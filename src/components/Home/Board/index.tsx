@@ -59,6 +59,8 @@ import {
     IconStack,
     IconQuestion,
     IconMagic,
+    IconCodeInsert,
+    IconBolt,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -409,6 +411,38 @@ const products: Product[] = [
             cta: {
                 url: 'https://app.posthog.com/settings/user-feature-previews#llm-analytics',
                 text: 'Try it out',
+            },
+        },
+    },
+    {
+        name: 'Embedded analytics',
+        color: '[#36C46F]',
+        Icon: IconCodeInsert,
+        description: 'Easily share a subset of data you capture with your customers so they can do analysis too.',
+        types: ['Data'],
+        features: [
+            { title: 'Query API', Icon: IconCode },
+            { title: 'Full SQL access', Icon: IconDatabase },
+            { title: 'Materialize views for speed', Icon: IconBolt },
+            { title: 'Visualize how you want', Icon: IconGraph },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_39_41_2x_9123ae5225.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_40_01_2x_d24eae394d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        pricing: {
+            cta: {
+                url: '/tutorials/embedded-analytics',
+                text: 'Get started',
             },
         },
     },
