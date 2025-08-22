@@ -509,7 +509,7 @@ export const ProductFeatureFlags = () => {
                         <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
                             <div className="relative aspect-video rounded overflow-hidden shadow-xl">
                                 <iframe
-                                    src="https://www.youtube-nocookie.com/embed/lqeD2vvAA4w"
+                                    src="https://www.youtube-nocookie.com/embed/Dvv2G0dTTz8"
                                     title="DeskHog Demo Video"
                                     className="w-full h-full"
                                     frameBorder="0"
