@@ -5,6 +5,7 @@ import slugify from 'slugify'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
+const mdx = require('@mdx-js/mdx')
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -35,6 +36,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
     const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
+    const MdxSegmentsTemplate = path.resolve(`src/templates/MdxSegments.tsx`)
 
     const result = (await graphql(`
         {
@@ -394,6 +396,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             }
                         }
                     }
+                }
+            }
+            allDocsJson {
+                nodes {
+                description
+                title
+                steps {
+                    badge
+                    content {
+                    variant
+                    type
+                    summary
+                    language
+                    inner_md
+                    filename
+                    code
+                    }
+                    title
+                }
                 }
             }
         }
@@ -849,4 +870,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }
         })
     })
+
+    // Create steps page from JSON
+    if (result.data.allDocsJson?.nodes?.[0]?.steps) {
+        const stepsData = result.data.allDocsJson.nodes[0]
+        
+        createPage({
+            path: '/web-error-tracking-steps',
+            component: MdxSegmentsTemplate,
+            context: {
+                stepsData,
+                title: stepsData.title,
+                description: stepsData.description,
+            },
+        })
+    }
 }

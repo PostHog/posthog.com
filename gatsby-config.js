@@ -147,6 +147,14 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
+                name: `testmdxsegments`,
+                path: `${__dirname}/docs/web-error-tracking-steps.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`]
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
                 name: `authors`,
                 path: `${__dirname}/src/data/authors.json`,
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
