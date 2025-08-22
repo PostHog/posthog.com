@@ -54,12 +54,13 @@ const TreeLink = ({
 }
 
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
+    const url = currentUrl.replace(/\/$/, '')
     for (const item of items) {
-        if (item.url === currentUrl) {
+        if (item.url?.replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
             return item
         }
         if (item.children?.length) {
-            const activeChild = getActiveItem(item.children, currentUrl)
+            const activeChild = getActiveItem(item.children, url)
             if (activeChild) {
                 return activeChild
             }
@@ -77,7 +78,7 @@ export function TreeMenu(props: TreeMenuProps) {
     )
 
     const handleClick = (item: MenuItem) => {
-        setActiveItem(item.children?.[0]?.url ? item.children[0] : item)
+        setActiveItem(item)
     }
 
     const items = useMemo(() => props.items, [])
