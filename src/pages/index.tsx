@@ -328,7 +328,7 @@ const CompanyStageTabs = () => {
         {
             label: (
                 <span>
-                    Startup<span className="hidden @lg:inline"> / Pre-PMF</span>
+                    Startup<span className="hidden @lg:inline"> / Side project</span>
                 </span>
             ),
             value: 'startup',
@@ -700,9 +700,8 @@ export default function Home() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 cta={{
-                    url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                    }.posthog.com/signup`,
+                    url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                        }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
             />

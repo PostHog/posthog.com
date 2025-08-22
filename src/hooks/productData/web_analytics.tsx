@@ -45,6 +45,12 @@ export const webAnalytics = {
             alt: 'Screenshot of web analytics in PostHog',
             classes: '',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_2b7a2176be.jpg',
+            alt: 'Web analytics dashboard',
+            classes: 'justify-start items-end pr-4 @lg:pr-6',
+            imgClasses: 'rounded-tr-md shadow-2xl',
+        },
     },
     customers: {
         ycombinator: {
