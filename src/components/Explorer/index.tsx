@@ -168,7 +168,7 @@ export default function Explorer({
                     {rightSidebarPanel && isRightSidebarOpen && (
                         <aside
                             data-scheme="secondary"
-                            className="not-prose bg-primary border-l border-primary h-full text-primary relative"
+                            className="not-prose bg-primary border-l border-primary h-full text-primary relative @3xl:block hidden"
                             style={{ width: rightSidebarWidth }}
                         >
                             <div className="h-full flex flex-col">
