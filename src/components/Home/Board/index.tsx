@@ -426,6 +426,15 @@ const products: Product[] = [
             { title: 'Automate tasks based on PostHog data', Icon: IconSparkles },
             { title: 'Build agent workflows with PostHog', Icon: IconBolt },
         ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_6d2cab1b66" />
+                    </div>
+                </>
+            )
+        },
         status: 'WIP',
         badge: 'BETA',
         pricing: {
