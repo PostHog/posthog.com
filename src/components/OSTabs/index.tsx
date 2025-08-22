@@ -143,8 +143,11 @@ export default function OSTabs({
                 onValueChange={(value) => {
                     setControlledValue(value)
 
-                    // Only calculate ordered tabs for horizontal orientation
-                    if (orientation === 'horizontal') {
+                    // Only calculate ordered tabs for horizontal orientation and when no extraTabRowContent
+                    // `/start` uses extraTabRowContent which displays on the far right side.
+                    // it's incompatible with the stacked tabs logic, so it has to be skipped.
+                    // on the homepage, tabs are vertical so we also want to skip it there too.
+                    if (orientation === 'horizontal' && !extraTabRowContent) {
                         const orderedTabsWithoutContent = calculateTabRows(value)?.map((row) =>
                             row.map(
                                 (tab): TabTriggerData => ({
@@ -172,8 +175,7 @@ export default function OSTabs({
                 value={value || controlledValue}
                 className={
                     className ??
-                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
-                        frame ? 'pt-2 px-4 pb-4' : ''
+                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${frame ? 'pt-2 px-4 pb-4' : ''
                     } h-full min-h-0 bg-primary`
                 }
             >
@@ -184,9 +186,8 @@ export default function OSTabs({
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${
-                                    orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
-                                }`}
+                                className={`flex ${orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
+                                    }`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -206,9 +207,8 @@ export default function OSTabs({
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <ScrollArea
-                            className={`@container bg-primary h-full min-h-0 ${
-                                frame ? 'border border-primary rounded-md' : ''
-                            }`}
+                            className={`@container bg-primary h-full min-h-0 ${frame ? 'border border-primary rounded-md' : ''
+                                }`}
                         >
                             <div
                                 className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}
