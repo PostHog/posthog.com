@@ -357,7 +357,7 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-12 md:mt-0">
+                        <div className="absolute mt-12 md:mt-0 md:right-0 md:bottom-12">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
                                 alt="Keyboard garden"
