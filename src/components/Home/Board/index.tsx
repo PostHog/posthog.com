@@ -61,6 +61,7 @@ import {
     IconMagic,
     IconCodeInsert,
     IconBolt,
+    IconSparkles,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -415,6 +416,26 @@ const products: Product[] = [
         },
     },
     {
+        name: 'MCP Server',
+        color: 'seagreen',
+        Icon: IconCode,
+        description: 'Give your agents access to PostHog data.',
+        types: ['AI'],
+        features: [
+            { title: 'Use PostHog in your editor', Icon: IconCode },
+            { title: 'Automate tasks based on PostHog data', Icon: IconSparkles },
+            { title: 'Build agent workflows with PostHog', Icon: IconBolt },
+        ],
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/docs/model-context-protocol',
+                text: 'Get started',
+            },
+        },
+    },
+    {
         name: 'Embedded analytics',
         color: '[#36C46F]',
         Icon: IconCodeInsert,
@@ -521,14 +542,6 @@ const products: Product[] = [
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2168,
-    },
-    {
-        name: 'Code editor',
-        Icon: IconCode,
-        color: 'seagreen',
-        types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2169,
     },
     {
         name: 'AI docs chat',
