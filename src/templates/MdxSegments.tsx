@@ -137,7 +137,7 @@ const ContentRenderer: React.FC<{ content: StepContent[] }> = ({ content }) => {
                     
                     case 'callout':
                         return (
-                            <CalloutBox key={index} type={item.variant || 'fyi'} title={item.title} icon="IconQuestion">
+                            <CalloutBox key={index} type={item.variant || 'fyi'} title="Important" icon="IconQuestion">
                                 {item.inner_md}
                             </CalloutBox>
                         )
@@ -161,6 +161,56 @@ const ContentRenderer: React.FC<{ content: StepContent[] }> = ({ content }) => {
                                 </div>
                             </div>
                         )
+                    
+                    case 'product-screenshot':
+                        // Parse ProductScreenshot component with regex
+                        const psMatch = item.inner_md.match(/<ProductScreenshot\s+([^>]+)\s*\/>/)
+                        if (psMatch) {
+                            const { ProductScreenshot } = require('../components/ProductScreenshot')
+                            const attrs = psMatch[1]
+                            const imageLightMatch = attrs.match(/imageLight="([^"]+)"/)
+                            const imageDarkMatch = attrs.match(/imageDark="([^"]+)"/)
+                            const altMatch = attrs.match(/alt="([^"]+)"/)
+                            const classesMatch = attrs.match(/classes="([^"]+)"/)
+                            const classNameMatch = attrs.match(/className="([^"]+)"/)
+                            
+                            const props = {
+                                imageLight: imageLightMatch ? imageLightMatch[1] : '',
+                                imageDark: imageDarkMatch ? imageDarkMatch[1] : '',
+                                alt: altMatch ? altMatch[1] : '',
+                                classes: classesMatch ? classesMatch[1] : '',
+                                className: classNameMatch ? classNameMatch[1] : ''
+                            }
+                            
+                            return <ProductScreenshot key={index} {...props} />
+                        }
+                        return <div key={index}>Invalid ProductScreenshot format</div>
+                    
+                    case 'call-to-action':
+                        // Parse CallToAction component with regex
+                        const ctaMatch = item.inner_md.match(/<CallToAction\s+([^>]+)>([^<]+)<\/CallToAction>/)
+                        if (ctaMatch) {
+                            const { CallToAction } = require('../components/CallToAction')
+                            const attrs = ctaMatch[1]
+                            const content = ctaMatch[2]
+                            
+                            const classNameMatch = attrs.match(/className="([^"]+)"/)
+                            const sizeMatch = attrs.match(/size="([^"]+)"/)
+                            const typeMatch = attrs.match(/type="([^"]+)"/)
+                            const toMatch = attrs.match(/to="([^"]+)"/)
+                            const externalMatch = attrs.match(/external={([^}]+)}/)
+                            
+                            const props = {
+                                className: classNameMatch ? classNameMatch[1] : '',
+                                size: sizeMatch ? sizeMatch[1] : 'md',
+                                type: typeMatch ? typeMatch[1] : 'primary',
+                                to: toMatch ? toMatch[1] : '',
+                                external: externalMatch ? externalMatch[1] === 'true' : false
+                            }
+                            
+                            return <CallToAction key={index} {...props}>{content}</CallToAction>
+                        }
+                        return <div key={index}>Invalid CallToAction format</div>
                     
                     case 'component':
                         return (
