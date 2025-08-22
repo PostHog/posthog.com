@@ -3,41 +3,48 @@ title: Home
 template: custom
 ---
 
-<HomeHappyHog />
+<div class="text-center @xl:text-left">
 
-<h1 class="[&_p]:m-0 flex gap-2 flex-wrap">
-    <span>welcome to</span>
+<h1 class="[&_p]:m-0 flex gap-2 flex-wrap justify-center @xl:justify-start">
     <Logo />
-    <span>PostHog</span>
 </h1>
 
-**we're building the AI-powered operating system for running a software business.**
+<span class="text-base font-medium mb-0">
+    We’re building every tool that product engineers need to build successful products.
+</span>
 
-this means every piece of software you need for working with customer data and interacting with customers.
+<CTAs />
+
+Questions? [Watch a demo](/demo) or [talk to a human](/talk-to-a-human).
+
+</div>
+
+<header class="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+
+## Explore apps <span class="text-secondary text-sm font-normal tracking-normal">by company stage</span>
+
+<aside class="hidden @xl:inline-flex">
+
+<span class="[&_p]:m-0">
+    [Browse app library](/products) (<AppCount />)
+</span>
+
+</aside>
+</header>
+
+<CompanyStageTabs />
+
+<div id="customers">
+
+## Who's using PostHog?
+
+Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)
+
+<Customers />
+
+</div>
 
 <div class="space-y-8 pt-2">
-
-<div id="product-os">
-
-<h2 class="mt-0">14 tools, one customer record</h2>
-
-when all your customer data lives in one place, you can make better decisions. PostHog ships with a [data warehouse](/data-warehouse), [100+ pipelines](/cdp), and SQL access.
-
-even if you don’t need any of these today, they’ll come in handy as you grow.
-
-</div>
-
-<div id="toolkits">
-
-## products we offer
-
-we have <ProductCount /> with <strong>6 more</strong> in development. all products have usage-based pricing.
-
-<Toolkits />
-
-overwhelmed? just start with a single product – you can always add more later.
-
-</div>
 
 <div id="ai">
 
@@ -73,17 +80,7 @@ this means you can connect all your existing data _and_ send it to where it need
 
 our usage-based pricing means you don't have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!
 
-<Pricing />
-
-</div>
-
-<div id="customers">
-
-## who's using PostHog?
-
-here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)
-
-<Customers />
+Pricing snippet
 
 </div>
 

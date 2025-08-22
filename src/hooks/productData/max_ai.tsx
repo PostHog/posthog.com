@@ -6,6 +6,7 @@ export const max_ai = {
     parentIcon: 'aiMax',
     // Icon: IconMagicWand,
     description: 'Your AI-powered product analyst and product manager',
+    role: 'Helpful chatbot',
     handle: 'max_ai',
     color: 'ai-blue',
     colorSecondary: 'lilac',
@@ -34,6 +35,29 @@ export const max_ai = {
         alt: "Hi, I'm Max!",
         classes: 'max-w-[413px]',
     },
+    skills: [
+        {
+            name: 'Answers product questions',
+            percent: 95,
+        },
+        {
+            name: 'Writes SQL queries',
+            percent: 95,
+        },
+        {
+            name: 'PostHog product expert',
+            percent: 90,
+        },
+        {
+            name: 'Builds data transformations',
+            percent: 95,
+        },
+        {
+            name: 'Analytics industry knowledge',
+            percent: 80,
+        },
+    ],
+
     features: [
         {
             title: 'Max answers product questions',

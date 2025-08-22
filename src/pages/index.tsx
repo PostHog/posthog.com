@@ -32,9 +32,12 @@ import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { PRODUCT_COUNT } from '../constants'
+import { PRODUCT_COUNT, APP_COUNT } from '../constants'
 import Start from 'components/Start'
-
+import { CallToAction } from 'components/CallToAction'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import ProductTabs from 'components/ProductTabs'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -106,6 +109,19 @@ const HomeHappyHog = () => {
     )
 }
 
+const CTAs = () => {
+    return (
+        <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
+            <CallToAction to="https://app.posthog.com/signup" size="md">
+                Get started - free
+            </CallToAction>
+            <CallToAction to="#" type="secondary" size="md">
+                Install with AI
+            </CallToAction>
+        </div>
+    )
+}
+
 const HomeHitCounter = () => {
     const [hitCount, setHitCount] = useState<number | null>(null)
 
@@ -174,94 +190,6 @@ const HomeHitCounter = () => {
             >
                 Total hit count to posthog.com
             </Tooltip>
-        </div>
-    )
-}
-
-const Toolkits = () => {
-    const columns = [
-        { name: '', width: 'auto', align: 'center' as const },
-        { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
-        { name: 'products', width: 'minmax(auto,1fr)', align: 'left' as const },
-    ]
-
-    const rows = [
-        {
-            cells: [
-                { content: 1 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>product development</span> <ProgressBar progress={69} />
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <ProductButtons
-                            productTypes={[
-                                'web_analytics',
-                                'product_analytics',
-                                'session_replay',
-                                'feature_flags',
-                                'experiments',
-                                'error_tracking',
-                            ]}
-                        />
-                    ),
-                    className: 'text-sm flex-wrap gap-px',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 2 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>customer engagement</span> <ProgressBar progress={15} />
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />{' '}
-                            Support
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 3 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>sales</span> <ProgressBar progress={5} />
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            CRM, Cross-sell/expansion <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-    ]
-
-    return (
-        <div className="mt-4">
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" overflowX />
         </div>
     )
 }
@@ -387,6 +315,81 @@ interface CustomerProps {
 
 const ProductCount = () => {
     return <strong>{PRODUCT_COUNT}+ products</strong>
+}
+
+const AppCount = () => {
+    return APP_COUNT
+}
+
+const CompanyStageTabs = () => {
+    const [selectedStage, setSelectedStage] = React.useState('growth')
+
+    const companyStageOptions: ToggleOption[] = [
+        {
+            label: (
+                <span>
+                    Startup<span className="hidden @lg:inline"> / Pre-PMF</span>
+                </span>
+            ),
+            value: 'startup',
+            // icon: <IconLaptop className="size-5" />,
+        },
+        {
+            label: 'Growth',
+            value: 'growth',
+            // icon: <IconLaptop className="size-5" />,
+        },
+        {
+            label: 'Scale',
+            value: 'scale',
+            // icon: <IconLaptop className="size-5" />,
+        },
+    ]
+
+    return (
+        <>
+            <ToggleGroup
+                hideTitle
+                title="Company stage"
+                options={companyStageOptions}
+                onValueChange={setSelectedStage}
+                value={selectedStage}
+                className="mb-2"
+            />
+
+            {selectedStage === 'startup' && (
+                <div className="flex flex-col gap-2">
+                    <p>
+                        <strong>Startup / Pre-PMF</strong>
+                        <p>blah</p>
+                    </p>
+                </div>
+            )}
+            {selectedStage === 'growth' && (
+                <div className="flex flex-col gap-2">
+                    <ProductTabs
+                        productHandles={[
+                            'session_replay',
+                            'web_analytics',
+                            'product_analytics',
+                            'experiments',
+                            'feature_flags',
+                            'surveys',
+                            'error_tracking',
+                        ]}
+                    />
+                </div>
+            )}
+            {selectedStage === 'scale' && (
+                <div className="flex flex-col gap-2">
+                    <p>
+                        <strong>Scale</strong>
+                        <p>Blitzscale.</p>
+                    </p>
+                </div>
+            )}
+        </>
+    )
 }
 
 const CustomerInfrastructureAccordion = () => {
@@ -571,6 +574,18 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <ProductCount />,
     },
     {
+        name: 'AppCount',
+        kind: 'flow',
+        props: [],
+        Editor: () => <AppCount />,
+    },
+    {
+        name: 'CompanyStageTabs',
+        kind: 'flow',
+        props: [],
+        Editor: () => <CompanyStageTabs />,
+    },
+    {
         name: 'PageNavigation',
         kind: 'flow',
         props: [],
@@ -581,6 +596,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HomeHappyHog />,
+    },
+    {
+        name: 'CTAs',
+        kind: 'flow',
+        props: [],
+        Editor: () => <CTAs />,
     },
     {
         name: 'HomeHitCounter',
@@ -597,12 +618,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                 welcome to <Logo />
             </h1>
         ),
-    },
-    {
-        name: 'Toolkits',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Toolkits />,
     },
     {
         name: 'AIAgents',
@@ -629,6 +644,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <Customers />,
     },
     {
+        name: 'DebugContainerQuery',
+        kind: 'flow',
+        props: [],
+        Editor: () => <DebugContainerQuery />,
+    },
+    {
         name: 'CTA',
         kind: 'flow',
         props: [],
@@ -645,7 +666,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'Logo',
         kind: 'flow',
         props: [],
-        Editor: () => <Logo noText className="inline-block" />,
+        Editor: () => <Logo className="inline-block" />,
     },
 ]
 
@@ -695,8 +716,9 @@ export default function Home() {
 
     return (
         <>
-            <SEO title="Welcome to PostHog!" description="Home" image="https://posthog.com/og-image.png" />
+            <SEO title="home.mdx" description="Home" image="https://posthog.com/og-image.png" />
             <MDXEditor
+                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}

@@ -14,7 +14,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
 import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
-import { PRODUCT_COUNT } from '../../constants'
+import { PRODUCT_COUNT, APP_COUNT } from '../../constants'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { IconGrid, IconListSquare } from 'components/OSIcons/Icons'
@@ -303,16 +303,20 @@ export default function Products(): JSX.Element {
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    Our toolkit helps product engineers build and scale products. It has everything you
-                                    need to build features, analyze usage, and talk to customers.
+                                    Our suite of tools are designed to help product engineers build and scale products.
                                 </p>
-                                <p className="text-sm mb-2">There are four main components:</p>
+                                <p className="text-sm mb-2">
+                                    There are four main components to the Product OS toolkit:
+                                </p>
                                 <ul className="pl-4 mb-4 [&_li]:text-sm">
                                     <li>Customer data infrastructure</li>
-                                    <li>Analytics/Data viz</li>
-                                    <li>Development tools</li>
-                                    <li>AI</li>
+                                    <li>Analytics/data viz</li>
+                                    <li>Product engineering tools</li>
+                                    <li>
+                                        AI <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
+                                    </li>
                                 </ul>
+                                {/* 
                                 <OSButton
                                     variant="underline"
                                     asLink
@@ -324,19 +328,22 @@ export default function Products(): JSX.Element {
                                 >
                                     Learn about Product OS
                                 </OSButton>
+                                 */}
                             </>
                         ),
                     },
                     {
-                        title: 'About PostHog',
+                        title: 'How pricing works',
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    <strong>We have {PRODUCT_COUNT}+ paid products today</strong> (and loads more in
-                                    development) – but even if we don't have it yet, we will eventually. We are going to
-                                    build every piece of SaaS you need to make your product successful.
+                                    <strong>We have {PRODUCT_COUNT} paid products</strong> and dozens of data analysis
+                                    tools that are free to use.
                                 </p>
-                                <p className="text-sm mb-2">Why picking PostHog is a no-brainer?</p>
+                                <p className="text-sm mb-2">
+                                    Our paid products offer usage-based pricing. Generally you only pay for data
+                                    ingress, <em>not</em> any monthly or storage fees.
+                                </p>
                                 <p className="text-sm mb-0">
                                     <OSButton
                                         variant="underline"
@@ -344,13 +351,40 @@ export default function Products(): JSX.Element {
                                         align="left"
                                         width="full"
                                         size="md"
-                                        to="/why"
+                                        to="/pricing"
                                         state={{ newWindow: true }}
                                         icon={<Icons.IconArrowRight className="text-salmon" />}
                                         iconPosition="right"
                                         className="font-semibold !px-0"
                                     >
-                                        Read about it
+                                        Explore pricing
+                                    </OSButton>
+                                </p>
+                            </>
+                        ),
+                    },
+                    {
+                        title: 'Roadmap',
+                        content: (
+                            <>
+                                <p className="text-sm mb-2">
+                                    We're working on a bunch of new products. If you don't see what you're looking for,
+                                    let us know – either we're already building it, or we will soon.
+                                </p>
+                                <p className="text-sm mb-0">
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="md"
+                                        to="/roadmap"
+                                        state={{ newWindow: true }}
+                                        icon={<Icons.IconArrowRight className="text-salmon" />}
+                                        iconPosition="right"
+                                        className="font-semibold !px-0"
+                                    >
+                                        Explore the roadmap
                                     </OSButton>
                                 </p>
                             </>
@@ -455,7 +489,7 @@ export default function Products(): JSX.Element {
                     })
 
                     return (
-                        <div className="@container not-prose space-y-2 -ml-3">
+                        <div className="@container not-prose space-y-2 @md:-ml-3">
                             {categoryOrder.map((category) => {
                                 const products = groupedProducts[category]
                                 if (!products || products.length === 0) return null
