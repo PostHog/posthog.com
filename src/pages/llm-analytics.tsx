@@ -1,11 +1,11 @@
 import React from 'react'
-import ProductLLMObservability from 'components/Product/LLMObservability'
+import ProductLLMAnalytics from 'components/Product/LLMAnalytics'
 import Layout from 'components/Layout'
 
 export default function LLMAnalytics(): JSX.Element {
     return (
         <Layout>
-            <ProductLLMObservability />
+            <ProductLLMAnalytics />
         </Layout>
     )
 }

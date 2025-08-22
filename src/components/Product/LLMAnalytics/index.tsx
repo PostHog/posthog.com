@@ -309,7 +309,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductLLMObservability = () => {
+export const ProductLLMAnalytics = () => {
     const { elevenlabs, lovable } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -356,7 +356,7 @@ export const ProductLLMObservability = () => {
 
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_8faecc596d.png"
                         alt="Screenshot of llm analytics in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
@@ -615,9 +615,9 @@ export const ProductLLMObservability = () => {
                             url="/tutorials/monitor-llama-index-with-langfuse"
                         />
                         <TutorialCard
-                            title="How to set up OpenAI observability"
+                            title="How to set up OpenAI analytics"
                             description="Let's explore how add and track the generate API route, then view generation data in PostHog."
-                            url="/tutorials/openai-observability"
+                            url="/tutorials/openai-analytics"
                         />
                     </ul>
                 </section>
@@ -729,4 +729,4 @@ export const ProductLLMObservability = () => {
     )
 }
 
-export default ProductLLMObservability
+export default ProductLLMAnalytics
