@@ -109,7 +109,7 @@ export default function DataWarehouse(): JSX.Element {
                 <p className="text-base font-semibold">{dataWarehouse.overview.description}</p>
 
                 <ZoomImage>
-                    <CloudinaryImage src={dataWarehouse.screenshots[0].src} alt={dataWarehouse.screenshots[0].alt} />
+                    <CloudinaryImage src={dataWarehouse.screenshots.overview.src} alt={dataWarehouse.screenshots.overview.alt} />
                 </ZoomImage>
 
                 <h3>Customers who love PostHog's Data Warehouse</h3>
