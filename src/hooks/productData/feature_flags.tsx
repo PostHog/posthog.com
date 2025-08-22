@@ -28,6 +28,13 @@ export const featureFlags = {
             alt: 'Feature flags screenshot',
             classes: '',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_light_6a7b1dfc70.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_dark_f091ddfb9b.png',
+            alt: 'Feature flags screenshot',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',

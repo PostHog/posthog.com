@@ -28,6 +28,13 @@ export const experiments = {
             alt: 'Screenshot of managing an A/B test in PostHog',
             classes: '',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png',
+            alt: 'Experiment results',
+            classes: 'justify-center items-end px-4 @lg:px-6',
+            imgClasses: 'rounded-t-md shadow-2xl',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',

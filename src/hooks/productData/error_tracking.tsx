@@ -26,6 +26,13 @@ export const errorTracking = {
             alt: 'Screenshot of the PostHog error tracking',
             classes: '',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_dark_ef481dc7a5.png',
+            alt: 'Error tracking screenshot',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',

@@ -6,6 +6,7 @@ import OSButton from 'components/OSButton'
 import { APP_COUNT } from '../../constants'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { useApp } from '../../context/App'
 
 interface ProductTabsProps {
     productHandles: string[]
@@ -25,7 +26,10 @@ interface Product {
     screenshots?: {
         [key: string]: {
             src: string
+            srcDark?: string
             alt: string
+            width?: number
+            height?: number
             classes?: string
             imgClasses?: string
         }
@@ -35,6 +39,8 @@ interface Product {
 export default function ProductTabs({ productHandles, className }: ProductTabsProps) {
     const allProducts = useProduct()
     const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
 
     useEffect(() => {
         // Find the container with aria-label="Company stage"
@@ -83,11 +89,11 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
                 </>
             ),
             content: (
-                <div className={`@container flex flex-col bg-${product.color} rounded`}>
+                <div className={`@container flex flex-col bg-${product.color} dark:bg-accent rounded`}>
                     <div className="flex items-start justify-between p-4 @lg:p-6">
                         <div className="flex-1 flex gap-3">
-                            {product.Icon && <product.Icon className={`size-8 ${product.overview.textColor}`} />}
-                            <div className={product.overview.textColor}>
+                            {product.Icon && <product.Icon className={`size-8 ${product.overview.textColor} dark:text-${product.color}`} />}
+                            <div className={`${product.overview.textColor} dark:text-white`}>
                                 <h3 className="text-xl font-semibold tracking-tight">{product.name}</h3>
                                 {product.overview?.title && <p className="mb-0">{product.overview.title}</p>}
                             </div>
@@ -100,13 +106,19 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
                     </div>
 
                     {product.screenshots?.home && (
-                        <div className={`flex-1 flex ${product.screenshots.home.classes}`}>
+                        <div
+                            className={`flex-1 flex ${product.screenshots.home.classes
+                                ? product.screenshots.home.classes
+                                : "justify-center items-end px-2 pb-2 @lg:pb-3"
+                                }`}
+                        >
+
                             <CloudinaryImage
-                                src={product.screenshots.home.src as any}
+                                src={(isDark && product.screenshots.home.srcDark) ? product.screenshots.home.srcDark : product.screenshots.home.src as any}
                                 alt={product.screenshots.home.alt}
-                                width={555}
-                                height={320}
-                                imgClassName={product.screenshots.home.imgClasses}
+                                width={product.screenshots.home.width}
+                                height={product.screenshots.home.height}
+                                imgClassName={product.screenshots.home.imgClasses ? product.screenshots.home.imgClasses : "rounded-md shadow-2xl"}
                             />
                         </div>
                     )}
