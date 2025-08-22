@@ -36,7 +36,7 @@ interface Product {
     }
 }
 
-export default function ProductTabs({ productHandles, className }: ProductTabsProps) {
+export default function ProductTabs({ productHandles, className, selectedStage }: ProductTabsProps) {
     const allProducts = useProduct()
     const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
     const { siteSettings } = useApp()
@@ -109,7 +109,7 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
                         <div
                             className={`flex-1 flex ${product.screenshots.home.classes
                                 ? product.screenshots.home.classes
-                                : "justify-center items-end px-2 pb-2 @lg:pb-3"
+                                : "justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4"
                                 }`}
                         >
 
@@ -140,9 +140,20 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
             extraTabRowContent={
                 <div
                     data-scheme="primary"
-                    className="text-primary mt-auto pt-1 text-sm basis-full @xl:basis-auto flex justify-center @xl:justify-stretch"
+                    className="text-primary mt-auto pt-1 text-sm basis-full @xl:basis-auto flex flex-col items-center @xl:items-stretch gap-2"
                 >
-                    <OSButton asLink to="/products" state={{ newWindow: true }} variant="secondary" size="md">
+                    {selectedStage === 'scale' && (
+                        <div className="bg-accent border border-primary rounded p-2 text-xs basis-full">
+                            <span>You may also like...</span>
+                            <ul className="my-0">
+                                <li><Link to="/dpa" state={{ newWindow: true }}>DPA generator</Link></li>
+                                <li><Link to="/baa" state={{ newWindow: true }}>BAA generator</Link></li>
+                                <li><Link to="/platform-addons" state={{ newWindow: true }}>Product OS add-ons</Link></li>
+
+                            </ul>
+                        </div>
+                    )}
+                    <OSButton asLink to="/products" state={{ newWindow: true }} variant="secondary" size="md" width="full">
                         Go to app library ({APP_COUNT})
                     </OSButton>
                 </div>

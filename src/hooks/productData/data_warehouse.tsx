@@ -3,8 +3,8 @@ import { IconAsterisk } from '@posthog/icons'
 
 export const dataWarehouse = {
     parentIcon: 'SQL',
-    /* Icon: IconAsterisk, */
-    name: 'Query & visualize data',
+    Icon: IconAsterisk,
+    name: 'Data warehouse', // Query & visualize data
     handle: 'data_warehouse',
     type: 'data_warehouse',
     slug: 'data-warehouse',
@@ -16,7 +16,7 @@ export const dataWarehouse = {
         description: 'Unify and query data from any source and analyze it alongside your product data.',
     },
     overview: {
-        title: 'Query & visualize data',
+        title: 'Query & visualize product & third party data together',
         description: 'Unify and query data from any source and analyze it alongside your product data.',
         textColor: 'text-white', // tw
     },
@@ -25,6 +25,13 @@ export const dataWarehouse = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png',
             alt: 'Screenshot of the PostHog data warehouse',
             classes: '',
+        },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_dark_8f465ecfaa.png',
+            alt: 'Data Warehouse screenshot',
+            classes: 'justify-center items-end px-4 @lg:px-6',
+            imgClasses: 'rounded-t shadow-2xl',
         },
     },
     hog: {

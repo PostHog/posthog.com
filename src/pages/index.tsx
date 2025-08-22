@@ -359,22 +359,29 @@ const CompanyStageTabs = () => {
 
             {selectedStage === 'startup' && (
                 <div className="flex flex-col gap-2">
-                    <p>
-                        <strong>Startup / Pre-PMF</strong>
-                        <p>blah</p>
-                    </p>
+                    <ProductTabs
+                        productHandles={[
+                            'session_replay',
+                            'web_analytics',
+                            'product_analytics',
+                            'feature_flags',
+                            'surveys',
+                            'llm_analytics',
+                        ]}
+                    />
                 </div>
             )}
             {selectedStage === 'growth' && (
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'session_replay',
-                            'web_analytics',
                             'product_analytics',
+                            'web_analytics',
+                            'session_replay',
                             'experiments',
                             'feature_flags',
                             'surveys',
+                            'dashboards',
                             'error_tracking',
                         ]}
                     />
@@ -382,10 +389,18 @@ const CompanyStageTabs = () => {
             )}
             {selectedStage === 'scale' && (
                 <div className="flex flex-col gap-2">
-                    <p>
-                        <strong>Scale</strong>
-                        <p>Blitzscale.</p>
-                    </p>
+                    <ProductTabs
+                        productHandles={[
+                            'data_warehouse',
+                            'cdp',
+                            'dashboards',
+                            'product_analytics',
+                            'experiments',
+                            'feature_flags',
+                            'error_tracking',
+                        ]}
+                        selectedStage="scale"
+                    />
                 </div>
             )}
         </>
