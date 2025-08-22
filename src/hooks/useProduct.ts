@@ -480,13 +480,22 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 textColor: 'text-white',
                 layout: 'columns',
             },
-            screenshots: [
-                {
+            screenshots: {
+                overview: {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1713967763/posthog.com/contents/docs/langfuse-dash.png',
                     alt: 'LLM analytics dashboard',
-                    classes: '',
+                    classes: 'justify-end items-end pl-4 @lg:pl-6',
+                    imgClasses: 'rounded-tl-md shadow-2xl',
                 },
-            ],
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
+                    alt: 'LLM Analytics screenshot',
+                    classes: 'justify-end items-end pl-4 @lg:pl-6',
+                    imgClasses: 'rounded-tl-md shadow-2xl',
+                },
+            },
             hog: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
                 alt: 'AI-powered hedgehog',
@@ -828,13 +837,20 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 textColor: 'text-white',
                 layout: 'columns',
             },
-            screenshots: [
-                {
+            screenshots: {
+                overview: {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png',
                     alt: 'PostHog dashboard example',
-                    classes: '',
+                    classes: 'justify-end items-end pl-4 @lg:pl-6',
+                    imgClasses: 'rounded-tl-md shadow-2xl',
                 },
-            ],
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_light_998b77b1a0.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_dark_43ef120c80.png',
+                    alt: 'Custom dashboard',
+                },
+            },
             hog: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
                 alt: 'Hedgehog monitoring dashboards',

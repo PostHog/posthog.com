@@ -3,8 +3,8 @@ import { IconPlug } from '@posthog/icons'
 
 export const cdp = {
     parentIcon: 'spreadsheetSearch',
-    // Icon: IconPlug,
-    name: 'Integrations library (145+)',
+    Icon: IconPlug,
+    name: 'CDP', // Integrations library (145+)
     description: 'Get data into PostHog and send it where it needs to go.',
     handle: 'cdp',
     type: 'cdp',
@@ -28,6 +28,13 @@ export const cdp = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
             alt: "Screenshot of PostHog's CDP",
             classes: '',
+        },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_dark_5610c405b2.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_light_97bc52e8f9.png',
+            alt: 'CDP screenshot',
+            classes: 'justify-center items-end px-4 @lg:px-6',
+            imgClasses: 'rounded-t shadow-2xl',
         },
     },
     features: [
