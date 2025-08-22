@@ -37,6 +37,11 @@ export const productAnalytics = {
             alt: 'Product analytics screenshot',
             classes: '',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_light_703f700a5b.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png',
+            alt: 'Product analytics screenshot',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',

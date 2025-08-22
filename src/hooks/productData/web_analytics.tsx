@@ -46,10 +46,11 @@ export const webAnalytics = {
             classes: '',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_2b7a2176be.jpg',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_light_313729cacc.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_dark_20eb61e4b2.png',
             alt: 'Web analytics dashboard',
-            classes: 'justify-start items-end pr-4 @lg:pr-6',
-            imgClasses: 'rounded-tr-md shadow-2xl',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
     customers: {

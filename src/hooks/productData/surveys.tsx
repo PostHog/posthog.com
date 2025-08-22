@@ -25,6 +25,13 @@ export const surveys = {
             alt: 'Screenshot of survey results in PostHog',
             classes: '',
         },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_light_3dfb9f57e9.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_dark_a492c37d9c.png',
+            alt: 'Surveys screenshot',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',

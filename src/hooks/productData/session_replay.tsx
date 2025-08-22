@@ -34,7 +34,8 @@ export const sessionReplay = {
             classes: 'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_429ce8655c.jpg',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
