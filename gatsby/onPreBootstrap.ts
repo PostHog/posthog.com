@@ -2,14 +2,27 @@ import { GatsbyNode } from 'gatsby'
 import fetch from 'node-fetch'
 import path from 'path'
 import fs from 'fs'
+
+import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
+
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
+export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
     // Copy hedgehog mode assets to public folder
     const source = path.resolve('node_modules/@posthog/hedgehog-mode/assets')
     const hedgehogModeDir = path.resolve(__dirname, '../public/hedgehog-mode')
     fs.cpSync(source, hedgehogModeDir, { recursive: true })
-    
+
+    // Fetch and process MCP tool definitions
+    const mcpToolsData = await fetchAndProcessMCPTools()
+    writeMCPToolsToFile(mcpToolsData)
+
+    // Cache the data if successful
+    if (!mcpToolsData.error && mcpToolsData.categories) {
+        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData.categories)
+    }
+
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {
         const pageViews: Record<string, number> = {}
 

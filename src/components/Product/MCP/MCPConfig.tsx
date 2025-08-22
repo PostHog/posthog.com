@@ -21,6 +21,13 @@ const MCP_SERVER_CONFIG = {
     },
 }
 
+// https://zed.dev/docs/ai/mcp#as-custom-servers
+const MCP_SERVER_CONFIG_ZED = {
+    ...MCP_SERVER_CONFIG,
+    enabled: true,
+    source: 'custom',
+}
+
 const createConfig = (wrapper: string) => JSON.stringify({ [wrapper]: { posthog: MCP_SERVER_CONFIG } }, null, 2)
 
 const mcpServersConfig = { language: 'json', content: () => createConfig('mcpServers') }
@@ -34,7 +41,10 @@ const EDITOR_CONFIGS = {
         language: 'bash',
         content: () => `claude mcp add-json posthog -s user '${JSON.stringify(MCP_SERVER_CONFIG, null, 2)}'`,
     },
-    zed: { language: 'json', content: () => createConfig('context_servers') },
+    zed: {
+        language: 'json',
+        content: () => JSON.stringify({ context_servers: { posthog: MCP_SERVER_CONFIG_ZED } }, null, 2),
+    },
 } as const
 
 const createMdxCodeBlock = (language: string, content: string) => ({

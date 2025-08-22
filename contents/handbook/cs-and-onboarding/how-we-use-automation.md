@@ -16,11 +16,11 @@ PostHog CS leverages several integrated tools to monitor account health and iden
 
 **Core monitoring systems:**
 
-* [**Vitally**](https://posthog.vitally-eu.io/)**:** Tracks usage patterns, billing changes, health scores, and engagement metrics.  
-  * Opportunities and Risks are surfaced via “Indicators”  
+* <PrivateLink url="https://posthog.vitally-eu.io/">**Vitally**</PrivateLink>**:** Tracks usage patterns, billing changes, health scores, and engagement metrics.  
+  * Opportunities and Risks are surfaced via "Indicators"  
   * Health scores update regularly as a composite of multiple metrics with different weights  
   * Data is synced in from Salesforce, PostHog, BuildBetter, and Stripe  
-* [**PostHog pipelines**](https://us.posthog.com/project/2/pipeline/overview)**:** Alerts for usage milestones, new product adoption, and behavioral changes. These are sent to Vitally, Salesforce, or Slack via PostHog CDP for alerts and data updates.   
+* <PrivateLink url="https://us.posthog.com/project/2/pipeline/overview">**PostHog pipelines**</PrivateLink>**:** Alerts for usage milestones, new product adoption, and behavioral changes. These are sent to Vitally, Salesforce, or Slack via PostHog CDP for alerts and data updates.   
 * [**BuildBetter**](https://app.buildbetter.app/)**:** Analyzes customer calls for feature requests, pain points, and sentiment.   
   * Notes from calls are automatically synced to Salesforce and Vitally  
   * feature requests and painpoints are automatically added to Vitally and sent to \#feature-request-feed channel  
