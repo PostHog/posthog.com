@@ -23,7 +23,7 @@ This happens because teams build the wrong features in the wrong places. Avoidin
 
 Just because AI companies seem to be reinventing the wheel doesn’t mean you need to too. 
 
-There are plenty of AI patterns a bunch of smart people have already figured out which you can copy to your product. These have the advantage of being UX patterns that users are familiar with while also being functionality AI is actually good at.
+A bunch of smart people have already figured out AI patterns that work which you can copy to your product. These have the advantage of being UX patterns that users are familiar with while also being functionality AI is actually good at.
 
 First is the classic “chat with your docs/data/PDF.” AI is great at search and summarization and can use this to build reports and recommendations. Intercom’s Fin or Mintlify’s docs chat are examples of this.
 
@@ -43,11 +43,11 @@ Knowing the common AI patterns helps you identify where you can use them in your
 
 > Ask not what you can do with AI, but what AI can do for you. - JFK (I think) 
 
-With the patterns in mind, it’s time to go through your product and figure out the jobs to be done that AI could potentially do. Some examples of these:
+With the patterns in mind, go through your product and figure out the jobs to be done that AI could potentially do. Some examples of these:
 
-- It’s a single task that takes more than 30 seconds to do like filling a long form, manually entering data, setting up an integration,or installing an SDK.
+- It’s a well defined single task that takes more than 30 seconds to do like filling a long form, manually entering data, setting up an integration,or installing an SDK.
 
-- Users need a language or interface they don’t understand, such as a complex UI, SQL queries, or building an app.
+- Users need to use a language or interface they don’t understand, such as a complex UI, SQL queries, or building an app.
 
 - Users do it more than 20 times like writing descriptions, summaries, or creating an entry. As Stephen Whitworth of incident.io said in [Lenny's Newsletter](https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building):
 
@@ -55,7 +55,7 @@ With the patterns in mind, it’s time to go through your product and figure out
 
 ### 3. Make sure that work is specific and valuable
 
-Now that you have some patterns and problems, you need to narrow them down to the ones that are both specific and valuable. 
+Now that you have some patterns and problems, narrow them down to the ones that are both specific and valuable. 
 
 ![Specific and valuable](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_08_08_at_16_39_26_2x_d30ab8c160.png)
 
@@ -63,7 +63,7 @@ Two common traps here are:
 
 1. **Using an existing pattern on a problem that isn’t valuable.** For example, if your product is early, you probably don’t need a “chat to your docs” feature. It might even be a negative as it could hide core usability issues.
 
-2. **Trying to solve too large a problem with AI.** Be honest with yourself. If you’re trying to have the AI one-shot making you a billion dollars, you are being unrealistic. It’s better to solve a narrow problem first before expanding outward. If you’re stuck, try enhancing something that already exists. 
+2. **Trying to solve too large a problem with AI.** Be honest with yourself. Having the AI one-shot making you a billion dollars is unrealistic. It’s better to solve a narrow problem first before expanding outward. If you’re stuck, try enhancing something that already exists. 
 
 ## Implementing your AI-powered feature the right way
 
@@ -71,7 +71,7 @@ Now that you have an idea of what you want to build, you need to make sure it ac
 
 ### 1. Context and state
 
-Everyone can call the OpenAI API. What your app has that’s unique is its context. This can include data like what a user is trying to do, who is doing it, what their account status is, where they are in the app, and what the app’s data schema looks like. 
+Everyone can call the OpenAI API, but your app's context is unique. This can include data like what a user is trying to do, who is doing it, what their account status is, where they are in the app, and what the app’s data schema looks like. 
 
 For example, when a user asks Max, our AI product analyst, why signups dropped last week, Max receives information on the:
 
@@ -127,7 +127,7 @@ Beyond state management, this requires:
 - Being able to select the correct tools and data based on the intended task users want to complete.
 - Making sure those tools, like query execution and formatting actually work.
 
-In PostHog, at the highest level, this is a router that looks like this:
+In PostHog, at the highest level, functionality comes from a router that looks like this:
 
 ```python
 # From root/nodes.py
@@ -178,7 +178,7 @@ From experience, here's what we've found is most important when trying to improv
 
 Building AI-powered features shouldn’t be the responsibility of some “AI guy” on your team. AI should be deeply integrated into your product and this means you need the expertise of the people talking to users and building something for them.
 
-There are a few ways you can encourage your team to do this:
+There are a few ways you can encourage this:
 
 - Build primitives and make your AI functionality composable so teams don’t need to re-invent prompts, streaming, consent, evals, and observability. This helps teams focus on unique and value-added AI functionality.
 
@@ -188,17 +188,17 @@ There are a few ways you can encourage your team to do this:
 
 ### 2. Make them faster
 
-One of the big challenges with AI-powered features, especially complex ones, is that they are slow. A workflow can often mean multiple calls to LLM providers which can add up to a lot of time waiting for responses. This can be especially frustrating when alternative ways to complete a task exist in an app or website.
+One of the big challenges with AI-powered features, especially complex ones, is that they are **slow**. A workflow can often mean multiple calls to LLM providers which can add up to a lot of time waiting for responses. This can be especially frustrating when alternative ways to complete a task exist in an app or website.
 
 As the founder of Superhuman, Rahul Vohra, said in [Lenny’s Newsletter](https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building):
 
 > The thing we’ve learned: speed wins. Take, for example, Instant Reply or Auto Summarize. Gmail and Outlook have similar features, but you have to generate the replies and summaries on demand—and then wait for them to finish generating. In Superhuman, we pre-compute them so they are always instantaneous. That simple difference is a massive lever on the user experience.
 
-Some ways to improve this 
+Some ways to improve this:
 
 - **Being aware of the model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed.
 
-- **Mixing fast and slow models depending on the task.** For example, we use fast models (like `gpt-4.1-mini`) for session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
+- **Mixing fast and slow models depending on the task.** For example, we use fast models (like `gpt-4.1-mini` and `gpt-4.1-nano`) for title generation,session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
 
 - **Async processing.** Complex AI operations, such as session summaries and pattern extraction, run asynchronously via Temporal workflows to avoid blocking user interactions. These are then cached in Redis to support retries without recomputation.
 
