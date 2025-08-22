@@ -682,37 +682,14 @@ export default function Home() {
         }
     `)
     const { appWindow } = useWindow()
-    const { setWindowTitle, isMobile, addWindow, updateWindow, siteSettings } = useApp()
+    const { setWindowTitle } = useApp()
     const posthog = usePostHog()
-    const [positionUpdated, setPositionUpdated] = useState(false)
 
     useEffect(() => {
         if (appWindow) {
             setWindowTitle(appWindow, 'home.mdx')
-            if (appWindow.location?.key === 'initial' && siteSettings.experience !== 'boring') {
-                addWindow(
-                    <Start
-                        newWindow
-                        location={{ pathname: `start` }}
-                        key={`start`}
-                        position={{
-                            x: appWindow.position.x + 50,
-                            y: appWindow.position.y + 200,
-                        }}
-                    />
-                )
-            }
         }
     }, [])
-
-    useEffect(() => {
-        if (appWindow && appWindow.location?.key === 'initial' && !isMobile && !positionUpdated) {
-            updateWindow(appWindow, {
-                position: { x: appWindow.position.x - 50, y: appWindow.position.y },
-            })
-            setPositionUpdated(true)
-        }
-    }, [appWindow])
 
     return (
         <>
