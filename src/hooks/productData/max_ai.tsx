@@ -13,6 +13,7 @@ export const max_ai = {
     category: 'ai',
     slug: 'max',
     status: 'beta',
+    hideFromPricingTable: true,
     seo: {
         title: 'Max AI - PostHog',
         description: 'Your AI-powered product analyst and product manager',

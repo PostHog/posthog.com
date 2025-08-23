@@ -139,6 +139,15 @@ export const Accordion = ({ allExpanded, setAllExpanded }) => {
     const ref = useRef<HTMLOListElement>(null)
     const [openIndex, setOpenIndex] = useState(null)
 
+    // Filter products to only show those with pricing
+    const pricedProducts = products.filter(item => {
+        // Skip if explicitly hidden from pricing table
+        if (item.hideFromPricingTable) return false
+        
+        // Include if billed with another product OR has its own billing data
+        return item.billedWith || item.billingData
+    })
+
     const scrollToIndex = (index) => {
         if (ref.current && window.innerWidth <= 639) {
             const element = ref.current.children[index]
@@ -155,7 +164,7 @@ export const Accordion = ({ allExpanded, setAllExpanded }) => {
 
     return (
         <ol ref={ref} className="not-prose space-y-px p-0 list-none">
-            {products.map((item, index) => (
+            {pricedProducts.map((item, index) => (
                 <AccordionItem
                     onAnimationComplete={({ height }) => {
                         if (height === 'auto') {

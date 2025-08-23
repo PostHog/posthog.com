@@ -12,6 +12,7 @@ export const cdp = {
     color: 'sky-blue',
     colorSecondary: 'blue',
     category: 'data',
+    hideFromPricingTable: true,
     seo: {
         title: 'CDP sources & destinations - PostHog',
         description: 'Get all your data into PostHog with 60+ sources & destinations',
