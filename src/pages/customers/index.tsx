@@ -15,14 +15,14 @@ const CUSTOMER_ORDER = [
     'mistralai',
     'supabase',
     'elevenlabs',
+    'lovable',
     'raycast',
     'airbus',
-    'dhl',
+    'researchgate',
     'startengine',
-    'assemblyai',
     'hasura',
     'trust',
-    'researchgate',
+    'heygen',
     'posthog',
 ]
 

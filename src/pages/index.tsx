@@ -284,19 +284,16 @@ const AIAgents = () => {
     )
 }
 
-const CUSTOMER_ORDER = ['ycombinator', 'airbus', 'dhl', 'startengine']
-
-const HUGE = ['ycombinator', 'airbus', 'dhl', 'startengine']
+const HUGE = ['ycombinator', 'airbus', 'elevenlabs', 'trust', 'lovable',]
 
 const GONNA_BE_HUGE = [
     'supabase',
-    'mistralai',
-    'elevenlabs',
-    'raycast',
-    'assemblyai',
     'hasura',
-    'trust',
+    'startengine',
+    'mistralai',
+    'raycast',
     'researchgate',
+    'heygen',
 ]
 
 interface CustomerProps {
@@ -390,7 +387,7 @@ const CompanyStageTabs = () => {
             )}
             {selectedStage === 'scale' && (
                 <div className="flex flex-col gap-2">
-                    <ProductTabs
+                    <ProduCustomersctTabs
                         productHandles={[
                             'data_warehouse',
                             'cdp',
@@ -518,14 +515,14 @@ const Customers = () => {
         // Check if logo is a React component (single SVG format)
         if (typeof customer.logo === 'function') {
             const LogoComponent = customer.logo
-            const heightClass = customer.height ? `h-${customer.height}` : 'h-6'
-            const className = `w-full fill-current object-contain ${heightClass} max-h-6`.trim()
+            const heightClass = customer.height ? `h-${customer.height - 2}` : 'h-8'
+            const className = `w-full fill-current object-contain ${heightClass} `.trim()
 
             return <LogoComponent className={className} />
         }
 
         // Otherwise, it's the existing light/dark object format
-        const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-6'
+        const heightClass = customer.height ? `max-h-${customer.height}` : ''
 
         return (
             <>
@@ -555,7 +552,7 @@ const Customers = () => {
                     content: (
                         <div className="flex flex-wrap gap-4 justify-center items-center">
                             {hugeCustomers.map((customer) => (
-                                <div key={customer.slug} className="h-8 flex items-center justify-center">
+                                <div key={customer.slug} className="flex items-center justify-center">
                                     {renderLogo(customer)}
                                 </div>
                             ))}
@@ -567,7 +564,7 @@ const Customers = () => {
                     content: (
                         <div className="flex flex-wrap gap-4 justify-center items-center">
                             {gonnaBeHugeCustomers.map((customer) => (
-                                <div key={customer.slug} className="h-8 flex items-center justify-center">
+                                <div key={customer.slug} className="flex items-center justify-center">
                                     {renderLogo(customer)}
                                 </div>
                             ))}
@@ -579,7 +576,12 @@ const Customers = () => {
         },
     ]
 
-    return <OSTable columns={columns} rows={rows} size="sm" className="mt-4" />
+    return <>
+        <OSTable columns={columns} rows={rows} size="sm" className="mt-4" />
+        <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
+            Read customer stories
+        </OSButton>
+    </>
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
@@ -685,9 +687,8 @@ export default function Home() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 cta={{
-                    url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                    }.posthog.com/signup`,
+                    url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                        }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
             />

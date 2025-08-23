@@ -22,6 +22,7 @@ import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
+import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
@@ -48,6 +49,7 @@ import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
+import LovableLogo from "components/CustomerLogos/LovableLogo"
 
 export interface Customer {
     slug: string
@@ -55,11 +57,11 @@ export interface Customer {
     toolsUsed: string[]
     notes?: React.ReactNode
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     height?: number
     quotes?: Record<
         string,
@@ -81,11 +83,11 @@ interface BaseCustomer {
     toolsUsed: string[]
     notes?: React.ReactNode
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     height?: number
     quotes?: Record<
         string,
@@ -134,14 +136,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 10,
         featured: true,
     },
-    assemblyai: {
-        name: 'AssemblyAI',
-        toolsUsed: ['experiments', 'product_analytics'],
-        notes: 'AI-based transcription APIs',
-        logo: AssemblyAILogo,
-        featured: true,
-        height: 10,
-    },
+    // assemblyai: {
+    //     name: 'AssemblyAI',
+    //     toolsUsed: ['experiments', 'product_analytics'],
+    //     notes: 'AI-based transcription APIs',
+    //     logo: AssemblyAILogo,
+    //     featured: true,
+    //     height: 10,
+    // },
     brainboard: {
         name: 'Brainboard',
         toolsUsed: ['experiments', 'product_analytics', 'apps'],
@@ -177,14 +179,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: false,
     },
-    dhl: {
-        name: 'DHL',
-        toolsUsed: [],
-        notes: 'The logistics company with the red and yellow logo',
-        logo: DHLLogo,
-        featured: true,
-        height: 10,
-    },
+    // dhl: {
+    //     name: 'DHL',
+    //     toolsUsed: [],
+    //     notes: 'The logistics company with the red and yellow logo',
+    //     logo: DHLLogo,
+    //     featured: true,
+    //     height: 10,
+    // },
     elevenlabs: {
         name: 'ElevenLabs',
         toolsUsed: ['feature_flags', 'product_analytics', 'feature_flags', 'surveys'],
@@ -223,6 +225,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 10,
     },
+    heygen: {
+        name: 'Heygen',
+        // toolsUsed: ['data_warehouse', 'product_analytics'],
+        notes: 'AI video editor',
+        logo: HeygenLogo,
+        featured: true,
+        height: 8,
+    },
     hostai: {
         name: 'HostAI',
         toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
@@ -230,6 +240,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         logo: HostAILogo,
         height: 12,
+    },
+    lovable: {
+        name: 'Lovable',
+        toolsUsed: [],
+        notes: 'AI app & website builder',
+        featured: true,
+        logo: LovableLogo,
+        height: 8,
     },
     juicebox: {
         name: 'Juicebox',
@@ -258,7 +276,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     mistralai: {
         name: 'Mistral AI',
         toolsUsed: [],
-        notes: '',
+        notes: 'Open source LLMs',
         logo: MistralAILogo,
         height: 10,
         featured: true,
@@ -353,7 +371,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     raycast: {
         name: 'Raycast',
         toolsUsed: [],
-        notes: 'MacOS Spotlight replacement on steroids',
+        notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
         height: 10,
@@ -363,7 +381,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['experiments', 'feature_flags', 'product_analytics'],
         notes: "World's largest professional network for scientists",
         logo: ResearchGateLogo,
-        height: 10,
+        height: 8,
         featured: true,
     },
     significa: {
@@ -437,7 +455,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: 'Crowdfunding for startups',
         logo: StartEngineLogo,
-        height: 12,
+        height: 14,
         featured: true,
     },
     trust: {
@@ -567,9 +585,9 @@ export const useCustomers = () => {
                         customer.logo ||
                         (markdownData.frontmatter.logo?.publicURL
                             ? {
-                                  light: markdownData.frontmatter.logo.publicURL,
-                                  dark: markdownData.frontmatter.logoDark.publicURL,
-                              }
+                                light: markdownData.frontmatter.logo.publicURL,
+                                dark: markdownData.frontmatter.logoDark.publicURL,
+                            }
                             : undefined),
                 },
             }
