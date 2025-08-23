@@ -1,23 +1,17 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react'
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
+import React, { useState, useMemo, useEffect } from 'react'
+import Editor from 'components/Editor'
+import OSTabs from 'components/OSTabs'
+import SEO from 'components/seo'
+import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import Link from 'components/Link'
-import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
-import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
-import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
-import HeaderBar from 'components/OSChrome/HeaderBar'
-import { Select } from 'components/RadixUI/Select'
-import { productMenu } from '../navs'
-import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import { IconPlus, IconX } from '@posthog/icons'
+import { IconX } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useWindow } from '../context/Window'
-import OSButton from 'components/OSButton'
+import OSButton from "components/OSButton"
 
 interface TeamsProps {
     searchTerm?: string
@@ -188,7 +182,6 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                 image={`/images/small-teams.png`}
             />
             <section data-scheme="primary" className="bg-primary">
-                {/* <DebugContainerQuery /> */}
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                     <div className="md:flex-1">
                         <h1>Small teams</h1>
@@ -203,6 +196,7 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                             </Link>{' '}
                             that are multi-disciplinary and as self-sufficient as possible.
                         </p>
+                        <OSButton asLink to="/teams" variant="secondary" size="md" state={{ newWindow: true }}>Browse teams</OSButton>
 
                         <div className="relative mb-6">
                             {searchTerm && propSearchTerm === undefined && (
@@ -214,12 +208,12 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                                     <IconX className="w-4 h-4" />
                                 </button>
                             )}
-                            {searchTerm && (
+                            {/* {searchTerm && (
                                 <p className="text-sm text-secondary mt-2 mb-4">
                                     Use <KeyboardShortcut text="↑" size="sm" /> /{' '}
                                     <KeyboardShortcut text="↓" size="sm" /> to navigate between results
                                 </p>
-                            )}
+                            )} */}
                         </div>
 
                         <div className="not-prose grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
@@ -245,11 +239,10 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                                             to={`/teams/${slug}`}
                                             state={{ newWindow: true }}
                                             key={id}
-                                            className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${
-                                                searchTerm && index === selectedIndex
-                                                    ? 'ring-2 ring-blue rounded bg-light dark:bg-dark'
-                                                    : ''
-                                            }`}
+                                            className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${searchTerm && index === selectedIndex
+                                                ? 'ring-2 ring-blue rounded bg-light dark:bg-dark'
+                                                : ''
+                                                }`}
                                         >
                                             <div className="w-48">
                                                 <TeamPatch
@@ -337,28 +330,24 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                                                                 return (
                                                                     <span
                                                                         key={`${name}-${index}`}
-                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${
-                                                                            isMatchingMember
-                                                                                ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
-                                                                                : 'border-accent'
-                                                                        }`}
+                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${isMatchingMember
+                                                                            ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
+                                                                            : 'border-accent'
+                                                                            }`}
                                                                     >
                                                                         <Tooltip
-                                                                            content={`${name} ${
-                                                                                isTeamLead ? '(Team lead)' : ''
-                                                                            }`}
+                                                                            content={`${name} ${isTeamLead ? '(Team lead)' : ''
+                                                                                }`}
                                                                             placement="bottom"
                                                                         >
                                                                             <img
                                                                                 src={avatar?.data?.attributes?.url}
-                                                                                className={`size-10 rounded-full bg-${
-                                                                                    color ??
+                                                                                className={`size-10 rounded-full bg-${color ??
                                                                                     'accent dark:bg-accent-dark'
-                                                                                } border transform ${
-                                                                                    isMatchingMember
+                                                                                    } border transform ${isMatchingMember
                                                                                         ? 'scale-125 border-red dark:border-yellow'
                                                                                         : 'scale-100 border-primary'
-                                                                                } hover:scale-125 transition-all`}
+                                                                                    } hover:scale-125 transition-all`}
                                                                                 alt={name}
                                                                             />
                                                                         </Tooltip>
@@ -379,4 +368,46 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
     )
 }
 
-export default Teams
+const SmallTeamsPage = () => {
+    const [searchTerm, setSearchTerm] = useState('')
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/small-teams',
+        content: (
+            <div className="max-w-screen-lg mx-auto mt-6 px-4">
+                <Teams searchTerm={searchTerm} />
+            </div>
+        ),
+    })
+
+    return (
+        <>
+            <SEO
+                title="Small teams – PostHog"
+                description="PostHog teams and their missions"
+                image={`/images/og/teams.jpg`}
+            />
+            <Editor
+                type="teams"
+                maxWidth="full"
+                proseSize="base"
+                onSearchChange={(query) => setSearchTerm(query)}
+                bookmark={{
+                    title: 'Small teams',
+                    description: 'PostHog teams and their missions',
+                }}
+            >
+                <OSTabs
+                    tabs={tabs}
+                    defaultValue="/small-teams"
+                    onValueChange={handleTabChange}
+                    frame={false}
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
+                    triggerDataScheme="primary"
+                />
+            </Editor>
+        </>
+    )
+}
+
+export default SmallTeamsPage

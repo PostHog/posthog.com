@@ -22,7 +22,7 @@ const tabs = [
         content: null,
     },
     {
-        value: '/teams',
+        value: '/small-teams',
         label: 'Teams',
         content: null,
     },

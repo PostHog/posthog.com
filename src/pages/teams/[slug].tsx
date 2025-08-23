@@ -1,13 +1,12 @@
 import Team from 'components/Team'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconPencil } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 type TeamPageProps = {
     params: {
@@ -43,6 +42,8 @@ export default function TeamPage(props: TeamPageProps) {
             }
             allSqueakTeam {
                 nodes {
+                    id
+                    name
                     slug
                     emojis {
                         name
@@ -88,16 +89,35 @@ export default function TeamPage(props: TeamPageProps) {
             }
         }
     `)
+    
     const body = data?.allTeams?.nodes?.find((node: any) => node?.fields?.slug === `/teams/${slug}`)?.body
     const objectives = data?.allObjectives?.nodes?.find(
         (node: any) => node?.fields?.slug === `/teams/${slug}/objectives`
     )?.body
     const team = data?.allSqueakTeam?.nodes?.find((node: any) => node?.slug === slug)
-
-    // These variables are defined but not used in this component
-    // const navigate = useNavigate()
-    // const location = useLocation()
-    // const currentPath = location.pathname.replace('/', '')
+    
+    // Create teams navigation for sidebar
+    const teamsNavigation = useMemo(() => {
+        const teams = data?.allSqueakTeam?.nodes || []
+        return [
+            {
+                name: 'Teams',
+            },
+            {
+                name: 'All teams',
+                url: '/teams',
+                icon: 'IconPeople',
+            },
+            ...teams
+                .filter((t: any) => t.name)
+                .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                .map((t: any) => ({
+                    name: t.name,
+                    url: `/teams/${t.slug}`,
+                    active: t.slug === slug,
+                }))
+        ]
+    }, [data?.allSqueakTeam?.nodes, slug])
 
     const handleSave = async () => {
         // Call the save function from Team component
@@ -127,53 +147,37 @@ export default function TeamPage(props: TeamPageProps) {
             </>
         ) : null
 
-    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/teams',
-        content: (
-            <div className="max-w-screen-lg mx-auto mt-6 px-4">
-                <Team
-                    emojis={team?.emojis}
-                    roadmaps={team?.roadmaps}
-                    objectives={objectives}
-                    body={body}
-                    slug={slug?.split('/').pop() || ''}
-                    editing={editing}
-                    setEditing={setEditing}
-                    saving={saving}
-                    setSaving={setSaving}
-                    onSaveRef={onSaveRef}
-                />
-            </div>
-        ),
-    })
-
     return (
         <>
             <SEO
-                title={`Team ${slug} – PostHog`}
-                description={`Learn about the ${slug} team at PostHog`}
+                title={`${team?.name || slug} Team – PostHog`}
+                description={`Learn about the ${team?.name || slug} team at PostHog`}
                 image={`/images/og/teams.jpg`}
             />
-            <Editor
-                maxWidth="full"
-                type="teams"
+            <ReaderView
+                title={`${team?.name || slug} Team`}
+                hideTitle={true}
+                leftSidebar={<TreeMenu items={teamsNavigation} />}
+                homeURL="/teams"
+                description={`Learn about the ${team?.name || slug} team at PostHog`}
                 proseSize="base"
-                bookmark={{
-                    title: `Team ${slug}`,
-                    description: `${slug} team at PostHog`,
-                }}
+                rightActionButtons={editing ? editActions : editButton}
             >
-                <div className="absolute right-4 top-2 flex gap-2">{editing ? editActions : editButton}</div>
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/teams"
-                    onValueChange={handleTabChange}
-                    frame={false}
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                />
-            </Editor>
+                <div className="max-w-screen-lg mx-auto px-4">
+                    <Team
+                        emojis={team?.emojis}
+                        roadmaps={team?.roadmaps}
+                        objectives={objectives}
+                        body={body}
+                        slug={slug?.split('/').pop() || ''}
+                        editing={editing}
+                        setEditing={setEditing}
+                        saving={saving}
+                        setSaving={setSaving}
+                        onSaveRef={onSaveRef}
+                    />
+                </div>
+            </ReaderView>
         </>
     )
 }
