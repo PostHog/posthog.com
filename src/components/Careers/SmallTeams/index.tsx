@@ -35,13 +35,12 @@ export const SmallTeams = () => {
 
     return (
         <section id="small-teams" className="@container px-8 @3xl:px-8">
-            <DebugContainerQuery />
             <div className="mb-8">
                 <h2 className="text-3xl font-bold mb-4">
                     Join a startup <em className="text-red dark:text-yellow">within a startup</em>
                 </h2>
-                <div className="not-prose @2xl:columns-2 gap-8 [orphans:3]">
-                    <p>Starting a job at a company of {roundedProfilesTotalCount}+ people can be intimidating!</p>
+                <div className="@2xl:columns-2 gap-8 [orphans:3]">
+                    <p className="mt-0">Starting a job at a company of {roundedProfilesTotalCount}+ people can be intimidating!</p>
                     <p>
                         With our <Link to="/handbook/company/small-teams">small teams</Link> structure, it's like
                         working at a startup <em>within</em> a startup. This allows each team to operate as autonomously
@@ -65,11 +64,13 @@ export const SmallTeams = () => {
                             const gatsbyImageMiniCrest = getImage(miniCrest)
                             return (
                                 <OSButton
+                                    asLink
                                     to={`/teams/${slug}`}
                                     key={id}
                                     align="left"
                                     width="full"
                                     zoomHover="md"
+                                    size="md"
                                     state={{ newWindow: true }}
                                 >
                                     <div className="size-8">
