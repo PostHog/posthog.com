@@ -73,21 +73,25 @@ const cursorOptions: ToggleOption[] = [
 
 const clickBehaviorOptions: ToggleOption[] = [
     {
-        label: <span>
-            Single-click{' '}
-            <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
-                <p className="max-w-sm my-0">Click once to open items</p>
-            </Tooltip>
-        </span>,
+        label: (
+            <span>
+                Single-click{' '}
+                <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
+                    <p className="max-w-sm my-0">Click once to open items</p>
+                </Tooltip>
+            </span>
+        ),
         value: 'single',
     },
     {
-        label: <span>
-            Double-click{' '}
-            <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
-                <p className="max-w-sm my-0">Click once to select, double-click to open</p>
-            </Tooltip>
-        </span>,
+        label: (
+            <span>
+                Double-click{' '}
+                <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
+                    <p className="max-w-sm my-0">Click once to select, double-click to open</p>
+                </Tooltip>
+            </span>
+        ),
         value: 'double',
         default: true,
     },
@@ -185,36 +189,41 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
             <Popover
                 trigger={trigger}
                 dataScheme="secondary"
-                contentClassName="@container bg-primary w-[800px] max-w-full min-h-[200px] h-[400px] max-h-full"
+                contentClassName="@container bg-primary w-[800px] max-w-full max-h-full"
                 sideOffset={8}
                 open={isOpen}
                 onOpenChange={setIsOpen}
             >
-                <div className="grid @xl:grid-cols-2 @2xl:grid-cols-3 @xl:gap-2 p-2">
-                    {themeOptions.map((option) => {
-                        const optionThumb = isDark ? option.background?.thumb?.dark : option.background?.thumb?.light
-                        const isSelected = option.value === value
-                        return (
-                            <button
-                                key={option.value}
-                                type="button"
-                                data-scheme="primary"
-                                onClick={() => handleSelect(option.value)}
-                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
+                <ScrollArea>
+                    <div className="grid @xl:grid-cols-2 @2xl:grid-cols-3 @xl:gap-2 p-2 min-h-[200px] h-[400px]">
+                        {themeOptions.map((option) => {
+                            const optionThumb = isDark
+                                ? option.background?.thumb?.dark
+                                : option.background?.thumb?.light
+                            const isSelected = option.value === value
+                            return (
+                                <button
+                                    key={option.value}
+                                    type="button"
+                                    data-scheme="primary"
+                                    onClick={() => handleSelect(option.value)}
+                                    className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${
+                                        isSelected ? 'bg-accent' : ''
                                     }`}
-                            >
-                                <img
-                                    src={optionThumb}
-                                    alt={option.label}
-                                    className="w-full h-auto object-cover rounded"
-                                />
-                                <span className={`text-primary ${isSelected ? 'font-bold' : 'font-medium'}`}>
-                                    {option.label}
-                                </span>
-                            </button>
-                        )
-                    })}
-                </div>
+                                >
+                                    <img
+                                        src={optionThumb}
+                                        alt={option.label}
+                                        className="w-full h-auto object-cover rounded"
+                                    />
+                                    <span className={`text-primary ${isSelected ? 'font-bold' : 'font-medium'}`}>
+                                        {option.label}
+                                    </span>
+                                </button>
+                            )
+                        })}
+                    </div>
+                </ScrollArea>
             </Popover>
         </>
     )
