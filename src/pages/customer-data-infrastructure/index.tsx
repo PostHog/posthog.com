@@ -228,7 +228,7 @@ export default function CDP(): JSX.Element {
                         </div>
                     </Fieldset>
                 </div>
-                <p className="text-base font-semibold">
+                <p className="text-lg font-bold">
                     Analyze product and customer data in PostHog – <em>no matter where it was generated.</em>
                 </p>
                 <p>
