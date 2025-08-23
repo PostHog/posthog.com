@@ -502,7 +502,7 @@ const PageNavigation = () => {
 }
 
 const Customers = () => {
-    const { getCustomers } = useCustomers()
+    const { getCustomers, hasCaseStudy } = useCustomers()
     const hugeCustomers = getCustomers(HUGE)
     const gonnaBeHugeCustomers = getCustomers(GONNA_BE_HUGE)
 
@@ -545,29 +545,43 @@ const Customers = () => {
         { name: 'Gonna be huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
     ]
 
+    // Helper function to render customer with case study link
+    const renderCustomerWithLink = (customer: any) => (
+        hasCaseStudy(customer.slug) ? (
+            <OSButton
+                key={customer.slug}
+                asLink
+                to={`/customers/${customer.slug}`}
+                state={{ newWindow: true }}
+                className="relative border border-transparent hover:border-primary rounded-sm"
+            >
+                {renderLogo(customer)}
+                <Tooltip trigger={
+                    <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white"></span>
+                } delay={0}>
+                    <p className="text-sm mb-0">
+                        Click to read customer story
+                    </p>
+                </Tooltip>
+            </OSButton>
+        ) : <span className="inline-flex py-1.5 px-2" key={customer.slug}>{renderLogo(customer)}</span>
+    )
+
     const rows = [
         {
             cells: [
                 {
                     content: (
-                        <div className="flex flex-wrap gap-4 justify-center items-center">
-                            {hugeCustomers.map((customer) => (
-                                <div key={customer.slug} className="flex items-center justify-center">
-                                    {renderLogo(customer)}
-                                </div>
-                            ))}
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
+                            {hugeCustomers.map(renderCustomerWithLink)}
                         </div>
                     ),
                     className: '!p-4',
                 },
                 {
                     content: (
-                        <div className="flex flex-wrap gap-4 justify-center items-center">
-                            {gonnaBeHugeCustomers.map((customer) => (
-                                <div key={customer.slug} className="flex items-center justify-center">
-                                    {renderLogo(customer)}
-                                </div>
-                            ))}
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
+                            {gonnaBeHugeCustomers.map(renderCustomerWithLink)}
                         </div>
                     ),
                     className: '!p-4',
