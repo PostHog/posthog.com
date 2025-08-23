@@ -11,11 +11,11 @@ interface Customer {
     slug: string
     name: string
     logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    | React.ComponentType<any>
+    | {
+        light: string
+        dark: string
+    }
     height?: number
 }
 
@@ -57,7 +57,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 if (typeof customer.logo === 'function') {
                     const LogoComponent = customer.logo
                     const heightClass = customer.height ? `h-${customer.height}` : ''
-                    const className = `fill-current object-contain ${heightClass}`.trim()
+                    const className = `fill-current object-contain max-w-full ${heightClass}`.trim()
 
                     return (
                         <div className="" style={{ maxHeight: customer.height ? customer.height * 5 + 'px' : '' }}>
