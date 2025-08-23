@@ -78,8 +78,8 @@ const Customer = ({ number, customer }: CustomerProps) => {
             },
             { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
             {
-                content: hasCaseStudy(customer.slug) ? (
-                    <Link to={`/customers/${customer.slug}`} className="group" state={{ newWindow: true }}>
+                content: hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
+                    <Link to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`} className="group" state={{ newWindow: true }}>
                         Link <IconArrowUpRight className="size-4 inline-block text-muted group-hover:text-primary" />
                     </Link>
                 ) : null,

@@ -294,6 +294,7 @@ const GONNA_BE_HUGE = [
     'raycast',
     'researchgate',
     'heygen',
+    'posthog',
 ]
 
 interface CustomerProps {
@@ -547,20 +548,20 @@ const Customers = () => {
 
     // Helper function to render customer with case study link
     const renderCustomerWithLink = (customer: any) => (
-        hasCaseStudy(customer.slug) ? (
+        hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
             <OSButton
                 key={customer.slug}
                 asLink
-                to={`/customers/${customer.slug}`}
+                to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
                 state={{ newWindow: true }}
                 className="relative border border-transparent hover:border-primary rounded-sm"
             >
                 {renderLogo(customer)}
                 <Tooltip trigger={
-                    <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white"></span>
-                } delay={0}>
+                    <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
+                } delay={0} sideOffset={14}>
                     <p className="text-sm mb-0">
-                        Click to read customer story
+                        {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
                     </p>
                 </Tooltip>
             </OSButton>
@@ -591,9 +592,9 @@ const Customers = () => {
     ]
 
     return <>
-        <OSTable columns={columns} rows={rows} size="sm" className="mt-4" />
+        <OSTable columns={columns} rows={rows} size="sm" className="mt-4" rowAlignment="top" />
         <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-            Read customer stories
+            Open customers.mdx
         </OSButton>
     </>
 }

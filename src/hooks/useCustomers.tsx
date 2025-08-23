@@ -336,11 +336,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         ],
         notes: (
             <>
-                Would it be clever or lame if we included our own company here? Read{' '}
-                <Link state={{ newWindow: true }} to="/blog/posthog-marketing">
-                    how we use PostHog
-                </Link>{' '}
-                at PostHog.
+                Would it be clever or lame if we included our own company here?
             </>
         ),
         logo: PostHogLogo,
