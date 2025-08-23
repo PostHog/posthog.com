@@ -584,12 +584,6 @@ const Customers = () => {
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     {
-        name: 'ProductCount',
-        kind: 'flow',
-        props: [],
-        Editor: () => <ProductCount />,
-    },
-    {
         name: 'AppCount',
         kind: 'flow',
         props: [],
@@ -602,18 +596,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <CompanyStageTabs />,
     },
     {
-        name: 'PageNavigation',
-        kind: 'flow',
-        props: [],
-        Editor: () => <PageNavigation />,
-    },
-    {
-        name: 'HomeHappyHog',
-        kind: 'flow',
-        props: [],
-        Editor: () => <HomeHappyHog />,
-    },
-    {
         name: 'CTAs',
         kind: 'flow',
         props: [],
@@ -624,16 +606,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HomeHitCounter />,
-    },
-    {
-        name: 'Headline',
-        kind: 'flow',
-        props: [],
-        Editor: () => (
-            <h1 className="flex items-end gap-1">
-                welcome to <Logo />
-            </h1>
-        ),
     },
     {
         name: 'AIAgents',
@@ -658,12 +630,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <Customers />,
-    },
-    {
-        name: 'DebugContainerQuery',
-        kind: 'flow',
-        props: [],
-        Editor: () => <DebugContainerQuery />,
     },
     {
         name: 'CTA',

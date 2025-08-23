@@ -8,6 +8,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { useApp } from '../../context/App'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useWindow } from '../../context/Window'
 
 const Image = ({
     images,
@@ -70,8 +71,11 @@ interface Product {
 }
 
 export default function ProductTabs({ productHandles, className, selectedStage }: ProductTabsProps) {
+    const { appWindow } = useWindow()
     const allProducts = useProduct()
-    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
+    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>(
+        typeof window !== 'undefined' && (appWindow?.size?.width || 0) >= 576 ? 'vertical' : 'horizontal'
+    )
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
 
