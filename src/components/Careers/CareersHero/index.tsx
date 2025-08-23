@@ -174,8 +174,7 @@ export const CareersHero = () => {
 
     return (
         <section
-            id="hero"
-            className="@container not-prose relative aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]"
+            className="@container not-prose relative rounded aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]"
         >
             {/* Background container for positioned graphics */}
             {/* Example of positioned graphics - replace with your actual graphics */}

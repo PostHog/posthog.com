@@ -49,7 +49,7 @@ export default function NewTeam(props: TeamPageProps) {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/teams/new',
         content: (
-            <div className="max-w-screen-lg mx-auto mt-6">
+            <div className="max-w-screen-lg mx-auto mt-6 px-4">
                 <Team
                     editing={editing}
                     setEditing={setEditing}

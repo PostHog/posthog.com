@@ -32,7 +32,7 @@ const tabs = [
         content: null,
     },
     {
-        value: '/handbook',
+        value: '/chapters',
         label: 'Handbook',
         content: null,
     },

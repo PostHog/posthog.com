@@ -64,10 +64,10 @@ const IndexPage = () => {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/careers',
         content: (
-            <ScrollArea className="h-full max-w-screen-xl mx-auto mt-6">
-                <div className="max-w-5xl mx-auto px-4 py-8">
+            <ScrollArea className="h-full max-w-screen-xl mx-auto">
+                <div className="max-w-5xl mx-auto">
                     <TableOfContents />
-                    <div id="hero">
+                    <div id="hero" className="p-2">
                         <CareersHero />
                         <JobListings />
                     </div>
@@ -123,9 +123,8 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${
-                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
-                }`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
+                    }`}
                 imageType="absolute"
             />
             <Editor

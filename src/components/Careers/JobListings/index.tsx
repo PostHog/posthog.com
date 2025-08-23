@@ -182,7 +182,7 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
         Math.round(
             (team.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza).length /
                 teamLength) *
-                100
+            100
         )
 
     return (
@@ -541,11 +541,10 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                     >
                                                         <div className="flex flex-col w-full items-start">
                                                             <span
-                                                                className={`font-semibold text-[15px] ${
-                                                                    selectedJob.fields.title === job.fields.title
+                                                                className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
                                                                         ? ''
                                                                         : ''
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 {job.fields.title}
                                                             </span>
@@ -594,18 +593,16 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                         width="full"
                                                         zoomHover="md"
                                                         active={selectedJob.fields.title === job.fields.title}
-                                                        className={` ${
-                                                            selectedJob.fields.title === job.fields.title ? '' : ''
-                                                        }`}
+                                                        className={` ${selectedJob.fields.title === job.fields.title ? '' : ''
+                                                            }`}
                                                         onClick={() => setSelectedJob(job)}
                                                     >
                                                         <div className="flex flex-col w-full items-start">
                                                             <span
-                                                                className={`font-semibold text-[15px] ${
-                                                                    selectedJob.fields.title === job.fields.title
+                                                                className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
                                                                         ? ''
                                                                         : ''
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 {job.fields.title}
                                                             </span>
@@ -655,32 +652,30 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex @2xl:flex-row flex-col @2xl:space-x-12 @2xl:space-y-0 space-y-6">
                                 <Detail
                                     title="Location"
-                                    value={`Remote${
-                                        selectedJob.parent.customFields.find(
-                                            (field: { title: string }) => field.title === 'Location(s)'
-                                        )?.value
-                                            ? ` (${
-                                                  selectedJob.parent.customFields.find(
-                                                      (field: { title: string }) => field.title === 'Location(s)'
-                                                  ).value
-                                              })`
+                                    value={`Remote${selectedJob.parent.customFields.find(
+                                        (field: { title: string }) => field.title === 'Location(s)'
+                                    )?.value
+                                            ? ` (${selectedJob.parent.customFields.find(
+                                                (field: { title: string }) => field.title === 'Location(s)'
+                                            ).value
+                                            })`
                                             : ''
-                                    }`}
+                                        }`}
                                     icon={<Location />}
                                 />
                                 {selectedJob.parent.customFields.find(
                                     (field: { title: string }) => field.title === 'Timezone(s)'
                                 )?.value && (
-                                    <Detail
-                                        title="Timezone(s)"
-                                        value={
-                                            selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Timezone(s)'
-                                            ).value
-                                        }
-                                        icon={<Timezone />}
-                                    />
-                                )}
+                                        <Detail
+                                            title="Timezone(s)"
+                                            value={
+                                                selectedJob.parent.customFields.find(
+                                                    (field: { title: string }) => field.title === 'Timezone(s)'
+                                                ).value
+                                            }
+                                            icon={<Timezone />}
+                                        />
+                                    )}
                             </ul>
 
                             <div className="@7xl:flex-1 [&_h3]:mt-0 mt-4">
@@ -733,9 +728,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                         </div>
                         <div
                             data-scheme="secondary"
-                            className={`@container @7xl:col-span-5 ${
-                                teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
-                            }`}
+                            className={`@container @7xl:col-span-5 ${teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
+                                }`}
                         >
                             <h3 className="mt-0">
                                 About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
@@ -758,7 +752,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                     ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
                                                 ).length /
                                                     teamLength) *
-                                                    100
+                                                100
                                             )
 
                                         return {

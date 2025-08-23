@@ -10,7 +10,7 @@ const TeamsPage = () => {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/teams',
         content: (
-            <div className="max-w-screen-lg mx-auto mt-6">
+            <div className="max-w-screen-lg mx-auto mt-6 px-4">
                 <Teams searchTerm={searchTerm} />
             </div>
         ),

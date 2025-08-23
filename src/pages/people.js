@@ -10,7 +10,8 @@ const PeoplePage = () => {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/people',
         content: (
-            <div className="max-w-screen-lg mx-auto mt-6">
+            <div className="max-w-screen-lg mx-auto mt-6 px-4">
+                <h1>People</h1>
                 <People />
             </div>
         ),
