@@ -594,13 +594,14 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 550,
-                height: 369,
+                height: 72,
             },
             max: {
                 width: 550,
-                height: 369,
+                height: 72,
             },
             fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
