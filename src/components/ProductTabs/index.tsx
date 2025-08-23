@@ -25,8 +25,8 @@ const Image = ({
     imgClassName: string
 }) => {
     const image = images.find((image: any) => image.publicURL === src)
-    if (!image) {
-        return null
+    if (!image?.childImageSharp?.gatsbyImageData) {
+        return <CloudinaryImage src={src as any} alt={alt} width={width} height={height} imgClassName={imgClassName} />
     }
 
     return (
