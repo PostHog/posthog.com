@@ -59,7 +59,7 @@ At its best, automation relieves tedium.
 
 When they’re set up to succeed, agents can relieve *loads* of tedium for developers, doing repetitive tasks and boring setup in a flash.
 
-The most exotic approach we’ll nod to here is the [MCP](https://github.com/modelcontextprotocol) server. This is *new*, but beneath the surface, it’s not *that new*.
+The most exotic approach we’ll nod to here is the [MCP](/docs/model-context-protocol) server. This is *new*, but beneath the surface, it’s not *that new*.
 
 An MCP server creates an interface between your existing technology and a coding agent. It provides these surfaces:
 

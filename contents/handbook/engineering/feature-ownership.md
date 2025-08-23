@@ -8,6 +8,19 @@ Each feature at PostHog has an Engineering owner. This owner is responsible for 
 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
+## Who can contribute to owned features?
+
+Feature ownership does **not** mean that the owner is the **only** person/team who can contribute to the feature. If another team requires something from an existing feature that isn't supported, that non-owning team should build it. The owner team is responsible for reviewing PRs to make sure the code patterns and UX makes sense for the feature overall. After the change is merged, the owner team then owns it (assuming no major bugs from the initial implementation).
+
+For example, web analytics wanted a heatmap insight type to see what times of day people were active. <TeamMember name="Javier Bahamondes" photo /> from web analytics opened up the necessary PRs to build this feature. It was reviewed by the product analytics team, owner of all insight types, who then took responsibility for it after it was merged.
+
+This process does four things:
+
+- It prevents people feeling like they need to wait on another team to build out necessary functionality for them
+- It ensures that features built by another team get proper review, because reviewers know they will have to own it eventually.
+- It makes sure no feature is left "orphaned" with no real owner.
+- It embraces our value of [Why not now?](https://posthog.com/handbook/values#why-not-now).
+
 
 ## Feature list
 
@@ -27,7 +40,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Batch exports | Team Batch Exports | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | Billing | [Team Billing][Team Billing]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Cache warming | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/cache-warming</span> |
-| Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #support-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR). **For Mobile SDK issues, defer to the Mobile group first** | <span class="lemon-tag gh-tag">feature/libraries</span> |
+| Mobile SDKs | **Primary: Mobile group**. Shared responsibility with the relevant Small Team for feature-owned areas. Start with the [Mobile group](https://github.com/orgs/PostHog/teams/team-mobile) for triage, loop in #support-client-libraries as needed. | <span class="lemon-tag gh-tag">feature/mobile</span> |
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Comments/Discussions | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/comments</span> |
 | CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |

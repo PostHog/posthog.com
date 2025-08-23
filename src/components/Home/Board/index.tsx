@@ -59,6 +59,9 @@ import {
     IconStack,
     IconQuestion,
     IconMagic,
+    IconCodeInsert,
+    IconBolt,
+    IconSparkles,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -413,6 +416,67 @@ const products: Product[] = [
         },
     },
     {
+        name: 'MCP Server',
+        color: 'seagreen',
+        Icon: IconCode,
+        description: 'Give your agents full control over PostHog.',
+        types: ['AI'],
+        features: [
+            { title: 'Use PostHog in your editor', Icon: IconCode },
+            { title: 'Automate tasks based on PostHog data', Icon: IconSparkles },
+            { title: 'Build agent workflows with PostHog', Icon: IconBolt },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_6d2cab1b66" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/docs/model-context-protocol',
+                text: 'Get started',
+            },
+        },
+    },
+    {
+        name: 'Embedded analytics',
+        color: '[#36C46F]',
+        Icon: IconCodeInsert,
+        description: 'Easily share a subset of data you capture with your customers so they can do analysis too.',
+        types: ['Data'],
+        features: [
+            { title: 'Query API', Icon: IconCode },
+            { title: 'Full SQL access', Icon: IconDatabase },
+            { title: 'Materialize views for speed', Icon: IconBolt },
+            { title: 'Visualize how you want', Icon: IconGraph },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_39_41_2x_9123ae5225.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_40_01_2x_d24eae394d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        pricing: {
+            cta: {
+                url: '/tutorials/embedded-analytics',
+                text: 'Get started',
+            },
+        },
+    },
+    {
         name: 'Messaging',
         color: 'blue',
         Icon: IconSend,
@@ -487,14 +551,6 @@ const products: Product[] = [
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2168,
-    },
-    {
-        name: 'Code editor',
-        Icon: IconCode,
-        color: 'seagreen',
-        types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2169,
     },
     {
         name: 'AI docs chat',

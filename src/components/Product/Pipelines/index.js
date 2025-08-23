@@ -549,3 +549,402 @@ const PipelinePreview = ({ pipeline }) => {
         </>
     )
 }
+
+function PipelinesPage({ location }) {
+    const {
+        destinations: { nodes },
+        transformations: { nodes: transformations },
+    } = useStaticQuery(query)
+
+    const [searchValue, setSearchValue] = React.useState('')
+
+    const [selectedCategory, setSelectedCategory] = React.useState('All')
+    const [selectedType, setSelectedType] = React.useState('All')
+
+    const pipelines = {
+        Sources: sources,
+        Destinations: nodes,
+        Transformations: transformations,
+    }
+
+    const nodesByCategory = useMemo(() => {
+        if (selectedType === 'All') {
+            return Object.values(pipelines).flat()
+        }
+        return pipelines[selectedType].filter(
+            (node) => selectedCategory === 'All' || node.category.includes(selectedCategory)
+        )
+    }, [selectedType, selectedCategory, pipelines])
+    const fuse = useMemo(
+        () => new Fuse(nodesByCategory, { keys: ['name', 'description'], threshold: 0.3 }),
+        [nodesByCategory]
+    )
+    const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
+    const [selectedDestination, setSelectedDestination] = React.useState(null)
+    const [modalOpen, setModalOpen] = React.useState(false)
+    const { fullWidthContent } = useLayoutData()
+    const [activeProfile, setActiveProfile] = React.useState(false)
+
+    const product = {
+        slug: 'cdp',
+        lowercase: 'data pipelines',
+        capitalized: 'Data pipelines',
+        freeTier: '10m rows',
+    }
+
+    return (
+        <Layout>
+            <SEO
+                title="CDP sources & destinations"
+                description="Get all your data into PostHog with 60+ sources & destinations"
+                image={`images/og/cdp.jpg`}
+            />
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
+            <SideModal
+                title={
+                    selectedDestination ? (
+                        <div className="flex space-x-2 items-center">
+                            <div className="size-7 flex-shrink-0">
+                                <img
+                                    className="w-full"
+                                    src={getIconUrl(selectedDestination.icon_url)}
+                                    alt={selectedDestination.name}
+                                />
+                            </div>
+                            <span>{selectedDestination.name}</span>
+                            <p className="m-0 px-1 py-0 border border-border dark:border-dark rounded text-sm font-normal">
+                                <span className="opacity-70">
+                                    {Object.keys(pipelines)
+                                        .find((key) => pipelines[key].includes(selectedDestination))
+                                        .slice(0, -1)}
+                                </span>
+                            </p>
+                            {selectedDestination.status === 'coming_soon' && (
+                                <p
+                                    className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ml-1`}
+                                >
+                                    Roadmap
+                                </p>
+                            )}
+                        </div>
+                    ) : (
+                        ''
+                    )
+                }
+                open={modalOpen}
+                setOpen={setModalOpen}
+                className="max-w-screen-md w-full"
+            >
+                {selectedDestination && <PipelinePreview pipeline={selectedDestination} />}
+            </SideModal>
+
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <Hero
+                    color="sky-blue"
+                    icon={<IconPlug />}
+                    product={product.capitalized}
+                    title="Ingest, transform, and send data between hundreds of tools"
+                    description="PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack."
+                />
+
+                <div className="flex justify-center mb-12">
+                    <SmoothScrollLink
+                        to="library"
+                        spy={true}
+                        smooth={true}
+                        offset={-108}
+                        duration={1000}
+                        className="cursor-pointer inline-flex items-center rounded-full bg-accent dark:bg-accent-dark px-3 py-1 text-sm border border-light dark:border-dark text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark hover:border-red dark:hover:border-yellow"
+                    >
+                        PostHog integrations library{' '}
+                        <IconArrowRightDown className="inline-block w-4 text-red dark:text-yellow" />
+                    </SmoothScrollLink>
+                </div>
+
+                <div className="text-center -mb-12 md:-mb-28">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png"
+                        alt="Screenshot of PostHog's CDP"
+                        className="w-full max-w-[1280px]"
+                        placeholder="none"
+                    />
+                </div>
+            </div>
+
+            {/*
+                TODO: Add custom sections (Sources & destinations library, etc)
+                <SmoothScroll exclude={['Pricing', 'Tutorials', 'PostHog vs...', 'Installation']} />
+            */}
+
+            <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} py-10 md:pt-20 pb-0`}>
+                <h2 className="text-4xl lg:text-5xl text-center mb-3 px-5">
+                    <span className="text-red dark:text-yellow">Sync product data</span> with third-party tools
+                </h2>
+                <p className="text-center mb-12 text-lg px-5">
+                    Any event or action in PostHog can update user records or trigger workflows in other products in
+                    your stack.
+                </p>
+                <CDPFlowChart />
+            </div>
+
+            <section
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <p className="text-center text-[15px] font-medium">
+                    Curious how other teams use PostHog? <Link to="/customers">Read their stories.</Link>
+                </p>
+            </section>
+
+            <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 pt-12 relative">
+                <div className="md:col-span-4 md:mb-4">
+                    <h2 className="text-center text-2xl lg:text-4xl">Sources, destinations, and transformations</h2>
+
+                    <div className="md:max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
+                        <IconSearch className="w-5 opacity-60" />
+                        <input
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            className="bg-transparent w-full border-none outline-none"
+                            placeholder="Search sources, destinations, and transformations"
+                        />
+                    </div>
+                </div>
+                <aside className="md:col-span-1 md:sticky top-[120px] self-start">
+                    <Category
+                        active={selectedType === 'All' && selectedCategory === 'All'}
+                        value="All integrations"
+                        onClick={() => {
+                            setSelectedType('All')
+                            setSelectedCategory('All')
+                        }}
+                    />
+                    <ul className="list-none m-0 p-0">
+                        {Object.keys(pipelines).map((type) => {
+                            const values = pipelines[type]
+                            return (
+                                <Categories
+                                    key={type}
+                                    categories={
+                                        // Transforms only have a couple of categories so we don't need to show them
+                                        type === 'Transformations'
+                                            ? []
+                                            : [...new Set(values.flatMap((value) => value.category))].sort()
+                                    }
+                                    selectedCategory={selectedCategory}
+                                    selectedType={selectedType}
+                                    onClick={(value) => {
+                                        setSelectedType(type)
+                                        setSelectedCategory(value)
+                                    }}
+                                    type={type}
+                                />
+                            )
+                        })}
+                    </ul>
+                </aside>
+                <section className="md:col-span-3 md:mt-0 mt-5">
+                    <ul className="list-none m-0 p-0 grid @lg:grid-cols-2 @2xl:grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-2 md:gap-4">
+                        {filteredNodes.length === 0 ? (
+                            <li className="col-span-full">
+                                <p className="mb-2">
+                                    <strong className="font-semibold">
+                                        We don't have that one... <em>yet!</em>
+                                    </strong>
+                                </p>
+                                <p>
+                                    <Link to="https://github.com/PostHog/posthog" external>
+                                        Request a data connector on GitHub
+                                    </Link>
+                                </p>
+                            </li>
+                        ) : (
+                            [...filteredNodes]
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((destination) => {
+                                    const { id, name, description, icon_url } = destination
+                                    const hasDocs = destination.mdx || destination.inputs_schema
+                                    const Container = hasDocs ? 'button' : 'div'
+                                    return (
+                                        <li key={id}>
+                                            <Container
+                                                {...(hasDocs
+                                                    ? {
+                                                          onClick: () => {
+                                                              setSelectedDestination(destination)
+                                                              setModalOpen(true)
+                                                          },
+                                                      }
+                                                    : {})}
+                                                className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
+                                                    hasDocs
+                                                        ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
+                                                        : ''
+                                                }`}
+                                            >
+                                                <div>
+                                                    <div className="flex space-x-3 items-center">
+                                                        <div className="size-7 flex-shrink-0">
+                                                            <img
+                                                                className="w-full"
+                                                                src={getIconUrl(icon_url)}
+                                                                alt={name}
+                                                            />
+                                                        </div>
+
+                                                        <h3 className="m-0 leading-none text-base">{name}</h3>
+                                                        {selectedType === 'All' && (
+                                                            <p className="m-0 !ml-1.5 px-1 py-0 border border-border dark:border-dark rounded text-xs flex-shrink-0">
+                                                                <span className="opacity-70">
+                                                                    {Object.keys(pipelines)
+                                                                        .find((key) =>
+                                                                            pipelines[key].includes(destination)
+                                                                        )
+                                                                        .slice(0, -1)}
+                                                                </span>
+                                                            </p>
+                                                        )}
+                                                        {destination.status === 'coming_soon' && (
+                                                            <p
+                                                                className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs font-medium rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ${
+                                                                    selectedType === 'All' ? '!ml-1' : ''
+                                                                }`}
+                                                            >
+                                                                Roadmap
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                    <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
+                                                        {description}
+                                                    </p>
+                                                </div>
+                                            </Container>
+                                        </li>
+                                    )
+                                })
+                        )}
+                    </ul>
+                </section>
+            </div>
+
+            <section
+                id="docs"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                <p className="mt-0 text-opacity-70 text-center">
+                    Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                </p>
+                <DocLinks
+                    menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children}
+                />
+            </section>
+
+            <section
+                id="team"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                <p className="text-center mb-2">
+                    PostHog works in small teams. <Link to={teamSlug}>Here's the team</Link> responsible for building
+                    our customer data platform.
+                </p>
+                <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
+            </section>
+
+            <section
+                id="questions"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+
+                <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+
+                <div className="text-center mb-8">
+                    <CallToAction href={`/questions/cdp`} type="secondary" size="sm">
+                        View CDP &amp; data pipeline questions
+                    </CallToAction>
+                </div>
+
+                <Questions topicIds={[383]} />
+            </section>
+
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <PairsWith items={pairsWithItemCount}>
+                    {PairsWithArray.map((card, index) => {
+                        return <PairsWithItem {...card} key={index} />
+                    })}
+                </PairsWith>
+            </div>
+            <div
+                className={`${
+                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
+                } relative px-5 py-10 md:pt-20 pb-0`}
+            >
+                <section className="mb-20">
+                    <CTA />
+                </section>
+            </div>
+        </Layout>
+    )
+}
+
+const query = graphql`
+    query {
+        destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
+                    secret
+                    required
+                    description
+                }
+                status
+            }
+        }
+        transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
+                    required
+                    description
+                }
+                status
+            }
+        }
+    }
+`
+
+export default PipelinesPage

@@ -26,9 +26,8 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
                         onClick={() => {
                             refine(item.value)
                         }}
-                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${
-                            item.isRefined ? isRefinedClassName : ''
-                        }`}
+                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${item.isRefined ? isRefinedClassName : ''
+                            }`}
                     >
                         <span className="text-sm">{capitalizeFirstLetter(item.label)}</span>{' '}
                         <span className="text-xs opacity-60 font-semibold">({item.count})</span>
@@ -85,15 +84,14 @@ const Search = ({
                         <Combobox.Input
                             className="w-full !border-none !text-lg !px-4 !py-2 "
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder="Search..."
+                            placeholder={`Search ${initialFilter && 'the ' + initialFilter}...`}
                             autoFocus={autoFocus}
                             value={query}
                         />
                         {!hideFilters && (
                             <button
-                                className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${
-                                    showFilters ? 'opacity-100' : 'opacity-70'
-                                }`}
+                                className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${showFilters ? 'opacity-100' : 'opacity-70'
+                                    }`}
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     setShowFilters(!showFilters)
