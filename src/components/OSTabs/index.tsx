@@ -51,11 +51,12 @@ export default function OSTabs({
     scrollable = true,
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
+    const initialOrderedTabs = (state as any)?.orderedTabs
     const [controlledValue, setControlledValue] = useState(defaultValue || tabs[0]?.value)
 
     // Only use orderedTabs logic for horizontal orientation
     const [orderedTabs, setOrderedTabs] = useState<TabItem[][]>(
-        orientation === 'horizontal' ? (state as any)?.orderedTabs || [tabs] : [tabs]
+        orientation === 'horizontal' ? (initialOrderedTabs?.length > 0 ? initialOrderedTabs : [tabs]) : [tabs]
     )
     const ref = useRef<HTMLDivElement>(null)
 
