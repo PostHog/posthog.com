@@ -1,12 +1,11 @@
 import Team from 'components/Team'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { useUser } from 'hooks/useUser'
-import { IconPencil } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
+import { graphql, useStaticQuery } from 'gatsby'
 
 type TeamPageProps = {
     params: {
@@ -21,10 +20,39 @@ export default function NewTeam(props: TeamPageProps) {
     const isModerator = user?.role?.type === 'moderator'
     const onSaveRef = useRef<(() => void) | null>(null)
 
-    // These variables are defined but not used in this component
-    // const navigate = useNavigate()
-    // const location = useLocation()
-    // const currentPath = location.pathname.replace('/', '')
+    const data = useStaticQuery(graphql`
+        {
+            allSqueakTeam {
+                nodes {
+                    id
+                    name
+                    slug
+                }
+            }
+        }
+    `)
+
+    // Create teams navigation for sidebar
+    const teamsNavigation = useMemo(() => {
+        const teams = data?.allSqueakTeam?.nodes || []
+        return [
+            {
+                name: 'Teams',
+            },
+            {
+                name: 'All teams',
+                url: '/teams',
+                icon: 'IconPeople',
+            },
+            ...teams
+                .filter((t: any) => t.name)
+                .sort((a: any, b: any) => a.name.localeCompare(b.name))
+                .map((t: any) => ({
+                    name: t.name,
+                    url: `/teams/${t.slug}`,
+                }))
+        ]
+    }, [data?.allSqueakTeam?.nodes])
 
     const handleSave = async () => {
         // Call the save function from Team component
@@ -33,57 +61,36 @@ export default function NewTeam(props: TeamPageProps) {
         }
     }
 
-    const editButton = isModerator ? (
-        <>{!editing && <OSButton size="md" icon={<IconPencil />} onClick={() => setEditing(true)} />}</>
+    const editActions = isModerator ? (
+        <>
+            <OSButton size="md" variant="primary" onClick={handleSave} disabled={saving}>
+                Save & publish
+            </OSButton>
+        </>
     ) : null
-
-    const editActions =
-        editing && isModerator ? (
-            <>
-                <OSButton size="md" variant="primary" onClick={handleSave} disabled={saving}>
-                    Save & publish
-                </OSButton>
-            </>
-        ) : null
-
-    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/teams/new',
-        content: (
-            <div className="max-w-screen-lg mx-auto mt-6 px-4">
-                <Team
-                    editing={editing}
-                    setEditing={setEditing}
-                    saving={saving}
-                    setSaving={setSaving}
-                    onSaveRef={onSaveRef}
-                />
-            </div>
-        ),
-    })
 
     return (
         <>
             <SEO title="New Team – PostHog" description="Create a new team at PostHog" image={`/images/og/teams.jpg`} />
-            <Editor
-                maxWidth="full"
-                type="teams"
+            <ReaderView
+                title="New Team"
+                hideTitle={true}
+                leftSidebar={<TreeMenu items={teamsNavigation} />}
+                homeURL="/teams"
+                description="Create a new team at PostHog"
                 proseSize="base"
-                bookmark={{
-                    title: 'New Team',
-                    description: 'Create a new team',
-                }}
+                rightActionButtons={editActions}
             >
-                <div className="absolute right-4 top-2 flex gap-2">{editing ? editActions : editButton}</div>
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/teams"
-                    onValueChange={handleTabChange}
-                    frame={false}
-                    triggerDataScheme="primary"
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                />
-            </Editor>
+                <div className="max-w-screen-lg mx-auto px-4">
+                    <Team
+                        editing={editing}
+                        setEditing={setEditing}
+                        saving={saving}
+                        setSaving={setSaving}
+                        onSaveRef={onSaveRef}
+                    />
+                </div>
+            </ReaderView>
         </>
     )
 }

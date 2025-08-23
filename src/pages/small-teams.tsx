@@ -192,7 +192,7 @@ const SmallTeamsPage = () => {
                         </p>
                         <div className="flex gap-2">
                             <OSButton asLink to="/teams" variant="primary" size="md" state={{ newWindow: true }}>
-                                Browse all teams ({allTeams.nodes.length})
+                                Explore our teams ({allTeams.nodes.length})
                             </OSButton>
                             <OSButton asLink to="/handbook/company/small-teams" variant="secondary" size="md" state={{ newWindow: true }}>
                                 Learn about small teams
