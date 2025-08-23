@@ -122,6 +122,7 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 }
 
 export default function SdkReference({ pageContext }: { pageContext: PageContext }) {
+    const location = useLocation()
     const { fullReference } = pageContext
 
     // Get the language for this SDK reference
