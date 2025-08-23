@@ -22,6 +22,7 @@ const SmallTeamsPage = () => {
                     name
                     slug
                     createdAt
+                    tagline
                     leadProfiles {
                         data {
                             id
@@ -105,6 +106,11 @@ const SmallTeamsPage = () => {
             width: 'minmax(300px, 1fr)',
         },
         {
+            name: 'Description',
+            align: 'left' as const,
+            width: '300px',
+        },
+        {
             name: 'Team lead',
             align: 'left' as const,
             width: '200px',
@@ -153,6 +159,13 @@ const SmallTeamsPage = () => {
                                 )}
                             </div>
                         </Link>
+                    ),
+                },
+                {
+                    content: team.tagline ? (
+                        <span className="text-sm text-secondary line-clamp-2">{team.tagline}</span>
+                    ) : (
+                        <span className="text-sm text-muted">—</span>
                     ),
                 },
                 {

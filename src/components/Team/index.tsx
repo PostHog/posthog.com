@@ -257,7 +257,7 @@ export default function Team({
         slug,
     })
 
-    const { name, crest, crestOptions, description, profiles, leadProfiles, teamImage, miniCrest } =
+    const { name, crest, crestOptions, description, tagline, profiles, leadProfiles, teamImage, miniCrest } =
         team?.attributes || {}
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
@@ -311,6 +311,7 @@ export default function Team({
         initialValues: {
             name,
             description,
+            tagline,
             teamImage: teamImage?.image?.data
                 ? { file: null, objectURL: teamImage?.image?.data?.attributes?.url }
                 : undefined,
@@ -335,6 +336,7 @@ export default function Team({
         onSubmit: async ({
             name,
             description,
+            tagline,
             teamImageCaption,
             crestImage,
             crestOptions,
@@ -371,12 +373,13 @@ export default function Team({
             const updatedTeam = {
                 name,
                 description,
+                tagline,
                 teamImage: {
                     image: uploadedTeamImage
                         ? uploadedTeamImage.id
                         : other.teamImage === null
-                        ? null
-                        : teamImage?.image?.data?.id,
+                            ? null
+                            : teamImage?.image?.data?.id,
                     caption: teamImageCaption,
                 },
                 crestOptions,
@@ -408,7 +411,7 @@ export default function Team({
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-                100
+            100
         )
 
     const underConsideration = roadmaps?.filter(
@@ -527,6 +530,7 @@ export default function Team({
                 loading={loading}
                 teamName={values.name}
                 description={description}
+                tagline={tagline}
                 teamImage={teamImage}
                 hasInProgress={hasInProgress}
                 handleChange={handleChange}
@@ -615,74 +619,73 @@ export default function Team({
                     <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {loading
                             ? new Array(4).fill(0).map((_, i) => (
-                                  <li key={i}>
-                                      <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                  </li>
-                              ))
+                                <li key={i}>
+                                    <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                </li>
+                            ))
                             : profiles?.data || values.teamMembers
-                            ? [...((editing ? values.teamMembers : profiles?.data) || [])]
-                                  .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                                  .map((profile) => {
-                                      const {
-                                          id,
-                                          attributes: {
-                                              avatar,
-                                              firstName,
-                                              lastName,
-                                              country,
-                                              location,
-                                              companyRole,
-                                              pineappleOnPizza,
-                                          },
-                                      } = profile
-                                      const name = [firstName, lastName].filter(Boolean).join(' ')
-                                      return (
-                                          <li key={id} className="rounded-md relative">
-                                              <TeamMember
-                                                  avatar={{
-                                                      url: avatar?.data?.attributes?.url || avatar?.url,
-                                                  }}
-                                                  firstName={firstName}
-                                                  lastName={lastName}
-                                                  companyRole={companyRole}
-                                                  country={country}
-                                                  location={location}
-                                                  squeakId={id}
-                                                  color={profile.attributes.color || 'yellow'}
-                                                  biography={profile.attributes.biography || ''}
-                                                  teamCrestMap={teamCrestMap}
-                                                  pineappleOnPizza={pineappleOnPizza}
-                                                  startDate={profile.attributes.startDate}
-                                                  isTeamLead={isTeamLead(id)}
-                                              />
-                                              {editing && (
-                                                  <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
-                                                      <button
-                                                          onClick={() => removeTeamMember(id)}
-                                                          className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
-                                                          title="Remove team member"
-                                                      >
-                                                          <IconX className="w-4 h-4" />
-                                                      </button>
-                                                      <button
-                                                          onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                          className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
-                                                              isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
-                                                          }`}
-                                                          title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
-                                                      >
-                                                          <IconCrown className="w-4 h-4" />
-                                                      </button>
-                                                  </div>
-                                              )}
-                                          </li>
-                                      )
-                                  })
-                            : new Array(4).fill(0).map((_, i) => (
-                                  <li key={i}>
-                                      <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                  </li>
-                              ))}
+                                ? [...((editing ? values.teamMembers : profiles?.data) || [])]
+                                    .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
+                                    .map((profile) => {
+                                        const {
+                                            id,
+                                            attributes: {
+                                                avatar,
+                                                firstName,
+                                                lastName,
+                                                country,
+                                                location,
+                                                companyRole,
+                                                pineappleOnPizza,
+                                            },
+                                        } = profile
+                                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                                        return (
+                                            <li key={id} className="rounded-md relative">
+                                                <TeamMember
+                                                    avatar={{
+                                                        url: avatar?.data?.attributes?.url || avatar?.url,
+                                                    }}
+                                                    firstName={firstName}
+                                                    lastName={lastName}
+                                                    companyRole={companyRole}
+                                                    country={country}
+                                                    location={location}
+                                                    squeakId={id}
+                                                    color={profile.attributes.color || 'yellow'}
+                                                    biography={profile.attributes.biography || ''}
+                                                    teamCrestMap={teamCrestMap}
+                                                    pineappleOnPizza={pineappleOnPizza}
+                                                    startDate={profile.attributes.startDate}
+                                                    isTeamLead={isTeamLead(id)}
+                                                />
+                                                {editing && (
+                                                    <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
+                                                        <button
+                                                            onClick={() => removeTeamMember(id)}
+                                                            className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
+                                                            title="Remove team member"
+                                                        >
+                                                            <IconX className="w-4 h-4" />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                            className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                                }`}
+                                                            title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
+                                                        >
+                                                            <IconCrown className="w-4 h-4" />
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </li>
+                                        )
+                                    })
+                                : new Array(4).fill(0).map((_, i) => (
+                                    <li key={i}>
+                                        <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                    </li>
+                                ))}
                         {/* Add job cards for open roles */}
                         {teamJobs.map((job: any) => (
                             <li key={job.fields.slug} className="rounded-md relative">

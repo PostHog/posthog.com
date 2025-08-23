@@ -11,6 +11,7 @@ import TeamImage from './TeamImage'
 export default function Header({
     teamName,
     description,
+    tagline,
     teamImage,
     hasInProgress,
     editing,
@@ -21,6 +22,7 @@ export default function Header({
 }: {
     teamName: string
     description: string
+    tagline?: string
     teamImage: any
     hasInProgress: boolean
     editing: boolean
@@ -30,16 +32,9 @@ export default function Header({
     loading: boolean
 }): JSX.Element {
     return (
-        <div className="my-6">
-            <div className="flex flex-col gap-12 @lg/reader-content:gap-4 @lg/reader-content:flex-row items-center">
-                <div className="flex-1">
-                    <Link
-                        to="/teams"
-                        className="-ml-2 mb-1 inline-flex items-center gap-1 text-sm text-muted hover:text-primary relative px-2 pt-1.5 pb-1 rounded hover:bg-primary border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
-                    >
-                        <IconArrowLeft className="size-5" />
-                        <span>Teams</span>
-                    </Link>
+        <>
+            <div className="flex flex-col-reverse gap-4 @xl/reader-content-container:gap-4 @xl/reader-content-container:flex-row items-center p-4 @xl/reader-content-container:p-8 w-full">
+                <div className="flex-1 text-center @xl/reader-content-container:text-left">
                     {loading ? (
                         <div className="h-8 w-full bg-accent rounded" />
                     ) : (
@@ -54,6 +49,7 @@ export default function Header({
                     ) : (
                         <Description
                             description={description}
+                            tagline={tagline}
                             handleChange={handleChange}
                             values={values}
                             editing={editing}
@@ -72,6 +68,6 @@ export default function Header({
                     <Crest teamName={teamName} editing={editing} setFieldValue={setFieldValue} values={values} />
                 )}
             </div>
-        </div>
+        </>
     )
 }

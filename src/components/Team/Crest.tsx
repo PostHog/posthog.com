@@ -21,10 +21,10 @@ const ModalViewButton = ({
             type="button"
             onClick={onClick}
             className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${active
-                    ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
+                ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
                 after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b
                 bg-light dark:bg-dark font-bold`
-                    : 'opacity-70 hover:opacity-100'
+                : 'opacity-70 hover:opacity-100'
                 }`}
         >
             {children}
@@ -82,7 +82,7 @@ export default function Crest({
                                         <TeamPatch
                                             name={teamName}
                                             imageUrl={values.crestImage?.objectURL}
-                                            className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
+                                            className="h-48 @md/reader-content-container:h-64 -mt-2 @md/reader-content-container:m-0"
                                             {...values.crestOptions}
                                         />
                                         {!values.crestImage?.objectURL ? (
@@ -307,7 +307,7 @@ export default function Crest({
                         <TeamPatch
                             name={teamName}
                             imageUrl={values.crestImage?.objectURL}
-                            className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
+                            className="h-48 @md/reader-content-container:h-64 -mt-2 @md/reader-content-container:m-0"
                             {...values.crestOptions}
                         />
                         {editing && (

@@ -186,6 +186,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                         image: true,
                     },
                 },
+                tagline: true,
             },
         },
         {

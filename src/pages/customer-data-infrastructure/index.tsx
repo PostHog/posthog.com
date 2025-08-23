@@ -181,10 +181,12 @@ export default function CDP(): JSX.Element {
                 leftSidebar={<LeftSidebarContent />}
                 title="Customer data infrastructure"
                 hideTitle={true}
-                header={<>
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png" alt="Hedgehogs taking data to the data factory" className="mt-4 px-4" imgClassName="max-w-[542px] w-full mx-auto" />
-                    <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">Unify external customer data with product usage data</h2>
-                </>}
+                {...{
+                    header: <>
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png" alt="Hedgehogs taking data to the data factory" className="mt-4 px-4" imgClassName="max-w-[542px] w-full mx-auto" />
+                        <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">Unify external customer data with product usage data</h2>
+                    </>
+                } as any}
             >
                 <div className="@2xl:float-right @2xl:w-96 @2xl:ml-4 @3xl:ml-12">
                     <Fieldset legend="Customer data stack docs">

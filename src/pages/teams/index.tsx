@@ -188,30 +188,17 @@ const TeamsPage = () => {
                 rightActionButtons={newTeamButton}
             >
                 <div className="@container">
+                    <p className="mt-0">
+                        We've organized the company into small teams that are multi-disciplinary and as self-sufficient as possible.{' '}
+                        <Link
+                            to="/handbook/company/small-teams"
+                            state={{ newWindow: true }}
+                        >
+                            Learn how small teams work.
+                        </Link>{' '}
+                    </p>
 
-                    <div className="relative mb-6 mt-8">
-                        {searchTerm && (
-                            <>
-                                <button
-                                    onClick={() => setSearchTerm('')}
-                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary hover:text-primary transition-colors"
-                                    aria-label="Clear search"
-                                >
-                                    <IconX className="w-4 h-4" />
-                                </button>
-                                {/* 
-                                this doesn't work anymore now that we use <ReaderView /> search
-                                    <p className="text-sm text-secondary mt-2 mb-4">
-                                        Use <KeyboardShortcut text="↑" size="sm" /> /{' '}
-                                        <KeyboardShortcut text="↓" size="sm" /> to navigate between results
-                                    </p>
-
-                                     */}
-                            </>
-                        )}
-                    </div>
-
-                    <div className="not-prose grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
+                    <div className="not-prose grid grid-cols-2 @lg/reader-content-container:grid-cols-2 @2xl/reader-content-container:grid-cols-3 @4xl/reader-content-container:grid-cols-4 @5xl/reader-content-container:grid-cols-5 @6xl/reader-content-container:grid-cols-6 gap-4 mb-8">
                         {filteredTeams
                             .sort((a: any, b: any) => a.name.localeCompare(b.name))
                             .map(
@@ -229,114 +216,112 @@ const TeamsPage = () => {
                                         leadProfiles,
                                     }: any,
                                     index: number
-                                ) => (
-                                    <Link
-                                        to={`/teams/${slug}`}
-                                        key={id}
-                                        className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${searchTerm && index === selectedIndex
-                                            ? 'ring-2 ring-blue rounded bg-light dark:bg-dark'
-                                            : ''
-                                            }`}
-                                    >
-                                        <div className="w-48">
-                                            <TeamPatch
-                                                name={name}
-                                                imageUrl={crest?.data?.attributes?.url}
-                                                {...crestOptions}
-                                                className="w-full"
-                                                fontSize="xl"
-                                            />
-                                        </div>
+                                ) => {
+                                    // Check if any team member matches the search
+                                    const hasMatchingMember = searchTerm && profiles?.data?.some((profile: any) =>
+                                        isTeamMemberMatch(profile, searchTerm)
+                                    )
 
-                                        <div className="flex-1 pt-8">
-                                            <h3 className="mb-1">{highlightText(name, searchTerm)}</h3>
-
-                                            {(tagline || description) && (
-                                                <p className="text-sm opacity-80 mb-1 line-clamp-3">
-                                                    {tagline || description}
-                                                </p>
-                                            )}
-
-                                            {createdAt && (
-                                                <p className="text-sm text-secondary opacity-70 mb-2">
-                                                    Est.{' '}
-                                                    {new Date(createdAt).toLocaleDateString('en-US', {
-                                                        month: 'short',
-                                                        year: 'numeric',
-                                                    })}
-                                                </p>
-                                            )}
-
-                                            <div className="flex flex-wrap justify-end pl-3" dir="rtl">
-                                                {profiles.data.length > 6 && (
-                                                    <span
-                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent`}
-                                                    >
-                                                        <Tooltip
-                                                            trigger={
-                                                                <div className="size-10 rounded-full bg-accent border border-primary flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
-                                                                    {profiles.data.length - 5}+
-                                                                </div>
-                                                            }
-                                                        >
-                                                            {`${profiles.data.length - 5} more`}
-                                                        </Tooltip>
-                                                    </span>
-                                                )}
-                                                {profiles.data
-                                                    .slice()
-                                                    .sort((a: any, b: any) => {
-                                                        const aIsLead = leadProfiles?.data?.some(
-                                                            (lead: any) => lead.id === a.id
-                                                        )
-                                                        const bIsLead = leadProfiles?.data?.some(
-                                                            (lead: any) => lead.id === b.id
-                                                        )
-                                                        if (aIsLead && !bIsLead) return -1
-                                                        if (bIsLead && !aIsLead) return 1
-                                                        return 0
-                                                    })
-                                                    .slice(0, 6)
-                                                    .map((profile: any) => {
-                                                        const isLead = leadProfiles?.data?.some(
-                                                            (lead: any) => lead.id === profile.id
-                                                        )
-                                                        const isMatch = isTeamMemberMatch(profile, searchTerm)
-                                                        const { firstName, lastName, avatar, color } =
-                                                            profile.attributes
-                                                        const name = `${firstName} ${lastName}`
-                                                        return (
-                                                            <span
-                                                                key={profile.id}
-                                                                className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${isMatch
-                                                                    ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
-                                                                    : 'border-accent'
-                                                                    }`}
-                                                            >
-                                                                <Tooltip trigger={
-                                                                    <img
-                                                                        src={avatar?.data?.attributes?.url}
-                                                                        className={`size-10 rounded-full bg-${color ??
-                                                                            'accent dark:bg-accent-dark'
-                                                                            } border transform ${isMatch
-                                                                                ? 'scale-125 border-red dark:border-yellow'
-                                                                                : 'scale-100 border-primary'
-                                                                            } hover:scale-125 transition-all`}
-                                                                        alt={name}
-                                                                    />
-                                                                }
-                                                                    delay={0}
-                                                                    side="bottom"
-                                                                >
-                                                                    {`${name}${isLead ? ' (Team lead)' : ''}`}
-                                                                </Tooltip>
-                                                            </span>
-                                                        )
-                                                    })}
+                                    return (
+                                        <Link
+                                            to={`/teams/${slug}`}
+                                            key={id}
+                                            className="group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px"
+                                        >
+                                            <div className="">
+                                                <TeamPatch
+                                                    name={name}
+                                                    imageUrl={crest?.data?.attributes?.url}
+                                                    {...crestOptions}
+                                                    className="w-full"
+                                                />
                                             </div>
-                                        </div>
-                                    </Link>
-                                )
+
+                                            <div className="absolute -bottom-4 left-0 right-0 justify-center -mr-3 transform transition-all duration-100">
+                                                <div className="flex flex-wrap justify-center" dir="rtl">
+                                                    {profiles.data.length > 6 && (
+                                                        <span
+                                                            className={`${hasMatchingMember ? 'visible' : 'invisible group-hover:visible'} cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark ${hasMatchingMember ? '' : 'animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500'} group-hover:animate-delay-[${5 * 100
+                                                                }ms]`}
+                                                        >
+                                                            <Tooltip
+                                                                trigger={<div className="size-10 rounded-full bg-accent dark:bg-accent-dark border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
+                                                                    {profiles.data.length - 5}+
+                                                                </div>}
+                                                                side="bottom"
+                                                            >
+                                                                {profiles.data.length - 5} more
+
+                                                            </Tooltip>
+                                                        </span>
+                                                    )}
+                                                    {profiles.data
+                                                        .slice()
+                                                        .sort((a: any, b: any) => {
+                                                            const aIsLead = leadProfiles.data.some(
+                                                                ({ id: leadID }: { id: string }) => leadID === a.id
+                                                            )
+                                                            const bIsLead = leadProfiles.data.some(
+                                                                ({ id: leadID }: { id: string }) => leadID === b.id
+                                                            )
+                                                            return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
+                                                        })
+                                                        .slice(0, profiles.data.length > 6 ? 5 : undefined)
+                                                        .reverse()
+                                                        .map(
+                                                            (
+                                                                {
+                                                                    id,
+                                                                    attributes: { firstName, lastName, avatar, color },
+                                                                },
+                                                                index: number
+                                                            ) => {
+                                                                const name = [firstName, lastName]
+                                                                    .filter(Boolean)
+                                                                    .join(' ')
+                                                                const isTeamLead = leadProfiles.data.some(
+                                                                    ({ id: leadID }: { id: string }) => leadID === id
+                                                                )
+                                                                const isMatchingMember = isTeamMemberMatch(
+                                                                    { attributes: { firstName, lastName } },
+                                                                    searchTerm
+                                                                )
+                                                                return (
+                                                                    <span
+                                                                        key={`${name}-${index}`}
+                                                                        className={`${hasMatchingMember ? 'visible' : 'invisible group-hover:visible'} cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${isMatchingMember ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10' : 'border-accent dark:border-accent-dark'} ${hasMatchingMember ? '' : 'animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500'} group-hover:animate-delay-[${(Math.min(
+                                                                            profiles.data.length > 6
+                                                                                ? 5
+                                                                                : profiles.data.length,
+                                                                            6
+                                                                        ) -
+                                                                            index -
+                                                                            1) *
+                                                                            100
+                                                                            }ms]`}
+                                                                    >
+                                                                        <Tooltip
+                                                                            trigger={<img
+                                                                                src={avatar?.data?.attributes?.url}
+                                                                                className={`size-10 rounded-full bg-${color ??
+                                                                                    'accent dark:bg-accent-dark'
+                                                                                    } border ${isMatchingMember ? 'border-red dark:border-yellow' : 'border-light dark:border-dark'} transform ${isMatchingMember ? 'scale-125' : 'scale-100'} hover:scale-125 transition-all`}
+                                                                                alt={name}
+                                                                            />}
+                                                                            side="bottom"
+                                                                            delay={0}
+                                                                        >
+                                                                            {name} {isTeamLead ? '(Team lead)' : ''}
+                                                                        </Tooltip>
+                                                                    </span>
+                                                                )
+                                                            }
+                                                        )}
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    )
+                                }
                             )}
                     </div>
 
