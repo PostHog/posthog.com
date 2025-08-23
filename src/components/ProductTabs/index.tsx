@@ -5,8 +5,41 @@ import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { APP_COUNT } from '../../constants'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
 import { useApp } from '../../context/App'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
+const Image = ({
+    images,
+    src,
+    alt,
+    width,
+    height,
+    imgClassName,
+}: {
+    images: any
+    src: string
+    alt: string
+    width?: number
+    height?: number
+    imgClassName: string
+}) => {
+    const image = images.find((image: any) => image.publicURL === src)
+    if (!image) {
+        return null
+    }
+
+    return (
+        <GatsbyImage
+            loading="eager"
+            image={getImage(image)}
+            alt={alt}
+            width={width}
+            height={height}
+            className={imgClassName}
+        />
+    )
+}
 
 interface ProductTabsProps {
     productHandles: string[]
@@ -42,6 +75,25 @@ export default function ProductTabs({ productHandles, className, selectedStage }
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
 
+    const {
+        mdx: {
+            frontmatter: { images },
+        },
+    } = useStaticQuery(graphql`
+        query {
+            mdx(slug: { eq: "" }) {
+                frontmatter {
+                    images {
+                        publicURL
+                        childImageSharp {
+                            gatsbyImageData
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
     useEffect(() => {
         // Find the container with aria-label="Company stage"
         const container = document.querySelector('[aria-label="Company stage"]')
@@ -69,8 +121,8 @@ export default function ProductTabs({ productHandles, className, selectedStage }
             const product = Array.isArray(allProducts)
                 ? allProducts.find((p: any) => p.handle === handle)
                 : allProducts?.handle === handle
-                    ? allProducts
-                    : null
+                ? allProducts
+                : null
             return product as Product | null
         })
         .filter((product): product is Product => product !== null)
@@ -89,17 +141,29 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                 </>
             ),
             content: (
-                <div className={`@container flex flex-col bg-${product.color} dark:bg-accent border border-transparent dark:border-primary rounded-md overflow-hidden`}>
+                <div
+                    className={`@container flex flex-col bg-${product.color} dark:bg-accent border border-transparent dark:border-primary rounded-md overflow-hidden`}
+                >
                     <div className="flex items-start justify-between p-4 @lg:p-6">
                         <div className="flex-1 flex gap-3">
-                            {product.Icon && <product.Icon className={`size-8 ${product.overview.textColor} dark:text-${product.color}`} />}
+                            {product.Icon && (
+                                <product.Icon
+                                    className={`size-8 ${product.overview.textColor} dark:text-${product.color}`}
+                                />
+                            )}
                             <div className={`${product.overview.textColor} dark:text-white`}>
                                 <h3 className="text-xl font-semibold tracking-tight">{product.name}</h3>
                                 {product.overview?.title && <p className="mb-0">{product.overview.title}</p>}
                             </div>
                         </div>
                         <div className="flex-shrink-0">
-                            <OSButton asLink to={`/${product.slug}`} state={{ newWindow: true }} variant="secondary" size="md">
+                            <OSButton
+                                asLink
+                                to={`/${product.slug}`}
+                                state={{ newWindow: true }}
+                                variant="secondary"
+                                size="md"
+                            >
                                 Explore
                             </OSButton>
                         </div>
@@ -107,18 +171,27 @@ export default function ProductTabs({ productHandles, className, selectedStage }
 
                     {product.screenshots?.home && (
                         <div
-                            className={`flex-1 flex ${product.screenshots.home.classes
-                                ? product.screenshots.home.classes
-                                : "justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4"
-                                }`}
+                            className={`flex-1 flex ${
+                                product.screenshots.home.classes
+                                    ? product.screenshots.home.classes
+                                    : 'justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4'
+                            }`}
                         >
-
-                            <CloudinaryImage
-                                src={(isDark && product.screenshots.home.srcDark) ? product.screenshots.home.srcDark : product.screenshots.home.src as any}
+                            <Image
+                                images={images}
+                                src={
+                                    isDark && product.screenshots.home.srcDark
+                                        ? product.screenshots.home.srcDark
+                                        : (product.screenshots.home.src as any)
+                                }
                                 alt={product.screenshots.home.alt}
                                 width={product.screenshots.home.width}
                                 height={product.screenshots.home.height}
-                                imgClassName={product.screenshots.home.imgClasses ? product.screenshots.home.imgClasses : "rounded-md shadow-2xl"}
+                                imgClassName={
+                                    product.screenshots.home.imgClasses
+                                        ? product.screenshots.home.imgClasses
+                                        : 'rounded-md shadow-2xl'
+                                }
                             />
                         </div>
                     )}
@@ -146,14 +219,32 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                         <div className="bg-accent border border-primary rounded p-2 text-xs basis-full">
                             <span>You may also like...</span>
                             <ul className="my-0">
-                                <li><Link to="/dpa" state={{ newWindow: true }}>DPA generator</Link></li>
-                                <li><Link to="/baa" state={{ newWindow: true }}>BAA generator</Link></li>
-                                <li><Link to="/platform-addons" state={{ newWindow: true }}>Product OS add-ons</Link></li>
-
+                                <li>
+                                    <Link to="/dpa" state={{ newWindow: true }}>
+                                        DPA generator
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/baa" state={{ newWindow: true }}>
+                                        BAA generator
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/platform-addons" state={{ newWindow: true }}>
+                                        Product OS add-ons
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     )}
-                    <OSButton asLink to="/products" state={{ newWindow: true }} variant="secondary" size="md" width="full">
+                    <OSButton
+                        asLink
+                        to="/products"
+                        state={{ newWindow: true }}
+                        variant="secondary"
+                        size="md"
+                        width="full"
+                    >
                         Go to app library ({APP_COUNT})
                     </OSButton>
                 </div>
