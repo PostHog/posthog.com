@@ -15,6 +15,9 @@ import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { IconPresentation } from 'components/OSIcons'
 import { useApp } from 'context/App'
 import useProduct from '../../hooks/useProduct'
+import CloudinaryImage from "components/CloudinaryImage"
+import { TextureTan } from "components/Textures"
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -174,8 +177,15 @@ export default function CDP(): JSX.Element {
                 description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`images/og/cdp.jpg`}
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Customer data infrastructure" hideTitle={true}>
-                <h2 className="text-2xl font-bold my-4">Unify external customer data with product usage data</h2>
+            <ReaderView
+                leftSidebar={<LeftSidebarContent />}
+                title="Customer data infrastructure"
+                hideTitle={true}
+                header={<>
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png" alt="Hedgehogs taking data to the data factory" className="mt-4 px-4" imgClassName="max-w-[542px] w-full mx-auto" />
+                    <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">Unify external customer data with product usage data</h2>
+                </>}
+            >
                 <div className="@2xl:float-right @2xl:w-96 @2xl:ml-4 @3xl:ml-12">
                     <Fieldset legend="Customer data stack docs">
                         <div
