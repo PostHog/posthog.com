@@ -1,29 +1,19 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import Link from 'components/Link'
-import Tooltip from 'components/Tooltip'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import TeamPatch from 'components/TeamPatch'
 import { useUser } from 'hooks/useUser'
-import { IconX } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
-import { useWindow } from '../context/Window'
 import OSButton from "components/OSButton"
+import OSTable from 'components/OSTable'
 
-interface TeamsProps {
-    searchTerm?: string
-}
-
-const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
-    const { appWindow } = useWindow()
-    const [localSearchTerm, setLocalSearchTerm] = useState('')
-    const searchTerm = propSearchTerm !== undefined ? propSearchTerm : localSearchTerm
-    const [selectedIndex, setSelectedIndex] = useState(0)
-
+const SmallTeamsPage = () => {
+    const [searchTerm, setSearchTerm] = useState('')
     const { isModerator } = useUser()
+
     const { allTeams } = useStaticQuery(graphql`
         {
             allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
@@ -32,15 +22,18 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                     name
                     slug
                     createdAt
-                    tagline
-                    description
+                    leadProfiles {
+                        data {
+                            id
+                        }
+                    }
                     profiles {
                         data {
                             id
                             attributes {
-                                color
                                 firstName
                                 lastName
+                                color
                                 avatar {
                                     data {
                                         attributes {
@@ -51,12 +44,14 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
                             }
                         }
                     }
-                    leadProfiles {
+                    crest {
                         data {
-                            id
+                            attributes {
+                                url
+                            }
                         }
                     }
-                    crest {
+                    miniCrest {
                         data {
                             attributes {
                                 url
@@ -80,301 +75,155 @@ const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
         }
     `)
 
-    // Filter teams based on search term
+    // Filter teams based on search term (team names only)
     const filteredTeams = useMemo(() => {
         if (!searchTerm.trim()) {
             return allTeams.nodes
         }
 
         const searchLower = searchTerm.toLowerCase()
-
         return allTeams.nodes.filter((team: any) => {
-            // Search in team name
-            if (team.name?.toLowerCase().includes(searchLower)) {
-                return true
-            }
-
-            // Search in team slug
-            if (team.slug?.toLowerCase().includes(searchLower)) {
-                return true
-            }
-
-            // Search in team member names
-            const memberMatch = team.profiles?.data?.some((profile: any) => {
-                const firstName = profile.attributes?.firstName?.toLowerCase() || ''
-                const lastName = profile.attributes?.lastName?.toLowerCase() || ''
-                const fullName = `${firstName} ${lastName}`.trim()
-
-                return (
-                    firstName.includes(searchLower) || lastName.includes(searchLower) || fullName.includes(searchLower)
-                )
-            })
-
-            return memberMatch
+            return team.name?.toLowerCase().includes(searchLower)
         })
     }, [allTeams.nodes, searchTerm])
 
-    // Reset selection when search results change
-    useEffect(() => {
-        setSelectedIndex(0)
-    }, [filteredTeams.length])
+    // Sort teams by name
+    const sortedTeams = useMemo(() => {
+        return [...filteredTeams].sort((a: any, b: any) => a.name.localeCompare(b.name))
+    }, [filteredTeams])
 
-    // Function to highlight matching text in team names
-    const highlightText = (text: string, searchTerm: string) => {
-        if (!searchTerm.trim()) return text
+    // Create table columns
+    const tableColumns = [
+        {
+            name: '#',
+            align: 'center' as const,
+            width: '60px',
+        },
+        {
+            name: 'Team',
+            align: 'left' as const,
+            width: 'minmax(300px, 1fr)',
+        },
+        {
+            name: 'Team lead',
+            align: 'left' as const,
+            width: '200px',
+        },
+    ]
 
-        const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
-        const parts = text.split(regex)
+    // Create table rows
+    const tableRows = sortedTeams.map((team: any, index: number) => {
+        // Find the lead profile by matching IDs
+        const leadId = team.leadProfiles?.data?.[0]?.id
+        const leadProfile = leadId
+            ? team.profiles?.data?.find((profile: any) => profile.id === leadId)
+            : null
+        const leadName = leadProfile
+            ? `${leadProfile.attributes?.firstName || ''} ${leadProfile.attributes?.lastName || ''}`.trim()
+            : 'No lead'
+        const leadAvatar = leadProfile?.attributes?.avatar?.data?.attributes?.url
+        const leadColor = leadProfile?.attributes?.color
 
-        return parts.map((part, index) =>
-            regex.test(part) ? (
-                <span key={index} className="bg-yellow/30 dark:bg-yellow/20 px-0.5 -mx-0.5 rounded">
-                    {part}
-                </span>
-            ) : (
-                part
-            )
-        )
-    }
+        return {
+            key: team.id,
+            cells: [
+                {
+                    content: <span className="text-muted">{index + 1}</span>,
+                },
+                {
+                    content: (
+                        <Link
+                            to={`/teams/${team.slug}`}
+                            state={{ newWindow: true }}
+                            className="flex items-center gap-3 !no-underline !font-normal"
+                        >
+                            <div className="w-10 h-10 flex-shrink-0">
 
-    // Function to check if a team member matches the search
-    const isTeamMemberMatch = (profile: any, searchTerm: string) => {
-        if (!searchTerm.trim()) return false
-
-        const searchLower = searchTerm.toLowerCase()
-        const firstName = profile.attributes?.firstName?.toLowerCase() || ''
-        const lastName = profile.attributes?.lastName?.toLowerCase() || ''
-        const fullName = `${firstName} ${lastName}`.trim()
-
-        return firstName.includes(searchLower) || lastName.includes(searchLower) || fullName.includes(searchLower)
-    }
-
-    useEffect(() => {
-        if (appWindow?.ref?.current) {
-            const handleKeyDown = (e: KeyboardEvent) => {
-                if (e.key === 'Escape') {
-                    setLocalSearchTerm('')
-                } else if (e.key === 'ArrowDown') {
-                    e.preventDefault()
-                    setSelectedIndex((prev) => (prev < filteredTeams.length - 1 ? prev + 1 : prev))
-                } else if (e.key === 'ArrowUp') {
-                    e.preventDefault()
-                    setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
-                } else if (e.key === 'Enter' && filteredTeams[selectedIndex]) {
-                    e.preventDefault()
-                    navigate(`/teams/${filteredTeams[selectedIndex].slug}`)
-                }
-            }
-
-            appWindow.ref?.current?.addEventListener('keydown', handleKeyDown)
-
-            return () => {
-                appWindow.ref?.current?.removeEventListener('keydown', handleKeyDown)
-            }
-        }
-    }, [appWindow?.ref, filteredTeams, selectedIndex])
-
-    return (
-        <>
-            <SEO
-                title="Teams - PostHog"
-                description="We're organized into multi-disciplinary small teams."
-                image={`/images/small-teams.png`}
-            />
-            <section data-scheme="primary" className="bg-primary">
-                <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
-                    <div className="md:flex-1">
-                        <h1>Small teams</h1>
-                        <p>
-                            We've organized the company into{' '}
-                            <Link
-                                to="/handbook/company/small-teams"
-                                state={{ newWindow: true }}
-                                className="font-semibold underline"
-                            >
-                                small teams
-                            </Link>{' '}
-                            that are multi-disciplinary and as self-sufficient as possible.
-                        </p>
-                        <OSButton asLink to="/teams" variant="secondary" size="md" state={{ newWindow: true }}>Browse teams</OSButton>
-
-                        <div className="relative mb-6">
-                            {searchTerm && propSearchTerm === undefined && (
-                                <button
-                                    onClick={() => setLocalSearchTerm('')}
-                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary hover:text-primary transition-colors"
-                                    aria-label="Clear search"
-                                >
-                                    <IconX className="w-4 h-4" />
-                                </button>
-                            )}
-                            {/* {searchTerm && (
-                                <p className="text-sm text-secondary mt-2 mb-4">
-                                    Use <KeyboardShortcut text="↑" size="sm" /> /{' '}
-                                    <KeyboardShortcut text="↓" size="sm" /> to navigate between results
-                                </p>
-                            )} */}
-                        </div>
-
-                        <div className="not-prose grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
-                            {filteredTeams
-                                .sort((a: any, b: any) => a.name.localeCompare(b.name))
-                                .map(
-                                    (
-                                        {
-                                            id,
-                                            name,
-                                            slug,
-                                            createdAt,
-                                            tagline,
-                                            description,
-                                            profiles,
-                                            crest,
-                                            crestOptions,
-                                            leadProfiles,
-                                        }: any,
-                                        index: number
-                                    ) => (
-                                        <Link
-                                            to={`/teams/${slug}`}
-                                            state={{ newWindow: true }}
-                                            key={id}
-                                            className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${searchTerm && index === selectedIndex
-                                                ? 'ring-2 ring-blue rounded bg-light dark:bg-dark'
-                                                : ''
-                                                }`}
-                                        >
-                                            <div className="w-48">
-                                                <TeamPatch
-                                                    name={name}
-                                                    imageUrl={crest?.data?.attributes?.url}
-                                                    {...crestOptions}
-                                                    className="w-full"
-                                                    fontSize="xl"
-                                                />
-                                            </div>
-
-                                            <div className="flex-1 pt-8">
-                                                <h3 className="mb-1">{highlightText(name, searchTerm)}</h3>
-
-                                                {(tagline || description) && (
-                                                    <p className="text-sm opacity-80 mb-1 line-clamp-3">
-                                                        {tagline || description}
-                                                    </p>
-                                                )}
-
-                                                {createdAt && (
-                                                    <p className="text-sm text-secondary opacity-70 mb-2">
-                                                        Est.{' '}
-                                                        {new Date(createdAt).toLocaleDateString('en-US', {
-                                                            month: 'short',
-                                                            year: 'numeric',
-                                                        })}
-                                                    </p>
-                                                )}
-
-                                                <div className="flex flex-wrap justify-end pl-3" dir="rtl">
-                                                    {profiles.data.length > 6 && (
-                                                        <span
-                                                            className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent`}
-                                                        >
-                                                            <Tooltip
-                                                                content={`${profiles.data.length - 5} more`}
-                                                                placement="bottom"
-                                                            >
-                                                                <div className="size-10 rounded-full bg-accent border border-primary flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
-                                                                    {profiles.data.length - 5}+
-                                                                </div>
-                                                            </Tooltip>
-                                                        </span>
-                                                    )}
-                                                    {profiles.data
-                                                        .slice()
-                                                        .sort((a: any, b: any) => {
-                                                            const aIsLead = leadProfiles.data.some(
-                                                                ({ id: leadID }: { id: string }) => leadID === a.id
-                                                            )
-                                                            const bIsLead = leadProfiles.data.some(
-                                                                ({ id: leadID }: { id: string }) => leadID === b.id
-                                                            )
-                                                            return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
-                                                        })
-                                                        .slice(0, profiles.data.length > 6 ? 5 : undefined)
-                                                        .reverse()
-                                                        .map(
-                                                            (
-                                                                {
-                                                                    id,
-                                                                    attributes: { firstName, lastName, avatar, color },
-                                                                }: any,
-                                                                index: number
-                                                            ) => {
-                                                                const name = [firstName, lastName]
-                                                                    .filter(Boolean)
-                                                                    .join(' ')
-                                                                const isTeamLead = leadProfiles.data.some(
-                                                                    ({ id: leadID }: { id: string }) => leadID === id
-                                                                )
-                                                                const isMatchingMember = isTeamMemberMatch(
-                                                                    {
-                                                                        attributes: {
-                                                                            firstName,
-                                                                            lastName,
-                                                                            avatar,
-                                                                            color,
-                                                                        },
-                                                                    },
-                                                                    searchTerm
-                                                                )
-
-                                                                return (
-                                                                    <span
-                                                                        key={`${name}-${index}`}
-                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${isMatchingMember
-                                                                            ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
-                                                                            : 'border-accent'
-                                                                            }`}
-                                                                    >
-                                                                        <Tooltip
-                                                                            content={`${name} ${isTeamLead ? '(Team lead)' : ''
-                                                                                }`}
-                                                                            placement="bottom"
-                                                                        >
-                                                                            <img
-                                                                                src={avatar?.data?.attributes?.url}
-                                                                                className={`size-10 rounded-full bg-${color ??
-                                                                                    'accent dark:bg-accent-dark'
-                                                                                    } border transform ${isMatchingMember
-                                                                                        ? 'scale-125 border-red dark:border-yellow'
-                                                                                        : 'scale-100 border-primary'
-                                                                                    } hover:scale-125 transition-all`}
-                                                                                alt={name}
-                                                                            />
-                                                                        </Tooltip>
-                                                                    </span>
-                                                                )
-                                                            }
-                                                        )}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    )
+                                <img src={team.miniCrest?.data?.attributes?.url || team.crest?.data?.attributes?.url} alt={team.name} className="w-full h-full" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="!font-semibold !underline">{team.name}</span>
+                                {team.createdAt && (
+                                    <span className="text-xs text-secondary">
+                                        Est. {new Date(team.createdAt).toLocaleDateString('en-US', {
+                                            month: 'short',
+                                            year: 'numeric',
+                                        })}
+                                    </span>
                                 )}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </>
-    )
-}
+                            </div>
+                        </Link>
+                    ),
+                },
+                {
+                    content: leadProfile ? (
+                        <Link to={`/community/profiles/${leadProfile.id}`} className="flex items-center gap-2" state={{ newWindow: true }}>
+                            {leadAvatar ? (
+                                <img
+                                    src={leadAvatar}
+                                    alt={leadName}
+                                    className={`size-8 rounded-full border border-primary object-cover bg-${leadColor ?? 'accent dark:bg-accent-dark'}`}
+                                />
+                            ) : (
+                                <div className={`size-8 rounded-full border border-primary flex items-center justify-center text-xs font-bold bg-${leadColor ?? 'accent dark:bg-accent-dark'}`}>
+                                    {leadProfile.attributes?.firstName?.[0]}
+                                    {leadProfile.attributes?.lastName?.[0]}
+                                </div>
+                            )}
+                            <span className="text-sm">{leadName}</span>
+                        </Link>
+                    ) : (
+                        <span className="text-sm text-muted">—</span>
+                    ),
+                },
+            ],
+        }
+    })
 
-const SmallTeamsPage = () => {
-    const [searchTerm, setSearchTerm] = useState('')
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/small-teams',
         content: (
             <div className="max-w-screen-lg mx-auto mt-6 px-4">
-                <Teams searchTerm={searchTerm} />
+                <section data-scheme="primary" className="bg-primary">
+                    <div className="mb-8">
+                        <h1>Small teams</h1>
+                        <p className="mt-0">
+                            We've organized the company into small teams that are multi-disciplinary and as self-sufficient as possible.
+                        </p>
+                        <div className="flex gap-2">
+                            <OSButton asLink to="/teams" variant="primary" size="md" state={{ newWindow: true }}>
+                                Browse all teams ({allTeams.nodes.length})
+                            </OSButton>
+                            <OSButton asLink to="/handbook/company/small-teams" variant="secondary" size="md" state={{ newWindow: true }}>
+                                Learn about small teams
+                            </OSButton>
+                        </div>
+                    </div>
+
+                    <div className="mt-8">
+                        <OSTable
+                            columns={tableColumns}
+                            rows={tableRows}
+                            className="bg-primary"
+                            size="md"
+                            rowAlignment="center"
+                        />
+                    </div>
+
+                    {filteredTeams.length === 0 && searchTerm && (
+                        <div className="text-center py-12">
+                            <p className="text-lg text-secondary">
+                                No teams found matching "{searchTerm}"
+                            </p>
+                            <button
+                                onClick={() => setSearchTerm('')}
+                                className="mt-4 text-blue hover:underline"
+                            >
+                                Clear search
+                            </button>
+                        </div>
+                    )}
+                </section>
             </div>
         ),
     })

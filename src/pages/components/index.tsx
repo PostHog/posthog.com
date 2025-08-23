@@ -60,21 +60,28 @@ export default function Components(): JSX.Element {
                 template="generic"
                 slug="components"
                 title="Components"
-                // options below only needed to override matching the slug
-                // teamName="product-analytics"
-                // roadmapCategory="product-analytics"
-                // changelogCategory="product-analytics"
-                // accentImage={
-                //     <CloudinaryImage
-                //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
-                //         alt="Screenshot of hedgehog mode's party mode"
-                //         className="w-full"
-                //         placeholder="none"
-                //     />
-                // }
+            // options below only needed to override matching the slug
+            // teamName="product-analytics"
+            // roadmapCategory="product-analytics"
+            // changelogCategory="product-analytics"
+            // accentImage={
+            //     <CloudinaryImage
+            //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
+            //         alt="Screenshot of hedgehog mode's party mode"
+            //         className="w-full"
+            //         placeholder="none"
+            //     />
+            // }
             >
                 <div className="@container text-primary">
                     <div className="space-y-12">
+                        <section>
+                            <h2>Open graph image templates</h2>
+
+                            <div className="inline-block w-[600px] h-[315px] border border-primary bg-accent">
+                                hello
+                            </div>
+                        </section>
                         {/* OSButton Component Showcase */}
                         <section>
                             <h2 className="">

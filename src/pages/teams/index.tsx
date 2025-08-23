@@ -189,18 +189,6 @@ const TeamsPage = () => {
             >
                 <div className="@container">
 
-                    <p className="text-[15px] opacity-75">
-                        We organize in{' '}
-                        <Link
-                            to="/handbook/wide-company"
-                            state={{ newWindow: true }}
-                            className="font-semibold underline"
-                        >
-                            small teams
-                        </Link>{' '}
-                        that are multi-disciplinary and as self-sufficient as possible.
-                    </p>
-
                     <div className="relative mb-6 mt-8">
                         {searchTerm && (
                             <>
@@ -323,17 +311,17 @@ const TeamsPage = () => {
                                                                 className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${isMatch
                                                                     ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
                                                                     : 'border-accent'
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 <Tooltip trigger={
                                                                     <img
                                                                         src={avatar?.data?.attributes?.url}
                                                                         className={`size-10 rounded-full bg-${color ??
                                                                             'accent dark:bg-accent-dark'
-                                                                        } border transform ${isMatch
-                                                                            ? 'scale-125 border-red dark:border-yellow'
-                                                                            : 'scale-100 border-primary'
-                                                                        } hover:scale-125 transition-all`}
+                                                                            } border transform ${isMatch
+                                                                                ? 'scale-125 border-red dark:border-yellow'
+                                                                                : 'scale-100 border-primary'
+                                                                            } hover:scale-125 transition-all`}
                                                                         alt={name}
                                                                     />
                                                                 }
