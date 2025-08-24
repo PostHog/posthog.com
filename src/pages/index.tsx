@@ -38,6 +38,7 @@ import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CloudinaryImage from "components/CloudinaryImage"
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -389,6 +390,10 @@ const Button = ({ url, children }: { url: string, children: React.ReactNode }) =
     )
 }
 
+const Image = ({ src, className }: { src: string, className?: string }) => {
+    return <CloudinaryImage src={src} className={className} />
+}
+
 const PageNavigation = () => {
     const [showTableOfContents, setShowTableOfContents] = useState(false)
     return (
@@ -612,6 +617,18 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <Button url="/about">Read more about us</Button>,
+    },
+    {
+        name: 'ImageDW',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png" className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm" />,
+    },
+    {
+        name: 'ImageMoney',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png" className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4" />,
     },
 ]
 
