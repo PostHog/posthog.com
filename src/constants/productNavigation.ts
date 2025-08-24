@@ -9,14 +9,14 @@ export const newestProducts = ['llm_analytics', 'error_tracking', 'revenue_analy
 
 // Category ordering for display
 export const categoryOrder = [
-    'ai',
     'data',
     'analytics',
     'dataviz',
     'product',
-    'engineering',
+    // 'engineering',
     'product_engineering',
     'communication',
+    'ai',
     'product_os',
 ] as const
 
@@ -27,7 +27,7 @@ export const categoryDisplayNames: Record<string, string> = {
     analytics: 'Analytics dashboards',
     dataviz: 'Data visualization',
     product: 'Product',
-    engineering: 'Engineering',
+    // engineering: 'Engineering',
     product_engineering: 'Product engineering',
     communication: 'Communication',
     product_os: 'Utilities & add-ons',
