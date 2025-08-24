@@ -321,6 +321,8 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                 },
                 'teams.data.attributes.name',
                 'companyRole',
+                'location',
+                'country',
             ],
             threshold: 0.3,
         })
@@ -360,6 +362,8 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                         },
                         'teams.data.attributes.name',
                         'companyRole',
+                        'location',
+                        'country',
                     ],
                     threshold: 0.3,
                 })

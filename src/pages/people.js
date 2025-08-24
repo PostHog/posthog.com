@@ -7,19 +7,20 @@ import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const PeoplePage = () => {
+    const [searchTerm, setSearchTerm] = useState('')
+    const [filteredPeople, setFilteredPeople] = useState(null)
+    const [nameFilter, setNameFilter] = useState(null)
+    const [pizzaFilter, setPizzaFilter] = useState(null)
+    
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/people',
         content: (
             <div className="max-w-screen-lg mx-auto mt-6 px-4">
                 <h1>People</h1>
-                <People />
+                <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
             </div>
         ),
     })
-    const [searchTerm, setSearchTerm] = useState('')
-    const [filteredPeople, setFilteredPeople] = useState(null)
-    const [nameFilter, setNameFilter] = useState(null)
-    const [pizzaFilter, setPizzaFilter] = useState(null)
 
     // Get team members data - include all fields needed by TeamMember component
     const {
@@ -103,8 +104,9 @@ const PeoplePage = () => {
         []
     )
 
-    // Handle filter changes
+    // Handle filter changes - combine filter and search logic
     const handleFilterChange = (filteredData) => {
+        // When filters change, apply them but keep the search term active
         setFilteredPeople(filteredData)
     }
 
