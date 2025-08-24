@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import Layout from 'components/Layout'
 import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
@@ -25,6 +25,8 @@ import {
     categoryDisplayNames,
     getProductsForCategory
 } from '../../constants/productNavigation'
+import Fuse from 'fuse.js'
+import debounce from 'lodash/debounce'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -104,9 +106,47 @@ export default function Products(): JSX.Element {
     const [lastClickTime, setLastClickTime] = useState(0)
     const [lastClickedProduct, setLastClickedProduct] = useState<string | null>(null)
     const [isListLayout, setIsListLayout] = useState(true)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
     const { appWindow } = useWindow()
 
     const appWindowWidth = appWindow?.size?.width || 0
+
+    // Set up fuzzy search with Fuse.js
+    const fuse = useMemo(() => {
+        return new Fuse(allProducts, {
+            keys: ['name', 'slug', 'description', 'category'],
+            threshold: 0.3,
+        })
+    }, [allProducts])
+
+    // Debounced search function
+    const debouncedSearch = useCallback(
+        debounce((query: string) => {
+            if (!query.trim()) {
+                setFilteredProducts(allProducts)
+                return
+            }
+
+            const results = fuse.search(query)
+            const filtered = results.map((result) => result.item)
+            setFilteredProducts(filtered)
+        }, 300),
+        [fuse, allProducts]
+    )
+
+    // Handle search changes
+    const handleSearchChange = useCallback((query: string) => {
+        setSearchTerm(query)
+        debouncedSearch(query)
+    }, [debouncedSearch])
+
+    // Update filtered products when allProducts changes
+    useEffect(() => {
+        if (!searchTerm.trim()) {
+            setFilteredProducts(allProducts)
+        }
+    }, [allProducts, searchTerm])
 
     const handleProductClick = useCallback(
         (product: any, e: React.MouseEvent) => {
@@ -157,6 +197,7 @@ export default function Products(): JSX.Element {
                 doubleClickToOpen={true}
                 isRightSidebarOpen={true}
                 onRightSidebarClose={handleRightSidebarClose}
+                onSearch={handleSearchChange}
                 rightActionButtons={
                     <ToggleGroup
                         title="Layout"
@@ -404,7 +445,7 @@ export default function Products(): JSX.Element {
             >
                 {(() => {
                     // Filter out products without a category, then group by category
-                    const productsWithCategory = allProducts.filter((product: any) => product.category)
+                    const productsWithCategory = filteredProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
                         const category = product.category
                         if (!acc[category]) {

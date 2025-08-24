@@ -32,13 +32,12 @@ interface ExplorerProps {
     selectOptions?: any[]
     onCategoryChange?: (category: string) => void
     selectedCategory?: string
-    // New props for dynamic right sidebar
     rightSidebarPanel?: React.ReactNode
     isRightSidebarOpen?: boolean
     onRightSidebarClose?: () => void
     doubleClickToOpen?: boolean
-    // New: custom actions to render on the right side of HeaderBar
     rightActionButtons?: React.ReactNode
+    onSearch?: (query: string) => void
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -90,6 +89,7 @@ export default function Explorer({
     onRightSidebarClose,
     doubleClickToOpen = false,
     rightActionButtons,
+    onSearch,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -135,6 +135,7 @@ export default function Explorer({
                         {...getHeaderBarProps()}
                         searchContentRef={searchContainerRef}
                         rightActionButtons={rightActionButtons}
+                        onSearch={onSearch}
                     />
                     <AddressBar
                         selectOptions={selectOptions}
@@ -147,9 +148,8 @@ export default function Explorer({
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
-                        fullScreen ? 'border-t border-primary' : ''
-                    }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''
+                        }`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -210,9 +210,8 @@ export default function Explorer({
                                 )}
                                 <div
                                     ref={searchContainerRef}
-                                    className={`${getProseClasses()} max-w-none h-full ${
-                                        padding ? 'relative @md:p-4' : ''
-                                    }`}
+                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative @md:p-4' : ''
+                                        }`}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}
