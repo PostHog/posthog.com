@@ -1,4 +1,4 @@
-import { IconCopy, IconUpload, IconFolder, IconDocument, IconChevronRight, IconChevronDown } from '@posthog/icons'
+import { IconCopy, IconUpload, IconFolder, IconDocument, IconChevronRight, IconChevronDown, IconX } from '@posthog/icons'
 import Modal from 'components/Modal'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { useApp } from '../../context/App'
@@ -294,9 +294,8 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
-                        node.type === 'file' ? 'draggable' : ''
-                    }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
+                        }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -365,6 +364,7 @@ export default function MediaUploadModal() {
     const { getJwt, user } = useUser()
     const [loading, setLoading] = useState(0)
     const [images, setImages] = useState<any[]>([])
+    const [searchQuery, setSearchQuery] = useState('')
     const isModerator = user?.role?.type === 'moderator'
 
     const onDrop = async (acceptedFiles: File[]) => {
@@ -394,6 +394,30 @@ export default function MediaUploadModal() {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
+    // Filter images based on search query
+    const allImages = [
+        ...images,
+        ...((user?.profile as any)?.images || [])
+    ]
+
+    const filteredImages = searchQuery
+        ? allImages.filter(image =>
+            image.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : allImages
+
+    // Handle ESC key to clear search
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setSearchQuery('')
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [])
+
     return isModerator ? (
         <ScrollArea className="w-full">
             <div data-scheme="primary" className="bg-primary text-primary size-full">
@@ -411,14 +435,12 @@ export default function MediaUploadModal() {
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
-                                    isDragActive ? 'bg-input border-primary' : ''
-                                }`}
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive ? 'bg-input border-primary' : ''
+                                    }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${
-                                        isDragActive ? '' : 'opacity-50'
-                                    }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive ? '' : 'opacity-50'
+                                        }`}
                                 >
                                     <IconUpload className="size-12 mb-4" />
                                     <p className="text-center font-medium m-0">
@@ -436,6 +458,26 @@ export default function MediaUploadModal() {
                     <div className="flex flex-col">
                         <h3 className="m-0">Your uploads</h3>
                         <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
+
+                        <div className="relative mb-4">
+                            <input
+                                type="text"
+                                className="w-full pr-8 rounded"
+                                placeholder="Search filenames..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            {searchQuery && (
+                                <button
+                                    onClick={() => setSearchQuery('')}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
+                                    aria-label="Clear search"
+                                >
+                                    <IconX className="size-4" />
+                                </button>
+                            )}
+                        </div>
+
                         <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
                             <ul className="list-none m-0 p-0 space-y-2">
                                 {loading > 0 &&
@@ -445,12 +487,14 @@ export default function MediaUploadModal() {
                                             className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
                                         />
                                     ))}
-                                {images.map((image) => {
+                                {filteredImages.map((image) => {
                                     return <Image key={image.id} {...image} />
                                 })}
-                                {(user?.profile as any)?.images?.map((image: any) => {
-                                    return <Image key={image.id} {...image} />
-                                })}
+                                {filteredImages.length === 0 && !loading && searchQuery && (
+                                    <li className="text-center text-secondary py-4">
+                                        No files matching "{searchQuery}"
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     </div>
