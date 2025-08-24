@@ -10,6 +10,7 @@ import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { graphql, useStaticQuery } from 'gatsby'
+import CloudinaryImage from "components/CloudinaryImage"
 
 type FieldsetItem = {
     label: string
@@ -24,7 +25,7 @@ type Fieldset = {
     layoutStyle: 'simple' | 'table'
 }
 
-export default function Credits(): JSX.Element {
+export default function Credits({ pageContext }: { pageContext?: { buildTime?: string } }): JSX.Element {
     const { focusedWindow, updateWindow, getDesktopCenterPosition } = useApp()
     const [isExpanded, setIsExpanded] = useState(false)
 
@@ -73,7 +74,7 @@ export default function Credits(): JSX.Element {
                 { label: 'Employees', value: teamSize },
                 { label: 'Small teams', value: allTeams.nodes.length },
                 { label: 'Customers', value: '190,254' },
-                { label: 'Revenue', value: '--' },
+                { label: 'Revenue', value: 'Lots' },
                 { label: 'Funding', value: '$107,000,000' },
                 {
                     label: 'Locations',
@@ -131,8 +132,9 @@ export default function Credits(): JSX.Element {
                     label: 'Inspiration',
                     value: (
                         <>
-                            Apple, Inc.
-                            <br /> Microsoft, Inc.
+                            Apple, Inc.<br />
+                            Microsoft, Inc.<br />
+                            1995-1998
                         </>
                     ),
                 },
@@ -192,12 +194,12 @@ export default function Credits(): JSX.Element {
                             <div className="flex flex-col items-center w-full">
                                 <figure
                                     data-skin="secondary"
-                                    className="aspect-video bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded max-w-md"
+                                    className="aspect-[600/315] bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded max-w-md"
                                 >
-                                    screenshot
+                                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/default_a3b46f408e.png" className="w-full" />
                                 </figure>
                                 <h1 className="text-lg mb-1">PostHog.com</h1>
-                                <p className="text-sm text-secondary">Updated today at 3:23 PM</p>
+                                <p className="text-sm text-secondary">Updated {pageContext?.buildTime || 'just now'}</p>
                             </div>
 
                             {sectionsToShow.map((fieldset, index) => renderFieldset(fieldset, index))}
@@ -220,7 +222,7 @@ export default function Credits(): JSX.Element {
                                 </Link>
                             </p>
 
-                            <p className="text-xs text-secondary">&copy;2025 PostHog Incorporated</p>
+                            <p className="text-xs text-secondary">&copy;{new Date().getFullYear()} PostHog Incorporated</p>
                         </div>
                     </ScrollArea>
                 </div>

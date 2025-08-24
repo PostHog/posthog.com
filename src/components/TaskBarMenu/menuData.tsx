@@ -8,12 +8,14 @@ import { APP_COUNT } from '../../constants'
 import {
     categoryOrder,
     categoryDisplayNames,
+    categoryIcons,
     buildCategoryMenuItems,
     buildProductMenuItems,
     popularProducts,
     newestProducts
 } from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
+import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from "components/OSIcons"
 
 interface DocsMenuItem {
     name: string
@@ -192,8 +194,9 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: `App library (${APP_COUNT - 1})`,
+            label: `App library (${APP_COUNT})`,
             link: '/products',
+            icon: <Icons.IconApps className="size-4 text-red" />,
         },
         {
             type: 'separator',
@@ -202,11 +205,13 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             type: 'submenu',
             label: 'Popular products',
             items: buildProductMenuItems(popularProducts, allProducts),
+            icon: <Icons.IconTrending className="size-4 text-green" />,
         },
         {
             type: 'submenu',
-            label: 'Newest products',
+            label: 'New products',
             items: buildProductMenuItems(newestProducts, allProducts),
+            icon: <Icons.IconPresent className="size-4 text-blue" />,
         },
         {
             type: 'separator',
@@ -225,9 +230,22 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 
         const categoryItems = buildCategoryMenuItems(category, allProducts)
         if (categoryItems.length > 0) {
+            // Get the icon for this category
+            let iconElement = null
+            const iconConfig = categoryIcons[category]
+            if (iconConfig) {
+                const IconComponent = Icons[iconConfig.icon as keyof typeof Icons]
+                if (IconComponent) {
+                    iconElement = React.createElement(IconComponent, {
+                        className: `size-4 text-${iconConfig.color}`
+                    })
+                }
+            }
+
             items.push({
                 type: 'submenu',
                 label: categoryDisplayNames[category] || category,
+                icon: iconElement,
                 items: categoryItems,
             })
         }
@@ -258,22 +276,11 @@ export function useMenuData(): MenuType[] {
                     label: 'About this website',
                     link: '/credits',
                 },
-                {
-                    type: 'item',
-                    label: 'Disabled option',
-                    disabled: true,
-                },
+                { type: 'separator' },
                 {
                     type: 'item',
                     label: 'Display options',
                     link: '/display-options',
-                },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Print a coloring book',
-                    link: '/coloring-book.pdf',
-                    shortcut: '⌘ P',
                 },
             ],
         },
@@ -412,30 +419,42 @@ export function useMenuData(): MenuType[] {
                             type: 'item',
                             label: 'X',
                             link: 'https://x.com/posthog',
+                            icon: <IconXNotTwitter className="size-4 text-black dark:text-white" />,
                             external: true,
                         },
                         {
                             type: 'item',
                             label: 'LinkedIn',
                             link: 'https://www.linkedin.com/company/posthog',
+                            icon: <IconLinkedIn className="size-4" />,
                             external: true,
                         },
                         {
                             type: 'item',
                             label: 'Substack',
                             link: 'https://newsletter.posthog.com',
+                            icon: <IconSubstack className="size-4" />,
                             external: true,
                         },
                         {
                             type: 'item',
                             label: 'YouTube',
                             link: 'https://www.youtube.com/@posthog',
+                            icon: <IconYouTube className="size-4" />,
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'Instagram',
+                            link: 'https://www.instagram.com/posthog',
+                            icon: <IconInstagram className="size-4" />,
                             external: true,
                         },
                         {
                             type: 'item',
                             label: 'GitHub',
                             link: 'https://github.com/posthog',
+                            icon: <IconGithub className="size-4" />,
                             external: true,
                         },
                     ],
@@ -453,15 +472,24 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Merch store',
                     link: '/merch',
+                    icon: <Icons.IconStore className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
                     label: 'Cool tech jobs',
                     link: '/cool-tech-jobs',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'DeskHog',
+                    link: '/deskhog',
+                    icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
                 },
                 {
                     type: 'submenu',
                     label: 'Sexy legal stuff',
+                    icon: <Icons.IconTie className="size-4 text-orange" />,
                     items: [
                         {
                             type: 'item',
@@ -498,6 +526,7 @@ export function useMenuData(): MenuType[] {
                     label: 'System status',
                     link: 'https://status.posthog.com',
                     external: true,
+                    icon: <Icons.IconCheckCircle className="size-4 text-green" />,
                 },
             ],
         },
@@ -521,10 +550,12 @@ export const DocsItemsEnd = [
         type: 'item' as const,
         label: 'Tutorials',
         link: '/tutorials',
+        icon: <Icons.IconBook className="size-4 text-blue" />,
     },
     {
         type: 'item' as const,
         label: 'Templates',
         link: '/templates',
+        icon: <Icons.IconBolt className="size-4 text-yellow" />,
     },
 ]

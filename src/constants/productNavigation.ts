@@ -33,6 +33,19 @@ export const categoryDisplayNames: Record<string, string> = {
     product_os: 'Utilities & add-ons',
 }
 
+// Icons and colors for categories
+export const categoryIcons: Record<string, { icon: string; color: string }> = {
+    ai: { icon: 'IconSparkles', color: 'purple' },
+    data: { icon: 'IconDatabase', color: 'blue' },
+    analytics: { icon: 'IconDashboard', color: 'green' },
+    dataviz: { icon: 'IconTrends', color: 'yellow' },
+    product: { icon: 'IconApps', color: 'red' },
+    // engineering: { icon: 'IconWrench', color: 'gray' },
+    product_engineering: { icon: 'IconCode2', color: 'seagreen' },
+    communication: { icon: 'IconMessage', color: 'sky-blue' },
+    product_os: { icon: 'IconGear', color: 'gray' },
+}
+
 // Product ordering within categories
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
@@ -56,17 +69,31 @@ export const productOrder: Record<string, string[]> = {
 // These need manual icon and link configuration
 export const nonProductPages = {
     'customer-data-infrastructure': {
-        name: 'README: Data warehouse / CDP / ETL.md',
         slug: 'customer-data-infrastructure',
-        url: '/customer-data-infrastructure',
-        category: 'data',
-        parentIcon: 'documentCanvas',
+        url: 'customer-data-infrastructure',
         icon: 'IconDocument',
         color: 'blue',
         description: 'CDP manifesto',
     },
+    'customer-data-infrastructure/sources': {
+        slug: 'customer-data-infrastructure/sources',
+        url: 'customer-data-infrastructure/sources',
+        icon: 'IconArrowRight',
+        color: 'orange',
+    },
+    'customer-data-infrastructure/transformations': {
+        slug: 'customer-data-infrastructure/transformations',
+        url: 'customer-data-infrastructure/transformations',
+        icon: 'IconRefresh',
+        color: 'green',
+    },
+    'customer-data-infrastructure/destinations': {
+        slug: 'customer-data-infrastructure/destinations',
+        url: 'customer-data-infrastructure/destinations',
+        icon: 'IconDecisionTree',
+        color: 'purple',
+    },
     ai: {
-        name: 'AI agents.md',
         slug: 'ai',
         url: '/ai',
         category: 'ai',

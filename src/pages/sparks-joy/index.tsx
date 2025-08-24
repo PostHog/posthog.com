@@ -6,7 +6,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import { IconDice, IconDictator, IconBrush } from 'components/OSIcons/Icons'
 import { AppIcon } from 'components/OSIcons'
-import { IconBookmarkSolid, IconPencil } from '@posthog/icons'
+import { IconBookmarkSolid, IconDocument, IconPencil } from '@posthog/icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 
 export default function SparkJoy(): JSX.Element {
@@ -107,6 +107,14 @@ export default function SparkJoy(): JSX.Element {
                         >
                             <IconBookmarkSolid className="!size-10 -mt-2 text-blue" />
                             <p className="text-sm font-medium">Bookmarks</p>
+                        </Link>
+                        <Link
+                            to="/coloring-book.pdf"
+                            state={{ newWindow: true }}
+                            className="flex flex-col justify-center items-center space-y-1 w-28 text-center text-primary hover:text-primary"
+                        >
+                            <IconDocument className="!size-10 -mt-2 text-red" />
+                            <p className="text-sm font-medium">Coloring book.pdf</p>
                         </Link>
                     </div>
                 </div>

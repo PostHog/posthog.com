@@ -1,3 +1,4 @@
+import { IconShieldPeople } from "@posthog/icons"
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
@@ -26,6 +27,7 @@ export function useSmallTeamsMenuItems() {
             type: 'item' as const,
             label: 'All teams',
             link: '/teams',
+            icon: <IconShieldPeople className="size-4" />,
         },
         { type: 'separator' as const },
         ...sortedTeams.map(

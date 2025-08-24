@@ -14,7 +14,28 @@ export { onPreBootstrap } from './gatsby/onPreBootstrap'
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
 export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
-    const { createPage } = actions
+    const { createPage, deletePage } = actions
+    
+    // Add build time to credits page
+    if (page.path === '/credits/') {
+        const now = new Date()
+        const hours = now.getHours()
+        const minutes = now.getMinutes()
+        const ampm = hours >= 12 ? 'PM' : 'AM'
+        const displayHours = hours % 12 || 12
+        const displayMinutes = minutes.toString().padStart(2, '0')
+        const buildTime = `today at ${displayHours}:${displayMinutes} ${ampm}`
+        
+        deletePage(page)
+        createPage({
+            ...page,
+            context: {
+                ...page.context,
+                buildTime,
+            },
+        })
+    }
+    
     if (page.path.match(/^\/community\/profiles/)) {
         page.matchPath = '/community/profiles/*'
         createPage(page)

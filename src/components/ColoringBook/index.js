@@ -21,19 +21,10 @@ export default function ColoringBook() {
     const { closeWindow } = useApp()
     const { appWindow } = useWindow()
 
-    useEffect(() => {
-        // Small delay to ensure PDF is loaded
-        const timer = setTimeout(() => {
-            window.print()
-        }, 1000)
-
-        return () => clearTimeout(timer)
-    }, [])
-
     return (
         <>
             <SEO
-                title="PostHog - How developers build successful products"
+                title="Coloring book.pdf - PostHog"
                 description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
                 image={`/images/home.png`}
             />
@@ -76,8 +67,7 @@ export default function ColoringBook() {
                     }
                 `}
             </style>
-            <Editor title="Coloring book" type="mdx" hideTitle>
-                <h1>Coloring book</h1>
+            <Editor title="Coloring book" type="pdf" hideTitle>
                 <iframe
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/coloring_book_a34bc42c76.pdf"
                     width="100%"

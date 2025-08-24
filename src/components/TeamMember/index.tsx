@@ -3,6 +3,7 @@ import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import { Link } from 'gatsby'
 
 export const TeamMemberLink = ({
     firstName,
@@ -36,14 +37,13 @@ export const TeamMemberLink = ({
 
     return (
         <span className="relative inline-block">
-            <a href={squeakId && `/community/profiles/${squeakId}`}>
+            <Link to={squeakId ? `/community/profiles/${squeakId}` : ''} state={{ newWindow: true }}>
                 {photo && (
                     <span
-                        className={`invisible max-h-4 inline-flex items-center ${
-                            photo
-                                ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                                : 'border-b border-primary border-dashed'
-                        }`}
+                        className={`invisible max-h-4 inline-flex items-center ${photo
+                            ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                            : 'border-b border-primary border-dashed'
+                            }`}
                     >
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
                             {avatarUrl ? (
@@ -63,11 +63,10 @@ export const TeamMemberLink = ({
                     </span>
                 )}
                 <span
-                    className={`inline-flex items-center ${
-                        photo
-                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                            : 'border-b border-primary border-dashed'
-                    } ${className}`}
+                    className={`inline-flex items-center ${photo
+                        ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                        : 'border-b border-primary border-dashed'
+                        } ${className}`}
                 >
                     {photo ? (
                         <>
@@ -94,9 +93,8 @@ export const TeamMemberLink = ({
                                     {avatarUrl ? (
                                         <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-dark border border-primary">
                                             <div
-                                                className={`bg-${
-                                                    color ? color : 'red'
-                                                }r} rounded-full overflow-hidden w-full aspect-square`}
+                                                className={`bg-${color ? color : 'red'
+                                                    } rounded-full overflow-hidden w-full aspect-square`}
                                             >
                                                 <img
                                                     src={avatarUrl}
@@ -135,7 +133,7 @@ export const TeamMemberLink = ({
                         </Tooltip>
                     )}
                 </span>
-            </a>
+            </Link>
         </span>
     )
 }

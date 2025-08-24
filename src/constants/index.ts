@@ -1,5 +1,5 @@
 export const PRODUCT_COUNT = 10
-export const APP_COUNT = 34
+export const APP_COUNT = 33 // total of /products - ai agents.md and cdp readme.md
 export const CUSTOMER_COUNT = 100000
 
 // Base prose classes without size modifiers

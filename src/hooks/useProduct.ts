@@ -2021,7 +2021,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconTerminal,
             description: 'Powerful APIs and SDKs to build analytics into your product',
             handle: 'api',
-            color: 'teal',
+            color: 'purple',
             colorSecondary: 'sky-blue',
             category: 'product_os',
             slug: 'api',

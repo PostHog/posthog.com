@@ -72,9 +72,8 @@ export const Select = ({
         <div className={`relative border-b border-input ${className}`}>
             <Listbox value={value || {}} onChange={handleChange}>
                 <Listbox.Button
-                    className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left  ${
-                        !value?.attributes?.label ? 'opacity-60' : ''
-                    }`}
+                    className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left  ${!value?.attributes?.label ? 'opacity-60' : ''
+                        }`}
                 >
                     {label && !!value && <label className="text-sm opacity-60 -mb-0.5 block">{label}</label>}
                     <div className="flex items-center justify-between">
@@ -98,11 +97,10 @@ export const Select = ({
                                             <Listbox.Option key={topic.id} value={topic}>
                                                 {({ selected }) => (
                                                     <div
-                                                        className={`${
-                                                            selected
-                                                                ? 'bg-accent text-primary'
-                                                                : 'prose-invert bg-white text-black hover:bg-accent'
-                                                        } py-2 px-4 cursor-pointer transition-all`}
+                                                        className={`${selected
+                                                            ? 'bg-accent text-primary'
+                                                            : 'prose-invert bg-white text-black hover:bg-accent'
+                                                            } py-2 px-4 cursor-pointer transition-all`}
                                                     >
                                                         {topic.attributes.label}
                                                     </div>
@@ -178,9 +176,9 @@ function QuestionFormMain({
                                 />
                             </div>
 
-                            <div className="bg-white dark:bg-accent-dark border border-primary rounded-md overflow-hidden mb-4">
+                            <div data-scheme="primary" className="bg-primary text-primary border border-primary rounded-md overflow-hidden mb-4">
                                 {status && status !== 'none' && (
-                                    <div className="p-4 bg-accent dark:bg-dark border-b border-input">
+                                    <div className="p-4 bg-accent border-b border-primary">
                                         <h5 className="m-0">Heads up!</h5>
                                         <p className="m-0 text-sm">
                                             We're currently experiencing an incident. Check{' '}
@@ -200,7 +198,7 @@ function QuestionFormMain({
                                     <>
                                         <Field
                                             autoFocus={autoFocus}
-                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-x-0 border-t-0 border-b border-primary text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className="font-semibold text-primary bg-primary border-x-0 border-t-0 border-b border-primary text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"

@@ -41,12 +41,12 @@ const Menu = () => {
                 items={[
                     ...(user
                         ? [
-                              {
-                                  name: 'My subscriptions',
-                                  url: '/questions/subscriptions',
-                                  icon: <IconNotification />,
-                              },
-                          ]
+                            {
+                                name: 'My subscriptions',
+                                url: '/questions/subscriptions',
+                                icon: <IconNotification />,
+                            },
+                        ]
                         : []),
                     ...topicsNav,
                 ]}
@@ -285,9 +285,9 @@ export default function Inbox(props) {
                 </aside>
                 <main data-scheme="primary" className="flex-1 bg-primary">
                     <div ref={containerRef} className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}>
-                        <div className={`@container flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
+                        <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
                             <ScrollArea className=" h-full">
-                                <div className="test flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10">
+                                <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10">
                                     <div className="hidden @3xl:block w-48">Author</div>
                                     <div className="flex-1">
                                         <span className="@3xl:hidden">Author / Replies</span>
@@ -313,6 +313,7 @@ export default function Inbox(props) {
                                                     align="left"
                                                     width="full"
                                                     hover="background"
+                                                    size="md"
                                                     key={question.id}
                                                     className={` 
                                                         flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start
@@ -323,7 +324,7 @@ export default function Inbox(props) {
                                                         if (bottomHeight <= 45) {
                                                             setBottomHeight(
                                                                 containerRef.current.getBoundingClientRect().height *
-                                                                    0.8
+                                                                0.8
                                                             )
                                                         }
                                                     }}
@@ -335,9 +336,8 @@ export default function Inbox(props) {
                                                         </span>
                                                     </div>
                                                     <div
-                                                        className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
-                                                            active ? 'font-medium @3xl:font-bold' : 'font-medium'
-                                                        }`}
+                                                        className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${active ? 'font-medium @3xl:font-bold' : 'font-medium'
+                                                            }`}
                                                     >
                                                         {subject}
                                                     </div>
@@ -382,9 +382,8 @@ export default function Inbox(props) {
                         {permalink && (
                             <div
                                 ref={bottomContainerRef}
-                                className={`flex-none relative min-h-0 min-w-0 ${
-                                    !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                } ${sideBySide ? 'border-l border-primary' : ''}`}
+                                className={`flex-none relative min-h-0 min-w-0 ${!isDragging ? 'transition-all duration-200 ease-out' : ''
+                                    } ${sideBySide ? 'border-l border-primary' : ''}`}
                                 style={{
                                     height: sideBySide ? '100%' : bottomHeight,
                                     width: sideBySide ? sideWidth : '100%',
@@ -488,15 +487,14 @@ export default function Inbox(props) {
                                                                 style={{ width: 26, height: 26 }}
                                                                 icon={
                                                                     <IconChevronDown
-                                                                        className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                            sideBySide
-                                                                                ? expandable
-                                                                                    ? 'rotate-90'
-                                                                                    : '-rotate-90'
-                                                                                : expandable
+                                                                        className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${sideBySide
+                                                                            ? expandable
+                                                                                ? 'rotate-90'
+                                                                                : '-rotate-90'
+                                                                            : expandable
                                                                                 ? 'rotate-180'
                                                                                 : ''
-                                                                        }`}
+                                                                            }`}
                                                                     />
                                                                 }
                                                                 onClick={expandOrCollapse}
