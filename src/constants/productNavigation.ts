@@ -50,7 +50,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
     ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
-    data: ['customer-data-infrastructure', 'cdp', 'data_in', 'transformations', 'data_warehouse', 'data_out'],
+    data: ['customer-data-infrastructure', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
     analytics: [
         'web_analytics',
         'product_analytics',
@@ -68,28 +68,40 @@ export const productOrder: Record<string, string[]> = {
 // Non-product pages that appear in the product navigation
 // These need manual icon and link configuration
 export const nonProductPages = {
+    cdp: {
+        slug: 'cdp',
+        url: '/cdp',
+        icon: 'IconPlug',
+        color: 'sky-blue',
+    },
+    'data-warehouse': {
+        slug: 'data-warehouse',
+        url: '/data-warehouse',
+        icon: 'IconAsterisk',
+        color: 'purple',
+    },
     'customer-data-infrastructure': {
         slug: 'customer-data-infrastructure',
-        url: 'customer-data-infrastructure',
+        url: '/customer-data-infrastructure',
         icon: 'IconDocument',
         color: 'blue',
         description: 'CDP manifesto',
     },
     'customer-data-infrastructure/sources': {
         slug: 'customer-data-infrastructure/sources',
-        url: 'customer-data-infrastructure/sources',
+        url: '/customer-data-infrastructure/sources',
         icon: 'IconArrowRight',
         color: 'orange',
     },
     'customer-data-infrastructure/transformations': {
         slug: 'customer-data-infrastructure/transformations',
-        url: 'customer-data-infrastructure/transformations',
+        url: '/customer-data-infrastructure/transformations',
         icon: 'IconRefresh',
         color: 'green',
     },
     'customer-data-infrastructure/destinations': {
         slug: 'customer-data-infrastructure/destinations',
-        url: 'customer-data-infrastructure/destinations',
+        url: '/customer-data-infrastructure/destinations',
         icon: 'IconDecisionTree',
         color: 'purple',
     },

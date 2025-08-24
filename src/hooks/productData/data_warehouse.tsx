@@ -1,6 +1,8 @@
 import React from 'react'
 import { IconAsterisk } from '@posthog/icons'
 
+// this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'visualize' handle.
+
 export const dataWarehouse = {
     parentIcon: 'SQL',
     Icon: IconAsterisk,
@@ -10,13 +12,13 @@ export const dataWarehouse = {
     slug: 'data-warehouse',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'data',
+    // category: 'data',
     seo: {
         title: 'Data Warehouse - PostHog',
         description: 'Unify and query data from any source and analyze it alongside your product data.',
     },
     overview: {
-        title: 'Query & visualize product & third party data together',
+        title: 'Query & visualize product and third party data together',
         description: 'Unify and query data from any source and analyze it alongside your product data.',
         textColor: 'text-white', // tw
     },

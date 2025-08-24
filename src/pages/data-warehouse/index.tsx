@@ -9,6 +9,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { ZoomImage } from 'components/ZoomImage'
 import OSTable from 'components/OSTable'
 import { useCustomers } from '../../hooks/useCustomers'
+import { CallToAction } from "components/CallToAction"
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -108,12 +109,17 @@ export default function DataWarehouse(): JSX.Element {
             <ReaderView leftSidebar={<LeftSidebarContent />} title={dataWarehouse.overview.title}>
                 <p className="text-base font-semibold">{dataWarehouse.overview.description}</p>
 
+                <CallToAction to="https://app.posthog.com/signup" state={{ newWindow: true }} size="md" className="mb-4">
+                    Get started – free
+                </CallToAction>
+
                 <ZoomImage>
                     <CloudinaryImage src={dataWarehouse.screenshots.overview.src} alt={dataWarehouse.screenshots.overview.alt} />
                 </ZoomImage>
 
                 <h3>Customers who love PostHog's Data Warehouse</h3>
                 <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" size="sm" />
+
 
                 <h3>Features</h3>
                 <ul>

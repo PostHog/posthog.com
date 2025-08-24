@@ -1,6 +1,8 @@
 import React from 'react'
 import { IconPlug } from '@posthog/icons'
 
+// this data powers the CDP page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'integrations' handle.
+
 export const cdp = {
     parentIcon: 'spreadsheetSearch',
     Icon: IconPlug,
@@ -11,7 +13,7 @@ export const cdp = {
     slug: 'cdp',
     color: 'sky-blue',
     colorSecondary: 'blue',
-    category: 'data',
+    // category: 'data',
     hideFromPricingTable: true,
     seo: {
         title: 'CDP sources & destinations - PostHog',
