@@ -125,8 +125,8 @@ export default function ProductTabs({ productHandles, className, selectedStage }
             const product = Array.isArray(allProducts)
                 ? allProducts.find((p: any) => p.handle === handle)
                 : allProducts?.handle === handle
-                ? allProducts
-                : null
+                    ? allProducts
+                    : null
             return product as Product | null
         })
         .filter((product): product is Product => product !== null)
@@ -156,7 +156,7 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                                 />
                             )}
                             <div className={`${product.overview.textColor} dark:text-white`}>
-                                <h3 className="text-xl font-semibold tracking-tight">{product.name}</h3>
+                                <h3 className="text-xl font-bold tracking-tight">{product.name}</h3>
                                 {product.overview?.title && <p className="mb-0">{product.overview.title}</p>}
                             </div>
                         </div>
@@ -175,11 +175,10 @@ export default function ProductTabs({ productHandles, className, selectedStage }
 
                     {product.screenshots?.home && (
                         <div
-                            className={`flex-1 flex ${
-                                product.screenshots.home.classes
-                                    ? product.screenshots.home.classes
-                                    : 'justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4'
-                            }`}
+                            className={`flex-1 flex ${product.screenshots.home.classes
+                                ? product.screenshots.home.classes
+                                : 'justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4'
+                                }`}
                         >
                             <Image
                                 images={images}

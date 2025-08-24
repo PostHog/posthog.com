@@ -1,3 +1,4 @@
+[&_ul]:mb-0
 @xl:max-w-2xs
 [&_.bg-front]:fill-yellow
 [&_.bg-front]:fill-blue

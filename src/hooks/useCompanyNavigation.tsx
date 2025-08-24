@@ -27,18 +27,18 @@ const tabs = [
         content: null,
     },
     {
-        value: '/careers',
-        label: 'Careers',
-        content: null,
-    },
-    {
         value: '/chapters',
         label: 'Handbook',
         content: null,
     },
     {
-        value: '/brand',
-        label: 'Brand',
+        value: '/blog',
+        label: 'Blog',
+        content: null,
+    },
+    {
+        value: '/careers',
+        label: 'Careers',
         content: null,
     },
 ]

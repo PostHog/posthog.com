@@ -44,30 +44,6 @@ interface ProductButtonsProps {
     beta?: boolean
 }
 
-const ProgressBar = ({ progress }: { progress: number }) => {
-    return (
-        <div>
-            <Tooltip
-                trigger={
-                    <div className="flex items-center justify-between gap-1 pb-1">
-                        <div className="w-full h-2 bg-accent rounded-sm flex min-w-[10rem]">
-                            <div className="h-full bg-blue" style={{ width: `${progress}%` }}></div>
-                        </div>
-                        <span className="text-xs whitespace-nowrap">{progress}%</span>
-                    </div>
-                }
-                delay={0}
-            >
-                <div>
-                    <p className="mb-0">
-                        <span>Toolkit completion: {progress}%</span>
-                    </p>
-                </div>
-            </Tooltip>
-        </div>
-    )
-}
-
 const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
     const allProducts = useProduct()
 
@@ -197,8 +173,8 @@ const HomeHitCounter = () => {
 const AIAgents = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
-        { name: 'agent', width: 'minmax(150px,250px)', align: 'left' as const },
-        { name: 'skills', width: 'minmax(auto,1fr)', align: 'left' as const },
+        { name: 'Agent', width: 'minmax(150px,250px)', align: 'left' as const },
+        { name: 'Skills', width: 'minmax(auto,1fr)', align: 'left' as const },
     ]
 
     const rows = [
@@ -207,18 +183,17 @@ const AIAgents = () => {
                 { content: 1 },
                 {
                     content: (
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col">
                             <Link to="/max" state={{ newWindow: true }}>
-                                Max - helpful chatbot <IconArrowUpRight className="inline-block size-4" />
+                                Max
                             </Link>
-                            <ProgressBar progress={75} />
+                            <span className="text-sm text-secondary">Helpful chatbot, data concierge</span>
                         </div>
                     ),
-                    className: 'font-bold',
                 },
                 {
                     content:
-                        'writing SQL, building data transformations, gathering context in insights, summarizing session recordings',
+                        'Writes SQL, builds data transformations, gathers context in insights',
                     className: 'text-sm',
                 },
             ],
@@ -228,14 +203,14 @@ const AIAgents = () => {
                 { content: 2 },
                 {
                     content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Raquel - exec</span> <ProgressBar progress={40} />
+                        <div className="flex flex-col">
+                            <span><strong>Raquel</strong> – <em>beta</em></span>
+                            <span className="text-sm text-secondary">Hands-on exec</span>
                         </div>
                     ),
-                    className: 'font-bold',
                 },
                 {
-                    content: 'researches complex data problems',
+                    content: 'Researches complex data problems, summarizes session recordings',
                     className: 'text-sm',
                 },
             ],
@@ -245,15 +220,15 @@ const AIAgents = () => {
                 { content: 3 },
                 {
                     content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Annika - product manager</span> <ProgressBar progress={25} />
+                        <div className="flex flex-col">
+                            <span><strong>Annika</strong> – <em>beta</em></span>
+                            <span className="text-sm text-secondary">Product manager</span>
                         </div>
                     ),
-                    className: 'font-bold',
                 },
                 {
                     content:
-                        'identifies errors and UX bugs, writes requirements docs, monitors code changes with phased rollouts',
+                        'Identifies errors and UX bugs, writes requirements docs, monitors code changes with phased rollouts',
                     className: 'text-sm',
                 },
             ],
@@ -263,14 +238,14 @@ const AIAgents = () => {
                 { content: 4 },
                 {
                     content: (
-                        <div className="flex flex-col gap-1">
-                            <span>Marius - engineer</span> <ProgressBar progress={10} />
+                        <div className="flex flex-col">
+                            <span><strong>Marius</strong> – <em>beta</em></span>
+                            <span className="text-sm text-secondary">10x engineer</span>
                         </div>
                     ),
-                    className: 'font-bold',
                 },
                 {
-                    content: 'implementing bug fixes, creating and configuring feature flags, creating pull requests',
+                    content: 'Implements bug fixes, creates and configures feature flags, writes code and generates pull requests',
                     className: 'text-sm',
                 },
             ],
@@ -388,7 +363,7 @@ const CompanyStageTabs = () => {
             )}
             {selectedStage === 'scale' && (
                 <div className="flex flex-col gap-2">
-                    <ProduCustomersctTabs
+                    <ProductTabs
                         productHandles={[
                             'data_warehouse',
                             'cdp',
@@ -406,55 +381,11 @@ const CompanyStageTabs = () => {
     )
 }
 
-const CustomerInfrastructureAccordion = () => {
+const Button = ({ url, children }: { url: string, children: React.ReactNode }) => {
     return (
-        <div>
-            <Accordion
-                // defaultValue="customer-infrastructure"
-                skin={false}
-                triggerClassName="pl-0 -ml-1 flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&_strong]:text-[15px]"
-                items={[
-                    {
-                        value: 'customer-infrastructure',
-                        trigger: <strong>learn more about customer infrastructure</strong>,
-                        content: (
-                            <div className="-my-4 -mx-2 text-[15px]">
-                                <p>
-                                    the problem with today’s customer data infrastructure is that there’s no single
-                                    source of truth.
-                                </p>
-                                <p>
-                                    most products only have a subset of customer data because each tool requires a
-                                    manual integration. so your CRM contains different info about a customer than your
-                                    support tool and your product analytics software has different data than you can
-                                    pull from revenue insights.
-                                </p>
-                                <p>
-                                    this mess of third party data integrations leads to siloed views of a customer.
-                                    sure, you can make educated decisions from a subset of data but it’s{' '}
-                                    <strong>an order of magnitude more powerful</strong> when you have the full picture.
-                                </p>
-                                <p>
-                                    PostHog can import data from third party sources into our data warehouse, but as you
-                                    start sending more data directly to PostHog OS,every PostHog product has access to
-                                    the same data.
-                                </p>
-                                <p>
-                                    and when you layer AI into the mix, you can produce more accurate, more valuable
-                                    insights than in any single other product – because PostHog has access to nuanced
-                                    data you never thought would be worth sending via an integration (or would be
-                                    cost-prohibitive to do so).
-                                </p>
-                                <p>
-                                    the fundamental difference with PostHog – this unified customer infrastructure –
-                                    means everyone is working from the same central source of data.
-                                </p>
-                            </div>
-                        ),
-                    },
-                ]}
-            />
-        </div>
+        <OSButton asLink to={url} variant="secondary" size="md" state={{ newWindow: true }}>
+            {children}
+        </OSButton>
     )
 }
 
@@ -631,17 +562,17 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <AIAgents />,
     },
     {
-        name: 'CustomerInfrastructureAccordion',
+        name: 'Button',
         kind: 'flow',
         props: [],
-        Editor: () => <CustomerInfrastructureAccordion />,
+        Editor: () => <Button />,
     },
-    // {
-    //     name: 'Pricing',
-    //     kind: 'flow',
-    //     props: [],
-    //     Editor: () => <Pricing />,
-    // },
+    {
+        name: 'Pricing',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Pricing />,
+    },
     {
         name: 'Customers',
         kind: 'flow',
@@ -655,7 +586,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => (
             <>
                 <p className="-mt-2">
-                    if nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                    If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
                 </p>
                 <CTA headline={false} />
             </>

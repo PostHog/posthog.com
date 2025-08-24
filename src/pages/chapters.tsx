@@ -18,7 +18,7 @@ export const HandbookToc: React.FC = () => {
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
         value: '/chapters',
         content: (
-            <section className="max-w-4xl mx-auto">
+            <section className="prose max-w-4xl mx-auto">
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                     <div className="-mt-16 md:-mt-12">
                         <CloudinaryImage
@@ -29,12 +29,12 @@ export const HandbookToc: React.FC = () => {
                         />
                     </div>
                     <div className="md:flex-1">
-                        <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
-                        <h3 className="text-xl">👋 Welcome!</h3>
-                        <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
+                        <h1>Company handbook</h1>
+                        <h2>👋 Welcome!</h2>
+                        <h3 className="text-secondary">
                             This handbook simply explains how we work. It is one of the most important things we've ever
                             made.
-                        </h5>
+                        </h3>
 
                         <OSButton asLink to="/handbook" variant="secondary" size="md" state={{ newWindow: true }}>
                             Visit the handbook

@@ -4,6 +4,7 @@ import useProduct from 'hooks/useProduct'
 import OSTable from 'components/OSTable'
 import { IconArrowUpRight } from '@posthog/icons'
 import { Link } from 'gatsby'
+import OSButton from 'components/OSButton'
 
 const productsToShow = ['product_analytics', 'feature_flags', 'session_replay', 'data_warehouse']
 
@@ -26,19 +27,19 @@ export default function Pricing() {
                 overflowX
                 columns={[
                     { name: '', width: '50px', align: 'center' as const },
-                    { name: 'product', width: 'minmax(200px,1fr)', align: 'left' as const },
-                    { name: 'free tier', width: 'minmax(200px,1fr)', align: 'left' as const },
-                    { name: 'pricing (decreases with volume)', width: 'minmax(200px,2fr)', align: 'left' as const },
+                    { name: 'Product', width: 'minmax(200px,1fr)', align: 'left' as const },
+                    { name: 'Free tier', width: 'minmax(200px,1fr)', align: 'left' as const },
+                    { name: 'Pricing (decreases with volume)', width: 'minmax(200px,2fr)', align: 'left' as const },
                 ]}
                 rows={products.map((product, index) => ({
                     cells: [
                         { content: index + 1 },
                         {
                             content: (
-                                <span className="flex items-center space-x-1">
+                                <Link to={`/${product.slug}`} state={{ newWindow: true }} className="flex items-center space-x-1">
                                     <product.Icon className={`inline-block size-4 text-${product.color}`} />
                                     <span>{product.name}</span>
-                                </span>
+                                </Link>
                             ),
                         },
                         { content: `${numberToWords(product.freeLimit)} ${product.unit}s/mo` },
@@ -57,9 +58,9 @@ export default function Pricing() {
                 }))}
             />
             <p>
-                <Link to="/pricing" state={{ newWindow: true }}>
-                    explore pricing <IconArrowUpRight className="inline-block size-4" />
-                </Link>
+                <OSButton asLink variant="secondary" size="md" to="/pricing" state={{ newWindow: true }}>
+                    Explore pricing
+                </OSButton>
             </p>
         </div>
     )
