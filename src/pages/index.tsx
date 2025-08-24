@@ -562,12 +562,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <AIAgents />,
     },
     {
-        name: 'Button',
-        kind: 'flow',
-        props: [],
-        Editor: ({ descriptor }) => <Button {...descriptor?.props} />
-    },
-    {
         name: 'Pricing',
         kind: 'flow',
         props: [],
@@ -600,6 +594,24 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             const { siteSettings } = useApp()
             return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
         },
+    },
+    {
+        name: 'ButtonCDI',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Button url="/customer-data-infrastructure">README: Data warehouse / CDP / ETL.md</Button>,
+    },
+    {
+        name: 'ButtonAI',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Button url="/ai">Read AI agents.md</Button>,
+    },
+    {
+        name: 'ButtonAbout',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Button url="/about">Read more about us</Button>,
     },
 ]
 
