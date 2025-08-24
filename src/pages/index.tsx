@@ -89,10 +89,10 @@ const HomeHappyHog = () => {
 const CTAs = () => {
     return (
         <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
-            <CallToAction to="/start" size="md" state={{ newWindow: true }}>
+            <CallToAction to="https://app.posthog.com/signup" size="md" state={{ newWindow: true, initialTab: 'signup' }}>
                 Get started - free
             </CallToAction>
-            <CallToAction to="#" type="secondary" size="md">
+            <CallToAction to="https://app.posthog.com/signup" type="secondary" size="md" state={{ newWindow: true, initialTab: 'ai' }}>
                 Install with AI
             </CallToAction>
         </div>
