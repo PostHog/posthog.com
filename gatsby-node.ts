@@ -16,15 +16,23 @@ export { onPreBootstrap } from './gatsby/onPreBootstrap'
 export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
     const { createPage, deletePage } = actions
     
-    // Add build time to credits page
+    // Add build time to credits page using environment variable
     if (page.path === '/credits/') {
-        const now = new Date()
-        const hours = now.getHours()
-        const minutes = now.getMinutes()
-        const ampm = hours >= 12 ? 'PM' : 'AM'
-        const displayHours = hours % 12 || 12
-        const displayMinutes = minutes.toString().padStart(2, '0')
-        const buildTime = `today at ${displayHours}:${displayMinutes} ${ampm}`
+        // Use Vercel's VERCEL_ENV variable or current time as fallback
+        const buildDate = process.env.VERCEL_GIT_COMMIT_SHA 
+            ? new Date() // This will be the actual build time when deployed
+            : new Date()
+        
+        const options: Intl.DateTimeFormatOptions = {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true,
+            timeZone: 'America/Los_Angeles'
+        }
+        const buildTime = buildDate.toLocaleString('en-US', options)
         
         deletePage(page)
         createPage({
@@ -32,6 +40,8 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
             context: {
                 ...page.context,
                 buildTime,
+                // Also pass the commit SHA if available for debugging
+                commitSha: process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'local',
             },
         })
     }
