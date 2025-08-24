@@ -18,7 +18,7 @@ export const HandbookToc: React.FC = () => {
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
         value: '/chapters',
         content: (
-            <section className="prose max-w-4xl mx-auto">
+            <section className="p-4 @xl:p-8 max-w-4xl mx-auto">
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                     <div className="-mt-16 md:-mt-12">
                         <CloudinaryImage
@@ -30,38 +30,34 @@ export const HandbookToc: React.FC = () => {
                     </div>
                     <div className="md:flex-1">
                         <h1>Company handbook</h1>
-                        <h2>👋 Welcome!</h2>
-                        <h3 className="text-secondary">
+                        <p className="text-secondary">
                             This handbook simply explains how we work. It is one of the most important things we've ever
                             made.
-                        </h3>
+                        </p>
 
                         <OSButton asLink to="/handbook" variant="secondary" size="md" state={{ newWindow: true }}>
-                            Visit the handbook
+                            Open the handbook
                         </OSButton>
                     </div>
                 </div>
 
                 {chapters.map((category) => {
                     return (
-                        <div key={category.name} className="mb-16">
-                            <h4 className="text-base font-normal opacity-60">{category.name}</h4>
-                            <ol className="p-0 -ml-3 -mr-2 space-y-0.5">
+                        <div key={category.name}>
+                            <h4 className="text-base font-normal text-secondary">{category.name}</h4>
+                            <ol className="p-0 space-y-1 divide-y divide-primary">
                                 {category.links.map((link) => {
                                     return (
-                                        <li key={link.to} className="list-none">
-                                            <Link
-                                                to={link.to}
-                                                state={{ newWindow: true }}
-                                                className="flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
-                                            >
-                                                <span className="relative inline-block pl-3 pr-2 bg-light dark:bg-dark">
+                                        <li key={link.to} className="list-none px-0 pt-1 first:pt-0">
+                                            <OSButton asLink to={link.to} state={{ newWindow: true }} size="md" width="full" hover="background">
+                                                <span className="flex-1">
                                                     {link.name}
                                                 </span>
-                                                <span className="relative pr-2 bg-light dark:bg-dark w-10 text-center text-sm">
+                                                <span>
                                                     {link.order}
                                                 </span>
-                                            </Link>
+                                            </OSButton>
+
                                         </li>
                                     )
                                 })}

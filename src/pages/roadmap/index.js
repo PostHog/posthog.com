@@ -13,7 +13,8 @@ const RoadmapPage = () => {
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
         value: '/roadmap',
         content: (
-            <div className="max-w-3xl mx-auto mt-6">
+            <div className="p-4 @xl:p-8">
+                <h1>Roadmap</h1>
                 <Roadmap filteredRoadmaps={filteredRoadmaps} groupByValue={groupByValue} />
             </div>
         ),

@@ -155,6 +155,8 @@ function TreeMenuItem({
                     to={item.url || item.children?.[0]?.url}
                     asLink
                     onClick={() => onClick(item)}
+                    size="md"
+                    hover="background"
                 >
                     {hasChildren && (
                         <motion.div animate={{ rotate: open ? 90 : 0 }}>

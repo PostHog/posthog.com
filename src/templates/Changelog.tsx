@@ -43,9 +43,8 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent rounded-sm text-left border hover:border flex justify-between items-center font-semibold text-sm text-secondary hover:text-primary dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
-                                open ? 'scale-[1.02] bg-accent border-primary text-primary' : 'border-transparent'
-                            }`}
+                            className={`group py-1 px-2 hover:bg-accent rounded-sm text-left border hover:border flex justify-between items-center font-semibold text-sm text-secondary hover:text-primary dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open ? 'scale-[1.02] bg-accent border-primary text-primary' : 'border-transparent'
+                                }`}
                         >
                             {({ value }) => (
                                 <>
@@ -60,11 +59,10 @@ const Select = ({ onChange, values, ...other }) => {
                                     {({ selected }) => {
                                         return (
                                             <li
-                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
-                                                    (other.value ? value.label === other.value : selected)
-                                                        ? 'font-bold'
-                                                        : ''
-                                                }`}
+                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${(other.value ? value.label === other.value : selected)
+                                                    ? 'font-bold'
+                                                    : ''
+                                                    }`}
                                             >
                                                 {value.label}
                                             </li>
@@ -497,14 +495,17 @@ export default function Changelog({ pageContext }) {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/changelog/2025',
         content: (
-            <div className="w-full max-w-screen-2xl mx-auto mt-6">
-                <div className="absolute right-0 -top-10">
-                    <button
-                        onClick={() => setExpandAll(!expandAll)}
-                        className="text-sm font-semibold text-red dark:text-yellow hover:text-red/80 dark:hover:text-yellow/80 mb-4"
-                    >
-                        {expandAll ? 'Collapse all' : 'Expand all'}
-                    </button>
+            <div className="p-4 @xl:p-8">
+                <div className="flex justify-between items-baseline pb-4">
+                    <h1>Changelog</h1>
+                    <div>
+                        <button
+                            onClick={() => setExpandAll(!expandAll)}
+                            className="text-sm font-semibold text-red dark:text-yellow hover:text-red/80 dark:hover:text-yellow/80 mb-4"
+                        >
+                            {expandAll ? 'Collapse all' : 'Expand all'}
+                        </button>
+                    </div>
                 </div>
                 <ScrollArea>
                     {isValidating && roadmaps.length === 0 ? (
@@ -577,39 +578,39 @@ export default function Changelog({ pageContext }) {
                     },
                     ...(topics.length > 0
                         ? [
-                              {
-                                  label: 'topic',
-                                  operator: 'eq',
-                                  options: [
-                                      {
-                                          label: 'All',
-                                          value: null,
-                                      },
-                                      ...topics.map((topic) => ({
-                                          label: topic.attributes.label,
-                                          value: topic.id,
-                                      })),
-                                  ],
-                              },
-                          ]
+                            {
+                                label: 'topic',
+                                operator: 'eq',
+                                options: [
+                                    {
+                                        label: 'All',
+                                        value: null,
+                                    },
+                                    ...topics.map((topic) => ({
+                                        label: topic.attributes.label,
+                                        value: topic.id,
+                                    })),
+                                ],
+                            },
+                        ]
                         : []),
                     ...(teams.length > 0
                         ? [
-                              {
-                                  label: 'team',
-                                  operator: 'includes',
-                                  options: [
-                                      {
-                                          label: 'All',
-                                          value: null,
-                                      },
-                                      ...teams.map((team) => ({
-                                          label: team.attributes.name,
-                                          value: team.id,
-                                      })),
-                                  ],
-                              },
-                          ]
+                            {
+                                label: 'team',
+                                operator: 'includes',
+                                options: [
+                                    {
+                                        label: 'All',
+                                        value: null,
+                                    },
+                                    ...teams.map((team) => ({
+                                        label: team.attributes.name,
+                                        value: team.id,
+                                    })),
+                                ],
+                            },
+                        ]
                         : []),
                 ]}
                 bookmark={{

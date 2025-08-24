@@ -13,29 +13,29 @@ export const Handbook: React.FC = () => {
             <SEO image="/images/handbook.png" title="Handbook - PostHog" />
             <ReaderView
                 title="Company Handbook"
-                hideTitle={false}
+                hideTitle={true}
                 leftSidebar={<TreeMenu items={handbookSidebar} />}
                 homeURL="/handbook"
                 description="Learn how PostHog works"
                 proseSize="base"
             >
                 <section className="max-w-4xl">
-                    <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2 mb-8">
-                        <div className="-mt-16 md:-mt-12">
+                    <div className="flex flex-col @md:items-center @md:justify-end @md:flex-row-reverse gap-8 @md:gap-2 mb-8">
+                        <div>
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                                 alt="This hog has an answer"
                                 width={400}
                                 placeholder="blurred"
+                                className="max-w-[300px] @xl:max-w-[300px]"
                             />
                         </div>
                         <div className="md:flex-1">
-                            <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
-                            <h3 className="text-xl">👋 Welcome!</h3>
-                            <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
+                            <h1>Company handbook</h1>
+                            <p className="text-secondary">
                                 This handbook simply explains how we work. It is one of the most important things we've ever
                                 made.
-                            </h5>
+                            </p>
                         </div>
                     </div>
 
