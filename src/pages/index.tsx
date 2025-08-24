@@ -565,7 +565,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'Button',
         kind: 'flow',
         props: [],
-        Editor: () => <Button />,
+        Editor: ({ descriptor }) => <Button {...descriptor?.props} />
     },
     {
         name: 'Pricing',
