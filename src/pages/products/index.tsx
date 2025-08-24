@@ -20,6 +20,11 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { IconGrid, IconListSquare } from 'components/OSIcons/Icons'
 import usePostHog from 'hooks/usePostHog'
 import { useWindow } from '../../context/Window'
+import {
+    categoryOrder,
+    categoryDisplayNames,
+    getProductsForCategory
+} from '../../constants/productNavigation'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -63,7 +68,7 @@ const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
 
     return submitted ? (
         <p className="text-sm m-0 mb-2 border border-input rounded-md p-2 bg-accent">
-            Thanks! We'll email you when <strong>{selectedProduct.name}</strong> is ready
+            Thanks! We'll email you when <strong>{selectedProduct.name}</strong> is ready.
         </p>
     ) : (
         <div className="pb-2">
@@ -399,66 +404,6 @@ export default function Products(): JSX.Element {
             >
                 {(() => {
                     // Filter out products without a category, then group by category
-                    const categoryOrder = [
-                        'ai',
-                        'data',
-                        'analytics',
-                        'dataviz',
-                        'product',
-                        'engineering',
-                        'product_engineering',
-                        'communication',
-                        'product_os',
-                    ]
-
-                    // Category display names
-                    const categoryDisplayNames: Record<string, string> = {
-                        ai: 'PostHog AI',
-                        data: 'Customer data infrastructure',
-                        analytics: 'Analytics dashboards',
-                        dataviz: 'Data visualization',
-                        product: 'Product',
-                        engineering: 'Engineering',
-                        product_engineering: 'Product engineering',
-                        communication: 'Communication',
-                        product_os: 'Utilities & add-ons',
-                    }
-
-                    // Custom product order by category - if not specified, products will be sorted alphabetically
-                    const productOrder: Record<string, string[]> = {
-                        ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
-                        data: [
-                            'customer-data-infrastructure',
-                            'cdp',
-                            'data_in',
-                            'transformations',
-                            'data_warehouse',
-                            'data_out',
-                            // 'data-warehouse',
-                            // 'sql',
-                            // 'capture_api',
-                            // 'webhooks',
-                        ],
-                        analytics: [
-                            'web_analytics',
-                            'product_analytics',
-                            'revenue_analytics',
-                            'llm_analytics',
-                            'custom_dashboards',
-                            'group_analytics',
-                        ],
-                        // product: ['session-replay', 'experiments', 'early_access'],
-                        // engineering: ['feature-flags', 'error-tracking'],
-                        product_engineering: [
-                            'session-replay',
-                            'experiments',
-                            'feature-flags',
-                            'error-tracking',
-                            'early_access',
-                        ],
-                        communication: ['surveys', 'broadcasts', 'user-interviews'],
-                        product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'teams', 'profiles'],
-                    }
                     const productsWithCategory = allProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
                         const category = product.category
@@ -469,28 +414,9 @@ export default function Products(): JSX.Element {
                         return acc
                     }, {} as Record<string, any[]>)
 
-                    // Sort products by custom order if specified, otherwise alphabetically
+                    // Sort products using the shared helper function
                     Object.keys(groupedProducts).forEach((category) => {
-                        const customOrder = productOrder[category]
-                        if (customOrder && customOrder.length > 0) {
-                            groupedProducts[category].sort((a: any, b: any) => {
-                                const aIndex = customOrder.indexOf(a.handle)
-                                const bIndex = customOrder.indexOf(b.handle)
-
-                                // If both products are in custom order, sort by that order
-                                if (aIndex !== -1 && bIndex !== -1) {
-                                    return aIndex - bIndex
-                                }
-                                // If only one is in custom order, prioritize it
-                                if (aIndex !== -1) return -1
-                                if (bIndex !== -1) return 1
-                                // If neither is in custom order, sort alphabetically
-                                return a.name.localeCompare(b.name)
-                            })
-                        } else {
-                            // Fall back to alphabetical sorting
-                            groupedProducts[category].sort((a: any, b: any) => a.name.localeCompare(b.name))
-                        }
+                        groupedProducts[category] = getProductsForCategory(category, productsWithCategory)
                     })
 
                     return (
@@ -519,8 +445,8 @@ export default function Products(): JSX.Element {
                                                 content: (
                                                     <div
                                                         className={`@md:pl-4 grid ${isListLayout
-                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                                : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 items-start'
+                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                            : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 items-start'
                                                             } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (

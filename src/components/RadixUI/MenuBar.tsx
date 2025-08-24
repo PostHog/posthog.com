@@ -29,7 +29,7 @@ const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses =
     'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
 const ItemClasses =
-    'hover-invert group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
+    'hover-invert group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-block [&>span]:w-full'
 const SubTriggerClasses =
     'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
 const ContentClasses =
@@ -152,7 +152,7 @@ const MenuItem: React.FC<{
                     to={item.link}
                     state={{ newWindow: true }}
                     externalNoIcon={item.external}
-                    className="w-full h-full px-2.5 flex items-center gap-2 no-underline text-primary"
+                    className="w-full min-h-[25px] h-full px-2.5 flex items-center gap-2 no-underline text-primary"
                 >
                     {item.icon ? (
                         item.icon
@@ -211,9 +211,8 @@ const MenuBar: React.FC<MenuBarProps> = ({
                     <RadixMenubar.Menu key={menuId} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
-                            className={`${triggerAsChild ? '' : TriggerClasses} ${
-                                menu.bold ? 'font-bold' : 'font-medium'
-                            } ${customTriggerClasses}`}
+                            className={`${triggerAsChild ? '' : TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'
+                                } ${customTriggerClasses}`}
                             id={triggerId}
                         >
                             {menu.trigger}

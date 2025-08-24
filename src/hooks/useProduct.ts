@@ -23,6 +23,7 @@ import {
     IconFunnels,
     IconBolt,
     IconArrowUpRight,
+    IconMegaphone,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { IconBrain } from 'components/OSIcons'
@@ -54,7 +55,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
 
         {
             name: 'Broadcasts',
-            Icon: IconMessage,
+            Icon: IconMegaphone,
             description: 'send messages to users.',
             handle: 'broadcasts',
             color: 'blue',

@@ -1,25 +1,19 @@
 import { MenuType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { IconApps, IconLogomark } from '@posthog/icons'
-import { productMenu, docsMenu, handbookSidebar } from '../../navs'
+import { docsMenu, handbookSidebar } from '../../navs'
 import * as Icons from '@posthog/icons'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import slugify from 'slugify'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
-import { useApp } from '../../context/App'
-
-interface ProductMenuItem {
-    name: string
-    url: string
-    icon: string
-    color: string
-}
-
-interface ProductMenu {
-    children: ProductMenuItem[]
-}
+import { APP_COUNT } from '../../constants'
+import {
+    categoryOrder,
+    categoryDisplayNames,
+    buildCategoryMenuItems,
+    buildProductMenuItems,
+    popularProducts,
+    newestProducts
+} from '../../constants/productNavigation'
+import useProduct from '../../hooks/useProduct'
 
 interface DocsMenuItem {
     name: string
@@ -31,36 +25,6 @@ interface DocsMenuItem {
 
 interface DocsMenu {
     children: DocsMenuItem[]
-}
-
-const getProductMenuItems = () => {
-    const products = (productMenu as ProductMenu).children
-        .filter((product) => {
-            const key = product.url.replace('/', '')
-            // Only filter out the "All products" entry
-            return key !== 'products'
-        })
-        .map((product) => {
-            const IconComponent = Icons[product.icon as keyof typeof Icons]
-            return {
-                type: 'item' as const,
-                label: product.name,
-                link: product.url,
-                icon: <IconComponent className={`text-${product.color} size-4`} />,
-            }
-        })
-
-    // Add separator and "All Products" at the bottom
-    return [
-        {
-            type: 'item' as const,
-            label: 'All Products',
-            link: '/products',
-            icon: <IconApps className="text-red size-4" />,
-        },
-        { type: 'separator' as const },
-        ...products,
-    ]
 }
 
 // Recursively group items under section dividers at any level
@@ -223,8 +187,58 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         })
 }
 
+// Build Product OS menu items with categories
+const buildProductOSMenuItems = (allProducts: any[]) => {
+    const items: any[] = [
+        {
+            type: 'item',
+            label: `App library (${APP_COUNT - 1})`,
+            link: '/products',
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'submenu',
+            label: 'Popular products',
+            items: buildProductMenuItems(popularProducts, allProducts),
+        },
+        {
+            type: 'submenu',
+            label: 'Newest products',
+            items: buildProductMenuItems(newestProducts, allProducts),
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'Categories',
+            disabled: true,
+        },
+    ]
+
+    // Add category submenus
+    categoryOrder.forEach((category) => {
+        const categoryProducts = allProducts.filter((product: any) => product.category === category)
+        if (categoryProducts.length === 0) return
+
+        const categoryItems = buildCategoryMenuItems(category, allProducts)
+        if (categoryItems.length > 0) {
+            items.push({
+                type: 'submenu',
+                label: categoryDisplayNames[category] || category,
+                items: categoryItems,
+            })
+        }
+    })
+
+    return items
+}
+
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
+    const allProducts = useProduct() as any[]
 
     return [
         {
@@ -265,8 +279,9 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Product OS',
-            items: getProductMenuItems(),
+            items: buildProductOSMenuItems(allProducts),
         },
+
         {
             trigger: 'Pricing',
             items: [
