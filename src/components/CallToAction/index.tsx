@@ -35,7 +35,7 @@ const sizes = {
     text-[14px]
     font-bold
     px-4
-    py-1.5
+    py-1
     translate-y-[-2px]
     hover:translate-y-[-4px]
     active:translate-y-[-1px]

@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight, IconInfo } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -174,7 +174,7 @@ const HomeHitCounter = () => {
 const AIAgents = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
-        { name: 'Agent', width: 'minmax(150px,250px)', align: 'left' as const },
+        { name: 'Agent', width: 'minmax(150px,300px)', align: 'left' as const },
         { name: 'Skills', width: 'minmax(auto,1fr)', align: 'left' as const },
     ]
 
@@ -184,11 +184,23 @@ const AIAgents = () => {
                 { content: 1 },
                 {
                     content: (
-                        <div className="flex flex-col">
-                            <Link to="/max" state={{ newWindow: true }}>
-                                Max
-                            </Link>
-                            <span className="text-sm text-secondary">Helpful chatbot, data concierge</span>
+                        <div className="flex gap-2 items-center">
+                            <span>
+                                <Tooltip trigger={
+                                    <Link to="/max" state={{ newWindow: true }}><img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_max_e80de99727.png" className="w-16 -m-2" /></Link>
+                                } delay={0}>
+                                    <div className="relative">
+                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_max_e80de99727.png" className="" />
+                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">Hi, I'm Max</div>
+                                    </div>
+                                </Tooltip>
+                            </span>
+                            <div className="flex flex-col">
+                                <Link to="/max" state={{ newWindow: true }}>
+                                    Max
+                                </Link>
+                                <span className="text-sm text-secondary">Helpful chatbot, data concierge</span>
+                            </div>
                         </div>
                     ),
                 },
@@ -204,9 +216,21 @@ const AIAgents = () => {
                 { content: 2 },
                 {
                     content: (
-                        <div className="flex flex-col">
-                            <span><strong>Raquel</strong> – <em>beta</em></span>
-                            <span className="text-sm text-secondary">Hands-on exec</span>
+                        <div className="flex gap-2 items-center">
+                            <span>
+                                <Tooltip trigger={
+                                    <Link to="/max" state={{ newWindow: true }}><img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="w-16 -m-2" /></Link>
+                                } delay={0}>
+                                    <div className="relative">
+                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="" />
+                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">Hi, I'm Raquel</div>
+                                    </div>
+                                </Tooltip>
+                            </span>
+                            <div className="flex flex-col">
+                                <span><strong>Raquel</strong> – <em>beta</em></span>
+                                <span className="text-sm text-secondary">Hands-on exec</span>
+                            </div>
                         </div>
                     ),
                 },
@@ -221,9 +245,21 @@ const AIAgents = () => {
                 { content: 3 },
                 {
                     content: (
-                        <div className="flex flex-col">
-                            <span><strong>Annika</strong> – <em>beta</em></span>
-                            <span className="text-sm text-secondary">Product manager</span>
+                        <div className="flex gap-2 items-center">
+                            <span>
+                                <Tooltip trigger={
+                                    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png" className="w-16 -m-2" />
+                                } delay={0}>
+                                    <div className="relative">
+                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png" className="" />
+                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">Hi, I'm Annika</div>
+                                    </div>
+                                </Tooltip>
+                            </span>
+                            <div className="flex flex-col">
+                                <span><strong>Annika</strong> – <em>beta</em></span>
+                                <span className="text-sm text-secondary">Product manager</span>
+                            </div>
                         </div>
                     ),
                 },
@@ -239,9 +275,22 @@ const AIAgents = () => {
                 { content: 4 },
                 {
                     content: (
-                        <div className="flex flex-col">
-                            <span><strong>Marius</strong> – <em>beta</em></span>
-                            <span className="text-sm text-secondary">10x engineer</span>
+
+                        <div className="flex gap-2 items-center">
+                            <span>
+                                <Tooltip trigger={
+                                    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png" className="w-16 -m-2" />
+                                } delay={0}>
+                                    <div className="relative">
+                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png" className="" />
+                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">Hi, I'm Marius</div>
+                                    </div>
+                                </Tooltip>
+                            </span>
+                            <div className="flex flex-col">
+                                <span><strong>Marius</strong> – <em>beta</em></span>
+                                <span className="text-sm text-secondary">10x engineer</span>
+                            </div>
                         </div>
                     ),
                 },
@@ -629,6 +678,24 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png" className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4" />,
+    },
+    {
+        name: 'ImageReading1',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png" className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2" />,
+    },
+    {
+        name: 'ImageReading2',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png" className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary" />,
+    },
+    {
+        name: 'TooltipDW',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Tooltip trigger={<span><IconInfo className="size-4 inline-block relative -top-px" /></span>} delay={0}><p className="text-sm mb-0">You can also connect your own!</p></Tooltip>,
     },
 ]
 
