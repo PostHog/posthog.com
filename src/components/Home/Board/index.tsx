@@ -406,8 +406,7 @@ const products: Product[] = [
                 </>
             )
         },
-        status: 'WIP',
-        badge: 'BETA',
+        status: 'Production',
         pricing: {
             cta: {
                 url: 'https://app.posthog.com/settings/user-feature-previews#llm-analytics',
