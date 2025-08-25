@@ -575,7 +575,10 @@ function PipelinesPage({ location }) {
             (node) => selectedCategory === 'All' || node.category.includes(selectedCategory)
         )
     }, [selectedType, selectedCategory, pipelines])
-    const fuse = useMemo(() => new Fuse(nodesByCategory, { keys: ['name', 'description'] }), [nodesByCategory])
+    const fuse = useMemo(
+        () => new Fuse(nodesByCategory, { keys: ['name', 'description'], threshold: 0.3 }),
+        [nodesByCategory]
+    )
     const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
     const [selectedDestination, setSelectedDestination] = React.useState(null)
     const [modalOpen, setModalOpen] = React.useState(false)

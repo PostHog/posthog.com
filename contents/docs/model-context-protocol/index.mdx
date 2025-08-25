@@ -9,19 +9,20 @@ import WindsurfSnippet from "./_snippets/windsurf.mdx"
 import VSCodeSnippet from "./_snippets/vscode.mdx"
 import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
 import ZedSnippet from "./_snippets/zed.mdx"
+import MCPTools from '../../../src/components/Docs/MCPTools'
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
 
 
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor** and **Claude Desktop**. 
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **VS Code** and **Zed**.
 
 ```bash
 npx @posthog/wizard mcp add
 ```
 
-We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below. 
+We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below.
 ## Manual install
 
 Start by getting a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
@@ -84,68 +85,7 @@ We recommend the following best practices to mitigate security risks when using 
 
 Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
 
-### Organization & project management
-
-| Tool | Purpose |
-| -- | -- |
-| `organizations-get` | Get the organizations the user has access to. |
-| `switch-organization` | Change the active organization from the default organization. |
-| `organization-details-get` | Get the details of the active organization. |
-| `projects-get` | Fetches projects that the user has access to in the current organization. |
-| `switch-project` | Change the active project from the default project. |
-| `property-definitions` | Get event and property definitions for the project. |
-
-### Feature flags
-
-| Tool | Purpose |
-| -- | -- |
-| `feature-flag-get-all` | Get all feature flags in the project. |
-| `feature-flag-get-definition` | Get the definition of a feature flag. |
-| `create-feature-flag` | Creates a new feature flag in the project. |
-| `update-feature-flag` | Update a feature flag in the project. |
-| `delete-feature-flag` | Delete a feature flag in the project. |
-
-### Insights & analytics
-
-| Tool | Purpose |
-| -- | -- |
-| `insights-get-all` | Get all insights in the project with optional filtering. |
-| `insight-get` | Get a specific insight by ID. |
-| `insight-create-from-query` | Save a query as an insight. |
-| `insight-update` | Update an existing insight by ID. |
-| `insight-delete` | Delete an insight by ID. |
-| `insight-query` | Execute a query on an existing insight to get its results/data. |
-| `get-sql-insight` | Queries project's PostHog data based on a provided natural language question. |
-
-### Dashboards
-
-| Tool | Purpose |
-| -- | -- |
-| `dashboards-get-all` | Get all dashboards in the project with optional filtering. |
-| `dashboard-get` | Get a specific dashboard by ID. |
-| `dashboard-create` | Create a new dashboard in the project. |
-| `dashboard-update` | Update an existing dashboard by ID. |
-| `dashboard-delete` | Delete a dashboard by ID. |
-| `add-insight-to-dashboard` | Add an existing insight to a dashboard. |
-
-### Error tracking
-
-| Tool | Purpose |
-| -- | -- |
-| `list-errors` | List errors in the project. |
-| `error-details` | Get the details of an error in the project. |
-
-### Documentation
-
-| Tool | Purpose |
-| -- | -- |
-| `docs-search` | Search the PostHog documentation for information. |
-
-### LLM analytics
-
-| Tool | Purpose |
-| -- | -- |
-| `get-llm-total-costs-for-project` | Fetches the total LLM daily costs for each model for a project over a given number of days. |
+<MCPTools />
 
 
 ## Next Steps

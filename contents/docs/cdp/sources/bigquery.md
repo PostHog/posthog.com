@@ -26,7 +26,7 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 - Click **Create Service Account.**
 - Provide a descriptive name (e.g., `bigquery-posthog-service-account`) and a brief description.
 2. **Assign required permissions:**
-- For simplicity, you can assign the **BigQuery Data Editor** and **BigQuery Job User** roles if it meets your security requirements.
+- For simplicity, you can assign the **BigQuery Data Editor**, **BigQuery Job User**, and **BigQuery Read Session User** roles if it meets your security requirements.
 - Alternatively, create a custom role that includes only these permissions:
     ```
     bigquery.readsessions.create

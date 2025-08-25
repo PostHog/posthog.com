@@ -53,8 +53,8 @@ The main tools for this team are:
 
 - Vitally
   - `Onboarding Lead` and `Onboarding Engaged` segments
-  - Segments `Paid one nonzero bill`, `Paid two nonzero bills`, and `Paid three nonzero bills` are set as respective bills are paid by [this](https://posthog.vitally-eu.io/settings/playbooks/f6f3c9e0-2dc5-4560-8653-63d143816293) playbook, so we can track this data elsewhere (eg in PostHog via DWH sync, though this hasn't run as a backfill/won't be up to date as of Q1 2025)
-  - Onboarding Specialist role is set by region [here](https://posthog.vitally-eu.io/settings/playbooks/50120bc6-98ae-4fc2-af38-7374ba424474)
+  - Segments `Paid one nonzero bill`, `Paid two nonzero bills`, and `Paid three nonzero bills` are set as respective bills are paid by <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/f6f3c9e0-2dc5-4560-8653-63d143816293">this</PrivateLink> playbook, so we can track this data elsewhere (eg in PostHog via DWH sync, though this hasn't run as a backfill/won't be up to date as of Q1 2025)
+  - Onboarding Specialist role is set by region <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/50120bc6-98ae-4fc2-af38-7374ba424474">here</PrivateLink>
 - Metabase [Customer Usage Dash (US/EU)](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=&lookback_days=30)
 - Billing Admin and Stripe (make sure you have “Support Associate” permission level)
 - Calendly and BuildBetter (read more in [How we work](https://posthog.com/handbook/growth/sales/how-we-work#tools-we-use))
@@ -78,7 +78,7 @@ To monitor and stay on top of where accounts are in their ~3-month-long Onboardi
 - `No Engagement` – We haven’t heard back despite our efforts, but they’re still actively using PostHog.
 - `Churned` – Sadly, despite our efforts, we lost the customer.
 
-**2. Daily view** ([link](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b))
+**2. Daily view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b">link</PrivateLink>)
 
 Sort your view by the “Next Renewal Date” column to reach out to users in a timely manner. Also, keep an eye on “Onboarding Status.”
 
@@ -88,7 +88,7 @@ Maintaining good hygiene and attention to detail is key here. Keep labels up to 
 
 Remember to add a short summary from meetings in a Note, and if you need to follow up at some point, create a Task with a due date.
 
-**3. Kanban view** ([link](https://posthog.vitally-eu.io/hubs/fcbd959f-4b0e-4786-9c37-8a1d9fc4f634/5dca462e-a6d2-4710-a8f8-a2f4b492569c ))
+**3. Kanban view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/fcbd959f-4b0e-4786-9c37-8a1d9fc4f634/5dca462e-a6d2-4710-a8f8-a2f4b492569c">link</PrivateLink>)
 
 A supplementary view that’s great for getting a general overview of progress.
 

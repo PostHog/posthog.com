@@ -10,7 +10,7 @@ availability:
 
 > **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), and [PHP](/docs/libraries/php) SDKs.
 
-> **Note:** Do not use local evaluation in an edge / lambda environment, as this can slow down performance, and also raise your bill drastically. It's best to use regular flag evaluation instead.
+> **Note:** Do not use local evaluation in edge/lambda environments and stateless PHP applications, as per-request initialization causes performance issues and unnecessarily inflated costs. Use regular flag evaluation instead.
 
 Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
 
