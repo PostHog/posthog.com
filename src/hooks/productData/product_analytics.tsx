@@ -310,55 +310,6 @@ export const productAnalytics = {
                 },
             ],
         },
-        {
-            title: 'Powerful tools & features',
-            headline: 'Everything you need for comprehensive analytics',
-            description:
-                'From automatic data capture to custom SQL queries, get all the tools for modern product analytics.',
-            features: [
-                {
-                    title: 'Dashboards',
-                    description: 'Create custom dashboards to monitor key metrics and share insights',
-                },
-                {
-                    title: 'HogQL',
-                    description: 'Write SQL queries to analyze data in ways beyond standard insights',
-                },
-                {
-                    title: 'Autocapture',
-                    description:
-                        'Automatically capture clicks, pageviews, and form submissions without manual tracking',
-                },
-                {
-                    title: 'LLM insights',
-                    description: 'Track costs, latency, and usage patterns for AI/LLM applications',
-                },
-                {
-                    title: 'Privacy controls',
-                    description: 'Limit data capture with sensitive info blocking and EU cloud options',
-                },
-                {
-                    title: 'Sharing & embedding',
-                    description: 'Share insights publicly or embed dashboards in your app',
-                },
-                {
-                    title: 'Subscriptions',
-                    description: 'Send regular reports via email or Slack on custom schedules',
-                },
-                {
-                    title: 'Alerts',
-                    description: 'Get notified when metrics exceed thresholds or change significantly',
-                },
-                {
-                    title: 'Sampling',
-                    description: 'Speed up complex queries on large datasets while maintaining accuracy',
-                },
-                {
-                    title: 'Group analytics',
-                    description: 'Analyze data at company or team level for B2B products',
-                },
-            ],
-        },
     ],
     questions: [
         {
