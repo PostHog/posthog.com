@@ -24,8 +24,8 @@ Next, we need to create a new user in our AWS console with programmatic access t
 4. Under **Actions**, select:
   1. **List** -> **ListBucket** and **ListBucketMultipartUploads**
   2. **Read** -> **GetBucketLocation** and **GetObject**
-  2. **Write** -> **AbortMultipartUpload** and **PutObject**
-  3. **Permission Management** -> **PutObjectAcl**
+  3. **Write** -> **AbortMultipartUpload** and **PutObject**
+  4. **Permission Management** -> **PutObjectAcl**
 5. Under **Resources**, select **Specific**. Under object, click **Add ARNs**
 6. Specify your bucket name and choose **Any object name**. In the example below, replace `posthog-s3-export` with the bucket name you chose in the previous section
 
@@ -87,7 +87,7 @@ The final step is to create a new user and give them access to our bucket by att
 6. Fill in the "S3 Bucket Name", "S3 Bucket Region" with the name and region you created earlier.
 7. For "S3 Bucket Path", use `airbyte`.
 8. For the "Output Format", pick Parquet. You can use the default settings
-9. Under "Optional fields", you'll want to add the access key and secret from step 1.
+9. Under "Optional fields", you'll want to add the access key and secret from step 2.
 10. In the next step, pick the streams you want to fill. Given you'll manually need to create a table for each stream, we suggest being selective.
 11. Wait for the sync to finish
 
@@ -98,7 +98,7 @@ The final step is to create a new user and give them access to our bucket by att
 1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
 2. Click **New source** and under self managed, look for **S3** and click **Link**
 3. Fill in the table name.
-4. For the URL pattern, copy the URL from S3, up to the bucket name. Replace the file name with `*`, as Airbyte will split larges streams out into multiple files.
+4. For the URL pattern, copy the URL from S3, up to the bucket name. Replace the file name with `*`, as Airbyte will split large streams out into multiple files.
     - For example: `https://your-bucket.s3.amazonaws.com/airbyte/invoices/*`
 5. For file format, select Parquet. Fill in the access key and secret key.
 

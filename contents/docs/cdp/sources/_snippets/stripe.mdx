@@ -17,8 +17,8 @@ You need to give your API key the following **Read** permissions:
 1. In PostHog, go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) select the **Sources** tab.
 2. Click **+ New source** button and select Stripe by clicking the **Link** button.
 3. In Stripe, get your Account ID by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
-4. Get a your API key from the [previous section](#creating-a-stripe-api-key)
-4. *Optional:* Add a prefix to your table names
+4. Get your API key from the [previous section](#creating-a-stripe-api-key)
+5. *Optional:* Add a prefix to your table names
 6. Click **Next**
 
 > For Stripe tables, incremental syncs will only sync new records and not update existing records. This is a limitation of the Stripe API in which it's not possible to query for updated data. 
