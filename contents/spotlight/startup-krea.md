@@ -54,7 +54,7 @@ How much is each LLM call costing you? Is the user getting the result they want 
 
 Or, the one piece of information Diego is curious about: “What happened in the LLM that influenced a customer? If products once spread via word of mouth — we will start seeing them spread through word of... next token prediction?"
 
-It's quite possible that a founder might not know to ask these questions, let alone where to look to answer them, and it's why staying alert matters. Towards this, PostHog has just launched a new beta product in this category, introducing [LLM analytics](/docs/llm-analytics) to help you follow more closely what's happening with your LLM calls. 
+It's quite possible that a founder might not know to ask these questions, let alone where to look to answer them, and it's why staying alert matters. Towards this, PostHog has just launched a new product in this category, introducing [LLM analytics](/docs/llm-analytics) to help you follow more closely what's happening with your LLM calls. 
 
 It's an exciting area that has us paying attention alongside Diego and other AI-focused founders. 
 
