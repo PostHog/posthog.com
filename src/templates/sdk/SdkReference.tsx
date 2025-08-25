@@ -257,12 +257,14 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
 
                                         <span className="text-primary/30 dark:text-primary-dark/30">|</span>
                                         <Link
-                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow hidden xs:inline"
                                             to={fullReference.info.specUrl}
                                         >
-                                            Edit this page
+                                            Edit page
                                         </Link>
-                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                        <span className="text-primary/30 dark:text-primary-dark/30 hidden xs:inline">
+                                            |
+                                        </span>
                                         <CopyMarkdownActionsDropdown
                                             markdownContent={JSON.stringify(fullReference, null, 2)}
                                             pageUrl={location.href || ''}
