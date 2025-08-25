@@ -219,7 +219,7 @@ const AIAgents = () => {
                         <div className="flex gap-2 items-center">
                             <span>
                                 <Tooltip trigger={
-                                    <Link to="/max" state={{ newWindow: true }}><img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="w-16 -m-2" /></Link>
+                                    <Link to="/raquel" state={{ newWindow: true }}><img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="w-16 -m-2" /></Link>
                                 } delay={0}>
                                     <div className="relative">
                                         <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="" />
@@ -228,7 +228,7 @@ const AIAgents = () => {
                                 </Tooltip>
                             </span>
                             <div className="flex flex-col">
-                                <span><strong>Raquel</strong> – <em>beta</em></span>
+                                <span><Link to="/raquel" state={{ newWindow: true }}>Raquel</Link> – <em>beta</em></span>
                                 <span className="text-sm text-secondary">Hands-on exec</span>
                             </div>
                         </div>

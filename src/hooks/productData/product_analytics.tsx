@@ -12,6 +12,7 @@ import {
     IconPeople,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import Link from "components/Link"
 
 export const productAnalytics = {
     Icon: IconGraph,
@@ -322,11 +323,15 @@ export const productAnalytics = {
             features: [
                 {
                     title: 'Write custom queries',
-                    description: 'Combine product data with warehouse data',
+                    description: 'Query product data and join tables to bring warehouse data into the mix',
                 },
                 {
                     title: 'Visualize data in tables, trends, charts and more',
                     description: 'Customize visualizations with colors, goals, scales, legends, and more',
+                },
+                {
+                    title: "Get help writing SQL",
+                    description: <><Link href="/max" state={{ newWindow: true }}>Max AI</Link> knows your data and can write syntax for you.</>,
                 },
             ],
             images: [
