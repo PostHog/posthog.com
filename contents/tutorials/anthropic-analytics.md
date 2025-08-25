@@ -186,7 +186,7 @@ Once you generate a few responses, go to PostHog and enable the [LLM analytics f
     classes="rounded"
 />
 
-You can also go into more detail by clicking on the [generations tab](https://app.posthog.com/llm-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+You can also go into more detail by clicking on the [generations tab](https://app.posthog.com/llm-analytics/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_05_at_10_04_35_2x_2dbca9be6b.png"

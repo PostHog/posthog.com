@@ -36,7 +36,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 
 [PostHog](/) is an open source all-in-one platform that combines LLM observability with several other developer-focused tools, such as product and web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
-Its [LLM analytics product](/docs/llm-analytics) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
+Its LLM observability product (known as [LLM analytics](/docs/llm-analytics)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_07_at_11_06_21_678982e3a9.png"

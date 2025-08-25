@@ -21,7 +21,7 @@ The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an
     classes="rounded"
 />
 
-It can be filtered like any dashboard in PostHog, including by event, person, and group properties. Our observability SDKs autocapture especially useful properties like provider, tokens, cost, model, and more.
+It can be filtered like any dashboard in PostHog, including by event, person, and group properties. Our SDKs autocapture especially useful properties like provider, tokens, cost, model, and more.
 
 This dashboard is a great starting point for understanding your LLM usage and performance. You can use it to answer questions like:
 
