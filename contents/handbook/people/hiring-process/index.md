@@ -225,7 +225,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-We will pay the candidate their 'normal day rate' with the caveat that we do cap the SuperDay payouts to $1,000. We will use this [calculator](https://www.xe.com/) to convert for GBP/EUR currencies. If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/day-rate-caluclator) to calculate it. 
+We pay all candidates 1,000 USD for their efforts on SuperDay.
 
 If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships. Due to the high volume of SuperDays we run, if the candidate has their SuperDay in the first half of the month, they can expect a payment to be made by the 15th of the month, while any SuperDays after the 15th of the month, it will be paid at the end of the month. 
 
