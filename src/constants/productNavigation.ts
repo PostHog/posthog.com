@@ -236,3 +236,75 @@ export function buildCategoryMenuItems(category: string, allProducts: any[]): an
         }
     })
 }
+
+// Helper function to build menu items for all products sorted alphabetically
+export function buildAllProductsMenuItems(allProducts: any[]): any[] {
+    // Handles to filter out
+    const filteredHandles = ['ai', 'annika', 'marius', 'customer-data-infrastructure', 'data_in', 'data_out']
+
+    // Label overrides by slug
+    const labelOverrides: Record<string, string> = {
+        cdp: 'Data pipelines',
+        'data-warehouse': 'Data warehouse',
+    }
+
+    // Filter out products with status 'WIP' and specific handles
+    const filteredProducts = allProducts.filter((product) => {
+        // Filter out WIP status
+        if (product.status === 'WIP') {
+            return false
+        }
+        // Filter out specific handles
+        if (filteredHandles.includes(product.handle)) {
+            return false
+        }
+        return true
+    })
+
+    // Sort filtered products alphabetically by name
+    const sortedProducts = [...filteredProducts].sort((a, b) => a.name.localeCompare(b.name))
+
+    return sortedProducts.map((product) => {
+        // Check if it's a non-product page
+        const nonProductPage = Object.values(nonProductPages).find((p) => p.slug === product.slug)
+
+        // Apply label override if it exists
+        const displayLabel = labelOverrides[product.slug] || product.name
+
+        if (nonProductPage) {
+            // Handle icon for non-product pages
+            let iconElement = null
+            if (nonProductPage.icon) {
+                const IconComponent = Icons[nonProductPage.icon as keyof typeof Icons]
+                if (IconComponent) {
+                    iconElement = React.createElement(IconComponent, {
+                        className: `text-${nonProductPage.color || product.color || 'gray'} size-4`,
+                    })
+                }
+            }
+
+            return {
+                type: 'item' as const,
+                label: displayLabel,
+                link: nonProductPage.url,
+                icon: iconElement,
+            }
+        }
+
+        // Regular product with icon
+        const isDisabled = product.status === 'WIP'
+        const iconElement = product.Icon
+            ? React.createElement(product.Icon, {
+                  className: isDisabled ? 'text-muted size-4' : `text-${product.color || 'gray'} size-4`,
+              })
+            : null
+
+        return {
+            type: 'item' as const,
+            label: displayLabel,
+            ...(!isDisabled && { link: `/${product.slug}` }),
+            icon: iconElement,
+            ...(isDisabled && { disabled: true }),
+        }
+    })
+}

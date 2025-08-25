@@ -11,6 +11,7 @@ import {
     categoryIcons,
     buildCategoryMenuItems,
     buildProductMenuItems,
+    buildAllProductsMenuItems,
     popularProducts,
     newestProducts,
 } from '../../constants/productNavigation'
@@ -252,6 +253,32 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
         }
     })
 
+    // Add "All products" at the very end
+    const allProductsItems = [
+        ...buildAllProductsMenuItems(allProducts),
+        {
+            type: 'separator' as const,
+        },
+        {
+            type: 'item' as const,
+            label: 'View all',
+            link: '/products',
+            icon: <Icons.IconApps className="size-4 text-red" />,
+        }
+    ]
+
+    items.push(
+        {
+            type: 'separator',
+        },
+        {
+            type: 'submenu',
+            label: 'All products',
+            items: allProductsItems,
+            icon: <Icons.IconList className="size-4 text-gray" />,
+        }
+    )
+
     return items
 }
 
@@ -285,15 +312,15 @@ export function useMenuData(): MenuType[] {
                 },
                 ...(windows.length > 0
                     ? [
-                          { type: 'separator' },
-                          {
-                              type: 'item',
-                              label: 'Close all windows',
-                              onClick: () => {
-                                  animateClosingAllWindows()
-                              },
-                          },
-                      ]
+                        { type: 'separator' as const },
+                        {
+                            type: 'item' as const,
+                            label: 'Close all windows',
+                            onClick: () => {
+                                animateClosingAllWindows()
+                            },
+                        },
+                    ]
                     : []),
             ],
         },
