@@ -1734,8 +1734,8 @@ export const companyMenu = {
                     url: '/teams/ingestion',
                 },
                 {
-                    name: 'LLM Observability',
-                    url: '/teams/llm-observability',
+                    name: 'LLM analytics',
+                    url: '/teams/llm-analytics',
                 },
                 {
                     name: 'Max AI',
@@ -4369,6 +4369,13 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'LLM analytics',
+            icon: 'IconAI',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            url: '/llm-analytics',
         },
         {
             name: 'Max AI',

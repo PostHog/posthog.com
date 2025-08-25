@@ -61,10 +61,13 @@ const companies = {
     Datadog: {
         comparisonURL: '',
     },
-    ChatGPT: {
+    Langfuse: {
         comparisonURL: '',
     },
-    Claude: {
+    Langsmith: {
+        comparisonURL: '',
+    },
+    Helicone: {
         comparisonURL: '',
     },
     PostHog: {

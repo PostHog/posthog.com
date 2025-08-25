@@ -987,7 +987,7 @@ export const LLMObservability = () => {
             containerClasses="!pt-8 mdlg:!py-4 xl:!py-10"
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
-            title="LLM observability"
+            title="LLM analytics"
             flag="Beta"
             flagColor="yellow"
             description="Build AI features with full visibility – both in development and production."
@@ -1012,7 +1012,7 @@ export const LLMObservability = () => {
                         ) : (
                             <>
                                 <CloudinaryImage
-                                    alt="The PostHog LLM observability dashboard, showing data on generative AI usage, performance, and costs"
+                                    alt="The PostHog LLM analytics dashboard, showing data on generative AI usage, performance, and costs"
                                     placeholder="none"
                                     quality={100}
                                     objectFit="contain"

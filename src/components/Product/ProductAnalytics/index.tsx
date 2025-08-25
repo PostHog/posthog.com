@@ -88,7 +88,7 @@ const subfeatures = [
     },
     {
         icon: <IconAI />,
-        title: 'LLM observability',
+        title: 'LLM analytics',
         description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
     },
 ]
