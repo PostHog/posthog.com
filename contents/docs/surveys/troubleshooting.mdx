@@ -79,9 +79,9 @@ Only the `question_index` parameter is mandatory. However, if you use the `quest
 
 ## Survey shows up repeatedly after dismissing
 
-A bug in `posthog-js` version `1.249.2` caused surveys to show up repeatedly even after being dismissed or completed. This was fixed in `posthog-js` version `1.249.3`.
+A bug in `posthog-js` version `1.249.2` caused surveys to reappear repeatedly after being dismissed or completed. This occurred because person feature flags and local storage weren't updated after survey events.
 
-**Solution:** Upgrade to the latest version of `posthog-js`. If the issue persists, please contact us using [one of the support options](/docs/support-options).
+**Solution:** Upgrade to the latest version of `posthog-js`. This bug has been fixed in newer versions. If the issue persists, please [contact support](/docs/support-options).
 
 ## Debugging surveys in console
 
