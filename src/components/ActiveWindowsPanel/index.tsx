@@ -29,6 +29,7 @@ export default function ActiveWindowsPanel() {
             isOpen={isActiveWindowsPanelOpen}
             onClose={closeActiveWindowsPanel}
             title="Active windows"
+            headerAside={<OSButton size="sm" onClick={() => closeAllWindows()}>Close all</OSButton>}
             width="w-80"
         >
             <ScrollArea className="p-2">

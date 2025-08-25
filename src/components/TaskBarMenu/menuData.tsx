@@ -276,11 +276,16 @@ export function useMenuData(): MenuType[] {
                     label: 'About this website',
                     link: '/credits',
                 },
-                { type: 'separator' },
                 {
                     type: 'item',
                     label: 'Display options',
                     link: '/display-options',
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Close all windows & show home.mdx',
+                    link: '#',
                 },
             ],
         },

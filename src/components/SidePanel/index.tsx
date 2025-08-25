@@ -1,12 +1,15 @@
 import React, { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as Portal from '@radix-ui/react-portal'
-import { IconX } from '@posthog/icons'
+import { IconChevronRight } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
+import OSButton from 'components/OSButton'
 
 interface SidePanelProps {
     isOpen: boolean
     onClose: () => void
     title?: string
+    headerAside?: React.ReactNode
     children: React.ReactNode
     className?: string
     width?: string
@@ -17,6 +20,7 @@ export default function SidePanel({
     isOpen,
     onClose,
     title,
+    headerAside,
     children,
     className = '',
     width = 'w-96',
@@ -60,15 +64,18 @@ export default function SidePanel({
                             <div className="h-full flex flex-col">
                                 {title && (
                                     <div className="flex items-center justify-between px-4 py-2 border-b border-primary">
-                                        <h2 className="text-lg font-semibold">{title}</h2>
-                                        {showCloseButton && (
-                                            <button
-                                                onClick={onClose}
-                                                className="text-sm text-secondary hover:text-primary"
-                                            >
-                                                <IconX className="size-4" />
-                                            </button>
-                                        )}
+                                        <h2 className="text-base font-semibold">{title}</h2>
+                                        <div className="flex items-center gap-1">
+                                            {headerAside && <div>{headerAside}</div>}
+                                            {showCloseButton && (
+                                                <span className="contents">
+                                                    <Tooltip trigger={<OSButton icon={<IconChevronRight />} onClick={onClose} size="md" />}>
+                                                        Hide sidebar
+                                                    </Tooltip>
+                                                </span>
+                                            )}
+
+                                        </div>
                                     </div>
                                 )}
 

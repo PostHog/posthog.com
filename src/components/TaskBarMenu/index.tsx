@@ -17,6 +17,7 @@ import { useApp } from '../../context/App'
 import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
@@ -89,9 +90,8 @@ export default function TaskBarMenu() {
                             <div className="relative">
                                 <CloudinaryImage
                                     src={getAvatarURL(user?.profile)}
-                                    imgClassName={`size-6 rounded-full overflow-hidden bg-${
-                                        user?.profile?.color ?? 'white dark:bg-dark'
-                                    }`}
+                                    imgClassName={`size-6 rounded-full overflow-hidden bg-${user?.profile?.color ?? 'white dark:bg-dark'
+                                        }`}
                                     width={48}
                                     alt=""
                                 />
@@ -107,100 +107,99 @@ export default function TaskBarMenu() {
             ),
             items: user
                 ? [
-                      {
-                          type: 'item' as const,
-                          label: 'Go to...',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'PostHog app',
-                          link: 'https://app.posthog.com',
-                          icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                          external: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Community',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Forums',
-                          link: '/questions',
-                          icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                      },
-                      ...(user?.profile
-                          ? [
-                                {
-                                    type: 'item' as const,
-                                    label: `Notifications${
-                                        notifications?.length > 0 ? ` (${notifications.length})` : ''
+                    {
+                        type: 'item' as const,
+                        label: 'Go to...',
+                        disabled: true,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'PostHog app',
+                        link: 'https://app.posthog.com',
+                        icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                        external: true,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Community',
+                        disabled: true,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Forums',
+                        link: '/questions',
+                        icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                    },
+                    ...(user?.profile
+                        ? [
+                            {
+                                type: 'item' as const,
+                                label: `Notifications${notifications?.length > 0 ? ` (${notifications.length})` : ''
                                     }`,
-                                    onClick: () => setIsNotificationsPanelOpen(true),
-                                    icon: (
-                                        <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
+                                onClick: () => setIsNotificationsPanelOpen(true),
+                                icon: (
+                                    <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
+                                ),
+                            },
+                            {
+                                type: 'item' as const,
+                                label: 'My profile',
+                                link: `/community/profiles/${user?.profile.id}`,
+                                icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                            },
+                            {
+                                type: 'item' as const,
+                                label: 'Bookmarks',
+                                link: '/bookmarks',
+                                icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                            },
+                        ]
+                        : []),
+                    ...(isModerator
+                        ? [
+                            {
+                                type: 'item' as const,
+                                label: 'Moderator tools',
+                                disabled: true,
+                            },
+                            {
+                                type: 'item' as const,
+                                label: 'Upload media',
+                                icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                onClick: () =>
+                                    addWindow(
+                                        <MediaUploadModal
+                                            newWindow
+                                            location={{ pathname: `media-upload` }}
+                                            key={`media-upload`}
+                                        />
                                     ),
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'My profile',
-                                    link: `/community/profiles/${user?.profile.id}`,
-                                    icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Bookmarks',
-                                    link: '/bookmarks',
-                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                            ]
-                          : []),
-                      ...(isModerator
-                          ? [
-                                {
-                                    type: 'item' as const,
-                                    label: 'Moderator tools',
-                                    disabled: true,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Upload media',
-                                    icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                    onClick: () =>
-                                        addWindow(
-                                            <MediaUploadModal
-                                                newWindow
-                                                location={{ pathname: `media-upload` }}
-                                                key={`media-upload`}
-                                            />
-                                        ),
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Components',
-                                    link: '/components',
-                                    icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                            ]
-                          : []),
-                      {
-                          type: 'separator' as const,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Community logout',
-                          onClick: () => logout(),
-                          icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                      },
-                  ]
+                            },
+                            {
+                                type: 'item' as const,
+                                label: 'Components',
+                                link: '/components',
+                                icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                            },
+                        ]
+                        : []),
+                    {
+                        type: 'separator' as const,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Community logout',
+                        onClick: () => logout(),
+                        icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                    },
+                ]
                 : [
-                      {
-                          type: 'item' as const,
-                          label: 'Sign in',
-                          onClick: handleSignInClick,
-                      },
-                  ],
+                    {
+                        type: 'item' as const,
+                        label: 'Sign in',
+                        onClick: handleSignInClick,
+                    },
+                ],
         },
     ]
 
@@ -269,9 +268,9 @@ export default function TaskBarMenu() {
                             animate={
                                 isAnimating
                                     ? {
-                                          scale: [1, 1.2, 1],
-                                          rotate: [0, -5, 5, -5, 5, 0],
-                                      }
+                                        scale: [1, 1.2, 1],
+                                        rotate: [0, -5, 5, -5, 5, 0],
+                                    }
                                     : {}
                             }
                             transition={{
@@ -280,32 +279,69 @@ export default function TaskBarMenu() {
                                 times: [0, 0.2, 0.4, 0.6, 0.8, 1],
                             }}
                         >
-                            <button
-                                onClick={handleActiveWindowsClick}
-                                disabled={totalWindows <= 0}
-                                data-scheme="primary"
-                                data-active-windows
-                                className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
-                                border-[1.5px] 
-                                border-t-4 
-                                
-                                 
-                                dark:hover:bg-dark 
-                                hover:bg-light
+                            {totalWindows <= 0 ? (
+                                <Tooltip
+                                    trigger={
+                                        <button
+                                            onClick={handleActiveWindowsClick}
+                                            disabled={totalWindows <= 0}
+                                            data-scheme="primary"
+                                            data-active-windows
+                                            className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
+                                            border-[1.5px] 
+                                            border-t-4 
+                                            
+                                             
+                                            dark:hover:bg-dark 
+                                            hover:bg-light
 
-                                text-secondary
-                                dark:text-primary
-                                hover:text-primary
+                                            text-secondary
+                                            dark:text-primary
+                                            hover:text-primary
 
-                                ${
-                                    totalWindows > 1
-                                        ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
-                                        : 'bg-accent border-primary dark:border-[#eaecf6]'
-                                }
-                            `}
-                            >
-                                <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
-                            </button>
+                                            ${totalWindows > 1
+                                                    ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
+                                                    : 'bg-accent border-primary dark:border-[#eaecf6]'
+                                                }
+                                        `}
+                                        >
+                                            <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
+                                        </button>
+                                    }
+                                    delay={0}
+                                >
+                                    <div className="max-w-48 text-center">
+                                        <p className="text-sm mb-0">You have no open windows</p>
+                                        <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">(But if you did, you could manage them here!)</p>
+                                    </div>
+                                </Tooltip>
+                            ) : (
+                                <button
+                                    onClick={handleActiveWindowsClick}
+                                    disabled={totalWindows <= 0}
+                                    data-scheme="primary"
+                                    data-active-windows
+                                    className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
+                                    border-[1.5px] 
+                                    border-t-4 
+                                    
+                                     
+                                    dark:hover:bg-dark 
+                                    hover:bg-light
+
+                                    text-secondary
+                                    dark:text-primary
+                                    hover:text-primary
+
+                                    ${totalWindows > 1
+                                            ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
+                                            : 'bg-accent border-primary dark:border-[#eaecf6]'
+                                        }
+                                `}
+                                >
+                                    <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
+                                </button>
+                            )}
                         </motion.div>
                     )}
                     <MenuBar menus={accountMenu} className="[&_button]:px-2" />
