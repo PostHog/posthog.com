@@ -1,0 +1,103 @@
+---
+title: Web experiments installation
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import WebInstall from '../../integrate/_snippets/install-web.mdx'
+
+
+<Steps>
+
+<Step title="Install PostHog web SDK" badge="required">
+
+<WebInstall />
+
+</Step>
+
+<Step title="Create an experiment" badge="required">
+
+
+Go to the [**Experiments** tab](https://app.posthog.com/experiments) in the PostHog app and click on the **New experiment** button in the top right.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
+    alt="How to create an experiment in PostHog" 
+    classes="rounded"
+/>
+
+For this tutorial, let's create a new experiment with the following test values: 
+
+- **Name**: `Test experiment`
+- **Description**: `This is a test experiment`
+- **Feature flag key**: `test-experiment-ff-key`
+- **Experiment type**: `Feature flag`
+- **Variants**: `control` and `test`
+- **Participant type**: `Users`
+
+Then click **Save as draft**.
+
+</Step>
+
+<Step title="Add metrics and release conditions">
+
+Assign metrics to track the impact of your experiment and determine statistical significance.
+    
+- **Primary metrics**: Represent your main goal — the key signal for deciding if your hypothesis is correct.
+- **Secondary metrics**: Optional supporting metrics for additional context.
+
+You can add up to 10 metrics (primary + secondary) per experiment.
+
+Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are statistically significant.
+
+Primary and secondary metrics
+Each metric can be set as either a primary or secondary metric. You can set up to 10 primary and secondary metrics per experiment.
+
+Primary metrics represent the main goal of your experiment. They directly measure if your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
+
+</Step>
+
+<Step title="Call feature flag" badge="required">
+
+
+In your experiment, each user is randomly assigned to a variant (usually either 'control' or 'test'). To check which variant a user has been assigned to, fetch the experiment feature flag. You can then customize their experience based on the value in the feature flag:
+
+```js-web
+// Ensure flags are loaded before usage.
+// You only need to call this on the code the first time a user visits.
+// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+posthog.onFeatureFlags(function() {
+    // feature flags should be available at this point
+    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+        // do something
+    }
+})
+
+// Otherwise, you can just do:
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+}
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
+```
+
+</Step>
+
+<Step checkpoint title="Validate PostHog calls">
+
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
+
+The best way to do this is adding an optional override to your release conditions. For example, you can create an override to assign a user to the test variant if their email is your own (or someone in your team). To do this:
+</Step>
+
+<Step title="Launch experiment" badge="required">
+
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
+
+The best way to do this is adding an optional override to your release conditions. For example, you can create an override to assign a user to the test variant if their email is your own (or someone in your team). To do this:
+</Step>
+
+
+</Steps> 
