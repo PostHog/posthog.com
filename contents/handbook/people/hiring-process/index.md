@@ -273,6 +273,12 @@ During the offer call, we'll share feedback from the interview process, and sell
 
 Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
+### How Ashby works for interviewers
+
+We pay Ashby per seat, so as an interviewer your access is limited to those candidates that you will interview, to save us some money. You will be able to see their application (inc cover letter), their resume and all previous feedback left about the candidate. 
+
+You will not be able to see every other candidate in the pipeline, this is because of the per seat pricing. However, we will keep a couple of seats aside so you can login to see other candidates in the pipeline and do a bit of profile/assessment calibration. If you would like to do this, please contact the talent team on slack and they can provision this for you. You won't keep this access forever but you can get it for a few days/ a week to get an overview of how some other interviewers are doing things. 
+
 ## Visa sponsorship
 
 Building a diverse team is at the heart of our culture at PostHog, and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the UK.
