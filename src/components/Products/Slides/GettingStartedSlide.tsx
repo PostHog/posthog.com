@@ -177,7 +177,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     backgroundPosition: 'center',
                 }}
             ></div>
-            <div className="hidden @2xl:block">
+            <div className="hidden @2xl:block h-full">
                 <MSPaint
                     // Pass the image URL to preload it as line art
                     initialImage={coloringPageImage}
