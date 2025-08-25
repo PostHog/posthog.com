@@ -17,7 +17,7 @@ toolsUsed:
   - Experimentation
   - Product analytics
   - Surveys
-  - LLM observability
+  - LLM analytics
 date: 2024-05-29
 ---
 
