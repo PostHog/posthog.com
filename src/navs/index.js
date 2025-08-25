@@ -1306,10 +1306,13 @@ export const handbookSidebar = [
                             },
                         ],
                     },
-
                     {
-                        name: 'Utilization by business type',
+                        name: 'Matching PostHog to a business type',
                         url: '/handbook/growth/sales/utilization-by-business-type',
+                    },
+                    {
+                        name: 'Asking better questions',
+                        url: '/handbook/growth/sales/asking-better-questions',
                     },
                     {
                         name: 'How we work',
