@@ -284,22 +284,97 @@ export default function MSPaint({
         }
     }, [initialImage, state.initialImageLoaded, threshold, state.canvasSize?.width, state.canvasSize?.height, initialCanvasSize])
 
+    // Save to history
+    const saveToHistory = useCallback(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        const newHistory = (state.canvasHistory || []).slice(0, (state.historyIndex ?? 0) + 1)
+        newHistory.push(imageData)
+
+        // Limit history to 50 items
+        if (newHistory.length > 50) {
+            newHistory.shift()
+        }
+
+        setState((prev) => ({
+            ...prev,
+            canvasHistory: newHistory,
+            historyIndex: newHistory.length - 1,
+            isModified: true,
+        }))
+    }, [state.canvasHistory, state.historyIndex])
+
+    // Undo/Redo
+    const undo = useCallback(() => {
+        if (state.canvasHistory && state.historyIndex !== undefined && state.historyIndex > 0) {
+            const canvas = canvasRef.current
+            if (!canvas) return
+
+            const ctx = canvas.getContext('2d')
+            if (!ctx) return
+
+            const newIndex = state.historyIndex - 1
+            const imageData = state.canvasHistory[newIndex]
+            if (imageData) {
+                // Clear canvas first
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.putImageData(imageData, 0, 0)
+                setState((prev) => ({ ...prev, historyIndex: newIndex }))
+            }
+        }
+    }, [state.historyIndex, state.canvasHistory])
+
+    const redo = useCallback(() => {
+        if (
+            state.canvasHistory &&
+            state.historyIndex !== undefined &&
+            state.historyIndex < state.canvasHistory.length - 1
+        ) {
+            const canvas = canvasRef.current
+            if (!canvas) return
+
+            const ctx = canvas.getContext('2d')
+            if (!ctx) return
+
+            const newIndex = state.historyIndex + 1
+            const imageData = state.canvasHistory[newIndex]
+            if (imageData) {
+                ctx.putImageData(imageData, 0, 0)
+                setState((prev) => ({ ...prev, historyIndex: newIndex }))
+            }
+        }
+    }, [state.historyIndex, state.canvasHistory])
+
     // Keyboard shortcuts
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            // Use Shift+Z for undo, Shift+Y for redo to avoid browser conflicts
-            if (e.shiftKey && e.key.toLowerCase() === 'z') {
+            // Use Cmd/Ctrl+Z for undo, Cmd/Ctrl+Shift+Z or Cmd/Ctrl+Y for redo
+            const isMac = navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
+            const modifierKey = isMac ? e.metaKey : e.ctrlKey
+
+            if (modifierKey && e.key.toLowerCase() === 'z') {
                 e.preventDefault()
-                undo()
-            } else if (e.shiftKey && e.key.toLowerCase() === 'y') {
+                e.stopPropagation()
+                if (e.shiftKey) {
+                    redo()
+                } else {
+                    undo()
+                }
+            } else if (modifierKey && e.key.toLowerCase() === 'y') {
                 e.preventDefault()
+                e.stopPropagation()
                 redo()
             }
         }
 
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [state.historyIndex, state.canvasHistory])
+        window.addEventListener('keydown', handleKeyDown, true) // Use capture phase
+        return () => window.removeEventListener('keydown', handleKeyDown, true)
+    }, [undo, redo])
 
     useEffect(() => {
         if (appWindow && appWindow.element && typeof appWindow.element === 'object' && 'props' in appWindow.element) {
@@ -319,64 +394,6 @@ export default function MSPaint({
             }
         }
     }, [])
-
-    // Save to history
-    const saveToHistory = useCallback(() => {
-        const canvas = canvasRef.current
-        if (!canvas) return
-
-        const ctx = canvas.getContext('2d')
-        if (!ctx) return
-
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-        const newHistory = (state.canvasHistory || []).slice(0, (state.historyIndex || 0) + 1)
-        newHistory.push(imageData)
-
-        // Limit history to 50 items
-        if (newHistory.length > 50) {
-            newHistory.shift()
-        }
-
-        setState((prev) => ({
-            ...prev,
-            canvasHistory: newHistory,
-            historyIndex: newHistory.length - 1,
-            isModified: true,
-        }))
-    }, [state.canvasHistory, state.historyIndex])
-
-    // Undo/Redo
-    const undo = useCallback(() => {
-        if (state.historyIndex && state.historyIndex > 0) {
-            const canvas = canvasRef.current
-            if (!canvas) return
-
-            const ctx = canvas.getContext('2d')
-            if (!ctx) return
-
-            const newIndex = state.historyIndex - 1
-            ctx.putImageData(state.canvasHistory[newIndex], 0, 0)
-            setState((prev) => ({ ...prev, historyIndex: newIndex }))
-        }
-    }, [state.historyIndex, state.canvasHistory])
-
-    const redo = useCallback(() => {
-        if (
-            state.canvasHistory &&
-            state.historyIndex !== undefined &&
-            state.historyIndex < state.canvasHistory.length - 1
-        ) {
-            const canvas = canvasRef.current
-            if (!canvas) return
-
-            const ctx = canvas.getContext('2d')
-            if (!ctx) return
-
-            const newIndex = state.historyIndex + 1
-            ctx.putImageData(state.canvasHistory[newIndex], 0, 0)
-            setState((prev) => ({ ...prev, historyIndex: newIndex }))
-        }
-    }, [state.historyIndex, state.canvasHistory])
 
     // Get mouse position relative to canvas
     const getMousePos = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -400,11 +417,26 @@ export default function MSPaint({
     // Handle mouse down
     const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
         const pos = getMousePos(e)
-        setState((prev) => ({ ...prev, isDrawing: true, startPos: pos }))
 
         const canvas = canvasRef.current
         const ctx = canvas?.getContext('2d')
         if (!ctx || !canvas) return
+
+        // Save current state BEFORE making changes (for tools that modify on drag)
+        if (
+            state.tool === 'pencil' ||
+            state.tool === 'brush' ||
+            state.tool === 'eraser' ||
+            state.tool === 'airbrush' ||
+            state.tool === 'line' ||
+            state.tool === 'rectangle' ||
+            state.tool === 'roundedRect' ||
+            state.tool === 'circle'
+        ) {
+            saveToHistory()
+        }
+
+        setState((prev) => ({ ...prev, isDrawing: true, startPos: pos }))
 
         const isRightClick = e.button === 2
         const color = isRightClick ? state.secondaryColor : state.primaryColor
@@ -439,17 +471,17 @@ export default function MSPaint({
                 ctx.moveTo(pos.x, pos.y)
                 break
             case 'fill':
+                saveToHistory() // Save before fill
                 floodFill(pos.x, pos.y, color)
                 setState((prev) => ({ ...prev, isDrawing: false }))
-                saveToHistory()
                 break
             case 'text': {
                 const text = prompt('Enter text:')
                 if (text) {
+                    saveToHistory() // Save before adding text
                     ctx.font = `${16 * state.brushSize}px Arial`
                     ctx.fillStyle = color
                     ctx.fillText(text, pos.x, pos.y)
-                    saveToHistory()
                 }
                 setState((prev) => ({ ...prev, isDrawing: false }))
                 break
@@ -473,13 +505,13 @@ export default function MSPaint({
                     const distance = Math.sqrt(Math.pow(pos.x - first.x, 2) + Math.pow(pos.y - first.y, 2))
                     if (distance < 10) {
                         // Close polygon
+                        saveToHistory() // Save before drawing polygon
                         ctx.beginPath()
                         ctx.moveTo(first.x, first.y)
                         state.polygonPoints.forEach((p) => ctx.lineTo(p.x, p.y))
                         ctx.closePath()
                         ctx.stroke()
                         setState((prev) => ({ ...prev, polygonPoints: [], isDrawing: false }))
-                        saveToHistory()
                     } else {
                         setState((prev) => ({ ...prev, polygonPoints: [...prev.polygonPoints, pos] }))
                     }
@@ -694,16 +726,6 @@ export default function MSPaint({
         }
 
         setState((prev) => ({ ...prev, isDrawing: false }))
-
-        if (
-            state.tool !== 'picker' &&
-            state.tool !== 'zoom' &&
-            state.tool !== 'polygon' &&
-            state.tool !== 'curve' &&
-            state.tool !== 'select'
-        ) {
-            saveToHistory()
-        }
     }
 
     // Flood fill algorithm
@@ -1022,16 +1044,16 @@ export default function MSPaint({
                 {
                     type: 'item' as const,
                     label: 'Undo',
-                    shortcut: 'Shift+Z',
+                    shortcut: '⌘Z',
                     onClick: undo,
-                    disabled: !state.canvasHistory || state.historyIndex <= 0,
+                    disabled: !state.canvasHistory || state.historyIndex === undefined || state.historyIndex <= 0,
                 },
                 {
                     type: 'item' as const,
                     label: 'Redo',
-                    shortcut: 'Shift+Y',
+                    shortcut: '⌘⇧Z',
                     onClick: redo,
-                    disabled: !state.canvasHistory || state.historyIndex >= state.canvasHistory.length - 1,
+                    disabled: !state.canvasHistory || state.historyIndex === undefined || state.historyIndex >= state.canvasHistory.length - 1,
                 },
                 { type: 'separator' as const },
                 ...(state.originalImageData
@@ -1259,7 +1281,7 @@ export default function MSPaint({
 
             {/* Status bar */}
             <div className="h-6 bg-[#c0c0c0] border-t-2 border-[#ffffff] px-2 flex items-center text-xs">
-                <span>Help? Where we're going, we don't need help! 🎨</span>
+                <span>Help? Sorry, I can't help with taste! 🎨</span>
             </div>
         </div>
     )
