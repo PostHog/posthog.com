@@ -216,6 +216,20 @@ The customer should redline the .docx version of the document in question.  You 
 
 We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity.
 
+## Varying terms for trials and proofs of concept (POCs)
+
+We don't vary PostHog's standard terms for trials and proofs of concepts (POCs) for prospective customers. 
+
+All prospective customers are welcome to try PostHog for free and under our standard terms (including our standard DPA and BAA, if applicable).
+
+We don't negotiate terms for trials and POCs for three reasons:
+
+1. Unlike many of our competitors, an annual subscription is not required to access PostHog, so a negotiated agreement is not necessary to use our services. Our product-led motion is designed to support customers trying PostHog. 
+2. When [evaluating custom legal terms](/handbook/growth/sales/contract-rules#varying-terms), PostHog evaluates legal risk against annual revenue received. 
+3. Because prospective customers are paying us $0 for a free, sales-led trial or POC, there is no frame of reference for us to evaluate any potential custom terms.  Spending our time and legal resources negotiating these terms is premature when a prospective customer doesn't know that they want to proceed with PostHog at all, much more at a qualifying level of annual usage. 
+
+Once the trial concludes, and [per our guidance on varying terms](/handbook/growth/sales/contract-rules#varying-terms), we will be happy to evaluate custom legal terms for an otherwise qualified PostHog customer. 
+
 ## Non-PostHog contracts
 
 If a customer requests to use a non-PostHog drafted contract for documents such as a DPA, MSA, Order Form, or BAA, we generally decline, except in special circumstances.  We avoid doing this as it adds too much risk for us, and also because reviewing and negotiating non-standard terms introduces significant operational inefficiencies and doesn't scale well as we continue to grow. We typically do not even consider using customer paper unless the deal is over $100k annually or involves an extremely blue-chip company. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. 
