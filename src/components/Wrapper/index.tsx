@@ -60,7 +60,7 @@ export default function Wrapper() {
             <CookieBannerToast />
             <AnimatePresence>
                 {closingAllWindowsAnimation && (
-                    <motion.div exit={{ opacity: 0 }} className="fixed inset-0 size-full z-50">
+                    <motion.div exit={{ opacity: 0 }} className="fixed top-0 left-0 w-full h-full z-[999999]">
                         <DotLottiePlayer
                             src="/lotties/hogzilla-swipe.lottie"
                             autoplay

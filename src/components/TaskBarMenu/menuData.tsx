@@ -258,7 +258,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows } = useApp()
+    const { animateClosingAllWindows, windows } = useApp()
 
     return [
         {
@@ -283,14 +283,18 @@ export function useMenuData(): MenuType[] {
                     label: 'Display options',
                     link: '/display-options',
                 },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Close all windows',
-                    onClick: () => {
-                        animateClosingAllWindows()
-                    },
-                },
+                ...(windows.length > 0
+                    ? [
+                          { type: 'separator' },
+                          {
+                              type: 'item',
+                              label: 'Close all windows',
+                              onClick: () => {
+                                  animateClosingAllWindows()
+                              },
+                          },
+                      ]
+                    : []),
             ],
         },
         {

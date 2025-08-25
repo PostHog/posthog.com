@@ -6,8 +6,15 @@ import OSButton from 'components/OSButton'
 import { navigate } from 'gatsby'
 
 export default function ActiveWindowsPanel() {
-    const { windows, isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen, focusedWindow, bringToFront, closeWindow } =
-        useApp()
+    const {
+        windows,
+        isActiveWindowsPanelOpen,
+        setIsActiveWindowsPanelOpen,
+        focusedWindow,
+        bringToFront,
+        closeWindow,
+        animateClosingAllWindows,
+    } = useApp()
 
     const closeActiveWindowsPanel = () => {
         setIsActiveWindowsPanelOpen(false)
@@ -29,7 +36,17 @@ export default function ActiveWindowsPanel() {
             isOpen={isActiveWindowsPanelOpen}
             onClose={closeActiveWindowsPanel}
             title="Active windows"
-            headerAside={<OSButton size="sm" onClick={() => closeAllWindows()}>Close all</OSButton>}
+            headerAside={
+                <OSButton
+                    size="sm"
+                    onClick={() => {
+                        animateClosingAllWindows()
+                        closeActiveWindowsPanel()
+                    }}
+                >
+                    Close all
+                </OSButton>
+            }
             width="w-80"
         >
             <ScrollArea className="p-2">
