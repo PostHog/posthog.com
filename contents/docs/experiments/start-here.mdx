@@ -217,7 +217,7 @@ For server-side experiments, you may need to manually trigger an exposure event 
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Add metrics and launch"
+  title="Add metrics"
   subtitle="Required"
   icon="IconGraph"
 >
@@ -236,11 +236,23 @@ Choose from:
     classes="rounded"
 />
 
-**Test before launching**: Create an override in your feature flag settings to assign yourself to a specific variant for testing. Once verified, launch your experiment!
-
 <CallToAction type="primary" to="/docs/experiments/metrics">
   Learn about experiment metrics
 </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Test and launch"
+  subtitle="Required"
+  icon="IconRocket"
+>
+
+Before launching to users, test your experiment to ensure both variants work correctly:
+
+Add an override in your feature flag's [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) to assign yourself to a specific variant (e.g., if your email equals "your-email@company.com", show the test variant). Test both variants to verify they behave as expected.
+
+Once verified, remove the override and launch your experiment to start collecting data!
 
 </QuestLogItem>
 
@@ -264,10 +276,6 @@ Once your experiment is running, monitor the results in real-time. PostHog shows
 />
 
 When your experiment reaches significance, you can ship the winning variant with confidence using the **Ship a variant** button.
-
-<CallToAction type="primary" to="/docs/experiments/testing-and-launching">
-  Learn about testing and launching
-</CallToAction>
 
 </QuestLogItem>
 
