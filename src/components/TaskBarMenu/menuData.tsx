@@ -284,7 +284,7 @@ export function useMenuData(): MenuType[] {
                 { type: 'separator' },
                 {
                     type: 'item',
-                    label: 'Close all windows & show home.mdx',
+                    label: 'Close all windows',
                     link: '#',
                 },
             ],
