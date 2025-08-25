@@ -24,7 +24,7 @@ export default function Wrapper() {
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
                 <Desktop />
-                <AnimatePresence onExitComplete={() => setClosingAllWindowsAnimation(false)}>
+                <AnimatePresence>
                     {windows.map((item, index) => {
                         return (
                             <motion.div
@@ -60,8 +60,9 @@ export default function Wrapper() {
             <CookieBannerToast />
             <AnimatePresence>
                 {closingAllWindowsAnimation && (
-                    <motion.div exit={{ opacity: 0 }} className="fixed top-0 left-0 w-full h-full z-[999999]">
+                    <motion.div exit={{ opacity: 0 }} className="fixed inset-0 size-full z-[999999]">
                         <DotLottiePlayer
+                            className="size-full"
                             src="/lotties/hogzilla-swipe.lottie"
                             autoplay
                             onEvent={(event) => {
