@@ -148,7 +148,7 @@ If a customer wishes to use subsequent year's credit early they must agree to pa
 
 The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.
 
-You can see a signed multi-year contract set up in this way [here](https://app.pandadoc.com/a/#/documents/WjZzCSt8CbRUFNKLxXK5fU).
+You can see a signed multi-year contract set up in this way by navigating to Documents -> Examples (folder) inside of [PandaDoc](https://app.pandadoc.com).
 
 ## Uptime SLA
 

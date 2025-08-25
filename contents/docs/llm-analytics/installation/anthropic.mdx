@@ -1,4 +1,36 @@
-Start by installing the Anthropic SDK:
+---
+title: Anthropic LLM analytics installation
+showStepsToc: true
+---
+
+import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
+import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+
+LLM analytics is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+
+<Steps>
+
+<Step title="Install the PostHog SDK" badge="required">
+
+Setting up analytics starts with installing the PostHog SDK for your language. LLM analytics works best with our Python and Node SDKs. 
+
+<MultiLanguage>
+
+```bash file=Python
+pip install posthog
+```
+
+```bash file=Node
+npm install @posthog/ai posthog-node
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step title="Install the Anthropic SDK" badge="required">
+
+Install the Anthropic SDK:
 
 <MultiLanguage>
 
@@ -6,13 +38,19 @@ Start by installing the Anthropic SDK:
 pip install anthropic
 ```
 
-```bash file=TypeScript
+```bash file=Node
 npm install @anthropic-ai/sdk
 ```
 
 </MultiLanguage>
 
-In the spot where you initialize the Anthropic SDK, import PostHog and our Anthropic wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to our Anthropic wrapper.
+<LLMsSDKsCallout />
+
+</Step>
+
+<Step title="Initialize PostHog and the Anthropic wrapper" badge="required">
+
+In the spot where you initialize the Anthropic SDK, import PostHog and our Anthropic wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our Anthropic wrapper.
 
 <MultiLanguage>
 
@@ -49,6 +87,10 @@ const client = new Anthropic({
 </MultiLanguage>
 
 > **Note:** This also works with the `AsyncAnthropic` client as well as `AnthropicBedrock`, `AnthropicVertex`, and the async versions of those.
+
+</Step>
+
+<Step title="Call Anthropic LLMs" badge="required">
 
 Now, when you use the Anthropic SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_cache_creation_input_tokens`, `$ai_latency`, `$ai_tools`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
 
@@ -97,6 +139,12 @@ phClient.shutdown()
 
 </MultiLanguage>
 
-> **Notes:** 
-> - This also works when message streams are used (e.g. `stream=True` or `client.messages.stream(...)`).
-> - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+**Notes:** 
+- This also works when message streams are used (e.g. `stream=True` or `client.messages.stream(...)`).
+- If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+</Step>
+
+<VerifyLLMEventsStep />
+
+</Steps>

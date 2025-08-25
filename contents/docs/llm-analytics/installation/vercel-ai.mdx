@@ -1,10 +1,40 @@
-Start by installing the Vercel AI SDK:
+---
+title: Vercel AI LLM analytics installation
+showStepsToc: true
+---
+
+import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
+import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+
+LLM analytics is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+
+<Steps>
+
+<Step title="Install the PostHog SDK" badge="required">
+
+Setting up analytics starts with installing the PostHog SDK. 
+
+```bash
+npm install @posthog/ai posthog-node
+```
+
+</Step>
+
+<Step title="Install the Vercel AI SDK" badge="required">
+
+Install the Vercel AI SDK:
 
 ```bash
 npm install ai @ai-sdk/openai
 ```
 
-In the spot where you initialize the Vercel AI SDK, import PostHog and our `withTracing` wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to the `withTracing` wrapper.
+<LLMsSDKsCallout />
+
+</Step>
+
+<Step title="Initialize PostHog and Vercel AI" badge="required">
+
+In the spot where you initialize the Vercel AI SDK, import PostHog and our `withTracing` wrapper, initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project), and pass it to the `withTracing` wrapper.
 
 ```ts
 import { PostHog } from "posthog-node";
@@ -33,6 +63,10 @@ const model = withTracing(openaiClient("gpt-4-turbo"), phClient, {
 phClient.shutdown()
 ``` 
 
+</Step>
+
+<Step title="Call Vercel AI" badge="required">
+
 Now, when you use the Vercel AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. This works for both `text` and `image` message types.
 
 You can also capture or modify additional properties with the `posthogDistinctId`, `posthogTraceId`, `posthogProperties`, `posthogGroups`, and `posthogPrivacyMode` parameters.
@@ -46,4 +80,10 @@ const { text } = await generateText({
 console.log(text)
 ```
 
-> **Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+**Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+</Step>
+
+<VerifyLLMEventsStep />
+
+</Steps>
