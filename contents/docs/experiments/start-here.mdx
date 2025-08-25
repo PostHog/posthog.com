@@ -1,0 +1,301 @@
+---
+title: Getting started with experiments
+hideAnchor: true
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { CallToAction } from 'components/CallToAction'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductVideo } from 'components/ProductVideo'
+import { IconRewindPlay, IconToggle, IconFlask, IconGraph } from '@posthog/icons'
+import Tab from "components/Tab"
+import Wizard from '../getting-started/_snippets/wizard.mdx'
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
+import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+import AndroidInstall from '../integrate/_snippets/install-android.mdx'
+import NodeInstall from '../integrate/_snippets/install-node.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PHPInstall from '../integrate/_snippets/install-php.mdx'
+import RubyInstall from '../integrate/_snippets/install-ruby.mdx'
+import GoInstall from '../integrate/_snippets/install-go.mdx'
+import DotNetInstall from '../integrate/_snippets/install-dotnet.mdx'
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to start experimenting!">
+
+<QuestLogItem 
+    title="Install PostHog SDK"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+Experiments enable you to test the impact of product changes and understand how they affect your users' behavior. For example, testing different onboarding flows, app designs, or pricing strategies.
+
+The first step is to install PostHog with the library you want to run experiments in (if you haven't already):
+
+<Tab.Group tabs={['AI wizard', 'Web', 'React', 'React Native', 'iOS', 'Android', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', '.NET']}>
+    <Tab.List>
+        <Tab>AI wizard</Tab>
+        <Tab>Web</Tab>
+        <Tab>React</Tab>
+        <Tab>React Native</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Android</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>.NET</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <Wizard />
+        </Tab.Panel>
+        <Tab.Panel>
+            <WebInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubyInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <DotNetInstall />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+<CallToAction type="primary" to="/docs/getting-started/install">
+  View all installation options
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Create your first experiment"
+  subtitle="Required"
+  icon="IconFlask"
+>
+
+Once PostHog is installed, create your experiment by going to the [experiments tab](https://app.posthog.com/experiments) and clicking **New experiment**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
+    alt="How to create an experiment in PostHog" 
+    classes="rounded"
+/>
+
+Fill in the experiment details:
+- **Feature flag key**: This will be used in your code to check which variant a user gets
+- **Variants**: By default, you get `control` and `test` variants (you can add more)
+- **Participants**: Choose between user-level or group-level experiments
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Add your experiment code"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+Next, add code to your app to show different experiences based on the experiment variant. Use the feature flag key from your experiment to check which variant a user has been assigned to:
+
+<MultiLanguage>
+
+```js-web
+if (posthog.getFeatureFlag('your-experiment-key') === 'test') {
+    // Show test variant
+    showNewCheckoutFlow();
+} else {
+    // Show control variant
+    showOriginalCheckoutFlow();
+}
+```
+
+```react
+import { useFeatureFlagVariantKey } from 'posthog-js/react'
+
+function App() {
+    const variant = useFeatureFlagVariantKey('your-experiment-key')
+    
+    if (variant === 'test') {
+        return <NewCheckoutFlow />
+    }
+    return <OriginalCheckoutFlow />
+}
+```
+
+```node
+const variant = await client.getFeatureFlag('your-experiment-key', 'user_distinct_id')
+
+if (variant === 'test') {
+    // Show test variant
+}
+```
+
+```python
+variant = posthog.get_feature_flag('your-experiment-key', 'user_distinct_id')
+
+if variant == 'test':
+    # Show test variant
+```
+
+```php
+$variant = PostHog::getFeatureFlag('your-experiment-key', 'user_distinct_id')
+
+if ($variant === 'test') {
+    // Show test variant
+}
+```
+
+```ruby
+variant = posthog.get_feature_flag('your-experiment-key', 'user_distinct_id')
+
+if variant == 'test'
+    # Show test variant
+end
+```
+
+```go
+variant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
+    Key:        "your-experiment-key",
+    DistinctId: "user_distinct_id",
+})
+if variant == "test" {
+    // Show test variant
+}
+```
+
+```android_kotlin
+if (PostHog.getFeatureFlag("your-experiment-key") == "test") {
+    // Show test variant
+}
+```
+
+```ios_swift
+if (PostHogSDK.shared.getFeatureFlag("your-experiment-key") as? String == "test") {
+    // Show test variant
+}
+```
+
+</MultiLanguage>
+
+<CalloutBox icon="IconInfo" title="Server-side experiments" type="info">
+
+For server-side experiments, you may need to manually trigger an exposure event when a user encounters your experiment. This ensures PostHog knows which users have been exposed to which variant. 
+
+[Learn more about exposures](/docs/experiments/exposures) and when manual exposure tracking is needed.
+
+</CalloutBox>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Add metrics and launch"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+Before launching, add at least one metric to measure your experiment's success. Go to your experiment and click **Add metric** in the Primary metrics section.
+
+Choose from:
+- **Funnel metrics**: For conversion rates (e.g., signup → purchase)
+- **Mean metrics**: For averages and sums (e.g., revenue per user)  
+- **Ratio metrics**: For custom calculations (e.g., revenue per order)
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_22_2x_e0b179b143.png"
+    alt="Primary metrics in PostHog experiments"
+    classes="rounded"
+/>
+
+**Test before launching**: Create an override in your feature flag settings to assign yourself to a specific variant for testing. Once verified, launch your experiment!
+
+<CallToAction type="primary" to="/docs/experiments/metrics">
+  Learn about experiment metrics
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Monitor and analyze results"
+  subtitle="Required"
+  icon="IconTrendingUp"
+>
+
+Once your experiment is running, monitor the results in real-time. PostHog shows:
+
+- **Statistical significance**: Whether your results are reliable
+- **Win probability**: The likelihood each variant is better
+- **Confidence intervals**: The range of possible effect sizes
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_22_at_10_05_11_2f5017a50c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_22_at_10_05_31_0e81dd9c8e.png"
+  alt="Viewing experiment results"
+  classes="rounded"
+/>
+
+When your experiment reaches significance, you can ship the winning variant with confidence using the **Ship a variant** button.
+
+<CallToAction type="primary" to="/docs/experiments/testing-and-launching">
+  Learn about testing and launching
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Advanced features"
+  subtitle="Optional"
+  icon="IconGear"
+>
+
+Take your experiments to the next level with advanced PostHog features:
+
+### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay  
+See exactly what users experienced in each variant with session recordings tied to your experiment results.
+
+### <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/> Feature flags
+Target specific user segments, implement gradual rollouts, or run experiments on user groups instead of individuals.
+
+### <IconFlask className="text-red w-7 -mt-1 inline-block"/> Advanced experimentation
+Choose between Bayesian and frequentist statistical approaches, handle multiple variants, and configure outlier detection.
+
+---
+
+That's it! You're ready to start running successful experiments.
+
+<CallToAction type="primary" to="https://app.posthog.com/experiments">
+  Create your first experiment
+</CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>
