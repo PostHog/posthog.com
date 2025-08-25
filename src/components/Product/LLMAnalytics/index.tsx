@@ -133,19 +133,19 @@ const subfeatures = [
 const questions = [
     {
         question: 'How much money am I spending per week?',
-        url: '/docs/ai-engineering/dashboard',
+        url: '/docs/llm-analytics/dashboard',
     },
     {
         question: 'What is my cost per user?',
-        url: '/docs/ai-engineering/dashboard',
+        url: '/docs/llm-analytics/dashboard',
     },
     {
         question: 'How might my LLM react to a new prompt?',
-        url: '/docs/ai-engineering/dashboard',
+        url: '/docs/llm-analytics/dashboard',
     },
     {
         question: 'How do my generations compare to each other?',
-        url: '/docs/ai-engineering/traces-generations',
+        url: '/docs/llm-analytics/traces-generations',
     },
     {
         question: 'What does a good AI product look like?',
