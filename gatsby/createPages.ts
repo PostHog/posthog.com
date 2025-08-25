@@ -393,6 +393,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 }
                             }
                         }
+                        categories
                     }
                 }
             }

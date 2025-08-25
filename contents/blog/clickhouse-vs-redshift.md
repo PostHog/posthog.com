@@ -40,7 +40,7 @@ ClickHouse was engineered to number crunch big data, returning aggregates at sub
 
 Like many open-source projects, ClickHouse can be optionally deployed via paid, managed solutions – including  one by ClickHouse Inc. known as ClickHouse Cloud, and another Kubernetes-based solution by Altinity Inc. known as Altinity.Cloud. 
 
-ClickHouse has enjoyed considerable success since its founding in 2016, counting Cloudflare, Microsoft, GitLab, Clearbit, and even us at PostHog as users. Because [ClickHouse](/docs/how-posthog-works/clickhouse) is often employed to power user-facing analytics, it comes as no surprise that its users are traditional tech companies. 
+ClickHouse has enjoyed considerable success since its founding in 2016, counting Cloudflare, Microsoft, GitLab, Clearbit, and even us at PostHog as users. Because [ClickHouse](/docs/how-posthog-works/clickhouse) is often employed to power [user-facing analytics](/tutorials/embedded-analytics), it comes as no surprise that its users are traditional tech companies. 
 
 ## What is Amazon Redshift?
 
