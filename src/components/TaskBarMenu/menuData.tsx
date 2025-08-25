@@ -12,10 +12,11 @@ import {
     buildCategoryMenuItems,
     buildProductMenuItems,
     popularProducts,
-    newestProducts
+    newestProducts,
 } from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
-import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from "components/OSIcons"
+import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
+import { useApp } from '../../context/App'
 
 interface DocsMenuItem {
     name: string
@@ -237,7 +238,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                 const IconComponent = Icons[iconConfig.icon as keyof typeof Icons]
                 if (IconComponent) {
                     iconElement = React.createElement(IconComponent, {
-                        className: `size-4 text-${iconConfig.color}`
+                        className: `size-4 text-${iconConfig.color}`,
                     })
                 }
             }
@@ -257,6 +258,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
+    const { animateClosingAllWindows } = useApp()
 
     return [
         {
@@ -285,7 +287,9 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Close all windows',
-                    link: '#',
+                    onClick: () => {
+                        animateClosingAllWindows()
+                    },
                 },
             ],
         },

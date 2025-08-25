@@ -100,6 +100,10 @@ interface AppContextType {
     compact: boolean
     menu: Menu
     openStart: ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => void
+    animateClosingAllWindows: () => void
+    closingAllWindowsAnimation: boolean
+    closeAllWindows: () => void
+    setClosingAllWindowsAnimation: (isOpen: boolean) => void
 }
 
 interface AppProviderProps {
@@ -245,6 +249,10 @@ export const Context = createContext<AppContextType>({
     compact: false,
     menu: [],
     openStart: () => {},
+    animateClosingAllWindows: () => {},
+    closingAllWindowsAnimation: false,
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
 })
 
 export interface AppSetting {
@@ -803,6 +811,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
+    const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
@@ -1236,6 +1245,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         localStorage.setItem('siteSettings', JSON.stringify(settings))
     }
 
+    const animateClosingAllWindows = () => {
+        setClosingAllWindowsAnimation(true)
+    }
+
+    const closeAllWindows = () => {
+        setWindows([])
+    }
+
     useEffect(() => {
         if (location.key === 'initial' && location.pathname === '/' && isMobile) {
             return
@@ -1426,6 +1443,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 compact,
                 menu,
                 openStart,
+                animateClosingAllWindows,
+                closingAllWindowsAnimation,
+                setClosingAllWindowsAnimation,
+                closeAllWindows,
             }}
         >
             {children}
