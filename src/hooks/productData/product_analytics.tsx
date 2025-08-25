@@ -8,6 +8,8 @@ import {
     IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
+    IconDatabase,
+    IconPeople,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 
@@ -310,6 +312,56 @@ export const productAnalytics = {
                 },
             ],
         },
+        {
+            title: 'SQL editor',
+            headline: 'Write SQL against your data',
+            description: 'No separate data warehouse needed – though it works with yours if you have one, or you can use ours.',
+            icon: <IconDatabase />,
+            color: 'purple',
+            layout: 'columns',
+            features: [
+                {
+                    title: 'Write custom queries',
+                    description: 'Combine product data with warehouse data',
+                },
+                {
+                    title: 'Visualize data in tables, trends, charts and more',
+                    description: 'Customize visualizations with colors, goals, scales, legends, and more',
+                },
+            ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
+                    alt: 'SQL editor',
+                    shadow: true,
+                },
+            ],
+        },
+        {
+            title: 'Group analytics',
+            headline: 'Track companies, not just individuals',
+            description: 'See how all seat activity rolls up to the entire account level – essential for B2B.',
+            icon: <IconPeople />,
+            color: 'green',
+            features: [
+                {
+                    title: 'Track organizations, companies, teams, projects',
+                    description: '',
+                },
+                {
+                    title: 'Filter, build cohorts based on group properties',
+                    description: '',
+                },
+                {
+                    title: 'Measure activation and retention at a group level',
+                    description: '',
+                },
+                {
+                    title: 'Target feature flags at groups',
+                    description: '',
+                },
+            ],
+        },
     ],
     questions: [
         {
@@ -369,25 +421,21 @@ export const productAnalytics = {
         summary: {
             them: [
                 {
-                    title: 'Time-based analysis for web analytics (e.g. time on page)',
-                    subtitle: "We're working on this!",
-                    subtitleUrl: 'https://posthog.com/teams/web-analytics',
+                    title: 'You want to use your own warehouse like Snowflake',
                 },
                 {
-                    title: 'Predictive analytics for extrapolating events into the future',
-                },
-                {
-                    title: 'Alerting for when events move beyond set thresholds',
-                    subtitle: "We're working on this!",
+                    title: "You need something extremely simple",
+                    subtitle: "Just use Web Analytics!",
+                    subtitleUrl: '/web-analytics',
                 },
             ],
             us: [
                 {
                     title: 'Linking between analytics and other features, so you can jump from a graph to a relevant recording',
                 },
-                {
-                    title: 'Wide range of insight types for analyzing data',
-                },
+                // {
+                //     title: 'Wide range of insight types for analyzing data',
+                // },
                 {
                     title: 'Formula mode and SQL access to enable deeper analysis',
                 },
@@ -925,7 +973,7 @@ export const productAnalytics = {
         customers:
             "Y Combinator gets 30% more data than they did with Google Analytics using a reverse proxy. Hasura found drop-offs they'd never seen before and fixed them. Contra watched recordings of users who dropped off and increased registrations by 30%. When you can understand the 'why' behind the numbers, fixing things gets a lot easier.",
         features:
-            "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>HogQL:</strong> Write SQL against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/data-warehouse'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>LLM insights:</strong> Track AI costs, latency, usage. Group by model or prompt version.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
+            "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/data-warehouse'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
         answers:
             'These questions come from real users. The cool thing is you can answer them without writing code or bothering engineering. Define churn however you want, find those users, see what they did differently. Then watch their last sessions to understand why they left. Power users? We automatically find who uses features most. Make cohorts, message them differently, whatever you need.',
         pricing:
