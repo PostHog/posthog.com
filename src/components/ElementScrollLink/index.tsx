@@ -102,7 +102,7 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         <button
             {...buttonProps}
             onClick={handleClick}
-            className={`
+            className={` [overflow-wrap:anywhere]
                 text-left text-sm py-0.5 block relative active:top-px active:scale-[.99]
                 ${isActive ? 'font-semibold text-primary' : 'text-secondary hover:text-primary '} 
                 ${className}
