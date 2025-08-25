@@ -1577,6 +1577,10 @@
         {
             "source": "/docs/ai-engineering/traceloop-posthog",
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering",
+            "destination": "/docs/llm-analytics"
         }
     ],
     "headers": [
