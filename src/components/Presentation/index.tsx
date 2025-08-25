@@ -96,8 +96,8 @@ export default function Presentation({
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true)
-    const [drawerHeight, setDrawerHeight] = useState<number>(80)
-    const [lastOpenHeight, setLastOpenHeight] = useState<number>(80)
+    const [drawerHeight, setDrawerHeight] = useState<number>(90)
+    const [lastOpenHeight, setLastOpenHeight] = useState<number>(90)
     const [isDragging, setIsDragging] = useState<boolean>(false)
     const [dragStartHeight, setDragStartHeight] = useState<number>(0)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -115,7 +115,7 @@ export default function Presentation({
             setIsDrawerOpen(false)
         } else {
             // Opening: restore last height, but ensure it's reasonable
-            const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 80
+            const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 90
             setDrawerHeight(heightToRestore)
             setIsDrawerOpen(true)
         }
@@ -274,16 +274,15 @@ export default function Presentation({
                             animate={
                                 isMobile
                                     ? {
-                                          height: isNavVisible ? 'auto' : 0,
-                                          width: '100%',
-                                      }
+                                        height: isNavVisible ? 'auto' : 0,
+                                        width: '100%',
+                                    }
                                     : { width: isNavVisible ? 192 : 0, height: '100%' }
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`bg-primary @2xl:border-y-0 border-y ${
-                                isNavVisible ? '@2xl:border-r' : 'border-b-0'
-                            } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[50px]`}
+                            className={`bg-primary @2xl:border-y-0 border-y ${isNavVisible ? '@2xl:border-r' : 'border-b-0'
+                                } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[50px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
@@ -328,9 +327,8 @@ export default function Presentation({
                                 </div>
                                 <div
                                     data-scheme="primary"
-                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${
-                                        !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                    }`}
+                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${!isDragging ? 'transition-all duration-200 ease-out' : ''
+                                        }`}
                                     style={{
                                         height: isDrawerOpen ? drawerHeight : 0,
                                         maxHeight: 300,
@@ -339,11 +337,10 @@ export default function Presentation({
                                 >
                                     <motion.div
                                         data-scheme="tertiary"
-                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${
-                                            isDrawerOpen
+                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${isDrawerOpen
                                                 ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
                                                 : 'pointer-events-none'
-                                        }`}
+                                            }`}
                                         drag={isDrawerOpen ? 'y' : false}
                                         dragMomentum={false}
                                         dragConstraints={{ top: 0, bottom: 0 }}
@@ -360,7 +357,7 @@ export default function Presentation({
                                                 setIsDrawerOpen(false)
                                                 // Ensure we have a reasonable height for reopening
                                                 if (lastOpenHeight < 10) {
-                                                    setLastOpenHeight(80)
+                                                    setLastOpenHeight(90)
                                                 }
                                             }
                                         }}
