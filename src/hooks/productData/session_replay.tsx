@@ -137,17 +137,14 @@ export const sessionReplay = {
             children: <SnippetRenderer />,
         },
         {
-            title: 'Capture form inputs',
-            headline: 'Capture form inputs',
+            title: 'Capture form data',
+            headline: 'Capture form data',
             description:
-                "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
+                <>HTML <code>input</code> fields are masked by default. But if you'd like to see what users are typing
+                    into a form, set <code>maskAllInputs</code> to <code>false</code>. (Password fields will still
+                    remain masked.)</>,
             children: (
                 <>
-                    <p className="leading-tight">
-                        <code>input</code> fields are masked by default. But if you'd like to see what users are typing
-                        into a form, set <code>maskAllInputs</code> to <code>false</code>. (Password fields will still
-                        remain masked.)
-                    </p>
                     <div className="flex flex-col md:flex-row gap-x-6">
                         <div className="shrink">
                             <h4 className="text-lg">Your code</h4>
@@ -185,6 +182,13 @@ export const sessionReplay = {
                 </>
             ),
         },
+        // {
+        //     title: 'Canvas recording',
+        //     headline: 'Canvas recording',
+        //     description:
+        //         "Capture canvas elements from your application. It works in both 2D and WebGL environments.",
+        //     children: <OSButton asLink to="/docs/session-replay/canvas-recording" state={{ newWindow: true }}>Read the docs</OSButton>,
+        // },
         // {
         //     title: 'Collections',
         //     headline: 'Collections',
@@ -245,9 +249,10 @@ window.posthog.onFeatureFlags(function () {
                         <legend className="text-lg font-semibold">Web</legend>
                         <OSButton
                             asLink
-                            icon={<IconJavaScript className="size-8" />}
+                            icon={<IconJavaScript />}
+                            iconClassName="size-8 relative -top-px"
                             size="xl"
-                            className="!text-xl text-primary font-semibold"
+                            className="!text-xl mr-1"
                             to="/docs/libraries/js"
                             state={{
                                 newWindow: true,
@@ -257,12 +262,13 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                     </fieldset>
                     <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Mobile</legend>
+                        <legend className="text-lg font-semibold">Mobile*</legend>
                         <OSButton
                             asLink
-                            icon={<IconApple className="size-8" />}
+                            icon={<IconApple />}
+                            iconClassName="size-8 relative -top-px"
                             size="xl"
-                            className="!text-xl text-primary font-semibold"
+                            className="!text-xl mr-1"
                             to="/docs/libraries/ios"
                             state={{
                                 newWindow: true,
@@ -272,9 +278,10 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                         <OSButton
                             asLink
-                            icon={<IconAndroid className="size-8" />}
+                            icon={<IconAndroid />}
+                            iconClassName="size-8 relative -top-px"
                             size="xl"
-                            className="!text-xl text-primary font-semibold"
+                            className="!text-xl mr-1"
                             to="/docs/libraries/android"
                             state={{
                                 newWindow: true,
@@ -284,13 +291,14 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                     </fieldset>
                     <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Cross-platform</legend>
+                        <legend className="text-lg font-semibold">Cross-platform*</legend>
                         <OSButton
                             asLink
-                            icon={<IconReactNative className="size-8" />}
+                            icon={<IconReactNative />}
+                            iconClassName="size-8 relative -top-px"
                             size="xl"
-                            className="!text-xl text-primary font-semibold"
-                            to="/docs/libraries/ios"
+                            className="!text-xl mr-1"
+                            to="/docs/libraries/react-native"
                             state={{
                                 newWindow: true,
                             }}
@@ -299,10 +307,11 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                         <OSButton
                             asLink
-                            icon={<IconFlutter className="size-8" />}
+                            icon={<IconFlutter />}
+                            iconClassName="size-8 relative -top-px"
                             size="xl"
-                            className="!text-xl text-primary font-semibold"
-                            to="/docs/libraries/android"
+                            className="!text-xl mr-1"
+                            to="/docs/libraries/flutter"
                             state={{
                                 newWindow: true,
                             }}
@@ -325,6 +334,10 @@ window.posthog.onFeatureFlags(function () {
             headline: 'More features',
             features: [
                 {
+                    title: 'Canvas recording',
+                    description: "Capture canvas elements from your application. It works in both 2D and WebGL environments.",
+                },
+                {
                     title: 'Filter by event',
                     description: 'Limit to recordings where users performed a specific event or action',
                 },
@@ -332,6 +345,14 @@ window.posthog.onFeatureFlags(function () {
                     title: 'Filter by people',
                     description:
                         'Use person properties (like country, custom property, or even email address) to quickly find relevant recordings',
+                },
+                {
+                    title: 'Saved filters',
+                    description: 'Find important recordings faster with saved filters',
+                },
+                {
+                    title: 'Collections',
+                    description: 'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
                 },
                 {
                     title: 'Block sensitive data',
@@ -390,19 +411,23 @@ window.posthog.onFeatureFlags(function () {
             question: 'How can I improve customer support with screen recordings?',
             url: '/tutorials/session-recordings-for-support',
         },
+        {
+            question: 'How do I control which sessions are being captured?',
+            url: '/docs/session-replay/how-to-control-which-sessions-you-record',
+        },
     ],
     comparison: {
         summary: {
             them: [
                 {
-                    title: 'Error tracking',
-                    subtitle: 'In progress!',
-                    subtitleUrl: 'https://github.com/PostHog/posthog/issues/23400',
+                    title: 'You want self-hosting or more strict data residency',
+                    // subtitle: 'In progress!',
+                    // subtitleUrl: 'https://github.com/PostHog/posthog/issues/23400',
                 },
                 {
-                    title: 'Alerting',
-                    subtitle: 'In progress!',
-                    subtitleUrl: 'https://github.com/PostHog/posthog/issues/14331',
+                    title: 'You have strong security requirements that require more robust PII redaction',
+                    // subtitle: 'In progress!',
+                    // subtitleUrl: 'https://github.com/PostHog/posthog/issues/14331',
                 },
             ],
             us: [
