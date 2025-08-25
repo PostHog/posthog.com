@@ -5,11 +5,11 @@ import Link from 'components/Link'
 import React from 'react'
 
 const PostPreviewSkeleton = () => {
-    return <div className="w-full h-28 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+    return <div className="w-full h-28 animate-pulse bg-accent rounded-md" />
 }
 
 const FeaturedPostSkeleton = () => {
-    return <div className="w-full h-96 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+    return <div className="w-full h-96 animate-pulse bg-accent rounded-md" />
 }
 
 const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {

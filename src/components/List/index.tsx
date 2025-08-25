@@ -51,16 +51,14 @@ export const ListItem = ({
             <Link
                 onClick={handleClick}
                 to={url}
-                className={`group flex justify-between items-center space-x-2 relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all !text-inherit hover:!text-inherit`}
+                className={`group flex justify-between items-center space-x-2 relative rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all !text-inherit hover:!text-inherit`}
             >
                 <span className="flex items-center space-x-2">
-                    {image && <img className="icon w-12 h-12 p-2 rounded-sm" src={image} />}
+                    {image && <img className="icon size-8 rounded-sm" src={image} />}
                     {Icon && (
                         <Icon
-                            className={`w-10 h-10 p-2 ${
-                                iconColor
-                                    ? `text-${iconColor} bg-${iconColor} bg-opacity-20`
-                                    : `bg-accent dark:bg-accent-dark`
+                            className={`size-8 ${
+                                iconColor ? `text-${iconColor} bg-${iconColor} bg-opacity-20` : `bg-accent`
                             }  rounded-sm shrink-0`}
                         />
                     )}
@@ -75,16 +73,14 @@ export const ListItem = ({
                     </span>
                 </span>
                 {badge && (
-                    <span className="inline-flex px-2 items-center text-[12px] uppercase text-primary/50 dark:text-primary-dark/50">
-                        {badge}
-                    </span>
+                    <span className="inline-flex px-2 items-center text-[12px] uppercase text-muted">{badge}</span>
                 )}
                 {children && (
                     <NewIcons.IconChevronDown className={`w-7 h-7 transition-transform ${open ? 'rotate-180' : ''}`} />
                 )}
             </Link>
             {children && open && (
-                <ul className="list-none m-0 py-1 px-0 border border-border dark:border-dark rounded-md absolute w-full z-10 bg-accent dark:bg-accent-dark">
+                <ul className="list-none m-0 py-1 px-0 border border-input rounded-md absolute w-full z-10 bg-accent">
                     {children.map((item) => (
                         <li key={`${label}-${item.name}`}>
                             <Link

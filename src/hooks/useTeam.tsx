@@ -36,6 +36,7 @@ const teamQuery = (slug: string) =>
                     },
                 },
                 miniCrest: true,
+                tagline: true,
             },
         },
         { encodeValuesOnly: true }

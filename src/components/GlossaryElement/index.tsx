@@ -34,44 +34,45 @@ export const formatNode = (node: MdxNode) => ({
 
 export const TooltipContent = ({ slug, description, title, video, setOpen }: TooltipContentProps) => {
     const [view, setView] = useState('article')
+
+    if (!title || !slug || !description) {
+        return null
+    }
+
     return (
-        title &&
-        slug &&
-        description && (
-            <div className="w-[320px] p-4 relative">
-                <button onClick={() => setOpen(false)} className="absolute top-2 right-1">
-                    <Close opacity="100" className="w-3 h-3 opacity-40 hover:opacity-60 transition-opacity" />
-                </button>
-                {video && (
-                    <div className="grid grid-cols-2 mb-4 pb-4 relative">
-                        <button onClick={() => setView('article')} className="font-semibold">
-                            Article
-                        </button>
-                        <button onClick={() => setView('video')} className="font-semibold">
-                            Video
-                        </button>
-                        <span
-                            className={`w-1/2 h-[2px] rounded-full bg-red absolute bottom-0 transition-all ${
-                                view === 'article' ? 'translate-x-0' : 'translate-x-full'
-                            }`}
-                        />
-                    </div>
-                )}
-                {view === 'article' ? (
-                    <>
-                        <h4 className="text-2xl m-0">{title}</h4>
-                        <p className="text-base m-0 mt-4">{description}</p>
-                        {slug && (
-                            <CallToAction size="sm" className="mt-6" width="full" to={slug}>
-                                Continue reading
-                            </CallToAction>
-                        )}
-                    </>
-                ) : (
-                    <iframe className="aspect-video w-full m-0" src={video} />
-                )}
-            </div>
-        )
+        <div className="w-[320px] p-4 relative">
+            <button onClick={() => setOpen(false)} className="absolute top-2 right-1">
+                <Close opacity="100" className="w-3 h-3 opacity-40 hover:opacity-60 transition-opacity" />
+            </button>
+            {video && (
+                <div className="grid grid-cols-2 mb-4 pb-4 relative">
+                    <button onClick={() => setView('article')} className="font-semibold">
+                        Article
+                    </button>
+                    <button onClick={() => setView('video')} className="font-semibold">
+                        Video
+                    </button>
+                    <span
+                        className={`w-1/2 h-[2px] rounded-full bg-red absolute bottom-0 transition-all ${
+                            view === 'article' ? 'translate-x-0' : 'translate-x-full'
+                        }`}
+                    />
+                </div>
+            )}
+            {view === 'article' ? (
+                <>
+                    <h4 className="text-2xl m-0">{title}</h4>
+                    <p className="text-base m-0 mt-4">{description}</p>
+                    {slug && (
+                        <CallToAction size="sm" className="mt-6" width="full" to={slug}>
+                            Continue reading
+                        </CallToAction>
+                    )}
+                </>
+            ) : (
+                <iframe className="aspect-video w-full m-0" src={video} />
+            )}
+        </div>
     )
 }
 

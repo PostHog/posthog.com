@@ -127,7 +127,7 @@ export const Sidebar = () => {
                         <span>
                             {isModerator && (
                                 <Link
-                                    className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
+                                    className="text-sm pr-2 mr-2 border-r border-input dark:text-yellow text-red font-semibold"
                                     to="/posts/new"
                                 >
                                     New post
@@ -216,7 +216,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
 const categoriesHideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
 export const tagsHideFromIndex = ['Comparisons']
 
-export const getParams = (root, tag, sort) => {
+export const getParams = (root, tag, sort, authorId) => {
     return {
         sort,
         filters: {
@@ -295,6 +295,17 @@ export const getParams = (root, tag, sort) => {
                               ],
                           },
                       ]),
+                ...(authorId
+                    ? [
+                          {
+                              authors: {
+                                  id: {
+                                      $eq: authorId,
+                                  },
+                              },
+                          },
+                      ]
+                    : []),
             ],
         },
     }
@@ -430,7 +441,7 @@ export default function Posts({
                 >
                     <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                         <div className="px-4">
-                            <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
+                            <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-input">
                                 <p className="m-0 text-sm font-bold dark:text-white">
                                     Note: PostHog.com authentication is separate from your PostHog app.
                                 </p>
@@ -453,7 +464,7 @@ export default function Posts({
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}
-                            className="ml-4 inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                            className="ml-4 inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 md:mb-8 rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                         >
                             <RightArrow className="-scale-x-100 w-6 text-red dark:text-yellow" />
                             <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">

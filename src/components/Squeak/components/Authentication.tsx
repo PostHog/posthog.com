@@ -41,7 +41,7 @@ export const Authentication = ({
     }
 
     return (
-        <div>
+        <div data-scheme="primary" className="bg-primary">
             {showProfile && <Avatar className="w-[40px] h-[40px] mr-[10px]" />}
             {formValues && (
                 <div className="items-center border border-black/20 dark:border-white/20 rounded-md border-b-0 flex max-w-[600px] py-2 px-4 rounded-bl-none rounded-br-none">
@@ -65,18 +65,14 @@ export const Authentication = ({
             )}
             <div style={showProfile ? { marginLeft: 50 } : {}}>
                 {showBanner && (
-                    <div className="bg-[#FFF7E9] dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark border-b-0 py-2 px-4 rounded-tr-0 rounded-tl-0">
+                    <div className="bg-[#FFF7E9] dark:bg-accent-dark border border-primary text-primary dark:text-primary-dark border-b-0 py-2 px-4 rounded-tr-0 rounded-tl-0">
                         <h4 className="m-0 text-base pb-1 text-primary dark:text-primary-dark">
                             Please signup to post.
                         </h4>
                         <p className="m-0 text-sm">Create an account to ask questions & help others.</p>
                     </div>
                 )}
-                <div
-                    className={`border border-light dark:border-dark border-t-0 rounded-md overflow-hidden relative ${
-                        showBanner ? 'rounded-tr-none rounded-tl-none' : ''
-                    }`}
-                >
+                <div className={`overflow-hidden relative ${showBanner ? 'rounded-tr-none rounded-tl-none' : ''}`}>
                     <div className="border-y grid grid-cols-2 relative border-black/[.2] dark:border-white/[.2]">
                         <button
                             className={`${
@@ -109,7 +105,7 @@ export const Authentication = ({
                                 {message}
                             </p>
                         )}
-                        <div className="pt-4 px-6 bg-accent dark:bg-accent-dark">
+                        <div className="pt-4 px-6 bg-accent">
                             {
                                 {
                                     'sign-in': (

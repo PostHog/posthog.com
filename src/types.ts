@@ -82,6 +82,7 @@ export interface BillingV2FeatureType {
     limit?: number
     note?: string
     group?: AvailableFeature
+    entitlement_only?: boolean
 }
 
 export interface BillingV2TierType {

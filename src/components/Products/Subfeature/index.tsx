@@ -15,7 +15,7 @@ export const FeatureDescription = ({ children, className = '' }: { children: Rea
 export const Subfeature = ({ title, description, className = '', icon, color }: IFeature): JSX.Element => {
     const Icon = PostHogIcons[icon]
     return (
-        <li className={`bg-accent dark:bg-accent-dark rounded-lg p-4 sm:p-6 sm:pb-8  ${className}`}>
+        <li className={`bg-accent rounded-lg p-4 sm:p-6 sm:pb-8  ${className}`}>
             {icon && (
                 <span className={`inline-block w-10 h-10 mb-4 ${color ? 'text-' + color : 'opacity-50'}`}>{icon}</span>
             )}

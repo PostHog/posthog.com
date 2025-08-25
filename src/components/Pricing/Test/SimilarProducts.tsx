@@ -7,6 +7,7 @@ import { IconCheck, IconX } from '@posthog/icons'
 import Logo from 'components/Logo'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CTA } from '../Plans'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const comparison = [
     {
@@ -140,58 +141,60 @@ const comparison = [
 
 export const SimilarProducts = () => {
     return (
-        <section className={`${section} my-8 md:px-4`}>
+        <section className={`${section} my-8`}>
             <SectionHeader>
-                <h3 className="mb-2">Compare to similar products</h3>
+                <h2>Compare to similar products</h2>
             </SectionHeader>
-            <div className="mt-4 -mx-4 px-4 overflow-x-auto">
-                <div className="grid grid-cols-7 min-w-[1000px]">
-                    <div className="col-span-1 pr-4"></div>
-                    {comparison.map((company) => (
-                        <div
-                            key={company.name}
-                            className={`text-center py-2 px-4 whitespace-nowrap flex flex-col justify-end ${
-                                company.name === 'PostHog'
-                                    ? 'bg-white dark:bg-green/15 border-x-2 border-t-green border-x-green rounded-t-sm border-t-2'
-                                    : ''
-                            }`}
-                        >
-                            <div className="max-h-9 text-center mb-2">{company.logo}</div>
-                            <strong>{company.name}</strong>
-                        </div>
-                    ))}
-                </div>
-                <div className="grid grid-cols-7 min-w-[1000px] divide-y divide-light dark:divide-dark">
-                    {Object.keys(comparison[0].products).map((product) => (
-                        <React.Fragment key={product}>
-                            <div className="col-span-1 flex items-start gap-2 py-2 pl-2 pr-4 first:border-t border-light dark:border-dark">
-                                <strong className="whitespace-nowrap">{product}</strong>
+            <ScrollArea className="-mx-4">
+                <div className="my-4 px-4">
+                    <div className="grid grid-cols-[minmax(150px,1fr)_repeat(5,minmax(105px,1fr))_minmax(160px,1fr)]">
+                        <div className="col-span-1 pr-4"></div>
+                        {comparison.map((company) => (
+                            <div
+                                key={company.name}
+                                className={`text-center py-2 px-4 whitespace-nowrap flex flex-col justify-end ${
+                                    company.name === 'PostHog'
+                                        ? 'bg-white dark:bg-green/15 border-x-2 border-t-green border-x-green rounded-t-sm border-t-2'
+                                        : ''
+                                }`}
+                            >
+                                <div className="max-h-9 text-center mb-2">{company.logo}</div>
+                                <strong>{company.name}</strong>
                             </div>
-                            {comparison.map((company) => (
-                                <div
-                                    key={`${company.name}-${product}`}
-                                    className={`py-2 px-4 text-center ${
-                                        company.name === 'PostHog'
-                                            ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
-                                            : ''
-                                    }`}
-                                >
-                                    {company.products[product] ? (
-                                        <IconCheck className="size-6 inline-block text-green" />
-                                    ) : (
-                                        <IconX className="size-6 inline-block text-red" />
-                                    )}
-                                    {product === 'Data warehouse' && company.name === 'PostHog' && (
-                                        <div className="pt-2">
-                                            <CTA size="sm" />
-                                        </div>
-                                    )}
+                        ))}
+                    </div>
+                    <div className="grid grid-cols-[minmax(150px,1fr)_repeat(5,minmax(105px,1fr))_minmax(160px,1fr)] divide-y divide-primary">
+                        {Object.keys(comparison[0].products).map((product) => (
+                            <React.Fragment key={product}>
+                                <div className="col-span-1 flex items-start gap-2 py-2 pl-2 pr-4 first:border-t border-primary">
+                                    <strong className="whitespace-nowrap">{product}</strong>
                                 </div>
-                            ))}
-                        </React.Fragment>
-                    ))}
+                                {comparison.map((company) => (
+                                    <div
+                                        key={`${company.name}-${product}`}
+                                        className={`py-2 px-4 text-center ${
+                                            company.name === 'PostHog'
+                                                ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
+                                                : ''
+                                        }`}
+                                    >
+                                        {company.products[product] ? (
+                                            <IconCheck className="size-6 inline-block text-green" />
+                                        ) : (
+                                            <IconX className="size-6 inline-block text-red" />
+                                        )}
+                                        {product === 'Data warehouse' && company.name === 'PostHog' && (
+                                            <div className="pt-2">
+                                                <CTA size="sm" />
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </React.Fragment>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </ScrollArea>
         </section>
     )
 }

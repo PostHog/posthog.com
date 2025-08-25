@@ -15,7 +15,7 @@ export const SiteSearchCallout: React.FC<SearchBoxProps> = ({ filter }) => {
     }
 
     return (
-        <div className="max-w-xl border border-gray-accent-light p-4 rounded inline-flex flex-col">
+        <div className="max-w-xl border border-primary p-4 rounded inline-flex flex-col">
             <p className="text-sm text-black/75 dark:text-white mb-2">
                 <strong>Tip:</strong> Get somewhere fast with{' '}
                 <button className="font-semibold text-red" onClick={handleSearchBoxClick}>

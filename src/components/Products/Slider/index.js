@@ -17,13 +17,13 @@ const SlideButton = ({ title, Icon, color, activeSlide, setSlide, index }) => {
     const active = activeSlide === index
 
     return (
-        <li className="h-[calc(100%_-_.25rem)] pb-1 border-b border-primary/25 dark:border-primary-dark/25 relative">
+        <li className="h-[calc(100%_-_.25rem)] pb-1 border-b border-input-dark/25 relative">
             <button
                 onClick={() => setSlide(index)}
                 className={`flex flex-col items-center mt-1 p-2 w-full rounded-md transition-opacity transition-colors border border-b-3 border-transparent space-y-1 h-full ${
                     active
                         ? `after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-${color} after:rounded-full active after:translate-y-1/2`
-                        : 'group hover:border-light dark:hover:border-dark hover:translate-y-[-2px] active:translate-y-[1px]'
+                        : 'group hover:border hover:translate-y-[-2px] active:translate-y-[1px]'
                 }`}
             >
                 <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
@@ -105,7 +105,7 @@ export default function Slider() {
                         onClick={() => handleArrow(activeSlide - 1, slides.length - 1)}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6"
                     >
-                        <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border" />
                     </button>
                 </div>
                 <div
@@ -123,7 +123,7 @@ export default function Slider() {
                         onClick={() => handleArrow(activeSlide + 1, 0)}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6 box-border"
                     >
-                        <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border" />
                     </button>
                 </div>
             </div>

@@ -416,7 +416,7 @@ export const ProductErrorTracking = () => {
 
                 <section>
                     <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
-                        <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
+                        <div className="bg-accent -mx-5 md:-mx-8">
                             <Marquee product={product.capitalized} shortFade>
                                 {questions.map((question, index) => {
                                     return <Question {...question} key={index} />

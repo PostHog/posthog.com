@@ -24,7 +24,7 @@ export const Features = ({ features, size, className = '' }) => {
 export const Badge = ({ title, className = '' }) => {
     return (
         <span
-            className={`text-xs py-1 px-2 rounded-sm border border-primary/50 opacity-50 font-normal leading-none ${className}`}
+            className={`text-xs py-1 px-2 rounded-sm border border-input opacity-50 font-normal leading-none ${className}`}
         >
             {title}
         </span>
@@ -40,7 +40,7 @@ export const Title = ({ className = '', title, subtitle, badge, icon }) => {
                     <h3 className="m-0 text-xl font-black mr-2">{title}</h3>
                     {badge && (
                         <span
-                            className={`text-xs py-[4px] px-[4px] rounded-[3px] border border-primary/50 opacity-50 font-normal leading-none`}
+                            className={`text-xs py-[4px] px-[4px] rounded-[3px] border border-input opacity-50 font-normal leading-none`}
                         >
                             {badge}
                         </span>
@@ -68,7 +68,7 @@ export const Price = ({ children }) => {
 export const Section = ({ title, children, className = '' }) => {
     return (
         <div className={className}>
-            <h4 className="opacity-50 border-b border-dashed border-gray-accent-light pb-2 font-semibold text-[15px] mb-3 mt-7">
+            <h4 className="opacity-50 border-b border-dashed border-primary pb-2 font-semibold text-[15px] mb-3 mt-7">
                 {title}
             </h4>
             {children}

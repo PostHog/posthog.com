@@ -20,13 +20,12 @@ const ModalViewButton = ({
         <button
             type="button"
             onClick={onClick}
-            className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${
-                active
-                    ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
+            className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${active
+                ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
                 after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b
-                bg-white dark:bg-dark font-bold`
-                    : 'opacity-70 hover:opacity-100'
-            }`}
+                bg-light dark:bg-dark font-bold`
+                : 'opacity-70 hover:opacity-100'
+                }`}
         >
             {children}
         </button>
@@ -61,9 +60,9 @@ export default function Crest({
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="mt-28 max-w-2xl w-full relative flex flex-col rounded-md border border-border dark:border-border-dark overflow-hidden"
+                        className="mt-28 max-w-2xl w-full relative flex flex-col rounded-md border border-primary overflow-hidden"
                     >
-                        <div className="bg-accent dark:bg-accent-dark border-b border-border dark:border-border-dark flex justify-between items-center">
+                        <div className="bg-accent border-b border-primary flex justify-between items-center">
                             <div className="flex -mt-[1px]">
                                 <ModalViewButton active={view === 'main'} onClick={() => setView('main')}>
                                     Main
@@ -76,14 +75,14 @@ export default function Crest({
                                 <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
                             </button>
                         </div>
-                        <div className="bg-white dark:bg-dark p-4">
+                        <div className="bg-light dark:bg-dark p-4">
                             {view === 'main' ? (
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="flex items-center justify-center relative group">
                                         <TeamPatch
                                             name={teamName}
                                             imageUrl={values.crestImage?.objectURL}
-                                            className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
+                                            className="h-48 @md/reader-content-container:h-64 -mt-2 @md/reader-content-container:m-0"
                                             {...values.crestOptions}
                                         />
                                         {!values.crestImage?.objectURL ? (
@@ -98,7 +97,7 @@ export default function Crest({
                                         ) : (
                                             <button
                                                 onClick={() => setFieldValue('crestImage', null)}
-                                                className="group-hover:opacity-100 opacity-0 transition-opacity absolute size-8 bg-white rounded-full border border-border dark:border-dark flex items-center justify-center"
+                                                className="group-hover:opacity-100 opacity-0 transition-opacity absolute size-8 bg-white rounded-full border border-input flex items-center justify-center"
                                             >
                                                 <IconX className="size-4" />
                                             </button>
@@ -291,13 +290,13 @@ export default function Crest({
                                 onRemove={() => setFieldValue('miniCrest', null)}
                                 onDrop={(image) => setFieldValue('miniCrest', image)}
                                 image={values.miniCrest}
-                                className="!size-full bg-white rounded-full border border-border dark:border-border-dark overflow-hidden !p-2"
+                                className="!size-full bg-white rounded-full border border-primary overflow-hidden !p-2"
                             />
                         ) : values.miniCrest?.objectURL ? (
                             <div className="size-full">
                                 <img
                                     src={values.miniCrest?.objectURL}
-                                    className="absolute w-full h-full object-contain object-center inset-0 size-full bg-white rounded-full border border-border dark:border-border-dark overflow-hidden"
+                                    className="absolute w-full h-full object-contain object-center inset-0 size-full bg-white rounded-full border border-primary overflow-hidden"
                                 />
                             </div>
                         ) : null}
@@ -308,7 +307,7 @@ export default function Crest({
                         <TeamPatch
                             name={teamName}
                             imageUrl={values.crestImage?.objectURL}
-                            className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
+                            className="h-48 @md/reader-content-container:h-64 -mt-2 @md/reader-content-container:m-0"
                             {...values.crestOptions}
                         />
                         {editing && (
@@ -318,7 +317,7 @@ export default function Crest({
                         )}
                     </div>
                 ) : editing ? (
-                    <div className="size-60 border border-border dark:border-border-dark rounded-md flex items-center justify-center">
+                    <div className="size-60 border border-primary rounded-md flex items-center justify-center">
                         <CallToAction onClick={() => setCrestBuilderOpen(true)} size="sm" type="secondary">
                             Crest builder
                         </CallToAction>

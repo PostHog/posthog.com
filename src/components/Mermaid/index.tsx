@@ -5,10 +5,7 @@ import { IconMinus, IconPlus, IconRefresh } from '@posthog/icons'
 
 const ControlButton = ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => {
     return (
-        <button
-            onClick={onClick}
-            className="p-2 border border-light dark:border-dark rounded-md bg-accent dark:bg-accent-dark"
-        >
+        <button onClick={onClick} className="p-2 border border-primary rounded-md bg-accent">
             {children}
         </button>
     )
@@ -50,7 +47,7 @@ export default function Mermaid({ children }: { children: string }): JSX.Element
     return (
         <div className="relative group">
             {loading && (
-                <div className="bg-accent dark:bg-accent-dark flex items-center justify-center size-full rounded-md animate-pulse absolute inset-0" />
+                <div className="bg-accent flex items-center justify-center size-full rounded-md animate-pulse absolute inset-0" />
             )}
             <TransformWrapper>
                 <Controls />
