@@ -99,6 +99,7 @@ interface MSPaintState {
     curvePoints: { x: number; y: number }[]
     selection: { x: number; y: number; width: number; height: number } | null
     originalImageData: ImageData | null
+    initialImageLoaded?: boolean
 }
 
 export default function MSPaint({
@@ -117,6 +118,28 @@ export default function MSPaint({
     const containerRef = useRef<HTMLDivElement>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
+    // Calculate initial canvas size based on whether it should be responsive
+    const getInitialCanvasSize = () => {
+        if (!initialCanvasSize) return { width: 640, height: 480 }
+
+        // Check if we should use responsive sizing
+        if (initialCanvasSize.width >= 1000 && initialCanvasSize.height >= 500 && typeof window !== 'undefined') {
+            // Try to get container dimensions if available
+            const container = document.querySelector('.flex-1.bg-\\[\\#808080\\]')
+            if (container) {
+                const rect = container.getBoundingClientRect()
+                if (rect.width > 0 && rect.height > 0) {
+                    return {
+                        width: Math.floor(rect.width - 8), // Account for padding and borders
+                        height: Math.floor(rect.height - 8)
+                    }
+                }
+            }
+        }
+
+        return initialCanvasSize
+    }
+
     const [state, setState] = useState<MSPaintState>(
         initialState || {
             tool: 'pencil',
@@ -125,7 +148,7 @@ export default function MSPaint({
             brushSize: 1,
             isDrawing: false,
             startPos: { x: 0, y: 0 },
-            canvasSize: initialCanvasSize || { width: 640, height: 480 },
+            canvasSize: getInitialCanvasSize(),
             zoomLevel: 1,
             canvasHistory: [],
             historyIndex: -1,
@@ -134,10 +157,41 @@ export default function MSPaint({
             curvePoints: [],
             selection: null,
             originalImageData: null,
+            initialImageLoaded: false,
         }
     )
 
-    // Initialize canvas
+    // Handle responsive canvas sizing
+    useEffect(() => {
+        if (!initialCanvasSize || !(initialCanvasSize.width >= 1000 && initialCanvasSize.height >= 500)) {
+            return
+        }
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect
+                if (width > 0 && height > 0) {
+                    const newWidth = Math.floor(width - 4) // Account for borders
+                    const newHeight = Math.floor(height - 4)
+
+                    if (newWidth !== state.canvasSize?.width || newHeight !== state.canvasSize?.height) {
+                        setState(prev => ({ ...prev, canvasSize: { width: newWidth, height: newHeight } }))
+                    }
+                }
+            }
+        })
+
+        // Observe the parent container
+        if (containerRef.current?.parentElement) {
+            resizeObserver.observe(containerRef.current.parentElement)
+        }
+
+        return () => {
+            resizeObserver.disconnect()
+        }
+    }, [initialCanvasSize])
+
+    // Initialize canvas and load image
     useEffect(() => {
         const canvas = canvasRef.current
         if (!canvas) return
@@ -145,22 +199,35 @@ export default function MSPaint({
         const ctx = canvas.getContext('2d')
         if (!ctx) return
 
-        // Only initialize if canvas is truly empty (not resizing)
-        if (!state.canvasHistory || state.canvasHistory.length === 0) {
-            // Set white background
-            ctx.fillStyle = '#FFFFFF'
-            ctx.fillRect(0, 0, canvas.width, canvas.height)
+        // Check if we need to load the initial image
+        if (initialImage && !state.initialImageLoaded) {
+            // For responsive canvases, wait a bit for resize to complete
+            const isResponsive = initialCanvasSize && initialCanvasSize.width >= 1000 && initialCanvasSize.height >= 500
+            const loadDelay = isResponsive ? 100 : 0
 
-            // Load initial image if provided
-            if (initialImage) {
+            const loadTimeout = setTimeout(() => {
+                // Set white background first
+                ctx.fillStyle = '#FFFFFF'
+                ctx.fillRect(0, 0, canvas.width, canvas.height)
+
                 const img = new Image()
                 img.onload = () => {
-                    // Draw the image
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+                    // Get the current canvas (might have been resized)
+                    const currentCanvas = canvasRef.current
+                    if (!currentCanvas) return
+                    const currentCtx = currentCanvas.getContext('2d')
+                    if (!currentCtx) return
+
+                    // Clear and set white background
+                    currentCtx.fillStyle = '#FFFFFF'
+                    currentCtx.fillRect(0, 0, currentCanvas.width, currentCanvas.height)
+
+                    // Draw the image scaled to canvas size
+                    currentCtx.drawImage(img, 0, 0, currentCanvas.width, currentCanvas.height)
 
                     // Only convert to black and white if threshold is provided
                     if (threshold !== undefined) {
-                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+                        const imageData = currentCtx.getImageData(0, 0, currentCanvas.width, currentCanvas.height)
                         const data = imageData.data
 
                         // Convert to black lines on white background
@@ -183,32 +250,39 @@ export default function MSPaint({
                             data[i + 3] = 255 // Alpha
                         }
 
-                        ctx.putImageData(imageData, 0, 0)
+                        currentCtx.putImageData(imageData, 0, 0)
                     }
 
                     // Save initial state with image
-                    const finalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+                    const finalImageData = currentCtx.getImageData(0, 0, currentCanvas.width, currentCanvas.height)
                     setState((prev) => ({
                         ...prev,
                         canvasHistory: [finalImageData],
                         historyIndex: 0,
                         isModified: false,
                         originalImageData: finalImageData,
+                        initialImageLoaded: true,
                     }))
                 }
                 img.src = initialImage
-            } else {
-                // Save initial blank state
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-                setState((prev) => ({
-                    ...prev,
-                    canvasHistory: [imageData],
-                    historyIndex: 0,
-                    isModified: false,
-                }))
-            }
+            }, loadDelay)
+
+            return () => clearTimeout(loadTimeout)
+        } else if (!initialImage && (!state.canvasHistory || state.canvasHistory.length === 0)) {
+            // No image provided, just set white background
+            ctx.fillStyle = '#FFFFFF'
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+            // Save initial blank state
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+            setState((prev) => ({
+                ...prev,
+                canvasHistory: [imageData],
+                historyIndex: 0,
+                isModified: false,
+            }))
         }
-    }, [initialImage])
+    }, [initialImage, state.initialImageLoaded, threshold, state.canvasSize?.width, state.canvasSize?.height, initialCanvasSize])
 
     // Keyboard shortcuts
     useEffect(() => {
@@ -685,10 +759,10 @@ export default function MSPaint({
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
         return result
             ? {
-                  r: parseInt(result[1], 16),
-                  g: parseInt(result[2], 16),
-                  b: parseInt(result[3], 16),
-              }
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16),
+            }
             : null
     }
 
@@ -1051,11 +1125,10 @@ export default function MSPaint({
                             <button
                                 key={t}
                                 onClick={() => setState((prev) => ({ ...prev, tool: t }))}
-                                className={`w-6 h-6 border flex items-center justify-center ${
-                                    state.tool === t
-                                        ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
-                                        : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0] hover:bg-[#dfdfdf]'
-                                }`}
+                                className={`w-6 h-6 border flex items-center justify-center ${state.tool === t
+                                    ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
+                                    : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0] hover:bg-[#dfdfdf]'
+                                    }`}
                                 title={tooltip}
                             >
                                 <Icon className="w-4 h-4" />
@@ -1070,11 +1143,10 @@ export default function MSPaint({
                                 <button
                                     key={size}
                                     onClick={() => setState((prev) => ({ ...prev, brushSize: size }))}
-                                    className={`w-5 h-5 border flex items-center justify-center ${
-                                        state.brushSize === size
-                                            ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
-                                            : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0]'
-                                    }`}
+                                    className={`w-5 h-5 border flex items-center justify-center ${state.brushSize === size
+                                        ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
+                                        : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0]'
+                                        }`}
                                 >
                                     <div
                                         className="bg-black rounded-full"
@@ -1087,37 +1159,51 @@ export default function MSPaint({
                 </div>
 
                 {/* Canvas area */}
-                <div className="flex-1 bg-[#808080] p-2 overflow-auto">
+                <div className="flex-1 bg-[#808080] overflow-auto">
                     <div
                         ref={containerRef}
                         className="inline-block bg-white shadow-[inset_-1px_-1px_#ffffff,inset_1px_1px_#808080,inset_-2px_-2px_#c0c0c0,inset_2px_2px_#000000]"
-                        style={{ transform: `scale(${state.zoomLevel || 1})`, transformOrigin: 'top left' }}
+                        style={{
+                            transform: `scale(${state.zoomLevel || 1})`,
+                            transformOrigin: 'top left',
+                            width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto'
+                        }}
                     >
-                        <div className="relative">
+                        <div className="relative" style={{
+                            width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
+                            height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto'
+                        }}>
                             <canvas
                                 ref={canvasRef}
                                 width={state.canvasSize?.width || 640}
                                 height={state.canvasSize?.height || 480}
                                 className=""
-                                onMouseDown={handleMouseDown}
-                                onMouseMove={handleMouseMove}
-                                onMouseUp={handleMouseUp}
-                                onMouseLeave={() => setState((prev) => ({ ...prev, isDrawing: false }))}
-                                onContextMenu={(e) => e.preventDefault()}
                                 style={{
                                     cursor:
                                         state.tool === 'picker'
                                             ? 'crosshair'
                                             : state.tool === 'zoom'
-                                            ? 'zoom-in'
-                                            : 'default',
+                                                ? 'zoom-in'
+                                                : 'default',
+                                    width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
+                                    height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto',
+                                    display: 'block'
                                 }}
+                                onMouseDown={handleMouseDown}
+                                onMouseMove={handleMouseMove}
+                                onMouseUp={handleMouseUp}
+                                onMouseLeave={() => setState((prev) => ({ ...prev, isDrawing: false }))}
+                                onContextMenu={(e) => e.preventDefault()}
                             />
                             <canvas
                                 ref={overlayCanvasRef}
                                 width={state.canvasSize?.width || 640}
                                 height={state.canvasSize?.height || 480}
                                 className="absolute top-0 left-0 pointer-events-none"
+                                style={{
+                                    width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
+                                    height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto'
+                                }}
                             />
                             {children}
                         </div>
