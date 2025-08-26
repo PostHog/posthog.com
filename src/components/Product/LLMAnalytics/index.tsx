@@ -617,7 +617,7 @@ export const ProductLLMAnalytics = () => {
                         <TutorialCard
                             title="How to set up OpenAI analytics"
                             description="Let's explore how add and track the generate API route, then view generation data in PostHog."
-                            url="/tutorials/openai-analytics"
+                            url="/tutorials/openai-observability"
                         />
                     </ul>
                 </section>
