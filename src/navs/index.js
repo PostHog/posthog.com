@@ -201,6 +201,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/destinations/gleap',
                 },
                 {
+                    name: 'Google Ads',
+                    url: '/docs/cdp/destinations/google-ads',
+                },
+                {
                     name: 'Google cloud storage',
                     url: '/docs/cdp/destinations/google-cloud-storage',
                 },
