@@ -20,7 +20,7 @@ toolsUsed:
   - Product analytics
   - MCP
   - Data pipelines
-date: 2025-07-09
+date: 2025-08-26
 ---
 When Lezgin Zilan, CTO at Swedish fintech [Qred](https://www.qred.se/en), looked at their onboarding flow, he saw a problem — not in the onboarding itself, but rather in the path to improving it and building a better product. 
 
