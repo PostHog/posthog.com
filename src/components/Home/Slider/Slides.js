@@ -992,10 +992,10 @@ export const LLMAnalytics = () => {
             flagColor="yellow"
             description="Build AI features with full visibility – both in development and production."
             features={[
-                { title: 'LLM traces', Icon: IconDecisionTree },
-                { title: 'AI usage and performance metrics', Icon: IconTrends },
+                { title: 'LLM traces and spans', Icon: IconDecisionTree },
+                { title: 'AI usage and latency metrics', Icon: IconTrends },
                 { title: 'Cost analysis', Icon: IconHandMoney },
-                { title: 'AI playground', Icon: IconPlay },
+                { title: 'AI playground', Icon: IconMagicWand },
             ]}
             imageColumn="relative md:col-span-10"
             imageClasses="flex-col gap-6 lg:gap-8 px-8 text-center pb-8 md:pb-0 xl:items-center"
