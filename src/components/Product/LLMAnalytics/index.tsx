@@ -365,7 +365,7 @@ export const ProductLLMAnalytics = () => {
             <SEO
                 title="LLM analytics and observability - PostHog"
                 description="Who keeps an eye on your AI? You do."
-                image={`/images/og/feature-flags.jpg`}
+                image={`/images/og/llm-analytics.png`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 {activeProfile && <Profile profile={{ ...activeProfile }} />}
