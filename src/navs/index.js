@@ -3974,6 +3974,120 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Link sources',
+                    url: '/docs/data-warehouse/sources',
+                    icon: 'IconBook',
+                    color: 'orange',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/sources/',
+                        },
+                        {
+                            name: 'Managed',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/data-warehouse/sources/azure-db',
+                        },
+                        {
+                            name: 'BigQuery',
+                            url: '/docs/data-warehouse/sources/bigquery',
+                        },
+                        {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/sources/chargebee',
+                        },
+                        {
+                            name: 'DoIt',
+                            url: '/docs/data-warehouse/sources/doit',
+                        },
+                        {
+                            name: 'Google Ads',
+                            url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Google Sheets',
+                            url: '/docs/data-warehouse/sources/google-sheets',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/data-warehouse/sources/hubspot',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'MongoDB',
+                            url: '/docs/data-warehouse/sources/mongodb',
+                        },
+                        {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/sources/mysql',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/data-warehouse/sources/postgres',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/data-warehouse/sources/snowflake',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/data-warehouse/sources/stripe',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Temporal.io',
+                            url: '/docs/data-warehouse/sources/temporal',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/sources/vitally',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/data-warehouse/sources/zendesk',
+                        },
+                        {
+                            name: 'Self-managed',
+                        },
+                        {
+                            name: 'Azure Blob',
+                            url: '/docs/data-warehouse/sources/azure-blob',
+                        },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/data-warehouse/sources/r2',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/data-warehouse/sources/gcs',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/data-warehouse/sources/s3',
+                        },
+                    ],
+                },
+                {
                     name: 'Tutorials and guides',
                     url: '/docs/data-warehouse/tutorials',
                     icon: 'IconGraduationCap',
