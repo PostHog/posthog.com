@@ -65,7 +65,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 - (Onboarding specialist) Continue to meet with inbound leads - very quickly you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge. 
 
 
-### How do I know if I'm on track?
+## How do I know if I'm on track?
 
 By the end of month 1:
  - Be leading customer calls on your own
