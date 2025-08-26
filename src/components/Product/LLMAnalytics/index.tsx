@@ -371,7 +371,7 @@ export const ProductLLMAnalytics = () => {
                             customer={elevenlabs}
                         />
                         <CustomerCard
-                            outcome="compared us to every other LLM tool, just to be sure"
+                            outcome="compared us to every other observability tool, just to be sure"
                             quote="If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers."
                             customer={lovable}
                         />
