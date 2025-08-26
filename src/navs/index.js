@@ -3987,52 +3987,20 @@ export const docsMenu = {
                             name: 'Managed',
                         },
                         {
-                            name: 'Stripe',
-                            url: '/docs/data-warehouse/sources/stripe',
-                        },
-                        {
-                            name: 'Hubspot',
-                            url: '/docs/data-warehouse/sources/hubspot',
-                        },
-                        {
-                            name: 'Zendesk',
-                            url: '/docs/data-warehouse/sources/zendesk',
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/data-warehouse/sources/postgres',
-                        },
-                        {
-                            name: 'Salesforce',
-                            url: '/docs/data-warehouse/sources/salesforce',
-                        },
-                        {
-                            name: 'MySQL',
-                            url: '/docs/data-warehouse/sources/mysql',
-                        },
-                        {
-                            name: 'MongoDB',
-                            url: '/docs/data-warehouse/sources/mongodb',
-                        },
-                        {
                             name: 'Azure SQL Server',
                             url: '/docs/data-warehouse/sources/azure-db',
                         },
                         {
-                            name: 'Snowflake',
-                            url: '/docs/data-warehouse/sources/snowflake',
-                        },
-                        {
-                            name: 'Vitally',
-                            url: '/docs/data-warehouse/sources/vitally',
+                            name: 'BigQuery',
+                            url: '/docs/data-warehouse/sources/bigquery',
                         },
                         {
                             name: 'Chargebee',
                             url: '/docs/data-warehouse/sources/chargebee',
                         },
                         {
-                            name: 'BigQuery',
-                            url: '/docs/data-warehouse/sources/bigquery',
+                            name: 'DoIt',
+                            url: '/docs/data-warehouse/sources/doit',
                         },
                         {
                             name: 'Google Ads',
@@ -4043,19 +4011,63 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/google-sheets',
                         },
                         {
+                            name: 'Hubspot',
+                            url: '/docs/data-warehouse/sources/hubspot',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'MongoDB',
+                            url: '/docs/data-warehouse/sources/mongodb',
+                        },
+                        {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/sources/mysql',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/data-warehouse/sources/postgres',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/data-warehouse/sources/snowflake',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/data-warehouse/sources/stripe',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
                             name: 'Temporal.io',
                             url: '/docs/data-warehouse/sources/temporal',
                         },
                         {
-                            name: 'DoIt',
-                            url: '/docs/data-warehouse/sources/doit',
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/sources/vitally',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/data-warehouse/sources/zendesk',
                         },
                         {
                             name: 'Self-managed',
-                        },
-                        {
-                            name: 'S3',
-                            url: '/docs/data-warehouse/sources/s3',
                         },
                         {
                             name: 'Azure Blob',
@@ -4068,6 +4080,10 @@ export const docsMenu = {
                         {
                             name: 'Google Cloud Storage',
                             url: '/docs/data-warehouse/sources/gcs',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/data-warehouse/sources/s3',
                         },
                     ],
                 },
