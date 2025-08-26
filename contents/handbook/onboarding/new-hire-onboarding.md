@@ -6,7 +6,9 @@ showTitle: true
 
 ## Your first few weeks
 
-Welcome to the PostHog's Onboarding team!  We only hire about 1 in 400 applicants, so you've done well to make it here!  Unlike a lot of companies, we don't have a super-long onboarding process and would prefer you to be up and running with your customer base as quickly as possible.  Here are the things you should focus on in your first few weeks at PostHog to help you achieve that. 
+Welcome to the PostHog's Onboarding team! We only hire about 1 in 400 applicants, so you've done well to make it here! Unlike a lot of companies, we don't have a super-long onboarding process and would prefer you to be up and running with your customer base as quickly as possible. 
+
+Here are the things you should focus on in your first few weeks at PostHog to help you achieve that. 
 
 Ramping up is mostly self serve - we won't sit you down in a room for training for 2 weeks. If you're not sure who is supposed to make something below happen, the person responsible is almost certainly you!
 
