@@ -69,7 +69,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 By the end of month 1:
  - Be leading customer calls on your own
- - Converting leads from your book to ['Onboarded'](https://posthog.com/handbook/onboarding/onboarding-team#onboarding-lifecycle) in Vitally.
+ - Converting leads from your book to ['Onboarded'](/handbook/onboarding/onboarding-team#onboarding-lifecycle) in Vitally.
  - Passing off large contracts to AEs via Salesforce
 
 By the end of month 2:
