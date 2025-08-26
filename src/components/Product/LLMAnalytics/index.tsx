@@ -21,6 +21,8 @@ import {
     IconHandMoney,
     IconActivity,
     IconChatHelp,
+    IconTrends,
+    IconUser,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -127,6 +129,29 @@ const subfeatures = [
         icon: <IconActivity />,
         title: 'Latency monitoring',
         description: 'Understand latency over time and how models impact performance',
+    },
+]
+
+const ecosystemItemCount = 3
+const ecosystem = [
+    {
+        title: 'Session replay',
+        description:
+            'Watch session recordings to see what users see when interacting with your AI product',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
+    },
+    {
+        title: 'Feature flags',
+        description: 'See how specific changes impact your metrics',
+        icon: <IconToggle />,
+        color: 'seagreen',
+    },
+    {
+        title: 'Error tracking',
+        description: 'Correlate app errors with specific sessions and prompt responses',
+        icon: <IconWarning />,
+        color: 'orange',
     },
 ]
 
@@ -386,88 +411,77 @@ export const ProductLLMAnalytics = () => {
             </div>
 
             <SmoothScroll />
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-4 pb-0`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-4 pb-0`}>
                 <section id="features" className="-mt-36 pt-36">
-                    <h2 className="text-4xl md:text-5xl text-center">
-                        Features that work great with Product OS,
-                        <br />
-                        <span className="text-red dark:text-yellow">or equally great on their own</span>
-                    </h2>
-                </section>
 
-                <div className="mt-12">
                     <ul
-                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-4 mt-12 list-none p-0`}
+                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-4 list-none p-0`}
                     >
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
                         ))}
                     </ul>
-                </div>
 
-                <div className="py-12">
-                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
-                        {features.map((feature, index) => (
-                            <Feature key={index} {...feature} />
-                        ))}
-                    </ul>
-                </div>
+                    <p className="text-center text-balance mt-8">
+                        <strong>Privacy mode:</strong>{' '}
+                        If you want high-level metrics (like cost and performance) without exposing user conversations to your team, you can <Link to="/docs/llm-analytics/privacy-mode">enable this in your code</Link>.
+                    </p>
 
-                <section>
+                    <div className="py-12">
+                        <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
+                            {features.map((feature, index) => (
+                                <Feature key={index} {...feature} />
+                            ))}
+                        </ul>
+                    </div>
+
                     <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
-                        <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
-                            <Marquee product={product.capitalized} shortFade>
-                                {questions.map((question, index) => {
-                                    return <Question {...question} key={index} />
-                                })}
-                            </Marquee>
+                        <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                            <div className="flex-1">
+                                <h2 className="text-4xl">
+                                    Prompt playground
+                                </h2>
+                                <p>
+                                    Test new models against each other, simulate different chat histories, and
+                                    test different reasoning levels – all inside PostHog.
+                                </p>
+
+                            </div>
+                            <aside className="shrink-0 md:basis-[500px]">
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/model_playground_c8cf84629c.png"
+                                    alt="privacy mode hedgehog"
+                                    className="w-full max-w-[662px]"
+                                />
+                            </aside>
                         </div>
+                    </div>
+
+                </section>
+                <section>
+                    <h2 className="text-4xl md:text-5xl text-center">
+                        Works with other PostHog products
+                    </h2>
+                    <p className="text-center text-lg max-w-2xl mx-auto mb-12">
+                        You can use LLM analytics by itself, but the magic comes when you use it with other tools and products from PostHog.
+                    </p>
+
+                    <div className="my-12">
+                        <ul
+                            className={`grid md:grid-cols-2 lg:grid-cols-${ecosystemItemCount} gap-8 mt-12 list-none p-0`}
+                        >
+                            {ecosystem.map((subfeature, index) => (
+                                <Subfeature key={index} {...subfeature} />
+                            ))}
+                        </ul>
                     </div>
                 </section>
-                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-24 pb-0`}>
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
-                        <div className="flex-1">
-                            <h2 className="text-4xl">
-                                Ready to mix business and pleasure?
-                                <br />
-                                <span className="text-red dark:text-yellow">
-                                    We've got a playground and a privacy mode
-                                </span>
-                            </h2>
-                            <p>
-                                Need somewhere to muck around and try new prompts? We've got a playground for that,
-                                where you test new models against each other, simulate different chat histories, and
-                                test different reasoning levels.
-                            </p>
-                            <p>
-                                We also care a lot about user privacy, even though it's boring. So, if you want to be
-                                able to track high-level metrics such as costs and performance then you do that without
-                                seeing the details of a user conversation.
-                            </p>
-                            <p className="text-sm mb-4 border-l-4 border-light dark:border-dark pl-2 py-1">
-                                <strong>
-                                    We also try to make privacy stuff <i>not</i> boring.
-                                </strong>
-                                <br /> Check out our <a href="/dpa">DPA</a> and <a href="/privacy">privacy polciies</a>{' '}
-                                to find out how we protect your users and you.
-                            </p>
-                        </div>
-                        <aside className="shrink-0 md:basis-[500px]">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/model_playground_c8cf84629c.png"
-                                alt="privacy mode hedgehog"
-                                className="w-full max-w-[662px]"
-                            />
-                        </aside>
-                    </div>
-                </div>
 
-                <section className="mb-20 px-5">
+                <section className="my-20 px-5">
                     <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
                         <div className="mb-8">
-                            <h2 className="text-4xl">
-                                We didn't just build LLM analytics. <br />
-                                We also build <em className="text-red dark:text-yellow">with</em> LLM analytics.
+                            <h2 className="text-5xl">
+                                We use LLM analytics, too.
                             </h2>
                             <p className="text-lg mb-4">
                                 We've used LLM analytics heavily while building <a href="/max">Max AI</a>, our in-app AI
@@ -509,6 +523,20 @@ export const ProductLLMAnalytics = () => {
                         </div>
                     </div>
                 </section>
+
+                <section>
+                    <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                        <div className="bg-accent dark:bg-accent-dark -mx-5 md:-mx-8">
+                            <Marquee product={product.capitalized} shortFade>
+                                {questions.map((question, index) => {
+                                    return <Question {...question} key={index} />
+                                })}
+                            </Marquee>
+                        </div>
+                    </div>
+                </section>
+
+
             </div>
 
             <section
@@ -703,10 +731,10 @@ export const ProductLLMAnalytics = () => {
                                     "PostHog's LLM analytics saved us so much time. We used to use a whole system of
                                     tools to track the prompts and responses for debugging and this is an infinitely
                                     better UI. We use it for every single AI experiment we run now —{' '}
-                                    <span className="bg-highlight p-0.5">
+                                    <strong className="bg-highlight p-0.5">
                                         also, if you need another quote then let me know, because the whole team loves
                                         it!
-                                    </span>
+                                    </strong>
                                     "
                                 </blockquote>
                                 <div className="font-semibold">
