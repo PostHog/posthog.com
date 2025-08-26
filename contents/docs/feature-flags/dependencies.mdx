@@ -75,20 +75,6 @@ Feature flag dependencies support several condition types:
 - `flag_name` equals `specific_variant`
 - `flag_name` does not equal `specific_variant`
 
-## Best practices
-
-### Avoid circular dependencies
-
-PostHog prevents circular dependencies where Flag A depends on Flag B, and Flag B depends on Flag A. Always design your flag hierarchy to flow in one direction.
-
-### Keep dependency chains simple
-
-While you can create complex dependency chains (A → B → C), simpler structures are easier to understand and debug. Consider flattening deep dependency chains when possible.
-
-### Document your flag relationships
-
-Use descriptive flag names and maintain documentation about flag dependencies outside of PostHog to help your team understand the relationships.
-
 ### Test dependency scenarios
 
 When testing flags with dependencies:
@@ -109,17 +95,6 @@ If your dependent flag isn't working as expected:
 3. **Review rollout percentage**: Even if conditions are met, the rollout percentage still applies
 4. **Check user properties**: Ensure the user meets all conditions, not just the flag dependency
 
-### Performance considerations
-
-Flag dependencies add minimal overhead to flag evaluation. However, be mindful of:
-
-- **Local evaluation**: At this time, dependent flags do not work with local evaluation in all SDKs
-- **API calls**: Each dependency may require additional flag evaluations
-
-### Debugging with the PostHog toolbar
-
-Use the [PostHog toolbar](/docs/toolbar) to inspect flag values and verify that dependencies are working correctly in your application.
-
 ## API usage
 
 When using PostHog's API or SDKs, flag dependencies work automatically. The flag evaluation will handle dependency resolution:
@@ -135,15 +110,3 @@ const isNewDashboardEnabled = await posthog.isFeatureEnabled('new_dashboard')
 is_new_dashboard_enabled = posthog.feature_enabled('new_dashboard', 'user_id')
 # Dependencies are resolved automatically
 ```
-
-## Limitations
-
-- Flag dependencies are resolved server-side and may not work with all local evaluation scenarios
-- Circular dependencies are prevented and will result in an error
-- Self-referential dependencies (a flag depending on itself) are not allowed
-
-## Next steps
-
-- Learn about [testing feature flags](/docs/feature-flags/testing)
-- Explore [best practices](/docs/feature-flags/best-practices) for feature flag management
-- Set up [early access feature management](/docs/feature-flags/early-access-feature-management) for beta programs
