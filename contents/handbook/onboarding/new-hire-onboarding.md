@@ -14,7 +14,7 @@ Ramping up is mostly self serve - we won't sit you down in a room for training f
 
 Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-onboarding) for guidance on what _not_ to do when you start. In general, there's a lot of good resources within [sales](/handbook/growth/sales/overview) to reference (as we were previously one team!)
 
-### Day 1
+## Day 1
 
 - Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Magda](/community/profiles/33065) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
