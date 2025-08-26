@@ -1,5 +1,5 @@
 ---
-title: Web experiments installation
+title: Javascript Web experiments installation
 showStepsToc: true
 ---
 
@@ -9,95 +9,146 @@ import WebInstall from '../../integrate/_snippets/install-web.mdx'
 
 <Steps>
 
-<Step title="Install PostHog web SDK" badge="required">
+<Step title="Install PostHog JavaScript web SDK" badge="required">
 
 <WebInstall />
 
 </Step>
 
-<Step title="Create an experiment" badge="required">
+<Step title="Capture conversion event" badge="required">
 
+Once PostHog is initialized, you should be able to capture events. 
+
+For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
+
+```js-web
+<button id="cta">Click me</button>
+
+<script>
+  document.getElementById('cta').addEventListener('click', () => {
+    posthog.capture('cta clicked')
+  })
+</script>
+```
+
+</Step>
+
+<Step checkpoint title="Validate PostHog events" subtitle="Confirm events are being sent to PostHog">
+
+Before proceeding, let's make sure events are being captured and sent to PostHog. You should see `cta clicked` events appear in the **Activity** feed.
+
+<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/activity/explore" external={true}>
+  Check for events in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Create an experiment" badge="required">
 
 Go to the [**Experiments** tab](https://app.posthog.com/experiments) in the PostHog app and click on the **New experiment** button in the top right.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
-    alt="How to create an experiment in PostHog" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_experiment_ae83e877d6.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/create_experiment_dark_5c6a4acbd0.png"
+  alt="Create experiment" 
+  classes="rounded"
 />
 
-For this tutorial, let's create a new experiment with the following test values: 
+For this tutorial, let's create a new experiment using simplified test values: 
 
-- **Name**: `Test experiment`
-- **Description**: `This is a test experiment`
-- **Feature flag key**: `test-experiment-ff-key`
-- **Experiment type**: `Feature flag`
-- **Variants**: `control` and `test`
-- **Participant type**: `Users`
+- **Name**: "Test experiment"
+- **Description**: "This is a test experiment"
+- **Feature flag key**: "test-experiment-ff-key"
+- **Experiment type**: "Feature flag"
+- **Variants**: "control" and "test"
+- **Participant type**: "Users"
 
 Then click **Save as draft**.
 
 </Step>
 
-<Step title="Add metrics and release conditions">
+<Step title="Add primary metric and launch" badge="required">
 
-Assign metrics to track the impact of your experiment and determine statistical significance.
-    
-- **Primary metrics**: Represent your main goal — the key signal for deciding if your hypothesis is correct.
-- **Secondary metrics**: Optional supporting metrics for additional context.
+Scroll down to the **Primary metrics** section and click **+ Add primary metric**.
 
-You can add up to 10 metrics (primary + secondary) per experiment.
+Choose **Single-use** and select **Type** > **Mean**.
 
-Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are statistically significant.
+Then search for the event `cta clicked` under **Metric** and click **Save**.
 
-Primary and secondary metrics
-Each metric can be set as either a primary or secondary metric. You can set up to 10 primary and secondary metrics per experiment.
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/primary_metric_b8d831b522.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/primary_metric_dark_a24636046b.png"
+  alt="Add primary metric" 
+  classes="rounded"
+  padding={false}
+/>
 
-Primary metrics represent the main goal of your experiment. They directly measure if your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
+By default, experiments are exposed to 100% of users. You can customize [release conditions](/docs/experiments/creating-an-experiment#release-conditions) to expose the experiment to a subset of users. 
+
+For this tutorial, we'll ship the experiment to all users and click **Launch** in the top right.
 
 </Step>
 
-<Step title="Call feature flag" badge="required">
+<Step title="Call experiment feature flag" badge="required">
 
-
-In your experiment, each user is randomly assigned to a variant (usually either 'control' or 'test'). To check which variant a user has been assigned to, fetch the experiment feature flag. You can then customize their experience based on the value in the feature flag:
+Use the PostHog SDK to call the experiment flag and change the `<button id="cta">` text based on the assigned variant. 
 
 ```js-web
 // Ensure flags are loaded before usage.
 // You only need to call this on the code the first time a user visits.
 // See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
 posthog.onFeatureFlags(function() {
-    // feature flags should be available at this point
-    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
-        // do something
-    }
+  const cta = document.getElementById('cta')
+  const variant = posthog.getFeatureFlag('test-experiment-ff-key')
+  cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
 })
 
 // Otherwise, you can just do:
-if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
-    // do something
-}
+const cta = document.getElementById('cta')
+const variant = posthog.getFeatureFlag('test-experiment-ff-key')
+cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
 
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'experiment-feature-flag-key': 'test'}})
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'test-experiment-ff-key': 'test'}})
 ```
 
+Now when a user triggers a `cta clicked` event, PostHog automatically assigns the user to a variant and records an experiment exposure. 
+
+By default, users are split equally between variants. If you want assign specific users to a specific variant, see more about [distribution and release conditions](/docs/experiments/creating-an-experiment#distribution-and-release-conditions).
+
 </Step>
 
-<Step checkpoint title="Validate PostHog calls">
+<Step checkpoint title="Validate feature flag calls">
 
-Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
+Make sure exposures and feature flag calls are being sent to PostHog. You should see `$feature_flag_called` events appear in the **Activity** feed.
 
-The best way to do this is adding an optional override to your release conditions. For example, you can create an override to assign a user to the test variant if their email is your own (or someone in your team). To do this:
+
+<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/activity/explore" external={true}>
+  Check for events in PostHog
+</CallToAction>
+
 </Step>
 
-<Step title="Launch experiment" badge="required">
+<Step title="Evaluate experiment" badge="recommended">
 
-Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
+As you capture more `cta clicked` events, more exposures will populate the primary metrics in your experiment. 
 
-The best way to do this is adding an optional override to your release conditions. For example, you can create an override to assign a user to the test variant if their email is your own (or someone in your team). To do this:
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/experiment_metrics_ecea40f310.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/experiment_metrics_dark_6fed5063b9.png"
+    alt="Evaluate experiment metrics" 
+    classes="rounded"
+/>
+
+With enough data, you can analyze the experiment and its variants by: 
+
+- Conversion rates
+- Statistical significance
+- Credible intervals
+- Chance to win %
+- Minimum detectable effect
+- And more
+
 </Step>
-
 
 </Steps> 
