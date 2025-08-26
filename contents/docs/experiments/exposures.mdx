@@ -122,6 +122,7 @@ You can exclude internal team members and test accounts from your experiment by 
 ## Common issues
 
 ### No exposures appearing
+
 - Verify your feature flag is active and returning variants
 - Check that `$feature_flag_called` events are being sent (or your custom exposure event)
 - Ensure the event includes the correct `$feature/<flag-key>` property
