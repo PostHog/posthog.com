@@ -211,6 +211,8 @@ In this round, the candidate will meet a future team member. This round is usual
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. Ask yourself - does this candidate raise the bar?
 
+For engineering roles only: during high-volume seasons, this round might be recorded for training purposes to help us onboard and train new interviewers faster. The candidate will, of course, have the chance to opt out by either letting their recruiter know in advance or letting the interviewer know at the start of the interview. 
+
 ### 3. Small Team interview with an Exec Team Member
 
 This is a call with either James, Tim, Raquel, or Charles depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
