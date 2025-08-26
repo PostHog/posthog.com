@@ -62,7 +62,7 @@ const product = {
 }
 
 const team = 'LLM analytics'
-const teamSlug = '/teams/llm-analytics'
+const teamSlug = '/teams/llm-observability'
 
 const featuresPerRow = 3
 const features = [
@@ -350,15 +350,21 @@ export const ProductLLMAnalytics = () => {
                     color="purple"
                     icon={<IconLlmObservability />}
                     product={product.capitalized}
-                    title='Who keeps an eye on your AI? <span class="text-red dark:text-yellow">You do.</span>'
-                    description="Track usage, costs, latency, and loads more metrics for your AI products"
+                    title='<span class="text-red dark:text-yellow">Monitor and debug</span> your AI products'
+                    description="Analyze traces, per-user costs, latency, and more"
                 />
 
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_8faecc596d.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_desktop_51e40f58bb.png"
                         alt="Screenshot of llm analytics in PostHog"
-                        className="w-full max-w-[1361px]"
+                        className="w-full max-w-[1406px] hidden md:block"
+                        placeholder="none"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_mobile_82d1f03dcb.png"
+                        alt="Screenshot of llm analytics in PostHog"
+                        className="w-[calc(100%+2rem)] max-w-[828px] md:hidden -ml-4"
                         placeholder="none"
                     />
                 </div>
@@ -391,7 +397,7 @@ export const ProductLLMAnalytics = () => {
 
                 <div className="mt-12">
                     <ul
-                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
+                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-4 mt-12 list-none p-0`}
                     >
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
@@ -461,7 +467,7 @@ export const ProductLLMAnalytics = () => {
                         <div className="mb-8">
                             <h2 className="text-4xl">
                                 We didn't just build LLM analytics. <br />
-                                We also build <span className="text-red dark:text-yellow">with</span> LLM analytics.
+                                We also build <em className="text-red dark:text-yellow">with</em> LLM analytics.
                             </h2>
                             <p className="text-lg mb-4">
                                 We've used LLM analytics heavily while building <a href="/max">Max AI</a>, our in-app AI
@@ -479,7 +485,7 @@ export const ProductLLMAnalytics = () => {
 
                         <div className="flex flex-col md:flex-row items-start gap-8">
                             <div className="flex-1 text-center md:text-left">
-                                <blockquote className="text-lg md:text-xl font-medium mb-4 bg-highlight p-0.5">
+                                <blockquote className="text-lg md:text-xl font-semibold mb-4 bg-highlight p-0.5">
                                     "The best thing about LLM analytics for us is how it connects with our other tools,
                                     like session replays and feature flags. That's something no other tool can do,
                                     because they focus on a narrower scope."
@@ -494,9 +500,7 @@ export const ProductLLMAnalytics = () => {
                                     </div>
                                     <div>
                                         <div className="font-semibold">
-                                            <a href="#" className="hover:text-red dark:hover:text-yellow">
-                                                Michael Matloka
-                                            </a>
+                                            Michael Matloka
                                         </div>
                                         <div className="text-sm opacity-75">Product Engineer at PostHog</div>
                                     </div>
@@ -639,7 +643,7 @@ export const ProductLLMAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        PostHog works in small teams. The <Link to={teamSlug}>LLM Observability</Link> team is responsible for
                         building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
