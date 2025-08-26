@@ -31,6 +31,7 @@ import {
     IconTerminal,
     IconTestTube,
     IconTrends,
+    IconPlay,
     IconUserPaths,
 } from '@posthog/icons'
 import Link from 'components/Link'
@@ -995,6 +996,7 @@ export const LLMAnalytics = () => {
                 { title: 'LLM traces', Icon: IconDecisionTree },
                 { title: 'AI usage and performance metrics', Icon: IconTrends },
                 { title: 'Cost analysis', Icon: IconHandMoney },
+                { title: 'AI playground', Icon: IconPlay },
             ]}
             imageColumn="relative md:col-span-10"
             imageClasses="flex-col gap-6 lg:gap-8 px-8 text-center pb-8 md:pb-0 xl:items-center"
