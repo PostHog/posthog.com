@@ -1998,6 +1998,16 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/libraries/node',
+                            children: [
+                                {
+                                    name: 'Setup and features',
+                                    url: '/docs/libraries/node',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-node',
+                                },
+                            ],
                         },
                         {
                             name: 'PHP',
