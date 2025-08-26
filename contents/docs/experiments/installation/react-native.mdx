@@ -1,0 +1,107 @@
+---
+title: React Native experiments installation
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactNative from '../../integrate/_snippets/install-react-native.mdx'
+import StepCreateExperiment from './_snippets/step-create-experiment.mdx'
+import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
+import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
+import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
+import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
+
+<Steps>
+
+<Step title="Install PostHog React Native SDK" badge="required">
+
+<InstallReactNative />
+
+</Step>
+
+<Step title="Capture conversion event" badge="required">
+
+Once PostHog is initialized, you should be able to capture events. 
+
+For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
+
+```jsx
+import React from 'react'
+import { Button } from 'react-native'
+import { usePostHog } from 'posthog-react-native'
+
+export function CTAButton() {
+  const posthog = usePostHog()
+  return (
+    <Button
+      title="Click me"
+      onPress={() => posthog?.capture('cta clicked')}
+      testID="cta"
+    />
+  )
+}
+```
+
+</Step>
+
+<Step checkpoint title="Validate PostHog events" subtitle="Confirm events are being sent to PostHog">
+
+<StepValidateExperimentEvents />
+
+</Step>
+
+<Step title="Create an experiment" badge="required">
+
+<StepCreateExperiment />
+
+</Step>
+
+<Step title="Add primary metric and launch" badge="required">
+
+<StepAddPrimaryMetric />
+
+</Step>
+
+<Step title="Call feature flag" badge="required">
+
+Use the React hooks to evaluate the experiment flag and render the `<button id="cta">` text based on the assigned variant. 
+
+```jsx
+import React from 'react'
+import { Button } from 'react-native'
+import { useFeatureFlag, usePostHog } from 'posthog-react-native'
+
+export function CTAButton() {
+  const posthog = usePostHog()
+  const variant = useFeatureFlag('test-experiment-ff-key') 
+
+  const title = variant === 'control' ? 'Control CTA' : 'Test CTA'
+  return (
+    <Button
+      testID="cta"
+      title={title}
+      onPress={() => posthog?.capture('cta clicked')}
+    />
+  )
+}
+```
+
+Now when a user triggers a `cta clicked` event, PostHog automatically assigns the user to a variant and records an experiment exposure. 
+
+By default, users are split equally between variants. If you want to assign specific users to a specific variant, see more about [distribution and release conditions](/docs/experiments/creating-an-experiment#distribution-and-release-conditions).
+
+</Step>
+
+<Step checkpoint title="Validate feature flag calls">
+
+<StepValidateFeatureFlags />
+
+</Step>
+
+<Step title="Evaluate experiment results" badge="recommended">
+
+<StepEvaluateExperimentResults />
+
+</Step>
+
+</Steps> 

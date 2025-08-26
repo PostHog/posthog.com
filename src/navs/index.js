@@ -3473,6 +3473,47 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Installation',
+                    url: '/docs/experiments/installation',
+                    icon: 'IconCode',
+                    featured: true,
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Web',
+                            url: '/docs/experiments/installation/web',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/experiments/installation/react',
+                        },
+
+                        {
+                            name: 'React Native',
+                            url: '/docs/experiments/installation/react-native',
+                        },
+
+                        {
+                            name: 'iOS',
+                            url: '/docs/experiments/installation/ios',
+                        },
+                    ],
+                },
+                {
+                    name: 'Creating an experiment',
+                    url: '/docs/experiments/creating-an-experiment',
+                    icon: 'IconFlask',
+                    featured: true,
+                    color: 'purple',
+                },
+                {
+                    name: 'Testing and launching',
+                    url: '/docs/experiments/testing-and-launching',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'green',
+                },
+                {
                     name: 'No-code experiments',
                     url: '/docs/experiments/no-code-web-experiments',
                     icon: 'IconToolbar',

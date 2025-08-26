@@ -1,0 +1,99 @@
+---
+title: Javascript Web experiments installation
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import WebInstall from '../../integrate/_snippets/install-web.mdx'
+import StepCreateExperiment from './_snippets/step-create-experiment.mdx'
+import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
+import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
+import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
+import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
+
+<Steps>
+
+<Step title="Install PostHog JavaScript web SDK" badge="required">
+
+<WebInstall />
+
+</Step>
+
+<Step title="Capture conversion event" badge="required">
+
+Once PostHog is initialized, you should be able to capture events. 
+
+For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
+
+```js-web
+<button id="cta">Click me</button>
+
+<script>
+  document.getElementById('cta').addEventListener('click', () => {
+    posthog.capture('cta clicked')
+  })
+</script>
+```
+
+</Step>
+
+<Step checkpoint title="Validate PostHog events" subtitle="Confirm events are being sent to PostHog">
+
+<StepValidateExperimentEvents />
+
+</Step>
+
+<Step title="Create an experiment" badge="required">
+
+<StepCreateExperiment />
+
+</Step>
+
+<Step title="Add primary metric and launch" badge="required">
+
+<StepAddPrimaryMetric />
+
+</Step>
+
+<Step title="Call feature flag" badge="required">
+
+Use the PostHog SDK to call the experiment flag and change the `<button id="cta">` text based on the assigned variant. 
+
+```js-web
+// Ensure flags are loaded before usage.
+// You only need to call this on the code the first time a user visits.
+// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+posthog.onFeatureFlags(function() {
+  const cta = document.getElementById('cta')
+  const variant = posthog.getFeatureFlag('test-experiment-ff-key')
+  cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
+})
+
+// Otherwise, you can just do:
+const cta = document.getElementById('cta')
+const variant = posthog.getFeatureFlag('test-experiment-ff-key')
+cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'test-experiment-ff-key': 'test'}})
+```
+
+Now when a user triggers a `cta clicked` event, PostHog automatically assigns the user to a variant and records an experiment exposure. 
+
+By default, users are split equally between variants. If you want to assign specific users to a specific variant, see more about [distribution and release conditions](/docs/experiments/creating-an-experiment#distribution-and-release-conditions).
+
+</Step>
+
+<Step checkpoint title="Validate feature flag calls">
+
+<StepValidateFeatureFlags />
+
+</Step>
+
+<Step title="Evaluate experiment results" badge="recommended">
+
+<StepEvaluateExperimentResults />
+
+</Step>
+
+</Steps> 
