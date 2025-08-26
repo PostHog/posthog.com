@@ -1837,7 +1837,6 @@ body.dark .max-ai-body {
     padding-top: 1rem;
     position: sticky;
     align-self: flex-start;
-    z-index: 50;
     padding-bottom: 0.5rem;
 }
 
