@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Temporal from './_snippets/temporal.mdx'
+import Temporal from './_snippets/source-temporal.mdx'
 
 <Temporal />

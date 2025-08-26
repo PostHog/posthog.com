@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import GCS from './_snippets/gcs.mdx'
+import GCS from './_snippets/source-gcs.mdx'
 
 <GCS />

@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Hubspot from './_snippets/hubspot.mdx'
+import Hubspot from './_snippets/source-hubspot.mdx'
 
 <Hubspot />

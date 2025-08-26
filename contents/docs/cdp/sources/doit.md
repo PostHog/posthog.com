@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import DoIt from './_snippets/doit.mdx'
+import DoIt from './_snippets/source-doit.mdx'
 
 <DoIt />

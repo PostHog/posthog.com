@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Vitally from './_snippets/vitally.mdx'
+import Vitally from './_snippets/source-vitally.mdx'
 
 <Vitally />

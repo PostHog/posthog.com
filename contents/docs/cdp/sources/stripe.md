@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Stripe from './_snippets/stripe.mdx'
+import Stripe from './_snippets/source-stripe.mdx'
 
 <Stripe />

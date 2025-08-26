@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Zendesk from './_snippets/zendesk.mdx'
+import Zendesk from './_snippets/source-zendesk.mdx'
 
 <Zendesk />

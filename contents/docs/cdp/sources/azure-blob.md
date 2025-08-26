@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import AzureBlob from './_snippets/azure-blob.mdx'
+import AzureBlob from './_snippets/source-azure-blob.mdx'
 
 <AzureBlob />

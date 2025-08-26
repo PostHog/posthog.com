@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import MongoDB from './_snippets/mongodb.mdx'
+import MongoDB from './_snippets/source-mongodb.mdx'
 
 <MongoDB />

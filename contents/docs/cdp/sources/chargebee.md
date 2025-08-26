@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Chargebee from './_snippets/chargebee.mdx'
+import Chargebee from './_snippets/source-chargebee.mdx'
 
 <Chargebee />

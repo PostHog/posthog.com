@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import BigQuery from './_snippets/bigquery.mdx'
+import BigQuery from './_snippets/source-bigquery.mdx'
 
 <BigQuery />

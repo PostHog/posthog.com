@@ -9,6 +9,6 @@ availability:
 beta: true
 ---
 
-import GoogleAds from './_snippets/google-ads.mdx'
+import GoogleAds from './_snippets/source-google-ads.mdx'
 
 <GoogleAds />

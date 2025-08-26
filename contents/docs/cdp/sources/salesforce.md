@@ -8,6 +8,6 @@ availability:
   enterprise: full
 ---
 
-import Salesforce from './_snippets/salesforce.mdx'
+import Salesforce from './_snippets/source-salesforce.mdx'
 
 <Salesforce />

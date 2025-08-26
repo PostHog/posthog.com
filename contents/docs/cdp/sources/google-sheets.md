@@ -9,6 +9,6 @@ availability:
 beta: true
 ---
 
-import GoogleSheets from './_snippets/google-sheets.mdx'
+import GoogleSheets from './_snippets/source-google-sheets.mdx'
 
 <GoogleSheets />
