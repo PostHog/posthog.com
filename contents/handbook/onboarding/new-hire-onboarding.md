@@ -37,7 +37,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Read all of the Onboarding section in the Handbook as well as the Sales and Customer Success section, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding.
 
-### Week 2
+## Week 2
 
 - Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings.
 - Explore Vitally and [Metabase](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
