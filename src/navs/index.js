@@ -1374,8 +1374,12 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding specialist overview',
+                        name: 'Onboarding Specialist overview',
                         url: '/handbook/onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'New hire onboarding',
+                        url: '/handbook/onboarding/new-hire-onboarding',
                     },
                 ],
             },
