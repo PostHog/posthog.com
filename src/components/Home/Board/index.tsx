@@ -409,7 +409,7 @@ const products: Product[] = [
         status: 'Production',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/settings/user-feature-previews#llm-analytics',
+                url: 'https://app.posthog.com/llm-analytics',
                 text: 'Try it out',
             },
         },
