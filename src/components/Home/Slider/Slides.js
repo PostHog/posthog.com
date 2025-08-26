@@ -989,7 +989,6 @@ export const LLMAnalytics = () => {
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
             title="LLM analytics"
-            flag="Beta"
             flagColor="yellow"
             description="Build AI features with full visibility – both in development and production."
             features={[
