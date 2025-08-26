@@ -3487,15 +3487,57 @@ export const docsMenu = {
                             name: 'React',
                             url: '/docs/experiments/installation/react',
                         },
-
+                        {
+                            name: 'Node.js',
+                            url: '/docs/experiments/installation/nodejs',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/experiments/installation/python',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/experiments/installation/php',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/experiments/installation/ruby',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/experiments/installation/go',
+                        },
                         {
                             name: 'React Native',
                             url: '/docs/experiments/installation/react-native',
                         },
-
+                        {
+                            name: 'Android',
+                            url: '/docs/experiments/installation/android',
+                        },
                         {
                             name: 'iOS',
                             url: '/docs/experiments/installation/ios',
+                        },
+                        {
+                            name: 'Java',
+                            url: '/docs/experiments/installation/java',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/experiments/installation/rust',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/experiments/installation/elixir',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/experiments/installation/dotnet',
+                        },
+                        {
+                            name: 'API',
+                            url: '/docs/experiments/installation/api',
                         },
                     ],
                 },

@@ -1,10 +1,10 @@
 ---
-title: Javascript Web experiments installation
+title: PHP experiments installation
 showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import WebInstall from '../../integrate/_snippets/install-web.mdx'
+import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 import StepCreateExperiment from './_snippets/step-create-experiment.mdx'
 import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
 import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
@@ -15,7 +15,7 @@ import Tab from "components/Tab"
 
 <Steps>
 
-<Step title="Install PostHog JavaScript web SDK" badge="required">
+<Step title="Install PostHog PHP SDK" badge="required">
 
 <Tab.Group tabs={['Wizard', 'Manual']}>
 <Tab.List>
@@ -27,7 +27,7 @@ import Tab from "components/Tab"
     <Wizard />
 </Tab.Panel>
 <Tab.Panel>
-    <WebInstall />
+    <PHPInstall />
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
@@ -38,16 +38,13 @@ import Tab from "components/Tab"
 
 Once PostHog is initialized, you should be able to capture events. For your experiment to be meaningful, we need to capture an event that we want to measure, such as a conversion event.
 
-For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
+For this tutorial, let's report a conversion event when a clicks a CTA. In server SDKs like Node, this can be called when a specific route is visited or reported from your client side app.
 
-```js-web
-<button id="cta">Click me</button>
-
-<script>
-  document.getElementById('cta').addEventListener('click', () => {
-    posthog.capture('cta clicked')
-  })
-</script>
+```php
+PostHog::capture(array(
+        'distinct_id' => 'user_distinct_id', 
+        'event' => 'cta clicked'
+    ))
 ```
 
 </Step>
@@ -72,25 +69,16 @@ For this tutorial, let's capture a conversion event on a `<button id="cta">` cli
 
 <Step title="Call feature flag" badge="required">
 
-Use the PostHog SDK to call the experiment flag and change the `<button id="cta">` text based on the assigned variant. 
+Use the PostHog SDK to call the experiment flag and update how your page renders based on the assigned variant.
 
-```js-web
-// Ensure flags are loaded before usage.
-// You only need to call this on the code the first time a user visits.
-// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
-posthog.onFeatureFlags(function() {
-  const cta = document.getElementById('cta')
-  const variant = posthog.getFeatureFlag('test-experiment-ff-key')
-  cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
-})
+```php
+$variant = PostHog::getFeatureFlag('your-experiment-key', 'user_distinct_id')
 
-// Otherwise, you can just do:
-const cta = document.getElementById('cta')
-const variant = posthog.getFeatureFlag('test-experiment-ff-key')
-cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
-
-// You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'test-experiment-ff-key': 'test'}})
+if ($variant === 'test') {
+    // Show test variant
+} else {
+    // Show control variant
+}
 ```
 
 Now when a user triggers a `cta clicked` event, PostHog automatically assigns the user to a variant and records an experiment exposure. 

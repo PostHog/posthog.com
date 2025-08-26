@@ -10,12 +10,26 @@ import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
 import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
 import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
 import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
+import Wizard from '../../getting-started/_snippets/wizard.mdx'
 
 <Steps>
 
 <Step title="Install PostHog React SDK" badge="required">
 
-<InstallReact />
+<Tab.Group tabs={['Wizard', 'Manual']}>
+<Tab.List>
+<Tab>Wizard</Tab>
+<Tab>Manual</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+  <Wizard />
+</Tab.Panel>
+<Tab.Panel>
+  <InstallReact />
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 </Step>
 
