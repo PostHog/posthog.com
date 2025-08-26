@@ -3480,6 +3480,10 @@ export const docsMenu = {
                     color: 'blue',
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/experiments/installation',
+                        },
+                        {
                             name: 'Web',
                             url: '/docs/experiments/installation/web',
                         },
@@ -3489,7 +3493,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Node.js',
-                            url: '/docs/experiments/installation/nodejs',
+                            url: '/docs/experiments/installation/node',
                         },
                         {
                             name: 'Python',
@@ -3520,24 +3524,8 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/ios',
                         },
                         {
-                            name: 'Java',
-                            url: '/docs/experiments/installation/java',
-                        },
-                        {
-                            name: 'Rust',
-                            url: '/docs/experiments/installation/rust',
-                        },
-                        {
-                            name: 'Elixir',
-                            url: '/docs/experiments/installation/elixir',
-                        },
-                        {
                             name: '.NET',
                             url: '/docs/experiments/installation/dotnet',
-                        },
-                        {
-                            name: 'API',
-                            url: '/docs/experiments/installation/api',
                         },
                     ],
                 },
@@ -3674,41 +3662,10 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Tutorials and guides',
+                    name: 'Tutorials and framework guides',
                     url: '/docs/experiments/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'green',
-                },
-                {
-                    name: 'Framework guides',
-                    url: '/docs/error-tracking/assigning-issues',
-                    icon: 'IconBrackets',
-                    color: 'red',
-                    featured: true,
-                    children: [
-                        { name: 'Android', url: '/tutorials/android-ab-tests' },
-                        { name: 'Angular', url: '/tutorials/angular-ab-tests' },
-                        { name: 'Astro', url: '/tutorials/astro-ab-tests' },
-                        { name: 'Bubble', url: '/tutorials/bubble-ab-tests' },
-                        { name: 'Django', url: '/tutorials/django-ab-tests' },
-                        { name: 'Flutter', url: '/tutorials/flutter-ab-tests' },
-                        { name: 'Framer', url: '/tutorials/framer-ab-tests' },
-                        { name: 'iOS', url: '/tutorials/ios-ab-tests' },
-                        { name: 'Go', url: '/tutorials/go-ab-tests' },
-                        { name: 'Laravel', url: '/tutorials/laravel-ab-tests' },
-                        { name: 'Next.js', url: '/tutorials/nextjs-ab-tests' },
-                        { name: 'Node.js (Express)', url: '/tutorials/node-express-ab-tests' },
-                        { name: 'Nuxt', url: '/tutorials/nuxtjs-ab-tests' },
-                        { name: 'PHP', url: '/tutorials/php-ab-tests' },
-                        { name: 'Python', url: '/tutorials/python-ab-testing' },
-                        { name: 'React', url: '/tutorials/react-ab-testing' },
-                        { name: 'React Native', url: '/tutorials/react-native-ab-tests' },
-                        { name: 'Remix', url: '/tutorials/remix-ab-tests' },
-                        { name: 'Ruby on Rails', url: '/tutorials/ruby-on-rails-ab-tests' },
-                        { name: 'Svelte', url: '/tutorials/svelte-ab-tests' },
-                        { name: 'Vue', url: '/tutorials/vue-ab-tests' },
-                        { name: 'Webflow', url: '/tutorials/webflow-ab-tests' },
-                    ],
                 },
                 {
                     name: 'Resources',

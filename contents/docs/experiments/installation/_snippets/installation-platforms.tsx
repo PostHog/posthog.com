@@ -58,21 +58,6 @@ const InstallationPlatforms = ({ urlFragment = '' }: InstallationPlatformsProps)
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
         },
         {
-            label: 'Java',
-            url: `/docs/experiments/installation/java${urlFragment}`,
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
-        },
-        {
-            label: 'Rust',
-            url: `/docs/experiments/installation/rust${urlFragment}`,
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
-        },
-        {
-            label: 'Elixir',
-            url: `/docs/experiments/installation/elixir${urlFragment}`,
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/elixir.svg',
-        },
-        {
             label: '.NET',
             url: `/docs/experiments/installation/dotnet${urlFragment}`,
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/dotnet_logo_7e446176f2.svg',
