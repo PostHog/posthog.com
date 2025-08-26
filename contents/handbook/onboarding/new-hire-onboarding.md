@@ -47,7 +47,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Book time with Magda for a deep dive on PostHog billing, sales process/routing. This will help you understand how your role fits in the broader context of the customer-facing teams
 - We'll start routing new leads to you at the end of week 1. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
 
-### In-person onboarding
+## In-person onboarding
 
 Ideally, this will happen in Week 3 or 4, and will be with a few existing team members (depending on where we do it) and will be 3-4 days covering:
 
