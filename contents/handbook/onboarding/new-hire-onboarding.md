@@ -25,8 +25,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Dana will add your GitHub handle to the template.
 - (Onboarding specialist) Book time with Magda to go over the nuts and bolts of the role - which leads get onboarding, what signals we're looking for, how to reach out. Start working through leads together.
 
-
-### Rest of week 1
+## Rest of week 1
 
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
  - Work your way through your GitHub onboarding issue that a member of the [People & Ops Team](/teams/people) should have created and sent a link to.
