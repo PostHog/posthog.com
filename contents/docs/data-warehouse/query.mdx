@@ -1,5 +1,5 @@
 ---
-title: Creating insights from sources
+title: Querying the data warehouse with SQL
 sidebar: Docs
 showTitle: true
 availability:
@@ -9,75 +9,42 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const QueryLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/query-light.png"
-export const QueryDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/query-dark.png"
 
-The data warehouse enables you to visualize and query data from external sources with PostHog's tools.
+PostHog provides the full flexibility of SQL to query your data warehouse using the [SQL editor](/docs/data-warehouse/sql).
 
-## Visualizing source data with trends
-
-After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends) like you would event or person data. 
-
-To do this, create a [new insight](https://us.posthog.com/insights/new), click the series, go to the **Data warehouse tables** tab, hover over the table you want, and click **Select**.
+To create a query, go to the [SQL editor](https://us.posthog.com/sql). Here you can see and search the schema of all available sources and PostHog tables as well as saved views.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
-  alt="Selecting a data warehouse table in a trend" 
-  classes="rounded"
-/>
-
-The main difference from events is that you must identify 3 fields from the data warehouse data to visualize it:
-
-- ID: A field that corresponds to the ID of the element. 
-- Distinct ID: A field that corresponds to an ID representing the user associated with the element. If none, can match ID.
-- Timestamp: A timestamp field representing when the element was created.
- 
-It's infeasible for us to map these fields. We pre-fill with a best guess, but allow you to edit it.
-
-### Filters and breakdowns
-
-When using data warehouse tables in insights, you can use properties from those tables filter and breakdown as you would with any other insight. For example, you could filter `zendesk_tickets` for ones where the `status` is `open` or `hubspot_companies` where `lifecyclestage` is `lead`.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bd_light_989c851f4b.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bd_dark_ef8b5baf43.png"
-  alt="Filtering and breaking down data warehouse data" 
-  classes="rounded"
-/>
-
-> **Want to create insights with a combination of PostHog and external data?** Check out our docs on [joining tables and persons](/docs/data-warehouse/join).
-
-## Querying sources with SQL
-
-For more complicated queries, you can use [SQL insights](/docs/product-analytics/sql). 
-
-To start, create a new SQL insight from the [SQL tab](https://us.posthog.com/sql). Here you can see the schema of all available external and PostHog tables as well as saved views.
-
-To see available sources, go to the [data pipeline page](https://us.posthog.com/pipeline/sources). This page shows the external and PostHog tables as well as [saved views](/docs/data-warehouse/views) you can visualize with trends or query through [SQL insights](/docs/product-analytics/sql).
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/d_light_3c5561008b.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/d_dark_767067055d.png"
-  alt="Data warehouse tab in PostHog app" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_45_2x_751fc31300.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_45_2x_751fc31300.png"
+  alt="SQL editor" 
   classes="rounded"
 />
 
 Here you can:
 
-1. Write your SQL query using your table like `SELECT * FROM hubspot_contacts`
-2. Click **Update and run** to see the results.
-3. Modify your query using [SQL commands](/docs/product-analytics/sql) as needed to get the data you want like `SELECT email FROM hubspot_contacts WHERE city = 'Brisbane'`.
-4. Save your query.
+1. Write your SQL query using your table like `SELECT * FROM stripe.prod.charge`
+2. Click **Run** to see the results.
+3. Modify your query using [SQL commands](/docs/data-warehouse/sql) and [functions](/docs/data-warehouse/sql/functions) as needed to get the data you want like `select amount / 100 as dollar_charge, status from stripe.prod.charge`.
 
 <ProductScreenshot
-  imageLight={QueryLight} 
-  imageDark={QueryDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_19_11_2x_b1d7ce399f.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_18_51_2x_e62db75b67.png" 
   alt="Querying a source in PostHog" 
   classes="rounded"
 />
 
-### SQL visualizations
+4. Click **Create insight**.
+5. Choose and customize your visualization.
+6. Click **Save insight**.
+
+<CalloutBox icon="IconInfo" title="Having trouble writing SQL?" type="fyi">
+
+  Max AI can help write SQL for you. Just click his face in the corner of your  screen and ask him to write or tweak your query for you.
+
+</CalloutBox>
+
+## SQL visualizations
 
 SQL queries have multiple different visualization options including:
 
@@ -99,7 +66,7 @@ For example, with tables, you can add conditional formatting rules. These enable
   classes="rounded"
 />
 
-### Querying multiple sources together
+## Querying multiple sources together
 
 Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands. 
 

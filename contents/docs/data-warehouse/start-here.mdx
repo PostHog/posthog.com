@@ -1,0 +1,129 @@
+---
+title: Getting started with data warehouse
+hideAnchor: true
+---
+
+import DWInstallationPlatforms from './_snippets/dw-installation-platforms'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
+
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to build your data warehouse!">
+
+<QuestLogItem 
+    title="Link your first source"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+  Data warehouse lets you store, query, and analyze your data in a unified platform, so you can build better products and make data-driven decisions.
+
+  The first step is to link your first source to your data warehouse.
+
+  ### Platforms
+
+  <DWInstallationPlatforms />
+
+  <CallToAction type="primary" to="/docs/data-warehouse/sources">
+    Link your first source
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Visualize your data with insights"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+  Once you've linked a source, you can use as you would your other PostHog data in [trends](/docs/data-warehouse/insights). This makes setting up your first insights easy.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
+    alt="Selecting a data warehouse table in a trend" 
+    classes="rounded"
+  />
+
+  <CallToAction type="primary" to="/docs/data-warehouse/insights">
+    Create an insight
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Query your data with SQL"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+  You can use SQL to query data from your sources. We provide all sorts of [commands](/docs/data-warehouse/sql#commands) and [functions](/docs/data-warehouse/sql/useful-functions) to help you with this.
+  
+  After you've got the data you want, the SQL editor also provides a bunch of [visualizations](/docs/data-warehouse/query#sql-visualizations) for you to use too.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_11_34_23_2x_a36e4b0bea.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_11_34_05_2x_50d26bf304.png"
+    alt="Visualize your data"
+    classes="rounded"
+    padding={false}
+/>
+
+  <CallToAction type="primary" to="/docs/data-warehouse/query">
+    Query your data with SQL
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Set up a warehouse join"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  The real power of the data warehouse is the ability to combine data from multiple tables in a single query. 
+  
+  [Joins](/docs/data-warehouse/join) enable you to do this by letting you choose fields that act as connections between PostHog and external sources. 
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/join_light_9b369cc72f.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/join_dark_41d32574ec.png"
+    alt="Create a join" 
+    classes="rounded"
+    padding={false}
+  />
+
+  <CallToAction type="primary" to="/docs/data-warehouse/join">
+    Set up a join
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Free 1M rows/mo"
+  icon="IconPiggyBank"
+>
+
+  PostHog's data warehouse is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. 
+
+  ### TL;DR 💸 
+
+  - No credit card required to start
+  - First 1M rows per month are free
+  - Above 1M we have usage-based pricing starting at $0.000015/row with discounts as volume increases
+  - Set billing limits to avoid surprise charges
+  - See our [pricing page](/data-warehouse#pricing) for more up-to-date details
+
+
+  --- 
+
+  That's it! You're ready to start building your data warehouse.
+
+  <CallToAction type="primary" to="/docs/data-warehouse/sources">
+    Link a source
+  </CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>

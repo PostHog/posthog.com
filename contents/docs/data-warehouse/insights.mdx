@@ -1,0 +1,52 @@
+---
+title: Visualizing data warehouse data with insights
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+After [linking your source](/docs/cdp/sources), you can use its data in a [trend](/docs/product-analytics/trends) insight like you would event or person data. 
+
+To do this, create a [new insight](https://us.posthog.com/insights/new), click the series, go to the **Data warehouse tables** tab, hover over the table you want, and click **Select**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
+  alt="Selecting a data warehouse table in a trend" 
+  classes="rounded"
+/>
+
+The main difference from events is that you must identify 3 fields from the data warehouse data to visualize it:
+
+- ID: A field that corresponds to the ID of the element. 
+- Distinct ID: A field that corresponds to an ID representing the user associated with the element. If none, can match ID.
+- Timestamp: A timestamp field representing when the element was created.
+ 
+It's infeasible for us to map these fields. We pre-fill with a best guess, but allow you to edit it.
+
+## Filters and breakdowns
+
+When using data warehouse tables in insights, you can use properties from those tables filter and breakdown as you would with any other insight. For example, you could filter `zendesk_tickets` for ones where the `status` is `open` or `hubspot_companies` where `lifecyclestage` is `lead`.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bd_light_989c851f4b.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bd_dark_ef8b5baf43.png"
+  alt="Filtering and breaking down data warehouse data" 
+  classes="rounded"
+/>
+
+## Extended person properties
+
+After setting up an join to the `persons` table, you can use the extended person properties of the joined table in filters, breakdowns, and more.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_08_26_at_13_30_29_2x_5c1e415836.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_08_26_at_13_31_28_2x_d0afde2a1c.png"
+  alt="Using extended person properties in an insight"
+  classes="rounded"
+/>
+
+Learn more about how to set this up in our guide on [joining data](/docs/data-warehouse/join).
