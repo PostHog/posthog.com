@@ -57,7 +57,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 - Toolkit and internal processes.
 - No stupid questions session.
 
-### Weeks 3-4
+## Weeks 3-4
 
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Make sure all your tooling and automation are fully set up (health indicators etc.)
