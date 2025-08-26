@@ -6,48 +6,5 @@
 <path d="M416.143 39.9976H450.121L479.35 135.495H469.115L497.183 39.9976H530.212L491.696 151.323H456.135L416.143 39.9976Z" fill="white"/>
 <path d="M366.162 154.384C355.117 154.384 345.409 151.992 337.038 147.208C328.736 142.425 322.3 135.601 317.727 126.737C313.225 117.873 310.974 107.497 310.974 95.6081C310.974 83.7193 313.225 73.3782 317.727 64.5847C322.3 55.7208 328.736 48.8971 337.038 44.1134C345.409 39.3298 355.117 36.938 366.162 36.938C377.206 36.938 386.879 39.3298 395.18 44.1134C403.481 48.8971 409.883 55.7208 414.385 64.5847C418.958 73.3782 421.244 83.7193 421.244 95.6081C421.244 107.497 418.958 117.873 414.385 126.737C409.883 135.601 403.481 142.425 395.18 147.208C386.879 151.992 377.206 154.384 366.162 154.384ZM366.162 129.903C370.805 129.903 374.779 128.636 378.086 126.104C381.392 123.501 383.924 119.667 385.683 114.602C387.442 109.467 388.321 103.135 388.321 95.6081C388.321 84.4228 386.387 75.9459 382.517 70.1773C378.648 64.3385 373.196 61.419 366.162 61.419C361.519 61.419 357.509 62.7205 354.132 65.3233C350.826 67.8559 348.293 71.6898 346.535 76.8252C344.776 81.8903 343.896 88.1512 343.896 95.6081C343.896 103.065 344.776 109.361 346.535 114.497C348.293 119.632 350.826 123.501 354.132 126.104C357.509 128.636 361.519 129.903 366.162 129.903Z" fill="white"/>
 <path d="M217.513 0.00192261H250.647V127.741L244.737 120.882C244.737 120.882 261.148 120.882 289.379 120.882C317.609 120.882 313.749 151.32 313.749 151.32H217.513V0.00192261Z" fill="white"/>
-<mask id="mask0_313_106" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="149" height="152">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M44.6502 0C69.3099 0 89.3004 20.0433 89.3004 44.7679V61.7825H104.16C128.82 61.7825 148.81 81.8258 148.81 106.55C148.81 131.275 128.82 151.318 104.16 151.318H0V44.7679C0 20.0433 19.9906 0 44.6502 0Z" fill="url(#paint0_linear_313_106)"/>
-</mask>
-<g mask="url(#mask0_313_106)">
-<g filter="url(#filter0_f_313_106)">
-<circle cx="65.2812" cy="80.7667" r="100.733" fill="#4B73FF"/>
-</g>
-<g filter="url(#filter1_f_313_106)">
-<ellipse cx="76.3487" cy="25.4884" rx="129.012" ry="100.733" fill="#FF66F4"/>
-</g>
-<g filter="url(#filter2_f_313_106)">
-<ellipse cx="97.3926" cy="6.53952" rx="100.733" ry="88.4654" fill="#FF0105"/>
-</g>
-<g filter="url(#filter3_f_313_106)">
-<circle cx="78.1432" cy="25.4679" r="60.5807" fill="#FE7B02"/>
-</g>
-</g>
-<defs>
-<filter id="filter0_f_313_106" x="-80.5968" y="-65.1113" width="291.756" height="291.756" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="22.5723" result="effect1_foregroundBlur_313_106"/>
-</filter>
-<filter id="filter1_f_313_106" x="-97.8078" y="-120.39" width="348.313" height="291.756" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="22.5723" result="effect1_foregroundBlur_313_106"/>
-</filter>
-<filter id="filter2_f_313_106" x="-48.4855" y="-127.071" width="291.756" height="267.22" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="22.5723" result="effect1_foregroundBlur_313_106"/>
-</filter>
-<filter id="filter3_f_313_106" x="-27.5822" y="-80.2574" width="211.451" height="211.451" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="22.5723" result="effect1_foregroundBlur_313_106"/>
-</filter>
-<linearGradient id="paint0_linear_313_106" x1="50.0774" y1="26.5915" x2="95.4144" y2="151.261" gradientUnits="userSpaceOnUse">
-<stop offset="0.025" stop-color="#FF8E63"/>
-<stop offset="0.56" stop-color="#FF7EB0"/>
-<stop offset="0.95" stop-color="#4B73FF"/>
-</linearGradient>
-</defs>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M44.6502 0C69.3099 0 89.3004 20.0433 89.3004 44.7679V61.7825H104.16C128.82 61.7825 148.81 81.8258 148.81 106.55C148.81 131.275 128.82 151.318 104.16 151.318H0V44.7679C0 20.0433 19.9906 0 44.6502 0Z" fill="white"/>
 </svg>

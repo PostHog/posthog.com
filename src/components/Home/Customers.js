@@ -126,8 +126,8 @@ export default function Customers() {
                     <Customer className="max-h-[60px]" image={raycast} alt="Raycast" />
                     <Customer className="max-h-[36px]" image={airbus} alt="Airbus" />
                     <Customer className="max-h-[45px]" image={heygen} alt="HeyGen" />
-                    <Customer url="/customers/lovable" className="max-h-[48px]" image={lovable} alt="Lovable" />
-                    <Customer url="/customers/supabase" className="max-h-[45px] " image={supabase} alt="Supabase" />
+                    <Customer url="/customers/lovable" className="max-h-[40px]" image={lovable} alt="Lovable" />
+                    <Customer url="/customers/supabase" className="max-h-[45px]" image={supabase} alt="Supabase" />
                     <Customer
                         url="/customers/hasura"
                         className="max-h-[45px] relative -top-1"
