@@ -4,13 +4,14 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import InstallReactNative from '../../integrate/_snippets/install-react-native.mdx'
+import ReactNativeInstall from '../../integrate/_snippets/install-react-native.mdx'
 import StepCreateExperiment from './_snippets/step-create-experiment.mdx'
 import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
 import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
 import StepValidateFeatureFlags from './_snippets/step-validate-feature-flags.mdx'
 import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-results.mdx'
 import Wizard from '../../getting-started/_snippets/wizard.mdx'
+import Tab from "components/Tab"
 
 <Steps>
 
@@ -23,10 +24,10 @@ import Wizard from '../../getting-started/_snippets/wizard.mdx'
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
-  <Wizard />
+    <Wizard />
 </Tab.Panel>
 <Tab.Panel>
-  <InstallReactNative />
+    <ReactNativeInstall />
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
