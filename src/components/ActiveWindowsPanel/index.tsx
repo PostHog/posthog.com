@@ -37,15 +37,17 @@ export default function ActiveWindowsPanel() {
             onClose={closeActiveWindowsPanel}
             title="Active windows"
             headerAside={
-                <OSButton
-                    size="sm"
-                    onClick={() => {
-                        animateClosingAllWindows()
-                        closeActiveWindowsPanel()
-                    }}
-                >
-                    Close all
-                </OSButton>
+                windows.length > 0 && (
+                    <OSButton
+                        size="sm"
+                        onClick={() => {
+                            animateClosingAllWindows()
+                            closeActiveWindowsPanel()
+                        }}
+                    >
+                        Close all
+                    </OSButton>
+                )
             }
             width="w-80"
         >

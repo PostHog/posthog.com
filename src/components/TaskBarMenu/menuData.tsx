@@ -264,7 +264,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             label: 'View all',
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
-        }
+        },
     ]
 
     items.push(
@@ -285,7 +285,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows } = useApp()
+    const { animateClosingAllWindows, windows, setScreensaverPreviewActive } = useApp()
 
     return [
         {
@@ -310,17 +310,24 @@ export function useMenuData(): MenuType[] {
                     label: 'Display options',
                     link: '/display-options',
                 },
+                {
+                    type: 'item',
+                    label: 'Start screensaver',
+                    onClick: () => {
+                        setScreensaverPreviewActive(true)
+                    },
+                },
                 ...(windows.length > 0
                     ? [
-                        { type: 'separator' as const },
-                        {
-                            type: 'item' as const,
-                            label: 'Close all windows',
-                            onClick: () => {
-                                animateClosingAllWindows()
-                            },
-                        },
-                    ]
+                          { type: 'separator' as const },
+                          {
+                              type: 'item' as const,
+                              label: 'Close all windows',
+                              onClick: () => {
+                                  animateClosingAllWindows()
+                              },
+                          },
+                      ]
                     : []),
             ],
         },

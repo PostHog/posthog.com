@@ -24,7 +24,7 @@ export default function Wrapper() {
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
                 <Desktop />
-                <AnimatePresence>
+                <AnimatePresence onExitComplete={() => setClosingAllWindowsAnimation(false)}>
                     {windows.map((item, index) => {
                         return (
                             <motion.div

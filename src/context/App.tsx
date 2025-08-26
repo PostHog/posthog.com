@@ -104,6 +104,8 @@ interface AppContextType {
     closingAllWindowsAnimation: boolean
     closeAllWindows: () => void
     setClosingAllWindowsAnimation: (isOpen: boolean) => void
+    screensaverPreviewActive: boolean
+    setScreensaverPreviewActive: (isActive: boolean) => void
 }
 
 interface AppProviderProps {
@@ -253,6 +255,8 @@ export const Context = createContext<AppContextType>({
     closingAllWindowsAnimation: false,
     closeAllWindows: () => {},
     setClosingAllWindowsAnimation: () => {},
+    screensaverPreviewActive: false,
+    setScreensaverPreviewActive: () => {},
 })
 
 export interface AppSetting {
@@ -812,6 +816,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
+    const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
@@ -1447,6 +1452,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 closingAllWindowsAnimation,
                 setClosingAllWindowsAnimation,
                 closeAllWindows,
+                screensaverPreviewActive,
+                setScreensaverPreviewActive,
             }}
         >
             {children}

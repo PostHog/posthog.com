@@ -136,7 +136,7 @@ const validateIconPositions = (positions: IconPositions, constraintsRef: React.R
 }
 
 export default function Desktop() {
-    const { constraintsRef, siteSettings } = useApp()
+    const { constraintsRef, siteSettings, screensaverPreviewActive, setScreensaverPreviewActive } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
         enabled: !siteSettings.screensaverDisabled,
@@ -439,7 +439,13 @@ export default function Desktop() {
                         </motion.ul>
                     </nav>
                 </div>
-                <Screensaver isActive={isInactive} onDismiss={dismiss} />
+                <Screensaver
+                    isActive={isInactive || screensaverPreviewActive}
+                    onDismiss={() => {
+                        setScreensaverPreviewActive(false)
+                        dismiss()
+                    }}
+                />
             </ContextMenu>
             <NotificationsPanel />
         </>
