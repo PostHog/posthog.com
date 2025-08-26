@@ -58,7 +58,7 @@ const product = {
     slug: 'llm-analytics',
     lowercase: 'LLM analytics',
     capitalized: 'LLM analytics',
-    freeTier: 'JOETBD',
+    freeTier: '100,000 events',
 }
 
 const team = 'LLM analytics'
