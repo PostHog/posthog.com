@@ -12,7 +12,7 @@ import {
     IconShield,
     IconStack,
     IconTerminal,
-    IconAI,
+    IconLlmObservability,
     IconUnlock,
     IconUserPaths,
     IconWarning,
@@ -348,7 +348,7 @@ export const ProductLLMAnalytics = () => {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="purple"
-                    icon={<IconAI />}
+                    icon={<IconLlmObservability />}
                     product={product.capitalized}
                     title='Who keeps an eye on your AI? <span class="text-red dark:text-yellow">You do.</span>'
                     description="Track usage, costs, latency, and loads more metrics for your AI products"
@@ -532,7 +532,7 @@ export const ProductLLMAnalytics = () => {
 
                 <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                     <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['llm_analytics']} />
                     </div>
                     <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
                         <h4 className="text-3xl">FAQs</h4>

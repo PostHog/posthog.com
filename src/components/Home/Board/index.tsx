@@ -387,7 +387,7 @@ const products: Product[] = [
         colorDark: '[#C170E8]',
         Icon: IconLlmObservability,
         description: 'Build AI features with full visibility – both in development and production.',
-        pricingKey: 'product_analytics',
+        pricingKey: 'llm_analytics',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },

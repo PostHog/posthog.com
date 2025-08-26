@@ -1595,7 +1595,7 @@ export const communityMenu = {
                 {
                     name: 'LLM analytics',
                     color: 'purple',
-                    icon: 'IconAI',
+                    icon: 'IconLlmObservability',
                     url: '/tutorials/ai-engineering',
                 },
             ],
@@ -4044,7 +4044,7 @@ export const docsMenu = {
             url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
-            icon: 'IconAI',
+            icon: 'IconLlmObservability',
             description: 'Insights for building your AI and LLM products',
             badge: {
                 title: 'Beta',
@@ -4372,7 +4372,7 @@ export const productMenu = {
         },
         {
             name: 'LLM analytics',
-            icon: 'IconAI',
+            icon: 'IconLlmObservability',
             color: '[#681291]',
             colorDark: '[#C170E8]',
             url: '/llm-analytics',
