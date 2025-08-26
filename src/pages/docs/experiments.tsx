@@ -115,7 +115,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                     title="Experiments"
                     description="Test different variations of your product and measure the impact."
                     buttonText="Roll out your first experiment"
-                    buttonLink="/docs/experiments/installation"
+                    buttonLink="/docs/experiments/start-here"
                     imageColumnClasses="max-w-96 mt-8 md:mt-0"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
                     imageClasses=""
@@ -132,7 +132,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                 <Content />
 
                 <div className="">
-                    <CallToAction to="/docs/experiments/installation" width="full">
+                    <CallToAction to="/docs/experiments/start-here" width="full">
                         Visit the manual
                     </CallToAction>
                 </div>

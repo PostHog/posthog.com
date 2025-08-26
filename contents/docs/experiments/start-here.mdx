@@ -21,9 +21,13 @@ import ExperimentInstallationPlatforms from './installation/_snippets/installati
 
 Experiments enable you to test the impact of product changes and understand how they affect your users' behavior. For example, testing different onboarding flows, app designs, or pricing strategies.
 
-The first step is to install PostHog with the library you want to run experiments in (if you haven't already):
+The first step is to install PostHog with the library you want to run experiments in:
 
 <ExperimentInstallationPlatforms />
+
+<CallToAction type="primary" to="/docs/experiments/installation">
+  Install PostHog SDK
+</CallToAction>
 
 </QuestLogItem>
 
@@ -47,25 +51,9 @@ Fill in the experiment details:
 - **Variants**: By default, you get `control` and `test` variants (you can add more)
 - **Participants**: Choose between user-level or group-level experiments
 
-</QuestLogItem>
-
-<QuestLogItem 
-  title="Add your experiment code"
-  subtitle="Required"
-  icon="IconCode"
->
-
-Next, add code to your app to show different experiences based on the experiment variant. Use the feature flag key from your experiment to check which variant a user has been assigned to:
-
-<ExperimentInstallationPlatforms urlFragment="#call-feature-flag" />
-
-<CalloutBox icon="IconInfo" title="Server-side experiments" type="info">
-
-For server-side experiments, you may need to manually trigger an exposure event when a user encounters your experiment. This ensures PostHog knows which users have been exposed to which variant. 
-
-[Learn more about exposures](/docs/experiments/exposures) and when manual exposure tracking is needed.
-
-</CalloutBox>
+<CallToAction type="primary" to="/docs/experiments/creating-an-experiment">
+  Create an experiment
+</CallToAction>
 
 </QuestLogItem>
 
@@ -96,23 +84,9 @@ Choose from:
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Test and launch"
-  subtitle="Required"
-  icon="IconRocket"
->
-
-Before launching to users, test your experiment to ensure both variants work correctly:
-
-Add an override in your feature flag's [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) to assign yourself to a specific variant (e.g., if your email equals "your-email@company.com", show the test variant). Test both variants to verify they behave as expected.
-
-Once verified, remove the override and launch your experiment to start collecting data!
-
-</QuestLogItem>
-
-<QuestLogItem 
   title="Monitor and analyze results"
-  subtitle="Required"
-  icon="IconTrendingUp"
+  subtitle="Recommended"
+  icon="IconTrending"
 >
 
 Once your experiment is running, monitor the results in real-time. PostHog shows:
@@ -135,7 +109,7 @@ When your experiment reaches significance, you can ship the winning variant with
 <QuestLogItem 
   title="Advanced features"
   subtitle="Optional"
-  icon="IconGear"
+  icon="IconLogomark"
 >
 
 Take your experiments to the next level with advanced PostHog features:
@@ -149,11 +123,31 @@ Target specific user segments, implement gradual rollouts, or run experiments on
 ### <IconFlask className="text-red w-7 -mt-1 inline-block"/> Advanced experimentation
 Choose between Bayesian and frequentist statistical approaches, handle multiple variants, and configure outlier detection.
 
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Free 1M requests/mo"
+  icon="IconPiggyBank">
+
+  PostHog's experiments is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. 
+
+  Experiments are billed with feature flags requests.  
+
+  ### TL;DR 💸 
+
+  - No credit card required to start
+  - First 1 million feature flag requests per month are free
+  - Above 1 million we have usage-based pricing starting at $0.0001/request with discounts as volume increases
+  - Set billing limits to avoid surprise charges
+  - See our [pricing page](/experiments#pricing) for more up-to-date details
+
+
 ---
 
 That's it! You're ready to start running successful experiments.
 
-<CallToAction type="primary" to="https://app.posthog.com/experiments">
+<CallToAction type="primary" to="/docs/experiments/installation">
   Create your first experiment
 </CallToAction>
 
