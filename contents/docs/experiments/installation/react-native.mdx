@@ -1,10 +1,10 @@
 ---
-title: Javascript Web experiments installation
+title: React Native experiments installation
 showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import WebInstall from '../../integrate/_snippets/install-web.mdx'
+import InstallReactNative from '../../integrate/_snippets/install-react-native.mdx'
 import StepCreateExperiment from './_snippets/step-create-experiment.mdx'
 import StepAddPrimaryMetric from './_snippets/step-add-primary-metric.mdx'
 import StepValidateExperimentEvents from './_snippets/step-validate-experiment-events.mdx'
@@ -13,9 +13,9 @@ import StepEvaluateExperimentResults from './_snippets/step-evaluate-experiment-
 
 <Steps>
 
-<Step title="Install PostHog JavaScript web SDK" badge="required">
+<Step title="Install PostHog React Native SDK" badge="required">
 
-<WebInstall />
+<InstallReactNative />
 
 </Step>
 
@@ -25,14 +25,21 @@ Once PostHog is initialized, you should be able to capture events.
 
 For this tutorial, let's capture a conversion event on a `<button id="cta">` click. 
 
-```js-web
-<button id="cta">Click me</button>
+```jsx
+import React from 'react'
+import { Button } from 'react-native'
+import { usePostHog } from 'posthog-react-native'
 
-<script>
-  document.getElementById('cta').addEventListener('click', () => {
-    posthog.capture('cta clicked')
-  })
-</script>
+export function CTAButton() {
+  const posthog = usePostHog()
+  return (
+    <Button
+      title="Click me"
+      onPress={() => posthog?.capture('cta clicked')}
+      testID="cta"
+    />
+  )
+}
 ```
 
 </Step>
@@ -57,25 +64,26 @@ For this tutorial, let's capture a conversion event on a `<button id="cta">` cli
 
 <Step title="Call feature flag" badge="required">
 
-Use the PostHog SDK to call the experiment flag and change the `<button id="cta">` text based on the assigned variant. 
+Use the React hooks to evaluate the experiment flag and render the `<button id="cta">` text based on the assigned variant. 
 
-```js-web
-// Ensure flags are loaded before usage.
-// You only need to call this on the code the first time a user visits.
-// See this doc for more details: /docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
-posthog.onFeatureFlags(function() {
-  const cta = document.getElementById('cta')
-  const variant = posthog.getFeatureFlag('test-experiment-ff-key')
-  cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
-})
+```jsx
+import React from 'react'
+import { Button } from 'react-native'
+import { useFeatureFlag, usePostHog } from 'posthog-react-native'
 
-// Otherwise, you can just do:
-const cta = document.getElementById('cta')
-const variant = posthog.getFeatureFlag('test-experiment-ff-key')
-cta.textContent = variant == 'control' ? 'Control CTA' : 'Test CTA'
+export function CTAButton() {
+  const posthog = usePostHog()
+  const variant = useFeatureFlag('test-experiment-ff-key') 
 
-// You can also test your code by overriding the feature flag:
-// e.g., posthog.featureFlags.overrideFeatureFlags({ flags: {'test-experiment-ff-key': 'test'}})
+  const title = variant === 'control' ? 'Control CTA' : 'Test CTA'
+  return (
+    <Button
+      testID="cta"
+      title={title}
+      onPress={() => posthog?.capture('cta clicked')}
+    />
+  )
+}
 ```
 
 Now when a user triggers a `cta clicked` event, PostHog automatically assigns the user to a variant and records an experiment exposure. 
