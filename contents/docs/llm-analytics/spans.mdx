@@ -1,0 +1,24 @@
+---
+title: Spans
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import SpanEvent from "./_snippets/span-event.mdx"
+
+Spans are individual operations within your LLM application like function calls, vector searches, or data retrieval steps. They provide granular visibility into your application's execution flow beyond just LLM calls.
+
+While [generations](/docs/llm-analytics/generations) capture LLM interactions and [traces](/docs/llm-analytics/traces) group related operations, spans track atomic operations that make up your workflow:
+
+- **Vector database searches** - Document and embedding retrieval
+- **Tool/function calls** - API calls, calculations, database queries  
+- **RAG pipeline steps** - Retrieval, reranking, context building
+- **Data processing** - Validation, chunking, formatting
+
+For technical implementation details, see [manual capture](/docs/llm-analytics/manual-capture).
+
+## Event properties
+
+<SpanEvent />

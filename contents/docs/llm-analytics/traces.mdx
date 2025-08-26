@@ -1,0 +1,24 @@
+---
+title: Traces
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import TraceEvent from "./_snippets/trace-event.mdx"
+
+Traces are a collection of generations and spans that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by  PostHog like the person, total cost, total latency, and more.
+
+Clicking on a trace opens a timeline of the interaction with all the generation and span events enabling you to see the entire conversation, details about the trace, and the individual generation and span events.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_25e203aa50.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_dark_dd6ad555dc.png"
+  alt="LLM traces"
+  classes="rounded"
+/>
+
+## Event properties
+
+<TraceEvent />

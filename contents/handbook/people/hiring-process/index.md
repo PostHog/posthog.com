@@ -225,7 +225,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-We will pay the candidate their 'normal day rate' with the caveat that we do cap the SuperDay payouts to $1,000. We will use this [calculator](https://www.xe.com/) to convert for GBP/EUR currencies. If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/day-rate-caluclator) to calculate it. 
+We pay all candidates 1,000 USD for their efforts on SuperDay.
 
 If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships. Due to the high volume of SuperDays we run, if the candidate has their SuperDay in the first half of the month, they can expect a payment to be made by the 15th of the month, while any SuperDays after the 15th of the month, it will be paid at the end of the month. 
 
@@ -272,6 +272,12 @@ The People & Ops team will prepare the offer details. James and Tim give final s
 During the offer call, we'll share feedback from the interview process, and sell the opportunity here at PostHog. We will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. Afterwards the person who made the offer will follow up with an offer email, outlining all the details. If a candidate is proving tricky to close, the team may escalate to James or Tim to help. 
 
 Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
+
+### How Ashby works for interviewers
+
+We pay Ashby per seat, so as an interviewer your access is limited to those candidates that you will interview, to save us some money. You will be able to see their application (inc cover letter), their resume and all previous feedback left about the candidate. 
+
+You will not be able to see every other candidate in the pipeline, this is because of the per seat pricing. However, we will keep a couple of seats aside so you can login to see other candidates in the pipeline and do a bit of profile/assessment calibration. If you would like to do this, please contact the talent team on slack and they can provision this for you. You won't keep this access forever but you can get it for a few days/ a week to get an overview of how some other interviewers are doing things. 
 
 ## Visa sponsorship
 

@@ -16,7 +16,7 @@ users:
 toolsUsed:
   - Feature flags
   - Product analytics
-  - LLM observability
+  - LLM analytics
 date: 2024-05-24
 ---
 

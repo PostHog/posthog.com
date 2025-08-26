@@ -3513,6 +3513,11 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
+"@posthog/core@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.1.tgz#49fb808ea2de880dc00e8818fa02172f7cde2eea"
+  integrity sha512-bwXUeHe+MLgENm8+/FxEbiNocOw1Vjewmm+HEUaYQe6frq8OhZnrvtnzZU3Q3DF6N0UbAmD/q+iNfNgyx8mozg==
+
 "@posthog/hedgehog-mode@^0.0.28":
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.28.tgz#0e8b3e5b2f187c8e3f90044a01595cf1668e1248"
@@ -20676,11 +20681,12 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.260.2:
-  version "1.260.2"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.260.2.tgz#66e034b3473e99ec985a415cd4acb60afc5d3201"
-  integrity sha512-2Q+QUz9j9+uG16wp0WcOEbezVsLZCobZyTX8NvWPMGKyPaf2lOsjbPjznsq5JiIt324B6NAqzpWYZTzvhn9k9Q==
+posthog-js@1.260.3:
+  version "1.260.3"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.260.3.tgz#ef08783c2ff715816eabe443a41b1b53ac617ea5"
+  integrity sha512-FCtksk0GQn22Rk9P7x7dsmAO7a2aBxPeYb2O2KXSraxR8xd2G6lUOOthVDK+qgtmuhpUZuur/mHrXEslMUEtjg==
   dependencies:
+    "@posthog/core" "1.0.1"
     core-js "^3.38.1"
     fflate "^0.4.8"
     preact "^10.19.3"

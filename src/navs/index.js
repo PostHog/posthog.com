@@ -1374,8 +1374,12 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding specialist overview',
+                        name: 'Onboarding Specialist overview',
                         url: '/handbook/onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'New hire onboarding',
+                        url: '/handbook/onboarding/new-hire-onboarding',
                     },
                 ],
             },
@@ -1593,7 +1597,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                     color: 'purple',
                     icon: 'IconAI',
                     url: '/tutorials/ai-engineering',
@@ -3072,7 +3076,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'LLM insights',
-                    url: '/docs/ai-engineering/llms',
+                    url: 'https://posthog.com/docs/llm-analytics',
                     icon: 'IconAIText',
                     color: 'yellow',
                     badge: {
@@ -4000,6 +4004,120 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Link sources',
+                    url: '/docs/data-warehouse/sources',
+                    icon: 'IconBook',
+                    color: 'orange',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/sources/',
+                        },
+                        {
+                            name: 'Managed',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/data-warehouse/sources/azure-db',
+                        },
+                        {
+                            name: 'BigQuery',
+                            url: '/docs/data-warehouse/sources/bigquery',
+                        },
+                        {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/sources/chargebee',
+                        },
+                        {
+                            name: 'DoIt',
+                            url: '/docs/data-warehouse/sources/doit',
+                        },
+                        {
+                            name: 'Google Ads',
+                            url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Google Sheets',
+                            url: '/docs/data-warehouse/sources/google-sheets',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/data-warehouse/sources/hubspot',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'MongoDB',
+                            url: '/docs/data-warehouse/sources/mongodb',
+                        },
+                        {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/sources/mysql',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/data-warehouse/sources/postgres',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/data-warehouse/sources/snowflake',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/data-warehouse/sources/stripe',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Temporal.io',
+                            url: '/docs/data-warehouse/sources/temporal',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/sources/vitally',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/data-warehouse/sources/zendesk',
+                        },
+                        {
+                            name: 'Self-managed',
+                        },
+                        {
+                            name: 'Azure Blob',
+                            url: '/docs/data-warehouse/sources/azure-blob',
+                        },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/data-warehouse/sources/r2',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/data-warehouse/sources/gcs',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/data-warehouse/sources/s3',
+                        },
+                    ],
+                },
+                {
                     name: 'Tutorials and guides',
                     url: '/docs/data-warehouse/tutorials',
                     icon: 'IconGraduationCap',
@@ -4066,8 +4184,8 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM observability',
-            url: '/docs/ai-engineering',
+            name: 'LLM analytics',
+            url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
             icon: 'IconAI',
@@ -4078,7 +4196,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -4086,58 +4204,156 @@ export const docsMenu = {
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/ai-engineering',
+                    url: '/docs/llm-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/llm-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Installation',
-                    url: '/docs/ai-engineering/observability',
+                    url: '/docs/llm-analytics/installation',
                     icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/llm-analytics/installation',
+                        },
+                        {
+                            name: 'OpenAI',
+                            url: '/docs/llm-analytics/installation/openai',
+                        },
+                        {
+                            name: 'Anthropic',
+                            url: '/docs/llm-analytics/installation/anthropic',
+                        },
+                        {
+                            name: 'Google',
+                            url: '/docs/llm-analytics/installation/google',
+                        },
+                        {
+                            name: 'LangChain',
+                            url: '/docs/llm-analytics/installation/langchain',
+                        },
+                        {
+                            name: 'Vercel AI SDK',
+                            url: '/docs/llm-analytics/installation/vercel-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'Privacy mode',
+                    url: '/docs/llm-analytics/privacy-mode',
+                    icon: 'IconLock',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Generations',
+                    url: '/docs/llm-analytics/generations',
+                    icon: 'IconAIText',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Spans',
+                    url: '/docs/llm-analytics/spans',
+                    icon: 'IconBrackets',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Dashboard',
-                    url: '/docs/ai-engineering/dashboard',
+                    name: 'Embeddings',
+                    url: '/docs/llm-analytics/embeddings',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Calculating LLM costs',
+                    url: '/docs/llm-analytics/calculating-costs',
+                    icon: 'IconBalance',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Analyze LLM performance',
+                    url: '/docs/llm-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
                 },
                 {
-                    name: 'Traces and generations',
-                    url: '/docs/ai-engineering/traces-generations',
-                    icon: 'IconTarget',
-                    color: 'orange',
+                    name: 'Manual capture',
+                    url: '/docs/llm-analytics/manual-capture',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
                 },
                 {
                     name: 'Tutorials and guides',
-                    url: '/docs/ai-engineering/tutorials',
+                    url: '/docs/llm-analytics/tutorials',
                     icon: 'IconGraduationCap',
-                    color: 'salmon',
+                    color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Observability integrations',
-                    url: '/docs/ai-engineering/llm-insights',
-                    icon: 'IconAIText',
-                    featured: true,
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/llm-analytics/troubleshooting',
+                    icon: 'IconQuestion',
                     color: 'purple',
+                },
+                {
+                    name: 'Integrations',
+                    url: '/docs/llm-analytics/integrations',
+                    icon: 'IconApps',
+                    featured: true,
+                    color: 'yellow',
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/llm-analytics/integrations',
+                        },
+                        {
                             name: 'Helicone',
-                            url: '/docs/ai-engineering/helicone-posthog',
+                            url: '/docs/llm-analytics/integrations/helicone-posthog',
                         },
                         {
                             name: 'Langfuse',
-                            url: '/docs/ai-engineering/langfuse-posthog',
+                            url: '/docs/llm-analytics/integrations/langfuse-posthog',
                         },
                         {
                             name: 'Traceloop',
-                            url: '/docs/ai-engineering/traceloop-posthog',
+                            url: '/docs/llm-analytics/integrations/traceloop-posthog',
                         },
                         {
                             name: 'Keywords AI',
-                            url: '/docs/ai-engineering/keywords-ai-posthog',
+                            url: '/docs/llm-analytics/integrations/keywords-ai-posthog',
                         },
                     ],
                 },
