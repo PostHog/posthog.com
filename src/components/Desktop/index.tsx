@@ -289,6 +289,7 @@ export default function Desktop() {
                             }}
                         />
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt="Hogzilla"
                             width={2574}
@@ -300,6 +301,7 @@ export default function Desktop() {
                     {/* Startup Monopoly */}
                     <div className="hidden select-none wallpaper-startup-monopoly:block absolute inset-0">
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
                             alt="Startup Monopoly"
                             width={1087}
@@ -329,6 +331,7 @@ export default function Desktop() {
                             }}
                         />
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
                             alt="Office party"
                             width={997}
@@ -359,6 +362,7 @@ export default function Desktop() {
                         />
                         <div className="absolute mt-12 md:mt-0 md:right-0 md:bottom-12">
                             <CloudinaryImage
+                                loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
                                 alt="Keyboard garden"
                                 width={1401}
@@ -366,6 +370,7 @@ export default function Desktop() {
                                 className="size-[400px] md:size-[700px] dark:hidden"
                             />
                             <CloudinaryImage
+                                loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
                                 alt="Keyboard garden"
                                 width={1401}
@@ -378,6 +383,7 @@ export default function Desktop() {
                     {/* 2001 bliss */}
                     <div className="hidden select-none wallpaper-2001-bliss:block absolute inset-0">
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
                             alt="2001 bliss"
                             width={1180}
@@ -390,6 +396,7 @@ export default function Desktop() {
                     {/* Parade */}
                     <div className="hidden select-none wallpaper-parade:block absolute inset-0">
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
                             alt="Parade"
                             width={1565}
@@ -398,6 +405,7 @@ export default function Desktop() {
                             imgClassName="object-contain h-full max-w-none dark:hidden"
                         />
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
                             alt="Parade"
                             width={1565}
@@ -410,6 +418,7 @@ export default function Desktop() {
                     {/* Coding at night */}
                     <div className="hidden select-none wallpaper-coding-at-night:block absolute inset-0">
                         <CloudinaryImage
+                            loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
                             alt="Coding at night"
                             width={800}
