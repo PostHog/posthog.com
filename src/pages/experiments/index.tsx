@@ -6,6 +6,187 @@ import { useContentData } from 'hooks/useContentData'
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'experiments'
 
+// Statistical methods data
+const statisticalMethods = [
+    {
+        id: 'bayesian',
+        name: 'Bayesian',
+        subtitle: "PostHog's default method",
+        color: 'purple',
+        bulletColor: 'purple',
+        whatItTells: [
+            {
+                term: 'Win probability',
+                description: 'Direct probability that variant A beats B'
+            },
+            {
+                term: 'Credible intervals',
+                description: 'Range where true value lies with 95% probability'
+            }
+        ],
+        advantages: [
+            'Check results anytime without statistical penalties',
+            'Get direct probability statements about which variant wins',
+            'Make confident decisions earlier with accumulating evidence',
+            'Intuitive interpretation: "Variant A has 85% chance of being better"'
+        ],
+        bestFor: [
+            'Continuous monitoring and optimization',
+            'Teams wanting flexible experiment duration',
+            'Modern experimentation practices'
+        ],
+        supportedMetrics: [
+            'Funnel metrics (conversion rates)',
+            'Count-based trends (event totals)',
+            'Value-based trends (revenue, time)'
+        ]
+    },
+    {
+        id: 'frequentist',
+        name: 'Frequentist',
+        subtitle: 'Classical academic approach',
+        color: 'blue',
+        bulletColor: 'blue',
+        whatItTells: [
+            {
+                term: 'P-value',
+                description: 'Probability of seeing these results if no real difference exists'
+            },
+            {
+                term: 'Confidence intervals',
+                description: 'Range of plausible values for true effect'
+            }
+        ],
+        advantages: [
+            'Widely understood by academic and data science communities',
+            'Matches industry-standard A/B testing tools',
+            'Simpler method with fewer parametric assumptions',
+            "Uses robust Welch's t-test for unequal variances"
+        ],
+        bestFor: [
+            'Teams familiar with p-values and confidence intervals',
+            'Matching internal data science standards',
+            'Academic research and publication'
+        ],
+        supportedMetrics: [
+            'Funnel metrics (conversion rates)',
+            'Mean metrics (revenue, session duration)',
+            'Includes outlier handling for mean metrics'
+        ]
+    }
+]
+
+// Key differences data
+const keyDifferences = [
+    {
+        category: 'Flexibility',
+        bayesian: 'Check anytime',
+        frequentist: 'Fixed analysis'
+    },
+    {
+        category: 'Interpretation',
+        bayesian: '"85% chance variant A wins"',
+        frequentist: '"p-value < 0.05"'
+    },
+    {
+        category: 'Industry Usage',
+        bayesian: 'Modern tech companies',
+        frequentist: 'Academic standard'
+    }
+]
+
+// Custom statistical methods comparison slide
+const StatisticalMethodsSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col pt-12 @2xl:pt-0 @2xl:justify-center h-full bg-primary text-primary px-8"
+        >
+            <div className="max-w-7xl w-full mx-auto">
+                <div className="text-center mb-12">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Bayesian vs Frequentist</h2>
+                    <p className="text-xl text-secondary">We've got em both.</p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    {statisticalMethods.map((method) => (
+                        <div key={method.id} className="bg-accent border border-primary rounded-lg p-8">
+                            <div className="text-center mb-6">
+                                <h3 className={`text-3xl font-bold text-${method.color} mb-2`}>{method.name}</h3>
+                                <p className="text-lg text-secondary">{method.subtitle}</p>
+                            </div>
+
+                            <div className="space-y-6">
+                                <div>
+                                    <h4 className="text-xl font-semibold mb-3">What it tells you</h4>
+                                    <ul className="space-y-2 text-base">
+                                        {method.whatItTells.map((item, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <span className={`text-${method.bulletColor} mr-2`}>•</span>
+                                                <span><strong>{item.term}:</strong> {item.description}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 className="text-xl font-semibold mb-3">Key advantages</h4>
+                                    <ul className="space-y-2 text-base">
+                                        {method.advantages.map((advantage, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <span className="text-green mr-2">✓</span>
+                                                <span>{advantage}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 className="text-xl font-semibold mb-3">Best for</h4>
+                                    <ul className="space-y-2 text-base">
+                                        {method.bestFor.map((item, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <span className={`text-${method.bulletColor} mr-2`}>•</span>
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 className="text-xl font-semibold mb-3">Supported metrics</h4>
+                                    <ul className="space-y-1 text-base">
+                                        {method.supportedMetrics.map((metric, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <span className={`text-${method.bulletColor} mr-2`}>•</span>
+                                                <span>{metric}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Bottom comparison */}
+                <div className="mt-12 bg-accent border border-primary rounded-lg p-8">
+                    <h4 className="text-2xl font-bold text-center mb-6">Key Differences</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        {keyDifferences.map((diff, index) => (
+                            <div key={index}>
+                                <h5 className="text-lg font-semibold mb-3">{diff.category}</h5>
+                                <p className="text-purple font-medium">Bayesian: {diff.bayesian}</p>
+                                <p className="text-blue font-medium">Frequentist: {diff.frequentist}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 // Custom pricing component for web analytics
 const CustomPricingSlide = () => {
     return (
@@ -116,7 +297,14 @@ export default function Experiments(): JSX.Element {
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
         exclude: ['answers'],
-        // order: ['overview', 'pricing', 'features'],
+        custom: [
+            {
+                slug: 'statistical-methods',
+                name: 'Statistical methods',
+                component: StatisticalMethodsSlide,
+            }
+        ],
+        order: ['overview', 'customers', 'features', 'statistical-methods', 'pricing', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with', 'getting-started'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
