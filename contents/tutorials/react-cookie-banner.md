@@ -46,6 +46,8 @@ npm install --save posthog-js
 
 Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `posthog-js/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))
 
+To ensure we don't store any cookies until the user opts in, we set `cookieless_mode` to `on_reject` in your initialization config like this:
+
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -56,6 +58,8 @@ import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
+  cookieless_mode: 'on_reject',
 })
 
 
@@ -128,6 +132,8 @@ import { Banner } from './Banner'
 
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
+  defaults: "<ph_posthog_js_defaults>",
+  cookieless_mode: 'on_reject',
 })
 
 
