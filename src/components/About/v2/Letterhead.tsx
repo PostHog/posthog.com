@@ -3,12 +3,15 @@ import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
 import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { useApp } from '../../../context/App'
 
 export const Letterhead = () => {
+    const { siteSettings } = useApp()
+
     return (
         <div className="not-prose border-b border-primary py-4 flex items-center justify-between">
             <div>
-                <Logo className="inline-block" />
+                <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
             </div>
             <aside className="flex gap-2 items-center">
                 <div>
@@ -24,6 +27,7 @@ export const Letterhead = () => {
                     </Link>
                 </div>
                 <div className="flex flex-col gap-0 leading-none">
+                    <div className="uppercase text-xs tracking-wider text-center text-muted pb-0.5">From the desk of</div>
                     <strong>James Hawkins</strong>
                     <span className="text-secondary text-sm">Co-founder</span>
                     <div>

@@ -310,6 +310,7 @@ export function useMenuData(): MenuType[] {
                     label: 'Display options',
                     link: '/display-options',
                 },
+                { type: 'separator' as const },
                 {
                     type: 'item',
                     label: 'Start screensaver',
@@ -317,18 +318,14 @@ export function useMenuData(): MenuType[] {
                         setScreensaverPreviewActive(true)
                     },
                 },
-                ...(windows.length > 0
-                    ? [
-                          { type: 'separator' as const },
-                          {
-                              type: 'item' as const,
-                              label: 'Close all windows',
-                              onClick: () => {
-                                  animateClosingAllWindows()
-                              },
-                          },
-                      ]
-                    : []),
+                {
+                    type: 'item' as const,
+                    label: 'Close all windows',
+                    disabled: windows.length < 1,
+                    onClick: () => {
+                        animateClosingAllWindows()
+                    },
+                },
             ],
         },
         {
