@@ -49,8 +49,8 @@ npm install @google/genai
 </Step>
 
 <Step title="Initialize PostHog and Google Gen AI client" badge="required">
-
-In the spot where you initialize the Google Gen AI SDK, import PostHog and our Google Gen AI wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our wrapper.
+ 
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to our Google Gen AI wrapper.
 
 <MultiLanguage>
 
@@ -90,7 +90,7 @@ const client = new GoogleGenAI({
 
 <Step title="Call Google Gen AI LLMs" badge="required">
 
-Now, when you use the Google Gen AI SDK, it automatically captures many properties into PostHog. These properties include:
+Now, when you use the Google Gen AI SDK, PostHog automatically captures `$ai_generation` properties. These include:
 
 <NotableGenerationProperties />
 

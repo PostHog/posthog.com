@@ -4272,6 +4272,10 @@ export const docsMenu = {
                             name: 'Vercel AI SDK',
                             url: '/docs/llm-analytics/installation/vercel-ai',
                         },
+                        {
+                            name: 'OpenRouter',
+                            url: '/docs/llm-analytics/installation/openrouter',
+                        },
                     ],
                 },
                 {
@@ -4292,17 +4296,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Traces',
-                    url: '/docs/llm-analytics/traces',
-                    icon: 'IconUserPaths',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'Spans',
                     url: '/docs/llm-analytics/spans',
                     icon: 'IconBrackets',
                     color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
                     featured: true,
                 },
                 {

@@ -37,18 +37,18 @@ Install PostHog SDK
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Record generations"
+  title="Track AI generations"
   subtitle="Required"
   icon="IconRecord"
 >
 
   Once you've installed the SDK, every LLM call automatically becomes a [generation](/docs/llm-analytics/generations) – a detailed record of what went in and what came out. Each generation captures:
 
-  - 📝 Complete conversation context (inputs and outputs)
-  - 🔢 Token counts and usage metrics  
-  - ⏱️ Response latency and performance data
-  - 💸 Automatic cost calculation based on model pricing
-  - 🔗 Trace IDs to group related LLM calls together
+  - Complete conversation context (inputs and outputs)
+  - Token counts and usage metrics  
+  - Response latency and performance data
+  - Automatic cost calculation based on model pricing
+  - Trace IDs to group related LLM calls together
 
 PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
   
@@ -60,7 +60,7 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
 
 <QuestLogItem 
   title="Evaluate model usage"
-  subtitle="Required"
+  subtitle="Recommended"
   icon="IconLineGraph"
 >
 
@@ -130,7 +130,7 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
 
   PostHog LLM analytics is designed to be cost-effective with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, more than 90% of companies use PostHog for free.
 
-### TL;DR
+### TL;DR 💸
 
   - No credit card required to start
   - First 100K LLM events per month are free with 30-day retention

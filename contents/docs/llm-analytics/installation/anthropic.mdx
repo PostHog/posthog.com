@@ -49,7 +49,7 @@ npm install @anthropic-ai/sdk
 
 <Step title="Initialize PostHog and the Anthropic wrapper" badge="required">
 
-In the spot where you initialize the Anthropic SDK, import PostHog and our Anthropic wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our Anthropic wrapper.
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to our Anthropic wrapper.
 
 <MultiLanguage>
 
@@ -91,7 +91,7 @@ const client = new Anthropic({
 
 <Step title="Call Anthropic LLMs" badge="required">
 
-Now, when you use the Anthropic SDK, it automatically captures many properties into PostHog. These properties include:
+Now, when you use the Anthropic SDK, PostHog automatically captures `$ai_generation` properties. These include:
 
 <NotableGenerationProperties />
 
