@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'experiments'
@@ -11,7 +12,7 @@ const statisticalMethods = [
     {
         id: 'bayesian',
         name: 'Bayesian',
-        subtitle: "PostHog's default method",
+        subtitle: "Popular with tech companies, check results anytime",
         color: 'purple',
         bulletColor: 'purple',
         whatItTells: [
@@ -44,7 +45,7 @@ const statisticalMethods = [
     {
         id: 'frequentist',
         name: 'Frequentist',
-        subtitle: 'Classical academic approach',
+        subtitle: 'Classical academic approach, fixed analysis',
         color: 'blue',
         bulletColor: 'blue',
         whatItTells: [
@@ -76,24 +77,8 @@ const statisticalMethods = [
     }
 ]
 
-// Key differences data
-const keyDifferences = [
-    {
-        category: 'Flexibility',
-        bayesian: 'Check anytime',
-        frequentist: 'Fixed analysis'
-    },
-    {
-        category: 'Interpretation',
-        bayesian: '"85% chance variant A wins"',
-        frequentist: '"p-value < 0.05"'
-    },
-    {
-        category: 'Industry Usage',
-        bayesian: 'Modern tech companies',
-        frequentist: 'Academic standard'
-    }
-]
+const legendClasses = 'text-center flex-shrink-0 px-4 border-x border-b border-primary py-2 bg-accent'
+const cellClasses = 'py-2 border-b border-primary px-4'
 
 // Custom statistical methods comparison slide
 const StatisticalMethodsSlide = () => {
@@ -103,12 +88,13 @@ const StatisticalMethodsSlide = () => {
             className="flex flex-col pt-12 @2xl:pt-0 @2xl:justify-center h-full bg-primary text-primary px-8"
         >
             <div className="max-w-7xl w-full mx-auto">
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Bayesian vs Frequentist</h2>
+                <div className="text-center mb-6">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Bayesian vs. Frequentist</h2>
                     <p className="text-xl text-secondary">We've got em both.</p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Mobile layout: 2 columns (portrait 9:16) */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 @2xl:hidden">
                     {statisticalMethods.map((method) => (
                         <div key={method.id} className="bg-accent border border-primary rounded-lg p-8">
                             <div className="text-center mb-6">
@@ -169,17 +155,119 @@ const StatisticalMethodsSlide = () => {
                     ))}
                 </div>
 
-                {/* Bottom comparison */}
-                <div className="mt-12 bg-accent border border-primary rounded-lg p-8">
-                    <h4 className="text-2xl font-bold text-center mb-6">Key Differences</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        {keyDifferences.map((diff, index) => (
-                            <div key={index}>
-                                <h5 className="text-lg font-semibold mb-3">{diff.category}</h5>
-                                <p className="text-purple font-medium">Bayesian: {diff.bayesian}</p>
-                                <p className="text-blue font-medium">Frequentist: {diff.frequentist}</p>
-                            </div>
-                        ))}
+                {/* Desktop landscape layout: 3 columns (landscape 16:9) */}
+                <div className="hidden @2xl:block">
+                    <div className="grid grid-cols-[1fr_auto_1fr]">
+                        {/* Headers */}
+                        <div className="text-center border-b border-primary">
+                            <h3 className="text-3xl font-bold text-purple mb-2">Bayesian</h3>
+                            <p className="text-base text-secondary">Popular with tech companies, check results anytime</p>
+                        </div>
+                        <div className="border-b border-primary">&nbsp;</div>
+                        <div className="text-center border-b border-primary">
+                            <h3 className="text-3xl font-bold text-blue mb-2">Frequentist</h3>
+                            <p className="text-base text-secondary">Classical academic approach, fixed analysis</p>
+                        </div>
+
+                        {/* What it tells you */}
+                        <div className={cellClasses}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[0].whatItTells.map((item, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-purple mr-2">•</span>
+                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className={legendClasses}>
+                            <h4 className="text-lg font-semibold">What it tells you</h4>
+                        </div>
+                        <div className={cellClasses}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[1].whatItTells.map((item, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-blue mr-2">•</span>
+                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Key advantages */}
+                        <div className={cellClasses}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[0].advantages.map((advantage, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-green mr-2">✓</span>
+                                        <span>{advantage}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className={legendClasses}>
+                            <h4 className="text-lg font-semibold">Key advantages</h4>
+                        </div>
+                        <div className={cellClasses}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[1].advantages.map((advantage, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-green mr-2">✓</span>
+                                        <span>{advantage}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Best for */}
+                        <div className={cellClasses}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[0].bestFor.map((item, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-purple mr-2">•</span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className={legendClasses}>
+                            <h4 className="text-lg font-semibold">Best for</h4>
+                        </div>
+                        <div className={cellClasses}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[1].bestFor.map((item, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-blue mr-2">•</span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Supported metrics */}
+                        <div className={`${cellClasses} border-b-0`}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[0].supportedMetrics.map((metric, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-purple mr-2">•</span>
+                                        <span>{metric}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className={`${legendClasses} border-b-0`}>
+                            <h4 className="text-lg font-semibold">Supported metrics</h4>
+                        </div>
+                        <div className={`${cellClasses} border-b-0`}>
+                            <ul className="space-y-1">
+                                {statisticalMethods[1].supportedMetrics.map((metric, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <span className="text-blue mr-2">•</span>
+                                        <span>{metric}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
