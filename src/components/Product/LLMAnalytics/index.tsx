@@ -363,7 +363,7 @@ export const ProductLLMAnalytics = () => {
         <>
             <SEO
                 title="LLM analytics and observability - PostHog"
-                description="Analyze traces, spans, per-user costs, latency, and more"
+                description="Analyze spans, traces, per-user costs, latency, and more"
                 image={`/images/og/llm-analytics.png`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
