@@ -159,33 +159,22 @@ Together, this looks like this:
 // src/Banner.jsx
 import { useEffect, useState } from "react";
 
-export function cookieConsentGiven() {
-  if (!localStorage.getItem('cookie_consent')) {
-    return 'undecided';
-  }
-  return localStorage.getItem('cookie_consent');
-}
-
 export function Banner() {
-  const [consentGiven, setConsentGiven] = useState('');
-
-  useEffect(() => {
-    setConsentGiven(cookieConsentGiven());
-  }, []);
+  const [consentGiven, setConsentGiven] = useState(posthog.get_explicit_consent_status());
 
   const handleAcceptCookies = () => {
-    localStorage.setItem('cookie_consent', 'yes');
-    setConsentGiven('yes');
+    posthog.opt_in_capturing();
+    setConsentGiven('granted');
   };
 
   const handleDeclineCookies = () => {
-    localStorage.setItem('cookie_consent', 'no');
-    setConsentGiven('no');
+    posthog.opt_out_capturing();
+    setConsentGiven('denied');
   };
 
   return (
     <div>
-      {consentGiven === 'undecided' && (
+      {consentGiven === 'pending' && (
         <div>
           <p>
             We use tracking cookies to understand how you use 
@@ -202,101 +191,9 @@ export function Banner() {
 }
 ```
 
-Back on our site, clicking accept or decline now stores the decision in local storage and hides the banner.
+Back on our site, clicking accept or decline now stores the decision in PostHog and hides the banner.
 
-## Step 5: Connecting consent to PostHog
-
-So far, our cookie banner is just for show. We want it to control whether PostHog uses cookies or not. This means we either set persistence to `localStorage+cookie` or `memory` depending on the user's consent. We need to do this in two places:
-
-1. Change PostHog's persistence at runtime when a user makes a consent decision in `Banner.jsx`.
-2. Use the consent decision to decide PostHog's initial persistence in `main.jsx`.
-
-In `Banner.jsx`, we import PostHog and use a `useEffect` hook to change PostHog's persistence at runtime.
-
-```js
-// src/Banner.jsx
-import { useEffect, useState } from "react";
-import posthog from "posthog-js";
-
-export function cookieConsentGiven() {
-  if (!localStorage.getItem('cookie_consent')) {
-    return 'undecided';
-  }
-  return localStorage.getItem('cookie_consent');
-}
-
-export function Banner() {
-  const [consentGiven, setConsentGiven] = useState('');
-
-  useEffect(() => {
-    setConsentGiven(cookieConsentGiven());
-  }, []);
-
-  useEffect(() => {
-    if (consentGiven !== '') {
-      posthog.set_config({ persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory' });
-    }
-  }, [consentGiven]);
-
-  const handleAcceptCookies = () => {
-    localStorage.setItem('cookie_consent', 'yes');
-    setConsentGiven('yes');
-  };
-
-  const handleDeclineCookies = () => {
-    localStorage.setItem('cookie_consent', 'no');
-    setConsentGiven('no');
-  };
-
-  return (
-    <div>
-      {consentGiven === 'undecided' && (
-        <div>
-          <p>
-            We use tracking cookies to understand how you use 
-            the product and help us improve it.
-            Please accept cookies to help us improve.
-          </p>
-          <button type="button" onClick={handleAcceptCookies}>Accept cookies</button>
-          <span> </span>
-          <button type="button" onClick={handleDeclineCookies}>Decline cookies</button>
-        </div>
-      )}
-    </div>
-  )
-}
-```
-
-In `main.jsx`, we reuse the `cookieConsentGiven` function to set the initial persistence based on the user's consent.
-
-```js
-// main.jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { PostHogProvider } from 'posthog-js/react'
-import posthog from 'posthog-js'
-import { Banner } from './Banner'
-import { cookieConsentGiven } from './Banner'
-
-posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_client_api_host>",
-  persistence: cookieConsentGiven() === 'yes' ? 'localStorage+cookie' : 'memory'
-})
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <PostHogProvider client={posthog}>
-      <App />
-      <Banner />
-    </PostHogProvider>
-  </React.StrictMode>,
-)
-```
-
-## Step 6: Testing it all out
+## Step 5: Testing it all out
 
 To make sure everything works, try the following steps:
 
