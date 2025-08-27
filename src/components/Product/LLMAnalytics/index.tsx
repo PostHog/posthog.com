@@ -680,7 +680,7 @@ export const ProductLLMAnalytics = () => {
                     </div>
                 </section>
 
-                <section id="questions" className="mb-20 px-5">
+                {/* <section id="questions" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
                     <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
@@ -692,7 +692,7 @@ export const ProductLLMAnalytics = () => {
                     </div>
 
                     <Questions topicIds={[390]} />
-                </section>
+                </section> */}
 
                 <PairsWith items={pairsWithItemCount}>
                     {PairsWithArray.map((card, index) => {
