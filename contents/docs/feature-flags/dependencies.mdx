@@ -72,7 +72,12 @@ Feature flag dependencies support several condition types:
 ### Multi-variant flags
 
 - `flag_name` equals `specific_variant`
-- `flag_name` does not equal `specific_variant`
+- `flag_name` equals `true` (matches any variant)
+- `flag_name` equals `false` (matches only if flag evaluates to `false`)
+
+## Using flag dependencies in your code
+
+Using a flag with dependencies doesn't require any special code. You can use [the flag in your code as you would any other flag](/docs/feature-flags/code-based-flags).
 
 ## Troubleshooting
 
