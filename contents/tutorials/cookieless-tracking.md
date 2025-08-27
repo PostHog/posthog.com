@@ -95,7 +95,7 @@ This means that whilst the IP address and User Agent are Personal Data, the hash
 
 ## Limitations
 
-Nothing comes for free and limiting what PostHog can store in cookies will have some implications:
+Nothing comes for free unfortunately. Limiting what PostHog can store in cookies has implications like:
 
 * **Higher user count** - Users that do not give cookie consent will appear as a different person each day. A new daily salt means that the hash will be different. Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices from the same user.
 
