@@ -177,40 +177,28 @@ posthog.init('<ph_project_api_key>', {
 })
 ``` 
 
-## Cookieless tracking 
+## Cookieless tracking
 
-import PersistenceInfo from "../libraries/js/_snippets/persistence-info.mdx"
+PostHog can be configured to do cookieless audience measurement.
 
-<PersistenceInfo />
-
-You can update the persistence of the PostHog client according to your user's cookie consent or your compliance requirements.
-
-- `persistence: "localStorage+cookie"` (default): Limited things are stored in the cookie such as the distinctID and the sessionID, and everything else in the browser's localStorage.
-
-- `persistence: "cookie"` : Stores all data in a cookie.
-
-- `persistence: "localStorage"`: Stores everything in `localStorage`.
-
-- `persistence: "sessionStorage"`: Stores everything in `sessionStorage`.
-
-- `persistence: "memory"`: Stores everything in page memory, which means data is only persisted for the duration of the page view.
-
-```js-web
-const handleCookieConsent = (consent) => {
-  posthog.set_config({ persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory' });
-  localStorage.setItem('cookie_consent', consent);
-};
-``` 
+- `cookieless_mode: "always"`
+  - Doesn't require a cookie banner (unless something else on your website uses cookies)
+  - PostHog never stores data in cookies or local/session storage
+  - You cannot call `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations
+  - PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
+- `cookieless_mode: "on_reject"`
+  - Use this if you do want to show a cookie banner and only enable cookies when the user consents
+  - PostHog never stores data in cookies or local/session storage until the user opts in
+  - PostHog doesn't capture any events until after consent is either given or denied
+  - If consent is denied, PostHog will still be able to count those users, using a privacy-preserving hash
 
 <CalloutBox type="info" title="Cookieless tracking">
 
-Using `persistence: "memory"` helps comply with cookie and consent requirements. This does **not** affect what data is captured and stored by PostHog.
-
-You still need to configure data collection and [storage](/docs/privacy/data-storage) separately to comply with relevant regulations.
+Using `cookieless_mode` helps comply with cookie and consent requirements. You still need to configure data collection and [storage](/docs/privacy/data-storage) separately to comply with relevant regulations.
 
 </CalloutBox>
 
-The JavaScript Web SDK has a more detailed guide on [managing persistence and cookies](/docs/libraries/js/persistence).
+For more information on how to set up cookieless audience measurement, you can follow our detailed tutorial on [cookieless tracking](/docs/tutorials/cookieless-tracking).
 
 ## Identifying users
 
