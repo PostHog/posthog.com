@@ -46,7 +46,7 @@ import { IconGraph, IconPiggyBank, IconPlug } from '@posthog/icons'
     alt="Visualize your data"
     classes="rounded"
     padding={false}
-/>
+  />
 
   <CallToAction type="primary" to="/docs/data-warehouse/query">
     Query your data with SQL
@@ -55,9 +55,9 @@ import { IconGraph, IconPiggyBank, IconPlug } from '@posthog/icons'
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Set up a warehouse join"
+  title="Set up a join"
   subtitle="Recommended"
-  icon="IconLogomark"
+  icon="IconStack"
 >
 
   The real power of the data warehouse is the ability to combine data from multiple tables in a single query. 
@@ -81,7 +81,7 @@ import { IconGraph, IconPiggyBank, IconPlug } from '@posthog/icons'
 <QuestLogItem
   title="Create and materialize views"
   subtitle="Recommended"
-  icon="IconLogomark"
+  icon="IconDatabaseBolt"
 >
 
   You can save your most used queries as [views](/docs/data-warehouse/views) and reference them in subsequent queries. This makes them composable and easy to reuse.
@@ -114,7 +114,7 @@ import { IconGraph, IconPiggyBank, IconPlug } from '@posthog/icons'
 
   Once you've linked a source, you can use it as you would your other PostHog data in [trends](/docs/data-warehouse/insights). This makes setting up your first insights easy.
 
-    <ProductScreenshot
+  <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
     alt="Selecting a data warehouse table in a trend" 
