@@ -191,7 +191,7 @@ We and our customers have found both to be essential so in our effort to “[equ
 
 1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from [Slack](/docs/cdp/destinations/slack) to [webhooks](/docs/cdp/destinations/webhook) to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
 
-2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Postgres](/docs/cdp/sources/postgres), [S3](/docs/cdp/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/sql) as well as [visualizations](/docs/data-warehouse/query) for this data.
+2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Postgres](/docs/cdp/sources/postgres), [S3](/docs/cdp/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/query) as well as [visualizations](/docs/data-warehouse/query#sql-visualizations) for this data.
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
 

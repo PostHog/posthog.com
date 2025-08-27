@@ -11,7 +11,7 @@ import {
     DataPipeline,
     DataWarehouse,
     WebAnalytics,
-    LLMObservability,
+    LLMAnalytics,
 } from './Slider/Slides'
 import { Chevron } from 'components/Icons'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
@@ -26,7 +26,7 @@ const slideContents = [
     Surveys,
     DataPipeline,
     DataWarehouse,
-    LLMObservability,
+    LLMAnalytics,
 ]
 
 type SlideButton = {

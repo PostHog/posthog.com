@@ -46,11 +46,10 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                 {({ open }) => (
                     <>
                         <Menu.Button
-                            className={`flex items-center space-x-1 font-semibold text-muted hover:text-primary py-1 px-1 rounded-sm border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
-                                open
+                            className={`flex items-center space-x-1 font-semibold text-muted hover:text-primary py-1 px-1 rounded-sm border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open
                                     ? 'scale-[1.02] bg-accent border-primary text-primary'
                                     : 'border-transparent hover:bg-accent hover:border'
-                            }`}
+                                }`}
                         >
                             {copiedState === 'markdown' ? (
                                 <>

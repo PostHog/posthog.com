@@ -18,12 +18,11 @@ To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the
 
 For example, if you import your Stripe data, you can define a join between the `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`. 
 
-
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/join_light_9b369cc72f.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/join_dark_41d32574ec.png"
-    alt="Create a join" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/join_light_9b369cc72f.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/join_dark_41d32574ec.png"
+  alt="Create a join" 
+  classes="rounded"
 />
 
 Once joined, source properties can be used in filters, breakdowns, and [SQL expressions](/docs/sql/expressions).
@@ -49,6 +48,6 @@ Person joins are a special type of table joins. They are joins on the `persons` 
 
 If you only want to join data together for a single insight or query, you can use SQL commands like `WHERE IN` and `JOIN` SQL commands.
 
-import QueryJoinExample from './snippets/query-join-example.mdx'
+import QueryJoinExample from './_snippets/query-join-example.mdx'
 
 <QueryJoinExample />

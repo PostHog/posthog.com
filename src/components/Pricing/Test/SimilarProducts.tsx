@@ -24,7 +24,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM observability': false,
+            'LLM analytics': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: true,
@@ -46,7 +46,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM observability': false,
+            'LLM analytics': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -67,7 +67,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM observability': false,
+            'LLM analytics': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -89,7 +89,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM observability': false,
+            'LLM analytics': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -111,7 +111,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM observability': false,
+            'LLM analytics': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -129,7 +129,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': true,
-            'LLM observability': true,
+            'LLM analytics': true,
             'Session replay': true,
             'Feature flags': true,
             Experiments: true,

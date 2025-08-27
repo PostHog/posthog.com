@@ -22,7 +22,7 @@ type LibraryFeatures = {
     sessionRecording?: boolean
     userIdentification: boolean
     surveys?: boolean
-    llmObservability?: boolean
+    llmAnalytics?: boolean
     errorTracking?: boolean
 }
 
