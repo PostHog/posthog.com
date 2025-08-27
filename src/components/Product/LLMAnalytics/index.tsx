@@ -142,7 +142,7 @@ const ecosystem = [
     },
     {
         title: 'Feature flags',
-        description: 'See how specific changes impact your metrics',
+        description: 'See how specific changes impact your metrics, deploy changes to certain users only',
         icon: <IconToggle />,
         color: 'seagreen',
     },
@@ -363,7 +363,7 @@ export const ProductLLMAnalytics = () => {
         <>
             <SEO
                 title="LLM analytics and observability - PostHog"
-                description="Analyze traces, per-user costs, latency, and more"
+                description="Analyze traces, spans, per-user costs, latency, and more"
                 image={`/images/og/llm-analytics.png`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
@@ -375,7 +375,7 @@ export const ProductLLMAnalytics = () => {
                     icon={<IconLlmObservability />}
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Monitor and debug</span> your AI products'
-                    description="Analyze traces, per-user costs, latency, and more"
+                    description="Analyze traces, spans, per-user costs, latency, and more"
                 />
 
                 <div className="text-center">
