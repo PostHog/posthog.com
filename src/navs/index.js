@@ -3427,7 +3427,7 @@ export const docsMenu = {
                 {
                     name: 'Feature flag dependencies',
                     url: '/docs/feature-flags/dependencies',
-                    icon: 'IconLink',
+                    icon: 'IconListTreeChild',
                     color: 'purple',
                 },
                 {
