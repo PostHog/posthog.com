@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ProductImage from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Feature {
     title: string
@@ -17,7 +16,7 @@ interface FeatureItem {
     icon?: any
     color?: string
     features?: Feature[]
-    images?: Array<{ src: string; alt: string; stylize: boolean; shadow: boolean }>
+    images?: Array<{ src: string; alt: string; stylize: boolean; shadow: boolean; className: string }>
     imagesClasses?: string
     children?: React.ReactNode
 }
@@ -91,17 +90,15 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                         <div className="relative">
                             <div className={`${item.layout === 'columns' ? 'pt-4' : 'pt-12 px-4 pb-8'} pb-8`}>
                                 <h2
-                                    className={`text-5xl mb-0 ${
-                                        item.layout === 'columns' ? 'text-left' : 'text-center'
-                                    }`}
+                                    className={`text-5xl mb-0 ${item.layout === 'columns' ? 'text-left' : 'text-center'
+                                        }`}
                                 >
                                     {item.headline}
                                 </h2>
                                 {item.description && (
                                     <p
-                                        className={`mt-4 text-xl [&_code]:text-xl ${
-                                            item.layout === 'columns' ? 'text-left' : 'text-center'
-                                        }`}
+                                        className={`mt-4 text-xl [&_code]:text-xl ${item.layout === 'columns' ? 'text-left' : 'text-center'
+                                            }`}
                                         {...(typeof item.description === 'string'
                                             ? { dangerouslySetInnerHTML: { __html: item.description } }
                                             : { children: item.description })}

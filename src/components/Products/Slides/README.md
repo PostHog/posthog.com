@@ -18,7 +18,7 @@ const PRODUCT_HANDLE = 'your_product_handle'
 
 export default function YourProductPage(): JSX.Element {
     const data = useStaticQuery(/* your GraphQL query */)
-    
+
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
 }
 ```
@@ -32,25 +32,25 @@ import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 
 // Only include specific slides
 const slides = createSlideConfig({
-    include: ['overview', 'features', 'pricing', 'getting-started']
+    include: ['overview', 'features', 'pricing', 'getting-started'],
 })
 
 // Or exclude certain slides
 const slides = createSlideConfig({
-    exclude: ['comparison-summary', 'feature-comparison']
+    exclude: ['comparison-summary', 'feature-comparison'],
 })
 
 // Custom order
 const slides = createSlideConfig({
-    order: ['overview', 'pricing', 'features', 'customers']
+    order: ['overview', 'pricing', 'features', 'customers'],
 })
 
 // Override slide names and properties
 const slides = createSlideConfig({
     overrides: {
         pricing: { name: 'Plans & Pricing' },
-        features: { props: { customProp: 'value' } }
-    }
+        features: { props: { customProp: 'value' } },
+    },
 })
 
 return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
@@ -65,19 +65,19 @@ const slides = createSlideConfig({
     content: {
         // Customize the description text for the Q&A/Answers slide
         answersDescription: 'Discover insights about your users and improve your product',
-        
+
         // Customize the headline for the Q&A/Answers slide (defaults to "What can I discover with {productName}?")
         answersHeadline: 'What can Product Analytics help me discover?',
-        
+
         // Add a background image to the Features slide
         // The image is rendered as an absolutely positioned element behind the content
         featuresBackgroundImage: {
             url: 'https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg',
-            opacity: 0.2,        // Optional, defaults to 0.2
-            position: 'center',  // Optional, defaults to 'center' (CSS object-position)
-            size: 'cover'        // Optional, defaults to 'cover' (CSS object-fit)
-        }
-    }
+            opacity: 0.2, // Optional, defaults to 0.2
+            position: 'center', // Optional, defaults to 'center' (CSS object-position)
+            size: 'cover', // Optional, defaults to 'cover' (CSS object-fit)
+        },
+    },
 })
 ```
 
@@ -86,28 +86,32 @@ const slides = createSlideConfig({
 ## Available Components
 
 ### Main Component
-- `SlidesTemplate` - Complete product page with all common logic
+
+-   `SlidesTemplate` - Complete product page with all common logic
 
 ### Slide Configuration
-- `createSlideConfig` - Helper to customize slide configuration. Returns a `SlideConfigResult` object containing:
-  - `slides`: Array of slide configurations
-  - `content`: Optional content configuration for slides (answersDescription, answersHeadline, featuresBackgroundImage)
-- `defaultSlides` - Default slide configuration object
+
+-   `createSlideConfig` - Helper to customize slide configuration. Returns a `SlideConfigResult` object containing:
+    -   `slides`: Array of slide configurations
+    -   `content`: Optional content configuration for slides (answersDescription, answersHeadline, featuresBackgroundImage)
+-   `defaultSlides` - Default slide configuration object
 
 ### Individual Slides
-- `OverviewSlide` - Product introduction with screenshot and hog image
-- `CustomersSlide` - Customer testimonials and case studies table
-- `FeaturesSlide` - Tabbed features display with images
-- `QuestionsSlide` - FAQ/questions with tutorial content
-- `ComparisonSummarySlide` - "PostHog vs..." comparison summary
-- `FeatureComparisonSlide` - Detailed feature comparison table
-- `DocsSlide` - Documentation links
-- `PairsWithSlide` - "Pairs with..." other products
-- `GettingStartedSlide` - CTA section
+
+-   `OverviewSlide` - Product introduction with screenshot and hog image
+-   `CustomersSlide` - Customer testimonials and case studies table
+-   `FeaturesSlide` - Tabbed features display with images
+-   `QuestionsSlide` - FAQ/questions with tutorial content
+-   `ComparisonSummarySlide` - "PostHog vs..." comparison summary
+-   `FeatureComparisonSlide` - Detailed feature comparison table
+-   `DocsSlide` - Documentation links
+-   `PairsWithSlide` - "Pairs with..." other products
+-   `GettingStartedSlide` - CTA section
 
 ### Utilities
-- `SlideThumbnails` - Slide navigation thumbnails
-- `PlanComparison` - Pricing comparison (already existed)
+
+-   `SlideThumbnails` - Slide navigation thumbnails
+-   `PlanComparison` - Pricing comparison (already existed)
 
 ## Advanced Usage
 
@@ -120,13 +124,13 @@ import { MyCustomSlide } from './MyCustomSlide'
 
 const slides = createSlideConfig({
     custom: [
-        { 
-            slug: 'custom-demo', 
-            name: 'Product Demo', 
+        {
+            slug: 'custom-demo',
+            name: 'Product Demo',
             component: MyCustomSlide,
-            props: { customProp: 'value' }
-        }
-    ]
+            props: { customProp: 'value' },
+        },
+    ],
 })
 ```
 
@@ -233,17 +237,56 @@ export default function YourProductPage(): JSX.Element {
         query {
             allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
                 nodes {
-                    fields { slug }
+                    fields {
+                        slug
+                    }
                     rawBody
-                    frontmatter { title description }
+                    frontmatter {
+                        title
+                        description
+                    }
                 }
             }
             allProductData {
                 nodes {
                     products {
-                        name type unit
-                        addons { name type unit plans { name plan_key included_if features { key name description limit note } } }
-                        plans { name plan_key free_allocation included_if features { key name description limit note } tiers { unit_amount_usd up_to } }
+                        name
+                        type
+                        unit
+                        addons {
+                            name
+                            type
+                            unit
+                            plans {
+                                name
+                                plan_key
+                                included_if
+                                features {
+                                    key
+                                    name
+                                    description
+                                    limit
+                                    note
+                                }
+                            }
+                        }
+                        plans {
+                            name
+                            plan_key
+                            free_allocation
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                            tiers {
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
                     }
                 }
             }
@@ -261,9 +304,9 @@ export default function YourProductPage(): JSX.Element {
             // Optionally add background image for features slide
             featuresBackgroundImage: {
                 url: 'https://your-image-url.jpg',
-                opacity: 0.2
-            }
-        }
+                opacity: 0.2,
+            },
+        },
     })
 
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
@@ -282,17 +325,17 @@ If you need more control, you can still copy the original session-replay structu
 
 Each slide component accepts specific props and can be customized:
 
-- Pass different data structures to modify content
-- Override default styling by extending component styles
-- Add or remove slides from the `rawSlides` array as needed
-- Customize the order of slides for different products
+-   Pass different data structures to modify content
+-   Override default styling by extending component styles
+-   Add or remove slides from the `rawSlides` array as needed
+-   Customize the order of slides for different products
 
 ## Notes
 
-- The GraphQL query fetches tutorial data and product data that's shared across all products
-- Each slide component is designed to handle missing data gracefully
-- TypeScript interfaces ensure type safety when passing props
-- Components use PostHog's design system colors and spacing 
+-   The GraphQL query fetches tutorial data and product data that's shared across all products
+-   Each slide component is designed to handle missing data gracefully
+-   TypeScript interfaces ensure type safety when passing props
+-   Components use PostHog's design system colors and spacing
 
 ## Data structure
 
@@ -306,29 +349,51 @@ You can use different templates of the overview slide to match your product's vi
 // Use stacked layout (horizontal split)
 const slides = createSlideConfig({
     templates: {
-        overview: 'stacked'
-    }
+        overview: 'stacked',
+    },
 })
 
 // Use overlay layout (centered with background)
 const slides = createSlideConfig({
     templates: {
-        overview: 'overlay'
-    }
+        overview: 'overlay',
+    },
 })
 
 // Use columns layout (default)
 const slides = createSlideConfig({
     templates: {
-        overview: 'columns'  // or leave blank for default
-    }
+        overview: 'columns', // or leave blank for default
+    },
 })
 ```
 
 #### Available Overview Slide Templates:
 
-- **Columns (Default)**: Traditional layout with content in left column and images/hog on the right
-- **Stacked**: Horizontal split layout with larger icon and side-by-side content and images  
-- **Overlay**: Centered vertical layout with background image and prominent centered content
+-   **Columns (Default)**: Traditional layout with content in left column and images/hog on the right
+-   **Stacked**: Horizontal split layout with larger icon and side-by-side content and images
+-   **Overlay**: Centered vertical layout with background image and prominent centered content
+
+#### Available Features Slide Templates:
+
+-   **Tabs (Default)**: All features displayed in tabs on a single slide
+-   **Columns**: AI-style features layout with columns
+-   **Grid**: Individual slides for each feature with 4-column grid layout
+
+```tsx
+// Create individual feature slides using grid template
+const features = productData?.features || []
+const featureSlides = features.map((feature, index) => ({
+    slug: `features-${index}`,
+    name: feature.title,
+    props: { featureIndex: index },
+    template: 'grid',
+}))
+
+const slides = createSlideConfig({
+    exclude: ['features'], // Remove default features slide
+    custom: featureSlides, // Add individual feature slides
+})
+```
 
 All templates accept the same props and work with existing product data structure.
