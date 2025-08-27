@@ -2,7 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { Accordion } from 'components/RadixUI/Accordion'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'experiments'
@@ -77,6 +77,9 @@ const statisticalMethods = [
     }
 ]
 
+const mobileTriggerClasses = 'flex items-center gap-2 px-4 py-2 text-2xl font-bold'
+const mobileCellClasses = 'py-2 px-4 grid gap-4'
+
 const legendClasses = 'text-center flex-shrink-0 px-4 border-x border-b border-primary py-2 bg-accent'
 const cellClasses = 'py-2 border-b border-primary px-4'
 
@@ -93,66 +96,163 @@ const StatisticalMethodsSlide = () => {
                     <p className="text-xl text-secondary">We've got em both.</p>
                 </div>
 
-                {/* Mobile layout: 2 columns (portrait 9:16) */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 @2xl:hidden">
-                    {statisticalMethods.map((method) => (
-                        <div key={method.id} className="bg-accent border border-primary rounded-lg p-8">
-                            <div className="text-center mb-6">
-                                <h3 className={`text-3xl font-bold text-${method.color} mb-2`}>{method.name}</h3>
-                                <p className="text-lg text-secondary">{method.subtitle}</p>
-                            </div>
-
-                            <div className="space-y-6">
-                                <div>
-                                    <h4 className="text-xl font-semibold mb-3">What it tells you</h4>
-                                    <ul className="space-y-2 text-base">
-                                        {method.whatItTells.map((item, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <span className={`text-${method.bulletColor} mr-2`}>•</span>
-                                                <span><strong>{item.term}:</strong> {item.description}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 className="text-xl font-semibold mb-3">Key advantages</h4>
-                                    <ul className="space-y-2 text-base">
-                                        {method.advantages.map((advantage, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <span className="text-green mr-2">✓</span>
-                                                <span>{advantage}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 className="text-xl font-semibold mb-3">Best for</h4>
-                                    <ul className="space-y-2 text-base">
-                                        {method.bestFor.map((item, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <span className={`text-${method.bulletColor} mr-2`}>•</span>
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h4 className="text-xl font-semibold mb-3">Supported metrics</h4>
-                                    <ul className="space-y-1 text-base">
-                                        {method.supportedMetrics.map((metric, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <span className={`text-${method.bulletColor} mr-2`}>•</span>
-                                                <span>{metric}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
+                {/* Mobile layout: Interactive accordion comparison (portrait 9:16) */}
+                <div className="@2xl:hidden">
+                    {/* Method headers */}
+                    <div className="grid divide-y divide-primary">
+                        <div className="text-center py-8">
+                            <h3 className="text-3xl font-bold text-purple mb-2">Bayesian</h3>
+                            <p className="text-xl text-secondary">{statisticalMethods[0].subtitle}</p>
                         </div>
-                    ))}
+                        <div className="text-center py-8">
+                            <h3 className="text-3xl font-bold text-blue mb-2">Frequentist</h3>
+                            <p className="text-xl text-secondary">{statisticalMethods[1].subtitle}</p>
+                        </div>
+                    </div>
+
+                    {/* Accordion comparison */}
+                    <Accordion
+                        items={[
+                            {
+                                value: 'what-it-tells-you',
+                                trigger: (
+                                    <div className={mobileTriggerClasses}>
+                                        What it tells you
+                                    </div>
+                                ),
+                                content: (
+                                    <div className={mobileCellClasses}>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-purple mb-3">Bayesian</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[0].whatItTells.map((item, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-purple mr-2">•</span>
+                                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-blue mb-3">Frequentist</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[1].whatItTells.map((item, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-blue mr-2">•</span>
+                                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )
+                            },
+                            {
+                                value: 'key-advantages',
+                                trigger: (
+                                    <div className={mobileTriggerClasses}>
+                                        Key advantages
+                                    </div>
+                                ),
+                                content: (
+                                    <div className={mobileCellClasses}>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-purple mb-3">Bayesian</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[0].advantages.map((advantage, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-green mr-2">✓</span>
+                                                        <span>{advantage}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-blue mb-3">Frequentist</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[1].advantages.map((advantage, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-green mr-2">✓</span>
+                                                        <span>{advantage}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )
+                            },
+                            {
+                                value: 'best-for',
+                                trigger: (
+                                    <div className={mobileTriggerClasses}>
+                                        Best for
+                                    </div>
+                                ),
+                                content: (
+                                    <div className={mobileCellClasses}>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-purple mb-3">Bayesian</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[0].bestFor.map((item, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-purple mr-2">•</span>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-blue mb-3">Frequentist</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[1].bestFor.map((item, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-blue mr-2">•</span>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )
+                            },
+                            {
+                                value: 'supported-metrics',
+                                trigger: (
+                                    <div className={mobileTriggerClasses}>
+                                        Supported metrics
+                                    </div>
+                                ),
+                                content: (
+                                    <div className={mobileCellClasses}>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-purple mb-3">Bayesian</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[0].supportedMetrics.map((metric, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-purple mr-2">•</span>
+                                                        <span>{metric}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-2xl font-semibold text-blue mb-3">Frequentist</h4>
+                                            <ul className="space-y-2 text-2xl">
+                                                {statisticalMethods[1].supportedMetrics.map((metric, index) => (
+                                                    <li key={index} className="flex items-start">
+                                                        <span className="text-blue mr-2">•</span>
+                                                        <span>{metric}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        ]}
+                        defaultValue="what-it-tells-you"
+                        className="bg-accent"
+                    />
                 </div>
 
                 {/* Desktop landscape layout: 3 columns (landscape 16:9) */}
@@ -181,7 +281,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={legendClasses}>
-                            <h4 className="text-lg font-semibold">What it tells you</h4>
+                            What it tells y
                         </div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
@@ -206,7 +306,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={legendClasses}>
-                            <h4 className="text-lg font-semibold">Key advantages</h4>
+                            Key advantag
                         </div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
@@ -231,7 +331,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={legendClasses}>
-                            <h4 className="text-lg font-semibold">Best for</h4>
+                            Best f
                         </div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
@@ -256,7 +356,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={`${legendClasses} border-b-0`}>
-                            <h4 className="text-lg font-semibold">Supported metrics</h4>
+                            Supported metri
                         </div>
                         <div className={`${cellClasses} border-b-0`}>
                             <ul className="space-y-1">
