@@ -1,0 +1,31 @@
+---
+title: Data warehouse troubleshooting and FAQs
+---
+
+## How can I see why my syncs are failing?
+
+From the [source page](https://us.posthog.com/pipeline/sources), click the source that's failing, scroll over to the **Status** column and hover over the error message.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_12_23_2x_7ed2ac106d.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_08_29_2x_8b7160e3b9.png"
+  alt="Viewing the error message for a failed sync" 
+  classes="rounded"
+/>
+
+You can also click the **Syncs** tab and expand any failed sync to see all the logs.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_17_09_2x_7da05def87.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_16_50_2x_13222eaa4c.png"
+  alt="Viewing the logs for a failed sync" 
+  classes="rounded"
+/>
+
+## How do I speed up my SQL queries?
+
+1. Reduce the date range you're querying.
+2. Add more specific filters with `WHERE` clauses.
+3. Use [materialized views](/docs/data-warehouse/views/materialize).
+
+We have other suggestions in our [product analytics docs](/docs/product-analytics/troubleshooting#insights-and-queries-faq).

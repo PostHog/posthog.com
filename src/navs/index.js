@@ -4206,6 +4206,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/data-warehouse/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'green',
+                },
+                {
                     name: 'Under the hood',
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
