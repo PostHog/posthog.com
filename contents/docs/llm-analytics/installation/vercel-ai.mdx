@@ -5,6 +5,8 @@ showStepsToc: true
 
 import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+
 
 <Steps>
 
@@ -65,7 +67,11 @@ phClient.shutdown()
 
 <Step title="Call Vercel AI" badge="required">
 
-Now, when you use the Vercel AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. This works for both `text` and `image` message types.
+Now, when you use the Vercel AI SDK, it automatically captures many properties into PostHog. These properties include:
+
+<NotableGenerationProperties />
+
+This works for both `text` and `image` message types.
 
 You can also capture or modify additional properties with the `posthogDistinctId`, `posthogTraceId`, `posthogProperties`, `posthogGroups`, and `posthogPrivacyMode` parameters.
 

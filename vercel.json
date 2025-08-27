@@ -1556,7 +1556,7 @@
         },
         {
             "source": "/docs/ai-engineering/traces-generations",
-            "destination": "/docs/llm-analytics/traces-generations"
+            "destination": "/docs/llm-analytics/generations"
         },
         {
             "source": "/docs/ai-engineering/dashboard",

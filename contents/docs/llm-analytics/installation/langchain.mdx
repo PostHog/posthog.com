@@ -5,6 +5,7 @@ showStepsToc: true
 
 import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 
 <Steps>
 
@@ -151,7 +152,11 @@ phClient.shutdown();
 
 </MultiLanguage>
 
-This automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. It also automatically creates a trace hierarchy based on how LangChain components are nested.
+This automatically captures many properties into PostHog. These properties include:
+
+<NotableGenerationProperties />
+
+It also automatically creates a trace hierarchy based on how LangChain components are nested.
 
 </Step>
 
