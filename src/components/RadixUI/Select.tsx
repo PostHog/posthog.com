@@ -42,7 +42,8 @@ const SelectItem = React.forwardRef(
     ({ children, className, ...props }: React.ComponentPropsWithoutRef<typeof RadixSelect.Item>, forwardedRef) => {
         return (
             <RadixSelect.Item
-                className={`hover-invert relative flex h-[25px] select-none items-center rounded pl-8 pr-4 text-sm leading-none text-primary bg-primary data-[disabled]:pointer-events-none data-[disabled]:text-muted data-[disabled]:cursor-not-allowed data-[highlighted]:text-primary data-[highlighted]:outline-none data-[state=checked]:font-medium ${className}`}
+                data-scheme="primary"
+                className={`hover:bg-accent relative flex h-[25px] select-none items-center rounded pl-8 pr-4 text-sm leading-none text-primary bg-primary data-[disabled]:pointer-events-none data-[disabled]:text-muted data-[disabled]:cursor-not-allowed data-[highlighted]:text-primary data-[highlighted]:outline-none data-[state=checked]:font-medium ${className}`}
                 {...props}
                 ref={forwardedRef as React.Ref<HTMLDivElement>}
             >
@@ -87,9 +88,10 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                 <div className="flex items-center" data-scheme={dataScheme}>
                     <button
                         ref={ref}
-                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none hover:bg-input-hover border border-primary disabled:border-primary data-[placeholder]:text-muted disabled:cursor-not-allowed ${className}`}
+                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none border border-primary disabled:border-primary data-[placeholder]:text-muted disabled:cursor-not-allowed ${className}`}
                         disabled={disabled}
                         aria-label={ariaLabel}
+                        data-scheme="primary"
                     >
                         <span className="text-muted">{placeholder || 'Select...'}</span>
                         <IconChevronDown className="size-6 text-muted" />
@@ -110,7 +112,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                 >
                     <RadixSelect.Trigger
                         ref={ref}
-                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none hover:bg-input-hover border border-primary disabled:border-primary data-[placeholder]:text-muted disabled:cursor-not-allowed ${className}`}
+                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none border border-primary disabled:border-primary data-[placeholder]:text-muted disabled:cursor-not-allowed ${className}`}
                         aria-label={ariaLabel}
                         data-scheme={dataScheme}
                     >
@@ -131,7 +133,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                 {groups.map((group, groupIndex) => (
                                     <React.Fragment key={`group-${groupIndex}-${group.label}`}>
                                         <RadixSelect.Group>
-                                            <RadixSelect.Label className="px-8 text-sm leading-[25px] text-secondary">
+                                            <RadixSelect.Label className="px-8 text-sm leading-[25px] text-muted" data-scheme="primary">
                                                 {group.label}
                                             </RadixSelect.Label>
                                             {group.items.map((item, itemIndex) => (
