@@ -3513,10 +3513,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/core@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.1.tgz#49fb808ea2de880dc00e8818fa02172f7cde2eea"
-  integrity sha512-bwXUeHe+MLgENm8+/FxEbiNocOw1Vjewmm+HEUaYQe6frq8OhZnrvtnzZU3Q3DF6N0UbAmD/q+iNfNgyx8mozg==
+"@posthog/core@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.2.tgz#8e6125d271348f646f51269c0b7b9bbf6549f984"
+  integrity sha512-hWk3rUtJl2crQK0WNmwg13n82hnTwB99BT99/XI5gZSvIlYZ1TPmMZE8H2dhJJ98J/rm9vYJ/UXNzw3RV5HTpQ==
 
 "@posthog/hedgehog-mode@^0.0.28":
   version "0.0.28"
@@ -20681,12 +20681,12 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.260.3:
-  version "1.260.3"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.260.3.tgz#ef08783c2ff715816eabe443a41b1b53ac617ea5"
-  integrity sha512-FCtksk0GQn22Rk9P7x7dsmAO7a2aBxPeYb2O2KXSraxR8xd2G6lUOOthVDK+qgtmuhpUZuur/mHrXEslMUEtjg==
+posthog-js@1.261.0:
+  version "1.261.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.261.0.tgz#1e9618b7810db81f6eed94ec251724639d92f95e"
+  integrity sha512-jyiXqyrCU+VlpbNNVRA6OQYAVut0XZMYNELCZH+XvTd981VqbE4jXn4XCBreo7XCL2gdPgDVxUVOuzNvEuKcmw==
   dependencies:
-    "@posthog/core" "1.0.1"
+    "@posthog/core" "1.0.2"
     core-js "^3.38.1"
     fflate "^0.4.8"
     preact "^10.19.3"
