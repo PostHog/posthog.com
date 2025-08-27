@@ -4199,6 +4199,13 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Cutting costs',
+                    url: '/docs/data-warehouse/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'salmon',
+                    featured: true,
+                },
+                {
                     name: 'More tutorials',
                     url: '/docs/data-warehouse/tutorials',
                     icon: 'IconGraduationCap',

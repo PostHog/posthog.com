@@ -1,0 +1,56 @@
+---
+title: Cutting data warehouse costs
+sidebar: Docs
+showTitle: true
+---
+
+## Use incremental or append only sync
+
+Full table syncs are the most expensive way to sync data into the data warehouse, but aren't always necessary.
+
+Both [incremental](/docs/cdp/sources#incremental) and [append only syncs](/docs/cdp/sources#append-only) reduce the number of rows synced as both account for existing data.
+
+## Sync less frequently
+
+Not all synced data needs to be up to date to be useful. Think about what sort of data freshness you need and change the sync frequency to match.
+
+PostHog offers sync options from every 5 minutes to every 12 hours to monthly. For incremental and full table syncs, increasing the sync frequency can reduce the number of rows synced.
+
+## Audit and disable unused tables
+
+Sources and tables continue to sync even if you aren't actively using them. This can cause unnecessary costs. You should regularly audit your sources and tables to see if you can disable ones you aren't using.
+
+Beyond just looking at [the source synced](https://us.posthog.com/pipeline/sources), you can use PostHog's `query_log` table. This contains details on all queries run in your project. You can use this to see what tables are (or are not) being queried and how often.
+
+For example, you can use the following query to identify potential unused or underused tables:
+
+```sql
+WITH cleaned AS (
+    SELECT 
+      query,
+      replaceRegexpAll(replaceRegexpAll(replaceRegexpAll(lowerUTF8(query), '--[^\\n]*', ' '), '/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/', ' '), '\\s+', ' ') AS q
+    FROM query_log
+),
+tail AS (
+  SELECT 
+    query,
+    arrayElement(splitByString(' from ', q),
+    length(splitByString(' from ', q))) AS after_from
+  FROM cleaned
+),
+tokens AS (
+  SELECT 
+    query,
+    trim(BOTH ' ' FROM replaceAll(replaceAll(arrayElement(splitByChar(',', arrayElement(splitByChar('(', arrayElement(splitByChar(' ', after_from), 1)), 1)), 1), '`',''), '"','')) AS tok
+  FROM tail
+)
+SELECT 
+  IF(position(tok,'.') > 0, arrayElement(splitByChar('.', tok), length(splitByChar('.', tok))), tok) AS table_after_from,
+  count() AS hits
+FROM tokens
+WHERE tok != ''
+GROUP BY table_after_from
+ORDER BY hits ASC
+```
+
+This query gets the most queried tables after the `FROM` keyword in the query (and it's a bit complex, we know). This means it also includes views and other queries that reference tables, but it might be able to help you identify unused or underused tables and disable syncs for them.
