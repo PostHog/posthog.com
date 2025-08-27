@@ -145,7 +145,7 @@ const PresentationMode = ({
 
       {/* Current slide */}
       <div className="w-full h-full flex items-center justify-center p-4 bg-accent">
-        <div className="aspect-video max-w-full max-h-full w-full overflow-hidden">
+        <div className="@container aspect-video max-w-full max-h-full w-full overflow-hidden">
           <ScalableSlide mode="presentation" baseWidth={1280} baseHeight={720}>
             <PresentationModeContext.Provider value={true}>
               {slideContent}

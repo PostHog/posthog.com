@@ -80,7 +80,7 @@ const statisticalMethods = [
 const mobileTriggerClasses = 'flex items-center gap-2 px-4 py-2 text-2xl font-bold'
 const mobileCellClasses = 'py-2 px-4 grid gap-4'
 
-const legendClasses = 'text-center flex-shrink-0 px-4 border-x border-b border-primary py-2 bg-accent'
+const legendClasses = 'text-center flex-shrink-0 px-4 border-x border-b border-primary py-2 bg-accent font-bold'
 const cellClasses = 'py-2 border-b border-primary px-4'
 
 // Custom statistical methods comparison slide
@@ -93,7 +93,7 @@ const StatisticalMethodsSlide = () => {
             <div className="max-w-7xl w-full mx-auto">
                 <div className="text-center mb-6">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Bayesian vs. Frequentist</h2>
-                    <p className="text-xl text-secondary">We've got em both.</p>
+                    <p className="text-xl text-secondary">Whether you're scrappy or super smart, we've got you covered.</p>
                 </div>
 
                 {/* Mobile layout: Interactive accordion comparison (portrait 9:16) */}
@@ -281,7 +281,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={legendClasses}>
-                            What it tells y
+                            What it tells you
                         </div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
@@ -306,7 +306,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={legendClasses}>
-                            Key advantag
+                            Key advantages
                         </div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
@@ -331,7 +331,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={legendClasses}>
-                            Best f
+                            Best for
                         </div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
@@ -356,7 +356,7 @@ const StatisticalMethodsSlide = () => {
                             </ul>
                         </div>
                         <div className={`${legendClasses} border-b-0`}>
-                            Supported metri
+                            Supported metrics
                         </div>
                         <div className={`${cellClasses} border-b-0`}>
                             <ul className="space-y-1">
