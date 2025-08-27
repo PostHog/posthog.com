@@ -39,4 +39,4 @@ This goes for everything at PostHog – but in AI features specifically, we use 
 - With OpenAI and Anthropic libraries in Python, use LLM analytics wrappers in `posthoganalytics.ai.openai` & `posthoganalytics.ai.anthropic`
 - With LangChain, use the LLM analytics callback handler in `posthoganalytics.ai.langchain.callbacks`
 
-This will give you and the organization full visibility into your feature – see the [LLM analytics dashboard](https://us.posthog.com/project/2/llm-observability). Feel free to leave feedback with [#team-llm-observability](https://posthog.slack.com/archives/C087XQ7K9K7).
+This will give you and the organization full visibility into your feature – see the [LLM analytics dashboard](https://us.posthog.com/project/2/llm-analytics). Feel free to leave feedback with [#team-llm-analytics](https://posthog.slack.com/archives/C087XQ7K9K7).
