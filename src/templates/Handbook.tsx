@@ -449,7 +449,7 @@ export default function Handbook({
                         />
                     }
                     tableOfContents={[...toc, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
-                    breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
+                    breadcrumb={breadcrumb?.slice(0, breadcrumb.length - 1) || []}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
                     askMax
