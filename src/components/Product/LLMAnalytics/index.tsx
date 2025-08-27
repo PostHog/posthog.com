@@ -382,7 +382,7 @@ export const ProductLLMAnalytics = () => {
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/llm_desktop_51e40f58bb.png"
                         alt="Screenshot of llm analytics in PostHog"
-                        className="w-full max-w-[1406px] hidden md:block"
+                        className="w-full max-w-[1406px] hidden md:inline-block"
                         placeholder="none"
                     />
                     <CloudinaryImage
