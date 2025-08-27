@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconLlmObservability } from '@posthog/icons'
+import { IconClockRewind, IconLlmObservability } from '@posthog/icons'
 
 export const llmAnalytics = {
   name: 'LLM Analytics',
@@ -50,22 +50,14 @@ export const llmAnalytics = {
     classes: 'absolute bottom-0 right-4 max-w-lg',
   },
   customers: {
-    // ycombinator: {
-    //     headline: 'tracks AI costs per customer',
-    //     description: 'We can finally see which users are expensive and optimize our AI features accordingly.',
-    // },
-    // hasura: {
-    //     headline: 'monitors LLM performance in production',
-    //     description: 'LLM analytics helps us catch latency spikes and errors before users complain.',
-    // },
-    // contra: {
-    //     headline: 'correlates AI usage with retention',
-    //     description: 'We discovered that users who interact with AI features have 3x higher retention.',
-    // },
-    // assemblyai: {
-    //     headline: 'reduced LLM costs by 40%',
-    //     description: 'Tracking costs by model and user helped us optimize prompts and switch models strategically.',
-    // },
+    elevenlabs: {
+      headline: 'uses LLM analytics with session replays (and everything else)',
+      description: 'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
+    },
+    lovable: {
+      headline: 'compared us to every other observability tool, just to be sure',
+      description: "If you're building a new product, just use PostHog.It's a no-brainer. It's the only all-in -one platform like it for developers.",
+    },
   },
   features: [
     {
@@ -81,6 +73,7 @@ export const llmAnalytics = {
       ],
       features: [
         {
+          icon: <IconClockRewind />,
           title: 'Full conversation history',
           description: 'Track prompts, completions, and token counts for every interaction',
         },
@@ -101,6 +94,9 @@ export const llmAnalytics = {
           description: 'Track entire conversation threads, not just individual calls',
         },
       ],
+      children: (<>
+        <em>hello</em> world!
+      </>)
     },
     {
       title: 'Cost analytics',

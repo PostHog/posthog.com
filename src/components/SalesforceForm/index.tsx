@@ -273,9 +273,8 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     onBlur={() => {
                         validateField(name)
                     }}
-                    className={`bg-primary outline-none border rounded shadow-none ring-0 focus:ring-0 resize-none ${
-                        error ? 'border-red' : 'border-primary'
-                    }`}
+                    className={`bg-primary outline-none border rounded shadow-none ring-0 focus:ring-0 resize-none ${error ? 'border-red' : 'border-primary'
+                        }`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                 />
@@ -302,9 +301,8 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                     onBlur={() => {
                         validateField(name)
                     }}
-                    className={`outline-none text-sm rounded border ${
-                        error ? 'border-red' : 'border-primary'
-                    } ring-0 focus:ring-0`}
+                    className={`outline-none text-sm rounded border bg-primary ${error ? 'border-red' : 'border-primary'
+                        } ring-0 focus:ring-0`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                     type={props.type === 'date' ? 'date' : type || 'text'}
@@ -367,13 +365,13 @@ export default function SalesforceForm({
                             field.required
                                 ? field.fieldType === 'checkbox'
                                     ? Yup.array()
-                                          .of(Yup.string())
-                                          .min(1, `${field.label} is a required field`)
-                                          .required(`${field.label} is a required field`)
+                                        .of(Yup.string())
+                                        .min(1, `${field.label} is a required field`)
+                                        .required(`${field.label} is a required field`)
                                     : Yup.string().required(`${field.label} is a required field`)
                                 : field.fieldType === 'checkbox'
-                                ? Yup.array().of(Yup.string())
-                                : Yup.string(),
+                                    ? Yup.array().of(Yup.string())
+                                    : Yup.string(),
                         ])
                     )
                 )}

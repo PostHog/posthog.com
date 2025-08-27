@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconToggle } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
+import Link from 'components/Link'
 
 export const featureFlags = {
     Icon: IconToggle,
@@ -18,8 +19,11 @@ export const featureFlags = {
     },
     overview: {
         title: 'Safely roll out features to specific users or groups',
-        description:
-            'Test changes with small groups of users before rolling out wider. Then analyze usage with product analytics and session replay.',
+        description: (
+            <>
+                Test changes with small groups of users before rolling out wider. Then analyze usage with <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>Product Analytics</Link> and <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>Session Replay</Link>.
+            </>
+        ),
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -74,7 +78,7 @@ export const featureFlags = {
             title: 'Boolean & multivariate feature flags',
             headline: 'Boolean & multivariate feature flags',
             description:
-                'Create up to nine variants of a feature flag to test or release different versions of a feature.',
+                'Test or release different versions of a feature with as many variants as you need.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png',
@@ -87,8 +91,8 @@ export const featureFlags = {
         {
             title: 'Test changes without pushing code',
             headline: 'Test changes without pushing code',
-            description:
-                'JSON payloads let you change text, visuals, or entire blocks of code directly from within PostHog – no code deployments needed – using <code>getFeatureFlagPayload()</code>.',
+            description: (<>
+                JSON payloads let you change text, visuals, or entire blocks of code directly from within PostHog – no code deployments needed with <code>getFeatureFlagPayload()</code> – or server-side with <Link to="/docs/feature-flags/remote-config" className="font-bold underline" state={{ newWindow: true }}>remote config</Link>.</>),
             // images: [
             //     {
             //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png',
@@ -208,10 +212,15 @@ export const featureFlags = {
             title: 'Testing & diagnostics',
             headline: 'Flag testing & diagnostics',
             description:
-                'See how many times a flag has been evaluated, how many times each variant has been returned, and what values users received.',
+                "There are a few ways to test flags and make sure your flags are working as expected.",
             children: (
                 <div className="-mt-5">
-                    <h4 className="text-xl mb-1">Local development</h4>
+                    <h4 className="text-xl mb-1">1. Assign a specific value to a user</h4>
+                    <p className="text-lg">
+                        Set release conditions to match your email or other user-identifiable properties.
+                    </p>
+
+                    <h4 className="text-xl mb-1">2. Flag overrides</h4>
                     <p className="text-lg">
                         When developing locally, you can set a flag's value in your browser's console.
                     </p>
@@ -223,6 +232,12 @@ export const featureFlags = {
                         This will persist until you call override again with the argument <code>false</code>.
                     </p>
                     <CodeBlock code={`posthog.featureFlags.overrideFeatureFlags(false)`} language="js" />
+
+
+                    <h4 className="text-xl mb-1">3. PostHog toolbar</h4>
+                    <p className="text-lg">
+                        Fire up the <Link to="/toolbar" state={{ newWindow: true }}>PostHog toolbar</Link> to toggle the status of any feature flag while on any page of your site.
+                    </p>
                 </div>
             ),
         },
@@ -230,7 +245,9 @@ export const featureFlags = {
             title: 'Developer-friendly automation',
             headline: 'Developer-friendly automation',
             description:
-                'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time.',
+                (<>
+                    <Link to="/docs/feature-flags/scheduled-flag-changes" className="font-bold underline" state={{ newWindow: true }}>Schedule flag changes.</Link> Get automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time.
+                </>),
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png',
@@ -295,6 +312,8 @@ export const featureFlags = {
             ],
         },
     ],
+    answersHeadline: 'How-to\'s with Feature Flags',
+    answersDescription: 'Learn how to do some interesting things with Feature Flags.',
     questions: [
         {
             question: 'How do I test features internally?',
@@ -312,15 +331,38 @@ export const featureFlags = {
             question: 'How do I sample events for a high-volume API?',
             url: '/tutorials/track-high-volume-apis',
         },
+        {
+            question: 'How can I set up a phased rollout?',
+            url: '/tutorials/phased-rollout'
+        },
+        {
+            question: 'How do I configure a location-based banner?',
+            url: '/tutorials/location-based-banner'
+        },
+        {
+            question: 'How do I update feature flags with the PostHog API?',
+            url: '/tutorials/api-feature-flags'
+        },
     ],
     comparison: {
         summary: {
             them: [
                 {
-                    title: 'Triggers and workflows to enable/disable flags on other events',
+                    title: 'Lifecycle management',
+                    description: 'Clean up old flags automatically',
                 },
                 {
-                    title: 'Data exports',
+                    title: 'Trigger changes based on metrics'
+                },
+                {
+                    title: 'Edge network support',
+                    description: 'like Vercel Edge Config',
+                },
+                {
+                    title: 'Approvals',
+                },
+                {
+                    title: 'Multi-armed bandit',
                 },
             ],
             us: [
@@ -329,11 +371,11 @@ export const featureFlags = {
                     subtitle: 'View replays attached to a flag, analyze data based on a flag, etc.',
                 },
                 {
-                    title: 'JSON payloads',
+                    title: 'Multi-variate flags with payloads',
                     subtitle: 'Flags can return JSON and trigger other in-app changes (like displaying a banner)',
                 },
                 {
-                    title: 'Early access management suite for toggling betas or new features',
+                    title: 'Evaluate flags with API',
                 },
             ],
         },

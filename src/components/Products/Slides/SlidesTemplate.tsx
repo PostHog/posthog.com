@@ -6,7 +6,6 @@ import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import { docsMenu } from '../../../navs'
 import SlideThumbnails from './SlideThumbnails'
-import OverviewSlide from './OverviewSlide'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
 import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
 import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
@@ -14,6 +13,7 @@ import OverviewSlideAI from './OverviewSlide/OverviewSlideAI'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import FeaturesSlideAI from './FeaturesSlideAI'
+import FeaturesGrid from './FeaturesGrid'
 import QuestionsSlide from './QuestionsSlide'
 import PlanComparison from './PlanComparison'
 import ComparisonSummarySlide from './ComparisonSummarySlide'
@@ -23,7 +23,7 @@ import PairsWithSlide from './PairsWithSlide'
 import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, SlideConfigResult, defaultSlides } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+
 import DemoSlide from './DemoSlide'
 
 interface SlidesTemplateProps {
@@ -52,7 +52,7 @@ export default function SlidesTemplate({
     const contentConfig = Array.isArray(slideConfig) ? {} : slideConfig.content || {}
     // Track whether we're in mobile or desktop view
     // Start with true (mobile) as default since that's the initial visible state
-    const [isMobileView, setIsMobileView] = useState(true)
+    const [, setIsMobileView] = useState(true)
 
     // Extract products data for the pricing component
     const products = data.allProductData.nodes[0].products
@@ -166,7 +166,7 @@ export default function SlidesTemplate({
                 )
 
             case 'features': {
-                // Default to tabs template, use columns for AI features
+                // Handle different feature templates
                 if (template === 'columns') {
                     return (
                         <FeaturesSlideAI
@@ -176,6 +176,30 @@ export default function SlidesTemplate({
                         />
                     )
                 }
+
+                if (template === 'grid') {
+                    // Individual feature grid slide
+                    const features = productData?.features || []
+                    const featureIndex = props?.featureIndex || 0
+                    const feature = features[featureIndex]
+
+                    if (!feature) {
+                        return <div>Feature not found</div>
+                    }
+
+                    return (
+                        <FeaturesGrid
+                            headline={feature.headline}
+                            description={feature.description}
+                            icon={feature.icon}
+                            features={feature.features}
+                            images={feature.images}
+                            children={feature.children}
+                            {...props}
+                        />
+                    )
+                }
+
                 // Default: tabs template (existing FeaturesSlide with OSTabs)
                 return (
                     <FeaturesSlide
@@ -196,7 +220,7 @@ export default function SlidesTemplate({
                     <QuestionsSlide
                         productName={productData?.name}
                         answersDescription={contentConfig.answersDescription || productData?.answersDescription}
-                        answersHeadline={contentConfig.answersHeadline}
+                        answersHeadline={contentConfig.answersHeadline || productData?.answersHeadline}
                         questions={productData?.questions || []}
                         tutorialData={data}
                         {...props}
@@ -268,8 +292,33 @@ export default function SlidesTemplate({
             case 'getting-started':
                 return <GettingStartedSlide initialState={{}} productName={productData?.name} {...props} />
 
-            default:
+            default: {
+                // Handle template-based rendering for any slide
+                if (template === 'grid') {
+                    // Individual feature grid slide
+                    const features = productData?.features || []
+                    const featureIndex = props?.featureIndex || 0
+                    const feature = features[featureIndex]
+
+                    if (!feature) {
+                        return <div>Feature not found</div>
+                    }
+
+                    return (
+                        <FeaturesGrid
+                            headline={feature.headline}
+                            description={feature.description}
+                            icon={feature.icon}
+                            features={feature.features}
+                            images={feature.images}
+                            children={feature.children}
+                            {...props}
+                        />
+                    )
+                }
+
                 return <div>Slide not found: {slug}</div>
+            }
         }
     }
 

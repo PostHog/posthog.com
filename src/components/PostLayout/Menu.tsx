@@ -40,11 +40,10 @@ const getIcon = (name: string) => {
 export const Icon = ({ color, icon }: { color?: string; icon: string | React.ReactNode }) => {
     return (
         <span
-            className={`flex items-center justify-center shrink-0 ${
-                color
-                    ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px] basis-[30px]`
-                    : 'w-[25px] h-[25px] basis-[25px] opacity-70'
-            }`}
+            className={`flex items-center justify-center shrink-0 ${color
+                ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px] basis-[30px]`
+                : 'w-[25px] h-[25px] basis-[25px] opacity-70'
+                }`}
         >
             {typeof icon === 'string' ? getIcon(icon) : icon}
         </span>
@@ -55,13 +54,12 @@ export const badgeClasses = `bg-accent text-secondary  text-xs m-[-2px] font-med
 export const MenuItem = ({ icon, color, badge, name, isActive, isOpen }) => {
     return icon ? (
         <span
-            className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
-                color ? 'items-center' : 'items-center'
-            }`}
+            className={`cursor-pointer w-full flex space-x-2 font-medium text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${color ? 'items-center' : 'items-center'
+                }`}
         >
             <Icon icon={icon} color={color} />
             <span className={`${badge?.title ? 'mr-1.5' : ''}`}>
-                <span className={isActive || isOpen ? '' : 'opacity-50'}>{name}</span>
+                <span className={isActive || isOpen ? '' : ' menu-item-placeholder-class'}>{name}</span>
             </span>
             {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
         </span>
@@ -114,11 +112,10 @@ export default function Menu({
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${
-        children || topLevel
-            ? 'hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
-            : ''
-    } ${children && open ? 'bg-accent font-bold !border-light dark:!border-dark' : ''}`
+    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${children || topLevel
+        ? 'hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
+        : ''
+        } ${children && open ? 'bg-accent font-bold !border-light dark:!border-dark' : ''}`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -134,9 +131,9 @@ export default function Menu({
         }
         setOpen(
             isMenuItemOpen?.({ name, url }) ||
-                isMenuItemActive?.({ name, url }) ||
-                url === pathname ||
-                (children && isOpen(children))
+            isMenuItemActive?.({ name, url }) ||
+            url === pathname ||
+            (children && isOpen(children))
         )
         setIsActive(active || isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname, active])
@@ -175,9 +172,8 @@ export default function Menu({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${
-                            isActive ? 'active' : ''
-                        }`}
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${isActive ? 'active' : ''
+                            }`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
                     >
