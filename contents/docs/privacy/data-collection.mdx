@@ -181,16 +181,17 @@ posthog.init('<ph_project_api_key>', {
 
 PostHog can be configured to do cookieless audience measurement.
 
-- `cookieless_mode: "always"`
-  - Doesn't require a cookie banner (unless something else on your website uses cookies)
-  - PostHog never stores data in cookies or local/session storage
-  - You cannot call `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations
-  - PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
-- `cookieless_mode: "on_reject"`
-  - Use this if you do want to show a cookie banner and only enable cookies when the user consents
-  - PostHog never stores data in cookies or local/session storage until the user opts in
-  - PostHog doesn't capture any events until after consent is either given or denied
-  - If consent is denied, PostHog will still be able to count those users, using a privacy-preserving hash
+First is `cookieless_mode: "always"`. This:
+- Doesn't require a cookie banner (unless something else on your website uses cookies)
+- Never stores PostHog data in cookies or local/session storage
+- Prevents you from calling `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations
+  - Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
+
+Second is `cookieless_mode: "on_reject"`. This:
+- Is useful if you do want to show a cookie banner and only enable cookies when the user consents with `posthog.opt_in_capturing()` or similar method
+- Never stores PostHog data in cookies or local/session storage until the user opts in
+- Doesn't capture any events until after consent is either given or denied
+- If consent is denied, still counts those users, using a privacy-preserving hash calculated on PostHog's servers
 
 <CalloutBox type="info" title="Cookieless tracking">
 

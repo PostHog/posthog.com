@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/cookieless-tracking.png
-featuredVideo: 'https://www.youtube-nocookie.com/embed/3V3fbz6sgPk'
 featuredTutorial: false
 date: 2025-08-27
 author:
@@ -42,6 +41,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
+This helps compliance with privacy regulations at the expensive of more detailed data capture. 
 ## If you want to show a cookie banner
 
 If you want to maintain the full tracking capability of PostHog, you'll need to show a cookie banner and only enable cookies when the user consents. To do this, you can set the cookieless mode to `"on_reject"`, create a cookie banner, and connect it to PostHog's consent management methods. 
@@ -61,7 +61,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-Then when deciding whether to show a cookie banner:
+Then connect PostHog to your cookie banner to show it when consent is pending like this:
 
 ```js
 if (posthog.get_explicit_consent_status() === 'pending') {
@@ -69,7 +69,7 @@ if (posthog.get_explicit_consent_status() === 'pending') {
 }
 ```
 
-And when the user makes a choice:
+Finally, when the user makes a choice, opt them in or out:
 
 ```js
 function handleCookieConsent(consent) {
@@ -81,6 +81,7 @@ function handleCookieConsent(consent) {
 }
 ```
 
+This automatically sets the correct cookieless mode as well as changes the consent status to hide the cookie banner. 
 
 ## Counting unique users without cookies
 
