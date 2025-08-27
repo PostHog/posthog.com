@@ -97,7 +97,7 @@ export default function HeaderBar({
     navIconClassName = '',
     isEditing = false,
 }: HeaderBarProps) {
-    const { compact } = useApp()
+    const { compact, focusedWindow } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
@@ -130,7 +130,8 @@ export default function HeaderBar({
     useEffect(() => {
         if (appWindow?.ref?.current) {
             const handleKeyDown = (e: KeyboardEvent) => {
-                if (e.key === 'F' && e.shiftKey) {
+                // Only handle Shift+F if this window is the focused/active window
+                if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
                     e.preventDefault()
                     setSearchOpen(true)
                 }
@@ -140,7 +141,7 @@ export default function HeaderBar({
                 document.removeEventListener('keydown', handleKeyDown)
             }
         }
-    }, [])
+    }, [focusedWindow, appWindow])
 
     return (
         <>
@@ -148,17 +149,15 @@ export default function HeaderBar({
                 {!compact && (
                     <div>
                         <motion.div
-                            className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
-                                hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
-                            }`}
+                            className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                                }`}
                         >
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}
                             <div
-                                className={`${
-                                    typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
+                                className={`${typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
                                         ? ''
                                         : 'hidden @2xl:block'
-                                }`}
+                                    }`}
                             >
                                 {hasLeftSidebar && (
                                     <OSButton
@@ -241,9 +240,8 @@ export default function HeaderBar({
                                         </svg>
                                         {count && count > 0 && (
                                             <span
-                                                className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${
-                                                    animateCartCount ? 'animate-wiggle' : ''
-                                                }`}
+                                                className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${animateCartCount ? 'animate-wiggle' : ''
+                                                    }`}
                                             >
                                                 {count}
                                             </span>
@@ -269,9 +267,8 @@ export default function HeaderBar({
                 </div>
                 {showSidebar && (
                     <motion.div
-                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
-                            isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
+                            }`}
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (

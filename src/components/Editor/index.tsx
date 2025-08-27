@@ -132,7 +132,7 @@ export function Editor({
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
     const { search } = useLocation()
-    const { addWindow } = useApp()
+    const { addWindow, focusedWindow } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
 
@@ -297,33 +297,33 @@ export function Editor({
                             {...(hasShareButton
                                 ? showCher
                                     ? {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <MediaPlayer
-                                                      newWindow
-                                                      location={{ pathname: `cher` }}
-                                                      key={`cher`}
-                                                      videoId="nZXRV4MezEw"
-                                                  />
-                                              )
-                                          },
-                                      }
+                                        onClick: () => {
+                                            addWindow(
+                                                <MediaPlayer
+                                                    newWindow
+                                                    location={{ pathname: `cher` }}
+                                                    key={`cher`}
+                                                    videoId="nZXRV4MezEw"
+                                                />
+                                            )
+                                        },
+                                    }
                                     : {
-                                          onClick: () => {
-                                              addWindow(
-                                                  <Share
-                                                      title={appWindow?.meta?.title}
-                                                      location={{ pathname: `share` }}
-                                                      key={`share`}
-                                                      newWindow
-                                                      url={`${window.location.origin}${appWindow?.path}`}
-                                                  />
-                                              )
-                                          },
-                                      }
+                                        onClick: () => {
+                                            addWindow(
+                                                <Share
+                                                    title={appWindow?.meta?.title}
+                                                    location={{ pathname: `share` }}
+                                                    key={`share`}
+                                                    newWindow
+                                                    url={`${window.location.origin}${appWindow?.path}`}
+                                                />
+                                            )
+                                        },
+                                    }
                                 : {
-                                      to: cta?.url,
-                                  })}
+                                    to: cta?.url,
+                                })}
                             state={{ newWindow: true }}
                             asLink
                             className="ml-1 -my-0.5"
@@ -404,6 +404,22 @@ export function Editor({
             window.removeEventListener('keyup', handleKeyUp)
         }
     }, [])
+
+    // Add Shift+F keyboard shortcut for search
+    useEffect(() => {
+        const handleSearchKeyDown = (e: KeyboardEvent) => {
+            // Only handle Shift+F if this window is the focused/active window
+            if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
+                e.preventDefault()
+                setShowSearch(true)
+            }
+        }
+
+        document.addEventListener('keydown', handleSearchKeyDown)
+        return () => {
+            document.removeEventListener('keydown', handleSearchKeyDown)
+        }
+    }, [focusedWindow, appWindow])
 
     useEffect(() => {
         setShowCher(isHovering && isModifierKeyPressed)
