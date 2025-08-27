@@ -45,6 +45,8 @@ Meta has something called InstantForm ads, which enable users to sign up to our 
 
 ## Paid placements in other newsletters
 
+> We're not running paid placements anymore due to the high cost per conversion. More details in <PrivateLink url="https://posthog.slack.com/archives/C01FHN8DNN6/p1756222160449869">Slack</PrivateLink>
+
 As mentioned above, Substack's attribution sucks. Historically, we instead created a custom link for each campaign using Dub.co and calculate cost per click to measure success. However, we should now be able to track signups using leaderboard + referral code workaround mentioned above.
 
 We generally prefer to use a pay-per-sub model, which perform better and are easier to track. This <PrivateLink url="https://github.com/issues/assigned?issue=PostHog%7Ccompany-internal%7C2017">issue</PrivateLink> outlines our current partnerships with other newsletter as of June 2025.

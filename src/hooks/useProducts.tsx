@@ -14,6 +14,7 @@ import { cdp } from './productData/cdp'
 import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { max_ai } from './productData/max_ai'
+import { llmAnalytics } from './productData/llm_analytics'
 
 const initialProducts = [
     productAnalytics,
@@ -26,6 +27,7 @@ const initialProducts = [
     webAnalytics,
     experiments,
     max_ai,
+    llmAnalytics,
 ]
 
 export default function useProducts() {

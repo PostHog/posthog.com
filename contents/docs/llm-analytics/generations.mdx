@@ -1,0 +1,24 @@
+---
+title: Generations
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import GenerationEvent from "./_snippets/generation-event.mdx"
+
+Generations are an event that capture an LLM request. The [generations tab](https://app.posthog.com/llm-analytics/generations) lists them along with the properties autocaptured by PostHog like the person, model, total cost, token usage, and more.
+
+When you expand a generation, it includes the properties, metadata, a conversation history, the role (system, user, assistant), input content, and output content.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_generations_8a94f2cd01.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_generations_dark_50e206f940.png"
+  alt="LLM generations"
+  classes="rounded"
+/>
+
+## Event properties
+
+<GenerationEvent />

@@ -49,13 +49,6 @@ export const analyticsSliders = [
         ],
     },
     {
-        label: 'LLM events',
-        types: [
-            { type: 'llmAnonymousEvents', label: 'Anonymous events' },
-            { type: 'llmAuthenticatedEvents', label: 'Identified events', enhanced: true },
-        ],
-    },
-    {
         label: 'API events',
         types: [
             { type: 'apiAnonymousEvents', label: 'Anonymous events' },

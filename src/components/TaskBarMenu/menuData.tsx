@@ -5,13 +5,13 @@ import * as Icons from '@posthog/icons'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
+import SearchableProductMenu from './SearchableProductMenu'
 import {
     categoryOrder,
     categoryDisplayNames,
     categoryIcons,
     buildCategoryMenuItems,
     buildProductMenuItems,
-    buildAllProductsMenuItems,
     popularProducts,
     newestProducts,
 } from '../../constants/productNavigation'
@@ -196,12 +196,19 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: `App library (${APP_COUNT})`,
+            label: `Browse all apps (${APP_COUNT})`,
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
         },
         {
             type: 'separator',
+        },
+        {
+            type: 'submenu' as const,
+            label: 'Search apps',
+            link: '/products',
+            items: <SearchableProductMenu products={allProducts} />,
+            icon: <Icons.IconSearch className="size-4 text-gray" />,
         },
         {
             type: 'submenu',
@@ -253,32 +260,6 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
         }
     })
 
-    // Add "All products" at the very end
-    const allProductsItems = [
-        ...buildAllProductsMenuItems(allProducts),
-        {
-            type: 'separator' as const,
-        },
-        {
-            type: 'item' as const,
-            label: 'View all',
-            link: '/products',
-            icon: <Icons.IconApps className="size-4 text-red" />,
-        },
-    ]
-
-    items.push(
-        {
-            type: 'separator',
-        },
-        {
-            type: 'submenu',
-            label: 'All products',
-            items: allProductsItems,
-            icon: <Icons.IconList className="size-4 text-gray" />,
-        }
-    )
-
     return items
 }
 
@@ -310,6 +291,7 @@ export function useMenuData(): MenuType[] {
                     label: 'Display options',
                     link: '/display-options',
                 },
+                { type: 'separator' as const },
                 {
                     type: 'item',
                     label: 'Start screensaver',
@@ -317,18 +299,14 @@ export function useMenuData(): MenuType[] {
                         setScreensaverPreviewActive(true)
                     },
                 },
-                ...(windows.length > 0
-                    ? [
-                          { type: 'separator' as const },
-                          {
-                              type: 'item' as const,
-                              label: 'Close all windows',
-                              onClick: () => {
-                                  animateClosingAllWindows()
-                              },
-                          },
-                      ]
-                    : []),
+                {
+                    type: 'item' as const,
+                    label: 'Close all windows',
+                    disabled: windows.length < 1,
+                    onClick: () => {
+                        animateClosingAllWindows()
+                    },
+                },
             ],
         },
         {

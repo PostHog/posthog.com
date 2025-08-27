@@ -382,12 +382,12 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM observability',
+        name: 'LLM analytics',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         Icon: IconLlmObservability,
-        description: 'Build AI features with full visibility – both in development and production.',
-        pricingKey: 'product_analytics',
+        description: 'Build AI features with full visibility – both in development and production',
+        pricingKey: 'llm_analytics',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },
@@ -406,12 +406,11 @@ const products: Product[] = [
                 </>
             )
         },
-        status: 'WIP',
-        badge: 'BETA',
+        status: 'Production',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/settings/user-feature-previews#llm-observability',
-                text: 'Try it out',
+                url: '/llm-analytics',
+                text: 'Learn more',
             },
         },
     },
@@ -984,9 +983,8 @@ export default function Hero(): JSX.Element {
                         return (
                             <div className="relative" key={name}>
                                 <button
-                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${
-                                        active ? 'font-bold' : 'opacity-75 hover:opacity-100'
-                                    }`}
+                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${active ? 'font-bold' : 'opacity-75 hover:opacity-100'
+                                        }`}
                                     onClick={() => setActiveStatus(name)}
                                     onFocus={(e) => {
                                         if (e.type === 'focus' && !e.currentTarget.matches(':focus-visible')) {
