@@ -53,4 +53,6 @@ GROUP BY table_after_from
 ORDER BY hits ASC
 ```
 
-This query gets the most queried tables after the `FROM` keyword in the query (and it's a bit complex, we know). This means it also includes views and other queries that reference tables, but it might be able to help you identify unused or underused tables and disable syncs for them.
+This query fetches your most queried tables by parsing the `FROM` clause from every query. It's a bit complex, we know.
+
+It effectively lists how often each table is referenced. This means it also includes views and other queries that reference tables, so it's not a perfect one-to-one-map, but it might be able to help you identify unused or underused tables and disable syncs for them.
