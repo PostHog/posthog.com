@@ -99,7 +99,7 @@ Nothing comes for free and limiting what PostHog can store in cookies will have 
 
 * **Higher user count** - Users that do not give cookie consent will appear as a different person each day. A new daily salt means that the hash will be different. Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices from the same user.
 
-* **Hash collisions** - because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
+* **Hash collisions** - Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
 
 * **Session replay & surveys** - both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
 
