@@ -3,9 +3,10 @@ title: Building a tracking cookies consent banner in React
 sidebar: Docs
 showTitle: true
 featuredTutorial: false
-date: 2024-06-10
+date: 2025-08-27
 author:
   - ian-vanagas
+  - robbie-coomber
 tags:
   - configuration
   - product os

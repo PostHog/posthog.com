@@ -6,9 +6,10 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/cookieless-tracking.png
 featuredVideo: 'https://www.youtube-nocookie.com/embed/3V3fbz6sgPk'
 featuredTutorial: false
-date: 2024-06-14
+date: 2025-08-27
 author:
   - joe-martin
+  - robbie-coomber
 tags:
   - configuration
   - product os
