@@ -44,7 +44,9 @@ posthog.init('<ph_project_api_key>', {
 
 ## If you want to show a cookie banner
 
-If you want to show a cookie banner and only enable cookies when the user consents, you can set the cookieless mode to `"on_reject"`. In this mode:
+If you want to maintain the full tracking capability of PostHog, you'll need to show a cookie banner and only enable cookies when the user consents. To do this, you can set the cookieless mode to `"on_reject"`, create a cookie banner, and connect it to PostHog's consent management methods. 
+
+With this:
 * PostHog never stores data in cookies or local/session storage until the user opts in
 * PostHog doesn't capture any events until after consent is either given or denied.
 * If consent is denied, PostHog will still be able to count those users with a privacy-preserving hash.
