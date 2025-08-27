@@ -75,6 +75,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     // Handle Escape key to close search
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape') {
+            onSearch?.('')
+            setSearchQuery('')
+            setInputValue('')
             onClose()
         }
     }
