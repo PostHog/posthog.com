@@ -4352,7 +4352,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Integrations',
+                    name: 'Third-party integrations',
                     url: '/docs/llm-analytics/integrations',
                     icon: 'IconApps',
                     featured: true,
