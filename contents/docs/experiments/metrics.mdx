@@ -4,19 +4,93 @@ sidebar: Docs
 showTitle: true
 ---
 
-Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are [statistically significant](/docs/experiments/significance).
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are statistically significant. For all metric types, only events that occur after a user's [exposure](/docs/experiments/exposures) to the experiment are included in calculations.
 
 ## Metric types
 
-There are two types of experiment metrics:
+PostHog supports three types of metrics to measure different aspects of your experiment's impact. Choose the metric type that best aligns with your hypothesis.
 
-1. **Funnels:** Evaluates using funnel conversions. Read more about how we calculate these in our [funnel statistic](/docs/experiments/funnels-statistics) or [funnel insights](/docs/product-analytics/funnels) docs.
+### Funnel
 
-2. **Trends:** Evaluates using aggregate metrics such as total count, average count per user, unique sessions, property values, and more. Trends also let you set the exposure event if you want it to be something other than `$feature_flag_called`. Read more about how we calculate these in our [trend count](/docs/experiments/trends-count-statistics) or [trend continuous](/docs/experiments/trends-continuous-statistics) statistic or [trend insights](/docs/product-analytics/trends/overview) docs.
+Use funnel metrics to measure conversion rates through multi-step processes. This is ideal for tracking user journeys like onboarding flows, checkout processes, or feature adoption paths.
+
+How it works:
+1. Define a series of events that users must complete in sequence (or any order if using unordered funnels)
+2. Each user either completes all steps (success) or drops off somewhere (failure)
+3. We calculate the conversion rate from the first step (the exposure event) to the last step for each variant
+4. Statistical significance is determined using the difference in conversion rates between variants
+
+<CalloutBox icon="IconInfo" title="Note: First step is the exposure event" type="info">
+
+In experiment funnels, the first step is always the exposure event (by default the `$feature_flag_called` event, but can be customized in the exposure settings). This differs from product analytics funnels where you explicitly define all steps.
+
+When defining your funnel metric, you only specify the events that should occur **after** the exposure. For example, if you want to measure a two-step funnel from exposure to purchase, you only need to add the purchase event - the exposure event is automatically included as the first step.
+
+[Learn more about exposures](/docs/experiments/exposures) and how they determine which users are included in your experiment.
+
+</CalloutBox>
+
+### Mean
+
+Use this to track metrics like total event count or summed values (e.g., revenue). Here's how it works:
+
+1. We aggregate the chosen value for each user using your selected method (count, sum, or average).
+2. We then compute the *mean* of those values for each variant.
+3. This mean is used to determine the statistical difference between variants.
+
+For example:
+- If you choose **sum of revenue**, we calculate total revenue per user, then take the mean across users.
+- If you select **average revenue** (not supported yet, but coming soon), we first compute each user's average (total revenue / number of events), then average those values across users.
+
+### Ratio
+
+Use ratio metrics to calculate the relationship between two different metrics. This is useful when you want to measure metrics like revenue per user, items per order, or conversion rate with a custom denominator (different from the users exposed to the experiment).
+
+How it works:
+1. We calculate the numerator value for each user (e.g., total revenue)
+2. We calculate the denominator value for each user (e.g., number of purchases)
+3. We compute the ratio between these aggregated values for each variant
+4. Statistical significance is calculated using the delta method for ratio estimation
+
+Common use cases:
+- **Revenue per purchase**: Track average order value by dividing total revenue by number of purchases
+- **Items per session**: Measure engagement by dividing total interactions by unique sessions
+- **Custom conversion rates**: Calculate conversions with a denominator other than exposed users (e.g., conversions per active user)
+
+Both the numerator and denominator support all aggregation methods (count, sum, average, unique values). You can even use the same event with different properties for each part of the ratio, such as dividing total revenue by total quantity sold from purchase events.
+
+## Outlier handling
+
+You can limit the impact of extreme values by capping metric data at specified percentile thresholds using configurable lower and upper bounds. Metric data beyond those thresholds aren't included in experiment calculations.
+
+This technique is commonly known as **Winsorization** and is especially useful for metrics with highly skewed distributions, such as revenue or total event counts, where a small subset of users can produce unusually high values that distort overall results.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/outlier_handling_light_8139933041.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/outlier_handling_dark_c7c0d775d6.png"
+  classes="rounded"
+  alt="Screenshot of outlier handling"
+/>
+
+
+## Conversion windows
+
+Conversion windows restrict metric events to those that occur within a defined time window following a user's initial exposure to the experiment. Metric events outside of the conversion window aren't included in experiment calculations.
+
+This ensures that only relevant, post-exposure behavior is included in the analysis.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_light_25b34f15b9.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_dark_c07beddef8.png"
+  classes="rounded"
+  alt="Screenshot of conversion window configuration"
+/>
 
 ## Primary and secondary metrics
 
-Each metric can be set as either a **primary** or **secondary** metric. You can set up to 10 primary and secondary metrics per experiment.
+Each metric can be set as either a **primary** or **secondary** metric. You can set up to 10 primary and 10 secondary metrics per experiment. This is just a way of organizing metrics - primary and secondary metrics work the same way.
 
 **Primary metrics** represent the main goal of your experiment. They directly measure if your hypothesis was successful and are the key factor in deciding if the test achieved its primary objective.
 
