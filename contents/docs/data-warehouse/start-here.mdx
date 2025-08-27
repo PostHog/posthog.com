@@ -5,7 +5,7 @@ hideAnchor: true
 
 import DWInstallationPlatforms from './_snippets/dw-installation-platforms'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconGraph } from '@posthog/icons'
+import { IconGraph, IconPiggyBank, IconPlug } from '@posthog/icons'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to build your data warehouse!">
@@ -18,7 +18,7 @@ import { IconGraph } from '@posthog/icons'
 
   Data warehouse lets you store, query, and analyze your data in a unified platform, so you can build better products and make data-driven decisions.
 
-  The first step is to link your first source to your data warehouse.
+  You can query any of the data you've already sent to PostHog like `events`, `persons`, and `sessions`, but you can also link external sources to build a single source of truth for your customer data.
 
   ### Platforms
 
@@ -31,33 +31,12 @@ import { IconGraph } from '@posthog/icons'
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Visualize your data with insights"
-  subtitle="Required"
-  icon="IconGraph"
->
-
-  Once you've linked a source, you can use it as you would your other PostHog data in [trends](/docs/data-warehouse/insights). This makes setting up your first insights easy.
-
-  <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
-    alt="Selecting a data warehouse table in a trend" 
-    classes="rounded"
-  />
-
-  <CallToAction type="primary" to="/docs/data-warehouse/insights">
-    Create an insight
-  </CallToAction>
-
-</QuestLogItem>
-
-<QuestLogItem 
   title="Query your data with SQL"
   subtitle="Required"
   icon="IconCode"
 >
 
-  You can use SQL to query data from your sources. We provide all sorts of [commands](/docs/data-warehouse/sql#commands) and [functions](/docs/data-warehouse/sql/useful-functions) to help you with this.
+  You can use SQL to query data from your sources and PostHog. We provide all sorts of [commands](/docs/data-warehouse/sql#commands) and [functions](/docs/data-warehouse/sql/useful-functions) to help you with this.
   
   After you've got the data you want, the SQL editor also provides a bunch of [visualizations](/docs/data-warehouse/query#sql-visualizations) for you to use too.
 
@@ -96,6 +75,75 @@ import { IconGraph } from '@posthog/icons'
   <CallToAction type="primary" to="/docs/data-warehouse/join">
     Set up a join
   </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Create and materialize views"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  You can save your most used queries as [views](/docs/data-warehouse/views) and reference them in subsequent queries. This makes them composable and easy to reuse.
+
+  You can even [materialize views](/docs/data-warehouse/views/materialize) to improve query performance. 
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
+    alt="Materialize view"
+    classes="rounded"
+    padding={false}
+  />
+
+  <CallToAction type="primary" to="/docs/data-warehouse/views">
+    Create a view
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Unify customer data"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  The data warehouse can be used throughout PostHog as a single source of truth for your customer data. Of course, this means it can be used to power other PostHog products too.
+  
+  ###  <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
+
+  Once you've linked a source, you can use it as you would your other PostHog data in [trends](/docs/data-warehouse/insights). This makes setting up your first insights easy.
+
+    <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
+    alt="Selecting a data warehouse table in a trend" 
+    classes="rounded"
+    padding={false}
+  />
+
+  ### <IconPiggyBank className="text-green w-7 -mt-1 inline-block"/> Revenue analytics
+
+  Sync Stripe to automatically generate a [revenue analytics](/docs/web-analytics/revenue-analytics) dashboard in PostHog to track MRR, customer count, ARPU, LTV, growth rate, and more.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_25_at_19_51_33_9f5267a861.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_25_at_19_52_23_13027e113c.png"
+    alt="revenue analytics dashboard"
+    classes="rounded"
+    padding={false}
+  />
+
+  ###  <IconExperiment className="text-purple w-7 -mt-1 inline-block"/>  Experiments
+
+  Run experiments and [calculate primary or secondary metrics](/docs/experiments/data-warehouse) using data warehouse tables. 
+  
+  <ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/experiment_goal_light_c767c4f794.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/experiment_goal_dark_7eedc50ffe.png"
+    classes="rounded"
+    alt="Screenshot of the form to assign a data warehouse table to an experiment metric"
+  />
 
 </QuestLogItem>
 

@@ -4098,16 +4098,16 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Visualize with insights',
-                    url: '/docs/data-warehouse/insights',
-                    icon: 'IconGraph',
-                    color: 'red',
-                },
-                {
                     name: 'Query with SQL',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconCode',
                     color: 'green',
+                },
+                {
+                    name: 'Visualize with insights',
+                    url: '/docs/data-warehouse/insights',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Concepts',
