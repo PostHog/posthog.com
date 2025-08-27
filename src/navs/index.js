@@ -1603,7 +1603,7 @@ export const communityMenu = {
                 {
                     name: 'LLM analytics',
                     color: 'purple',
-                    icon: 'IconAI',
+                    icon: 'IconLlmObservability',
                     url: '/tutorials/ai-engineering',
                 },
             ],
@@ -1742,8 +1742,8 @@ export const companyMenu = {
                     url: '/teams/ingestion',
                 },
                 {
-                    name: 'LLM Observability',
-                    url: '/teams/llm-observability',
+                    name: 'LLM analytics',
+                    url: '/teams/llm-analytics',
                 },
                 {
                     name: 'Max AI',
@@ -4194,7 +4194,7 @@ export const docsMenu = {
             url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
-            icon: 'IconAI',
+            icon: 'IconLlmObservability',
             description: 'Insights for building your AI and LLM products',
             children: [
                 {
@@ -4511,6 +4511,13 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'LLM analytics',
+            icon: 'IconLlmObservability',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            url: '/llm-analytics',
         },
         {
             name: 'Max AI',

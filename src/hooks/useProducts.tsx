@@ -6,6 +6,7 @@ import {
     IconMessage,
     IconRewindPlay,
     IconToggle,
+    IconLlmObservability,
 } from '@posthog/icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
@@ -89,6 +90,18 @@ const initialProducts = [
             marks: [100000, 1000000, 10000000, 50000000],
             min: 100000,
             max: 50000000,
+        },
+        volume: 100000,
+    },
+    {
+        Icon: IconLlmObservability,
+        name: 'LLM analytics',
+        type: 'llm_analytics',
+        color: 'purple',
+        slider: {
+            marks: [100000, 1000000, 10000000, 100000000],
+            min: 100000,
+            max: 100000000,
         },
         volume: 100000,
     },
