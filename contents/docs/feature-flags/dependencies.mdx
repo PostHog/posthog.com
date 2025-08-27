@@ -74,15 +74,6 @@ Feature flag dependencies support several condition types:
 - `flag_name` equals `specific_variant`
 - `flag_name` does not equal `specific_variant`
 
-### Test dependency scenarios
-
-When testing flags with dependencies:
-
-1. Test the base flag independently
-2. Test the dependent flag when the base flag is enabled
-3. Test the dependent flag when the base flag is disabled
-4. Test edge cases like partial rollouts
-
 ## Troubleshooting
 
 ### Dependent flag not activating
