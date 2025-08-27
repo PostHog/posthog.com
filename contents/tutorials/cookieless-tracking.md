@@ -101,7 +101,7 @@ Nothing comes for free unfortunately. Limiting what PostHog can store in cookies
 
 * **Hash collisions** - Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
 
-* **Session replay & surveys** - both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
+* **Session replay and surveys:** Both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
 
 * **Cache optimizations:** PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are [bootstrapped](/docs/feature-flags/bootstrapping)).
 
