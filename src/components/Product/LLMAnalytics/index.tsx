@@ -63,7 +63,7 @@ const product = {
     freeTier: '100,000 events',
 }
 
-const team = 'LLM analytics'
+const team = 'LLM Observability'
 const teamSlug = '/teams/llm-observability'
 
 const featuresPerRow = 3
@@ -136,8 +136,7 @@ const ecosystemItemCount = 3
 const ecosystem = [
     {
         title: 'Session replay',
-        description:
-            'Watch session recordings to see what users see when interacting with your AI product',
+        description: 'Watch session recordings to see what users see when interacting with your AI product',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
@@ -413,18 +412,16 @@ export const ProductLLMAnalytics = () => {
             <SmoothScroll />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-4 pb-0`}>
                 <section id="features" className="-mt-36 pt-36">
-
-                    <ul
-                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-4 list-none p-0`}
-                    >
+                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-4 list-none p-0`}>
                         {subfeatures.map((subfeature, index) => (
                             <Subfeature key={index} {...subfeature} />
                         ))}
                     </ul>
 
                     <p className="text-center text-balance mt-8">
-                        <strong>Privacy mode:</strong>{' '}
-                        If you want high-level metrics (like cost and performance) without exposing user conversations to your team, you can <Link to="/docs/llm-analytics/privacy-mode">enable this in your code</Link>.
+                        <strong>Privacy mode:</strong> If you want high-level metrics (like cost and performance)
+                        without exposing user conversations to your team, you can{' '}
+                        <Link to="/docs/llm-analytics/privacy-mode">enable this in your code</Link>.
                     </p>
 
                     <div className="py-12">
@@ -438,14 +435,11 @@ export const ProductLLMAnalytics = () => {
                     <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                         <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                             <div className="flex-1">
-                                <h2 className="text-4xl">
-                                    Prompt playground
-                                </h2>
+                                <h2 className="text-4xl">Prompt playground</h2>
                                 <p>
-                                    Test new models against each other, simulate different chat histories, and
-                                    test different reasoning levels – all inside PostHog.
+                                    Test new models against each other, simulate different chat histories, and test
+                                    different reasoning levels – all inside PostHog.
                                 </p>
-
                             </div>
                             <aside className="shrink-0 md:basis-[500px]">
                                 <CloudinaryImage
@@ -456,14 +450,12 @@ export const ProductLLMAnalytics = () => {
                             </aside>
                         </div>
                     </div>
-
                 </section>
                 <section>
-                    <h2 className="text-4xl md:text-5xl text-center">
-                        Works with other PostHog products
-                    </h2>
+                    <h2 className="text-4xl md:text-5xl text-center">Works with other PostHog products</h2>
                     <p className="text-center text-lg max-w-2xl mx-auto mb-12">
-                        You can use LLM analytics by itself, but the magic comes when you use it with other tools and products from PostHog.
+                        You can use LLM analytics by itself, but the magic comes when you use it with other tools and
+                        products from PostHog.
                     </p>
 
                     <div className="my-12">
@@ -480,9 +472,7 @@ export const ProductLLMAnalytics = () => {
                 <section className="my-20 px-5">
                     <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
                         <div className="mb-8">
-                            <h2 className="text-5xl">
-                                We use LLM analytics, too.
-                            </h2>
+                            <h2 className="text-5xl">We use LLM analytics, too.</h2>
                             <p className="text-lg mb-4">
                                 We've used LLM analytics heavily while building <a href="/max">Max AI</a>, our in-app AI
                                 product manager. At the start it helped us keep an eye on operational costs so we could
@@ -513,9 +503,7 @@ export const ProductLLMAnalytics = () => {
                                         />
                                     </div>
                                     <div>
-                                        <div className="font-semibold">
-                                            Michael Matloka
-                                        </div>
+                                        <div className="font-semibold">Michael Matloka</div>
                                         <div className="text-sm opacity-75">Product Engineer at PostHog</div>
                                     </div>
                                 </div>
@@ -535,8 +523,6 @@ export const ProductLLMAnalytics = () => {
                         </div>
                     </div>
                 </section>
-
-
             </div>
 
             <section
@@ -671,8 +657,8 @@ export const ProductLLMAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>LLM Observability</Link> team is responsible for
-                        building {product.lowercase}.
+                        PostHog works in small teams. The <Link to={teamSlug}>LLM Observability</Link> team is
+                        responsible for building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
