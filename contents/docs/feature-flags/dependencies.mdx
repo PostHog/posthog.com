@@ -58,7 +58,7 @@ Here's a common pattern where you want to enable a new feature only for users in
 - Condition: `beta_program` equals `true`
 - 100% rollout to users who meet the condition
 
-This ensures the new dashboard is only shown to beta program participants.
+When the dependent flag is evaluated using any of the [evaluation methods](/docs/feature-flags/adding-feature-flag-code), PostHog automatically evaluates the base flag first. This ensures the new dashboard is only shown to beta program participants.
 
 ## Supported dependency types
 
