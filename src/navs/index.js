@@ -3541,6 +3541,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Adding your code',
+                    url: '/docs/experiments/adding-experiment-code',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
                     name: 'Testing and launching',
                     url: '/docs/experiments/testing-and-launching',
                     icon: 'IconRocket',

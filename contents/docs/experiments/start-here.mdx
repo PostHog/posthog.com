@@ -58,6 +58,33 @@ Fill in the experiment details:
 </QuestLogItem>
 
 <QuestLogItem 
+  title="Add experiment code"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+With your experiment created, add the code to check which variant users see. Simply fetch the feature flag and customize the experience based on its value:
+
+```js
+// Example: Testing a new checkout flow
+if (posthog.getFeatureFlag('new-checkout-flow') === 'test') {
+    // Show new checkout experience
+    showNewCheckout()
+} else {
+    // Show current checkout (control)
+    showCurrentCheckout()
+}
+```
+
+That's it! When you call `getFeatureFlag()`, PostHog automatically tracks exposures and starts collecting data for your experiment.
+
+<CallToAction type="primary" to="/docs/experiments/adding-experiment-code">
+  View code examples for all SDKs
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
   title="Add metrics"
   subtitle="Required"
   icon="IconGraph"
