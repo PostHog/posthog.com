@@ -65,7 +65,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
       <div className="max-h-[400px] overflow-y-auto">
         {filteredProducts.length > 0 ? (
           <>
-            {filteredProducts.map((product) => {
+            {filteredProducts.map((product, index) => {
               // Handle icon rendering
               const isDisabled = product.status === 'WIP'
               let iconElement = null
@@ -77,7 +77,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
 
               return (
                 <Link
-                  key={product.slug}
+                  key={`${product.slug}-${index}-${searchTerm}`}
                   to={`/${product.slug}`}
                   state={{ newWindow: true }}
                   className="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-accent text-primary no-underline group"
