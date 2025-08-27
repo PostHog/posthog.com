@@ -68,7 +68,7 @@ export default function FeatureFlags(): JSX.Element {
             overview: 'stacked', // Use the horizontal split layout
         },
         content: {
-            answersDescription: 'Control the release of new features to your users',
+            // answersDescription: 'Control the release of new features to your users', moved to json
         },
     })
 

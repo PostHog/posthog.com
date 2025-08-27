@@ -197,6 +197,7 @@ export default function SlidesTemplate({
                         productName={productData?.name}
                         answersDescription={contentConfig.answersDescription || productData?.answersDescription}
                         answersHeadline={contentConfig.answersHeadline}
+                        answersHeadline={contentConfig.answersHeadline || productData?.answersHeadline}
                         questions={productData?.questions || []}
                         tutorialData={data}
                         {...props}
