@@ -123,13 +123,14 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
-                    }`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${
+                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
+                }`}
                 imageType="absolute"
             />
             <Editor
                 type="careers"
-                maxWidth="full"
+                maxWidth="100%"
                 proseSize="base"
                 bookmark={{
                     title: 'Careers',

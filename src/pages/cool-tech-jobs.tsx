@@ -1335,7 +1335,7 @@ export default function JobsPage() {
                 title="cool_tech_jobs"
                 type="psheet"
                 slug="/cool-tech-jobs"
-                maxWidth="full"
+                maxWidth="100%"
                 onSearchChange={(search) => {
                     setSearch(search)
                 }}

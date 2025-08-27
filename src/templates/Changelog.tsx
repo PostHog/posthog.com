@@ -43,8 +43,9 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent rounded-sm text-left border hover:border flex justify-between items-center font-semibold text-sm text-secondary hover:text-primary dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open ? 'scale-[1.02] bg-accent border-primary text-primary' : 'border-transparent'
-                                }`}
+                            className={`group py-1 px-2 hover:bg-accent rounded-sm text-left border hover:border flex justify-between items-center font-semibold text-sm text-secondary hover:text-primary dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open ? 'scale-[1.02] bg-accent border-primary text-primary' : 'border-transparent'
+                            }`}
                         >
                             {({ value }) => (
                                 <>
@@ -59,10 +60,11 @@ const Select = ({ onChange, values, ...other }) => {
                                     {({ selected }) => {
                                         return (
                                             <li
-                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${(other.value ? value.label === other.value : selected)
-                                                    ? 'font-bold'
-                                                    : ''
-                                                    }`}
+                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
+                                                    (other.value ? value.label === other.value : selected)
+                                                        ? 'font-bold'
+                                                        : ''
+                                                }`}
                                             >
                                                 {value.label}
                                             </li>
@@ -549,7 +551,7 @@ export default function Changelog({ pageContext }) {
             <SEO title="Changelog - PostHog" />
             <Editor
                 type="changelog"
-                maxWidth="full"
+                maxWidth="100%"
                 dataToFilter={roadmaps}
                 handleFilterChange={handleFilterChange}
                 showFilters={false}
@@ -578,39 +580,39 @@ export default function Changelog({ pageContext }) {
                     },
                     ...(topics.length > 0
                         ? [
-                            {
-                                label: 'topic',
-                                operator: 'eq',
-                                options: [
-                                    {
-                                        label: 'All',
-                                        value: null,
-                                    },
-                                    ...topics.map((topic) => ({
-                                        label: topic.attributes.label,
-                                        value: topic.id,
-                                    })),
-                                ],
-                            },
-                        ]
+                              {
+                                  label: 'topic',
+                                  operator: 'eq',
+                                  options: [
+                                      {
+                                          label: 'All',
+                                          value: null,
+                                      },
+                                      ...topics.map((topic) => ({
+                                          label: topic.attributes.label,
+                                          value: topic.id,
+                                      })),
+                                  ],
+                              },
+                          ]
                         : []),
                     ...(teams.length > 0
                         ? [
-                            {
-                                label: 'team',
-                                operator: 'includes',
-                                options: [
-                                    {
-                                        label: 'All',
-                                        value: null,
-                                    },
-                                    ...teams.map((team) => ({
-                                        label: team.attributes.name,
-                                        value: team.id,
-                                    })),
-                                ],
-                            },
-                        ]
+                              {
+                                  label: 'team',
+                                  operator: 'includes',
+                                  options: [
+                                      {
+                                          label: 'All',
+                                          value: null,
+                                      },
+                                      ...teams.map((team) => ({
+                                          label: team.attributes.name,
+                                          value: team.id,
+                                      })),
+                                  ],
+                              },
+                          ]
                         : []),
                 ]}
                 bookmark={{

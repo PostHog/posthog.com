@@ -7,9 +7,7 @@ import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 const ChangelogPage = () => {
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
         value: '/changelog/2025',
-        content: (
-            <></>
-        ),
+        content: <></>,
     })
 
     return (
@@ -21,7 +19,7 @@ const ChangelogPage = () => {
             />
             <Editor
                 type="changelog"
-                maxWidth="full"
+                maxWidth="100%"
                 proseSize="base"
                 bookmark={{
                     title: 'Changelog',
@@ -36,7 +34,6 @@ const ChangelogPage = () => {
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
-
                 />
             </Editor>
         </>

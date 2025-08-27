@@ -158,7 +158,7 @@ export default function Posts({ pageContext }) {
             <Editor
                 title="posts"
                 type="psheet"
-                maxWidth="screen-2xl"
+                maxWidth={1536}
                 dataToFilter={posts}
                 handleFilterChange={handleFilterChange}
                 showFilters
