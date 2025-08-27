@@ -103,7 +103,7 @@ Nothing comes for free and limiting what PostHog can store in cookies will have 
 
 * **Session replay & surveys** - both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
 
-* **Cache optimizations** - PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are bootstrapped).
+* **Cache optimizations:** PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are [bootstrapped](/docs/feature-flags/bootstrapping)).
 
 ## Further reading
 
