@@ -92,7 +92,7 @@ When using cookieless tracking, PostHog doesn't store a distinct ID in the user'
 hash(team_id, daily_salt, ip_address, user_agent, hostname)
 ```
 
-A hash is an irreversible function, and a salt is a random value that changes daily which we delete once that days events have been processed.
+A hash is an irreversible function, and a salt is a random value that changes daily which we delete once that day's events have been processed.
 
 This means that whilst the IP address and User Agent are Personal Data, the hash is not considered Personal Data, and it is impossible to reverse-engineer any Personal Data from the hash.
 
