@@ -45,7 +45,7 @@ const RoadmapPage = () => {
             <Editor
                 type="roadmap"
                 proseSize="base"
-                maxWidth="full"
+                maxWidth="100%"
                 dataToFilter={roadmaps}
                 onFilterChange={(data) => setFilteredRoadmaps(data)}
                 availableFilters={

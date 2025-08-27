@@ -73,7 +73,7 @@ export default function About({ data }: AboutProps) {
         <>
             <SEO title="About PostHog" description="All about PostHog" image={`/images/og/product-analytics.jpg`} />
             <Editor
-                maxWidth="full"
+                maxWidth="100%"
                 // title="Company"
                 // type="about"
                 proseSize="base"

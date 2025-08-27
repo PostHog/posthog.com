@@ -11,7 +11,7 @@ const PeoplePage = () => {
     const [filteredPeople, setFilteredPeople] = useState(null)
     const [nameFilter, setNameFilter] = useState(null)
     const [pizzaFilter, setPizzaFilter] = useState(null)
-    
+
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/people',
         content: (
@@ -115,7 +115,7 @@ const PeoplePage = () => {
             <SEO title="People – PostHog" description="Meet the PostHog team" image={`/images/og/people.jpg`} />
             <Editor
                 type="people"
-                maxWidth="full"
+                maxWidth="100%"
                 proseSize="base"
                 onSearchChange={(query) => setSearchTerm(query)}
                 availableFilters={availableFilters}

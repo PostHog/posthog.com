@@ -12,7 +12,7 @@ import { companyMenu } from '../navs'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
-import OSButton from "components/OSButton"
+import OSButton from 'components/OSButton'
 
 export const HandbookToc: React.FC = () => {
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
@@ -49,15 +49,17 @@ export const HandbookToc: React.FC = () => {
                                 {category.links.map((link) => {
                                     return (
                                         <li key={link.to} className="list-none px-0 pt-1 first:pt-0">
-                                            <OSButton asLink to={link.to} state={{ newWindow: true }} size="md" width="full" hover="background">
-                                                <span className="flex-1">
-                                                    {link.name}
-                                                </span>
-                                                <span>
-                                                    {link.order}
-                                                </span>
+                                            <OSButton
+                                                asLink
+                                                to={link.to}
+                                                state={{ newWindow: true }}
+                                                size="md"
+                                                width="full"
+                                                hover="background"
+                                            >
+                                                <span className="flex-1">{link.name}</span>
+                                                <span>{link.order}</span>
                                             </OSButton>
-
                                         </li>
                                     )
                                 })}
@@ -97,7 +99,7 @@ export const HandbookToc: React.FC = () => {
         <>
             <SEO image="/images/handbook.png" title="Handbook - PostHog" />
             <Editor
-                maxWidth="full"
+                maxWidth="100%"
                 // title="Company"
                 // type="about"
                 proseSize="base"

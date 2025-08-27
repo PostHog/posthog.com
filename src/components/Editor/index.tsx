@@ -1,6 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Select } from '../RadixUI/Select'
-import { IconSearch, IconMessage, IconFilter } from '@posthog/icons'
+import {
+    IconSearch,
+    IconMessage,
+    IconFilter,
+    IconGear,
+    IconTextWidthFixed,
+    IconTextWidth,
+    IconRefresh,
+} from '@posthog/icons'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -26,12 +34,15 @@ import Cher from 'components/Cher'
 import BookmarkButton from 'components/BookmarkButton'
 import MediaPlayer from 'components/MediaPlayer'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { Popover } from 'components/RadixUI/Popover'
+import Slider from 'components/RadixUI/Slider'
 
 interface EditorProps {
     slug?: string
     title?: string
     type?: string
-    maxWidth?: string
+    maxWidth?: number | string
     children?: React.ReactNode
     availableFilters?: {
         label: string
@@ -98,12 +109,101 @@ const filterData = (data: any, filters: any) => {
     })
 }
 
+const contentWidthOptions: ToggleOption[] = [
+    {
+        label: 'Fixed',
+        value: 'fixed',
+        icon: <IconTextWidthFixed className="size-5 inline-block" />,
+        default: true,
+    },
+    {
+        label: 'Full',
+        value: 'full',
+        icon: <IconTextWidth className="size-5" />,
+    },
+]
+
+const Options = ({
+    fullWidthContent,
+    maxWidth,
+    setMaxWidth,
+    ...other
+}: {
+    fullWidthContent: boolean
+    maxWidth: number | string
+    setMaxWidth: (value: number | string) => void
+    initialMaxWidth: number | string
+}) => {
+    const { appWindow } = useWindow()
+    const initialMaxWidth =
+        typeof other.initialMaxWidth === 'number' ? other.initialMaxWidth : appWindow?.size?.width || 1000
+    const [preferredMaxWidth, setPreferredMaxWidth] = useState(
+        typeof window !== 'undefined'
+            ? Number(localStorage.getItem('preferredMaxWidth')) || initialMaxWidth
+            : initialMaxWidth
+    )
+
+    useEffect(() => {
+        if (!fullWidthContent) {
+            setMaxWidth(preferredMaxWidth)
+            localStorage.setItem('preferredMaxWidth', preferredMaxWidth.toString())
+        }
+    }, [preferredMaxWidth, fullWidthContent])
+
+    return (
+        <Popover
+            title="Options"
+            dataScheme="secondary"
+            trigger={
+                <span>
+                    <OSButton icon={<IconGear className="size-5" />} />
+                </span>
+            }
+            contentClassName="w-80 p-2"
+        >
+            <ToggleGroup
+                title="Content width"
+                options={contentWidthOptions}
+                value={fullWidthContent ? 'full' : 'fixed'}
+                onValueChange={(value) => {
+                    setMaxWidth(
+                        value === 'full'
+                            ? '100%'
+                            : typeof preferredMaxWidth === 'number'
+                            ? preferredMaxWidth
+                            : appWindow?.size?.width || 1000
+                    )
+                }}
+            />
+            {typeof preferredMaxWidth === 'number' && typeof maxWidth === 'number' && (
+                <div className="flex items-center space-x-1">
+                    <div className="flex-grow">
+                        <Slider
+                            defaultValue={preferredMaxWidth}
+                            max={appWindow?.size?.width}
+                            step={1}
+                            min={400}
+                            value={[preferredMaxWidth]}
+                            label="Line height"
+                            onValueChange={(value) => setPreferredMaxWidth(value[0])}
+                        />
+                    </div>
+                    <OSButton
+                        onClick={() => setPreferredMaxWidth(initialMaxWidth)}
+                        icon={<IconRefresh className="size-5" />}
+                    />
+                </div>
+            )}
+        </Popover>
+    )
+}
+
 export function Editor({
     title,
     type,
     children,
     availableFilters,
-    maxWidth = '3xl',
+    maxWidth: initialMaxWidth = 768,
     onSearchChange,
     showFilters: initialShowFilters = false,
     disableFilterChange = false,
@@ -126,6 +226,8 @@ export function Editor({
     const [filters, setFilters] = useState({})
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
+    const [maxWidth, setMaxWidth] = useState(initialMaxWidth)
+    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
@@ -276,6 +378,12 @@ export function Editor({
             className: 'ml-auto flex items-center gap-px',
             children: (
                 <>
+                    <Options
+                        fullWidthContent={fullWidthContent}
+                        maxWidth={maxWidth}
+                        setMaxWidth={setMaxWidth}
+                        initialMaxWidth={initialMaxWidth}
+                    />
                     <OSButton size="md" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
                     {availableFilters && availableFilters.length > 0 && (
                         <OSButton
@@ -511,7 +619,10 @@ export function Editor({
                                     )}
                                 </div>
                             )}
-                            <article className={`${getProseClasses(proseSize)} p-4 mx-auto max-w-${maxWidth}`}>
+                            <article
+                                style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
+                                className={`${getProseClasses(proseSize)} p-4 mx-auto`}
+                            >
                                 {title && (
                                     <h1 className="text-2xl font-bold">
                                         {title}
