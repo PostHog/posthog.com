@@ -63,8 +63,8 @@ const product = {
     freeTier: '100,000 events',
 }
 
-const team = 'LLM Observability'
-const teamSlug = '/teams/llm-observability'
+const team = 'LLM Analytics'
+const teamSlug = '/teams/llm-analytics'
 
 const featuresPerRow = 3
 const features = [
@@ -657,7 +657,7 @@ export const ProductLLMAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>LLM Observability</Link> team is
+                        PostHog works in small teams. The <Link to={teamSlug}>{team</Link> team is
                         responsible for building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
