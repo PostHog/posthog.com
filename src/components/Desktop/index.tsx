@@ -360,14 +360,14 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute mt-12 bottom-32 md:mt-0 md:right-0 md:bottom-12">
+                        <div className="absolute bottom-8 right-8 md:right-0 md:bottom-12">
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
                                 alt="Keyboard garden"
                                 width={1401}
                                 height={1400}
-                                className="size-[400px] md:size-[700px] dark:hidden"
+                                className="size-[300px] md:size-[700px] dark:hidden"
                             />
                             <CloudinaryImage
                                 loading="lazy"
@@ -375,7 +375,7 @@ export default function Desktop() {
                                 alt="Keyboard garden"
                                 width={1401}
                                 height={1400}
-                                className="size-[400px] md:size-[700px] hidden dark:block"
+                                className="size-[300px] md:size-[700px] hidden dark:block"
                             />
                         </div>
                     </div>

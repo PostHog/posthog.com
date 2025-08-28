@@ -1,20 +1,12 @@
-import React from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
+import React, { useState } from 'react'
 import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import useProduct from '../../hooks/useProduct'
-import OSButton from 'components/OSButton'
-import * as Icons from '@posthog/icons'
-import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
-import { Accordion } from 'components/RadixUI/Accordion'
-import ZoomHover from 'components/ZoomHover'
-import { IconPresentation } from 'components/OSIcons'
+import { AppLink } from 'components/OSIcons/AppIcon'
 import { productMenu } from '../../navs'
-import { PRODUCT_COUNT } from '../../constants'
+import { explorerGridColumns } from '../../constants'
+import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -41,6 +33,8 @@ const selectOptions = [
 ]
 
 export default function FeetPics(): JSX.Element {
+    const [isListLayout, setIsListLayout] = useState(true)
+
     return (
         <>
             <SEO
@@ -59,6 +53,16 @@ export default function FeetPics(): JSX.Element {
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
 
+                rightActionButtons={
+                    <ToggleGroup
+                        title="Layout"
+                        hideTitle={true}
+                        options={explorerLayoutOptions}
+                        onValueChange={(value) => setIsListLayout(value === 'list')}
+                        value={isListLayout ? 'list' : 'grid'}
+                        className="-my-1 ml-2"
+                    />
+                }
                 leftSidebarContent={[
                     {
                         title: 'Feet pics',
@@ -84,7 +88,10 @@ export default function FeetPics(): JSX.Element {
                     },
                 ]}
             >
-                <div className="@md:pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-x-1 gap-y-4 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center">
+                <div className={`@md:pl-4 grid ${isListLayout
+                    ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
+                    : explorerGridColumns + ' gap-y-4 items-start justify-items-center'
+                    } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}>
                     <AppLink
                         label="employee #30200.jpg"
                         Icon={
@@ -97,6 +104,7 @@ export default function FeetPics(): JSX.Element {
                         }
                         background="bg-primary"
                         className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
                     ></AppLink>
 
                     <AppLink
@@ -111,6 +119,7 @@ export default function FeetPics(): JSX.Element {
                         }
                         background="bg-primary"
                         className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
                     ></AppLink>
 
                     <AppLink
@@ -125,6 +134,7 @@ export default function FeetPics(): JSX.Element {
                         }
                         background="bg-primary"
                         className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
                     ></AppLink>
 
                     <AppLink
@@ -139,10 +149,12 @@ export default function FeetPics(): JSX.Element {
                         }
                         background="bg-primary"
                         className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
                     ></AppLink>
 
                     <AppLink
                         label="lobster toes.png"
+                        url="#"
                         Icon={
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/image_8_b6c1a80c8d.png"
@@ -153,6 +165,7 @@ export default function FeetPics(): JSX.Element {
                         }
                         background="bg-primary"
                         className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
                     ></AppLink>
                 </div>
             </Explorer>

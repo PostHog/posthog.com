@@ -1,20 +1,13 @@
-import React from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
+import React, { useState } from 'react'
 import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import useProduct from '../../hooks/useProduct'
-import OSButton from 'components/OSButton'
-import * as Icons from '@posthog/icons'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
-import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
-import { PRODUCT_COUNT } from '../../constants'
+import { explorerGridColumns } from '../../constants'
+import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -40,7 +33,11 @@ const selectOptions = [
     },
 ]
 
+
+
 export default function Trash(): JSX.Element {
+    const [isListLayout, setIsListLayout] = useState(true)
+
     return (
         <>
             <SEO
@@ -54,6 +51,16 @@ export default function Trash(): JSX.Element {
                 title="Trash"
                 showTitle={false}
                 selectOptions={selectOptions}
+                rightActionButtons={
+                    <ToggleGroup
+                        title="Layout"
+                        hideTitle={true}
+                        options={explorerLayoutOptions}
+                        onValueChange={(value) => setIsListLayout(value === 'list')}
+                        value={isListLayout ? 'list' : 'grid'}
+                        className="-my-1 ml-2"
+                    />
+                }
                 // options below only needed to override matching the slug
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
@@ -197,7 +204,10 @@ export default function Trash(): JSX.Element {
                                                     </span>
                                                 ),
                                                 content: (
-                                                    <div className="@md:pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-x-1 gap-y-4 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center">
+                                                    <div className={`@md:pl-4 grid ${isListLayout
+                                                        ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
+                                                        : explorerGridColumns + ' gap-y-4 items-start justify-items-center'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}>
                                                         {items.map((item) => {
                                                             const appLink = (
                                                                 <AppLink
@@ -206,6 +216,7 @@ export default function Trash(): JSX.Element {
                                                                     Icon={<AppIcon name={item.icon} />}
                                                                     background="bg-primary"
                                                                     className={`size-12 [&_.bg-front]:fill-${item.color} [&_.bg-rear]:fill-${item.color}`}
+                                                                    orientation={isListLayout ? 'row' : 'column'}
                                                                 ></AppLink>
                                                             )
 
@@ -214,7 +225,7 @@ export default function Trash(): JSX.Element {
                                                                 return (
                                                                     <ZoomHover
                                                                         key={item.slug}
-                                                                        className="w-28 justify-center"
+                                                                        className={isListLayout ? "w-full justify-start" : "w-28 justify-center"}
                                                                     >
                                                                         {appLink}
                                                                     </ZoomHover>
@@ -225,7 +236,7 @@ export default function Trash(): JSX.Element {
                                                             return (
                                                                 <div
                                                                     key={item.slug}
-                                                                    className="w-28 justify-center mx-auto"
+                                                                    className={isListLayout ? "w-full justify-start" : "w-28 justify-center mx-auto"}
                                                                 >
                                                                     {appLink}
                                                                 </div>

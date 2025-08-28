@@ -1,28 +1,25 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
 import { navigate } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
-import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
+import { AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
-import ZoomHover from 'components/ZoomHover'
 import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
-import { PRODUCT_COUNT, APP_COUNT } from '../../constants'
+import { PRODUCT_COUNT } from '../../constants'
+import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import { IconGrid, IconListSquare } from 'components/OSIcons/Icons'
 import usePostHog from 'hooks/usePostHog'
 import { useWindow } from '../../context/Window'
 import { categoryOrder, categoryDisplayNames, getProductsForCategory } from '../../constants/productNavigation'
 import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
+import { explorerGridColumns } from '../../constants'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -48,10 +45,7 @@ const selectOptions = [
     },
 ]
 
-const layoutOptions = [
-    { label: <IconListSquare className="size-4" />, value: 'list', default: true },
-    { label: <IconGrid className="size-4" />, value: 'grid' },
-]
+
 
 const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
     const posthog = usePostHog()
@@ -205,7 +199,7 @@ export default function Products(): JSX.Element {
                     <ToggleGroup
                         title="Layout"
                         hideTitle={true}
-                        options={layoutOptions}
+                        options={explorerLayoutOptions}
                         onValueChange={(value) => setIsListLayout(value === 'list')}
                         value={isListLayout ? 'list' : 'grid'}
                         className="-my-1 ml-2"
@@ -489,21 +483,19 @@ export default function Products(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${
-                                                            isListLayout
-                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                                : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 items-start'
-                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                        className={`@md:pl-4 grid ${isListLayout
+                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                            : explorerGridColumns + 'gap-y-4 items-start justify-items-center'
+                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
                                                             <button
                                                                 key={product.slug}
                                                                 onClick={(e) => handleProductClick(product, e)}
-                                                                onMouseEnter={(e) => setHoveredProduct(product)}
-                                                                onMouseLeave={(e) => setHoveredProduct(null)}
-                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
-                                                                    selectedProduct?.slug === product.slug ? '' : ''
-                                                                } ${appWindowWidth <= 768 ? 'cursor-pointer' : ''}`}
+                                                                onMouseEnter={() => setHoveredProduct(product)}
+                                                                onMouseLeave={() => setHoveredProduct(null)}
+                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
+                                                                    } ${appWindowWidth <= 768 ? 'cursor-pointer' : ''}`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>
