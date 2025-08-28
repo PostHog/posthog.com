@@ -12,7 +12,7 @@ import {
     IconShield,
     IconStack,
     IconTerminal,
-    IconLlmObservability,
+    IconLlmAnalytics,
     IconUnlock,
     IconUserPaths,
     IconWarning,
@@ -372,7 +372,7 @@ export const ProductLLMAnalytics = () => {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="purple"
-                    icon={<IconLlmObservability />}
+                    icon={<IconLlmAnalytics />}
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Monitor and debug</span> your AI products'
                     description="Analyze traces, spans, per-user costs, latency, and more"
@@ -657,8 +657,8 @@ export const ProductLLMAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is
-                        responsible for building {product.lowercase}.
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>
