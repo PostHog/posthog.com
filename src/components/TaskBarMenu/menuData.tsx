@@ -350,11 +350,13 @@ export function useMenuData(): MenuType[] {
                     label: 'Startups',
                     link: '/startups',
                 },
+                /*
                 {
                     type: 'item',
                     label: 'Enterprise',
                     link: '/enterprise',
                 },
+                */
                 { type: 'separator' },
                 {
                     type: 'item',
@@ -364,12 +366,12 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Pricing philosophy',
-                    link: '/pricing?tab=philosophy',
+                    link: '/pricing#philosophy',
                 },
                 {
                     type: 'item',
-                    label: 'How we do sales',
-                    link: '/pricing#sales',
+                    label: 'How we do "sales"',
+                    link: '/sales',
                 },
             ],
         },
@@ -380,6 +382,11 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Content',
             items: [
+                {
+                    type: 'item',
+                    label: 'PostHog news',
+                    link: '/community',
+                },
                 {
                     type: 'item',
                     label: 'Newsletter',
@@ -544,6 +551,33 @@ export function useMenuData(): MenuType[] {
                     ],
                 },
                 {
+                    type: 'submenu',
+                    label: 'Random pages',
+                    icon: <Icons.IconEllipsis className="size-4 text-orange" />,
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'How we do "sales"',
+                            link: '/sales',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Enterprise flair',
+                            link: '/enterprise',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Post-It note training',
+                            link: '/academy',
+                        },
+                        {
+                            type: 'item',
+                            label: '404 page',
+                            link: '/404',
+                        },
+                    ],
+                },
+                {
                     type: 'separator',
                 },
                 {
@@ -575,12 +609,18 @@ export const DocsItemsEnd = [
         type: 'item' as const,
         label: 'Tutorials',
         link: '/tutorials',
-        icon: <Icons.IconBook className="size-4 text-blue" />,
+        icon: <Icons.IconBook className="size-4 text-purple" />,
     },
     {
         type: 'item' as const,
-        label: 'Templates',
+        label: 'Dashboard templates',
         link: '/templates',
-        icon: <Icons.IconBolt className="size-4 text-yellow" />,
+        icon: <Icons.IconDashboard className="size-4 text-blue" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Tracks',
+        link: '/tracks',
+        icon: <Icons.IconGraduationCap className="size-4 text-black" />,
     },
 ]
