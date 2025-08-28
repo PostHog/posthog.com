@@ -60,9 +60,9 @@ export const TeamMember = (props: any) => {
     // Format start date for tooltip
     const formattedStartDate = startDate
         ? new Date(startDate).toLocaleDateString('en-US', {
-            month: 'long',
-            year: 'numeric',
-        })
+              month: 'long',
+              year: 'numeric',
+          })
         : null
 
     // Check role for custom tooltip text (customer-facing roles take priority)
@@ -118,8 +118,8 @@ export const TeamMember = (props: any) => {
                                                 pineappleOnPizza === true
                                                     ? 'StickerPineappleYes'
                                                     : pineappleOnPizza === false
-                                                        ? 'StickerPineappleNo'
-                                                        : 'StickerPineappleUnknown'
+                                                    ? 'StickerPineappleNo'
+                                                    : 'StickerPineappleUnknown'
                                             }
                                         />
                                     }
@@ -127,8 +127,8 @@ export const TeamMember = (props: any) => {
                                     {pineappleOnPizza === true
                                         ? 'Loves'
                                         : pineappleOnPizza === false
-                                            ? 'Hates'
-                                            : 'Undecided about'}{' '}
+                                        ? 'Hates'
+                                        : 'Undecided about'}{' '}
                                     pineapple on pizza
                                 </Tooltip>
                             </ZoomHover>
@@ -404,10 +404,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                     </p>
 
                     <p>
-                        Interested in a hand-drawn sketch of your face?{' '}
-                        <Link to={`/careers`}>
-                            We're hiring.
-                        </Link>
+                        Interested in a hand-drawn sketch of your face? <Link to={`/careers`}>We're hiring.</Link>
                     </p>
                 </div>
 
@@ -441,7 +438,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
 
                         return (
                             <TeamMember
-                                key={index}
+                                key={teamMember.squeakId}
                                 {...teamMember}
                                 isTeamLead={isTeamLead}
                                 teamCrestMap={teamCrestMap}
