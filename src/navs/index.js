@@ -4342,6 +4342,13 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Tracking custom properties',
+                    url: '/docs/llm-analytics/custom-properties',
+                    icon: 'IconGear',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'Manual capture',
                     url: '/docs/llm-analytics/manual-capture',
                     icon: 'IconCode',
