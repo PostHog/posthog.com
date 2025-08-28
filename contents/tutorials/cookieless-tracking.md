@@ -101,9 +101,9 @@ This means that whilst the IP address and User Agent are Personal Data, the hash
 
 Nothing comes for free unfortunately. Limiting what PostHog can store in cookies has implications like:
 
-* **Higher user count** - Users that do not give cookie consent will appear as a different person each day. A new daily salt means that the hash will be different. Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices from the same user.
+* **Higher user count:** Users that do not give cookie consent appear as different people each day. A new daily salt means that the hash is different. This means high unique user counts beyond one day (like weekly or monthly unique users). Additionally, not being able to `identify()` users means that it is impossible to link together multiple devices or browsers from the same user.
 
-* **Hash collisions** - Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
+* **Hash collisions:** Because the hash is based on a limited set of inputs, it is possible that two different users will generate the same hash. This means that two different users could be counted as one user. The most likely scenario would be two users with the same IP address (e.g. in a corporate network) and the same user agent (e.g. using the same browser version on the same OS).
 
 * **Session replay and surveys:** Both are disabled if the user has not given cookie consent. This is because both features rely on storing data in cookies/local storage.
 
