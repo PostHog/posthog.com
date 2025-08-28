@@ -1,23 +1,101 @@
 ---
 title: Generations
-availability:
-  free: full
-  selfServe: full
-  enterprise: full
 ---
 
 import GenerationEvent from "./_snippets/generation-event.mdx"
+import NotableGenerationProperties from "./_snippets/notable-generation-properties.mdx"
 
-Generations are an event that capture an LLM request. The [generations tab](https://app.posthog.com/llm-analytics/generations) lists them along with the properties autocaptured by PostHog like the person, model, total cost, token usage, and more.
-
-When you expand a generation, it includes the properties, metadata, a conversation history, the role (system, user, assistant), input content, and output content.
+Generations are events that capture LLM calls and their responses. They represent interactions and conversations with an AI model. Generations are tracked as `$ai_generation` events and can be used to create and visualize [insights](/docs/product-analytics/insights) just like other PostHog events.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_generations_8a94f2cd01.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_generations_dark_50e206f940.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/ai_generations_f687da8aaa.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/ai_generations_dark_51d8bae273.png"
+  alt="$ai_generation events"
+  classes="rounded"
+/>
+<Caption>
+  View recent AI generation events in the <b>Activity</b> tab
+</Caption>
+
+The **LLM Analytics** > **Generations** tab displays a list of generations, along with a preview of key autocaptured properties. You can filter and search for generations by various properties.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llm_generations_b12119af33.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llm_geneerations_dark_03c996e8ad.png"
   alt="LLM generations"
   classes="rounded"
 />
+
+<Caption>
+  Preview and filter AI generations in the <b>Generations</b> tab
+</Caption>
+
+
+## What does each generation capture?
+
+A generation event records the AI model’s inputs, generated output, and additional metadata – like token usage, latency, and cost – for each LLM call.
+
+PostHog automatically logs and displays the generation and its data within a conversation view for contextual debugging and analysis. You can also view the raw JSON payload.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4" 
+  alt="AI generation in-app view" 
+  autoPlay="true"
+  loop="true"
+/>
+
+You can expect each generation to have the following properties (in addition to the [default event properties](/docs/data/events#default-properties)):
+
+<NotableGenerationProperties />
+
+When calling LLMs with our [SDK wrappers](/docs/llm-analytics/installation), you can also enrich the `$ai_generation` event with your own [custom properties](/docs/llm-analytics/custom-properties) and PostHog attributes like groups and distinct IDs for identified users.
+
+<MultiLanguage>
+
+```python
+response = client.responses.create(
+    model="gpt-4o-mini",
+    input=[
+        {"role": "user", "content": "Tell me a fun fact about hedgehogs"}
+    ],
+    posthog_distinct_id="user_123", # optional
+    posthog_trace_id="trace_123", # optional
+    posthog_properties={"custom_property": "value"}, # optional
+    posthog_groups={"company": "company_id_in_your_db"},  # optional 
+    posthog_privacy_mode=False # optional
+)
+```
+
+```ts
+const completion = await openai.responses.create({
+    model: "gpt-4o-mini",
+    input: [{ role: "user", content: "Tell me a fun fact about hedgehogs" }],
+    posthogDistinctId: "user_123", // optional
+    posthogTraceId: "trace_123", // optional
+    posthogProperties: { custom_property: "value" }, // optional
+    posthogGroups: { company: "company_id_in_your_db" }, // optional 
+    posthogPrivacyMode: false // optional
+});
+```
+
+</MultiLanguage>
+
+## How are traces and spans related?
+
+Generations are nested under [spans](/docs/llm-analytics/spans) and [traces](/docs/llm-analytics/traces). 
+
+A trace is the top-level entity that groups all related LLM operations, including spans and generations, together.
+
+Spans are individual operations within a trace. Some spans represent generations, which are also uniquely identified using the `$ai_span_id` property. However, most spans track other types of LLM operations such as tool calls, RAG retrieval, data processing, and more.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llm_spans_151fd2701a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llm_spans_dark_6ce1cab5b9.png"
+  alt="LLM trace tree"
+  classes="rounded"
+/>
+
+<Caption>Generations and spans are nested within a trace</Caption>
 
 ## Event properties
 
