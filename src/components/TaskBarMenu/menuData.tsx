@@ -557,11 +557,6 @@ export function useMenuData(): MenuType[] {
                     items: [
                         {
                             type: 'item',
-                            label: 'How we do "sales"',
-                            link: '/sales',
-                        },
-                        {
-                            type: 'item',
                             label: 'Enterprise flair',
                             link: '/enterprise',
                         },
