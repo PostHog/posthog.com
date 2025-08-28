@@ -18,6 +18,7 @@ import {
 import useProduct from '../../hooks/useProduct'
 import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
 import { useApp } from '../../context/App'
+import { useResponsive } from '../../hooks/useResponsive'
 
 interface DocsMenuItem {
     name: string
@@ -267,53 +268,14 @@ export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { animateClosingAllWindows, windows, setScreensaverPreviewActive } = useApp()
+    const { isMobile, isLoaded } = useResponsive()
 
-    return [
-        {
-            trigger: (
-                <>
-                    <Logo noText className="size-6" fill="primary" classic />
-                </>
-            ),
-            items: [
-                {
-                    type: 'item',
-                    label: 'About PostHog',
-                    link: '/about',
-                },
-                {
-                    type: 'item',
-                    label: 'About this website',
-                    link: '/credits',
-                },
-                {
-                    type: 'item',
-                    label: 'Display options',
-                    link: '/display-options',
-                },
-                { type: 'separator' as const },
-                {
-                    type: 'item',
-                    label: 'Start screensaver',
-                    onClick: () => {
-                        setScreensaverPreviewActive(true)
-                    },
-                },
-                {
-                    type: 'item' as const,
-                    label: 'Close all windows',
-                    disabled: windows.length < 1,
-                    onClick: () => {
-                        animateClosingAllWindows()
-                    },
-                },
-            ],
-        },
+    // Define main navigation items (excluding logo menu)
+    const mainNavItems: MenuType[] = [
         {
             trigger: 'Product OS',
             items: buildProductOSMenuItems(allProducts),
         },
-
         {
             trigger: 'Pricing',
             items: [
@@ -584,6 +546,72 @@ export function useMenuData(): MenuType[] {
                 },
             ],
         },
+    ]
+
+    // Define base logo menu items (system items)
+    const baseLogoMenuItems = [
+        {
+            type: 'item' as const,
+            label: 'About PostHog',
+            link: '/about',
+        },
+        {
+            type: 'item' as const,
+            label: 'About this website',
+            link: '/credits',
+        },
+        {
+            type: 'item' as const,
+            label: 'Display options',
+            link: '/display-options',
+        },
+    ]
+
+    // On mobile, include main navigation items in the logo menu
+    const logoMenuItems = isLoaded && isMobile
+        ? [
+            // Main navigation items as submenus
+            ...mainNavItems.map(item => ({
+                type: 'submenu' as const,
+                label: typeof item.trigger === 'string' ? item.trigger : 'More',
+                items: item.items,
+            })),
+            { type: 'separator' as const },
+            // System items
+            ...baseLogoMenuItems,
+        ]
+        : [
+            // Desktop: only show system items
+            ...baseLogoMenuItems,
+            { type: 'separator' as const },
+            {
+                type: 'item' as const,
+                label: 'Start screensaver',
+                onClick: () => {
+                    setScreensaverPreviewActive(true)
+                },
+            },
+            {
+                type: 'item' as const,
+                label: 'Close all windows',
+                disabled: windows.length < 1,
+                onClick: () => {
+                    animateClosingAllWindows()
+                },
+            },
+        ]
+
+    return [
+        {
+            trigger: (
+                <>
+                    <Logo noText className="size-6" fill="primary" classic />
+                </>
+            ),
+            items: logoMenuItems,
+        },
+        // On desktop, show main navigation items
+        ...(isLoaded && !isMobile ? mainNavItems : []),
     ]
 }
 
