@@ -39,14 +39,14 @@ export default function Wrapper() {
                                 animate={
                                     shakeReady
                                         ? {
-                                              x: [0, (Math.random() - 0.5) * 45],
-                                              y: [0, (Math.random() - 0.5) * 22],
-                                              rotate: [0, (Math.random() - 0.5) * 15],
-                                              transition: {
-                                                  delay: index * 0.05,
-                                                  duration: 0.1,
-                                              },
-                                          }
+                                            x: [0, (Math.random() - 0.5) * 45],
+                                            y: [0, (Math.random() - 0.5) * 22],
+                                            rotate: [0, (Math.random() - 0.5) * 15],
+                                            transition: {
+                                                delay: index * 0.05,
+                                                duration: 0.1,
+                                            },
+                                        }
                                         : {}
                                 }
                                 exit={{
@@ -63,7 +63,9 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
+            {/*             
             {!compact && <Dock />}
+            */}
             <CookieBannerToast />
             <AnimatePresence>
                 <motion.div
