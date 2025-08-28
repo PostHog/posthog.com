@@ -65,6 +65,7 @@ type UserContextValue = {
     voteReply: (id: number, vote: 'up' | 'down', user?: User) => Promise<void>
     addBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
     removeBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
+    reportSpam: (type: 'reply' | 'question', id: number) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -91,6 +92,7 @@ export const UserContext = createContext<UserContextValue>({
     voteReply: async () => undefined,
     addBookmark: async () => undefined,
     removeBookmark: async () => undefined,
+    reportSpam: async () => undefined,
 })
 
 type UserProviderProps = {
@@ -644,6 +646,25 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
+    const reportSpam = async (type: 'reply' | 'question', id: number) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/report-spam`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    type,
+                    id,
+                },
+            }),
+        })
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -668,6 +689,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         voteReply,
         addBookmark,
         removeBookmark,
+        reportSpam,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

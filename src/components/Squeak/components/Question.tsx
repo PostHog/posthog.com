@@ -11,7 +11,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
+import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo, IconWarning } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
@@ -24,6 +24,7 @@ import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
+import ReportSpamButton from './ReportSpamButton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -597,6 +598,11 @@ export const Question = (props: QuestionProps) => {
                                     )
                                 }}
                             </EditWrapper>
+                            {!isQuestionAuthor && (
+                                <div className="mt-2">
+                                    <ReportSpamButton type="question" id={questionData.id} />
+                                </div>
+                            )}
                             {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
                                 <p className="text-xs text-secondary pb-4 mb-0 mt-1">
                                     <span>Originally posted on</span>{' '}
