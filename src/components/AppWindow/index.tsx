@@ -480,7 +480,10 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                           item.minimal
                                               ? '!shadow-none'
                                               : `flex flex-col ${
-                                                    size.width >= window?.innerWidth ? '' : 'border rounded'
+                                                    size.width >=
+                                                    (typeof window !== 'undefined' ? window?.innerWidth : 0)
+                                                        ? ''
+                                                        : 'border rounded'
                                                 }`
                                       }`
                             } overflow-hidden`}
