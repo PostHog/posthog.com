@@ -20,7 +20,7 @@ Adding items to the coming soon menu early offers several advantages. It enables
 
 Coming soon features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months. 
 
-<CalloutBox icon="IconInfo" title="Moving from `Concept` to `Beta`" type="fyi">
+<CalloutBox icon="IconInfo" title="Moving from Concept to Beta" type="fyi">
 
 Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
 
