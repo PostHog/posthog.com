@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
 import Chat from 'components/Chat'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
 
 interface ChatContextType {
     hasUnread: boolean
@@ -32,6 +34,8 @@ export function ChatProvider({
     chatId?: string
     date?: string
 }): JSX.Element {
+    const { windows, setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -163,6 +167,13 @@ export function ChatProvider({
             initialContext.forEach((c) => addContext(c))
         }
     }, [initialContext])
+
+    useEffect(() => {
+        const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
+        if (appWindow && chatWindows.length > 0) {
+            setWindowTitle(appWindow, `Chat ${chatWindows.length}`)
+        }
+    }, [])
 
     return (
         <ChatContext.Provider
