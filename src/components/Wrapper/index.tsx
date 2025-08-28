@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useApp } from '../../context/App'
 import Desktop from 'components/Desktop'
 import TaskBarMenu from 'components/TaskBarMenu'
@@ -18,13 +18,20 @@ export default function Wrapper() {
         closeAllWindows,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
+    const dotLottieRef = useRef<any>(null)
+
+    useEffect(() => {
+        if (closingAllWindowsAnimation) {
+            dotLottieRef.current.play()
+        }
+    }, [closingAllWindowsAnimation])
 
     return (
         <div className="fixed inset-0 size-full flex flex-col">
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
                 <Desktop />
-                <AnimatePresence onExitComplete={() => setClosingAllWindowsAnimation(false)}>
+                <AnimatePresence>
                     {windows.map((item, index) => {
                         return (
                             <motion.div
@@ -59,26 +66,31 @@ export default function Wrapper() {
             {!compact && <Dock />}
             <CookieBannerToast />
             <AnimatePresence>
-                {closingAllWindowsAnimation && (
-                    <motion.div exit={{ opacity: 0 }} className="fixed inset-0 size-full z-[999999]">
-                        <DotLottiePlayer
-                            className="size-full"
-                            src="/lotties/hogzilla-swipe.lottie"
-                            autoplay
-                            onEvent={(event) => {
-                                if (event === PlayerEvents.Play) {
+                <motion.div
+                    exit={{ opacity: 0 }}
+                    className={`fixed inset-0 size-full z-[999999] ${closingAllWindowsAnimation ? 'block' : 'hidden'}`}
+                >
+                    <DotLottiePlayer
+                        className="size-full"
+                        src="/lotties/hogzilla-swipe.lottie"
+                        ref={dotLottieRef}
+                        onEvent={(event) => {
+                            if (event === PlayerEvents.Play) {
+                                setTimeout(() => {
+                                    setShakeReady(true)
                                     setTimeout(() => {
-                                        setShakeReady(true)
-                                    }, 2200)
-                                }
-                                if (event === PlayerEvents.Complete) {
-                                    closeAllWindows()
-                                    setShakeReady(false)
-                                }
-                            }}
-                        />
-                    </motion.div>
-                )}
+                                        closeAllWindows()
+                                        setShakeReady(false)
+                                    }, 500)
+                                }, 2200)
+                            }
+                            if (event === PlayerEvents.Complete) {
+                                setClosingAllWindowsAnimation(false)
+                                dotLottieRef.current.stop()
+                            }
+                        }}
+                    />
+                </motion.div>
             </AnimatePresence>
         </div>
     )
