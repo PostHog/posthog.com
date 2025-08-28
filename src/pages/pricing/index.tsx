@@ -161,6 +161,8 @@ export default function Pricing() {
                 billingProducts={billingProducts}
             />
 
+            <Philosophy />
+
             <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
 
             <Addons addons={billingProducts.flatMap((product: any) => product.addons || [])} />
@@ -171,7 +173,7 @@ export default function Pricing() {
 
             <Reviews />
 
-            <Philosophy />
+
 
             <SectionLayout id="faq" className="mb-12">
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>

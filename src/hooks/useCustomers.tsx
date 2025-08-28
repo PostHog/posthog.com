@@ -133,7 +133,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: 'They make airplanes',
         logo: AirbusLogo,
-        height: 10,
+        height: 9,
         featured: true,
     },
     // assemblyai: {
@@ -278,7 +278,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: 'Open source LLMs',
         logo: MistralAILogo,
-        height: 10,
+        height: 12,
         featured: true,
     },
     netdata: {
@@ -370,7 +370,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
-        height: 10,
+        height: 12,
     },
     researchgate: {
         name: 'ResearchGate',

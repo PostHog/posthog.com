@@ -76,13 +76,13 @@ const PricingPhilosophy = (): JSX.Element => {
                     </span>
                 </p>
                 <p>
-                    Or if you need more info, <Link href="/pricing#faq">read our FAQ</Link>,{' '}
-                    <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
-                    <Link href="/talk-to-a-human">talk to a human</Link>.
+                    Or if you need more info, <Link href="#faq">read our FAQ</Link>,{' '}
+                    <Link href="/questions/topic/pricing" state={{ newWindow: true }}>ask a question</Link>, or{' '}
+                    <Link href="/talk-to-a-human" state={{ newWindow: true }}>talk to a human</Link>.
                 </p>
 
                 <div className="flex gap-2 items-center">
-                    <Link href="/community/profiles/27732">
+                    <Link href="/community/profiles/27732" state={{ newWindow: true }}>
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             quality={100}
@@ -93,8 +93,8 @@ const PricingPhilosophy = (): JSX.Element => {
                             imgClassName="absolute inset-0 object-cover"
                         />
                     </Link>
-                    <p className="leading-tight mb-0">
-                        <Link href="/community/profiles/27732" className="flex">
+                    <p className="leading-tight my-0">
+                        <Link href="/community/profiles/27732" state={{ newWindow: true }} className="flex">
                             <strong>James Hawkins</strong>
                         </Link>
                         <span className="text-sm text-secondary">Co-founder</span>

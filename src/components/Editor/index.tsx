@@ -156,7 +156,7 @@ const Options = ({
             dataScheme="secondary"
             trigger={
                 <span>
-                    <OSButton icon={<IconGear className="size-5" />} />
+                    <OSButton icon={<IconGear />} size="md" />
                 </span>
             }
             contentClassName="w-80 p-2"
@@ -170,8 +170,8 @@ const Options = ({
                         value === 'full'
                             ? '100%'
                             : typeof preferredMaxWidth === 'number'
-                            ? preferredMaxWidth
-                            : appWindow?.size?.width || 1000
+                                ? preferredMaxWidth
+                                : appWindow?.size?.width || 1000
                     )
                 }}
             />

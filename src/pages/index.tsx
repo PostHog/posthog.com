@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight, IconInfo } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight, IconInfo, IconRefresh } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -309,18 +309,231 @@ const AIAgents = () => {
     )
 }
 
-const HUGE = ['ycombinator', 'airbus', 'elevenlabs', 'trust', 'lovable',]
+const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'heygen']
 
-const GONNA_BE_HUGE = [
+const COL2 = [
     'supabase',
-    'hasura',
-    'startengine',
     'mistralai',
+    'elevenlabs',
+    'hasura',
     'raycast',
-    'researchgate',
-    'heygen',
     'posthog',
 ]
+
+const companyBreakdowns = {
+    VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
+    colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
+    hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
+    planes: { col1: 'Builds planes', col2: 'Doesn\'t build planes (yet)' },
+    highValue: { col1: 'Companies with >1 $B\'s in their valuations', col2: 'Everyone else (for now)' },
+    caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
+    easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
+    goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
+    explainable: { col1: 'Companies you can explain to your parents', col2: 'Companies your parents will never understand' },
+    shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
+    realWords: { col1: 'Real words', col2: 'Not real words' },
+    american: { col1: 'Founded in America', col2: 'Not founded in American' },
+    pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' }
+}
+
+
+const companyAttributes = {
+    "VCsLoveThem": [
+        "ycombinator",
+        "airbus",
+        // "elevenlabs",
+        "trust",
+        "lovable",
+        // "supabase",
+        // "hasura",
+        "startengine",
+        // "mistralai",
+        // "raycast",
+        "researchgate",
+        "heygen",
+        // "posthog"
+    ],
+    "colorful": [
+        "ycombinator",
+        // "airbus",
+        // "elevenlabs",
+        "trust",
+        "lovable",
+        "supabase",
+        // "hasura",
+        "startengine",
+        "mistralai",
+        "raycast",
+        // "researchgate",
+        // "heygen",
+        "posthog"
+    ],
+    "hardware": [
+        // "ycombinator",
+        "airbus",
+        // "elevenlabs",
+        // "trust",
+        // "lovable",
+        // "supabase",
+        // "hasura",
+        // "startengine",
+        // "mistralai",
+        // "raycast",
+        // "researchgate",
+        // "heygen",
+        "posthog"
+    ],
+    "planes": [
+        // "ycombinator",
+        "airbus",
+        // "elevenlabs",
+        // "trust",
+        // "lovable",
+        // "supabase",
+        // "hasura",
+        // "startengine",
+        // "mistralai",
+        // "raycast",
+        // "researchgate",
+        // "heygen",
+        // "posthog"
+    ],
+    "highValue": [
+        "airbus",
+        "elevenlabs",
+        // "ycombinator",
+        "lovable",
+        "supabase",
+        "hasura",
+        // "trust",
+        // "startengine",
+        "mistralai",
+        // "raycast",
+        // "researchgate",
+        // "heygen",
+        // "posthog"
+    ],
+    "caseStudy": [
+        "ycombinator",
+        // "airbus",
+        "elevenlabs",
+        // "trust",
+        "lovable",
+        "supabase",
+        "hasura",
+        // "startengine",
+        // "mistralai",
+        // "raycast",
+        "researchgate",
+        // "heygen",
+        "posthog"
+    ],
+    "easyToYell": [
+        // "ycombinator",
+        "airbus",
+        // "elevenlabs",
+        "trust",
+        // "lovable",
+        // "supabase",
+        // "hasura",
+        // "startengine",
+        // "mistralai",
+        "raycast",
+        // "researchgate",
+        "heygen",
+        "posthog"
+    ],
+    "goodBandName": [
+        // "ycombinator",
+        "elevenlabs",
+        "lovable",
+        // "hasura",
+        "trust",
+        // "airbus",
+        // "supabase",
+        "startengine",
+        // "mistralai",
+        "raycast",
+        "researchgate",
+        // "heygen",
+        "posthog"
+    ],
+    "explainable": [
+        "ycombinator",
+        "airbus",
+        // "trust",
+        "lovable",
+        // "elevenlabs",
+        // "supabase",
+        // "hasura",
+        "startengine",
+        // "mistralai",
+        // "raycast",
+        "researchgate",
+        // "heygen",
+        // "posthog"
+    ],
+    "shortNames": [
+        // "ycombinator",
+        "airbus",
+        "trust",
+        "lovable",
+        // "elevenlabs",
+        // "supabase",
+        "hasura",
+        // "startengine",
+        // "mistralai",
+        "raycast",
+        // "researchgate",
+        "heygen",
+        "posthog"
+    ],
+    "realWords": [
+        // "ycombinator",
+        "airbus",
+        "trust",
+        "lovable",
+        "elevenlabs",
+        // "supabase",
+        // "hasura",
+        "startengine",
+        // "mistralai",
+        // "raycast",
+        "researchgate",
+        // "heygen",
+        "posthog"
+    ],
+    "american": [
+        "ycombinator",
+        // "airbus",
+        // "elevenlabs",
+        "trust",
+        // "lovable",
+        "supabase",
+        "hasura",
+        "startengine",
+        // "mistralai",
+        // "raycast",
+        "researchgate",
+        "heygen",
+        "posthog"
+    ],
+    "pokemon": [
+        // "ycombinator",
+        // "airbus",
+        // "elevenlabs",
+        // "trust",
+        "lovable",
+        "supabase",
+        "hasura",
+        // "startengine",
+        "mistralai",
+        "raycast",
+        // "researchgate",
+        "heygen",
+        // "posthog"
+    ]
+}
 
 interface CustomerProps {
     number: number
@@ -489,8 +702,19 @@ const PageNavigation = () => {
 
 const Customers = () => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const hugeCustomers = getCustomers(HUGE)
-    const gonnaBeHugeCustomers = getCustomers(GONNA_BE_HUGE)
+    const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
+    const [isAnimating, setIsAnimating] = React.useState(false)
+    const logoRefs = React.useRef<Record<string, HTMLElement>>({})
+
+    // Get all companies
+    const allCompanies = [...COL1, ...COL2]
+
+    // Get companies in column 1 (those in the breakdown) and column 2 (the rest)
+    const companiesInCol1 = companyAttributes[currentBreakdown as keyof typeof companyAttributes] || []
+    const companiesInCol2 = allCompanies.filter(company => !companiesInCol1.includes(company))
+
+    const column1 = getCustomers(companiesInCol1)
+    const column2 = getCustomers(companiesInCol2)
 
     // Helper function to render logo - same logic as CustomersSlide.tsx
     const renderLogo = (customer: any) => {
@@ -526,31 +750,101 @@ const Customers = () => {
         )
     }
 
+    // Toggle function to change breakdown with FLIP animation
+    const toggleBreakdown = () => {
+        if (isAnimating) return
+
+        // Step 1: Record current positions (First)
+        const beforePositions: Record<string, DOMRect> = {}
+        Object.keys(logoRefs.current).forEach(slug => {
+            const element = logoRefs.current[slug]
+            if (element) {
+                beforePositions[slug] = element.getBoundingClientRect()
+            }
+        })
+
+        setIsAnimating(true)
+
+        // Step 2: Change breakdown (Last)
+        const breakdownKeys = Object.keys(companyBreakdowns)
+        const currentIndex = breakdownKeys.indexOf(currentBreakdown)
+        const availableBreakdowns = breakdownKeys.filter((_, index) => index !== currentIndex)
+        const randomIndex = Math.floor(Math.random() * availableBreakdowns.length)
+        setCurrentBreakdown(availableBreakdowns[randomIndex])
+
+        // Step 3: Calculate and animate differences (Invert & Play)
+        requestAnimationFrame(() => {
+            Object.keys(logoRefs.current).forEach(slug => {
+                const element = logoRefs.current[slug]
+                if (element && beforePositions[slug]) {
+                    const afterPosition = element.getBoundingClientRect()
+                    const deltaX = beforePositions[slug].left - afterPosition.left
+                    const deltaY = beforePositions[slug].top - afterPosition.top
+
+                    // Apply initial transform (Invert)
+                    element.style.transform = `translate(${deltaX}px, ${deltaY}px)`
+                    element.style.transition = 'none'
+
+                    // Animate to final position (Play)
+                    requestAnimationFrame(() => {
+                        element.style.transition = 'transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                        element.style.transform = 'translate(0, 0)'
+                    })
+                }
+            })
+
+            // Reset animation state
+            setTimeout(() => {
+                setIsAnimating(false)
+                // Clean up transforms
+                Object.keys(logoRefs.current).forEach(slug => {
+                    const element = logoRefs.current[slug]
+                    if (element) {
+                        element.style.transform = ''
+                        element.style.transition = ''
+                    }
+                })
+            }, 600)
+        })
+    }
+
+    const currentLabels = companyBreakdowns[currentBreakdown as keyof typeof companyBreakdowns]
     const columns = [
-        { name: 'Huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
-        { name: 'Gonna be huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: currentLabels.col1, width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: currentLabels.col2, width: 'minmax(auto,1fr)', align: 'center' as const },
     ]
 
     // Helper function to render customer with case study link
     const renderCustomerWithLink = (customer: any) => (
-        hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
-            <OSButton
-                key={customer.slug}
-                asLink
-                to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
-                state={{ newWindow: true }}
-                className="relative border border-transparent hover:border-primary rounded-sm"
-            >
-                {renderLogo(customer)}
-                <Tooltip trigger={
-                    <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
-                } delay={0} sideOffset={14}>
-                    <p className="text-sm mb-0">
-                        {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
-                    </p>
-                </Tooltip>
-            </OSButton>
-        ) : <span className="inline-flex py-1.5 px-2" key={customer.slug}>{renderLogo(customer)}</span>
+        <div
+            key={customer.slug}
+            className="inline-block"
+            ref={(el: HTMLElement | null) => {
+                if (el) logoRefs.current[customer.slug] = el
+            }}
+        >
+            {hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
+                <OSButton
+                    asLink
+                    to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
+                    state={{ newWindow: true }}
+                    className="relative border border-transparent hover:border-primary rounded-sm"
+                >
+                    {renderLogo(customer)}
+                    <Tooltip trigger={
+                        <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
+                    } delay={0} sideOffset={14}>
+                        <p className="text-sm mb-0">
+                            {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
+                        </p>
+                    </Tooltip>
+                </OSButton>
+            ) : (
+                <span className="inline-flex py-1.5 px-2">
+                    {renderLogo(customer)}
+                </span>
+            )}
+        </div>
     )
 
     const rows = [
@@ -559,7 +853,7 @@ const Customers = () => {
                 {
                     content: (
                         <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
-                            {hugeCustomers.map(renderCustomerWithLink)}
+                            {column1.map(renderCustomerWithLink)}
                         </div>
                     ),
                     className: '!p-4',
@@ -567,7 +861,7 @@ const Customers = () => {
                 {
                     content: (
                         <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
-                            {gonnaBeHugeCustomers.map(renderCustomerWithLink)}
+                            {column2.map(renderCustomerWithLink)}
                         </div>
                     ),
                     className: '!p-4',
@@ -577,6 +871,79 @@ const Customers = () => {
     ]
 
     return <>
+        <div className="relative @xl:pt-1">
+            <div className="@xl:absolute right-0 -top-4">
+                <OSButton
+                    onClick={toggleBreakdown}
+                    variant="secondary"
+                    size="sm"
+                    className="font-semibold [&_span]:min-w-[146px]"
+                    disabled={isAnimating}
+                >
+                    {isAnimating ? '🔀 Shuffling...' : <><IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies</>}
+                </OSButton>
+            </div>
+
+            {/* 
+            <select
+                value={currentBreakdown}
+                onChange={(e) => {
+                    if (!isAnimating) {
+                        // Record positions before change for FLIP animation
+                        const beforePositions: Record<string, DOMRect> = {}
+                        Object.keys(logoRefs.current).forEach(slug => {
+                            const element = logoRefs.current[slug]
+                            if (element) {
+                                beforePositions[slug] = element.getBoundingClientRect()
+                            }
+                        })
+
+                        setIsAnimating(true)
+                        setCurrentBreakdown(e.target.value)
+
+                        // Apply FLIP animation
+                        requestAnimationFrame(() => {
+                            Object.keys(logoRefs.current).forEach(slug => {
+                                const element = logoRefs.current[slug]
+                                if (element && beforePositions[slug]) {
+                                    const afterPosition = element.getBoundingClientRect()
+                                    const deltaX = beforePositions[slug].left - afterPosition.left
+                                    const deltaY = beforePositions[slug].top - afterPosition.top
+
+                                    element.style.transform = `translate(${deltaX}px, ${deltaY}px)`
+                                    element.style.transition = 'none'
+
+                                    requestAnimationFrame(() => {
+                                        element.style.transition = 'transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                                        element.style.transform = 'translate(0, 0)'
+                                    })
+                                }
+                            })
+
+                            setTimeout(() => {
+                                setIsAnimating(false)
+                                Object.keys(logoRefs.current).forEach(slug => {
+                                    const element = logoRefs.current[slug]
+                                    if (element) {
+                                        element.style.transform = ''
+                                        element.style.transition = ''
+                                    }
+                                })
+                            }, 600)
+                        })
+                    }
+                }}
+                className="px-2 py-1 text-sm border border-primary rounded bg-primary text-primary"
+                disabled={isAnimating}
+            >
+                {Object.entries(companyBreakdowns).map(([key, labels]) => (
+                    <option key={key} value={key}>
+                        {labels.col1} / {labels.col2}
+                    </option>
+                ))}
+            </select>
+             */}
+        </div>
         <OSTable columns={columns} rows={rows} size="sm" className="mt-4" rowAlignment="top" />
         <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
             Open customers.mdx

@@ -43,6 +43,7 @@ export default function Enterprise() {
                         href="/talk-to-a-human"
                         type="secondary"
                         size="lg"
+                        state={{ newWindow: true }}
                     >
                         Talk to a human
                     </TrackedCTA>

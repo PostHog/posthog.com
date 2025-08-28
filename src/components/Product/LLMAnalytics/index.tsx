@@ -12,7 +12,7 @@ import {
     IconShield,
     IconStack,
     IconTerminal,
-    IconLlmObservability,
+    IconLlmAnalytics,
     IconUnlock,
     IconUserPaths,
     IconWarning,
@@ -372,7 +372,7 @@ export const ProductLLMAnalytics = () => {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="purple"
-                    icon={<IconLlmObservability />}
+                    icon={<IconLlmAnalytics />}
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Monitor and debug</span> your AI products'
                     description="Analyze traces, spans, per-user costs, latency, and more"
