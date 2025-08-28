@@ -360,7 +360,7 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute mt-12 md:mt-0 md:right-0 md:bottom-12">
+                        <div className="absolute mt-12 bottom-32 md:mt-0 md:right-0 md:bottom-12">
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
