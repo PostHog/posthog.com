@@ -6,7 +6,7 @@ import {
     IconMessage,
     IconRewindPlay,
     IconToggle,
-    IconLlmObservability,
+    IconLlmAnalytics,
 } from '@posthog/icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
@@ -94,7 +94,7 @@ const initialProducts = [
         volume: 100000,
     },
     {
-        Icon: IconLlmObservability,
+        Icon: IconLlmAnalytics,
         name: 'LLM analytics',
         type: 'llm_analytics',
         color: 'purple',

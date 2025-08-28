@@ -1603,7 +1603,7 @@ export const communityMenu = {
                 {
                     name: 'LLM analytics',
                     color: 'purple',
-                    icon: 'IconLlmObservability',
+                    icon: 'IconLlmAnalytics',
                     url: '/tutorials/ai-engineering',
                 },
             ],
@@ -4225,7 +4225,7 @@ export const docsMenu = {
             url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
-            icon: 'IconLlmObservability',
+            icon: 'IconLlmAnalytics',
             description: 'Insights for building your AI and LLM products',
             children: [
                 {
@@ -4545,7 +4545,7 @@ export const productMenu = {
         },
         {
             name: 'LLM analytics',
-            icon: 'IconLlmObservability',
+            icon: 'IconLlmAnalytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
             url: '/llm-analytics',
