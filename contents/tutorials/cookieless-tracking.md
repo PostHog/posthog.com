@@ -43,6 +43,7 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 This helps you comply with privacy regulations at the expense of a less detailed data capture. 
+
 ## If you want to show a cookie banner
 
 If you want to maintain the full tracking capability of PostHog, you'll need to show a cookie banner and only enable cookies when the user consents. To do this, you can set the cookieless mode to `"on_reject"`, create a cookie banner, and connect it to PostHog's consent management methods. 
