@@ -1274,6 +1274,10 @@ export const handbookSidebar = [
                                 name: 'Account planning',
                                 url: '/handbook/growth/sales/account-planning',
                             },
+                            {
+                                name: 'Cross-selling',
+                                url: '/handbook/growth/sales/cross-selling',
+                            },
                         ],
                     },
 
