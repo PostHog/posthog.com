@@ -7,7 +7,7 @@ import Icon from './Icon'
 
 const Chip = ({ icon, title, className }) => {
     return (
-        <div className={`bg-gray-accent-light flex space-x-2 py-2 px-4 rounded-lg items-center mt-2 ${className}`}>
+        <div className={`bg-accent-light flex space-x-2 py-2 px-4 rounded-lg items-center mt-2 ${className}`}>
             <Icon className="w-4 h-4" name={icon} />
             <span className="text-sm sm:text-[16px] font-bold">{title}</span>
         </div>
@@ -35,7 +35,7 @@ const PipelineGraphic = () => {
             <div className="flex justify-center items-center lg:flex-col relative lg:col-span-3">
                 <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-full -top-8 z-10">
                     <Icon name="logo-bullet" className="w-16 h-16 mx-auto" />
-                    <h5 className="text-lg font-bold hidden bg-tan border border-gray/50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
+                    <h5 className="text-lg font-bold hidden bg-tan border border-primary/50 px-4 py-2 lg:inline-flex rounded-full border-solid leading-none">
                         Self-serve product analytics for 90% of your product questions
                     </h5>
                 </div>

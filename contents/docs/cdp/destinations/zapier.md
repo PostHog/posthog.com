@@ -18,7 +18,7 @@ You'll also need access to the relevant Zapier account.
 
 ## Installation
 
-### Option 1: Via the PostHog app in Zapier  <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
+### Option 1: Via the PostHog app in Zapier  <span class="bg-accent text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
 
 1. In your Zapier dashboard, go to your [zaps](https://zapier.com/app/assets/zaps) and create a new zap.
 2. Add the [PostHog app](https://zapier.com/apps/posthog/integrations/webhook) as a trigger.

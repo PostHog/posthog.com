@@ -9,7 +9,7 @@ import Link from 'components/Link'
 
 const Edit = ({ image, color, name, date, profileID, text }) => {
     return (
-        <li className="border-b-half border-border dark:border-dark last:border-b-0 mb-2 pb-2 last:pb-0 last:mb-0">
+        <li className="border-b-half border-input last:border-b-0 mb-2 pb-2 last:pb-0 last:mb-0">
             <span className="flex items-center space-x-1 text-sm">
                 <Avatar image={image} color={color} className="size-4" />
                 <span>

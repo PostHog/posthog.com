@@ -11,7 +11,7 @@ dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
 const Skeleton = () => {
-    return <div className="animate-pulse bg-accent dark:bg-accent-dark h-[160px] w-full rounded-md" />
+    return <div className="animate-pulse bg-accent h-[160px] w-full rounded-md" />
 }
 
 const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
@@ -21,7 +21,7 @@ const ThreadHeaderRow = ({ columns }: { columns: string[] }) => {
                 return (
                     <div
                         key={index}
-                        className="font-medium text-[13px] pb-1 mb-1 text-left border-b border-border dark:border-dark text-primary/60 dark:text-primary-dark/60 even:pl-2 even:hidden even:text-right @2xs:even:block"
+                        className="font-medium text-[13px] pb-1 mb-1 text-left border-b border-input text-secondary even:pl-2 even:hidden even:text-right @2xs:even:block"
                     >
                         {column}
                     </div>
@@ -103,7 +103,7 @@ export default function Questions(): JSX.Element {
                             <div>
                                 <Link
                                     to="/community/dashboard"
-                                    className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
+                                    className="text-[13px] font-bold flex items-center bg-accent rounded-lg px-2 py-1"
                                 >
                                     View all
                                     <IconArrowRight className="inline-block w-4 h-4 ml-1" />
@@ -134,7 +134,7 @@ export default function Questions(): JSX.Element {
                         <div>
                             <Link
                                 to="/questions"
-                                className="text-[13px] font-bold flex items-center bg-accent dark:bg-accent-dark rounded-lg px-2 py-1"
+                                className="text-[13px] font-bold flex items-center bg-accent rounded-lg px-2 py-1"
                             >
                                 View all
                                 <IconArrowRight className="inline-block w-4 h-4 ml-1" />

@@ -52,7 +52,7 @@ const Form = () => {
                     <input
                         onChange={(e) => setEmail(e.target.value)}
                         name="email"
-                        className="py-[12px] block px-[13px] text-[15px] rounded-sm border border-gray-accent-light mt-1 w-full"
+                        className="py-[12px] block px-[13px] text-[15px] rounded-sm border border-primary mt-1 w-full"
                         type="email"
                         required
                         placeholder="Email address..."
@@ -71,10 +71,13 @@ const Form = () => {
 
 export default function Subscribe() {
     return (
-        <div className="max-w-[800px] sm:mt-0 mt-12 w-full flex sm:space-x-9 sm:space-y-0 space-y-4 relative bg-white py-9 px-7 border border-gray-accent-light rounded-md sm:flex-row flex-col">
+        <div className="max-w-[800px] sm:mt-0 mt-12 w-full flex sm:space-x-9 sm:space-y-0 space-y-4 relative bg-white py-9 px-7 border border-primary rounded-md sm:flex-row flex-col">
             <div className="w-[233px] sm:mt-0 -mt-24">
                 <div className="sm:absolute bottom-0">
-                    <CloudinaryImage width={233} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Subscribe/hog-the-builder.png" />
+                    <CloudinaryImage
+                        width={233}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Subscribe/hog-the-builder.png"
+                    />
                 </div>
             </div>
             <div className="flex-grow">

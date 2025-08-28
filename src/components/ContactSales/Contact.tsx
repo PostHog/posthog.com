@@ -12,7 +12,7 @@ import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from 'hooks/usePostHog'
 
-const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
+const inputContainerClasses = `p-1 bg-primary border-b border-primary group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
 const fields: {
     name: string
@@ -198,9 +198,9 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
                 value={props.value}
                 onChange={handleChange}
                 id={`${other.name}-${other.value}`}
-                {...(reference ? { ref: reference } : {})}
+                ref={reference || null}
             />
-            <span className="block py-2 w-full rounded-md border-[2px] peer-focus:border-dashed peer-checked:border-solid border-light dark:border-dark  peer-focus:border-black/40 dark:peer-focus:border-white/75 peer-checked:border-red dark:peer-checked:border-yellow text-sm">
+            <span className="block py-2 w-full rounded-md border-[2px] peer-focus:border-dashed peer-checked:border-solid border-primary  peer-focus:border-black/40 dark:peer-focus:border-white/75 peer-checked:border-red dark:peer-checked:border-yellow text-sm">
                 {label || other.value}
             </span>
         </label>
@@ -211,7 +211,8 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
     const { options, errors, validateField, openOptions, setOpenOptions, values, setFieldValue, ...other } = props
     const error = errors[props.name]
     const open = openOptions.includes(props.name)
-    const ref = useRef()
+    const radioRef = useRef<HTMLInputElement>(null)
+
     return (
         <div
             onFocus={() => {
@@ -221,7 +222,7 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                 if (options && !openOptions.includes(other.name)) {
                     setOpenOptions([...openOptions, other.name])
                     if (!values[other.name]) {
-                        ref.current?.focus()
+                        radioRef.current?.focus()
                         setFieldValue(other.name, options[0]?.value || options[0]?.hubspotValue)
                     }
                 }
@@ -248,7 +249,7 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
                         const { value, hubspotValue, label } = option
                         return (
                             <Radio
-                                reference={index === 0 && ref}
+                                reference={index === 0 ? radioRef : undefined}
                                 key={value}
                                 {...props}
                                 value={value || hubspotValue}
@@ -269,17 +270,19 @@ const ValidationSchema = Yup.object().shape({
     workEmail: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
     companyName: Yup.string().required('Please enter your company name'),
     role: Yup.string().required('Please select your role'),
-    monthlyActiveUsers: Yup.number().required('Please select a value'),
+    contactSalesMonthlyActiveUsers: Yup.string().nullable(),
     details: Yup.string().nullable(),
     whereDidYouHearAboutPostHog: Yup.string().nullable(),
 })
 
 export default function Contact({
     initialValues = {},
+    onSubmit,
 }: {
     initialValues?: {
         [k: string]: any
     }
+    onSubmit?: () => void
 }) {
     const posthog = usePostHog()
     const { href } = useLocation()
@@ -325,6 +328,7 @@ export default function Contact({
             if (res.status === 200) {
                 setSubmitted(true)
                 scroll.scrollToTop()
+                onSubmit?.()
             }
         },
         validationSchema: ValidationSchema,
@@ -338,7 +342,7 @@ export default function Contact({
                     <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                 </div>
             )}
-            <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
+            <div className="bg-light dark:bg-dark border border-primary px-6 py-8 rounded-md mt-4">
                 <h4>
                     ✅ <strong>Message received!</strong>
                 </h4>
@@ -357,7 +361,7 @@ export default function Contact({
                 <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
                 breakneck pace!
             </p>
-            <div className="grid border border-light dark:border-dark rounded overflow-hidden">
+            <div className="grid border border-primary rounded overflow-hidden">
                 {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
                     return (
                         <Component

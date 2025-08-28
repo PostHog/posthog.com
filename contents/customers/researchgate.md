@@ -2,9 +2,9 @@
 title: 'How ResearchGate tests product changes for over 25M users'
 customer: ResearchGate
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_logo_1627258295.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_light_b4db4cc5d5.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/resaerchgate_logo_dark_e8ea7ae745.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_dark_502e1077d4.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_posthog_7a5a2cf3ac.png
 featuredCustomer: false

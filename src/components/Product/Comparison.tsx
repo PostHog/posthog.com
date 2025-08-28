@@ -93,7 +93,7 @@ export default function Comparison({ comparison, columnCount, truncate, classNam
                     }`}
                 >
                     {/* header row */}
-                    <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-dark">
+                    <div className="bg-accent leading-tight p-2 mt-2 border-t border-input">
                         <strong></strong>
                     </div>
                     {activeCompanies.map((company) => {
@@ -103,10 +103,7 @@ export default function Comparison({ comparison, columnCount, truncate, classNam
                                 <Logo className="w-32" />
                             </div>
                         ) : (
-                            <div
-                                key={company}
-                                className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 text-center"
-                            >
+                            <div key={company} className="bg-accent leading-tight p-2 mt-2 text-center">
                                 <strong className="block">{company}</strong>
                                 {comparisonURL && (
                                     <span className="block text-[12px] md:text-sm leading-tight">

@@ -8,7 +8,7 @@ import blurb from './images/blurb.svg'
 
 export default function FooterCTA() {
     return (
-        <div className="flex pt-16 pb-12 px-6 sm:px-12 md:pr-24 lg:pr-6 xl:pr-24 text-primary dark:text-primary-dark bg-accent dark:bg-accent-dark border border-light dark:border-dark items-center dark rounded-[10px] mt-6 md:mt-12 relative">
+        <div className="flex pt-16 pb-12 px-6 sm:px-12 md:pr-24 lg:pr-6 xl:pr-24 text-primary dark:text-primary-dark bg-accent border border-primary items-center dark rounded-[10px] mt-6 md:mt-12 relative">
             <div className="w-full text-center sm:text-left">
                 <h2 className="text-5xl">Try it free.</h2>
                 <p className="w-">It takes less than 5 minutes.</p>
@@ -23,7 +23,10 @@ export default function FooterCTA() {
                 <AnimateIntoView className="absolute -left-20">
                     <img src={blurb} />
                 </AnimateIntoView>
-                <CloudinaryImage width={252} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/FooterCTA/images/surprised-hog.png" />
+                <CloudinaryImage
+                    width={252}
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/FooterCTA/images/surprised-hog.png"
+                />
             </div>
         </div>
     )

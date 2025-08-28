@@ -90,13 +90,12 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
     const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return (
-        <li className="border-b border-border dark:border-dark p-1">
+        <li className="border-b border-input p-1">
             <button
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
-                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
-                    focused === index ? 'bg-accent dark:bg-accent-dark' : ''
-                }`}
+                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${focused === index ? 'bg-accent' : ''
+                    }`}
             >
                 <div className="size-6 overflow-hidden rounded-full">
                     <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
@@ -196,14 +195,14 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
         >
             <button
                 type="button"
-                className="p-1 rounded-full bg-white dark:bg-dark border border-border dark:border-dark absolute top-0.5 right-0.5 z-20"
+                className="p-1 rounded-full bg-light dark:bg-dark border border-input absolute top-0.5 right-0.5 z-20"
                 onClick={onClose}
             >
                 <IconX className="w-3" />
             </button>
             <ul
                 ref={listRef}
-                className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto"
+                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
             >
                 {mentionProfiles.map((profile, index) => (
                     <MentionProfile
@@ -230,6 +229,7 @@ export default function RichText({
     preview = true,
     label = '',
     mentions = false,
+    bodyKey = 'body',
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -328,7 +328,7 @@ export default function RichText({
     }, [cursor])
 
     useEffect(() => {
-        setFieldValue('body', value)
+        setFieldValue(bodyKey, value)
     }, [value])
 
     const handleKeyDown = (e) => {
@@ -365,7 +365,7 @@ export default function RichText({
         const mention =
             profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
                 ? `@max `
-                : `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+                : `@${profile.attributes.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         textarea.current?.focus()
@@ -376,7 +376,7 @@ export default function RichText({
             <div onClick={handleContainerClick}>
                 <input className="hidden" {...getInputProps()} />
                 {showPreview ? (
-                    <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
+                    <div className="bg-primary text-primary border-none text-base h-[200px] py-3 px-4 resize-none w-full outline-none focus:ring-0 overflow-auto">
                         <Markdown
                             transformImageUri={(fakeImagePath) => {
                                 const objectURL = values.images.find(
@@ -427,13 +427,13 @@ export default function RichText({
                             />
                         </label>
                         {isDragActive && (
-                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
+                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:dark: after:rounded-md">
                                 <p className="m-0 font-semibold">Drop image here</p>
                             </div>
                         )}
                         <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
                             <span className="text-xs opacity-70">
-                                {values.body.length} / {maxLength}
+                                {values[bodyKey]?.length} / {maxLength}
                             </span>
                         </span>
                     </div>
@@ -445,7 +445,7 @@ export default function RichText({
                                 <li key={index}>
                                     <Tooltip content={button.tooltipContent} placement="top">
                                         <button
-                                            className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
+                                            className="flex items-center bg-none border-none rounded-sm text-black/50  justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
                                             onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
                                         >
                                             {button.icon}
@@ -457,7 +457,7 @@ export default function RichText({
                         <li>
                             <Tooltip content="Image" placement="top">
                                 <button
-                                    className="flex items-center bg-none border-none rounded-sm text-primary/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] relative hover:border hover:border-light dark:hover:border-dark hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
+                                    className="flex items-center bg-none border-none rounded-sm text-muted justify-center w-[32px] h-[32px] relative hover:border hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
                                     onClick={(e) => {
                                         e.preventDefault()
                                         open()
@@ -488,11 +488,8 @@ export default function RichText({
                                         <button
                                             onClick={() => setShowPreview(false)}
                                             type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
-                                                showPreview
-                                                    ? ''
-                                                    : '!border border-light dark:border-dark bg-light dark:bg-dark'
-                                            }`}
+                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${showPreview ? '' : '!border border-primary bg-light dark:bg-dark'
+                                                }`}
                                         >
                                             <Edit />
                                         </button>
@@ -503,11 +500,8 @@ export default function RichText({
                                         <button
                                             onClick={() => setShowPreview(true)}
                                             type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                                showPreview
-                                                    ? 'border border-light dark:border-dark bg-light dark:bg-dark'
-                                                    : ''
-                                            }`}
+                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${showPreview ? 'border border-primary bg-light dark:bg-dark' : ''
+                                                }`}
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -543,7 +537,7 @@ export default function RichText({
                 {!value && (
                     <div className="absolute top-4 right-4">
                         <a
-                            className="!text-primary/30 hover:!text-primary/50 dark:!text-primary-dark/30 dark:hover:!text-primary-dark/50"
+                            className="!text-muted hover:!text-muted"
                             href="https://www.markdownguide.org/cheat-sheet/"
                             target="_blank"
                             rel="noreferrer"

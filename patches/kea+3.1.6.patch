@@ -1,0 +1,26 @@
+diff --git a/node_modules/kea/lib/index.cjs.js b/node_modules/kea/lib/index.cjs.js
+index 68e14d9..9d6f0cf 100644
+--- a/node_modules/kea/lib/index.cjs.js
++++ b/node_modules/kea/lib/index.cjs.js
+@@ -848,6 +848,8 @@ var getStoreState$1 = function getStoreState() {
+ function useSelector(selector) {
+   return shim.exports.useSyncExternalStore(getContext().store.subscribe, function () {
+     return selector(getStoreState$1());
++  }, function () {
++    return selector(getStoreState$1());
+   });
+ }
+ function useValues(logic) {
+diff --git a/node_modules/kea/lib/index.esm.js b/node_modules/kea/lib/index.esm.js
+index 7376cc6..a8f02fe 100644
+--- a/node_modules/kea/lib/index.esm.js
++++ b/node_modules/kea/lib/index.esm.js
+@@ -822,6 +822,8 @@ var getStoreState$1 = function getStoreState() {
+ function useSelector(selector) {
+   return shim.exports.useSyncExternalStore(getContext().store.subscribe, function () {
+     return selector(getStoreState$1());
++  }, function () {
++    return selector(getStoreState$1());
+   });
+ }
+ function useValues(logic) {
