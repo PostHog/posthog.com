@@ -309,16 +309,14 @@ const AIAgents = () => {
     )
 }
 
-const HUGE = ['ycombinator', 'airbus', 'elevenlabs', 'trust', 'lovable',]
+const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'heygen']
 
-const GONNA_BE_HUGE = [
+const COL2 = [
     'supabase',
-    'hasura',
-    'startengine',
     'mistralai',
+    'elevenlabs',
+    'hasura',
     'raycast',
-    'researchgate',
-    'heygen',
     'posthog',
 ]
 
@@ -489,8 +487,8 @@ const PageNavigation = () => {
 
 const Customers = () => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const hugeCustomers = getCustomers(HUGE)
-    const gonnaBeHugeCustomers = getCustomers(GONNA_BE_HUGE)
+    const column1 = getCustomers(COL1)
+    const column2 = getCustomers(COL2)
 
     // Helper function to render logo - same logic as CustomersSlide.tsx
     const renderLogo = (customer: any) => {
@@ -527,8 +525,8 @@ const Customers = () => {
     }
 
     const columns = [
-        { name: 'Huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
-        { name: 'Gonna be huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: 'VCs love them', width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: 'Product engineers love them', width: 'minmax(auto,1fr)', align: 'center' as const },
     ]
 
     // Helper function to render customer with case study link
@@ -559,7 +557,7 @@ const Customers = () => {
                 {
                     content: (
                         <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
-                            {hugeCustomers.map(renderCustomerWithLink)}
+                            {column1.map(renderCustomerWithLink)}
                         </div>
                     ),
                     className: '!p-4',
@@ -567,7 +565,7 @@ const Customers = () => {
                 {
                     content: (
                         <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
-                            {gonnaBeHugeCustomers.map(renderCustomerWithLink)}
+                            {column2.map(renderCustomerWithLink)}
                         </div>
                     ),
                     className: '!p-4',
