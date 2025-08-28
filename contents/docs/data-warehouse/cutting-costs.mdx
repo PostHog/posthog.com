@@ -28,12 +28,14 @@ For example, you can use the following query to identify potential unused or und
 WITH cleaned AS (
     SELECT 
       query,
+      -- Normalize SQL for easier parsing
       replaceRegexpAll(replaceRegexpAll(replaceRegexpAll(lowerUTF8(query), '--[^\\n]*', ' '), '/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/', ' '), '\\s+', ' ') AS q
     FROM query_log
 ),
 tail AS (
   SELECT 
     query,
+    -- Take everything after the *last* " from "
     arrayElement(splitByString(' from ', q),
     length(splitByString(' from ', q))) AS after_from
   FROM cleaned
@@ -41,11 +43,12 @@ tail AS (
 tokens AS (
   SELECT 
     query,
+    -- Extract the first token after FROM
     trim(BOTH ' ' FROM replaceAll(replaceAll(arrayElement(splitByChar(',', arrayElement(splitByChar('(', arrayElement(splitByChar(' ', after_from), 1)), 1)), 1), '`',''), '"','')) AS tok
   FROM tail
 )
 SELECT 
-  IF(position(tok,'.') > 0, arrayElement(splitByChar('.', tok), length(splitByChar('.', tok))), tok) AS table_after_from,
+  tok AS table_after_from,
   count() AS hits
 FROM tokens
 WHERE tok != ''
@@ -55,4 +58,11 @@ ORDER BY hits ASC
 
 This query fetches your most queried tables by parsing the `FROM` clause from every query. It's a bit complex, we know.
 
-It effectively lists how often each table is referenced. This means it also includes views and other queries that reference tables, so it's not a perfect one-to-one-map, but it might be able to help you identify unused or underused tables and disable syncs for them.
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_28_at_08_27_54_2x_be171663f4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_28_at_08_28_10_2x_883b4e4f4e.png"
+  alt="Query to identify most queried tables"
+  classes="rounded"
+/>
+
+It effectively lists how often each table is referenced. This means it also includes views, subqueries, and other queries that reference tables, so it's not a perfect one-to-one-map, but it might be able to help you identify unused or underused tables and disable syncs for them.
