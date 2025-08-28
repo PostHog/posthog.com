@@ -66,6 +66,7 @@ const BoomerInstall = () => (
             src="https://app.posthog.com/signup"
             className="w-full h-full border-0 rounded relative z-10"
             title="PostHog signup"
+            fetchPriority="high"
         />
     </div>
 )

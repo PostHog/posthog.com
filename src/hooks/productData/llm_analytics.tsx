@@ -1,9 +1,9 @@
 import React from 'react'
-import { IconClockRewind, IconLlmObservability } from '@posthog/icons'
+import { IconClockRewind, IconLlmAnalytics } from '@posthog/icons'
 
 export const llmAnalytics = {
   name: 'LLM Analytics',
-  Icon: IconLlmObservability,
+  Icon: IconLlmAnalytics,
   description: 'Track costs, performance, and usage of your AI features',
   handle: 'llm_analytics',
   slug: 'llm-analytics',
