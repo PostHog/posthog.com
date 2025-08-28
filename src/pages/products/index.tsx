@@ -20,11 +20,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { IconGrid, IconListSquare } from 'components/OSIcons/Icons'
 import usePostHog from 'hooks/usePostHog'
 import { useWindow } from '../../context/Window'
-import {
-    categoryOrder,
-    categoryDisplayNames,
-    getProductsForCategory
-} from '../../constants/productNavigation'
+import { categoryOrder, categoryDisplayNames, getProductsForCategory } from '../../constants/productNavigation'
 import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
 
@@ -103,6 +99,7 @@ const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
+    const [hoveredProduct, setHoveredProduct] = useState<any>(null)
     const [lastClickTime, setLastClickTime] = useState(0)
     const [lastClickedProduct, setLastClickedProduct] = useState<string | null>(null)
     const [isListLayout, setIsListLayout] = useState(true)
@@ -136,10 +133,13 @@ export default function Products(): JSX.Element {
     )
 
     // Handle search changes
-    const handleSearchChange = useCallback((query: string) => {
-        setSearchTerm(query)
-        debouncedSearch(query)
-    }, [debouncedSearch])
+    const handleSearchChange = useCallback(
+        (query: string) => {
+            setSearchTerm(query)
+            debouncedSearch(query)
+        },
+        [debouncedSearch]
+    )
 
     // Update filtered products when allProducts changes
     useEffect(() => {
@@ -178,7 +178,10 @@ export default function Products(): JSX.Element {
 
     const handleRightSidebarClose = useCallback(() => {
         setSelectedProduct(null)
+        setHoveredProduct(null)
     }, [])
+
+    const sidePanelProduct = hoveredProduct || selectedProduct
 
     return (
         <>
@@ -209,10 +212,10 @@ export default function Products(): JSX.Element {
                     />
                 }
                 rightSidebarPanel={
-                    selectedProduct ? (
+                    sidePanelProduct ? (
                         <div className="p-4">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-lg font-semibold">{selectedProduct.name}</h2>
+                                <h2 className="text-lg font-semibold">{sidePanelProduct.name}</h2>
                                 <button
                                     onClick={handleRightSidebarClose}
                                     className="p-1 hover:bg-accent rounded-sm transition-colors"
@@ -227,19 +230,19 @@ export default function Products(): JSX.Element {
                                     {(() => {
                                         const ProductIcon = () => (
                                             <div className="flex justify-center">
-                                                {selectedProduct.parentIcon ? (
+                                                {sidePanelProduct.parentIcon ? (
                                                     <div className="relative">
-                                                        {selectedProduct.Icon &&
-                                                            React.createElement(selectedProduct.Icon, {
+                                                        {sidePanelProduct.Icon &&
+                                                            React.createElement(sidePanelProduct.Icon, {
                                                                 className: `size-16`,
                                                             })}
                                                     </div>
-                                                ) : selectedProduct.Icon ? (
+                                                ) : sidePanelProduct.Icon ? (
                                                     <div className={`relative size-16`}>
                                                         <IconPresentation
-                                                            className={`size-16 [&_.bg-front]:fill-${selectedProduct.color} [&_.bg-rear]:fill-${selectedProduct.colorSecondary}`}
+                                                            className={`size-16 [&_.bg-front]:fill-${sidePanelProduct.color} [&_.bg-rear]:fill-${sidePanelProduct.colorSecondary}`}
                                                         />
-                                                        {React.createElement(selectedProduct.Icon, {
+                                                        {React.createElement(sidePanelProduct.Icon, {
                                                             className: `size-8 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
                                                         })}
                                                     </div>
@@ -250,16 +253,16 @@ export default function Products(): JSX.Element {
                                         )
 
                                         // If screenshots exist, show screenshot with icon overlay
-                                        if (selectedProduct.screenshots && selectedProduct.screenshots.overview) {
+                                        if (sidePanelProduct.screenshots && sidePanelProduct.screenshots.overview) {
                                             return (
                                                 <div className="space-y-2">
                                                     <h3 className="text-sm font-semibold">Screenshot</h3>
                                                     <div
-                                                        className={`bg-${selectedProduct.color} rounded-md p-2 relative`}
+                                                        className={`bg-${sidePanelProduct.color} rounded-md p-2 relative`}
                                                     >
                                                         <img
-                                                            src={selectedProduct.screenshots.overview.src}
-                                                            alt={selectedProduct.screenshots.overview.alt}
+                                                            src={sidePanelProduct.screenshots.overview.src}
+                                                            alt={sidePanelProduct.screenshots.overview.alt}
                                                             className="w-full rounded-md border border-primary"
                                                         />
                                                         <div className="absolute bottom-0 left-0">
@@ -275,25 +278,25 @@ export default function Products(): JSX.Element {
                                     })()}
 
                                     {/* SEO info if available */}
-                                    {selectedProduct.seo && (
+                                    {sidePanelProduct.seo && (
                                         <div className="space-y-2">
                                             <h3 className="text-sm font-semibold">SEO Information</h3>
-                                            {selectedProduct.seo.title && (
+                                            {sidePanelProduct.seo.title && (
                                                 <p className="text-sm text-secondary">
-                                                    <strong>Title:</strong> {selectedProduct.seo.title}
+                                                    <strong>Title:</strong> {sidePanelProduct.seo.title}
                                                 </p>
                                             )}
-                                            {selectedProduct.seo.description && (
+                                            {sidePanelProduct.seo.description && (
                                                 <p className="text-sm text-secondary">
-                                                    <strong>Description:</strong> {selectedProduct.seo.description}
+                                                    <strong>Description:</strong> {sidePanelProduct.seo.description}
                                                 </p>
                                             )}
                                         </div>
                                     )}
 
                                     {/* Open product button */}
-                                    {selectedProduct.status == 'WIP' ? (
-                                        <Subscribe key={selectedProduct.slug} selectedProduct={selectedProduct} />
+                                    {sidePanelProduct.status == 'WIP' ? (
+                                        <Subscribe key={sidePanelProduct.slug} selectedProduct={sidePanelProduct} />
                                     ) : (
                                         <div className="pt-4">
                                             <OSButton
@@ -301,12 +304,12 @@ export default function Products(): JSX.Element {
                                                 width="full"
                                                 size="md"
                                                 asLink
-                                                to={`/${selectedProduct.slug}`}
+                                                to={`/${sidePanelProduct.slug}`}
                                                 state={{ newWindow: true }}
                                                 icon={<Icons.IconArrowRight />}
                                                 iconPosition="right"
                                             >
-                                                Open {selectedProduct.name}
+                                                Open {sidePanelProduct.name}
                                             </OSButton>
                                             <p className="text-xs text-muted text-center mt-2">
                                                 Tip: Double-click the icon to open directly
@@ -317,22 +320,23 @@ export default function Products(): JSX.Element {
                                     {/* Product info */}
                                     <div className="space-y-2">
                                         <p className="text-sm text-secondary">
-                                            <strong>Slug:</strong> <pre className="inline">/{selectedProduct.slug}</pre>
+                                            <strong>Slug:</strong>{' '}
+                                            <pre className="inline">/{sidePanelProduct.slug}</pre>
                                         </p>
-                                        {selectedProduct.description && (
+                                        {sidePanelProduct.description && (
                                             <p className="text-sm text-secondary">
-                                                <strong>Description:</strong> {selectedProduct.description}
+                                                <strong>Description:</strong> {sidePanelProduct.description}
                                             </p>
                                         )}
-                                        {selectedProduct.category && (
+                                        {sidePanelProduct.category && (
                                             <p className="text-sm text-secondary">
-                                                <strong>Category:</strong> {selectedProduct.category}
+                                                <strong>Category:</strong> {sidePanelProduct.category}
                                             </p>
                                         )}
-                                        {selectedProduct.status && (
+                                        {sidePanelProduct.status && (
                                             <p className="text-sm text-secondary">
                                                 <strong>Status:</strong>{' '}
-                                                <span className="uppercase">{selectedProduct.status}</span>
+                                                <span className="uppercase">{sidePanelProduct.status}</span>
                                             </p>
                                         )}
                                     </div>
@@ -485,17 +489,21 @@ export default function Products(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${isListLayout
-                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                            : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 items-start'
-                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
+                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                                : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 items-start'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
                                                             <button
                                                                 key={product.slug}
                                                                 onClick={(e) => handleProductClick(product, e)}
-                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
-                                                                    } ${appWindowWidth <= 768 ? 'cursor-pointer' : ''}`}
+                                                                onMouseEnter={(e) => setHoveredProduct(product)}
+                                                                onMouseLeave={(e) => setHoveredProduct(null)}
+                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
+                                                                    selectedProduct?.slug === product.slug ? '' : ''
+                                                                } ${appWindowWidth <= 768 ? 'cursor-pointer' : ''}`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>
