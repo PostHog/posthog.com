@@ -179,25 +179,25 @@ posthog.init('<ph_project_api_key>', {
 
 ## Cookieless tracking
 
-PostHog can be configured to do cookieless tracking in two different ways.
+PostHog can be configured to do cookieless tracking by setting `cookieless_mode` to `always` or `on_reject`.
 
-First is `cookieless_mode: "always"`. This:
+First is `cookieless_mode: "always"`:
 - Doesn't require a cookie banner (unless something else on your website uses cookies)
 - Never stores PostHog data in cookies or local/session storage
 - Prevents you from calling `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations
-  - Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
+- Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
 
-Second is `cookieless_mode: "on_reject"`. This:
+Second is `cookieless_mode: "on_reject"`:
 - Is useful if you do want to show a cookie banner and only enable cookies when the user consents with `posthog.opt_in_capturing()` or similar method
 - Never stores PostHog data in cookies or local/session storage until the user opts in
-- Doesn't capture any events until after consent is either given or denied
+- **No events are captured** until after consent is either given or denied
 - If consent is denied, still counts those users, using a privacy-preserving hash calculated on PostHog's servers
 
 <CalloutBox type="info" title="Cookieless tracking">
 
 Using `cookieless_mode` helps comply with cookie and consent requirements. You still need to configure data collection and [storage](/docs/privacy/data-storage) separately to comply with relevant regulations.
 
-Do not send data that could be used to identify users (e.g. setting an email address as a [Person property](/docs/product-analytics/person-properties) if they have not consented.
+Do not send data that could be used to identify users (e.g. setting an email address as a [Person property](/docs/product-analytics/person-properties) if they have not given consent.
 
 </CalloutBox>
 

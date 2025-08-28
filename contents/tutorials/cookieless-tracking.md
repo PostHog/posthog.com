@@ -16,7 +16,7 @@ tags:
 
 Normally, PostHog stores some information about the user in their browser using a cookie. This approach is typical for analytics tools and enables user tracking across sessions, caching feature flag data, and more. 
 
-There are some situations where you don't want to use cookies and do cookieless tracking instead. For example, when you have concerns about user privacy or regulation such as [GDPR](/docs/integrate/gdpr) or [HIPAA](/docs/privacy/hipaa-compliance) (or just you hate cookie banners).
+There are some situations where you don't want to use cookies and do cookieless tracking instead. For example, when you have concerns about user privacy or to comply with regulation such as [GDPR](/docs/integrate/gdpr) or [HIPAA](/docs/privacy/hipaa-compliance) (or you just hate cookie banners).
 
 This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/libraries/js) to do cookieless audience measurement.
 
@@ -27,6 +27,7 @@ This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/librar
 ## If you want to delete your cookie banner
 
 If you never want to show a cookie banner, you can set the cookieless mode to `"always"`. In this mode:
+
 * PostHog never stores data in cookies or local/session storage.
 * You cannot call `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations.
 * PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers.
@@ -35,13 +36,13 @@ To set this mode, add the following config option to your PostHog initialization
 
 ```js
 posthog.init('<ph_project_api_key>', {
-    cookieless_mode: 'always',
+    cookieless_mode: 'always', // +
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>'
 })
 ```
 
-This helps compliance with privacy regulations at the expensive of more detailed data capture. 
+This helps you comply with privacy regulations at the expense of a less detailed data capture. 
 ## If you want to show a cookie banner
 
 If you want to maintain the full tracking capability of PostHog, you'll need to show a cookie banner and only enable cookies when the user consents. To do this, you can set the cookieless mode to `"on_reject"`, create a cookie banner, and connect it to PostHog's consent management methods. 
@@ -51,17 +52,17 @@ With this:
 * PostHog doesn't capture any events until after consent is either given or denied.
 * If consent is denied, PostHog will still be able to count those users with a privacy-preserving hash.
 
-To set this mode, add the following config option to your PostHog initialization:
+To enable this mode, add the following config option to your PostHog initialization:
 
 ```js
 posthog.init('<ph_project_api_key>', {
-    cookieless_mode: 'on_reject',
+    cookieless_mode: 'on_reject', // +
     api_host:'<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>'
 })
 ```
 
-Then connect PostHog to your cookie banner to show it when consent is pending like this:
+Then connect PostHog to your cookie banner and display it when consent is pending:
 
 ```js
 if (posthog.get_explicit_consent_status() === 'pending') {
@@ -93,7 +94,7 @@ hash(team_id, daily_salt, ip_address, user_agent, hostname)
 
 A hash is an irreversible function, and a salt is a random value that changes daily which we delete once that day's events have been processed.
 
-This means that whilst the IP address and User Agent are Personal Data, the hash is not considered Personal Data, and it is impossible to reverse-engineer any Personal Data from the hash.
+This means that whilst the IP address and User Agent are Personal Data, the hash is not considered Personal Data because it is impossible to obtain any Personal Data from the hash.
 
 
 ## Limitations
