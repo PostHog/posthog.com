@@ -61,6 +61,8 @@ export default {
       "<ph_project_api_key>",
       {
         api_host: "<ph_client_api_host>",
+        api_defaults: "<ph_posthog_js_defaults>",
+        cookieless_mode: "on_reject",
       }
     );
   },
@@ -225,7 +227,7 @@ export default {
   name: 'App',
   data: function() {
     return {
-      showBanner: !(this.$posthog.has_opted_out_capturing()||this.$posthog.has_opted_in_capturing())
+      showBanner: this.$posthog.get_explicit_consent_status() === 'pending'
     }
   },
   components: {
