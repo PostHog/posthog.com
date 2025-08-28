@@ -56,8 +56,8 @@ const DataWarehouse: React.FC = () => {
                     subheader="Getting started"
                     title="Data warehouse"
                     description="A single source for all your important data."
-                    buttonText="Link your first source"
-                    buttonLink="/docs/cdp/sources"
+                    buttonText="Installation guide"
+                    buttonLink="/docs/data-warehouse/start-here"
                     imageColumnClasses="mt-4 md:-mt-8"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                     imageClasses="max-h-48 md:max-h-64"
@@ -71,7 +71,7 @@ const DataWarehouse: React.FC = () => {
                     ]}
                 />
                 <Content />
-                <CallToAction to="/docs/data-warehouse/query" width="full">
+                <CallToAction to="/docs/data-warehouse/start-here" width="full">
                     Visit the manual
                 </CallToAction>
             </PostLayout>
