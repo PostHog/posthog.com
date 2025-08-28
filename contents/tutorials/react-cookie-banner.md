@@ -45,7 +45,7 @@ npm install --save posthog-js
 
 Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `posthog-js/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))
 
-```js
+```js file=main.jsx
 // main.jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -124,7 +124,7 @@ cd src
 touch Banner.jsx
 ```
 
-In the `Banner.jsx` file, we’ll create a basic React component function with wording about cookies and accept or decline buttons connected to `handleAcceptCookies` and `handleDeclineCookies` functions (that just log to the console for now).
+In the `Banner.jsx` file, we create a basic React component with a blurb about cookies. We also add accept and decline buttons connected to the `handleAcceptCookies` and `handleDeclineCookies` functions (that just log to the console for now).
 
 ```js
 // Banner.jsx
@@ -245,7 +245,7 @@ Back on our site, clicking accept or decline now opts users in or out of trackin
 To make sure everything works, try the following steps:
 
 1. Go to the site and click accept or decline on the banner.
-2. Check the banner disappears and whether cookies are set or not.
+2. Confirm that the banner disappears and whether cookies are set or not.
 3. Reload the page and check that the banner doesn’t load.
 4. Delete your PostHog key in local storage and try with the other consent option.
 
