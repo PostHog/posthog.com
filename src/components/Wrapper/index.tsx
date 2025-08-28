@@ -50,7 +50,7 @@ export default function Wrapper() {
                                         : {}
                                 }
                                 exit={{
-                                    y: window.innerHeight + 200,
+                                    y: typeof window !== 'undefined' ? window.innerHeight + 200 : 0,
                                     transition: {
                                         delay: index * 0.05,
                                         ease: 'easeInOut',
