@@ -3425,6 +3425,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconListTreeChild',
+                    color: 'purple',
+                },
+                {
                     name: 'Remote config',
                     url: '/docs/feature-flags/remote-config',
                     icon: 'IconGear',
