@@ -4340,13 +4340,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Tutorials and guides',
-                    url: '/docs/llm-analytics/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
                     name: 'Resources',
                 },
                 {
@@ -4354,6 +4347,13 @@ export const docsMenu = {
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
+                },
+                {
+                    name: 'More tutorials',
+                    url: '/docs/llm-analytics/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Third-party integrations',
