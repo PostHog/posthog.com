@@ -1,6 +1,6 @@
 ---
 title: How to set up embedded analytics
-date: 2025-03-28
+date: 2025-08-29
 author:
  - ian-vanagas
 tags:
@@ -23,7 +23,7 @@ npx create-next-app@latest embedded-analytics
 
 We’ll then update `page.tsx` to an input to select between two “teams” and a button. We’ll use this to capture data later. 
 
-```js
+```ts
 // app/page.tsx
 'use client'
 import { useState } from 'react'
@@ -49,7 +49,6 @@ export default function Home() {
     </div>
   );
 }
-
 ```
 
 ## Setting up PostHog
@@ -60,80 +59,28 @@ To capture analytics for our app, start by installing `posthog-js`:
 npm i posthog-js
 ```
 
-Afterwards, create a `providers.tsx` file and set up a PostHog initialization in it using your project API key and host from [your project settings](https://us.posthog.com/settings/project). 
+Afterwards, create a `instrumentation-client.ts` file at the base of your project and set up a PostHog initialization in it using your project API key and host from [your project settings](https://us.posthog.com/settings/project). 
 
 ```js
-// app/providers.tsx
-'use client'
-
+// instrumentation-client.ts
 import posthog from 'posthog-js'
-import { PostHogProvider as PHProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
 
-export function PostHogProvider({ children }: { children: React.ReactNode }) {
-    useEffect(() => {
-      posthog.init('<ph_project_api_key>', {
-        api_host: '<ph_api_host>',
-        defaults: '<ph_posthog_js_defaults>',
-      })
-  }, [])
-
-  return (
-    <PHProvider client={posthog}>
-      {children}
-    </PHProvider>
-  )
-}
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+});
 ```
 
-Next, import the `PostHogProvider` into `layout.tsx` like this:
+To use it, import PostHog in `page.tsx` and capture a `home_button_clicked` event like this:
 
-```js
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { PostHogProvider } from "./providers";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <PostHogProvider>
-          {children}
-        </PostHogProvider>
-      </body>
-    </html>
-  );
-}
-
-```
-
-Finally, add PostHog to `page.tsx` and capture a `home_button_clicked` event like this:
-
-```js
+```ts
+// app/page.tsx
 'use client'
-
 import { useState } from 'react'
-import { usePostHog } from 'posthog-js/react'
+import posthog from 'posthog-js' // +
 
 export default function Home() {
   const [team, setTeam] = useState('blue')
-  const posthog = usePostHog()
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -147,9 +94,10 @@ export default function Home() {
         <option value="red">Red Team</option>
       </select>
       <button className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600" onClick={() => {
-        posthog.capture('home_button_clicked', { team: team })
+        posthog.capture('home_button_clicked', { // +
+          team: team, // +
+        }) // +
       }}>Click me</button>
-      
     </div>
   );
 }
@@ -173,15 +121,15 @@ Now that we have data being captured, we can set up our queries to get this data
 
 This starts by creating API routes in our app to make both PostHog queries. In our `app` folder, we’ll create a new `api` folder, then create `pageviews` and `button-clicks` folders inside that, and then a `route.ts` file inside each of those.
 
-### Pageviews
+### Setting up our pageviews query
 
 In `pageviews/route.ts`, we start by setting our host URL and project ID, both of which you can get from the URL of your PostHog instance. 
 
-It also requires a personal API key with project **query read** permissions. You can set this up in your user settings.
+It also requires a personal API key with project **query read** permissions. You can set this up in [your user settings](https://app.posthog.com/settings/user-api-keys).
 
 We then use these to set up a request to PostHog’s `query` endpoint with an SQL query to get pageviews for the last 7 days. Together, this looks like this:
 
-```js
+```ts
 // src/app/api/pageviews/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -240,11 +188,11 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-### Button clicks
+### Setting up our button clicks query
 
 In `button-clicks/route.ts`, we’ll add a similar API request to get button clicks. The difference is that it takes a variable for the team we use to get the button clicks for that specific team. 
 
-```js
+```ts
 // src/app/api/button-clicks/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -313,12 +261,12 @@ To do this, we will create a new `analytics` folder inside the `app` directory. 
 
 It also formats the pageview data for use in a trend and lets people choose between `red` and `blue` team button click stats. Altogether, this looks like this:
 
-```js
+```ts
 // app/analytics/page.tsx
 'use client'
 import React, { useState, useEffect } from 'react';
 
-export default function Home() {
+export default function AnalyticsPage() {
   const [pageviews, setPageviews] = useState<Array<{date: string, views: number}>>([]);
   const [buttonClicks, setButtonClicks] = useState('');
   const [team, setTeam] = useState('blue');
@@ -411,7 +359,7 @@ When we run `npm run dev` again and go to `http://localhost:3000/analytics`, we�
 
 Toggling between the two team’s button clicks gives you an idea of how you can segment embedded analytics for multiple teams or users. 
 
-The final problem we need to solve: making the pageview data look good. We’ll set up better visuals in the next step with Recharts.
+The next problem we need to solve: making the pageview data look better. We’ll set up better visuals in the next step with Recharts.
 
 ## Setting up Recharts to visualize PostHog data
 
@@ -423,11 +371,11 @@ npm i recharts
 
 Next, in `app/analytics/page.tsx`, we’ll import the components needed for a line chart and set it up with our formatted pageview data like this:
 
-```js
+```ts
 // app/analytics/page.tsx
 'use client'
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'; // +
 
 export default function Home() {
   // ... existing code
@@ -435,14 +383,14 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-5">
       <label>Pageviews:</label>
-      {pageviews.length > 0 && (
-        <LineChart width={800} height={400} data={pageviews}>
-          <Line type="monotone" dataKey="views" stroke="#8884d8" />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-        </LineChart>
-      )}
+      {pageviews.length > 0 && ( // +
+        <LineChart width={800} height={400} data={pageviews}> // +
+          <Line type="monotone" dataKey="views" stroke="#8884d8" /> // +
+          <XAxis dataKey="date" /> // +
+          <YAxis /> // +
+          <Tooltip /> // +
+        </LineChart> // +
+      )} // +
 		  {/* ... existing code */}
     </div>
   );
@@ -452,6 +400,85 @@ export default function Home() {
 This creates a simple (and much nicer looking) final visualization for our pageview data.
 
 ![Recharts](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_28_at_09_46_26_311c50b731.png)
+
+## Using a materialized view to improve performance
+
+Although these queries are simple and fast, future queries you might want to add could be slower. To make more complex queries as fast as possible, you can use a [materialized view](/docs/data-warehouse/views/materialize).
+
+We can show this off by materializing our pageview query. To do this, go to the SQL editor in PostHog and enter your pageview query:
+
+```sql
+SELECT 
+  toDate(timestamp) AS date,
+  count() AS pageviews
+FROM events
+WHERE 
+  event = '$pageview'
+GROUP BY date
+ORDER BY date DESC
+LIMIT 7
+```
+
+Select the **Materialization** tab below the query and click **Save and materialize**. Give your view a name like `mat_embedded_pageviews`, press **Submit**, and then the materialization will start.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_29_at_11_48_18_2x_6e82125b07.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_29_at_11_47_58_2x_e9c15e9a5c.png"
+  alt="Materialization"
+  classes="rounded"
+/>
+
+Once done, you can then use the materialized view back in your pageview API route like this:
+
+```ts focusOnLines=20-23
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(request: NextRequest) {
+
+  const posthogUrl = "https://us.posthog.com" // or eu...
+  const projectId = "5...."
+  const personalApiKey = "phx_1..."
+
+  try {
+    const url = `${posthogUrl}/api/projects/${projectId}/query/`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${personalApiKey}`
+      },
+      body: JSON.stringify({
+        query: {
+          kind: 'HogQLQuery',
+          query: `SELECT * from mat_embedded_pageviews`
+        }
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      return NextResponse.json(
+        { error: `PostHog API error: ${errorText}` },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
+
+    return NextResponse.json(data.results);
+    
+  } catch (error) {
+    console.error('Error processing pageviews request:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+The response is the same as before but the query is faster, which helps provide a better experience for your users.
 
 ## Further reading
 
