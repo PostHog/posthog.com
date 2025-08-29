@@ -4,15 +4,17 @@ import { IconXNotTwitter } from 'components/OSIcons'
 import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { useApp } from '../../../context/App'
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 export const Letterhead = () => {
     const { siteSettings } = useApp()
 
     return (
-        <div className="not-prose border-b border-primary py-4 flex items-center justify-between">
+        <div className="not-prose border-b border-primary py-4 flex flex-col gap-2 @sm:flex-row items-center justify-between">
             <div>
                 <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
             </div>
+            <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-muted pt-2">From the desk of</div>
             <aside className="flex gap-2 items-center">
                 <div>
                     <Link
@@ -27,11 +29,11 @@ export const Letterhead = () => {
                     </Link>
                 </div>
                 <div className="flex flex-col gap-0 leading-none">
-                    <div className="uppercase text-xs tracking-wider text-center text-muted pb-0.5">From the desk of</div>
+                    <div className="hidden @sm:flex uppercase text-xs tracking-wider text-center text-muted pb-0.5">From the desk of</div>
                     <strong>James Hawkins</strong>
                     <span className="text-secondary text-sm">Co-founder</span>
                     <div>
-                        <IconXNotTwitter className="inline-block size-4" />
+                        <IconXNotTwitter className="inline-block size-4 mr-1" />
                         <Link to="https://x.com/james406" external className="text-sm">
                             james406
                         </Link>

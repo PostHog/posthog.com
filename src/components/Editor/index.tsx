@@ -599,7 +599,7 @@ export function Editor({
                                         )
                                     })}
                                     {availableGroups && availableGroups.length > 0 && (
-                                        <div className="ml-auto flex items-center space-x-1">
+                                        <div className="@xl:ml-auto flex items-center space-x-1">
                                             <span className="text-sm font-bold">Group by</span>
                                             <Select
                                                 placeholder="Group by"

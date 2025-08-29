@@ -20,7 +20,7 @@ export const HandbookToc: React.FC = () => {
         content: (
             <section className="p-4 @xl:p-8 max-w-4xl mx-auto">
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
-                    <div className="-mt-16 md:-mt-12">
+                    <div className="-mt-4 @lg:-mt-12">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                             alt="This hog has an answer"

@@ -60,9 +60,9 @@ export const TeamMember = (props: any) => {
     // Format start date for tooltip
     const formattedStartDate = startDate
         ? new Date(startDate).toLocaleDateString('en-US', {
-              month: 'long',
-              year: 'numeric',
-          })
+            month: 'long',
+            year: 'numeric',
+        })
         : null
 
     // Check role for custom tooltip text (customer-facing roles take priority)
@@ -118,8 +118,8 @@ export const TeamMember = (props: any) => {
                                                 pineappleOnPizza === true
                                                     ? 'StickerPineappleYes'
                                                     : pineappleOnPizza === false
-                                                    ? 'StickerPineappleNo'
-                                                    : 'StickerPineappleUnknown'
+                                                        ? 'StickerPineappleNo'
+                                                        : 'StickerPineappleUnknown'
                                             }
                                         />
                                     }
@@ -127,8 +127,8 @@ export const TeamMember = (props: any) => {
                                     {pineappleOnPizza === true
                                         ? 'Loves'
                                         : pineappleOnPizza === false
-                                        ? 'Hates'
-                                        : 'Undecided about'}{' '}
+                                            ? 'Hates'
+                                            : 'Undecided about'}{' '}
                                     pineapple on pizza
                                 </Tooltip>
                             </ZoomHover>
@@ -382,7 +382,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
         <div data-scheme="primary" className="bg-primary h-full">
             <SEO title="Team - PostHog" />
             <ScrollArea className="h-full">
-                <div className="columns-2 gap-4 mb-4">
+                <div className="@lg:columns-2 gap-4 mb-4">
                     <p className="mt-0">
                         We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
                     </p>
