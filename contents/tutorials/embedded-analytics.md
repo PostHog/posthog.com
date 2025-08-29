@@ -59,7 +59,7 @@ To capture analytics for our app, start by installing `posthog-js`:
 npm i posthog-js
 ```
 
-Afterwards, create a `instrumentation-client.ts` file at the base of your project and set up a PostHog initialization in it using your project API key and host from [your project settings](https://us.posthog.com/settings/project). 
+Afterwards, create a `instrumentation-client.ts` file at the base of your project and set up a PostHog initialization in it using your project API key and host from [your project settings](http://app.posthog.com/settings/project).
 
 ```js
 // instrumentation-client.ts
