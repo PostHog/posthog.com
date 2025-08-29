@@ -53,9 +53,9 @@ const openaiClient = createOpenAI({
 const model = withTracing(openaiClient("gpt-4-turbo"), phClient, {
   posthogDistinctId: "user_123", // optional
   posthogTraceId: "trace_123", // optional
-  posthogProperties: { "conversation_id": "abc123", "paid": true }, // optional
+  posthogProperties: { conversationId: "abc123", paid: true }, // optional
   posthogPrivacyMode: false, // optional
-  posthogGroups: { "company": "company_id_in_your_db" }, // optional
+  posthogGroups: { company: "companyIdInYourDb" }, // optional
 });
 
 phClient.shutdown()

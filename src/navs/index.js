@@ -4342,6 +4342,25 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Tracking custom properties',
+                    url: '/docs/llm-analytics/custom-properties',
+                    icon: 'IconGear',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Link session replay',
+                    url: '/docs/llm-analytics/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link error tracking',
+                    url: '/docs/llm-analytics/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
                     name: 'Manual capture',
                     url: '/docs/llm-analytics/manual-capture',
                     icon: 'IconCode',
