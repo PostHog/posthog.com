@@ -303,9 +303,7 @@ const AIAgents = () => {
     ]
 
     return (
-        <div className="mt-4">
-            <OSTable columns={columns} rows={rows} size="sm" overflowX />
-        </div>
+        <OSTable columns={columns} rows={rows} size="sm" />
     )
 }
 
@@ -871,7 +869,7 @@ const Customers = () => {
     ]
 
     return <>
-        <div className="relative @xl:pt-1">
+        <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
             <div className="@xl:absolute right-0 -top-4">
                 <OSButton
                     onClick={toggleBreakdown}
@@ -944,7 +942,7 @@ const Customers = () => {
             </select>
              */}
         </div>
-        <OSTable columns={columns} rows={rows} size="sm" className="mt-4" rowAlignment="top" />
+        <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
         <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
             Open customers.mdx
         </OSButton>
@@ -1021,6 +1019,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <Button url="/customer-data-infrastructure">README: Data warehouse / CDP / ETL.md</Button>,
+    },
+    {
+        name: 'ButtonPricing',
+        kind: 'flow',
+        props: [],
+        Editor: () => <Button url="/pricing">Explore pricing</Button>,
     },
     {
         name: 'ButtonAI',
