@@ -3070,12 +3070,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Calendar heatmap',
-                    url: '/docs/product-analytics/calendar-heatmap',
-                    icon: 'IconCalendar',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Tools',
                 },
                 {
@@ -3423,6 +3417,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
+                },
+                {
+                    name: 'Feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconListTreeChild',
+                    color: 'purple',
                 },
                 {
                     name: 'Remote config',

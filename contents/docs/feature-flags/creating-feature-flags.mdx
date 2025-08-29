@@ -103,4 +103,14 @@ Percentage rollouts are available for all flags. More options depend on your Pos
     classes="rounded"
 />
 
+### Advanced release conditions
+
+For more sophisticated feature rollouts, you can also create **feature flag dependencies** where one flag's activation depends on another flag's state. This enables complex scenarios like:
+
+- Enabling features only for users in beta programs
+- Creating conditional experiments based on other feature participation
+- Setting up safety mechanisms where critical flags must be active first
+
+Learn more about [feature flag dependencies](/docs/feature-flags/dependencies).
+
 > **Can I migrate my feature flags from another tool?** If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).

@@ -48,7 +48,7 @@ In PostHog, because of the sensitive data available, not all user permissions ar
 
 Each organization can only have one owner, and new users are added as members by default.
 
-|                                                                                       | Member (base level) | Administrator | Owner |
+| Permission                                                                            | Member (base level) | Administrator | Owner |
 | ------------------------------------------------------------------------------------- | ------------------- | ------------- | ----- |
 | Viewing and querying project data                                                     | ✅                  | ✅            | ✅    |
 | Inviting new members                                                                  | ✅                  | ✅            | ✅    |
