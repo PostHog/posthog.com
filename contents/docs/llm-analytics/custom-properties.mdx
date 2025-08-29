@@ -10,14 +10,14 @@ availability:
 
 Custom properties in LLM analytics enable you to add metadata to your [AI generations](/docs/llm-analytics/generations), making it easier to filter, analyze, and understand your LLM usage patterns. 
 
-This guide shows you how to set custom properties using PostHog's LLM analytics SDKs and leverage them for better observability.
+This guide shows you how to set custom properties using PostHog's LLM analytics SDKs and leverage them for better observability. For specific integration patterns, see our guides on [linking to session replay](/docs/llm-analytics/link-session-replay) and [linking to error tracking](/docs/llm-analytics/link-error-tracking).
 
 ## Why use custom properties?
 
 Custom properties help you:
 - **Filter [traces](/docs/llm-analytics/traces)** by specific criteria (e.g., subscription tier, feature flags, account settings)
 - **Track prompt versions** to measure improvements over time
-- **Link backend LLM events** to session replays and error tracking
+- **Link backend LLM events** to [session replays](/docs/llm-analytics/link-session-replay) and [error tracking](/docs/llm-analytics/link-error-tracking)
 - **Group related [generations](/docs/llm-analytics/generations)** by custom business logic (e.g, sessions, conversations, tenants )
 - **Monitor costs** by user segments or features
 
@@ -47,10 +47,10 @@ const response = await openai.responses.create({
   model: 'gpt-5',
   messages: [{ role: 'user', content: 'Hello' }],
   posthogProperties: {
-    custom_property: 'custom value',
-    conversation_id: 'conv_abc123',
-    user_tier: 'premium',
-    feature: 'chat_assistant'
+    customProperty: 'customValue',
+    conversationId: 'conv_abc123',
+    subscriptionTier: 'premium',
+    feature: 'chatAssistant'
   }
 })
 ```
@@ -75,7 +75,7 @@ response = client.responses.create(
     posthog_properties={
         "custom_property": "custom_value",
         "conversation_id": "conv_abc123",
-        "user_tier": "premium",
+        "subscription_tier": "premium",
         "feature": "chat_assistant"
     }
 )
@@ -92,8 +92,8 @@ Track LLM usage by subscription tier or payment plan to monitor costs and usage 
 <MultiLanguage>
 
 ```javascript file=JavaScript
-const getUserTier = (userId) => {
-  // Your logic to determine user tier
+const getSubscriptionTier = (userId) => {
+  // Your logic to determine the user subscription tier
   return user.subscription?.tier || 'free'
 }
 
@@ -102,16 +102,16 @@ const response = await openai.responses.create({
   messages: messages,
   posthogDistinctId: userId,
   posthogProperties: {
-    user_tier: getUserTier(userId),
-    monthly_usage: user.currentMonthUsage,
-    rate_limited: user.isRateLimited
+    subscriptionTier: getSubscriptionTier(userId),
+    monthlyUsage: user.currentMonthUsage,
+    rateLimited: user.isRateLimited
   }
 })
 ```
 
 ```python file=Python
-def get_user_tier(user_id):
-    # Your logic to determine user tier
+def get_subscription_tier(user_id):
+    # Your logic to determine the user's subscription tier
     return user.subscription.tier if user.subscription else 'free'
 
 response = client.responses.create(
@@ -119,7 +119,7 @@ response = client.responses.create(
     messages=messages,
     posthog_distinct_id=user_id,
     posthog_properties={
-        "user_tier": get_user_tier(user_id),
+        "user_tier": get_subscription_tier(user_id),
         "monthly_usage": user.current_month_usage,
         "rate_limited": user.is_rate_limited
     }
@@ -223,229 +223,6 @@ response = client.responses.create(
 
 The `$ai_span_name` property will appear as the primary label in your trace visualization, making it easier to identify specific operations.
 
-## Linking to session replay
-
-Connect your backend LLM events to frontend session replays to see the full user journey:
-
-### Frontend: Get the session ID
-
-```javascript
-// In your frontend code
-import posthog from 'posthog-js'
-
-// Get the current session ID
-const sessionId = posthog.getSessionId()
-
-// Send it with your API request
-const response = await fetch('/api/chat', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    message: userInput,
-    sessionId: sessionId  // Include session ID
-  })
-})
-```
-
-### Backend: Include session ID in LLM events
-
-<MultiLanguage>
-
-```javascript file=JavaScript
-app.post('/api/chat', async (req, res) => {
-  const { message, sessionId } = req.body
-  
-  const response = await openai.responses.create({
-    model: 'gpt-5',
-    messages: [{ role: 'user', content: message }],
-    posthogDistinctId: req.userId,
-    posthogProperties: {
-      $session_id: sessionId,  // Links to session replay
-      endpoint: '/api/chat',
-      request_id: generateRequestId()
-    }
-  })
-  
-  res.json({ response: response.choices[0].message.content })
-})
-```
-
-```python file=Python
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    data = request.json
-    message = data['message']
-    session_id = data.get('sessionId')
-    
-    response = client.responses.create(
-        model="gpt-5",
-        messages=[{"role": "user", "content": message}],
-        posthog_distinct_id=current_user.id,
-        posthog_properties={
-            "$session_id": session_id,  # Links to session replay
-            "endpoint": "/api/chat",
-            "request_id": generate_request_id()
-        }
-    )
-    
-    return jsonify({
-        "response": response.choices[0].message.content
-    })
-```
-
-</MultiLanguage>
-
-## Linking to error tracking
-
-Connect your LLM events to error tracking to debug failures and monitor exceptions in your AI workflows. This helps you correlate errors with specific LLM traces and understand what went wrong.
-
-### Capturing LLM-related exceptions
-
-When an LLM operation fails or encounters an error, you can link the exception to the LLM trace:
-
-<MultiLanguage>
-
-```javascript file=JavaScript
-app.post('/api/chat', async (req, res) => {
-  const { message } = req.body
-  const traceId = generateTraceId() // Your trace ID generation logic
-  
-  try {
-    const response = await openai.responses.create({
-      model: 'gpt-5',
-      messages: [{ role: 'user', content: message }],
-      posthogDistinctId: req.userId,
-      posthogTraceId: traceId,  // Sets the trace ID for this LLM call
-      posthogProperties: {
-        endpoint: '/api/chat'
-      }
-    })
-    
-    res.json({ response: response.choices[0].message.content })
-  } catch (error) {
-    // Capture the exception with the same trace ID
-    posthog.captureException(error, {
-      $ai_trace_id: traceId,  // Links exception to the LLM trace
-      endpoint: '/api/chat',
-      user_id: req.userId,
-      llm_model: 'gpt-5',
-      error_type: 'llm_api_error'
-    })
-    
-    res.status(500).json({ error: 'Failed to generate response' })
-  }
-})
-```
-
-```python file=Python
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    data = request.json
-    message = data['message']
-    trace_id = generate_trace_id()  # Your trace ID generation logic
-    
-    try:
-        response = client.responses.create(
-            model="gpt-5",
-            messages=[{"role": "user", "content": message}],
-            posthog_distinct_id=current_user.id,
-            posthog_trace_id=trace_id,  # Sets the trace ID for this LLM call
-            posthog_properties={
-                "endpoint": "/api/chat"
-            }
-        )
-        
-        return jsonify({
-            "response": response.choices[0].message.content
-        })
-    except Exception as e:
-        # Capture the exception with the same trace ID
-        posthog.capture_exception(
-            e,
-            distinct_id=current_user.id,
-            properties={
-                "$ai_trace_id": trace_id,  # Links exception to the LLM trace
-                "endpoint": "/api/chat",
-                "user_id": current_user.id,
-                "llm_model": "gpt-5",
-                "error_type": "llm_api_error"
-            }
-        )
-        
-        return jsonify({"error": "Failed to generate response"}), 500
-```
-
-</MultiLanguage>
-
-### Tracking validation and processing errors
-
-You can also track errors that occur during prompt validation, response processing, or any other part of your LLM pipeline:
-
-<MultiLanguage>
-
-```javascript file=JavaScript
-async function processLLMResponse(response, traceId) {
-  try {
-    // Validate response structure
-    if (!response.choices?.[0]?.message?.content) {
-      throw new Error('Invalid response structure from LLM')
-    }
-    
-    // Process the response
-    const processedContent = await parseAndValidate(response.choices[0].message.content)
-    
-    return processedContent
-  } catch (error) {
-    // Capture processing errors with context
-    posthog.captureException(error, {
-      $ai_trace_id: traceId,
-      stage: 'response_processing',
-      error_details: error.message
-    })
-    
-    throw error
-  }
-}
-```
-
-```python file=Python
-def process_llm_response(response, trace_id):
-    try:
-        # Validate response structure
-        if not response.choices or not response.choices[0].message.content:
-            raise ValueError("Invalid response structure from LLM")
-        
-        # Process the response
-        processed_content = parse_and_validate(response.choices[0].message.content)
-        
-        return processed_content
-    except Exception as e:
-        # Capture processing errors with context
-        posthog.capture_exception(
-            e,
-            distinct_id=current_user.id,
-            properties={
-                "$ai_trace_id": trace_id,
-                "stage": "response_processing",
-                "error_details": str(e)
-            }
-        )
-        
-        raise
-```
-
-</MultiLanguage>
-
-### Benefits of linking errors to LLM traces
-
-By including the `$ai_trace_id` in your exception events, you can:
-
-1. **Navigate between products**: Click from an error in Error Tracking to view the full LLM trace that caused it
-2. **Debug faster**: See the exact prompts, model responses, and metadata associated with failed LLM operations  
-3. **Monitor reliability**: Track error rates for specific LLM models, prompt versions, or user segments
-4. **Set up alerts**: Create alerts for when LLM-related errors exceed thresholds
-5. **Analyze patterns**: Identify common failure modes in your AI features
-
 ## Filtering in the dashboard
 
 Once you've set custom properties, they appear in the PostHog LLM analytics dashboard where you can:
@@ -457,6 +234,6 @@ Once you've set custom properties, they appear in the PostHog LLM analytics dash
 For example, after setting a `conversation_id` property, you can:
 - Filter the generations table to show only events from a specific conversation
 - Create a funnel to track conversation completion rates
-- Build a dashboard showing average cost per conversation by user tier
+- Build a dashboard showing average cost per conversation by user subscription tier
 
 Your custom properties will appear in the event details panel alongside the automatically captured properties like model, tokens, and latency.
