@@ -6,48 +6,9 @@ import TraceEvent from "./_snippets/trace-event.mdx"
 
 Traces are a collection of [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
-## AI event hierarchy
-
-```mermaid
-classDiagram
-  class Trace {
-    $ai_trace_id
-  }
-
-  class Span {
-    $ai_trace_id
-    $ai_parent_id // can be a trace or span
-    $ai_span_id  // uniquely identifies a span
-  }
-
-  class Generation {
-    $ai_trace_id 
-    $ai_parent_id // can be a trace or span
-    $ai_span_id  // uniquely identifies a generation
-  }
-
-  Trace "1" o-- "n" Span 
-  Trace "1" o-- "n" Generation 
-  Span --o Span : nested
-  Span <|-- Generation
-```
-
-<details>
-<summary>The flowchart in text</summary>
-
-Traces consist of the following hierarchy: 
-
-1. A trace is the top-level entity.
-2. A trace contains spans and generations.
-3. A span can be the parent of other spans.
-4. A generation can be the child of a span or trace.
-
-</details>
-
-
 ## Trace timeline
 
-Clicking on a trace opens a timeline of the interaction with all the generation and span events enabling you to see the entire conversation, details about the trace, and the individual generation and span events.
+Clicking on a trace opens a timeline of the interaction with all the generation and span events. The trace timeline enables you to see the entire conversation, profiling details, and the individual generations and spans.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_traces_25e203aa50.png"
@@ -55,6 +16,40 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
   alt="LLM traces"
   classes="rounded"
 />
+
+<Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
+
+
+## AI event hierarchy
+
+```mermaid
+flowchart TD
+
+    A[<strong>$ai_trace</strong>]
+            
+    B[<strong>$ai_generation</strong>]
+      
+    C@{ shape: processes, label: "<strong>$ai_spans</strong>" }
+
+    D[<strong>$ai_generation</strong>]
+
+    E@{ shape: processes, label: "<strong>$ai_spans</strong>" }
+
+    F[<strong>$ai_generation</strong>]
+
+    A --> B
+    A --> C
+    C --> D
+    C --> E
+    E --> F
+```
+
+Traces consist of the following event hierarchy: 
+
+1. A trace is the top-level event entity.
+2. A trace can contain multiple spans and generations.
+3. A span can be the parent of other spans.
+4. A generation can be the child of a span or trace.
 
 ## Event properties
 
