@@ -20,7 +20,7 @@ PostHog offers sync options from every 5 minutes to every 12 hours to monthly. F
 
 Sources and tables continue to sync even if you aren't actively using them. This can cause unnecessary costs. You should regularly audit your sources and tables to see if you can disable ones you aren't using.
 
-Beyond just looking at [the source synced](https://app.posthog.com/pipeline/sources), you can use PostHog's `query_log` table. This contains details on all queries run in your project. You can use this to see what tables are (or are not) being queried and how often.
+Beyond just looking at [the source synced](https://app.posthog.com/pipeline/sources), you can use PostHog's [`query_log` table](/docs/data/query-log). This contains details on all queries run in your project. You can use this to see what tables are (or are not) being queried and how often.
 
 For example, you can use the following query to identify potential unused or underused tables:
 
