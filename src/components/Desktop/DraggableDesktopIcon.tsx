@@ -70,12 +70,10 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
 
     return (
         <motion.li
-            className={`${isMobile ? '' : 'absolute'} w-28 flex justify-center items-center ${
-                isDragging ? 'z-50' : 'z-10'
-            }`}
+            className={`absolute w-28 flex justify-center items-center ${isDragging ? 'z-50' : 'z-10'}`}
             animate={{
-                x: isMobile ? 0 : position.x,
-                y: isMobile ? 0 : position.y,
+                x: position.x,
+                y: position.y,
                 scale: 1,
                 opacity: 1,
             }}
@@ -89,7 +87,7 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
             onDragEnd={handleDragEnd}
             onMouseDown={handleMouseDown}
             whileDrag={{ scale: 1.1, rotate: 2 }}
-            initial={isMobile ? undefined : { x: position.x, y: position.y }}
+            initial={{ x: position.x, y: position.y }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
         >
             <div
