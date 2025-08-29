@@ -1089,7 +1089,12 @@ export default function Home() {
 
     return (
         <>
-            <SEO title="home.mdx" description="Home" image="https://posthog.com/og-image.png" />
+            <SEO
+                title="PostHog is for product engineers"
+                updateWindowTitle={false}
+                description="Home"
+                image="https://posthog.com/images/og/default.png"
+            />
             <MDXEditor
                 hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}

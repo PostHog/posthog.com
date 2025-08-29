@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Fieldset } from 'components/OSFieldset'
 import OSTable from 'components/OSTable'
 import OSTabs from 'components/OSTabs'
@@ -13,11 +13,12 @@ import { TreeMenu } from 'components/TreeMenu'
 import ZoomHover from 'components/ZoomHover'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { IconPresentation } from 'components/OSIcons'
-import { useApp } from 'context/App'
+import { useApp } from '../../context/App'
 import useProduct from '../../hooks/useProduct'
 import CloudinaryImage from "components/CloudinaryImage"
 import { TextureTan } from "components/Textures"
 import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { useWindow } from "../../context/Window"
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -170,16 +171,26 @@ export default function CDP(): JSX.Element {
         ? dataProducts.map((handle) => allProducts.find((product: any) => product.handle === handle)).filter(Boolean)
         : []
 
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'warehouse vs ETL vs CDP??.md')
+        }
+    }, [])
+
     return (
         <>
             <SEO
-                title="warehouse vs ETL vs CDP??.md"
+                title="Customer data infrastructure - PostHog"
+                updateWindowTitle={false}
                 description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`images/og/cdp.jpg`}
             />
             <ReaderView
                 leftSidebar={<LeftSidebarContent />}
-                title="Customer data infrastructure"
+                title="warehouse vs ETL vs CDP??.md"
                 hideTitle={true}
                 {...{
                     header: <>

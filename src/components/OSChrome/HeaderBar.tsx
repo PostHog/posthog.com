@@ -153,12 +153,7 @@ export default function HeaderBar({
                                 }`}
                         >
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}
-                            <div
-                                className={`${typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
-                                        ? ''
-                                        : 'hidden @2xl:block'
-                                    }`}
-                            >
+                            <div>
                                 {hasLeftSidebar && (
                                     <OSButton
                                         size="md"

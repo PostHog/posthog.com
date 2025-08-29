@@ -570,6 +570,12 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isLoaded && isMobile
         ? [
+            {
+                type: 'item' as const,
+                label: 'home.mdx',
+                link: '/',
+            },
+            { type: 'separator' as const },
             // Main navigation items as submenus
             ...mainNavItems.map(item => ({
                 type: 'submenu' as const,

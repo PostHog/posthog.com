@@ -13,6 +13,7 @@ import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 interface Product {
     name: string
@@ -111,7 +112,7 @@ const STORAGE_KEY = 'desktop-icon-positions'
 
 const validateIconPositions = (positions: IconPositions, constraintsRef: React.RefObject<HTMLDivElement>): boolean => {
     const iconWidth = 112
-    const iconHeight = 85
+    const iconHeight = 75
 
     // Get current viewport dimensions
     const containerWidth =
@@ -156,12 +157,13 @@ export default function Desktop() {
             (typeof window !== 'undefined' ? window.innerHeight : 800)
 
         const iconWidth = 112
-        const iconHeight = 85
-        const padding = 16
+        const iconHeight = 75
+        const paddingHorizontal = 4
+        const paddingVertical = 20
         const columnSpacing = 128 // Space between columns (icon width + gap)
 
-        const startY = padding
-        const availableHeight = containerHeight - padding * 2 // Top and bottom padding
+        const startY = paddingVertical
+        const availableHeight = containerHeight - paddingVertical * 2 // Top and bottom padding
         const maxIconsPerColumn = Math.floor(availableHeight / iconHeight)
 
         // Position productLinks starting from the left
@@ -171,7 +173,7 @@ export default function Desktop() {
             const positionInColumn = index % maxIconsPerColumn
 
             positions[app.label] = {
-                x: padding + columnIndex * columnSpacing,
+                x: paddingHorizontal + columnIndex * columnSpacing,
                 y: startY + positionInColumn * iconHeight,
             }
 
@@ -179,9 +181,9 @@ export default function Desktop() {
         })
 
         // Start from the rightmost position and flow left
-        const rightmostStart = containerWidth - padding - iconWidth
+        const rightmostStart = containerWidth - paddingHorizontal - iconWidth
         // Ensure at least one column gap from productLinks
-        const minStartFromLeft = (currentColumn + 1) * columnSpacing + padding
+        const minStartFromLeft = (currentColumn + 1) * columnSpacing + paddingHorizontal
         const rightStartColumn = Math.max(rightmostStart, minStartFromLeft)
 
         apps.forEach((app, index) => {
@@ -291,7 +293,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
-                            alt="Hogzilla"
+                            alt=""
                             width={2574}
                             height={1256}
                             className="absolute right-0 bottom-0 object-contain w-full h-auto"
@@ -303,7 +305,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
-                            alt="Startup Monopoly"
+                            alt=""
                             width={1087}
                             height={540}
                             className="absolute right-0 top-0 w-[1087px] h-[540px]"
@@ -333,7 +335,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
-                            alt="Office party"
+                            alt=""
                             width={997}
                             height={858}
                             className="absolute bottom-24 left-24 w-[498.5px] h-[429px]"
@@ -360,11 +362,11 @@ export default function Desktop() {
                                 backgroundRepeat: 'repeat',
                             }}
                         />
-                        <div className="absolute bottom-8 right-8 md:right-0 md:bottom-12">
+                        <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
-                                alt="Keyboard garden"
+                                alt=""
                                 width={1401}
                                 height={1400}
                                 className="size-[300px] md:size-[700px] dark:hidden"
@@ -372,7 +374,7 @@ export default function Desktop() {
                             <CloudinaryImage
                                 loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt="Keyboard garden"
+                                alt=""
                                 width={1401}
                                 height={1400}
                                 className="size-[300px] md:size-[700px] hidden dark:block"
@@ -385,7 +387,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
-                            alt="2001 bliss"
+                            alt=""
                             width={1180}
                             height={738}
                             imgClassName="absolute inset-0 w-full h-full object-cover object-center"
@@ -398,7 +400,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
-                            alt="Parade"
+                            alt=""
                             width={1565}
                             height={744}
                             className="absolute inset-0"
@@ -407,7 +409,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
-                            alt="Parade"
+                            alt=""
                             width={1565}
                             height={744}
                             className="absolute inset-0"
@@ -420,7 +422,7 @@ export default function Desktop() {
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
-                            alt="Coding at night"
+                            alt=""
                             width={800}
                             height={600}
                             className="absolute bottom-0 left-1/2 -translate-x-1/2 object-contain h-full max-w-none"
@@ -431,7 +433,7 @@ export default function Desktop() {
                         <motion.ul
                             initial={{ opacity: 0 }}
                             animate={{ opacity: rendered ? 1 : 0 }}
-                            className="list-none m-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2 md:mt-0 mt-4"
+                            className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
                         >
                             {allApps.map((app) => {
                                 const position = iconPositions[app.label]

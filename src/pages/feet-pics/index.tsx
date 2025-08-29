@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Explorer from 'components/Explorer'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
@@ -7,6 +7,7 @@ import { productMenu } from '../../navs'
 import { explorerGridColumns } from '../../constants'
 import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -33,7 +34,7 @@ const selectOptions = [
 ]
 
 export default function FeetPics(): JSX.Element {
-    const [isListLayout, setIsListLayout] = useState(true)
+    const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
 
     return (
         <>
@@ -58,8 +59,8 @@ export default function FeetPics(): JSX.Element {
                         title="Layout"
                         hideTitle={true}
                         options={explorerLayoutOptions}
-                        onValueChange={(value) => setIsListLayout(value === 'list')}
-                        value={isListLayout ? 'list' : 'grid'}
+                        onValueChange={setLayoutValue}
+                        value={currentLayout}
                         className="-my-1 ml-2"
                     />
                 }

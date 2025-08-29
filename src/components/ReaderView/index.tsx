@@ -392,38 +392,58 @@ const Menu = () => {
 }
 
 const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
-    const { isNavVisible } = useReaderView()
+    const { isNavVisible, toggleNav } = useReaderView()
+
     return (
         <AnimatePresence>
             {isNavVisible && (
-                <motion.div
-                    id="nav"
-                    className="hidden @2xl/app-reader:block flex-shrink-0 overflow-hidden mb-[-47px] text-primary"
-                    initial={{ width: '250px' }}
-                    animate={{
-                        width: '250px',
-                        transition: { duration: 0.2 },
-                    }}
-                    exit={{
-                        width: 0,
-                        transition: { duration: 0.25, delay: 0.05 },
-                    }}
-                >
+                <>
+                    {/* Backdrop for mobile overlay - only visible on small screens */}
                     <motion.div
-                        className="h-full"
-                        initial={{ opacity: 1 }}
+                        className="fixed inset-0 top-[37px] bg-black/50 z-40 @2xl/app-reader:hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, transition: { duration: 0.2 } }}
+                        exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                        onClick={toggleNav}
+                    />
+
+                    {/* Sidebar - overlay on mobile, normal flow on desktop */}
+                    <motion.div
+                        id="nav"
+                        className="flex-shrink-0 overflow-hidden mb-[-47px] text-primary 
+                                   fixed left-2 top-[47px] bottom-16 z-50 
+                                   @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
+                        initial={{
+                            width: '250px',
+                            x: -250 // Start off-screen on mobile
+                        }}
                         animate={{
-                            opacity: 1,
-                            transition: { duration: 0.5, delay: 1 },
+                            width: '250px',
+                            x: 0, // Slide in
+                            transition: { duration: 0.2 },
                         }}
                         exit={{
-                            opacity: 0,
-                            transition: { duration: 0.05 },
+                            width: '250px',
+                            x: -250, // Slide out on mobile
+                            transition: { duration: 0.25, delay: 0.05 },
                         }}
                     >
-                        <ScrollArea className="px-4">{children}</ScrollArea>
+                        <motion.div
+                            className="h-full bg-primary rounded @2xl/app-reader:rounded-none pt-4 @2xl/app-reader:pt-0"
+                            initial={{ opacity: 1 }}
+                            animate={{
+                                opacity: 1,
+                                transition: { duration: 0.05, delay: 0.2 },
+                            }}
+                            exit={{
+                                opacity: 0,
+                                transition: { duration: 0.05 },
+                            }}
+                        >
+                            <ScrollArea className="px-4">{children}</ScrollArea>
+                        </motion.div>
                     </motion.div>
-                </motion.div>
+                </>
             )}
         </AnimatePresence>
     )
@@ -546,7 +566,7 @@ function ReaderViewContent({
                     <ScrollArea
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
-                            ${renderLeftSidebar && isNavVisible ? 'rounded-l' : 'border-l-0'}
+                            ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:rounded-l' : 'border-l-0'}
                             ${showSidebar && isTocVisible
                                 ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
                                 : 'border-r-0'
