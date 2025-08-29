@@ -15,7 +15,7 @@ export const Tab: React.FC & {
             className={({ selected }) =>
                 classNames(
                     selected
-                        ? 'text-red h-full pb-2 dark:text-yellow font-bold after:h-[2px] after:bg-red dark:after:bg-yellow after:bottom-px after:content-[""] after:absolute after:left-0 after:right-0 focus:ring-transparent focus:outline-none focus-visible:ring-transparent'
+                        ? 'text-red h-full pb-2 dark:text-yellow font-bold after:h-[2px] after:bg-red dark:after:bg-yellow after:-bottom-px after:content-[""] after:absolute after:left-0 after:right-0 focus:ring-transparent focus:outline-none focus-visible:ring-transparent'
                         : 'flex text-secondary items-center relative my-1 rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all',
                     'px-2 py-1 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group'
                 )
