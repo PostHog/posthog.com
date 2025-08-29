@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import SEO from 'components/seo'
@@ -9,9 +9,10 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { explorerGridColumns } from '../../constants'
 import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 
 export default function SparkJoy(): JSX.Element {
-    const [isListLayout, setIsListLayout] = useState(true)
+    const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
 
     return (
         <>
@@ -29,8 +30,8 @@ export default function SparkJoy(): JSX.Element {
                         title="Layout"
                         hideTitle={true}
                         options={explorerLayoutOptions}
-                        onValueChange={(value) => setIsListLayout(value === 'list')}
-                        value={isListLayout ? 'list' : 'grid'}
+                        onValueChange={setLayoutValue}
+                        value={currentLayout}
                         className="-my-1 ml-2"
                     />
                 }

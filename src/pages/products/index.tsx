@@ -20,6 +20,7 @@ import { categoryOrder, categoryDisplayNames, getProductsForCategory } from '../
 import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
 import { explorerGridColumns } from '../../constants'
+import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -96,7 +97,7 @@ export default function Products(): JSX.Element {
     const [hoveredProduct, setHoveredProduct] = useState<any>(null)
     const [lastClickTime, setLastClickTime] = useState(0)
     const [lastClickedProduct, setLastClickedProduct] = useState<string | null>(null)
-    const [isListLayout, setIsListLayout] = useState(true)
+    const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
     const { appWindow } = useWindow()
@@ -200,8 +201,8 @@ export default function Products(): JSX.Element {
                         title="Layout"
                         hideTitle={true}
                         options={explorerLayoutOptions}
-                        onValueChange={(value) => setIsListLayout(value === 'list')}
-                        value={isListLayout ? 'list' : 'grid'}
+                        onValueChange={setLayoutValue}
+                        value={currentLayout}
                         className="-my-1 ml-2"
                     />
                 }
