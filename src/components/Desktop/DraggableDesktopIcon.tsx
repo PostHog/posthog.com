@@ -44,7 +44,7 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
 
         // Keep icon within bounds
         const iconWidth = 112 // w-28 = 112px
-        const iconHeight = 100 // approximate height
+        const iconHeight = 90 // approximate height
         const maxX = bounds.width - iconWidth
         const maxY = bounds.height - iconHeight
 
