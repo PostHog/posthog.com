@@ -455,6 +455,7 @@ export default function Inbox(props) {
                                     }}
                                     transition={{
                                         type: 'tween',
+                                        ...(isDragging ? { duration: 0 } : {}),
                                     }}
                                 >
                                     {sideBySide ? (
