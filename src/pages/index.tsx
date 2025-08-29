@@ -870,7 +870,7 @@ const Customers = () => {
 
     return <>
         <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-            <div className="@xl:absolute right-0 -top-4">
+            <div className="@xl:absolute right-0 -top-8">
                 <OSButton
                     onClick={toggleBreakdown}
                     variant="secondary"

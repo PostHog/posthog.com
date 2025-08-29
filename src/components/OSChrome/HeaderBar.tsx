@@ -149,7 +149,7 @@ export default function HeaderBar({
                 {!compact && (
                     <div>
                         <motion.div
-                            className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                            className={`flex-shrink-0 flex items-center gap-px transition-all min-w-0 ${hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
                                 }`}
                         >
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}

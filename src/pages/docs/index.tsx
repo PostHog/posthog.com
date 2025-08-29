@@ -21,6 +21,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
 import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
 import { SearchUI } from 'components/SearchUI'
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 const keyboardShortcut =
     'box-content p-[5px] border border-b-2 border-primary  rounded-[3px] inline-flex text-black/35 dark:text-white/40'
@@ -216,7 +217,7 @@ const renderSectionContent = (children: any[]) => {
     return (
         <div
             data-scheme="primary"
-            className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative items-start"
+            className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-2 @4xl:gap-4 relative items-start"
         >
             {children
                 .filter((child) => child.url && child.name)
@@ -264,7 +265,7 @@ export const DocsIndex = () => {
             content: (
                 <div
                     data-scheme="primary"
-                    className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative items-start"
+                    className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-2 @4xl:gap-4 relative items-start"
                 >
                     {productSections.map((product: any, index: number) => {
                         const Icon = product.icon ? (Icons[product.icon as keyof typeof Icons] as any) : Icons.IconApps
@@ -474,28 +475,30 @@ export const DocsIndex = () => {
                         </div>
                     </div>
                 </section>
-                <div className="flex @md:flex-row flex-col gap-8 h-full p-5">
+                <div className="flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full p-2 @xl:p-4">
                     <section className="flex-1">
                         <SearchUI initialFilter="docs" hideFilters isRefinedClassName="bg-white" className="mb-4" />
                         <ScrollArea>
-                            {accordionItems.map((item, index) => (
-                                <Accordion
-                                    key={index}
-                                    skin={false}
-                                    triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                                    defaultValue={item.value}
-                                    items={[item]}
-                                />
-                            ))}
+                            <div className="@md:-ml-3">
+                                {accordionItems.map((item, index) => (
+                                    <Accordion
+                                        key={index}
+                                        skin={false}
+                                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                        defaultValue={item.value}
+                                        items={[item]}
+                                    />
+                                ))}
+                            </div>
                         </ScrollArea>
                     </section>
 
-                    <aside className="max-w-xs text-sm">
+                    <aside className="@4xl:max-w-xs text-sm">
                         <ScrollArea>
-                            <h6>About our docs</h6>
+                            <h6 className="text-lg">About our docs</h6>
                             <p>There are a few ways to explore our docs:</p>
                             <p>
-                                <strong>On our website</strong> (You are here)
+                                <strong className="text-base">On our website</strong> (You are here)
                             </p>
                             <ul>
                                 <li>
@@ -516,7 +519,7 @@ export const DocsIndex = () => {
                                 .
                             </p>
                             <p>
-                                <strong>In the product</strong>
+                                <strong className="text-base">In the product</strong>
                             </p>
                             <ul>
                                 <li>Look for tooltips that link to docs - they open right inside the product</li>
@@ -525,7 +528,7 @@ export const DocsIndex = () => {
 
                             <hr className="my-4" />
 
-                            <h6>Feedback</h6>
+                            <h6 className="text-lg">Feedback</h6>
 
                             <p>
                                 Our docs are perpetually a work in progress. The{' '}

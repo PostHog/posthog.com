@@ -1,3 +1,5 @@
 import React from 'react'
 
-export const Blockquote = (props) => <blockquote {...props} className="px-6 rounded bg-accent border border-primary" />
+export const Blockquote = (props) => (
+    <blockquote {...props} className="not-prose pt-2 px-4 rounded bg-accent border border-primary" />
+)
