@@ -265,11 +265,11 @@ export function Editor({
             active: actionButtons?.redo?.active,
             disabled: actionButtons?.redo?.disabled,
         },
-        { type: 'separator' },
+        { type: 'separator', className: 'hidden @2xl:block' },
         {
             type: 'select',
             placeholder: 'Zoom',
-            className: '!text-[13px] !pr-0 !py-0.5',
+            className: '!text-[13px] !pr-0 !py-0.5 hidden @2xl:inline-flex',
             disabled: true,
             groups: [
                 {
@@ -311,12 +311,13 @@ export function Editor({
             onClick: actionButtons?.strikethrough?.onClick,
             active: actionButtons?.strikethrough?.active,
             disabled: actionButtons?.strikethrough?.disabled,
+            className: 'hidden @md:inline-flex'
         },
-        { type: 'separator' },
+        { type: 'separator', className: 'hidden @3xl:block' },
         {
             type: 'select',
             placeholder: 'Font',
-            className: '!text-[13px] !pr-0 !py-0.5',
+            className: '!text-[13px] !pr-0 !py-0.5 hidden @3xl:inline-flex',
             disabled: true,
             groups: [
                 {
@@ -329,7 +330,7 @@ export function Editor({
                 },
             ],
         },
-        { type: 'separator' },
+        { type: 'separator', className: 'hidden @lg:block' },
         {
             type: 'button',
             label: 'Left',
@@ -338,6 +339,7 @@ export function Editor({
             active: actionButtons?.leftAlign?.active,
             hideLabel: true,
             disabled: actionButtons?.leftAlign?.disabled,
+            className: 'hidden @lg:inline-flex',
         },
         {
             type: 'button',
@@ -347,6 +349,7 @@ export function Editor({
             active: actionButtons?.centerAlign?.active,
             hideLabel: true,
             disabled: actionButtons?.centerAlign?.disabled,
+            className: 'hidden @lg:inline-flex',
         },
         {
             type: 'button',
@@ -356,15 +359,17 @@ export function Editor({
             active: actionButtons?.rightAlign?.active,
             hideLabel: true,
             disabled: actionButtons?.rightAlign?.disabled,
+            className: 'hidden @lg:inline-flex',
         },
 
-        { type: 'separator' },
+        { type: 'separator', className: 'hidden @xl:block' },
         {
             type: 'button',
             icon: <IconLink />,
             label: 'Link',
             hideLabel: true,
             disabled: true,
+            className: 'hidden @xl:inline-flex',
         },
         {
             type: 'button',
@@ -372,6 +377,7 @@ export function Editor({
             label: 'Comment',
             hideLabel: true,
             disabled: true,
+            className: 'hidden @xl:inline-flex',
         },
         {
             type: 'container' as const,
