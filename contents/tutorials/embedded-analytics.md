@@ -130,7 +130,7 @@ It also requires a personal API key with project **query read** permissions. You
 We then use these to set up a request to PostHog’s `query` endpoint with an SQL query to get pageviews for the last 7 days. Together, this looks like this:
 
 ```ts
-// src/app/api/pageviews/route.ts
+// app/api/pageviews/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
