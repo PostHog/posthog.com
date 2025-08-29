@@ -62,7 +62,7 @@ export default function OSTabs({
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
-            if (orientation === 'horizontal') {
+            if (orientation === 'vertical') {
                 setOrderedTabs([tabs])
                 return
             }
@@ -135,8 +135,8 @@ export default function OSTabs({
     )
 
     useEffect(() => {
-        // Only run tab row calculation for horizontal orientation
-        if (orientation === 'horizontal' || !ref.current) return
+        // Only run tab row calculation for horizontal orientation (when tabs might wrap)
+        if (orientation === 'vertical' || !ref.current) return
 
         calculateTabRows()
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
@@ -184,8 +184,7 @@ export default function OSTabs({
                 value={value || controlledValue}
                 className={
                     className ??
-                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
-                        frame ? 'pt-2 px-4 pb-4' : ''
+                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${frame ? 'pt-2 px-4 pb-4' : ''
                     } h-full min-h-0 bg-primary`
                 }
             >
@@ -196,9 +195,8 @@ export default function OSTabs({
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${
-                                    orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
-                                }`}
+                                className={`flex ${orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
+                                    }`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -218,9 +216,8 @@ export default function OSTabs({
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <TabContentContainer
-                            className={`@container bg-primary h-full min-h-0 ${
-                                frame ? 'border border-primary rounded-md' : ''
-                            } ${!scrollable ? 'overflow-hidden' : ''}`}
+                            className={`@container bg-primary h-full min-h-0 ${frame ? 'border border-primary rounded-md' : ''
+                                } ${!scrollable ? 'overflow-hidden' : ''}`}
                         >
                             <div
                                 className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}
