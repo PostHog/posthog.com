@@ -95,12 +95,13 @@ const Row = ({
                ${cellIndex === row.cells.length - 1 ? '!border-r' : ''}
             flex flex-col 
             ${rowAlignment === 'top' ? 'justify-start' : 'justify-center'} 
-            ${columns?.[cellIndex]?.align === 'left'
-                                    ? 'items-start'
-                                    : columns?.[cellIndex]?.align === 'right'
-                                        ? 'justify-end'
-                                        : 'items-center'
-                                } ${cell.className || ''}`}
+            ${
+                columns?.[cellIndex]?.align === 'left'
+                    ? 'items-start'
+                    : columns?.[cellIndex]?.align === 'right'
+                    ? 'justify-end'
+                    : 'items-center'
+            } ${cell.className || ''}`}
                         >
                             {cell.content}
                         </div>
@@ -108,27 +109,27 @@ const Row = ({
                 })}
                 {moreCount && moreCount > 0
                     ? row.cells.map((cell, cellIndex) => {
-                        return (
-                            <div key={cellIndex} className={`!p-0 !border-none relative`}>
-                                <button
-                                    className="absolute top-0 left-0 w-full h-full py-2 -translate-y-1/2"
-                                    onClick={onShowMore}
-                                />
-                                <button
-                                    className="absolute top-0 left-0 w-full border-t border-yellow z-[1]"
-                                    onClick={onShowMore}
-                                />
-                                {moreCount && cellIndex === row.cells.length - 1 ? (
-                                    <button
-                                        onClick={onShowMore}
-                                        className="leading-none text-[11px] absolute right-0 -translate-y-1/2 translate-x-1/2 size-6 rounded-full bg-yellow dark:text-black text-white flex items-center justify-center z-[1] border-white dark:border-black border font-semibold"
-                                    >
-                                        {`+${moreCount}`}
-                                    </button>
-                                ) : null}
-                            </div>
-                        )
-                    })
+                          return (
+                              <div key={cellIndex} className={`!p-0 !border-none relative`}>
+                                  <button
+                                      className="absolute top-0 left-0 w-full h-full py-2 -translate-y-1/2"
+                                      onClick={onShowMore}
+                                  />
+                                  <button
+                                      className="absolute top-0 left-0 w-full border-t border-yellow z-[1]"
+                                      onClick={onShowMore}
+                                  />
+                                  {moreCount && cellIndex === row.cells.length - 1 ? (
+                                      <button
+                                          onClick={onShowMore}
+                                          className="leading-none text-[11px] absolute right-0 -translate-y-1/2 translate-x-1/2 size-6 rounded-full bg-yellow dark:text-black text-white flex items-center justify-center z-[1] border-white dark:border-black border font-semibold"
+                                      >
+                                          {`+${moreCount}`}
+                                      </button>
+                                  ) : null}
+                              </div>
+                          )
+                      })
                     : null}
             </React.Fragment>
         </>
@@ -192,8 +193,9 @@ const OSTable: React.FC<OSTableProps> = ({
         <div className="-mx-4 @xl:-mx-8">
             <ScrollArea fullWidth>
                 <div
-                    className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 ${size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
-                        } ${className}`}
+                    className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] min-w-full w-0 [&>div]:px-2 ${
+                        size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
+                    } ${className}`}
                     style={{ gridTemplateColumns: gridClass }}
                 >
                     {/* Header Row */}
@@ -202,8 +204,9 @@ const OSTable: React.FC<OSTableProps> = ({
                             {columns.map((column, index) => (
                                 <div
                                     key={index}
-                                    className={`text-sm border-l border-t border-primary bg-input font-bold ${index === columns.length - 1 ? '!border-r' : ''
-                                        } ${column.align === 'center' ? 'text-center' : ''} ${column.className || ''}`}
+                                    className={`text-sm border-l border-t border-primary bg-input font-bold ${
+                                        index === columns.length - 1 ? '!border-r' : ''
+                                    } ${column.align === 'center' ? 'text-center' : ''} ${column.className || ''}`}
                                 >
                                     {column.name}
                                 </div>
@@ -214,33 +217,33 @@ const OSTable: React.FC<OSTableProps> = ({
                     {/* Data Rows */}
                     {groupBy
                         ? Object.entries(
-                            _groupBy(
-                                rows,
-                                `cells[${columns?.findIndex((col) => col.name === groupBy)}].content.props.children`
-                            )
-                        ).map(([_group, value], index) => (
-                            <GroupedRows
-                                key={index}
-                                rows={value}
-                                lastRowRef={lastRowRef}
-                                rowAlignment={rowAlignment}
-                                columns={columns}
-                                editable={editable}
-                            />
-                        ))
+                              _groupBy(
+                                  rows,
+                                  `cells[${columns?.findIndex((col) => col.name === groupBy)}].content.props.children`
+                              )
+                          ).map(([_group, value], index) => (
+                              <GroupedRows
+                                  key={index}
+                                  rows={value}
+                                  lastRowRef={lastRowRef}
+                                  rowAlignment={rowAlignment}
+                                  columns={columns}
+                                  editable={editable}
+                              />
+                          ))
                         : rows.map((row, rowIndex) => (
-                            <Row
-                                key={row.key || rowIndex}
-                                row={row}
-                                lastRowRef={rowIndex === rows.length - 1 ? lastRowRef : null}
-                                rowAlignment={rowAlignment}
-                                columns={columns}
-                                editable={editable}
-                            />
-                        ))}
+                              <Row
+                                  key={row.key || rowIndex}
+                                  row={row}
+                                  lastRowRef={rowIndex === rows.length - 1 ? lastRowRef : null}
+                                  rowAlignment={rowAlignment}
+                                  columns={columns}
+                                  editable={editable}
+                              />
+                          ))}
                 </div>
                 {loading && <RowSkeleton />}
-            </ScrollArea >
+            </ScrollArea>
         </div>
     )
 }
