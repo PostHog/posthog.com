@@ -343,7 +343,7 @@ export default function Inbox(props) {
                     <div ref={containerRef} className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}>
                         <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
                             <ScrollArea className="h-full">
-                                <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10">
+                                <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
                                     <div className="hidden @3xl:block w-48">Author</div>
                                     <div className="flex-1">
                                         <span className="@3xl:hidden">Author / Replies</span>
@@ -453,6 +453,9 @@ export default function Inbox(props) {
                                     exit={{
                                         width: 0,
                                     }}
+                                    transition={{
+                                        type: 'tween',
+                                    }}
                                 >
                                     {sideBySide ? (
                                         <motion.div
@@ -487,7 +490,11 @@ export default function Inbox(props) {
                                     )}
 
                                     <ScrollArea>
-                                        <div className="bg-accent @2xl:border-t border-t-0 border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
+                                        <div
+                                            className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${
+                                                sideBySide ? 'border-t-0' : ''
+                                            }`}
+                                        >
                                             <OSButton
                                                 variant="secondary"
                                                 size="xs"
