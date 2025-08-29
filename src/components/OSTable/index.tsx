@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { groupBy as _groupBy } from 'lodash'
 import { navigate } from 'gatsby'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface Column {
     name: string
@@ -190,11 +191,13 @@ const OSTable: React.FC<OSTableProps> = ({
         }
     }, [lastRowInView])
 
+    const Container = overflowX ? ScrollArea : React.Fragment
+
     return (
-        <>
+        <Container>
             <div
                 className={`${
-                    overflowX ? ' min-w-full overflow-x-auto w-0' : ''
+                    overflowX ? ' min-w-full w-0' : ''
                 } text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 ${
                     size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
                 } ${className}`}
@@ -245,7 +248,7 @@ const OSTable: React.FC<OSTableProps> = ({
                       ))}
             </div>
             {loading && <RowSkeleton />}
-        </>
+        </Container>
     )
 }
 
