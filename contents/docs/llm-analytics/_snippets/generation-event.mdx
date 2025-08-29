@@ -10,7 +10,7 @@ A generation is a single call to an LLM.
 | `$ai_span_id` | *(Optional)* Unique identifier for this generation |
 | `$ai_span_name` | *(Optional)* Name given to this generation <br/>Example: `summarize_text` |
 | `$ai_parent_id` | *(Optional)* Parent span ID for tree view grouping | 
-| `$ai_model` | The model used <br/>Example: `gpt-3.5-turbo` |
+| `$ai_model` | The model used <br/>Example: `gpt-5-mini` |
 | `$ai_provider` | The LLM provider <br/>Example: `openai`, `anthropic`, `gemini` |
 | `$ai_input` | List of messages sent to the LLM <br/>Example: `[{"role": "user", "content": [{"type": "text", "text": "What's in this image?"}, {"type": "image", "image": "https://example.com/image.jpg"}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
 | `$ai_input_tokens` | The number of tokens in the input (often found in response.usage) |
