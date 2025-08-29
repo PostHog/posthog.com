@@ -40,7 +40,10 @@ const isLabel = (item: any) => !item?.url && item?.name
 
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
     const { appWindow } = useWindow()
-    const [isNavVisible, setIsNavVisible] = useState(true)
+    // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
+    const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
+    const [isNavVisible, setIsNavVisible] = useState(isWideEnoughForSidebar)
+    const [navUserToggled, setNavUserToggled] = useState(false)
     // @6xl breakpoint is 72rem = 1152px
     const isLarge = appWindow?.size?.width && appWindow?.size?.width >= 1152
     const [isTocVisible, setIsTocVisible] = useState(isLarge)
@@ -58,6 +61,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     })
 
     const toggleNav = useCallback(() => {
+        setNavUserToggled(true)
         setIsNavVisible((prev) => !prev)
     }, [])
 
@@ -103,9 +107,10 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
     }, [])
 
-    // Reset ToC toggle state when path changes
+    // Reset ToC and Nav toggle state when path changes
     useEffect(() => {
         setTocUserToggled(false)
+        setNavUserToggled(false)
     }, [appWindow?.path])
 
     const handleBackgroundImageChange = useCallback((image: string | null) => {
@@ -139,6 +144,16 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
             setIsTocVisible(isLarge)
         }
     }, [isLarge])
+
+    // Monitor container size and update Nav visibility
+    useEffect(() => {
+        if (!appWindow?.size?.width) return
+
+        // Only update Nav visibility if user hasn't manually toggled it
+        if (!navUserToggled) {
+            setIsNavVisible(isWideEnoughForSidebar)
+        }
+    }, [isWideEnoughForSidebar, navUserToggled])
 
     const value = {
         isNavVisible,
