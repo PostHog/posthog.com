@@ -193,7 +193,7 @@ export async function POST(request: NextRequest) {
 In `button-clicks/route.ts`, we’ll add a similar API request to get button clicks. The difference is that it takes a variable for the team we use to get the button clicks for that specific team. 
 
 ```ts
-// src/app/api/button-clicks/route.ts
+// app/api/button-clicks/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
