@@ -377,7 +377,7 @@ Next, in `app/analytics/page.tsx`, we’ll import the components needed for a li
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'; // +
 
-export default function Home() {
+export default function AnalyticsPage() {
   // ... existing code
   
   return (
