@@ -17,7 +17,7 @@ Generations are events that capture LLM calls and their responses. They represen
   View recent AI generation events in the <b>Activity</b> tab
 </Caption>
 
-The **LLM analytics** > **Generations** tab displays a list of generations, along with a preview of key autocaptured properties. You can filter and search for generations by various properties.
+The **LLM analytics** > [**Generations** tab](https://app.posthog.com/llm-analytics/generations) displays a list of generations, along with a preview of key autocaptured properties. You can filter and search for generations by various properties.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llm_generations_b12119af33.png"
@@ -54,7 +54,7 @@ When calling LLMs with our [SDK wrappers](/docs/llm-analytics/installation), you
 
 ```python
 response = client.responses.create(
-    model="gpt-4o-mini",
+    model="gpt-5-mini",
     input=[
         {"role": "user", "content": "Tell me a fun fact about hedgehogs"}
     ],
@@ -68,7 +68,7 @@ response = client.responses.create(
 
 ```ts
 const completion = await openai.responses.create({
-    model: "gpt-4o-mini",
+    model: "gpt-5-mini",
     input: [{ role: "user", content: "Tell me a fun fact about hedgehogs" }],
     posthogDistinctId: "user_123", // optional
     posthogTraceId: "trace_123", // optional
@@ -80,7 +80,7 @@ const completion = await openai.responses.create({
 
 </MultiLanguage>
 
-## How are traces and spans related?
+## How are generations, traces, and spans related?
 
 Generations are nested under [spans](/docs/llm-analytics/spans) and [traces](/docs/llm-analytics/traces). 
 

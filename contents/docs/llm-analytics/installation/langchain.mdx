@@ -49,7 +49,7 @@ npm install langchain @langchain/core @posthog/ai
 
 <Step title="Initialize PostHog and LangChain" badge="required">
 
- Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to the LangChain `CallbackHandler` wrapper.
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to the LangChain `CallbackHandler` wrapper.
 
 Optionally, you can provide a user distinct ID, trace ID, PostHog properties, [groups](/docs/product-analytics/group-analytics), and privacy mode.
 
@@ -152,7 +152,7 @@ phClient.shutdown();
 
 </MultiLanguage>
 
-PostHog automatically captures `$ai_generation` properties. These include:
+PostHog automatically captures an `$ai_generation` event along with these properties:
 
 <NotableGenerationProperties />
 
