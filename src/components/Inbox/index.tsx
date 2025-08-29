@@ -465,7 +465,7 @@ export default function Inbox(props) {
                                             drag="x"
                                             dragMomentum={false}
                                             dragConstraints={{ left: 0, right: 0 }}
-                                            onDragStart={() => {
+                                            onMouseDown={() => {
                                                 setIsDragging(true)
                                                 setDragStartWidth(sideWidth)
                                             }}
