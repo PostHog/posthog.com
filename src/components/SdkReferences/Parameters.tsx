@@ -14,11 +14,13 @@ const Parameters = ({
     title = 'Parameters',
     validTypes,
     slugPrefix,
+    includeId = false,
 }: {
     params: Parameter[]
     title?: string
     validTypes: string[]
     slugPrefix: string
+    includeId?: boolean
 }): JSX.Element | null => {
     if (!params || params.length === 0) return null
 
@@ -47,7 +49,10 @@ const Parameters = ({
                                             : ''
                                     }
                                 >
-                                    <td className="text-gray-600 dark:text-gray-300 text-sm py-2 px-2 align-top">
+                                    <td
+                                        id={includeId ? `${param.name}-param` : undefined}
+                                        className="text-gray-600 dark:text-gray-300 text-sm py-2 px-2 align-top scroll-mt-32"
+                                    >
                                         <code className="break-words text-red hover:text-red font-semibold group">
                                             {param.name}
                                             {param.isOptional && '?'}
