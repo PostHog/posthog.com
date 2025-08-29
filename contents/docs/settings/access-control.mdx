@@ -259,12 +259,12 @@ Returns a list of all users who have access to a specific resource, including th
 
 The API uses different permission levels depending on the resource type:
 
-#### Project and team resources
+#### Project resources
 - `none` – No access
 - `member` – Basic member access
 - `admin` – Administrative access
 
-#### Resource objects (dashboards, insights, notebooks, feature flags)
+#### Other resources (dashboards, insights, notebooks, feature flags, etc.)
 - `none` – No access
 - `viewer` – Read-only access
 - `editor` – Read and write access (default)
@@ -349,13 +349,6 @@ When querying who has access to a resource, the API returns how each user obtain
 - `project_admin` – Project admin privileges
 - `default` – Default project access level
 
-### Required permissions
-
-To manage access controls via the API:
-- **For resource-specific changes**: You must be the resource creator, an organization admin, or have manager-level access to the resource
-- **For global/project-wide changes**: You must be an organization admin
-- **For read operations**: Any project member with appropriate API key scopes can view access controls
-
 ### Example workflows
 
 #### Grant a team member access to a specific dashboard
@@ -380,18 +373,6 @@ curl -X PUT https://app.posthog.com/api/projects/@current/resource_access_contro
     "resource": "notebook",
     "role": "analysts-role-uuid",
     "access_level": "editor"
-  }'
-```
-
-#### Remove access for a specific member
-
-```bash
-curl -X PUT https://app.posthog.com/api/projects/@current/insights/{insight_id}/access_controls \
-  -H "Authorization: Bearer {your-api-key}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "organization_member": "member-uuid",
-    "access_level": null
   }'
 ```
 
