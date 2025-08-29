@@ -73,6 +73,7 @@ response = client.responses.create(
     model="gpt-5",
     messages=[{"role": "user", "content": "Hello"}],
     posthog_properties={
+        "custom_property": "custom_value",
         "conversation_id": "conv_abc123",
         "user_tier": "premium",
         "feature": "chat_assistant"
