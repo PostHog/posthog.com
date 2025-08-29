@@ -9,6 +9,7 @@ import * as Yup from 'yup'
 import Editor from 'components/Editor'
 import { Select } from 'components/RadixUI/Select'
 import OSButton from 'components/OSButton'
+import ScrollArea from "components/RadixUI/ScrollArea"
 
 interface CustomFieldOption {
     label: string
@@ -239,7 +240,7 @@ function RadioGroup({
                     {placeholder}
                 </p>
             </div>
-            <div className="col-span-10">
+            <div className="col-span-full @lg:col-span-10">
                 <Select
                     value={String(formValues[name] || '')}
                     onValueChange={handleValueChange}
@@ -253,7 +254,7 @@ function RadioGroup({
     )
 }
 
-const inputContainerClasses = `relative text-left text-sm col-span-2`
+const inputContainerClasses = `relative text-left text-sm col-span-full @lg:col-span-2 font-semibold`
 
 const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
     const { name, placeholder } = props
@@ -266,7 +267,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
             <label className={`sr-only ${inputContainerClasses}`} htmlFor={props.id}>
                 {placeholder}
             </label>
-            <div className="col-span-10">
+            <div className="col-span-full @lg:col-span-10">
                 <textarea
                     rows={8}
                     onChange={(e) => setFieldValue(name, e.target.value)}
@@ -295,7 +296,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
             <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={props.id}>
                 {placeholder}
             </label>
-            <div className="col-span-10">
+            <div className="col-span-full @lg:col-span-10">
                 <input
                     onChange={(e) => setFieldValue(name, e.target.value)}
                     onBlur={() => {
@@ -382,71 +383,75 @@ export default function SalesforceForm({
                 onSubmit={handleSubmit}
             >
                 <Form className={formOptions?.className}>
-                    <div className="px-4 pt-2 pb-1 border-b border-primary">
+                    <div className="px-4 pt-2 pb-1 border-b border-primary flex-[0_0_auto]">
                         <OSButton size="md" variant="primary" icon={<IconSend />} type="submit">
                             {form.buttonText ?? 'Submit'}
                         </OSButton>
                     </div>
-                    <div className="p-4">
-                        <div className="grid grid-cols-12 gap-2">
-                            <span className="relative text-left text-sm col-span-2 ">To</span>
-                            <div className="col-span-10 text-sm">sales@posthog.com</div>
-                            {form.fields.map(
-                                ({ name, label, placeholder, type, required, options, fieldType, cols }, index) => {
-                                    if (customFields && customFields[name])
-                                        return {
-                                            radioGroup: (
-                                                <RadioGroup
-                                                    type={fieldType || 'radio'}
-                                                    options={customFields[name].options || options || []}
-                                                    name={name}
-                                                    placeholder={label}
-                                                    cols={customFields[name].cols ?? formOptions?.cols}
-                                                />
-                                            ),
-                                        }[customFields[name]?.type]
+                    <div className="flex-1">
+                        <ScrollArea className="min-h-0">
+                            <div className="@container p-4">
+                                <div className="grid grid-cols-12 gap-2">
+                                    <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold ">To</span>
+                                    <div className="col-span-full @lg:col-span-10 text-sm">sales@posthog.com</div>
+                                    {form.fields.map(
+                                        ({ name, label, placeholder, type, required, options, fieldType, cols }, index) => {
+                                            if (customFields && customFields[name])
+                                                return {
+                                                    radioGroup: (
+                                                        <RadioGroup
+                                                            type={fieldType || 'radio'}
+                                                            options={customFields[name].options || options || []}
+                                                            name={name}
+                                                            placeholder={label}
+                                                            cols={customFields[name].cols ?? formOptions?.cols}
+                                                        />
+                                                    ),
+                                                }[customFields[name]?.type]
 
-                                    if (type === 'enumeration')
+                                            if (type === 'enumeration')
+                                                return (
+                                                    <RadioGroup
+                                                        key={`${name}-${index}`}
+                                                        type={fieldType || 'radio'}
+                                                        options={options || []}
+                                                        name={name}
+                                                        placeholder={label}
+                                                        cols={cols || formOptions?.cols}
+                                                    />
+                                                )
+
+                                            if (fieldType === 'textarea') return null
+
+                                            return (
+                                                <Input
+                                                    key={`${name}-${index}`}
+                                                    type={fieldType}
+                                                    name={name}
+                                                    placeholder={placeholder || label}
+                                                    required={required}
+                                                />
+                                            )
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                            <div className="px-4">
+                                {form.fields.map(({ name, label, fieldType, required }, index) => {
+                                    if (fieldType === 'textarea') {
                                         return (
-                                            <RadioGroup
+                                            <Textarea
                                                 key={`${name}-${index}`}
-                                                type={fieldType || 'radio'}
-                                                options={options || []}
                                                 name={name}
                                                 placeholder={label}
-                                                cols={cols || formOptions?.cols}
+                                                required={required}
                                             />
                                         )
-
-                                    if (fieldType === 'textarea') return null
-
-                                    return (
-                                        <Input
-                                            key={`${name}-${index}`}
-                                            type={fieldType}
-                                            name={name}
-                                            placeholder={placeholder || label}
-                                            required={required}
-                                        />
-                                    )
-                                }
-                            )}
-                        </div>
-                    </div>
-                    <div className="px-4">
-                        {form.fields.map(({ name, label, fieldType, required }, index) => {
-                            if (fieldType === 'textarea') {
-                                return (
-                                    <Textarea
-                                        key={`${name}-${index}`}
-                                        name={name}
-                                        placeholder={label}
-                                        required={required}
-                                    />
-                                )
-                            }
-                            return null
-                        })}
+                                    }
+                                    return null
+                                })}
+                            </div>
+                        </ScrollArea>
                     </div>
                 </Form>
             </Formik>

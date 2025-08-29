@@ -81,7 +81,7 @@ export default function ContactSales({ location }) {
                         size: 'md',
                     }}
                     formOptions={{
-                        className: 'pb-4',
+                        className: 'pb-4 flex flex-col',
                     }}
                     form={{
                         fields: [
