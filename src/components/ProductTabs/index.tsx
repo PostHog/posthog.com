@@ -148,7 +148,7 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                 <div
                     className={`@container flex flex-col bg-${product.color} dark:bg-accent border border-transparent dark:border-primary rounded-md overflow-hidden`}
                 >
-                    <div className="flex items-start justify-between p-4 @lg:p-6">
+                    <div className="flex flex-col gap-2 @sm:flex-row items-start justify-between p-4 @xl:p-6">
                         <div className="flex-1 flex gap-3">
                             {product.Icon && (
                                 <product.Icon
@@ -157,10 +157,10 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                             )}
                             <div className={`${product.overview.textColor} dark:text-white`}>
                                 <h3 className="text-xl font-bold tracking-tight">{product.name}</h3>
-                                {product.overview?.title && <p className="mb-0">{product.overview.title}</p>}
+                                {product.overview?.title && <p className="mb-0 leading-tight">{product.overview.title}</p>}
                             </div>
                         </div>
-                        <div className="flex-shrink-0">
+                        <div className="flex-shrink-0 mt-2 @sm:mt-0 ml-10 @sm:ml-0">
                             <OSButton
                                 asLink
                                 to={`/${product.slug}`}
@@ -210,7 +210,7 @@ export default function ProductTabs({ productHandles, className, selectedStage }
             frame={false}
             className={className}
             orientation={orientation}
-            tabContainerClassName="pt-2 pr-4 [&>div>div]:flex-wrap [&>div>div]:justify-center"
+            tabContainerClassName={`${orientation === 'vertical' ? 'pt-2 pr-4' : ''} [&>div>div]:flex-wrap [&>div>div]:justify-center`}
             tabTriggerClassName="flex justify-start items-center gap-1 rounded-b-sm hover:bg-primary !border-b data-[state=active]:font-semibold"
             tabContentClassName="not-prose pt-2"
             extraTabRowContent={
