@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconClockRewind, IconGraph, IconHandMoney, IconLightBulb, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconRewindPlay, IconShield, IconSparkles, IconTarget, IconTrends, IconUser } from '@posthog/icons'
+import { IconBell, IconClockRewind, IconDashboard, IconGraph, IconHandMoney, IconLightBulb, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconRewindPlay, IconShield, IconSparkles, IconTarget, IconTrends, IconUser, IconWarning, IconGlobe, IconListCheck } from '@posthog/icons'
 import { IconGrid, IconTag } from 'components/OSIcons'
 
 export const llmAnalytics = {
@@ -144,27 +144,40 @@ export const llmAnalytics = {
     },
     {
       title: 'Performance monitoring',
-      headline: 'Keep your AI fast and reliable',
+      headline: 'Performance monitoring',
       description:
-        'Monitor latency, error rates, and model performance to ensure great user experiences.',
+        'Monitor latency, error rates, and model performance',
+      images: [
+        {
+          src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
+          srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
+          alt: 'LLM performance monitoring',
+          className: 'justify-center items-center',
+        },
+      ],
       features: [
         {
+          icon: <IconDashboard />,
           title: 'Latency tracking',
           description: 'Monitor response times and identify performance bottlenecks',
         },
         {
+          icon: <IconWarning />,
           title: 'Error monitoring',
           description: 'Track API errors, rate limits, and model failures',
         },
         {
+          icon: <IconTrends />,
           title: 'Model performance',
           description: 'Compare speed and reliability across different models',
         },
         {
+          icon: <IconBell />,
           title: 'Real-time alerts',
           description: 'Get notified of latency spikes or error rate increases',
         },
         {
+          icon: <IconGlobe />,
           title: 'Geographic performance',
           description: 'See how performance varies by user location',
         },
