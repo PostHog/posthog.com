@@ -1,6 +1,6 @@
 import React from 'react'
-import { IconClockRewind, IconListTreeConnected, IconLlmAnalytics, IconShield, IconUser } from '@posthog/icons'
-import { IconTag } from 'components/OSIcons'
+import { IconClockRewind, IconGraph, IconHandMoney, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconShield, IconSparkles, IconTarget, IconTrends, IconUser } from '@posthog/icons'
+import { IconGrid, IconTag } from 'components/OSIcons'
 
 export const llmAnalytics = {
   name: 'LLM Analytics',
@@ -74,7 +74,7 @@ export const llmAnalytics = {
           src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
           srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
           alt: 'LLM trace',
-          className: 'rounded-tl-xl shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
+          className: 'rounded-tl-md shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
         },
       ],
       features: [
@@ -104,30 +104,38 @@ export const llmAnalytics = {
       // </>)
     },
     {
-      title: 'Cost analytics',
-      headline: 'Understand your AI economics',
+      title: 'Cost analysis',
+      headline: 'Cost analysis',
       description:
         'Track costs by model, user, feature, and time period to optimize spending and pricing.',
+      images: [
+        {
+          src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',
+          srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_dark_d1efde15fd.png',
+          alt: 'LLM cost analysis',
+          className: 'justify-center items-center',
+        },
+      ],
       features: [
         {
-          title: 'Cost per user',
-          description: 'See which users or organizations are driving your LLM costs',
-        },
-        {
+          icon: <IconTrends />,
           title: 'Model comparison',
           description: 'Compare costs across different models and providers',
         },
         {
+          icon: <IconTarget />,
+          title: 'Cost per user',
+          description: 'See which users or organizations are driving your LLM costs',
+        },
+        {
+          icon: <IconSparkles />,
           title: 'Feature-level costs',
           description: 'Understand the economics of each AI-powered feature',
         },
         {
-          title: 'Cost trends',
-          description: 'Monitor how costs change over time and with usage patterns',
-        },
-        {
+          icon: <IconPiggyBank />,
           title: 'ROI analysis',
-          description: 'Connect AI costs to revenue and user engagement metrics',
+          description: 'Connect AI costs to revenue data and user engagement metrics',
         },
       ],
     },
