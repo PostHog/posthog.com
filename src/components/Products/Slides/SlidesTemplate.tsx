@@ -412,8 +412,13 @@ export default function SlidesTemplate({
                 slug={productData?.slug}
                 title=""
                 slideId={productData?.slug}
-                sidebarContent={(activeSlideIndex) => (
-                    <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} slideId={productData?.slug} />
+                sidebarContent={(activeSlideIndex, onClick) => (
+                    <SlideThumbnails
+                        slides={slides}
+                        activeSlideIndex={activeSlideIndex}
+                        slideId={productData?.slug}
+                        onClick={onClick}
+                    />
                 )}
                 slides={slides}
                 presenterNotes={productData?.presenterNotes}

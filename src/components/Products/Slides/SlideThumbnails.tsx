@@ -18,10 +18,11 @@ interface SlideThumbProps {
     index: number
     isActive: boolean
     slideId?: string
+    onClick?: () => void
 }
 
 // Component for individual slide thumbnail with proper scaling
-const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
+const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProps) => {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
     const presentationContext = useContext(PresentationModeContext)
@@ -100,6 +101,7 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
                     : `[data-slide="${index}"]`
                 const slideElement = document.querySelector(selector)
                 slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                onClick?.()
             }}
         >
             <div
@@ -130,10 +132,11 @@ interface SlideThumbnailsProps {
     slides: Slide[]
     activeSlideIndex: number
     slideId?: string
+    onClick?: () => void
 }
 
 // Component for rendering slide thumbnails
-export default function SlideThumbnails({ slides, activeSlideIndex, slideId }: SlideThumbnailsProps) {
+export default function SlideThumbnails({ slides, activeSlideIndex, slideId, onClick }: SlideThumbnailsProps) {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
     const presentationContext = useContext(PresentationModeContext)
@@ -186,6 +189,7 @@ export default function SlideThumbnails({ slides, activeSlideIndex, slideId }: S
                             index={index}
                             isActive={index === activeSlideIndex}
                             slideId={slideId}
+                            onClick={onClick}
                         />
                     </div>
                 ))}

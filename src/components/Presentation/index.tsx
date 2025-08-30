@@ -37,14 +37,16 @@ interface PresentationProps {
 const SidebarContent = ({
     content,
     activeSlideIndex,
+    onClick,
 }: {
-    content: React.ReactNode | AccordionItem[] | ((activeSlideIndex: number) => React.ReactNode)
+    content: React.ReactNode | AccordionItem[] | ((activeSlideIndex: number, onClick?: () => void) => React.ReactNode)
     activeSlideIndex: number
+    onClick?: () => void
 }): React.ReactElement | null => {
     if (!content) return null
 
     if (typeof content === 'function') {
-        return <>{content(activeSlideIndex)}</>
+        return <>{content(activeSlideIndex, onClick)}</>
     }
 
     if (Array.isArray(content)) {
@@ -274,19 +276,28 @@ export default function Presentation({
                             animate={
                                 isMobile
                                     ? {
-                                        height: isNavVisible ? 'auto' : 0,
-                                        width: '100%',
-                                    }
+                                          height: isNavVisible ? 'auto' : 0,
+                                          width: '100%',
+                                      }
                                     : { width: isNavVisible ? 192 : 0, height: '100%' }
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`bg-primary @2xl:border-y-0 border-y ${isNavVisible ? '@2xl:border-r' : 'border-b-0'
-                                } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[50px]`}
+                            className={`bg-primary @2xl:border-y-0 border-y ${
+                                isNavVisible ? '@2xl:border-r' : 'border-b-0'
+                            } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[46px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
-                                    <SidebarContent content={sidebarContent} activeSlideIndex={activeSlideIndex} />
+                                    <SidebarContent
+                                        content={sidebarContent}
+                                        activeSlideIndex={activeSlideIndex}
+                                        onClick={() => {
+                                            if (isMobile) {
+                                                toggleNav()
+                                            }
+                                        }}
+                                    />
                                 </div>
                             </ScrollArea>
                         </motion.aside>
@@ -327,8 +338,9 @@ export default function Presentation({
                                 </div>
                                 <div
                                     data-scheme="primary"
-                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${!isDragging ? 'transition-all duration-200 ease-out' : ''
-                                        }`}
+                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${
+                                        !isDragging ? 'transition-all duration-200 ease-out' : ''
+                                    }`}
                                     style={{
                                         height: isDrawerOpen ? drawerHeight : 0,
                                         maxHeight: 300,
@@ -337,10 +349,11 @@ export default function Presentation({
                                 >
                                     <motion.div
                                         data-scheme="tertiary"
-                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${isDrawerOpen
-                                            ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
-                                            : 'pointer-events-none'
-                                            }`}
+                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${
+                                            isDrawerOpen
+                                                ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
+                                                : 'pointer-events-none'
+                                        }`}
                                         drag={isDrawerOpen ? 'y' : false}
                                         dragMomentum={false}
                                         dragConstraints={{ top: 0, bottom: 0 }}
