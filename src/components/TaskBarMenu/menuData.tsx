@@ -19,6 +19,7 @@ import useProduct from '../../hooks/useProduct'
 import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
+import { IconChevronDown } from "@posthog/icons"
 
 interface DocsMenuItem {
     name: string
@@ -611,7 +612,12 @@ export function useMenuData(): MenuType[] {
         {
             trigger: (
                 <>
-                    <Logo noText className="size-6" fill="primary" classic />
+
+                    <div className="flex items-center">
+                        <Logo noText className="size-6 2xs:hidden md:block" fill="primary" classic />
+                        <Logo className="hidden 2xs:flex md:hidden h-5 w-auto" fill="primary" classic />
+                        <IconChevronDown className="size-6 inline-block md:hidden" />
+                    </div>
                 </>
             ),
             items: logoMenuItems,
