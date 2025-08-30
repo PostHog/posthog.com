@@ -186,7 +186,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
             resizeObserver.disconnect()
             window.removeEventListener('resize', handleResize)
         }
-    }, [updateScale, mode])
+    }, [updateScale, mode, children])
 
     // Don't render scaled content until we have proper dimensions
     if (!isInitialized) {
