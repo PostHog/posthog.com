@@ -338,8 +338,8 @@ export default function Presentation({
                                     <motion.div
                                         data-scheme="tertiary"
                                         className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${isDrawerOpen
-                                                ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
-                                                : 'pointer-events-none'
+                                            ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
+                                            : 'pointer-events-none'
                                             }`}
                                         drag={isDrawerOpen ? 'y' : false}
                                         dragMomentum={false}

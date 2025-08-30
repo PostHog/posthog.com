@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
+import ResponsiveSlideContent from 'components/Presentation/ResponsiveSlideContent'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import { docsMenu } from '../../../navs'
@@ -384,14 +385,10 @@ export default function SlidesTemplate({
                                 {slide.name}
                             </span>
                             {/* <DebugContainerQuery /> */}
-                            {/* Mobile view - 9:16 aspect ratio */}
-                            <div className="@2xl:hidden bg-primary aspect-[9/16] relative rounded-md shadow-lg overflow-hidden">
-                                {slide.mobileContent}
-                            </div>
-                            {/* Desktop view - 16:9 aspect ratio */}
-                            <div className="hidden @2xl:block bg-primary aspect-video relative rounded-md shadow-lg overflow-hidden">
-                                {slide.content}
-                            </div>
+                            <ResponsiveSlideContent
+                                mobileContent={slide.mobileContent}
+                                desktopContent={slide.content}
+                            />
                         </div>
                     ))}
                 </div>

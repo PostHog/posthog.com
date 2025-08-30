@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
 import { useWindow } from '../../../context/Window'
 import { useApp } from '../../../context/App'
 import { getIsMobile } from 'components/Presentation'
+import { PresentationModeContext } from '../../RadixUI/Tabs'
 
 interface Slide {
     name: string
@@ -23,7 +24,9 @@ interface SlideThumbProps {
 const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
+    const presentationContext = useContext(PresentationModeContext)
     const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
+    const [isPortraitMode, setIsPortraitMode] = useState<boolean>(false)
     const slideRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (isActive && isMobile && slideRef.current) {
@@ -47,6 +50,43 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
         return () => window.removeEventListener('resize', handleResize)
     }, [appWindow, siteSettings])
 
+    // Determine if we should use portrait orientation for thumbnails
+    useEffect(() => {
+        const checkPortraitMode = () => {
+            // Case 1: Full screen presentation mode with viewport < 768px
+            if (presentationContext.isPresenting && presentationContext.isPortrait) {
+                setIsPortraitMode(true)
+                return
+            }
+
+            // Case 2: Edit mode - check if container is below @2xl (672px)
+            // We need to check the actual container width, not just the app window
+            if (!presentationContext.isPresenting) {
+                // For edit mode, we check the app window width (which represents the container)
+                const containerWidth = typeof window !== 'undefined' && siteSettings.experience === 'boring'
+                    ? window.innerWidth
+                    : appWindow?.size?.width
+
+                // Below @2xl (672px) should show portrait thumbnails
+                setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
+                return
+            }
+
+            // Default to landscape
+            setIsPortraitMode(false)
+        }
+
+        checkPortraitMode()
+
+        // Also listen for window resize to update portrait mode
+        const handleResize = () => {
+            checkPortraitMode()
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [presentationContext, appWindow, siteSettings])
+
     return (
         <div
             ref={slideRef}
@@ -62,11 +102,14 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
             }}
         >
             <div
-                className={`aspect-video bg-primary border rounded overflow-hidden relative ${
-                    isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'
-                }`}
+                className={`${isPortraitMode ? 'aspect-[9/16]' : 'aspect-video'} bg-primary border rounded overflow-hidden relative ${isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'
+                    }`}
             >
-                <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
+                <ScalableSlide
+                    mode="thumbnail"
+                    baseWidth={isPortraitMode ? 720 : 1280}
+                    baseHeight={isPortraitMode ? 1280 : 720}
+                >
                     {slide.rawContent}
                 </ScalableSlide>
                 {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
@@ -87,12 +130,51 @@ interface SlideThumbnailsProps {
 
 // Component for rendering slide thumbnails
 export default function SlideThumbnails({ slides, activeSlideIndex, slideId }: SlideThumbnailsProps) {
+    const { siteSettings } = useApp()
+    const { appWindow } = useWindow()
+    const presentationContext = useContext(PresentationModeContext)
+    const [isPortraitMode, setIsPortraitMode] = useState<boolean>(false)
+
+    // Determine if we should use portrait orientation for thumbnails layout
+    useEffect(() => {
+        const checkPortraitMode = () => {
+            // Case 1: Full screen presentation mode with viewport < 768px
+            if (presentationContext.isPresenting && presentationContext.isPortrait) {
+                setIsPortraitMode(true)
+                return
+            }
+
+            // Case 2: Edit mode - check if container is below @2xl (672px)
+            if (!presentationContext.isPresenting) {
+                const containerWidth = typeof window !== 'undefined' && siteSettings.experience === 'boring'
+                    ? window.innerWidth
+                    : appWindow?.size?.width
+
+                // Below @2xl (672px) should show portrait thumbnails
+                setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
+                return
+            }
+
+            // Default to landscape
+            setIsPortraitMode(false)
+        }
+
+        checkPortraitMode()
+
+        const handleResize = () => {
+            checkPortraitMode()
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [presentationContext, appWindow, siteSettings])
+
     return (
         <div className="space-y-3 p-1">
             <h3 className="text-sm text-center font-semibold text-secondary mb-3 @2xl:block hidden">Slides</h3>
             <div className="flex @2xl:grid gap-2">
                 {slides.map((slide, index) => (
-                    <div key={index} className="flex-shrink-0 @2xl:w-full w-48">
+                    <div key={index} className={`flex-shrink-0 @2xl:w-full ${isPortraitMode ? 'w-32' : 'w-48'}`}>
                         <SlideThumb
                             key={index}
                             slide={slide}

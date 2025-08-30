@@ -38,7 +38,12 @@ interface TabsContentProps {
 const TabsContext = React.createContext<TabSize>('sm')
 
 // Create context for presentation mode detection
-const PresentationModeContext = React.createContext<boolean>(false)
+interface PresentationModeContextValue {
+    isPresenting: boolean
+    isPortrait?: boolean
+}
+
+const PresentationModeContext = React.createContext<PresentationModeContextValue>({ isPresenting: false })
 
 // Export the presentation mode context for use in other components
 export { PresentationModeContext }
@@ -52,10 +57,10 @@ const TabsRoot = ({
     size = 'sm',
     children,
 }: TabsRootProps): JSX.Element => {
-    const isInPresentationMode = React.useContext(PresentationModeContext)
+    const presentationContext = React.useContext(PresentationModeContext)
 
     // If in presentation mode and size is lg, downgrade to sm
-    const effectiveSize = isInPresentationMode && size === 'lg' ? 'sm' : size
+    const effectiveSize = presentationContext.isPresenting && size === 'lg' ? 'sm' : size
 
     return (
         <TabsContext.Provider value={effectiveSize}>

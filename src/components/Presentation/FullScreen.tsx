@@ -23,6 +23,7 @@ const PresentationMode = ({
 }: PresentationModeProps) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlideIndex)
   const [showControls, setShowControls] = useState(true)
+  const [isPortrait, setIsPortrait] = useState(false)
   const mouseTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   const nextSlide = useCallback(() => {
@@ -42,6 +43,23 @@ const PresentationMode = ({
       setShowControls(false)
     }, 3000)
   }, [])
+
+  // Check viewport width to determine if we should use portrait mode
+  const checkOrientation = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      setIsPortrait(window.innerWidth < 768)
+    }
+  }, [])
+
+  // Calculate appropriate dimensions based on orientation
+  const slideConfig = {
+    aspectRatio: isPortrait ? 'aspect-[9/16]' : 'aspect-video',
+    baseWidth: isPortrait ? 720 : 1280,
+    baseHeight: isPortrait ? 1280 : 720,
+    thumbnailWidth: isPortrait ? 'w-12' : 'w-20',
+    thumbnailHeight: isPortrait ? 'h-20' : 'h-12',
+    thumbnailAspectRatio: isPortrait ? 'aspect-[9/16]' : 'aspect-video'
+  }
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -72,8 +90,12 @@ const PresentationMode = ({
       }
     }
 
+    // Check orientation on mount and window resize
+    checkOrientation()
+
     document.addEventListener('keydown', handleKeyDown)
     document.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('resize', checkOrientation)
 
     // Initial timer for hiding controls
     const initialTimer = setTimeout(() => {
@@ -86,6 +108,7 @@ const PresentationMode = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('resize', checkOrientation)
       if (mouseTimerRef.current) {
         clearTimeout(mouseTimerRef.current)
       }
@@ -93,7 +116,7 @@ const PresentationMode = ({
       // Restore body scrolling
       document.body.style.overflow = ''
     }
-  }, [nextSlide, prevSlide, onExit, handleMouseMove])
+  }, [nextSlide, prevSlide, onExit, handleMouseMove, checkOrientation])
 
   const currentSlideData = slides[currentSlide]
   // Use rawContent for presentation to avoid double-scaling, fallback to content
@@ -145,9 +168,9 @@ const PresentationMode = ({
 
       {/* Current slide */}
       <div className="w-full h-full flex items-center justify-center p-4 bg-accent">
-        <div className="@container aspect-video max-w-full max-h-full w-full overflow-hidden">
-          <ScalableSlide mode="presentation" baseWidth={1280} baseHeight={720}>
-            <PresentationModeContext.Provider value={true}>
+        <div className={`@container ${slideConfig.aspectRatio} max-w-full max-h-full w-full overflow-hidden`}>
+          <ScalableSlide mode="presentation" baseWidth={slideConfig.baseWidth} baseHeight={slideConfig.baseHeight}>
+            <PresentationModeContext.Provider value={{ isPresenting: true, isPortrait }}>
               {slideContent}
             </PresentationModeContext.Provider>
           </ScalableSlide>
@@ -178,9 +201,9 @@ const PresentationMode = ({
                   } rounded`}
                 title={slide.name}
               >
-                <div className="w-20 h-12 aspect-video bg-primary border border-white/20 group-hover:border-white/40 rounded overflow-hidden relative">
-                  <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
-                    <PresentationModeContext.Provider value={true}>
+                <div className={`${slideConfig.thumbnailWidth} ${slideConfig.thumbnailHeight} ${slideConfig.thumbnailAspectRatio} bg-primary border border-white/20 group-hover:border-white/40 rounded overflow-hidden relative`}>
+                  <ScalableSlide mode="thumbnail" baseWidth={slideConfig.baseWidth} baseHeight={slideConfig.baseHeight}>
+                    <PresentationModeContext.Provider value={{ isPresenting: true, isPortrait }}>
                       {thumbnailContent}
                     </PresentationModeContext.Provider>
                   </ScalableSlide>
@@ -191,7 +214,7 @@ const PresentationMode = ({
                     {index}
                   </div>
                 </div>
-                <div className="text-xs text-white/80 mt-1 text-center font-medium truncate max-w-20">
+                <div className={`text-xs text-white/80 mt-1 text-center font-medium truncate ${slideConfig.thumbnailWidth}`}>
                   {slide.name}
                 </div>
               </button>
