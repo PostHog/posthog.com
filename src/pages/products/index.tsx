@@ -95,8 +95,6 @@ export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [hoveredProduct, setHoveredProduct] = useState<any>(null)
-    const [lastClickTime, setLastClickTime] = useState(0)
-    const [lastClickedProduct, setLastClickedProduct] = useState<string | null>(null)
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
@@ -147,28 +145,10 @@ export default function Products(): JSX.Element {
         (product: any, e: React.MouseEvent) => {
             e.preventDefault()
             e.stopPropagation()
-            if (appWindowWidth <= 768) {
-                navigate(`/${product.slug}`, { state: { newWindow: true } })
-                return
-            }
-
-            const currentTime = Date.now()
-            const timeSinceLastClick = currentTime - lastClickTime
-            const isSameProduct = lastClickedProduct === product.slug
-
-            // Double-click detection (within 500ms on the same product)
-            if (isSameProduct && timeSinceLastClick < 500) {
-                // Double-click: open the product page in PostHog window
-                navigate(`/${product.slug}`, { state: { newWindow: true } })
-            } else {
-                // Single-click: select the product
-                setSelectedProduct(product)
-                setLastClickedProduct(product.slug)
-            }
-
-            setLastClickTime(currentTime)
+            // Single-click opens the product page
+            navigate(`/${product.slug}`, { state: { newWindow: true } })
         },
-        [lastClickTime, lastClickedProduct, appWindowWidth]
+        [appWindowWidth]
     )
 
     const handleRightSidebarClose = useCallback(() => {
@@ -192,7 +172,6 @@ export default function Products(): JSX.Element {
                 showTitle={false}
                 headerBarOptions={['showBack', 'showForward', 'showSearch']}
                 selectOptions={selectOptions}
-                doubleClickToOpen={true}
                 isRightSidebarOpen={true}
                 onRightSidebarClose={handleRightSidebarClose}
                 onSearch={handleSearchChange}
@@ -306,9 +285,6 @@ export default function Products(): JSX.Element {
                                             >
                                                 Open {sidePanelProduct.name}
                                             </OSButton>
-                                            <p className="text-xs text-muted text-center mt-2">
-                                                Tip: Double-click the icon to open directly
-                                            </p>
                                         </div>
                                     )}
 
@@ -495,8 +471,8 @@ export default function Products(): JSX.Element {
                                                                 onClick={(e) => handleProductClick(product, e)}
                                                                 onMouseEnter={() => setHoveredProduct(product)}
                                                                 onMouseLeave={() => setHoveredProduct(null)}
-                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
-                                                                    } ${appWindowWidth <= 768 ? 'cursor-pointer' : ''}`}
+                                                                className={`w-full cursor-pointer p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
+                                                                    }`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>
