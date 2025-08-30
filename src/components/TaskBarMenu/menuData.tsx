@@ -616,7 +616,7 @@ export function useMenuData(): MenuType[] {
                     <div className="flex items-center">
                         <Logo noText className="size-6 2xs:hidden md:block" fill="primary" classic />
                         <Logo className="hidden 2xs:flex md:hidden h-5 w-auto" fill="primary" classic />
-                        <IconChevronDown className="size-6 inline-block md:hidden" />
+                        <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
