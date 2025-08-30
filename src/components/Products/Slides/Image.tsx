@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ZoomImage } from 'components/ZoomImage'
+import CloudinaryImage from "components/CloudinaryImage"
 
 interface Image {
     src: string
+    srcDark: string
     alt: string
     stylize: boolean
     shadow: boolean
@@ -16,6 +18,30 @@ interface ProductImageProps {
 
 export default function ProductImage({ images, className = '' }: ProductImageProps): JSX.Element {
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [isDark, setIsDark] = useState(false)
+
+    // Check theme from body class
+    useEffect(() => {
+        const checkTheme = () => {
+            const bodyClass = document.body.className
+            const bodyIsDark = bodyClass.includes('dark')
+            setIsDark(bodyIsDark)
+            console.log('Theme check:', {
+                bodyClass,
+                bodyIsDark,
+                currentImage: images[currentIndex]?.src,
+                currentImageDark: images[currentIndex]?.srcDark
+            })
+        }
+
+        checkTheme()
+
+        // Listen for theme changes
+        const observer = new MutationObserver(checkTheme)
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] })
+
+        return () => observer.disconnect()
+    }, [currentIndex, images])
 
     if (!images || images.length === 0) {
         return <div>No images available</div>
@@ -32,9 +58,21 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
     }
 
+    // Use srcDark if it exists AND theme is dark, otherwise use src
+    const imageSrc = (currentImage.srcDark && isDark) ? currentImage.srcDark : currentImage.src
+
+    console.log('Image selection:', {
+        isDark,
+        hasSrcDark: !!currentImage.srcDark,
+        selectedSrc: imageSrc,
+        originalSrc: currentImage.src,
+        darkSrc: currentImage.srcDark
+    })
+
     const content = (
-        <img
-            src={currentImage.src}
+        <CloudinaryImage
+            key={`${imageSrc}-${isDark ? 'dark' : 'light'}`} // Force re-render when theme changes
+            src={imageSrc as `https://res.cloudinary.com/${string}`}
             alt={currentImage.alt}
             className={`w-full h-full object-contain ${currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
                 } ${currentImage.shadow ? 'shadow-xl' : ''} ${currentImage.className || ''}`}

@@ -12,7 +12,7 @@ interface FeaturesSplitProps {
   description?: string
   icon?: React.ReactNode
   features?: Feature[]
-  images?: Array<{ src: string; alt: string; stylize?: boolean; shadow?: boolean; className?: string }>
+  images?: Array<{ src: string; srcDark?: string; alt: string; stylize?: boolean; shadow?: boolean; className?: string }>
   children?: React.ReactNode
   bgColor?: string
   textColor?: string
@@ -75,6 +75,7 @@ export default function FeaturesSplit({ headline, description, icon, features, i
           <ProductImage
             images={images.map(img => ({
               src: img.src,
+              srcDark: img.srcDark || '',
               alt: img.alt,
               stylize: img.stylize || false,
               shadow: img.shadow || false,
