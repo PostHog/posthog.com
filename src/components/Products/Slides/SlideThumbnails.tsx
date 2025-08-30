@@ -63,12 +63,13 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
             // We need to check the actual container width, not just the app window
             if (!presentationContext.isPresenting) {
                 // For edit mode, we check the app window width (which represents the container)
-                const containerWidth = typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                    ? window.innerWidth
-                    : appWindow?.size?.width
+                const containerWidth =
+                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
+                        ? window.innerWidth
+                        : appWindow?.size?.width
 
                 // Below @2xl (672px) should show portrait thumbnails
-                setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
+                setIsPortraitMode(containerWidth ? containerWidth < 896 : false)
                 return
             }
 
@@ -102,8 +103,11 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
             }}
         >
             <div
-                className={`${isPortraitMode ? 'aspect-[9/16]' : 'aspect-video'} bg-primary border rounded overflow-hidden relative ${isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'
-                    }`}
+                className={`${
+                    isPortraitMode ? 'aspect-[9/16]' : 'aspect-video'
+                } bg-primary border rounded overflow-hidden relative ${
+                    isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'
+                }`}
             >
                 <ScalableSlide
                     mode="thumbnail"
@@ -146,9 +150,10 @@ export default function SlideThumbnails({ slides, activeSlideIndex, slideId }: S
 
             // Case 2: Edit mode - check if container is below @2xl (672px)
             if (!presentationContext.isPresenting) {
-                const containerWidth = typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                    ? window.innerWidth
-                    : appWindow?.size?.width
+                const containerWidth =
+                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
+                        ? window.innerWidth
+                        : appWindow?.size?.width
 
                 // Below @2xl (672px) should show portrait thumbnails
                 setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
