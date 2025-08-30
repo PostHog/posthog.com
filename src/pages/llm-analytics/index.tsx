@@ -84,7 +84,7 @@ export default function LLMAnalytics(): JSX.Element {
         slug: `features-${index}`,
         name: feature.title,
         props: { featureIndex: index },
-        template: 'grid'
+        template: 'split'
     }))
 
     const slides = createSlideConfig({

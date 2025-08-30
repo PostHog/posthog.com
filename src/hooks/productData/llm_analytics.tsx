@@ -1,5 +1,6 @@
 import React from 'react'
-import { IconClockRewind, IconLlmAnalytics } from '@posthog/icons'
+import { IconClockRewind, IconListTreeConnected, IconLlmAnalytics, IconShield, IconUser } from '@posthog/icons'
+import { IconTag } from 'components/OSIcons'
 
 export const llmAnalytics = {
   name: 'LLM Analytics',
@@ -64,42 +65,43 @@ export const llmAnalytics = {
   },
   features: [
     {
-      title: 'Conversation tracking',
-      headline: 'Track every LLM interaction',
+      title: 'Trace monitoring',
+      headline: 'Trace monitoring',
       description:
-        'Capture inputs, outputs, tokens, and metadata for every conversation in your application.',
+        'Debug entire conversations, not just individual calls',
       images: [
         {
-          src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1713967763/posthog.com/contents/docs/langfuse-dash.png',
-          alt: 'Conversation tracking',
+          src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
+          srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
+          alt: 'LLM trace',
+          className: 'rounded-tl-xl shadow-2xl justify-end items-end @2xl:mt-8 ml-8 @2xl:ml-0',
         },
       ],
       features: [
         {
-          icon: <IconClockRewind />,
-          title: 'Full conversation history',
+          icon: <IconListTreeConnected />,
+          title: 'Multi-turn conversation history',
           description: 'Track prompts, completions, and token counts for every interaction',
         },
         {
+          icon: <IconUser />,
           title: 'User attribution',
-          description: 'Connect AI interactions to specific users and organizations',
+          description: 'Trace AI interactions to specific users and organizations',
         },
         {
-          title: 'Privacy mode',
-          description: 'Optionally exclude sensitive prompt and completion data',
-        },
-        {
+          icon: <IconTag />,
           title: 'Metadata tracking',
           description: 'Add custom properties like conversation ID, session, or feature',
         },
         {
-          title: 'Multi-turn conversations',
-          description: 'Track entire conversation threads, not just individual calls',
+          icon: <IconShield />,
+          title: 'Privacy mode',
+          description: 'Optionally exclude sensitive prompt and completion data',
         },
       ],
-      children: (<>
-        <em>hello</em> world!
-      </>)
+      // children: (<>
+      //   <em>hello</em> world!
+      // </>)
     },
     {
       title: 'Cost analytics',

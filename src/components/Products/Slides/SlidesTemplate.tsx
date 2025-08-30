@@ -15,6 +15,7 @@ import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import FeaturesSlideAI from './FeaturesSlideAI'
 import FeaturesGrid from './FeaturesGrid'
+import FeaturesSplit from './FeaturesSplit'
 import QuestionsSlide from './QuestionsSlide'
 import PlanComparison from './PlanComparison'
 import ComparisonSummarySlide from './ComparisonSummarySlide'
@@ -201,6 +202,31 @@ export default function SlidesTemplate({
                     )
                 }
 
+                if (template === 'split') {
+                    // Individual feature grid slide
+                    const features = productData?.features || []
+                    const featureIndex = props?.featureIndex || 0
+                    const feature = features[featureIndex]
+
+                    if (!feature) {
+                        return <div>Feature not found</div>
+                    }
+
+                    return (
+                        <FeaturesSplit
+                            bgColor={productData?.color}
+                            textColor={productData?.overview?.textColor}
+                            headline={feature.headline}
+                            description={feature.description}
+                            icon={feature.icon}
+                            features={feature.features}
+                            images={feature.images}
+                            children={feature.children}
+                            {...props}
+                        />
+                    )
+                }
+
                 // Default: tabs template (existing FeaturesSlide with OSTabs)
                 return (
                     <FeaturesSlide
@@ -307,6 +333,31 @@ export default function SlidesTemplate({
 
                     return (
                         <FeaturesGrid
+                            headline={feature.headline}
+                            description={feature.description}
+                            icon={feature.icon}
+                            features={feature.features}
+                            images={feature.images}
+                            children={feature.children}
+                            {...props}
+                        />
+                    )
+                }
+
+                if (template === 'split') {
+                    // Individual feature split slide
+                    const features = productData?.features || []
+                    const featureIndex = props?.featureIndex || 0
+                    const feature = features[featureIndex]
+
+                    if (!feature) {
+                        return <div>Feature not found</div>
+                    }
+
+                    return (
+                        <FeaturesSplit
+                            bgColor={productData?.color}
+                            textColor={productData?.overview?.textColor}
                             headline={feature.headline}
                             description={feature.description}
                             icon={feature.icon}

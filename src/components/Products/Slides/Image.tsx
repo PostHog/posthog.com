@@ -36,9 +36,8 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
         <img
             src={currentImage.src}
             alt={currentImage.alt}
-            className={`w-full h-full object-contain ${
-                currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
-            } ${currentImage.shadow ? 'shadow-xl' : ''}`}
+            className={`w-full h-full object-contain ${currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
+                } ${currentImage.shadow ? 'shadow-xl' : ''} ${currentImage.className || ''}`}
         />
     )
 
@@ -87,9 +86,8 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
                             <button
                                 key={index}
                                 onClick={() => setCurrentIndex(index)}
-                                className={`w-2 h-2 rounded-full transition-colors ${
-                                    index === currentIndex ? 'bg-primary' : 'bg-primary/40 hover:bg-primary/60'
-                                }`}
+                                className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-primary' : 'bg-primary/40 hover:bg-primary/60'
+                                    }`}
                                 aria-label={`Go to image ${index + 1}`}
                             />
                         ))}
