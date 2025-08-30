@@ -8,15 +8,19 @@ export interface OverviewSlideProps {
     screenshots?: {
         [key: string]: {
             src: string
-            alt: string
+            srcMobile?: string
+            alt?: string
             classes?: string
+            imgClasses?: string
+            classesMobile?: string
+            imgClassesMobile?: string
         }
     }
     color: string
     Icon?: React.ComponentType<any>
     hog?: {
         src: string
-        alt: string
+        alt?: string
         classes?: string
     }
 }

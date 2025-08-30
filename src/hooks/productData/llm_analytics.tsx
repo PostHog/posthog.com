@@ -24,16 +24,19 @@ export const llmAnalytics = {
   overview: {
     title: 'Monitor and debug your AI products',
     description:
-      'Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools',
+      'Analyze traces, spans, per-user costs, latency, and usage of your AI features',
     textColor: 'text-white',
     layout: 'overlay',
   },
   screenshots: {
     overview: {
-      src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_desktop_51e40f58bb.png',
+      src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_desktop_2399cc57d6.png',
+      srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
       alt: 'LLM analytics dashboard',
-      classes: 'justify-end items-end pl-4 @lg:pl-6',
-      imgClasses: 'rounded-tl-md shadow-2xl',
+      classes: '',
+      // imgClasses: 'rounded-tl-md shadow-2xl',
+      classesMobile: '',
+      imgClassesMobile: '',
     },
     home: {
       src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png',
@@ -44,11 +47,11 @@ export const llmAnalytics = {
       imgClasses: 'rounded-tl-md shadow-2xl',
     },
   },
-  hog: {
-    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-    alt: 'AI-powered hedgehog',
-    classes: 'absolute bottom-0 right-4 max-w-lg',
-  },
+  // hog: {
+  //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
+  //   alt: 'AI-powered hedgehog',
+  //   classes: 'absolute bottom-0 right-4 max-w-lg',
+  // },
   customers: {
     elevenlabs: {
       headline: 'uses LLM analytics with session replays (and everything else)',
@@ -359,4 +362,8 @@ export const llmAnalytics = {
     },
   ],
   worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
+  presenterNotes: {
+    overview:
+      "<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.",
+  },
 }

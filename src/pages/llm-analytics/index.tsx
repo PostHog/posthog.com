@@ -88,6 +88,9 @@ export default function LLMAnalytics(): JSX.Element {
     }))
 
     const slides = createSlideConfig({
+        templates: {
+            overview: 'stacked',
+        },
         exclude: ['features'], // Remove the default features slide
         custom: featureSlides, // Add individual feature slides
         order: ['overview', 'customers', ...featureSlides.map((slide: any) => slide.slug), 'answers', 'pricing', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with', 'getting-started'],

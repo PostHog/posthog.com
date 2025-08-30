@@ -13,35 +13,53 @@ export default function OverviewSlideStacked({
     const textColor = overview?.textColor || 'text-white'
 
     return (
-        <div className={`h-full p-4 @2xl:p-12 flex flex-col items-center relative bg-${color} ${textColor}`}>
-            <div className="mb-4 w-full flex flex-col">
-                <div className="flex justify-center items-center gap-2 mb-2">
-                    {Icon && <Icon className={`size-8 drop-shadow-xl ${textColor}`} />}
-                    <span className={`text-xl font-semibold drop-shadow-xl opacity-80 ${textColor}`}>
+        <div className={`h-full flex flex-col items-center relative bg-${color} ${textColor}`}>
+            <div className="pt-8 px-4 @2xl:pt-12 @2xl:px-8 mb-4 w-full flex flex-col">
+                <div className="flex justify-center items-center gap-2 mb-4">
+                    {Icon && <Icon className={`size-16 @2xl:size-10 drop-shadow-xl opacity-80 ${textColor}`} />}
+                    <span className={`text-3xl @2xl:text-2xl font-semibold drop-shadow-xl opacity-80 ${textColor}`}>
                         {productName}
                     </span>
                 </div>
-                <div>
-                    <h1
-                        className={`text-6xl @2xl:text-5xl mb-4 font-bold text-center leading-tight drop-shadow-2xl ${textColor}`}
-                    >
-                        {overview?.title}
-                    </h1>
-                </div>
+                <h1
+                    className={`text-6xl mb-4 @2xl:mb-2 font-bold text-center leading-tight drop-shadow-2xl text-balance ${textColor}`}
+                >
+                    {overview?.title}
+                </h1>
                 <p
-                    className={`text-3xl @2xl:text-xl text-center leading-snug drop-shadow max-w-4xl text-balance mx-auto ${textColor}`}
+                    className={`text-3xl text-center leading-snug drop-shadow text-balance mx-auto ${textColor}`}
                 >
                     {overview?.description}
                 </p>
             </div>
 
             <div className="relative flex-1">
-                {screenshots?.overview && (
-                    <CloudinaryImage
-                        src={screenshots.overview.src as any}
-                        alt={screenshots.overview.alt}
-                        imgClassName={screenshots.overview.classes}
-                    />
+                {screenshots?.overview?.srcMobile ? (
+                    <>
+                        {/* Show mobile version until @2xl */}
+                        <CloudinaryImage
+                            src={screenshots.overview.srcMobile as any}
+                            alt={screenshots.overview.alt}
+                            imgClassName={screenshots.overview.classes}
+                            className="@2xl:hidden"
+                        />
+                        {/* Show desktop version from @2xl onwards */}
+                        <CloudinaryImage
+                            src={screenshots.overview.src as any}
+                            alt={screenshots.overview.alt}
+                            imgClassName={screenshots.overview.classes}
+                            className="hidden @2xl:block"
+                        />
+                    </>
+                ) : (
+                    screenshots?.overview && (
+                        /* Show desktop version on all screen sizes when no mobile version exists */
+                        <CloudinaryImage
+                            src={screenshots.overview.src as any}
+                            alt={screenshots.overview.alt}
+                            imgClassName={screenshots.overview.classes}
+                        />
+                    )
                 )}
             </div>
             {hog?.src && (
