@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconClockRewind, IconGraph, IconHandMoney, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconShield, IconSparkles, IconTarget, IconTrends, IconUser } from '@posthog/icons'
+import { IconClockRewind, IconGraph, IconHandMoney, IconLightBulb, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconRewindPlay, IconShield, IconSparkles, IconTarget, IconTrends, IconUser } from '@posthog/icons'
 import { IconGrid, IconTag } from 'components/OSIcons'
 
 export const llmAnalytics = {
@@ -45,7 +45,7 @@ export const llmAnalytics = {
         'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png',
       alt: 'LLM Analytics screenshot',
       classes: 'justify-end items-end pl-4 @lg:pl-6',
-      imgClasses: 'rounded-tl-md shadow-2xl',
+      imgClasses: 'rounded-tl-lg shadow-2xl',
     },
   },
   // hog: {
@@ -89,6 +89,11 @@ export const llmAnalytics = {
           description: 'Trace AI interactions to specific users and organizations',
         },
         {
+          icon: <IconRewindPlay />,
+          title: 'Integrated session recordings',
+          description: 'Observe any changes to your UI based on the LLM\'s response',
+        },
+        {
           icon: <IconTag />,
           title: 'Metadata tracking',
           description: 'Add custom properties like conversation ID, session, or feature',
@@ -99,15 +104,13 @@ export const llmAnalytics = {
           description: 'Optionally exclude sensitive prompt and completion data',
         },
       ],
-      // children: (<>
-      //   <em>hello</em> world!
-      // </>)
+      // children: (<></>)
     },
     {
       title: 'Cost analysis',
       headline: 'Cost analysis',
       description:
-        'Track costs by model, user, feature, and time period to optimize spending and pricing.',
+        'Track costs by model, user, feature, and time period to optimize spending and pricing',
       images: [
         {
           src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',

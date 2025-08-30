@@ -21,7 +21,7 @@ interface FeaturesSplitProps {
 export default function FeaturesSplit({ headline, description, icon, features, images, children, bgColor, textColor }: FeaturesSplitProps) {
   return (
     <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor}`}>
-      <div className="@2xl:max-w-[40%] p-8">
+      <div className="@2xl:max-w-[40%] pt-8 px-8 @2xl:py-8">
         <div className="mb-8">
           {icon && (
             <div className="flex justify-center mb-4">
@@ -56,7 +56,7 @@ export default function FeaturesSplit({ headline, description, icon, features, i
                 )}
                 <div className="flex-1">
                   <h3 className="text-3xl @2xl:text-2xl">{feature.title}</h3>
-                  <p className="text-2xl @2xl:text-lg">{feature.description}</p>
+                  <p className="text-2xl @2xl:text-lg !leading-normal">{feature.description}</p>
                 </div>
               </div>
             ))}
@@ -64,7 +64,7 @@ export default function FeaturesSplit({ headline, description, icon, features, i
         )}
 
         {children && (
-          <div className="mt-8">
+          <div className="mt-4">
             {children}
           </div>
         )}
