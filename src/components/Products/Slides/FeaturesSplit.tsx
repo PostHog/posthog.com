@@ -48,8 +48,8 @@ export default function FeaturesSplit({ headline, description, icon, features, i
             {features.map((feature: Feature, index: number) => (
               <div key={index} className="flex gap-4 items-start">
                 {feature.icon && (
-                  <div className="pt-1">
-                    <div className="size-6">
+                  <div className="pt-0.5 @2xl:pt-1">
+                    <div className="size-8 @2xl:size-6">
                       {feature.icon}
                     </div>
                   </div>

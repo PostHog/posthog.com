@@ -75,7 +75,8 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
             src={imageSrc as `https://res.cloudinary.com/${string}`}
             alt={currentImage.alt}
             className={`w-full h-full object-contain ${currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
-                } ${currentImage.shadow ? 'shadow-xl' : ''} ${currentImage.className || ''}`}
+                } ${currentImage.shadow ? 'shadow-xl' : ''} || ''}`}
+            imgClassName={currentImage.className || ''}
         />
     )
 
