@@ -91,11 +91,9 @@ const client = new Anthropic({
 
 <Step title="Call Anthropic LLMs" badge="required">
 
-Now, when you use the Anthropic SDK, PostHog automatically captures an `$ai_generation` event along with these properties:
+Now, when you use the Anthropic SDK to call LLMs, PostHog automatically captures an `$ai_generation` event.
 
-<NotableGenerationProperties />
-
-You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
+You can enrich the event with additional data such as the trace ID, distinct ID, custom properties, groups, and privacy mode options.
 
 <MultiLanguage>
 
@@ -140,9 +138,13 @@ phClient.shutdown()
 
 </MultiLanguage>
 
-**Notes:** 
-- This also works when message streams are used (e.g. `stream=True` or `client.messages.stream(...)`).
-- If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+> **Notes:** 
+> - This also works when message streams are used (e.g. `stream=True` or `client.messages.stream(...)`).
+> - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+You can expect captured `$ai_generation` events to have the following properties:
+
+<NotableGenerationProperties />
 
 </Step>
 
