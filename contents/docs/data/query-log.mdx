@@ -166,7 +166,6 @@ For example, you can compare access patterns between personal API keys vs other 
 
 ```sql
 SELECT
-SELECT
     is_personal_api_key_request,
     count() as query_count,
     count(DISTINCT created_by) as unique_users,
