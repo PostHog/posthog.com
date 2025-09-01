@@ -59,9 +59,9 @@ To capture analytics for our app, start by installing `posthog-js`:
 npm i posthog-js
 ```
 
-Afterwards, create a `instrumentation-client.ts` file at the base of your project and set up a PostHog initialization in it using your project API key and host from [your project settings](http://app.posthog.com/settings/project).
+Afterwards, create an `instrumentation-client.ts` file at the base of your project and set up a PostHog initialization in it using your project API key and host from [your project settings](http://app.posthog.com/settings/project).
 
-```js
+```ts
 // instrumentation-client.ts
 import posthog from 'posthog-js'
 
@@ -123,7 +123,7 @@ This starts by creating API routes in our app to make both PostHog queries. In o
 
 ### Setting up our pageviews query
 
-In `pageviews/route.ts`, we start by setting our host URL and project ID, both of which you can get from the URL of your PostHog instance. 
+In `/api/pageviews/route.ts`, we start by setting our host URL and project ID, both of which you can get from the URL of your PostHog instance. 
 
 It also requires a personal API key with project **query read** permissions. You can set this up in [your user settings](https://app.posthog.com/settings/user-api-keys).
 
@@ -190,7 +190,7 @@ export async function POST(request: NextRequest) {
 
 ### Setting up our button clicks query
 
-In `button-clicks/route.ts`, we’ll add a similar API request to get button clicks. The difference is that it takes a variable for the team we use to get the button clicks for that specific team. 
+In `/api/button-clicks/route.ts`, we’ll add a similar API request to get button clicks. The difference is that it takes a variable for the team we use to get the button clicks for that specific team. 
 
 ```ts
 // app/api/button-clicks/route.ts
@@ -403,7 +403,7 @@ This creates a simple (and much nicer looking) final visualization for our pagev
 
 ## Using a materialized view to improve performance
 
-Although these queries are simple and fast, future queries you might want to add could be slower. To make more complex queries as fast as possible, you can use a [materialized view](/docs/data-warehouse/views/materialize).
+Although these queries are simple and fast, more complex queries you add later may be slower. To improve performance and keep queries as fast as possible, you can use a [materialized view](/docs/data-warehouse/views/materialize).
 
 We can show this off by materializing our pageview query. To do this, go to the SQL editor in PostHog and enter your pageview query:
 
