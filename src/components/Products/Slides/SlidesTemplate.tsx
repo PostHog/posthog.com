@@ -151,6 +151,7 @@ export default function SlidesTemplate({
                         Icon={productData?.Icon}
                         color={productData?.color}
                         hog={productData?.hog}
+                        status={productData?.status}
                         {...props}
                     />
                 )

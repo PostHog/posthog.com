@@ -23,4 +23,5 @@ export interface OverviewSlideProps {
         alt?: string
         classes?: string
     }
+    status?: string
 }

@@ -132,13 +132,13 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 textColor: 'text-white',
                 layout: 'columns',
             },
-            screenshots: [
-                {
+            screenshots: {
+                overview: {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_25_at_19_51_33_9f5267a861.png',
-                    alt: 'Revenue analytics dashboard',
-                    classes: '',
+                    alt: 'Revenue Analytics dashboard',
+                    classes: 'absolute max-w-[95%] @2xl:max-w-[525px] rounded-md overflow-hidden shadow-2xl',
                 },
-            ],
+            },
             hog: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
                 alt: 'Hedgehog counting money',

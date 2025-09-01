@@ -9,8 +9,9 @@ export default function OverviewSlideStacked({
     color,
     Icon,
     hog,
+    status,
 }: OverviewSlideProps) {
-    const textColor = overview?.textColor || 'text-white'
+    const textColor = overview?.textColor || 'text-primary'
 
     return (
         <div className={`h-full flex flex-col items-center relative bg-${color} ${textColor}`}>
@@ -20,6 +21,9 @@ export default function OverviewSlideStacked({
                     <span className={`text-3xl @2xl:text-2xl font-semibold drop-shadow-xl opacity-80 ${textColor}`}>
                         {productName}
                     </span>
+                    {status === 'beta' && (
+                        <span className={`font-bold uppercase border-2 border-white px-1 rounded-md text-lg ${overview?.textColor || 'text-primary'}`}>Beta</span>
+                    )}
                 </div>
                 <h1
                     className={`text-6xl mb-4 @2xl:mb-2 font-bold text-center leading-tight drop-shadow-2xl text-balance ${textColor}`}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
@@ -69,6 +69,24 @@ export default function RevenueAnalytics(): JSX.Element {
         }
     `)
 
+    const slides = createSlideConfig({
+        exclude: ['customers', 'pricing', 'docs', 'pairs-with'],
+        // order: ['overview', 'pricing', 'features'],
+        // templates: {
+        //     overview: 'columns', // Use the horizontal split layout
+        // },
+        // content: {
+        //     answersDescription:
+        //         'Understand user behavior, identify friction points, and improve your product experience',
+        //     featuresBackgroundImage: {
+        //         url: 'https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg',
+        //         opacity: 0.2,
+        //         position: 'center',
+        //         size: 'cover',
+        //     },
+        // },
+    })
+
     // Merge content data with product data
 
     const mergedData = {
@@ -77,5 +95,5 @@ export default function RevenueAnalytics(): JSX.Element {
         ...contentData,
     }
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }
