@@ -7,7 +7,7 @@ interface Feature {
   icon?: React.ReactNode
 }
 
-interface FeaturesSplitProps {
+interface FeaturesSplitWithImageProps {
   headline: string
   description?: string
   icon?: React.ReactNode
@@ -18,7 +18,7 @@ interface FeaturesSplitProps {
   textColor?: string
 }
 
-export default function FeaturesSplit({ headline, description, icon, features, images, children, bgColor, textColor }: FeaturesSplitProps) {
+export default function FeaturesSplitWithImage({ headline, description, icon, features, images, children, bgColor, textColor }: FeaturesSplitWithImageProps) {
   return (
     <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor}`}>
       <div className="@2xl:max-w-[40%] pt-8 px-8 @2xl:py-8">

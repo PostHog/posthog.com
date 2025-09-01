@@ -15,7 +15,7 @@ import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import FeaturesSlideAI from './FeaturesSlideAI'
 import FeaturesGrid from './FeaturesGrid'
-import FeaturesSplit from './FeaturesSplit'
+import FeaturesSplitWithImage from './FeaturesSplitWithImage'
 import QuestionsSlide from './QuestionsSlide'
 import PlanComparison from './PlanComparison'
 import ComparisonSummarySlide from './ComparisonSummarySlide'
@@ -213,7 +213,7 @@ export default function SlidesTemplate({
                     }
 
                     return (
-                        <FeaturesSplit
+                        <FeaturesSplitWithImage
                             bgColor={productData?.color}
                             textColor={productData?.overview?.textColor}
                             headline={feature.headline}
@@ -355,7 +355,7 @@ export default function SlidesTemplate({
                     }
 
                     return (
-                        <FeaturesSplit
+                        <FeaturesSplitWithImage
                             bgColor={productData?.color}
                             textColor={productData?.overview?.textColor}
                             headline={feature.headline}
@@ -376,19 +376,19 @@ export default function SlidesTemplate({
 
     // Process features to expand custom template features into individual slides
     const processedSlides: any[] = []
-    
+
     slideConfigs.forEach(({ slug, name, component: CustomComponent, props, template }) => {
         if (slug === 'features') {
             // Get features that should use default tabs template
             const defaultFeatures = (productData?.features || []).filter(
                 (f: any) => !f.template || f.template === 'tabs'
             )
-            
+
             // Get features with custom templates that need individual slides
             const customTemplateFeatures = (productData?.features || []).filter(
                 (f: any) => f.template && f.template !== 'tabs'
             )
-            
+
             // Add the default features slide if there are any default features
             if (defaultFeatures.length > 0) {
                 processedSlides.push({
@@ -405,16 +405,16 @@ export default function SlidesTemplate({
                     ),
                 })
             }
-            
+
             // Add individual slides for each custom template feature
             customTemplateFeatures.forEach((feature: any, index: number) => {
                 const featureSlug = feature.handle ? `feature-${feature.handle}` : `feature-custom-${index}`
-                
+
                 // Determine the content based on the template
                 let featureContent
                 if (feature.template === 'split') {
                     featureContent = (
-                        <FeaturesSplit
+                        <FeaturesSplitWithImage
                             bgColor={productData?.color}
                             textColor={productData?.overview?.textColor}
                             headline={feature.headline}
@@ -448,7 +448,7 @@ export default function SlidesTemplate({
                         />
                     )
                 }
-                
+
                 processedSlides.push({
                     name: feature.title || `Feature ${index + 1}`,
                     slug: featureSlug,
@@ -464,7 +464,7 @@ export default function SlidesTemplate({
             })
         }
     })
-    
+
     // Create raw slides from processed configuration
     const rawSlides = processedSlides
 
