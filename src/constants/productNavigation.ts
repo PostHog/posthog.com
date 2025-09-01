@@ -30,7 +30,7 @@ export const categoryDisplayNames: Record<string, string> = {
     // engineering: 'Engineering',
     product_engineering: 'Product engineering',
     communication: 'Communication',
-    product_os: 'Utilities & add-ons',
+    product_os: 'Utilities, add-ons, & packages',
 }
 
 // Icons and colors for categories
@@ -62,7 +62,7 @@ export const productOrder: Record<string, string[]> = {
     dataviz: ['trends', 'funnels', 'bi'],
     product_engineering: ['session-replay', 'experiments', 'feature-flags', 'error-tracking', 'early_access'],
     communication: ['surveys', 'broadcasts', 'user-interviews'],
-    product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'teams', 'profiles'],
+    product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform-packages'],
 }
 
 // Non-product pages that appear in the product navigation
