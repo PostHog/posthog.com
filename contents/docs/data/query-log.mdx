@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-The `query_log` table in PostHog's [data warehouse](/docs/data-warehouse) provides access to query execution metadata and performance metrics. This table is built on top of the ClickHouse `query_log_archive` table and offers a simplified, team-filtered interface for analyzing query performance. It filters for completed HogQL queries for your team. 
+The `query_log` table in PostHog's [data warehouse](/docs/data-warehouse) provides access to query execution metadata and performance metrics. This table is built on top of the ClickHouse `system.query_log` table and offers a simplified, team-filtered interface for analyzing query performance. It filters for completed HogQL queries for your team.
 
 It provides data that enables you to:
 
@@ -51,7 +51,7 @@ Because the query log can be so large, it's important to query it efficiently.
 | `result_rows` | Integer | Number of rows returned |
 | `result_bytes` | Integer | Size of result set in bytes |
 | `memory_usage` | Integer | Peak memory usage in bytes |
-| `cpu_microseconds` | Integer | CPU time consumed |
+| `cpu_microseconds` | Integer | CPU time consumed (for computation, excluding waiting) |
 | `RealTimeMicroseconds` | Integer | Wall clock time in microseconds |
 
 ### S3 storage metrics
@@ -84,7 +84,8 @@ SELECT
     hogql_name,
     query_start_time,
     read_rows,
-    memory_usage
+    memory_usage,
+    cpu_microseconds / 1e6 as cpu_sec
 FROM query_log 
 WHERE event_time >= now() - INTERVAL 1 DAY
 ORDER BY query_duration_ms DESC
@@ -99,14 +100,15 @@ SELECT
     count() as query_count,
     avg(query_duration_ms) as avg_duration,
     avg(memory_usage) as avg_memory,
-    sum(read_bytes) as total_bytes_read
+    sum(read_bytes) as total_bytes_read,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec
 FROM query_log 
 WHERE event_date = today()
 GROUP BY endpoint
 ORDER BY avg_duration DESC
 ```
 
-You can do something similar to track S3 operations and data transfer:
+You can do something similar to track S3 operations and data transfer (applies to data warehouse queries, imported data, materialized views):
 
 ```sql
 SELECT 
@@ -155,7 +157,64 @@ GROUP BY created_by
 ORDER BY queries_run DESC
 ```
 
-This can also be useful to track API access patterns and permissions for security or compliance purposes. 
+
+### API Key Access Tracking
+
+This can also be useful to track API access patterns and permissions for security or compliance purposes.
+
+You can compare access patterns between personal API keys vs other methods.
+
+```sql
+--
+SELECT
+    is_personal_api_key_request,
+    count() as query_count,
+    count(DISTINCT created_by) as unique_users,
+    avg(query_duration_ms) as avg_duration,
+    sum(read_bytes) / 1024 / 1024 as total_mb_read,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec
+FROM query_log
+WHERE event_time >= now() - INTERVAL 7 DAY
+GROUP BY is_personal_api_key_request
+ORDER BY query_count DESC
+```
+
+You can monitor personal API key usage by specific keys (api_key_mask and api_key_label are only available when is_personal_api_key_request = true).
+
+```sql
+SELECT
+    api_key_label,
+    api_key_mask,
+    count() as queries_run,
+    avg(query_duration_ms) as avg_duration_ms,
+    sum(read_rows) as total_rows_processed,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec,
+    min(query_start_time) as first_access,
+    max(query_start_time) as last_access
+FROM query_log
+WHERE is_personal_api_key_request = true
+  AND event_time >= now() - INTERVAL 24 HOUR
+GROUP BY api_key_label, api_key_mask
+ORDER BY queries_run DESC
+```
+
+You can see daily personal API key usage stats for the last 30 days.
+
+```sql
+SELECT
+    event_date,
+    count() as daily_queries,
+    count(DISTINCT api_key_mask) as unique_api_keys,
+    avg(query_duration_ms) as avg_duration_ms,
+    avg(memory_usage) / 1024 / 1024 as avg_mb_memory,
+    sum(read_bytes) / 1024 / 1024 as total_mb_read,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec
+FROM query_log
+WHERE is_personal_api_key_request = true
+  AND event_time >= now() - INTERVAL 30 DAY
+GROUP BY event_date
+ORDER BY event_date DESC
+
 
 ## Query log and its relationship to internal tables
 
