@@ -34,6 +34,11 @@ const LLMInstallationPlatforms = () => {
             url: '/docs/llm-analytics/installation/openrouter',
             icon: <IconOpenRouter />,
         },
+        {
+            label: 'OpenRouter',
+            url: '/docs/llm-analytics/installation/openrouter',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/openrouterai_8260e8b011.png',
+        },
     ]
 
     return <OSList className="grid" items={platforms} />

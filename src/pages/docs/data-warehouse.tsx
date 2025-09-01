@@ -71,7 +71,7 @@ const DataWarehouse: React.FC = () => {
                 ]}
             />
             <Content />
-            <CallToAction to="/docs/data-warehouse/query" width="full">
+            <CallToAction to="/docs/data-warehouse/start-here" width="full">
                 Visit the manual
             </CallToAction>
         </ReaderView>

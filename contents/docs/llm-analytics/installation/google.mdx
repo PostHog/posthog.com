@@ -5,6 +5,7 @@ showStepsToc: true
 
 import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 
 <Steps>
 
@@ -48,8 +49,8 @@ npm install @google/genai
 </Step>
 
 <Step title="Initialize PostHog and Google Gen AI client" badge="required">
-
-In the spot where you initialize the Google Gen AI SDK, import PostHog and our Google Gen AI wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our wrapper.
+ 
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to our Google Gen AI wrapper.
 
 <MultiLanguage>
 
@@ -89,7 +90,9 @@ const client = new GoogleGenAI({
 
 <Step title="Call Google Gen AI LLMs" badge="required">
 
-Now, when you use the Google Gen AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_cache_creation_input_tokens`, `$ai_latency`, `$ai_tools`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
+Now, when you use the Google Gen AI SDK, PostHog automatically captures an `$ai_generation` event along with these properties:
+
+<NotableGenerationProperties />
 
 You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
 

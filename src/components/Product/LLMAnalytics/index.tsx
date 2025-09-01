@@ -657,8 +657,8 @@ export const ProductLLMAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is
-                        responsible for building {product.lowercase}.
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
                 </section>

@@ -1,4 +1,5 @@
 import React from 'react'
+// import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo, useState } from 'react'

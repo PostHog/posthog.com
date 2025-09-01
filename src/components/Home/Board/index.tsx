@@ -983,8 +983,9 @@ export default function Hero(): JSX.Element {
                         return (
                             <div className="relative" key={name}>
                                 <button
-                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${active ? 'font-bold' : 'opacity-75 hover:opacity-100'
-                                        }`}
+                                    className={`text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap ${
+                                        active ? 'font-bold' : 'opacity-75 hover:opacity-100'
+                                    }`}
                                     onClick={() => setActiveStatus(name)}
                                     onFocus={(e) => {
                                         if (e.type === 'focus' && !e.currentTarget.matches(':focus-visible')) {
