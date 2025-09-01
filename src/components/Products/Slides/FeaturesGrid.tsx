@@ -14,6 +14,8 @@ interface FeaturesGridProps {
   features?: Feature[]
   images?: Array<{ src: string; alt: string; stylize?: boolean; shadow?: boolean; className?: string }>
   children?: React.ReactNode
+  bgColor?: string
+  textColor?: string
 }
 
 // Function to determine optimal column count based on feature count
@@ -38,13 +40,13 @@ const getColumnCount = (featureCount: number): number => {
   }
 }
 
-export default function FeaturesGrid({ headline, description, icon, features, images, children }: FeaturesGridProps) {
+export default function FeaturesGrid({ headline, description, icon, features, images, children, bgColor, textColor }: FeaturesGridProps) {
   // Determine column count based on features length
   const columnCount = features ? getColumnCount(features.length) : 4
   const gridColsClass = `grid-cols-${columnCount}`
 
   return (
-    <div className="h-full bg-primary text-primary">
+    <div className={`h-full bg-${bgColor} ${textColor}`}>
       <div className="pt-12 px-4 pb-8">
         <h2 className="text-5xl mb-0 text-center">
           {headline}
@@ -69,13 +71,13 @@ export default function FeaturesGrid({ headline, description, icon, features, im
       </div>
 
       {features && features.length > 0 && (
-        <div className={`grid ${gridColsClass} gap-4 px-4 mb-8`}>
+        <div className={`grid @2xl:${gridColsClass} gap-x-4 gap-y-8 px-8 @2xl:px-4 mb-8`}>
           {features.map((feature: Feature, index: number) => (
-            <div key={index} className="text-center">
+            <div key={index} className="@2xl:text-center">
               {feature.icon && (
                 <div className="flex justify-center mb-3">
                   <div className="bg-accent rounded-full p-4">
-                    <div className="size-8">
+                    <div className={`size-8 text-black fill-black`}>
                       {feature.icon}
                     </div>
                   </div>

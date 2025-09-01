@@ -358,6 +358,8 @@ export default function SlidesTemplate({
 
                     return (
                         <FeaturesGrid
+                            bgColor={productData?.color}
+                            textColor={productData?.overview?.textColor}
                             headline={feature.headline}
                             description={feature.description}
                             icon={feature.icon}
@@ -468,6 +470,8 @@ export default function SlidesTemplate({
                 } else if (feature.template === 'grid') {
                     featureContent = (
                         <FeaturesGrid
+                            bgColor={productData?.color}
+                            textColor={productData?.overview?.textColor}
                             headline={feature.headline}
                             description={feature.description}
                             icon={feature.icon}

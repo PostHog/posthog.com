@@ -81,6 +81,7 @@ export default function LLMAnalytics(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
+        exclude: ['answers'],
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
             answersHeadline: 'What can LLM Analytics help me discover?'

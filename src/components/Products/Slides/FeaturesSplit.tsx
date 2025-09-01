@@ -21,17 +21,7 @@ interface FeaturesSplitProps {
 export default function FeaturesSplit({ headline, description, icon, features, images, children, bgColor, textColor }: FeaturesSplitProps) {
   return (
     <div className={`h-full flex flex-col @2xl:flex-row @2xl:gap-4 bg-${bgColor} ${textColor}`}>
-
-      <aside className="flex-1 flex">
-
-        {children && (
-          <div>
-            {children}
-          </div>
-        )}
-
-      </aside>
-      <div className="@2xl:max-w-[40%] pt-8 px-8 @2xl:py-8">
+      <div className="@2xl:flex-1 pt-8 px-8 @2xl:py-8">
         <div className="mb-8">
           {icon && (
             <div className="flex justify-center mb-4">
@@ -58,25 +48,29 @@ export default function FeaturesSplit({ headline, description, icon, features, i
             {features.map((feature: Feature, index: number) => (
               <div key={index} className="flex gap-4 items-start">
                 {feature.icon && (
-                  <div className="pt-0.5 @2xl:pt-1">
-                    <div className="size-8 @2xl:size-6">
+                  <div className="">
+                    <div className="size-12 @2xl:size-10">
                       {feature.icon}
                     </div>
                   </div>
                 )}
                 <div className="flex-1">
-                  <h3 className="text-3xl @2xl:text-2xl">{feature.title}</h3>
-                  <p className="text-2xl @2xl:text-lg !leading-normal">{feature.description}</p>
+                  <h3 className="text-4xl @2xl:text-3xl">{feature.title}</h3>
+                  <p className="text-3xl @2xl:text-xl !leading-normal">{feature.description}</p>
                 </div>
               </div>
             ))}
           </div>
         )}
-
-
       </div>
 
-
+      <aside className="@2xl:max-w-[40%] flex">
+        {children && (
+          <div>
+            {children}
+          </div>
+        )}
+      </aside>
     </div>
   )
 }

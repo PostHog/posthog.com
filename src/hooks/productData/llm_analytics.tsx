@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconBell, IconClockRewind, IconDashboard, IconGraph, IconHandMoney, IconLightBulb, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconRewindPlay, IconShield, IconSparkles, IconTarget, IconTrends, IconUser, IconWarning, IconGlobe, IconListCheck } from '@posthog/icons'
-import { IconAnthropic, IconGemini, IconGrid, IconLangChain, IconOpenAI, IconOpenRouter, IconTag, IconVercel } from 'components/OSIcons'
+import { IconAnthropic, IconGemini, IconGrid, IconHelicone, IconKeywordsAI, IconLangChain, IconLangfuse, IconOpenAI, IconOpenRouter, IconTag, IconTraceloop, IconVercel } from 'components/OSIcons'
 
 export const llmAnalytics = {
   name: 'LLM Analytics',
@@ -199,36 +199,32 @@ export const llmAnalytics = {
         {
           icon: <IconOpenAI />,
           title: 'OpenAI SDK',
-          description: 'Drop-in integration for GPT models with one line of code',
+          // description: 'Drop-in integration for GPT models with one line of code',
         },
         {
           icon: <IconAnthropic />,
           title: 'Anthropic SDK',
-          description: 'Native support for Claude models',
+          // description: 'Native support for Claude models',
         },
         {
           icon: <IconGemini />,
           title: 'Google Gemini',
-          description: 'Native support for Gemini models',
+          // description: 'Native support for Gemini models',
         },
         {
           icon: <IconLangChain />,
           title: 'LangChain',
-          description: 'Full observability for LangChain applications',
+          // description: 'Full observability for LangChain applications',
         },
         {
           icon: <IconVercel />,
           title: 'Vercel AI SDK',
-          description: 'Track streaming responses and edge functions',
+          // description: 'Track streaming responses and edge functions',
         },
         {
           icon: <IconOpenRouter />,
           title: 'OpenRouter',
-          description: 'Native support for OpenRouter',
-        },
-        {
-          title: 'Platform integrations',
-          description: 'Works with Langfuse, Helicone, Traceloop, and Keywords AI',
+          // description: 'Native support for OpenRouter',
         },
       ],
     },
@@ -236,34 +232,34 @@ export const llmAnalytics = {
       title: 'Platform integrations',
       handle: 'platform_integrations',
       template: 'split',
-      headline: 'Works with your AI stack',
-      description: 'Simple SDKs for popular LLM providers and observability platforms.',
+      headline: 'Integrates with other LLM observability platforms',
+      description: 'Using another LLM observability platform? Send data to PostHog to analyze it with product usage data.',
       features: [
         {
-          icon: <IconOpenAI />,
+          icon: <IconLangfuse />,
           title: 'Langfuse',
           description: '',
         },
         {
-          icon: <IconOpenAI />,
+          icon: <IconHelicone />,
           title: 'Helicone',
           description: '',
         },
         {
-          icon: <IconOpenAI />,
+          icon: <IconTraceloop />,
           title: 'Traceloop',
           description: '',
         },
         {
-          icon: <IconOpenAI />,
+          icon: <IconKeywordsAI />,
           title: 'Keywords AI',
           description: '',
         },
       ],
       children: (
-        <div>
-          <p>Answer questions like:</p>
-          <ul>
+        <div className="prose-xl p-8">
+          <h3>Answer questions like:</h3>
+          <ul className="list-disc">
             <li>What are my LLM costs by customer, model, and in total?</li>
             <li>How many of my users are interacting with my LLM features?</li>
             <li>Are there generation latency spikes?</li>
@@ -332,38 +328,29 @@ export const llmAnalytics = {
     summary: {
       them: [
         {
-          title: 'Expensive specialized tools',
-          subtitle: 'Most LLM observability tools charge premium prices',
+          title: "You don't need any product insights",
+          subtitle: 'and only want to track operational metrics',
         },
         {
-          title: 'Limited analytics capabilities',
-          subtitle: 'Basic dashboards without correlation to product metrics',
+          title: 'Deep mobile support',
+          subtitle: "if you're building a mobile-specific product",
         },
         {
-          title: 'Separate from your product data',
-          subtitle: "Can't connect AI usage to business outcomes",
+          title: 'You don\'t want to use an open source product',
         },
       ],
       us: [
         {
-          title: '10x cheaper than alternatives',
-          subtitle: 'Same pricing as regular events, not premium LLM pricing',
+          title: 'You want to understand LLM costs on a per user basis',
+          subtitle: 'in addition to other axes',
         },
         {
-          title: 'Full analytics platform',
-          subtitle: 'Connect AI metrics to retention, revenue, and engagement',
+          title: 'You want to combine LLM analytics with other tools',
+          subtitle: 'like Error Tracking and Session Replay',
         },
         {
-          title: 'Privacy-first options',
-          subtitle: 'Exclude sensitive data with built-in privacy mode',
-        },
-        {
-          title: 'All major LLMs supported',
-          subtitle: 'OpenAI, Anthropic, LangChain, and more',
-        },
-        {
-          title: 'No proxy or latency',
-          subtitle: "Async tracking that doesn't slow down your app",
+          title: 'You need easy regulatory compliance for HIPAA and GDPR',
+          // subtitle: 'Exclude sensitive data with built-in privacy mode',
         },
       ],
     },
