@@ -165,7 +165,7 @@ This can also be useful to track API access patterns and permissions for securit
 You can compare access patterns between personal API keys vs other methods.
 
 ```sql
---
+SELECT
 SELECT
     is_personal_api_key_request,
     count() as query_count,
