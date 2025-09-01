@@ -8,7 +8,7 @@ showTitle: true
 
 ### How do I get access?
 
-Ask in the `#team-infrastructure` Slack channel for someone to add you.
+Create a PR to the `posthog-cloud-infra` repository to add your details [here](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
 
 To give someone access
 1. Go [to this link](https://us-east-1.console.aws.amazon.com/singlesignon/home?region=us-east-1#!/instances/7223d5d28068c4d6/users) while logged in
