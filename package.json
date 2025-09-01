@@ -5,7 +5,7 @@
     "author": "PostHog",
     "license": "MIT",
     "engines": {
-        "node": "22.x"
+        "node": "20.x"
     },
     "repository": {
         "type": "git",
