@@ -2480,6 +2480,10 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Query log',
+                            url: '/docs/data/query-log',
+                        },
+                        {
                             name: 'Annotations',
                             url: '/docs/data/annotations',
                         },
