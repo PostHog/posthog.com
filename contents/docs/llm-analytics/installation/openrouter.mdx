@@ -102,9 +102,7 @@ phClient.shutdown()
 
 <Step title="Call OpenRouter" badge="required">
 
-Now, when you call OpenRouter with the OpenAI SDK, PostHog automatically captures an `$ai_generation` event along with these properties:
-
-<NotableGenerationProperties />
+Now, when you call OpenRouter with the OpenAI SDK, PostHog automatically captures an `$ai_generation` event.
 
 You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
 
@@ -147,6 +145,10 @@ console.log(completion.choices[0].message.content)
 > - We also support the old `chat.completions` API.
 > - This works with responses where `stream=True`.
 > - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+You can expect captured `$ai_generation` events to have the following properties:
+
+<NotableGenerationProperties />
 
 </Step>
 
