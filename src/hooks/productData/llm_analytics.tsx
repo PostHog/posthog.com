@@ -67,7 +67,7 @@ export const llmAnalytics = {
     {
       title: 'Trace monitoring',
       handle: 'trace_monitoring',
-      template: 'split',
+      template: 'splitImage',
       headline: 'Trace monitoring',
       description:
         'Debug entire conversations, not just individual calls',
@@ -111,7 +111,7 @@ export const llmAnalytics = {
     {
       title: 'Cost analysis',
       handle: 'cost_analysis',
-      template: 'split',
+      template: 'splitImage',
       headline: 'Cost analysis',
       description:
         'Track costs by model, user, feature, and time period to optimize spending and pricing',
@@ -149,7 +149,7 @@ export const llmAnalytics = {
     {
       title: 'Performance monitoring',
       handle: 'performance_monitoring',
-      template: 'split',
+      template: 'splitImage',
       headline: 'Performance monitoring',
       description:
         'Monitor latency, error rates, and model performance',
@@ -231,6 +231,46 @@ export const llmAnalytics = {
           description: 'Works with Langfuse, Helicone, Traceloop, and Keywords AI',
         },
       ],
+    },
+    {
+      title: 'Platform integrations',
+      handle: 'platform_integrations',
+      template: 'split',
+      headline: 'Works with your AI stack',
+      description: 'Simple SDKs for popular LLM providers and observability platforms.',
+      features: [
+        {
+          icon: <IconOpenAI />,
+          title: 'Langfuse',
+          description: '',
+        },
+        {
+          icon: <IconOpenAI />,
+          title: 'Helicone',
+          description: '',
+        },
+        {
+          icon: <IconOpenAI />,
+          title: 'Traceloop',
+          description: '',
+        },
+        {
+          icon: <IconOpenAI />,
+          title: 'Keywords AI',
+          description: '',
+        },
+      ],
+      children: (
+        <div>
+          <p>Answer questions like:</p>
+          <ul>
+            <li>What are my LLM costs by customer, model, and in total?</li>
+            <li>How many of my users are interacting with my LLM features?</li>
+            <li>Are there generation latency spikes?</li>
+            <li>Does interacting with LLM features correlate with other metrics (retention, usage, revenue, etc.)?</li>
+          </ul>
+        </div>
+      ),
     },
     {
       title: 'Advanced analytics',
