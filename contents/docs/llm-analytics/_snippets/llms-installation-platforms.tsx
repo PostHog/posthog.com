@@ -28,6 +28,11 @@ const LLMInstallationPlatforms = () => {
             url: '/docs/llm-analytics/installation/vercel-ai',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/vercel_ded5edb1ef.svg',
         },
+        {
+            label: 'OpenRouter',
+            url: '/docs/llm-analytics/installation/openrouter',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/openrouterai_8260e8b011.png',
+        },
     ]
 
     return <List className="grid sm:grid-cols-2" items={platforms} />

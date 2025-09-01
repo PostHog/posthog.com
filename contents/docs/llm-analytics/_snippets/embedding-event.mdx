@@ -1,30 +1,37 @@
 An embedding is a single call to an embedding model to convert text into a vector representation.
 
-Event Name: `$ai_embedding`
+**Event name**: `$ai_embedding`
 
-| Property | Description |
-|----------|-------------|
-| `$ai_trace_id` | The trace ID (a UUID to group related AI events together)<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code><br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
+### Core properties
+
+| **Property** | **Description** |
+|--------------|-----------------|
+| `$ai_trace_id` | The trace ID (a UUID to group related AI events together). Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code> <br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
+| `$ai_span_id` | *(Optional)* Unique identifier for this embedding operation |
+| `$ai_span_name` | *(Optional)* Name given to this embedding operation <br/>Example: `embed_user_query`, `index_document` |
+| `$ai_parent_id` | *(Optional)* Parent span ID for tree-view grouping |
 | `$ai_model` | The embedding model used<br/>Example: `text-embedding-3-small`, `text-embedding-ada-002` |
 | `$ai_provider` | The LLM provider<br/>Example: `openai`, `cohere`, `voyage` |
 | `$ai_input` | The text to embed<br/>Example: `"Tell me a fun fact about hedgehogs"` or array of strings for batch embeddings |
 | `$ai_input_tokens` | The number of tokens in the input |
-| `$ai_latency` | **Optional**<br/>The latency of the embedding call in seconds |
-| `$ai_http_status` | **Optional**<br/>The HTTP status code of the response |
-| `$ai_base_url` | **Optional**<br/>The base URL of the LLM provider<br/>Example: `https://api.openai.com/v1` |
-| `$ai_request_url` | **Optional**<br/>The full URL of the request made to the embedding API<br/>Example: `https://api.openai.com/v1/embeddings` |
-| `$ai_is_error` | **Optional**<br/>Boolean to indicate if the request was an error |
-| `$ai_error` | **Optional**<br/>The error message or object if the embedding failed |
-| **Cost Properties** | *Optional - If not provided, costs will be calculated automatically from token counts* |
-| `$ai_input_cost_usd` | **Optional**<br/>The cost in USD of the input tokens |
-| `$ai_output_cost_usd` | **Optional**<br/>The cost in USD of the output tokens (usually 0 for embeddings) |
-| `$ai_total_cost_usd` | **Optional**<br/>The total cost in USD |
-| **Span/Trace Properties** | |
-| `$ai_span_id` | **Optional**<br/>Unique identifier for this embedding operation |
-| `$ai_span_name` | **Optional**<br/>Name given to this embedding operation<br/>Example: `embed_user_query`, `index_document` |
-| `$ai_parent_id` | **Optional**<br/>Parent span ID for tree view grouping |
+| `$ai_latency` | *(Optional)* The latency of the embedding call in seconds |
+| `$ai_http_status` | *(Optional)* The HTTP status code of the response |
+| `$ai_base_url` | *(Optional)* The base URL of the LLM provider<br/>Example: `https://api.openai.com/v1` |
+| `$ai_request_url` | *(Optional)* The full URL of the request made to the embedding API<br/>Example: `https://api.openai.com/v1/embeddings` |
+| `$ai_is_error` | *(Optional)* Boolean to indicate if the request was an error |
+| `$ai_error` | *(Optional)* The error message or object if the embedding failed |
 
-### Example
+### Cost properties  
+
+Cost properties are optional as we can automatically calculate them from model and token counts. If you want, you can provide your own cost property instead.
+
+| **Property** | **Description** |
+|--------------|-----------------|
+| `$ai_input_cost_usd` | *(Optional)* Cost in USD for input tokens |
+| `$ai_output_cost_usd` | *(Optional)*  Cost in USD for output tokens (usually 0 for embeddings) |
+| `$ai_total_cost_usd` | *(Optional)* Total cost in USD |
+
+### Example API call
 
 ```bash
 curl -X POST "<ph_client_api_host>/i/v0/e/" \
