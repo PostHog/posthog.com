@@ -374,12 +374,99 @@ export default function SlidesTemplate({
         }
     }
 
-    // Create raw slides from configuration
-    const rawSlides = slideConfigs.map(({ slug, name, component: CustomComponent, props, template }) => ({
-        name,
-        slug,
-        content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(slug, props, template),
-    }))
+    // Process features to expand custom template features into individual slides
+    const processedSlides: any[] = []
+    
+    slideConfigs.forEach(({ slug, name, component: CustomComponent, props, template }) => {
+        if (slug === 'features') {
+            // Get features that should use default tabs template
+            const defaultFeatures = (productData?.features || []).filter(
+                (f: any) => !f.template || f.template === 'tabs'
+            )
+            
+            // Get features with custom templates that need individual slides
+            const customTemplateFeatures = (productData?.features || []).filter(
+                (f: any) => f.template && f.template !== 'tabs'
+            )
+            
+            // Add the default features slide if there are any default features
+            if (defaultFeatures.length > 0) {
+                processedSlides.push({
+                    name,
+                    slug,
+                    content: CustomComponent ? (
+                        <CustomComponent {...props} />
+                    ) : (
+                        <FeaturesSlide
+                            features={defaultFeatures}
+                            backgroundImage={contentConfig.featuresBackgroundImage}
+                            {...props}
+                        />
+                    ),
+                })
+            }
+            
+            // Add individual slides for each custom template feature
+            customTemplateFeatures.forEach((feature: any, index: number) => {
+                const featureSlug = feature.handle ? `feature-${feature.handle}` : `feature-custom-${index}`
+                
+                // Determine the content based on the template
+                let featureContent
+                if (feature.template === 'split') {
+                    featureContent = (
+                        <FeaturesSplit
+                            bgColor={productData?.color}
+                            textColor={productData?.overview?.textColor}
+                            headline={feature.headline}
+                            description={feature.description}
+                            icon={feature.icon}
+                            features={feature.features}
+                            images={feature.images}
+                            children={feature.children}
+                            {...props}
+                        />
+                    )
+                } else if (feature.template === 'grid') {
+                    featureContent = (
+                        <FeaturesGrid
+                            headline={feature.headline}
+                            description={feature.description}
+                            icon={feature.icon}
+                            features={feature.features}
+                            images={feature.images}
+                            children={feature.children}
+                            {...props}
+                        />
+                    )
+                } else {
+                    // Fallback for any other template types
+                    featureContent = (
+                        <FeaturesSlide
+                            features={[feature]}
+                            backgroundImage={contentConfig.featuresBackgroundImage}
+                            {...props}
+                        />
+                    )
+                }
+                
+                processedSlides.push({
+                    name: feature.title || `Feature ${index + 1}`,
+                    slug: featureSlug,
+                    content: featureContent,
+                })
+            })
+        } else {
+            // Non-features slides pass through as normal
+            processedSlides.push({
+                name,
+                slug,
+                content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(slug, props, template),
+            })
+        }
+    })
+    
+    // Create raw slides from processed configuration
+    const rawSlides = processedSlides
 
     // Create slides with both raw content and wrapped content for different contexts
     const slides = rawSlides.map((slide) => ({
@@ -412,7 +499,7 @@ export default function SlidesTemplate({
                 slug={productData?.slug}
                 title=""
                 slideId={productData?.slug}
-                sidebarContent={(activeSlideIndex, onClick) => (
+                sidebarContent={(activeSlideIndex: number, onClick: any) => (
                     <SlideThumbnails
                         slides={slides}
                         activeSlideIndex={activeSlideIndex}

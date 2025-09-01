@@ -16,7 +16,33 @@ interface FeaturesGridProps {
   children?: React.ReactNode
 }
 
+// Function to determine optimal column count based on feature count
+const getColumnCount = (featureCount: number): number => {
+  switch (featureCount) {
+    case 2:
+      return 2
+    case 3:
+      return 3
+    case 4:
+      return 4
+    case 5:
+      return 3 // 3 cols and wrap
+    case 6:
+      return 3
+    case 7:
+      return 4
+    case 8:
+      return 4
+    default:
+      return 4 // fallback for edge cases
+  }
+}
+
 export default function FeaturesGrid({ headline, description, icon, features, images, children }: FeaturesGridProps) {
+  // Determine column count based on features length
+  const columnCount = features ? getColumnCount(features.length) : 4
+  const gridColsClass = `grid-cols-${columnCount}`
+
   return (
     <div className="h-full bg-primary text-primary">
       <div className="pt-12 px-4 pb-8">
@@ -43,7 +69,7 @@ export default function FeaturesGrid({ headline, description, icon, features, im
       </div>
 
       {features && features.length > 0 && (
-        <div className="grid grid-cols-4 gap-4 px-4 mb-8">
+        <div className={`grid ${gridColsClass} gap-4 px-4 mb-8`}>
           {features.map((feature: Feature, index: number) => (
             <div key={index} className="text-center">
               {feature.icon && (

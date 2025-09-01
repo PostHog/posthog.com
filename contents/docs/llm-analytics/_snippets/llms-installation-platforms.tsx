@@ -1,6 +1,6 @@
 import React from 'react'
 import { OSList } from 'components/OSList'
-import { IconOpenAI, IconAnthropic, IconGemini, IconLangChain, IconVercel } from 'components/OSIcons'
+import { IconOpenAI, IconAnthropic, IconGemini, IconLangChain, IconVercel, IconOpenRouter } from 'components/OSIcons'
 
 const LLMInstallationPlatforms = () => {
     const platforms = [
@@ -15,7 +15,7 @@ const LLMInstallationPlatforms = () => {
             icon: <IconAnthropic />,
         },
         {
-            label: 'Google',
+            label: 'Google Gemini',
             url: '/docs/llm-analytics/installation/google',
             icon: <IconGemini />,
         },
@@ -28,6 +28,11 @@ const LLMInstallationPlatforms = () => {
             label: 'Vercel AI SDK',
             url: '/docs/llm-analytics/installation/vercel-ai',
             icon: <IconVercel />,
+        },
+        {
+            label: 'OpenRouter',
+            url: '/docs/llm-analytics/installation/openrouter',
+            icon: <IconOpenRouter />,
         },
     ]
 

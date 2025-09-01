@@ -188,6 +188,8 @@ interface ProductData {
         title: string
         headline: string
         description?: string
+        handle?: string      // Optional: used for unique slide slug
+        template?: 'tabs' | 'split' | 'grid'  // Optional: slide template
         icon?: any
         color?: string
         features?: Array<{ title: string; description: string }>
@@ -341,6 +343,52 @@ Each slide component accepts specific props and can be customized:
 
 Populate data for a product in `src/hooks/useProducts.tsx`. (This will eventually move to the billing API.) If the product isn't fully finished, use @src/hooks/useProduct.tsx, as it gets checked first and can exist without the full data structure needed for the billing API.
 
+### Feature-Level Templates (Automatic Slide Generation)
+
+You can now specify templates directly in your feature data structure, and SlidesTemplate will automatically create individual slides for features with custom templates:
+
+```tsx
+// In your product data file (e.g., src/hooks/productData/llm_analytics.tsx)
+features: [
+    {
+        title: 'Trace monitoring',
+        handle: 'trace_monitoring',  // Optional: used for slide slug
+        template: 'split',           // Specify the template for this feature
+        headline: 'Trace monitoring',
+        description: 'Debug entire conversations...',
+        // ... other feature properties
+    },
+    {
+        title: 'Native integrations',
+        handle: 'native_integrations',
+        template: 'grid',            // Different template for this feature
+        headline: 'Works with your AI stack',
+        // ... other feature properties
+    },
+    {
+        title: 'Some other feature',
+        // No template specified - will use default tabs template
+        headline: 'Another feature',
+        // ... other feature properties
+    }
+]
+```
+
+#### How it works:
+
+1. Features without a `template` property (or with `template: 'tabs'`) will be grouped together in the default tabbed features slide
+2. Features with `template: 'split'` or `template: 'grid'` will automatically get their own individual slides
+3. Individual feature slides are rendered after the default features slide (if any)
+4. The `handle` property is used to create unique slide slugs (e.g., `feature-trace_monitoring`)
+
+#### Available Feature Templates:
+
+- **tabs** (default): Feature appears in the tabbed features slide
+- **split**: Individual slide with split layout (image on one side, content on the other)
+- **grid**: Individual slide with grid layout for feature details
+
+This approach eliminates the need for custom logic in individual product pages - just set the template in your feature data!
+
 ### Slide Templates (Overview Slides)
 
 You can use different templates of the overview slide to match your product's visual style:
@@ -373,27 +421,5 @@ const slides = createSlideConfig({
 -   **Columns (Default)**: Traditional layout with content in left column and images/hog on the right
 -   **Stacked**: Horizontal split layout with larger icon and side-by-side content and images
 -   **Overlay**: Centered vertical layout with background image and prominent centered content
-
-#### Available Features Slide Templates:
-
--   **Tabs (Default)**: All features displayed in tabs on a single slide
--   **Columns**: AI-style features layout with columns
--   **Grid**: Individual slides for each feature with 4-column grid layout
-
-```tsx
-// Create individual feature slides using grid template
-const features = productData?.features || []
-const featureSlides = features.map((feature, index) => ({
-    slug: `features-${index}`,
-    name: feature.title,
-    props: { featureIndex: index },
-    template: 'grid',
-}))
-
-const slides = createSlideConfig({
-    exclude: ['features'], // Remove default features slide
-    custom: featureSlides, // Add individual feature slides
-})
-```
 
 All templates accept the same props and work with existing product data structure.

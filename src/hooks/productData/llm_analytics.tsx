@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconBell, IconClockRewind, IconDashboard, IconGraph, IconHandMoney, IconLightBulb, IconListTreeConnected, IconLlmAnalytics, IconPiggyBank, IconRewindPlay, IconShield, IconSparkles, IconTarget, IconTrends, IconUser, IconWarning, IconGlobe, IconListCheck } from '@posthog/icons'
-import { IconGrid, IconTag } from 'components/OSIcons'
+import { IconAnthropic, IconGemini, IconGrid, IconLangChain, IconOpenAI, IconOpenRouter, IconTag, IconVercel } from 'components/OSIcons'
 
 export const llmAnalytics = {
   name: 'LLM Analytics',
@@ -66,6 +66,8 @@ export const llmAnalytics = {
   features: [
     {
       title: 'Trace monitoring',
+      handle: 'trace_monitoring',
+      template: 'split',
       headline: 'Trace monitoring',
       description:
         'Debug entire conversations, not just individual calls',
@@ -108,6 +110,8 @@ export const llmAnalytics = {
     },
     {
       title: 'Cost analysis',
+      handle: 'cost_analysis',
+      template: 'split',
       headline: 'Cost analysis',
       description:
         'Track costs by model, user, feature, and time period to optimize spending and pricing',
@@ -144,6 +148,8 @@ export const llmAnalytics = {
     },
     {
       title: 'Performance monitoring',
+      handle: 'performance_monitoring',
+      template: 'split',
       headline: 'Performance monitoring',
       description:
         'Monitor latency, error rates, and model performance',
@@ -185,24 +191,40 @@ export const llmAnalytics = {
     },
     {
       title: 'Native integrations',
+      handle: 'native_integrations',
+      template: 'grid',
       headline: 'Works with your AI stack',
       description: 'Simple SDKs for popular LLM providers and observability platforms.',
       features: [
         {
+          icon: <IconOpenAI />,
           title: 'OpenAI SDK',
           description: 'Drop-in integration for GPT models with one line of code',
         },
         {
+          icon: <IconAnthropic />,
           title: 'Anthropic SDK',
           description: 'Native support for Claude models',
         },
         {
+          icon: <IconGemini />,
+          title: 'Google Gemini',
+          description: 'Native support for Gemini models',
+        },
+        {
+          icon: <IconLangChain />,
           title: 'LangChain',
           description: 'Full observability for LangChain applications',
         },
         {
+          icon: <IconVercel />,
           title: 'Vercel AI SDK',
           description: 'Track streaming responses and edge functions',
+        },
+        {
+          icon: <IconOpenRouter />,
+          title: 'OpenRouter',
+          description: 'Native support for OpenRouter',
         },
         {
           title: 'Platform integrations',
@@ -212,6 +234,8 @@ export const llmAnalytics = {
     },
     {
       title: 'Advanced analytics',
+      handle: 'advanced_analytics',
+      template: 'grid',
       headline: 'Go beyond basic metrics',
       description: "Use PostHog's full analytics suite to understand AI feature adoption and impact.",
       features: [

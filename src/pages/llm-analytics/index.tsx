@@ -2,14 +2,12 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
-import useProduct from 'hooks/useProduct'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'llm_analytics'
 
 export default function LLMAnalytics(): JSX.Element {
     const contentData = useContentData()
-    const productData = useProduct({ handle: PRODUCT_HANDLE }) as any
 
     // Combined GraphQL query for both tutorial data and product data
     const data = useStaticQuery(graphql`
@@ -78,22 +76,11 @@ export default function LLMAnalytics(): JSX.Element {
         ...contentData,
     }
 
-    // Create custom slide configuration to replace features with individual feature slides
-    const features = productData?.features || []
-    const featureSlides = features.map((feature: any, index: number) => ({
-        slug: `features-${index}`,
-        name: feature.title,
-        props: { featureIndex: index },
-        template: 'split'
-    }))
-
+    // Create slide configuration with custom templates
     const slides = createSlideConfig({
         templates: {
             overview: 'stacked',
         },
-        exclude: ['features'], // Remove the default features slide
-        custom: featureSlides, // Add individual feature slides
-        order: ['overview', 'customers', ...featureSlides.map((slide: any) => slide.slug), 'answers', 'pricing', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with', 'getting-started'],
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
             answersHeadline: 'What can LLM Analytics help me discover?'
