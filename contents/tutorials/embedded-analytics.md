@@ -430,7 +430,7 @@ Select the **Materialization** tab below the query and click **Save and material
 
 Once done, you can then use the materialized view back in your pageview API route like this:
 
-```ts focusOnLines=20-23
+```ts focusOnLines=18-21
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
