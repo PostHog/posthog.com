@@ -34,7 +34,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 - [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you
 - [BuildBetter](https://app.buildbetter.app) - use Google SSO
-- [PandaDoc](https://app.pandadoc.com/) – ask Simon or Dana to invite you
+- [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
 - [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home)
 - [Vitally](https://posthog.vitally-eu.io/) - use Google SSO, then ask Simon or Dana to upgrade your role so you can create traits and see success metrics
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
