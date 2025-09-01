@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconFlask } from '@posthog/icons'
+import Link from "components/Link"
 
 export const experiments = {
     Icon: IconFlask,
@@ -18,8 +19,9 @@ export const experiments = {
     },
     overview: {
         title: 'Test changes with statistical significance',
-        description:
-            'Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with Session Replay and a auto-generated dashboard of insights from Product Analytics.',
+        description: (<>
+            Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>Session Replay</Link> and a auto-generated dashboard of insights from <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>Product Analytics</Link>.
+        </>),
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -64,22 +66,65 @@ export const experiments = {
     },
     features: [
         {
-            title: 'Customizable goals',
-            headline: 'Customizable goals',
-            description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
-            images: [
+            title: 'Flexible experiment types',
+            headline: 'Test any metric that matters to your business',
+            description: 'Support for conversion funnels, count-based trends, value-based metrics, and custom metrics',
+            features: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
-                    alt: 'Customizable goals',
-                    stylize: true,
-                    shadow: true,
+                    title: 'Funnel metrics',
+                    description: 'Test conversion rates through multi-step user journeys',
+                },
+                {
+                    title: 'Count-based trends',
+                    description: 'Measure events like pageviews, clicks, or feature usage',
+                },
+                {
+                    title: 'Value-based trends',
+                    description: 'Track revenue, time spent, or any numeric value',
+                },
+                {
+                    title: 'Primary & secondary metrics',
+                    description: 'Monitor main goals while watching for negative side effects',
+                },
+                {
+                    title: 'Shared metrics library',
+                    description: 'Create reusable metrics across experiments for consistency',
                 },
             ],
         },
         {
+            title: 'Supported tests',
+            headline: 'Run a variety of tests depending on your needs',
+            features: [
+                {
+                    title: 'A/B testing',
+                    description: 'Use count, value or funnel metrics to test new code and find what works best. Great for teams with big ideas.',
+                },
+                {
+                    title: 'A/A testing',
+                    description: 'Validate experiments by testing code against duplicates, across a funnel. Great for teams who need strong data.',
+                },
+                {
+                    title: 'A/B/N testing',
+                    description: 'Test multiple variants against a shared metrics library to determine the best approach based on data. Great for teams with lots of ideas.',
+                },
+                {
+                    title: 'Holdout testing',
+                    description: 'Test new code across an entire funnel by holding content back from users. Great for teams with complex lifecycle models.',
+                },
+                {
+                    title: 'Fake Door Testing',
+                    description: 'Gauge demand in new products with roadmap experiments. Great for teams that ship quickly.',
+                },
+                {
+                    title: 'Redirect testing',
+                    description: 'Test ideas by changing the user path instead of the content they see. Great for teams that want to optimize instead of iterate.',
+                },
+            ]
+        },
+        {
             title: 'Targeting rules',
-            headline: 'Precise control over who sees your experiments',
-            description: 'Target by user properties, cohorts, geographic location, or custom conditions',
+            headline: 'Target by user properties, cohorts, geographic location, or custom conditions',
             layout: 'columns',
             features: [
                 {
@@ -102,6 +147,10 @@ export const experiments = {
                     title: 'Group-level experiments',
                     description: 'Test at organization or team level for B2B products',
                 },
+                {
+                    title: 'Holdouts',
+                    description: 'Exclude a randomly assigned lists of users from an experiment',
+                },
             ],
             images: [
                 {
@@ -113,53 +162,15 @@ export const experiments = {
             ],
         },
         {
-            title: 'Bayesian statistical engine',
-            headline: 'Advanced Bayesian statistics for faster decisions',
-            description:
-                'Check results anytime without p-hacking concerns. Get clear win probabilities and credible intervals that show the likely range of improvement.',
-            features: [
+            title: 'Customizable metrics',
+            headline: 'Customizable metrics',
+            description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
+            images: [
                 {
-                    title: 'Real-time results',
-                    description: 'Check experiment results anytime without statistical penalties or peeking problems',
-                },
-                {
-                    title: 'Clear probability statements',
-                    description: 'Get direct statements like "95% probability that variant B is better than control"',
-                },
-                {
-                    title: 'Credible intervals',
-                    description: 'See the likely range of improvement with visual confidence bands',
-                },
-                {
-                    title: 'No fixed sample sizes',
-                    description: 'Make decisions when you have enough evidence, not when you hit an arbitrary number',
-                },
-            ],
-        },
-        {
-            title: 'Flexible experiment types',
-            headline: 'Test any metric that matters to your business',
-            description: 'Support for conversion funnels, count-based trends, value-based metrics, and custom goals',
-            features: [
-                {
-                    title: 'Funnel metrics',
-                    description: 'Test conversion rates through multi-step user journeys',
-                },
-                {
-                    title: 'Count-based trends',
-                    description: 'Measure events like pageviews, clicks, or feature usage',
-                },
-                {
-                    title: 'Value-based trends',
-                    description: 'Track revenue, time spent, or any numeric value',
-                },
-                {
-                    title: 'Primary & secondary metrics',
-                    description: 'Monitor main goals while watching for negative side effects',
-                },
-                {
-                    title: 'Shared metrics library',
-                    description: 'Create reusable metrics across experiments for consistency',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
+                    alt: 'Customizable metrics',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -255,28 +266,22 @@ export const experiments = {
             them: [
                 {
                     title: 'No-code experiments or CMS capabilities',
-                    subtitle: "You'll still need a designer/engineer to create experiments",
+                    subtitle: "You'll still need a designer/engineer to create experiments – but we're working on no-code A/B testing!",
                 },
                 {
                     title: 'No integration with Google Ads',
                     subtitle:
                         "PostHog can't run ad experiments, or target users into an experiment based on an ad variant engagement.",
                 },
+                {
+                    title: 'Personalization',
+                },
             ],
             us: [
-                {
-                    title: 'Bayesian statistical engine',
-                    subtitle:
-                        'Check results anytime without p-hacking. Get clear win probabilities instead of confusing p-values.',
-                },
                 {
                     title: 'Integration with other PostHog products',
                     subtitle:
                         'Attach surveys to experiments or view replays for a test group. Analyze results beyond your initial hypothesis or goal metric.',
-                },
-                {
-                    title: 'No fixed sample size requirements',
-                    subtitle: 'Make decisions when you have enough evidence, not when you hit an arbitrary number',
                 },
                 {
                     title: 'Group-level experiments for B2B',
@@ -296,8 +301,9 @@ export const experiments = {
                 link: '/blog/posthog-vs-optimizely',
             },
             {
-                name: 'Amplitude Experiments',
-                key: 'amplitude_experiments',
+                name: 'Amplitude',
+                key: 'amplitude',
+                link: '/blog/posthog-vs-amplitude',
             },
             {
                 name: 'Pendo',
@@ -317,7 +323,7 @@ export const experiments = {
             {
                 feature: 'Unlimited experiments',
                 companies: {
-                    amplitude_experiments: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: false,
                     vwo: true,
@@ -327,7 +333,7 @@ export const experiments = {
             {
                 feature: 'Multivariate experiments',
                 companies: {
-                    amplitude_experiments: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: false,
                     vwo: true,
@@ -335,9 +341,9 @@ export const experiments = {
                 },
             },
             {
-                feature: 'Secondary goals',
+                feature: 'Secondary metrics',
                 companies: {
-                    amplitude_experiments: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: false,
                     vwo: true,
@@ -345,9 +351,9 @@ export const experiments = {
                 },
             },
             {
-                feature: 'Minimum goals',
+                feature: 'Minimum metrics',
                 companies: {
-                    amplitude_experiments: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: false,
                     vwo: false,
@@ -357,7 +363,7 @@ export const experiments = {
             {
                 feature: 'Duration prediction',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: false,
                     pendo: false,
                     vwo: true,
@@ -367,7 +373,7 @@ export const experiments = {
             {
                 feature: 'Cross-domain experiments',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: true,
                     pendo: false,
                     vwo: true,
@@ -377,7 +383,7 @@ export const experiments = {
             {
                 feature: 'Traffic allocation',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: true,
                     pendo: false,
                     vwo: true,
@@ -387,7 +393,7 @@ export const experiments = {
             {
                 feature: 'Target by location',
                 companies: {
-                    amplitude_experiments: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: false,
                     vwo: true,
@@ -417,7 +423,7 @@ export const experiments = {
             {
                 feature: 'Bayesian statistics',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: false,
                     vwo: true,
                     posthog: true,
@@ -426,7 +432,7 @@ export const experiments = {
             {
                 feature: 'Check results anytime',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: false,
                     vwo: false,
                     posthog: true,
@@ -435,7 +441,7 @@ export const experiments = {
             {
                 feature: 'Group-level experiments',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: false,
                     vwo: false,
                     posthog: true,
@@ -444,7 +450,7 @@ export const experiments = {
             {
                 feature: 'Integrated session replay',
                 companies: {
-                    amplitude_experiments: false,
+                    amplitude: false,
                     optimizely: false,
                     vwo: false,
                     posthog: true,
@@ -453,9 +459,9 @@ export const experiments = {
             {
                 feature: 'Shared metrics library',
                 companies: {
-                    amplitude_experiments: false,
-                    optimizely: false,
-                    vwo: false,
+                    amplitude: false,
+                    optimizely: true,
+                    vwo: true,
                     posthog: true,
                 },
             },
@@ -489,7 +495,7 @@ export const experiments = {
         pricing:
             'Experiments are billed as feature flag requests since that\'s what they are under the hood. You get 1 million requests free per month, then pay-as-you-go after that. This is radically different from tools like Optimizely that can run 5-figures annually for experimentation. With PostHog, a typical B2C app running 5-10 experiments might use 10-20 million requests per month. That\'s a few hundred dollars, not tens of thousands. And you get all features—no "enterprise" tier needed for basic functionality like API access or custom metrics. And the best part: get it all without "jumping on a quick call with sales!"',
         'comparison-summary':
-            "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude Experiments, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude Experiments requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform. Our Bayesian engine is genuinely differentiated – most tools still use frequentist statistics that don't let you check results early. We also uniquely support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
+            "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform. Our Bayesian engine is genuinely differentiated – most tools still use frequentist statistics that don't let you check results early. We also uniquely support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
         'feature-comparison':
             "This comparison highlights our unique strengths. PostHog Experiments is the only tool that lets you check results anytime without statistical penalties – a huge advantage for fast-moving teams. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.<br /><br /><strong>What we don't have:</strong> no-code visual editor (yet!) or CMS capabilities. You'll need engineering resources to implement tests, but that's a deliberate choice as we're building for technical teams who want power and flexibility.",
         docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact. The docs include power calculators, sample size estimators, and templates for experiment design. We're transparent about limitations too – like why you shouldn't run experiments on metrics with extreme outliers without transformation.",
