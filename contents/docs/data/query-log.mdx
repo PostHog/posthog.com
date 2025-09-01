@@ -213,7 +213,7 @@ WHERE is_personal_api_key_request = true
   AND event_time >= now() - INTERVAL 30 DAY
 GROUP BY event_date
 ORDER BY event_date DESC
-
+```
 
 ## Query log and its relationship to internal tables
 
