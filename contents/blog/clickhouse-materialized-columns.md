@@ -20,7 +20,7 @@ ClickHouse supports speeding up queries using materialized columns to create new
 
 Consider the following schema:
 
-```sql
+```sql runInPostHog=false runInPostHog=false
 CREATE TABLE events (
     uuid UUID,
     event VARCHAR,
@@ -38,7 +38,7 @@ This table can be used to store a lot of analytics data and is similar to what w
 
 If we wanted to query login page pageviews in August, the query would look like this:
 
-```sql
+```sql runInPostHog=false runInPostHog=false
 SELECT count(*)
 FROM events
 WHERE event = '$pageview'
@@ -80,7 +80,7 @@ However, in this particular case it wouldn’t work because:
 
 Turns out, those are exactly the problems materialized columns can help solve.
 
-```sql
+```sql runInPostHog=false
 ALTER TABLE events
 ADD COLUMN mat_$current_url
 VARCHAR MATERIALIZED JSONExtractString(properties_json, '$current_url')
@@ -92,13 +92,13 @@ The trade-off is more data being stored on disk. In practice, ClickHouse compres
 
 Just creating the column is not enough though, since old data queries would still resort to using a `JSONExtract`. For this reason, you want to backfill data. The easiest way currently is to run the [OPTIMIZE](https://clickhouse.tech/docs/en/sql-reference/statements/optimize/) command:
 
-```sql
+```sql runInPostHog=false
 OPTIMIZE TABLE events FINAL
 ```
 
 After backfilling, running the updated query speeds things up significantly:
 
-```sql
+```sql runInPostHog=false
 SELECT count(*)
 FROM events
 WHERE event = '$pageview'
@@ -122,7 +122,7 @@ As of writing, there's a feature request on [Github](https://github.com/ClickHou
 
 Here's how you can use `DEFAULT` type columns to backfill more efficiently:
 
-```sql
+```sql runInPostHog=false
 ALTER TABLE events
 ALTER COLUMN mat_$current_url
 VARCHAR DEFAULT JSONExtractString(properties_json, '$current_url');

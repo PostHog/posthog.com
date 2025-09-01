@@ -19,6 +19,7 @@ type LanguageOption = {
     file?: string
     code: string
     focusOnLines?: string
+    runInPostHog?: string
 }
 
 type CodeBlockProps = {
@@ -60,6 +61,7 @@ type MetaStringProps = {
     label?: string
     unavailable?: boolean
     focusOnLines?: string
+    runInPostHog?: string
 }
 
 type MdxCodeBlockChildren = {
@@ -78,7 +80,7 @@ type MdxCodeBlockChildren = {
     } & MetaStringProps
 }
 
-export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
+export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element | null => {
     if (children?.props?.className?.includes('language-mermaid')) {
         return <Mermaid>{children.props.children}</Mermaid>
     }
@@ -93,6 +95,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
                 file,
                 children,
                 focusOnLines,
+                runInPostHog,
             } = child.props.mdxType === 'code' ? child.props : child.props.children.props
 
             const matches = className.match(/language-(?<lang>.*)/)
@@ -104,6 +107,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
                 file,
                 code: children as string,
                 focusOnLines,
+                runInPostHog,
             }
         })
 
@@ -120,7 +124,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
     )
 }
 
-export const SingleCodeBlock = ({ label, language, children, ...props }: SingleCodeBlockProps) => {
+export const SingleCodeBlock = ({ label, language, children, ...props }: SingleCodeBlockProps): JSX.Element => {
     const currentLanguage = {
         language,
         code: children,
@@ -142,8 +146,8 @@ const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
 }
 
-const getLinesToShow = (lines: string) => {
-    const lineBounds = lines.split('-').map((line, _) => {
+const getLinesToShow = (lines: string): number[] => {
+    const lineBounds = lines.split('-').map((line) => {
         return parseInt(line.trim())
     })
 
@@ -163,7 +167,7 @@ export const CodeBlock = ({
     onChange,
     lineNumberStart = 1,
     tooltips,
-}: CodeBlockProps) => {
+}: CodeBlockProps): JSX.Element | null => {
     if (languages.length < 0 || !currentLanguage) {
         return null
     }
@@ -184,6 +188,7 @@ export const CodeBlock = ({
 
     const [expanded, setExpanded] = React.useState(false)
     const linesToShow = currentLanguage.focusOnLines ? getLinesToShow(currentLanguage.focusOnLines) : []
+    const showRunInPostHog = currentLanguage.runInPostHog !== 'false'
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
@@ -200,7 +205,7 @@ export const CodeBlock = ({
         }
     }, [posthog])
 
-    const replaceProjectInfo = (code: string) => {
+    const replaceProjectInfo = (code: string): string => {
         return code
             .replace(/<ph_project_api_key>/g, removeQuotes(projectToken) || '<ph_project_api_key>')
             .replace(/<ph_project_name>/g, removeQuotes(projectName) || '<ph_project_name>')
@@ -214,7 +219,7 @@ export const CodeBlock = ({
             )
     }
 
-    const copyToClipboard = () => {
+    const copyToClipboard = (): void => {
         navigator.clipboard.writeText(
             replaceProjectInfo(
                 currentLanguage.code
@@ -248,6 +253,14 @@ export const CodeBlock = ({
             diffRemoveLineNumbers.push(index)
         }
     })
+
+    const generateSQLEditorLink = (code: string): string => {
+        // Takes an SQL string and returns a URL string in the PostHog SQL editor format
+        // We can't use app.posthog.com to redirect because it breaks newlines in the encoded URL
+
+        const query = encodeURIComponent(code.trim()).replace(/%20/g, '+').replace(/\(/g, '%28').replace(/\)/g, '%29')
+        return `https://${region}.posthog.com/sql?open_query=${query}`
+    }
 
     return (
         <div className="code-block relative mt-2 mb-4 border border-light dark:border-dark rounded">
@@ -331,6 +344,30 @@ export const CodeBlock = ({
                             </div>
                         ) : null}
 
+                        {showRunInPostHog && currentLanguage.language === 'sql' && (
+                            <div className="relative flex items-center justify-center px-1">
+                                <a
+                                    href={`${generateSQLEditorLink(currentLanguage.code)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 whitespace-nowrap text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                >
+                                    Run in PostHog
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 18"
+                                        className="w-4 h-4 fill-current translate-x-[-2px] translate-y-[-2px]"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M7.995 5.75a.75.75 0 0 1 .75-.75h8.505c.966 0 1.75.784 1.75 1.75v9.496a.75.75 0 0 1-1.5 0V7.56L7.03 18.03a.75.75 0 0 1-1.06-1.061L16.44 6.5H8.744a.75.75 0 0 1-.75-.75Z"
+                                            clipRule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        )}
+
                         {showCopy && (
                             <div className="relative flex items-center justify-center px-1">
                                 <button
@@ -377,7 +414,7 @@ export const CodeBlock = ({
                 language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
                 theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
             >
-                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                {({ className, tokens, getLineProps, getTokenProps }) => (
                     <pre
                         className={`w-full m-0 p-0 rounded-t-none rounded-b bg-accent dark:bg-accent-dark border-light dark:border-dark ${
                             showLabel ? 'border-t' : ''
