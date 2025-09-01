@@ -87,6 +87,38 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'analytics',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: 'group-analytics',
+            overview: {
+                title: 'Group Analytics',
+                description:
+                    'Analyze multi-seat accounts and other groups. Associate events with a group or entity - such as a company, community, or project, then analyze these events as if they were sent by that entity itself. Great for B2B, marketplaces, and more.',
+                textColor: 'text-black', // tw
+            },
+            features: [
+                {
+                    title: 'B2B SaaS app',
+                    headline: 'B2B SaaS app',
+                    description:
+                        '<p>Aggregate events at an account-level. Calculate metrics like:</p><ul><li>number of daily active companies</li><li>company churn rate</li><li>How many companies have adopted a new feature.</li></ul>',
+                },
+                {
+                    title: 'Collaborative, project-based services',
+                    headline: 'Collaborative, project-based services',
+                    description:
+                        '<p>For project-based products like Notion, Jira, or Figma, create a project group type to calculate:</p><ul><li>metrics at a project level</li><li>users per project</li><li>project engagement</li></ul>',
+                },
+                {
+                    title: 'Communication-based apps',
+                    headline: 'Communication-based apps',
+                    description:
+                        '<p>For a product like Slack, you can create a channel group type to measure:</p><ul><li>the average number of messages per channel</li><li>the number of monthly active channels</li><li>total number of channel participants</li></ul>',
+                },
+                {
+                    title: 'Social media apps',
+                    headline: 'Social media apps',
+                    description:
+                        '<p>For a social network-type product, create a post group type to measure:</p><ul><li>average number of replies per post</li><li>total count of unique posters per month</li></ul>',
+                },
+            ],
         },
         {
             name: 'Teams (add-on)',

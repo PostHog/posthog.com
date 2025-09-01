@@ -14,9 +14,8 @@ const FeatureItem = ({ name, description, size }) => (
         <div className="flex-1">
             <h4 className="text-base my-1">{name}</h4>
             <p
-                className={`${
-                    size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
-                } text-secondary mb-0`}
+                className={`${size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
+                    } text-secondary mb-0`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>
@@ -45,40 +44,6 @@ const addons = [
                     {
                         name: 'Customizability with Hog',
                         description: 'Use our powerful Hog language to write completely custom destinations.',
-                        icon: IconAdvanced,
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        name: 'Group analytics',
-        features: [
-            {
-                group: 'Examples of how to use groups',
-                items: [
-                    {
-                        name: 'B2B SaaS app',
-                        description:
-                            'Aggregate events at an account-level. Calculate metrics like:<ul><li>number of daily active companies</li><li>company churn rate</li><li>How many companies have adopted a new feature.</li></ul>',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Collaborative, project-based services',
-                        description:
-                            'For project-based products like Notion, Jira, or Figma, create a project group type to calculate:<ul><li>metrics at a project level</li><li>users per project</li><li>project engagement</li></ul>',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Communication-based apps',
-                        description:
-                            'For a product like Slack, you can create a channel group type to measure:<ul><li>the average number of messages per channel</li><li>the number of monthly active channels</li><li>total number of channel participants</li></ul>',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Social media apps',
-                        description:
-                            'For a social network-type product, create a post group type to measure:<ul><li>average number of replies per post</li><li>total count of unique posters per month</li></ul>',
                         icon: IconAdvanced,
                     },
                 ],
@@ -214,28 +179,28 @@ const Addons = (): JSX.Element => {
                                 <div className="grid gap-x-8 gap-y-3 md:grid-cols-1">
                                     {customAddon
                                         ? customAddon.features?.map((feature) => {
-                                              return (
-                                                  <Features
-                                                      key={`${name}-${feature.group}`}
-                                                      addonName={name}
-                                                      features={feature.items}
-                                                      title={feature.group}
-                                                  />
-                                              )
-                                          })
+                                            return (
+                                                <Features
+                                                    key={`${name}-${feature.group}`}
+                                                    addonName={name}
+                                                    features={feature.items}
+                                                    title={feature.group}
+                                                />
+                                            )
+                                        })
                                         : Object.keys(featuresByCategory)
-                                              .sort((feature) => (feature === 'Features' ? -1 : 1))
-                                              ?.map((category) => {
-                                                  const features = featuresByCategory[category]
-                                                  return (
-                                                      <Features
-                                                          key={`${name}-${category}`}
-                                                          title={category}
-                                                          addonName={name}
-                                                          features={features}
-                                                      />
-                                                  )
-                                              })}
+                                            .sort((feature) => (feature === 'Features' ? -1 : 1))
+                                            ?.map((category) => {
+                                                const features = featuresByCategory[category]
+                                                return (
+                                                    <Features
+                                                        key={`${name}-${category}`}
+                                                        title={category}
+                                                        addonName={name}
+                                                        features={features}
+                                                    />
+                                                )
+                                            })}
                                 </div>
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">
