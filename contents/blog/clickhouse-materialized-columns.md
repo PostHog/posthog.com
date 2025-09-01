@@ -20,7 +20,7 @@ ClickHouse supports speeding up queries using materialized columns to create new
 
 Consider the following schema:
 
-```sql runInPostHog=false runInPostHog=false
+```sql runInPostHog=false
 CREATE TABLE events (
     uuid UUID,
     event VARCHAR,
@@ -38,7 +38,7 @@ This table can be used to store a lot of analytics data and is similar to what w
 
 If we wanted to query login page pageviews in August, the query would look like this:
 
-```sql runInPostHog=false runInPostHog=false
+```sql runInPostHog=false
 SELECT count(*)
 FROM events
 WHERE event = '$pageview'
