@@ -74,7 +74,7 @@ This is the default model for Snowflake batch exports. The schema of the model a
 
 If the provided table doesn't exist in the provided database and schema, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the query:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
     "uuid" STRING,
     "event" STRING,
@@ -111,7 +111,7 @@ The Snowflake table will contain one row per `(team_id, distinct_id)` pair, and 
 
 If the provided table doesn't exist in the provided database and schema, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the query:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
     "team_id" INTEGER,
     "distinct_id" STRING,
