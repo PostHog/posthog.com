@@ -256,26 +256,9 @@ Example endpoints:
 
 Returns a list of all users who have access to a specific resource, including their access levels and how they obtained access.
 
-<<<<<<< Updated upstream
-### Permission levels
-
-The API uses different permission levels depending on the resource type:
-
-#### Project resources
-- `none` – No access
-- `member` – Basic member access
-- `admin` – Administrative access
-
-#### Other resources (dashboards, insights, notebooks, feature flags, etc.)
-- `none` – No access
-- `viewer` – Read-only access
-- `editor` – Read and write access (default)
-- `manager` – Full management access including permission management
-=======
 Example endpoints:
 - `/api/projects/@current/dashboards/{dashboard_id}/users_with_access`
 - `/api/projects/@current/users_with_access`
->>>>>>> Stashed changes
 
 ### Request and response formats
 
@@ -404,44 +387,3 @@ When querying who has access to a resource, the API returns how each user obtain
 - `explicit_role` – Role-based assignment
 - `project_admin` – Project admin privileges
 - `default` – Default project access level
-
-<<<<<<< Updated upstream
-### Example workflows
-
-#### Grant a team member access to a specific dashboard
-
-```bash
-curl -X PUT https://app.posthog.com/api/projects/@current/dashboards/{dashboard_id}/access_controls \
-  -H "Authorization: Bearer {your-api-key}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "organization_member": "member-uuid",
-    "access_level": "viewer"
-  }'
-```
-
-#### Set role-based access for all notebooks
-
-```bash
-curl -X PUT https://app.posthog.com/api/projects/@current/resource_access_controls \
-  -H "Authorization: Bearer {your-api-key}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "resource": "notebook",
-    "role": "analysts-role-uuid",
-    "access_level": "editor"
-  }'
-```
-
-### Limitations
-
-- You cannot set multiple access levels for the same member/role on a single resource
-- Project admins always have full access and cannot be restricted via the API
-=======
-### Required permissions
-
-To manage access controls via the API:
-- **For read operations**: Any project member with appropriate API key scopes can view access controls
-- **For object access controls**: You must be the resource creator, a project admin, an organization admin, or have manager-level access to the resource
-- **For resource access controls**: You must be an project admin or organization admin
->>>>>>> Stashed changes
