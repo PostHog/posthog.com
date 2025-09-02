@@ -13,6 +13,7 @@ const countryFlagMapping: Record<string, keyof typeof AllStickers> = {
     CO: 'StickerFlagCO',
     CY: 'StickerFlagCY',
     DE: 'StickerFlagDE',
+    DK: 'StickerFlagDK',
     DO: 'StickerFlagDO',
     ES: 'StickerFlagES',
     FI: 'StickerFlagFI',
