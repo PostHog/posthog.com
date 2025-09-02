@@ -33,6 +33,11 @@ const LLMInstallationPlatforms = () => {
             url: '/docs/llm-analytics/installation/openrouter',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/openrouterai_8260e8b011.png',
         },
+        {
+            label: 'LiteLLM',
+            url: '', // TODO: Add LiteLLM link
+            image: '/static/images/litellm-logo.png',
+        },
     ]
 
     return <List className="grid sm:grid-cols-2" items={platforms} />
