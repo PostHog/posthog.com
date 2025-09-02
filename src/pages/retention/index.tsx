@@ -5,27 +5,27 @@ import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 
-export default function SQL() {
-  const sqlProduct = useProduct({ handle: 'sql' }) as any
+export default function Retention() {
+  const retentionProduct = useProduct({ handle: 'retention' }) as any
 
-  if (!sqlProduct) {
+  if (!retentionProduct) {
     return <div>Product not found</div>
   }
 
-  const { overview, features, Icon, color, screenshots } = sqlProduct
+  const { overview, features, Icon, color, screenshots } = retentionProduct
 
   return (
     <>
       <SEO
-        title={overview?.title || "SQL (HogQL)"}
-        description={overview?.description || "Query data directly with HogQL"}
+        title={overview?.title || "Retention"}
+        description={overview?.description || "See how many users return on subsequent days"}
         image="/images/og/product-analytics.jpg"
       />
       <Editor
         maxWidth="65ch"
         proseSize="base"
         bookmark={{
-          title: overview?.title || 'SQL (HogQL)',
+          title: overview?.title || 'Retention',
           description: overview?.description || '',
         }}
       >
@@ -97,7 +97,7 @@ export default function SQL() {
 
 export const query = graphql`
   {
-    mdx(fields: { slug: { eq: "/sql" } }) {
+    mdx(fields: { slug: { eq: "/retention" } }) {
       body
       frontmatter {
         title
