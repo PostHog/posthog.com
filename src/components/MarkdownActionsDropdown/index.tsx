@@ -4,6 +4,7 @@ import { Chevron } from 'components/Icons'
 import CheckIcon from '../../images/check.svg'
 import Link from 'components/Link'
 import React, { useState } from 'react'
+import usePostHog from 'hooks/usePostHog'
 
 interface CopyMarkdownActionsDropdownProps {
     /** The markdown content to work with */
@@ -17,6 +18,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     pageUrl,
 }) => {
     const [copiedState, setCopiedState] = useState<string | null>(null)
+    const posthog = usePostHog()
 
     // Consolidated styles
     const menuItemButtonStyles =
@@ -34,10 +36,21 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
         }
     }
 
+    // Shared tracking function
+    const handlePostHogCapture = (actionName: string, additionalProps?: Record<string, any>) => {
+        posthog?.capture(`docs_markdown_dropdown`, {
+            markdown_action: actionName,
+            markdown_url: getMarkdownUrl(pageUrl),
+            ...additionalProps,
+        })
+    }
+
     const handleCopyMarkdown = () => {
         navigator.clipboard.writeText(markdownContent)
         setCopiedState('markdown')
         setTimeout(() => setCopiedState(null), 2000)
+
+        handlePostHogCapture('copy')
     }
 
     return (
@@ -51,6 +64,11 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                                     ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
                                     : 'border-transparent hover:bg-accent dark:hover:bg-accent-dark hover:border-light dark:hover:border-dark'
                             }`}
+                            onClick={() => {
+                                if (!open) {
+                                    handlePostHogCapture('open')
+                                }
+                            }}
                         >
                             {copiedState === 'markdown' ? (
                                 <>
@@ -75,7 +93,14 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             </Menu.Item>
 
                             <Menu.Item>
-                                <Link to={`${getMarkdownUrl(pageUrl)}`} externalNoIcon className={menuItemButtonStyles}>
+                                <Link
+                                    to={`${getMarkdownUrl(pageUrl)}`}
+                                    externalNoIcon
+                                    className={menuItemButtonStyles}
+                                    onClick={() => {
+                                        handlePostHogCapture('view')
+                                    }}
+                                >
                                     <IconEye className={menuItemIconStyles} />
                                     <span>View as Markdown</span>
                                 </Link>
@@ -88,6 +113,9 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                                     )}`}
                                     externalNoIcon
                                     className={menuItemButtonStyles}
+                                    onClick={() => {
+                                        handlePostHogCapture('open_chatgpt')
+                                    }}
                                 >
                                     <IconExternal className={menuItemIconStyles} />
                                     <span>Open in ChatGPT</span>
@@ -101,6 +129,9 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                                     )}`}
                                     externalNoIcon
                                     className={menuItemButtonStyles}
+                                    onClick={() => {
+                                        handlePostHogCapture('open_claude')
+                                    }}
                                 >
                                     <IconExternal className={menuItemIconStyles} />
                                     <span>Open in Claude</span>
