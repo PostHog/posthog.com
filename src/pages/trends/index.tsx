@@ -1,9 +1,14 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import Editor from 'components/Editor'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { DataVizNav } from '../../hooks/useDataVizNavigation'
+
+const LeftSidebarContent = () => {
+    return <DataVizNav />
+}
 
 export default function Trends() {
   const trendsProduct = useProduct({ handle: 'trends' }) as any
@@ -21,13 +26,10 @@ export default function Trends() {
         description={overview?.description || "Visualize user data with graphs, tables, charts, maps, and more"}
         image="/images/og/product-analytics.jpg"
       />
-      <Editor
-        maxWidth="65ch"
-        proseSize="base"
-        bookmark={{
-          title: overview?.title || 'Trends',
-          description: overview?.description || '',
-        }}
+      <ReaderView
+        leftSidebar={<LeftSidebarContent />}
+        title={overview?.title || 'Trends'}
+        hideTitle={false}
       >
         <div className="space-y-8">
           <div>
@@ -90,7 +92,7 @@ export default function Trends() {
             </div>
           )}
         </div>
-      </Editor>
+      </ReaderView>
     </>
   )
 }

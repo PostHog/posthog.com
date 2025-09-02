@@ -1,9 +1,15 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import Editor from 'components/Editor'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { DataVizNav } from '../../hooks/useDataVizNavigation'
+
+
+const LeftSidebarContent = () => {
+    return <DataVizNav />
+}
 
 export default function BI() {
   const biProduct = useProduct({ handle: 'bi' }) as any
@@ -21,13 +27,10 @@ export default function BI() {
         description={overview?.description || "Business intelligence for data-driven teams"}
         image="/images/og/product-analytics.jpg"
       />
-      <Editor
-        maxWidth="65ch"
-        proseSize="base"
-        bookmark={{
-          title: overview?.title || 'Business Intelligence',
-          description: overview?.description || '',
-        }}
+      <ReaderView
+        leftSidebar={<LeftSidebarContent />}
+        title={overview?.title || 'Business Intelligence'}
+        hideTitle={false}
       >
         <div className="space-y-8">
           <div>
@@ -90,7 +93,7 @@ export default function BI() {
             </div>
           )}
         </div>
-      </Editor>
+      </ReaderView>
     </>
   )
 }

@@ -141,6 +141,10 @@ top: .5px;
 transform: rotate(0deg);
 }
 
+.ikp-ai-chat-input__send-button-icon {
+transform: none !important;
+}
+
 .ikp-messages__wrapper > div:first-child {
 padding-bottom: 0;
 }

@@ -1,9 +1,15 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import Editor from 'components/Editor'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { DataVizNav } from '../../hooks/useDataVizNavigation'
+
+
+const LeftSidebarContent = () => {
+    return <DataVizNav />
+}
 
 export default function UserPaths() {
   const userPathsProduct = useProduct({ handle: 'user_paths' }) as any
@@ -21,13 +27,10 @@ export default function UserPaths() {
         description={overview?.description || "See how users navigate your product, website, or conversion funnel"}
         image="/images/og/product-analytics.jpg"
       />
-      <Editor
-        maxWidth="65ch"
-        proseSize="base"
-        bookmark={{
-          title: overview?.title || 'User Paths',
-          description: overview?.description || '',
-        }}
+      <ReaderView
+        leftSidebar={<LeftSidebarContent />}
+        title={overview?.title || 'User Paths'}
+        hideTitle={false}
       >
         <div className="space-y-8">
           <div>
@@ -90,7 +93,7 @@ export default function UserPaths() {
             </div>
           )}
         </div>
-      </Editor>
+      </ReaderView>
     </>
   )
 }
