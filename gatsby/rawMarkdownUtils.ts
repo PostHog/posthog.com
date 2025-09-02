@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
+import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
 
 // Function to generate raw markdown files
 export const generateRawMarkdownPages = async (pages) => {
@@ -183,6 +184,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
         fs.mkdirSync(sdkSpecDir, { recursive: true })
     }
 
+    const sdkLanguage = getLanguageFromSdkId(sdkReferences.info.id)
     const filePath = path.join(sdkSpecDir, `${sdkReferences.info.slugPrefix}.md`)
 
     const renderTypeAsText = (type: string): string => {
@@ -298,7 +300,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
                     markdownNodes.push(returnMarkdown)
                 }
 
-                const examplesMarkdown = renderExamples(func.examples, func.language || 'javascript')
+                const examplesMarkdown = renderExamples(func.examples, sdkLanguage)
                 if (examplesMarkdown) {
                     markdownNodes.push(examplesMarkdown)
                 }
