@@ -21,7 +21,7 @@ import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import OSButton from "components/OSButton"
+import OSButton from 'components/OSButton'
 import { IconList } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -57,9 +57,19 @@ const IndexPage = () => {
                     <Popover
                         trigger={
                             <span className="[&>span>div]:rounded-full">
-                                <Tooltip trigger={<OSButton icon={<IconList />} size="lg" className="size-10 p-1 rounded-full border shadow-lg bg-primary border-primary hover:bg-accent active:bg-accent hover:border-input">
-                                </OSButton>} delay={0} sideOffset={12}>Table of contents</Tooltip>
-
+                                <Tooltip
+                                    trigger={
+                                        <OSButton
+                                            icon={<IconList />}
+                                            size="lg"
+                                            className="size-10 p-1 rounded-full border shadow-lg bg-primary border-primary hover:bg-accent active:bg-accent hover:border-input"
+                                        ></OSButton>
+                                    }
+                                    delay={0}
+                                    sideOffset={12}
+                                >
+                                    Table of contents
+                                </Tooltip>
                             </span>
                         }
                         dataScheme="primary"
@@ -71,13 +81,17 @@ const IndexPage = () => {
                         <ul className="not-prose grid list-none m-0 p-0">
                             {careersTableOfContents.map((item) => (
                                 <li key={item.url}>
-                                    <a
-                                        href={item.url}
+                                    <button
                                         className="font-semibold text-sm hover:underline block p-1"
-                                        onClick={() => setShowTableOfContents(false)}
+                                        onClick={() => {
+                                            setShowTableOfContents(false)
+                                            const el = document.querySelector(item.url)
+                                            if (!el) return
+                                            el.scrollIntoView({ behavior: 'smooth' })
+                                        }}
                                     >
                                         {item.value}
-                                    </a>
+                                    </button>
                                 </li>
                             ))}
                         </ul>
@@ -140,8 +154,9 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
-                    }`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${
+                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
+                }`}
                 imageType="absolute"
             />
             <Editor

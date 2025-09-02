@@ -26,6 +26,7 @@ const query = graphql`
                     title
                     slug
                     html
+                    locations
                 }
                 parent {
                     ... on AshbyJob {
@@ -182,8 +183,10 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
         Math.round(
             (team.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza).length /
                 teamLength) *
-            100
+                100
         )
+
+    if (!team) return null
 
     return (
         <div
@@ -368,7 +371,11 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
-    const teams = teamsField ? JSON.parse(teamsField.value) : []
+    const teams = teamsField
+        ? JSON.parse(teamsField.value).filter((teamName: string) =>
+              allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
+          )
+        : []
     const [selectedTeamName, setSelectedTeamName] = useState('')
 
     // Compute the current team name - either the selected one or default to first team
@@ -483,7 +490,9 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             // Show search results
                             filteredJobs.length > 0 ? (
                                 <optgroup
-                                    label={`${filteredJobs.length} search result${filteredJobs.length !== 1 ? 's' : ''}`}
+                                    label={`${filteredJobs.length} search result${
+                                        filteredJobs.length !== 1 ? 's' : ''
+                                    }`}
                                 >
                                     {filteredJobs.map((job: any) => (
                                         <option key={job.fields.title} value={job.fields.title}>
@@ -544,20 +553,22 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                         >
                                                             <div className="flex flex-col w-full items-start">
                                                                 <span
-                                                                    className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
-                                                                        ? ''
-                                                                        : ''
-                                                                        }`}
+                                                                    className={`font-semibold text-[15px] ${
+                                                                        selectedJob.fields.title === job.fields.title
+                                                                            ? ''
+                                                                            : ''
+                                                                    }`}
                                                                 >
                                                                     {job.fields.title}
                                                                 </span>
                                                                 {!hideTeamsByJob.includes(job.fields?.title) && (
                                                                     <span className="text-[13px] text-secondary !font-normal">
                                                                         {(() => {
-                                                                            const teamsField = job.parent.customFields.find(
-                                                                                (field: { title: string }) =>
-                                                                                    field.title === 'Teams'
-                                                                            )
+                                                                            const teamsField =
+                                                                                job.parent.customFields.find(
+                                                                                    (field: { title: string }) =>
+                                                                                        field.title === 'Teams'
+                                                                                )
                                                                             const teams = teamsField
                                                                                 ? JSON.parse(teamsField.value)
                                                                                 : []
@@ -596,26 +607,29 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                             width="full"
                                                             zoomHover="md"
                                                             active={selectedJob.fields.title === job.fields.title}
-                                                            className={` ${selectedJob.fields.title === job.fields.title ? '' : ''
-                                                                }`}
+                                                            className={` ${
+                                                                selectedJob.fields.title === job.fields.title ? '' : ''
+                                                            }`}
                                                             onClick={() => setSelectedJob(job)}
                                                         >
                                                             <div className="flex flex-col w-full items-start">
                                                                 <span
-                                                                    className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
-                                                                        ? ''
-                                                                        : ''
-                                                                        }`}
+                                                                    className={`font-semibold text-[15px] ${
+                                                                        selectedJob.fields.title === job.fields.title
+                                                                            ? ''
+                                                                            : ''
+                                                                    }`}
                                                                 >
                                                                     {job.fields.title}
                                                                 </span>
                                                                 {!hideTeamsByJob.includes(job.fields?.title) && (
                                                                     <span className="text-[13px] text-secondary !font-normal">
                                                                         {(() => {
-                                                                            const teamsField = job.parent.customFields.find(
-                                                                                (field: { title: string }) =>
-                                                                                    field.title === 'Teams'
-                                                                            )
+                                                                            const teamsField =
+                                                                                job.parent.customFields.find(
+                                                                                    (field: { title: string }) =>
+                                                                                        field.title === 'Teams'
+                                                                                )
                                                                             const teams = teamsField
                                                                                 ? JSON.parse(teamsField.value)
                                                                                 : []
@@ -656,30 +670,26 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex flex-wrap gap-8 items-start @2xl:flex-row @2xl:gap-12">
                                 <Detail
                                     title="Location"
-                                    value={`Remote${selectedJob.parent.customFields.find(
-                                        (field: { title: string }) => field.title === 'Location(s)'
-                                    )?.value
-                                        ? ` (${selectedJob.parent.customFields.find(
-                                            (field: { title: string }) => field.title === 'Location(s)'
-                                        ).value
-                                        })`
-                                        : ''
-                                        }`}
+                                    value={`Remote${
+                                        selectedJob.fields.locations?.length > 0
+                                            ? ` (${selectedJob.fields.locations.join(', ')})`
+                                            : ''
+                                    }`}
                                     icon={<Location />}
                                 />
                                 {selectedJob.parent.customFields.find(
                                     (field: { title: string }) => field.title === 'Timezone(s)'
                                 )?.value && (
-                                        <Detail
-                                            title="Timezone(s)"
-                                            value={
-                                                selectedJob.parent.customFields.find(
-                                                    (field: { title: string }) => field.title === 'Timezone(s)'
-                                                ).value
-                                            }
-                                            icon={<Timezone />}
-                                        />
-                                    )}
+                                    <Detail
+                                        title="Timezone(s)"
+                                        value={
+                                            selectedJob.parent.customFields.find(
+                                                (field: { title: string }) => field.title === 'Timezone(s)'
+                                            ).value
+                                        }
+                                        icon={<Timezone />}
+                                    />
+                                )}
                             </ul>
 
                             <div className="@5xl:flex-1 [&_h3]:mt-0 mt-4">
@@ -730,50 +740,55 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div
-                            data-scheme="secondary"
-                            className={`@container @5xl:col-span-5 ${teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
+                        {teams.length > 0 && (
+                            <div
+                                data-scheme="secondary"
+                                className={`@container @5xl:col-span-5 ${
+                                    teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
-                        >
-                            <h3 className="mt-0">
-                                About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
-                            </h3>
+                            >
+                                <h3 className="mt-0">
+                                    About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
+                                </h3>
 
-                            {teams.length > 1 ? (
-                                <OSTabs
-                                    key={`${selectedJob.fields.title}-${currentTeamName}`}
-                                    tabs={teams.map((teamName: string) => {
-                                        const team = allTeams.find(
-                                            (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
-                                        )
-                                        const teamLength = team?.profiles?.data?.length
-                                        const teamURL = `/teams/${team?.slug || ''}`
-                                        const pineapplePercentage =
-                                            teamLength &&
-                                            teamLength > 0 &&
-                                            Math.round(
-                                                (team.profiles?.data?.filter(
-                                                    ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
-                                                ).length /
-                                                    teamLength) *
-                                                100
+                                {teams.length > 1 ? (
+                                    <OSTabs
+                                        key={`${selectedJob.fields.title}-${currentTeamName}`}
+                                        tabs={teams.map((teamName: string) => {
+                                            const team = allTeams.find(
+                                                (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
                                             )
+                                            const teamLength = team?.profiles?.data?.length
+                                            const teamURL = `/teams/${team?.slug || ''}`
+                                            const pineapplePercentage =
+                                                teamLength &&
+                                                teamLength > 0 &&
+                                                Math.round(
+                                                    (team.profiles?.data?.filter(
+                                                        ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
+                                                    ).length /
+                                                        teamLength) *
+                                                        100
+                                                )
 
-                                        return {
-                                            value: teamName,
-                                            label: teamName,
-                                            content: <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />,
-                                        }
-                                    })}
-                                    defaultValue={currentTeamName}
-                                    frame={false}
-                                    onValueChange={(value) => setSelectedTeamName(value)}
-                                    className="px-0 mb-4"
-                                />
-                            ) : (
-                                <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
-                            )}
-                        </div>
+                                            return {
+                                                value: teamName,
+                                                label: teamName,
+                                                content: (
+                                                    <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />
+                                                ),
+                                            }
+                                        })}
+                                        defaultValue={currentTeamName}
+                                        frame={false}
+                                        onValueChange={(value) => setSelectedTeamName(value)}
+                                        className="px-0 mb-4"
+                                    />
+                                ) : (
+                                    <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
