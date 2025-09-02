@@ -34,6 +34,11 @@ const LLMInstallationPlatforms = () => {
             url: '/docs/llm-analytics/installation/openrouter',
             icon: <IconOpenRouter />,
         },
+        {
+            label: 'LiteLLM',
+            url: '', // TODO: Add LiteLLM link
+            image: '/static/images/litellm-logo.png',
+        },
     ]
 
     return <OSList className="grid" items={platforms} />

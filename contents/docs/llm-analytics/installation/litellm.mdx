@@ -1,0 +1,113 @@
+---
+title: LiteLLM analytics installation
+showStepsToc: true
+---
+
+import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
+import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
+
+> **Note:** LiteLLM is only available for Python.
+
+<Steps>
+
+<Step title="Install the PostHog SDK" badge="required">
+
+Setting up analytics starts with installing the PostHog SDK. LiteLLM integration is only available for Python.
+
+```bash
+pip install posthog
+```
+
+</Step>
+
+<Step title="Install the LiteLLM SDK" badge="required">
+
+Install the LiteLLM SDK:
+
+```bash
+pip install litellm
+```
+
+<LLMsSDKsCallout />
+
+</Step>
+
+<Step title="Initialize PostHog and LiteLLM client" badge="required">
+
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then import the LiteLLM completion and embedding functions.
+
+```python
+from posthog.ai.litellm import completion, embedding
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>"
+)
+```
+
+> **Note:** This integration uses PostHog's LiteLLM wrapper functions rather than a client class.
+```
+
+<LLMsSDKsCallout />
+
+</Step>
+
+<Step title="Call LLMs through LiteLLM" badge="required">
+
+Now, when you use the LiteLLM completion function to call various LLM providers, PostHog automatically captures an `$ai_generation` event.
+
+You can enrich the event with additional data such as the trace ID, distinct ID, custom properties, groups, and privacy mode options.
+
+```python
+response = completion(
+    posthog_client=posthog,
+    model="openai/gpt-4o-mini",  # Use provider/model format
+    messages=[
+        {"role": "user", "content": "Tell me a fun fact about hedgehogs"}
+    ],
+    posthog_distinct_id="user_123", # optional
+    posthog_trace_id="trace_123", # optional
+    posthog_properties={"conversation_id": "abc123", "paid": True}, # optional
+    posthog_groups={"company": "company_id_in_your_db"},  # optional 
+    posthog_privacy_mode=False # optional
+)
+
+print(response.choices[0].message.content)
+```
+
+> **Notes:** 
+> - LiteLLM supports 100+ LLM providers including OpenAI, Anthropic, Cohere, Replicate, PaLM, Azure, Hugging Face, and more.
+> - Use the `provider/model` format for the model parameter (e.g., `openai/gpt-4`, `anthropic/claude-3-5-haiku-latest`, `gemini/gemini-1.5-flash`).
+> - This works with streaming responses by setting `stream=True`.
+> - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+You can expect captured `$ai_generation` events to have the following properties:
+
+<NotableGenerationProperties />
+
+</Step>
+
+<VerifyLLMEventsStep />
+
+<Step title="Capture embeddings" badge="optional">
+
+PostHog can also capture embedding generations as `$ai_embedding` events through LiteLLM:
+
+```python
+response = embedding(
+    posthog_client=posthog,
+    input="The quick brown fox",
+    model="openai/text-embedding-3-small",  # Use provider/model format
+    posthog_distinct_id="user_123", # optional
+    posthog_trace_id="trace_123",   # optional
+    posthog_properties={"key": "value"}, # optional
+    posthog_groups={"company": "company_id_in_your_db"},  # optional 
+    posthog_privacy_mode=False # optional
+)
+```
+
+</Step>
+
+</Steps>
