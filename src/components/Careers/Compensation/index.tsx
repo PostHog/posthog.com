@@ -16,14 +16,9 @@ const Compensation: React.FC = () => {
       description: "You receive all your options in the event you're let go due to the company being acquired.",
     },
     {
-      title: 'Option to trade cash for equity',
-      subtitle: '(when getting a raise)',
-      description: 'You can trade up to 100% of any pay rise you receive for share options at a 1:1 ratio of cash to equity.',
-    },
-    {
       title: 'Employee secondaries',
       subtitle: '(when offered)',
-      description: 'In 2024, we held our first secondary for early employees to sell some of their shares. We plan on doing more in the future.',
+      description: 'In 2024, we held our first secondary for early employees to sell some of their shares. We did our first Tender offer in 2025, and plan to do more.',
     },
   ]
 
