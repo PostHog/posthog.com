@@ -1,21 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import Link from 'components/Link'
-import { Department, Location, Timezone } from 'components/NotProductIcons'
-import { CallToAction } from 'components/CallToAction'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
-import slugify from 'slugify'
-import { IconPineapple } from '@posthog/icons'
-import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
-import TeamPatch from 'components/TeamPatch'
-import { slugifyTeamName } from 'lib/utils'
-import OSButton from 'components/OSButton'
-import Tabs from 'components/RadixUI/Tabs'
-import OSTabs from 'components/OSTabs'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
-
 import Mark from 'mark.js'
 
 const query = graphql`
