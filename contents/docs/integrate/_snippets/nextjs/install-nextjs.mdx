@@ -67,3 +67,19 @@ Older versions of Next.js don't support the `instrumentation-client.ts|js` file.
 </Tab.Group>
 
 </details>
+
+<details>
+<summary>Bootstrapping with <code>instrumentation-client</code></summary>
+
+When using `instrumentation-client`, the values you pass to `posthog.init` remain fixed for the entire session. This means bootstrapping only works if you evaluate flags **before your app renders** (for example, on the server).  
+
+If you need flag values after the app has rendered, you’ll want to:  
+
+- Evaluate the flag on the server and pass the value into your app, or  
+- Evaluate the flag in an earlier page/state, then store and re-use it when needed.  
+
+Both approaches avoid flicker and give you the same outcome as bootstrapping, as long as you use the same `distinct_id` across client and server.  
+
+See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for more information.
+
+</details>

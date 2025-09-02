@@ -5,6 +5,8 @@ showTitle: true
 hideAnchor: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 PostHog includes a variety of early access features in [the feature previews section of a users' settings page](https://app.posthog.com/settings/user-feature-previews), as well as a roadmap of feature previews which are coming soon.
 
 Items in the feature previews section can be toggled on or off if users want to try a feature out. Items in the coming soon section enable users to register their interest so that we can contact them with updates. Both sections work only at the user-level and not at the org or project level. 
@@ -18,8 +20,11 @@ Adding items to the coming soon menu early offers several advantages. It enables
 
 Coming soon features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months. 
 
-> **Moving from `Concept` to `Beta`**
-> Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
+<CalloutBox icon="IconInfo" title="Moving from Concept to Beta" type="fyi">
+
+Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
+
+</CalloutBox>
 
 ## Releasing as beta
 If your team is releasing an early version of a feature which users can interact with, you should consider adding it to the beta menu by creating a flag in the `beta` stage. Betas do not need to have been in `concept` stage first. 
@@ -50,7 +55,9 @@ All betas should follow the best practices below in order to provide a minimum a
 Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the [Content team](/teams/content) can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
+
   It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+
 </CalloutBox>
 
 ### Collecting beta feedback

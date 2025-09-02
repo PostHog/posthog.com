@@ -859,11 +859,12 @@
         { "source": "/tutorials/stripe-payment-data", "destination": "/tutorials/stripe-reports" },
         { "source": "/tutorials/delayed-survey", "destination": "/docs/surveys/creating-surveys#customization" },
         { "source": "/tutorials/how-to-connect-patterns-and-posthog", "destination": "/docs/cdp/" },
-        { "source": "/tutorials/monitor-aws-bedrock-calls", "destination": "/docs/ai-engineering" },
-        { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/ai-engineering" },
-        { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/ai-engineering" },
+        { "source": "/tutorials/monitor-aws-bedrock-calls", "destination": "/docs/llm-analytics" },
+        { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/llm-analytics" },
+        { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/llm-analytics" },
         { "source": "/tutorials/chatgpt-analytics", "destination": "/tutorials/openai-observability" },
         { "source": "/tutorials/nextjs-app-directory-analytics", "destination": "/tutorials/nextjs-analytics" },
+        { "source": "/tutorials/customer-facing-analytics", "destination": "/tutorials/embedded-analytics" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
         { "source": "/james", "destination": "/community/profiles/27732" },
         { "source": "/tim", "destination": "/community/profiles/27730" },
@@ -1216,9 +1217,13 @@
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
         },
-        { "source": "/docs/product-analytics/llms", "destination": "/docs/ai-engineering" },
-        { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
+        { "source": "/docs/product-analytics/llms", "destination": "/docs/llm-analytics" },
+        { "source": "/docs/ai-engineering/llms", "destination": "/docs/llm-analytics" },
         { "source": "/docs/product-analytics/trends", "destination": "/docs/product-analytics/trends/overview" },
+        {
+            "source": "/docs/product-analytics/calendar-heatmap",
+            "destination": "/docs/product-analytics/trends/charts#calendar-heatmap"
+        },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
         { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" },
@@ -1540,6 +1545,46 @@
         {
             "source": "/docs/error-tracking/issues",
             "destination": "/docs/error-tracking/issues-and-exceptions"
+        },
+        {
+            "source": "/docs/ai-engineering/observability",
+            "destination": "/docs/llm-analytics/start-here"
+        },
+        {
+            "source": "/docs/ai-engineering/llm-insights",
+            "destination": "/docs/llm-analytics/start-here"
+        },
+        {
+            "source": "/docs/ai-engineering/tutorials",
+            "destination": "/docs/llm-analytics/tutorials"
+        },
+        {
+            "source": "/docs/ai-engineering/traces-generations",
+            "destination": "/docs/llm-analytics/generations"
+        },
+        {
+            "source": "/docs/ai-engineering/dashboard",
+            "destination": "/docs/llm-analytics/dashboard"
+        },
+        {
+            "source": "/docs/ai-engineering/langfuse-posthog",
+            "destination": "/docs/llm-analytics/integrations/langfuse-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering/helicone-posthog",
+            "destination": "/docs/llm-analytics/integrations/helicone-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering/keywords-ai-posthog",
+            "destination": "/docs/llm-analytics/integrations/keywords-ai-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering/traceloop-posthog",
+            "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering",
+            "destination": "/docs/llm-analytics"
         }
     ],
     "headers": [

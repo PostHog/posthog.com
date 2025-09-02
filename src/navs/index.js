@@ -201,6 +201,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/destinations/gleap',
                 },
                 {
+                    name: 'Google Ads',
+                    url: '/docs/cdp/destinations/google-ads',
+                },
+                {
                     name: 'Google cloud storage',
                     url: '/docs/cdp/destinations/google-cloud-storage',
                 },
@@ -1304,6 +1308,10 @@ export const handbookSidebar = [
                                 name: 'Account planning',
                                 url: '/handbook/growth/sales/account-planning',
                             },
+                            {
+                                name: 'Cross-selling',
+                                url: '/handbook/growth/sales/cross-selling',
+                            },
                         ],
                     },
 
@@ -1324,16 +1332,12 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'CS & Onboarding',
+                name: 'Customer Success',
                 url: '',
                 children: [
                     {
                         name: 'Customer success overview',
                         url: '/handbook/cs-and-onboarding/customer-success',
-                    },
-                    {
-                        name: 'Onboarding specialist overview',
-                        url: '/handbook/cs-and-onboarding/onboarding-team',
                     },
                     {
                         name: 'Getting started with newly assigned customers',
@@ -1370,6 +1374,20 @@ export const handbookSidebar = [
                     {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
+                    },
+                ],
+            },
+            {
+                name: 'Onboarding',
+                url: '',
+                children: [
+                    {
+                        name: 'Onboarding Specialist overview',
+                        url: '/handbook/onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'New hire onboarding',
+                        url: '/handbook/onboarding/new-hire-onboarding',
                     },
                 ],
             },
@@ -1587,9 +1605,9 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                     color: 'purple',
-                    icon: 'IconAI',
+                    icon: 'IconLlmAnalytics',
                     url: '/tutorials/ai-engineering',
                 },
             ],
@@ -1728,8 +1746,8 @@ export const companyMenu = {
                     url: '/teams/ingestion',
                 },
                 {
-                    name: 'LLM Observability',
-                    url: '/teams/llm-observability',
+                    name: 'LLM analytics',
+                    url: '/teams/llm-analytics',
                 },
                 {
                     name: 'Max AI',
@@ -2466,6 +2484,10 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Query log',
+                            url: '/docs/data/query-log',
+                        },
+                        {
                             name: 'Annotations',
                             url: '/docs/data/annotations',
                         },
@@ -2731,6 +2753,10 @@ export const docsMenu = {
                         {
                             name: 'nginx',
                             url: '/docs/advanced/proxy/nginx',
+                        },
+                        {
+                            name: 'Node',
+                            url: '/docs/advanced/proxy/node',
                         },
                         {
                             name: 'Nuxt',
@@ -3052,23 +3078,13 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Calendar heatmap',
-                    url: '/docs/product-analytics/calendar-heatmap',
-                    icon: 'IconCalendar',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Tools',
                 },
                 {
                     name: 'LLM insights',
-                    url: '/docs/ai-engineering/llms',
+                    url: 'https://posthog.com/docs/llm-analytics',
                     icon: 'IconAIText',
                     color: 'yellow',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Autocapture',
@@ -3411,6 +3427,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconListTreeChild',
+                    color: 'purple',
+                },
+                {
                     name: 'Remote config',
                     url: '/docs/feature-flags/remote-config',
                     icon: 'IconGear',
@@ -3453,149 +3475,231 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/experiments/start-here',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/experiments/installation',
-                    icon: 'IconBook',
-                    color: 'blue',
+                    icon: 'IconCode',
                     featured: true,
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/experiments/installation',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/experiments/installation/web',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/experiments/installation/react',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/experiments/installation/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/experiments/installation/python',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/experiments/installation/php',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/experiments/installation/ruby',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/experiments/installation/go',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/experiments/installation/react-native',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/experiments/installation/android',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/experiments/installation/ios',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/experiments/installation/dotnet',
+                        },
+                    ],
                 },
                 {
                     name: 'Creating an experiment',
                     url: '/docs/experiments/creating-an-experiment',
-                    icon: 'IconTarget',
-                    color: 'orange',
+                    icon: 'IconFlask',
                     featured: true,
-                },
-                {
-                    name: 'Creating a no-code experiment',
-                    url: '/docs/experiments/no-code-web-experiments',
-                    icon: 'IconApp',
-                    color: 'seagreen',
-                    featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Experiment metrics',
-                    url: '/docs/experiments/metrics',
-                    icon: 'IconGraph',
-                    color: 'red',
+                    color: 'purple',
                 },
                 {
                     name: 'Adding your code',
                     url: '/docs/experiments/adding-experiment-code',
                     icon: 'IconCode',
-                    color: 'salmon',
+                    color: 'orange',
                 },
                 {
                     name: 'Testing and launching',
                     url: '/docs/experiments/testing-and-launching',
                     icon: 'IconRocket',
-                    color: 'purple',
                     featured: true,
-                },
-                {
-                    name: 'Best practices',
-                    url: '/docs/experiments/best-practices',
-                    icon: 'IconStar',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/experiments/common-questions',
-                    icon: 'IconQuestion',
-                    color: 'seagreen',
-                    featured: true,
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/experiments/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                },
-                {
-                    name: 'Features',
-                },
-                {
-                    name: 'Experiments without feature flags',
-                    url: '/docs/experiments/running-experiments-without-feature-flags',
-                    icon: 'IconFlag',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Holdouts',
-                    url: '/docs/experiments/holdouts',
-                    icon: 'IconPeople',
-                    color: 'orange',
-                },
-                {
-                    name: 'New experimentation engine',
-                    url: '/docs/experiments/new-experimentation-engine',
-                    icon: 'IconTestTube',
                     color: 'green',
                 },
                 {
-                    name: 'Data warehouse',
-                    url: '/docs/experiments/data-warehouse',
-                    icon: 'IconDatabase',
-                    color: 'blue',
+                    name: 'No-code experiments',
+                    url: '/docs/experiments/no-code-web-experiments',
+                    icon: 'IconToolbar',
+                    color: 'yellow',
+                    featured: true,
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
                 {
-                    name: 'Under the hood',
+                    name: 'Concepts',
                 },
                 {
                     name: 'Traffic allocation',
                     url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPeople',
-                    color: 'orange',
-                },
-                {
-                    name: 'Sample size and running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconDashboard',
+                    icon: 'IconPercentage',
                     color: 'blue',
                 },
                 {
-                    name: 'Bayesian method',
+                    name: 'Exposures',
+                    url: '/docs/experiments/exposures',
+                    icon: 'IconPerson',
+                    color: 'red',
+                },
+                {
+                    name: 'Metrics',
+                    url: '/docs/experiments/metrics',
+                    icon: 'IconGraph',
+                    color: 'purple',
+                },
+                {
+                    name: 'Running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconCalculator',
+                    color: 'orange',
                 },
                 {
                     name: 'Statistics overview',
                     url: '/docs/experiments/statistics',
-                    icon: 'IconBook',
-                    color: 'blue',
-                },
-                {
-                    name: 'Funnels statistics',
-                    url: '/docs/experiments/funnels-statistics',
-                    icon: 'IconGraph',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Trends count statistics',
-                    url: '/docs/experiments/trends-count-statistics',
-                    icon: 'IconGraph',
-                    color: 'green',
-                },
-                {
-                    name: 'Trends continuous statistics',
-                    url: '/docs/experiments/trends-continuous-statistics',
-                    icon: 'IconGraph',
-                    color: 'red',
+                    icon: 'IconSquareRoot',
+                    color: 'purple',
                 },
                 {
                     name: 'Frequentist method',
-                },
-                {
-                    name: 'Overview',
                     url: '/docs/experiments/frequentist-method',
                     icon: 'IconBook',
                     color: 'blue',
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'green',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Experiments without feature flags',
+                    url: '/docs/experiments/running-experiments-without-feature-flags',
+                    icon: 'IconWrench',
+                    color: 'red',
+                },
+                {
+                    name: 'New user experiments',
+                    url: '/tutorials/new-user-experiments',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
+                    name: 'A/A testing',
+                    url: '/tutorials/aa-testing',
+                    icon: 'IconBalance',
+                    color: 'orange',
+                },
+                {
+                    name: 'A/B/n testing',
+                    url: '/tutorials/abn-testing',
+                    icon: 'IconSplitTesting',
+                    color: 'purple',
+                },
+                {
+                    name: 'Holdout testing',
+                    url: '/tutorials/holdout-testing',
+                    icon: 'IconShieldPeople',
+                    color: 'green',
+                },
+                {
+                    name: 'Redirect testing',
+                    url: '/tutorials/redirect-testing',
+                    icon: 'IconArrowRight',
+                    color: 'red',
+                },
+                {
+                    name: 'Fake door test',
+                    url: '/tutorials/fake-door-test',
+                    icon: 'IconCursorClick',
+                    color: 'blue',
+                },
+                {
+                    name: 'LLM A/B tests',
+                    url: '/tutorials/llm-ab-tests',
+                    icon: 'IconAI',
+                    color: 'orange',
+                },
+
+                {
+                    name: 'Data warehouse experiments',
+                    url: '/docs/experiments/data-warehouse',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Tutorials and framework guides',
+                    url: '/docs/experiments/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'green',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/experiments/best-practices',
+                    icon: 'IconStar',
+                    color: 'blue',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/experiments/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'orange',
+                    featured: true,
                 },
             ],
         },
@@ -3914,29 +4018,152 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Tutorials and guides',
-                    url: '/docs/data-warehouse/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/data-warehouse/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'SQL editor',
+                    name: 'Link sources',
+                    url: '/docs/data-warehouse/sources',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/sources/',
+                        },
+                        {
+                            name: 'Managed',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/data-warehouse/sources/azure-db',
+                        },
+                        {
+                            name: 'BigQuery',
+                            url: '/docs/data-warehouse/sources/bigquery',
+                        },
+                        {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/sources/chargebee',
+                        },
+                        {
+                            name: 'DoIt',
+                            url: '/docs/data-warehouse/sources/doit',
+                        },
+                        {
+                            name: 'Google Ads',
+                            url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'Google Sheets',
+                            url: '/docs/data-warehouse/sources/google-sheets',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/data-warehouse/sources/hubspot',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'MongoDB',
+                            url: '/docs/data-warehouse/sources/mongodb',
+                        },
+                        {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/sources/mysql',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/data-warehouse/sources/postgres',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/sources/salesforce',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/data-warehouse/sources/snowflake',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/data-warehouse/sources/stripe',
+                            badge: {
+                                title: 'Popular',
+                                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Temporal.io',
+                            url: '/docs/data-warehouse/sources/temporal',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/sources/vitally',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/data-warehouse/sources/zendesk',
+                        },
+                        {
+                            name: 'Self-managed',
+                        },
+                        {
+                            name: 'Azure Blob',
+                            url: '/docs/data-warehouse/sources/azure-blob',
+                        },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/data-warehouse/sources/r2',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/data-warehouse/sources/gcs',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/data-warehouse/sources/s3',
+                        },
+                    ],
                 },
                 {
-                    name: 'SQL editor',
+                    name: 'Query with SQL',
+                    url: '/docs/data-warehouse/query',
+                    icon: 'IconCode',
+                    color: 'green',
+                },
+                {
+                    name: 'Visualize with insights',
+                    url: '/docs/data-warehouse/insights',
+                    icon: 'IconGraph',
+                    color: 'red',
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'SQL commands',
                     url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
                     color: 'purple',
                 },
                 {
-                    name: 'Accessing data',
-                    url: '/docs/data-warehouse/sql/data-access',
-                    icon: 'IconDatabase',
-                    color: 'salmon',
-                },
-                {
-                    name: 'Useful functions',
+                    name: 'SQL functions',
                     url: '/docs/data-warehouse/sql/useful-functions',
                     icon: 'IconStar',
                     color: 'yellow',
@@ -3948,27 +4175,56 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Features',
+                    name: 'Views',
+                    url: '/docs/data-warehouse/views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
+                    featured: true,
                 },
                 {
-                    name: 'Creating insights from sources',
-                    url: '/docs/data-warehouse/query',
-                    icon: 'IconGraph',
-                    color: 'purple',
+                    name: 'Guides',
+                },
+                {
+                    name: 'Accessing data',
+                    url: '/docs/data-warehouse/sql/data-access',
+                    icon: 'IconDatabase',
+                    color: 'green',
                 },
                 {
                     name: 'Joining data',
                     url: '/docs/data-warehouse/join',
                     icon: 'IconList',
-                    color: 'orange',
+                    color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Save views',
-                    url: '/docs/data-warehouse/views',
+                    name: 'Materializing views',
+                    url: '/docs/data-warehouse/views/materialize',
                     icon: 'IconCalculator',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Cutting costs',
+                    url: '/docs/data-warehouse/cutting-costs',
+                    icon: 'IconPiggyBank',
                     color: 'salmon',
                     featured: true,
+                },
+                {
+                    name: 'More tutorials',
+                    url: '/docs/data-warehouse/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/data-warehouse/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'green',
                 },
                 {
                     name: 'Under the hood',
@@ -3980,78 +4236,191 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM observability',
-            url: '/docs/ai-engineering',
+            name: 'LLM analytics',
+            url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
-            icon: 'IconAI',
+            icon: 'IconLlmAnalytics',
             description: 'Insights for building your AI and LLM products',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
             children: [
                 {
-                    name: 'LLM observability',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    name: 'LLM analytics',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/ai-engineering',
+                    url: '/docs/llm-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/llm-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Installation',
-                    url: '/docs/ai-engineering/observability',
+                    url: '/docs/llm-analytics/installation',
                     icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/llm-analytics/installation',
+                        },
+                        {
+                            name: 'OpenAI',
+                            url: '/docs/llm-analytics/installation/openai',
+                        },
+                        {
+                            name: 'Anthropic',
+                            url: '/docs/llm-analytics/installation/anthropic',
+                        },
+                        {
+                            name: 'Google',
+                            url: '/docs/llm-analytics/installation/google',
+                        },
+                        {
+                            name: 'LangChain',
+                            url: '/docs/llm-analytics/installation/langchain',
+                        },
+                        {
+                            name: 'Vercel AI SDK',
+                            url: '/docs/llm-analytics/installation/vercel-ai',
+                        },
+                        {
+                            name: 'OpenRouter',
+                            url: '/docs/llm-analytics/installation/openrouter',
+                        },
+                    ],
+                },
+                {
+                    name: 'Privacy mode',
+                    url: '/docs/llm-analytics/privacy-mode',
+                    icon: 'IconLock',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Generations',
+                    url: '/docs/llm-analytics/generations',
+                    icon: 'IconAIText',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Spans',
+                    url: '/docs/llm-analytics/spans',
+                    icon: 'IconBrackets',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Dashboard',
-                    url: '/docs/ai-engineering/dashboard',
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Embeddings',
+                    url: '/docs/llm-analytics/embeddings',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Calculating LLM costs',
+                    url: '/docs/llm-analytics/calculating-costs',
+                    icon: 'IconBalance',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Analyze LLM performance',
+                    url: '/docs/llm-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
                 },
                 {
-                    name: 'Traces and generations',
-                    url: '/docs/ai-engineering/traces-generations',
-                    icon: 'IconTarget',
-                    color: 'orange',
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/ai-engineering/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'salmon',
-                    featured: true,
-                },
-                {
-                    name: 'Observability integrations',
-                    url: '/docs/ai-engineering/llm-insights',
-                    icon: 'IconAIText',
-                    featured: true,
+                    name: 'Tracking custom properties',
+                    url: '/docs/llm-analytics/custom-properties',
+                    icon: 'IconGear',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Link session replay',
+                    url: '/docs/llm-analytics/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link error tracking',
+                    url: '/docs/llm-analytics/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
+                    name: 'Manual capture',
+                    url: '/docs/llm-analytics/manual-capture',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/llm-analytics/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
+                {
+                    name: 'More tutorials',
+                    url: '/docs/llm-analytics/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Third-party integrations',
+                    url: '/docs/llm-analytics/integrations',
+                    icon: 'IconApps',
+                    featured: true,
+                    color: 'yellow',
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/llm-analytics/integrations',
+                        },
+                        {
                             name: 'Helicone',
-                            url: '/docs/ai-engineering/helicone-posthog',
+                            url: '/docs/llm-analytics/integrations/helicone-posthog',
                         },
                         {
                             name: 'Langfuse',
-                            url: '/docs/ai-engineering/langfuse-posthog',
+                            url: '/docs/llm-analytics/integrations/langfuse-posthog',
                         },
                         {
                             name: 'Traceloop',
-                            url: '/docs/ai-engineering/traceloop-posthog',
+                            url: '/docs/llm-analytics/integrations/traceloop-posthog',
                         },
                         {
                             name: 'Keywords AI',
-                            url: '/docs/ai-engineering/keywords-ai-posthog',
+                            url: '/docs/llm-analytics/integrations/keywords-ai-posthog',
                         },
                     ],
                 },
@@ -4211,6 +4580,13 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'LLM analytics',
+            icon: 'IconLlmAnalytics',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            url: '/llm-analytics',
         },
         {
             name: 'Max AI',

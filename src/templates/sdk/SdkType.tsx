@@ -72,6 +72,7 @@ export default function SdkType({ pageContext }: { pageContext: PageContext }) {
                                 params={typeData.properties}
                                 title="Properties"
                                 validTypes={types}
+                                includeId={true}
                             />
                         ) : typeData.example ? (
                             <div>

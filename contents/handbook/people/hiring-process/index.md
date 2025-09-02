@@ -211,6 +211,8 @@ In this round, the candidate will meet a future team member. This round is usual
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. Ask yourself - does this candidate raise the bar?
 
+For engineering roles only: during high-volume seasons, this round might be recorded for training purposes to help us onboard and train new interviewers faster. The candidate will, of course, have the chance to opt out by either letting their recruiter know in advance or letting the interviewer know at the start of the interview. 
+
 ### 3. Small Team interview with an Exec Team Member
 
 This is a call with either James, Tim, Raquel, or Charles depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
@@ -225,7 +227,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-We will pay the candidate their 'normal day rate' with the caveat that we do cap the SuperDay payouts to $1,000. We will use this [calculator](https://www.xe.com/) to convert for GBP/EUR currencies. If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/day-rate-caluclator) to calculate it. 
+We pay all candidates 1,000 USD for their efforts on SuperDay.
 
 If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships. Due to the high volume of SuperDays we run, if the candidate has their SuperDay in the first half of the month, they can expect a payment to be made by the 15th of the month, while any SuperDays after the 15th of the month, it will be paid at the end of the month. 
 
@@ -273,6 +275,12 @@ During the offer call, we'll share feedback from the interview process, and sell
 
 Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
+### How Ashby works for interviewers
+
+We pay Ashby per seat, so as an interviewer your access is limited to those candidates that you will interview, to save us some money. You will be able to see their application (inc cover letter), their resume and all previous feedback left about the candidate. 
+
+You will not be able to see every other candidate in the pipeline, this is because of the per seat pricing. However, we will keep a couple of seats aside so you can login to see other candidates in the pipeline and do a bit of profile/assessment calibration. If you would like to do this, please contact the talent team on slack and they can provision this for you. You won't keep this access forever but you can get it for a few days/ a week to get an overview of how some other interviewers are doing things. 
+
 ## Visa sponsorship
 
 Building a diverse team is at the heart of our culture at PostHog, and we are proud to be hiring internationally. In some cases, this includes the need for visa sponsorship. We are currently only able to provide visas in the UK.
@@ -282,7 +290,7 @@ Building a diverse team is at the heart of our culture at PostHog, and we are pr
 
 For employees where PostHog covers the costs related to obtaining a visa, the employee agrees to reimburse PostHog if they voluntarily terminate their employment prior to the completion of 12 months of service. The costs will be calculated on a monthly basis, so when the employee decides to leave after 10 months, they will have to repay 2/12 of the costs related to the visa.
 
-If a candidate needs visa sponsorship, please keep in mind that the process is lengthy and costly.
+If a candidate needs visa sponsorship, including sponsoring or transfer of H1B visa in the US, at this time, we cannot hire them.
 
 ## E-Verify
 
