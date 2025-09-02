@@ -71,7 +71,7 @@ Products at PostHog generically go through three phases, and considering your ph
 * This is where we're scaling the number of free and paid users.
 
 * Features at this stage either fall into:
-  * (i) gaps with competitive products that we've not prioritized so far, probably based on feature requests from users, in which case the risk of them not being useful for users is prettty low or...
+  * (i) gaps with competitive products that we've not prioritized so far, probably based on feature requests from users, in which case the risk of them not being useful for users is pretty low or...
   * (ii) totally innovative things like new UX driven by our take on AI, or a new way to access data (like Hog or SQL), or an integrated experience that no one else can offer because they don't have all the tools in one. In these cases, it is _more important_ to consider how your products are being used as you are more likely to build something that isn't useful (but at this stage, it's fine and encouraged to innovate)
 
 There are plenty of other techniques, that you can do in parallel to get a signal on a new idea:

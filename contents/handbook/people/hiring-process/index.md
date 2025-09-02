@@ -290,7 +290,7 @@ Building a diverse team is at the heart of our culture at PostHog, and we are pr
 
 For employees where PostHog covers the costs related to obtaining a visa, the employee agrees to reimburse PostHog if they voluntarily terminate their employment prior to the completion of 12 months of service. The costs will be calculated on a monthly basis, so when the employee decides to leave after 10 months, they will have to repay 2/12 of the costs related to the visa.
 
-If a candidate needs visa sponsorship, please keep in mind that the process is lengthy and costly.
+If a candidate needs visa sponsorship, including sponsoring or transfer of H1B visa in the US, at this time, we cannot hire them.
 
 ## E-Verify
 

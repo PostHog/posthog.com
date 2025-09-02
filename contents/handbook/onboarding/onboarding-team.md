@@ -11,14 +11,15 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here ([link](https://us.posthog.com/project/2/dashboard/363452)).
+The north star metric for the Onboarding team is 3-month logo retention from the first $100+ forecasted bill, which can be tracked here ([link](https://us.posthog.com/project/2/dashboard/363452)).
 
 Secondly, we also care about net dollar retention for this segment.
 
 ### Which customers get onboarding?
 
-As above, the segment consists of customers who self-serve PostHog and generate a forecasted bill of over $500. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $500 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
+As above, the segment consists of customers who self-serve PostHog and generate a forecasted bill of over $100. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $100 forecast are routed to us. We also handle a couple of other segments:
 
+- YC program participants
 - Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
 - Startup plan customers with high credit usage (> ~$1500).
 - Hype startups we want to work with (despite being below $ thresholds), or longer-standing customers that have paid in this range and need billing or setup assistance.

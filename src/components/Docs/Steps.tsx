@@ -110,7 +110,7 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
                         <em>{subtitle}</em>
                     </div>
                 )}
-                <div className="mt-4 mb-4 overflow-x-auto overflow-y-hidden pl-2">{children}</div>
+                <div className="mt-4 mb-4 overflow-x-hidden overflow-y-hidden pl-2">{children}</div>
             </div>
         </li>
     )
