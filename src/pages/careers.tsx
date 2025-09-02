@@ -9,6 +9,7 @@ import { SEO } from '../components/seo'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import MegaQuote from 'components/Careers/MegaQuote'
 import CompanyHandbook from 'components/Careers/Handbook'
+import { TeamVideo } from '../components/Careers/TeamVideo/index'
 import NoHatingAllowed from '../components/NoHatingAllowed'
 import { CareersCards } from '../components/NoHatingAllowed/data.js'
 import IdealEmployeeProfile from 'components/Careers/IdealEmployeeProfile'
@@ -46,6 +47,7 @@ const IndexPage = () => {
             <FounderNote />
             <MegaQuote />
             <CompanyHandbook />
+            <TeamVideo videoId="QeU5MmpqBg0" title="Get to know your potential future colleagues" />
             <NoHatingAllowed data={CareersCards} youllHate="working here" size="text-4xl lg:text-5xl" />
             <IdealEmployeeProfile />
             <BenefitsUnexpected />
