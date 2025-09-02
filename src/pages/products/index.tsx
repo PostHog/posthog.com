@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react'
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react'
 import Explorer from 'components/Explorer'
 import { navigate } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
@@ -99,6 +99,7 @@ export default function Products(): JSX.Element {
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
     const { appWindow } = useWindow()
+    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
     const appWindowWidth = appWindow?.size?.width || 0
 
@@ -140,6 +141,15 @@ export default function Products(): JSX.Element {
             setFilteredProducts(allProducts)
         }
     }, [allProducts, searchTerm])
+
+    // Clean up timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (hoverTimeoutRef.current) {
+                clearTimeout(hoverTimeoutRef.current)
+            }
+        }
+    }, [])
 
     const handleProductClick = useCallback(
         (product: any, e: React.MouseEvent) => {
@@ -469,8 +479,31 @@ export default function Products(): JSX.Element {
                                                             <button
                                                                 key={product.slug}
                                                                 onClick={(e) => handleProductClick(product, e)}
-                                                                onMouseEnter={() => setHoveredProduct(product)}
-                                                                onMouseLeave={() => setHoveredProduct(null)}
+                                                                onMouseEnter={() => {
+                                                                    // Clear any pending timeout
+                                                                    if (hoverTimeoutRef.current) {
+                                                                        clearTimeout(hoverTimeoutRef.current)
+                                                                        hoverTimeoutRef.current = null
+                                                                    }
+
+                                                                    // If there's already a panel open, delay switching
+                                                                    if (hoveredProduct || selectedProduct) {
+                                                                        hoverTimeoutRef.current = setTimeout(() => {
+                                                                            setHoveredProduct(product)
+                                                                        }, 100)
+                                                                    } else {
+                                                                        // No panel open, show immediately
+                                                                        setHoveredProduct(product)
+                                                                    }
+                                                                }}
+                                                                onMouseLeave={() => {
+                                                                    // Don't hide the panel on mouse leave - keep it open
+                                                                    // Clear any pending timeout to prevent delayed switching
+                                                                    if (hoverTimeoutRef.current) {
+                                                                        clearTimeout(hoverTimeoutRef.current)
+                                                                        hoverTimeoutRef.current = null
+                                                                    }
+                                                                }}
                                                                 className={`w-full cursor-pointer p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
                                                                     }`}
                                                                 style={{ pointerEvents: 'auto' }}
