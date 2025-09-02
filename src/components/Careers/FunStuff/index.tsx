@@ -1,5 +1,6 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
 
 const FunThing: React.FC<{
     image: React.ReactNode
@@ -9,14 +10,13 @@ const FunThing: React.FC<{
     imagePosition: 'top' | 'bottom'
 }> = ({ image, title, content, link, imagePosition }) => (
     <div
-        className={`bg-white dark:bg-dark rounded shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${
-            imagePosition === 'top' ? 'flex-col-reverse' : ''
-        }`}
+        className={`bg-primary border border-primary rounded overflow-hidden flex flex-col ${imagePosition === 'top' ? 'flex-col-reverse' : ''
+            }`}
     >
         {link ? (
-            <a href={link} target="_blank" rel="noreferrer">
+            <Link to={link} state={{ newWindow: true }}>
                 {image}
-            </a>
+            </Link>
         ) : (
             image
         )}
@@ -195,7 +195,7 @@ const frameContents = [
 
 const FunStuff: React.FC = () => {
     return (
-        <section id="fun-stuff" className="@container px-8 @4xl:px-8">
+        <section id="fun-stuff" className="not-prose @container px-8 @4xl:px-8">
             <h2 className="text-center text-4xl lg:text-5xl text-balance">
                 Live, Laugh, LEquip every developer to build successful products
             </h2>
@@ -203,7 +203,7 @@ const FunStuff: React.FC = () => {
                 Our jobs are zero fun. Here are some things that have made it a little less insufferable.
             </p>
 
-            <div className="grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-3 gap-4 lg:gap-6 xl:gap-8">
+            <div className="bg-accent rounded p-4 grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-3 gap-4 lg:gap-x-6 xl:gap-x-8">
                 {frameContents.map((frame, index) => (
                     <FunThing
                         key={index}

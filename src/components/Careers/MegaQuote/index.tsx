@@ -24,9 +24,8 @@ const TeamMemberLink = (person) => {
             <a href={person && `/community/profiles/${squeakId}`} className="flex flex-col gap-2 items-center">
                 <div className="border-2 border-primary p-0.5 bg-light dark:bg-dark rounded-full">
                     <div
-                        className={`size-24 rounded-full overflow-hidden mx-auto ${
-                            color ? `bg-${color}` : 'bg-orange'
-                        }`}
+                        className={`size-24 rounded-full overflow-hidden mx-auto ${color ? `bg-${color}` : 'bg-orange'
+                            }`}
                     >
                         {person ? (
                             <img
@@ -51,7 +50,7 @@ const TeamMemberLink = (person) => {
                 <div>{person.companyRole && `${person.companyRole}`}</div>
                 <div className="text-[13px]">
                     <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
-                    <Link to={teamURL} className="font-semibold underline">
+                    <Link to={teamURL} state={{ newWindow: true }} className="font-semibold underline">
                         {teamName} Team
                     </Link>
                 </div>

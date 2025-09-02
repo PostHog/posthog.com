@@ -217,7 +217,7 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
                 </div>
                 <div className="order-4 @md:order-none col-start-1 row-start-4 @md:col-start-1 @md:row-start-4 @md:col-span-full @xl:row-span-1 @2xl:col-span-4">
                     <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-sm">
                         <div className="w-10">
                             {pineapplePercentage > 50 ? (
                                 <StickerPineappleYes className="size-10" />

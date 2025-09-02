@@ -37,11 +37,9 @@ const TeamMemberLink = (person) => {
             </div>
 
             <div
-                className={`p-0.5 leading-[0] bg-white dark:bg-accent-dark rounded-full border-2 border-light relative dark:border-dark hover:border-${
-                    color ? color : 'red'
-                } dark:hover:border-${
-                    color ? color : 'yellow'
-                } scale-100 hover:scale-[1.03] active:scale-[.99] active:top-[2px] transition-transform duration-200`}
+                className={`p-0.5 leading-[0] bg-white dark:bg-accent-dark rounded-full border-2 border-light relative dark:border-dark hover:border-${color ? color : 'red'
+                    } dark:hover:border-${color ? color : 'yellow'
+                    } scale-100 hover:scale-[1.03] active:scale-[.99] active:top-[2px] transition-transform duration-200`}
             >
                 <Link
                     href={`/community/profiles/${squeakId}`}
@@ -141,7 +139,7 @@ const TeamQuotes: React.FC = () => {
 
             <Masonry
                 breakpointCols={breakpointColumnsObj}
-                className="flex -ml-8 xl:-ml-12 w-auto"
+                className="not-prose bg-accent rounded p-4 flex w-auto"
                 columnClassName="pl-8 xl:pl-12 bg-clip-padding"
             >
                 <TeamMember name="Lottie Coxon" />

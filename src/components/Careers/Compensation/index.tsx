@@ -16,21 +16,15 @@ const Compensation: React.FC = () => {
             description: "You receive all your options in the event you're let go due to the company being acquired.",
         },
         {
-            title: 'Option to trade cash for equity',
-            subtitle: '(when getting a raise)',
-            description:
-                'You can trade up to 100% of any pay rise you receive for share options at a 1:1 ratio of cash to equity.',
-        },
-        {
             title: 'Employee secondaries',
             subtitle: '(when offered)',
             description:
-                'In 2024, we held our first secondary for early employees to sell some of their shares. We plan on doing more in the future.',
+                'In 2024, we held our first secondary for early employees to sell some of their shares. We executed our first tender offer in 2025, and plan to do more.',
         },
     ]
 
     return (
-        <section id="compensation" className="@container px-8 @3xl:px-8">
+        <section id="compensation" className="not-prose @container px-8 @3xl:px-8">
             <h2 className="text-3xl font-bold mb-2">Compensation &amp; equity</h2>
             <p className="mb-4">
                 We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success,
@@ -61,7 +55,7 @@ const Compensation: React.FC = () => {
                         ))}
                     </ul>
 
-                    <CallToAction to="/handbook/people/share-options" type="secondary" size="sm">
+                    <CallToAction to="/handbook/people/share-options" type="secondary" size="sm" state={{ newWindow: true }}>
                         Learn more about share options
                     </CallToAction>
                 </div>

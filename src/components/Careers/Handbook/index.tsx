@@ -29,7 +29,7 @@ const CompanyHandbook: React.FC = () => {
                 <ul className="mb-4 pl-4">
                     <li>Our revenue is over $10 million a year</li>
                     <li>
-                        We're <Link href="/handbook/finance">default alive</Link>
+                        We're <Link href="/handbook/finance" state={{ newWindow: true }}>default alive</Link>
                     </li>
                     <li>If you join us, you will be expected to take a stance on if pineapple belongs on pizza</li>
                 </ul>
@@ -50,6 +50,7 @@ const CompanyHandbook: React.FC = () => {
                                                 <Link
                                                     to={link.to}
                                                     className="group flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary rounded border border-transparent hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[28px] py-1 text-sm font-medium no-underline"
+                                                    state={{ newWindow: true }}
                                                 >
                                                     <span className="relative inline-block pl-3 pr-2 bg-white -ml-px group-hover:ml-0 dark:bg-dark truncate no-underline">
                                                         {link.name}

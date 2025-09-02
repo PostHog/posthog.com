@@ -5,12 +5,12 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 export const InterviewProcessOverview = () => {
     return (
-        <section id="interview-process" className="@container px-8 @3xl:px-8">
+        <section id="interview-process" className="@container pt-12 px-8 @3xl:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <div className="flex flex-col justify-between">
                     <div>
                         <div className="opacity-60 mb-2">Interview process</div>
-                        <h2 className="text-3xl lg:text-4xl font-bold mb-2">Get paid to try working here</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold mb-2 mt-0">Get paid to try working here</h2>
                         <p className="max-w-md">
                             We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.
                         </p>
