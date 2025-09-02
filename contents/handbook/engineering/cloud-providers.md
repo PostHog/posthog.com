@@ -11,10 +11,11 @@ showTitle: true
 Create a PR to the `posthog-cloud-infra` repository to add your details [here](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
 
 To give someone access
-1. Go [to this link](https://us-east-1.console.aws.amazon.com/singlesignon/home?region=us-east-1#!/instances/7223d5d28068c4d6/users) while logged in
+1. Add the new user to the cloud infra repo (see link above)
 2. Use their email address as their username
-3. Add them to the "developers" group on the next step
-4. Tell them to use http://go/aws to log in
+3. Add them to the "Developers" and "DevelopersRO" groups (just use `groups = local.default_groups`)
+4. Add team infra as reviewer. 
+5. Once this is merged, tell them to use http://go/aws to log in
 
 ### Permissions errors using AWS CLI
 
