@@ -1,8 +1,9 @@
 ---
 title: Building a Next.js cookie consent banner
-date: 2024-03-27
+date: 2025-08-27
 author:
   - ian-vanagas
+  - robbie-coomber
 showTitle: true
 sidebar: Docs
 tags:
@@ -24,47 +25,46 @@ First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodej
 npx create-next-app@latest cookie-banner
 ```
 
-To add PostHog to our app, go into your `app` folder and create a `providers.js` file. Here we create a client-side PostHog provider that initializes in a `useEffect` using the project API key and instance address (get them from your [project settings](https://app.posthog.com/project/settings)). Make sure to include the `use client` directive and the `phInstance` state (for future use). Altogether, this looks like this:
+Next, install PostHog's JavaScript Web SDK:
 
-```js
-// app/providers.js
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { useEffect } from 'react'
-
-export function PHProvider({ children }) {
-  useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_client_api_host>',
-      defaults: '<ph_posthog_js_defaults>',
-    })
-  }, []);
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
+```bash
+npm install posthog-js
 ```
 
-We can then import the `PHProvider` component from the `provider.js` file in our `app/layout.js` file, and wrap our app in it.
+To set up PostHog, create a `instrumentation-client.js` file in the root of your project. In it, initialize PostHog with your project API key and instance address from your [project settings](https://app.posthog.com/project/settings) like this:
 
 ```js
-// app/layout.js
-import { PHProvider } from './providers'
+// instrumentation-client.js
+import posthog from 'posthog-js'
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <PHProvider>
-        <body>{children}</body>
-      </PHProvider>
-    </html>
-  )
-}
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+});
 ```
 
 After setting this up and running `npm run dev`, PostHog starts autocapturing events, but a PostHog-related cookie is set for the user without their consent.
 
 ![Cookie set](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-cookie-banner/cookie.png)
+
+## Ensuring cookies aren't set on initial load
+
+If you want to make sure you are fully compliant, you may want to ensure cookies aren't set until the user has given consent.
+
+To do this, you can set `cookieless_mode` to `on_reject` in your initialization config like this:
+
+```js
+// instrumentation-client.js
+import posthog from "posthog-js";
+
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  defaults: '<ph_posthog_js_defaults>',
+  cookieless_mode: 'on_reject'
+})
+```
+
+This means that PostHog will not set any cookies until the user has given consent, which is what we rely on the cookie banner to do.
 
 ## Creating a cookie banner
 
@@ -83,12 +83,12 @@ export function Banner() {
   useEffect(() => {
     // We want this to only run once the client loads
     // or else it causes a hydration error
-    setConsentGiven('undecided');
+    setConsentGiven('pending');
   }, []);
 
   return (
     <div>
-      {consentGiven === 'undecided' && (
+      {consentGiven === 'pending' && (
         <div>
           <p>
             We use tracking cookies to understand how you use 
@@ -105,25 +105,24 @@ export function Banner() {
 }
 ```
 
-After creating this, we import the component into `layout.js` and set it up inside our `PHProvider` and `body` components:
+After creating this, we import the component into `layout.js` and set it up inside our `body` component:
 
 ```js
-import './globals.css'
-import { PHProvider } from './providers'
-import Banner from './banner'
+// app/layout.js
+import "./globals.css";
+import { Banner } from "./banner";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <PHProvider>
-        <body>
-          {children}
-          <Banner />
-        </body>
-      </PHProvider>
+      <body>
+        {children}
+        <Banner />
+      </body>
     </html>
-  )
+  );
 }
+
 ```
 
 This creates an ugly but functional cookie banner at the bottom of our site. You can customize and style it how you want.
@@ -132,44 +131,36 @@ This creates an ugly but functional cookie banner at the bottom of our site. You
 
 ## Handling and storing user consent
 
-Next, we add the logic to handle and store the user's consent. We do this in `banner.js` by adding `handleAcceptCookies` and `handleDeclineCookies` functions called when a user chooses to accept or decline cookies. We save this choice to local storage.
-
-We also add a `cookieConsentGiven` function that returns the user's consent state from local storage, which we call on first load. If there isn't a value in local storage, we set the consent state to `undecided`.
+Next, we add the logic to handle and store the user's consent. We do this in `banner.js` by adding `handleAcceptCookies` and `handleDeclineCookies` functions and connect them to PostHog's consent management methods like this:
 
 ```js
 // app/banner.js
 'use client';
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 
-export function cookieConsentGiven() {
-  if (!localStorage.getItem('cookie_consent')) {
-    return 'undecided';
-  }
-  return localStorage.getItem('cookie_consent');
-}
-
-export default function Banner() {
+export function Banner() {
   const [consentGiven, setConsentGiven] = useState('');
 
   useEffect(() => {
     // We want this to only run once the client loads
     // or else it causes a hydration error
-    setConsentGiven(cookieConsentGiven());
+    setConsentGiven(posthog.get_explicit_consent_status());
   }, []);
 
   const handleAcceptCookies = () => {
-    localStorage.setItem('cookie_consent', 'yes');
-    setConsentGiven('yes');
+    posthog.opt_in_capturing();
+    setConsentGiven('granted');
   };
 
   const handleDeclineCookies = () => {
-    localStorage.setItem('cookie_consent', 'no');
-    setConsentGiven('no');
+    posthog.opt_out_capturing();
+    setConsentGiven('denied');
   };
 
   return (
     <div>
-      {consentGiven === 'undecided' && (
+      {consentGiven === 'pending' && (
         <div>
           <p>
             We use tracking cookies to understand how you use 
@@ -186,101 +177,9 @@ export default function Banner() {
 }
 ```
 
-## Controlling PostHog persistence based on consent
+Now, when users make a choice, PostHog opts them in or out of tracking cookies, storing the choice in local storage.
 
-Now that we can ask for and store user consent, we can use this to control whether PostHog sets a cookie or not. There are 3 possible states:
-
-1. If the user hasn't made a consent choice, show the banner and initialize PostHog in `memory` mode.
-
-2. If the user declines consent, hide the banner and keep PostHog in `memory` mode.
-
-3. If the user accepts consent, hide the banner and switch PostHog to `localStorage+cookie` mode.
-
-To start implementing this, we add a `useEffect` dependent on the `consentGiven` in `banner.js` to update the PostHog configuration based on the user's consent.
-
-```js
-// app/banner.js
-'use client';
-import { useEffect, useState } from "react";
-import { usePostHog } from "posthog-js/react";
-
-export function cookieConsentGiven() {
-  if (!localStorage.getItem('cookie_consent')) {
-    return 'undecided';
-  }
-  return localStorage.getItem('cookie_consent');
-}
-
-export default function Banner() {
-  const [consentGiven, setConsentGiven] = useState('');
-  const posthog = usePostHog();
-
-  useEffect(() => {
-    // We want this to only run once the client loads
-    // or else it causes a hydration error
-    setConsentGiven(cookieConsentGiven());
-  }, []);
-
-  useEffect(() => {
-    if (consentGiven !== '') {
-      posthog.set_config({ persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory' });
-    }
-  }, [consentGiven]);
-
-  const handleAcceptCookies = () => {
-    localStorage.setItem('cookie_consent', 'yes');
-    setConsentGiven('yes');
-  };
-
-  const handleDeclineCookies = () => {
-    localStorage.setItem('cookie_consent', 'no');
-    setConsentGiven('no');
-  };
-
-  return (
-    <div>
-      {consentGiven === 'undecided' && (
-        <div>
-          <p>
-            We use tracking cookies to understand how you use 
-            the product and help us improve it.
-            Please accept cookies to help us improve.
-          </p>
-          <button type="button" onClick={handleAcceptCookies}>Accept cookies</button>
-          <span> </span>
-          <button type="button" onClick={handleDeclineCookies}>Decline cookies</button>
-        </div>
-      )}
-    </div>
-  );
-}
-```
-
-To ensure, we initialize PostHog correctly on future loads, we also need to update `providers.js` to set the `persistence` config option based on the user's consent state. We can do this by reusing the `cookieConsentGiven` function.
-
-```js
-// app/providers.js
-'use client'
-import posthog from 'posthog-js'
-import { PostHogProvider } from 'posthog-js/react'
-import { cookieConsentGiven } from './banner'
-import { useEffect } from 'react'
-export function PHProvider({ children }) {
-  useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_client_api_host>',
-      defaults: '<ph_posthog_js_defaults>',
-      persistence: cookieConsentGiven() === 'yes' ? 'localStorage+cookie' : 'memory'
-    })
-  }, []);
-
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-When users visit your site now, PostHog is initialized either with or without cookies based on their consent choice.
-
-![Consented with local storage](https://res.cloudinary.com/dmukukwp6/image/upload/v1711561917/posthog.com/contents/images/tutorials/nextjs-cookie-banner/consent.png)
+![Full cookie banner demo](https://res.cloudinary.com/dmukukwp6/video/upload/cookie_73efa36bc7.mp4)
 
 ## Further reading
 

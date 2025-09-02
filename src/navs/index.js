@@ -2480,6 +2480,10 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Query log',
+                            url: '/docs/data/query-log',
+                        },
+                        {
                             name: 'Annotations',
                             url: '/docs/data/annotations',
                         },
@@ -3070,12 +3074,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Calendar heatmap',
-                    url: '/docs/product-analytics/calendar-heatmap',
-                    icon: 'IconCalendar',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Tools',
                 },
                 {
@@ -3423,6 +3421,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
+                },
+                {
+                    name: 'Feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconListTreeChild',
+                    color: 'purple',
                 },
                 {
                     name: 'Remote config',
@@ -4285,6 +4289,10 @@ export const docsMenu = {
                             name: 'Vercel AI SDK',
                             url: '/docs/llm-analytics/installation/vercel-ai',
                         },
+                        {
+                            name: 'OpenRouter',
+                            url: '/docs/llm-analytics/installation/openrouter',
+                        },
                     ],
                 },
                 {
@@ -4305,17 +4313,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Traces',
-                    url: '/docs/llm-analytics/traces',
-                    icon: 'IconUserPaths',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'Spans',
                     url: '/docs/llm-analytics/spans',
                     icon: 'IconBrackets',
                     color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
                     featured: true,
                 },
                 {
@@ -4342,17 +4350,29 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Tracking custom properties',
+                    url: '/docs/llm-analytics/custom-properties',
+                    icon: 'IconGear',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Link session replay',
+                    url: '/docs/llm-analytics/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link error tracking',
+                    url: '/docs/llm-analytics/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
                     name: 'Manual capture',
                     url: '/docs/llm-analytics/manual-capture',
                     icon: 'IconCode',
                     color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/llm-analytics/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -4365,7 +4385,14 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Integrations',
+                    name: 'More tutorials',
+                    url: '/docs/llm-analytics/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Third-party integrations',
                     url: '/docs/llm-analytics/integrations',
                     icon: 'IconApps',
                     featured: true,
