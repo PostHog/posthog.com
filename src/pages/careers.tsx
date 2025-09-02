@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React from 'react'
+import React, { useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { OpenRoles } from '../components/Careers/OpenRoles'
 import { Transparency } from '../components/Careers/Transparency'
@@ -22,6 +22,9 @@ import OSTabs from 'components/OSTabs'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from "components/OSButton"
+import { IconList } from '@posthog/icons'
+import Tooltip from "components/RadixUI/Tooltip"
 
 const careersTableOfContents = [
     { url: '#hero', value: 'Open roles', depth: 0 },
@@ -42,31 +45,63 @@ const careersTableOfContents = [
 ]
 
 // Table of Contents Component
-const TableOfContents = () => (
-    <div className="bg-accent border border-primary rounded p-4 mb-8">
-        <h3 className="text-lg font-semibold m-0 mb-3">Table of Contents</h3>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 list-none m-0 p-0">
-            {careersTableOfContents.map((item) => (
-                <li key={item.url}>
-                    <Link to={item.url} className="text-sm hover:underline">
-                        {item.value}
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </div>
-)
+const TableOfContents = ({
+    isVisible,
+    onClose
+}: {
+    isVisible: boolean
+    onClose: () => void
+}) => {
+    if (!isVisible) return null
+
+    const handleLinkClick = () => {
+        onClose()
+    }
+
+    return (
+        <div className="absolute bottom-12 right-0 w-64 border border-primary p-2 bg-accent rounded shadow-xl">
+            <ul className="not-prose grid list-none m-0 p-0">
+                {careersTableOfContents.map((item) => (
+                    <li key={item.url}>
+                        <Link
+                            to={item.url}
+                            className="font-semibold text-sm hover:underline"
+                            onClick={handleLinkClick}
+                        >
+                            {item.value}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
+    const [showTableOfContents, setShowTableOfContents] = useState(false)
+
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/careers',
         content: (
             <ScrollArea className="h-full max-w-screen-xl mx-auto">
-                <div className="max-w-5xl mx-auto">
-                    <TableOfContents />
+                <div className="fixed bottom-4 right-4 z-20">
+                    <div className="relative">
+                        <Tooltip trigger={<OSButton icon={<IconList />} size="lg" className={`size-10 p-1 rounded-full border shadow-lg ${showTableOfContents ? 'bg-accent border-input' : 'bg-primary border-primary'}`} onClick={() => setShowTableOfContents(!showTableOfContents)}>
+
+                        </OSButton>} delay={0} sideOffset={12}>
+                            {showTableOfContents ? 'Hide table of contents' : 'Show table of contents'}
+                        </Tooltip>
+                        <TableOfContents
+                            isVisible={showTableOfContents}
+                            onClose={() => setShowTableOfContents(false)}
+                        />
+
+                    </div>
+                </div>
+                <div className="max-w-7xl mx-auto">
                     <div id="hero" className="p-2">
                         <CareersHero />
                         <JobListings />
@@ -123,9 +158,8 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${
-                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
-                }`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
+                    }`}
                 imageType="absolute"
             />
             <Editor
