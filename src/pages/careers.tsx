@@ -20,11 +20,11 @@ import { JobListings } from 'components/Careers/JobListings'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
-import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from "components/OSButton"
 import { IconList } from '@posthog/icons'
-import Tooltip from "components/RadixUI/Tooltip"
+import { Popover } from 'components/RadixUI/Popover'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const careersTableOfContents = [
     { url: '#hero', value: 'Open roles', depth: 0 },
@@ -41,41 +41,7 @@ const careersTableOfContents = [
     { url: '#transparency', value: 'Transparency', depth: 0 },
     { url: '#fun-stuff', value: 'Fun stuff', depth: 0 },
     { url: '#team-quotes', value: 'Team quotes', depth: 0 },
-    { url: '#open-roles', value: 'Open roles (bottom)', depth: 0 },
 ]
-
-// Table of Contents Component
-const TableOfContents = ({
-    isVisible,
-    onClose
-}: {
-    isVisible: boolean
-    onClose: () => void
-}) => {
-    if (!isVisible) return null
-
-    const handleLinkClick = () => {
-        onClose()
-    }
-
-    return (
-        <div className="absolute bottom-12 right-0 w-64 border border-primary p-2 bg-accent rounded shadow-xl">
-            <ul className="not-prose grid list-none m-0 p-0">
-                {careersTableOfContents.map((item) => (
-                    <li key={item.url}>
-                        <Link
-                            to={item.url}
-                            className="font-semibold text-sm hover:underline"
-                            onClick={handleLinkClick}
-                        >
-                            {item.value}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
@@ -88,18 +54,34 @@ const IndexPage = () => {
         content: (
             <ScrollArea className="h-full max-w-screen-xl mx-auto">
                 <div className="fixed bottom-4 right-4 z-20">
-                    <div className="relative">
-                        <Tooltip trigger={<OSButton icon={<IconList />} size="lg" className={`size-10 p-1 rounded-full border shadow-lg ${showTableOfContents ? 'bg-accent border-input' : 'bg-primary border-primary'}`} onClick={() => setShowTableOfContents(!showTableOfContents)}>
+                    <Popover
+                        trigger={
+                            <span className="[&>span>div]:rounded-full">
+                                <Tooltip trigger={<OSButton icon={<IconList />} size="lg" className="size-10 p-1 rounded-full border shadow-lg bg-primary border-primary hover:bg-accent active:bg-accent hover:border-input">
+                                </OSButton>} delay={0} sideOffset={12}>Table of contents</Tooltip>
 
-                        </OSButton>} delay={0} sideOffset={12}>
-                            {showTableOfContents ? 'Hide table of contents' : 'Show table of contents'}
-                        </Tooltip>
-                        <TableOfContents
-                            isVisible={showTableOfContents}
-                            onClose={() => setShowTableOfContents(false)}
-                        />
-
-                    </div>
+                            </span>
+                        }
+                        dataScheme="primary"
+                        contentClassName="w-64"
+                        sideOffset={10}
+                        open={showTableOfContents}
+                        onOpenChange={setShowTableOfContents}
+                    >
+                        <ul className="not-prose grid list-none m-0 p-0">
+                            {careersTableOfContents.map((item) => (
+                                <li key={item.url}>
+                                    <a
+                                        href={item.url}
+                                        className="font-semibold text-sm hover:underline block p-1"
+                                        onClick={() => setShowTableOfContents(false)}
+                                    >
+                                        {item.value}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </Popover>
                 </div>
                 <div className="max-w-7xl mx-auto">
                     <div id="hero" className="p-2">

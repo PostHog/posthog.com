@@ -292,10 +292,10 @@ export const Pizza = () => {
         }
     })
 
-    // Sort teams within each group by percentage (highest to lowest)
-    ;(Object.keys(groupedTeams) as Array<keyof typeof groupedTeams>).forEach((key) => {
-        groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
-    })
+        // Sort teams within each group by percentage (highest to lowest)
+        ; (Object.keys(groupedTeams) as Array<keyof typeof groupedTeams>).forEach((key) => {
+            groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
+        })
 
     return (
         <section id="pizza" className="@container px-8 @3xl:px-8">
@@ -332,7 +332,7 @@ export const Pizza = () => {
                         </div>
                     </div>
 
-                    <ul className="list-none p-0 space-y-3">
+                    <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.moreThan50.map((team) => {
                             const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
                             const teamMiniCrest = getImage(teamData?.miniCrest)
@@ -350,7 +350,7 @@ export const Pizza = () => {
                                         <div className="flex-1">
                                             <Link
                                                 to={`/teams/${team.slug}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                                className="text-[15px] font-semibold text-primary hover:underline"
                                             >
                                                 {team.name}
                                             </Link>
@@ -392,7 +392,7 @@ export const Pizza = () => {
                         </div>
                     </div>
 
-                    <ul className="list-none p-0 space-y-3">
+                    <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.exactly50.map((team) => {
                             const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
                             const teamMiniCrest = getImage(teamData?.miniCrest)
@@ -410,7 +410,7 @@ export const Pizza = () => {
                                         <div className="flex-1">
                                             <Link
                                                 to={`/teams/${team.slug}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                                className="text-[15px] font-semibold text-primary hover:underline"
                                             >
                                                 {team.name}
                                             </Link>
@@ -450,7 +450,7 @@ export const Pizza = () => {
                         </div>
                     </div>
 
-                    <ul className="list-none p-0 space-y-3">
+                    <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.lessThan50.map((team) => {
                             const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
                             const teamMiniCrest = getImage(teamData?.miniCrest)
@@ -468,7 +468,7 @@ export const Pizza = () => {
                                         <div className="flex-1">
                                             <Link
                                                 to={`/teams/${team.slug}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                                className="text-[15px] font-semibold text-primary hover:underline"
                                             >
                                                 {team.name}
                                             </Link>
@@ -492,6 +492,19 @@ export const Pizza = () => {
                 </div>
             </div>
 
+            <div>
+                <iframe
+                    title="Does pineapple belong on pizza?"
+                    src="https://www.youtube-nocookie.com/embed/QeU5MmpqBg0?rel=0"
+                    className="w-full aspect-video rounded"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                />
+            </div>
+
             <h3 className="text-3xl mb-0 text-center">Speaking of pizza...</h3>
             <div className="text-lg opacity-70 mb-6 text-center">Here are some of our creations.</div>
 
@@ -500,11 +513,10 @@ export const Pizza = () => {
                     <button
                         key={option}
                         onClick={() => setFilter(option)}
-                        className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${
-                            filter === option
-                                ? 'border-red dark:border-yellow font-bold'
-                                : 'border-transparent hover:border text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
-                        }`}
+                        className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${filter === option
+                            ? 'border-red dark:border-yellow font-bold'
+                            : 'border-transparent hover:border text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
+                            }`}
                     >
                         {option}
                     </button>
