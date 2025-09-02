@@ -11,25 +11,25 @@ const LeftSidebarContent = () => {
     return <DataVizNav />
 }
 
-export default function SQL() {
-  const sqlProduct = useProduct({ handle: 'sql' }) as any
+export default function CorrelationAnalysis() {
+  const correlationProduct = useProduct({ handle: 'correlation_analysis' }) as any
 
-  if (!sqlProduct) {
+  if (!correlationProduct) {
     return <div>Product not found</div>
   }
 
-  const { overview, features, Icon, color, screenshots } = sqlProduct
+  const { overview, features, Icon, color, screenshots } = correlationProduct
 
   return (
     <>
       <SEO
-        title={overview?.title || "SQL (HogQL)"}
-        description={overview?.description || "Query data directly with HogQL"}
+        title={overview?.title || "Correlation Analysis"}
+        description={overview?.description || "Discover what events correlate with conversion or churn"}
         image="/images/og/product-analytics.jpg"
       />
       <ReaderView
         leftSidebar={<LeftSidebarContent />}
-        title={overview?.title || 'SQL (HogQL)'}
+        title={overview?.title || 'Correlation Analysis'}
         hideTitle={false}
       >
         <div className="space-y-8">
@@ -100,7 +100,7 @@ export default function SQL() {
 
 export const query = graphql`
   {
-    mdx(fields: { slug: { eq: "/sql" } }) {
+    mdx(fields: { slug: { eq: "/correlation-analysis" } }) {
       body
       frontmatter {
         title

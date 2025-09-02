@@ -24,6 +24,11 @@ import {
     IconBolt,
     IconArrowUpRight,
     IconMegaphone,
+    IconUserPaths,
+    IconCorrelationAnalysis,
+    IconRetention,
+    IconStickiness,
+    IconHogQL,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { IconBrain } from 'components/OSIcons'
@@ -899,44 +904,161 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'Trends',
             Icon: IconGraph,
-            description: 'Graphs & trends',
+            description: 'Visualize user data with graphs, tables, charts, maps, and more',
             handle: 'trends',
-            color: 'blue',
+            color: 'yellow',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'trends',
+            overview: {
+                title: 'Trends',
+                description: 'Visualize user data with graphs, tables, charts, maps, and more. Plot any event over time, apply advanced filtering, and break down by any property.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png',
+                    alt: 'Trends bar chart',
+                    classes: '',
+                },
+                additional: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png',
+                        alt: 'Multiple sparklines',
+                    },
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-area.png',
+                        alt: 'Area chart',
+                    },
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-sparkline.png',
+                        alt: 'Sparkline chart',
+                    },
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-map.png',
+                        alt: 'Map visualization',
+                    },
+                ],
+            },
+            features: [
+                {
+                    title: 'Trends',
+                    headline: 'Plot events over time',
+                    description: 'Plot any event over time, such as a feature being used. You can even do math and multiple series.',
+                },
+                {
+                    title: 'Advanced filtering',
+                    headline: 'Advanced filtering',
+                    description: 'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic.',
+                },
+                {
+                    title: 'Breakdown tables',
+                    headline: 'Breakdown tables',
+                    description: 'Break out your trends by any event property.',
+                },
+                {
+                    title: 'Sampling',
+                    headline: 'Speed up queries',
+                    description: 'Speed up long running queries across large datasets in one click.',
+                },
+            ],
         },
         {
             name: 'Funnels',
             Icon: IconFunnels,
-            description: 'Funnels',
+            description: 'Find drop-off across a series of actions',
             handle: 'funnels',
             color: 'blue',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'funnels',
+            overview: {
+                title: 'Funnels',
+                description: 'Find drop-off across a series of actions. Track user progression between steps, conversion time between each step, and how a funnel\'s conversion rate changes over time.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
+                    alt: 'Basic funnel visualization',
+                    classes: '',
+                },
+                additional: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png',
+                        alt: 'Grouped funnel visualization',
+                    },
+                ],
+            },
+            features: [
+                {
+                    title: 'Filtering',
+                    headline: 'Advanced filtering',
+                    description: 'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
+                },
+                {
+                    title: 'Graph types',
+                    headline: 'Multiple graph types',
+                    description: 'Track user progression between steps, conversion time between each step, and how a funnel\'s conversion rate changes over time',
+                },
+                {
+                    title: 'Step ordering',
+                    headline: 'Flexible step ordering',
+                    description: 'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
+                },
+                {
+                    title: 'Granular controls',
+                    headline: 'Granular controls',
+                    description: 'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
+                },
+            ],
         },
         {
             name: 'BI',
             Icon: IconMagicWand,
-            description: 'Business intelligence',
+            description: 'Business intelligence for data-driven teams',
             handle: 'bi',
-            color: 'blue',
+            color: 'purple',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'bi',
-            status: 'beta',
-            seo: {
-                title: 'BI @ PostHog',
-                description: 'Business intelligence built on PostHog',
-            },
             overview: {
-                title: 'Business intelligence',
-                description:
-                    'Max is an AI-powered product analyst that lives in PostHog. Research answers to product questions by querying data, get things done quickly in the PostHog UI, and learn all about PostHog features.',
-                textColor: 'text-white',
-                layout: 'columns',
+                title: 'Business Intelligence',
+                description: 'Transform your PostHog data into actionable insights with powerful BI capabilities. Query your data warehouse with SQL, visualize external data sources, and build custom dashboards that combine product analytics with business metrics.',
+                textColor: 'text-black',
             },
+            features: [
+                {
+                    title: 'SQL-first analysis',
+                    headline: 'Full SQL power',
+                    description: 'Query your entire data warehouse with standard SQL. Access raw events, user data, and external sources all in one place.',
+                },
+                {
+                    title: 'Data warehouse integration',
+                    headline: 'Connect external data',
+                    description: 'Combine data from Stripe, HubSpot, Salesforce, and other sources with your product analytics for complete business intelligence.',
+                },
+                {
+                    title: 'Custom visualizations',
+                    headline: 'Flexible visualizations',
+                    description: 'Create tables, charts, big numbers, and more. Build the exact views your team needs with conditional formatting and customization options.',
+                },
+                {
+                    title: 'Advanced analytics',
+                    headline: 'Statistical modeling',
+                    description: 'Perform cohort analysis, calculate custom metrics, build funnels from SQL, and create sophisticated business models.',
+                },
+                {
+                    title: 'Self-serve analytics',
+                    headline: 'Empower your team',
+                    description: 'Enable non-technical users to explore data with saved queries, template dashboards, and AI-assisted SQL generation.',
+                },
+                {
+                    title: 'Real-time insights',
+                    headline: 'Always up-to-date',
+                    description: 'Query live data without ETL delays. Your insights reflect the current state of your business, not yesterday\'s snapshot.',
+                },
+            ],
         },
         {
             name: 'Raquel',
@@ -1010,6 +1132,270 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             ],
                         },
                     ],
+                },
+            ],
+        },
+        {
+            name: 'User Paths',
+            Icon: IconUserPaths,
+            description: 'See how users navigate your product, website, or conversion funnel',
+            handle: 'user_paths',
+            color: 'teal',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'user-paths',
+            overview: {
+                title: 'User Paths',
+                description: 'Set start and end points to see how users navigate your product, website, or conversion funnel. Visualize any sequence of page views, screen views or events, with up to 20 steps.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-paths.png',
+                    alt: 'User paths visualization',
+                    classes: '',
+                },
+            },
+            features: [
+                {
+                    title: 'Step insights',
+                    headline: 'Step insights',
+                    description: 'See who dropped off at each step, who did or didn\'t complete a step, and the drop-off rate.',
+                },
+                {
+                    title: 'Wildcard groups',
+                    headline: 'Wildcard groups',
+                    description: 'Group similar steps into a mega-step (where any of a group of events can trigger a step).',
+                },
+                {
+                    title: 'Exclusion events',
+                    headline: 'Exclusion events',
+                    description: 'Prevent specific events from appearing in a path.',
+                },
+                {
+                    title: 'Granular controls',
+                    headline: 'Granular controls',
+                    description: 'Visualize any sequence of page views, screen views or events, with up to 20 steps.',
+                },
+            ],
+        },
+        {
+            name: 'Correlation Analysis',
+            Icon: IconCorrelationAnalysis,
+            description: 'Discover what events correlate with conversion or churn',
+            handle: 'correlation_analysis',
+            color: 'purple',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'correlation-analysis',
+            overview: {
+                title: 'Correlation Analysis',
+                description: 'When analyzing funnels, correlation analysis highlights significant events or properties that may be useful in determining how likely someone is to converting or churning.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-correlation-analysis.png',
+                    alt: 'Correlation analysis',
+                    classes: '',
+                },
+            },
+            features: [
+                {
+                    title: 'Event correlation',
+                    headline: 'Event correlation',
+                    description: 'Identify which events are most strongly correlated with successful conversion.',
+                },
+                {
+                    title: 'Property analysis',
+                    headline: 'Property analysis',
+                    description: 'Discover which user or event properties correlate with conversion or churn.',
+                },
+                {
+                    title: 'Automatic significance testing',
+                    headline: 'Automatic significance testing',
+                    description: 'Statistical significance is automatically calculated to surface meaningful correlations.',
+                },
+                {
+                    title: 'Funnel integration',
+                    headline: 'Funnel integration',
+                    description: 'Works seamlessly with funnel analysis to provide deeper insights into conversion factors.',
+                },
+            ],
+        },
+        {
+            name: 'Retention',
+            Icon: IconRetention,
+            description: 'See how many users return on subsequent days',
+            handle: 'retention',
+            color: 'salmon',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'retention',
+            overview: {
+                title: 'Retention',
+                description: 'See how many users return on subsequent days after first visiting your site or product. Track cohort retention over time to understand user engagement.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-retention.png',
+                    alt: 'Retention chart',
+                    classes: '',
+                },
+            },
+            features: [
+                {
+                    title: 'Cohort analysis',
+                    headline: 'Cohort analysis',
+                    description: 'Analyze retention by user cohorts to understand behavior patterns over time.',
+                },
+                {
+                    title: 'Recurring retention',
+                    headline: 'Recurring retention',
+                    description: 'Track users who perform an action repeatedly over specific time periods.',
+                },
+                {
+                    title: 'First time retention',
+                    headline: 'First time retention',
+                    description: 'Measure retention from the first time a user performs a specific action.',
+                },
+                {
+                    title: 'Customizable periods',
+                    headline: 'Customizable periods',
+                    description: 'Define custom time periods for retention analysis - days, weeks, or months.',
+                },
+            ],
+        },
+        {
+            name: 'Stickiness',
+            Icon: IconStickiness,
+            description: 'Learn how many times users perform events in a period',
+            handle: 'stickiness',
+            color: 'yellow',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'stickiness',
+            overview: {
+                title: 'Stickiness',
+                description: 'Learn how many times users perform a specific event in a period of time. Understand user engagement frequency and identify your most active users.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-stickiness.png',
+                    alt: 'Stickiness chart',
+                    classes: '',
+                },
+            },
+            features: [
+                {
+                    title: 'Frequency distribution',
+                    headline: 'Frequency distribution',
+                    description: 'See the distribution of how often users perform specific actions.',
+                },
+                {
+                    title: 'Power users',
+                    headline: 'Identify power users',
+                    description: 'Discover which users are most engaged with your product.',
+                },
+                {
+                    title: 'Engagement scoring',
+                    headline: 'Engagement scoring',
+                    description: 'Quantify user engagement with stickiness metrics.',
+                },
+                {
+                    title: 'Time period analysis',
+                    headline: 'Time period analysis',
+                    description: 'Analyze stickiness over different time periods - daily, weekly, or monthly.',
+                },
+            ],
+        },
+        {
+            name: 'Lifecycle',
+            Icon: IconLifecycle,
+            description: 'Understand how your active users break down',
+            handle: 'lifecycle',
+            color: 'seagreen',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'lifecycle',
+            overview: {
+                title: 'Lifecycle',
+                description: 'Discover how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png',
+                    alt: 'Lifecycle chart',
+                    classes: '',
+                },
+            },
+            features: [
+                {
+                    title: 'User states',
+                    headline: 'User lifecycle states',
+                    description: 'Track users through new, returning, resurrecting, and dormant states.',
+                },
+                {
+                    title: 'Trend analysis',
+                    headline: 'Lifecycle trends',
+                    description: 'Monitor how user lifecycle stages change over time.',
+                },
+                {
+                    title: 'Churn identification',
+                    headline: 'Identify churning users',
+                    description: 'Spot users who are becoming dormant and at risk of churning.',
+                },
+                {
+                    title: 'Growth metrics',
+                    headline: 'Growth metrics',
+                    description: 'Track new user acquisition and resurrection patterns.',
+                },
+            ],
+        },
+        {
+            name: 'SQL',
+            Icon: IconHogQL,
+            description: 'Query data directly with HogQL',
+            handle: 'sql',
+            color: 'red',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'sql',
+            overview: {
+                title: 'SQL (HogQL)',
+                description: 'Directly query data stored in PostHog via our SQL transition layer, HogQL. Write custom queries to analyze your data in ways that pre-built insights can\'t.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-hogql.png',
+                    alt: 'HogQL query editor',
+                    classes: '',
+                },
+            },
+            features: [
+                {
+                    title: 'Full SQL support',
+                    headline: 'Full SQL support',
+                    description: 'Write complex queries with JOINs, aggregations, and subqueries.',
+                },
+                {
+                    title: 'Breakdowns',
+                    headline: 'Advanced breakdowns',
+                    description: 'Group data by multiple columns for detailed analysis.',
+                },
+                {
+                    title: 'Aggregations',
+                    headline: '90+ aggregation functions',
+                    description: 'Use count, min, max, sum, avg, and about 90 more aggregation functions.',
+                },
+                {
+                    title: 'Direct data access',
+                    headline: 'Direct data access',
+                    description: 'Query raw event data directly without limitations.',
                 },
             ],
         },

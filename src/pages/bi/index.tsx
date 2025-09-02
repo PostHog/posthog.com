@@ -11,25 +11,25 @@ const LeftSidebarContent = () => {
     return <DataVizNav />
 }
 
-export default function SQL() {
-  const sqlProduct = useProduct({ handle: 'sql' }) as any
+export default function BI() {
+  const biProduct = useProduct({ handle: 'bi' }) as any
 
-  if (!sqlProduct) {
+  if (!biProduct) {
     return <div>Product not found</div>
   }
 
-  const { overview, features, Icon, color, screenshots } = sqlProduct
+  const { overview, features, Icon, color, screenshots } = biProduct
 
   return (
     <>
       <SEO
-        title={overview?.title || "SQL (HogQL)"}
-        description={overview?.description || "Query data directly with HogQL"}
+        title={overview?.title || "Business Intelligence"}
+        description={overview?.description || "Business intelligence for data-driven teams"}
         image="/images/og/product-analytics.jpg"
       />
       <ReaderView
         leftSidebar={<LeftSidebarContent />}
-        title={overview?.title || 'SQL (HogQL)'}
+        title={overview?.title || 'Business Intelligence'}
         hideTitle={false}
       >
         <div className="space-y-8">
@@ -100,7 +100,7 @@ export default function SQL() {
 
 export const query = graphql`
   {
-    mdx(fields: { slug: { eq: "/sql" } }) {
+    mdx(fields: { slug: { eq: "/bi" } }) {
       body
       frontmatter {
         title

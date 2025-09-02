@@ -11,25 +11,25 @@ const LeftSidebarContent = () => {
     return <DataVizNav />
 }
 
-export default function SQL() {
-  const sqlProduct = useProduct({ handle: 'sql' }) as any
+export default function Stickiness() {
+  const stickinessProduct = useProduct({ handle: 'stickiness' }) as any
 
-  if (!sqlProduct) {
+  if (!stickinessProduct) {
     return <div>Product not found</div>
   }
 
-  const { overview, features, Icon, color, screenshots } = sqlProduct
+  const { overview, features, Icon, color, screenshots } = stickinessProduct
 
   return (
     <>
       <SEO
-        title={overview?.title || "SQL (HogQL)"}
-        description={overview?.description || "Query data directly with HogQL"}
+        title={overview?.title || "Stickiness"}
+        description={overview?.description || "Learn how many times users perform events in a period"}
         image="/images/og/product-analytics.jpg"
       />
       <ReaderView
         leftSidebar={<LeftSidebarContent />}
-        title={overview?.title || 'SQL (HogQL)'}
+        title={overview?.title || 'Stickiness'}
         hideTitle={false}
       >
         <div className="space-y-8">
@@ -100,7 +100,7 @@ export default function SQL() {
 
 export const query = graphql`
   {
-    mdx(fields: { slug: { eq: "/sql" } }) {
+    mdx(fields: { slug: { eq: "/stickiness" } }) {
       body
       frontmatter {
         title
