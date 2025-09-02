@@ -1,5 +1,5 @@
 ---
-title: LLM analytics dashboard (beta)
+title: LLM analytics dashboard
 availability:
     free: full
     selfServe: full

@@ -449,7 +449,7 @@ export default function Handbook({
                         />
                     }
                     tableOfContents={[...toc, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
-                    breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
+                    breadcrumb={breadcrumb?.slice(0, breadcrumb.length - 1) || []}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
                     askMax
@@ -481,14 +481,14 @@ export default function Handbook({
                                                     )}
                                                     {filePath && (
                                                         <Link
-                                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow hidden xs:inline"
                                                             to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
                                                         >
-                                                            Edit this page
+                                                            Edit page
                                                         </Link>
                                                     )}
                                                     {contentWithSnippets && (!hideLastUpdated || filePath) && (
-                                                        <span className="text-primary/30 dark:text-primary-dark/30">
+                                                        <span className="text-primary/30 dark:text-primary-dark/30 hidden xs:inline">
                                                             |
                                                         </span>
                                                     )}
@@ -616,7 +616,7 @@ export const query = graphql`
                     featureFlags
                     groupAnalytics
                     surveys
-                    llmObservability
+                    llmAnalytics
                     errorTracking
                 }
                 availability {

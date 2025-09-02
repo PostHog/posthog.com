@@ -30,7 +30,7 @@ import ManagedAccounts from './_snippets/managed-accounts.mdx'
 import StartupCohorts from './_snippets/startup-cohorts.mdx'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-PostHog's [data warehouse](/data-warehouse) is our most powerful feature. It lets you sync data from the tools you already use like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively.
+PostHog's [data warehouse](/data-warehouse) is our most powerful feature. It lets you sync data from the tools you already use like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot), query it alongside your existing product data using [SQL](/docs/data-warehouse/query), and visualize it natively.
 
 We built it because the [modern data stack sucks](/blog/modern-data-stack-sucks). What starts as a handful of business critical tools devolves into dozens of tools, many specifically built to capture, clean, format, load, query, and visualize data.
 
@@ -155,7 +155,9 @@ It includes insights like:
 
 ### Using views to create reusable queries
 
-Because product managers are slicing and dicing the data in multiple similar ways, they end up using a lot of [views](/docs/data-warehouse/views). These are saved queries that can be reused easily. It enables them to build a query to get the data they want in the format they want then use it to build multiple other queries. Some examples include:
+Because product managers are slicing and dicing the data in multiple similar ways, they end up using a lot of [views](/docs/data-warehouse/views). These are saved queries that can be reused easily and can also be [materialized](/docs/data-warehouse/views/materialize) for a speed up. 
+
+Views enable them to build a query to get the data they want in the format they want then use it to build multiple other queries. Some examples include:
 
 - `org_icp_scores`: Gets ICP scores for customers from Salesforce where they are calculated.
 - `feature_flags_activation_base`: Builds a funnel of product intent → activation → retention, all centered on [feature flags](/feature-flags) and enriched with an ICP score.

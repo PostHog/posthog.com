@@ -11,7 +11,7 @@ import {
     IconPeople,
     IconNotification,
     IconRewindPlay,
-    IconAI,
+    IconLlmAnalytics,
 } from '@posthog/icons'
 import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
@@ -87,8 +87,8 @@ const subfeatures = [
         description: 'Analyze how any group of people (like an organization) use your product',
     },
     {
-        icon: <IconAI />,
-        title: 'LLM observability',
+        icon: <IconLlmAnalytics />,
+        title: 'LLM analytics',
         description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
     },
 ]

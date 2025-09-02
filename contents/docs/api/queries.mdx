@@ -15,7 +15,7 @@ API queries enable you to query your data in PostHog. This is useful for:
 > **When should you _not_ use API queries?**
 > 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
 > 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
-> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
+> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views/materialize) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
 
 ## Prerequisites
 
@@ -164,7 +164,7 @@ createQuery()
 
 </MultiLanguage>
 
-Every query you run is logged in the `query_log` table along with details like duration, read bytes, read rows, and more.
+Every query you run is logged in the [`query_log` table](/docs/data/query-log) along with details like duration, read bytes, read rows, and more.
 
 ## Writing performant queries
 
@@ -254,7 +254,7 @@ createQuery()
 
 ### 2. Materialize a view for the data you need
 
-The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views#materializing-and-scheduling-a-view) of your data. This means that the view is precomputed, which can significantly improve query performance.
+The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views/materialize) of your data. This means that the view is precomputed, which can significantly improve query performance.
 
 To do this, write your query in the [SQL editor](https://us.posthog.com/sql), click **Materialize**, then **Save and materialize**, and give it a name without spaces (I chose `mat_event_count`). You can also schedule to update the view at a specific interval.
 

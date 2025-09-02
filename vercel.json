@@ -1220,6 +1220,10 @@
         { "source": "/docs/product-analytics/llms", "destination": "/docs/llm-analytics" },
         { "source": "/docs/ai-engineering/llms", "destination": "/docs/llm-analytics" },
         { "source": "/docs/product-analytics/trends", "destination": "/docs/product-analytics/trends/overview" },
+        {
+            "source": "/docs/product-analytics/calendar-heatmap",
+            "destination": "/docs/product-analytics/trends/charts#calendar-heatmap"
+        },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
         { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" },
@@ -1556,7 +1560,7 @@
         },
         {
             "source": "/docs/ai-engineering/traces-generations",
-            "destination": "/docs/llm-analytics/traces-generations"
+            "destination": "/docs/llm-analytics/generations"
         },
         {
             "source": "/docs/ai-engineering/dashboard",
@@ -1577,6 +1581,10 @@
         {
             "source": "/docs/ai-engineering/traceloop-posthog",
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering",
+            "destination": "/docs/llm-analytics"
         }
     ],
     "headers": [

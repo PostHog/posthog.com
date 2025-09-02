@@ -22,7 +22,7 @@ showTitle: true
 
 You can pop Max open wherever you are in PostHog! Just click on [Max AI](https://app.posthog.com/#panel=max) in the top right corner of the app. Then get to chatting.
 
-> **Important:** Because PostHog AI features use third-party LLM providers (see details below), the first use of Max in your organization requires org admin approval. In most cases this is just a formality, but we've made it explicit as we know many PostHog customers strictly limit data sub-processors.
+> **Important:** Because PostHog AI features use third-party LLM providers (see details below), the first use of Max in your organization requires org admin approval. In most cases this is just a formality, but we've made it explicit as we take data governance seriously.
 
 ## Does Max have any superpowers compared to ChatGPT and similar agents?
 
@@ -68,17 +68,20 @@ Other providers that are not data subprocessors:
 
 ## How can I get Max to remember information?
 
-Max has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask him to remember specific details using verbs like "remember" or "save."
-You can always edit Max's memory in PostHog's settings.
+Max has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask him to remember specific details using verbs like "remember" or "save", or most directly: the `/remember` command in the chat.
+
+Max's full memory can be viewed and edited in project settings.
 
 ## How can I disable AI in PostHog?
 
-If you prefer not to use AI features in PostHog, you can disable Max and all AI functionality entirely in your organization settings. To do this:
+If an org admin has previously approved AI features, but you'd prefer them disabled (and are an org admin too), you can disable Max and all AI data analysis in your organization settings. To do this:
 
 1. Go to **Settings** > **Organization** > **General**
-2. Find the **PostHog AI data analysis** section
-3. Toggle off AI features
+2. Find the **PostHog AI data analysis** section ([direct link](http://app.posthog.com/settings/organization-details#organization-ai-consent))
+3. Toggle the switch to "off"
 
-You can also access this setting directly at [app.posthog.com/settings/organization-details#organization-ai-consent](http://app.posthog.com/settings/organization-details#organization-ai-consent).
+When disabled, Max won't be available and no data will be shared with AI providers. This can be reversed at any time.
 
-When disabled, Max will not be available and no data will be shared with AI providers.
+## Can I hide Max AI?
+
+There currently isn't a toggle to _hide_ AI features altogether. However, in any case, only org admins can approve AI features in the organization – so there's no risk of data being sent to any AI provider without explicit consent.
