@@ -15,7 +15,7 @@ To give someone access
 2. Use their email address as their username
 3. Add them to the "Developers" and "DevelopersRO" groups (just use `groups = local.default_groups`)
 4. Add team infra as reviewer. 
-4. Once this is merged, tell them to use http://go/aws to log in
+5. Once this is merged, tell them to use http://go/aws to log in
 
 ### Permissions errors using AWS CLI
 
