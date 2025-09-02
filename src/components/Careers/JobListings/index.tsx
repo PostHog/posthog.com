@@ -15,8 +15,8 @@ import Tabs from 'components/RadixUI/Tabs'
 import OSTabs from 'components/OSTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
-
 import Mark from 'mark.js'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const query = graphql`
     query JobListings {
@@ -194,7 +194,7 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
                 <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @2xl:row-span-1 @md:self-center">
                     {multipleTeams && <h3 className="text-sm font-bold mt-0 mb-1">{team.name} Team</h3>}
                     {team.description && (
-                        <p className="text-[15px] @7xl:text-sm text-secondary !my-0">{team.description}</p>
+                        <p className="text-[15px] @5xl:text-sm text-secondary !my-0">{team.description}</p>
                     )}
                 </div>
                 <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
@@ -463,183 +463,187 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
             id={embedded ? undefined : 'roles'}
             className={` ${embedded ? '' : 'flex flex-col @2xl:flex-row @2xl:gap-6 p-4'}`}
         >
-            <div className="w-full @2xl:w-1/3 @3xl:w-1/4">
-                <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
-                    Select a role
-                </label>
-                <select
-                    className="block @2xl:hidden w-full p-2 border border-b-0 border-light bg-accent dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
-                    value={selectedJob.fields.title}
-                    onChange={(e) => {
-                        const selectedJobTitle = e.target.value
-                        const job = (searchQuery.trim() ? filteredJobs : allJobs).find(
-                            (job: any) => job.fields.title === selectedJobTitle
-                        )
-                        setSelectedJob(job)
-                    }}
-                >
-                    {searchQuery.trim() ? (
-                        // Show search results
-                        filteredJobs.length > 0 ? (
-                            <optgroup
-                                label={`${filteredJobs.length} search result${filteredJobs.length !== 1 ? 's' : ''}`}
-                            >
-                                {filteredJobs.map((job: any) => (
-                                    <option key={job.fields.title} value={job.fields.title}>
-                                        {job.fields.title}
-                                    </option>
-                                ))}
-                            </optgroup>
-                        ) : (
-                            <optgroup label="No results found">
-                                <option disabled>No roles found matching "{searchQuery}"</option>
-                            </optgroup>
-                        )
-                    ) : (
-                        // Show grouped results
-                        jobGroups.map((group) => (
-                            <optgroup key={group.name} label={group.name}>
-                                {group.jobs.map((job: any) => (
-                                    <option key={job.fields.title} value={job.fields.title}>
-                                        {job.fields.title}
-                                    </option>
-                                ))}
-                            </optgroup>
-                        ))
-                    )}
-                </select>
-
-                <input
-                    type="text"
-                    className="w-full p-2 border border-b-0 border-input bg-primary rounded text-xl relative z-10 mb-4"
-                    placeholder="Search roles..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    onKeyDown={handleSearchKeyDown}
-                />
-
-                <div data-scheme="primary" className="hidden @2xl:block">
-                    <div ref={jobListRef}>
+            <div className="w-full @2xl:w-1/3 @3xl:w-1/4 flex flex-col h-full">
+                <div>
+                    <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
+                        Select a role
+                    </label>
+                    <select
+                        className="block @2xl:hidden w-full p-2 border border-primary rounded text-xl font-bold relative z-10 mb-2"
+                        value={selectedJob.fields.title}
+                        onChange={(e) => {
+                            const selectedJobTitle = e.target.value
+                            const job = (searchQuery.trim() ? filteredJobs : allJobs).find(
+                                (job: any) => job.fields.title === selectedJobTitle
+                            )
+                            setSelectedJob(job)
+                        }}
+                    >
                         {searchQuery.trim() ? (
                             // Show search results
-                            <>
-                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
-                                    {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
-                                </h3>
-                                {filteredJobs.length > 0 ? (
-                                    <ul className="list-none p-0 space-y-px">
-                                        {filteredJobs.map((job: any) => {
-                                            return (
-                                                <li key={job.fields.title} className="p-0">
-                                                    <OSButton
-                                                        size="md"
-                                                        align="left"
-                                                        width="full"
-                                                        zoomHover="md"
-                                                        active={selectedJob.fields.title === job.fields.title}
-                                                        onClick={() => setSelectedJob(job)}
-                                                    >
-                                                        <div className="flex flex-col w-full items-start">
-                                                            <span
-                                                                className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
-                                                                        ? ''
-                                                                        : ''
-                                                                    }`}
-                                                            >
-                                                                {job.fields.title}
-                                                            </span>
-                                                            {!hideTeamsByJob.includes(job.fields?.title) && (
-                                                                <span className="text-[13px] text-secondary !font-normal">
-                                                                    {(() => {
-                                                                        const teamsField = job.parent.customFields.find(
-                                                                            (field: { title: string }) =>
-                                                                                field.title === 'Teams'
-                                                                        )
-                                                                        const teams = teamsField
-                                                                            ? JSON.parse(teamsField.value)
-                                                                            : []
-                                                                        return teams.length > 1
-                                                                            ? 'Multiple teams'
-                                                                            : teams.length === 1 && teams[0]
-                                                                    })()}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </OSButton>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                ) : (
-                                    <p className="text-secondary text-sm px-1.5 py-2 italic">
-                                        No roles found matching "{searchQuery}"
-                                    </p>
-                                )}
-                            </>
+                            filteredJobs.length > 0 ? (
+                                <optgroup
+                                    label={`${filteredJobs.length} search result${filteredJobs.length !== 1 ? 's' : ''}`}
+                                >
+                                    {filteredJobs.map((job: any) => (
+                                        <option key={job.fields.title} value={job.fields.title}>
+                                            {job.fields.title}
+                                        </option>
+                                    ))}
+                                </optgroup>
+                            ) : (
+                                <optgroup label="No results found">
+                                    <option disabled>No roles found matching "{searchQuery}"</option>
+                                </optgroup>
+                            )
                         ) : (
                             // Show grouped results
                             jobGroups.map((group) => (
-                                <div key={group.name} className="mb-2 last:mb-0">
-                                    <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
-                                        {group.name}
-                                    </h3>
-                                    <ul className="list-none p-0 space-y-px">
-                                        {group.jobs.map((job: any) => {
-                                            return (
-                                                <li key={job.fields.title} className="p-0">
-                                                    <OSButton
-                                                        size="md"
-                                                        align="left"
-                                                        width="full"
-                                                        zoomHover="md"
-                                                        active={selectedJob.fields.title === job.fields.title}
-                                                        className={` ${selectedJob.fields.title === job.fields.title ? '' : ''
-                                                            }`}
-                                                        onClick={() => setSelectedJob(job)}
-                                                    >
-                                                        <div className="flex flex-col w-full items-start">
-                                                            <span
-                                                                className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
-                                                                        ? ''
-                                                                        : ''
-                                                                    }`}
-                                                            >
-                                                                {job.fields.title}
-                                                            </span>
-                                                            {!hideTeamsByJob.includes(job.fields?.title) && (
-                                                                <span className="text-[13px] text-secondary !font-normal">
-                                                                    {(() => {
-                                                                        const teamsField = job.parent.customFields.find(
-                                                                            (field: { title: string }) =>
-                                                                                field.title === 'Teams'
-                                                                        )
-                                                                        const teams = teamsField
-                                                                            ? JSON.parse(teamsField.value)
-                                                                            : []
-                                                                        return teams.length > 1
-                                                                            ? 'Multiple teams'
-                                                                            : teams.length === 1 && teams[0]
-                                                                    })()}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </OSButton>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div>
+                                <optgroup key={group.name} label={group.name}>
+                                    {group.jobs.map((job: any) => (
+                                        <option key={job.fields.title} value={job.fields.title}>
+                                            {job.fields.title}
+                                        </option>
+                                    ))}
+                                </optgroup>
                             ))
                         )}
-                    </div>
+                    </select>
+
+                    <input
+                        type="text"
+                        className="hidden @2xl:block w-full p-2 border border-b-0 border-input bg-primary rounded text-xl relative z-10 mb-4"
+                        placeholder="Search roles..."
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        onKeyDown={handleSearchKeyDown}
+                    />
+                </div>
+
+                <div data-scheme="primary" className="hidden @2xl:block flex-1">
+                    <ScrollArea className="h-full min-h-0">
+                        <div ref={jobListRef}>
+                            {searchQuery.trim() ? (
+                                // Show search results
+                                <>
+                                    <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                        {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
+                                    </h3>
+                                    {filteredJobs.length > 0 ? (
+                                        <ul className="list-none p-0 space-y-px">
+                                            {filteredJobs.map((job: any) => {
+                                                return (
+                                                    <li key={job.fields.title} className="p-0">
+                                                        <OSButton
+                                                            size="md"
+                                                            align="left"
+                                                            width="full"
+                                                            zoomHover="md"
+                                                            active={selectedJob.fields.title === job.fields.title}
+                                                            onClick={() => setSelectedJob(job)}
+                                                        >
+                                                            <div className="flex flex-col w-full items-start">
+                                                                <span
+                                                                    className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
+                                                                        ? ''
+                                                                        : ''
+                                                                        }`}
+                                                                >
+                                                                    {job.fields.title}
+                                                                </span>
+                                                                {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                                    <span className="text-[13px] text-secondary !font-normal">
+                                                                        {(() => {
+                                                                            const teamsField = job.parent.customFields.find(
+                                                                                (field: { title: string }) =>
+                                                                                    field.title === 'Teams'
+                                                                            )
+                                                                            const teams = teamsField
+                                                                                ? JSON.parse(teamsField.value)
+                                                                                : []
+                                                                            return teams.length > 1
+                                                                                ? 'Multiple teams'
+                                                                                : teams.length === 1 && teams[0]
+                                                                        })()}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </OSButton>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    ) : (
+                                        <p className="text-secondary text-sm px-1.5 py-2 italic">
+                                            No roles found matching "{searchQuery}"
+                                        </p>
+                                    )}
+                                </>
+                            ) : (
+                                // Show grouped results
+                                jobGroups.map((group) => (
+                                    <div key={group.name} className="mb-2 last:mb-0">
+                                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                            {group.name}
+                                        </h3>
+                                        <ul className="list-none p-0 space-y-px">
+                                            {group.jobs.map((job: any) => {
+                                                return (
+                                                    <li key={job.fields.title} className="p-0">
+                                                        <OSButton
+                                                            size="md"
+                                                            align="left"
+                                                            width="full"
+                                                            zoomHover="md"
+                                                            active={selectedJob.fields.title === job.fields.title}
+                                                            className={` ${selectedJob.fields.title === job.fields.title ? '' : ''
+                                                                }`}
+                                                            onClick={() => setSelectedJob(job)}
+                                                        >
+                                                            <div className="flex flex-col w-full items-start">
+                                                                <span
+                                                                    className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title
+                                                                        ? ''
+                                                                        : ''
+                                                                        }`}
+                                                                >
+                                                                    {job.fields.title}
+                                                                </span>
+                                                                {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                                    <span className="text-[13px] text-secondary !font-normal">
+                                                                        {(() => {
+                                                                            const teamsField = job.parent.customFields.find(
+                                                                                (field: { title: string }) =>
+                                                                                    field.title === 'Teams'
+                                                                            )
+                                                                            const teams = teamsField
+                                                                                ? JSON.parse(teamsField.value)
+                                                                                : []
+                                                                            return teams.length > 1
+                                                                                ? 'Multiple teams'
+                                                                                : teams.length === 1 && teams[0]
+                                                                        })()}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </OSButton>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </ScrollArea>
                 </div>
             </div>
             <div className="flex-1 bg-primary flex flex-col">
                 <div className="flex-1">
-                    <h2 className="-mt-1 mb-2">{selectedJob.fields.title}</h2>
+                    <h2 className="hidden @2xl:block -mt-1 mb-2">{selectedJob.fields.title}</h2>
 
-                    <div className="grid grid-cols-1 @7xl:grid-cols-12 gap-8">
-                        <div className="@7xl:col-span-7">
+                    <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-8">
+                        <div className="@5xl:col-span-7">
                             {teams.length > 1 && (
                                 <p
                                     data-scheme="secondary"
@@ -649,17 +653,17 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 </p>
                             )}
 
-                            <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex @2xl:flex-row flex-col @2xl:space-x-12 @2xl:space-y-0 space-y-6">
+                            <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex flex-wrap gap-8 items-start @2xl:flex-row @2xl:gap-12">
                                 <Detail
                                     title="Location"
                                     value={`Remote${selectedJob.parent.customFields.find(
                                         (field: { title: string }) => field.title === 'Location(s)'
                                     )?.value
-                                            ? ` (${selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Location(s)'
-                                            ).value
-                                            })`
-                                            : ''
+                                        ? ` (${selectedJob.parent.customFields.find(
+                                            (field: { title: string }) => field.title === 'Location(s)'
+                                        ).value
+                                        })`
+                                        : ''
                                         }`}
                                     icon={<Location />}
                                 />
@@ -678,7 +682,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     )}
                             </ul>
 
-                            <div className="@7xl:flex-1 [&_h3]:mt-0 mt-4">
+                            <div className="@5xl:flex-1 [&_h3]:mt-0 mt-4">
                                 <h3>Job summary</h3>
 
                                 {isLoading ? (
@@ -728,7 +732,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                         </div>
                         <div
                             data-scheme="secondary"
-                            className={`@container @7xl:col-span-5 ${teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
+                            className={`@container @5xl:col-span-5 ${teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
                         >
                             <h3 className="mt-0">
