@@ -509,7 +509,7 @@ export const QuestLog: React.FC<{
                                 offset={SCROLLSPY_OFFSET}
                                 className="space-y-4"
                                 style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
-                                rootEl="#content-menu-wrapper"
+                                rootEl=".reader-view-content-container"
                                 onUpdate={handleScrollspyUpdate}
                             >
                                 {questItems.map((child, index) => (
