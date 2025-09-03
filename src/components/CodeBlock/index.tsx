@@ -12,6 +12,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import Tooltip from 'components/Tooltip'
 import Mermaid from 'components/Mermaid'
 import usePostHog from 'hooks/usePostHog'
+import { IconArrowUpRight } from '@posthog/icons'
 
 type LanguageOption = {
     label?: string
@@ -353,17 +354,7 @@ export const CodeBlock = ({
                                     className="inline-flex items-center gap-1 whitespace-nowrap text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
                                     Run in PostHog
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 18"
-                                        className="w-4 h-4 fill-current translate-x-[-2px] translate-y-[-2px]"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M7.995 5.75a.75.75 0 0 1 .75-.75h8.505c.966 0 1.75.784 1.75 1.75v9.496a.75.75 0 0 1-1.5 0V7.56L7.03 18.03a.75.75 0 0 1-1.06-1.061L16.44 6.5H8.744a.75.75 0 0 1-.75-.75Z"
-                                            clipRule="evenodd"
-                                        ></path>
-                                    </svg>
+                                    <IconArrowUpRight className="w-4 h-4" />
                                 </a>
                             </div>
                         )}
