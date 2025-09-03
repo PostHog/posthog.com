@@ -85,7 +85,7 @@ FROM events
 LEFT JOIN persons ON events.person_id = persons.id
 ```
 
-This is especially useful when querying combining [PostHog data](/docs/data-warehouse/sources/posthog) and an external source. For example, once you set up the Stripe connector, you can query for a count of events from your customers like this:
+This is especially useful when combining [PostHog data](/docs/data-warehouse/sources/posthog) and an external source. For example, once you set up the Stripe connector, you can query for a count of events from your customers like this:
 
 ```sql
 SELECT events.distinct_id, COUNT() AS event_count
