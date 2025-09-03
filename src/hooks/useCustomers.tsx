@@ -49,7 +49,8 @@ import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
-import LovableLogo from "components/CustomerLogos/LovableLogo"
+import LovableLogo from 'components/CustomerLogos/LovableLogo'
+import useProducts from './useProducts'
 
 export interface Customer {
     slug: string
@@ -57,11 +58,11 @@ export interface Customer {
     toolsUsed: string[]
     notes?: React.ReactNode
     logo?:
-    | React.ComponentType<any>
-    | {
-        light: string
-        dark: string
-    }
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
     quotes?: Record<
         string,
@@ -83,11 +84,11 @@ interface BaseCustomer {
     toolsUsed: string[]
     notes?: React.ReactNode
     logo?:
-    | React.ComponentType<any>
-    | {
-        light: string
-        dark: string
-    }
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
     quotes?: Record<
         string,
@@ -334,11 +335,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'cdp',
             'max_ai',
         ],
-        notes: (
-            <>
-                Would it be clever or lame if we included our own company here?
-            </>
-        ),
+        notes: <>Would it be clever or lame if we included our own company here?</>,
         logo: PostHogLogo,
         height: 10,
         featured: true,
@@ -531,6 +528,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
 }
 
 export const useCustomers = () => {
+    const { products } = useProducts()
     const data = useStaticQuery(graphql`
         query {
             allCustomers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
@@ -554,6 +552,10 @@ export const useCustomers = () => {
         }
     `)
 
+    const getProductTitleByHandle = (handle: string) => {
+        return products.find((product) => product.handle === handle)?.name
+    }
+
     // Create a map of frontmatter customers for quick lookup
     const frontmatterCustomers = data.allCustomers.nodes.reduce((acc: Record<string, any>, node: any) => {
         const key = node.fields.slug.split('/').pop() || ''
@@ -569,28 +571,32 @@ export const useCustomers = () => {
             slug: key,
         }
 
+        const toolsUsed =
+            markdownData?.frontmatter?.toolsUsed ||
+            customer?.toolsUsed?.map((tool) => getProductTitleByHandle(tool)).filter(Boolean)
+
         if (markdownData) {
             return {
                 ...acc,
                 [key]: {
                     ...customerWithSlug,
                     name: markdownData.frontmatter.customer || customer.name,
-                    toolsUsed: markdownData.frontmatter.toolsUsed || customer.toolsUsed,
+                    toolsUsed,
                     notes: markdownData.frontmatter.notes || customer.notes,
                     logo:
                         customer.logo ||
                         (markdownData.frontmatter.logo?.publicURL
                             ? {
-                                light: markdownData.frontmatter.logo.publicURL,
-                                dark: markdownData.frontmatter.logoDark.publicURL,
-                            }
+                                  light: markdownData.frontmatter.logo.publicURL,
+                                  dark: markdownData.frontmatter.logoDark.publicURL,
+                              }
                             : undefined),
                 },
             }
         }
         return {
             ...acc,
-            [key]: customerWithSlug,
+            [key]: { ...customerWithSlug, toolsUsed },
         }
     }, {} as Record<string, Customer>)
 

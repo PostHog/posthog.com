@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
@@ -29,11 +29,10 @@ const CUSTOMER_ORDER = [
 interface CustomerProps {
     number: number
     customer: CustomerType
+    hasCaseStudy: (slug: string) => boolean
 }
 
-const Customer = ({ number, customer }: CustomerProps) => {
-    const { hasCaseStudy } = useCustomers()
-
+const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
     // Determine logo rendering logic - same as CustomersSlide.tsx
     const renderLogo = () => {
         if (!customer.logo) {
@@ -78,11 +77,17 @@ const Customer = ({ number, customer }: CustomerProps) => {
             },
             { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
             {
-                content: hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
-                    <Link to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`} className="group" state={{ newWindow: true }}>
-                        Link <IconArrowUpRight className="size-4 inline-block text-muted group-hover:text-primary" />
-                    </Link>
-                ) : null,
+                content:
+                    hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
+                        <Link
+                            to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
+                            className="group"
+                            state={{ newWindow: true }}
+                        >
+                            Link{' '}
+                            <IconArrowUpRight className="size-4 inline-block text-muted group-hover:text-primary" />
+                        </Link>
+                    ) : null,
             },
             { content: customer.notes || '', className: 'text-sm' },
         ],
@@ -90,7 +95,7 @@ const Customer = ({ number, customer }: CustomerProps) => {
 }
 
 const sortCustomers = (customers: CustomerType[]) => {
-    return customers.sort((a, b) => {
+    return [...customers].sort((a, b) => {
         const aIndex = CUSTOMER_ORDER.indexOf(a.slug)
         const bIndex = CUSTOMER_ORDER.indexOf(b.slug)
         const aOrder = aIndex === -1 ? Infinity : aIndex
@@ -99,25 +104,22 @@ const sortCustomers = (customers: CustomerType[]) => {
     })
 }
 
+const columns = [
+    { name: '', width: 'auto', align: 'center' as const },
+    { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
+    { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
+    { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
+    { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },
+]
+
 export default function Customers(): JSX.Element {
     const { hasCaseStudy, isFeatured, customers: allCustomers } = useCustomers()
-    const customers = sortCustomers(Object.values(allCustomers))
+    const customers = useMemo(() => sortCustomers(Object.values(allCustomers)), [allCustomers])
     const [filteredCustomers, setFilteredCustomers] = useState<any>(customers.filter((customer) => customer.featured))
 
-    const columns = [
-        { name: '', width: 'auto', align: 'center' as const },
-        { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
-        { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
-        { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
-        { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },
-    ]
-
-    const rows = (filteredCustomers || customers).map((customer: any, index: number) => {
-        return Customer({
-            number: index + 1,
-            customer,
-        })
-    })
+    const handleFilterChange = (filters: any) => {
+        setFilteredCustomers(sortCustomers(filters))
+    }
 
     return (
         <>
@@ -147,7 +149,7 @@ export default function Customers(): JSX.Element {
                                 value: tool,
                             })),
                         ],
-                        filter: (obj, value) => obj['toolsUsed'].includes(value),
+                        filter: (obj, value) => obj['toolsUsed']?.includes(value),
                         operator: 'includes',
                     },
                     {
@@ -173,12 +175,21 @@ export default function Customers(): JSX.Element {
                     },
                 ]}
                 dataToFilter={customers}
-                onFilterChange={(data) => setFilteredCustomers(sortCustomers(data))}
+                onFilterChange={handleFilterChange}
             >
                 <ScrollArea>
                     <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
                     <p className="!mt-0">You can use the filters (above) to read how they use different products.</p>
-                    <OSTable columns={columns} rows={rows} />
+                    <OSTable
+                        columns={columns}
+                        rows={(filteredCustomers || customers).map((customer: any, index: number) => {
+                            return Customer({
+                                number: index + 1,
+                                customer,
+                                hasCaseStudy,
+                            })
+                        })}
+                    />
                 </ScrollArea>
             </Editor>
         </>
