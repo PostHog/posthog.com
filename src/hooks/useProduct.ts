@@ -150,7 +150,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'Revenue Analytics',
             Icon: IconPiggyBank,
-            description: 'Track revenue directly alongside your product analytics',
             handle: 'revenue_analytics',
             slug: 'revenue-analytics',
             color: 'green',
@@ -878,6 +877,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'data',
             slug: 'customer-data-infrastructure',
+            seo: {
+                title: 'Unify external customer data with product usage data',
+                description: 'Analyze product and customer data in PostHog – no matter where it was generated.',
+            },
         },
         {
             name: 'AI agents.md',
@@ -902,17 +905,16 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Trends',
+            name: 'Graphs & trends',
             Icon: IconGraph,
-            description: 'Visualize user data with graphs, tables, charts, maps, and more',
             handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'trends',
             overview: {
-                title: 'Trends',
-                description: 'Visualize user data with graphs, tables, charts, maps, and more. Plot any event over time, apply advanced filtering, and break down by any property.',
+                title: 'Visualize user data with graphs, tables, charts, maps, and more',
+                description: 'Plot any event over time, apply advanced filtering, and break down by any property.',
                 textColor: 'text-black',
             },
             screenshots: {
@@ -944,12 +946,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 {
                     title: 'Trends',
                     headline: 'Plot events over time',
-                    description: 'Plot any event over time, such as a feature being used. You can even do math and multiple series.',
+                    description:
+                        'Plot any event over time, such as a feature being used. You can even do math and multiple series.',
                 },
                 {
                     title: 'Advanced filtering',
                     headline: 'Advanced filtering',
-                    description: 'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic.',
+                    description:
+                        'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic.',
                 },
                 {
                     title: 'Breakdown tables',
@@ -966,15 +970,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'Funnels',
             Icon: IconFunnels,
-            description: 'Find drop-off across a series of actions',
             handle: 'funnels',
             color: 'blue',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'funnels',
             overview: {
-                title: 'Funnels',
-                description: 'Find drop-off across a series of actions. Track user progression between steps, conversion time between each step, and how a funnel\'s conversion rate changes over time.',
+                title: 'Find drop-off across a series of actions',
+                description:
+                    "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time.",
                 textColor: 'text-black',
             },
             screenshots: {
@@ -994,69 +998,79 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 {
                     title: 'Filtering',
                     headline: 'Advanced filtering',
-                    description: 'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
+                    description:
+                        'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
                 },
                 {
                     title: 'Graph types',
                     headline: 'Multiple graph types',
-                    description: 'Track user progression between steps, conversion time between each step, and how a funnel\'s conversion rate changes over time',
+                    description:
+                        "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
                 },
                 {
                     title: 'Step ordering',
                     headline: 'Flexible step ordering',
-                    description: 'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
+                    description:
+                        'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
                 },
                 {
                     title: 'Granular controls',
                     headline: 'Granular controls',
-                    description: 'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
+                    description:
+                        'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
                 },
             ],
         },
         {
             name: 'BI',
             Icon: IconMagicWand,
-            description: 'Business intelligence for data-driven teams',
             handle: 'bi',
             color: 'purple',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'bi',
             overview: {
-                title: 'Business Intelligence',
-                description: 'Transform your PostHog data into actionable insights with powerful BI capabilities. Query your data warehouse with SQL, visualize external data sources, and build custom dashboards that combine product analytics with business metrics.',
+                title: 'Business intelligence for data-driven teams',
+                description:
+                    'Transform your PostHog data into actionable insights with powerful BI capabilities. Query your data warehouse with SQL, visualize external data sources, and build custom dashboards that combine product analytics with business metrics.',
                 textColor: 'text-black',
             },
             features: [
                 {
                     title: 'SQL-first analysis',
                     headline: 'Full SQL power',
-                    description: 'Query your entire data warehouse with standard SQL. Access raw events, user data, and external sources all in one place.',
+                    description:
+                        'Query your entire data warehouse with standard SQL. Access raw events, user data, and external sources all in one place.',
                 },
                 {
                     title: 'Data warehouse integration',
                     headline: 'Connect external data',
-                    description: 'Combine data from Stripe, HubSpot, Salesforce, and other sources with your product analytics for complete business intelligence.',
+                    description:
+                        'Combine data from Stripe, HubSpot, Salesforce, and other sources with your product analytics for complete business intelligence.',
                 },
                 {
                     title: 'Custom visualizations',
                     headline: 'Flexible visualizations',
-                    description: 'Create tables, charts, big numbers, and more. Build the exact views your team needs with conditional formatting and customization options.',
+                    description:
+                        'Create tables, charts, big numbers, and more. Build the exact views your team needs with conditional formatting and customization options.',
                 },
                 {
                     title: 'Advanced analytics',
                     headline: 'Statistical modeling',
-                    description: 'Perform cohort analysis, calculate custom metrics, build funnels from SQL, and create sophisticated business models.',
+                    description:
+                        'Perform cohort analysis, calculate custom metrics, build funnels from SQL, and create sophisticated business models.',
                 },
                 {
                     title: 'Self-serve analytics',
                     headline: 'Empower your team',
-                    description: 'Enable non-technical users to explore data with saved queries, template dashboards, and AI-assisted SQL generation.',
+                    description:
+                        'Enable non-technical users to explore data with saved queries, template dashboards, and AI-assisted SQL generation.',
                 },
                 {
                     title: 'Real-time insights',
                     headline: 'Always up-to-date',
-                    description: 'Query live data without ETL delays. Your insights reflect the current state of your business, not yesterday\'s snapshot.',
+                    description:
+                        "Query live data without ETL delays. Your insights reflect the current state of your business, not yesterday's snapshot.",
                 },
             ],
         },
@@ -1138,15 +1152,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'User Paths',
             Icon: IconUserPaths,
-            description: 'See how users navigate your product, website, or conversion funnel',
             handle: 'user_paths',
             color: 'teal',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'user-paths',
             overview: {
-                title: 'User Paths',
-                description: 'Set start and end points to see how users navigate your product, website, or conversion funnel. Visualize any sequence of page views, screen views or events, with up to 20 steps.',
+                title: 'See how users navigate your product, website, or conversion funnel',
+                description:
+                    'Set start and end points to see how users navigate your product, website, or conversion funnel. Visualize any sequence of page views, screen views or events, with up to 20 steps.',
                 textColor: 'text-black',
             },
             screenshots: {
@@ -1160,12 +1174,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 {
                     title: 'Step insights',
                     headline: 'Step insights',
-                    description: 'See who dropped off at each step, who did or didn\'t complete a step, and the drop-off rate.',
+                    description:
+                        "See who dropped off at each step, who did or didn't complete a step, and the drop-off rate.",
                 },
                 {
                     title: 'Wildcard groups',
                     headline: 'Wildcard groups',
-                    description: 'Group similar steps into a mega-step (where any of a group of events can trigger a step).',
+                    description:
+                        'Group similar steps into a mega-step (where any of a group of events can trigger a step).',
                 },
                 {
                     title: 'Exclusion events',
@@ -1182,15 +1198,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'Correlation Analysis',
             Icon: IconCorrelationAnalysis,
-            description: 'Discover what events correlate with conversion or churn',
             handle: 'correlation_analysis',
             color: 'purple',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'correlation-analysis',
             overview: {
-                title: 'Correlation Analysis',
-                description: 'When analyzing funnels, correlation analysis highlights significant events or properties that may be useful in determining how likely someone is to converting or churning.',
+                title: 'Discover what events correlate with conversion or churn',
+                description:
+                    'When analyzing funnels, correlation analysis highlights significant events or properties that may be useful in determining how likely someone is to converting or churning.',
                 textColor: 'text-black',
             },
             screenshots: {
@@ -1214,27 +1230,29 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 {
                     title: 'Automatic significance testing',
                     headline: 'Automatic significance testing',
-                    description: 'Statistical significance is automatically calculated to surface meaningful correlations.',
+                    description:
+                        'Statistical significance is automatically calculated to surface meaningful correlations.',
                 },
                 {
                     title: 'Funnel integration',
                     headline: 'Funnel integration',
-                    description: 'Works seamlessly with funnel analysis to provide deeper insights into conversion factors.',
+                    description:
+                        'Works seamlessly with funnel analysis to provide deeper insights into conversion factors.',
                 },
             ],
         },
         {
             name: 'Retention',
             Icon: IconRetention,
-            description: 'See how many users return on subsequent days',
             handle: 'retention',
             color: 'salmon',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'retention',
             overview: {
-                title: 'Retention',
-                description: 'See how many users return on subsequent days after first visiting your site or product. Track cohort retention over time to understand user engagement.',
+                title: 'See how many users return on subsequent days',
+                description:
+                    'Track cohort retention over time to understand user engagement after first visiting your site or product.',
                 textColor: 'text-black',
             },
             screenshots: {
@@ -1270,15 +1288,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'Stickiness',
             Icon: IconStickiness,
-            description: 'Learn how many times users perform events in a period',
             handle: 'stickiness',
             color: 'yellow',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'stickiness',
             overview: {
-                title: 'Stickiness',
-                description: 'Learn how many times users perform a specific event in a period of time. Understand user engagement frequency and identify your most active users.',
+                title: 'Learn how many times users perform events in a period',
+                description:
+                    'Understand user engagement frequency and identify your most active users by tracking how often they perform specific events.',
                 textColor: 'text-black',
             },
             screenshots: {
@@ -1314,15 +1332,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'Lifecycle',
             Icon: IconLifecycle,
-            description: 'Understand how your active users break down',
             handle: 'lifecycle',
             color: 'seagreen',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'lifecycle',
             overview: {
-                title: 'Lifecycle',
-                description: 'Discover how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.',
+                title: 'Understand how your active users break down',
+                description:
+                    'Discover user lifecycle stages, highlighting those who have recently stopped being active or those who have just become active for the first time.',
                 textColor: 'text-black',
             },
             screenshots: {
@@ -1358,15 +1376,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'SQL',
             Icon: IconHogQL,
-            description: 'Query data directly with HogQL',
             handle: 'sql',
             color: 'red',
             colorSecondary: 'lilac',
             category: 'dataviz',
             slug: 'sql',
             overview: {
-                title: 'SQL (HogQL)',
-                description: 'Directly query data stored in PostHog via our SQL transition layer, HogQL. Write custom queries to analyze your data in ways that pre-built insights can\'t.',
+                title: 'Query data directly with HogQL',
+                description:
+                    "Directly query data stored in PostHog via our SQL transition layer, HogQL. Write custom queries to analyze your data in ways that pre-built insights can't.",
                 textColor: 'text-black',
             },
             screenshots: {
@@ -2871,6 +2889,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'sky-blue',
             colorSecondary: 'blue',
             category: 'data',
+            seo: {
+                title: 'Ingest, transform, and send data between hundreds of tools',
+                description: 'Import data from a warehouse, sync with event data, and export to other products.',
+            },
         },
         {
             name: 'Get data into PostHog',
@@ -2882,6 +2904,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'data',
             slug: 'customer-data-infrastructure/sources',
+            seo: {
+                title: 'PostHog provides multiple ways to ingest data from various sources',
+                description: "It's easy to centralize all your customer and product data in one place.",
+            },
         },
         {
             name: 'Transform data',
@@ -2893,6 +2919,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'data',
             slug: 'customer-data-infrastructure/transformations',
+            seo: {
+                title: 'Transform, enrich, and model your data',
+                description: 'Get your data in the exact shape you need it.',
+            },
         },
         {
             parentIcon: 'SQL',
@@ -2904,6 +2934,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'purple',
             colorSecondary: 'lilac',
             category: 'data',
+            seo: {
+                title: 'Query & visualize product and third party data together',
+                description: 'Unify and query data from any source and analyze it alongside your product data.',
+            },
         },
         {
             name: 'Send data out of PostHog',
@@ -2915,6 +2949,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'data',
             slug: 'customer-data-infrastructure/destinations',
+            seo: {
+                title: 'Export and stream your data to external systems',
+                description: 'Activate your product data across your entire tech stack.',
+            },
         },
 
         {

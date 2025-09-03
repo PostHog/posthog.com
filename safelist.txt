@@ -13,6 +13,7 @@
 [&_.bg-front]:fill-lime-green
 [&_.bg-front]:fill-orange
 [&_.bg-rear]:fill-[#B56C00]
+[&_.bg-rear]:fill-[#37945D]
 !pb-8
 !-mb-12
 -mb-12

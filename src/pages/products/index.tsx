@@ -6,7 +6,7 @@ import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
-import { AppLink } from 'components/OSIcons/AppIcon'
+import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
@@ -16,11 +16,13 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import usePostHog from 'hooks/usePostHog'
 import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 import { categoryOrder, categoryDisplayNames, getProductsForCategory } from '../../constants/productNavigation'
 import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
 import { explorerGridColumns } from '../../constants'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -45,8 +47,6 @@ const selectOptions = [
         ],
     },
 ]
-
-
 
 const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
     const posthog = usePostHog()
@@ -91,6 +91,38 @@ const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
     )
 }
 
+// ProductIcon component - moved up so it can be used globally in rightSidebarPanel
+const ProductIcon = ({ product }: { product: any }) => (
+    <div className="flex justify-center">
+        {product.parentIcon ? (
+            <div className="relative">
+                {product.Icon ? (
+                    React.createElement(product.Icon, {
+                        className: `size-16`,
+                    })
+                ) : typeof product.parentIcon === 'string' ? (
+                    <AppIcon name={product.parentIcon} className="size-16" />
+                ) : (
+                    React.createElement(product.parentIcon, {
+                        className: `size-16`,
+                    })
+                )}
+            </div>
+        ) : product.Icon ? (
+            <div className={`relative size-16`}>
+                <IconPresentation
+                    className={`size-16 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
+                />
+                {React.createElement(product.Icon, {
+                    className: `size-6 mt-[-.2rem] text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
+                })}
+            </div>
+        ) : (
+            <IconPresentation className="size-16" />
+        )}
+    </div>
+)
+
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
@@ -99,6 +131,8 @@ export default function Products(): JSX.Element {
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredProducts, setFilteredProducts] = useState<any[]>(allProducts)
     const { appWindow } = useWindow()
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
     const appWindowWidth = appWindow?.size?.width || 0
@@ -197,9 +231,27 @@ export default function Products(): JSX.Element {
                 }
                 rightSidebarPanel={
                     sidePanelProduct ? (
-                        <div className="p-4">
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-lg font-semibold">{sidePanelProduct.name}</h2>
+                        <div>
+                            <ScrollArea className="h-[calc(100vh-12rem)]">
+                                <div className="flex flex-col items-center justify-between p-4">
+                                    <div className="flex flex-col items-center justify-center w-full">
+                                        <ProductIcon product={sidePanelProduct} />
+                                        <h2 className="text-lg font-semibold text-center leading-tight mb-1">
+                                            {sidePanelProduct.name}
+                                        </h2>
+                                        {sidePanelProduct.status && (
+                                            <div className="bg-yellow rounded-xs px-1 py-px uppercase text-xs font-semibold mb-1">
+                                                {sidePanelProduct.status}
+                                            </div>
+                                        )}
+                                    </div>
+                                    {(sidePanelProduct.overview?.title || sidePanelProduct.seo?.description) && (
+                                        <p className="text-sm text-secondary text-center mb-0">
+                                            {sidePanelProduct.overview?.title || sidePanelProduct.seo?.description}
+                                        </p>
+                                    )}
+
+                                    {/* 
                                 <button
                                     onClick={handleRightSidebarClose}
                                     className="p-1 hover:bg-accent rounded-sm transition-colors"
@@ -207,118 +259,73 @@ export default function Products(): JSX.Element {
                                 >
                                     <Icons.IconX className="size-4" />
                                 </button>
-                            </div>
-                            <ScrollArea className="h-[calc(100vh-12rem)]">
+                                 */}
+                                </div>
+
+                                {/* {sidePanelProduct.overview?.description && (
+                                         <p className="text-sm text-secondary">{sidePanelProduct.overview.description}</p>
+                                     )} */}
                                 <div className="space-y-4">
                                     {/* Product icon component */}
                                     {(() => {
-                                        const ProductIcon = () => (
-                                            <div className="flex justify-center">
-                                                {sidePanelProduct.parentIcon ? (
-                                                    <div className="relative">
-                                                        {sidePanelProduct.Icon &&
-                                                            React.createElement(sidePanelProduct.Icon, {
-                                                                className: `size-16`,
-                                                            })}
-                                                    </div>
-                                                ) : sidePanelProduct.Icon ? (
-                                                    <div className={`relative size-16`}>
-                                                        <IconPresentation
-                                                            className={`size-16 [&_.bg-front]:fill-${sidePanelProduct.color} [&_.bg-rear]:fill-${sidePanelProduct.colorSecondary}`}
-                                                        />
-                                                        {React.createElement(sidePanelProduct.Icon, {
-                                                            className: `size-8 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
-                                                        })}
-                                                    </div>
-                                                ) : (
-                                                    <IconPresentation className="size-16" />
-                                                )}
-                                            </div>
-                                        )
+                                        // Prefer screenshots.home, then screenshots.overview, else ProductIcon
+                                        const screenshot =
+                                            sidePanelProduct.screenshots?.home || sidePanelProduct.screenshots?.overview
 
-                                        // If screenshots exist, show screenshot with icon overlay
-                                        if (sidePanelProduct.screenshots && sidePanelProduct.screenshots.overview) {
+                                        if (screenshot) {
                                             return (
-                                                <div className="space-y-2">
-                                                    <h3 className="text-sm font-semibold">Screenshot</h3>
+                                                <div className="@container space-y-2">
                                                     <div
-                                                        className={`bg-${sidePanelProduct.color} rounded-md p-2 relative`}
+                                                        className={`bg-${sidePanelProduct.color} pt-4 relative flex ${
+                                                            sidePanelProduct.screenshots?.home?.classes
+                                                                ? sidePanelProduct.screenshots.home.classes
+                                                                : 'justify-center px-4 shadow-2xl'
+                                                        }`}
                                                     >
-                                                        <img
-                                                            src={sidePanelProduct.screenshots.overview.src}
-                                                            alt={sidePanelProduct.screenshots.overview.alt}
-                                                            className="w-full rounded-md border border-primary"
+                                                        <CloudinaryImage
+                                                            src={
+                                                                isDark && screenshot.srcDark
+                                                                    ? screenshot.srcDark
+                                                                    : (screenshot.src as any)
+                                                            }
+                                                            alt={screenshot.alt}
+                                                            width={screenshot.width}
+                                                            height={screenshot.height}
+                                                            imgClassName={
+                                                                sidePanelProduct.screenshots?.home?.imgClasses
+                                                                    ? sidePanelProduct.screenshots.home.imgClasses
+                                                                    : 'rounded-t'
+                                                            }
                                                         />
-                                                        <div className="absolute bottom-0 left-0">
-                                                            <ProductIcon />
-                                                        </div>
                                                     </div>
                                                 </div>
                                             )
                                         }
-
-                                        // If no screenshots, show icon by itself
-                                        return <ProductIcon />
+                                        return null
                                     })()}
 
-                                    {/* SEO info if available */}
-                                    {sidePanelProduct.seo && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-sm font-semibold">SEO Information</h3>
-                                            {sidePanelProduct.seo.title && (
-                                                <p className="text-sm text-secondary">
-                                                    <strong>Title:</strong> {sidePanelProduct.seo.title}
-                                                </p>
-                                            )}
-                                            {sidePanelProduct.seo.description && (
-                                                <p className="text-sm text-secondary">
-                                                    <strong>Description:</strong> {sidePanelProduct.seo.description}
-                                                </p>
-                                            )}
-                                        </div>
-                                    )}
-
-                                    {/* Open product button */}
-                                    {sidePanelProduct.status == 'WIP' ? (
-                                        <Subscribe key={sidePanelProduct.slug} selectedProduct={sidePanelProduct} />
-                                    ) : (
-                                        <div className="pt-4">
-                                            <OSButton
-                                                variant="primary"
-                                                width="full"
-                                                size="md"
-                                                asLink
-                                                to={`/${sidePanelProduct.slug}`}
-                                                state={{ newWindow: true }}
-                                                icon={<Icons.IconArrowRight />}
-                                                iconPosition="right"
-                                            >
-                                                Open {sidePanelProduct.name}
-                                            </OSButton>
-                                        </div>
-                                    )}
-
-                                    {/* Product info */}
-                                    <div className="space-y-2">
-                                        <p className="text-sm text-secondary">
-                                            <strong>Slug:</strong>{' '}
-                                            <pre className="inline">/{sidePanelProduct.slug}</pre>
-                                        </p>
-                                        {sidePanelProduct.description && (
-                                            <p className="text-sm text-secondary">
-                                                <strong>Description:</strong> {sidePanelProduct.description}
-                                            </p>
-                                        )}
-                                        {sidePanelProduct.category && (
-                                            <p className="text-sm text-secondary">
-                                                <strong>Category:</strong> {sidePanelProduct.category}
-                                            </p>
-                                        )}
-                                        {sidePanelProduct.status && (
-                                            <p className="text-sm text-secondary">
-                                                <strong>Status:</strong>{' '}
-                                                <span className="uppercase">{sidePanelProduct.status}</span>
-                                            </p>
+                                    <div className="px-4">
+                                        {/* Open product button */}
+                                        {sidePanelProduct.status == 'WIP' ? (
+                                            <Subscribe key={sidePanelProduct.slug} selectedProduct={sidePanelProduct} />
+                                        ) : (
+                                            <div className="pt-4">
+                                                <OSButton
+                                                    variant="primary"
+                                                    width="full"
+                                                    size="md"
+                                                    asLink
+                                                    to={`/${sidePanelProduct.slug}`}
+                                                    state={{ newWindow: true }}
+                                                    icon={<Icons.IconArrowRight />}
+                                                    iconPosition="right"
+                                                >
+                                                    Open{' '}
+                                                    {sidePanelProduct.category === 'data'
+                                                        ? 'page'
+                                                        : sidePanelProduct.name}
+                                                </OSButton>
+                                            </div>
                                         )}
                                     </div>
                                 </div>
@@ -470,10 +477,12 @@ export default function Products(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${isListLayout
-                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                            : explorerGridColumns + 'gap-y-4 items-start justify-items-center'
-                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
+                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                                : explorerGridColumns +
+                                                                  'gap-y-4 items-start justify-items-center'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
                                                             <button
@@ -504,8 +513,9 @@ export default function Products(): JSX.Element {
                                                                         hoverTimeoutRef.current = null
                                                                     }
                                                                 }}
-                                                                className={`w-full cursor-pointer p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
-                                                                    }`}
+                                                                className={`w-full cursor-pointer p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
+                                                                    selectedProduct?.slug === product.slug ? '' : ''
+                                                                }`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>

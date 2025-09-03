@@ -9,7 +9,7 @@ export const webAnalytics = {
     type: 'product_analytics',
     slug: 'web-analytics',
     color: 'green-2',
-    colorSecondary: '[#36C46F]',
+    colorSecondary: '[#37945D]',
     category: 'analytics',
     billedWith: 'Product analytics',
     pairsWith: [
@@ -47,7 +47,8 @@ export const webAnalytics = {
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_light_313729cacc.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_dark_20eb61e4b2.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_dark_20eb61e4b2.png',
             alt: 'Web analytics dashboard',
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
