@@ -85,7 +85,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 
 #### Data warehouse
 
-- They have connected up the sources the need to.
+- They have connected up the sources they need to.
 - They are aware of the difference between incremental and full sync and the impact on billing.
 - We've conducted training on using SQL in PostHog, creating views and joining on person data.
 
