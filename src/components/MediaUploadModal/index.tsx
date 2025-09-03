@@ -1,4 +1,12 @@
-import { IconCopy, IconUpload, IconFolder, IconDocument, IconChevronRight, IconChevronDown, IconX } from '@posthog/icons'
+import {
+    IconCopy,
+    IconUpload,
+    IconFolder,
+    IconDocument,
+    IconChevronRight,
+    IconChevronDown,
+    IconX,
+} from '@posthog/icons'
 import Modal from 'components/Modal'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { useApp } from '../../context/App'
@@ -294,8 +302,9 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
-                        }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
+                        node.type === 'file' ? 'draggable' : ''
+                    }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -365,6 +374,8 @@ export default function MediaUploadModal() {
     const [loading, setLoading] = useState(0)
     const [images, setImages] = useState<any[]>([])
     const [searchQuery, setSearchQuery] = useState('')
+    const [isPasting, setIsPasting] = useState(false)
+    const { addToast } = useToast()
     const isModerator = user?.role?.type === 'moderator'
 
     const onDrop = async (acceptedFiles: File[]) => {
@@ -395,18 +406,13 @@ export default function MediaUploadModal() {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     // Filter images based on search query
-    const allImages = [
-        ...images,
-        ...((user?.profile as any)?.images || [])
-    ]
+    const allImages = [...images, ...((user?.profile as any)?.images || [])]
 
     const filteredImages = searchQuery
-        ? allImages.filter(image =>
-            image.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+        ? allImages.filter((image) => image.name.toLowerCase().includes(searchQuery.toLowerCase()))
         : allImages
 
-    // Handle ESC key to clear search
+    // Handle ESC key to clear search and paste events
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -414,9 +420,61 @@ export default function MediaUploadModal() {
             }
         }
 
+        const handlePaste = async (e: ClipboardEvent) => {
+            const items = e.clipboardData?.items
+            if (!items) return
+
+            const imageItems = Array.from(items).filter((item) => item.type.startsWith('image/'))
+            if (imageItems.length === 0) return
+
+            e.preventDefault()
+            setIsPasting(true)
+
+            try {
+                const files = await Promise.all(
+                    imageItems.map(async (item) => {
+                        const blob = item.getAsFile()
+                        if (!blob) return null
+
+                        // Create a proper filename with extension
+                        const extension = blob.type.split('/')[1] || 'png'
+                        const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+                        const fileName = `pasted-image-${timestamp}.${extension}`
+
+                        // Create a new File object with the proper name
+                        return new File([blob], fileName, { type: blob.type })
+                    })
+                )
+
+                const validFiles = files.filter((f): f is File => f !== null)
+                if (validFiles.length > 0) {
+                    await onDrop(validFiles)
+                    addToast({
+                        description: `Pasted ${validFiles.length} image${
+                            validFiles.length > 1 ? 's' : ''
+                        } from clipboard`,
+                        duration: 3000,
+                    })
+                }
+            } catch (err) {
+                console.error('Error pasting image:', err)
+                addToast({
+                    description: 'Failed to paste image from clipboard',
+                    error: true,
+                    duration: 3000,
+                })
+            } finally {
+                setIsPasting(false)
+            }
+        }
+
         window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [])
+        window.addEventListener('paste', handlePaste)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('paste', handlePaste)
+        }
+    }, [onDrop, addToast])
 
     return isModerator ? (
         <ScrollArea className="w-full">
@@ -431,23 +489,42 @@ export default function MediaUploadModal() {
 
                         <div className="flex flex-col">
                             <h3 className="m-0">Upload media</h3>
-                            <p className="text-sm text-secondary mt-1 mb-4">Or drag files here</p>
+                            <p className="text-sm text-secondary mt-1 mb-4">Drag files here or paste from clipboard</p>
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive ? 'bg-input border-primary' : ''
-                                    }`}
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                    isDragActive
+                                        ? 'bg-input border-primary'
+                                        : isPasting
+                                        ? 'bg-input border-primary animate-pulse'
+                                        : ''
+                                }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive ? '' : 'opacity-50'
-                                        }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${
+                                        isDragActive || isPasting ? '' : 'opacity-50'
+                                    }`}
                                 >
-                                    <IconUpload className="size-12 mb-4" />
+                                    {isPasting ? (
+                                        <Loading className="size-12 mb-4" />
+                                    ) : (
+                                        <IconUpload className="size-12 mb-4" />
+                                    )}
                                     <p className="text-center font-medium m-0">
-                                        {isDragActive ? 'Drop files here' : 'Drop files to upload'}
+                                        {isPasting
+                                            ? 'Pasting image...'
+                                            : isDragActive
+                                            ? 'Drop files here'
+                                            : 'Drop files or paste to upload'}
                                     </p>
                                     <p className="text-sm text-secondary text-center mt-2 m-0">
-                                        PNG, JPG, WEBP, GIF, MP4, MOV, PDF, SVG, ABC, XYZ
+                                        {isPasting
+                                            ? 'Processing clipboard image...'
+                                            : 'PNG, JPG, WEBP, GIF, MP4, MOV, PDF, SVG'}
+                                    </p>
+                                    <p className="text-xs text-muted text-center mt-2 m-0">
+                                        Cmd+V / Ctrl+V to paste from clipboard
                                     </p>
                                 </div>
                                 <input {...getInputProps()} />
