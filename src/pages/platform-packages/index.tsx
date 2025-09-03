@@ -93,16 +93,16 @@ export default function PlatformPackages() {
 
                     {/* List of addons with name, description, and flat rate */}
                     <div>
-                        <h2>Available packages</h2>
-                        <div className="space-y-6">
+                        <h2 className="mb-4">Available packages</h2>
+                        <div className="grid @3xl:grid-cols-3 gap-8">
                             {platformAddons.map((addon: any) => {
                                 const plan = addon.plans[addon.plans.length - 1]
                                 return (
                                     <div key={addon.name} className="">
-                                        <h3 className="text-xl font-semibold mb-2">{addon.name}</h3>
+                                        <h3 className="text-xl font-semibold mb-2 mt-0">{addon.name}</h3>
                                         <p className="text-secondary mb-2">{addon.description}</p>
                                         {plan?.flat_rate && (
-                                            <div className="flex items-baseline">
+                                            <div className="flex items-baseline mt-auto">
                                                 <strong className="text-lg">
                                                     ${plan.unit_amount_usd.replace('.00', '')}
                                                 </strong>
