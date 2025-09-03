@@ -6,7 +6,6 @@ import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
-import CloudinaryImage from "components/CloudinaryImage"
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useFormik } from 'formik'
@@ -149,7 +148,8 @@ export default function TeamPage(props: TeamPageProps) {
     const posthog = usePostHog()
 
     const { team, updateTeam, loading } = useTeam({ slug })
-    const { name, crest, crestOptions, description, tagline, profiles, leadProfiles, teamImage, miniCrest } = (team as any)?.attributes || {}
+    const { name, crest, crestOptions, description, tagline, profiles, leadProfiles, teamImage, miniCrest } =
+        (team as any)?.attributes || {}
 
     const data = useStaticQuery(graphql`
         {
@@ -337,8 +337,8 @@ export default function TeamPage(props: TeamPageProps) {
                     image: uploadedTeamImage
                         ? uploadedTeamImage.id
                         : other.teamImage === null
-                            ? null
-                            : teamImage?.image?.data?.id,
+                        ? null
+                        : teamImage?.image?.data?.id,
                     caption: teamImageCaption,
                 },
                 crestOptions,
@@ -423,7 +423,7 @@ export default function TeamPage(props: TeamPageProps) {
                     name: t.name,
                     url: `/teams/${t.slug}`,
                     active: t.slug === slug,
-                }))
+                })),
         ]
     }, [data?.allSqueakTeam?.nodes, slug])
 
@@ -444,7 +444,7 @@ export default function TeamPage(props: TeamPageProps) {
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-            100
+                100
         )
 
     const underConsideration = teamData?.roadmaps?.filter(
@@ -533,10 +533,8 @@ export default function TeamPage(props: TeamPageProps) {
                 description={`Learn about the ${(team as any)?.name || slug} team at PostHog`}
                 proseSize="base"
                 rightActionButtons={editing ? editActions : editButton}
-                {...{
+                {...({
                     header: (
-
-
                         <Header
                             loading={loading}
                             teamName={values.name}
@@ -549,10 +547,9 @@ export default function TeamPage(props: TeamPageProps) {
                             editing={editing}
                             setFieldValue={setFieldValue}
                         />
-                    )
-                } as any}
+                    ),
+                } as any)}
             >
-
                 <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-8 mb-8">
                     <div className={!teamImage?.image?.data && !editing ? 'col-span-2' : ''}>
                         <div className="@container/team-stats">
@@ -582,16 +579,18 @@ export default function TeamPage(props: TeamPageProps) {
                                     <div>
                                         <Fieldset
                                             legend={
-                                                (<span className="flex items-center gap-1">
-                                                    Team height in hedgehogs{' '}
-                                                    <Tooltip trigger={<IconInfo className="w-4" />} delay={0}>
-                                                        The average hedgehog is{' '}
-                                                        {(posthog as any)?.getFeatureFlag?.('are-you-in-the-us')
-                                                            ? '7 inches'
-                                                            : '17 centimeters'}{' '}
-                                                        long
-                                                    </Tooltip>
-                                                </span>) as any
+                                                (
+                                                    <span className="flex items-center gap-1">
+                                                        Team height in hedgehogs{' '}
+                                                        <Tooltip trigger={<IconInfo className="w-4" />} delay={0}>
+                                                            The average hedgehog is{' '}
+                                                            {(posthog as any)?.getFeatureFlag?.('are-you-in-the-us')
+                                                                ? '7 inches'
+                                                                : '17 centimeters'}{' '}
+                                                            long
+                                                        </Tooltip>
+                                                    </span>
+                                                ) as any
                                             }
                                         >
                                             <ul className="list-none m-0 p-0 flex flex-wrap">
@@ -621,7 +620,12 @@ export default function TeamPage(props: TeamPageProps) {
                     {loading ? (
                         <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
                     ) : (
-                        <TeamImage values={values} setFieldValue={setFieldValue} teamImage={teamImage} editing={editing} />
+                        <TeamImage
+                            values={values}
+                            setFieldValue={setFieldValue}
+                            teamImage={teamImage}
+                            editing={editing}
+                        />
                     )}
                 </div>
 
@@ -630,73 +634,76 @@ export default function TeamPage(props: TeamPageProps) {
                         <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs/reader-content:grid grid-cols-2 @xl/reader-content:grid-cols-3 @4xl/reader-content:grid-cols-4 @5xl/reader-content:grid-cols-5 gap-4 @md/reader-content:gap-x-6 gap-y-12 max-w-screen-2xl">
                             {loading
                                 ? new Array(4).fill(0).map((_, i) => (
-                                    <li key={i}>
-                                        <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                    </li>
-                                ))
+                                      <li key={i}>
+                                          <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                      </li>
+                                  ))
                                 : profiles?.data || values.teamMembers
-                                    ? [...((editing ? values.teamMembers : profiles?.data) || [])]
-                                        .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                                        .map((profile) => {
-                                            const {
-                                                id,
-                                                attributes: {
-                                                    avatar,
-                                                    firstName,
-                                                    lastName,
-                                                    country,
-                                                    location,
-                                                    companyRole,
-                                                    pineappleOnPizza,
-                                                },
-                                            } = profile
-                                            // const name = [firstName, lastName].filter(Boolean).join(' ')
-                                            return (
-                                                <li key={id} className="rounded-md relative">
-                                                    <TeamMember
-                                                        avatar={{
-                                                            url: avatar?.data?.attributes?.url || avatar?.url,
-                                                        }}
-                                                        firstName={firstName}
-                                                        lastName={lastName}
-                                                        companyRole={companyRole}
-                                                        country={country}
-                                                        location={location}
-                                                        squeakId={id}
-                                                        color={profile.attributes.color || 'yellow'}
-                                                        biography={profile.attributes.biography || ''}
-                                                        teamCrestMap={teamCrestMap}
-                                                        pineappleOnPizza={pineappleOnPizza}
-                                                        startDate={profile.attributes.startDate}
-                                                        isTeamLead={isTeamLead(id)}
-                                                    />
-                                                    {editing && (
-                                                        <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
-                                                            <button
-                                                                onClick={() => removeTeamMember(id)}
-                                                                className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
-                                                                title="Remove team member"
-                                                            >
-                                                                <IconX className="w-4 h-4" />
-                                                            </button>
-                                                            <button
-                                                                onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                                className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
-                                                                    }`}
-                                                                title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
-                                                            >
-                                                                <IconCrown className="w-4 h-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </li>
-                                            )
-                                        })
-                                    : new Array(4).fill(0).map((_, i) => (
-                                        <li key={i}>
-                                            <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                        </li>
-                                    ))}
+                                ? [...((editing ? values.teamMembers : profiles?.data) || [])]
+                                      .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
+                                      .map((profile) => {
+                                          const {
+                                              id,
+                                              attributes: {
+                                                  avatar,
+                                                  firstName,
+                                                  lastName,
+                                                  country,
+                                                  location,
+                                                  companyRole,
+                                                  pineappleOnPizza,
+                                              },
+                                          } = profile
+                                          // const name = [firstName, lastName].filter(Boolean).join(' ')
+                                          return (
+                                              <li key={id} className="rounded-md relative">
+                                                  <TeamMember
+                                                      avatar={{
+                                                          url: avatar?.data?.attributes?.url || avatar?.url,
+                                                      }}
+                                                      firstName={firstName}
+                                                      lastName={lastName}
+                                                      companyRole={companyRole}
+                                                      country={country}
+                                                      location={location}
+                                                      squeakId={id}
+                                                      color={profile.attributes.color || 'yellow'}
+                                                      biography={profile.attributes.biography || ''}
+                                                      teamCrestMap={teamCrestMap}
+                                                      pineappleOnPizza={pineappleOnPizza}
+                                                      startDate={profile.attributes.startDate}
+                                                      isTeamLead={isTeamLead(id)}
+                                                  />
+                                                  {editing && (
+                                                      <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
+                                                          <button
+                                                              onClick={() => removeTeamMember(id)}
+                                                              className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
+                                                              title="Remove team member"
+                                                          >
+                                                              <IconX className="w-4 h-4" />
+                                                          </button>
+                                                          <button
+                                                              onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
+                                                                  isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                              }`}
+                                                              title={
+                                                                  isTeamLead(id) ? 'Remove team lead' : 'Make team lead'
+                                                              }
+                                                          >
+                                                              <IconCrown className="w-4 h-4" />
+                                                          </button>
+                                                      </div>
+                                                  )}
+                                              </li>
+                                          )
+                                      })
+                                : new Array(4).fill(0).map((_, i) => (
+                                      <li key={i}>
+                                          <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                      </li>
+                                  ))}
                             {/* Add job cards for open roles */}
                             {teamJobs.map((job: any) => (
                                 <li key={job.fields.slug} className="rounded-md relative">
@@ -723,12 +730,17 @@ export default function TeamPage(props: TeamPageProps) {
                                     {(updates.length > 0 || isModerator) && (
                                         <div className="lg:max-w-[340px] w-full flex-shrink-0">
                                             {isModerator && (
-                                                <div className={`${updates.length > 0 ? 'mb-8 pb-8 border-input ' : ''}`}>
+                                                <div
+                                                    className={`${updates.length > 0 ? 'mb-8 pb-8 border-input ' : ''}`}
+                                                >
                                                     <TeamUpdate teamName={name} hideTeamSelect />
                                                 </div>
                                             )}
                                             {updates.length > 0 && (
-                                                <Question key={(updates[0] as any).question} id={(updates[0] as any).question} />
+                                                <Question
+                                                    key={(updates[0] as any).question}
+                                                    id={(updates[0] as any).question}
+                                                />
                                             )}
                                         </div>
                                     )}
@@ -747,7 +759,7 @@ export default function TeamPage(props: TeamPageProps) {
                     <>
                         <h2>Goals</h2>
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
-                            <div dangerouslySetInnerHTML={{ __html: objectives }} />
+                            <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </>
                 )}
