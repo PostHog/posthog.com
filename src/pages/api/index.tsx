@@ -38,10 +38,10 @@ export default function API() {
                             )}
                             <h1 className="!m-0">{name}</h1>
                         </div>
-                        <h2 className="!m-0 pb-2">Powerful APIs and SDKs for every platform</h2>
+                        <h2 className="!m-0 pb-2">REST APIs for everything</h2>
                         <p>
                             Capture events, query data, manage feature flags, and control every aspect of PostHog
-                            programmatically. With 14+ SDKs and comprehensive REST APIs.
+                            programmatically.
                         </p>
                     </div>
 
@@ -54,44 +54,8 @@ export default function API() {
                     )}
 
                     <div>
-                        <h2>Features</h2>
                         <div className="space-y-6">
                             <div>
-                                <h3>14+ SDKs for every platform</h3>
-                                <p>
-                                    Native libraries for JavaScript, Python, Ruby, Go, PHP, iOS, Android, React Native,
-                                    Flutter, and more. Get started in minutes with your favorite language.
-                                </p>
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                                    <div className="border border-primary rounded p-3">
-                                        <strong>JavaScript/TypeScript</strong>
-                                        <p className="text-sm mb-0 opacity-70">Web, Node.js, React</p>
-                                    </div>
-                                    <div className="border border-primary rounded p-3">
-                                        <strong>Python</strong>
-                                        <p className="text-sm mb-0 opacity-70">Django, Flask, FastAPI</p>
-                                    </div>
-                                    <div className="border border-primary rounded p-3">
-                                        <strong>Mobile</strong>
-                                        <p className="text-sm mb-0 opacity-70">iOS, Android, React Native, Flutter</p>
-                                    </div>
-                                    <div className="border border-primary rounded p-3">
-                                        <strong>Backend</strong>
-                                        <p className="text-sm mb-0 opacity-70">Ruby, Go, PHP, Java</p>
-                                    </div>
-                                    <div className="border border-primary rounded p-3">
-                                        <strong>Infrastructure</strong>
-                                        <p className="text-sm mb-0 opacity-70">Segment, Rudderstack</p>
-                                    </div>
-                                    <div className="border border-primary rounded p-3">
-                                        <strong>More</strong>
-                                        <p className="text-sm mb-0 opacity-70">Rust, Elixir, .NET</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3>REST APIs for everything</h3>
                                 <p>
                                     Query insights, manage feature flags, create cohorts, export data, and automate
                                     workflows. If you can do it in the UI, you can do it via API.
@@ -126,8 +90,11 @@ export default function API() {
                                     billions of events daily and our infrastructure scales automatically with your
                                     growth.
                                 </p>
-                                <div className="bg-accent rounded-md p-4 mt-4">
-                                    <p className="mb-2">
+                                <div
+                                    data-scheme="secondary"
+                                    className="@2xl:float-right @2xl:max-w-sm @2xl:ml-4 bg-primary rounded-md p-4 mt-4"
+                                >
+                                    <p className="mb-2 mt-0">
                                         <strong>Built for scale:</strong>
                                     </p>
                                     <ul className="mb-0">
@@ -187,25 +154,8 @@ export default function API() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">
-                        <OSButton
-                            asLink
-                            variant="primary"
-                            size="md"
-                            to="/docs/api"
-                            state={{ newWindow: true }}
-                            width="full"
-                        >
+                        <OSButton asLink variant="primary" size="md" to="/docs/api" state={{ newWindow: true }}>
                             Explore API documentation
-                        </OSButton>
-                        <OSButton
-                            asLink
-                            variant="secondary"
-                            size="md"
-                            to="/docs/libraries"
-                            state={{ newWindow: true }}
-                            width="full"
-                        >
-                            View SDK libraries
                         </OSButton>
                     </div>
                 </div>
