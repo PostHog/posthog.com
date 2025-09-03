@@ -38,7 +38,7 @@ import { useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { TextureTan } from "components/Textures"
+import { TextureTan } from 'components/Textures'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -415,7 +415,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                    @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
                         initial={{
                             width: '250px',
-                            x: -250 // Start off-screen on mobile
+                            x: -250, // Start off-screen on mobile
                         }}
                         animate={{
                             width: '250px',
@@ -567,21 +567,23 @@ function ReaderViewContent({
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
                             ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:rounded-l' : 'border-l-0'}
-                            ${showSidebar && isTocVisible
-                                ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
-                                : 'border-r-0'
-                            } ${selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                            ${
+                                showSidebar && isTocVisible
+                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                    : 'border-r-0'
+                            } ${
+                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
-                            }`}
+                        }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {
-                                    backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
-                                    backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
-                                    backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
-                                    backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
-                                }
+                                      backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                      backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                      backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                      backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                                  }
                                 : undefined
                         }
                     >
@@ -590,23 +592,33 @@ function ReaderViewContent({
                                 proseSize
                             )} max-w-none relative overflow-x-hidden`}
                         >
-                            {header && <header className="relative">
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png" className="dark:hidden absolute inset-0" imgClassName="h-full w-full" />
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png" className="hidden dark:block absolute inset-0" imgClassName="h-full w-full" />
-                                <div className="relative flex flex-col items-center w-full">
-                                    {header}
-                                </div>
-                            </header>}
+                            {header && (
+                                <header className="relative">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
+                                        className="dark:hidden absolute inset-0"
+                                        imgClassName="h-full w-full"
+                                    />
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
+                                        className="hidden dark:block absolute inset-0"
+                                        imgClassName="h-full w-full"
+                                    />
+                                    <div className="relative flex flex-col items-center w-full">{header}</div>
+                                </header>
+                            )}
                             <div
                                 ref={contentRef}
-                                className={`@container/reader-content relative ${padding
-                                    ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
-                                    : ''
-                                    } mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
-                                    }`}
+                                className={`@container/reader-content relative ${
+                                    padding
+                                        ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
+                                        : ''
+                                } mx-auto transition-all ${
+                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                }`}
                             >
                                 {/* <DebugContainerQuery /> */}
-                                {body.featuredImage && (
+                                {body.featuredImage && !body.featuredVideo && (
                                     <div className="mb-4">
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
                                     </div>
@@ -700,8 +712,9 @@ function ReaderViewContent({
                 {/* Third row - Footer */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 rounded-b">
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 transition-all min-w-0 ${
+                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
+                        }`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
@@ -751,8 +764,9 @@ function ReaderViewContent({
                         </div>
                     )}
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
+                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
+                        }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         {filePath && (
