@@ -15,10 +15,10 @@ import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { IconPresentation } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import useProduct from '../../hooks/useProduct'
-import CloudinaryImage from "components/CloudinaryImage"
-import { TextureTan } from "components/Textures"
-import { DebugContainerQuery } from "components/DebugContainerQuery"
-import { useWindow } from "../../context/Window"
+import CloudinaryImage from 'components/CloudinaryImage'
+import { TextureTan } from 'components/Textures'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { useWindow } from '../../context/Window'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -161,7 +161,7 @@ export default function CDP(): JSX.Element {
     ]
 
     // Define the specific data products we want to display in order
-    const dataProducts = ['sql', 'data_warehouse', 'hog', 'capture_api', 'webhooks']
+    const dataProducts = ['sql', 'data_warehouse', 'cdp', 'api', 'webhooks']
 
     // cdp, hog
 
@@ -192,51 +192,55 @@ export default function CDP(): JSX.Element {
                 leftSidebar={<LeftSidebarContent />}
                 title="warehouse vs ETL vs CDP??.md"
                 hideTitle={true}
-                {...{
-                    header: <>
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png" alt="Hedgehogs taking data to the data factory" className="mt-4 px-4" imgClassName="max-w-[542px] w-full mx-auto" />
-                        <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">Unify external customer data with product usage data</h2>
-                    </>
-                } as any}
+                {...({
+                    header: (
+                        <>
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png"
+                                alt="Hedgehogs taking data to the data factory"
+                                className="mt-4 px-4"
+                                imgClassName="max-w-[542px] w-full mx-auto"
+                            />
+                            <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">
+                                Unify external customer data with product usage data
+                            </h2>
+                        </>
+                    ),
+                } as any)}
             >
-                <div className="@2xl:float-right @2xl:w-96 @2xl:ml-4 @3xl:ml-12">
-                    <Fieldset legend="Customer data stack docs">
+                <div className="@2xl:float-right @2xl:w-[23.5rem] @2xl:ml-4 @3xl:ml-12">
+                    <Fieldset legend="Customer data infrastructure">
                         <div
                             className={`not-prose grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 gap-x-1 relative [&>div]:mx-auto [&_figure]:text-center`}
                         >
                             {products.map((product: any) => (
-                                <ZoomHover key={product.slug} width="full" className={`justify-center`}>
-                                    <div className="cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border">
-                                        <div>
-                                            <AppLink
-                                                label={product.name}
-                                                url={`/${product.slug}`}
-                                                Icon={product.parentIcon ? product.Icon : <IconPresentation />}
-                                                orientation="column"
-                                                parentIcon={product.parentIcon}
-                                                color={product.color}
-                                                background="bg-primary"
-                                                className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
-                                            >
-                                                {!product.parentIcon &&
-                                                    product.Icon &&
-                                                    React.createElement(product.Icon, {
-                                                        className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
-                                                    })}
-                                                {product.status === 'beta' && (
-                                                    <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
-                                                        Beta
-                                                    </span>
-                                                )}
-                                                {product.status === 'WIP' && (
-                                                    <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
-                                                        WIP
-                                                    </span>
-                                                )}
-                                            </AppLink>
-                                        </div>
-                                    </div>
-                                </ZoomHover>
+                                <AppLink
+                                    key={product.slug}
+                                    label={product.name}
+                                    url={`/${product.slug}`}
+                                    Icon={product.parentIcon ? product.Icon : <IconPresentation />}
+                                    orientation="column"
+                                    parentIcon={product.parentIcon}
+                                    color={product.color}
+                                    background="bg-primary"
+                                    className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
+                                >
+                                    {!product.parentIcon &&
+                                        product.Icon &&
+                                        React.createElement(product.Icon, {
+                                            className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
+                                        })}
+                                    {product.status === 'beta' && (
+                                        <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                            Beta
+                                        </span>
+                                    )}
+                                    {product.status === 'WIP' && (
+                                        <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
+                                            WIP
+                                        </span>
+                                    )}
+                                </AppLink>
                             ))}
                         </div>
                     </Fieldset>
@@ -358,6 +362,7 @@ export default function CDP(): JSX.Element {
                     product engineers in mind – to help you get the data points you need to build success products –
                     without having to hire a dedicated team to handle it all.
                 </p>
+                {/* 
                 <h3>Roadmap</h3>
                 <p>
                     PostHog is always a work in progress. here’s what we’re working on next, and what we’re thinking
@@ -373,6 +378,7 @@ export default function CDP(): JSX.Element {
                     <li>item 1</li>
                     <li>item 2</li>
                 </ul>
+                 */}
             </ReaderView>
         </>
     )

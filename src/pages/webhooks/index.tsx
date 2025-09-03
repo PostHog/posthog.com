@@ -1,81 +1,111 @@
+import { graphql } from 'gatsby'
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { SlidesTemplate } from 'components/Products/Slides'
-import { useContentData } from 'hooks/useContentData'
+import ReaderView from 'components/ReaderView'
+import SEO from 'components/seo'
+import useProduct from 'hooks/useProduct'
+import CloudinaryImage from 'components/CloudinaryImage'
+import Editor from 'components/Editor'
+import OSButton from 'components/OSButton'
 
-// Product configuration - change this to adapt for different products
-const PRODUCT_HANDLE = 'webhooks'
+export default function Webhooks() {
+    const webhooksProduct = useProduct({ handle: 'webhooks' }) as any
 
-export default function Webhooks(): JSX.Element {
-    const contentData = useContentData()
-    // Combined GraphQL query for both tutorial data and product data
-    const data = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-            allProductData {
-                nodes {
-                    products {
-                        name
-                        type
-                        unit
-                        addons {
-                            name
-                            type
-                            unit
-                            plans {
-                                name
-                                plan_key
-                                included_if
-                                features {
-                                    key
-                                    name
-                                    description
-                                    limit
-                                    note
-                                }
-                            }
-                        }
-                        plans {
-                            name
-                            plan_key
-                            free_allocation
-                            included_if
-                            features {
-                                key
-                                name
-                                description
-                                limit
-                                note
-                            }
-                            tiers {
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    // Merge content data with product data
-
-    const mergedData = {
-        ...data,
-
-        ...contentData,
+    if (!webhooksProduct) {
+        return <div>Product not found</div>
     }
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} />
+    const { name, overview, features, Icon, color, screenshots } = webhooksProduct
+
+    return (
+        <>
+            <SEO title={overview?.title} description={overview?.description} image="/images/og/product-analytics.jpg" />
+            <Editor>
+                <div className="space-y-8">
+                    <div>
+                        <div className="flex gap-2 items-center">
+                            {Icon && (
+                                <div className={`size-8 my-4 text-${color}`}>
+                                    <Icon />
+                                </div>
+                            )}
+                            <h1 className="!m-0">{name}</h1>
+                        </div>
+                        <h2 className="!m-0 pb-2">{overview?.title}</h2>
+                        <p>{overview?.description}</p>
+                    </div>
+
+                    {screenshots && (
+                        <div className="space-y-4">
+                            {/* Show overview screenshot if it exists */}
+                            {screenshots.overview && (
+                                <CloudinaryImage
+                                    src={screenshots.overview.src}
+                                    alt={screenshots.overview.alt}
+                                    className="w-full rounded-md shadow-lg"
+                                />
+                            )}
+
+                            {/* Show additional screenshots, filtering out 'home' if it exists */}
+                            {screenshots.additional &&
+                                screenshots.additional.map((screenshot: any, index: number) => (
+                                    <CloudinaryImage
+                                        key={index}
+                                        src={screenshot.src}
+                                        srcDark={screenshot.srcDark}
+                                        alt={screenshot.alt || ''}
+                                        className="w-full rounded-md shadow-lg"
+                                    />
+                                ))}
+
+                            {/* Show any other named screenshots except 'home' */}
+                            {Object.keys(screenshots)
+                                .filter((key) => key !== 'overview' && key !== 'additional' && key !== 'home')
+                                .map((key) => {
+                                    const screenshot = screenshots[key]
+                                    return (
+                                        <CloudinaryImage
+                                            key={key}
+                                            src={screenshot.src}
+                                            srcDark={screenshot.srcDark}
+                                            alt={screenshot.alt || ''}
+                                            className="w-full rounded-md shadow-lg"
+                                        />
+                                    )
+                                })}
+                        </div>
+                    )}
+
+                    {features && features.length > 0 && (
+                        <div>
+                            <h2>Features</h2>
+                            <div className="space-y-6">
+                                {features.map((feature: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-xl font-semibold mb-2">
+                                            {feature.headline || feature.title}
+                                        </h3>
+                                        <p className="[&>p]:mb-0">{feature.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    <OSButton asLink variant="primary" size="md" to="/docs/webhooks" state={{ newWindow: true }}>
+                        Learn more about webhooks
+                    </OSButton>
+                </div>
+            </Editor>
+        </>
+    )
 }
+
+export const query = graphql`
+    {
+        mdx(fields: { slug: { eq: "/webhooks" } }) {
+            body
+            frontmatter {
+                title
+            }
+        }
+    }
+`

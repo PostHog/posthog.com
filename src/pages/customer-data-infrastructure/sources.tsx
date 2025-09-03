@@ -103,9 +103,7 @@ export default function Sources(): JSX.Element {
                     </li>
                 </ul>
                 <p>
-                    <Link to="/cdp?type=source" state={{ newWindow: true }}>
-                        Browse webhook integrations →
-                    </Link>
+                    <Link to="/cdp?type=source">Browse webhook integrations →</Link>
                 </p>
 
                 <h2>4. Capture API</h2>

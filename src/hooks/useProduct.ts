@@ -2110,6 +2110,77 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
+            name: 'Webhooks',
+            Icon: IconWebhooks,
+            handle: 'webhooks',
+            color: 'purple',
+            colorSecondary: 'sky-blue',
+            category: 'product_os',
+            slug: 'webhooks',
+            seo: {
+                title: 'Webhooks - PostHog',
+                description:
+                    'Send event data from PostHog to any HTTP endpoint in real-time. Integrate with your backend, internal systems, or third-party platforms.',
+            },
+            overview: {
+                title: 'Send your data anywhere with real-time webhooks',
+                description:
+                    'Stream PostHog events to any HTTP endpoint as they happen. Connect your product analytics with your backend, trigger workflows, or sync with third-party tools—all without polling or batch exports.',
+                textColor: 'text-black',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/webhook_destination_cd495788fc.png',
+                    alt: 'Webhook destination configuration',
+                    classes: '',
+                },
+                additional: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/webhook_url_config_5900a5a9b7.png',
+                        alt: 'Configure webhook URL',
+                    },
+                ],
+            },
+            features: [
+                {
+                    title: 'Real-time event streaming',
+                    headline: 'Get events as they happen',
+                    description:
+                        'No polling, no delays. PostHog sends events to your endpoint immediately as they occur, enabling real-time reactions to user behavior.',
+                },
+                {
+                    title: 'Flexible filtering',
+                    headline: 'Send only the data you need',
+                    description:
+                        'Use match rules and filters to control exactly which events trigger webhooks. Filter by event type, user properties, or any custom criteria to reduce noise and costs.',
+                },
+                {
+                    title: 'Custom payloads',
+                    headline: 'Format data your way',
+                    description:
+                        "Customize the JSON payload to match your endpoint's expectations. Transform event data, add custom fields, or restructure the payload entirely using our templating system.",
+                },
+                {
+                    title: 'Built-in reliability',
+                    headline: 'Automatic retries and error handling',
+                    description:
+                        'Failed requests are automatically retried with exponential backoff. Monitor delivery status and debug issues with detailed logging and response tracking.',
+                },
+                {
+                    title: 'No-code setup',
+                    headline: 'Connect in minutes, not days',
+                    description:
+                        'Configure webhooks through the UI without writing code. Test with one click, see real-time logs, and iterate quickly on your integration.',
+                },
+                {
+                    title: 'Use cases',
+                    headline: 'Endless integration possibilities',
+                    description:
+                        'Trigger Slack alerts for key events, sync user actions to your CRM, update internal dashboards, kick off backend workflows, or feed data into your data lake—all from a single webhook.',
+                },
+            ],
+        },
+        {
             name: 'Notebooks',
             Icon: IconNotebook,
             description: 'Combine analytics, replays, and notes in collaborative docs',
@@ -2892,6 +2963,13 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'Ingest, transform, and send data between hundreds of tools',
                 description: 'Import data from a warehouse, sync with event data, and export to other products.',
+            },
+            screenshots: {
+                overview: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_09_03_T13_24_20_613_Z_5ce971dd31.png',
+                    alt: 'Integrations library',
+                    classes: '',
+                },
             },
         },
         {
