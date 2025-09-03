@@ -39,6 +39,7 @@ import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import { TextureTan } from 'components/Textures'
+import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -769,6 +770,12 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
+                        {body?.type === 'mdx' && (
+                            <CopyMarkdownActionsDropdown
+                                markdownContent={body.content}
+                                pageUrl={`https://posthog.com${appWindow?.path}`}
+                            />
+                        )}
                         {filePath && (
                             <OSButton
                                 asLink
@@ -776,7 +783,6 @@ function ReaderViewContent({
                                 icon={<IconPencil />}
                             />
                         )}
-
                         {commits?.length && commits.length > 0 && (
                             <Popover
                                 trigger={

@@ -1,9 +1,11 @@
 import { Menu } from '@headlessui/react'
-import { IconCopy, IconEye, IconExternal } from '@posthog/icons'
+import { IconCopy, IconEye, IconExternal, IconCheck } from '@posthog/icons'
 import { Chevron } from 'components/Icons'
 import CheckIcon from '../../images/check.svg'
 import Link from 'components/Link'
 import React, { useState } from 'react'
+import { Popover } from 'components/RadixUI/Popover'
+import OSButton from 'components/OSButton'
 
 interface CopyMarkdownActionsDropdownProps {
     /** The markdown content to work with */
@@ -16,12 +18,11 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     markdownContent,
     pageUrl,
 }) => {
-    const [copiedState, setCopiedState] = useState<string | null>(null)
-
-    // Consolidated styles
+    const [copied, setCopied] = useState(false)
+    const [popoverOpen, setPopoverOpen] = useState(false)
     const menuItemButtonStyles =
-        '!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center !text-primary dark:!text-primary-dark hover:!text-primary dark:hover:!text-primary-dark'
-    const menuItemIconStyles = 'w-4 h-4 mr-3'
+        'flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full'
+    const menuItemIconStyles = 'size-4'
 
     // Helper function to safely create markdown URL
     const getMarkdownUrl = (url: string) => {
@@ -35,81 +36,55 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     }
 
     const handleCopyMarkdown = () => {
+        setPopoverOpen(false)
         navigator.clipboard.writeText(markdownContent)
-        setCopiedState('markdown')
-        setTimeout(() => setCopiedState(null), 2000)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
     }
 
     return (
-        <div className={`relative`}>
-            <Menu>
-                {({ open }) => (
-                    <>
-                        <Menu.Button
-                            className={`flex items-center space-x-1 font-semibold text-muted hover:text-primary py-1 px-1 rounded-sm border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open
-                                    ? 'scale-[1.02] bg-accent border-primary text-primary'
-                                    : 'border-transparent hover:bg-accent hover:border'
-                                }`}
-                        >
-                            {copiedState === 'markdown' ? (
-                                <>
-                                    <img src={CheckIcon} alt="Copied" className="w-4 h-4 text-green" />
-                                    <span className="text-secondary">Copied</span>
-                                </>
-                            ) : (
-                                <>
-                                    <IconCopy className="w-4 h-4" />
-                                    <span>Copy page</span>
-                                </>
-                            )}
-                            <Chevron className="w-2.5 opacity-70 group-hover:opacity-70" />
-                        </Menu.Button>
+        <Popover
+            trigger={
+                <span>
+                    <OSButton icon={copied ? <IconCheck className="text-green" /> : <IconCopy />} />
+                </span>
+            }
+            dataScheme="secondary"
+            open={popoverOpen}
+            onOpenChange={setPopoverOpen}
+        >
+            <button onClick={handleCopyMarkdown} className={menuItemButtonStyles}>
+                <IconCopy className={menuItemIconStyles} />
+                <span>Copy as Markdown</span>
+            </button>
 
-                        <Menu.Items className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-primary list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
-                            <Menu.Item>
-                                <button onClick={handleCopyMarkdown} className={menuItemButtonStyles}>
-                                    <IconCopy className={menuItemIconStyles} />
-                                    <span>Copy as Markdown</span>
-                                </button>
-                            </Menu.Item>
+            <Link to={`${getMarkdownUrl(pageUrl)}`} externalNoIcon className={menuItemButtonStyles}>
+                <IconEye className={menuItemIconStyles} />
+                <span>View as Markdown</span>
+            </Link>
 
-                            <Menu.Item>
-                                <Link to={`${getMarkdownUrl(pageUrl)}`} externalNoIcon className={menuItemButtonStyles}>
-                                    <IconEye className={menuItemIconStyles} />
-                                    <span>View as Markdown</span>
-                                </Link>
-                            </Menu.Item>
+            <Link
+                to={`https://chat.openai.com/?q=${encodeURIComponent(
+                    `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
+                )}`}
+                externalNoIcon
+                className={menuItemButtonStyles}
+            >
+                <IconExternal className={menuItemIconStyles} />
+                <span>Open in ChatGPT</span>
+            </Link>
 
-                            <Menu.Item>
-                                <Link
-                                    to={`https://chat.openai.com/?q=${encodeURIComponent(
-                                        `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
-                                    )}`}
-                                    externalNoIcon
-                                    className={menuItemButtonStyles}
-                                >
-                                    <IconExternal className={menuItemIconStyles} />
-                                    <span>Open in ChatGPT</span>
-                                </Link>
-                            </Menu.Item>
-
-                            <Menu.Item>
-                                <Link
-                                    to={`https://claude.ai/new?q=${encodeURIComponent(
-                                        `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
-                                    )}`}
-                                    externalNoIcon
-                                    className={menuItemButtonStyles}
-                                >
-                                    <IconExternal className={menuItemIconStyles} />
-                                    <span>Open in Claude</span>
-                                </Link>
-                            </Menu.Item>
-                        </Menu.Items>
-                    </>
-                )}
-            </Menu>
-        </div>
+            <Link
+                to={`https://claude.ai/new?q=${encodeURIComponent(
+                    `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
+                )}`}
+                externalNoIcon
+                className={menuItemButtonStyles}
+            >
+                <IconExternal className={menuItemIconStyles} />
+                <span>Open in Claude</span>
+            </Link>
+        </Popover>
     )
 }
 
