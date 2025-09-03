@@ -269,7 +269,7 @@ To do this cleanup properly, you should:
 
 1. Check if you have any orphan parts (this should be run per node in your cluster, or you could modify the query to use `clusterAllReplicas`):
 
-```sql
+```sql runInPostHog=false
 select zoo.p_path as part_zoo, zoo.ctime, zoo.mtime, disk.p_path as part_disk
 from
 (
@@ -320,7 +320,7 @@ If you spot a migration that doesn't seem to be progressing after a long time, i
 
 You can also spot this by looking at the replication queue for long-running operations. You could run the following query, for example:
 
-```sql
+```sql runInPostHog=false
 select * from clusterAllReplicas('<cluster_name>', system.replication_queue) order by create_time
 ```
 
