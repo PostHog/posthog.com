@@ -3,13 +3,14 @@ import { Menubar as RadixMenubar } from 'radix-ui'
 import { IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 // Types
 export type MenuItemType = {
     type: 'item' | 'submenu' | 'separator'
     label?: string
     link?: string
-    shortcut?: string
+    shortcut?: string | string[] // Support both string and array of keys
     disabled?: boolean
     icon?: React.ReactNode
     items?: MenuItemType[] // For submenus
@@ -171,7 +172,26 @@ const MenuItem: React.FC<{
                         ) : null}
                         <span>{item.label}</span>
                     </span>
-                    {item.shortcut && <div className={ShortcutClasses}>{item.shortcut}</div>}
+                    {item.shortcut && (
+                        <div className={ShortcutClasses}>
+                            {Array.isArray(item.shortcut) ? (
+                                <div className="flex items-center">
+                                    {item.shortcut.map((key, index) => (
+                                        <React.Fragment key={index}>
+                                            <KeyboardShortcut text={key} size="xs" />
+                                            {/* 
+                                            {index < item.shortcut!.length - 1 && (
+                                                <span className="text-muted text-xs">+</span>
+                                            )}
+                                             */}
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                            ) : (
+                                <KeyboardShortcut text={item.shortcut} size="xs" />
+                            )}
+                        </div>
+                    )}
                 </span>
             )}
         </RadixMenubar.Item>
@@ -211,8 +231,9 @@ const MenuBar: React.FC<MenuBarProps> = ({
                     <RadixMenubar.Menu key={menuId} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
-                            className={`${triggerAsChild ? '' : TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'
-                                } ${customTriggerClasses}`}
+                            className={`${triggerAsChild ? '' : TriggerClasses} ${
+                                menu.bold ? 'font-bold' : 'font-medium'
+                            } ${customTriggerClasses}`}
                             id={triggerId}
                         >
                             {menu.trigger}

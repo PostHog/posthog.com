@@ -8,6 +8,8 @@ import {
     IconCollapse45Chevrons,
     IconExpand45Chevrons,
     IconSquare,
+    IconArrowLeft,
+    IconArrowRight,
 } from '@posthog/icons'
 import { Menu, MenuItem, useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
@@ -25,6 +27,7 @@ import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
 import { getProseClasses } from '../../constants'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -589,6 +592,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                         type: 'item',
                                                         label: 'Close',
                                                         onClick: handleClose,
+                                                        shortcut: ['Shift', 'W'],
                                                     },
                                                 ],
                                             },
@@ -678,21 +682,33 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                                 Snap to...
                                                             </ContextMenu.Label>
                                                             <ContextMenu.Item
-                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                                 onClick={() => handleSnapToSide('left')}
                                                             >
                                                                 Left half
                                                                 <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                    Shift+←
+                                                                    <KeyboardShortcut text="Shift" size="xs" />
+                                                                    <KeyboardShortcut
+                                                                        text={
+                                                                            <IconArrowLeft className="size-3 inline-block" />
+                                                                        }
+                                                                        size="xs"
+                                                                    />
                                                                 </div>
                                                             </ContextMenu.Item>
                                                             <ContextMenu.Item
-                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                                 onClick={() => handleSnapToSide('right')}
                                                             >
                                                                 Right half
                                                                 <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                    Shift+→
+                                                                    <KeyboardShortcut text="Shift" size="xs" />
+                                                                    <KeyboardShortcut
+                                                                        text={
+                                                                            <IconArrowRight className="size-3 inline-block" />
+                                                                        }
+                                                                        size="xs"
+                                                                    />
                                                                 </div>
                                                             </ContextMenu.Item>
                                                             <ContextMenu.Separator className="m-[5px] h-px bg-border" />
@@ -703,12 +719,18 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                                 disabled={
                                                                     size.width === (isSSR ? 0 : window?.innerWidth)
                                                                 }
-                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                                 onClick={expandWindow}
                                                             >
                                                                 Maximize
                                                                 <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                    Shift+↑
+                                                                    <KeyboardShortcut text="Shift" size="xs" />
+                                                                    <KeyboardShortcut
+                                                                        text={
+                                                                            <IconArrowRight className="size-3 inline-block -rotate-90" />
+                                                                        }
+                                                                        size="xs"
+                                                                    />
                                                                 </div>
                                                             </ContextMenu.Item>
                                                         </ContextMenu.Content>
