@@ -211,34 +211,34 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
 
 type AppParametersProps = {
     config:
-    | {
-        key: string
-        name: string | null
-        required: boolean | null
-        type: string | null
-        hint: string | null
-        description: string | null
-    }[]
-    | null
+        | {
+              key: string
+              name: string | null
+              required: boolean | null
+              type: string | null
+              hint: string | null
+              description: string | null
+          }[]
+        | null
 }
 
 type TemplateParametersProps =
     | {
-        templateId: string
-        name: string
-        type: string
-        inputs_schema:
-        | {
-            key: string
-            type: string | null
-            label: string | null
-            description: string | null
-            default?: string | null
-            secret?: boolean | null
-            required?: boolean | null
-        }[]
-        | null
-    }[]
+          templateId: string
+          name: string
+          type: string
+          inputs_schema:
+              | {
+                    key: string
+                    type: string | null
+                    label: string | null
+                    description: string | null
+                    default?: string | null
+                    secret?: boolean | null
+                    required?: boolean | null
+                }[]
+              | null
+      }[]
     | null
 
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
@@ -367,9 +367,9 @@ export default function Handbook({
         IsEU,
         IsUS,
         table: (props) => (
-            <OverflowContainer {...props}>
+            <OverflowXSection>
                 <table {...props} />
-            </OverflowContainer>
+            </OverflowXSection>
         ),
         ...shortcodes,
     }
