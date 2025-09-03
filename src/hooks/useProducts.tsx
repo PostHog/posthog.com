@@ -16,6 +16,7 @@ import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { max_ai } from './productData/max_ai'
 import { llmAnalytics } from './productData/llm_analytics'
+import { revenueAnalytics } from './productData/revenue_analytics'
 
 const initialProducts = [
     productAnalytics,
@@ -29,6 +30,7 @@ const initialProducts = [
     experiments,
     max_ai,
     llmAnalytics,
+    revenueAnalytics,
 ]
 
 export default function useProducts() {
