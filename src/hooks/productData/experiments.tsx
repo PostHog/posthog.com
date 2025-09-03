@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconFlask } from '@posthog/icons'
-import Link from "components/Link"
+import Link from 'components/Link'
 
 export const experiments = {
     Icon: IconFlask,
@@ -19,9 +19,19 @@ export const experiments = {
     },
     overview: {
         title: 'Test changes with statistical significance',
-        description: (<>
-            Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>Session Replay</Link> and a auto-generated dashboard of insights from <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>Product Analytics</Link>.
-        </>),
+        description: (
+            <>
+                Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with{' '}
+                <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
+                    Session Replay
+                </Link>{' '}
+                and a auto-generated dashboard of insights from{' '}
+                <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>
+                    Product Analytics
+                </Link>
+                .
+            </>
+        ),
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -32,7 +42,8 @@ export const experiments = {
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png',
             alt: 'Experiment results',
             classes: 'justify-center items-end px-4 @lg:px-6',
             imgClasses: 'rounded-t-md shadow-2xl',
@@ -98,29 +109,35 @@ export const experiments = {
             features: [
                 {
                     title: 'A/B testing',
-                    description: 'Use count, value or funnel metrics to test new code and find what works best. Great for teams with big ideas.',
+                    description:
+                        'Use count, value or funnel metrics to test new code and find what works best. Great for teams with big ideas.',
                 },
                 {
                     title: 'A/A testing',
-                    description: 'Validate experiments by testing code against duplicates, across a funnel. Great for teams who need strong data.',
+                    description:
+                        'Validate experiments by testing code against duplicates, across a funnel. Great for teams who need strong data.',
                 },
                 {
                     title: 'A/B/N testing',
-                    description: 'Test multiple variants against a shared metrics library to determine the best approach based on data. Great for teams with lots of ideas.',
+                    description:
+                        'Test multiple variants against a shared metrics library to determine the best approach based on data. Great for teams with lots of ideas.',
                 },
                 {
                     title: 'Holdout testing',
-                    description: 'Test new code across an entire funnel by holding content back from users. Great for teams with complex lifecycle models.',
+                    description:
+                        'Test new code across an entire funnel by holding content back from users. Great for teams with complex lifecycle models.',
                 },
                 {
-                    title: 'Fake Door Testing',
-                    description: 'Gauge demand in new products with roadmap experiments. Great for teams that ship quickly.',
+                    title: 'Fake door testing',
+                    description:
+                        'Gauge demand in new products with roadmap experiments. Great for teams that ship quickly.',
                 },
                 {
                     title: 'Redirect testing',
-                    description: 'Test ideas by changing the user path instead of the content they see. Great for teams that want to optimize instead of iterate.',
+                    description:
+                        'Test ideas by changing the user path instead of the content they see. Great for teams that want to optimize instead of iterate.',
                 },
-            ]
+            ],
         },
         {
             title: 'Targeting rules',
@@ -164,7 +181,8 @@ export const experiments = {
         {
             title: 'Customizable metrics',
             headline: 'Customizable metrics',
-            description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
+            description:
+                'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
@@ -266,7 +284,8 @@ export const experiments = {
             them: [
                 {
                     title: 'No-code experiments or CMS capabilities',
-                    subtitle: "You'll still need a designer/engineer to create experiments – but we're working on no-code A/B testing!",
+                    subtitle:
+                        "You'll still need a designer/engineer to create experiments – but we're working on no-code A/B testing!",
                 },
                 {
                     title: 'No integration with Google Ads',
@@ -275,6 +294,8 @@ export const experiments = {
                 },
                 {
                     title: 'Personalization',
+                    subtitle:
+                        "Of course, you could set up personalization yourself, but we don't have pre-built components or templates for this.",
                 },
             ],
             us: [
@@ -305,11 +326,11 @@ export const experiments = {
                 key: 'amplitude',
                 link: '/blog/posthog-vs-amplitude',
             },
-            {
-                name: 'Pendo',
-                key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
-            },
+            // {
+            //     name: 'Pendo',
+            //     key: 'pendo',
+            //     link: '/blog/posthog-vs-pendo',
+            // },
             {
                 name: 'VWO',
                 key: 'vwo',
@@ -403,7 +424,7 @@ export const experiments = {
             {
                 feature: 'Target by cohort',
                 companies: {
-                    Pendo: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: true,
                     vwo: true,
@@ -413,7 +434,7 @@ export const experiments = {
             {
                 feature: 'Target by person property',
                 companies: {
-                    Pendo: true,
+                    amplitude: true,
                     optimizely: true,
                     pendo: true,
                     vwo: false,

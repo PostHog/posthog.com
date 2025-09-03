@@ -189,6 +189,12 @@ export default function Products(): JSX.Element {
         (product: any, e: React.MouseEvent) => {
             e.preventDefault()
             e.stopPropagation()
+
+            // Don't navigate if product status is 'WIP' - no page ready yet
+            if (product.status === 'WIP') {
+                return
+            }
+
             // Single-click opens the product page
             navigate(`/${product.slug}`, { state: { newWindow: true } })
         },
@@ -513,9 +519,11 @@ export default function Products(): JSX.Element {
                                                                         hoverTimeoutRef.current = null
                                                                     }
                                                                 }}
-                                                                className={`w-full cursor-pointer p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
-                                                                    selectedProduct?.slug === product.slug ? '' : ''
-                                                                }`}
+                                                                className={`w-full p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
+                                                                    product.status === 'WIP'
+                                                                        ? 'cursor-default opacity-75'
+                                                                        : 'cursor-pointer'
+                                                                } ${selectedProduct?.slug === product.slug ? '' : ''}`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>

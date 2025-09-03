@@ -1421,8 +1421,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             name: 'Annika',
             parentIcon: 'aiAnnika',
             // Icon: IconMagicWand,
-            description: 'Your AI-powered product analyst and product manager',
-            role: 'Product Manager',
             handle: 'annika',
             color: 'green',
             colorSecondary: 'lilac',
@@ -1431,11 +1429,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
             seo: {
                 title: 'Annika - PostHog',
-                description: 'Your AI-powered product analyst and product manager',
+                description: 'Your AI-powered product manager',
             },
             overview: {
-                title: 'Annika',
-                description: 'Annika.',
+                title: 'Your AI-powered product manager',
+                // description: 'Annika.',
                 textColor: 'text-white',
             },
             skills: [
@@ -1450,7 +1448,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             name: 'Marius',
             parentIcon: 'aiMarius',
             // Icon: IconMagicWand,
-            description: 'Your AI-powered product analyst and product manager',
             role: '10x Engineer',
             handle: 'marius',
             color: 'blue',
@@ -1460,10 +1457,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'WIP',
             seo: {
                 title: 'Marius - PostHog',
-                description: 'Your AI-powered product analyst and product manager',
+                description: 'Your AI-powered 10x engineer',
             },
             overview: {
-                title: 'Marius',
+                title: 'Your AI-powered 10x engineer',
                 description: 'Marius.',
                 textColor: 'text-white',
             },

@@ -1,11 +1,15 @@
-import { graphql } from 'gatsby'
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
+import { TreeMenu } from 'components/TreeMenu'
+import { productOSNav } from 'hooks/useProductOSNavigation'
+
+const LeftSidebarContent = () => {
+    return <TreeMenu items={productOSNav.children} />
+}
 
 export default function Webhooks() {
     const webhooksProduct = useProduct({ handle: 'webhooks' }) as any
@@ -14,12 +18,16 @@ export default function Webhooks() {
         return <div>Product not found</div>
     }
 
-    const { name, overview, features, Icon, color, screenshots } = webhooksProduct
+    const { name, overview, features, Icon, color, screenshots, seo } = webhooksProduct
 
     return (
         <>
-            <SEO title={overview?.title} description={overview?.description} image="/images/og/product-analytics.jpg" />
-            <Editor>
+            <SEO
+                title={seo?.title || 'Webhooks - PostHog'}
+                description={seo?.description}
+                image="/images/og/product-analytics.jpg"
+            />
+            <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <div className="space-y-8">
                     <div>
                         <div className="flex gap-2 items-center">
@@ -30,8 +38,11 @@ export default function Webhooks() {
                             )}
                             <h1 className="!m-0">{name}</h1>
                         </div>
-                        <h2 className="!m-0 pb-2">{overview?.title}</h2>
-                        <p>{overview?.description}</p>
+                        <h2 className="!m-0 pb-2">Send data to external services automatically</h2>
+                        <p>
+                            Trigger actions in external services when events occur in PostHog. Connect to thousands of
+                            tools and services to automate your workflows.
+                        </p>
                     </div>
 
                     {screenshots && (
@@ -75,37 +86,52 @@ export default function Webhooks() {
                         </div>
                     )}
 
-                    {features && features.length > 0 && (
-                        <div>
-                            <h2>Features</h2>
-                            <div className="space-y-6">
-                                {features.map((feature: any, index: number) => (
-                                    <div key={index}>
-                                        <h3 className="text-xl font-semibold mb-2">
-                                            {feature.headline || feature.title}
-                                        </h3>
-                                        <p className="[&>p]:mb-0">{feature.description}</p>
-                                    </div>
-                                ))}
+                    <div>
+                        <h2>Features</h2>
+                        <div className="space-y-6">
+                            <div>
+                                <h3>Real-time event streaming</h3>
+                                <p>
+                                    Send events to external services immediately as they happen. No delays, no batching
+                                    - events are delivered in real-time to your configured endpoints.
+                                </p>
+                            </div>
+                            <div>
+                                <h3>Flexible filtering and routing</h3>
+                                <p>
+                                    Configure which events to send and where to send them. Filter by event properties,
+                                    user properties, or custom conditions to ensure the right data reaches the right
+                                    services.
+                                </p>
+                            </div>
+                            <div>
+                                <h3>Reliable delivery</h3>
+                                <p>
+                                    Built-in retry logic and error handling ensure your webhooks are delivered reliably.
+                                    Monitor delivery status and troubleshoot failed requests.
+                                </p>
+                            </div>
+                            <div>
+                                <h3>Custom payload formatting</h3>
+                                <p>
+                                    Transform event data to match your external service requirements. Map properties,
+                                    add custom fields, and format payloads exactly how you need them.
+                                </p>
+                            </div>
+                            <div>
+                                <h3>Security and authentication</h3>
+                                <p>
+                                    Secure your webhook endpoints with custom headers, API keys, and signature
+                                    verification. Ensure only authorized requests reach your services.
+                                </p>
                             </div>
                         </div>
-                    )}
+                    </div>
                     <OSButton asLink variant="primary" size="md" to="/docs/webhooks" state={{ newWindow: true }}>
                         Learn more about webhooks
                     </OSButton>
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }
-
-export const query = graphql`
-    {
-        mdx(fields: { slug: { eq: "/webhooks" } }) {
-            body
-            frontmatter {
-                title
-            }
-        }
-    }
-`
