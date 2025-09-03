@@ -1,0 +1,121 @@
+---
+title: PostHog as a data warehouse source
+---
+
+Much of your PostHog data is available in the data warehouse by default. This includes data like [events](/docs/data/events), [persons](/docs/data/persons), [sessions](/docs/data/sessions), [groups](/docs/product-analytics/group-analytics), and the [query log](/docs/data/query-log).
+
+Using our [SDKs](/docs/libraries) or [API](/docs/api/capture) to [capture events](/docs/getting-started/send-events), [identify users](/docs/getting-started/identify-users), create groups, and add properties adds data to these tables, that you can query using the [SQL editor](/docs/data-warehouse/query).
+
+## PostHog data warehouse tables
+
+### `events`
+
+Events are the core unit of data in PostHog, so you'll likely have a lot of them. This also makes the `events` table one of the most useful. 
+
+Some of the columns in the `events` table are:
+
+| Column         | Description                                                        |
+|----------------|--------------------------------------------------------------------|
+| `uuid`         | Unique ID of the event                                             |
+| `event`        | Name of the event                                                  |
+| `properties`   | Object containing all properties of the event (stored as a String). You can see the default properties in [our data docs](/docs/data/events#default-properties). |
+| `timestamp`    | Time the event was captured (ISO 8601 format)                      |
+| `distinct_id`  | Unique identifier tying together events from the same person       |
+| `session_id`   | Unique identifier for the session the event belongs to             |
+| `person_id`    | Unique identifier for the person                                   |
+
+Some products have special event names and properties that can be useful to know. For example:
+
+- [Autocaptured events](/tutorials/hogql-autocapture) are named `$autocapture` and have the `elements_chain` property.
+
+- [LLM analytics](/docs/llm-analytics) captures events like `$ai_generation`, `$ai_span`, `$ai_embedding` with properties like `$ai_model`, `$ai_input_tokens`, and `$ai_total_cost_usd`.
+
+- [Error tracking](/docs/error-tracking) captures `$exception` events with properties like `$exception_list` and `$exception_fingerprint` both with a specific expected schema.
+
+### `persons`
+
+The users behind your events are known as [persons](/docs/data/persons) in PostHog.
+
+Some of the columns in the `persons` table are:
+
+| Column          | Description                                                                                      |
+|-----------------|--------------------------------------------------------------------------------------------------|
+| `id`            | UUID of the person. Relates to `person_id` in the `events` table.                                |
+| `created_at`    | Date and time when the person was first created (ISO 8601 format).                               |
+| `properties`    | Object containing all properties associated with the person (stored as a String).                |
+| `is_identified` | Indicates if the person is identified (`1`) or anonymous (`0`).                                  |
+
+Beyond storing demographic data about your users, the `persons` table is powerful as it can connect to many other tables. For example, the `persons` table can be queried through the `events` using the `person` field like `SELECT person.properties.$initial_browser FROM events`. It can also be [joined to external sources](/docs/data-warehouse/join) to create extended person properties.
+
+### `groups`
+
+Groups enable you to aggregate events based on an entity like an organization, project, or team if you have set up [group analytics](/docs/product-analytics/group-analytics).
+
+Some of the columns in the `groups` table are:
+
+| Column        | Description                                                                                                                                                                        |
+|-------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `index`       | Numeric index of the group type. You can view the group types in the [People tab](https://app.posthog.com/persons). It is zero-based, so the first group type listed there is `0`. |
+| `key`         | Unique string identifier for the group. Relates to one of the group keys on the `events` table, such as `$group_0`, depending on the `index`.                                      |
+| `created_at`  | Date and time when the group was first created (ISO 8601 format).                                                                                                                  |
+| `updated_at`  | Date and time when the group was last updated (ISO 8601 format).                                                                                                                   |
+| `properties`  | Object containing all properties associated with the group (stored as a String).                                                                                                   |
+
+### `sessions` 
+
+If you are using PostHog's [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript Web SDK](/docs/libraries/js), PostHog automatically captures session data which you can query using the `sessions` table.
+
+Unlike the other tables, the `sessions` table stores all its properties as separate columns. This means there are a lot more of them. Some of them include:
+
+| Column                      | Description                                                                                  |
+|-----------------------------|----------------------------------------------------------------------------------------------|
+| `session_id`                | Unique identifier for the session. Relates to `$session_id` on the `events` table.           | 
+| `distinct_id`               | Unique identifier for the user (person). Relates to `$distinct_id` on the `events` table.    |
+| `$start_timestamp`          | Timestamp when the session started                                                           |
+| `$end_timestamp`            | Timestamp when the session ended                                                             |
+| `$num_uniq_urls`            | Number of unique URLs visited in the session                                                 |
+| `$entry_current_url`        | URL of the page where the session started                                                    |
+| `$end_current_url`          | URL of the page where the session ended                                                      |
+| `$entry_referring_domain`   | Referring domain for the session's entry                                                     |
+| `$entry_utm_source`         | UTM source for the session's entry                                                           |
+| `$pageview_count`           | Number of pageviews in the session                                                           |
+| `$autocapture_count`        | Number of autocapture events in the session                                                  |
+| `$screen_count`             | Number of screen events in the session                                                       |
+| `$channel_type`             | Channel type for the session's entry (e.g., organic, paid)                                   |
+| `$session_duration`         | Duration of the session in seconds                                                           |
+| `$is_bounce`                | Indicates if the session was a bounce (`1` = bounce, `0` = not)                              |
+| `$last_external_click_url`  | Last external click URL in the session                                                       |
+| `$vitals_lcp`               | Largest Contentful Paint (LCP) web vital for the session                                     |
+| [...](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties |
+
+The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
+
+### `query_log`
+
+The `query_log` table provides access to query execution metadata and performance metrics. You can learn more about it in the [query log data docs](/docs/data/query-log).
+
+Like the `sessions` table, the `query_log` table stores all its properties as separate columns. Some of them include:
+
+| Field                        | Description                                                                            |
+|------------------------------|----------------------------------------------------------------------------------------|
+| `event_date`                 | Date when the query was executed                                                       |
+| `event_time`                 | Exact timestamp when query started                                                     |
+| `query_id`                   | Unique identifier for the query                                                        |
+| `endpoint`                   | API endpoint that triggered the query                                                  |
+| `query`                      | The actual HogQL/SQL query that was executed                                           |
+| `query_start_time`           | When query execution began                                                             |
+| `query_duration_ms`          | Query execution time in milliseconds                                                   |
+| `created_by`                 | User ID who initiated the query                                                        |
+| `read_rows`                  | Number of rows processed                                                               |
+| `read_bytes`                 | Bytes read during execution                                                            |
+| `result_rows`                | Number of rows returned                                                                |
+| `result_bytes`               | Size of result set in bytes                                                            |
+| `memory_usage`               | Peak memory usage in bytes                                                             |
+| `exception_code`             | Exception code if the query failed                                                     |
+| `is_personal_api_key_request`| Whether request used personal API key                                                  |
+| `api_key_mask`               | Masked API key used                                                                    |
+| `cpu_microseconds`           | CPU time consumed (for computation, excluding waiting)                                 |
+| `RealTimeMicroseconds`       | Wall clock time in microseconds                                                        |
+| [...](/docs/data/query-log#table-schema) | See [full list](/docs/data/query-log#table-schema) of query log properties |
+
+The `query_log` table is the only table with data on you and your team's internal usage of PostHog, making it useful for security, governance, and performance optimization.

@@ -96,7 +96,7 @@ left join big_events on big_events.distinct_id = sb_users.email
 
 We could also PostHog person properties or a Supabase table to these by joining more tables to this query. 
 
-> **Tip:** You can also set up a join between PostHog's `persons` table and your Supabase `users` table. Go to the data warehouse tab, click the three dots next to the `persons` source, and click **Add join**. This enables you to use Supabase `users` data wherever you can use persons.
+> **Tip:** You can also set up a join between [PostHog's `persons` table](/docs/data-warehouse/sources/posthog#persons) and your Supabase `users` table. Go to the data warehouse tab, click the three dots next to the `persons` source, and click **Add join**. This enables you to use Supabase `users` data wherever you can use persons.
 > <ProductScreenshot imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_01_at_14_42_17_2x_21724552d8.png" imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_01_at_14_42_45_2x_1d6608820e.png" alt="Setting up a join between PostHog's persons table and Supabase users table" classes="rounded" />
 
 ### Usage by paid users
