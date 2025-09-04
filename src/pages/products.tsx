@@ -175,6 +175,15 @@ const productDetails: Record<
         goals: ['Find errors', 'Solve performance issues'],
         complexity: ['People who code'],
     },
+    'llm-analytics': {
+        freeTierLimit: '100,000',
+        denominator: 'event',
+        startingPrice: '$0.00006',
+        description: 'Build AI features with full visibility – both in development and production',
+        roles: ['Product engineers', 'Startups & founders'],
+        goals: ['Understand user behavior', 'Improve product'],
+        complexity: ['People who code'],
+    },
     max: {
         description: 'AI-powered product analyst and assistant',
         roles: ['Product people', 'Startups & founders', 'Marketing', 'Sales'],

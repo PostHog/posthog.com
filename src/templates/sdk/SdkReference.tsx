@@ -17,20 +17,20 @@ import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
 import Chip from '../../components/Chip'
 
-interface Parameter {
+export interface Parameter {
     name: string
     type: string
     description: string
     isOptional: boolean
 }
 
-interface Example {
+export interface Example {
     id: string
     name: string
     code: string
 }
 
-interface SdkFunction {
+export interface SdkFunction {
     id: string
     title: string
     description: string
@@ -47,14 +47,14 @@ interface SdkFunction {
     releaseTag?: string
 }
 
-interface Class {
+export interface Class {
     id: string
     title: string
     description: string
     functions: SdkFunction[]
 }
 
-interface SdkReferenceData {
+export interface SdkReferenceData {
     id: string
     hogRef: string
     info: {
@@ -69,7 +69,7 @@ interface SdkReferenceData {
     categories: string[]
 }
 
-interface PageContext {
+export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
 }
@@ -257,12 +257,14 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
 
                                         <span className="text-primary/30 dark:text-primary-dark/30">|</span>
                                         <Link
-                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow hidden xs:inline"
                                             to={fullReference.info.specUrl}
                                         >
-                                            Edit this page
+                                            Edit page
                                         </Link>
-                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                        <span className="text-primary/30 dark:text-primary-dark/30 hidden xs:inline">
+                                            |
+                                        </span>
                                         <CopyMarkdownActionsDropdown
                                             markdownContent={JSON.stringify(fullReference, null, 2)}
                                             pageUrl={location.href || ''}

@@ -38,7 +38,7 @@ type LibraryFeatures = {
     sessionRecording: boolean
     userIdentification: boolean
     surveys: boolean
-    llmObservability: boolean
+    llmAnalytics: boolean
     errorTracking: boolean
 }
 
@@ -182,7 +182,7 @@ const query = graphql`
                 featureFlags
                 groupAnalytics
                 surveys
-                llmObservability
+                llmAnalytics
                 errorTracking
             }
         }

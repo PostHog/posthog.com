@@ -1,0 +1,242 @@
+---
+title: Query log
+sidebar: Docs
+showTitle: true
+---
+
+The `query_log` table in PostHog's [data warehouse](/docs/data-warehouse/sources/posthog) provides access to query execution metadata and performance metrics. This table is built on top of the ClickHouse `system.query_log` table and offers a simplified, team-filtered interface for analyzing query performance. It filters for completed HogQL queries for your team.
+
+It provides data that enables you to:
+
+- Monitor query performance and resource usage
+- Debug slow or failing queries  
+- Analyze query patterns and usage metrics
+- Track resource consumption (CPU, memory, I/O)
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Querying the query log efficiently" type="fyi">
+  
+Because the query log can be so large, it's important to query it efficiently.
+
+- Use date/time filters to limit query scope for better performance
+- Consider using `event_date` for efficient partitioning
+- Large time ranges may require pagination for complex queries
+
+</CalloutBox>
+
+## Table schema
+
+### Core fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `event_date` | Date | Date when the query was executed |
+| `event_time` | DateTime | Exact timestamp when query started |
+| `query_id` | String | Unique identifier for the query |
+| `endpoint` | String | API endpoint that triggered the query |
+| `query` | String | The actual HogQL/SQL query that was executed |
+| `query_start_time` | DateTime | When query execution began |
+| `query_duration_ms` | Integer | Query execution time in milliseconds |
+| `hogql_name` | String | Human-readable name for the query |
+| `created_by` | Integer | User ID who initiated the query |
+| `status` | String | Query status (QueryFinish, ExceptionWhileProcessing, etc.) |
+
+### Performance metrics
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `read_rows` | Integer | Number of rows processed |
+| `read_bytes` | Integer | Bytes read during execution |
+| `result_rows` | Integer | Number of rows returned |
+| `result_bytes` | Integer | Size of result set in bytes |
+| `memory_usage` | Integer | Peak memory usage in bytes |
+| `cpu_microseconds` | Integer | CPU time consumed (for computation, excluding waiting) |
+| `RealTimeMicroseconds` | Integer | Wall clock time in microseconds |
+
+### S3 storage metrics
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `S3ListObjects` | Integer | Number of S3 list operations |
+| `S3HeadObject` | Integer | Number of S3 head operations |
+| `S3GetObjectAttributes` | Integer | Number of S3 get attributes calls |
+| `S3GetObject` | Integer | Number of S3 get operations |
+| `ReadBufferFromS3Bytes` | Integer | Bytes read from S3 |
+
+### Access control
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `is_personal_api_key_request` | Boolean | Whether request used personal API key |
+| `api_key_label` | String | Label of the API key used |
+| `api_key_mask` | String | Masked API key used |
+
+## Query log use cases and examples
+
+### Performance optimization
+
+You can use the query log to identify slow queries. For example, to find slowest queries in the last 24 hours:
+
+```sql
+SELECT 
+    query_duration_ms,
+    hogql_name,
+    query_start_time,
+    read_rows,
+    memory_usage,
+    cpu_microseconds / 1e6 as cpu_sec
+FROM query_log 
+WHERE event_time >= now() - INTERVAL 1 DAY
+ORDER BY query_duration_ms DESC
+LIMIT 10
+```
+
+You can also use the query log for resource analysis. For example, to analyze resource consumption by API endpoint:
+
+```sql
+SELECT 
+    endpoint,
+    count() as query_count,
+    avg(query_duration_ms) as avg_duration,
+    avg(memory_usage) as avg_memory,
+    sum(read_bytes) as total_bytes_read,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec
+FROM query_log 
+WHERE event_date = today()
+GROUP BY endpoint
+ORDER BY avg_duration DESC
+```
+
+You can do something similar to track S3 operations and data transfer (applies to data warehouse queries, imported data, materialized views):
+
+```sql
+SELECT 
+  event_date,
+  sum(S3GetObject) as get_operations,
+  sum(S3ListObjects) as list_operations,
+  sum(ReadBufferFromS3Bytes) / 1024 / 1024 as mb_read_from_s3
+FROM query_log 
+WHERE event_time >= now() - INTERVAL 30 DAY
+GROUP BY event_date
+ORDER BY event_date DESC
+```
+
+### Debugging and troubleshooting
+
+The query log can help you find failing queries and understand failure patterns. 
+
+```sql
+SELECT 
+  query_start_time,
+  hogql_name,
+  endpoint,
+  query_duration_ms,
+  substring(query, 1, 100) as query_preview
+FROM query_log 
+WHERE status IN ('ExceptionWhileProcessing', 'ExceptionBeforeStart')
+  AND event_time >= now() - INTERVAL 1 DAY
+ORDER BY query_start_time DESC
+```
+
+The benefit of this is that you can see the actual query that was executed and the error that was returned.
+
+### Usage analytics
+
+The query log lets you see what types of queries and usage patterns are most popular in your project. For example, to track query activity by user:
+
+```sql
+SELECT 
+    created_by,
+    count() as queries_run,
+    avg(query_duration_ms) as avg_duration,
+    max(query_duration_ms) as max_duration
+FROM query_log 
+WHERE event_time >= now() - INTERVAL 7 DAY
+GROUP BY created_by
+ORDER BY queries_run DESC
+```
+
+
+### API key access tracking
+
+This can also be useful to track API access patterns and permissions for security or compliance purposes.
+
+For example, you can compare access patterns between personal API keys vs other methods.
+
+```sql
+SELECT
+    is_personal_api_key_request,
+    count() as query_count,
+    count(DISTINCT created_by) as unique_users,
+    avg(query_duration_ms) as avg_duration,
+    sum(read_bytes) / 1024 / 1024 as total_mb_read,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec
+FROM query_log
+WHERE event_time >= now() - INTERVAL 7 DAY
+GROUP BY is_personal_api_key_request
+ORDER BY query_count DESC
+```
+
+For more specific tracking, you can monitor personal API key usage by specific keys (`api_key_mask` and `api_key_label` are only available when `is_personal_api_key_request` is `true`).
+
+```sql
+SELECT
+    api_key_label,
+    api_key_mask,
+    count() as queries_run,
+    avg(query_duration_ms) as avg_duration_ms,
+    sum(read_rows) as total_rows_processed,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec,
+    min(query_start_time) as first_access,
+    max(query_start_time) as last_access
+FROM query_log
+WHERE is_personal_api_key_request = true
+  AND event_time >= now() - INTERVAL 24 HOUR
+GROUP BY api_key_label, api_key_mask
+ORDER BY queries_run DESC
+```
+
+To understand which keys are most active, you can see daily personal API key usage stats for the last 30 days.
+
+```sql
+SELECT
+    event_date,
+    count() as daily_queries,
+    count(DISTINCT api_key_mask) as unique_api_keys,
+    avg(query_duration_ms) as avg_duration_ms,
+    avg(memory_usage) / 1024 / 1024 as avg_mb_memory,
+    sum(read_bytes) / 1024 / 1024 as total_mb_read,
+    sum(cpu_microseconds / 1e6) as total_cpu_sec
+FROM query_log
+WHERE is_personal_api_key_request = true
+  AND event_time >= now() - INTERVAL 30 DAY
+GROUP BY event_date
+ORDER BY event_date DESC
+```
+
+## Query log and its relationship to internal tables
+
+> **Note:** This section is mostly useful for the internal PostHog team.
+
+The `query_log` table is a virtual table that:
+
+- Maps to the underlying `query_log_archive` ClickHouse table, which contains all system queries, not filtered by team
+- Automatically filters queries by `team_id` for data isolation
+- Only shows HogQL queries (`lc_query__kind = 'HogQLQuery'`)
+- Provides simplified field names and data types
+
+This is similar to: 
+
+- **System tables** which access ClickHouse system information for broader analysis
+- **Events tables** which correlate query performance with user activity patterns
+
+### Technical architecture of the query log
+
+```
+system.query_log (ClickHouse system table)
+    ↓ (materialized view)
+query_log_archive (persistent storage)
+    ↓ (HogQL mapping/filtering)
+query_log (HogQL table - what users access)
+```

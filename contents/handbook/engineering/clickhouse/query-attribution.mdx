@@ -109,7 +109,7 @@ We use at least 42 unique tags:
 
 **Get tag frequency**
 
-```SQL
+```SQL runInPostHog=false
 SELECT
     arrayJoin(JSONExtractKeys(log_comment)) AS tag_key,
     count() AS occurrences
@@ -125,7 +125,7 @@ ORDER BY occurrences DESC;
 
 **Get tag type, number of occurrences and values**
 
-```SQL
+```SQL runInPostHog=false
 SELECT
     {{tag_name}} AS tag_name,
     JSONType(log_comment, {{tag_name}}) AS value_type,

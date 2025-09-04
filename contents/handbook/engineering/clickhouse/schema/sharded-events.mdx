@@ -8,7 +8,7 @@ In this document, we'll be dissecting the state of the table at the time of writ
 
 ## Schema
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE sharded_events
 (
     uuid UUID,
@@ -53,13 +53,13 @@ The table is sharded by `sipHash64(distinct_id)`
 
 The ORDER BY clause for this table is:
 
-```sql
+```sql runInPostHog=false
 ORDER BY (team_id, toDate(timestamp), event, cityHash64(distinct_id), cityHash64(uuid))
 ```
 
 Most insight queries have filters along the lines of:
 
-```sql
+```sql runInPostHog=false
 WHERE team_id = 2
   AND event = '$pageview'
   AND timestamp > '2022-11-03 00:00:00'

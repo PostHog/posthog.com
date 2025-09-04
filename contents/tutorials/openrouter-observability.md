@@ -169,7 +169,7 @@ Now, when you run `npm run dev` again, you can choose your model, enter your mes
 
 ## 3. Viewing generations in PostHog
 
-After generating a few responses with different models, go to PostHog and enable the [LLM observability feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability). Once enabled, you can access the [LLM analytics dashboard](https://app.posthog.com/llm-analytics) to see:
+After generating a few responses with different models, go to PostHog to access the [LLM analytics dashboard](https://app.posthog.com/llm-analytics) to see:
 
 - Overview of all AI interactions
 - Cost breakdowns by model

@@ -394,7 +394,7 @@ export const QuestLog: React.FC<{
 
                     {/* Quest List - Sticky Container */}
                     <div
-                        className="quest-sidebar bg-light dark:bg-dark"
+                        className="quest-sidebar z-30 bg-light dark:bg-dark"
                         style={{
                             top: `${headerHeight}px`,
                         }}

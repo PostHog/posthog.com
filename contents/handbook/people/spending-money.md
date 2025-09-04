@@ -14,7 +14,7 @@ If it's a trivial expense, just buy it. We provide you with a company card to co
 
 > Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
 
-You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. 
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. Please remember that you need to submit receipts for *all* purchases using your Revolut.
 
 For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
 
@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 ## Saving receipts
 
-Make sure you *keep copies for all receipts $75 or more*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />.
+Make sure you *keep copies for all receipts $75 or more* for charges **on Brex**. You must save _all_ receipts for charges on Revolut. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />.
 
 You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
 
@@ -150,7 +150,13 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 
-Every person has $100 per month for personal software - this is software that is purely for your individual use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+Every person has $100 per month for individual software use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+
+### AI tools & API
+
+This is expected to be a dedicated monthly budget to help you enhance your work productivity and empower you to ship faster. This budget of USD 300 per month for the Tech/R&D department, is separate from your regular software subscription. It is meant for work related tools only, such as AI coding assistants, API credits, other AI tool subscriptions. 
+
+These budgets shouldn't stop us from innovating, and we can approve an increase on a case-by-case basis.
 
 ### Optional software
 

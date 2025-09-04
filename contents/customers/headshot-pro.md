@@ -31,7 +31,7 @@ After asking for recommendations from other founders, Danny narrowed his list to
 
 During the beta [our Data Warehouse team](/teams/data-warehouse) were naturally curious for feedback, so it wasn’t long before they reached out to speak with Danny about what he needed.
 
-“Headshot Pro wasn’t using a data warehouse before PostHog,” says [Eric](/community/profiles/30209), our data warehouse team lead. “Instead, they were analyzing data in the respective platforms — and they really wanted to analyze their marketing data alongside product data. So, we helped them [get data from Google Adwords into PostHog](/docs/data-warehouse/tutorials).”
+“Headshot Pro wasn’t using a data warehouse before PostHog,” says [Eric](/community/profiles/30209), our data warehouse team lead. “Instead, they were analyzing data in the respective platforms — and they really wanted to analyze their marketing data alongside product data. So, we helped them [get data from Google Adwords into PostHog](/docs/data-warehouse/sources/google-ads).”
 
 <BorderWrapper>
 <Quote
