@@ -573,8 +573,8 @@ export const handbookSidebar = [
                 url: '/handbook/people/feedback',
             },
             {
-                name: 'Clubs',
-                url: '/handbook/people/clubs',
+                name: 'BookHog',
+                url: '/handbook/people/bookhog',
             },
             {
                 name: 'Lore',
