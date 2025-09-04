@@ -1467,6 +1467,10 @@ export const handbookSidebar = [
                         name: 'New hire onboarding exercise',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
                     },
+                    {
+                        name: 'New customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding.md',
+                    },
                 ],
             },
             {
