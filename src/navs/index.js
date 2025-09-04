@@ -4038,6 +4038,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/',
                         },
                         {
+                            name: 'PostHog as a source',
+                            url: '/docs/data-warehouse/sources/posthog',
+                        },
+                        {
                             name: 'Managed',
                         },
                         {
