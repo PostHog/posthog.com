@@ -333,7 +333,7 @@ export default function Handbook({
 }) {
     const {
         body,
-        frontmatter: { title, seo },
+        frontmatter: { title, seo, tableOfContents: frontmatterTableOfContents },
         fields: { slug, contributors, appConfig, templateConfigs, commits },
         excerpt,
     } = post
@@ -386,7 +386,7 @@ export default function Handbook({
             <ReaderView
                 body={{ type: 'mdx', content: body }}
                 title={title}
-                tableOfContents={tableOfContents}
+                tableOfContents={frontmatterTableOfContents || tableOfContents}
                 mdxComponents={components}
                 commits={commits}
                 filePath={post.parent?.relativePath}
@@ -464,6 +464,11 @@ export const query = graphql`
                 }
             }
             frontmatter {
+                tableOfContents {
+                    depth
+                    url
+                    value
+                }
                 title
                 description
                 showTitle
