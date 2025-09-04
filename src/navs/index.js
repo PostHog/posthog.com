@@ -573,8 +573,8 @@ export const handbookSidebar = [
                 url: '/handbook/people/feedback',
             },
             {
-                name: 'Clubs',
-                url: '/handbook/people/clubs',
+                name: 'BookHog',
+                url: '/handbook/people/bookhog',
             },
             {
                 name: 'Lore',
@@ -1467,6 +1467,10 @@ export const handbookSidebar = [
                         name: 'New hire onboarding exercise',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
                     },
+                    {
+                        name: 'New customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding.md',
+                    },
                 ],
             },
             {
@@ -1998,6 +2002,16 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/libraries/node',
+                            children: [
+                                {
+                                    name: 'Setup and features',
+                                    url: '/docs/libraries/node',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-node',
+                                },
+                            ],
                         },
                         {
                             name: 'PHP',
@@ -4039,6 +4053,10 @@ export const docsMenu = {
                         {
                             name: 'Overview',
                             url: '/docs/data-warehouse/sources/',
+                        },
+                        {
+                            name: 'PostHog as a source',
+                            url: '/docs/data-warehouse/sources/posthog',
                         },
                         {
                             name: 'Managed',
