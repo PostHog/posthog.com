@@ -193,9 +193,18 @@ FROM events
 WHERE matchesAction('clicked homepage button')
 ```
 
-### Links
+### HTML tags and links
 
-URLs are automatically clickable in the **Table** visualization, but you can also set a custom link using an `<a>` tag.
+These HTML tags are currently supported, but for security reasons, none of them support attributes right now: 
+
+- `<div>`, `<p>`, `<span>`, `<pre>`, `<code>`
+- `<em>`, `<strong>`, `<b>`, `<i>`, `<u>`
+- `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`
+- `<ul>`, `<ol>`, `<li>`
+- `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`
+- `<blockquote>`, `<hr>`
+
+Most useful is the `<a>` tag for creating links. URLs are automatically clickable in the **Table** visualization, but you can also set a custom link using an `<a>` tag.
 
 ```sql
 select 

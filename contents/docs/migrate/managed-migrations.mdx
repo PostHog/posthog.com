@@ -33,6 +33,10 @@ Direct imports enable you to migrate data directly from Mixpanel or Amplitude wi
 
 Each direct import job supports a maximum date range of one year. To migrate data spanning more than one year, run multiple jobs that cover smaller, consecutive ranges.
 
+When setting up an Amplitude direct import, you can enable the **"Generate identify events to link user IDs with device IDs"** checkbox. This will automatically generate `$identify` events whenever a new device ID is associated with a user ID from an event. These identify events help maintain proper user identity linking in PostHog by connecting anonymous device IDs with known user IDs.
+
+> **Note:** Groups are not yet supported in Amplitude migrations. Only user events and properties will be imported.
+
 See the [Event transformations](#event-transformations) section for full mapping details and examples. You should also consider running a small test migration first to preview transformations.
 
 <CalloutBox icon="IconWarning" title="Caveat" type="caution">

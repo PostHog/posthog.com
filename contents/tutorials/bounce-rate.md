@@ -67,7 +67,7 @@ WHERE
     $entry_pathname = '/'
 ```
 
-The query above will only work for sessions that started on the home page. If we want to find the bounce rate for the `/pricing` page (not only for sessions that started on that page), we'll need to join on the `events` table and filter for pageviews that match the URL.
+The query above will only work for sessions that started on the home page. If we want to find the bounce rate for the `/pricing` page (not only for sessions that started on that page), we'll need to join on the [`events` table](/docs/data-warehouse/sources/posthog) and filter for pageviews that match the URL.
 
 ```sql
 SELECT

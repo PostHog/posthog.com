@@ -62,6 +62,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 opt_in_site_apps: true,
                                 __preview_remote_config: true,
                                 __preview_flags_v2: true,
+                                __preview_lazy_load_replay: true,
                                 cookieless_mode: navigator.userAgent.includes("Firefox/") ? "on_reject" : undefined,
                             })
                             `,
