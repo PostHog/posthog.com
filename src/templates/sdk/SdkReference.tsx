@@ -230,7 +230,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     ])
 
     return (
-        <ReaderView>
+        <ReaderView markdownContent={JSON.stringify(fullReference, null, 2)}>
             <SEO title={`${fullReference.info.title} - PostHog`} />
             <section>
                 <div className="mb-8 relative">

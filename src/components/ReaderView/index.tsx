@@ -69,6 +69,7 @@ interface ReaderViewProps {
     onSearch?: (query: string) => void
     showSurvey?: boolean
     parent?: MenuItem
+    markdownContent?: string
 }
 
 interface BackgroundImageOption {
@@ -326,6 +327,7 @@ export default function ReaderView({
     onSearch,
     showSurvey = false,
     parent,
+    markdownContent,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -349,6 +351,7 @@ export default function ReaderView({
                 onSearch={onSearch}
                 showSurvey={showSurvey}
                 parent={parent}
+                markdownContent={markdownContent}
             >
                 {children}
             </ReaderViewContent>
@@ -477,6 +480,7 @@ function ReaderViewContent({
     onSearch,
     showSurvey = false,
     parent,
+    markdownContent,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -777,9 +781,9 @@ function ReaderViewContent({
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
-                        {body?.type === 'mdx' && (
+                        {(markdownContent || body?.type === 'mdx') && (
                             <CopyMarkdownActionsDropdown
-                                markdownContent={body.content}
+                                markdownContent={markdownContent || body.content}
                                 pageUrl={`https://posthog.com${appWindow?.path}`}
                             />
                         )}
