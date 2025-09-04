@@ -145,10 +145,13 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const [minimizing, setMinimizing] = useState(false)
     const [animating, setAnimating] = useState(true)
 
-    const parent = (appMenu as Menu).find(({ children, url }) => {
-        const currentURL = item?.path
-        return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
-    }) || { name: 'Default', children: [] }
+    const parent =
+        (appMenu as Menu).find(({ children, url }) => {
+            const currentURL = item?.path
+            return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
+        }) ||
+        appMenu.find(({ url }) => url === `/${item?.path?.split('/')[1]}`) ||
+        appMenu[0]
 
     const internalMenu = parent?.children || []
 
