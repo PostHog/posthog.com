@@ -78,7 +78,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Pipeline sources | [Team Data Warehouse][Team Data Warehouse] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
 | Project home page | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/home</span> |
-| Property filters | [Team Product UX][Team Product UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
+| Property filters | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
 | Query performance | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Quota limiting | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/quota-limiting</span>  |
@@ -89,7 +89,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Session analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
-| Settings (personal & project) | Shared responsibility |  <span class="lemon-tag gh-tag">feature/settings</span> |
+| Settings (personal & project) | [Team Platform UX][Team Platform UX] for the structure, all teams manage their own settings |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SQL editor | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/sql-editor</span> |
 | SQL insights | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/sql-insights</span> |
 | SSO | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
@@ -97,7 +97,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Subscriptions | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/subscriptions</span> |
 | Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
 | Table exports | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/table-exports</span> |
-| Taxonomic filters | [Team Product UX][Team Product UX] | <span class="lemon-tag gh-tag">feature/taxonomic-filters</span> |
+| Taxonomic filters | [Team Platform UX][Team Platform UX] | <span class="lemon-tag gh-tag">feature/taxonomic-filters</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Usage reports | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
 | Variables | [Team Product Analytics][Team Product Analytics] | <span class="lemon-tag gh-tag">feature/variables</span>  |
