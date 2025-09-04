@@ -3935,6 +3935,30 @@ export const docsMenu = {
                     color: 'purple',
                     featured: true,
                 },
+                {
+                    name: 'SDK references',
+                    url: '/docs/error-tracking/sdk-references',
+                    icon: 'IconBox',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'JavaScript web SDK',
+                            url: '/docs/references/posthog-js?filter=error-tracking',
+                        },
+                        {
+                            name: 'Node.js SDK',
+                            url: '/docs/references/posthog-node?filter=error-tracking',
+                        },
+                        {
+                            name: 'Python SDK',
+                            url: '/docs/references/posthog-python?filter=error-tracking',
+                        },
+                        {
+                            name: 'Error tracking API',
+                            url: '/docs/api',
+                        },
+                    ],
+                },
             ],
         },
         {
