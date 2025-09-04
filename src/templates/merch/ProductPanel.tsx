@@ -12,7 +12,7 @@ import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { getShopifyImage } from 'gatsby-source-shopify'
+import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
 import SizeGuide from './SizeGuide'
 
@@ -47,7 +47,11 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
     const handleAddToCart = () => {
         setIsAdding(true)
         setTimeout(() => {
-            addToCart(variantForCart || product.variants[0], quantity)
+            const cartItem = variantForCart || product.variants[0]
+            if (product.kit) {
+                cartItem.kit = true
+            }
+            addToCart(cartItem, quantity)
             setIsCart(true)
             setIsAdding(false)
         }, 500)
@@ -72,7 +76,16 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <p className="leading-tight">{subtitle}</p>
                 {selectedVariant && (
                     <p className="text-lg">
-                        <Price price={selectedVariant.price.amount} />
+                        {product.kit ? (
+                            <>
+                                <span className="line-through">
+                                    <Price price={selectedVariant.price.amount} />
+                                </span>{' '}
+                                <span className="text-green font-bold">FREE</span>
+                            </>
+                        ) : (
+                            <Price price={selectedVariant.price.amount} />
+                        )}
                     </p>
                 )}
             </div>
@@ -105,7 +118,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <SizeGuide title={product.title} />
 
-            <Quantity value={quantity} onChange={setQuantity} />
+            <Quantity value={quantity} onChange={setQuantity} disabled={product.kit} />
 
             <CallToAction
                 disabled={loading || outOfStock}
@@ -132,7 +145,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </>
             </CallToAction>
 
-            {!loading && outOfStock && <BackInStockForm variant={variantForCart} />}
+            {!loading && outOfStock && <BackInStockForm variant={variantForCart} product={product} />}
 
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
@@ -148,7 +161,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     </p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
                         {product.imageProducts?.map((product) => {
-                            const { handle, featuredImage } = product
+                            const { handle } = product
+                            const featuredImage = (product as any).featuredImage
                             return (
                                 <li key={handle}>
                                     <a href={`?product=${handle}`}>

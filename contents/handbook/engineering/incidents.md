@@ -6,19 +6,22 @@ showTitle: true
 
 Incidents are going to happen.
 
+If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+
 ## When to raise an incident
 
-**When in doubt, raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong.
+> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
 
-To declare an incident, type `/incident` anywhere in Slack. This will create a new channel and send updates.
+To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will  trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
 
-Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
+Once an incident is raised an automatic workflow begins that will help you summarize the issue and escalate it appropriately. 
 
 Some things that should definitely be an incident
 
 - `us.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
 - No insights can be created
-- Feature flags are not being returned at all, or `/decide` is down
+- Feature flags are not being returned at all, or `/flags` is down
+- Any feature is 'down' and users are unable to access their existing data through it (this can be a bug and doesn't have to be an infra incident)
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
 
 Things that _shouldn’t_ be an incident
@@ -28,7 +31,7 @@ Things that _shouldn’t_ be an incident
 - Unable to save insights, create feature flags
 - Expected disruption which happens as part of scheduled maintenance
 
-> Planning some maintenance? Check the [announcements](/handbook/growth/words-and-pictures/product-announcements) section instead.
+> Planning some maintenance? Check the [announcements](/handbook/growth/brand/product-announcements) section instead.
 
 ### Security-specific guidance
 
@@ -42,6 +45,8 @@ Some examples of security-related issues that warrant raising an incident includ
 - Receiving a credible report of a vulnerability or exploit affecting company systems
 
 **When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
+
+> **Need to make a security advisory?** We have a page for that with [more detail on the process for security vulnerabilities](/handbook/company/security-advisories). 
 
 ### Incident severity
 
@@ -89,7 +94,7 @@ Examples
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
 
-- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Comms can assist in running communications if required.
+- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
     - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.
@@ -108,14 +113,15 @@ When handling a security incident, please align with the incident responder team
 security issues. E.g. it could not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
 If an early communication is outweighing those kind of downsides or helps our customers if affected, then do it!
 
-
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
 When updating the status page, make sure to mark the affected component appropriately (for example during an ingestion delay, setting `US Cloud 🇺🇸` / `Event and Data Ingestion` to `Degraded Performance`). This allows PostHog's UI to gently surface incidents with a "System status" warning on the right. Only users in the affected region will see the warning:
 
 <img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f" />
 
-Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Comms will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
+Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Product Marketers will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
+
+#### When a customer is causing an incident
 
 In the case that we need to update a _specific_ customer, such as when an individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 
@@ -144,10 +150,10 @@ When we’ve identified the root cause of the issue and put a fix in place. End 
 
 ## What happens after an incident? (Incident analysis)
 
-1. Schedule a half hour incident review, invite <engineering@posthog.com>
+1. If the impact was high, or the incident recurs frequently, proceed to the next step to document the incident and hold an incident-review meeting. If this is a low-/no-impact incident, it's recommended to opt-out of the post-incident flow - we only want to document relevant incidents and keep our processes lean!
 2. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
-3. Hold the meeting.
-4. If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+3. Hold a ~30 min meeting discussing the above
+4. If an incident had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 All critical incidents should have a PR in the post-mortem repository + a scheduled meeting. All major incidents should have a PR in the post-mortem repository, and optionally a scheduled meeting.
 

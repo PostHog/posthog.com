@@ -14,11 +14,13 @@ Our [team](/people) is spread across the world, and so are our new joiners. In o
 
 ## Onboarding checklist
 
-This is maintained as an issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding issue for each new joiner.
+This is maintained as an issue template in GitHub, <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md">which you can view here</PrivateLink>. The People team will create a new onboarding issue for each new joiner.
 
 ### Onboarding email
 
 We send an introductory email to all new hires to welcome them to the team and ease them in the some of the essential actions we need them to take. This needs communicating openly, as users may not be able to access the `company-internal` repo yet. So, we send them an email. 
+
+> Once you've joined PostHog, we will **not** use email for communicating with each other. For example, James or Tim will never ask you to do something critical over email only – they'll always confirm it over Slack, and so will everyone else. Be extremely cautious of direct emails from James, Tim, or other people of PostHog. 
 
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we send email using Gmail Layouts. You can access Gmail Layouts with this button: 
 
@@ -62,14 +64,15 @@ In these cases, the process is:
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
 
-While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite. Some considerations to reduce the cost:
+While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite, which is $2,000 per person. Some considerations to reduce the cost:
 
   - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
-  - You should not need to plan a social activity
-  - Limit attendees to the members of your Small Team only that you think are needed to make it successful (e.g. if your team is 3+ people, not everyone needs to come - you have Offsites as well)
+  - Consider doing more casual social activities that are less expensive: dinners, drinks etc
+  - You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
+  - The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the the budget. 
   - See if there are any other onboardings at the same time you could pair up with
 
-Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex in USD for any onboardings you are doing. There will of course be some exceptions to this, please just include the reasoning in your brex budget request, and ensure to list who the budget request is for.
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
@@ -123,22 +126,19 @@ We use a number of different tools to organise our work and communicate at PostH
 - PagerDuty
 - Heroku
 - Grafana
-- Sentry
 
 ### Design
 - Figma
 
 ### Ops, People & CS
-- HubSpot - customer CRM
+- Salesforce - customer CRM
 - Zendesk - our support platform
-- Pry - financial modelling
+- Mosaic - financial modelling
 - Carta - cap table management
 - Fondo - US accounting
-- Calendly - external meeting scheduling (e.g. demos, sales)
-- Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
 - Ashby - recruitment
-- Brilliant - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
+- Micromerch - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 
@@ -179,12 +179,12 @@ All new hires should schedule a 30 minute session with the [support engineer clo
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 
-- [ ] [What the role of a support hero is](/handbook/growth/customer-support#engineers-are-support-heroes) and how they can expect to receive tickets/escalations
-- [ ] [An overview of where tickets come from](/handbook/growth/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
+- [ ] [What the role of a support hero is](/handbook/support/customer-support#support-is-done-by-actual-engineers) and how they can expect to receive tickets/escalations
+- [ ] [An overview of where tickets come from](/handbook/support/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
 - [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
 - [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 - [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
-- [ ] [What our SLAs](/handbook/growth/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
+- [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
 - [ ] How to deal with bug reports and feature requests
 - [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
 - [ ] How to avoid duplication of effort in ZenDesk
@@ -215,3 +215,46 @@ Feedback is a really important part of the onboarding process and as a manager i
 These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. It is important for a manager to ensure that they do not wait for one of these check-ins to communicate with an exec team member that there could be issues with the team member passing probation. They should let them know immediately, so that a fair and reasonable plan can be put in action ASAP. 
 
 If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people
+
+## Slack Channels
+
+Below are a list of Slack channels you may find helpful:
+
+### Work-related channels
+
+- `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+- `#brand-mentions`
+- `#do-more-weird`
+- `#newsletters`
+- `#team-exec`
+- `#dev`
+- `#general`
+- `#alerts`
+- `#industry-news`
+
+### Social channels
+
+- `#food` 
+- `#parenting`
+- `#no-context-posthog` 
+- `#random` 
+- `#whereintheworld`
+- `#devel-random`
+- `#books-and-films`
+- `#climbing`
+- `#coffee-snobs`
+- `#dad-jokes`
+- `#fitness`
+- `#hoglife`
+- `#rockets`
+- `#stonks`
+- `#cycling`
+- `#listening-to`
+- `#design-inspiration`
+
+### Location specific channels
+
+- `#london`
+- `#germany`
+- `#sf-bay-area`
+etc.

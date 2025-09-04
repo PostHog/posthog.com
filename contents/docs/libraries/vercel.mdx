@@ -1,0 +1,162 @@
+---
+title: Vercel
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/vercel_fbbc18772c.svg
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+This doc focuses on features unique to the Vercel platform like Vercel Functions, the AI SDK, and the Flags SDK. If you're looking for details on frameworks like [Next.js](/docs/libraries/next-js), [Svelte](/docs/libraries/svelte), [Astro](/docs/libraries/astro), and [Nuxt](/docs/libraries/nuxt-js), see their framework-specific docs.
+
+## Vercel Functions
+
+To use PostHog in Vercel Functions, first install the `posthog-node` library:
+
+```bash
+npm i posthog-node
+```
+
+Afterwards, set up a PostHog instance:
+
+```js
+// app/posthog.js
+import { PostHog } from 'posthog-node'
+
+export default function PostHogClient() {
+  const posthogClient = new PostHog('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    flushAt: 1, // flush immediately in serverless environment
+    flushInterval: 0 // same
+  })
+  return posthogClient
+}
+```
+
+Finally, import and add PostHog to your function. We use the `captureImmediate` method to ensure data is captured before the serverless function shuts down.
+
+```js
+// app/api/hello/route.js
+import PostHogClient from '../../posthog'
+
+export function GET(request) {
+  const posthogClient = PostHogClient()
+  posthogClient.captureImmediate({
+    distinctId: 'ian@posthog.com',
+    event: 'vercel_function_called',
+    properties: {
+      message: 'Hello from Vercel!'
+    }
+  })
+  return new Response('Hello from Vercel!');
+}
+```
+
+We use `captureImmediate` because it guarantees the HTTP request finishes before your function continues (or shuts downs). `flushAt` and `flushInterval` mean events are sent immediately, but `capture` is still async and serverless environments can freeze or terminate before it completes.
+
+Finally, to ensure all your requests complete you can combine PostHog's `shutdown()` method with either Vercel's [`waitUntil` helper method](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) or Next.js's [`after` function](https://nextjs.org/docs/app/api-reference/functions/after). This ensures your events get sent to PostHog, no background processes are left running, and the function doesn't hang forever if something goes wrong.
+
+<MultiLanguage>
+
+```js file=waitUntil
+// app/api/wait/route.js
+import { waitUntil } from '@vercel/functions';
+import PostHogClient from '../../posthog'
+
+export async function POST(request) {
+  const posthogClient = PostHogClient()
+
+  // ... your code ...
+
+  waitUntil(posthogClient.shutdown())
+
+  return new Response('Good job!');
+}
+```
+
+```js file=after
+// app/api/after/route.js
+import { after } from 'next/server'
+import PostHogClient from '../../posthog'
+
+export async function POST(request) {
+  const posthogClient = PostHogClient()
+
+  // ... other code ...
+
+  after(() => posthogClient.shutdown())
+
+  return new Response('Good job!')
+}
+```
+
+</MultiLanguage>
+
+<CalloutBox icon="IconInfo" title="What about the pages router?" type="fyi">
+
+[Vercel recommends](https://vercel.com/docs/functions?framework=nextjs) using route handlers in the app router when using Vercel Functions.
+
+</CalloutBox>
+
+### Error tracking
+
+You can capture errors in Vercel Functions like you would in other Node applications using `posthog.captureException()`.
+
+For more details and a method for automatically capturing errors from Vercel Functions, see our [error tracking installation docs](/docs/error-tracking/installation?tab=Next.js#capturing-server-errors).
+
+## AI SDK and LLM analytics
+
+PostHog can automatically capture generations, traces, spans, and more for Vercel's AI SDK. You can find out how to install it in [the LLM analytics docs](/docs/llm-analytics/installation/vercel-ai). 
+
+## Vercel Flags SDK
+
+You can use the native PostHog adapter for the Vercel Flags SDK to implement and manage feature flags.
+
+> Vercel provides an [example app](https://vercel.com/templates/edge-middleware/posthog-with-flags-sdk-and-next-js) you can deploy if you want to try this out faster.
+
+To set it up, start by installing the Flags SDK PostHog adapter:
+
+```bash
+npm i flags @flags-sdk/posthog
+```
+
+Next, set up the required environment variables. The adapter uses these values as defaults. You can get both of them in [your project settings](https://us.posthog.com/settings/project). 
+
+``` file=.env.local
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_api_client_host>
+```
+
+You can then set up the adapter and flags in a `flags.js|ts` file. You will need to have already created a feature flag in PostHog (I did `example-flag`) and use its key like this:
+
+```js
+// flags.js|ts
+import { flag } from 'flags/next'
+import { postHogAdapter } from '@flags-sdk/posthog'
+ 
+export const exampleFlag = flag({
+  key: 'example-flag',
+  defaultValue: false,
+  adapter: postHogAdapter.isFeatureEnabled(),
+  identify: {
+    distinctId: 'user_distinct_id', // Replace with real ID
+  },
+})
+```
+
+You can use it in your pages like this:
+
+```jsx
+// app/page.jsx
+import { exampleFlag } from "@/flags";
+ 
+export default async function Page() {
+  const exampleValue = await exampleFlag();
+ 
+  return <div>Example Flag: {String(exampleValue)}</div>;
+}
+```
+
+## Further reading
+
+- [Next.js framework docs](/docs/libraries/next-js)
+- [Using Vercel rewrites as a reverse proxy](/docs/advanced/proxy/vercel)

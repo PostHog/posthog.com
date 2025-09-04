@@ -80,9 +80,10 @@ export default function AskMax({
                                 type="secondary"
                                 size="md"
                                 className="group [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
+                                childClassName="whitespace-nowrap"
                                 onClick={handleChatOpen}
                             >
-                                Chat with Max AI
+                                Chat with Max
                                 <IconSidebarOpen className="size-6 inline-block opacity-75 group-hover:opacity-100" />
                             </CallToAction>
                         </div>

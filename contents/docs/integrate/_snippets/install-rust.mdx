@@ -1,10 +1,8 @@
-> **Warning:** This is a community maintained crate, and is still under development. It is not officially supported by PostHog.
-
 Install the `posthog-rs` crate by adding it to your `Cargo.toml`.
 
 ```toml file=Cargo.toml
 [dependencies]
-posthog-rs = "0.2.0"
+posthog-rs = "0.3.5"
 ```
 
 Next, set up the client with your PostHog project key.
@@ -12,5 +10,3 @@ Next, set up the client with your PostHog project key.
 ```rust
 let client = posthog_rs::client(env!("<ph_project_api_key>"));
 ```
-
-> **Note:** Currently, there is no way to customize the host that events are sent to, and we default to `app.posthog.com`

@@ -192,7 +192,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases! Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -240,7 +240,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: false,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13269">In beta</a>',
+            PostHog: true,
         },
     },
     {
@@ -250,7 +250,7 @@ const comparison = [
             LogRocket: false,
             Matomo: false,
             FullStory: false,
-            PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
+            PostHog: true,
         },
     },
     {

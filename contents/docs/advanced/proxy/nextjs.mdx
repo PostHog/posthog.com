@@ -6,10 +6,16 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
 
 If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function and the `skipTrailingSlashRedirect` option to your `next.config.js` file: 
 
@@ -19,16 +25,12 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/ingest/static/:path*",
+        source: "/<ph_proxy_path>/static/:path*",
         destination: "https://us-assets.i.posthog.com/static/:path*",
       },
       {
-        source: "/ingest/:path*",
+        source: "/<ph_proxy_path>/:path*",
         destination: "https://us.i.posthog.com/:path*",
-      },
-      {
-        source: "/ingest/decide",
-        destination: "https://us.i.posthog.com/decide",
       },
     ];
   },
@@ -42,7 +44,7 @@ Then configure the PostHog client to send requests via your rewrite.
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-  api_host: "/ingest",
+  api_host: "/<ph_proxy_path>",
   ui_host: '<ph_app_host>'
 })
 ```

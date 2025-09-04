@@ -19,7 +19,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Wait til you're ready to talk to customers. Jump in sooner than you feel comfortable - it is by far the fastest way to learn. A great, low-risk way to practise is chat to inbound leads who you think aren't going to be high paying customers - the cost of doing badly is very low!
 - Lazily forward customer questions to engineering teams without any context. That's super annoying. Instead:
   - Try to solve the problem yourself, read the Docs etc.
-  - Try asking #max-ai in Slack
+  - Try asking in #ask-max Slack channel
   - Ask the rest of the Sales team
   - _Then_ forward to the relevant engineering team _and add context_ - are they a huge oppo, evaluating or already paying, technical/non-technical etc.? Help them help you
     - Bonus points for: 'I think [this] is the answer, am I on the right track?'
@@ -32,13 +32,12 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) can help you out for access or invites for the following tools:
 
-- [Salesforce](https://posthog.lightning.force.com/)
-- [BuildBetter](https://app.buildbetter.app)
-- [PandaDoc](https://app.pandadoc.com/)
+- [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you
+- [BuildBetter](https://app.buildbetter.app) - use Google SSO
+- [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
 - [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home)
-- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
+- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO, then ask Simon or Dana to upgrade your role so you can create traits and see success metrics
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
-- [Pitch](https://app.pitch.com/) - use Google SSO
 - [QuoteHog](https://quote.posthog.net/) - use Google SSO
 - [Pylon](https://usepylon.com/) - use Slack SSO
 - [Zoom](https://zoom.com/) - use Google SSO
@@ -46,13 +45,17 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances - use Google SSO
 - [PostHog App + Website](https://us.posthog.com/project/2) within PostHog US instance - use Google SSO
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
+- [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
+- [Pitch](https://app.pitch.com/) - ask Simon or Dana to invite you
 - Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
+
+*Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
 
 ## Technical Account Executive ramp
 
 ### Day 1
 
-- Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
+- Meet with [Ben](/community/profiles/32367) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales standup.
@@ -61,16 +64,88 @@ Sales at PostHog isn't like most other software companies! These are some of the
 ### Rest of week 1
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
- - Check out some [Jimminy](https://app.jiminny.eu/dashboard) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
+ - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales. 
+ - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - PostHog integration exercise - by the end of week 1:
+   - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
+   - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
+   - Implement a custom event
+   - Implement user identification
+   - Record a loom showing what you’ve done and share it in our team channel
+
+
+### Week 2
+
+- During your first week, Ben will go through the sales process with you and answer any questions you may have about the playbook. 
+- Shadow more live calls and listen to more Buildbetter recordings
+- Towards the end of the week, schedule a demo and feedback session with Ben.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
+- Get comfortable with the PostHog [Docs](/docs) around our main products. 
+- We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
+- Make sure you're comfortable with the Shared Processes section of the Handbook
+
+### In-person onboarding
+
+Ideally, this will happen in Week 3 or 4, and will be with a few existing team members (depending on where we do it) and will be 3-4 days covering:
+
+- Demo practice session with the team.
+- The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
+- Deep dive on Vitally tracking.
+- No stupid questions session.
+
+### Weeks 3-4
+
+- Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
+- Continue to meet with customers and reaching out to new leads. 
+
+### How do I know if I'm on track?
+
+By the end of month 1:
+ - Be leading customer calls and demos on your own
+ - Have evaluations in flight (with support from the team if needed)
+ - Have closed your first annual deal of any size
+
+By the end of month 2:
+ - Be leading evaluations on your own
+ - Seeing strong conversion from your outreach to new leads
+ - Have closed multiple contracts by this point through the whole process
+
+By the end of month 3:
+- You've built out a strong pipeline and plan, looking 1-2 quarters ahead
+- On track to hit 100% quota by the end of month 6
+
+## Technical Account Manager ramp
+
+### Day 1
+
+- Meet with [Landon](/community/profiles/33186) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
+- Setup relevant [Sales & CS Tools](#sales--cs-tools)
+- If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
+- If you start on a Monday, join your first Sales standup.
+  - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
+
+### Rest of week 1
+
+ - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
+ - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
+ - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Read all of the Sales section in the Handbook, and update it as you learn more.
+ - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
+ - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - PostHog integration exercise - by the end of week 1:
+   - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
+   - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
+   - Implement a custom event
+   - Implement user identification
+   - Record a loom showing what you’ve done and share it in our team channel
 
 ### Week 2
 
 - During your first week, Simon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
-- Shadow more live calls and listen to more [Jiminny](https://app.jiminny.eu/dashboard) recordings. There is [a Jiminny playlist with sub-folders containing Sales calls and PostHog knowledge calls](https://app.jiminny.eu/playlists#playlist-355cdc2a-1326-4ea6-97e3-e7749800fc8a), add to it as you listen! 
-- Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
+- Shadow more live calls and listen to more Buildbetter recordings. 
+- Towards the end of the week, schedule a demo and feedback session with Landon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
@@ -134,7 +209,7 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 
 ### How does support work at PostHog?
 
-- Generally, you're expected to be able to be the first line of support for customers at PostHog. You should be able to answer _most_ yourself - that's why we hire _Technical_ AEs and CSMs after all! #max-ai in Slack can often help too. 
+- Generally, you're expected to be able to be the first line of support for customers at PostHog. You should be able to answer _most_ yourself - that's why we hire _Technical_ AEs and AMs after all! #ask-max in Slack can often help too. 
 - If you can't solve a customer's problem (it happens) then follow our [standard support process](/handbook/support/customer-support).
 
 ### Can I login as a customer?

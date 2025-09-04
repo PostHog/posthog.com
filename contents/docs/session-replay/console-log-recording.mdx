@@ -10,14 +10,16 @@ import Tab from "components/Tab"
 import WebLogging from "./_snippets/web-logging.mdx"
 import AndroidLogging from "./_snippets/android-logging.mdx"
 import ReactNativeLogging from "./_snippets/react-native-logging.mdx"
+import IOSLogging from "./_snippets/ios-logging.mdx"
 
 PostHog can capture console logs, info, warnings, and errors from your application. This is useful for debugging and providing extra context on what is happening in your user's browser or mobile device environment.
 
-<Tab.Group tabs={['Web', 'Android', 'React Native']}>
+<Tab.Group tabs={['Web', 'Android', 'React Native', 'iOS']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>Android</Tab>
         <Tab>React Native</Tab>
+        <Tab>iOS</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -28,6 +30,9 @@ PostHog can capture console logs, info, warnings, and errors from your applicati
         </Tab.Panel>
         <Tab.Panel>
             <ReactNativeLogging />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSLogging />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

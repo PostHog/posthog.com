@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductImages } from './utils'
-import { getShopifyImage } from 'gatsby-source-shopify'
+import { getShopifyImage } from './utils'
 
 type ProductCarouselProps = {
     className?: string

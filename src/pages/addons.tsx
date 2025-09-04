@@ -3,11 +3,9 @@ import React from 'react'
 import { pricingMenu } from '../navs'
 import Layout from 'components/Layout'
 import { IconAdvanced } from '@posthog/icons'
-import { usePlatform } from 'components/Pricing/Platform/usePlatform'
 import useProducts from 'components/Pricing/Products'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { Link } from 'react-scroll'
-import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
 
@@ -39,21 +37,14 @@ const addons = [
                         icon: IconAdvanced,
                     },
                     {
-                        name: 'Enforce event schemas',
+                        name: 'Library of pre-built templates',
                         description:
-                            'By default, PostHog does not enforce schemas on events it receives. However, a transformation could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.',
+                            'Choose from hundreds of pre-built templates, including Slack, Discord, Customer.io, and more.',
                         icon: IconAdvanced,
                     },
                     {
-                        name: 'Label events',
-                        description:
-                            'To facilitate sorting through your events, you can use transformations to determine arbitrary logic to label an event (e.g. by setting a label property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data elsewhere.',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Only pay for saved events',
-                        description:
-                            'PostHog only charges for events that are successfully saved to our platform - events filtered out or dropped by transformations are not counted towards billing quotas.',
+                        name: 'Customizability with Hog',
+                        description: 'Use our powerful Hog language to write completely custom destinations.',
                         icon: IconAdvanced,
                     },
                 ],
@@ -126,26 +117,20 @@ const addons = [
 const Features = ({ title, addonName, features }) => {
     return (
         <React.Fragment>
-            <div className={addonName === 'Teams' ? 'md:col-span-2 pt-8 first:pt-0' : ''}>
+            <div>
                 <h3 className="text-xl pt-1 mb-0">{title}</h3>
             </div>
             {features.map((feature, itemIndex) => (
-                <FeatureItem
-                    key={`${addonName}-${title}-${itemIndex}`}
-                    size={addonName === 'Teams' ? 'small' : ''}
-                    {...feature}
-                />
+                <FeatureItem key={`${addonName}-${title}-${itemIndex}`} {...feature} />
             ))}
         </React.Fragment>
     )
 }
 
 const Addons = (): JSX.Element => {
-    const platform = usePlatform()
     const products = useProducts()
-    const platformAddons = platform.addons.filter((addon) => !addon.inclusion_only)
     const productAddons = products.flatMap((product) => product.addons)
-    const allAddons = [...platformAddons, ...productAddons]
+    const allAddons = productAddons
 
     return (
         <Layout parent={pricingMenu}>
@@ -226,11 +211,7 @@ const Addons = (): JSX.Element => {
                                 )}
                             </div>
                             <div className="md:col-span-8">
-                                <div
-                                    className={`grid gap-x-8 gap-y-3 ${
-                                        name === 'Teams' ? 'md:grid-cols-2' : 'md:grid-cols-1'
-                                    }`}
-                                >
+                                <div className="grid gap-x-8 gap-y-3 md:grid-cols-1">
                                     {customAddon
                                         ? customAddon.features?.map((feature) => {
                                               return (

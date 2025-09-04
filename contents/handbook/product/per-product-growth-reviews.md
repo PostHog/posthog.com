@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](/handbook/growth/growth-engineering/growth-sessions) the [Growth team](/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended by the small team lead, the exec responsible for the team and the product manager. Apart from the small team lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the product manager to schedule, prepare and lead the growth review.
+For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. We recommend to do the growth reviews at the start of the month, to review the previous month. Most growth reviews happen asynchronously with the PM reviewing key metrics, analysing anomalies and sharing an overview with the team in Slack.
 
 ## Objectives
 
@@ -14,13 +14,13 @@ Looking at the same metrics regularly will increase our understanding how they r
 
 The growth reviews should focus on analysing anomalies instead of expected metric behavior, especially as teams become more familiar with their data.
 
-Outside of the regular meetings, it’s the job of the Product Manager to regularly monitor these metrics, becoming an expert in their nuances. Should a metric deviate from the norm, they are responsible for presenting a well-researched explanation during the review.
+Outside of the regular monthly reviews, it’s the job of the Product Manager to regularly monitor these metrics, becoming an expert in their nuances. Should a metric deviate from the norm, they are responsible for presenting a well-researched explanation during the review.
 
 ## Contents
 
 ### Recurring analysis
 
-During these meetings, we assess both input and output metrics. Input metrics, serving as leading indicators, significantly impact output metrics like revenue and retention.
+During these reviews, we assess both input and output metrics. Input metrics, serving as leading indicators, significantly impact output metrics like revenue and retention.
 
 Here are some examples:
 
@@ -62,7 +62,18 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 - Are there any difference between [high ICP](/handbook/who-we-are-building-for) and non ICP customers in how they use the product?
 - Are our 10 biggest customers happy users of the product?
 
-## Structure
+## In-sync or async?
+
+While monthly metrics reviews are important, they are not always actionable. Or, sometimes a metric might be suboptimal, but we decide not to focus on it, because we have more important topics to work on. Since PostHog's culture leans towards no meetings by default, we are not meeting every month to review the metrics in-sync. For in-sync growth reviews, the following guidelines apply:
+
+- 1 quarterly in-sync growth review for existing products & PMs
+- 3 monthly in-sync growth reviews in a row for a new product or new PM
+- In-sync growth review any time a PM spots an issue in the metrics they would like to discuss
+- Additionally, the team lead and the responsible exec can also ask for a in-sync growth review
+
+In-sync growth reviews are usually joined by the PM, the team lead and the responsible exec. Team members usually don't join the growth reviews, but a summary and the full analysis is accessible to everyone and shared via Slack.
+
+## Structure of the in-sync growth reviews
 
 ### During the meeting
 
@@ -83,6 +94,10 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 
 - PM shares summary of meeting discussion + outcome with the small team
 - PM makes sure all to dos are completed by the next growth reviews
+
+## Structure of the async growth reviews
+
+Very similar to the above, except that the metrics walkthrough doesn't happen in a meeting. The PM shares a summary of the full growth review they prepared (key metrics, deep dives, anomalies and follow-ups) in the team's Slack with the team lead and responsible exec tagged. The whole team is encouraged to read up on the full notes & numbers that are linked, and ask follow-up questions.
 
 ## Useful material (internal links)
 

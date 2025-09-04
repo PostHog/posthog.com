@@ -14,6 +14,8 @@ import type {
     StorefrontShopResponse,
     VariantSelectedOption,
 } from './types'
+import { getAvailableQuantity } from './utils'
+import { useStaticQuery, graphql } from 'gatsby'
 
 type getVariantOptionArgs = {
     name: string
@@ -95,7 +97,7 @@ export function useProduct(id: string): {
         })
     }
 
-    const outOfStock = (selectedVariant?.brilliantQuantity || 0) <= 0
+    const outOfStock = product?.tags?.includes('gift') ? false : (selectedVariant?.quantityAvailable || 0) <= 0
 
     return { selectedOptions, setOptionAtIndex, selectedVariant, loading, outOfStock }
 }
@@ -113,6 +115,18 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
     const [productData, setProductData] = useState<StorefrontProduct | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<unknown>()
+    const { allProducts } = useStaticQuery(graphql`
+        {
+            allProducts: allShopifyProduct {
+                nodes {
+                    variants {
+                        shopifyId
+                        inventoryPolicy
+                    }
+                }
+            }
+        }
+    `)
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -164,7 +178,7 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
 
                 const json = (await response.json()) as StorefrontShopRequestBody
                 const responseData = getProduct(json.data)
-                await assignBrilliantQuantities(responseData.variants)
+                await assignQuantities(responseData.variants, allProducts.nodes)
                 setProductData(responseData)
                 setLoading(false)
             } catch (err) {
@@ -189,26 +203,15 @@ function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProduc
     return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
 }
 
-async function assignBrilliantQuantities(variants: StorefrontProductVariantNode[]): Promise<void> {
-    await Promise.all(
-        variants.map((v) => {
-            if (v.product.tags.includes('digital')) {
-                v.brilliantQuantity = v.quantityAvailable
-            } else {
-                return fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/brilliant/inventory/${
-                        v.id.split('gid://shopify/ProductVariant/')[1]
-                    }`
+async function assignQuantities(variants: StorefrontProductVariantNode[], allProducts: any): Promise<void> {
+    variants.map((v) => {
+        if (!v.product.tags.includes('digital')) {
+            const continueSelling = allProducts.some((p: any) =>
+                p.variants.some(
+                    (variant: any) => variant.shopifyId === v.id && variant.inventoryPolicy.toLowerCase() === 'continue'
                 )
-                    .then((res) => res.json())
-                    .then((data) => {
-                        v.brilliantQuantity = data?.quantity || 0
-                    })
-                    .catch((err) => {
-                        console.error('Error fetching quantity:', err)
-                        v.brilliantQuantity = 0
-                    })
-            }
-        })
-    )
+            )
+            v.quantityAvailable = continueSelling ? 100 : v.quantityAvailable
+        }
+    })
 }

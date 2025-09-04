@@ -23,6 +23,11 @@ posthog.capture(
 )
 // name: 'Mr. Fox'
 // initial_url: '/blog'
+
+// When using anonymous events with `person_profiles: 'identified_only'`, 
+// adding `$set` or `$set_once` properties to an event will not create a 
+// person profile. Use one of the functions mentioned here: 
+// https://posthog.com/docs/data/anonymous-vs-identified-events
 ```
 
 ```node

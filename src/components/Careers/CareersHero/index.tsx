@@ -149,7 +149,9 @@ export const CareersHero = () => {
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
-    const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
+    const selectedTeam = selectedTeamName
+        ? allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
+        : undefined
     const teamLength = selectedTeam?.profiles?.data?.length
     const teamURL = `/teams/${slugifyTeamName(selectedTeam?.name || '')}`
     const pineapplePercentage =

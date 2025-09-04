@@ -1,41 +1,41 @@
-import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useState } from 'react'
-import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
-import { IconBrackets, IconGraph, IconFlask, IconToggle, IconPeople, IconRewindPlay } from '@posthog/icons'
-import { MultivariateTesting } from 'components/ProductIcons'
-import { SplitTesting } from 'components/NotProductIcons'
+import { IconBrackets, IconFlask, IconGraph, IconPeople, IconRewindPlay, IconToggle } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import { CustomerCard } from 'components/Products/CustomerCard'
-import { TutorialCard } from 'components/Products/TutorialCard'
-import { Hero } from 'components/Products/Hero'
-import { Feature } from 'components/Products/Feature'
-import { Subfeature } from 'components/Products/Subfeature'
-import { Marquee } from 'components/Products/Marquee'
-import { graphql, useStaticQuery } from 'gatsby'
+import CloudinaryImage from 'components/CloudinaryImage'
 import ContentViewer from 'components/ContentViewer'
 import AbTesting from 'components/Home/CodeBlocks/ABTesting/index'
-import Install from '../Install'
-import { docsMenu } from '../../../navs'
-import TeamRoadmap from 'components/TeamRoadmap'
-import RecentChange from '../RecentChange'
-import TeamMembers from '../TeamMembers'
-import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
-import Comparison from '../Comparison'
+import { useLayoutData } from 'components/Layout/hooks'
+import Link from 'components/Link'
+import { SplitTesting } from 'components/NotProductIcons'
+import Plans from 'components/Pricing/Plans'
+import { MultivariateTesting } from 'components/ProductIcons'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
+import { CustomerCard } from 'components/Products/CustomerCard'
+import { DocLinks } from 'components/Products/DocsLinks'
+import { FAQ } from 'components/Products/FAQ'
+import { Feature } from 'components/Products/Feature'
+import { Hero } from 'components/Products/Hero'
+import { Marquee } from 'components/Products/Marquee'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
-import { VsCompetitor } from 'components/Products/Competitor'
-import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
-import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { FAQ } from 'components/Products/FAQ'
+import { Subfeature } from 'components/Products/Subfeature'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { SEO } from 'components/seo'
-import { useLayoutData } from 'components/Layout/hooks'
-import Plans from 'components/Pricing/Plans'
+import TeamRoadmap from 'components/TeamRoadmap'
+import { graphql, useStaticQuery } from 'gatsby'
+import { StaticImage } from 'gatsby-plugin-image'
+import React, { useState } from 'react'
+import { docsMenu } from '../../../navs'
 import SideModal from '../../Modal/SideModal'
 import Profile from '../../Team/Profile'
+import Comparison from '../Comparison'
+import Install from '../Install'
+import Questions from '../Questions'
+import RecentChange from '../RecentChange'
+import TeamMembers from '../TeamMembers'
 
 const product = {
     slug: 'experiments',
@@ -143,7 +143,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases! Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -205,7 +205,7 @@ const comparison = [
             AmplitudeExperiments: false,
             Optimizely: true,
             VWO: true,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {

@@ -32,6 +32,7 @@ To counteract this, autocapture is configurable. For example, you can use the fr
 ```js
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
   autocapture: false,
   // ... more options
 })
@@ -48,19 +49,17 @@ If you’re worried that a specific area of your product may be generating too m
 First, you can turn off autocapture with a feature flag when the PostHog library loads. Toggling off this feature flag can lower event flow within PostHog without changing the code.
 
 ```js
-posthog.init(
-  '<ph_project_api_key>',
-  { 
-    api_host: '<ph_client_api_host>',
-    loaded: function (posthog) {
-      posthog.onFeatureFlags((_flags) => {
-        if (posthog.isFeatureEnabled('disable-autocapture')) {
-          posthog.config.autocapture = false;
-        }
+posthog.init('<ph_project_api_key>', { 
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  loaded: function (posthog) {
+    posthog.onFeatureFlags((_flags) => {
+      if (posthog.isFeatureEnabled('disable-autocapture')) {
+        posthog.config.autocapture = false;
       }
-    }
+    })
   }
-)
+})
 ```
 
 Second, you can put events in key areas behind feature flags and turn them off if you reach your limit.

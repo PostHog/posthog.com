@@ -1,7 +1,6 @@
 ---
-title: Troubleshooting and FAQs
+title: Experiment troubleshooting and FAQs
 ---
-import {ProductVideo} from 'components/ProductVideo'
 export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
 export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
@@ -80,3 +79,13 @@ If you're [running an A/A test](/tutorials/aa-testing) (where both variants are 
 4. **Random variation**: While A/A tests should theoretically show no difference, random chance can sometimes cause temporary statistical significance, especially with smaller sample sizes.
 
 Remember: A successful A/A test validates your experimentation setup, while an "unsuccessful" one helps identify issues you can fix to improve your process. If you're still seeing unexplained significant differences, [contact support](https://app.posthog.com/home#supportModal=bug%3Aexperiments) for help troubleshooting.
+
+## Why do I need a minimum number of exposures to run an experiment?
+
+Experiments require a minimum of 50 exposures per variant before showing experiment results. This is necessary because, with too few exposures, the results may not be statistically significant and could lead to incorrect conclusions. This threshold ensures that the experiment data is reliable enough to make a decision.
+
+You can check your current exposure count on the experiment results page. If your experiment is not reaching the minimum number of exposures, you can try the following:
+
+- Verify your feature flag implementation.
+- Consider increasing your feature flag's rollout percentage.
+- Ensure your exposure events are firing correctly.

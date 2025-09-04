@@ -77,7 +77,7 @@ For example, [I owned sales](/founders/startup-sales-strategy) when we were an e
 
 Right now, we split our responsibilities around the products we care most about, and are uniquely qualified to help progress:
 
-  * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM observability](/docs/ai-engineering). He’s great at execution and understands the ins and outs of these products better than I.
+  * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM analytics](/docs/llm-analytics). He’s great at execution and understands the ins and outs of these products better than I.
 
   * I’m focused on marketing, and AI-first products and features like [Max AI](/docs/max-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
 
@@ -104,7 +104,7 @@ Misalignment is another important flag here. If you feel like you’re pulling i
 
 For example, we’ve struggled to get on the same page around how design works at PostHog. We both want good design, but have had very different perspectives on how to tackle it, and thus the kind of people we should hire. The way this gets painful is we spend a month recruiting, then the “less involved” of us rejects candidates at the final stage that everyone else is very keen to move forward with.
 
-Again, we solved this by zooming out and [codifying](/handbook/design/process)[our thinking](/handbook/engineering/product-design) in our company handbook, which then gave us a reference for making better decisions in the future.
+Again, we solved this by zooming out and [codifying](/handbook/brand/process)[our thinking](/handbook/engineering/product-design) in our company handbook, which then gave us a reference for making better decisions in the future.
 
 ## 6\. Focus on opportunities before problems
 

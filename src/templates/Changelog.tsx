@@ -226,6 +226,20 @@ export default function Changelog({ pageContext }) {
             title="Changelog"
             tableOfContents={tableOfContents}
         >
+            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-3 mb-6 text-center">
+                <p className="m-0 text-sm text-primary dark:text-primary-dark">
+                    Want to stay updated with what's coming soon?{' '}
+                    <a
+                        href="https://app.posthog.com/settings/user-feature-previews"
+                        className="text-red dark:text-yellow hover:underline font-semibold"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Subscribe for updates
+                    </a>
+                </p>
+            </div>
+
             <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
                 <div>
                     <div className="flex gap-4 items-center">

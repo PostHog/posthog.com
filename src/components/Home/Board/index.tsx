@@ -45,7 +45,7 @@ import {
     IconLlmPromptEvaluation,
     IconWarning,
     IconSend,
-    IconLlmObservability,
+    IconLlmAnalytics,
     IconListCheck,
     IconApp,
     IconPhone,
@@ -57,6 +57,11 @@ import {
     IconArchive,
     IconCheck,
     IconStack,
+    IconQuestion,
+    IconMagic,
+    IconCodeInsert,
+    IconBolt,
+    IconSparkles,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -345,12 +350,44 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM observability',
+        name: 'Max AI',
+        color: 'purple',
+        Icon: IconMagicWand,
+        description: 'AI-powered product analyst and assistant',
+        types: ['AI'],
+        features: [
+            { title: 'Answers product usage questions', Icon: IconQuestion },
+            { title: 'Generates SQL queries', Icon: IconHogQL },
+            { title: 'Installs itself', Icon: IconMagic },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/max_489a283f4c.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/max_489a283f4c.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/max',
+                text: 'Learn more',
+            },
+        },
+    },
+    {
+        name: 'LLM analytics',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
-        Icon: IconLlmObservability,
-        description: 'Build AI features with full visibility – both in development and production.',
-        pricingKey: 'product_analytics',
+        Icon: IconLlmAnalytics,
+        description: 'Build AI features with full visibility – both in development and production',
+        pricingKey: 'llm_analytics',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },
@@ -369,12 +406,72 @@ const products: Product[] = [
                 </>
             )
         },
+        status: 'Production',
+        pricing: {
+            cta: {
+                url: '/llm-analytics',
+                text: 'Learn more',
+            },
+        },
+    },
+    {
+        name: 'MCP Server',
+        color: 'seagreen',
+        Icon: IconCode,
+        description: 'Give your agents full control over PostHog.',
+        types: ['AI'],
+        features: [
+            { title: 'Use PostHog in your editor', Icon: IconCode },
+            { title: 'Automate tasks based on PostHog data', Icon: IconSparkles },
+            { title: 'Build agent workflows with PostHog', Icon: IconBolt },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_6d2cab1b66" />
+                    </div>
+                </>
+            )
+        },
         status: 'WIP',
         badge: 'BETA',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/#panel=feature-previews%3Allm-observability',
-                text: 'Try it out',
+                url: '/docs/model-context-protocol',
+                text: 'Get started',
+            },
+        },
+    },
+    {
+        name: 'Embedded analytics',
+        color: '[#36C46F]',
+        Icon: IconCodeInsert,
+        description: 'Easily share a subset of data you capture with your customers so they can do analysis too.',
+        types: ['Data'],
+        features: [
+            { title: 'Query API', Icon: IconCode },
+            { title: 'Full SQL access', Icon: IconDatabase },
+            { title: 'Materialize views for speed', Icon: IconBolt },
+            { title: 'Visualize how you want', Icon: IconGraph },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_39_41_2x_9123ae5225.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_40_01_2x_d24eae394d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        pricing: {
+            cta: {
+                url: '/tutorials/embedded-analytics',
+                text: 'Get started',
             },
         },
     },
@@ -453,14 +550,6 @@ const products: Product[] = [
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2168,
-    },
-    {
-        name: 'Code editor',
-        Icon: IconCode,
-        color: 'seagreen',
-        types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2169,
     },
     {
         name: 'AI docs chat',
@@ -659,25 +748,35 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
             {(billingData || pricing) && (
                 <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark relative">
                     <div>
-                        <h3 className="text-sm opacity-60 font-semibold m-0">Monthly free tier</h3>
-                        {pricing?.FreeTier ? (
-                            <pricing.FreeTier />
-                        ) : (
-                            <p className="text-sm text-green font-bold m-0">
-                                {numberToWords(billingData?.freeLimit)} {billingData?.billingData.unit}s
-                            </p>
-                        )}
+                        {pricing?.FreeTier ||
+                            (billingData && (
+                                <div>
+                                    <h3 className="text-sm opacity-60 font-semibold m-0">Monthly free tier</h3>
+                                    {pricing?.FreeTier ? (
+                                        <pricing.FreeTier />
+                                    ) : (
+                                        <p className="text-sm text-green font-bold m-0">
+                                            {numberToWords(billingData?.freeLimit)} {billingData?.billingData.unit}s
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
                     </div>
                     <div>
-                        <h3 className="text-sm opacity-60 font-semibold m-0">Starts at</h3>
-                        {pricing?.StartsAt ? (
-                            <pricing.StartsAt />
-                        ) : (
-                            <p className="text-sm m-0">
-                                <strong>${billingData?.startsAt}</strong>
-                                <span className="opacity-60">/{billingData?.billingData.unit}</span>
-                            </p>
-                        )}
+                        {pricing?.StartsAt ||
+                            (billingData && (
+                                <div>
+                                    <h3 className="text-sm opacity-60 font-semibold m-0">Starts at</h3>
+                                    {pricing?.StartsAt ? (
+                                        <pricing.StartsAt />
+                                    ) : (
+                                        <p className="text-sm m-0">
+                                            <strong>${billingData?.startsAt}</strong>
+                                            <span className="opacity-60">/{billingData?.billingData.unit}</span>
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
                     </div>
                     <div className="md:ml-auto">
                         <CallToAction type="outline" size="sm" to={pricing?.cta?.url || '/pricing'}>

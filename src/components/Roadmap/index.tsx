@@ -51,7 +51,7 @@ export interface IRoadmap {
 
 export const VoteBox = ({ likeCount, liked }) => {
     return (
-        <div className="text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-border-dark/50 flex-shrink-0 relative">
+        <div className="vote-box text-center w-16 h-16 flex flex-col justify-center items-center bg-accent dark:bg-border-dark/50 flex-shrink-0 relative">
             <p className="m-0 leading-none">
                 <strong className="text-lg leading-none">{likeCount}</strong>
                 <br />

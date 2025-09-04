@@ -60,7 +60,7 @@ Your data needs start to spiral once you reach Seed stage – as does the comple
 
 To answer these questions, you need to pull data from a growing number of sources - product analytics, CRM, help desk, ad platform, payment processors, and more. You also begin to utilize more of the features of these sources, such as customer engagement and session recordings, generating even more data.
 
-This is where customer data platforms (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and [revenue data from Stripe](/tutorials/stripe-reports), and send it back to those same tools or a warehouse for use with a business intelligence tool like Hex.
+This is where customer data platforms (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and [revenue data from Stripe](/tutorials/stripe-reports), and send it back to those same tools or a [warehouse](/blog/cdp-vs-data-warehouse) for use with a business intelligence tool like Hex.
 
 ![Seed](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/seed.png)
 
@@ -125,7 +125,7 @@ Improving reliability, integrations, and UX is critical for success here. Being 
 
 To go one better, we are also working on making PostHog a data warehouse. This means storing and using arbitrary data from many different sources, scaling this up to users needs, and integrating with traditional data warehousing tools. Our team [built this](https://github.com/PostHog/posthog/pull/14915) at our last Hackathon.
 
-It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), [Intercom](/tutorials/intercom-reports), and more along with data from PostHog. 
+It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Intercom, and more along with data from PostHog. 
 
 This improves data accuracy and reporting flexibility. It also enables teams to continue using PostHog (which they are familiar with), as they scale. This replaces many of the tools of the modern data stack, which means they don't have to set up or maintain it. They can spend their time and resources building a great product.
 

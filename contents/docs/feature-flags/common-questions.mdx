@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting and FAQs
+title: Feature flag troubleshooting and FAQs
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -136,7 +136,7 @@ If your flag is returning false and you expect it to return another value, check
 
 ## If a user matches multiple release conditions, which one is used?
 
-During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used.
+During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 ## Why does it take so long for flag properties to appear in filters and breakdowns?
 
@@ -144,19 +144,38 @@ There can be ingestion latency for all events and properties, including ones rel
 
 On top of this, we need to do extra processing for new properties which can take longer than just ingesting an event.
 
-## Billing & usage
+#### What happens when I change a roll out percentage?
 
-Feature flags are charged based requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+PostHog uses a deterministic hashing strategy to assign users. We hash the user's `distinct_id` to a number between 0 and 1 (0-100%), and compare it against the roll out percentage.
 
-### How can I estimate the number of feature flag requests I'll be charged for?
+- If you **increase** the percentage, users who already matched will continue to match, and more users may now qualify.
 
-import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
+- If you **decrease** the percentage, some users who previously matched may fall outside the new threshold and stop qualifying.
 
-<FlagChargeEstimate />
+This applies to both boolean and multivariate flags. Multivariate flags assign users to specific variants based on the rollout split. If you want to roll out one variant to everyone, set it to 100% and the others to 0%.
 
-### I have very few feature flag called events when I look at a flag, but my bill is still very high, why is this?
+## How are feature flags billed?
 
-`$feature_flag_called` events are captured when you call `getFeatureFlag()` or `isFeatureEnabled()`, but not sent every time and are only sent when the flag value changes for a given person. 
+Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
-This is different from requests made to our servers to compute flags, which is what feature flag billable requests are. Thus, generally, there will be no relation between the number of `$feature_flag_called` events and the usage you see in your billing.
+The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
+You can read more about how feature flags are billed and how to reduce your bill in our [dedicated guide](/docs/feature-flags/cutting-costs).
+
+## Why am I being charged for feature flags when I'm not using them?
+
+We make a request to fetch feature flags (using the [`/flags` endpoint](/docs/api/flags)) when one of the below occurs:
+
+- The PostHog SDK is initialized
+- A user is [identified](/docs/data/identify) 
+- A user's [properties](/docs/product-analytics/person-properties) are updated
+- You call `posthog.reloadFeatureFlags()` in your code
+- You create a [group](/docs/product-analytics/group-analytics)
+
+Feature flags are charged based on the number of requests made to the `/flags` endpoint. This means even if no feature flag events are generated, you may still be charged for feature flag requests.
+
+## How do I generate reports on feature flag usage?
+
+import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
+
+<PostHogBillableUsageTemplate />

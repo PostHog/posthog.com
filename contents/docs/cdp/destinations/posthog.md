@@ -15,7 +15,7 @@ You'll also need access to the destination PostHog account.
 ## Installation
 
 1. In PostHog, click the **[Data pipelines](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=posthog) tab.
 3. Search for **PostHog** and click **+ Create**.
 4. Add the Host and API Key of the destination at the configuration step.
 5. Press **Create & Enable** and watch your 'Events' list get populated in the destination PostHog instance!

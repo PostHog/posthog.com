@@ -16,6 +16,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
                 <link
                     rel="preload"
                     as="font"
@@ -67,6 +68,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 opt_in_site_apps: true,
                                 __preview_remote_config: true,
                                 __preview_flags_v2: true,
+                                cookieless_mode: navigator.userAgent.includes("Firefox/") ? "on_reject" : undefined,
                             })
                             `,
                         }}

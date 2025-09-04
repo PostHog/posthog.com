@@ -97,7 +97,7 @@ Once that was done, we quickly had hundreds more.
 
 At first, we had to make up pricing. We priced similarly to others.
 
-As we sold some deals, and failed to sell others, we started [modifying pricing](pricing-lessons) to fit our specific users and go to market more specifically. In our instance, that meant going [transparent](transparent-enterprise-pricing) and self serve (eventually) with our pricing, and charging on usage with a generous free tier.
+As we sold some deals, and failed to sell others, we started [modifying pricing](/founders/pricing-lessons) to fit our specific users and go to market more specifically. In our instance, that meant going [transparent](/blog/transparent-enterprise-pricing) and self serve (eventually) with our pricing, and charging on usage with a generous free tier.
 
 ## How we're evolving this
 

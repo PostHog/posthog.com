@@ -6,10 +6,16 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
 
 You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to build a nginx container:
 

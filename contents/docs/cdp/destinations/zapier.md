@@ -29,7 +29,7 @@ Note that the PostHog app in Zapier only supports receiving events from [actions
 ### Option 2: Via PostHog's Data pipelines
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=zapier) tab.
 3. Search for **Zapier** and click **+ Create**.
 4. In your Zapier dashboard, create a new Zap with a [webhook trigger](https://zapier.com/apps/webhook/integrations) and then add your webhook URL in PostHog under **Zapier hook path**.
 5. Press **Create & Enable** and watch your 'Zaps' get triggered in Zapier!

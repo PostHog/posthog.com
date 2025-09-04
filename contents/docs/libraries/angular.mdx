@@ -1,0 +1,234 @@
+---
+title: Angular
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg
+---
+
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
+
+PostHog makes it easy to get data about traffic and usage of your [Angular](https://angular.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+
+This guide walks you through integrating PostHog into your Angular app using the [JavaScript Web SDK](/docs/libraries/js).
+
+## Installation
+
+import AngularInstall from "../integrate/_snippets/install-angular.mdx"
+
+<AngularInstall />
+
+> **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
+>
+> Given the nature of this library, you might need to completely clear your `.npm` cache to get this to work as expected. Make sure your clear your CI's cache as well.
+>
+> In the rare case the versions above get out-of-date, you can check our [JavaScript SDK's `package.json`](https://github.com/PostHog/posthog-js/blob/main/package.json) to understand what's the exact version you need to depend on.
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
+## Tracking pageviews
+
+PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2025-05-24`.
+
+## Capture custom events
+
+To [capture custom events](/docs/product-analytics/capture-events), import `posthog` and call `posthog.capture()`. Below is an example of how to do this in a component:
+
+```typescript file=app.component.ts
+import { Component } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Component({
+ // existing component code
+})
+
+export class AppComponent {
+  handleClick() {
+    posthog.capture(
+      'home_button_clicked', 
+    )
+  }
+}
+```
+
+## Session replay
+
+Session replay uses change detection to record the DOM. This can clash with Angular's change detection.
+
+The recorder tool attempts to detect when an Angular zone is present and avoid the clash but might not always succeed.
+
+- If you followed the installation instructions for Angular v17 and above, you don't need to do anything. 
+- If you followed the installation instructions for Angular v16 and below and you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
+
+```ts file=posthog.service.ts
+import { Injectable } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Injectable({ providedIn: 'root' })
+export class PostHogSessionRecordingService {
+  constructor(private ngZone: NgZone) {}
+initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(
+        /* your config */
+      )
+    })
+  }
+}
+```
+
+## Angular with SSR
+
+To use PostHog with Angular server-side rendering (SSR), you need to:
+
+1. Update the PostHog web JS client to only initialize on the client-side.
+2. Initialize PostHog Node on the server-side.
+
+### 1. Update the PostHog web JS client
+
+Update your `posthog.service.ts` to restrict the initialization of the PostHog web JS client to the client-side. The web SDK uses methods that are not available on the server side, so we need to check if we're on the client side before initializing PostHog.
+
+```ts file=posthog.service.ts focusOnLines=5-21
+import { DestroyRef, Injectable, NgZone, Inject } from "@angular/core";
+import posthog from "posthog-js";
+import { environment } from "../../environments/environment";
+import { Router } from "@angular/router";
+
+import { isPlatformBrowser } from "@angular/common"; // +
+import { PLATFORM_ID } from "@angular/core"; // +
+import { isPlatformBrowser } from "@angular/common"; // +
+import { PLATFORM_ID } from "@angular/core"; // +
+
+@Injectable({ providedIn: "root" })
+export class PosthogService {
+  constructor(
+    private ngZone: NgZone,
+    private router: Router,
+    private destroyRef: DestroyRef,
+    @Inject(PLATFORM_ID) private platformId: Object // +
+  ) {
+    // Only initialize PostHog in browser environment
+    if (isPlatformBrowser(this.platformId)) { // +
+      this.initPostHog(); //+
+    } 
+  }
+
+  private initPostHog() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.init(environment.posthogKey, {
+        api_host: environment.posthogHost,
+        defaults: '<ph_posthog_js_defaults>',
+        debug: false,
+        cross_subdomain_cookie: true,
+      });
+    });
+  }
+}
+```
+
+### 2. Add server-side initialization
+
+Angular SSR uses a `server.ts` file to handle requests. We can add any server-side initialization code to this file.
+
+First, install the `posthog-node` package to run on the server side.
+
+<InstallNodePackageManagers />
+
+Then, add the following code to the `server.ts` file:
+
+```ts file=server.ts
+// src/server.ts
+
+import { environment } from './environments/environment';
+import { PostHog } from 'posthog-node'
+
+/**
+ * Extract distinct ID from PostHog cookie
+ */
+function getDistinctIdFromCookie(cookieHeader: string | undefined): string | null {
+  if (!cookieHeader) return null;
+  
+  const cookieMatch = cookieHeader.match(`ph_${environment.posthogKey}_posthog=([^;]+)`);
+  if (cookieMatch) {
+    try {
+      const parsed = JSON.parse(decodeURIComponent(cookieMatch[1]));
+      return parsed?.distinct_id || null;
+    } catch (error) {
+      console.error('Error parsing PostHog cookie:', error);
+      return null;
+    }
+  }
+  return null;
+}
+
+/**
+ * Handle all other requests by rendering the Angular application.
+ */
+app.get('**', async (req, res, next) => {
+  const { protocol, originalUrl, baseUrl, headers } = req;
+
+  const distinctId = getDistinctIdFromCookie(headers.cookie);
+  let isFeatureEnabled = false;
+  const client = new PostHog(
+      const client = new PostHog(
+      environment.posthogKey,
+      { host: environment.posthogHost }
+  )
+  )
+
+  if (distinctId) {
+    client.capture({
+      distinctId: distinctId,
+      event: 'test_ssr_event',
+      properties: {
+        message: 'Hello from Angular SSR!'
+      }
+    })
+
+    isFeatureEnabled = await client.isFeatureEnabled(
+      'your_feature_flag_key', distinctId) || false;
+  }
+
+  commonEngine
+    .render({
+      bootstrap,
+      documentFilePath: indexHtml,
+      url: `${protocol}://${headers.host}${originalUrl}`,
+      publicPath: browserDistFolder,
+      providers: [
+        { provide: APP_BASE_HREF, useValue: baseUrl },
+        { provide: 'FEATURE_FLAG_ENABLED', useValue: isFeatureEnabled }
+      ],
+    })
+    .then((html) => res.send(html))
+    .catch((err) => next(err));
+
+  await client.shutdown() 
+});
+```
+
+This code does the following:
+
+- Extracts the distinct ID from the cookie header. This is set by the web JS client.
+- Captures an event on the server side.
+- Evaluates a feature flag on the server side. This can be passed as a provider to the Angular application.
+- Calls `shutdown` on the PostHog Node client to ensure all events are flushed.
+
+<CalloutBox icon="IconInfo" title="Using PostHog in server-side code">
+
+Angular SSR does not allow Node.js code to be bundled into client-side components. Even though resolvers and other server-side code can be written along with client-side components, you cannot use PostHog Node in those components.
+
+</CalloutBox>
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up Angular analytics, feature flags, and more](/tutorials/angular-analytics)
+- [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
+- [How to set up surveys in Angular](/tutorials/angular-surveys)
+

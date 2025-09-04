@@ -6,6 +6,7 @@ import { LineItem } from './LineItem'
 import { Price } from './Price'
 import { useCartStore } from './store'
 import { StaticImage } from 'gatsby-plugin-image'
+import ShippingBanner from './ShippingBanner'
 
 type CartProps = {
     className?: string
@@ -28,10 +29,15 @@ export function Cart(props: CartProps): React.ReactElement {
                 <div className="border border-light dark:border-dark bg-tan dark:bg-dark rounded p-8 text-center flex flex-col gap-8">
                     <p className="font-medium mb-0">This cart would look better with something in it.</p>
                     <div className="w-64 mx-auto">
-                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/shopahogic.png" alt="Empty cart" />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/shopahogic.png"
+                            alt="Empty cart"
+                        />
                     </div>
                 </div>
             )}
+
+            {/* {!isEmpty && <ShippingBanner />} */}
 
             <>
                 <div>

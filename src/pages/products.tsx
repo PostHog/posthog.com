@@ -22,11 +22,11 @@ interface ProductListingProps {
     name: string
     description: string
     freeTierLimit?: string
-    startingPrice: string
+    startingPrice?: string
     url: string
     icon: React.ReactNode
     color: string
-    denominator: string
+    denominator?: string
 }
 
 const ProductListing: FC<ProductListingProps> = ({
@@ -46,30 +46,37 @@ const ProductListing: FC<ProductListingProps> = ({
                 <h2 className="text-lg mb-0 text-primary dark:text-primary-dark">{name}</h2>
             </Link>
             <p className="opacity-70 text-[15px] mb-2">{description}</p>
-            <div className="mt-auto w-full">
-                <dl className="grid @3xl:grid-cols-2 gap-x-2 @3xl:gap-y-1 text-sm mb-4 w-full">
-                    <dt className="order-1 @3xl:order-none">
-                        <label className="font-normal opacity-75">Monthly free tier</label>
-                    </dt>
-                    <dt className="order-3 @3xl:order-none">
-                        <label className="font-normal opacity-75">Then pricing starts at</label>
-                    </dt>
-                    <dd className="order-2 @3xl:order-none pb-2 @3xl:pb-0">
-                        <p className="mb-0 text-[15px]">
-                            <strong className="text-green">
-                                {freeTierLimit} {denominator}s
-                            </strong>
-                        </p>
-                    </dd>
-                    <dd className="order-4 @3xl:order-none">
-                        <p className="mb-0 text-[15px]">
-                            <strong>{startingPrice}</strong>/<span className="text-sm opacity-70">{denominator}</span>
-                        </p>
-                    </dd>
-                </dl>
-                <CallToAction to={url} type="secondary" size="sm" width="auto">
-                    Explore
-                </CallToAction>
+            <div className={`${freeTierLimit && denominator ? 'mt-auto' : 'h-full flex flex-col'} w-full`}>
+                {freeTierLimit && denominator ? (
+                    <dl className="grid @3xl:grid-cols-2 gap-x-2 @3xl:gap-y-1 text-sm mb-4 w-full">
+                        <dt className="order-1 @3xl:order-none">
+                            <label className="font-normal opacity-75">Monthly free tier</label>
+                        </dt>
+                        <dt className="order-3 @3xl:order-none">
+                            <label className="font-normal opacity-75">Then pricing starts at</label>
+                        </dt>
+                        <dd className="order-2 @3xl:order-none pb-2 @3xl:pb-0">
+                            <p className="mb-0 text-[15px]">
+                                <strong className="text-green">
+                                    {freeTierLimit} {denominator}s
+                                </strong>
+                            </p>
+                        </dd>
+                        <dd className="order-4 @3xl:order-none">
+                            <p className="mb-0 text-[15px]">
+                                <strong>{startingPrice}</strong>/
+                                <span className="text-sm opacity-70">{denominator}</span>
+                            </p>
+                        </dd>
+                    </dl>
+                ) : (
+                    <p className="text-sm opacity-70 italic">Free during beta</p>
+                )}
+                <div className={`${freeTierLimit && denominator ? '' : 'mt-auto'}`}>
+                    <CallToAction to={url} type="secondary" size="sm" width="auto">
+                        Explore
+                    </CallToAction>
+                </div>
             </div>
         </div>
     )
@@ -133,9 +140,9 @@ const productDetails: Record<
         complexity: ['People who code'],
     },
     surveys: {
-        freeTierLimit: '250',
+        freeTierLimit: '1500',
         denominator: 'response',
-        startingPrice: '$0.20',
+        startingPrice: '$0.10',
         description: 'Get qualitative feedback from the right users at the right time',
         roles: ['Product people', 'Marketing', 'Sales'],
         goals: ['Understand user behavior', 'Improve product'],
@@ -152,7 +159,7 @@ const productDetails: Record<
     },
     cdp: {
         freeTierLimit: '1 million',
-        denominator: 'row',
+        denominator: 'event',
         startingPrice: '$0.000062',
         description: 'Send customer data anywhere with our CDP and reverse ETL pipeline',
         roles: ['Data engineers', 'Marketing'],
@@ -167,6 +174,21 @@ const productDetails: Record<
         roles: ['Product engineers'],
         goals: ['Find errors', 'Solve performance issues'],
         complexity: ['People who code'],
+    },
+    'llm-analytics': {
+        freeTierLimit: '100,000',
+        denominator: 'event',
+        startingPrice: '$0.00006',
+        description: 'Build AI features with full visibility – both in development and production',
+        roles: ['Product engineers', 'Startups & founders'],
+        goals: ['Understand user behavior', 'Improve product'],
+        complexity: ['People who code'],
+    },
+    max: {
+        description: 'AI-powered product analyst and assistant',
+        roles: ['Product people', 'Startups & founders', 'Marketing', 'Sales'],
+        goals: ['Understand user behavior', 'Improve product'],
+        complexity: ['Low-code'],
     },
 }
 

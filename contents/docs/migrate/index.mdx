@@ -12,7 +12,9 @@ import ApiMigration from "./_snippets/api-migration.mdx"
 
 Historical migrations refer to ingesting and importing past data into PostHog for analysis. This includes:
 
-- Migrating from a different tool or platform like [Mixpanel](/docs/migrate/mixpanel), [Amplitude](/docs/migrate/migrate-from-amplitude), [Heap](/docs/migrate/heap), or [LaunchDarkly](/docs/migrate/launchdarkly).
+- Using [managed migrations](/docs/migrate/managed-migrations) for automated data import from Mixpanel, Amplitude or S3 buckets.
+
+- Migrating from a different tool or platform like [Google Analytics](/docs/migrate/google-analytics), [Heap](/docs/migrate/migrate-from-amplitude), [Plausible](/docs/migrate/plausible), or [LaunchDarkly](/docs/migrate/launchdarkly).
 
 - Migrating from a [self-hosted PostHog instance to PostHog Cloud](/docs/migrate/migrate-to-cloud).
 
@@ -28,7 +30,7 @@ Start your migration by formatting your data correctly. There is no way to selec
 
 - **Using the correct event names.** For example, to capture a pageview event in PostHog, you capture a `$pageview` event. This might be different than the "name" other services use.
 
-- **Including the `timestamp` field.** This ensures your events are ingested with the correct time in PostHog. It needs to be in the ISO 8601 format. 
+- **Including the `timestamp` field.** This ensures your events are ingested with the correct time in PostHog. It needs to be in the ISO 8601 format and dated at least 48 hours before the time of import.
 
 - **Use the correct `distinct_id`.** This is the unique identifier for your user in PostHog. Every event needs one. For example, `posthog-js` automatically generates a `uuidv7` value for anonymous users.
 

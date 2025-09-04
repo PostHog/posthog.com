@@ -10,17 +10,18 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: true
+  llmAnalytics: true
   errorTracking: true
 ---
 
-
+import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
 
-> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs).
+> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/main/packages/browser/playground/nextjs).
 
 Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
@@ -30,8 +31,6 @@ To follow this guide along, you need:
 
 1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
 2. A Next.js application
-
-## AgentIntegrationSection
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
 
@@ -43,9 +42,37 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 <NextJSInstall />
 
-### Accessing PostHog using the provider
+<DetailSetUpReverseProxy />
 
-PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/libraries/react) for examples of how to use:
+<DetailGroupProductsInOneProject />
+
+## Accessing PostHog
+
+import Tab from "components/Tab"
+import InstrumentationClientSetup from "./_snippets/instrumentation-client-access.mdx"
+import ProviderAccess from "./_snippets/provider-access.mdx"
+
+<Tab.Group tabs={[
+    'Instrumentation client', 
+    'PostHog provider'
+]}>
+    <Tab.List>
+        <Tab>Instrumentation client</Tab>
+        <Tab>PostHog provider</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <InstrumentationClientSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ProviderAccess />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+### Usage
+
+See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 
 - [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
 - [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
@@ -60,7 +87,7 @@ import NextJSInstallServer from "../../integrate/_snippets/nextjs/install-nextjs
 
 ### Server-side configuration
 
-Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this Next.js's default behavior to any fetch call.
+Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this is Next.js's default behavior for any fetch call.
 
 You can override that configuration when initializing PostHog, but make sure you understand the pros/cons of using Next.js's cache and that you might get cached results rather than the actual result our server would return. This is important for feature flags, for example.
 
@@ -101,7 +128,7 @@ On top of the standard features like autocapture, custom events, session recordi
 
 See the [React SDK docs](/docs/libraries/react) for more details.
 
-### Why use a `useEffect` hook to initialize PostHog?
+### Why use a `useEffect` hook to initialize PostHog in the provider?
 
 We want to initialize PostHog when the app is loaded. The [React docs](https://react.dev/learn/synchronizing-with-effects) recommend using a `useEffect` hook to do this:
 
@@ -155,15 +182,15 @@ export function PHProvider({
 
 The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
 
-### Why does the pageview component need a `useEffect`? 
+### Why did the pageview component need a `useEffect`? 
 
-Using a `useEffect` hook is the simplest way to accurately capture pageviews. Other approaches include:
+Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2025-05-24'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
 
 1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation. 
 2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers. 
 
 ## Further reading
 
-- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js pages router analytics, feature flags, and more](/tutorials/nextjs-pages-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)

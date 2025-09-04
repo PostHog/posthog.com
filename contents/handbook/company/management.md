@@ -76,7 +76,7 @@ Talking about long-term career plans every now and again is also important but e
 
 ### The keeper test
 
-As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#6-talent-compounds) high - we can't centralize this with the founders. To help us scale this, the relevant exec team member will regularly check in with their respective team leads to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year:
+As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#youre-the-driver) high - we can't centralize this with the founders. To help us scale this, the relevant exec team member will regularly check in with their respective team leads to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year:
 
 1. Ask the team lead 'if X was leaving for a similar role at another company, would you try to keep them?'
 2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?

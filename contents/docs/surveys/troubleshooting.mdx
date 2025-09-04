@@ -6,7 +6,7 @@ Having trouble with surveys? Below are some tips for getting past some common is
 
 The most common solution is...
 
-### Update the PostHog snippet or JavaScript Web SDK
+## Update the PostHog snippet or JavaScript Web SDK
 
 Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#installation) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
 
@@ -75,6 +75,14 @@ For custom insights or SQL usage, **you can use built-in SQL function `getSurvey
 - `question_id` is the ID of the question. Optional - use if if not all responses are being shown with only the index. This takes precedence over `question_index`. If you use the `question_id` parameter, the value for `question_index` is ignored.
 - `is_multiple_choice` is a boolean that is `true` if the question is a multiple choice question, and `false` otherwise. Optional, only needed for multiple choice questions. This is necessary because multiple choice questions are stored differently - as an array of strings instead of a single string.
 
+Only the `question_index` parameter is mandatory. However, if you use the `question_id`, the value for `question_index` is ignored.
+
+## Survey shows up repeatedly after dismissing
+
+A bug in `posthog-js` version `1.249.2` caused surveys to reappear repeatedly after being dismissed or completed. This occurred because person feature flags and local storage weren't updated after survey events.
+
+**Solution:** Upgrade to the latest version of `posthog-js`. This bug has been fixed in newer versions. If the issue persists, please [contact support](/docs/support-options).
+
 ## Debugging surveys in console
 
 [Enable debugging](/docs/libraries/js#debugging) to check the dev logs in your dev console.
@@ -93,10 +101,6 @@ The event must be captured on the user's session by the `posthog-js` SDK.
 
 Backend events aren't supported yet, upvote this [issue](https://github.com/PostHog/posthog/issues/25433) if that would be useful for you.
 
-### I set a survey to be activated based on an action. Why does it shows up to users who haven't performed that action?
-
-Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade your installation of `posthog-js` to the latest to support action based surveys.
-
 ### Why am I getting a feature flags error on my survey?
 
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for person property targeting.
@@ -110,3 +114,42 @@ No, you will not.
 #### How do I enable conditional questions on iOS?
 
 Conditional questions require `posthog-ios` version `3.25.0` or higher. Update your dependency to the latest version to enable this feature.
+
+## Survey notifications and webhooks
+
+### Handling partial responses
+
+When using partial responses, a single response will send multiple `survey sent` events. The number of events is equal to the number of questions answered.
+
+If you only wish to get notifications about completed surveys, you can use the `$survey_completed` property. You can set your events to trigger only when `$survey_completed` is `true`. This way, you'll only get one notification or webhook per survey response.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_08_at_16_17_17_2x_c8235c0413.jpg"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_08_at_16_18_54_2x_e1cee82eaf.jpg"
+    alt="Handling partial responses with notifications/destinations"
+    classes="rounded"
+/>
+
+## Hosted surveys
+
+### Hosted surveys are showing in `getActiveMatchingSurveys`
+
+Make sure you upgrade `posthog-js` to at least version `1.258.1`, as it updates the SDK to support hosted surveys.
+
+### Hosted survey responses are anonymous / not linked to users by default
+
+If you're using hosted surveys and responses appear as anonymous users instead of being linked to your identified users, you're missing the `distinct_id` query parameter.
+
+**Solution:** Add the `distinct_id` parameter to your hosted survey URL:
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
+```
+
+**Important:** The [`distinct_id` value must match exactly what you use in `posthog.identify()`](/docs/product-analytics/identify) calls in your application. This is the only way PostHog can link the external survey response to the correct user profile.
+
+**Common mistakes:**
+- Using a [different ID than the one you use in `posthog.identify()`](/docs/product-analytics/identify) calls in your application (e.g., email vs user ID)
+- Forgetting to add the parameter entirely
+
+**Note:** In-app surveys (popover, API, feedback button) don't need this parameter as they automatically use the current user's identity.

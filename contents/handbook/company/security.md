@@ -12,12 +12,14 @@ We maintain a robust security program that follows best practice in order to mee
 
 This page covers SOC 2, GDPR, and CCPA compliance.
 
+For information about security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
+
 ## Multi-factor authentication 
 
 We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
 
 - One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
-- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) for use with mobile devices, and as backup
+- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) to be on the safe side, if you have an older iPhone model) for use with mobile devices, and as backup
 
 Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
 
@@ -26,41 +28,9 @@ Google recently changed its settings for 2FA and Yubikeys and you may struggle t
 > **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
 ## SOC 2
+import SOC2 from './_snippets/soc2.mdx'
 
-PostHog is certified as SOC 2 Type II compliant, following an external audit. 
-
-Our latest [security report](https://drive.google.com/file/d/1uLBE83_pN5q7p7IA-Ut85ArQh9BBzEdw/view?usp=drive_link) is publicly available (covering controls as of May 31st, 2024). Our [bridge letter](https://drive.google.com/file/d/1NYT0MNNDK-RXoQNIY_hqo5eygTTH5on7) is also available until we receive our next report.
-
-### Policies
-
-We have a number of policies in place to support SOC 2 compliance. All team members have been invited to Drata to review these and to complete security training and background checks as part of onboarding.
-
-All of these policies are available for viewing upon request:
-
-- Acceptable Use Policy
-- Application Logging & Monitoring Policy
-- Asset Management Policy
-- Backup Policy
-- Breach Notification Policy
-- Business Associate Policy
-- Business Continuity Plan
-- Code of Conduct
-- Data Classification Policy
-- Data Deletion Policy
-- Data Protection Policy
-- Disaster Recovery Plan
-- Encryption Policy
-- Incident Response Plan
-- Information Security Policy
-- Password Policy
-- Physical Security Policy
-- Privacy, Use, and Disclosure Policy
-- Responsible Disclosure Policy
-- Risk Assessment Policy
-- Software Development Lifecycle Policy
-- System Access Control Policy
-- Vendor Management Policy
-- Vulnerability Management Policy
+<SOC2 />
 
 These policies are also relevant for GDPR (see below). 
 
@@ -102,4 +72,25 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 
+We conduct these annually, most recently in May 2025 - you can find the report [here](https://drive.google.com/file/d/1JoR74x6U7Kh_0HA8sLDe0AN6YK5-OOZ5/view?usp=sharing) 
+
+## Responsible disclosure
+
+Security vulnerabilities and other security related findings can be reported by emailing security@posthog.com. Valid findings will be rewarded with PostHog swag.
+
+For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
+
+## Secure communication (aka preventing or detecting social engineering)
+
+We have a few policies in place to prevent social engineering attacks. 
+
+For our internal communications, we have the following policies:
+- We do not use email for critical communications. 
+- We do not use SMS for critical communications. 
+- We do not use phone for critical communications. 
+
+-> We only use Slack for critical communications
+
+In case you should receive a suspicious email or other form of communication, please do not click on any links or open any attachments. Instead, please contact the team or person directly via Slack. E.g. if someone claims to be James, send them a message on Slack and ask "James, am I in a call with you right now?". This is a great and easy way to verify if this is legit. The same goes for any other form of communication. 
+
+Please report any suspicious communications to `#project-security` on Slack. 

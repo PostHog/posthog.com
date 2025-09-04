@@ -941,19 +941,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     },
     {
         country: 'Brazil',
-        area: 'Sao Paulo',
-        locationFactor: 0.6,
-        currency: 'BRL',
-    },
-    {
-        country: 'Brazil',
-        area: 'Rio de Janeiro',
-        locationFactor: 0.6,
-        currency: 'BRL',
-    },
-    {
-        country: 'Brazil',
-        area: 'Everywhere else',
+        area: 'All',
         locationFactor: 0.6,
         currency: 'BRL',
     },
@@ -1104,7 +1092,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Japan',
         area: 'All',
-        locationFactor: 0.6,
+        locationFactor: 0.75,
         currency: 'JPY',
     },
     {

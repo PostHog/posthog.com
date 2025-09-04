@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 ## 1. Migrate historical data from another tool
 
 Are you migrating from another tool like PostHog?
@@ -33,7 +35,7 @@ Warning: watching replays is addictive, but incredibly useful.
 
 When you choose PostHog, you also get a built-in data warehouse.
 
-You can use it to [link your most valuable data](/docs/data-warehouse/join) from sources like your CRM, payment processor, or database, combine it with the event data already in PostHog, and query across all of it.
+You can use it to [link your most valuable data](/docs/data-warehouse/sources) from sources like your CRM, payment processor, or database, [combine it](/docs/data-warehouse/join) with the event data already in PostHog, and [query](/docs/data-warehouse/query) across all of it.
 
 We currently offer fully-managed import integrations for the likes of [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), and [Salesforce](/docs/cdp/sources/salesforce).
 
@@ -87,3 +89,30 @@ Read more about:
 - [Installing feature flags](/docs/feature-flags/installation) and [creating your first flag](/docs/feature-flags/creating-feature-flags)
 - [How we test in production](/product-engineers/testing-in-production) at PostHog using feature flags
 - [Best practices for using feature flags](/docs/feature-flags/best-practices) in your product
+
+## 8. Try Max AI
+
+[Max](/docs/max-ai) is an AI-powered product analyst that lives in your browser. Max can answer product usage questions, build filters and queries, and teach you everything you need to know about PostHog.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
+    alt="Max in the sidebar"
+    classes="rounded max-h-[569px]"
+    zoom={false}
+/>
+
+You can ask Max things like:
+- ["What's my churn rate?"](https://app.posthog.com/#panel=max:!What's%20my%20churn%20rate%3F)
+- ["What's our most popular feature?"](https://app.posthog.com/#panel=max:!What's%20our%20most%20popular%20feature%3F)
+- ["Why are people dropping off before conversion?"](https://app.posthog.com/#panel=max:!Why%20are%20people%20dropping%20off%20before%20conversion%3F)
+
+Or tell Max to:
+- [Filter a playlist of session recordings](https://app.posthog.com/#panel=max:!Find%20session%20recordings%20where%20users%20drop%20off%20before%20conversion)
+- [Generate SQL queries](https://app.posthog.com/#panel=max:!Generate%20a%20SQL%20query%20to%20find%20DAU%2FMAU%20ratio)
+- [Explain how to use PostHog features](https://app.posthog.com/#panel=max:!Explain%20how%20PostHog%20actions%20work)
+
+<CalloutBox type="fyi" icon="IconLightBulb" title="PostHog tip: Add more context">
+<a href="/docs/max-ai">Max</a> gets smarter when you feed product, revenue, and customer data (steps 1-7).
+</CalloutBox>
+
+To chat with Max, opt into the beta in the [feature previews menu](https://app.posthog.com/settings/user-feature-previews#artificial-hog).

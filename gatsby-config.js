@@ -16,8 +16,25 @@ const getQuestionPages = async (base) => {
             },
         })
 
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
-        return response.json()
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}, Text: ${await response.text()}`)
+                }
+
+                return response.json()
+            } catch (error) {
+                if (attempt === 3) {
+                    console.error(`Failed to fetch questions after 3 attempts: ${error.message}`)
+                    throw error
+                }
+                console.log(`Attempt ${attempt} failed: ${error.message}. Retrying...`)
+                // Simple delay between retries (1 second)
+                await new Promise((resolve) => setTimeout(resolve, 1000))
+            }
+        }
     }
 
     const initialResponse = await fetchQuestions(1)
@@ -100,7 +117,7 @@ module.exports = {
                 shouldBlockNodeFromTransformation: (node) =>
                     node.internal.type === 'File' &&
                     node.url &&
-                    node.url.includes('https://raw.githubusercontent.com/'),
+                    new URL(node.url).hostname === 'raw.githubusercontent.com',
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -140,6 +157,14 @@ module.exports = {
             options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `sdkReferences`,
+                path: `${__dirname}/src/data/sdkReferences`,
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },

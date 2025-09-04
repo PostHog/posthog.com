@@ -71,6 +71,8 @@ To do this, set up two trend series, one for total pageview count and a second f
 
 You can filter these series to provide details on sections and funnels on your site. Clicking on the charts will provide a list of the users included in that data. If there is a [session replay](/docs/session-replay) available for that user session, there will be a link for you to go watch it.
 
+<MaxCTA question="What's the average number of pages per session?" />
+
 ## Analyzing sessions with SQL
 
 If trends don't give you the details you need, you can access the raw session data with SQL. It is located in the `sessions` table.

@@ -10,9 +10,16 @@ availability:
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-> **Important:** This feature is currently an opt-in beta. To access it, enable the [feature preview](https://app.posthog.com/#panel=feature-previews%3revenue-analytics). Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
+> **Important:** This feature is currently an opt-in beta. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#revenue-analytics-beta). Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
 
 Our revenue tracking feature enables you to capture revenue from your website via the events you are already sending us, or via an integration between your payment platform and our Data Warehouse, which you can then track in your [revenue analytics dashboard](https://app.posthog.com/revenue_analytics).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_25_at_19_51_33_9f5267a861.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_25_at_19_52_23_13027e113c.png"
+    alt="revenue analytics dashboard"
+    classes="rounded"
+/>
 
 ## Choosing a revenue data source
 
@@ -85,6 +92,59 @@ Please refer to the [Data Warehouse docs](/data-warehouse) for more information.
 
 > **Important:** We currently only support Revenue Analytics data from Stripe. The Chargebee connector already exists and integration with Revenue Analytics is coming soon. We'll implement more sources in the near future. Check our roadmap at [our team page](/teams/revenue-analytics).
 
+## Deferred revenue
+
+When using revenue data from your Data Warehouse (like Stripe), PostHog will automatically defer revenue recognition to match your accounting practices. This is particularly useful for subscription businesses that need to recognize revenue over time rather than all at once.
+This implies that our dashboard will show revenue in the future, indicating all of the revenue that will be recognized in the future.
+
+> **Note**: Revenue deferring is automatically applied when using Stripe as your data source. You don't need to configure anything additional if you're already filling Stripe's `period` property on your invoice line items - PostHog handles the calculations based on the period information in your Stripe invoices.
+
+### Revenue deferring on Stripe
+
+PostHog's Stripe integration automatically handles revenue deferring based on the `period` property found in your Stripe invoice line items.
+
+In Stripe, when you create a subscription or invoice, each line item can include a `period` object that defines the service period:
+
+```json
+{
+  "line_items": [
+    {
+      "amount": 120000,
+      "currency": "usd",
+      "period": {
+        "start": 1640995200,
+        "end": 1672531200
+      }
+    }
+  ]
+}
+```
+
+The `period` object contains:
+- `start`: Unix timestamp when the service period begins
+- `end`: Unix timestamp when the service period ends
+
+### How PostHog processes deferred revenue
+
+When PostHog imports your revenue data, it automatically:
+
+1. **Detects period information**: Looks for the `period` property on invoice line items
+2. **Calculates deferral periods**: Determines how many months/days the revenue should be spread across
+3. **Distributes revenue**: Splits the total amount evenly across the service period
+
+For example, if you have an annual subscription where customers pay $1,200 upfront:
+- **Without deferring**: All $1,200 appears in the month of payment
+- **With deferring**: $100 appears in each of the 12 months of the subscription period
+
+#### When deferring doesn't apply
+
+Revenue deferring only applies when:
+- You're using Stripe as your data source
+- Your invoice line items include a `period` property
+- The period spans multiple billing cycles
+
+For one-time purchases or monthly subscriptions, revenue is recognized immediately in the month of payment.
+
 ## Using revenue data in product analytics
 
 You can use your revenue data for deeper product analytics insights beyond the web analytics dashboard, too. This allows you to:
@@ -137,7 +197,7 @@ Yes. You can select your desired currency in the **Revenue** tab in **Data manag
     classes="rounded"
 />
 
-### How do you convert renvenue in different currencies?
+### How do you convert revenue in different currencies?
 
 We automatically convert revenue from other currencies into your chosen reporting currency – i.e. if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), it's converted into USD in PostHog to ensure consistency.
 

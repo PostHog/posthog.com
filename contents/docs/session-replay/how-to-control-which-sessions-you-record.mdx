@@ -12,18 +12,21 @@ export const ImgSampleConfigDark = "https://res.cloudinary.com/dmukukwp6/image/u
 export const ImgMinDurationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-light-mode.png"
 export const ImgMinDurationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-dark-mode.png"
 
-There are several ways to control which sessions you record:
+There are several ways to control which sessions you record with the Web JavaScript SDK:
 
 ## Programmatically start and stop recordings
 
-1. Ensure your domain is added to the [authorized domains list](https://us.posthog.com/settings/project-replay#replay-authorized-domains).
+> Note: For mobile replay controls, see [iOS](/docs/session-replay/privacy?tab=iOS#handling-sensitive-third-party-screens), and [Android](/docs/session-replay/privacy?tab=Android#handling-sensitive-third-party-screens) privacy controls section. Support for this method in React Native and Flutter is planned — track progress [here](https://github.com/PostHog/posthog-js/issues/2169).
+
+1. For older projects, there is a section for 'Authorized domains for replay' in the [project replay settings](https://us.posthog.com/settings/environment-replay#replay-authorized-domains). Ensure your domain is added if the section is present.
 
 
 2. Set `disable_session_recording: true` in your [config](/docs/libraries/js/config).
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
     disable_session_recording: true,
     // ... other options
 })
@@ -45,8 +48,6 @@ posthog.startSessionRecording({
   event_trigger: true || false 
 })
 ```
-
-> **NOTE:** Session recording triggers work as OR conditions — the recording starts if *any* of the set triggers (URL or event) are matched.
 
 ## With URL trigger conditions
 
@@ -76,8 +77,8 @@ The client keeps a short buffer in-memory, so you'll still be able to see how th
 
 You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
 
-1. [Create a boolean flag](/docs/feature-flags/creating-feature-flags) that determines whether to record sessions or not.
-2. Go to the [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
+1. [Create a boolean or multiple variant flag](/docs/feature-flags/creating-feature-flags) that determines whether to record sessions or not.
+2. Go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 3. Link your newly created flag in the **Enable recordings using feature flag**.
 
 <ProductScreenshot
@@ -89,7 +90,7 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 ## Sampling
 
-Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/settings/project-replay#replay-ingestion).
+Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
 <ProductScreenshot
     imageLight={ImgSampleConfigLight} 
@@ -102,9 +103,19 @@ Our recommendation is to start with capturing 100% of sessions and decrease it a
 
 > **Note:** Sampling reduces the number of sessions you record, but it doesn’t let you control which sessions are recorded.
 
-### Overriding sampling
+## Combining controls
 
-You can begin a recording regardless of sampling by calling `posthog.startSessionRecording({sampling: true})`
+Since version 1.238.0 of the web SDK you can control how multiple triggers are combined. Choosing whether recording will start when all triggers match or when any trigger matches.
+
+For example if you set an event trigger for Exception events, a URL trigger for the checkout page, and sampling to 20%.
+
+### With any matching
+
+You'll capture 20% of every session, and any session that has an exception event or is on the checkout page.
+
+### With all matching
+
+You'll capture 20% of any session on the checkout page that has an exception event.
 
 ## Minimum duration
 

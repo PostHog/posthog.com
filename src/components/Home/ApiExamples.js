@@ -43,7 +43,7 @@ const WelderHog = () => {
 
 const examples = [
     {
-        title: 'User-facing analytics',
+        title: 'Embedded analytics',
         endpoint: 'query',
         description:
             'Query data captured into PostHog to show analytics for your users. Create your own visualizations and let PostHog fill in the data.',
@@ -56,7 +56,7 @@ const examples = [
     },
     {
         title: 'Evaluate feature flags anywhere',
-        endpoint: 'decide',
+        endpoint: 'flags',
         description: (
             <>
                 Even if you don't use one of our <Link to="/docs/getting-started/install?tab=sdks">SDKs</Link>, you can

@@ -14,7 +14,7 @@ users:
   - Leadership
   - Founder
 toolsUsed:
-  - LLM observability
+  - LLM analytics
   - Session recording
   - Error tracking
   - Product analytics
@@ -71,7 +71,7 @@ Responding to these BugSnag alerts caused a lot of friction, however. Brandon an
 
 A major reason Brandon was willing to make this switch was due to the way PostHog tools are interoperable and can be seamlessly used in combination. 
 
-You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
+You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/session-replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
 
 You can even use [Max AI](/docs/max-ai), the in-app AI agent, to search for similar errors and recordings using natural language.
 
@@ -79,4 +79,4 @@ You can even use [Max AI](/docs/max-ai), the in-app AI agent, to search for simi
 
 “This is one of the things I love most about PostHog, that you have so many tools in one place and they all work together. It makes it a no-brainer for you to install PostHog early on and then, when you get to the point where you need a new tool or to get serious about your data — everything you need is already there.”
 
-“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/ai-engineering) is going to be there for us when we’re ready.”
+“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/llm-analytics) is going to be there for us when we’re ready.”

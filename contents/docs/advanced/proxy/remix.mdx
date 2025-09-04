@@ -6,14 +6,22 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
 
 If you are using Remix, you can use [API routes](https://remix.run/docs/en/main/guides/api-routes) to set up a reverse proxy.
 
-Create a file `ingest.$.tsx` in the routes folder. In this file, set up code to match requests to a custom route, set a new host header, change the URL to point to PostHog, and rewrite the response.
+Create a file `<ph_proxy_path>.$.tsx` in the routes folder. For example, if your proxy path is `/ph-relay-xyz123`, name the file `ph-relay-xyz123.$.tsx`.
+
+In this file, set up code to match requests to a custom route, set a new host header, change the URL to point to PostHog, and rewrite the response.
 
 ```js
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
@@ -23,7 +31,7 @@ const ASSET_HOST = "eu-assets.i.posthog.com";
 
 const posthogProxy = async (request: Request) => {
   const url = new URL(request.url);
-  const hostname = url.pathname.startsWith("/ingest/static/")
+  const hostname = url.pathname.startsWith("/<ph_proxy_path>/static/")
     ? ASSET_HOST
     : API_HOST;
 
@@ -31,7 +39,7 @@ const posthogProxy = async (request: Request) => {
   newUrl.protocol = "https";
   newUrl.hostname = hostname;
   newUrl.port = "443";
-  newUrl.pathname = newUrl.pathname.replace(/^\/ingest/, "");
+  newUrl.pathname = newUrl.pathname.replace(/^\/<ph_proxy_path>/, "");
 
   const headers = new Headers(request.headers);
   headers.set("host", hostname);
@@ -60,7 +68,7 @@ Once done, configure the PostHog client to send requests via your rewrite.
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-  api_host: "/ingest",
+  api_host: "/<ph_proxy_path>",
   ui_host: "<ph_app_host>"
 })
 ```

@@ -81,7 +81,7 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
     },
     reducers: {
         surveyResponseNumber: [
-            250,
+            1500,
             {
                 setSurveyResponseSliderValue: (
                     _: null,

@@ -146,6 +146,8 @@ Slack is used for more informal communication, or where it doesn't make sense to
 
 Also keep in mind that, as an open source platform, PostHog has contributors who don't have access to Slack. Having too much context in a private location can be detrimental to those who are trying to understand the rationale for a certain decision.
 
+> Slack canvasses are useful for storing information like schedules, bookmarks, personal to-do lists, scratch notes etc. However, things like quarterly goals, runbooks, sprint plans, FAQs etc. should live in the Handbook, Docs, or in a GitHub RFC or Issue by default. If you find yourself documenting something useful in Slack, it's much better to put it in GitHub instead and link to it from Slack so that Max AI can include it in future search results. Slack canvasses are terrible for searchability!
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
@@ -155,6 +157,16 @@ Slack is used differently in different organizations. Here are some guidelines f
 1. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
 1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
 1. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
+
+Channel naming conventions so people don't get confused:
+
+- `#team-xxxxx` - small team channels, only as listed on the [teams](/teams) page
+- `#project-xxxxxx` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
+- `#posthog-xxxxx` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#xxxxxx-posthog` instead)
+- `#alerts-xxxxx` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
+- `#support-xxxxx` - similarly, useful to feed support requests in if helpful without adding clutter
+
+On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there. 
 
 ### Google Docs and Slides
 
@@ -197,7 +209,7 @@ Here are the steps for an RFC:
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
     - Post in the relevant Slack channel (normally the teams slack channel, or `#tell-posthog-anything` if it's a bigger cross-team RFC)
-    - Tag the people you need input from in the slack thread or DM them - it's your responsibility to nudge the relevant people for their input
+    - The aim is not to get one person to mark the RFC as approved, but to get the right people involved and commenting. It's a request for _comments_ not a request for _approval_. That means you might need to chase them to make sure it happens - tag the people, present at all hands, use offsites or other sync time - **it's your responsibility to nudge the relevant people for their input**
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
 5. Once a decision is made, include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
 

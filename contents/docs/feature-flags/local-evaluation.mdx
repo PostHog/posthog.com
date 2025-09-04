@@ -10,7 +10,7 @@ availability:
 
 > **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), and [PHP](/docs/libraries/php) SDKs.
 
-> **Note:** Do not use local evaluation in an edge / lambda environment, as this can slow down performance, and also raise your bill drastically. It's best to use regular flag evaluation instead.
+> **Note:** Do not use local evaluation in edge/lambda environments and stateless PHP applications, as per-request initialization causes performance issues and unnecessarily inflated costs. Use regular flag evaluation instead.
 
 Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
 
@@ -18,106 +18,31 @@ It is best practice to use local evaluation flags when possible, since this enab
 
 There are 3 steps to enable local evaluation:
 
-## Step 1: Obtain a personal API key
+## Step 1: Find your feature flags secure API key
 
-import ObtainPersonalAPIKey from "../integrate/_snippets/obtain-personal-api-key.mdx"
+import ObtainFeatureFlagsSecureAPIKey from "../integrate/_snippets/obtain-flags-secure-key.mdx"
 
-<ObtainPersonalAPIKey />
+<ObtainFeatureFlagsSecureAPIKey />
 
-## Step 2: Initialize PostHog with your personal API key
+## Step 2: Initialize PostHog with your feature flags secure API key
 
-When you initialize PostHog with your personal API key, PostHog will use your the key to automatically fetch feature flag definitions. These definitions are then used to evaluate feature flags locally.
+When you initialize PostHog with your feature flags secure API key, PostHog will use the key to automatically fetch feature flag definitions. These definitions are then used to evaluate feature flags locally.
 
 By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in the Go SDK). However, you can change this frequency by specifying a different value in the polling interval argument.
 
-> **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to `10 decide` requests. 
+> **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to `10 flags` requests. 
 > 
 > This is because one of these requests can compute feature flags for hundreds or thousands of users. It ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!). 
 
-<MultiLanguage>
+import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secure-key.mdx"
 
-```node
-const client = new PostHog(
-    '<ph_project_api_key>',
-    { 
-        host: '<ph_client_api_host>',
-        personalApiKey: 'your personal API key from step 1',
-        featureFlagsPollingInterval: 30000 // Optional. Measured in milliseconds. Defaults to 30000 (30 seconds)
-    }
-) 
-```
-
-```ruby
-posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
-  host: "<ph_client_api_host>",
-  personal_api_key: 'your personal API key from step 1',
-  feature_flags_polling_interval: 30 # Optional. Measured in seconds. Defaults to 30.
-})
-```
-
-```go
-package main
-
-import (
-    "os"
-    "time"
-    "github.com/posthog/posthog-go"
-)
-
-func main() {
-	client, _ := posthog.NewWithConfig(
-		os.Getenv("POSTHOG_API_KEY"),
-		posthog.Config{
-			Endpoint:       "<ph_client_api_host>",
-			PersonalApiKey: "your personal API key", // Optional, but much more performant. If this token is not supplied, then fetching feature flag values will be slower.
-            DefaultFeatureFlagsPollingInterval: time.Minute * 5 // time.Duration // Optional. Defaults to 5 minutes.
-            // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
-		},
-	)
-	defer client.Close()
-	// run commands
-}
-```
-
-```php
-PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_client_api_host>'),
-  null, // or custom http client
- 'YOUR PERSONAL API KEY from step 1'
-);
-// NOTE: PHP currently doesn't support a poller, so you'll need to reload flags as and when needed, or re-initialize the posthog client
-```
-
-```python
-from posthog import Posthog
-
-posthog = Posthog('<ph_project_api_key>', 
-    host='<ph_client_api_host>',
-    poll_interval=30, # Optional. Measured in seconds. Defaults to 30.
-    personal_api_key='your personal API key from step 1'
-)
-```
-
-```dotnet
-// Note: We don't recommend passing these in directly.
-// Instead, rely on the config system and set the personal 
-// api key in a secrets manager.
-var client = new PostHogClient(
-    new PostHogOptions {
-        ProjectApiKey = "<ph_project_api_key>",
-        PersonalApiKey = "your personal API key from step 1"
-    });
-```
-
-
-</MultiLanguage>
+<ConfigureFlagsSecureKey />
 
 ## Step 3: Evaluate your feature flag
 
 To evaluate the feature flag, call any of the flag related methods, like `getFeatureFlag` or `getAllFlags`, as you normally would. The only difference is that you must provide any `person properties`, `groups` or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
 
-Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request fetch the flag value. 
+Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value. 
 
 You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to. 
 
@@ -134,14 +59,14 @@ await client.getFeatureFlag(
         },
         groups: {
             "your_group_type": "your_group_id",
-            "another_group_type": "your_group_id",
+            "another_group_type": "another_group_id",
         },
         groupProperties: {
             'your_group_type': {
                 'group_property_name': 'value'
             },
             'another_group_type': {
-                'group_property_name': 'value'
+                'group_property_name': 'another value'
             } 
         },
         onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
@@ -159,14 +84,14 @@ posthog.get_feature_flag(
     },
     groups: {
         'your_group_type': 'your_group_id',
-        'another_group_type': 'your_group_id',
+        'another_group_type': 'another_group_id',
     },
     group_properties: {
         'your_group_type': {
             'group_property_name': 'value'
         }
         'another_group_type': {
-            'group_property_name': 'value'
+            'group_property_name': 'another value'
         } 
     },
     only_evaluate_locally: False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
@@ -181,7 +106,7 @@ enabledVariant, err := client.GetFeatureFlag(
         // Include any person properties, groups, or group properties required to evaluate the flag
         Groups: posthog.NewGroups().
             Set("your_group_type", "your_group_id").
-            Set("another_group_type", "your_group_id"),
+            Set("another_group_type", "another_group_id"),
         PersonProperties: posthog.NewProperties().
             Set("property_name", "value"),
         GroupProperties: map[string]map[string]interface{}{
@@ -189,7 +114,7 @@ enabledVariant, err := client.GetFeatureFlag(
                 "group_property_name": "value",
             },
             "another_group_type": {
-                "group_property_name": "value",
+                "group_property_name": "another value",
             },
         },
         OnlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
@@ -205,10 +130,11 @@ posthog.get_feature_flag(
     person_properties={'property_name': 'value'},
     groups={
         'your_group_type': 'your_group_id',
-        'another_group_type': 'your_group_id'},
+        'another_group_type': 'another_group_id'
+    },
     group_properties={
         'your_group_type': {'group_property_name': 'value'},
-        'another_group_type': {'group_property_name': 'value'}
+        'another_group_type': {'group_property_name': 'another value'}
     },
     only_evaluate_locally=False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
 )
@@ -221,15 +147,40 @@ PostHog::getFeatureFlag(
     // Include any person properties, groups, or group properties required to evaluate the flag
     [
         'your_group_type' => 'your_group_id',
-        'another_group_type' => 'your_group_id'
+        'another_group_type' => 'another_group_id'
     ], // groups
     ['property_name' => 'value'], // person properties
     [
         'your_group_type' => ['group_property_name' => 'value'], 
-        'another_group_type' => ['group_property_name' => 'value']
+        'another_group_type' => ['group_property_name' => 'another value']
     ], // group properties
     false, // only_evaluate_locally, Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
     true // sendFeatureFlagEvents
+);
+```
+
+```csharp
+await posthog.GetFeatureFlagAsync(
+    "flag-key",
+    "distinct_id_of_the_user",
+    options: new FeatureFlagOptions
+    {
+        PersonProperties = new()
+        {
+            ["property_name"] = "value"
+        },
+        Groups = new()
+        {
+            new Group("your_group_type", "your_group_id")
+            {
+                ["group_property_name"] = "value"
+            },
+            new Group("another_group_type", "another_group_id")
+            {
+                ["group_property_name"] = "another value"
+            }
+        }
+    }
 );
 ```
 
@@ -237,7 +188,7 @@ PostHog::getFeatureFlag(
 
 ## Reloading flags
 
-As mentioned in [step 2](#step-2-initialize-posthog-with-your-personal-api-key), PostHog periodically fetches feature flag definitions. However, you can also force a reload by calling `reloadFeatureFlags()`:
+As mentioned in [step 2](#step-2-initialize-posthog-with-your-feature-flags-secure-api-key), PostHog periodically fetches feature flag definitions. However, you can also force a reload by calling `reloadFeatureFlags()`:
 
 <MultiLanguage>
 

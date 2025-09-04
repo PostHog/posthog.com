@@ -14,13 +14,16 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: false
+  llmAnalytics: false
   errorTracking: true
 ---
 
+import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 PostHog makes it easy to get data about traffic and usage of your React app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-This guide will walk you through an example integration of PostHog using React and the [posthog-js library](/docs/integrate/client/js).
+This guide walks you through an example integration of PostHog using React and the [posthog-js library](/docs/integrate/client/js).
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
 
@@ -32,55 +35,32 @@ import ReactInstall from '../../integrate/_snippets/install-react.mdx'
 
 <ReactInstall />
 
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
 ## Usage
 
-### PostHog Provider
+### PostHog provider
 
 The React context provider makes it easy to access the `posthog-js` library in your app.
 
-The provider can either take an initialized client instance OR an API key and an optional `options` object.
-
-With an initialized client instance:
+The provider takes an initialized and configured client instance like this:
 
 ```react
 // src/index.js
 import posthog from 'posthog-js';
 import { PostHogProvider} from 'posthog-js/react'
 
-posthog.init(
-  process.env.REACT_APP_PUBLIC_POSTHOG_KEY,
-  {
-    api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
-  }
-);
+posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
+  api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
+  defaults: '<ph_posthog_js_defaults>',
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PostHogProvider client={posthog}>
-      <App />
-    </PostHogProvider>
-  </React.StrictMode>
-);
-```
-
-or with an API key and optional `options` object:
-
-```react
-// src/index.js
-import { PostHogProvider} from 'posthog-js/react'
-
-const options = {
-  api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
-}
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <PostHogProvider 
-      apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
-      options={options}
-    >
       <App />
     </PostHogProvider>
   </React.StrictMode>
@@ -156,7 +136,7 @@ useEffect(() => {
 
 Typescript helps protect against these errors.
 
-## Feature Flags
+## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
@@ -166,7 +146,7 @@ import ReactFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/
 
 <ReactFeatureFlagsCode />
 
-### Bootstrapping Flags
+### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our primary focus is on making our paying customers successful, not forcing sales through. We follow a 100% inbound sales model - our approach to [product-led growth](/handbook/strategy/overview) means that we do not do cold outbound. Our plan is to put this off for as long as humanly possible.  
+Our primary focus is on making our paying customers successful, not forcing sales through. Today, we follow a 100% inbound sales model - our approach to [product-led growth](/handbook/strategy/overview) means that we do not do cold outbound yet, though we'll probably run some experiments here later in 2025 as we scale. 
 
 While this means working with a smaller number of users than typical B2B SaaS companies, we know that the people we talk to are mostly already pre-qualified and genuinely interested in potentially using PostHog. 
 
@@ -27,21 +27,23 @@ The Sales team act as genuine partners with our users. We should feel as motivat
 
 ### Things we want to be great at
 
-- **Genuinely helpful:** We deliver genuinely useful insights about things those customers care about (can be purely PostHog-related, but also general advice). Our ICP are ‘self-servers', so ideally we teach them how to do something, rather than doing it for them. A great support experience is part of this. 
+- **Technically capable:** We deliver genuinely useful insights about things those customers care about (can be purely PostHog-related, but also general advice). Our ICP are ‘self-servers', so ideally we teach them how to do something, rather than doing it for them. A great support experience is part of this. 
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
 - **Cross sell:** PostHog gets much more powerful as customers adopt [multiple products](/handbook/growth/sales/expansion-and-retention#identifying-cross-sell-opportunities) that all share the underlying data. And they stick around longer. It's a win win. 
 
-- **Warm outbound to product leads:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by [proactively reaching out to them](/handbook/growth/sales/product-led-sales#product-led-lead-generation) based on certain triggers. Some people call this 'warm outbound'. 
+- **Warm outbound to product leads:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by [proactively reaching out to them](/handbook/growth/sales/product-led-sales#product-led-lead-generation) based on certain triggers. Some people call this 'warm outbound'.
+
+### Things we're interested in trying out
+
+- **Cold outbound:** Most companies do this really badly. We're interested in seeing how we could do this the PostHog way. 
 
 ### Things we don't want to spend time on
 
 - **Events:** These _may_ be a good way for us to reach more of our ICP in future, done in the right way, e.g. by giving talks. However events are not a scalable/automatable channel, and are slightly in the zone of 'outbound sales'.
 
 - **Winning the deal at all costs:** We have overall ARR targets at PostHog, but these are not exclusively achieved by the Sales & CS team - the vast majority of our paying customers come in without ever talking to us. This means that revenue isn't the CS team's responsibility alone, so we don't have to close deals where we get a short term bump to revenue in exchange for long term pain/churn (e.g. forcing a non-ICP deal to close with extremely discounted pricing).
-
-- **Cold outbound:** No thank you. 
 
 ## How to work with different types of customer
 
@@ -69,12 +71,10 @@ We'd typically define a deal as a large deal if it has most of the following:
 
 ## Who the Sales team are
 
-Our small team page is maintained [here](/teams/sales-cs). By 2026, we still want to be a very focused but highly effective and responsive team, rather than a very large sales team with all the traditional functions and hierarchy. AEs at PostHog are fullstack - they are responsible for selling to qualified leads, getting them properly using the product, and being the main point of contact for retaining/cross-selling to existing customers assigned to them. This is a hybrid role - we don't sell and then throw over the wall to an accounts team to manage.
+Our small team page is maintained [here](/teams/sales-cs). In addition to people who share PostHog's culture, we also value:
 
-In addition to people who share PostHog's culture, we also value:
-
-- People who have very high empathy with product engineers and their needs
+- People who have very high empathy with product teams and their needs
 - People who are happy to choose their own objectives if it meets a business goal
 - Low ego, and a willingness to turn around even the most disgruntled and unreasonable customer
 - Hands-on people not motivated by managing a team
-- For anyone sales-focused, we would want to buy PostHog from them - this is more important than cool logos
+- We would want to buy PostHog from them - this is more important than cool logos

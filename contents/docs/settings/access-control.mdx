@@ -5,6 +5,7 @@ showTitle: true
 availability:
     free: none
     selfServe: none
+    teams: partial
     enterprise: full
 ---
 export const rbacSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_light_5774d4da82.png"
@@ -36,21 +37,21 @@ The three access levels are: Member, Admin, and Owner. An organization must have
 | Changing authentication settings (SAML, SSO settings, 2FA enforcement, etc.)          | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Changing organization settings (name, logo, etc.)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Managing RBAC Roles (creating, editing, deleting, changing members, etc.)             | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
-| Inviting new members (only for current level or below)                                | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Inviting new members (only for current level or below)*                               | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Managing members (changing roles, removing, etc.)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Leaving an organization                                                               | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-red text-lg">✖</span>      |
 | Transferring organization ownership                                                   | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
 | Deleting an organization                                                              | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
 
+*This permission is configurable and can be disabled for members by organization admins and owners.
+
 Access levels can be viewed and changed in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
 
 ### 2. Project level
 
-> This feature is currently being rolled out to all users, so you may not see this experience yet. If you're interested in trying it out, please email zach@posthog.com with "Access control beta" in the subject line.
-
 At the project level, there are two access levels: member and admin.
 
-Each project has a default access level that applies to all organization members:
+Each project has a default access level that applies to all organization members. The default access level can be one of these three options:
 
 - **No access** – Members need explicit permission to access the project
 - **Member** – All organization members have member-level access
@@ -79,8 +80,6 @@ See the table below for a summary of project-level permissions:
 
 ### 3. Resource level
 
-> This feature is currently being rolled out to all users, so you may not see this experience yet. If you're interested in trying it out, please email zach@posthog.com with "Access control beta" in the subject line.
-
 Resource access controls allow you to control who can view and edit specific resource objects. These can be accessed in the "Access control" sidebar when viewing a supported resource.
 
 Currently, resource access controls are available for:
@@ -92,20 +91,21 @@ Currently, resource access controls are available for:
 
 Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
 
-Resource access controls have three possible access levels:
+Resource access controls have four possible access levels:
 - **No access** – Cannot view or edit the resource
-- **View** – Can view but not modify the resource
-- **Edit** – Can view and modify the resource
+- **Viewer** – Can view but not modify the resource
+- **Editor** – Can view and modify the resource
+- **Manager** - Can change metadata about the resource like access controls
 
 There are two ways to set resource-level access controls:
 
-#### a. Individual resource object
+#### a. Individual resource object (object access controls)
 
 These settings allow you to control who can view and edit a specific resource object. You can access these controls via the project's access control settings.
 
-By default, new resources are set to "Edit" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
+By default, new resources are set to "Editor" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
 
-Resource creators and project admins can always view and edit resources, as well as manage their access controls. Only creators and project admins can manage access controls for a resource object.
+Resource creators, project admins, and users with "Manager" access can always view and edit resources, as well as manage their access controls.
 
 You cannot set resource-level access controls for project admins, as they always have full access.
 
@@ -116,15 +116,15 @@ You cannot set resource-level access controls for project admins, as they always
     classes="rounded"
 />
 
-#### b. All resource objects of a given type in a project
+#### b. All resource objects of a given type in a project (resource access controls)
 
 These settings allow you to control who can view and edit all resources of a given type within a project. These controls are set at the project level.
 
 You can set default access levels for all resources of a given type in a project. This allows you to set it once and apply it to all resources of that type in the project (past and future).
 
-Project-wide access controls for resources take precedence over individual resource object access controls.
+Individual resource object access controls for specific users or roles take precedence over resource-level access controls.
 
-You cannot set project-wide access controls for project admins, as they always have full access.
+You cannot set resource-level access controls for project admins, as they always have full access.
 
 <ProductScreenshot
     imageLight = {resourceAccessControlLight} 
@@ -133,25 +133,85 @@ You cannot set project-wide access controls for project admins, as they always h
     classes="rounded"
 />
 
+## How object access control precedence works
+
+When determining what a user can access for a specific resource object, PostHog checks permissions in this order (highest priority first):
+
+1. **Specific object permissions** - Direct access granted to a specific resource object (e.g., Amy can edit Dashboard X)
+2. **Resource type permissions** - Access set for all resources of a type (e.g., Customer Support role can view all Notebooks)
+3. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default)
+
+**Note**: Resource creators and organization admins always have full access, regardless of these precedence rules.
+
+## Common use cases
+
+Here are some practical examples of how to configure access controls for different scenarios:
+
+#### Contractor with access to only one dashboard
+
+**Scenario**: You want to give a contractor access to view only a specific dashboard without access to other project resources.
+
+**Setup**:
+1. Set resource-level access controls to "No access" for all resource types for the contractor
+2. Give the contractor specific "Viewer" access to the desired dashboard
+3. The contractor will only see and access that specific dashboard
+
+#### Country teams with role-based access
+
+**Scenario**: You have teams organized by country and want each team to have edit access to their country's resources.
+
+**Setup**:
+1. Create roles for each country team (e.g., "US Team", "UK Team")
+2. Add team members to their respective country roles
+3. Set resource-level access controls to "Viewer" for all resource types for each role
+4. Create country-specific dashboards and insights
+5. Assign each role "Editor" access to their country's resources
+
+#### Private project for executives only
+
+**Scenario**: You want to create a project that only executives can access.
+
+**Setup**:
+1. Set project default access to "No access"
+2. Create an "Executives" role
+3. Add executives to the "Executives" role
+4. Give the "Executives" role "Admin" access to the project 
+5. Only executives will have access to the project and its resources
+
+#### Data scientist with limited access
+
+**Scenario**: You want to give an analyst access to create and edit insights, but only view dashboards.
+
+**Setup**:
+1. Set resource-level access controls to "No access" for all resource types for the analyst
+2. Give the analyst "Editor" access to all Insights (resource-level)
+3. Give the analyst "Viewer" access to all Dashboards (resource-level)
+4. The analyst can create and edit insights but only view dashboards
+
 ## Feature availability
 
-### Free / Ridiculously cheap
+### Free / Pay-as-you-go
 
-These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Edit" access.
+These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Editor" access.
 
-### Teams
+### Boost or Scale
 
-The Teams Add-on gives advanced permissions.
+The Boost and Scale add-ons include access controls for teams with stricter security requirements.
 
-The goal of this is to allow teams with stricter access requirements to control who can access their projects and resources.
-
-On this plan, you can set default access levels for projects and resources, and also set specific access levels for individual members (but not roles).
+**What you can do:**
+- Set default access levels for projects and resources
+- Configure specific access levels for individual members (but not roles)
 
 ### Enterprise
 
-> While you can create roles on any plan, they can only be used for access control on Enterprise plans.
+> **Note**: While you can create roles on any plan, they can only be used for access control on Enterprise plans.
 
-Instead of managing permissions individually, you can create roles to group users together. Roles can be assigned permissions at both the project and resource level.
+Enterprise plans include full access control capabilities with role-based access control (RBAC).
+
+**What you can do:**
+- Create roles to group users together
+- Assign permissions to roles at both project and resource levels
+- Manage permissions at scale instead of individually
 
 <ProductScreenshot
     imageLight = {rbacSettingsLight} 
@@ -159,3 +219,171 @@ Instead of managing permissions individually, you can create roles to group user
     alt="RBAC settings" 
     classes="rounded"
 />
+
+## API support
+
+PostHog provides comprehensive API endpoints for managing access controls programmatically. This allows you to automate permission management and integrate access control into your workflows.
+
+### Authentication
+
+To use the access control API endpoints, you need to authenticate using one of PostHog's [authentication methods](/docs/api). Personal API keys require specific scopes:
+- **Read operations**: `access_control:read` scope
+- **Write operations**: `access_control:write` scope
+
+### Available endpoints
+
+Each supported resource type provides the following endpoints:
+
+#### 1. Object access controls
+**Endpoint**: `GET/PUT` `/{resource}/{id}/access_controls`
+
+This endpoint allows you to view and manage access controls for a specific objects. See above for more details on object access controls.
+
+Example endpoints:
+- `/api/projects/@current/dashboards/{dashboard_id}/access_controls`
+- `/api/projects/@current/access_controls`
+
+#### 2. Resource access controls
+**Endpoint**: `GET/PUT` `/{resource}/{id}/resource_access_controls`
+
+This endpoint manages project-wide access rules for all resources of a given type. See above for more details on resource access controls.
+
+Example endpoints:
+- `/api/projects/@current/resource_access_controls`
+
+#### 3. Users with access
+**Endpoint**: `GET` `/{resource}/{id}/users_with_access`
+
+Returns a list of all users who have access to a specific resource, including their access levels and how they obtained access.
+
+Example endpoints:
+- `/api/projects/@current/dashboards/{dashboard_id}/users_with_access`
+- `/api/projects/@current/users_with_access`
+
+### Request and response formats
+
+#### Getting object access controls
+
+**Request**: `GET` `/api/projects/@current/dashboards/{dashboard_id}/access_controls`
+
+**Response**:
+```json
+{
+  "access_controls": [
+    {
+      "access_level": "editor",
+      "resource": "dashboard",
+      "resource_id": "abc123",
+      "organization_member": "member-uuid",
+      "role": null,
+      "created_by": "user-uuid",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "available_access_levels": ["none", "viewer", "editor", "manager"],
+  "default_access_level": "editor", // The default access level if no specific access level is set
+  "user_access_level": "manager", // The current user's access level for this resource
+  "user_can_edit_access_levels": true
+}
+```
+
+#### Setting object access controls
+
+**Request**: `PUT /api/projects/@current/dashboards/{dashboard_id}/access_controls`
+
+```json
+{
+  "access_level": "editor",
+  "organization_member": "member-uuid" 
+}
+```
+
+Or with a role:
+```json
+{
+  "access_level": "viewer",
+  "role": "role-uuid"
+}
+```
+
+**Note**: You must specify either `organization_member` OR `role`, not both. To remove an access control, set `access_level` to `null`.
+
+#### Getting resource access controls
+
+**Request**: `GET /api/projects/@current/resource_access_controls`
+
+**Response**:
+```json
+{
+  "resource_access_controls": [
+    {
+      "access_level": "editor",
+      "resource": "dashboard",
+      "resource_id": null,
+      "organization_member": "member-uuid",
+      "role": null,
+      "created_by": "user-uuid",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "available_access_levels": ["none", "viewer", "editor", "manager"],
+  "default_access_level": "editor", // The default access level if no specific access level is set
+  "user_access_level": "manager", // The current user's access level for this resource
+  "user_can_edit_access_levels": true
+}
+```
+
+#### Setting resource access controls
+
+**Request**: `PUT /api/projects/@current/resource_access_controls`
+
+```json
+{
+  "access_level": "editor",
+  "resource": "feature_flag",
+  "organization_member": "member-uuid" 
+}
+```
+
+Or with a role:
+```json
+{
+  "access_level": "viewer",
+  "resource": "feature_flag",
+  "role": "role-uuid"
+}
+```
+
+**Note**: You must specify either `organization_member` OR `role`, not both. If you want to set a default value for all members pass `null` for both `organization_member` and `role`.
+
+#### Getting users with access
+
+**Request**: `GET /api/projects/@current/dashboards/{dashboard_id}/users_with_access`
+
+**Response**:
+```json
+{
+  "users": [
+    {
+      "user_id": "user-uuid",
+      "access_level": "manager",
+      "access_source": "creator",
+      "organization_membership_id": "membership-uuid",
+      "organization_membership_level": "admin"
+    }
+  ],
+  "total_count": 1
+}
+```
+
+### Access sources
+
+When querying who has access to a resource, the API returns how each user obtained their access:
+- `creator` – User created the resource
+- `organization_admin` – Organization admin privileges
+- `explicit_member` – Direct member assignment
+- `explicit_role` – Role-based assignment
+- `project_admin` – Project admin privileges
+- `default` – Default project access level

@@ -16,11 +16,14 @@ import trustwallet from './images/customers/trustwallet.svg'
 import yCombinator from './images/customers/y-combinator.svg'
 
 import mistral from './images/customers/mistral.svg'
+import lovable from './images/customers/lovable.svg'
 import elevenlabs from './images/customers/elevenlabs.svg'
 import raycast from './images/customers/raycast.svg'
 import startengine from './images/customers/startengine.svg'
 import zendesk from './images/customers/zendesk.svg'
 import researchgate from './images/customers/researchgate.svg'
+import supabase from './images/customers/supabase.svg'
+import heygen from './images/customers/heygen.svg'
 
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
@@ -122,14 +125,9 @@ export default function Customers() {
                     />
                     <Customer className="max-h-[60px]" image={raycast} alt="Raycast" />
                     <Customer className="max-h-[36px]" image={airbus} alt="Airbus" />
-                    <Customer className="max-h-[30px]" image={dhl} alt="DHL" />
-                    <Customer className="max-h-[60px]" image={startengine} alt="StartEngine" />
-                    <Customer
-                        url="/customers/assemblyai"
-                        className="max-h-[45px]"
-                        image={assemblyai}
-                        alt="Assembly AI"
-                    />
+                    <Customer className="max-h-[45px]" image={heygen} alt="HeyGen" />
+                    <Customer url="/customers/lovable" className="max-h-[40px]" image={lovable} alt="Lovable" />
+                    <Customer url="/customers/supabase" className="max-h-[45px]" image={supabase} alt="Supabase" />
                     <Customer
                         url="/customers/hasura"
                         className="max-h-[45px] relative -top-1"

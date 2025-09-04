@@ -1,0 +1,53 @@
+For Pages Router, you can use React's [Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) to catch JavaScript errors anywhere in the component tree.
+
+Create a custom error boundary component and report errors to PostHog in the `componentDidCatch` method:
+
+```tsx file=components/ErrorBoundary.tsx focusOnLines=13-17
+// components/ErrorBoundary.js
+import React from 'react'
+import posthog from 'posthog-js'
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    posthog.captureException(error) // +
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+         {/* ... */}
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
+
+export default ErrorBoundary
+```
+
+Then wrap your app or specific components with the error boundary:
+
+```tsx file=pages/_app.tsx
+import type { AppProps } from 'next/app'
+import ErrorBoundary from '../components/ErrorBoundary'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ErrorBoundary> // +
+      <Component {...pageProps} />
+    </ErrorBoundary> // +
+  )
+}
+```

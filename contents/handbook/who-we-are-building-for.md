@@ -36,15 +36,15 @@ Each team will focus more or less on different members of the product team. This
 
 - Most of the existing product analytics tools are built for product managers who are less technical, not engineers.
 
-- However, the best tech companies are increasingly engineering led, with all members of the product team being technical. We believe more companies will work like this in the future.
+- However, the best tech companies are increasingly engineering-led, with all members of the product team being technical. We believe more companies will work like this in the future.
 
 **Principles**
 
-- We should double down on the best product engineers at the best product companies.
+- We should double-down on the best product engineers at the best product companies.
 
 - Going incredibly far with a specific type of user instead of placating everybody means we'll get over the threshold for "I need to tell my engineer friends about this." We only get word-of-mouth growth by doing a remarkable job for a specific kind of user, not an average one for lots of people.
 
-- We develop a strong feedback loop: by building for the best product engineers we'll attract more of the best product engineers and the best companies. This improves PostHog and drives more word-of-mouth growth from high authority individuals and companies.
+- We develop a strong feedback loop: by building for the best product engineers, we'll attract more of the best product engineers and the best companies. This improves PostHog and drives more word-of-mouth growth from high authority individuals and companies.
 
 - As more of the best companies become engineering-led and grow faster as a result, PostHog gains significant market share.
 
@@ -52,7 +52,7 @@ Each team will focus more or less on different members of the product team. This
 
 - We have good PMF with engineers and not yet with product people.
 
-- Instead, we should make the tool simpler and more accessible to product managers so we can better work for them and companies with product manager-led cultures. 
+- Instead, we should make the tool simpler and more accessible to product managers, so we can better work for them and companies with product manager-led cultures. 
 
 - This could potentially help us grow faster in the short-term. However, this is less convincing for long-term growth and less clearly differentiates PostHog from existing tools.
 
@@ -62,7 +62,7 @@ Each team will focus more or less on different members of the product team. This
 
 - Generally, we should build for the **best product engineers** building the **most-loved products** at **high-growth startups**.
 
-- These kinds of users are speaking to customers, looking at data, and quickly building and shipping features. They operate collaboratively within a diverse team including designers, other PMs, marketers and executives. We want to be loved by the sophisticated power users and still good to use for the others on the team.
+- These kinds of users are speaking to customers, looking at data, and quickly building and shipping features. They operate collaboratively within a diverse team including designers, other PMs, marketers, and executives. We want to be loved by the sophisticated power users and still good to use for the others on the team.
 
 - For product analytics, product managers who are technical (ex-engineers, for example) are the power users of analytics. They have the desire and the time to go significantly deeper into the data.
 
@@ -70,7 +70,7 @@ Each team will focus more or less on different members of the product team. This
 
 - Our product is very sticky. By being the default choice at the highest potential startups we can grow with them and learn from them. Other small-stage (but less high-potential) companies index on what they use.
 
-- High-potential startups haven’t cracked product-market fit yet, but are rapidly iterating towards it. They are founded by excellent product people that likely played key IC roles in other companies or founded a company previously. Often in top accelerators.
+- High-potential startups haven’t cracked product-market fit yet, but are rapidly iterating towards it. They are founded by excellent product people that likely played key IC roles in other companies or founded a company previously, often in top accelerators.
 
 - Compared to the individual contributor personas in high-growth startups, at high-potential startups the CTO/technical co-founder will often take more of a lead.
 
@@ -94,7 +94,7 @@ Each team will focus more or less on different members of the product team. This
   - Significant bonus points:
     - Their day job is at an ICP
     - They have a large active social media reach
-    - They are in major tech cites e.g. San Francisco, Austin, New York, London, Berlin, etc.
+    - They are in major tech cities e.g. San Francisco, Austin, New York, London, Berlin, etc.
 
 ### Why the data team?
 
@@ -106,4 +106,4 @@ Each team will focus more or less on different members of the product team. This
 
 - The features should be usable by the marketing team, but we shouldn’t focus on building features specifically _for_ them. Generally, they have a different level of technical ability to our core power users.
 
-- There is an exception to the rule: If a feature will make PostHog more widely adopted in a company, and will decrease the risk of the company moving to a competitor, we should build the feature. Ultimately, this is in line with our wider strategy, because the more teams in a company use the same set of product data stored in PostHog vs a second tool, the more successfully the company will operate. Anti goal: Make PostHog _harder_ to use for product engineers by supporting features for non-ICP users.
+- There is an exception to the rule: If a feature will make PostHog more widely adopted in a company, and will decrease the risk of the company moving to a competitor, we should build the feature. Ultimately, this is in line with our wider strategy, because the more teams in a company using the same set of product data stored in PostHog vs a second tool, the more successfully the company will operate. Anti goal: Make PostHog _harder_ to use for product engineers by supporting features for non-ICP users.

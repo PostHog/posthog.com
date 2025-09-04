@@ -136,7 +136,7 @@ export async function middleware(request) {
 //...
 ```
 
-With the distinct ID, we can make an API request to evaluate flags for the user. This requires making a request to `https://us.i.posthog.com/decide?v=4` (or `https://eu.i.posthog.com/decide?v=4`) with the `api_key` and `distinct_id`. 
+With the distinct ID, we can make an API request to evaluate flags for the user. This requires making a request to `https://us.i.posthog.com/flags?v=2` (or `https://eu.i.posthog.com/flags?v=2`) with the `api_key` and `distinct_id`. 
 
 > **Note:** We use the API because [Vercel edge middleware](https://vercel.com/docs/concepts/functions/edge-middleware) (which optimizes the speed of this request in your app) has a limited number of packages and `posthog-node` isn’t one of them.
 
@@ -154,7 +154,7 @@ const requestOptions = {
 };
 
 const ph_request = await fetch(
-	'<ph_client_api_host>/decide?v=4',
+	'<ph_client_api_host>/flags?v=2',
 	requestOptions
 );
 const data = await ph_request.json();
@@ -192,7 +192,7 @@ export async function middleware(request) {
   };
   
   const ph_request = await fetch(
-		'<ph_client_api_host>/decide?v=4', // or eu
+		'<ph_client_api_host>/flags?v=2', // or eu
 		requestOptions
 	);
   const data = await ph_request.json();

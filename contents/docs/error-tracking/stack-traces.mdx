@@ -2,9 +2,11 @@
 title: Stack traces
 ---
 
+import Tab from "components/Tab"
+
 Error tracking enables you to view the stack trace and code context associated with an exception. This can help understand, identify and resolve the root cause of an issue.
 
-For languages like Python, the stack trace and code context can be gathered by the PostHog client and requires no additional processing.
+Stack traces are available for all languages and can be found in the details page of an issue.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
@@ -13,13 +15,27 @@ For languages like Python, the stack trace and code context can be gathered by t
     classes="rounded"
 />
 
-## Symbol sets
+## Resolving stack traces
+
+If you use a compiled language or server minified bundles, you'll need to [upload source maps](/docs/error-tracking/upload-source-maps) to get stack traces. Compiled or minified code obfuscates the original source code, so PostHog uses the source map to resolve the stack trace to the original source code.
+
+For languages like Python, the stack trace and code context can be gathered by the PostHog client and requires no additional processing.
+
+### Uploading source maps
+
+If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. You can either use the `@posthog/nextjs-config` package or the `posthog-cli` to handle this process. Select your platform to view instructions.
+
+import UploadSourceMapPlatforms from  './upload-source-maps/_snippets/upload-source-map-platforms.tsx'
+
+<UploadSourceMapPlatforms />
+
+## Troubleshooting symbol sets
 
 Compiled or minified languages requires additional information to perform a process called symbolification to produce the same stack trace and code context output shown above. The additional information is known as a symbol set.
 
 The `source` of a frame in the exception stack trace should point to the minified code of your application which should contain the `sourceMappingUrl` parameter denoting the location of the source map. These files must either be publicly accessible for PostHog to fetch or uploaded manually to symbolify the stack trace.
 
-You can see the symbol sets fetched by PostHog and the associated frames within the [error tracking settings](https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets). Any missing symbol sets will also be present along with the failure reason. From here, you can also manually upload missing symbol sets or replace existing ones.
+You can see the symbol sets fetched by PostHog and the associated frames within the [error tracking settings](https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets). Any missing symbol sets will also be present along with the failure reason. From here, you can also manually upload missing symbol sets or replace existing ones.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_29_at_21_24_09_7b244773eb.png"
@@ -28,6 +44,4 @@ You can see the symbol sets fetched by PostHog and the associated frames within 
     classes="rounded"
 />
 
-import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
-
-<UploadSourceMaps />
+We strongly recommend you follow the [upload source maps](/docs/error-tracking/upload-source-maps) guide to ensure your stack traces are uploaded automatically in CI instead of manually debugging the process. If you're still having issues, [let us know in-app](https://us.posthog.com/project/2#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).

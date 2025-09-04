@@ -13,12 +13,11 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
-  surveys: false
-  llmObservability: false
-  errorTracking: false
+  surveys: true
+  llmAnalytics: false
 ---
 
-import FlutterIdentify from './\_snippets/identify.mdx'
+import FlutterIdentify from './_snippets/identify.mdx'
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
@@ -62,7 +61,7 @@ await Posthog().alias(
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Anonymous vs identfied events
+## Anonymous vs identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
 
@@ -110,7 +109,7 @@ await Posthog().unregister("team_id")
 
 This will remove the Super Property and subsequent events will not include it.
 
-If you are doing this as part of a user logging out you can instead simply use `Posthog().reset` which takes care of clearing all stored Super Properties and more.
+If you are doing this as part of a user logging out you can instead simply use `Posthog().reset()` which takes care of clearing all stored Super Properties and more.
 
 ## Group analytics
 
@@ -158,9 +157,17 @@ This is needed as Flutter renders your app using a browser canvas element.
 
 ## Surveys
 
-> **Note: ** Surveys is supported on the Flutter Web environment only.
+> **Note:** Surveys is supported in Flutter for **Web**, **iOS** and **Android** platforms. 
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+## Offline behavior
+
+The PostHog Flutter SDK will continue to capture events when the device is offline for Android and Apple platforms. The events are stored in a queue in the device's file storage and are flushed when the device is online.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed when the app is restarted and the device is online.
 
 ## Issues
 

@@ -9,7 +9,7 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconHandMoney, IconRocket } from '@posthog/icons'
+import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -26,6 +26,8 @@ import Header from './Test/Header'
 import { Link as ScrollLink } from 'react-scroll'
 import PurchasedWith from './Test/PurchasedWith'
 import { PRODUCT_COUNT } from '../../constants'
+import { Calculator } from './Test/Calculator'
+import PricingHero from './Test/PricingHero'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -50,7 +52,16 @@ const Discounts = () => (
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Non-profits</strong>
                 <p className="text-[15px] mb-2">
-                    Most non-profits are eligible for 50% off. Get in touch through the app after signing up.
+                    Most non-profits are eligible for a discount. Get in touch through the app after signing up.
+                </p>
+            </li>
+            <li className="relative pl-7 pt-4">
+                <IconCode className="size-5 absolute left-0 top-4.5 opacity-50" />
+                <strong>Small OSS projects without corporate backing</strong>
+                <p className="text-[15px] mb-2">
+                    If you have an open source project without corporate backing that has less than $200k annual
+                    revenue, you can get up to $50k credits per year to use PostHog for free, subject to approval. Get
+                    in touch through the app after signing up to see if you qualify!
                 </p>
             </li>
         </ul>
@@ -85,98 +96,6 @@ export const gridCellBottom = cntl`
     pb-4
     xl:pb-8
     rounded-b-md
-`
-
-export const allProductsData = graphql`
-    query {
-        allProductData {
-            nodes {
-                products {
-                    description
-                    docs_url
-                    image_url
-                    icon_key
-                    inclusion_only
-                    contact_support
-                    addons {
-                        contact_support
-                        description
-                        docs_url
-                        image_url
-                        icon_key
-                        inclusion_only
-                        name
-                        type
-                        unit
-                        plans {
-                            description
-                            docs_url
-                            image_url
-                            name
-                            plan_key
-                            product_key
-                            unit
-                            flat_rate
-                            unit_amount_usd
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                    name
-                    type
-                    unit
-                    usage_key
-                    plans {
-                        description
-                        docs_url
-                        features {
-                            key
-                            name
-                            description
-                            category
-                            limit
-                            note
-                            entitlement_only
-                            is_plan_default
-                            unit
-                        }
-                        free_allocation
-                        image_url
-                        included_if
-                        name
-                        plan_key
-                        product_key
-                        contact_support
-                        unit_amount_usd
-                        tiers {
-                            current_amount_usd
-                            current_usage
-                            flat_amount_usd
-                            unit_amount_usd
-                            up_to
-                        }
-                        unit
-                    }
-                }
-            }
-        }
-    }
 `
 
 const FreeTierItem = ({ icon, icon2, name, allocation, description }) => {
@@ -230,7 +149,97 @@ const PricingExperiment = (): JSX.Element => {
         allProductData: {
             nodes: [{ products: billingProducts }],
         },
-    } = useStaticQuery(allProductsData)
+    } = useStaticQuery(graphql`
+        query {
+            allProductData {
+                nodes {
+                    products {
+                        description
+                        docs_url
+                        image_url
+                        icon_key
+                        inclusion_only
+                        contact_support
+                        addons {
+                            contact_support
+                            description
+                            docs_url
+                            image_url
+                            icon_key
+                            inclusion_only
+                            name
+                            type
+                            unit
+                            plans {
+                                description
+                                docs_url
+                                image_url
+                                name
+                                plan_key
+                                product_key
+                                unit
+                                flat_rate
+                                unit_amount_usd
+                                features {
+                                    key
+                                    name
+                                    description
+                                    category
+                                    limit
+                                    note
+                                    entitlement_only
+                                    is_plan_default
+                                    unit
+                                }
+                                tiers {
+                                    current_amount_usd
+                                    current_usage
+                                    flat_amount_usd
+                                    unit_amount_usd
+                                    up_to
+                                }
+                            }
+                        }
+                        name
+                        type
+                        unit
+                        usage_key
+                        plans {
+                            description
+                            docs_url
+                            features {
+                                key
+                                name
+                                description
+                                category
+                                limit
+                                note
+                                entitlement_only
+                                is_plan_default
+                                unit
+                            }
+                            free_allocation
+                            image_url
+                            included_if
+                            name
+                            plan_key
+                            product_key
+                            contact_support
+                            unit_amount_usd
+                            tiers {
+                                current_amount_usd
+                                current_usage
+                                flat_amount_usd
+                                unit_amount_usd
+                                up_to
+                            }
+                            unit
+                        }
+                    }
+                }
+            }
+        }
+    `)
 
     const [activePlan, setActivePlan] = useState('free')
 
@@ -241,16 +250,6 @@ const PricingExperiment = (): JSX.Element => {
             setActivePlan(plan)
         }
     }, [])
-
-    const handleFreePlanClick = () => {
-        setActivePlan('free')
-        window.history.pushState(null, '', '?plan=free')
-    }
-
-    const handlePaidPlanClick = () => {
-        setActivePlan('paid')
-        window.history.pushState(null, '', '?plan=paid')
-    }
 
     return (
         <>
@@ -270,136 +269,7 @@ const PricingExperiment = (): JSX.Element => {
                 </div>
 
                 <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
-                    <div className="hidden md:block">
-                        <Header />
-                    </div>
-
-                    <p className="mb-4">
-                        PostHog is designed to grow with you. Our <strong>{PRODUCT_COUNT}+ products</strong> (and
-                        counting) will take you from idea to product-market fit to IPO and beyond. 🚀
-                    </p>
-
-                    <p className="mb-4">
-                        Our generous free tier means{' '}
-                        <strong>
-                            <em>more than 90% of companies use PostHog for free.</em>
-                        </strong>{' '}
-                        Only add a card if you need more than the free tier limits, advanced features, or want more
-                        projects. You still keep the same monthly free volume, even after upgrading.
-                    </p>
-
-                    <div className="max-w-xs @sm:min-w-2xs @md:max-w-none @md:inline-block">
-                        <div className="flex justify-between items-end gap-4">
-                            <div>
-                                {activePlan === 'free' ? (
-                                    <>
-                                        <h3 className="mb-0 text-xl">Free</h3>
-                                        <p className="text-sm mb-4">No credit card required</p>
-                                    </>
-                                ) : (
-                                    <>
-                                        <p className="text-sm mb-0">From</p>
-                                        <h3 className="mb-4 text-xl">
-                                            $0<span className="opacity-70 font-normal text-base">/mo</span>
-                                        </h3>
-                                    </>
-                                )}
-                            </div>
-                            <div>
-                                <ScrollLink to="plans" offset={-120} smooth className="inline-block mb-4">
-                                    <button className="text-red dark:text-yellow font-semibold cursor-pointer text-sm">
-                                        Compare plans
-                                    </button>
-                                </ScrollLink>
-                            </div>
-                        </div>
-
-                        <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 md:mb-6 overflow-x-auto">
-                            <li>
-                                <button
-                                    onClick={handleFreePlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
-                                        activePlan === 'free'
-                                            ? 'border-yellow bg-white dark:bg-white/5'
-                                            : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                    }`}
-                                >
-                                    <strong className="whitespace-nowrap">Totally free</strong>
-                                    <span className="text-sm opacity-75 whitespace-nowrap">
-                                        Free - no credit card required
-                                    </span>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    onClick={handlePaidPlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
-                                        activePlan === 'free'
-                                            ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                            : 'border-yellow bg-white dark:bg-white/5'
-                                    }`}
-                                >
-                                    <strong className="whitespace-nowrap">Ridiculously cheap</strong>
-                                    <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
-
-                    <div
-                        className={`@container transition-all rounded-md border ${
-                            animateFreeTiers
-                                ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
-                                : 'bg-transparent border-transparent'
-                        }`}
-                        onAnimationEnd={() => setAnimateFreeTiers(false)}
-                    >
-                        <div className="flex items-baseline gap-1 mb-3">
-                            <h4 className="mb-0 text-lg">Free tier on all plans</h4>
-                            <span className="opacity-75 text-sm">(resets monthly)</span>
-                        </div>
-
-                        <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2">
-                            <FreeTierItem
-                                name="Analytics"
-                                allocation="1M events"
-                                icon={<Icons.IconGraph className="text-blue size-5" />}
-                                icon2={<Icons.IconPieChart className="text-green size-5" />}
-                            />
-                            <FreeTierItem
-                                name="Session replay"
-                                allocation="5K recordings"
-                                icon={<Icons.IconRewindPlay className="text-yellow size-5" />}
-                            />
-                            <FreeTierItem
-                                name="Feature flags"
-                                allocation="1M requests"
-                                icon={<Icons.IconToggle className="text-seagreen size-5" />}
-                            />
-                            <FreeTierItem
-                                name="Experiments"
-                                description="Billed with feature flags"
-                                icon={<Icons.IconFlask className="text-purple size-5" />}
-                            />
-                            <FreeTierItem
-                                name="Error tracking"
-                                allocation="100K exceptions"
-                                icon={<Icons.IconWarning className="text-orange size-5" />}
-                            />
-                            <FreeTierItem
-                                name="Surveys"
-                                allocation="250 responses"
-                                icon={<Icons.IconMessage className="text-red size-5" />}
-                            />
-                            <FreeTierItem
-                                name="Data warehouse"
-                                allocation="1M rows"
-                                icon={<Icons.IconDatabase className="text-purple size-5" />}
-                            />
-                        </div>
-                    </div>
+                    <PricingHero activePlan={activePlan} setActivePlan={setActivePlan} />
                 </div>
 
                 <aside className="md:col-span-16 lg:col-span-5 lgxl:col-span-4">
@@ -419,62 +289,7 @@ const PricingExperiment = (): JSX.Element => {
             <SimilarProducts />
             <PurchasedWith />
             <Reviews />
-
-            <SectionLayout id="calculator">
-                <SectionHeader>
-                    <h3>Pricing calculator</h3>
-                </SectionHeader>
-
-                <div className="flex flex-col lgxl:flex-row lgxl:gap-8 2xl:gap-12 items-start pt-4">
-                    <Tabbed />
-
-                    <div className="grid md:grid-cols-2 lgxl:grid-cols-1 gap-8 mt-12 lgxl:mt-0 max-w-6xl lgxl:max-w-xs 2xl:max-w-sm sticky top-4">
-                        <div>
-                            <h4 className="text-lg mb-2">How our pricing works</h4>
-                            <SidebarList>
-                                <SidebarListItem>Only pay for products you use</SidebarListItem>
-                                <SidebarListItem>
-                                    <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
-                                        Generous free tier for each product (resets monthly)
-                                    </strong>
-                                </SidebarListItem>
-                                <SidebarListItem>
-                                    You can set billing limits per product so you never get a surprise bill
-                                </SidebarListItem>
-                                <SidebarListItem>
-                                    We also offer{' '}
-                                    <Tooltip content={() => <Discounts />} placement="top">
-                                        <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                            discounts
-                                        </strong>
-                                    </Tooltip>{' '}
-                                    for startups and non-profits
-                                </SidebarListItem>
-                            </SidebarList>
-                        </div>
-                        <div>
-                            <h4 className="text-lg mb-2">Estimating usage</h4>
-                            <SidebarList>
-                                <SidebarListItem>
-                                    Not sure what your volume looks like? Add the tracking code to your site and check
-                                    back in a few days – no credit card required.
-                                </SidebarListItem>
-                                <SidebarListItem>
-                                    If something stupid happens and you get an unexpected bill (like if{' '}
-                                    <Link href="/side-project-insurance">
-                                        your side project unexpectedly goes viral
-                                    </Link>{' '}
-                                    or you’re unhappy), we’ll pretty much always refund it!
-                                </SidebarListItem>
-                                <SidebarListItem>
-                                    We've also written{' '}
-                                    <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to help!
-                                </SidebarListItem>
-                            </SidebarList>
-                        </div>
-                    </div>
-                </div>
-            </SectionLayout>
+            <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
 
             <SectionLayout>
                 <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
@@ -569,7 +384,7 @@ const PricingExperiment = (): JSX.Element => {
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?
                         </p>
-                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I’ll take you there.)</p>
+                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I'll take you there.)</p>
                         <button
                             onClick={() => scroll.scrollToTop()}
                             className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm relative active:top-[1px] active:scale-[.97]"

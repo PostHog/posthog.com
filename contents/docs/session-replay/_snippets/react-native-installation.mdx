@@ -12,7 +12,7 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 <ReactNativeInstall />
 
-> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js-lite/releases), and it's recommended to always use the latest version.
+> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js/releases), and it's recommended to always use the latest version.
 
 Install the session replay plugin.
 
@@ -52,7 +52,7 @@ export const posthog = new PostHog(
       maskAllImages: true,
       // Enable masking of all sandboxed system views like UIImagePickerController, PHPickerViewController and CNContactPickerViewController. Default is true.
       // iOS only
-      maskAllSandboxedViews = true,
+      maskAllSandboxedViews: true,
       // Capture logs automatically. Default is true.
       // Android only (Native Logcat only)
       captureLog: true,
@@ -115,4 +115,7 @@ npx expo run:ios --no-build-cache --device
 ## Troubleshooting
 
 - Run a clean build if you experience issues such as `The package 'posthog-react-native-session-replay' doesn't seem to be linked`.
-- Update your iOS Pods.
+- Update your SDK and iOS Pods.
+- If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug [here](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request [here](https://github.com/PostHog/posthog-android/issues/250).

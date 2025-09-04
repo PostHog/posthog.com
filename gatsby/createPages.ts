@@ -33,6 +33,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
+    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
+    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
     const result = (await graphql(`
         {
@@ -323,6 +325,76 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     name
                     slug
                     type
+                }
+            }
+            allTypes: allSdkReferencesJson {
+                edges {
+                    node {
+                        info {
+                            version
+                            id
+                            title
+                            description
+                            slugPrefix
+                        }
+                        types {
+                            id
+                            name
+                            properties {
+                                description
+                                type
+                                name
+                            }
+                            path
+                            example
+                        }
+                    }
+                }
+            }
+            allSdkReferencesJson {
+                edges {
+                    node {
+                        id
+                        hogRef
+                        info {
+                            version
+                            description
+                            id
+                            slugPrefix
+                            specUrl
+                            title
+                        }
+                        classes {
+                            description
+                            id
+                            title
+                            functions {
+                                category
+                                description
+                                details
+                                id
+                                showDocs
+                                title
+                                releaseTag
+                                examples {
+                                    code
+                                    id
+                                    name
+                                }
+                                params {
+                                    description
+                                    isOptional
+                                    type
+                                    name
+                                }
+                                returnType {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                        categories
+                    }
                 }
             }
         }
@@ -742,6 +814,40 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             path: `/docs/cdp/${node.type}s/${node.slug}`,
             component: DataPipeline,
             context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+
+    const types = result.data.allTypes.edges.map(({ node }) => node.types.map(({ name }) => name)).flat()
+    result.data.allSdkReferencesJson.edges.forEach(({ node }) => {
+        createPage({
+            path: `/docs/references/${node.info.slugPrefix}`,
+            component: SdkReferenceTemplate,
+            context: {
+                name: node.info.title,
+                description: node.info.description,
+                fullReference: node,
+                regex: `/docs/references/${node.info.slugPrefix}`,
+                types,
+            },
+        })
+    })
+
+    result.data.allTypes.edges.forEach(({ node }) => {
+        const version = node.info.version
+        node.types?.forEach((type) => {
+            if (type.id && (type.properties || type.example)) {
+                createPage({
+                    path: `/docs/references/${node.info.slugPrefix}/types/${type.id}`,
+                    component: SdkTypeTemplate,
+                    context: {
+                        typeData: type,
+                        version,
+                        id: node.info.id,
+                        types,
+                        slugPrefix: node.info.slugPrefix,
+                    },
+                })
+            }
         })
     })
 }

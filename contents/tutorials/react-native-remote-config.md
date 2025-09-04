@@ -189,4 +189,4 @@ Finally, we can test our app by reloading or running `npx expo start` again and 
 
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
 - [How to set up analytics in React Native](/tutorials/react-native-analytics)
-- [How to set up A/B tests in React Native](/react-native-ab-tests)
+- [How to set up A/B tests in React Native](/tutorials/react-native-ab-tests)

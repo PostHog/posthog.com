@@ -37,9 +37,9 @@ If you've just joined us, there's a lot you probably don't know. That's okay! Ho
   - We expect you to read the docs
   - If it takes you more than 10 mins to figure it out, then ask someone internally.
 
-You can also try self-serving an answer in our <PrivateLink href="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max Slack channel</PrivateLink>. It's trained on our handbook and documentation, so it's capable of answering both questions about internal processes and procedures, as well as product-related questions.
+You can also try self-serving an answer in our <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max Slack channel</PrivateLink>. It's trained on our handbook and documentation, so it's capable of answering both questions about internal processes and procedures, as well as product-related questions.
 
-If you don't get the context you're looking for, try <PrivateLink href="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> where team members are willing to point you in the right direction. Take a moment to explain how you've tried to help yourself and linking to resources. That saves others valuable time searching the docs again, or typing up a suggestion to do just that.
+If you don't get the context you're looking for, try <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> where team members are willing to point you in the right direction. Take a moment to explain how you've tried to help yourself and linking to resources. That saves others valuable time searching the docs again, or typing up a suggestion to do just that.
 
 ## Don't expect perfection
 
@@ -87,13 +87,13 @@ Do not "yolo merge" – i.e.: force a change to our website or platform without 
 
 Bias for action. If you can just pick up the work, do so. We want a culture of individual contribution _not_ of delegation.
 
-It is fine (and encouraged) to pick-up side quests, or to deviate from your goals if you think you should. Especially if something is a quick fix, do it yourself as part of our value that _Everyone Codes_.
+It is fine (and encouraged) to pick-up side quests, or to deviate from your goals if you think you should. Especially if something is a quick fix, do it yourself as part of our value that _You're the driver_.
 
 If you aren't able to make a change yourself, create an issue in GitHub. Avoid simply relaying to-dos in Slack as a means of getting someone to pick up a task. It's hard to track and easy to forget.
 
 ## Do things as publicly as possible by default
 
-For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our _"We are open source"_ value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
+For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our _"Make it public"_ value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
 
 There are only a few exceptions to what we can't share publicly, for example if you are discussing security concerns, specific customers (for privacy reasons), revenue, or growth numbers (since these cause signalling issues with investors or competitors).
 

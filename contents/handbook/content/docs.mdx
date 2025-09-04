@@ -1,0 +1,144 @@
+---
+title: How we write docs
+sidebar: Handbook
+showTitle: true
+---
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+At PostHog, we want our docs to win over developers and to give us a competitive edge. That means delivering a world-class developer experience, maintaining a well-organized knowledge base, and writing documentation that is a genuine pleasure to read.
+
+## Our documentation values 
+
+1. Treat docs like a product
+2. Be practical, not just technical
+3. Good writing = better docs
+4. Help our customers win
+
+### 1. Treat docs like a product
+
+We treat our docs like a product, because they are. They have users (readers), use cases (implementation, product education, troubleshooting, etc.), and success metrics (more on this later). PostHog's goal is to help customers build successful products, and docs play a huge part in that.
+
+The blend of roles docs have presents unique challenges and opportunities. But ultimately, great docs can drive product activation by providing the *right* information, in the *right* way, at the *right* stage in a [developer's journey](https://res.cloudinary.com/dmukukwp6/image/upload/dev_journey_9ed427d2c5.webp). 
+
+This could mean helping developers set up their very first PostHog event in a new framework. This could also mean helping existing customers with complex configurations and custom properties smoothly integrate their third or fourth PostHog product. It's a wide spectrum, but the goal is the same: to help developers self-serve and succeed with PostHog.
+
+Docs are a *core* part of the product experience. So when you're working on them, take some time to ask:
+- Where is the reader on their PostHog developer journey? 
+- Where do they need to go next? 
+- How does this help them get there?
+
+### 2. Be practical, not just technical
+
+Developers don't want abstract examples or out-of-context code snippets. They want to solve real problems and use cases.
+
+We want to showcase code that's runnable, practical, and immediately useful.
+
+*As a rule of thumb*, our docs should show code within application context whenever possible. The examples we provide should reflect how PostHog is actually used in production, in the wild. 
+
+**Isolated example:**
+```js
+posthog.capture({
+  distinctId: 'distinct_id_of_the_user',
+  event: 'user_signed_up',
+  properties: {
+    login_type: 'email',
+    is_free_trial: true,
+  },
+})
+```
+
+If a code snippet has missing application context or business logic, it can be improved.
+
+**In-context example:**
+```js focusOnLines=12-24
+// Importing PostHog into the app
+import { PostHog } from 'posthog-node'
+
+// Initializing PostHog client
+const posthog = new PostHog(
+  '<ph_project_api_key>',
+  { host: 'https://us.i.posthog.com' }
+)
+
+app.post('/api/signup', async (req, res) => {
+  const { email, password } = req.body
+
+  try {
+    const user = await createUser({ email, password })
+    // Calling PostHog inside business logic // HIGHLIGHT
+    posthog.capture({ // HIGHLIGHT
+      distinctId: user.id, // HIGHLIGHT
+      event: 'user_signed_up', // HIGHLIGHT
+      properties: { // HIGHLIGHT
+        login_type: 'email', // HIGHLIGHT
+        is_free_trial: true // HIGHLIGHT
+      }, // HIGHLIGHT
+    }) // HIGHLIGHT
+    res.status(201).json({ message: 'Signup successful', userId: user.id})
+  } catch (error) {
+    res.status(500).json({ error: 'Signup failed' })
+  }
+})
+```
+
+The in-context example is more verbose, but much more useful. It shows how PostHog fits into applications, which helps developers understand *when* and *where* to use it. 
+
+<CalloutBox icon="IconInfo" title="Scannable code" type="fyi">
+
+Inline comments and UI enhancements like syntax highlighting and collapsible sections will keep code scannable.
+
+</CalloutBox>
+
+### 3. Good writing = better docs
+
+Writing is something we love to do here at PostHog. The principles of PostHog [writing](/handbook/content/writing-for-posthog) and [marketing](/handbook/growth/marketing#marketing-values) all still apply here, but documentation has a few extra demands.
+
+People come to our docs looking for answers, usually with limited time. Sharp, precise writing helps them accomplish their goals faster. We focus on clarity and consistency because they contribute to a smoother, more efficient learning experience. 
+
+Docs are finely tuned. Even small oversights or tiny mistakes can create snags that confuse readers. So nitpicking isn’t just allowed, it’s encouraged!
+
+<details>
+<summary>Example #1</summary>
+
+~~Just~~ Click the button to create a new insight.
+</details>
+
+<details>
+<summary>Example #2</summary>
+
+Under ~~**User** in your **Settings**~~ **Settings** > **User**, click the button.
+</details>
+
+Nits and semantics and formatting (oh my!) – they're all part of the fun of technical writing. Careful attention to detail is what turns good docs into great ones, so don't shy away from it.
+
+This does *not* mean our docs have to be dry or academic. In fact, they should have a natural flow that makes them easy to read. Be open, direct, and opinionated. Don't be afraid to add humor and personality when there's opportunity.
+
+PostHog's writing voice is one of the key things that sets us apart from a sea of generic SaaS platforms. It's important that this voice can come through in our docs.
+
+The [docs style guide](/handbook/content/docs-style-guide) is a key reference we'll continue to update with examples and best practices.
+
+### 4. Help our customers win 
+
+Our customers are smart, discerning, and ambitious. They're here to build. They want to 10x their own products. 
+
+Our docs exist to help them win.
+
+This means we should include details beyond references and technical implementations. We should share examples, use cases, and the big picture reasons *why* they should use a product or feature. 
+
+## How we prioritize
+
+Here's how we loosely define high-priority docs work:
+- Anything that blocks product adoption or severely impacts the product experience  
+- Anything that speeds up new content velocity or improves overall quality
+- Anything that unblocks better LLM-assisted workflows
+- *Usable* docs (e.g., SDK references) come first, *cool* docs (e.g., interactive code editor) come after
+
+## Measuring success
+
+Our north star indicators that tell us if our docs are heading in the right direction:
+
+- Praise for how awesome our docs are (#brand-mentions, #posthog-feedback, etc.)
+- Fewer support tickets caused by bad or missing docs
+- More Max AI replies marked as `helpful`
+- More docs used by Sales and CS & Onboarding as a valuable resource for customers
+- More docs pageviews (within context)

@@ -28,7 +28,13 @@ Every batch export exports data to a destination using the configuration paramet
 * [Postgres](/docs/cdp/batch-exports/postgres)
 * [Redshift](/docs/cdp/batch-exports/redshift)
 
-Support for new destinations will be added based on demand. You can follow development of new destinations [here](https://github.com/PostHog/posthog/issues/15997).
+You can test the configurations of each destination by clicking the **Start test** button below the configuration form:
+
+![image of configuration test showing 3 completed steps](https://res.cloudinary.com/dmukukwp6/image/upload/Destination_tests_998d84299b.png)
+
+This test can detect and diagnose configuration issues, like invalid credentials or missing permissions, before running the batch export.
+
+Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or create an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in  new destinations.
 
 import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
@@ -37,6 +43,13 @@ import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 ## Models
 
 Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
+
+> **Note:** New fields may be added to these models over time. 
+> 
+> To maintain consistency, these fields are not automatically added to database destination tables.
+If a particular field is missing from your tables, you can manually add the field and it will be populated in future exports.
+In the case of S3, these new fields will be added to the exported files as soon as they become available.
+
 
 ### Events model
 
@@ -73,6 +86,16 @@ More information, including any additional necessary permissions, schema informa
 * [Postgres](/docs/cdp/batch-exports/postgres)
 * [Redshift](/docs/cdp/batch-exports/redshift)
 
+### Sessions model
+
+> **Note:** The sessions model is currently in `beta`. This means the schema of this model is subject to change.
+>
+> You can request access via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
+
+A [session](/docs/data/sessions) in PostHog represents a series of events that make up a single use of your product or visit to your website. Each session is uniquely identified by its `session_id`.
+
+If you want to link events with sessions, you'll need to ensure you're capturing the `$session_id` in your events. This is done automatically by our JavaScript Web library and mobile SDKs. For server-side SDKs, refer to our [docs](/docs/data/sessions#server-sdks-and-sessions).
+
 ## Batch runs
 
 A batch export is executed in batch runs depending on the configured frequency. For example, an hourly batch export starts a run on every hour. The data processed by every run has an **upper bound** given by the time in which the run is scheduled to start, and a **lower bound** that results from subtracting the frequency to the batch run's scheduled start time.
@@ -95,7 +118,7 @@ Each run has:
 
 ## Backfills (exporting historical data)
 
-When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can run a backfill.
+When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can **backfill** the batch export.
 
 To view your existing backfills or to start a new one, you can navigate to the "Backfills" tab of the destination:
 
@@ -107,22 +130,24 @@ From here, you can create a new backfill by clicking the "Start backfill" button
 
 This will immediately schedule a series of batch export runs that fall within the bounds selected, based on the batch export's frequency.
 
-The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 2024-01-01 but the earliest event captured in PostHog is 2024-01-02, the start date will be adjusted to 2024-01-02.
+The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 2024-01-01 but the earliest event captured in PostHog is 2024-01-02, the start date will be adjusted to 2024-01-02. On the other hand, the end date of the backfill cannot be set past the current time, as our engineers have yet to figure out time traveling to allow us to export events in the future.
 
 
 ## FAQ
 
 ### How do batch exports work?
 
-As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal Workflow](https://docs.temporal.io/workflows), with a [Workflow Type](https://docs.temporal.io/workflows#workflow-type) that indicates which destination is implemented in it.
+As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal workflow](https://docs.temporal.io/workflows). These workflows contain all the destination-specific operations required to connect to each specific destination. For example, the `s3-export` workflow contains the code to export data from PostHog to AWS S3.
 
-For example, the Workflow of `s3-export` type contains the code to export data from PostHog to AWS S3. This way, PostHog maintains a map of destinations to Workflow Types, so whenever a user selects a destination, like Snowflake, we can check the map to arrive at the Workflow Type `snowflake-export`.
+When a batch export run is triggered, all workflows first read the data to export from our database and store it in an internal S3 bucket. The workflows then read the data from this internal bucket, processes it into the desired output format, and sends it to the destination.
 
-To trigger these workflows according to intervals chosen by our users, we leverage [Schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal Schedule configured to execute the Workflow associated with the export destination, at the chosen interval.
+To trigger these workflows on intervals chosen by our users, we leverage another feature of Temporal: [schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal schedule configured to execute the workflow associated with the export destination at the chosen interval.
 
-After creation, the Schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the Schedule will trigger a Workflow to export the data for the batch period that has just concluded. Scheduling a Workflow for execution places the Activities defined in the Workflow on a task queue. Temporal Workers running in [PostHog infrastructure](/docs/how-posthog-works) will then pick up these tasks as they become available and execute them.
+After creation, the schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the schedule will trigger a workflow to export the data for the batch period that has just concluded. However, before doing so, the schedule will wait for an additional small and randomly assigned amount of time. This additional waiting time allows us to avoid issues with having all workflows starting just as the next hour or day starts (commonly known as the thundering herd problem).
 
-> **Note:** Temporal Workers run in PostHog infrastructure and are maintained by PostHog, not by Temporal. This means no data leaves PostHog infrastructure unless it is being exported to the destination of your choosing. Any configuration parameters are encrypted before being sent to Temporal Cloud.
+Each workflow is divided into activities, and we operate workers running in [PostHog infrastructure](/docs/how-posthog-works) that pick up and run these activities as they are queued-up by each workflow.
+
+> **Note:** Workers run in PostHog infrastructure and are maintained by PostHog, not by Temporal. This means no event, person, or session data is ever sent to Temporal, as it is only handled by the aforementioned workers. Only configuration parameters are sent to external Temporal servers as they coordinate the execution of batch exports across multiple workers. This configuration data is always encrypted before leaving PostHog.
 
 ```mermaid
 sequenceDiagram
@@ -154,23 +179,59 @@ sequenceDiagram
 
 ### How does this differ from the old export destinations, formerly known as apps?
 
-- The data is exported on batches at a fixed frequency, like hourly or daily.
+- The data is exported on batches at a fixed frequency, like daily, hourly, or sub-hour frequencies.
   - This allows us to optimize uploads and insertions which generally perform better with larger sizes.
   - If you need real time delivery, then you will want check out [webhooks](/docs/webhooks).
 
-- Some features of the old export destinations are still being ported over.
-  - This includes logs and error reporting.
-
 ### How do batch exports handle periods with no data?
 
-If no data is found for a particular batch period, then the batch export run will immediately succeed. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when filtering the batch export to only export very low volume events.
+If no data is found for a particular batch period, then the batch export run will immediately succeed. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when heavily filtering the batch export.
 
-> **Note:** This could mean that underlying configuration issues are not surfaced early, as we do not attempt to connect to a destination if there is nothing to export. It is recommended to confirm there is data to export to ensure a batch export has been configured correctly. This can be done by checking batch export debug logs as they will display how many rows are exported. So, if no debug logs appear, it means there is no data to export, so we haven't had a chance to validate the batch export configuration.
+When this happens, the batch export logs will display a message like "Batch export will finish early as there is no data matching specified filters".
 
-### Why do I see duplicate data when running a backfill?
+> **Note:** When there is no data to export, a batch export may skip attempting to connect to a destination. This could mean that underlying issues with the destination configuration are not surfaced. It is recommended to test the configuration after every change by running the tests in the configuration tab.
 
-A backfill does not check if the data already exists in the destination. Doing so would negatively impact performance of each batch export run, and potentially require more permissions on the destination. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who start a backfill want all their historic data, which means that multiple batch export runs over the same time period will produce duplicates.
+### Why do I get duplicate data?
 
-In addition, depending on any delays in sending or ingesting data, the last few batch export runs created by a backfill may have data that overlaps with the first few regularly scheduled batch export runs.
+There are a few situations that can cause batch exports to export duplicate data. For this reason, although we strive to keep the number of duplicates below a threshold, we recommend that you set up processes to de-duplicate the data in your destination if any amount of duplicates is undesirable. Different destinations will offer different tools to optimally handle duplicates, so we suggest you review your destination's documentation to find out what is the best strategy.
 
-For these reasons, we recommend that you set up processes to de-duplicate the data in your destination if duplicates are undesirable.
+#### 1. Batch exports run before deduplication
+
+Occasionally, PostHog ingests duplicate data, as we want to ensure all data is captured, even if that means sometimes capturing the same event multiple times. PostHog has several asynchronous processes that clean up these duplicate values so that they never surface to any visible dashboards.
+
+Batch exports can run before these asynchronous processes have done their work. In that situation, the batch export can be served duplicate data by our underlying data storage. Batch exports will attempt to de-duplicate data within a batch, but any de-duplication across multiple batches would be too expensive to execute within the time constraints of the batch export.
+
+In these rare situations, you will see duplicate data in your destination.
+
+
+#### 2. Backfills
+
+When requesting a backfill, PostHog does not check if the data to backfill already exists in the destination. Doing so would negatively impact performance of each batch export run, potentially require more permissions to operate on the destination, and introduce more complexity into the configuration of the batch export.
+
+Batch exports assume that users who start a backfill want all the data within the backfill window exported, which means that multiple backfills over the same time period will produce duplicates.
+
+When requesting a backfill, we recommend doing so for data that wasn't exported at all, like data from before the batch export was created, or when re-exporting the same data is required, like if it is accidentally deleted from the destination by an unrelated error.
+
+In addition, depending on any delays in sending or ingesting data, batch export runs triggered by a backfill close to real time may have data that overlaps with regularly scheduled batch export runs.
+
+For these reasons, although we strive to keep the number of duplicates below a threshold, we recommend that you set up processes to de-duplicate the data in your destination if any amount of duplicates is undesirable. Different destinations will offer different tools to optimally handle duplicates, so we suggest you review your destination's documentation to find out what is the best strategy.
+
+### Why are events exported in runs that do not match the event's timestamp?
+
+Due to delays in ingestion, caused by unreliable networks, buffering strategies, and other quirks, an event may arrive at PostHog with a significant delay compared to its timestamp. If batch exports relied on the event's timestamp to decide which data to include in a particular batch, we could be missing events that arrive late. As it is impossible to know whether events with a delay exist before they arrive, batch exports instead relies on the time when an event is ingested to decide whether an event belongs in a batch or not.
+
+Here is an example to illustrate this situation:
+
+1. An event is generated by your mobile application with a timestamp with a time component of 12:59:59 (assume all times are on the same timezone, for simplicity).
+
+2. Since the mobile device is currently not connected to a stable WiFi connection, the event fails to be sent to PostHog, and is instead cached in the device to be sent later.
+
+3. In the time it took for the event to fail, the clock already moved past 13:00:00, and your hourly batch export has started the 12:00:00-13:00:00 run.
+
+4. A few minutes later, say 13:05:00, the batch export run finishes.
+
+5. Finally a few minutes after that, at 13:07:00, the mobile device connects to a reliable WiFi, the event with timestamp 12:59:59 is finally sent, and processed in PostHog.
+
+This example illustrates the issue: The event with timestamp 12:59:59 can only be exported by batch export runs triggered after its arrival (13:00:00-14:00:00, and beyond), as the previous runs (12:00:00-13:00:00, and before) execute before PostHog even knows that the event exists. But if the 13:00:00-14:00:00 batch export run looked for events with timestamps in the 13:00:00-14:00:00 range, it would not export the event with timestamp 12:59:59, in fact, the event would never be automatically exported; we would say the event was **missed**.
+
+For this reason, PostHog tracks the time when an event is ingested and uses that to determine which events to include in a batch export run. Continuing with the example, the 13:00:00-14:00:00 batch export run instead looks for events that arrived within those bounds, and since the event in our example arrived at 13:07:00, it would be picked up and exported. This way, no events are missed.

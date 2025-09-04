@@ -31,14 +31,14 @@ You have two options for creating your Zap and setting its trigger:
 4. Name your action `Survey sent action` and click **Save**.
 5. Then in your Zapier dashboard, go to your [zaps](https://zapier.com/app/assets/zaps) and create a new zap.
 6. Add the [PostHog app](https://zapier.com/apps/posthog/integrations/webhook) as a trigger.
-7. Configure the PostHog app by setting the **Trigger event** to `Action Performed`. 
+7. Configure the PostHog app by setting the **Trigger event** to `Action Performed`.
 8. Click **Continue** and select the relevant organization and project. In the Action section, select the **Survey sent action** you created in the previous steps.
 9. Click  **Continue** and test your trigger.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_21_35_AM_aaca8d5934.png " 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_21_35_AM_aaca8d5934.png " 
-  alt="Setting up the PostHog app as a trigger in Zapier" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_21_35_AM_aaca8d5934.png "
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_21_35_AM_aaca8d5934.png "
+  alt="Setting up the PostHog app as a trigger in Zapier"
   classes="rounded"
 />
 
@@ -48,6 +48,16 @@ You have two options for creating your Zap and setting its trigger:
 2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
 3. Search for **Zapier** and click **+ Create**.
 4. In the **Match events and actions** section, search for and select `survey sent`.
+
+> **Note:** If you're using partial responses, you'll need to add the `$survey_completed = true` property to the event filters. Otherwise, the destination will trigger for every question answered, and not only when the survey is completed. [See more details here](/docs/surveys/troubleshooting#handling-partial-responses).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_08_at_16_17_17_2x_c8235c0413.jpg"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_08_at_16_18_54_2x_e1cee82eaf.jpg"
+    alt="Create Zapier destination"
+    classes="rounded"
+/>
+
 5. Then in your Zapier dashboard, create a new Zap with a [webhook trigger](https://zapier.com/apps/webhook/integrations)
 6. Set the **Trigger event** in the webhook to `Catch Hook` and press **Continue**.
 7. Leave **Pick off a Child key** as blank and click **Continue**. Do not test your Zap just yet.
@@ -93,9 +103,9 @@ You have two options for creating your Zap and setting its trigger:
 2.  Go back to Zapier and press **Test trigger**. You should see the test request appear.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_55_03_AM_be9092dc5d.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_55_03_AM_be9092dc5d.png" 
-  alt="Setting up the webhook trigger in Zapier using PostHog CDP" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_55_03_AM_be9092dc5d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_02_at_11_55_03_AM_be9092dc5d.png"
+  alt="Setting up the webhook trigger in Zapier using PostHog CDP"
   classes="rounded"
 />
 
@@ -114,13 +124,14 @@ Once you've completed this step, you can publish your Zap and survey responses s
 
 ## Available properties
 
-You can extract the following properties from surveys to your zaps:
+You can extract the following properties from surveys:
 
 | Property | Description |
 |----------|-------------|
 | `event.properties.$survey_name` | The name of the survey |
-| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `index`, and `question` |
+| `event.properties.$survey_questions` | An array of objects containing the following survey question properties: `id`, `question`, and `response` |
 | `event.properties.$survey_response_{response_key}` | The response to a specific question. To find `response_key`, go to your survey page and click on the button **Copy survey response key**. There's one for each question in your survey. `response_key` is identical to the corresponding survey question ID |
+| `event.properties.$survey_completed` | Whether the survey was completed. Relevant if you're using partial responses. |
 | `person.name` or other person properties | The name of the person who responded or other properties |
 
 ## Further reading

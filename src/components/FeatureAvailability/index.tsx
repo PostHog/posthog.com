@@ -10,6 +10,7 @@ type FeatureAvailabilityProps = {
               openSource?: boolean
               free: boolean
               selfServe: boolean
+              teams?: boolean
               enterprise: boolean
           }
         | boolean
@@ -74,6 +75,19 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     </h5>
                 </div>
 
+                {availability.teams && (
+                    <div>
+                        <h5 className="flex items-center space-x-1.5 text-base !my-0">
+                            <span>Teams</span>
+                            <Tooltip content="Available on PostHog Cloud">
+                                <span>
+                                    <InfoIcon className="w-4 h-4" />
+                                </span>
+                            </Tooltip>
+                        </h5>
+                    </div>
+                )}
+
                 <div>
                     <h5 className="flex items-center space-x-1.5 text-base !my-0">
                         <span>Enterprise</span>
@@ -90,6 +104,9 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.free)}
 
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.selfServe)}
+
+                {availability.teams &&
+                    renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.teams)}
 
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.enterprise)}
             </div>

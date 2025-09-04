@@ -56,6 +56,7 @@ export type ShopifyMedia = ShopifyMediaItem[]
 
 export type ShopifyProduct = {
     description: string
+    descriptionHtml: string
     featuredMedia: ShopifyMediaImage
     handle: string
     id: string
@@ -91,6 +92,7 @@ export type ShopifyProductVariant = {
     shopifyId: string
     sku: string
     title: string
+    kit?: boolean
 }
 
 interface Image {
@@ -151,7 +153,6 @@ export interface StorefrontProductVariantNode {
     }
     quantityAvailable: number
     selectedOptions: VariantSelectedOption[]
-    brilliantQuantity: number
 }
 
 export type StorefrontProductVariant = StorefrontProductVariantNode

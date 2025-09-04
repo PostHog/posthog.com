@@ -58,7 +58,7 @@ You can use cohorts in many different ways, such as:
 - As a filter on any product analytics dashboard
 - To target feature flags, experiments, and user surveys
 - To filter the session replay list and create saved filters
-- Filter live events on the Activity page
+- Filter live events on the [activity page](/docs/activity)
 - Filter users on the People page
 
 You can use cohorts to answer questions like:
@@ -128,9 +128,28 @@ You have two options when creating a cohort:
 
 Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
 
-The CSV file only requires a single column with the user's distinct ID. The very first row (the header) will be skipped during import.
+When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog. You can upload CSV files in two formats:
 
-To update the list, you can either upload another CSV to add more users, or use the interface to remove users.
+**Single-column CSV**: Include one distinct ID per row (all rows are processed as data, no header required)
+
+```csv
+user123
+user456
+test@example.com
+```
+
+**Multi-column CSV**: Include a header row with a `distinct_id` or `distinct-id` column containing the user identifiers
+
+```csv
+email,distinct_id,name,segment
+user1@team.com,user123,Alice Johnson,premium
+user2@team.com,user456,Bob Smith,standard
+user3@team.com,test@example.com,Carol Davis,premium
+```
+
+For multi-column files, PostHog will extract the distinct IDs from the specified column and ignore all other columns, making it easy to upload exported cohort data without modification.
+
+To update the list, you can upload another CSV to add more users. You can also remove users by deleting their [person profile](/docs/data/persons) from the list, noting that this will completely remove the person from PostHog.
 
 ### Dynamic cohorts
 

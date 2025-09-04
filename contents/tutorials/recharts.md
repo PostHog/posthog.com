@@ -453,6 +453,6 @@ This creates a nice-looking pie chart with labels like this:
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
 - [How to use React Charts to visualize analytics data (with examples)](/tutorials/react-charts)
-- [How to set up customer-facing analytics](/tutorials/customer-facing-analytics)
+- [How to set up embedded analytics](/tutorials/embedded-analytics)
 
 <NewsletterForm />
