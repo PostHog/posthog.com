@@ -24,6 +24,8 @@ Some of the columns in the `events` table are:
 | `session_id`   | Unique identifier for the session the event belongs to             |
 | `person_id`    | Unique identifier for the person                                   |
 
+`event` names and `properties` can be set to any value you want, so you might many potential values for each.
+
 Some products have special event names and properties that can be useful to know. For example:
 
 - [Autocaptured events](/tutorials/hogql-autocapture) are named `$autocapture` and have the `elements_chain` property.
@@ -86,7 +88,7 @@ Unlike the other tables, the `sessions` table stores all its properties as separ
 | `$is_bounce`                | Indicates if the session was a bounce (`1` = bounce, `0` = not)                              |
 | `$last_external_click_url`  | Last external click URL in the session                                                       |
 | `$vitals_lcp`               | Largest Contentful Paint (LCP) web vital for the session                                     |
-| [...](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties |
+| [... more](/docs/data/sessions#session-properties) | See [full list](/docs/data/sessions#session-properties) of session properties |
 
 The `sessions` table is heavily used in [web analytics](/docs/web-analytics). It is also useful for [marketing analytics](/docs/web-analytics/marketing-analytics) and [session-based metrics](/tutorials/session-metrics) more broadly.
 
@@ -116,6 +118,6 @@ Like the `sessions` table, the `query_log` table stores all its properties as se
 | `api_key_mask`               | Masked API key used                                                                    |
 | `cpu_microseconds`           | CPU time consumed (for computation, excluding waiting)                                 |
 | `RealTimeMicroseconds`       | Wall clock time in microseconds                                                        |
-| [...](/docs/data/query-log#table-schema) | See [full list](/docs/data/query-log#table-schema) of query log properties |
+| [... more](/docs/data/query-log#table-schema) | See [full list](/docs/data/query-log#table-schema) of query log properties |
 
 The `query_log` table is the only table with data on you and your team's internal usage of PostHog, making it useful for security, governance, and performance optimization.
