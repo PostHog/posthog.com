@@ -2384,16 +2384,16 @@ export const docsMenu = {
                             url: '/docs/ai-engineering',
                         },
                         {
-                            name: 'AI wizard',
-                            url: '/docs/ai-engineering/ai-wizard',
+                            name: 'Max AI',
+                            url: '/docs/max-ai',
+                        },
+                        {
+                            name: 'Wizard',
+                            url: '/docs/ai-engineering/wizard',
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                        },
-                        {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
                         },
                         {
                             name: 'LLM analytics',
