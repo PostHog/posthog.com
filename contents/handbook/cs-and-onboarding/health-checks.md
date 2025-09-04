@@ -52,7 +52,7 @@ If a customer has Session replay enabled, log in as them and look at their sessi
 
 A common pattern is for users to call `posthog.identify()` on every page, or in an endless loop.  Whilst this won't break their tracking (unless they use different distinct IDs in the identify call) they will end up with a drastically inflated event volume.  You can diagnose this by looking at their Metabase usage dashboard in the Key event volume visualization.  If either the volume of $identify or $set events is higher then 5% then something has likely gone wrong in the implementation.
 
-You should get and touch and let them know that they only need to call `posthog.identify()` [once per session](/docs/product-analytics/identify#best-practices-when-using-identify).
+You should get in touch and let them know that they only need to call `posthog.identify()` [once per session](/docs/product-analytics/identify#best-practices-when-using-identify).
 
 ### Calling groupidentify too often
 
