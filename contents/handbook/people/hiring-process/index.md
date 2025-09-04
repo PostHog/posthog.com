@@ -93,7 +93,6 @@ Ashby also had a partnership with YC's job board so all roles to YC's [Work at a
 **Engineering**
 
 *   Hacker News Who's Hiring - see [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
-*   [The Pragmatic Engineer](https://pragmatic-engineer.pallet.com/jobs)
 
 **Product**
 
