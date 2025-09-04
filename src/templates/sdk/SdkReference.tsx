@@ -15,8 +15,8 @@ import { navigate } from 'gatsby'
 import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
-import ReaderView from 'components/ReaderView'
 import Chip from '../../components/Chip'
+import ReaderView from 'components/ReaderView'
 
 export interface Parameter {
     name: string
@@ -76,7 +76,7 @@ export interface PageContext {
 }
 
 const padDescription = (description: string): string => {
-    return description.replace(/\n/g, '\n\n')
+    return description?.replace(/\n/g, '\n\n') || ''
 }
 
 // Group functions by category, but Initialization always first, and "Other methods" for uncategorized
@@ -122,8 +122,8 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 }
 
 export default function SdkReference({ pageContext }: { pageContext: PageContext }) {
-    const location = useLocation()
     const { fullReference } = pageContext
+    const location = useLocation()
 
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
@@ -237,19 +237,11 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                     <div className="flex items-center mt-0 flex-wrap justify-between">
                         <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
                             <div className="flex-1">
-                                <h1 className="text-3xl sm:text-4xl m-0">{fullReference.info.title}</h1>
-                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0">
-                                    <p className="m-0 font-semibold text-secondary">
+                                <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{fullReference.info.title}</h1>
+                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                    <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
                                         SDK Version: {fullReference.info.version}
                                     </p>
-                                    <span className="text-secondary">|</span>
-                                    <Link className="text-red dark:text-yellow" to={fullReference.info.specUrl}>
-                                        Edit this page
-                                    </Link>
-                                    <CopyMarkdownActionsDropdown
-                                        markdownContent={JSON.stringify(fullReference, null, 2)}
-                                        pageUrl={location.href || ''}
-                                    />
                                 </div>
                             </div>
                         </div>
@@ -270,12 +262,12 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                             />
                         ))}
                     </div>
-                    {fullReference.classes.map((classData) => (
-                        <div key={classData.id} className="mb-12">
+                    {filteredClasses.map((classData) => (
+                        <div key={classData.id} className="mb-12" id={classData.id}>
                             <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
                             <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
 
-                            {groupFunctionsByCategory(classData.functions).map(({ label, functions }) => (
+                            {classData.sortedFunctions.map(({ label, functions }) => (
                                 <div key={label || 'other-methods'}>
                                     {/* Only show a heading if label is not null and not "Other methods" */}
                                     {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
@@ -283,12 +275,16 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                     {!label && <h3 className="text-xl font-semibold mb-2 mt-8">Other methods</h3>}
                                     {functions.map((func) => (
                                         <div
-                                            key={func.id}
+                                            key={`${classData.id}-${func.id}`}
                                             className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0 py-8"
                                         >
                                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                                 <div className="space-y-6">
-                                                    <Heading as="h4" id={func.id} className="text-lg my-0 font-bold">
+                                                    <Heading
+                                                        as="h4"
+                                                        id={`${classData.id}-${func.id}`}
+                                                        className="text-lg my-0 font-bold"
+                                                    >
                                                         <code>{func.title}</code>
                                                         {func.releaseTag && (
                                                             <span
