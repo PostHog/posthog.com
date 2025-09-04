@@ -326,7 +326,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                     }`}
                                 >
                                     <span className={`w-6 h-6 mr-2 text-${color} dark:text-${colorDark}`}>
-                                        <Icon />
+                                        {Icon && <Icon />}
                                     </span>
                                     <span
                                         className={`text-sm whitespace-nowrap ${
