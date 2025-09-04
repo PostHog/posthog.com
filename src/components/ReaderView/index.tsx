@@ -34,7 +34,7 @@ import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { useWindow } from '../../context/Window'
-import { useApp } from '../../context/App'
+import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
@@ -68,6 +68,7 @@ interface ReaderViewProps {
     isEditing?: boolean
     onSearch?: (query: string) => void
     showSurvey?: boolean
+    parent?: MenuItem
 }
 
 interface BackgroundImageOption {
@@ -324,6 +325,7 @@ export default function ReaderView({
     isEditing,
     onSearch,
     showSurvey = false,
+    parent,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -346,6 +348,7 @@ export default function ReaderView({
                 isEditing={isEditing}
                 onSearch={onSearch}
                 showSurvey={showSurvey}
+                parent={parent}
             >
                 {children}
             </ReaderViewContent>
@@ -353,8 +356,11 @@ export default function ReaderView({
     )
 }
 
-const Menu = () => {
-    const { setActiveInternalMenu, activeInternalMenu, parent } = useWindow()
+const Menu = (props: { parent: MenuItem }) => {
+    const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
+
+    const parent = props.parent || windowParent
+    const activeInternalMenu = windowActiveInternalMenu || parent.children?.[0]
 
     return (
         <>
@@ -470,6 +476,7 @@ function ReaderViewContent({
     isEditing,
     onSearch,
     showSurvey = false,
+    parent,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -563,7 +570,7 @@ function ReaderViewContent({
                 />
                 {/* Second row - Main Content */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
-                    {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>}
+                    {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu parent={parent} />}</LeftSidebar>}
                     <ScrollArea
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
