@@ -117,6 +117,8 @@ This is basically a combo of discovery and demo call - your objectives here are 
 
 We have various slide templates - ask someone on the Sales team for an invite to our Pitch account so you can create customized versions with your name etc. You should general use the deck as scaffolding, pulling out the relevant slides (e.g. pricing). Do not spend the demo presenting a deck - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. 
 
+We have a [Demo Project](https://eu.posthog.com/project/30021/) linked to [Hogflix](https://hogflix.dev/) that you can use. Before you demo, make sure there is enough data to properly showcase our features. If needed, you can use [Hogbot](https://github.com/PostHog/hogbot) to generate more synthetic data. This is built by the sales team for the sales team, so if you see anything you want to improve, don't hesitate to submit a PR!
+
 You should give a relevant and pointed demo - don't just throw everything in, as the customer will get overwhelmed. If you don't show what's important first, people on the call will become distracted.
 
 For example, a customer may say "we need to see how our customers our using our platform". In this case, a good approach is to go straight to Session Replay, then tie Replay into Analytics, then go from there.
