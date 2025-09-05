@@ -631,7 +631,7 @@ function ReaderViewContent({
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && !body.featuredVideo && (
-                                    <div className="mb-4">
+                                    <div className="not-prose mb-4">
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
                                     </div>
                                 )}
