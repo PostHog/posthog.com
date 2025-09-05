@@ -148,7 +148,7 @@ export default function CareersOG(): JSX.Element {
 
     return (
         <>
-            <SEO title="Careers @ PostHog" description="PostHog job opportunities" />
+            <SEO title="Careers @ PostHog" description="PostHog job opportunities" noindex />
             <Editor
                 title="roles"
                 type="mdx"

@@ -24,6 +24,66 @@ import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 
 const limit = pLimit(10)
 
+const createOGImages = async () => {
+    console.log('Creating OG images')
+
+    const dir = path.resolve(__dirname, '../public/og-images')
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+
+    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
+    const revisionInfo = await browserFetcher.download('982053')
+
+    const browser = await chromium.puppeteer.launch({
+        args: await chromium.args,
+        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
+        headless: true,
+        defaultViewport: {
+            width: 1200,
+            height: 630,
+        },
+    })
+    const page = await browser.newPage()
+    await page.setViewport({
+        width: 1200,
+        height: 630,
+    })
+
+    async function createOG({ slug }) {
+        const url = `https://preview.posthog.com/${slug}`
+        console.log(`Creating OG screenshot for: ${url}`)
+
+        await page.goto(url, {
+            waitUntil: ['domcontentloaded', 'networkidle0'],
+        })
+
+        await page.waitForTimeout(1000)
+
+        await page.addStyleTag({
+            content: `
+            body {
+                width: 1200px;
+                height: 630px;
+            }
+            .ToastRoot {
+                display: none;
+            }
+            `,
+        })
+
+        await page.screenshot({
+            type: 'jpeg',
+            path: `${dir}/${slug.replace(/\//g, '')}.jpeg`,
+            quality: 100,
+        })
+    }
+
+    await createOG({ slug: 'careers-og' })
+
+    console.log('Finished creating OG images')
+
+    await browser.close()
+}
+
 const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     const apiHost = process.env.GATSBY_SQUEAK_API_HOST
 
@@ -343,6 +403,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
     generateLlmsTxt(filteredPages)
+
+    await createOGImages()
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
