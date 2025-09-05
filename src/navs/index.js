@@ -4083,6 +4083,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/google-ads',
                         },
                         {
+                            name: 'LinkedIn Ads',
+                            url: '/docs/data-warehouse/sources/linkedin-ads',
+                        },
+                        {
                             name: 'Google Sheets',
                             url: '/docs/data-warehouse/sources/google-sheets',
                         },
