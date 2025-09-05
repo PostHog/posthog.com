@@ -123,7 +123,7 @@ export default function Hub({ folder, sidebar, title }: { folder: string; sideba
     }, [])
 
     return (
-        <div data-scheme="secondary" className="p-5 bg-primary h-full">
+        <div data-scheme="secondary" className="p-4 bg-primary text-primary h-full">
             <div className="flex gap-8 h-full">
                 <section className="flex-1">
                     <ScrollArea>
