@@ -23,13 +23,13 @@ import { useApp } from '../../context/App'
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
 
 const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number; slug: string }> =
-{
-    all: { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
-    Apparel: { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
-    Stickers: { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
-    Goods: { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
-    Novelty: { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
-}
+    {
+        all: { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
+        Apparel: { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
+        Stickers: { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
+        Goods: { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
+        Novelty: { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
+    }
 
 type CollectionProps = {
     pageContext: CollectionPageContext

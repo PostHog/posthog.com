@@ -29,6 +29,7 @@ interface OSTabsProps {
     extraTabRowContent?: React.ReactNode
     onValueChange?: (value: string, tabs: TabTriggerData[][]) => void
     tabContainerClassName?: string
+    centerTabs?: boolean
     tabTriggerClassName?: string
     tabContentClassName?: string
     scrollable?: boolean
@@ -46,6 +47,7 @@ export default function OSTabs({
     extraTabRowContent,
     onValueChange,
     tabContainerClassName,
+    centerTabs = false,
     tabTriggerClassName,
     tabContentClassName,
     scrollable = true,
@@ -184,7 +186,8 @@ export default function OSTabs({
                 value={value || controlledValue}
                 className={
                     className ??
-                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${frame ? 'pt-2 px-4 pb-4' : ''
+                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
+                        frame ? 'pt-2 px-4 pb-4' : ''
                     } h-full min-h-0 bg-primary`
                 }
             >
@@ -195,8 +198,9 @@ export default function OSTabs({
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
-                                    }`}
+                                className={`flex ${
+                                    orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
+                                } ${centerTabs ? 'justify-center' : ''}`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -216,8 +220,9 @@ export default function OSTabs({
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <TabContentContainer
-                            className={`@container bg-primary h-full min-h-0 ${frame ? 'border border-primary rounded-md' : ''
-                                } ${!scrollable ? 'overflow-hidden' : ''}`}
+                            className={`@container bg-primary h-full min-h-0 ${
+                                frame ? 'border border-primary rounded-md' : ''
+                            } ${!scrollable ? 'overflow-hidden' : ''}`}
                         >
                             <div
                                 className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}

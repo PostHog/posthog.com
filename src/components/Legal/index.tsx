@@ -33,6 +33,8 @@ export default function Legal({ children, defaultTab }: { children: React.ReactN
                 onValueChange={(value) => {
                     navigate(value)
                 }}
+                centerTabs
+                tabContentClassName="!p-0"
             />
         </ScrollArea>
     )

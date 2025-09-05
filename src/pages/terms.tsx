@@ -69,7 +69,7 @@ function Terms() {
         >
             <SEO title="Terms, PostHog style" description="Terms, PostHog style" image={`/images/og/terms.png`} />
             <div>
-                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
+                <div className="max-w-3xl mx-auto py-8 px-4 md:px-8">
                     <h1 className="text-5xl text-center">
                         Terms,{' '}
                         <span className="whitespace-nowrap text-red dark:text-yellow">

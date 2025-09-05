@@ -432,23 +432,26 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
-                }`}
+            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${
+                isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
+            }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
-                    ? 'pt-4 pb-2 z-20'
-                    : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                    }`}
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
+                    isOpen
+                        ? 'pt-4 pb-2 z-20'
+                        : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
-                            }`}
+                        className={`transition-all leading-tight ${
+                            isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
+                        }`}
                     >
                         {title}
                     </span>
@@ -742,11 +745,10 @@ export default function Sales() {
                                 </Link>{' '}
                                 was a good idea...
                             </p>
-
                         </div>
                     </div>
                     <div className="w-full max-w-2xl mx-auto">
-                        <SuggestedLinksBlock links={["hate", "pricing", "careers"]} />
+                        <SuggestedLinksBlock links={['hate', 'pricing', 'careers']} />
                     </div>
                 </>
             ),
@@ -777,10 +779,10 @@ export default function Sales() {
                         {!isLast ? (
                             <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
                                 {slideIndex === 0
-                                    ? "See how [everyone else] does sales"
+                                    ? 'See how [everyone else] does sales'
                                     : slideIndex === 1
-                                        ? "See how PostHog does sales"
-                                        : "Next"}
+                                    ? 'See how PostHog does sales'
+                                    : 'Next'}
                             </CallToAction>
                         ) : (
                             <OSButton onClick={() => setClosing(true)} size="md" variant="primary">
