@@ -30,16 +30,29 @@ export const Content = ({ quickLinks = false }) => {
 
             <section className="mb-12">
                 <h3 className="mb-2 text-xl">FAQ</h3>
-                <Link to="/docs/revenue-analytics/metrics">What's deferred revenue?</Link>
-                <Link to="/docs/revenue-analytics/metrics">
-                    What are the key metrics available in Revenue analytics?
-                </Link>
-                <Link to="/docs/revenue-analytics/persons-and-groups">
-                    How can I see how much money I'm making from my customers?
-                </Link>
-                <Link to="/docs/revenue-analytics/revenue-breakdowns">
-                    How can I see how much money I'm making per country/product/etc?
-                </Link>
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4">
+                    <li>
+                        <Link to="/docs/revenue-analytics/deferred-revenue">What's deferred revenue?</Link>
+                    </li>
+                    <li>
+                        <Link to="/docs/revenue-analytics/metrics">
+                            What are the key metrics available in Revenue analytics?
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/docs/revenue-analytics/persons-and-groups">
+                            How can I see how much money I'm making from my customers?
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/docs/revenue-analytics/revenue-breakdowns">
+                            How can I see how much money I'm making per country/product/etc?
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/docs/revenue-analytics/faq">Other questions</Link>
+                    </li>
+                </ul>
             </section>
 
             {/* TODO: Complete/enabled once we've got Revenue Analytics resources */}
