@@ -60,6 +60,7 @@ interface ReaderViewProps {
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
+    hideRightSidebar?: boolean
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
     homeURL?: string
@@ -318,6 +319,7 @@ export default function ReaderView({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideRightSidebar = false,
     padding = true,
     proseSize = 'sm',
     homeURL,
@@ -342,6 +344,7 @@ export default function ReaderView({
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
+                hideRightSidebar={hideRightSidebar}
                 padding={padding}
                 proseSize={proseSize}
                 homeURL={homeURL}
@@ -471,6 +474,7 @@ function ReaderViewContent({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideRightSidebar = false,
     padding = true,
     proseSize,
     homeURL,
@@ -498,7 +502,7 @@ function ReaderViewContent({
         setFullWidthContent,
     } = useReaderView()
 
-    const showSidebar = tableOfContents && tableOfContents?.length > 0
+    const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
 
     // Determine if we should render the left sidebar at all (separate from animation state)
     const renderLeftSidebar = !compact && !hideLeftSidebar
