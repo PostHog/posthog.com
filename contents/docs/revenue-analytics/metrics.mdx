@@ -1,0 +1,60 @@
+---
+title: MRR breakdown
+sidebar: Docs
+showTitle: true
+---
+
+> **Important:** Revenue analytics is currently in beta. At this stage, Revenue Analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+
+Our [revenue analytics dashboard](https://app.posthog.com/revenue_analytics) provides a lot of metrics for you to see how your revenue is doing.
+
+This is a simple explanation of what each of these metrics is.
+
+### MRR
+
+MRR stands for Monthly Recurring Revenue. It's a metric that measures how much revenue you're making from customers with active subscriptions.
+
+This is automatically calculated by PostHog based on the revenue data you've sent us. For event sources it'll only be included in case you've configured a revenue event with a subscription property.
+
+When looking at your data per month we report what that amount was on the last day of the month.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_39_49_535d7ac546.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_39_40_56f31c997d.png"
+  alt="Revenue analytics MRR/ARR" 
+  classes="rounded"
+/>
+
+### ARR
+
+ARR stands for Annual Run Rate, it's your current revenue projected out over 12 months - `MRR * 12`. 
+
+This numbers does not try and predict what your revenue will be in the future, it assumes you'll keep the exact same customers paying the exact same amount for the next 12 months.
+
+Albeit unlikely to happen, this is usually the first number your investors will ask you about.
+
+### New and Churned Subscriptions
+
+This is the number of new subscriptions you gained and the number of subscriptions you lost in the selected time range.
+
+This is automatically calculated by PostHog based on the revenue data you've sent us. For event sources it'll only be included in case you've configured a revenue event with a subscription property.
+
+### New and Churned Customers
+
+This is the number of new customers you gained and the number of customers you lost in the selected time range.
+
+This is automatically calculated by PostHog based on the revenue data you've sent us. For event sources it'll only be included in case you've configured a revenue event with a customer property.
+
+We'll use the number of churned customers to calculate your churn rate `# churned_customers / # total customers`. This will then be used to calculate your [LTV](#ltv).
+
+### ARPU
+
+ARPU stands for Average Revenue Per User. It's a metric that measures how much revenue you're making from each user on average during that period. It's not restricted to subscriptions only and includes all revenue you're making.
+
+### LTV
+
+LTV stands for Lifetime Value. It's a metric that measures how much revenue you're making from each customer on average during their entire lifetime as a customer.
+
+We'll use the number of churned customers to calculate your churn rate `# churned_customers / # total customers`.
+
+This is then used to calculate your LTV by dividing your monthly ARPU by your churn rate.

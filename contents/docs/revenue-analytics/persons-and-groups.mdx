@@ -1,0 +1,29 @@
+---
+title: Persons and groups
+sidebar: Docs
+showTitle: true
+---
+
+> **Important:** Revenue analytics is currently in beta. At this stage, Revenue Analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+
+You can connect your revenue data to the `persons` and `groups` tables in the [revenue analytics settings](https://app.posthog.com/data-management/revenue).
+
+This is automatically done when you're using revenue events (since we know what person/group an event belongs to) but we need your help to manually map them in case you're using a data warehouse source.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_38_743c93fff2.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_29_8ec0f4633a.png"
+  alt="Revenue analytics persons and groups setup" 
+  classes="rounded"
+/>
+
+Once this is connected you'll be able to properly see who your top customers are in the [Top customers dashboard](https://app.posthog.com/revenue_analytics#top-customers).
+
+You'll also get access to the `revenue_analytics_persons` and `revenue_analytics_groups` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is. We plan on expanding that soon with more fields and also making that data available on the soon-to-be-released [CRM](/teams/crm) page.
+
+```sql
+-- Count the number of persons with revenue greater than 1,000,000
+SELECT COUNT(*)
+FROM persons_revenue_analytics
+WHERE amount > 1000000
+```

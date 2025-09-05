@@ -1,0 +1,88 @@
+---
+title: FAQs
+sidebar: Docs
+showTitle: true
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+> **Important:** Revenue analytics is currently in beta. At this stage, Revenue Analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+
+Have a question not covered here? [Let us know](http://app.posthog.com/home#supportModal).
+
+## Can I change the default reporting currency in PostHog?
+
+Yes. You can select your desired currency in the **Revenue** tab in **Data management**. This is the currency we'll use to *report* revenue in our Revenue analytics dashboard.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201104_33977aba84.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Captura_de_tela_2025_03_17_201051_e412bbb268.png"
+    alt="base currency configuration"
+    classes="rounded"
+/>
+
+## How do you convert revenue in different currencies?
+
+We automatically convert revenue from other currencies into your chosen reporting currency – i.e. if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), it's converted into USD in PostHog to ensure consistency.
+
+PostHog's currency conversion data is sourced from [Open Exchange Rates](https://openexchangerates.org/). The exchange rate data is updated hourly and stored with daily granularity.
+
+This ensures that your revenue data is converted using recent exchange rates, based on the exchange rate at the time of the event, providing reliable revenue analytics across different currencies.
+
+## Which currencies do you support?
+
+PostHog supports a wide range of global currencies for revenue tracking. See our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py) for a complete list.
+
+## What if you don't support the currency on my revenue event?
+
+This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
+
+### Why isn't my revenue appearing in the revenue analytics dashboard?
+
+If your revenue isn't appearing in your revenue analytics dashboard, there are a few common issues to check:
+
+1. **Check the Revenue tab in Data management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management.
+1. **Make sure Revenue tracking is enabled for you Data warehouse source**: Legacy data warehouse sources have revenue tracking disabled by default. Make sure you enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
+1. **Check your filters**: you can choose to filter revenue events in the Revenue analytics dashboard filter, make sure you have selected the desired entries.
+
+## Can I query converted rates?
+
+Yes, you can query converted rates yourself in SQL using the `convertCurrency` function. This is useful for custom queries and advanced analytics.
+
+Example:
+
+```sql
+SELECT 
+    *,
+    properties.$currency as original_currency,
+    properties.value as original_value,
+    convertCurrency(original_currency, 'USD', original_value, _toDate(timestamp)) as value_usd
+FROM events
+WHERE event = 'purchase'
+```
+
+The signature for the `convertCurrency` function is:
+
+```
+convertCurrency(
+    from_currency: string,
+    to_currency: string,
+    value: Decimal,
+    timestamp: Date | DateTime
+) -> Decimal
+```
+
+## Can I correlate revenue with paid ads data?
+
+This feature is current under development. Soon, PostHog will support sources for importing ad expense data, allowing you to analyze return on ad spend directly within the platform.
+
+## Can I compute CAC and CPC?
+
+Computing Customer Acquisition Cost (CAC) and Cost Per Click (CPC) will be possible once we've completed integrations with ad expense platforms. These metrics will provide valuable insights into your marketing efficiency and return on investment. You can learn more about this on the [Marketing Analytics](/docs/web-analytics/marketing-analytics) page.
+
+## Can I use custom currency conversion data?
+
+Currently, PostHog does not support using custom currency conversion data. We rely on the exchange rates provided by Open Exchange Rates.
+
+If you need support for custom conversion rates, please [create a feature request](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=), so our team can consider adding this functionality.

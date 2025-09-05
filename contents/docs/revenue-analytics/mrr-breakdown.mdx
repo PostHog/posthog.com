@@ -1,0 +1,26 @@
+---
+title: MRR breakdown
+sidebar: Docs
+showTitle: true
+---
+
+> **Important:** Revenue analytics is currently in beta. At this stage, Revenue Analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+
+If you're properly sending us information regarding your subscriptions - see the [setup](/docs/revenue-analytics/setup) page - you can see what your MRR breakdown looks like.
+
+This enables you to see what your MRR is made up of - new MRR, expansion, contraction, and churn.
+
+- **New MRR**: MRR from new customers
+- **Expansion**: MRR from existing customers who have paid more in the current subscription period than the previous one
+- **Contraction**: MRR from existing customers who have paid less in the current subscription period than the previous one
+- **Churn**: MRR from existing customers who cancel their subscription OR whose charge was 0 in the current subscription period
+
+This is calculated day by day. If you're looking at a timeframe where we display monthly data then we'll display the aggregated data for the whole month.
+
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_42_23_72bb1db21f.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_42_44_4fd7ed9d33.png"
+  alt="Revenue analytics MRR breakdown" 
+  classes="rounded"
+/>
