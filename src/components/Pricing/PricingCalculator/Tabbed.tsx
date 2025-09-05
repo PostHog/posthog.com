@@ -14,7 +14,7 @@ import { useUser } from 'hooks/useUser'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 
-const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
+export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
     const [percentage, setPercentage] = useState(50)
@@ -112,7 +112,15 @@ export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData
     ) : null
 }
 
-const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, analyticsData, setAnalyticsData }) => {
+export const TabContent = ({
+    activeProduct,
+    addons,
+    setVolume,
+    setAddons,
+    setProduct,
+    analyticsData,
+    setAnalyticsData,
+}) => {
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
 
