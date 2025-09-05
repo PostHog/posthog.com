@@ -31,6 +31,7 @@ import Loading from 'components/Loading'
 import { Popover } from 'components/RadixUI/Popover'
 import { FileMenu } from 'components/RadixUI/FileMenu'
 import BookmarkButton from 'components/BookmarkButton'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 interface HeaderBarProps {
     isNavVisible?: boolean
@@ -149,8 +150,9 @@ export default function HeaderBar({
                 {!compact && (
                     <div>
                         <motion.div
-                            className={`flex-shrink-0 flex items-center gap-px transition-all min-w-0 ${hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
-                                }`}
+                            className={`flex-shrink-0 flex items-center gap-px transition-all min-w-0 ${
+                                hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                            }`}
                         >
                             {homeURL && <OSButton size="md" icon={<IconHome />} to={homeURL} asLink />}
                             <div>
@@ -209,8 +211,18 @@ export default function HeaderBar({
                     <div className="flex items-center gap-px relative">
                         {rightActionButtons}
                         {showSearch && (searchContentRef || onSearch) && !isEditing && (
-                            <Tooltip trigger={<OSButton size="md" icon={<IconSearch />} onClick={toggleSearch} />}>
-                                Search this page
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconSearch />} onClick={toggleSearch} />}
+                                side="bottom"
+                            >
+                                <div className="flex flex-col items-center gap-2">
+                                    <span>Search this page</span>
+                                    <div>
+                                        <KeyboardShortcut text="Shift" size="xs" />
+                                        &nbsp;
+                                        <KeyboardShortcut text="F" size="xs" />
+                                    </div>
+                                </div>
                             </Tooltip>
                         )}
                         {showCart && (
@@ -235,8 +247,9 @@ export default function HeaderBar({
                                         </svg>
                                         {count && count > 0 && (
                                             <span
-                                                className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${animateCartCount ? 'animate-wiggle' : ''
-                                                    }`}
+                                                className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${
+                                                    animateCartCount ? 'animate-wiggle' : ''
+                                                }`}
                                             >
                                                 {count}
                                             </span>
@@ -262,8 +275,9 @@ export default function HeaderBar({
                 </div>
                 {showSidebar && (
                     <motion.div
-                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
+                            isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
+                        }`}
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (

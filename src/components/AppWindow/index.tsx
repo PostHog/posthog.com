@@ -627,7 +627,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     <div className="flex justify-end">
                                         {siteSettings.experience !== 'boring' && (
                                             <>
-                                                <OSButton size="xs" onClick={handleMinimize} className="!px-1.5">
+                                                <OSButton size="xs" onClick={handleMinimize} className="">
                                                     <IconMinus className="size-4 relative top-1" />
                                                 </OSButton>
 
@@ -655,7 +655,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                                 onMouseLeave={() => {
                                                                     setWindowOptionsTooltipVisible(false)
                                                                 }}
-                                                                className="!px-1.5 group"
+                                                                className=" group"
                                                             >
                                                                 <Tooltip
                                                                     trigger={
@@ -741,9 +741,18 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                 </ContextMenu.Root>
                                             </>
                                         )}
-                                        <OSButton size="xs" onClick={handleClose} className="!px-1.5">
-                                            <IconX className="size-4" />
-                                        </OSButton>
+                                        <Tooltip
+                                            trigger={<OSButton size="md" onClick={handleClose} icon={<IconX />} />}
+                                        >
+                                            <div className="flex flex-col items-center gap-2">
+                                                <span>Close window</span>
+                                                <div>
+                                                    <KeyboardShortcut text="Shift" size="xs" />
+                                                    &nbsp;
+                                                    <KeyboardShortcut text="W" size="xs" />
+                                                </div>
+                                            </div>
+                                        </Tooltip>
                                     </div>
                                 </div>
                             )}
