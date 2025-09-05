@@ -19,7 +19,7 @@ This is automatically done when you're using revenue events (since we know what 
 
 Once this is connected you'll be able to properly see who your top customers are in the [Top customers dashboard](https://app.posthog.com/revenue_analytics#top-customers).
 
-You'll also get access to the `revenue_analytics_persons` and `revenue_analytics_groups` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is. We plan on expanding that soon with more fields and also making that data available on the soon-to-be-released [CRM](/teams/crm) page.
+You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is. We plan on expanding that soon with more fields and also making that data available on the soon-to-be-released [CRM](/teams/crm) page.
 
 ```sql
 -- Count the number of persons with revenue greater than 1,000,000
