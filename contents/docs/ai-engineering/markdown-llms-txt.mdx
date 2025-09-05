@@ -2,19 +2,57 @@
 title: Markdown and llms.txt
 ---
 
-All of our docs pages are available in raw markdown and [llms.txt](https://posthog.com/llms.txt).
+LLMs and AI agents love Markdown. Us too. So we've made PostHog's documentation available in Markdown for developers to copy, crawl, and reuse as prompts or context.
 
-<ProductVideo
-    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/meet_max_ai_overview_778f4acffb.mp4" 
-    alt="Meet Max AI" 
+## Markdown pages
+
+Nearly every page in our developer docs has a raw Markdown version of itself – including this one!
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/raw_md_112b8b399d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/raw_md_dark_7c1b3013fc.png"
+    alt="Markdown version of this page"
     classes="rounded"
-    autoPlay={false}
-    muted={false}
-    loop={false}
+    padding={false}
 />
 
-## Markdown
+<Caption>
+Markdown version of this page
+</Caption>
+
+Markdown pages can be accessed by adding `.md` to the end of the URL, which renders the [MDX](https://mdxjs.com/) we write our docs in.
+
+| Page URL | Markdown URL |
+|----------|--------------|
+| [https://posthog.com/docs/getting-started/install](/docs/getting-started/install) | [https://posthog.com/docs/getting-started/install.md](https://posthog.com/docs/getting-started/install.md) |
+| [https://posthog.com/docs/error-tracking/capture](/docs/error-tracking/capture) | [https://posthog.com/docs/error-tracking/capture.md](https://posthog.com/docs/error-tracking/capture.md) |
+| The page you're on right now 🫵 | [https://posthog.com/docs/ai-engineering/markdown-llms-txt.md](https://posthog.com/docs/ai-engineering/markdown-llms-txt.md) |
+
+There are some exceptions to this URL pattern, such as the API reference pages. Refer to [llms.txt](https://posthog.com/llms.txt) to find the exact Markdown URLs for a specific page.
 
 ## llms.txt
 
-All of our docs pages are available in raw markdown and [llms.txt](https://posthog.com/llms.txt).
+You can find a directory of all our `.md` pages at [https://posthog.com/llms.txt](https://posthog.com/llms.txt), a new proposed standard that helps LLMs index content.  
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llms_txt_9768b3b49d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llms_txt_dark_f207eb35de.png"
+    alt="llms.txt"
+    classes="rounded"
+/>
+
+## Copy page
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/copy_page_c1c0828a1f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/copy_page_dark_62248c27f8.png"
+    alt="Copy page dropdown"
+    classes="rounded"
+/>
+
+Docs pages have a **Copy page** dropdown with shortcuts to: 
+
+- Copy the Markdown content to your clipboard
+- View the raw Markdown version of the page
+- Open a prompt in ChatGPT to read the page
+- Open a prompt in Claude to read the page
