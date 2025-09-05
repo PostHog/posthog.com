@@ -205,6 +205,14 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 - [Superhuman](https://superhuman.com/) (app) AI powered inbox
 - [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
 
+## Set up alerting (for team leads)
+
+We have certain automations in Vitally and Zapier that your team lead needs to add you to. Please ask them to add you.
+
+- [ ] [Vitally name trait playbook](https://posthog.vitally-eu.io/settings/playbooks/81d5c249-1e8f-4dfd-98b2-01e8ad904851): create a new branch that matches assigned AE to new team member. In this branch, add action to update account trait `AE name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
+- [ ] [Failed payment alerting](https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb): in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
+- [ ] [Annual plan credit alerting](https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088): in step 8 look up table, add new team member's email and Slack member ID 
+
 ## New hire frequently asked questions
 
 ### How does support work at PostHog?
