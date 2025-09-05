@@ -3930,6 +3930,30 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'References',
+                    url: '/docs/error-tracking/references',
+                    icon: 'IconBox',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'JavaScript web SDK',
+                            url: '/docs/references/posthog-js?filter=error-tracking',
+                        },
+                        {
+                            name: 'Node.js SDK',
+                            url: '/docs/references/posthog-node?filter=error-tracking',
+                        },
+                        {
+                            name: 'Python SDK',
+                            url: '/docs/references/posthog-python?filter=error-tracking',
+                        },
+                        {
+                            name: 'Error tracking API',
+                            url: '/docs/api',
+                        },
+                    ],
+                },
+                {
                     name: 'More tutorials',
                     url: '/docs/error-tracking/tutorials',
                     icon: 'IconGraduationCap',
