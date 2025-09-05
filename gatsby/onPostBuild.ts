@@ -1,12 +1,6 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
-import blogTemplate from '../src/templates/OG/blog.js'
-import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
-import customerTemplate from '../src/templates/OG/customer.js'
-import careersTemplate from '../src/templates/OG/careers.js'
-import jobTemplate from '../src/templates/OG/job.js'
-import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
@@ -418,14 +412,14 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
     generateLlmsTxt(filteredPages)
 
-    await createOGImages()
-
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
         return
     }
 
     console.log('Running onPostBuild tasks')
+
+    await createOGImages()
 
     const { data } = await graphql(`
         query {
