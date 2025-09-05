@@ -27,7 +27,7 @@ import slugify from 'slugify'
 import uniqBy from 'lodash/uniqBy'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -38,10 +38,11 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-3 py-2 @3xl:py-1 rounded flex-1 text-[15px] @3xl:text-sm border relative opacity-75 ${active
-                ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
-                : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
-                } ${className}`}
+            className={`px-3 py-2 @3xl:py-1 rounded flex-1 text-[15px] @3xl:text-sm border relative opacity-75 ${
+                active
+                    ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
+                    : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
+            } ${className}`}
         >
             {children}
         </button>
@@ -193,8 +194,15 @@ const Header = () => {
     const { fullWidthContent } = useLayoutData()
 
     return (
-        <section className={`@container pt-4 px-6 @7xl:px-5 transition-all mx-auto ${fullWidthContent ? '' : 'max-w-[1400px]'}`}>
-            <div data-scheme="primary" className="bg-accent grid grid-cols-2 @3xl:grid-cols-[200px_1fr_200px] mb-4 @7xl:mb-6 mx-auto py-1 @3xl:p-2 items-center">
+        <section
+            className={`@container pt-4 px-6 @7xl:px-5 transition-all mx-auto ${
+                fullWidthContent ? '' : 'max-w-[1400px]'
+            }`}
+        >
+            <div
+                data-scheme="primary"
+                className="bg-accent grid grid-cols-2 @3xl:grid-cols-[200px_1fr_200px] mb-4 @7xl:mb-6 mx-auto py-1 @3xl:p-2 items-center"
+            >
                 <div className="@3xl:block text-sm @3xl:pl-2">
                     <div className="@3xl:hidden">
                         {currentDate.toLocaleDateString('en-US', {
@@ -228,8 +236,9 @@ const Main = () => {
 
     return (
         <section
-            className={`grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8 mx-auto px-7 @7xl:px-9 mb-12 transition-all ${fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
-                }`}
+            className={`grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8 mx-auto px-7 @7xl:px-9 mb-12 transition-all ${
+                fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
+            }`}
         >
             <aside className="@container order-3 col-span-full border-t border-primary @5xl:col-span-1 @5xl:border-t-0 pt-8 @5xl:pt-0 @5xl:order-none flex flex-col ">
                 <div className="grid @7xl:grid-cols-2 gap-4 @7xl:gap-x-12 @7xl:gap-y-4 divide-y @5xl:divide-y-0 divide-border dark:divide-border-dark">
@@ -311,8 +320,9 @@ const Main = () => {
             </aside>
             <section className="@container order-1 flex-1 @5xl:order-none @2xl:border-r @2xl:pr-6 @5xl:px-6 @7xl:px-8 @5xl:border-x border-primary">
                 <div
-                    className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${fullWidthContent ? '' : 'max-w-2xl mx-auto'
-                        }`}
+                    className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
+                        fullWidthContent ? '' : 'max-w-2xl mx-auto'
+                    }`}
                 >
                     <Posts />
 

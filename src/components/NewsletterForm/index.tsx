@@ -30,10 +30,10 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
         placement === 'middle'
             ? 'border-y !mt-10 !mb-6 xs:!my-6 !py-4'
             : placement === 'blog-index'
-                ? 'border-0 pt-8'
-                : placement === 'community'
-                    ? 'border-0'
-                    : 'border-y !mt-6 !mb-0 !py-4'
+            ? 'border-0 pt-8'
+            : placement === 'community'
+            ? 'border-0'
+            : 'border-y !mt-6 !mb-0 !py-4'
 
     useEffect(() => {
         if (user?.email) {
