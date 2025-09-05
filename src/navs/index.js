@@ -4505,12 +4505,20 @@ export const docsMenu = {
                     icon: 'IconHome',
                     color: 'seagreen',
                     featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Setup',
                     url: '/docs/revenue-analytics/setup',
                     icon: 'IconBook',
                     color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Dashboard',
