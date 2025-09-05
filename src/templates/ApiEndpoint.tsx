@@ -725,7 +725,9 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                                             response.content?.['application/json']?.schema['$ref']
                                                                 ?.split('/')
                                                                 .at(-1) ||
-                                                            response.content?.['application/json']?.schema.items['$ref']
+                                                            response.content?.['application/json']?.schema.items?.[
+                                                                '$ref'
+                                                            ]
                                                                 ?.split('/')
                                                                 .at(-1)
                                                         }
