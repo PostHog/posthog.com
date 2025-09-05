@@ -87,18 +87,6 @@ By the end of month 3:
   - You've suggested and made changes to our systems that enable you to do your job better
   - Think about customer health scores and add/change anything you learn here
 
-#### Onboarding specialist
-By the end of month 1:
- - Be leading customer calls on your own
- - Converting leads from your book to ['Onboarded'](https://posthog.com/handbook/cs-and-onboarding/onboarding-team#onboarding-lifecycle) in Vitally.
- - Passing off large contracts to AEs via Salesforce
-
-By the end of month 2:
- - You're a PostHog power user - most questions you raise can only be answered by product engineers rather than the support team
-
-By the end of month 3:
- - You've implemented process and system-level changes to make your job better/more effective
-
 ## PostHog curriculum
 
 PostHog has a lot of products! To help you figure out how to start and continue build your knowledge, here's a recommended list of topics to work through. 
