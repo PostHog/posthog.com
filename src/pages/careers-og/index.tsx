@@ -39,9 +39,8 @@ const roleGroupingOrder = ['Engineering', 'Product', 'Design', 'Marketing', 'Sal
 const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
 
 const columns = [
-    { name: 'Job Title', width: 'minmax(250px,1.5fr)', align: 'left' as const },
-    { name: 'Team(s)', width: 'minmax(150px,1fr)', align: 'left' as const },
-    { name: 'Timezone(s)', width: 'minmax(150px,1fr)', align: 'left' as const },
+    { name: 'Role', width: 'minmax(350px,2fr)', align: 'left' as const, className: '!text-xl' },
+    { name: 'Timezone(s)', width: 'minmax(200px,1fr)', align: 'left' as const, className: '!text-xl' },
 ]
 
 export default function CareersOG(): JSX.Element {
@@ -50,7 +49,7 @@ export default function CareersOG(): JSX.Element {
         allTeams: { nodes: allTeams },
     } = useStaticQuery(query)
 
-    const jobGroups = useMemo(() => {
+    const jobRows = useMemo(() => {
         // Group jobs by role grouping
         const groups: { [key: string]: any[] } = {}
 
@@ -82,8 +81,8 @@ export default function CareersOG(): JSX.Element {
             return a.localeCompare(b)
         })
 
-        // Create groups with formatted job rows
-        const formattedGroups: { name: string; rows: any[] }[] = []
+        // Create flat list of all jobs
+        const allRows: any[] = []
 
         sortedGroupNames.forEach((groupName) => {
             const groupJobs = [...groups[groupName]]
@@ -101,8 +100,8 @@ export default function CareersOG(): JSX.Element {
                 groupJobs.push(speculativeJob)
             }
 
-            // Create rows for this group
-            const groupRows = groupJobs.map((job: any) => {
+            // Add jobs directly to the flat array
+            groupJobs.forEach((job: any) => {
                 const teamsField = job.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
                 const teams = teamsField ? JSON.parse(teamsField.value) : []
                 const validTeams = teams.filter((teamName: string) =>
@@ -114,50 +113,37 @@ export default function CareersOG(): JSX.Element {
                 )
 
                 // Prepare location string for potential future use
-                const locationString = `Remote${
-                    job.fields.locations?.length > 0 ? ` (${job.fields.locations.join(', ')})` : ''
-                }`
+                const locationString = `Remote${job.fields.locations?.length > 0 ? ` (${job.fields.locations.join(', ')})` : ''
+                    }`
 
-                return {
+                allRows.push({
                     key: `${job.fields.title}-${groupName}`,
                     cells: [
                         {
                             content: (
-                                <>
-                                    {job.fields.title}
+                                <div>
+                                    <div className="font-bold text-xl tracking-tight">{job.fields.title}</div>
                                     {/* {' - ' + locationString} */}
-                                </>
+                                    {!hideTeamsByJob.includes(job.fields.title) && validTeams.length > 0 && (
+                                        <div className="text-xl text-secondary mt-1">
+                                            {validTeams.join(', ')} Team{validTeams.length > 1 ? 's' : ''}
+                                        </div>
+                                    )}
+                                </div>
                             ),
-                            className: 'font-semibold',
-                        },
-                        {
-                            content: hideTeamsByJob.includes(job.fields.title)
-                                ? '-'
-                                : validTeams.length > 1
-                                ? 'Multiple teams'
-                                : validTeams[0] || '-',
-                            className: 'text-sm',
+                            className: '',
                         },
                         {
                             content: timezoneField?.value || '-',
-                            className: 'text-sm',
+                            className: 'text-lg',
                         },
                     ],
-                }
-            })
-
-            formattedGroups.push({
-                name: groupName,
-                rows: groupRows,
+                })
             })
         })
 
-        return formattedGroups
+        return allRows
     }, [originalJobs, allTeams])
-
-    const totalJobs = useMemo(() => {
-        return jobGroups.reduce((sum, group) => sum + group.rows.length, 0)
-    }, [jobGroups])
 
     return (
         <>
@@ -174,14 +160,15 @@ export default function CareersOG(): JSX.Element {
                 <ScrollArea>
                     <h2 className="!mt-0 mb-4">
                         our small teams are looking to add{' '}
-                        <strong className="whitespace-nowrap">{totalJobs} team members</strong>
+                        <strong className="whitespace-nowrap">{jobRows.length} team members</strong>
                     </h2>
-                    {jobGroups.map((group) => (
-                        <div key={group.name} className="mb-6">
-                            <h3 className="text-lg font-bold mb-2">{group.name}</h3>
-                            <OSTable columns={columns} rows={group.rows} rowAlignment="top" size="sm" />
-                        </div>
-                    ))}
+                    <OSTable
+                        columns={columns}
+                        rows={jobRows}
+                        rowAlignment="top"
+                        size="md"
+                        className="text-2xl"
+                    />
                 </ScrollArea>
             </Editor>
         </>
