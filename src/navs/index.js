@@ -2402,8 +2402,8 @@ export const docsMenu = {
                             url: '/docs/max-ai',
                         },
                         {
-                            name: 'Wizard',
-                            url: '/docs/ai-engineering/wizard',
+                            name: 'AI wizard',
+                            url: '/docs/ai-engineering/ai-wizard',
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
