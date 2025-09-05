@@ -38,6 +38,8 @@ This way you can test out analytics in development and staging environments, whi
 
 We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
 
+You can still query data for your app or marketing website separately if needed. A way to do this is [filtering](/docs/product-analytics/trends/filters) by the `host` property, for example setting `host` to `posthog.com`. Alternatively, you could set [super properties](/docs/libraries/js/features#super-properties) and then filter by them.
+
 It's best to use separate projects for:
 - Apps that are entirely separate products with unlinked authentication systems
 - Admin apps that aren't customer-facing products

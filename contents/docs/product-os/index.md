@@ -25,7 +25,7 @@ Product OS comprises things like:
 
 - Our easy to implement [client and server SDKs](/docs/getting-started/install?tab=sdks) like `posthog-js` client library, which [autocaptures](/docs/product-analytics/autocapture) frontend events, so you don't have to waste time manually instrumenting every button and simple interaction
 
-- Our [APIs](/docs/api), which enable you to capture, evaluate, create, update, and delete nearly all of your information in PostHog, and [pull information into your app](/tutorials/customer-facing-analytics)
+- Our [APIs](/docs/api), which enable you to capture, evaluate, create, update, and delete nearly all of your information in PostHog, and [pull information into your app](/tutorials/embedded-analytics)
 
 - Collaboration features like [notebooks](/docs/notebooks), which enable you to analyze data from all PostHog products in a single document you can share and collaborate on with teammates
 

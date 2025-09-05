@@ -140,9 +140,9 @@ const productDetails: Record<
         complexity: ['People who code'],
     },
     surveys: {
-        freeTierLimit: '250',
+        freeTierLimit: '1500',
         denominator: 'response',
-        startingPrice: '$0.20',
+        startingPrice: '$0.10',
         description: 'Get qualitative feedback from the right users at the right time',
         roles: ['Product people', 'Marketing', 'Sales'],
         goals: ['Understand user behavior', 'Improve product'],
@@ -173,6 +173,15 @@ const productDetails: Record<
         description: 'Find and track errors in your product, then assign them as issues',
         roles: ['Product engineers'],
         goals: ['Find errors', 'Solve performance issues'],
+        complexity: ['People who code'],
+    },
+    'llm-analytics': {
+        freeTierLimit: '100,000',
+        denominator: 'event',
+        startingPrice: '$0.00006',
+        description: 'Build AI features with full visibility – both in development and production',
+        roles: ['Product engineers', 'Startups & founders'],
+        goals: ['Understand user behavior', 'Improve product'],
         complexity: ['People who code'],
     },
     max: {

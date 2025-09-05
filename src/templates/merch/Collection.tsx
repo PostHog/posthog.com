@@ -23,7 +23,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 <SEO title="Merch - PostHog" image="/images/merch.png" />
                 <Nav currentCollectionHandle={pageContext.handle} />
                 <div className="w-full px-4 mx-auto max-w-7xl">
-                    <ShippingBanner />
+                    {/* <ShippingBanner /> */}
                     <ProductGrid products={transformedProducts} />
                 </div>
             </Layout>

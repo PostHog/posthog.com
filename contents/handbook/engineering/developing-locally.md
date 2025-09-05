@@ -140,11 +140,12 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
-You can do this in one line with:
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` and line `::1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
+You can do this with:
 
 ```bash
 echo '127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
+echo '::1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
@@ -381,6 +382,9 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 # only services strictly required to run posthog
 ./bin/start --minimal
+
+# enable tracing for django services (jaeger and otel collector are part of the stack)
+./bin/start --enable-tracing
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -553,6 +557,16 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
+## Extra: Enable tracing with Jaeger
+
+To debug with Jaeger, you can use the following command:
+
+```bash
+./bin/start --enable-tracing
+```
+
+Jaeger will be available at [http://localhost:16686](http://localhost:16686).
+
 #### Production usage
 
 We send our PostHog Cloud emails via Customer.io using their HTTP API. If Customer.io is not configured but SMTP is, it will fall back to SMTP. We do this so we can continue to support SMTP emails for self-hosted instances.
@@ -593,9 +607,7 @@ When creating a new email, there are a few steps to take. It's important to add 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
-
-In PostHog you'll want to add the Stripe public key so it can load on the client. To do so, go to 1Password and find "Local PostHog environment variables". Take that value and put it into a `.env` file at the root of your PostHog repo locally. If your server is already running, you'll want to restart it.
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
 ## Extra: Working with the data warehouse
 

@@ -1,0 +1,113 @@
+---
+title: Python error tracking installation
+showStepsToc: true
+---
+
+
+import Tab from "components/Tab"
+import DjangoContextMiddleware from '../../libraries/python/_snippets/django-context-middleware.mdx'
+import PythonFlaskExceptionAutocapture from '../../libraries/python/_snippets/python-flask-exception-autocapture.mdx'
+import PythonFastAPIExceptionAutocapture from '../../libraries/python/_snippets/python-fastapi-exception-autocapture.mdx'
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+
+<Steps>
+<Step title="Install PostHog Python SDK" badge="required">
+
+```bash
+pip install posthog
+```
+
+In your app, import the `posthog` library and set your project API key and host **before** making any calls. You can find these in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+```python
+from posthog import Posthog
+
+
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+```
+
+> **Note:** As a rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable is best.
+
+To debug, you can toggle debug mode:
+
+```python
+posthog.debug = True
+```
+
+To make sure no calls happen during tests, you can disable PostHog, like so:
+
+```python
+if settings.TEST:
+    posthog.disabled = True
+```
+
+</Step>
+
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, enable debug and call `posthog.capture('test_event')` to make sure you can capture events.
+
+</Step>
+
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Python application." badge="required">
+
+> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any unhandled exceptions thrown by your Python application. It works by setting Python's built-in exception hooks, such as `sys.excepthook` and `threading.excepthook`.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
+```
+
+We recommend setting up and using [contexts](/docs/libraries/python#contexts) so that exceptions automatically include distinct IDs, session IDs, and other properties you can set up with tags.
+
+</Step>
+
+<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Python application." badge="optional">
+
+For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
+
+```python
+posthog.capture_exception(e, distinct_id="user_distinct_id", properties=additional_properties)
+```
+
+You can find a full example of all of this in our [Python (and Flask) error tracking tutorial](/tutorials/python-error-tracking).
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+<Step title="Framework-specific exception capture" subtitle="Your goal in this step: Configure framework-specific exception capture." badge="optional">
+
+Python frameworks often have built-in error handlers. This means PostHog's default exception autocapture won't work and we need to manually capture errors instead. The exact process for doing this depends on the framework:
+
+<Tab.Group tabs={['Django', 'Flask', 'FastAPI']}>
+  <Tab.List>
+    <Tab>Django</Tab>
+    <Tab>Flask</Tab>
+    <Tab>FastAPI</Tab>
+  </Tab.List>
+  <Tab.Panels>
+    <Tab.Panel>
+      <DjangoContextMiddleware />
+    </Tab.Panel>
+    <Tab.Panel>
+      <PythonFlaskExceptionAutocapture />
+    </Tab.Panel>
+    <Tab.Panel>
+      <PythonFastAPIExceptionAutocapture />
+    </Tab.Panel>
+  </Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Upload source maps" badge="optional">
+
+<StepUploadSourceMaps urlPath="cli" />
+
+</Step>
+</Steps> 

@@ -22,7 +22,7 @@ To find recordings from a specific user that needs support, you can filter for a
 
 ![Filters](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/session-recordings-for-support/filter.png)
 
-Once you’ve found a relevant recording, click the toggle above the events to show the ones matching your filters (in this case, `Rageclick`) to go straight to the issue. You can also search for other events within the session (such as [exceptions](/docs/error-trackings)). This shows you those events in the recording, the behavior before or after, and the related person and event data.
+Once you’ve found a relevant recording, click the toggle above the events to show the ones matching your filters (in this case, `Rageclick`) to go straight to the issue. You can also search for other events within the session (such as [exceptions](/docs/error-tracking)). This shows you those events in the recording, the behavior before or after, and the related person and event data.
 
 Finding a session replay connected to the issue saves you time in multiple ways:
 - You don’t have to go back and forth with the user for details.

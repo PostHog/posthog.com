@@ -61,11 +61,11 @@ If you're having issues with recordings not looking correct, there are a few thi
 Most assets rendered on your website or app are captured **inline** – meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however, this is either too difficult or too costly to do, so instead we load them directly from the original webserver (just like your website does). This can lead to CORS issues where the webserver does not permit **us.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens, but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
 
 ```
-Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from origin 'https://app.posthog.com has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from origin 'https://us.posthog.com has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 @ GET https://yourwebsite.com/fonts/MyriadPro-Bold.woff2 net: :ERR_FAILED 200
 ```
 
-If you see errors like this, please add `app.posthog.com` to the list of permitted domains in your webservers CORS configuration.
+If you see errors like this, please add `us.posthog.com` (or `eu.posthog.com`) to the list of permitted domains in your webservers CORS configuration.
 
 ### Adjust the crossorigin attribute on stylesheets
 If the `crossorigin` attribute is not set on `link` elements a Chrome specific protection will prevent programmatic access to stylesheet rules (e.g. `stylesheet.cssRules` throws an exception). This means that styles on your site render as expected but they cannot be captured by PostHog in order to recreate the session during playback.
@@ -77,11 +77,17 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
+## Images and videos do not appear in the replay
+
+PostHog captures session replays by capturing the DOM, not videos or screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
+
+If the DOM contains images or other media assets referenced by a URL that is signed, expired, or otherwise not available, the replay will not be able to reconstruct the DOM correctly. A workaround to make replays more accurately represent the original session is to fallback to a placeholder if the asset is no longer available.
+
 ## Unable to filter by user or page properties
 
 Some of the filtering options in session replays depend on [product analytics](/docs/product-analytics) events. 
 
-To enable all filtering options, we recommend capturing at least one event per session. Most commonly identifying users via `identify()`. This makes sure you can use all of the power of filtering by person and event properties
+To enable all filtering options, we recommend capturing at least one event per session. Most commonly identifying users via `identify()`. This makes sure you can use all of the power of filtering by person and event properties.
 
 Since these events contribute to the product analytics usage and [billing limits](/docs/billing/limits-alerts), if you exceed your product analytics monthly limit, the recordings captured after that (until new billing period starts or limit is increased) won't be possible to filter by these properties.
 
@@ -118,6 +124,12 @@ To fix this, either call a method that creates a person profile (like `identify(
 ## Browser freezes or crashes when recordings are enabled
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/libraries/js/persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.
+
+## Enable recordings when URL matches not working as expected
+
+The **Enable recordings when URL matches** setting is only supported in the web SDK version `1.171.0` and above. If your recordings aren’t being recorded as expected, even when the URL matches your regex, it’s likely due to an outdated SDK version.
+
+Make sure you’re using version `1.171.0` or newer to ensure this feature works correctly.
 
 ## Network payload capture is not capturing headers
 

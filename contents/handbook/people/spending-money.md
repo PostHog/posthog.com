@@ -14,7 +14,7 @@ If it's a trivial expense, just buy it. We provide you with a company card to co
 
 > Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
 
-You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. 
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. Please remember that you need to submit receipts for *all* purchases using your Revolut.
 
 For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
 
@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 ## Saving receipts
 
-Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with Janani.
+Make sure you *keep copies for all receipts $75 or more* for charges **on Brex**. You must save _all_ receipts for charges on Revolut. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />.
 
 You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
 
@@ -90,7 +90,7 @@ We'd prefer you to use a laptop. This is so when we host meetups in real life, y
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
 
-Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
+Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen that meets our suggested monitor specs below. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
 > You need to purchase a laptop with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. Please do not purchase any other type.
 
@@ -98,7 +98,7 @@ If you are in the US only, when buying something at Apple we can get 3% cashback
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-> You can request a budget to buy a new laptop if your laptop is over 4 years old - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. We recommend wiping + reinstalling a minimum set of apps to verify this. 
+> You can request a budget to buy a new laptop if your laptop is over 4 years old or significantly impacting your productivity - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
 >
 > If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
@@ -150,7 +150,13 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 
-Every person has $100 per month for personal software - this is software that is purely for your individual use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+Every person has $100 per month for individual software use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+
+### AI tools & API
+
+This is expected to be a dedicated monthly budget to help you enhance your work productivity and empower you to ship faster. This budget of USD 300 per month for the Tech/R&D department, is separate from your regular software subscription. It is meant for work related tools only, such as AI coding assistants, API credits, other AI tool subscriptions. 
+
+These budgets shouldn't stop us from innovating, and we can approve an increase on a case-by-case basis.
 
 ### Optional software
 
@@ -198,13 +204,15 @@ We have a company WeWork All Access account that allows you to book desks in any
 If you need to travel on PostHog’s behalf for in-person onboarding, meeting customers, and offsites, again please spend money in the best interests of the company. 
 
 We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
-- We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
+- We all travel economy by default – we don't pay for folks to fly premium or business class. Feel free to upgrade using your personal money/miles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat.
+- If you'd like to travel in a premium cabin using personal miles or points and can only book the flight using points, you can request a reimbursement for the cost of the economy fare in Brex. Submit your request with a screenshot of the cost of the economy fare at the time of booking.
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
-- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
-- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when travelling on behalf of PostHog.
+- Related to the above, consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when traveling to the US. PostHog will cover costs here.
+- When traveling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
+- When making charges on your card internationally, run the transaction using the local currency when given the option as Brex will generally have a better exchange rate.
+- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when traveling on behalf of PostHog.
 
-> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
+> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 
 ### Budget for working together/socializing
 
@@ -227,6 +235,12 @@ We offset all carbon emissions generated by team flights using [Wren](https://ww
 ## Customer meetings
 
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill. At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
+
+## Customer meet-ups
+
+We encourage team members to meet with users and key customers in person. This type of travel is separate from your quarterly "working together" budget. This enables us to track the budgets and costs separately. To cover costs for travel, accommodation, and meals when meeting customers, please submit a separate budget request in Brex.
+
+When submitting your request, please provide details of your arrangements and the purpose of the trip - this is required to justify the budget and costs to the auditor, and to ensure that our records are complete. A screenshot/link to a Slack conversation or an email is a great way to provide this context.
 
 ## Training
 

@@ -1,6 +1,6 @@
 ---
 title: 'The best Hotjar alternatives & competitors, compared'
-date: 2024-03-04
+date: 2025-08-07
 author:
   - andy-vandervell
 rootpage: /blog
@@ -18,61 +18,72 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 ## 1. PostHog
 
 - **Founded:** 2020
-- **Similar to:** LogRocket, Mixpanel
+- **Similar to:** Hotjar, Pendo, Crazy Egg
 - **Typical users:** Engineers and product teams
 - **Typical customers:** Mid-size B2B/B2C companies and startups
 
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_07_at_09_52_07_2x_09204fb91f.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_07_at_09_52_28_2x_a44d56c654.png"
+    alt="PostHog session replay and analytics dashboard"
+    classes="rounded"
+/>
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform for session replay, product analytics, feature flags, A/B testing, and user surveys – everything you need to understand your users. This means it's not just an alternative to Hotjar, but also tools like [Mixpanel](/blog/best-mixpanel-alternatives) and [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+[PostHog](/) (that's us 👋) is an all-in-one platform for session replay, heatmaps, product and web analytics, feature flags, A/B testing, error tracking, and user surveys — everything you need to understand your users. This means it's not just an [alternative to Hotjar](/blog/posthog-vs-hotjar), but also tools like [Mixpanel](/blog/best-mixpanel-alternatives), [Sentry](/blog/best-sentry-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives).
 
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of February 2024, PostHog is used on 5,169 (0.52%) of the top 1 million websites. Hotjar is used by [72,048 of the top 1 million websites](https://trends.builtwith.com/analytics/Hotjar). Typical PostHog users are engineers and product managers at startups and mid-size companies, such as [Webshare](/customers/webshare), [AssemblyAI](/customers/assemblyai), and [Purplewave](/customers/purplewave).
-
-Unlike Hotjar, PostHog supports iOS, Android, React Native, and Flutter SDKs for mobile apps, making it a good option if you need a [Hotjar-style tool for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter).
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of August 2025, PostHog is used on 4,882 (0.49%) of the top 1 million websites. Hotjar is used by [74,141 of the top 1 million websites](https://trends.builtwith.com/analytics/Hotjar). Typical PostHog users are engineers and product managers at startups, scaleups, and mid-size companies, such as [ElevenLabs](/customers/elevenlabs), Raycast, and Airbus (a bit bigger than a mid-size company but 🤷‍♂️).
 
 #### Key features
 
-- **Session replays:** Including event timelines, console logs, network activity.
-- **Heatmaps:** Visualize user and rage clicks anywhere on your site.
-- **Product analytics:** Analyze funnels, user paths, retention, and trends.
-- **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
-- **Surveys:** Run customer satisfaction, NPS, and PMF surveys.
+- 🎥 **Session replays:** Including event timelines, console logs, DOM explorer, network activity. Combine with error tracking to debug issues faster.
+- 🔥 **Heatmaps:** Visualize user and rage clicks anywhere on your site, along with scroll depth and clickmaps.
+- 📊 **Product analytics:** Analyze funnels, user paths, retention, and trends. Write your own custom queries with SQL.
+- ⛳ **Feature flags & A/B testing:** Rollout features safely, run multivariate A/B tests.
+- 📝 **Surveys:** Run custom, targeted, multi-step surveys or use our pre-built customer satisfaction, NPS, and PMF ones.
 
 ### How does PostHog compare to Hotjar?
 
-According to BuiltWith, 27% of sites using Hotjar also use an analytics tool like FullStory (21% of sites use Mixpanel). PostHog can replace them all and has a [generous free tier](/pricing) of 5,000 sessions and 1 million analytics events per month.
+Hotjar is great for web session replays and surveys, but users often rely on other tools for analytics and more. For example, according to BuiltWith, 27% of sites using Hotjar also use an analytics tool like Fullstory (21% of sites use Mixpanel). PostHog can replace them all and has a [generous free tier](/pricing) of 5,000 sessions and 1 million analytics events per month.
+
+On top of this, PostHog provides session replays and surveys for iOS, Android (surveys soon), React Native, and Flutter for mobile apps, making it a great option if you need a [Hotjar-style tool for mobile apps](/blog/hotjar-for-mobile-ios-android-react-native-flutter).
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"5k/mo"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={"No Android"} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={true} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 ### Why do companies use PostHog?
 
 According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
 
-1. **It replaces multiple tools:** PostHog can replace [Hotjar](/blog/posthog-vs-hotjar) (session replay & surveys), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly) (feature flags and A/B testing). This simplifies workflows and ensures all their data is in one place.
+1. **It replaces multiple tools:** PostHog can replace [Hotjar](/blog/posthog-vs-hotjar) (session replay & surveys), [Google Analytics](/blog/posthog-vs-ga4), [GrowthBook](/blog/posthog-vs-growthbook) (feature flags and A/B testing), and more. This simplifies workflows and ensures all their data is in one place.
 
 2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get an additional $50k in credits.
 
-3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, tracking errors, and gathering feedback with user surveys.
 
 > #### Bottom line
 >
-> PostHog is a broader, more powerful tool than Hotjar. This comes with some extra complexity, but the payoff is all your user data in one place and tightly integrated with powerful analytical tools.
+> PostHog is a broader, more powerful tool than Hotjar. This means more tools and mobile support, but this comes with some extra complexity. The payoff is all your user data in one place and tightly integrated with powerful analytical tools.
+>
+> It also has a [generous free tier](/pricing) for each of its products including 5,000 replays, 1 million events, and 1500 survey responses per month.
 
 <br />
 
@@ -89,39 +100,43 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 [Mouseflow](/blog/best-mouseflow-alternatives) is a behavioral analytics tool that offers session replays, heatmaps, and basic funnel analysis. It's designed mainly for marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
 
-According to data from BuiltWith, 5,555 of the top 1 million websites use Mouseflow (correct as of Feb 2024), considerably less than Hotjar's 72,048.
+According to data from BuiltWith, 5,897 of the top 1 million websites use Mouseflow (correct as of August 2025), considerably less than Hotjar's 74,141.
 
 #### Key features
 
-- **Session replay:** Watch user sessions to learn what helps and hurts.
-- **Friction scores:** Identify sessions where users experience frustration.
-- **Heatmaps:** See where users click and scroll on your website.
-- **User feedback:** Gather feedback and ratings from users.
-- **Form analytics:** Reduce abandonment on signup forms.
+- 🎥 **Session replay:** Watch user sessions to learn what helps and hurts.
+- 🛞 **Friction scores:** Identify sessions where users experience frustration.
+- 🔥 **Heatmaps:** See where users click and scroll on your website.
+- 🗣️ **User feedback:** Gather feedback and ratings from users.
+- 📝 **Form analytics:** Reduce abandonment on signup forms.
 
 ### How does Mouseflow compare to Hotjar?
 
-It's more or less a like-for-like replacement. If you're unhappy with Hotjar but don't want a more advanced product like PostHog, Mouseflow is an obvious alternative.
+Mouseflow is more or less a like-for-like replacement for Hotjar. If you're unhappy with Hotjar but don't want a more advanced product like PostHog, Mouseflow is an obvious alternative.
 
 <ComparisonTable column1="Mouseflow" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"500/mo"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={false} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 ### Why do companies use Mouseflow?
 
-Based on reviews from G2.com, customers use Mouseflow because:
+Based on reviews from G2, customers use Mouseflow because:
 
 1. **They want to understand user behavior:** Session replays and heatmaps help them see what actions users take, which areas of the website receive the most attention, and how they can improve the user experience to increase conversions.
 
@@ -132,6 +147,8 @@ Based on reviews from G2.com, customers use Mouseflow because:
 > #### Bottom line
 >
 > Mouseflow is a good alternative to Hotjar for companies who just want a similar tool with slight differences in execution and pricing.
+>
+> If you're looking for more functionality or mobile support, you'll need to look elsewhere.
 
 <br />
 
@@ -146,34 +163,41 @@ Based on reviews from G2.com, customers use Mouseflow because:
 
 ### What is Sprig?
 
-[Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
+[Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys, session replays, and heatmaps with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user events. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
 
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (Mar 2024), Sprig is used on 521 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used large, B2C companies such as PayPal, Coinbase, and Robinhood.
+According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (August 2025), Sprig is used on 538 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used by large, B2C companies such as PayPal, Coinbase, and Robinhood.
 
 #### Key features
 
-- **Surveys:** Run targeted surveys right in your product and capture real-time insights.
-- **Session replay:** Capture targeted user journey clips to see what’s working.
-- **AI analysis:** Surface product issues and opportunities in real time.
+- 📝 **Surveys:** Run targeted surveys right in your product and capture real-time insights.
+- 🎥 **Session replay:** Capture targeted user journey clips to see what's working.
+- 🔥 **Heatmaps:** Get a visual representation of your users' in-product interactions.
+- 🤖 **AI analysis:** Surface product issues and opportunities in real time.
 
 ### How does Sprig compare to Hotjar?
 
-Sprig is a decent replacement for Hotjar, especially if you find Hotjar's survey tools lacking. It's support for mobile apps is another key differentiator.
+Sprig is a decent replacement for Hotjar, especially if you find Hotjar's survey tools lacking. Its support for mobile apps (minus Flutter) is a key differentiator.
+
+Unfortunately, Sprig's pricing is opaque and it's unclear what's available for free or how much their paid tiers cost.
 
 <ComparisonTable column1="Sprig" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={"No Flutter"} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"None"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={false} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={false} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={"No Flutter"} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={false} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 ### Why do companies use Sprig?
@@ -188,7 +212,9 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 
 > #### Bottom line
 > 
-> Sprig is a good option for product teams who want to do in-depth analysis on user journeys within products, especially compared to other Hotjar alternatives like Mouseflow that are more focused on e-commerce and small business users.
+> Sprig is a good option for product teams who want to run surveys and do in-depth analysis on user journeys within products, especially compared to other Hotjar alternatives like Mouseflow that are more focused on e-commerce and small business users.
+>
+> Their lack of pricing transparency is a negative though.
 
 <br />
 
@@ -199,40 +225,44 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 - **Typical users:** Marketers and consultants
 - **Typical customers:** Small e-commerce businesses and agencies
 
-![luckyorange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
+![luckyorange](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/luckyorange_f619e57c62.png)
 
 ### What is Lucky Orange?
 
 Lucky Orange is a simple analytics tool designed to analyze user behavior on small e-commerce websites using session replays and heatmaps. It also offers built-in form analytics, live chat, surveys, and announcements widgets that are useful for store owners.
 
-Founded in 2010, Lucky Orange is used on 4,435 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Hotjar's 72,048. Lucky Orange customers are often small online stores or freelance conversion optimization consultants.
+Founded in 2010, Lucky Orange is used on 4,125 of the top 1 million websites [according to BuiltWith](https://trends.builtwith.com/analytics/Lucky-Orange), compared to Hotjar's 74,141. Lucky Orange customers are often small online stores or freelance conversion optimization consultants.
 
 #### Key features
 
-- **Session replay:** Watch how real users navigate your website.
-- **Heatmaps** See where users click and scroll to on pages.
-- **Conversion funnels:** Basic funnel analysis for tracking conversions.
-- **Dashboards:** Create simple dashboards using pre-defined reports.
-- **Visitor profiles:** See everything a user has done.
+- 🎥 **Session replay:** Watch how real users navigate your website.
+- 🔥 **Heatmaps:** See where users click and scroll to on pages.
+- 🛝 **Conversion funnels:** Basic funnel analysis for tracking conversions.
+- 📊 **Dashboards:** Create simple dashboards using pre-defined reports.
+- 🤼 **Visitor profiles:** See everything a user has done.
 
 ### How does Lucky Orange compare to Hotjar?
 
-Lucky Orange is a natural alternative to Hotjar as it covers most of the same features.
+Lucky Orange is a natural alternative to Hotjar as it covers most of the same features, with some slightly better web analytics capacities.
 
 <ComparisonTable column1="Lucky Orange" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"100/mo"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={"Partial"} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
+  <ComparisonRow column1={true} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
+  <ComparisonRow column1={"Funnels"} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />
   <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={false} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 > 💡 **Good to know:** Although Lucky Orange offers a simple dashboarding feature, it doesn't include campaign or session metrics.
@@ -249,7 +279,9 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 > #### Bottom line
 > 
-> Lucky Orange is ideal for small businesses owners who want actionable insights without much effort, though its streamlined interface may be too limiting for larger teams who want more powerful tools.
+> Lucky Orange is ideal for small business owners who want actionable insights without much effort, though its streamlined interface may be too limiting for larger teams who want more powerful tools. 
+>
+> It's a good alternative to Hotjar, but doesn't provide features beyond it.
 
 <br />
 
@@ -264,34 +296,42 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 
 ### What is Crazy Egg?
 
-Crazy Egg is a heatmap and optimization platform tool for small business owners and marketers – it's popular among e-commerce businesses who run Shopify stores. It's best for its heatmaps, but it also includes basic replay, A/B testing, and website analytics tools. It's ideal for nontechnical users who want to optimize their websites and drive conversions.
+Crazy Egg is a heatmap and optimization platform tool for small business owners and marketers — it's popular among e-commerce businesses who run Shopify stores. It's best for its heatmaps, but it also includes basic replay, A/B testing, and website analytics tools. 
+
+It's ideal for nontechnical users who want to optimize their websites and drive conversions.
 
 #### Key features
 
-- **Heatmaps:** See where people click and where they don't.
-- **Session replay:** Watch recordings of actual visitors using your website.
-- **A/B testing:** Simple A/B tests using multi-armed bandit method.
-- **Surveys:** Collect qualitative feedback.
-- **Errors tracking:** Find out if Errors are preventing your visitors from converting.
+- 🔥 **Heatmaps:** See where people click and where they don't.
+- 🎥 **Session replay:** Watch recordings of actual visitors using your website.
+- 🧪 **A/B testing:** Simple, no-code A/B tests using multi-armed bandit method.
+- 📝 **Surveys:** Collect qualitative feedback.
+- 🚨 **Error tracking:** Find out if Errors are preventing your visitors from converting.
 
 ### How does Crazy Egg compare to Hotjar?
 
 Crazy Egg is very similar to Hotjar. It includes many of the same features and is designed for a similar audience of website owners and marketers.
 
+It does include some additional capacities beyond Hotjar's with web analytics, A/B testing, and error tracking. 
+
 <ComparisonTable column1="Crazy Egg" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"None"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={true} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 ### Why do companies use Crazy Egg?
@@ -302,10 +342,12 @@ According to reviews on G2, people use Crazy Egg because:
 
 2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable them to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
 
-3. **Gathering feedback** Users like that they can combine data with the qualitative feedback from users and customer CTAs.
+3. **Gathering feedback:** Users like that they can combine data with the qualitative feedback from users and customer CTAs.
 
 > #### Bottom line
-> Crazy Egg is strong alternative to Hotjar, especially if you'd like to run basic A/B tests to help improve conversions, something Hotjar doesn't offer.
+> Crazy Egg is a strong alternative to Hotjar, especially if you'd like to run basic A/B tests to help improve conversions, something Hotjar doesn't offer. It doesn't provide mobile support, but does add some features like error tracking and web analytics.
+>
+> Unfortunately, Crazy Egg doesn't offer a free tier though, only a free trial.
 
 <br />
 
@@ -316,40 +358,46 @@ According to reviews on G2, people use Crazy Egg because:
 - **Typical users:** Product managers and customer success teams
 - **Typical customers:** Small and mid-market B2C apps
 
-![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/pendo.png)
+![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-Fullstory-alternatives/pendo.png)
 
 ### What is Pendo?
 
 [Pendo](/blog/posthog-vs-pendo) describes itself as a product experience platform. In addition to session replay and user feedback tools, it offers product analytics, in-app guides, user feedback, and product validation tools. It's mainly used by product managers and customer success teams.
 
-According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo), as of January 2024, 3,740 of the top million websites used Pendo, much less than Hotjar's 72,048. 
+According to [data from BuiltWith](https://trends.builtwith.com/analytics/Pendo), as of August 2025, 3,936 of the top million websites used Pendo, much less than Hotjar's 74,141. 
 
 #### Key features
 
-- **Session replay:** Watch real users use your product. 
-- **In-app guides:** Deliver personalized guidance to customers inside your app.
-- **User feedback:** Capture and analyze customer feedback at scale.
-- **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
-- **Product validation and roadmaps:** Plan product improvements and roadmaps.
+- 🎥 **Session replay:** Watch real users use your product. 
+- 🦮 **In-app guides:** Deliver personalized guidance to customers inside your app.
+- 📝 **User feedback:** Capture and analyze customer feedback at scale.
+- 📊 **Product analytics:** Funnels, trends, and retention analysis with event autocapture.
+- 🛣️ **Product validation and roadmaps:** Plan product improvements and roadmaps.
 
 ### How does Pendo compare to Hotjar?
 
-Pendo doesn't offer all the features Hotjar does – it lacks heatmaps and scroll maps, for example. But it does offer more comprehensive product analytics features, making it more useful for app developers. It's similar in some ways to Sprig, though Pendo is broader and less focused on surveys.
+Pendo doesn't offer all the features Hotjar does — it lacks heatmaps and scroll maps, for example. But it does offer more comprehensive product analytics features, making it more useful for app developers.
+
+It's also one of the few options on this list that offers mobile surveys, but mobile replays are still missing.
 
 <ComparisonTable column1="Pendo" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"None"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={false} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={false} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={false} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 ### Why do companies use Pendo?
@@ -364,6 +412,8 @@ According to G2 reviews, customers use Pendo for:
 
 > #### Bottom line
 > [Pendo](/blog/best-pendo-alternatives) isn't a complete replacement for Hotjar due its lack of heatmaps, but the combination of analytics, session replay, and survey tools makes it useful for product managers, especially those who also need in-app product guides.
+>
+> Unfortunately, its lack of transparent pricing and no free replays are a negative.
 
 <br />
 
@@ -380,34 +430,39 @@ According to G2 reviews, customers use Pendo for:
 
 [Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports basic replay features and heatmaps. It also records rage clicks and dead clicks, and integrates with Google Analytics 4, so you can view your GA data in Clarity.
 
-Unsurprisingly, given it's free, Clarity is very popular. [BuiltWith estimates](https://trends.builtwith.com/analytics/Microsoft-Clarity) over 45,000 of the top 1 million websites use Clarity, making it one of the most popular alternatives, but still well below Hotjar's 72,048. 
+Unsurprisingly, given it's free, Clarity is very popular. [BuiltWith estimates](https://trends.builtwith.com/analytics/Microsoft-Clarity) over 65,688 of the top 1 million websites use Clarity, making it one of the most popular alternatives, but still well below Hotjar's 74,141.
 
 #### Key features
 
-- **Session replay:** Watch user sessions with built-in event timelines
-- **Heatmaps:** See where users click and how they navigate your website
-- **Scrollmaps:** See how far users scroll and where they dwell
-- **Frustration signals:** Detect rage and dead clicks
+- 🎥 **Session replay:** Watch user sessions with built-in event timelines
+- 🔥 **Heatmaps:** See where users click and how they navigate your website
+- 📜 **Scrollmaps:** See how far users scroll and where they dwell
+- 🤬 **Frustration signals:** Detect rage and dead clicks
 
 ### How does Clarity compare to Hotjar?
 
-Clarity covers most of the same features as Hotjar with the exclusion of surveys and user feedback. It's also free, of course, though it only retains data for 30 days.
+Clarity provides a great session replay and heatmap tool to the exclusion of all other features. Some Hotjar users might miss the surveys capabilities though.
+
+It's also free, of course, though it only retains data for 30 days.
 
 <ComparisonTable column1="Clarity" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions on iOS, Android, React Native, and Flutter apps" />
+  <ComparisonRow column1={"Unlimited"} column2={"35/day"} feature="Free replays" description="Free tier of session replays" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={false} feature="Canvas recording" description="Capture canvas elements from your application" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={false} column2={true} feature="Feedback widgets" description="Pre-built widgets for NPS, CSAT, and more" />
+  <ComparisonRow column1={false} column2={true} feature="Web surveys" description="Run targeted surveys to gather open-ended feedback" />
+  <ComparisonRow column1={false} column2={false} feature="Mobile surveys" description="Run surveys and capture feedback on iOS, Android, React Native, and Flutter" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={false} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={true} feature="Surveys" description="Collect feedback and run satisfaction surveys" />
+  <ComparisonRow column1={false} column2={false} feature="Error tracking" description="Capture errors and exceptions, provide stack traces to debug issues" />
 </ComparisonTable>
 
 ### Why do companies use Microsoft Clarity?
@@ -433,8 +488,8 @@ We're biased, obviously, but we think PostHog is the perfect Hotjar replacement 
 
 - You'd like to replace multiple tools with just one.
 - You want more powerful analytics than Hotjar can offer.
-- You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+- You want to try before you buy (we're self-serve with a [generous free tier](/pricing)).
 
-Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
+Check out [our product pages](/session-replay) and [read our docs](/docs) to learn more.
 
 <NewsletterForm />

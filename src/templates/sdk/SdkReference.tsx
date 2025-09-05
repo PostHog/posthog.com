@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
 import SEO from '../../components/seo'
 import PostLayout from '../../components/PostLayout'
@@ -11,24 +11,26 @@ import FunctionReturn from '../../components/SdkReferences/Return'
 import FunctionExamples from '../../components/SdkReferences/Examples'
 import CopyMarkdownActionsDropdown from '../../components/MarkdownActionsDropdown'
 import { useLocation } from '@reach/router'
+import { navigate } from 'gatsby'
 import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
+import Chip from '../../components/Chip'
 
-interface Parameter {
+export interface Parameter {
     name: string
     type: string
     description: string
     isOptional: boolean
 }
 
-interface Example {
+export interface Example {
     id: string
     name: string
     code: string
 }
 
-interface SdkFunction {
+export interface SdkFunction {
     id: string
     title: string
     description: string
@@ -45,17 +47,16 @@ interface SdkFunction {
     releaseTag?: string
 }
 
-interface Class {
+export interface Class {
     id: string
     title: string
     description: string
     functions: SdkFunction[]
 }
 
-interface SdkReferenceData {
+export interface SdkReferenceData {
     id: string
     hogRef: string
-    noDocsTypes: string[]
     info: {
         description: string
         id: string
@@ -65,15 +66,16 @@ interface SdkReferenceData {
         version: string
     }
     classes: Class[]
+    categories: string[]
 }
 
-interface PageContext {
+export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
 }
 
 const padDescription = (description: string): string => {
-    return description.replace(/\n/g, '\n\n')
+    return description?.replace(/\n/g, '\n\n') || ''
 }
 
 // Group functions by category, but Initialization always first, and "Other methods" for uncategorized
@@ -127,6 +129,51 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
     const validTypes = pageContext.types
+
+    // State for filtering
+    const [currentFilter, setCurrentFilter] = useState('all')
+
+    // Pre-transform classes with sorted functions
+    const sortedClasses = fullReference.classes.map((classData) => ({
+        ...classData,
+        sortedFunctions: groupFunctionsByCategory(classData.functions),
+    }))
+
+    // Convert category name to kebab-case for query params
+    const categoryToQueryParam = (category: string): string => {
+        return category.toLowerCase().replace(/\s+/g, '-')
+    }
+
+    // Convert query param back to category name
+    const queryParamToCategory = (queryParam: string): string | null => {
+        return fullReference.categories.find((cat) => categoryToQueryParam(cat) === queryParam) || null
+    }
+
+    // Reset filters
+    const resetFilters = () => {
+        setCurrentFilter('all')
+        navigate(location.pathname)
+    }
+
+    // Handle filter changes
+    const handleFilterChange = (category: string) => {
+        setCurrentFilter(category)
+        const queryParam = categoryToQueryParam(category)
+        navigate(`${location.pathname}?filter=${queryParam}`)
+    }
+
+    // Initialize filter from query params
+    useEffect(() => {
+        const params = new URLSearchParams(location?.search)
+        const filter = params.get('filter')
+        if (filter) {
+            const category = queryParamToCategory(filter)
+            if (category) {
+                setCurrentFilter(category)
+            }
+        }
+    }, [location])
+
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {
         switch (releaseTag.toLowerCase()) {
@@ -139,6 +186,50 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         }
     }
 
+    const getFilteredClasses = () => {
+        if (currentFilter === 'all') {
+            return sortedClasses
+        }
+
+        return sortedClasses
+            .map((classData) => {
+                const filteredSortedFunctions = classData.sortedFunctions
+                    .map(({ label, functions }) => ({
+                        label,
+                        functions: functions.filter((func) => func.category === currentFilter),
+                    }))
+                    .filter(({ functions }) => functions.length > 0)
+
+                if (filteredSortedFunctions.length === 0) {
+                    return null
+                }
+
+                return {
+                    ...classData,
+                    sortedFunctions: filteredSortedFunctions,
+                }
+            })
+            .filter((item): item is NonNullable<typeof item> => item !== null)
+    }
+
+    const filteredClasses = getFilteredClasses()
+
+    // Generate ToC from filtered classes and functions
+    const tableOfContents = filteredClasses.flatMap((classData) => [
+        {
+            url: classData.id,
+            value: `${classData.title}`,
+            depth: 0,
+        },
+        ...classData.sortedFunctions.flatMap(({ functions }) =>
+            functions.map((func) => ({
+                url: `${classData.id}-${func.id}`,
+                value: `${func.title}()`,
+                depth: 1,
+            }))
+        ),
+    ])
+
     return (
         <Layout parent={docsMenu} activeInternalMenu={activeInternalMenu}>
             <SEO title={`${fullReference.info.title} - PostHog`} />
@@ -147,7 +238,9 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                 questions={<CommunityQuestions />}
                 menu={activeInternalMenu?.children || []}
                 fullWidthContent={true}
-                hideSidebar
+                hideSidebar={false}
+                sidebar={<></>}
+                tableOfContents={tableOfContents}
             >
                 <section>
                     <div className="mb-8 relative">
@@ -164,15 +257,17 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
 
                                         <span className="text-primary/30 dark:text-primary-dark/30">|</span>
                                         <Link
-                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow hidden xs:inline"
                                             to={fullReference.info.specUrl}
                                         >
-                                            Edit this page
+                                            Edit page
                                         </Link>
-                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                        <span className="text-primary/30 dark:text-primary-dark/30 hidden xs:inline">
+                                            |
+                                        </span>
                                         <CopyMarkdownActionsDropdown
                                             markdownContent={JSON.stringify(fullReference, null, 2)}
-                                            pageUrl={location.href}
+                                            pageUrl={location.href || ''}
                                         />
                                     </div>
                                 </div>
@@ -181,12 +276,25 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                     </div>
 
                     <div className="w-full">
-                        {fullReference.classes.map((classData) => (
-                            <div key={classData.id} className="mb-12">
+                        <div className="flex justify-start items-center mb-6 gap-2 flex-wrap">
+                            <Chip text="All" onClick={resetFilters} active={currentFilter === 'all'} href="" state="" />
+                            {fullReference.categories.map((category) => (
+                                <Chip
+                                    key={category}
+                                    text={category}
+                                    onClick={() => handleFilterChange(category)}
+                                    active={currentFilter === category}
+                                    href=""
+                                    state=""
+                                />
+                            ))}
+                        </div>
+                        {filteredClasses.map((classData) => (
+                            <div key={classData.id} className="mb-12" id={classData.id}>
                                 <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
                                 <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
 
-                                {groupFunctionsByCategory(classData.functions).map(({ label, functions }) => (
+                                {classData.sortedFunctions.map(({ label, functions }) => (
                                     <div key={label || 'other-methods'}>
                                         {/* Only show a heading if label is not null and not "Other methods" */}
                                         {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
@@ -194,14 +302,14 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                         {!label && <h3 className="text-xl font-semibold mb-2 mt-8">Other methods</h3>}
                                         {functions.map((func) => (
                                             <div
-                                                key={func.id}
+                                                key={`${classData.id}-${func.id}`}
                                                 className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0 py-8"
                                             >
                                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                                     <div className="space-y-6">
                                                         <Heading
                                                             as="h4"
-                                                            id={func.id}
+                                                            id={`${classData.id}-${func.id}`}
                                                             className="text-lg my-0 font-bold"
                                                         >
                                                             <code>{func.title}</code>

@@ -248,13 +248,18 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                     />
                     <FreeTierItem
                         name="Surveys"
-                        allocation="250 responses"
+                        allocation="1500 responses"
                         icon={<Icons.IconMessage className="text-red size-5" />}
                     />
                     <FreeTierItem
                         name="Data warehouse"
                         allocation="1M rows"
                         icon={<Icons.IconDatabase className="text-purple size-5" />}
+                    />
+                    <FreeTierItem
+                        name="LLM analytics"
+                        allocation="100K events"
+                        icon={<Icons.IconLlmAnalytics className="text-purple size-5" />}
                     />
                 </div>
             </div>

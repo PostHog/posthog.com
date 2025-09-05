@@ -145,7 +145,7 @@ This can mean [discussions about what a "biscuit" is](https://www.youtube.com/wa
 
 Since our goal is to build an innovative product, it's important to be exposed to multiple perspectives, and there are few better ways to do so professionally than hiring people from various corners of the Earth.
 
-At PostHog, for example, we currently have people based in the US, Brazil, England, Senegal, Belgium, Estonia, Germany, and many other countries. As a result, we consistently get exposed to perspectives we may not have come across before, growing both as individuals and as a company. 
+At PostHog, for example, we currently have people based in the US, Brazil, England, Cyprus, Belgium, Estonia, Germany, and many other countries. As a result, we consistently get exposed to perspectives we may not have come across before, growing both as individuals and as a company. 
 
 ## It's in our DNA 🧬
 

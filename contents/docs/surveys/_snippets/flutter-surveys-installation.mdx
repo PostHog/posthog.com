@@ -1,8 +1,8 @@
 ## Step one: Add PostHog to your app
 
-> 🚧 **Note:** Mobile surveys for Flutter is currently in **beta** and only available for **iOS**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow%3Atrue) or one of our other [support options](/docs/support-options).
->
-> Using it requires PostHog's Flutter SDK version >= 5.1.0, but it's recommended to always use the latest version.
+> 🚧 **Note:** Mobile surveys for Flutter is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow%3Atrue) or one of our other [support options](/docs/support-options).
+
+Using it requires PostHog's Flutter SDK version >= 5.4.1, but it's recommended to always use the latest version.
 
 import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
@@ -17,7 +17,7 @@ To enable surveys in your Flutter app, update your PostHog configuration:
 ```dart
 final config = PostHogConfig('<ph_project_api_key>');
 config.host = 'https://us.i.posthog.com';
-config.surveys = true; // Enable surveys (iOS Only)
+config.surveys = true; // Enable surveys
 
 await Posthog().setup(config);
 ```
@@ -61,7 +61,7 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 
 ## Supported Features
 
-| Feature                           | Support (iOS only) | 
+| Feature                           | Support                | 
 | --------------------------------- | ---------------------- |
 | **Questions**                                              |
 | All question types                | ✅                     |
@@ -75,6 +75,7 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 | PostHog branding                  | ❌                     | 
 | Delay popup after screen view     | ❌                     | 
 | Position config                   | ❌ Always bottom sheet | 
+| HTML content                      | ❌                     |
 | **Display conditions**                                     |
 | Feature flag & property targeting | ✅                     | 
 | Screen/URL targeting              | ❌                     | 
@@ -86,8 +87,9 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 
 ## Limitations
 
-- Surveys are only available on iOS, with minimum deployment target of [iOS13](/docs/libraries/ios).
-- Requires PostHog Flutter SDK version >= 5.1.0
+- On Android, requires API >= 26.
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
+- Requires PostHog Flutter SDK version >= 5.4.0
 
 ## Troubleshooting
 
@@ -98,3 +100,4 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 - If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-three-install-posthogobserver).
   - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
   - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
+- If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

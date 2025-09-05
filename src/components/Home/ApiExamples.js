@@ -43,7 +43,7 @@ const WelderHog = () => {
 
 const examples = [
     {
-        title: 'User-facing analytics',
+        title: 'Embedded analytics',
         endpoint: 'query',
         description:
             'Query data captured into PostHog to show analytics for your users. Create your own visualizations and let PostHog fill in the data.',

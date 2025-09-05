@@ -1,37 +1,14 @@
 ### Q3 2025 objectives
 
-* **Improve the UX around loading and performance**
-  * Make refreshing more subtle on dashboards with existing data (just light grey spinner)
-  * Create a metric that tracks how often people are triggering manual refreshes (Anirudh)
-    * If this is large, attempt to drive it down with improvements to cache warming or UX (while not overly burdening ClickHouse)
-    * Improve cache warming efficiency
-    * enable refreshing for shared dashboards
+> Note: this was reset mid way through the quarter based on the team split
 
-* **Infrastructure improvements**
-  * Port things that are being affected by Celery unreliability to Temporal
-    * Async `/query` calls triggered when the FE blocking queries are backed up
-    * Cache warming
-  
+* Improve user paths insight [ Thomas ]
+* Work with Analytics Platform on the dashboard loading experience [ Thomas ]
+* Metabase-like query editor [ Thomas ]
+* Explore pre-built product analytics dashboard [ Anirudh ]
+    * Integrating to MaxAI
+    * Understanding their most important events and conversions/funnels
+    * Finish an RFC + start work on the integration
+* Staying on top of high priority interface / chart related bugs that come up
+* We may add to this ...
 
-* **Feature development**
-  * PW-protected shared dashboards (hashed password)
-  * Using Data Warehouse tables in funnel steps
-  * Total count aggregation in funnels
-  * Pinned dashboard filters
-  * Event usage counts -> enable taxonomic filter improvements
-  * Event management (borrowed properties?)
-  * Nightly / timed dashboard calculation 
-
-* **Figure out how to triage feature requests for the team** (Anna)
-
-
-* **AI generated insights** (Anirudh)
-  * Suggested insights section (above all insights maybe)
-    * Once we have the users data, we can figure out what insights to generate (from say signup events,...) maybe even create entire dashboards
-  * Related charts
-
-* **Statistical analysis** (Anirudh working with Anna)
-  * Confidence intervals
-  * Forecasting
-  * Trend lines
-  * Root cause analysis
