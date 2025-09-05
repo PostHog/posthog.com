@@ -226,7 +226,7 @@ export default function QuestionsSlide({
                         <ScrollArea className="h-full">
                             <div className="px-4 pt-8 @2xl:pt-0">
                                 <h2 className="text-3xl mb-4">{question.question}</h2>
-                                <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
+                                <div className="prose dark:prose-invert max-w-none [&_p]:!text-lg [&_li]:!text-lg">
                                     <Markdown>{getContentForUrl(question.url)}</Markdown>
                                 </div>
                                 {question.url && (

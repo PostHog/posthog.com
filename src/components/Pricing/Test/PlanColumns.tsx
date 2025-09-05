@@ -140,7 +140,7 @@ const AllPlansInclude = () => {
     return (
         <div className="@container w-full text-primary">
             <p className="font-bold text-[15px] mb-2">All plans include:</p>
-            <ul className="prose grid @xl:grid-cols-2 gap-x-4">
+            <ul className="prose dark:prose-invert grid @xl:grid-cols-2 gap-x-4">
                 <li className="flex gap-1 items-start text-[15px]">
                     <IconCheck className="w-5 h-5 text-green relative top-0.5" />
                     Unlimited team members
@@ -190,11 +190,10 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                     <ScrollArea>
                         <div className="pt-6 pb-2">
                             <div
-                                className={`flex flex-wrap @4xl:grid grid-cols-[repeat(2,1fr)__minmax(200px,_400px)] gap-4 @4xl:gap-8 mb-4 ${
-                                    highlight === 'free'
+                                className={`flex flex-wrap @4xl:grid grid-cols-[repeat(2,1fr)__minmax(200px,_400px)] gap-4 @4xl:gap-8 mb-4 ${highlight === 'free'
                                         ? '[&>*:nth-child(1)_>div]:border-yellow [&>*:nth-child(1)_>div]:border-3'
                                         : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
-                                }`}
+                                    }`}
                             >
                                 {planSummary.map((plan, index) => (
                                     <Plan key={index} planData={plan} />
@@ -237,11 +236,10 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                 </p>
 
                 <div
-                    className={`${
-                        isPlanComparisonVisible
+                    className={`${isPlanComparisonVisible
                             ? 'visible max-h-full opacity-1 mb-12 mt-2 @3xl:px-4'
                             : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                    } transition duration-500 ease-in-out transform`}
+                        } transition duration-500 ease-in-out transform`}
                 >
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                         <div className="grid grid-cols-12 mb-1 min-w-min not-prose">
@@ -267,9 +265,8 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                                 const planKey = plan.key || plan.plan_key || `plan-${idx}`
                                 return (
                                     <div
-                                        className={`main col-span-4 px-3 py-2 text-sm${
-                                            isLast ? ' border-r border-primary' : ''
-                                        }`}
+                                        className={`main col-span-4 px-3 py-2 text-sm${isLast ? ' border-r border-primary' : ''
+                                            }`}
                                         key={`${planKey}-base-price`}
                                     >
                                         {plan.included_if === 'no_active_subscription' ? (
@@ -290,11 +287,10 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                                     {/* Feature names */}
                                     <div
                                         data-scheme="secondary"
-                                        className={`col-span-4 bg-primary px-3 py-2 text-sm ${
-                                            idx_outer === highestPlanFeatures?.length - 1
+                                        className={`col-span-4 bg-primary px-3 py-2 text-sm ${idx_outer === highestPlanFeatures?.length - 1
                                                 ? 'border-b border-primary'
                                                 : ''
-                                        }`}
+                                            }`}
                                     >
                                         {feature.description ? (
                                             <Tooltip content={feature.description}>
@@ -314,9 +310,8 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                                         const planKey = plan.key || plan.plan_key || `plan-${idx_inner}`
                                         return (
                                             <div
-                                                className={`inside col-span-4 px-3 py-2 text-sm ${
-                                                    isLastColumn ? 'border-r border-primary' : ''
-                                                } ${isLastRow ? 'border-b border-primary' : ''}`}
+                                                className={`inside col-span-4 px-3 py-2 text-sm ${isLastColumn ? 'border-r border-primary' : ''
+                                                    } ${isLastRow ? 'border-b border-primary' : ''}`}
                                                 key={`${planKey}-${feature.key}-${idx_inner}`}
                                             >
                                                 {planFeature ? (

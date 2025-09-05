@@ -18,7 +18,7 @@ const DontClickButton = ({ alertMessage, children, ...props }) => (
 export const Tweet = ({ children, className = '', alertMessage }) => {
     return (
         <div
-            className={`tw-tweet max-w-xl bg-white dark:bg-dark border border-primary rounded-md p-4 mb-8 relative ${className}`}
+            className={`not-prose tw-tweet max-w-xl bg-white dark:bg-dark border border-primary rounded-md p-4 mb-8 relative ${className}`}
         >
             <div className="flex items-center space-x-3">
                 <div className="rounded-full border border-primary hover:border-red dark:hover:border-yellow bg-light dark:bg-dark">

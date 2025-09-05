@@ -91,9 +91,8 @@ const BackgroundImageField = ({
                                     backgroundPosition: bg.backgroundPosition,
                                 })
                             }
-                            className={`relative overflow-hidden rounded-md border-2 ${
-                                isSelected ? 'border-red dark:border-yellow' : 'border-input'
-                            } transition-all hover:scale-105`}
+                            className={`relative overflow-hidden rounded-md border-2 ${isSelected ? 'border-red dark:border-yellow' : 'border-input'
+                                } transition-all hover:scale-105`}
                         >
                             <div
                                 className="aspect-video w-full"
@@ -114,9 +113,8 @@ const BackgroundImageField = ({
                 <button
                     type="button"
                     onClick={() => setFieldValue('backgroundImage', null)}
-                    className={`relative overflow-hidden rounded-md border-2 ${
-                        !currentBg ? 'border-red dark:border-yellow' : 'border-input'
-                    } transition-all hover:scale-105 aspect-video`}
+                    className={`relative overflow-hidden rounded-md border-2 ${!currentBg ? 'border-red dark:border-yellow' : 'border-input'
+                        } transition-all hover:scale-105 aspect-video`}
                 >
                     <span className="text-sm font-bold">No background</span>
                 </button>
@@ -332,9 +330,8 @@ const AvatarBlock = ({
                                 <li key={color} onClick={() => setFieldValue('color', color)}>
                                     <button
                                         type="button"
-                                        className={`size-5 rounded-full bg-${color} border-[1.5px] ${
-                                            active ? 'border-black dark:border-white' : 'border-transparent'
-                                        }`}
+                                        className={`size-5 rounded-full bg-${color} border-[1.5px] ${active ? 'border-black dark:border-white' : 'border-transparent'
+                                            }`}
                                     />
                                 </li>
                             )
@@ -697,28 +694,28 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                     initialValue={profile.biography}
                 />
             ) : (
-                <Markdown className="prose prose-sm max-w-full text-primary">
+                <Markdown className="prose dark:prose-invert prose-sm max-w-full text-primary">
                     {profile.biography || `${firstName} hasn't written a bio yet`}
                 </Markdown>
             ),
         },
         ...((isModerator && isEditing) || profile.readme
             ? [
-                  {
-                      value: 'readme',
-                      label: 'README',
-                      content: isEditing ? (
-                          <BodyEditor
-                              values={values}
-                              setFieldValue={setFieldValue}
-                              bodyKey="readme"
-                              initialValue={profile.readme}
-                          />
-                      ) : (
-                          <Markdown className="prose prose-sm">{profile.readme}</Markdown>
-                      ),
-                  },
-              ]
+                {
+                    value: 'readme',
+                    label: 'README',
+                    content: isEditing ? (
+                        <BodyEditor
+                            values={values}
+                            setFieldValue={setFieldValue}
+                            bodyKey="readme"
+                            initialValue={profile.readme}
+                        />
+                    ) : (
+                        <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
+                    ),
+                },
+            ]
             : []),
         {
             value: 'discussions',
@@ -730,7 +727,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                         disclaimer={false}
                         showForm={false}
                         noQuestionsMessage={
-                            <p className="prose prose-sm max-w-full text-primary m-0">
+                            <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
                                 {firstName} hasn't participated in any discussions yet
                             </p>
                         }
@@ -740,46 +737,46 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
         },
         ...(hasPosts
             ? [
-                  {
-                      value: 'posts',
-                      label: 'Posts',
-                      content: (
-                          <>
-                              <div className="flex justify-between items-center mb-4">
-                                  <h4 className="text-lg font-bold m-0">All posts</h4>
-                                  <Select
-                                      groups={[
-                                          {
-                                              items: sortOptions.map((option) => ({
-                                                  label: option.label,
-                                                  value: option.label,
-                                              })),
-                                              label: 'Sort by',
-                                          },
-                                      ]}
-                                      value={sort}
-                                      onValueChange={(value) => setSort(value)}
-                                  />
-                              </div>
-                              <PostsTable {...posts} />
-                          </>
-                      ),
-                  },
-              ]
+                {
+                    value: 'posts',
+                    label: 'Posts',
+                    content: (
+                        <>
+                            <div className="flex justify-between items-center mb-4">
+                                <h4 className="text-lg font-bold m-0">All posts</h4>
+                                <Select
+                                    groups={[
+                                        {
+                                            items: sortOptions.map((option) => ({
+                                                label: option.label,
+                                                value: option.label,
+                                            })),
+                                            label: 'Sort by',
+                                        },
+                                    ]}
+                                    value={sort}
+                                    onValueChange={(value) => setSort(value)}
+                                />
+                            </div>
+                            <PostsTable {...posts} />
+                        </>
+                    ),
+                },
+            ]
             : []),
         ...(user?.profile?.id === id
             ? [
-                  {
-                      value: 'likes',
-                      label: 'Liked posts',
-                      content: (
-                          <>
-                              <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
-                              <LikedPosts profileID={id} />
-                          </>
-                      ),
-                  },
-              ]
+                {
+                    value: 'likes',
+                    label: 'Liked posts',
+                    content: (
+                        <>
+                            <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
+                            <LikedPosts profileID={id} />
+                        </>
+                    ),
+                },
+            ]
             : []),
     ]
 
@@ -818,12 +815,12 @@ export default function ProfilePage({ params }: PageProps) {
                 achievements: {
                     ...(!isCurrentUser
                         ? {
-                              filters: {
-                                  hidden: {
-                                      $ne: true,
-                                  },
-                              },
-                          }
+                            filters: {
+                                hidden: {
+                                    $ne: true,
+                                },
+                            },
+                        }
                         : null),
                     populate: {
                         achievement: {
@@ -845,8 +842,8 @@ export default function ProfilePage({ params }: PageProps) {
                 },
                 ...(isModerator
                     ? {
-                          user: true,
-                      }
+                        user: true,
+                    }
                     : null),
             },
         },
@@ -863,10 +860,10 @@ export default function ProfilePage({ params }: PageProps) {
                 url,
                 jwt
                     ? {
-                          headers: {
-                              Authorization: `Bearer ${jwt}`,
-                          },
-                      }
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    }
                     : undefined
             )
             const { data } = await res.json()
@@ -924,8 +921,8 @@ export default function ProfilePage({ params }: PageProps) {
     // Create a map of team names to crest data for quick lookup
     const teamCrestMap = team?.attributes?.crest?.data
         ? {
-              [team.attributes.name]: team.attributes.crest.data.attributes.url,
-          }
+            [team.attributes.name]: team.attributes.crest.data.attributes.url,
+        }
         : {}
 
     const { submitForm, isSubmitting, setFieldValue, values, resetForm, errors } = useFormik({
@@ -1052,11 +1049,11 @@ export default function ProfilePage({ params }: PageProps) {
                     style={
                         values.backgroundImage
                             ? {
-                                  backgroundImage: `url(${values.backgroundImage.url})`,
-                                  backgroundSize: values.backgroundImage.backgroundSize || 'auto',
-                                  backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
-                                  backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
-                              }
+                                backgroundImage: `url(${values.backgroundImage.url})`,
+                                backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                                backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                                backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                            }
                             : undefined
                     }
                 >
@@ -1075,33 +1072,33 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location) && (
-                                <Block title="Details">
-                                    <Details
-                                        profile={profile}
-                                        isEditing={isEditing}
-                                        setFieldValue={setFieldValue}
-                                        values={values}
-                                        errors={errors}
-                                        isTeamMember={isTeamMember}
-                                    />
-                                </Block>
-                            )}
+                                    <Block title="Details">
+                                        <Details
+                                            profile={profile}
+                                            isEditing={isEditing}
+                                            setFieldValue={setFieldValue}
+                                            values={values}
+                                            errors={errors}
+                                            isTeamMember={isTeamMember}
+                                        />
+                                    </Block>
+                                )}
 
                             {(isEditing ||
                                 profile.github ||
                                 profile.twitter ||
                                 profile.linkedin ||
                                 profile.website) && (
-                                <Block title="Links">
-                                    <Links
-                                        errors={errors}
-                                        setFieldValue={setFieldValue}
-                                        formValues={values}
-                                        profile={profile}
-                                        isEditing={isEditing}
-                                    />
-                                </Block>
-                            )}
+                                    <Block title="Links">
+                                        <Links
+                                            errors={errors}
+                                            setFieldValue={setFieldValue}
+                                            formValues={values}
+                                            profile={profile}
+                                            isEditing={isEditing}
+                                        />
+                                    </Block>
+                                )}
 
                             {profile.achievements?.length > 0 && (
                                 <Block title="Achievements">

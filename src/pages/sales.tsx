@@ -605,7 +605,7 @@ export default function Sales() {
         // Slide 1: Intro
         {
             content: (
-                <div className="prose text-primary flex-1 p-8">
+                <div className="prose dark:prose-invert text-primary flex-1 p-8">
                     <h1 className="m-0 p-0 text-2xl text-secondary">Compare the sales process:</h1>
                     <h2 className="text-4xl !m-0 p-0">
                         <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
@@ -732,7 +732,7 @@ export default function Sales() {
         {
             content: (
                 <>
-                    <div className="prose prose-sm px-8">
+                    <div className="prose dark:prose-invert prose-sm px-8">
                         <div className="max-w-2xl mx-auto text-center">
                             <h2 className="text-4xl font-bold mb-6">And that's how we do sales</h2>
                             <p className="mb-8 text-balance">
