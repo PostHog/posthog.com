@@ -85,7 +85,7 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
                 <img src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')} />
             </div>
             <div className="flex-grow">
-                <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-sm">
+                <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl">
                     {name}
                     {isImage && width && height && (
                         <span className="text-sm text-secondary font-normal ml-1">
