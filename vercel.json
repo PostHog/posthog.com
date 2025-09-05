@@ -7,6 +7,9 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/handbook/growth/sales", "destination": "/handbook/sales-cs-onboarding/sales" },
+        { "source": "/handbook/cs-and-onboarding", "destination": "/handbook/sales-cs-onboarding/customer-success" },
+        { "source": "/handbook/onboarding", "destination": "/handbook/sales-cs-onboarding/onboarding" },
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
