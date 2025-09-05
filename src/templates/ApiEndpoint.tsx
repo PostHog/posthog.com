@@ -325,7 +325,7 @@ function Security({ item }) {
 function RequestBody({ item, objects }) {
     const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
-        item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
+        item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
 
@@ -659,48 +659,39 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 <Security item={item} objects={objects} />
                                 <Parameters item={item} objects={objects} />
 
-                                <RequestBody item={item} objects={objects} />
-
-                                <ResponseBody item={item} objects={objects} />
-                            </div>
-                            <div className="lg:sticky top-[108px]">
-                                <h4>Request</h4>
-                                <RequestExample
-                                    name={name}
-                                    item={item}
-                                    objects={objects}
-                                    exampleLanguage={exampleLanguage}
-                                    setExampleLanguage={setExampleLanguage}
-                                />
-
-                                <h4>Response</h4>
-                                {Object.keys(item.responses).map((statusCode) => {
-                                    const response = item.responses[statusCode]
-                                    return (
-                                        <div key={statusCode}>
-                                            <h5 className="text-sm font-semibold">
-                                                <span className="bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                    Status {statusCode}
-                                                </span>{' '}
-                                                {response.description}
-                                            </h5>
-                                            <ResponseExample
-                                                item={item}
-                                                objects={objects}
-                                                objectKey={
-                                                    response.content?.['application/json']?.schema['$ref']
-                                                        ?.split('/')
-                                                        .at(-1) ||
-                                                    response.content?.['application/json']?.schema.items['$ref']
-                                                        ?.split('/')
-                                                        .at(-1)
-                                                }
-                                                exampleLanguage={exampleLanguage}
-                                                setExampleLanguage={setExampleLanguage}
-                                            />
-                                        </div>
-                                    )
-                                })}
+                                    <div>
+                                        <h4>Response</h4>
+                                        {Object.keys(item.responses).map((statusCode) => {
+                                            const response = item.responses[statusCode]
+                                            return (
+                                                <div key={statusCode} className="mb-4">
+                                                    <h5 className="text-sm font-semibold mb-2">
+                                                        <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                            Status {statusCode}
+                                                        </span>{' '}
+                                                        {response.description}
+                                                    </h5>
+                                                    <ResponseExample
+                                                        item={item}
+                                                        objects={objects}
+                                                        objectKey={
+                                                            response.content?.['application/json']?.schema['$ref']
+                                                                ?.split('/')
+                                                                .at(-1) ||
+                                                            response.content?.['application/json']?.schema.items?.[
+                                                                '$ref'
+                                                            ]
+                                                                ?.split('/')
+                                                                .at(-1)
+                                                        }
+                                                        exampleLanguage={exampleLanguage}
+                                                        setExampleLanguage={setExampleLanguage}
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
