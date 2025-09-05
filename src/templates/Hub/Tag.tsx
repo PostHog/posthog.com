@@ -11,6 +11,7 @@ import SEO from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
 import { tagOptions } from 'components/Hub'
 import MenuBar from 'components/RadixUI/MenuBar'
+import OSButton from 'components/OSButton'
 
 const rootOptions = {
     founders: {
@@ -34,10 +35,7 @@ const Post = ({ post }: { post: any }) => {
     )
     return (
         <li key={post.id}>
-            <Link
-                to={slug}
-                className="px-2 py-1 rounded-md bg-transparent hover:bg-accent flex items-center justify-between text-sm font-semibold"
-            >
+            <OSButton asLink to={slug} size="md" width="full" className="justify-between" hover="background">
                 <div>{title}</div>
                 <button
                     onClick={(e) => {
@@ -48,7 +46,7 @@ const Post = ({ post }: { post: any }) => {
                 >
                     {isBookmarked ? <IconBookmarkSolid className="size-5" /> : <IconBookmark className="size-5" />}
                 </button>
-            </Link>
+            </OSButton>
         </li>
     )
 }
@@ -72,7 +70,7 @@ export default function Tag({
     return (
         <>
             <SEO title={`${title} - ${rootOptions[root].title} - PostHog`} />
-            <div data-scheme="secondary" className="p-5 bg-primary h-full">
+            <div data-scheme="secondary" className="p-4 bg-primary text-primary h-full">
                 <div className="flex gap-8 h-full">
                     <section className="flex-1">
                         <ScrollArea className="pr-5">
@@ -106,7 +104,7 @@ export default function Tag({
                                     ]}
                                 />
                             </div>
-                            <ul className="space-y-2 m-0">
+                            <ul className="space-y-px m-0">
                                 {isLoading
                                     ? Array.from({ length: 10 }).map((_, index) => (
                                           <div

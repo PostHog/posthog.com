@@ -90,7 +90,7 @@ const leftSidebarContent = [
         title: 'Shipping',
         content: (
             <>
-                <p className="prose text-primary text-sm mb-2">
+                <p className="prose dark:prose-invert text-primary text-sm mb-2">
                     Merch is shipped from Ohio via our fulfillment partner,{' '}
                     <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">
                         MicroMerch

@@ -140,7 +140,7 @@ const AllPlansInclude = () => {
     return (
         <div className="@container w-full text-primary">
             <p className="font-bold text-[15px] mb-2">All plans include:</p>
-            <ul className="prose grid @xl:grid-cols-2 gap-x-4">
+            <ul className="prose dark:prose-invert grid @xl:grid-cols-2 gap-x-4">
                 <li className="flex gap-1 items-start text-[15px]">
                     <IconCheck className="w-5 h-5 text-green relative top-0.5" />
                     Unlimited team members

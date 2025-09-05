@@ -697,7 +697,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                     initialValue={profile.biography}
                 />
             ) : (
-                <Markdown className="prose prose-sm max-w-full text-primary">
+                <Markdown className="prose dark:prose-invert prose-sm max-w-full text-primary">
                     {profile.biography || `${firstName} hasn't written a bio yet`}
                 </Markdown>
             ),
@@ -715,7 +715,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                               initialValue={profile.readme}
                           />
                       ) : (
-                          <Markdown className="prose prose-sm">{profile.readme}</Markdown>
+                          <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
                       ),
                   },
               ]
@@ -730,7 +730,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                         disclaimer={false}
                         showForm={false}
                         noQuestionsMessage={
-                            <p className="prose prose-sm max-w-full text-primary m-0">
+                            <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
                                 {firstName} hasn't participated in any discussions yet
                             </p>
                         }

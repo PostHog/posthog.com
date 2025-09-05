@@ -432,23 +432,26 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
-                }`}
+            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${
+                isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
+            }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
-                    ? 'pt-4 pb-2 z-20'
-                    : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                    }`}
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
+                    isOpen
+                        ? 'pt-4 pb-2 z-20'
+                        : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
-                            }`}
+                        className={`transition-all leading-tight ${
+                            isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
+                        }`}
                     >
                         {title}
                     </span>
@@ -605,7 +608,7 @@ export default function Sales() {
         // Slide 1: Intro
         {
             content: (
-                <div className="prose text-primary flex-1 p-8">
+                <div className="prose dark:prose-invert text-primary flex-1 p-8">
                     <h1 className="m-0 p-0 text-2xl text-secondary">Compare the sales process:</h1>
                     <h2 className="text-4xl !m-0 p-0">
                         <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
@@ -732,7 +735,7 @@ export default function Sales() {
         {
             content: (
                 <>
-                    <div className="prose prose-sm px-8">
+                    <div className="prose dark:prose-invert prose-sm px-8">
                         <div className="max-w-2xl mx-auto text-center">
                             <h2 className="text-4xl font-bold mb-6">And that's how we do sales</h2>
                             <p className="mb-8 text-balance">
@@ -742,11 +745,10 @@ export default function Sales() {
                                 </Link>{' '}
                                 was a good idea...
                             </p>
-
                         </div>
                     </div>
                     <div className="w-full max-w-2xl mx-auto">
-                        <SuggestedLinksBlock links={["hate", "pricing", "careers"]} />
+                        <SuggestedLinksBlock links={['hate', 'pricing', 'careers']} />
                     </div>
                 </>
             ),
@@ -777,10 +779,10 @@ export default function Sales() {
                         {!isLast ? (
                             <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
                                 {slideIndex === 0
-                                    ? "See how [everyone else] does sales"
+                                    ? 'See how [everyone else] does sales'
                                     : slideIndex === 1
-                                        ? "See how PostHog does sales"
-                                        : "Next"}
+                                    ? 'See how PostHog does sales'
+                                    : 'Next'}
                             </CallToAction>
                         ) : (
                             <OSButton onClick={() => setClosing(true)} size="md" variant="primary">
