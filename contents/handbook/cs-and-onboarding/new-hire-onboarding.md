@@ -144,10 +144,10 @@ Add and modify this list as you work through it.
     - path cleaning rules
 3. API
 
-## Get alerting set up (for team lead)
+## Set up alerting
 
-This section is for team leads. We have certain automations set up in Vitally and Zapier that your team lead needs to add you to. Check and remind your team lead 
+We have certain automations in Vitally and Zapier that your team lead needs to add you to. Please ask them to add you.
 
-- [ ] [Vitally name trait playbook](https://posthog.vitally-eu.io/settings/playbooks/170c8d04-db4c-4036-997c-8967946a1fd8): create a new branch that matches assigned CSM to new team member. In this branch, add action to update account trait `CSM name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
-- [ ] [Failed payment alerting](https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb): in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
-- [ ] [Annual plan credit alerting](https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088): in step 8 look up table, add new team member's email and Slack member ID 
+- [ ] <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/170c8d04-db4c-4036-997c-8967946a1fd8">Vitally name trait playbook</PrivateLink>: create a new branch that matches assigned CSM to new team member. In this branch, add action to update account trait `CSM name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
+- [ ] <PrivateLink url="https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb"> Failed payment alerting </PrivateLink>: in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
+- [ ] <PrivateLink url="https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088"> Annual plan credit alerting </PrivateLink>: in step 8 look up table, add new team member's email and Slack member ID 
