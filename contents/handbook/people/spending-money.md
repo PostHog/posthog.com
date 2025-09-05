@@ -172,6 +172,10 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
   
   We use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask <TeamMember name="Simon Fisher" photo />. (But does anyone _really_ need longer meetings?)
 
+- <Link to="https://superhuman.com" external>Superhuman</Link>
+  
+  Everyone has their own favorite email app, but Superhuman users will make sure you don’t forget theirs. We have a team plan to keep those folks happy with inbox zero and inner peace.
+
 ### IDEs
 
 * IDEs range widely in cost. Best in class IDE suites can cost up to $700, which is a bad value proposition for most engineers. However, we are happy to revisit this policy if you have very specific needs.
