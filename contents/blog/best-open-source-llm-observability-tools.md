@@ -51,7 +51,7 @@ PostHog’s LLM analytics product works with the rest of our product suite. This
 
 PostHog’s hosted Cloud version and all of its LLM analytics features are free to use. It comes with 100k LLM observability events for free every month with indefinite retention. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
 
-You can [get started right away](http://us.posthog.com/signup), no sales call or elaborate setup needed.
+You can [get started right away](http://app.posthog.com/signup), no sales call or elaborate setup needed.
 
 ## 2. Langfuse
 
