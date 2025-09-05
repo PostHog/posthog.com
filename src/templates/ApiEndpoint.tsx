@@ -327,7 +327,7 @@ function Security({ item }) {
 function RequestBody({ item, objects }) {
     const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
-        item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
+        item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
 

@@ -75,4 +75,4 @@ This code is run every time an intent is updated. For example, if the activation
 
 Tracking activation is important, because it tells us how many companies start using our products successfully each month, and how many retain. Measuring it month over month allows us to see trends, and whether improvements to the product actually made a difference.
 
-If the activation metrics look good, it gives us the piece of mind to focus on new feature development. But if they trend downwards, it's probably a good time to look into our onboarding and "first time user" funnels to see in which areas our UX can be improved.
+If the activation metrics look good, it gives us the peace of mind to focus on new feature development. But if they trend downwards, it's probably a good time to look into our onboarding and "first time user" funnels to see in which areas our UX can be improved.

@@ -46,7 +46,7 @@ to work.
 
 Example kafka engine table:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE kafka_ingestion_warnings
 (
     team_id Int64,
@@ -76,7 +76,7 @@ Materialized views come with a lot of gotchas. A great resource for learning mor
 
 Consider the following sharded table schema together with `kafka_ingestion_warnings`:
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE sharded_ingestion_warnings
 (
     team_id Int64,

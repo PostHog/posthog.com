@@ -61,7 +61,7 @@ Doing this for your whole site might show many outliers. To limit this, you can 
 
 ## Diving deeper into time on page with SQL
 
-Both the `$prev_pageview_duration` and `$prev_pageview_pathname` properties are available on events in the `events` table. This means we can use them in SQL queries like this:
+Both the `$prev_pageview_duration` and `$prev_pageview_pathname` properties are available on events in [PostHog's `events` table](/docs/data-warehouse/sources/posthog). This means we can use them in SQL queries like this:
 
 ```sql
 select 

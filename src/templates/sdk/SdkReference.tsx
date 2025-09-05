@@ -75,7 +75,7 @@ export interface PageContext {
 }
 
 const padDescription = (description: string): string => {
-    return description.replace(/\n/g, '\n\n')
+    return description?.replace(/\n/g, '\n\n') || ''
 }
 
 // Group functions by category, but Initialization always first, and "Other methods" for uncategorized
