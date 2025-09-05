@@ -61,7 +61,7 @@ Overall, candidates should spend at least 80% of their time and energy on the ta
 
 #### How to become an interviewer at PostHog
 
-As PostHog grows and our hiring goals get bigger and bigger, to achieve that we will need more people taking interviews and assessing people in those interviews. As we scale, it's important that we maintain a callibration across interviewers by onboarding each new interviewer to the interviewing process carefully. 
+As PostHog grows and our hiring goals get bigger and bigger, to achieve that we will need more people taking interviews and assessing people in those interviews. As we scale, it's important that we maintain a calibration across interviewers by onboarding each new interviewer to the interviewing process carefully. 
 
 If you wish to get involved in interviewing, you can request so by contacting the talent team using the @talent-folks handle in Slack in the #team-people-and-ops channel. Please note, that if you are in your first 90 days at PostHog, you should not be focussing on interviewing and focus on ramping up and onboarding successfully. Interviewing can be distracting, so even avoid shadowing in this period of time. 
 
