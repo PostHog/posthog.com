@@ -18,13 +18,7 @@ import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { OverflowXSection } from '../components/OverflowXSection'
 import { Tweet } from 'components/Tweet'
-
-const articleWidth = {
-    lg: 'max-w-screen-2xl',
-    md: 'max-w-5xl',
-    sm: 'max-w-2xl',
-    full: 'w-full px-0',
-}
+import ReaderView from 'components/ReaderView'
 
 const A = (props) => <Link {...props} />
 
@@ -49,10 +43,8 @@ export default function Plain({ data }) {
         ...shortcodes,
     }
 
-    const Wrapper = isInFrame ? 'div' : Layout
-
     return (
-        <Wrapper className={isInFrame ? 'flex justify-center items-center h-screen' : undefined}>
+        <ReaderView hideLeftSidebar>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
@@ -60,13 +52,13 @@ export default function Plain({ data }) {
                 image={featuredImage?.publicURL}
                 noindex={isInFrame || noindex}
             />
-            <article className={`mx-auto my-12 md:my-24 px-4 article-content ${articleWidth[width || 'sm']}`}>
+            <section className="py-12">
                 {showTitle && <h1 className="text-center">{title}</h1>}
                 <MDXProvider components={components}>
                     <MDXRenderer images={images}>{body}</MDXRenderer>
                 </MDXProvider>
-            </article>
-        </Wrapper>
+            </section>
+        </ReaderView>
     )
 }
 
