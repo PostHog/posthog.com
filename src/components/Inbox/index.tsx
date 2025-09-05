@@ -47,7 +47,7 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
                       },
                   ]
                 : []),
-            ...topicsNav.filter((topic) => !!topic.url),
+            ...topicsNav,
         ]
     }, [topicsNav])
 
