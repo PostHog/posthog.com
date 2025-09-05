@@ -4512,7 +4512,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Setup',
-                    url: '/docs/revenue-analytics/setup',
+                    url: '/docs/revenue-analytics/getting-started',
                     icon: 'IconBook',
                     color: 'blue',
                     badge: {

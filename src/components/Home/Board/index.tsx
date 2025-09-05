@@ -510,7 +510,7 @@ const products: Product[] = [
         badge: 'BETA',
         pricing: {
             cta: {
-                url: '/docs/revenue-analytics/setup',
+                url: '/docs/revenue-analytics/getting-started',
                 text: 'Get started',
             },
         },

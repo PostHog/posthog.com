@@ -83,7 +83,7 @@ const RevenueAnalytics: React.FC<RevenueAnalyticsProps> = ({ data }) => {
                     title="Revenue analytics"
                     description="Track and analyze your revenue metrics to understand your business performance and growth."
                     buttonText="Setup guide"
-                    buttonLink="/docs/revenue-analytics/setup"
+                    buttonLink="/docs/revenue-analytics/getting-started"
                     imageColumnClasses="mt-4 md:-mt-8"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_hog_81ae754b5e.png"
                     imageClasses="max-h-48 md:max-h-64"
