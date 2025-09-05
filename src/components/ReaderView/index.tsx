@@ -61,6 +61,7 @@ interface ReaderViewProps {
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
     hideRightSidebar?: boolean
+    contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
     homeURL?: string
@@ -320,6 +321,7 @@ export default function ReaderView({
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
     homeURL,
@@ -345,6 +347,7 @@ export default function ReaderView({
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
                 hideRightSidebar={hideRightSidebar}
+                contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
                 homeURL={homeURL}
@@ -475,6 +478,7 @@ function ReaderViewContent({
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    contentMaxWidthClass,
     padding = true,
     proseSize,
     homeURL,
@@ -630,7 +634,9 @@ function ReaderViewContent({
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
                                 } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                    fullWidthContent || body?.type !== 'mdx'
+                                        ? 'max-w-full'
+                                        : contentMaxWidthClass || 'max-w-2xl'
                                 }`}
                             >
                                 {/* <DebugContainerQuery /> */}
