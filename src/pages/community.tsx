@@ -28,6 +28,7 @@ import uniqBy from 'lodash/uniqBy'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import OSButton from 'components/OSButton'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -103,7 +104,7 @@ const SlackPosts = () => {
         </div>
     ) : slackPosts?.length > 0 ? (
         <div className="py-4">
-            <h3 className="text-base">From the PostHog Slack</h3>
+            <h3 className="text-base mb-2">From the PostHog Slack</h3>
             <ul className="list-none m-0 p-0 space-y-4">
                 {uniqBy(slackPosts, 'attributes.question.data.attributes.topics.data[0].id').map(
                     ({
@@ -123,7 +124,7 @@ const SlackPosts = () => {
                         return (
                             <li key={id}>
                                 <Link
-                                    className="text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark leading-tight flex items-center gap-1"
+                                    className="text-primary hover:underline leading-tight flex items-center gap-1"
                                     to={`/questions/topic/${slugify(topic.slug)}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
@@ -143,7 +144,9 @@ const SlackPosts = () => {
                                     to={`/questions/${permalink}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
-                                    <h4 className="mt-1 mb-2 text-base leading-tight ml-6">{subject}</h4>
+                                    <h4 className="mt-1 mb-2 font-medium hover:underline text-[15px] leading-tight ml-6">
+                                        {subject}
+                                    </h4>
                                 </Link>
                                 {/* <p className="text-sm m-0 mb-2">
                                     <span className="opacity-50">Shared by</span>{' '}
@@ -256,9 +259,9 @@ const Main = () => {
                         }
                     />
 
-                    <div className="text-center pt-6 pb-4 px-2">
+                    <div className="pt-6 pb-4 px-2">
                         <CloudinaryImage
-                            className="h-20 w-20 float-left mr-2 mb-2"
+                            className="size-20 float-right"
                             width={200}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
                         />
@@ -285,32 +288,39 @@ const Main = () => {
                                 </div>
                             }
                             cta={
-                                <Link to="/community/profiles/30086" className="text-[15px]">
+                                <OSButton
+                                    asLink
+                                    to="/community/profiles/30086"
+                                    variant="secondary"
+                                    size="md"
+                                    width="full"
+                                    state={{ newWindow: true }}
+                                >
                                     Learn more about Zach W.
-                                </Link>
+                                </OSButton>
                             }
                         />
                     </div>
 
                     <div className="py-4 grid gap-5">
                         <div>
-                            <h3 className="text-base">People news</h3>
+                            <h3 className="text-base mb-2">People news</h3>
 
-                            <div className="flex gap-1 items-center">
+                            <div className="flex gap-1 items-center mb-2">
                                 <div>
                                     <IconConfetti className="w-8 h-8 text-muted" />
                                 </div>
-                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
+                                <h4 className="font-semibold opacity-75 text-sm mb-0">Welcome to PostHog!</h4>
                             </div>
                             <Newbies />
                         </div>
 
                         <div>
-                            <div className="flex gap-1 items-center">
+                            <div className="flex gap-1 items-center mb-2">
                                 <div>
                                     <IconCake className="w-8 h-8 text-muted" />
                                 </div>
-                                <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
+                                <h4 className="font-semibold opacity-75 text-sm mb-0">Thanks for being here!</h4>
                             </div>
 
                             <Anniversaries />

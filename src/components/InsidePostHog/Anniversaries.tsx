@@ -50,8 +50,8 @@ export default function Anniversaries() {
     return loading ? (
         <Skeleton />
     ) : (
-        <ul className="list-none grid gap-3 mt-2 [&>*:nth-child(2)>div:first-child]:bg-blue [&>*:nth-child(3)>div:first-child]:bg-yellow [&>*:nth-child(4)>div:first-child]:bg-teal">
-            {teamMembers.map(({ id, years, attributes: { firstName, lastName, companyRole, avatar } }) => {
+        <ul className="list-none grid gap-3 mt-2">
+            {teamMembers.map(({ id, years, attributes: { firstName, lastName, companyRole, avatar, color } }) => {
                 const image = avatar?.data?.attributes?.formats?.thumbnail?.url
                 const name = [firstName, lastName].filter(Boolean).join(' ')
                 return (
@@ -61,8 +61,12 @@ export default function Anniversaries() {
                         name={name}
                         stat={`Congrats on ${years} year${years > 1 ? 's' : ''}!`}
                         image={
-                            <div className="w-9 rounded-full aspect-square overflow-hidden bg-salmon">
-                                <img src={image} alt={name} className="w-full h-full object-fill" />
+                            <div
+                                className={`w-9 rounded-full aspect-square overflow-hidden ${
+                                    color ? `bg-${color}` : 'bg-salmon'
+                                }`}
+                            >
+                                <img src={image} alt={name} className="w-full h-full object-fill size-9" />
                             </div>
                         }
                     />

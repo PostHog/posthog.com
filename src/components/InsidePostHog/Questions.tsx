@@ -94,7 +94,7 @@ export default function Questions(): JSX.Element {
                 ) : (
                     <div>
                         <div className="flex gap-4 w-full items-baseline">
-                            <h3 className="flex-1 text-lg mb-2">
+                            <h3 className="flex-1 text-base mb-2">
                                 My discussions
                                 <Tooltip content="Subscribed threads with recent activity" placement="top">
                                     <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
@@ -125,7 +125,7 @@ export default function Questions(): JSX.Element {
             ) : (
                 <div className="">
                     <div className="flex gap-4 w-full items-baseline">
-                        <h3 className="flex-1 text-lg mb-2">
+                        <h3 className="flex-1 text-base mb-2">
                             Latest questions
                             <Tooltip content="Questions posted to the community forums" placement="top">
                                 <IconInfo className="w-4 h-4 opacity-75 inline-block ml-1 relative -top-px" />
