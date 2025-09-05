@@ -129,7 +129,7 @@ export default function Sidebar() {
 
             {user?.profile && (
                 <SidebarSection title="My discussions">
-                    <Link to="/community/dashboard" className="text-sm">
+                    <Link to="/community/dashboard" className="text-sm" state={{ newWindow: true }}>
                         Visit my discussions
                     </Link>
                 </SidebarSection>
@@ -145,6 +145,7 @@ export default function Sidebar() {
                                         <Link
                                             to={`/questions/topic/${slug}`}
                                             className="block text-sm p-1 rounded-sm hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
+                                            state={{ newWindow: true }}
                                         >
                                             {label}
                                         </Link>

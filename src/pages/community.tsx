@@ -239,7 +239,7 @@ const Main = () => {
 
     return (
         <section
-            className={`grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8 mx-auto px-7 @7xl:px-9 mb-12 transition-all ${
+            className={`grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8 mx-auto px-7 @7xl:px-9 pb-8 transition-all ${
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
