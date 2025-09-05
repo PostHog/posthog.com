@@ -32,6 +32,28 @@ interface CustomerProps {
     hasCaseStudy: (slug: string) => boolean
 }
 
+const CustomerLink = ({
+    customer,
+    hasCaseStudy,
+    children,
+}: {
+    customer: CustomerType
+    hasCaseStudy: (slug: string) => boolean
+    children: React.ReactNode
+}) => {
+    return hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
+        <Link
+            to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
+            state={{ newWindow: true }}
+            className="group"
+        >
+            {children}
+        </Link>
+    ) : (
+        <>{children}</>
+    )
+}
+
 const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
     // Determine logo rendering logic - same as CustomersSlide.tsx
     const renderLogo = () => {
@@ -45,14 +67,18 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
             const heightClass = customer.height ? `h-${customer.height}` : ''
             const className = `w-full fill-current object-contain ${heightClass}`.trim()
 
-            return <LogoComponent className={className} />
+            return (
+                <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
+                    <LogoComponent className={className} />
+                </CustomerLink>
+            )
         }
 
         // Otherwise, it's the existing light/dark object format
         const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-10'
 
         return (
-            <>
+            <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
                 <img
                     src={customer.logo.light}
                     alt={customer.name}
@@ -63,7 +89,7 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
                     alt={customer.name}
                     className={`w-auto object-contain hidden dark:block ${heightClass}`}
                 />
-            </>
+            </CustomerLink>
         )
     }
 
@@ -79,14 +105,10 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
             {
                 content:
                     hasCaseStudy(customer.slug) || customer.slug === 'posthog' ? (
-                        <Link
-                            to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
-                            className="group"
-                            state={{ newWindow: true }}
-                        >
+                        <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
                             Link{' '}
                             <IconArrowUpRight className="size-4 inline-block text-muted group-hover:text-primary" />
-                        </Link>
+                        </CustomerLink>
                     ) : null,
             },
             { content: customer.notes || '', className: 'text-sm' },
