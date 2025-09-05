@@ -132,6 +132,15 @@ If you need to work in a noisy environment and don't already have noise cancelli
 
 We would expect to spend $250 on noise-cancelling headphones.
 
+### Microphone & Camera (sales & CS)
+
+If you're in a customer facing role, you should have a high quality setup of audio, video and lights:
+
+- **Camera**: buy a second hand iPhone (Xr and up) and set up [Continuity Camera](https://support.apple.com/en-gb/102546). [Backmarket for UK](https://www.backmarket.com/en-us)
+  - **Mount**: Get this mount for your macbook [UK](https://www.amazon.co.uk/dp/B0BJNV9KDC/?coliid=I2ZZE23V1MKF0D&colid=IEUPUCSD58X7&psc=1&ref_=list_c_wl_lv_vv_lig_dp_it)
+- **Microphone**: Blue Yeti [UK](https://www.amazon.co.uk/dp/B00N1YPXW2/?coliid=I1FIZW4MNXNBCD&colid=IEUPUCSD58X7&psc=1&ref_=list_c_wl_lv_vv_lig_dp_it) [US](https://www.amazon.com/Microphone-Recording-Podcasting-No-Latency-Monitoring/dp/B07DTTGZ7M/ref=sr_1_7?crid=1R670RNNVC00R&dib=eyJ2IjoiMSJ9.kFfCy6vr3WRnsyPzVUmFniV57hF5Jko0T0CCDXlfBgUkmcbOBulB_57wsEp-01f3fMOaczbhTqZ6pOVhA-EvSDCragnUHiGgKmCvH9F9cCXfU5_foTmX8lGeKJt6IZzYwAiHlDCrhiI_QIsOVW17CeFgJ7nz9SHhVp--QH--N4CezWaZ2SdCWy5zLopWMyDH4Id0US0kT-pD2A4SB13Dd2PuPM6vYQ51OvNJaPwFlxynMNz1aTcvlOQDs0dt0mg3a-HX9v_B9fjbV3MBAkzSVQFJCCwHDHoWOIQoHrcoLXw.BmxPe5lmHDDF3YAWzOMFeZdMd4B1ptdIw2eUHkFDhls&dib_tag=se&keywords=blue+yeti+microphone&qid=1757000803&sprefix=blue+yeti+%2Caps%2C208&sr=8-7)
+- **Lights**: Key Light/Key Light Air (Key light clamps on desk, Key Light Air is a stand) [UK](https://amazon.co.uk/dp/B07L755X9G?psc=1&smid=A3P5ROKL5A1OLE&ref_=chk_typ_imgToDp)
+
 ## Software
 
 Software expenses are treated as above and will generally fall into trivial.
