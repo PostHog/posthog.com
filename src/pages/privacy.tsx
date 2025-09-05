@@ -76,8 +76,8 @@ function Privacy() {
                 description="Privacy policy, but PostHog style"
                 image={`/images/og/privacy.png`}
             />
-            <div>
-                <div className="@container/legal-content max-w-2xl mx-auto prose dark:prose-invert py-4 @2xl:py-8">
+            <div className="prose dark:prose-invert">
+                <div className="@container/legal-content max-w-2xl mx-auto py-4 @2xl:py-8">
                     <h1 className="text-center">
                         Privacy policy,{' '}
                         <span className="whitespace-nowrap text-red dark:text-yellow">
@@ -252,7 +252,7 @@ function Privacy() {
                 <div className="pt-4">
                     <ol
                         data-scheme="primary"
-                        className="table-of-contents max-w-2xl mx-auto bg-accent border border-primary rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2"
+                        className="table-of-contents not-prose max-w-2xl mx-auto bg-accent border border-primary rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2"
                     >
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
@@ -273,7 +273,7 @@ function Privacy() {
                     </ol>
                 </div>
 
-                <div className={`${privacyClasses} prose dark:prose-invert`}>
+                <div className={`${privacyClasses}`}>
                     <div className="">
                         <h3 className="mb-1 text-4xl md:hidden">Privacy policy</h3>
                         <p className="text-sm opacity-75 md:hidden">

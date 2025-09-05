@@ -76,8 +76,8 @@ function DpaGenerator() {
                 <Tooltip
                     content={() => (
                         <>
-                            Fill out the form <span className="md:hidden">at the top</span>
-                            <span className="hidden md:inline-block">to the left</span> populate these fields
+                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                            <span className="hidden @3xl:inline-block">to the left</span> populate these fields
                         </>
                     )}
                     placement="top"
@@ -94,15 +94,15 @@ function DpaGenerator() {
             </p>
             <div className="grid grid-cols-[minmax(100px,200px)_1fr] items-baseline max-w-xl space-y-4 [&>p]:!mb-0">
                 <p>Signature</p>
-                <p className="border-b border-black w-full">&nbsp;</p>
+                <p className="border-b border-primary w-full">&nbsp;</p>
 
                 <p>Name </p>
-                <p className="border-b border-black w-full">
+                <p className="border-b border-primary w-full">
                     <Tooltip
                         content={() => (
                             <>
-                                Fill out the form <span className="md:hidden">at the top</span>
-                                <span className="hidden md:inline-block">to the left</span> populate these fields
+                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                <span className="hidden @3xl:inline-block">to the left</span> populate these fields
                             </>
                         )}
                         placement="top"
@@ -119,12 +119,12 @@ function DpaGenerator() {
                 </p>
 
                 <p>Title</p>
-                <p className="border-b border-black w-full">
+                <p className="border-b border-primary w-full">
                     <Tooltip
                         content={() => (
                             <>
-                                Fill out the form <span className="md:hidden">at the top</span>
-                                <span className="hidden md:inline-block">to the left</span> populate these fields
+                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                <span className="hidden @3xl:inline-block">to the left</span> populate these fields
                             </>
                         )}
                         placement="top"
@@ -141,24 +141,24 @@ function DpaGenerator() {
                 </p>
 
                 <p>Date</p>
-                <p className="border-b border-black">&nbsp;</p>
+                <p className="border-b border-primary">&nbsp;</p>
 
                 <p className="col-span-2 !mt-8">
                     <strong>PostHog, Inc.</strong>
                 </p>
 
                 <p>Signature</p>
-                <p className="border-b border-black w-full">&nbsp;</p>
+                <p className="border-b border-primary w-full">&nbsp;</p>
 
                 <p>Name</p>
-                <p className="border-b border-black w-full">Charles Cook</p>
+                <p className="border-b border-primary w-full">Charles Cook</p>
 
                 <p>Title</p>
-                <p className="border-b border-black w-full">VP Operations</p>
+                <p className="border-b border-primary w-full">VP Operations</p>
 
                 <p>Date</p>
-                <p className="border-b border-black">
-                    <code>[Document.CreatedDate]</code>
+                <p className="border-b border-primary">
+                    <code className="dark:bg-accent/10">[Document.CreatedDate]</code>
                 </p>
             </div>
         </>
@@ -235,7 +235,7 @@ function DpaGenerator() {
                     </em>
                 </h1>
                 <h2
-                    className={`mt-2 px-2 md:-mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}
+                    className={`mt-2 px-2 @3xl:-mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}
                 >
                     Welcome to PostHog's data processing agreement (DPA) generator,
                     <br className="hidden lg:block" /> designed to make even the most{' '}
@@ -269,11 +269,11 @@ function DpaGenerator() {
             </section>
 
             <section
-                className={`grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4 ${
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
-                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-108px)] md:overflow-auto md:sticky top-0 reasonable:top-[108px] print:hidden">
+                <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 @3xl:max-h-screen @3xl:reasonable:max-h-[calc(100vh-108px)] @3xl:overflow-auto @3xl:sticky top-0 reasonable:top-[108px] print:hidden">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -302,7 +302,7 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyName(e.target.value)}
                                 placeholder="Company name"
                                 id="companyName"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
                                 required
                             />
 
@@ -315,7 +315,7 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyAddress(e.target.value)}
                                 placeholder="Company address"
                                 id="companyAddress"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
                                 required
                             />
 
@@ -328,7 +328,7 @@ function DpaGenerator() {
                                 onChange={(e) => setYourName(e.target.value)}
                                 placeholder="Representative name"
                                 id="yourName"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
                                 required
                             />
 
@@ -341,7 +341,7 @@ function DpaGenerator() {
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
                                 placeholder="Representative email"
                                 id="representativeEmail"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
                                 required
                             />
 
@@ -354,13 +354,13 @@ function DpaGenerator() {
                                 onChange={(e) => setYourTitle(e.target.value)}
                                 placeholder="Representative title"
                                 id="yourTitle"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-primary text-primary"
                                 required
                             />
 
-                            <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">Format</div>
+                            <div className="col-span-5 @@3xl:col-span-2 text-sm self-baseline pt-2">Format</div>
 
-                            <ul className="flex flex-col col-span-5 @md:col-span-3 gap-3 list-none pt-2 pl-0">
+                            <ul className="flex flex-col col-span-5 @@3xl:col-span-3 gap-3 list-none pt-2 pl-0">
                                 <li className="pl-7 relative">
                                     <input
                                         type="radio"
@@ -433,13 +433,13 @@ function DpaGenerator() {
                 <div
                     ref={divRef}
                     id="page"
-                    className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-primary md:shadow-xl print:shadow-none rounded relative"
+                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] md:top-0 reasonable:md:top-[108px] z-10">
-                        <div className="text-lg font-bold">Preview</div>
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] @3xl:top-0 reasonable:@3xl:top-[108px] z-10">
+                        <div className="text-lg font-bold dark:text-primary">Preview</div>
                         <Tooltip
                             content={() => (
-                                <div className="max-w-xs md:max-w-sm print:hidden">
+                                <div className="max-w-xs @3xl:max-w-sm print:hidden">
                                     {isFormComplete ? (
                                         <>
                                             {mode === 'pretty' || mode === 'lawyer' ? (
@@ -462,7 +462,7 @@ function DpaGenerator() {
                                         </>
                                     ) : (
                                         <>
-                                            Fill out all the fields <br className="md:hidden" />
+                                            Fill out all the fields <br className="@3xl:hidden" />
                                             to send for signature.
                                         </>
                                     )}
@@ -493,7 +493,7 @@ function DpaGenerator() {
                             <strong>Notice:</strong> While this version is a great way to understand what the DPA says,
                             we don't recommend sending this version to the lawyers.
                         </div>
-                        <h2 className="text-center !text-[2.25rem] text-balance !leading-snug py-8 font-fairytale-title">
+                        <h2 className="text-center !text-[2.25rem] text-balance !leading-snug py-8 font-fairytale-title mt-0">
                             Weaving a Magical Pact for Data Protection: An Enchanted Alliance
                         </h2>
                         <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 [&_li]:text-[19px] [&_li]:leading-relaxed max-w-xl mx-auto font-fairytale">
@@ -508,8 +508,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -543,8 +543,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -579,8 +579,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -605,8 +605,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -641,8 +641,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -679,8 +679,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -709,8 +709,8 @@ function DpaGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -744,9 +744,9 @@ function DpaGenerator() {
                         </div>
 
                         <div className="@container mx-auto max-w-3xl">
-                            <h2 className="pt-8 pb-0">Data Dance</h2>
+                            <h2 className="pt-8 pb-0 mt-0">Data Dance</h2>
 
-                            <div className="@lg:float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
+                            <div className="@lg:float-right flex flex-col -mr-2 ml-2 @3xl:ml-0 mb-2 mt:mt-0 w-48 @3xl:w-64">
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/t-swift.png"
                                     alt="Taylor Swift hog"
@@ -836,8 +836,8 @@ function DpaGenerator() {
                             <Tooltip
                                 content={() => (
                                     <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        Fill out the form <span className="@3xl:hidden">at the top</span>
+                                        <span className="hidden @3xl:inline-block">to the left</span> populate these
                                         fields
                                     </>
                                 )}
@@ -1457,8 +1457,8 @@ function DpaGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                                <span className="hidden @3xl:inline-block">to the left</span> populate
                                                 these fields
                                             </>
                                         )}
@@ -1483,8 +1483,8 @@ function DpaGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                                <span className="hidden @3xl:inline-block">to the left</span> populate
                                                 these fields
                                             </>
                                         )}
@@ -1716,7 +1716,7 @@ function DpaGenerator() {
                                 .filter((subprocessor) => subprocessor.type === 'ai')
                                 .map((subprocessor, index) => (
                                     <React.Fragment key={index}>
-                                        <div className="col-span-3 md:@xl:!-mb-6">
+                                        <div className="col-span-3 @3xl:@xl:!-mb-6">
                                             <h3 className="!my-0 text-xl">
                                                 <strong>{subprocessor.name}</strong>
                                             </h3>
@@ -1799,7 +1799,7 @@ function DpaGenerator() {
                 </div>
             </section>
 
-            <section className="text-center mt-20 md:mt-40 mb-20 md:mb-24 print:hidden">
+            <section className="text-center mt-20 @3xl:mt-40 pb-20 @3xl:pb-24 print:hidden">
                 <h3>Need a custom MSA?</h3>
                 <TrackedCTA
                     event={{ name: `clicked Talk to a human` }}

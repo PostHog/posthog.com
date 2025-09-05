@@ -88,7 +88,7 @@ const Layout = ({
 
     return (
         <ScrollArea>
-            <div data-scheme="secondary" className="bg-primary">
+            <div data-scheme="secondary" className="bg-primary text-primary">
                 {children}
             </div>
         </ScrollArea>

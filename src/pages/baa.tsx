@@ -136,11 +136,11 @@ function BAAGenerator() {
             </section>
 
             <section
-                className={`grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 gap-4 ${
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 gap-4 ${
                     submitted ? 'hidden' : 'block'
                 }`}
             >
-                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:overflow-auto md:sticky top-0">
+                <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 @3xl:max-h-screen @3xl:overflow-auto @3xl:sticky top-0">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -173,7 +173,7 @@ function BAAGenerator() {
                                     placeholder="Company name"
                                     value={companyName}
                                     onChange={(e) => setCompanyName(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
                                     required
                                 />
 
@@ -186,7 +186,7 @@ function BAAGenerator() {
                                     placeholder="Representative name"
                                     value={yourName}
                                     onChange={(e) => setYourName(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
                                     required
                                 />
 
@@ -199,7 +199,7 @@ function BAAGenerator() {
                                     placeholder="Representative title"
                                     value={yourTitle}
                                     onChange={(e) => setYourTitle(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
                                     required
                                 />
 
@@ -212,7 +212,7 @@ function BAAGenerator() {
                                     placeholder="Representative email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
+                                    className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-primary text-primary"
                                     required
                                 />
                             </div>
@@ -220,12 +220,12 @@ function BAAGenerator() {
                     )}
                 </div>
 
-                <div className="md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 pb-24 border-y md:border-y-0 border-primary md:shadow-xl rounded relative">
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
-                        <div className="text-lg font-bold">Business Associate Agreement Preview</div>
+                <div className="@3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 pb-24 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl rounded relative">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-[57px] @3xl:top-[108px] z-10">
+                        <div className="text-lg font-bold text-white">Business Associate Agreement Preview</div>
                         <Tooltip
                             content={() => (
-                                <div className="max-w-xs md:max-w-sm print:hidden">
+                                <div className="max-w-xs @3xl:max-w-sm print:hidden">
                                     {isFormComplete ? (
                                         <>
                                             <h4 className="text-base mb-1">Ready to send?</h4>
@@ -236,7 +236,7 @@ function BAAGenerator() {
                                         </>
                                     ) : (
                                         <>
-                                            Fill out all the fields <br className="md:hidden" />
+                                            Fill out all the fields <br className="@3xl:hidden" />
                                             to send for signature.
                                         </>
                                     )}
@@ -269,8 +269,8 @@ function BAAGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -296,8 +296,8 @@ function BAAGenerator() {
                             <Tooltip
                                 content={() => (
                                     <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        Fill out the form <span className="@3xl:hidden">at the top</span>
+                                        <span className="hidden @3xl:inline-block">to the left</span> populate these
                                         fields
                                     </>
                                 )}
@@ -318,8 +318,8 @@ function BAAGenerator() {
                                 <Tooltip
                                     content={() => (
                                         <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            Fill out the form <span className="@3xl:hidden">at the top</span>
+                                            <span className="hidden @3xl:inline-block">to the left</span> populate these
                                             fields
                                         </>
                                     )}
@@ -366,7 +366,12 @@ function BAAGenerator() {
                             and that you have the authority to bind Customer to this BAA.
                         </p>
                         <p>
-                           This BAA is only available to customers on the Teams Plan, as defined below, and is effective only if the Customer has the required add-on in place at the time of signing. By signing this BAA, the Customer represents and warrants that they meet the requirements of the Teams Plan. This BAA shall be null, void, and of no effect if the Customer does not meet those requirements at the time of signing, regardless of whether this BAA has been electronically executed.
+                            This BAA is only available to customers on the Teams Plan, as defined below, and is
+                            effective only if the Customer has the required add-on in place at the time of signing. By
+                            signing this BAA, the Customer represents and warrants that they meet the requirements of
+                            the Teams Plan. This BAA shall be null, void, and of no effect if the Customer does not meet
+                            those requirements at the time of signing, regardless of whether this BAA has been
+                            electronically executed.
                         </p>
                         <p>
                             This BAA applies only to PostHog's processing of PHI for Customer in Customer's capacity as
@@ -590,8 +595,8 @@ function BAAGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                                <span className="hidden @3xl:inline-block">to the left</span> populate
                                                 these fields
                                             </>
                                         )}
@@ -616,8 +621,8 @@ function BAAGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                                <span className="hidden @3xl:inline-block">to the left</span> populate
                                                 these fields
                                             </>
                                         )}
@@ -642,8 +647,8 @@ function BAAGenerator() {
                                     <Tooltip
                                         content={() => (
                                             <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                Fill out the form <span className="@3xl:hidden">at the top</span>
+                                                <span className="hidden @3xl:inline-block">to the left</span> populate
                                                 these fields
                                             </>
                                         )}
