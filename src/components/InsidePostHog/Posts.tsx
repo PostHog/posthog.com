@@ -14,12 +14,12 @@ const FeaturedPostSkeleton = () => {
 
 const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
     return (
-        <Link className="text-red dark:text-yellow hover:text-red hover:dark:text-yellow font-normal" to={slug}>
-            <img className="w-full" src={featuredImage?.url} />
+        <Link className="prose font-normal" to={slug}>
+            <img className="w-full mb-0" src={featuredImage?.url} />
             <p className="text-primary dark:text-primary-dark text-sm opacity-60 dark:opacity-50 mt-3 mb-1">
                 {post_category?.data?.attributes?.label}
             </p>
-            <h2 className="mb-2">{title}</h2>
+            <h2 className="mt-0 mb-2">{title}</h2>
             <p className="text-primary dark:text-primary-dark">{excerpt}</p>
         </Link>
     )
@@ -111,7 +111,7 @@ export default function Posts() {
     })
 
     return (
-        <div className="@container space-y-8 @lg:space-y-4">
+        <div className="@container space-y-8 @lg:space-y-4 [&>span]:block">
             {isLoading ? <FeaturedPostSkeleton /> : <FeaturedPost {...posts?.[0]} />}
 
             {isLoading ? (
