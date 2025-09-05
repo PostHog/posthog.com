@@ -2393,6 +2393,37 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'AI engineering',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconLlmPromptEvaluation',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-engineering',
+                        },
+                        {
+                            name: 'Max AI',
+                            url: '/docs/max-ai',
+                        },
+                        {
+                            name: 'AI wizard',
+                            url: '/docs/ai-engineering/ai-wizard',
+                        },
+                        {
+                            name: 'Model Context Protocol (MCP)',
+                            url: '/docs/model-context-protocol',
+                        },
+                        {
+                            name: 'LLM analytics',
+                            url: 'https://posthog.com/docs/llm-analytics',
+                        },
+                        {
+                            name: 'Markdown and llms.txt',
+                            url: '/docs/ai-engineering/markdown-llms-txt',
+                        },
+                    ],
+                },
+                {
                     name: 'Winning with PostHog',
                 },
                 {
@@ -2521,10 +2552,6 @@ export const docsMenu = {
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
-                        },
-                        {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
                         },
@@ -2548,10 +2575,6 @@ export const docsMenu = {
                         {
                             name: 'Projects',
                             url: '/docs/settings/projects',
-                        },
-                        {
-                            name: 'Model context protocol (MCP)',
-                            url: '/docs/model-context-protocol',
                         },
                         {
                             name: 'Hog',
