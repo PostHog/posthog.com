@@ -113,8 +113,9 @@ export default function CareersOG(): JSX.Element {
                 )
 
                 // Prepare location string for potential future use
-                const locationString = `Remote${job.fields.locations?.length > 0 ? ` (${job.fields.locations.join(', ')})` : ''
-                    }`
+                const locationString = `Remote${
+                    job.fields.locations?.length > 0 ? ` (${job.fields.locations.join(', ')})` : ''
+                }`
 
                 allRows.push({
                     key: `${job.fields.title}-${groupName}`,
@@ -162,13 +163,7 @@ export default function CareersOG(): JSX.Element {
                         our small teams are looking to add{' '}
                         <strong className="whitespace-nowrap">{jobRows.length} team members</strong>
                     </h2>
-                    <OSTable
-                        columns={columns}
-                        rows={jobRows}
-                        rowAlignment="top"
-                        size="md"
-                        className="text-2xl"
-                    />
+                    <OSTable columns={columns} rows={jobRows} rowAlignment="top" size="md" className="text-2xl" />
                 </ScrollArea>
             </Editor>
         </>
