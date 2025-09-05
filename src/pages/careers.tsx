@@ -154,7 +154,9 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image={`https://preview.posthog.com/og-images/careers-og.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers-og.jpeg${
+                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
+                }`}
                 imageType="absolute"
             />
             <Editor
