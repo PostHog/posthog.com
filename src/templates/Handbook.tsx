@@ -333,7 +333,7 @@ export default function Handbook({
 }) {
     const {
         body,
-        frontmatter: { title, seo, tableOfContents: frontmatterTableOfContents },
+        frontmatter: { title, seo, tableOfContents: frontmatterTableOfContents, hideRightSidebar },
         fields: { slug, contributors, appConfig, templateConfigs, commits },
         excerpt,
     } = post
@@ -393,6 +393,7 @@ export default function Handbook({
                 homeURL={breadcrumbBase.url}
                 description={seo?.metaDescription || excerpt}
                 showSurvey
+                hideRightSidebar={hideRightSidebar}
             />
         </>
     )
@@ -472,6 +473,7 @@ export const query = graphql`
                 title
                 description
                 showTitle
+                hideRightSidebar
                 hideAnchor
                 hideLastUpdated
                 github
