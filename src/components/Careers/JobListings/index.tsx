@@ -6,7 +6,7 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
 import slugify from 'slugify'
-import { IconPineapple } from '@posthog/icons'
+import { IconPineapple, IconX } from '@posthog/icons'
 import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
 import TeamPatch from 'components/TeamPatch'
 import { slugifyTeamName } from 'lib/utils'
@@ -112,7 +112,7 @@ const query = graphql`
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
-        <li className="flex space-x-2">
+        <li className="flex space-x-2 mr-4 @2xl:mr-8">
             <span className="w-6 h-6 text-black dark:text-white flex-shrink-0">{icon}</span>
             <span className="grid">
                 <h4 className="text-sm m-0 font-normal leading-none pt-1">
@@ -420,6 +420,14 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         }
     }
 
+    // Handle clear search button
+    const handleClearSearch = () => {
+        setSearchQuery('')
+        if (markedRef.current) {
+            markedRef.current.unmark()
+        }
+    }
+
     useEffect(() => {
         const parser = new DOMParser()
         const doc = parser.parseFromString(selectedJob.fields.html, 'text/html')
@@ -543,14 +551,25 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             )}
                         </select>
 
-                        <input
-                            type="text"
-                            className="hidden @2xl:block w-full p-2 border border-b-0 border-input bg-primary rounded text-xl relative z-10 mb-4"
-                            placeholder="Search roles..."
-                            value={searchQuery}
-                            onChange={handleSearchChange}
-                            onKeyDown={handleSearchKeyDown}
-                        />
+                        <div className="hidden @2xl:block relative mb-4">
+                            <input
+                                type="text"
+                                className="w-full p-2 pr-10 border border-b-0 border-input bg-primary rounded text-xl relative z-10"
+                                placeholder="Search roles..."
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                                onKeyDown={handleSearchKeyDown}
+                            />
+                            {searchQuery && (
+                                <button
+                                    onClick={handleClearSearch}
+                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
+                                    aria-label="Clear search"
+                                >
+                                    <IconX className="w-4 h-4 text-muted" />
+                                </button>
+                            )}
+                        </div>
                     </div>
 
                     <div data-scheme="primary" className="hidden @2xl:block flex-1">
@@ -696,7 +715,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 </p>
                             )}
 
-                            <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex flex-wrap gap-8 items-start @2xl:flex-row @2xl:gap-12">
+                            <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex flex-wrap items-start @2xl:flex-row ">
                                 <Detail
                                     title="Location"
                                     value={`Remote${
