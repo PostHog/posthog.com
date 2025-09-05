@@ -39,6 +39,7 @@ import {
     IconWarning,
     IconMagicWand,
     IconLlmAnalytics,
+    IconPiggyBank,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -94,6 +95,7 @@ export const topicIcons = {
     survey: IconMessage,
     '#where-in-the-world': IconGlobe,
     'web analytics': IconPieChart,
+    'revenue analytics': IconPiggyBank,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {

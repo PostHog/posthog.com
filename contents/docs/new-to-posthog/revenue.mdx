@@ -28,6 +28,9 @@ posthog.capture('subscription_purchased', {
 	months: 12,
 	price: 1999,     // in cents, equivalent to $19.99
 	currency: 'USD', // ISO 4217 currency code
+    coupon: 'SUMMER2024',       // optional, but recommended if using coupons, unique identifier for the coupon
+    product_id: 'prod_1234',    // optional, but recommended, unique identifier for the product
+    subscription_id: 'sub_1234' // optional, but recommended, unique identifier for the subscription
 })
 ```
 
@@ -47,7 +50,7 @@ Even at the earliest stages of a business, data can be scattered between multipl
 
 Instead of setting up complex event-sending pipelines, you can bring the data directly into PostHog's data warehouse and analyze it all from there.
 
-PostHog's **data warehouse** solves this problem by aggregating multiple data sources. You can then access our [revenue analytics](/docs/web-analytics/revenue-analytics) dashboard to see what your revenue looks like across time and across your events/sources! You can also build custom insights that traverse both.
+PostHog's **data warehouse** solves this problem by aggregating multiple data sources. You can then access our [revenue analytics](/docs/revenue-analytics) dashboard to see what your revenue looks like across time and across your events/sources! You can also build custom insights that traverse both.
 
 You can query *anything* from your app database with [data warehouse](/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](/docs/cdp/sources/stripe) and [Chargebee](/docs/cdp/sources/chargebee). 
 
