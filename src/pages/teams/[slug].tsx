@@ -53,7 +53,7 @@ const Hedgehog = ({ className = '' }) => {
 }
 
 const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
-    if (!percentage) {
+    if (percentage === undefined) {
         return (
             <div className="flex flex-col items-center space-y-3">
                 <p className="text-sm opacity-75">No data available</p>
@@ -169,7 +169,7 @@ export default function TeamPage(props: TeamPageProps) {
                     body
                 }
             }
-            allSqueakTeam {
+            allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
                 nodes {
                     id
                     name
