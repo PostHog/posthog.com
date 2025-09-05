@@ -425,8 +425,9 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
             language: 'bash',
             code: `
             export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-                }\\
+curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
+                item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+            }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
     <ph_app_host>${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
@@ -439,19 +440,21 @@ api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
-        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${additionalPathParams.length > 0
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${
+                additionalPathParams.length > 0
                     ? additionalPathParams.map(
-                        (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
-                    )
+                          (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
+                      )
                     : ''
-                }
+            }
     ),
-    headers={"Authorization": "Bearer {}".format(api_key)},${params.length > 0
-                    ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
-                        .replaceAll('\n', '\n\t')
-                        .replace('\n}', '\n\t}')}`
-                    : ''
-                }
+    headers={"Authorization": "Bearer {}".format(api_key)},${
+        params.length > 0
+            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
+                  .replaceAll('\n', '\n\t')
+                  .replace('\n}', '\n\t}')}`
+            : ''
+    }
 )${item.httpVerb !== 'delete' ? '.json()' : ''}
             `,
         },
@@ -659,38 +662,35 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 <Security item={item} objects={objects} />
                                 <Parameters item={item} objects={objects} />
 
-                                    <div>
-                                        <h4>Response</h4>
-                                        {Object.keys(item.responses).map((statusCode) => {
-                                            const response = item.responses[statusCode]
-                                            return (
-                                                <div key={statusCode} className="mb-4">
-                                                    <h5 className="text-sm font-semibold mb-2">
-                                                        <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                            Status {statusCode}
-                                                        </span>{' '}
-                                                        {response.description}
-                                                    </h5>
-                                                    <ResponseExample
-                                                        item={item}
-                                                        objects={objects}
-                                                        objectKey={
-                                                            response.content?.['application/json']?.schema['$ref']
-                                                                ?.split('/')
-                                                                .at(-1) ||
-                                                            response.content?.['application/json']?.schema.items?.[
-                                                                '$ref'
-                                                            ]
-                                                                ?.split('/')
-                                                                .at(-1)
-                                                        }
-                                                        exampleLanguage={exampleLanguage}
-                                                        setExampleLanguage={setExampleLanguage}
-                                                    />
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
+                                <div>
+                                    <h4>Response</h4>
+                                    {Object.keys(item.responses).map((statusCode) => {
+                                        const response = item.responses[statusCode]
+                                        return (
+                                            <div key={statusCode} className="mb-4">
+                                                <h5 className="text-sm font-semibold mb-2">
+                                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                        Status {statusCode}
+                                                    </span>{' '}
+                                                    {response.description}
+                                                </h5>
+                                                <ResponseExample
+                                                    item={item}
+                                                    objects={objects}
+                                                    objectKey={
+                                                        response.content?.['application/json']?.schema['$ref']
+                                                            ?.split('/')
+                                                            .at(-1) ||
+                                                        response.content?.['application/json']?.schema.items?.['$ref']
+                                                            ?.split('/')
+                                                            .at(-1)
+                                                    }
+                                                    exampleLanguage={exampleLanguage}
+                                                    setExampleLanguage={setExampleLanguage}
+                                                />
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>
