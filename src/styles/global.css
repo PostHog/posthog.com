@@ -2465,6 +2465,11 @@ body.dark .max-ai-body {
     container-name: quest-layout;
 }
 
+/* Ensure reader view article supports sticky only when quest-sidebar exists */
+article.reader-view-content-container:has(.quest-sidebar) {
+    overflow: visible;
+}
+
 /* Default styles (mobile-first) */
 .quest-main-content {
     width: 100%;
@@ -2480,9 +2485,11 @@ body.dark .max-ai-body {
 .quest-sidebar {
     width: 100%;
     padding-top: 1rem;
-    position: sticky;
+    position: sticky !important;
+    top: 0 !important;
     align-self: flex-start;
     padding-bottom: 0.5rem;
+    z-index: 30;
 }
 
 .quest-desktop-nav {
