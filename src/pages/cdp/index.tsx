@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useMemo, useState, useEffect } from 'react'
+import { useStaticQuery, graphql, navigate } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import OSTable from 'components/OSTable'
@@ -139,6 +139,23 @@ const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
+// Helper function to slugify category names for URL
+const slugifyCategory = (category: string): string => {
+    return category
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+}
+
+// Helper function to unslugify category names
+const unslugifyCategory = (slug: string, categories: string[]): string | null => {
+    const slugToCategory = categories.reduce((acc, cat) => {
+        acc[slugifyCategory(cat)] = cat
+        return acc
+    }, {} as Record<string, string>)
+    return slugToCategory[slug] || null
+}
+
 export default function CDP(): JSX.Element {
     const contentData = useContentData()
     const [searchQuery, setSearchQuery] = useState('')
@@ -262,10 +279,61 @@ export default function CDP(): JSX.Element {
         { name: 'Status', width: '100px', align: 'center' as const },
     ]
 
+    // Parse URL query parameters on initial load
+    const getInitialFilterValues = () => {
+        if (typeof window === 'undefined') return { type: null, status: null, category: null }
+
+        const params = new URLSearchParams(window.location.search)
+        const type = params.get('type')
+        const status = params.get('status')
+        const categorySlug = params.get('category')
+
+        // Validate type
+        const validType = type && ['source', 'destination', 'transformation'].includes(type) ? type : null
+
+        // Validate status (convert "roadmap" to "coming_soon" for internal use)
+        const validStatus = status === 'roadmap' ? 'coming_soon' : status === 'live' ? 'live' : null
+
+        // Unslugify category
+        const validCategory = categorySlug ? unslugifyCategory(categorySlug, allCategories) : null
+
+        return { type: validType, status: validStatus, category: validCategory }
+    }
+
+    const initialFilters = getInitialFilterValues()
+
     // State for managing filters
-    const [typeFilter, setTypeFilter] = useState<string | null>(null)
-    const [statusFilter, setStatusFilter] = useState<string | null>(null)
-    const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
+    const [typeFilter, setTypeFilter] = useState<string | null>(initialFilters.type)
+    const [statusFilter, setStatusFilter] = useState<string | null>(initialFilters.status)
+    const [categoryFilter, setCategoryFilter] = useState<string | null>(initialFilters.category)
+
+    // Update URL when filters change
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+
+        const params = new URLSearchParams()
+
+        if (typeFilter) {
+            params.set('type', typeFilter)
+        }
+
+        if (statusFilter) {
+            // Convert "coming_soon" to "roadmap" for URL
+            params.set('status', statusFilter === 'coming_soon' ? 'roadmap' : statusFilter)
+        }
+
+        if (categoryFilter) {
+            params.set('category', slugifyCategory(categoryFilter))
+        }
+
+        const queryString = params.toString()
+        const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname
+
+        // Only navigate if URL has changed
+        if (newUrl !== window.location.pathname + window.location.search) {
+            navigate(newUrl, { replace: true })
+        }
+    }, [typeFilter, statusFilter, categoryFilter])
 
     // Apply all filters
     const filteredByType = typeFilter ? allPipelines.filter((p) => p.type === typeFilter) : allPipelines
