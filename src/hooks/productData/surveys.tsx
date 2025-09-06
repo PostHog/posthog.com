@@ -102,6 +102,22 @@ export const surveys = {
             ],
         },
         {
+            title: 'Presentation options',
+            headline: 'Presentation options',
+            description:
+                'Surveys can be displayed in your app as a popover (like one that sits in the bottom corner of the screen) or a feedback button. You can also get a shareable URL for a hosted survey or create a completely custom experience using the API.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg',
+                    alt: 'Presentation options',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
+        },
+        {
             title: 'Multi-step surveys',
             headline: 'Multi-step surveys',
             description:
