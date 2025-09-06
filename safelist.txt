@@ -12,6 +12,7 @@
 [&_.bg-front]:fill-lilac
 [&_.bg-front]:fill-lime-green
 [&_.bg-front]:fill-orange
+[&_.bg-front]:fill-teal
 [&_.bg-rear]:fill-[#B56C00]
 [&_.bg-rear]:fill-[#37945D]
 !pb-8
