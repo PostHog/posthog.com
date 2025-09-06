@@ -42,7 +42,7 @@ export default function AISlide({ ai, productName }: AISlideProps) {
                     <ul>
                         {ai?.prompts?.map((prompt: string) => (
                             <li key={prompt} className="text-xl">
-                                {prompt}
+                                "{prompt}"
                             </li>
                         ))}
                     </ul>
