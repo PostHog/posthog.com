@@ -304,8 +304,8 @@ export const QuestLog: React.FC<{
             // Calculate header height
             const headerElement = document.getElementById('header')
             if (headerElement) {
-                const headerRect = headerElement.getBoundingClientRect()
-                setHeaderHeight(headerRect.height)
+                const headerRect = headerElement?.getBoundingClientRect()
+                setHeaderHeight(43)
             }
         }
 
@@ -366,7 +366,7 @@ export const QuestLog: React.FC<{
                             {questItems.map((questItem, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-sm p-4 md:p-6"
+                                    className="bg-white dark:bg-accent-dark border border-primary dark:border-primary rounded-sm shadow-sm p-4 md:p-6"
                                 >
                                     {index === 0 ? (
                                         <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32">
@@ -394,10 +394,12 @@ export const QuestLog: React.FC<{
 
                     {/* Quest List - Sticky Container */}
                     <div
-                        className="quest-sidebar z-30 bg-light dark:bg-dark"
-                        style={{
-                            top: `${headerHeight}px`,
-                        }}
+                        className="quest-sidebar z-30 bg-primary"
+                        style={
+                            {
+                                /* Let CSS handle positioning */
+                            }
+                        }
                     >
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-3 px-1">
@@ -509,7 +511,7 @@ export const QuestLog: React.FC<{
                                 offset={SCROLLSPY_OFFSET}
                                 className="space-y-4"
                                 style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
-                                rootEl=".reader-view-content-container"
+                                rootEl="[data-radix-scroll-area-viewport]"
                                 onUpdate={handleScrollspyUpdate}
                             >
                                 {questItems.map((child, index) => (
@@ -539,6 +541,7 @@ export const QuestLog: React.FC<{
                                 currentClassName="active"
                                 offset={MOBILE_SCROLLSPY_OFFSET}
                                 componentTag="div"
+                                rootEl="[data-radix-scroll-area-viewport]"
                                 onUpdate={handleScrollspyUpdate}
                             >
                                 <MobileQuestLogItem
@@ -575,7 +578,7 @@ export const QuestLogItem: React.FC<
             className={`relative rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
                 isSelected
                     ? 'border border-orange shadow-md opacity-100 bg-orange/10 dark:bg-orange/10'
-                    : 'border border-light dark:border-dark opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
+                    : 'border border-primary dark:border-primary opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
             }`}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
@@ -589,7 +592,7 @@ export const QuestLogItem: React.FC<
                 <div className="flex-1 min-w-0">
                     <strong
                         className={`text-sm md:text-base font-bold leading-tight ${
-                            isSelected ? 'text-red dark:text-yellow' : 'text-primary dark:text-primary-dark'
+                            isSelected ? 'text-red dark:text-yellow' : ''
                         }`}
                     >
                         {title}
@@ -647,7 +650,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                             {Number.isFinite(selectedQuest) ? questItems[selectedQuest]?.props.title || '' : ''}
                         </strong>
                         {Number.isFinite(selectedQuest) && questItems[selectedQuest]?.props.subtitle && (
-                            <div className="text-xs text-primary/40 dark:text-primary-dark leading-tight">
+                            <div className="text-xs leading-tight">
                                 <strong>
                                     <em>{questItems[selectedQuest].props.subtitle}</em>
                                 </strong>
@@ -679,9 +682,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                             <div className="flex items-center space-x-2.5">
                                 <div
                                     className={`flex-shrink-0 w-5 h-5 ${
-                                        selectedQuest === index
-                                            ? 'text-red dark:text-yellow'
-                                            : 'text-primary/40 dark:text-primary-dark'
+                                        selectedQuest === index ? 'text-red dark:text-yellow' : ''
                                     }`}
                                 >
                                     {(() => {
