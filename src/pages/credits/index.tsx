@@ -10,7 +10,8 @@ import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { graphql, useStaticQuery } from 'gatsby'
-import CloudinaryImage from "components/CloudinaryImage"
+import CloudinaryImage from 'components/CloudinaryImage'
+import { CUSTOMER_COUNT } from '../../constants'
 
 type FieldsetItem = {
     label: string
@@ -73,7 +74,7 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                 { label: 'Established', value: 'January 2020' },
                 { label: 'Employees', value: teamSize },
                 { label: 'Small teams', value: allTeams.nodes.length },
-                { label: 'Customers', value: '190,254' },
+                { label: 'Customers', value: CUSTOMER_COUNT.toLocaleString() },
                 { label: 'Revenue', value: 'Lots' },
                 { label: 'Funding', value: '$107,000,000' },
                 {
@@ -132,8 +133,10 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                     label: 'Inspiration',
                     value: (
                         <>
-                            Apple, Inc.<br />
-                            Microsoft, Inc.<br />
+                            Apple, Inc.
+                            <br />
+                            Microsoft, Inc.
+                            <br />
                             1995-1998
                         </>
                     ),
@@ -196,7 +199,10 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                                     data-skin="secondary"
                                     className="aspect-[600/315] bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded max-w-md"
                                 >
-                                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/default_a3b46f408e.png" className="w-full" />
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/default_a3b46f408e.png"
+                                        className="w-full"
+                                    />
                                 </figure>
                                 <h1 className="text-lg mb-1">PostHog.com</h1>
                                 <p className="text-sm text-secondary">Updated {pageContext?.buildTime || 'just now'}</p>
@@ -222,7 +228,9 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                                 </Link>
                             </p>
 
-                            <p className="text-xs text-secondary">&copy;{new Date().getFullYear()} PostHog Incorporated</p>
+                            <p className="text-xs text-secondary">
+                                &copy;{new Date().getFullYear()} PostHog Incorporated
+                            </p>
                         </div>
                     </ScrollArea>
                 </div>
