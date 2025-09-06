@@ -9,6 +9,8 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
+import CloudinaryImage from 'components/CloudinaryImage'
+import OSButton from 'components/OSButton'
 
 interface Skill {
     name: string
@@ -87,6 +89,11 @@ export default function AI(): JSX.Element {
                 }}
             >
                 <ScrollArea>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/max_aeaeca84a3.png"
+                        alt="Max AI"
+                        className="float-right ml-4 max-w-48 @xl:max-w-64"
+                    />
                     <p>
                         <Link to="/max" state={{ newWindow: true }}>
                             Max
@@ -106,13 +113,12 @@ export default function AI(): JSX.Element {
                         color blue - you may get a rough idea, but it’s hardly the Mona Lisa.
                     </p>
 
-                    <h2>More than chat to your data…</h2>
+                    <h2>More than chatting with your data...</h2>
 
                     <p>
-                        Max is read and write. He can find, watch session, explain and summarize replays for you, he can
-                        create insights, write and edit SQL, conduct multi step deep research, and more every week. The
-                        goal is to generate a rich understanding of your customers’ broad range of data and he can do
-                        things too.
+                        Max can read and write. He can find, watch sessions, explain and summarize replays for you. He
+                        can create insights, write and edit SQL, conduct multi-step deep research, and more. The goal is
+                        to generate a rich understanding of your customers’ broad range of data.
                     </p>
 
                     <h2>Product autonomy</h2>
@@ -131,9 +137,12 @@ export default function AI(): JSX.Element {
 
                     <p>
                         Very shortly you’ll be able to detect and generate PRs for fixing UX issues and errors, before
-                        you even wake up for the day. We’re working on Max Code - the ability to generate ideas for what
-                        to work on, and to convert these into pull requests agentically. Stay tuned.
+                        you even wake up for the day. We’re working on <em>Max Code</em> - the ability to generate ideas
+                        for what to work on, and to convert these into pull requests agentically. Stay tuned.
                     </p>
+                    <OSButton asLink to="/max" variant="secondary" size="md" state={{ newWindow: true }}>
+                        Learn more about Max
+                    </OSButton>
                 </ScrollArea>
             </Editor>
         </>

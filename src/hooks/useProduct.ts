@@ -535,7 +535,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'AI agents.md',
+            name: 'AI README.md',
             // Icon: IconMagicWand,
             parentIcon: 'doc',
             description: 'AI suite',
@@ -726,81 +726,82 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
         },
-        {
-            name: 'Raquel',
-            parentIcon: 'aiRaquel',
-            // Icon: IconMagicWand,
-            description: 'Your AI-powered product analyst',
-            role: 'Data Analyst',
-            handle: 'raquel_ai',
-            color: 'red',
-            colorSecondary: 'lilac',
-            category: 'ai',
-            slug: 'raquel',
-            status: 'beta',
-            seo: {
-                title: 'Raquel - PostHog',
-                description: 'Your AI-powered data analyst',
-            },
-            overview: {
-                title: 'Your AI data analyst',
-                description:
-                    'Raquel researches complex data problems, summarizes session recordings, and finds insights that would have been impossible to find manually.',
-            },
-            hog: {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_raquel_c56887c5b7.png',
-                alt: "Hi, I'm Raquel!",
-                classes: 'max-w-[407px]',
-            },
-            skills: [
-                {
-                    name: 'Deep data analysis & insights',
-                    percent: 74,
-                },
 
-                {
-                    name: 'Data visualization expertise',
-                    percent: 75,
-                },
+        // {
+        //     name: 'Raquel',
+        //     parentIcon: 'aiRaquel',
+        //     // Icon: IconMagicWand,
+        //     description: 'Your AI-powered product analyst',
+        //     role: 'Data Analyst',
+        //     handle: 'raquel_ai',
+        //     color: 'red',
+        //     colorSecondary: 'lilac',
+        //     category: 'ai',
+        //     slug: 'raquel',
+        //     status: 'beta',
+        //     seo: {
+        //         title: 'Raquel - PostHog',
+        //         description: 'Your AI-powered data analyst',
+        //     },
+        //     overview: {
+        //         title: 'Your AI data analyst',
+        //         description:
+        //             'Raquel researches complex data problems, summarizes session recordings, and finds insights that would have been impossible to find manually.',
+        //     },
+        //     hog: {
+        //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_raquel_c56887c5b7.png',
+        //         alt: "Hi, I'm Raquel!",
+        //         classes: 'max-w-[407px]',
+        //     },
+        //     skills: [
+        //         {
+        //             name: 'Deep data analysis & insights',
+        //             percent: 74,
+        //         },
 
-                {
-                    name: 'Statistical modeling & trends',
-                    percent: 60,
-                },
-                {
-                    name: 'Complex SQL query optimization',
-                    percent: 48,
-                },
-                {
-                    name: 'Research methodology & validation',
-                    percent: 60,
-                },
-            ],
-            features: [
-                {
-                    title: 'Raquel researches complex data problems',
-                    headline: 'researches complex data problems',
-                    description:
-                        'Gathering context from dozens of insights is time consuming. Raquel can do it for you.',
-                    features: [
-                        {
-                            icon: IconBolt,
-                            title: 'Deep research',
-                            items: [
-                                'Raquel creates detailed analysis for your product questions by creating as many insights as needed to uncover answers.',
-                            ],
-                        },
-                        {
-                            icon: IconBrain,
-                            title: 'Summarizes session recordings',
-                            items: [
-                                'Each user session is a trove of knowledge – but the more recordings and events there are, the harder it is to go through them manually. Raquel analyzes batches of sessions for you, delivering signal on a silver platter for you.',
-                            ],
-                        },
-                    ],
-                },
-            ],
-        },
+        //         {
+        //             name: 'Data visualization expertise',
+        //             percent: 75,
+        //         },
+
+        //         {
+        //             name: 'Statistical modeling & trends',
+        //             percent: 60,
+        //         },
+        //         {
+        //             name: 'Complex SQL query optimization',
+        //             percent: 48,
+        //         },
+        //         {
+        //             name: 'Research methodology & validation',
+        //             percent: 60,
+        //         },
+        //     ],
+        //     features: [
+        //         {
+        //             title: 'Raquel researches complex data problems',
+        //             headline: 'researches complex data problems',
+        //             description:
+        //                 'Gathering context from dozens of insights is time consuming. Raquel can do it for you.',
+        //             features: [
+        //                 {
+        //                     icon: IconBolt,
+        //                     title: 'Deep research',
+        //                     items: [
+        //                         'Raquel creates detailed analysis for your product questions by creating as many insights as needed to uncover answers.',
+        //                     ],
+        //                 },
+        //                 {
+        //                     icon: IconBrain,
+        //                     title: 'Summarizes session recordings',
+        //                     items: [
+        //                         'Each user session is a trove of knowledge – but the more recordings and events there are, the harder it is to go through them manually. Raquel analyzes batches of sessions for you, delivering signal on a silver platter for you.',
+        //                     ],
+        //                 },
+        //             ],
+        //         },
+        //     ],
+        // },
         {
             name: 'User Paths',
             Icon: IconUserPaths,
@@ -1069,61 +1070,63 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
         },
-        {
-            name: 'Annika',
-            parentIcon: 'aiAnnika',
-            // Icon: IconMagicWand,
-            handle: 'annika',
-            color: 'green',
-            colorSecondary: 'lilac',
-            category: 'ai',
-            slug: 'annika',
-            status: 'WIP',
-            seo: {
-                title: 'Annika - PostHog',
-                description: 'Your AI-powered product manager',
-            },
-            overview: {
-                title: 'Your AI-powered product manager',
-                // description: 'Annika.',
-                textColor: 'text-white',
-            },
-            skills: [
-                { name: 'Metrics & success measurement', percent: 80 },
-                { name: 'Error analysis & prioritization', percent: 75 },
-                { name: 'Feature roadmap planning', percent: 70 },
-                { name: 'Risk assessment & mitigation', percent: 70 },
-                { name: 'Rollout strategy & testing', percent: 65 },
-            ],
-        },
-        {
-            name: 'Marius',
-            parentIcon: 'aiMarius',
-            // Icon: IconMagicWand,
-            role: '10x Engineer',
-            handle: 'marius',
-            color: 'blue',
-            colorSecondary: 'lilac',
-            category: 'ai',
-            slug: 'marius',
-            status: 'WIP',
-            seo: {
-                title: 'Marius - PostHog',
-                description: 'Your AI-powered 10x engineer',
-            },
-            overview: {
-                title: 'Your AI-powered 10x engineer',
-                description: 'Marius.',
-                textColor: 'text-white',
-            },
-            skills: [
-                { name: 'Bug identification & fixes', percent: 75 },
-                { name: 'Code generation & optimization', percent: 70 },
-                { name: 'Technical architecture planning', percent: 70 },
-                { name: 'Code review & quality assurance', percent: 65 },
-                { name: 'PR creation & documentation', percent: 60 },
-            ],
-        },
+
+        // {
+        //     name: 'Annika',
+        //     parentIcon: 'aiAnnika',
+        //     // Icon: IconMagicWand,
+        //     handle: 'annika',
+        //     color: 'green',
+        //     colorSecondary: 'lilac',
+        //     category: 'ai',
+        //     slug: 'annika',
+        //     status: 'WIP',
+        //     seo: {
+        //         title: 'Annika - PostHog',
+        //         description: 'Your AI-powered product manager',
+        //     },
+        //     overview: {
+        //         title: 'Your AI-powered product manager',
+        //         // description: 'Annika.',
+        //         textColor: 'text-white',
+        //     },
+        //     skills: [
+        //         { name: 'Metrics & success measurement', percent: 80 },
+        //         { name: 'Error analysis & prioritization', percent: 75 },
+        //         { name: 'Feature roadmap planning', percent: 70 },
+        //         { name: 'Risk assessment & mitigation', percent: 70 },
+        //         { name: 'Rollout strategy & testing', percent: 65 },
+        //     ],
+        // },
+
+        // {
+        //     name: 'Marius',
+        //     parentIcon: 'aiMarius',
+        //     // Icon: IconMagicWand,
+        //     role: '10x Engineer',
+        //     handle: 'marius',
+        //     color: 'blue',
+        //     colorSecondary: 'lilac',
+        //     category: 'ai',
+        //     slug: 'marius',
+        //     status: 'WIP',
+        //     seo: {
+        //         title: 'Marius - PostHog',
+        //         description: 'Your AI-powered 10x engineer',
+        //     },
+        //     overview: {
+        //         title: 'Your AI-powered 10x engineer',
+        //         description: 'Marius.',
+        //         textColor: 'text-white',
+        //     },
+        //     skills: [
+        //         { name: 'Bug identification & fixes', percent: 75 },
+        //         { name: 'Code generation & optimization', percent: 70 },
+        //         { name: 'Technical architecture planning', percent: 70 },
+        //         { name: 'Code review & quality assurance', percent: 65 },
+        //         { name: 'PR creation & documentation', percent: 60 },
+        //     ],
+        // },
         {
             name: 'User activity',
             Icon: IconClockRewind,
