@@ -46,6 +46,9 @@ export const defaultSlides: Record<string, SlideConfig> = {
     'getting-started': { slug: 'getting-started', name: 'Get started' },
 }
 
+// AI slide configuration (not included by default, only when ai data exists)
+export const aiSlide: SlideConfig = { slug: 'ai', name: 'AI' }
+
 /**
  * Create a customized slide configuration for a product page
  *

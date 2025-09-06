@@ -514,6 +514,22 @@ export const surveys = {
             },
         ],
     },
+    ai: {
+        // title: '',
+        description: 'build surveys more efficiently',
+        skills: [
+            'Generate complete surveys based on your research goals',
+            'Suggest appropriate question types(freeform text, rating scales, multiple choice, etc.)',
+            'Help you set up display conditions and targeting',
+            'Recommend survey templates for common use cases',
+        ],
+        prompts: [
+            'Create an NPS survey for my mobile app users',
+            'Build a product satisfaction survey with rating questions',
+            'Help me create a survey to understand why users churn',
+            'Generate a post-purchase feedback survey',
+        ],
+    },
     pairsWith: [
         {
             slug: 'product-analytics',
