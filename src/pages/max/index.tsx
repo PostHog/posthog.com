@@ -87,7 +87,7 @@ export default function MaxAI(): JSX.Element {
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
-        exclude: ['customers', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with'],
+        exclude: ['customers', 'ai', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with'],
         // custom: [
         //     {
         //         slug: 'product-os-benefits',
@@ -108,7 +108,7 @@ export default function MaxAI(): JSX.Element {
         //     'getting-started',
         // ],
         templates: {
-            overview: 'ai',
+            overview: 'max',
             features: 'columns',
             answers: 'demo',
         },

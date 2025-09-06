@@ -11,6 +11,7 @@ import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
 import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
 import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
 import OverviewSlideAI from './OverviewSlide/OverviewSlideAI'
+import OverviewSlideMax from './OverviewSlide/OverviewSlideMax'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import FeaturesSlideAI from './FeaturesSlideAI'
@@ -56,26 +57,48 @@ export default function SlidesTemplate({
     // Process slide configuration
     let processedSlideConfig = slideConfig
 
-    // If using default slides or a SlideConfigResult, conditionally add AI slide
+    // Add AI slide automatically if:
+    // 1. Product has AI data
+    // 2. AI slide hasn't been explicitly excluded
+    // 3. AI slide isn't already present
     if (productData?.ai) {
         if (Array.isArray(slideConfig)) {
-            // Using default slides array - insert AI slide after features
-            const featuresIndex = slideConfig.findIndex((slide) => slide.slug === 'features')
-            if (featuresIndex !== -1) {
-                processedSlideConfig = [
-                    ...slideConfig.slice(0, featuresIndex + 1),
-                    aiSlide,
-                    ...slideConfig.slice(featuresIndex + 1),
-                ]
+            // Check if AI slide is already present
+            const hasAiSlide = slideConfig.some((slide) => slide.slug === 'ai')
+
+            if (!hasAiSlide) {
+                // AI slide not present - auto-insert after features
+                const featuresIndex = slideConfig.findIndex((slide) => slide.slug === 'features')
+                if (featuresIndex !== -1) {
+                    processedSlideConfig = [
+                        ...slideConfig.slice(0, featuresIndex + 1),
+                        aiSlide,
+                        ...slideConfig.slice(featuresIndex + 1),
+                    ]
+                }
             }
         } else {
-            // Using SlideConfigResult - insert AI slide into slides array
-            const slides = slideConfig.slides
-            const featuresIndex = slides.findIndex((slide) => slide.slug === 'features')
-            if (featuresIndex !== -1 && !slides.some((slide) => slide.slug === 'ai')) {
-                processedSlideConfig = {
-                    ...slideConfig,
-                    slides: [...slides.slice(0, featuresIndex + 1), aiSlide, ...slides.slice(featuresIndex + 1)],
+            // SlideConfigResult - check if AI was explicitly excluded
+            const wasExcluded = slideConfig.exclude?.includes('ai')
+
+            if (!wasExcluded) {
+                // Check if AI slide is in the slides array
+                const slides = slideConfig.slides
+                const hasAiSlide = slides.some((slide) => slide.slug === 'ai')
+
+                if (!hasAiSlide) {
+                    // AI slide not present and not excluded - auto-insert after features
+                    const featuresIndex = slides.findIndex((slide) => slide.slug === 'features')
+                    if (featuresIndex !== -1) {
+                        processedSlideConfig = {
+                            ...slideConfig,
+                            slides: [
+                                ...slides.slice(0, featuresIndex + 1),
+                                aiSlide,
+                                ...slides.slice(featuresIndex + 1),
+                            ],
+                        }
+                    }
                 }
             }
         }
@@ -166,6 +189,8 @@ export default function SlidesTemplate({
                             return OverviewSlideOverlay
                         case 'ai':
                             return OverviewSlideAI
+                        case 'max':
+                            return OverviewSlideMax
                         case 'columns':
                         default:
                             return OverviewSlideColumns
