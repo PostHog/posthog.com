@@ -1,94 +1,105 @@
-import React, { createContext, useContext, ReactNode, useState, useEffect, useRef, useCallback } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
-import { layoutLogic } from 'logic/layoutLogic'
-import { useValues } from 'kea'
-import { AIChatFunctions } from '@inkeep/uikit'
 import Chat from 'components/Chat'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
 
 interface ChatContextType {
-    chatOpen: boolean
-    closeChat: () => void
-    openChat: () => void
-    chatting: boolean
     hasUnread: boolean
     setHasUnread: (unread: boolean) => void
     loading: boolean
-    renderChat: (target: string, conversationId?: string) => void
-    inkeep: AIChatFunctions | null
+    renderChat: () => void
     setQuickQuestions: (questions: string[]) => void
     conversationHistory: { id: string; question: number; date: string }[]
     resetConversationHistory: () => void
+    EmbeddedChat: any
+    aiChatSettings: any
+    baseSettings: any
+    context: { type: 'page'; value: { path: string; label: string } }[]
+    setContext: (context: { type: 'page'; value: { path: string; label: string } }[]) => void
+    addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
+    firstResponse: string | null
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
-export function ChatProvider({ children }: { children: ReactNode }): JSX.Element {
-    const { websiteTheme } = useValues(layoutLogic)
-    const { baseSettings, aiChatSettings } = useInkeepSettings()
-    const embeddedChatRef = useRef<AIChatFunctions | null>(null)
-    const [chatting, setChatting] = useState(false)
-    const [chatOpen, setChatOpen] = useState(false)
+export function ChatProvider({
+    context: initialContext,
+    quickQuestions: initialQuickQuestions,
+    chatId,
+    date,
+}: {
+    context?: { type: 'page'; value: { path: string; label: string } }[]
+    quickQuestions?: string[]
+    chatId?: string
+    date?: string
+}): JSX.Element {
+    const { windows, setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+    const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
-    const [quickQuestions, setQuickQuestions] = useState(defaultQuickQuestions)
+    const [quickQuestions, setQuickQuestions] = useState(initialQuickQuestions || defaultQuickQuestions)
     const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
+    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
+    const [EmbeddedChat, setEmbeddedChat] = useState<any>()
+    const [firstResponse, setFirstResponse] = useState<string | null>(null)
+    const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
+
+    const logConversation = async (event: any) => {
+        const conversationId = event?.properties?.conversation?.id
+        if (conversationId) {
+            try {
+                const newConversation = {
+                    id: conversationId,
+                    question: event?.properties?.conversation?.messages[0]?.content,
+                    date: conversationStartedDate,
+                }
+                const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
+                localStorage.setItem(
+                    'conversations',
+                    JSON.stringify([
+                        ...conversations.filter((c: any) => c.date !== conversationStartedDate),
+                        newConversation,
+                    ])
+                )
+            } catch (error) {
+                console.error('Error adding conversation to history:', error)
+            }
+        }
+    }
 
     const logEventCallback = useCallback(
-        (event: any) => {
-            if (event?.eventName === 'chat_message_bot_response_received') {
+        async (event: any) => {
+            if (event?.eventName === 'user_message_submitted' && !firstResponse) {
+                setFirstResponse(
+                    event.properties.conversation.messages.filter((m: any) => m.role === 'user')[0].content
+                )
+            }
+            if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
                     setHasFirstResponse(true)
-                    try {
-                        const newConversation = {
-                            id: event.properties.chatSessionId,
-                            question: event.properties.question,
-                            date: new Date().toISOString(),
-                        }
-                        const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
-                        conversations.push(newConversation)
-                        localStorage.setItem('conversations', JSON.stringify(conversations))
-                    } catch (error) {
-                        console.error('Error adding conversation to history:', error)
-                    }
-                }
-                if (!chatOpen) {
-                    setHasUnread(true)
                 }
             }
+            logConversation(event)
         },
-        [hasFirstResponse, chatOpen]
+        [hasFirstResponse]
     )
 
-    const openChat = () => {
-        setChatOpen(true)
+    const addContext = (newContext: { type: 'page'; value: { path: string; label: string } }) => {
+        if (newContext && !context.some((c) => c.value.path === newContext.value.path)) {
+            setContext((prev) => [...prev, newContext])
+        }
     }
 
-    const closeChat = () => {
-        setChatOpen(false)
-    }
-
-    const renderChat = (target: string, conversationId?: string) => {
-        // Render chat (usually after the target element is mounted)
-        import('@inkeep/uikit-js').then((inkeepJS) => {
-            const inkeep = inkeepJS.Inkeep(baseSettings)
-            embeddedChatRef.current = inkeep.embed({
-                componentType: 'EmbeddedChat',
-                targetElement: target,
-                properties: {
-                    baseSettings: {
-                        ...baseSettings,
-                        logEventCallback,
-                    },
-                    aiChatSettings: {
-                        ...aiChatSettings,
-                        quickQuestions,
-                        ...(conversationId ? { chatId: conversationId } : {}),
-                    },
-                },
-            })
-            setLoading(false)
-        })
+    const renderChat = async () => {
+        try {
+            const { InkeepEmbeddedChat } = await import('@inkeep/cxkit-react')
+            setEmbeddedChat(() => InkeepEmbeddedChat)
+        } catch (error) {
+            console.error('Failed to load EmbeddedChat:', error)
+        }
     }
 
     const resetConversationHistory = () => {
@@ -97,122 +108,92 @@ export function ChatProvider({ children }: { children: ReactNode }): JSX.Element
     }
 
     useEffect(() => {
-        // Open chat on ?chat=open
-        const params = new URLSearchParams(window.location.search)
-        if (params.get('chat') === 'open') {
-            openChat()
-        }
+        renderChat()
         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
         setConversationHistory(conversations)
     }, [])
 
     useEffect(() => {
-        // Update quick questions
-        if (quickQuestions.length > 0) {
-            if (embeddedChatRef.current) {
-                // Remove old quick questions first because they're not removed automatically
-                embeddedChatRef.current.render({
-                    aiChatSettings: {
-                        quickQuestions: false,
-                    },
-                })
-                // Add new quick questions
-                embeddedChatRef.current.render({
-                    aiChatSettings: {
-                        quickQuestions,
-                    },
-                })
-            }
-        }
-    }, [quickQuestions])
-
-    useEffect(() => {
         // Add community suggestion to chat
-        if (hasFirstResponse && embeddedChatRef.current) {
+        if (hasFirstResponse) {
             const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
             if (shadowRoot) {
-                const chatBubbleActions = shadowRoot.querySelector('.ikp-chat-bubble__message-actions')
+                const chatBubbleActions = shadowRoot.querySelector('.ikp-ai-chat-message-toolbar')
                 if (chatBubbleActions) {
                     const el = document.createElement('p')
                     el.classList.add('community-suggestion')
                     el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a target="_blank" style="text-decoration: underline;" href="/questions"><strong>posting a community question</strong></a> and humans may respond!`
-                    chatBubbleActions.insertAdjacentElement('beforebegin', el)
+                    chatBubbleActions.insertAdjacentElement('afterend', el)
                 }
             }
         }
     }, [hasFirstResponse])
 
     useEffect(() => {
-        // Update dark/light theme
-        if (embeddedChatRef.current) {
-            embeddedChatRef.current.render({
-                baseSettings: {
-                    colorMode: {
-                        forcedColorMode: websiteTheme === 'dark' ? 'dark' : 'light',
-                    },
-                },
-            })
-        }
-    }, [websiteTheme])
+        setBaseSettings({
+            ...baseSettings,
+            onEvent: logEventCallback,
+        })
+    }, [])
 
     useEffect(() => {
-        // Update event callback (sets unread messages and detects first response)
-        if (embeddedChatRef.current) {
-            embeddedChatRef.current.render({
-                baseSettings: {
-                    logEventCallback,
-                },
-            })
-        }
-        // Reset unread messages when chat is opened
-        if (chatOpen) {
-            setHasUnread(false)
-        }
-        // Start chatting when chat is opened (keeps chat from rendering more than once)
-        if (chatOpen && !chatting) {
-            setChatting(true)
-        }
-    }, [chatOpen, hasFirstResponse])
+        const prompts = context.map((c) =>
+            c.type === 'page' ? `The user is currently viewing the page ${c.value.label} at ${c.value.path}` : ``
+        )
+        setAiChatSettings({
+            ...aiChatSettings,
+            prompts,
+        })
+    }, [context])
 
     useEffect(() => {
-        // Open chat on ? key press
-        const handleKeyPress = (event: KeyboardEvent) => {
-            // Don't trigger if user is typing in an input, textarea (including shadow DOM)
-            if (
-                event.target instanceof HTMLElement &&
-                (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.shadowRoot)
-            ) {
-                return
-            }
+        setAiChatSettings({
+            ...aiChatSettings,
+            exampleQuestions: quickQuestions,
+        })
+    }, [quickQuestions])
 
-            if (!chatOpen && event.key === '?') {
-                openChat()
-                event.preventDefault()
-            }
+    useEffect(() => {
+        if (chatId) {
+            setAiChatSettings({
+                ...aiChatSettings,
+                chatId,
+            })
         }
+    }, [chatId])
 
-        window.addEventListener('keydown', handleKeyPress)
-        return () => window.removeEventListener('keydown', handleKeyPress)
-    }, [chatOpen])
+    useEffect(() => {
+        if (initialContext) {
+            initialContext.forEach((c) => addContext(c))
+        }
+    }, [initialContext])
+
+    useEffect(() => {
+        const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
+        if (appWindow && chatWindows.length > 0) {
+            setWindowTitle(appWindow, `Chat ${chatWindows.length}`)
+        }
+    }, [])
 
     return (
         <ChatContext.Provider
             value={{
-                chatOpen,
-                closeChat,
-                openChat,
-                chatting,
                 hasUnread,
                 setHasUnread,
                 loading,
                 renderChat,
-                inkeep: embeddedChatRef.current,
                 setQuickQuestions,
                 conversationHistory,
                 resetConversationHistory,
+                EmbeddedChat,
+                aiChatSettings,
+                baseSettings,
+                context,
+                setContext,
+                addContext,
+                firstResponse,
             }}
         >
-            {children}
             <Chat />
         </ChatContext.Provider>
     )

@@ -70,17 +70,17 @@ export const PricingCalculator = () => {
                 <p className="inline md:inline-flex text-sm opacity-75">
                     Subscribe to products individually after creating an account.
                 </p>
-                <p className="md:hidden mt-4 text-sm bg-accent dark:bg-accent-dark p-4 rounded mb-0">
+                <p className="md:hidden mt-4 text-sm bg-accent p-4 rounded mb-0">
                     <strong>To estimate your bill,</strong> drag the sliders to your estimated volume for each product,
                     then scroll down to see the total.
                 </p>
             </div>
 
             <div className="grid grid-cols-16">
-                <div className="col-span-16 md:col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tl rounded-bl">
+                <div className="col-span-16 md:col-span-3 !border-t-0 p-1 text-sm opacity-75 bg-accent rounded-tl rounded-bl">
                     <strong className="md:hidden">Products</strong>
                 </div>
-                <div className="hidden md:block md:col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                <div className="hidden md:block md:col-span-4 !border-t-0 py-1 text-sm opacity-75 bg-accent">
                     <span className="relative">
                         Pricing starts at...{' '}
                         <Tooltip
@@ -101,13 +101,13 @@ export const PricingCalculator = () => {
                         </Tooltip>
                     </span>
                 </div>
-                <div className="hidden md:block md:col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent dark:bg-accent-dark">
+                <div className="hidden md:block md:col-span-4 xl:col-span-5 !border-t-0 py-1 text-sm opacity-75 pr-8 bg-accent">
                     Calculate your price
                 </div>
-                <div className="hidden md:block md:col-span-3 !border-t-0 py-1 text-sm opacity-75 bg-accent dark:bg-accent-dark">
+                <div className="hidden md:block md:col-span-3 !border-t-0 py-1 text-sm opacity-75 bg-accent">
                     Estimated usage
                 </div>
-                <div className="hidden md:block md:col-span-2 xl:col-span-1 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent dark:bg-accent-dark rounded-tr rounded-br">
+                <div className="hidden md:block md:col-span-2 xl:col-span-1 text-right !border-t-0 py-1 pr-2 text-sm opacity-75 bg-accent rounded-tr rounded-br">
                     Subtotal
                 </div>
             </div>
@@ -115,11 +115,11 @@ export const PricingCalculator = () => {
             <div className="grid grid-cols-16 md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none [&>div:nth-child(3)]:border-none [&>div:nth-child(4)]:border-none [&>div:nth-child(5)]:border-none [&>div]:border-light dark:[&>div]:border-dark mb-2">
                 {products.map((product, index) => (
                     <React.Fragment key={index}>
-                        <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-light dark:border-dark md:col-span-3 pt-4 md:pb-4 md:pr-4">
+                        <div className="col-span-16 sm:col-span-8 border-t md:border-t-0 border-primary md:col-span-3 pt-4 md:pb-4 md:pr-4">
                             <div className="col-span-7 @md:col-span-6 sm:pl-0 md:pl-2 mb-1 @md:mb-0">
                                 <Link
                                     to={`/${product.slug}#pricing`}
-                                    className="inline-flex md:flex-col mdlg:flex-row gap-2 md:gap-1 mdlg:gap-2 mdlg:items-center hover:bg-accent dark:bg-accent-dark rounded p-1 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
+                                    className="inline-flex md:flex-col mdlg:flex-row gap-2 md:gap-1 mdlg:gap-2 mdlg:items-center hover:bg-accent rounded p-1 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
                                 >
                                     {product.icon}
                                     <span className="font-semibold text-[15px]">{product.name}</span>
@@ -127,7 +127,7 @@ export const PricingCalculator = () => {
                             </div>
                         </div>
                         <div
-                            className={`col-span-16 sm:col-span-8 sm:border-t border-light dark:border-dark md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8 ${
+                            className={`col-span-16 sm:col-span-8 sm:border-t border-primary md:border-t-0 md:col-span-4 pl-7 sm:pl-0 pb-6 md:pl-0 sm:pt-4 md:pb-4 md:pr-8 ${
                                 !product.price && 'flex items-center'
                             }`}
                         >
@@ -173,12 +173,12 @@ export const PricingCalculator = () => {
                     </React.Fragment>
                 ))}
             </div>
-            <div className="grid grid-cols-16 p-2 px-4 md:px-2 bg-accent dark:bg-accent-dark md:bg-transparent md:p-0">
-                <div className="col-span-16 flex flex-col justify-center md:col-span-8 md:p-3 opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tl rounded-bl h-full text-balance">
+            <div className="grid grid-cols-16 p-2 px-4 md:px-2 bg-accent md:bg-transparent md:p-0">
+                <div className="col-span-16 flex flex-col justify-center md:col-span-8 md:p-3 opacity-75 mb-2 bg-accent rounded-tl rounded-bl h-full text-balance">
                     <strong>Monthly estimate for usage-based plans</strong>
                     <span className="text-sm">with billing limits at your selections</span>
                 </div>
-                <div className="col-span-16 md:col-span-8 p-1 md:pr-4 flex flex-col md:items-end justify-center text-sm opacity-75 mb-2 bg-accent dark:bg-accent-dark rounded-tr rounded-br md:text-right h-full gap-x-4">
+                <div className="col-span-16 md:col-span-8 p-1 md:pr-4 flex flex-col md:items-end justify-center text-sm opacity-75 mb-2 bg-accent rounded-tr rounded-br md:text-right h-full gap-x-4">
                     <div className="flex md:justify-end items-center">
                         {annualPriceAvailable && showAnnualPrice ? (
                             <div>
@@ -208,7 +208,7 @@ export const PricingCalculator = () => {
                         )}
                     </div>
                     {annualPriceAvailable && (
-                        <div className="flex justify-between gap-x-4 shrink-0 border border-light dark:border-dark rounded p-2 pr-4 mt-2 md:mt-1">
+                        <div className="flex justify-between gap-x-4 shrink-0 border border-primary rounded p-2 pr-4 mt-2 md:mt-1">
                             <p className="text-sm opacity-75 m-0">With 20% annual discount</p>
                             <Toggle checked={showAnnualPrice} onChange={() => setShowAnnualPrice(!showAnnualPrice)} />
                         </div>

@@ -76,7 +76,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
             <div className="w-full px-4 mx-auto max-w-7xl">
                 <div className="md:grid md:grid-cols-2 md:gap-8 space-y-6 md:space-y-0 md:mt-24 mb-36">
                     <div>
-                        <div className="image-wrapper relative bg-white rounded-md border border-light dark:border-dark ">
+                        <div className="image-wrapper relative bg-white rounded-md border border-primary ">
                             {isNew && (
                                 <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                                     New
@@ -98,10 +98,8 @@ export default function Product(props: ProductPageProps): React.ReactElement {
 
                         {loading && (
                             <div role="status" className="max-w-sm animate-pulse">
-                                <div className="h-7 bg-gray-accent rounded-md dark:bg-gray-accent-dark w-32"></div>
-                                {product.variants.length > 1 && (
-                                    <div className="h-9 bg-gray-accent rounded-md dark:bg-gray-accent-dark mt-4"></div>
-                                )}
+                                <div className="h-7 bg-accent rounded-md  w-32"></div>
+                                {product.variants.length > 1 && <div className="h-9 bg-accent rounded-md  mt-4"></div>}
                                 <span className="sr-only">Loading...</span>
                             </div>
                         )}
@@ -152,7 +150,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                         {outOfStock && <BackInStockForm />}
 
                         {product.description && (
-                            <div className="border-t border-light dark:border-dark pt-4">
+                            <div className="border-t border-primary pt-4">
                                 <h3 className="text-lg mb-0">Description</h3>
                                 <p className="text-[15px]">{product.description}</p>
                             </div>

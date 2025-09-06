@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
+import { IconLink } from '../OSIcons'
 
 export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
     const [visible, setVisible] = useState(false)
@@ -17,7 +18,7 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
     return (
         <span
             style={{ opacity: hovered || visible ? '1' : '0' }}
-            className="absolute left-0 top-1/2 -translate-x-full pr-2 -translate-y-1/2 hidden xl:flex justify-center transition-opacity"
+            className="absolute left-0 top-2 -translate-x-4 @md/reader-content:-translate-x-5 @lg/reader-content:-translate-x-full pr-2 hidden xl:flex justify-center transition-opacity"
         >
             <AnimatePresence>
                 {visible && (
@@ -31,20 +32,7 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
                 )}
             </AnimatePresence>
             <button className="hover:opacity-100 opacity-20 transition-opacity" onClick={handleClick}>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                    />
-                </svg>
+                <IconLink className="size-4" />
             </button>
         </span>
     )

@@ -1,34 +1,15 @@
-import { MDXProvider } from '@mdx-js/react'
-import { useLocation } from '@reach/router'
+import React from 'react'
+import ReaderView from 'components/ReaderView'
+import { graphql } from 'gatsby'
 import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
-import Layout from 'components/Layout'
-import Link from 'components/Link'
-import PostLayout from 'components/PostLayout'
-import SidebarSection from 'components/PostLayout/SidebarSection'
-import { SEO } from 'components/seo'
 import Team from 'components/People'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
-import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useState } from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
-import MobileSidebar from 'components/Docs/MobileSidebar'
-import LibraryFeatures from 'components/LibraryFeatures'
-import { GitHub } from 'components/Icons/Icons'
-import { getCookie } from 'lib/utils'
-import { CallToAction } from 'components/CallToAction'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import Tooltip from 'components/Tooltip'
-import CommunityQuestions from 'components/CommunityQuestions'
-import { formatNode } from 'components/GlossaryElement'
 import Markdown from 'markdown-to-jsx'
-import CheckIcon from '../images/check.svg'
-import XIcon from '../images/x.svg'
-import WarningIcon from '../images/warning.svg'
 import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
@@ -37,14 +18,23 @@ import { Emoji } from 'components/Emoji'
 import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
 import TeamMember from 'components/TeamMember'
-import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
-import { IconCheck } from '@posthog/icons'
+import Link from 'components/Link'
+import SEO from 'components/seo'
+import { IconWarning, IconCheck, IconX } from '@posthog/icons'
 import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
+import { CallToAction } from 'components/CallToAction'
+import Tooltip from 'components/Tooltip'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
+import { useState } from 'react'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import Contributor from 'components/Docs/Contributors'
+import OverflowContainer from 'components/OverflowContainer'
 
 function parseStepsFromMDX(mdxString: string) {
     const steps = []
@@ -105,19 +95,19 @@ const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
         case 'full':
             return (
                 <Tooltip content="This plan has full access to this feature">
-                    <img src={CheckIcon} alt="Available" className="w-4 h-4" aria-hidden="true" />
+                    <IconCheck className="size-4 inline-block" />
                 </Tooltip>
             )
         case 'partial':
             return (
                 <Tooltip content="Some parts of this feature are not available on this plan">
-                    <img src={WarningIcon} alt="Partially available" className="w-4 h-4" aria-hidden="true" />
+                    <IconWarning className="size-4 inline-block" />
                 </Tooltip>
             )
         case 'none':
             return (
                 <Tooltip content="This feature is not available on this plan">
-                    <img src={XIcon} alt="Not available" className="w-4 h-4" aria-hidden="true" />
+                    <IconX className="size-4 inline-block" />
                 </Tooltip>
             )
     }
@@ -275,7 +265,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
                             <tr key={option.key}>
                                 <td>
                                     <div className="mb-6">
-                                        <code className="p-1 rounded dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit">
+                                        <code className="dark:text-white bg-accent text-inherit p-1 rounded">
                                             {option.name}
                                         </code>
                                     </div>
@@ -335,52 +325,18 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
     return TemplateParameters
 }
 
+const A = (props) => <Link {...props} />
+
 export default function Handbook({
-    data: { post, nextPost, glossary },
+    data: { post },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
-    location,
 }) {
     const {
         body,
-        frontmatter,
-        fields: { slug, contributors, appConfig, templateConfigs, contentWithSnippets },
+        frontmatter: { title, seo, tableOfContents: frontmatterTableOfContents },
+        fields: { slug, contributors, appConfig, templateConfigs, commits },
+        excerpt,
     } = post
-    const {
-        title,
-        description,
-        showTitle,
-        hideAnchor,
-        hideLastUpdated,
-        features,
-        github,
-        availability,
-        thumbnail,
-        related,
-        seo,
-        showStepsToc,
-    } = frontmatter
-    const { parent, excerpt } = post
-    const lastUpdated = parent?.fields?.gitLogLatestDate
-    const filePath = post?.parent?.relativePath
-
-    const isArticle = frontmatter.isArticle !== false
-
-    // Parse steps from MDX content and use them to replace table of contents if found
-    const stepsFromMDX = frontmatter.showStepsToc ? parseStepsFromMDX(body) : []
-    const toc = stepsFromMDX.length > 0 ? stepsFromMDX : tableOfContents
-    const showToc = !hideAnchor && toc?.length > 0
-
-    const [showCTA, setShowCTA] = React.useState<boolean>(
-        typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
-    )
-
-    const A = (props) => (
-        <Link
-            {...props}
-            glossary={glossary?.nodes?.map(formatNode)}
-            className="font-semibold text-red hover:text-red"
-        />
-    )
 
     const components = {
         Team,
@@ -403,7 +359,7 @@ export default function Handbook({
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,
-        Emoji,
+        // Emoji,
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
@@ -427,105 +383,17 @@ export default function Handbook({
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
                 imageType="absolute"
             />
-            <Layout>
-                <PostLayout
-                    searchFilter={searchFilter}
-                    title={title}
-                    filePath={filePath}
-                    questions={
-                        <div id="squeak-questions" className="pb-8">
-                            <CommunityQuestions />
-                        </div>
-                    }
-                    menu={menu}
-                    menuWidth={{ left: 400 }}
-                    sidebar={
-                        <HandbookSidebar
-                            contributors={contributors}
-                            availability={availability}
-                            related={related}
-                            location={location}
-                            title={title}
-                        />
-                    }
-                    tableOfContents={[...toc, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
-                    breadcrumb={breadcrumb?.slice(0, breadcrumb.length - 1) || []}
-                    hideSidebar={hideAnchor}
-                    nextPost={nextPost}
-                    askMax
-                >
-                    <section>
-                        <div className="relative mb-8">
-                            <div className="flex flex-wrap justify-between items-center mt-0">
-                                <div className="flex flex-col-reverse mb-1 space-x-2 w-full md:flex-row md:items-center">
-                                    {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
-                                    {showTitle !== false && (
-                                        <div className="flex-1">
-                                            <h1 className="m-0 text-3xl dark:text-white sm:text-4xl">{title}</h1>
-                                            {description && (
-                                                <p className="mt-1 mb-0 italic leading-tight opacity-75">
-                                                    {description}
-                                                </p>
-                                            )}
-                                            {(!hideLastUpdated || filePath || contentWithSnippets) && (
-                                                <div className="flex items-center mb-4 space-x-2 text-black md:mt-1 md:mb-0 dark:text-white">
-                                                    {!hideLastUpdated && (
-                                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
-                                                            Last updated: <time>{lastUpdated}</time>
-                                                        </p>
-                                                    )}
-                                                    {!hideLastUpdated && filePath && (
-                                                        <span className="text-primary/30 dark:text-primary-dark/30">
-                                                            |
-                                                        </span>
-                                                    )}
-                                                    {filePath && (
-                                                        <Link
-                                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow hidden xs:inline"
-                                                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                        >
-                                                            Edit page
-                                                        </Link>
-                                                    )}
-                                                    {contentWithSnippets && (!hideLastUpdated || filePath) && (
-                                                        <span className="text-primary/30 dark:text-primary-dark/30 hidden xs:inline">
-                                                            |
-                                                        </span>
-                                                    )}
-                                                    {contentWithSnippets && (
-                                                        <CopyMarkdownActionsDropdown
-                                                            markdownContent={contentWithSnippets}
-                                                            pageUrl={
-                                                                typeof window !== 'undefined'
-                                                                    ? window.location.href
-                                                                    : undefined
-                                                            }
-                                                        />
-                                                    )}
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    {github && (
-                                        <Link to={github}>
-                                            <GitHub className="w-8 h-8 transition-colors text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60" />
-                                        </Link>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="lg:hidden">{showToc && <MobileSidebar tableOfContents={toc} />}</div>
-                        {features && <LibraryFeatures availability={features} />}
-                        <div className={isArticle && 'article-content'}>
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </div>
-                    </section>
-                </PostLayout>
-            </Layout>
+            <ReaderView
+                body={{ type: 'mdx', content: body }}
+                title={title}
+                tableOfContents={frontmatterTableOfContents || tableOfContents}
+                mdxComponents={components}
+                commits={commits}
+                filePath={post.parent?.relativePath}
+                homeURL={breadcrumbBase.url}
+                description={seo?.metaDescription || excerpt}
+                showSurvey
+            />
         </>
     )
 }
@@ -559,6 +427,16 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                commits {
+                    author {
+                        avatar_url
+                        html_url
+                        login
+                    }
+                    date
+                    message
+                    url
+                }
                 appConfig {
                     key
                     name
@@ -584,22 +462,13 @@ export const query = graphql`
                         }
                     }
                 }
-                templateConfigs {
-                    templateId
-                    name
-                    type
-                    inputs_schema {
-                        key
-                        type
-                        label
-                        secret
-                        required
-                        description
-                    }
-                }
-                contentWithSnippets
             }
             frontmatter {
+                tableOfContents {
+                    depth
+                    url
+                    value
+                }
                 title
                 description
                 showTitle

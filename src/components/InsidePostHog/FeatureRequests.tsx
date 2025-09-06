@@ -6,7 +6,7 @@ import React from 'react'
 
 const Skeleton = () => {
     return new Array(3).fill(0).map((_, index) => {
-        return <div className="h-16 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse mb-2" key={index} />
+        return <div className="h-16 w-full bg-accent rounded-md animate-pulse mb-2" key={index} />
     })
 }
 
@@ -47,12 +47,12 @@ export default function FeatureRequests() {
     })
 
     return (
-        <div className="border-y border-light dark:border-dark pt-4 @lg:border-b-0">
+        <div className="border-y border-primary pt-4 @lg:border-b-0">
             <h3 className="text-lg">Latest feature requests</h3>
             {isLoading ? (
                 <Skeleton />
             ) : (
-                <ul className="list-none m-0 p-0 space-y-2 mb-4">
+                <ul className="list-none m-0 p-0 space-y-2 mt-2 mb-4">
                     {[...roadmaps]
                         .sort((a, b) => b.attributes?.likeCount - a.attributes?.likeCount)
                         .slice(0, 3)
@@ -63,15 +63,23 @@ export default function FeatureRequests() {
                                     ?.reactions?.total_count || 0
                             const totalLikes = likeCount + staticLikeCount
                             return (
-                                <li key={roadmap.squeakId} className="flex items-center space-x-2">
+                                <li key={roadmap.squeakId} className="flex flex-wrap gap-1">
+                                    <h4 className="text-base m-0 leading-tight flex-[1_0_100%]">
+                                        {roadmap?.attributes?.title}
+                                    </h4>
                                     <VoteBox likeCount={totalLikes} />
-                                    <h4 className="text-base m-0 leading-tight">{roadmap?.attributes?.title}</h4>
                                 </li>
                             )
                         })}
                 </ul>
             )}
-            <CallToAction to="/roadmap" type="secondary" size="sm" width="[calc(100%_+_3px)]">
+            <CallToAction
+                to="/roadmap"
+                type="secondary"
+                size="sm"
+                state={{ newWindow: true }}
+                width="[calc(100%_+_3px)]"
+            >
                 Vote on the roadmap
             </CallToAction>
         </div>

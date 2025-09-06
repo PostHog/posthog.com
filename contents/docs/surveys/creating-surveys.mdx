@@ -3,30 +3,41 @@ title: Creating surveys
 sidebar: Docs
 showTitle: true
 availability:
-  free: none
-  selfServe: full
-  enterprise: full
+    free: none
+    selfServe: full
+    enterprise: full
 ---
 
-export const newSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-light-mode.png"
-export const newSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png"
-export const delaySurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_57_AM_fb3b007108.png"
-export const delaySurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png"
-export const displayConditionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png"
-export const displayConditionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png"
-export const surveyTriggeredByEventLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg"
-export const surveyTriggeredByEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg"
-export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg"
-export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
-export const presentationTypesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg"
-export const presentationTypesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg"
-export const copySurveyLinkLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg"
-export const copySurveyLinkDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_39_26_2x_11ecb9914d.jpg"
+export const newSurveyLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-light-mode.png'
+export const newSurveyDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png'
+export const delaySurveyLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_57_AM_fb3b007108.png'
+export const delaySurveyDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png'
+export const displayConditionsLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png'
+export const displayConditionsDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png'
+export const surveyTriggeredByEventLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg'
+export const surveyTriggeredByEventDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg'
+export const repeatingSurveyLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg'
+export const repeatingSurveyDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg'
+export const presentationTypesLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg'
+export const presentationTypesDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg'
+export const copySurveyLinkLight =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg'
+export const copySurveyLinkDark =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_39_26_2x_11ecb9914d.jpg'
 
-<iframe
-    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
-    className="rounded shadow-xl"
-/>
+<iframe src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900" className="rounded shadow-xl" />
 
 To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) in the PostHog app, and click on the "New survey" button in the top right. This presents you with a collection of [survey templates](/templates?filter=type&value=survey) or you can click "Create blank survey" in the top right to create your own.
 
@@ -39,27 +50,23 @@ To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) 
 
 After choosing one, you are brought to a form where you can complete the details of your new survey:
 
-<ProductScreenshot
-    imageLight={newSurveyLight}
-    imageDark={newSurveyDark}
-    alt="Create a survey"
-    classes="rounded"
-/>
+<ProductScreenshot imageLight={newSurveyLight} imageDark={newSurveyDark} alt="Create a survey" classes="rounded" />
 
-## MaxAI and Surveys
+## Max AI and surveys
 
-[Max](/docs/max-ai), PostHog's AI-powered product analyst, can help you create surveys quickly using natural language. Max understands different question types and can:
+[Max](/max), PostHog's AI-powered assistant, can help you create surveys quickly using natural language. Max understands different question types and can:
 
-- Generate complete surveys based on your research goals
-- Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
-- Help you set up display conditions and targeting
-- Recommend survey templates for common use cases
+-   Generate complete surveys based on your research goals
+-   Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
+-   Help you set up display conditions and targeting
+-   Recommend survey templates for common use cases
 
 You can ask Max things like:
-- "Create an NPS survey for my mobile app users"
-- "Build a product satisfaction survey with rating questions"
-- "Help me create a survey to understand why users churn"
-- "Generate a post-purchase feedback survey"
+
+-   "Create an NPS survey for my mobile app users"
+-   "Build a product satisfaction survey with rating questions"
+-   "Help me create a survey to understand why users churn"
+-   "Generate a post-purchase feedback survey"
 
 To get started, click "Max" in the top right corner of the PostHog app and describe what kind of survey you want to create.
 
@@ -88,7 +95,7 @@ There are three options for displaying a survey:
     classes="rounded"
 />
 
-Popover, API, and feedback button surveys are considered *in-app* surveys, meaning they are displayed directly in your application using our SDKs. Hosted surveys are displayed via an external URLs, hosted by PostHog.
+Popover, API, and feedback button surveys are considered _in-app_ surveys, meaning they are displayed directly in your application using our SDKs. Hosted surveys are displayed via an external URLs, hosted by PostHog.
 
 #### Identifying respondents on hosted surveys
 
@@ -115,26 +122,26 @@ You can also add [conditional logic](/docs/surveys/conditional-questions) to dis
 
 PostHog supports multiple question types which are all available for both popover and API display modes.
 
-| Type                      | Preview                                                                                               |
-|------------------------|-------------------------------------------------------------------------------------------------------|
-| **Freeform text**              | ![Open text survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/freetext-survey.png)                                     |
-| **Link/Notification**                   | ![Link survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/link-survey.png)                                              |
-| **Rating emoji**         | ![Emoji rating survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/rating-emoji-survey.png)                              |
-| **Rating - number**        | ![Number rating survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/rating-number-survey.png)                            |
-| **Single choice select**   | ![Single choice select survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/single-select-survey.png)                      |
-| **Multiple choice select** | ![Multiple choice survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/multiple-choice-survey.png)                         |
+| Type                       | Preview                                                                                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Freeform text**          | ![Open text survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/freetext-survey.png)                 |
+| **Link/Notification**      | ![Link survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/link-survey.png)                          |
+| **Rating emoji**           | ![Emoji rating survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/rating-emoji-survey.png)          |
+| **Rating - number**        | ![Number rating survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/rating-number-survey.png)        |
+| **Single choice select**   | ![Single choice select survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/single-select-survey.png) |
+| **Multiple choice select** | ![Multiple choice survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/multiple-choice-survey.png)    |
 
 ### Customization
 
 Customization enables you to change the look, feel, and timing of your popover survey:
 
-- The color of the background, border, and buttons.
-- The position of the popover at the bottom of the screen.
-- The placeholder text.
-- The visibility of the PostHog branding.
-- Whether to shuffle the order of the choices and questions.
-- The delay (in seconds) before the survey appears on the page.
-- Whether the confirmation message auto disappears after 5 seconds.
+-   The color of the background, border, and buttons.
+-   The position of the popover at the bottom of the screen.
+-   The placeholder text.
+-   The visibility of the PostHog branding.
+-   Whether to shuffle the order of the choices and questions.
+-   The delay (in seconds) before the survey appears on the page.
+-   Whether the confirmation message auto disappears after 5 seconds.
 
 <ProductScreenshot
     imageLight={delaySurveyLight}
@@ -153,19 +160,19 @@ This specifies the conditions a user must meet to be shown an in-app survey. A u
 
 You can display your survey to specific users based on:
 
-- **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
+-   **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
-- **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
+-   **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex. The URL targeting is evaluated against `window.location.href`.
 
-- **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using *Person and group properties* (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
+-   **Device types targeting:** Show when the device type either contains a string, exactly matches a string or matches a regex. The device type targeting is evaluated by parsing the [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) on the client-side, possible values are: Desktop, Mobile, Tablet, Console, and Wearable. You can also target device types using _Person and group properties_ (Latest or Initial Device type), but these properties aren't immediately available on the first page load for unidentified persons. Only available from posthog-js version 1.214.0 forward.
 
-- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
+-   **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
-- **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
+-   **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
 
-- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
+-   **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
-- **User sends events:** Display a survey to users who have sent a specific event during their session.
+-   **User sends events:** Display a survey to users who have sent a specific event during their session.
 
 <ProductScreenshot
     imageLight={displayConditionsLight}
@@ -173,7 +180,6 @@ You can display your survey to specific users based on:
     alt="Display conditions"
     classes="rounded"
 />
-
 
 ### Completion conditions
 
@@ -196,13 +202,12 @@ If you want to trigger a survey on a specific event, but only show it once per u
     classes="rounded"
 />
 
-
 ### Complete conditions
 
 Under complete conditions, there's two options that can be configured so the survey is shown again:
 
-- `Repeat on a schedule`
-- `Every time the display conditions are met`
+-   `Repeat on a schedule`
+-   `Every time the display conditions are met`
 
 #### Repeat on a schedule
 
@@ -216,18 +221,19 @@ You can also configure in-app surveys to repeat at specific intervals, which is 
 />
 
 For example, you can configure settings like:
-- **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
 
-| Date | Event | Explanation |
-|------|-------|-------------|
-| Jan 1 | Survey shown and completed | First showing of the survey. User completes it, starting the 30-day timer |
-| Jan 2-30 | No survey shown | Within 30-day waiting period after first completion |
-| Jan 31 | Survey becomes eligible | 30 days have passed since first completion |
-| Feb 15 | Survey shown and completed | User visits site and completes survey for the second time |
-| Feb 16-Mar 16 | No survey shown | Within 30-day waiting period after second completion |
-| Mar 17 | Survey becomes eligible | 30 days have passed since second completion |
-| Apr 1 | Survey shown and completed | User completes survey for the third and final time |
-| After Apr 1 | Survey never shown again for this user | Maximum number of repetitions (3) reached |
+-   **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
+
+| Date          | Event                                  | Explanation                                                               |
+| ------------- | -------------------------------------- | ------------------------------------------------------------------------- |
+| Jan 1         | Survey shown and completed             | First showing of the survey. User completes it, starting the 30-day timer |
+| Jan 2-30      | No survey shown                        | Within 30-day waiting period after first completion                       |
+| Jan 31        | Survey becomes eligible                | 30 days have passed since first completion                                |
+| Feb 15        | Survey shown and completed             | User visits site and completes survey for the second time                 |
+| Feb 16-Mar 16 | No survey shown                        | Within 30-day waiting period after second completion                      |
+| Mar 17        | Survey becomes eligible                | 30 days have passed since second completion                               |
+| Apr 1         | Survey shown and completed             | User completes survey for the third and final time                        |
+| After Apr 1   | Survey never shown again for this user | Maximum number of repetitions (3) reached                                 |
 
 A survey is considered "shown" when a user either completes or dismisses it. The repeat interval timer starts from that moment. For example, if you set a survey to repeat every 90 days and a user completes it on January 1st, they won't see it again until April 1st, regardless of how many times they visit your site in between.
 
@@ -268,7 +274,7 @@ You can enable partial responses in the "Completion conditions" section of the s
 If partial responses are enabled, PostHog tracks user progress as follows:
 
 1.  **Initial Response:** The first `survey sent` event is triggered as soon as the user answers at least one question. This initial event includes the answer(s) provided up to that point. The `$survey_completed` property in this event will be `false`.
-2.  **Subsequent Responses:** For each *additional* question the user answers, another `survey sent` event is captured. Each of these events will contain *all* responses submitted by the user for that survey instance up to that point, and `$survey_completed` will remain `false`.
+2.  **Subsequent Responses:** For each _additional_ question the user answers, another `survey sent` event is captured. Each of these events will contain _all_ responses submitted by the user for that survey instance up to that point, and `$survey_completed` will remain `false`.
 3.  **Full Completion:** When the user fully completes and submits the survey, a final `survey sent` event is sent. This event will again include all their answers, and the `$survey_completed` property will now be `true`.
 
 **The `$survey_submission_id`:**

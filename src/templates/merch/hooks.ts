@@ -186,8 +186,8 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
                 setLoading(false)
             }
         }
-        setTimeout(() => fetchProduct(), 500)
-    }, [])
+        fetchProduct()
+    }, [id])
 
     return { product: productData, loading }
 }

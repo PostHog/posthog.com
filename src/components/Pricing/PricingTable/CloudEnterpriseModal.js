@@ -55,7 +55,7 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                             </div>
 
                             <div className="mb-4 border border-white/10 rounded">
-                                <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
+                                <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-accent-light">
                                     <div className="mb-0 text-sm text-primary dark:text-primary-dark text-opacity-75">
                                         Event volume
                                     </div>
@@ -93,7 +93,7 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                                 </div>
                             </div>
 
-                            <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
+                            <hr className="border-primary bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
 
                             <div className="flex justify-between items-baseline">
                                 <div className="mb-0 font-bold flex items-baseline">

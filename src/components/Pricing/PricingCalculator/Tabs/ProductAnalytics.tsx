@@ -85,7 +85,7 @@ const Modal = ({ onClose, isVisible }) => {
                 className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
           ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
             >
-                <div className="w-full h-fit flex justify-between p-4 border-b border-light dark:border-dark">
+                <div className="w-full h-fit flex justify-between p-4 border-b border-primary">
                     <span className="font-bold text-xl">Event types, explained</span>
 
                     <button onClick={() => onClose()}>
@@ -264,7 +264,7 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
                 <p className="m-0 text-sm absolute left-8 top-0">
                     {label}{' '}
                     {enhanced ? (
-                        <span className="text-primary/70 dark:text-primary-dark/70">
+                        <span className="text-secondary">
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-[250px]">
@@ -288,7 +288,7 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
                             </Tooltip>
                         </span>
                     ) : (
-                        <span className="text-primary/70 dark:text-primary-dark/70"></span>
+                        <span className="text-secondary"></span>
                     )}
                 </p>
             )}
@@ -462,7 +462,7 @@ export default function ProductAnalyticsTab({
                     First 1,000,000 events free – every month!
                 </div>
                 <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                    <h3 className="col-span-4 lg:col-span-5 m-0 text-base">
+                    <h3 className="col-span-3 @2xl:col-span-4 m-0 text-base">
                         Event usage{' '}
                         <button
                             onClick={() => setModalOpen(true)}
@@ -471,7 +471,7 @@ export default function ProductAnalyticsTab({
                             explain event types
                         </button>
                     </h3>
-                    <p className="col-span-2 lg:col-span-1 m-0 text-right opacity-70 text-sm">Events/mo</p>
+                    <p className="col-span-3 @2xl:col-span-2 m-0 text-right opacity-70 text-sm">Events/mo</p>
                 </div>
 
                 {analyticsSliders.map((slider) => (
@@ -493,7 +493,7 @@ export default function ProductAnalyticsTab({
                         analyticsData={analyticsData}
                     />
                 </div>
-                <div className="grid grid-cols-6 gap-x-8 pt-2 border-t border-light dark:border-dark">
+                <div className="grid grid-cols-6 gap-x-8 pt-2 border-t border-primary">
                     <div className="col-span-full flex justify-between items-center">
                         <div>
                             <h3 className="m-0 text-base">Event cost subtotal</h3>
@@ -525,11 +525,11 @@ export default function ProductAnalyticsTab({
                     </div>
 
                     {showBreakdown && (
-                        <div className="col-span-full p-4 mt-4 rounded border border-light dark:border-dark bg-white dark:bg-accent-dark relative">
+                        <div className="col-span-full p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
                             <div className="absolute top-4 right-4">
                                 <button
                                     onClick={() => setShowBreakdown(false)}
-                                    className="text-primary/50 hover:text-primary/100 dark:text-primary-dark/50 dark:hover:text-primary-dark/100"
+                                    className="text-muted hover:text-primary"
                                 >
                                     <IconX className="size-5 inline-block" />
                                 </button>
@@ -540,7 +540,7 @@ export default function ProductAnalyticsTab({
                                 or have custom properties stored on them are charged an additional rate called Person
                                 profiles.
                             </p>
-                            <p className="my-4 font-bold border-t border-light dark:border-dark pt-4">
+                            <p className="my-4 font-bold border-t border-primary pt-4">
                                 Here's how your estimate breaks down:
                             </p>
                             <div className="space-y-8">
@@ -553,7 +553,7 @@ export default function ProductAnalyticsTab({
                                         </p>
                                     )}
                                     <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
-                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-border dark:border-dark rounded-md mt-2">
+                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
                                             <PricingTiers
                                                 plans={[{ tiers: activeProduct.costByTier }]}
                                                 unit={activeProduct.billingData.unit}
@@ -576,7 +576,7 @@ export default function ProductAnalyticsTab({
                                         </p>
                                     )}
                                     <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
-                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-border dark:border-dark rounded-md mt-2">
+                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
                                             <PricingTiers
                                                 plans={[{ tiers: enhancedPersonsCost.costByTier }]}
                                                 unit={activeProduct.billingData.unit}

@@ -8,7 +8,7 @@ module.exports = {
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         screens: {
-            '2xs': '400px',
+            '2xs': '425px',
             xs: '482px',
             sm: '640px',
             // => @media (min-width: 640px) { ... }
@@ -42,7 +42,20 @@ module.exports = {
         },
 
         extend: {
+            backgroundColor: {
+                light: '#fff',
+                'accent-light': '#e5e7e0',
+                dark: '#1e1f23',
+                'accent-dark': '#232429',
+                primary: 'rgb(var(--bg) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
+                input: 'rgb(var(--input-bg) / <alpha-value>)',
+                'input-hover': 'rgb(var(--input-bg-hover) / <alpha-value>)',
+
+                'ai-blue': '#3E6B9E',
+            },
             backgroundImage: {
+                ai: 'radial-gradient(67.05% 98.56% at 12.79% 49.61%, #FF8041 0%, #DE7AFF 34.48%, #3795FF 67.29%, #46EEBC 100%)',
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'bullet-light':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%23D0D1C9" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
@@ -59,23 +72,60 @@ module.exports = {
 
                 'bullet-chevron-dark':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24"><path fill="%23999" fill-rule="evenodd" d="M8.47 3.47a.75.75 0 0 1 1.06 0l7.293 7.292a1.75 1.75 0 0 1 0 2.475L9.53 20.53a.75.75 0 0 1-1.06-1.06l7.293-7.293a.25.25 0 0 0 0-.354L8.47 4.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>\')',
+
+                'arrow-up-right':
+                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24"><path fill="%232F80FA" fill-rule="evenodd" d="M7.995 5.75a.75.75 0 0 1 .75-.75h8.505c.966 0 1.75.784 1.75 1.75v9.496a.75.75 0 0 1-1.5 0V7.56L7.03 18.03a.75.75 0 0 1-1.06-1.061L16.44 6.5H8.744a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>\')',
+                'red-carpet': "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_8817dd42aa.png')",
             },
             backgroundPosition: {
                 0: '0',
                 100: '100%',
             },
+            borderColor: {
+                light: '#fff',
+                'accent-light': '#e5e7e0',
+                dark: '#1e1f23',
+                'accent-dark': '#232429',
+                button: '#B17816',
+                'button-dark': '#835C19',
+                'button-secondary-dark': '#C78617',
+
+                primary: 'rgb(var(--border) / <alpha-value>)',
+                secondary: 'rgb(var(--input-border) / <alpha-value>)',
+                'bg-primary': 'rgb(var(--bg) / <alpha-value>)',
+                input: 'rgb(var(--input-border) / <alpha-value>)',
+                'input-hover': 'rgb(var(--input-border-hover) / <alpha-value>)',
+            },
+            borderRadius: {
+                xs: '2px',
+                sm: '4px',
+                lg: '20px',
+            },
+            borderWidth: {
+                half: '.5px',
+                1: '1px',
+                3: '3px',
+                8: '8px',
+                12: '12px',
+                16: '16px',
+            },
             colors: {
+                'light-1': '#FDFDF8',
+                'light-2': '#EEEFE9',
+                'light-3': '#E5E7E0',
+                'light-4': '#D2D3CC',
+                'light-5': '#C8CAC1',
+                'light-6': '#BFC1B7',
+                'light-7': '#B6B7AF',
+                'light-8': '#D0D1C9',
+                'light-9': '#73756B',
+                'light-10': '#9EA096',
+                'light-11': '#4D4F46',
+                'light-12': '#23251D',
+
                 transparent: 'transparent',
                 current: 'currentColor',
 
-                primary: '#151515',
-                'primary-dark': '#EEEFE9',
-                accent: '#E5E7E0',
-                'accent-dark': '#232429',
-                border: '#D0D1C9',
-                'border-dark': '#4A4C52',
-                light: '#EEEFE9',
-                dark: '#1D1F27',
                 highlight: 'rgba(235,157,42,.2)',
                 footer: '#08042f',
 
@@ -92,6 +142,8 @@ module.exports = {
                 'fuchsia-dark': '#74108D',
                 gray: '#8F8F8C',
                 green: '#6AA84F',
+                'green-dark': '#4D7533',
+                'green-2': '#36C46F',
                 gold: '#FFBA53',
                 'gold-dark': '#E38907',
                 lilac: '#8567FF',
@@ -126,28 +178,47 @@ module.exports = {
                 'white-dark': '#111', // crest dark border hack
                 yellow: '#F7A501',
 
+                'button-shadow': '#CD8407',
+                'button-border': '#B17816',
+                'button-shadow-dark': '#99660E',
+                'button-secondary-shadow-dark': '#925D05',
+
+                border: 'rgb(var(--border) / <alpha-value>)',
+
+                light: '#fff',
+                'accent-light': '#e5e7e0',
+                dark: '#1e1f23',
+                'accent-dark': '#232429',
+
                 // frame-bg
                 // frame-border
                 // plaque-bg
                 // plaque-border
                 // plaque-shadow-bg
-
-                'button-shadow': '#CD8407',
-                'button-border': '#B17816',
-                'button-shadow-dark': '#99660E',
-                'button-secondary-shadow-dark': '#925D05',
-                'gray-accent': '#D0D1C9',
-                'gray-accent-dark': '#2C2C2C',
-                'gray-accent-dark-hover': '#3D3D3D',
-                'gray-accent-light': '#E5E7E0',
-                'gray-accent-light-hover': '#C5C6C2',
+            },
+            textColor: {
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                muted: 'rgb(var(--text-muted) / <alpha-value>)',
+            },
+            fill: {
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                muted: 'rgb(var(--text-muted) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
+            },
+            stroke: {
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                muted: 'rgb(var(--text-muted) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
             },
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],
                 fairytale: ['Computer Modern', 'sans-serif'],
                 serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
-                    'MatterVF',
+                    'IBM Plex Sans',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -162,8 +233,8 @@ module.exports = {
                     'sans-serif',
                 ],
                 fancy: ['Zapfino', 'serif'],
-                button: ['MatterVF', 'sans-serif'],
-                nav: ['MatterVF', 'sans-serif'],
+                button: ['IBM Plex Sans', 'sans-serif'],
+                nav: ['IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
@@ -188,9 +259,7 @@ module.exports = {
                 ],
             },
             fontSize: {
-                '4xl': '1.875rem',
-                '3xl': '1.5rem',
-                '6xl': '3.5rem',
+                '2xs': '.625rem',
             },
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',
@@ -202,27 +271,6 @@ module.exports = {
 
             minHeight: {
                 md: '780px',
-            },
-            borderColor: {
-                light: '#D0D1C9',
-                dark: '#4A4C52',
-                'bg-light': '#EEEFE9',
-                'bg-dark': '#1D1F27',
-                button: '#B17816',
-                'button-dark': '#835C19',
-                'button-secondary-dark': '#C78617',
-            },
-            borderRadius: {
-                sm: '4px',
-                lg: '20px',
-            },
-            borderWidth: {
-                half: '.5px',
-                1: '1px',
-                3: '3px',
-                8: '8px',
-                12: '12px',
-                16: '16px',
             },
             padding: {
                 'fluid-video': '56.25%',
@@ -257,6 +305,14 @@ module.exports = {
                         '100%': { 'background-position-x': '100%' },
                     },
                 },
+                slideDown: {
+                    from: { height: '0px' },
+                    to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                slideUp: {
+                    from: { height: 'var(--radix-accordion-content-height)' },
+                    to: { height: '0px' },
+                },
                 develop: {
                     '0%': {
                         opacity: '0',
@@ -279,6 +335,32 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(-2deg) translateX(-5px)' },
                     '50%': { transform: 'rotate(2deg) translateX(5px)' },
                 },
+                hide: {
+                    from: { opacity: '1' },
+                    to: { opacity: '0' },
+                },
+                slideIn: {
+                    from: {
+                        transform: 'translateX(calc(100% + var(--viewport-padding)))',
+                    },
+                    to: { transform: 'translateX(0)' },
+                },
+                swipeOut: {
+                    from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
+                    to: { transform: 'translateX(calc(100% + var(--viewport-padding)))' },
+                },
+                'spin-slow': {
+                    from: { transform: 'rotate(0deg)' },
+                    to: { transform: 'rotate(360deg)' },
+                },
+                'spin-slow-reverse': {
+                    from: { transform: 'rotate(360deg)' },
+                    to: { transform: 'rotate(0deg)' },
+                },
+                'gradient-rotate': {
+                    '0%, 100%': { 'background-position': '0% 50%' },
+                    '50%': { 'background-position': '100% 50%' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -288,8 +370,16 @@ module.exports = {
                 reveal: 'reveal 1s ease-in-out',
                 'text-gradient': 'text-gradient 2500ms linear infinite',
                 develop: 'develop 1.5s ease-out forwards',
+                slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+                slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
                 'svg-stroke-dashoffset-around': 'svg-stroke-dashoffset-around 2.5s linear infinite',
                 wobble: 'wobble 3s ease-in-out infinite',
+                hide: 'hide 100ms ease-in',
+                slideIn: 'slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+                swipeOut: 'swipeOut 100ms ease-out',
+                'spin-slow': 'spin-slow 4s linear infinite',
+                'spin-slow-reverse': 'spin-slow-reverse 4s linear infinite',
+                'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',
@@ -310,11 +400,37 @@ module.exports = {
                 '-100': '-1',
             },
         },
+        // typography: {
+        //     DEFAULT: {
+        //         css: {
+        //             h5: {
+        //                 marginBottom: '.25rem',
+        //             },
+        //         },
+        //     },
+        // },
     },
     plugins: [
         require('@tailwindcss/forms'),
         require('@headlessui/tailwindcss'),
         require('@tailwindcss/container-queries'),
+        function ({ addUtilities }) {
+            addUtilities({
+                '.container-size': { 'container-type': 'size' },
+            })
+        },
         require('tailwindcss-animated'),
+        require('@tailwindcss/typography'),
+        function ({ addVariant }) {
+            addVariant('skin-modern', 'body[data-skin="modern"] &')
+            addVariant('skin-classic', 'body[data-skin="classic"] &')
+            addVariant('wallpaper-keyboard-garden', 'body[data-wallpaper="keyboard-garden"] &')
+            addVariant('wallpaper-hogzilla', 'body[data-wallpaper="hogzilla"] &')
+            addVariant('wallpaper-office-party', 'body[data-wallpaper="office-party"] &')
+            addVariant('wallpaper-2001-bliss', 'body[data-wallpaper="2001-bliss"] &')
+            addVariant('wallpaper-parade', 'body[data-wallpaper="parade"] &')
+            addVariant('wallpaper-coding-at-night', 'body[data-wallpaper="coding-at-night"] &')
+            addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
+        },
     ],
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ProductVideo = ({ videoLight, videoDark, autoPlay = true, muted = true, loop = true, classes = '' }) => {
     return (
-        <div className="mb-4 border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark">
+        <div className="mb-4 border border-primary rounded bg-accent">
             <video
                 autoPlay={autoPlay}
                 loop={loop}

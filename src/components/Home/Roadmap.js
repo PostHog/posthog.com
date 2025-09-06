@@ -4,12 +4,12 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
 const RoadmapColumn = ({ children }) => {
-    return <div className="md:border-r last:border-r-0 border-light dark:border-dark">{children}</div>
+    return <div className="md:border-r last:border-r-0 border-primary">{children}</div>
 }
 
 const RoadmapItem = ({ children }) => {
     return (
-        <li className="list-none m-0 pt-2 px-1 pb-3 text-[15px] text-primary/75 dark:text-primary-dark/75 w-full font-semibold border-light dark:border-dark border-b last:border-b-0 whitespace-normal md:whitespace-nowrap overflow-hidden text-ellipsis">
+        <li className="list-none m-0 pt-2 px-1 pb-3 text-[15px] text-secondary w-full font-semibold border-primary border-b last:border-b-0 whitespace-normal md:whitespace-nowrap overflow-hidden text-ellipsis">
             {children}
         </li>
     )
@@ -95,22 +95,22 @@ const Roadmap = () => {
                     </CallToAction>
                 </div>
 
-                <div className="grid border border-light dark:border-dark text-primary dark:text-primary-dark md:grid-cols-2 relative after:bg-gradient-to-b after:from-light/0 after:to-light/70 md:after:to</h3>-light/90 dark:after:from-dark/0 dark:after:to-dark/70 dark:md:after:to-dark/90 after:bottom-0 after:left-0 after:w-full after:h-36 after:absolute">
+                <div className="grid border border-primary text-primary dark:text-primary-dark md:grid-cols-2 relative after:bg-gradient-to-b after:from-light/0 after:to-light/70 md:after:to</h3>-light/90 dark:after:from-dark/0 dark:after:to-dark/70 dark:md:after:to-dark/90 after:bottom-0 after:left-0 after:w-full after:h-36 after:absolute">
                     <RoadmapColumn>
-                        <div className="text-base py-1 font-bold text-center bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
+                        <div className="text-base py-1 font-bold text-center bg-accent border-b border-primary">
                             Under consideration
                         </div>
-                        <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
+                        <ul className="m-0 px-4 pt-1 bg-accent">
                             {roadmaps.map((roadmap, index) => (
                                 <RoadmapItem key={roadmap.squeakId || `idx${index}`}>{roadmap.title}</RoadmapItem>
                             ))}
                         </ul>
                     </RoadmapColumn>
                     <RoadmapColumn>
-                        <div className="text-base py-1 font-bold text-center bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
+                        <div className="text-base py-1 font-bold text-center bg-accent border-b border-primary">
                             In progress
                         </div>
-                        <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
+                        <ul className="m-0 px-4 pt-1 bg-accent">
                             {wip.map((roadmap) => (
                                 <RoadmapItem key={roadmap.squeakId || `idx${index}`}>{roadmap.title}</RoadmapItem>
                             ))}

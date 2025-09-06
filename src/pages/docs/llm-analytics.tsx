@@ -12,6 +12,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
+import ReaderView from 'components/ReaderView'
 
 type LLMAnalyticsProps = {
     data: {
@@ -61,7 +62,7 @@ export const Content = ({ quickLinks = false }) => {
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
                     width="[calc(100%_+_3px)]"
                 >
                     Explore guides
@@ -73,24 +74,22 @@ export const Content = ({ quickLinks = false }) => {
 
 const LLMAnalytics: React.FC<LLMAnalyticsProps> = ({ data }) => {
     return (
-        <Layout>
-            <SEO title="LLM analytics - Documentation - PostHog" />
+        <ReaderView>
+            <SEO title="LLM Analytics - Documentation - PostHog" />
 
-            <PostLayout title={'LLM analytics'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="LLM analytics"
-                    description="Gather data for your AI and LLM products usage and performance."
-                    buttonText="Start capturing LLM data"
-                    buttonLink="/docs/llm-analytics/start-here"
-                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
-                    imageClasses="max-h-48 md:max-h-64"
-                />
+            <Intro
+                subheader="Getting started"
+                title="LLM Analytics"
+                description="Gather data for your AI and LLM products usage and performance."
+                buttonText="Start capturing LLM data"
+                buttonLink="/docs/llm-analytics/start-here"
+                imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
+                imageClasses="max-h-48 md:max-h-64"
+            />
 
-                <Content />
-            </PostLayout>
-        </Layout>
+            <Content />
+        </ReaderView>
     )
 }
 

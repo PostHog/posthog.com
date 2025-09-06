@@ -12,6 +12,7 @@ import QuickLinks from 'components/QuickLinks'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import Link from 'components/Link'
+import ReaderView from 'components/ReaderView'
 
 type ErrorTrackingProps = {
     data: {
@@ -64,38 +65,36 @@ export const Content = ({ quickLinks = false }) => {
 
 const ErrorTracking: React.FC<ErrorTrackingProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Error tracking - Docs - PostHog" />
 
-            <PostLayout title={'Error tracking'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Error tracking"
-                    description="Track and monitor errors and exceptions in your code."
-                    buttonText="Installation guide"
-                    buttonLink="/docs/error-tracking/start-here"
-                    imageColumnClasses="mt-4 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
-                    imageClasses="max-h-48 md:max-h-64"
-                />
+            <Intro
+                subheader="Getting started"
+                title="Error tracking"
+                description="Track and monitor errors and exceptions in your code."
+                buttonText="Installation guide"
+                buttonLink="/docs/error-tracking/start-here"
+                imageColumnClasses="mt-4 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
+                imageClasses="max-h-48 md:max-h-64"
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'How do I see what the most common errors are?',
-                        'How do I custom error groups?',
-                        'How do I assign someone an error?',
-                    ]}
-                />
+            <AskMax
+                quickQuestions={[
+                    'How do I see what the most common errors are?',
+                    'How do I custom error groups?',
+                    'How do I assign someone an error?',
+                ]}
+            />
 
-                <Content />
+            <Content />
 
-                <div className="">
-                    <CallToAction to="/docs/error-tracking/start-here" width="full">
-                        Visit the manual
-                    </CallToAction>
-                </div>
-            </PostLayout>
-        </Layout>
+            <div className="">
+                <CallToAction to="/docs/error-tracking/start-here" width="full">
+                    Visit the manual
+                </CallToAction>
+            </div>
+        </ReaderView>
     )
 }
 

@@ -41,17 +41,14 @@ export default function Post({
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li
-            ref={containerRef}
-            className={`snap-start md:last:pb-24 ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}
-        >
+        <li ref={containerRef} className={`snap-start ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}>
             {!articleView && <LikeButton slug={slug} postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>
                 <Link
-                    className={`inline m-0 font-semibold border-t border-b !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative 
+                    className={`inline m-0 font-semibold border-t border-b !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit hover:transition-transform flex-grow hover:bg-accent relative 
                     ${
                         active
-                            ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-dark'
+                            ? 'bg-accent font-bold border-input'
                             : 'border-transparent hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]'
                     } 
                     ${fullWidthContent ? 'p-2 ' : 'p-2 lg:px-4'}
@@ -96,7 +93,7 @@ export default function Post({
                             </span>
                         )}
                     </div>
-                    <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
+                    <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent rounded-sm overflow-hidden md:self-start self-center relative z-10">
                         <span
                             className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
                         >

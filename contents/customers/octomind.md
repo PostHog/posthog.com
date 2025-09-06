@@ -2,23 +2,23 @@
 title: 'How Octomind’s marketing team uses PostHog with ease'
 customer: Octomind
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_673e0ed777.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_dark_a89deeee90.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_dark_a89deeee90.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_673e0ed777.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_octomind_bb047603a6.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog_octomind_bb047603a6.jpg
 featuredCustomer: false
 industries:
-  - 'Devtool, SaaS'
+    - 'Devtool, SaaS'
 users:
-  - Marketing
+    - Marketing
 toolsUsed:
-  - Experiments
-  - Surveys
-  - PostHog Cloud
-  - Insights
-  - Web analytics
-  - Product analytics
+    - Experiments
+    - Surveys
+    - PostHog Cloud
+    - Insights
+    - Web analytics
+    - Product analytics
 date: 2024-11-10
 ---
 
@@ -33,7 +33,8 @@ Maria knew she needed a way to track marketing metrics, but also knew that Googl
 “Sometimes it can be difficult to persuade engineers to even implement a simple cookie banner, but in this case? Our developers love PostHog and quickly got started with no-cookie tracking and EU servers. GDPR compliance was just really easy and our engineers knew they had a real partner in the choice of analytics platform.”
 
 ### PostHog + Hubspot = A marketer's dream
-Following the initial implementation, Maria enabled autocapture to get data flowing into PostHog straight away, and got started with [web analytics](/web-analytics) and [pre-built dashboard templates](/templates). These enabled her to track the high-level data immediately, and as she’s become more familiar with the data she’s started building her own insights too. 
+
+Following the initial implementation, Maria enabled autocapture to get data flowing into PostHog straight away, and got started with [web analytics](/web-analytics) and [pre-built dashboard templates](/templates). These enabled her to track the high-level data immediately, and as she’s become more familiar with the data she’s started building her own insights too.
 
 <BorderWrapper>
 <Quote
@@ -47,12 +48,13 @@ Following the initial implementation, Maria enabled autocapture to get data flow
 
 “Analysis is always kind of funky because marketing data is so volatile,” says Maria. “Our content has gone viral a few times and that puts all sorts of peaks and dips onto the charts. When I don’t need to make adjustments I can just use web analytics, but other times I need to change the data and filter stuff out — it’s all easily done though.”
 
-In addition to setting up these initial dashboards and insights, Maria also integrated PostHog with Hubspot so data could flow seamlessly between the two platforms.  
+In addition to setting up these initial dashboards and insights, Maria also integrated PostHog with Hubspot so data could flow seamlessly between the two platforms.
 
 “We don’t have a sales team, so we use Hubspot for automations based on sign-ups. We have different workflows which depend on how far people get with the product, where people get stuck. We’re still in an exploratory phase with this, but connecting PostHog and Hubspot was very useful.”
 
 ### Just ask PostHog
-Even though Maria is building her own queries and piping data to other platforms, there’s still plenty of room for Octomind to achieve more with PostHog — and Maria has taken the learning curve in stride. 
+
+Even though Maria is building her own queries and piping data to other platforms, there’s still plenty of room for Octomind to achieve more with PostHog — and Maria has taken the learning curve in stride.
 
 <BorderWrapper>
 <Quote
@@ -66,6 +68,6 @@ Even though Maria is building her own queries and piping data to other platforms
 
 “All the [tutorials and guides](/docs/product-analytics/tutorials) make it really easy,” says Maria. “Everything I need is right there and if I have questions then I can ask at [the bottom of any docs page](/docs/product-analytics/trends/overview) or look through the comments. I actually sometimes need to kick our guys when they say they’re stuck on something — I tell them: Ask PostHog! They’re really good at answering this stuff!”
 
-Armed with this knowledge, Maria is planning to start using [PostHog’s A/B testing tools](/docs/experiments) on her landing pages, as well as no-code user surveys to gather user feedback. Again, [templates and guides for enabling users to book their own feedback calls](/templates/user-interview) will prove useful — though Maria saves her biggest praise for a different feature altogether. 
+Armed with this knowledge, Maria is planning to start using [PostHog’s A/B testing tools](/docs/experiments) on her landing pages, as well as no-code user surveys to gather user feedback. Again, [templates and guides for enabling users to book their own feedback calls](/templates/user-interview) will prove useful — though Maria saves her biggest praise for a different feature altogether.
 
 “I always have [hedgehog mode](/blog/rome-hackathon#hedgehog-mode) enabled,” says Maria. “I really love that hedgehog!”

@@ -17,20 +17,14 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
                 <link
-                    rel="preload"
-                    as="font"
-                    type="font/woff2"
-                    href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff2"
-                    crossOrigin="anonymous"
+                    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+                    rel="stylesheet"
                 />
-                <link
-                    rel="preload"
-                    as="font"
-                    type="font/woff2"
-                    href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2"
-                    crossOrigin="anonymous"
-                />
+
                 <link
                     rel="preload"
                     as="font"
@@ -78,7 +72,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
 
                 {props.headComponents}
             </head>
-            <body {...props.bodyAttributes} className="light">
+            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
                 {props.preBodyComponents}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
                 {props.postBodyComponents}

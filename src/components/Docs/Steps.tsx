@@ -75,8 +75,8 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
             <div className="hidden lg:flex items-start mr-2 relative z-10">
                 <div className="flex flex-col items-center relative">
                     <CopyAnchor id={anchorId} hovered={hovered} />
-                    <div className="bg-tan dark:bg-dark py-2">
-                        <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-dark">
+                    <div className="py-2">
+                        <span className="flex items-center justify-center w-8 h-8 rounded-md font-bold text-base border border-primary border-b-4">
                             {isCheckpoint ? <Icons.IconFlag className="w-4 h-4" /> : number}
                         </span>
                     </div>

@@ -212,7 +212,7 @@ export default function Libraries() {
                                                 href={item.url}
                                                 className="flex flex-col gap-2 items-center p-0 relative transition-all hover:scale-[1.02] hover:top-[-.5px] active:scale-[.98] active:top-[.5px]"
                                             >
-                                                <figure className="size-14 bg-accent dark:bg-accent-dark p-3 rounded-md text-center flex items-center justify-center text-primary/50 dark:text-primary-dark/50">
+                                                <figure className="size-14 bg-accent p-3 rounded-md text-center flex items-center justify-center text-muted">
                                                     {item.icon}
                                                 </figure>
                                                 <span className="text-red dark:text-yellow font-semibold text-sm">

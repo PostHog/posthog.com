@@ -42,6 +42,7 @@ import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
 import { Marquee } from './components/Products/Marquee'
 import { MobileSlides } from './components/Products/MobileSlides'
+import { OSQuote } from './components/OSQuote'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
 import { SmoothScroll } from './components/Products/SmoothScroll'
@@ -58,7 +59,9 @@ import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { MaxCTA } from './components/MaxCTA'
+import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
+import OSButton from './components/OSButton'
 
 export const shortcodes = {
     ArrayCTA,
@@ -86,6 +89,8 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    OSQuote,
+    OSButton,
     Link,
     PrivateLink,
     AbTesting,
@@ -119,6 +124,7 @@ export const shortcodes = {
     Tweet,
     ZendeskTicket,
     MaxCTA,
+    SmallTeam,
     Steps,
     Step,
 }

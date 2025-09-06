@@ -14,7 +14,7 @@ const tooltipLookup: Record<string, JSX.Element> = {
     teams: (
         <>
             <h3 className="mb-1 text-base">Team features</h3>
-            <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
+            <ul className="list-none p-0 divide-y divide-primary">
                 <li className="py-1.5 text-sm">Verified events</li>
                 <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
                 <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>
@@ -90,11 +90,11 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
             <div className="grid grid-cols-16 mt-2 items-center md:[&>div]:border-t [&>div:nth-child(1)]:border-none [&>div:nth-child(2)]:border-none md:[&>div:nth-child(3)]:border-none [&>div]:border-light dark:[&>div]:border-dark">
                 {addons.map((addon, index) => (
                     <React.Fragment key={index}>
-                        <div className="col-span-8 md:col-span-3 lg:col-span-3 flex items-center gap-2 md:border-t-0 h-full border-light dark:border-dark pt-4 md:pb-4">
+                        <div className="col-span-8 md:col-span-3 lg:col-span-3 flex items-center gap-2 md:border-t-0 h-full border-primary pt-4 md:pb-4">
                             {getProductIcon(addon.icon_key, 'opacity-60 w-6 h-6')}
                             <span className="font-semibold text-[15px]">{addon.name}</span>
                         </div>
-                        <div className="col-span-8 md:col-span-5 lg:col-span-4 md:border-t-0 h-full border-light dark:border-dark pt-4 md:pb-4 flex items-center px-2">
+                        <div className="col-span-8 md:col-span-5 lg:col-span-4 md:border-t-0 h-full border-primary pt-4 md:pb-4 flex items-center px-2">
                             <p className="mb-0">
                                 <span className="space-x-0.5">
                                     <strong>${getAddonPrice(addon)?.toLocaleString()}</strong>
@@ -113,7 +113,7 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
                                 )}
                             </p>
                         </div>
-                        <div className="col-span-16 md:col-span-8 lg:col-span-9 pl-8 md:pl-0 border-b md:border-b-0 md:border-t-0 h-full border-light dark:border-dark pt-2 md:pt-4 pb-4">
+                        <div className="col-span-16 md:col-span-8 lg:col-span-9 pl-8 md:pl-0 border-b md:border-b-0 md:border-t-0 h-full border-primary pt-2 md:pt-4 pb-4">
                             <p className="text-sm mb-0">
                                 <span>{addon.description}</span>
                                 {tooltipLookup[addon.type] && (

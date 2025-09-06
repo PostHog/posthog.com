@@ -31,9 +31,9 @@ const menuItems: MenuItem[] = [
 export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[] }): JSX.Element => {
     const [activeTab, setActiveTab] = useState(0)
     return (
-        <div className="hidden md:block sticky top-[-1px] reasonable:top-[107px] z-[50] bg-accent dark:bg-accent-dark mb-12">
+        <div className="hidden md:block sticky top-[-1px] reasonable:top-[107px] z-[50] bg-accent mb-12">
             <section>
-                <Slider className="list-none flex gap-4 pt-0.5 ![justify-content:_safe_center] border-t border-border dark:border-dark">
+                <Slider className="list-none flex gap-4 pt-0.5 ![justify-content:_safe_center] border-t border-input">
                     {(other?.menuItems ?? menuItems)
                         .filter(({ label }) => !exclude.includes(label))
                         .map(({ label, id }, index) => {
@@ -41,9 +41,9 @@ export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[]
                                 <Link
                                     key={id}
                                     offset={-169}
-                                    className={`whitespace-nowrap text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark inline-block text-sm py-2 px-3 border border-transparent border-b-transparent hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md cursor-pointer ${
+                                    className={`whitespace-nowrap text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark inline-block text-sm py-2 px-3 border border-transparent border-b-transparent hover:border-primary hover:bg-primary hover:rounded-tl-sm hover:rounded-tr-md cursor-pointer ${
                                         index === activeTab
-                                            ? '!border-border dark:!border-dark !border-b-bg-light dark:!border-b-bg-dark font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md text-opacity-100'
+                                            ? '!border-primary font-bold bg-primary rounded-tl-sm rounded-tr-md text-opacity-100'
                                             : 'text-opacity-60'
                                     }`}
                                     smooth
@@ -58,7 +58,7 @@ export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[]
                             )
                         })}
                 </Slider>
-                <div className="w-full border-t border-border dark:border-dark -mt-px" />
+                <div className="w-full border-t border-input -mt-px" />
             </section>
         </div>
     )

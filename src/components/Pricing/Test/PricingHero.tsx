@@ -6,6 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { Link as ScrollLink } from 'react-scroll'
 import * as Icons from '@posthog/icons'
 import FreeTierItem from './FreeTierItem'
+import PlanContent from './PlanContent'
 
 interface PricingHeroProps {
     activePlan: string
@@ -148,7 +149,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 You still keep the same monthly free volume, even after upgrading.
             </p>
 
-            <div className="max-w-xs @sm:min-w-2xs @md:max-w-none @md:inline-block">
+            <div className="not-prose max-w-xs @sm:min-w-2xs @md:max-w-none @md:inline-block">
                 <div className="flex justify-between items-end gap-4">
                     <div>
                         {activePlan === 'free' ? (
@@ -167,9 +168,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                     </div>
                     <div>
                         <a href="#plans" className="inline-block mb-4">
-                            <button className="text-red dark:text-yellow font-semibold cursor-pointer text-sm">
-                                Compare plans
-                            </button>
+                            <button className="cursor-pointer text-sm font-semibold underline">Compare plans</button>
                         </a>
                     </div>
                 </div>
@@ -181,7 +180,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                             className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
                                 activePlan === 'free'
                                     ? 'border-yellow bg-white dark:bg-white/5'
-                                    : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                    : 'border-primary bg-transparent'
                             }`}
                         >
                             <strong className="whitespace-nowrap">Free</strong>
@@ -193,7 +192,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                             onClick={handlePaidPlanClick}
                             className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
                                 activePlan === 'free'
-                                    ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                    ? 'border-primary bg-transparent'
                                     : 'border-yellow bg-white dark:bg-white/5'
                             }`}
                         >
@@ -204,10 +203,14 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 </ul>
             </div>
 
-            <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
+            <div className="@5xl/reader-content:hidden not-prose border border-primary rounded-md p-4 mb-4 bg-light dark:bg-accent">
+                <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} isMainColumn />
+            </div>
+
+            <div className="hidden @5xl/reader-content:block border-t border-primary pt-4 h-px"></div>
 
             <div
-                className={`@container transition-all rounded-md border ${
+                className={`not-prose @container transition-all rounded-md border ${
                     animateFreeTiers
                         ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
                         : 'bg-transparent border-transparent'
