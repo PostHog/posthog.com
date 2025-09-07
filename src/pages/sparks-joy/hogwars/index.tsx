@@ -20,7 +20,7 @@ export default function HogWars(): JSX.Element {
                 // changelogCategory="product-analytics"
                 fullScreen
             >
-                <iframe src="https://hog-wars.vercel.app/" className="w-full h-full border-0" />
+                <iframe src="https://hogwars.vercel.app/" className="w-full h-full border-0" />
             </Explorer>
         </>
     )
