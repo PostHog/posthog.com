@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { graphql, navigate } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
@@ -12,18 +12,17 @@ import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { companyMenu } from '../navs'
-import groupBy from 'lodash.groupby'
 import TeamMember from 'components/TeamMember'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { Select } from 'components/RadixUI/Select'
-import { TreeMenu } from 'components/TreeMenu'
 import OSButton from 'components/OSButton'
-import { IconList } from '@posthog/icons'
+import { IconList, IconX } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
 import TeamPatch from 'components/TeamPatch'
 import { StickerPineappleYes, StickerPineappleNo, StickerPineapple } from 'components/Stickers/Stickers'
 import { TeamMembers } from 'components/Job/Sidebar'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import Mark from 'mark.js'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -41,6 +40,9 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
     )
 }
 
+// Add custom ordering for role groupings - same as careers page
+const roleGroupingOrder = ['Engineering', 'Product', 'Design', 'Marketing', 'Sales', 'Operations']
+
 export default function Job({
     data: {
         teams,
@@ -57,57 +59,102 @@ export default function Job({
     },
     pageContext: { gitHubIssues },
 }) {
+    // State variables
+    const [showTableOfContents, setShowTableOfContents] = useState(false)
+    const [parsedContent, setParsedContent] = useState<any[]>([])
+    const [searchQuery, setSearchQuery] = useState('')
+    const jobListRef = useRef<HTMLDivElement>(null)
+    const markedRef = useRef<Mark | null>(null)
+
+    // Extract data from props
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
     const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
     const showObjectives = missionAndObjectives !== 'false'
-    const availableTeams = groupBy(allJobPostings.nodes, ({ parent, departmentName }) => {
-        const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
-        const speculative = departmentName?.toLowerCase() === 'speculative'
-        return speculative ? 'Speculative' : teams.length > 1 ? 'Multiple teams' : `Team ${teams[0]}`
-    })
+    // Group jobs by role grouping
+    const jobGroups = useMemo(() => {
+        const groups: { [key: string]: any[] } = {}
+
+        allJobPostings.nodes.forEach((job: any) => {
+            const roleGroupingField = job.parent?.customFields?.find(
+                (field: { title: string }) => field.title === 'Role grouping'
+            )
+            const groupName = roleGroupingField?.value || 'Other'
+
+            if (!groups[groupName]) {
+                groups[groupName] = []
+            }
+            groups[groupName].push(job)
+        })
+
+        // Sort groups according to custom order
+        const sortedGroupNames = Object.keys(groups).sort((a, b) => {
+            if (a === 'Other') return 1
+            if (b === 'Other') return -1
+
+            const aIndex = roleGroupingOrder.indexOf(a)
+            const bIndex = roleGroupingOrder.indexOf(b)
+
+            if (aIndex !== -1 && bIndex !== -1) {
+                return aIndex - bIndex
+            }
+            if (aIndex !== -1) return -1
+            if (bIndex !== -1) return 1
+            return a.localeCompare(b)
+        })
+
+        // Apply custom sorting within each group
+        sortedGroupNames.forEach((groupName) => {
+            const groupJobs = groups[groupName]
+
+            // Move Product Engineer to the front
+            const productEngineerIndex = groupJobs.findIndex((job) => job.fields.title === 'Product Engineer')
+            if (productEngineerIndex !== -1) {
+                const [productEngineerJob] = groupJobs.splice(productEngineerIndex, 1)
+                groupJobs.unshift(productEngineerJob)
+            }
+
+            // Move Speculative application to the end
+            const speculativeIndex = groupJobs.findIndex((job) => job.fields.title === 'Speculative application')
+            if (speculativeIndex !== -1) {
+                const [speculativeJob] = groupJobs.splice(speculativeIndex, 1)
+                groupJobs.push(speculativeJob)
+            }
+        })
+
+        return sortedGroupNames.map((groupName) => ({
+            name: groupName,
+            jobs: groups[groupName],
+        }))
+    }, [allJobPostings.nodes])
+
+    // Get all jobs in a flat array
+    const allJobs = useMemo(() => {
+        return jobGroups.flatMap((group) => group.jobs)
+    }, [jobGroups])
+
+    // Filter jobs based on search query
+    const filteredJobs = useMemo(() => {
+        if (!searchQuery.trim()) return []
+
+        const query = searchQuery.toLowerCase()
+        return allJobs.filter((job: any) => {
+            // Search in job title
+            if (job.fields.title.toLowerCase().includes(query)) {
+                return true
+            }
+
+            // Search in team names
+            const teamsField = job.parent?.customFields?.find((field: { title: string }) => field.title === 'Teams')
+            const teams = teamsField ? JSON.parse(teamsField.value) : []
+            return teams.some((teamName: string) => teamName.toLowerCase().includes(query))
+        })
+    }, [searchQuery, allJobs])
+
     const multipleTeams = teams?.nodes?.length > 1
     const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `Team ${teams?.nodes?.[0]?.name}` : ''
 
-    const openRolesMenu = []
-    Object.keys(availableTeams)
-        .sort()
-        .forEach((team) => {
-            openRolesMenu.push({ name: team })
-            availableTeams[team]?.forEach(({ fields: { title, slug } }) => {
-                openRolesMenu.push({
-                    name: title.split(' - ')[0],
-                    url: slug,
-                })
-            })
-        })
-    const menu = [
-        {
-            name: 'Work at PostHog',
-        },
-        {
-            name: 'Careers home',
-            url: '/careers',
-        },
-        {
-            name: 'About us',
-            url: '/about',
-        },
-        {
-            name: 'Our story',
-            url: '/handbook/company/story',
-        },
-        {
-            name: 'Open roles',
-            url: '',
-            children: openRolesMenu,
-        },
-    ]
-
     const [jobTitle] = title.split(' - ')
-
-    const [showTableOfContents, setShowTableOfContents] = useState(false)
-    const [parsedContent, setParsedContent] = useState<any[]>([])
 
     // Parse HTML content to extract details blocks
     useEffect(() => {
@@ -149,30 +196,183 @@ export default function Job({
         { value: 'Apply', url: '#apply', depth: 0 },
     ]
 
+    // Handle search input
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setSearchQuery(value)
+
+        // Apply highlighting after a brief delay
+        setTimeout(() => {
+            if (jobListRef.current && value.trim()) {
+                if (markedRef.current) {
+                    markedRef.current.unmark()
+                }
+                markedRef.current = new Mark(jobListRef.current)
+                markedRef.current.mark(value, {
+                    separateWordSearch: false,
+                    accuracy: 'partially',
+                })
+            } else if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }, 100)
+    }
+
+    // Handle ESC key to clear search
+    const handleSearchKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            setSearchQuery('')
+            if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }
+    }
+
+    // Handle clear search button
+    const handleClearSearch = () => {
+        setSearchQuery('')
+        if (markedRef.current) {
+            markedRef.current.unmark()
+        }
+    }
+
+    // Cleanup highlighting on unmount
+    useEffect(() => {
+        return () => {
+            if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }
+    }, [])
+
+    const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
+
     const LeftSidebarContent = () => (
-        <>
-            <Select
-                groups={[
-                    {
-                        label: null,
-                        items: [
-                            { value: '/careers', label: 'Careers home', icon: null },
-                            { value: '/about', label: 'About us', icon: null },
-                            { value: '/handbook/company/story', label: 'Our story', icon: null },
-                        ],
-                    },
-                ]}
-                placeholder="Select..."
-                ariaLabel="Career navigation"
-                className="w-full mb-2"
-                value={slug}
-                onValueChange={(value) => {
-                    navigate(value)
-                }}
-                dataScheme="primary"
-            />
-            <TreeMenu items={openRolesMenu} />
-        </>
+        <ScrollArea className="h-full">
+            {/* Search input */}
+            <div className="relative mb-4">
+                <input
+                    type="text"
+                    className="w-full p-2 pr-10 border border-input bg-primary rounded text-sm relative z-10"
+                    placeholder="Search roles..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    onKeyDown={handleSearchKeyDown}
+                />
+                {searchQuery && (
+                    <button
+                        onClick={handleClearSearch}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
+                        aria-label="Clear search"
+                    >
+                        <IconX className="w-4 h-4 text-muted" />
+                    </button>
+                )}
+            </div>
+
+            {/* Job list */}
+            <div ref={jobListRef}>
+                {searchQuery.trim() ? (
+                    // Show search results
+                    <>
+                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                            {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
+                        </h3>
+                        {filteredJobs.length > 0 ? (
+                            <ul className="list-none p-0 space-y-px">
+                                {filteredJobs.map((job: any) => {
+                                    const isCurrentJob = job.fields.slug === slug
+                                    return (
+                                        <li key={job.fields.title} className="p-0">
+                                            <OSButton
+                                                size="sm"
+                                                align="left"
+                                                width="full"
+                                                active={isCurrentJob}
+                                                onClick={() => navigate(job.fields.slug)}
+                                            >
+                                                <div className="flex flex-col w-full items-start">
+                                                    <span className="font-semibold text-[14px]">
+                                                        {job.fields.title.split(' - ')[0]}
+                                                    </span>
+                                                    {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                        <span className="text-[12px] text-secondary !font-normal">
+                                                            {(() => {
+                                                                const teamsField = job.parent?.customFields?.find(
+                                                                    (field: { title: string }) =>
+                                                                        field.title === 'Teams'
+                                                                )
+                                                                const teams = teamsField
+                                                                    ? JSON.parse(teamsField.value)
+                                                                    : []
+                                                                return teams.length > 1
+                                                                    ? 'Multiple teams'
+                                                                    : teams.length === 1 && teams[0]
+                                                            })()}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </OSButton>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        ) : (
+                            <p className="text-secondary text-sm px-1.5 py-2 italic">
+                                No roles found matching "{searchQuery}"
+                            </p>
+                        )}
+                    </>
+                ) : (
+                    // Show grouped results
+                    jobGroups.map((group) => (
+                        <div key={group.name} className="mb-2 last:mb-0">
+                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                {group.name}
+                            </h3>
+                            <ul className="list-none p-0 space-y-px">
+                                {group.jobs.map((job: any) => {
+                                    const isCurrentJob = job.fields.slug === slug
+                                    return (
+                                        <li key={job.fields.title} className="p-0">
+                                            <OSButton
+                                                size="sm"
+                                                align="left"
+                                                width="full"
+                                                active={isCurrentJob}
+                                                onClick={() => navigate(job.fields.slug)}
+                                            >
+                                                <div className="flex flex-col w-full items-start">
+                                                    <span className="font-semibold text-[14px]">
+                                                        {job.fields.title.split(' - ')[0]}
+                                                    </span>
+                                                    {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                        <span className="text-[12px] text-secondary !font-normal">
+                                                            {(() => {
+                                                                const teamsField = job.parent?.customFields?.find(
+                                                                    (field: { title: string }) =>
+                                                                        field.title === 'Teams'
+                                                                )
+                                                                const teams = teamsField
+                                                                    ? JSON.parse(teamsField.value)
+                                                                    : []
+                                                                return teams.length > 1
+                                                                    ? 'Multiple teams'
+                                                                    : teams.length === 1 && teams[0]
+                                                            })()}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </OSButton>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    ))
+                )}
+            </div>
+        </ScrollArea>
     )
 
     return (
@@ -238,7 +438,6 @@ export default function Job({
                 <div className="space-y-8">
                     <div>
                         {teamName && <p className="m-0 opacity-60 pb-2">{teamName}</p>}
-                        <h1 className="m-0 text-5xl">{jobTitle}</h1>
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             {departmentName?.toLowerCase() !== 'speculative' && (
                                 <Detail title="Department" value={departmentName} icon={<Department />} />
@@ -277,7 +476,6 @@ export default function Job({
 
                                     {multipleTeams ? (
                                         <Accordion
-                                            skin={false}
                                             items={teams.nodes.map((team: any, index: number) => ({
                                                 value: team.name,
                                                 trigger: <span className="font-semibold">{team.name}</span>,
