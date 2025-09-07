@@ -684,15 +684,18 @@ function ReaderViewContent({
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                     </div>
                                 )}
-                                {tableOfContents && tableOfContents.length > 0 && !hideMobileTableOfContents && (
-                                    <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
-                                        <TableOfContents
-                                            tableOfContents={tableOfContents}
-                                            contentRef={contentRef}
-                                            title="Contents"
-                                        />
-                                    </div>
-                                )}
+                                {tableOfContents &&
+                                    tableOfContents.length > 0 &&
+                                    !hideMobileTableOfContents &&
+                                    !hideRightSidebar && (
+                                        <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
+                                            <TableOfContents
+                                                tableOfContents={tableOfContents}
+                                                contentRef={contentRef}
+                                                title="Contents"
+                                            />
+                                        </div>
+                                    )}
                                 {body.featuredVideo && <iframe src={body.featuredVideo} />}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (

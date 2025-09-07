@@ -24,7 +24,7 @@ export const QuestLog: React.FC<{
     lastSpeechBubble = "You're ready to start building!",
 }) => {
     const SCROLLSPY_OFFSET = -50
-    const MOBILE_SCROLLSPY_OFFSET = 125
+    const MOBILE_SCROLLSPY_OFFSET = 250
 
     // Animation timing constants
     const INITIAL_LOAD_DELAY = 1000
