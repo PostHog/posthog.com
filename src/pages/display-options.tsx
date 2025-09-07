@@ -71,44 +71,7 @@ const cursorOptions: ToggleOption[] = [
     },
 ]
 
-const clickBehaviorOptions: ToggleOption[] = [
-    {
-        label: (
-            <span>
-                Single-click{' '}
-                <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
-                    <p className="max-w-sm my-0">Click once to open items</p>
-                </Tooltip>
-            </span>
-        ),
-        value: 'single',
-    },
-    {
-        label: (
-            <span>
-                Double-click{' '}
-                <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
-                    <p className="max-w-sm my-0">Click once to select, double-click to open</p>
-                </Tooltip>
-            </span>
-        ),
-        value: 'double',
-        default: true,
-    },
-]
-
 const experienceOptions = [
-    {
-        label: (
-            <span>
-                Multi-window{' '}
-                <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                    <p className="max-w-sm my-0">Like a desktop OS, open as many windows as you like.</p>
-                </Tooltip>
-            </span>
-        ),
-        value: 'posthog',
-    },
     {
         label: (
             <span>
@@ -119,6 +82,17 @@ const experienceOptions = [
             </span>
         ),
         value: 'boring',
+    },
+    {
+        label: (
+            <span>
+                Multi-window{' '}
+                <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
+                    <p className="max-w-sm my-0">Like a desktop OS, open as many windows as you like.</p>
+                </Tooltip>
+            </span>
+        ),
+        value: 'posthog',
     },
 ] satisfies (ToggleOption & { value: SiteSettings['experience'] })[]
 
@@ -264,10 +238,6 @@ export default function DisplayOptions() {
         })
     }
 
-    const handleClickBehaviorChange = (value: string) => {
-        updateSiteSettings({ ...siteSettings, clickBehavior: value as SiteSettings['clickBehavior'] })
-    }
-
     return (
         <>
             <SEO title="Display options" description="Personalize your PostHog.com experience" />
@@ -340,14 +310,6 @@ export default function DisplayOptions() {
                             options={experienceOptions}
                             onValueChange={handleExperienceChange}
                             value={siteSettings.experience}
-                        />
-                    </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
-                        <ToggleGroup
-                            title="Click behavior"
-                            options={clickBehaviorOptions}
-                            onValueChange={handleClickBehaviorChange}
-                            value={siteSettings.clickBehavior || 'double'}
                         />
                     </div>
                 </Fieldset>
