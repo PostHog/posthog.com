@@ -287,15 +287,6 @@ export default function Desktop() {
                     {/* Hogzilla */}
                     <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bg_dark_4b00252f27.png')",
-                                backgroundSize: '414px 532px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
@@ -303,7 +294,7 @@ export default function Desktop() {
                             width={2574}
                             height={1256}
                             className="absolute inset-0 flex items-end justify-end"
-                            imgClassName="max-w-none md:max-h-[628px] h-auto w-[700px] md:w-screen"
+                            imgClassName="max-w-none max-h-[628px] h-full z-10"
                         />
                     </div>
 
