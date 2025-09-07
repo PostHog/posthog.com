@@ -294,7 +294,7 @@ export default function Desktop() {
                             width={2574}
                             height={1256}
                             className="absolute inset-0 flex items-end justify-end"
-                            imgClassName="max-w-none max-h-[628px] h-full z-10"
+                            imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
                         />
                     </div>
 
