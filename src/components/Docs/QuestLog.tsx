@@ -254,7 +254,7 @@ export const QuestLog: React.FC<{
         }
     }, [])
 
-    // Update bracket position on quest change
+    // Update bracket position when inner containers change size (not browser window)
     useEffect(() => {
         const updateBracketPosition = () => {
             const selectedElement = questRefs.current[selectedQuest]
@@ -270,9 +270,36 @@ export const QuestLog: React.FC<{
             }
         }
 
+        // Initial positioning
         updateBracketPosition()
+
+        // Use ResizeObserver to watch inner containers that actually change size
+        let resizeObserver: ResizeObserver | null = null
+        if (typeof ResizeObserver !== 'undefined') {
+            const containersToWatch = [
+                document.querySelector('[data-scheme="primary"] [data-radix-scroll-area-viewport]'), // Scroll viewport
+                document.querySelector('.quest-log-container'), // QuestLog container
+            ].filter(Boolean) as Element[] // Remove null elements and type assertion
+
+            if (containersToWatch.length > 0) {
+                resizeObserver = new ResizeObserver(() => {
+                    // Small delay to ensure DOM has settled after resize
+                    requestAnimationFrame(updateBracketPosition)
+                })
+
+                containersToWatch.forEach((container) => {
+                    resizeObserver?.observe(container)
+                })
+            }
+        }
+
+        // Fallback: still listen to window resize for edge cases
         window.addEventListener('resize', updateBracketPosition)
-        return () => window.removeEventListener('resize', updateBracketPosition)
+
+        return () => {
+            window.removeEventListener('resize', updateBracketPosition)
+            resizeObserver?.disconnect()
+        }
     }, [selectedQuest])
 
     // Trigger sprite animation on quest change
