@@ -37,6 +37,7 @@ import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -266,35 +267,57 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                <Accordion
-                    items={[
-                        {
-                            value: 'table-of-contents',
-                            trigger: title,
-                            content: (
-                                <ul className="list-none m-0 p-0 flex flex-col">
-                                    {tableOfContents.map((navItem) => {
-                                        return (
-                                            <li className="relative leading-none m-0" key={navItem.url}>
-                                                <ElementScrollLink
-                                                    id={navItem.url}
-                                                    label={navItem.value}
-                                                    className="hover:underline"
-                                                    element={contentRef}
-                                                    style={{
-                                                        paddingLeft: `${navItem.depth || 0}rem`,
-                                                    }}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            ),
-                        },
-                    ]}
-                    defaultValue="table-of-contents"
-                    skin={true}
-                />
+                <div className="@4xl/app-reader:hidden">
+                    <Accordion
+                        items={[
+                            {
+                                value: 'table-of-contents',
+                                trigger: title,
+                                content: (
+                                    <ul className="list-none m-0 p-0 flex flex-col">
+                                        {tableOfContents.map((navItem) => {
+                                            return (
+                                                <li className="relative leading-none m-0" key={navItem.url}>
+                                                    <ElementScrollLink
+                                                        id={navItem.url}
+                                                        label={navItem.value}
+                                                        className="hover:underline"
+                                                        element={contentRef}
+                                                        style={{
+                                                            paddingLeft: `${navItem.depth || 0}rem`,
+                                                        }}
+                                                    />
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                ),
+                            },
+                        ]}
+                        defaultValue="table-of-contents"
+                        skin={true}
+                    />
+                </div>
+                <div className="hidden @4xl/app-reader:block">
+                    {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
+                    <ul className="list-none m-0 p-0 flex flex-col">
+                        {tableOfContents.map((navItem) => {
+                            return (
+                                <li className="relative leading-none m-0" key={navItem.url}>
+                                    <ElementScrollLink
+                                        id={navItem.url}
+                                        label={navItem.value}
+                                        className=""
+                                        element={contentRef}
+                                        style={{
+                                            paddingLeft: `${navItem.depth || 0}rem`,
+                                        }}
+                                    />
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
             </div>
         </ScrollSpyProvider>
     )
