@@ -11,7 +11,8 @@ import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import initialMenu from '../navs'
 import { useToast } from './Toast'
-import { IconDay, IconLaptop, IconNight } from "@posthog/icons"
+import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
+import { themeOptions } from '../hooks/useTheme'
 
 declare global {
     interface Window {
@@ -219,26 +220,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
-    handleSnapToSide: () => { },
+    openSearch: () => {},
+    handleSnapToSide: () => {},
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => { },
+    expandWindow: () => {},
     openSignIn: () => null,
-    openRegister: () => { },
-    openForgotPassword: () => { },
+    openRegister: () => {},
+    openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -249,22 +250,22 @@ export const Context = createContext<AppContextType>({
         screensaverDisabled: false,
         clickBehavior: 'double',
     },
-    updateSiteSettings: () => { },
-    openNewChat: () => { },
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => { },
+    setIsNotificationsPanelOpen: () => {},
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => { },
+    setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => { },
-    animateClosingAllWindows: () => { },
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => { },
-    setClosingAllWindowsAnimation: () => { },
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => { },
+    setScreensaverPreviewActive: () => {},
 })
 
 export interface AppSetting {
@@ -807,13 +808,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-    | 'keyboard-garden'
-    | 'hogzilla'
-    | 'startup-monopoly'
-    | 'office-party'
-    | '2001-bliss'
-    | 'parade'
-    | 'coding-at-night'
+        | 'keyboard-garden'
+        | 'hogzilla'
+        | 'startup-monopoly'
+        | 'office-party'
+        | '2001-bliss'
+        | 'parade'
+        | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
 }
@@ -960,12 +961,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                              }
                             : w
                     )
                 )
@@ -1057,9 +1058,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: isSSR ? 0 : window.innerWidth * 0.9,
-                    height: isSSR ? 0 : window.innerHeight * 0.9,
-                })
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1114,9 +1115,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1380,7 +1381,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 openNewChat({ path: 'ask-max' })
             }
 
-            // Theme toggle with \ key
+            // Theme toggle with \ key (without Shift)
             if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
                 e.preventDefault()
                 e.stopPropagation()
@@ -1430,6 +1431,29 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 }
             }
 
+            // Wallpaper cycle with | key (which is Shift + \ on most keyboards)
+            if (e.key === '|') {
+                e.preventDefault()
+                e.stopPropagation()
+
+                // Get current wallpaper index
+                const currentIndex = themeOptions.findIndex((theme) => theme.value === siteSettings.wallpaper)
+                // Cycle to next wallpaper (wrap around to first if at end)
+                const nextIndex = (currentIndex + 1) % themeOptions.length
+                const nextWallpaper = themeOptions[nextIndex]
+
+                updateSiteSettings({
+                    ...siteSettings,
+                    wallpaper: nextWallpaper.value as SiteSettings['wallpaper'],
+                })
+
+                // Add toast notification
+                addToast({
+                    description: `Switched to ${nextWallpaper.label} wallpaper`,
+                    duration: 2000,
+                })
+            }
+
             // Window-specific shortcuts
             if (e.shiftKey && e.key === 'ArrowLeft') {
                 handleSnapToSide('left')
@@ -1455,7 +1479,17 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
-    }, [handleSnapToSide, expandWindow, focusedWindow, closeWindow, openSearch, openNewChat, siteSettings, updateSiteSettings, addToast])
+    }, [
+        handleSnapToSide,
+        expandWindow,
+        focusedWindow,
+        closeWindow,
+        openSearch,
+        openNewChat,
+        siteSettings,
+        updateSiteSettings,
+        addToast,
+    ])
 
     useEffect(() => {
         const savedSettings = localStorage.getItem('siteSettings')
@@ -1477,13 +1511,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
-
-            // Auto-switch to dark mode for "coding-at-night" wallpaper
-            if (siteSettings.wallpaper === 'coding-at-night') {
-                if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
-                    ; (window as any).__setPreferredTheme('dark')
-                }
-            }
         }
     }, [siteSettings])
 
@@ -1545,7 +1572,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             )
         }
     }, [location.pathname])
-
 
     return (
         <Context.Provider

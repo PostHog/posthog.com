@@ -336,7 +336,7 @@ export default function Desktop() {
                             alt=""
                             width={997}
                             height={858}
-                            className="absolute bottom-24 left-24 w-[498.5px] h-[429px]"
+                            className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
                         />
                     </div>
 
@@ -381,14 +381,21 @@ export default function Desktop() {
                     </div>
 
                     {/* 2001 bliss */}
-                    <div className="hidden select-none wallpaper-2001-bliss:block absolute inset-0">
+                    <div
+                        className="hidden select-none wallpaper-2001-bliss:block absolute inset-0 bg-repeat bg-center"
+                        style={{
+                            backgroundImage:
+                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')",
+                            backgroundSize: '1180px 738px',
+                        }}
+                    >
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
                             alt=""
                             width={1180}
                             height={738}
-                            imgClassName="absolute inset-0 w-full h-full object-cover object-center"
+                            imgClassName="hidden"
                         />
                         <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
                     </div>
@@ -401,7 +408,7 @@ export default function Desktop() {
                             alt=""
                             width={1565}
                             height={744}
-                            className="max-w-full"
+                            className="absolute inset-0"
                             imgClassName="object-contain h-full max-w-full dark:hidden max-h-[744px]"
                         />
                         <CloudinaryImage
@@ -410,7 +417,7 @@ export default function Desktop() {
                             alt=""
                             width={1565}
                             height={744}
-                            className="max-w-full"
+                            className="absolute inset-0"
                             imgClassName="object-contain h-full max-w-full hidden dark:block max-h-[744px]"
                         />
                     </div>
@@ -421,9 +428,10 @@ export default function Desktop() {
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
                             alt=""
-                            width={800}
-                            height={600}
-                            className="absolute bottom-0 left-1/2 -translate-x-1/2 object-contain h-full max-w-none"
+                            width={2360}
+                            height={696}
+                            className="absolute inset-0 flex justify-center items-end"
+                            imgClassName="max-w-none w-96 md:w-full"
                         />
                     </div>
 
