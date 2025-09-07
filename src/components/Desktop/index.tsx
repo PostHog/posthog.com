@@ -13,7 +13,7 @@ import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Product {
     name: string
@@ -91,6 +91,12 @@ export const apps: AppItem[] = [
         label: 'Fun stuff',
         Icon: <AppIcon name="games" />,
         url: '/sparks-joy',
+        source: 'desktop',
+    },
+    {
+        label: 'Work here',
+        Icon: <AppIcon name="typewriter" />,
+        url: '/careers',
         source: 'desktop',
     },
     {
