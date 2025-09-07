@@ -6,16 +6,15 @@ import {
     IconPullRequest,
     IconTextWidth,
     IconGear,
-    IconInfo,
     IconRefresh,
     IconClockRewind,
     IconTextWidthFixed,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { Accordion } from '../RadixUI/Accordion'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
@@ -26,7 +25,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
 import Slider from 'components/RadixUI/Slider'
-import Tooltip from 'components/RadixUI/Tooltip'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -38,7 +36,6 @@ import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { TextureTan } from 'components/Textures'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 dayjs.extend(relativeTime)
 
@@ -254,20 +251,6 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
     )
 }
 
-const textWidthOptions: ToggleOption[] = [
-    {
-        label: 'Fixed width',
-        value: 'fixed',
-        icon: <IconTextWidthFixed className="size-5 inline-block" />,
-        default: true,
-    },
-    {
-        label: 'Full width',
-        value: 'full',
-        icon: <IconTextWidth className="size-5" />,
-    },
-]
-
 interface TableOfContentsProps {
     tableOfContents: any[]
     contentRef: React.RefObject<HTMLDivElement>
@@ -283,24 +266,35 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
-                <ul className="list-none m-0 p-0 flex flex-col">
-                    {tableOfContents.map((navItem) => {
-                        return (
-                            <li className="relative leading-none m-0" key={navItem.url}>
-                                <ElementScrollLink
-                                    id={navItem.url}
-                                    label={navItem.value}
-                                    className=""
-                                    element={contentRef}
-                                    style={{
-                                        paddingLeft: `${navItem.depth || 0}rem`,
-                                    }}
-                                />
-                            </li>
-                        )
-                    })}
-                </ul>
+                <Accordion
+                    items={[
+                        {
+                            value: 'table-of-contents',
+                            trigger: title,
+                            content: (
+                                <ul className="list-none m-0 p-0 flex flex-col">
+                                    {tableOfContents.map((navItem) => {
+                                        return (
+                                            <li className="relative leading-none m-0" key={navItem.url}>
+                                                <ElementScrollLink
+                                                    id={navItem.url}
+                                                    label={navItem.value}
+                                                    className="hover:underline"
+                                                    element={contentRef}
+                                                    style={{
+                                                        paddingLeft: `${navItem.depth || 0}rem`,
+                                                    }}
+                                                />
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            ),
+                        },
+                    ]}
+                    defaultValue="table-of-contents"
+                    skin={true}
+                />
             </div>
         </ScrollSpyProvider>
     )
@@ -643,10 +637,7 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {tableOfContents && tableOfContents.length > 0 && (
-                                    <div
-                                        data-scheme="secondary"
-                                        className="@4xl/app-reader:hidden p-4 mb-4 bg-primary rounded border border-primary"
-                                    >
+                                    <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
                                         <TableOfContents
                                             tableOfContents={tableOfContents}
                                             contentRef={contentRef}
