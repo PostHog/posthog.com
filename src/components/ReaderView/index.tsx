@@ -407,8 +407,8 @@ const Menu = (props: { parent: MenuItem }) => {
                         (menuItem) => menuItem.url === value || menuItem.name === value
                     )
                     setActiveInternalMenu(selectedMenu)
-                    if (!selectedMenu?.children && selectedMenu?.url) {
-                        navigate(selectedMenu.url)
+                    if (selectedMenu?.url) {
+                        return navigate(selectedMenu.url)
                     }
                 }}
                 dataScheme="primary"
