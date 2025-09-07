@@ -492,7 +492,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                         : 'border rounded'
                                                 }`
                                       }`
-                            } overflow-hidden`}
+                            } ${chrome ? 'overflow-hidden' : ''}`}
                             style={{
                                 zIndex: item.zIndex,
                             }}
@@ -758,8 +758,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             )}
                             <div
                                 ref={contentRef}
-                                className={`size-full flex-grow overflow-hidden ${
-                                    chrome ? 'bg-light dark:bg-dark' : ''
+                                className={`size-full flex-grow ${
+                                    chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
                                 }`}
                             >
                                 {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
