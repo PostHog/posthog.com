@@ -139,17 +139,17 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
     const trigger = (
         <button
             type="button"
-            className="w-full bg-white dark:bg-dark border border-primary rounded px-2 py-2 text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary flex items-center justify-between hover:bg-accent"
+            className="w-full bg-white dark:bg-dark border border-primary rounded px-2 py-2 text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary flex gap-2 items-center justify-between hover:bg-accent"
         >
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col items-center gap-2">
+                <span className="text-primary">{currentOption?.label || 'Select wallpaper'}</span>
                 {currentThumb && (
                     <img
                         src={currentThumb}
                         alt={currentOption?.label || ''}
-                        className="w-[150px] h-[94px] object-contain border border-primary rounded"
+                        className="object-contain border border-primary rounded"
                     />
                 )}
-                <span className="text-primary">{currentOption?.label || 'Select wallpaper'}</span>
             </div>
             <svg className="w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

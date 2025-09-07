@@ -285,7 +285,7 @@ export default function Desktop() {
                 <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
-                    <div className="hidden select-none wallpaper-hogzilla:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
                         <div
                             className="absolute inset-0 opacity-0 dark:opacity-100"
@@ -302,7 +302,8 @@ export default function Desktop() {
                             alt=""
                             width={2574}
                             height={1256}
-                            className="absolute right-0 bottom-0 object-contain w-full h-auto"
+                            className="absolute inset-0 flex items-end justify-end"
+                            imgClassName="max-w-none md:max-h-[628px] h-auto w-[700px] md:w-screen"
                         />
                     </div>
 
@@ -402,15 +403,15 @@ export default function Desktop() {
                     </div>
 
                     {/* Parade */}
-                    <div className="hidden select-none wallpaper-parade:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-parade:flex items-end absolute inset-0">
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
                             alt=""
                             width={1565}
                             height={744}
-                            className="absolute inset-0"
-                            imgClassName="object-contain h-full max-w-none dark:hidden"
+                            className="max-w-full"
+                            imgClassName="object-contain h-full max-w-full dark:hidden max-h-[744px]"
                         />
                         <CloudinaryImage
                             loading="lazy"
@@ -418,8 +419,8 @@ export default function Desktop() {
                             alt=""
                             width={1565}
                             height={744}
-                            className="absolute inset-0"
-                            imgClassName="object-contain h-full max-w-none hidden dark:block"
+                            className="max-w-full"
+                            imgClassName="object-contain h-full max-w-full hidden dark:block max-h-[744px]"
                         />
                     </div>
 
