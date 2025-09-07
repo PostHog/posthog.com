@@ -23,7 +23,7 @@ export const QuestLog: React.FC<{
     firstSpeechBubble = "We're going on an adventure!",
     lastSpeechBubble = "You're ready to start building!",
 }) => {
-    const SCROLLSPY_OFFSET = 0
+    const SCROLLSPY_OFFSET = -50
     const MOBILE_SCROLLSPY_OFFSET = 125
 
     // Animation timing constants
@@ -81,7 +81,7 @@ export const QuestLog: React.FC<{
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const [headerHeight, setHeaderHeight] = useState(0)
+    // Removed unused headerHeight state
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
@@ -298,22 +298,6 @@ export const QuestLog: React.FC<{
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [dropdownOpen])
 
-    // Handle header height for sticky positioning
-    useEffect(() => {
-        const handleResize = () => {
-            // Calculate header height
-            const headerElement = document.getElementById('header')
-            if (headerElement) {
-                const headerRect = headerElement?.getBoundingClientRect()
-                setHeaderHeight(43)
-            }
-        }
-
-        handleResize() // Set initial value
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
-
     // Handle initial scroll after images load
     useEffect(() => {
         if (typeof window === 'undefined') return
@@ -393,14 +377,7 @@ export const QuestLog: React.FC<{
                     </div>
 
                     {/* Quest List - Sticky Container */}
-                    <div
-                        className="quest-sidebar z-30 bg-primary"
-                        style={
-                            {
-                                /* Let CSS handle positioning */
-                            }
-                        }
-                    >
+                    <div className="quest-sidebar z-30 bg-primary">
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-3 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
@@ -511,7 +488,13 @@ export const QuestLog: React.FC<{
                                 offset={SCROLLSPY_OFFSET}
                                 className="space-y-4"
                                 style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
-                                rootEl="[data-radix-scroll-area-viewport]"
+                                // Try different rootEl selectors in this order of priority:
+                                rootEl="[data-scheme='primary'] [data-radix-scroll-area-viewport]"
+                                // Alternative 1: rootEl="[data-radix-scroll-area-viewport]"
+                                // Alternative 2: rootEl=".size-full"
+                                // Alternative 3: rootEl="article"
+                                // Alternative 4: rootEl=".reader-content-container"
+                                // Alternative 5: Remove rootEl completely to use window scroll
                                 onUpdate={handleScrollspyUpdate}
                             >
                                 {questItems.map((child, index) => (
@@ -541,7 +524,8 @@ export const QuestLog: React.FC<{
                                 currentClassName="active"
                                 offset={MOBILE_SCROLLSPY_OFFSET}
                                 componentTag="div"
-                                rootEl="[data-radix-scroll-area-viewport]"
+                                // Use same selector as desktop version (try alternatives if this doesn't work)
+                                rootEl="[data-scheme='primary'] [data-radix-scroll-area-viewport]"
                                 onUpdate={handleScrollspyUpdate}
                             >
                                 <MobileQuestLogItem
