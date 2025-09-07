@@ -1,13 +1,6 @@
 import React from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import ProductSidebar from 'components/Explorer/ProductSidebar'
-import Product from 'components/Explorer/Product'
 
 export default function HedgehogModeGame(): JSX.Element {
     return (
@@ -27,10 +20,7 @@ export default function HedgehogModeGame(): JSX.Element {
                 // changelogCategory="product-analytics"
                 fullScreen
             >
-                <iframe
-                    src="https://hedgehog-mode-git-feat-parity-post-hog.vercel.app/"
-                    className="w-full h-full border-0"
-                />
+                <iframe src="https://hedgehog-mode-playground.vercel.app/" className="w-full h-full border-0" />
             </Explorer>
         </>
     )

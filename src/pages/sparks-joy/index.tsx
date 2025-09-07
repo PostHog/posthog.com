@@ -85,6 +85,18 @@ export default function SparkJoy(): JSX.Element {
                             <p className="text-sm font-medium">Hedgehog mode</p>
                         </Link>
                         <Link
+                            to="/sparks-joy/hog-wars"
+                            state={{ newWindow: true }}
+                            className={`${
+                                isListLayout
+                                    ? 'flex flex-row items-center space-x-3 w-full text-left'
+                                    : 'flex flex-col justify-center items-center space-y-1 w-28 text-center'
+                            } text-primary hover:text-primary`}
+                        >
+                            <AppIcon name="hog_wars" className="!size-10 -mt-2" />
+                            <p className="text-sm font-medium">HogWars</p>
+                        </Link>
+                        <Link
                             to="/sparks-joy/dictator-or-tech-bro"
                             state={{ newWindow: true }}
                             className={`${
