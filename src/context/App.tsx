@@ -267,7 +267,8 @@ export interface AppSetting {
         autoHeight?: boolean
     }
     position?: {
-        center?: boolean
+        center?: boolean // Centers window both horizontally and vertically
+        topCenter?: boolean // Centers horizontally, anchors from top (100px desktop only, 0px mobile)
         getPositionDefaults?: (
             size: { width: number; height: number },
             windows: AppWindow[],
@@ -646,14 +647,14 @@ const appSettings: AppSettings = {
                 height: 72,
             },
             max: {
-                width: 550,
+                width: 800,
                 height: 72,
             },
             fixed: true,
             autoHeight: true,
         },
         position: {
-            center: true,
+            topCenter: true,
         },
     },
     '/reset-password': {
@@ -997,6 +998,17 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     function getPositionDefaults(key: string, size: { width: number; height: number }, windows: AppWindow[]) {
         if (appSettings[key]?.position?.center) {
             return getDesktopCenterPosition(size)
+        }
+
+        if (appSettings[key]?.position?.topCenter) {
+            // Check if desktop (screen width >= 768px)
+            const isDesktop = !isSSR && window.innerWidth >= 768
+            const topOffset = isDesktop ? 100 : 0
+
+            return {
+                x: isSSR ? 0 : window.innerWidth / 2 - size.width / 2,
+                y: topOffset,
+            }
         }
 
         if (key?.startsWith('ask-max')) {
