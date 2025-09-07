@@ -411,15 +411,14 @@ export default function Desktop() {
                     </div>
 
                     {/* Parade */}
-                    <div className="hidden select-none wallpaper-parade:flex items-end absolute inset-0">
+                    <div className="hidden select-none wallpaper-parade:flex items-end fixed inset-0">
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
                             alt=""
                             width={1565}
                             height={744}
-                            className="absolute inset-0"
-                            imgClassName="object-contain h-full max-w-full dark:hidden max-h-[744px]"
+                            imgClassName="dark:hidden w-full"
                         />
                         <CloudinaryImage
                             loading="lazy"
@@ -427,21 +426,19 @@ export default function Desktop() {
                             alt=""
                             width={1565}
                             height={744}
-                            className="absolute inset-0"
-                            imgClassName="object-contain h-full max-w-full hidden dark:block max-h-[744px]"
+                            imgClassName="hidden dark:block"
                         />
                     </div>
 
                     {/* Coding at night */}
-                    <div className="hidden select-none wallpaper-coding-at-night:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-coding-at-night:flex items-end fixed inset-0">
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
                             alt=""
                             width={2360}
                             height={696}
-                            className="absolute inset-0 flex justify-center items-end"
-                            imgClassName="max-w-none w-96 md:w-full"
+                            className="w-full"
                         />
                     </div>
 
