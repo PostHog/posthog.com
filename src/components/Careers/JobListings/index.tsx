@@ -783,9 +783,15 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                         )}
                                     </>
                                 )}
-                                <CallToAction to={selectedJob.fields.slug} size="sm">
+                                <OSButton
+                                    asLink
+                                    to={selectedJob.fields.slug}
+                                    size="md"
+                                    variant="primary"
+                                    state={{ newWindow: true }}
+                                >
                                     Read more
-                                </CallToAction>
+                                </OSButton>
                             </div>
                         </div>
                         {teams.length > 0 && (

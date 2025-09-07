@@ -68,6 +68,7 @@ interface ReaderViewProps {
     showSurvey?: boolean
     parent?: MenuItem
     markdownContent?: string
+    showQuestions?: boolean
 }
 
 interface BackgroundImageOption {
@@ -345,6 +346,7 @@ export default function ReaderView({
     showSurvey = false,
     parent,
     markdownContent,
+    showQuestions = true,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -369,6 +371,7 @@ export default function ReaderView({
                 showSurvey={showSurvey}
                 parent={parent}
                 markdownContent={markdownContent}
+                showQuestions={showQuestions}
             >
                 {children}
             </ReaderViewContent>
@@ -498,6 +501,7 @@ function ReaderViewContent({
     showSurvey = false,
     parent,
     markdownContent,
+    showQuestions = true,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -680,12 +684,14 @@ function ReaderViewContent({
                                         children
                                     )}
                                 </div>
-                                <div className="mt-8">
-                                    <h3 id="squeak-questions" className="mb-4">
-                                        Community questions
-                                    </h3>
-                                    <Questions slug={appWindow?.path} />
-                                </div>
+                                {showQuestions && (
+                                    <div className="mt-8">
+                                        <h3 id="squeak-questions" className="mb-4">
+                                            Community questions
+                                        </h3>
+                                        <Questions slug={appWindow?.path} />
+                                    </div>
+                                )}
                                 {showSurvey && (
                                     <div className="mt-8">
                                         <DocsPageSurvey filePath={filePath} />

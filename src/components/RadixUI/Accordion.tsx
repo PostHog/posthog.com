@@ -88,33 +88,51 @@ interface AccordionRootProps
         trigger: React.ReactNode
         content: React.ReactNode
     }[]
+    type?: 'single' | 'multiple'
     className?: string
-    defaultValue?: string
-    onValueChange?: (value: string) => void
+    defaultValue?: string | string[]
+    onValueChange?: ((value: string) => void) | ((value: string[]) => void)
     contentClassName?: string
     triggerClassName?: string
     skin?: boolean
     dataScheme?: string
+    defaultOpenAll?: boolean // New prop to open all items by default when type is 'multiple'
 }
 
 export const Accordion = ({
     items,
     className,
+    type = 'single',
     defaultValue,
     onValueChange,
     contentClassName,
     triggerClassName,
     skin = true,
     dataScheme = 'primary',
+    defaultOpenAll = false,
     ...props
 }: AccordionRootProps) => {
+    // Calculate default value based on type and defaultOpenAll
+    const calculatedDefaultValue = React.useMemo(() => {
+        if (defaultValue !== undefined) {
+            return defaultValue
+        }
+
+        if (type === 'multiple' && defaultOpenAll) {
+            // Open all items by default for multiple type
+            return items.map((item, index) => item.value || `item-${index}`)
+        }
+
+        return undefined
+    }, [defaultValue, type, defaultOpenAll, items])
+
     return (
         <RadixAccordion.Root
             className={`${skin ? 'rounded border border-primary' : ''} ${className}`}
-            type="single"
+            type={type as any}
             collapsible
-            defaultValue={defaultValue}
-            onValueChange={onValueChange}
+            defaultValue={calculatedDefaultValue as any}
+            onValueChange={onValueChange as any}
             data-scheme={dataScheme}
             {...props}
         >
