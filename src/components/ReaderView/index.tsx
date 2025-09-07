@@ -652,7 +652,7 @@ function ReaderViewContent({
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                     </div>
                                 )}
-                                {tableOfContents && tableOfContents.length > 0 && (
+                                {tableOfContents && tableOfContents.length > 0 && !hideRightSidebar && (
                                     <div
                                         data-scheme="secondary"
                                         className="@4xl/app-reader:hidden p-4 mb-4 bg-primary rounded border border-primary"
