@@ -419,7 +419,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                    @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
                         initial={{
                             width: '250px',
-                            x: -250, // Start off-screen on mobile
+                            x: isNavVisible ? 0 : -250, // Start off-screen on mobile
                         }}
                         animate={{
                             width: '250px',
