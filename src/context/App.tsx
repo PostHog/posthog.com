@@ -501,6 +501,7 @@ const appSettings: AppSettings = {
                 height: 550,
             },
             fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
