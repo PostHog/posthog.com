@@ -10,8 +10,8 @@ import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import initialMenu from '../navs'
-import Toast from 'components/RadixUI/Toast'
-import { createPortal } from 'react-dom'
+import { useToast } from './Toast'
+import { IconDay, IconLaptop, IconNight } from "@posthog/icons"
 
 declare global {
     interface Window {
@@ -863,7 +863,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
-    const [themeToast, setThemeToast] = useState<{ message: string; key: number } | null>(null)
+    const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
@@ -1387,18 +1387,32 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
                 // Cycle through system -> light -> dark -> system
                 let nextMode: 'system' | 'light' | 'dark'
-                let toastMessage: string
+                let toastMessage: React.ReactNode
 
                 if (siteSettings.colorMode === 'system') {
                     nextMode = 'light'
-                    toastMessage = '☀️ Switched to light mode'
+                    toastMessage = (
+                        <>
+                            <IconDay className="size-5 inline-block mr-1" />
+                            Switched to light mode
+                        </>
+                    )
                 } else if (siteSettings.colorMode === 'light') {
                     nextMode = 'dark'
-                    toastMessage = '🌙 Switched to dark mode'
+                    toastMessage = (
+                        <>
+                            <IconNight className="size-5 inline-block mr-1" />
+                            Switched to dark mode
+                        </>
+                    )
                 } else {
                     nextMode = 'system'
-                    const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light'
-                    toastMessage = `💻 Switched to system mode (currently ${currentTheme})`
+                    toastMessage = (
+                        <>
+                            <IconLaptop className="size-5 inline-block mr-1" />
+                            Switched to system mode
+                        </>
+                    )
                 }
 
                 if (typeof window !== 'undefined' && window.__setPreferredTheme) {
@@ -1408,8 +1422,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                         theme: newTheme as SiteSettings['theme'],
                         colorMode: nextMode,
                     })
-                    // Force a new toast by adding a timestamp to make it unique
-                    setThemeToast({ message: toastMessage + ' ', key: Date.now() })
+                    // Add toast notification
+                    addToast({
+                        description: toastMessage,
+                        duration: 2000,
+                    })
                 }
             }
 
@@ -1438,7 +1455,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
-    }, [handleSnapToSide, expandWindow, focusedWindow, closeWindow, openSearch, openNewChat, siteSettings, updateSiteSettings, setThemeToast])
+    }, [handleSnapToSide, expandWindow, focusedWindow, closeWindow, openSearch, openNewChat, siteSettings, updateSiteSettings, addToast])
 
     useEffect(() => {
         const savedSettings = localStorage.getItem('siteSettings')
@@ -1529,14 +1546,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [location.pathname])
 
-    useEffect(() => {
-        if (themeToast) {
-            const timer = setTimeout(() => {
-                setThemeToast(null)
-            }, 2500)
-            return () => clearTimeout(timer)
-        }
-    }, [themeToast])
 
     return (
         <Context.Provider
@@ -1582,16 +1591,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }}
         >
             {children}
-            {themeToast && typeof document !== 'undefined' &&
-                createPortal(
-                    <Toast
-                        key={themeToast.key}
-                        description={themeToast.message}
-                        duration={2000}
-                    />,
-                    document.body
-                )
-            }
         </Context.Provider>
     )
 }
