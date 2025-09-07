@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect, useMemo, useState, useCall
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -11,6 +10,15 @@ import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import initialMenu from '../navs'
+import Toast from 'components/RadixUI/Toast'
+import { createPortal } from 'react-dom'
+
+declare global {
+    interface Window {
+        __setPreferredTheme: (theme: string) => string
+        __onThemeChange: (theme: string) => void
+    }
+}
 
 export interface MenuItem {
     name: string
@@ -855,6 +863,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
+    const [themeToast, setThemeToast] = useState<{ message: string; key: number } | null>(null)
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
@@ -1350,14 +1359,61 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement
+
             if (
-                e.target.tagName === 'INPUT' ||
-                e.target.tagName === 'TEXTAREA' ||
-                e.target.shadowRoot ||
-                (e.target instanceof HTMLElement && e.target.closest('.mdxeditor'))
+                target.tagName === 'INPUT' ||
+                target.tagName === 'TEXTAREA' ||
+                target.shadowRoot ||
+                (target instanceof HTMLElement && target.closest('.mdxeditor'))
             ) {
                 return
             }
+
+            // Global shortcuts
+            if (e.key === '/' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                openSearch()
+            }
+            if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+                e.preventDefault()
+                openNewChat({ path: 'ask-max' })
+            }
+
+            // Theme toggle with \ key
+            if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                e.stopPropagation()
+
+                // Cycle through system -> light -> dark -> system
+                let nextMode: 'system' | 'light' | 'dark'
+                let toastMessage: string
+
+                if (siteSettings.colorMode === 'system') {
+                    nextMode = 'light'
+                    toastMessage = '☀️ Switched to light mode'
+                } else if (siteSettings.colorMode === 'light') {
+                    nextMode = 'dark'
+                    toastMessage = '🌙 Switched to dark mode'
+                } else {
+                    nextMode = 'system'
+                    const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light'
+                    toastMessage = `💻 Switched to system mode (currently ${currentTheme})`
+                }
+
+                if (typeof window !== 'undefined' && window.__setPreferredTheme) {
+                    const newTheme = window.__setPreferredTheme(nextMode)
+                    updateSiteSettings({
+                        ...siteSettings,
+                        theme: newTheme as SiteSettings['theme'],
+                        colorMode: nextMode,
+                    })
+                    // Force a new toast by adding a timestamp to make it unique
+                    setThemeToast({ message: toastMessage + ' ', key: Date.now() })
+                }
+            }
+
+            // Window-specific shortcuts
             if (e.shiftKey && e.key === 'ArrowLeft') {
                 handleSnapToSide('left')
             }
@@ -1382,7 +1438,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
-    }, [handleSnapToSide, expandWindow, focusedWindow, closeWindow])
+    }, [handleSnapToSide, expandWindow, focusedWindow, closeWindow, openSearch, openNewChat, siteSettings, updateSiteSettings, setThemeToast])
 
     useEffect(() => {
         const savedSettings = localStorage.getItem('siteSettings')
@@ -1473,6 +1529,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [location.pathname])
 
+    useEffect(() => {
+        if (themeToast) {
+            const timer = setTimeout(() => {
+                setThemeToast(null)
+            }, 2500)
+            return () => clearTimeout(timer)
+        }
+    }, [themeToast])
+
     return (
         <Context.Provider
             value={{
@@ -1517,6 +1582,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }}
         >
             {children}
+            {themeToast && typeof document !== 'undefined' &&
+                createPortal(
+                    <Toast
+                        key={themeToast.key}
+                        description={themeToast.message}
+                        duration={2000}
+                    />,
+                    document.body
+                )
+            }
         </Context.Provider>
     )
 }

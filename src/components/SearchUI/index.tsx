@@ -27,9 +27,8 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
                         onClick={() => {
                             refine(item.value)
                         }}
-                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${
-                            item.isRefined ? isRefinedClassName : ''
-                        }`}
+                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${item.isRefined ? isRefinedClassName : ''
+                            }`}
                     >
                         <span className="text-sm">{capitalizeFirstLetter(item.label)}</span>{' '}
                         <span className="text-xs opacity-60 font-semibold">({item.count})</span>
@@ -111,7 +110,7 @@ const Search = ({
                         <Combobox.Options
                             static
                             hold
-                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-60 h-full bg-white"
+                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-white"
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>
@@ -124,11 +123,11 @@ const Search = ({
                                                 className={`cursor-pointer ${active ? 'bg-primary' : ''}`}
                                             >
                                                 <div className="py-2 px-4 block">
-                                                    <h5 className="text-base m-0 font-bold line-clamp-1">
+                                                    <p className="text-[13px] text-red font-medium m-0">/{hit.slug}</p>
+                                                    <h5 className="text-[15px] m-0 font-bold line-clamp-1">
                                                         {hit.title}
                                                     </h5>
-                                                    <p className="text-sm m-0 my-1">{hit.excerpt}</p>
-                                                    <p className="text-sm opacity-60 font-semibold m-0">/{hit.slug}</p>
+                                                    <p className="text-sm text-secondary m-0 my-1">{hit.excerpt}</p>
                                                 </div>
                                             </li>
                                         )}
