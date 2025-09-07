@@ -26,8 +26,9 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
                         onClick={() => {
                             refine(item.value)
                         }}
-                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${item.isRefined ? isRefinedClassName : ''
-                            }`}
+                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${
+                            item.isRefined ? isRefinedClassName : ''
+                        }`}
                     >
                         <span className="text-sm">{capitalizeFirstLetter(item.label)}</span>{' '}
                         <span className="text-xs opacity-60 font-semibold">({item.count})</span>
@@ -39,14 +40,14 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
 }
 
 const Search = ({
-    initialFilter,
+    initialFilter = '',
     className = '',
     onChange,
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
     autoFocus = true,
 }: {
-    initialFilter?: string
+    initialFilter: string
     className?: string
     onChange?: () => void
     isRefinedClassName?: string
@@ -84,14 +85,15 @@ const Search = ({
                         <Combobox.Input
                             className="w-full !border-none !text-lg !px-4 !py-2 "
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder={`Search ${initialFilter && 'the ' + initialFilter}...`}
+                            placeholder={`Search${initialFilter && ' the ' + initialFilter}...`}
                             autoFocus={autoFocus}
                             value={query}
                         />
                         {!hideFilters && (
                             <button
-                                className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${showFilters ? 'opacity-100' : 'opacity-70'
-                                    }`}
+                                className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${
+                                    showFilters ? 'opacity-100' : 'opacity-70'
+                                }`}
                                 onClick={(e) => {
                                     e.stopPropagation()
                                     setShowFilters(!showFilters)
@@ -175,7 +177,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
             <div ref={ref}>
                 <Search
                     initialFilter={initialFilter}
-                    className="p-3 rounded-md bg-white max-w-screen-md border border-primary"
+                    className="cursor-grab active:cursor-grabbing p-3 rounded-md bg-white/80 backdrop-blur shadow-2xl max-w-screen-md border border-primary"
                     onChange={onChange}
                 />
             </div>
@@ -184,7 +186,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
 }
 
 export const SearchUI = ({
-    initialFilter,
+    initialFilter = '',
     className = '',
     isRefinedClassName = 'bg-primary',
     hideFilters = false,

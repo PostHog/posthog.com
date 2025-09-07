@@ -104,7 +104,7 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
     )
 }
 
-export default function AppWindow({ item }: { item: AppWindowType }) {
+export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
     const {
         minimizeWindow,
         bringToFront,
@@ -758,7 +758,9 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             )}
                             <div
                                 ref={contentRef}
-                                className={`size-full flex-grow overflow-hidden bg-light dark:bg-dark`}
+                                className={`size-full flex-grow overflow-hidden ${
+                                    chrome ? 'bg-light dark:bg-dark' : ''
+                                }`}
                             >
                                 {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                     <Router
