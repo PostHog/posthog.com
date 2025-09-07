@@ -377,7 +377,7 @@ export default function Presentation({
                                         onDrag={handleVerticalDrag}
                                     />
                                     <ScrollArea className="h-full">
-                                        <div className="p-4 text-sm prose prose-sm">
+                                        <div className="p-4 text-sm prose dark:prose-invert prose-sm">
                                             {currentSlideNotes ? (
                                                 typeof currentSlideNotes === 'string' ? (
                                                     <div dangerouslySetInnerHTML={{ __html: currentSlideNotes }} />
