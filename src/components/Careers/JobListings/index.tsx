@@ -502,7 +502,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 style={{ height: leftColHeight }}
                 className="w-full @2xl:w-1/3 @3xl:w-1/4 flex flex-col h-full"
             >
-                <ScrollArea>
+                <ScrollArea fadeOverflow={16}>
                     <div>
                         <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
                             Select a role
@@ -795,7 +795,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
                             >
-                                <h3 className="mt-0">
+                                <h3 className="my-0 leading-tight">
                                     About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
                                 </h3>
 
