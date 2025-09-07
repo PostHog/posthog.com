@@ -254,18 +254,28 @@ export default function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/display-options" state={{ newWindow: true }}>
-                                Display options
+                            <Link to="/about" state={{ newWindow: true }}>
+                                About PostHog
                             </Link>
                         ),
                     },
                     {
                         type: 'item',
                         children: (
-                            <Link to="/about" state={{ newWindow: true }}>
-                                About PostHog
+                            <Link to="/display-options" state={{ newWindow: true }}>
+                                Display options
                             </Link>
                         ),
+                        shortcut: [','],
+                    },
+                    {
+                        type: 'item',
+                        children: (
+                            <Link to="/kbd" state={{ newWindow: true }}>
+                                Keyboard shortcuts
+                            </Link>
+                        ),
+                        shortcut: ['.'],
                     },
                     {
                         type: 'item',

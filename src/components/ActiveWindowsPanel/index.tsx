@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useApp } from '../../context/App'
 import SidePanel from 'components/SidePanel'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -19,6 +19,24 @@ export default function ActiveWindowsPanel() {
     const closeActiveWindowsPanel = () => {
         setIsActiveWindowsPanelOpen(false)
     }
+
+    // Add keyboard listener for Escape key
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isActiveWindowsPanelOpen) {
+                e.preventDefault()
+                closeActiveWindowsPanel()
+            }
+        }
+
+        if (isActiveWindowsPanelOpen) {
+            document.addEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [isActiveWindowsPanelOpen])
 
     const handleWindowClick = (appWindow: any) => {
         if (appWindow.path.startsWith('/')) {

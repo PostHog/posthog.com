@@ -220,26 +220,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => {},
-    bringToFront: () => {},
+    closeWindow: () => { },
+    bringToFront: () => { },
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => {},
+    minimizeWindow: () => { },
     taskbarHeight: 0,
-    addWindow: () => {},
-    updateWindowRef: () => {},
-    updateWindow: () => {},
+    addWindow: () => { },
+    updateWindowRef: () => { },
+    updateWindow: () => { },
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => {},
-    handleSnapToSide: () => {},
+    openSearch: () => { },
+    handleSnapToSide: () => { },
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => {},
+    expandWindow: () => { },
     openSignIn: () => null,
-    openRegister: () => {},
-    openForgotPassword: () => {},
+    openRegister: () => { },
+    openForgotPassword: () => { },
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -250,22 +250,22 @@ export const Context = createContext<AppContextType>({
         screensaverDisabled: false,
         clickBehavior: 'double',
     },
-    updateSiteSettings: () => {},
-    openNewChat: () => {},
+    updateSiteSettings: () => { },
+    openNewChat: () => { },
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => {},
+    setIsNotificationsPanelOpen: () => { },
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => {},
+    setIsActiveWindowsPanelOpen: () => { },
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => {},
-    animateClosingAllWindows: () => {},
+    openStart: () => { },
+    animateClosingAllWindows: () => { },
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => {},
-    setClosingAllWindowsAnimation: () => {},
+    closeAllWindows: () => { },
+    setClosingAllWindowsAnimation: () => { },
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => {},
+    setScreensaverPreviewActive: () => { },
 })
 
 export interface AppSetting {
@@ -501,6 +501,7 @@ const appSettings: AppSettings = {
                 height: 550,
             },
             fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
@@ -549,6 +550,23 @@ const appSettings: AppSettings = {
                 height: 625,
             },
             fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/kbd': {
+        size: {
+            min: {
+                width: 600,
+                height: 625,
+            },
+            max: {
+                width: 600,
+                height: 625,
+            },
+            fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
@@ -808,13 +826,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-        | 'keyboard-garden'
-        | 'hogzilla'
-        | 'startup-monopoly'
-        | 'office-party'
-        | '2001-bliss'
-        | 'parade'
-        | 'coding-at-night'
+    | 'keyboard-garden'
+    | 'hogzilla'
+    | 'startup-monopoly'
+    | 'office-party'
+    | '2001-bliss'
+    | 'parade'
+    | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
 }
@@ -961,12 +979,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                  ...w,
-                                  element: newWindow.element,
-                                  path: newWindow.path,
-                                  fromHistory: newWindow.fromHistory,
-                                  props: newWindow.props,
-                              }
+                                ...w,
+                                element: newWindow.element,
+                                path: newWindow.path,
+                                fromHistory: newWindow.fromHistory,
+                                props: newWindow.props,
+                            }
                             : w
                     )
                 )
@@ -1058,9 +1076,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                      width: isSSR ? 0 : window.innerWidth * 0.9,
-                      height: isSSR ? 0 : window.innerHeight * 0.9,
-                  })
+                    width: isSSR ? 0 : window.innerWidth * 0.9,
+                    height: isSSR ? 0 : window.innerHeight * 0.9,
+                })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1115,9 +1133,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - size.height / 2,
-                  }
+                    x: lastClickedElementRect.x - size.width / 2,
+                    y: lastClickedElementRect.y - size.height / 2,
+                }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1380,6 +1398,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 e.preventDefault()
                 openNewChat({ path: 'ask-max' })
             }
+            if (e.key === ',' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                // Open display options
+                navigate('/display-options', { state: { newWindow: true } })
+            }
+            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                // Open keyboard shortcuts pane
+                navigate('/kbd', { state: { newWindow: true } })
+            }
 
             // Theme toggle with \ key (without Shift)
             if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -1464,12 +1492,51 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             if (e.shiftKey && e.key === 'ArrowUp') {
                 expandWindow()
             }
+            if (e.shiftKey && e.key === 'ArrowDown') {
+                e.preventDefault()
+                if (focusedWindow) {
+                    minimizeWindow(focusedWindow)
+                }
+            }
             if (e.shiftKey && e.key.toLowerCase() === 'w') {
                 e.preventDefault()
                 if (focusedWindow) {
                     // Trigger the same close animation as clicking the X button
                     const closeEvent = new CustomEvent('windowClose', { detail: { windowKey: focusedWindow.key } })
                     document.dispatchEvent(closeEvent)
+                }
+            }
+            if (e.shiftKey && e.key === 'X') {
+                e.preventDefault()
+                // Close all windows with animation
+                animateClosingAllWindows()
+            }
+            if (e.shiftKey && e.key === 'Z') {
+                e.preventDefault()
+                // Start screensaver
+                setScreensaverPreviewActive(true)
+            }
+            if (e.shiftKey && e.key === '<') {
+                e.preventDefault()
+                // Open active windows panel
+                setIsActiveWindowsPanelOpen(true)
+            }
+            if (e.shiftKey && e.key === '>') {
+                e.preventDefault()
+                // Cycle to next window
+                if (windows.length > 1) {
+                    // Find the currently focused window index
+                    const currentIndex = windows.findIndex(w => w === focusedWindow)
+                    // Calculate next window index (wrap around to first if at end)
+                    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % windows.length
+                    const nextWindow = windows[nextIndex]
+
+                    // Navigate to the next window
+                    if (nextWindow.path.startsWith('/')) {
+                        navigate(nextWindow.path)
+                    } else {
+                        bringToFront(nextWindow)
+                    }
                 }
             }
         }
@@ -1489,6 +1556,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         siteSettings,
         updateSiteSettings,
         addToast,
+        animateClosingAllWindows,
+        setScreensaverPreviewActive,
+        minimizeWindow,
+        setIsActiveWindowsPanelOpen,
+        windows,
+        bringToFront,
     ])
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { ContextMenu as RadixContextMenu } from 'radix-ui'
+import KeyboardShortcut from "components/KeyboardShortcut"
 
 export interface ContextMenuItemProps {
     type: 'item' | 'separator'
@@ -7,6 +8,7 @@ export interface ContextMenuItemProps {
     onClick?: () => void
     disabled?: boolean
     children?: React.ReactNode
+    shortcut?: string[]
 }
 
 export interface ContextMenuProps {
@@ -21,7 +23,7 @@ const ContextMenu = ({ children, menuItems, className }: ContextMenuProps) => {
     const ContentClasses =
         'bg-primary min-w-[220px] rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity]'
     const ItemClasses =
-        'group relative flex h-[25px] select-none items-center rounded-[3px] px-2.5 text-[13px] leading-none text-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:text-secondary'
+        'group relative flex h-[25px] select-none items-center rounded-[3px] px-2.5 text-[13px] leading-none text-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:text-primary data-[highlighted]:bg-accent'
     const SeparatorClasses = 'm-[5px] h-px bg-border'
 
     return (
@@ -55,9 +57,14 @@ const ContextMenu = ({ children, menuItems, className }: ContextMenuProps) => {
                                             document.dispatchEvent(escapeEvent)
                                         }, 0)
                                     }}
-                                    className="w-full"
+                                    className="w-full flex justify-between items-center gap-1"
                                 >
-                                    {item.children || item.label}
+                                    <span>
+                                        {item.children || item.label}
+                                    </span>
+                                    <span>
+                                        {item.shortcut && <KeyboardShortcut text={item.shortcut.join(' ')} size="sm" />}
+                                    </span>
                                 </div>
                             </RadixContextMenu.Item>
                         )

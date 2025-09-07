@@ -163,39 +163,40 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
             <Popover
                 trigger={trigger}
                 dataScheme="secondary"
-                contentClassName="@container bg-primary w-[800px] max-w-full max-h-full"
+                contentClassName="@container bg-primary w-screen md:w-[800px] max-w-full max-h-full"
                 sideOffset={8}
                 open={isOpen}
                 onOpenChange={setIsOpen}
             >
                 <ScrollArea>
-                    <div className="grid @xl:grid-cols-2 @2xl:grid-cols-3 @xl:gap-2 p-2 min-h-[200px] h-[400px]">
-                        {themeOptions.map((option) => {
-                            const optionThumb = isDark
-                                ? option.background?.thumb?.dark
-                                : option.background?.thumb?.light
-                            const isSelected = option.value === value
-                            return (
-                                <button
-                                    key={option.value}
-                                    type="button"
-                                    data-scheme="primary"
-                                    onClick={() => handleSelect(option.value)}
-                                    className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${
-                                        isSelected ? 'bg-accent' : ''
-                                    }`}
-                                >
-                                    <img
-                                        src={optionThumb}
-                                        alt={option.label}
-                                        className="w-full h-auto object-cover rounded"
-                                    />
-                                    <span className={`text-primary ${isSelected ? 'font-bold' : 'font-medium'}`}>
-                                        {option.label}
-                                    </span>
-                                </button>
-                            )
-                        })}
+                    <div className="@container">
+                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2 min-h-[200px] h-[400px]">
+                            {themeOptions.map((option) => {
+                                const optionThumb = isDark
+                                    ? option.background?.thumb?.dark
+                                    : option.background?.thumb?.light
+                                const isSelected = option.value === value
+                                return (
+                                    <button
+                                        key={option.value}
+                                        type="button"
+                                        data-scheme="primary"
+                                        onClick={() => handleSelect(option.value)}
+                                        className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
+                                            }`}
+                                    >
+                                        <img
+                                            src={optionThumb}
+                                            alt={option.label}
+                                            className="w-full h-auto object-cover rounded"
+                                        />
+                                        <span className={`text-primary ${isSelected ? 'font-bold' : 'font-medium'}`}>
+                                            {option.label}
+                                        </span>
+                                    </button>
+                                )
+                            })}
+                        </div>
                     </div>
                 </ScrollArea>
             </Popover>
@@ -302,16 +303,18 @@ export default function DisplayOptions() {
                         </div>
                     </div>
                 </Fieldset>
-                <Fieldset legend="Navigation">
-                    <div className="bg-primary grid grid-cols-2 gap-2">
-                        <ToggleGroup
-                            title="Experience"
-                            options={experienceOptions}
-                            onValueChange={handleExperienceChange}
-                            value={siteSettings.experience}
-                        />
-                    </div>
-                </Fieldset>
+                <div className="hidden md:block">
+                    <Fieldset legend="Navigation">
+                        <div className="bg-primary grid grid-cols-2 gap-2">
+                            <ToggleGroup
+                                title="Experience"
+                                options={experienceOptions}
+                                onValueChange={handleExperienceChange}
+                                value={siteSettings.experience}
+                            />
+                        </div>
+                    </Fieldset>
+                </div>
             </div>
             {previewScreensaver &&
                 typeof document !== 'undefined' &&
