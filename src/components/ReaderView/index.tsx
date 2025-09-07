@@ -307,7 +307,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
                                     <ElementScrollLink
                                         id={navItem.url}
                                         label={navItem.value}
-                                        className=""
+                                        className="hover:underline"
                                         element={contentRef}
                                         style={{
                                             paddingLeft: `${navItem.depth || 0}rem`,

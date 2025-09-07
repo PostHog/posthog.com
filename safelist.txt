@@ -1,3 +1,6 @@
+from-[color-mix(in_srgb,rgb(var(--bg))_0%,transparent)]
+via-[color-mix(in_srgb,rgb(var(--bg))_75%,transparent)]
+to-[rgb(var(--bg))]
 [&_ul]:mb-0
 @xl:max-w-2xs
 [&_.bg-front]:fill-yellow
