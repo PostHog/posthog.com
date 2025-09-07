@@ -13,7 +13,8 @@ import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import HedgeHogModeEmbed from 'components/HedgehogMode'
 
 interface Product {
     name: string
@@ -457,6 +458,7 @@ export default function Desktop() {
                         dismiss()
                     }}
                 />
+                <HedgeHogModeEmbed />
             </ContextMenu>
             <NotificationsPanel />
         </>

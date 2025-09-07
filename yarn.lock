@@ -4411,10 +4411,10 @@
   resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.2.tgz#8e6125d271348f646f51269c0b7b9bbf6549f984"
   integrity sha512-hWk3rUtJl2crQK0WNmwg13n82hnTwB99BT99/XI5gZSvIlYZ1TPmMZE8H2dhJJ98J/rm9vYJ/UXNzw3RV5HTpQ==
 
-"@posthog/hedgehog-mode@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.28.tgz#0e8b3e5b2f187c8e3f90044a01595cf1668e1248"
-  integrity sha512-n99eMB5R6RukI9kVb/xH6nsSNuxop4m9YIe/t7nnRw+JF3RcPEnMBEC+SWQR2nx2pDDqc1cRCm2OkeB2CKT8Fw==
+"@posthog/hedgehog-mode@^0.0.38":
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.38.tgz#b8ffa49ad7dfe908761cbef1684862811c6f1f8f"
+  integrity sha512-ZxnJmyYBuxXLLkNvPJlZx6Qhh7rhH5jqgserbhKYlEZuNg0lRODX0YP5hrrAQHL2t5dpvcmPk/h904zgiUeRKw==
   dependencies:
     gsap "^3.12.7"
     lodash "^4.17.21"
