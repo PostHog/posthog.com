@@ -50,6 +50,19 @@ interface GitHubIssue {
     labels?: Array<{ name: string; url: string }>
 }
 
+interface TableOfContentsItem {
+    value: string
+    url: string
+    depth: number
+}
+
+interface ParsedContentItem {
+    value: string
+    trigger: React.ReactNode
+    content: React.ReactNode
+    title: string
+}
+
 interface JobProps {
     data: {
         teams: any
@@ -300,7 +313,7 @@ export default function Job({
 }: JobProps) {
     // State variables
     const [showTableOfContents, setShowTableOfContents] = useState(false)
-    const [parsedContent, setParsedContent] = useState<any[]>([])
+    const [parsedContent, setParsedContent] = useState<ParsedContentItem[]>([])
     const [searchQuery, setSearchQuery] = useState('')
 
     // Extract data from props
@@ -398,8 +411,11 @@ export default function Job({
     // Parse HTML content to extract details blocks
     useEffect(() => {
         if (html) {
+            // Filter out unwanted content
+            const filteredHtml = html.replace('<p><em>#LI-DNI</em></p>', '').replace('<p>#LI-DNI</p>', '')
+
             const parser = new DOMParser()
-            const doc = parser.parseFromString(html, 'text/html')
+            const doc = parser.parseFromString(filteredHtml, 'text/html')
             const detailsElements = doc.querySelectorAll('details')
 
             if (detailsElements.length > 0) {
@@ -433,9 +449,9 @@ export default function Job({
 
     const jobTableOfContents = useMemo(() => {
         // Replace the original table of contents entries with accordion section references
-        const tocWithAccordions = tableOfContents.map((item: any) => {
+        const tocWithAccordions = tableOfContents.map((item: TableOfContentsItem) => {
             // Find if this TOC item matches an accordion section
-            const accordionItem = parsedContent.find((content: any) => content.title === item.value)
+            const accordionItem = parsedContent.find((content: ParsedContentItem) => content.title === item.value)
 
             if (accordionItem) {
                 // This is an accordion section, update the URL to point to the accordion
@@ -575,7 +591,9 @@ export default function Job({
                             ) : (
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: html,
+                                        __html: html
+                                            .replace('<p><em>#LI-DNI</em></p>', '')
+                                            .replace('<p>#LI-DNI</p>', ''),
                                     }}
                                 />
                             )}
