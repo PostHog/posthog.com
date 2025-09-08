@@ -8,7 +8,7 @@ import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 
 <RevAnalyticsBetaWarning />
 
-The Revenue analytics dashboard provides an overview of your revenue data. 
+The revenue analytics dashboard provides an overview of your revenue data. 
 
 For the selected time range, it starts with the total revenue made alongside how many paying customers you have and the average revenue for each of them in that period.
 
@@ -19,9 +19,9 @@ For the selected time range, it starts with the total revenue made alongside how
   classes="rounded"
 />
 
-Like other dashboards in PostHog, the revenue analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Options include product name, initial coupon, customer id, amount, etc.. Just click the "Add filter" button next to the date range at the top of the dashboard.
+Like other dashboards in PostHog, the revenue analytics dashboard is filterable. This means you can filter for data with certain event or person property values. Some options include product name, initial coupon, customer ID, and amount. Just click the "Add filter" button next to the date range at the top of the dashboard.
 
-For more complex queries, you can still use the product analytics tab as usual.
+For more complex queries, you can still use [product analytics insights](/docs/product-analytics/insights) or the [SQL editor](/docs/data-warehouse/query) as usual.
 
 You can also breakdown by them letting you see what your revenue looks like for each of your individual products/plans/customers, etc.
 
@@ -113,7 +113,7 @@ The last chart allows you to see who are your top customers and how much revenue
 This will use [deferred revenue](/docs/revenue-analytics/deferred-revenue) to calculate the revenue for each customer which means that
 if someone's paid a lump sum for a multi-month subscription you'll see it properly split in months if you've set the charge period accordingly in your data source.
 
-For data warehouse sources we'll use the data source identifier. We'll only be able to display the name if you've connected your source to the `persons` or `groups` table in the [revenue analytics settings](/docs/revenue-analytics/persons-and-groups).
+For data warehouse sources we'll use the data source identifier. We'll only be able to display the name if you've connected your source to `persons` or `groups` table in the [revenue analytics settings](/docs/revenue-analytics/connecting-revenue-to-customers).
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_15_03_45_eb050d6def.png"
