@@ -523,6 +523,66 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/terms': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/privacy': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/dpa': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/baa': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
     '/vibe-check': {
         size: {
             min: {
