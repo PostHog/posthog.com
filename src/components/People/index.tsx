@@ -171,7 +171,7 @@ export const TeamMember = (props: any) => {
 
                         <div className="absolute bottom-[calc(50cqh_-_2rem)] group-hover:bottom-[calc(50cqh_+_0rem)] translate-y-1/2 inset-x-0 overflow-hidden z-10 py-2 transition-all">
                             <div className="relative -rotate-3 font-squeak uppercase">
-                                <div className="bg-white border-y-3 border-black relative -mx-1 py-0.5 pl-2 pr-4 flex flex-col items-end text-right">
+                                <div className="bg-white border-y-3 border-black text-black relative -mx-1 py-0.5 pl-2 pr-4 flex flex-col items-end text-right">
                                     <h3
                                         className="person-name m-0 leading-tight -mb-0.5"
                                         data-length={getTextLength(name, 'name')}
@@ -179,13 +179,13 @@ export const TeamMember = (props: any) => {
                                         {name}
                                     </h3>
                                     <h4
-                                        className="person-role text-base m-0 !leading-tight text-secondary"
+                                        className="person-role text-base m-0 !leading-tight text-secondary dark:text-black/75"
                                         data-length={getTextLength(companyRole, 'companyRole')}
                                     >
                                         {companyRole}
                                     </h4>
                                 </div>
-                                <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3 relative top-0 group-hover:-top-12 transition-all -z-10">
+                                <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3 relative top-0 group-hover:-top-12 transition-all text-black -z-10">
                                     <Stickers country={country} location={location} />{' '}
                                     {country === 'world' ? 'Planet Earth' : location || country}
                                 </div>
@@ -270,7 +270,7 @@ export const TeamMember = (props: any) => {
                                 ''
                             )}
 
-                            <div className="absolute left-0 w-full top-full pt-8 px-4 group-hover:top-[0%] transition-all">
+                            <div className="absolute left-0 w-full top-full pt-8 px-4 group-hover:top-[0%] transition-all text-black">
                                 <ReactMarkdown
                                     disallowedElements={['a']}
                                     className="text-sm bio-preview"
