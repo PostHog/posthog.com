@@ -38,7 +38,8 @@ export const Markdown = ({
             rehypePlugins={[rehypeSanitize]}
             className={cn(
                 'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold',
-                !regularText, className
+                !regularText,
+                className
             )}
             components={{
                 pre: ({ children }) => {
