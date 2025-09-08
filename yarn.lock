@@ -3518,16 +3518,17 @@
   resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.2.tgz#8e6125d271348f646f51269c0b7b9bbf6549f984"
   integrity sha512-hWk3rUtJl2crQK0WNmwg13n82hnTwB99BT99/XI5gZSvIlYZ1TPmMZE8H2dhJJ98J/rm9vYJ/UXNzw3RV5HTpQ==
 
-"@posthog/hedgehog-mode@^0.0.39":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.39.tgz#69c66a561591d251f1a4da22f602fed319606fc2"
-  integrity sha512-EaYv1TOeVkYOXCCMllDFVadwWQTht9F7qmZL62CSLEzf+7tkagNQHsIAFmuT+HsMLhjrFOyeBttLkqPsXsjcMA==
+"@posthog/hedgehog-mode@^0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.41.tgz#41afd5dbafe68823200929499fef5fef8f9fce9f"
+  integrity sha512-lNF8sLYOROOHyzAKuA9Kb+oZXtvK2XAUJTJ+0Fk2eQiJZMbEiiO/bRsYDVrc+cRVR7D4MF4MfrOnhfG/TaVpMQ==
   dependencies:
     gsap "^3.12.7"
     lodash "^4.17.21"
     matter-js "^0.20.0"
     pixi.js "^8.4.0"
     react-shadow "^20.6.0"
+    uuid "^12.0.0"
 
 "@posthog/icons@0.29.0":
   version "0.29.0"
@@ -25733,6 +25734,11 @@ uuid-browser@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid-browser/-/uuid-browser-3.1.0.tgz#0f05a40aef74f9e5951e20efbf44b11871e56410"
   integrity sha512-dsNgbLaTrd6l3MMxTtouOCFw4CBFc/3a+GgYA2YyrJvyQ1u6q4pcu3ktLoUZ/VN/Aw9WsauazbgsgdfVWgAKQg==
+
+uuid@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-12.0.0.tgz#114e150a140571af7b188c5c2a8d8493755fb587"
+  integrity sha512-USe1zesMYh4fjCA8ZH5+X5WIVD0J4V1Jksm1bFTVBX2F/cwSXt0RO5w/3UXbdLKmZX65MiWV+hwhSS8p6oBTGA==
 
 uuid@^3.3.2:
   version "3.4.0"
