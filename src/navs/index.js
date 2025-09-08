@@ -4528,6 +4528,10 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'orange',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Concepts',
@@ -4537,6 +4541,10 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/connect-to-customers',
                     icon: 'IconPeople',
                     color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Deferred Revenue',
