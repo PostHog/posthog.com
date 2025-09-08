@@ -588,6 +588,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/sales': {
+        size: {
+            min: {
+                width: 875,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 900,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/spicy.mov': {
         size: {
             min: {
@@ -1526,7 +1542,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 // Cycle to next window
                 if (windows.length > 1) {
                     // Find the currently focused window index
-                    const currentIndex = windows.findIndex(w => w === focusedWindow)
+                    const currentIndex = windows.findIndex((w) => w === focusedWindow)
                     // Calculate next window index (wrap around to first if at end)
                     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % windows.length
                     const nextWindow = windows[nextIndex]
