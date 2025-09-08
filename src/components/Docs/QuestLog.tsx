@@ -3,15 +3,16 @@ import * as Icons from '@posthog/icons'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Slugger from 'github-slugger'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import Scrollspy from 'react-scrollspy'
 
 export interface QuestLogItemProps {
     title: string
     subtitle?: string
     icon?: string
     children: React.ReactNode
+    index?: number
+    isSelected?: boolean
+    questRef?: React.Ref<HTMLDivElement>
+    onSelect?: () => void
 }
 
 export const QuestLog: React.FC<{
@@ -23,9 +24,6 @@ export const QuestLog: React.FC<{
     firstSpeechBubble = "We're going on an adventure!",
     lastSpeechBubble = "You're ready to start building!",
 }) => {
-    const SCROLLSPY_OFFSET = -50
-    const MOBILE_SCROLLSPY_OFFSET = 250
-
     // Animation timing constants
     const INITIAL_LOAD_DELAY = 1000
     const SPEECH_BUBBLE_SHOW_DELAY = 200
@@ -195,19 +193,26 @@ export const QuestLog: React.FC<{
 
     const questIds = questItems.map((item) => `quest-item-${generateQuestSlug(item.props.title)}`)
 
-    // Restore Scrollspy onUpdate for both desktop and mobile
-    const handleScrollspyUpdate = (el: HTMLElement | null) => {
+    // ScrollSpy context reference for quest detection
+    const questContentRef = useRef<HTMLDivElement>(null)
+
+    const handleScrollspyUpdate = (activeQuestId: string | null) => {
         // Only allow scrollspy updates after user has actually interacted with the page
-        if (!hasInitialLoadSettled) return
+        if (!hasInitialLoadSettled) {
+            return
+        }
 
         // Prevent updates during smooth scrolling
-        if (isSmoothScrolling) return
+        if (isSmoothScrolling) {
+            return
+        }
 
-        if (el && el.id) {
-            const questIndex = questIds.findIndex((id) => id === el.id)
+        if (activeQuestId) {
+            const questIndex = questIds.findIndex((id) => id === activeQuestId)
+
             if (questIndex >= 0 && questIndex !== selectedQuest) {
                 setSelectedQuest(questIndex)
-                window.history.replaceState(null, '', `#${el.id}`)
+                window.history.replaceState(null, '', `#${activeQuestId}`)
             }
         }
     }
@@ -363,224 +368,273 @@ export const QuestLog: React.FC<{
         : 'calc(0% - 10px)'
 
     return (
-        <>
-            <div className="max-w-7xl mx-auto pb-6 quest-log-container">
-                <div
-                    id={questIds[0]}
-                    style={{ position: 'absolute', top: 0, height: 0, width: 0 }}
-                    aria-hidden="true"
-                />
-                <div className="quest-main-content">
-                    {/* Quest Details */}
-                    <div className="quest-details">
-                        <div className="space-y-4">
-                            {questItems.map((questItem, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white dark:bg-accent-dark border border-primary dark:border-primary rounded-sm shadow-sm p-4 md:p-6"
+        <div className="max-w-7xl mx-auto pb-6 quest-log-container">
+            <div className="quest-main-content">
+                {/* Quest Details */}
+                <div className="quest-details" ref={questContentRef}>
+                    <div className="space-y-4">
+                        {questItems.map((questItem, index) => (
+                            <div
+                                key={index}
+                                className="bg-white dark:bg-accent-dark border border-primary dark:border-primary rounded-sm shadow-sm p-4 md:p-6"
+                            >
+                                <h2
+                                    id={questIds[index]}
+                                    className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
                                 >
-                                    {index === 0 ? (
-                                        <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32">
-                                            {questItem.props.title}
-                                        </h2>
-                                    ) : (
-                                        <h2
-                                            id={questIds[index]}
-                                            className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
-                                        >
-                                            {questItem.props.title}
-                                        </h2>
-                                    )}
-                                    {questItem.props.children || (
-                                        <div>
-                                            <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
-                                                Quest details will appear here.
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Quest List - Sticky Container */}
-                    <div className="quest-sidebar z-30 bg-primary">
-                        {/* Progress Indicator */}
-                        <div className="mt-3 mb-3 px-1">
-                            <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
-                                <span>
-                                    {selectedQuest + 1}/{questItems.length}
-                                </span>
+                                    {questItem.props.title}
+                                </h2>
+                                {questItem.props.children || (
+                                    <div>
+                                        <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
+                                            Quest details will appear here.
+                                        </p>
+                                    </div>
+                                )}
                             </div>
-                            <div className="w-full bg-accent rounded-full h-1.5 relative">
+                        ))}
+                    </div>
+                </div>
+
+                {/* Quest List - Sticky Container */}
+                <div className="quest-sidebar z-30 bg-primary">
+                    {/* Progress Indicator */}
+                    <div className="mt-3 mb-3 px-1">
+                        <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
+                            <span>
+                                {selectedQuest + 1}/{questItems.length}
+                            </span>
+                        </div>
+                        <div className="w-full bg-accent rounded-full h-1.5 relative">
+                            <div
+                                className="bg-red dark:bg-yellow h-1.5 rounded-full transition-all duration-[2s] ease-in-out"
+                                style={{ width: `${progressPercentage}%` }}
+                            ></div>
+                            {/* Sprite Animation with Speech Bubble */}
+                            <div
+                                className="absolute transition-all duration-[2s] ease-in-out"
+                                style={{
+                                    left: spritePosition,
+                                    top: '-48px',
+                                    width: '48px',
+                                    height: '48px',
+                                }}
+                            >
+                                {/* Walking Sprite */}
                                 <div
-                                    className="bg-red dark:bg-yellow h-1.5 rounded-full transition-all duration-[2s] ease-in-out"
-                                    style={{ width: `${progressPercentage}%` }}
-                                ></div>
-                                {/* Sprite Animation with Speech Bubble */}
-                                <div
-                                    className="absolute transition-all duration-[2s] ease-in-out"
+                                    ref={spriteRef}
+                                    className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
                                     style={{
-                                        left: spritePosition,
-                                        top: '-48px',
-                                        width: '48px',
+                                        backgroundImage: 'url(/images/game-walk.png)',
+                                        backgroundSize: '528px 48px',
+                                        backgroundRepeat: 'no-repeat',
                                         height: '48px',
                                     }}
+                                />
+
+                                {/* Speech Bubble */}
+                                <div
+                                    className={`absolute ${
+                                        selectedQuest === questItems.length - 1 ? 'right-full mr-2' : 'left-full'
+                                    } top-[calc(50%-3px)] transform -translate-y-[calc(50%)] transition-all duration-300 ease-out ${
+                                        showSpeechBubble
+                                            ? 'opacity-100 translate-x-0 scale-100'
+                                            : selectedQuest === questItems.length - 1
+                                            ? 'opacity-0 translate-x-2 scale-95'
+                                            : 'opacity-0 -translate-x-2 scale-95'
+                                    }`}
+                                    style={{
+                                        animation: showSpeechBubble
+                                            ? selectedQuest === questItems.length - 1
+                                                ? 'speechBounceLeft 0.5s ease-out'
+                                                : 'speechBounce 0.5s ease-out'
+                                            : 'none',
+                                        zIndex: 60, // Higher than your sticky nav
+                                    }}
                                 >
-                                    {/* Walking Sprite */}
-                                    <div
-                                        ref={spriteRef}
-                                        className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
-                                        style={{
-                                            backgroundImage: 'url(/images/game-walk.png)',
-                                            backgroundSize: '528px 48px',
-                                            backgroundRepeat: 'no-repeat',
-                                            height: '48px',
-                                        }}
-                                    />
+                                    {/* Speech Bubble Container */}
+                                    <div className="relative bg-white dark:bg-accent-dark rounded-lg shadow-md border-1 border-white dark:border-dark px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        {/* Speech Text */}
+                                        <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
+                                            <span className="inline-block">{speechText}</span>
+                                        </div>
 
-                                    {/* Speech Bubble */}
-                                    <div
-                                        className={`absolute ${
-                                            selectedQuest === questItems.length - 1 ? 'right-full mr-2' : 'left-full'
-                                        } top-[calc(50%-3px)] transform -translate-y-[calc(50%)] transition-all duration-300 ease-out ${
-                                            showSpeechBubble
-                                                ? 'opacity-100 translate-x-0 scale-100'
-                                                : selectedQuest === questItems.length - 1
-                                                ? 'opacity-0 translate-x-2 scale-95'
-                                                : 'opacity-0 -translate-x-2 scale-95'
-                                        }`}
-                                        style={{
-                                            animation: showSpeechBubble
-                                                ? selectedQuest === questItems.length - 1
-                                                    ? 'speechBounceLeft 0.5s ease-out'
-                                                    : 'speechBounce 0.5s ease-out'
-                                                : 'none',
-                                            zIndex: 60, // Higher than your sticky nav
-                                        }}
-                                    >
-                                        {/* Speech Bubble Container */}
-                                        <div className="relative bg-white dark:bg-accent-dark rounded-lg shadow-md border-1 border-white dark:border-dark px-1 py-1 min-w-[120px] max-w-[175px]">
-                                            {/* Speech Text */}
-                                            <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
-                                                <span className="inline-block">{speechText}</span>
-                                            </div>
-
-                                            {/* Speech Bubble Tail */}
+                                        {/* Speech Bubble Tail */}
+                                        <div
+                                            className={`absolute ${
+                                                selectedQuest === questItems.length - 1 ? 'left-full' : 'right-full'
+                                            } top-1/2 transform -translate-y-1/2`}
+                                        >
+                                            <div
+                                                className={`w-0 h-0 border-t-[7px] border-b-[7px] ${
+                                                    selectedQuest === questItems.length - 1
+                                                        ? 'border-l-[10px] border-l-white dark:border-l-dark'
+                                                        : 'border-r-[10px] border-r-white dark:border-r-dark'
+                                                } border-t-transparent border-b-transparent`}
+                                            ></div>
                                             <div
                                                 className={`absolute ${
-                                                    selectedQuest === questItems.length - 1 ? 'left-full' : 'right-full'
-                                                } top-1/2 transform -translate-y-1/2`}
-                                            >
-                                                <div
-                                                    className={`w-0 h-0 border-t-[7px] border-b-[7px] ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? 'border-l-[10px] border-l-white dark:border-l-dark'
-                                                            : 'border-r-[10px] border-r-white dark:border-r-dark'
-                                                    } border-t-transparent border-b-transparent`}
-                                                ></div>
-                                                <div
-                                                    className={`absolute ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? '-left-[8px] border-l-[8px] border-l-white dark:border-l-accent-dark'
-                                                            : '-right-[8px] border-r-[8px] border-r-white dark:border-r-accent-dark'
-                                                    } top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent`}
-                                                ></div>
-                                            </div>
+                                                    selectedQuest === questItems.length - 1
+                                                        ? '-left-[8px] border-l-[8px] border-l-white dark:border-l-accent-dark'
+                                                        : '-right-[8px] border-r-[8px] border-r-white dark:border-r-accent-dark'
+                                                } top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent`}
+                                            ></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        {/* Desktop Navigation */}
-                        <div className="quest-desktop-nav space-y-4 relative">
-                            {/* Moving Corner Brackets */}
-                            <div
-                                className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
-                                style={{
-                                    top: `${bracketPosition.top}px`,
-                                    height: `${bracketPosition.height}px`,
-                                }}
-                            >
-                                {TOP_LEFT_CORNER_SVG}
-                                {TOP_RIGHT_CORNER_SVG}
-                                {BOTTOM_LEFT_CORNER_SVG}
-                                {BOTTOM_RIGHT_CORNER_SVG}
-                            </div>
-
-                            <Scrollspy
-                                items={questIds}
-                                currentClassName="active"
-                                offset={SCROLLSPY_OFFSET}
-                                className="space-y-4"
-                                style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
-                                // Try different rootEl selectors in this order of priority:
-                                rootEl="[data-scheme='primary'] [data-radix-scroll-area-viewport]"
-                                // Alternative 1: rootEl="[data-radix-scroll-area-viewport]"
-                                // Alternative 2: rootEl=".size-full"
-                                // Alternative 3: rootEl="article"
-                                // Alternative 4: rootEl=".reader-content-container"
-                                // Alternative 5: Remove rootEl completely to use window scroll
-                                onUpdate={handleScrollspyUpdate}
-                            >
-                                {questItems.map((child, index) => (
-                                    <a
-                                        key={index}
-                                        href={`#${questIds[index]}`}
-                                        className="block no-underline"
-                                        style={{ textDecoration: 'none' }}
-                                        onClick={(e) => {
-                                            handleDesktopNavClick(e, questIds[index])
-                                        }}
-                                    >
-                                        {React.cloneElement(child, {
-                                            index,
-                                            isSelected: selectedQuest === index,
-                                            questRef: (el: HTMLDivElement | null) => (questRefs.current[index] = el),
-                                        })}
-                                    </a>
-                                ))}
-                            </Scrollspy>
+                    {/* Desktop Navigation */}
+                    <div className="quest-desktop-nav space-y-4 relative">
+                        {/* Moving Corner Brackets */}
+                        <div
+                            className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
+                            style={{
+                                top: `${bracketPosition.top}px`,
+                                height: `${bracketPosition.height}px`,
+                            }}
+                        >
+                            {TOP_LEFT_CORNER_SVG}
+                            {TOP_RIGHT_CORNER_SVG}
+                            {BOTTOM_LEFT_CORNER_SVG}
+                            {BOTTOM_RIGHT_CORNER_SVG}
                         </div>
 
-                        {/* Mobile Navigation */}
-                        <div className="quest-mobile-nav">
-                            <Scrollspy
-                                items={questIds}
-                                currentClassName="active"
-                                offset={MOBILE_SCROLLSPY_OFFSET}
-                                componentTag="div"
-                                // Use same selector as desktop version (try alternatives if this doesn't work)
-                                rootEl="[data-scheme='primary'] [data-radix-scroll-area-viewport]"
-                                onUpdate={handleScrollspyUpdate}
-                            >
-                                <MobileQuestLogItem
-                                    questItems={questItems}
-                                    selectedQuest={selectedQuest}
-                                    dropdownOpen={dropdownOpen}
-                                    onDropdownToggle={setDropdownOpen}
-                                    dropdownRef={dropdownRef}
-                                    questIds={questIds}
-                                    onNavClick={handleMobileNavClick}
-                                />
-                            </Scrollspy>
-                        </div>
+                        <QuestScrollSpyContent
+                            questItems={questItems}
+                            questIds={questIds}
+                            selectedQuest={selectedQuest}
+                            questRefs={questRefs}
+                            questContentRef={questContentRef}
+                            handleDesktopNavClick={handleDesktopNavClick}
+                            onScrollSpyUpdate={handleScrollspyUpdate}
+                        />
+                    </div>
+
+                    {/* Mobile Navigation */}
+                    <div className="quest-mobile-nav">
+                        <MobileQuestLogItem
+                            questItems={questItems}
+                            selectedQuest={selectedQuest}
+                            dropdownOpen={dropdownOpen}
+                            onDropdownToggle={setDropdownOpen}
+                            dropdownRef={dropdownRef}
+                            questIds={questIds}
+                            onNavClick={handleMobileNavClick}
+                        />
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
-export const QuestLogItem: React.FC<
-    QuestLogItemProps & {
-        index?: number
-        isSelected?: boolean
-        questRef?: React.Ref<HTMLDivElement>
-        onSelect?: () => void
-    }
-> = ({ title, subtitle, icon, isSelected = false, questRef, onSelect }) => {
+interface QuestScrollSpyContentProps {
+    questItems: React.ReactElement<QuestLogItemProps>[]
+    questIds: string[]
+    selectedQuest: number
+    questRefs: React.MutableRefObject<(HTMLDivElement | null)[]>
+    questContentRef: React.RefObject<HTMLDivElement>
+    handleDesktopNavClick: (e: React.MouseEvent, questId: string) => void
+    onScrollSpyUpdate: (activeQuestId: string | null) => void
+}
+
+const QuestScrollSpyContent: React.FC<QuestScrollSpyContentProps> = ({
+    questItems,
+    questIds,
+    selectedQuest,
+    questRefs,
+    questContentRef,
+    handleDesktopNavClick,
+    onScrollSpyUpdate,
+}) => {
+    return (
+        <div className="space-y-4" style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}>
+            {questItems.map((child, index) => (
+                <QuestScrollSpyItem
+                    key={index}
+                    child={child}
+                    index={index}
+                    questId={questIds[index]}
+                    selectedQuest={selectedQuest}
+                    questRefs={questRefs}
+                    questContentRef={questContentRef}
+                    handleDesktopNavClick={handleDesktopNavClick}
+                    onScrollSpyUpdate={onScrollSpyUpdate}
+                />
+            ))}
+        </div>
+    )
+}
+
+interface QuestScrollSpyItemProps {
+    child: React.ReactElement<QuestLogItemProps>
+    index: number
+    questId: string
+    selectedQuest: number
+    questRefs: React.MutableRefObject<(HTMLDivElement | null)[]>
+    questContentRef: React.RefObject<HTMLDivElement>
+    handleDesktopNavClick: (e: React.MouseEvent, questId: string) => void
+    onScrollSpyUpdate: (activeQuestId: string | null) => void
+}
+
+const QuestScrollSpyItem: React.FC<QuestScrollSpyItemProps> = ({
+    child,
+    index,
+    questId,
+    selectedQuest,
+    questRefs,
+    questContentRef,
+    handleDesktopNavClick,
+    onScrollSpyUpdate,
+}) => {
+    // Handle the scroll detection for this quest item
+    useEffect(() => {
+        if (!questContentRef.current) return
+
+        const targetElement = questContentRef.current.querySelector(`#${CSS.escape(questId)}`)
+        if (!targetElement) return
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        onScrollSpyUpdate(questId)
+                    }
+                })
+            },
+            {
+                root: questContentRef.current.closest('[data-radix-scroll-area-viewport]'),
+                threshold: [0, 0.1, 0.25, 0.5],
+                rootMargin: '50px 0px -50% 0px', // Positive top margin to detect earlier, negative bottom to prevent multiple active
+            }
+        )
+
+        observer.observe(targetElement)
+        return () => observer.disconnect()
+    }, [questId, questContentRef, onScrollSpyUpdate, index])
+
+    return (
+        <a
+            href={`#${questId}`}
+            className="block no-underline"
+            style={{ textDecoration: 'none' }}
+            onClick={(e) => {
+                handleDesktopNavClick(e, questId)
+            }}
+        >
+            {React.cloneElement(child, {
+                index,
+                isSelected: selectedQuest === index,
+                questRef: (el: HTMLDivElement | null) => (questRefs.current[index] = el),
+            })}
+        </a>
+    )
+}
+
+export const QuestLogItem: React.FC<QuestLogItemProps> = ({ title, subtitle, icon, isSelected = false, questRef }) => {
     const Icon = Icons[icon as keyof typeof Icons] || Icons.IconInfo
 
     return (
@@ -678,7 +732,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
 
             {dropdownOpen && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
-                    {questItems.map((child, index) => (
+                    {questItems.map((questItem, index) => (
                         <a
                             key={index}
                             href={`#${questIds[index]}`}
