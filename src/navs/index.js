@@ -4564,7 +4564,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'FAQ',
-                    url: '/docs/revenue-analytics/faq',
+                    url: '/docs/revenue-analytics/common-questions',
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,

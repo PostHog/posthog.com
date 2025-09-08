@@ -50,7 +50,7 @@ export const Content = ({ quickLinks = false }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/faq">Other questions</Link>
+                        <Link to="/docs/revenue-analytics/common-questions">Other questions</Link>
                     </li>
                 </ul>
             </section>
