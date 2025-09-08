@@ -136,6 +136,10 @@ This will only affect *your browser*, not other users or your flags evaluated on
 
 ### Toolbar not loading or displaying
 
+There are two common reasons why the toolbar might not load or display:
+
+#### 1. The toolbar is being overridden
+
 When launched, the toolbar injects an API token in the format `#__posthog=JSON` in your site's URL, like this: `http://mysite.com/#__posthog=JSON`.
 
 The toolbar won't load if you have a frontend that overrides the injected API token (the information after the #) before the `posthog-js` library (or snippet) loads and has a chance to read the API token.
@@ -149,7 +153,9 @@ if (toolbarJSON) {
 }
 ```
 
-Another reason the toolbar might not load or display is using an ad blocker. Turning off your ad blocker should fix the issue in this case.
+#### 2. The toolbar is being blocked by an ad blocker
+
+Ad blockers can block the toolbar from loading or displaying. Turning off your ad blocker should fix the issue in this case.
 
 ### Toolbar authentication issue (with reverse proxy)
 
