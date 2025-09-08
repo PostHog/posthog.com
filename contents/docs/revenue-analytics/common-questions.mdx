@@ -12,7 +12,7 @@ Have a question not covered here? [Let us know](http://app.posthog.com/home#supp
 
 ## How do you convert revenue in different currencies?
 
-We automatically convert revenue from other currencies into your chosen reporting currency – i.e. if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), it's converted into USD in PostHog to ensure consistency.
+We automatically convert revenue from other currencies into your chosen reporting currency. If someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), it's converted into USD in PostHog to ensure consistency.
 
 PostHog's currency conversion data is sourced from [Open Exchange Rates](https://openexchangerates.org/). The exchange rate data is updated hourly and stored with daily granularity.
 
@@ -24,12 +24,13 @@ PostHog supports a wide range of global currencies for revenue tracking. See our
 
 ## What "currency's minor unit" means?
 
-You can choose between sending the currency the minor unit of the currency or the full amount.
-We'll expect the whole amount by default (i.e. $20.45) but we suggest you send the minor unit of the currency instead (i.e. 2045) to avoid floating point precision issues.
+You can choose between sending the minor unit of the currency or the decimal amount. For example, the whole amount of `$20.45` (as in 20 dollars and 45 cents) would be equal to the minor unit of `2045` (as in 2,045 cents).
+
+While we support both, we recommend sending the minor to avoid floating point precision issues.
 
 When sending the minor unit of the currency, we'll treat it as follows:
 - `1045` in `USD` (or any other two-decimal currency) is treated as $10.45
-- `1045` in `JPY` (or any other zero-decimal currency) is treated as ¥1045
+- `1045` in `JPY` (or any other [zero-decimal currency](#zero-decimal-currencies)) is treated as ¥1045
 
 ### Zero-decimal currencies
 

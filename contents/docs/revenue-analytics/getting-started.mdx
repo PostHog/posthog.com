@@ -21,6 +21,11 @@ Revenue tracking enables you to capture revenue from your application via the ev
     classes="rounded"
 />
 
+You can start tracking revenue by doing the following:
+
+1. Choosing your reporting currency
+2. Configuring your revenue data source
+
 ## Choosing your reporting currency
 
 PostHog will automatically convert revenue from other currencies into your chosen reporting currency. For example, if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), PostHog converts it into USD to ensure consistency.
@@ -34,9 +39,22 @@ You can configure your reporting currency at the top of your [revenue analytics 
     classes="rounded"
 />
 
-## Choosing your revenue data sources
+## Configuring your revenue data sources
 
-PostHog can collect revenue from two different types of sources:
+Next, you need to tell PostHog where to find your revenue data. PostHog can collect revenue from two different types of sources:
+
+- [Connecting to a data warehouse source like Stripe](/docs/revenue-analytics/getting-started?tab=Data+warehouse+tables#option-1-data-warehouse-tables)
+- [Collecting events with revenue properties](/docs/revenue-analytics/getting-started?tab=Event+properties#option-2-properties-on-events)
+
+import Tab from "components/Tab"
+
+<Tab.Group tabs={['Data warehouse tables', 'Event properties']}>
+<Tab.List>
+<Tab>Data warehouse tables</Tab>
+<Tab>Event properties</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
 
 ### Option 1: Data warehouse tables
 
@@ -62,6 +80,8 @@ Please refer to the [data warehouse docs](/data-warehouse) for more information.
     </p>
 </details>
 
+</Tab.Panel>
+<Tab.Panel>
 
 ### Option 2: Properties on events
 
@@ -78,6 +98,7 @@ When you do so, you need to include two properties:
 | Subscription property (optional) | An unique identifier for the subscription that the event is related to | `subscription_id` | `sub_1234` |
 
 <MultiLanguage>
+
 ```js
 posthog.capture("purchase_completed", {
     revenue: 1000,
@@ -170,3 +191,6 @@ When you enable "values are in cents" (minor unit), we consider most currencies 
 
 There's also one exception to the day-to-day usage of each currency, and that's the Icelandic Krona (ISK). The Icelandic Krona (ISK) is a zero-decimal currency, but we treat it as a two-decimal currency to keep backwards compatibility with our integration with Stripe.
 
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
