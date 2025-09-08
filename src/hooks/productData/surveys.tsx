@@ -354,8 +354,8 @@ export const surveys = {
                 feature: 'Hosted surveys',
                 companies: {
                     // pendo: true,
-                    // hotjar: true,
-                    // sprig: true,
+                    hotjar: true,
+                    sprig: true,
                     posthog: true,
                 },
             },
@@ -555,7 +555,7 @@ export const surveys = {
         answers:
             'These are actual survey questions our customers use. User interviews? End with a Calendly link. PMF survey? Use the template. Support satisfaction? Time it after ticket resolution. The key is asking at the right moment - after they use a feature, complete a task, or hit a milestone.',
         pricing:
-            "Use surveys free, or enter a credit card for advanced features. Either way, your first 250 survey responses are free – every month, then it's simple usage-based pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything – targeting, multi-step, API access – out of the box.",
+            "Use surveys free, or enter a credit card for advanced features. Either way, your first 1500 survey responses are free – every month, then it's simple usage-based pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything – targeting, multi-step, API access – out of the box.",
         'comparison-summary':
             "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. (We're the only one with feature flag targeting.)",
         'feature-comparison':
