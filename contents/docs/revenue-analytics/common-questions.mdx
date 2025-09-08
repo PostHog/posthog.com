@@ -22,6 +22,44 @@ This ensures that your revenue data is converted using recent exchange rates, ba
 
 PostHog supports a wide range of global currencies for revenue tracking. See our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py) for a complete list.
 
+## What "currency's minor unit" means?
+
+You can choose between sending the currency the minor unit of the currency or the full amount.
+We'll expect the whole amount by default (i.e. $20.45) but we suggest you send the minor unit of the currency instead (i.e. 2045) to avoid floating point precision issues.
+
+When sending the minor unit of the currency, we'll treat it as follows:
+- `1045` in `USD` (or any other two-decimal currency) is treated as $10.45
+- `1045` in `JPY` (or any other zero-decimal currency) is treated as ¥1045
+
+### Zero-decimal currencies
+
+When you enable "values are in cents" (minor unit), we consider most currencies to be two-decimal currencies unless they are in the following list:
+
+<div className="grid grid-cols-2 gap-2">
+    <ul>
+        <li>BIF</li>
+        <li>CLP</li>
+        <li>DJF</li>
+        <li>GNF</li>
+        <li>JPY</li>
+        <li>KMF</li>
+        <li>KRW</li>
+        <li>MGA</li>
+    </ul>
+    <ul>
+        <li>PYG</li>
+        <li>RWF</li>
+        <li>UGX</li>
+        <li>VND</li>
+        <li>VUV</li>
+        <li>XAF</li>
+        <li>XOF</li>
+        <li>XPF</li>
+    </ul>   
+</div>
+
+There's also one exception to what you'd expect from a zero-decimal currency, and that's the Icelandic Krona (ISK). The Icelandic Krona (ISK) is a zero-decimal currency, but we treat it as a two-decimal currency to keep backwards compatibility with our integration with Stripe.
+
 ## What if you don't support the currency on my revenue event?
 
 This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
