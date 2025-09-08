@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconAsterisk } from '@posthog/icons'
+import Link from 'components/Link'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'visualize' handle.
 
@@ -59,13 +60,101 @@ export const dataWarehouse = {
     },
     features: [
         {
+            title: 'Query with PostHog SQL',
+            headline: 'Query with PostHog SQL',
+            description: 'Directly access your data, join sources, and interrogate data however you want',
+            layout: 'columns',
+            features: [
+                {
+                    title: 'Add queries to notebooks',
+                    description:
+                        'Use PostHog notebooks to collect warehouse info, research topics, or just as a scratch pad',
+                },
+                {
+                    title: 'Save queries as views',
+                    description: 'Visualize your results as tables, graphs, and more, then save them for easy access',
+                },
+                {
+                    title: 'Write SQL without knowing SQL',
+                    description: 'Nobody likes writing SQL, except for our AI helper, Max',
+                },
+                {
+                    title: 'Simplified syntax',
+                    description: 'Access properties with dot notation like properties.$browser',
+                },
+                {
+                    title: 'Smart joins',
+                    description: 'Automatic joins between events, persons, and groups',
+                },
+                {
+                    title: 'Product functions',
+                    description: 'Built-in functions for cohorts, feature flags, and more',
+                },
+                {
+                    title: 'ClickHouse power',
+                    description: 'Full access to ClickHouse functions and performance',
+                },
+                {
+                    title: 'Time zone handling',
+                    description: 'Automatic time zone conversion for your project',
+                },
+            ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
+                    alt: '',
+                },
+            ],
+        },
+        {
+            title: 'SQL insights',
+            headline: 'Custom analytics beyond standard charts',
+            description:
+                'Build any analysis with SELECT, JOIN, WHERE, GROUP BY and visualize results in multiple formats.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/sql-light.png',
+                    alt: 'SQL insights',
+                },
+            ],
+            features: [
+                {
+                    title: 'Complex queries',
+                    description: 'Multi-step CTEs, window functions, and subqueries',
+                },
+                {
+                    title: 'Multiple visualizations',
+                    description: 'Tables, line charts, bar charts, and more',
+                },
+                {
+                    title: 'Save & share',
+                    description: 'Save queries as insights to add to dashboards',
+                },
+                {
+                    title: 'Export results',
+                    description: 'Download query results as CSV or JSON',
+                },
+                {
+                    title: 'Query templates',
+                    description: 'Start from examples or save your own templates',
+                },
+            ],
+        },
+        {
             title: 'Hog',
             features: [
                 {
                     title: 'SQL-compatible syntax',
                     headline: 'Familiar language for data teams',
-                    description:
-                        'If you know SQL, you already know most of Hog. Built to feel natural for data analysis.',
+                    description: (
+                        <>
+                            If you know SQL, you already know most of{' '}
+                            <Link to="/docs/hog" state={{ newWindow: true }}>
+                                Hog
+                            </Link>
+                            . Built to feel natural for data analysis.
+                        </>
+                    ),
                     images: [
                         {
                             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/hog/hog-code-example.png',
@@ -158,91 +247,10 @@ export const dataWarehouse = {
             ],
         },
         {
-            title: 'Query with PostHog SQL',
-            headline: 'Query with PostHog SQL',
-            description: 'Directly access your data, join sources, and interrogate data however you want',
-            layout: 'columns',
-            features: [
-                {
-                    title: 'Add queries to notebooks',
-                    description:
-                        'Use PostHog notebooks to collect warehouse info, research topics, or just as a scratch pad',
-                },
-                {
-                    title: 'Save queries as views',
-                    description: 'Visualize your results as tables, graphs, and more, then save them for easy access',
-                },
-                {
-                    title: 'Write SQL without knowing SQL',
-                    description: 'Nobody likes writing SQL, except for our AI helper, Max',
-                },
-                {
-                    title: 'Simplified syntax',
-                    description: 'Access properties with dot notation like properties.$browser',
-                },
-                {
-                    title: 'Smart joins',
-                    description: 'Automatic joins between events, persons, and groups',
-                },
-                {
-                    title: 'Product functions',
-                    description: 'Built-in functions for cohorts, feature flags, and more',
-                },
-                {
-                    title: 'ClickHouse power',
-                    description: 'Full access to ClickHouse functions and performance',
-                },
-                {
-                    title: 'Time zone handling',
-                    description: 'Automatic time zone conversion for your project',
-                },
-            ],
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
-                    alt: '',
-                },
-            ],
-        },
-        {
-            title: 'SQL insights',
-            headline: 'Custom analytics beyond standard charts',
-            description:
-                'Build any analysis with SELECT, JOIN, WHERE, GROUP BY and visualize results in multiple formats.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/sql-light.png',
-                    alt: 'SQL insights',
-                },
-            ],
-            features: [
-                {
-                    title: 'Complex queries',
-                    description: 'Multi-step CTEs, window functions, and subqueries',
-                },
-                {
-                    title: 'Multiple visualizations',
-                    description: 'Tables, line charts, bar charts, and more',
-                },
-                {
-                    title: 'Save & share',
-                    description: 'Save queries as insights to add to dashboards',
-                },
-                {
-                    title: 'Export results',
-                    description: 'Download query results as CSV or JSON',
-                },
-                {
-                    title: 'Query templates',
-                    description: 'Start from examples or save your own templates',
-                },
-            ],
-        },
-        {
             title: 'Data exploration',
             headline: 'Browse and query all available tables',
             description:
-                'Explore events, persons, sessions, and external data sources with schema browser and auto-complete.',
+                'Explore events, persons, sessions, and external data sources with schema browser and auto-complete. Visualize your data warehouse data using tables, trends, and more. You can also use data warehouse data with insights.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/warehouse-light.png',
@@ -287,7 +295,8 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'Custom views',
-                    description: 'Create reusable views combining multiple sources',
+                    description:
+                        'Save data as views to reuse in other queries. Materialize them to improve performance',
                 },
                 {
                     title: 'Scheduled syncs',
@@ -327,6 +336,12 @@ export const dataWarehouse = {
             ],
         },
         {
+            title: 'Variables',
+            headline: 'Variables',
+            description:
+                'Use variables to customize queries for different users, customers, timeframes, and other filters.',
+        },
+        {
             title: 'Sync from anywhere',
             headline: 'Sync from anywhere',
             description: 'Stripe, Hubspot, Zendesk, Adwords, Salesforce, and major databases.',
@@ -338,10 +353,16 @@ export const dataWarehouse = {
             ],
         },
         {
-            title: 'Custom sources',
-            headline: 'Custom sources',
+            title: 'Person joins',
+            headline: 'Person joins',
             description:
-                'Build your own sources and let us read data from your storage system, with complete control of how regularly we sync.',
+                'Join warehouse data on PostHog persons to easily access that data wherever you access the person profile.',
+        },
+        {
+            title: 'Combine PostHog data with other sources',
+            headline: 'Combine PostHog data with other sources',
+            description:
+                'Combine your product data with revenue, CRM, logs, and much more to get a full picture of your business.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
@@ -429,6 +450,10 @@ export const dataWarehouse = {
         {
             slug: 'feature-flags',
             description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
+        },
+        {
+            slug: 'experiments',
+            description: 'You can use data warehouse data as primary or secondary metrics in experiments.',
         },
         {
             slug: 'docs/sql',

@@ -148,8 +148,9 @@ export default function Explorer({
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''
-                        }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
+                        fullScreen ? 'border-t border-primary' : ''
+                    }`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -203,15 +204,16 @@ export default function Explorer({
                                     <div className="absolute right-0 top-6">
                                         <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
                                             {accentImage}
-                                            <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
-                                            <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
+                                            <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[rgb(var(--bg))] to-[color-mix(in_srgb,rgb(var(--bg))_0%,transparent)]" />
+                                            <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,rgb(var(--bg))_0%,transparent)] to-[rgb(var(--bg))]" />
                                         </div>
                                     </div>
                                 )}
                                 <div
                                     ref={searchContainerRef}
-                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative @md:p-4' : ''
-                                        }`}
+                                    className={`${getProseClasses()} max-w-none h-full ${
+                                        padding ? 'relative @md:p-4' : ''
+                                    }`}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}

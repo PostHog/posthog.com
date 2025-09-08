@@ -1,12 +1,12 @@
 import React from 'react'
 
-export const ProductVideo = ({ videoLight, videoDark, autoPlay = true, classes = '' }) => {
+export const ProductVideo = ({ videoLight, videoDark, autoPlay = true, muted = true, loop = true, classes = '' }) => {
     return (
         <div className="mb-4 border border-primary rounded bg-accent">
             <video
                 autoPlay={autoPlay}
-                loop
-                muted
+                loop={loop}
+                muted={muted}
                 playsInline
                 src={videoLight}
                 className={`${videoDark ? 'dark:hidden' : ''} ${classes}`}
@@ -15,8 +15,8 @@ export const ProductVideo = ({ videoLight, videoDark, autoPlay = true, classes =
             {videoDark && (
                 <video
                     autoPlay={autoPlay}
-                    loop
-                    muted
+                    loop={loop}
+                    muted={muted}
                     playsInline
                     src={videoDark}
                     className={`hidden dark:block ${classes}`}

@@ -6,16 +6,15 @@ import {
     IconPullRequest,
     IconTextWidth,
     IconGear,
-    IconInfo,
     IconRefresh,
     IconClockRewind,
     IconTextWidthFixed,
 } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { Select } from '../RadixUI/Select'
 import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { Accordion } from '../RadixUI/Accordion'
 import Link from 'components/Link'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
@@ -26,7 +25,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
 import Slider from 'components/RadixUI/Slider'
-import Tooltip from 'components/RadixUI/Tooltip'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -38,8 +36,8 @@ import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import { TextureTan } from 'components/Textures'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -72,6 +70,7 @@ interface ReaderViewProps {
     showSurvey?: boolean
     parent?: MenuItem
     markdownContent?: string
+    showQuestions?: boolean
 }
 
 interface BackgroundImageOption {
@@ -256,20 +255,6 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
     )
 }
 
-const textWidthOptions: ToggleOption[] = [
-    {
-        label: 'Fixed width',
-        value: 'fixed',
-        icon: <IconTextWidthFixed className="size-5 inline-block" />,
-        default: true,
-    },
-    {
-        label: 'Full width',
-        value: 'full',
-        icon: <IconTextWidth className="size-5" />,
-    },
-]
-
 interface TableOfContentsProps {
     tableOfContents: any[]
     contentRef: React.RefObject<HTMLDivElement>
@@ -285,24 +270,57 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
     return (
         <ScrollSpyProvider>
             <div className={`not-prose ${className}`}>
-                {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
-                <ul className="list-none m-0 p-0 flex flex-col">
-                    {tableOfContents.map((navItem) => {
-                        return (
-                            <li className="relative leading-none m-0" key={navItem.url}>
-                                <ElementScrollLink
-                                    id={navItem.url}
-                                    label={navItem.value}
-                                    className=""
-                                    element={contentRef}
-                                    style={{
-                                        paddingLeft: `${navItem.depth || 0}rem`,
-                                    }}
-                                />
-                            </li>
-                        )
-                    })}
-                </ul>
+                <div className="@4xl/app-reader:hidden">
+                    <Accordion
+                        items={[
+                            {
+                                value: 'table-of-contents',
+                                trigger: title,
+                                content: (
+                                    <ul className="list-none m-0 p-0 flex flex-col">
+                                        {tableOfContents.map((navItem) => {
+                                            return (
+                                                <li className="relative leading-none m-0" key={navItem.url}>
+                                                    <ElementScrollLink
+                                                        id={navItem.url}
+                                                        label={navItem.value}
+                                                        className="hover:underline"
+                                                        element={contentRef}
+                                                        style={{
+                                                            paddingLeft: `${navItem.depth || 0}rem`,
+                                                        }}
+                                                    />
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                ),
+                            },
+                        ]}
+                        defaultValue="table-of-contents"
+                        skin={true}
+                    />
+                </div>
+                <div className="hidden @4xl/app-reader:block">
+                    {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
+                    <ul className="list-none m-0 p-0 flex flex-col">
+                        {tableOfContents.map((navItem) => {
+                            return (
+                                <li className="relative leading-none m-0" key={navItem.url}>
+                                    <ElementScrollLink
+                                        id={navItem.url}
+                                        label={navItem.value}
+                                        className="hover:underline"
+                                        element={contentRef}
+                                        style={{
+                                            paddingLeft: `${navItem.depth || 0}rem`,
+                                        }}
+                                    />
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
             </div>
         </ScrollSpyProvider>
     )
@@ -332,6 +350,7 @@ export default function ReaderView({
     showSurvey = false,
     parent,
     markdownContent,
+    showQuestions = true,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -358,6 +377,7 @@ export default function ReaderView({
                 showSurvey={showSurvey}
                 parent={parent}
                 markdownContent={markdownContent}
+                showQuestions={showQuestions}
             >
                 {children}
             </ReaderViewContent>
@@ -396,8 +416,8 @@ const Menu = (props: { parent: MenuItem }) => {
                         (menuItem) => menuItem.url === value || menuItem.name === value
                     )
                     setActiveInternalMenu(selectedMenu)
-                    if (!selectedMenu?.children && selectedMenu?.url) {
-                        navigate(selectedMenu.url)
+                    if (selectedMenu?.url) {
+                        return navigate(selectedMenu.url)
                     }
                 }}
                 dataScheme="primary"
@@ -431,7 +451,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
                                    @2xl/app-reader:static @2xl/app-reader:z-auto @2xl/app-reader:top-auto @2xl/app-reader:bottom-auto @2xl/app-reader:left-auto"
                         initial={{
                             width: '250px',
-                            x: -250, // Start off-screen on mobile
+                            x: isNavVisible ? 0 : -250, // Start off-screen on mobile
                         }}
                         animate={{
                             width: '250px',
@@ -489,6 +509,7 @@ function ReaderViewContent({
     showSurvey = false,
     parent,
     markdownContent,
+    showQuestions = true,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -652,11 +673,8 @@ function ReaderViewContent({
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                     </div>
                                 )}
-                                {tableOfContents && tableOfContents.length > 0 && !hideRightSidebar && (
-                                    <div
-                                        data-scheme="secondary"
-                                        className="@4xl/app-reader:hidden p-4 mb-4 bg-primary rounded border border-primary"
-                                    >
+                                {tableOfContents && tableOfContents.length > 0  && !hideRightSidebar && (
+                                    <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
                                         <TableOfContents
                                             tableOfContents={tableOfContents}
                                             contentRef={contentRef}
@@ -676,12 +694,14 @@ function ReaderViewContent({
                                         children
                                     )}
                                 </div>
-                                <div className="mt-8">
-                                    <h3 id="squeak-questions" className="mb-4">
-                                        Community questions
-                                    </h3>
-                                    <Questions slug={appWindow?.path} />
-                                </div>
+                                {showQuestions && (
+                                    <div className="mt-8">
+                                        <h3 id="squeak-questions" className="mb-4">
+                                            Community questions
+                                        </h3>
+                                        <Questions slug={appWindow?.path} />
+                                    </div>
+                                )}
                                 {showSurvey && (
                                     <div className="mt-8">
                                         <DocsPageSurvey filePath={filePath} />

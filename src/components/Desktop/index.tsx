@@ -13,7 +13,7 @@ import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Product {
     name: string
@@ -62,7 +62,7 @@ export const productLinks: AppItem[] = [
     },
     {
         label: 'Talk to a human',
-        Icon: <AppIcon name="contact" />,
+        Icon: <AppIcon name="envelope" />,
         url: '/talk-to-a-human',
         source: 'desktop',
     },
@@ -91,6 +91,12 @@ export const apps: AppItem[] = [
         label: 'Fun stuff',
         Icon: <AppIcon name="games" />,
         url: '/sparks-joy',
+        source: 'desktop',
+    },
+    {
+        label: 'Work here',
+        Icon: <AppIcon name="typewriter" />,
+        url: '/careers',
         source: 'desktop',
     },
     {
@@ -248,18 +254,28 @@ export default function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/display-options" state={{ newWindow: true }}>
-                                Display options
+                            <Link to="/about" state={{ newWindow: true }}>
+                                About PostHog
                             </Link>
                         ),
                     },
                     {
                         type: 'item',
                         children: (
-                            <Link to="/about" state={{ newWindow: true }}>
-                                About PostHog
+                            <Link to="/display-options" state={{ newWindow: true }}>
+                                Display options
                             </Link>
                         ),
+                        shortcut: [','],
+                    },
+                    {
+                        type: 'item',
+                        children: (
+                            <Link to="/kbd" state={{ newWindow: true }}>
+                                Keyboard shortcuts
+                            </Link>
+                        ),
+                        shortcut: ['.'],
                     },
                     {
                         type: 'item',
@@ -279,24 +295,16 @@ export default function Desktop() {
                 <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
-                    <div className="hidden select-none wallpaper-hogzilla:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
                         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bg_dark_4b00252f27.png')",
-                                backgroundSize: '414px 532px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt=""
                             width={2574}
                             height={1256}
-                            className="absolute right-0 bottom-0 object-contain w-full h-auto"
+                            className="absolute inset-0 flex items-end justify-end"
+                            imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
                         />
                     </div>
 
@@ -338,7 +346,7 @@ export default function Desktop() {
                             alt=""
                             width={997}
                             height={858}
-                            className="absolute bottom-24 left-24 w-[498.5px] h-[429px]"
+                            className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
                         />
                     </div>
 
@@ -383,28 +391,34 @@ export default function Desktop() {
                     </div>
 
                     {/* 2001 bliss */}
-                    <div className="hidden select-none wallpaper-2001-bliss:block absolute inset-0">
+                    <div
+                        className="hidden select-none wallpaper-2001-bliss:block absolute inset-0 bg-repeat bg-center"
+                        style={{
+                            backgroundImage:
+                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')",
+                            backgroundSize: '1180px 738px',
+                        }}
+                    >
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
                             alt=""
                             width={1180}
                             height={738}
-                            imgClassName="absolute inset-0 w-full h-full object-cover object-center"
+                            imgClassName="hidden"
                         />
                         <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
                     </div>
 
                     {/* Parade */}
-                    <div className="hidden select-none wallpaper-parade:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-parade:flex items-end fixed inset-0">
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
                             alt=""
                             width={1565}
                             height={744}
-                            className="absolute inset-0"
-                            imgClassName="object-contain h-full max-w-none dark:hidden"
+                            imgClassName="dark:hidden w-full"
                         />
                         <CloudinaryImage
                             loading="lazy"
@@ -412,20 +426,19 @@ export default function Desktop() {
                             alt=""
                             width={1565}
                             height={744}
-                            className="absolute inset-0"
-                            imgClassName="object-contain h-full max-w-none hidden dark:block"
+                            imgClassName="hidden dark:block"
                         />
                     </div>
 
                     {/* Coding at night */}
-                    <div className="hidden select-none wallpaper-coding-at-night:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-coding-at-night:flex items-end fixed inset-0">
                         <CloudinaryImage
                             loading="lazy"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
                             alt=""
-                            width={800}
-                            height={600}
-                            className="absolute bottom-0 left-1/2 -translate-x-1/2 object-contain h-full max-w-none"
+                            width={2360}
+                            height={696}
+                            className="w-full"
                         />
                     </div>
 

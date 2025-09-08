@@ -173,7 +173,7 @@ const MenuItem: React.FC<{
                         <span>{item.label}</span>
                     </span>
                     {item.shortcut && (
-                        <div className={ShortcutClasses}>
+                        <div className={`${ShortcutClasses} hidden md:block`}>
                             {Array.isArray(item.shortcut) ? (
                                 <div className="flex items-center">
                                     {item.shortcut.map((key, index) => (
@@ -231,9 +231,8 @@ const MenuBar: React.FC<MenuBarProps> = ({
                     <RadixMenubar.Menu key={menuId} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
-                            className={`${triggerAsChild ? '' : TriggerClasses} ${
-                                menu.bold ? 'font-bold' : 'font-medium'
-                            } ${customTriggerClasses}`}
+                            className={`${triggerAsChild ? '' : TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'
+                                } ${customTriggerClasses}`}
                             id={triggerId}
                         >
                             {menu.trigger}

@@ -157,6 +157,14 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Classic_9ed0e7c3dc.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Modern_b3a6093647.png',
     },
+    typewriter: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_classic_6362f6fbc5.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_modern_9beb68e461.png',
+    },
+    envelope: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/envelope_classic_8ccd5e8abc.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/envelope_modern_f1c74ae9dd.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
@@ -331,7 +339,7 @@ export const AppLink = ({
             >
                 <span className={`inline-block leading-tight`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${finalBackground}  rounded-[2px] px-0.5 py-0`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}

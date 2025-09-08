@@ -24,6 +24,17 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
     // Use shared display title logic
     const displayTitle = getDisplayTitle(product)
 
+    // Check if product is out of stock
+    const isOutOfStock = useMemo(() => {
+        // If product has no variants, check totalInventory
+        if (!product.variants || product.variants.length === 0) {
+            return product.totalInventory === 0
+        }
+
+        // If product has variants, check if all variants are unavailable for sale
+        return product.variants.every((variant) => !variant.availableForSale)
+    }, [product])
+
     const image = useMemo(
         () => getShopifyImage({ image: { ...product.featuredMedia.preview.image, width: 500, height: 500 } }),
         [product]
@@ -57,10 +68,16 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                 <h3 className="text-sm font-medium leading-tight">{displayTitle}</h3>
                 {/* <p className="text-[15px] leading-tight mb-1">{subtitle}</p> */}
                 <p className="text-sm text-secondary mb-0">
-                    <span className={`${productKit ? 'line-through' : ''}`}>
-                        ${product.priceRangeV2.minVariantPrice.amount}
-                    </span>{' '}
-                    {productKit ? <span className="text-green font-bold">FREE</span> : null}
+                    {isOutOfStock ? (
+                        <span className="text-muted italic">Out of stock</span>
+                    ) : (
+                        <>
+                            <span className={`${productKit ? 'line-through' : ''}`}>
+                                ${product.priceRangeV2.minVariantPrice.amount}
+                            </span>{' '}
+                            {productKit ? <span className="text-green font-bold">FREE</span> : null}
+                        </>
+                    )}
                 </p>
             </div>
         </div>

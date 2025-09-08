@@ -37,7 +37,7 @@ const careersTableOfContents = [
     { url: '#handbook', value: 'Company handbook', depth: 0 },
     { url: '#iep', value: 'IEP (Ideal employee profile)', depth: 0 },
     { url: '#unexpected-benefits', value: 'Unexpected benefits', depth: 0 },
-    { url: '#benefits', value: 'The normal benefits', depth: 0 },
+    { url: '#benefits', value: 'The boring benefits', depth: 0 },
     { url: '#transparency', value: 'Transparency', depth: 0 },
     { url: '#fun-stuff', value: 'Fun stuff', depth: 0 },
     { url: '#team-quotes', value: 'Team quotes', depth: 0 },
@@ -129,7 +129,7 @@ const IndexPage = () => {
                     <div id="unexpected-benefits">
                         <BenefitsUnexpected />
                     </div>
-                    <div id="benefits">
+                    <div>
                         <BenefitsUsual />
                     </div>
                     <div id="transparency">

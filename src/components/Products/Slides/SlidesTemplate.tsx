@@ -11,6 +11,7 @@ import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
 import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
 import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
 import OverviewSlideAI from './OverviewSlide/OverviewSlideAI'
+import OverviewSlideMax from './OverviewSlide/OverviewSlideMax'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import FeaturesSlideAI from './FeaturesSlideAI'
@@ -22,9 +23,10 @@ import PlanComparison from './PlanComparison'
 import ComparisonSummarySlide from './ComparisonSummarySlide'
 import FeatureComparisonSlide from './FeatureComparisonSlide'
 import DocsSlide from './DocsSlide'
+import AISlide from './AISlide'
 import PairsWithSlide from './PairsWithSlide'
 import GettingStartedSlide from './GettingStartedSlide'
-import { SlideConfig, SlideConfigResult, defaultSlides } from './createSlideConfig'
+import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 
@@ -49,9 +51,62 @@ export default function SlidesTemplate({
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
 }: SlidesTemplateProps) {
+    // Get product data early to check for AI section
+    const productData = useProduct({ handle: productHandle }) as any
+
+    // Process slide configuration
+    let processedSlideConfig = slideConfig
+
+    // Add AI slide automatically if:
+    // 1. Product has AI data
+    // 2. AI slide hasn't been explicitly excluded
+    // 3. AI slide isn't already present
+    if (productData?.ai) {
+        if (Array.isArray(slideConfig)) {
+            // Check if AI slide is already present
+            const hasAiSlide = slideConfig.some((slide) => slide.slug === 'ai')
+
+            if (!hasAiSlide) {
+                // AI slide not present - auto-insert after features
+                const featuresIndex = slideConfig.findIndex((slide) => slide.slug === 'features')
+                if (featuresIndex !== -1) {
+                    processedSlideConfig = [
+                        ...slideConfig.slice(0, featuresIndex + 1),
+                        aiSlide,
+                        ...slideConfig.slice(featuresIndex + 1),
+                    ]
+                }
+            }
+        } else {
+            // SlideConfigResult - check if AI was explicitly excluded
+            const wasExcluded = slideConfig.exclude?.includes('ai')
+
+            if (!wasExcluded) {
+                // Check if AI slide is in the slides array
+                const slides = slideConfig.slides
+                const hasAiSlide = slides.some((slide) => slide.slug === 'ai')
+
+                if (!hasAiSlide) {
+                    // AI slide not present and not excluded - auto-insert after features
+                    const featuresIndex = slides.findIndex((slide) => slide.slug === 'features')
+                    if (featuresIndex !== -1) {
+                        processedSlideConfig = {
+                            ...slideConfig,
+                            slides: [
+                                ...slides.slice(0, featuresIndex + 1),
+                                aiSlide,
+                                ...slides.slice(featuresIndex + 1),
+                            ],
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Extract slides and content configuration
-    const slideConfigs = Array.isArray(slideConfig) ? slideConfig : slideConfig.slides
-    const contentConfig = Array.isArray(slideConfig) ? {} : slideConfig.content || {}
+    const slideConfigs = Array.isArray(processedSlideConfig) ? processedSlideConfig : processedSlideConfig.slides
+    const contentConfig = Array.isArray(processedSlideConfig) ? {} : processedSlideConfig.content || {}
     // Track whether we're in mobile or desktop view
     // Start with true (mobile) as default since that's the initial visible state
     const [, setIsMobileView] = useState(true)
@@ -59,8 +114,7 @@ export default function SlidesTemplate({
     // Extract products data for the pricing component
     const products = data.allProductData.nodes[0].products
 
-    // Get product data and customers using abstracted product handle
-    const productData = useProduct({ handle: productHandle }) as any
+    // Get customers using abstracted product handle
     const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get all products for pairsWith lookup
@@ -135,6 +189,8 @@ export default function SlidesTemplate({
                             return OverviewSlideOverlay
                         case 'ai':
                             return OverviewSlideAI
+                        case 'max':
+                            return OverviewSlideMax
                         case 'columns':
                         default:
                             return OverviewSlideColumns
@@ -197,9 +253,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesGrid>
                     )
                 }
 
@@ -222,9 +279,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesSplit>
                     )
                 }
 
@@ -247,9 +305,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesSplitWithImage>
                     )
                 }
 
@@ -332,6 +391,9 @@ export default function SlidesTemplate({
                     />
                 )
 
+            case 'ai':
+                return <AISlide ai={productData?.ai} productName={productData?.name} />
+
             case 'pairs-with':
                 return (
                     <PairsWithSlide
@@ -366,9 +428,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesGrid>
                     )
                 }
 
@@ -391,9 +454,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesSplitWithImage>
                     )
                 }
 
@@ -450,9 +514,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesSplit>
                     )
                 } else if (feature.template === 'splitImage') {
                     featureContent = (
@@ -464,9 +529,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesSplitWithImage>
                     )
                 } else if (feature.template === 'grid') {
                     featureContent = (
@@ -478,9 +544,10 @@ export default function SlidesTemplate({
                             icon={feature.icon}
                             features={feature.features}
                             images={feature.images}
-                            children={feature.children}
                             {...props}
-                        />
+                        >
+                            {feature.children}
+                        </FeaturesGrid>
                     )
                 } else {
                     // Fallback for any other template types

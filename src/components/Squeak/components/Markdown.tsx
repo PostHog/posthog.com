@@ -37,8 +37,8 @@ export const Markdown = ({
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className={cn(
-                'flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 font-normal [&_p:last-child]:mb-0',
-                !regularText && 'question-content community-post-markdown',
+                'markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold',
+                !regularText,
                 className
             )}
             components={{

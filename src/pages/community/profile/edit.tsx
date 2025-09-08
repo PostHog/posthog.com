@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, ChangeEventHandler } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
@@ -17,6 +16,7 @@ import { flattenStrapiResponse } from '../../../utils'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { OSInput, OSTextarea } from 'components/OSForm'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -29,7 +29,7 @@ const HeightField = ({ values, setFieldValue }) => {
     return (
         <div className="max-w-[170px]">
             <div className="flex space-x-2 items-end">
-                <Input
+                <OSInput
                     onChange={(e) => {
                         const value = Number(e.target.value)
                         setHeight(value)
@@ -40,6 +40,8 @@ const HeightField = ({ values, setFieldValue }) => {
                     name="height"
                     placeholder="Height"
                     label="Height"
+                    direction="column"
+                    size="md"
                 />
                 <div className="flex-grow flex-shrink-0 w-[85px]">
                     <Toggle
@@ -157,24 +159,6 @@ function Avatar({ values, setFieldValue, error }) {
     )
 }
 
-const Input = ({ type, name, placeholder, label, value, onChange, error, className = '' }) => {
-    return (
-        <div>
-            <label className="font-bold block">{label}</label>
-            <input
-                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent border ${
-                    error ? 'border-red' : 'border-input'
-                } ${className}`}
-                type={type || 'text'}
-                name={name}
-                placeholder={placeholder || label}
-                value={value}
-                onChange={onChange}
-            />
-        </div>
-    )
-}
-
 const formSections = [
     {
         title: 'Who are you?',
@@ -218,13 +202,15 @@ const formSections = [
                 component: ({ values, setFieldValue }) => {
                     const [enabled, setEnabled] = useState(!!values.pronouns)
                     return enabled ? (
-                        <Input
+                        <OSInput
                             name="pronouns"
                             placeholder="Pronouns"
                             type="text"
                             label="Pronouns"
                             onChange={(e) => setFieldValue('pronouns', e.target.value)}
                             value={values['pronouns']}
+                            direction="column"
+                            size="md"
                         />
                     ) : (
                         <button
@@ -344,23 +330,19 @@ const formSections = [
         fields: {
             biography: {
                 component: ({ values, setFieldValue, error }) => (
-                    <>
-                        <div className="flex justify-between items-center">
-                            <label className="font-bold">Bio</label>
-                            <p className="m-0 opacity-60 text-sm">Supports Markdown</p>
-                        </div>
-                        <TextareaAutosize
-                            value={values.biography}
-                            onChange={(e) => setFieldValue('biography', e.target.value)}
-                            minRows={6}
-                            rows={6}
-                            name="biography"
-                            placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent mt-1 border ${
-                                error ? 'border-red' : 'border-input'
-                            }`}
-                        />
-                    </>
+                    <OSTextarea
+                        value={values.biography}
+                        onChange={(e) => setFieldValue('biography', e.target.value)}
+                        rows={6}
+                        name="biography"
+                        label="Bio"
+                        placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
+                        description="Supports Markdown"
+                        direction="column"
+                        size="md"
+                        touched={!!error}
+                        error={error}
+                    />
                 ),
                 className: 'w-full',
             },
@@ -406,13 +388,16 @@ const formSections = [
                 component: ({ values, setFieldValue }) => {
                     return (
                         <div className="grid sm:flex justify-between">
-                            <Input
+                            <OSInput
                                 label="Country code (2 digit ISO)"
                                 name="country"
                                 onChange={(e) => setFieldValue('country', e.target.value)}
                                 placeholder="US"
                                 type="text"
                                 value={values['country']}
+                                width="auto"
+                                direction="column"
+                                size="md"
                                 className="max-w-[72px]"
                             />
                             <Link
@@ -458,23 +443,19 @@ const formSections = [
         fields: {
             readme: {
                 component: ({ values, setFieldValue, error }) => (
-                    <>
-                        <div className="flex justify-between items-center">
-                            <label className="font-bold">How can we best work with you?</label>
-                            <p className="m-0 opacity-60 text-sm">Supports Markdown</p>
-                        </div>
-                        <TextareaAutosize
-                            value={values.readme}
-                            onChange={(e) => setFieldValue('readme', e.target.value)}
-                            minRows={6}
-                            rows={6}
-                            name="readme"
-                            placeholder="I typically work best when..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent mt-1 border ${
-                                error ? 'border-red' : 'border-input'
-                            }`}
-                        />
-                    </>
+                    <OSTextarea
+                        value={values.readme}
+                        onChange={(e) => setFieldValue('readme', e.target.value)}
+                        rows={6}
+                        name="readme"
+                        label="How can we best work with you?"
+                        placeholder="I typically work best when..."
+                        description="Supports Markdown"
+                        direction="column"
+                        size="md"
+                        touched={!!error}
+                        error={error}
+                    />
                 ),
                 className: 'w-full',
             },
@@ -601,7 +582,7 @@ function EditProfile({ profile, mutate }) {
                         : undefined
                 }
             >
-                <SEO noindex title="Edit Profile - PostHog" />
+                <SEO noindex title="Edit profile - PostHog" />
                 <section className="max-w-2xl mx-auto py-12 px-4 bg-primary/90 backdrop-blur-sm rounded-lg">
                     <form className="m-0 space-y-6" onSubmit={handleSubmit}>
                         {formSections.map((section, index) => {
@@ -618,14 +599,17 @@ function EditProfile({ profile, mutate }) {
                                                 <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
                                                     {(field.component &&
                                                         field.component({ values, setFieldValue, error })) || (
-                                                        <Input
+                                                        <OSInput
                                                             type={field.type}
                                                             name={key}
                                                             placeholder={field.placeholder}
                                                             label={field.label}
                                                             value={values[key]}
                                                             onChange={handleChange}
-                                                            error={!!error}
+                                                            touched={!!error}
+                                                            error={error}
+                                                            direction="column"
+                                                            size="md"
                                                         />
                                                     )}
                                                     {error && (

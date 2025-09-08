@@ -20,6 +20,7 @@ import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, I
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from "@posthog/icons"
+import { navigate } from "gatsby"
 
 interface DocsMenuItem {
     name: string
@@ -564,7 +565,10 @@ export function useMenuData(): MenuType[] {
         {
             type: 'item' as const,
             label: 'Display options',
-            link: '/display-options',
+            onClick: () => {
+                navigate('/display-options', { state: { newWindow: true } })
+            },
+            shortcut: [','],
         },
     ]
 
@@ -597,6 +601,7 @@ export function useMenuData(): MenuType[] {
                 onClick: () => {
                     setScreensaverPreviewActive(true)
                 },
+                shortcut: ['Shift', 'Z'],
             },
             {
                 type: 'item' as const,
@@ -605,6 +610,7 @@ export function useMenuData(): MenuType[] {
                 onClick: () => {
                     animateClosingAllWindows()
                 },
+                shortcut: ['Shift', 'X'],
             },
         ]
 

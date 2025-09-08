@@ -12,7 +12,7 @@ import {
     IconPeople,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import Link from "components/Link"
+import Link from 'components/Link'
 
 export const productAnalytics = {
     Icon: IconGraph,
@@ -42,7 +42,8 @@ export const productAnalytics = {
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_light_703f700a5b.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png',
             alt: 'Product analytics screenshot',
         },
     },
@@ -316,7 +317,8 @@ export const productAnalytics = {
         {
             title: 'SQL editor',
             headline: 'Write SQL against your data',
-            description: 'No separate data warehouse needed – though it works with yours if you have one, or you can use ours.',
+            description:
+                'No separate data warehouse needed – though it works with yours if you have one, or you can use ours.',
             icon: <IconDatabase />,
             color: 'purple',
             layout: 'columns',
@@ -330,8 +332,15 @@ export const productAnalytics = {
                     description: 'Customize visualizations with colors, goals, scales, legends, and more',
                 },
                 {
-                    title: "Get help writing SQL",
-                    description: <><Link href="/max" state={{ newWindow: true }}>Max AI</Link> knows your data and can write syntax for you.</>,
+                    title: 'Get help writing SQL',
+                    description: (
+                        <>
+                            <Link href="/max" state={{ newWindow: true }}>
+                                Max AI
+                            </Link>{' '}
+                            knows your data and can write syntax for you.
+                        </>
+                    ),
                 },
             ],
             images: [
@@ -368,6 +377,22 @@ export const productAnalytics = {
             ],
         },
     ],
+    ai: {
+        // title: '',
+        description: 'answer product questions faster',
+        skills: [
+            'Creates insights and applies filters using natural language',
+            'Creates dashboards',
+            'Searches insights',
+            'Researches complex questions with Deep Research mode',
+        ],
+        prompts: [
+            "What's my churn rate?",
+            'Show me user retention by country',
+            'How many people signed up last month?',
+            "What's my most popular feature?",
+        ],
+    },
     questions: [
         {
             question: 'How do I calculate new vs returning users?',
@@ -429,8 +454,8 @@ export const productAnalytics = {
                     title: 'You want to use your own warehouse like Snowflake',
                 },
                 {
-                    title: "You need something extremely simple",
-                    subtitle: "Just use Web Analytics!",
+                    title: 'You need something extremely simple',
+                    subtitle: 'Just use Web Analytics!',
                     subtitleUrl: '/web-analytics',
                 },
             ],

@@ -11,6 +11,7 @@ export interface SlideConfig {
 export interface SlideConfigResult {
     slides: SlideConfig[]
     content?: SlideConfigOptions['content']
+    exclude?: string[] // Track excluded slides for AI auto-inclusion logic
 }
 
 export interface SlideConfigOptions {
@@ -46,8 +47,16 @@ export const defaultSlides: Record<string, SlideConfig> = {
     'getting-started': { slug: 'getting-started', name: 'Get started' },
 }
 
+// AI slide configuration (not included by default, only when ai data exists)
+export const aiSlide: SlideConfig = { slug: 'ai', name: 'AI' }
+
 /**
  * Create a customized slide configuration for a product page
+ *
+ * Note: The AI slide is automatically included after the features slide when:
+ * - The product has an 'ai' section in its data
+ * - Using default slide configuration (no custom config)
+ * To explicitly include or exclude the AI slide, use the include/exclude options.
  *
  * @param options Configuration options
  * @param options.include - Array of slide slugs to include (if provided, only these will be included)
@@ -72,7 +81,7 @@ export const defaultSlides: Record<string, SlideConfig> = {
  *
  * // Exclude certain slides
  * const slides = createSlideConfig({
- *     exclude: ['comparison-summary', 'feature-comparison']
+ *     exclude: ['comparison-summary', 'feature-comparison', 'ai']
  * })
  *
  * // Custom order with overrides
@@ -169,5 +178,6 @@ export function createSlideConfig({
     return {
         slides,
         content,
+        exclude, // Include exclude list for AI auto-inclusion logic
     }
 }

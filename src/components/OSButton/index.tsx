@@ -1,6 +1,5 @@
 import React from 'react'
-import { IconInfo } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import ZoomHover from 'components/ZoomHover'
 // Basic usage
@@ -181,13 +180,6 @@ export default function OSButton({
                     {icon && iconPosition === 'right' && (
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
-                    {tooltip && (
-                        <span className="contents">
-                            <Tooltip content={tooltip}>
-                                <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
-                            </Tooltip>
-                        </span>
-                    )}
                 </span>
             ) : (
                 <>
@@ -208,17 +200,12 @@ export default function OSButton({
                     {icon && iconPosition === 'right' && (
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
-                    {tooltip && (
-                        <span className="">
-                            <Tooltip content={tooltip}>
-                                <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
-                            </Tooltip>
-                        </span>
-                    )}
                 </>
             )}
         </>
     )
+
+    const { contextMenu, ...restProps } = props
 
     const commonProps = {
         className: `${baseClasses} ${width === 'full' ? 'flex' : 'inline-flex'} ${
@@ -235,14 +222,23 @@ export default function OSButton({
         onClick,
         disabled,
         state,
-        ...props,
+        ...(asLink ? restProps : props),
     }
 
     // Apply ZoomHover to default variant automatically
     const shouldApplyZoomHover = zoomHover || (variant === 'default' && !disabled)
     const zoomHoverSize = typeof zoomHover === 'string' ? zoomHover : undefined
 
-    return asLink ? (
+    // Tooltip offset based on button size
+    const tooltipSideOffset = {
+        xs: 2,
+        sm: 4,
+        md: 6,
+        lg: 10,
+        xl: 12,
+    }
+
+    const buttonElement = asLink ? (
         shouldApplyZoomHover ? (
             <ZoomHover size={zoomHoverSize} width={width} display={width === 'full' ? 'block' : undefined}>
                 <Link to={to || ''} {...commonProps} {...(external ? { externalNoIcon: true } : {})}>
@@ -260,5 +256,13 @@ export default function OSButton({
         </ZoomHover>
     ) : (
         <button {...commonProps}>{buttonContent}</button>
+    )
+
+    return tooltip ? (
+        <Tooltip delay={0} sideOffset={tooltipSideOffset[size]} trigger={buttonElement}>
+            {tooltip}
+        </Tooltip>
+    ) : (
+        buttonElement
     )
 }

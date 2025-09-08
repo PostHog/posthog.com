@@ -1,4 +1,9 @@
+import React from 'react'
 import { IconMessage } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import { IconJavaScript, IconApple, IconAndroid, IconReactNative, IconFlutter } from 'components/OSIcons'
+import Link from 'components/Link'
+import { Shadow } from '@inkeep/cxkit-react'
 
 export const surveys = {
     Icon: IconMessage,
@@ -83,22 +88,48 @@ export const surveys = {
         {
             title: 'Display conditions',
             headline: 'Display conditions',
-            description: 'Display surveys based on URL, person property, or feature flag when used with Feature Flags',
+            description:
+                'Display surveys based on URL, person property, or feature flag when used with Feature Flags. You can also trigger a survey to open when an event occurs – either every time the event is sent or just once.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/targeting.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg',
                     alt: 'Display conditions',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
+        },
+        {
+            title: 'Presentation options',
+            headline: 'Presentation options',
+            description:
+                'Surveys can be displayed in your app as a popover (like one that sits in the bottom corner of the screen) or a feedback button. You can also get a shareable URL for a hosted survey or create a completely custom experience using the API.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg',
+                    alt: 'Presentation options',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
         {
             title: 'Multi-step surveys',
             headline: 'Multi-step surveys',
-            description: 'Up to 10 questions',
+            description:
+                'Define the next step based on the response received for <em>single choice</em> and <em>rating</em> questions.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/steps.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_branching_singlechoice_8053dd1700.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_branching_singlechoice_dark_0ec63f974a.png',
                     alt: 'Multi-step surveys',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -128,20 +159,129 @@ export const surveys = {
             ],
         },
         {
+            title: 'Supported platforms',
+            headline: 'Supported platforms',
+            description: 'Survey users across web and mobile..',
+            children: (
+                <div className="max-w-xl mx-auto">
+                    <fieldset className="bg-primary">
+                        <legend className="text-lg font-semibold">Web</legend>
+                        <OSButton
+                            asLink
+                            icon={<IconJavaScript />}
+                            iconClassName="size-8 relative -top-px"
+                            size="xl"
+                            className="!text-xl mr-1"
+                            to="/docs/surveys/installation?tab=Web"
+                            state={{
+                                newWindow: true,
+                            }}
+                        >
+                            <span>JavaScript</span>
+                        </OSButton>
+                    </fieldset>
+                    <fieldset className="bg-primary">
+                        <legend className="text-lg font-semibold">Mobile</legend>
+                        <OSButton
+                            asLink
+                            icon={<IconApple />}
+                            iconClassName="size-8 relative -top-px"
+                            size="xl"
+                            className="!text-xl mr-1"
+                            to="/docs/surveys/installation?tab=iOS"
+                            state={{
+                                newWindow: true,
+                            }}
+                        >
+                            <span>iOS</span>
+                        </OSButton>
+                        {/* <OSButton
+                            asLink
+                            icon={<IconAndroid />}
+                            iconClassName="size-8 relative -top-px"
+                            size="xl"
+                            className="!text-xl mr-1"
+                            to="/docs/libraries/android"
+                            state={{
+                                newWindow: true,
+                            }}
+                        >
+                            <span>Android</span>
+                        </OSButton> */}
+                    </fieldset>
+                    <fieldset className="bg-primary">
+                        <legend className="text-lg font-semibold">Cross-platform*</legend>
+                        <OSButton
+                            asLink
+                            icon={<IconReactNative />}
+                            iconClassName="size-8 relative -top-px"
+                            size="xl"
+                            className="!text-xl mr-1"
+                            to="/docs/surveys/installation?tab=React+Native"
+                            state={{
+                                newWindow: true,
+                            }}
+                        >
+                            <span>React Native</span>
+                        </OSButton>
+                        <OSButton
+                            asLink
+                            icon={<IconFlutter />}
+                            iconClassName="size-8 relative -top-px"
+                            size="xl"
+                            className="!text-xl mr-1"
+                            to="/docs/surveys/installation?tab=Flutter"
+                            state={{
+                                newWindow: true,
+                            }}
+                        >
+                            <span>Flutter</span>
+                        </OSButton>
+                    </fieldset>
+                </div>
+            ),
+        },
+        {
             title: 'More features',
             headline: 'More features',
             features: [
+                {
+                    title: 'Hosted surveys',
+                    description:
+                        'Get a shareable URL to a survey that you can send directly to your users or embed in your website using an iframe',
+                },
+                {
+                    title: 'Capture partial responses',
+                    description:
+                        'Log responses to individual questions as they are received, rather than waiting for the survey to complete',
+                },
+                {
+                    title: 'Completion conditions',
+                    description: 'Configure the survey to repeat on a schedule or when the display conditions are met',
+                },
+                {
+                    title: 'Customizable wait periods',
+                    description: 'Set a delay before a survey opens',
+                },
                 {
                     title: 'Aggregated results',
                     description: 'See feedback summarized and broken down per response',
                 },
                 {
-                    title: 'Slack notifications',
+                    title: 'Send responses to Slack',
                     description: 'Send realtime survey responses to a Slack channel',
                 },
                 {
-                    title: 'Customizable wait periods',
-                    description: 'Set a delay before a survey opens',
+                    title: 'Send responses to CDP destinations',
+                    description: (
+                        <>
+                            {'Browse our '}
+                            <Link to="/cdp?type=destination" state={{ newWindow: true }}>
+                                {'destination library'}
+                            </Link>
+                            {' to explore the possibilities'}
+                        </>
+                    ),
                 },
             ],
         },
@@ -165,15 +305,13 @@ export const surveys = {
         summary: {
             them: [
                 {
-                    title: 'Full page forms',
-                    subtitle:
-                        "PostHog offers multi-step surveys, but they won't be full-page forms such as Typeform or Google Forms",
-                },
-                {
                     title: 'AI-powered analysis or recommendations based on results',
                 },
                 {
                     title: 'Limited formatting options',
+                },
+                {
+                    title: 'WYSIWYG editor',
                 },
             ],
             us: [
@@ -213,12 +351,30 @@ export const surveys = {
         ],
         features: [
             {
+                feature: 'Hosted surveys',
+                companies: {
+                    // pendo: true,
+                    // hotjar: true,
+                    // sprig: true,
+                    posthog: true,
+                },
+            },
+            {
+                feature: 'Mobile surveys',
+                companies: {
+                    // pendo: false,
+                    // hotjar: false,
+                    // sprig: false,
+                    posthog: true,
+                },
+            },
+            {
                 feature: 'Customizable pop-ups',
                 companies: {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -227,7 +383,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -236,7 +392,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -245,7 +401,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -254,7 +410,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -263,7 +419,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -272,7 +428,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -281,7 +437,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -290,7 +446,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -299,7 +455,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: false,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -308,7 +464,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -317,7 +473,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -326,7 +482,7 @@ export const surveys = {
                     pendo: false,
                     hotjar: false,
                     sprig: false,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -344,7 +500,7 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
             {
@@ -353,9 +509,25 @@ export const surveys = {
                     pendo: true,
                     hotjar: true,
                     sprig: true,
-                    postHog: true,
+                    posthog: true,
                 },
             },
+        ],
+    },
+    ai: {
+        // title: '',
+        description: 'build surveys more efficiently',
+        skills: [
+            'Generate complete surveys based on your research goals',
+            'Suggest appropriate question types(freeform text, rating scales, multiple choice, etc.)',
+            'Help you set up display conditions and targeting',
+            'Recommend survey templates for common use cases',
+        ],
+        prompts: [
+            'Create an NPS survey for my mobile app users',
+            'Build a product satisfaction survey with rating questions',
+            'Help me create a survey to understand why users churn',
+            'Generate a post-purchase feedback survey',
         ],
     },
     pairsWith: [
