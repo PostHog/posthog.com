@@ -19,7 +19,6 @@ import { sortOptions } from 'components/Edition/Posts'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
-import RadixTooltip from 'components/RadixUI/Tooltip'
 import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -384,9 +383,9 @@ const AvatarBlock = ({
                 <div className="flex items-center space-x-2 my-2">
                     <h2 className="uppercase">{name}</h2>
                     {profile.country && (
-                        <RadixTooltip trigger={<Stickers country={profile.country} className="w-6 h-6" />} delay={0}>
+                        <Tooltip trigger={<Stickers country={profile.country} className="w-6 h-6" />} delay={0}>
                             {profile.location || profile.country}
-                        </RadixTooltip>
+                        </Tooltip>
                     )}
                 </div>
             )}
@@ -1357,28 +1356,27 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
 
     return (
         <Tooltip
-            contentContainerClassName="!border-none !p-0 !bg-transparent"
-            tooltipClassName="!rounded-none"
-            placement="bottom-start"
-            content={() => (
-                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-primary bg-light dark:bg-dark">
-                    <div className="mb-4 -mx-4 -mt-2">
-                        <img src={image?.data?.attributes?.url} />
-                    </div>
-                    <h4 className="text-lg m-0">{title}</h4>
-                    <p className="m-0 mt-1 text-sm mb-2">{description}</p>
-                </div>
-            )}
+            delay={0}
+            side="bottom"
+            trigger={
+                <ImageContainer
+                    onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
+                    onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
+                    onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
+                    style={{ opacity }}
+                    className={`relative transition-opacity`}
+                >
+                    <img className="w-full" src={icon?.data?.attributes?.url} />
+                </ImageContainer>
+            }
         >
-            <ImageContainer
-                onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
-                onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
-                onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
-                style={{ opacity }}
-                className={`relative transition-opacity`}
-            >
-                <img className="w-full" src={icon?.data?.attributes?.url} />
-            </ImageContainer>
+            <div className="max-w-[250px] text-left">
+                <div className="mb-4 -mx-2 -mt-2">
+                    <img src={image?.data?.attributes?.url} />
+                </div>
+                <h4 className="text-lg m-0">{title}</h4>
+                <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+            </div>
         </Tooltip>
     )
 }

@@ -5,7 +5,7 @@ import Spinner from 'components/Spinner'
 import Markdown from './Markdown'
 import slugify from 'slugify'
 import { Edit } from 'components/Icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
@@ -14,6 +14,7 @@ import { IconFeatures, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
 import OSTextarea from 'components/OSForm/textarea'
+import OSButton from 'components/OSButton'
 
 const buttons = [
     {
@@ -92,24 +93,28 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
 
     return (
         <li className="border-b border-input p-1">
-            <button
+            <OSButton
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
-                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
-                    focused === index ? 'bg-accent' : ''
-                }`}
+                variant="default"
+                width="full"
+                align="left"
+                className={`!px-3 !py-1 !justify-start ${focused === index ? 'bg-accent' : ''}`}
+                active={focused === index}
             >
-                <div className="size-6 overflow-hidden rounded-full">
-                    <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
-                </div>
-                <div>
-                    {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
-                    <div className="flex space-x-1 items-center">
-                        <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
-                        {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
+                <div className="flex space-x-2 items-center w-full">
+                    <div className="size-6 overflow-hidden rounded-full">
+                        <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
+                    </div>
+                    <div>
+                        {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
+                        <div className="flex space-x-1 items-center">
+                            <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                            {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
+                        </div>
                     </div>
                 </div>
-            </button>
+            </OSButton>
         </li>
     )
 }
@@ -195,13 +200,14 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
             exit={{ opacity: 0, translateX: '100%' }}
             className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
         >
-            <button
+            <OSButton
                 type="button"
-                className="p-1 rounded-full bg-light dark:bg-dark border border-input absolute top-0.5 right-0.5 z-20"
+                variant="default"
+                size="xs"
+                icon={<IconX className="w-3" />}
+                className="!p-1 rounded-full absolute top-0.5 right-0.5 z-20"
                 onClick={onClose}
-            >
-                <IconX className="w-3" />
-            </button>
+            />
             <ul
                 ref={listRef}
                 className="m-0 p-0 list-none border border-input bg-light dark:bg-dark h-full rounded-md overflow-auto"
@@ -447,26 +453,22 @@ export default function RichText({
                         {buttons.map((button, index) => {
                             return (
                                 <li key={index}>
-                                    <Tooltip content={button.tooltipContent} placement="top">
-                                        <button
-                                            className="flex items-center bg-none border-none rounded-sm text-black/50  justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
-                                            onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
-                                        >
-                                            {button.icon}
-                                        </button>
-                                    </Tooltip>
+                                    <OSButton
+                                        variant="default"
+                                        size="md"
+                                        icon={button.icon}
+                                        tooltip={button.tooltipContent}
+                                        onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
+                                        className="!p-2"
+                                    />
                                 </li>
                             )
                         })}
                         <li>
-                            <Tooltip content="Image" placement="top">
-                                <button
-                                    className="flex items-center bg-none border-none rounded-sm text-muted justify-center w-[32px] h-[32px] relative hover:border hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
-                                    onClick={(e) => {
-                                        e.preventDefault()
-                                        open()
-                                    }}
-                                >
+                            <OSButton
+                                variant="default"
+                                size="md"
+                                icon={
                                     <svg
                                         className="w-4"
                                         fill="none"
@@ -482,33 +484,33 @@ export default function RichText({
                                             fill="currentColor"
                                         />
                                     </svg>
-                                </button>
-                            </Tooltip>
+                                }
+                                tooltip="Image"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    open()
+                                }}
+                                className="!p-2"
+                            />
                         </li>
                         {preview && (
                             <>
                                 <li className="!ml-auto">
-                                    <Tooltip content="Edit">
-                                        <button
-                                            onClick={() => setShowPreview(false)}
-                                            type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
-                                                showPreview ? '' : '!border border-primary bg-light dark:bg-dark'
-                                            }`}
-                                        >
-                                            <Edit />
-                                        </button>
-                                    </Tooltip>
+                                    <OSButton
+                                        variant="default"
+                                        size="md"
+                                        icon={<Edit />}
+                                        tooltip="Edit"
+                                        onClick={() => setShowPreview(false)}
+                                        active={!showPreview}
+                                        className="!p-2"
+                                    />
                                 </li>
                                 <li>
-                                    <Tooltip content="Preview">
-                                        <button
-                                            onClick={() => setShowPreview(true)}
-                                            type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                                showPreview ? 'border border-primary bg-light dark:bg-dark' : ''
-                                            }`}
-                                        >
+                                    <OSButton
+                                        variant="default"
+                                        size="md"
+                                        icon={
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -528,8 +530,12 @@ export default function RichText({
                                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                                                 />
                                             </svg>
-                                        </button>
-                                    </Tooltip>
+                                        }
+                                        tooltip="Preview"
+                                        onClick={() => setShowPreview(true)}
+                                        active={showPreview}
+                                        className="!p-2"
+                                    />
                                 </li>
                             </>
                         )}
@@ -543,7 +549,7 @@ export default function RichText({
                 {!value && (
                     <div className="absolute top-4 right-4">
                         <a
-                            className="!text-muted hover:!text-muted"
+                            className="text-muted hover:text-secondary"
                             href="https://www.markdownguide.org/cheat-sheet/"
                             target="_blank"
                             rel="noreferrer"
