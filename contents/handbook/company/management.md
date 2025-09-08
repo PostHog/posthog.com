@@ -9,7 +9,7 @@ A manager at PostHog has a short list of responsibilities:
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
-5. Escalating performance issues to execs if you've been unable to resolve them with a direct report 
+5. Collaborating on performance issues to execs 
 
 That's it.
 
@@ -73,6 +73,16 @@ First, make sure you are setting the right context. Next, the most useful thing 
 Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work! 
 
 [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member. These are not to be followed strictly if you don't want to - this is to just save you having to create something from scratch. 
+
+### Performance
+
+- we don't want you to be stressing about this every day. we also want to make sure that posthog has a consistent, transparent and well thought out way to deal with serious performance issues
+- our people and ops team will push to think about this at certain times (30-day check in, 80-day check in after a person joined).
+- we expect you to proactively give feedback to all the people in your team
+- we expect you to proactively raise performance issues with your exec
+  - once this happens, the exec will manage the process. you will likely be asked to continue giving the feedback to the employee, but the exec will coach you during these conversation
+  - the exec will always manage the process and make any decisions required
+  - if we do decide to let someone go, the exec will handle that process with the people team
 
 ### The keeper test
 
