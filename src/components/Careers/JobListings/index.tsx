@@ -4,15 +4,10 @@ import Link from 'components/Link'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
-import slugify from 'slugify'
-import { IconPineapple, IconX } from '@posthog/icons'
-import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
-import TeamPatch from 'components/TeamPatch'
+import { IconX } from '@posthog/icons'
 import { slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
-import Tabs from 'components/RadixUI/Tabs'
-import OSTabs from 'components/OSTabs'
+import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Mark from 'mark.js'
@@ -128,6 +123,32 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
 
 const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
 
+// Fallback team data for roles without teams
+const fallbackTeam = {
+    name: 'Mystery',
+    description:
+        "This role hasn't been assigned to a team yet. You'll be placed on a team that match your skills and interests.",
+    crest: {
+        data: {
+            attributes: {
+                url: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/exec_8be5c3a342.png',
+            },
+        },
+    },
+    crestOptions: {
+        textColor: 'brown',
+        textShadow: 'Light',
+        frame: 'square',
+        plaque: 'stepped',
+        imageXOffset: -5,
+        imageYOffset: -10,
+        imageScale: 90,
+        frameColor: 'burntOrange',
+        plaqueColor: 'white',
+    },
+    profiles: { data: [] },
+}
+
 // Add custom ordering for role groupings - modify this array to change the order
 const roleGroupingOrder = [
     'Engineering',
@@ -173,84 +194,6 @@ const getTeamLeadInfo = (team: any) => {
     }
 
     return `${firstName} joined in ${formatDate(startDate)} and lives in ${location}, ${country}.`
-}
-
-const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: boolean }) => {
-    const teamLength = team?.profiles?.data?.length
-    const teamURL = team?.slug ? `/teams/${team.slug}` : `/teams/${slugifyTeamName(team?.name || '')}`
-    const pineapplePercentage =
-        teamLength &&
-        teamLength > 0 &&
-        Math.round(
-            (team.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza).length /
-                teamLength) *
-                100
-        )
-
-    if (!team) return null
-
-    return (
-        <div
-            data-scheme="secondary"
-            className={`${multipleTeams ? 'border border-primary rounded-md p-4 bg-primary' : ''}`}
-        >
-            <div className="flex flex-col @md:grid @md:grid-cols-6 @md:grid-rows-[repeat(3,auto)] @lg:grid-rows-[repeat(4,auto)] gap-4 @2xl:gap-y-0">
-                <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @2xl:row-span-1 @md:self-center">
-                    {multipleTeams && <h3 className="text-sm font-bold mt-0 mb-1">{team.name} Team</h3>}
-                    {team.description && (
-                        <p className="text-[15px] @5xl:text-sm text-secondary !my-0">{team.description}</p>
-                    )}
-                </div>
-                <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
-                    <div className="w-48 @md:w-full @3xl:max-w-60 mx-auto">
-                        <Link to={teamURL} state={{ newWindow: true }}>
-                            <TeamPatch
-                                name={team.name}
-                                imageUrl={team.crest?.data?.attributes?.url}
-                                {...team.crestOptions}
-                                className="w-full"
-                            />
-                        </Link>
-                    </div>
-                </div>
-                <div className="order-3 @md:order-none col-start-1 row-start-3 @md:row-start-3 @md:col-span-full @xl:row-span-1 @xl:row-start-3 @2xl:row-span-4 @2xl:row-start-2">
-                    <p className="text-sm font-semibold !mb-1 @2xl:pt-2">Team members</p>
-                    <div className="flex justify-start">
-                        <TeamMembers size="!size-16" profiles={team.profiles} teamName={team.name} />
-                    </div>
-                </div>
-                <div className="order-4 @md:order-none col-start-1 row-start-4 @md:col-start-1 @md:row-start-4 @md:col-span-full @xl:row-span-1 @2xl:col-span-4">
-                    <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
-                    <div className="flex items-center gap-2 text-sm">
-                        <div className="w-10">
-                            {pineapplePercentage > 50 ? (
-                                <StickerPineappleYes className="size-10" />
-                            ) : pineapplePercentage == 50 ? (
-                                <StickerPineapple className="size-10" />
-                            ) : (
-                                <StickerPineappleNo className="size-10" />
-                            )}
-                        </div>
-                        <div className="flex-1 leading-tight">
-                            {pineapplePercentage > 50 ? (
-                                <>
-                                    <strong>{pineapplePercentage}%</strong> of this team say{' '}
-                                    <strong className="text-green">YES</strong>!
-                                </>
-                            ) : pineapplePercentage == 50 ? (
-                                <>This team is evenly split. (You could break the tie!)</>
-                            ) : (
-                                <>
-                                    <strong>{100 - pineapplePercentage}%</strong> of this team say{' '}
-                                    <strong className="text-red">NO!</strong>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
 }
 
 export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
@@ -618,7 +561,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                     : []
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
-                                                                                    : teams.length === 1 && teams[0]
+                                                                                    : teams.length === 1 &&
+                                                                                          `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -682,7 +626,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                     : []
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
-                                                                                    : teams.length === 1 && teams[0]
+                                                                                    : teams.length === 1 &&
+                                                                                          `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -794,7 +739,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 </OSButton>
                             </div>
                         </div>
-                        {teams.length > 0 && (
+                        {(teams.length > 0 || !teams.length) && (
                             <div
                                 data-scheme="secondary"
                                 className={`@container @5xl:col-span-5 ${
@@ -802,45 +747,19 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 }`}
                             >
                                 <h3 className="my-0 leading-tight">
-                                    About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
+                                    {teams.length > 1
+                                        ? 'About the small teams'
+                                        : teams.length === 1
+                                        ? `About the ${currentTeamName} Team`
+                                        : 'About this role'}
                                 </h3>
 
-                                {teams.length > 1 ? (
-                                    <OSTabs
-                                        key={`${selectedJob.fields.title}-${currentTeamName}`}
-                                        tabs={teams.map((teamName: string) => {
-                                            const team = allTeams.find(
-                                                (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
-                                            )
-                                            const teamLength = team?.profiles?.data?.length
-                                            const teamURL = `/teams/${team?.slug || ''}`
-                                            const pineapplePercentage =
-                                                teamLength &&
-                                                teamLength > 0 &&
-                                                Math.round(
-                                                    (team.profiles?.data?.filter(
-                                                        ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
-                                                    ).length /
-                                                        teamLength) *
-                                                        100
-                                                )
-
-                                            return {
-                                                value: teamName,
-                                                label: teamName,
-                                                content: (
-                                                    <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />
-                                                ),
-                                            }
-                                        })}
-                                        defaultValue={currentTeamName}
-                                        frame={false}
-                                        onValueChange={(value) => setSelectedTeamName(value)}
-                                        className="px-0 mb-4"
-                                    />
-                                ) : (
-                                    <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
-                                )}
+                                <TeamsSidebar
+                                    teams={teams}
+                                    allTeams={allTeams}
+                                    multipleTeams={teams.length > 1}
+                                    isCompact={false}
+                                />
                             </div>
                         )}
                     </div>

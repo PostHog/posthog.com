@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { graphql, navigate } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
@@ -18,9 +18,7 @@ import OSButton from 'components/OSButton'
 import { IconList, IconX } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
-import TeamPatch from 'components/TeamPatch'
-import { StickerPineappleYes, StickerPineappleNo, StickerPineapple } from 'components/Stickers/Stickers'
-import { TeamMembers } from 'components/Job/Sidebar'
+import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Mark from 'mark.js'
 
@@ -43,6 +41,247 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
 // Add custom ordering for role groupings - same as careers page
 const roleGroupingOrder = ['Engineering', 'Product', 'Design', 'Marketing', 'Sales', 'Operations']
 
+const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
+
+interface GitHubIssue {
+    url: string
+    number: number
+    title: string
+    labels?: Array<{ name: string; url: string }>
+}
+
+interface JobProps {
+    data: {
+        teams: any
+        objectives: any
+        mission: any
+        allJobPostings: any
+        ashbyJobPosting: {
+            departmentName: string
+            info: any
+            id: string
+            parent: any
+            fields: {
+                tableOfContents: any
+                html: string
+                title: string
+                slug: string
+                locations: any
+            }
+        }
+    }
+    pageContext: {
+        gitHubIssues: GitHubIssue[]
+    }
+}
+
+// Separate component for left sidebar to prevent re-renders
+const LeftSidebarContent = React.memo(
+    ({
+        searchQuery,
+        setSearchQuery,
+        filteredJobs,
+        jobGroups,
+        slug,
+        navigate,
+    }: {
+        searchQuery: string
+        setSearchQuery: (value: string) => void
+        filteredJobs: any[]
+        jobGroups: any[]
+        slug: string
+        navigate: any
+    }) => {
+        const jobListRef = useRef<HTMLDivElement>(null)
+        const markedRef = useRef<Mark | null>(null)
+
+        // Handle search input
+        const handleSearchChange = useCallback(
+            (e: React.ChangeEvent<HTMLInputElement>) => {
+                const value = e.target.value
+                setSearchQuery(value)
+            },
+            [setSearchQuery]
+        )
+
+        // Apply highlighting when search query changes
+        useEffect(() => {
+            if (jobListRef.current && searchQuery.trim()) {
+                if (markedRef.current) {
+                    markedRef.current.unmark()
+                }
+                markedRef.current = new Mark(jobListRef.current)
+                markedRef.current.mark(searchQuery, {
+                    separateWordSearch: false,
+                    accuracy: 'partially',
+                })
+            } else if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }, [searchQuery])
+
+        // Handle ESC key to clear search
+        const handleSearchKeyDown = useCallback(
+            (e: React.KeyboardEvent) => {
+                if (e.key === 'Escape') {
+                    setSearchQuery('')
+                    if (markedRef.current) {
+                        markedRef.current.unmark()
+                    }
+                }
+            },
+            [setSearchQuery]
+        )
+
+        // Handle clear search button
+        const handleClearSearch = useCallback(() => {
+            setSearchQuery('')
+            if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }, [setSearchQuery])
+
+        // Cleanup highlighting on unmount
+        useEffect(() => {
+            return () => {
+                if (markedRef.current) {
+                    markedRef.current.unmark()
+                }
+            }
+        }, [])
+
+        return (
+            <ScrollArea className="h-full">
+                {/* Search input */}
+                <div className="relative mb-4">
+                    <input
+                        type="text"
+                        className="w-full p-2 pr-10 border border-input bg-primary rounded text-sm relative z-10"
+                        placeholder="Search roles..."
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        onKeyDown={handleSearchKeyDown}
+                    />
+                    {searchQuery && (
+                        <button
+                            onClick={handleClearSearch}
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
+                            aria-label="Clear search"
+                        >
+                            <IconX className="w-4 h-4 text-muted" />
+                        </button>
+                    )}
+                </div>
+
+                {/* Job list */}
+                <div ref={jobListRef}>
+                    {searchQuery.trim() ? (
+                        // Show search results
+                        <>
+                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
+                            </h3>
+                            {filteredJobs.length > 0 ? (
+                                <ul className="list-none p-0 space-y-px">
+                                    {filteredJobs.map((job: any) => {
+                                        const isCurrentJob = job.fields.slug === slug
+                                        return (
+                                            <li key={job.fields.title} className="p-0">
+                                                <OSButton
+                                                    size="sm"
+                                                    align="left"
+                                                    width="full"
+                                                    active={isCurrentJob}
+                                                    onClick={() => navigate(job.fields.slug)}
+                                                >
+                                                    <div className="flex flex-col w-full items-start">
+                                                        <span className="font-semibold text-[14px]">
+                                                            {job.fields.title.split(' - ')[0]}
+                                                        </span>
+                                                        {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                            <span className="text-[12px] text-secondary !font-normal">
+                                                                {(() => {
+                                                                    const teamsField = job.parent?.customFields?.find(
+                                                                        (field: { title: string }) =>
+                                                                            field.title === 'Teams'
+                                                                    )
+                                                                    const teams = teamsField
+                                                                        ? JSON.parse(teamsField.value)
+                                                                        : []
+                                                                    return teams.length > 1
+                                                                        ? 'Multiple teams'
+                                                                        : teams.length === 1 && `${teams[0]} Team`
+                                                                })()}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </OSButton>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            ) : (
+                                <p className="text-secondary text-sm px-1.5 py-2 italic">
+                                    No roles found matching "{searchQuery}"
+                                </p>
+                            )}
+                        </>
+                    ) : (
+                        // Show grouped results
+                        jobGroups.map((group) => (
+                            <div key={group.name} className="mb-2 last:mb-0">
+                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                    {group.name}
+                                </h3>
+                                <ul className="list-none p-0 space-y-px">
+                                    {group.jobs.map((job: any) => {
+                                        const isCurrentJob = job.fields.slug === slug
+                                        return (
+                                            <li key={job.fields.title} className="p-0">
+                                                <OSButton
+                                                    size="sm"
+                                                    align="left"
+                                                    width="full"
+                                                    active={isCurrentJob}
+                                                    onClick={() => navigate(job.fields.slug)}
+                                                >
+                                                    <div className="flex flex-col w-full items-start">
+                                                        <span className="font-semibold text-[14px]">
+                                                            {job.fields.title.split(' - ')[0]}
+                                                        </span>
+                                                        {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                            <span className="text-[12px] text-secondary !font-normal">
+                                                                {(() => {
+                                                                    const teamsField = job.parent?.customFields?.find(
+                                                                        (field: { title: string }) =>
+                                                                            field.title === 'Teams'
+                                                                    )
+                                                                    const teams = teamsField
+                                                                        ? JSON.parse(teamsField.value)
+                                                                        : []
+                                                                    return teams.length > 1
+                                                                        ? 'Multiple teams'
+                                                                        : teams.length === 1 && `${teams[0]} Team`
+                                                                })()}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </OSButton>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </ScrollArea>
+        )
+    }
+)
+
+LeftSidebarContent.displayName = 'LeftSidebarContent'
+
 export default function Job({
     data: {
         teams,
@@ -58,18 +297,18 @@ export default function Job({
         },
     },
     pageContext: { gitHubIssues },
-}) {
+}: JobProps) {
     // State variables
     const [showTableOfContents, setShowTableOfContents] = useState(false)
     const [parsedContent, setParsedContent] = useState<any[]>([])
     const [searchQuery, setSearchQuery] = useState('')
-    const jobListRef = useRef<HTMLDivElement>(null)
-    const markedRef = useRef<Mark | null>(null)
 
     // Extract data from props
-    const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
-    const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
-    const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
+    const timezone = parent?.customFields?.find(({ title }: { title: string }) => title === 'Timezone(s)')?.value
+    const salaryRole = parent?.customFields?.find(({ title }: { title: string }) => title === 'Salary')?.value || title
+    const missionAndObjectives = parent?.customFields?.find(
+        ({ title }: { title: string }) => title === 'Mission & objectives'
+    )?.value
     const showObjectives = missionAndObjectives !== 'false'
     // Group jobs by role grouping
     const jobGroups = useMemo(() => {
@@ -196,185 +435,6 @@ export default function Job({
         { value: 'Apply', url: '#apply', depth: 0 },
     ]
 
-    // Handle search input
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setSearchQuery(value)
-
-        // Apply highlighting after a brief delay
-        setTimeout(() => {
-            if (jobListRef.current && value.trim()) {
-                if (markedRef.current) {
-                    markedRef.current.unmark()
-                }
-                markedRef.current = new Mark(jobListRef.current)
-                markedRef.current.mark(value, {
-                    separateWordSearch: false,
-                    accuracy: 'partially',
-                })
-            } else if (markedRef.current) {
-                markedRef.current.unmark()
-            }
-        }, 100)
-    }
-
-    // Handle ESC key to clear search
-    const handleSearchKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Escape') {
-            setSearchQuery('')
-            if (markedRef.current) {
-                markedRef.current.unmark()
-            }
-        }
-    }
-
-    // Handle clear search button
-    const handleClearSearch = () => {
-        setSearchQuery('')
-        if (markedRef.current) {
-            markedRef.current.unmark()
-        }
-    }
-
-    // Cleanup highlighting on unmount
-    useEffect(() => {
-        return () => {
-            if (markedRef.current) {
-                markedRef.current.unmark()
-            }
-        }
-    }, [])
-
-    const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
-
-    const LeftSidebarContent = () => (
-        <ScrollArea className="h-full">
-            {/* Search input */}
-            <div className="relative mb-4">
-                <input
-                    type="text"
-                    className="w-full p-2 pr-10 border border-input bg-primary rounded text-sm relative z-10"
-                    placeholder="Search roles..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    onKeyDown={handleSearchKeyDown}
-                />
-                {searchQuery && (
-                    <button
-                        onClick={handleClearSearch}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
-                        aria-label="Clear search"
-                    >
-                        <IconX className="w-4 h-4 text-muted" />
-                    </button>
-                )}
-            </div>
-
-            {/* Job list */}
-            <div ref={jobListRef}>
-                {searchQuery.trim() ? (
-                    // Show search results
-                    <>
-                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
-                            {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
-                        </h3>
-                        {filteredJobs.length > 0 ? (
-                            <ul className="list-none p-0 space-y-px">
-                                {filteredJobs.map((job: any) => {
-                                    const isCurrentJob = job.fields.slug === slug
-                                    return (
-                                        <li key={job.fields.title} className="p-0">
-                                            <OSButton
-                                                size="sm"
-                                                align="left"
-                                                width="full"
-                                                active={isCurrentJob}
-                                                onClick={() => navigate(job.fields.slug)}
-                                            >
-                                                <div className="flex flex-col w-full items-start">
-                                                    <span className="font-semibold text-[14px]">
-                                                        {job.fields.title.split(' - ')[0]}
-                                                    </span>
-                                                    {!hideTeamsByJob.includes(job.fields?.title) && (
-                                                        <span className="text-[12px] text-secondary !font-normal">
-                                                            {(() => {
-                                                                const teamsField = job.parent?.customFields?.find(
-                                                                    (field: { title: string }) =>
-                                                                        field.title === 'Teams'
-                                                                )
-                                                                const teams = teamsField
-                                                                    ? JSON.parse(teamsField.value)
-                                                                    : []
-                                                                return teams.length > 1
-                                                                    ? 'Multiple teams'
-                                                                    : teams.length === 1 && teams[0]
-                                                            })()}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </OSButton>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        ) : (
-                            <p className="text-secondary text-sm px-1.5 py-2 italic">
-                                No roles found matching "{searchQuery}"
-                            </p>
-                        )}
-                    </>
-                ) : (
-                    // Show grouped results
-                    jobGroups.map((group) => (
-                        <div key={group.name} className="mb-2 last:mb-0">
-                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
-                                {group.name}
-                            </h3>
-                            <ul className="list-none p-0 space-y-px">
-                                {group.jobs.map((job: any) => {
-                                    const isCurrentJob = job.fields.slug === slug
-                                    return (
-                                        <li key={job.fields.title} className="p-0">
-                                            <OSButton
-                                                size="sm"
-                                                align="left"
-                                                width="full"
-                                                active={isCurrentJob}
-                                                onClick={() => navigate(job.fields.slug)}
-                                            >
-                                                <div className="flex flex-col w-full items-start">
-                                                    <span className="font-semibold text-[14px]">
-                                                        {job.fields.title.split(' - ')[0]}
-                                                    </span>
-                                                    {!hideTeamsByJob.includes(job.fields?.title) && (
-                                                        <span className="text-[12px] text-secondary !font-normal">
-                                                            {(() => {
-                                                                const teamsField = job.parent?.customFields?.find(
-                                                                    (field: { title: string }) =>
-                                                                        field.title === 'Teams'
-                                                                )
-                                                                const teams = teamsField
-                                                                    ? JSON.parse(teamsField.value)
-                                                                    : []
-                                                                return teams.length > 1
-                                                                    ? 'Multiple teams'
-                                                                    : teams.length === 1 && teams[0]
-                                                            })()}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </OSButton>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                    ))
-                )}
-            </div>
-        </ScrollArea>
-    )
-
     return (
         <>
             <SEO
@@ -385,7 +445,16 @@ export default function Job({
             <ReaderView
                 title={jobTitle}
                 tableOfContents={[]} // Hide built-in TOC
-                leftSidebar={<LeftSidebarContent />}
+                leftSidebar={
+                    <LeftSidebarContent
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
+                        filteredJobs={filteredJobs}
+                        jobGroups={jobGroups}
+                        slug={slug}
+                        navigate={navigate}
+                    />
+                }
                 parent={companyMenu}
                 showQuestions={false}
             >
@@ -467,31 +536,23 @@ export default function Job({
                         </div>
 
                         {/* Right sidebar with team info */}
-                        {teams?.nodes?.length > 0 && (
-                            <div className="lg:col-span-1">
-                                <div className="sticky top-4">
-                                    <h2 className="my-0 leading-tight text-xl">
-                                        {multipleTeams ? 'Teams hiring for this role' : 'Meet your team'}
-                                    </h2>
+                        <div className="lg:col-span-1">
+                            <div className="sticky top-4">
+                                <h2 className="my-0 leading-tight text-base">
+                                    {teams?.nodes?.length > 0
+                                        ? multipleTeams
+                                            ? 'Teams hiring for this role'
+                                            : 'Meet your team'
+                                        : 'Your team'}
+                                </h2>
 
-                                    {multipleTeams ? (
-                                        <Accordion
-                                            items={teams.nodes.map((team: any, index: number) => ({
-                                                value: team.name,
-                                                trigger: <span className="font-semibold">{team.name}</span>,
-                                                content: <TeamInfoDisplay team={team} />,
-                                            }))}
-                                            defaultValue={teams.nodes[0]?.name}
-                                            className="mt-4"
-                                        />
-                                    ) : (
-                                        <div className="mt-4">
-                                            <TeamInfoDisplay team={teams.nodes[0]} />
-                                        </div>
-                                    )}
-                                </div>
+                                <TeamsSidebar
+                                    teams={teams?.nodes || []}
+                                    multipleTeams={multipleTeams}
+                                    isCompact={true}
+                                />
                             </div>
-                        )}
+                        </div>
                     </div>
 
                     <div>
@@ -571,39 +632,43 @@ export default function Job({
                                                 <div className="mb-2">
                                                     <p>Here are some open GitHub issues you could help solve:</p>
                                                     <ul className="list-none !m-0 p-0 grid gap-y-4">
-                                                        {gitHubIssues.map(({ url, number, title, labels }) => {
-                                                            return (
-                                                                <li key={title} className="flex flex-col ">
-                                                                    <div className="flex space-x-2">
-                                                                        <Link
-                                                                            to={url}
-                                                                            className="block w-[60px] md:w-auto"
-                                                                        >
-                                                                            <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
-                                                                                #{number}
-                                                                            </span>
-                                                                        </Link>
-                                                                        <Link to={url}>{title}</Link>
-                                                                    </div>
-                                                                    {labels && labels.length > 0 && (
-                                                                        <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
-                                                                            {labels.map(({ name, url }, index) => {
-                                                                                return (
-                                                                                    <li key={name + index}>
-                                                                                        <Link
-                                                                                            className="transition-all text-sm rounded-sm py-1 px-[5px] bg-blue/10 hover:bg-blue/20 text-blue hover:text-blue dark:bg-white/10 dark:hover:bg-white/30 dark:text-white/75 dark:hover:text-white/100"
-                                                                                            to={url}
-                                                                                        >
-                                                                                            {name}
-                                                                                        </Link>
-                                                                                    </li>
-                                                                                )
-                                                                            })}
-                                                                        </ul>
-                                                                    )}
-                                                                </li>
-                                                            )
-                                                        })}
+                                                        {gitHubIssues.map(
+                                                            ({ url, number, title, labels }: GitHubIssue) => {
+                                                                return (
+                                                                    <li key={title} className="flex flex-col ">
+                                                                        <div className="flex space-x-2">
+                                                                            <Link
+                                                                                to={url}
+                                                                                className="block w-[60px] md:w-auto"
+                                                                            >
+                                                                                <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
+                                                                                    #{number}
+                                                                                </span>
+                                                                            </Link>
+                                                                            <Link to={url}>{title}</Link>
+                                                                        </div>
+                                                                        {labels && labels.length > 0 && (
+                                                                            <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
+                                                                                {labels.map(
+                                                                                    ({ name, url }, index: number) => {
+                                                                                        return (
+                                                                                            <li key={name + index}>
+                                                                                                <Link
+                                                                                                    className="transition-all text-sm rounded-sm py-1 px-[5px] bg-blue/10 hover:bg-blue/20 text-blue hover:text-blue dark:bg-white/10 dark:hover:bg-white/30 dark:text-white/75 dark:hover:text-white/100"
+                                                                                                    to={url}
+                                                                                                >
+                                                                                                    {name}
+                                                                                                </Link>
+                                                                                            </li>
+                                                                                        )
+                                                                                    }
+                                                                                )}
+                                                                            </ul>
+                                                                        )}
+                                                                    </li>
+                                                                )
+                                                            }
+                                                        )}
                                                     </ul>
                                                 </div>
                                             ),
@@ -685,73 +750,6 @@ export default function Job({
                 </div>
             </ReaderView>
         </>
-    )
-}
-
-// Team info display component
-const TeamInfoDisplay = ({ team }: { team: any }) => {
-    const teamLength = team?.profiles?.data?.length
-    const teamURL = `/teams/${team?.slug || ''}`
-    const pineapplePercentage =
-        teamLength &&
-        teamLength > 0 &&
-        Math.round(
-            (team.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza).length /
-                teamLength) *
-                100
-        )
-
-    return (
-        <div className="space-y-4">
-            <div className="flex justify-center">
-                <Link to={teamURL} state={{ newWindow: true }}>
-                    <TeamPatch
-                        name={team.name}
-                        imageUrl={team.crest?.data?.attributes?.url}
-                        {...team.crestOptions}
-                        className="w-32"
-                    />
-                </Link>
-            </div>
-
-            {team.description && <p className="text-sm text-secondary !my-0">{team.description}</p>}
-
-            <div>
-                <p className="text-sm font-semibold !mb-1">Team members</p>
-                <div className="flex justify-start">
-                    <TeamMembers size="!size-12" profiles={team.profiles} teamName={team.name} />
-                </div>
-            </div>
-
-            <div>
-                <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
-                <div className="flex items-center gap-2 text-sm">
-                    <div className="w-8">
-                        {pineapplePercentage > 50 ? (
-                            <StickerPineappleYes className="size-8" />
-                        ) : pineapplePercentage == 50 ? (
-                            <StickerPineapple className="size-8" />
-                        ) : (
-                            <StickerPineappleNo className="size-8" />
-                        )}
-                    </div>
-                    <div className="flex-1 leading-tight text-xs">
-                        {pineapplePercentage > 50 ? (
-                            <>
-                                <strong>{pineapplePercentage}%</strong> say <strong className="text-green">YES</strong>!
-                            </>
-                        ) : pineapplePercentage == 50 ? (
-                            <>Team is evenly split</>
-                        ) : (
-                            <>
-                                <strong>{100 - pineapplePercentage}%</strong> say{' '}
-                                <strong className="text-red">NO!</strong>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
     )
 }
 
