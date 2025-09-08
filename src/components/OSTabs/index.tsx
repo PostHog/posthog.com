@@ -140,7 +140,10 @@ export default function OSTabs({
         // Only run tab row calculation for horizontal orientation (when tabs might wrap)
         if (orientation === 'vertical' || !ref.current) return
 
-        calculateTabRows()
+        setTimeout(() => {
+            calculateTabRows()
+        }, 300)
+
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
