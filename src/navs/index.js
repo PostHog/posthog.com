@@ -1698,12 +1698,12 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
-                    name: 'Billing',
-                    url: '/teams/billing',
+                    name: 'Batch Exports',
+                    url: '/teams/batch-exports',
                 },
                 {
-                    name: 'CDP',
-                    url: '/teams/cdp',
+                    name: 'Billing',
+                    url: '/teams/billing',
                 },
                 {
                     name: 'ClickHouse',
@@ -1754,8 +1754,12 @@ export const companyMenu = {
                     url: '/teams/messaging',
                 },
                 {
-                    name: 'Platform',
-                    url: '/teams/platform',
+                    name: 'Platform Analytics',
+                    url: '/teams/platform-analytics',
+                },
+                {
+                    name: 'Platform Features',
+                    url: '/teams/platform-features',
                 },
                 {
                     name: 'Platform UX',
@@ -1793,8 +1797,8 @@ export const companyMenu = {
                     url: '/teams/content',
                 },
                 {
-                    name: 'CS & Onboarding',
-                    url: '/teams/cs-onboarding',
+                    name: 'Customer Success',
+                    url: '/teams/customer-success',
                 },
                 {
                     name: 'Demand Gen',
@@ -1805,6 +1809,10 @@ export const companyMenu = {
                     url: '/teams/exec',
                 },
                 {
+                    name: 'Marketing',
+                    url: '/teams/marketing',
+                },
+                {
                     name: 'Onboarding',
                     url: '/teams/onboarding',
                 },
@@ -1813,7 +1821,7 @@ export const companyMenu = {
                     url: '/teams/people',
                 },
                 {
-                    name: 'Sales & CS',
+                    name: 'Sales',
                     url: '/teams/sales-cs',
                 },
                 {
@@ -2794,6 +2802,10 @@ export const docsMenu = {
                         {
                             name: 'Pomerium',
                             url: '/docs/advanced/proxy/pomerium',
+                        },
+                        {
+                            name: 'Railway',
+                            url: '/docs/advanced/proxy/railway',
                         },
                         {
                             name: 'Remix',
