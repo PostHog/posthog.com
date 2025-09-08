@@ -62,7 +62,7 @@ export const productLinks: AppItem[] = [
     },
     {
         label: 'Talk to a human',
-        Icon: <AppIcon name="contact" />,
+        Icon: <AppIcon name="envelope" />,
         url: '/talk-to-a-human',
         source: 'desktop',
     },

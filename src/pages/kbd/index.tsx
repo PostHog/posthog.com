@@ -50,6 +50,7 @@ export default function KBDShortcuts(): JSX.Element {
         { keys: ['Shift', '↓'], description: 'Minimize window' },
         { keys: ['Shift', '←'], description: 'Snap window to left half' },
         { keys: ['Shift', '→'], description: 'Snap window to right half' },
+        { keys: ['Shift', 'F'], description: 'Search window content' },
       ],
     },
   ]

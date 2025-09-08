@@ -161,6 +161,10 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_classic_6362f6fbc5.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_modern_9beb68e461.png',
     },
+    envelope: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/envelope_classic_8ccd5e8abc.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/envelope_modern_f1c74ae9dd.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
@@ -255,9 +259,8 @@ export const AppLink = ({
     const getChildIconClasses = () => {
         if (typeof parentIcon === 'string' && parentIcon === 'page') {
             // Custom classes for page parentIcon
-            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${
-                color ? `bg-${color}` : ''
-            }`
+            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${color ? `bg-${color}` : ''
+                }`
         }
         // Default fallback classes
         return `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`
