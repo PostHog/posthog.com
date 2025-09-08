@@ -216,11 +216,7 @@ function DpaGenerator() {
     }
 
     return (
-        <Layout
-            headerBlur={false}
-            parent={sexyLegalMenu}
-            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'dpa generator')}
-        >
+        <>
             {showConfetti && <Confetti recycle={false} numberOfPieces={1000} />}
             <SEO
                 title="DPA generator"
@@ -273,7 +269,7 @@ function DpaGenerator() {
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
-                <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 @3xl:max-h-screen @3xl:reasonable:max-h-[calc(100vh-108px)] @3xl:overflow-auto @3xl:sticky top-0 reasonable:top-[108px] print:hidden">
+                <div className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 print:hidden`}>
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -439,7 +435,7 @@ function DpaGenerator() {
                     id="page"
                     className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] @3xl:top-0 reasonable:@3xl:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10">
                         <div className="text-lg font-bold dark:text-primary">Preview</div>
                         <Tooltip
                             content={() => (
@@ -1814,7 +1810,7 @@ function DpaGenerator() {
                     Talk to sales
                 </TrackedCTA>
             </section>
-        </Layout>
+        </>
     )
 }
 
