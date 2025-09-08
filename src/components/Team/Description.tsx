@@ -32,14 +32,14 @@ export default function Description({
                 className="w-full p-2 text-[15px] rounded-md bg-white dark:bg-accent-dark border border-input resize-none"
             />
         </div>
-    ) : (description || tagline) ? (
+    ) : description || tagline ? (
         <div className="space-y-2">
             {tagline && (
-                <p className="my-2 md:mb-4 text-[15px] text-secondary"><em>{tagline}</em></p>
+                <p className="my-2 text-[15px] text-secondary">
+                    <em>{tagline}</em>
+                </p>
             )}
-            {description && (
-                <p className="my-2 md:mb-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
-            )}
+            {description && <p className="my-2 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />}
         </div>
     ) : null
 }

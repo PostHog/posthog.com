@@ -391,7 +391,7 @@ export default function Job({
     }, [searchQuery, allJobs])
 
     const multipleTeams = teams?.nodes?.length > 1
-    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `Team ${teams?.nodes?.[0]?.name}` : ''
+    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `${teams?.nodes?.[0]?.name} Team` : ''
 
     const [jobTitle] = title.split(' - ')
 
@@ -539,11 +539,13 @@ export default function Job({
 
                 <div className="space-y-8">
                     <div>
-                        {teamName && <p className="m-0 opacity-60 pb-2">{teamName}</p>}
+                        {teamName && <p className="m-0 text-secondary pb-2">{teamName}</p>}
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
+                            {/*                         
                             {departmentName?.toLowerCase() !== 'speculative' && (
                                 <Detail title="Department" value={departmentName} icon={<Department />} />
-                            )}
+                            )} */}
+
                             <Detail
                                 title="Location"
                                 value={`Remote${locations?.length > 0 ? ` (${locations.join(', ')})` : ''}`}
@@ -582,12 +584,12 @@ export default function Job({
                         {/* Right sidebar with team info */}
                         <div className="lg:col-span-1">
                             <div className="sticky top-4">
-                                <h2 className="my-0 leading-tight text-base">
+                                <h2 className="mt-0 mb-2 leading-tight text-base text-center">
                                     {teams?.nodes?.length > 0
                                         ? multipleTeams
                                             ? 'Teams hiring for this role'
                                             : 'Meet your team'
-                                        : 'Your team'}
+                                        : 'About this team'}
                                 </h2>
 
                                 <TeamsSidebar
