@@ -25,9 +25,9 @@ Railway provides a simple way to deploy a [reverse proxy for PostHog](https://ra
         <img src="https://railway.com/button.svg" alt="Deploy on Railway" className="max-w-[200px] h-auto mb-4" noZoom />
     </a>
 </div>
-Make sure to set the `POSTHOG_CLOUD_REGION` variable to either `us` or `eu` depending on your PostHog cloud region, and to configure your domain to follow our [best practices](/docs/advanced/proxy#best-practices).
+Make sure to set the `POSTHOG_CLOUD_REGION` variable to either `us` or `eu` depending on your PostHog cloud region.
 
-Then configure your PostHog client to send requests through your Railway project.
+Afterwards, configure your PostHog client to send requests through your Railway reverse proxy.
 
 ```js
 posthog.init('<ph_project_api_key>', {
