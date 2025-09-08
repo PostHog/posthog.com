@@ -9,8 +9,7 @@ import * as Yup from 'yup'
 import Editor from 'components/Editor'
 import { Select } from 'components/RadixUI/Select'
 import OSButton from 'components/OSButton'
-import ScrollArea from "components/RadixUI/ScrollArea"
-
+import ScrollArea from 'components/RadixUI/ScrollArea'
 interface CustomFieldOption {
     label: string
     value: string | number
@@ -205,12 +204,14 @@ function RadioGroup({
     placeholder,
     cols = 2,
     type,
+    required,
 }: {
     options: CustomFieldOption[]
     name: string
     placeholder: string
     cols?: 1 | 2
     type: string
+    required?: boolean
 }) {
     if (!name) return null
     const { errors, values, setFieldValue } = useFormikContext<Record<string, any>>()
@@ -237,7 +238,10 @@ function RadioGroup({
         <>
             <div className={`${inputContainerClasses} ${error ? '' : ''}`}>
                 <p className={`m-0`} id={`group-${name}`}>
-                    {placeholder}
+                    <span>
+                        {placeholder}
+                        {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+                    </span>
                 </p>
             </div>
             <div className="col-span-full @lg:col-span-10">
@@ -254,10 +258,10 @@ function RadioGroup({
     )
 }
 
-const inputContainerClasses = `relative text-left text-sm col-span-full @lg:col-span-2 font-semibold`
+const inputContainerClasses = `relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center`
 
 const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
-    const { name, placeholder } = props
+    const { name, placeholder, required } = props
     if (!name) return null
     const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
     const error = (errors as any)[name]
@@ -265,7 +269,10 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
     return (
         <>
             <label className={`sr-only ${inputContainerClasses}`} htmlFor={props.id}>
-                {placeholder}
+                <span>
+                    {placeholder}
+                    {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+                </span>
             </label>
             <div className="col-span-full @lg:col-span-10">
                 <textarea
@@ -274,8 +281,9 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     onBlur={() => {
                         validateField(name)
                     }}
-                    className={`bg-primary outline-none border rounded shadow-none ring-0 focus:ring-0 resize-none ${error ? 'border-red' : 'border-primary'
-                        }`}
+                    className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full resize-none ${
+                        error ? 'border-red' : 'border-primary'
+                    }`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                 />
@@ -286,7 +294,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
 }
 
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
-    const { name, placeholder } = props
+    const { name, placeholder, required } = props
     if (!name) return null
     const type = props.type
     const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
@@ -294,7 +302,10 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     return (
         <>
             <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={props.id}>
-                {placeholder}
+                <span>
+                    {placeholder}
+                    {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+                </span>
             </label>
             <div className="col-span-full @lg:col-span-10">
                 <input
@@ -302,8 +313,9 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                     onBlur={() => {
                         validateField(name)
                     }}
-                    className={`outline-none text-sm rounded border bg-primary ${error ? 'border-red' : 'border-primary'
-                        } ring-0 focus:ring-0`}
+                    className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full ${
+                        error ? 'border-red' : 'border-primary'
+                    }`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                     type={props.type === 'date' ? 'date' : type || 'text'}
@@ -361,19 +373,28 @@ export default function SalesforceForm({
             <Formik
                 validationSchema={Yup.object().shape(
                     Object.fromEntries(
-                        form.fields.map((field) => [
-                            field.name,
-                            field.required
-                                ? field.fieldType === 'checkbox'
-                                    ? Yup.array()
-                                        .of(Yup.string())
-                                        .min(1, `${field.label} is a required field`)
-                                        .required(`${field.label} is a required field`)
-                                    : Yup.string().required(`${field.label} is a required field`)
-                                : field.fieldType === 'checkbox'
+                        form.fields.map((field) => {
+                            const fieldLabel = field.placeholder || field.label
+                            return [
+                                field.name,
+                                field.required
+                                    ? field.fieldType === 'checkbox'
+                                        ? Yup.array()
+                                              .of(Yup.string())
+                                              .min(1, `${fieldLabel} is required`)
+                                              .required(`${fieldLabel} is required`)
+                                        : field.fieldType === 'email'
+                                        ? Yup.string()
+                                              .email('Please enter a valid email address')
+                                              .required(`${fieldLabel} is required`)
+                                        : Yup.string().required(`${fieldLabel} is required`)
+                                    : field.fieldType === 'checkbox'
                                     ? Yup.array().of(Yup.string())
+                                    : field.fieldType === 'email'
+                                    ? Yup.string().email('Please enter a valid email address')
                                     : Yup.string(),
-                        ])
+                            ]
+                        })
                     )
                 )}
                 validateOnChange={false}
@@ -392,10 +413,15 @@ export default function SalesforceForm({
                         <ScrollArea className="min-h-0">
                             <div className="@container p-4">
                                 <div className="grid grid-cols-12 gap-2">
-                                    <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold ">To</span>
+                                    <span className="relative text-left text-sm col-span-full @lg:col-span-2 font-semibold flex items-center">
+                                        To
+                                    </span>
                                     <div className="col-span-full @lg:col-span-10 text-sm">sales@posthog.com</div>
                                     {form.fields.map(
-                                        ({ name, label, placeholder, type, required, options, fieldType, cols }, index) => {
+                                        (
+                                            { name, label, placeholder, type, required, options, fieldType, cols },
+                                            index
+                                        ) => {
                                             if (customFields && customFields[name])
                                                 return {
                                                     radioGroup: (
@@ -405,6 +431,7 @@ export default function SalesforceForm({
                                                             name={name}
                                                             placeholder={label}
                                                             cols={customFields[name].cols ?? formOptions?.cols}
+                                                            required={required}
                                                         />
                                                     ),
                                                 }[customFields[name]?.type]
@@ -418,6 +445,7 @@ export default function SalesforceForm({
                                                         name={name}
                                                         placeholder={label}
                                                         cols={cols || formOptions?.cols}
+                                                        required={required}
                                                     />
                                                 )
 

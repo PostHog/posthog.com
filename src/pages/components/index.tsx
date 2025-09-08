@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
@@ -11,6 +11,8 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
+import { OSInput, OSTextarea } from 'components/OSForm'
+import { Fieldset } from 'components/OSFieldset'
 
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
@@ -60,18 +62,18 @@ export default function Components(): JSX.Element {
                 template="generic"
                 slug="components"
                 title="Components"
-            // options below only needed to override matching the slug
-            // teamName="product-analytics"
-            // roadmapCategory="product-analytics"
-            // changelogCategory="product-analytics"
-            // accentImage={
-            //     <CloudinaryImage
-            //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
-            //         alt="Screenshot of hedgehog mode's party mode"
-            //         className="w-full"
-            //         placeholder="none"
-            //     />
-            // }
+                // options below only needed to override matching the slug
+                // teamName="product-analytics"
+                // roadmapCategory="product-analytics"
+                // changelogCategory="product-analytics"
+                // accentImage={
+                //     <CloudinaryImage
+                //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
+                //         alt="Screenshot of hedgehog mode's party mode"
+                //         className="w-full"
+                //         placeholder="none"
+                //     />
+                // }
             >
                 <div className="@container text-primary">
                     <div className="space-y-12">
@@ -1295,6 +1297,362 @@ export default function Components(): JSX.Element {
                                 </div>
                             </div>
                         </section>
+
+                        {/* Form Elements Section */}
+                        <section>
+                            <h2 className="">Form elements</h2>
+
+                            {/* OSInput Component Showcase */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">
+                                    <code>&lt;OSInput /&gt;</code>
+                                </h3>
+
+                                {/* Basic Examples */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Basic examples</h4>
+                                    <div className="space-y-4">
+                                        <OSInput
+                                            label="Email"
+                                            type="email"
+                                            placeholder="you@example.com"
+                                            name="email-basic"
+                                        />
+                                        <OSInput label="Password" type="password" name="password-basic" />
+                                        <OSInput
+                                            label="Phone"
+                                            type="tel"
+                                            placeholder="+1 (555) 000-0000"
+                                            name="phone-basic"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Sizes */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Sizes</h4>
+                                    <div className="space-y-4">
+                                        <OSInput label="Small" size="sm" placeholder="Small input" name="small-input" />
+                                        <OSInput
+                                            label="Medium"
+                                            size="md"
+                                            placeholder="Medium input (default)"
+                                            name="medium-input"
+                                        />
+                                        <OSInput label="Large" size="lg" placeholder="Large input" name="large-input" />
+                                    </div>
+                                </div>
+
+                                {/* Directions */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Label directions</h4>
+                                    <div className="space-y-4">
+                                        <OSInput
+                                            label="Row direction"
+                                            direction="row"
+                                            placeholder="Label on the left"
+                                            name="row-direction"
+                                        />
+                                        <OSInput
+                                            label="Column direction"
+                                            direction="column"
+                                            placeholder="Label above"
+                                            name="column-direction"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Width Options */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Width options</h4>
+                                    <div className="space-y-4">
+                                        <div className="border border-dashed border-primary p-2">
+                                            <OSInput
+                                                label="Full width"
+                                                width="full"
+                                                placeholder="Takes full container width"
+                                                name="full-width"
+                                            />
+                                        </div>
+                                        <div className="border border-dashed border-primary p-2">
+                                            <OSInput
+                                                label="Auto width"
+                                                width="auto"
+                                                placeholder="Auto width"
+                                                name="auto-width"
+                                            />
+                                        </div>
+                                        <div className="border border-dashed border-primary p-2">
+                                            <OSInput label="Fit width" width="fit" placeholder="Fit" name="fit-width" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Features */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Features</h4>
+                                    <div className="space-y-4">
+                                        <OSInput
+                                            label="Required field"
+                                            required
+                                            placeholder="This field is required"
+                                            name="required-field"
+                                        />
+                                        <OSInput
+                                            label="With description"
+                                            description="Enter your primary email address"
+                                            placeholder="you@example.com"
+                                            name="with-description"
+                                        />
+                                        <OSInput
+                                            label="With tooltip"
+                                            tooltip="We'll never share your email"
+                                            placeholder="Hover the info icon"
+                                            name="with-tooltip"
+                                        />
+                                        <OSInput
+                                            label="Hidden label"
+                                            showLabel={false}
+                                            placeholder="No visible label"
+                                            name="hidden-label"
+                                        />
+                                        <OSInput
+                                            label="Custom label width"
+                                            labelWidth="w-32"
+                                            placeholder="Wider label column"
+                                            name="custom-label-width"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Error States */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Error states</h4>
+                                    <div className="space-y-4">
+                                        <OSInput
+                                            label="Invalid email"
+                                            type="email"
+                                            touched={true}
+                                            error="Please enter a valid email address"
+                                            placeholder="you@example.com"
+                                            name="error-email"
+                                        />
+                                        <OSInput
+                                            label="Required field"
+                                            touched={true}
+                                            error="This field is required"
+                                            placeholder="Cannot be empty"
+                                            name="error-required"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Complex Examples */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Complex examples</h4>
+                                    <div className="space-y-4">
+                                        <OSInput
+                                            label="Full featured"
+                                            type="email"
+                                            required
+                                            tooltip="Your primary contact email"
+                                            description="We'll use this for account notifications"
+                                            placeholder="you@example.com"
+                                            direction="column"
+                                            size="lg"
+                                            name="full-featured"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* OSTextarea Component Showcase */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">
+                                    <code>&lt;OSTextarea /&gt;</code>
+                                </h3>
+
+                                {/* Basic Examples */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Basic examples</h4>
+                                    <div className="space-y-4">
+                                        <OSTextarea
+                                            label="Message"
+                                            placeholder="Enter your message here..."
+                                            name="message-basic"
+                                        />
+                                        <OSTextarea
+                                            label="Description"
+                                            rows={6}
+                                            placeholder="Provide a detailed description..."
+                                            name="description-basic"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Features */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Features</h4>
+                                    <div className="space-y-4">
+                                        <OSTextarea
+                                            label="Required textarea"
+                                            required
+                                            placeholder="This field is required"
+                                            name="required-textarea"
+                                        />
+                                        <OSTextarea
+                                            label="With description"
+                                            description="Please be as detailed as possible"
+                                            placeholder="Your detailed response..."
+                                            name="textarea-with-description"
+                                        />
+                                        <OSTextarea
+                                            label="With tooltip"
+                                            tooltip="Markdown formatting is supported"
+                                            placeholder="You can use **bold** and *italic*"
+                                            name="textarea-with-tooltip"
+                                        />
+                                        <OSTextarea
+                                            label="Column layout"
+                                            direction="column"
+                                            placeholder="Label appears above the textarea"
+                                            name="textarea-column"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Error States */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Error states</h4>
+                                    <div className="space-y-4">
+                                        <OSTextarea
+                                            label="Invalid input"
+                                            touched={true}
+                                            error="Message must be at least 10 characters"
+                                            placeholder="Too short..."
+                                            name="textarea-error"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Fieldset Component Showcase */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">
+                                    <code>&lt;Fieldset /&gt;</code>
+                                </h3>
+
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Group related form fields</h4>
+                                    <div className="space-y-4">
+                                        <Fieldset legend="Personal Information">
+                                            <OSInput label="First name" direction="column" name="first-name" />
+                                            <OSInput label="Last name" direction="column" name="last-name" />
+                                            <OSInput
+                                                label="Email"
+                                                type="email"
+                                                direction="column"
+                                                name="fieldset-email"
+                                            />
+                                        </Fieldset>
+
+                                        <Fieldset legend="Address">
+                                            <OSInput label="Street" direction="column" name="street" />
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <OSInput label="City" direction="column" name="city" />
+                                                <OSInput label="ZIP" direction="column" name="zip" />
+                                            </div>
+                                        </Fieldset>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Complete Form Examples */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Complete form examples</h3>
+
+                                {/* Two Column Form */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Two-column form</h4>
+                                    <div className="border border-primary rounded p-6 bg-accent">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <OSInput
+                                                label="First name"
+                                                direction="column"
+                                                required
+                                                name="form-first-name"
+                                            />
+                                            <OSInput
+                                                label="Last name"
+                                                direction="column"
+                                                required
+                                                name="form-last-name"
+                                            />
+                                            <OSInput
+                                                label="Email"
+                                                type="email"
+                                                direction="column"
+                                                required
+                                                tooltip="We'll never share your email"
+                                                name="form-email"
+                                            />
+                                            <OSInput label="Phone" type="tel" direction="column" name="form-phone" />
+                                            <div className="md:col-span-2">
+                                                <OSTextarea
+                                                    label="Message"
+                                                    direction="column"
+                                                    required
+                                                    rows={4}
+                                                    description="Tell us what you're looking for"
+                                                    name="form-message"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="mt-4">
+                                            <OSButton variant="primary" size="md">
+                                                Submit
+                                            </OSButton>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Inline Form */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Inline form with consistent label widths</h4>
+                                    <div className="border border-primary rounded p-6 bg-accent">
+                                        <div className="space-y-3">
+                                            <OSInput
+                                                label="Username"
+                                                labelWidth="w-24"
+                                                required
+                                                name="inline-username"
+                                            />
+                                            <OSInput
+                                                label="Email"
+                                                type="email"
+                                                labelWidth="w-24"
+                                                required
+                                                name="inline-email"
+                                            />
+                                            <OSInput
+                                                label="Password"
+                                                type="password"
+                                                labelWidth="w-24"
+                                                required
+                                                name="inline-password"
+                                            />
+                                            <OSTextarea label="Bio" labelWidth="w-24" rows={3} name="inline-bio" />
+                                        </div>
+                                        <div className="mt-4 ml-26">
+                                            <OSButton variant="secondary" size="sm">
+                                                Save Profile
+                                            </OSButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                         <section>
                             <h2 className="">
                                 <code>useCustomers</code>

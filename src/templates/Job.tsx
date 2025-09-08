@@ -600,7 +600,6 @@ export default function Job({
                     </div>
 
                     <div className="max-w-4xl">
-
                         <div>
                             {sfBenchmark[salaryRole] && (
                                 <div id="salary">
@@ -618,7 +617,10 @@ export default function Job({
                                                             experience.
                                                         </p>
                                                         <p>
-                                                            <Link to="/handbook/people/compensation" state={{ newWindow: true }}>
+                                                            <Link
+                                                                to="/handbook/people/compensation"
+                                                                state={{ newWindow: true }}
+                                                            >
                                                                 Learn more about compensation
                                                             </Link>
                                                         </p>
@@ -649,7 +651,11 @@ export default function Job({
                                                                     key={title}
                                                                     className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
                                                                 >
-                                                                    <img className="max-w-[30px]" alt={title} src={image} />
+                                                                    <img
+                                                                        className="max-w-[30px]"
+                                                                        alt={title}
+                                                                        src={image}
+                                                                    />
                                                                     <span>{title}</span>
                                                                 </li>
                                                             )
@@ -657,7 +663,10 @@ export default function Job({
                                                     </ul>
                                                     <p>
                                                         Get more details about all our benefits on the{' '}
-                                                        <Link to="/careers#benefits" state={{ newWindow: true }}>Careers page</Link>.
+                                                        <Link to="/careers#benefits" state={{ newWindow: true }}>
+                                                            Careers page
+                                                        </Link>
+                                                        .
                                                     </p>
                                                 </>
                                             ),
@@ -691,12 +700,17 @@ export default function Job({
                                                                                         #{number}
                                                                                     </span>
                                                                                 </Link>
-                                                                                <Link to={url} external>{title}</Link>
+                                                                                <Link to={url} external>
+                                                                                    {title}
+                                                                                </Link>
                                                                             </div>
                                                                             {labels && labels.length > 0 && (
                                                                                 <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
                                                                                     {labels.map(
-                                                                                        ({ name, url }, index: number) => {
+                                                                                        (
+                                                                                            { name, url },
+                                                                                            index: number
+                                                                                        ) => {
                                                                                             return (
                                                                                                 <li key={name + index}>
                                                                                                     <Link
@@ -736,7 +750,10 @@ export default function Job({
                                                     <div className="mb-6">
                                                         {mission?.body && (
                                                             <MDXProvider
-                                                                components={{ HideFromJobPosting: () => null, TeamMember }}
+                                                                components={{
+                                                                    HideFromJobPosting: () => null,
+                                                                    TeamMember,
+                                                                }}
                                                             >
                                                                 <MDXRenderer>{mission.body}</MDXRenderer>
                                                             </MDXProvider>
@@ -764,8 +781,8 @@ export default function Job({
                                             content: (
                                                 <div className="mb-6">
                                                     <p>
-                                                        We do 2-3 short interviews, then pay you to do some real-life (or
-                                                        close to real-life) work.
+                                                        We do 2-3 short interviews, then pay you to do some real-life
+                                                        (or close to real-life) work.
                                                     </p>
                                                     <InterviewProcess role={title} inApplicationProcess />
                                                 </div>

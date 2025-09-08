@@ -14,6 +14,8 @@ import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import { IconExternal } from '@posthog/icons'
 import { useDropzone } from 'react-dropzone'
+import Input from '../OSForm/input'
+import Textarea from '../OSForm/textarea'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -25,50 +27,68 @@ interface IResumeComponentProps {
 
 const components = {
     valueselect: ({ title, required, path, options }) => (
-        <select
-            name={title}
-            data-path={path}
-            required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-        >
-            <option disabled selected value="">
-                Select an option
-            </option>
-            {options.map(({ label, value }) => {
-                return (
-                    <option key={value} value={value}>
-                        {label}
-                    </option>
-                )
-            })}
-        </select>
+        <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+                {title}
+                {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+            </label>
+            <select
+                name={title}
+                data-path={path}
+                required={required}
+                className="w-full bg-primary border border-primary rounded px-2.5 py-2 text-[15px]"
+            >
+                <option disabled selected value="">
+                    Select an option
+                </option>
+                {options.map(({ label, value }) => {
+                    return (
+                        <option key={value} value={value}>
+                            {label}
+                        </option>
+                    )
+                })}
+            </select>
+        </div>
     ),
     string: ({ title, required, path, placeholder }: IResumeComponentProps) => (
-        <input
+        <Input
+            label={title}
+            type="text"
+            size="md"
+            direction="column"
+            touched={false}
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-            placeholder={typeof placeholder === 'string' ? placeholder : title}
+            placeholder={title}
+            description={placeholder}
             name={title}
         />
     ),
     email: ({ title, required, path, placeholder }: IResumeComponentProps) => (
-        <input
+        <Input
+            label={title}
+            type="email"
+            size="md"
+            direction="column"
+            touched={false}
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-            type="email"
-            placeholder={placeholder || title}
+            placeholder={title}
+            description={placeholder}
             name={title}
         />
     ),
     longtext: ({ title, required, path, placeholder }: IResumeComponentProps) => (
-        <textarea
+        <Textarea
+            label={title}
             rows={5}
+            direction="column"
+            touched={false}
             data-path={path}
             required={required}
-            className="w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white/10 dark:text-white"
-            placeholder={placeholder || title}
+            placeholder={title}
+            description={placeholder}
             name={title}
         />
     ),
@@ -97,52 +117,64 @@ const components = {
         })
 
         return (
-            <div
-                {...getRootProps()}
-                className={`relative h-24 w-full border border-primary ${
-                    isDragActive ? 'bg-blue/10' : 'bg-accent'
-                } rounded-md flex justify-center items-center text-black/50 dark:text-white/50`}
-            >
-                <div className="absolute">
-                    {fileName ? (
-                        <p className="!m-0">{fileName}</p>
-                    ) : (
-                        <p className="flex space-x-3 items-center !m-0">
-                            <button type="button" className={container('primary', 'sm')} onClick={open}>
-                                <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
-                            </button>
-                            <span className="text-sm">or drag and drop here</span>
-                        </p>
-                    )}
+            <div className="w-full">
+                <label className="block text-sm font-medium mb-1">
+                    {title}
+                    {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
+                </label>
+                <div
+                    {...getRootProps()}
+                    className={`relative h-24 w-full border border-primary ${
+                        isDragActive ? 'bg-blue/10' : 'bg-accent'
+                    } rounded-md flex justify-center items-center text-black/50 dark:text-white/50`}
+                >
+                    <div className="absolute">
+                        {fileName ? (
+                            <p className="!m-0">{fileName}</p>
+                        ) : (
+                            <p className="flex space-x-3 items-center !m-0">
+                                <button type="button" className={container('primary', 'sm')} onClick={open}>
+                                    <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
+                                </button>
+                                <span className="text-sm">or drag and drop here</span>
+                            </p>
+                        )}
+                    </div>
+                    <input {...getInputProps()} ref={inputRef} data-path={path} required={required} name={title} />
                 </div>
-                <input {...getInputProps()} ref={inputRef} data-path={path} required={required} name={title} />
             </div>
         )
     },
     boolean: ({ title, required, path }: IResumeComponentProps) => (
-        <div className="flex space-x-4">
-            <label className="flex items-center space-x-2">
-                <input
-                    data-path={path}
-                    type="radio"
-                    name={title}
-                    value={true}
-                    className="w-4 h-4"
-                    required={required}
-                />
-                <span>Yes</span>
+        <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+                {title}
+                {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
             </label>
-            <label className="flex items-center space-x-2">
-                <input
-                    data-path={path}
-                    type="radio"
-                    name={title}
-                    value={false}
-                    className="w-4 h-4"
-                    required={required}
-                />
-                <span>No</span>
-            </label>
+            <div className="flex space-x-4">
+                <label className="flex items-center space-x-2">
+                    <input
+                        data-path={path}
+                        type="radio"
+                        name={title}
+                        value={true}
+                        className="w-4 h-4"
+                        required={required}
+                    />
+                    <span>Yes</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                    <input
+                        data-path={path}
+                        type="radio"
+                        name={title}
+                        value={false}
+                        className="w-4 h-4"
+                        required={required}
+                    />
+                    <span>No</span>
+                </label>
+            </div>
         </div>
     ),
 }
@@ -183,54 +215,50 @@ const Form = ({ setSubmitted, info, id }) => {
         <div>
             <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
             <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
+            {/*             
             <p className="opacity-50 text-sm">
                 <span className="font-bold">Bolded fields</span> are required
-            </p>
-            <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-3">
-                    {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
-                        return fields.map(({ field, isRequired, descriptionPlain }) => {
-                            const required = isRequired
-                            const type = field?.type?.toLowerCase()
+            </p> 
+            */}
+            <div className="bg-accent border border-primary p-4 rounded">
+                <form onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-2 gap-3">
+                        {info?.applicationFormDefinition?.sections?.map(({ fields }) => {
+                            return fields.map(({ field, isRequired, descriptionPlain }) => {
+                                const required = isRequired
+                                const type = field?.type?.toLowerCase()
 
-                            return (
-                                <div
-                                    className={
-                                        type === 'string' ||
-                                        type === 'email' ||
-                                        type === 'valueselect' ||
-                                        type === 'boolean'
-                                            ? 'sm:col-span-1 col-span-2 flex flex-col'
-                                            : 'col-span-2'
-                                    }
-                                    key={field?.path}
-                                >
-                                    <div className="flex-grow">
-                                        <label
-                                            className={`opacity-70 mb-1 inline-block ${required ? 'font-bold' : ''}`}
-                                            htmlFor={field?.title}
-                                        >
-                                            {field?.title}
-                                        </label>
+                                return (
+                                    <div
+                                        className={
+                                            type === 'string' ||
+                                            type === 'email' ||
+                                            type === 'valueselect' ||
+                                            type === 'boolean'
+                                                ? 'sm:col-span-1 col-span-2 flex flex-col'
+                                                : 'col-span-2'
+                                        }
+                                        key={field?.path}
+                                    >
+                                        {components[type] &&
+                                            components[type]({
+                                                title: field?.title,
+                                                required,
+                                                path: field?.path,
+                                                placeholder: descriptionPlain,
+                                                options: field?.selectableValues,
+                                            })}
                                     </div>
-                                    {components[type] &&
-                                        components[type]({
-                                            title: field?.title,
-                                            required,
-                                            path: field?.path,
-                                            placeholder: descriptionPlain,
-                                            options: field?.selectableValues,
-                                        })}
-                                </div>
-                            )
-                        })
-                    })}
-                </div>
-                {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
-                <button className={`${container()} mt-6 shadow-none !w-full box-border`}>
-                    <span className={child()}>Submit</span>
-                </button>
-            </form>
+                                )
+                            })
+                        })}
+                    </div>
+                    {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
+                    <button className={`${container()} mt-6 shadow-none !w-full box-border`}>
+                        <span className={child()}>Submit</span>
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

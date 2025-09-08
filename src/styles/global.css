@@ -548,20 +548,6 @@ blockquote {
     letter-spacing: -0.015em;
 }
 
-/* headers */
-
-input[type='text'],
-input[type='email'],
-input[type='tel'],
-input[type='number'],
-input[type='password'] {
-    @apply border border-primary px-1.5 py-1 text-sm w-full ring-0 focus:ring-1;
-}
-
-textarea {
-    @apply text-sm w-full ring-0 focus:ring-1;
-}
-
 fieldset {
     @apply border border-primary px-4 pt-2 pb-4 mb-4;
 
