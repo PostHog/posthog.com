@@ -28,10 +28,12 @@ import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
     IconArrowUpRight,
+    IconPencil,
     IconSpinner,
     IconUpload,
     IconX,
     IconCheck,
+    IconExternal,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
@@ -44,6 +46,9 @@ import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
 import { useToast } from '../../../context/Toast'
+import HeaderBar from 'components/OSChrome/HeaderBar'
+import OSButton from 'components/OSButton'
+import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 
 dayjs.extend(relativeTime)
 
@@ -925,14 +930,39 @@ export default function ProfilePage({ params }: PageProps) {
             if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
                 try {
                     const jwt = await getJwt()
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
+                    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${id}`, {
                         method: 'PUT',
                         headers: {
                             Authorization: `Bearer ${jwt}`,
                         },
                     })
+
+                    if (response.ok) {
+                        await mutate()
+                        addToast({
+                            description: (
+                                <>
+                                    <IconCheck className="text-green size-4 inline-block mr-1" />
+                                    User blocked successfully
+                                </>
+                            ),
+                            duration: 3000,
+                        })
+                    } else {
+                        console.error('Failed to block user:', response.status)
+                        addToast({
+                            description: 'Failed to block user',
+                            error: true,
+                            duration: 3000,
+                        })
+                    }
                 } catch (err) {
                     console.error(err)
+                    addToast({
+                        description: 'Failed to block user',
+                        error: true,
+                        duration: 3000,
+                    })
                 }
             } else {
                 return
@@ -940,17 +970,41 @@ export default function ProfilePage({ params }: PageProps) {
         } else {
             try {
                 const jwt = await getJwt()
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${id}`, {
                     method: 'PUT',
                     headers: {
                         Authorization: `Bearer ${jwt}`,
                     },
                 })
+
+                if (response.ok) {
+                    await mutate()
+                    addToast({
+                        description: (
+                            <>
+                                <IconCheck className="text-green size-4 inline-block mr-1" />
+                                User unblocked successfully
+                            </>
+                        ),
+                        duration: 3000,
+                    })
+                } else {
+                    console.error('Failed to unblock user:', response.status)
+                    addToast({
+                        description: 'Failed to unblock user',
+                        error: true,
+                        duration: 3000,
+                    })
+                }
             } catch (err) {
                 console.error(err)
+                addToast({
+                    description: 'Failed to unblock user',
+                    error: true,
+                    duration: 3000,
+                })
             }
         }
-        window.location.reload()
     }
 
     const { attributes: profile } = data || {}
@@ -1095,6 +1149,79 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <div data-scheme="secondary" className="h-full bg-primary text-primary">
             <SEO title={`${name}'s profile - PostHog`} />
+            <div className="border-b border-primary">
+                <HeaderBar
+                    rightActionButtons={
+                        isEditing ? (
+                            <div className="flex gap-1">
+                                <OSButton
+                                    size="md"
+                                    variant="secondary"
+                                    onClick={() => {
+                                        setIsEditing(false)
+                                        resetForm()
+                                    }}
+                                >
+                                    Cancel
+                                </OSButton>
+                                <OSButton size="md" variant="primary" onClick={submitForm} disabled={isSubmitting}>
+                                    {isSubmitting ? 'Saving...' : 'Save'}
+                                </OSButton>
+                            </div>
+                        ) : (
+                            <>
+                                {isModerator && (
+                                    <div className="flex gap-px border-r border-secondary pr-2 mr-2">
+                                        <OSButton
+                                            asLink
+                                            size="md"
+                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
+                                            tooltip={
+                                                <>
+                                                    View in Strapi{' '}
+                                                    <IconExternal className="size-4 text-secondary inline-block relative -top-px" />
+                                                </>
+                                            }
+                                            icon={<IconStrapi />}
+                                            iconClassName="size-5"
+                                            external
+                                        />
+
+                                        <OSButton
+                                            size="md"
+                                            tooltip={
+                                                profile?.user?.data?.attributes?.blocked
+                                                    ? 'Unblock user?'
+                                                    : 'Block user'
+                                            }
+                                            icon={
+                                                profile?.user?.data?.attributes?.blocked ? (
+                                                    <IconNoEntry />
+                                                ) : (
+                                                    <IconNoEntry />
+                                                )
+                                            }
+                                            iconClassName="size-5"
+                                            className={`${
+                                                profile?.user?.data?.attributes?.blocked ? '!bg-red !text-white' : ''
+                                            }`}
+                                            onClick={() => handleBlock(!profile?.user?.data?.attributes?.blocked)}
+                                        />
+                                    </div>
+                                )}
+                                {(isCurrentUser || (isModerator && user?.webmaster)) && (
+                                    <OSButton
+                                        size="md"
+                                        icon={<IconPencil />}
+                                        iconClassName="size-5"
+                                        onClick={() => setIsEditing(true)}
+                                    />
+                                )}
+                            </>
+                        )
+                    }
+                />
+            </div>
             <ScrollArea>
                 <div
                     data-scheme="primary"
@@ -1174,72 +1301,6 @@ export default function ProfilePage({ params }: PageProps) {
                             {isModerator && isEditing && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
-                                </Block>
-                            )}
-                            {isEditing ? (
-                                <div className="space-y-2 mb-4">
-                                    <CallToAction
-                                        size="sm"
-                                        type="primary"
-                                        width="full"
-                                        onClick={submitForm}
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? (
-                                            <IconSpinner className="size-5 animate-spin mx-auto" />
-                                        ) : (
-                                            'Update profile'
-                                        )}
-                                    </CallToAction>
-                                    <CallToAction
-                                        size="sm"
-                                        type="secondary"
-                                        width="full"
-                                        onClick={() => {
-                                            setIsEditing(false)
-                                            resetForm()
-                                        }}
-                                    >
-                                        Cancel
-                                    </CallToAction>
-                                </div>
-                            ) : (
-                                (user?.profile?.id === data?.id ||
-                                    (user?.role?.type === 'moderator' && user?.webmaster)) && (
-                                    <div className="mb-4">
-                                        <CallToAction
-                                            size="sm"
-                                            onClick={() => {
-                                                setIsEditing(true)
-                                            }}
-                                            type="secondary"
-                                            width="full"
-                                        >
-                                            Edit profile
-                                        </CallToAction>
-                                    </div>
-                                )
-                            )}
-                            {isModerator && (
-                                <Block title="Moderator tools">
-                                    <div className="space-y-2">
-                                        <CallToAction
-                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
-                                            size="sm"
-                                            type="secondary"
-                                            width="full"
-                                        >
-                                            View in Strapi
-                                        </CallToAction>
-                                        <CallToAction
-                                            size="sm"
-                                            type="primary"
-                                            onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
-                                            width="full"
-                                        >
-                                            {profile.user?.data.attributes.blocked ? 'Unblock User' : 'Block User'}
-                                        </CallToAction>
-                                    </div>
                                 </Block>
                             )}
                         </div>
