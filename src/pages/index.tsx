@@ -653,8 +653,8 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'session_replay',
                             'web_analytics',
+                            'session_replay',
                             'product_analytics',
                             'feature_flags',
                             'surveys',
@@ -667,9 +667,9 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'product_analytics',
-                            'web_analytics',
                             'session_replay',
+                            'web_analytics',
+                            'product_analytics',
                             'experiments',
                             'feature_flags',
                             'surveys',
