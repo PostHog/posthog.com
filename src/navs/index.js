@@ -4527,30 +4527,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'MRR Breakdown',
-                    url: '/docs/revenue-analytics/mrr-breakdown',
-                    icon: 'IconGraph',
-                    color: 'red',
-                },
-                {
-                    name: 'Metrics',
-                    url: '/docs/revenue-analytics/metrics',
-                    icon: 'IconFunnels',
-                    color: 'purple',
-                },
-                {
-                    name: 'Revenue Breakdowns',
-                    url: '/docs/revenue-analytics/revenue-breakdowns',
-                    icon: 'IconWrench',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Revenue Goals',
-                    url: '/docs/revenue-analytics/revenue-goals',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
-                },
-                {
                     name: 'Connect to customers',
                     url: '/docs/revenue-analytics/connect-to-customers',
                     icon: 'IconPeople',
