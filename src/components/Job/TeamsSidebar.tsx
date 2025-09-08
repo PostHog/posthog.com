@@ -9,6 +9,11 @@ import { Accordion } from 'components/RadixUI/Accordion'
 const parseDescriptionWithLinks = (htmlString: string) => {
     if (!htmlString) return null
 
+    // Check if we're in a browser environment (not SSR)
+    if (typeof document === 'undefined') {
+        return htmlString
+    }
+
     // Create a temporary div to parse the HTML
     const tempDiv = document.createElement('div')
     tempDiv.innerHTML = htmlString
