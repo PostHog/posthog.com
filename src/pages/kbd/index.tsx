@@ -23,12 +23,12 @@ export default function KBDShortcuts(): JSX.Element {
             shortcuts: [
                 { keys: ['/'], description: 'Open search' },
                 { keys: ['Shift', '?'], description: 'Open Max AI chat' },
+                { keys: [','], description: 'Open display options' },
             ],
         },
         {
             title: 'Appearance',
             shortcuts: [
-                { keys: [','], description: 'Open display options' },
                 { keys: ['Shift', '\\'], description: 'Cycle wallpapers' },
                 { keys: ['Shift', 'Z'], description: 'Start screensaver' },
                 { keys: ['\\'], description: 'Cycle color themes', info: 'Light, dark, system' },
