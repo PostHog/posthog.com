@@ -14,7 +14,13 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import { generateRawMarkdownPages, generateApiSpecMarkdown, generateLlmsTxt } from './rawMarkdownUtils'
+import {
+    generateRawMarkdownPages,
+    generateApiSpecMarkdown,
+    generateLlmsTxt,
+    generateSdkReferencesMarkdown,
+} from './rawMarkdownUtils'
+import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 
 const limit = pLimit(10)
 
@@ -258,6 +264,63 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     } catch (error) {
         console.error('Failed to generate API spec markdown:', error)
     }
+
+    // Generate SDK references markdown files
+
+    const sdkReferencesQuery = (await graphql(`
+        query {
+            allSdkReferencesJson {
+                edges {
+                    node {
+                        id
+                        hogRef
+                        info {
+                            version
+                            description
+                            id
+                            slugPrefix
+                            specUrl
+                            title
+                        }
+                        classes {
+                            description
+                            id
+                            title
+                            functions {
+                                category
+                                description
+                                details
+                                id
+                                showDocs
+                                title
+                                releaseTag
+                                examples {
+                                    code
+                                    id
+                                    name
+                                }
+                                params {
+                                    description
+                                    isOptional
+                                    type
+                                    name
+                                }
+                                returnType {
+                                    id
+                                    name
+                                }
+                            }
+                        }
+                        categories
+                    }
+                }
+            }
+        }
+    `)) as { data: { allSdkReferencesJson: { edges: { node: SdkReferenceData }[] } } }
+
+    sdkReferencesQuery.data.allSdkReferencesJson.edges.forEach(({ node }) => {
+        generateSdkReferencesMarkdown(node)
+    })
 
     // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
     const markdownQuery = await graphql(`

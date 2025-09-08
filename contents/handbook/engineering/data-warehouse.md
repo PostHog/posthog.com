@@ -47,7 +47,7 @@ Once MySQL is installed, create a database and table, insert a row, and create a
 mysql -u root
 ```
 
-```sql
+```sql runInPostHog=false
 CREATE DATABASE posthog_dw_test;
 CREATE TABLE IF NOT EXISTS payments (id INT AUTO_INCREMENT PRIMARY KEY, timestamp DATETIME, distinct_id VARCHAR(255), amount DECIMAL(10,2));
 

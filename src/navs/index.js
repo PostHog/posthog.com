@@ -81,6 +81,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'LinkedIn Ads',
+                    url: '/docs/cdp/sources/linkedin-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -573,8 +577,8 @@ export const handbookSidebar = [
                 url: '/handbook/people/feedback',
             },
             {
-                name: 'Clubs',
-                url: '/handbook/people/clubs',
+                name: 'BookHog',
+                url: '/handbook/people/bookhog',
             },
             {
                 name: 'Lore',
@@ -1308,6 +1312,10 @@ export const handbookSidebar = [
                                 name: 'Account planning',
                                 url: '/handbook/growth/sales/account-planning',
                             },
+                            {
+                                name: 'Cross-selling',
+                                url: '/handbook/growth/sales/cross-selling',
+                            },
                         ],
                     },
 
@@ -1462,6 +1470,10 @@ export const handbookSidebar = [
                     {
                         name: 'New hire onboarding exercise',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
+                    },
+                    {
+                        name: 'New customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding.md',
                     },
                 ],
             },
@@ -1698,12 +1710,12 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
-                    name: 'Billing',
-                    url: '/teams/billing',
+                    name: 'Batch Exports',
+                    url: '/teams/batch-exports',
                 },
                 {
-                    name: 'CDP',
-                    url: '/teams/cdp',
+                    name: 'Billing',
+                    url: '/teams/billing',
                 },
                 {
                     name: 'ClickHouse',
@@ -1754,8 +1766,12 @@ export const companyMenu = {
                     url: '/teams/messaging',
                 },
                 {
-                    name: 'Platform',
-                    url: '/teams/platform',
+                    name: 'Platform Analytics',
+                    url: '/teams/platform-analytics',
+                },
+                {
+                    name: 'Platform Features',
+                    url: '/teams/platform-features',
                 },
                 {
                     name: 'Platform UX',
@@ -1793,8 +1809,8 @@ export const companyMenu = {
                     url: '/teams/content',
                 },
                 {
-                    name: 'CS & Onboarding',
-                    url: '/teams/cs-onboarding',
+                    name: 'Customer Success',
+                    url: '/teams/customer-success',
                 },
                 {
                     name: 'Demand Gen',
@@ -1805,6 +1821,10 @@ export const companyMenu = {
                     url: '/teams/exec',
                 },
                 {
+                    name: 'Marketing',
+                    url: '/teams/marketing',
+                },
+                {
                     name: 'Onboarding',
                     url: '/teams/onboarding',
                 },
@@ -1813,7 +1833,7 @@ export const companyMenu = {
                     url: '/teams/people',
                 },
                 {
-                    name: 'Sales & CS',
+                    name: 'Sales',
                     url: '/teams/sales-cs',
                 },
                 {
@@ -2006,6 +2026,16 @@ export const docsMenu = {
                         {
                             name: 'Node.js',
                             url: '/docs/libraries/node',
+                            children: [
+                                {
+                                    name: 'Setup and features',
+                                    url: '/docs/libraries/node',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-node',
+                                },
+                            ],
                         },
                         {
                             name: 'PHP',
@@ -2371,6 +2401,37 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'AI engineering',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconLlmPromptEvaluation',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-engineering',
+                        },
+                        {
+                            name: 'Max AI',
+                            url: '/docs/max-ai',
+                        },
+                        {
+                            name: 'AI wizard',
+                            url: '/docs/ai-engineering/ai-wizard',
+                        },
+                        {
+                            name: 'Model Context Protocol (MCP)',
+                            url: '/docs/model-context-protocol',
+                        },
+                        {
+                            name: 'LLM analytics',
+                            url: 'https://posthog.com/docs/llm-analytics',
+                        },
+                        {
+                            name: 'Markdown and llms.txt',
+                            url: '/docs/ai-engineering/markdown-llms-txt',
+                        },
+                    ],
+                },
+                {
                     name: 'Winning with PostHog',
                 },
                 {
@@ -2499,10 +2560,6 @@ export const docsMenu = {
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
-                        },
-                        {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
                         },
@@ -2526,10 +2583,6 @@ export const docsMenu = {
                         {
                             name: 'Projects',
                             url: '/docs/settings/projects',
-                        },
-                        {
-                            name: 'Model context protocol (MCP)',
-                            url: '/docs/model-context-protocol',
                         },
                         {
                             name: 'Hog',
@@ -2761,6 +2814,10 @@ export const docsMenu = {
                         {
                             name: 'Pomerium',
                             url: '/docs/advanced/proxy/pomerium',
+                        },
+                        {
+                            name: 'Railway',
+                            url: '/docs/advanced/proxy/railway',
                         },
                         {
                             name: 'Remix',
@@ -3908,6 +3965,30 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'References',
+                    url: '/docs/error-tracking/references',
+                    icon: 'IconBox',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'JavaScript web SDK',
+                            url: '/docs/references/posthog-js?filter=error-tracking',
+                        },
+                        {
+                            name: 'Node.js SDK',
+                            url: '/docs/references/posthog-node?filter=error-tracking',
+                        },
+                        {
+                            name: 'Python SDK',
+                            url: '/docs/references/posthog-python?filter=error-tracking',
+                        },
+                        {
+                            name: 'Error tracking API',
+                            url: '/docs/api',
+                        },
+                    ],
+                },
+                {
                     name: 'More tutorials',
                     url: '/docs/error-tracking/tutorials',
                     icon: 'IconGraduationCap',
@@ -4034,6 +4115,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/',
                         },
                         {
+                            name: 'PostHog as a source',
+                            url: '/docs/data-warehouse/sources/posthog',
+                        },
+                        {
                             name: 'Managed',
                         },
                         {
@@ -4055,6 +4140,10 @@ export const docsMenu = {
                         {
                             name: 'Google Ads',
                             url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'LinkedIn Ads',
+                            url: '/docs/data-warehouse/sources/linkedin-ads',
                         },
                         {
                             name: 'Google Sheets',

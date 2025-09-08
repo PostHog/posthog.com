@@ -26,9 +26,9 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 We are all-remote, but we have a few limitations on the countries we are able to employ people in:
 
-- We hire within -8 to +2 GMT timezones. Beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
+- Our hiring is strictly limited to candidates **physically based** in GMT-8 through GMT+2. Unfortunately, we cannot hire people outside this range, even if they are willing to adjust their working hours. The only exception is for countries that are normally GMT+2 but move to GMT+3 during daylight savings (e.g. Bulgaria, Greece).
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
-- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs.
+- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, Denmark or Brazil, mainly due to the very high employer costs.
   - In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. We have done this before successfully in Brazil and Uruguay.
 - We have an entity in Germany, which allows us to hire people directly. However, due to employment restrictions with companies with over 10 people, we have reached the total number of employees that we will hire here, so we will no longer be hiring in Germany and no current team member will be able to relocate to Germany.
 
@@ -93,7 +93,6 @@ Ashby also had a partnership with YC's job board so all roles to YC's [Work at a
 **Engineering**
 
 *   Hacker News Who's Hiring - see [Tim's comment history](https://news.ycombinator.com/threads?id=timgl) for a template.
-*   [The Pragmatic Engineer](https://pragmatic-engineer.pallet.com/jobs)
 
 **Product**
 

@@ -45,7 +45,7 @@ The technical interview with [Simon](/community/profiles/28895) usually lasts 45
 
 #### Small Team Screen
 
-In this 30-minute interview, you'll be meeting with [Tim](/tim) who will be trying to answer "Would I buy from this person?"
+In this 30-minute interview, you'll be meeting with [Charles](https://posthog.com/community/profiles/28625) who will be trying to answer "Would I buy from this person?"
 
 #### Sales and CS SuperDay
 
