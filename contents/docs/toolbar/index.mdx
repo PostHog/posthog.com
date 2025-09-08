@@ -149,6 +149,8 @@ if (toolbarJSON) {
 }
 ```
 
+Another reason the toolbar might not load or display is using an ad blocker. Turning off your ad blocker should fix the issue in this case.
+
 ### Toolbar authentication issue (with reverse proxy)
 
 If you are having issues authenticating your toolbar and are using a [reverse proxy](/docs/advanced/proxy), be sure to pass the proper `ui_host` config parameter when initializing (like `ui_host: 'https://us.posthog.com'`). This ensures PostHog makes the authentication request to the correct host.
