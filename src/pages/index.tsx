@@ -389,7 +389,7 @@ const companyBreakdowns = {
     },
     shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
-    american: { col1: 'Founded in America', col2: 'Not founded in American' },
+    american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
 }
 
@@ -1204,9 +1204,8 @@ export default function Home() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 cta={{
-                    url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                    }.posthog.com/signup`,
+                    url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                        }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
             />
