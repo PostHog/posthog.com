@@ -19,8 +19,8 @@ import useProduct from '../../hooks/useProduct'
 import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
-import { IconChevronDown } from "@posthog/icons"
-import { navigate } from "gatsby"
+import { IconChevronDown } from '@posthog/icons'
+import { navigate } from 'gatsby'
 
 interface DocsMenuItem {
     name: string
@@ -307,7 +307,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Founder stack',
-                    link: '/founders',
+                    link: '/founder-stack',
                 },
                 {
                     type: 'item',
@@ -344,7 +344,7 @@ export function useMenuData(): MenuType[] {
             items: mergedDocsMenu(),
         },
         {
-            trigger: 'Content',
+            trigger: 'Library',
             items: [
                 {
                     type: 'item',
@@ -382,6 +382,15 @@ export function useMenuData(): MenuType[] {
                     link: '/about',
                 },
                 {
+                    type: 'submenu',
+                    label: 'Handbook',
+                    link: '/handbook',
+                    items: processHandbookSidebar(handbookSidebar),
+                },
+                {
+                    type: 'separator',
+                },
+                {
                     type: 'item',
                     label: 'People',
                     link: '/people',
@@ -392,20 +401,30 @@ export function useMenuData(): MenuType[] {
                     items: smallTeamsMenuItems,
                 },
                 {
-                    type: 'submenu',
-                    label: 'Handbook',
-                    link: '/handbook',
-                    items: processHandbookSidebar(handbookSidebar),
+                    type: 'item',
+                    label: 'Careers',
+                    link: '/careers',
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Roadmap',
+                    link: '/roadmap',
+                },
+                {
+                    type: 'item',
+                    label: 'Changelog',
+                    link: '/changelog',
+                },
+                {
+                    type: 'separator',
                 },
                 {
                     type: 'item',
                     label: 'Blog',
                     link: '/blog',
-                },
-                {
-                    type: 'item',
-                    label: 'Careers',
-                    link: '/careers',
                 },
                 {
                     type: 'submenu',
@@ -573,52 +592,52 @@ export function useMenuData(): MenuType[] {
     ]
 
     // On mobile, include main navigation items in the logo menu
-    const logoMenuItems = isLoaded && isMobile
-        ? [
-            {
-                type: 'item' as const,
-                label: 'home.mdx',
-                link: '/',
-            },
-            { type: 'separator' as const },
-            // Main navigation items as submenus
-            ...mainNavItems.map(item => ({
-                type: 'submenu' as const,
-                label: typeof item.trigger === 'string' ? item.trigger : 'More',
-                items: item.items,
-            })),
-            { type: 'separator' as const },
-            // System items
-            ...baseLogoMenuItems,
-        ]
-        : [
-            // Desktop: only show system items
-            ...baseLogoMenuItems,
-            { type: 'separator' as const },
-            {
-                type: 'item' as const,
-                label: 'Start screensaver',
-                onClick: () => {
-                    setScreensaverPreviewActive(true)
-                },
-                shortcut: ['Shift', 'Z'],
-            },
-            {
-                type: 'item' as const,
-                label: 'Close all windows',
-                disabled: windows.length < 1,
-                onClick: () => {
-                    animateClosingAllWindows()
-                },
-                shortcut: ['Shift', 'X'],
-            },
-        ]
+    const logoMenuItems =
+        isLoaded && isMobile
+            ? [
+                  {
+                      type: 'item' as const,
+                      label: 'home.mdx',
+                      link: '/',
+                  },
+                  { type: 'separator' as const },
+                  // Main navigation items as submenus
+                  ...mainNavItems.map((item) => ({
+                      type: 'submenu' as const,
+                      label: typeof item.trigger === 'string' ? item.trigger : 'More',
+                      items: item.items,
+                  })),
+                  { type: 'separator' as const },
+                  // System items
+                  ...baseLogoMenuItems,
+              ]
+            : [
+                  // Desktop: only show system items
+                  ...baseLogoMenuItems,
+                  { type: 'separator' as const },
+                  {
+                      type: 'item' as const,
+                      label: 'Start screensaver',
+                      onClick: () => {
+                          setScreensaverPreviewActive(true)
+                      },
+                      shortcut: ['Shift', 'Z'],
+                  },
+                  {
+                      type: 'item' as const,
+                      label: 'Close all windows',
+                      disabled: windows.length < 1,
+                      onClick: () => {
+                          animateClosingAllWindows()
+                      },
+                      shortcut: ['Shift', 'X'],
+                  },
+              ]
 
     return [
         {
             trigger: (
                 <>
-
                     <div className="flex items-center">
                         <Logo noText className="size-8 2xs:hidden md:block md:size-6" fill="primary" classic />
                         <Logo className="hidden 2xs:flex md:hidden h-5 w-auto" fill="primary" classic />
