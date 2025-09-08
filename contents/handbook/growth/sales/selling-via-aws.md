@@ -6,6 +6,7 @@ showTitle: true
 
 
 PostHog is now available on AWS Marketplace for SaaS products. The way we've chosen to list our product is that it is not available as a public offering and instead is "listed" but only available via AWS "Private Offers", which means we create custom order forms for each customer through AWS that they accept via their portal.
+
 AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team members set the price as a lump sum credit purchase for **annual pre-payment only**. Down the road, if we change our listing to public on the marketplace, we could set up usage-based billing through AWS (but that's future state).
 
 ## Why this matters
