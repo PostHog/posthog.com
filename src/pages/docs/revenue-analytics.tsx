@@ -7,6 +7,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import Link from 'components/Link'
+import AskMax from 'components/AskMax'
 
 type RevenueAnalyticsProps = {
     data: {
@@ -28,6 +29,15 @@ export const Content = ({ quickLinks = false }) => {
                 />
             )}
 
+            <AskMax
+                quickQuestions={[
+                    'Can I track my revenue with PostHog?',
+                    'What metrics can I track with revenue analytics?',
+                    "How can I see how much money I'm making per country/product/etc?",
+                    "What's deferred revenue?",
+                ]}
+            />
+
             <section className="mb-12">
                 <h3 className="mb-2 text-xl">FAQ</h3>
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4">
@@ -40,7 +50,7 @@ export const Content = ({ quickLinks = false }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/persons-and-groups">
+                        <Link to="/docs/revenue-analytics/connecting-revenue-to-customers">
                             How can I see how much money I'm making from my customers?
                         </Link>
                     </li>
