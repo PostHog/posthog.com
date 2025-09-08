@@ -412,10 +412,18 @@ export default function Job({
                     const summaryToRemove = contentClone.querySelector('summary')
                     summaryToRemove?.remove()
 
+                    // Create a unique ID for this section
+                    const sectionId = `content-section-${index}`
+
                     return {
-                        value: `section-${index}`,
-                        trigger: <h3 className="!m-0">{title}</h3>,
+                        value: sectionId,
+                        trigger: (
+                            <h3 className="!m-0" id={sectionId}>
+                                {title}
+                            </h3>
+                        ),
                         content: <div dangerouslySetInnerHTML={{ __html: contentClone.innerHTML }} />,
+                        title: title, // Store title for TOC mapping
                     }
                 })
                 setParsedContent(accordionItems)
@@ -423,17 +431,36 @@ export default function Job({
         }
     }, [html])
 
-    const jobTableOfContents = [
-        ...tableOfContents,
-        ...(sfBenchmark[salaryRole] ? [{ value: 'Salary', url: '#salary', depth: 0 }] : []),
-        { value: 'Benefits', url: '#benefits', depth: 0 },
-        ...(gitHubIssues.length > 0 ? [{ value: 'Typical tasks', url: '#typical-tasks', depth: 0 }] : []),
-        ...(!multipleTeams && showObjectives && objectives
-            ? [{ value: "Your team's mission and objectives", url: '#mission-objectives', depth: 0 }]
-            : []),
-        { value: 'Interview process', url: '#interview-process', depth: 0 },
-        { value: 'Apply', url: '#apply', depth: 0 },
-    ]
+    const jobTableOfContents = useMemo(() => {
+        // Replace the original table of contents entries with accordion section references
+        const tocWithAccordions = tableOfContents.map((item: any) => {
+            // Find if this TOC item matches an accordion section
+            const accordionItem = parsedContent.find((content: any) => content.title === item.value)
+
+            if (accordionItem) {
+                // This is an accordion section, update the URL to point to the accordion
+                return {
+                    ...item,
+                    url: `#${accordionItem.value}`,
+                    isAccordion: true,
+                }
+            }
+
+            return item
+        })
+
+        return [
+            ...tocWithAccordions,
+            ...(sfBenchmark[salaryRole] ? [{ value: 'Salary', url: '#salary', depth: 0 }] : []),
+            { value: 'Benefits', url: '#benefits', depth: 0 },
+            ...(gitHubIssues.length > 0 ? [{ value: 'Typical tasks', url: '#typical-tasks', depth: 0 }] : []),
+            ...(!multipleTeams && showObjectives && objectives
+                ? [{ value: "Your team's mission and objectives", url: '#mission-objectives', depth: 0 }]
+                : []),
+            { value: 'Interview process', url: '#interview-process', depth: 0 },
+            { value: 'Apply', url: '#apply', depth: 0 },
+        ]
+    }, [tableOfContents, parsedContent, salaryRole, gitHubIssues, multipleTeams, showObjectives, objectives])
 
     return (
         <>
@@ -491,9 +518,15 @@ export default function Job({
                                         className="font-semibold text-sm hover:underline block p-1 w-full text-left"
                                         onClick={() => {
                                             setShowTableOfContents(false)
-                                            const el = document.querySelector(item.url)
-                                            if (!el) return
-                                            el.scrollIntoView({ behavior: 'smooth' })
+
+                                            // Get the element ID from the URL (remove the #)
+                                            const elementId = item.url.substring(1)
+
+                                            // Find the element by ID
+                                            const el = document.getElementById(elementId)
+                                            if (el) {
+                                                el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                            }
                                         }}
                                     >
                                         {item.value}
@@ -525,7 +558,18 @@ export default function Job({
                         <div className="lg:col-span-2">
                             {/* Show parsed content in accordion if available, otherwise show raw HTML */}
                             {parsedContent.length > 0 ? (
-                                <Accordion skin={false} items={parsedContent} type="multiple" defaultOpenAll={true} />
+                                <div>
+                                    {parsedContent.map((item) => (
+                                        <div key={item.value} id={item.value}>
+                                            <Accordion
+                                                skin={false}
+                                                items={[item]}
+                                                type="single"
+                                                defaultValue={item.value}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
                             ) : (
                                 <div
                                     dangerouslySetInnerHTML={{

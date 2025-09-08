@@ -69,7 +69,7 @@ export const TeamInfoDisplay = ({
                             name={displayTeam.name}
                             imageUrl={displayTeam.crest?.data?.attributes?.url}
                             {...displayTeam.crestOptions}
-                            className="w-32"
+                            className="w-full"
                         />
                     ) : (
                         // Link real teams
@@ -78,7 +78,7 @@ export const TeamInfoDisplay = ({
                                 name={displayTeam.name}
                                 imageUrl={displayTeam.crest?.data?.attributes?.url}
                                 {...displayTeam.crestOptions}
-                                className="w-32"
+                                className="w-full"
                             />
                         </Link>
                     )}
