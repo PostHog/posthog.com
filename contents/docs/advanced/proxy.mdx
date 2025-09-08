@@ -6,7 +6,7 @@ showTitle: true
 
 import ProxyPathNamesWarning from "./_snippets/proxy-path-names-warning.mdx"
 
-A reverse proxy enables you to send events to PostHog Cloud using your own domain. 
+A reverse proxy enables you to send events to PostHog Cloud using your own domain.
 
 This means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog.
 
@@ -14,7 +14,7 @@ You then use this subdomain as your `api_host` in the initialization of PostHog 
 
 ## Why do we recommend deploying one?
 
-Using a reverse proxy means that events are less likely to be intercepted by tracking blockers. 
+Using a reverse proxy means that events are less likely to be intercepted by tracking blockers.
 
 You'll be able to capture more usage data without having to self-host PostHog, ensuring you get a complete view of your users.
 
@@ -34,6 +34,8 @@ Other documented options for deploying a reverse proxy include:
 - [Next.js rewrites](/docs/advanced/proxy/nextjs)
 - [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
 - [nginx](/docs/advanced/proxy/nginx)
+- [node](/docs/advanced/proxy/node)
+- [Railway](/docs/advanced/proxy/railway)
 - [Remix](/docs/advanced/proxy/remix)
 - [SvelteKit](/docs/advanced/proxy/sveltekit)
 - [Vercel](/docs/advanced/proxy/vercel)
@@ -64,4 +66,3 @@ If you want to use an alternative reverse proxy that we have not documented, it 
 <CalloutBox icon="IconWarning" title="Beware of size limits" type="caution">
   Some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need to adjust your limits.
 </CalloutBox>
-

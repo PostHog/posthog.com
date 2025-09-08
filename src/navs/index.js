@@ -2808,6 +2808,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/pomerium',
                         },
                         {
+                            name: 'Railway',
+                            url: '/docs/advanced/proxy/railway',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/advanced/proxy/remix',
                         },
