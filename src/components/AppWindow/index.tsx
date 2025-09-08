@@ -486,10 +486,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                           item.minimal
                                               ? '!shadow-none'
                                               : `flex flex-col ${
-                                                    size.width >=
-                                                    (typeof window !== 'undefined' ? window?.innerWidth : 0)
-                                                        ? ''
-                                                        : 'border rounded'
+                                                    siteSettings.experience === 'boring' ? '' : 'border rounded'
                                                 }`
                                       }`
                             } ${chrome ? 'overflow-hidden' : ''}`}
