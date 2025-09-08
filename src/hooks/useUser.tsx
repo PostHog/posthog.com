@@ -114,7 +114,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         if (jwt && (await fetchUser(jwt))) {
             setJwt(jwt)
         } else {
-            logout()
+            clearUser()
         }
         setIsValidating(false)
     }
@@ -208,14 +208,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     }
 
-    const logout = async (): Promise<void> => {
-        posthog?.capture('squeak logout')
-
+    const clearUser = async (): Promise<void> => {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
 
         setUser(null)
         setJwt(null)
+    }
+
+    const logout = async (): Promise<void> => {
+        posthog?.capture('squeak logout')
+
+        clearUser()
     }
 
     const signUp = async ({
