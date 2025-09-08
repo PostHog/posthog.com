@@ -22,7 +22,7 @@ You'll be able to capture more usage data without having to self-host PostHog, e
 
 Using our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) is the easiest way to do this.
 
-It's available as part of our [platforms add-ons](/platforms-addons), which includes automatic provisioning, SSO and 2FA enforcement, priority support, and additional collaboration features.
+It's available as part of our [platforms add-ons](/platform-addons), which includes automatic provisioning, SSO and 2FA enforcement, priority support, and additional collaboration features.
 
 Other documented options for deploying a reverse proxy include:
 
@@ -60,3 +60,8 @@ If you want to use an alternative reverse proxy that we have not documented, it 
   reverse_proxy: https://us.i.posthog.com/*
   host_header: us.i.posthog.com
 ```
+
+<CalloutBox icon="IconWarning" title="Beware of size limits" type="caution">
+  Some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need to adjust your limits.
+</CalloutBox>
+

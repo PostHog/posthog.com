@@ -1,0 +1,30 @@
+---
+title: Spans
+---
+
+import SpanEvent from "./_snippets/span-event.mdx"
+
+Spans are units of work within an LLM [trace](/docs/llm-analytics/traces). These are events that represent individual operations and discrete durations within your LLM application, like function calls, vector searches, or data retrieval steps, providing granular visibility into the execution flow. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llm_spans_151fd2701a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llm_spans_dark_6ce1cab5b9.png"
+  alt="LLM trace tree"
+  classes="rounded"
+/>
+
+<Caption>Spans are nested and displayed within a trace</Caption>
+
+PostHog captures spans to track atomic operations that make up your LLM workflow. For example:
+
+- **[Generations](/docs/llm-analytics/generations)** - LLM calls and interactions
+- **Vector database searches** - Document and embedding retrieval
+- **Tool/function calls** - API calls, calculations, database queries  
+- **RAG pipeline steps** - Retrieval, reranking, context building
+- **Data processing** - Validation, chunking, formatting
+
+For technical implementation details, see [manual capture](/docs/llm-analytics/manual-capture).
+
+## Event properties
+
+<SpanEvent />

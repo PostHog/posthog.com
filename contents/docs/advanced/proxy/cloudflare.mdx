@@ -6,12 +6,14 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
   1. <ProxyWarning />
   2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
 
 </CalloutBox>
 
@@ -27,7 +29,7 @@ Workers are really powerful and allow up to 100,000 requests per day on the free
 
 ### 1. Create a worker
 
-From the root of the Cloudflare dashboard, go to "Workers & Pages" > "Overview" > "Create application" > "Create Worker". At this point, you can either keep the random worker name or choose your own. Click "Deploy" once done.
+From the root of the Cloudflare dashboard, go to "Compute (Workers)" > "Workers & Pages" > "Create" > "Start with Hello World!". At this point, you can either keep the random worker name or choose your own. Click "Deploy" once done.
 
 ### 2. Configure the worker to act as a proxy
 
@@ -73,12 +75,12 @@ export default {
 
 ```
 
-When done, click "Save and deploy".
+When done, click "Deploy".
 
 ### 3. Use a custom domain for the worker
 
 This step is optional, but highly recommended. 
-To use your own domain instead of the basic `*.workers.dev` one, go to the worker page (by exiting the code editor, if you're still in it) and there click "settings" -> "triggers". Click "Add Custom Domain", type in a subdomain, and save with "Add Custom Domain". The subdomain can be anything, even `pineapple.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked.
+To use your own domain instead of the basic `*.workers.dev` one, go to the worker page (by exiting the code editor, if you're still in it) and there click "Settings" -> "Trigger Events". Click "Add" in the Domain & Routes section, click "Custom domain", type in a subdomain, and save with "Add domain". The subdomain can be anything, even `pineapple.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked.
 
 ### 4. Use the new host in SDKs
 

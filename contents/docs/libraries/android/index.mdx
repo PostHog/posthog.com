@@ -14,8 +14,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: false
-  llmObservability: false
-  errorTracking: false
+  llmAnalytics: false
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -272,6 +271,15 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Android SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
+## Offline behavior
+
+The PostHog Android SDK will continue to capture events when the device is offline. The events are stored in a queue in the device's file storage and are flushed when the device is online.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed when the app is restarted and the device is online.
+- When you call [`flush()`](#flush) while the device is offline, it aborts early and the events are not flushed.
+
 ## All configuration options
 
 When creating the PostHog client, there are many options you can set:
@@ -341,3 +349,10 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     reuseAnonymousId = false
 }
 ```
+
+# FAQ
+
+## Do I need to declare permissions in the AndroidManifest.xml?
+
+We don't declare nor use any 'Service', so no permissions are needed.
+

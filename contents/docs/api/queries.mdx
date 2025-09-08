@@ -4,14 +4,18 @@ sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 API queries enable you to query your data in PostHog. This is useful for:
 
-- Building user or [customer-facing analytics](/tutorials/customer-facing-analytics). 
+- Building [embedded analytics](/tutorials/embedded-analytics). 
 - Pulling aggregated PostHog data into your own or other apps.
 
 > **When should you _not_ use API queries?**
 > 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
 > 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
+> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views/materialize) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
 
 ## Prerequisites
 
@@ -160,7 +164,7 @@ createQuery()
 
 </MultiLanguage>
 
-Every query you run is logged in the `query_log` table along with details like duration, read bytes, read rows, and more.
+Every query you run is logged in the [`query_log` table](/docs/data/query-log) along with details like duration, read bytes, read rows, and more.
 
 ## Writing performant queries
 
@@ -250,7 +254,7 @@ createQuery()
 
 ### 2. Materialize a view for the data you need
 
-The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views#materializing-and-scheduling-a-view) of your data. This means that the view is precomputed, which can significantly improve query performance.
+The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views/materialize) of your data. This means that the view is precomputed, which can significantly improve query performance.
 
 To do this, write your query in the [SQL editor](https://us.posthog.com/sql), click **Materialize**, then **Save and materialize**, and give it a name without spaces (I chose `mat_event_count`). You can also schedule to update the view at a specific interval.
 
@@ -465,22 +469,27 @@ curl \
 
 ## Rate limits
 
-API queries on our free plans are limited to:
+API queries are limited at the project-level to:
 
-- 1 query running concurrently
-- 10,000 rows
-- 1TB read bytes during query processing
-
-
-Our pay-as-you-go plan lifts this to:
-
+- 1200 requests per hour
+- 120 requests per minute
 - 3 queries running concurrently
+- 80 threads per query
+- 10 seconds of max execution time
+  - applies to query execution time, not HTTP request duration
+
 
 If you need higher limits than these, [get in touch with our sales team](/talk-to-a-human). We promise they're friendly and technical enough to know what an API is.
 
+If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
+
+<CalloutBox type="fyi" icon="IconLightBulb" title="Legacy query limits">
+Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
+</CalloutBox>
+
 ## Further reading
 
-- [How to set up customer-facing analytics with PostHog, Next.js, and Tremor](/tutorials/customer-facing-analytics)
+- [How to set up embedded analytics with PostHog, Next.js, and Recharts](/tutorials/embedded-analytics)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
 - [The query endpoint API reference](/docs/api/query/)

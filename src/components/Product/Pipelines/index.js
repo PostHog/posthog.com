@@ -446,7 +446,7 @@ const CDPFlowChart = () => {
 }
 
 export const getIconUrl = (iconUrl) => {
-    return iconUrl?.startsWith('http') ? iconUrl : `https://app.posthog.com${iconUrl}`
+    return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
 }
 
 export const NotifyMe = ({ pipeline }) => {
@@ -575,7 +575,10 @@ function PipelinesPage({ location }) {
             (node) => selectedCategory === 'All' || node.category.includes(selectedCategory)
         )
     }, [selectedType, selectedCategory, pipelines])
-    const fuse = useMemo(() => new Fuse(nodesByCategory, { keys: ['name', 'description'] }), [nodesByCategory])
+    const fuse = useMemo(
+        () => new Fuse(nodesByCategory, { keys: ['name', 'description'], threshold: 0.3 }),
+        [nodesByCategory]
+    )
     const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
     const [selectedDestination, setSelectedDestination] = React.useState(null)
     const [modalOpen, setModalOpen] = React.useState(false)
@@ -642,9 +645,8 @@ function PipelinesPage({ location }) {
                     color="sky-blue"
                     icon={<IconPlug />}
                     product={product.capitalized}
-                    title="Ingest, transform, and send data between 25+ tools"
+                    title="Ingest, transform, and send data between hundreds of tools"
                     description="PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack."
-                    beta
                 />
 
                 <div className="flex justify-center mb-12">

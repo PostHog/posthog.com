@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting and FAQs
+title: Feature flag troubleshooting and FAQs
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -156,7 +156,7 @@ This applies to both boolean and multivariate flags. Multivariate flags assign u
 
 ## How are feature flags billed?
 
-Feature flags are charged based requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
@@ -170,6 +170,7 @@ We make a request to fetch feature flags (using the [`/flags` endpoint](/docs/ap
 - A user is [identified](/docs/data/identify) 
 - A user's [properties](/docs/product-analytics/person-properties) are updated
 - You call `posthog.reloadFeatureFlags()` in your code
+- You create a [group](/docs/product-analytics/group-analytics)
 
 Feature flags are charged based on the number of requests made to the `/flags` endpoint. This means even if no feature flag events are generated, you may still be charged for feature flag requests.
 

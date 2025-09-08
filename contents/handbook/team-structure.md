@@ -56,9 +56,8 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 
 **Typically, you must give at least 2-3 weeks notice of a product launch and you should reach out directly to marketing team leads if this is not possible.**
 
-- [ ] [Create a Pricing RFC](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-pricing.md?plain=1) to coordinate with the Billing team
-- [ ] Inform the #marketing channel that a new Pricing RFC has been created
-- [ ] Continue to communicate timelines in the #marketing channel
+- [ ] [Create a new launch plan issue](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md)
+- [ ] Continue to communicate timelines / updates in the Slack channel created
 
 
 

@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> See also our [past experiences on YouTube](/handbook/content-and-docs/youtube). 
-
 ## The types of videos we make
 
 We're still figuring this out, but the first few videos we've made have been:

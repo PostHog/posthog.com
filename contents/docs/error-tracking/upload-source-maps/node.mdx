@@ -1,0 +1,65 @@
+---
+title: Upload source maps for Node.js
+showStepsToc: true
+---
+
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
+
+
+<Steps>
+
+<Step title="Install the PostHog CLI" badge="required">
+<CLIDownload />
+</Step>
+
+<Step title="Authenticate the PostHog CLI" badge="required">
+<CLIAuthenticate />
+</Step>
+
+<Step title="Output source maps for Node.js" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
+
+If you serve minified bundles in production, PostHog requires source maps to generate accurate stack traces. Here are instructions to enable source map generation for popular build tools:
+
+<div className="overflow-x-hidden">
+
+| Build Tool | Documentation |
+|------------|--------------|
+| Vite | [Source Map Configuration](https://v3.vitejs.dev/config/build-options.html#build-sourcemap) |
+| webpack | [Source Map Configuration](https://webpack.js.org/configuration/devtool/) |
+| Rollup | [Source Map Options](https://rollupjs.org/configuration-options/#output-sourcemap) |
+
+</div>
+
+For other build tools, consult their documentation to enable source maps.
+
+</Step>
+
+<Step title="Inject source map" badge="required">
+<InjectSourceMap />
+
+</Step>
+
+<Step checkpoint title="Verify source map injection" >
+
+Confirm that the served files are injected with the correct source map comment in production in dev tools:
+
+```js 
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+``` 
+
+</Step>
+
+<Step title="Upload source map" badge="required">
+<UploadSourceMap />
+
+</Step>
+
+<StepVerifySourceMapUpload />
+
+</Steps>
+
+

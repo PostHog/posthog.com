@@ -46,7 +46,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                 {({ open }) => (
                     <>
                         <Menu.Button
-                            className={`flex items-center space-x-1 font-semibold text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow py-1 px-1 rounded-sm border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                            className={`flex items-center space-x-1 font-semibold text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow rounded-sm border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
                                 open
                                     ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
                                     : 'border-transparent hover:bg-accent dark:hover:bg-accent-dark hover:border-light dark:hover:border-dark'
@@ -66,7 +66,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             <Chevron className="w-2.5 opacity-70 group-hover:opacity-70" />
                         </Menu.Button>
 
-                        <Menu.Items className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
+                        <Menu.Items className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-50 grid">
                             <Menu.Item>
                                 <button onClick={handleCopyMarkdown} className={menuItemButtonStyles}>
                                     <IconCopy className={menuItemIconStyles} />

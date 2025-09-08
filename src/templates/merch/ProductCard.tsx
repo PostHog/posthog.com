@@ -3,7 +3,7 @@ import React from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
-import { getShopifyImage } from 'gatsby-source-shopify'
+import { getShopifyImage } from './utils'
 
 type ProductCardProps = {
     product: ShopifyProduct

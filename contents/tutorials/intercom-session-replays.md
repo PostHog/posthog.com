@@ -9,9 +9,31 @@ tags:
 
 [Session replays](/session-replay) are a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make it a powerful support platform.
 
-To get easy access to session replays in Intercom, you can add them as either user data or events. To show you how to do this, we build a basic Next.js app, add PostHog, add Intercom, and set up the session replay link to show in both places in Intercom.
+To get easy access to session replays in Intercom, you can add them as either user data or events. This can be done automatically with the `integrations` config option or manually passing the session replay and person URLs to Intercom. This tutorial shows you how to set up both.
 
-## 1. Create a basic Next.js app
+## Automatically sending session replays to Intercom
+
+Since version 1.256.0, our Web SDK can add session replay and person URLs to Intercom automatically by setting the `integrations` config option to `{ intercom: true }`.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    integrations: {
+        intercom: true,
+    },
+    // the rest of your config
+});
+```
+
+The integration calls `update` and `trackEvent` on Intercom whenever the session ID changes, adds `latestPosthogReplayURL` and `latestPosthogPersonURL` to your Intercom person record, and sends a `posthog:sessionInfo` event with the replay and the person URL.
+
+It does require Intercom to be [installed on your site](#3-add-intercom) as well as a [people data attribute](#4-adding-session-replays-to-intercom) for `latestPosthogReplayURL` and `latestPosthogPersonURL` in your Intercom account.
+
+## Manual setup
+
+If you want complete customization over the format of the data sent to Intercom, you can do this manually. To show you how to set this up, we build a basic Next.js app, add PostHog, add Intercom, and set up the session replay link to show in both places in Intercom.
+
+### 1. Create a basic Next.js app
 
 First, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (18.17 or newer), and then create a Next.js app:
 
@@ -51,7 +73,7 @@ Once done, run `npm run dev` and go `http://localhost:3000`  to see your app.
 
 To set up session replays, we install PostHog in our app. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-> **Important:** Make sure to enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
+> **Important:** Make sure to enable **Record user sessions** in [your project settings](https://us.posthog.com/settings/project-replay).
 
 After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 

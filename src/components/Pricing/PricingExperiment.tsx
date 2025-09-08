@@ -9,7 +9,7 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconHandMoney, IconRocket } from '@posthog/icons'
+import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -52,7 +52,16 @@ const Discounts = () => (
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Non-profits</strong>
                 <p className="text-[15px] mb-2">
-                    Most non-profits are eligible for 50% off. Get in touch through the app after signing up.
+                    Most non-profits are eligible for a discount. Get in touch through the app after signing up.
+                </p>
+            </li>
+            <li className="relative pl-7 pt-4">
+                <IconCode className="size-5 absolute left-0 top-4.5 opacity-50" />
+                <strong>Small OSS projects without corporate backing</strong>
+                <p className="text-[15px] mb-2">
+                    If you have an open source project without corporate backing that has less than $200k annual
+                    revenue, you can get up to $50k credits per year to use PostHog for free, subject to approval. Get
+                    in touch through the app after signing up to see if you qualify!
                 </p>
             </li>
         </ul>
@@ -280,11 +289,7 @@ const PricingExperiment = (): JSX.Element => {
             <SimilarProducts />
             <PurchasedWith />
             <Reviews />
-            <Calculator 
-                SidebarList={SidebarList}
-                SidebarListItem={SidebarListItem}
-                Discounts={Discounts}
-            />
+            <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
 
             <SectionLayout>
                 <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">

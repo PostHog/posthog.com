@@ -1,4 +1,4 @@
-import AutocaptureConfig from './autocapture-config.mdx'
+import AutocaptureConfig from './autocapture-config-ios.mdx'
 
 PostHog autocapture automatically tracks the following events for you:
 
@@ -28,6 +28,8 @@ PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```
 
 > **Important:** While `captureScreenViews` works with both `UIKit` and `SwiftUI`, the screen names captured in `SwiftUI` may not be very meaningful as they are based on internal SwiftUI view identifiers. For `SwiftUI` applications, we recommend turning this option off and instead using the `.postHogScreenView()` view modifier (see next section) to capture screen views with meaningful names.
+
+> **Note:** You can use the `BeforeSendBlock` to filter or drop any undesired screen events, giving you control over which screen views are sent to PostHog. See [Amending, dropping or sampling events](/docs/libraries/ios#amending-dropping-or-sampling-events) for implementation examples.
 
 ### Capturing screen views in SwiftUI
 
@@ -89,7 +91,7 @@ In this example, interactions with the _underlying_ UITextField will be captured
 
 The generated analytics element in the examples above will have the following form: 
 
-```html
+```swift
 <UITextField id="usernameTextField">text value</UITextField>
 ```
 

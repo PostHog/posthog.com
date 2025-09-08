@@ -4,9 +4,16 @@ To authenticate the CLI, you can call the `login` command and follow the instruc
 posthog-cli login
 ```
 
-If you are using the CLI in a CI/CD environment such as GitHub Actions, you can set environment variables to authenticate. [`POSTHOG_CLI_ENV_ID`](https://app.posthog.com/settings/environment#variables) and [`POSTHOG_CLI_TOKEN`](https://app.posthog.com/settings/user-api-keys#variables) should be the number in your PostHog homepage URL and a [personal API key](/docs/api#private-endpoint-authentication) respectively.
+If you are using the CLI in a CI/CD environment such as GitHub Actions, you can set environment variables to authenticate:
 
-Uploading source maps requires the **error tracking write** scope when creating a [personal API key](https://us.posthog.com/settings/user-api-keys).
+<div className="h-fit overflow-x-hidden">
+
+| Environment Variable | Description | Source |
+| --- | --- | --- |
+| `POSTHOG_CLI_ENV_ID` | PostHog project ID | [Environment settings](https://app.posthog.com/settings/environment#variables) |
+| `POSTHOG_CLI_TOKEN` | **Personal API key** with `error tracking write` scope | [API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+
+</div>
 
 Use the `--host` option in subsequent commands to specify a different PostHog instance / or region. For EU users:
 

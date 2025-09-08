@@ -50,7 +50,7 @@
         { "source": "/docs/integrations/ruby-integration", "destination": "/docs/libraries/ruby" },
         { "source": "/docs/integrations/rudderstack-integration", "destination": "/docs/libraries/rudderstack" },
         { "source": "/docs/integrations/segment-integration", "destination": "/docs/libraries/segment" },
-        { "source": "/docs/integrations/sentry-integration", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/integrations/sentry-integration", "destination": "/docs/error-tracking" },
         { "source": "/docs/integrations/slack", "destination": "/docs/libraries/slack" },
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
         { "source": "/handbook/people/team", "destination": "/people" },
@@ -354,7 +354,7 @@
         { "source": "/apps/schema-enforcer/docs", "destination": "/docs/apps/schema-enforcer" },
         { "source": "/apps/segment/docs", "destination": "/docs/apps/segment" },
         { "source": "/apps/sendgrid-connector/docs", "destination": "/docs/apps/sendgrid-connector" },
-        { "source": "/apps/sentry-connector/docs", "destination": "/docs/apps/sentry-connector" },
+        { "source": "/apps/sentry-connector/docs", "destination": "/docs/error-tracking" },
         { "source": "/apps/shopify/docs", "destination": "/docs/apps" },
         { "source": "/apps/snowflake-export/docs", "destination": "/docs/apps/snowflake-export" },
         { "source": "/apps/taxonomy-standardizer/docs", "destination": "/docs/apps/taxonomy-standardizer" },
@@ -630,6 +630,8 @@
         { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/hogql/guide", "destination": "/docs/product-analytics/sql" },
         { "source": "/docs/hogql/:path*", "destination": "/docs/sql/:path*" },
+        { "source": "/docs/product-analytics/sql", "destination": "/docs/data-warehouse/sql" },
+        { "source": "/docs/sql/variables", "destination": "/docs/data-warehouse/sql/variables" },
         { "source": "/manual/toolbar", "destination": "/docs/toolbar" },
         { "source": "/docs/product-analytics/toolbar", "destination": "/docs/toolbar" },
         { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },
@@ -656,7 +658,7 @@
         { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/on-call-rotation" },
         { "source": "/handbook/engineering/oncall", "destination": "/handbook/engineering/on-call-rotation" },
         { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
-        { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/integrate/sentry", "destination": "/docs/error-tracking" },
         { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
         { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
         { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
@@ -735,7 +737,7 @@
         { "source": "/apps/segment", "destination": "/cdp/segment" },
         { "source": "/apps/semver-flattener", "destination": "/cdp/semver-flattener" },
         { "source": "/apps/sendgrid-connector", "destination": "/cdp/sendgrid-connector" },
-        { "source": "/apps/sentry-connector", "destination": "/cdp/sentry-connector" },
+        { "source": "/apps/sentry-connector", "destination": "/docs/error-tracking" },
         { "source": "/apps/shopify", "destination": "/cdp/" },
         { "source": "/apps/snowflake-export", "destination": "/cdp/snowflake-export" },
         { "source": "/apps/stripe-connector", "destination": "/cdp" },
@@ -800,7 +802,7 @@
         { "source": "/docs/apps/segment", "destination": "/docs/cdp/segment" },
         { "source": "/docs/apps/semver-flattener", "destination": "/docs/cdp/semver-flattener" },
         { "source": "/docs/apps/sendgrid-connector", "destination": "/docs/cdp/sendgrid-connector" },
-        { "source": "/docs/apps/sentry-connector", "destination": "/docs/cdp/sentry-connector" },
+        { "source": "/docs/apps/sentry-connector", "destination": "/docs/error-tracking" },
         { "source": "/docs/apps/shopify", "destination": "/docs/cdp" },
         { "source": "/docs/apps/snowflake-export", "destination": "/docs/cdp/snowflake-export" },
         { "source": "/docs/apps/stripe-connector", "destination": "/docs/cdp/stripe-connector" },
@@ -809,7 +811,10 @@
         { "source": "/docs/apps/twitter-followers", "destination": "/docs/cdp/twitter-followers" },
         { "source": "/docs/apps/unduplicator", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
-        { "source": "/docs/apps/url-query", "destination": "/docs/cdp/url-query" },
+        {
+            "source": "/docs/apps/url-query",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
         { "source": "/docs/apps/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         { "source": "/docs/apps/variance-connector", "destination": "/docs/cdp/variance-connector" },
         { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/" },
@@ -836,6 +841,9 @@
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
         { "source": "/handbook/company/story", "destination": "/handbook/story" },
+        { "source": "/handbook/current-status", "destination": "/handbook/story" },
+        { "source": "/docs/product-direction", "destination": "/handbook/which-products" },
+        { "source": "/docs/posthog-direction", "destination": "/handbook/story" },
         { "source": "/guides", "destination": "/tutorials" },
         {
             "source": "/handbook/growth/marketing/customer-personas",
@@ -851,10 +859,12 @@
         { "source": "/tutorials/stripe-payment-data", "destination": "/tutorials/stripe-reports" },
         { "source": "/tutorials/delayed-survey", "destination": "/docs/surveys/creating-surveys#customization" },
         { "source": "/tutorials/how-to-connect-patterns-and-posthog", "destination": "/docs/cdp/" },
-        { "source": "/tutorials/monitor-aws-bedrock-calls", "destination": "/docs/ai-engineering" },
-        { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/ai-engineering" },
-        { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/ai-engineering" },
+        { "source": "/tutorials/monitor-aws-bedrock-calls", "destination": "/docs/llm-analytics" },
+        { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/llm-analytics" },
+        { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/llm-analytics" },
         { "source": "/tutorials/chatgpt-analytics", "destination": "/tutorials/openai-observability" },
+        { "source": "/tutorials/nextjs-app-directory-analytics", "destination": "/tutorials/nextjs-analytics" },
+        { "source": "/tutorials/customer-facing-analytics", "destination": "/tutorials/embedded-analytics" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
         { "source": "/james", "destination": "/community/profiles/27732" },
         { "source": "/tim", "destination": "/community/profiles/27730" },
@@ -1141,14 +1151,14 @@
         { "source": "/cdp/replicator", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/docs/cdp/replicator", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/docs/cdp/segment", "destination": "/docs/libraries/segment" },
-        { "source": "/docs/cdp/sentry-connector", "destination": "/docs/libraries/sentry" },
+        { "source": "/docs/cdp/sentry-connector", "destination": "/docs/error-tracking" },
         { "source": "/docs/cdp/n8n", "destination": "/docs/libraries/n8n" },
         { "source": "/docs/cdp/zendesk", "destination": "/docs/libraries/zendesk" },
         { "source": "/docs/cdp/rudderstack-import", "destination": "/docs/libraries/rudderstack" },
         { "source": "/cdp/zendesk-connector", "destination": "/docs/cdp" },
         { "source": "/docs/libraries/zendesk", "destination": "/docs/cdp" },
         { "source": "/cdp/snowflake-export", "destination": "/docs/cdp/batch-exports/snowflake" },
-        { "source": "/cdp/sentry-connector", "destination": "/docs/libraries/sentry" },
+        { "source": "/cdp/sentry-connector", "destination": "/docs/error-tracking" },
         { "source": "/cdp/segment", "destination": "/docs/libraries/segment" },
         { "source": "/cdp/n8n", "destination": "/docs/libraries/n8n" },
         { "source": "/cdp/s3-export", "destination": "/docs/cdp/batch-exports/s3" },
@@ -1207,12 +1217,15 @@
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
         },
-        { "source": "/docs/product-analytics/llms", "destination": "/docs/ai-engineering" },
-        { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
+        { "source": "/docs/product-analytics/llms", "destination": "/docs/llm-analytics" },
+        { "source": "/docs/ai-engineering/llms", "destination": "/docs/llm-analytics" },
         { "source": "/docs/product-analytics/trends", "destination": "/docs/product-analytics/trends/overview" },
+        {
+            "source": "/docs/product-analytics/calendar-heatmap",
+            "destination": "/docs/product-analytics/trends/charts#calendar-heatmap"
+        },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
-        { "source": "/teams/customer-success", "destination": "/teams/sales-cs" },
         { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" },
         {
             "source": "/pricing",
@@ -1348,7 +1361,6 @@
             "source": "/handbook/growth/marketing/value-propositions",
             "destination": "/handbook/why-does-posthog-exist"
         },
-        { "source": "/handbook/growth/marketing/icp", "destination": "/handbook/growth/sales/lead-scoring" },
         { "source": "/features/self-hosted", "destination": "/docs/self-host" },
         { "source": "/docs/settings/organizations-and-projects", "destination": "/docs/settings/organizations" },
         { "source": "/docs/settings/role-based-access", "destination": "/docs/settings/access-control" },
@@ -1369,7 +1381,10 @@
         { "source": "/cdp/taxonomy-standardizer", "destination": "/docs/cdp/taxonomy-standardizer" },
         { "source": "/cdp/timestamp-parser", "destination": "/docs/cdp/timestamp-parser" },
         { "source": "/cdp/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
-        { "source": "/cdp/url-query", "destination": "/docs/cdp/url-query" },
+        {
+            "source": "/cdp/url-query",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
         { "source": "/cdp/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         {
             "source": "/handbook/growth/marketing/components",
@@ -1470,6 +1485,102 @@
         {
             "source": "/docs/privacy/data-deletion",
             "destination": "/docs/privacy/data-storage#data-deletion"
+        },
+        {
+            "source": "/manual/funnels",
+            "destination": "/docs/product-analytics/funnels"
+        },
+        {
+            "source": "/manual/lifecycle",
+            "destination": "/docs/product-analytics/lifecycle"
+        },
+        {
+            "source": "/manual/paths",
+            "destination": "/docs/product-analytics/paths"
+        },
+        {
+            "source": "/manual/correlation",
+            "destination": "/docs/product-analytics/correlation"
+        },
+        {
+            "source": "/manual/experimentation",
+            "destination": "/docs/experiments"
+        },
+        {
+            "source": "/manual/retention",
+            "destination": "/docs/product-analytics/retention"
+        },
+        {
+            "source": "/manual/feature-flags",
+            "destination": "/docs/feature-flags"
+        },
+        {
+            "source": "/manual/annotations",
+            "destination": "/docs/data/annotations"
+        },
+        {
+            "source": "/manual/dashboards",
+            "destination": "/docs/product-analytics/dashboards"
+        },
+        {
+            "source": "/manual/stickiness",
+            "destination": "/docs/product-analytics/stickiness"
+        },
+        {
+            "source": "/manual/insights",
+            "destination": "/docs/product-analytics/insights"
+        },
+        {
+            "source": "/manual/trends",
+            "destination": "/docs/product-analytics/trends"
+        },
+        {
+            "source": "/docs/cdp/url-query",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
+        {
+            "source": "/teams/cs-onboarding",
+            "destination": "/teams/customer-success"
+        },
+        {
+            "source": "/docs/error-tracking/issues",
+            "destination": "/docs/error-tracking/issues-and-exceptions"
+        },
+        {
+            "source": "/docs/ai-engineering/observability",
+            "destination": "/docs/llm-analytics/start-here"
+        },
+        {
+            "source": "/docs/ai-engineering/llm-insights",
+            "destination": "/docs/llm-analytics/start-here"
+        },
+        {
+            "source": "/docs/ai-engineering/tutorials",
+            "destination": "/docs/llm-analytics/tutorials"
+        },
+        {
+            "source": "/docs/ai-engineering/traces-generations",
+            "destination": "/docs/llm-analytics/generations"
+        },
+        {
+            "source": "/docs/ai-engineering/dashboard",
+            "destination": "/docs/llm-analytics/dashboard"
+        },
+        {
+            "source": "/docs/ai-engineering/langfuse-posthog",
+            "destination": "/docs/llm-analytics/integrations/langfuse-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering/helicone-posthog",
+            "destination": "/docs/llm-analytics/integrations/helicone-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering/keywords-ai-posthog",
+            "destination": "/docs/llm-analytics/integrations/keywords-ai-posthog"
+        },
+        {
+            "source": "/docs/ai-engineering/traceloop-posthog",
+            "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
         }
     ],
     "headers": [

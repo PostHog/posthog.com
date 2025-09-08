@@ -14,8 +14,10 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### Day 1
 
+- Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools) 
+- Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools)
+  - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first CS and Onboarding standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Dana will add your GitHub handle to the template.
@@ -24,17 +26,21 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### Rest of week 1
 
+ - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
+ - Work your way through your GitHub onboarding issue that a member of the [People & Ops Team](/teams/people) should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
- - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding. 
+   - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://eu.posthog.com/project/29925) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+ - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
+ - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding.
 
 ### Week 2
 
 - Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings.
 - Explore Vitally and [Metabase](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
+- Once you have your book of business, try running through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Dana. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
 
@@ -83,8 +89,8 @@ By the end of month 3:
 
 #### Onboarding specialist
 By the end of month 1:
- - Be leading customer calls and demos on your own
- - Converting leads from your book to 'onboarded' in Vitally. This means you've spoken with them (call, email, Slack) and have confirmation they will pay, or they have signed an annual contract.
+ - Be leading customer calls on your own
+ - Converting leads from your book to ['Onboarded'](https://posthog.com/handbook/cs-and-onboarding/onboarding-team#onboarding-lifecycle) in Vitally.
  - Passing off large contracts to AEs via Salesforce
 
 By the end of month 2:

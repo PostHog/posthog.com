@@ -8,11 +8,12 @@ export default function ShippingBanner(): React.ReactElement {
                 <IconWarning className="size-10" />
             </div>
             <div>
-                <h3 className="text-base mb-0">June 13: Expect shipping delays</h3>
+                <h3 className="text-base mb-0">July 2: We're catching up on merch orders</h3>
                 <p className="text-sm mb-0">
                     Just like our code, our merch usually ships fast. But we're changing merch fulfillment providers
-                    which means there will be a delay in fulfilling orders. We expect this to last for the next 2-3
-                    weeks. Thanks for your patience!
+                    which means there will be a delay in fulfilling orders. The process is also complete and we expect
+                    to be fully caught up on shipping new orders within the next 2 weeks. Orders placed between June 13
+                    and July 1 will ship soon. Thanks for your patience!
                 </p>
             </div>
         </div>

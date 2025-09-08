@@ -9,7 +9,7 @@ tags:
 
 Errors are an inevitable part of software development, but so is catching and fixing them. You can use error tracking in PostHog to help you do this.
 
-To help you set this up, this tutorial details how to create a basic Next.js app, set up PostHog on both the front and backend, and then automatically capture errors that happen in both locations.  
+To help you set this up, this tutorial details how to create a basic Next.js app, set up PostHog on both the front and backend, and then automatically capture errors that happen in both locations.
 
 ## 1. Creating a Next.js app
 
@@ -80,7 +80,7 @@ npm i posthog-js posthog-node
 
 ### Frontend setup
 
-We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`. 
+We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`.
 
 ```js
 // app/providers.js
@@ -148,7 +148,7 @@ let posthogInstance = null
 export function getPostHogServer() {
   if (!posthogInstance) {
     posthogInstance = new PostHog(
-      '<ph_project_api_key>', 
+      '<ph_project_api_key>',
       {
         host: '<ph_client_api_host>',
         flushAt: 1,
@@ -164,7 +164,7 @@ We can then import this singleton wherever we need it in the backend. Unfortunat
 
 ## 3. Capturing errors
 
-With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event. 
+With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event.
 
 <MultiLanguage>
 
@@ -190,13 +190,15 @@ To ensure all component errors are tracked, we can use the [built-in error bound
 // app/error.jsx
 'use client'
 
-import { useEffect } from 'react'
-import posthog from 'posthog-js'
+import { useEffect } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 export default function Error({
   error,
   reset,
 }) {
+  const posthog = usePostHog()
+
   useEffect(() => {
     posthog.captureException(error)
   }, [error])
@@ -220,11 +222,11 @@ import { useState, useEffect } from 'react'
 // ... rest of your code
 
   const [shouldError, setShouldError] = useState(false)
-  
+
   useEffect(() => {
     setShouldError(true)
   }, [])
-  
+
   if (shouldError) {
     throw new Error('This is a test error')
   }
@@ -236,14 +238,25 @@ You can also create a similar `global-error.jsx` file to capture errors affectin
 
 ### How to automatically capture backend errors
 
-Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture. 
+Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture.
 
-Instead, we create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we to both check the request is running in the `nodejs` runtime to ensure PostHog works and get the  `distinct_id` from the cookie to connect the error to a specific user.
+The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data on every request by specifying the domains you wish to patch with the session and user distinct ID.
+
+```js
+posthog.init('<ph_project_api_key>', {
+  __add_tracing_headers: ['your-domain.com'],
+})
+```
+
+Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
+
+On the backend create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we check the request is running in the `nodejs` runtime to ensure PostHog works. We get the `session_id` and `distinct_id` from request headers to add to the captured exception.
 
 This looks like this:
 
 ```js
 // instrumentation.js
+
 export function register() {
   // No-op for initialization
 }
@@ -253,28 +266,15 @@ export const onRequestError = async (err, request, context) => {
     const { getPostHogServer } = require('./app/posthog-server')
     const posthog = await getPostHogServer()
 
-    let distinctId = null
-    if (request.headers.cookie) {
-      const cookieString = request.headers.cookie
-      const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
-      
-      if (postHogCookieMatch && postHogCookieMatch[1]) {
-        try {
-          const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
-          const postHogData = JSON.parse(decodedCookie)
-          distinctId = postHogData.distinct_id
-        } catch (e) {
-          console.error('Error parsing PostHog cookie:', e)
-        }
-      }
-    }
+    const sessionId = request.headers.get('X-POSTHOG-SESSION-ID');
+    const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID');
 
-    await posthog.captureException(err, distinctId || undefined)
+    await posthog.captureException(err, distinctId || undefined, { $session_id: sessionId })
   }
 }
 ```
 
-Now, when you click the **Click me for a backend API error** button, it will trigger an error which will be automatically captured by PostHog. 
+Now, when you click the **Click me for a backend API error** button, it will trigger an error which will be automatically captured by PostHog.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_15_30_05_2x_e99f29a546.png"
@@ -298,48 +298,6 @@ You can click into any of these errors to get more details on them, including a 
 
 ## 5. Uploading source maps
 
-import CLIDownload from "../docs/error-tracking/_snippets/cli/download.mdx"
-import CLIAuthenticate from "../docs/error-tracking/_snippets/cli/authenticate.mdx"
-import CLIInject from "../docs/error-tracking/_snippets/cli/inject.mdx"
-import CLIUpload from "../docs/error-tracking/_snippets/cli/upload.mdx"
+import NextJsUploadSourceMaps from "../docs/error-tracking/_snippets/nextjs-upload-source-maps.mdx"
 
-PostHog uses source maps to show unminified code in your stack traces (so you can find where the errors are coming from). Next.js disables source maps by default during production builds to prevent you from leaking your source on the client, but you can opt-in with the `productionBrowserSourceMaps` configuration flag.
-
-To enable this, we set a environment variable to control this so we only generate source maps when building locally (or if you are running a build in CI).
-
-```file=.env.local
-GENERATE_SOURCEMAPS=true
-```
-
-Once we have the environment variable set, we can configure Next.js to generate source maps.
-
-```js file=next.config.js 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  productionBrowserSourceMaps: process.env.GENERATE_SOURCEMAPS === 'true'
-};
-
-export default nextConfig;
-```
-
-Once you've done this, run `npm run build` to build your app and create a `.next` directory.
-
-### Using PostHog's CLI to inject and upload source maps
-
-First, install the CLI:
-
-<CLIDownload/>
-
-<CLIAuthenticate />
-
-Once you're authenticated, inject the context required by PostHog to associate the maps with the served code.
-
-<CLIInject path="./.next" />
-
-Finally, upload the modified assets to PostHog.
-
-<CLIUpload path="./.next" />
-
-You must also ensure that the modified asset bundles uploaded to PostHog are the ones your site serves. If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces. 
-
-Setting up a CI step to build your app and upload the source maps is a good way to ensure this.
+<NextJsUploadSourceMaps />

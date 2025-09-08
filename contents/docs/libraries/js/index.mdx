@@ -14,7 +14,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: false
+  llmAnalytics: false
   errorTracking: true
 ---
 
@@ -87,7 +87,22 @@ posthog.project2.capture("other_event")
 
 ## Debugging
 
-To see all the data that is being sent to PostHog, you can run `posthog.debug()` in your dev console or set the `debug` option to `true` in the `init` call.
+To see all the data that is being sent to PostHog, you can run `posthog.debug()` in your dev console or set the `debug` option to `true` in the `init` call. You can also enable debug mode by appending this query to the URL `?__posthog_debug=true` (i.e., https://posthog.com/?__posthog_debug=true).
+
+### Exposing the `posthog` global object in web apps that don't have `window.posthog`
+
+> This has been tested in Chrome and Firefox. Safari doesn't have this feature, but other Chromium and Gecko/Firefox browsers do.
+
+Sometimes you may want to test PostHog in the browser by using `posthog.capture()` or some other method. Although some sites expose `window.posthog`, most modern web app (React, Vue, etc.) don't.
+
+To expose PostHog in the browser:
+
+1. Enable debug mode by setting `debug: true` in your config
+2. In the browser console, search for `[PostHog.js] Starting in debug mode`
+3. Expand the object
+4. Right-click on `this` and pick "Store as global variable"
+
+You can then access `posthog` as `temp0` in Firefox and `temp1` in Chrome. You can then do stuff like `temp1.capture('test event')`.
 
 ## Development
 

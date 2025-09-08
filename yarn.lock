@@ -3513,10 +3513,15 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/hedgehog-mode@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.28.tgz#0e8b3e5b2f187c8e3f90044a01595cf1668e1248"
-  integrity sha512-n99eMB5R6RukI9kVb/xH6nsSNuxop4m9YIe/t7nnRw+JF3RcPEnMBEC+SWQR2nx2pDDqc1cRCm2OkeB2CKT8Fw==
+"@posthog/core@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.2.tgz#8e6125d271348f646f51269c0b7b9bbf6549f984"
+  integrity sha512-hWk3rUtJl2crQK0WNmwg13n82hnTwB99BT99/XI5gZSvIlYZ1TPmMZE8H2dhJJ98J/rm9vYJ/UXNzw3RV5HTpQ==
+
+"@posthog/hedgehog-mode@^0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.39.tgz#69c66a561591d251f1a4da22f602fed319606fc2"
+  integrity sha512-EaYv1TOeVkYOXCCMllDFVadwWQTht9F7qmZL62CSLEzf+7tkagNQHsIAFmuT+HsMLhjrFOyeBttLkqPsXsjcMA==
   dependencies:
     gsap "^3.12.7"
     lodash "^4.17.21"
@@ -3524,10 +3529,10 @@
     pixi.js "^8.4.0"
     react-shadow "^20.6.0"
 
-"@posthog/icons@0.22.0":
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.22.0.tgz#9a8edfe22868f7f1e6b58dcf4123686c48a5b0c2"
-  integrity sha512-HOLBtbUatf2ulHDsOWx7SjlCw91ETM95qV/9dCy5BwyUbc7CnA0JaDMW89XT0WbUCL8vTYRucZz7qwlphzeh3g==
+"@posthog/icons@0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.29.0.tgz#7263540d12169271bfe02293c402d94a7bd910c8"
+  integrity sha512-d0M8EsPPGWt6Kcw/TaD2Um9KD1ogAf3I5I9WmWWfcMcRJ3kViPP+NYTHzfm7tghuaXbGaaeSmPGAQhGM7A5E1A==
 
 "@preact/signals-core@^1.2.3":
   version "1.8.0"
@@ -13718,7 +13723,7 @@ gatsby-plugin-utils@^3.19.0:
     joi "^17.4.2"
     mime "^3.0.0"
 
-gatsby-plugin-utils@^4.0.0, gatsby-plugin-utils@^4.14.0:
+gatsby-plugin-utils@^4.0.0:
   version "4.14.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-4.14.0.tgz#5ba6f5a92ba3a79d5b66ab59c8243d4504418782"
   integrity sha512-w7EZ0C7JA9sG3JiBS2ffGsrZplAbtNk0Junb3UeUFj66CY0MU8UV0rZIzBkz+EMbQvPkxvVJNQu4/tA9ohCvfA==
@@ -13794,34 +13799,6 @@ gatsby-source-filesystem@^4.20.0:
     pretty-bytes "^5.4.1"
     valid-url "^1.0.9"
     xstate "4.32.1"
-
-gatsby-source-filesystem@^5.14.0:
-  version "5.14.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-5.14.0.tgz#f2c765f2eead173918b3d1bc92626bc770867972"
-  integrity sha512-uewEJaHvdxZlN6DOtZCIUuI7X5v9MRk5IVpCYy9SIZCDbnUA5siEd2A4SC+kcXxJM6AUbdvkfayqpVJrm5JaZA==
-  dependencies:
-    "@babel/runtime" "^7.20.13"
-    chokidar "^3.5.3"
-    file-type "^16.5.4"
-    fs-extra "^11.2.0"
-    gatsby-core-utils "^4.14.0"
-    mime "^3.0.0"
-    pretty-bytes "^5.6.0"
-    valid-url "^1.0.9"
-    xstate "^4.38.0"
-
-gatsby-source-shopify@^8.12.3:
-  version "8.14.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-shopify/-/gatsby-source-shopify-8.14.0.tgz#4773a30cc76838daa57876fb38027c707466287d"
-  integrity sha512-NImfEC66Kp3hgYa34nlVqPE0VXLfzuBXtDbD8q1fYrpA7PAMNaWddsqfh0b1zWgBy3/RikHAghMuGVWafW3Oxw==
-  dependencies:
-    "@babel/runtime" "^7.20.13"
-    gatsby-core-utils "^4.14.0"
-    gatsby-plugin-utils "^4.14.0"
-    gatsby-source-filesystem "^5.14.0"
-    node-fetch "^2.6.11"
-    sharp "^0.32.6"
-    shift-left "^0.1.5"
 
 gatsby-telemetry@^3.25.0:
   version "3.25.0"
@@ -19056,7 +19033,7 @@ node-fetch@2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-fetch@^2.6.0, node-fetch@^2.6.1, node-fetch@^2.6.11, node-fetch@^2.6.12, node-fetch@^2.6.6, node-fetch@^2.6.7:
+node-fetch@^2.6.0, node-fetch@^2.6.1, node-fetch@^2.6.12, node-fetch@^2.6.6, node-fetch@^2.6.7:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
@@ -20704,11 +20681,12 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.255.1:
-  version "1.255.1"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.255.1.tgz#c8c335f496d3062985fc00662804604cd3edb884"
-  integrity sha512-KMh0o9MhORhEZVjXpktXB5rJ8PfDk+poqBoTSoLzWgNjhJf6D8jcyB9jUMA6vVPfn4YeepVX5NuclDRqOwr5Mw==
+posthog-js@1.261.7:
+  version "1.261.7"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.261.7.tgz#e12688bbefc756ea2a2d54cf3e687c65d75082b5"
+  integrity sha512-Fjpbz6VfIMsEbKIN/UyTWhU1DGgVIngqoRjPGRolemIMOVzTfI77OZq8WwiBhMug+rU+wNhGCQhC41qRlR5CxA==
   dependencies:
+    "@posthog/core" "1.0.2"
     core-js "^3.38.1"
     fflate "^0.4.8"
     preact "^10.19.3"
@@ -20775,7 +20753,7 @@ prettier@^2.1.0, prettier@^2.8.8:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-pretty-bytes@^5.3.0, pretty-bytes@^5.4.1, pretty-bytes@^5.6.0:
+pretty-bytes@^5.3.0, pretty-bytes@^5.4.1:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.6.0.tgz#356256f643804773c82f64723fe78c92c62beaeb"
   integrity sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==
@@ -23175,11 +23153,6 @@ shell-quote@^1.7.3:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.2.tgz#d2d83e057959d53ec261311e9e9b8f51dcb2934a"
   integrity sha512-AzqKpGKjrj7EM6rKVQEPpB288oCfnrEIuyoT9cyF4nmGa7V8Zk6f7RRqYisX8X9m+Q7bd632aZW4ky7EhbQztA==
-
-shift-left@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/shift-left/-/shift-left-0.1.5.tgz#4a61a9d0412b1b32f9abbd97f72466c9c74a6be1"
-  integrity sha512-55d8QaP1YmuL1D52fhgq8CT1tXksM/2WPZ6980RtkMbl0Cze++kuJy50GLMnXwostk/YG9hasaJmP3r+d3yUtQ==
 
 should-equal@^2.0.0:
   version "2.0.0"
@@ -26625,7 +26598,7 @@ xstate@4.32.1:
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.32.1.tgz#1a09c808a66072938861a3b4acc5b38460244b70"
   integrity sha512-QYUd+3GkXZ8i6qdixnOn28bL3EvA++LONYL/EMWwKlFSh/hiLndJ8YTnz77FDs+JUXcwU7NZJg7qoezoRHc4GQ==
 
-xstate@^4.38.0, xstate@^4.38.1:
+xstate@^4.38.1:
   version "4.38.3"
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.38.3.tgz#4e15e7ad3aa0ca1eea2010548a5379966d8f1075"
   integrity sha512-SH7nAaaPQx57dx6qvfcIgqKRXIh4L0A1iYEqim4s1u7c9VoCgzZc+63FY90AKU4ZzOC2cfJzTnpO4zK7fCUzzw==

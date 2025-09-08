@@ -45,7 +45,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 **Teams with no PM currently**
 
 - [CRM](/teams/crm)
-- [LLM Observability](/teams/llm-observability)
+- [LLM Analytics](/teams/llm-analytics)
 - [Max AI](/teams/max-ai)
 - [Revenue Analytics](/teams/revenue-analytics)
 
@@ -57,15 +57,13 @@ The [quarterly per-product planning](/handbook/company/goal-setting) typically h
 
 As the PM team, we are also pursuing a couple of side projects each quarter with the goal of leveling up how we do Product at PostHog.
 
-In Q2 2025, those are:
+In Q3 2025, those are:
 
-**Goal 1: V2 growth review and product usage metrics**
-* Define per-product revenue metrics & benchmarks, based on Mine's "all revenue" work -> Anna
-* Define a set of usage metrics we can track across products, consider a dashboard template for this -> Annika
-* Bring it together for V2 growth reviews -> both
+**Goal 1: Investigate if we can automate growth reviews, some parts at least** -> <TeamMember name="Anna Szell" photo /> & <TeamMember name="Cory Slater" photo />
+* Something along the lines of having a materialized view per metric
+* Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
 
-**Goal 2: Increase adoption of Buildbetter** -> Anna
-* How can different roles get the most value out of the tool? (PM, Engineering, Sales, ...)
+**Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
+* We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
 
-**Goal 3: Hire a new PM** -> Annika & Raquel
-* Product ownership: CDP, then Error tracking and surveys
+

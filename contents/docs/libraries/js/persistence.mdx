@@ -29,10 +29,12 @@ const handleCookieConsent = (consent) => {
 };
 ```
 
-### Persistence caveats
+## Persistence caveats
 
 - Be aware that `localStorage` and `sessionStorage` can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider a `cookie` option or make sure to set all super properties across each subdomain.
 
 - Due to the size limitation of cookies you may run into `431 Request Header Fields Too Large` errors (e.g. if you have a lot of feature flags). In that case, use `localStorage+cookie`.
 
 - If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. If you do this, remember to call [`posthog.identify`](/docs/libraries/js/features#identifying-users) **every time** your app loads. If you don't, every page refresh is treated as a new and different user.
+
+- For browser extensions, use `localStorage`, `sessionStorage`, or `memory`. Each extension context may initialize its own PostHog instance. These contexts don't share storage so the instances don't know about each other. Since `browser.storage` and `chrome.storage` APIs are not supported for data persistence, you'll need to provide your own shared `distinct_id` during each initialization to ensure events are sent under the same identifier. See the [browser extension documentation](/docs/advanced/browser-extension) for more details.

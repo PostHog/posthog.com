@@ -12,7 +12,7 @@ import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { getShopifyImage } from 'gatsby-source-shopify'
+import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
 import SizeGuide from './SizeGuide'
 

@@ -196,7 +196,7 @@ Even now, five years and 100+ people later, [our strategy](/handbook/why-does-po
 2. Build all the tools they need in one platform
 3. Get in first
 
-Finally, early-stage companies often fall apart because the founders break up, so I'd recommend asking: "How do you and the other founders avoid falling out?" See [How to not break up with your cofounder](/newsletter/how-to-not-break-up-with-your-cofounder) for what to look for here.
+Finally, early-stage companies often fall apart because the founders break up, so I'd recommend asking: "How do you and the other founders avoid falling out?" See [How to not break up with your cofounder](/newsletter/how-to-not-breakup-with-your-cofounder) for what to look for here.
 
 >  **Remember:** The success of the company over the long run is a product of its vision now. Joining a team that knows where they want to go helps both them and you be successful.
 

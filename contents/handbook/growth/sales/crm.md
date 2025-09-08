@@ -12,7 +12,7 @@ As a first step, you might find it useful to install Salesforce's [Chrome extens
 
 As a general principle, we try to ensure as much customer communication as possible is captured in Salesforce, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We've seen much higher response rates on Slack than email. 
 
-For existing customers, you'll sometimes send emails directly from [Vitally](https://posthog.vitally-eu.io/).  To ensure these also make it to Salesforce, first look up your *Email to Salesforce Address* from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your [Vitally gmail settings](https://posthog.vitally-eu.io/settings/profile/gmail).
+For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>.  To ensure these also make it to Salesforce, first look up your *Email to Salesforce Address* from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
 All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
 
@@ -138,9 +138,14 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 Use the following criteria to determine when a lead should be converted to an opportunity:
 - You've had an initial call and have decided to work this as a hands-on sale.
 - There's a clearly identified problem that PostHog can solve.
-- There's a solid next step.
+- The customer has taken a concrete, identifiable action toward further evaluating PostHog. The action will be evaluated in context, but the goal is to identify something they have done that provides evidence they're serious. Examples include:
+  - Signing up for a PostHog organization
+  - Implementing PostHog 
+  - Getting an MNDA in place
+  - Accepting a Slack Connect invite and asking questions in a Slack channel
+  - Accepting a call invite with their boss/buying committee
 
-Converting at this stage (rather than waiting until later) helps us get a more accurate view of our pipeline and standardize our approach across territories and team members.
+All three criteria should be met. Converting at this stage (rather than waiting until later) helps us get a more accurate view of our pipeline and standardize our approach across territories and team members.
 
 ### Support Requests
 
@@ -174,13 +179,13 @@ Opportunities track potential deals in Salesforce. Managing opportunities effect
 
 ### Opportunity Record Types
 
-New Business: Select this type when engaging with a new customer for the first time or when selling a product/service to an existing customer for the first time.
+New Revenue: Select this type when engaging with a customer who has never paid us before. This includes new customers and startup customers transitioning to a paid plan for the first time.
 
-Existing Business (Expansion Opportunity): Choose this type when selling additional products or services to a customer with whom we already have a business relationship.
+New Revenue – Existing Customer: Choose this type for additional credits to a customer who is already paying us. This includes upsells, cross sells, or expansion within the same account.
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
-Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' opportunity is Closed (more on these later).
+Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' type opportunity is Closed (more on these later).
 
 ### Opportunity Types
 Annual Plan: Select this type when the customer agrees to pay for a year-long+ subscription to our services.

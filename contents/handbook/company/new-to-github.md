@@ -27,7 +27,7 @@ You can take any task linearly from start to finish using this set of tools, tho
 
 You can use any of these features on their own, or use them together. Primarily, PostHog uses issues, pull requests, and actions. If you’re not super familiar with GitHub, just focus on issues and pull requests, as that’s where the bulk of the interesting work happens.
 
-Note: The PostHog handbook covers GitHub issues and pull requests, and suggests [everything should start with a pull request](/handbook/company/communication#github) because it represents one of our values, "[bias for impact](/handbook/company/values#bias-for-impact)".
+Note: The PostHog handbook covers GitHub issues and pull requests, and suggests [everything should start with a pull request](/handbook/company/communication#github) because it represents one of our values, "[Why not now?](/handbook/company/values#why-not-now)".
 
 ## Notifications
 
@@ -41,7 +41,7 @@ By default, you’ll receive email notifications for everything you subscribe to
 
 As I’m not a huge fan of email, I prefer to visit a centralized place for my GitHub notifications, although many engineers prefer email notifications. Personally, I don’t like GitHub’s [/notifications](https://github.com/notifications) page, as it feels cumbersome (slow) to read through updates. Here are two much better ways to consume GitHub notifications (entirely my opinion):
 
-1. [GitHub’s iPad app](https://apps.apple.com/us/app/github/id1477376905?platform=ipad) - provides an email-like interface that feels a lot more natural to reading notifications github.com/notifications. (If only GitHub had this UI on the web...)
+1. [GitHub’s iPad app](https://apps.apple.com/us/app/github/id1477376905?platform=ipad) - provides an email-like interface that feels a lot more natural to reading notifications than github.com/notifications. (If only GitHub had this UI on the web...)
 2. [octobox.io](http://octobox.io) - uses the same email-like interface, but in a browser
 
 I have [octobox.io](http://octobox.io) set to my homepage in Chrome, so anytime I want to see my notifications, I just click the Home button and I have one-click access to my work “inbox”.

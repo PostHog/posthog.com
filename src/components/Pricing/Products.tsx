@@ -159,17 +159,17 @@ export const useProducts = () => {
             name: 'Surveys',
             type: 'surveys',
             slug: 'surveys',
-            freeLimit: '250',
+            freeLimit: '1500',
             denomination: 'response',
-            price: '0.2000',
+            price: '0.1000',
             volume: surveyResponseNumber,
             calcVolume: <>{surveyResponseNumber.toLocaleString()}</>,
             calcCost: <>{surveyResponseCost.toLocaleString()}</>,
             slider: (
                 <LogSlider
                     stepsInRange={100}
-                    marks={[250, 2000, 15000, 100000]}
-                    min={250}
+                    marks={[1500, 5000, 20000, 100000]}
+                    min={1500}
                     max={100000}
                     onChange={(value) => setSurveyResponseSliderValue(value, sliderCurve)}
                     value={surveyResponseSliderValue}

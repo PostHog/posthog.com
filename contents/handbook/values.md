@@ -36,7 +36,7 @@ We aren't weird for the sake of it. We want the company perfectly optimized for 
 
 ## Why not now?
 
-_Why not now?_ means getting things done _proactively_, _today_. You do not need consensus to do things – focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others. You certainly shouldn't wait until next quarter if your new idea makes more sense to work on that your previous goal.
+_Why not now?_ means getting things done _proactively_, _today_. You do not need consensus to do things – focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others. You certainly shouldn't wait until next quarter if your new idea makes more sense to work on than your previous goal.
 
 We have learned the clearest lessons at PostHog by doing things, not from hypothesizing about them. If we're debating doing something, just trying it is the best way to learn. Doing more planning is rarely the right way to figure out if something will work, doing the thing is the answer by default here.
 

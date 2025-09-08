@@ -2,7 +2,7 @@ As console logs can contain sensitive information, we do not capture these logs 
 You can enable this feature from your client-side by setting `captureLogs = true` in our [iOS SDK config](/docs/session-replay/installation?tab=iOS#step-two-enable-session-recordings-in-your-project-settings).
 
 ```ios_swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
 config.sessionReplay = true
 config.sessionReplayConfig.captureLogs = true // TIP: Needs to be configured in code. Project settings won't have an effect.
 
@@ -18,7 +18,7 @@ PostHog iOS SDK allows you to customize how log messages are processed and categ
 This handler is called for each new line printed to the console. It receives the line's content and can return either a processed log entry with its severity level, or `nil` to skip the log entirely:
 
 ```ios_swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
 
 // Custom log processing and sanitization
 config.sessionReplayConfig.captureLogsConfig.logSanitizer = { output in

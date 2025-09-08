@@ -645,6 +645,7 @@ function Privacy() {
                             <li>AWS - cloud data hosting</li>
                             <li>BuildBetter - product success platform </li>
                             <li>Clearbit - marketing data engine</li>
+                            <li>Clay - marketing data engine</li>
                             <li>Cloudflare - cloud data hosting</li>
                             <li>Customer.io - email campaign service provider</li>
                             <li>Digital Ocean - website user data for community profiles</li>
@@ -654,7 +655,6 @@ function Privacy() {
                             <li>Heroku - cloud data hosting</li>
                             <li>OpenPhone - SMS campaigns</li>
                             <li>Salesforce - CRM database</li>
-                            <li>Sentry - application monitoring and error tracking</li>
                             <li>Slack - internal communications tool</li>
                             <li>Vitally - CRM database</li>
                             <li>Zendesk - customer support tool</li>

@@ -105,7 +105,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {
-            if (node.frontmatter?.[field] && node.frontmatter?.[field].includes('res.cloudinary.com')) {
+            if (node.frontmatter?.[field] && new URL(node.frontmatter[field]).hostname === 'res.cloudinary.com') {
                 const publicId = getPublicID(node.frontmatter?.[field])
                 const cloudinaryData = cloudinaryCache[publicId]
                 if (!cloudinaryData) {
@@ -259,7 +259,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         })
     }
 
-    if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
+    if (node.internal.type === 'Plugin' && new URL(node.url).hostname === 'github.com' && process.env.GITHUB_API_KEY) {
         const { name, owner } = GitUrlParse(node.url)
         const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
             headers: {
@@ -320,7 +320,16 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             body: JSON.stringify({ locationId: id }),
         })
             .then((res) => res.json())
-            .then((data) => data.results.name)
+            .then((data) => {
+                if (!data?.results?.name) {
+                    console.log('No name found for location', data)
+                }
+                return data?.results?.name
+            })
+            .catch((e) => {
+                console.error('Error fetching Ashby location name', e)
+                return null
+            })
 
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')

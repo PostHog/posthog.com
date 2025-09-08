@@ -36,7 +36,7 @@ Once we have our array, we can break it down further. To do this, [create an ins
 
 The most useful breakdown with arrays is `arrayJoin`. This is a [special expression](https://clickhouse.com/docs/en/sql-reference/functions/array-join) that "unfolds" an array into multiple rows. and helps us access each value from within an array. For example, to get a count of the usage of different `$active_feature_flags`, you can use this SQL expression breakdown:
 
-```sql
+```sql runInPostHog=false
 arrayJoin(
   JSONExtractArrayRaw(
     properties.$active_feature_flags ?? '[]'
@@ -65,7 +65,7 @@ To add a filter, click the filter dropdown next to your data series, click **Add
 
 To start, you can remove empty arrays with a `notEmpty()` check. For example, to remove empty arrays from the `$active_feature_flags` by filtering for the SQL expression:
 
-```sql
+```sql runInPostHog=false
 notEmpty(
   JSONExtractArrayRaw(
     properties.$active_feature_flags ?? '[]'

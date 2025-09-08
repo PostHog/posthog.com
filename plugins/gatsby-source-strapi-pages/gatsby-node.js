@@ -13,7 +13,16 @@ exports.onPreInit = async function (_, options) {
                     Authorization: `Bearer ${strapiKey}`,
                 },
             }
-        ).then((res) => res.json())
+        )
+            .then((res) => res.json())
+            .catch((e) => {
+                console.error('Error fetching Strapi pages', e)
+                return null
+            })
+
+        if (!strapiPages?.data || !strapiPages?.data?.length) {
+            console.log('No data found for Strapi pages', strapiPages)
+        }
         const { data, meta } = strapiPages
         if (data) {
             data.forEach(({ id, attributes }) => {

@@ -9,33 +9,6 @@ availability:
 beta: true
 ---
 
-You can sync data from Google Ads reports by configuring it as a source in PostHog. The supported reports that can be synced include Ad, AdStats, AdGroup, AdGroupStats, Campaign, CampaignStats, Keyword, KeywordStats, Video, and VideoStats, as they are described [here](https://cloud.google.com/bigquery/docs/google-ads-transformation). Additional reports will be added based on user feedback we receive via our [in-app support form](https://us.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
+import GoogleAds from './_snippets/source-google-ads.mdx'
 
-## Requirements
-- The [Google Ads customer ID](https://support.google.com/google-ads/answer/1704344) of the account you are trying to sync to Posthog.
-- Administrator access to the Google Ads account you want to sync.
-
-## Configure Google Ads
-
-To connect to your Google Ads account, PostHog uses a Google Cloud service account. Thus, you must grant this service account access to your Google Ads account by following these steps:
-
-1. Sign in to your Google Ads account as an administrator.
-2. Navigate to **Admin > Access and security**.
-3. Click the **+** button under the **Users** tab.
-
-![Screenshot displaying plus button in users tab](https://res.cloudinary.com/dmukukwp6/image/upload/Google_Ads_Screenshot_Plus_a012c89aa6.png)
-
-4. Enter the following service account email into the **Email** field: `google-ads-api@posthog-external.iam.gserviceaccount.com`.
-5. Select **Read only** access level.
-
-![Screenshot displaying input of service account email and read only permissions selection](https://res.cloudinary.com/dmukukwp6/image/upload/Google_Ads_Screenshot_Invite_90767abd60.png)
-
-6. All done!
-
-## Configuring PostHog
-
-1. In PostHog, go to the **[Data pipelines](https://us.posthog.com/pipeline/sources)** tab.
-2. Open the **+ New** drop-down menu in the top-right and select **Source**.
-3. Find Google Ads in the sources list and click **Link**.
-4. Enter the **Google Ads customer ID** of the Google Ads account you want to sync.
-5. (Optional) Add a prefix for the table name.
+<GoogleAds />

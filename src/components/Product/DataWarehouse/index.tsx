@@ -148,7 +148,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases! Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -318,26 +318,26 @@ export const ProductDataWarehouse = () => {
                 } px-5 py-10 md:pt-0 md:-mt-12 pb-0`}
             >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured guides</h3>
                     <p className="mt-0 text-opacity-75 text-center mb-6">
                         Visit the <Link to="/tutorials">tutorials</Link> section for more.
                     </p>
 
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to set up Stripe reports"
-                            description="Analyze gross revenue, customer counts, MRR, churn, and more"
-                            url="/tutorials/stripe-reports"
+                            title="How we use PostHog's built-in data warehouse"
+                            description="How we track revenue, churn, sales, support, and more."
+                            url="/blog/data-warehouse-at-posthog"
                         />
                         <TutorialCard
-                            title="How to set up Hubspot reports"
-                            description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
-                            url="/tutorials/hubspot-reports"
+                            title="How we found our activation metric (and how you can too)"
+                            description="The real process (and queries) we used to find our activation metric."
+                            url="/product-engineers/activation-metrics"
                         />
                         <TutorialCard
-                            title="How to set up Zendesk reports"
-                            description="Track ticket counts, power users, SLA metrics, and more."
-                            url="/tutorials/zendesk-reports"
+                            title="The basics of SQL for analytics"
+                            description="No idea where to start with SQL? We've got you covered."
+                            url="/product-engineers/sql-for-analytics"
                         />
                     </ul>
                 </div>

@@ -4,25 +4,50 @@ sidebar: Docs
 showTitle: true
 ---
 
-Max is an AI-powered product analyst and assistant that lives in PostHog. Max can:
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-- Research answers to product questions by querying the data.
-- Get things done quickly in the PostHog UI for you (such as updating filters).
-- Tell you all about PostHog features and how to use them (based on our docs).
-- Chit-chat about anything really.
+[Max](https://app.posthog.com/#panel=max) is an AI-powered product analyst and assistant that lives in PostHog. Max can:
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_30_at_09_57_49_2e30546e93.png"
-    alt="Max in the sidebar"
-    classes="rounded max-h-[569px]"
-    zoom={false}
+- **Research answers** to product questions by querying the data.
+- **Get things done** quickly in the PostHog UI for you like update filters, create insights, write SQL, find session replays, make surveys, and more.
+- **Explain PostHog** features and how to use them (based on our docs).
+- **Chit-chat** about anything PostHog-related really.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/meet_max_ai_overview_778f4acffb.mp4" 
+    alt="Meet Max AI" 
+    classes="rounded"
+    autoPlay={false}
+    muted={false}
+    loop={false}
 />
+
+<Caption>
+Meet Max AI
+</Caption>
+
 
 ## How do I access Max?
 
-You can pop Max open wherever you are in PostHog! Just click on "Max" in the top right corner of the app. Then get to chatting.
+You can pop Max open wherever you are in PostHog! Just click on the [Max AI](https://app.posthog.com/#panel=max) icon in the corner of the app and get to chatting.
 
-> **Important:** Because PostHog AI features use third-party LLM providers (see details below), the first use of Max in your organization requires org admin approval. In most cases this is just a formality, but we've made it explicit as we know many PostHog customers strictly limit data sub-processors.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/maxai_sidebar_3a91ad81c9.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/maxai_sidebar_dark_143f5b4c4c.png"
+    alt="Open Max in the right-hand sidebar"
+    classes="rounded max-h-[480px]"
+    zoom={false}
+/>
+
+<Caption>
+Max is available in the right-hand sidebar of the PostHog app
+</Caption>
+
+<CalloutBox icon="IconInfo" title="Important" type="warning">
+
+Because PostHog AI features use third-party LLM providers (see details below), the first use of Max in your organization requires org admin approval. In most cases this is just a formality, but we've made it explicit as we take data governance seriously.
+
+</CalloutBox>
 
 ## Does Max have any superpowers compared to ChatGPT and similar agents?
 
@@ -30,18 +55,21 @@ Glad you asked! Max is deeply connected with your data, and lives inside of the 
 
 Unlike other agents, Max can:
 - Put on a data analyst hat and explore your PostHog data in depth.
-- Generate PostHog data visualizations, such as insights.
+- Create dashboards and generate PostHog data visualizations, such as insights.
 - Interact natively with the PostHog UI, for example by editing filters.
 - Generate complex [HogQL](/docs/sql) (our version of SQL) queries.
 - Answer questions from PostHog's documentation.
+- Create [surveys](/docs/surveys/creating-surveys) using natural language.
+- Write [Hog](/docs/hog) functions to power your realtime destinations.
+
 
 And soon, Max will be able to:
-- Watch your session replays
-- Create [feature flags](/docs/feature-flags), [experiments](/docs/experiments) or [surveys](/docs/surveys)
-- Write [Hog](/docs/hog) functions to power your realtime destinations.
+- Watch and summarize your session replays.
+- Create [feature flags](/docs/feature-flags) and [experiments](/docs/experiments).
+- Conduct deep research.
 - and more...
 
-Check our [roadmap](/max) to see what's coming, and vote on our upcoming features.
+Check our [roadmap](/max#roadmap) to see what's coming, and vote on our upcoming features.
 
 ## What access does Max have to my data?
 
@@ -67,5 +95,20 @@ Other providers that are not data subprocessors:
 
 ## How can I get Max to remember information?
 
-Max has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask him to remember specific details using verbs like "remember" or "save."
-You can always edit Max's memory in PostHog's settings.
+Max has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask him to remember specific details using verbs like "remember" or "save", or most directly: the `/remember` command in the chat.
+
+Max's full memory can be viewed and edited in project settings.
+
+## How can I disable AI in PostHog?
+
+If an org admin has previously approved AI features, but you'd prefer them disabled (and are an org admin too), you can disable Max and all AI data analysis in your organization settings. To do this:
+
+1. Go to **Settings** > **Organization** > **General**
+2. Find the **PostHog AI data analysis** section ([direct link](http://app.posthog.com/settings/organization-details#organization-ai-consent))
+3. Toggle the switch to "off"
+
+When disabled, Max won't be available and no data will be shared with AI providers. This can be reversed at any time.
+
+## Can I hide Max AI?
+
+There currently isn't a toggle to _hide_ AI features altogether. However, in any case, only org admins can approve AI features in the organization – so there's no risk of data being sent to any AI provider without explicit consent.

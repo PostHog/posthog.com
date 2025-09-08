@@ -1,0 +1,103 @@
+## Step one: Add PostHog to your app
+
+> 🚧 **Note:** Mobile surveys for Flutter is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow%3Atrue) or one of our other [support options](/docs/support-options).
+
+Using it requires PostHog's Flutter SDK version >= 5.4.1, but it's recommended to always use the latest version.
+
+import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
+
+> ⚠️ **Note:** For mobile surveys, you must setup the SDK manually.
+
+<FlutterInstallManual />
+
+## Step two: Enable surveys in your configuration
+
+To enable surveys in your Flutter app, update your PostHog configuration:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.host = 'https://us.i.posthog.com';
+config.surveys = true; // Enable surveys
+
+await Posthog().setup(config);
+```
+
+## Step three: Install PosthogObserver
+
+For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys.
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PostHogWidget(
+      child: MaterialApp(
+        navigatorObservers: [PosthogObserver()],
+        title: 'My App',
+        home: const HomeScreen(),
+      ),
+    );
+  }
+}
+```
+
+If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing-screen-views) to learn how to set up the `PosthogObserver`.
+
+## Supported Features
+
+| Feature                           | Support                | 
+| --------------------------------- | ---------------------- |
+| **Questions**                                              |
+| All question types                | ✅                     |
+| Multi-question surveys            | ✅                     |
+| Confirmation message              | ✅                     |
+| Feedback button presentation      | ❌                     |
+| Conditional questions             | ✅                     |
+| **Customization / Appearance**                            |
+| Set colors in PostHog dashboard   | ✅                     | 
+| Shuffle questions                 | ❌                     | 
+| PostHog branding                  | ❌                     | 
+| Delay popup after screen view     | ❌                     | 
+| Position config                   | ❌ Always bottom sheet | 
+| HTML content                      | ❌                     |
+| **Display conditions**                                     |
+| Feature flag & property targeting | ✅                     | 
+| Screen/URL targeting              | ❌                     | 
+| Device type targeting             | ✅                     | 
+| Survey wait period                | ❌                     | 
+| Event triggers                    | ✅                     | 
+| Action triggers                   | ❌                     | 
+| Partial responses                 | ❌                     |
+
+## Limitations
+
+- On Android, requires API >= 26.
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios).
+- Requires PostHog Flutter SDK version >= 5.4.0
+
+## Troubleshooting
+
+- Update your SDK and iOS Pods.
+- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure you have disabled automatic SDK intialization. 
+- Run a clean build if you experience issues.
+- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-three-install-posthogobserver).
+  - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
+  - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
+- If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

@@ -298,13 +298,7 @@ const Roadmap = () => {
                             )
                             .map((roadmap: RoadmapItem) => (
                                 <div key={roadmap.id} className="p-4">
-                                    <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
-                                        <VoteBox
-                                            likeCount={roadmap.attributes.likes.data.length}
-                                            liked={roadmap.attributes.likes.data.some(
-                                                ({ id }) => id === user?.profile?.id
-                                            )}
-                                        />
+                                    <div className="flex space-x-4">
                                         <div className="flex-1">
                                             <h4 className="text-lg font-bold mb-1 leading-tight">
                                                 {roadmap.attributes.title}
@@ -801,7 +795,7 @@ export const ProductMax = () => {
                             </p>
                             <p>
                                 Deep research mode. Max will build a deep understanding of your customers and product to
-                                answer questions, pulling together context from all our tools and data – like a an
+                                answer questions, pulling together context from all our tools and data – like an
                                 automatic PM or analyst.
                             </p>
                             <p>
@@ -825,7 +819,7 @@ export const ProductMax = () => {
                         />
                     </div>
 
-                    <section className="mt-20 dark:text-primary">
+                    <section id="roadmap" className="mt-20 dark:text-primary">
                         <Roadmap />
                     </section>
 
@@ -994,7 +988,7 @@ export const ProductMax = () => {
                                     <CallToAction
                                         type="secondary"
                                         size="sm"
-                                        to="https://us.posthog.com/#panel=feature-previews%3Aadvanced-max-ai-features"
+                                        to="https://app.posthog.com/settings/user-feature-previews#advanced-max-ai-features"
                                     >
                                         Sign up to the waitlist
                                     </CallToAction>

@@ -63,7 +63,7 @@ Work in the iteration should:
 * have a clear owner in the team
 * have a clear link to the team or company goals
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
+As one of our values is [Why not now?](/handbook/company/values#why-not-now), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
 
 ### Evaluate success 
 
@@ -136,18 +136,86 @@ Check the `test-runner.ts` file to see how this is configured. We use the `@stor
 
    ```bash
    pnpm storybook
+   # or
+   pnpm --filter=@posthog/storybook
    ```
 
 2. **Install Playwright and run the visual tests in debug mode** in another terminal:
 
    ```bash
    pnpm exec playwright install
-   pnpm test:visual:debug
+   pnpm --filter=@posthog/storybook test:visual:debug
    ```
 
 This setup will help catch unintended UI regressions and ensure consistent visual quality.
 
-[Learn more](https://github.com/PostHog/posthog/blob/master/.storybook/README.md)
+If you wish to locally run `test-runner.ts` and output all snapshots:
+
+   ```bash
+   pnpm --filter=@posthog/storybook test:visual:ci:update
+   ```
+
+Or if you wish to run one particular story:
+
+   ```bash
+   pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
+   
+   # example: pnpm --filter=@posthog/storybook test:visual:ci:update frontend/src/scenes/settings/stories/SettingsProject.stories.tsx
+   ```
+
+#### Merge conflicts with visual regression snapshots
+
+It happens often that your PR will show conflics with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
+
+Github does not allow for conflict resolution inside their website, so you must do it manually. 
+
+> The following is done on your branch in question.
+
+1. Bring your branch up to date with `master`.
+
+   ```bash
+   git fetch origin
+   ```
+
+2. Rebase master into your branch
+
+   ```bash
+   git rebase master
+   ```
+
+3. Rebase your upstream into your local branch
+
+   ```bash
+   git pull --rebase <your branch>
+   ```
+
+In your terminal, it should show you the conflicts mimicking what you see in your Github PR.
+
+
+   ```bash
+   warning: Cannot merge binary files: frontend/__snapshots__/<conflicted_file_1>.png (HEAD vs. xxx (Update UI snapshots for `chromium` (1)))
+   Auto-merging frontend/__snapshots__/<conflicted_file_1>.png
+   CONFLICT (content): Merge conflict in frontend/__snapshots__/<conflicted_file_1>.png
+   error: could not apply xxx... Update UI snapshots for `chromium` (1)
+   hint: Resolve all conflicts manually, mark them as resolved with
+   hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+   hint: You can instead skip this commit: run "git rebase --skip".
+   hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+   ```
+
+If all your conflicts are only snapshots, you can simply skip it.
+
+   ```bash
+   git rebase --skip
+   ```
+
+If all conflicts go away, then
+
+   ```bash
+   git push origin --force <your branch>
+   ```
+
+> Why does this work? As we mentioned earlier, our CI runs `test-runner.ts` on every push, so we don't really care if these images are conflicted as they are regenerated after you push to your branch.
 
 ## Reviewing code
 
