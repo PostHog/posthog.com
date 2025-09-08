@@ -46,9 +46,10 @@ showStepsToc: true
   | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
   | `POSTHOG_ENV_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/environment#variables) |
   | `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Defaults to `https://us.posthog.com` |
-  
+
   </div>
 
+  If you are using Vercel (or any other hosting service), make sure these environment variables are added to your project settings, not just your local setup.
 </Step>
 
 <Step checkpoint title="Verify source map generation">
