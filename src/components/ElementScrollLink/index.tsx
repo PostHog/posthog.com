@@ -19,9 +19,9 @@ interface ScrollSpyContextType {
     activeSection: string | null
 }
 
-const ScrollSpyContext = createContext<ScrollSpyContextType>({
+export const ScrollSpyContext = createContext<ScrollSpyContextType>({
     sections: {},
-    setSectionData: () => { },
+    setSectionData: () => {},
     activeSection: null,
 })
 
