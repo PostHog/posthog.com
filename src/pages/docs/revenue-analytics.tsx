@@ -50,7 +50,7 @@ export const Content = ({ quickLinks = false }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/connecting-revenue-to-customers">
+                        <Link to="/docs/revenue-analytics/connect-to-customers">
                             How can I see how much money I'm making from my customers?
                         </Link>
                     </li>

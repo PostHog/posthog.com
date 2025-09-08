@@ -4551,8 +4551,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Connecting revenue to customers',
-                    url: '/docs/revenue-analytics/connecting-revenue-to-customers',
+                    name: 'Connect to customers',
+                    url: '/docs/revenue-analytics/connect-to-customers',
                     icon: 'IconPeople',
                     color: 'blue',
                 },
