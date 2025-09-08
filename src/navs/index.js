@@ -4551,8 +4551,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Persons and Groups',
-                    url: '/docs/revenue-analytics/persons-and-groups',
+                    name: 'Connecting revenue to customers',
+                    url: '/docs/revenue-analytics/connecting-revenue-to-customers',
                     icon: 'IconPeople',
                     color: 'blue',
                 },
@@ -4561,6 +4561,12 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/deferred-revenue',
                     icon: 'IconBolt',
                     color: 'orange',
+                },
+                {
+                    name: 'Managed views',
+                    url: '/docs/revenue-analytics/manged-views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
                 },
                 {
                     name: 'FAQ',
