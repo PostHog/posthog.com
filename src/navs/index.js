@@ -4495,6 +4495,10 @@ export const docsMenu = {
             color: '[#36C46F]',
             url: '/docs/revenue-analytics',
             description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Revenue analytics',
