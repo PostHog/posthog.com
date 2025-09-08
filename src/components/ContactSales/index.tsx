@@ -158,7 +158,7 @@ export default function ContactSales({ location }) {
                                 },
                             ],
                             buttonText: 'Send',
-                            message: "Message received. We'll be in touch!",
+                            message: "Message received! We'll be in touch.",
                             name: 'Contact sales',
                         }}
                     />

@@ -375,13 +375,16 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         const parser = new DOMParser()
         const doc = parser.parseFromString(selectedJob.fields.html, 'text/html')
 
+        const theRole = doc.querySelector('details:has(h2[id="the-role"])')
         const whoWereLookingFor = doc.querySelector('details:has(h2[id="who-we\'re-looking-for"])')
         const whatYoullBeDoing = doc.querySelector('details:has(h2[id="what-you\'ll-be-doing"])')
         const requirements = doc.querySelector('details:has(h2[id="requirements"])')
         const niceToHave = doc.querySelector('details:has(h2[id="nice-to-have"])')
 
         let content = ''
-        if (whoWereLookingFor) {
+        if (theRole) {
+            content = theRole.outerHTML
+        } else if (whoWereLookingFor) {
             content = whoWereLookingFor.outerHTML
         } else if (whatYoullBeDoing) {
             content = whatYoullBeDoing.outerHTML
@@ -396,6 +399,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 ''
             )
             .replace('<p><em>#LI-DNI</em></p>', '')
+            .replace('<p>#LI-DNI</p>', '')
 
         setProcessedHtml(content)
         setSelectedTeamName('')
@@ -649,7 +653,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 <div className="flex-1">
                     <h2 className="hidden @2xl:block -mt-1 mb-2">{selectedJob.fields.title}</h2>
 
-                    <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-8">
+                    <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-8 items-start">
                         <div className="@5xl:col-span-7">
                             {teams.length > 1 && (
                                 <p
@@ -746,12 +750,12 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
                             >
-                                <h3 className="my-0 leading-tight">
+                                <h3 className="mt-0 mb-2 leading-tight text-center">
                                     {teams.length > 1
                                         ? 'About the small teams'
                                         : teams.length === 1
                                         ? `About the ${currentTeamName} Team`
-                                        : 'About this role'}
+                                        : 'About this team'}
                                 </h3>
 
                                 <TeamsSidebar

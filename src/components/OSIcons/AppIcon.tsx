@@ -71,8 +71,8 @@ const PRODUCT_ICON_MAP = {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_bdd451f4e8.png',
     },
     trash: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/trash_classic_94fddf05b4.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/trash_modern_a550bcaa95.png',
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/trash_classic_20ed394a8d.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/trash_modern_b4f09eff8f.png',
     },
     video: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/video_classic_beadf43e4b.png',

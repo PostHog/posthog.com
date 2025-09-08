@@ -56,9 +56,11 @@ export default function Header({
                         />
                     )}
                     {hasInProgress && !editing && (
-                        <CallToAction type="secondary" size="md" to="#in-progress">
-                            See what we're building
-                        </CallToAction>
+                        <div className="mt-4">
+                            <CallToAction type="secondary" size="md" to="#roadmap">
+                                See what we're building
+                            </CallToAction>
+                        </div>
                     )}
                 </div>
 
