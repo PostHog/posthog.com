@@ -259,8 +259,9 @@ export const AppLink = ({
     const getChildIconClasses = () => {
         if (typeof parentIcon === 'string' && parentIcon === 'page') {
             // Custom classes for page parentIcon
-            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${color ? `bg-${color}` : ''
-                }`
+            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${
+                color ? `bg-${color}` : ''
+            }`
         }
         // Default fallback classes
         return `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`
