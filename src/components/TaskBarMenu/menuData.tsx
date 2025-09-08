@@ -314,13 +314,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Startups',
                     link: '/startups',
                 },
-                /*
-                {
-                    type: 'item',
-                    label: 'Enterprise',
-                    link: '/enterprise',
-                },
-                */
                 { type: 'separator' },
                 {
                     type: 'item',
@@ -336,6 +329,16 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'How we do "sales"',
                     link: '/sales',
+                },
+                {
+                    type: 'item',
+                    label: "You'll hate PostHog if...",
+                    link: '/vibe-check',
+                },
+                {
+                    type: 'item',
+                    label: 'Social validation for enterprise',
+                    link: '/enterprise',
                 },
             ],
         },
@@ -388,6 +391,16 @@ export function useMenuData(): MenuType[] {
                     items: processHandbookSidebar(handbookSidebar),
                 },
                 {
+                    type: 'item',
+                    label: 'Roadmap',
+                    link: '/roadmap',
+                },
+                {
+                    type: 'item',
+                    label: 'Changelog',
+                    link: '/changelog',
+                },
+                {
                     type: 'separator',
                 },
                 {
@@ -409,26 +422,8 @@ export function useMenuData(): MenuType[] {
                     type: 'separator',
                 },
                 {
-                    type: 'item',
-                    label: 'Roadmap',
-                    link: '/roadmap',
-                },
-                {
-                    type: 'item',
-                    label: 'Changelog',
-                    link: '/changelog',
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
-                },
-                {
                     type: 'submenu',
-                    label: 'Social media',
+                    label: 'Like and subscribe',
                     items: [
                         {
                             type: 'item',

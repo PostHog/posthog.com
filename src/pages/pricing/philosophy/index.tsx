@@ -12,10 +12,13 @@ import { StaticImage } from 'gatsby-plugin-image'
 const PricingPhilosophy = (): JSX.Element => {
     return (
         <>
-            <section className="bg-light dark:bg-dark text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 md:mx-auto mt-12 mb-20 w-[calc(100%_-_3rem)] @xl:w-full max-w-3xl border border-primary">
+            <section
+                id="philosophy"
+                className="bg-light dark:bg-dark text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 md:mx-auto mt-12 mb-20 w-[calc(100%_-_3rem)] @xl:w-full max-w-3xl border border-primary"
+            >
                 <SectionHeader>
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
-                    <h3>Our pricing is designed to make you happy</h3>
+                    <h3 className="text-xl">Our pricing is designed to make you happy</h3>
                 </SectionHeader>
 
                 <p className="mt-4">Here's what you should know about our pricing:</p>
@@ -38,8 +41,13 @@ const PricingPhilosophy = (): JSX.Element => {
                     </li>
                     <li>
                         The company in general has significant revenue, over 60,000 customers, runs{' '}
-                        <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">default alive</Link>,
-                        and aims to IPO rather than sell. This means{' '}
+                        <Link
+                            href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2"
+                            state={{ newWindow: true }}
+                        >
+                            default alive
+                        </Link>
+                        , and aims to IPO rather than sell. This means{' '}
                         <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course we aren’t
                         perfect, but this goes a long way to avoiding the average dumb vc-backed company stuff in
                         general - like running out of money or selling to a lame bigger company who just kills off our
@@ -76,9 +84,29 @@ const PricingPhilosophy = (): JSX.Element => {
                     </span>
                 </p>
                 <p>
-                    Or if you need more info, <Link href="#faq">read our FAQ</Link>,{' '}
-                    <Link href="/questions/topic/pricing" state={{ newWindow: true }}>ask a question</Link>, or{' '}
-                    <Link href="/talk-to-a-human" state={{ newWindow: true }}>talk to a human</Link>.
+                    Or if you need more info,{' '}
+                    <a
+                        href="#faq"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            const faq = document.getElementById('faq')
+                            if (faq) {
+                                faq.scrollIntoView({ behavior: 'smooth' })
+                            }
+                            window.history.replaceState(null, '', '#faq')
+                        }}
+                    >
+                        read our FAQ
+                    </a>
+                    ,{' '}
+                    <Link href="/questions/topic/pricing" state={{ newWindow: true }}>
+                        ask a question
+                    </Link>
+                    , or{' '}
+                    <Link href="/talk-to-a-human" state={{ newWindow: true }}>
+                        talk to a human
+                    </Link>
+                    .
                 </p>
 
                 <div className="flex gap-2 items-center">
