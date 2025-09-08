@@ -599,196 +599,199 @@ export default function Job({
                         </div>
                     </div>
 
-                    <div>
-                        {sfBenchmark[salaryRole] && (
-                            <div id="salary">
+                    <div className="max-w-4xl">
+
+                        <div>
+                            {sfBenchmark[salaryRole] && (
+                                <div id="salary">
+                                    <Accordion
+                                        skin={false}
+                                        items={[
+                                            {
+                                                value: 'salary',
+                                                trigger: <h2 className="!m-0">Salary</h2>,
+                                                content: (
+                                                    <>
+                                                        <p>
+                                                            We have a set system for compensation as part of being
+                                                            transparent. Salary varies based on location and level of
+                                                            experience.
+                                                        </p>
+                                                        <p>
+                                                            <Link to="/handbook/people/compensation" state={{ newWindow: true }}>
+                                                                Learn more about compensation
+                                                            </Link>
+                                                        </p>
+                                                        <div className="mb-6">
+                                                            <CompensationCalculator hideRole initialJob={salaryRole} />
+                                                        </div>
+                                                    </>
+                                                ),
+                                            },
+                                        ]}
+                                        defaultValue="salary"
+                                    />
+                                </div>
+                            )}
+                            <div id="benefits">
                                 <Accordion
                                     skin={false}
                                     items={[
                                         {
-                                            value: 'salary',
-                                            trigger: <h2 className="!m-0">Salary</h2>,
+                                            value: 'benefits',
+                                            trigger: <h2 className="!m-0">Benefits</h2>,
                                             content: (
                                                 <>
+                                                    <ul className="list-none m-0 p-0 pb-4 grid md:grid-cols-2 grid-cols-1 gap-6">
+                                                        {benefits.map(({ title, image }) => {
+                                                            return (
+                                                                <li
+                                                                    key={title}
+                                                                    className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
+                                                                >
+                                                                    <img className="max-w-[30px]" alt={title} src={image} />
+                                                                    <span>{title}</span>
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
                                                     <p>
-                                                        We have a set system for compensation as part of being
-                                                        transparent. Salary varies based on location and level of
-                                                        experience.
+                                                        Get more details about all our benefits on the{' '}
+                                                        <Link to="/careers#benefits" state={{ newWindow: true }}>Careers page</Link>.
                                                     </p>
-                                                    <p>
-                                                        <Link to="/handbook/people/compensation">
-                                                            Learn more about compensation
-                                                        </Link>
-                                                    </p>
-                                                    <div className="mb-6">
-                                                        <CompensationCalculator hideRole initialJob={salaryRole} />
-                                                    </div>
                                                 </>
                                             ),
                                         },
                                     ]}
-                                    defaultValue="salary"
+                                    defaultValue="benefits"
                                 />
                             </div>
-                        )}
-                        <div id="benefits">
-                            <Accordion
-                                skin={false}
-                                items={[
-                                    {
-                                        value: 'benefits',
-                                        trigger: <h2 className="!m-0">Benefits</h2>,
-                                        content: (
-                                            <>
-                                                <ul className="list-none m-0 p-0 pb-4 grid md:grid-cols-2 grid-cols-1 gap-6">
-                                                    {benefits.map(({ title, image }) => {
-                                                        return (
-                                                            <li
-                                                                key={title}
-                                                                className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
+                            {gitHubIssues.length > 0 && (
+                                <div id="typical-tasks">
+                                    <Accordion
+                                        skin={false}
+                                        items={[
+                                            {
+                                                value: 'typical-tasks',
+                                                trigger: <h2 className="!m-0">Typical tasks</h2>,
+                                                content: (
+                                                    <div className="mb-2">
+                                                        <p>Here are some open GitHub issues you could help solve:</p>
+                                                        <ul className="list-none !m-0 p-0 grid gap-y-4">
+                                                            {gitHubIssues.map(
+                                                                ({ url, number, title, labels }: GitHubIssue) => {
+                                                                    return (
+                                                                        <li key={title} className="flex flex-col ">
+                                                                            <div className="flex space-x-2">
+                                                                                <Link
+                                                                                    to={url}
+                                                                                    className="block w-[60px] md:w-auto"
+                                                                                >
+                                                                                    <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
+                                                                                        #{number}
+                                                                                    </span>
+                                                                                </Link>
+                                                                                <Link to={url} external>{title}</Link>
+                                                                            </div>
+                                                                            {labels && labels.length > 0 && (
+                                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
+                                                                                    {labels.map(
+                                                                                        ({ name, url }, index: number) => {
+                                                                                            return (
+                                                                                                <li key={name + index}>
+                                                                                                    <Link
+                                                                                                        className="transition-all text-sm rounded-sm py-1 px-[5px] bg-blue/10 hover:bg-blue/20 text-blue hover:text-blue dark:bg-white/10 dark:hover:bg-white/30 dark:text-white/75 dark:hover:text-white/100"
+                                                                                                        to={url}
+                                                                                                    >
+                                                                                                        {name}
+                                                                                                    </Link>
+                                                                                                </li>
+                                                                                            )
+                                                                                        }
+                                                                                    )}
+                                                                                </ul>
+                                                                            )}
+                                                                        </li>
+                                                                    )
+                                                                }
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                ),
+                                            },
+                                        ]}
+                                        defaultValue="typical-tasks"
+                                    />
+                                </div>
+                            )}
+                            {!multipleTeams && showObjectives && objectives && (
+                                <div id="mission-objectives">
+                                    <Accordion
+                                        skin={false}
+                                        items={[
+                                            {
+                                                value: 'mission-objectives',
+                                                trigger: <h2 className="!m-0">Your team's mission and objectives</h2>,
+                                                content: (
+                                                    <div className="mb-6">
+                                                        {mission?.body && (
+                                                            <MDXProvider
+                                                                components={{ HideFromJobPosting: () => null, TeamMember }}
                                                             >
-                                                                <img className="max-w-[30px]" alt={title} src={image} />
-                                                                <span>{title}</span>
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                                <p>
-                                                    Get more details about all our benefits on the{' '}
-                                                    <Link to="/careers#benefits">Careers page</Link>.
-                                                </p>
-                                            </>
-                                        ),
-                                    },
-                                ]}
-                                defaultValue="benefits"
-                            />
-                        </div>
-                        {gitHubIssues.length > 0 && (
-                            <div id="typical-tasks">
-                                <Accordion
-                                    skin={false}
-                                    items={[
-                                        {
-                                            value: 'typical-tasks',
-                                            trigger: <h2 className="!m-0">Typical tasks</h2>,
-                                            content: (
-                                                <div className="mb-2">
-                                                    <p>Here are some open GitHub issues you could help solve:</p>
-                                                    <ul className="list-none !m-0 p-0 grid gap-y-4">
-                                                        {gitHubIssues.map(
-                                                            ({ url, number, title, labels }: GitHubIssue) => {
-                                                                return (
-                                                                    <li key={title} className="flex flex-col ">
-                                                                        <div className="flex space-x-2">
-                                                                            <Link
-                                                                                to={url}
-                                                                                className="block w-[60px] md:w-auto"
-                                                                            >
-                                                                                <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
-                                                                                    #{number}
-                                                                                </span>
-                                                                            </Link>
-                                                                            <Link to={url}>{title}</Link>
-                                                                        </div>
-                                                                        {labels && labels.length > 0 && (
-                                                                            <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
-                                                                                {labels.map(
-                                                                                    ({ name, url }, index: number) => {
-                                                                                        return (
-                                                                                            <li key={name + index}>
-                                                                                                <Link
-                                                                                                    className="transition-all text-sm rounded-sm py-1 px-[5px] bg-blue/10 hover:bg-blue/20 text-blue hover:text-blue dark:bg-white/10 dark:hover:bg-white/30 dark:text-white/75 dark:hover:text-white/100"
-                                                                                                    to={url}
-                                                                                                >
-                                                                                                    {name}
-                                                                                                </Link>
-                                                                                            </li>
-                                                                                        )
-                                                                                    }
-                                                                                )}
-                                                                            </ul>
-                                                                        )}
-                                                                    </li>
-                                                                )
-                                                            }
+                                                                <MDXRenderer>{mission.body}</MDXRenderer>
+                                                            </MDXProvider>
                                                         )}
-                                                    </ul>
-                                                </div>
-                                            ),
-                                        },
-                                    ]}
-                                    defaultValue="typical-tasks"
-                                />
-                            </div>
-                        )}
-                        {!multipleTeams && showObjectives && objectives && (
-                            <div id="mission-objectives">
-                                <Accordion
-                                    skin={false}
-                                    items={[
-                                        {
-                                            value: 'mission-objectives',
-                                            trigger: <h2 className="!m-0">Your team's mission and objectives</h2>,
-                                            content: (
-                                                <div className="mb-6">
-                                                    {mission?.body && (
                                                         <MDXProvider
                                                             components={{ HideFromJobPosting: () => null, TeamMember }}
                                                         >
-                                                            <MDXRenderer>{mission.body}</MDXRenderer>
+                                                            <MDXRenderer>{objectives.body}</MDXRenderer>
                                                         </MDXProvider>
-                                                    )}
-                                                    <MDXProvider
-                                                        components={{ HideFromJobPosting: () => null, TeamMember }}
-                                                    >
-                                                        <MDXRenderer>{objectives.body}</MDXRenderer>
-                                                    </MDXProvider>
+                                                    </div>
+                                                ),
+                                            },
+                                        ]}
+                                        defaultValue="mission-objectives"
+                                    />
+                                </div>
+                            )}
+                            <div id="interview-process">
+                                <Accordion
+                                    skin={false}
+                                    items={[
+                                        {
+                                            value: 'interview-process',
+                                            trigger: <h2 className="!m-0">Interview process</h2>,
+                                            content: (
+                                                <div className="mb-6">
+                                                    <p>
+                                                        We do 2-3 short interviews, then pay you to do some real-life (or
+                                                        close to real-life) work.
+                                                    </p>
+                                                    <InterviewProcess role={title} inApplicationProcess />
                                                 </div>
                                             ),
                                         },
                                     ]}
-                                    defaultValue="mission-objectives"
+                                    defaultValue="interview-process"
                                 />
                             </div>
-                        )}
-                        <div id="interview-process">
-                            <Accordion
-                                skin={false}
-                                items={[
-                                    {
-                                        value: 'interview-process',
-                                        trigger: <h2 className="!m-0">Interview process</h2>,
-                                        content: (
-                                            <div className="mb-6">
-                                                <p>
-                                                    We do 2-3 short interviews, then pay you to do some real-life (or
-                                                    close to real-life) work.
-                                                </p>
-                                                <InterviewProcess role={title} inApplicationProcess />
-                                            </div>
-                                        ),
-                                    },
-                                ]}
-                                defaultValue="interview-process"
-                            />
-                        </div>
-                        <div id="apply">
-                            <Accordion
-                                skin={false}
-                                items={[
-                                    {
-                                        value: 'apply',
-                                        trigger: <h2 className="!m-0">Apply</h2>,
-                                        content: (
-                                            <div className="mb-6">
-                                                <Apply id={id} info={info} />
-                                            </div>
-                                        ),
-                                    },
-                                ]}
-                                defaultValue="apply"
-                            />
+                            <div id="apply">
+                                <Accordion
+                                    skin={false}
+                                    items={[
+                                        {
+                                            value: 'apply',
+                                            trigger: <h2 className="!m-0">Apply</h2>,
+                                            content: (
+                                                <div className="mb-6">
+                                                    <Apply id={id} info={info} />
+                                                </div>
+                                            ),
+                                        },
+                                    ]}
+                                    defaultValue="apply"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
