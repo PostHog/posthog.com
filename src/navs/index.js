@@ -4564,7 +4564,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Managed views',
-                    url: '/docs/revenue-analytics/manged-views',
+                    url: '/docs/revenue-analytics/managed-views',
                     icon: 'IconCalculator',
                     color: 'salmon',
                 },
