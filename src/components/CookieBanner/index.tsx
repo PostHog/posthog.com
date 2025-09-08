@@ -5,6 +5,25 @@ import Tooltip from 'components/Tooltip'
 import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
 
+// Simple UK detection utility, this is just for fun
+const isUserInUK = () => {
+    if (navigator.language.includes('en-GB')) {
+        return true
+    }
+
+    try {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        return timezone === 'Europe/London'
+    } catch {
+        return false
+    }
+}
+
+// Text replacement for UK users
+const cookieText = (text: string) => {
+    return isUserInUK() ? text.replace(/cookie/gi, () => 'biscuit') : text
+}
+
 const UrsulaCookieBanner = ({
     handleClick,
     internalMenu,
@@ -20,8 +39,8 @@ const UrsulaCookieBanner = ({
         >
             <div className="bg-primary/80 backdrop-blur dark:bg-gray-accent-dark rounded-[15px] shadow-[0px_4px_10px_rgba(0,0,0,.4)] px-6 py-5 sm:pb-3 w-[calc(100%_-_2rem)] sm:max-w-[300px] translate-x-4 sm:translate-x-[80px] border border-white/20 mb-2">
                 <p className="text-[14px] m-0 pb-2 text-white">
-                    <strong>PostHog.com doesn't use third party cookies</strong>{' '}
-                    <span className="text-white/80">- only a single in-house cookie.</span>
+                    <strong>{cookieText("PostHog.com doesn't use third party cookies")}</strong>{' '}
+                    <span className="text-white/80">{cookieText('- only a single in-house cookie.')}</span>
                 </p>
                 <p className="text-[14px] m-0 pb-4 text-white/80">No data is sent to a third party.</p>
                 <div className="space-y-2">
@@ -75,7 +94,7 @@ const SmallCookieBanner = ({ handleClick }: { handleClick: (accept: boolean) => 
             <div className="bg-primary/80 dark:bg-gray-accent-dark backdrop-blur-sm p-4 w-full">
                 <div className="max-w-7xl mx-auto flex flex-col items-center gap-y-3">
                     <p className="text-sm text-white m-0 text-center">
-                        PostHog.com doesn't use third party cookies - only a single in-house cookie.
+                        {cookieText("PostHog.com doesn't use third party cookies - only a single in-house cookie.")}
                     </p>
                     <div className="flex items-center gap-x-2">
                         <button
