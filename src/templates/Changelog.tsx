@@ -628,6 +628,7 @@ export default function Changelog({ pageContext }) {
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
+                    centerTabs
                 />
             </Editor>
         </>

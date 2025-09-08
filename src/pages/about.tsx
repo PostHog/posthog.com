@@ -92,6 +92,7 @@ export default function About({ data }: AboutProps) {
                     className={className}
                     triggerDataScheme="primary"
                     scrollable={false}
+                    centerTabs
                 />
             </Editor>
         </>

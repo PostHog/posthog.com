@@ -317,7 +317,7 @@ export function useMenuData(): MenuType[] {
                 { type: 'separator' },
                 {
                     type: 'item',
-                    label: 'Bedtime reading',
+                    label: 'Mildly interesting reads',
                     disabled: true,
                 },
                 {
@@ -329,6 +329,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'How we do "sales"',
                     link: '/sales',
+                },
+                {
+                    type: 'item',
+                    label: 'Side project insurance',
+                    link: '/side-project-insurance',
                 },
                 {
                     type: 'item',
@@ -513,7 +518,7 @@ export function useMenuData(): MenuType[] {
                         },
                         {
                             type: 'item',
-                            label: 'DPA generator',
+                            label: "DPA generator (it's fun!)",
                             link: '/dpa',
                         },
                         {
