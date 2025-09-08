@@ -9,19 +9,33 @@ import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 <RevAnalyticsBetaWarning />
 
 When using revenue data from your Data Warehouse (like Stripe), PostHog will automatically defer revenue recognition to match your accounting practices. This is particularly useful for subscription businesses that need to recognize revenue over time rather than all at once.
-This implies that our dashboard will show revenue in the future, indicating all of the revenue that will be recognized in the future.
+
+This implies that our dashboard will show future revenue if you filter by a date range including dates in the future, indicating all of the revenue that will be recognized in the future.
 
 > **Note**: Revenue deferring is automatically applied when using Stripe as your data source. You don't need to configure anything additional if you're already filling Stripe's `period` property on your invoice line items - PostHog handles the calculations based on the period information in your Stripe invoices.
 
+## How PostHog processes deferred revenue
+
+This does NOT apply to revenue data from events since we don't support informing what period a revenue event belongs to. See [below](#revenue-from-event-data) for more information.
+
+For supported sources, when PostHog imports your revenue data, it automatically:
+
+1. **Detects period information**: Finds the relevant `period` property on your invoice line items
+2. **Calculates deferral periods**: Determines how many months/days the revenue should be spread across
+3. **Distributes revenue**: Splits the total amount evenly across the service period
+
+For example, if you have an annual subscription where customers pay $1,200 upfront:
+- **Without deferring**: All $1,200 appears in the month of payment
+- **With deferring**: $100 appears in each of the 12 months of the subscription period
+
 ## Revenue deferring for each revenue source
 
-### Events
+### Revenue from event data
 
 Revenue deferring is **NOT** applied to revenue data from events since we don't support informing what period a revenue event belongs to.
 You should manually apply revenue deferring to events on your own before sending them to PostHog.
 
-
-### Stripe
+### Revenue from Stripe 
 
 PostHog's Stripe integration automatically handles revenue deferring based on the `period` property found in your Stripe invoice line items.
 
@@ -45,18 +59,6 @@ In Stripe, when you create a subscription or invoice, each line item can include
 The `period` object contains:
 - `start`: Unix timestamp when the service period begins
 - `end`: Unix timestamp when the service period ends
-
-## How PostHog processes deferred revenue
-
-When PostHog imports your revenue data, it automatically:
-
-1. **Detects period information**: Looks for the `period` property on invoice line items
-2. **Calculates deferral periods**: Determines how many months/days the revenue should be spread across
-3. **Distributes revenue**: Splits the total amount evenly across the service period
-
-For example, if you have an annual subscription where customers pay $1,200 upfront:
-- **Without deferring**: All $1,200 appears in the month of payment
-- **With deferring**: $100 appears in each of the 12 months of the subscription period
 
 ## When deferring doesn't apply
 

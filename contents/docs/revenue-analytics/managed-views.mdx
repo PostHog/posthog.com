@@ -3,8 +3,9 @@ title: Managed views
 sidebar: Docs
 showTitle: true
 ---
+import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 
-> **Important:** Revenue analytics is currently in beta. At this stage, Revenue analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+<RevAnalyticsBetaWarning />
 
 Revenue analytics works by automatically transforming the data coming from your different revenue sources (Stripe or events) into a standardized set of [managed views](/docs/data-warehouse/views).
 
@@ -12,14 +13,18 @@ These views are automatically created once you [add a revenue source](/docs/reve
 
 These views are not exclusive to the revenue analytics dashboard: you can use them in other parts of PostHog where you'd be able to use views, more importantly the [SQL editor](/docs/data-warehouse/query).
 
-There are 5 sets of views. For "events" sources they're named in the format `revenue_analytics.events.<event_name>.revenue_analytics_<view_type>` while for Data Warehouse sources they're created in the `<data_warehouse_source_name>.revenue_analytics_<view_type>`.
-There's also a global `revenue_analytics.all.<view_type>` view that contains aggregated data from all the sources.
+There are 5 sets of views. 
+- For event sources they're named in the format `revenue_analytics.events.<event_name>.revenue_analytics_<view_type>` 
+- For data warehouse sources they're created in the `<data_warehouse_source_name>.revenue_analytics_<view_type>`.
+
+There's also a global `revenue_analytics.all.<view_type>` view that contains aggregated data from all sources.
 
 ## View types
 
 ### Product
 
-One of the most basic views is the `product` view. This view is a simple table containing the list of all products you have in your sources. For events this comes from the property you configure as the product ID, for data warehouse sources it's automatically inferred from the source.
+The `product` view is a simple table containing the list of all products you have in your sources. For events this comes from the property you configure as the product ID, for data warehouse sources it's automatically inferred from the source.
+
 
 Examples assuming one data warehouse source and one event:
 - `stripe.prod.revenue_analytics_product`
@@ -28,7 +33,9 @@ Examples assuming one data warehouse source and one event:
 
 ### Charge
 
-The `cgarge` view is a very low-level table displaying all of the charges you've made. It does not aggregate data by any means and simply exposes the data we're collecting from your sources in standardized fashion. This table also handles converting the data from the original currency to your [reporting currency](/docs/getting-started#choosing-your-reporting-currency).
+The `charge` view is a low-level table displaying all of the charges you've made. It does not aggregate data by any means and simply exposes the data we're collecting from your sources in standardized fashion. This table also handles converting the data from the original currency to your [reporting currency](/docs/getting-started#choosing-your-reporting-currency).
+
+You should prefer the `revenue_item` view over the `charge` view since it implements [deferred revenue](/docs/revenue-analytics/deferred-revenue).
 
 Examples:
 - `stripe.prod.revenue_analytics_charge`
