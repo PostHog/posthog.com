@@ -29,7 +29,7 @@ Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage th
 ### Initial setup
 
 **Before you start:**
-- Make sure you have access to Clazar 
+- Make sure you have access to Clazar
 - Have signed order form from customer with "AWS Marketplace" selected as the billing method
 - Have the customer's AWS account ID ready
 
