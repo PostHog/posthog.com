@@ -177,6 +177,7 @@ You can disable data collection for a user at any time using the `disable()` met
 await Posthog().disable();
 ```
 
+This prevents any future events from being sent. It doesn’t remove events already captured for the user.
 To opt the user back in:
 
 ```dart
