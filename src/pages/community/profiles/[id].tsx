@@ -20,7 +20,7 @@ import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
 import RadixTooltip from 'components/RadixUI/Tooltip'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
@@ -42,6 +42,7 @@ import RichText from 'components/Squeak/components/RichText'
 import transformValues from 'components/Squeak/util/transformValues'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import { Select } from 'components/RadixUI/Select'
+import OSInput from 'components/OSForm/input'
 
 dayjs.extend(relativeTime)
 
@@ -62,6 +63,10 @@ const WebsiteIcon = () => {
             />
         </svg>
     )
+}
+
+const stripUrlPrefix = (url: string) => {
+    return url.replace(/^https?:\/\/(www\.)?/, '')
 }
 
 const BackgroundImageField = ({
@@ -139,7 +144,7 @@ const Links = ({
     errors: any
 }) => {
     return (
-        <ul className={`flex m-0 p-0 list-none ${isEditing ? 'flex-col' : 'space-x-3'}`}>
+        <ul className={`flex m-0 p-0 list-none ${isEditing ? 'flex-col space-y-3' : 'space-x-3'}`}>
             {isEditing ? (
                 <li>
                     <Input
@@ -153,9 +158,16 @@ const Links = ({
             ) : (
                 profile.github && (
                     <li>
-                        <Link to={profile.github} externalNoIcon>
-                            <GitHub className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.github} externalNoIcon>
+                                    <GitHub className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.github)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -172,9 +184,16 @@ const Links = ({
             ) : (
                 profile.twitter && (
                     <li>
-                        <Link to={profile.twitter} externalNoIcon>
-                            <Twitter className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.twitter} externalNoIcon>
+                                    <Twitter className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.twitter)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -191,9 +210,16 @@ const Links = ({
             ) : (
                 profile.linkedin && (
                     <li>
-                        <Link to={profile.linkedin} externalNoIcon>
-                            <LinkedIn className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.linkedin} externalNoIcon>
+                                    <LinkedIn className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.linkedin)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -210,9 +236,16 @@ const Links = ({
             ) : (
                 profile.website && (
                     <li>
-                        <Link to={profile.website} externalNoIcon>
-                            <WebsiteIcon />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.website} externalNoIcon>
+                                    <WebsiteIcon />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.website)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -222,13 +255,17 @@ const Links = ({
 
 const Input = ({ label, name, value, onChange, error }) => {
     return (
-        <div>
-            <label className="text-xs font-semibold" htmlFor={name}>
-                {label}
-            </label>
-            <input type="text" name={name} value={value} onChange={onChange} placeholder={label} className="rounded" />
-            {error && <p className="text-red m-0 text-xs font-bold mt-1">{error}</p>}
-        </div>
+        <OSInput
+            label={label}
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={label}
+            direction="column"
+            error={error}
+            touched={!!error}
+            showLabel={true}
+        />
     )
 }
 
@@ -296,7 +333,7 @@ const AvatarBlock = ({
             )}
             <Avatar className="w-full border-b border-primary" src={imageURL} color={profile.color} />
             {isEditing ? (
-                <div className="p-3 w-full">
+                <div className="p-3 w-full space-y-3">
                     <Input
                         label="First name"
                         name="firstName"
@@ -311,35 +348,37 @@ const AvatarBlock = ({
                         onChange={(e) => setFieldValue('lastName', e.target.value)}
                         error={errors.lastName}
                     />
-                    <label className="text-xs font-semibold">Favorite color</label>
-                    <ul className="list-none m-0 p-0 flex space-x-1">
-                        {[
-                            'lime-green',
-                            'blue',
-                            'orange',
-                            'teal',
-                            'purple',
-                            'seagreen',
-                            'salmon',
-                            'yellow',
-                            'red',
-                            'green',
-                            'lilac',
-                            'sky-blue',
-                        ].map((color) => {
-                            const active = values.color === color
-                            return (
-                                <li key={color} onClick={() => setFieldValue('color', color)}>
-                                    <button
-                                        type="button"
-                                        className={`size-5 rounded-full bg-${color} border-[1.5px] ${
-                                            active ? 'border-black dark:border-white' : 'border-transparent'
-                                        }`}
-                                    />
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    <div>
+                        <label className="text-[15px]">Favorite color</label>
+                        <ul className="list-none m-0 p-0 flex space-x-1 mt-1">
+                            {[
+                                'lime-green',
+                                'blue',
+                                'orange',
+                                'teal',
+                                'purple',
+                                'seagreen',
+                                'salmon',
+                                'yellow',
+                                'red',
+                                'green',
+                                'lilac',
+                                'sky-blue',
+                            ].map((color) => {
+                                const active = values.color === color
+                                return (
+                                    <li key={color} onClick={() => setFieldValue('color', color)}>
+                                        <button
+                                            type="button"
+                                            className={`size-5 rounded-full bg-${color} border-[1.5px] ${
+                                                active ? 'border-black dark:border-white' : 'border-transparent'
+                                            }`}
+                                        />
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
                 </div>
             ) : (
                 <div className="flex items-center space-x-2 my-2">
@@ -360,7 +399,7 @@ const AvatarBlock = ({
 
 const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
     return (
-        <div className="text-sm space-y-1">
+        <div className="text-sm space-y-3">
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -377,8 +416,8 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                 </p>
             )}
             {isEditing ? (
-                <>
-                    <label className="text-xs font-semibold">Pineapple on pizza</label>
+                <div>
+                    <label className="text-[15px]">Pineapple on pizza</label>
                     <ToggleGroup
                         title="Pineapple on pizza"
                         hideTitle={true}
@@ -395,7 +434,7 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                         value={values.pineappleOnPizza === null ? undefined : values.pineappleOnPizza ? 'yes' : 'no'}
                         onValueChange={(value) => setFieldValue('pineappleOnPizza', value === 'yes' ? true : false)}
                     />
-                </>
+                </div>
             ) : (
                 profile.pineappleOnPizza !== null && (
                     <p className="flex justify-between m-0">
@@ -459,7 +498,7 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
     }, [heightUnit])
 
     return (
-        <div>
+        <div className="space-y-3">
             <Input
                 label="Role"
                 name="companyRole"
@@ -475,10 +514,10 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                 error={errors.country}
             />
             <div>
-                <label className="text-xs font-semibold">Height</label>
+                <label className="text-[15px]">Height</label>
                 <div className="flex items-center space-x-1">
                     <input
-                        className="rounded"
+                        className="bg-transparent text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50"
                         type="number"
                         name="height"
                         value={height}
@@ -501,7 +540,7 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                 </div>
             </div>
             <div>
-                <label className="text-xs font-semibold">Show comments</label>
+                <label className="text-[15px]">Show comments</label>
                 <p className="text-xs text-secondary m-0 mb-2">
                     Let visitors comment on your profile. You'll get comment notifications via email.
                 </p>
@@ -1165,7 +1204,7 @@ export default function ProfilePage({ params }: PageProps) {
                                             type="secondary"
                                             width="full"
                                         >
-                                            Edit Profile
+                                            Edit profile
                                         </CallToAction>
                                     </div>
                                 )

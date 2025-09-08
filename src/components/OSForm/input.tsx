@@ -56,7 +56,7 @@ const Input = ({
         <div className={`flex ${direction === 'column' ? 'flex-col space-y-1' : 'items-center space-x-2'}`}>
             {showLabel && (
                 <div className={`${direction === 'column' ? 'w-full' : labelWidth || 'w-[90px]'}`}>
-                    <label htmlFor={inputId} className={`font-medium ${labelSizeClasses[size]}`}>
+                    <label htmlFor={inputId} className={`${labelSizeClasses[size]}`}>
                         <span>
                             {label}
                             {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}

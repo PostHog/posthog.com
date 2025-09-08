@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconFeatures, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
+import OSTextarea from 'components/OSForm/textarea'
 
 const buttons = [
     {
@@ -94,8 +95,9 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
             <button
                 onClick={() => onSelect?.(profile, selectionStart)}
                 type="button"
-                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${focused === index ? 'bg-accent' : ''
-                    }`}
+                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
+                    focused === index ? 'bg-accent' : ''
+                }`}
             >
                 <div className="size-6 overflow-hidden rounded-full">
                     <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
@@ -407,13 +409,15 @@ export default function RichText({
                                 )}
                             </AnimatePresence>
                         )}
-                        <label htmlFor="body" className="py-3 px-4 pb-8 block">
-                            {label && !!value && <span className="text-sm opacity-60 block">{label}</span>}
+                        <div className="py-3 px-4 pb-8">
+                            {label && !!value && (
+                                <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
+                            )}
                             <textarea
                                 onPaste={handlePaste}
                                 disabled={imageLoading}
                                 autoFocus={autoFocus}
-                                className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] resize-none w-full text-black outline-none focus:ring-0 p-0"
+                                className="bg-primary border-none text-base h-[200px] resize-none w-full text-primary p-0"
                                 onBlur={(e) => e.preventDefault()}
                                 name="body"
                                 value={value}
@@ -425,7 +429,7 @@ export default function RichText({
                                 maxLength={maxLength}
                                 onKeyDown={handleKeyDown}
                             />
-                        </label>
+                        </div>
                         {isDragActive && (
                             <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:dark: after:rounded-md">
                                 <p className="m-0 font-semibold">Drop image here</p>
@@ -488,8 +492,9 @@ export default function RichText({
                                         <button
                                             onClick={() => setShowPreview(false)}
                                             type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${showPreview ? '' : '!border border-primary bg-light dark:bg-dark'
-                                                }`}
+                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
+                                                showPreview ? '' : '!border border-primary bg-light dark:bg-dark'
+                                            }`}
                                         >
                                             <Edit />
                                         </button>
@@ -500,8 +505,9 @@ export default function RichText({
                                         <button
                                             onClick={() => setShowPreview(true)}
                                             type="button"
-                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${showPreview ? 'border border-primary bg-light dark:bg-dark' : ''
-                                                }`}
+                                            className={`flex items-center bg-none border-none rounded-sm text-black/50  justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                                showPreview ? 'border border-primary bg-light dark:bg-dark' : ''
+                                            }`}
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
