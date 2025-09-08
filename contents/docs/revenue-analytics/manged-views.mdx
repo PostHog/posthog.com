@@ -19,7 +19,7 @@ There's also a global `revenue_analytics.all.<view_type>` view that contains agg
 
 ### Product
 
-One of the most basic views is the `product` view. This view is a simple table containing the list of all products you have in your sources. For events this comes from the property you configure as the product ID, for data warehouse sources it's automatically infered from the source.
+One of the most basic views is the `product` view. This view is a simple table containing the list of all products you have in your sources. For events this comes from the property you configure as the product ID, for data warehouse sources it's automatically inferred from the source.
 
 Examples assuming one data warehouse source and one event:
 - `stripe.prod.revenue_analytics_product`
@@ -39,7 +39,7 @@ You can look at the table schema in the [SQL editor](/docs/data-warehouse/query)
 
 ### Customer
 
-The `customer` view is a table containing the list of all customers you have in your sources. For events this is automatically inferred from the `distinct_id`/`$group_key` person/group connected to the event. For data warehouse sources it's automatically infered from the source's own source of truth for customers.
+The `customer` view is a table containing the list of all customers you have in your sources. For events this is automatically inferred from the `distinct_id`/`$group_key` person/group connected to the event. For data warehouse sources it's automatically inferred from the source's own source of truth for customers.
 
 Examples:
 - `stripe.prod.revenue_analytics_customer`
@@ -52,7 +52,7 @@ For data warehouse sources, you might wanna connect these customers to your `per
 
 ### Subscription
 
-The `subscription` view is a table containing the list of all subscriptions you have in your sources. For events this will only be tracked once you've [configured a subscription property](/docs/revenue-analytics/getting-started#choosing-your-revenue-data-sources). For data warehouse sources it's automatically infered if you connect a subscription to your invoices.
+The `subscription` view is a table containing the list of all subscriptions you have in your sources. For events this will only be tracked once you've [configured a subscription property](/docs/revenue-analytics/getting-started#choosing-your-revenue-data-sources). For data warehouse sources it's automatically inferred if you connect a subscription to your invoices.
 
 Examples:
 - `stripe.prod.revenue_analytics_subscription`
