@@ -8,7 +8,9 @@ availability:
     enterprise: full
 ---
 
-> **Important:** Revenue analytics is currently in beta. At this stage, Revenue analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+
+<RevAnalyticsBetaWarning />
 
 Revenue tracking enables you to capture revenue from your application via the events you are already sending us, or via an integration between your payment platform and our Data Warehouse, which you can then track in your [revenue analytics dashboard](https://app.posthog.com/revenue_analytics).
 

@@ -4,7 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Important:** Revenue analytics is currently in beta. At this stage, Revenue analytics is optimized for small/medium-sized companies. If you process more than 20,000 transactions/month you might have performance issues. Similarly, at this stage we're optimized for customers running on a subscription model (mostly SaaS). If you're running a business where your revenue is not coming from recurring payments, you might find Revenue analytics to be less useful/more empty than expected.
+import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+
+<RevAnalyticsBetaWarning />
 
 When using revenue data from your Data Warehouse (like Stripe), PostHog will automatically defer revenue recognition to match your accounting practices. This is particularly useful for subscription businesses that need to recognize revenue over time rather than all at once.
 This implies that our dashboard will show revenue in the future, indicating all of the revenue that will be recognized in the future.
