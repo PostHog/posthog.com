@@ -1710,7 +1710,7 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
-                    team: 'Batch Exports',
+                    name: 'Batch Exports',
                     url: '/teams/batch-exports',
                 },
                 {
