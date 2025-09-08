@@ -31,6 +31,7 @@ import {
     IconSpinner,
     IconUpload,
     IconX,
+    IconCheck,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
@@ -42,6 +43,7 @@ import transformValues from 'components/Squeak/util/transformValues'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
+import { useToast } from '../../../context/Toast'
 
 dayjs.extend(relativeTime)
 
@@ -838,6 +840,7 @@ export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
     const nav = useTopicsNav()
+    const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
 
@@ -1050,6 +1053,17 @@ export default function ProfilePage({ params }: PageProps) {
 
                 if (data) {
                     await mutate()
+
+                    // Show success toast
+                    addToast({
+                        description: (
+                            <>
+                                <IconCheck className="text-green size-4 inline-block mr-1" />
+                                Profile saved successfully
+                            </>
+                        ),
+                        duration: 3000,
+                    })
                 }
 
                 posthog?.capture('squeak profile update', {
