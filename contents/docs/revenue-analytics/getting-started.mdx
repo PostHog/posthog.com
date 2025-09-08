@@ -43,8 +43,8 @@ You can configure your reporting currency at the top of your [revenue analytics 
 
 Next, you need to tell PostHog where to find your revenue data. PostHog can collect revenue from two different types of sources:
 
-- [Connecting to a data warehouse source like Stripe](/docs/revenue-analytics/getting-started?tab=Data+warehouse+tables#option-1-data-warehouse-tables)
-- [Collecting events with revenue properties](/docs/revenue-analytics/getting-started?tab=Event+properties#option-2-properties-on-events)
+- [Connecting to a data warehouse source like Stripe](/docs/revenue-analytics/getting-started?tab=Data+warehouse+tables#data-warehouse-tables)
+- [Collecting events with revenue properties](/docs/revenue-analytics/getting-started?tab=Event+properties#properties-on-events)
 
 import Tab from "components/Tab"
 
@@ -56,7 +56,7 @@ import Tab from "components/Tab"
 <Tab.Panels>
 <Tab.Panel>
 
-### Option 1: Data warehouse tables
+### Data warehouse tables
 
 The simplest way to send us revenue data is from your [data warehouse](/data-warehouse) tables.
 
@@ -83,7 +83,7 @@ Please refer to the [data warehouse docs](/data-warehouse) for more information.
 </Tab.Panel>
 <Tab.Panel>
 
-### Option 2: Properties on events
+### Properties on events
 
 Another way to send us revenue data is through revenue generating events, such as when a purchase is completed, a user starts a subscription, or a subscription is renewed.
 
