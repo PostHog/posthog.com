@@ -404,7 +404,10 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                     </p>
 
                     <p>
-                        Interested in a hand-drawn sketch of your face? <Link to={`/careers`}>We're hiring.</Link>
+                        Interested in a hand-drawn sketch of your face?{' '}
+                        <Link to={`/careers`} state={{ newWindow: true }}>
+                            We're hiring.
+                        </Link>
                     </p>
                 </div>
 
