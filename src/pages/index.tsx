@@ -1098,7 +1098,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonAI',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/ai">Read AI agents.md</Button>,
+        Editor: () => <Button url="/max">Learn about Max AI</Button>,
     },
     {
         name: 'ButtonAbout',
