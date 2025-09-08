@@ -4511,7 +4511,10 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Setup',
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Getting started',
                     url: '/docs/revenue-analytics/getting-started',
                     icon: 'IconBook',
                     color: 'blue',
@@ -4525,6 +4528,9 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'orange',
+                },
+                {
+                    name: 'Concepts',
                 },
                 {
                     name: 'Connect to customers',
@@ -4543,6 +4549,9 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/managed-views',
                     icon: 'IconCalculator',
                     color: 'salmon',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'FAQ',
