@@ -12,7 +12,7 @@ Which customer should you visit? Sometimes, when interacting with a customer on 
 
 Here’s one way to organize a great customer visit. None of this is set in stone, so feel free to adapt, and pay attention to what the customer is comfortable with.
 
-### 1. Identify the biggest areas of improvement
+### 1. Identify the biggest areas for improvement
 Review the customer's Slack channel and pull together a list of the most pressing issues from the past few months. For larger customers, there may also be lots of context in BuildBetter and past recorded calls. Focus on understanding what they’re struggling with most and which upcoming features matter the most to them.
 
 ### 2. Lock in dates and the point of contact
