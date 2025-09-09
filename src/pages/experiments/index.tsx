@@ -77,9 +77,11 @@ const StatisticalMethodsSlide = () => {
             className="flex flex-col pt-12 @2xl:pt-0 @2xl:justify-center h-full bg-primary text-primary px-8"
         >
             <div className="max-w-7xl w-full mx-auto">
-                <div className="text-center mb-6">
+                <div className="text-center mb-6 @2xl:mb-12">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Bayesian vs. Frequentist</h2>
-                    <p className="text-xl text-secondary">Choose the statistical approach that fits your team.</p>
+                    <p className="text-xl text-secondary">
+                        Whether you're scrappy or super smart, we've got a statistical method for you.
+                    </p>
                 </div>
 
                 {/* Mobile layout: Interactive accordion comparison (portrait 9:16) */}

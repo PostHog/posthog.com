@@ -22,7 +22,13 @@ export default function OverviewSlideStacked({
                         {productName}
                     </span>
                     {status === 'beta' && (
-                        <span className={`font-bold uppercase border-2 border-white px-1 rounded-md text-lg ${overview?.textColor || 'text-primary'}`}>Beta</span>
+                        <span
+                            className={`font-bold uppercase border-2 border-white px-1 rounded-md text-lg ${
+                                overview?.textColor || 'text-primary'
+                            }`}
+                        >
+                            Beta
+                        </span>
                     )}
                 </div>
                 <h1
@@ -30,9 +36,7 @@ export default function OverviewSlideStacked({
                 >
                     {overview?.title}
                 </h1>
-                <p
-                    className={`text-3xl text-center leading-snug drop-shadow text-balance mx-auto ${textColor}`}
-                >
+                <p className={`text-3xl text-center leading-snug drop-shadow text-balance mx-auto ${textColor}`}>
                     {overview?.description}
                 </p>
             </div>
@@ -44,15 +48,15 @@ export default function OverviewSlideStacked({
                         <CloudinaryImage
                             src={screenshots.overview.srcMobile as any}
                             alt={screenshots.overview.alt}
-                            imgClassName={screenshots.overview.classes}
-                            className="@2xl:hidden"
+                            className={`@2xl:hidden ${screenshots.overview.classes}`}
+                            imgClassName={screenshots.overview.imgClasses}
                         />
                         {/* Show desktop version from @2xl onwards */}
                         <CloudinaryImage
                             src={screenshots.overview.src as any}
                             alt={screenshots.overview.alt}
-                            imgClassName={screenshots.overview.classes}
-                            className="hidden @2xl:block"
+                            className={`hidden @2xl:block ${screenshots.overview.classes}`}
+                            imgClassName={screenshots.overview.imgClasses}
                         />
                     </>
                 ) : (
@@ -61,7 +65,8 @@ export default function OverviewSlideStacked({
                         <CloudinaryImage
                             src={screenshots.overview.src as any}
                             alt={screenshots.overview.alt}
-                            imgClassName={screenshots.overview.classes}
+                            className={screenshots.overview.classes}
+                            imgClassName={screenshots.overview.imgClasses}
                         />
                     )
                 )}

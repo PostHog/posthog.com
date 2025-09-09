@@ -32,7 +32,8 @@ export const sessionReplay = {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
             alt: 'Session replay screenshot',
-            classes: 'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
+            imgClasses:
+                'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
@@ -593,11 +594,11 @@ window.posthog.onFeatureFlags(function () {
             {
                 feature: 'Search by network request',
                 companies: {
-                    // hotjar: true,
+                    hotjar: true,
                     logrocket: true,
-                    // matomo: true,
+                    matomo: true,
                     // fullstory: true,
-                    // clarity: true,
+                    clarity: false,
                     posthog: false,
                 },
             },

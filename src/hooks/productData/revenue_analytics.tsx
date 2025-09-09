@@ -18,16 +18,25 @@ export const revenueAnalytics = {
     },
     overview: {
         title: 'Track revenue alongside product metrics',
-        description:
-            'Connect revenue data from events or payment platforms like Stripe. See revenue attribution, deferred recognition for subscriptions, and multi-currency support all in one place.',
+        description: (
+            <>
+                Revenue attribution, deferred recognition for subscriptions, and multi-currency support all in one
+                place.{' '}
+                <span className="text-2xl">
+                    <br />
+                    Supports Stripe, other popular payment platforms, and events-based tracking.
+                </span>
+            </>
+        ),
         textColor: 'text-white',
-        layout: 'columns',
     },
     screenshots: {
         overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_25_at_19_51_33_9f5267a861.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_light_8c167328e5.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_dark_03ce149b78.png',
             alt: 'Revenue Analytics dashboard',
-            classes: 'absolute max-w-[95%] @2xl:max-w-[525px] rounded-md overflow-hidden shadow-2xl',
+            classes: 'mt-12 @2xl:mt-0 px-4 @2xl:px-12',
+            imgClasses: 'rounded-md overflow-hidden shadow-2xl',
         },
     },
     hog: {
