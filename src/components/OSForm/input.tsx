@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconInfo } from '@posthog/icons'
+import { IconInfo, IconX } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 
 interface InputProps {
@@ -16,6 +16,10 @@ interface InputProps {
     labelWidth?: string
     required?: boolean
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
+    showClearButton?: boolean
+    onClear?: () => void
+    value?: string
+    className?: string
     [key: string]: any
 }
 
@@ -33,6 +37,10 @@ const Input = ({
     labelWidth,
     required = false,
     dataScheme,
+    showClearButton = false,
+    onClear,
+    value,
+    className = '',
     ...props
 }: InputProps) => {
     const sizeClasses = {
@@ -84,16 +92,26 @@ const Input = ({
                     {description && <p className="text-sm text-secondary m-0 mt-0.5">{description}</p>}
                 </div>
             )}
-            <div className={`${direction === 'column' ? 'w-full' : 'flex-1'}`}>
+            <div className={`relative ${direction === 'column' ? 'w-full' : 'flex-1'}`}>
                 <input
-                    className={`bg-primary border border-primary rounded ring-0 focus:ring-1 ${
-                        touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                    } ${sizeClasses[size]} ${widthClasses[width]}`}
+                    className={`bg-primary border border-primary rounded ring-0 focus:ring-1 ${touched && error ? 'border-red dark:border-yellow' : 'border-primary'
+                        } ${sizeClasses[size]} ${widthClasses[width]} ${showClearButton && value ? 'pr-10' : ''} ${className}`}
                     type={type}
                     id={inputId}
                     placeholder={props.placeholder || label}
+                    value={value}
                     {...props}
                 />
+                {showClearButton && value && (
+                    <button
+                        onClick={onClear}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
+                        aria-label="Clear search"
+                        type="button"
+                    >
+                        <IconX className="w-4 h-4 text-muted" />
+                    </button>
+                )}
                 {touched && error && <p className="text-sm text-red dark:text-yellow m-0 mt-1">{error}</p>}
             </div>
         </div>

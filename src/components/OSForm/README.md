@@ -41,6 +41,9 @@ import { OSInput } from 'components/OSForm'
 | `touched` | `boolean` | `false` | Whether field has been interacted with (for validation) |
 | `error` | `string` | - | Error message to display when validation fails |
 | `dataScheme` | `"primary" \| "secondary" \| "tertiary"` | - | Sets the data-scheme attribute for different background colors |
+| `showClearButton` | `boolean` | `false` | Shows a clear button when the input has a value |
+| `onClear` | `() => void` | - | Callback function when the clear button is clicked |
+| `value` | `string` | - | The input value (required when using showClearButton) |
 
 ### OSTextarea
 
@@ -346,6 +349,23 @@ When set, the `dataScheme` prop applies a `data-scheme` attribute to the compone
 ## Integration with Form Libraries
 
 These components work well with form libraries like Formik or react-hook-form:
+
+### Search Input with Clear Button
+
+```tsx
+<OSInput 
+  label="Search"
+  showLabel={false}
+  placeholder="Search..."
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+  onClear={() => setSearchQuery('')}
+  showClearButton={true}
+  name="search"
+/>
+```
+
+The clear button automatically appears when the input has a value and disappears when empty. The input automatically adds right padding to accommodate the clear button.
 
 ### With Formik
 

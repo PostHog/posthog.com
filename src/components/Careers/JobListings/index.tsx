@@ -4,7 +4,6 @@ import Link from 'components/Link'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { IconX } from '@posthog/icons'
 import { slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
 import { TeamsSidebar } from 'components/Job/TeamsSidebar'
@@ -13,6 +12,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Mark from 'mark.js'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useWindow } from '../../../context/Window'
+import { OSInput } from 'components/OSForm'
 
 const query = graphql`
     query JobListings {
@@ -274,21 +274,14 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         return jobGroups.flatMap((group) => group.jobs)
     }, [jobGroups])
 
-    // Filter jobs based on search query
+    // Filter jobs based on search query - only search job titles
     const filteredJobs = useMemo(() => {
         if (!searchQuery.trim()) return []
 
         const query = searchQuery.toLowerCase()
         return allJobs.filter((job: any) => {
-            // Search in job title
-            if (job.fields.title.toLowerCase().includes(query)) {
-                return true
-            }
-
-            // Search in team names
-            const teamsField = job.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
-            const teams = teamsField ? JSON.parse(teamsField.value) : []
-            return teams.some((teamName: string) => teamName.toLowerCase().includes(query))
+            // Only search in job title
+            return job.fields.title.toLowerCase().includes(query)
         })
     }, [searchQuery, allJobs])
 
@@ -320,8 +313,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField
         ? JSON.parse(teamsField.value).filter((teamName: string) =>
-              allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
-          )
+            allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
+        )
         : []
     const [selectedTeamName, setSelectedTeamName] = useState('')
 
@@ -342,11 +335,17 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 if (markedRef.current) {
                     markedRef.current.unmark()
                 }
-                markedRef.current = new Mark(jobListRef.current)
-                markedRef.current.mark(value, {
-                    separateWordSearch: false,
-                    accuracy: 'partially',
-                })
+                // Only highlight job titles, not team names or other text
+                const jobTitleElements = jobListRef.current.querySelectorAll('[data-job-title]')
+                if (jobTitleElements.length > 0) {
+                    // Convert NodeListOf<Element> to HTMLElement array
+                    const elements = Array.from(jobTitleElements) as HTMLElement[]
+                    markedRef.current = new Mark(elements)
+                    markedRef.current.mark(value, {
+                        separateWordSearch: false,
+                        accuracy: 'partially',
+                    })
+                }
             } else if (markedRef.current) {
                 markedRef.current.unmark()
             }
@@ -469,9 +468,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 // Show search results
                                 filteredJobs.length > 0 ? (
                                     <optgroup
-                                        label={`${filteredJobs.length} search result${
-                                            filteredJobs.length !== 1 ? 's' : ''
-                                        }`}
+                                        label={`${filteredJobs.length} result${filteredJobs.length !== 1 ? 's' : ''
+                                            }`}
                                     >
                                         {filteredJobs.map((job: any) => (
                                             <option key={job.fields.title} value={job.fields.title}>
@@ -498,24 +496,21 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             )}
                         </select>
 
-                        <div className="hidden @2xl:block relative mb-4">
-                            <input
+                        <div className="hidden @2xl:block mb-4">
+                            <OSInput
                                 type="text"
-                                className="w-full p-2 pr-10 border border-b-0 border-input bg-primary rounded text-xl relative z-10"
+                                label="Search roles"
+                                showLabel={false}
                                 placeholder="Search roles..."
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                                 onKeyDown={handleSearchKeyDown}
+                                onClear={handleClearSearch}
+                                showClearButton={true}
+                                size="sm"
+                                width="full"
+                                name="job-search"
                             />
-                            {searchQuery && (
-                                <button
-                                    onClick={handleClearSearch}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
-                                    aria-label="Clear search"
-                                >
-                                    <IconX className="w-4 h-4 text-muted" />
-                                </button>
-                            )}
                         </div>
                     </div>
 
@@ -525,7 +520,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 {searchQuery.trim() ? (
                                     // Show search results
                                     <>
-                                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary tracking-normal">
                                             {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
                                         </h3>
                                         {filteredJobs.length > 0 ? (
@@ -543,12 +538,12 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
-                                                                        className={`font-semibold text-[15px] ${
-                                                                            selectedJob.fields.title ===
+                                                                        data-job-title
+                                                                        className={`font-semibold text-[15px] ${selectedJob.fields.title ===
                                                                             job.fields.title
-                                                                                ? ''
-                                                                                : ''
-                                                                        }`}
+                                                                            ? ''
+                                                                            : ''
+                                                                            }`}
                                                                     >
                                                                         {job.fields.title}
                                                                     </span>
@@ -566,7 +561,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
                                                                                     : teams.length === 1 &&
-                                                                                          `${teams[0]} Team`
+                                                                                    `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -586,7 +581,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     // Show grouped results
                                     jobGroups.map((group) => (
                                         <div key={group.name} className="mb-2 last:mb-0">
-                                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary tracking-normal">
                                                 {group.name}
                                             </h3>
                                             <ul className="list-none p-0 space-y-px">
@@ -599,21 +594,20 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                 width="full"
                                                                 zoomHover="md"
                                                                 active={selectedJob.fields.title === job.fields.title}
-                                                                className={` ${
-                                                                    selectedJob.fields.title === job.fields.title
-                                                                        ? ''
-                                                                        : ''
-                                                                }`}
+                                                                className={` ${selectedJob.fields.title === job.fields.title
+                                                                    ? ''
+                                                                    : ''
+                                                                    }`}
                                                                 onClick={() => setSelectedJob(job)}
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
-                                                                        className={`font-semibold text-[15px] ${
-                                                                            selectedJob.fields.title ===
+                                                                        data-job-title
+                                                                        className={`font-semibold text-[15px] ${selectedJob.fields.title ===
                                                                             job.fields.title
-                                                                                ? ''
-                                                                                : ''
-                                                                        }`}
+                                                                            ? ''
+                                                                            : ''
+                                                                            }`}
                                                                     >
                                                                         {job.fields.title}
                                                                     </span>
@@ -631,7 +625,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
                                                                                     : teams.length === 1 &&
-                                                                                          `${teams[0]} Team`
+                                                                                    `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -667,26 +661,25 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex flex-wrap items-start @2xl:flex-row ">
                                 <Detail
                                     title="Location"
-                                    value={`Remote${
-                                        selectedJob.fields.locations?.length > 0
-                                            ? ` (${selectedJob.fields.locations.join(', ')})`
-                                            : ''
-                                    }`}
+                                    value={`Remote${selectedJob.fields.locations?.length > 0
+                                        ? ` (${selectedJob.fields.locations.join(', ')})`
+                                        : ''
+                                        }`}
                                     icon={<Location />}
                                 />
                                 {selectedJob.parent.customFields.find(
                                     (field: { title: string }) => field.title === 'Timezone(s)'
                                 )?.value && (
-                                    <Detail
-                                        title="Timezone(s)"
-                                        value={
-                                            selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Timezone(s)'
-                                            ).value
-                                        }
-                                        icon={<Timezone />}
-                                    />
-                                )}
+                                        <Detail
+                                            title="Timezone(s)"
+                                            value={
+                                                selectedJob.parent.customFields.find(
+                                                    (field: { title: string }) => field.title === 'Timezone(s)'
+                                                ).value
+                                            }
+                                            icon={<Timezone />}
+                                        />
+                                    )}
                             </ul>
 
                             <div className="@5xl:flex-1 [&_h3]:mt-0 mt-4">
@@ -746,16 +739,15 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                         {(teams.length > 0 || !teams.length) && (
                             <div
                                 data-scheme="secondary"
-                                className={`@container @5xl:col-span-5 ${
-                                    teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
-                                }`}
+                                className={`@container @5xl:col-span-5 ${teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
+                                    }`}
                             >
                                 <h3 className="mt-0 mb-2 leading-tight text-center">
                                     {teams.length > 1
                                         ? 'About the small teams'
                                         : teams.length === 1
-                                        ? `About the ${currentTeamName} Team`
-                                        : 'About this team'}
+                                            ? `About the ${currentTeamName} Team`
+                                            : 'About this team'}
                                 </h3>
 
                                 <TeamsSidebar

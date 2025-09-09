@@ -15,12 +15,13 @@ import { companyMenu } from '../navs'
 import TeamMember from 'components/TeamMember'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
-import { IconList, IconX } from '@posthog/icons'
+import { IconList } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Mark from 'mark.js'
+import { OSInput } from 'components/OSForm'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -123,11 +124,17 @@ const LeftSidebarContent = React.memo(
                 if (markedRef.current) {
                     markedRef.current.unmark()
                 }
-                markedRef.current = new Mark(jobListRef.current)
-                markedRef.current.mark(searchQuery, {
-                    separateWordSearch: false,
-                    accuracy: 'partially',
-                })
+                // Only highlight job titles, not team names or other text
+                const jobTitleElements = jobListRef.current.querySelectorAll('[data-job-title]')
+                if (jobTitleElements.length > 0) {
+                    // Convert NodeListOf<Element> to HTMLElement array
+                    const elements = Array.from(jobTitleElements) as HTMLElement[]
+                    markedRef.current = new Mark(elements)
+                    markedRef.current.mark(searchQuery, {
+                        separateWordSearch: false,
+                        accuracy: 'partially',
+                    })
+                }
             } else if (markedRef.current) {
                 markedRef.current.unmark()
             }
@@ -166,24 +173,21 @@ const LeftSidebarContent = React.memo(
         return (
             <ScrollArea className="h-full">
                 {/* Search input */}
-                <div className="relative mb-4">
-                    <input
+                <div className="mb-4">
+                    <OSInput
                         type="text"
-                        className="w-full p-2 pr-10 border border-input bg-primary rounded text-sm relative z-10"
+                        label="Search roles"
+                        showLabel={false}
                         placeholder="Search roles..."
                         value={searchQuery}
                         onChange={handleSearchChange}
                         onKeyDown={handleSearchKeyDown}
+                        onClear={handleClearSearch}
+                        showClearButton={true}
+                        size="sm"
+                        width="full"
+                        name="job-search"
                     />
-                    {searchQuery && (
-                        <button
-                            onClick={handleClearSearch}
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
-                            aria-label="Clear search"
-                        >
-                            <IconX className="w-4 h-4 text-muted" />
-                        </button>
-                    )}
                 </div>
 
                 {/* Job list */}
@@ -191,7 +195,7 @@ const LeftSidebarContent = React.memo(
                     {searchQuery.trim() ? (
                         // Show search results
                         <>
-                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary tracking-normal">
                                 {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
                             </h3>
                             {filteredJobs.length > 0 ? (
@@ -208,7 +212,7 @@ const LeftSidebarContent = React.memo(
                                                     onClick={() => navigate(job.fields.slug)}
                                                 >
                                                     <div className="flex flex-col w-full items-start">
-                                                        <span className="font-semibold text-[14px]">
+                                                        <span data-job-title className="font-semibold text-[14px]">
                                                             {job.fields.title.split(' - ')[0]}
                                                         </span>
                                                         {!hideTeamsByJob.includes(job.fields?.title) && (
@@ -243,7 +247,7 @@ const LeftSidebarContent = React.memo(
                         // Show grouped results
                         jobGroups.map((group) => (
                             <div key={group.name} className="mb-2 last:mb-0">
-                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary tracking-normal">
                                     {group.name}
                                 </h3>
                                 <ul className="list-none p-0 space-y-px">
@@ -259,7 +263,7 @@ const LeftSidebarContent = React.memo(
                                                     onClick={() => navigate(job.fields.slug)}
                                                 >
                                                     <div className="flex flex-col w-full items-start">
-                                                        <span className="font-semibold text-[14px]">
+                                                        <span data-job-title className="font-semibold text-[14px]">
                                                             {job.fields.title.split(' - ')[0]}
                                                         </span>
                                                         {!hideTeamsByJob.includes(job.fields?.title) && (
@@ -385,21 +389,14 @@ export default function Job({
         return jobGroups.flatMap((group) => group.jobs)
     }, [jobGroups])
 
-    // Filter jobs based on search query
+    // Filter jobs based on search query - only search job titles
     const filteredJobs = useMemo(() => {
         if (!searchQuery.trim()) return []
 
         const query = searchQuery.toLowerCase()
         return allJobs.filter((job: any) => {
-            // Search in job title
-            if (job.fields.title.toLowerCase().includes(query)) {
-                return true
-            }
-
-            // Search in team names
-            const teamsField = job.parent?.customFields?.find((field: { title: string }) => field.title === 'Teams')
-            const teams = teamsField ? JSON.parse(teamsField.value) : []
-            return teams.some((teamName: string) => teamName.toLowerCase().includes(query))
+            // Only search in job title
+            return job.fields.title.toLowerCase().includes(query)
         })
     }, [searchQuery, allJobs])
 
