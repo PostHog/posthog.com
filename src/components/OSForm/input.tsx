@@ -94,8 +94,11 @@ const Input = ({
             )}
             <div className={`relative ${direction === 'column' ? 'w-full' : 'flex-1'}`}>
                 <input
-                    className={`bg-primary border border-primary rounded ring-0 focus:ring-1 ${touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                        } ${sizeClasses[size]} ${widthClasses[width]} ${showClearButton && value ? 'pr-10' : ''} ${className}`}
+                    className={`bg-primary border border-primary rounded ring-0 focus:ring-1 ${
+                        touched && error ? 'border-red dark:border-yellow' : 'border-primary'
+                    } ${sizeClasses[size]} ${widthClasses[width]} ${
+                        showClearButton && value ? 'pr-10' : ''
+                    } ${className}`}
                     type={type}
                     id={inputId}
                     placeholder={props.placeholder || label}
