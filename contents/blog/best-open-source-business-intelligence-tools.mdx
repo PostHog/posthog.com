@@ -1,0 +1,299 @@
+---
+title: 7 best free open source business intelligence tools right now
+date: 2025-09-09
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+  - Open source
+  - Comparisons
+---
+
+Not everyone has money to dish out for an enterprise Tableau contract, not everyone wants to send their data to Looker AKA Google either. 
+
+Free and open source business intelligence tools solve both these problems by making BI accessible and keeping you in control of your data.
+
+The challenge becomes choosing the best one. To help you, we've put together this list of the top free and open source business intelligence tools you can use.
+
+## 1. PostHog
+
+- License: MIT
+- GitHub stars: 25.6k (maybe it would be cool to mention y/y growth in stars)
+- [PostHog on GitHub](https://github.com/PostHog/posthog)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_09_at_17_05_35_2x_42e293fddd.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_09_at_17_05_50_2x_8d74438a4a.png"
+  alt="PostHog"
+  classes="rounded"
+/>
+
+PostHog is an open source, all-in-one platform that combines business intelligence with several other developer-focused tools, such as product and web analytics, session replays, experimentation, error tracking, and surveys.
+
+Its business intelligence stack contains three key pieces:
+
+1. A data warehouse that stores data captured into PostHog as well as syncs with external sources you already use like Stripe, Hubspot, Postgres, Google Sheets, S3, Snowflake, and more.
+
+2. Product analytics which provides a simple but powerful interface for building dashboards and insights like trends, funnels, retention graphs, user paths, and more. 
+
+3. An SQL editor for direct access to your data along with its own set of visualizations and customization.
+
+### What makes PostHog special?
+
+PostHog has the flexibility of a business intelligence tool, while including a full suite of tools product and engineering teams need to build successful products. You have less data spaghetti trying to connect them all together. 
+
+For example, not only can you analyze A/B tests from warehouse data in PostHog, but you can actually set up and run them natively using our experimentation and feature flag products. You don't need to set up 4 different products, just PostHog.
+
+### FAQ
+
+<details>
+    <summary>What tools does PostHog replace?</summary>
+    
+    PostHog is less of a traditional replacement for tools like Looker and Tableau and more a replacement for your suite of product and data tools like [Amplitude](/blog/posthog-vs-amplitude), [Mixpanel](/blog/posthog-vs-mixpanel), [Fullstory](/blog/posthog-vs-fullstory), [LaunchDarkly](/blog/posthog-vs-launchdarkly), [Hotjar](/blog/posthog-vs-hotjar), [Sentry](/blog/posthog-vs-sentry), and [Survicate](/blog/best-survicate-alternatives).
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Yes. PostHog can connect to many of the popular data warehouse providers including [S3](/docs/data-warehouse/sources/s3), [R2](/docs/data-warehouse/sources/r2), [GCS](/docs/data-warehouse/sources/gcs), [Snowflake](/docs/data-warehouse/sources/snowflake), [BigQuery](/docs/data-warehouse/sources/bigquery), and more.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+    
+    Yes. PostHog's hosted Cloud version and all of its business intelligence features are free to use. It comes with 1 million events and 1 million rows synced for free every month. Beyond this, pricing is usage-based and [totally transparent](/pricing).
+</details>
+
+## 2. Metabase
+
+- License: AGPLv3
+- GitHub stars: 43.6k
+- [Metabase on GitHub](https://github.com/metabase/metabase)
+
+![Metabase](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/metabase_fa7dbf71d9.png)
+
+Metabase is an open source analytics tool that easily connects to your existing database. 
+
+Once connected, Metabase offers an easy to use and powerful query builder. Visualizations can be built with or without SQL. Within these, users can drill down to filter, breakout, or view the source table.
+
+Once built, Metabase then enables teams to build and organize with dashboards and collections. They also provide permissioning to ensure only the right people have access to sensitive insights.
+
+### What makes Metabase special?
+
+Metabase is praised for their simplicity. It really is easy to connect to a data source and start querying fast. Their visualization builder is just as simple, with a clean UI that doesn't require a power user to figure out.
+
+### FAQ
+
+<details>
+    <summary>What tools does Metabase replace?</summary>
+    
+    Metabase is a simpler alternative to BI tools like Tableau, Power BI, and Looker, but it misses some of the powerful data modeling that these tools provide. It is also similar to the SQL + viz tools like Mode, Superset, and Redash.
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Metabase can connect to a bunch of popular databases including BigQuery, ClickHouse, Databricks, MongoDB, PostgreSQL, Redshift, Snowflake, and more.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+    
+    Metabase Cloud provides a fully managed Metabase instance hosted in your region. They offer a free 14-day trial, then starts at $85 per month plus $5 per month per user.
+</details>
+
+## 3. Superset
+
+- License: Apache 2.0
+- GitHub stars: 67.9k
+- [Superset on GitHub](https://github.com/apache/superset)
+
+![Superset](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/superset_6f35a66cc9.jpg)
+
+Apache Superset is a modern, open source exploration and visualization platform. Superset formed out of a 2015 Airbnb hackathon project.
+
+It provides both no-code and SQL options for queries and 40+ pre-installed visualizations. In terms of “modernity”, it's lightweight, scalable, and integrates with any SQL-based database, including cloud-native and petabyte-scale ones. 
+
+### What makes Superset special?
+
+Superset provides a few “meta” tools for making insight creation easier.
+
+1. A semantic layer for quickly defining custom dimensions and metrics. These abstractions map SQL to be more human-friendly.
+2. Datasets which are subsets of data that make chart creation easier and queries more performant. This aims to be a middle point between a query-centric approach and a semantic-centric one.
+
+### FAQ
+
+<details>
+    <summary>What tools does Superset replace?</summary>
+    
+    Like Metabase, Superset generally replaces business intelligence tools like Tableau and Power BI as well as SQL + viz tools like Mode and Metabase. On top of this, their semantic layer is a lighter version of LookML and dbt metrics.
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Superset can query data from any “SQL-speaking” datastore or data engine including Redshift, BigQuery, Snowflake, PostgreSQL, Databricks, and more.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+    
+    Preset provides a scalable, enterprise-hosted version of Superset. It's a company founded by the creator of Superset, Maxime Beauchemin.
+</details>
+
+## 4. Grafana
+
+- License: AGPLv3
+- GitHub stars: 69.8k
+- [Grafana on GitHub](https://github.com/grafana/grafana)
+
+![Grafana](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/grafana_dashboard_english_2fe2b3cb4d.png)
+
+Grafana is an open source observability platform that centralizes metrics, logs, traces, and profiles. It provides observability for big infrastructure providers, monitoring for popular services, and connectors for other tools. 
+
+Once all this data is captured or connected, Grafana provides over 100 data visualization options to build all sorts of dashboards. It also provides more tools for making use of this data like alerts, transformations, and annotations.
+
+### What makes Grafana special?
+
+Grafana is one of the most mature tools on this list. It was founded in 2014, is valued at over $6B, has acquired companies like k6 and Amixr to add to its product suite, and has a massive library of data source and visualization plugins.
+
+This means they are very popular with their core customer: infrastructure engineers. For these people, they provide a majority of tools they need like logging with Loki, tracing with Tempo, metrics with Mimir, and visualization with Grafana.
+
+### FAQ
+
+<details>
+    <summary>What tools does Grafana replace?</summary>
+    
+    Grafana focuses on replacing monitoring visualization, and logging tools like Kibana, Datadog, New Relic, and Splunk.
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Grafana can query a bunch of tools you already use like Snowflake, Splunk, Datadog, Linux, AWS, Docker, ClickHouse, PostgreSQL, Redshift, and more.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+    
+    Grafana Cloud provides all the key features of Grafana without the overhead of maintaining your own stack. Their free tier provides 10k metrics, 50GB logs, traces, and profiles with a 14-day retention, and more.
+</details>
+
+## 5. Evidence
+
+- License: MIT
+- GitHub stars: 5.5k
+- [Evidence on GitHub](https://github.com/evidence-dev/evidence)
+
+![Evidence](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/evidence_c0c74bbd76.png)
+
+Evidence is a modern frontend for data work. It focuses on providing a modern design and dev experience for building polished and performant data products like articles and dashboards. 
+
+They've focused on ensuring their query engine provides high performance on huge queries and their data products provide a high quality experience for both internal and external teams. 
+
+Their cloud version also has SOC 2 certification, row-level security, and other features enterprises expect from tools like these.
+
+### What makes Evidence special?
+
+In Evidence, everything is code. This means it combines SQL, markdown, and their templating language to provide a simple, but powerful development environment for their data products.
+
+It also means they can do real-time syntax validation, version control, and testing. Their cloud version adds AI tools to help users generate and edit this code based on natural language.
+
+### FAQ
+
+<details>
+    <summary>What tools does Evidence replace?</summary>
+    
+    Evidence replaces the standard suite of dashboard builders like Tableau, Looker, and Power BI as well as the data notebook tools like Hex and Jupyter.
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Evidence can be configured to connect to a range of data sources like BigQuery, Snowflake, Redshift, PostgreSQL, Databricks, and more.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+    
+    Evidence Studio is the cloud version of Evidence. Released in June 2025, it provides a more expressive syntax, a fully web-based dev environment, and agentic AI to help you write queries.
+</details>
+
+## 6. Redash
+
+- License: BSD-2
+- GitHub stars: 27.7k
+- [Redash on GitHub](https://github.com/getredash/redash)
+
+![Redash](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/redash_b3a8f5a223.png)
+
+Redash is a tool that enables you to easily connect to your data sources, query them with SQL, and build dashboards for your team.
+
+It supports a range of:
+
+1. SQL, NoSQL, big data, and API data sources from Redshift to MySQL to Postgres. 
+2. Charts and visualizations from boxplots to maps to funnels.
+
+Beyond this, Redash also provides alerts, an API to extend its functionality, SSO, and access controls. 
+
+### What makes Redash special?
+
+Redash is a much more focused product than the other alternatives on this list. They focus much more on:
+
+1. Providing a great query writing experience with autocomplete, keyboard shortcuts, snippets, and results caching.
+2. Creating useful dashboards with their collection of visualizations and sharing tools.
+
+Because of this simpler feature set, Redash can be simpler and lighter to self host.
+
+### FAQ
+
+<details>
+    <summary>What tools does Redash replace?</summary>
+    
+    Redash provides a simple replacement for SQL + viz tools like Mode, Metabase, and Superset as well as the more powerful BI tools like Tableau and Looker Studio.
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Redash supports a range of SQL, NoSQL, and big data tools including Redshift, ClickHouse, Databricks, PostgreSQL, and more.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+    
+    Redash doesn't have a hosted version. After being acquired by Databricks, it was shut down in November 2021. Other hosting services, like [Render](https://render.com/docs/deploy-redash), do offer a template for it though.
+</details>
+
+## 7. Lightdash
+
+- License: MIT
+- GitHub stars: 5k
+- [Lightdash on GitHub](https://github.com/lightdash/lightdash)
+
+![Lightdash](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/lightdash_63940e2642.webp)
+
+Lightdash makes it easy to turn your dbt project into BI dashboards easily.
+
+Once set up leveraging your existing dbt models, it makes creating visualizations easy. These don't require SQL and instead rely on their data catalog, pre-built metrics, and point and click explorer. It also includes an AI analyst co-pilot to help users self-serve their data needs. 
+
+Although they rely on dbt, they also provide integrations for warehouses, version control tools (like GitHub), alerting (Slack), and sharing. This helps them easily connect to your existing stack. 
+
+### What makes Lightdash special?
+
+Lightdash has connected itself deeply to dbt. It literally markets itself as “The BI platform built for dbt.” Like Evidence, this lets teams manage everything (like dashboards) as code.
+
+Lightdash's developer focus doesn't stop there. They also provide version controls, staging, automated testing, and CI/CD toolings. 
+
+### FAQ
+
+<details>
+    <summary>What tools does Lightdash replace?</summary>
+    
+    Lightdash replaces BI tools like Looker (especially closely as their metric layer is modeled after LookML), Tableau, and Power BI. It also replaces the SQL + viz tools mentioned earlier.
+</details>
+<details>
+    <summary>Can it connect to my data warehouse?</summary>
+    
+    Lightdash is reliant on dbt and has fewer integrations than other tools on this list, but still includes warehouses like Snowflake, PostgreSQL, Redshift, BigQuery, and Databricks.
+</details>
+<details>
+    <summary>Is there a hosted version?</summary>
+   
+    Lightdash has a cloud hosted option that requires zero configuration, is updated daily, and enables unlimited users and visualizations. It starts at $800 per month with a 21-day free trial.
+</details>
