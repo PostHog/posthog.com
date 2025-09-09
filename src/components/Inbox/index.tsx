@@ -290,7 +290,7 @@ export default function Inbox(props) {
 
     return (
         <>
-            <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Questions'} />
+            <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
                     <HeaderBar
