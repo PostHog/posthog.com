@@ -126,7 +126,7 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
 
     const handleSelect = useCallback(
         (columnIndex: number, item: IMenu) => {
-            if ((isMobile || compact) && item.url && !item.children) {
+            if (item.url && !item.children) {
                 return navigate(item.url)
             }
             const newPath = path.slice(0, columnIndex + 1) // Trim path up to the current column index
@@ -184,11 +184,6 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
                         <p className="text-sm text-secondary dark:text-secondary-dark mb-2">
                             Type: {lastSelectedItem.children ? 'folder' : 'file'}
                         </p>
-                        {!compact && lastSelectedItem.url && (
-                            <Link className="text-sm text-red dark:text-yellow font-semibold" to={lastSelectedItem.url}>
-                                Visit
-                            </Link>
-                        )}
                         {/* Add more file details here */}
                     </div>
                 )}
