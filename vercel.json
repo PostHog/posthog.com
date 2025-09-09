@@ -1594,6 +1594,10 @@
         {
             "source": "/services",
             "destination": "/"
+        },
+        {
+            "source": "/platform-addons",
+            "destination": "/platform-packages"
         }
     ],
     "headers": [

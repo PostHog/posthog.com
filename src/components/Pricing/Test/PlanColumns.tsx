@@ -204,7 +204,7 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                                     <div className="mt-6">
                                         <p className="font-bold text-[15px] xl:mt-4 mb-2">
                                             Looking for features for larger teams?{' '}
-                                            <Link to="/platform-addons">Check out our platform add-ons.</Link>
+                                            <Link to="/platform-packages">Check out our platform packages.</Link>
                                         </p>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                     <AllPlansInclude />
                     <div className="md:gap-12 xl:pl-6 mt-6">
                         <p className="text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
-                        <Link to="/platform-addons">Check out our platform add-ons.</Link>
+                        <Link to="/platform-packages">Check out our platform packages.</Link>
                     </div>
                 </div>
                 <p
