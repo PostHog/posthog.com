@@ -11,7 +11,7 @@ Don't obsess over exact-match keywords, ask: What is the searcher really trying 
 
 We craft our content to address those underlying needs. Cover the main topic thoroughly, include related sub-questions and themes, and anticipate next steps a reader might take.
 
-**Here’s what that might look like for "Retention rate vs churn"**
+Here’s what that might look like for "Retention rate vs churn"
 
 * **Quick answer first:** Retention rate shows who stayed, churn shows who left. If churn is 20%, retention is 80%.  
 * **Context next:** Add formulas, a simple numeric example, and a short paragraph on why retention matters for growth.  
@@ -27,7 +27,7 @@ When answering a question, we lead with the answer first, then expand with suppo
 
 We keep our structure simple and scannable:
 
-* **Use a clear heading hierarchy** (H1, H2, H3) so readers and crawlers can follow your logic.   
+* **Use a clear heading hierarchy** (`H1`, `H2`, `H3`) so readers and crawlers can follow your logic.   
   * Use one `H1` per page to avoid confusion about the page’s main topic.  
 * **Write short paragraphs** and use bullets or numbered steps for lists.  
 * **Use plain language** – drop the jargon and explain terms plainly so anyone (and any language model) can understand what you’re talking about.  
@@ -41,11 +41,7 @@ Our headlines are the front door to our content – they’re what convince some
 
 We should be bold, creative, and opinionated – but not so clever that we lose relevance. If every result has a nearly identical headline, we win by being different, but if we get too abstract or too witty, we risk missing the actual query intent and dropping out of search entirely.
 
-**Quick rule of thumb:** If it sounds like every other search result, sharpen it. If it sounds clever but hides what the article’s about, clarify it. 
-
-H1s: Creative and clickable (grab attention).  
-H2s/H3s: Clear, direct, often question-based to stay relevant for search and AI retrieval.  
-H4s: Use for step-by-step sub-points or detail breakdowns.
+> **Quick rule of thumb:** If it sounds like every other search result, sharpen it. If it sounds clever but hides what the article’s about, clarify it. 
 
 ### 4. Demonstrate expertise and authority
 
@@ -67,11 +63,13 @@ Our tone is friendly, focused, and human – especially now that voice search an
 
 That said, conversational doesn’t mean rambling. Stay on topic and be clear and direct. Think of how you’d explain the topic if speaking to a colleague – friendly but focused. A more dialog-like tone can also help capture featured snippets or People Also Ask boxes, as the content directly addresses how users phrase questions. 
 
-| Bad Q\&A example Heading: Strategies for reducing customer attrition Body copy: Customer attrition is a key challenge for many businesses and must be addressed with a comprehensive set of initiatives. Companies should consider improving their product offering, implementing proactive customer success programs, and monitoring engagement metrics over time. |
-| :---- |
+> **Bad Q&A example** 
+> **Heading**: Strategies for reducing customer attrition 
+> **Body copy**: Customer attrition is a key challenge for many businesses and must be addressed with a comprehensive set of initiatives. Companies should consider improving their product offering, implementing proactive customer success programs, and monitoring engagement metrics over time. 
 
-| Good Q\&A example Heading: How do we reduce churn? Body copy: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? |
-| :---- |
+> **Good Q&A example**
+> **Heading**: How do we reduce churn? 
+> **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
 
 ### 6. Don’t put all our eggs in one keyword basket
 
