@@ -96,6 +96,12 @@ export default function Destinations(): JSX.Element {
                         <strong>Webhooks:</strong> Send events to any HTTP endpoint in real-time
                     </li>
                     <li>
+                        <strong>Slack:</strong> Send events to Slack channels
+                    </li>
+                    <li>
+                        <strong>SaaS tools:</strong> Send events to SaaS tools like Braze, Customer.io, and more
+                    </li>
+                    <li>
                         <strong>Kafka:</strong> Stream events to Apache Kafka topics for high-throughput processing
                     </li>
                     <li>
