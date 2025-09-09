@@ -118,6 +118,7 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
     return (
         <div data-scheme="secondary" className="bg-primary size-full p-4">
             <QuestionForm
+                showTopicSelector
                 onSubmit={(_values, _type, data) => {
                     onSubmit()
                     addToast({
