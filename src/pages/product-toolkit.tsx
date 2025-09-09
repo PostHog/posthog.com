@@ -99,7 +99,7 @@ const Products = () => {
                 { content: 3 },
                 { content: 'talk to customers', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts']} />,
+                    content: <ProductButtons productTypes={['surveys', 'messaging', 'user_interviews']} />,
                     className: 'text-sm',
                 },
             ],
