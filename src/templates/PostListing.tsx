@@ -217,12 +217,8 @@ export default function Posts({ pageContext }) {
             >
                 {posts.length > 0 && (
                     <OSTable
+                        fetchMore={hasMore ? fetchMore : undefined}
                         loading={isValidating}
-                        onLastRowInView={() => {
-                            if (hasMore && !isValidating) {
-                                fetchMore()
-                            }
-                        }}
                         rowAlignment="top"
                         columns={[
                             {
