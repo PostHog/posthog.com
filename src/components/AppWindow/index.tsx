@@ -775,28 +775,29 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </div>
                                 </div>
                             )}
-                            <div
-                                ref={contentRef}
-                                className={`size-full flex-grow ${
-                                    chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
-                                }`}
-                            >
-                                {inView && (!animating || isSSR || item.appSettings?.size?.autoHeight) && (
-                                    <Router
-                                        minimizing={minimizing}
-                                        onExit={() => {
-                                            if (minimizing) {
-                                                setMinimizing(false)
-                                                if (siteSettings.experience === 'posthog') {
-                                                    setAnimating(true)
+                            <div className={chrome ? 'bg-light dark:bg-dark size-full' : ''}>
+                                <div
+                                    ref={contentRef}
+                                    className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
+                                    style={{ display: inView ? 'block' : 'none' }}
+                                >
+                                    {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
+                                        <Router
+                                            minimizing={minimizing}
+                                            onExit={() => {
+                                                if (minimizing) {
+                                                    setMinimizing(false)
+                                                    if (siteSettings.experience === 'posthog') {
+                                                        setAnimating(true)
+                                                    }
                                                 }
-                                            }
-                                        }}
-                                        {...item.props}
-                                    >
-                                        {item.element}
-                                    </Router>
-                                )}
+                                            }}
+                                            {...item.props}
+                                        >
+                                            {item.element}
+                                        </Router>
+                                    )}
+                                </div>
                             </div>
                             {!item.fixedSize && !item.minimal && (
                                 <motion.div
