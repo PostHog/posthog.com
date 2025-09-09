@@ -12,6 +12,7 @@ import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
 import Logo from 'components/Logo'
+import OSButton from 'components/OSButton'
 
 // Partner configurations
 const partnerConfigs = [
@@ -163,17 +164,17 @@ export default function Startups(): JSX.Element {
                             <h1 className="flex items-center gap-2.5 mb-0 text-2xl">
                                 <Logo className="h-14 relative -top-px" fill="white" /> {titleContent}
                             </h1>
-                            <ul className="not-prose my-2">
+                            <ul className="prose prose-sm text-white mt-2 mb-4">
                                 <li>{creditValue} in PostHog credits</li>
                                 <li>Exclusive founder merch</li>
                                 <li>Partner benefits</li>
                             </ul>
 
-                            <CallToAction href="https://app.posthog.com/startups" type="primary" size="md">
+                            <OSButton asLink to="https://app.posthog.com/startups" variant="primary" size="md" external>
                                 Apply now
-                            </CallToAction>
+                            </OSButton>
 
-                            <p className="italic">You'll need a PostHog account first</p>
+                            <p className="italic text-sm">You'll need a PostHog account first</p>
                         </div>
                     </div>
 
@@ -194,15 +195,17 @@ export default function Startups(): JSX.Element {
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_partners_5c43154c33.png" />
-                            <h3 className="text-base my-1 leading-tight">But wait, there's more...</h3>
-                            <p className="text-sm mb-0">Mintlify and Speakeasy have entered the chat</p>
+                            <h3 className="text-base my-1 leading-tight">Better docs with Mintlify</h3>
+                            <p className="text-sm mb-0">
+                                The best products deserve the best documentation. Get 50% off Mintlify for 6 months.
+                            </p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_referral_89e28aa960.png" />
-                            <h3 className="text-base my-1 leading-tight">Refer &amp; get more</h3>
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_partners_5c43154c33.png" />
+                            <h3 className="text-base my-1 leading-tight">Better SDKs with Speakeasy</h3>
                             <p className="text-sm mb-0">
-                                Refer your accelerator to 2x your credits, or split $10,000 in credits when you refer a
-                                friend.
+                                Building an API or SDK? Our pals at Speakeasy have you covered with 50% off for 6
+                                months.
                             </p>
                         </div>
                     </div>
@@ -331,7 +334,7 @@ export default function Startups(): JSX.Element {
                                     },
                                     {
                                         cells: [
-                                            { content: 'Free gifts (omg, stickers)', className: 'font-semibold' },
+                                            { content: 'Free gifts (OMG stickers)', className: 'font-semibold' },
                                             { content: <IconX className="size-5 text-red" /> },
                                             { content: <IconX className="size-5 text-red" /> },
                                             { content: <IconX className="size-5 text-red" /> },

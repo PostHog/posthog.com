@@ -371,7 +371,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Topic libraries',
+                    label: "Everything we've learned",
                     disabled: true,
                 },
                 {
