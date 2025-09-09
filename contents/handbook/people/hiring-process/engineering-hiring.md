@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Engineering hiring at PostHog
 
-Engineers make up around 60% of our team, and we are almost always hiring for Engineering roles. This page provides internal documentation on our engineering hiring process, including roles and best practices for interviewers. You can find all open roles at PostHog on our careers page, in case you want to refer someone.
+Engineers make up around 60% of our team, and we are almost always hiring for Engineering roles. This page provides internal documentation on our engineering hiring process, including roles and best practices for interviewers. You can find all open roles at PostHog on our [careers page](https://posthog.com/careers), in case you want to [refer](https://posthog.com/handbook/people/hiring-process#referrals) someone.
 
 ### What we are looking for in engineering hires
 
@@ -26,6 +26,8 @@ Beyond the specific skills listed in the job description, we generally look for:
 
 Hiring is a team effort, and we need everyone to contribute to make the best new hires. Talent Partners handle all scheduling throughout the interview process, and support both interviewers, candidates and hiring leads.
 
+You can find more information regarding the hiring process [in the handbook](https://posthog.com/handbook/people/hiring-process), or reach out to @talent-folks in Slack.
+
 #### Culture screen 
 
 The culture screen is handled by the Talent team. Normally this is a 20-30 min call where they make an initial assessment for the candidate's fit for the job, culture, communication style, and sort all logistics.
@@ -36,7 +38,7 @@ The [technical interview](/handbook/people/hiring-process#2-technical-interview-
 
 Sometimes when you get part of the way into a technical interview it becomes clear that the person is not a fit. Because rejecting candidates needs to be done in a specific way, please continue the interview as usual and do not reject on the call. It's okay to end the interview a bit early - interviews often don't take the entire time, and it's okay to give this caveat ahead of every technical interview.
 
-You should use [this rubric](https://github.com/Posthog-Interviews/superday-interview-test/blob/main/technical-exercise/rubric.md) when evaluating candidates at this stage.
+You should use <PrivateLink url="[https://github.com/Posthog-Interviews/superday-interview-test/blob/main/technical-exercise/rubric.md]">the technical exercise guide</PrivateLink> when evaluating candidates at this stage.
 
 > You may be shadowed by another PostHog team member – a shadow is someone who listens in, but doesn't participate. This is something we do regularly among technical interviewers, as a way of improving the hiring process. During high season, we may ask some of you to record these interviews for training purposes to help us onboard and train new interviewers faster. The candidate will, of course, have the chance to opt out by either letting their recruiter know in advance or letting you know at the start of the interview - you should always ask the candidate for their permission before recording and this will never affect the outcome of the interview - there are many reasons why someone may opt out from being recorded. 
 
@@ -71,7 +73,7 @@ As PostHog grows and our hiring goals get bigger and bigger, to achieve that we 
 
 If you wish to get involved in interviewing, you can request so by contacting the talent team using the @talent-folks handle in Slack in the #team-people-and-ops channel. Please note, that if you are in your first 90 days at PostHog, you should not be focussing on interviewing and focus on ramping up and onboarding successfully. Even shadowing interviews can be distracting, so consider even leaving these until after your first 90 days.
 
-Once you have let the talent team know, you'll work closely with a Talent Partner to get you up to speed. This will involve them scheduling you to shadow at least two live technical screens with two of our most experienced interviewers. They will also share with you the relevant watching and reading materials(like the [technical exercise guide](https://github.com/PostHog/superday-interview-test/blob/main/technical-exercise/guide.md) and the respective [rubric](https://github.com/Posthog-Interviews/superday-interview-test/blob/main/technical-exercise/rubric.md)  that should be consumed before conducting your first interview. Your very first interview will be shadowed by one of our experienced interviewers and they will give you feedback, on both their assessment of the candidate interviewed and then how you did. Based on how this goes, either you can get another interview shadowed by another engineer for more feedback, or you can go out on your own. 
+Once you have let the talent team know, you'll work closely with a Talent Partner to get you up to speed. This will involve them scheduling you to shadow at least two live technical screens with two of our most experienced interviewers. They will also share with you the relevant watching and reading materials that should be consumed before conducting your first interview. Your very first interview will be shadowed by one of our experienced interviewers and they will give you feedback, on both their assessment of the candidate interviewed and then how you did. Based on how this goes, either you can get another interview shadowed by another engineer for more feedback, or you can go out on your own. 
 
 ### Your first interview alone
 
