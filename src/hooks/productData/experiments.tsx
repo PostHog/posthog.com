@@ -75,9 +75,9 @@ export const experiments = {
     },
     features: [
         {
-            title: 'Flexible experiment types',
-            headline: 'Test any metric that matters to your business',
-            description: 'Choose the right metric for your goal and track side effects across your product.',
+            title: 'Experiment types',
+            headline: 'Choose the right metric for your goal and track side effects across your product.',
+            description: 'Supports conversion funnels, count-based trends, value-based metrics, and custom metrics',
             features: [
                 {
                     title: 'Funnel metrics',
@@ -141,7 +141,7 @@ export const experiments = {
         },
         {
             title: 'Targeting rules',
-            headline: 'Target the right audience for every experiment',
+            headline: 'Target by user properties, cohorts, geographic location, or custom conditions',
             layout: 'columns',
             features: [
                 {
@@ -185,11 +185,44 @@ export const experiments = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_09_at_11_59_57_265b164241.png',
                     alt: 'Customizable metrics',
-                    stylize: true,
+                    // stylize: true,
                     shadow: true,
                 },
             ],
         },
+        // {
+        //     title: 'Auto recommendations',
+        //     headline: 'Built-in guidance for successful experiments',
+        //     description:
+        //         'Get automatic recommendations for sample size, test duration, and minimum detectable effects based on your data',
+        //     layout: 'columns',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png',
+        //             alt: 'Smart recommendations',
+        //             stylize: true,
+        //             shadow: true,
+        //         },
+        //     ],
+        //     features: [
+        //         {
+        //             title: 'Sample size calculator',
+        //             description: 'Know how many users you need based on your minimum detectable effect',
+        //         },
+        //         {
+        //             title: 'Duration estimates',
+        //             description: 'Get recommendations on how long to run your test',
+        //         },
+        //         {
+        //             title: 'Pre-launch checklist',
+        //             description: 'Ensure your experiment is set up correctly before launch',
+        //         },
+        //         {
+        //             title: 'Health monitoring',
+        //             description: 'Automatic alerts for sample ratio mismatch and other issues',
+        //         },
+        //     ],
+        // },
         {
             title: 'Developer-friendly implementation',
             headline: 'Simple integration with powerful capabilities',

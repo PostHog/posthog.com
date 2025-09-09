@@ -594,11 +594,11 @@ window.posthog.onFeatureFlags(function () {
             {
                 feature: 'Search by network request',
                 companies: {
-                    // hotjar: true,
+                    hotjar: true,
                     logrocket: true,
-                    // matomo: true,
+                    matomo: true,
                     // fullstory: true,
-                    // clarity: true,
+                    clarity: false,
                     posthog: false,
                 },
             },
