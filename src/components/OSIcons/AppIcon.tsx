@@ -24,6 +24,9 @@ const PRODUCT_ICON_MAP = {
     hedgehog_mode: {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/hedgehog_mode_eaf3d50472.png',
     },
+    hogwars: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogwars_2af56b2949.png',
+    },
     hogpaint: {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/arthog_ed871b96df.png',
     },
