@@ -66,9 +66,9 @@ export const Transparency = () => {
     }
 
     return (
-        <section id="transparency" className="@container careers-transparency px-8 @3xl:px-8">
+        <section id="transparency" className="@container careers-transparency">
             <div className="w-11/12 max-w-4xl mx-auto @2xl:text-center">
-                <h2 className="text-4xl @2xl:text-5xl">
+                <h2 className="text-2xl @3xl:text-4xl">
                     The most transparent company, <em className="text-red dark:text-yellow">ever</em>
                 </h2>
                 <h4 className="lg:text-center opacity-70 font-medium max-w-2xl mx-auto leading-tight text-lg">

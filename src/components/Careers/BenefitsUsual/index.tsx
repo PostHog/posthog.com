@@ -63,10 +63,10 @@ const Benefit = ({ icon, title, details, className = '' }: BenefitProps) => {
 
 const BenefitsUsual: React.FC = () => {
     return (
-        <section id="benefits" className="@container px-8 @3xl:px-8">
+        <section id="benefits" className="@container">
             {/* <DebugContainerQuery /> */}
             <div className="">
-                <h2 className="text-4xl font-bold mb-2">
+                <h2 className="text-2xl @3xl:text-4xl font-bold mb-2">
                     The <em>boring</em> benefits
                 </h2>
                 <p>

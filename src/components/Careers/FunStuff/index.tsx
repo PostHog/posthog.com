@@ -10,8 +10,9 @@ const FunThing: React.FC<{
     imagePosition: 'top' | 'bottom'
 }> = ({ image, title, content, link, imagePosition }) => (
     <div
-        className={`bg-primary border border-primary rounded overflow-hidden flex flex-col ${imagePosition === 'top' ? 'flex-col-reverse' : ''
-            }`}
+        className={`bg-primary border border-primary rounded overflow-hidden flex flex-col ${
+            imagePosition === 'top' ? 'flex-col-reverse' : ''
+        }`}
     >
         {link ? (
             <Link to={link} state={{ newWindow: true }}>
@@ -195,11 +196,11 @@ const frameContents = [
 
 const FunStuff: React.FC = () => {
     return (
-        <section id="fun-stuff" className="not-prose @container px-8 @4xl:px-8">
-            <h2 className="text-center text-4xl lg:text-5xl text-balance">
+        <section id="fun-stuff" className="not-prose @container pt-12">
+            <h2 className="text-center text-2xl @3xl:text-4xl text-balance">
                 Live, Laugh, LEquip every developer to build successful products
             </h2>
-            <p className="text-center text-lg mb-8 opacity-75">
+            <p className="text-center text-base @3xl:text-lg mb-8 text-secondary">
                 Our jobs are zero fun. Here are some things that have made it a little less insufferable.
             </p>
 
