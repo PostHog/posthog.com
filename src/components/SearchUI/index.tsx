@@ -46,6 +46,7 @@ const Search = ({
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
     autoFocus = true,
+    onEscape,
 }: {
     initialFilter: string
     className?: string
@@ -53,6 +54,7 @@ const Search = ({
     isRefinedClassName?: string
     hideFilters?: boolean
     autoFocus?: boolean
+    onEscape?: () => void
 }) => {
     const [query, setQuery] = useState('')
     const { dragControls } = useWindow()
@@ -65,6 +67,18 @@ const Search = ({
         if (!hit) return
         navigate(`/${hit.slug}`, { state: { newWindow: true } })
         onChange?.()
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Escape') {
+            if (query === '') {
+                // If input is empty, close the search
+                onEscape?.()
+            } else {
+                // If input has text, clear it
+                setQuery('')
+            }
+        }
     }
 
     useEffect(() => {
@@ -85,6 +99,7 @@ const Search = ({
                         <Combobox.Input
                             className="w-full !border-none !text-[15px] !px-2.5 !py-1.5"
                             onChange={(e) => setQuery(e.target.value)}
+                            onKeyDown={handleKeyDown}
                             placeholder={`Search ${initialFilter ? 'the ' + initialFilter : 'PostHog.com'}...`}
                             autoFocus={autoFocus}
                             value={query}
@@ -180,6 +195,11 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
                     initialFilter={initialFilter}
                     className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl max-w-screen-md border border-primary"
                     onChange={onChange}
+                    onEscape={() => {
+                        if (appWindow) {
+                            closeWindow(appWindow)
+                        }
+                    }}
                 />
             </div>
         </InstantSearch>
