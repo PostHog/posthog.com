@@ -1,6 +1,6 @@
 {
     "commentTypes": ["logic", "syntax", "style", "info"],
-    "instructions": "Ensure contents/handbook/content/docs-style-guide.mdx and contents/handbook/content/posthog-style-guide.md are enforced.",
+    "instructions": "Ensure everything in PostHog style guides located in the contents/handbook/content/docs-style-guide.mdx and contents/handbook/content/posthog-style-guide.md files are enforced. These rules are especially important: words are spelled using American English, titles are in sentence case, feature names (e.g. feature flags or product analytics) are in sentence case too, use relative URLs for internal links, and http://app.posthog.com instead of http://us.posthog.com or http://eu.posthog.com for links to the app. Thank you for your service.",
     "ignorePatterns": "api/**\ngatsby/**\nplugins/**\nscripts/**\nsrc/**\n*.json\n*.js\n*.ts\n*.jsx\n.tsx\n.yaml",
     "triggerOnUpdates": false,
     "shouldUpdateDescription": false,

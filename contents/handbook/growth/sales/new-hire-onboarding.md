@@ -32,13 +32,12 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) can help you out for access or invites for the following tools:
 
-- [Salesforce](https://posthog.lightning.force.com/)
-- [BuildBetter](https://app.buildbetter.app)
-- [PandaDoc](https://app.pandadoc.com/)
+- [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you
+- [BuildBetter](https://app.buildbetter.app) - use Google SSO
+- [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
 - [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home)
-- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO
+- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO, then ask Simon or Dana to upgrade your role so you can create traits and see success metrics
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
-- [Pitch](https://app.pitch.com/) - use Google SSO
 - [QuoteHog](https://quote.posthog.net/) - use Google SSO
 - [Pylon](https://usepylon.com/) - use Slack SSO
 - [Zoom](https://zoom.com/) - use Google SSO
@@ -47,9 +46,10 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - [PostHog App + Website](https://us.posthog.com/project/2) within PostHog US instance - use Google SSO
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
 - [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
+- [Pitch](https://app.pitch.com/) - ask Simon or Dana to invite you
 - Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
 
-*Note: You'll be added to group emails sent to sales@posthog.com or cs-onboarding@posthog.com. It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
+*Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
 
 ## Technical Account Executive ramp
 

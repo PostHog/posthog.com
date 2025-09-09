@@ -14,25 +14,27 @@ const Parameters = ({
     title = 'Parameters',
     validTypes,
     slugPrefix,
+    includeId = false,
 }: {
     params: Parameter[]
     title?: string
     validTypes: string[]
     slugPrefix: string
+    includeId?: boolean
 }): JSX.Element | null => {
     if (!params || params.length === 0) return null
 
     return (
         <div>
             <h4 className="text-lg font-semibold mb-2">{title}</h4>
-            <div className="min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">
-                <table className="w-full table-auto">
+            <div className="min-w-full -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">
+                <table className="w-full table-fixed">
                     <thead className="bg-gray-accent-light dark:bg-gray-accent-dark">
                         <tr>
-                            <th className="text-left text-[14px] leading-5 opacity-75 font-[800] py-2 px-2 text-gray-900 dark:text-gray-100 whitespace-nowrap">
+                            <th className="text-left text-sm leading-5 opacity-75 font-bold py-2 px-2 text-gray-900 dark:text-gray-100 w-1/2">
                                 Name
                             </th>
-                            <th className="text-left text-[14px] leading-5 opacity-75 font-[800] py-2 px-2 text-gray-900 dark:text-gray-100 whitespace-nowrap">
+                            <th className="text-left text-sm leading-5 opacity-75 font-bold py-2 px-2 text-gray-900 dark:text-gray-100 w-1/2">
                                 Type
                             </th>
                         </tr>
@@ -47,13 +49,16 @@ const Parameters = ({
                                             : ''
                                     }
                                 >
-                                    <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-nowrap">
-                                        <code className="text-red hover:text-red font-semibold group">
+                                    <td
+                                        id={includeId ? `${param.name}-param` : undefined}
+                                        className="text-gray-600 dark:text-gray-300 text-sm py-2 px-2 align-top scroll-mt-32"
+                                    >
+                                        <code className="break-words text-red hover:text-red font-semibold group">
                                             {param.name}
                                             {param.isOptional && '?'}
                                         </code>
                                     </td>
-                                    <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
+                                    <td className="text-gray-600 dark:text-gray-300 text-sm py-2 px-2 align-top">
                                         <TypeLink slugPrefix={slugPrefix} type={param.type} validTypes={validTypes} />
                                     </td>
                                 </tr>
@@ -61,7 +66,7 @@ const Parameters = ({
                                     <tr>
                                         <td
                                             colSpan={2}
-                                            className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top border-t-0"
+                                            className="text-gray-600 dark:text-gray-300 text-sm py-2 px-2 align-top border-t-0"
                                         >
                                             <ReactMarkdown>{param.description}</ReactMarkdown>
                                         </td>

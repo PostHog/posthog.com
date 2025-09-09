@@ -11,7 +11,7 @@ import {
     IconPeople,
     IconNotification,
     IconRewindPlay,
-    IconAI,
+    IconLlmAnalytics,
 } from '@posthog/icons'
 import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
@@ -87,8 +87,8 @@ const subfeatures = [
         description: 'Analyze how any group of people (like an organization) use your product',
     },
     {
-        icon: <IconAI />,
-        title: 'LLM observability',
+        icon: <IconLlmAnalytics />,
+        title: 'LLM analytics',
         description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
     },
 ]
@@ -222,7 +222,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases! Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',

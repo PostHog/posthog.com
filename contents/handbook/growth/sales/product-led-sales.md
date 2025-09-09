@@ -40,4 +40,4 @@ For customers that may have started implementation late, or ran into issues duri
 
 ## Getting recognized on the deal
 
-As they have already shown intent by signing up/subscribing, you will need to demonstrate that you have actively worked on the opportunity to include it in your book of business.  We will use a common sense approach here but sending a couple of emails and 1 call won't be classed as 'actively working'. Simon will make the call here, escalating if needed. 
+As they have already shown intent by signing up/subscribing, you will need to demonstrate that you have actively worked on the opportunity to include it in your book of business.  We will use a common sense approach here but sending a couple of emails and 1 call won't be classed as 'actively working'. We want to ensure there is concrete sales activity going on with this customer. Simon will make the call here, escalating if needed. 

@@ -31,6 +31,7 @@ import {
     IconTerminal,
     IconTestTube,
     IconTrends,
+    IconPlay,
     IconUserPaths,
 } from '@posthog/icons'
 import Link from 'components/Link'
@@ -926,7 +927,7 @@ export const DataWarehouse = () => {
     )
 }
 
-export const LLMObservability = () => {
+export const LLMAnalytics = () => {
     const { enterpriseMode } = useLayoutData()
 
     const BrainIcon = () => (
@@ -987,14 +988,14 @@ export const LLMObservability = () => {
             containerClasses="!pt-8 mdlg:!py-4 xl:!py-10"
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
-            title="LLM observability"
-            flag="Beta"
+            title="LLM analytics"
             flagColor="yellow"
             description="Build AI features with full visibility – both in development and production."
             features={[
-                { title: 'LLM traces', Icon: IconDecisionTree },
-                { title: 'AI usage and performance metrics', Icon: IconTrends },
+                { title: 'LLM traces and spans', Icon: IconDecisionTree },
+                { title: 'AI usage and latency metrics', Icon: IconTrends },
                 { title: 'Cost analysis', Icon: IconHandMoney },
+                { title: 'AI playground', Icon: IconMagicWand },
             ]}
             imageColumn="relative md:col-span-10"
             imageClasses="flex-col gap-6 lg:gap-8 px-8 text-center pb-8 md:pb-0 xl:items-center"
@@ -1012,7 +1013,7 @@ export const LLMObservability = () => {
                         ) : (
                             <>
                                 <CloudinaryImage
-                                    alt="The PostHog LLM observability dashboard, showing data on generative AI usage, performance, and costs"
+                                    alt="The PostHog LLM analytics dashboard, showing data on generative AI usage, performance, and costs"
                                     placeholder="none"
                                     quality={100}
                                     objectFit="contain"
@@ -1046,7 +1047,7 @@ export const LLMObservability = () => {
             )}
             contentOffset=""
             buttonLabel="Explore"
-            buttonUrl="/docs/ai-engineering"
+            buttonUrl="/docs/llm-analytics"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-[#fff] border-black/50 !text-black group-hover:text-black"
         />

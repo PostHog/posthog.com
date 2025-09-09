@@ -376,7 +376,7 @@ You can often refer to the source of existing pages for more examples, but if in
 
 #### Images/GIFs
 
-If you need to upload images, you can upload them to Cloudinary
+If you need to upload images, you can [upload them to Cloudinary](/handbook/engineering/posthog-com/assets)
 
 To include an image in a markdown file, you can use Cloudinary URLs, like so:
 

@@ -1,52 +1,14 @@
 {
     "id": "posthog-python",
-    "hogRef": "0.1",
+    "hogRef": "0.3",
     "info": {
-        "version": "6.0.3",
+        "version": "6.6.0",
         "id": "posthog-python",
         "title": "PostHog Python SDK",
         "description": "Integrate PostHog into any python application.",
         "slugPrefix": "posthog-python",
         "specUrl": "https://github.com/PostHog/posthog-python"
     },
-    "noDocsTypes": [
-        "Client",
-        "any",
-        "int",
-        "float",
-        "bool",
-        "dict",
-        "list",
-        "str",
-        "tuple",
-        "set",
-        "frozenset",
-        "bytes",
-        "bytearray",
-        "memoryview",
-        "range",
-        "slice",
-        "complex",
-        "Union",
-        "Optional",
-        "Any",
-        "Callable",
-        "Type",
-        "TypeVar",
-        "Generic",
-        "Literal",
-        "ClassVar",
-        "Final",
-        "Annotated",
-        "NotRequired",
-        "Required",
-        "None",
-        "NoneType",
-        "object",
-        "Unpack",
-        "BaseException",
-        "Exception"
-    ],
     "types": [
         {
             "id": "FeatureFlag",
@@ -225,6 +187,39 @@
             "example": ""
         },
         {
+            "id": "SendFeatureFlagsOptions",
+            "name": "SendFeatureFlagsOptions",
+            "path": "posthog.types.SendFeatureFlagsOptions",
+            "properties": [
+                {
+                    "name": "should_send",
+                    "type": "bool",
+                    "description": "Field: should_send"
+                },
+                {
+                    "name": "only_evaluate_locally",
+                    "type": "Optional[bool]",
+                    "description": "Field: only_evaluate_locally"
+                },
+                {
+                    "name": "person_properties",
+                    "type": "Optional[dict[str, typing.Any]]",
+                    "description": "Field: person_properties"
+                },
+                {
+                    "name": "group_properties",
+                    "type": "Optional[dict[str, dict[str, typing.Any]]]",
+                    "description": "Field: group_properties"
+                },
+                {
+                    "name": "flag_keys_filter",
+                    "type": "Optional[list[str]]",
+                    "description": "Field: flag_keys_filter"
+                }
+            ],
+            "example": ""
+        },
+        {
             "id": "OptionalCaptureArgs",
             "name": "OptionalCaptureArgs",
             "path": "posthog.args.OptionalCaptureArgs",
@@ -256,7 +251,7 @@
                 },
                 {
                     "name": "send_feature_flags",
-                    "type": "typing_extensions.NotRequired[Optional[bool]]",
+                    "type": "typing_extensions.NotRequired[Union[bool, SendFeatureFlagsOptions, any]]",
                     "description": "Field: send_feature_flags"
                 },
                 {
@@ -301,24 +296,36 @@
             "example": ""
         },
         {
-            "id": "traceback",
-            "name": "traceback",
-            "path": "builtins.traceback",
-            "properties": [],
-            "example": ""
-        },
-        {
-            "id": "UUID",
-            "name": "UUID",
-            "path": "uuid.UUID",
-            "properties": [],
-            "example": ""
-        },
-        {
-            "id": "datetime",
-            "name": "datetime",
-            "path": "datetime.datetime",
-            "properties": [],
+            "id": "SendFeatureFlagsOptions",
+            "name": "SendFeatureFlagsOptions",
+            "path": "posthog.types.SendFeatureFlagsOptions",
+            "properties": [
+                {
+                    "name": "should_send",
+                    "type": "bool",
+                    "description": "Field: should_send"
+                },
+                {
+                    "name": "only_evaluate_locally",
+                    "type": "Optional[bool]",
+                    "description": "Field: only_evaluate_locally"
+                },
+                {
+                    "name": "person_properties",
+                    "type": "Optional[dict[str, typing.Any]]",
+                    "description": "Field: person_properties"
+                },
+                {
+                    "name": "group_properties",
+                    "type": "Optional[dict[str, dict[str, typing.Any]]]",
+                    "description": "Field: group_properties"
+                },
+                {
+                    "name": "flag_keys_filter",
+                    "type": "Optional[list[str]]",
+                    "description": "Field: flag_keys_filter"
+                }
+            ],
             "example": ""
         }
     ],
@@ -355,141 +362,147 @@
                         },
                         {
                             "name": "max_queue_size",
-                            "description": "Parameter: max_queue_size",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "send",
-                            "description": "Parameter: send",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "on_error",
-                            "description": "Parameter: on_error",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "flush_at",
-                            "description": "Parameter: flush_at",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "flush_interval",
-                            "description": "Parameter: flush_interval",
+                            "description": "",
                             "isOptional": false,
                             "type": "float"
                         },
                         {
                             "name": "gzip",
-                            "description": "Parameter: gzip",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "max_retries",
-                            "description": "Parameter: max_retries",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "sync_mode",
-                            "description": "Parameter: sync_mode",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "timeout",
-                            "description": "Parameter: timeout",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "thread",
-                            "description": "Parameter: thread",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "poll_interval",
-                            "description": "Parameter: poll_interval",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "personal_api_key",
-                            "description": "Parameter: personal_api_key",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disabled",
-                            "description": "Parameter: disabled",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
-                            "description": "Parameter: disable_geoip",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "historical_migration",
-                            "description": "Parameter: historical_migration",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "feature_flags_request_timeout_seconds",
-                            "description": "Parameter: feature_flags_request_timeout_seconds",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "super_properties",
-                            "description": "Parameter: super_properties",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "enable_exception_autocapture",
-                            "description": "Parameter: enable_exception_autocapture",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "log_captured_exceptions",
-                            "description": "Parameter: log_captured_exceptions",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "project_root",
-                            "description": "Parameter: project_root",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "privacy_mode",
-                            "description": "Parameter: privacy_mode",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "before_send",
-                            "description": "Parameter: before_send",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "flag_fallback_cache_url",
-                            "description": "Parameter: flag_fallback_cache_url",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "enable_local_evaluation",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "bool"
                         }
                     ],
                     "showDocs": true,
@@ -573,7 +586,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -622,7 +635,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -646,7 +659,7 @@
                     "title": "feature_enabled",
                     "description": "Check if a feature flag is enabled for a user.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "key",
@@ -664,19 +677,19 @@
                             "name": "groups",
                             "description": "A dictionary of group information.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -737,7 +750,7 @@
                     "title": "get_all_flags",
                     "description": "Get all feature flags for a user.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "distinct_id",
@@ -749,19 +762,19 @@
                             "name": "groups",
                             "description": "A dictionary of group information.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -774,6 +787,12 @@
                             "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "flag_keys_to_evaluate",
+                            "description": "A list of specific flag keys to evaluate. If provided,         only these flags will be evaluated, improving performance.",
+                            "isOptional": true,
+                            "type": "list[str]"
                         }
                     ],
                     "showDocs": true,
@@ -795,7 +814,7 @@
                     "title": "get_all_flags_and_payloads",
                     "description": "Get all feature flags and their payloads for a user.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "distinct_id",
@@ -807,19 +826,19 @@
                             "name": "groups",
                             "description": "A dictionary of group information.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -832,6 +851,12 @@
                             "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "flag_keys_to_evaluate",
+                            "description": "A list of specific flag keys to evaluate. If provided,         only these flags will be evaluated, improving performance.",
+                            "isOptional": true,
+                            "type": "list[str]"
                         }
                     ],
                     "showDocs": true,
@@ -853,7 +878,7 @@
                     "title": "get_feature_flag",
                     "description": "Get multivariate feature flag value for a user.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "key",
@@ -871,19 +896,19 @@
                             "name": "groups",
                             "description": "A dictionary of group information.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -923,7 +948,7 @@
                     "title": "get_feature_flag_payload",
                     "description": "Get the payload for a feature flag.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "key",
@@ -947,19 +972,19 @@
                             "name": "groups",
                             "description": "A dictionary of group information.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -1017,19 +1042,19 @@
                             "name": "groups",
                             "description": "A dictionary of group information.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -1069,7 +1094,7 @@
                     "title": "get_feature_flags_and_payloads",
                     "description": "Get feature flags and payloads for a user by calling decide.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "distinct_id",
@@ -1100,6 +1125,12 @@
                             "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "flag_keys_to_evaluate",
+                            "description": "A list of specific flag keys to evaluate. If provided,         only these flags will be evaluated, improving performance.",
+                            "isOptional": true,
+                            "type": "list[str]"
                         }
                     ],
                     "showDocs": true,
@@ -1121,7 +1152,7 @@
                     "title": "get_feature_payloads",
                     "description": "Get feature flag payloads for a user by calling decide.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "distinct_id",
@@ -1152,6 +1183,12 @@
                             "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "flag_keys_to_evaluate",
+                            "description": "A list of specific flag keys to evaluate. If provided,         only these flags will be evaluated, improving performance.",
+                            "isOptional": true,
+                            "type": "list[str]"
                         }
                     ],
                     "showDocs": true,
@@ -1173,7 +1210,7 @@
                     "title": "get_feature_variants",
                     "description": "Get feature flag variants for a user by calling decide.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "distinct_id",
@@ -1204,6 +1241,12 @@
                             "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "flag_keys_to_evaluate",
+                            "description": "A list of specific flag keys to evaluate. If provided,         only these flags will be evaluated, improving performance.",
+                            "isOptional": true,
+                            "type": "list[str]"
                         }
                     ],
                     "showDocs": true,
@@ -1218,7 +1261,7 @@
                     "title": "get_flags_decision",
                     "description": "Get feature flags decision.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [
                         {
                             "name": "distinct_id",
@@ -1249,6 +1292,12 @@
                             "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "flag_keys_to_evaluate",
+                            "description": "A list of specific flag keys to evaluate. If provided,         only these flags will be evaluated, improving performance.",
+                            "isOptional": true,
+                            "type": "list[str]"
                         }
                     ],
                     "showDocs": true,
@@ -1287,39 +1336,39 @@
                         {
                             "name": "properties",
                             "description": "A dictionary of properties to set on the group.",
-                            "isOptional": false,
-                            "type": "any"
+                            "isOptional": true,
+                            "type": "dict[str, typing.Any]"
                         },
                         {
                             "name": "timestamp",
                             "description": "The timestamp of the event.",
                             "isOptional": false,
-                            "type": "any"
+                            "type": "datetime"
                         },
                         {
                             "name": "uuid",
                             "description": "A unique identifier for the event.",
-                            "isOptional": false,
-                            "type": "any"
+                            "isOptional": true,
+                            "type": "str"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this event.",
-                            "isOptional": false,
-                            "type": "any"
+                            "isOptional": true,
+                            "type": "bool"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user performing the action.",
                             "isOptional": false,
-                            "type": "any"
+                            "type": "Number"
                         }
                     ],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "None"
+                        "name": "Optional[str]"
                     },
                     "examples": [
                         {
@@ -1355,7 +1404,7 @@
                     "title": "load_feature_flags",
                     "description": "Load feature flags for local evaluation.",
                     "details": "",
-                    "category": "Feature Flags",
+                    "category": "Feature flags",
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
@@ -1414,7 +1463,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -1447,7 +1496,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -1561,7 +1610,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -1600,7 +1649,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -1642,19 +1691,19 @@
                             "name": "groups",
                             "description": "Groups mapping",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "Person properties",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "Group properties",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -1713,7 +1762,7 @@
                 {
                     "id": "flush",
                     "title": "flush",
-                    "description": "Tell the client to flush.",
+                    "description": "Tell the client to flush all queued events.",
                     "details": "",
                     "category": "Client management",
                     "params": [],
@@ -1748,19 +1797,19 @@
                             "name": "groups",
                             "description": "Groups mapping",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "Person properties",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "Group properties",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -1812,19 +1861,19 @@
                             "name": "groups",
                             "description": "Groups mapping from group type to group key",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "Person properties",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "Group properties in format { group_type_name: { group_properties } }",
                             "isOptional": false,
-                            "type": "dict"
+                            "type": "any"
                         },
                         {
                             "name": "only_evaluate_locally",
@@ -1858,6 +1907,69 @@
                             "code": "# Multivariate feature flag\nfrom posthog import get_feature_flag, get_feature_flag_payload\nenabled_variant = get_feature_flag('flag-key', 'distinct_id_of_your_user')\nif enabled_variant == 'variant-key':\n    matched_flag_payload = get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
                         }
                     ]
+                },
+                {
+                    "id": "get_feature_flag_result",
+                    "title": "get_feature_flag_result",
+                    "description": "Get a FeatureFlagResult object which contains the flag result and payload.  This method evaluates a feature flag and returns a FeatureFlagResult object containing: - enabled: Whether the flag is enabled - variant: The variant value if the flag has variants - payload: The payload associated with the flag (automatically deserialized from JSON) - key: The flag key - reason: Why the flag was enabled/disabled  Example: ```python result = posthog.get_feature_flag_result('beta-feature', 'distinct_id') if result and result.enabled:     # Use the variant and payload     print(f\"Variant: {result.variant}\")     print(f\"Payload: {result.payload}\") ```",
+                    "details": "",
+                    "category": null,
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "None"
+                    }
                 },
                 {
                     "id": "get_remote_config_payload",
@@ -1969,7 +2081,7 @@
                 {
                     "id": "join",
                     "title": "join",
-                    "description": "Block program until the client clears the queue.",
+                    "description": "Block program until the client clears the queue. Used during program shutdown. You should use `shutdown()` directly in most cases.",
                     "details": "",
                     "category": "Client management",
                     "params": [],
@@ -2085,7 +2197,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -2141,7 +2253,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -2217,5 +2329,15 @@
                 }
             ]
         }
+    ],
+    "categories": [
+        "Initialization",
+        "Identification",
+        "Capture",
+        "Error Tracking",
+        "Feature flags",
+        "Contexts",
+        "Events",
+        "Client management"
     ]
 }

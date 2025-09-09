@@ -5,6 +5,7 @@ showTitle: true
 ---
 
 import MigrationWarning from "./_snippets/migration-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <MigrationWarning />
 
@@ -30,13 +31,62 @@ Direct imports enable you to migrate data directly from Mixpanel or Amplitude wi
 - Transforms events to match PostHog's event schema
 - Imports the data into your PostHog project
 
+Each direct import job supports a maximum date range of one year. To migrate data spanning more than one year, run multiple jobs that cover smaller, consecutive ranges.
+
+When setting up an Amplitude direct import, you can enable the **"Generate identify events to link user IDs with device IDs"** checkbox. This will automatically generate `$identify` events whenever a new device ID is associated with a user ID from an event. These identify events help maintain proper user identity linking in PostHog by connecting anonymous device IDs with known user IDs.
+
+> **Note:** Groups are not yet supported in Amplitude migrations. Only user events and properties will be imported.
+
+See the [Event transformations](#event-transformations) section for full mapping details and examples. You should also consider running a small test migration first to preview transformations.
+
+<CalloutBox icon="IconWarning" title="Caveat" type="caution">
+
+Direct imports are currently less reliable than S3 imports for some datasets and customers. Rate limits and data export size limits vary by customer and by Amplitude/Mixpanel account, making it hard to gracefully handle the full range of API export failure modes. We’re actively improving the robustness of direct imports, but if you encounter issues, consider using an [S3 import](#s3-imports).
+
+</CalloutBox>
+
 ## S3 imports
 
-S3 imports give you full control over your data transformation while still benefiting from automated ingestion. This method is ideal when you need:
+S3 imports are the most reliable and flexible way to migrate your data to PostHog.
+
+You can upload uncompressed JSONL files using any supported content type — `posthog`, `amplitude`, or `mixpanel`. You may choose to run your own custom transformations and output PostHog‑shaped events (select the `posthog` content type), but you don’t have to — if you upload Amplitude or Mixpanel exports and select the matching content type, we’ll apply the same mappings as direct imports.
+
+This method gives you full control while still benefiting from automated ingestion. This method is ideal when you need:
 
 - Custom event transformations
 - To handle very large datasets
 - To migrate from platforms not supported by direct imports
+- Direct imports aren't working for your data set
+
+If you upload Amplitude or Mixpanel events to S3, select the matching content type and PostHog will apply the event and property mappings described in [Event transformations](#event-transformations). If you upload PostHog events, they are ingested as-is without source-specific remapping.
+
+### Supported content types
+
+- `amplitude`: Upload JSONL events that match Amplitude’s export schema. The [event transformations](#event-transformations) for Amplitude are applied during import.
+- `mixpanel`: Upload JSONL events that match Mixpanel’s export schema. The [event transformations](#event-transformations) for Mixpanel are applied during import.
+- `posthog`: Upload JSONL events that match PostHog’s event schema. Events are ingested as-is without source-specific remapping. Use this if you’ve already run your own transformation to produce PostHog-shaped events.
+
+### File format and compression
+
+- **Format**: Files must be JSON Lines (`.jsonl`) with one valid JSON object per line.
+- **Schema**: Each line/object must conform to the selected content type’s schema (`amplitude`, `mixpanel`, or `posthog`).
+- **Compression**: Files must not be compressed. Some export endpoints return compressed archives (for example `.gz` or `.zip`)—ensure you fully uncompress files to plain `.jsonl` before importing.
+
+### Custom event transformations with S3
+
+“Custom transformations” means you can run your own script over your source data to reshape it exactly how you want before importing:
+
+1. Export your events from your source.
+2. Transform them with your own script or pipeline.
+   - Option A: Output PostHog-shaped events and choose the `posthog` content type (no additional mapping is applied by PostHog).
+   - Option B: Output events in the original Amplitude or Mixpanel export schema and choose the matching content type to reuse PostHog’s built-in mappings described in [Event transformations](#event-transformations).
+3. Save as uncompressed JSONL and upload to S3.
+
+Minimal example for `posthog` content type (one line per event):
+
+```json
+{"event":"$pageview","distinct_id":"user_123","properties":{"$current_url":"https://example.com"},"timestamp":"2024-01-01T00:00:00Z"}
+```
 
 ### Setting up an S3 import
 
@@ -47,7 +97,7 @@ S3 imports give you full control over your data transformation while still benef
   - S3 bucket name
   - AWS access key ID
   - AWS secret access key
-  - Content Type (the schema of the events that you uploaded to S3)
+  - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema and be uncompressed `.jsonl`)
 
 ## When to use each method
 
@@ -61,9 +111,10 @@ S3 imports give you full control over your data transformation while still benef
 ### Use S3 imports when:
 
 - Your data volume is large
-- You need custom event transformations or property mappings
+- You need custom event transformations or property mappings (for example, running your own scripts to reshape events before import)
 - You're migrating from a platform not yet supported by direct imports
 - You want to pre-process or clean your data before import
+- Direct imports are failing for you
 
 ## Monitoring your migration
 
@@ -71,6 +122,125 @@ Once started, you can monitor your migration progress:
 1. **Migration dashboard**: View real-time progress and status of your migration
 2. **Event validation**: Query for your events as they come in to ensure proper transformation and ingestion
 
+If an unexpected error occurs during a migration, the job will be paused and the error message will be displayed in the migration dashboard. For transient issues (for example, upstream API rate limits or temporary availability problems), you can contact support using the **Data ingestion** topic to help resume or retry your job once the condition has cleared.
+
+If the error indicates your job is attempting to import too much data (for example, exceeding export size limits), consider switching to an [S3 import](#s3-imports), which is better suited for large migrations.
+
 ## Best practices
 
 - **Test first**: Run a small test migration with a subset of your data against a new project. This ensures events have the desired schema without polluting your main project
+
+## Event transformations
+
+When you use direct imports, PostHog transforms events from your source (Amplitude or Mixpanel) into PostHog’s schema. Below is an overview of what changes.
+
+### Amplitude → PostHog
+
+- **Event name mapping**
+  - `session_start`: dropped (not imported)
+  - `[Amplitude] Page Viewed` → `$pageview`
+  - `[Amplitude] Element Clicked` and `[Amplitude] Element Changed` → `$autocapture`
+  - All other event names are preserved
+- **Distinct ID selection**
+  - Prefer `user_id`, else `device_id`, else a generated UUID
+- **Timestamp**
+  - Parse, in order: `event_time`, `client_event_time`, `server_received_time` (supports fractional seconds). If none parse, use current time
+- **Added properties**
+  - Always adds: `historical_migration: true`, `analytics_source: "amplitude"`
+  - If present: `$amplitude_user_id`, `$amplitude_device_id`, `$device_id`, `$amplitude_event_id`, `$amplitude_session_id`
+  - Page context mapping from `event_properties`:
+    - `[Amplitude] Page URL` → `$current_url`
+    - `[Amplitude] Page Domain` → `$host`
+    - `[Amplitude] Page Path` → `$pathname`
+    - `[Amplitude] Viewport Height`/`Width` → `$viewport_height`/`$viewport_width`
+    - `referrer`/`referring_domain` → `$referrer`/`$referring_domain`
+  - Device/browser/geo:
+    - `$browser` from `os_name`, `$os` from `device_type`
+    - `$browser_version` from `os_version`
+    - `$device_type`: `Mobile` for `iOS`/`Android`, `Desktop` for `Windows`/`Linux`
+    - `$ip` from `ip_address`
+    - `$geoip_city_name`, `$geoip_subdivision_1_name`, `$geoip_country_name` from `city`/`region`/`country`
+- **Person updates**
+  - `set_once`: `$initial_referrer`, `$initial_referring_domain`, `$initial_utm_*` (filters out the literal string `"EMPTY"`)
+  - `set`: `$browser`, `$os`, `$device_type`, `$current_url`, `$pathname`, `$browser_version`, `$referrer`, `$referring_domain`, and geo fields
+
+Example (simplified):
+
+```json
+// Amplitude input
+{
+  "event_type": "[Amplitude] Page Viewed",
+  "user_id": "user_123",
+  "event_properties": {
+    "[Amplitude] Page URL": "https://example.com/page",
+    "[Amplitude] Page Domain": "example.com",
+    "[Amplitude] Page Path": "/page"
+  }
+}
+
+// PostHog event produced
+{
+  "event": "$pageview",
+  "distinct_id": "user_123",
+  "properties": {
+    "$current_url": "https://example.com/page",
+    "$host": "example.com",
+    "$pathname": "/page",
+    "historical_migration": true,
+    "analytics_source": "amplitude"
+  }
+}
+```
+
+### Mixpanel → PostHog
+
+- **Event name mapping**
+  - `$mp_web_page_view` → `$pageview`
+  - All other event names are preserved
+- **Distinct ID selection**
+  - Use `properties.distinct_id` unless it looks anonymous; if `$distinct_id_before_identity` is present it can be used instead when:
+    - `distinct_id` is empty
+    - or starts with `$device:`
+    - or is only uppercase letters, digits, and dashes
+  - If no ID remains and you choose to skip events without IDs, the event is dropped; otherwise a UUID is generated
+- **Timestamp**
+  - `properties.time` is treated as seconds unless it’s > 10,000,000,000 (then it’s milliseconds). An optional offset can be applied if your data needs it
+- **Property cleanup and enrichment**
+  - Always adds: `historical_migration: true`, `analytics_source: "mixpanel"`
+  - Geo mapping: `$city` → `$geoip_city_name`, `$region` → `$geoip_subdivision_1_name`, `mp_country_code` → `$geoip_country_code` and derived `$geoip_country_name`
+  - Removes Mixpanel-specific fields like `$mp_api_endpoint`, `mp_processing_time_ms`, `$insert_id`, `$geo_source`, `$mp_api_timestamp_ms`
+  - No `set`/`set_once` updates are applied
+
+Example (simplified):
+
+```json
+// Mixpanel input
+{
+  "event": "$mp_web_page_view",
+  "properties": {
+    "time": 1700000000000,
+    "distinct_id": "abc123",
+    "$city": "Paris",
+    "mp_country_code": "FR"
+  }
+}
+
+// PostHog event produced
+{
+  "event": "$pageview",
+  "distinct_id": "abc123",
+  "properties": {
+    "$geoip_city_name": "Paris",
+    "$geoip_country_code": "FR",
+    "$geoip_country_name": "France",
+    "historical_migration": true,
+    "analytics_source": "mixpanel"
+  }
+}
+```
+
+<CalloutBox icon="IconInfo" title="Tip" type="fyi">
+
+Start with a small date range as a test migration to a fresh project to preview the transformed events and validate your mappings before running a full migration.
+
+</CalloutBox>

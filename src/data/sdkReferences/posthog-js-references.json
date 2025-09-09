@@ -1,35 +1,14 @@
 {
     "id": "posthog-js",
-    "hogRef": "0.1",
+    "hogRef": "0.3",
     "info": {
-        "version": "1.256.0",
+        "version": "1.260.2",
         "id": "posthog-js",
         "title": "PostHog JavaScript Web SDK",
         "description": "Posthog-js allows you to automatically capture usage and send events to PostHog.",
         "slugPrefix": "posthog-js",
         "specUrl": "https://github.com/PostHog/posthog-js"
     },
-    "noDocsTypes": [
-        "string",
-        "number",
-        "boolean",
-        "integer",
-        "object",
-        "array",
-        "null",
-        "undefined",
-        "any",
-        "unknown",
-        "void",
-        "Date",
-        "RegExp",
-        "Error",
-        "Symbol",
-        "BigInt",
-        "Map",
-        "Set",
-        "PostHog"
-    ],
     "classes": [
         {
             "description": "This is the SDK reference for the PostHog JavaScript Web SDK. You can learn more about example usage in the [JavaScript Web SDK documentation](/docs/libraries/js). You can also follow [framework specific guides](/docs/frameworks) to integrate PostHog into your project.\nThis SDK is designed for browser environments. Use the PostHog [Node.js SDK](/docs/libraries/node) for server-side usage.",
@@ -37,9 +16,9 @@
             "title": "PostHog",
             "functions": [
                 {
-                    "category": "",
-                    "description": "Creates an alias linking two distinct user identifiers.",
-                    "details": "PostHog will use this to link two distinct_ids going forward (not retroactively). Call this when a user signs up to connect their anonymous session with their account.\n#### Best Practices - Call alias() when a unique ID is first created (e.g., account creation) - Should only be called once per user (except for chaining) - Multiple aliases can map to the same original ID",
+                    "category": "Identification",
+                    "description": "Creates an alias linking two distinct user identifiers. Learn more about [identifying users](/docs/product-analytics/identify)",
+                    "details": "PostHog will use this to link two distinct_ids going forward (not retroactively). Call this when a user signs up to connect their anonymous session with their account.",
                     "id": "alias",
                     "showDocs": true,
                     "title": "alias",
@@ -77,61 +56,8 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "calculateEventProperties\nThis method is used internally to calculate the event properties before sending it to PostHog. It can also be used by integrations (e.g. Segment) to enrich events with PostHog properties before sending them to Segment, which is required for some PostHog products to work correctly. (e.g. to have a correct $session_id property).",
-                    "details": null,
-                    "id": "calculateEventProperties",
-                    "showDocs": true,
-                    "title": "calculateEventProperties",
-                    "examples": [
-                        {
-                            "id": "calculateeventproperties",
-                            "name": "Generated example for calculateEventProperties",
-                            "code": "// Generated example for calculateEventProperties\nposthog.calculateEventProperties();"
-                        }
-                    ],
-                    "releaseTag": "public",
-                    "params": [
-                        {
-                            "description": "The name of the event. This can be anything the user does - 'Button Click', 'Sign Up', '$pageview', etc.",
-                            "isOptional": false,
-                            "type": "string",
-                            "name": "eventName"
-                        },
-                        {
-                            "description": "The properties to include with the event.",
-                            "isOptional": false,
-                            "type": "Properties",
-                            "name": "eventProperties"
-                        },
-                        {
-                            "description": "The timestamp of the event, e.g. for calculating time on page. If not set, it'll automatically be set to the current time.",
-                            "isOptional": true,
-                            "type": "Date",
-                            "name": "timestamp"
-                        },
-                        {
-                            "description": "The uuid of the event, e.g. for storing the $pageview ID.",
-                            "isOptional": true,
-                            "type": "string",
-                            "name": "uuid"
-                        },
-                        {
-                            "description": "Set this if you do not intend to actually send the event, and therefore do not want to update internal state e.g. session timeout",
-                            "isOptional": true,
-                            "type": "boolean",
-                            "name": "readOnly"
-                        }
-                    ],
-                    "returnType": {
-                        "id": "Properties",
-                        "name": "Properties"
-                    },
-                    "path": "lib/src/posthog-core.d.ts"
-                },
-                {
-                    "category": "",
-                    "description": "Checks the feature flags associated with this Survey to see if the survey can be rendered.\nThis method is deprecated because it's synchronous and won't return the correct result if surveys are not loaded.",
+                    "category": "Surveys",
+                    "description": "Checks the feature flags associated with this Survey to see if the survey can be rendered. This method is deprecated because it's synchronous and won't return the correct result if surveys are not loaded. Use `canRenderSurveyAsync` instead.",
                     "details": null,
                     "id": "canRenderSurvey",
                     "showDocs": true,
@@ -159,7 +85,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Surveys",
                     "description": "Checks the feature flags associated with this Survey to see if the survey can be rendered.",
                     "details": null,
                     "id": "canRenderSurveyAsync",
@@ -167,9 +93,9 @@
                     "title": "canRenderSurveyAsync",
                     "examples": [
                         {
-                            "id": "canrendersurveyasync",
-                            "name": "Generated example for canRenderSurveyAsync",
-                            "code": "// Generated example for canRenderSurveyAsync\nposthog.canRenderSurveyAsync();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.canRenderSurveyAsync(surveyId).then((result) => {\n    if (result.visible) {\n        // Survey can be rendered\n        console.log('Survey can be rendered')\n    } else {\n        // Survey cannot be rendered\n        console.log('Survey cannot be rendered:', result.disabledReason)\n    }\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -194,7 +120,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Captures an event with optional properties and configuration.",
                     "details": "You can capture arbitrary object-like values as events. [Learn about capture best practices](/docs/product-analytics/capture-events)",
                     "id": "capture",
@@ -204,7 +130,7 @@
                         {
                             "id": "basic_event_capture",
                             "name": "basic event capture",
-                            "code": "\n\n// basic event capture\nposthog.capture('cta-button-clicked', {\n    button_name: 'Get Started',\n    page: 'homepage'\n})\n\n\n\n"
+                            "code": "\n\n// basic event capture\nposthog.capture('cta-button-clicked', {\n    button_name: 'Get Started',\n    page: 'homepage'\n})\n\n\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -235,7 +161,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Error tracking",
                     "description": "Capture a caught exception manually",
                     "details": null,
                     "id": "captureException",
@@ -243,34 +169,39 @@
                     "title": "captureException",
                     "examples": [
                         {
-                            "id": "captureexception",
-                            "name": "Generated example for captureException",
-                            "code": "// Generated example for captureException\nposthog.captureException();"
+                            "id": "capture_a_caught_exception",
+                            "name": "Capture a caught exception",
+                            "code": "\n\n// Capture a caught exception\ntry {\n  // something that might throw\n} catch (error) {\n  posthog.captureException(error)\n}\n\n\n"
+                        },
+                        {
+                            "id": "with_additional_properties",
+                            "name": "With additional properties",
+                            "code": "\n\n// With additional properties\nposthog.captureException(error, {\n  customProperty: 'value',\n  anotherProperty: ['I', 'can be a list'],\n  ...\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The error to capture",
                             "isOptional": false,
                             "type": "unknown",
                             "name": "error"
                         },
                         {
-                            "description": "",
+                            "description": "Any additional properties to add to the error event",
                             "isOptional": true,
                             "type": "Properties",
                             "name": "additionalProperties"
                         }
                     ],
                     "returnType": {
-                        "id": "void",
-                        "name": "void"
+                        "id": "CaptureResult | undefined",
+                        "name": "CaptureResult | undefined"
                     },
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "LLM analytics",
                     "description": "Capture written user feedback for a LLM trace. Numeric values are converted to strings.",
                     "details": null,
                     "id": "captureTraceFeedback",
@@ -305,7 +236,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "LLM analytics",
                     "description": "Capture a metric for a LLM trace. Numeric values are converted to strings.",
                     "details": null,
                     "id": "captureTraceMetric",
@@ -346,7 +277,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Privacy",
                     "description": "Clear the user's opt in/out status of data capturing and cookies/localstorage for this PostHog instance",
                     "details": null,
                     "id": "clear_opt_in_out_capturing",
@@ -368,17 +299,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Creates a person profile for the current user, if they don't already have one and config.person_profiles is set to 'identified_only'. Produces a warning and does not create a profile if config.person_profiles is set to 'never'.",
+                    "category": "Identification",
+                    "description": "Creates a person profile for the current user, if they don't already have one and config.person_profiles is set to 'identified_only'. Produces a warning and does not create a profile if config.person_profiles is set to 'never'. Learn more about [person profiles](/docs/product-analytics/identify)",
                     "details": null,
                     "id": "createPersonProfile",
                     "showDocs": true,
                     "title": "createPersonProfile",
                     "examples": [
                         {
-                            "id": "createpersonprofile",
-                            "name": "Generated example for createPersonProfile",
-                            "code": "// Generated example for createPersonProfile\nposthog.createPersonProfile();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.createPersonProfile()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -390,7 +321,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Initialization",
                     "description": "Enables or disables debug mode for detailed logging.",
                     "details": "Debug mode logs all PostHog calls to the browser console for troubleshooting. Can also be enabled by adding `?__posthog_debug=true` to the URL.",
                     "id": "debug",
@@ -424,7 +355,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Identification",
                     "description": "Returns the current distinct ID for the user.",
                     "details": "This is either the auto-generated ID or the ID set via `identify()`. The distinct ID is used to associate events with users in PostHog.",
                     "id": "get_distinct_id",
@@ -451,7 +382,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Identification",
                     "description": "Returns the value of a super property. Returns undefined if the property doesn't exist.",
                     "details": "get_property() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically.",
                     "id": "get_property",
@@ -480,9 +411,9 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Returns the current session_id.\nNOTE: This should only be used for informative purposes. Any actual internal use case for the session_id should be handled by the sessionManager.",
-                    "details": null,
+                    "category": "Session replay",
+                    "description": "Returns the current session_id.",
+                    "details": "This should only be used for informative purposes. Any actual internal use case for the session_id should be handled by the sessionManager.",
                     "id": "get_session_id",
                     "showDocs": true,
                     "title": "get_session_id",
@@ -502,7 +433,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Session replay",
                     "description": "Returns the Replay url for the current session.",
                     "details": null,
                     "id": "get_session_replay_url",
@@ -510,9 +441,9 @@
                     "title": "get_session_replay_url",
                     "examples": [
                         {
-                            "id": "get_session_replay_url",
-                            "name": "Generated example for get_session_replay_url",
-                            "code": "// Generated example for get_session_replay_url\nposthog.get_session_replay_url();"
+                            "id": "basic_usage",
+                            "name": "basic usage",
+                            "code": "\n\n// basic usage\nposthog.get_session_replay_url()\n\n@example\n\njs // timestamp posthog.get_session_replay_url({ withTimestamp: true })\n\n\n@example\n\njs // timestamp and lookback posthog.get_session_replay_url({ withTimestamp: true, timestampLookBack: 30 // look back 30 seconds }) ```\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -531,29 +462,29 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Get surveys that should be enabled for the current user.",
+                    "category": "Surveys",
+                    "description": "Get surveys that should be enabled for the current user. See [fetching surveys documentation](/docs/surveys/implementing-custom-surveys#fetching-surveys-manually) for more details.",
                     "details": null,
                     "id": "getActiveMatchingSurveys",
                     "showDocs": true,
                     "title": "getActiveMatchingSurveys",
                     "examples": [
                         {
-                            "id": "getactivematchingsurveys",
-                            "name": "Generated example for getActiveMatchingSurveys",
-                            "code": "// Generated example for getActiveMatchingSurveys\nposthog.getActiveMatchingSurveys();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.getActiveMatchingSurveys((surveys) => {\n     // do something\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The callback function will be called when the surveys are loaded or updated.",
                             "isOptional": false,
                             "type": "SurveyCallback",
                             "name": "callback"
                         },
                         {
-                            "description": "",
+                            "description": "Whether to force a reload of the surveys.",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "forceReload"
@@ -566,35 +497,35 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Get the list of early access features. To check enrollment status, use `isFeatureEnabled`.",
+                    "category": "Feature flags",
+                    "description": "Get the list of early access features. To check enrollment status, use `isFeatureEnabled`. [Learn more in the docs](/docs/feature-flags/early-access-feature-management#option-2-custom-implementation)",
                     "details": null,
                     "id": "getEarlyAccessFeatures",
                     "showDocs": true,
                     "title": "getEarlyAccessFeatures",
                     "examples": [
                         {
-                            "id": "getearlyaccessfeatures",
-                            "name": "Generated example for getEarlyAccessFeatures",
-                            "code": "// Generated example for getEarlyAccessFeatures\nposthog.getEarlyAccessFeatures();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nconst posthog = usePostHog()\nconst activeFlags = useActiveFeatureFlags()\n\nconst [activeBetas, setActiveBetas] = useState([])\nconst [inactiveBetas, setInactiveBetas] = useState([])\nconst [comingSoonFeatures, setComingSoonFeatures] = useState([])\n\nuseEffect(() => {\n  posthog.getEarlyAccessFeatures((features) => {\n    // Filter features by stage\n    const betaFeatures = features.filter(feature => feature.stage === 'beta')\n    const conceptFeatures = features.filter(feature => feature.stage === 'concept')\n\n    setComingSoonFeatures(conceptFeatures)\n\n    if (!activeFlags || activeFlags.length === 0) {\n      setInactiveBetas(betaFeatures)\n      return\n    }\n\n    const activeBetas = betaFeatures.filter(\n            beta => activeFlags.includes(beta.flagKey)\n        );\n    const inactiveBetas = betaFeatures.filter(\n            beta => !activeFlags.includes(beta.flagKey)\n        );\n    setActiveBetas(activeBetas)\n    setInactiveBetas(inactiveBetas)\n  }, true, ['concept', 'beta'])\n}, [activeFlags])\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The callback function will be called when the early access features are loaded.",
                             "isOptional": false,
                             "type": "EarlyAccessFeatureCallback",
                             "name": "callback"
                         },
                         {
-                            "description": "",
+                            "description": "Whether to force a reload of the early access features.",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "force_reload"
                         },
                         {
-                            "description": "",
+                            "description": "The stages of the early access features to load.",
                             "isOptional": true,
                             "type": "EarlyAccessFeatureStage[]",
                             "name": "stages"
@@ -607,7 +538,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Feature flags",
                     "description": "Gets the value of a feature flag for the current user.",
                     "details": "Returns the feature flag value which can be a boolean, string, or undefined. Supports multivariate flags that can return custom string values.",
                     "id": "getFeatureFlag",
@@ -647,16 +578,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Feature flags",
+                    "description": "Get feature flag payload value matching key for user (supports multivariate flags).",
                     "details": null,
                     "id": "getFeatureFlagPayload",
                     "showDocs": true,
                     "title": "getFeatureFlagPayload",
                     "examples": [
                         {
-                            "id": "getfeatureflagpayload",
-                            "name": "Generated example for getFeatureFlagPayload",
-                            "code": "// Generated example for getFeatureFlagPayload\nposthog.getFeatureFlagPayload();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nif(posthog.getFeatureFlag('beta-feature') === 'some-value') {\n     const someValue = posthog.getFeatureFlagPayload('beta-feature')\n     // do something\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -675,7 +607,8 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Identification",
+                    "description": "Returns the current groups.",
                     "details": null,
                     "id": "getGroups",
                     "showDocs": true,
@@ -696,7 +629,8 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Initialization",
+                    "description": "Returns the current page view ID.",
                     "details": null,
                     "id": "getPageViewId",
                     "showDocs": true,
@@ -717,7 +651,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Identification",
                     "description": "Returns the value of the session super property named property_name. If no such property is set, getSessionProperty() will return the undefined value.",
                     "details": "This is based on browser-level `sessionStorage`, NOT the PostHog session. getSessionProperty() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically.",
                     "id": "getSessionProperty",
@@ -746,7 +680,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Surveys",
                     "description": "Get list of all surveys.",
                     "details": null,
                     "id": "getSurveys",
@@ -754,21 +688,21 @@
                     "title": "getSurveys",
                     "examples": [
                         {
-                            "id": "getsurveys",
-                            "name": "Generated example for getSurveys",
-                            "code": "// Generated example for getSurveys\nposthog.getSurveys();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nfunction callback(surveys, context) {\n  // do something\n}\n\nposthog.getSurveys(callback, false)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "Function that receives the array of surveys",
                             "isOptional": false,
                             "type": "SurveyCallback",
                             "name": "callback"
                         },
                         {
-                            "description": "",
+                            "description": "Optional boolean to force an API call for updated surveys",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "forceReload"
@@ -781,8 +715,8 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Associates the user with a group for group-based analytics.",
+                    "category": "Identification",
+                    "description": "Associates the user with a group for group-based analytics. Learn more about [groups](/docs/product-analytics/group-analytics)",
                     "details": "Groups allow you to analyze users collectively (e.g., by organization, team, or account). This sets the group association for all subsequent events and reloads feature flags.",
                     "id": "group",
                     "showDocs": true,
@@ -827,7 +761,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Privacy",
                     "description": "Checks if the user has opted into data capturing.",
                     "details": "Returns the current consent status for event tracking and data persistence.",
                     "id": "has_opted_in_capturing",
@@ -849,7 +783,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Privacy",
                     "description": "Checks if the user has opted out of data capturing.",
                     "details": "Returns the current consent status for event tracking and data persistence.",
                     "id": "has_opted_out_capturing",
@@ -871,9 +805,9 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Associates a user with a unique identifier instead of an auto-generated ID.",
-                    "details": "By default, PostHog assigns each user a randomly generated `distinct_id`. Use this method to replace that ID with your own unique identifier (like a user ID from your database).\n#### User Merging Behavior - If the user is already identified, calling identify again will **not** merge users - To merge identified users, use the `alias` method instead - Use `reset()` to start a fresh session before identifying a different user",
+                    "category": "Identification",
+                    "description": "Associates a user with a unique identifier instead of an auto-generated ID. Learn more about [identifying users](/docs/product-analytics/identify)",
+                    "details": "By default, PostHog assigns each user a randomly generated `distinct_id`. Use this method to replace that ID with your own unique identifier (like a user ID from your database).",
                     "id": "identify",
                     "showDocs": true,
                     "title": "identify",
@@ -968,7 +902,29 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Privacy",
+                    "description": "Checks whether the PostHog library is currently capturing events.\nUsually this means that the user has not opted out of capturing, but the exact behaviour can be controlled by some config options.\nAdditionally, if the cookieless_mode is set to 'on_reject', we will capture events in cookieless mode if the user has explicitly opted out.",
+                    "details": null,
+                    "id": "is_capturing",
+                    "showDocs": true,
+                    "title": "is_capturing",
+                    "examples": [
+                        {
+                            "id": "is_capturing",
+                            "name": "Generated example for is_capturing",
+                            "code": "// Generated example for is_capturing\nposthog.is_capturing();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "boolean",
+                        "name": "boolean"
+                    },
+                    "path": "lib/src/posthog-core.d.ts"
+                },
+                {
+                    "category": "Feature flags",
                     "description": "Checks if a feature flag is enabled for the current user.",
                     "details": "Returns true if the flag is enabled, false if disabled, or undefined if not found. This is a convenience method that treats any truthy value as enabled.",
                     "id": "isFeatureEnabled",
@@ -1008,8 +964,8 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "returns a boolean indicating whether the toolbar loaded",
+                    "category": "Toolbar",
+                    "description": "returns a boolean indicating whether the [toolbar](/docs/toolbar) loaded",
                     "details": null,
                     "id": "loadToolbar",
                     "showDocs": true,
@@ -1037,7 +993,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Exposes a set of events that PostHog will emit. e.g. `eventCaptured` is emitted immediately before trying to send an event\nUnlike `onFeatureFlags` and `onSessionId` these are not called when the listener is registered, the first callback will be the next event _after_ registering a listener",
                     "details": null,
                     "id": "on",
@@ -1045,21 +1001,21 @@
                     "title": "on",
                     "examples": [
                         {
-                            "id": "on",
-                            "name": "Generated example for on",
-                            "code": "// Generated example for on\nposthog.on();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.on('eventCaptured', (event) => {\n  console.log(event)\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The event to listen for.",
                             "isOptional": false,
                             "type": "'eventCaptured'",
                             "name": "event"
                         },
                         {
-                            "description": "",
+                            "description": "The callback function to call when the event is emitted.",
                             "isOptional": false,
                             "type": "(...args: any[]) => void",
                             "name": "cb"
@@ -1072,22 +1028,23 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Feature flags",
+                    "description": "Register an event listener that runs when feature flags become available or when they change. If there are flags, the listener is called immediately in addition to being called on future changes. Note that this is not called only when we fetch feature flags from the server, but also when they change in the browser.",
                     "details": null,
                     "id": "onFeatureFlags",
                     "showDocs": true,
                     "title": "onFeatureFlags",
                     "examples": [
                         {
-                            "id": "onfeatureflags",
-                            "name": "Generated example for onFeatureFlags",
-                            "code": "// Generated example for onFeatureFlags\nposthog.onFeatureFlags();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.onFeatureFlags(function(featureFlags, featureFlagsVariants, { errorsLoading }) {\n    // do something\n})\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The callback function will be called once the feature flags are ready or when they are updated. It'll return a list of feature flags enabled for the user, the variants, and also a context object indicating whether we succeeded to fetch the flags or not.",
                             "isOptional": false,
                             "type": "FeatureFlagsCallback",
                             "name": "callback"
@@ -1100,22 +1057,23 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Identification",
+                    "description": "Register an event listener that runs whenever the session id or window id change. If there is already a session id, the listener is called immediately in addition to being called on future changes.\nCan be used, for example, to sync the PostHog session id with a backend session.",
                     "details": null,
                     "id": "onSessionId",
                     "showDocs": true,
                     "title": "onSessionId",
                     "examples": [
                         {
-                            "id": "onsessionid",
-                            "name": "Generated example for onSessionId",
-                            "code": "// Generated example for onSessionId\nposthog.onSessionId();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.onSessionId(function(sessionId, windowId) { // do something })\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The callback function will be called once a session id is present or when it or the window id are updated.",
                             "isOptional": false,
                             "type": "SessionIdChangedCallback",
                             "name": "callback"
@@ -1128,22 +1086,23 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Surveys",
+                    "description": "Register an event listener that runs when surveys are loaded.\nCallback parameters: - surveys: Survey[]: An array containing all survey objects fetched from PostHog using the getSurveys method - context:  isLoaded: boolean, error?: string : An object indicating if the surveys were loaded successfully",
                     "details": null,
                     "id": "onSurveysLoaded",
                     "showDocs": true,
                     "title": "onSurveysLoaded",
                     "examples": [
                         {
-                            "id": "onsurveysloaded",
-                            "name": "Generated example for onSurveysLoaded",
-                            "code": "// Generated example for onSurveysLoaded\nposthog.onSurveysLoaded();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.onSurveysLoaded((surveys, context) => { // do something })\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The callback function will be called when surveys are loaded or updated.",
                             "isOptional": false,
                             "type": "SurveyCallback",
                             "name": "callback"
@@ -1156,7 +1115,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Privacy",
                     "description": "Opts the user into data capturing and persistence.",
                     "details": "Enables event tracking and data persistence (cookies/localStorage) for this PostHog instance. By default, captures an `$opt_in` event unless disabled.",
                     "id": "opt_in_capturing",
@@ -1195,7 +1154,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Privacy",
                     "description": "Opts the user out of data capturing and persistence.",
                     "details": "Disables event tracking and data persistence (cookies/localStorage) for this PostHog instance. If `opt_out_persistence_by_default` is true, SDK persistence will also be disabled.",
                     "id": "opt_out_capturing",
@@ -1218,16 +1177,16 @@
                 },
                 {
                     "category": "",
-                    "description": "push() keeps the standard async-array-push behavior around after the lib is loaded. This is only useful for external integrations that do not wish to rely on our convenience methods (created in the snippet).\n### Usage: posthog.push(['register',  a: 'b' ]);",
+                    "description": "push() keeps the standard async-array-push behavior around after the lib is loaded. This is only useful for external integrations that do not wish to rely on our convenience methods (created in the snippet).",
                     "details": null,
                     "id": "push",
                     "showDocs": true,
                     "title": "push",
                     "examples": [
                         {
-                            "id": "push",
-                            "name": "Generated example for push",
-                            "code": "// Generated example for push\nposthog.push();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.push(['register', { a: 'b' }]);\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1246,7 +1205,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Registers super properties for the current session only.",
                     "details": "Session super properties are automatically added to all events during the current browser session. Unlike regular super properties, these are cleared when the session ends and are stored in sessionStorage.",
                     "id": "register_for_session",
@@ -1280,7 +1239,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Registers super properties only if they haven't been set before.",
                     "details": "Unlike `register()`, this method will not overwrite existing super properties. Use this for properties that should only be set once, like signup date or initial referrer.",
                     "id": "register_once",
@@ -1326,7 +1285,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Registers super properties that are included with all events.",
                     "details": "Super properties are stored in persistence and automatically added to every event you capture. These values will overwrite any existing super properties with the same keys.",
                     "id": "register",
@@ -1336,7 +1295,7 @@
                         {
                             "id": "register_a_single_property",
                             "name": "register a single property",
-                            "code": "\n\n// register a single property\nposthog.register({ plan: 'premium' })\n\n\n"
+                            "code": "\n\n// register a single property\nposthog.register({ plan: 'premium' })\n\n\n\n\n"
                         },
                         {
                             "id": "register_multiple_properties",
@@ -1371,16 +1330,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Feature flags",
+                    "description": "Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call this method.",
                     "details": null,
                     "id": "reloadFeatureFlags",
                     "showDocs": true,
                     "title": "reloadFeatureFlags",
                     "examples": [
                         {
-                            "id": "reloadfeatureflags",
-                            "name": "Generated example for reloadFeatureFlags",
-                            "code": "// Generated example for reloadFeatureFlags\nposthog.reloadFeatureFlags();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.reloadFeatureFlags()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1392,29 +1352,29 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Render a survey on a specific element.",
+                    "category": "Surveys",
+                    "description": "Although we recommend using popover surveys and display conditions, if you want to show surveys programmatically without setting up all the extra logic needed for API surveys, you can render surveys programmatically with the renderSurvey method.\nThis takes a survey ID and an HTML selector to render an unstyled survey.",
                     "details": null,
                     "id": "renderSurvey",
                     "showDocs": true,
                     "title": "renderSurvey",
                     "examples": [
                         {
-                            "id": "rendersurvey",
-                            "name": "Generated example for renderSurvey",
-                            "code": "// Generated example for renderSurvey\nposthog.renderSurvey();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.renderSurvey(coolSurveyID, '#survey-container')\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The ID of the survey to render.",
                             "isOptional": false,
                             "type": "string",
                             "name": "surveyId"
                         },
                         {
-                            "description": "",
+                            "description": "The selector of the HTML element to render the survey on.",
                             "isOptional": false,
                             "type": "string",
                             "name": "selector"
@@ -1427,9 +1387,9 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Resets all user data and starts a fresh session.",
-                    "details": "⚠️ **Warning**: Only call this when a user logs out. Calling at the wrong time can cause split sessions.\nThis clears: - Session ID and super properties - User identification (sets new random distinct_id) - Cached data and consent settings",
+                    "category": "Identification",
+                    "description": "Resets all user data and starts a fresh session.\n⚠️ **Warning**: Only call this when a user logs out. Calling at the wrong time can cause split sessions.\nThis clears: - Session ID and super properties - User identification (sets new random distinct_id) - Cached data and consent settings",
+                    "details": null,
                     "id": "reset",
                     "showDocs": true,
                     "title": "reset",
@@ -1461,16 +1421,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Feature flags",
+                    "description": "Resets the group properties for feature flags.",
                     "details": null,
                     "id": "resetGroupPropertiesForFlags",
                     "showDocs": true,
                     "title": "resetGroupPropertiesForFlags",
                     "examples": [
                         {
-                            "id": "resetgrouppropertiesforflags",
-                            "name": "Generated example for resetGroupPropertiesForFlags",
-                            "code": "// Generated example for resetGroupPropertiesForFlags\nposthog.resetGroupPropertiesForFlags();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.resetGroupPropertiesForFlags()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1489,17 +1450,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Resets only the group properties of the user currently logged in.",
+                    "category": "Identification",
+                    "description": "Resets only the group properties of the user currently logged in. Learn more about [groups](/docs/product-analytics/group-analytics)",
                     "details": null,
                     "id": "resetGroups",
                     "showDocs": true,
                     "title": "resetGroups",
                     "examples": [
                         {
-                            "id": "resetgroups",
-                            "name": "Generated example for resetGroups",
-                            "code": "// Generated example for resetGroups\nposthog.resetGroups();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.resetGroups()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1511,16 +1472,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Feature flags",
+                    "description": "Resets the person properties for feature flags.",
                     "details": null,
                     "id": "resetPersonPropertiesForFlags",
                     "showDocs": true,
                     "title": "resetPersonPropertiesForFlags",
                     "examples": [
                         {
-                            "id": "resetpersonpropertiesforflags",
-                            "name": "Generated example for resetPersonPropertiesForFlags",
-                            "code": "// Generated example for resetPersonPropertiesForFlags\nposthog.resetPersonPropertiesForFlags();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.resetPersonPropertiesForFlags()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1532,7 +1494,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Session replay",
                     "description": "returns a boolean indicating whether session recording is currently running",
                     "details": null,
                     "id": "sessionRecordingStarted",
@@ -1540,9 +1502,9 @@
                     "title": "sessionRecordingStarted",
                     "examples": [
                         {
-                            "id": "sessionrecordingstarted",
-                            "name": "Generated example for sessionRecordingStarted",
-                            "code": "// Generated example for sessionRecordingStarted\nposthog.sessionRecordingStarted();"
+                            "id": "stop_session_recording_if_it's_running",
+                            "name": "Stop session recording if it's running",
+                            "code": "\n\n// Stop session recording if it's running\nif (posthog.sessionRecordingStarted()) {\n  posthog.stopSessionRecording()\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1554,7 +1516,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Initialization",
                     "description": "Updates the configuration of the PostHog instance.",
                     "details": null,
                     "id": "set_config",
@@ -1583,29 +1545,34 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Set override group properties for feature flags. This is used when dealing with new groups / where you don't want to wait for ingestion to update properties. Takes in an object, the key of which is the group type. For example: setGroupPropertiesForFlags('organization':  name: 'CYZ', employees: '11'  )",
+                    "category": "Feature flags",
+                    "description": "Set override group properties for feature flags. This is used when dealing with new groups / where you don't want to wait for ingestion to update properties. Takes in an object, the key of which is the group type.",
                     "details": null,
                     "id": "setGroupPropertiesForFlags",
                     "showDocs": true,
                     "title": "setGroupPropertiesForFlags",
                     "examples": [
                         {
-                            "id": "setgrouppropertiesforflags",
-                            "name": "Generated example for setGroupPropertiesForFlags",
-                            "code": "// Generated example for setGroupPropertiesForFlags\nposthog.setGroupPropertiesForFlags();"
+                            "id": "set_properties_with_reload",
+                            "name": "Set properties with reload",
+                            "code": "\n\n// Set properties with reload\nposthog.setGroupPropertiesForFlags({'organization': { name: 'CYZ', employees: '11' } })\n\n\n"
+                        },
+                        {
+                            "id": "set_properties_without_reload",
+                            "name": "Set properties without reload",
+                            "code": "\n\n// Set properties without reload\nposthog.setGroupPropertiesForFlags({'organization': { name: 'CYZ', employees: '11' } }, false)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The properties to override, the key of which is the group type.",
                             "isOptional": false,
                             "type": "{\n        [type: string]: Properties;\n    }",
                             "name": "properties"
                         },
                         {
-                            "description": "",
+                            "description": "Whether to reload feature flags.",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "reloadFeatureFlags"
@@ -1618,8 +1585,8 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Sets properties on the person profile associated with the current `distinct_id`.",
+                    "category": "Identification",
+                    "description": "Sets properties on the person profile associated with the current `distinct_id`. Learn more about [identifying users](/docs/product-analytics/identify)",
                     "details": "Updates user properties that are stored with the person profile in PostHog. If `person_profiles` is set to `identified_only` and no profile exists, this will create one.",
                     "id": "setPersonProperties",
                     "showDocs": true,
@@ -1658,29 +1625,34 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Set override person properties for feature flags. This is used when dealing with new persons / where you don't want to wait for ingestion to update user properties.",
+                    "category": "Feature flags",
+                    "description": "Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls:",
                     "details": null,
                     "id": "setPersonPropertiesForFlags",
                     "showDocs": true,
                     "title": "setPersonPropertiesForFlags",
                     "examples": [
                         {
-                            "id": "setpersonpropertiesforflags",
-                            "name": "Generated example for setPersonPropertiesForFlags",
-                            "code": "// Generated example for setPersonPropertiesForFlags\nposthog.setPersonPropertiesForFlags();"
+                            "id": "set_properties",
+                            "name": "Set properties",
+                            "code": "\n\n// Set properties\nposthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})\n\n\n"
+                        },
+                        {
+                            "id": "set_properties_without_reloading",
+                            "name": "Set properties without reloading",
+                            "code": "\n\n// Set properties without reloading\nposthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'}, false)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The properties to override.",
                             "isOptional": false,
                             "type": "Properties",
                             "name": "properties"
                         },
                         {
-                            "description": "",
+                            "description": "Whether to reload feature flags.",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "reloadFeatureFlags"
@@ -1693,7 +1665,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Session replay",
                     "description": "turns session recording on, and updates the config option `disable_session_recording` to false",
                     "details": null,
                     "id": "startSessionRecording",
@@ -1701,9 +1673,14 @@
                     "title": "startSessionRecording",
                     "examples": [
                         {
-                            "id": "startsessionrecording",
-                            "name": "Generated example for startSessionRecording",
-                            "code": "// Generated example for startSessionRecording\nposthog.startSessionRecording();"
+                            "id": "start_and_ignore_controls",
+                            "name": "Start and ignore controls",
+                            "code": "\n\n// Start and ignore controls\nposthog.startSessionRecording(true)\n\n\n"
+                        },
+                        {
+                            "id": "start_and_override_controls",
+                            "name": "Start and override controls",
+                            "code": "\n\n// Start and override controls\nposthog.startSessionRecording({\n  // you don't have to send all of these\n  sampling: true || false,\n  linked_flag: true || false,\n  url_trigger: true || false,\n  event_trigger: true || false\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1722,7 +1699,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Session replay",
                     "description": "turns session recording off, and updates the config option disable_session_recording to true",
                     "details": null,
                     "id": "stopSessionRecording",
@@ -1730,9 +1707,9 @@
                     "title": "stopSessionRecording",
                     "examples": [
                         {
-                            "id": "stopsessionrecording",
-                            "name": "Generated example for stopSessionRecording",
-                            "code": "// Generated example for stopSessionRecording\nposthog.stopSessionRecording();"
+                            "id": "stop_session_recording",
+                            "name": "Stop session recording",
+                            "code": "\n\n// Stop session recording\nposthog.stopSessionRecording()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1744,28 +1721,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "details": null,
-                    "id": "toString",
-                    "showDocs": true,
-                    "title": "toString",
-                    "examples": [
-                        {
-                            "id": "tostring",
-                            "name": "Generated example for toString",
-                            "code": "// Generated example for toString\nposthog.toString();"
-                        }
-                    ],
-                    "releaseTag": "public",
-                    "params": [],
-                    "returnType": {
-                        "id": "string",
-                        "name": "string"
-                    },
-                    "path": "lib/src/posthog-core.d.ts"
-                },
-                {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Removes a session super property from the current session.",
                     "details": "This will stop the property from being automatically included in future events for this session. The property is removed from sessionStorage.",
                     "id": "unregister_for_session",
@@ -1794,7 +1750,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Capture",
                     "description": "Removes a super property from persistent storage.",
                     "details": "This will stop the property from being automatically included in future events. The property will be permanently removed from the user's profile.",
                     "id": "unregister",
@@ -1823,32 +1779,38 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
-                    "description": "Opt the user in or out of an early access feature.",
+                    "category": "Feature flags",
+                    "description": "Opt the user in or out of an early access feature. [Learn more in the docs](/docs/feature-flags/early-access-feature-management#option-2-custom-implementation)",
                     "details": null,
                     "id": "updateEarlyAccessFeatureEnrollment",
                     "showDocs": true,
                     "title": "updateEarlyAccessFeatureEnrollment",
                     "examples": [
                         {
-                            "id": "updateearlyaccessfeatureenrollment",
-                            "name": "Generated example for updateEarlyAccessFeatureEnrollment",
-                            "code": "// Generated example for updateEarlyAccessFeatureEnrollment\nposthog.updateEarlyAccessFeatureEnrollment();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nconst toggleBeta = (betaKey) => {\n  if (activeBetas.some(\n    beta => beta.flagKey === betaKey\n  )) {\n    posthog.updateEarlyAccessFeatureEnrollment(\n      betaKey,\n      false\n    )\n    setActiveBetas(\n      prevActiveBetas => prevActiveBetas.filter(\n        item => item.flagKey !== betaKey\n      )\n    );\n    return\n  }\n\n  posthog.updateEarlyAccessFeatureEnrollment(\n    betaKey,\n    true\n  )\n  setInactiveBetas(\n    prevInactiveBetas => prevInactiveBetas.filter(\n      item => item.flagKey !== betaKey\n    )\n  );\n}\n\nconst registerInterest = (featureKey) => {\n  posthog.updateEarlyAccessFeatureEnrollment(\n    featureKey,\n    true\n  )\n  // Update UI to show user has registered\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "",
+                            "description": "The key of the feature flag to update.",
                             "isOptional": false,
                             "type": "string",
                             "name": "key"
                         },
                         {
-                            "description": "",
+                            "description": "Whether the user is enrolled in the feature.",
                             "isOptional": false,
                             "type": "boolean",
                             "name": "isEnrolled"
+                        },
+                        {
+                            "description": "The stage of the feature flag to update.",
+                            "isOptional": true,
+                            "type": "string",
+                            "name": "stage"
                         }
                     ],
                     "returnType": {
@@ -2250,6 +2212,11 @@
                     "description": "ADVANCED: alters the refill rate for the token bucket mutation throttling Normally only altered alongside posthog support guidance. Accepts values between 0 and 100\n1",
                     "type": "number",
                     "name": "__exceptionRateLimiterRefillRate"
+                },
+                {
+                    "description": "Decide whether exceptions thrown by browser extensions should be captured\nfalse",
+                    "type": "boolean",
+                    "name": "captureExtensionExceptions"
                 }
             ],
             "path": "lib/src/types.d.ts"
@@ -2420,7 +2387,7 @@
             "name": "JsonType",
             "properties": [],
             "path": "lib/src/types.d.ts",
-            "example": "string | number | boolean | ..."
+            "example": "string | number | boolean | null | undefined | JsonRecord | Array<JsonType>"
         },
         {
             "id": "KnownEventName",
@@ -2560,14 +2527,9 @@
             "name": "PostHogConfig",
             "properties": [
                 {
-                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Whether to wrap fetch and add tracing headers to the request",
-                    "type": "boolean",
+                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION A list of hostnames for which to inject PostHog tracing headers to all requests (X-POSTHOG-DISTINCT-ID, X-POSTHOG-SESSION-ID, X-POSTHOG-WINDOW-ID)",
+                    "type": "string[]",
                     "name": "__add_tracing_headers"
-                },
-                {
-                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Whether to send a sentinel value for distinct id, device id, and session id, which will be replaced server-side by a cookieless hash",
-                    "type": "boolean",
-                    "name": "__preview_experimental_cookieless_mode"
                 },
                 {
                     "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Whether to use the new /flags/ endpoint",
@@ -2608,6 +2570,11 @@
                     "description": "Determines whether PostHog should disable toolbar metrics. This is our internal instrumentation for our toolbar in your website.\nfalse",
                     "type": "boolean",
                     "name": "advanced_disable_toolbar_metrics"
+                },
+                {
+                    "description": "When this is enabled, surveys will always be initialized, regardless of the /flags response or remote config settings. This is useful if you want to use surveys but disable all other flag-dependent functionality. Used internally for displaying external surveys without making a /flags request.\nfalse",
+                    "type": "boolean",
+                    "name": "advanced_enable_surveys"
                 },
                 {
                     "description": "Determines whether PostHog should only evaluate feature flags for surveys. Useful for when you want to use this library to evaluate feature flags for surveys only but you have additional feature flags that you evaluate on the server side.\nfalse",
@@ -2675,6 +2642,11 @@
                     "name": "capture_performance"
                 },
                 {
+                    "description": "Determines the key for the cookie / local storage used to store the information about whether users are opted in/out of capturing. When `null`, we used a key based on your token.\nnull",
+                    "type": "string | null",
+                    "name": "consent_persistence_name"
+                },
+                {
                     "description": "Determines the number of days to store cookies for.\n365",
                     "type": "number",
                     "name": "cookie_expiration"
@@ -2683,6 +2655,11 @@
                     "description": "",
                     "type": "string",
                     "name": "cookie_name"
+                },
+                {
+                    "description": "Enables cookieless mode. In this mode, PostHog will not set any cookies, or use session or local storage. User identity is handled by generating a privacy-preserving hash on PostHog's servers. - 'always' - enable cookieless mode immediately on startup, use this if you do not intend to show a cookie banner - 'on_reject' - enable cookieless mode only if the user rejects cookies, use this if you want to show a cookie banner. If the user accepts cookies, cookieless mode will not be used, and PostHog will use cookies and local storage as usual.\nNote that you MUST enable cookieless mode in your PostHog project's settings, otherwise all your cookieless events will be ignored. We plan to remove this requirement in the future.",
+                    "type": "'always' | 'on_reject'",
+                    "name": "cookieless_mode"
                 },
                 {
                     "description": "Determines if cookie should be set on the top level domain (example.com). If PostHog-js is loaded on a subdomain (test.example.com), and `cross_subdomain_cookie` is set to false, it'll set the cookie on the subdomain only (test.example.com).\nNOTE: It will be set to `false` if we detect that the domain is a subdomain of a platform that is excluded from cross-subdomain cookie setting. The current list of excluded platforms is `herokuapp.com`, `vercel.app`, and `netlify.app`.",
@@ -2700,7 +2677,7 @@
                     "name": "custom_campaign_params"
                 },
                 {
-                    "description": "Custom list of personal data properties to mask.\n[]",
+                    "description": "Custom list of personal data properties to mask.\nE.g. if you added `email` to this list, then any `email` property in the URL will be masked. https://www.example.com/login?email=john.doe%40example.com = https://www.example.com/login?email=\n[]",
                     "type": "string[]",
                     "name": "custom_personal_data_properties"
                 },
@@ -2824,7 +2801,7 @@
                     "name": "mask_all_text"
                 },
                 {
-                    "description": "Prevent autocapture from capturing personal data properties. These include campaign parameters, UTM parameters, and other parameters that could be considered personal data under e.g. GDPR.\nfalse",
+                    "description": "Mask personal data properties from the current URL. This will mask personal data properties such as advertising IDs (gclid, fbclid, etc.), and you can also add custom properties to mask with `custom_personal_data_properties`.   false",
                     "type": "boolean",
                     "name": "mask_personal_data_properties"
                 },
@@ -2854,7 +2831,7 @@
                     "name": "opt_out_capturing_by_default"
                 },
                 {
-                    "description": "Determines the prefix for the cookie used to store the information about whether users are opted out of capturing. When `null`, it falls back to the default prefix found in `consent.ts`.\nnull",
+                    "description": "",
                     "type": "string | null",
                     "name": "opt_out_capturing_cookie_prefix"
                 },
@@ -3136,7 +3113,7 @@
                 },
                 {
                     "description": "Error tracking configuration options",
-                    "type": "{\n        autocaptureExceptions?: boolean;\n        suppressionRules?: ErrorTrackingSuppressionRule[];\n    }",
+                    "type": "{\n        autocaptureExceptions?: boolean;\n        captureExtensionExceptions?: boolean;\n        suppressionRules?: ErrorTrackingSuppressionRule[];\n    }",
                     "name": "errorTracking"
                 },
                 {
@@ -3496,7 +3473,7 @@
                     "name": "appearance"
                 },
                 {
-                    "type": "{\n        url?: string;\n        selector?: string;\n        seenSurveyWaitPeriodInDays?: number;\n        urlMatchType?: PropertyMatchType;\n        events: {\n            repeatedActivation?: boolean;\n            values: {\n                name: string;\n            }[];\n        } | null;\n        actions: {\n            values: SurveyActionType[];\n        } | null;\n        deviceTypes?: string[];\n        deviceTypesMatchType?: PropertyMatchType;\n    } | null",
+                    "type": "{\n        url?: string;\n        selector?: string;\n        seenSurveyWaitPeriodInDays?: number;\n        urlMatchType?: PropertyMatchType;\n        events: {\n            repeatedActivation?: boolean;\n            values: {\n                name: string;\n            }[];\n        } | null;\n        actions: {\n            values: SurveyActionType[];\n        } | null;\n        deviceTypes?: string[];\n        deviceTypesMatchType?: PropertyMatchType;\n        linkedFlagVariant?: string;\n    } | null",
                     "name": "conditions"
                 },
                 {
@@ -3884,7 +3861,7 @@
             "name": "SurveyQuestion",
             "properties": [],
             "path": "lib/src/posthog-surveys-types.d.ts",
-            "example": "BasicSurveyQuestion | LinkSurveyQuestion | RatingSurveyQuestion | ..."
+            "example": "BasicSurveyQuestion | LinkSurveyQuestion | RatingSurveyQuestion | MultipleSurveyQuestion"
         },
         {
             "id": "SurveyQuestionBranchingType",
@@ -3984,6 +3961,10 @@
                 {
                     "type": "\"api\"",
                     "name": "API"
+                },
+                {
+                    "type": "\"external_survey\"",
+                    "name": "ExternalSurvey"
                 },
                 {
                     "type": "\"popover\"",
@@ -4094,5 +4075,17 @@
             "path": "lib/src/types.d.ts",
             "example": "\"toolbar\""
         }
+    ],
+    "categories": [
+        "Initialization",
+        "Identification",
+        "Capture",
+        "Surveys",
+        "Error tracking",
+        "LLM analytics",
+        "Privacy",
+        "Session replay",
+        "Feature flags",
+        "Toolbar"
     ]
 }

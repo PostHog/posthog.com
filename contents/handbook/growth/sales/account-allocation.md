@@ -25,7 +25,7 @@ We track the count of these products in Vitally using the `Total paid product co
 
 ### Doing the allocation
 
-It's Simon's job, with input from Dana and Charles, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs.  We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in.  Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer.  Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Dana and Charles, to review the list of <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3">$20K accounts without an owner</PrivateLink>, as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -85,7 +85,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 
 #### Data warehouse
 
-- They have connected up the sources the need to.
+- They have connected up the sources they need to.
 - They are aware of the difference between incremental and full sync and the impact on billing.
 - We've conducted training on using SQL in PostHog, creating views and joining on person data.
 

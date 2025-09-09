@@ -50,7 +50,7 @@ Over time, for larger PostHog users with over 10 million visitors, some simple q
 
 We narrowed this down to one particular JOIN in our system:
 
-```sql
+```sql runInPostHog=false
 JOIN (
     SELECT distinct_id, argMax(person_id, _timestamp) as person_id
     FROM (
@@ -85,7 +85,7 @@ However, in practice, this query was slow and used up too much memory, due to ne
 
 After noticing the problem, we realized we didn't need to actually emit rows with `is_deleted=0` to behave correctly, and could move to an alternative schema, which can be queried as follows:
 
-```sql
+```sql runInPostHog=false
 JOIN (
     SELECT distinct_id, argMax(person_id, version) as person_id
     FROM person_distinct_id2
@@ -116,7 +116,7 @@ PostHog uses a [ClickHouse MergeTree](https://clickhouse.com/docs/en/engines/tab
 
 Our `ORDER BY` clause originally looked something like this:
 
-```sql
+```sql runInPostHog=false
 ORDER BY (
     project_id,
     toDate(timestamp),
@@ -127,7 +127,7 @@ ORDER BY (
 
 With that in mind, let’s consider this simplified query counting the number of users who had pageviews within a given time range:
 
-```sql
+```sql runInPostHog=false
 SELECT count(DISTINCT person_id)
 FROM events
 WHERE project_id = 2
@@ -140,7 +140,7 @@ When executing this query, ClickHouse can leverage data being sorted and the spa
 
 However, almost all of our most time-sensitive queries in PostHog also filter by event type. After measuring and confirming this, we updated the `ORDER BY` clause to the following one:
 
-```sql
+```sql runInPostHog=false
 ORDER BY (
     project_id,
     toDate(timestamp),

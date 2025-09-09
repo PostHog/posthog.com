@@ -3513,21 +3513,27 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@posthog/hedgehog-mode@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.28.tgz#0e8b3e5b2f187c8e3f90044a01595cf1668e1248"
-  integrity sha512-n99eMB5R6RukI9kVb/xH6nsSNuxop4m9YIe/t7nnRw+JF3RcPEnMBEC+SWQR2nx2pDDqc1cRCm2OkeB2CKT8Fw==
+"@posthog/core@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@posthog/core/-/core-1.0.2.tgz#8e6125d271348f646f51269c0b7b9bbf6549f984"
+  integrity sha512-hWk3rUtJl2crQK0WNmwg13n82hnTwB99BT99/XI5gZSvIlYZ1TPmMZE8H2dhJJ98J/rm9vYJ/UXNzw3RV5HTpQ==
+
+"@posthog/hedgehog-mode@^0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@posthog/hedgehog-mode/-/hedgehog-mode-0.0.41.tgz#41afd5dbafe68823200929499fef5fef8f9fce9f"
+  integrity sha512-lNF8sLYOROOHyzAKuA9Kb+oZXtvK2XAUJTJ+0Fk2eQiJZMbEiiO/bRsYDVrc+cRVR7D4MF4MfrOnhfG/TaVpMQ==
   dependencies:
     gsap "^3.12.7"
     lodash "^4.17.21"
     matter-js "^0.20.0"
     pixi.js "^8.4.0"
     react-shadow "^20.6.0"
+    uuid "^12.0.0"
 
-"@posthog/icons@0.22.0":
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.22.0.tgz#9a8edfe22868f7f1e6b58dcf4123686c48a5b0c2"
-  integrity sha512-HOLBtbUatf2ulHDsOWx7SjlCw91ETM95qV/9dCy5BwyUbc7CnA0JaDMW89XT0WbUCL8vTYRucZz7qwlphzeh3g==
+"@posthog/icons@0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.29.0.tgz#7263540d12169271bfe02293c402d94a7bd910c8"
+  integrity sha512-d0M8EsPPGWt6Kcw/TaD2Um9KD1ogAf3I5I9WmWWfcMcRJ3kViPP+NYTHzfm7tghuaXbGaaeSmPGAQhGM7A5E1A==
 
 "@preact/signals-core@^1.2.3":
   version "1.8.0"
@@ -20676,11 +20682,12 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.258.1:
-  version "1.258.1"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.258.1.tgz#9e4876ce9f899b13f624ecf3350253b8d097a663"
-  integrity sha512-xywALQKdXP/GN+99Z8+ROFd9Q9CtUhsqxHWEw8Lk8oAyCgHlLYCyyYHy2Heh+0nvyDdjr5njLOYOs0m04BQ70A==
+posthog-js@1.262.0:
+  version "1.262.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.262.0.tgz#41c0bc5bb9eb2a328f57501810bca765b9238cb2"
+  integrity sha512-RPbm+0qLVsgKQEN3KjfYAK+0qOwBPT28RHDg4WIstN8/z2m6PczMqSirOIXSqbvDwSCQQQRPTKS6fSurevqJMA==
   dependencies:
+    "@posthog/core" "1.0.2"
     core-js "^3.38.1"
     fflate "^0.4.8"
     preact "^10.19.3"
@@ -25727,6 +25734,11 @@ uuid-browser@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid-browser/-/uuid-browser-3.1.0.tgz#0f05a40aef74f9e5951e20efbf44b11871e56410"
   integrity sha512-dsNgbLaTrd6l3MMxTtouOCFw4CBFc/3a+GgYA2YyrJvyQ1u6q4pcu3ktLoUZ/VN/Aw9WsauazbgsgdfVWgAKQg==
+
+uuid@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-12.0.0.tgz#114e150a140571af7b188c5c2a8d8493755fb587"
+  integrity sha512-USe1zesMYh4fjCA8ZH5+X5WIVD0J4V1Jksm1bFTVBX2F/cwSXt0RO5w/3UXbdLKmZX65MiWV+hwhSS8p6oBTGA==
 
 uuid@^3.3.2:
   version "3.4.0"

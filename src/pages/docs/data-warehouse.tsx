@@ -24,21 +24,21 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
-                        title="How to set up Stripe reports"
-                        description="Connect your revenue data from Stripe to PostHog"
-                        url="/tutorials/stripe-reports"
+                        title="How we use PostHog's built-in data warehouse"
+                        description="How we track revenue, churn, sales, support, and more."
+                        url="/blog/data-warehouse-at-posthog"
                     />
                     <ResourceItem
                         type="Guide"
-                        title="How to set up Hubspot reports"
-                        description="Connect your sales data from Hubspot to PostHog"
-                        url="/tutorials/hubspot-reports"
+                        title="How we found our activation metric (and how you can too)"
+                        description="The real process (and queries) we used to find our activation metric."
+                        url="/product-engineers/activation-metrics"
                     />
                     <ResourceItem
                         type="Guide"
-                        title="The power of SQL's sum() aggregation"
-                        description="Unlock a new level of aggregation customization"
-                        url="/tutorials/hogql-sum-aggregation"
+                        title="The basics of SQL for analytics"
+                        description="No idea where to start with SQL? We've got you covered."
+                        url="/product-engineers/sql-for-analytics"
                     />
                 </ul>
             </section>
@@ -56,8 +56,8 @@ const DataWarehouse: React.FC = () => {
                     subheader="Getting started"
                     title="Data warehouse"
                     description="A single source for all your important data."
-                    buttonText="Link your first source"
-                    buttonLink="/docs/cdp/sources"
+                    buttonText="Installation guide"
+                    buttonLink="/docs/data-warehouse/start-here"
                     imageColumnClasses="mt-4 md:-mt-8"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                     imageClasses="max-h-48 md:max-h-64"
@@ -71,7 +71,7 @@ const DataWarehouse: React.FC = () => {
                     ]}
                 />
                 <Content />
-                <CallToAction to="/docs/data-warehouse/query" width="full">
+                <CallToAction to="/docs/data-warehouse/start-here" width="full">
                     Visit the manual
                 </CallToAction>
             </PostLayout>

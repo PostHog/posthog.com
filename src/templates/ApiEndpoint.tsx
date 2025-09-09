@@ -28,6 +28,16 @@ const mapVerbsColor = {
     delete: 'red',
 }
 
+// Divider component for visual separation
+const Divider = ({ className = '' }) => (
+    <hr className={`border-0 border-t border-gray-accent-light dark:border-gray-accent-dark my-6 ${className}`} />
+)
+
+// Section divider with more spacing for major sections
+const SectionDivider = ({ className = '' }) => (
+    <hr className={`border-0 border-t-2 border-gray-accent-light dark:border-gray-accent-dark my-8 ${className}`} />
+)
+
 function Endpoints({ paths }) {
     const urlItems = []
     Object.entries(paths).map(([path, value]) => Object.keys(value).map((verb) => urlItems.push(pathID(verb, path))))
@@ -159,7 +169,10 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li key={index} className="py-1  first:border-0">
+                    <li
+                        key={index}
+                        className="py-3 border-b border-gray-accent-light dark:border-gray-accent-dark first:border-0 last:border-0"
+                    >
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
@@ -203,7 +216,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                                         xmlns="http://www.w3.org/2000/svg"
                                                     >
                                                         <title>Click to open</title>
-                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
+                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.80 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
                                                     </svg>
                                                 </div>
                                             </>
@@ -279,6 +292,7 @@ function Parameters({ item, objects }) {
                 <div>
                     <h4>Path parameters</h4>
                     <Params params={pathParams} objects={objects} />
+                    {queryParams?.length > 0 && <Divider />}
                 </div>
             )}
             {queryParams?.length > 0 && (
@@ -313,7 +327,7 @@ function Security({ item }) {
 function RequestBody({ item, objects }) {
     const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
-        item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
+        item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
 
@@ -352,17 +366,20 @@ function ResponseBody({ item, objects }) {
                 </button>
                 <br />
                 {showResponse && (
-                    <Params
-                        params={Object.entries(object.properties)
-                            .map(([name, schema]) => {
-                                return {
-                                    name,
-                                    schema,
-                                }
-                            })
-                            .filter((item) => !item.schema.readOnly)}
-                        objects={objects}
-                    />
+                    <>
+                        <Divider className="my-4" />
+                        <Params
+                            params={Object.entries(object.properties)
+                                .map(([name, schema]) => {
+                                    return {
+                                        name,
+                                        schema,
+                                    }
+                                })
+                                .filter((item) => !item.schema.readOnly)}
+                            objects={objects}
+                        />
+                    </>
                 )}
             </div>
         </>
@@ -620,23 +637,29 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 </blockquote>
 
                 {overviewNode?.body && (
-                    <div className="article-content mt-6">
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{overviewNode.body}</MDXRenderer>
-                        </MDXProvider>
-                    </div>
+                    <>
+                        <div className="article-content mt-6">
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                            </MDXProvider>
+                        </div>
+                        <SectionDivider />
+                    </>
                 )}
 
                 <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
+                <Divider />
+
                 <Endpoints paths={paths} />
 
-                {items.map((item) => {
+                {items.map((item, index) => {
                     item = item.operationSpec
                     const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
                     return (
-                        <div className="mt-8" key={item.operationId}>
+                        <div key={item.operationId}>
+                            {index > 0 && <SectionDivider />}
                             <div
                                 className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
                                 id={pathID(item.httpVerb, item.pathName)}
@@ -644,62 +667,77 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 <div className="space-y-6">
                                     <h2>{generateName(item)}</h2>
                                     {mdxNode?.body && (
-                                        <div className="article-content">
-                                            <MDXProvider components={components}>
-                                                <MDXRenderer>{mdxNode.body}</MDXRenderer>
-                                            </MDXProvider>
-                                        </div>
+                                        <>
+                                            <div className="article-content">
+                                                <MDXProvider components={components}>
+                                                    <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                                </MDXProvider>
+                                            </div>
+                                            <Divider />
+                                        </>
                                     )}
                                     <ReactMarkdown>
                                         {!item.description || item.description === items[0].operationSpec?.description
                                             ? pathDescription(item)
                                             : item.description}
                                     </ReactMarkdown>
+
                                     <Security item={item} objects={objects} />
+                                    {item.security?.[0]?.['PersonalAPIKeyAuth']?.length && <Divider />}
+
                                     <Parameters item={item} objects={objects} />
+                                    {item.parameters?.filter((param) => param.in === 'path' || param.in === 'query')
+                                        ?.length > 0 && <Divider />}
 
                                     <RequestBody item={item} objects={objects} />
+                                    {item.requestBody && <Divider />}
 
                                     <ResponseBody item={item} objects={objects} />
                                 </div>
-                                <div className="lg:sticky top-[108px]">
-                                    <h4>Request</h4>
-                                    <RequestExample
-                                        name={name}
-                                        item={item}
-                                        objects={objects}
-                                        exampleLanguage={exampleLanguage}
-                                        setExampleLanguage={setExampleLanguage}
-                                    />
+                                <div className="lg:sticky top-[108px] space-y-6">
+                                    <div>
+                                        <h4>Request</h4>
+                                        <RequestExample
+                                            name={name}
+                                            item={item}
+                                            objects={objects}
+                                            exampleLanguage={exampleLanguage}
+                                            setExampleLanguage={setExampleLanguage}
+                                        />
+                                    </div>
 
-                                    <h4>Response</h4>
-                                    {Object.keys(item.responses).map((statusCode) => {
-                                        const response = item.responses[statusCode]
-                                        return (
-                                            <div key={statusCode}>
-                                                <h5 className="text-sm font-semibold">
-                                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                        Status {statusCode}
-                                                    </span>{' '}
-                                                    {response.description}
-                                                </h5>
-                                                <ResponseExample
-                                                    item={item}
-                                                    objects={objects}
-                                                    objectKey={
-                                                        response.content?.['application/json']?.schema['$ref']
-                                                            ?.split('/')
-                                                            .at(-1) ||
-                                                        response.content?.['application/json']?.schema.items['$ref']
-                                                            ?.split('/')
-                                                            .at(-1)
-                                                    }
-                                                    exampleLanguage={exampleLanguage}
-                                                    setExampleLanguage={setExampleLanguage}
-                                                />
-                                            </div>
-                                        )
-                                    })}
+                                    <div>
+                                        <h4>Response</h4>
+                                        {Object.keys(item.responses).map((statusCode) => {
+                                            const response = item.responses[statusCode]
+                                            return (
+                                                <div key={statusCode} className="mb-4">
+                                                    <h5 className="text-sm font-semibold mb-2">
+                                                        <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                            Status {statusCode}
+                                                        </span>{' '}
+                                                        {response.description}
+                                                    </h5>
+                                                    <ResponseExample
+                                                        item={item}
+                                                        objects={objects}
+                                                        objectKey={
+                                                            response.content?.['application/json']?.schema['$ref']
+                                                                ?.split('/')
+                                                                .at(-1) ||
+                                                            response.content?.['application/json']?.schema.items?.[
+                                                                '$ref'
+                                                            ]
+                                                                ?.split('/')
+                                                                .at(-1)
+                                                        }
+                                                        exampleLanguage={exampleLanguage}
+                                                        setExampleLanguage={setExampleLanguage}
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -707,9 +745,12 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 })}
 
                 {nextURL && (
-                    <CallToAction className="mt-8" to={nextURL}>
-                        Next page →
-                    </CallToAction>
+                    <>
+                        <SectionDivider />
+                        <CallToAction className="mt-8" to={nextURL}>
+                            Next page →
+                        </CallToAction>
+                    </>
                 )}
             </PostLayout>
         </Layout>

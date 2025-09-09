@@ -1,12 +1,39 @@
 ---
-title: Searching and monitoring issues
+title: Monitor and search issues
 ---
+
+This guide covers how to find the most relevant, urgent, and impactful issues in your error tracking using the [issues page](https://app.posthog.com/error_tracking).
+
+## Monitoring issues
+
+When you're monitoring issues in your project, there are generally two common workflows:
+
+- You're exploring issues to identify impactful and problematic areas. You should use sorting features.
+- You're looking for issues assigned to you to resolve them. You should filter by the `Assigned to` property.
+
+### Sorting issues 
+
+Issues can be sorted by the following properties:
+
+| Property | Description |
+| --- | --- |
+| Last seen | The issue that has the most recent exception |
+| First seen | The issue that has the oldest exception |
+| Occurrences | The number of exceptions in the issue |
+| Users | The number of unique users affected by the issue |
+| Sessions | The number of unique sessions affected by the issue |
+
+Sorting by **last seen** and **occurrences** are great ways to get a general sense of issues in your project. Sorting by **users** and **sessions** is great to find the most impactful issues if you're using other [filters](#finding-specific-issues) to narrow down your results.
+
+### Monitoring issues assigned to you
+
+You can filter issues by the **Assigned to** property to find issues assigned to you. This is especially useful if you configure [automatic issue assignment](/docs/error-tracking/assigning-issues) and configure [alerts](/docs/error-tracking/alerts) to notify you when new issues are created.
 
 ## Finding specific issues
 
-You can use the search bar at the top of the [issue page](https://us.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
+You can use the search bar at the top of the [issue page](https://app.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
 
-Search results are matched based on properties of exceptions grouped into the issues. For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError".
+Search results are matched based on [properties of exception events](/docs/error-tracking/issues-and-exceptions) grouped into the issues. For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError".
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
@@ -16,19 +43,20 @@ You may see seemingly unrelated issues in your search results because your searc
 
 </CalloutBox>
 
+### Filtering modes
+
 The search bar provides two modes of filtering:
 
-- Exact property filtering, which operates like property filters elsewhere in PostHog, enabling you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
 
-- [Freeform text search](#freeform-text-search), which does text matching for a subset of the error tracking specific properties of the exception event.
+#### 1. Exact property filtering
 
-You add a property filter by clicking the property name shown here:
+This operates like property filters elsewhere in PostHog, enabling you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`. You add a property filter by clicking the property name shown here:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_1d7490b403.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_dark_dd03d08aa5.png"
-  alt="Adding a property to the property filter"
-  classes="rounded"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filtering_issues_light_2b2dd25208.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/filtering_issues_dark_17d1e67da6.png"
+    alt="Adding a property to the property filter"
+    classes="rounded"
 />
 
 Added property filters look like this:
@@ -40,11 +68,12 @@ Added property filters look like this:
   classes="rounded"
 />
 
-The results of both of these filter types (property filters and freeform search) are ANDed together, such that only exceptions that match all filters are included in the search results.
+The results of both of these filter types (property filters and freeform search) are combined with `AND` logic, such that only exceptions that match all filters are included in the search results.
 
-## Freeform text search
+#### 2. Freeform text search
 
-The freeform search splits the text you give it into tokens. The search matches an exception if *each* of the tokens in your search term appear in one of the following:
+
+This does text matching for a subset of the error tracking specific properties of the exception event. It splits the text you give it into tokens. The search matches an exception if *each* of the tokens in your search term appear in one of the following:
 - The exception type
 - The exception message
 - The function names in the exception stack trace (if known)
@@ -79,27 +108,40 @@ Exception events can have more than one exception in them, due to language featu
 
 For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read property` would match the exception, because it matches *one* of the exception messages (`property` appears in the "root" one).
 
-## Filtering exception occurrences within an issue
+## Issue details
 
-Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list for a particular instance of the issue. This is particularly useful in cases where some exceptions in the issue have information others don't and you want to use that information for debugging.
+When you click on an issue, you'll see the details page of the issue. 
 
-Here's an example from our own systems. We select a recent occurrence of this issue to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
+This page shows you the following:
+- The stack trace, properties, and sessions related to the **currently selected exception**.
+- Name, description, status, assignee, and external tracking links for the issue.
+- A filterable list of all exceptions in the issue. **Selecting an exception** will show you the stack trace, properties, and sessions related to that exception at the top of the page.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/unfiltered_exception_list_8cdbf735c0.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/exception_list_unfiltered_dark_200b8be303.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_no_filter_light_405a3332d7.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_no_filter_dark_dfce08c4b0.png"
   alt="An issue, with an unfiltered exception list"
   classes="rounded"
 />
 
-Here, we've added a property filter on `http_referer`, which we think will be useful for our debugging and can then easily select an occurrence where that property is set:
+### Filtering exception occurrences within an issue
+
+Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list for a particular instance of the issue. This is particularly useful in cases where some exceptions in the issue have information others don't and you want to use that information for debugging.
+
+For example, you can add a property filter on `http_referer` that shows all exceptions where the `http_referer` is set:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filtered_exception_list_7b51efa94f.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/exception_list_filtered_dark_70a70d9ce9.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_with_filter_light_0fc6e1cb2d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_with_filter_dark_bf74dca1d9.png"
   alt="An issue, with a filtered exception list"
   classes="rounded"
 />
+
+<CalloutBox icon="IconInfo" title="Alerts" type="info">
+
+If you have a set of filters that you use often, you can create alerts for them. This way you can be notified when new issues match your filters. Learn more about [alerts](/docs/error-tracking/alerts).
+
+</CalloutBox>
 
 ## Improving search performance
 
@@ -109,4 +151,8 @@ We try to return results to you within a second, but sometimes if you're queryin
 
 - **Use freeform search rather than property filters:** Our freeform searches are generally faster than property filters, as the total amount of data processed is smaller.
 
-If you find your queries timing out or taking more than 30 seconds, please [let us know in-app](https://us.posthog.com/#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue)! We're always looking for benchmarks to improve against.
+If you find your queries timing out or taking more than 30 seconds, please [let us know in-app](https://app.posthog.com/#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue)! We're always looking for benchmarks to improve against.
+
+## Suppressing issues
+
+If you find issues that are not useful to you, you can suppress them by changing the status to **Suppressed**. We recommend that you also implement [client-side suppression](/docs/error-tracking/capture#suppressing-exceptions) to not capture these exceptions in the first place, for cost and performance reasons. 

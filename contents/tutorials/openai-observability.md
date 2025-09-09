@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - LLM observability
+  - LLM analytics
 ---
 
 
@@ -34,7 +34,7 @@ First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-
 npx create-next-app@latest openai-observability
 ```
 
-After creating your app, go into the newly created `openai-observability` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/ai-engineering/observability) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
+After creating your app, go into the newly created `openai-observability` directory and install the PostHog [Node SDK](/docs/libraries/node) and `ai` [package](/docs/llm-analytics/installation) as well as OpenAI's [JavaScript SDK](https://platform.openai.com/docs/libraries/typescript-javascript-library).
 
 ```bash
 cd openai-observability
@@ -171,25 +171,25 @@ Now, when we run `npm run dev` again and submit an input, we should see a respon
 
 ## 3. Viewing generations in PostHog
 
-Once you generate a few responses, go to PostHog and enable the [LLM observability feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability). Once enabled, go to the LLM observability tab to get an overview of traces, users, costs, and more.
+Once you generate a few responses, go to PostHog's [LLM analytics tab](https://app.posthog.com/llm-analytics) to get an overview of traces, users, costs, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_58_04_2x_a87f97d692.png" 
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_57_32_2x_f8d6385951.png"
-  alt="LLM observability dashboard" 
+  alt="LLM analytics dashboard" 
   classes="rounded"
 />
 
-You can also go into more detail by clicking on the [generations tab](https://us.posthog.com/llm-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+You can also go into more detail by clicking on the [generations tab](https://us.posthog.com/llm-analytics/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_05_47_2x_31ac89084d.png" 
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_04_38_2x_4029e378cb.png"
-  alt="LLM observability dashboard" 
+  alt="LLM analytics dashboard" 
   classes="rounded"
 />
 
-From here, you can go further by filtering your LLM observability dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
+From here, you can go further by filtering your LLM analytics dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
 
 ## Further reading
 
