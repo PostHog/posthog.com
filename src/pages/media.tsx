@@ -5,6 +5,9 @@ import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
+import Link from 'components/Link'
+import { shortcodes } from '../mdxGlobalComponents'
 // Note: MDX components are handled globally via mdxGlobalComponents
 
 interface MediaProps {
@@ -16,7 +19,11 @@ export default function Media({ data }: MediaProps) {
         value: '/media',
         content: (
             <div className="max-w-3xl mx-auto pb-12">
-                <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                <MDXProvider
+                    components={{ a: (props) => <Link {...props} state={{ newWindow: true }} />, ...shortcodes }}
+                >
+                    <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                </MDXProvider>
             </div>
         ),
     })
