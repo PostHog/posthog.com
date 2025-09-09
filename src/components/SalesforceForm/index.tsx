@@ -2,7 +2,6 @@ import { Form, Formik, useFormikContext } from 'formik'
 import React, { createContext, InputHTMLAttributes, RefObject, useContext, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { button } from 'components/CallToAction'
-import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
 import { IconCheck, IconSend } from '@posthog/icons'
 import * as Yup from 'yup'
@@ -10,6 +9,7 @@ import Editor from 'components/Editor'
 import { Select } from 'components/RadixUI/Select'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { useApp } from '../../context/App'
 interface CustomFieldOption {
     label: string
     value: string | number
@@ -336,10 +336,10 @@ export default function SalesforceForm({
     type = 'lead',
     source,
 }: IProps) {
+    const { setConfetti } = useApp()
     const posthog = usePostHog()
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [submitted, setSubmitted] = useState(false)
-    const [confetti, setConfetti] = useState(true)
 
     const handleSubmit = async (values: any) => {
         const distinctId = posthog?.get_distinct_id?.()
@@ -355,16 +355,12 @@ export default function SalesforceForm({
             body: JSON.stringify({ ...values, type, source }),
         })
         setSubmitted(true)
+        setConfetti(true)
     }
 
     return form.fields.length > 0 ? (
         submitted ? (
             <>
-                {confetti && (
-                    <div className="fixed inset-0">
-                        <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
-                    </div>
-                )}
                 <div className="bg-accent border border-input px-6 py-16 rounded-md flex justify-center items-center">
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>

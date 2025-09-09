@@ -15,6 +15,7 @@ import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
+import ReactConfetti from 'react-confetti'
 
 interface Product {
     name: string
@@ -151,7 +152,14 @@ const validateIconPositions = (positions: IconPositions, constraintsRef: React.R
 }
 
 export default function Desktop() {
-    const { constraintsRef, siteSettings, screensaverPreviewActive, setScreensaverPreviewActive } = useApp()
+    const {
+        constraintsRef,
+        siteSettings,
+        screensaverPreviewActive,
+        setScreensaverPreviewActive,
+        setConfetti,
+        confetti,
+    } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
         enabled: !siteSettings.screensaverDisabled,
@@ -481,6 +489,15 @@ export default function Desktop() {
                 <HedgeHogModeEmbed />
             </ContextMenu>
             <NotificationsPanel />
+            {confetti && (
+                <div className="fixed inset-0">
+                    <ReactConfetti
+                        onConfettiComplete={() => setConfetti(false)}
+                        recycle={false}
+                        numberOfPieces={1000}
+                    />
+                </div>
+            )}
         </>
     )
 }

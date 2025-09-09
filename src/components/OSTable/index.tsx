@@ -245,13 +245,17 @@ const OSTable: React.FC<OSTableProps> = ({
                               />
                           ))}
                 </div>
-                {loading ? (
-                    <RowSkeleton />
-                ) : fetchMore ? (
-                    <CallToAction onClick={() => fetchMore()} size="md" width="full" className="mt-4">
-                        Load more
-                    </CallToAction>
-                ) : null}
+                {(loading || fetchMore) && (
+                    <div className="mt-4 mb-16">
+                        {loading ? (
+                            <RowSkeleton />
+                        ) : fetchMore ? (
+                            <CallToAction onClick={() => fetchMore()} size="md" width="full">
+                                Load more
+                            </CallToAction>
+                        ) : null}
+                    </div>
+                )}
             </ScrollArea>
         </div>
     )

@@ -16,6 +16,7 @@ import { IconExternal } from '@posthog/icons'
 import { useDropzone } from 'react-dropzone'
 import Input from '../OSForm/input'
 import Textarea from '../OSForm/textarea'
+import { useApp } from '../../context/App'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -180,6 +181,7 @@ const components = {
 }
 
 const Form = ({ setSubmitted, info, id }) => {
+    const { setConfetti } = useApp()
     const [error, setError] = useState(null)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -209,6 +211,7 @@ const Form = ({ setSubmitted, info, id }) => {
             .then((res) => res.json())
             .then(() => {
                 setSubmitted(true)
+                setConfetti(true)
             })
     }
     return (
