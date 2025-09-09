@@ -849,6 +849,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/product-engineering',
                     },
                     {
+                        name: 'Visiting customers as an engineer',
+                        url: '/handbook/engineering/visiting-customers',
+                    },
+                    {
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
