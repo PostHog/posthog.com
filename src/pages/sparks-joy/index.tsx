@@ -2,7 +2,7 @@ import React from 'react'
 import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import SEO from 'components/seo'
-import { IconDice, IconDictator } from 'components/OSIcons/Icons'
+import { IconController, IconDictator } from 'components/OSIcons/Icons'
 import { AppIcon } from 'components/OSIcons'
 import { IconBookmarkSolid, IconDocument } from '@posthog/icons'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -49,7 +49,7 @@ export default function SparkJoy(): JSX.Element {
                                 {
                                     trigger: (
                                         <>
-                                            <IconDice className={`text-green size-5 inline-block`} />
+                                            <IconController className={`text-lime-green size-5 inline-block`} />
                                             <span className="flex-1">Fun stuff</span>
                                         </>
                                     ),

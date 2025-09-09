@@ -16,7 +16,15 @@ import {
     newestProducts,
 } from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
-import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
+import {
+    IconXNotTwitter,
+    IconSubstack,
+    IconYouTube,
+    IconLinkedIn,
+    IconGithub,
+    IconInstagram,
+    IconController,
+} from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
@@ -345,6 +353,22 @@ export function useMenuData(): MenuType[] {
                     label: 'Social validation for enterprise',
                     link: '/enterprise',
                 },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Learn more',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Watch a demo',
+                    link: '/demo',
+                },
+                {
+                    type: 'item',
+                    label: 'Talk to a human',
+                    link: '/talk-to-a-human',
+                },
             ],
         },
         {
@@ -393,6 +417,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'About',
                     link: '/about',
+                },
+                {
+                    type: 'item',
+                    label: 'customers.mdx',
+                    link: '/customers',
                 },
                 {
                     type: 'item',
@@ -518,7 +547,37 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'submenu',
-                    label: 'Sexy legal stuff',
+                    label: 'Fun stuff',
+                    icon: <IconController className="size-4 text-lime-green" />,
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'Browse all',
+                            link: '/sparks-joy',
+                        },
+                        {
+                            type: 'separator',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Hedgehog mode',
+                            link: '/sparks-joy/hedgehog-mode',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Post-It note training',
+                            link: '/academy',
+                        },
+                        {
+                            type: 'item',
+                            label: '404 page',
+                            link: '/404',
+                        },
+                    ],
+                },
+                {
+                    type: 'submenu',
+                    label: 'Sexy legal documents',
                     icon: <Icons.IconTie className="size-4 text-orange" />,
                     items: [
                         {
@@ -545,28 +604,6 @@ export function useMenuData(): MenuType[] {
                             type: 'item',
                             label: 'HIPAA',
                             link: '/docs/privacy/hipaa-compliance',
-                        },
-                    ],
-                },
-                {
-                    type: 'submenu',
-                    label: 'Random pages',
-                    icon: <Icons.IconEllipsis className="size-4 text-orange" />,
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'Enterprise flair',
-                            link: '/enterprise',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Post-It note training',
-                            link: '/academy',
-                        },
-                        {
-                            type: 'item',
-                            label: '404 page',
-                            link: '/404',
                         },
                     ],
                 },
@@ -704,5 +741,11 @@ export const DocsItemsEnd = [
         label: 'Tracks',
         link: '/tracks',
         icon: <Icons.IconGraduationCap className="size-4 text-black" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Forums',
+        link: '/questions',
+        icon: <Icons.IconMessage className="size-4 text-green" />,
     },
 ]
