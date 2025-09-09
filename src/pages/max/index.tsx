@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { useRoadmaps } from 'hooks/useRoadmaps'
@@ -142,10 +142,10 @@ const CustomRoadmapSlide = () => {
 
             <div className="text-center mt-6">
                 <p className="text-sm text-secondary">
-                    Vote and follow roadmap items at{' '}
-                    <a href="/max#roadmap" className="text-primary underline">
-                        posthog.com/max#roadmap
-                    </a>
+                    Have opinions about what we should build next?{' '}
+                    <Link to="/roadmap" className="text-primary underline" state={{ newWindow: true }}>
+                        Vote on our roadmap.
+                    </Link>
                 </p>
             </div>
         </div>

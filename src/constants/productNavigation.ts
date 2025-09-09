@@ -59,9 +59,19 @@ export const productOrder: Record<string, string[]> = {
         'custom_dashboards',
         'group_analytics',
     ],
-    dataviz: ['trends', 'funnels', 'user_paths', 'correlation_analysis', 'retention', 'stickiness', 'lifecycle', 'sql', 'bi'],
+    dataviz: [
+        'trends',
+        'funnels',
+        'user_paths',
+        'correlation_analysis',
+        'retention',
+        'stickiness',
+        'lifecycle',
+        'sql',
+        'bi',
+    ],
     product_engineering: ['session-replay', 'experiments', 'feature-flags', 'error-tracking', 'early_access'],
-    communication: ['surveys', 'broadcasts', 'user-interviews'],
+    communication: ['surveys', 'messaging', 'user-interviews'],
     product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform-packages'],
 }
 

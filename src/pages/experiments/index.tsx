@@ -12,35 +12,28 @@ const statisticalMethods = [
     {
         id: 'bayesian',
         name: 'Bayesian',
-        subtitle: "Popular with tech companies, check results anytime",
+        subtitle: 'Popular with tech companies, check results anytime',
         color: 'purple',
         bulletColor: 'purple',
         whatItTells: [
             {
                 term: 'Win probability',
-                description: 'Direct probability that variant A beats B'
+                description: 'Direct probability that one variant outperforms another',
             },
             {
                 term: 'Credible intervals',
-                description: 'Range where true value lies with 95% probability'
-            }
+                description: 'The likely range of the true effect size',
+            },
         ],
         advantages: [
             'Check results anytime without statistical penalties',
-            'Get direct probability statements about which variant wins',
-            'Make confident decisions earlier with accumulating evidence',
-            'Intuitive interpretation: "Variant A has 85% chance of being better"'
+            'Intuitive interpretation (“Variant A has an 85% chance of being better”)',
+            'Supports continuous monitoring and faster decision-making',
         ],
         bestFor: [
-            'Continuous monitoring and optimization',
             'Teams wanting flexible experiment duration',
-            'Modern experimentation practices'
+            'Modern product teams favoring clear, actionable results',
         ],
-        supportedMetrics: [
-            'Funnel metrics (conversion rates)',
-            'Count-based trends (event totals)',
-            'Value-based trends (revenue, time)'
-        ]
     },
     {
         id: 'frequentist',
@@ -51,30 +44,23 @@ const statisticalMethods = [
         whatItTells: [
             {
                 term: 'P-value',
-                description: 'Probability of seeing these results if no real difference exists'
+                description: 'Probability of observing results if no real difference exists.',
             },
             {
                 term: 'Confidence intervals',
-                description: 'Range of plausible values for true effect'
-            }
+                description: 'The likely range of the true effect size',
+            },
         ],
         advantages: [
-            'Widely understood by academic and data science communities',
-            'Matches industry-standard A/B testing tools',
-            'Simpler method with fewer parametric assumptions',
-            "Uses robust Welch's t-test for unequal variances"
+            'Matches widely used academic and industry standards',
+            'Well understood by data science communities',
         ],
         bestFor: [
-            'Teams familiar with p-values and confidence intervals',
-            'Matching internal data science standards',
-            'Academic research and publication'
+            'Teams familiar with p-values and classical statistics',
+            'Organizations needing to align with established methods',
+            'Standardized reporting',
         ],
-        supportedMetrics: [
-            'Funnel metrics (conversion rates)',
-            'Mean metrics (revenue, session duration)',
-            'Includes outlier handling for mean metrics'
-        ]
-    }
+    },
 ]
 
 const mobileTriggerClasses = 'flex items-center gap-2 px-4 py-2 text-2xl font-bold'
@@ -93,7 +79,7 @@ const StatisticalMethodsSlide = () => {
             <div className="max-w-7xl w-full mx-auto">
                 <div className="text-center mb-6">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">Bayesian vs. Frequentist</h2>
-                    <p className="text-xl text-secondary">Whether you're scrappy or super smart, we've got a statistical method for you.</p>
+                    <p className="text-xl text-secondary">Choose the statistical approach that fits your team.</p>
                 </div>
 
                 {/* Mobile layout: Interactive accordion comparison (portrait 9:16) */}
@@ -115,11 +101,7 @@ const StatisticalMethodsSlide = () => {
                         items={[
                             {
                                 value: 'what-it-tells-you',
-                                trigger: (
-                                    <div className={mobileTriggerClasses}>
-                                        What it tells you
-                                    </div>
-                                ),
+                                trigger: <div className={mobileTriggerClasses}>What it tells you</div>,
                                 content: (
                                     <div className={mobileCellClasses}>
                                         <div>
@@ -128,7 +110,9 @@ const StatisticalMethodsSlide = () => {
                                                 {statisticalMethods[0].whatItTells.map((item, index) => (
                                                     <li key={index} className="flex items-start">
                                                         <span className="text-purple mr-2">•</span>
-                                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                                        <span>
+                                                            <strong>{item.term}:</strong> {item.description}
+                                                        </span>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -139,21 +123,19 @@ const StatisticalMethodsSlide = () => {
                                                 {statisticalMethods[1].whatItTells.map((item, index) => (
                                                     <li key={index} className="flex items-start">
                                                         <span className="text-blue mr-2">•</span>
-                                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                                        <span>
+                                                            <strong>{item.term}:</strong> {item.description}
+                                                        </span>
                                                     </li>
                                                 ))}
                                             </ul>
                                         </div>
                                     </div>
-                                )
+                                ),
                             },
                             {
                                 value: 'key-advantages',
-                                trigger: (
-                                    <div className={mobileTriggerClasses}>
-                                        Key advantages
-                                    </div>
-                                ),
+                                trigger: <div className={mobileTriggerClasses}>Key advantages</div>,
                                 content: (
                                     <div className={mobileCellClasses}>
                                         <div>
@@ -179,15 +161,11 @@ const StatisticalMethodsSlide = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                )
+                                ),
                             },
                             {
                                 value: 'best-for',
-                                trigger: (
-                                    <div className={mobileTriggerClasses}>
-                                        Best for
-                                    </div>
-                                ),
+                                trigger: <div className={mobileTriggerClasses}>Best for</div>,
                                 content: (
                                     <div className={mobileCellClasses}>
                                         <div>
@@ -213,42 +191,8 @@ const StatisticalMethodsSlide = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                )
-                            },
-                            {
-                                value: 'supported-metrics',
-                                trigger: (
-                                    <div className={mobileTriggerClasses}>
-                                        Supported metrics
-                                    </div>
                                 ),
-                                content: (
-                                    <div className={mobileCellClasses}>
-                                        <div>
-                                            <h4 className="text-2xl font-semibold text-purple mb-3">Bayesian</h4>
-                                            <ul className="space-y-2 text-2xl">
-                                                {statisticalMethods[0].supportedMetrics.map((metric, index) => (
-                                                    <li key={index} className="flex items-start">
-                                                        <span className="text-purple mr-2">•</span>
-                                                        <span>{metric}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-2xl font-semibold text-blue mb-3">Frequentist</h4>
-                                            <ul className="space-y-2 text-2xl">
-                                                {statisticalMethods[1].supportedMetrics.map((metric, index) => (
-                                                    <li key={index} className="flex items-start">
-                                                        <span className="text-blue mr-2">•</span>
-                                                        <span>{metric}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                )
-                            }
+                            },
                         ]}
                         defaultValue="what-it-tells-you"
                         className="bg-accent"
@@ -261,12 +205,12 @@ const StatisticalMethodsSlide = () => {
                         {/* Headers */}
                         <div className="text-center border-b border-primary">
                             <h3 className="text-3xl font-bold text-purple mb-2">Bayesian</h3>
-                            <p className="text-base text-secondary">Popular with tech companies, check results anytime</p>
+                            <p className="text-base text-secondary">Flexible, intuitive results you can trust</p>
                         </div>
                         <div className="border-b border-primary">&nbsp;</div>
                         <div className="text-center border-b border-primary">
                             <h3 className="text-3xl font-bold text-blue mb-2">Frequentist</h3>
-                            <p className="text-base text-secondary">Classical academic approach, fixed analysis</p>
+                            <p className="text-base text-secondary">Proven, standardized testing with clear rules</p>
                         </div>
 
                         {/* What it tells you */}
@@ -275,20 +219,22 @@ const StatisticalMethodsSlide = () => {
                                 {statisticalMethods[0].whatItTells.map((item, index) => (
                                     <li key={index} className="flex items-start">
                                         <span className="text-purple mr-2">•</span>
-                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                        <span>
+                                            <strong>{item.term}:</strong> {item.description}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
-                        <div className={legendClasses}>
-                            What it tells you
-                        </div>
+                        <div className={legendClasses}>What it tells you</div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
                                 {statisticalMethods[1].whatItTells.map((item, index) => (
                                     <li key={index} className="flex items-start">
                                         <span className="text-blue mr-2">•</span>
-                                        <span><strong>{item.term}:</strong> {item.description}</span>
+                                        <span>
+                                            <strong>{item.term}:</strong> {item.description}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
@@ -305,9 +251,7 @@ const StatisticalMethodsSlide = () => {
                                 ))}
                             </ul>
                         </div>
-                        <div className={legendClasses}>
-                            Key advantages
-                        </div>
+                        <div className={legendClasses}>Key advantages</div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
                                 {statisticalMethods[1].advantages.map((advantage, index) => (
@@ -330,40 +274,13 @@ const StatisticalMethodsSlide = () => {
                                 ))}
                             </ul>
                         </div>
-                        <div className={legendClasses}>
-                            Best for
-                        </div>
+                        <div className={legendClasses}>Best for</div>
                         <div className={cellClasses}>
                             <ul className="space-y-1">
                                 {statisticalMethods[1].bestFor.map((item, index) => (
                                     <li key={index} className="flex items-start">
                                         <span className="text-blue mr-2">•</span>
                                         <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Supported metrics */}
-                        <div className={`${cellClasses} border-b-0`}>
-                            <ul className="space-y-1">
-                                {statisticalMethods[0].supportedMetrics.map((metric, index) => (
-                                    <li key={index} className="flex items-start">
-                                        <span className="text-purple mr-2">•</span>
-                                        <span>{metric}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className={`${legendClasses} border-b-0`}>
-                            Supported metrics
-                        </div>
-                        <div className={`${cellClasses} border-b-0`}>
-                            <ul className="space-y-1">
-                                {statisticalMethods[1].supportedMetrics.map((metric, index) => (
-                                    <li key={index} className="flex items-start">
-                                        <span className="text-blue mr-2">•</span>
-                                        <span>{metric}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -387,11 +304,11 @@ const CustomPricingSlide = () => {
 
                 <div className="bg-accent border border-primary rounded p-8 text-left max-w-3xl mx-auto">
                     <p className="text-lg mb-6">
-                        Experiments is currently bundled with{' '}
+                        Experiments are bundled with{' '}
                         <Link to="/feature-flags" className="underline font-medium" state={{ newWindow: true }}>
                             Feature Flags
                         </Link>{' '}
-                        and shares volume limits.
+                        and share volume limits.
                     </p>
 
                     <ul className="space-y-4 mb-6 text-lg">
@@ -490,9 +407,20 @@ export default function Experiments(): JSX.Element {
                 slug: 'statistical-methods',
                 name: 'Statistical methods',
                 component: StatisticalMethodsSlide,
-            }
+            },
         ],
-        order: ['overview', 'customers', 'features', 'statistical-methods', 'pricing', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with', 'getting-started'],
+        order: [
+            'overview',
+            'customers',
+            'features',
+            'statistical-methods',
+            'pricing',
+            'comparison-summary',
+            'feature-comparison',
+            'docs',
+            'pairs-with',
+            'getting-started',
+        ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },

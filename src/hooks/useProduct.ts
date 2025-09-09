@@ -23,15 +23,15 @@ import {
     IconFunnels,
     IconBolt,
     IconArrowUpRight,
-    IconMegaphone,
     IconUserPaths,
     IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
     IconHogQL,
+    IconDecisionTree,
 } from '@posthog/icons'
 import useProducts from './useProducts'
-import { IconBrain } from 'components/OSIcons'
+import { IconEnvelope } from 'components/OSIcons'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -59,15 +59,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         // },
 
         {
-            name: 'Broadcasts',
-            Icon: IconMegaphone,
+            name: 'Messaging',
+            Icon: IconDecisionTree,
             description: 'send messages to users.',
-            handle: 'broadcasts',
+            handle: 'messaging',
             color: 'blue',
             colorSecondary: 'sky-blue',
             category: 'communication',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'broadcasts',
+            slug: 'messaging',
             status: 'WIP',
         },
         {

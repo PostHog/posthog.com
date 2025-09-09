@@ -123,7 +123,7 @@ export const max_ai = {
             q: 'What is distribution of paid vs. organic traffic?',
         },
         {
-            q: 'Write an SQL query for me?',
+            q: 'Write a SQL query for me',
         },
         {
             q: 'How many pageviews did we get today?',

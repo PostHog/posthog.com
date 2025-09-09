@@ -6,7 +6,7 @@ const skills = [
     'Put on a data analyst hat and explore your PostHog data in depth',
     'Create dashboards and generate PostHog data visualizations, such as insights',
     'Interact natively with the PostHog UI, for example by editing filters',
-    'Generate complex HogQL(our version of SQL) queries',
+    'Generate complex PostHog SQL queries',
     "Answer questions from PostHog's documentation",
     'Create surveys using natural language',
     'Write Hog functions to power your realtime destinations',

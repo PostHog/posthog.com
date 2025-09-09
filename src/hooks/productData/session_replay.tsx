@@ -6,6 +6,7 @@ import Link from 'components/Link'
 import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SnippetRenderer from 'components/SnippetRenderer'
+import { True } from 'components/ComparisonTable/row'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
@@ -139,10 +140,13 @@ export const sessionReplay = {
         {
             title: 'Capture form data',
             headline: 'Capture form data',
-            description:
-                <>HTML <code>input</code> fields are masked by default. But if you'd like to see what users are typing
+            description: (
+                <>
+                    HTML <code>input</code> fields are masked by default. But if you'd like to see what users are typing
                     into a form, set <code>maskAllInputs</code> to <code>false</code>. (Password fields will still
-                    remain masked.)</>,
+                    remain masked.)
+                </>
+            ),
             children: (
                 <>
                     <div className="flex flex-col md:flex-row gap-x-6">
@@ -214,13 +218,13 @@ export const sessionReplay = {
             ],
         },
         {
-            title: 'Record by feature flag',
-            headline: 'Record by feature flag',
+            title: 'Recording rules',
+            headline: 'Recording rules',
             description:
-                "If you don't want to record all user sessions, you can choose to only enable it when a user is opted in to a feature flag. You can also use feature flags to record only a specific volume of randomized traffic.",
+                'You can limit the sessions that are recorded to a percentage of randomized traffic, or based on triggered events, user properties, or browsing behavior. You can also manually enable recording in your code when a user is opted in to a feature flag.',
             children: (
                 <div>
-                    <h4 className="text-lg">Your code</h4>
+                    <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
                     <CodeBlock
                         code={`posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
@@ -335,7 +339,8 @@ window.posthog.onFeatureFlags(function () {
             features: [
                 {
                     title: 'Canvas recording',
-                    description: "Capture canvas elements from your application. It works in both 2D and WebGL environments.",
+                    description:
+                        'Capture canvas elements from your application. It works in both 2D and WebGL environments.',
                 },
                 {
                     title: 'Filter by event',
@@ -352,7 +357,8 @@ window.posthog.onFeatureFlags(function () {
                 },
                 {
                     title: 'Collections',
-                    description: 'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
+                    description:
+                        'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
                 },
                 {
                     title: 'Block sensitive data',
@@ -465,6 +471,10 @@ window.posthog.onFeatureFlags(function () {
                 link: '/blog/posthog-vs-logrocket',
             },
             {
+                name: 'Clarity',
+                key: 'clarity',
+            },
+            {
                 name: 'PostHog',
                 key: 'posthog',
             },
@@ -473,10 +483,11 @@ window.posthog.onFeatureFlags(function () {
             {
                 feature: 'AI summaries',
                 companies: {
-                    hotjar: false,
-                    logrocket: false,
+                    hotjar: true,
+                    logrocket: true,
                     matomo: false,
-                    fullstory: false,
+                    fullstory: true,
+                    clarity: true,
                     posthog: 'In alpha',
                 },
             },
@@ -487,6 +498,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: true,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -497,6 +509,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: false,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -507,6 +520,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: false,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -517,6 +531,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: false,
                     fullstory: false,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -527,6 +542,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: false,
                     matomo: false,
                     fullstory: false,
+                    clarity: true,
                     posthog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
                 },
             },
@@ -537,6 +553,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: true,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -547,6 +564,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: true,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -557,6 +575,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: false,
                     matomo: true,
                     fullstory: false,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -567,7 +586,19 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: true,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
+                },
+            },
+            {
+                feature: 'Search by network request',
+                companies: {
+                    // hotjar: true,
+                    logrocket: true,
+                    // matomo: true,
+                    // fullstory: true,
+                    // clarity: true,
+                    posthog: false,
                 },
             },
             {
@@ -577,6 +608,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: false,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -587,6 +619,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: true,
                     matomo: true,
                     fullstory: true,
+                    clarity: true,
                     posthog: true,
                 },
             },
@@ -597,6 +630,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: false,
                     matomo: true,
                     fullstory: true,
+                    clarity: false,
                     posthog: true,
                 },
             },
@@ -607,6 +641,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: false,
                     matomo: false,
                     fullstory: false,
+                    clarity: false,
                     posthog: 'WIP',
                 },
             },
@@ -617,6 +652,7 @@ window.posthog.onFeatureFlags(function () {
                     logrocket: '1 month',
                     matomo: '24 months',
                     fullstory: '1 month',
+                    clarity: '30 days',
                     posthog: 'Up to 3 months',
                 },
             },
@@ -650,7 +686,8 @@ window.posthog.onFeatureFlags(function () {
             "You get 5,000 recordings per month for free – this is <em>significantly</em> more than other replay products. After that, it's metered by usage. No lock-ins, no guessing what tier you need. You pay only for what you record. The more you use, the cheaper it gets. And unlike some other tools, you're not paying for seats or stuck in an enterprise contract just to unlock basic features. This lets both small teams and large ones get the same level of insight, with pricing that's scalable. And you can also control which sessions you want to keep costs down and set billing limits so you never end up with a surprise bill.<br /><br />There's also that time <a href='/blog/session-replay-pricing'>we reduced pricing for everyone across the board</a>, and we're planning on doing it again soon.",
         'comparison-summary':
             "<strong>TL;DR:</strong> If you want a replay product that deeply integrates with other analytics tools, use PostHog. We're always shipping code to get to feature parity with any competing product, so even if we don't have what you need yet, there's a good chance we'll have it soon. Plus you can follow along with this product's roadmap and see what the Replay Team is shipping next.",
-        'feature-comparison': "@TODO we should add some things we don't have that others do...",
+        'feature-comparison':
+            "We don't have it all (yet) but we're working on it. We hope this comparison chart adds some Clarity for you.",
         docs: "We put a lot of effort into our documentation because we know that for most teams, this is your first real experience using PostHog. And we don't outsource it. The people writing the docs are the same engineers building the product. That means what you're reading is usually up to date, technically accurate, and written by someone who knows what it's like to implement this stuff in production.<br /><br />We treat the docs like a product of their own. Our team actively monitors GitHub issues, community Slack, forums, and feedback that comes through the site. So if something's unclear, we try to fix it quickly.<br /><br />We also understand that getting things configured properly is only part of the job. If your team is concerned about session replay costs, sampling strategy, just reach out – we're happy to suggest optimizations and help you get the right setup for your use case, even if it means we make less money. We want you to get the most out of PostHog without surprises.",
         'pairs-with':
             "One big difference with PostHog is that replay isn't bolted on. It's part of the full product suite. That means it connects directly to analytics, feature flags, experiments, and surveys. If you're running an A/B test and a user drops out, you can jump into their replay and see why. Or you can filter recordings by flag variant. You're not exporting data between tools – it's already connected. That makes it easier to find patterns and actually act on them.<br /><br />Of course, we integrate with third-party tools and data warehouses too – but if you you're not using them, you have everything you need right inside PostHog.",
