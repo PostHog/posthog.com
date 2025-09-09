@@ -14,7 +14,7 @@ Engineers make up around 60% of our team, and we are almost always hiring for En
 Beyond the specific skills listed in the job description, we generally look for: 
 
 *   Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
-    *   We don't care how many years of professional experience someone have, but depending on our current team structure we may be looking for more or less experienced people for a role - if that's the case, we will be explicit in the job spec.
+    *   We don't care how many years of professional experience someone has, but depending on our current team structure we may be looking for more or less experienced people for a role - if that's the case, we will be explicit in the job spec.
 *   Has built something from scratch, ideally with minimal outside help
     *   They may have been the founder of a startup, or built an impressive side project. They may have also worked on a project at work where they were the only developer.
 *   Communication skills
