@@ -9,7 +9,7 @@ import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 
 Revenue analytics works by automatically transforming the data coming from your different revenue sources (Stripe or events) into a standardized set of [managed views](/docs/data-warehouse/views).
 
-These views are automatically created once you [add a revenue source](/docs/revenue-analytics/getting-started).
+These views are automatically created once you [add a revenue source](/docs/revenue-analytics/start-here).
 
 These views are not exclusive to the revenue analytics dashboard: you can use them in other parts of PostHog where you'd be able to use views, more importantly the [SQL editor](/docs/data-warehouse/query).
 
@@ -59,7 +59,7 @@ For data warehouse sources, you might wanna connect these customers to your `per
 
 ### Subscription
 
-The `subscription` view is a table containing the list of all subscriptions you have in your sources. For events this will only be tracked once you've [configured a subscription property](/docs/revenue-analytics/getting-started#choosing-your-revenue-data-sources). For data warehouse sources it's automatically inferred if you connect a subscription to your invoices.
+The `subscription` view is a table containing the list of all subscriptions you have in your sources. For events this will only be tracked once you've [configured a subscription property](/docs/revenue-analytics/payment-platforms). For data warehouse sources it's automatically inferred if you connect a subscription to your invoices.
 
 Example view names:
 - `stripe.prod.revenue_analytics_subscription`
@@ -72,7 +72,7 @@ You can look at the table schema in the [SQL editor](/docs/data-warehouse/query)
 
 The `revenue_item` view is a table containing the list of all revenue items you have in your sources. It applies [deferred revenue](/docs/revenue-analytics/deferred-revenue) and [currency conversion](/docs/revenue-analytics/faq#how-do-you-convert-revenue-in-different-currencies) to the data automatically.
 
-This data is inferred automatically both from your events and data warehouse sources. For data warehouse sources we consider all of your invoices plus all of your invoiceless charges. You can omit invoiceless charges in the [settings](/docs/revenue-analytics/getting-started#choosing-your-revenue-data-sources).
+This data is inferred automatically both from your events and data warehouse sources. For data warehouse sources we consider all of your invoices plus all of your invoiceless charges. You can omit invoiceless charges in the [settings](/docs/revenue-analytics/payment-platforms).
 
 Example view names:
 - `stripe.prod.revenue_analytics_revenue_item`
