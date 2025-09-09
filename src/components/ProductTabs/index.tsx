@@ -240,7 +240,7 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                                 </li>
                                 <li>
                                     <Link to="/platform-packages" state={{ newWindow: true }}>
-                                        Product OS add-ons
+                                        Platform packages
                                     </Link>
                                 </li>
                             </ul>
