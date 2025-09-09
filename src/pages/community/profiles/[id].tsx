@@ -886,7 +886,11 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
             : []),
     ]
 
-    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+    return (
+        <div data-scheme="secondary">
+            <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+        </div>
+    )
 }
 
 const ValidationSchema = Yup.object().shape({

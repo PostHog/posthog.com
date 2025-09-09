@@ -263,6 +263,7 @@ const SmallTeamsPage = () => {
                 image={`/images/og/teams.jpg`}
             />
             <Editor
+                hasTabs
                 type="teams"
                 maxWidth="100%"
                 proseSize="base"
@@ -276,7 +277,8 @@ const SmallTeamsPage = () => {
                     tabs={tabs}
                     defaultValue="/small-teams"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
+                    contentPadding={false}
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"

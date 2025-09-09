@@ -98,7 +98,7 @@ const IndexPage = () => {
                     </Popover>
                 </div>
                 <div className="max-w-7xl mx-auto">
-                    <div id="hero" className="p-2">
+                    <div id="hero">
                         <CareersHero />
                         <JobListings />
                     </div>
@@ -160,6 +160,7 @@ const IndexPage = () => {
                 imageType="absolute"
             />
             <Editor
+                hasTabs
                 type="careers"
                 maxWidth="100%"
                 proseSize="base"
@@ -172,7 +173,7 @@ const IndexPage = () => {
                     tabs={tabs}
                     defaultValue="/careers"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"

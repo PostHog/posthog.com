@@ -43,6 +43,7 @@ const RoadmapPage = () => {
                 image={`/images/og/roadmap.jpg`}
             />
             <Editor
+                hasTabs
                 type="roadmap"
                 proseSize="base"
                 maxWidth="100%"
@@ -101,7 +102,8 @@ const RoadmapPage = () => {
                     tabs={tabs}
                     defaultValue="/roadmap"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
+                    contentPadding={false}
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"

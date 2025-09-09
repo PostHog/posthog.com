@@ -222,7 +222,7 @@ function BAAGenerator() {
 
                 <div className="@3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 pb-24 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl rounded relative">
                     <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-[57px] @3xl:top-[108px] z-10">
-                        <div className="text-lg font-bold text-white">Business Associate Agreement Preview</div>
+                        <div className="font-bold dark:text-white text-left">Business Associate Agreement Preview</div>
                         <Tooltip
                             content={() => (
                                 <div className="max-w-xs @3xl:max-w-sm print:hidden">

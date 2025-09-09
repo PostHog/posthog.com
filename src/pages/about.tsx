@@ -81,17 +81,17 @@ export default function About({ data }: AboutProps) {
                     title: 'Company',
                     description: 'Learn about PostHog',
                 }}
+                hasTabs
             >
                 <OSTabs
                     tabs={tabs}
                     defaultValue="/about"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
                     tabContainerClassName={tabContainerClassName}
                     tabContentClassName="px-4 @xl:px-8"
                     className={className}
                     triggerDataScheme="primary"
-                    scrollable={false}
                     centerTabs
                 />
             </Editor>

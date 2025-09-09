@@ -210,7 +210,8 @@ export default function ProductTabs({ productHandles, className, selectedStage }
         <OSTabs
             tabs={tabs}
             defaultValue={products[0]?.handle}
-            frame={false}
+            border={false}
+            padding={false}
             className={className}
             orientation={orientation}
             tabContainerClassName={`${

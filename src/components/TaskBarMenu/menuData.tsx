@@ -566,14 +566,14 @@ export function useMenuData(): MenuType[] {
                     ],
                 },
                 {
+                    type: 'separator',
+                },
+                {
                     type: 'item',
                     label: 'Keyboard shortcuts',
                     link: '/kbd',
                     icon: <Icons.IconKeyboard className="size-4 text-primary" />,
                     shortcut: ['.'],
-                },
-                {
-                    type: 'separator',
                 },
                 {
                     type: 'item',

@@ -44,6 +44,7 @@ interface EditorProps {
     type?: string
     maxWidth?: number | string
     children?: React.ReactNode
+    hasTabs?: boolean
     availableFilters?: {
         label: string
         value?: any
@@ -170,8 +171,8 @@ const Options = ({
                         value === 'full'
                             ? '100%'
                             : typeof preferredMaxWidth === 'number'
-                                ? preferredMaxWidth
-                                : appWindow?.size?.width || 1000
+                            ? preferredMaxWidth
+                            : appWindow?.size?.width || 1000
                     )
                 }}
             />
@@ -201,6 +202,7 @@ const Options = ({
 export function Editor({
     title,
     type,
+    hasTabs = false,
     children,
     availableFilters,
     maxWidth: initialMaxWidth = 768,
@@ -311,7 +313,7 @@ export function Editor({
             onClick: actionButtons?.strikethrough?.onClick,
             active: actionButtons?.strikethrough?.active,
             disabled: actionButtons?.strikethrough?.disabled,
-            className: 'hidden @md:inline-flex'
+            className: 'hidden @md:inline-flex',
         },
         { type: 'separator', className: 'hidden @3xl:block' },
         {
@@ -411,33 +413,33 @@ export function Editor({
                             {...(hasShareButton
                                 ? showCher
                                     ? {
-                                        onClick: () => {
-                                            addWindow(
-                                                <MediaPlayer
-                                                    newWindow
-                                                    location={{ pathname: `cher` }}
-                                                    key={`cher`}
-                                                    videoId="nZXRV4MezEw"
-                                                />
-                                            )
-                                        },
-                                    }
+                                          onClick: () => {
+                                              addWindow(
+                                                  <MediaPlayer
+                                                      newWindow
+                                                      location={{ pathname: `cher` }}
+                                                      key={`cher`}
+                                                      videoId="nZXRV4MezEw"
+                                                  />
+                                              )
+                                          },
+                                      }
                                     : {
-                                        onClick: () => {
-                                            addWindow(
-                                                <Share
-                                                    title={appWindow?.meta?.title}
-                                                    location={{ pathname: `share` }}
-                                                    key={`share`}
-                                                    newWindow
-                                                    url={`${window.location.origin}${appWindow?.path}`}
-                                                />
-                                            )
-                                        },
-                                    }
+                                          onClick: () => {
+                                              addWindow(
+                                                  <Share
+                                                      title={appWindow?.meta?.title}
+                                                      location={{ pathname: `share` }}
+                                                      key={`share`}
+                                                      newWindow
+                                                      url={`${window.location.origin}${appWindow?.path}`}
+                                                  />
+                                              )
+                                          },
+                                      }
                                 : {
-                                    to: cta?.url,
-                                })}
+                                      to: cta?.url,
+                                  })}
                             state={{ newWindow: true }}
                             asLink
                             className="ml-1 -my-0.5"
@@ -560,102 +562,122 @@ export function Editor({
                             onSearch={onSearchChange}
                         />
 
-                        <ScrollArea>
-                            {showFilters && availableFilters && availableFilters.length > 0 && (
-                                <div className="bg-accent p-2 text-sm border-b border-primary text-primary flex gap-1 sticky top-0 z-40 flex-wrap">
-                                    {availableFilters?.map((filter, index) => {
-                                        return (
-                                            <div key={filter.label} className="flex items-center gap-1">
-                                                <span>{index === 0 ? 'where' : 'and'}</span>
-                                                <span className="text-sm font-bold">{filter.label}</span>
-                                                <span className="italic">{filter.operator}</span>
-                                                <Select
-                                                    key={`${Object.keys(filters).length}-${filter.label}`}
-                                                    disabled={disableFilterChange}
-                                                    placeholder={filter.label}
-                                                    defaultValue={
-                                                        filters[filter.value || filter.label]?.value ||
-                                                        filter.initialValue ||
-                                                        filter.options[0].value
-                                                    }
-                                                    groups={[
-                                                        {
-                                                            label: '',
-                                                            items: filter.options.map((option) => ({
-                                                                label: option.label,
-                                                                value: option.value,
-                                                            })),
-                                                        },
-                                                    ]}
-                                                    onValueChange={(value) =>
-                                                        handleFilterChange(
-                                                            filter.value || filter.label,
-                                                            value,
-                                                            filter.filter
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                    {availableGroups && availableGroups.length > 0 && (
-                                        <div className="@xl:ml-auto flex items-center space-x-1">
-                                            <span className="text-sm font-bold">Group by</span>
+                        {showFilters && availableFilters && availableFilters.length > 0 && (
+                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary flex gap-1 sticky top-0 z-40 flex-wrap">
+                                {availableFilters?.map((filter, index) => {
+                                    return (
+                                        <div key={filter.label} className="flex items-center gap-1">
+                                            <span>{index === 0 ? 'where' : 'and'}</span>
+                                            <span className="text-sm font-bold">{filter.label}</span>
+                                            <span className="italic">{filter.operator}</span>
                                             <Select
-                                                placeholder="Group by"
-                                                defaultValue="none"
+                                                key={`${Object.keys(filters).length}-${filter.label}`}
+                                                disabled={disableFilterChange}
+                                                placeholder={filter.label}
+                                                defaultValue={
+                                                    filters[filter.value || filter.label]?.value ||
+                                                    filter.initialValue ||
+                                                    filter.options[0].value
+                                                }
                                                 groups={[
                                                     {
                                                         label: '',
-                                                        items: [
-                                                            { label: 'None', value: 'none' },
-                                                            ...availableGroups.map((group) => ({
-                                                                label: group.label,
-                                                                value: group.value,
-                                                            })),
-                                                        ],
-                                                    },
-                                                ]}
-                                                onValueChange={(value) => onGroupChange?.(value)}
-                                            />
-                                        </div>
-                                    )}
-                                    {sortOptions && sortOptions.length > 0 && (
-                                        <div className="ml-auto flex items-center space-x-2">
-                                            <span className="text-sm font-bold">Sort by:</span>
-                                            <Select
-                                                placeholder="Sort by"
-                                                defaultValue={defaultSortValue}
-                                                groups={[
-                                                    {
-                                                        label: '',
-                                                        items: sortOptions.map((option) => ({
+                                                        items: filter.options.map((option) => ({
                                                             label: option.label,
                                                             value: option.value,
                                                         })),
                                                     },
                                                 ]}
-                                                onValueChange={(value) => onSortChange?.(value)}
+                                                onValueChange={(value) =>
+                                                    handleFilterChange(
+                                                        filter.value || filter.label,
+                                                        value,
+                                                        filter.filter
+                                                    )
+                                                }
                                             />
                                         </div>
-                                    )}
-                                </div>
-                            )}
-                            <article
-                                style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                className={`${getProseClasses(proseSize)} p-4 mx-auto`}
-                            >
-                                {title && (
-                                    <h1 className="text-2xl font-bold">
-                                        {title}
-                                        {type && <span className="opacity-40">.{type}</span>}
-                                    </h1>
+                                    )
+                                })}
+                                {availableGroups && availableGroups.length > 0 && (
+                                    <div className="@xl:ml-auto flex items-center space-x-1">
+                                        <span className="text-sm font-bold">Group by</span>
+                                        <Select
+                                            placeholder="Group by"
+                                            defaultValue="none"
+                                            groups={[
+                                                {
+                                                    label: '',
+                                                    items: [
+                                                        { label: 'None', value: 'none' },
+                                                        ...availableGroups.map((group) => ({
+                                                            label: group.label,
+                                                            value: group.value,
+                                                        })),
+                                                    ],
+                                                },
+                                            ]}
+                                            onValueChange={(value) => onGroupChange?.(value)}
+                                        />
+                                    </div>
                                 )}
-                                <div className="relative">
-                                    <div ref={searchContentRef}>{children}</div>
-                                </div>
-                            </article>
-                        </ScrollArea>
+                                {sortOptions && sortOptions.length > 0 && (
+                                    <div className="ml-auto flex items-center space-x-2">
+                                        <span className="text-sm font-bold">Sort by:</span>
+                                        <Select
+                                            placeholder="Sort by"
+                                            defaultValue={defaultSortValue}
+                                            groups={[
+                                                {
+                                                    label: '',
+                                                    items: sortOptions.map((option) => ({
+                                                        label: option.label,
+                                                        value: option.value,
+                                                    })),
+                                                },
+                                            ]}
+                                            onValueChange={(value) => onSortChange?.(value)}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                        {hasTabs ? (
+                            <div data-scheme="primary" className="bg-accent h-full">
+                                <article
+                                    data-scheme="primary"
+                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
+                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all`}
+                                >
+                                    {title && (
+                                        <h1 className="text-2xl font-bold">
+                                            {title}
+                                            {type && <span className="opacity-40">.{type}</span>}
+                                        </h1>
+                                    )}
+                                    <div className="relative h-full" ref={searchContentRef}>
+                                        {children}
+                                    </div>
+                                </article>
+                            </div>
+                        ) : (
+                            <ScrollArea>
+                                <article
+                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
+                                    className={`${getProseClasses(proseSize)} p-4 mx-auto transition-all`}
+                                >
+                                    {title && (
+                                        <h1 className="text-2xl font-bold">
+                                            {title}
+                                            {type && <span className="opacity-40">.{type}</span>}
+                                        </h1>
+                                    )}
+                                    <div className="relative">
+                                        <div ref={searchContentRef}>{children}</div>
+                                    </div>
+                                </article>
+                            </ScrollArea>
+                        )}
                     </main>
                 </div>
             </div>

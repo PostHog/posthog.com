@@ -8,6 +8,7 @@ interface ScrollAreaProps {
     fadeOverflow?: boolean | number
     style?: React.CSSProperties
     fullWidth?: boolean
+    viewportClasses?: string
 }
 
 const ScrollArea = ({
@@ -17,6 +18,7 @@ const ScrollArea = ({
     fadeOverflow = false,
     style,
     fullWidth = false,
+    viewportClasses = '',
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
     return (
@@ -25,7 +27,9 @@ const ScrollArea = ({
             className={`relative overflow-hidden h-full ${fullWidth ? 'max-w-screen' : ''} ${className}`}
             style={style}
         >
-            <ScrollAreaPrimitive.Viewport className={`size-full ${fadeHeight ? `pb-${fadeHeight}` : ''}`}>
+            <ScrollAreaPrimitive.Viewport
+                className={`size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
+            >
                 {fullWidth ? <div className="px-4 @xl:px-8">{children}</div> : children}
             </ScrollAreaPrimitive.Viewport>
             <ScrollAreaPrimitive.Scrollbar

@@ -18,6 +18,7 @@ const ChangelogPage = () => {
                 image={`/images/og/changelog.jpg`}
             />
             <Editor
+                hasTabs
                 type="changelog"
                 maxWidth="100%"
                 proseSize="base"
@@ -30,7 +31,8 @@ const ChangelogPage = () => {
                     tabs={tabs}
                     defaultValue="/changelog/2025"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
+                    contentPadding={false}
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"

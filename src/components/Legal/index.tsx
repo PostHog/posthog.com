@@ -5,39 +5,37 @@ import React from 'react'
 
 export default function Legal({ children, defaultTab }: { children: React.ReactNode; defaultTab: string }) {
     return (
-        <ScrollArea>
-            <OSTabs
-                scrollable={false}
-                frame
-                tabs={[
-                    {
-                        label: 'Terms',
-                        value: '/terms',
-                        content: children,
-                    },
-                    {
-                        label: 'Privacy',
-                        value: '/privacy',
-                        content: children,
-                    },
-                    {
-                        label: 'DPA generator',
-                        value: '/dpa',
-                        content: children,
-                    },
-                    {
-                        label: 'BAA generator',
-                        value: '/baa',
-                        content: children,
-                    },
-                ]}
-                defaultValue={defaultTab}
-                onValueChange={(value) => {
-                    navigate(value)
-                }}
-                centerTabs
-                tabContentClassName="!p-0"
-            />
-        </ScrollArea>
+        <OSTabs
+            padding
+            contentPadding={false}
+            tabs={[
+                {
+                    label: 'Terms',
+                    value: '/terms',
+                    content: children,
+                },
+                {
+                    label: 'Privacy',
+                    value: '/privacy',
+                    content: children,
+                },
+                {
+                    label: 'DPA generator',
+                    value: '/dpa',
+                    content: children,
+                },
+                {
+                    label: 'BAA generator',
+                    value: '/baa',
+                    content: children,
+                },
+            ]}
+            defaultValue={defaultTab}
+            onValueChange={(value) => {
+                navigate(value)
+            }}
+            centerTabs
+            className="h-full"
+        />
     )
 }

@@ -214,7 +214,8 @@ export default function Roadmap({ frame }: { frame: boolean }) {
     return (
         <OSTabs
             className="relative flex flex-col h-full min-h-0 mt-4"
-            frame={frame}
+            border={frame}
+            contentPadding={frame}
             tabs={[
                 {
                     label: `wip (${wip.nodes.length})`,
