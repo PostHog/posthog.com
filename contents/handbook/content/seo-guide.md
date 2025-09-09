@@ -134,7 +134,7 @@ The goal is to make our content the easiest, clearest, most trustworthy answer i
 - **Authority signals:** Cite sources, include data, and highlight expert input. Models tend to favor content that “looks” trustworthy. Author bios, sources, and first-hand insights boost trust.  
 - **Chunk quality:** Keep sections focused. A 200-word section that completely answers one question is more reusable than a 1,000-word wall of text.  
 - **Stay fresh and correct:** Outdated or wrong info can keep us out of results (or worse, get us quoted incorrectly). Include timestamps, years, and up-to-date references (“as of 2025”).  
-- **Favor Q\&A format:** Perplexity loves conversational answers and listicles (think “Top 5 tools for X”).  
+- **Favor Q&A format:** Perplexity loves conversational answers and listicles (think “Top 5 tools for X”).  
 - **Consistency matters:** Keep facts about PostHog accurate and aligned across different pieces of content.  
 - **Watch competitors:** Monitor what SGE cites and improve on those answers to outrank them.
 
