@@ -21,8 +21,6 @@ We craft our content to address those underlying needs. Cover the main topic tho
   * When should you focus on retention vs. acquisition?  
 * **Next steps:** Link to guides on retention strategies, cohort analysis, and churn reduction.
 
-  welkfehwglkwehglkehgwle gwlesgkhvkj wsedv.khwselvkj 
-
 ### 2. Make it easy to digest
 
 When answering a question, we lead with the answer first, then expand with supporting details. This helps impatient readers and aligns with how AI tools select responses.
