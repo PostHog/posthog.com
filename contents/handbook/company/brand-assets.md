@@ -7,6 +7,18 @@ hideAnchor: false
 
 > **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
+## Logo and brand usage for third-parties
+
+We’re really happy people want to build on top of PostHog, but we want to keep it clear when something is made by us or made by someone else. If you've built a third-party app on top of PostHog or want to partner with us in some way, here is some high-level guidance for you to bear in mind.
+
+- We're _generally OK_ with people using the PostHog name to describe compatibility. For example, you can say your product "works with PostHog," is "built for PostHog" or "built on PostHog".
+
+- We're *not OK* with people using the PostHog name to make it look like your project is made by, endorsed by, or is officially partnered with PostHog if it isn't. So for example, while "Desktop Studio for PostHog" would be fine, "Official PostHog Desktop Studio" or "PostHog Desktop Studio" would not be.
+
+- You can use our logo or brand assets only in unmodified form, and not as the main branding for your own project. You cannot make it seem like your product is an official PostHog product. Please make sure that logo and name usage are consistent with the rules we've laid out in this page.
+
+We don't like doing it, but if we spot some name or logo usage that are inconsistent with our guidelines or brand, we will reach out to try to get that sorted out, so please try to be thoughtful about branding and try to be consistent with the guidelines we've set out here. If you have questions, please reach out to us at marketing@posthog.com for clarification. 
+
 ## Logo
 
 If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss. 

@@ -163,7 +163,7 @@
     }
 
     .prose-sm {
-        @apply text-[15px];
+        @apply text-[15px] [&_table]:text-[15px];
 
         li p {
             @apply mt-2;

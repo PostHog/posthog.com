@@ -40,7 +40,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         {
             allMdx(
                 filter: {
-                    fileAbsolutePath: { regex: "/^((?!contents/teams/|contents/about.mdx).)*$/" }
+                    fileAbsolutePath: {
+                        regex: "/^((?!contents/teams/|contents/about.mdx|contents/media-contents.mdx).)*$/"
+                    }
                     frontmatter: { title: { nin: [""] }, template: { nin: ["custom"] } }
                 }
             ) {

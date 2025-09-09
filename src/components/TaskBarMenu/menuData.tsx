@@ -371,7 +371,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Topic libraries',
+                    label: "Everything we've learned",
                     disabled: true,
                 },
                 {
@@ -414,6 +414,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
+                },
+                {
+                    type: 'item',
+                    label: 'Media',
+                    link: '/media',
                 },
                 {
                     type: 'separator',

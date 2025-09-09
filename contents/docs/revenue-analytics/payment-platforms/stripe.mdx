@@ -1,0 +1,27 @@
+---
+title: Add stripe as a revenue source
+sidebar: Docs
+showTitle: true
+---
+
+When using revenue analytics, you can connect Stripe to PostHog as a source of revenue data. Revenue analytics will automatically use the data from Stripe to build your [revenue dashboard](/docs/revenue-analytics/dashboard).
+
+import Stripe from '../../cdp/sources/_snippets/source-stripe.mdx'
+
+<Stripe />
+
+## How is the data stored?
+
+Your data will be imported and transformed into a set of [managed views](/docs/revenue-analytics/managed-views). Revenue analytics will use these views to build your [revenue dashboard](/docs/revenue-analytics/dashboard) automatically.
+
+You can also use these views in the [SQL editor](/docs/data-warehouse/query) to run custom queries and visualize the data.
+
+## Deferred revenue
+
+PostHog will automatically defer revenue recognition to match your accounting practices. This means we spread the revenue across all the months a charge is relevant for. You can read more about this on the [deferred revenue](/docs/revenue-analytics/deferred-revenue) page.
+
+## Connect to customers
+
+You can link your Stripe customers to your [persons](/docs/persons) and [groups](/docs/groups) in PostHog. This helps you identify your top customers and see how much revenue they're generating.
+
+You can learn more about this on the [connect to customers](/docs/revenue-analytics/connect-to-customers) page.

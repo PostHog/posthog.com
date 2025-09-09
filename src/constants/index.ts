@@ -11,8 +11,7 @@ export const INACTIVITY_TIMEOUTS = {
 export const explorerGridColumns =
     'grid-cols-2 @xs:grid-cols-3 @md:grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 @2xl:grid-cols-6 @3xl:grid-cols-7 @4xl:grid-cols-8 @5xl:grid-cols-9 @6xl:grid-cols-10 @7xl:grid-cols-11'
 
-export const TABLE_CLASSES =
-    'min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12 [&_table]:text-[15px]'
+export const TABLE_CLASSES = 'min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12'
 
 // Base prose classes without size modifiers
 export const PROSE_CORE = `prose dark:prose-invert
