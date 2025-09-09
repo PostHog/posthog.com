@@ -11,10 +11,10 @@ export const newestProducts = ['llm_analytics', 'error_tracking', 'revenue_analy
 export const categoryOrder = [
     'data',
     'analytics',
+    'product_engineering',
     'dataviz',
     'product',
     // 'engineering',
-    'product_engineering',
     'communication',
     'ai',
     'product_os',
@@ -22,35 +22,35 @@ export const categoryOrder = [
 
 // Display names for categories
 export const categoryDisplayNames: Record<string, string> = {
-    ai: 'PostHog AI',
     data: 'Customer data infrastructure',
+    product_engineering: 'Product engineering',
     analytics: 'Analytics dashboards',
     dataviz: 'Data visualization',
     product: 'Product',
     // engineering: 'Engineering',
-    product_engineering: 'Product engineering',
     communication: 'Communication',
+    ai: 'PostHog AI',
     product_os: 'Utilities, add-ons, & packages',
 }
 
 // Icons and colors for categories
 export const categoryIcons: Record<string, { icon: string; color: string }> = {
-    ai: { icon: 'IconSparkles', color: 'purple' },
     data: { icon: 'IconDatabase', color: 'blue' },
+    product_engineering: { icon: 'IconCode2', color: 'seagreen' },
     analytics: { icon: 'IconDashboard', color: 'green' },
     dataviz: { icon: 'IconTrends', color: 'yellow' },
     product: { icon: 'IconApps', color: 'red' },
     // engineering: { icon: 'IconWrench', color: 'gray' },
-    product_engineering: { icon: 'IconCode2', color: 'seagreen' },
     communication: { icon: 'IconMessage', color: 'sky-blue' },
+    ai: { icon: 'IconSparkles', color: 'purple' },
     product_os: { icon: 'IconGear', color: 'gray' },
 }
 
 // Product ordering within categories
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
-    ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
     data: ['customer-data-infrastructure', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
+    product_engineering: ['session-replay', 'experiments', 'feature-flags', 'error-tracking', 'early_access'],
     analytics: [
         'web_analytics',
         'product_analytics',
@@ -70,8 +70,8 @@ export const productOrder: Record<string, string[]> = {
         'sql',
         'bi',
     ],
-    product_engineering: ['session-replay', 'experiments', 'feature-flags', 'error-tracking', 'early_access'],
     communication: ['surveys', 'messaging', 'user-interviews'],
+    ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
     product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform-packages'],
 }
 

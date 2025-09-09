@@ -359,8 +359,8 @@ export default function Products(): JSX.Element {
                                 </p>
                                 <ul className="pl-4 mb-4 [&_li]:text-sm">
                                     <li>Customer data infrastructure</li>
-                                    <li>Analytics/data viz</li>
                                     <li>Product engineering tools</li>
+                                    <li>Analytics/data viz</li>
                                     <li>
                                         AI <Icons.IconSparkles className="inline-block size-4 relative -top-px" />
                                     </li>
