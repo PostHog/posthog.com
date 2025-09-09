@@ -7,16 +7,16 @@ hideAnchor: true
 
 ## Engineering hiring at PostHog
 
-Engineers make up around 60% of our team, and we are almost always hiring for Engineering roles. Please check our [careers page](/careers) for our open roles. 
+Engineers make up around 60% of our team, and we are almost always hiring for Engineering roles. This page outlines our engineering hiring process, roles, and best practices for interviewers. You can find all open roles at PostHog on our [careers page](/careers), in case you want to refer someone. 
 
 ### What we are looking for in engineering hires
 
 Beyond the specific skills listed in the job description, we generally look for: 
 
 *   Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
-    *   We don't care how many years of professional experience you have, but depending on our current team structure we may be looking for more or less experienced people for a role - if that's the case, we will be explicit in the job spec.
+    *   We don't care how many years of professional experience someone have, but depending on our current team structure we may be looking for more or less experienced people for a role - if that's the case, we will be explicit in the job spec.
 *   Has built something from scratch, ideally with minimal outside help
-    *   You may have been the founder of a startup, or built an impressive side project. You may have also worked on a project at work where you were the only developer.
+    *   They may have been the founder of a startup, or built an impressive side project. They may have also worked on a project at work where they were the only developer.
 *   Communication skills
     *   More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
 *   User-centric
@@ -24,40 +24,42 @@ Beyond the specific skills listed in the job description, we generally look for:
 
 ### Engineering hiring process 
 
-#### Culture interview 
+Hiring is a team effort, and we need everyone to contribute to make the best new hires. Talent Partners handle all scheduling throughout the interview process, and support both interviewers, candidates and hiring leads.
 
-This is the usual first round interview with the People & Ops team. 
+#### Culture screen 
 
-#### Technical interview
+The culture screen is handled by the Talent team. Normally this is a 20-30 min call where they make an initial asssessment for the candidate's fit for the job, culture, communication style, and sort all logistics. 
+
+#### Technical screen
 
 The [technical interview](/handbook/people/hiring-process#2-technical-interview-with-the-hiring-manager) is an hour-long technical interview with one of our engineers. This might be architecture design or diving more into past technical experiences in more of a workshop style. No whiteboarding or brain teasers. 
 
 Sometimes when you get part of the way into a technical interview it becomes clear that the person is not a fit. Because rejecting candidates needs to be done in a specific way, please continue the interview as usual and do not reject on the call. It's okay to end the interview a bit early - interviews often don't take the entire time, and it's okay to give this caveat ahead of every technical interview.
 
-> The engineer interviewing you may be shadowed by another PostHog team member – a shadow is someone who listens in, but doesn't participate. This is something we do regularly among technical interviewers, as a way of improving the hiring process.
+> You may be shadowed by another PostHog team member – a shadow is someone who listens in, but doesn't participate. This is something we do regularly among technical interviewers, as a way of improving the hiring process.
 
 #### Culture & motivation chat
 
-Congratulations on passing the technical interview! One of our co-founders – [Tim](/tim) or [James](/james), depending on scheduling – would love to learn about your previous experiences and what motivates you.
+One of our co-founders – [Tim](/tim) or [James](/james), depending on scheduling – will meet with the candidate for a short 15 min chat to dive deeper into culture and motivation. 
 
 #### Engineering SuperDay
 
 The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around the candidate's schedule. 
 
-For full-stack roles, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of their ability to prioritize. 
+For full-stack roles, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of their ability to prioritize (and ship!). 
 
 Each engineering SuperDay will have a SuperDay buddy, this person will conduct the interview halfway through the day, will be available in Slack throughout the day to answer any questions, they will also be giving feedback on the SuperDay output.
 
 An engineering SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
 *   An invitation to a personal Slack channel for the SuperDay, which we'll use throughout the day
-   * This will include:- 2x Ops team members, 2 cofounders, the interviewer from the technical screen & the SuperDay buddy      
+   * This will include:- the talent team, cofounders, exec, hiring lead, & the SuperDay buddy      
 *   Time to focus on the task
 *   An interview with the SuperDay buddy
-*   A chat with [James](/james) or [Tim](/tim), whoever they didn't meet with in the previous stage
+*   A chat with [James](/james), [Tim](/tim), or an exec, whoever they didn't meet with in the previous stage
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
-A couple of PostHog engineers will then take a look at the candidate's work, and we'll get back to them with our final decision ASAP (always within a few days).
+Usually the Superday buddy will review the output, but they can ask other engineers for input when needed, and we'll get back to the candidate with our final decision ASAP (always within a few days).
 
 Overall, candidates should spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we base our decision on their output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems.
 
@@ -65,7 +67,7 @@ Overall, candidates should spend at least 80% of their time and energy on the ta
 
 As PostHog grows and our hiring goals get bigger and bigger, to achieve that we will need more people taking interviews and assessing people in those interviews. As we scale, it's important that we maintain a calibration across interviewers by onboarding each new interviewer to the interviewing process carefully. 
 
-If you wish to get involved in interviewing, you can request so by contacting the talent team using the @talent-folks handle in Slack in the #team-people-and-ops channel. Please note, that if you are in your first 90 days at PostHog, you should not be focussing on interviewing and focus on ramping up and onboarding successfully. Interviewing can be distracting, so even avoid shadowing in this period of time. 
+If you wish to get involved in interviewing, you can request so by contacting the talent team using the @talent-folks handle in Slack in the #team-people-and-ops channel. Please note, that if you are in your first 90 days at PostHog, you should not be focussing on interviewing and focus on ramping up and onboarding successfully.  
 
 Once you have let the talent team know, you'll work closely with a Talent Partner to get you up to speed. This will involve them scheduling you to shadow at least two live technical screens with two of our most experienced interviewers. They will also share with you the relevant watching and reading materials that should be consumed before conducting your first interview. Your very first interview will be shadowed by one of our experienced interviewers and they will give you feedback, on both their assessment of the candidate interviewed and then how you did. Based on how this goes, either you can get another interview shadowed by another engineer for more feedback, or you can go out on your own. 
 
@@ -85,7 +87,7 @@ You should try and keep your approach relatively consistent for the first 5-10 i
 
 ### How to keep improving as an interviewer
 
-- Regularly shadow other interviewers, have other interviewers shadow you. Give each other feedback.
+- Regularly shadow other interviewers, have other interviewers shadow you. 
 - Speak with Talent Partners, ask for their feedback
 - Ask exec's why they gave specific scores about candidates you interviewed
 - Keep track of how the candidates you have assessed get on in the later stages 
