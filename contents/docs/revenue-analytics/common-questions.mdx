@@ -1,0 +1,115 @@
+---
+title: Revenue analytics troubleshooting and FAQs
+sidebar: Docs
+showTitle: true
+---
+
+import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+
+<RevAnalyticsBetaWarning />
+
+Have a question not covered here? [Let us know](http://app.posthog.com/home#supportModal).
+
+## How do you convert revenue in different currencies?
+
+We automatically convert revenue from other currencies into your chosen reporting currency. If someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), it's converted into USD in PostHog to ensure consistency.
+
+PostHog's currency conversion data is sourced from [Open Exchange Rates](https://openexchangerates.org/). The exchange rate data is updated hourly and stored with daily granularity.
+
+This ensures that your revenue data is converted using recent exchange rates, based on the exchange rate at the time of the event, providing reliable revenue analytics across different currencies.
+
+## Which currencies do you support?
+
+PostHog supports a wide range of global currencies for revenue tracking. See our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py) for a complete list.
+
+## What "currency's minor unit" means?
+
+You can choose between sending the minor unit of the currency or the decimal amount. For example, the whole amount of `$20.45` (as in 20 dollars and 45 cents) would be equal to the minor unit of `2045` (as in 2,045 cents).
+
+While we support both, we recommend sending the minor to avoid floating point precision issues.
+
+When sending the minor unit of the currency, we'll treat it as follows:
+- `1045` in `USD` (or any other two-decimal currency) is treated as $10.45
+- `1045` in `JPY` (or any other [zero-decimal currency](#zero-decimal-currencies)) is treated as ¥1045
+
+### Zero-decimal currencies
+
+When you enable "values are in cents" (minor unit), we consider most currencies to be two-decimal currencies unless they are in the following list:
+
+<div className="grid grid-cols-2 gap-2">
+    <ul>
+        <li>BIF</li>
+        <li>CLP</li>
+        <li>DJF</li>
+        <li>GNF</li>
+        <li>JPY</li>
+        <li>KMF</li>
+        <li>KRW</li>
+        <li>MGA</li>
+    </ul>
+    <ul>
+        <li>PYG</li>
+        <li>RWF</li>
+        <li>UGX</li>
+        <li>VND</li>
+        <li>VUV</li>
+        <li>XAF</li>
+        <li>XOF</li>
+        <li>XPF</li>
+    </ul>   
+</div>
+
+There's also one exception to what you'd expect from a zero-decimal currency, and that's the Icelandic Krona (ISK). The Icelandic Krona (ISK) is a zero-decimal currency, but we treat it as a two-decimal currency to keep backwards compatibility with our integration with Stripe.
+
+## What if you don't support the currency on my revenue event?
+
+This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
+
+### Why isn't my revenue appearing in the revenue analytics dashboard?
+
+If your revenue isn't appearing in your revenue analytics dashboard, there are a few common issues to check:
+
+1. **Check the Revenue tab in Data management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management.
+1. **Make sure Revenue tracking is enabled for your Data warehouse source**: Legacy data warehouse sources have revenue tracking disabled by default. Make sure you enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
+1. **Check your filters**: you can choose to filter revenue events in the Revenue analytics dashboard filter, make sure you have selected the desired entries.
+
+## Can I query converted rates?
+
+Yes, you can query converted rates yourself in SQL using the `convertCurrency` function. This is useful for custom queries and advanced analytics.
+
+Example:
+
+```sql
+SELECT 
+    *,
+    properties.$currency as original_currency,
+    properties.value as original_value,
+    convertCurrency(original_currency, 'USD', original_value, _toDate(timestamp)) as value_usd
+FROM events
+WHERE event = 'purchase'
+```
+
+The signature for the `convertCurrency` function is:
+
+```
+convertCurrency(
+    from_currency: string,
+    to_currency: string,
+    value: Decimal,
+    timestamp: Date | DateTime
+) -> Decimal
+```
+
+## Can I correlate revenue with paid ads data?
+
+This feature is currently under development. Soon, PostHog will support sources for importing ad expense data, allowing you to analyze return on ad spend directly within the platform.
+
+## Can I compute CAC and CPC?
+
+Computing Customer Acquisition Cost (CAC) and Cost Per Click (CPC) will be possible once we've completed integrations with ad expense platforms. These metrics will provide valuable insights into your marketing efficiency and return on investment. You can learn more about this on the [Marketing Analytics](/docs/web-analytics/marketing-analytics) page.
+
+## Can I use custom currency conversion data?
+
+Currently, PostHog does not support using custom currency conversion data. We rely on the exchange rates provided by Open Exchange Rates.
+
+If you need support for custom conversion rates, please [create a feature request](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=), so our team can consider adding this functionality.

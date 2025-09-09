@@ -332,6 +332,7 @@ export default function ReaderView({
     header,
     hideTitle = false,
     tableOfContents,
+    hideMobileTableOfContents = false,
     mdxComponents,
     commits,
     filePath,
@@ -360,6 +361,7 @@ export default function ReaderView({
                 header={header}
                 hideTitle={hideTitle}
                 tableOfContents={tableOfContents}
+                hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
                 commits={commits}
                 filePath={filePath}
@@ -491,6 +493,7 @@ function ReaderViewContent({
     header,
     hideTitle = false,
     tableOfContents,
+    hideMobileTableOfContents = false,
     mdxComponents,
     commits,
     filePath,
@@ -673,7 +676,7 @@ function ReaderViewContent({
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                     </div>
                                 )}
-                                {tableOfContents && tableOfContents.length > 0  && !hideRightSidebar && (
+                                {tableOfContents && tableOfContents.length > 0 && !hideMobileTableOfContents && !hideRightSidebar && (
                                     <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
                                         <TableOfContents
                                             tableOfContents={tableOfContents}

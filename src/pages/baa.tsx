@@ -156,9 +156,9 @@ function BAAGenerator() {
                     <p className="text-sm">After completing this form, we'll be in touch to finalize the details.</p>
                     <p className="text-sm">
                         Important: You'll need to be subscribed to our{' '}
-                        <Link to="/platform-addons#boost-add-on">Boost</Link>,{' '}
-                        <Link to="/platform-addons#scale-add-on">Scale</Link>, or{' '}
-                        <Link to="/platform-addons#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
+                        <Link to="/platform-packages#boost-add-on">Boost</Link>,{' '}
+                        <Link to="/platform-packages#scale-add-on">Scale</Link>, or{' '}
+                        <Link to="/platform-packages#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
                     </p>
 
                     {!submitted && (

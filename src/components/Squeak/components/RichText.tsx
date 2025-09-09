@@ -238,6 +238,7 @@ export default function RichText({
     label = '',
     mentions = false,
     bodyKey = 'body',
+    className = '',
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -415,7 +416,7 @@ export default function RichText({
                                 )}
                             </AnimatePresence>
                         )}
-                        <div className="py-3 px-4 pb-8">
+                        <div className="border-b border-secondary">
                             {label && !!value && (
                                 <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
                             )}
@@ -423,7 +424,7 @@ export default function RichText({
                                 onPaste={handlePaste}
                                 disabled={imageLoading}
                                 autoFocus={autoFocus}
-                                className="bg-primary border-none text-base h-[200px] resize-none w-full text-primary p-0"
+                                className={`bg-primary border-none text-base h-[200px] resize-none w-full text-primary p-4 ${className}`}
                                 onBlur={(e) => e.preventDefault()}
                                 name="body"
                                 value={value}
@@ -448,7 +449,7 @@ export default function RichText({
                         </span>
                     </div>
                 )}
-                <div className="flex items-center justify-between py-1">
+                <div data-scheme="secondary" className="bg-primary flex items-center justify-between py-1">
                     <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
                         {buttons.map((button, index) => {
                             return (
@@ -457,9 +458,9 @@ export default function RichText({
                                         variant="default"
                                         size="md"
                                         icon={button.icon}
+                                        iconClassName="size-5 justify-center items-center flex"
                                         tooltip={button.tooltipContent}
                                         onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
-                                        className="!p-2"
                                     />
                                 </li>
                             )
@@ -485,6 +486,7 @@ export default function RichText({
                                         />
                                     </svg>
                                 }
+                                iconClassName="size-5 justify-center items-center flex"
                                 tooltip="Image"
                                 onClick={(e) => {
                                     e.preventDefault()
@@ -500,10 +502,10 @@ export default function RichText({
                                         variant="default"
                                         size="md"
                                         icon={<Edit />}
+                                        iconClassName="size-5 justify-center items-center flex"
                                         tooltip="Edit"
                                         onClick={() => setShowPreview(false)}
                                         active={!showPreview}
-                                        className="!p-2"
                                     />
                                 </li>
                                 <li>
@@ -534,7 +536,7 @@ export default function RichText({
                                         tooltip="Preview"
                                         onClick={() => setShowPreview(true)}
                                         active={showPreview}
-                                        className="!p-2"
+                                        iconClassName="size-5 justify-center items-center flex"
                                     />
                                 </li>
                             </>

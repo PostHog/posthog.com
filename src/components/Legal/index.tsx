@@ -7,6 +7,8 @@ export default function Legal({ children, defaultTab }: { children: React.ReactN
     return (
         <ScrollArea>
             <OSTabs
+                scrollable={false}
+                frame
                 tabs={[
                     {
                         label: 'Terms',

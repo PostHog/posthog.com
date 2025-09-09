@@ -389,7 +389,7 @@ const companyBreakdowns = {
     },
     shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
-    american: { col1: 'Founded in America', col2: 'Not founded in American' },
+    american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
 }
 
@@ -653,8 +653,8 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'session_replay',
                             'web_analytics',
+                            'session_replay',
                             'product_analytics',
                             'feature_flags',
                             'surveys',
@@ -667,9 +667,9 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'product_analytics',
-                            'web_analytics',
                             'session_replay',
+                            'web_analytics',
+                            'product_analytics',
                             'experiments',
                             'feature_flags',
                             'surveys',
@@ -1098,7 +1098,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonAI',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/ai">Read AI agents.md</Button>,
+        Editor: () => <Button url="/max">Learn about Max AI</Button>,
     },
     {
         name: 'ButtonAbout',

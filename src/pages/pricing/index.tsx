@@ -148,7 +148,7 @@ export default function Pricing() {
     }, [search])
 
     return (
-        <ReaderView hideLeftSidebar tableOfContents={pricingTableOfContents}>
+        <ReaderView hideLeftSidebar tableOfContents={pricingTableOfContents} hideMobileTableOfContents>
             <SEO title="Pricing - PostHog" description="Find out how much it costs to use PostHog" />
 
             <PricingExperiment
@@ -172,8 +172,6 @@ export default function Pricing() {
             <PurchasedWith />
 
             <Reviews />
-
-
 
             <SectionLayout id="faq" className="mb-12">
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>

@@ -365,7 +365,7 @@ export default function SalesforceForm({
                         <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                     </div>
                 )}
-                <div className="bg-accent border border-input px-6 py-8 rounded-md mt-4">
+                <div className="bg-accent border border-input px-6 py-16 rounded-md flex justify-center items-center">
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>
             </>

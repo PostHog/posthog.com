@@ -3242,16 +3242,6 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Revenue analytics',
-                    url: '/docs/web-analytics/revenue-analytics',
-                    icon: 'IconPiggyBank',
-                    color: 'salmon',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Marketing analytics',
                     url: '/docs/web-analytics/marketing-analytics',
                     icon: 'IconGraph',
@@ -4515,6 +4505,91 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Revenue analytics',
+            icon: 'IconPiggyBank',
+            color: '[#36C46F]',
+            url: '/docs/revenue-analytics',
+            description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Revenue analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/revenue-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/revenue-analytics/getting-started',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Dashboard',
+                    url: '/docs/revenue-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'orange',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Connect to customers',
+                    url: '/docs/revenue-analytics/connect-to-customers',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Deferred Revenue',
+                    url: '/docs/revenue-analytics/deferred-revenue',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'Managed views',
+                    url: '/docs/revenue-analytics/managed-views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/revenue-analytics/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'Max AI',
             icon: 'IconMagicWand',
             color: 'purple',
@@ -4578,10 +4653,10 @@ export const pricingMenu = {
             url: '/addons',
         },
         {
-            name: 'Platform add-ons',
+            name: 'Platform packages',
             icon: 'IconServer',
             color: 'purple',
-            url: '/platform-addons',
+            url: '/platform-packages',
         },
         {
             name: 'Pricing philosophy',

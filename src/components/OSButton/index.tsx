@@ -33,7 +33,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
     icon?: React.ReactNode
     iconClassName?: string
-    tooltip?: string
+    tooltip?: string | React.ReactNode
     label?: string
     chip?: string
     chipColor?: string

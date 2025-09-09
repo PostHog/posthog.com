@@ -32,7 +32,7 @@ export const ToggleGroup = ({
 
     return (
         <>
-            {!hideTitle && <label className="pt-1.5 text-sm">{title}</label>}
+            {!hideTitle && <label className="pt-1.5 text-[15px] block mb-1">{title}</label>}
             <RadixToggleGroup.Root
                 className={`flex space-x-px rounded p-1 bg-primary border border-primary ${className}`}
                 type="single"

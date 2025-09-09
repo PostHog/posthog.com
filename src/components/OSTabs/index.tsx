@@ -140,7 +140,10 @@ export default function OSTabs({
         // Only run tab row calculation for horizontal orientation (when tabs might wrap)
         if (orientation === 'vertical' || !ref.current) return
 
-        calculateTabRows()
+        setTimeout(() => {
+            calculateTabRows()
+        }, 300)
+
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
@@ -222,7 +225,7 @@ export default function OSTabs({
                         <TabContentContainer
                             className={`@container bg-primary h-full min-h-0 ${
                                 frame ? 'border border-primary rounded-md' : ''
-                            } ${!scrollable ? 'overflow-hidden' : ''}`}
+                            }`}
                         >
                             <div
                                 className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}

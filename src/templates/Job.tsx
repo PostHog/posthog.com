@@ -50,6 +50,19 @@ interface GitHubIssue {
     labels?: Array<{ name: string; url: string }>
 }
 
+interface TableOfContentsItem {
+    value: string
+    url: string
+    depth: number
+}
+
+interface ParsedContentItem {
+    value: string
+    trigger: React.ReactNode
+    content: React.ReactNode
+    title: string
+}
+
 interface JobProps {
     data: {
         teams: any
@@ -300,7 +313,7 @@ export default function Job({
 }: JobProps) {
     // State variables
     const [showTableOfContents, setShowTableOfContents] = useState(false)
-    const [parsedContent, setParsedContent] = useState<any[]>([])
+    const [parsedContent, setParsedContent] = useState<ParsedContentItem[]>([])
     const [searchQuery, setSearchQuery] = useState('')
 
     // Extract data from props
@@ -391,15 +404,18 @@ export default function Job({
     }, [searchQuery, allJobs])
 
     const multipleTeams = teams?.nodes?.length > 1
-    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `Team ${teams?.nodes?.[0]?.name}` : ''
+    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `${teams?.nodes?.[0]?.name} Team` : ''
 
     const [jobTitle] = title.split(' - ')
 
     // Parse HTML content to extract details blocks
     useEffect(() => {
         if (html) {
+            // Filter out unwanted content
+            const filteredHtml = html.replace('<p><em>#LI-DNI</em></p>', '').replace('<p>#LI-DNI</p>', '')
+
             const parser = new DOMParser()
-            const doc = parser.parseFromString(html, 'text/html')
+            const doc = parser.parseFromString(filteredHtml, 'text/html')
             const detailsElements = doc.querySelectorAll('details')
 
             if (detailsElements.length > 0) {
@@ -433,9 +449,9 @@ export default function Job({
 
     const jobTableOfContents = useMemo(() => {
         // Replace the original table of contents entries with accordion section references
-        const tocWithAccordions = tableOfContents.map((item: any) => {
+        const tocWithAccordions = tableOfContents.map((item: TableOfContentsItem) => {
             // Find if this TOC item matches an accordion section
-            const accordionItem = parsedContent.find((content: any) => content.title === item.value)
+            const accordionItem = parsedContent.find((content: ParsedContentItem) => content.title === item.value)
 
             if (accordionItem) {
                 // This is an accordion section, update the URL to point to the accordion
@@ -539,11 +555,13 @@ export default function Job({
 
                 <div className="space-y-8">
                     <div>
-                        {teamName && <p className="m-0 opacity-60 pb-2">{teamName}</p>}
+                        {teamName && <p className="m-0 text-secondary pb-2">{teamName}</p>}
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
+                            {/*                         
                             {departmentName?.toLowerCase() !== 'speculative' && (
                                 <Detail title="Department" value={departmentName} icon={<Department />} />
-                            )}
+                            )} */}
+
                             <Detail
                                 title="Location"
                                 value={`Remote${locations?.length > 0 ? ` (${locations.join(', ')})` : ''}`}
@@ -573,7 +591,9 @@ export default function Job({
                             ) : (
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: html,
+                                        __html: html
+                                            .replace('<p><em>#LI-DNI</em></p>', '')
+                                            .replace('<p>#LI-DNI</p>', ''),
                                     }}
                                 />
                             )}
@@ -582,12 +602,12 @@ export default function Job({
                         {/* Right sidebar with team info */}
                         <div className="lg:col-span-1">
                             <div className="sticky top-4">
-                                <h2 className="my-0 leading-tight text-base">
+                                <h2 className="mt-0 mb-2 leading-tight text-base text-center">
                                     {teams?.nodes?.length > 0
                                         ? multipleTeams
                                             ? 'Teams hiring for this role'
                                             : 'Meet your team'
-                                        : 'Your team'}
+                                        : 'About this team'}
                                 </h2>
 
                                 <TeamsSidebar

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
+import { INACTIVITY_TIMEOUTS } from '../constants'
 
 interface UseInactivityDetectionOptions {
     focusedTimeout?: number
@@ -7,8 +8,8 @@ interface UseInactivityDetectionOptions {
 }
 
 export const useInactivityDetection = ({
-    focusedTimeout = 120000, // 120 seconds
-    unfocusedTimeout = 30000, // 30 seconds
+    focusedTimeout = INACTIVITY_TIMEOUTS.FOCUSED,
+    unfocusedTimeout = INACTIVITY_TIMEOUTS.UNFOCUSED,
     enabled = true,
 }: UseInactivityDetectionOptions = {}) => {
     const [isInactive, setIsInactive] = useState(false)

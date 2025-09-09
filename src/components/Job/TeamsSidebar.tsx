@@ -5,6 +5,62 @@ import { StickerPineappleYes, StickerPineappleNo, StickerPineapple } from 'compo
 import { TeamMembers } from 'components/Job/Sidebar'
 import { Accordion } from 'components/RadixUI/Accordion'
 
+// Helper function to parse HTML and replace anchor tags with Link components
+const parseDescriptionWithLinks = (htmlString: string) => {
+    if (!htmlString) return null
+
+    // Check if we're in a browser environment (not SSR)
+    if (typeof document === 'undefined') {
+        return htmlString
+    }
+
+    // Create a temporary div to parse the HTML
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = htmlString
+
+    // Find all anchor tags and replace them
+    const anchorTags = tempDiv.querySelectorAll('a')
+    const result: React.ReactNode[] = []
+    let lastIndex = 0
+
+    // Process each anchor tag
+    anchorTags.forEach((anchor, index) => {
+        const href = anchor.getAttribute('href')
+        const text = anchor.textContent || ''
+
+        // Add text before this anchor
+        const beforeText = htmlString.substring(lastIndex, htmlString.indexOf(anchor.outerHTML, lastIndex))
+        if (beforeText) {
+            result.push(beforeText)
+        }
+
+        // Add the Link component
+        if (href) {
+            result.push(
+                <Link key={`link-${index}`} to={href} state={{ newWindow: true }}>
+                    {text}
+                </Link>
+            )
+        } else {
+            result.push(text)
+        }
+
+        lastIndex = htmlString.indexOf(anchor.outerHTML, lastIndex) + anchor.outerHTML.length
+    })
+
+    // Add any remaining text after the last anchor
+    if (lastIndex < htmlString.length) {
+        result.push(htmlString.substring(lastIndex))
+    }
+
+    // If no anchors were found, return the original HTML as a string
+    if (anchorTags.length === 0) {
+        return htmlString
+    }
+
+    return result
+}
+
 // Fallback team data for roles without teams
 const fallbackTeam = {
     name: 'Mystery',
@@ -62,7 +118,7 @@ export const TeamInfoDisplay = ({
         // Compact version for Job template
         return (
             <div className="space-y-4">
-                <div className="flex justify-center">
+                <div className="flex justify-center mb-4">
                     {isFallback ? (
                         // Don't link the fallback team
                         <TeamPatch
@@ -84,7 +140,9 @@ export const TeamInfoDisplay = ({
                     )}
                 </div>
 
-                {displayTeam.description && <p className="text-sm text-secondary !my-0">{displayTeam.description}</p>}
+                {displayTeam.description && (
+                    <p className="text-sm text-secondary !my-0">{parseDescriptionWithLinks(displayTeam.description)}</p>
+                )}
 
                 {teamLength > 0 && (
                     <>
@@ -144,7 +202,9 @@ export const TeamInfoDisplay = ({
                 <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @2xl:row-span-1 @md:self-center">
                     {multipleTeams && <h3 className="text-sm font-bold mt-0 mb-1">{displayTeam.name} Team</h3>}
                     {displayTeam.description && (
-                        <p className="text-[15px] @5xl:text-sm text-secondary !my-0">{displayTeam.description}</p>
+                        <p className="text-[15px] @5xl:text-sm text-secondary !my-0">
+                            {parseDescriptionWithLinks(displayTeam.description)}
+                        </p>
                     )}
                 </div>
                 <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
@@ -236,7 +296,7 @@ export const TeamsSidebar: React.FC<TeamsSidebarProps> = ({
     if (!hasTeams) {
         // Show fallback team when no teams are assigned
         return (
-            <div className={isCompact ? 'mt-4 bg-accent' : ''}>
+            <div className={isCompact ? 'mt-4 p-4 rounded border border-primary bg-accent' : ''}>
                 <TeamInfoDisplay team={null} multipleTeams={false} isCompact={isCompact} />
             </div>
         )
@@ -262,6 +322,7 @@ export const TeamsSidebar: React.FC<TeamsSidebarProps> = ({
                 })}
                 defaultValue={teams[0]?.name || teams[0]}
                 className="mt-4"
+                contentClassName="px-4"
             />
         )
     }
@@ -273,7 +334,7 @@ export const TeamsSidebar: React.FC<TeamsSidebarProps> = ({
             : teams[0]
 
     return (
-        <div className={isCompact ? 'mt-4 bg-accent' : ''}>
+        <div className={isCompact ? 'p-4 rounded border border-primary bg-accent' : ''}>
             <TeamInfoDisplay team={team} multipleTeams={false} isCompact={isCompact} />
         </div>
     )

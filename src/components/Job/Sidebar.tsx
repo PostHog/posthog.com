@@ -36,7 +36,7 @@ export const TeamMembers = ({
     size?: string
 }) => {
     return (
-        <ul className="not-prose list-none m-0 pl-6 flex flex-wrap justify-end" dir="rtl">
+        <ul className="not-prose list-none m-0 p-0 flex flex-wrap justify-end" dir="rtl">
             {profiles?.data
                 ?.slice()
                 .reverse()

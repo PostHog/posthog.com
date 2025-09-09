@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconInfo } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 interface InputProps {
     label: string
@@ -10,10 +11,11 @@ interface InputProps {
     touched?: boolean
     error?: string
     description?: string
-    tooltip?: string
+    tooltip?: string | React.ReactNode
     showLabel?: boolean
     labelWidth?: string
     required?: boolean
+    dataScheme?: 'primary' | 'secondary' | 'tertiary'
     [key: string]: any
 }
 
@@ -30,6 +32,7 @@ const Input = ({
     showLabel = true,
     labelWidth,
     required = false,
+    dataScheme,
     ...props
 }: InputProps) => {
     const sizeClasses = {
@@ -53,7 +56,10 @@ const Input = ({
     const inputId = props.id || props.name || label?.toLowerCase().replace(/\s+/g, '-')
 
     return (
-        <div className={`flex ${direction === 'column' ? 'flex-col space-y-1' : 'items-center space-x-2'}`}>
+        <div
+            className={`flex ${direction === 'column' ? 'flex-col space-y-1' : 'items-center space-x-2'}`}
+            {...(dataScheme && { 'data-scheme': dataScheme })}
+        >
             {showLabel && (
                 <div className={`${direction === 'column' ? 'w-full' : labelWidth || 'w-[90px]'}`}>
                     <label htmlFor={inputId} className={`${labelSizeClasses[size]}`}>
@@ -62,11 +68,16 @@ const Input = ({
                             {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}
                         </span>
                         {tooltip && (
-                            <span className="group relative inline-flex ml-1">
-                                <IconInfo className="w-3.5 h-3.5 opacity-60 hover:opacity-100 cursor-help" />
-                                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-primary text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10 border border-primary shadow-lg">
+                            <span>
+                                <Tooltip
+                                    trigger={
+                                        <IconInfo className="ml-1 relative -top-px inline-block size-4 text-secondary hover:text-primary" />
+                                    }
+                                    delay={0}
+                                    sideOffset={-3}
+                                >
                                     {tooltip}
-                                </span>
+                                </Tooltip>
                             </span>
                         )}
                     </label>

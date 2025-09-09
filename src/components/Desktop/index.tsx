@@ -119,6 +119,13 @@ const STORAGE_KEY = 'desktop-icon-positions'
 const validateIconPositions = (positions: IconPositions, constraintsRef: React.RefObject<HTMLDivElement>): boolean => {
     const iconWidth = 112
     const iconHeight = 75
+    const allApps = [...productLinks, ...apps]
+
+    for (const app of allApps) {
+        if (!positions[app.label]) {
+            return false
+        }
+    }
 
     // Get current viewport dimensions
     const containerWidth =
@@ -449,7 +456,7 @@ export default function Desktop() {
                             className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
                         >
                             {allApps.map((app) => {
-                                const position = iconPositions[app.label]
+                                const position = iconPositions[app.label] || { x: 0, y: 0 }
 
                                 return (
                                     <DraggableDesktopIcon

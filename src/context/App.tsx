@@ -523,6 +523,66 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/terms': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/privacy': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/dpa': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/baa': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
     '/vibe-check': {
         size: {
             min: {
@@ -581,6 +641,22 @@ const appSettings: AppSettings = {
             max: {
                 width: 960,
                 height: 682,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/sales': {
+        size: {
+            min: {
+                width: 875,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 900,
             },
             fixed: false,
         },
@@ -1526,7 +1602,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 // Cycle to next window
                 if (windows.length > 1) {
                     // Find the currently focused window index
-                    const currentIndex = windows.findIndex(w => w === focusedWindow)
+                    const currentIndex = windows.findIndex((w) => w === focusedWindow)
                     // Calculate next window index (wrap around to first if at end)
                     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % windows.length
                     const nextWindow = windows[nextIndex]

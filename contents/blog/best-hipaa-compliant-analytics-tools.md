@@ -6,20 +6,20 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - andy-vandervell
+    - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
 category: General
 tags:
-  - Privacy
+    - Privacy
 ---
 
 ## What is HIPAA?
 
 Passed in 1996, HIPAA (Health Insurance Portability and Accountability Act) defines the legal requirements for securing and handling health information, and the severe penalties for failing to do so.
 
-Data protected under HIPAA is called [Protected Health Information](/blog/what-is-personal-data-pii) (PHI), or ePHI if it is digitized. It includes any data that can be used to identify the past, current or future health status of an individual. 
+Data protected under HIPAA is called [Protected Health Information](/blog/what-is-personal-data-pii) (PHI), or ePHI if it is digitized. It includes any data that can be used to identify the past, current or future health status of an individual.
 
 This includes test results and diagnoses, but also birthdays, ethnicity, gender and other information. Even an IP address can be considered ePHI under HIPAA.
 
@@ -28,13 +28,13 @@ While similar in some respects to the EU's General Data Protection Regulation (G
 There are two ways to be HIPAA-compliant while using analytics tools:
 
 1. Self-host your analytics, so data remains totally within your control.
-2. Sign a Business Associate Agreement (BAA) with a third-party analytics tool. 
+2. Sign a Business Associate Agreement (BAA) with a third-party analytics tool.
 
 ## What is a Business Associate Agreement (BAA)?
 
-Some services enable HIPAA compliance through the creation of a [Business Associate Agreement](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) (US Department of Health). This is a contract with a service provider to ensure that they are jointly compliant and liable for services they provide. 
+Some services enable HIPAA compliance through the creation of a [Business Associate Agreement](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html) (US Department of Health). This is a contract with a service provider to ensure that they are jointly compliant and liable for services they provide.
 
-It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license. 
+It's worth noting that, because BAAs expose third-parties to increased risk and scrutiny, they are often an expensive option and/or require users to purchase a higher tier of license.
 
 Some analytics tools, such as Google Analytics, don't offer BAAs and are therefore not HIPAA-compliant.
 
@@ -46,13 +46,13 @@ Some analytics tools, such as Google Analytics, don't offer BAAs and are therefo
 
 #### Overview
 
-- **Product analytics:** <span className="text-green text-lg">✔</span>
-- **Web analytics:** <span className="text-green text-lg">✔</span>
-- **Session replay:** <span className="text-green text-lg">✔</span>
-- **Feature flags:** <span className="text-green text-lg">✔</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-green text-lg">✔</span>
-- **Customer data platform:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-green text-lg">✔</span>
+-   **Web analytics:** <span className="text-green text-lg">✔</span>
+-   **Session replay:** <span className="text-green text-lg">✔</span>
+-   **Feature flags:** <span className="text-green text-lg">✔</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-green text-lg">✔</span>
+-   **Customer data platform:** <span className="text-green text-lg">✔</span>
 
 [PostHog](https://posthog.com/) is an open-source platform that combines product analytics, web analytics, session replay, feature flags, A/B testing, and user surveys into one platform. It gives you every tool you need to understand user behavior and, unlike typical analytics tools that rely on third-party integrations, all these tools work together seamlessly.
 
@@ -63,10 +63,10 @@ Being an all-in-one platform has two further benefits:
 
 #### PostHog and HIPAA compliance
 
-- **Self-hostable:** <span className="text-green text-lg">✔</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-green text-lg">✔</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
-A BAA is available on PostHog's [platform add-ons](/platform-addons), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
+A BAA is available on PostHog's [platform packages](/platform-packages), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
 ### 2. Mixpanel
 
@@ -74,20 +74,20 @@ A BAA is available on PostHog's [platform add-ons](/platform-addons), which also
 
 #### Overview
 
-- **Product analytics:** <span className="text-green text-lg">✔</span>
-- **Web analytics:** <span className="text-green text-lg">✔</span>
-- **Session replay:** <span className="text-red text-lg">✖</span>
-- **Feature flags:** <span className="text-red text-lg">✖</span>
-- **A/B testing:** <span className="text-red text-lg">✖</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Customer data platform:** <span className="text-red text-lg">✖</span>
+-   **Product analytics:** <span className="text-green text-lg">✔</span>
+-   **Web analytics:** <span className="text-green text-lg">✔</span>
+-   **Session replay:** <span className="text-red text-lg">✖</span>
+-   **Feature flags:** <span className="text-red text-lg">✖</span>
+-   **A/B testing:** <span className="text-red text-lg">✖</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-[Mixpanel](https://mixpanel.com/) is a pure product analytics tool for analyzing user funnels and behavior. It doesn't offer built-in tools for things like session replay, feature management, A/B testing, or user surveys, but it does have extensive integrations with third-party tools for these. 
+[Mixpanel](https://mixpanel.com/) is a pure product analytics tool for analyzing user funnels and behavior. It doesn't offer built-in tools for things like session replay, feature management, A/B testing, or user surveys, but it does have extensive integrations with third-party tools for these.
 
 #### Mixpanel and HIPAA compliance
 
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 10,000 events. You'll need to sign separate BAAs with any other analytics you wish to integrate with Mixpanel.
 
@@ -99,20 +99,20 @@ A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 
 
 #### Overview
 
-- **Product analytics:** <span className="text-green text-lg">✔</span>
-- **Web analytics:** <span className="text-green text-lg">✔</span>
-- **Session replay:** <span className="text-red text-lg">✖</span>
-- **Feature flags:** <span className="text-red text-lg">✖</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-green text-lg">✔</span>
-- **Customer data platform:** <span className="text-red text-lg">✖</span>
+-   **Product analytics:** <span className="text-green text-lg">✔</span>
+-   **Web analytics:** <span className="text-green text-lg">✔</span>
+-   **Session replay:** <span className="text-red text-lg">✖</span>
+-   **Feature flags:** <span className="text-red text-lg">✖</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-green text-lg">✔</span>
+-   **Customer data platform:** <span className="text-red text-lg">✖</span>
 
 [Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/blog/best-mobile-app-analytics-tools).
 
 #### Countly and HIPAA compliance
 
-- **Self-hostable:** <span className="text-green text-lg">✔</span>
-- **BAA available:** <span className="text-red text-lg">✖</span>
+-   **Self-hostable:** <span className="text-green text-lg">✔</span>
+-   **BAA available:** <span className="text-red text-lg">✖</span>
 
 Countly doesn't offer a BAA for HIPAA compliance on its hosted cloud, but it does offer the option to either:
 
@@ -125,24 +125,24 @@ This makes Countly a good option if you'd prefer to self-host your analytics.
 
 ![freshpaint](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/freshpaint.png)
 
-- **Product analytics:** <span className="text-red text-lg">✖</span>
-- **Web analytics:** <span className="text-red text-lg">✖</span>
-- **Session replay:** <span className="text-red text-lg">✖</span>
-- **Feature flags:** <span className="text-red text-lg">✖</span>
-- **A/B testing:** <span className="text-red text-lg">✖</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Customer data platform:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-red text-lg">✖</span>
+-   **Web analytics:** <span className="text-red text-lg">✖</span>
+-   **Session replay:** <span className="text-red text-lg">✖</span>
+-   **Feature flags:** <span className="text-red text-lg">✖</span>
+-   **A/B testing:** <span className="text-red text-lg">✖</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Customer data platform:** <span className="text-green text-lg">✔</span>
 
 #### Overview
 
-[Freshpaint](https://www.freshpaint.io/) isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies. 
+[Freshpaint](https://www.freshpaint.io/) isn't an analytics tool per se, it's more of an analytics event tracker and customer data platform (CDP) that's specifically designed for healthcare companies.
 
 Freshpaint sits between data sources (e.g data warehouses) and third-party data destinations and ensures no PHI is passed between them. This means you can continue to use non-HIPAA compliant tools, such as Google Analytics, safe in the knowledge you're not accidentally passing PHI into them.
 
 #### Freshpaint and HIPAA compliance
 
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 Freshpaint is a cloud-only product specifically designed for healthcare companies, so offers a BAA for HIPAA compliance.
 
@@ -150,13 +150,13 @@ Freshpaint is a cloud-only product specifically designed for healthcare companie
 
 ![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
 
-- **Product analytics:** <span className="text-red text-lg">✖</span>
-- **Web analytics:** <span className="text-green text-lg">✔</span>
-- **Session replay:** <span className="text-red text-lg">✖</span>
-- **Feature flags:** <span className="text-red text-lg">✖</span>
-- **A/B testing:** <span className="text-red text-lg">✖</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Customer data platform:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-red text-lg">✖</span>
+-   **Web analytics:** <span className="text-green text-lg">✔</span>
+-   **Session replay:** <span className="text-red text-lg">✖</span>
+-   **Feature flags:** <span className="text-red text-lg">✖</span>
+-   **A/B testing:** <span className="text-red text-lg">✖</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Customer data platform:** <span className="text-green text-lg">✔</span>
 
 #### Overview
 
@@ -164,8 +164,8 @@ Piwik PRO is a commercial analytics and customer data platform spun out of the o
 
 #### PiwikPRO and HIPAA compliance
 
-- **Self-hostable:** <span className="text-green text-lg">✔</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-green text-lg">✔</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by signing a BAA or by self-hosting, giving you maximum flexibility.
 
@@ -175,20 +175,20 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 
 #### Overview
 
-- **Product analytics:** <span className="text-green text-lg">✔</span>
-- **Web analytics:** <span className="text-red text-lg">✖</span>
-- **Session replay:** <span className="text-green text-lg">✔</span>
-- **Feature flags:** <span className="text-green text-lg">✔</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Customer data platform:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-green text-lg">✔</span>
+-   **Web analytics:** <span className="text-red text-lg">✖</span>
+-   **Session replay:** <span className="text-green text-lg">✔</span>
+-   **Feature flags:** <span className="text-green text-lg">✔</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-[Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, and A/B testing. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."   
+[Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, and A/B testing. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."
 
 #### Amplitude and HIPAA compliance
 
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 Amplitude offers a BAA, but doesn't stipulate the minimum terms for signing one on its website. You can also use its product analytics tool on top of a Snowflake data warehouse, which may be an option for HIPAA compliance if you're already storing analytics data in Snowflake.
 
@@ -198,13 +198,13 @@ Amplitude offers a BAA, but doesn't stipulate the minimum terms for signing one 
 
 ![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
 
-- **Product analytics:** <span className="text-green text-lg">✔</span>
-- **Web analytics:** <span className="text-red text-lg">✖</span>
-- **Session replay:** <span className="text-green text-lg">✔</span>
-- **Feature flags:** <span className="text-red text-lg">✖</span>
-- **A/B testing:** <span className="text-red text-lg">✖</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Customer data platform:** <span className="text-red text-lg">✖</span>
+-   **Product analytics:** <span className="text-green text-lg">✔</span>
+-   **Web analytics:** <span className="text-red text-lg">✖</span>
+-   **Session replay:** <span className="text-green text-lg">✔</span>
+-   **Feature flags:** <span className="text-red text-lg">✖</span>
+-   **A/B testing:** <span className="text-red text-lg">✖</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Customer data platform:** <span className="text-red text-lg">✖</span>
 
 #### Overview
 
@@ -212,8 +212,8 @@ Amplitude offers a BAA, but doesn't stipulate the minimum terms for signing one 
 
 #### Heap and HIPAA compliance
 
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 Heap offers a BAA, but only on its Pro and Premier plans, not on its self-serve Growth plan. It's not available as a self-hosted product.
 
@@ -223,7 +223,7 @@ Heap offers a BAA, but only on its Pro and Premier plans, not on its self-serve 
 
 ### Who does HIPAA apply to?
 
-HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity. 
+HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity.
 
 HIPAA also applies to "business associates," which, according to the [US Department of Health and Human Services](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html), are "a subcontractor that creates, receives, maintains, or transmits protected health information on behalf of another business associate."
 
@@ -231,7 +231,7 @@ Under HIPAA, the analytics tools in this guide would all be considered business 
 
 ### What is PHI (Protected Health Information)?
 
-Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual. 
+Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual.
 
 This includes medical records, laboratory results, billing information, and any other information that identifies an individual and relates to their past, present, or future physical or mental health condition, treatment, or payment for healthcare services.
 
