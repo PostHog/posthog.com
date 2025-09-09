@@ -171,7 +171,7 @@ export const experiments = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/us_posthog_com_project_2_feature_flags_160557_cc3f425138.png',
                     alt: 'Targeting rules',
-                    stylize: true,
+                    // stylize: true,
                     shadow: true,
                 },
             ],
