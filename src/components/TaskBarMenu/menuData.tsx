@@ -390,6 +390,11 @@ export function useMenuData(): MenuType[] {
                     link: '/about',
                 },
                 {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                },
+                {
                     type: 'submenu',
                     label: 'Handbook',
                     link: '/handbook',

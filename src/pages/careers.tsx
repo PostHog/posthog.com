@@ -176,6 +176,7 @@ const IndexPage = () => {
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
+                    centerTabs
                 />
             </Editor>
         </>
