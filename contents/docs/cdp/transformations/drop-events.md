@@ -8,6 +8,14 @@ PostHog's drop events transformation allows you to selectively discard events fr
 
 The drop events transformation permanently removes events from your data pipeline, preventing them from being stored or processed by PostHog.
 
+<CalloutBox icon="IconPiggyBank" title="Impact On Usage & Billing" type="info">
+
+Events that are dropped using a transformation do not count towards your Product Analytics event usage/billing. 
+While we encourage you to instrument custom events and configure autocapture using our SDKs to capture only the events you need long term, a **Drop Events** transformation can serve as a temporary solution to reduce usage immediately (vs. waiting for your next deployment cycle to modify custom events or configuration). 
+It can also be useful when you want more granular control over _bundled_ autocapture events such as excluding a [specific App Lifecycle Events](https://posthog.com/docs/product-analytics/autocapture#react-native-navigation-and-lifecycle-autocapture) and only capturing the ones you need.
+
+</CalloutBox>
+
 ## Configuration
 
 The drop events transformation uses filters to target specific events for removal.
