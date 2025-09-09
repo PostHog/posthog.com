@@ -67,9 +67,9 @@ Overall, candidates should spend at least 80% of their time and energy on the ta
 
 As PostHog grows and our hiring goals get bigger and bigger, to achieve that we will need more people taking interviews and assessing people in those interviews. As we scale, it's important that we maintain a calibration across interviewers by onboarding each new interviewer to the interviewing process carefully. 
 
-If you wish to get involved in interviewing, you can request so by contacting the talent team using the @talent-folks handle in Slack in the #team-people-and-ops channel. Please note, that if you are in your first 90 days at PostHog, you should not be focussing on interviewing and focus on ramping up and onboarding successfully.  
+If you wish to get involved in interviewing, you can request so by contacting the talent team using the @talent-folks handle in Slack in the #team-people-and-ops channel. Please note, that if you are in your first 90 days at PostHog, you should not be focussing on interviewing and focus on ramping up and onboarding successfully. Even shadowing interviews can be distracting, so consider even leaving these until after your first 90 days.
 
-Once you have let the talent team know, you'll work closely with a Talent Partner to get you up to speed. This will involve them scheduling you to shadow at least two live technical screens with two of our most experienced interviewers. They will also share with you the relevant watching and reading materials that should be consumed before conducting your first interview. Your very first interview will be shadowed by one of our experienced interviewers and they will give you feedback, on both their assessment of the candidate interviewed and then how you did. Based on how this goes, either you can get another interview shadowed by another engineer for more feedback, or you can go out on your own. 
+Once you have let the talent team know, you'll work closely with a Talent Partner to get you up to speed. This will involve them scheduling you to shadow at least two live technical screens with two of our most experienced interviewers. They will also share with you the relevant watching and reading materials(like the [technical exercise guide](https://github.com/PostHog/superday-interview-test/blob/main/technical-exercise/guide.md) and the respective [rubric](https://github.com/Posthog-Interviews/superday-interview-test/blob/main/technical-exercise/rubric.md)  that should be consumed before conducting your first interview. Your very first interview will be shadowed by one of our experienced interviewers and they will give you feedback, on both their assessment of the candidate interviewed and then how you did. Based on how this goes, either you can get another interview shadowed by another engineer for more feedback, or you can go out on your own. 
 
 ### Your first interview alone
 
@@ -87,7 +87,7 @@ You should try and keep your approach relatively consistent for the first 5-10 i
 
 ### How to keep improving as an interviewer
 
-- Regularly shadow other interviewers, have other interviewers shadow you. 
+- Regularly shadow other interviewers, have other interviewers shadow you. Give each other feedback
 - Speak with Talent Partners, ask for their feedback
 - Ask exec's why they gave specific scores about candidates you interviewed
 - Keep track of how the candidates you have assessed get on in the later stages 
