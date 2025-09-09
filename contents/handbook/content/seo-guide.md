@@ -28,7 +28,7 @@ When answering a question, we lead with the answer first, then expand with suppo
 We keep our structure simple and scannable:
 
 * **Use a clear heading hierarchy** (H1, H2, H3) so readers and crawlers can follow your logic.   
-  * Use one \<h1\> per page to avoid confusion about the page’s main topic.  
+  * Use one `H1` per page to avoid confusion about the page’s main topic.  
 * **Write short paragraphs** and use bullets or numbered steps for lists.  
 * **Use plain language** – drop the jargon and explain terms plainly so anyone (and any language model) can understand what you’re talking about.  
 * **Facilitate easy navigation** – use anchor links or a mini table of contents for long articles.  
@@ -103,7 +103,7 @@ When we write, we should ask ourselves:
 * **What contextual qualifiers would they use?** (e.g. “for nonprofits,” “for remote teams,” “for Europe in 2025”) and weave them naturally into the copy.  
 * **What’s next?** Anticipate the next three questions they’d ask after reading and answer them in the same piece. This keeps us the source that AI models (and readers) turn to as the conversation deepens.
 
-## 8. Updates work / are important
+### 8. Updates work / are important
 
 Publishing a great article is not the end of the story. SEO is an ongoing process, and one of the best ways to maintain or boost rankings is to keep content up-to-date.
 
@@ -111,7 +111,7 @@ How often this should happen is very subjective, but the more traffic a page get
 
 Likewise, updating and improving a page that isn't ranking is often the best way to get it to rank successfully. Just because something didn't rank at the first attempt, doesn't mean it never will.
 
-## 9. Internal linking isn't optional
+### 9. Internal linking isn't optional
 
 Internal linking is a vital part of successful SEO. It helps Google find our content and understand how pages relate to each other. It can also help prevent internal conflicts (where Google is unsure which article to list for a term), by signalling to Google what specific term we think a page should rank for.
 
@@ -123,7 +123,7 @@ Here are some best practices for internal linking:
 * **Don’t overdo it.** A handful of well-placed internal links (3–5) is usually enough. You don’t need to link every other sentence. Too many links can dilute their value and be distracting for readers.  
 * **Maintain your links.** Periodically, use tools or audits to check for broken internal links (if you reorganize pages or change URLs, update any old links). Broken links hurt user experience and can waste crawl budget.
 
-## 10. Optimize for LLMs
+### 10. Optimize for LLMs
 
 We’re no longer just writing for Google – we’re writing for the answer engines too. ChatGPT, Perplexity, Claude, and Google’s AI Overviews are pulling from our content to build answers. To win those spots, we need to make our pages easy to retrieve, easy to quote, and obviously authoritative.
 
@@ -166,27 +166,25 @@ Ahrefs is an all-in-one tool. It's useful for:
 * Site audits: We use Ahref's Site Audit tool to identify website issues – 404s, broken internal links, etc. A scan runs once a week. Andy looks after this.  
 * Backlink analysis: Allows us to see who is linking to our website and competitors. We don't use this extensively atm, but it's useful every once in a while.
 
-### **Keywords Everywhere**
+### Keywords Everywhere
 
 [Keywords Everywhere](https://keywordseverywhere.com/) is a very useful Chrome extension that adds keyword research context to Google searches and other popular SEO tools. It's a great way to do quick bits of keyword research and find related terms.
 
 It's only \~$15 annually.
 
-### **Google Search Console**
+### Google Search Console
 
 While the data is somewhat sampled, Search Console is a useful tool for analyzing the top-level numbers, or specific pages. Especially useful for seeing exactly which search terms are driving traffic to a particular page – sometimes the results will surprise you.
 
-### **Mangools Google SERP Simulator**
+### Mangools Google SERP Simulator
 
 A free tool that lets you [test how your headline will look in Google search results](https://mangools.com/free-seo-tools/serp-simulator). This is useful for seeing:
 
 1. Whether Google will clip the headline because it's too long – Google has a 600px width limit on headlines.  
 2. Comparing your headline to other results – ideally we want headlines that stand out / are more enticing than other results
 
-### **AlsoAsked**
+### AlsoAsked
 
 A [useful little tool](https://alsoasked.com/) with a decent free tier – 3 searches per day. It generates "people also asked" questions based on search terms.
 
 It's useful for deciding what subheadings to include in articles, though exact matches aren't really necessary.
-
-## 
