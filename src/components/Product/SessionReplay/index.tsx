@@ -330,7 +330,7 @@ const comparison = [
             LogRocket: '1 month',
             Matomo: '24 months',
             FullStory: '1 month',
-            PostHog: 'Up to 3 months',
+            PostHog: 'Up to 12 months',
         },
     },
 ]
@@ -530,14 +530,10 @@ export const ProductSessionReplay = () => {
                             >
                                 <ul>
                                     <li>
-                                        <Link to="https://github.com/PostHog/posthog/issues/23400" external>
-                                            Error tracking (in progress...)
-                                        </Link>
+                                        AI Session summarization (currently closed alpha)
                                     </li>
                                     <li>
-                                        <Link to="https://github.com/PostHog/posthog/issues/14331" external>
-                                            Alerting (in progress...)
-                                        </Link>
+                                        Extended retention (currently closed alpha)
                                     </li>
                                 </ul>
                             </VsCompetitor>
