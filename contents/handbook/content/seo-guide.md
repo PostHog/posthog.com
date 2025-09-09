@@ -63,13 +63,13 @@ Our tone is friendly, focused, and human – especially now that voice search an
 
 That said, conversational doesn’t mean rambling. Stay on topic and be clear and direct. Think of how you’d explain the topic if speaking to a colleague – friendly but focused. A more dialog-like tone can also help capture featured snippets or People Also Ask boxes, as the content directly addresses how users phrase questions. 
 
-> **Bad Q&A example** 
-> **Heading**: Strategies for reducing customer attrition 
-> **Body copy**: Customer attrition is a key challenge for many businesses and must be addressed with a comprehensive set of initiatives. Companies should consider improving their product offering, implementing proactive customer success programs, and monitoring engagement metrics over time. 
+> **Bad Q&A example**   
+> - **Heading**: Strategies for reducing customer attrition   
+> - **Body copy**: Customer attrition is a key challenge for many businesses and must be addressed with a comprehensive set of initiatives. Companies should consider improving their product offering, implementing proactive customer success programs, and monitoring engagement metrics over time. 
 
-> **Good Q&A example**
-> **Heading**: How do we reduce churn? 
-> **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
+> **Good Q&A example**  
+> - **Heading**: How do we reduce churn?   
+> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
 
 ### 6. Don’t put all our eggs in one keyword basket
 
