@@ -531,7 +531,7 @@ export default function TeamPage(props: TeamPageProps) {
                 leftSidebar={<TreeMenu items={teamsNavigation} />}
                 homeURL="/teams"
                 description={`Learn about the ${(team as any)?.name || slug} team at PostHog`}
-                proseSize="base"
+                proseSize="sm"
                 rightActionButtons={editing ? editActions : editButton}
                 showQuestions={false}
                 {...({
