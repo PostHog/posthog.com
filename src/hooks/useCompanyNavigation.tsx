@@ -37,6 +37,11 @@ const tabs = [
         content: null,
     },
     {
+        value: '/media',
+        label: 'Media',
+        content: null,
+    },
+    {
         value: '/careers',
         label: 'Careers',
         content: null,

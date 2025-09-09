@@ -416,6 +416,11 @@ export function useMenuData(): MenuType[] {
                     link: '/changelog',
                 },
                 {
+                    type: 'item',
+                    label: 'Media',
+                    link: '/media',
+                },
+                {
                     type: 'separator',
                 },
                 {
