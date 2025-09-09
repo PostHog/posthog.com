@@ -2,12 +2,13 @@
 title: Drop Events
 showTitle: true
 ---
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 PostHog's drop events transformation allows you to selectively discard events from being ingested based on specific criteria. 
 ## Overview
 
 The drop events transformation permanently removes events from your data pipeline, preventing them from being stored or processed by PostHog.
-import { CalloutBox } from 'components/Docs/CalloutBox'
+
 <CalloutBox icon="IconPiggyBank" title="Impact on usage & billing" type="info">
 
 Events that are dropped using a transformation **do not count towards your usage/billing**. 
