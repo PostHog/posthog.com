@@ -16,7 +16,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
     icon="IconGear"
 >
   
-  PostHog will automatically convert revenue from other currencies into your chosen reporting currency. For example, if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), PostHog converts it into USD to ensure consistency.
+  PostHog automatically converts revenue from other currencies into your chosen reporting currency. For example, if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), PostHog converts it into USD to ensure consistency.
 
   <ProductScreenshot
       imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/update_currency_light_9345e4640f.png" 
@@ -45,7 +45,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 
   <DataWarehouseSources />
 
-  ### Event properties
+  ### Capture revenue events
 
   If you're not using a supported data warehouse source, or you just want to track revenue manually, you can do so by capturing revenue events with revenue properties.
 
@@ -82,7 +82,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
   icon="IconPeople"
 >
 
-  Linking your revenue data to your customers will allow you to identify your top customers and see how much revenue they're generating.
+  Linking your revenue data to your customers enables you to identify your top customers and see how much revenue they're generating.
 
   When you collect revenue data through events, we'll automatically link the customer to the revenue data. If you're connecting to a payment platform like Stripe, you'll need to manually link the customer to the revenue data.
 
@@ -101,6 +101,10 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
   PostHog's revenue analytics is currently in beta, and you can try it for free. 
   
   PostHog is always built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. All of this applies to revenue analytics, too, when it's out of beta.
+
+    <CallToAction type="primary" to="/docs/revenue-analytics/payment-platforms">
+    Connect revenue data
+  </CallToAction>
 
 </QuestLogItem>
 

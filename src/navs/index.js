@@ -4552,15 +4552,12 @@ export const docsMenu = {
                         },
                         {
                             name: 'Chargebee (Coming soon)',
-                            url: '',
                         },
                         {
                             name: 'Polar (Coming soon)',
-                            url: '',
                         },
                         {
                             name: 'RevenueCat (Coming soon)',
-                            url: '',
                         },
                     ],
                 },

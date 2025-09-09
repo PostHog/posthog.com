@@ -6,17 +6,17 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-You can collect revenue data as PostHog events. This guide walks you through how to collect revenue events, what properties to include, and how to configure PostHog to use them.
+You can collect revenue data as PostHog events. This guide walks through what properties to include and how to configure PostHog to use them.
 
-<CalloutBox icon="IconQuestion" title="Already have revenue data??" type="fyi">
+<CalloutBox icon="IconQuestion" title="Already have revenue data?" type="fyi">
 
-If you already have revenue data in Stripe you can use them directly in revenue analytics.
+If you already have revenue data in Stripe, you can use it directly in revenue analytics.
 
 Learn more about [connecting to a data warehouse source like Stripe](/docs/revenue-analytics/payment-platforms).
 
 </CalloutBox>
 
-When you do so, you need to include two properties:
+To capture revenue events, include the following properties. Both the actual event and property names don't matter, as you set these later in PostHog:
 
 | Property | Description | Example key | Example value |
 | --- | --- | --- | --- |
