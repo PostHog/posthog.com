@@ -551,7 +551,7 @@ export function Editor({
                     <main
                         data-app="Editor"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full"
+                        className="@container flex-1 bg-primary relative h-full flex flex-col"
                     >
                         <SearchBar
                             visible={showSearch}
@@ -664,7 +664,9 @@ export function Editor({
                             <ScrollArea>
                                 <article
                                     style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(proseSize)} p-4 mx-auto transition-all`}
+                                    className={`${getProseClasses(
+                                        proseSize
+                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
