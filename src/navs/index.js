@@ -4551,13 +4551,22 @@ export const docsMenu = {
                             url: '/docs/revenue-analytics/payment-platforms/stripe',
                         },
                         {
-                            name: 'Chargebee (Coming soon)',
+                            name: 'Chargebee',
+                            badge: {
+                                title: 'Coming soon',
+                            },
                         },
                         {
-                            name: 'Polar (Coming soon)',
+                            name: 'Polar',
+                            badge: {
+                                title: 'Coming soon',
+                            },
                         },
                         {
-                            name: 'RevenueCat (Coming soon)',
+                            name: 'RevenueCat',
+                            badge: {
+                                title: 'Coming soon',
+                            },
                         },
                     ],
                 },
