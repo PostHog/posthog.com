@@ -25,7 +25,7 @@ Later on, you can then _innovate_ several ways:
 From our [roadmap](/roadmap), here's what we're working on next:
 
 - Embedded analytics - `#project-embedded-analytics`
-- Logs - - `#project-logs'
+- Logs - `#project-logs`
 - Auth
 - Tasks
 - Support
