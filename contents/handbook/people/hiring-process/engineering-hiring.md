@@ -28,7 +28,7 @@ Hiring is a team effort, and we need everyone to contribute to make the best new
 
 #### Culture screen 
 
-The culture screen is handled by the Talent team. Normally this is a 20-30 min call where they make an initial asssessment for the candidate's fit for the job, culture, communication style, and sort all logistics. 
+The culture screen is handled by the Talent team. Normally this is a 20-30 min call where they make an initial assessment for the candidate's fit for the job, culture, communication style, and sort all logistics.
 
 #### Technical screen
 
