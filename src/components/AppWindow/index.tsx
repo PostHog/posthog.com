@@ -775,7 +775,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </div>
                                 </div>
                             )}
-                            <div className={chrome ? 'bg-light dark:bg-dark size-full' : ''}>
+                            <div className={chrome ? 'bg-light dark:bg-dark size-full overflow-hidden' : ''}>
                                 <div
                                     ref={contentRef}
                                     className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
