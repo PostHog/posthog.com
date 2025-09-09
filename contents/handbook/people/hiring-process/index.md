@@ -264,21 +264,8 @@ If a decision is made to hire, the People & Ops team will open an onboarding iss
 If we don't make an offer, it's important to clearly outline to the candidate why that decision was made. Highlight what went well, but also mention specific points of improvement. Offer to schedule a call if they would like to discuss further. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
 
 ### How to create an offer 
-- Go into the [shared drives](https://drive.google.com/drive/u/0/shared-drives), click on [Legal Docs](https://drive.google.com/drive/u/0/folders/0AHE6s4htUnT2Uk9PVA)
-- Click on the [Teams folder](https://drive.google.com/drive/u/0/folders/1YliTxLAOTB9nVAxrZf4CIoSd6Sb4tggO)
-- Click on Offer [Letters folder](https://drive.google.com/drive/u/0/folders/1q82IDhnDIMRGaXfbzKuhXMvOkwj70yu_)
-- Then use the correct offer letter template  and then click on file within the doc and “make a copy”, save the copy under the first and last name of the new hire
-- Fill in the missing details in the copy offer letter under the new hire’s name- which would be the following info: 
-   - Name
-   - Title and team
-   - Total compensation broken down by base salary and total equity worth today - you will get these numbers by using the [TEMPLATE - compensation Jan 2025 version Equity calculator](https://docs.google.com/spreadsheets/d/1MCNBgG19GBylk1x2zQ8Sq0K2F3Nyygp-5iGseN_TScU/edit?gid=0#gid=0) All format must be in USD for this sheet.
-   - Base salary - find this in the [compensation calculator](https://posthog.com/handbook/people/compensation) section of the handbook
-   - Equity missing field in the offer letter - make a copy of the [“compensation sheet”](https://docs.google.com/spreadsheets/d/1MCNBgG19GBylk1x2zQ8Sq0K2F3Nyygp-5iGseN_TScU/edit?gid=0#gid=0) hyperlink section and name the sheet under the candidate’s first and last name
-   - Copy over the information from the [TEMPLATE  - compensation Jan 2025 version Equity calculator](https://docs.google.com/spreadsheets/d/1fjEu3Zjd8cOK-p2j0-75-xpoaGHuSXa7thuhhSXXy2c/edit?gid=0#gid=0) to the [compensation sheet](https://docs.google.com/spreadsheets/d/1MCNBgG19GBylk1x2zQ8Sq0K2F3Nyygp-5iGseN_TScU/edit?gid=0#gid=0) (the compensation sheet will go into the offer letter to the candidate)
-   - Send the draft offer into the private-people-and-hiring channel and tagged the appropriate exec to review and approve:
-      - Engineering - Tim and Raquel
-      - Product - Tim, James, and Raquel
-      - GTM - Charles and James
+- Use the [Offer template](https://docs.google.com/spreadsheets/d/1Hrud75402h4Cb-SW4h_lrzjLMRLsmezn66OSY1QDwgA/edit?gid=626204592#gid=626204592) to generate the offer letter. If you need a refresher, please reference to the [Loom recording](https://slack.com/openid/connect/login_initiate_redirect?login_hint=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczpcL1wvc2xhY2suY29tIiwic3ViIjoiY291YUBwb3N0aG9nLmNvbSIsImF1ZCI6IjkyNjU5NDUwMDM3LjMyMjA2MTU4Mjg4NiIsImV4cCI6MTc1NzQ0MDMzMSwiaWF0IjoxNzU3NDQwMzI0LCJhdXRoX3RpbWUiOjE3NTc0NDAzMjQsImh0dHBzOlwvXC9zbGFjay5jb21cL3VzZXJfaWQiOiJVMDNBVEZNOE4xNCIsImh0dHBzOlwvXC9zbGFjay5jb21cL3RlYW1faWQiOiJUU1M1VzhZUVoiLCJodHRwczpcL1wvc2xhY2suY29tXC90YXJnZXRfdXJpIjoiaHR0cHM6XC9cL3d3dy5sb29tLmNvbVwvc2hhcmVcLzYwZTA1NzFiMGMzNDRkMDk4ZGI0YmVkODJmNzZkY2Q1P3NpZD1hNmEwNmM2YS1hMjg3LTRiYTEtYTZmNi0xMjRiNDRiYTU3YzcifQ.xiUX-21PxJANuHiJstcclsbwTD4ovMsK2GI8rHwAXdQJv5DwEgi6G2fdD93q2kpsTCHwOoC88tUDlWsNYGIFa4aA-u1u_z53UcoSQRMsJE5n0LkLdPclr6h0fmAhk0qvcVTkjXQKYCB2hNX3VLN0_fI3skE2qseiWRKdwzB3DT8SDuKSUkG3HMZm9id4tyLheL338I5JqizQf8FoKd-ZKTDdYbbWk05a-n3iuMoGLYYtmwMLn3LxVuYvTg48xXViYxU_ASQ8YdLarpr2uEvSLWhx0UjETJi-hsm6eHqj7W1hjYnwC9nVB-HFFD-WxeWXzDYcQ_Xwpo-MNae8_t7TOQ)
+- Send the draft offer into the private-talent-and-exec channel and tagged the appropriate exec and Fraser to approve the offer details.
 
 ### Making the offer
 
