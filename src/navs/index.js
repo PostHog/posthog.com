@@ -849,6 +849,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/product-engineering',
                     },
                     {
+                        name: 'Visiting customers as an engineer',
+                        url: '/handbook/engineering/visiting-customers',
+                    },
+                    {
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
@@ -1303,6 +1307,10 @@ export const handbookSidebar = [
                     {
                         name: 'How to do discovery',
                         url: '/handbook/growth/sales/how-to-do-discovery',
+                    },
+                    {
+                        name: 'Selling and procuring via AWS Marketplace',
+                        url: '/handbook/growth/sales/selling-via-aws',
                     },
                     {
                         name: 'Expansion, cross-sell & retention',
