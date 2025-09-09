@@ -356,7 +356,7 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'PostHog news',
+                    label: 'PostHog newspaper',
                     link: '/community',
                 },
                 {
@@ -366,18 +366,23 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Product for engineers',
+                    label: 'Blog',
+                    link: '/blog',
+                },
+                {
+                    type: 'item',
+                    label: 'Topic libraries',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Product engineers hub',
                     link: '/product-engineers',
                 },
                 {
                     type: 'item',
                     label: 'Founders hub',
                     link: '/founders',
-                },
-                {
-                    type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
                 },
             ],
         },
