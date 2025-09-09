@@ -4538,24 +4538,57 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
-                    name: 'Getting started',
-                    url: '/docs/revenue-analytics/getting-started',
-                    icon: 'IconBook',
+                    name: 'Start here',
+                    url: '/docs/revenue-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Payment platforms',
+                    url: '/docs/revenue-analytics/payment-platforms',
+                    icon: 'IconCode',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/revenue-analytics/payment-platforms',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/revenue-analytics/payment-platforms/stripe',
+                        },
+                        {
+                            name: 'Chargebee',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                        {
+                            name: 'Polar',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                        {
+                            name: 'RevenueCat',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                    ],
+                },
+                {
+                    name: 'Capture revenue events',
+                    url: '/docs/revenue-analytics/capture-revenue-events',
+                    icon: 'IconCode',
+                    color: 'green',
                 },
                 {
                     name: 'Dashboard',
                     url: '/docs/revenue-analytics/dashboard',
                     icon: 'IconDashboard',
-                    color: 'orange',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    color: 'red',
                 },
                 {
                     name: 'Concepts',
@@ -4565,10 +4598,6 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/connect-to-customers',
                     icon: 'IconPeople',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Deferred Revenue',

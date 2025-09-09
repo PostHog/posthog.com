@@ -21,7 +21,7 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
                             top: 100,
                         },
                         minWidth: 50,
-                    }
+                    },
                 }}
                 onGameReady={() => {
                     console.log('Hedgehog mode ready')
