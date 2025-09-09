@@ -148,9 +148,7 @@ export default function Explorer({
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
-                        fullScreen ? 'border-t border-primary' : ''
-                    }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : ''}`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
