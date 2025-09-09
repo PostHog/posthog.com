@@ -18,7 +18,7 @@ Review the customer's Slack channel and pull together a list of the most pressin
 ### 2. Lock in dates and the point of contact
 Find a single point of contact to help organize the visit. Share with them the list of topics and pain points, and explain that you’d like to meet in person to get a deeper understanding. Don’t underestimate this step – even if the company is very engaged on Slack, people are busy and organizing something optional like this isn’t always their top priority. Having one person on their side makes it much easier to get dates confirmed, which is the main thing you need at this stage. You can sort out the details and a more precise agenda later.
 
-As for the duration, three days is usually a sweet spot – enough time to spend quality time with the team without overstaying or being a distraction in their office. Use your best judgment here and agree on the timing with your point of contact.
+As for the duration, two to three days is usually a sweet spot – enough time to spend quality time with the team without overstaying or being a distraction in their office. Use your best judgment here and agree on the timing with your point of contact.
 
 For large customers with an account manager assigned, it’s super valuable to bring them along. They often already have a strong relationship with the customer, can ask additional questions you might not think of, and can keep things like scheduling, follow-ups, and expectation-setting smoother.
 
