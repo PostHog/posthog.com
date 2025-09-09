@@ -4551,15 +4551,15 @@ export const docsMenu = {
                             url: '/docs/cdp/sources/stripe',
                         },
                         {
-                            name: 'Chargebee',
+                            name: 'Chargebee (Coming soon)',
                             url: '',
                         },
                         {
-                            name: 'Polar',
+                            name: 'Polar (Coming soon)',
                             url: '',
                         },
                         {
-                            name: 'RevenueCat',
+                            name: 'RevenueCat (Coming soon)',
                             url: '',
                         },
                     ],
