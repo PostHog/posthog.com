@@ -405,7 +405,7 @@ export default function Tabbed() {
 
                 <div className="hidden @2xl:block col-span-4" />
                 <div className="col-span-12 @2xl:col-span-8 py-2 md:border-t border-primary">
-                    <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
+                    <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform packages</h4>
 
                     {platform.addons
                         .filter((a) => !a.legacy_product)

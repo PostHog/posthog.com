@@ -9,6 +9,7 @@ import { navigate } from 'gatsby'
 import { IconFilter } from '@posthog/icons'
 import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
+import OSButton from 'components/OSButton'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -39,14 +40,14 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
 }
 
 const Search = ({
-    initialFilter,
+    initialFilter = '',
     className = '',
     onChange,
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
     autoFocus = true,
 }: {
-    initialFilter?: string
+    initialFilter: string
     className?: string
     onChange?: () => void
     isRefinedClassName?: string
@@ -80,25 +81,27 @@ const Search = ({
         <div className={`flex flex-col ${className}`} onMouseDown={(e) => dragControls.start(e)}>
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
-                    <div className="bg-white rounded-md border !border-primary overflow-hidden relative">
+                    <div className="bg-white rounded border !border-primary overflow-hidden relative">
                         <Combobox.Input
-                            className="w-full !border-none !text-lg !px-4 !py-2 "
+                            className="w-full !border-none !text-[15px] !px-2.5 !py-1.5"
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder={`Search ${initialFilter && 'the ' + initialFilter}...`}
+                            placeholder={`Search ${initialFilter ? 'the ' + initialFilter : 'PostHog.com'}...`}
                             autoFocus={autoFocus}
                             value={query}
                         />
                         {!hideFilters && (
-                            <button
-                                className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${showFilters ? 'opacity-100' : 'opacity-70'
-                                    }`}
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    setShowFilters(!showFilters)
-                                }}
-                            >
-                                <IconFilter className="size-4" />
-                            </button>
+                            <div data-scheme="secondary" className="absolute right-1 top-1/2 -translate-y-1/2">
+                                <OSButton
+                                    size="md"
+                                    className={` ${showFilters ? 'opacity-100' : 'opacity-70'}`}
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setShowFilters(!showFilters)
+                                    }}
+                                    icon={<IconFilter />}
+                                    hover="background"
+                                />
+                            </div>
                         )}
                     </div>
                     {!hideFilters && showFilters && <Filters isRefinedClassName={isRefinedClassName} />}
@@ -107,7 +110,7 @@ const Search = ({
                         <Combobox.Options
                             static
                             hold
-                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-60 h-full bg-white"
+                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-white"
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>
@@ -120,11 +123,11 @@ const Search = ({
                                                 className={`cursor-pointer ${active ? 'bg-primary' : ''}`}
                                             >
                                                 <div className="py-2 px-4 block">
-                                                    <h5 className="text-base m-0 font-bold line-clamp-1">
+                                                    <p className="text-[13px] text-red font-medium m-0">/{hit.slug}</p>
+                                                    <h5 className="text-[15px] m-0 font-bold line-clamp-1">
                                                         {hit.title}
                                                     </h5>
-                                                    <p className="text-sm m-0 my-1">{hit.excerpt}</p>
-                                                    <p className="text-sm opacity-60 font-semibold m-0">/{hit.slug}</p>
+                                                    <p className="text-sm text-secondary m-0 my-1">{hit.excerpt}</p>
                                                 </div>
                                             </li>
                                         )}
@@ -175,7 +178,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
             <div ref={ref}>
                 <Search
                     initialFilter={initialFilter}
-                    className="p-3 rounded-md bg-white max-w-screen-md border border-primary"
+                    className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl max-w-screen-md border border-primary"
                     onChange={onChange}
                 />
             </div>
@@ -184,7 +187,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
 }
 
 export const SearchUI = ({
-    initialFilter,
+    initialFilter = '',
     className = '',
     isRefinedClassName = 'bg-primary',
     hideFilters = false,

@@ -104,7 +104,7 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
     )
 }
 
-export default function AppWindow({ item }: { item: AppWindowType }) {
+export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
     const {
         minimizeWindow,
         bringToFront,
@@ -486,13 +486,10 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                           item.minimal
                                               ? '!shadow-none'
                                               : `flex flex-col ${
-                                                    size.width >=
-                                                    (typeof window !== 'undefined' ? window?.innerWidth : 0)
-                                                        ? ''
-                                                        : 'border rounded'
+                                                    siteSettings.experience === 'boring' ? '' : 'border rounded'
                                                 }`
                                       }`
-                            } overflow-hidden`}
+                            } ${chrome ? 'overflow-hidden' : ''}`}
                             style={{
                                 zIndex: item.zIndex,
                             }}
@@ -758,7 +755,9 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             )}
                             <div
                                 ref={contentRef}
-                                className={`size-full flex-grow overflow-hidden bg-light dark:bg-dark`}
+                                className={`size-full flex-grow ${
+                                    chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
+                                }`}
                             >
                                 {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                     <Router

@@ -550,6 +550,7 @@ export default function Changelog({ pageContext }) {
         <>
             <SEO title="Changelog - PostHog" />
             <Editor
+                hasTabs
                 type="changelog"
                 maxWidth="100%"
                 dataToFilter={roadmaps}
@@ -624,10 +625,12 @@ export default function Changelog({ pageContext }) {
                     tabs={tabs}
                     defaultValue="/changelog/2025"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
+                    contentPadding={false}
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
+                    centerTabs
                 />
             </Editor>
         </>

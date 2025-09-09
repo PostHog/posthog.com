@@ -15,7 +15,7 @@ const PeoplePage = () => {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/people',
         content: (
-            <div className="max-w-screen-lg mx-auto mt-6 px-4">
+            <div className="max-w-screen-6xl mx-auto">
                 <h1>People</h1>
                 <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
             </div>
@@ -114,6 +114,7 @@ const PeoplePage = () => {
         <>
             <SEO title="People – PostHog" description="Meet the PostHog team" image={`/images/og/people.jpg`} />
             <Editor
+                hasTabs
                 type="people"
                 maxWidth="100%"
                 proseSize="base"
@@ -130,10 +131,11 @@ const PeoplePage = () => {
                     tabs={tabs}
                     defaultValue="/people"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
+                    centerTabs
                 />
             </Editor>
         </>

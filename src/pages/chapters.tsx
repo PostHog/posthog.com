@@ -99,6 +99,7 @@ export const HandbookToc: React.FC = () => {
         <>
             <SEO image="/images/handbook.png" title="Handbook - PostHog" />
             <Editor
+                hasTabs
                 maxWidth="100%"
                 // title="Company"
                 // type="about"
@@ -112,10 +113,12 @@ export const HandbookToc: React.FC = () => {
                     tabs={tabs}
                     defaultValue="/chapters"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
+                    contentPadding={false}
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
+                    centerTabs
                 />
             </Editor>
         </>

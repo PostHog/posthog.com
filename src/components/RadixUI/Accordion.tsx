@@ -38,7 +38,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
         <RadixAccordion.Header className="flex">
             <RadixAccordion.Trigger
                 className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none select-none ${
-                    skin ? 'first:rounded-t last:rounded-b bg-accent hover:bg-accent' : ''
+                    skin ? 'first:rounded-t bg-accent hover:bg-accent' : ''
                 } text-primary outline-none ${className}`}
                 {...props}
                 ref={forwardedRef}
@@ -65,7 +65,7 @@ interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Ra
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
     ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Content
-            className={`overflow-hidden select-none ${
+            className={`overflow-hidden ${
                 skin ? 'bg-primary text-primary border-primary border-t' : ''
             } data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown p-2 last:rounded-b [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${className}`}
             {...props}
@@ -88,31 +88,52 @@ interface AccordionRootProps
         trigger: React.ReactNode
         content: React.ReactNode
     }[]
+    type?: 'single' | 'multiple'
     className?: string
-    defaultValue?: string
-    onValueChange?: (value: string) => void
+    defaultValue?: string | string[]
+    onValueChange?: ((value: string) => void) | ((value: string[]) => void)
     contentClassName?: string
     triggerClassName?: string
     skin?: boolean
+    dataScheme?: string
+    defaultOpenAll?: boolean // New prop to open all items by default when type is 'multiple'
 }
 
 export const Accordion = ({
     items,
     className,
+    type = 'single',
     defaultValue,
     onValueChange,
     contentClassName,
     triggerClassName,
     skin = true,
+    dataScheme = 'primary',
+    defaultOpenAll = false,
     ...props
 }: AccordionRootProps) => {
+    // Calculate default value based on type and defaultOpenAll
+    const calculatedDefaultValue = React.useMemo(() => {
+        if (defaultValue !== undefined) {
+            return defaultValue
+        }
+
+        if (type === 'multiple' && defaultOpenAll) {
+            // Open all items by default for multiple type
+            return items.map((item, index) => item.value || `item-${index}`)
+        }
+
+        return undefined
+    }, [defaultValue, type, defaultOpenAll, items])
+
     return (
         <RadixAccordion.Root
             className={`${skin ? 'rounded border border-primary' : ''} ${className}`}
-            type="single"
+            type={type as any}
             collapsible
-            defaultValue={defaultValue}
-            onValueChange={onValueChange}
+            defaultValue={calculatedDefaultValue as any}
+            onValueChange={onValueChange as any}
+            data-scheme={dataScheme}
             {...props}
         >
             {items.map(({ value, trigger, content }, index) => (

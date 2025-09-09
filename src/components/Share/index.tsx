@@ -7,6 +7,7 @@ import OSTabs from 'components/OSTabs'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 import { CallToAction } from 'components/CallToAction'
+import { IconXNotTwitter } from 'components/OSIcons'
 
 interface TweetTemplate {
     id: string
@@ -562,7 +563,7 @@ const TweetGenerator = ({ url }: { url: string }) => {
                     externalNoIcon
                     className="w-full mt-2"
                 >
-                    Post to X
+                    Post to <IconXNotTwitter className="size-4 inline-block relative -top-px" />
                 </CallToAction>
             </div>
         </div>
@@ -811,13 +812,14 @@ export default function Share({ url, title }: { url: string; title: string }) {
     const { setWindowTitle, siteSettings } = useApp()
 
     useEffect(() => {
-        setWindowTitle(appWindow, `Share ${title || url}`)
+        setWindowTitle(appWindow, `Share page`)
     }, [])
 
     return (
         <div className={`${siteSettings.experience === 'boring' ? 'size-full' : 'w-[500px]'}`}>
             <OSTabs
-                frame
+                padding
+                triggerDataScheme="primary"
                 tabs={[
                     {
                         label: 'Tweet generator',

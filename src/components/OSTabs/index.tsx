@@ -21,8 +21,9 @@ interface OSTabsProps {
     defaultValue?: string
     value?: string
     orientation?: 'horizontal' | 'vertical'
-    frame: boolean
-    children?: React.ReactNode
+    border?: boolean
+    padding?: boolean
+    contentPadding?: boolean
     fullScreen?: boolean
     className?: string
     triggerDataScheme?: string
@@ -33,15 +34,17 @@ interface OSTabsProps {
     tabTriggerClassName?: string
     tabContentClassName?: string
     scrollable?: boolean
+    scrollAreaClasses?: string
 }
 
 export default function OSTabs({
     tabs,
     defaultValue,
     value,
-    children,
     orientation = 'horizontal',
-    frame = true,
+    border = true,
+    padding = false,
+    contentPadding = true,
     className,
     triggerDataScheme = 'secondary',
     extraTabRowContent,
@@ -51,6 +54,7 @@ export default function OSTabs({
     tabTriggerClassName,
     tabContentClassName,
     scrollable = true,
+    scrollAreaClasses = '',
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const initialOrderedTabs = (state as any)?.orderedTabs
@@ -140,7 +144,10 @@ export default function OSTabs({
         // Only run tab row calculation for horizontal orientation (when tabs might wrap)
         if (orientation === 'vertical' || !ref.current) return
 
-        calculateTabRows()
+        setTimeout(() => {
+            calculateTabRows()
+        }, 300)
+
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
@@ -149,8 +156,9 @@ export default function OSTabs({
     const TabContentContainer = useMemo(() => (scrollable ? ScrollArea : 'div'), [scrollable])
 
     return (
-        <div ref={ref}>
+        <>
             <Tabs.Root
+                ref={ref}
                 onValueChange={(value) => {
                     setControlledValue(value)
 
@@ -184,12 +192,9 @@ export default function OSTabs({
                 }}
                 defaultValue={defaultValue || tabs[0]?.value}
                 value={value || controlledValue}
-                className={
-                    className ??
-                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
-                        frame ? 'pt-2 px-4 pb-4' : ''
-                    } h-full min-h-0 bg-primary`
-                }
+                className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
+                    padding ? 'pt-1  px-2 pb-2' : ''
+                } min-h-0 bg-primary ${className}`}
             >
                 <div className={tabContainerClassName}>
                     <Tabs.List
@@ -199,8 +204,8 @@ export default function OSTabs({
                             <div
                                 key={rowIndex}
                                 className={`flex ${
-                                    orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
-                                } ${centerTabs ? 'justify-center' : ''}`}
+                                    orientation === 'horizontal' ? ' items-center ml-4' : 'flex-col gap-px h-full'
+                                } ${centerTabs ? 'justify-center ml-0' : ''}`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -221,11 +226,12 @@ export default function OSTabs({
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <TabContentContainer
                             className={`@container bg-primary h-full min-h-0 ${
-                                frame ? 'border border-primary rounded-md' : ''
-                            } ${!scrollable ? 'overflow-hidden' : ''}`}
+                                border ? 'border border-primary rounded-md' : ''
+                            }`}
+                            viewportClasses={scrollAreaClasses}
                         >
                             <div
-                                className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}
+                                className={`@container ${contentPadding ? 'p-4 @2xl:p-6' : ''} ${tabContentClassName}`}
                             >
                                 {tab.content}
                             </div>
@@ -233,7 +239,6 @@ export default function OSTabs({
                     </Tabs.Content>
                 ))}
             </Tabs.Root>
-            {children}
-        </div>
+        </>
     )
 }

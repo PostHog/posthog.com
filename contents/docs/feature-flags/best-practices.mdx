@@ -3,6 +3,7 @@ title: Feature flag best practices
 sidebar: Docs
 showTitle: true
 ---
+
 ## 1. Use a reverse proxy
 
 Ad blockers have the potential to disable your feature flags, which can lead to bad experiences, such as users seeing the wrong version of your app, or missing a new feature rollout.
@@ -11,7 +12,7 @@ To avoid this, deploy a reverse proxy, which enables you to make requests and se
 
 This means that requests are less likely to be intercepted by tracking blockers, and your feature flags are more likely to work as intended. You'll also capture more usage data.
 
-PostHog customers on one of our [platforms add-ons](/platform-addons) can use our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), but there are numerous methods to run your own. See our [reverse proxy docs](/docs/advanced/proxy/managed-reverse-proxy) for more.
+PostHog customers on one of our [platforms add-ons](/platform-packages) can use our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), but there are numerous methods to run your own. See our [reverse proxy docs](/docs/advanced/proxy/managed-reverse-proxy) for more.
 
 ## 2. Call your flag in as few places as possible
 
@@ -49,13 +50,13 @@ See our docs on [bootstrapping](/docs/feature-flags/bootstrapping) for more deta
 
 Good naming conventions for your flags makes them easier to understand and maintain. Below are tips for naming your flags:
 
-- **Use descriptive names.** For example, `is_v2_billing_dashboard_enabled` is much clearer than `is_dashboard_enabled`.
+-   **Use descriptive names.** For example, `is_v2_billing_dashboard_enabled` is much clearer than `is_dashboard_enabled`.
 
-- **Use name "types".** This helps organize them and makes their purpose clear. Types might include experiments, releases, and permissions. For example, instead of `new-billing`, they would be `new-billing-experiment` or `new-billing-release`.
+-   **Use name "types".** This helps organize them and makes their purpose clear. Types might include experiments, releases, and permissions. For example, instead of `new-billing`, they would be `new-billing-experiment` or `new-billing-release`.
 
-- **Name flags to reflect their return type.** For example, `is_premium_user` for a boolean, `enabled_integrations` for an array, or `selected_theme` for a single string.
+-   **Name flags to reflect their return type.** For example, `is_premium_user` for a boolean, `enabled_integrations` for an array, or `selected_theme` for a single string.
 
-- **Use positive language for boolean flags.** For example, `is_premium_user` instead of `is_not_premium_user`. This helps avoid double negatives when checking the flag value (e.g. `if !is_not_premium_user` is confusing).
+-   **Use positive language for boolean flags.** For example, `is_premium_user` instead of `is_not_premium_user`. This helps avoid double negatives when checking the flag value (e.g. `if !is_not_premium_user` is confusing).
 
 ## 7. Roll out progressively
 
@@ -64,11 +65,12 @@ When testing a change behind a feature flag, it is best to roll it out to a smal
 For example, at PostHog we often roll out the flag to just the responsible developer. It then moves on to the internal team, then beta users, and finally into a full rollout. This enables us to [test in production](/product-engineers/testing-in-production), get multiple rounds of feedback, identify issues, and polish the feature before the full release.
 
 ## 8. Clean up after yourself
+
 Leaving flags in your code for too long can confuse future developers and create technical debt, especially if it's already rolled out and integrated. Be sure to remove stale flags once they are completely rolled out or no longer needed.
 
 ## 9. Fallback to working code
 
-It's possible that a feature flag will return an [unexpected value](/docs/feature-flags/common-questions#my-feature-flag-called-events-show-none-empty-string-or-false-instead-of-my-variant-names). For example, if the flag is disabled or failed to load due to a network error. 
+It's possible that a feature flag will return an [unexpected value](/docs/feature-flags/common-questions#my-feature-flag-called-events-show-none-empty-string-or-false-instead-of-my-variant-names). For example, if the flag is disabled or failed to load due to a network error.
 
 In this case, its best to check that the feature flag returns a valid expected value before using it. If it isn't, fallback to working code.
 
@@ -76,9 +78,9 @@ In this case, its best to check that the feature flag returns a valid expected v
 
 For sophisticated feature rollouts, consider using [feature flag dependencies](/docs/feature-flags/dependencies) where one flag's activation depends on another flag's state. This is useful for:
 
-- Enabling complex features only after foundational components are active
-- Running experiments only on users with specific features enabled
-- Creating safety mechanisms where critical flags must be enabled first
+-   Enabling complex features only after foundational components are active
+-   Running experiments only on users with specific features enabled
+-   Creating safety mechanisms where critical flags must be enabled first
 
 When using dependencies, keep the dependency chains simple and avoid circular dependencies.
 

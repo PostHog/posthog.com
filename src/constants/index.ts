@@ -1,6 +1,13 @@
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
 export const CUSTOMER_COUNT = 190254
+
+// screensaver
+export const INACTIVITY_TIMEOUTS = {
+    FOCUSED: 240000, // 240 seconds (4 minutes)
+    UNFOCUSED: 120000, // 120 seconds (2 minutes)
+} as const
+
 export const explorerGridColumns =
     'grid-cols-2 @xs:grid-cols-3 @md:grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 @2xl:grid-cols-6 @3xl:grid-cols-7 @4xl:grid-cols-8 @5xl:grid-cols-9 @6xl:grid-cols-10 @7xl:grid-cols-11'
 

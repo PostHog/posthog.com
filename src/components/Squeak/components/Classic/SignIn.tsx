@@ -5,42 +5,12 @@ import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
 import { User, useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
+import Input from '../../../../components/OSForm/input'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
 import Link from 'components/Link'
-
-const Input = ({
-    label,
-    type = 'text',
-    touched,
-    error,
-    ...props
-}: {
-    label: string
-    type?: string
-    touched: boolean
-    error?: string
-    [key: string]: any
-}) => {
-    return (
-        <div className="flex items-center space-x-2">
-            <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
-                {label}
-            </label>
-            <div>
-                <input
-                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-primary'}`}
-                    type={type}
-                    id={props.name}
-                    placeholder={label}
-                    {...props}
-                />
-            </div>
-        </div>
-    )
-}
 
 const errorMessages: Record<string, string> = {
     'Invalid identifier or password': 'Invalid email or password',
@@ -102,7 +72,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'Welcome to PostHog.com')
+            setWindowTitle(appWindow, 'Log on to PostHog.com')
         }
     }, [])
 
@@ -135,13 +105,18 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                         <img src={SecurityHog} className="w-20" />
                     </div>
                     <div data-scheme="primary" className="flex-1">
-                        <h3 className="text-base font-semibold leading-tight mb-4">
+                        <h3 className="text-base font-semibold leading-tight mb-2">
                             Enter your email and password to log on to PostHog.com
                         </h3>
+                        <p className="text-xs text-red dark:text-orange">
+                            Your PostHog.com login is separate from the app's authentication.
+                        </p>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input
                                 label="Email"
                                 type="email"
+                                size="sm"
+                                direction="row"
                                 touched={!!touched.email}
                                 error={errors.email}
                                 {...getFieldProps('email')}
@@ -149,6 +124,8 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                             <Input
                                 label="Password"
                                 type="password"
+                                size="sm"
+                                direction="row"
                                 touched={!!touched.password}
                                 error={errors.password}
                                 {...getFieldProps('password')}

@@ -19,8 +19,7 @@ import { sortOptions } from 'components/Edition/Posts'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
-import RadixTooltip from 'components/RadixUI/Tooltip'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
@@ -29,9 +28,12 @@ import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
     IconArrowUpRight,
+    IconPencil,
     IconSpinner,
     IconUpload,
     IconX,
+    IconCheck,
+    IconExternal,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
@@ -42,6 +44,11 @@ import RichText from 'components/Squeak/components/RichText'
 import transformValues from 'components/Squeak/util/transformValues'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import { Select } from 'components/RadixUI/Select'
+import OSInput from 'components/OSForm/input'
+import { useToast } from '../../../context/Toast'
+import HeaderBar from 'components/OSChrome/HeaderBar'
+import OSButton from 'components/OSButton'
+import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 
 dayjs.extend(relativeTime)
 
@@ -62,6 +69,10 @@ const WebsiteIcon = () => {
             />
         </svg>
     )
+}
+
+const stripUrlPrefix = (url: string) => {
+    return url.replace(/^https?:\/\/(www\.)?/, '')
 }
 
 const BackgroundImageField = ({
@@ -139,7 +150,7 @@ const Links = ({
     errors: any
 }) => {
     return (
-        <ul className={`flex m-0 p-0 list-none ${isEditing ? 'flex-col' : 'space-x-3'}`}>
+        <ul className={`flex m-0 p-0 list-none ${isEditing ? 'flex-col space-y-3' : 'space-x-3'}`}>
             {isEditing ? (
                 <li>
                     <Input
@@ -153,9 +164,16 @@ const Links = ({
             ) : (
                 profile.github && (
                     <li>
-                        <Link to={profile.github} externalNoIcon>
-                            <GitHub className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.github} externalNoIcon>
+                                    <GitHub className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.github)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -172,9 +190,16 @@ const Links = ({
             ) : (
                 profile.twitter && (
                     <li>
-                        <Link to={profile.twitter} externalNoIcon>
-                            <Twitter className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.twitter} externalNoIcon>
+                                    <Twitter className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.twitter)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -191,9 +216,16 @@ const Links = ({
             ) : (
                 profile.linkedin && (
                     <li>
-                        <Link to={profile.linkedin} externalNoIcon>
-                            <LinkedIn className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.linkedin} externalNoIcon>
+                                    <LinkedIn className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.linkedin)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -210,9 +242,16 @@ const Links = ({
             ) : (
                 profile.website && (
                     <li>
-                        <Link to={profile.website} externalNoIcon>
-                            <WebsiteIcon />
-                        </Link>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.website} externalNoIcon>
+                                    <WebsiteIcon />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.website)}
+                        </Tooltip>
                     </li>
                 )
             )}
@@ -220,15 +259,37 @@ const Links = ({
     )
 }
 
-const Input = ({ label, name, value, onChange, error }) => {
+const Input = ({
+    label,
+    name,
+    value,
+    onChange,
+    error,
+    dataScheme,
+    tooltip,
+}: {
+    label: string
+    name: string
+    value: any
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    error?: string
+    tooltip?: string | React.ReactNode
+    dataScheme?: 'primary' | 'secondary' | 'tertiary'
+}) => {
     return (
-        <div>
-            <label className="text-xs font-semibold" htmlFor={name}>
-                {label}
-            </label>
-            <input type="text" name={name} value={value} onChange={onChange} placeholder={label} className="rounded" />
-            {error && <p className="text-red m-0 text-xs font-bold mt-1">{error}</p>}
-        </div>
+        <OSInput
+            label={label}
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={label}
+            direction="column"
+            error={error}
+            touched={!!error}
+            showLabel={true}
+            dataScheme="primary"
+            tooltip={tooltip}
+        />
     )
 }
 
@@ -296,7 +357,7 @@ const AvatarBlock = ({
             )}
             <Avatar className="w-full border-b border-primary" src={imageURL} color={profile.color} />
             {isEditing ? (
-                <div className="p-3 w-full">
+                <div className="p-3 w-full space-y-3">
                     <Input
                         label="First name"
                         name="firstName"
@@ -311,43 +372,45 @@ const AvatarBlock = ({
                         onChange={(e) => setFieldValue('lastName', e.target.value)}
                         error={errors.lastName}
                     />
-                    <label className="text-xs font-semibold">Favorite color</label>
-                    <ul className="list-none m-0 p-0 flex space-x-1">
-                        {[
-                            'lime-green',
-                            'blue',
-                            'orange',
-                            'teal',
-                            'purple',
-                            'seagreen',
-                            'salmon',
-                            'yellow',
-                            'red',
-                            'green',
-                            'lilac',
-                            'sky-blue',
-                        ].map((color) => {
-                            const active = values.color === color
-                            return (
-                                <li key={color} onClick={() => setFieldValue('color', color)}>
-                                    <button
-                                        type="button"
-                                        className={`size-5 rounded-full bg-${color} border-[1.5px] ${
-                                            active ? 'border-black dark:border-white' : 'border-transparent'
-                                        }`}
-                                    />
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    <div>
+                        <label className="text-[15px]">Favorite color</label>
+                        <ul className="list-none m-0 p-0 flex space-x-1 mt-1">
+                            {[
+                                'lime-green',
+                                'blue',
+                                'orange',
+                                'teal',
+                                'purple',
+                                'seagreen',
+                                'salmon',
+                                'yellow',
+                                'red',
+                                'green',
+                                'lilac',
+                                'sky-blue',
+                            ].map((color) => {
+                                const active = values.color === color
+                                return (
+                                    <li key={color} onClick={() => setFieldValue('color', color)}>
+                                        <button
+                                            type="button"
+                                            className={`size-5 rounded-full bg-${color} border-[1.5px] ${
+                                                active ? 'border-black dark:border-white' : 'border-transparent'
+                                            }`}
+                                        />
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
                 </div>
             ) : (
                 <div className="flex items-center space-x-2 my-2">
                     <h2 className="uppercase">{name}</h2>
                     {profile.country && (
-                        <RadixTooltip trigger={<Stickers country={profile.country} className="w-6 h-6" />} delay={0}>
+                        <Tooltip trigger={<Stickers country={profile.country} className="w-6 h-6" />} delay={0}>
                             {profile.location || profile.country}
-                        </RadixTooltip>
+                        </Tooltip>
                     )}
                 </div>
             )}
@@ -359,8 +422,14 @@ const AvatarBlock = ({
 }
 
 const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+    const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
+
+    // Update showPronounsInput when values.pronouns changes
+    useEffect(() => {
+        setShowPronounsInput(!!values.pronouns)
+    }, [values.pronouns])
     return (
-        <div className="text-sm space-y-1">
+        <div className="text-sm space-y-3">
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -377,11 +446,9 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                 </p>
             )}
             {isEditing ? (
-                <>
-                    <label className="text-xs font-semibold">Pineapple on pizza</label>
+                <div>
                     <ToggleGroup
-                        title="Pineapple on pizza"
-                        hideTitle={true}
+                        title="Pineapple on pizza?"
                         options={[
                             {
                                 label: 'Yes',
@@ -395,7 +462,7 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                         value={values.pineappleOnPizza === null ? undefined : values.pineappleOnPizza ? 'yes' : 'no'}
                         onValueChange={(value) => setFieldValue('pineappleOnPizza', value === 'yes' ? true : false)}
                     />
-                </>
+                </div>
             ) : (
                 profile.pineappleOnPizza !== null && (
                     <p className="flex justify-between m-0">
@@ -427,13 +494,34 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                 )
             )}
             {isEditing ? (
-                <Input
-                    label="Pronouns"
-                    name="pronouns"
-                    value={values.pronouns}
-                    onChange={(e) => setFieldValue('pronouns', e.target.value)}
-                    error={errors.pronouns}
-                />
+                showPronounsInput ? (
+                    <Input
+                        label="Pronouns"
+                        name="pronouns"
+                        value={values.pronouns}
+                        onChange={(e) => setFieldValue('pronouns', e.target.value)}
+                        error={errors.pronouns}
+                    />
+                ) : (
+                    <OSButton
+                        size="sm"
+                        variant="default"
+                        onClick={() => {
+                            setShowPronounsInput(true)
+                            // Focus the input after it renders
+                            setTimeout(() => {
+                                const input = document.querySelector('input[name="pronouns"]') as HTMLInputElement
+                                if (input) {
+                                    input.focus()
+                                }
+                            }, 0)
+                        }}
+                        className="text-secondary font-medium"
+                        hover="background"
+                    >
+                        add pronouns
+                    </OSButton>
+                )
             ) : (
                 profile.pronouns && (
                     <p className="flex justify-between m-0">
@@ -459,7 +547,7 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
     }, [heightUnit])
 
     return (
-        <div>
+        <div className="space-y-3">
             <Input
                 label="Role"
                 name="companyRole"
@@ -469,24 +557,35 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
             />
             <Input
                 label="Country (2-char code)"
+                tooltip={
+                    <Link to="https://countrycode.org/" external>
+                        Look this up
+                    </Link>
+                }
                 name="country"
                 value={values.country}
                 onChange={(e) => setFieldValue('country', e.target.value)}
                 error={errors.country}
             />
             <div>
-                <label className="text-xs font-semibold">Height</label>
+                <label className="text-[15px] block mb-1">Height</label>
+                <p className="text-xs text-secondary m-0 mb-2">
+                    We use this to <s>estimate how much pizza you can eat</s> find how many hedgehogs long your small
+                    team is tall – in aggregate. (Important research.)
+                </p>
                 <div className="flex items-center space-x-1">
                     <input
-                        className="rounded"
+                        className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50"
                         type="number"
                         name="height"
                         value={height}
+                        data-scheme="primary"
                         onChange={(e) => {
                             const value = Number(e.target.value)
                             setHeight(value)
                             setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(value) : value)
                         }}
+                        required
                     />
                     <ToggleGroup
                         title="Height unit"
@@ -501,7 +600,7 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                 </div>
             </div>
             <div>
-                <label className="text-xs font-semibold">Show comments</label>
+                <label className="text-[15px]">Show comments</label>
                 <p className="text-xs text-secondary m-0 mb-2">
                     Let visitors comment on your profile. You'll get comment notifications via email.
                 </p>
@@ -524,10 +623,10 @@ const ProfileSkeleton = () => {
     return (
         <div data-scheme="secondary" className="h-full bg-primary">
             <ScrollArea>
-                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-4 pb-4 @container">
                     <div className="flex flex-col @2xl:flex-row gap-6 p-6">
                         {/* Left sidebar skeleton */}
-                        <div className="@2xl:max-w-xs w-full flex-shrink-0">
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             {/* Avatar section skeleton */}
                             <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
                                 <div className="w-full aspect-square bg-accent animate-pulse border-b border-primary" />
@@ -657,7 +756,13 @@ const Block = ({ title, children, url }) => {
 const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
     return (
         <div className="bg-white dark:bg-accent-dark rounded-md border border-primary overflow-hidden">
-            <RichText values={values} initialValue={initialValue} setFieldValue={setFieldValue} bodyKey={bodyKey} />
+            <RichText
+                values={values}
+                initialValue={initialValue}
+                setFieldValue={setFieldValue}
+                bodyKey={bodyKey}
+                className="h-[400px]"
+            />
         </div>
     )
 }
@@ -697,9 +802,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                     initialValue={profile.biography}
                 />
             ) : (
-                <Markdown className="prose dark:prose-invert prose-sm max-w-full text-primary">
-                    {profile.biography || `${firstName} hasn't written a bio yet`}
-                </Markdown>
+                <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
             ),
         },
         ...((isModerator && isEditing) || profile.readme
@@ -783,7 +886,11 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
             : []),
     ]
 
-    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+    return (
+        <div data-scheme="secondary">
+            <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
+        </div>
+    )
 }
 
 const ValidationSchema = Yup.object().shape({
@@ -802,6 +909,7 @@ export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
     const nav = useTopicsNav()
+    const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
 
@@ -886,14 +994,39 @@ export default function ProfilePage({ params }: PageProps) {
             if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
                 try {
                     const jwt = await getJwt()
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
+                    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${id}`, {
                         method: 'PUT',
                         headers: {
                             Authorization: `Bearer ${jwt}`,
                         },
                     })
+
+                    if (response.ok) {
+                        await mutate()
+                        addToast({
+                            description: (
+                                <>
+                                    <IconCheck className="text-green size-4 inline-block mr-1" />
+                                    User blocked successfully
+                                </>
+                            ),
+                            duration: 3000,
+                        })
+                    } else {
+                        console.error('Failed to block user:', response.status)
+                        addToast({
+                            description: 'Failed to block user',
+                            error: true,
+                            duration: 3000,
+                        })
+                    }
                 } catch (err) {
                     console.error(err)
+                    addToast({
+                        description: 'Failed to block user',
+                        error: true,
+                        duration: 3000,
+                    })
                 }
             } else {
                 return
@@ -901,17 +1034,41 @@ export default function ProfilePage({ params }: PageProps) {
         } else {
             try {
                 const jwt = await getJwt()
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${id}`, {
                     method: 'PUT',
                     headers: {
                         Authorization: `Bearer ${jwt}`,
                     },
                 })
+
+                if (response.ok) {
+                    await mutate()
+                    addToast({
+                        description: (
+                            <>
+                                <IconCheck className="text-green size-4 inline-block mr-1" />
+                                User unblocked successfully
+                            </>
+                        ),
+                        duration: 3000,
+                    })
+                } else {
+                    console.error('Failed to unblock user:', response.status)
+                    addToast({
+                        description: 'Failed to unblock user',
+                        error: true,
+                        duration: 3000,
+                    })
+                }
             } catch (err) {
                 console.error(err)
+                addToast({
+                    description: 'Failed to unblock user',
+                    error: true,
+                    duration: 3000,
+                })
             }
         }
-        window.location.reload()
     }
 
     const { attributes: profile } = data || {}
@@ -1014,6 +1171,17 @@ export default function ProfilePage({ params }: PageProps) {
 
                 if (data) {
                     await mutate()
+
+                    // Show success toast
+                    addToast({
+                        description: (
+                            <>
+                                <IconCheck className="text-green size-4 inline-block mr-1" />
+                                Profile saved successfully
+                            </>
+                        ),
+                        duration: 3000,
+                    })
                 }
 
                 posthog?.capture('squeak profile update', {
@@ -1045,10 +1213,83 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <div data-scheme="secondary" className="h-full bg-primary text-primary">
             <SEO title={`${name}'s profile - PostHog`} />
+            <div className="border-b border-primary">
+                <HeaderBar
+                    rightActionButtons={
+                        isEditing ? (
+                            <div className="flex gap-1">
+                                <OSButton
+                                    size="md"
+                                    variant="secondary"
+                                    onClick={() => {
+                                        setIsEditing(false)
+                                        resetForm()
+                                    }}
+                                >
+                                    Cancel
+                                </OSButton>
+                                <OSButton size="md" variant="primary" onClick={submitForm} disabled={isSubmitting}>
+                                    {isSubmitting ? 'Saving...' : 'Save'}
+                                </OSButton>
+                            </div>
+                        ) : (
+                            <>
+                                {isModerator && (
+                                    <div className="flex gap-px border-r border-secondary pr-2 mr-2">
+                                        <OSButton
+                                            asLink
+                                            size="md"
+                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
+                                            tooltip={
+                                                <>
+                                                    View in Strapi{' '}
+                                                    <IconExternal className="size-4 text-secondary inline-block relative -top-px" />
+                                                </>
+                                            }
+                                            icon={<IconStrapi />}
+                                            iconClassName="size-5"
+                                            external
+                                        />
+
+                                        <OSButton
+                                            size="md"
+                                            tooltip={
+                                                profile?.user?.data?.attributes?.blocked
+                                                    ? 'Unblock user?'
+                                                    : 'Block user'
+                                            }
+                                            icon={
+                                                profile?.user?.data?.attributes?.blocked ? (
+                                                    <IconNoEntry />
+                                                ) : (
+                                                    <IconNoEntry />
+                                                )
+                                            }
+                                            iconClassName="size-5"
+                                            className={`${
+                                                profile?.user?.data?.attributes?.blocked ? '!bg-red !text-white' : ''
+                                            }`}
+                                            onClick={() => handleBlock(!profile?.user?.data?.attributes?.blocked)}
+                                        />
+                                    </div>
+                                )}
+                                {(isCurrentUser || (isModerator && user?.webmaster)) && (
+                                    <OSButton
+                                        size="md"
+                                        icon={<IconPencil />}
+                                        iconClassName="size-5"
+                                        onClick={() => setIsEditing(true)}
+                                    />
+                                )}
+                            </>
+                        )
+                    }
+                />
+            </div>
             <ScrollArea>
                 <div
                     data-scheme="primary"
-                    className="mx-auto max-w-screen-xl px-5 @container"
+                    className="mx-auto max-w-screen-xl px-4 pb-4 @container"
                     style={
                         values.backgroundImage
                             ? {
@@ -1060,8 +1301,8 @@ export default function ProfilePage({ params }: PageProps) {
                             : undefined
                     }
                 >
-                    <div className="flex flex-col @2xl:flex-row gap-6 p-6">
-                        <div className="@2xl:max-w-xs w-full flex-shrink-0">
+                    <div className="flex flex-col @2xl:flex-row gap-6 p-4">
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             <AvatarBlock
                                 profile={profile}
                                 isEditing={isEditing}
@@ -1124,72 +1365,6 @@ export default function ProfilePage({ params }: PageProps) {
                             {isModerator && isEditing && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
-                                </Block>
-                            )}
-                            {isEditing ? (
-                                <div className="space-y-2 mb-4">
-                                    <CallToAction
-                                        size="sm"
-                                        type="primary"
-                                        width="full"
-                                        onClick={submitForm}
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? (
-                                            <IconSpinner className="size-5 animate-spin mx-auto" />
-                                        ) : (
-                                            'Update profile'
-                                        )}
-                                    </CallToAction>
-                                    <CallToAction
-                                        size="sm"
-                                        type="secondary"
-                                        width="full"
-                                        onClick={() => {
-                                            setIsEditing(false)
-                                            resetForm()
-                                        }}
-                                    >
-                                        Cancel
-                                    </CallToAction>
-                                </div>
-                            ) : (
-                                (user?.profile?.id === data?.id ||
-                                    (user?.role?.type === 'moderator' && user?.webmaster)) && (
-                                    <div className="mb-4">
-                                        <CallToAction
-                                            size="sm"
-                                            onClick={() => {
-                                                setIsEditing(true)
-                                            }}
-                                            type="secondary"
-                                            width="full"
-                                        >
-                                            Edit Profile
-                                        </CallToAction>
-                                    </div>
-                                )
-                            )}
-                            {isModerator && (
-                                <Block title="Moderator tools">
-                                    <div className="space-y-2">
-                                        <CallToAction
-                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
-                                            size="sm"
-                                            type="secondary"
-                                            width="full"
-                                        >
-                                            View in Strapi
-                                        </CallToAction>
-                                        <CallToAction
-                                            size="sm"
-                                            type="primary"
-                                            onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
-                                            width="full"
-                                        >
-                                            {profile.user?.data.attributes.blocked ? 'Unblock User' : 'Block User'}
-                                        </CallToAction>
-                                    </div>
                                 </Block>
                             )}
                         </div>
@@ -1320,28 +1495,27 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
 
     return (
         <Tooltip
-            contentContainerClassName="!border-none !p-0 !bg-transparent"
-            tooltipClassName="!rounded-none"
-            placement="bottom-start"
-            content={() => (
-                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-primary bg-light dark:bg-dark">
-                    <div className="mb-4 -mx-4 -mt-2">
-                        <img src={image?.data?.attributes?.url} />
-                    </div>
-                    <h4 className="text-lg m-0">{title}</h4>
-                    <p className="m-0 mt-1 text-sm mb-2">{description}</p>
-                </div>
-            )}
+            delay={0}
+            side="bottom"
+            trigger={
+                <ImageContainer
+                    onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
+                    onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
+                    onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
+                    style={{ opacity }}
+                    className={`relative transition-opacity`}
+                >
+                    <img className="w-full" src={icon?.data?.attributes?.url} />
+                </ImageContainer>
+            }
         >
-            <ImageContainer
-                onClick={isCurrentUser ? () => handleClick(!hidden) : undefined}
-                onMouseEnter={isCurrentUser ? () => setOpacity(0.8) : undefined}
-                onMouseOut={isCurrentUser ? () => setOpacity(hidden ? 0.6 : 1) : undefined}
-                style={{ opacity }}
-                className={`relative transition-opacity`}
-            >
-                <img className="w-full" src={icon?.data?.attributes?.url} />
-            </ImageContainer>
+            <div className="max-w-[250px] text-left">
+                <div className="mb-4 -mx-2 -mt-2">
+                    <img src={image?.data?.attributes?.url} />
+                </div>
+                <h4 className="text-lg m-0">{title}</h4>
+                <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+            </div>
         </Tooltip>
     )
 }

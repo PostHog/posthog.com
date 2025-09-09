@@ -43,6 +43,10 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
                     assetsUrl: '/hedgehog-mode',
                     platforms: {
                         selector: '.border',
+                        viewportPadding: {
+                            top: 100,
+                        },
+                        minWidth: 50,
                     },
                 }}
                 onGameReady={() => void 0}

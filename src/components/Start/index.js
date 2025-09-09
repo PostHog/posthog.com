@@ -26,7 +26,7 @@ import ProgressBar from 'components/ProgressBar'
 const AIInstall = ({ setActiveTab }) => (
     <div
         data-scheme="primary"
-        className="bg-primary text-primary -m-4 @2xl:-m-6 flex flex-col-reverse @xl:flex-row overflow-hidden rounded"
+        className="bg-primary text-primary flex flex-col-reverse @xl:flex-row overflow-hidden rounded"
     >
         <div className="flex-1 p-4 @2xl:p-6">
             <IntegrationPrompt />
@@ -57,7 +57,7 @@ const AIInstall = ({ setActiveTab }) => (
 )
 
 const BoomerInstall = () => (
-    <div className="-m-4 @2xl:-m-6 flex flex-1 h-[630px] relative">
+    <div className="flex flex-1 h-full md:h-[630px] relative">
         <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
             <Loading className="size-8 text-muted" />
             <div className="text-sm text-secondary">Loading...</div>
@@ -106,6 +106,9 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
                 ]}
                 triggerDataScheme="primary"
                 value={activeTab}
+                padding
+                className="h-full pt-2 px-4 pb-4"
+                contentPadding={false}
                 onValueChange={setActiveTab}
                 extraTabRowContent={
                     <div data-scheme="primary" className="hidden @xl:inline-block text-primary ml-auto text-sm">
@@ -120,6 +123,8 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
                         </Link>
                     </div>
                 }
+                scrollAreaClasses="[&>div]:h-full"
+                tabContentClassName="h-full"
             />
         </>
     )

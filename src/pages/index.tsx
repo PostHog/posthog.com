@@ -38,7 +38,7 @@ import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import CloudinaryImage from "components/CloudinaryImage"
+import CloudinaryImage from 'components/CloudinaryImage'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -89,10 +89,19 @@ const HomeHappyHog = () => {
 const CTAs = () => {
     return (
         <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
-            <CallToAction to="https://app.posthog.com/signup" size="md" state={{ newWindow: true, initialTab: 'signup' }}>
+            <CallToAction
+                to="https://app.posthog.com/signup"
+                size="md"
+                state={{ newWindow: true, initialTab: 'signup' }}
+            >
                 Get started - free
             </CallToAction>
-            <CallToAction to="https://app.posthog.com/signup" type="secondary" size="md" state={{ newWindow: true, initialTab: 'ai' }}>
+            <CallToAction
+                to="https://app.posthog.com/signup"
+                type="secondary"
+                size="md"
+                state={{ newWindow: true, initialTab: 'ai' }}
+            >
                 Install with AI
             </CallToAction>
         </div>
@@ -186,12 +195,25 @@ const AIAgents = () => {
                     content: (
                         <div className="flex gap-2 items-center">
                             <span>
-                                <Tooltip trigger={
-                                    <Link to="/max" state={{ newWindow: true }}><img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_max_e80de99727.png" className="w-16 -m-2" /></Link>
-                                } delay={0}>
+                                <Tooltip
+                                    trigger={
+                                        <Link to="/max" state={{ newWindow: true }}>
+                                            <img
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
+                                                className="w-16 -m-2"
+                                            />
+                                        </Link>
+                                    }
+                                    delay={0}
+                                >
                                     <div className="relative">
-                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_max_e80de99727.png" className="" />
-                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">Hi, I'm Max</div>
+                                        <img
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
+                                            className=""
+                                        />
+                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
+                                            Hi, I'm Max
+                                        </div>
                                     </div>
                                 </Tooltip>
                             </span>
@@ -205,8 +227,7 @@ const AIAgents = () => {
                     ),
                 },
                 {
-                    content:
-                        'Writes SQL, builds data transformations, gathers context in insights',
+                    content: 'Writes SQL, builds data transformations, gathers context in insights',
                     className: 'text-sm',
                 },
             ],
@@ -218,17 +239,35 @@ const AIAgents = () => {
                     content: (
                         <div className="flex gap-2 items-center">
                             <span>
-                                <Tooltip trigger={
-                                    <Link to="/raquel" state={{ newWindow: true }}><img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="w-16 -m-2" /></Link>
-                                } delay={0}>
+                                <Tooltip
+                                    trigger={
+                                        <Link to="/raquel" state={{ newWindow: true }}>
+                                            <img
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png"
+                                                className="w-16 -m-2"
+                                            />
+                                        </Link>
+                                    }
+                                    delay={0}
+                                >
                                     <div className="relative">
-                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png" className="" />
-                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">Hi, I'm Raquel</div>
+                                        <img
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_raquel_c56887c5b7.png"
+                                            className=""
+                                        />
+                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">
+                                            Hi, I'm Raquel
+                                        </div>
                                     </div>
                                 </Tooltip>
                             </span>
                             <div className="flex flex-col">
-                                <span><Link to="/raquel" state={{ newWindow: true }}>Raquel</Link> – <em>beta</em></span>
+                                <span>
+                                    <Link to="/raquel" state={{ newWindow: true }}>
+                                        Raquel
+                                    </Link>{' '}
+                                    – <em>beta</em>
+                                </span>
                                 <span className="text-sm text-secondary">Hands-on exec</span>
                             </div>
                         </div>
@@ -247,17 +286,30 @@ const AIAgents = () => {
                     content: (
                         <div className="flex gap-2 items-center">
                             <span>
-                                <Tooltip trigger={
-                                    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png" className="w-16 -m-2" />
-                                } delay={0}>
+                                <Tooltip
+                                    trigger={
+                                        <img
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png"
+                                            className="w-16 -m-2"
+                                        />
+                                    }
+                                    delay={0}
+                                >
                                     <div className="relative">
-                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png" className="" />
-                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">Hi, I'm Annika</div>
+                                        <img
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_annika_fb5ff41473.png"
+                                            className=""
+                                        />
+                                        <div className="absolute top-[calc(100%-4.75rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[-2.75deg] left-0 right-0">
+                                            Hi, I'm Annika
+                                        </div>
                                     </div>
                                 </Tooltip>
                             </span>
                             <div className="flex flex-col">
-                                <span><strong>Annika</strong> – <em>beta</em></span>
+                                <span>
+                                    <strong>Annika</strong> – <em>beta</em>
+                                </span>
                                 <span className="text-sm text-secondary">Product manager</span>
                             </div>
                         </div>
@@ -275,100 +327,106 @@ const AIAgents = () => {
                 { content: 4 },
                 {
                     content: (
-
                         <div className="flex gap-2 items-center">
                             <span>
-                                <Tooltip trigger={
-                                    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png" className="w-16 -m-2" />
-                                } delay={0}>
+                                <Tooltip
+                                    trigger={
+                                        <img
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png"
+                                            className="w-16 -m-2"
+                                        />
+                                    }
+                                    delay={0}
+                                >
                                     <div className="relative">
-                                        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png" className="" />
-                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">Hi, I'm Marius</div>
+                                        <img
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/h_400,c_limit,q_auto,f_auto/ai_marius_9c4cd7045d.png"
+                                            className=""
+                                        />
+                                        <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
+                                            Hi, I'm Marius
+                                        </div>
                                     </div>
                                 </Tooltip>
                             </span>
                             <div className="flex flex-col">
-                                <span><strong>Marius</strong> – <em>beta</em></span>
+                                <span>
+                                    <strong>Marius</strong> – <em>beta</em>
+                                </span>
                                 <span className="text-sm text-secondary">10x engineer</span>
                             </div>
                         </div>
                     ),
                 },
                 {
-                    content: 'Implements bug fixes, creates and configures feature flags, writes code and generates pull requests',
+                    content:
+                        'Implements bug fixes, creates and configures feature flags, writes code and generates pull requests',
                     className: 'text-sm',
                 },
             ],
         },
     ]
 
-    return (
-        <OSTable columns={columns} rows={rows} size="sm" />
-    )
+    return <OSTable columns={columns} rows={rows} size="sm" />
 }
 
 const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'heygen']
 
-const COL2 = [
-    'supabase',
-    'mistralai',
-    'elevenlabs',
-    'hasura',
-    'raycast',
-    'posthog',
-]
+const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
     VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
-    planes: { col1: 'Builds planes', col2: 'Doesn\'t build planes (yet)' },
-    highValue: { col1: 'Companies with >1 $B\'s in their valuations', col2: 'Everyone else (for now)' },
+    planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
+    highValue: { col1: "Companies with >1 $B's in their valuations", col2: 'Everyone else (for now)' },
     caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
     easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
     goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
-    explainable: { col1: 'Companies you can explain to your parents', col2: 'Companies your parents will never understand' },
+    explainable: {
+        col1: 'Companies you can explain to your parents',
+        col2: 'Companies your parents will never understand',
+    },
     shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
-    american: { col1: 'Founded in America', col2: 'Not founded in American' },
-    pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' }
+    american: { col1: 'Founded in America', col2: 'Not founded in America' },
+    pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
 }
 
-
 const companyAttributes = {
-    "VCsLoveThem": [
-        "ycombinator",
-        "airbus",
+    VCsLoveThem: [
+        'ycombinator',
+        'airbus',
         // "elevenlabs",
-        "trust",
-        "lovable",
+        'trust',
+        'lovable',
         // "supabase",
         // "hasura",
-        "startengine",
+        'startengine',
         // "mistralai",
         // "raycast",
-        "researchgate",
-        "heygen",
+        'researchgate',
+        'heygen',
         // "posthog"
     ],
-    "colorful": [
-        "ycombinator",
+    colorful: [
+        'ycombinator',
         // "airbus",
         // "elevenlabs",
-        "trust",
-        "lovable",
-        "supabase",
+        'trust',
+        'lovable',
+        'supabase',
         // "hasura",
-        "startengine",
-        "mistralai",
-        "raycast",
+        'startengine',
+        'mistralai',
+        'raycast',
         // "researchgate",
         // "heygen",
-        "posthog"
+        'posthog',
     ],
-    "hardware": [
+    hardware: [
         // "ycombinator",
-        "airbus",
+        'airbus',
         // "elevenlabs",
         // "trust",
         // "lovable",
@@ -379,11 +437,11 @@ const companyAttributes = {
         // "raycast",
         // "researchgate",
         // "heygen",
-        "posthog"
+        'posthog',
     ],
-    "planes": [
+    planes: [
         // "ycombinator",
-        "airbus",
+        'airbus',
         // "elevenlabs",
         // "trust",
         // "lovable",
@@ -396,141 +454,141 @@ const companyAttributes = {
         // "heygen",
         // "posthog"
     ],
-    "highValue": [
-        "airbus",
-        "elevenlabs",
+    highValue: [
+        'airbus',
+        'elevenlabs',
         // "ycombinator",
-        "lovable",
-        "supabase",
-        "hasura",
+        'lovable',
+        'supabase',
+        'hasura',
         // "trust",
         // "startengine",
-        "mistralai",
+        'mistralai',
         // "raycast",
         // "researchgate",
         // "heygen",
         // "posthog"
     ],
-    "caseStudy": [
-        "ycombinator",
+    caseStudy: [
+        'ycombinator',
         // "airbus",
-        "elevenlabs",
+        'elevenlabs',
         // "trust",
-        "lovable",
-        "supabase",
-        "hasura",
+        'lovable',
+        'supabase',
+        'hasura',
         // "startengine",
         // "mistralai",
         // "raycast",
-        "researchgate",
+        'researchgate',
         // "heygen",
-        "posthog"
+        'posthog',
     ],
-    "easyToYell": [
+    easyToYell: [
         // "ycombinator",
-        "airbus",
+        'airbus',
         // "elevenlabs",
-        "trust",
+        'trust',
         // "lovable",
         // "supabase",
         // "hasura",
         // "startengine",
         // "mistralai",
-        "raycast",
+        'raycast',
         // "researchgate",
-        "heygen",
-        "posthog"
+        'heygen',
+        'posthog',
     ],
-    "goodBandName": [
+    goodBandName: [
         // "ycombinator",
-        "elevenlabs",
-        "lovable",
+        'elevenlabs',
+        'lovable',
         // "hasura",
-        "trust",
+        'trust',
         // "airbus",
         // "supabase",
-        "startengine",
+        'startengine',
         // "mistralai",
-        "raycast",
-        "researchgate",
+        'raycast',
+        'researchgate',
         // "heygen",
-        "posthog"
+        'posthog',
     ],
-    "explainable": [
-        "ycombinator",
-        "airbus",
+    explainable: [
+        'ycombinator',
+        'airbus',
         // "trust",
-        "lovable",
+        'lovable',
         // "elevenlabs",
         // "supabase",
         // "hasura",
-        "startengine",
+        'startengine',
         // "mistralai",
         // "raycast",
-        "researchgate",
+        'researchgate',
         // "heygen",
         // "posthog"
     ],
-    "shortNames": [
+    shortNames: [
         // "ycombinator",
-        "airbus",
-        "trust",
-        "lovable",
+        'airbus',
+        'trust',
+        'lovable',
         // "elevenlabs",
         // "supabase",
-        "hasura",
+        'hasura',
         // "startengine",
         // "mistralai",
-        "raycast",
+        'raycast',
         // "researchgate",
-        "heygen",
-        "posthog"
+        'heygen',
+        'posthog',
     ],
-    "realWords": [
+    realWords: [
         // "ycombinator",
-        "airbus",
-        "trust",
-        "lovable",
-        "elevenlabs",
+        'airbus',
+        'trust',
+        'lovable',
+        'elevenlabs',
         // "supabase",
         // "hasura",
-        "startengine",
+        'startengine',
         // "mistralai",
         // "raycast",
-        "researchgate",
+        'researchgate',
         // "heygen",
-        "posthog"
+        'posthog',
     ],
-    "american": [
-        "ycombinator",
+    american: [
+        'ycombinator',
         // "airbus",
         // "elevenlabs",
-        "trust",
+        'trust',
         // "lovable",
-        "supabase",
-        "hasura",
-        "startengine",
+        'supabase',
+        'hasura',
+        'startengine',
         // "mistralai",
         // "raycast",
-        "researchgate",
-        "heygen",
-        "posthog"
+        'researchgate',
+        'heygen',
+        'posthog',
     ],
-    "pokemon": [
+    pokemon: [
         // "ycombinator",
         // "airbus",
         // "elevenlabs",
         // "trust",
-        "lovable",
-        "supabase",
-        "hasura",
+        'lovable',
+        'supabase',
+        'hasura',
         // "startengine",
-        "mistralai",
-        "raycast",
+        'mistralai',
+        'raycast',
         // "researchgate",
-        "heygen",
+        'heygen',
         // "posthog"
-    ]
+    ],
 }
 
 interface CustomerProps {
@@ -595,8 +653,8 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'session_replay',
                             'web_analytics',
+                            'session_replay',
                             'product_analytics',
                             'feature_flags',
                             'surveys',
@@ -609,9 +667,9 @@ const CompanyStageTabs = () => {
                 <div className="flex flex-col gap-2">
                     <ProductTabs
                         productHandles={[
-                            'product_analytics',
-                            'web_analytics',
                             'session_replay',
+                            'web_analytics',
+                            'product_analytics',
                             'experiments',
                             'feature_flags',
                             'surveys',
@@ -642,7 +700,7 @@ const CompanyStageTabs = () => {
     )
 }
 
-const Button = ({ url, children }: { url: string, children: React.ReactNode }) => {
+const Button = ({ url, children }: { url: string; children: React.ReactNode }) => {
     return (
         <OSButton asLink to={url} variant="secondary" size="md" state={{ newWindow: true }}>
             {children}
@@ -650,7 +708,7 @@ const Button = ({ url, children }: { url: string, children: React.ReactNode }) =
     )
 }
 
-const Image = ({ src, className }: { src: string, className?: string }) => {
+const Image = ({ src, className }: { src: string; className?: string }) => {
     return <CloudinaryImage src={src} className={className} />
 }
 
@@ -709,7 +767,7 @@ const Customers = () => {
 
     // Get companies in column 1 (those in the breakdown) and column 2 (the rest)
     const companiesInCol1 = companyAttributes[currentBreakdown as keyof typeof companyAttributes] || []
-    const companiesInCol2 = allCompanies.filter(company => !companiesInCol1.includes(company))
+    const companiesInCol2 = allCompanies.filter((company) => !companiesInCol1.includes(company))
 
     const column1 = getCustomers(companiesInCol1)
     const column2 = getCustomers(companiesInCol2)
@@ -754,7 +812,7 @@ const Customers = () => {
 
         // Step 1: Record current positions (First)
         const beforePositions: Record<string, DOMRect> = {}
-        Object.keys(logoRefs.current).forEach(slug => {
+        Object.keys(logoRefs.current).forEach((slug) => {
             const element = logoRefs.current[slug]
             if (element) {
                 beforePositions[slug] = element.getBoundingClientRect()
@@ -772,7 +830,7 @@ const Customers = () => {
 
         // Step 3: Calculate and animate differences (Invert & Play)
         requestAnimationFrame(() => {
-            Object.keys(logoRefs.current).forEach(slug => {
+            Object.keys(logoRefs.current).forEach((slug) => {
                 const element = logoRefs.current[slug]
                 if (element && beforePositions[slug]) {
                     const afterPosition = element.getBoundingClientRect()
@@ -795,7 +853,7 @@ const Customers = () => {
             setTimeout(() => {
                 setIsAnimating(false)
                 // Clean up transforms
-                Object.keys(logoRefs.current).forEach(slug => {
+                Object.keys(logoRefs.current).forEach((slug) => {
                     const element = logoRefs.current[slug]
                     if (element) {
                         element.style.transform = ''
@@ -829,18 +887,20 @@ const Customers = () => {
                     className="relative border border-transparent hover:border-primary rounded-sm"
                 >
                     {renderLogo(customer)}
-                    <Tooltip trigger={
-                        <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
-                    } delay={0} sideOffset={14}>
+                    <Tooltip
+                        trigger={
+                            <span className="absolute top-1 right-0 inline-flex w-4 h-4 rounded-full bg-red border-2 border-white dark:border-dark"></span>
+                        }
+                        delay={0}
+                        sideOffset={14}
+                    >
                         <p className="text-sm mb-0">
                             {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
                         </p>
                     </Tooltip>
                 </OSButton>
             ) : (
-                <span className="inline-flex py-1.5 px-2">
-                    {renderLogo(customer)}
-                </span>
+                <span className="inline-flex py-1.5 px-2">{renderLogo(customer)}</span>
             )}
         </div>
     )
@@ -868,21 +928,28 @@ const Customers = () => {
         },
     ]
 
-    return <>
-        <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
-            <div className="@xl:absolute right-0 -top-8">
-                <OSButton
-                    onClick={toggleBreakdown}
-                    variant="secondary"
-                    size="sm"
-                    className="font-semibold [&_span]:min-w-[146px]"
-                    disabled={isAnimating}
-                >
-                    {isAnimating ? '🔀 Shuffling...' : <><IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies</>}
-                </OSButton>
-            </div>
+    return (
+        <>
+            <div className="relative @xl:pt-1 pb-2 @xl:pb-0">
+                <div className="@xl:absolute right-0 -top-8">
+                    <OSButton
+                        onClick={toggleBreakdown}
+                        variant="secondary"
+                        size="sm"
+                        className="font-semibold [&_span]:min-w-[146px]"
+                        disabled={isAnimating}
+                    >
+                        {isAnimating ? (
+                            '🔀 Shuffling...'
+                        ) : (
+                            <>
+                                <IconRefresh className="size-4 inline-block relative -top-px" /> Shuffle companies
+                            </>
+                        )}
+                    </OSButton>
+                </div>
 
-            {/* 
+                {/* 
             <select
                 value={currentBreakdown}
                 onChange={(e) => {
@@ -941,12 +1008,13 @@ const Customers = () => {
                 ))}
             </select>
              */}
-        </div>
-        <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
-        <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-            Open customers.mdx
-        </OSButton>
-    </>
+            </div>
+            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" />
+            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
+                Open customers.mdx
+            </OSButton>
+        </>
+    )
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
@@ -1030,7 +1098,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonAI',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/ai">Read AI agents.md</Button>,
+        Editor: () => <Button url="/max">Learn about Max AI</Button>,
     },
     {
         name: 'ButtonAbout',
@@ -1042,31 +1110,62 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ImageDW',
         kind: 'flow',
         props: [],
-        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png" className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm" />,
+        Editor: () => (
+            <Image
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
+                className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
+            />
+        ),
     },
     {
         name: 'ImageMoney',
         kind: 'flow',
         props: [],
-        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png" className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4" />,
+        Editor: () => (
+            <Image
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
+                className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+            />
+        ),
     },
     {
         name: 'ImageReading1',
         kind: 'flow',
         props: [],
-        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png" className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2" />,
+        Editor: () => (
+            <Image
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
+                className="@md:hidden @xl:block @lg:float-right max-w-full @xl:max-w-xs rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary -mb-2 @lg:mb-2 @lg:ml-4 @lg:-mt-2"
+            />
+        ),
     },
     {
         name: 'ImageReading2',
         kind: 'flow',
         props: [],
-        Editor: () => <Image src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png" className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary" />,
+        Editor: () => (
+            <Image
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/reading_at_night_8397c5198c.png"
+                className="hidden @md:block @md:float-right @xl:hidden @md:max-w-60 @xl:max-w-xs @sm:ml-4 @sm:mb-2 rotate-1 shadow-2xl rounded border-4 border-white dark:border-primary"
+            />
+        ),
     },
     {
         name: 'TooltipDW',
         kind: 'flow',
         props: [],
-        Editor: () => <Tooltip trigger={<span><IconInfo className="size-4 inline-block relative -top-px" /></span>} delay={0}><p className="text-sm mb-0">You can also connect your own!</p></Tooltip>,
+        Editor: () => (
+            <Tooltip
+                trigger={
+                    <span>
+                        <IconInfo className="size-4 inline-block relative -top-px" />
+                    </span>
+                }
+                delay={0}
+            >
+                <p className="text-sm mb-0">You can also connect your own!</p>
+            </Tooltip>
+        ),
     },
 ]
 
@@ -1097,7 +1196,7 @@ export default function Home() {
                 title="PostHog is for product engineers"
                 updateWindowTitle={false}
                 description="Home"
-                image="https://posthog.com/images/og/default.png"
+                image="/images/home.png"
             />
             <MDXEditor
                 hideTitle={true}
@@ -1105,8 +1204,9 @@ export default function Home() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 cta={{
-                    url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                        }.posthog.com/signup`,
+                    url: `https://${
+                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                    }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
             />

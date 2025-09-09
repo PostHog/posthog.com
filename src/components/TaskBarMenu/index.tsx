@@ -24,6 +24,7 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import { navigate } from 'gatsby'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 export default function TaskBarMenu() {
     const {
@@ -257,12 +258,37 @@ export default function TaskBarMenu() {
                             Get started – free
                         </OSButton>
                     </div>
-                    <OSButton onClick={() => openSearch()} size="sm">
-                        <IconSearch className="size-5" />
-                    </OSButton>
-                    <OSButton onClick={() => openNewChat({ path: `ask-max` })} size="sm">
-                        <IconChatHelp className="size-5" />
-                    </OSButton>
+                    <Tooltip
+                        trigger={
+                            <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                <IconSearch className="size-5" />
+                            </OSButton>
+                        }
+                    >
+                        <div className="flex flex-col items-center gap-1">
+                            <p className="text-sm mb-0">Search</p>
+                            <KeyboardShortcut text="/" size="sm" />
+                        </div>
+                    </Tooltip>
+                    <Tooltip
+                        trigger={
+                            <OSButton
+                                onClick={() => openNewChat({ path: `ask-max` })}
+                                size="sm"
+                                className="relative top-px"
+                            >
+                                <IconChatHelp className="size-5" />
+                            </OSButton>
+                        }
+                    >
+                        <div className="flex flex-col items-center gap-1">
+                            <p className="text-sm mb-0">Ask Max</p>
+                            <div className="flex items-center gap-1">
+                                <KeyboardShortcut text="Shift" size="sm" />
+                                <KeyboardShortcut text="?" size="sm" />
+                            </div>
+                        </div>
+                    </Tooltip>
                     {siteSettings.experience === 'posthog' && (
                         <motion.div
                             animate={
@@ -305,14 +331,18 @@ export default function TaskBarMenu() {
                                                 }
                                         `}
                                         >
-                                            <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
+                                            <span className="text-[13px] font-semibold relative -top-px">
+                                                {totalWindows}
+                                            </span>
                                         </button>
                                     }
                                     delay={0}
                                 >
                                     <div className="max-w-48 text-center">
                                         <p className="text-sm mb-0">You have no open windows</p>
-                                        <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">(But if you did, you could manage them here!)</p>
+                                        <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
+                                            (But if you did, you could manage them here!)
+                                        </p>
                                     </div>
                                 </Tooltip>
                             ) : (

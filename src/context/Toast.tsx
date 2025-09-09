@@ -9,6 +9,8 @@ export interface Toast {
     onUndo?: () => void
     onAction?: () => void
     actionLabel?: string
+    verticalAlign?: string
+    actionAsIcon?: React.ReactNode
     duration?: number
     image?: React.ReactNode
 }

@@ -58,9 +58,9 @@ const PlatformAddons = (): JSX.Element => {
             <section className="xl:w-11/12 mx-auto px-4 md:px-8 2xl:px-12 py-8 relative">
                 <div className="flex flex-col-reverse md:flex-row gap-4">
                     <div className="flex-1">
-                        <h1 className="text-4xl xl:text-5xl mb-2">Platform add-ons</h1>
+                        <h1 className="text-4xl xl:text-5xl mb-2">Platform packages</h1>
                         <p className="text-[17px] 2xl:text-lg font-semibold opacity-75">
-                            Our platform add-ons are designed to help you manage your teams securely and efficiently on
+                            Our platform packages are designed to help you manage your teams securely and efficiently on
                             PostHog as you grow.
                         </p>
                         <div className="max-w-sm rounded border border-primary bg-accent p-4">

@@ -125,8 +125,8 @@ export default function ProductTabs({ productHandles, className, selectedStage }
             const product = Array.isArray(allProducts)
                 ? allProducts.find((p: any) => p.handle === handle)
                 : allProducts?.handle === handle
-                    ? allProducts
-                    : null
+                ? allProducts
+                : null
             return product as Product | null
         })
         .filter((product): product is Product => product !== null)
@@ -157,7 +157,9 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                             )}
                             <div className={`${product.overview.textColor} dark:text-white`}>
                                 <h3 className="text-xl font-bold tracking-tight">{product.name}</h3>
-                                {product.overview?.title && <p className="mb-0 leading-tight">{product.overview.title}</p>}
+                                {product.overview?.title && (
+                                    <p className="mb-0 leading-tight">{product.overview.title}</p>
+                                )}
                             </div>
                         </div>
                         <div className="flex-shrink-0 mt-2 @sm:mt-0 ml-10 @sm:ml-0">
@@ -175,10 +177,11 @@ export default function ProductTabs({ productHandles, className, selectedStage }
 
                     {product.screenshots?.home && (
                         <div
-                            className={`flex-1 flex ${product.screenshots.home.classes
-                                ? product.screenshots.home.classes
-                                : 'justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4'
-                                }`}
+                            className={`flex-1 flex ${
+                                product.screenshots.home.classes
+                                    ? product.screenshots.home.classes
+                                    : 'justify-center items-end px-2 pb-2 @lg:px-4 @lg:pb-4'
+                            }`}
                         >
                             <Image
                                 images={images}
@@ -207,10 +210,13 @@ export default function ProductTabs({ productHandles, className, selectedStage }
         <OSTabs
             tabs={tabs}
             defaultValue={products[0]?.handle}
-            frame={false}
+            border={false}
+            padding={false}
             className={className}
             orientation={orientation}
-            tabContainerClassName={`${orientation === 'vertical' ? 'pt-2 pr-4' : ''} [&>div>div]:flex-wrap [&>div>div]:justify-center`}
+            tabContainerClassName={`${
+                orientation === 'vertical' ? 'pt-2 pr-4' : ''
+            } [&>div>div]:flex-wrap [&>div>div]:justify-center`}
             tabTriggerClassName="flex justify-start items-center gap-1 rounded-b-sm hover:bg-primary !border-b data-[state=active]:font-semibold"
             tabContentClassName="not-prose pt-2"
             extraTabRowContent={
@@ -233,7 +239,7 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/platform-addons" state={{ newWindow: true }}>
+                                    <Link to="/platform-packages" state={{ newWindow: true }}>
                                         Product OS add-ons
                                     </Link>
                                 </li>

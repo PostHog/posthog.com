@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect, useMemo, useState, useCall
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -11,6 +10,16 @@ import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import initialMenu from '../navs'
+import { useToast } from './Toast'
+import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
+import { themeOptions } from '../hooks/useTheme'
+
+declare global {
+    interface Window {
+        __setPreferredTheme: (theme: string) => string
+        __onThemeChange: (theme: string) => void
+    }
+}
 
 export interface MenuItem {
     name: string
@@ -267,7 +276,8 @@ export interface AppSetting {
         autoHeight?: boolean
     }
     position?: {
-        center?: boolean
+        center?: boolean // Centers window both horizontally and vertically
+        topCenter?: boolean // Centers horizontally, anchors from top (100px desktop only, 0px mobile)
         getPositionDefaults?: (
             size: { width: number; height: number },
             windows: AppWindow[],
@@ -491,6 +501,7 @@ const appSettings: AppSettings = {
                 height: 550,
             },
             fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
@@ -507,6 +518,66 @@ const appSettings: AppSettings = {
                 height: 575,
             },
             fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/terms': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/privacy': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/dpa': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/baa': {
+        size: {
+            min: {
+                width: 1,
+                height: 1,
+            },
+            max: {
+                width: 10000,
+                height: 10000,
+            },
         },
         position: {
             center: true,
@@ -544,6 +615,23 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/kbd': {
+        size: {
+            min: {
+                width: 600,
+                height: 625,
+            },
+            max: {
+                width: 600,
+                height: 625,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/demo': {
         size: {
             min: {
@@ -553,6 +641,22 @@ const appSettings: AppSettings = {
             max: {
                 width: 960,
                 height: 682,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/sales': {
+        size: {
+            min: {
+                width: 875,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 900,
             },
             fixed: false,
         },
@@ -646,14 +750,14 @@ const appSettings: AppSettings = {
                 height: 72,
             },
             max: {
-                width: 550,
+                width: 800,
                 height: 72,
             },
             fixed: true,
             autoHeight: true,
         },
         position: {
-            center: true,
+            topCenter: true,
         },
     },
     '/reset-password': {
@@ -854,6 +958,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
+    const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
@@ -997,6 +1102,17 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     function getPositionDefaults(key: string, size: { width: number; height: number }, windows: AppWindow[]) {
         if (appSettings[key]?.position?.center) {
             return getDesktopCenterPosition(size)
+        }
+
+        if (appSettings[key]?.position?.topCenter) {
+            // Check if desktop (screen width >= 768px)
+            const isDesktop = !isSSR && window.innerWidth >= 768
+            const topOffset = isDesktop ? 100 : 0
+
+            return {
+                x: isSSR ? 0 : window.innerWidth / 2 - size.width / 2,
+                y: topOffset,
+            }
         }
 
         if (key?.startsWith('ask-max')) {
@@ -1338,14 +1454,111 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement
+
             if (
-                e.target.tagName === 'INPUT' ||
-                e.target.tagName === 'TEXTAREA' ||
-                e.target.shadowRoot ||
-                (e.target instanceof HTMLElement && e.target.closest('.mdxeditor'))
+                target.tagName === 'INPUT' ||
+                target.tagName === 'TEXTAREA' ||
+                target.shadowRoot ||
+                (target instanceof HTMLElement && target.closest('.mdxeditor'))
             ) {
                 return
             }
+
+            // Global shortcuts
+            if (e.key === '/' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                openSearch()
+            }
+            if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+                e.preventDefault()
+                openNewChat({ path: 'ask-max' })
+            }
+            if (e.key === ',' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                // Open display options
+                navigate('/display-options', { state: { newWindow: true } })
+            }
+            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                // Open keyboard shortcuts pane
+                navigate('/kbd', { state: { newWindow: true } })
+            }
+
+            // Theme toggle with \ key (without Shift)
+            if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                e.stopPropagation()
+
+                // Cycle through system -> light -> dark -> system
+                let nextMode: 'system' | 'light' | 'dark'
+                let toastMessage: React.ReactNode
+
+                if (siteSettings.colorMode === 'system') {
+                    nextMode = 'light'
+                    toastMessage = (
+                        <>
+                            <IconDay className="size-5 inline-block mr-1" />
+                            Switched to light mode
+                        </>
+                    )
+                } else if (siteSettings.colorMode === 'light') {
+                    nextMode = 'dark'
+                    toastMessage = (
+                        <>
+                            <IconNight className="size-5 inline-block mr-1" />
+                            Switched to dark mode
+                        </>
+                    )
+                } else {
+                    nextMode = 'system'
+                    toastMessage = (
+                        <>
+                            <IconLaptop className="size-5 inline-block mr-1" />
+                            Switched to system mode
+                        </>
+                    )
+                }
+
+                if (typeof window !== 'undefined' && window.__setPreferredTheme) {
+                    const newTheme = window.__setPreferredTheme(nextMode)
+                    updateSiteSettings({
+                        ...siteSettings,
+                        theme: newTheme as SiteSettings['theme'],
+                        colorMode: nextMode,
+                    })
+                    // Add toast notification
+                    addToast({
+                        description: toastMessage,
+                        duration: 2000,
+                    })
+                }
+            }
+
+            // Wallpaper cycle with | key (which is Shift + \ on most keyboards)
+            if (e.key === '|') {
+                e.preventDefault()
+                e.stopPropagation()
+
+                // Get current wallpaper index
+                const currentIndex = themeOptions.findIndex((theme) => theme.value === siteSettings.wallpaper)
+                // Cycle to next wallpaper (wrap around to first if at end)
+                const nextIndex = (currentIndex + 1) % themeOptions.length
+                const nextWallpaper = themeOptions[nextIndex]
+
+                updateSiteSettings({
+                    ...siteSettings,
+                    wallpaper: nextWallpaper.value as SiteSettings['wallpaper'],
+                })
+
+                // Add toast notification
+                addToast({
+                    description: `Switched to ${nextWallpaper.label} wallpaper`,
+                    duration: 2000,
+                })
+            }
+
+            // Window-specific shortcuts
             if (e.shiftKey && e.key === 'ArrowLeft') {
                 handleSnapToSide('left')
             }
@@ -1355,12 +1568,51 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             if (e.shiftKey && e.key === 'ArrowUp') {
                 expandWindow()
             }
+            if (e.shiftKey && e.key === 'ArrowDown') {
+                e.preventDefault()
+                if (focusedWindow) {
+                    minimizeWindow(focusedWindow)
+                }
+            }
             if (e.shiftKey && e.key.toLowerCase() === 'w') {
                 e.preventDefault()
                 if (focusedWindow) {
                     // Trigger the same close animation as clicking the X button
                     const closeEvent = new CustomEvent('windowClose', { detail: { windowKey: focusedWindow.key } })
                     document.dispatchEvent(closeEvent)
+                }
+            }
+            if (e.shiftKey && e.key === 'X') {
+                e.preventDefault()
+                // Close all windows with animation
+                animateClosingAllWindows()
+            }
+            if (e.shiftKey && e.key === 'Z') {
+                e.preventDefault()
+                // Start screensaver
+                setScreensaverPreviewActive(true)
+            }
+            if (e.shiftKey && e.key === '<') {
+                e.preventDefault()
+                // Open active windows panel
+                setIsActiveWindowsPanelOpen(true)
+            }
+            if (e.shiftKey && e.key === '>') {
+                e.preventDefault()
+                // Cycle to next window
+                if (windows.length > 1) {
+                    // Find the currently focused window index
+                    const currentIndex = windows.findIndex((w) => w === focusedWindow)
+                    // Calculate next window index (wrap around to first if at end)
+                    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % windows.length
+                    const nextWindow = windows[nextIndex]
+
+                    // Navigate to the next window
+                    if (nextWindow.path.startsWith('/')) {
+                        navigate(nextWindow.path)
+                    } else {
+                        bringToFront(nextWindow)
+                    }
                 }
             }
         }
@@ -1370,7 +1622,23 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
         }
-    }, [handleSnapToSide, expandWindow, focusedWindow, closeWindow])
+    }, [
+        handleSnapToSide,
+        expandWindow,
+        focusedWindow,
+        closeWindow,
+        openSearch,
+        openNewChat,
+        siteSettings,
+        updateSiteSettings,
+        addToast,
+        animateClosingAllWindows,
+        setScreensaverPreviewActive,
+        minimizeWindow,
+        setIsActiveWindowsPanelOpen,
+        windows,
+        bringToFront,
+    ])
 
     useEffect(() => {
         const savedSettings = localStorage.getItem('siteSettings')
@@ -1392,13 +1660,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
-
-            // Auto-switch to dark mode for "coding-at-night" wallpaper
-            if (siteSettings.wallpaper === 'coding-at-night') {
-                if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
-                    ; (window as any).__setPreferredTheme('dark')
-                }
-            }
         }
     }, [siteSettings])
 

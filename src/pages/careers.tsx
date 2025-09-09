@@ -37,7 +37,7 @@ const careersTableOfContents = [
     { url: '#handbook', value: 'Company handbook', depth: 0 },
     { url: '#iep', value: 'IEP (Ideal employee profile)', depth: 0 },
     { url: '#unexpected-benefits', value: 'Unexpected benefits', depth: 0 },
-    { url: '#benefits', value: 'The normal benefits', depth: 0 },
+    { url: '#benefits', value: 'The boring benefits', depth: 0 },
     { url: '#transparency', value: 'Transparency', depth: 0 },
     { url: '#fun-stuff', value: 'Fun stuff', depth: 0 },
     { url: '#team-quotes', value: 'Team quotes', depth: 0 },
@@ -98,7 +98,7 @@ const IndexPage = () => {
                     </Popover>
                 </div>
                 <div className="max-w-7xl mx-auto">
-                    <div id="hero" className="p-2">
+                    <div id="hero">
                         <CareersHero />
                         <JobListings />
                     </div>
@@ -129,7 +129,7 @@ const IndexPage = () => {
                     <div id="unexpected-benefits">
                         <BenefitsUnexpected />
                     </div>
-                    <div id="benefits">
+                    <div>
                         <BenefitsUsual />
                     </div>
                     <div id="transparency">
@@ -160,6 +160,7 @@ const IndexPage = () => {
                 imageType="absolute"
             />
             <Editor
+                hasTabs
                 type="careers"
                 maxWidth="100%"
                 proseSize="base"
@@ -172,10 +173,11 @@ const IndexPage = () => {
                     tabs={tabs}
                     defaultValue="/careers"
                     onValueChange={handleTabChange}
-                    frame={false}
+                    padding
                     tabContainerClassName={tabContainerClassName}
                     className={className}
                     triggerDataScheme="primary"
+                    centerTabs
                 />
             </Editor>
         </>

@@ -158,7 +158,7 @@ export default function Posts({ pageContext }) {
             <Editor
                 title="posts"
                 type="psheet"
-                maxWidth={1536}
+                maxWidth="100%"
                 dataToFilter={posts}
                 handleFilterChange={handleFilterChange}
                 showFilters
@@ -236,12 +236,12 @@ export default function Posts({ pageContext }) {
                                 width: '3fr',
                             },
                             {
-                                name: 'Author(s)',
+                                name: 'Tags',
                                 align: 'left',
                                 width: '1fr',
                             },
                             {
-                                name: 'Tags',
+                                name: 'Author(s)',
                                 align: 'left',
                                 width: '1fr',
                             },

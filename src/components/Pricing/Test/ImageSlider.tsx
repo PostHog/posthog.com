@@ -101,7 +101,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
 
     return (
         <>
-            <div className="relative flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded border border-primary">
+            <div className="relative flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded border border-primary leading-[0]">
                 {images.map((image, index) => (
                     <React.Fragment key={`${image.src}-${index}`}>
                         <Slide
@@ -114,7 +114,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                             sliderId={id}
                         />
                         {showDisclaimer && index === 0 && (
-                            <div className="absolute bottom-2 @4xl:bottom-1 @5xl:bottom-2 left-2 right-2 text-primary text-xs leading-tight opacity-60">
+                            <div className="absolute bottom-2 @4xl:bottom-1 @5xl:bottom-2 left-2 right-2 text-[11px] leading-tight text-muted">
                                 *{disclaimer}
                             </div>
                         )}

@@ -4,20 +4,15 @@ import Link from 'components/Link'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
-import slugify from 'slugify'
-import { IconPineapple, IconX } from '@posthog/icons'
-import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
-import TeamPatch from 'components/TeamPatch'
 import { slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
-import Tabs from 'components/RadixUI/Tabs'
-import OSTabs from 'components/OSTabs'
+import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Mark from 'mark.js'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useWindow } from '../../../context/Window'
+import { OSInput } from 'components/OSForm'
 
 const query = graphql`
     query JobListings {
@@ -128,6 +123,32 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
 
 const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
 
+// Fallback team data for roles without teams
+const fallbackTeam = {
+    name: 'Mystery',
+    description:
+        "This role hasn't been assigned to a team yet. You'll be placed on a team that match your skills and interests.",
+    crest: {
+        data: {
+            attributes: {
+                url: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/exec_8be5c3a342.png',
+            },
+        },
+    },
+    crestOptions: {
+        textColor: 'brown',
+        textShadow: 'Light',
+        frame: 'square',
+        plaque: 'stepped',
+        imageXOffset: -5,
+        imageYOffset: -10,
+        imageScale: 90,
+        frameColor: 'burntOrange',
+        plaqueColor: 'white',
+    },
+    profiles: { data: [] },
+}
+
 // Add custom ordering for role groupings - modify this array to change the order
 const roleGroupingOrder = [
     'Engineering',
@@ -173,84 +194,6 @@ const getTeamLeadInfo = (team: any) => {
     }
 
     return `${firstName} joined in ${formatDate(startDate)} and lives in ${location}, ${country}.`
-}
-
-const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: boolean }) => {
-    const teamLength = team?.profiles?.data?.length
-    const teamURL = team?.slug ? `/teams/${team.slug}` : `/teams/${slugifyTeamName(team?.name || '')}`
-    const pineapplePercentage =
-        teamLength &&
-        teamLength > 0 &&
-        Math.round(
-            (team.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza).length /
-                teamLength) *
-                100
-        )
-
-    if (!team) return null
-
-    return (
-        <div
-            data-scheme="secondary"
-            className={`${multipleTeams ? 'border border-primary rounded-md p-4 bg-primary' : ''}`}
-        >
-            <div className="flex flex-col @md:grid @md:grid-cols-6 @md:grid-rows-[repeat(3,auto)] @lg:grid-rows-[repeat(4,auto)] gap-4 @2xl:gap-y-0">
-                <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @2xl:row-span-1 @md:self-center">
-                    {multipleTeams && <h3 className="text-sm font-bold mt-0 mb-1">{team.name} Team</h3>}
-                    {team.description && (
-                        <p className="text-[15px] @5xl:text-sm text-secondary !my-0">{team.description}</p>
-                    )}
-                </div>
-                <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
-                    <div className="w-48 @md:w-full @3xl:max-w-60 mx-auto">
-                        <Link to={teamURL} state={{ newWindow: true }}>
-                            <TeamPatch
-                                name={team.name}
-                                imageUrl={team.crest?.data?.attributes?.url}
-                                {...team.crestOptions}
-                                className="w-full"
-                            />
-                        </Link>
-                    </div>
-                </div>
-                <div className="order-3 @md:order-none col-start-1 row-start-3 @md:row-start-3 @md:col-span-full @xl:row-span-1 @xl:row-start-3 @2xl:row-span-4 @2xl:row-start-2">
-                    <p className="text-sm font-semibold !mb-1 @2xl:pt-2">Team members</p>
-                    <div className="flex justify-start">
-                        <TeamMembers size="!size-16" profiles={team.profiles} teamName={team.name} />
-                    </div>
-                </div>
-                <div className="order-4 @md:order-none col-start-1 row-start-4 @md:col-start-1 @md:row-start-4 @md:col-span-full @xl:row-span-1 @2xl:col-span-4">
-                    <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
-                    <div className="flex items-center gap-2 text-sm">
-                        <div className="w-10">
-                            {pineapplePercentage > 50 ? (
-                                <StickerPineappleYes className="size-10" />
-                            ) : pineapplePercentage == 50 ? (
-                                <StickerPineapple className="size-10" />
-                            ) : (
-                                <StickerPineappleNo className="size-10" />
-                            )}
-                        </div>
-                        <div className="flex-1 leading-tight">
-                            {pineapplePercentage > 50 ? (
-                                <>
-                                    <strong>{pineapplePercentage}%</strong> of this team say{' '}
-                                    <strong className="text-green">YES</strong>!
-                                </>
-                            ) : pineapplePercentage == 50 ? (
-                                <>This team is evenly split. (You could break the tie!)</>
-                            ) : (
-                                <>
-                                    <strong>{100 - pineapplePercentage}%</strong> of this team say{' '}
-                                    <strong className="text-red">NO!</strong>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
 }
 
 export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
@@ -331,21 +274,14 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         return jobGroups.flatMap((group) => group.jobs)
     }, [jobGroups])
 
-    // Filter jobs based on search query
+    // Filter jobs based on search query - only search job titles
     const filteredJobs = useMemo(() => {
         if (!searchQuery.trim()) return []
 
         const query = searchQuery.toLowerCase()
         return allJobs.filter((job: any) => {
-            // Search in job title
-            if (job.fields.title.toLowerCase().includes(query)) {
-                return true
-            }
-
-            // Search in team names
-            const teamsField = job.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
-            const teams = teamsField ? JSON.parse(teamsField.value) : []
-            return teams.some((teamName: string) => teamName.toLowerCase().includes(query))
+            // Only search in job title
+            return job.fields.title.toLowerCase().includes(query)
         })
     }, [searchQuery, allJobs])
 
@@ -399,11 +335,17 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 if (markedRef.current) {
                     markedRef.current.unmark()
                 }
-                markedRef.current = new Mark(jobListRef.current)
-                markedRef.current.mark(value, {
-                    separateWordSearch: false,
-                    accuracy: 'partially',
-                })
+                // Only highlight job titles, not team names or other text
+                const jobTitleElements = jobListRef.current.querySelectorAll('[data-job-title]')
+                if (jobTitleElements.length > 0) {
+                    // Convert NodeListOf<Element> to HTMLElement array
+                    const elements = Array.from(jobTitleElements) as HTMLElement[]
+                    markedRef.current = new Mark(elements)
+                    markedRef.current.mark(value, {
+                        separateWordSearch: false,
+                        accuracy: 'partially',
+                    })
+                }
             } else if (markedRef.current) {
                 markedRef.current.unmark()
             }
@@ -432,13 +374,16 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         const parser = new DOMParser()
         const doc = parser.parseFromString(selectedJob.fields.html, 'text/html')
 
+        const theRole = doc.querySelector('details:has(h2[id="the-role"])')
         const whoWereLookingFor = doc.querySelector('details:has(h2[id="who-we\'re-looking-for"])')
         const whatYoullBeDoing = doc.querySelector('details:has(h2[id="what-you\'ll-be-doing"])')
         const requirements = doc.querySelector('details:has(h2[id="requirements"])')
         const niceToHave = doc.querySelector('details:has(h2[id="nice-to-have"])')
 
         let content = ''
-        if (whoWereLookingFor) {
+        if (theRole) {
+            content = theRole.outerHTML
+        } else if (whoWereLookingFor) {
             content = whoWereLookingFor.outerHTML
         } else if (whatYoullBeDoing) {
             content = whatYoullBeDoing.outerHTML
@@ -453,6 +398,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 ''
             )
             .replace('<p><em>#LI-DNI</em></p>', '')
+            .replace('<p>#LI-DNI</p>', '')
 
         setProcessedHtml(content)
         setSelectedTeamName('')
@@ -495,14 +441,14 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     return (
         <section
             id={embedded ? undefined : 'roles'}
-            className={` ${embedded ? '' : 'flex flex-col @2xl:flex-row @2xl:gap-6 p-4 items-start'}`}
+            className={` ${embedded ? '' : 'flex flex-col @2xl:flex-row @2xl:gap-6 items-start'}`}
         >
             <div
                 ref={leftColRef}
                 style={{ height: leftColHeight }}
                 className="w-full @2xl:w-1/3 @3xl:w-1/4 flex flex-col h-full"
             >
-                <ScrollArea>
+                <ScrollArea fadeOverflow={16} viewportClasses="!pb-0 @2xl:!pb-16">
                     <div>
                         <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
                             Select a role
@@ -522,9 +468,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 // Show search results
                                 filteredJobs.length > 0 ? (
                                     <optgroup
-                                        label={`${filteredJobs.length} search result${
-                                            filteredJobs.length !== 1 ? 's' : ''
-                                        }`}
+                                        label={`${filteredJobs.length} result${filteredJobs.length !== 1 ? 's' : ''}`}
                                     >
                                         {filteredJobs.map((job: any) => (
                                             <option key={job.fields.title} value={job.fields.title}>
@@ -551,24 +495,21 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             )}
                         </select>
 
-                        <div className="hidden @2xl:block relative mb-4">
-                            <input
+                        <div className="hidden @2xl:block mb-4">
+                            <OSInput
                                 type="text"
-                                className="w-full p-2 pr-10 border border-b-0 border-input bg-primary rounded text-xl relative z-10"
+                                label="Search roles"
+                                showLabel={false}
                                 placeholder="Search roles..."
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                                 onKeyDown={handleSearchKeyDown}
+                                onClear={handleClearSearch}
+                                showClearButton={true}
+                                size="sm"
+                                width="full"
+                                name="job-search"
                             />
-                            {searchQuery && (
-                                <button
-                                    onClick={handleClearSearch}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 p-1 hover:bg-accent rounded"
-                                    aria-label="Clear search"
-                                >
-                                    <IconX className="w-4 h-4 text-muted" />
-                                </button>
-                            )}
                         </div>
                     </div>
 
@@ -578,7 +519,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 {searchQuery.trim() ? (
                                     // Show search results
                                     <>
-                                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                        <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary tracking-normal">
                                             {filteredJobs.length} search result{filteredJobs.length !== 1 ? 's' : ''}
                                         </h3>
                                         {filteredJobs.length > 0 ? (
@@ -596,6 +537,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
+                                                                        data-job-title
                                                                         className={`font-semibold text-[15px] ${
                                                                             selectedJob.fields.title ===
                                                                             job.fields.title
@@ -618,7 +560,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                     : []
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
-                                                                                    : teams.length === 1 && teams[0]
+                                                                                    : teams.length === 1 &&
+                                                                                          `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -638,7 +581,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     // Show grouped results
                                     jobGroups.map((group) => (
                                         <div key={group.name} className="mb-2 last:mb-0">
-                                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
+                                            <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary tracking-normal">
                                                 {group.name}
                                             </h3>
                                             <ul className="list-none p-0 space-y-px">
@@ -660,6 +603,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
+                                                                        data-job-title
                                                                         className={`font-semibold text-[15px] ${
                                                                             selectedJob.fields.title ===
                                                                             job.fields.title
@@ -682,7 +626,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                     : []
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
-                                                                                    : teams.length === 1 && teams[0]
+                                                                                    : teams.length === 1 &&
+                                                                                          `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -704,12 +649,12 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 <div className="flex-1">
                     <h2 className="hidden @2xl:block -mt-1 mb-2">{selectedJob.fields.title}</h2>
 
-                    <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-8">
+                    <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-8 items-start">
                         <div className="@5xl:col-span-7">
                             {teams.length > 1 && (
                                 <p
                                     data-scheme="secondary"
-                                    className="bg-primary p-2 border border-primary rounded-sm mt-0 mb-3"
+                                    className="bg-primary py-2 px-4 border border-primary rounded-sm text-sm mt-0 mb-3"
                                 >
                                     <strong>{teams.length} small teams are hiring for this role</strong>
                                 </p>
@@ -764,7 +709,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                         ) : (
                                             <div
                                                 dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                                className="[&_details]:!border-transparent [&_details_ul]:!pl-4 [&_details_ul]:!pr-0 [&_details]:!p-0 [&_details_p]:!px-0 [&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
+                                                className="[&_details]:!border-transparent [&_details_ul]:!pl-4 [&_details_ul]:!pr-0 [&_details]:!p-0 [&_details_p]:!px-0 [&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:from-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
                                             />
                                         )}
                                         {selectedJob.fields.title == 'Speculative application' && (
@@ -783,58 +728,34 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                         )}
                                     </>
                                 )}
-                                <CallToAction to={selectedJob.fields.slug} size="sm">
+                                <OSButton
+                                    asLink
+                                    to={selectedJob.fields.slug}
+                                    size="md"
+                                    variant="primary"
+                                    state={{ newWindow: true }}
+                                >
                                     Read more
-                                </CallToAction>
+                                </OSButton>
                             </div>
                         </div>
-                        {teams.length > 0 && (
-                            <div
-                                data-scheme="secondary"
-                                className={`@container @5xl:col-span-5 ${
-                                    teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
-                                }`}
-                            >
-                                <h3 className="mt-0">
-                                    About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
+                        {(teams.length > 0 || !teams.length) && (
+                            <div className="@container @5xl:col-span-5">
+                                <h3 className="mt-0 mb-2 leading-tight text-center">
+                                    {teams.length > 1
+                                        ? 'About the small teams'
+                                        : teams.length === 1
+                                        ? `About the ${currentTeamName} Team`
+                                        : 'About this team'}
                                 </h3>
-
-                                {teams.length > 1 ? (
-                                    <OSTabs
-                                        key={`${selectedJob.fields.title}-${currentTeamName}`}
-                                        tabs={teams.map((teamName: string) => {
-                                            const team = allTeams.find(
-                                                (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
-                                            )
-                                            const teamLength = team?.profiles?.data?.length
-                                            const teamURL = `/teams/${team?.slug || ''}`
-                                            const pineapplePercentage =
-                                                teamLength &&
-                                                teamLength > 0 &&
-                                                Math.round(
-                                                    (team.profiles?.data?.filter(
-                                                        ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
-                                                    ).length /
-                                                        teamLength) *
-                                                        100
-                                                )
-
-                                            return {
-                                                value: teamName,
-                                                label: teamName,
-                                                content: (
-                                                    <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />
-                                                ),
-                                            }
-                                        })}
-                                        defaultValue={currentTeamName}
-                                        frame={false}
-                                        onValueChange={(value) => setSelectedTeamName(value)}
-                                        className="px-0 mb-4"
+                                <div data-scheme="secondary" className={` ${teams.length > 1 ? '-mt-1' : ''}`}>
+                                    <TeamsSidebar
+                                        teams={teams}
+                                        allTeams={allTeams}
+                                        multipleTeams={teams.length > 1}
+                                        isCompact={false}
                                     />
-                                ) : (
-                                    <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
-                                )}
+                                </div>
                             </div>
                         )}
                     </div>

@@ -533,6 +533,7 @@ export default function TeamPage(props: TeamPageProps) {
                 description={`Learn about the ${(team as any)?.name || slug} team at PostHog`}
                 proseSize="base"
                 rightActionButtons={editing ? editActions : editButton}
+                showQuestions={false}
                 {...({
                     header: (
                         <Header
@@ -717,11 +718,11 @@ export default function TeamPage(props: TeamPageProps) {
 
                 {(hasInProgress || hasUnderConsideration || recentlyShipped) && (
                     <>
-                        <h2>Roadmap</h2>
+                        <h2 id="roadmap">Roadmap</h2>
 
                         {hasInProgress && (
                             <Fieldset legend="What we're building">
-                                <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
+                                <div className="">
                                     <ul className="list-none m-0 p-0 flex flex-col gap-4">
                                         {inProgress.map((roadmap) => (
                                             <InProgress key={roadmap.squeakId} {...roadmap} />

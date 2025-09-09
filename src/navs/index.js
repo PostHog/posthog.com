@@ -1698,12 +1698,12 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
-                    name: 'Billing',
-                    url: '/teams/billing',
+                    name: 'Batch Exports',
+                    url: '/teams/batch-exports',
                 },
                 {
-                    name: 'CDP',
-                    url: '/teams/cdp',
+                    name: 'Billing',
+                    url: '/teams/billing',
                 },
                 {
                     name: 'ClickHouse',
@@ -1754,8 +1754,12 @@ export const companyMenu = {
                     url: '/teams/messaging',
                 },
                 {
-                    name: 'Platform',
-                    url: '/teams/platform',
+                    name: 'Platform Analytics',
+                    url: '/teams/platform-analytics',
+                },
+                {
+                    name: 'Platform Features',
+                    url: '/teams/platform-features',
                 },
                 {
                     name: 'Platform UX',
@@ -1793,8 +1797,8 @@ export const companyMenu = {
                     url: '/teams/content',
                 },
                 {
-                    name: 'CS & Onboarding',
-                    url: '/teams/cs-onboarding',
+                    name: 'Customer Success',
+                    url: '/teams/customer-success',
                 },
                 {
                     name: 'Demand Gen',
@@ -1805,6 +1809,10 @@ export const companyMenu = {
                     url: '/teams/exec',
                 },
                 {
+                    name: 'Marketing',
+                    url: '/teams/marketing',
+                },
+                {
                     name: 'Onboarding',
                     url: '/teams/onboarding',
                 },
@@ -1813,7 +1821,7 @@ export const companyMenu = {
                     url: '/teams/people',
                 },
                 {
-                    name: 'Sales & CS',
+                    name: 'Sales',
                     url: '/teams/sales-cs',
                 },
                 {
@@ -2796,6 +2804,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/pomerium',
                         },
                         {
+                            name: 'Railway',
+                            url: '/docs/advanced/proxy/railway',
+                        },
+                        {
                             name: 'Remix',
                             url: '/docs/advanced/proxy/remix',
                         },
@@ -3228,16 +3240,6 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Revenue analytics',
-                    url: '/docs/web-analytics/revenue-analytics',
-                    icon: 'IconPiggyBank',
-                    color: 'salmon',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Marketing analytics',
@@ -4503,6 +4505,91 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Revenue analytics',
+            icon: 'IconPiggyBank',
+            color: '[#36C46F]',
+            url: '/docs/revenue-analytics',
+            description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Revenue analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/revenue-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/revenue-analytics/getting-started',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Dashboard',
+                    url: '/docs/revenue-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'orange',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Connect to customers',
+                    url: '/docs/revenue-analytics/connect-to-customers',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Deferred Revenue',
+                    url: '/docs/revenue-analytics/deferred-revenue',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'Managed views',
+                    url: '/docs/revenue-analytics/managed-views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/revenue-analytics/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
+                },
+            ],
+        },
+        {
             name: 'Max AI',
             icon: 'IconMagicWand',
             color: 'purple',
@@ -4566,10 +4653,10 @@ export const pricingMenu = {
             url: '/addons',
         },
         {
-            name: 'Platform add-ons',
+            name: 'Platform packages',
             icon: 'IconServer',
             color: 'purple',
-            url: '/platform-addons',
+            url: '/platform-packages',
         },
         {
             name: 'Pricing philosophy',
