@@ -14,6 +14,7 @@ interface TextareaProps {
     labelWidth?: string
     required?: boolean
     rows?: number
+    dataScheme?: 'primary' | 'secondary' | 'tertiary'
     [key: string]: any
 }
 
@@ -30,6 +31,7 @@ const Textarea = ({
     labelWidth,
     required = false,
     rows = 4,
+    dataScheme,
     ...props
 }: TextareaProps) => {
     const sizeClasses = {
@@ -53,7 +55,10 @@ const Textarea = ({
     const textareaId = props.id || props.name || label?.toLowerCase().replace(/\s+/g, '-')
 
     return (
-        <div className={`flex ${direction === 'column' ? 'flex-col space-y-1' : 'items-start space-x-2'}`}>
+        <div
+            className={`flex ${direction === 'column' ? 'flex-col space-y-1' : 'items-start space-x-2'}`}
+            {...(dataScheme && { 'data-scheme': dataScheme })}
+        >
             {showLabel && (
                 <div className={`${direction === 'column' ? 'w-full' : labelWidth || 'w-[90px]'} pt-2`}>
                     <label htmlFor={textareaId} className={`font-medium ${labelSizeClasses[size]}`}>

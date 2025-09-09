@@ -40,6 +40,7 @@ import { OSInput } from 'components/OSForm'
 | `placeholder` | `string` | - | Placeholder text (defaults to label if not provided) |
 | `touched` | `boolean` | `false` | Whether field has been interacted with (for validation) |
 | `error` | `string` | - | Error message to display when validation fails |
+| `dataScheme` | `"primary" \| "secondary" \| "tertiary"` | - | Sets the data-scheme attribute for different background colors |
 
 ### OSTextarea
 
@@ -65,6 +66,7 @@ All props from OSInput plus:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `rows` | `number` | `4` | Number of visible text rows |
+| `dataScheme` | `"primary" \| "secondary" \| "tertiary"` | - | Sets the data-scheme attribute for different background colors |
 
 ### Fieldset
 
@@ -318,6 +320,28 @@ All components use PostHog's design system:
 - **Focus states**: Shows focus ring on interaction
 - **Error states**: Red borders and text for validation errors
 - **Required indicators**: Red asterisk for required fields
+
+### Data Schemes
+
+The `dataScheme` prop allows form components to adapt their background colors to different contexts. This is particularly useful when forms appear on different colored backgrounds:
+
+```tsx
+// Use primary scheme for forms on secondary/tertiary backgrounds
+<OSInput 
+  label="Name"
+  dataScheme="primary"
+  name="name"
+/>
+
+// Use secondary scheme for forms on primary backgrounds
+<OSTextarea 
+  label="Message"
+  dataScheme="secondary"
+  name="message"
+/>
+```
+
+When set, the `dataScheme` prop applies a `data-scheme` attribute to the component's outermost element, which triggers the appropriate color theme defined in your CSS.
 
 ## Integration with Form Libraries
 

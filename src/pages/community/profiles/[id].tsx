@@ -259,7 +259,23 @@ const Links = ({
     )
 }
 
-const Input = ({ label, name, value, onChange, error }) => {
+const Input = ({
+    label,
+    name,
+    value,
+    onChange,
+    error,
+    dataScheme,
+    tooltip,
+}: {
+    label: string
+    name: string
+    value: any
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    error?: string
+    tooltip?: string | React.ReactNode
+    dataScheme?: 'primary' | 'secondary' | 'tertiary'
+}) => {
     return (
         <OSInput
             label={label}
@@ -271,6 +287,8 @@ const Input = ({ label, name, value, onChange, error }) => {
             error={error}
             touched={!!error}
             showLabel={true}
+            dataScheme="primary"
+            tooltip={tooltip}
         />
     )
 }
@@ -404,6 +422,12 @@ const AvatarBlock = ({
 }
 
 const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+    const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
+
+    // Update showPronounsInput when values.pronouns changes
+    useEffect(() => {
+        setShowPronounsInput(!!values.pronouns)
+    }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
             {!isEditing && (
@@ -423,10 +447,8 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
             )}
             {isEditing ? (
                 <div>
-                    <label className="text-[15px]">Pineapple on pizza</label>
                     <ToggleGroup
-                        title="Pineapple on pizza"
-                        hideTitle={true}
+                        title="Pineapple on pizza?"
                         options={[
                             {
                                 label: 'Yes',
@@ -472,13 +494,34 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                 )
             )}
             {isEditing ? (
-                <Input
-                    label="Pronouns"
-                    name="pronouns"
-                    value={values.pronouns}
-                    onChange={(e) => setFieldValue('pronouns', e.target.value)}
-                    error={errors.pronouns}
-                />
+                showPronounsInput ? (
+                    <Input
+                        label="Pronouns"
+                        name="pronouns"
+                        value={values.pronouns}
+                        onChange={(e) => setFieldValue('pronouns', e.target.value)}
+                        error={errors.pronouns}
+                    />
+                ) : (
+                    <OSButton
+                        size="sm"
+                        variant="default"
+                        onClick={() => {
+                            setShowPronounsInput(true)
+                            // Focus the input after it renders
+                            setTimeout(() => {
+                                const input = document.querySelector('input[name="pronouns"]') as HTMLInputElement
+                                if (input) {
+                                    input.focus()
+                                }
+                            }, 0)
+                        }}
+                        className="text-secondary font-medium"
+                        hover="background"
+                    >
+                        add pronouns
+                    </OSButton>
+                )
             ) : (
                 profile.pronouns && (
                     <p className="flex justify-between m-0">
@@ -514,24 +557,35 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
             />
             <Input
                 label="Country (2-char code)"
+                tooltip={
+                    <Link to="https://countrycode.org/" external>
+                        Look this up
+                    </Link>
+                }
                 name="country"
                 value={values.country}
                 onChange={(e) => setFieldValue('country', e.target.value)}
                 error={errors.country}
             />
             <div>
-                <label className="text-[15px]">Height</label>
+                <label className="text-[15px] block mb-1">Height</label>
+                <p className="text-xs text-secondary m-0 mb-2">
+                    We use this to <s>estimate how much pizza you can eat</s> find how many hedgehogs long your small
+                    team is tall – in aggregate. (Important research.)
+                </p>
                 <div className="flex items-center space-x-1">
                     <input
-                        className="bg-transparent text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50"
+                        className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50"
                         type="number"
                         name="height"
                         value={height}
+                        data-scheme="primary"
                         onChange={(e) => {
                             const value = Number(e.target.value)
                             setHeight(value)
                             setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(value) : value)
                         }}
+                        required
                     />
                     <ToggleGroup
                         title="Height unit"
@@ -569,10 +623,10 @@ const ProfileSkeleton = () => {
     return (
         <div data-scheme="secondary" className="h-full bg-primary">
             <ScrollArea>
-                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-4 pb-4 @container">
                     <div className="flex flex-col @2xl:flex-row gap-6 p-6">
                         {/* Left sidebar skeleton */}
-                        <div className="@2xl:max-w-xs w-full flex-shrink-0">
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             {/* Avatar section skeleton */}
                             <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
                                 <div className="w-full aspect-square bg-accent animate-pulse border-b border-primary" />
@@ -702,7 +756,13 @@ const Block = ({ title, children, url }) => {
 const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
     return (
         <div className="bg-white dark:bg-accent-dark rounded-md border border-primary overflow-hidden">
-            <RichText values={values} initialValue={initialValue} setFieldValue={setFieldValue} bodyKey={bodyKey} />
+            <RichText
+                values={values}
+                initialValue={initialValue}
+                setFieldValue={setFieldValue}
+                bodyKey={bodyKey}
+                className="h-[400px]"
+            />
         </div>
     )
 }
@@ -1225,7 +1285,7 @@ export default function ProfilePage({ params }: PageProps) {
             <ScrollArea>
                 <div
                     data-scheme="primary"
-                    className="mx-auto max-w-screen-xl px-5 @container"
+                    className="mx-auto max-w-screen-xl px-4 pb-4 @container"
                     style={
                         values.backgroundImage
                             ? {
@@ -1237,8 +1297,8 @@ export default function ProfilePage({ params }: PageProps) {
                             : undefined
                     }
                 >
-                    <div className="flex flex-col @2xl:flex-row gap-6 p-6">
-                        <div className="@2xl:max-w-xs w-full flex-shrink-0">
+                    <div className="flex flex-col @2xl:flex-row gap-6 p-4">
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             <AvatarBlock
                                 profile={profile}
                                 isEditing={isEditing}

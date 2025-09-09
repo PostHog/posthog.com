@@ -1650,6 +1650,64 @@ export default function Components(): JSX.Element {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* Data Scheme Examples */}
+                                <div className="mb-6">
+                                    <h4 className="font-semibold mb-4">Data scheme variations</h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* Primary scheme on secondary background */}
+                                        <div
+                                            data-scheme="secondary"
+                                            className="border border-primary rounded p-6 bg-primary"
+                                        >
+                                            <h5 className="font-semibold mb-3">Primary scheme inputs</h5>
+                                            <p className="text-sm text-secondary mb-4">
+                                                These inputs use dataScheme="primary" on a secondary background
+                                            </p>
+                                            <div className="space-y-3">
+                                                <OSInput
+                                                    label="Name"
+                                                    dataScheme="primary"
+                                                    direction="column"
+                                                    name="primary-name"
+                                                />
+                                                <OSTextarea
+                                                    label="Description"
+                                                    dataScheme="primary"
+                                                    direction="column"
+                                                    rows={3}
+                                                    name="primary-desc"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Secondary scheme on primary background */}
+                                        <div
+                                            data-scheme="primary"
+                                            className="border border-primary rounded p-6 bg-primary"
+                                        >
+                                            <h5 className="font-semibold mb-3">Secondary scheme inputs</h5>
+                                            <p className="text-sm text-secondary mb-4">
+                                                These inputs use dataScheme="secondary" on a primary background
+                                            </p>
+                                            <div className="space-y-3">
+                                                <OSInput
+                                                    label="Name"
+                                                    dataScheme="secondary"
+                                                    direction="column"
+                                                    name="secondary-name"
+                                                />
+                                                <OSTextarea
+                                                    label="Description"
+                                                    dataScheme="secondary"
+                                                    direction="column"
+                                                    rows={3}
+                                                    name="secondary-desc"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
