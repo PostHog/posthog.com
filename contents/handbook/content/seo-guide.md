@@ -162,7 +162,7 @@ Ahrefs is an all-in-one tool. It's useful for:
 - **Competitor analysis**: Arguably the most useful feature. Use the Site Explorer feature to analyze traffic and keyword patterns for competing websites.  
 - **Keyword research**: There are better keyword research tools, but the Ahrefs Keyword Explorer is still a useful way to find and analyze keyword and article opportunities.  
 - **Site audits**: We use Ahref's Site Audit tool to identify website issues – 404s, broken internal links, etc. A scan runs once a week. Andy looks after this.  
-- **Backlink analysi**s**: Allows us to see who is linking to our website and competitors. We don't use this extensively atm, but it's useful every once in a while.
+- **Backlink analysis**: Allows us to see who is linking to our website and competitors. We don't use this extensively atm, but it's useful every once in a while.
 
 ### Keywords Everywhere
 
