@@ -1305,6 +1305,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-do-discovery',
                     },
                     {
+                        name: 'Selling and procuring via AWS Marketplace',
+                        url: '/handbook/growth/sales/selling-via-aws',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                         children: [
