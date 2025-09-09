@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Fieldset } from 'components/OSFieldset'
@@ -6,7 +6,7 @@ import KeyboardShortcut from 'components/KeyboardShortcut'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 interface ShortcutItem {
-    keys: string[]
+    keys: string[] | string[][]
     description: string
     info?: string
 }
@@ -17,11 +17,21 @@ interface ShortcutSection {
 }
 
 export default function KBDShortcuts(): JSX.Element {
+    const [isMac, setIsMac] = useState(false)
+
+    useEffect(() => {
+        // Detect if the user is on macOS
+        const platform = typeof window !== 'undefined' ? window.navigator.platform : ''
+        setIsMac(platform.toLowerCase().includes('mac'))
+    }, [])
+
+    const modifierKey = isMac ? 'CMD' : 'CTRL'
+
     const shortcutSections: ShortcutSection[] = [
         {
             title: 'Navigation',
             shortcuts: [
-                { keys: ['/'], description: 'Open search' },
+                { keys: [[`${modifierKey}`, 'K', 'or', '/']], description: 'Open search' },
                 { keys: ['Shift', '?'], description: 'Open Max AI chat' },
                 { keys: [','], description: 'Open display options' },
             ],
@@ -90,12 +100,25 @@ export default function KBDShortcuts(): JSX.Element {
                                                     <span className="text-secondary text-xs">{shortcut.info}</span>
                                                 </div>
                                                 <div className="flex items-center gap-1">
-                                                    {shortcut.keys.map((key, keyIndex) => (
-                                                        <React.Fragment key={keyIndex}>
-                                                            {/* {keyIndex > 0 && (<>&nbsp;</>)} */}
-                                                            <KeyboardShortcut text={key} size="sm" />
-                                                        </React.Fragment>
-                                                    ))}
+                                                    {Array.isArray(shortcut.keys[0])
+                                                        ? // Handle alternative shortcuts (e.g., "/" or "Cmd+K")
+                                                        shortcut.keys[0].map((key, keyIndex) => (
+                                                            <React.Fragment key={keyIndex}>
+                                                                {key === 'or' ? (
+                                                                    <span className="text-secondary mx-1 text-xs">
+                                                                        or
+                                                                    </span>
+                                                                ) : (
+                                                                    <KeyboardShortcut text={key} size="sm" />
+                                                                )}
+                                                            </React.Fragment>
+                                                        ))
+                                                        : // Handle regular shortcuts
+                                                        shortcut.keys.map((key, keyIndex) => (
+                                                            <React.Fragment key={keyIndex}>
+                                                                <KeyboardShortcut text={key} size="sm" />
+                                                            </React.Fragment>
+                                                        ))}
                                                 </div>
                                             </div>
                                         ))}
