@@ -13,13 +13,13 @@ We craft our content to address those underlying needs. Cover the main topic tho
 
 Here’s what that might look like for "Retention rate vs churn"
 
-* **Quick answer first:** Retention rate shows who stayed, churn shows who left. If churn is 20%, retention is 80%.  
-* **Context next:** Add formulas, a simple numeric example, and a short paragraph on why retention matters for growth.  
-* **Related questions:**  
-  * What’s a "good" churn rate?  
-  * How do you reduce churn?  
-  * When should you focus on retention vs. acquisition?  
-* **Next steps:** Link to guides on retention strategies, cohort analysis, and churn reduction.
+- **Quick answer first:** Retention rate shows who stayed, churn shows who left. If churn is 20%, retention is 80%.  
+- **Context next:** Add formulas, a simple numeric example, and a short paragraph on why retention matters for growth.  
+- **Related questions:**  
+  - What’s a "good" churn rate?  
+  - How do you reduce churn? 
+  - When should you focus on retention vs. acquisition?  
+- **Next steps:** Link to guides on retention strategies, cohort analysis, and churn reduction.
 
 ### 2. Make it easy to digest
 
@@ -27,13 +27,13 @@ When answering a question, we lead with the answer first, then expand with suppo
 
 We keep our structure simple and scannable:
 
-* **Use a clear heading hierarchy** (`H1`, `H2`, `H3`) so readers and crawlers can follow your logic.   
-  * Use one `H1` per page to avoid confusion about the page’s main topic.  
-* **Write short paragraphs** and use bullets or numbered steps for lists.  
-* **Use plain language** – drop the jargon and explain terms plainly so anyone (and any language model) can understand what you’re talking about.  
-* **Facilitate easy navigation** – use anchor links or a mini table of contents for long articles.  
-* **Use visuals** – charts, tables, and screenshots make key points faster to absorb.  
-* **Structured extracts** – add TL;DRs, “Key takeaways” boxes, or pull-quotes to highlight what’s most important at a glance.
+- **Use a clear heading hierarchy** (`H1`, `H2`, `H3`) so readers and crawlers can follow your logic.   
+  - Use one `H1` per page to avoid confusion about the page’s main topic.  
+- **Write short paragraphs** and use bullets or numbered steps for lists.  
+- **Use plain language** – drop the jargon and explain terms plainly so anyone (and any language model) can understand what you’re talking about.  
+- **Facilitate easy navigation** – use anchor links or a mini table of contents for long articles.  
+- **Use visuals** – charts, tables, and screenshots make key points faster to absorb.  
+- **Structured extracts** – add TL;DRs, “Key takeaways” boxes, or pull-quotes to highlight what’s most important at a glance.
 
 ### 3. Headlines matter
 
@@ -49,11 +49,11 @@ The internet has never been so full of words. The friction for content creation 
 
 Establish yourself (and PostHog) as a subject matter expert. We do this by:
 
-* **Backing our claims with data.** Include relevant statistics, research findings, or mention credible studies. Citing reputable sources or adding footnotes for facts can also build trust (and AI models tend to favor answers with a cited source).
+- **Backing our claims with data.** Include relevant statistics, research findings, or mention credible studies. Citing reputable sources or adding footnotes for facts can also build trust (and AI models tend to favor answers with a cited source).
 
-* **Including expert insights.** If possible, add quotations or insights from experts (it can be an internal SME). An authoritative quote or a first-hand insight provides uniqueness and value that generic content lacks.
+- **Including expert insights.** If possible, add quotations or insights from experts (it can be an internal SME). An authoritative quote or a first-hand insight provides uniqueness and value that generic content lacks.
 
-* **Offering a unique point of view or proprietary data.** Bring something new to the table – something only we can. Share internal data\* or a novel insight from your personal experience. Google’s algorithms now consider “information gain,” which measures the uniqueness of information your content adds beyond what’s already out there. To avoid being lost in a sea of redundant content, strive to add new value or perspective on the topic.
+- **Offering a unique point of view or proprietary data.** Bring something new to the table – something only we can. Share internal data\* or a novel insight from your personal experience. Google’s algorithms now consider “information gain,” which measures the uniqueness of information your content adds beyond what’s already out there. To avoid being lost in a sea of redundant content, strive to add new value or perspective on the topic.
 
 *Be thoughtful about what you share – protect sensitive data and respect user privacy – but don’t shy away from leveraging the knowledge only we have. Our unique perspective is our moat.
 
@@ -77,15 +77,15 @@ Good SEO articles always target more than one search term. While you may start w
 
 For example, the parent search term "user persona" (27,000/mo) has numerous derivations:
 
-* Define user persona (8,100)  
-* Create user persona (3,600)  
-* Persona modelling (720)  
-* Benefits of personas (50)  
-* User persona examples (5,400)  
-* Examples of user persona (260)  
-* How to create personas (2,900)  
-* What is a user persona (260)  
-* User persona template (27,000)
+- Define user persona (8,100)  
+- Create user persona (3,600)  
+- Persona modelling (720)  
+- Benefits of personas (50)  
+- User persona examples (5,400)  
+- Examples of user persona (260)  
+- How to create personas (2,900)  
+- What is a user persona (260)  
+- User persona template (27,000)
 
 We target clusters of intent, not just one keyword. Long-tail variations are often easier wins and build topical relevance. Over time, our page can rank for multiple terms and even capture the broad head term as authority grows.
 
@@ -97,9 +97,9 @@ For example, a generic “best CRM tools” list might compete with thousands of
 
 When we write, we should ask ourselves:
 
-* **Who exactly is this for?** What unique context, goals, or constraints does our ICP have?  
-* **What contextual qualifiers would they use?** (e.g. “for nonprofits,” “for remote teams,” “for Europe in 2025”) and weave them naturally into the copy.  
-* **What’s next?** Anticipate the next three questions they’d ask after reading and answer them in the same piece. This keeps us the source that AI models (and readers) turn to as the conversation deepens.
+- **Who exactly is this for?** What unique context, goals, or constraints does our ICP have?  
+- **What contextual qualifiers would they use?** (e.g. “for nonprofits,” “for remote teams,” “for Europe in 2025”) and weave them naturally into the copy.  
+- **What’s next?** Anticipate the next three questions they’d ask after reading and answer them in the same piece. This keeps us the source that AI models (and readers) turn to as the conversation deepens.
 
 ### 8. Updates work / are important
 
@@ -115,11 +115,11 @@ Internal linking is a vital part of successful SEO. It helps Google find our con
 
 Here are some best practices for internal linking:
 
-* **Link early, where it makes sense.** Google tends to value links placed higher up on the page more than ones buried at the bottom. So, when you mention a concept that you have a deeper article on, link it to that first mention if appropriate.  
-* **Use descriptive, varied anchor text.** The anchor text (the clickable text of a link) should give a hint about the destination page’s content. Instead of saying “click here” or linking the same generic phrase every time, use keywords or descriptive phrases that fit naturally in your sentence.  
-* **Link relevant pages only.** Ensure your internal links are contextually relevant. Don’t force a link where it doesn’t belong; Google can tell if links are unnatural. The goal is to guide readers to related content they’d find useful, which in turn guides search engines.  
-* **Don’t overdo it.** A handful of well-placed internal links (3–5) is usually enough. You don’t need to link every other sentence. Too many links can dilute their value and be distracting for readers.  
-* **Maintain your links.** Periodically, use tools or audits to check for broken internal links (if you reorganize pages or change URLs, update any old links). Broken links hurt user experience and can waste crawl budget.
+- **Link early, where it makes sense.** Google tends to value links placed higher up on the page more than ones buried at the bottom. So, when you mention a concept that you have a deeper article on, link it to that first mention if appropriate.  
+- **Use descriptive, varied anchor text.** The anchor text (the clickable text of a link) should give a hint about the destination page’s content. Instead of saying “click here” or linking the same generic phrase every time, use keywords or descriptive phrases that fit naturally in your sentence.  
+- **Link relevant pages only.** Ensure your internal links are contextually relevant. Don’t force a link where it doesn’t belong; Google can tell if links are unnatural. The goal is to guide readers to related content they’d find useful, which in turn guides search engines.  
+- **Don’t overdo it.** A handful of well-placed internal links (3–5) is usually enough. You don’t need to link every other sentence. Too many links can dilute their value and be distracting for readers.  
+- **Maintain your links.** Periodically, use tools or audits to check for broken internal links (if you reorganize pages or change URLs, update any old links). Broken links hurt user experience and can waste crawl budget.
 
 ### 10. Optimize for LLMs
 
@@ -127,16 +127,16 @@ We’re no longer just writing for Google – we’re writing for the answer eng
 
 The goal is to make our content the easiest, clearest, most trustworthy answer in the room, for both humans and machines. How we do that:
 
-* **Clarity over cleverness:** Say the thing plainly. LLMs work best with clear, declarative sentences.  
-* **Structure for retrieval:** Use clean headings, bulleted lists, and short paragraphs so answers can be extracted in chunks. Each section should stand alone if it’s pulled out of context.  
-* **Front-load the answer:** Start with the takeaway, then explain. (Think: “TL;DR first, nuance after.”)  
-* **Semantic redundancy:** Repeat key terms and phrases naturally – it helps LLMs reinforce relevance without guessing.  
-* **Authority signals:** Cite sources, include data, and highlight expert input. Models tend to favor content that “looks” trustworthy. Author bios, sources, and first-hand insights boost trust.  
-* **Chunk quality:** Keep sections focused. A 200-word section that completely answers one question is more reusable than a 1,000-word wall of text.  
-* **Stay fresh and correct:** Outdated or wrong info can keep us out of results (or worse, get us quoted incorrectly). Include timestamps, years, and up-to-date references (“as of 2025”).  
-* **Favor Q\&A format:** Perplexity loves conversational answers and listicles (think “Top 5 tools for X”).  
-* **Consistency matters:** Keep facts about PostHog accurate and aligned across different pieces of content.  
-* **Watch competitors:** Monitor what SGE cites and improve on those answers to outrank them.
+- **Clarity over cleverness:** Say the thing plainly. LLMs work best with clear, declarative sentences.  
+- **Structure for retrieval:** Use clean headings, bulleted lists, and short paragraphs so answers can be extracted in chunks. Each section should stand alone if it’s pulled out of context.  
+- **Front-load the answer:** Start with the takeaway, then explain. (Think: “TL;DR first, nuance after.”)  
+- **Semantic redundancy:** Repeat key terms and phrases naturally – it helps LLMs reinforce relevance without guessing.  
+- **Authority signals:** Cite sources, include data, and highlight expert input. Models tend to favor content that “looks” trustworthy. Author bios, sources, and first-hand insights boost trust.  
+- **Chunk quality:** Keep sections focused. A 200-word section that completely answers one question is more reusable than a 1,000-word wall of text.  
+- **Stay fresh and correct:** Outdated or wrong info can keep us out of results (or worse, get us quoted incorrectly). Include timestamps, years, and up-to-date references (“as of 2025”).  
+- **Favor Q\&A format:** Perplexity loves conversational answers and listicles (think “Top 5 tools for X”).  
+- **Consistency matters:** Keep facts about PostHog accurate and aligned across different pieces of content.  
+- **Watch competitors:** Monitor what SGE cites and improve on those answers to outrank them.
 
 ### Additional tips
 
@@ -158,17 +158,17 @@ We use and recommend all the following tools to all writers.
 
 Ahrefs is an all-in-one tool. It's useful for:
 
-* Rank tracking: We use the built-in rank tracking to keep an eye on our visibility in Google for terms we're targeting with content. It updates ranking every 7 days. We only track desktop rankings in the United States atm.  
-* Competitor analysis: Arguably the most useful feature. Use the Site Explorer feature to analyze traffic and keyword patterns for competing websites.  
-* Keyword research: There are better keyword research tools, but the Ahrefs Keyword Explorer is still a useful way to find and analyze keyword and article opportunities.  
-* Site audits: We use Ahref's Site Audit tool to identify website issues – 404s, broken internal links, etc. A scan runs once a week. Andy looks after this.  
-* Backlink analysis: Allows us to see who is linking to our website and competitors. We don't use this extensively atm, but it's useful every once in a while.
+- Rank tracking: We use the built-in rank tracking to keep an eye on our visibility in Google for terms we're targeting with content. It updates ranking every 7 days. We only track desktop rankings in the United States atm.  
+- Competitor analysis: Arguably the most useful feature. Use the Site Explorer feature to analyze traffic and keyword patterns for competing websites.  
+- Keyword research: There are better keyword research tools, but the Ahrefs Keyword Explorer is still a useful way to find and analyze keyword and article opportunities.  
+- Site audits: We use Ahref's Site Audit tool to identify website issues – 404s, broken internal links, etc. A scan runs once a week. Andy looks after this.  
+- Backlink analysis: Allows us to see who is linking to our website and competitors. We don't use this extensively atm, but it's useful every once in a while.
 
 ### Keywords Everywhere
 
 [Keywords Everywhere](https://keywordseverywhere.com/) is a very useful Chrome extension that adds keyword research context to Google searches and other popular SEO tools. It's a great way to do quick bits of keyword research and find related terms.
 
-It's only \~$15 annually.
+It's only ~$15 annually.
 
 ### Google Search Console
 
@@ -178,7 +178,7 @@ While the data is somewhat sampled, Search Console is a useful tool for analyzin
 
 A free tool that lets you [test how your headline will look in Google search results](https://mangools.com/free-seo-tools/serp-simulator). This is useful for seeing:
 
-1. Whether Google will clip the headline because it's too long – Google has a 600px width limit on headlines.  
+1. Whether Google will clip the headline because it's too long – Google has a 600px width limit on headlines. 
 2. Comparing your headline to other results – ideally we want headlines that stand out / are more enticing than other results
 
 ### AlsoAsked
