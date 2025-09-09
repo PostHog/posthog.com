@@ -2,6 +2,8 @@ import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import ZoomHover from 'components/ZoomHover'
+import { IconExternal } from '@posthog/icons'
+
 // Basic usage
 // <OSButton>Click me</OSButton>
 
@@ -132,17 +134,15 @@ export default function OSButton({
     }
 
     const variantClasses = {
-        default: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${
-            active
-                ? 'font-bold skin-modern:bg-accent/50 dark:skin-modern:bg-accent skin-modern:hover:border-primary skin-classic:border-primary skin-classic:bg-primary'
-                : hover === 'border'
+        default: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${active
+            ? 'font-bold skin-modern:bg-accent/50 dark:skin-modern:bg-accent skin-modern:hover:border-primary skin-classic:border-primary skin-classic:bg-primary'
+            : hover === 'border'
                 ? 'hover:border-primary skin-classic:hover:border-primary skin-classic:border-transparent disabled:hover:bg-transparent disabled:hover:border-transparent'
                 : 'hover:bg-accent dark:hover:bg-accent disabled:hover:bg-transparent disabled:hover:border-transparent'
-        } ${
-            hover === 'border'
+            } ${hover === 'border'
                 ? 'active:bg-accent/50 dark:active:bg-accent/50'
                 : 'active:bg-accent dark:active:bg-accent'
-        } active:border-primary focus:border-primary`,
+            } active:border-primary focus:border-primary`,
         primary: {
             parent: 'bg-button-shadow dark:bg-button-shadow-dark text-primary border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed inline-block',
             child: 'flex items-center justify-center bg-orange text-black hover:text-black dark:text-black dark:hover:text-black no-underline border-button dark:border-button-dark dark:bg-orange font-bold active:transition-all active:duration-100 select-none',
@@ -159,20 +159,19 @@ export default function OSButton({
         <>
             {variant === 'primary' || variant === 'secondary' ? (
                 <span
-                    className={`${variantClasses[variant].child} ${childSizeClasses[size]} ${
-                        width === 'full' ? fullWidthChildClasses[size] : ''
-                    }`}
+                    className={`${variantClasses[variant].child} ${childSizeClasses[size]} ${width === 'full' ? fullWidthChildClasses[size] : ''
+                        }`}
                 >
                     {icon && iconPosition === 'left' && (
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
+                    {external ? <IconExternal className="size-4 opacity-50 group-hover:opacity-100" /> : null}
                     {chip && (
                         <span
-                            className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${
-                                chipColor ? `text-${chipColor} border-${chipColor}` : 'text-primary border-primary'
-                            }`}
+                            className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${chipColor ? `text-${chipColor} border-${chipColor}` : 'text-primary border-primary'
+                                }`}
                         >
                             {chip}
                         </span>
@@ -190,9 +189,8 @@ export default function OSButton({
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
                     {chip && (
                         <span
-                            className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${
-                                chipColor ? `text-${chipColor} border-${chipColor}` : 'text-primary border-primary'
-                            }`}
+                            className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${chipColor ? `text-${chipColor} border-${chipColor}` : 'text-primary border-primary'
+                                }`}
                         >
                             {chip}
                         </span>
@@ -208,17 +206,13 @@ export default function OSButton({
     const { contextMenu, ...restProps } = props
 
     const commonProps = {
-        className: `${baseClasses} ${width === 'full' ? 'flex' : 'inline-flex'} ${
-            variant === 'primary' || variant === 'secondary'
-                ? `${parentSizeClasses[size]} ${variantClasses[variant].parent}`
-                : `${simpleSizeClasses[size]} ${variantClasses[variant]} ${
-                      disabled ? 'disabled:hover:bg-transparent' : ''
-                  }`
-        } ${align === 'center' ? 'justify-center' : 'justify-start text-left'} ${
-            !children ? '' : width === 'full' ? 'w-full' : 'w-auto'
-        } ${width === 'full' && (variant === 'primary' || variant === 'secondary') ? '!block' : ''} ${
-            asLink ? '!no-underline' : ''
-        } ${className}`,
+        className: `${baseClasses} ${width === 'full' ? 'flex' : 'inline-flex'} ${variant === 'primary' || variant === 'secondary'
+            ? `${parentSizeClasses[size]} ${variantClasses[variant].parent}`
+            : `${simpleSizeClasses[size]} ${variantClasses[variant]} ${disabled ? 'disabled:hover:bg-transparent' : ''
+            }`
+            } ${align === 'center' ? 'justify-center' : 'justify-start text-left'} ${!children ? '' : width === 'full' ? 'w-full' : 'w-auto'
+            } ${width === 'full' && (variant === 'primary' || variant === 'secondary') ? '!block' : ''} ${asLink ? '!no-underline' : ''
+            } ${className}`,
         onClick,
         disabled,
         state,
