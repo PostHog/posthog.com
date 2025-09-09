@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer'
 import { groupBy as _groupBy } from 'lodash'
 import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { CallToAction } from 'components/CallToAction'
 
 interface Column {
     name: string
@@ -31,6 +32,7 @@ interface OSTableProps {
     onLastRowInView?: () => void
     loading?: boolean
     groupBy?: string
+    fetchMore?: () => void
 }
 
 const RowSkeleton = () => {
@@ -178,6 +180,7 @@ const OSTable: React.FC<OSTableProps> = ({
     onLastRowInView,
     loading,
     groupBy,
+    fetchMore,
 }) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
     const [lastRowRef, lastRowInView] = useInView({ threshold: 0.1 })
@@ -242,7 +245,13 @@ const OSTable: React.FC<OSTableProps> = ({
                               />
                           ))}
                 </div>
-                {loading && <RowSkeleton />}
+                {loading ? (
+                    <RowSkeleton />
+                ) : fetchMore ? (
+                    <CallToAction onClick={() => fetchMore()} size="md" width="full" className="mt-4">
+                        Load more
+                    </CallToAction>
+                ) : null}
             </ScrollArea>
         </div>
     )
