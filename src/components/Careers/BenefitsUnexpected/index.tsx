@@ -6,7 +6,7 @@ const BenefitsUnexpected: React.FC = () => {
     return (
         <section className="max-w-7xl mx-auto px-4 pt-8 pb-12 grid gap-12 xl:gap-16">
             <div className="-mb-4">
-                <h2 className="text-center text-5xl mb-2">
+                <h2 className="text-center text-2xl @3xl:text-5xl mb-2">
                     <em className="text-red dark:text-yellow">Unexpected</em> benefits
                 </h2>
                 <p className="text-center font-semibold opacity-75 mb-0">Perks you'll only find here</p>

@@ -24,8 +24,9 @@ const TeamMemberLink = (person) => {
             <a href={person && `/community/profiles/${squeakId}`} className="flex flex-col gap-2 items-center">
                 <div className="border-2 border-primary p-0.5 bg-light dark:bg-dark rounded-full">
                     <div
-                        className={`size-24 rounded-full overflow-hidden mx-auto ${color ? `bg-${color}` : 'bg-orange'
-                            }`}
+                        className={`size-24 rounded-full overflow-hidden mx-auto ${
+                            color ? `bg-${color}` : 'bg-orange'
+                        }`}
                     >
                         {person ? (
                             <img
@@ -122,8 +123,8 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
 
 const MegaQuote: React.FC = () => {
     return (
-        <section id="quote" className="@container px-8 @3xl:px-8 not-prose">
-            <h2 className="text-3xl @3xl:text-4xl text-center mb-1">A really long quote</h2>
+        <section id="quote" className="@container not-prose">
+            <h2 className="text-2xl @3xl:text-4xl text-center mb-1">A really long quote</h2>
             <p className="text-center text-lg mb-8">(It was so good we just couldn't cut it down.)</p>
             <div className="max-w-7xl mx-auto flex flex-col-reverse gap-8 @3xl:gap-12 items-center @3xl:flex-row p-6 @3xl:p-8 bg-white dark:bg-dark rounded border border-primary">
                 <aside className="w-full @3xl:w-auto min-w-48 max-w-full text-center">

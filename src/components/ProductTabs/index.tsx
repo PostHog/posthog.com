@@ -214,6 +214,8 @@ export default function ProductTabs({ productHandles, className, selectedStage }
             padding={false}
             className={className}
             orientation={orientation}
+            centerTabs={orientation === 'horizontal' ? true : false}
+            contentPadding={false}
             tabContainerClassName={`${
                 orientation === 'vertical' ? 'pt-2 pr-4' : ''
             } [&>div>div]:flex-wrap [&>div>div]:justify-center`}

@@ -270,7 +270,7 @@ export const CompensationCalculator = ({
                             </ol>
                         )}
                         <div
-                            className={`rounded flex ${
+                            className={`flex ${
                                 hideFormula ? 'border-t-2 justify-between border-primary pt-2' : 'justify-between'
                             }`}
                             id="compensation"

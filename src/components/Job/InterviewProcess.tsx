@@ -68,7 +68,7 @@ export default function InterviewProcess({
                     ({ title, description, badge }, index) => {
                         return (
                             <li
-                                className={`flex items-start py-3 space-x-4 relative before:absolute before:w-px before:top-0 before:bottom-0 before:left-6 before:bg-border dark:before:bg-border-dark last:before:bottom-12 ${
+                                className={`flex items-start py-3 space-x-4 relative before:absolute before:w-px before:top-0 before:bottom-0 before:left-6 before:bg-border dark:before:bg-border-dark last:before:bottom-24 @2xl:last:before:bottom-16 ${
                                     inApplicationProcess
                                         ? 'first:bg-white dark:first:bg-accent-dark first:border first:border-b-3 first:border-light dark:first:border-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:before:hidden'
                                         : 'first:before:top-6'
