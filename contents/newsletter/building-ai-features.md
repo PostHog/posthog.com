@@ -4,7 +4,7 @@ date: 2025-09-09
 author:
  - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hero_9791aaf820.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820.jpg
 featuredImageType: full
 tags:
   - Product engineers
@@ -64,7 +64,7 @@ Knowing the common AI patterns helps you identify where you can use them in your
 
 Soon, Max AI will go further in its tool use by watching and analyzing session recordings for you, among other (somewhat secret) things.
 
-## 2. Identify problems that AI might solve
+### 2. Identify problems that AI might solve
 
 > Ask not what you can do with AI, but what AI can do for you. — JFK (I think)
 
@@ -88,7 +88,8 @@ We’ve applied this thinking in many ways, such as:
 
 2. Max AI makes writing complex SQL queries easy by acting as a natural language translator. This especially helps less technical users of PostHog [who aren’t familiar with SQL](/product-engineers/sql-for-analytics) create more customized insights.
 
-## 3. Validate the problem is specific and valuable
+### 3. Validate the problem is specific and valuable
+
 Now that you have some patterns and problems, narrow them down to the ones that are both specific and valuable.
 
 ![Specific and valuable](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/specificvaluable_f91bec523d.png)
