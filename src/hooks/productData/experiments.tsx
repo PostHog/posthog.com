@@ -21,13 +21,10 @@ export const experiments = {
         title: 'Test changes with statistical significance',
         description: (
             <>
-                Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with{' '}
+                Run statistically rigorous experiments, use precise targeting and exclusion rules, and analyze your
+                groups with{' '}
                 <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
                     Session Replay
-                </Link>{' '}
-                and a auto-generated dashboard of insights from{' '}
-                <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>
-                    Product Analytics
                 </Link>
                 .
             </>
@@ -36,7 +33,7 @@ export const experiments = {
     },
     screenshots: {
         overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Xnapper_2025_01_20_15_25_58_0867c02f69.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_09_at_11_26_18_350dc26349.png',
             alt: 'Screenshot of managing an A/B test in PostHog',
             classes: '',
         },
@@ -79,19 +76,20 @@ export const experiments = {
         {
             title: 'Flexible experiment types',
             headline: 'Test any metric that matters to your business',
-            description: 'Support for conversion funnels, count-based trends, value-based metrics, and custom metrics',
+            description: 'Choose the right metric for your goal and track side effects across your product.',
             features: [
                 {
                     title: 'Funnel metrics',
-                    description: 'Test conversion rates through multi-step user journeys',
+                    description: 'Track conversion rates across multi-step journeys, like signup flows or checkout.',
                 },
                 {
-                    title: 'Count-based trends',
-                    description: 'Measure events like pageviews, clicks, or feature usage',
+                    title: 'Count & value metrics',
+                    description:
+                        'Measure totals such as pageviews or clicks, or capture values like revenue, order size, or time spent.',
                 },
                 {
-                    title: 'Value-based trends',
-                    description: 'Track revenue, time spent, or any numeric value',
+                    title: 'Ratio metrics',
+                    description: 'Test ratios such as percentage of positive feedback to capture deeper insights.',
                 },
                 {
                     title: 'Primary & secondary metrics',
@@ -99,7 +97,8 @@ export const experiments = {
                 },
                 {
                     title: 'Shared metrics library',
-                    description: 'Create reusable metrics across experiments for consistency',
+                    description:
+                        'Create reusable metrics across experiments for consistency and easy experiment setup.',
                 },
             ],
         },
@@ -110,68 +109,66 @@ export const experiments = {
                 {
                     title: 'A/B testing',
                     description:
-                        'Use count, value or funnel metrics to test new code and find what works best. Great for teams with big ideas.',
+                        'Compare two versions of a feature or flow using count, value, funnel, or ratio metrics. The standard way to see what works best.',
                 },
                 {
                     title: 'A/A testing',
                     description:
-                        'Validate experiments by testing code against duplicates, across a funnel. Great for teams who need strong data.',
+                        'Test identical variants to validate your setup and ensure results aren’t biased by random chance.',
                 },
                 {
                     title: 'A/B/N testing',
                     description:
-                        'Test multiple variants against a shared metrics library to determine the best approach based on data. Great for teams with lots of ideas.',
+                        'Run experiments with three or more variants to quickly identify the best-performing option.',
                 },
                 {
                     title: 'Holdout testing',
                     description:
-                        'Test new code across an entire funnel by holding content back from users. Great for teams with complex lifecycle models.',
+                        'Reserve a group of users who don’t see any changes, so you can measure long-term impact against a true baseline.',
                 },
                 {
                     title: 'Fake door testing',
                     description:
-                        'Gauge demand in new products with roadmap experiments. Great for teams that ship quickly.',
+                        'Measure interest in a potential feature by exposing users to a “coming soon” entry point before building it.',
                 },
                 {
                     title: 'Redirect testing',
                     description:
-                        'Test ideas by changing the user path instead of the content they see. Great for teams that want to optimize instead of iterate.',
+                        'Send users to different versions of a page or flow (like a signup path) to test changes at the navigation level.',
                 },
             ],
         },
         {
             title: 'Targeting rules',
-            headline: 'Target by user properties, cohorts, geographic location, or custom conditions',
+            headline: 'Target the right audience for every experiment',
             layout: 'columns',
             features: [
                 {
-                    title: 'User property targeting',
-                    description: 'Target based on any user attribute you track',
-                },
-                {
                     title: 'Cohort integration',
-                    description: 'Run experiments on specific user segments or behavioral cohorts',
+                    description: 'Target specific user segments or behavioral cohorts.',
                 },
                 {
                     title: 'Geographic targeting',
-                    description: 'Test changes in specific countries or regions',
+                    description: 'Limit experiments to certain countries or regions to account for local differences.',
                 },
                 {
                     title: 'Percentage rollouts',
-                    description: 'Start small with 5% of users and scale up safely',
+                    description:
+                        'Start with a small slice of users (e.g. 5%) and gradually expand once results look good.',
                 },
                 {
                     title: 'Group-level experiments',
-                    description: 'Test at organization or team level for B2B products',
+                    description: 'Run tests at the organization, account, or team level – ideal for B2B products.',
                 },
                 {
                     title: 'Holdouts',
-                    description: 'Exclude a randomly assigned lists of users from an experiment',
+                    description:
+                        'Set aside a random group of users who never see the change, giving you a clean baseline for long-term measurement.',
                 },
             ],
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/us_posthog_com_project_2_feature_flags_160557_cc3f425138.png',
                     alt: 'Targeting rules',
                     stylize: true,
                     shadow: true,
@@ -185,43 +182,10 @@ export const experiments = {
                 'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_09_at_11_59_57_265b164241.png',
                     alt: 'Customizable metrics',
                     stylize: true,
                     shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Auto recommendations',
-            headline: 'Built-in guidance for successful experiments',
-            description:
-                'Get automatic recommendations for sample size, test duration, and minimum detectable effects based on your data',
-            layout: 'columns',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png',
-                    alt: 'Smart recommendations',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-            features: [
-                {
-                    title: 'Sample size calculator',
-                    description: 'Know how many users you need based on your minimum detectable effect',
-                },
-                {
-                    title: 'Duration estimates',
-                    description: 'Get recommendations on how long to run your test',
-                },
-                {
-                    title: 'Pre-launch checklist',
-                    description: 'Ensure your experiment is set up correctly before launch',
-                },
-                {
-                    title: 'Health monitoring',
-                    description: 'Automatic alerts for sample ratio mismatch and other issues',
                 },
             ],
         },
@@ -231,24 +195,28 @@ export const experiments = {
             description: 'Built on our feature flag infrastructure with all major SDKs supported',
             features: [
                 {
-                    title: 'JSON payloads',
-                    description: 'Pass configuration data to dynamically change experiences',
+                    title: 'Feature flag foundation',
+                    description:
+                        'Experiments run on PostHog’s battle-tested feature flag infrastructure, with full support across all major SDKs.',
                 },
                 {
-                    title: 'Dynamic cohort support',
-                    description: 'Add new users to an experiment automatically by setting a person property',
+                    title: 'JSON payloads',
+                    description:
+                        'Pass structured data to variants, letting you dynamically configure and change user experiences without redeploys.',
                 },
                 {
                     title: 'Multivariate testing',
-                    description: 'Test up to 9 variants against a control group',
+                    description:
+                        'Run tests with up to 9 variants plus a control, giving you the flexibility to explore multiple approaches at once.',
                 },
                 {
                     title: 'Local evaluation',
-                    description: 'Zero latency with cached flag values',
+                    description: 'Zero latency with flag values evaluated on your server.',
                 },
                 {
-                    title: 'All major platforms',
-                    description: 'SDKs for web, mobile, backend, and more',
+                    title: 'Cross-platform SDKs',
+                    description:
+                        'Web, mobile, backend, and server-side SDKs make it easy to run consistent experiments anywhere in your stack.',
                 },
             ],
         },
@@ -412,16 +380,6 @@ export const experiments = {
                 },
             },
             {
-                feature: 'Target by location',
-                companies: {
-                    amplitude: true,
-                    optimizely: true,
-                    pendo: false,
-                    vwo: true,
-                    posthog: true,
-                },
-            },
-            {
                 feature: 'Target by cohort',
                 companies: {
                     amplitude: true,
@@ -506,7 +464,7 @@ export const experiments = {
     ],
     presenterNotes: {
         overview:
-            "<strong>Presenter notes:</strong> Test changes to your product and evaluate the impacts those changes make. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow. You can track up to nine metrics to see how your experiment affects other parts of your app or different flows. Our Bayesian statistical engine gives you results anytime without p-hacking concerns. You'll get clear win probabilities that let you make confident decisions when you have data to back it up, not when you hit some arbitrary date.",
+            '<strong>Presenter notes:</strong> Test product changes and measure their true impact. Run experiments on funnels like a signup flow, on single events such as revenue, or on advanced metrics like ratios. Track unlimited metrics to see how experiments affect other parts of your app and user journeys. Our Bayesian and frequentist engines provide clear, statistically rigorous results so you can make confident, data-backed decisions.',
         customers:
             'Y Combinator tested small changes systematically and saw a 40% engagement boost. ResearchGate runs experiments on 25 million users. Vendasta tested "insignificant" ideas and got 30% more registrations. They all move fast because they\'re not waiting weeks for "significance".',
         features:
@@ -518,8 +476,8 @@ export const experiments = {
         'comparison-summary':
             "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform. Our Bayesian engine is genuinely differentiated – most tools still use frequentist statistics that don't let you check results early. We also uniquely support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
         'feature-comparison':
-            "This comparison highlights our unique strengths. PostHog Experiments is the only tool that lets you check results anytime without statistical penalties – a huge advantage for fast-moving teams. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.<br /><br /><strong>What we don't have:</strong> no-code visual editor (yet!) or CMS capabilities. You'll need engineering resources to implement tests, but that's a deliberate choice as we're building for technical teams who want power and flexibility.",
-        docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact. The docs include power calculators, sample size estimators, and templates for experiment design. We're transparent about limitations too – like why you shouldn't run experiments on metrics with extreme outliers without transformation.",
+            "This comparison highlights our unique strengths. PostHog Experiments is the only tool that lets you check results anytime without statistical penalties – a huge advantage for fast-moving teams. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
+        docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact.",
         'pairs-with':
             "PostHog Experiments truly shine when combined with our other products. Start with an experiment on a new feature, then use product analytics to dive deeper than your primary metric—maybe conversion increased but time-to-convert also increased. Watch session recordings of users in each variant to see exactly how they interact differently. If the experiment wins, roll it out gradually using the same feature flag. This integrated workflow means you're not jumping between tools or trying to match user IDs across systems. It's one platform where everything connects.",
         'getting-started':
