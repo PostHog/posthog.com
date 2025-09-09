@@ -22,7 +22,6 @@ interface OSTabsProps {
     value?: string
     orientation?: 'horizontal' | 'vertical'
     frame: boolean
-    children?: React.ReactNode
     fullScreen?: boolean
     className?: string
     triggerDataScheme?: string
@@ -39,7 +38,6 @@ export default function OSTabs({
     tabs,
     defaultValue,
     value,
-    children,
     orientation = 'horizontal',
     frame = true,
     className,
@@ -152,8 +150,9 @@ export default function OSTabs({
     const TabContentContainer = useMemo(() => (scrollable ? ScrollArea : 'div'), [scrollable])
 
     return (
-        <div ref={ref}>
+        <>
             <Tabs.Root
+                ref={ref}
                 onValueChange={(value) => {
                     setControlledValue(value)
 
@@ -236,7 +235,6 @@ export default function OSTabs({
                     </Tabs.Content>
                 ))}
             </Tabs.Root>
-            {children}
-        </div>
+        </>
     )
 }
