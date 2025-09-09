@@ -654,7 +654,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             {teams.length > 1 && (
                                 <p
                                     data-scheme="secondary"
-                                    className="bg-primary p-2 border border-primary rounded-sm mt-0 mb-3"
+                                    className="bg-primary py-2 px-4 border border-primary rounded-sm text-sm mt-0 mb-3"
                                 >
                                     <strong>{teams.length} small teams are hiring for this role</strong>
                                 </p>
@@ -740,12 +740,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             </div>
                         </div>
                         {(teams.length > 0 || !teams.length) && (
-                            <div
-                                data-scheme="secondary"
-                                className={`@container @5xl:col-span-5 ${
-                                    teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
-                                }`}
-                            >
+                            <div className="@container @5xl:col-span-5">
                                 <h3 className="mt-0 mb-2 leading-tight text-center">
                                     {teams.length > 1
                                         ? 'About the small teams'
@@ -753,13 +748,14 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                         ? `About the ${currentTeamName} Team`
                                         : 'About this team'}
                                 </h3>
-
-                                <TeamsSidebar
-                                    teams={teams}
-                                    allTeams={allTeams}
-                                    multipleTeams={teams.length > 1}
-                                    isCompact={false}
-                                />
+                                <div data-scheme="secondary" className={` ${teams.length > 1 ? '-mt-1' : ''}`}>
+                                    <TeamsSidebar
+                                        teams={teams}
+                                        allTeams={allTeams}
+                                        multipleTeams={teams.length > 1}
+                                        isCompact={false}
+                                    />
+                                </div>
                             </div>
                         )}
                     </div>

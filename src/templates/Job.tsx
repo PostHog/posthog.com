@@ -569,8 +569,8 @@ export default function Job({
                     </div>
 
                     {/* Main content with sidebar layout */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div className="lg:col-span-2">
+                    <div className="grid grid-cols-1 @xl:grid-cols-5 gap-8">
+                        <div className="@xl:col-span-3">
                             {/* Show parsed content in accordion if available, otherwise show raw HTML */}
                             {parsedContent.length > 0 ? (
                                 <div>
@@ -597,14 +597,18 @@ export default function Job({
                         </div>
 
                         {/* Right sidebar with team info */}
-                        <div className="lg:col-span-1">
+                        <div className="@xl:col-span-2 @container">
                             <div className="sticky top-4">
                                 <h2 className="mt-0 mb-2 leading-tight text-base text-center">
-                                    {teams?.nodes?.length > 0
-                                        ? multipleTeams
-                                            ? 'Teams hiring for this role'
-                                            : 'Meet your team'
-                                        : 'About this team'}
+                                    {teams?.nodes?.length > 0 ? (
+                                        multipleTeams ? (
+                                            'Teams hiring for this role'
+                                        ) : (
+                                            <>Meet the {teamName}</>
+                                        )
+                                    ) : (
+                                        'About this team'
+                                    )}
                                 </h2>
 
                                 <TeamsSidebar

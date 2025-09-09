@@ -117,8 +117,8 @@ export const TeamInfoDisplay = ({
     if (isCompact) {
         // Compact version for Job template
         return (
-            <div className="space-y-4">
-                <div className="flex justify-center mb-4">
+            <div className="flex flex-col @md:flex-row @md:gap-4">
+                <div className="flex justify-center mb-4 max-w-48 mx-auto">
                     {isFallback ? (
                         // Don't link the fallback team
                         <TeamPatch
@@ -139,55 +139,58 @@ export const TeamInfoDisplay = ({
                         </Link>
                     )}
                 </div>
+                <div className="flex-1">
+                    {displayTeam.description && (
+                        <p className="text-sm text-secondary !my-0">
+                            {parseDescriptionWithLinks(displayTeam.description)}
+                        </p>
+                    )}
 
-                {displayTeam.description && (
-                    <p className="text-sm text-secondary !my-0">{parseDescriptionWithLinks(displayTeam.description)}</p>
-                )}
-
-                {teamLength > 0 && (
-                    <>
-                        <div>
-                            <p className="text-sm font-semibold !mb-1">Team members</p>
-                            <div className="flex justify-start">
-                                <TeamMembers
-                                    size="!size-12"
-                                    profiles={displayTeam.profiles}
-                                    teamName={displayTeam.name}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
-                            <div className="flex items-center gap-2 text-sm">
-                                <div className="w-8">
-                                    {pineapplePercentage > 50 ? (
-                                        <StickerPineappleYes className="size-8" />
-                                    ) : pineapplePercentage == 50 ? (
-                                        <StickerPineapple className="size-8" />
-                                    ) : (
-                                        <StickerPineappleNo className="size-8" />
-                                    )}
-                                </div>
-                                <div className="flex-1 leading-tight text-xs">
-                                    {pineapplePercentage > 50 ? (
-                                        <>
-                                            <strong>{pineapplePercentage}%</strong> say{' '}
-                                            <strong className="text-green">YES</strong>!
-                                        </>
-                                    ) : pineapplePercentage == 50 ? (
-                                        <>Team is evenly split</>
-                                    ) : (
-                                        <>
-                                            <strong>{100 - pineapplePercentage}%</strong> say{' '}
-                                            <strong className="text-red">NO!</strong>
-                                        </>
-                                    )}
+                    {teamLength > 0 && (
+                        <>
+                            <div>
+                                <p className="text-sm font-semibold !mb-1">Team members</p>
+                                <div className="flex justify-start">
+                                    <TeamMembers
+                                        size="!size-12"
+                                        profiles={displayTeam.profiles}
+                                        teamName={displayTeam.name}
+                                    />
                                 </div>
                             </div>
-                        </div>
-                    </>
-                )}
+
+                            <div>
+                                <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
+                                <div className="flex items-center gap-2 text-sm">
+                                    <div className="w-8">
+                                        {pineapplePercentage > 50 ? (
+                                            <StickerPineappleYes className="size-8" />
+                                        ) : pineapplePercentage == 50 ? (
+                                            <StickerPineapple className="size-8" />
+                                        ) : (
+                                            <StickerPineappleNo className="size-8" />
+                                        )}
+                                    </div>
+                                    <div className="flex-1 leading-tight text-xs">
+                                        {pineapplePercentage > 50 ? (
+                                            <>
+                                                <strong>{pineapplePercentage}%</strong> say{' '}
+                                                <strong className="text-green">YES</strong>!
+                                            </>
+                                        ) : pineapplePercentage == 50 ? (
+                                            <>Team is evenly split</>
+                                        ) : (
+                                            <>
+                                                <strong>{100 - pineapplePercentage}%</strong> say{' '}
+                                                <strong className="text-red">NO!</strong>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
         )
     }
@@ -196,7 +199,7 @@ export const TeamInfoDisplay = ({
     return (
         <div
             data-scheme="secondary"
-            className={`${multipleTeams ? 'border border-primary rounded-md p-4 bg-primary' : ''}`}
+            className={`${multipleTeams ? 'p-2' : 'border border-primary rounded-md p-4 bg-primary'}`}
         >
             <div className="flex flex-col @md:grid @md:grid-cols-6 @md:grid-rows-[repeat(3,auto)] @lg:grid-rows-[repeat(4,auto)] gap-4 @2xl:gap-y-0">
                 <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @2xl:row-span-1 @md:self-center">
