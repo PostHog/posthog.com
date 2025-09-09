@@ -153,8 +153,8 @@ export default function SparkJoy(): JSX.Element {
                                     : 'flex flex-col justify-center items-center space-y-1 w-28 text-center'
                             } text-primary hover:text-primary`}
                         >
-                            <IconBookmarkSolid className="!size-10 -mt-2 text-blue" />
-                            <p className="text-sm font-medium">Bookmarks</p>
+                            <AppIcon name="bookmark" className="!size-10 -mt-2" />
+                            <p className="text-sm font-medium">Bookmarks (beta)</p>
                         </Link>
                         <Link
                             to="/coloring-book.pdf"
@@ -165,7 +165,7 @@ export default function SparkJoy(): JSX.Element {
                                     : 'flex flex-col justify-center items-center space-y-1 w-28 text-center'
                             } text-primary hover:text-primary`}
                         >
-                            <IconDocument className="!size-10 -mt-2 text-red" />
+                            <AppIcon name="pdf" className="!size-10 -mt-2" />
                             <p className="text-sm font-medium">Coloring book.pdf</p>
                         </Link>
                     </div>
