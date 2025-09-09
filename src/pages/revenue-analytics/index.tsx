@@ -72,9 +72,9 @@ export default function RevenueAnalytics(): JSX.Element {
     const slides = createSlideConfig({
         exclude: ['customers', 'pricing', 'docs', 'pairs-with'],
         // order: ['overview', 'pricing', 'features'],
-        // templates: {
-        //     overview: 'columns', // Use the horizontal split layout
-        // },
+        templates: {
+            overview: 'stacked',
+        },
         // content: {
         //     answersDescription:
         //         'Understand user behavior, identify friction points, and improve your product experience',

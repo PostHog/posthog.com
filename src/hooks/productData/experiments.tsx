@@ -34,8 +34,9 @@ export const experiments = {
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_09_at_11_26_18_350dc26349.png',
-            alt: 'Screenshot of managing an A/B test in PostHog',
-            classes: '',
+            alt: 'Screenshot of managing an experiment in PostHog',
+            classes: 'px-8',
+            imgClasses: 'rounded-t-md shadow-2xl',
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png',

@@ -17,7 +17,8 @@ export default function OverviewSlideColumns({
                 <CloudinaryImage
                     src={screenshots.overview.src as any}
                     alt={screenshots.overview.alt}
-                    imgClassName={screenshots.overview.classes}
+                    className={screenshots.overview.classes}
+                    imgClassName={screenshots.overview.imgClasses}
                 />
             )}
             {hog?.src && (
@@ -32,7 +33,13 @@ export default function OverviewSlideColumns({
                     {Icon && <Icon className={`size-7 ${overview?.textColor || 'text-black'}`} />}
                     <span className={`text-xl font-bold ${overview?.textColor || 'text-black'}`}>{productName}</span>
                     {status === 'beta' && (
-                        <span className={`font-bold uppercase border-2 border-white px-1 rounded-md text-lg ${overview?.textColor || 'text-primary'}`}>Beta</span>
+                        <span
+                            className={`font-bold uppercase border-2 border-white px-1 rounded-md text-lg ${
+                                overview?.textColor || 'text-primary'
+                            }`}
+                        >
+                            Beta
+                        </span>
                     )}
                 </div>
                 <h1 className={`text-5xl font-bold mb-4 leading-tight ${overview?.textColor || 'text-black'}`}>

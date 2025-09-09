@@ -20,7 +20,8 @@ export default function OverviewSlideOverlay({
                     <CloudinaryImage
                         src={screenshots.overview.src as any}
                         alt={screenshots.overview.alt}
-                        imgClassName="w-full h-full object-cover"
+                        className={`w-full h-full object-cover ${screenshots.overview.classes}`}
+                        imgClassName={screenshots.overview.imgClasses}
                     />
                 </div>
             )}
