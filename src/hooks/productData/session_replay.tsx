@@ -481,7 +481,7 @@ window.posthog.onFeatureFlags(function () {
                 companies: {
                     hotjar: true,
                     logrocket: true,
-                    // matomo: true,
+                    matomo: false,
                     fullstory: true,
                     posthog: 'In alpha',
                 },
