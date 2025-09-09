@@ -4518,20 +4518,51 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
-                    name: 'Getting started',
-                    url: '/docs/revenue-analytics/getting-started',
-                    icon: 'IconBook',
+                    name: 'Start here',
+                    url: '/docs/revenue-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Payment platforms',
+                    url: '/docs/revenue-analytics/payment-platforms',
+                    icon: 'IconCode',
                     color: 'blue',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    children: [
+                        {
+                            name: 'Stripe',
+                            url: '/docs/cdp/sources/stripe',
+                        },
+                        {
+                            name: 'Chargebee',
+                            url: '',
+                        },
+                        {
+                            name: 'Polar',
+                            url: '',
+                        },
+                        {
+                            name: 'RevenueCat',
+                            url: '',
+                        },
+                    ],
+                },
+                {
+                    name: 'Capture revenue events',
+                    url: '/docs/revenue-analytics/capture-revenue-events',
+                    icon: 'IconCode',
+                    color: 'green',
                 },
                 {
                     name: 'Dashboard',
                     url: '/docs/revenue-analytics/dashboard',
                     icon: 'IconDashboard',
-                    color: 'orange',
+                    color: 'red',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
