@@ -9,7 +9,7 @@ A manager at PostHog has a short list of responsibilities:
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
-5. Collaborating on performance issues to execs 
+5. Collaborating with execs on performance concerns that need early intervention
 
 That's it.
 
@@ -76,13 +76,13 @@ Talking about long-term career plans every now and again is also important but e
 
 ### Performance
 
-- we don't want you to be stressing about this every day. we also want to make sure that posthog has a consistent, transparent and well thought out way to deal with serious performance issues
-- our people and ops team will push to think about this at certain times (30-day check in, 80-day check in after a person joined).
-- we expect you to proactively give feedback to all the people in your team
-- we expect you to proactively raise performance issues with your exec
-  - once this happens, the exec will manage the process. you will likely be asked to continue giving the feedback to the employee, but the exec will coach you during these conversation
-  - the exec will always manage the process and make any decisions required
-  - if we do decide to let someone go, the exec will handle that process with the people team
+We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a manager, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but the onus is on you to raise concerns early.
+
+- We expect you to regularly give proactive, actionable feedback to everyone on your team - it’s the most direct way to help troubleshoot issues upstream. This is particularly important at the 30-day and 80-day check-ins after a new starter joins.
+- We expect you to actively raise performance issues with your exec.
+  - Once you do, your exec will take the lead on the process. You’ll likely deliver feedback directly to the employee, but your exec will support and coach you through those conversations.
+  - Your exec will look after the process and make any decisions required.
+  - If it ever comes to someone leaving, your exec will work with the People team to handle it carefully, sensitively and fairly.
 
 ### The keeper test
 
