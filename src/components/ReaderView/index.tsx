@@ -58,6 +58,8 @@ interface ReaderViewProps {
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
+    hideRightSidebar?: boolean
+    contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
     homeURL?: string
@@ -345,6 +347,8 @@ export default function ReaderView({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideRightSidebar = false,
+    contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
     homeURL,
@@ -371,6 +375,8 @@ export default function ReaderView({
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
+                hideRightSidebar={hideRightSidebar}
+                contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
                 homeURL={homeURL}
@@ -502,6 +508,8 @@ function ReaderViewContent({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideRightSidebar = false,
+    contentMaxWidthClass,
     padding = true,
     proseSize,
     homeURL,
@@ -530,7 +538,7 @@ function ReaderViewContent({
         setFullWidthContent,
     } = useReaderView()
 
-    const showSidebar = tableOfContents && tableOfContents?.length > 0
+    const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
 
     // Determine if we should render the left sidebar at all (separate from animation state)
     const renderLeftSidebar = !compact && !hideLeftSidebar
@@ -658,7 +666,9 @@ function ReaderViewContent({
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
                                 } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                    fullWidthContent || body?.type !== 'mdx'
+                                        ? 'max-w-full'
+                                        : contentMaxWidthClass || 'max-w-2xl'
                                 }`}
                             >
                                 {/* <DebugContainerQuery /> */}
@@ -674,15 +684,18 @@ function ReaderViewContent({
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                     </div>
                                 )}
-                                {tableOfContents && tableOfContents.length > 0 && !hideMobileTableOfContents && (
-                                    <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
-                                        <TableOfContents
-                                            tableOfContents={tableOfContents}
-                                            contentRef={contentRef}
-                                            title="Contents"
-                                        />
-                                    </div>
-                                )}
+                                {tableOfContents &&
+                                    tableOfContents.length > 0 &&
+                                    !hideMobileTableOfContents &&
+                                    !hideRightSidebar && (
+                                        <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
+                                            <TableOfContents
+                                                tableOfContents={tableOfContents}
+                                                contentRef={contentRef}
+                                                title="Contents"
+                                            />
+                                        </div>
+                                    )}
                                 {body.featuredVideo && <iframe src={body.featuredVideo} />}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
