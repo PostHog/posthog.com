@@ -1798,7 +1798,7 @@ export const companyMenu = {
                 },
                 {
                     name: 'Brand & Vibes',
-                    url: '/teams/brand-vibes',
+                    url: '/teams/brand',
                 },
                 {
                     name: 'Content',
