@@ -9,6 +9,8 @@ export const realtimeDestinations = {
     color: 'seagreen',
     colorSecondary: 'green-2',
     // category: 'data', // Not set on purpose - this ensures it's hidden from navigation and products
+    includeAddonRates: true,
+    categoryName: 'Data pipelines',
     slider: {
         marks: [10000, 50000, 250000, 1000000, 10000000],
         min: 10000,

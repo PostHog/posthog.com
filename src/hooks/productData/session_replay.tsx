@@ -17,6 +17,7 @@ export const sessionReplay = {
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
+    includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
         title: 'Session replay - PostHog',
