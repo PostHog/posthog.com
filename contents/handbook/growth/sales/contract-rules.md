@@ -115,13 +115,17 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits and start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
+We do offer additional discounts to nonprofits and start nonprofit discounts at 15% regardless of spend.
 
-When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
+If signing for an annual plan with a credit purchase between $20k and $80k, an additional 5% nonprofit discount is applied. For example, purchasing $25k in credits with an additional 5% nonprofit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
 
-To set up the non-profit discount in Stripe, follow the [instructions here](/handbook/growth/sales/billing#coupons-and-discounts).
+We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
-> Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
+When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. 
+
+To set up the nonprofit discount in Stripe, follow the [instructions here](/handbook/growth/sales/billing#coupons-and-discounts).
+
+> Nonprofit discounts only stack with annual discounts at a rate of 5%, and only if the credit purchase amount is less than $80,000.
 
 ### Legacy discounts
 
