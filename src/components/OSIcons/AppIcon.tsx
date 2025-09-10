@@ -172,7 +172,7 @@ const PRODUCT_ICON_MAP = {
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
 
-const isAppIconName = (value: string): value is AppIconName => value in PRODUCT_ICON_MAP
+export const isAppIconName = (value: string): value is AppIconName => value in PRODUCT_ICON_MAP
 
 export interface AppIconProps extends IconProps {
     name: AppIconName
