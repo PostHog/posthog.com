@@ -445,7 +445,7 @@ window.posthog.onFeatureFlags(function () {
                     subtitle: 'Jump between them easily',
                 },
                 {
-                    title: 'Collaboration, sharing, and embedding exporting recordings',
+                    title: 'Collaboration, sharing, embedding, and exporting recordings',
                 },
                 {
                     title: 'No limits on how many recordings captured',
@@ -546,7 +546,7 @@ window.posthog.onFeatureFlags(function () {
                     matomo: false,
                     fullstory: false,
                     clarity: true,
-                    posthog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
+                    posthog: true,
                 },
             },
             {
@@ -645,7 +645,7 @@ window.posthog.onFeatureFlags(function () {
                     matomo: false,
                     fullstory: false,
                     clarity: false,
-                    posthog: 'WIP',
+                    posthog: 'Beta',
                 },
             },
             {

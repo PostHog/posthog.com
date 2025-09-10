@@ -1598,6 +1598,10 @@
         {
             "source": "/platform-addons",
             "destination": "/platform-packages"
+        },
+        {
+            "source": "/founder-lab",
+            "destination": "/startups"
         }
     ],
     "headers": [
