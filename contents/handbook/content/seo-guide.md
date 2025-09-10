@@ -121,7 +121,7 @@ Here are some best practices for internal linking:
 - **Use descriptive, varied anchor text.** The anchor text (the clickable text of a link) should give a hint about the destination page’s content. Instead of saying “click here” or linking the same generic phrase every time, use keywords or descriptive phrases that fit naturally in your sentence.  
 - **Link relevant pages only.** Ensure your internal links are contextually relevant. Don’t force a link where it doesn’t belong; Google can tell if links are unnatural. The goal is to guide readers to related content they’d find useful, which in turn guides search engines.  
 - **Don’t overdo it.** A handful of well-placed internal links (3–5) is usually enough. You don’t need to link every other sentence. Too many links can dilute their value and be distracting for readers.  
-- **Maintain your links.** Periodically, use tools or audits to check for broken internal links (if you reorganize pages or change URLs, update any old links). Broken links hurt user experience and can waste crawl budget.
+- **Maintain your links.** Periodically, use tools or audits such as `#alerts-broken-website-internal-links` to check for broken internal links (if you reorganize pages or change URLs, update any old links). Broken links hurt user experience and can waste crawl budget.
 
 ### 10. Optimize for LLMs
 
