@@ -172,6 +172,14 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/bookmark_classic_925f7242d3.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/bookmark_modern_fdeca8567b.png',
     },
+    postIt: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/post_it_classic_c0c129d5b5.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/post_it_modern_4af52ddd13.png',
+    },
+    blueScreen: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/blue_screen_classic_a1f6489f34.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/blue_screen_modern_ee31731c1f.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP

@@ -90,7 +90,7 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
-        label: 'Fun stuff',
+        label: 'Things that spark joy',
         Icon: <AppIcon name="games" />,
         url: '/sparks-joy',
         source: 'desktop',
