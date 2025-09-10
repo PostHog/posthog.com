@@ -31,7 +31,7 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
     return (
         <section className="scroll-pt-[108px]">
-            <ol className="ml-0">
+            <ol className="ml-0 pl-0">
                 {React.Children.map(children, (child) => {
                     if (!React.isValidElement(child)) return null
 
