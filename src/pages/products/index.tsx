@@ -9,7 +9,6 @@ import * as Icons from '@posthog/icons'
 import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconPresentation } from 'components/OSIcons'
-import { productMenu } from '../../navs'
 import { PRODUCT_COUNT } from '../../constants'
 import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -23,30 +22,7 @@ import debounce from 'lodash/debounce'
 import { explorerGridColumns } from '../../constants'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 import CloudinaryImage from 'components/CloudinaryImage'
-
-// Create selectOptions for the address bar
-const selectOptions = [
-    {
-        label: 'Platform',
-        items: [
-            { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
-            ...productMenu.children.flatMap((item) => {
-                // Skip items without valid slugs
-                if (!item.slug) return []
-
-                // Add the base product
-                return [
-                    {
-                        value: item.slug,
-                        label: item.name,
-                        icon: item.icon,
-                        color: item.color,
-                    },
-                ]
-            }),
-        ],
-    },
-]
+import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 
 const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
     const posthog = usePostHog()
@@ -125,6 +101,7 @@ const ProductIcon = ({ product }: { product: any }) => (
 
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
+    const selectOptions = useMenuSelectOptions()
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [hoveredProduct, setHoveredProduct] = useState<any>(null)
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
@@ -222,6 +199,7 @@ export default function Products(): JSX.Element {
                 showTitle={false}
                 headerBarOptions={['showBack', 'showForward', 'showSearch']}
                 selectOptions={selectOptions}
+                selectedCategory="products"
                 isRightSidebarOpen={true}
                 onRightSidebarClose={handleRightSidebarClose}
                 onSearch={handleSearchChange}

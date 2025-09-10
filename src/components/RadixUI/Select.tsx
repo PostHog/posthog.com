@@ -9,7 +9,7 @@ type SelectItem = {
     value: string
     label: string
     disabled?: boolean
-    icon?: string
+    icon?: string | React.ReactNode
     color?: string
 }
 
@@ -32,10 +32,29 @@ type SelectProps = {
     className?: string
 }
 
-const Icon = ({ name, className = '', color }: { name?: string; className?: string; color?: string }) => {
-    if (!name) return null
-    const IconComponent = (NewIcons as any)[name] || (NotProductIcons as any)[name] || (OSIcons as any)[name]
-    return IconComponent ? <IconComponent className={`${color ? `text-${color}` : ''} ${className}`} /> : null
+const Icon = ({
+    icon,
+    className = '',
+    color,
+}: {
+    icon?: string | React.ReactNode
+    className?: string
+    color?: string
+}) => {
+    if (!icon) return null
+
+    // If icon is already a React element, render it directly
+    if (React.isValidElement(icon)) {
+        return icon
+    }
+
+    // If icon is a string, look it up in the icon libraries
+    if (typeof icon === 'string') {
+        const IconComponent = (NewIcons as any)[icon] || (NotProductIcons as any)[icon] || (OSIcons as any)[icon]
+        return IconComponent ? <IconComponent className={`${color ? `text-${color}` : ''} ${className}`} /> : null
+    }
+
+    return null
 }
 
 const SelectItem = React.forwardRef(
@@ -82,6 +101,18 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             setIsClient(true)
         }, [])
 
+        // Find the selected item to get its icon
+        const selectedItem = React.useMemo(() => {
+            const currentValue = value || defaultValue
+            if (!currentValue) return null
+
+            for (const group of groups) {
+                const item = group.items.find((i) => i.value === currentValue)
+                if (item) return item
+            }
+            return null
+        }, [value, defaultValue, groups])
+
         // During SSR, render a simple button placeholder that matches the Select trigger
         if (!isClient) {
             return (
@@ -116,7 +147,14 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                         aria-label={ariaLabel}
                         data-scheme={dataScheme}
                     >
-                        <RadixSelect.Value placeholder={placeholder} />
+                        <RadixSelect.Value placeholder={placeholder}>
+                            {selectedItem && (
+                                <span className="flex space-x-1 items-center">
+                                    <Icon icon={selectedItem.icon} color={selectedItem.color} className="size-4" />
+                                    <span>{selectedItem.label}</span>
+                                </span>
+                            )}
+                        </RadixSelect.Value>
                         <RadixSelect.Icon className="text-muted">
                             <IconChevronDown className="size-6" />
                         </RadixSelect.Icon>
@@ -133,7 +171,10 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                 {groups.map((group, groupIndex) => (
                                     <React.Fragment key={`group-${groupIndex}-${group.label}`}>
                                         <RadixSelect.Group>
-                                            <RadixSelect.Label className="px-8 text-sm leading-[25px] text-muted" data-scheme="primary">
+                                            <RadixSelect.Label
+                                                className="px-8 text-sm leading-[25px] text-muted"
+                                                data-scheme="primary"
+                                            >
                                                 {group.label}
                                             </RadixSelect.Label>
                                             {group.items.map((item, itemIndex) => (
@@ -144,7 +185,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                                     className="text-primary dark:text-primary-dark"
                                                 >
                                                     <span className="flex space-x-1 items-center">
-                                                        <Icon name={item.icon} color={item.color} className="size-4" />
+                                                        <Icon icon={item.icon} color={item.color} className="size-4" />
                                                         <span>{item.label}</span>
                                                     </span>
                                                 </SelectItem>

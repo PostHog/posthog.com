@@ -13,6 +13,7 @@ import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
+import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 
 // Partner configurations
 const partnerConfigs = [
@@ -41,6 +42,7 @@ const partnerConfigs = [
 
 export default function Startups(): JSX.Element {
     const location = useLocation()
+    const selectOptions = useMenuSelectOptions()
 
     // Extract partner slug from pathname
     const pathSegments = location.pathname.split('/').filter(Boolean)
@@ -62,6 +64,8 @@ export default function Startups(): JSX.Element {
                 template="generic"
                 slug="startups"
                 title="PostHog for startups"
+                selectOptions={selectOptions}
+                selectedCategory="startups"
                 // options below only needed to override matching the slug
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"

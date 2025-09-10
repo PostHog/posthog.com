@@ -8,12 +8,13 @@ import { explorerGridColumns } from '../../constants'
 import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
-import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
+import { SparksJoyItems, useMenuSelectOptions } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
 
 export default function SparkJoy(): JSX.Element {
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
+    const selectOptions = useMenuSelectOptions()
 
     return (
         <>
@@ -26,6 +27,8 @@ export default function SparkJoy(): JSX.Element {
                 template="generic"
                 slug="spark-joy"
                 // title="Sparks joy"
+                selectOptions={selectOptions}
+                selectedCategory="sparks-joy"
                 rightActionButtons={
                     <ToggleGroup
                         title="Layout"
