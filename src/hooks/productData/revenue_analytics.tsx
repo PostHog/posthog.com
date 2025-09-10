@@ -20,8 +20,7 @@ export const revenueAnalytics = {
         title: 'Track revenue alongside product metrics',
         description: (
             <>
-                Revenue attribution, deferred recognition for subscriptions, and multi-currency support all in one
-                place.{' '}
+                Deferred recognition for subscriptions and multi-currency support all in one place.{' '}
                 <span className="text-2xl">
                     <br />
                     Supports Stripe and events-based tracking.
