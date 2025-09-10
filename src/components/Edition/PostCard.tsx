@@ -38,7 +38,7 @@ export default function PostCard({ title, featuredImage, date, excerpt, slug, fe
                 to={slug}
             >
                 <div className="w-full aspect-[600/315] rounded-md overflow-hidden bg-accent">
-                    <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
+                    <img className="w-full h-full object-cover" src={imageURL || '/images/og/default.png'} />
                 </div>
                 <p className="m-0 text-sm mt-3 opacity-75">{postDate}</p>
                 <h3 className="my-1 text-xl leading-tight">{title}</h3>

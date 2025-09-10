@@ -1196,7 +1196,7 @@ export default function Home() {
                 title="PostHog is for product engineers"
                 updateWindowTitle={false}
                 description="Home"
-                image="/images/home.png"
+                image="/images/og/default.png"
             />
             <MDXEditor
                 hideTitle={true}

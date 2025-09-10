@@ -59,7 +59,7 @@ module.exports = {
         description:
             'The single platform for engineers to analyze, test, observe, and deploy new features. Product analytics, session replay, feature flags, experiments, CDP, and more.',
         url: 'https://posthog.com', // No trailing slash allowed!
-        image: '/banner.png', // Path to your image you placed in the 'static' folder
+        image: '/images/og/default.png', // Path to your image you placed in the 'static' folder
         twitterUsername: '@PostHog',
         siteUrl: 'https://posthog.com', // required by gatsby-plugin-sitemap
     },
