@@ -76,7 +76,7 @@ Talking about long-term career plans every now and again is also important but e
 
 ### Performance
 
-We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a manager, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but the onus is on you to raise concerns early.
+We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a team lead, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but you should proactively give feedback and raise concerns with your exec.
 
 - We expect you to regularly give proactive, actionable feedback to everyone on your team - it’s the most direct way to help troubleshoot issues upstream. This is particularly important at the 30-day and 80-day check-ins after a new starter joins.
 - We expect you to actively raise performance issues with your exec.
