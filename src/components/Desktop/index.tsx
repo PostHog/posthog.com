@@ -16,6 +16,7 @@ import { motion } from 'framer-motion'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
+import ProgressBar from 'components/ProgressBar'
 
 interface Product {
     name: string
@@ -496,6 +497,11 @@ export default function Desktop() {
                         recycle={false}
                         numberOfPieces={1000}
                     />
+                </div>
+            )}
+            {!rendered && (
+                <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+                    <ProgressBar title="desktop" />
                 </div>
             )}
         </>
