@@ -15,6 +15,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       slug: String
       contributors: [Contributors]
       appConfig: [AppConfig]
+      commits: [Commit]
+    }
+    type Commit {
+      author: GitHubUser
+      date: Date
+      message: String
+      url: String
+    }
+    type GitHubUser {
+      avatar_url: String
+      html_url: String
+      login: String
     }
     type AshbyJobPostingTableOfContents {
       value: String,
@@ -290,6 +302,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         is_plan_default: Boolean
         unit: String
     }
+    type SqueakTeam implements Node {
+        tagline: String
+        description: String
+        createdAt: Date
+    }
   `)
     createTypes([
         schema.buildObjectType({
@@ -322,6 +339,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             type ShopifyMetafield implements Node {
               key: String!
               value: String!
+              namespace: String!
             }
             type ShopifyProductVariant implements Node {
               availableForSale: Boolean!
@@ -361,6 +379,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               height: Int
               originalSrc: String
             }
+            type ShopifyProductCategory {
+              id: String!
+              name: String!
+              level: Int!
+              parentId: String
+            }
             type ShopifyProduct implements Node {
               descriptionHtml: String
               description: String!
@@ -379,6 +403,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               totalInventory: Int!
               featuredImage: ShopifyImage @proxy(from: "featuredMedia.preview.image")
               imageProducts: [ShopifyProduct]
+              createdAt: Date
+              category: ShopifyProductCategory
             }
           `
     )

@@ -4,22 +4,22 @@ import { Link } from 'gatsby'
 
 const IdealEmployeeProfile: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto px-4 py-8 grid md:grid-cols-2 md:gap-8">
+        <section id="iep" className="@container grid @3xl:grid-cols-2 @3xl:gap-8 not-prose">
             <div className="">
-                <p className="opacity-60 mb-2">Who we look for</p>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-2">
+                <p className="opacity-60 mb-0">Who we look for</p>
+                <h2 className="text-3xl font-bold my-2">
                     Our IEP (ideal <em>employee</em> profile)
                 </h2>
                 <p className="mb-2">
                     <strong>TL;DR:</strong> We don't hire middle management.
                 </p>
-                <p className="text-[15px] max-w-md my-4 py-4 border-y md:border-b-0 md:pb-0 md:mb-0 border-light dark:border-dark">
+                <p className="text-[15px] max-w-md my-4 py-4 border-y @3xl:border-b-0 @3xl:pb-0 @3xl:mb-0 border-primary">
                     <strong>Fun fact:</strong> We have an internal Slack channel called{' '}
                     <span className="whitespace-nowrap">#do-more-weird</span> where we discuss crazy ideas that most
                     companies save for April Fool's Day.
                 </p>
             </div>
-            <div className="space-y-8 md:space-y-0">
+            <div className="space-y-8 @3xl:space-y-0 @3xl:pt-8">
                 <div>
                     <h3 className="text-lg mb-1">Weirdos</h3>
                     <p className="mb-3">
@@ -28,10 +28,10 @@ const IdealEmployeeProfile: React.FC = () => {
                         career.
                     </p>
 
-                    <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark mb-6">
-                        <TeamMember name="Joe Martin" photo className="bg-white/50 dark:bg-dark/50" /> worked as a
-                        clown, a morgue cleaner, and a chainsaw salesman before joining the Marketing team. He now leads
-                        the <Link href="/teams/brand-vibes">Brand & Vibes Team</Link>.
+                    <p className="text-[15px] border-l-3 border-primary pl-4 mb-6">
+                        <TeamMember name="Joe Martin" photo /> worked as a clown, a morgue cleaner, and a chainsaw
+                        salesman before joining the Marketing team. He now leads the{' '}
+                        <Link href="/teams/brand-vibes">Brand & Vibes Team</Link>.
                     </p>
                 </div>
 
@@ -42,9 +42,9 @@ const IdealEmployeeProfile: React.FC = () => {
                         context. We're not a fit if management responsibility is what motivates you.
                     </p>
 
-                    <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark mb-6">
-                        <TeamMember name="Thomas Obermüller" photo className="bg-white/50 dark:bg-dark/50" /> was CTO
-                        for his previous company of 120 people before joining PostHog as a software engineer on the{' '}
+                    <p className="text-[15px] border-l-3 border-primary pl-4 mb-6">
+                        <TeamMember name="Thomas Obermüller" photo /> was CTO for his previous company of 120 people
+                        before joining PostHog as a software engineer on the{' '}
                         <Link href="/teams/product-analytics">Product Analytics team</Link>.
                     </p>
                 </div>
@@ -56,10 +56,9 @@ const IdealEmployeeProfile: React.FC = () => {
                         of work done fast. We're not a fit if you want process.
                     </p>
 
-                    <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark">
-                        <TeamMember name="Cameron DeLeone" photo className="bg-white/50 dark:bg-dark/50" /> worked for
-                        an $11 billion startup, then was Vice President of a poultry farm before joining PostHog as a
-                        CSM.
+                    <p className="text-[15px] border-l-3 border-primary pl-4">
+                        <TeamMember name="Cameron DeLeone" photo /> worked for an $11 billion startup, then was Vice
+                        President of a poultry farm before joining PostHog as a CSM.
                     </p>
                 </div>
             </div>

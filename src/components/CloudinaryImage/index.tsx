@@ -19,15 +19,20 @@ export default function CloudinaryImage({
     className = '',
     imgClassName = '',
     placeholder,
+    objectFit,
+    objectPosition,
     ...other
 }: {
     src: `https://res.cloudinary.com/${string}`
     width?: number
     className?: string
     imgClassName?: string
+    objectFit?: 'cover' | 'contain'
+    objectPosition?: 'top' | 'bottom' | 'left' | 'right' | 'center'
 } & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
-    return cloudinaryPublicId ? (
+    const hasCommas = src?.includes(',')
+    return cloudinaryPublicId && !hasCommas ? (
         <div className={`inline-block ${className}`}>
             <Image
                 {...other}

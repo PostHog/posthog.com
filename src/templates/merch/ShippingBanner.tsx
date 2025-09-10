@@ -3,7 +3,7 @@ import { IconWarning } from '@posthog/icons'
 
 export default function ShippingBanner(): React.ReactElement {
     return (
-        <div className="bg-yellow/25 border border-yellow rounded p-4 mb-4 flex gap-4">
+        <div className="not-prose bg-yellow/25 border-b border-yellow rounded p-4 flex gap-4">
             <div className="shrink w-10">
                 <IconWarning className="size-10" />
             </div>

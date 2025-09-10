@@ -171,7 +171,7 @@ export default function Timeline() {
                         onClick={() => listRef?.current?.scrollBy({ left: -50, behavior: 'smooth' })}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                     >
-                        <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark rotate-90" />
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border-primary rotate-90" />
                     </button>
                 </div>
                 <div
@@ -190,7 +190,7 @@ export default function Timeline() {
                         return (
                             <div key={year} className="w-[80vw] md:w-[90vw] max-w-5xl shrink-0 mb-4 snap-center">
                                 <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
-                                <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark sm:h-auto h-96 overflow-auto snap-x">
+                                <div className="p-4 bg-light dark:bg-dark border border-primary sm:h-auto h-96 overflow-auto snap-x">
                                     <ul role="list" className="py-1 px-0 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                                         {months.map((month) => {
                                             const items = pastMonths[month]
@@ -198,10 +198,10 @@ export default function Timeline() {
                                             return (
                                                 <li
                                                     key={month}
-                                                    className="timeline-entry bg-accent dark:bg-accent-dark list-none px-4 pb-4 text-center min-h-[6rem] md:min-h-[8rem] lg:min-h-[10rem]"
+                                                    className="timeline-entry bg-accent list-none px-4 pb-4 text-center min-h-[6rem] md:min-h-[8rem] lg:min-h-[10rem]"
                                                 >
                                                     <p
-                                                        className={`text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2`}
+                                                        className={`text-lg font-bold border-b border-primary capitalize py-2 mb-2`}
                                                     >
                                                         {month}
                                                     </p>
@@ -213,9 +213,9 @@ export default function Timeline() {
                                             return (
                                                 <li
                                                     key={quarter}
-                                                    className="timeline-entry list-none bg-accent dark:bg-accent-dark px-4 pb-4"
+                                                    className="timeline-entry list-none bg-accent px-4 pb-4"
                                                 >
-                                                    <p className="text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2 text-center">
+                                                    <p className="text-lg font-bold border-b border-primary capitalize py-2 mb-2 text-center">
                                                         Q{quarter}
                                                     </p>
                                                     <ul className="list-none m-0 p-0">
@@ -245,7 +245,7 @@ export default function Timeline() {
                         onClick={() => listRef?.current?.scrollBy({ left: 50, behavior: 'smooth' })}
                         className="md:block hidden relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                     >
-                        <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark -rotate-90" />
+                        <IconChevronDown className="w-12 h-12 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border -rotate-90" />
                     </button>
                 </div>
             </div>

@@ -478,7 +478,7 @@ export const ProductFeatureFlags = () => {
                     </ul>
                 </section>
 
-                <section className="bg-accent dark:bg-accent-dark">
+                <section className="bg-accent">
                     <Marquee product={product.capitalized}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
@@ -498,7 +498,7 @@ export const ProductFeatureFlags = () => {
                             <br className="hidden lg:block" />
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
-                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
+                        <div className="bg-accent border border-primary rounded-md px-8 py-4 mb-2 text-sm">
                             <strong>Note:</strong> Feature flags and Experiments are currently packaged together and
                             share volume limits.
                         </div>

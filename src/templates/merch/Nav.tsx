@@ -1,12 +1,8 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
-import { useControllableValue } from 'ahooks'
-import { Drawer } from 'components/Drawer'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
 import React, { Fragment, useState } from 'react'
-import { Cart } from './Cart'
-import { useCartStore } from './store'
 import type { ShopifyCollection } from './types'
 
 type NavItem = {
@@ -18,18 +14,10 @@ type NavProps = {
     className?: string
     items?: NavItem[]
     currentCollectionHandle?: string
-    setCartIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
-    cartIsOpen?: boolean
 }
 
 export function Nav(props: NavProps): React.ReactElement {
-    const { currentCollectionHandle, items = [], ...rest } = props
-    const count = useCartStore((state) => state.count)
-    const [cartIsOpen, setCartIsOpen] = useControllableValue<boolean>(rest, {
-        defaultValue: false,
-        valuePropName: 'cartIsOpen',
-        trigger: 'setCartIsOpen',
-    })
+    const { currentCollectionHandle, items = [] } = props
 
     // Fall back to the default page if there's a problem with items
     const defaultItem: NavItem = { url: '', title: 'All products', handle: '' }
@@ -44,7 +32,7 @@ export function Nav(props: NavProps): React.ReactElement {
 
     return (
         <>
-            <div className="mb-6 px-2 sticky top-[57px] md:top-[-1px] md:reasonable:top-[107px] z-[50] bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
+            <div className="px-2 z-[50] bg-accent border-b border-primary">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-3 py-1 min-h-[40px]">
                     {/**
                      * If you're on a product page
@@ -63,7 +51,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                             className="group relative inline-flex w-full cursor-pointer rounded-l py-1 pl-2 pr-1 
                             hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99] 
                             [data-headlessui-state='open']:border [data-headlessui-state='open']:border-b-3
-                            rounded-sm text-left border border-transparent border-b-3 hover:border-light dark:hover:border-dark focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                            rounded-sm text-left border border-transparent border-b-3 hover:border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
                                         >
                                             <span className="block truncate font-semibold">
                                                 {currentCollection.title}
@@ -86,8 +74,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                                     <Listbox.Option
                                                         key={i}
                                                         className={({ active }) =>
-                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark ${
-                                                                active ? 'font-bold' : 'opacity-75'
+                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent ${active ? 'font-bold' : 'opacity-75'
                                                             }`
                                                         }
                                                         value={collection}
@@ -99,9 +86,8 @@ export function Nav(props: NavProps): React.ReactElement {
                                                         }) => (
                                                             <>
                                                                 <span
-                                                                    className={`block truncate ${
-                                                                        currentCollection ? 'font-bold' : 'font-normal'
-                                                                    }`}
+                                                                    className={`block truncate ${currentCollection ? 'font-bold' : 'font-normal'
+                                                                        }`}
                                                                 >
                                                                     {collection.title}
                                                                 </span>
@@ -126,31 +112,8 @@ export function Nav(props: NavProps): React.ReactElement {
                     ) : (
                         <span className="text-sm font-medium opacity-75">Merch store</span>
                     )}
-                    <div className="ml-auto" onClick={() => setCartIsOpen(true)}>
-                        <div className="group flex px-2 py-0.5 items-center gap-1 cursor-pointer relative border border-transparent hover:border-light dark:hover:border-dark hover:border-b-3 rounded-sm hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99]">
-                            {/* switch to this we merge master and update the icon package: <IconCart className="h-5 w-5" aria-hidden="true" /> */}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                className="w-5 h-5 fill-current"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M1 2.75A.75.75 0 0 1 1.75 2h.93a1.75 1.75 0 0 1 1.716 1.407L4.715 5h15.553a1.75 1.75 0 0 1 1.712 2.11l-1.579 7.5A1.75 1.75 0 0 1 18.69 16H6.819a1.75 1.75 0 0 1-1.715-1.407L2.925 3.701A.25.25 0 0 0 2.68 3.5h-.93A.75.75 0 0 1 1 2.75ZM5.015 6.5l1.56 7.799a.25.25 0 0 0 .245.201h11.869a.25.25 0 0 0 .244-.198l1.58-7.5a.25.25 0 0 0-.245-.302H5.015ZM8 18.5a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1ZM6 19a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm11-.5a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1Zm-2 .5a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                            <span className="font-semibold text-[15px] opacity-75 group-hover:opacity-100">
-                                {count || 0}
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-            <Drawer isOpen={cartIsOpen} onClose={() => setCartIsOpen(false)}>
-                <Cart className="h-full overflow-y-scroll bg-accent dark:bg-accent-dark" />
-            </Drawer>
         </>
     )
 }
