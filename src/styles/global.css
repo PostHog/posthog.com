@@ -2519,3 +2519,9 @@ body.dark .max-ai-body {
         display: none;
     }
 }
+
+.role-search + .scrollarea-fade {
+    @media (max-width: 767px) {
+        display: none;
+    }
+}

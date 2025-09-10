@@ -1195,7 +1195,7 @@ export default function Home() {
             <SEO
                 title="PostHog is for product engineers"
                 updateWindowTitle={false}
-                description="Home"
+                description="We’re building every tool for product engineers to build successful products."
                 image="/images/og/default.png"
             />
             <MDXEditor
