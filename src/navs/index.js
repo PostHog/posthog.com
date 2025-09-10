@@ -1486,6 +1486,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Getting people to talk to you',
+                url: '/handbook/growth/sales/getting-people-to-talk-to-you',
+            },
+            {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
             },
