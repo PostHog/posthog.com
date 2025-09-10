@@ -217,7 +217,7 @@ export default function Explorer({
                                 )}
                                 <div
                                     ref={searchContainerRef}
-                                    className={`${getProseClasses()} max - w - none h - full ${
+                                    className={`${getProseClasses()} max-w-none h-full ${
                                         padding ? 'relative @md:p-4' : ''
                                     } `}
                                 >
