@@ -35,7 +35,7 @@ import { usePosts } from 'components/Edition/hooks/usePosts'
 import { TreeMenu } from 'components/TreeMenu'
 import { postsMenu as menu } from '../navs/posts'
 import MenuBar from 'components/RadixUI/MenuBar'
-const A = (props) => <Link {...props} />
+const A = (props) => <Link {...props} state={{ newWindow: true }} />
 
 export const Intro = ({
     featuredImage,
