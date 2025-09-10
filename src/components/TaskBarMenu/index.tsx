@@ -39,9 +39,9 @@ export default function TaskBarMenu() {
         setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
+        posthogInstance,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
-    const [posthogInstance, setPosthogInstance] = useState<string>()
     const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -67,18 +67,6 @@ export default function TaskBarMenu() {
             taskbar.addEventListener('windowMinimized', handleWindowMinimized)
             return () => {
                 taskbar.removeEventListener('windowMinimized', handleWindowMinimized)
-            }
-        }
-    }, [])
-
-    useEffect(() => {
-        if (window) {
-            const instanceCookie = document.cookie
-                .split('; ')
-                ?.filter((row) => row.startsWith('ph_current_instance='))
-                ?.map((c) => c.split('=')?.[1])?.[0]
-            if (instanceCookie) {
-                setPosthogInstance(instanceCookie)
             }
         }
     }, [])
