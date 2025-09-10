@@ -111,7 +111,7 @@ export const TeamInfoDisplay = ({
             (displayTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza)
                 .length /
                 teamLength) *
-            100
+                100
         )
 
     if (isCompact) {
