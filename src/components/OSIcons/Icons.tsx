@@ -73,6 +73,12 @@ export const IconBrush = (props: IconProps) => (
     </BaseIcon>
 )
 
+export const IconController = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
+        <path d="M20 5.25A2.75 2.75 0 0 1 22.75 8v8A2.75 2.75 0 0 1 20 18.75H4A2.75 2.75 0 0 1 1.25 16V8A2.75 2.75 0 0 1 4 5.25h16ZM4 6.75c-.69 0-1.25.56-1.25 1.25v8c0 .69.56 1.25 1.25 1.25h16c.69 0 1.25-.56 1.25-1.25V8c0-.69-.56-1.25-1.25-1.25H4ZM8 9a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0v-1.5h-1.5a.75.75 0 0 1 0-1.5h1.5v-1.5A.75.75 0 0 1 8 9Zm7 3.75a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm3-3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z" />
+    </BaseIcon>
+)
+
 export const IconCouch = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
         <path d="M5 11.75a.25.25 0 0 0-.25-.25h-2a.25.25 0 0 0-.25.25v4.5c0 .138.112.25.25.25h18.5a.25.25 0 0 0 .25-.25v-4.5a.25.25 0 0 0-.25-.25h-2a.25.25 0 0 0-.25.25v1.571a.75.75 0 0 1-.75.75H5.75a.75.75 0 0 1-.75-.75V11.75Zm18 4.5A1.75 1.75 0 0 1 21.25 18H2.75A1.75 1.75 0 0 1 1 16.25v-4.5c0-.966.784-1.75 1.75-1.75h2c.966 0 1.75.784 1.75 1.75v.821h11v-.821c0-.966.784-1.75 1.75-1.75h2c.966 0 1.75.784 1.75 1.75v4.5Z" />
@@ -91,6 +97,17 @@ export const IconDemoThumb = (props: IconProps) => (
         <path
             d="M20.3808 15.899C19.409 15.31 18.1667 16.0097 18.1667 17.1462V30.8539C18.1667 31.9903 19.409 32.69 20.3808 32.101L31.6897 25.2472C32.6263 24.6795 32.6263 23.3205 31.6897 22.7528L20.3808 15.899Z"
             fill="white"
+        />
+    </BaseIcon>
+)
+
+export const IconSparksJoy = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 128 128" width="64" height="64" {...props}>
+        <image
+            width="128"
+            height="128"
+            y="0"
+            href="https://res.cloudinary.com/dmukukwp6/image/upload/sparksjoy_84e324b2f2.png"
         />
     </BaseIcon>
 )

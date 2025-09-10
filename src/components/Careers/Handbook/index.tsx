@@ -7,7 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const CompanyHandbook: React.FC = () => {
     return (
-        <section id="handbook" className="@container px-8 @3xl:px-8 mb-12">
+        <section id="handbook" className="@container mb-12">
             <div className="relative mb-12">
                 <h2>Get to know us in our company handbook</h2>
 
@@ -29,7 +29,10 @@ const CompanyHandbook: React.FC = () => {
                 <ul className="mb-4 pl-4">
                     <li>Our revenue is over $10 million a year</li>
                     <li>
-                        We're <Link href="/handbook/finance" state={{ newWindow: true }}>default alive</Link>
+                        We're{' '}
+                        <Link href="/handbook/finance" state={{ newWindow: true }}>
+                            default alive
+                        </Link>
                     </li>
                     <li>If you join us, you will be expected to take a stance on if pineapple belongs on pizza</li>
                 </ul>

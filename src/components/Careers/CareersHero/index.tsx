@@ -158,9 +158,7 @@ export const CareersHero = () => {
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
 
     return (
-        <section
-            className="@container not-prose relative rounded aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]"
-        >
+        <section className="@container not-prose relative rounded aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]">
             {/* Background container for positioned graphics */}
             {/* Example of positioned graphics - replace with your actual graphics */}
             {/* Left section graphics */}
@@ -333,7 +331,7 @@ export const CareersHero = () => {
                 {/* Text overlay - keeping this as is */}
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
                     <h1 className="text-2xl lg:text-3xl font-bold mb-1 @3xl:mb-2">Who's hiring?</h1>
-                    <p className="text-base mb-4">
+                    <p className="text-base mb-4 text-center">
                         Our small teams are looking to add{' '}
                         <strong className="whitespace-nowrap">{totalPositions} team members</strong>.
                     </p>

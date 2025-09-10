@@ -123,7 +123,7 @@ const PostQuote: React.FC<PostQuoteProps> = ({
                         </div>
                     </div>
                 </aside>
-                <div className="flex-1 [&_p]:text-lg [&_p]:mb-3 [&_p:last-child]:mb-0 md:columns-2 gap-8">
+                <div className="flex-1 [&_p]:first:mt-0 [&_p]:text-base [&_p]:mb-3 [&_p:last-child]:mb-0 md:columns-2 gap-8">
                     {quote.split('\n\n').map((paragraph, index) => (
                         <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
                     ))}

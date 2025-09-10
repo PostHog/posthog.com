@@ -16,7 +16,18 @@ import {
     newestProducts,
 } from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
-import { IconXNotTwitter, IconSubstack, IconYouTube, IconLinkedIn, IconGithub, IconInstagram } from 'components/OSIcons'
+import {
+    IconXNotTwitter,
+    IconSubstack,
+    IconYouTube,
+    IconLinkedIn,
+    IconGithub,
+    IconInstagram,
+    IconController,
+    IconDictator,
+    IconSparksJoy,
+} from 'components/OSIcons'
+import { AppIcon } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
@@ -345,6 +356,22 @@ export function useMenuData(): MenuType[] {
                     label: 'Social validation for enterprise',
                     link: '/enterprise',
                 },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Learn more',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Watch a demo',
+                    link: '/demo',
+                },
+                {
+                    type: 'item',
+                    label: 'Talk to a human',
+                    link: '/talk-to-a-human',
+                },
             ],
         },
         {
@@ -393,6 +420,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'About',
                     link: '/about',
+                },
+                {
+                    type: 'item',
+                    label: 'customers.mdx',
+                    link: '/customers',
                 },
                 {
                     type: 'item',
@@ -518,8 +550,45 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'submenu',
-                    label: 'Sexy legal stuff',
-                    icon: <Icons.IconTie className="size-4 text-orange" />,
+                    label: 'Things that spark joy',
+                    icon: <IconSparksJoy className="size-4" />,
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'Browse all',
+                            link: '/sparks-joy',
+                        },
+                        {
+                            type: 'separator',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Games',
+                            disabled: true,
+                        },
+                        // Games section
+                        ...SparksJoyItems.games.map((item) => ({
+                            type: 'item' as const,
+                            label: item.label,
+                            link: item.link,
+                        })),
+                        {
+                            type: 'item',
+                            label: 'Sorta like games',
+                            disabled: true,
+                        },
+                        // Not games section
+                        ...SparksJoyItems.notGames.map((item) => ({
+                            type: 'item' as const,
+                            label: item.label,
+                            link: item.link,
+                        })),
+                    ],
+                },
+                {
+                    type: 'submenu',
+                    label: 'Sexy legal documents',
+                    icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
                     items: [
                         {
                             type: 'item',
@@ -549,28 +618,6 @@ export function useMenuData(): MenuType[] {
                     ],
                 },
                 {
-                    type: 'submenu',
-                    label: 'Random pages',
-                    icon: <Icons.IconEllipsis className="size-4 text-orange" />,
-                    items: [
-                        {
-                            type: 'item',
-                            label: 'Enterprise flair',
-                            link: '/enterprise',
-                        },
-                        {
-                            type: 'item',
-                            label: 'Post-It note training',
-                            link: '/academy',
-                        },
-                        {
-                            type: 'item',
-                            label: '404 page',
-                            link: '/404',
-                        },
-                    ],
-                },
-                {
                     type: 'separator',
                 },
                 {
@@ -585,7 +632,7 @@ export function useMenuData(): MenuType[] {
                     label: 'System status',
                     link: 'https://status.posthog.com',
                     external: true,
-                    icon: <Icons.IconCheckCircle className="size-4 text-green" />,
+                    icon: <Icons.IconPulse className="size-4 text-red" />,
                 },
             ],
         },
@@ -705,4 +752,135 @@ export const DocsItemsEnd = [
         link: '/tracks',
         icon: <Icons.IconGraduationCap className="size-4 text-black" />,
     },
+    {
+        type: 'item' as const,
+        label: 'Forums',
+        link: '/questions',
+        icon: <Icons.IconMessage className="size-4 text-green" />,
+    },
 ]
+
+import type { AppIconName } from 'components/OSIcons/AppIcon'
+
+// Export Fun stuff items for use in sparks-joy page and menu
+export const SparksJoyItems = {
+    games: [
+        {
+            label: 'Hedgehog mode',
+            link: '/sparks-joy/hedgehog-mode',
+            iconName: 'hedgehog_mode' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogWars',
+            link: '/sparks-joy/hogwars',
+            iconName: 'hogwars' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'Dictator or tech bro?',
+            link: '/sparks-joy/dictator-or-tech-bro',
+            iconName: null,
+            customIcon: <IconDictator />,
+        },
+    ],
+    notGames: [
+        {
+            label: 'Photobooth',
+            link: '/photobooth',
+            iconName: 'photobooth' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogPaint',
+            link: '/paint',
+            iconName: 'hogpaint' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'Coloring book.pdf',
+            link: '/coloring-book.pdf',
+            iconName: 'pdf' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'Post-It note training',
+            link: '/academy',
+            iconName: 'postIt' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: '404 page',
+            link: '/404',
+            iconName: 'blueScreen' as AppIconName,
+            customIcon: null,
+        },
+    ],
+}
+
+// Helper hook to extract menu data for AddressBar select options
+export function useMenuSelectOptions() {
+    // Build the select groups
+    const selectGroups = [
+        {
+            label: 'Product OS',
+            items: [
+                {
+                    value: 'products',
+                    label: 'Product OS',
+                    icon: <Icons.IconApps className="size-4 text-red" />,
+                },
+            ],
+        },
+        {
+            label: 'Pricing',
+            items: [
+                { value: 'pricing', label: 'Plans & usage-based pricing' },
+                { value: 'pricing#calculator', label: 'Pricing calculator' },
+                { value: 'pricing#addons', label: 'Add-ons' },
+                { value: 'founder-stack', label: 'Founder stack' },
+                { value: 'startups', label: 'Startups' },
+            ],
+        },
+        {
+            label: 'Docs',
+            items: [{ value: 'docs', label: 'Documentation' }],
+        },
+        {
+            label: 'Library',
+            items: [
+                { value: 'blog', label: 'Blog' },
+                { value: 'product-engineers', label: 'Product engineers hub' },
+                { value: 'founders', label: 'Founders hub' },
+            ],
+        },
+        {
+            label: 'Company',
+            items: [
+                { value: 'about', label: 'About' },
+                { value: 'customers', label: 'Customers' },
+                { value: 'handbook', label: 'Handbook' },
+                { value: 'roadmap', label: 'Roadmap' },
+                { value: 'changelog', label: 'Changelog' },
+                { value: 'people', label: 'People' },
+                { value: 'teams', label: 'Teams' },
+                { value: 'careers', label: 'Careers' },
+            ],
+        },
+        {
+            label: 'More',
+            items: [
+                { value: 'sparks-joy', label: 'Things that spark joy', icon: <IconSparksJoy className="size-4" /> },
+                { value: 'merch', label: 'Merch' },
+                { value: 'deskhog', label: 'DeskHog' },
+                {
+                    value: 'trash',
+                    label: 'Trash',
+                    icon: <Icons.IconTrash className="size-4 text-gray dark:text-white" />,
+                },
+            ],
+        },
+    ]
+
+    return selectGroups
+}

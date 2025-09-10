@@ -9,14 +9,10 @@ export default function Toasts(): JSX.Element {
     return (
         <RadixToast.Provider swipeDirection="right">
             {toasts.map((toast: any) => (
-                <ToastItem 
-                    key={toast.createdAt} 
-                    {...toast} 
-                    onClose={() => removeToast(toast.createdAt)}
-                />
+                <ToastItem key={toast.createdAt} {...toast} onClose={() => removeToast(toast.createdAt)} />
             ))}
             <RadixToast.Viewport
-                className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 w-[390px] max-w-[100vw] m-0 list-none outline-none"
+                className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 2xl:w-[390px] max-w-[calc(100vw_-_2rem)] m-0 list-none outline-none"
                 data-radix-toast-viewport
             />
         </RadixToast.Provider>

@@ -38,6 +38,7 @@ interface ExplorerProps {
     doubleClickToOpen?: boolean
     rightActionButtons?: React.ReactNode
     onSearch?: (query: string) => void
+    viewportClasses?: string
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -90,6 +91,7 @@ export default function Explorer({
     doubleClickToOpen = false,
     rightActionButtons,
     onSearch,
+    viewportClasses = '',
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -122,10 +124,16 @@ export default function Explorer({
         return props
     }
 
-    const ContentWrapper = useMemo(
-        () => (appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment),
-        [appWindow]
-    )
+    const ContentWrapper = useMemo(() => {
+        const WrapperComponent = ({ children: wrapperChildren }: { children: React.ReactNode }) => {
+            if (appWindow?.size?.width && appWindow.size.width <= 768) {
+                return <ScrollArea viewportClasses={`[&>div]:h-full ${viewportClasses}`}>{wrapperChildren}</ScrollArea>
+            }
+            return <>{wrapperChildren}</>
+        }
+        WrapperComponent.displayName = 'ContentWrapper'
+        return WrapperComponent
+    }, [appWindow, viewportClasses])
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
@@ -148,9 +156,7 @@ export default function Explorer({
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
-                        fullScreen ? 'border-t border-primary' : ''
-                    }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? ' ' : 'h-full'}`}
                 >
                     {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
@@ -213,7 +219,7 @@ export default function Explorer({
                                     ref={searchContainerRef}
                                     className={`${getProseClasses()} max-w-none h-full ${
                                         padding ? 'relative @md:p-4' : ''
-                                    }`}
+                                    } `}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}

@@ -145,6 +145,28 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [minimizing, setMinimizing] = useState(false)
     const [animating, setAnimating] = useState(true)
 
+    const inView = useMemo(() => {
+        const windowsAbove = windows.filter(
+            (window) => window !== item && window.zIndex > item.zIndex && !window.minimized
+        )
+
+        let coveredArea = 0
+        const currentArea = size.width * size.height
+
+        for (const windowAbove of windowsAbove) {
+            const left = Math.max(position.x, windowAbove.position.x)
+            const right = Math.min(position.x + size.width, windowAbove.position.x + windowAbove.size.width)
+            const top = Math.max(position.y, windowAbove.position.y)
+            const bottom = Math.min(position.y + size.height, windowAbove.position.y + windowAbove.size.height)
+
+            if (left < right && top < bottom) {
+                coveredArea += (right - left) * (bottom - top)
+            }
+        }
+
+        return coveredArea / currentArea < 0.8
+    }, [windows, item, position, size])
+
     const parent =
         (appMenu as Menu).find(({ children, url }) => {
             const currentURL = item?.path
@@ -753,28 +775,31 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </div>
                                 </div>
                             )}
-                            <div
-                                ref={contentRef}
-                                className={`size-full flex-grow ${
-                                    chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
-                                }`}
-                            >
-                                {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
-                                    <Router
-                                        minimizing={minimizing}
-                                        onExit={() => {
-                                            if (minimizing) {
-                                                setMinimizing(false)
-                                                if (siteSettings.experience === 'posthog') {
-                                                    setAnimating(true)
+                            <div className={chrome ? 'bg-light dark:bg-dark size-full overflow-hidden' : ''}>
+                                <div
+                                    ref={contentRef}
+                                    className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
+                                    style={{
+                                        display: siteSettings.performanceBoost ? (inView ? 'block' : 'none') : 'block',
+                                    }}
+                                >
+                                    {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
+                                        <Router
+                                            minimizing={minimizing}
+                                            onExit={() => {
+                                                if (minimizing) {
+                                                    setMinimizing(false)
+                                                    if (siteSettings.experience === 'posthog') {
+                                                        setAnimating(true)
+                                                    }
                                                 }
-                                            }
-                                        }}
-                                        {...item.props}
-                                    >
-                                        {item.element}
-                                    </Router>
-                                )}
+                                            }}
+                                            {...item.props}
+                                        >
+                                            {item.element}
+                                        </Router>
+                                    )}
+                                </div>
                             </div>
                             {!item.fixedSize && !item.minimal && (
                                 <motion.div

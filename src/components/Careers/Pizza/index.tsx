@@ -292,13 +292,13 @@ export const Pizza = () => {
         }
     })
 
-        // Sort teams within each group by percentage (highest to lowest)
-        ; (Object.keys(groupedTeams) as Array<keyof typeof groupedTeams>).forEach((key) => {
-            groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
-        })
+    // Sort teams within each group by percentage (highest to lowest)
+    ;(Object.keys(groupedTeams) as Array<keyof typeof groupedTeams>).forEach((key) => {
+        groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
+    })
 
     return (
-        <section id="pizza" className="@container px-8 @3xl:px-8">
+        <section id="pizza" className="@container">
             <div className="text-center">
                 <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col @4xl:flex-row leading-none">
                     <StickerPineapple className="inline-block size-10" />
@@ -513,10 +513,11 @@ export const Pizza = () => {
                     <button
                         key={option}
                         onClick={() => setFilter(option)}
-                        className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${filter === option
-                            ? 'border-red dark:border-yellow font-bold'
-                            : 'border-transparent hover:border text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
-                            }`}
+                        className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${
+                            filter === option
+                                ? 'border-red dark:border-yellow font-bold'
+                                : 'border-transparent hover:border text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
+                        }`}
                     >
                         {option}
                     </button>

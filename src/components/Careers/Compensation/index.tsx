@@ -24,7 +24,7 @@ const Compensation: React.FC = () => {
     ]
 
     return (
-        <section id="compensation" className="not-prose @container px-8 @3xl:px-8">
+        <section id="compensation" className="not-prose @container">
             <h2 className="text-3xl font-bold mb-2">Compensation &amp; equity</h2>
             <p className="mb-4">
                 We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success,
@@ -55,7 +55,12 @@ const Compensation: React.FC = () => {
                         ))}
                     </ul>
 
-                    <CallToAction to="/handbook/people/share-options" type="secondary" size="sm" state={{ newWindow: true }}>
+                    <CallToAction
+                        to="/handbook/people/share-options"
+                        type="secondary"
+                        size="sm"
+                        state={{ newWindow: true }}
+                    >
                         Learn more about share options
                     </CallToAction>
                 </div>

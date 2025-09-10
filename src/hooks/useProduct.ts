@@ -1766,7 +1766,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             name: 'Webhooks',
             Icon: IconWebhooks,
             handle: 'webhooks',
-            color: 'purple',
+            color: 'red',
             colorSecondary: 'sky-blue',
             category: 'product_os',
             slug: 'webhooks',

@@ -34,13 +34,15 @@ export const SmallTeams = () => {
     const roundedProfilesTotalCount = Math.floor(profilesTotalCount / 10) * 10
 
     return (
-        <section id="small-teams" className="@container px-8 @3xl:px-8">
+        <section id="small-teams" className="@container">
             <div className="mb-8">
-                <h2 className="text-3xl font-bold mb-4">
+                <h2 className="text-3xl font-bold mt-0 mb-4">
                     Join a startup <em className="text-red dark:text-yellow">within a startup</em>
                 </h2>
                 <div className="@2xl:columns-2 gap-8 [orphans:3]">
-                    <p className="mt-0">Starting a job at a company of {roundedProfilesTotalCount}+ people can be intimidating!</p>
+                    <p className="mt-0">
+                        Starting a job at a company of {roundedProfilesTotalCount}+ people can be intimidating!
+                    </p>
                     <p>
                         With our <Link to="/handbook/company/small-teams">small teams</Link> structure, it's like
                         working at a startup <em>within</em> a startup. This allows each team to operate as autonomously

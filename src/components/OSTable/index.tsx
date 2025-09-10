@@ -195,67 +195,71 @@ const OSTable: React.FC<OSTableProps> = ({
     return (
         <div className="-mx-4 @xl:-mx-8">
             <ScrollArea fullWidth>
-                <div
-                    className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] min-w-full w-0 [&>div]:px-2 ${
-                        size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
-                    } ${className}`}
-                    style={{ gridTemplateColumns: gridClass }}
-                >
-                    {/* Header Row */}
-                    {columns && (
-                        <>
-                            {columns.map((column, index) => (
-                                <div
-                                    key={index}
-                                    className={`text-sm border-l border-t border-primary bg-input font-bold ${
-                                        index === columns.length - 1 ? '!border-r' : ''
-                                    } ${column.align === 'center' ? 'text-center' : ''} ${column.className || ''}`}
-                                >
-                                    {column.name}
-                                </div>
-                            ))}
-                        </>
-                    )}
+                <div className="px-4 @xl:px-8">
+                    <div
+                        className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] min-w-full w-0 [&>div]:px-2 ${
+                            size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
+                        } ${className}`}
+                        style={{ gridTemplateColumns: gridClass }}
+                    >
+                        {/* Header Row */}
+                        {columns && (
+                            <>
+                                {columns.map((column, index) => (
+                                    <div
+                                        key={index}
+                                        className={`text-sm border-l border-t border-primary bg-input font-bold ${
+                                            index === columns.length - 1 ? '!border-r' : ''
+                                        } ${column.align === 'center' ? 'text-center' : ''} ${column.className || ''}`}
+                                    >
+                                        {column.name}
+                                    </div>
+                                ))}
+                            </>
+                        )}
 
-                    {/* Data Rows */}
-                    {groupBy
-                        ? Object.entries(
-                              _groupBy(
-                                  rows,
-                                  `cells[${columns?.findIndex((col) => col.name === groupBy)}].content.props.children`
-                              )
-                          ).map(([_group, value], index) => (
-                              <GroupedRows
-                                  key={index}
-                                  rows={value}
-                                  lastRowRef={lastRowRef}
-                                  rowAlignment={rowAlignment}
-                                  columns={columns}
-                                  editable={editable}
-                              />
-                          ))
-                        : rows.map((row, rowIndex) => (
-                              <Row
-                                  key={row.key || rowIndex}
-                                  row={row}
-                                  lastRowRef={rowIndex === rows.length - 1 ? lastRowRef : null}
-                                  rowAlignment={rowAlignment}
-                                  columns={columns}
-                                  editable={editable}
-                              />
-                          ))}
-                </div>
-                {(loading || fetchMore) && (
-                    <div className="mt-4 mb-16">
-                        {loading ? (
-                            <RowSkeleton />
-                        ) : fetchMore ? (
-                            <CallToAction onClick={() => fetchMore()} size="md" width="full">
-                                Load more
-                            </CallToAction>
-                        ) : null}
+                        {/* Data Rows */}
+                        {groupBy
+                            ? Object.entries(
+                                  _groupBy(
+                                      rows,
+                                      `cells[${columns?.findIndex(
+                                          (col) => col.name === groupBy
+                                      )}].content.props.children`
+                                  )
+                              ).map(([_group, value], index) => (
+                                  <GroupedRows
+                                      key={index}
+                                      rows={value}
+                                      lastRowRef={lastRowRef}
+                                      rowAlignment={rowAlignment}
+                                      columns={columns}
+                                      editable={editable}
+                                  />
+                              ))
+                            : rows.map((row, rowIndex) => (
+                                  <Row
+                                      key={row.key || rowIndex}
+                                      row={row}
+                                      lastRowRef={rowIndex === rows.length - 1 ? lastRowRef : null}
+                                      rowAlignment={rowAlignment}
+                                      columns={columns}
+                                      editable={editable}
+                                  />
+                              ))}
                     </div>
-                )}
+                    {(loading || fetchMore) && (
+                        <div className="mt-4 mb-16">
+                            {loading ? (
+                                <RowSkeleton />
+                            ) : fetchMore ? (
+                                <CallToAction onClick={() => fetchMore()} size="md" width="full">
+                                    Load more
+                                </CallToAction>
+                            ) : null}
+                        </div>
+                    )}
+                </div>
             </ScrollArea>
         </div>
     )

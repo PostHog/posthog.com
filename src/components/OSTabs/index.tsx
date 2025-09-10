@@ -204,7 +204,9 @@ export default function OSTabs({
                             <div
                                 key={rowIndex}
                                 className={`flex ${
-                                    orientation === 'horizontal' ? ' items-center ml-4' : 'flex-col gap-px h-full'
+                                    orientation === 'horizontal'
+                                        ? `items-center${!centerTabs ? ' ml-4' : ''}`
+                                        : 'flex-col gap-px h-full'
                                 } ${centerTabs ? 'justify-center ml-0' : ''}`}
                             >
                                 {row.map((tab) => (

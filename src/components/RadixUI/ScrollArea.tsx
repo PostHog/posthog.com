@@ -24,13 +24,13 @@ const ScrollArea = ({
     return (
         <ScrollAreaPrimitive.Root
             data-scheme={dataScheme}
-            className={`relative overflow-hidden h-full ${fullWidth ? 'max-w-screen' : ''} ${className}`}
+            className={`relative overflow-hidden h-full flex-1 ${fullWidth ? 'max-w-screen' : ''} ${className}`}
             style={style}
         >
             <ScrollAreaPrimitive.Viewport
                 className={`size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
             >
-                {fullWidth ? <div className="px-4 @xl:px-8">{children}</div> : children}
+                {fullWidth ? <div className="">{children}</div> : children}
             </ScrollAreaPrimitive.Viewport>
             <ScrollAreaPrimitive.Scrollbar
                 className="flex touch-none select-none p-0.5 transition-colors duration-[160ms] ease-out hover:bg-accent-2 dark:hover:bg-accent-dark data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"

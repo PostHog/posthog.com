@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { OpenRoles } from '../components/Careers/OpenRoles'
 import { Transparency } from '../components/Careers/Transparency'
@@ -44,6 +44,7 @@ const careersTableOfContents = [
 ]
 
 const IndexPage = () => {
+    const ref = useRef<HTMLDivElement>(null)
     const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
@@ -53,7 +54,7 @@ const IndexPage = () => {
         value: '/careers',
         content: (
             <ScrollArea className="h-full max-w-screen-xl mx-auto">
-                <div className="fixed bottom-4 right-4 z-20">
+                <div ref={ref} className="fixed bottom-4 right-4 z-20">
                     <Popover
                         trigger={
                             <span className="[&>span>div]:rounded-full">
@@ -85,9 +86,15 @@ const IndexPage = () => {
                                         className="font-semibold text-sm hover:underline block p-1"
                                         onClick={() => {
                                             setShowTableOfContents(false)
-                                            const el = document.querySelector(item.url)
+                                            const container = ref.current
+                                                ?.closest('[data-radix-scroll-area-viewport]')
+                                                ?.parentElement?.closest('[data-radix-scroll-area-viewport]')
+                                            const el = container?.querySelector(item.url)
                                             if (!el) return
-                                            el.scrollIntoView({ behavior: 'smooth' })
+                                            container?.scrollTo({
+                                                top: el.offsetTop,
+                                                behavior: 'smooth',
+                                            })
                                         }}
                                     >
                                         {item.value}

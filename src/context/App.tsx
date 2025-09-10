@@ -251,6 +251,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: false,
         clickBehavior: 'double',
+        performanceBoost: false,
     },
     updateSiteSettings: () => {},
     openNewChat: () => {},
@@ -915,6 +916,7 @@ export interface SiteSettings {
         | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
+    performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -928,6 +930,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
+        performanceBoost: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1018,10 +1021,22 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const menu = injectDynamicChildren(initialMenu)
 
+    const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
+        setWindows((windows) =>
+            windows.map((el) => ({
+                ...el,
+                zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
+                minimized: item === el ? false : el.minimized,
+                location: item === el ? location || el.location : el.location,
+                position: item === el ? position || el.position : el.position,
+            }))
+        )
+    }, [])
+
     const closeWindow = useCallback(
         (item: AppWindow) => {
-            setTimeout(() => {
-                const windowsFiltered = windows.filter((el) => el.path !== item.path)
+            setWindows((currentWindows) => {
+                const windowsFiltered = currentWindows.filter((el) => el.path !== item.path)
                 const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
                     (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
                     undefined
@@ -1035,23 +1050,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 } else {
                     window.history.pushState({}, '', '/')
                 }
-                setWindows(windowsFiltered)
-            }, 0)
+                return windowsFiltered
+            })
         },
-        [windows]
+        [navigate, bringToFront]
     )
-
-    const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
-        setWindows((windows) =>
-            windows.map((el) => ({
-                ...el,
-                zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
-                minimized: item === el ? false : el.minimized,
-                location: item === el ? location || el.location : el.location,
-                position: item === el ? position || el.position : el.position,
-            }))
-        )
-    }, [])
 
     const replaceFocusedWindow = useCallback(
         (newWindow: AppWindow) => {
