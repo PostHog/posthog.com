@@ -26,6 +26,7 @@ export default function SessionReplay(): JSX.Element {
                             plans {
                                 name
                                 plan_key
+                                free_allocation
                                 included_if
                                 features {
                                     key

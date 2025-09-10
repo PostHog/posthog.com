@@ -197,8 +197,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                 }
 
                 if (isFreeTier && addonPlan.included_if === 'no_active_parent_subscription') {
-                    // For free tier, if included_if is no_active_parent_subscription, it means not available
-                    return false
+                    // For free tier, if included_if is no_active_parent_subscription, it means it's available,
+                    // and if free_allocation is set, we can use its value
+                    return addonPlan.free_allocation || true
                 }
 
                 if (!isFreeTier && addonPlan.included_if === 'has_parent_subscription') {
