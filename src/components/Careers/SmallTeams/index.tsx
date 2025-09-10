@@ -34,7 +34,7 @@ export const SmallTeams = () => {
     const roundedProfilesTotalCount = Math.floor(profilesTotalCount / 10) * 10
 
     return (
-        <section id="small-teams" className="@container">
+        <section className="@container mt-12">
             <div className="mb-8">
                 <h2 className="text-3xl font-bold mt-0 mb-4">
                     Join a startup <em className="text-red dark:text-yellow">within a startup</em>
