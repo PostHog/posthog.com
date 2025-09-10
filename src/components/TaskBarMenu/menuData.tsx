@@ -713,9 +713,10 @@ export function useMenuData(): MenuType[] {
                 const menuItemsCopy = [...menu.items]
 
                 // Apply mobile destinations for docs menu if this is the Docs menu
-                const itemsToProcess = typeof menu.trigger === 'string' && menu.trigger === 'Docs'
-                    ? addDocsMenuMobileDestinations(menuItemsCopy, allProducts)
-                    : menuItemsCopy
+                const itemsToProcess =
+                    typeof menu.trigger === 'string' && menu.trigger === 'Docs'
+                        ? addDocsMenuMobileDestinations(menuItemsCopy, allProducts)
+                        : menuItemsCopy
 
                 for (let i = 0; i < itemsToProcess.length; i++) {
                     const item = itemsToProcess[i]
@@ -723,9 +724,11 @@ export function useMenuData(): MenuType[] {
                     // Skip items marked for mobile omission
                     if (item.mobileDestination === false) {
                         // Remove preceding separator if it would be orphaned
-                        if (filteredItems.length > 0 &&
+                        if (
+                            filteredItems.length > 0 &&
                             filteredItems[filteredItems.length - 1].type === 'separator' &&
-                            (i === itemsToProcess.length - 1 || itemsToProcess[i + 1].type === 'separator')) {
+                            (i === itemsToProcess.length - 1 || itemsToProcess[i + 1].type === 'separator')
+                        ) {
                             filteredItems.pop()
                         }
                         continue
@@ -747,8 +750,7 @@ export function useMenuData(): MenuType[] {
                             type: 'item' as const,
                             items: undefined,
                         })
-                    }
-                    else {
+                    } else {
                         filteredItems.push(item)
                     }
                 }
@@ -773,40 +775,40 @@ export function useMenuData(): MenuType[] {
     const logoMenuItems =
         isLoaded && isMobile
             ? [
-                {
-                    type: 'item' as const,
-                    label: 'home.mdx',
-                    link: '/',
-                },
-                { type: 'separator' as const },
-                // Main navigation items processed for mobile
-                ...processMobileNavItems(),
-                { type: 'separator' as const },
-                // System items
-                ...baseLogoMenuItems,
-            ]
+                  {
+                      type: 'item' as const,
+                      label: 'home.mdx',
+                      link: '/',
+                  },
+                  { type: 'separator' as const },
+                  // Main navigation items processed for mobile
+                  ...processMobileNavItems(),
+                  { type: 'separator' as const },
+                  // System items
+                  ...baseLogoMenuItems,
+              ]
             : [
-                // Desktop: only show system items
-                ...baseLogoMenuItems,
-                { type: 'separator' as const },
-                {
-                    type: 'item' as const,
-                    label: 'Start screensaver',
-                    onClick: () => {
-                        setScreensaverPreviewActive(true)
-                    },
-                    shortcut: ['Shift', 'Z'],
-                },
-                {
-                    type: 'item' as const,
-                    label: 'Close all windows',
-                    disabled: windows.length < 1,
-                    onClick: () => {
-                        animateClosingAllWindows()
-                    },
-                    shortcut: ['Shift', 'X'],
-                },
-            ]
+                  // Desktop: only show system items
+                  ...baseLogoMenuItems,
+                  { type: 'separator' as const },
+                  {
+                      type: 'item' as const,
+                      label: 'Start screensaver',
+                      onClick: () => {
+                          setScreensaverPreviewActive(true)
+                      },
+                      shortcut: ['Shift', 'Z'],
+                  },
+                  {
+                      type: 'item' as const,
+                      label: 'Close all windows',
+                      disabled: windows.length < 1,
+                      onClick: () => {
+                          animateClosingAllWindows()
+                      },
+                      shortcut: ['Shift', 'X'],
+                  },
+              ]
 
     return [
         {

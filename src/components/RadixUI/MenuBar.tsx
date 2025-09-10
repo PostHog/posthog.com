@@ -74,21 +74,23 @@ const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
                 items: undefined,
             }
         }
-        
+
         // Otherwise, process children but make them all leaf nodes
         if (Array.isArray(item.items)) {
-            const processedItems = item.items.map((subItem: MenuItemType) => {
-                // Convert all nested submenus to simple items
-                if (subItem.type === 'submenu') {
-                    return {
-                        ...subItem,
-                        type: 'item' as const,
-                        link: subItem.link || subItem.mobileDestination || '#',
-                        items: undefined,
+            const processedItems = item.items
+                .map((subItem: MenuItemType) => {
+                    // Convert all nested submenus to simple items
+                    if (subItem.type === 'submenu') {
+                        return {
+                            ...subItem,
+                            type: 'item' as const,
+                            link: subItem.link || subItem.mobileDestination || '#',
+                            items: undefined,
+                        }
                     }
-                }
-                return subItem
-            }).filter(Boolean) as MenuItemType[]
+                    return subItem
+                })
+                .filter(Boolean) as MenuItemType[]
 
             return {
                 ...item,
@@ -102,10 +104,10 @@ const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
 
 const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
     const processedItems: MenuItemType[] = []
-    
+
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
-        
+
         // Skip items marked for mobile omission
         if (item.mobileDestination === false) {
             // Also skip the preceding separator if it exists
@@ -114,13 +116,13 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
             }
             continue
         }
-        
+
         const processed = processMobileMenuItem(item)
         if (processed) {
             processedItems.push(processed)
         }
     }
-    
+
     return processedItems
 }
 
@@ -294,7 +296,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
     id = 'menubar',
 }) => {
     const { isMobile, isLoaded } = useResponsive()
-    
+
     const baseId = React.useMemo(() => {
         // Generate a stable ID based on the menu structure
         const menuSignature = menus
@@ -308,16 +310,16 @@ const MenuBar: React.FC<MenuBarProps> = ({
         // Wait for responsive detection to load before processing
         if (!isLoaded) return menus
         if (!isMobile) return menus
-        
-        return menus.map(menu => {
+
+        return menus.map((menu) => {
             // If menu has mobileLink, don't process items since they won't be shown
             if (menu.mobileLink) {
                 return menu
             }
-            
+
             return {
                 ...menu,
-                items: processMobileMenuItems(menu.items)
+                items: processMobileMenuItems(menu.items),
             }
         })
     }, [menus, isMobile, isLoaded])
@@ -328,7 +330,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
                 const menuId = generateStableId(baseId, 'menu', menuIndex)
                 const triggerId = generateStableId(baseId, 'trigger', menuIndex)
                 const contentId = generateStableId(baseId, 'content', menuIndex)
-                
+
                 // On mobile, if menu has mobileLink, make it a direct link
                 if (isLoaded && isMobile && menu.mobileLink) {
                     return (
@@ -336,19 +338,22 @@ const MenuBar: React.FC<MenuBarProps> = ({
                             key={menuId}
                             to={menu.mobileLink}
                             state={{ newWindow: true }}
-                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${customTriggerClasses || ''}`}
+                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
+                                customTriggerClasses || ''
+                            }`}
                         >
                             {menu.trigger}
                         </Link>
                     )
                 }
-                
+
                 return (
                     <RadixMenubar.Menu key={menuId} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
-                            className={`${triggerAsChild ? '' : TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'
-                                } ${customTriggerClasses}`}
+                            className={`${triggerAsChild ? '' : TriggerClasses} ${
+                                menu.bold ? 'font-bold' : 'font-medium'
+                            } ${customTriggerClasses}`}
                             id={triggerId}
                         >
                             {menu.trigger}

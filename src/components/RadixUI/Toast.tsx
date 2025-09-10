@@ -53,7 +53,9 @@ const Toast = ({
     return (
         <RadixToast.Root
             data-scheme="primary"
-            className={`ToastRoot grid grid-cols-[auto_max-content] gap-x-[15px] rounded-md bg-light dark:bg-dark border border-primary text-primary prose dark:prose-invert p-4 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-swipeOut data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out] relative ${verticalAlign ? verticalAlign : 'items-center'} ${className}`}
+            className={`ToastRoot grid grid-cols-[auto_max-content] gap-x-[15px] rounded-md bg-light dark:bg-dark border border-primary text-primary prose dark:prose-invert p-4 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-swipeOut data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out] relative ${
+                verticalAlign ? verticalAlign : 'items-center'
+            } ${className}`}
             open={open}
             onOpenChange={handleOpenChange}
             duration={duration || 3000}
@@ -64,18 +66,11 @@ const Toast = ({
                         {title}
                     </RadixToast.Title>
                 )}
-                <RadixToast.Description className="text-sm !my-0 text-secondary">
-                    {description}
-                </RadixToast.Description>
+                <RadixToast.Description className="text-sm !my-0 text-secondary">{description}</RadixToast.Description>
                 {image && image}
             </div>
             {(onUndo || onAction) && (
-                <RadixToast.Action
-                    onClick={handleAction}
-                    className="[grid-area:_action]"
-                    asChild
-                    altText={actionLabel}
-                >
+                <RadixToast.Action onClick={handleAction} className="[grid-area:_action]" asChild altText={actionLabel}>
                     <OSButton size="sm" hover="background" icon={onUndo ? <IconUndo /> : undefined}>
                         {actionAsIcon ? actionAsIcon : actionLabel}
                     </OSButton>
