@@ -32,7 +32,7 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
                 <>
                     <div className="w-full aspect-[600/315] rounded-md overflow-hidden">
                         <Link to={slug}>
-                            <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
+                            <img className="w-full h-full object-cover" src={imageURL || '/images/og/default.png'} />
                         </Link>
                     </div>
                     <div>

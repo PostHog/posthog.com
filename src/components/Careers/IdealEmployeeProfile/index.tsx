@@ -31,7 +31,7 @@ const IdealEmployeeProfile: React.FC = () => {
                     <p className="text-[15px] border-l-3 border-primary pl-4 mb-6">
                         <TeamMember name="Joe Martin" photo /> worked as a clown, a morgue cleaner, and a chainsaw
                         salesman before joining the Marketing team. He now leads the{' '}
-                        <Link href="/teams/brand-vibes">Brand & Vibes Team</Link>.
+                        <Link href="/teams/brand">Brand & Vibes Team</Link>.
                     </p>
                 </div>
 

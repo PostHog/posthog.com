@@ -159,6 +159,7 @@ export default function Desktop() {
         setScreensaverPreviewActive,
         setConfetti,
         confetti,
+        compact,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -479,13 +480,15 @@ export default function Desktop() {
                         </motion.ul>
                     </nav>
                 </div>
-                <Screensaver
-                    isActive={isInactive || screensaverPreviewActive}
-                    onDismiss={() => {
-                        setScreensaverPreviewActive(false)
-                        dismiss()
-                    }}
-                />
+                {!compact && (
+                    <Screensaver
+                        isActive={isInactive || screensaverPreviewActive}
+                        onDismiss={() => {
+                            setScreensaverPreviewActive(false)
+                            dismiss()
+                        }}
+                    />
+                )}
                 <HedgeHogModeEmbed />
             </ContextMenu>
             <NotificationsPanel />

@@ -104,7 +104,7 @@ export default function Post({
                                     className={`w-full h-full ${
                                         !imageURL && defaultImage ? 'object-contain' : 'object-cover'
                                     }`}
-                                    src={imageURL || defaultImage || '/banner.png'}
+                                    src={imageURL || defaultImage || '/images/og/default.png'}
                                 />
                             )}
                         </span>

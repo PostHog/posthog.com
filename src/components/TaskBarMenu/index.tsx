@@ -41,6 +41,7 @@ export default function TaskBarMenu() {
         taskbarRef,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
+    const [posthogInstance, setPosthogInstance] = useState<string>()
     const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -66,6 +67,18 @@ export default function TaskBarMenu() {
             taskbar.addEventListener('windowMinimized', handleWindowMinimized)
             return () => {
                 taskbar.removeEventListener('windowMinimized', handleWindowMinimized)
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        if (window) {
+            const instanceCookie = document.cookie
+                .split('; ')
+                ?.filter((row) => row.startsWith('ph_current_instance='))
+                ?.map((c) => c.split('=')?.[1])?.[0]
+            if (instanceCookie) {
+                setPosthogInstance(instanceCookie)
             }
         }
     }, [])
@@ -205,8 +218,28 @@ export default function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Sign in',
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in to PostHog.com',
                           onClick: handleSignInClick,
+                      },
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Go to...',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'PostHog app',
+                          link: 'https://app.posthog.com',
+                          icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          external: true,
                       },
                   ],
         },
@@ -260,10 +293,11 @@ export default function TaskBarMenu() {
                         <OSButton
                             variant="secondary"
                             size="md"
-                            onClick={() => navigate('/start', { state: { newWindow: true } })}
+                            asLink
+                            to={posthogInstance ? posthogInstance.replace(/"/g, '') : 'https://app.posthog.com/signup'}
                             className=""
                         >
-                            Get started – free
+                            {posthogInstance ? 'Dashboard' : 'Get started – free'}
                         </OSButton>
                     </div>
                     <Tooltip
