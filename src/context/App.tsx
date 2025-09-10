@@ -325,7 +325,7 @@ const appSettings: AppSettings = {
                 if (windowRight > keyboardGardenImageLeft) {
                     const newX = x - (windowRight - keyboardGardenImageLeft)
                     return {
-                        x: newX < 0 ? x : newX,
+                        x: newX < 115 ? x : newX,
                         y,
                     }
                 }
