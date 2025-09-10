@@ -81,7 +81,7 @@ export const Content = ({ quickLinks = true }) => {
 const RevenueAnalytics: React.FC<RevenueAnalyticsProps> = ({ data }) => {
     return (
         <ReaderView>
-            <SEO title="Product analytics - Documentation - PostHog" />
+            <SEO title="Revenue analytics - Documentation - PostHog" />
 
             <Content />
         </ReaderView>
