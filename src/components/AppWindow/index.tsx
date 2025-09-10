@@ -476,36 +476,36 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             !siteSettings.performanceBoost &&
             !toasts.some((toast) => toast.title === 'Animations running slow')
         ) {
-            posthog?.capture('animation_performance_toast_shown')
-            addToast({
-                title: 'Animations may be affecting performance',
-                description: 'You can turn off animations to improve performance if needed.',
-                actionLabel: 'Disable animations',
-                onAction: () => {
-                    posthog?.capture('animation_performance_toast_action')
-                    updateSiteSettings({ ...siteSettings, performanceBoost: true })
-                    addToast({
-                        title: 'Animations have been disabled',
-                        description: (
-                            <p className="max-w-sm">
-                                Animations have been turned off to improve performance. You can change this setting in{' '}
-                                <Link
-                                    to="/display-options"
-                                    className="font-semibold underline"
-                                    state={{ newWindow: true }}
-                                >
-                                    display options
-                                </Link>
-                            </p>
-                        ),
-                        duration: 2000,
-                        onUndo: () => {
-                            updateSiteSettings({ ...siteSettings, performanceBoost: false })
-                        },
-                    })
-                },
-                duration: 8000,
-            })
+            posthog?.capture('animation_performance_reduced')
+            // addToast({
+            //     title: 'Animations may be affecting performance',
+            //     description: 'You can turn off animations to improve performance if needed.',
+            //     actionLabel: 'Disable animations',
+            //     onAction: () => {
+            //         posthog?.capture('animation_performance_toast_action')
+            //         updateSiteSettings({ ...siteSettings, performanceBoost: true })
+            //         addToast({
+            //             title: 'Animations have been disabled',
+            //             description: (
+            //                 <p className="max-w-sm">
+            //                     Animations have been turned off to improve performance. You can change this setting in{' '}
+            //                     <Link
+            //                         to="/display-options"
+            //                         className="font-semibold underline"
+            //                         state={{ newWindow: true }}
+            //                     >
+            //                         display options
+            //                     </Link>
+            //                 </p>
+            //             ),
+            //             duration: 2000,
+            //             onUndo: () => {
+            //                 updateSiteSettings({ ...siteSettings, performanceBoost: false })
+            //             },
+            //         })
+            //     },
+            //     duration: 8000,
+            // })
         }
         animationStartTimeRef.current = null
     }
