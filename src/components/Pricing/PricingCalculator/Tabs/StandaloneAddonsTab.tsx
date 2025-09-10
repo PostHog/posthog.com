@@ -192,7 +192,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                 </button>
                             )}
                         </div>
-                        <div>
+                        <div className="pr-3">
                             <strong>{formatUSD(totalCost)}</strong>
                         </div>
                     </div>
