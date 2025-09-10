@@ -49,7 +49,7 @@ Watching AI come crashing into the world of tech has been exhilarating.
 
 We've long believed software was becoming commoditized. More open-source libraries, better tooling, more abstraction, and just more people in software engineering. These things were already speeding up development and gave us the confidence that we could build many products in one.
 
-This was good for our customers (fewer vendors, lower prices per product, all your customer context in one place) and AI is enabling us to move even faster, and ship experiences that have never been possible before. 
+This was good for our customers (fewer vendors, lower prices per product, all your customer context in one place) and [AI is enabling us to move even faster](/newsletter/building-ai-features), and ship experiences that have never been possible before. 
 
 Today, we have [Max AI](/max) – now generally available as an open beta – and an increasingly powerful AI installation wizard, which people love.
 
