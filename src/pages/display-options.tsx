@@ -314,16 +314,12 @@ export default function DisplayOptions() {
                                 value={siteSettings.experience}
                             />
                         </div>
-                    </Fieldset>
-                </div>
-                <div className="hidden md:block">
-                    <Fieldset legend="Performance">
                         <div className="bg-primary grid grid-cols-2 gap-2">
                             <ToggleGroup
-                                title="Performance boost"
+                                title="Animation"
                                 options={[
-                                    { label: 'Disabled', value: 'false' },
-                                    { label: 'Enabled', value: 'true' },
+                                    { label: 'Disabled', value: 'true' },
+                                    { label: 'Enabled', value: 'false' },
                                 ]}
                                 onValueChange={(value) =>
                                     updateSiteSettings({ ...siteSettings, performanceBoost: value === 'true' })

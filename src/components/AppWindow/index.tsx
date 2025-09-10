@@ -547,10 +547,21 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         ? 'auto'
                                         : size.height,
                                 transition: {
-                                    duration: siteSettings.experience === 'boring' ? 0 : 0.2,
+                                    duration:
+                                        siteSettings.experience === 'boring' || siteSettings.performanceBoost ? 0 : 0.2,
                                     scale: {
-                                        duration: siteSettings.experience === 'boring' || !windowPosition ? 0 : 0.2,
-                                        delay: siteSettings.experience === 'boring' || !windowPosition ? 0 : 0.2,
+                                        duration:
+                                            siteSettings.experience === 'boring' ||
+                                            siteSettings.performanceBoost ||
+                                            !windowPosition
+                                                ? 0
+                                                : 0.2,
+                                        delay:
+                                            siteSettings.experience === 'boring' ||
+                                            siteSettings.performanceBoost ||
+                                            !windowPosition
+                                                ? 0
+                                                : 0.2,
                                         ease: [0.2, 0.2, 0.8, 1],
                                     },
                                     width: {
@@ -566,7 +577,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 ...(closing || !windowPosition ? {} : { x: windowPosition.x, y: windowPosition.y }),
                                 transition: {
                                     scale: {
-                                        duration: siteSettings.experience === 'boring' ? 0 : 0.23,
+                                        duration:
+                                            siteSettings.experience === 'boring' || siteSettings.performanceBoost
+                                                ? 0
+                                                : 0.23,
                                         ease: [0.2, 0.2, 0.8, 1],
                                     },
                                     x: {
@@ -775,31 +789,28 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </div>
                                 </div>
                             )}
-                            <div className={chrome ? 'bg-light dark:bg-dark size-full overflow-hidden' : ''}>
-                                <div
-                                    ref={contentRef}
-                                    className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
-                                    style={{
-                                        display: siteSettings.performanceBoost ? (inView ? 'block' : 'none') : 'block',
-                                    }}
-                                >
-                                    {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
-                                        <Router
-                                            minimizing={minimizing}
-                                            onExit={() => {
-                                                if (minimizing) {
-                                                    setMinimizing(false)
-                                                    if (siteSettings.experience === 'posthog') {
-                                                        setAnimating(true)
-                                                    }
+                            <div
+                                ref={contentRef}
+                                className={`size-full flex-grow ${
+                                    chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
+                                }`}
+                            >
+                                {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
+                                    <Router
+                                        minimizing={minimizing}
+                                        onExit={() => {
+                                            if (minimizing) {
+                                                setMinimizing(false)
+                                                if (siteSettings.experience === 'posthog') {
+                                                    setAnimating(true)
                                                 }
-                                            }}
-                                            {...item.props}
-                                        >
-                                            {item.element}
-                                        </Router>
-                                    )}
-                                </div>
+                                            }
+                                        }}
+                                        {...item.props}
+                                    >
+                                        {item.element}
+                                    </Router>
+                                )}
                             </div>
                             {!item.fixedSize && !item.minimal && (
                                 <motion.div
