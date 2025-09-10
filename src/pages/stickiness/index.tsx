@@ -24,7 +24,7 @@ export default function Stickiness() {
             <SEO
                 title={overview?.title || 'Stickiness'}
                 description={overview?.description || 'Learn how many times users perform events in a period'}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
                 <div className="space-y-8">

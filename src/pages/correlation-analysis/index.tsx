@@ -24,7 +24,7 @@ export default function CorrelationAnalysis() {
             <SEO
                 title={overview?.title || 'Correlation Analysis'}
                 description={overview?.description || 'Discover what events correlate with conversion or churn'}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
                 <div className="space-y-8">

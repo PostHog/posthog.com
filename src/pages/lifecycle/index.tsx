@@ -24,7 +24,7 @@ export default function Lifecycle() {
             <SEO
                 title={overview?.title || 'Lifecycle'}
                 description={overview?.description || 'Understand how your active users break down'}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
                 <div className="space-y-8">

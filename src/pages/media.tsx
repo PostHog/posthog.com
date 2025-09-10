@@ -33,7 +33,7 @@ export default function Media({ data }: MediaProps) {
             <SEO
                 title="Media & press - PostHog"
                 description="Media resources, press information, and brand assets for PostHog"
-                image={`/images/og/product-analytics.jpg`}
+                image={`/images/og/default.png`}
             />
             <Editor
                 maxWidth="100%"

@@ -21,7 +21,7 @@ export default function SparkJoy(): JSX.Element {
             <SEO
                 title="Sparks joy - PostHog"
                 description="Because we're not all work and no play"
-                image={`/images/og/product-analytics.jpg`}
+                image={`/images/og/default.png`}
             />
             <Explorer
                 template="generic"

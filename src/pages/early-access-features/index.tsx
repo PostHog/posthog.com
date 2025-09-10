@@ -19,7 +19,7 @@ export default function EarlyAccessFeatures() {
             <SEO
                 title={seo?.title || 'Early Access Features - PostHog'}
                 description={seo?.description}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <Editor>
                 <div className="space-y-8">

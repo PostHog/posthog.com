@@ -25,7 +25,7 @@ export default function Webhooks() {
             <SEO
                 title={seo?.title || 'Webhooks - PostHog'}
                 description={seo?.description}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <div className="space-y-8">

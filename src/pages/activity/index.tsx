@@ -25,7 +25,7 @@ export default function Activity() {
             <SEO
                 title={seo?.title || 'Activity - PostHog'}
                 description={seo?.description}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <div className="space-y-8">

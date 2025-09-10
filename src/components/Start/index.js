@@ -94,7 +94,7 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
             <SEO
                 title="Get started – free"
                 description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
-                image={`/images/home.png`}
+                image={`/images/og/default.png`}
             />
             <OSTabs
                 tabs={[

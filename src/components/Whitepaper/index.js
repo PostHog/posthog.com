@@ -26,7 +26,7 @@ export default function Whitepaper() {
             <SEO
                 title="Copy of whitepaper (2) - final LATEST.docx.pdf"
                 description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
-                image={`/images/home.png`}
+                image={`/images/og/default.png`}
             />
             <Editor title="Copy of whitepaper (2) - final LATEST.docx" type="pdf">
                 <iframe
