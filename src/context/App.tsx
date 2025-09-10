@@ -117,6 +117,7 @@ interface AppContextType {
     setScreensaverPreviewActive: (isActive: boolean) => void
     setConfetti: (isActive: boolean) => void
     confetti: boolean
+    posthogInstance?: string
 }
 
 interface AppProviderProps {
@@ -271,6 +272,7 @@ export const Context = createContext<AppContextType>({
     setScreensaverPreviewActive: () => {},
     setConfetti: () => {},
     confetti: false,
+    posthogInstance: undefined,
 })
 
 export interface AppSetting {
@@ -966,6 +968,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
     const [confetti, setConfetti] = useState(false)
+    const [posthogInstance, setPosthogInstance] = useState<string>()
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
@@ -1741,6 +1744,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [location.pathname])
 
+    useEffect(() => {
+        if (window) {
+            const instanceCookie = document.cookie
+                .split('; ')
+                ?.filter((row) => row.startsWith('ph_current_instance='))
+                ?.map((c) => c.split('=')?.[1])?.[0]
+            if (instanceCookie) {
+                setPosthogInstance(instanceCookie)
+            }
+        }
+    }, [])
+
     return (
         <Context.Provider
             value={{
@@ -1784,6 +1799,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setScreensaverPreviewActive,
                 setConfetti,
                 confetti,
+                posthogInstance,
             }}
         >
             {children}

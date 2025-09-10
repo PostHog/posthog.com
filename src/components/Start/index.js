@@ -80,7 +80,7 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
     const posthog = usePostHog()
     const [activeTab, setActiveTab] = useState(initialTab)
     const { search } = useLocation()
-
+    const { posthogInstance } = useApp()
     useEffect(() => {
         const params = new URLSearchParams(search)
         const flow = params.get('flow')
@@ -103,11 +103,15 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
                         value: 'ai',
                         content: <AIInstall setActiveTab={setActiveTab} />,
                     },
-                    {
-                        label: 'Web signup',
-                        value: 'signup',
-                        content: <BoomerInstall />,
-                    },
+                    ...(!posthogInstance
+                        ? [
+                              {
+                                  label: 'Web signup',
+                                  value: 'signup',
+                                  content: <BoomerInstall />,
+                              },
+                          ]
+                        : []),
                 ]}
                 triggerDataScheme="primary"
                 value={activeTab}
