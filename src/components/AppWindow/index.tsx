@@ -29,6 +29,7 @@ import Legal from 'components/Legal'
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -148,6 +149,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [minimizing, setMinimizing] = useState(false)
     const [animating, setAnimating] = useState(true)
     const animationStartTimeRef = useRef<number | null>(null)
+    const posthog = usePostHog()
 
     const inView = useMemo(() => {
         const windowsAbove = windows.filter(
@@ -474,11 +476,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             !siteSettings.performanceBoost &&
             !toasts.some((toast) => toast.title === 'Animations running slow')
         ) {
+            posthog?.capture('animation_performance_toast_shown')
             addToast({
                 title: 'Animations may be affecting performance',
                 description: 'You can turn off animations to improve performance if needed.',
                 actionLabel: 'Disable animations',
                 onAction: () => {
+                    posthog?.capture('animation_performance_toast_action')
                     updateSiteSettings({ ...siteSettings, performanceBoost: true })
                     addToast({
                         title: 'Animations have been disabled',
