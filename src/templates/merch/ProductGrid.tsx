@@ -42,7 +42,10 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
 
     // URL handling is now done in Collection.tsx component
 
-    const classes = cn('grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @7xl:grid-cols-5 @2xl:gap-1 p-2', className)
+    const classes = cn(
+        'grid @xs:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @7xl:grid-cols-5 @2xl:gap-1 p-2',
+        className
+    )
 
     return (
         <>

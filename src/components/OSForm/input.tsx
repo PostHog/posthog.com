@@ -20,6 +20,7 @@ interface InputProps {
     onClear?: () => void
     value?: string
     className?: string
+    containerClassName?: string
     [key: string]: any
 }
 
@@ -41,6 +42,7 @@ const Input = ({
     onClear,
     value,
     className = '',
+    containerClassName = '',
     ...props
 }: InputProps) => {
     const sizeClasses = {
@@ -65,7 +67,9 @@ const Input = ({
 
     return (
         <div
-            className={`flex ${direction === 'column' ? 'flex-col space-y-1' : 'items-center space-x-2'}`}
+            className={`flex ${
+                direction === 'column' ? 'flex-col space-y-1' : 'items-center space-x-2'
+            } ${containerClassName}`}
             {...(dataScheme && { 'data-scheme': dataScheme })}
         >
             {showLabel && (

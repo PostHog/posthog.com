@@ -73,31 +73,50 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         )
 
     return (
-        <div className={classes}>
-            <div ref={sliderRef} className="keen-slider">
-                {images.map((image, i) => {
-                    return <Image index={i} image={image} title={title} key={i} />
-                })}
-            </div>
-            {loaded && instanceRef.current && (
-                <>
-                    <Arrow
-                        left
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            instanceRef.current?.prev()
-                        }}
-                        disabled={currentSlide === 0}
-                    />
+        <div className="relative">
+            <div className={classes}>
+                <div ref={sliderRef} className="keen-slider">
+                    {images.map((image, i) => {
+                        return <Image index={i} image={image} title={title} key={i} />
+                    })}
+                </div>
+                {loaded && instanceRef.current && (
+                    <>
+                        <Arrow
+                            left
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                instanceRef.current?.prev()
+                            }}
+                            disabled={currentSlide === 0}
+                        />
 
-                    <Arrow
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            instanceRef.current?.next()
-                        }}
-                        disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
-                    />
-                </>
+                        <Arrow
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                instanceRef.current?.next()
+                            }}
+                            disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
+                        />
+                    </>
+                )}
+            </div>
+            {loaded && instanceRef.current && images.length > 1 && (
+                <div className="flex justify-center space-x-1.5 absolute -bottom-6 left-0 w-full">
+                    {images.map((_, idx) => (
+                        <button
+                            key={idx}
+                            className={cn(
+                                'size-3 rounded-full transition-transform duration-200',
+                                currentSlide === idx
+                                    ? 'bg-red dark:bg-yellow scale-125'
+                                    : 'bg-accent hover:bg-secondary dark:bg-white/20 dark:hover:bg-white/40 hover:scale-125'
+                            )}
+                            onClick={() => instanceRef.current?.moveToIdx(idx)}
+                            aria-label={`Go to slide ${idx + 1}`}
+                        />
+                    ))}
+                </div>
             )}
         </div>
     )

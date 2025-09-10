@@ -113,7 +113,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     return (
         <div className={classes}>
-            <div className="image-wrapper relative bg-white rounded-md border border-primary">
+            <div className="image-wrapper mb-8 relative bg-white rounded-md border border-primary">
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                         New
@@ -216,21 +216,33 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <div className="text-secondary">Available</div>
                 <div className="col-span-3">{available}</div>
 
-                <div className="text-secondary">Brand</div>
-                <div className="col-span-3">{productBrand}</div>
+                {productBrand && (
+                    <>
+                        <div className="text-secondary">Brand</div>
+                        <div className="col-span-3">{productBrand}</div>
+                    </>
+                )}
 
                 <div className="text-secondary">Quality</div>
                 <div className="col-span-3">Excellent</div>
 
-                <div className="text-secondary">Model info</div>
-                <div className="col-span-3">
-                    {typeof productModelInfo === 'string'
-                        ? productModelInfo.split('\n').map((line, i) => <div key={i}>{line}</div>)
-                        : ''}
-                </div>
+                {productModelInfo && typeof productModelInfo === 'string' && (
+                    <>
+                        <div className="text-secondary">Model info</div>
+                        <div className="col-span-3">
+                            {productModelInfo.split('\n').map((line, i) => (
+                                <div key={i}>{line}</div>
+                            ))}
+                        </div>
+                    </>
+                )}
 
-                <div className="text-secondary">Added on</div>
-                <div className="col-span-3">{addedOn}</div>
+                {product.createdAt && (
+                    <>
+                        <div className="text-secondary">Added on</div>
+                        <div className="col-span-3">{addedOn}</div>
+                    </>
+                )}
                 {product.description && (
                     <>
                         <div className="text-secondary">Description</div>
@@ -241,8 +253,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             {product.imageProducts?.length > 0 && (
                 <div className="border-t border-primary pt-4 mt-4">
-                    <h3 className="text-lg mb-0">See something else you liked?</h3>
-                    <p className="mt-0 opacity-75">
+                    <h3 className="text-base text-center mb-0">See something else you liked?</h3>
+                    <p className="mt-0 text-secondary text-sm text-center">
                         You may have spotted these other fine PostHog products in the photos above.
                     </p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">

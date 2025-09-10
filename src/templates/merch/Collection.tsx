@@ -102,9 +102,9 @@ const leftSidebarContent = [
                 </p>
                 <div className="grid grid-cols-2 gap-2 mb-2">
                     <strong>Within the US:</strong>
-                    <span>1-2 weeks</span>
+                    <span>1 week</span>
                     <strong>Outside the US:</strong>
-                    <span>2-4 weeks</span>
+                    <span>2 weeks</span>
                 </div>
             </>
         ),

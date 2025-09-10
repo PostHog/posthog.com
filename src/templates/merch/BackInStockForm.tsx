@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
+import Input from 'components/OSForm/input'
 
 interface VariantProp {
     title?: string
@@ -41,7 +42,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
     }
 
     return (
-        <div className="border-t border border-input p-4 bg-accent rounded-md">
+        <div data-scheme="primary" className="border border-primary p-4 bg-primary rounded-md">
             {submitted ? (
                 <p className="m-0 text-sm">Thanks! We'll email you when it's back in stock.</p>
             ) : (
@@ -51,15 +52,18 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
                         Enter your email and we'll get back to you as soon as this product is back in stock
                     </p>
                     <form onSubmit={handleSubmit} className="flex space-x-2 items-center m-0">
-                        <input
-                            placeholder="Email"
-                            className="bg-light dark:bg-dark rounded-md border border-input py-1.5 px-2 text-base mt-[2px] w-full"
+                        <Input
+                            label="Email"
                             type="email"
+                            placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            showLabel={false}
+                            dataScheme="secondary"
+                            containerClassName="flex-1"
                         />
                         <div className="shrink-0">
-                            <CallToAction size="md" type="primary">
+                            <CallToAction size="lg" type="primary">
                                 Notify me
                             </CallToAction>
                         </div>
