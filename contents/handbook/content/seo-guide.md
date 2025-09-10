@@ -23,7 +23,7 @@ Here’s what that might look like for "Retention rate vs churn"
 
 ### 2. Make it easy to digest
 
-When answering a question, we lead with the answer first, then expand with supporting details. This helps impatient readers and aligns with how AI tools select responses.
+When answering a question, lead with the answer first, then expand with supporting details. This helps impatient readers and aligns with how AI tools select responses.
 
 We keep our structure simple and scannable:
 
@@ -51,17 +51,19 @@ Establish yourself (and PostHog) as a subject matter expert. We do this by:
 
 - **Backing our claims with data.** Include relevant statistics, research findings, or mention credible studies. Citing reputable sources or adding footnotes for facts can also build trust (and AI models tend to favor answers with a cited source).
 
-- **Including expert insights.** If possible, add quotations or insights from experts (it can be an internal SME). An authoritative quote or a first-hand insight provides uniqueness and value that generic content lacks.
+- **Including expert insights.** If possible, add quotations or insights from experts (it can be an internal one). An authoritative quote or a first-hand insight provides uniqueness and value that generic content lacks.
 
-- **Offering a unique point of view or proprietary data.** Bring something new to the table – something only we can. Share internal data\* or a novel insight from your personal experience. Google’s algorithms now consider “information gain,” which measures the uniqueness of information your content adds beyond what’s already out there. To avoid being lost in a sea of redundant content, strive to add new value or perspective on the topic.
+- **Offering a unique point of view or proprietary data.** Bring something new to the table – something only we can. Share internal data\* or a novel insight from your personal experience. Google’s algorithms now consider “information gain,” which measures the uniqueness of information your content adds beyond what’s already out there.
 
-*Be thoughtful about what you share – protect sensitive data and respect user privacy – but don’t shy away from leveraging the knowledge only we have. Our unique perspective is our moat.
+- Be thoughtful about what you share – protect sensitive data and respect user privacy – but don’t shy away from leveraging the knowledge only we have. Our unique perspective is our moat.
 
 ### 5. Be conversational
 
-Our tone is friendly, focused, and human – especially now that voice search and AI chat engines are shaping how people consume information. Content that sounds natural and answers questions simply is more likely to show up in featured snippets, People Also Ask boxes, and AI overviews.
+Our tone is friendly, focused, and human – especially now that voice search and AI chat engines are shaping how people consume information. Content that sounds natural and answers questions simply is more likely to show up in featured snippets, *People Also Ask* boxes, and AI overviews.
 
-That said, conversational doesn’t mean rambling. Stay on topic and be clear and direct. Think of how you’d explain the topic if speaking to a colleague – friendly but focused. A more dialog-like tone can also help capture featured snippets or People Also Ask boxes, as the content directly addresses how users phrase questions. 
+That said, conversational doesn’t mean rambling. Stay on topic and be clear and direct. Think of how you’d explain the topic if speaking to a colleague – friendly but focused. 
+
+A more dialog-like tone can also help capture featured snippets or *People Also Ask* boxes, as the content directly addresses how users phrase questions. 
 
 > **Bad Q&A example**   
 > - **Heading**: Strategies for reducing customer attrition   
@@ -147,7 +149,7 @@ Quick metadata checklist:
 - [ ] Meta title includes the primary keyword and stays under \~60 characters  
 - [ ] Meta description is under 160 characters and compelling (can include primary or secondary keywords)  
 - [ ] Each page has unique metadata (no duplicates)  
-- [ ] Preview in a SERP simulator before publishing to check for truncation  
+- [ ] Preview in a [SERP simulator](https://mangools.com/free-seo-tools/serp-simulator) before publishing to check for truncation  
 - [ ] Add dates, numbers, or benefit-driven language where relevant to make metadata feel fresh and worth clicking.
 
 ## Useful SEO tools
