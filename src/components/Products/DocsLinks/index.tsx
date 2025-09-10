@@ -26,7 +26,7 @@ export const DocLinks = ({ menu }: { menu: any[] }) => {
             {menuOrganized.map((title) => {
                 return (
                     <li key={title}>
-                        <p className="opacity-50 m-0 font-semibold">{title}</p>
+                        <p className="opacity-50 m-0 font-semibold text-primary">{title}</p>
                         <ul className="list-none m-0 p-0 mt-2 flex flex-col">
                             {organized[title].map(({ name, icon, color, url, badge }) => {
                                 return (

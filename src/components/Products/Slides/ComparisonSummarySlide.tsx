@@ -38,7 +38,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                     <ul className="p-0 mb-2 list-none">
                         {them.map((item: ComparisonItem, index: number) => (
                             <li key={index} className="border-b-2 last:border-b-0 border-primary py-2">
-                                <span className="font-semibold text-lg">{item.title}</span>
+                                <span className="font-semibold text-lg text-primary">{item.title}</span>
                                 {item.subtitle && (
                                     <span className="text-secondary ml-2 italic">
                                         {/* Update:{' '} */}
@@ -69,7 +69,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                     <ul className="p-0 mb-2 list-none">
                         {us.map((item: ComparisonItem, index: number) => (
                             <li key={index} className="border-b-2 last:border-b-0 border-primary py-2">
-                                <span className="font-semibold text-lg">{item.title}</span>
+                                <span className="font-semibold text-lg text-primary">{item.title}</span>
                                 {item.subtitle && <span className="text-secondary ml-1">{item.subtitle}</span>}
                             </li>
                         ))}
