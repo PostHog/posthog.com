@@ -320,7 +320,7 @@ export default function DisplayOptions() {
                     <Fieldset legend="Performance">
                         <div className="bg-primary grid grid-cols-2 gap-2">
                             <ToggleGroup
-                                title="Performance Boost"
+                                title="Performance boost"
                                 options={[
                                     { label: 'Disabled', value: 'false' },
                                     { label: 'Enabled', value: 'true' },
