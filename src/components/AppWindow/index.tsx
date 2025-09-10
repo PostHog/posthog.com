@@ -28,6 +28,7 @@ import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { useToast } from '../../context/Toast'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -105,6 +106,7 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
 }
 
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
+    const { addToast, toasts } = useToast()
     const {
         minimizeWindow,
         bringToFront,
@@ -118,6 +120,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         constraintsRef,
         expandWindow,
         siteSettings,
+        updateSiteSettings,
         openNewChat,
         compact,
         menu: appMenu,
@@ -144,6 +147,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [closed, setClosed] = useState(false)
     const [minimizing, setMinimizing] = useState(false)
     const [animating, setAnimating] = useState(true)
+    const animationStartTimeRef = useRef<number | null>(null)
 
     const inView = useMemo(() => {
         const windowsAbove = windows.filter(
@@ -457,6 +461,40 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         }, 0)
     }
 
+    const onAnimationStart = () => {
+        animationStartTimeRef.current = performance.now()
+    }
+    const onAnimationComplete = () => {
+        setAnimating(false)
+        const endTime = performance.now()
+        const startTime = animationStartTimeRef.current || 0
+        const duration = endTime - startTime
+        if (
+            duration > 700 &&
+            !siteSettings.performanceBoost &&
+            !toasts.some((toast) => toast.title === 'Animations running slow')
+        ) {
+            addToast({
+                title: 'Animations running slow',
+                description: 'Want to disable animations for a snappier experience?',
+                actionLabel: 'Disable animations',
+                onAction: () => {
+                    updateSiteSettings({ ...siteSettings, performanceBoost: true })
+                    addToast({
+                        title: 'Animations disabled',
+                        description: 'Animations have been disabled for a snappier experience.',
+                        duration: 2000,
+                        onUndo: () => {
+                            updateSiteSettings({ ...siteSettings, performanceBoost: false })
+                        },
+                    })
+                },
+                duration: 8000,
+            })
+        }
+        animationStartTimeRef.current = null
+    }
+
     return (
         <WindowProvider
             appWindow={item}
@@ -602,7 +640,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             onDragEnd={handleDragEnd}
                             onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={handleMouseDown}
-                            onAnimationComplete={() => setAnimating(false)}
+                            onAnimationStart={onAnimationStart}
+                            onAnimationComplete={onAnimationComplete}
                         >
                             {!item.minimal && !compact && (
                                 <div
