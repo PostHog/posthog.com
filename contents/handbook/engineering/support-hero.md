@@ -52,7 +52,7 @@ Each engineering team has its own list of tickets in Zendesk:
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/33125360060571)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/33125190975131)
 
-Your job is simple: ship features and fixes, and resolve ticket after ticket from your team's list.
+Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and response to open-source PRs assigned to your team.
 
 There are three sources of tickets:
 
@@ -73,6 +73,58 @@ Others tickets report bugs or suspected bugs. Get to the bottom of each one - yo
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+### Responding to external PRs
+
+Another responsibility of the support hero is to serve as the first point of contact for code reviews on external (open-source) PRs that affect your team's product. Quick and thoughtful responses to community contributions are critical for maintaining PostHog's reputation as a good open-source citizen.
+
+#### How external PRs are assigned
+
+External PRs typically reach your team through one of two methods:
+- **CODEOWNERS automation**: If your team has CODEOWNERS configured, PRs modifying your team's files will automatically be assigned to your team
+- **Manual assignment**: For teams without CODEOWNERS set up, external PRs may be manually assigned to your team handle by other engineers who spot them
+
+#### Handling external PRs
+
+When an external PR lands in your team's queue:
+
+1. **Initial triage (within 24 hours)**
+   - Acknowledge the PR with a comment thanking the contributor
+   - Check if the PR passes our automated checks (Greptile feedback, tests, linting)
+   - If there are obvious blockers (failed tests, merge conflicts), politely ask the contributor to address them first
+
+2. **Review approach**
+   - Be especially welcoming and constructive - remember that contributors are volunteering their time
+   - Provide clear, actionable feedback rather than vague suggestions
+   - If changes are needed, explain why and provide examples where helpful
+   - Consider the effort/reward tradeoff - some PRs may need more work than they're worth, and it's okay to politely decline with explanation
+
+3. **Communication expectations**
+   - Set clear expectations about what the contributor needs to do
+   - If you need time to test or investigate further, let them know when they can expect an update
+   - Remember that external contributors can't ping us directly like teammates can, so be proactive with updates
+   - If a PR will require significant back-and-forth, consider whether it's worth the time investment
+
+4. **Common blockers to address upfront**
+   - Ask contributors to respond to Greptile feedback before your review
+   - Require merge conflicts to be resolved before reviewing
+   - Ensure tests are passing (or understand why they're not)
+   - Check that the PR follows our existing code patterns and conventions
+
+5. **When to escalate**
+   - If the PR touches critical infrastructure or security-sensitive code
+   - If you're unsure about the product implications of the change
+   - If the PR has been stale for more than a week despite your follow-ups
+
+#### Prioritization
+
+External PRs should be treated with the following priority during your support hero week:
+- **High-value bug fixes**: Review within 1-2 days
+- **Small improvements**: Review within 2-3 days  
+- **Large features**: Initial triage within 2 days, full review within a week
+- **PRs requiring significant rework**: Provide feedback quickly so contributors can decide whether to continue
+
+Remember: Every external PR that goes stale reflects poorly on PostHog. It's better to politely decline a PR quickly than to let it languish without feedback.
 
 ## What do I do as a SDK Support Hero?
 
