@@ -257,12 +257,7 @@ export default function TaskBarMenu() {
                         className="[&_button]:px-2"
                     /> */}
                     <div className="relative mr-1">
-                        <OSButton
-                            variant="secondary"
-                            size="md"
-                            onClick={() => navigate('/start', { state: { newWindow: true } })}
-                            className=""
-                        >
+                        <OSButton variant="secondary" size="md" asLink to="https://app.posthog.com/signup" className="">
                             Get started – free
                         </OSButton>
                     </div>
