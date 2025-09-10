@@ -86,7 +86,7 @@ We'll cover every step clearly, including how to handle setup without Google Clo
 
 1. In BigQuery left menu, click **Data transfers**  
 
-![iamge 5](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/5_pipelines_45478ae2fa.png)  
+![image 5](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/5_pipelines_45478ae2fa.png)  
 
 2. The Data Transfers page will open. In there, click the **Create Transfer** button  
 3. **Source:** Select **Google Ads** from dropdown  
