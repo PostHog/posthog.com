@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
+import { GettingStartedSlide } from './GettingStartedSlide'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'revenue_analytics'
@@ -70,28 +71,22 @@ export default function RevenueAnalytics(): JSX.Element {
     `)
 
     const slides = createSlideConfig({
-        exclude: ['customers', 'pricing', 'docs', 'pairs-with'],
-        // order: ['overview', 'pricing', 'features'],
+        exclude: ['customers', 'pricing'],
         templates: {
             overview: 'stacked',
         },
-        // content: {
-        //     answersDescription:
-        //         'Understand user behavior, identify friction points, and improve your product experience',
-        //     featuresBackgroundImage: {
-        //         url: 'https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg',
-        //         opacity: 0.2,
-        //         position: 'center',
-        //         size: 'cover',
-        //     },
-        // },
+        custom: [
+            {
+                slug: 'getting-started',
+                name: 'Getting Started',
+                component: GettingStartedSlide,
+            },
+        ],
     })
 
     // Merge content data with product data
-
     const mergedData = {
         ...data,
-
         ...contentData,
     }
 
