@@ -65,19 +65,35 @@ const SliderRow = ({ label = '', sliderConfig, volume, setVolume, unit, cost, bi
 export default function StandaloneAddonsTab({ activeProduct, setVolume, setProduct }) {
     const [mainVolume, setMainVolume] = useState(activeProduct.volume || 0)
     const [mainCost, setMainCost] = useState(0)
-    const [addonVolume, setAddonVolume] = useState(activeProduct.addonSliders?.[0]?.volume || 0)
-    const [addonCost, setAddonCost] = useState(0)
     const [showBreakdown, setShowBreakdown] = useState(false)
     const [mainCostByTier, setMainCostByTier] = useState([])
-    const [addonCostByTier, setAddonCostByTier] = useState([])
+
+    // Initialize addon state for all addons
+    const [addonData, setAddonData] = useState(
+        () =>
+            activeProduct.addonSliders?.map((addon) => ({
+                volume: addon.volume || 0,
+                cost: 0,
+                costByTier: [],
+            })) || []
+    )
 
     const mainBillingTiers = useMemo(() => activeProduct?.billingData.plans.find((plan) => plan.tiers)?.tiers, [])
 
-    const addonSlider = activeProduct.addonSliders?.[0]
-    const addonBillingData = activeProduct.billingData.addons?.find((addon) => addon.type === addonSlider?.key)
-    const addonBillingTiers = useMemo(() => addonBillingData?.plans.find((plan) => plan.tiers)?.tiers, [])
+    // Get billing data for all addons
+    const addonBillingData = useMemo(
+        () =>
+            activeProduct.addonSliders?.map((addon) => ({
+                ...addon,
+                billingData: activeProduct.billingData.addons?.find((billingAddon) => billingAddon.type === addon.key),
+                billingTiers: activeProduct.billingData.addons
+                    ?.find((billingAddon) => billingAddon.type === addon.key)
+                    ?.plans.find((plan) => plan.tiers)?.tiers,
+            })) || [],
+        []
+    )
 
-    const totalCost = mainCost + addonCost
+    const totalCost = mainCost + addonData.reduce((sum, addon) => sum + addon.cost, 0)
 
     useEffect(() => {
         if (mainBillingTiers) {
@@ -88,12 +104,17 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     }, [mainVolume, mainBillingTiers])
 
     useEffect(() => {
-        if (addonBillingTiers && addonVolume > 0) {
-            const { total, costByTier } = calculatePrice(addonVolume, addonBillingTiers)
-            setAddonCost(total)
-            setAddonCostByTier(costByTier)
-        }
-    }, [addonVolume, addonBillingTiers])
+        // Update costs for all addons
+        const updatedAddonData = addonData.map((addon, index) => {
+            const addonBilling = addonBillingData[index]
+            if (addonBilling?.billingTiers && addon.volume > 0) {
+                const { total, costByTier } = calculatePrice(addon.volume, addonBilling.billingTiers)
+                return { ...addon, cost: total, costByTier }
+            }
+            return { ...addon, cost: 0, costByTier: [] }
+        })
+        setAddonData(updatedAddonData)
+    }, [addonData.map((a) => a.volume).join(','), addonBillingData])
 
     useEffect(() => {
         const { costByTier: mainCostByTier } = calculatePrice(mainVolume, mainBillingTiers)
@@ -102,16 +123,15 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
             volume: mainVolume,
             costByTier: mainCostByTier,
         })
-    }, [totalCost, mainVolume, addonVolume, mainBillingTiers])
+    }, [totalCost, mainVolume, addonData, mainBillingTiers])
 
     const handleMainVolumeChange = (volume, cost) => {
         setMainVolume(volume)
         setMainCost(cost)
     }
 
-    const handleAddonVolumeChange = (volume, cost) => {
-        setAddonVolume(volume)
-        setAddonCost(cost)
+    const handleAddonVolumeChange = (index) => (volume, cost) => {
+        setAddonData((prev) => prev.map((addon, i) => (i === index ? { ...addon, volume, cost } : addon)))
     }
 
     return (
@@ -132,21 +152,24 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     />
                 </div>
 
-                {/* Addon Slider */}
-                {addonSlider && addonBillingTiers && (
-                    <div className="mb-4">
-                        <h4 className="mb-3 text-base font-semibold">{addonSlider.label}</h4>
-                        <SliderRow
-                            label={addonSlider.unit}
-                            sliderConfig={addonSlider.sliderConfig}
-                            volume={addonVolume}
-                            setVolume={handleAddonVolumeChange}
-                            unit={addonSlider.unit}
-                            cost={addonCost}
-                            billingTiers={addonBillingTiers}
-                            freeAllocation={addonSlider.freeAllocation}
-                        />
-                    </div>
+                {/* Addon Sliders */}
+                {addonBillingData.map(
+                    (addon, index) =>
+                        addon.billingTiers && (
+                            <div key={addon.key} className="mb-4">
+                                <h4 className="mb-3 text-base font-semibold">{addon.label}</h4>
+                                <SliderRow
+                                    label={addon.unit}
+                                    sliderConfig={addon.sliderConfig}
+                                    volume={addonData[index]?.volume || 0}
+                                    setVolume={handleAddonVolumeChange(index)}
+                                    unit={addon.unit}
+                                    cost={addonData[index]?.cost || 0}
+                                    billingTiers={addon.billingTiers}
+                                    freeAllocation={addon.freeAllocation}
+                                />
+                            </div>
+                        )
                 )}
 
                 <div className="grid grid-cols-6 gap-x-8 pt-4 mt-4 border-t border-primary">
@@ -211,24 +234,29 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                     </div>
                                 </div>
 
-                                {/* Addon Breakdown */}
-                                {addonSlider && addonVolume > 0 && (
-                                    <div>
-                                        <h4 className="text-lg m-0">{addonSlider.label}</h4>
-                                        <p className="opacity-70 m-0 text-sm mb-2">
-                                            <strong>{addonVolume.toLocaleString()}</strong> {addonSlider.unit}s
-                                        </p>
-                                        <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
-                                            <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
-                                                <PricingTiers
-                                                    plans={[{ tiers: addonCostByTier }]}
-                                                    unit={addonSlider.unit}
-                                                    type={addonSlider.key}
-                                                    showSubtotal
-                                                />
+                                {/* Addon Breakdowns */}
+                                {addonBillingData.map(
+                                    (addon, index) =>
+                                        addon.billingTiers &&
+                                        addonData[index]?.volume > 0 && (
+                                            <div key={addon.key}>
+                                                <h4 className="text-lg m-0">{addon.label}</h4>
+                                                <p className="opacity-70 m-0 text-sm mb-2">
+                                                    <strong>{addonData[index].volume.toLocaleString()}</strong>{' '}
+                                                    {addon.unit}s
+                                                </p>
+                                                <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                                    <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
+                                                        <PricingTiers
+                                                            plans={[{ tiers: addonData[index].costByTier }]}
+                                                            unit={addon.unit}
+                                                            type={addon.key}
+                                                            showSubtotal
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        )
                                 )}
                             </div>
                         </div>
