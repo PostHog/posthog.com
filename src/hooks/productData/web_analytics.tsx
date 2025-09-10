@@ -12,22 +12,6 @@ export const webAnalytics = {
     colorSecondary: '[#37945D]',
     category: 'analytics',
     billedWith: 'Product analytics',
-    pairsWith: [
-        {
-            slug: 'product-analytics',
-            description: 'Go deeper than a dashboard by building your own insights and SQL queries from scratch.',
-        },
-        {
-            slug: 'session-replay',
-            description:
-                "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
-        },
-        {
-            slug: 'surveys',
-            description:
-                'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
-        },
-    ],
     seo: {
         title: 'Web analytics - PostHog',
         description:

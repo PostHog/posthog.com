@@ -1,12 +1,7 @@
 import React from 'react'
 import ZoomHover from 'components/ZoomHover'
 import Link from 'components/Link'
-
-interface PairProduct {
-    name: string
-    Icon?: React.ComponentType<any>
-    color?: string
-}
+import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 
 interface PairItem {
     slug: string
@@ -40,12 +35,17 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
                                 className="flex flex-col items-center border border-primary rounded p-4 bg-primary hover:bg-accent transition-colors h-full w-full"
                             >
                                 <span
-                                    className={`inline-block size-8 my-4 ${productDetails.color
+                                    className={`inline-block size-8 my-4 ${
+                                        productDetails.color
                                             ? 'text-' + productDetails.color
                                             : 'text-primary dark:text-primary-dark opacity-50'
-                                        }`}
+                                    }`}
                                 >
-                                    {productDetails.Icon && <productDetails.Icon />}
+                                    {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
+                                        <AppIcon name={productDetails.parentIcon} />
+                                    ) : (
+                                        productDetails.Icon && <productDetails.Icon />
+                                    )}
                                 </span>
                                 <h3 className="text-2xl font-bold text-primary mb-2">{productDetails.name}</h3>
                                 <p className="text-lg text-secondary">{pair.description}</p>
