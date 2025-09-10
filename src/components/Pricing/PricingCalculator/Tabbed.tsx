@@ -15,6 +15,11 @@ import { useUser } from 'hooks/useUser'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 
+// Display name overrides for pricing calculator tabs menu
+const TAB_DISPLAY_NAMES = {
+    realtime_destinations: 'Data pipelines',
+}
+
 const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
@@ -353,7 +358,7 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
-                        {products.map(({ name, Icon, cost, color, billingData }, index) => {
+                        {products.map(({ name, Icon, cost, color, billingData, handle }, index) => {
                             const active = activeTab === index
                             const addonsPrice = productAddons
                                 .filter(
@@ -376,7 +381,7 @@ export default function Tabbed() {
                                                     <Icon className={`w-5 h-6 text-${color}`} />
                                                 </span>
                                             )}
-                                            <span>{name}</span>
+                                            <span>{TAB_DISPLAY_NAMES[handle] || name}</span>
                                         </div>
                                         {name == 'Experiments' ? (
                                             <span className="opacity-25">--</span>

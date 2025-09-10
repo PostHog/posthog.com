@@ -38,7 +38,6 @@ import {
 export const realtimeDestinations = {
     name: 'Realtime destinations',
     Icon: IconDecisionTree,
-    // description: 'Send data to tools such as Slack, Zapier, or Customer.io to receive notifications, trigger automations, send emails, and more.',
     type: 'realtime_destinations',
     handle: 'realtime_destinations',
     slug: 'realtime-destinations',
