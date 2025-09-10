@@ -148,7 +148,12 @@ export default function Pricing() {
     }, [search])
 
     return (
-        <ReaderView hideLeftSidebar tableOfContents={pricingTableOfContents} hideMobileTableOfContents>
+        <ReaderView
+            hideLeftSidebar
+            tableOfContents={pricingTableOfContents}
+            showQuestions={false}
+            hideMobileTableOfContents
+        >
             <SEO title="Pricing - PostHog" description="Find out how much it costs to use PostHog" />
 
             <PricingExperiment
@@ -178,7 +183,9 @@ export default function Pricing() {
                 <FAQs />
                 <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
                     Have another pricing-related question?{' '}
-                    <Link to="/questions/topic/pricing">Ask in our community forum</Link>
+                    <Link to="/questions/topic/pricing" state={{ newWindow: true }}>
+                        Ask in our community forum.
+                    </Link>
                 </p>
             </SectionLayout>
 

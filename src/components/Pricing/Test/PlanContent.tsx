@@ -3,10 +3,36 @@ import { IconCheck } from '@posthog/icons'
 import { Link as ScrollLink } from 'react-scroll'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
-import Modal from 'components/Modal'
-import Lottie from 'react-lottie'
+import { useApp } from '../../../context/App'
+import { useWindow } from '../../../context/Window'
 
-export const FreePlanContent = ({ onFreeTierClick, isMainColumn = false }) => {
+const SignupEmbed = (props: any) => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Signup trends')
+        }
+    }, [])
+
+    return (
+        <iframe
+            className="m-0 size-full"
+            width="100%"
+            height="100%"
+            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
+        />
+    )
+}
+
+export const FreePlanContent = ({
+    onFreeTierClick,
+    isMainColumn = false,
+}: {
+    onFreeTierClick: () => void
+    isMainColumn?: boolean
+}) => {
     return (
         <div>
             {!isMainColumn && (
@@ -42,7 +68,13 @@ export const FreePlanContent = ({ onFreeTierClick, isMainColumn = false }) => {
     )
 }
 
-export const PaidPlanContent = ({ onFreeTierClick, isMainColumn = false }) => {
+export const PaidPlanContent = ({
+    onFreeTierClick,
+    isMainColumn = false,
+}: {
+    onFreeTierClick: () => void
+    isMainColumn?: boolean
+}) => {
     return (
         <div>
             {!isMainColumn && (
@@ -103,7 +135,15 @@ export const PaidPlanContent = ({ onFreeTierClick, isMainColumn = false }) => {
     )
 }
 
-const RegionButton = ({ active, onClick, children }) => {
+const RegionButton = ({
+    active,
+    onClick,
+    children,
+}: {
+    active: boolean
+    onClick: () => void
+    children: React.ReactNode
+}) => {
     return (
         <button
             onClick={onClick}
@@ -116,25 +156,20 @@ const RegionButton = ({ active, onClick, children }) => {
     )
 }
 
-export default function PlanContent({ activePlan, onFreeTierClick, isMainColumn = false }) {
+export default function PlanContent({
+    activePlan,
+    onFreeTierClick,
+    isMainColumn = false,
+}: {
+    activePlan: string
+    onFreeTierClick: () => void
+    isMainColumn?: boolean
+}) {
     const posthog = usePostHog()
+    const { addWindow } = useApp()
     const [region, setRegion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
     const [signupCoundLoading, setSignupCountLoading] = useState(true)
-    const [modalOpen, setModalOpen] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-
-    const handleOpenModal = () => {
-        setIsLoading(true)
-        setModalOpen(true)
-        setTimeout(() => setIsLoading(false), 3000)
-    }
-
-    const [hogData, setHogData] = useState<any | null>(null)
-
-    useEffect(() => {
-        import('../../../../static/lotties/loading.json').then((data) => setHogData(data.default))
-    }, [])
 
     useEffect(() => {
         if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
@@ -154,36 +189,6 @@ export default function PlanContent({ activePlan, onFreeTierClick, isMainColumn 
 
     return (
         <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                {isLoading ? (
-                    <>
-                        {hogData ? (
-                            <div className="size-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Lottie
-                                    options={{
-                                        loop: true,
-                                        autoplay: true,
-                                        animationData: hogData,
-                                    }}
-                                />
-                            </div>
-                        ) : (
-                            <>Loading...</>
-                        )}
-                    </>
-                ) : (
-                    <div className="px-5">
-                        <div className="max-w-4xl mx-auto mt-12 relative rounded-md overflow-hidden">
-                            <iframe
-                                className="m-0"
-                                width="100%"
-                                height="400"
-                                src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
-                            />
-                        </div>
-                    </div>
-                )}
-            </Modal>
             {activePlan === 'free' ? (
                 <FreePlanContent onFreeTierClick={onFreeTierClick} isMainColumn={isMainColumn} />
             ) : (
@@ -222,7 +227,20 @@ export default function PlanContent({ activePlan, onFreeTierClick, isMainColumn 
                 >
                     {signupCountToday ? <strong>{signupCountToday}</strong> : 'Tons of'} companies signed up{' '}
                     {signupCountToday ? (
-                        <button className="font-bold text-red dark:text-yellow" onClick={handleOpenModal}>
+                        <button
+                            onClick={() =>
+                                addWindow(
+                                    (
+                                        <SignupEmbed
+                                            location={{ pathname: 'signup-embed' }}
+                                            key="signup-embed"
+                                            newWindow
+                                        />
+                                    ) as any
+                                )
+                            }
+                            className="font-bold text-red dark:text-yellow"
+                        >
                             today
                         </button>
                     ) : (
