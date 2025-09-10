@@ -46,6 +46,7 @@ const query = graphql`
             nodes {
                 id
                 name
+                slug
                 description
                 crest {
                     data {
@@ -313,8 +314,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField
         ? JSON.parse(teamsField.value).filter((teamName: string) =>
-              allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
-          )
+            allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
+        )
         : []
     const [selectedTeamName, setSelectedTeamName] = useState('')
 
@@ -538,12 +539,11 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
                                                                         data-job-title
-                                                                        className={`font-semibold text-[15px] ${
-                                                                            selectedJob.fields.title ===
-                                                                            job.fields.title
+                                                                        className={`font-semibold text-[15px] ${selectedJob.fields.title ===
+                                                                                job.fields.title
                                                                                 ? ''
                                                                                 : ''
-                                                                        }`}
+                                                                            }`}
                                                                     >
                                                                         {job.fields.title}
                                                                     </span>
@@ -561,7 +561,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
                                                                                     : teams.length === 1 &&
-                                                                                          `${teams[0]} Team`
+                                                                                    `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -594,22 +594,20 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                 width="full"
                                                                 zoomHover="md"
                                                                 active={selectedJob.fields.title === job.fields.title}
-                                                                className={` ${
-                                                                    selectedJob.fields.title === job.fields.title
+                                                                className={` ${selectedJob.fields.title === job.fields.title
                                                                         ? ''
                                                                         : ''
-                                                                }`}
+                                                                    }`}
                                                                 onClick={() => setSelectedJob(job)}
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
                                                                         data-job-title
-                                                                        className={`font-semibold text-[15px] ${
-                                                                            selectedJob.fields.title ===
-                                                                            job.fields.title
+                                                                        className={`font-semibold text-[15px] ${selectedJob.fields.title ===
+                                                                                job.fields.title
                                                                                 ? ''
                                                                                 : ''
-                                                                        }`}
+                                                                            }`}
                                                                     >
                                                                         {job.fields.title}
                                                                     </span>
@@ -627,7 +625,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
                                                                                     : teams.length === 1 &&
-                                                                                          `${teams[0]} Team`
+                                                                                    `${teams[0]} Team`
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -663,26 +661,25 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex flex-wrap items-start @2xl:flex-row ">
                                 <Detail
                                     title="Location"
-                                    value={`Remote${
-                                        selectedJob.fields.locations?.length > 0
+                                    value={`Remote${selectedJob.fields.locations?.length > 0
                                             ? ` (${selectedJob.fields.locations.join(', ')})`
                                             : ''
-                                    }`}
+                                        }`}
                                     icon={<Location />}
                                 />
                                 {selectedJob.parent.customFields.find(
                                     (field: { title: string }) => field.title === 'Timezone(s)'
                                 )?.value && (
-                                    <Detail
-                                        title="Timezone(s)"
-                                        value={
-                                            selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Timezone(s)'
-                                            ).value
-                                        }
-                                        icon={<Timezone />}
-                                    />
-                                )}
+                                        <Detail
+                                            title="Timezone(s)"
+                                            value={
+                                                selectedJob.parent.customFields.find(
+                                                    (field: { title: string }) => field.title === 'Timezone(s)'
+                                                ).value
+                                            }
+                                            icon={<Timezone />}
+                                        />
+                                    )}
                             </ul>
 
                             <div className="@5xl:flex-1 [&_h3]:mt-0 mt-4">
@@ -745,8 +742,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     {teams.length > 1
                                         ? 'About the small teams'
                                         : teams.length === 1
-                                        ? `About the ${currentTeamName} Team`
-                                        : 'About this team'}
+                                            ? `About the ${currentTeamName} Team`
+                                            : 'About this team'}
                                 </h3>
                                 <div data-scheme="secondary" className={` ${teams.length > 1 ? '-mt-1' : ''}`}>
                                     <TeamsSidebar
