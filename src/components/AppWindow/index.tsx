@@ -21,7 +21,7 @@ import MenuBar, { MenuItemType } from 'components/RadixUI/MenuBar'
 import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
-import { navigate } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import Inbox from 'components/Inbox'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
@@ -477,12 +477,19 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             addToast({
                 title: 'Animations may be affecting performance',
                 description: 'You can turn off animations to improve performance if needed.',
-                actionLabel: 'Turn off animations',
+                actionLabel: 'Disable animations',
                 onAction: () => {
                     updateSiteSettings({ ...siteSettings, performanceBoost: true })
                     addToast({
-                        title: 'Animations turned off',
-                        description: 'Animations have been turned off to improve performance.',
+                        title: 'Animations have been disabled',
+                        description: (
+                            <>
+                                Animations have been turned off to improve performance. You can change this setting in{' '}
+                                <Link to="/display-options" state={{ newWindow: true }}>
+                                    display options
+                                </Link>
+                            </>
+                        ),
                         duration: 2000,
                         onUndo: () => {
                             updateSiteSettings({ ...siteSettings, performanceBoost: false })
