@@ -95,7 +95,7 @@ We target clusters of intent, not just one keyword. Long-tail variations are oft
 
 The more specific we make our content, the more likely it is to resonate – and perform. This matters more than ever with AI-driven search and tools like ChatGPT's Deep Research, which don’t just answer the initial query but often fan out into follow-up questions and related recommendations. 
 
-For example, a generic “best CRM tools” list might compete with thousands of others. But “best CRM tool for a healthtech startup in 2025” positions us as the exact match for a highly qualified search.
+For example, a generic “Best session replay tools” list might compete with thousands of others. But “Best open source session replay tools for startups” positions us as the exact match for a highly qualified search.
 
 When we write, we should ask ourselves:
 
