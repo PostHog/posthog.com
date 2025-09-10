@@ -117,7 +117,7 @@ Additional notes on self-serve discounts:
 
 We do offer additional discounts to nonprofits and start nonprofit discounts at 15% regardless of spend.
 
-If signing for an annual plan with a credit purchase between $20k and $80k, an additional 5% nonprofit discount is applied. For example, purchasing $25k in credits with an additional 5% nonprofit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
+If signing for an annual plan with a credit purchase between $25k and $80k, an additional 5% nonprofit discount is applied. For example, purchasing $25k in credits with an additional 5% nonprofit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
 
 We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
