@@ -363,7 +363,7 @@ export default function ProductToolkit() {
 
     return (
         <>
-            <SEO title="Welcome to PostHog!" description="Home" image="https://posthog.com/og-image.png" />
+            <SEO title="Welcome to PostHog!" description="Home" image="/images/og/default.png" />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}

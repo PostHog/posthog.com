@@ -17,7 +17,7 @@ export default function Dashboards() {
 
     return (
         <>
-            <SEO title={overview?.title} description={overview?.description} image="/images/og/product-analytics.jpg" />
+            <SEO title={overview?.title} description={overview?.description} image="/images/og/default.png" />
             <Editor>
                 <div className="space-y-8">
                     <div>

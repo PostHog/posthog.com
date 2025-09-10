@@ -24,7 +24,7 @@ export default function Trends() {
             <SEO
                 title={overview?.title || 'Trends'}
                 description={overview?.description || 'Visualize user data with graphs, tables, charts, maps, and more'}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
                 <div className="space-y-8">

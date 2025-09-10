@@ -188,7 +188,7 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
             <SEO
                 title="About this website"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
-                image={`/images/og/product-analytics.jpg`}
+                image={`/images/og/default.png`}
             />
             <Wizard>
                 <div className="bg-accent h-full">

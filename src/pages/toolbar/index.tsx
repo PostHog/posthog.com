@@ -22,7 +22,7 @@ export default function Toolbar() {
 
     return (
         <>
-            <SEO title={overview?.title} description={overview?.description} image="/images/og/product-analytics.jpg" />
+            <SEO title={overview?.title} description={overview?.description} image="/images/og/default.png" />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <div className="space-y-8">
                     <div>

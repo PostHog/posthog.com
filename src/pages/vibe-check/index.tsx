@@ -22,7 +22,7 @@ const FinalSlide = () => (
                 </p>
                 <p className="text-secondary text-sm mt-4">If you enjoyed this, you might also like:</p>
 
-                <SuggestedLinksBlock links={["sales", "pricing", "careers"]} />
+                <SuggestedLinksBlock links={['sales', 'pricing', 'careers']} />
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@ export default function Ick() {
             <SEO
                 title="You'll hate PostHog if..."
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
-                image={`/images/og/product-analytics.jpg`}
+                image={`/images/og/default.png`}
             />
             <Wizard
                 leftNavigation={

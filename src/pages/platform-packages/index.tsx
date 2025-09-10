@@ -79,7 +79,7 @@ export default function PlatformPackages() {
             <SEO
                 title="Platform packages - PostHog"
                 description="Our platform packages are designed to help you manage your teams securely and efficiently on PostHog as you grow."
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <div className="space-y-8">

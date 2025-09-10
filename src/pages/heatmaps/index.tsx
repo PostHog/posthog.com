@@ -19,7 +19,7 @@ export default function Heatmaps() {
             <SEO
                 title={seo?.title || 'Heatmaps - PostHog'}
                 description={seo?.description}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <Editor>
                 <div className="space-y-8">

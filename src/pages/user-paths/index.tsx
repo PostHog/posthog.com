@@ -21,7 +21,7 @@ export default function UserPaths() {
 
     return (
         <>
-            <SEO title={overview?.title} description={overview?.description} image="/images/og/product-analytics.jpg" />
+            <SEO title={overview?.title} description={overview?.description} image="/images/og/default.png" />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={name} hideTitle>
                 <div className="space-y-8">
                     <div>

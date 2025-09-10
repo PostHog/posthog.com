@@ -699,7 +699,7 @@ export const ProductProductAnalytics = () => {
             <SEO
                 title="Product Analytics - PostHog"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
-                image={`/images/og/product-analytics.jpg`}
+                image={`/images/og/default.png`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 {activeProfile && <Profile profile={{ ...activeProfile }} />}

@@ -22,11 +22,7 @@ export default function API() {
 
     return (
         <>
-            <SEO
-                title={seo?.title || 'API - PostHog'}
-                description={seo?.description}
-                image="/images/og/product-analytics.jpg"
-            />
+            <SEO title={seo?.title || 'API - PostHog'} description={seo?.description} image="/images/og/default.png" />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <div className="space-y-8">
                     <div>

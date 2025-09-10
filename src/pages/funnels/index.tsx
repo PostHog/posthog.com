@@ -24,7 +24,7 @@ export default function Funnels() {
             <SEO
                 title={overview?.title || 'Funnels'}
                 description={overview?.description || 'Find drop-off across a series of actions'}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
                 <div className="space-y-8">

@@ -24,7 +24,7 @@ export default function BI() {
             <SEO
                 title={overview?.title || 'Business Intelligence'}
                 description={overview?.description || 'Business intelligence for data-driven teams'}
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
                 <div className="space-y-8">

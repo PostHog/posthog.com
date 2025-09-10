@@ -53,11 +53,7 @@ export default function Components(): JSX.Element {
 
     return (
         <>
-            <SEO
-                title="Components - PostHog"
-                description="Components for PostHog"
-                image={`/images/og/product-analytics.jpg`}
-            />
+            <SEO title="Components - PostHog" description="Components for PostHog" image={`/images/og/default.png`} />
             <Explorer
                 template="generic"
                 slug="components"

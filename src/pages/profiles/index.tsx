@@ -20,7 +20,7 @@ export default function Profiles() {
             <SEO
                 title="User profiles - PostHog"
                 description="Track identified users with person profiles. Merge anonymous and identified users, store custom properties, and analyze user-specific behavior."
-                image="/images/og/product-analytics.jpg"
+                image="/images/og/default.png"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="User profiles" hideTitle>
                 <div className="space-y-8">
