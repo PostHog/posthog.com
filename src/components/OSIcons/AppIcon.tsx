@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BaseIcon, type IconProps } from './Icons'
 import Link from 'components/Link'
 import { useRef } from 'react'
@@ -172,6 +172,18 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/bookmark_classic_925f7242d3.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/bookmark_modern_fdeca8567b.png',
     },
+    postIt: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/post_it_classic_c0c129d5b5.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/post_it_modern_4af52ddd13.png',
+    },
+    blueScreen: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/blue_screen_classic_a1f6489f34.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/blue_screen_modern_ee31731c1f.png',
+    },
+    handbook: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_classic_b7cd7f26f7.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_modern_cf862d2ae6.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
@@ -195,13 +207,39 @@ export const IconImage = ({ url, className }: IconImageProps) => (
 )
 
 export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
-    const getCurrentSkin = (): 'modern' | 'classic' => {
-        if (typeof document !== 'undefined') {
-            const skin = document.body.getAttribute('data-skin')
-            return skin === 'classic' ? 'classic' : 'modern'
+    const [currentSkin, setCurrentSkin] = useState<'modern' | 'classic'>('modern')
+
+    useEffect(() => {
+        const updateSkin = () => {
+            if (typeof document !== 'undefined') {
+                const skin = document.body.getAttribute('data-skin')
+                setCurrentSkin(skin === 'classic' ? 'classic' : 'modern')
+            }
         }
-        return 'modern'
-    }
+
+        // Initial update
+        updateSkin()
+
+        // Watch for changes using MutationObserver
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-skin') {
+                    updateSkin()
+                }
+            })
+        })
+
+        if (typeof document !== 'undefined') {
+            observer.observe(document.body, {
+                attributes: true,
+                attributeFilter: ['data-skin'],
+            })
+        }
+
+        return () => {
+            observer.disconnect()
+        }
+    }, [])
 
     const getIconUrl = (iconName: AppIconName): string => {
         const iconVariants = PRODUCT_ICON_MAP[iconName] as AppIconVariants
@@ -209,8 +247,6 @@ export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
             console.warn(`AppIcon: Unknown icon name "${iconName}"`)
             return ''
         }
-
-        const currentSkin = getCurrentSkin()
 
         // Prefer skin-specific variant if available, else fall back to default
         if (currentSkin === 'modern' && iconVariants.modern) {
@@ -342,9 +378,11 @@ export const AppLink = ({
                 {children}
             </span>
             <figcaption
-                className={`text-sm font-medium leading-tight ${orientation === 'row' ? 'text-left' : 'text-center'}`}
+                className={`text-[13px] font-medium leading-tight ${
+                    orientation === 'row' ? 'text-left' : 'text-center'
+                }`}
             >
-                <span className={`inline-block leading-tight`}>
+                <span className={`inline-block leading-snug`}>
                     <span
                         className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
                     >
@@ -361,7 +399,7 @@ export const AppLink = ({
     const orientationClassName =
         orientation === 'row'
             ? 'flex w-full gap-2'
-            : 'inline-flex flex-col justify-center w-auto max-w-28 space-y-1 text-center'
+            : 'inline-flex flex-col justify-center w-auto space-y-0.5 max-w-28 text-center'
 
     return (
         <figure ref={ref}>

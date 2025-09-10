@@ -24,7 +24,10 @@ import {
     IconGithub,
     IconInstagram,
     IconController,
+    IconDictator,
+    IconSparksJoy,
 } from 'components/OSIcons'
+import { AppIcon } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
@@ -547,8 +550,8 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'submenu',
-                    label: 'Fun stuff',
-                    icon: <IconController className="size-4 text-lime-green" />,
+                    label: 'Things that spark joy',
+                    icon: <IconSparksJoy className="size-4" />,
                     items: [
                         {
                             type: 'item',
@@ -560,25 +563,32 @@ export function useMenuData(): MenuType[] {
                         },
                         {
                             type: 'item',
-                            label: 'Hedgehog mode',
-                            link: '/sparks-joy/hedgehog-mode',
+                            label: 'Games',
+                            disabled: true,
                         },
+                        // Games section
+                        ...SparksJoyItems.games.map((item) => ({
+                            type: 'item' as const,
+                            label: item.label,
+                            link: item.link,
+                        })),
                         {
                             type: 'item',
-                            label: 'Post-It note training',
-                            link: '/academy',
+                            label: 'Sorta like games',
+                            disabled: true,
                         },
-                        {
-                            type: 'item',
-                            label: '404 page',
-                            link: '/404',
-                        },
+                        // Not games section
+                        ...SparksJoyItems.notGames.map((item) => ({
+                            type: 'item' as const,
+                            label: item.label,
+                            link: item.link,
+                        })),
                     ],
                 },
                 {
                     type: 'submenu',
                     label: 'Sexy legal documents',
-                    icon: <Icons.IconTie className="size-4 text-orange" />,
+                    icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
                     items: [
                         {
                             type: 'item',
@@ -622,7 +632,7 @@ export function useMenuData(): MenuType[] {
                     label: 'System status',
                     link: 'https://status.posthog.com',
                     external: true,
-                    icon: <Icons.IconCheckCircle className="size-4 text-green" />,
+                    icon: <Icons.IconPulse className="size-4 text-red" />,
                 },
             ],
         },
@@ -749,3 +759,61 @@ export const DocsItemsEnd = [
         icon: <Icons.IconMessage className="size-4 text-green" />,
     },
 ]
+
+import type { AppIconName } from 'components/OSIcons/AppIcon'
+
+// Export Fun stuff items for use in sparks-joy page and menu
+export const SparksJoyItems = {
+    games: [
+        {
+            label: 'Hedgehog mode',
+            link: '/sparks-joy/hedgehog-mode',
+            iconName: 'hedgehog_mode' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogWars',
+            link: '/sparks-joy/hogwars',
+            iconName: 'hogwars' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'Dictator or tech bro?',
+            link: '/sparks-joy/dictator-or-tech-bro',
+            iconName: null,
+            customIcon: <IconDictator />,
+        },
+    ],
+    notGames: [
+        {
+            label: 'Photobooth',
+            link: '/photobooth',
+            iconName: 'photobooth' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogPaint',
+            link: '/paint',
+            iconName: 'hogpaint' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'Coloring book.pdf',
+            link: '/coloring-book.pdf',
+            iconName: 'pdf' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'Post-It note training',
+            link: '/academy',
+            iconName: 'postIt' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: '404 page',
+            link: '/404',
+            iconName: 'blueScreen' as AppIconName,
+            customIcon: null,
+        },
+    ],
+}
