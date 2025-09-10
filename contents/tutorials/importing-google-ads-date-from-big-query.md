@@ -52,23 +52,31 @@ We'll cover every step clearly, including how to handle setup without Google Clo
 2. Search for "BigQuery API"  
 3. Click **BigQuery API** result  
 4. Click "ENABLE" button  
-5. Make sure you see “API Enabled” message with green tick  
-   ![][image1]  
+5. Make sure you see “API Enabled” message with green tick
+
+![bigquery api](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/1_bigquery_api_90bc90382e.png)
+
 6. Click ← Go Back or use browser back button  
 7. Search "Google Ads API"  
 8. Click **Google Ads API** result  
 9. Click **Enable** button  
 10. Ensure you see the “API Enabled” message with green tick  
-    ![][image2]
+
+![google-ads-api](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2_google_ads_api_33bef419da.png)
 
 ### **Step 3: Create BigQuery Dataset**
 
 1. From Google Cloud Console homepage, go to **BigQuery** from the Quick Access Menu  
-2. In BigQuery interface, find your project name in left sidebar![][image3]  
+2. In BigQuery interface, find your project name in left sidebar
+
+![dataset-1](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/3_bigquery_dataset_134091ffa4.png)
+
 3. Click three dots (⋮) next to your project name  
 4. Select **Create dataset**  
-5. A side menu will open from the right side  
-   ![][image4]  
+5. A side menu will open from the right side
+
+![image 4](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/4_big_query_data_set_ff7a6823d3.png)
+
 6. **Dataset ID:** `google_ads_data`  
 7. **Data location:** Choose your region (US, EU, etc.)  
 8. Leave other settings as default  
@@ -77,11 +85,14 @@ We'll cover every step clearly, including how to handle setup without Google Clo
 ### **Step 4: Set Up Data Transfer**
 
 1. In BigQuery left menu, click **Data transfers**  
-   ![][image5]  
+
+![iamge 5](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/5_pipelines_45478ae2fa.png)  
+
 2. The Data Transfers page will open. In there, click the **Create Transfer** button  
 3. **Source:** Select **Google Ads** from dropdown  
-4. The Google Ads Transfer configuration menu will open with multiple configuration steps. We’ll cover all these steps from Step 5-10**.**  
-   ![][image6]
+4. The Google Ads Transfer configuration menu will open with multiple configuration steps. We’ll cover all these steps from Step 5-10**.**
+
+![image 6](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/6_data_source_c8825dd32f.png)
 
 ### **Step 5: Configure Data Source Details**
 
