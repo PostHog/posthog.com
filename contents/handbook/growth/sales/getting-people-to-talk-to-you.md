@@ -49,7 +49,7 @@ We've found most people will respond to this.
 
 ## Have you been ghosted?
 
-If you've had a a conversation with someone, there was interest on their side and then they suddenly go dark, using the The [John Barrows Ghosting Sequence](https://jbarrows.com/) can revivify them. 
+If you've had a conversation with someone, there was interest on their side and then they suddenly go dark, using the [John Barrows Ghosting Sequence](https://jbarrows.com/) can revivify them.
 
 1. After 2 weeks of valuable follow-up and you've not heard back, reply-all to the latest email thread.
 Change the subject to: "Still interested?"
