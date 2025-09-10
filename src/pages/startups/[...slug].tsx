@@ -11,6 +11,7 @@ import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
+import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
 import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
@@ -34,6 +35,16 @@ const partnerConfigs = [
                 <IconX className="size-8 text-white inline-block relative top-1" />
                 <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
                 <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'odf',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img src={ODFLogo} alt="ODF" className="inline-block h-9 relative top-[.2rem]" />
             </>
         ),
         value: '$50,000',
@@ -198,14 +209,14 @@ export default function Startups(): JSX.Element {
                             </p>
                         </div>
                         <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_partners_5c43154c33.png" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_docs_ae8043058c.png" />
                             <h3 className="text-base my-1 leading-tight">Better docs with Mintlify</h3>
                             <p className="text-sm mb-0">
                                 The best products deserve the best documentation. Get 50% off Mintlify for 6 months.
                             </p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_partners_5c43154c33.png" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_sdks_25358b1af4.png" />
                             <h3 className="text-base my-1 leading-tight">Better SDKs with Speakeasy</h3>
                             <p className="text-sm mb-0">
                                 Building an API or SDK? Our pals at Speakeasy have you covered with 50% off for 6
