@@ -16,7 +16,7 @@ interface ComparisonSummarySlideProps {
 export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySlideProps) {
     return (
         <div className="h-full p-8">
-            <div className="rounded-lg shadow-2xl flex flex-col justify-between items-center relative overflow-hidden min-h-96 mb-6 before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/compare_bg_0ffcd7a4d0.jpg')] before:bg-cover before:bg-center before:bg-no-repeat after:absolute after:inset-0 after:bg-gradient-to-b after:from-[rgba(0,0,0,.5)] after:via-[rgba(0,0,0,.2)] after:to-[rgba(0,0,0,0)]">
+            <div className="rounded-lg shadow-2xl flex flex-col justify-between items-center relative overflow-hidden min-h-64 mb-6 before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/compare_bg_0ffcd7a4d0.jpg')] before:bg-cover before:bg-center before:bg-no-repeat after:absolute after:inset-0 after:bg-gradient-to-b after:from-[rgba(0,0,0,.5)] after:via-[rgba(0,0,0,.2)] after:to-[rgba(0,0,0,0)]">
                 <div className="relative z-20 pt-8">
                     <h2 className="text-4xl font-bold text-white mb-2 text-center">PostHog vs...</h2>
                     <p className="text-xl text-white max-w-4xl mx-auto mb-8 text-center">An honest comparison tl;dr:</p>
@@ -25,7 +25,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/mascots_e1d975b193.png"
                     alt="Mascots"
                     className="relative z-10"
-                    imgClassName="max-h-[218px]"
+                    imgClassName="max-h-[180px]"
                 />
             </div>
 
