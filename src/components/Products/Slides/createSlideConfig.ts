@@ -135,7 +135,7 @@ export function createSlideConfig({
     // Get all available slide slugs (default + custom)
     const defaultSlugs = Object.keys(defaultSlides)
     const customSlugs = custom.map((slide) => slide.slug)
-    const allSlugs = [...defaultSlugs, ...customSlugs]
+    const allSlugs = Array.from(new Set([...defaultSlugs, ...customSlugs]))
 
     // Filter slides based on include/exclude
     let filteredSlugs = include ? allSlugs.filter((slug) => include.includes(slug)) : allSlugs
