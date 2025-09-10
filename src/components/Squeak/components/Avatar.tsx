@@ -3,10 +3,10 @@ import React from 'react'
 
 const Image = ({ src, className = '' }: { src: string | null | undefined; className?: '' }) => {
     return src ? (
-        <img className={`object-fill rounded-full ${className}`} src={src} />
+        <img className={`object-contain rounded-full ${className}`} src={src} />
     ) : (
         <svg
-            className={`bg-accent rounded-full ${className}`}
+            className={`bg-accent rounded-full !size-full ${className}`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 40 40"
