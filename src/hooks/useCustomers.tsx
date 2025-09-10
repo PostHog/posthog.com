@@ -137,14 +137,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 9,
         featured: true,
     },
-    // assemblyai: {
-    //     name: 'AssemblyAI',
-    //     toolsUsed: ['experiments', 'product_analytics'],
-    //     notes: 'AI-based transcription APIs',
-    //     logo: AssemblyAILogo,
-    //     featured: true,
-    //     height: 10,
-    // },
     brainboard: {
         name: 'Brainboard',
         toolsUsed: ['experiments', 'product_analytics', 'apps'],
@@ -180,14 +172,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: false,
     },
-    // dhl: {
-    //     name: 'DHL',
-    //     toolsUsed: [],
-    //     notes: 'The logistics company with the red and yellow logo',
-    //     logo: DHLLogo,
-    //     featured: true,
-    //     height: 10,
-    // },
     elevenlabs: {
         name: 'ElevenLabs',
         toolsUsed: ['feature_flags', 'product_analytics', 'feature_flags', 'surveys'],
@@ -437,12 +421,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 10,
     },
-    // swype: {
-    //     name: 'Swype',
-    //     toolsUsed: ['session_replay', 'product_analytics'],
-    //     notes: 'Tinder for jobs',
-    //     // logo: SwypeLogo,
-    // },
     startengine: {
         name: 'StartEngine',
         toolsUsed: [],
@@ -483,13 +461,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 10,
     },
-    // wowzer: {
-    //     name: 'Wowzer',
-    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
-    //     notes: 'AI image generator',
-    //     featured: false,
-    //     // logo: WowzerLogo,
-    // },
     ycombinator: {
         name: 'Y Combinator',
         toolsUsed: ['experiments', 'insights'],

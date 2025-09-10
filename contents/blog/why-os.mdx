@@ -53,7 +53,7 @@ It was also an interesting learning curve for me in figuring out how to organize
 -   Skinning a site with themes _and_ color schemes
     -   How do you maintain light and dark mode, along with themes across a handful of accent variations (primary, secondary, tertiary) in a way that all play well together? (I found this out, and I’ll write about it sometime!)
 -   A reference customer database
-    -   I’ve created a single customer record [in code](https://github.com/PostHog/posthog.com/blob/windows-n-such/src/hooks/useCustomers.tsx) that contains: a) which products they use, b) quotes from specific people about individual products c) SVG logos that work in light and dark mode
+    -   I’ve created a single customer record <Link to="https://github.com/PostHog/posthog.com/blob/61ad1a9ea079d6e0422a95ab453acbddf4cdd5a4/src/hooks/useCustomers.tsx#L364" external>in code</Link> that contains: a) which products they use, b) quotes from specific people about individual products c) SVG logos that work in light and dark mode
     -   This means that any quote can be presented on any page for any product without having to be hard-coded. It pulls in their name and photo, quote, and company logo, and can be filtered in reference to a specific product.
 
 For a lot of this site, I was designing it _while_ I was building UIs in Typescript and Tailwind. (The entire site is just a Git branch off our current site – it's all technically the same codebase. I just merged along the way over the last few months.)

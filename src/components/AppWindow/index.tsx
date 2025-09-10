@@ -483,12 +483,16 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     addToast({
                         title: 'Animations have been disabled',
                         description: (
-                            <>
+                            <p className="max-w-sm">
                                 Animations have been turned off to improve performance. You can change this setting in{' '}
-                                <Link to="/display-options" state={{ newWindow: true }}>
+                                <Link
+                                    to="/display-options"
+                                    className="font-semibold underline"
+                                    state={{ newWindow: true }}
+                                >
                                     display options
                                 </Link>
-                            </>
+                            </p>
                         ),
                         duration: 2000,
                         onUndo: () => {
