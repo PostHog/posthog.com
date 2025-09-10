@@ -56,7 +56,7 @@ export default function QuickCallsScript(): JSX.Element {
             if you like.
           </p>
           <p>
-            You may also enjoy <Link href="/pricing#sales" state={{ newWindow: true }}>our in-depth comparison</Link> of how we do "sales" compared to everybody else.
+            You may also enjoy <Link href="/sales" state={{ newWindow: true }}>our in-depth comparison</Link> of how we do "sales" compared to everybody else.
           </p>
         </ScrollArea>
       </Editor>

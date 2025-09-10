@@ -180,6 +180,10 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/blue_screen_classic_a1f6489f34.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/blue_screen_modern_ee31731c1f.png',
     },
+    handbook: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_classic_b7cd7f26f7.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_modern_cf862d2ae6.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
@@ -274,9 +278,8 @@ export const AppLink = ({
     const getChildIconClasses = () => {
         if (typeof parentIcon === 'string' && parentIcon === 'page') {
             // Custom classes for page parentIcon
-            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${
-                color ? `bg-${color}` : ''
-            }`
+            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${color ? `bg-${color}` : ''
+                }`
         }
         // Default fallback classes
         return `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`
@@ -350,7 +353,7 @@ export const AppLink = ({
                 {children}
             </span>
             <figcaption
-                className={`text-sm font-medium leading-tight ${orientation === 'row' ? 'text-left' : 'text-center'}`}
+                className={`text-[13px] font-medium leading-tight ${orientation === 'row' ? 'text-left' : 'text-center'}`}
             >
                 <span className={`inline-block leading-tight`}>
                     <span
@@ -369,7 +372,7 @@ export const AppLink = ({
     const orientationClassName =
         orientation === 'row'
             ? 'flex w-full gap-2'
-            : 'inline-flex flex-col justify-center w-auto max-w-28 space-y-1 text-center'
+            : 'inline-flex flex-col justify-center w-auto max-w-28 text-center'
 
     return (
         <figure ref={ref}>
