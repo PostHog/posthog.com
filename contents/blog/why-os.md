@@ -1,30 +1,66 @@
 ---
 title: 'Why our website looks like an operating system'
-date: 2025-07-22
+date: 2025-09-11
 author:
     - cory-watilo
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/default_636113ede9.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/default_2d8c0bdf90.png
 featuredImageType: full
 tags:
     - PostHog news
 ---
 
-There’s a problem with many large websites. Often times, you want to reference content on different pages. Browsers invented tabs, but it feel more like a band-aid than a solution.
+I have a problem with many large, technical websites.
 
-AI offers the promise of getting all the content you need on a single page, but it requires:
+Often times, I’ll want to refer to different pages at the same time. So I’ll `CMD` + click “a couple times” while browsing around and before I know it, I have 12 new tabs open – all indistinguishable from each other because they share the same favicon.
 
--   knowing the question you want to ask.
--   trusting that the AI will provide accurate information.
+PostHog.com has the same problem – especially as the site has grown from supporting a handful of paid products to over a dozen.
 
-As website creators, we can organize the content as best we can, but we’ll never overcome the natural human behavior of wanting to explore on our own.
+As I looked for ways to solve this explosion of pages, I started to question many of the typical patterns that marketing & docs websites have today.
 
-So instead of fighting this, we built PostHog.com to act more like an operating system where you can multi-task and open multiple pages simultaneously. And since we all know how to use an OS, there's not much of a learning curve.
+Long-form scrolling. Oversized footers. Absurd whitespace.
 
-This also means deviating from the industry norm of copious whitespace and longform scrolling in exchange for information density and the ability to access everything with less effort and fewer clicks.
+These website _encourage_ scrolling, but just to get people to the bottom of the page? And then what?
 
-There's also a ton of technical improvements which will make it easier for the PostHog team to maintain content as we grow past 15+ products toward 50 and beyond. And this is just the beginning – we have a ton of stuff we want to do next.
+Why are we doing this? What if we just made better ways to consume content?
 
-So welcome to the new PostHog.com. Be curious, click around, have some fun. We hope you enjoy your time here as much as we enjoyed building it.
+That’s the idea behind the new PostHog.com. You can multitask, open a few articles simultaneously, and move them around as you please. If anything there's a whitespace deficiency, and your fingers will be jealous you're not scrolling with them as much (because you're so engaged with our content).
 
-And if you want to _more_ about how and why we did this, [read how the site works](/handbook/engineering/posthog-com/how-posthog-website-works).
+It has window snapping, keyboard shortcuts, and a bookmark app. It works as well as you’d expect an operating system to work in a browser.
+
+You can be reading the latest newsletter from Product for Engineers while watching a demo video in the corner and also playing Hedgehog Mode, the game.
+
+I’ll be the first to admit it – an OS interface for a “website” is initially a jarring experience. I felt this as I built it. The human brain expects certain patterns within the confines of a browser viewport, and when it doesn’t get that assurance, it revolts.
+
+But the more I used the new site, the more I started to like it. And the experience was the same for colleagues. And now I can’t imagine using anything else.
+
+I had a lot of fun in building it with <TeamMember name="Eli Kinsey" />. Throughout the site you’ll find:
+
+-   A [Windows File Explorer](/products) clone that also acts as the UI for [our merch store](/merch)
+-   [Product pages](/llm-analytics) that resemble PowerPoint presentations
+-   A [document editor](/customers) where you can actually edit content
+-   [Forums](/questions) designed to look like you’re reading newsgroups in Outlook Express
+-   A [QuickTime clone](/demo)
+-   A lot of pages you’d expect to be well-designed that are… just [formatted as spreadsheets](/changelog)
+-   A screensaver and a [library of desktop backgrounds](/display-options)
+
+It was also an interesting learning curve for me in figuring out how to organize five years worth of content while making it scalable for the future. Some of the technical highlights:
+
+-   Separation of visual layer from content
+    -   All product pages are now powered from JSON files. This means that JSON dictates page layouts, content presentation, feature-level competitor comparison charts, and more. It also contains an array of screenshots used in various places (both in light and dark mode, of course).
+    -   Eventually this will move to a repository that’s shared with the PostHog app, so all the information is powered from the same source.
+-   Skinning a site with themes _and_ color schemes
+    -   How do you maintain light and dark mode, along with themes across a handful of accent variations (primary, secondary, tertiary) in a way that all play well together? (I found this out, and I’ll write about it sometime!)
+-   A reference customer database
+    -   I’ve created a single customer record in code that contains: a) which products they use, b) , quotes from specific people about individual products c) SVG logos that work in light and dark mode
+    -   This means that any quote can be presented on any page for any product without having to be hard-coded. It pulls in their name and photo, quote, and company logo, and can be filtered in reference to a specific product.
+
+For a lot of this site, I was designing it _while_ I was building UIs in Typescript Tailwind. (We just made a branch off our current site and merged along the way over the last few months – it's all technically the same codebase.)
+
+Prototyping in a production-level environment was a great way to ideate and develop features along the way – stuff I never would have built if I were just going off of mockups.
+
+So how will this pan out? Well, we’re about to find out. This feels like an early MVP – there’s a ton of stuff to improve upon from here.
+
+But in the meantime, I hops you enjoy the new PostHog.com. Be curious, click around, and have some fun. I hope you enjoy your time here as much as we enjoyed building it.
+
+If you're curious, [read more about how the site technically works](/handbook/engineering/posthog-com/how-posthog-website-works).

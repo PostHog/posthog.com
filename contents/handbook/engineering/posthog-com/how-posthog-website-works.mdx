@@ -15,7 +15,6 @@ For more context, [read why we designed our website to look like an operating sy
     1. `<TaskBarMenu />` – the MacOS-style menu bar
     1. `<Desktop />` – the desktop app icons and desktop background
     1. `<AppWindow />` – the chrome for each app and where the content renders
-    1. `<Dock />` – fixed tray on mobile
     1. `<CookieBannerToast />`
 1. `<AppWindow />` loads `<WindowProvider />` and `<WindowContainer />`.
     - This contains the window's top bar with the minimize, maximize, and close buttons. It also supports window resizing.
@@ -61,9 +60,9 @@ When the `session_replay` handle is passed into `useProduct`, it looks up the pr
 -   feature customers
 -   features array
 -   feature comparison chart
--   etc
+-   etcc
 
-> Note: The Billing Team (@TODO: Make a component for this like `<TeamMember />`) maintains a billing API that contains pricing tiers and entitlements. This is how pricing data and usage tiers stay in sync between the website and product. The plan is to eventually move the product data into the billing API so there's a single source of truth for every product.
+> Note: The <SmallTeam slug="billing" /> maintains a billing API that contains pricing tiers and entitlements. This is how pricing data and usage tiers stay in sync between the website and product. The plan is to eventually move the product data into the billing API so there's a single source of truth for every product.
 
 ---
 
