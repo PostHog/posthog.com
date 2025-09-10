@@ -64,7 +64,6 @@ export const sessionReplay = {
                 max: 500000,
             },
             volume: 2500,
-            freeAllocation: 2500,
             unit: 'mobile recording',
         },
     ],

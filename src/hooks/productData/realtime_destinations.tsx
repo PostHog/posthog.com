@@ -25,7 +25,6 @@ export const realtimeDestinations = {
                 max: 100000000,
             },
             volume: 1000000,
-            freeAllocation: 1000000,
             unit: 'row',
         },
     ],

@@ -164,7 +164,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                 unit={addon.unit}
                                 cost={addonData[index]?.cost || 0}
                                 billingTiers={addon.billingTiers}
-                                freeAllocation={addon.freeAllocation}
+                                freeAllocation={addon.sliderConfig.min}
                             />
                         </div>
                     )
