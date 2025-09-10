@@ -85,6 +85,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Revenue analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
 | Revenue data management | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-data-management</span>  |
+| Base currency | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/currency</span>  |
+| Currency rate dataset | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/currency-rate</span>  |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |

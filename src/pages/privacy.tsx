@@ -3,7 +3,6 @@ import Layout from 'components/Layout'
 import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
 import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -11,12 +10,13 @@ import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
 import { Tweet } from 'components/Tweet'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const privacyClasses = cntl`
   full-privacy-policy
   grid
   grid-cols-1
-  md:grid-cols-2
+  @2xl:grid-cols-2
   max-w-6xl
   px-4
   lg:px-8
@@ -25,7 +25,7 @@ const privacyClasses = cntl`
   [&div]:p-4
   [&>div:nth-child(even)]:relative
   [&>div:nth-child(even)]:before:relative
-  md:[&>div:nth-child(even)]:before:hidden
+  @2xl:[&>div:nth-child(even)]:before:hidden
   [&>div:nth-child(even)]:before:text-sm
   [&>div:nth-child(even)]:before:-top-2
   [&>div:nth-child(even)]:before:pb-2
@@ -35,21 +35,19 @@ const privacyClasses = cntl`
   [&>div:nth-child(even):empty]:before:hidden
   [&>div:nth-child(even)]:before:content-['What_it_means']
   [&>div:nth-child(even)>p]:border-l-4
-  md:[&>div:nth-child(even)>p]:border-l-0
-  [&>div:nth-child(even)>p]:border-light
+  @2xl:[&>div:nth-child(even)>p]:border-l-0
+  [&>div:nth-child(even)>p]:border-primary
   [&>div:nth-child(even)>p]:pl-3
   [&>div:nth-child(even)>ul]:border-l-4
-  md:[&>div:nth-child(even)>ul]:border-l-0
-  [&>div:nth-child(even)>ul]:border-light
+  @2xl:[&>div:nth-child(even)>ul]:border-l-0
+  [&>div:nth-child(even)>ul]:border-primary
   [&>div:nth-child(even)>ul]:pl-3
   [&>div:nth-child(even)_li]:ml-4
-  dark:[&>div:nth-child(even)]:border-dark
-  md:[&>div:nth-child(even)]:border-l
+  @2xl:[&>div:nth-child(even)]:border-l
   [&>div:nth-child(odd)]:pr-8
-  md:[&>div:nth-child(even)>p]:pl-0
-  md:[&>div:nth-child(even)]:pl-8
-  md:[&>div:nth-child(even)]:border-light
-  dark:md:[&>div:nth-child(even)]:border-dark
+  @2xl:[&>div:nth-child(even)>p]:pl-0
+  @2xl:[&>div:nth-child(even)]:pl-8
+  @2xl:[&>div:nth-child(even)]:border-primary
   [&>div:nth-child(odd)_p]:text-[15px]
   [&>div:nth-child(odd)_ol]:pb-4
   [&>div:nth-child(odd)_ul]:pb-4
@@ -58,12 +56,14 @@ const privacyClasses = cntl`
 `
 
 function Privacy() {
-    const [headers, setHeaders] = useState([])
+    const [headers, setHeaders] = useState<HTMLElement[]>([])
 
     useEffect(() => {
         const fullPrivacyPolicy = document.querySelector('.full-privacy-policy')
-        const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
-        setHeaders(Array.from(h2s))
+        if (fullPrivacyPolicy) {
+            const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
+            setHeaders(Array.from(h2s) as HTMLElement[])
+        }
     }, [])
 
     return (
@@ -76,34 +76,33 @@ function Privacy() {
                 description="Privacy policy, but PostHog style"
                 image={`/images/og/privacy.png`}
             />
-            <div>
-                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
-                    <h1 className="text-5xl text-center">
+            <div className="prose dark:prose-invert">
+                <div className="@container/legal-content max-w-2xl mx-auto py-4 @2xl:py-8">
+                    <h1 className="text-center">
                         Privacy policy,{' '}
                         <span className="whitespace-nowrap text-red dark:text-yellow">
                             <em>PostHog style</em>
                         </span>
                     </h1>
 
-                    <p className="mt-2 text-lg font-semibold mb-2 text-center text-balance">
-                        The internet has wrecked our attention span. <em>(Thanks, Buzzfeed!)</em>
+                    <h2 className="text-center text-balance mt-0">
+                        The internet has wrecked our attention span.
+                        <br />
+                        <em className="text-xs font-normal">(Thanks, Buzzfeed!)</em>
+                    </h2>
+
+                    <p className="text-center">
+                        Long paragraphs are boring. So we've summarized our privacy policy for you. Here's the gist in a
+                        familiar format you can probably skim while driving. (Or 💩.)
                     </p>
 
-                    <p className="mb-2 text-center">
-                        Long paragraphs are boring. So we've summarized our privacy policy for you.
-                    </p>
-
-                    <p className="mb-2 text-center">
-                        Here's the gist in a familiar format you can probably skim while driving. (Or 💩.)
-                    </p>
-
-                    <h3 className="text-2xl pt-8 text-center">Summary of our privacy policy</h3>
+                    <h3 className="text-center">Summary of our privacy policy</h3>
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
                         <span className="text-xl">
                             <strong>Semi-important legal notice</strong> from{' '}
                             <Tooltip content={() => <Lawyers />} placement="bottom" className="[&_button]:cursor-auto">
-                                <span className="border-b border-dashed border-dark/50 dark:border-light/60 dark:hover:border-light/80 inline-block !leading-tight">
+                                <span className="border-b border-dashed border-primary inline-block !leading-tight">
                                     our over-zealous legal team
                                 </span>
                             </Tooltip>
@@ -113,16 +112,16 @@ function Privacy() {
                             (Serif font demonstrates how important this disclaimer is)
                         </span>
                         The following is only a summary of PostHog's privacy policy. Please read{' '}
-                        <SmoothScrollLink
-                            to="full-privacy-policy"
-                            spy={true}
-                            smooth={true}
-                            offset={-128}
-                            duration={1500}
-                            className="cursor-pointer"
+                        <button
+                            onClick={() => {
+                                const el = document.querySelector('#full-privacy-policy')
+                                if (!el) return
+                                el.scrollIntoView({ behavior: 'smooth' })
+                            }}
+                            className="cursor-pointer hover:underline"
                         >
                             the full privacy policy
-                        </SmoothScrollLink>{' '}
+                        </button>{' '}
                         and don't rely on 140 characters at a time, especially from someone who isn't a lawyer.
                     </p>
 
@@ -170,7 +169,7 @@ function Privacy() {
                             <Link
                                 href="https://giphy.com/gifs/cat-pizza-crazy-3o7TKJwsoLn5QAmqw8"
                                 externalNoIcon
-                                className="font-normal text-xs text-primary/50 dark:text-primary-dark/50"
+                                className="font-normal text-xs text-muted"
                             >
                                 Thanks, Giphy!
                             </Link>
@@ -223,61 +222,58 @@ function Privacy() {
                     policy
                 </h2>
 
-                <div className="px-4">
-                    <div className="max-w-lg mx-auto pb-6">
-                        <p className="mb-2">
-                            For your sanity, we've summarized each paragraph of legalese with plain English.
-                        </p>
-                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
-                            (This was inspired by{' '}
-                            <Link href="https://500px.com/privacy" externalNoIcon>
-                                500px
-                            </Link>{' '}
-                            who did it first and deserve full credit! We tried to do it better but we couldn't.)
-                        </p>
-                        <p className="mb-2">
-                            You probably realize this, but the summaries{' '}
-                            <span className="md:hidden">
-                                below each section in blockquotes (under the <em>"What it means</em> subheaders)
-                            </span>
-                            <span className="hidden md:inline-block">in the right-hand column</span> exist solely to aid
-                            your comprehension and alleviate boredom. They're not legally binding.
-                        </p>
-                        <p className="mb-2">
-                            The <em>actual</em> privacy policy{' '}
-                            <span className="md:hidden">
-                                is everything <em>not in blockquotes</em>
-                            </span>
-                            <span className="hidden md:inline-block">is in the left column below</span>.
-                        </p>
-                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
-                            (Can you believe we actually had to clarify this?)
-                        </p>
-                    </div>
+                <div className="max-w-2xl mx-auto">
+                    <p className="">For your sanity, we've summarized each paragraph of legalese with plain English.</p>
+                    <p className=" text-secondary">
+                        (This was inspired by{' '}
+                        <Link href="https://500px.com/privacy" externalNoIcon>
+                            500px
+                        </Link>{' '}
+                        who did it first and deserve full credit! We tried to do it better but we couldn't.)
+                    </p>
+                    <p className="">
+                        You probably realize this, but the summaries{' '}
+                        <span className="md:hidden">
+                            below each section in blockquotes (under the <em>"What it means</em> subheaders)
+                        </span>
+                        <span className="hidden md:inline-block">in the right-hand column</span> exist solely to aid
+                        your comprehension and alleviate boredom. They're not legally binding.
+                    </p>
+                    <p className="">
+                        The <em>actual</em> privacy policy{' '}
+                        <span className="md:hidden">
+                            is everything <em>not in blockquotes</em>
+                        </span>
+                        <span className="hidden md:inline-block">is in the left column below</span>.
+                    </p>
+                    <p className=" text-secondary">(Can you believe we actually had to clarify this?)</p>
                 </div>
 
-                <div className="px-4">
-                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2">
+                <div className="pt-4">
+                    <ol
+                        data-scheme="primary"
+                        className="table-of-contents not-prose max-w-2xl mx-auto bg-accent border border-primary rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2"
+                    >
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
-                                <SmoothScrollLink
-                                    to={header.id}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-128}
-                                    duration={1000}
-                                    className="group cursor-pointer top-16 md:top-24 lg:top-32 text-sm md:text-base"
+                                <button
+                                    className="group cursor-pointer text-sm md:text-base font-semibold hover:underline block p-1"
+                                    onClick={() => {
+                                        const el = document.querySelector(`#${header.id}`)
+                                        if (!el) return
+                                        el.scrollIntoView({ behavior: 'smooth' })
+                                    }}
                                 >
                                     {header.innerText}
                                     <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 dark:group-hover:opacity-70 text-primary dark:text-primary-dark" />
-                                </SmoothScrollLink>
+                                </button>
                             </li>
                         ))}
                     </ol>
                 </div>
 
-                <div className={privacyClasses}>
+                <div className={`${privacyClasses}`}>
                     <div className="">
                         <h3 className="mb-1 text-4xl md:hidden">Privacy policy</h3>
                         <p className="text-sm opacity-75 md:hidden">
@@ -524,7 +520,7 @@ function Privacy() {
                     <div></div>
 
                     <div>
-                        <p className="mb-2">
+                        <p className="">
                             <strong>To fulfill a contract or take steps linked to a contract with you</strong>
                             <br />
                             We use your personal information to:
@@ -544,7 +540,7 @@ function Privacy() {
                     </div>
 
                     <div>
-                        <p className="mb-2">
+                        <p className="">
                             <strong>Legitimate interests</strong> <br />
                             We use your personal information:
                         </p>
@@ -574,7 +570,7 @@ function Privacy() {
                     </div>
 
                     <div className="md:pb-12">
-                        <p className="mb-2">
+                        <p className="">
                             <strong>Consent</strong>
                             <br />
                             We may rely on your consent:
@@ -635,7 +631,7 @@ function Privacy() {
                     <div></div>
                     <div></div>
                     <div>
-                        <p className="mb-2">
+                        <p className="">
                             <strong>Service Providers and partners</strong>. PostHog engages a number of service
                             providers or partners to manage or support certain aspects of our business operations on our
                             behalf. For instance, we currently use the following service providers who will handle your
@@ -1229,7 +1225,7 @@ function Privacy() {
                         </p>
                         <h3 id="information-we-collect-from-applicants">Information we collect from applicants</h3>
                         <h4 id="information-we-collect-from-you">Information we collect from you</h4>
-                        <p className="mb-2">
+                        <p className="">
                             We collect and process some or all of the following types of information from you:
                         </p>
                         <ul>
@@ -1281,7 +1277,7 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div>
-                        <p className="mb-2">
+                        <p className="">
                             We <em>only</em> collect and use your personal information for the following purposes:
                         </p>
                         <ul>
@@ -1356,16 +1352,16 @@ function Privacy() {
 
                         <p>
                             Please see the section on{' '}
-                            <SmoothScrollLink
-                                to="privacy-practices"
-                                spy={true}
-                                smooth={true}
-                                offset={-128}
-                                duration={1500}
-                                className="cursor-pointer"
+                            <button
+                                onClick={() => {
+                                    const el = document.querySelector('#privacy-practices')
+                                    if (!el) return
+                                    el.scrollIntoView({ behavior: 'smooth' })
+                                }}
+                                className="cursor-pointer hover:underline"
                             >
                                 Global Privacy Practices and Your Rights
-                            </SmoothScrollLink>{' '}
+                            </button>{' '}
                             above.
                         </p>
                     </div>

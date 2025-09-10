@@ -1,51 +1,83 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
-import { getProductMetafield } from './utils'
+import { getProductMetafield, getDisplayTitle } from './utils'
 import { getShopifyImage } from './utils'
 
 type ProductCardProps = {
     product: ShopifyProduct
     className?: string
     onClick?: () => void
+    selected?: boolean
 }
 
 export function ProductCard(props: ProductCardProps): React.ReactElement {
-    const { className, product, onClick } = props
+    const { className, product, onClick, selected = false } = props
 
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
-    const classes = cn('group relative flex flex-col gap-2', className)
+    // Kit logic: use product.type === 'Kit' (case-insensitive)
+    const productKit = typeof product.type === 'string' && product.type.toLowerCase() === 'kit'
+
+    // Use shared display title logic
+    const displayTitle = getDisplayTitle(product)
+
+    // Check if product is out of stock
+    const isOutOfStock = useMemo(() => {
+        // If product has no variants, check totalInventory
+        if (!product.variants || product.variants.length === 0) {
+            return product.totalInventory === 0
+        }
+
+        // If product has variants, check if all variants are unavailable for sale
+        return product.variants.every((variant) => !variant.availableForSale)
+    }, [product])
+
+    const image = useMemo(
+        () => getShopifyImage({ image: { ...product.featuredMedia.preview.image, width: 500, height: 500 } }),
+        [product]
+    )
 
     return (
-        <div className={classes} key={product.shopifyId} onClick={onClick}>
-            <div className="cursor-pointer image-wrapper relative aspect-[.75]">
+        <div
+            className={`group px-2 pt-2 pb-1 border-[1.5px] rounded ${
+                selected ? 'border-blue bg-blue/10' : 'border-transparent'
+            }  relative flex flex-col gap-2 ${className}`}
+            key={product.shopifyId}
+            onClick={onClick}
+        >
+            <div className="cursor-default image-wrapper relative">
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                         New
                     </div>
                 )}
-                <div className="relative h-full bg-white rounded-md border border-light dark:border-dark flex items-center hover:top-[-1px] hover:scale-[1.005] active:top-[2px] active:scale-[.99] hover:transition-all">
+                <div className="relative aspect-square bg-white flex items-center">
                     <GatsbyImage
-                        className="w-full h-full rounded-md overflow-hidden"
-                        image={getShopifyImage({ image: product.featuredMedia.preview.image })}
+                        className="aspect-square overflow-hidden"
+                        image={image}
                         alt={product.title}
+                        loading="lazy"
                     />
                 </div>
             </div>
 
-            <div className="cursor-pointer mb-2">
-                <h3 className="text-lg [&_a]:text-primary dark:[&_a]:text-primary-dark leading-tight mb-1">
-                    {product.title}
-                </h3>
-                <p className="text-[15px] leading-tight mb-1">{subtitle}</p>
-                <p className="text-base font-bold mb-0">
-                    <span className={`${product.kit ? 'line-through' : ''}`}>
-                        ${product.priceRangeV2.minVariantPrice.amount}
-                    </span>{' '}
-                    {product.kit ? <span className="text-green font-bold">FREE</span> : null}
+            <div className="cursor-default mb-2 text-center">
+                <h3 className="text-sm font-medium leading-tight">{displayTitle}</h3>
+                {/* <p className="text-[15px] leading-tight mb-1">{subtitle}</p> */}
+                <p className="text-sm text-secondary mb-0">
+                    {isOutOfStock ? (
+                        <span className="text-muted italic">Out of stock</span>
+                    ) : (
+                        <>
+                            <span className={`${productKit ? 'line-through' : ''}`}>
+                                ${product.priceRangeV2.minVariantPrice.amount}
+                            </span>{' '}
+                            {productKit ? <span className="text-green font-bold">FREE</span> : null}
+                        </>
+                    )}
                 </p>
             </div>
         </div>

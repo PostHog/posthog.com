@@ -76,7 +76,7 @@ We conduct these annually, most recently in May 2025 - you can find the report [
 
 ## Responsible disclosure
 
-Security vulnerabilities and other security related findings can be reported by emailing security@posthog.com. Valid findings will be rewarded with PostHog swag.
+Security vulnerabilities and other security related findings can be reported via our [vulnerability disclosure program](https://bugcrowd.com/engagements/posthog-vdp-pro) or by emailing security-reports@posthog.com. Valid findings will be rewarded with PostHog swag.
 
 For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
 

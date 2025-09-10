@@ -55,7 +55,7 @@ const Customer = ({ image, alt, className = '', url }) => {
         >
             <Logo className={className} src={image} alt={alt} />
             <div
-                className={`hidden md:flex group absolute top-2 hover:right-2 transition-all border border-transparent hover:border-light/40 rounded-full px-2 py-0.5 items-center gap-1 ${
+                className={`hidden md:flex group absolute top-2 hover:right-2 transition-all border border-transparent hover:border-primary rounded-full px-2 py-0.5 items-center gap-1 ${
                     image === posthog ? '[right:_-8.5rem]' : 'right-[-6.5rem]'
                 }`}
             >

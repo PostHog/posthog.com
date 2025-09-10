@@ -26,7 +26,7 @@ const Benefit = ({ image, title, details, className = '' }: BenefitProps) => {
     const classList = mergeClassList('p-8', className)
 
     return (
-        <div className={`bg-accent dark:bg-accent-dark rounded-lg ${classList}`}>
+        <div className={`bg-accent rounded-lg ${classList}`}>
             <div className="flex w-16 h-16">
                 <img src={image} alt={title} className="max-w-full block mb-0" />
             </div>

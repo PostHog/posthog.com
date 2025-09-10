@@ -1,5 +1,4 @@
 import cntl from 'cntl'
-import { DarkModeToggle } from 'components/DarkModeToggle'
 import Logo from 'components/Logo'
 import { Link } from 'gatsby'
 import React from 'react'
@@ -73,17 +72,13 @@ export default function Breadcrumbs({
 }: BreadcrumbsProps): JSX.Element {
     return (
         <ul className={`list-none p-0 m-0 flex ${className}`}>
-            {logo && <Crumb url="/" title={<Logo className="w-5 h-4" color={linkColor} noText />} />}
+            {logo && <Crumb url="/" title={<Logo className="w-5 h-4" fill={linkColor} noText />} />}
             {children ||
                 (crumbs &&
                     crumbs.map((crumb, index) => {
                         return <Crumb linkColor={linkColor} key={index} {...crumb} />
                     }))}
-            {darkModeToggle && (
-                <li className="flex ml-auto">
-                    <DarkModeToggle />
-                </li>
-            )}
+            {darkModeToggle && <li className="flex ml-auto">toggle removed (scss)</li>}
         </ul>
     )
 }
