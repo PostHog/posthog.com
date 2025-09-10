@@ -24,7 +24,10 @@ import {
     IconGithub,
     IconInstagram,
     IconController,
+    IconDictator,
+    IconSparksJoy,
 } from 'components/OSIcons'
+import { AppIcon } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
@@ -547,8 +550,8 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'submenu',
-                    label: 'Fun stuff',
-                    icon: <IconController className="size-4 text-lime-green" />,
+                    label: 'Things that spark joy',
+                    icon: <IconSparksJoy className="size-4" />,
                     items: [
                         {
                             type: 'item',
@@ -558,27 +561,29 @@ export function useMenuData(): MenuType[] {
                         {
                             type: 'separator',
                         },
+                        // First 5 items (non-games)
+                        ...SparksJoyItems.slice(0, 5).map((item) => ({
+                            type: 'item' as const,
+                            label: item.label,
+                            link: item.link,
+                        })),
                         {
                             type: 'item',
-                            label: 'Hedgehog mode',
-                            link: '/sparks-joy/hedgehog-mode',
+                            label: 'Games',
+                            disabled: true,
                         },
-                        {
-                            type: 'item',
-                            label: 'Post-It note training',
-                            link: '/academy',
-                        },
-                        {
-                            type: 'item',
-                            label: '404 page',
-                            link: '/404',
-                        },
+                        // Games section (remaining items)
+                        ...SparksJoyItems.slice(5).map((item) => ({
+                            type: 'item' as const,
+                            label: item.label,
+                            link: item.link,
+                        })),
                     ],
                 },
                 {
                     type: 'submenu',
                     label: 'Sexy legal documents',
-                    icon: <Icons.IconTie className="size-4 text-orange" />,
+                    icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
                     items: [
                         {
                             type: 'item',
@@ -622,7 +627,7 @@ export function useMenuData(): MenuType[] {
                     label: 'System status',
                     link: 'https://status.posthog.com',
                     external: true,
-                    icon: <Icons.IconCheckCircle className="size-4 text-green" />,
+                    icon: <Icons.IconPulse className="size-4 text-red" />,
                 },
             ],
         },
@@ -747,5 +752,49 @@ export const DocsItemsEnd = [
         label: 'Forums',
         link: '/questions',
         icon: <Icons.IconMessage className="size-4 text-green" />,
+    },
+]
+
+// Export Fun stuff items for use in sparks-joy page and menu
+export const SparksJoyItems = [
+    {
+        label: 'Photobooth',
+        link: '/photobooth',
+        icon: <AppIcon name="photobooth" className="!size-10 -mt-2" />,
+    },
+    {
+        label: 'HogPaint',
+        link: '/paint',
+        icon: <AppIcon name="hogpaint" className="!size-10 -mt-2" />,
+    },
+    {
+        label: 'Coloring book.pdf',
+        link: '/coloring-book.pdf',
+        icon: <AppIcon name="pdf" className="!size-10 -mt-2" />,
+    },
+    {
+        label: 'Post-It note training',
+        link: '/academy',
+        icon: null, // Will add AppIcon when available
+    },
+    {
+        label: '404 page',
+        link: '/404',
+        icon: null, // Will add AppIcon when available
+    },
+    {
+        label: 'Hedgehog mode',
+        link: '/sparks-joy/hedgehog-mode',
+        icon: <AppIcon name="hedgehog_mode" className="!size-10 -mt-2" />,
+    },
+    {
+        label: 'HogWars',
+        link: '/sparks-joy/hogwars',
+        icon: <AppIcon name="hogwars" className="!size-10 -mt-2" />,
+    },
+    {
+        label: 'Dictator or tech bro?',
+        link: '/sparks-joy/dictator-or-tech-bro',
+        icon: <IconDictator className="!size-10 -mt-2" />,
     },
 ]
