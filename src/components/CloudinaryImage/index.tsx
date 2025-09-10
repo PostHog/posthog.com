@@ -31,7 +31,7 @@ export default function CloudinaryImage({
     objectPosition?: 'top' | 'bottom' | 'left' | 'right' | 'center'
 } & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element {
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
-    const hasCommas = src.includes(',')
+    const hasCommas = src?.includes(',')
     return cloudinaryPublicId && !hasCommas ? (
         <div className={`inline-block ${className}`}>
             <Image

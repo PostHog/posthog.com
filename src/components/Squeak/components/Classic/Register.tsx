@@ -84,7 +84,6 @@ const RegisterForm: React.FC = () => {
                 email: values.email,
                 password: values.password,
             })
-            console.log(user)
 
             if (!user) {
                 setErrorMessage('There was an error creating your account. Please try again.')
