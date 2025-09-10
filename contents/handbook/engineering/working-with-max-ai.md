@@ -6,7 +6,7 @@ showTitle: true
 
 ## Technical overview
 
-Almost every team either is, or needs to, build AI features. As a result, we have a platform approach so that when we can reuse work that everyone contributes towards our AI features. For example, we want to avoid multiple filtering experiences. Just like how we shipped HogQL instead of everyone writing their own queries.
+Almost every team either is, or needs to, build AI features. As a result, we have a platform approach so that we can reuse work when everyone contributes towards our AI features. For example, we want to avoid multiple filtering experiences. Just like how we shipped HogQL instead of everyone writing their own queries.
 
 Interfaces, applications, integrations, context and existing products all work together.
 
