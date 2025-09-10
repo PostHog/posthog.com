@@ -1313,7 +1313,7 @@ export default function ProfilePage({ params }: PageProps) {
                             />
 
                                     <div className="space-y-1 mb-8">
-                                        <div className="flex gap-x-2 items-baseline flex-col sm:flex-row">
+                                        <div className="flex gap-x-2 items-baseline">
                                             <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
                                             {profile.pronouns && (
                                                 <div className="opacity-50 text-sm">{profile.pronouns}</div>
