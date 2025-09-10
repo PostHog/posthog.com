@@ -109,7 +109,14 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                             Enter your email and password to log on to PostHog.com
                         </h3>
                         <p className="text-xs text-red dark:text-orange">
-                            Your PostHog.com login is separate from the app's authentication.
+                            Your PostHog.com login is separate from the app's authentication.{' '}
+                            <Link
+                                to="https://app.posthog.com"
+                                external
+                                className="text-primary font-semibold underline"
+                            >
+                                Go to app
+                            </Link>
                         </p>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input

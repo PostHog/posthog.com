@@ -109,16 +109,16 @@ export default function Link({
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl) {
             posthog?.createPersonProfile?.()
-            // const urlObj = new URL(url)
-            // const path = urlObj.pathname
-            // if (path === '/signup') {
-            //     e.preventDefault()
-            //     const subdomain = urlObj.hostname.split('.')[0]
-            //     openStart({
-            //         subdomain,
-            //         initialTab: siteSettings.experience === 'boring' ? 'signup' : state?.initialTab,
-            //     })
-            // }
+            const urlObj = new URL(url)
+            const path = urlObj.pathname
+            if (path === '/signup') {
+                e.preventDefault()
+                const subdomain = urlObj.hostname.split('.')[0]
+                openStart({
+                    subdomain,
+                    initialTab: siteSettings.experience === 'boring' ? 'signup' : state?.initialTab,
+                })
+            }
         }
         if (event && posthog) {
             posthog.capture(event)

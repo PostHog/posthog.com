@@ -205,8 +205,28 @@ export default function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Sign in',
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in to PostHog.com',
                           onClick: handleSignInClick,
+                      },
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Go to...',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'PostHog app',
+                          link: 'https://app.posthog.com',
+                          icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          external: true,
                       },
                   ],
         },
@@ -257,7 +277,12 @@ export default function TaskBarMenu() {
                         className="[&_button]:px-2"
                     /> */}
                     <div className="relative mr-1">
-                        <OSButton variant="secondary" size="md" asLink to="https://app.posthog.com/signup" className="">
+                        <OSButton
+                            variant="secondary"
+                            size="md"
+                            onClick={() => navigate('/start', { state: { newWindow: true } })}
+                            className=""
+                        >
                             Get started – free
                         </OSButton>
                     </div>
