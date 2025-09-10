@@ -475,14 +475,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             !toasts.some((toast) => toast.title === 'Animations running slow')
         ) {
             addToast({
-                title: 'Animations running slow',
-                description: 'Want to disable animations for a snappier experience?',
-                actionLabel: 'Disable animations',
+                title: 'Animations may be affecting performance',
+                description: 'You can turn off animations to improve performance if needed.',
+                actionLabel: 'Turn off animations',
                 onAction: () => {
                     updateSiteSettings({ ...siteSettings, performanceBoost: true })
                     addToast({
-                        title: 'Animations disabled',
-                        description: 'Animations have been disabled for a snappier experience.',
+                        title: 'Animations turned off',
+                        description: 'Animations have been turned off to improve performance.',
                         duration: 2000,
                         onUndo: () => {
                             updateSiteSettings({ ...siteSettings, performanceBoost: false })
