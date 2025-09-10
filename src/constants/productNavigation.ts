@@ -50,7 +50,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
 // Products not listed here will be sorted alphabetically
 export const productOrder: Record<string, string[]> = {
     data: ['customer-data-infrastructure', 'integrations', 'data_in', 'transformations', 'visualize', 'data_out'],
-    product_engineering: ['session-replay', 'experiments', 'feature-flags', 'error-tracking', 'early_access'],
+    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'error_tracking', 'early_access'],
     analytics: [
         'web_analytics',
         'product_analytics',
@@ -58,6 +58,7 @@ export const productOrder: Record<string, string[]> = {
         'llm_analytics',
         'custom_dashboards',
         'group_analytics',
+        'custom_dashboards',
     ],
     dataviz: [
         'trends',
@@ -72,7 +73,7 @@ export const productOrder: Record<string, string[]> = {
     ],
     communication: ['surveys', 'messaging', 'user-interviews'],
     ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
-    product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform-packages'],
+    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
 // Non-product pages that appear in the product navigation

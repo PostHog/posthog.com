@@ -4,40 +4,15 @@ import SEO from 'components/seo'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
-import { productMenu } from '../../navs'
 import { explorerGridColumns } from '../../constants'
 import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
-
-// Create selectOptions for the address bar
-const selectOptions = [
-    {
-        label: 'Products',
-        items: [
-            { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
-            ...productMenu.children.flatMap((item) => {
-                // Skip items without valid slugs
-                if (!item.slug) return []
-
-                // Add the base product
-                return [
-                    {
-                        value: item.slug,
-                        label: item.name,
-                        icon: item.icon,
-                        color: item.color,
-                    },
-                ]
-            }),
-        ],
-    },
-]
-
-
+import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 
 export default function Trash(): JSX.Element {
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
+    const selectOptions = useMenuSelectOptions()
 
     return (
         <>
@@ -52,6 +27,7 @@ export default function Trash(): JSX.Element {
                 title="Trash"
                 showTitle={false}
                 selectOptions={selectOptions}
+                selectedCategory="trash"
                 rightActionButtons={
                     <ToggleGroup
                         title="Layout"
@@ -205,10 +181,14 @@ export default function Trash(): JSX.Element {
                                                     </span>
                                                 ),
                                                 content: (
-                                                    <div className={`@md:pl-4 grid ${isListLayout
-                                                        ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
-                                                        : explorerGridColumns + ' gap-y-4 items-start justify-items-center'
-                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}>
+                                                    <div
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
+                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
+                                                                : explorerGridColumns +
+                                                                  ' gap-y-4 items-start justify-items-center'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                    >
                                                         {items.map((item) => {
                                                             const appLink = (
                                                                 <AppLink
@@ -226,7 +206,11 @@ export default function Trash(): JSX.Element {
                                                                 return (
                                                                     <ZoomHover
                                                                         key={item.slug}
-                                                                        className={isListLayout ? "w-full justify-start" : "w-28 justify-center"}
+                                                                        className={
+                                                                            isListLayout
+                                                                                ? 'w-full justify-start'
+                                                                                : 'w-28 justify-center'
+                                                                        }
                                                                     >
                                                                         {appLink}
                                                                     </ZoomHover>
@@ -237,7 +221,11 @@ export default function Trash(): JSX.Element {
                                                             return (
                                                                 <div
                                                                     key={item.slug}
-                                                                    className={isListLayout ? "w-full justify-start" : "w-28 justify-center mx-auto"}
+                                                                    className={
+                                                                        isListLayout
+                                                                            ? 'w-full justify-start'
+                                                                            : 'w-28 justify-center mx-auto'
+                                                                    }
                                                                 >
                                                                     {appLink}
                                                                 </div>

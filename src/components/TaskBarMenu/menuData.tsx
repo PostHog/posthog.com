@@ -817,3 +817,70 @@ export const SparksJoyItems = {
         },
     ],
 }
+
+// Helper hook to extract menu data for AddressBar select options
+export function useMenuSelectOptions() {
+    // Build the select groups
+    const selectGroups = [
+        {
+            label: 'Product OS',
+            items: [
+                {
+                    value: 'products',
+                    label: 'Product OS',
+                    icon: <Icons.IconApps className="size-4 text-red" />,
+                },
+            ],
+        },
+        {
+            label: 'Pricing',
+            items: [
+                { value: 'pricing', label: 'Plans & usage-based pricing' },
+                { value: 'pricing#calculator', label: 'Pricing calculator' },
+                { value: 'pricing#addons', label: 'Add-ons' },
+                { value: 'founder-stack', label: 'Founder stack' },
+                { value: 'startups', label: 'Startups' },
+            ],
+        },
+        {
+            label: 'Docs',
+            items: [{ value: 'docs', label: 'Documentation' }],
+        },
+        {
+            label: 'Library',
+            items: [
+                { value: 'blog', label: 'Blog' },
+                { value: 'product-engineers', label: 'Product engineers hub' },
+                { value: 'founders', label: 'Founders hub' },
+            ],
+        },
+        {
+            label: 'Company',
+            items: [
+                { value: 'about', label: 'About' },
+                { value: 'customers', label: 'Customers' },
+                { value: 'handbook', label: 'Handbook' },
+                { value: 'roadmap', label: 'Roadmap' },
+                { value: 'changelog', label: 'Changelog' },
+                { value: 'people', label: 'People' },
+                { value: 'teams', label: 'Teams' },
+                { value: 'careers', label: 'Careers' },
+            ],
+        },
+        {
+            label: 'More',
+            items: [
+                { value: 'sparks-joy', label: 'Things that spark joy', icon: <IconSparksJoy className="size-4" /> },
+                { value: 'merch', label: 'Merch' },
+                { value: 'deskhog', label: 'DeskHog' },
+                {
+                    value: 'trash',
+                    label: 'Trash',
+                    icon: <Icons.IconTrash className="size-4 text-gray dark:text-white" />,
+                },
+            ],
+        },
+    ]
+
+    return selectGroups
+}
