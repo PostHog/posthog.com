@@ -136,23 +136,31 @@ const ContributorsSmall = ({ contributors }) => {
             <ul className="flex space-x-2">
                 {contributors.map(({ profile_id, name, profile, ...other }) => {
                     const image = profile?.avatar?.url || other?.image
+                    const color = profile?.color
                     const url = profile_id && `/community/profiles/${profile_id}`
                     const Container = url ? Link : 'div'
                     const gatsbyImage = image && getImage(image)
                     return (
                         <li className="!mb-0" key={name}>
-                            <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
+                            <Container
+                                className="flex space-x-2 items-center"
+                                {...(url ? { to: url, state: { newWindow: true } } : {})}
+                            >
                                 {typeof image === 'string' ? (
                                     <CloudinaryImage
                                         width={50}
-                                        className="w-6 h-6 border border-primary rounded-full overflow-hidden"
+                                        className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${
+                                            color ? color : 'red'
+                                        }`}
                                         src={image}
                                     />
                                 ) : gatsbyImage ? (
                                     <GatsbyImage
                                         image={gatsbyImage}
                                         alt={name}
-                                        className="w-6 h-6 border border-primary rounded-full overflow-hidden"
+                                        className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${
+                                            color ? color : 'red'
+                                        }`}
                                     />
                                 ) : (
                                     ''
