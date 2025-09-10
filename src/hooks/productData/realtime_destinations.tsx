@@ -1,39 +1,4 @@
-import React from 'react'
-import {
-    IconBell,
-    IconClockRewind,
-    IconDashboard,
-    IconGraph,
-    IconHandMoney,
-    IconLightBulb,
-    IconListTreeConnected,
-    IconLlmAnalytics,
-    IconPiggyBank,
-    IconRewindPlay,
-    IconShield,
-    IconSparkles,
-    IconTarget,
-    IconTrends,
-    IconUser,
-    IconWarning,
-    IconGlobe,
-    IconListCheck,
-    IconDecisionTree,
-} from '@posthog/icons'
-import {
-    IconAnthropic,
-    IconGemini,
-    IconGrid,
-    IconHelicone,
-    IconKeywordsAI,
-    IconLangChain,
-    IconLangfuse,
-    IconOpenAI,
-    IconOpenRouter,
-    IconTag,
-    IconTraceloop,
-    IconVercel,
-} from 'components/OSIcons'
+import { IconDecisionTree } from '@posthog/icons'
 
 export const realtimeDestinations = {
     name: 'Realtime destinations',
