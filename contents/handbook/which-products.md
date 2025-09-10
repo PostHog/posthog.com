@@ -26,7 +26,7 @@ From our [roadmap](/roadmap), here's what we're working on next:
 
 - Embedded analytics - `#project-embedded-analytics`
 - Logs - `#project-logs`
-- Tasks (currently part of #team-llm-analytics)
+- Tasks - currently within `#team-llm-analytics`
 - Auth
 - Support
 
