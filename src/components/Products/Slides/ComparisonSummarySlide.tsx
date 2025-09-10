@@ -25,7 +25,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/mascots_e1d975b193.png"
                     alt="Mascots"
                     className="relative z-10"
-                    imgClassName="max-h-[180px]"
+                    imgClassName="max-h-[218px]"
                 />
             </div>
 

@@ -20,8 +20,8 @@ export const revenueAnalytics = {
         title: 'Track revenue alongside product metrics',
         description: (
             <>
-                Track your revenue alongside product metrics, deferred recognition for subscriptions, and multi-currency
-                support all in one place.{' '}
+                Revenue attribution, deferred recognition for subscriptions, and multi-currency support all in one
+                place.{' '}
                 <span className="text-2xl">
                     <br />
                     Supports Stripe and events-based tracking.
@@ -32,9 +32,8 @@ export const revenueAnalytics = {
     },
     screenshots: {
         overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png',
-            srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_light_8c167328e5.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_dark_03ce149b78.png',
             alt: 'Revenue Analytics dashboard',
             classes: 'mt-12 @2xl:mt-0 px-4 @2xl:px-12',
             imgClasses: 'rounded-md overflow-hidden shadow-2xl',
@@ -43,7 +42,7 @@ export const revenueAnalytics = {
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_hog_81ae754b5e.png',
         alt: 'Hedgehog holding a big dollar coin',
-        classes: 'absolute bottom-0 right-4 max-w-lg',
+        classes: 'absolute bottom-0 -right-4 max-w-sm',
     },
     customers: {
         // assemblyai: {
@@ -139,7 +138,7 @@ export const revenueAnalytics = {
             ],
         },
         {
-            title: 'Revenue data where it matters',
+            title: 'Unify revenue & product data',
             headline: 'Revenue data alongside your persons/groups',
             description: 'See how revenue behaves for individual customers/companies.',
             features: [
@@ -247,7 +246,7 @@ export const revenueAnalytics = {
                     subtitle: "We can't (yet!) predict revenue based on historical data",
                 },
                 {
-                    title: 'Connect with Marketing/Operational expenses',
+                    title: 'Connect with marketing/operational expenses',
                 },
             ],
             us: [
@@ -265,7 +264,7 @@ export const revenueAnalytics = {
                 },
                 {
                     title: 'SQL access to all data',
-                    subtitle: 'Query revenue data directly with SQL',
+                    subtitle: 'Query revenue data directly with PostHog SQL',
                 },
             ],
         },
