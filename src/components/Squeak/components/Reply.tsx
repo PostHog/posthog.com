@@ -334,7 +334,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         () => reply?.attributes?.downvoteProfiles?.data?.length,
         [reply?.attributes?.downvoteProfiles]
     )
-    const isMax = profile?.data.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+    const isMax = profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return profile?.data ? (
         <div onClick={handleContainerClick}>
