@@ -1,11 +1,12 @@
 import React from 'react'
-import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
+import { useApp } from '../../context/App'
+import { useLocation } from '@reach/router'
 
 interface AskMaxProps {
     border?: boolean
@@ -24,7 +25,8 @@ export default function AskMax({
 }: AskMaxProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
-    const { openChat, setQuickQuestions } = useChat()
+    const { openNewChat } = useApp()
+    const location = useLocation()
     const {
         allDocsPages: { totalDocsCount },
     } = useStaticQuery(graphql`
@@ -35,14 +37,11 @@ export default function AskMax({
         }
     `)
 
-    const borderClasses = border ? 'py-6 mt-4 border-y border-light dark:border-dark' : 'mb-8'
+    const borderClasses = border ? 'py-6 mt-4 border-y border-primary' : 'mb-8'
 
     const handleChatOpen = () => {
         posthog?.capture('Opened MaxAI chat')
-        if (quickQuestions) {
-            setQuickQuestions(quickQuestions)
-        }
-        openChat()
+        openNewChat({ path: `ask-max-${location.pathname}`, quickQuestions })
     }
 
     if (linkOnly) {
@@ -62,7 +61,7 @@ export default function AskMax({
                     >
                         <div className="flex-1 @2xl:flex-[0_0_auto] flex flex-col @lg:flex-row items-center justify-center gap-4">
                             <div>
-                                <IconLightBulb className="size-10 inline-block bg-accent dark:bg-accent-dark rounded p-2 text-primary/50 dark:text-primary-dark/50" />
+                                <IconLightBulb className="size-10 inline-block bg-accent rounded p-2 text-muted" />
                             </div>
 
                             <div className="flex flex-col text-center @lg:text-left">

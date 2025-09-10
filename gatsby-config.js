@@ -50,6 +50,9 @@ const getQuestionPages = async (base) => {
 }
 
 module.exports = {
+    flags: {
+        DEV_SSR: false,
+    },
     siteMetadata: {
         title: 'PostHog',
         titleTemplate: '%s',
@@ -101,7 +104,6 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
-        `gatsby-plugin-sass`,
         `gatsby-plugin-smoothscroll`,
         {
             resolve: `gatsby-source-filesystem`,
@@ -277,100 +279,100 @@ module.exports = {
                 },
             },
         },
-        {
-            resolve: `gatsby-plugin-feed`,
-            options: {
-                setup: (options) => ({
-                    ...options,
-                    custom_namespaces: {
-                        blog: 'https://posthog.com/blog',
-                    },
-                }),
-                query: `
-                {
-                  site {
-                    siteMetadata {
-                      title
-                      description
-                      siteUrl
-                    }
-                  }
-                }
-              `,
-                feeds: [
-                    {
-                        serialize: ({ query: { site, allMdx } }) => {
-                            let {
-                                siteMetadata: { siteUrl },
-                            } = site
+        // {
+        //     resolve: `gatsby-plugin-feed`,
+        //     options: {
+        //         setup: (options) => ({
+        //             ...options,
+        //             custom_namespaces: {
+        //                 blog: 'https://posthog.com/blog',
+        //             },
+        //         }),
+        //         query: `
+        //         {
+        //           site {
+        //             siteMetadata {
+        //               title
+        //               description
+        //               siteUrl
+        //             }
+        //           }
+        //         }
+        //       `,
+        //         feeds: [
+        //             {
+        //                 serialize: ({ query: { site, allMdx } }) => {
+        //                     let {
+        //                         siteMetadata: { siteUrl },
+        //                     } = site
 
-                            let allMdxs = allMdx.edges.map((edge) => {
-                                let { node } = edge
-                                let { frontmatter, excerpt, slug, id, html } = node
-                                let { date, title, authors, featuredImage } = frontmatter
-                                return {
-                                    description: excerpt,
-                                    date,
-                                    title,
-                                    url: `${siteUrl}/${slug}`,
-                                    guid: id,
-                                    author: authors && authors[0].name,
-                                    custom_elements: [
-                                        {
-                                            'content:encoded': {
-                                                _cdata: html,
-                                            },
-                                        },
-                                    ],
-                                    enclosure: {
-                                        url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
-                                    },
-                                }
-                            })
+        //                     let allMdxs = allMdx.edges.map((edge) => {
+        //                         let { node } = edge
+        //                         let { frontmatter, excerpt, slug, id, html } = node
+        //                         let { date, title, authors, featuredImage } = frontmatter
+        //                         return {
+        //                             description: excerpt,
+        //                             date,
+        //                             title,
+        //                             url: `${siteUrl}/${slug}`,
+        //                             guid: id,
+        //                             author: authors && authors[0].name,
+        //                             custom_elements: [
+        //                                 {
+        //                                     'content:encoded': {
+        //                                         _cdata: html,
+        //                                     },
+        //                                 },
+        //                             ],
+        //                             enclosure: {
+        //                                 url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
+        //                             },
+        //                         }
+        //                     })
 
-                            return allMdxs
-                        },
-                        query: `
-                        {
-                            allMdx(
-                              sort: { order: DESC, fields: [frontmatter___date] }
-                              filter: { frontmatter: { rootPage: { eq: "/blog" } } }
-                            ) {
-                              edges {
-                                node {
-                                  id
-                                  slug
-                                  html
-                                  excerpt(pruneLength: 150)
-                                  frontmatter {
-                                    date(formatString: "MMMM DD, YYYY")
-                                    title
-                                    featuredImage {
-                                      publicURL
-                                    }
-                                    authors: authorData {
-                                        handle
-                                        name
-                                        role
-                                        link_type
-                                        link_url
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        `,
-                        output: '/rss.xml',
-                        title: "PostHog's RSS Feed",
-                        // optional configuration to insert feed reference in pages:
-                        // if `string` is used, it will be used to create RegExp and then test if pathname of
-                        // current page satisfied this regular expression;
-                        // if not provided or `undefined`, all pages will have feed reference inserted
-                    },
-                ],
-            },
-        },
+        //                     return allMdxs
+        //                 },
+        //                 query: `
+        //                 {
+        //                     allMdx(
+        //                       sort: { order: DESC, fields: [frontmatter___date] }
+        //                       filter: { frontmatter: { rootPage: { eq: "/blog" } } }
+        //                     ) {
+        //                       edges {
+        //                         node {
+        //                           id
+        //                           slug
+        //                           html
+        //                           excerpt(pruneLength: 150)
+        //                           frontmatter {
+        //                             date(formatString: "MMMM DD, YYYY")
+        //                             title
+        //                             featuredImage {
+        //                               publicURL
+        //                             }
+        //                             authors: authorData {
+        //                                 handle
+        //                                 name
+        //                                 role
+        //                                 link_type
+        //                                 link_url
+        //                             }
+        //                           }
+        //                         }
+        //                       }
+        //                     }
+        //                   }
+        //                 `,
+        //                 output: '/rss.xml',
+        //                 title: "PostHog's RSS Feed",
+        //                 // optional configuration to insert feed reference in pages:
+        //                 // if `string` is used, it will be used to create RegExp and then test if pathname of
+        //                 // current page satisfied this regular expression;
+        //                 // if not provided or `undefined`, all pages will have feed reference inserted
+        //             },
+        //         ],
+        //     },
+        // },
         {
             resolve: require.resolve(`./plugins/gatsby-transformer-cloudinary`),
             options: {
@@ -389,9 +391,9 @@ module.exports = {
                 ],
             },
         },
-        {
-            resolve: 'gatsby-plugin-no-sourcemaps',
-        },
+        // {
+        //     resolve: 'gatsby-plugin-no-sourcemaps',
+        // },
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),

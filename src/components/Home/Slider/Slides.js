@@ -167,7 +167,7 @@ const Title = ({ title, label }) => {
             <h3 className="text-xl mdlg:text-lg lg:text-3xl mb-1">
                 {title}
                 {label && (
-                    <span className="ml-1 relative -top-0.5 text-sm text-primary/60 dark:text-primary/60 font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
+                    <span className="ml-1 relative -top-0.5 text-sm text-secondary font-semibold leading-tight border border-dark dark:border-dark px-1 py-0.5 rounded-sm uppercase">
                         {label}
                     </span>
                 )}
@@ -187,7 +187,7 @@ const Description = ({ description, className = '' }) => {
 const ContentContainer = ({ children, className = '' }) => {
     return (
         <div
-            className={`md:border border-t-0 border-light dark:border-dark mdlg:border-0 mdlg:flex items-center order-1 mdlg:order-2 mdlg:p-0 p-3 bg-accent mdlg:bg-transparent dark:bg-accent-dark mdlg:dark:bg-transparent z-10 relative text-black dark:text-white mdlg:text-inherit dark:mdlg:text-inherit ${className}`}
+            className={`md:border border-t-0 border-primary mdlg:border-0 mdlg:flex items-center order-1 mdlg:order-2 mdlg:p-0 p-3 bg-accent mdlg:bg-transparent dark:bg-accent-dark mdlg:dark:bg-transparent z-10 relative text-black dark:text-white mdlg:text-inherit dark:mdlg:text-inherit ${className}`}
         >
             {children}
         </div>
@@ -217,9 +217,7 @@ const FeatureList = ({ features, featureIconBackground, className = '' }) => {
                         key={title}
                         className="flex gap-2 items-start mdlg:items-center text-base mdlg:text-sm xl:text-[15px]"
                     >
-                        <span
-                            className={`inline-flex p-1 rounded-sm bg-primary/10 mdlg:bg-${featureIconBackground}/10`}
-                        >
+                        <span className={`inline-flex p-1 rounded-sm bg-accent mdlg:bg-${featureIconBackground}/10`}>
                             <Icon className="w-4 mdlg:w-6" />
                         </span>
                         <span className="opacity-70 font-semibold">{title}</span>
@@ -328,7 +326,7 @@ export const WebAnalytics = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-[675px] md:shadow-2xl md:rotate-1',
+        className: 'w-full border border-primary rounded md:max-w-[675px] md:shadow-2xl md:rotate-1',
     }
     const features = [
         { title: 'Pageviews, sessions, unique visitors', Icon: IconLineGraph },
@@ -418,7 +416,7 @@ export const SessionReplay = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-full md:shadow-2xl md:rotate-1',
+        className: 'w-full border border-primary rounded md:max-w-full md:shadow-2xl md:rotate-1',
     }
     const features = [
         { title: 'Event timeline', Icon: IconClock },
@@ -505,7 +503,7 @@ export const FeatureFlags = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:-rotate-1',
+        className: 'w-full border border-primary rounded md:max-w-[840px] md:shadow-2xl md:-rotate-1',
     }
     const image2Props = {
         loading: 'eager',
@@ -513,7 +511,7 @@ export const FeatureFlags = () => {
         placeholder: 'none',
         quality: 100,
         objectFit: 'contain',
-        className: 'w-full border border-light dark:border-dark rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
+        className: 'w-full border border-primary rounded md:max-w-[840px] md:shadow-2xl md:rotate-1',
     }
     const features = [
         { title: 'Multivariate flags', Icon: IconTestTube },

@@ -69,14 +69,14 @@ Fonts are hosted outside of our posthog.com GitHub repo (due to licensing reason
 
 Restricted to PostHog employees, it's possible to reference the font locally to see an exact replication of what will be published on posthog.com.
 
-[Layout.scss](https://github.com/PostHog/posthog.com/blob/master/src/components/Layout/Layout.scss) contains some commented out code which can be used, in conjunction with the [variable webfont files](https://github.com/PostHog/company-internal/blob/master/MatterSQVF.zip) (restricted to PostHog organization members). Here's how to use them:
+[global.css](https://github.com/PostHog/posthog.com/blob/master/src/styles.css) contains some commented out code which can be used, in conjunction with the [variable webfont files](https://github.com/PostHog/company-internal/blob/master/MatterSQVF.zip) (restricted to PostHog organization members). Here's how to use them:
 
 1. Download the webfont files from the zip above
 1. Extract the files and place them in `/public/fonts`
-1. In `Layout.scss`, comment out the `src` for both fonts with production (Cloudfront) URLs and uncomment the relative URLs.
+1. In `global.css`, comment out the `src` for both fonts with production (Cloudfront) URLs and uncomment the relative URLs.
 1. Optionally use `.gitignore` to keep the files locally without inadvertently checking them in
 
-Note: When submitting a PR, be sure to revert changes made to `Layout.scss`
+Note: When submitting a PR, be sure to revert changes made to `global.css`
 
 ### Designing on desktop
 

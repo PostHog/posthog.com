@@ -8,48 +8,23 @@
 const React = require('react')
 
 import { initKea, wrapElement } from './kea'
-import HandbookLayout from './src/templates/Handbook'
-import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
-import Posts from './src/components/Edition/Posts'
-import { Provider as ToastProvider } from './src/context/toast'
-import { ChatProvider } from './src/hooks/useChat'
-import Chat from './src/components/Chat'
-export const wrapPageElement = ({ element, props }) => {
-    const slug = props.location.pathname.substring(1)
-    initKea(true, props.location)
+import Wrapper from './src/components/Wrapper'
+import { Provider } from './src/context/App'
+import { Provider as ToastProvider } from './src/context/Toast'
+
+export const wrapRootElement = ({ element }) => (
+    <ToastProvider>
+        <UserProvider>{wrapElement({ element })}</UserProvider>
+    </ToastProvider>
+)
+
+export const wrapPageElement = ({ element, props: { location } }) => {
+    initKea(true, location)
     return (
-        <UserProvider>
-            <ChatProvider>
-                {wrapElement({
-                    element:
-                        !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
-                        (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
-                            <Posts {...props}>{element}</Posts>
-                        ) : props.custom404 || !props.data || props.pageContext.ignoreWrapper ? (
-                            element
-                        ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-                          ![
-                              'docs/api/post-only-endpoints',
-                              'docs/api/user',
-                              'docs/integrations',
-                              'docs/product-analytics',
-                              'docs/session-replay',
-                              'docs/feature-flags',
-                              'docs/experiments',
-                              'docs/data',
-                          ].includes(slug) ? (
-                            <HandbookLayout {...props} />
-                        ) : /^session-replay|^product-analytics|^feature-flags|^experiments|^product-os/.test(slug) ? (
-                            <Product {...props} />
-                        ) : /^careers\//.test(slug) ? (
-                            <Job {...props} />
-                        ) : (
-                            element
-                        ),
-                })}
-            </ChatProvider>
-        </UserProvider>
+        <Provider element={element} location={location}>
+            <Wrapper />
+        </Provider>
     )
 }
 
@@ -72,21 +47,30 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
     darkQuery.addListener(function (e) {
         if (!localStorage.getItem('theme')) {
-            window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+            window.__setPreferredTheme('system')
         }
     })
     try {
         preferredTheme =
-            (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light')) ||
-            'light'
+            localStorage.getItem('theme') || 'light'
     } catch (err) {}
-    window.__setPreferredTheme = function (newTheme) {
+    window.__setPreferredTheme = function (theme) {
+        const newTheme = theme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : theme
         setTheme(newTheme)
         try {
             localStorage.setItem('theme', newTheme)
         } catch (err) {}
+        return newTheme
     }
-    setTheme(preferredTheme)
+    setTheme(preferredTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : preferredTheme)
+
+    // Set initial skin value
+    try {
+        const savedSkin = JSON.parse(localStorage.getItem('siteSettings') || '{}').skinMode || 'modern'
+        document.body.setAttribute('data-skin', savedSkin)
+        const savedWallpaper = JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'keyboard-garden'
+        document.body.setAttribute('data-wallpaper', savedWallpaper)
+    } catch (err) {}
 })()
       `,
             },

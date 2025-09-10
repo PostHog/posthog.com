@@ -14,9 +14,8 @@ const FeatureItem = ({ name, description, size }) => (
         <div className="flex-1">
             <h4 className="text-base my-1">{name}</h4>
             <p
-                className={`${
-                    size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
-                } text-primary/75 dark:text-primary-dark/75 mb-0`}
+                className={`${size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
+                    } text-secondary mb-0`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>
@@ -31,7 +30,7 @@ const addons = [
                 group: 'Benefits',
                 items: [
                     {
-                        name: 'Send event data to a data warehouse',
+                        name: 'Send event data to a data warehouse!!',
                         description:
                             'If you have a data lake or data warehouse, you can use destinations to send PostHog event data there, while ensuring you still have that data in PostHog to perform your analytics processes.',
                         icon: IconAdvanced,
@@ -45,40 +44,6 @@ const addons = [
                     {
                         name: 'Customizability with Hog',
                         description: 'Use our powerful Hog language to write completely custom destinations.',
-                        icon: IconAdvanced,
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        name: 'Group analytics',
-        features: [
-            {
-                group: 'Examples of how to use groups',
-                items: [
-                    {
-                        name: 'B2B SaaS app',
-                        description:
-                            'Aggregate events at an account-level. Calculate metrics like:<ul><li>number of daily active companies</li><li>company churn rate</li><li>How many companies have adopted a new feature.</li></ul>',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Collaborative, project-based services',
-                        description:
-                            'For project-based products like Notion, Jira, or Figma, create a project group type to calculate:<ul><li>metrics at a project level</li><li>users per project</li><li>project engagement</li></ul>',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Communication-based apps',
-                        description:
-                            'For a product like Slack, you can create a channel group type to measure:<ul><li>the average number of messages per channel</li><li>the number of monthly active channels</li><li>total number of channel participants</li></ul>',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Social media apps',
-                        description:
-                            'For a social network-type product, create a post group type to measure:<ul><li>average number of replies per post</li><li>total count of unique posters per month</li></ul>',
                         icon: IconAdvanced,
                     },
                 ],
@@ -142,7 +107,7 @@ const Addons = (): JSX.Element => {
                             We've moved specialized functionality into add-ons so you never pay for things you don't
                             need.
                         </p>
-                        <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
+                        <div className="max-w-sm rounded border border-primary bg-accent p-4">
                             <div className="font-semibold opacity-70 mb-1">Jump to:</div>
                             <ol className="pl-6">
                                 {allAddons.map((addon) => (
@@ -184,7 +149,7 @@ const Addons = (): JSX.Element => {
                             className="grid md:grid-cols-12 gap-x-12 gap-y-4 mt-12"
                             id={name.toLowerCase().replace(/\s+/g, '-')}
                         >
-                            <div className="md:col-span-12 border-b border-light dark:border-dark pb-2">
+                            <div className="md:col-span-12 border-b border-primary pb-2">
                                 <h2 className="mb-1">{name}</h2>
                             </div>
                             <div className="md:col-span-4 md:sticky top-[120px] self-start">
@@ -214,33 +179,33 @@ const Addons = (): JSX.Element => {
                                 <div className="grid gap-x-8 gap-y-3 md:grid-cols-1">
                                     {customAddon
                                         ? customAddon.features?.map((feature) => {
-                                              return (
-                                                  <Features
-                                                      key={`${name}-${feature.group}`}
-                                                      addonName={name}
-                                                      features={feature.items}
-                                                      title={feature.group}
-                                                  />
-                                              )
-                                          })
+                                            return (
+                                                <Features
+                                                    key={`${name}-${feature.group}`}
+                                                    addonName={name}
+                                                    features={feature.items}
+                                                    title={feature.group}
+                                                />
+                                            )
+                                        })
                                         : Object.keys(featuresByCategory)
-                                              .sort((feature) => (feature === 'Features' ? -1 : 1))
-                                              ?.map((category) => {
-                                                  const features = featuresByCategory[category]
-                                                  return (
-                                                      <Features
-                                                          key={`${name}-${category}`}
-                                                          title={category}
-                                                          addonName={name}
-                                                          features={features}
-                                                      />
-                                                  )
-                                              })}
+                                            .sort((feature) => (feature === 'Features' ? -1 : 1))
+                                            ?.map((category) => {
+                                                const features = featuresByCategory[category]
+                                                return (
+                                                    <Features
+                                                        key={`${name}-${category}`}
+                                                        title={category}
+                                                        addonName={name}
+                                                        features={features}
+                                                    />
+                                                )
+                                            })}
                                 </div>
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">
                                         <h5 className="mb-2 text-lg">Pricing breakdown</h5>
-                                        <div className="border border-light dark:border-dark rounded divide-y divide-light dark:divide-dark bg-accent/50 dark:bg-accent-dark">
+                                        <div className="border border-primary rounded divide-y divide-primary bg-accent">
                                             <PricingTiers plans={plans} type={type} unit={unit} test />
                                         </div>
                                     </div>
@@ -249,7 +214,7 @@ const Addons = (): JSX.Element => {
                         </div>
                     )
                 })}
-                <div className="my-12 border-t border-light dark:border-dark pt-6 flex flex-col items-center">
+                <div className="my-12 border-t border-primary pt-6 flex flex-col items-center">
                     <p>Subscribe to add-ons after signing up.</p>
 
                     <CallToAction

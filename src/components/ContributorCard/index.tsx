@@ -57,7 +57,7 @@ export const ContributorCard = ({
                     </ContributorCardTooltip>
                 </div>
             ) : null}
-            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark rounded flex flex-col items-center pt-6 pb-12 px-6 space-y-6">
+            <div className="bg-accent border border-primary text-primary dark:text-primary-dark rounded flex flex-col items-center pt-6 pb-12 px-6 space-y-6">
                 <div className="space-y-1">
                     <img
                         src={imageSrc}
@@ -80,7 +80,7 @@ export const ContributorCard = ({
                         </ContributorCardTooltip>
                     </div>
 
-                    <div className="relative w-full rounded-full overflow-hidden bg-white dark:bg-accent/25 h-1.5">
+                    <div className="relative w-full rounded-full overflow-hidden bg-white dark:bg-accent h-1.5">
                         <div
                             style={{ width: `${contributorLevel >= 50 ? 50 : (100 * contributorLevel) / 50}%` }}
                             className="absolute left-0 inset-y-0 h-full bg-gradient-to-r from-[#F1A82C] to-orange"

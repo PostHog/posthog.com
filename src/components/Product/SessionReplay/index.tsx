@@ -465,7 +465,7 @@ export const ProductSessionReplay = () => {
                     </ul>
                 </section>
 
-                <section className="bg-accent dark:bg-accent-dark">
+                <section className="bg-accent">
                     <Marquee product={product.capitalized}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
@@ -529,12 +529,8 @@ export const ProductSessionReplay = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        AI Session summarization (currently closed alpha)
-                                    </li>
-                                    <li>
-                                        Extended retention (currently closed alpha)
-                                    </li>
+                                    <li>AI Session summarization (currently closed alpha)</li>
+                                    <li>Extended retention (currently closed alpha)</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
