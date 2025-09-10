@@ -262,12 +262,12 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                     <FreeTierItem
                         name="Realtime destinations"
                         allocation="10K events"
-                        icon={<Icons.IconDatabase className="text-seagreen size-5" />}
+                        icon={<Icons.IconDecisionTree className="text-seagreen size-5" />}
                     />
                     <FreeTierItem
                         name="Batch exports"
                         allocation="1M rows"
-                        icon={<Icons.IconDatabase className="text-seagreen size-5" />}
+                        icon={<Icons.IconShare className="text-seagreen size-5" />}
                     />
                     <FreeTierItem
                         name="LLM analytics"
