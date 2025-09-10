@@ -43,8 +43,13 @@ const AIInstall = ({ setActiveTab }) => (
         >
             <div className="w-full bg-accent flex justify-center h-full text-sm relative">
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/3000_773e0d4c49.png"
-                    className="-mt-4"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/os_light_4d68fe80d8.png"
+                    className="dark:hidden"
+                    imgClassName=""
+                />
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/os_dark_c5dab7be97.png"
+                    className="hidden dark:block"
                     imgClassName=""
                 />
                 <div className="absolute right-[-3.5rem] top-10 rotate-[45deg] bg-red py-2 px-12 text-white font-code font-semibold">
