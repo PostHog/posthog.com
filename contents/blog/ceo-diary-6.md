@@ -1,5 +1,5 @@
 ---
-date: 2025-08-29
+date: 2025-09-10
 title: Reflections on my communication
 rootPage: /blog
 sidebar: Blog
