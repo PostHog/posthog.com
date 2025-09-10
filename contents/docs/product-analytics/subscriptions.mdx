@@ -7,8 +7,8 @@ availability:
 ---
 export const newSubscriptionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-light-mode.png"
 export const newSubscriptionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-dark-mode.png"
-export const slackSubsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-choose-light-mode.png"
-export const slackSubsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-choose-dark-mode.png"
+export const slackSubsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/slack_config_light_b5a1c93ad5.png"
+export const slackSubsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/slack_config_dark_3abf83e8fe.png"
 export const slackAddLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-light-mode.png"
 export const slackAddDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-dark-mode.png"
 
@@ -16,7 +16,7 @@ Subscriptions enable you to send [insights](/docs/product-analytics/insights) or
 
 > **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/cdp/destinations) to learn how to send event or action data to webhooks, Slack, and more.
 
-To get started, open the dropdown menu in the top right of any insight or dashboard and click "Subscribe."
+To get started, open the dropdown menu in the top right of any insight or dashboard and click **Subscribe**.
 
 <ProductScreenshot
     imageLight = {newSubscriptionLight} 
@@ -38,11 +38,38 @@ When configuring an email subscription you can subscribe multiple emails at once
 
 Once saved, any emails not already subscribed receives a notification email informing them what you have subscribed them to. You can optionally include a small personalized message that is sent along to them.
 
-> 🚧 For self-hosted instances, you need to have configured the SMTP email settings in [instance settings](/docs/self-host/configure/email).
-
 ## Slack subscriptions
 
-To set up a Slack subscription, you first need to install the PostHog Slack App. This can be done in the subscription set up modal or in [your project settings](https://us.posthog.com/settings/project#integration-slack).
+There are three steps to setting up a Slack subscription:
+1. Adding the PostHog Slack app to your workspace
+2. Adding the PostHog Slack app to specific channels
+3. Creating a new Slack subscription in PostHog
+
+### 1. Adding the PostHog Slack app to your workspace
+
+Starting in PostHog, you can add the PostHog Slack app to your workspace in the subscription set up modal or in [your project settings](https://app.posthog.com/settings/project#integration-slack).
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/allow_slack_bb68272218.png" 
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/allow_slack_bb68272218.png"
+    classes="rounded"
+    alt="Allow PostHog Slack app permissions"
+/>
+
+The PostHog Slack app will require some basic permissions which you can grant by clicking the **Allow** button.
+
+### 2. Adding the PostHog Slack app to specific channels
+
+Then, head to **Slack** and add PostHog to **specific Slack channels**. To do this:
+
+1. In the Slack [channel header](https://slack.com/help/articles/360059928654-How-to-use-Slack--your-quick-start-guide#channels), click the top right menu and click **Open channel details**
+2. Navigate to the **Integrations** tab
+3. Click the **Add an app** button
+4. Under **In your workspace**, click **PostHog**
+
+### 3. Creating a new Slack subscription in PostHog
+
+After installing the app, head back to PostHog and add a new subscription. You can do this in any dashboard or insight by clicking the top right menu, then **Subscribe**, and then **Add subscription**.
 
 <ProductScreenshot
     imageLight = {slackAddLight} 
@@ -51,14 +78,7 @@ To set up a Slack subscription, you first need to install the PostHog Slack App.
     alt="Add to Slack button"
 />
 
-You can configure a subscription to be sent to any Slack channel in your workspace that the PostHog Slack App has access to. To add access to a channel in Slack, click:
-
-1. The channel name
-2. The "Integrations" tab
-3. The "Add an app" button
-4. Choose "PostHog"
-
-Back in PostHog, you can then select any channel the app has access to and set a frequency. **Private channels** are only listed if you have already added PostHog to the relevant channel.
+You can then select any channel the app has access to and set a frequency. **Private channels** are only listed if you have already added PostHog to the relevant channel.
 
 <ProductScreenshot
     imageLight = {slackSubsLight} 
@@ -66,5 +86,3 @@ Back in PostHog, you can then select any channel the app has access to and set a
     classes="rounded"
     alt="Slack channel selection"
 />
-
-> 🚧 For self-hosted instances, you need to have configured the Slack App in [instance settings](/docs/self-host/configure/slack).

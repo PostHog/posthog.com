@@ -483,14 +483,37 @@ const products: Product[] = [
         status: 'WIP',
         roadmapID: 1999,
     },
-
     {
         name: 'Revenue analytics',
+        color: '[#36C46F]',
         Icon: IconPiggyBank,
-        color: 'orange',
+        description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
         types: ['Sales'],
+        features: [
+            { title: 'MRR and Gross Revenue', Icon: IconPiggyBank },
+            { title: 'Breakdowns by country, product, plan, and customer', Icon: IconGlobe },
+            { title: 'Growth/Churn Rate', Icon: IconLineGraph },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png" />
+                    </div>
+                </>
+            )
+        },
         status: 'WIP',
-        roadmapID: 2206,
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/docs/revenue-analytics/start-here',
+                text: 'Get started',
+            },
+        },
     },
     {
         name: 'Product tours',

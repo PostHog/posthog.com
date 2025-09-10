@@ -81,6 +81,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'LinkedIn Ads',
+                    url: '/docs/cdp/sources/linkedin-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -845,6 +849,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/product-engineering',
                     },
                     {
+                        name: 'Visiting customers as an engineer',
+                        url: '/handbook/engineering/visiting-customers',
+                    },
+                    {
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
@@ -1301,6 +1309,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-do-discovery',
                     },
                     {
+                        name: 'Selling and procuring via AWS Marketplace',
+                        url: '/handbook/growth/sales/selling-via-aws',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                         children: [
@@ -1466,6 +1478,10 @@ export const handbookSidebar = [
                     {
                         name: 'New hire onboarding exercise',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
+                    },
+                    {
+                        name: 'New customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding.md',
                     },
                 ],
             },
@@ -1702,12 +1718,12 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
-                    name: 'Billing',
-                    url: '/teams/billing',
+                    name: 'Batch Exports',
+                    url: '/teams/batch-exports',
                 },
                 {
-                    name: 'CDP',
-                    url: '/teams/cdp',
+                    name: 'Billing',
+                    url: '/teams/billing',
                 },
                 {
                     name: 'ClickHouse',
@@ -1758,8 +1774,12 @@ export const companyMenu = {
                     url: '/teams/messaging',
                 },
                 {
-                    name: 'Platform',
-                    url: '/teams/platform',
+                    name: 'Platform Analytics',
+                    url: '/teams/platform-analytics',
+                },
+                {
+                    name: 'Platform Features',
+                    url: '/teams/platform-features',
                 },
                 {
                     name: 'Platform UX',
@@ -1797,8 +1817,8 @@ export const companyMenu = {
                     url: '/teams/content',
                 },
                 {
-                    name: 'CS & Onboarding',
-                    url: '/teams/cs-onboarding',
+                    name: 'Customer Success',
+                    url: '/teams/customer-success',
                 },
                 {
                     name: 'Demand Gen',
@@ -1809,6 +1829,10 @@ export const companyMenu = {
                     url: '/teams/exec',
                 },
                 {
+                    name: 'Marketing',
+                    url: '/teams/marketing',
+                },
+                {
                     name: 'Onboarding',
                     url: '/teams/onboarding',
                 },
@@ -1817,7 +1841,7 @@ export const companyMenu = {
                     url: '/teams/people',
                 },
                 {
-                    name: 'Sales & CS',
+                    name: 'Sales',
                     url: '/teams/sales-cs',
                 },
                 {
@@ -2385,6 +2409,37 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'AI engineering',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconLlmPromptEvaluation',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-engineering',
+                        },
+                        {
+                            name: 'Max AI',
+                            url: '/docs/max-ai',
+                        },
+                        {
+                            name: 'AI wizard',
+                            url: '/docs/ai-engineering/ai-wizard',
+                        },
+                        {
+                            name: 'Model Context Protocol (MCP)',
+                            url: '/docs/model-context-protocol',
+                        },
+                        {
+                            name: 'LLM analytics',
+                            url: 'https://posthog.com/docs/llm-analytics',
+                        },
+                        {
+                            name: 'Markdown and llms.txt',
+                            url: '/docs/ai-engineering/markdown-llms-txt',
+                        },
+                    ],
+                },
+                {
                     name: 'Winning with PostHog',
                 },
                 {
@@ -2513,10 +2568,6 @@ export const docsMenu = {
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
-                        },
-                        {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
                         },
@@ -2540,10 +2591,6 @@ export const docsMenu = {
                         {
                             name: 'Projects',
                             url: '/docs/settings/projects',
-                        },
-                        {
-                            name: 'Model context protocol (MCP)',
-                            url: '/docs/model-context-protocol',
                         },
                         {
                             name: 'Hog',
@@ -2775,6 +2822,10 @@ export const docsMenu = {
                         {
                             name: 'Pomerium',
                             url: '/docs/advanced/proxy/pomerium',
+                        },
+                        {
+                            name: 'Railway',
+                            url: '/docs/advanced/proxy/railway',
                         },
                         {
                             name: 'Remix',
@@ -3206,16 +3257,6 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Revenue analytics',
-                    url: '/docs/web-analytics/revenue-analytics',
-                    icon: 'IconPiggyBank',
-                    color: 'salmon',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Marketing analytics',
@@ -3922,6 +3963,30 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'References',
+                    url: '/docs/error-tracking/references',
+                    icon: 'IconBox',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'JavaScript web SDK',
+                            url: '/docs/references/posthog-js?filter=error-tracking',
+                        },
+                        {
+                            name: 'Node.js SDK',
+                            url: '/docs/references/posthog-node?filter=error-tracking',
+                        },
+                        {
+                            name: 'Python SDK',
+                            url: '/docs/references/posthog-python?filter=error-tracking',
+                        },
+                        {
+                            name: 'Error tracking API',
+                            url: '/docs/api',
+                        },
+                    ],
+                },
+                {
                     name: 'More tutorials',
                     url: '/docs/error-tracking/tutorials',
                     icon: 'IconGraduationCap',
@@ -4073,6 +4138,10 @@ export const docsMenu = {
                         {
                             name: 'Google Ads',
                             url: '/docs/data-warehouse/sources/google-ads',
+                        },
+                        {
+                            name: 'LinkedIn Ads',
+                            url: '/docs/data-warehouse/sources/linkedin-ads',
                         },
                         {
                             name: 'Google Sheets',
@@ -4437,6 +4506,120 @@ export const docsMenu = {
                             url: '/docs/llm-analytics/integrations/keywords-ai-posthog',
                         },
                     ],
+                },
+            ],
+        },
+        {
+            name: 'Revenue analytics',
+            icon: 'IconPiggyBank',
+            color: '[#36C46F]',
+            url: '/docs/revenue-analytics',
+            description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'Revenue analytics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/revenue-analytics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/revenue-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Payment platforms',
+                    url: '/docs/revenue-analytics/payment-platforms',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/revenue-analytics/payment-platforms',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/revenue-analytics/payment-platforms/stripe',
+                        },
+                        {
+                            name: 'Chargebee',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                        {
+                            name: 'Polar',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                        {
+                            name: 'RevenueCat',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                    ],
+                },
+                {
+                    name: 'Capture revenue events',
+                    url: '/docs/revenue-analytics/capture-revenue-events',
+                    icon: 'IconCode',
+                    color: 'green',
+                },
+                {
+                    name: 'Dashboard',
+                    url: '/docs/revenue-analytics/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'red',
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Connect to customers',
+                    url: '/docs/revenue-analytics/connect-to-customers',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                },
+                {
+                    name: 'Deferred Revenue',
+                    url: '/docs/revenue-analytics/deferred-revenue',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'Managed views',
+                    url: '/docs/revenue-analytics/managed-views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/revenue-analytics/common-questions',
+                    icon: 'IconQuestion',
+                    color: 'blue',
+                    featured: true,
                 },
             ],
         },
