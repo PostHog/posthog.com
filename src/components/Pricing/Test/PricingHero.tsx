@@ -7,6 +7,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import * as Icons from '@posthog/icons'
 import FreeTierItem from './FreeTierItem'
 import PlanContent from './PlanContent'
+import Tooltip from 'components/Tooltip'
 
 interface PricingHeroProps {
     activePlan: string
@@ -260,14 +261,27 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                         icon={<Icons.IconDatabase className="text-purple size-5" />}
                     />
                     <FreeTierItem
-                        name="Realtime destinations"
-                        allocation="10K events"
+                        name="Data pipelines"
+                        allocation={
+                            <>
+                                10K events + 1M rows{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Real-time destinations: Send events to Slack, webhooks, and 40+ tools as
+                                            they happen.
+                                            <br />
+                                            Batch exports: Reliable scheduled exports to S3, Snowflake, BigQuery, and
+                                            more
+                                        </>
+                                    )}
+                                    placement="top"
+                                >
+                                    <Icons.IconInfo className="size-3 inline-block relative -top-px" />
+                                </Tooltip>
+                            </>
+                        }
                         icon={<Icons.IconDecisionTree className="text-seagreen size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Batch exports"
-                        allocation="1M rows"
-                        icon={<Icons.IconShare className="text-seagreen size-5" />}
                     />
                     <FreeTierItem
                         name="LLM analytics"
