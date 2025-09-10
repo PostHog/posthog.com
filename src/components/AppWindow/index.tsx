@@ -779,7 +779,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 <div
                                     ref={contentRef}
                                     className={`size-full flex-grow ${chrome ? 'overflow-hidden' : ''}`}
-                                    style={{ display: inView ? 'block' : 'none' }}
+                                    style={{
+                                        display: siteSettings.performanceBoost ? (inView ? 'block' : 'none') : 'block',
+                                    }}
                                 >
                                     {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                         <Router

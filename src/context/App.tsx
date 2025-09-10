@@ -251,6 +251,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: false,
         clickBehavior: 'double',
+        performanceBoost: false,
     },
     updateSiteSettings: () => {},
     openNewChat: () => {},
@@ -915,6 +916,7 @@ export interface SiteSettings {
         | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
+    performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -928,6 +930,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         clickBehavior: 'double',
+        performanceBoost: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
