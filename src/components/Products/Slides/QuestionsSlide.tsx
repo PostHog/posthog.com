@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import pluralizeWord from 'pluralize'
 import { Markdown } from 'components/Squeak/components/Markdown'
 
 interface Question {
@@ -217,35 +218,40 @@ export default function QuestionsSlide({
                         </Tabs.List>
                     </ScrollArea>
                 </div>
-                {questions.map((question: Question, index: number) => (
-                    <Tabs.Content
-                        className="text-primary flex-1 bg-primary @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full rounded-b @2xl:rounded-b-none @2xl:rounded-r"
-                        key={index}
-                        value={`tab-${index}`}
-                    >
-                        <ScrollArea className="h-full">
-                            <div className="px-4 pt-8 @2xl:pt-0">
-                                <h2 className="text-3xl mb-4">{question.question}</h2>
-                                <div className="prose dark:prose-invert max-w-none [&_p]:!text-lg [&_li]:!text-lg">
-                                    <Markdown>{getContentForUrl(question.url)}</Markdown>
-                                </div>
-                                {question.url && (
-                                    <div className="mt-6">
-                                        <OSButton
-                                            to={question.url}
-                                            variant="secondary"
-                                            size="lg"
-                                            asLink
-                                            state={{ newWindow: true }}
-                                        >
-                                            Read full tutorial →
-                                        </OSButton>
+                {questions.map((question: Question, index: number) => {
+                    const type = question.url ? question.url.split('/')[1] ?? 'tutorial' : 'tutorial'
+                    const singularType = type === 'docs' ? 'documentation' : pluralizeWord.singular(type)
+
+                    return (
+                        <Tabs.Content
+                            className="text-primary flex-1 bg-primary @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full rounded-b @2xl:rounded-b-none @2xl:rounded-r"
+                            key={index}
+                            value={`tab-${index}`}
+                        >
+                            <ScrollArea className="h-full">
+                                <div className="px-4 pt-8 @2xl:pt-0">
+                                    <h2 className="text-3xl mb-4">{question.question}</h2>
+                                    <div className="prose dark:prose-invert max-w-none [&_p]:!text-lg [&_li]:!text-lg">
+                                        <Markdown>{getContentForUrl(question.url)}</Markdown>
                                     </div>
-                                )}
-                            </div>
-                        </ScrollArea>
-                    </Tabs.Content>
-                ))}
+                                    {question.url && (
+                                        <div className="mt-6">
+                                            <OSButton
+                                                to={question.url}
+                                                variant="secondary"
+                                                size="lg"
+                                                asLink
+                                                state={{ newWindow: true }}
+                                            >
+                                                Read full {singularType} →
+                                            </OSButton>
+                                        </div>
+                                    )}
+                                </div>
+                            </ScrollArea>
+                        </Tabs.Content>
+                    )
+                })}
             </Tabs.Root>
         </div>
     )
