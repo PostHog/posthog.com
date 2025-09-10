@@ -21,7 +21,15 @@ export const featureFlags = {
         title: 'Safely roll out features to specific users or groups',
         description: (
             <>
-                Test changes with small groups of users before rolling out wider. Then analyze usage with <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>Product Analytics</Link> and <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>Session Replay</Link>.
+                Test changes with small groups of users before rolling out wider. Then analyze usage with{' '}
+                <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>
+                    Product Analytics
+                </Link>{' '}
+                and{' '}
+                <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
+                    Session Replay
+                </Link>
+                .
             </>
         ),
         textColor: 'text-white', // tw
@@ -77,8 +85,7 @@ export const featureFlags = {
         {
             title: 'Boolean & multivariate feature flags',
             headline: 'Boolean & multivariate feature flags',
-            description:
-                'Test or release different versions of a feature with as many variants as you need.',
+            description: 'Test or release different versions of a feature with as many variants as you need.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png',
@@ -91,8 +98,20 @@ export const featureFlags = {
         {
             title: 'Test changes without pushing code',
             headline: 'Test changes without pushing code',
-            description: (<>
-                JSON payloads let you change text, visuals, or entire blocks of code directly from within PostHog – no code deployments needed with <code>getFeatureFlagPayload()</code> – or server-side with <Link to="/docs/feature-flags/remote-config" className="font-bold underline" state={{ newWindow: true }}>remote config</Link>.</>),
+            description: (
+                <>
+                    JSON payloads let you change text, visuals, or entire blocks of code directly from within PostHog –
+                    no code deployments needed with <code>getFeatureFlagPayload()</code> – or server-side with{' '}
+                    <Link
+                        to="/docs/feature-flags/remote-config"
+                        className="font-bold underline"
+                        state={{ newWindow: true }}
+                    >
+                        remote config
+                    </Link>
+                    .
+                </>
+            ),
             // images: [
             //     {
             //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png',
@@ -157,7 +176,7 @@ export const featureFlags = {
             title: 'Local evaluation ',
             headline: 'Local evaluation',
             description:
-                "Improve speed by caching a flag's value on initial load.Or use the API to build your own UI. ",
+                "Improve speed by caching a flag's value on initial load. Or use the API to build your own UI. ",
             children: (
                 <>
                     <h4 className="text-xl mb-1">
@@ -179,7 +198,7 @@ export const featureFlags = {
             title: 'Bootstrapping',
             headline: 'Bootstrapping',
             description:
-                'Bootstrap flags on initialization so all flags are available immediately, without having to make extra network requests.',
+                'Bootstrap flags on initialization so all flags are available immediately on page load – without having to make extra network requests.',
             children: (
                 <div className="">
                     <h4 className="text-xl mb-1">
@@ -211,8 +230,7 @@ export const featureFlags = {
         {
             title: 'Testing & diagnostics',
             headline: 'Flag testing & diagnostics',
-            description:
-                "There are a few ways to test flags and make sure your flags are working as expected.",
+            description: 'There are a few ways to test flags and make sure your flags are working as expected.',
             children: (
                 <div className="-mt-5">
                     <h4 className="text-xl mb-1">1. Assign a specific value to a user</h4>
@@ -233,10 +251,13 @@ export const featureFlags = {
                     </p>
                     <CodeBlock code={`posthog.featureFlags.overrideFeatureFlags(false)`} language="js" />
 
-
                     <h4 className="text-xl mb-1">3. PostHog toolbar</h4>
                     <p className="text-lg">
-                        Fire up the <Link to="/toolbar" state={{ newWindow: true }}>PostHog toolbar</Link> to toggle the status of any feature flag while on any page of your site.
+                        Fire up the{' '}
+                        <Link to="/toolbar" state={{ newWindow: true }}>
+                            PostHog toolbar
+                        </Link>{' '}
+                        to toggle the status of any feature flag while on any page of your site.
                     </p>
                 </div>
             ),
@@ -244,10 +265,19 @@ export const featureFlags = {
         {
             title: 'Developer-friendly automation',
             headline: 'Developer-friendly automation',
-            description:
-                (<>
-                    <Link to="/docs/feature-flags/scheduled-flag-changes" className="font-bold underline" state={{ newWindow: true }}>Schedule flag changes.</Link> Get automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time.
-                </>),
+            description: (
+                <>
+                    <Link
+                        to="/docs/feature-flags/scheduled-flag-changes"
+                        className="font-bold underline"
+                        state={{ newWindow: true }}
+                    >
+                        Schedule flag changes.
+                    </Link>{' '}
+                    Get automated usage reports, IP address resolution (for location-based targeting), and recall person
+                    properties to avoid passing them manually every time.
+                </>
+            ),
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png',
@@ -289,10 +319,6 @@ export const featureFlags = {
                     description: 'Disable a feature without touching your codebase',
                 },
                 {
-                    title: 'Bootstrapping',
-                    description: 'Get flags and values to trigger changes immediately on page load',
-                },
-                {
                     title: 'Persist flags across authentication steps',
                     description: 'Make sure users have a consistent experience after login',
                 },
@@ -312,7 +338,7 @@ export const featureFlags = {
             ],
         },
     ],
-    answersHeadline: 'How-to\'s with Feature Flags',
+    answersHeadline: "How-to's with Feature Flags",
     answersDescription: 'Learn how to do some interesting things with Feature Flags.',
     questions: [
         {
@@ -333,15 +359,15 @@ export const featureFlags = {
         },
         {
             question: 'How can I set up a phased rollout?',
-            url: '/tutorials/phased-rollout'
+            url: '/tutorials/phased-rollout',
         },
         {
             question: 'How do I configure a location-based banner?',
-            url: '/tutorials/location-based-banner'
+            url: '/tutorials/location-based-banner',
         },
         {
             question: 'How do I update feature flags with the PostHog API?',
-            url: '/tutorials/api-feature-flags'
+            url: '/tutorials/api-feature-flags',
         },
     ],
     comparison: {
@@ -352,7 +378,7 @@ export const featureFlags = {
                     description: 'Clean up old flags automatically',
                 },
                 {
-                    title: 'Trigger changes based on metrics'
+                    title: 'Trigger changes based on metrics',
                 },
                 {
                     title: 'Edge network support',
