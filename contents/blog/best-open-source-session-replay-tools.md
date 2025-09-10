@@ -38,7 +38,7 @@ Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session re
 
 [PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
-PostHog's session replay tool includes console logs and network activity, so you can identify the causes of bugs or performance problems. There's also a playlist feature, allowing you to save similar replays based on specific events or person properties into one list, and you can save recordings offline for safe keeping.
+PostHog's session replay tool includes console logs and network activity, so you can identify the causes of bugs or performance problems. There's also a "saved filters" feature, allowing you to save similar replays based on specific events or person properties into one list, and you can save recordings offline for safe keeping.
 
 Other features include product analytics, [feature flags](/product/feature-flags), [funnels](/product/funnels), [heatmaps](/product/heatmaps), [experimentation](/product/experimentation-suite), [trends](/product/trends) and [much more](/product). 
 
