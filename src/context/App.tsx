@@ -13,7 +13,6 @@ import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
-import { docsMenu } from '../navs'
 
 declare global {
     interface Window {
@@ -1702,13 +1701,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 '*'
             )
 
-            window.parent.postMessage(
-                {
-                    type: 'docs-menu',
-                    menu: docsMenu.children,
-                },
-                '*'
-            )
+            // window.parent.postMessage(
+            //     {
+            //         type: 'docs-menu',
+            //         menu: docsMenu.children,
+            //     },
+            //     '*'
+            // )
         }
 
         const onMessage = (e: MessageEvent): void => {
