@@ -95,7 +95,7 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { compact } = useLayoutData()
-    const { openStart } = useApp()
+    const { openStart, siteSettings } = useApp()
     const posthog = usePostHog()
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
@@ -114,7 +114,10 @@ export default function Link({
             if (path === '/signup') {
                 e.preventDefault()
                 const subdomain = urlObj.hostname.split('.')[0]
-                openStart({ subdomain, initialTab: state?.initialTab })
+                openStart({
+                    subdomain,
+                    initialTab: siteSettings.experience === 'boring' ? 'signup' : state?.initialTab,
+                })
             }
         }
         if (event && posthog) {
