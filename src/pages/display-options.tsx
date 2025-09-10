@@ -182,8 +182,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                                         type="button"
                                         data-scheme="primary"
                                         onClick={() => handleSelect(option.value)}
-                                        className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
-                                            }`}
+                                        className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${
+                                            isSelected ? 'bg-accent' : ''
+                                        }`}
                                     >
                                         <img
                                             src={optionThumb}
@@ -311,6 +312,23 @@ export default function DisplayOptions() {
                                 options={experienceOptions}
                                 onValueChange={handleExperienceChange}
                                 value={siteSettings.experience}
+                            />
+                        </div>
+                    </Fieldset>
+                </div>
+                <div className="hidden md:block">
+                    <Fieldset legend="Performance">
+                        <div className="bg-primary grid grid-cols-2 gap-2">
+                            <ToggleGroup
+                                title="Performance Boost"
+                                options={[
+                                    { label: 'Disabled', value: 'false' },
+                                    { label: 'Enabled', value: 'true' },
+                                ]}
+                                onValueChange={(value) =>
+                                    updateSiteSettings({ ...siteSettings, performanceBoost: value === 'true' })
+                                }
+                                value={siteSettings.performanceBoost ? 'true' : 'false'}
                             />
                         </div>
                     </Fieldset>
