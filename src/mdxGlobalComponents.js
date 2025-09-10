@@ -59,6 +59,7 @@ import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { MaxCTA } from './components/MaxCTA'
+import TeamMember from './components/TeamMember'
 import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
 import OSButton from './components/OSButton'
@@ -125,6 +126,7 @@ export const shortcodes = {
     ZendeskTicket,
     MaxCTA,
     SmallTeam,
+    TeamMember,
     Steps,
     Step,
 }
