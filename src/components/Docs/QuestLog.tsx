@@ -80,7 +80,6 @@ export const QuestLog: React.FC<{
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    // Removed unused headerHeight state
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
@@ -283,7 +282,7 @@ export const QuestLog: React.FC<{
             const containersToWatch = [
                 document.querySelector('[data-scheme="primary"] [data-radix-scroll-area-viewport]'), // Scroll viewport
                 document.querySelector('.quest-log-container'), // QuestLog container
-            ].filter(Boolean) as Element[] // Remove null elements and type assertion
+            ].filter((el): el is Element => el !== null) // Remove null elements with type guard
 
             if (containersToWatch.length > 0) {
                 resizeObserver = new ResizeObserver(() => {
