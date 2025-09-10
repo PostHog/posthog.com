@@ -561,7 +561,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: (
                 <>
-                    <span className="ml-1">More</span>
+                    <span>More</span>
                 </>
             ),
             items: [
