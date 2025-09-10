@@ -9,6 +9,7 @@ import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
+import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { NumericFormat } from 'react-number-format'
@@ -133,6 +134,12 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                             Experiments is currently bundled with Feature flags and share a free tier and volume
                             pricing.
                         </div>
+                    ) : activeProduct.addonSliders ? (
+                        <StandaloneAddonsTab
+                            activeProduct={activeProduct}
+                            setVolume={setVolume}
+                            setProduct={setProduct}
+                        />
                     ) : (
                         <>
                             <div className="grid grid-cols-8">
