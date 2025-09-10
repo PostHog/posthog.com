@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BaseIcon, type IconProps } from './Icons'
 import Link from 'components/Link'
 import { useRef } from 'react'
@@ -207,13 +207,39 @@ export const IconImage = ({ url, className }: IconImageProps) => (
 )
 
 export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
-    const getCurrentSkin = (): 'modern' | 'classic' => {
-        if (typeof document !== 'undefined') {
-            const skin = document.body.getAttribute('data-skin')
-            return skin === 'classic' ? 'classic' : 'modern'
+    const [currentSkin, setCurrentSkin] = useState<'modern' | 'classic'>('modern')
+
+    useEffect(() => {
+        const updateSkin = () => {
+            if (typeof document !== 'undefined') {
+                const skin = document.body.getAttribute('data-skin')
+                setCurrentSkin(skin === 'classic' ? 'classic' : 'modern')
+            }
         }
-        return 'modern'
-    }
+
+        // Initial update
+        updateSkin()
+
+        // Watch for changes using MutationObserver
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-skin') {
+                    updateSkin()
+                }
+            })
+        })
+
+        if (typeof document !== 'undefined') {
+            observer.observe(document.body, {
+                attributes: true,
+                attributeFilter: ['data-skin'],
+            })
+        }
+
+        return () => {
+            observer.disconnect()
+        }
+    }, [])
 
     const getIconUrl = (iconName: AppIconName): string => {
         const iconVariants = PRODUCT_ICON_MAP[iconName] as AppIconVariants
@@ -221,8 +247,6 @@ export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
             console.warn(`AppIcon: Unknown icon name "${iconName}"`)
             return ''
         }
-
-        const currentSkin = getCurrentSkin()
 
         // Prefer skin-specific variant if available, else fall back to default
         if (currentSkin === 'modern' && iconVariants.modern) {
@@ -278,8 +302,9 @@ export const AppLink = ({
     const getChildIconClasses = () => {
         if (typeof parentIcon === 'string' && parentIcon === 'page') {
             // Custom classes for page parentIcon
-            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${color ? `bg-${color}` : ''
-                }`
+            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${
+                color ? `bg-${color}` : ''
+            }`
         }
         // Default fallback classes
         return `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`
@@ -353,9 +378,11 @@ export const AppLink = ({
                 {children}
             </span>
             <figcaption
-                className={`text-[13px] font-medium leading-tight ${orientation === 'row' ? 'text-left' : 'text-center'}`}
+                className={`text-[13px] font-medium leading-tight ${
+                    orientation === 'row' ? 'text-left' : 'text-center'
+                }`}
             >
-                <span className={`inline-block leading-tight`}>
+                <span className={`inline-block leading-snug`}>
                     <span
                         className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
                     >
@@ -372,7 +399,7 @@ export const AppLink = ({
     const orientationClassName =
         orientation === 'row'
             ? 'flex w-full gap-2'
-            : 'inline-flex flex-col justify-center w-auto max-w-28 text-center'
+            : 'inline-flex flex-col justify-center w-auto space-y-0.5 max-w-28 text-center'
 
     return (
         <figure ref={ref}>

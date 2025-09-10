@@ -760,50 +760,60 @@ export const DocsItemsEnd = [
     },
 ]
 
+import type { AppIconName } from 'components/OSIcons/AppIcon'
+
 // Export Fun stuff items for use in sparks-joy page and menu
 export const SparksJoyItems = {
     games: [
         {
             label: 'Hedgehog mode',
             link: '/sparks-joy/hedgehog-mode',
-            icon: <AppIcon name="hedgehog_mode" />,
+            iconName: 'hedgehog_mode' as AppIconName,
+            customIcon: null,
         },
         {
             label: 'HogWars',
             link: '/sparks-joy/hogwars',
-            icon: <AppIcon name="hogwars" />,
+            iconName: 'hogwars' as AppIconName,
+            customIcon: null,
         },
         {
             label: 'Dictator or tech bro?',
             link: '/sparks-joy/dictator-or-tech-bro',
-            icon: <IconDictator />,
+            iconName: null,
+            customIcon: <IconDictator />,
         },
     ],
     notGames: [
         {
             label: 'Photobooth',
             link: '/photobooth',
-            icon: <AppIcon name="photobooth" />,
+            iconName: 'photobooth' as AppIconName,
+            customIcon: null,
         },
         {
             label: 'HogPaint',
             link: '/paint',
-            icon: <AppIcon name="hogpaint" />,
+            iconName: 'hogpaint' as AppIconName,
+            customIcon: null,
         },
         {
             label: 'Coloring book.pdf',
             link: '/coloring-book.pdf',
-            icon: <AppIcon name="pdf" />,
+            iconName: 'pdf' as AppIconName,
+            customIcon: null,
         },
         {
             label: 'Post-It note training',
             link: '/academy',
-            icon: <AppIcon name="postIt" />,
+            iconName: 'postIt' as AppIconName,
+            customIcon: null,
         },
         {
             label: '404 page',
             link: '/404',
-            icon: <AppIcon name="blueScreen" />,
+            iconName: 'blueScreen' as AppIconName,
+            customIcon: null,
         },
     ],
 }

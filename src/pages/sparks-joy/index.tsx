@@ -9,7 +9,7 @@ import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
-import { AppLink } from 'components/OSIcons/AppIcon'
+import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
 
 export default function SparkJoy(): JSX.Element {
@@ -81,7 +81,9 @@ export default function SparkJoy(): JSX.Element {
                                 value: 'games',
                                 trigger: (
                                     <span className="bg-primary pr-2 relative z-10 select-none">
-                                        Games ({SparksJoyItems.games.filter((item) => item.icon).length})
+                                        Games (
+                                        {SparksJoyItems.games.filter((item) => item.iconName || item.customIcon).length}
+                                        )
                                     </span>
                                 ),
                                 content: (
@@ -93,7 +95,7 @@ export default function SparkJoy(): JSX.Element {
                                         } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                     >
                                         {SparksJoyItems.games
-                                            .filter((item) => item.icon)
+                                            .filter((item) => item.iconName || item.customIcon)
                                             .map((item) => (
                                                 <ZoomHover
                                                     key={item.link}
@@ -104,7 +106,13 @@ export default function SparkJoy(): JSX.Element {
                                                     <AppLink
                                                         label={item.label}
                                                         url={item.link}
-                                                        Icon={item.icon}
+                                                        Icon={
+                                                            item.iconName ? (
+                                                                <AppIcon name={item.iconName} />
+                                                            ) : (
+                                                                item.customIcon
+                                                            )
+                                                        }
                                                         background="bg-primary"
                                                         className="size-12"
                                                         orientation={isListLayout ? 'row' : 'column'}
@@ -127,7 +135,12 @@ export default function SparkJoy(): JSX.Element {
                                 value: 'grab-bag',
                                 trigger: (
                                     <span className="bg-primary pr-2 relative z-10 select-none">
-                                        Grab bag ({SparksJoyItems.notGames.filter((item) => item.icon).length})
+                                        Grab bag (
+                                        {
+                                            SparksJoyItems.notGames.filter((item) => item.iconName || item.customIcon)
+                                                .length
+                                        }
+                                        )
                                     </span>
                                 ),
                                 content: (
@@ -139,7 +152,7 @@ export default function SparkJoy(): JSX.Element {
                                         } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                     >
                                         {SparksJoyItems.notGames
-                                            .filter((item) => item.icon)
+                                            .filter((item) => item.iconName || item.customIcon)
                                             .map((item) => (
                                                 <ZoomHover
                                                     key={item.link}
@@ -150,7 +163,13 @@ export default function SparkJoy(): JSX.Element {
                                                     <AppLink
                                                         label={item.label}
                                                         url={item.link}
-                                                        Icon={item.icon}
+                                                        Icon={
+                                                            item.iconName ? (
+                                                                <AppIcon name={item.iconName} />
+                                                            ) : (
+                                                                item.customIcon
+                                                            )
+                                                        }
                                                         background="bg-primary"
                                                         className="size-12"
                                                         orientation={isListLayout ? 'row' : 'column'}
