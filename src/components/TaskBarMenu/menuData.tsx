@@ -1,4 +1,4 @@
-import { MenuType } from 'components/RadixUI/MenuBar'
+import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
 import { docsMenu, handbookSidebar } from '../../navs'
 import * as Icons from '@posthog/icons'
@@ -23,11 +23,9 @@ import {
     IconLinkedIn,
     IconGithub,
     IconInstagram,
-    IconController,
     IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
-import { AppIcon } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
@@ -43,6 +41,34 @@ interface DocsMenuItem {
 
 interface DocsMenu {
     children: DocsMenuItem[]
+}
+
+// Add mobile destinations for docs menu items based on the product data
+const addDocsMenuMobileDestinations = (items: any[], allProducts: any[]): any[] => {
+    return items.map((item) => {
+        // For docs product items, add mobile destination based on slug from product data
+        if (item.type === 'submenu' && item.label && !item.mobileDestination) {
+            // Find matching product by name to get its slug
+            const product = allProducts.find((p) => p.name === item.label)
+            if (product && product.slug) {
+                return {
+                    ...item,
+                    mobileDestination: `/docs/${product.slug}`,
+                    items: item.items, // Keep items for desktop
+                }
+            }
+        }
+
+        // Recursively process nested items
+        if (item.items && Array.isArray(item.items)) {
+            return {
+                ...item,
+                items: addDocsMenuMobileDestinations(item.items, allProducts),
+            }
+        }
+
+        return item
+    })
 }
 
 // Recursively group items under section dividers at any level
@@ -168,8 +194,10 @@ const getDocsMenuItems = () => {
     return items
 }
 
-const mergedDocsMenu = () => {
-    return [...DocsItemsStart, ...getDocsMenuItems(), ...DocsItemsEnd]
+const mergedDocsMenu = (allProducts: any[]) => {
+    const docsItems = getDocsMenuItems()
+    const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
+    return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
 }
 
 // Process handbookSidebar into menu item structure
@@ -213,6 +241,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             label: `Browse all apps (${APP_COUNT})`,
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
+            mobileDestination: '/products',
         },
         {
             type: 'separator',
@@ -223,18 +252,21 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
+            mobileDestination: '/products',
         },
         {
             type: 'submenu',
             label: 'Popular products',
             items: buildProductMenuItems(popularProducts, allProducts),
             icon: <Icons.IconTrending className="size-4 text-green" />,
+            mobileDestination: '/products',
         },
         {
             type: 'submenu',
             label: 'New products',
             items: buildProductMenuItems(newestProducts, allProducts),
             icon: <Icons.IconPresent className="size-4 text-blue" />,
+            mobileDestination: '/products',
         },
         {
             type: 'separator',
@@ -288,6 +320,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Product OS',
             items: buildProductOSMenuItems(allProducts),
+            mobileLink: '/products', // Direct link on mobile
         },
         {
             trigger: 'Pricing',
@@ -376,7 +409,7 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
-            items: mergedDocsMenu(),
+            items: mergedDocsMenu(allProducts),
         },
         {
             trigger: 'Library',
@@ -436,6 +469,7 @@ export function useMenuData(): MenuType[] {
                     label: 'Handbook',
                     link: '/handbook',
                     items: processHandbookSidebar(handbookSidebar),
+                    mobileDestination: '/handbook',
                 },
                 {
                     type: 'item',
@@ -476,6 +510,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'submenu',
                     label: 'Like and subscribe',
+                    mobileDestination: false, // Omit from mobile menu
                     items: [
                         {
                             type: 'item',
@@ -660,48 +695,118 @@ export function useMenuData(): MenuType[] {
         },
     ]
 
+    // Process main nav items for mobile menu
+    const processMobileNavItems = (): MenuItemType[] => {
+        const mobileItems: MenuItemType[] = []
+
+        mainNavItems.forEach((menu) => {
+            // If menu has mobileLink, convert to simple item
+            if (menu.mobileLink) {
+                mobileItems.push({
+                    type: 'item' as const,
+                    label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
+                    link: menu.mobileLink,
+                })
+            } else {
+                // Process items and filter out those with mobileDestination === false
+                const filteredItems: MenuItemType[] = []
+                const menuItemsCopy = [...menu.items]
+
+                // Apply mobile destinations for docs menu if this is the Docs menu
+                const itemsToProcess = typeof menu.trigger === 'string' && menu.trigger === 'Docs'
+                    ? addDocsMenuMobileDestinations(menuItemsCopy, allProducts)
+                    : menuItemsCopy
+
+                for (let i = 0; i < itemsToProcess.length; i++) {
+                    const item = itemsToProcess[i]
+
+                    // Skip items marked for mobile omission
+                    if (item.mobileDestination === false) {
+                        // Remove preceding separator if it would be orphaned
+                        if (filteredItems.length > 0 &&
+                            filteredItems[filteredItems.length - 1].type === 'separator' &&
+                            (i === itemsToProcess.length - 1 || itemsToProcess[i + 1].type === 'separator')) {
+                            filteredItems.pop()
+                        }
+                        continue
+                    }
+
+                    // Convert submenus with mobileDestination to simple items
+                    if (item.type === 'submenu' && item.mobileDestination) {
+                        filteredItems.push({
+                            ...item,
+                            type: 'item' as const,
+                            link: item.mobileDestination,
+                            items: undefined,
+                        })
+                    }
+                    // Convert submenus with links to simple items
+                    else if (item.type === 'submenu' && item.link) {
+                        filteredItems.push({
+                            ...item,
+                            type: 'item' as const,
+                            items: undefined,
+                        })
+                    }
+                    else {
+                        filteredItems.push(item)
+                    }
+                }
+
+                const processedItems = filteredItems
+
+                // Only add menu if it has items after filtering
+                if (processedItems.length > 0) {
+                    mobileItems.push({
+                        type: 'submenu' as const,
+                        label: typeof menu.trigger === 'string' ? menu.trigger : 'More',
+                        items: processedItems,
+                    })
+                }
+            }
+        })
+
+        return mobileItems
+    }
+
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems =
         isLoaded && isMobile
             ? [
-                  {
-                      type: 'item' as const,
-                      label: 'home.mdx',
-                      link: '/',
-                  },
-                  { type: 'separator' as const },
-                  // Main navigation items as submenus
-                  ...mainNavItems.map((item) => ({
-                      type: 'submenu' as const,
-                      label: typeof item.trigger === 'string' ? item.trigger : 'More',
-                      items: item.items,
-                  })),
-                  { type: 'separator' as const },
-                  // System items
-                  ...baseLogoMenuItems,
-              ]
+                {
+                    type: 'item' as const,
+                    label: 'home.mdx',
+                    link: '/',
+                },
+                { type: 'separator' as const },
+                // Main navigation items processed for mobile
+                ...processMobileNavItems(),
+                { type: 'separator' as const },
+                // System items
+                ...baseLogoMenuItems,
+            ]
             : [
-                  // Desktop: only show system items
-                  ...baseLogoMenuItems,
-                  { type: 'separator' as const },
-                  {
-                      type: 'item' as const,
-                      label: 'Start screensaver',
-                      onClick: () => {
-                          setScreensaverPreviewActive(true)
-                      },
-                      shortcut: ['Shift', 'Z'],
-                  },
-                  {
-                      type: 'item' as const,
-                      label: 'Close all windows',
-                      disabled: windows.length < 1,
-                      onClick: () => {
-                          animateClosingAllWindows()
-                      },
-                      shortcut: ['Shift', 'X'],
-                  },
-              ]
+                // Desktop: only show system items
+                ...baseLogoMenuItems,
+                { type: 'separator' as const },
+                {
+                    type: 'item' as const,
+                    label: 'Start screensaver',
+                    onClick: () => {
+                        setScreensaverPreviewActive(true)
+                    },
+                    shortcut: ['Shift', 'Z'],
+                },
+                {
+                    type: 'item' as const,
+                    label: 'Close all windows',
+                    disabled: windows.length < 1,
+                    onClick: () => {
+                        animateClosingAllWindows()
+                    },
+                    shortcut: ['Shift', 'X'],
+                },
+            ]
 
     return [
         {
@@ -726,6 +831,7 @@ export const DocsItemsStart = [
         type: 'item' as const,
         label: 'Overview',
         link: '/docs',
+        icon: <Icons.IconBook className="size-4 text-purple" />,
     },
     {
         type: 'separator' as const,

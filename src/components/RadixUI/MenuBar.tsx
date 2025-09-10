@@ -4,6 +4,7 @@ import { IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { useResponsive } from '../../hooks/useResponsive'
 
 // Types
 export type MenuItemType = {
@@ -18,12 +19,14 @@ export type MenuItemType = {
     node?: React.ReactNode // Allow embedding a React node
     external?: boolean // Whether the link should open in a new window with external styling
     active?: boolean
+    mobileDestination?: string | false // Mobile-specific destination URL or false to omit from mobile menu
 }
 
 export type MenuType = {
     trigger: React.ReactNode
     bold?: boolean
     items: MenuItemType[]
+    mobileLink?: string // Direct link for the menu trigger on mobile
 }
 
 const RootClasses = 'flex gap-px py-0.5 h-full'
@@ -42,6 +45,83 @@ const ShortcutClasses =
 // Helper to generate stable IDs
 const generateStableId = (baseId: string, ...parts: (string | number)[]): string => {
     return `${baseId}-${parts.join('-')}`
+}
+
+// Process menu items for mobile display - truncate nesting to 2 levels max
+const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
+    // Skip items marked for mobile omission
+    if (item.mobileDestination === false) {
+        return null
+    }
+
+    // If item has a mobile destination, convert submenu to simple link
+    if (item.mobileDestination && item.type === 'submenu') {
+        return {
+            ...item,
+            type: 'item' as const,
+            link: item.mobileDestination,
+            items: undefined, // Remove nested items on mobile
+        }
+    }
+
+    // For submenus without explicit mobile destination, limit depth
+    if (item.type === 'submenu' && item.items) {
+        // If the submenu has a link, make it a simple link on mobile
+        if (item.link) {
+            return {
+                ...item,
+                type: 'item' as const,
+                items: undefined,
+            }
+        }
+        
+        // Otherwise, process children but make them all leaf nodes
+        if (Array.isArray(item.items)) {
+            const processedItems = item.items.map((subItem: MenuItemType) => {
+                // Convert all nested submenus to simple items
+                if (subItem.type === 'submenu') {
+                    return {
+                        ...subItem,
+                        type: 'item' as const,
+                        link: subItem.link || subItem.mobileDestination || '#',
+                        items: undefined,
+                    }
+                }
+                return subItem
+            }).filter(Boolean) as MenuItemType[]
+
+            return {
+                ...item,
+                items: processedItems,
+            }
+        }
+    }
+
+    return item
+}
+
+const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
+    const processedItems: MenuItemType[] = []
+    
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        
+        // Skip items marked for mobile omission
+        if (item.mobileDestination === false) {
+            // Also skip the preceding separator if it exists
+            if (processedItems.length > 0 && processedItems[processedItems.length - 1].type === 'separator') {
+                processedItems.pop()
+            }
+            continue
+        }
+        
+        const processed = processMobileMenuItem(item)
+        if (processed) {
+            processedItems.push(processed)
+        }
+    }
+    
+    return processedItems
 }
 
 // Components
@@ -213,6 +293,8 @@ const MenuBar: React.FC<MenuBarProps> = ({
     customTriggerClasses,
     id = 'menubar',
 }) => {
+    const { isMobile, isLoaded } = useResponsive()
+    
     const baseId = React.useMemo(() => {
         // Generate a stable ID based on the menu structure
         const menuSignature = menus
@@ -221,12 +303,46 @@ const MenuBar: React.FC<MenuBarProps> = ({
         return `${id}-${menuSignature}`
     }, [menus, id])
 
+    // Process menus for mobile if needed
+    const processedMenus = React.useMemo(() => {
+        // Wait for responsive detection to load before processing
+        if (!isLoaded) return menus
+        if (!isMobile) return menus
+        
+        return menus.map(menu => {
+            // If menu has mobileLink, don't process items since they won't be shown
+            if (menu.mobileLink) {
+                return menu
+            }
+            
+            return {
+                ...menu,
+                items: processMobileMenuItems(menu.items)
+            }
+        })
+    }, [menus, isMobile, isLoaded])
+
     return (
         <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`} id={baseId}>
-            {menus.map((menu, menuIndex) => {
+            {processedMenus.map((menu, menuIndex) => {
                 const menuId = generateStableId(baseId, 'menu', menuIndex)
                 const triggerId = generateStableId(baseId, 'trigger', menuIndex)
                 const contentId = generateStableId(baseId, 'content', menuIndex)
+                
+                // On mobile, if menu has mobileLink, make it a direct link
+                if (isLoaded && isMobile && menu.mobileLink) {
+                    return (
+                        <Link
+                            key={menuId}
+                            to={menu.mobileLink}
+                            state={{ newWindow: true }}
+                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${customTriggerClasses || ''}`}
+                        >
+                            {menu.trigger}
+                        </Link>
+                    )
+                }
+                
                 return (
                     <RadixMenubar.Menu key={menuId} data-scheme="primary">
                         <RadixMenubar.Trigger

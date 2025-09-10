@@ -60,7 +60,7 @@ const Toast = ({
         >
             <div className="not-prose">
                 {title && (
-                    <RadixToast.Title className="text-[15px] font-semibold text-primary [grid-area:_title]">
+                    <RadixToast.Title className="text-[15px] font-semibold text-primary leading-tight [grid-area:_title]">
                         {title}
                     </RadixToast.Title>
                 )}
