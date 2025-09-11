@@ -81,6 +81,7 @@ Another responsibility of the support hero is to serve as the first point of con
 #### How external PRs are assigned
 
 External PRs typically reach your team through one of two methods:
+
 - **CODEOWNERS automation**: If your team has CODEOWNERS configured, PRs modifying your team's files will automatically be assigned to your team
 - **Manual assignment**: For teams without CODEOWNERS set up, external PRs may be manually assigned to your team handle by other engineers who spot them
 
@@ -119,6 +120,7 @@ When an external PR lands in your team's queue:
 #### Prioritization
 
 External PRs should be treated with the following priority during your support hero week:
+
 - **High-value bug fixes**: Review within 1-2 days
 - **Small improvements**: Review within 2-3 days  
 - **Large features**: Initial triage within 2 days, full review within a week
