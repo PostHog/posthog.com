@@ -48,13 +48,15 @@ One of our most important pricing principles is that it should be free to use Po
 - **10,000 trigger events free** each month  
 - **1 million rows exported free** each month  
 
-That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions](/docs/cdp/destinations/linkedin-ads), and [data backed up to S3](/docs/cdp/batch-exports/s3). It should be plenty to get started, or even to keep going, depending on your setup.
+That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions](/docs/cdp/destinations/linkedin-ads), and [data backed up to S3](/docs/cdp/batch-exports/s3). It should be plenty to get started, or even to keep going, depending on your setup. 
+
+To learn more about usage-based pricing beyond free tiers and to calculate potential costs, check out our [pricing page and calculator](/pricing).
 
 ## What's next?
 
 If you're already using pipelines, you don't need to do anything — your billing will automatically switch to the new system starting today and will apply to usage going forward. Your usage up until yesterday is billed under the old pricing scheme and you can see both charges in the billing page for this month. 
 
-If you are forecasted an increased bill because of the price change, we will  automatically apply a 50% discount for the next month.
+If you are forecasted an increased bill because of the price change, we will automatically apply a 50% discount for the next month.
 
 If you've been waiting for a better reason to try data pipelines out, well… this is it.  
 
