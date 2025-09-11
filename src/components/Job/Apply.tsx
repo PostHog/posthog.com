@@ -4,7 +4,6 @@ import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState, useCallback, useEffect } from 'react'
-import Confetti from 'react-confetti'
 import { NewsletterForm } from 'components/NewsletterForm'
 import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -313,7 +312,6 @@ const ApplicationSuccess = () => {
 
     return (
         <>
-            <Confetti recycle={false} numberOfPieces={1000} />
             <ScrollArea className="bg-primary">
                 <div data-scheme="secondary" className="w-full text-primary rounded-md relative max-h-[80vh]">
                     <div className="px-8 text-center">
