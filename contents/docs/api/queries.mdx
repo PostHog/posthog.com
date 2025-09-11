@@ -170,7 +170,7 @@ createQuery()
 
 </MultiLanguage>
 
-Every query you run is logged in the [`query_log` table](/docs/data/query-log) along with details like duration, read bytes, read rows, and more.
+Every query you run is logged in the [`query_log` table](/docs/data/query-log) along with details like duration, read bytes, read rows, and more. The `name` parameter you provide appears in this log, making it easier to identify and analyze your queries.
 
 ## Writing performant queries
 
@@ -397,9 +397,32 @@ SELECT *
 FROM ca_events
 ```
 
-### 4. Other SQL optimizations
+### 4. Name your queries for easier debugging
 
-Option 1 and 2 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
+Always provide a meaningful `name` parameter for your queries. This helps you:
+
+- Identify slow or problematic queries in the [`query_log` table](/docs/data/query-log)
+- Analyze query performance patterns over time
+- Debug issues more efficiently
+- Track resource usage by query type
+
+Good query names are descriptive and include the purpose:
+
+Good examples
+
+- `daily_active_users_last_7_days`
+- `funnel_signup_to_activation`
+- `revenue_by_country_monthly`
+
+Avoid generic names
+
+- `query1`
+- `test`
+- `data`
+
+### 5. Other SQL optimizations
+
+Options 1-4 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
 
 ## Query parameters
 
@@ -410,7 +433,7 @@ Top level request parameters include:
 - `refresh` (optional): Controls caching behavior and execution mode (sync vs async).
 - `filters_override` (optional): Dashboard-specific filters to apply.
 - `variables_override` (optional): Variable overrides for queries that support variables.
-- `name` (optional): A name for the query to better identify it in the `query_log` table.
+- `name` (optional): A descriptive name for the query to better identify it in the [`query_log` table](/docs/data/query-log). We strongly recommend providing meaningful names for easier debugging and performance analysis.
 
 ### Caching and execution modes
 

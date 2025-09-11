@@ -1,6 +1,8 @@
 This is the main endpoint for querying data from PostHog. You can find all the details on what it does and how you can use it in our [API queries doc](/docs/api/queries).
 
-If you don't want to read that, here's an example of how to use it to get events where the `$current_url` contains blog using the `HogQLQuery` query type and SQL:
+If you don't want to read that, here's an example of how to use it to get events where the `$current_url` contains blog using the `HogQLQuery` query type and SQL.
+
+> **Tip:** Always include a descriptive `name` parameter in your queries. This makes them easier to identify and analyze in the [`query_log` table](/docs/data/query-log).
 
 <MultiLanguage>
 
