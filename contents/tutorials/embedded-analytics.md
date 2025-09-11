@@ -11,7 +11,9 @@ tags:
 
 If you're building a B2B2C product, *your users* might want analytics about *their users*. You can provide this with embedded analytics (AKA customer-facing analytics), events you capture and then display for them.
 
-This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog’s [queries API](/docs/api/queries), and then displaying it with Recharts.
+This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog's [queries API](/docs/api/queries), and then displaying it with Recharts.
+
+> **Note:** In this tutorial, we include a `name` parameter with each query. This makes it easier to identify and debug queries in the [query log](/docs/data/query-log), which is especially useful when building customer-facing analytics.
 
 ## Creating a Next.js app
 
@@ -162,7 +164,8 @@ export async function POST(request: NextRequest) {
           ORDER BY date DESC
           LIMIT 7
           `
-        }
+        },
+        name: 'embedded_analytics_pageviews'
       }),
     });
 
@@ -227,7 +230,8 @@ export async function POST(request: NextRequest) {
               AND properties.team = '${team}'
 
           `
-        }
+        },
+        name: `embedded_analytics_button_clicks`
       }),
     });
 
