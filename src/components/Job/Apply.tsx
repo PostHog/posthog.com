@@ -486,6 +486,13 @@ export default function Apply({ id, info }: { id: string; info: any }) {
         )
     }
 
+    // preview confirmation window
+    // useEffect(() => {
+    //     addWindow(
+    //         <ApplicationSuccess key="application-success" location={{ pathname: 'application-success' }} newWindow />
+    //     )
+    // }, [])
+
     return submitted ? (
         <>
             <h3>Thanks for your interest in joining PostHog!</h3>
