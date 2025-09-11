@@ -1,5 +1,5 @@
 ---
-date: 2025-09-10
+date: 2025-09-11
 title: Data pipelines just got cheaper (and fairer)
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_is_the_cheapest_e77c4ea4a5.jpg
