@@ -13,6 +13,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
+import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 
 import { Accordion } from 'components/RadixUI/Accordion'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -46,8 +47,6 @@ interface Plan {
     unit_amount_usd: string
     tiers?: Tier[]
 }
-
-const EXCLUDED_ADDON_TYPES = ['mobile_replay', 'data_pipelines']
 
 const predefinedAddons = [
     {
