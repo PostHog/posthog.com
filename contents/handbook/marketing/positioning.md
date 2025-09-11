@@ -1,5 +1,5 @@
 ---
-title: Positioning
+title: Product Positioning
 sidebar: Handbook
 showTitle: true
 ---

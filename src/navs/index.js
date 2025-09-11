@@ -648,6 +648,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Overview',
+                url: '/handbook/brand/brand-and-vibes',
+            },
+            {
                 name: 'Design',
                 url: '',
                 children: [
@@ -674,54 +678,18 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Product marketing',
+                name: 'Website',
                 url: '',
                 children: [
                     {
-                        name: 'Email marketing',
-                        url: '/handbook/brand/email-comms',
-                    },
-                    {
-                        name: 'In-app messaging',
-                        url: '/handbook/brand/in-app',
-                    },
-                    {
-                        name: 'Partnerships',
-                        url: '/handbook/brand/partners',
-                    },
-                    {
-                        name: 'Press & PR',
-                        url: '/handbook/brand/press',
-                    },
-                    {
-                        name: 'Product launches',
-                        url: '/handbook/brand/product-announcements',
-                    },
-                    {
-                        name: 'Startups & YC Programs',
-                        url: '/handbook/brand/startups',
-                    },
-                    {
-                        name: 'Testimonials & G2',
-                        url: '/handbook/brand/testimonials',
+                        name: 'Designing PostHog website',
+                        url: '/handbook/brand/designing-posthog-website',
                     },
                 ],
             },
             {
                 name: 'Brand strategy',
                 url: '/handbook/strategy/brand',
-            },
-            {
-                name: 'Events',
-                url: '/handbook/brand/events',
-            },
-            {
-                name: 'Paid ads',
-                url: '/handbook/brand/paid',
-            },
-            {
-                name: 'Product positioning',
-                url: '/handbook/brand/positioning',
             },
         ],
     },
@@ -1087,6 +1055,58 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/growth/marketing',
+            },
+            {
+                name: 'Product Marketing',
+                url: '/handbook/marketing/product-announcements',
+            },
+            {
+                name: 'Paid Advertising',
+                url: '/handbook/marketing/paid',
+            },
+            {
+                name: 'Product Positioning',
+                url: '/handbook/marketing/positioning',
+            },
+            {
+                name: 'Marketing Events',
+                url: '/handbook/marketing/events',
+            },
+            {
+                name: 'Email & Communications',
+                url: '',
+                children: [
+                    {
+                        name: 'Email marketing',
+                        url: '/handbook/brand/email-comms',
+                    },
+                    {
+                        name: 'In-app messaging',
+                        url: '/handbook/brand/in-app',
+                    },
+                ],
+            },
+            {
+                name: 'Partnerships & PR',
+                url: '',
+                children: [
+                    {
+                        name: 'Partnerships',
+                        url: '/handbook/brand/partners',
+                    },
+                    {
+                        name: 'Press & PR',
+                        url: '/handbook/brand/press',
+                    },
+                    {
+                        name: 'Startups & YC Programs',
+                        url: '/handbook/brand/startups',
+                    },
+                    {
+                        name: 'Testimonials & G2',
+                        url: '/handbook/brand/testimonials',
+                    },
+                ],
             },
             {
                 name: 'Who can help me?',
