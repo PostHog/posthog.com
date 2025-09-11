@@ -5,7 +5,7 @@ import { IRoadmap } from '.'
 import { Authentication, Question } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Spinner from 'components/Spinner'
-import { useToast } from '../../hooks/toast'
+import { useToast } from '../../context/Toast'
 import useSWR from 'swr'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
@@ -66,7 +66,7 @@ const Update = ({ body, questionID, fetchUpdates }) => {
             {editing ? (
                 <div>
                     <form onSubmit={handleSubmit}>
-                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                        <div className="bg-white dark:bg-accent-dark border border-primary rounded-md overflow-hidden mb-4">
                             <RichText
                                 onSubmit={submitForm}
                                 autoFocus
@@ -366,8 +366,8 @@ export function InProgress(
                     showProfile={false}
                 />
             </SideModal>
-            <li className={`pb-4 border border-light dark:border-dark rounded-md ${props?.className ?? ''}`}>
-                <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent dark:bg-accent-dark rounded-t-md">
+            <li className={`pb-4 border border-primary rounded-md ${props?.className ?? ''}`}>
+                <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent rounded-t-md">
                     <div className="sm:flex-grow">
                         <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
                         <Markdown>

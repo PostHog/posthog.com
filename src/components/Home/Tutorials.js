@@ -24,9 +24,9 @@ export default function Tutorials({ title, subtitle, cta }) {
                         <li key={index} className="">
                             <Link
                                 to={slug}
-                                className="relative rounded block bg-light dark:bg-dark border border-light dark:border-dark"
+                                className="relative rounded block bg-light dark:bg-dark border border-primary"
                             >
-                                <GatsbyImage className="bg-accent dark:bg-accent-dark" image={image} alt={title} />
+                                <GatsbyImage className="bg-accent" image={image} alt={title} />
                                 <div className="rounded-md absolute p-4 top-0 left-0 w-full h-full">
                                     <h4 className="text-xl m-0 leading-6">{title}</h4>
                                 </div>

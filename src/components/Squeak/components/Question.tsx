@@ -11,8 +11,8 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo, IconWarning } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import { Check2, Close } from 'components/Icons'
@@ -24,6 +24,7 @@ import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
+import ReportSpamButton from './ReportSpamButton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -34,6 +35,8 @@ type QuestionProps = {
     buttonText?: string
     showActions?: boolean
     askMax?: boolean
+    onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
+    subscribeButton?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -66,30 +69,35 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
     return (
         <div className="relative">
             <Listbox value={selectedTopics} onChange={handleChange} multiple>
-                <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold">
-                    <Tooltip content={() => <div style={{ maxWidth: 320 }}>Pin thread</div>}>
-                        <span className="flex items-center h-6 justify-center">
-                            <IconPin className="w-5 h-5" />
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-4 h-4"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                                />
-                            </svg>
-                        </span>
+                <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold">
+                    <Tooltip
+                        delay={0}
+                        trigger={
+                            <span className="flex items-center h-6 justify-center">
+                                <IconPin className="w-5 h-5" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-4 h-4"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                                    />
+                                </svg>
+                            </span>
+                        }
+                    >
+                        <div style={{ maxWidth: 320 }}>Pin thread</div>
                     </Tooltip>
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
                     <Listbox.Options
-                        className={`list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover max-h-[500px] overflow-auto shadow-md rounded-md divide-y divide-light dark:divide-dark mt-2`}
+                        className={`list-none p-0 m-0 absolute z-20 bg-white max-h-[500px] overflow-auto shadow-md rounded-md divide-y divide-primary mt-2`}
                     >
                         {topicGroups
                             .sort(
@@ -100,7 +108,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                             .map(({ attributes: { label, topics } }) => {
                                 return (
                                     <div key={label}>
-                                        <h5 className="!m-0 py-2 px-4 text-sm sticky top-0 bg-white dark:bg-gray-accent-dark-hover whitespace-nowrap">
+                                        <h5 className="!m-0 py-2 px-4 text-sm sticky top-0 bg-white whitespace-nowrap">
                                             {label}
                                         </h5>
                                         {topics?.data.map((topic) => {
@@ -112,7 +120,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                                                     <div
                                                         className={`${
                                                             active ? 'font-semibold' : ''
-                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
+                                                        } prose-invert py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-accent text-primary hover:bg-accent`}
                                                     >
                                                         <span className="flex-shrink-0 w-3">
                                                             {active && <Check2 />}
@@ -148,7 +156,7 @@ const EscalateButton = ({ escalate, escalated }) => {
     return (
         <>
             <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="border-border dark:border-dark border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent dark:bg-accent-dark max-w-lg w-full rounded-md">
+                <div className="border-input border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent max-w-lg w-full rounded-md">
                     <button onClick={() => setModalOpen(false)} className="absolute top-3 right-3">
                         <Close className="w-4 h-4" />
                     </button>
@@ -166,7 +174,7 @@ const EscalateButton = ({ escalate, escalated }) => {
                         />
                         {showResponse && (
                             <>
-                                <p className="text-sm p-2 mt-4 mb-3 border border-border dark:border-border text-center rounded-md bg-light dark:bg-dark font-semibold">
+                                <p className="text-sm p-2 mt-4 mb-3 border border-primary dark:border-primary text-center rounded-md bg-light dark:bg-dark font-semibold">
                                     Response will come from Max, the support hog
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">
@@ -174,12 +182,12 @@ const EscalateButton = ({ escalate, escalated }) => {
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
                                         width={40}
                                         height={40}
-                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"
+                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-input"
                                     />
                                     <textarea
                                         rows={5}
                                         placeholder="Message from Max"
-                                        className="w-full p-2 rounded-md border border-border dark:border-dark text-black bg-white"
+                                        className="w-full p-2 rounded-md border border-input text-black bg-white"
                                         value={response}
                                         onChange={(e) => setResponse(e.target.value)}
                                     />
@@ -187,7 +195,7 @@ const EscalateButton = ({ escalate, escalated }) => {
                             </>
                         )}
                     </div>
-                    <div className="p-4 mt-4 border-t border-border dark:border-dark flex justify-end">
+                    <div className="p-4 mt-4 border-t border-input flex justify-end">
                         <CallToAction onClick={handleConfirm} size="sm" type="outline">
                             {showResponse ? 'Escalate and notify' : 'Escalate'}
                         </CallToAction>
@@ -216,12 +224,17 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
     return (
         <button
             onClick={handleClick}
-            className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
+            className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
         >
-            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Delete thread</div>}>
-                <span className="flex w-6 h-6">
-                    <IconTrash />
-                </span>
+            <Tooltip
+                delay={0}
+                trigger={
+                    <span className="flex w-6 h-6">
+                        <IconTrash />
+                    </span>
+                }
+            >
+                <div style={{ maxWidth: 320 }}>Delete thread</div>
             </Tooltip>
         </button>
     )
@@ -231,34 +244,32 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
     return (
         <ul className="ml-5 !mb-0 p-0 list-none">
             <li
-                className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+                className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0`}
             >
                 <Tooltip
-                    content={() => (
-                        <div className="text-sm max-w-64">
-                            Max AI is our resident AI assistant. Double-check responses for accuracy.
-                        </div>
-                    )}
-                    placement="top"
-                >
-                    <div className="relative inline-block">
-                        <div className="flex items-center !text-black dark:!text-white">
-                            <div className="mr-2 relative">
-                                <Avatar
-                                    className="w-[25px] h-[25px] rounded-full"
-                                    image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
-                                />
-                                <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                                    <Logomark className="w-[16px]" />
-                                </span>
+                    delay={0}
+                    trigger={
+                        <div className="relative inline-block">
+                            <div className="flex items-center !text-black dark:!text-white">
+                                <div className="mr-2 relative">
+                                    <Avatar
+                                        className="w-[25px] h-[25px] rounded-full"
+                                        image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                                    />
+                                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
+                                        <Logomark className="w-[16px]" />
+                                    </span>
+                                </div>
+                                <strong>Max AI</strong>
                             </div>
-                            <strong>Max AI</strong>
                         </div>
+                    }
+                >
+                    <div className="text-sm max-w-64">
+                        Max AI is our resident AI assistant. Double-check responses for accuracy.
                     </div>
                 </Tooltip>
-                <div className="ml-[33px] mt-1 py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
-                    {children}
-                </div>
+                <div className="ml-[33px] mt-1 py-2 px-4 bg-accent rounded-md border border-primary">{children}</div>
             </li>
         </ul>
     )
@@ -308,7 +319,7 @@ const AskMaxLoading = () => {
                         <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                     </p>
                     <p
-                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
+                        className={`text-secondary !mb-0 !pb-1 transition-opacity duration-500 ${
                             fadeState === 'out' ? 'opacity-0' : 'opacity-100'
                         }`}
                     >
@@ -332,12 +343,17 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
         <button
             disabled={alreadyAsked}
             onClick={handleClick}
-            className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:!scale-[1] disabled:!top-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:!text-primary/50 dark:disabled:!text-primary-dark/50"
+            className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:!scale-[1] disabled:!top-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:!text-muted dark:disabled:!text-primary-dark/50"
         >
-            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Ask Max</div>}>
-                <span className="flex w-6 h-6">
-                    <IconSparkles />
-                </span>
+            <Tooltip
+                delay={0}
+                trigger={
+                    <span className="flex w-6 h-6">
+                        <IconSparkles />
+                    </span>
+                }
+            >
+                <div style={{ maxWidth: 320 }}>Ask Max</div>
             </Tooltip>
         </button>
     )
@@ -388,7 +404,7 @@ const AskMax = ({
         <AskMaxLoading />
     ) : !confident ? (
         <MaxReply>
-            <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
+            <div className="text-secondary font-normal question-content community-post-markdown !p-0">
                 <p>Dang, we couldn’t find anything this time. A community member will hopefully respond soon!</p>
             </div>
         </MaxReply>
@@ -431,6 +447,12 @@ export const Question = (props: QuestionProps) => {
         mutate,
     } = useQuestion(id, { data: question })
 
+    useEffect(() => {
+        if (questionData) {
+            props.onQuestionReady?.(questionData)
+        }
+    }, [questionData])
+
     if (isLoading) {
         return <QuestionSkeleton />
     }
@@ -466,9 +488,9 @@ export const Question = (props: QuestionProps) => {
                 mutate,
             }}
         >
-            <div className={`${isModerator && !publishedAt ? 'opacity-70' : ''}`}>
+            <div className={`text-primary ${isModerator && !publishedAt ? '' : ''}`}>
                 {archived && (
-                    <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
+                    <div className="font-medium text-sm m-0 mb-6 bg-accent border border-primary p-4 rounded text-center">
                         <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
                         <p className="!text-sm !m-0">
                             It's likely out of date, no longer relevant, or the answer has been added to our{' '}
@@ -478,7 +500,7 @@ export const Question = (props: QuestionProps) => {
                 )}
                 <div className={`flex flex-col w-full`}>
                     {!publishedAt && isModerator && (
-                        <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                        <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent border border-primary rounded">
                             This thread is unpublished and only visible to moderators
                         </p>
                     )}
@@ -501,23 +523,29 @@ export const Question = (props: QuestionProps) => {
                                     <EscalateButton escalate={escalate} escalated={escalated} />
                                     <button
                                         onClick={() => archive(!archived)}
-                                        className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
+                                        className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
                                     >
                                         {!archived ? (
                                             <Tooltip
-                                                content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}
+                                                delay={0}
+                                                trigger={
+                                                    <span className="flex w-6 h-6">
+                                                        <IconArchive />
+                                                    </span>
+                                                }
                                             >
-                                                <span className="flex w-6 h-6">
-                                                    <IconArchive />
-                                                </span>
+                                                <div style={{ maxWidth: 320 }}>Archive thread</div>
                                             </Tooltip>
                                         ) : (
                                             <Tooltip
-                                                content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}
+                                                delay={0}
+                                                trigger={
+                                                    <span className="flex w-6 h-6">
+                                                        <IconUndo />
+                                                    </span>
+                                                }
                                             >
-                                                <span className="flex w-6 h-6">
-                                                    <IconUndo />
-                                                </span>
+                                                <div style={{ maxWidth: 320 }}>Restore thread</div>
                                             </Tooltip>
                                         )}
                                     </button>
@@ -530,14 +558,14 @@ export const Question = (props: QuestionProps) => {
                                     />
                                 </>
                             )}
-                            {!archived && (
+                            {!archived && (props.subscribeButton ?? true) && (
                                 <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
                             )}
                         </div>
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="ml-5 pl-[30px] pb-4 border-l border-light dark:border-dark">
+                        <div className="ml-5 pl-[30px] pb-4 border-l border-primary">
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link
@@ -561,7 +589,7 @@ export const Question = (props: QuestionProps) => {
                                                         onClick={() => setEditing(true)}
                                                         className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
                                                     >
-                                                        <IconPencil className="size-4 mr-1 text-primary/70 dark:text-primary-dark/70 inline-block" />
+                                                        <IconPencil className="size-4 mr-1 text-secondary inline-block" />
                                                         Edit
                                                     </button>
                                                 </div>
@@ -570,13 +598,15 @@ export const Question = (props: QuestionProps) => {
                                     )
                                 }}
                             </EditWrapper>
+                            {!isQuestionAuthor && (
+                                <div className="mt-2">
+                                    <ReportSpamButton type="question" id={questionData.id} />
+                                </div>
+                            )}
                             {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
-                                <p className="text-xs text-primary/60 dark:text-primary-dark/60 pb-4 mb-0 mt-1">
+                                <p className="text-xs text-secondary pb-4 mb-0 mt-1">
                                     <span>Originally posted on</span>{' '}
-                                    <Link
-                                        to={slugs[0]?.slug}
-                                        className="text-primary/60 dark:text-primary-dark/60 font-medium"
-                                    >
+                                    <Link to={slugs[0]?.slug} className="text-secondary font-medium">
                                         https://posthog.com{slugs[0]?.slug}
                                     </Link>
                                 </p>

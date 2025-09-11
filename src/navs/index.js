@@ -1686,18 +1686,6 @@ export const companyMenu = {
             url: '/roadmap',
         },
         {
-            name: 'WIP',
-            icon: 'IconHourglass',
-            color: 'seagreen',
-            url: '/wip',
-        },
-        {
-            name: 'Training',
-            icon: 'IconBook',
-            color: 'red',
-            url: '/academy',
-        },
-        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
@@ -1810,7 +1798,7 @@ export const companyMenu = {
                 },
                 {
                     name: 'Brand & Vibes',
-                    url: '/teams/brand-vibes',
+                    url: '/teams/brand',
                 },
                 {
                     name: 'Content',
@@ -3048,6 +3036,9 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -3134,7 +3125,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'SQL',
-                    url: 'https://posthog.com/docs/data-warehouse/sql',
+                    url: '/docs/data-warehouse/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
                 },
@@ -3337,6 +3328,9 @@ export const docsMenu = {
                     url: '/docs/session-replay/cutting-costs',
                     icon: 'IconPiggyBank',
                     color: 'yellow',
+                },
+                {
+                    type: 'divider',
                 },
                 {
                     name: 'Features',
@@ -3666,6 +3660,12 @@ export const docsMenu = {
                     name: 'Holdouts',
                     url: '/docs/experiments/holdouts',
                     icon: 'IconPeople',
+                    color: 'green',
+                },
+                {
+                    name: 'New experimentation engine',
+                    url: '/docs/experiments/new-experimentation-engine',
+                    icon: 'IconTestTube',
                     color: 'green',
                 },
                 {
@@ -4056,6 +4056,9 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
                 },
                 {
                     name: 'Features',
@@ -4538,37 +4541,70 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
-                    name: 'Getting started',
-                    url: '/docs/revenue-analytics/getting-started',
-                    icon: 'IconBook',
+                    name: 'Start here',
+                    url: '/docs/revenue-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Payment platforms',
+                    url: '/docs/revenue-analytics/payment-platforms',
+                    icon: 'IconCode',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/revenue-analytics/payment-platforms',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/revenue-analytics/payment-platforms/stripe',
+                        },
+                        {
+                            name: 'Chargebee',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                        {
+                            name: 'Polar',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                        {
+                            name: 'RevenueCat',
+                            badge: {
+                                title: 'Coming soon',
+                            },
+                        },
+                    ],
+                },
+                {
+                    name: 'Capture revenue events',
+                    featured: true,
+                    url: '/docs/revenue-analytics/capture-revenue-events',
+                    icon: 'IconCode',
+                    color: 'green',
                 },
                 {
                     name: 'Dashboard',
+                    featured: true,
                     url: '/docs/revenue-analytics/dashboard',
                     icon: 'IconDashboard',
-                    color: 'orange',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    color: 'red',
                 },
                 {
                     name: 'Concepts',
                 },
                 {
                     name: 'Connect to customers',
+                    featured: true,
                     url: '/docs/revenue-analytics/connect-to-customers',
                     icon: 'IconPeople',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Deferred Revenue',
@@ -4658,10 +4694,10 @@ export const pricingMenu = {
             url: '/addons',
         },
         {
-            name: 'Platform add-ons',
+            name: 'Platform packages',
             icon: 'IconServer',
             color: 'purple',
-            url: '/platform-addons',
+            url: '/platform-packages',
         },
         {
             name: 'Pricing philosophy',
@@ -4688,66 +4724,91 @@ export const productMenu = {
     name: 'Products',
     url: '/products',
     icon: 'IconApps',
+    slug: 'products',
+    color: 'salmon',
     children: [
-        {
-            name: 'All products',
-            icon: 'IconApps',
-            color: 'red',
-            url: '/products',
-        },
         {
             name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/product-analytics',
+            slug: 'product-analytics',
+            description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels.',
+            startsAt: '0.00005',
+            denomination: 'event',
+            freeTier: 1000000,
+            sharesFreeTier: 'web-analytics',
+            worksWith: ['session-replay', 'experiments', 'surveys'],
+            category: 'analytics',
         },
         {
             name: 'Web analytics',
             icon: 'IconPieChart',
             color: '[#36C46F]',
             url: '/web-analytics',
+            slug: 'web-analytics',
+            description: 'Monitor your website traffic. Built for people who really liked GA3...',
+            startsAt: '0.00005',
+            denomination: 'event',
+            freeTier: 1000000,
+            sharesFreeTier: 'product-analytics',
+            worksWith: ['product-analytics', 'session-replay', 'surveys'],
+            category: 'analytics',
         },
         {
             name: 'Session replay',
             icon: 'IconRewindPlay',
             color: 'yellow',
             url: '/session-replay',
+            slug: 'session-replay',
+            category: 'behavior',
         },
         {
             name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/feature-flags',
+            slug: 'feature-flags',
+            category: 'features',
         },
         {
             name: 'Experiments',
             icon: 'IconFlask',
             color: 'purple',
             url: '/experiments',
+            slug: 'experiments',
+            category: 'features',
         },
         {
             name: 'Error tracking',
             icon: 'IconWarning',
             color: 'orange',
             url: '/error-tracking',
+            slug: 'error-tracking',
+            category: 'behavior',
         },
         {
             name: 'Surveys',
             icon: 'IconMessage',
             color: 'salmon',
             url: '/surveys',
+            slug: 'surveys',
+            category: 'behavior',
         },
         {
             name: 'Data pipelines',
             icon: 'IconPlug',
             color: 'sky-blue',
             url: '/cdp',
+            slug: 'cdp',
+            category: 'tools',
         },
         {
             name: 'Data warehouse',
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+            slug: 'data-warehouse',
         },
         {
             name: 'LLM analytics',
@@ -4765,8 +4826,9 @@ export const productMenu = {
         {
             name: 'Product OS',
             icon: 'IconStack',
-            color: 'blue',
+            color: 'salmon',
             url: '/product-os',
+            slug: 'product-os',
         },
     ],
 }

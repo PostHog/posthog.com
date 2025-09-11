@@ -305,13 +305,13 @@ function RadioGroup({
                     <p className="m-0 mt-1 mb-4 text-xs">
                         <strong>Tip:</strong> Use{' '}
                         <kbd
-                            className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
+                            className="text-xs border border-b-2 border-input rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
                             style={{ fontSize: '10px' }}
                         >
                             ←
                         </kbd>
                         <kbd
-                            className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                            className="text-xs border border-b-2 border-input rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
                             style={{ fontSize: '10px' }}
                         >
                             →
@@ -359,7 +359,7 @@ function RadioGroup({
     )
 }
 
-const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark group active:bg-light focus-within:bg-light dark:active:bg-dark dark:focus-within:bg-dark relative text-left`
+const inputContainerClasses = `p-4 bg-accent group active:bg-light focus-within:bg-light dark:active:bg-dark dark:focus-within:bg-dark relative text-left`
 
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
@@ -491,7 +491,7 @@ export default function HubSpotForm({
                         <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                     </div>
                 )}
-                <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-8 rounded-md mt-4">
+                <div className="bg-accent border border-input px-6 py-8 rounded-md mt-4">
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message }} />}
                 </div>
             </>
@@ -506,7 +506,7 @@ export default function HubSpotForm({
                     onSubmit={handleSubmit}
                 >
                     <Form className={formOptions?.className}>
-                        <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
+                        <div className="grid divide-y divide-border border border-primary">
                             {form.fields.map(({ name, label, type, required, options, fieldType }, index) => {
                                 if (customFields && customFields[name])
                                     return {

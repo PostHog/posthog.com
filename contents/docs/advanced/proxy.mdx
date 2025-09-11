@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import ProxyPathNamesWarning from "./_snippets/proxy-path-names-warning.mdx"
+import ProxyPathNamesWarning from './_snippets/proxy-path-names-warning.mdx'
 
 A reverse proxy enables you to send events to PostHog Cloud using your own domain.
 
@@ -22,32 +22,32 @@ You'll be able to capture more usage data without having to self-host PostHog, e
 
 Using our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) is the easiest way to do this.
 
-It's available as part of our [platforms add-ons](/platform-addons), which includes automatic provisioning, SSO and 2FA enforcement, priority support, and additional collaboration features.
+It's available as part of our [platforms add-ons](/platform-packages), which includes automatic provisioning, SSO and 2FA enforcement, priority support, and additional collaboration features.
 
 Other documented options for deploying a reverse proxy include:
 
-- [AWS CloudFront](/docs/advanced/proxy/cloudfront)
-- [Caddy](/docs/advanced/proxy/caddy)
-- [Cloudflare](/docs/advanced/proxy/cloudflare)
-- [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
-- [Netlify](/docs/advanced/proxy/netlify)
-- [Next.js rewrites](/docs/advanced/proxy/nextjs)
-- [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
-- [nginx](/docs/advanced/proxy/nginx)
-- [node](/docs/advanced/proxy/node)
-- [Railway](/docs/advanced/proxy/railway)
-- [Remix](/docs/advanced/proxy/remix)
-- [SvelteKit](/docs/advanced/proxy/sveltekit)
-- [Vercel](/docs/advanced/proxy/vercel)
-- [Nuxt](/docs/advanced/proxy/nuxt)
-- [Pomerium](/docs/advanced/proxy/pomerium)
+-   [AWS CloudFront](/docs/advanced/proxy/cloudfront)
+-   [Caddy](/docs/advanced/proxy/caddy)
+-   [Cloudflare](/docs/advanced/proxy/cloudflare)
+-   [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
+-   [Netlify](/docs/advanced/proxy/netlify)
+-   [Next.js rewrites](/docs/advanced/proxy/nextjs)
+-   [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
+-   [nginx](/docs/advanced/proxy/nginx)
+-   [node](/docs/advanced/proxy/node)
+-   [Railway](/docs/advanced/proxy/railway)
+-   [Remix](/docs/advanced/proxy/remix)
+-   [SvelteKit](/docs/advanced/proxy/sveltekit)
+-   [Vercel](/docs/advanced/proxy/vercel)
+-   [Nuxt](/docs/advanced/proxy/nuxt)
+-   [Pomerium](/docs/advanced/proxy/pomerium)
 
 ## Best practices
 
-- We require that the proxy sets the `Host` header to the same host it's calling. Check the guides above on how to do that for several proxies.
-- Don't use a subdomain that includes `posthog`, `analytics`, `tracking`, or other similar words which might cause events to be blocked.
-- Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js/config) when initializing PostHog, so that links to PostHog point to the correct host (like `us.posthog.com`). This is required for tasks like authenticating the toolbar.
-- <ProxyPathNamesWarning />
+-   We require that the proxy sets the `Host` header to the same host it's calling. Check the guides above on how to do that for several proxies.
+-   Don't use a subdomain that includes `posthog`, `analytics`, `tracking`, or other similar words which might cause events to be blocked.
+-   Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js/config) when initializing PostHog, so that links to PostHog point to the correct host (like `us.posthog.com`). This is required for tasks like authenticating the toolbar.
+-   <ProxyPathNamesWarning />
 
 ## Reverse proxy requirements
 
@@ -64,5 +64,7 @@ If you want to use an alternative reverse proxy that we have not documented, it 
 ```
 
 <CalloutBox icon="IconWarning" title="Beware of size limits" type="caution">
-  Some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need to adjust your limits.
+    Some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a
+    reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need
+    to adjust your limits.
 </CalloutBox>

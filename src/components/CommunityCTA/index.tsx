@@ -40,7 +40,12 @@ export default function CommunityCTA() {
                         }}
                     />
                 ) : (
-                    <CloudinaryImage width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                    <CloudinaryImage
+                        width={300}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg"
+                        alt="Hog"
+                        placeholder="blurred"
+                    />
                 )}
             </div>
             <div className="max-w-[400px]">
@@ -49,7 +54,7 @@ export default function CommunityCTA() {
                     Get help or answer questions from the PostHog community, vote on the roadmap, and get early access
                     to new features.
                 </p>
-                <CallToAction size="sm" to="/community">
+                <CallToAction size="sm" to="/community" state={{ newWindow: true }}>
                     Check it out
                 </CallToAction>
             </div>

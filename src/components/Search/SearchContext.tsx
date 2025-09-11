@@ -102,7 +102,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-tan/75 dark:bg-primary/75 transition-opacity z-[999998]" />
+                        <div className="fixed inset-0 bg-accent transition-opacity z-[999998]" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto z-[999998]">

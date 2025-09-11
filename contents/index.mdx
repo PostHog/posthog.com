@@ -1,0 +1,188 @@
+---
+title: Home
+template: custom
+images:
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_light_a436da72f7.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_llm_analytics_dark_d8f32c249b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_light_998b77b1a0.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_dashboards_dark_43ef120c80.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_dark_5610c405b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_cdp_light_97bc52e8f9.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_dark_8f465ecfaa.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_light_3dfb9f57e9.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_dark_a492c37d9c.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_light_313729cacc.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_dashboard_dark_20eb61e4b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_light_465bac8937.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_experiments_result_dark_399c2187ea.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_light_6a7b1dfc70.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_feature_flags_dark_f091ddfb9b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_light_703f700a5b.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png
+    - https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_dark_ef481dc7a5.png
+---
+
+<div class="text-center @xl:text-left">
+
+<h1 class="[&_p]:m-0 flex gap-2 flex-wrap justify-center @xl:justify-start">
+    <Logo />
+</h1>
+
+<span class="text-base font-medium mb-0">
+    We’re building every tool for product engineers to build successful products.
+</span>
+
+<CTAs />
+
+Questions? [Watch a demo](/demo) or [talk to a human](/talk-to-a-human).
+
+</div>
+
+<header class="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
+
+## Explore apps <span class="text-secondary text-sm font-normal tracking-normal">by company stage</span>
+
+<aside class="hidden @xl:inline-flex">
+
+<span class="[&_p]:m-0">
+    [Browse app library](/products) (<AppCount />)
+</span>
+
+</aside>
+</header>
+
+<CompanyStageTabs />
+
+<div id="customers">
+
+## Who's using PostHog?
+
+Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.)
+
+<Customers />
+
+</div>
+
+<div class="space-y-8 pt-2">
+
+<div id="customer-infrastructure">
+
+## Customer data infrastructure, built for product engineers
+
+<div class="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative pb-[120px] @md:pb-4 @md:pr-[220px] @lg:pr-6 @lg:pb-[120px]">
+
+<p class="my-0 [&_p]:my-0">
+
+**Built-in, Product OS ships with:**
+
+</p>
+
+<span class="[&_ul]:mb-0">
+
+-   A data warehouse <TooltipDW />
+-   120+ sources/destinations
+-   SQL editor + BI + data viz
+-   User activity feed (CDP-lite)
+-   API, webhooks
+
+</span>
+
+<ImageDW />
+
+</div>
+
+When you're analyzing how customers use your product, you should be operating from _the full set of data_.
+
+This includes customer information that happens _outside your product_:
+
+-   payments from Stripe
+-   exceptions in an error tracking tool
+-   tickets in your support platform
+
+Having all the data in one place means you can make more informed decisions about what to build next.
+
+PostHog's Product OS isn't just analytics – it's the entire suite of tools built to give you a single source of truth about your customers.
+
+<ButtonCDI />
+
+</div>
+
+<div id="pricing">
+
+## Usage-based pricing
+
+<ImageMoney />
+
+Our whole philosophy is that you shouldn't have to worry about pricing.
+
+All our paid products are pay-per-use with generous monthly free tiers. In fact, 98% of our customers use PostHog for free.
+
+We aim to be the cheapest option at scale – PostHog should be a no-brainer. You never have to "jump on a quick call" with sales.
+
+Here are some examples of how we charge for most popular products:
+
+<Pricing />
+
+<ButtonPricing />
+
+</div>
+
+<div id="ai">
+
+## "Shouldn't you be talking about AI?"
+
+We've got that too. It works across the Product OS platform – and it's _way_ more than just generating insights.
+
+Max AI helps you automate monotonous tasks of gathering context and summarizing information – and will soon have the ability to make code changes to fix bugs and improve software.
+
+<ButtonAI />
+
+</div>
+
+<div id="why-posthog">
+
+## Why PostHog?
+
+We're different from most companies for a bunch of reasons:
+
+-   **Transparency.** You can read our [company handbook](/handbook), our [sales manual](/handbook/growth/sales/overview), and [company strategy](/handbook/why-does-posthog-exist).
+-   **We ship fast.** See our [changelog](/changelog).
+-   **_Actually_-technical support.** Our [support folks](/teams/support) all have engineering backgrounds.
+
+<ButtonAbout />
+
+</div>
+
+<div id="bedtime-reading">
+
+## Bedtime reading
+
+<ImageReading1 />
+
+Still here? We've got some links that may be mildly interesting to you:
+
+<ImageReading2 />
+
+-   [demo.mov](/demo)
+-   [Technical docs](/docs)
+-   [API](/docs/api)
+-   [Ask a question](/questions)
+-   [Small teams at PostHog](/teams)
+
+</div>
+
+<div id="shameless-cta">
+
+## Shameless CTA
+
+<CTA />
+
+</div>
+</div>
+
+<HomeHitCounter />

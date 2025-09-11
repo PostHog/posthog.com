@@ -16,7 +16,7 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
 
     return (
         <div
-            className={`ph-callout flex flex-col md:flex-row gap-2 md:gap-4 mt-4 mb-6 p-4 border rounded bg-gray/10 border-gray`}
+            className={`ph-callout flex flex-col md:flex-row gap-2 md:gap-4 mt-4 mb-6 p-4 border rounded bg-accent border-primary`}
         >
             <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
