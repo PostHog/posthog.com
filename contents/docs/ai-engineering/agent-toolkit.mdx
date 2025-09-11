@@ -4,7 +4,7 @@ title: Agent toolkit
 
 import MCPTools from '../../../src/components/Docs/MCPTools'
 
-The PostHog agent toolkit equips your AI agents with the ability to interact with the PostHog API and platform. It provides a set of standardized function calling tools that can be integrated with frameworks like Vercel's AI SDK, LangChain, and others.
+The PostHog agent toolkit equips your AI agents with the ability to interact with the PostHog API and platform. It provides a set of standardized function calling tools that can be integrated with frameworks like Vercel's AI SDK and LangChain.
 
 Our agent toolkit is open source on [GitHub](https://github.com/PostHog/mcp) and currently available in [TypeScript](https://github.com/PostHog/mcp/tree/main/typescript) and [Python](https://github.com/PostHog/mcp/tree/main/python). 
 
@@ -15,9 +15,7 @@ npm install @posthog/agent-toolkit
 ```
 
 ```bash file=Python
-git clone https://github.com/PostHog/mcp.git
-cd python
-uv sync --dev
+uv add posthog_agent_toolkit
 ```
 
 </MultiLanguage>
@@ -28,22 +26,18 @@ With the agent toolkit, your AI agents can:
 
 - Select PostHog organizations and projects
 - Manage insights and dashboards
-- Write natural language SQL queries
+- Write SQL queries using natural language
 - Create, update, or remove feature flags
-- Track errors, experiments, and LLM analytics
+- Retrieve errors, experiments, and LLM analytics
 - Search PostHog documentation
-- See the [available tools](#available-tools) section for the full list 
 
-Designed for developer productivity, the toolkit also provides:
+See the [available tools](#available-tools) section for the full list.
 
-- **State management**: Toolkit remembers your PostHog project and organization context across tool calls. 
-- **Type-safety**: Zod schemas provide runtime validation and IDE autocompletion.
-- **Shared schema**: Python and TypeScript use the same tool schema.
-- **Error handling**: Clear, actionable errors to help debug agent failures. 
+The toolkit also keeps track of your active PostHog project and organization across tool calls and gives you clear error messages when something goes wrong.
 
 ## MCP vs agent toolkit 
 
-The PostHog [MCP server](/model-context-protocol) and agent toolkit are two complementary ways to integrate PostHog tools into your AI workflows. They share the same foundation; a set of core services and function calls that include tool definitions, schemas, API interactions, state management, error handling, etc.
+The PostHog [MCP server](/docs/model-context-protocol) and agent toolkit are two complementary ways to integrate PostHog tools into your AI workflows. They share the same foundation; a set of core services and function calls that include tool definitions, schemas, API interactions, state management, error handling, etc.
 
 ```mermaid
 
@@ -89,7 +83,11 @@ Here's a high-level comparison:
 | **Control** | Standardized MCP interface. | You control how PostHog tool calls fit into your workflow. |
 | **Best for** | Out-of-the-box integrations that leverage the MCP ecosystem. | Custom AI workflows that need flexibility and programmatic control. |
 
-Pick what makes sense for your use case. For example, you could use the agent toolkit for internal applications *and* the MCP server for third-party integrations.
+Pick what makes sense for your use case. It also doesn't have to be one or the other. Both the MCP server and the agent toolkit can play a role in your AI engineering process. 
+
+For example, you could use our agent toolkit for in-house AI development and our MCP server for integrating with third-party agents. *Fun fact*: Our Python agent toolkit is actually a wrapper around our MCP server (see the [source code](https://github.com/PostHog/mcp/tree/main/python)). 
+
+These two approaches are designed to work together or on their own.
 
 ## Agent toolkit example
 
@@ -109,10 +107,11 @@ const toolkit = new PostHogAgentToolkit({
   posthogApiBaseUrl: 'https://us.posthog.com' // or https://eu.posthog.com
 });
 
-// Create your agent
+// Get tools and execute the agent
+const tools = await toolkit.getTools();
 const result = await generateText({
   model: openai('gpt-5-mini'),
-  tools: toolkit.getTools(),
+  tools: tools,
   prompt: 'Show me my top 5 PostHog insights and summarize them'
 });
 
@@ -136,7 +135,7 @@ const toolkit = new PostHogAgentToolkit({
 });
 
 // Get tools and create prompt template
-const tools = toolkit.getTools();
+const tools = await toolkit.getTools();
 const prompt = ChatPromptTemplate.fromMessages([
   ['system', 'You are a helpful assistant that can analyze PostHog data.'],
   ['human', '{input}'],
@@ -196,7 +195,7 @@ print(result["output"])
 
 </MultiLanguage>
 
-A few more example prompts you can use with PostHog tool calls:
+A few more example prompts you can use with PostHog tool calls within an agentic workflow:
 
 ```
 - What feature flags do I have active?
@@ -205,7 +204,7 @@ A few more example prompts you can use with PostHog tool calls:
 - Show me my LLM costs this week
 ```
 
-Check out our repo for [more integration examples](https://github.com/PostHog/mcp/tree/main/examples) and instructions for how to use our agent toolkit. 
+Check out our repo for [more integration examples](https://github.com/PostHog/mcp/tree/main/examples) and instructions on how to use our agent toolkit. 
 
 ## Available tools
 
