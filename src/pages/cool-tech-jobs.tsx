@@ -499,8 +499,9 @@ const IssueForm = () => {
                 <textarea
                     id="description"
                     rows={4}
-                    className={`w-full p-2 border rounded-md bg-transparent ${touched.description && errors.description ? 'border-red' : 'border-input'
-                        }`}
+                    className={`w-full p-2 border rounded-md bg-transparent ${
+                        touched.description && errors.description ? 'border-red' : 'border-input'
+                    }`}
                     placeholder="Please provide details about the issue"
                     {...getFieldProps('description')}
                 />
@@ -532,8 +533,9 @@ const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...
             <Component
                 {...props}
                 rows={multiline ? rows : undefined}
-                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${touched && error ? 'border-red' : 'border-input'
-                    }`}
+                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${
+                    touched && error ? 'border-red' : 'border-input'
+                }`}
             />
             {touched && error && <p className="text-red text-sm m-0 mt-1">{error}</p>}
         </div>
@@ -822,7 +824,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     values.slug !== company?.attributes?.slug
                 // Create initial company without images in case of failure
                 const companyResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${canUpdate ? `/${companyId}` : ''
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${
+                        canUpdate ? `/${companyId}` : ''
                     }?populate=*`,
                     {
                         method: canUpdate ? 'PUT' : 'POST',
@@ -887,18 +890,18 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                                 ...(uploadedLogoLight
                                     ? { logoLight: uploadedLogoLight.id }
                                     : usingPending && logoLight
-                                        ? { logoLight: company?.attributes.logoLight.data?.id }
-                                        : {}),
+                                    ? { logoLight: company?.attributes.logoLight.data?.id }
+                                    : {}),
                                 ...(uploadedLogoDark
                                     ? { logoDark: uploadedLogoDark.id }
                                     : usingPending && logoDark
-                                        ? { logoDark: company?.attributes.logoDark.data?.id }
-                                        : {}),
+                                    ? { logoDark: company?.attributes.logoDark.data?.id }
+                                    : {}),
                                 ...(uploadedLogomark
                                     ? { logomark: uploadedLogomark.id }
                                     : usingPending && logomark
-                                        ? { logomark: company?.attributes.logomark.data?.id }
-                                        : {}),
+                                    ? { logomark: company?.attributes.logomark.data?.id }
+                                    : {}),
                             },
                         }),
                     }
@@ -1003,12 +1006,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div
-            className={`p-4 rounded-md border ${confirmationMessage.type === 'success'
+            className={`p-4 rounded-md border ${
+                confirmationMessage.type === 'success'
                     ? 'border-green bg-green/20'
                     : confirmationMessage.type === 'warning'
-                        ? 'border-yellow bg-yellow/20'
-                        : 'border-red bg-red/20'
-                }`}
+                    ? 'border-yellow bg-yellow/20'
+                    : 'border-red bg-red/20'
+            }`}
         >
             <h4 className="text-base m-0">{confirmationMessage.title}</h4>
             <p
@@ -1078,8 +1082,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             <p className="m-0 text-sm opacity-70">{jobBoardBaseURLs[values.jobBoardType]}</p>
                             <div className="flex-grow relative">
                                 <input
-                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${touched.slug && errors.slug ? 'border-red' : 'border-input'
-                                        }`}
+                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
+                                        touched.slug && errors.slug ? 'border-red' : 'border-input'
+                                    }`}
                                     placeholder="bluth-company"
                                     {...getFieldProps('slug')}
                                 />
@@ -1163,8 +1168,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logoLight && errors.logoLight ? 'border-red' : ''
-                                }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${
+                                touched.logoLight && errors.logoLight ? 'border-red' : ''
+                            }`}
                             onDrop={(file) => setFieldValue('logoLight', file)}
                             onRemove={() => setFieldValue('logoLight', null)}
                             image={values.logoLight}
@@ -1175,8 +1181,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logoDark && errors.logoDark ? 'border-red' : ''
-                                }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${
+                                touched.logoDark && errors.logoDark ? 'border-red' : ''
+                            }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
                             onRemove={() => setFieldValue('logoDark', null)}
                             image={values.logoDark}
@@ -1187,8 +1194,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logomark</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logomark && errors.logomark ? 'border-red' : ''
-                                }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${
+                                touched.logomark && errors.logomark ? 'border-red' : ''
+                            }`}
                             onDrop={(file) => setFieldValue('logomark', file)}
                             onRemove={() => setFieldValue('logomark', null)}
                             image={values.logomark}
@@ -1197,14 +1205,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </label>
                 </div>
                 {(touched.logoLight && errors.logoLight) ||
-                    (touched.logoDark && errors.logoDark) ||
-                    (touched.logomark && errors.logomark) ? (
+                (touched.logoDark && errors.logoDark) ||
+                (touched.logomark && errors.logomark) ? (
                     <p className="text-red text-sm m-0 mt-1">
                         {touched.logoLight && errors.logoLight
                             ? errors.logoLight
                             : touched.logoDark && errors.logoDark
-                                ? errors.logoDark
-                                : errors.logomark}
+                            ? errors.logoDark
+                            : errors.logomark}
                     </p>
                 ) : null}
             </div>
@@ -1265,8 +1273,9 @@ const AddAJobWindow = ({
     return (
         <div
             data-scheme="secondary"
-            className={`bg-primary p-4 overflow-y-auto ${siteSettings.experience === 'boring' ? 'size-full' : 'max-h-[500px]'
-                }`}
+            className={`bg-primary p-4 overflow-y-auto ${
+                siteSettings.experience === 'boring' ? 'size-full' : 'max-h-[500px]'
+            }`}
         >
             <CompanyForm companyId={companyId} onSuccess={onSuccess} />
         </div>
@@ -1362,7 +1371,10 @@ export default function JobsPage() {
                     </p>
                     <ul className="mb-8">
                         <li>
-                            Looking to work at PostHog? <Link to="/careers" state={{ newWindow: true }}>Visit our careers page.</Link>
+                            Looking to work at PostHog?{' '}
+                            <Link to="/careers" state={{ newWindow: true }}>
+                                Visit our careers page.
+                            </Link>
                         </li>
                         <li>
                             Work at a company with great perks?{' '}
