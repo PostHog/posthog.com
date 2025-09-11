@@ -17,7 +17,14 @@ const SliderRow = ({ label = '', sliderConfig, volume, setVolume, unit, cost, bi
     }, [currentVolume, billingTiers])
 
     const handleVolumeChange = (newVolume) => {
-        setCurrentVolume(Math.round(newVolume))
+        const roundedVolume = Math.round(newVolume)
+        setCurrentVolume(roundedVolume)
+
+        // Immediately update parent state during slider drag
+        if (billingTiers) {
+            const calculatedCost = calculatePrice(roundedVolume, billingTiers).total
+            setVolume(roundedVolume, calculatedCost)
+        }
     }
 
     return (
@@ -113,7 +120,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
             return { ...addon, cost: 0, costByTier: [] }
         })
         setAddonData(updatedAddonData)
-    }, [addonData.map((a) => a.volume).join(','), addonBillingData])
+    }, [addonBillingData])
 
     useEffect(() => {
         if (mainBillingTiers) {
