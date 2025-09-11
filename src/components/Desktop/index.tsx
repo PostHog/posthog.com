@@ -102,6 +102,12 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
+        label: 'Store',
+        Icon: <AppIcon name="shoppingBag" />,
+        url: '/merch',
+        source: 'desktop',
+    },
+    {
         label: 'Trash',
         Icon: <AppIcon name="trash" />,
         url: '/trash',

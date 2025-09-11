@@ -13,9 +13,10 @@ import { Link as ScrollLink } from 'react-scroll'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
+import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
+
 import { Accordion } from 'components/RadixUI/Accordion'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-
 interface AddonProps {
     name: string
     icon_key: keyof typeof Icons
@@ -253,7 +254,9 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }: Add
 
 export const Addons = (props: AddonsProps) => {
     const products = useProducts()
-    const productAddons = products.flatMap((product) => product.addons)
+    const productAddons = products
+        .flatMap((product) => product.addons)
+        .filter((addon) => !EXCLUDED_ADDON_TYPES.includes(addon.type))
     const allAddons = productAddons
 
     const accordionItems = allAddons.map((addon: any) => {

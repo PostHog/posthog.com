@@ -56,7 +56,7 @@ const RoadmapPage = () => {
                                   label: 'Team',
                                   operator: 'equals',
                                   options: [
-                                      { label: 'All', value: null },
+                                      { label: 'All', value: 'all' },
                                       ...Object.keys(
                                           groupBy(
                                               roadmaps,
@@ -74,6 +74,9 @@ const RoadmapPage = () => {
                                       { label: 'Not assigned', value: 'Not assigned' },
                                   ],
                                   filter: (roadmap, value) => {
+                                      if (value === 'all') {
+                                          return true
+                                      }
                                       const teamName = roadmap.attributes?.teams?.data?.[0]?.attributes?.name
                                       if (value === 'Not assigned') {
                                           return !teamName

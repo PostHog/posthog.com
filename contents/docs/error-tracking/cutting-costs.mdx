@@ -22,7 +22,24 @@ import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your error tracking costs.
 
-## Configure exception autocapture
+## What contributes to your bill?
+
+Error tracking bills you based on the number of `$exception` events **_ingested_** by PostHog _each month_. This means if you send exception events to PostHog, they will be billed.
+
+This also means:
+- The total number of exceptions stored in PostHog does not contribute to your bill.
+- The number of [issues](/docs/error-tracking/issues-and-exceptions) in PostHog does not affect your bill, only the individual exception events that make up the issues.
+- Merging, resolving, and suppressing issues in PostHog does not reduce your bill.
+
+## Preventing surprise bills
+
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for error tracking. When a project exceeds this limit, PostHog will no longer capture exception events until your billing period resets.
+
+## Tips to reduce your bill
+
+The best way to reduce your bill is to reduce the number of `$exception` events you send to PostHog from the client-side. This means being more selective about which exceptions are captured.
+
+### Configure exception autocapture
 
 By default, we capture all unhandled errors and rejections. This can capture more than you need. To reduce which exceptions that are captured, you can configure which types of exceptions are autocaptured in the JS SDK config like this: 
 
@@ -37,8 +54,6 @@ By default, we capture all unhandled errors and rejections. This can capture mor
 ```
 
 Alternatively, you can disable exception autocapture completely in your [project settings](https://us.posthog.com/error_tracking/configuration).
-
-## Filtering exceptions clientside
 
 ### Suppression rules
 
@@ -57,13 +72,3 @@ import BurstProtection from './_snippets/burst-protection.mdx'
 import BeforeSendHook from './_snippets/before-send-hook.mdx'
 
 <BeforeSendHook />
-
-## Issue suppression
-
-import IssueSuppression from './_snippets/issue-suppression.mdx'
-
-<IssueSuppression />
-
-## Quota limiting
-
-Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for error tracking. When a project exceeds this limit, PostHog will no longer capture exception events until your billing period resets.

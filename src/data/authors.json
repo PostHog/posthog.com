@@ -413,5 +413,13 @@
         "link_type": "github",
         "link_url": "https://github.com/robbie-c",
         "profile_id": 29292
+    },
+    {
+        "handle": "abe-basu",
+        "name": "Abe Basu",
+        "role": "Product Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/abheek9",
+        "profile_id": 34044
     }
 ]

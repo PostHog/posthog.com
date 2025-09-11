@@ -4552,6 +4552,7 @@ export const docsMenu = {
                     url: '/docs/revenue-analytics/payment-platforms',
                     icon: 'IconCode',
                     color: 'blue',
+                    featured: true,
                     children: [
                         {
                             name: 'Overview',
@@ -4583,12 +4584,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Capture revenue events',
+                    featured: true,
                     url: '/docs/revenue-analytics/capture-revenue-events',
                     icon: 'IconCode',
                     color: 'green',
                 },
                 {
                     name: 'Dashboard',
+                    featured: true,
                     url: '/docs/revenue-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
@@ -4598,6 +4601,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Connect to customers',
+                    featured: true,
                     url: '/docs/revenue-analytics/connect-to-customers',
                     icon: 'IconPeople',
                     color: 'blue',

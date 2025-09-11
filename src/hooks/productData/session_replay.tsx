@@ -17,6 +17,7 @@ export const sessionReplay = {
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
+    includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
         title: 'Session replay - PostHog',
@@ -54,6 +55,19 @@ export const sessionReplay = {
         max: 500000,
     },
     volume: 5000,
+    addonSliders: [
+        {
+            key: 'mobile_replay',
+            label: 'Mobile replay',
+            sliderConfig: {
+                marks: [2500, 10000, 50000, 150000, 500000],
+                min: 2500,
+                max: 500000,
+            },
+            volume: 2500,
+            unit: 'mobile recording',
+        },
+    ],
     customers: {
         hasura: {
             headline: 'improved conversion rates by 10-20%',

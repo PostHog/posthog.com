@@ -31,7 +31,7 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
     return (
         <section className="scroll-pt-[108px]">
-            <ol className="ml-0">
+            <ol className="ml-0 pl-0">
                 {React.Children.map(children, (child) => {
                     if (!React.isValidElement(child)) return null
 
@@ -64,18 +64,18 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
 
     return (
         <li
-            className="mb-10 flex w-full group relative"
+            className="flex w-full group relative"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
             {/* Vertical line positioned absolutely relative to li - only show on lg+ */}
-            <div className="hidden lg:block absolute left-4 w-[1px] border-l border-light dark:border-dark h-full opacity-70"></div>
+            <div className="hidden lg:block absolute left-[1.4rem] w-[1px] border-l border-primary h-full opacity-70"></div>
 
             {/* Number/flag column - only show on lg+ */}
             <div className="hidden lg:flex items-start mr-2 relative z-10">
                 <div className="flex flex-col items-center relative">
                     <CopyAnchor id={anchorId} hovered={hovered} />
-                    <div className="py-2">
+                    <div className="bg-primary pt-2 pb-3">
                         <span className="flex items-center justify-center w-8 h-8 rounded-md font-bold text-base border border-primary border-b-4">
                             {isCheckpoint ? <Icons.IconFlag className="w-4 h-4" /> : number}
                         </span>
