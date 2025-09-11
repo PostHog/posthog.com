@@ -10,6 +10,7 @@ export const revenueAnalytics = {
     colorSecondary: 'green-2',
     category: 'analytics',
     status: 'beta',
+    hideFromPricingTable: true,
     billedWith: 'Data warehouse',
     seo: {
         title: 'Revenue Analytics - PostHog',
