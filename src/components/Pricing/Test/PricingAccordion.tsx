@@ -56,13 +56,36 @@ export const tiers = [
     },
 ]
 
-const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color, billingData, billedWith, type }) => {
+const AccordionItem = ({
+    isOpen,
+    onClick,
+    onAnimationComplete,
+    Icon,
+    name,
+    color,
+    billingData,
+    billedWith,
+    type,
+    includeAddonRates,
+    categoryName,
+}) => {
     const contentRef = useRef(null)
+    const displayName = categoryName || name
     const startsAt =
         !billedWith &&
         billingData?.plans?.[billingData.plans.length - 1]?.tiers?.find((tier) => tier?.unit_amount_usd !== '0')
             ?.unit_amount_usd
     const unit = billingData?.unit?.replace('survey ', '')
+
+    const addonData =
+        includeAddonRates && billingData?.addons
+            ? billingData.addons.map((addon: any) => ({
+                  name: addon.name,
+                  billingData: addon,
+                  type: addon.type,
+              }))
+            : []
+
     return (
         <li
             className={`border-t relative ${
@@ -92,7 +115,7 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                                     isOpen ? 'text-base @5xl:text-base' : 'text-sm @5xl:text-base'
                                 }`}
                             >
-                                {name}
+                                {displayName}
                             </span>
                         </div>
                     </div>
@@ -101,6 +124,8 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                             <em className="font-normal text-secondary text-sm">
                                 Billed with <span className="lowercase">{billedWith}</span>
                             </em>
+                        ) : includeAddonRates ? (
+                            <em className="font-normal text-secondary text-sm">Multiple resources</em>
                         ) : (
                             startsAt && (
                                 <span>
@@ -130,7 +155,28 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                 className={isOpen ? '' : 'overflow-hidden'}
             >
                 <div className="px-3 pb-4">
-                    <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
+                    {includeAddonRates && addonData.length > 0 ? (
+                        <div className="space-y-6">
+                            {/* Main product pricing */}
+                            <div>
+                                <h5 className="text-sm font-semibold mb-3">{name}</h5>
+                                <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
+                            </div>
+                            {/* Addon products pricing */}
+                            {addonData.map((addon, index) => (
+                                <div key={index}>
+                                    <h5 className="text-sm font-semibold mb-3">{addon.name}</h5>
+                                    <PricingTiers
+                                        plans={addon.billingData?.plans}
+                                        type={addon.type}
+                                        unit={addon.billingData?.unit}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
+                    )}
                 </div>
             </motion.div>
         </li>
