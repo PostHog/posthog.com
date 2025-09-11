@@ -117,6 +117,10 @@ When an external PR lands in your team's queue:
    - If you're unsure about the product implications of the change
    - If the PR has been stale for more than a week despite your follow-ups
 
+6. **Consider whether to reward with merch**
+    - a PR doesn't need to be merged to be reward-able
+    - folk took time to care about PostHog and merch is a great way for us to say thank you
+
 #### Prioritization
 
 External PRs should be treated with the following priority during your support hero week:
