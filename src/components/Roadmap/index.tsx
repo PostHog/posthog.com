@@ -42,7 +42,7 @@ import {
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
 import ProgressBar from 'components/ProgressBar'
-import { Scroll } from "lucide-react"
+import { Scroll } from 'lucide-react'
 
 interface IGitHubPage {
     title: string
@@ -220,10 +220,11 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${active
-                ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
-                : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
-                } ${className}`}
+            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
+                active
+                    ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
+                    : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
+            } ${className}`}
         >
             {children}
         </button>
@@ -465,10 +466,10 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
             // Format date if available
             const formattedDate = roadmap.attributes.createdAt
                 ? new Date(roadmap.attributes.createdAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                })
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                  })
                 : 'Unknown'
 
             // Access highlighted fields
@@ -519,11 +520,11 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                 },
                 ...(tableSort === 'newest' || tableSort === 'oldest'
                     ? [
-                        {
-                            content: <span className="text-sm font-medium">{formattedDate}</span>,
-                            className: 'text-secondary dark:text-secondary-dark',
-                        },
-                    ]
+                          {
+                              content: <span className="text-sm font-medium">{formattedDate}</span>,
+                              className: 'text-secondary dark:text-secondary-dark',
+                          },
+                      ]
                     : []),
                 {
                     content: teamName ? (
@@ -676,11 +677,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                     <>
                         <p className="mt-0">
                             Here's what we're thinking about building next. If you want to see what we've shipped
-                            recently,{' '}
-                            <Link to="/changelog/2025" state={{ newWindow: true }}>
-                                visit the changelog
-                            </Link>
-                            .
+                            recently, <Link to="/changelog">visit the changelog</Link>.
                         </p>
                         <div className="flex justify-between items-center space-x-2 mb-4">
                             {isModerator && !adding && (
