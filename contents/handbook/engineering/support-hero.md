@@ -89,7 +89,7 @@ External PRs typically reach your team through one of two methods:
 
 When an external PR lands in your team's queue:
 
-1. **Initial triage (within 24 hours)**
+1. **Initial triage (within 2 working days - although sooner is better)**
    - Acknowledge the PR with a comment thanking the contributor
    - Check if the PR passes our automated checks (Greptile feedback, tests, linting)
    - If there are obvious blockers (failed tests, merge conflicts), politely ask the contributor to address them first
