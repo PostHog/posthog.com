@@ -131,6 +131,15 @@ export default function HeaderBar({
     useEffect(() => {
         if (appWindow?.ref?.current) {
             const handleKeyDown = (e: KeyboardEvent) => {
+                const target = e.target as HTMLElement
+                if (
+                    target.tagName === 'INPUT' ||
+                    target.tagName === 'TEXTAREA' ||
+                    target.shadowRoot ||
+                    (target instanceof HTMLElement && target.closest('.mdxeditor'))
+                ) {
+                    return
+                }
                 // Only handle Shift+F if this window is the focused/active window
                 if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
                     e.preventDefault()
