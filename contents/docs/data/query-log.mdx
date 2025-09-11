@@ -146,9 +146,7 @@ The benefit of this is that you can see the actual query that was executed and t
 
 ### Query analysis by request name and date
 
-The `name` field allows you to analyze query patterns by their assigned names. Here are some useful queries:
-
-**Daily query volume by request name:**
+The `name` field enables you to analyze query patterns by their assigned names, such as daily query volume by request name:
 
 ```sql
 SELECT 
@@ -166,7 +164,7 @@ GROUP BY event_date, name
 ORDER BY event_date DESC, daily_queries DESC
 ```
 
-**Most common request names by time period:**
+Or the most common request names by time period:
 
 ```sql
 SELECT 
@@ -186,7 +184,7 @@ ORDER BY total_queries DESC
 LIMIT 20
 ```
 
-**Request performance trends over time:**
+You can also use the `name` property to see request performance trends over time:
 
 ```sql
 SELECT 
@@ -205,7 +203,7 @@ GROUP BY event_date, name
 ORDER BY event_date DESC, query_count DESC
 ```
 
-**Identify problematic request names:**
+You can use it to identify problematic request names too:
 
 ```sql
 SELECT 

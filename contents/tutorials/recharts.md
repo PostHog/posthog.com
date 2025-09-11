@@ -153,7 +153,7 @@ function App() {
                     ORDER BY date DESC
                     LIMIT 20`
         },
-        "name": "get page views by date"
+        "name": "get pageviews by date"
       }
       try {
         const response = await fetch(url, {

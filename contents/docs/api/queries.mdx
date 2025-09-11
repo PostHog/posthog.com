@@ -216,7 +216,7 @@ payload = {
           WHERE timestamp >= now() - INTERVAL 7 DAY
         """
     },
-    "name": "event number in last 7 days"
+    "name": "event count in last 7 days"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -242,7 +242,7 @@ async function createQuery() {
         LIMIT 100
       `
     },
-    "name": "event number in last 7 days"
+    "name": "event count in last 7 days"
   }
 
   const response = await fetch(url, {
@@ -287,7 +287,7 @@ curl \
           "kind": "HogQLQuery",
           "query": "SELECT * FROM mat_event_count"
         },
-        "name": "get materialized counts"
+        "name": "get materialized event count"
       }'
 ```
 
@@ -308,7 +308,7 @@ payload = {
           FROM mat_event_count
         """
     },
-    "name": "get materialized counts"
+    "name": "get materialized event count"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -408,13 +408,11 @@ Always provide a meaningful `name` parameter for your queries. This helps you:
 
 Good query names are descriptive and include the purpose:
 
-Good examples
-
 - `daily_active_users_last_7_days`
 - `funnel_signup_to_activation`
 - `revenue_by_country_monthly`
 
-Avoid generic names
+Bad names are generic and vague:
 
 - `query1`
 - `test`
