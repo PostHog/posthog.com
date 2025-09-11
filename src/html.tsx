@@ -64,6 +64,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 __preview_flags_v2: true,
                                 __preview_lazy_load_replay: true,
                                 cookieless_mode: navigator.userAgent.includes("Firefox/") ? "on_reject" : undefined,
+                                partitioned_cookie: true,
                             })
                             `,
                         }}
