@@ -39,11 +39,11 @@ The best part, for the vast majority of customers, this is going to be cheaper, 
 
 It's fairer and friendlier on your wallet.
 
-For transparency, 2% of customers will see an increase in price. If you're a part of this small subset, we will start you off with a 50% discount for the month.
+If you're part of the (very) small subset of customers who would see an increase in price, we will start you off with a 50% discount for a month so you can see how your usage changes and add billing limits if needed.
 
 ## Free tiers (still generous!)
 
-We love side projects and smaller teams, so the free tiers aren't going anywhere:  
+One of our most important pricing principles is that it should be free to use PostHog at smaller scales or to get started. That's why all PostHog apps have a generous free allowance you can use every month. Data pipelines are no different. 
 
 - **10,000 trigger events free** each month  
 - **1 million rows exported free** each month  
