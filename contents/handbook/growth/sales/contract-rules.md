@@ -230,7 +230,7 @@ Once they have returned the redlines to you first check to ensure that they have
 
 ### What customers should expect when submitting requested terms 
 
-PostHog evaluates legal risk assumed against annual revenue received. In other words, contractual terms will be varied in proportion to the customer's commited annual spend with PostHog.
+PostHog evaluates legal risk assumed against annual revenue received. In other words, contractual terms will be varied in proportion to the customer's committed annual spend with PostHog.
 
 To illustrate with examples:
 
