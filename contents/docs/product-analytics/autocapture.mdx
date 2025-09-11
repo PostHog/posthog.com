@@ -514,6 +514,27 @@ Autocapture events and properties can be used like any other [event type](/docs/
 
 - You can query autocapture `elements_chain` using [SQL](/tutorials/hogql-autocapture).
 
+### Common autocapture patterns
+
+#### Searching for autocapture events by text
+
+For UI interactions, you may see autocaptured events such as `clicked span with text "Delete"`. You can filter these events by the UI text by using the **Element text** property.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/element_text_light_6cadb0a9a9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/element_text_dark_99c0ae37a5.png"
+  alt="Element text property" 
+  classes="rounded"
+/>
+
+#### Filter by interaction type
+
+Autocaptured events have a more specific event type. For example, you can filter for all clicks by filtering for **Autocapture** events with the **Event type** property set to `click`. Check the [interaction autocapture](#interaction-autocapture) docs for more information on the different interaction types.
+
+#### Filter for interactions with specific elements
+
+Autocaptured events can also be filtered by its CSS selector. For example, you can filter for all interactions with a specific element by filtering for the **CSS selector** property as `#my-element` or `.button--submit`.
+
 ### Captured properties
 
 <Tab.Group tabs={['Web', 'iOS', 'React Native']}>
