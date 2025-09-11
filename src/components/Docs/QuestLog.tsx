@@ -575,14 +575,12 @@ export const QuestLogItem: React.FC<QuestLogItemProps> = ({ title, subtitle, ico
                 </div>
                 <div className="flex-1 min-w-0">
                     <strong
-                        className={`text-sm md:text-base font-bold leading-tight ${
-                            isSelected ? 'text-red dark:text-yellow' : ''
-                        }`}
+                        className={`text-sm font-bold leading-tight ${isSelected ? 'text-red dark:text-yellow' : ''}`}
                     >
                         {title}
                     </strong>
                     {subtitle && (
-                        <div className="text-xs md:text-sm text-primary/40 dark:text-primary-dark leading-tight">
+                        <div className="text-xs text-primary/40 dark:text-primary-dark leading-tight">
                             <strong>
                                 <em>{subtitle}</em>
                             </strong>
