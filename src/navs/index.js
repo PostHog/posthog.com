@@ -85,6 +85,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/linkedin-ads',
                 },
                 {
+                    name: 'Reddit Ads',
+                    url: '/docs/cdp/sources/reddit-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -4145,6 +4149,10 @@ export const docsMenu = {
                         {
                             name: 'LinkedIn Ads',
                             url: '/docs/data-warehouse/sources/linkedin-ads',
+                        },
+                        {
+                            name: 'Reddit Ads',
+                            url: '/docs/data-warehouse/sources/reddit-ads',
                         },
                         {
                             name: 'Google Sheets',
