@@ -20,7 +20,6 @@ const SliderRow = ({ label = '', sliderConfig, volume, setVolume, unit, cost, bi
         const roundedVolume = Math.round(newVolume)
         setCurrentVolume(roundedVolume)
 
-        // Immediately update parent state during slider drag
         if (billingTiers) {
             const calculatedCost = calculatePrice(roundedVolume, billingTiers).total
             setVolume(roundedVolume, calculatedCost)
