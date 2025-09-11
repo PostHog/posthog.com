@@ -96,15 +96,15 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
-        label: 'Work here',
-        Icon: <AppIcon name="typewriter" />,
-        url: '/careers',
-        source: 'desktop',
-    },
-    {
         label: 'Store',
         Icon: <AppIcon name="shoppingBag" />,
         url: '/merch',
+        source: 'desktop',
+    },
+    {
+        label: 'Work here',
+        Icon: <AppIcon name="typewriter" />,
+        url: '/careers',
         source: 'desktop',
     },
     {
