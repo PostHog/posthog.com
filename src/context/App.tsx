@@ -900,6 +900,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'application-success': {
+        size: {
+            min: {
+                width: 575,
+                height: 500,
+            },
+            max: {
+                width: 575,
+                height: 1000,
+            },
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
