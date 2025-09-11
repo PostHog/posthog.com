@@ -95,7 +95,7 @@ const AccordionItem = ({
             }`}
         >
             <button
-                onClick={billedWith ? onClick : undefined}
+                onClick={!billedWith ? onClick : undefined}
                 className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
                     isOpen
                         ? 'pt-2 pl-2 pr-3 pb-2 z-20'
