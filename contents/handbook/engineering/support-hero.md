@@ -52,7 +52,7 @@ Each engineering team has its own list of tickets in Zendesk:
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/33125360060571)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/33125190975131)
 
-Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and response to open-source PRs assigned to your team.
+Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and respond to open-source PRs assigned to your team.
 
 There are three sources of tickets:
 
