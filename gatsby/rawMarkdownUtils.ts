@@ -18,7 +18,6 @@ export const generateRawMarkdownPages = async (pages) => {
         '/service-message',
         '/services',
         '/request-received',
-        '/application-received',
         '/teams/',
         '/hosthog',
         '/startups',
