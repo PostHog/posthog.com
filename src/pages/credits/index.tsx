@@ -218,6 +218,16 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                                 </div>
                             )}
 
+                            <p className="text-sm text-secondary text-center text-balance">
+                                <Link
+                                    to="/blog/why-os"
+                                    state={{ newWindow: true }}
+                                    className="underline"
+                                >
+                                    Why does PostHog.com look like an operating system?
+                                </Link>
+                            </p>
+
                             <p className="text-sm text-secondary">
                                 <Link
                                     to="https://github.com/posthog/posthog.com"
