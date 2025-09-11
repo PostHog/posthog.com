@@ -141,7 +141,14 @@ The Small Team is responsible for creating roles for those that they need.
 
 We have a centralized team that will then help you hire.
 
-James and Tim will meet every hire we make - it's a standard startup failure for founders to get too removed from hiring. We are very happy to then give you complete autonomy on the work you do, as best we can.
+James or Tim will meet every hire we make - it's a standard startup failure for founders to get too removed from hiring. We are very happy to then give you complete autonomy on the work you do, as best we can.
+
+#### How do we create new teams?
+
+- We want people with some time (~6 months at PostHog) to start new teams (rather than completely new people)
+  - The team that the person moves from: we only move people from teams that are well resourced
+    - During the exec org tidy up meeting, we will figure out what products we want to build and who we want to build those products, so we can overstaff those teams
+
 
 #### Does a Small Team have a budget?
 
