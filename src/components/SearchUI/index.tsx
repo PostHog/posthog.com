@@ -98,7 +98,8 @@ const Search = ({
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
                     <div className="bg-accent rounded border !border-primary overflow-hidden relative">
-                        <Input
+                        <Combobox.Input
+                            as={Input}
                             label=""
                             showLabel={false}
                             className="w-full text-primary border-0 bg-transparent focus:ring-0"
