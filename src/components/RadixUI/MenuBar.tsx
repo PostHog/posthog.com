@@ -47,6 +47,22 @@ const generateStableId = (baseId: string, ...parts: (string | number)[]): string
     return `${baseId}-${parts.join('-')}`
 }
 
+// Helper to render menu item content (icon + label)
+const MenuItemContent = (item: MenuItemType, forceIconIndent?: boolean) => {
+    const iconContent = item.icon ? (
+        <span className="mr-2 flex items-center">{item.icon}</span>
+    ) : forceIconIndent ? (
+        <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
+    ) : null
+
+    return (
+        <>
+            {iconContent}
+            {item.label}
+        </>
+    )
+}
+
 // Process menu items for mobile display - truncate nesting to 2 levels max
 const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
     // Skip items marked for mobile omission
@@ -157,12 +173,19 @@ const MenuItem: React.FC<{
             return (
                 <RadixMenubar.Sub key={itemId}>
                     <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
-                        {item.icon ? (
-                            <span className="mr-2 flex items-center">{item.icon}</span>
-                        ) : forceIconIndent ? (
-                            <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
-                        ) : null}
-                        {item.label}
+                        {item.link ? (
+                            <Link
+                                to={item.link}
+                                state={{ newWindow: true }}
+                                externalNoIcon={item.external}
+                                className="flex items-center gap-2 flex-1 no-underline text-primary"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {MenuItemContent(item, forceIconIndent)}
+                            </Link>
+                        ) : (
+                            MenuItemContent(item, forceIconIndent)
+                        )}
                         <div className={ShortcutClasses}>
                             <IconChevronRight className="size-4" />
                         </div>
@@ -296,7 +319,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
     id = 'menubar',
 }) => {
     const { isMobile, isLoaded } = useResponsive()
-
+    console.log('menus', menus)
     const baseId = React.useMemo(() => {
         // Generate a stable ID based on the menu structure
         const menuSignature = menus
