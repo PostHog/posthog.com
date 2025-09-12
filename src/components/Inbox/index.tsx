@@ -604,6 +604,7 @@ export default function Inbox(props) {
                                                         id={permalink}
                                                         onQuestionReady={(question) => setQuestion(question)}
                                                         subscribeButton={false}
+                                                        showSlug
                                                     />
                                                 </div>
                                             </ScrollArea>
