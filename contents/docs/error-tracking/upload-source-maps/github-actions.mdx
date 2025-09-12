@@ -7,11 +7,11 @@ showStepsToc: true
 
 <Step title="Prerequisites" badge="required">
 
-Ensure your build generates source maps. This action does not build your project — it only injects source map metadata into the built files and uploads the source maps to PostHog. Run your usual production build first (for example, `npm run build`).
+Uploading source maps with GitHub Actions requires your build to have already generated source maps. This action does not build your project, it only injects source map metadata into the built files and uploads them to PostHog. Make sure to run your production build first (for example, `npm run build`).
 
 </Step>
 
-<Step title="Use the GitHub Action" badge="required">
+<Step title="Use the GitHub action" badge="required">
 
 Add a workflow step to run the PostHog upload action after your build:
 
@@ -60,11 +60,11 @@ This step:
 | **Name** | **Required** | **Description** |
 | --- | --- | --- |
 | `directory` | Yes | Directory containing built assets (for example, `dist`) |
-| `env-id` | Yes | PostHog environment ID. See [environment settings](https://app.posthog.com/settings/environment#variables) |
-| `cli-token` | Yes | PostHog CLI token. See [API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `env-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/environment#variables) |
+| `cli-token` | Yes | Personal API key with error tracking write scope. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
 | `project` | No | Project identifier. Defaults to the Git repository name when available |
 | `version` | No | Release/version (for example, commit SHA). Defaults to current commit SHA when available |
-| `host` | No | PostHog host URL. For EU cloud set `https://eu.posthog.com` |
+| `host` | No | PostHog host URL. Defaults to `https://us.posthog.com`. For EU cloud, set it to `https://eu.posthog.com` | 
 
 </div>
 
