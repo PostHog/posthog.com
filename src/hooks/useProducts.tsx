@@ -132,6 +132,7 @@ const allProductsData = graphql`
                         plans {
                             description
                             docs_url
+                            free_allocation
                             image_url
                             name
                             plan_key
