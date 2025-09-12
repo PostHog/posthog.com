@@ -212,11 +212,11 @@ We can roll up to half the amount of credit from the original order form to a ne
 
 ## Varying contractual terms
 
-### When we vary terms for customers
+### When we vary terms
 
 If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes (also known as "redlines").  
 
-At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big, substantive changes (e.g. adding a Service Level Agreements). The minimum is $200k to bring your own contract instead of our standard template - see ['Non PostHog Contracts'](/handbook/growth/sales/contract-rules#using-non-posthog-contracts) below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect-when-submitting-requested-terms) with PostHog.  A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation.
+At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big, substantive changes (e.g. adding a Service Level Agreements). The minimum is $200k to bring your own contract instead of our standard template - see ['Non PostHog Contracts'](/handbook/growth/sales/contract-rules#using-non-posthog-contracts) below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect) with PostHog.  A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation.
 
 We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity where the potential annual revenue is understood.
 
@@ -228,7 +228,7 @@ The customer should redline the current .docx version of the document in questio
 
 Once they have returned the redlines to you first check to ensure that they have used the template which you provided, and then share the document for review in the #legal channel.  There will usually be a few rounds of back and forth as we converge on an agreement. You will continue to represent PostHog's position to your customer throughout the negotiation. Please work with #legal on the appropriate responses and speak clearly to our customers. 
 
-### What customers should expect when submitting requested terms 
+### What customers should expect 
 
 PostHog evaluates legal risk assumed against annual revenue received. In other words, contractual terms will be varied in proportion to the customer's committed annual spend with PostHog.
 
@@ -247,13 +247,13 @@ All prospective customers are welcome to try PostHog for free and under our stan
 We don't negotiate terms for trials and POCs for three reasons:
 
 1. Unlike many of our competitors, an annual subscription is not required to access PostHog, so a negotiated agreement is not necessary to use our services. Our product-led motion is designed to support customers trying PostHog. 
-2. When [evaluating custom legal terms](/handbook/growth/sales/contract-rules#what-customers-should-expect-when-submitting-requested-terms), PostHog evaluates legal risk assumed against annual revenue received. 
+2. When [evaluating custom legal terms](/handbook/growth/sales/contract-rules#what-customers-should-expect), PostHog evaluates legal risk assumed against annual revenue received. 
 3. Because prospective customers are paying us $0 for a free, sales-led trial or POC, there is no frame of reference for us to evaluate any potential custom terms.  Spending our time and legal resources negotiating these terms is premature when a prospective customer doesn't know that they want to proceed with PostHog at all, much more at a qualifying level of annual usage. 
 
 Once the trial concludes, and [per our guidance on varying terms](/handbook/growth/sales/contract-rules#varying-contractual-terms), we will be happy to evaluate custom legal terms for an otherwise qualified PostHog customer. 
 
 ## Using Non-PostHog contracts
 
-If a customer requests to use a non-PostHog drafted contract for documents such as a DPA, MSA, Order Form, or BAA, we generally decline, except in special circumstances (see ['When we vary terms for customers'](/handbook/growth/sales/contract-rules#when-we-vary-terms-for-customers)).  We avoid doing this as it adds too much risk for us, and also because reviewing and negotiating non-standard terms introduces significant operational inefficiencies and doesn't scale well as we continue to grow. We typically do not even consider using customer paper unless the deal is over $200k annually or involves an extremely blue-chip company. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. 
+If a customer requests to use a non-PostHog drafted contract for documents such as a DPA, MSA, Order Form, or BAA, we generally decline, except in special circumstances (see ['When we vary terms for customers'](/handbook/growth/sales/contract-rules#when-we-vary-terms)).  We avoid doing this as it adds too much risk for us, and also because reviewing and negotiating non-standard terms introduces significant operational inefficiencies and doesn't scale well as we continue to grow. We typically do not even consider using customer paper unless the deal is over $200k annually or involves an extremely blue-chip company. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. 
 
 We are somewhat more flexible when it comes to NDAs. That said, since we contract through our U.S. entity, we require customer NDAs to be governed by U.S. law. This is necessary to maintain consistency and ensure we’re not taking on legal or operational risk in jurisdictions where we don’t operate or fully understand the legal landscape. This is mainly about ensuring we can review and manage agreements efficiently with our limited legal resources.
