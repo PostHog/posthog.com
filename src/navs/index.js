@@ -82,6 +82,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/linkedin-ads',
                 },
                 {
+                    name: 'Reddit Ads',
+                    url: '/docs/cdp/sources/reddit-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -2391,10 +2395,6 @@ export const docsMenu = {
                             url: '/docs/ai-engineering',
                         },
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
-                        },
-                        {
                             name: 'AI wizard',
                             url: '/docs/ai-engineering/ai-wizard',
                         },
@@ -2403,7 +2403,11 @@ export const docsMenu = {
                             url: '/docs/model-context-protocol',
                         },
                         {
-                            name: 'LLM analytics',
+                            name: 'Agent toolkit',
+                            url: '/docs/ai-engineering/agent-toolkit',
+                        },
+                        {
+                            name: 'LLM analytics ↗',
                             url: 'https://posthog.com/docs/llm-analytics',
                         },
                         {
@@ -2459,7 +2463,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'PostHog explained',
-                    icon: 'IconQuestion',   
+                    icon: 'IconQuestion',
                     children: [
                         {
                             name: 'What is Product OS?',
@@ -2544,6 +2548,10 @@ export const docsMenu = {
                             url: '/docs/max-ai',
                             icon: 'IconToolbar',
                             children: [
+                                {
+                                    name: 'Max AI',
+                                    url: '/docs/max-ai',
+                                },
                                 {
                                     name: 'Toolbar',
                                     url: '/docs/toolbar',
@@ -4137,6 +4145,10 @@ export const docsMenu = {
                         {
                             name: 'LinkedIn Ads',
                             url: '/docs/data-warehouse/sources/linkedin-ads',
+                        },
+                        {
+                            name: 'Reddit Ads',
+                            url: '/docs/data-warehouse/sources/reddit-ads',
                         },
                         {
                             name: 'Google Sheets',
