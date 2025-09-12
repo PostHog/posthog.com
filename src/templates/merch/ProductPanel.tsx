@@ -212,7 +212,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </div>
             )}
 
-            <div className="grid grid-cols-4 gap-y-1 gap-x-2 text-sm">
+            <div className="grid grid-cols-4 gap-y-1 gap-x-2 text-sm [&_a]:underline [&_a]:font-semibold">
                 <div className="text-secondary">Available</div>
                 <div className="col-span-3">{available}</div>
 
