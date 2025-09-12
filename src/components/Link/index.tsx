@@ -95,7 +95,7 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { compact } = useLayoutData()
-    const { openStart, siteSettings } = useApp()
+    const { openStart, siteSettings, posthogInstance } = useApp()
     const posthog = usePostHog()
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
@@ -107,7 +107,7 @@ export default function Link({
         })
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
-        if (isPostHogAppUrl) {
+        if (isPostHogAppUrl && !posthogInstance) {
             posthog?.createPersonProfile?.()
             const urlObj = new URL(url)
             const path = urlObj.pathname
