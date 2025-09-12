@@ -178,7 +178,7 @@ const MenuItem: React.FC<{
                                 to={item.link}
                                 state={{ newWindow: true }}
                                 externalNoIcon={item.external}
-                                className="flex items-center gap-2 flex-1 no-underline text-primary"
+                                className="flex items-center flex-1 no-underline text-primary"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 {MenuItemContent(item, forceIconIndent)}
