@@ -36,7 +36,7 @@ We are also starting to experiment with cold outbound, specifically to those who
 
 ## If you're reading this after PostHog outbound, ~~blink twice~~ you can opt out here
 
-We've linked to this section because you've been included in our [first few experiments.](/handbook/growth/sales/what-we're-doing-today) We want to work together, but not at the expense of you hating us. 
+We've linked to this section because you've been included in our [first few experiments.](#what-were-doing-today) We want to work together, but not at the expense of you hating us.
 
 So, if you'd rather we didn't reach out, just click here [LINK]. 
 
