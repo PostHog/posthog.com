@@ -1,12 +1,12 @@
 ---
-title: Product announcements
+title: Product Marketing
 sidebar: Handbook
 showTitle: true
 ---
 
-> **Have something you want to announce?** Let the Brand team know! If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
+> **Have something you want to announce?** Let the Marketing team know! If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
 
-Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/brand/product-announcements#announcing-scheduled-maintenance), if needed. 
+Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
 
 ## Types of announcement
 

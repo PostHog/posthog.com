@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Marketing Events
 sidebar: Handbook
 showTitle: true
 ---
@@ -101,8 +101,8 @@ Community events are better when organizers share what happened, what you learne
 
 ## Sponsoring external events
 
-We sometimes get asked by other companies or people if we are interested in sponsoring their events - these can range from small to extremely large. We don't do these at the moment because they are a poor return on investment, though we always encourage team members to speak at these if there is an opportunity to, and we can support you with budget, social posts, merch etc. Ask in the [#team-brand](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+We sometimes get asked by other companies or people if we are interested in sponsoring their events - these can range from small to extremely large. We don't do these at the moment because they are a poor return on investment, though we always encourage team members to speak at these if there is an opportunity to, and we can support you with budget, social posts, merch etc. Ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
 
 ## Sponsoring student organizations
 
-Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-brand](https://posthog.slack.com/archives/C01V9AT7DK4) channel.
+Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-marketing](https://posthog.slack.com/archives/C01V9AT7DK4) channel.

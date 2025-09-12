@@ -6,7 +6,7 @@ showTitle: true
 
 ## How marketing works
 
-There is no marketing team at PostHog. Instead, marketing at PostHog is a collaborative effort dispersed across two teams, though this will likely grow in the future:
+Marketing at PostHog is a collaborative effort across three teams:
 
 - **Content:**
   - Content marketing
@@ -16,15 +16,20 @@ There is no marketing team at PostHog. Instead, marketing at PostHog is a collab
   - Maintaining and improving documentation
   - Video production
 
-- **Brand & Vibes:**
+- **Marketing:**
   - Product marketing
-  - Artwork and graphic design
-  - Events 
+  - Paid advertising
+  - Product positioning
+  - Marketing events
   - Special programs (PostHog for Startups)
   - Cross-sell and email marketing
-  - Website
-  - Billboards
-  - Vibes (because they insist)
+
+- **Brand & Vibes:**
+  - Design system and visual identity
+  - Website design and development
+  - Artwork and graphic design
+  - Brand assets and merchandise design
+  - Visual content creation
 
 See [Who can help me?](/handbook/growth/marketing/ownership) for more on who to talk to.
 

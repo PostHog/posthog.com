@@ -1,5 +1,5 @@
 ---
-title: Paid ads
+title: Paid Advertising
 sidebar: Handbook
 showTitle: true
 ---
