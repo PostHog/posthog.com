@@ -3872,6 +3872,10 @@ export const docsMenu = {
                             name: 'CLI',
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
+                        {
+                            name: 'GitHub Actions',
+                            url: '/docs/error-tracking/upload-source-maps/github-actions',
+                        },
                     ],
                 },
                 {

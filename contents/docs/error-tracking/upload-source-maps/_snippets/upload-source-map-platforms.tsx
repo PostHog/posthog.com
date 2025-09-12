@@ -38,6 +38,11 @@ const UploadSourceMapPlatforms = () => {
             url: '/docs/error-tracking/upload-source-maps/cli',
             icon: 'IconCode',
         },
+        {
+            label: 'GitHub Actions',
+            url: '/docs/error-tracking/upload-source-maps/github-actions',
+            icon: 'IconCode',
+        },
     ]
 
     return <List className="grid sm:grid-cols-2" items={platforms} />
