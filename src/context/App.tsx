@@ -985,7 +985,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
     const [confetti, setConfetti] = useState(false)
-    const [posthogInstance, setPosthogInstance] = useState<string>('https://us.posthog.com')
+    const [posthogInstance, setPosthogInstance] = useState<string>()
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
