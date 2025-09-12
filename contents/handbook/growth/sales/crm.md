@@ -34,7 +34,7 @@ People currently come into Salesforce through one of the following ways:
 
 ### Email
 
-We respond to emails which come into sales@posthog.com by replying with sales@ in BCC to ensure that everyone else on the team knows that you're handling the query. 
+We respond to emails which come into sales@posthog.com by addressing tasks in the Sales Mailbox and lead queues within Salesforce. You will typically be notified of the tasks in places such as #sales-alerts and #sales-leads channels.  
 
 If you've turned on the Salesforce Chrome Extension you can see the person's Salesforce profile directly within Gmail which should give you their auto-computed [Lead score](/handbook/growth/sales/lead-scoring) so this will help you decide on the correct approach (hands-on/self-serve).
 
