@@ -62,7 +62,7 @@ More generally, self-service analytics tools also offer other advantages:
 
 - *Democratization:* Biases can occur for all sorts of reasons and you can never be sure where your next great idea will come from. Enabling more users to interact safely with data increases your chance of finding meaningful insights. 
 - *Single source of truth:* If you don’t have a dedicated team which is managing your data well then it’s easy for decisions to be made based on out of date spreadsheets or faulty information. Self-service analytics tools ensure everyone sings from the same hymn sheet. 
-- *Efficiency:* Most business intelligence (BI) tools require knowledge of SQL or equivalent programming languages. This means it can take a long time just to get the answer to simple questions, whereas self-service tools such as PostHog offer a more accessible UI.
+- *Efficiency:* Most [business intelligence (BI) tools](/blog/best-open-source-business-intelligence-tools) require knowledge of SQL or equivalent programming languages. This means it can take a long time just to get the answer to simple questions, whereas self-service tools such as PostHog offer a more accessible UI.
 - *Speed:* The reality of centralized data teams is that they rapidly become a bottleneck for the rest of the business. Opening analytics up with a self-service platform enables all teams to move faster and interact with data in real time. 
 
 Ultimately, self-service analytics is important because it enables organizations to get more value from their data, faster — and usually more cost effectively too. Some organizations that maintain dedicated data teams will even adopt self-service analytics tools regardless, so they can free data teams up to pursue more bespoke analysis. 

@@ -118,7 +118,7 @@ Overall, ClickHouse's close-metal optimizations enable it to return aggregate va
 
 ### Who uses Snowflake and ClickHouse?
 
-Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting business intelligence tools with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a growing competitive offering, but the current integrations are less numerous.
+Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting [business intelligence tools](/blog/best-open-source-business-intelligence-tools) with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a growing competitive offering, but the current integrations are less numerous.
 
 ClickHouse and Snowflake are both used for analytics, but ClickHouse is more focused on analytical queries. 
 

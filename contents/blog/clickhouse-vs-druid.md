@@ -22,7 +22,7 @@ OLAP databases store data in a columnar format that is primed for aggregations, 
 
 ![OLAP vs OLTP](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
 
-Products with massive volumes of data, like business intelligence tools, stock market trading books, and apps with lots of charts and graphs, can benefit from using  OLAP databases. 
+Products with massive volumes of data, like [business intelligence tools](/blog/best-open-source-business-intelligence-tools), stock market trading books, and apps with lots of charts and graphs, can benefit from using  OLAP databases. 
 
 At PostHog, we use ClickHouse to power our analytics warehouse – lovingly dubbed our Events Mansion. ClickHouse was a saving grace when our Postgres setup was grinding to a halt due to our growth. 
 

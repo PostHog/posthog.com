@@ -70,7 +70,7 @@ The first is Redshift Spectrum, which refers to an army of EC2 machines that com
 
 ![Amazon Redshift Spectrum.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/Amazon_Redshift_Spectrum.png)
 
-The easiest way to describe this setup is to walk through a single query. Imagine a business intelligence (BI) tool that wants to learn the total sum of sales across a company’s history. In order: 
+The easiest way to describe this setup is to walk through a single query. Imagine a [business intelligence (BI) tool](/blog/best-open-source-business-intelligence-tools) that wants to learn the total sum of sales across a company’s history. In order: 
 
 1. A leader node accepts the query and delegates it to a compute node.
 2. A compute node employs Redshift Spectrum to execute the summation.
