@@ -554,6 +554,7 @@ function PipelinesPage({ location }) {
     const {
         destinations: { nodes },
         transformations: { nodes: transformations },
+        source_webhooks: { nodes: source_webhooks },
     } = useStaticQuery(query)
 
     const [searchValue, setSearchValue] = React.useState('')
@@ -562,7 +563,7 @@ function PipelinesPage({ location }) {
     const [selectedType, setSelectedType] = React.useState('All')
 
     const pipelines = {
-        Sources: sources,
+        Sources: [...sources, ...source_webhooks],
         Destinations: nodes,
         Transformations: transformations,
     }
@@ -626,6 +627,13 @@ function PipelinesPage({ location }) {
                                     className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ml-1`}
                                 >
                                     Roadmap
+                                </p>
+                            )}
+                            {source_webhooks.includes(selectedDestination) && (
+                                <p
+                                    className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50 border border-purple flex-shrink-0 ml-1`}
+                                >
+                                    Early access
                                 </p>
                             )}
                         </div>
@@ -814,6 +822,15 @@ function PipelinesPage({ location }) {
                                                                 Roadmap
                                                             </p>
                                                         )}
+                                                        {source_webhooks.includes(destination) && (
+                                                            <p
+                                                                className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs font-medium rounded px-1 m-0 !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50 border border-purple flex-shrink-0 ${
+                                                                    selectedType === 'All' ? '!ml-1' : ''
+                                                                }`}
+                                                            >
+                                                                Early access
+                                                            </p>
+                                                        )}
                                                     </div>
                                                     <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
                                                         {description}
@@ -920,6 +937,31 @@ const query = graphql`
             }
         }
         transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
+                    required
+                    description
+                }
+                status
+            }
+        }
+        source_webhooks: allPostHogPipeline(filter: { type: { eq: "source_webhook" } }) {
             nodes {
                 id
                 slug
