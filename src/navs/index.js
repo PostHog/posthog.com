@@ -2406,10 +2406,6 @@ export const docsMenu = {
                             url: '/docs/ai-engineering',
                         },
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
-                        },
-                        {
                             name: 'AI wizard',
                             url: '/docs/ai-engineering/ai-wizard',
                         },
@@ -2559,6 +2555,10 @@ export const docsMenu = {
                     url: '/docs/max-ai',
                     icon: 'IconToolbar',
                     children: [
+                        {
+                            name: 'Max AI',
+                            url: '/docs/max-ai',
+                        },
                         {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
