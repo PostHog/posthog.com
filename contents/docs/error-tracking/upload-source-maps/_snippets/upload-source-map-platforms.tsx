@@ -41,7 +41,7 @@ const UploadSourceMapPlatforms = () => {
         {
             label: 'GitHub Action',
             url: '/docs/error-tracking/upload-source-maps/github-actions',
-            icon: 'IconGithub',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/icone_github_noir_b730f0c4b6.png',
         },
     ]
 
