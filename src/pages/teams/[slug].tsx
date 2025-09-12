@@ -528,7 +528,11 @@ export default function TeamPage(props: TeamPageProps) {
             <ReaderView
                 title={`${(team as any)?.name || slug} Team`}
                 hideTitle={true}
-                leftSidebar={<TreeMenu items={teamsNavigation} />}
+                leftSidebar={
+                    <div className="pb-6">
+                        <TreeMenu items={teamsNavigation} />
+                    </div>
+                }
                 homeURL="/teams"
                 description={`Learn about the ${(team as any)?.name || slug} team at PostHog`}
                 proseSize="sm"
