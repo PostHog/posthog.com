@@ -39,9 +39,9 @@ const UploadSourceMapPlatforms = () => {
             icon: 'IconCode',
         },
         {
-            label: 'GitHub Actions',
+            label: 'GitHub Action',
             url: '/docs/error-tracking/upload-source-maps/github-actions',
-            icon: 'IconCode',
+            icon: 'IconGithub',
         },
     ]
 

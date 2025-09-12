@@ -48,7 +48,7 @@ jobs:
 
 This step:
 
-- Injects a `//# chunkId=...` comment into your built files so PostHog can match them to uploaded source maps
+- Injects a `//# chunkId=...` comment into your built source files so PostHog can match them with uploaded source maps
 - Uploads the source maps to your PostHog project
 
 
@@ -81,7 +81,7 @@ We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `P
     Check symbol sets in PostHog
 </CallToAction>
 
-2. Confirm your served production files include an injected comment similar to:
+2. Confirm your served production files include an injected comment at the end of the file similar to:
 
 ```js
 //# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c

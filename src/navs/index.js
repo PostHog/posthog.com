@@ -3873,7 +3873,7 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/cli',
                         },
                         {
-                            name: 'GitHub Actions',
+                            name: 'GitHub Action',
                             url: '/docs/error-tracking/upload-source-maps/github-actions',
                         },
                     ],
