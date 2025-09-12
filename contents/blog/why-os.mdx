@@ -48,7 +48,7 @@ I had a lot of fun in building it with <TeamMember name="Eli Kinsey" />. Through
 It was also an interesting learning curve for me in figuring out how to organize five years worth of content while making it scalable for the future. Some of the technical highlights:
 
 -   Separation of visual layer from content
-    -   All product pages are now powered from JSON files (<a to="https://github.com/PostHog/posthog.com/blob/windows-n-such/src/hooks/productData/session_replay.tsx" external>example</a>). This means that JSON dictates page layouts, content presentation, feature-level competitor comparison charts, and more. It also contains an array of screenshots used in various places (both in light and dark mode, of course).
+    -   All product pages are now powered from JSON files (<a to="https://github.com/PostHog/posthog.com/blob/master/src/hooks/productData/session_replay.tsx" external>example</a>). This means that JSON dictates page layouts, content presentation, feature-level competitor comparison charts, and more. It also contains an array of screenshots used in various places (both in light and dark mode, of course).
     -   Eventually this will move to a repository that’s shared with the PostHog app, so all the information is powered from the same source.
 -   Skinning a site with themes _and_ color schemes
     -   How do you maintain light and dark mode, along with themes across a handful of accent variations (primary, secondary, tertiary) in a way that all play well together? (I found this out, and I’ll write about it sometime!)
