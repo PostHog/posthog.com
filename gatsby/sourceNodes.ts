@@ -13,7 +13,7 @@ import dayjs from 'dayjs'
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
 
-    const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
+    const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://us.posthog.com/api/schema/'
     const spec = await fetch(openApiSpecUrl, {
         headers: {
             Accept: 'application/json',
