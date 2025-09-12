@@ -319,7 +319,6 @@ const MenuBar: React.FC<MenuBarProps> = ({
     id = 'menubar',
 }) => {
     const { isMobile, isLoaded } = useResponsive()
-    console.log('menus', menus)
     const baseId = React.useMemo(() => {
         // Generate a stable ID based on the menu structure
         const menuSignature = menus
