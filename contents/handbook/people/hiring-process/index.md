@@ -226,7 +226,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-We pay all candidates a flat rate of $1,000 USD for their efforts on SuperDay. On rare occasions, if we have to cancel a scheduled superday because we have filled the role with another candidate who was further advanced in the process, we  will pay a $500 USD term fee to the candidate for their efforts up until this point. 
+We pay all candidates a flat rate of $1,000 USD for their efforts on the SuperDay. On rare occasions, if we have to cancel a scheduled superday because we have filled the role with another candidate who was further advanced in the process, we  will pay a $500 USD term fee to the candidate for their efforts up until this point. 
 
 If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships. Due to the high volume of SuperDays we run, if the candidate has their SuperDay in the first half of the month, they can expect a payment to be made by the 15th of the month, while any SuperDays after the 15th of the month, it will be paid at the end of the month. 
 
