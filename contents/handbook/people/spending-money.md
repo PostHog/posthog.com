@@ -75,7 +75,7 @@ If you wish to pay for invoices but don't have the budget to do so, you can draf
 
 PostHog is an all-remote company. This means it's important you have an ergonomic setup at home to be as productive as possible.
 
-PostHog will provide you with office equipment. Please note that it remains PostHog's property.
+PostHog will provide you with office equipment. Please note that it remains PostHog's property and is returned in offboarding.
 
 ### YubiKey
 
@@ -83,18 +83,18 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 
 ### Laptop
 
-We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
+We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many.  
 
-* For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
-* For all other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
+Below are general guidelines for the laptop configurations currently recommended, by role. The most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines please ask Fraser for approval prior to making the purchase.
 
-These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
+* For engineering roles (Product & Support teams), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For all other non-engineering roles, we recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen that meets our suggested monitor specs below. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
 > You need to purchase a laptop with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. Please do not purchase any other type.
 
-If you are in the US only, when buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Fraser. Don't do this if you're in the UK though - use your Revolut card as we claim back the VAT. 
+If you are in the US only, make Apple purchases through Brex as we can get 3% cashback on the amount. This happens automatically on the backend. Don't do this if you're in the UK though - use your Revolut card as we claim back the VAT. 
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
