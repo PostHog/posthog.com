@@ -214,9 +214,9 @@ We can roll up to half the amount of credit from the original order form to a ne
 
 ### When we vary terms
 
-If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes (also known as "redlines").  
+If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these suggested changes (also known as "redlines").  
 
-At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big, substantive changes (e.g. adding Service Level Agreements). The minimum is $200k to bring your own contract instead of our standard template - see ['Non PostHog Contracts'](/handbook/growth/sales/contract-rules#using-non-posthog-contracts) below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect) with PostHog.  A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation.
+At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big changes (e.g. changing significant provisions, adding Service Level Agreements, etc.). A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect) with PostHog.  A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation. 
 
 We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity where the potential annual revenue is understood.
 
@@ -234,9 +234,11 @@ PostHog evaluates legal risk assumed against annual revenue received. In other w
 
 To illustrate with examples:
 
-- A customer committing to spend just $20k USD annually should not expect any major, substantive deviations from PostHog's standard terms. Minor, clarifying edits will be acceptable. We will not spend our time going back and forth for this amount. We may respond to major suggested changes with a polite, "no," rather than negotiating, to communicate clearly.
-- A customer committing to spend $80k USD annually would be able to request substantive deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
-- A customer committing to spend $200k USD annually (or more) would be able to start with [a Non-PostHog contract](/handbook/growth/sales/contract-rules#using-non-posthog-contracts), and we will evaluate the suggested terms through the lens of legal risk assumed against revenue received. Even when starting from a Non-PostHog contract, PostHog requires the contract to reflect how we actually do business. This will also be a negotiation, and we will represent PostHog's position clearly as we go along.
+- A customer committing to spend just $20k USD annually should not expect significant deviations from PostHog's standard terms. Minor, clarifying edits will be acceptable. We will not spend our time going back and forth for this amount. We may respond to significant changes with a polite, "no," rather than negotiating, to communicate clearly.
+- A customer committing to spend $80k USD annually would be able to request slightly more sigificant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
+- A customer committing to spend $160k USD annually (or more) would be able request even more sigificant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
+
+At any potential level of annual spend, PostHog will not proceed under unreasonable legal terms. Certain suggested terms may be non-starters for PostHog. 
 
 ### Varying terms for trials and proofs of concept (POCs) for prospective customers
 
