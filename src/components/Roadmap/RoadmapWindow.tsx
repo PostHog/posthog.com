@@ -7,6 +7,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import ProgressBar from 'components/ProgressBar'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import { useToast } from '../../context/Toast'
 
 interface Team {
     data?: {
@@ -66,6 +67,7 @@ export default function RoadmapWindow({
     status?: Status
     onSubmit?: () => void
 }): JSX.Element {
+    const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [initialValues, setInitialValues] = useState<Record<string, unknown> | null>(null)
     const { closeWindow } = useApp()
@@ -124,22 +126,25 @@ export default function RoadmapWindow({
     }
 
     useEffect(() => {
-        if (user?.role?.type !== 'moderator') return
+        if (id && user?.role?.type !== 'moderator') return
         fetchRoadmapItem()
     }, [user, id])
 
     return (
         <ScrollArea>
             <div className="p-4">
-                {initialValues ? (
+                {(initialValues && id) || !id ? (
                     <RoadmapForm
                         status={status || 'in-progress'}
                         hideStatusSelector={false}
                         initialValues={initialValues}
-                        buttonText="Update"
+                        buttonText={id ? 'Update' : 'Create'}
                         id={id}
                         onSubmit={() => {
                             closeWindow(appWindow)
+                            addToast({
+                                description: id ? 'Roadmap updated successfully' : 'Roadmap created successfully',
+                            })
                             onSubmit?.()
                         }}
                     />

@@ -621,7 +621,6 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                                           addWindow(
                                               <RoadmapWindow
                                                   location={{ pathname: `edit-roadmap-${roadmap.id}` }}
-                                                  roadmap={roadmap}
                                                   key={`edit-roadmap`}
                                                   newWindow
                                                   id={roadmap.id}
@@ -714,7 +713,23 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                         <div className="flex justify-between items-center space-x-2 mb-4">
                             {isModerator && !adding && (
                                 <div className="relative">
-                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                    <CallToAction
+                                        onClick={() => {
+                                            addWindow(
+                                                <RoadmapWindow
+                                                    location={{ pathname: `add-roadmap` }}
+                                                    key={`add-roadmap`}
+                                                    newWindow
+                                                    status="under-consideration"
+                                                    onSubmit={() => {
+                                                        mutate()
+                                                    }}
+                                                />
+                                            )
+                                        }}
+                                        size="xs"
+                                        type="secondary"
+                                    >
                                         <Tooltip content="Only moderators can see this" placement="top">
                                             <IconShieldLock className="w-6 h-6 inline-block" />
                                         </Tooltip>
