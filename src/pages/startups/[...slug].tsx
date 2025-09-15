@@ -227,7 +227,7 @@ export default function Startups(): JSX.Element {
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/chroma_d25cba6cf9.png" />
                             <h3 className="text-base my-1 leading-tight">Better search with Chroma</h3>
                             <p className="text-sm mb-0">
-                                Building an AI? Chroma gives you $5,000 of credit for their search and retrieval
+                                Building with AI? Chroma gives you $5,000 of credit for their search and retrieval
                                 service.
                             </p>
                         </div>
