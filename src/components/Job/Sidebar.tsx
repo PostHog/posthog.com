@@ -42,22 +42,10 @@ export const TeamMembers = ({
                 .reverse()
                 .map((profile: any) => {
                     const {
-                        attributes: {
-                            avatar: {
-                                data: {
-                                    attributes: { url: avatar },
-                                },
-                            },
-                            firstName,
-                            lastName,
-                            country,
-                            location,
-                            color,
-                            companyRole,
-                            leadTeams,
-                        },
+                        attributes: { avatar, firstName, lastName, country, location, color, companyRole, leadTeams },
                         id,
                     } = profile
+                    const avatarUrl = avatar?.data?.attributes?.url
                     const name = [firstName, lastName].filter(Boolean).join(' ')
                     const isTeamLead = leadTeams?.data?.some(
                         ({ attributes: { name } }: { attributes: { name: string } }) => name === teamName
@@ -73,7 +61,7 @@ export const TeamMembers = ({
                                     trigger={
                                         <ContributorImageSmall
                                             name={name}
-                                            image={avatar}
+                                            image={avatarUrl}
                                             className={`border-[2.5px] border-solid border-white dark:border-primary bg-${
                                                 color ? color : 'accent'
                                             } dark:bg-${color ? color : 'accent-dark'} ${size}`}
