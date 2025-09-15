@@ -632,8 +632,8 @@ export default function RoadmapForm({
     })
 
     return (
-        <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-primary pb-8">
-            <div className="bg-white dark:bg-accent-dark rounded-md border border-input overflow-hidden grid grid-cols-2 [&>*]:border-primary [&>*]:dark:border-dark">
+        <form onSubmit={handleSubmit} className="">
+            <div className="bg-white dark:bg-accent-dark border border-input overflow-hidden grid grid-cols-2 [&>*]:border-primary [&>*]:dark:border-dark">
                 {status === 'complete' && (
                     <div className="col-span-2">
                         <ImageDrop
@@ -707,13 +707,12 @@ export default function RoadmapForm({
                     id="title"
                     className="col-span-2 border-y"
                 />
-                <div className="col-span-2">
+                <div className="col-span-2 [&_textarea]:align-bottom">
                     <RichText
                         initialValue={initialValues.body}
                         setFieldValue={setFieldValue}
                         values={values}
                         maxLength={524288}
-                        label="Details"
                     />
                 </div>
                 {(status === 'in-progress' || status === 'under-consideration') && (
@@ -743,6 +742,7 @@ export default function RoadmapForm({
                                     onChange={(checked) => setFieldValue('milestone', checked)}
                                     label="Show on homepage"
                                     tooltip='Adds roadmap item to the "We ship weirdly fast" section on the homepage'
+                                    className="!justify-start"
                                 />
                             </div>
                         )}
