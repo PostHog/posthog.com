@@ -754,7 +754,7 @@ const Block = ({ title, children, url }) => {
     )
 }
 
-const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
+const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength }) => {
     return (
         <div className="bg-white dark:bg-accent-dark rounded-md border border-primary overflow-hidden">
             <RichText
@@ -763,6 +763,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
                 setFieldValue={setFieldValue}
                 bodyKey={bodyKey}
                 className="h-[400px]"
+                maxLength={maxLength}
             />
         </div>
     )
@@ -817,6 +818,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                               setFieldValue={setFieldValue}
                               bodyKey="readme"
                               initialValue={profile.readme}
+                              maxLength={10000}
                           />
                       ) : (
                           <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
