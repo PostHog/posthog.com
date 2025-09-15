@@ -76,7 +76,7 @@ It might be an intense week, but you're also going to solve so many real problem
 
 ### Responding to external PRs
 
-Another responsibility of the support hero is to serve as the first point of contact for code reviews on external (open-source) PRs that affect your team's product. Quick and thoughtful responses to community contributions are critical for maintaining PostHog's reputation as a good open-source citizen.
+When capacity allows, the support hero serves as the first point of contact for external (open-source) PRs that affect your team's product. While we want to be good open-source citizens, **customer support always takes priority** — if you're dealing with a heavy support load, it's acceptable for PR reviews to be delayed or handled more briefly.
 
 #### How external PRs are assigned
 
@@ -85,58 +85,67 @@ External PRs typically reach your team through one of two methods:
 - **CODEOWNERS automation**: If your team has CODEOWNERS configured, PRs modifying your team's files will automatically be assigned to your team
 - **Manual assignment**: For teams without CODEOWNERS set up, external PRs may be manually assigned to your team handle by other engineers who spot them
 
-#### Handling external PRs
+#### Best practices for handling external PRs
 
-When an external PR lands in your team's queue:
+These are guidelines to aim for when you have bandwidth after handling customer support. Adapt them based on your workload:
 
-1. **Initial triage (within 2 working days - although sooner is better)**
-   - Acknowledge the PR with a comment thanking the contributor
-   - Check if the PR passes our automated checks (Greptile feedback, tests, linting)
-   - If there are obvious blockers (failed tests, merge conflicts), politely ask the contributor to address them first
+##### Initial response (when possible)
 
-2. **Review approach**
-   - Be especially welcoming and constructive - remember that contributors are volunteering their time
-   - Provide clear, actionable feedback rather than vague suggestions
-   - If changes are needed, explain why and provide examples where helpful
-   - Consider the effort/reward tradeoff - some PRs may need more work than they're worth, and it's okay to politely decline with explanation
+- Acknowledge the PR with a thank you comment when you can
+- Quick check: Are there obvious blockers like failed tests or merge conflicts? If so, politely ask the contributor to address them first
+- If your support queue is overwhelming, it's okay to delay this or keep it brief
 
-3. **Communication expectations**
-   - Set clear expectations about what the contributor needs to do
-   - If you need time to test or investigate further, let them know when they can expect an update
-   - Remember that external contributors can't ping us directly like teammates can, so be proactive with updates
-   - If a PR will require significant back-and-forth, consider whether it's worth the time investment
+##### Review approach
 
-4. **Common blockers to address upfront**
-   - Ask contributors to respond to Greptile feedback before your review
-   - Require merge conflicts to be resolved before reviewing
-   - Ensure tests are passing (or understand why they're not)
-   - Check that the PR follows our existing code patterns and conventions
+- Be welcoming and constructive - contributors are volunteering their time
+- Provide actionable feedback when you have time for a thorough review
+- Consider the effort/reward tradeoff - some PRs may need more work than they're worth
+- It's better to politely decline quickly than to let a PR sit without feedback for weeks
 
-5. **When to escalate**
-   - If the PR touches critical infrastructure or security-sensitive code
-   - If you're unsure about the product implications of the change
-   - If the PR has been stale for more than a week despite your follow-ups
+##### Communication tips
 
-6. **Consider whether to reward with merch**
-    - a PR doesn't need to be merged to be reward-able
-    - folk took time to care about PostHog and merch is a great way for us to say thank you
+- Set realistic expectations based on your current workload
+- Remember that external contributors can't ping us directly like teammates can
+- If you know you won't get to a PR this week, a quick "Thanks for the contribution! Our team is currently focused on customer issues but we'll review this when we can" is better than silence
 
-#### Prioritization
+##### Common blockers to address upfront (when doing a full review)
 
-External PRs should be treated with the following priority during your support hero week:
+- Ask contributors to respond to Greptile feedback before your review
+- Require merge conflicts to be resolved before reviewing
+- Ensure tests are passing (or understand why they're not)
+- Check that the PR follows our existing code patterns and conventions
 
-- **High-value bug fixes**: Review within 1-2 days
-- **Small improvements**: Review within 2-3 days  
-- **Large features**: Initial triage within 2 days, full review within a week
-- **PRs requiring significant rework**: Provide feedback quickly so contributors can decide whether to continue
+##### When to escalate or defer
 
-Remember: Every external PR that goes stale reflects poorly on PostHog. It's better to politely decline a PR quickly than to let it languish without feedback.
+- If the PR touches critical infrastructure or security-sensitive code
+- If you're unsure about the product implications
+- If your support load is too high to give it proper attention
+- If a PR requires extensive back-and-forth that you don't have bandwidth for
+
+##### Consider rewarding with merch
+
+- A PR doesn't need to be merged to be reward-able
+- Folk took time to care about PostHog and merch is a great way to say thank you
+
+#### Managing expectations
+
+The reality is that support hero weeks vary significantly in intensity across teams and time periods. Some weeks you might have capacity to thoroughly review several PRs; other weeks, you might barely have time to acknowledge them. That's okay. The goal is to engage with external contributions in good faith within your available bandwidth, not to maintain a perfect response rate at the expense of customer support or your well-being.
+
+If you find yourself overwhelmed, remember:
+
+- Customer issues come first
+- A brief acknowledgment is better than nothing
+- It's acceptable to hand off complex PRs to the next support hero
+- Teams aren't expected to handle unlimited PRs
+
+The key principle: We want to be responsive to our open-source community when we can, but not at the cost of our primary support responsibilities or team sustainability.
 
 ## What do I do as a SDK Support Hero?
 
 Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
+
 - [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
 - New issues in the SDK repositories
   - [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
