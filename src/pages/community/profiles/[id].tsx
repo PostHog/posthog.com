@@ -308,6 +308,7 @@ const AvatarBlock = ({
     values: any
     errors: any
 }) => {
+    const { isModerator } = useUser()
     const inputRef = useRef<HTMLInputElement>(null)
     const [imageURL, setImageURL] = useState(values?.avatar)
 
@@ -345,7 +346,7 @@ const AvatarBlock = ({
                             type="file"
                         />
                     </div>
-                    {imageURL && (
+                    {imageURL && !isModerator && (
                         <button
                             onClick={() => setFieldValue('avatar', null)}
                             className="p-2 border-l border-b border-primary bg-primary"
