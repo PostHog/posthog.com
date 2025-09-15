@@ -47,7 +47,7 @@ const generateStableId = (baseId: string, ...parts: (string | number)[]): string
     return `${baseId}-${parts.join('-')}`
 }
 
-// Helper to render menu item content (icon + label)
+// Helper to render menu item content (icon + label + chevron)
 const MenuItemContent = (item: MenuItemType, forceIconIndent?: boolean) => {
     const iconContent = item.icon ? (
         <span className="mr-2 flex items-center">{item.icon}</span>
@@ -59,6 +59,9 @@ const MenuItemContent = (item: MenuItemType, forceIconIndent?: boolean) => {
         <>
             {iconContent}
             {item.label}
+            <div className={ShortcutClasses}>
+                <IconChevronRight className="size-4" />
+            </div>
         </>
     )
 }
@@ -172,24 +175,23 @@ const MenuItem: React.FC<{
             const subContentId = generateStableId(baseId, 'sub-content', menuIndex, itemIndex)
             return (
                 <RadixMenubar.Sub key={itemId}>
-                    <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
-                        {item.link ? (
-                            <Link
-                                to={item.link}
-                                state={{ newWindow: true }}
-                                externalNoIcon={item.external}
-                                className="flex items-center flex-1 no-underline text-primary"
-                                onClick={(e) => e.stopPropagation()}
-                            >
+                    {item.link ? (
+                        <Link
+                            to={item.link}
+                            state={{ newWindow: true }}
+                            externalNoIcon={item.external}
+                            className="no-underline"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
                                 {MenuItemContent(item, forceIconIndent)}
-                            </Link>
-                        ) : (
-                            MenuItemContent(item, forceIconIndent)
-                        )}
-                        <div className={ShortcutClasses}>
-                            <IconChevronRight className="size-4" />
-                        </div>
-                    </RadixMenubar.SubTrigger>
+                            </RadixMenubar.SubTrigger>
+                        </Link>
+                    ) : (
+                        <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
+                            {MenuItemContent(item, forceIconIndent)}
+                        </RadixMenubar.SubTrigger>
+                    )}
                     <RadixMenubar.Portal>
                         <RadixMenubar.SubContent
                             className={ContentClasses}
