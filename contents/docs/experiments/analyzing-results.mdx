@@ -21,9 +21,7 @@ export const FunnelBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/u
 
 After your experiment runs and collects data, you'll want to analyze the results to determine if your changes had a statistically significant impact. This guide shows you how to understand and interpret your experiment results in PostHog.
 
-## Understanding the results page
-
-### Exposures panel
+## Understanding exposures
 
 The exposures panel shows you how many users have been exposed to each variant of your experiment:
 
@@ -43,7 +41,7 @@ The exposure numbers help you verify that:
 2. The split between variants matches your expected allocation
 3. You have sufficient sample size for meaningful results
 
-### Metric results and significance
+## Metric results and determining significance
 
 For each metric you're tracking, PostHog displays a delta chart showing the performance of each variant compared to the control:
 
@@ -54,16 +52,18 @@ For each metric you're tracking, PostHog displays a delta chart showing the perf
     classes="rounded"
 />
 
-## How to determine if a variant is significant
+### How to determine if a variant is significant
 
 The most important question when analyzing results is: **"Is my variant statistically significant?"**
 
 Look for these clear visual indicators in the delta chart:
 
 1. **Color-coded deltas**: When a variant achieves statistical significance:
-   - **Green with ↑ arrow**: The variant is winning (positive significant change)
-   - **Red with ↓ arrow**: The variant is losing (negative significant change)
+   - **Green**: The variant is winning (achieving the desired change)
+   - **Red**: The variant is losing (moving opposite to the desired direction)
    - **No color**: The result is not statistically significant
+   
+   When significant, an arrow (↑ or ↓) indicates whether the metric increased or decreased
 
 2. **Confidence/Credible intervals**: The horizontal bars show the 95% confidence interval (frequentist) or credible interval (Bayesian):
    - If the interval doesn't cross zero, the result is statistically significant
@@ -74,7 +74,6 @@ Look for these clear visual indicators in the delta chart:
 <ProductScreenshot
     imageLight={DeltaChartHoverLight} 
     imageDark={DeltaChartHoverDark}
-    classes="max-w-40"
     alt="Detailed statistics shown when hovering over a variant" 
     classes="rounded"
 />
@@ -111,9 +110,9 @@ It's common to see some metrics improve while others decline. When this happens:
    - Is a 5% increase in conversion worth a 2% decrease in average order value?
    - Does improved engagement justify slightly lower retention?
 3. **Dig deeper with analytics**:
-   - Break down results by user segments to understand who benefits and who doesn't
-   - Use session replays to see how users interact differently with each variant
-   - Create cohorts of users from each variant for further analysis
+   - Break down results in [Product analytics](/docs/product-analytics) by user segments to understand who benefits and who doesn't
+   - Use [Session replays](/docs/session-replay) to see how users interact differently with each variant
+   - Create [Cohorts](/docs/data/cohorts) of users from each variant for further analysis
 4. **Consider the user journey**: Sometimes negative changes in one metric lead to positive downstream effects
 
 ### No significant results
