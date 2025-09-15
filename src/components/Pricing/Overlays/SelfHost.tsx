@@ -89,7 +89,7 @@ export default function SelfHost({ setOpen, open }: { setOpen: (open: boolean) =
                         return (
                             <li
                                 key={feature.title}
-                                className="flex items-start space-x-2 text-gray-accent-light border-t first:border-t-0 border-dashed border-gray-accent mt-4 pt-4 first:mt-0 first:pt-0"
+                                className="flex items-start space-x-2 text-gray-accent-light border-t first:border-t-0 border-dashed border-primary-accent mt-4 pt-4 first:mt-0 first:pt-0"
                             >
                                 <Check className="w-[20px] flex-shrink-0" />
                                 <div>

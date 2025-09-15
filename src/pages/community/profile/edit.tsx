@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, ChangeEventHandler } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
@@ -10,10 +9,14 @@ import { communityMenu } from '../../../navs'
 import Link from 'components/Link'
 import Switch from 'components/Toggle'
 import { CallToAction } from 'components/CallToAction'
-import { useToast } from 'hooks/toast'
+import { useToast } from '../../../context/Toast'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import { flattenStrapiResponse } from '../../../utils'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { profileBackgrounds } from '../../../data/profileBackgrounds'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { OSInput, OSTextarea } from 'components/OSForm'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -26,7 +29,7 @@ const HeightField = ({ values, setFieldValue }) => {
     return (
         <div className="max-w-[170px]">
             <div className="flex space-x-2 items-end">
-                <Input
+                <OSInput
                     onChange={(e) => {
                         const value = Number(e.target.value)
                         setHeight(value)
@@ -37,6 +40,8 @@ const HeightField = ({ values, setFieldValue }) => {
                     name="height"
                     placeholder="Height"
                     label="Height"
+                    direction="column"
+                    size="md"
                 />
                 <div className="flex-grow flex-shrink-0 w-[85px]">
                     <Toggle
@@ -70,7 +75,7 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
                     <span>{label}</span>
                 </label>
             )}
-            <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
+            <div className="grid grid-cols-2 rounded-md bg-accent relative text-center overflow-hidden mt-1 text-base border border-input">
                 <span
                     className={`bg-red dark:bg-yellow w-1/2 h-full absolute transition-all left-0 ${
                         checked === null ? 'hidden' : checked ? '' : 'translate-x-full'
@@ -112,9 +117,9 @@ function Avatar({ values, setFieldValue, error }) {
             className={`relative w-full aspect-square rounded-full flex justify-center items-center border-[1.5px] ${
                 favoriteColor
                     ? imageURL
-                        ? `bg-${favoriteColor} border-gray-accent-light dark:border-gray-accent-dark`
+                        ? `bg-${favoriteColor} border-primary dark:`
                         : `border-${favoriteColor} dark:border-${favoriteColor}`
-                    : `border-gray-accent-light dark:border-gray-accent-dark`
+                    : `border-primary dark:`
             }  text-black/50 dark:text-white/50 overflow-hidden group ${error ? '' : '-mb-2'}`}
         >
             {imageURL ? (
@@ -150,24 +155,6 @@ function Avatar({ values, setFieldValue, error }) {
                     />
                 </div>
             </div>
-        </div>
-    )
-}
-
-const Input = ({ type, name, placeholder, label, value, onChange, error, className = '' }) => {
-    return (
-        <div>
-            <label className="font-bold block">{label}</label>
-            <input
-                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent dark:bg-accent-dark border ${
-                    error ? 'border-red' : 'border-border dark:border-dark'
-                } ${className}`}
-                type={type || 'text'}
-                name={name}
-                placeholder={placeholder || label}
-                value={value}
-                onChange={onChange}
-            />
         </div>
     )
 }
@@ -215,13 +202,15 @@ const formSections = [
                 component: ({ values, setFieldValue }) => {
                     const [enabled, setEnabled] = useState(!!values.pronouns)
                     return enabled ? (
-                        <Input
+                        <OSInput
                             name="pronouns"
                             placeholder="Pronouns"
                             type="text"
                             label="Pronouns"
                             onChange={(e) => setFieldValue('pronouns', e.target.value)}
                             value={values['pronouns']}
+                            direction="column"
+                            size="md"
                         />
                     ) : (
                         <button
@@ -275,27 +264,85 @@ const formSections = [
         },
     },
     {
+        title: 'Profile background',
+        fields: {
+            backgroundImage: {
+                label: 'Choose a background for your profile',
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    const currentBg = values.backgroundImage
+                    return (
+                        <>
+                            <label className="font-bold">Choose a background for your profile</label>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
+                                {profileBackgrounds.map((bg) => {
+                                    const isSelected = currentBg?.id === bg.id
+                                    return (
+                                        <button
+                                            key={bg.id}
+                                            type="button"
+                                            onClick={() =>
+                                                setFieldValue('backgroundImage', {
+                                                    id: bg.id,
+                                                    url: bg.url,
+                                                    backgroundSize: bg.backgroundSize,
+                                                    backgroundRepeat: bg.backgroundRepeat,
+                                                    backgroundPosition: bg.backgroundPosition,
+                                                })
+                                            }
+                                            className={`relative overflow-hidden rounded-md border-2 ${
+                                                isSelected ? 'border-red dark:border-yellow' : 'border-input'
+                                            } transition-all hover:scale-105`}
+                                        >
+                                            <div
+                                                className="aspect-video w-full"
+                                                style={{
+                                                    backgroundImage: `url(${bg.url})`,
+                                                    backgroundSize: bg.backgroundSize || 'auto',
+                                                    backgroundRepeat: bg.backgroundRepeat || 'no-repeat',
+                                                    backgroundPosition: bg.backgroundPosition || 'center',
+                                                }}
+                                            />
+                                            <span className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs p-1">
+                                                {bg.name}
+                                            </span>
+                                        </button>
+                                    )
+                                })}
+                                {currentBg && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setFieldValue('backgroundImage', null)}
+                                        className="relative overflow-hidden rounded-md border-2 border-input transition-all hover:scale-105 flex items-center justify-center aspect-video bg-accent"
+                                    >
+                                        <span className="text-sm font-bold">Remove background</span>
+                                    </button>
+                                )}
+                            </div>
+                        </>
+                    )
+                },
+            },
+        },
+    },
+    {
         title: 'About you',
         fields: {
             biography: {
                 component: ({ values, setFieldValue, error }) => (
-                    <>
-                        <div className="flex justify-between items-center">
-                            <label className="font-bold">Bio</label>
-                            <p className="m-0 opacity-60 text-sm">Supports Markdown</p>
-                        </div>
-                        <TextareaAutosize
-                            value={values.biography}
-                            onChange={(e) => setFieldValue('biography', e.target.value)}
-                            minRows={6}
-                            rows={6}
-                            name="biography"
-                            placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
-                                error ? 'border-red' : 'border-border dark:border-dark'
-                            }`}
-                        />
-                    </>
+                    <OSTextarea
+                        value={values.biography}
+                        onChange={(e) => setFieldValue('biography', e.target.value)}
+                        rows={6}
+                        name="biography"
+                        label="Bio"
+                        placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
+                        description="Supports Markdown"
+                        direction="column"
+                        size="md"
+                        touched={!!error}
+                        error={error}
+                    />
                 ),
                 className: 'w-full',
             },
@@ -341,13 +388,16 @@ const formSections = [
                 component: ({ values, setFieldValue }) => {
                     return (
                         <div className="grid sm:flex justify-between">
-                            <Input
+                            <OSInput
                                 label="Country code (2 digit ISO)"
                                 name="country"
                                 onChange={(e) => setFieldValue('country', e.target.value)}
                                 placeholder="US"
                                 type="text"
                                 value={values['country']}
+                                width="auto"
+                                direction="column"
+                                size="md"
                                 className="max-w-[72px]"
                             />
                             <Link
@@ -372,9 +422,9 @@ const formSections = [
                     return (
                         <div className="flex space-x-2 space-between w-full">
                             <div className="flex-grow">
-                                <p className="font-bold m-0">Show an AMA</p>
+                                <p className="font-bold m-0">Show comments</p>
                                 <p className="m-0">
-                                    Let visitors ask you questions. You'll get question notifications via email.
+                                    Let visitors comment on your profile. You'll get comment notifications via email.
                                 </p>
                             </div>
                             <Switch
@@ -393,23 +443,19 @@ const formSections = [
         fields: {
             readme: {
                 component: ({ values, setFieldValue, error }) => (
-                    <>
-                        <div className="flex justify-between items-center">
-                            <label className="font-bold">How can we best work with you?</label>
-                            <p className="m-0 opacity-60 text-sm">Supports Markdown</p>
-                        </div>
-                        <TextareaAutosize
-                            value={values.readme}
-                            onChange={(e) => setFieldValue('readme', e.target.value)}
-                            minRows={6}
-                            rows={6}
-                            name="readme"
-                            placeholder="I typically work best when..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
-                                error ? 'border-red' : 'border-border dark:border-dark'
-                            }`}
-                        />
-                    </>
+                    <OSTextarea
+                        value={values.readme}
+                        onChange={(e) => setFieldValue('readme', e.target.value)}
+                        rows={6}
+                        name="readme"
+                        label="How can we best work with you?"
+                        placeholder="I typically work best when..."
+                        description="Supports Markdown"
+                        direction="column"
+                        size="md"
+                        touched={!!error}
+                        error={error}
+                    />
                 ),
                 className: 'w-full',
             },
@@ -505,7 +551,7 @@ function EditProfile({ profile, mutate }) {
             throw error
         } finally {
             setSubmitting(false)
-            addToast({ message: 'Profile updated!' })
+            addToast({ description: 'Profile updated!' })
         }
     }
 
@@ -521,52 +567,70 @@ function EditProfile({ profile, mutate }) {
     })
 
     return (
-        <Layout parent={communityMenu}>
-            <SEO noindex title="Edit Profile - PostHog" />
-            <section className="max-w-2xl mx-auto py-12 px-4">
-                <form className="m-0 space-y-6" onSubmit={handleSubmit}>
-                    {formSections.map((section, index) => {
-                        if (section.modOnly && user?.role?.type !== 'moderator') return null
-                        return (
-                            <div key={index}>
-                                <h2>{section.title}</h2>
-                                {section.subtitle && <p className="opacity-70 -mt-4 mb-4">{section.subtitle}</p>}
-                                <div className="flex flex-wrap items-center">
-                                    {Object.keys(section.fields).map((key) => {
-                                        const field = section.fields[key]
-                                        const error = errors[key]
-                                        return (
-                                            <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
-                                                {(field.component &&
-                                                    field.component({ values, setFieldValue, error })) || (
-                                                    <Input
-                                                        type={field.type}
-                                                        name={key}
-                                                        placeholder={field.placeholder}
-                                                        label={field.label}
-                                                        value={values[key]}
-                                                        onChange={handleChange}
-                                                        error={!!error}
-                                                    />
-                                                )}
-                                                {error && (
-                                                    <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
-                                                        {error}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
+        <ScrollArea>
+            <div
+                data-scheme="primary"
+                className="bg-primary min-h-full"
+                style={
+                    values.backgroundImage
+                        ? {
+                              backgroundImage: `url(${values.backgroundImage.url})`,
+                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                          }
+                        : undefined
+                }
+            >
+                <SEO noindex title="Edit profile - PostHog" />
+                <section className="max-w-2xl mx-auto py-12 px-4 bg-primary/90 backdrop-blur-sm rounded-lg">
+                    <form className="m-0 space-y-6" onSubmit={handleSubmit}>
+                        {formSections.map((section, index) => {
+                            if (section.modOnly && user?.role?.type !== 'moderator') return null
+                            return (
+                                <div key={index}>
+                                    <h2>{section.title}</h2>
+                                    {section.subtitle && <p className="opacity-70 mb-4">{section.subtitle}</p>}
+                                    <div className="flex flex-wrap items-center">
+                                        {Object.keys(section.fields).map((key) => {
+                                            const field = section.fields[key]
+                                            const error = errors[key]
+                                            return (
+                                                <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
+                                                    {(field.component &&
+                                                        field.component({ values, setFieldValue, error })) || (
+                                                        <OSInput
+                                                            type={field.type}
+                                                            name={key}
+                                                            placeholder={field.placeholder}
+                                                            label={field.label}
+                                                            value={values[key]}
+                                                            onChange={handleChange}
+                                                            touched={!!error}
+                                                            error={error}
+                                                            direction="column"
+                                                            size="md"
+                                                        />
+                                                    )}
+                                                    {error && (
+                                                        <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
+                                                            {error}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                    <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
-                        Update
-                    </CallToAction>
-                </form>
-            </section>
-        </Layout>
+                            )
+                        })}
+                        <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
+                            Update
+                        </CallToAction>
+                    </form>
+                </section>
+            </div>
+        </ScrollArea>
     )
 }
 
@@ -598,5 +662,9 @@ export default function EditProfilePage({ location }) {
         getProfile()
     }, [])
 
-    return ready ? <EditProfile profile={profile} mutate={getProfile} /> : null
+    return ready ? (
+        <EditProfile profile={profile} mutate={getProfile} />
+    ) : (
+        <div data-scheme="secondary" className="h-full bg-primary" />
+    )
 }

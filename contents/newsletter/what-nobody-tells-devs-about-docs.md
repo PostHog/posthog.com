@@ -2,16 +2,16 @@
 title: What nobody tells developers about documentation
 date: 2025-04-17
 author:
- - ian-vanagas
+    - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/image_2_4ece7bbd84.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/image_2_4ece7bbd84.png
 featuredImageType: full
 tags:
-  - Engineering
+    - Engineering
 crosspost:
-  - Product engineers
-  - Founders
-  - Blog
+    - Product engineers
+    - Founders
+    - Blog
 ---
 
 Developers have a lot of misconceptions about docs:
@@ -80,17 +80,17 @@ Docs readers are trying to get what they need and get back to work. Their goal c
 
 You want to help them do this as fast as possible. Here’s what we’ve found most important for accomplishing this:
 
-- **Put the most important information first.** Get to the point. No overly long intros.
+-   **Put the most important information first.** Get to the point. No overly long intros.
 
-- **Break up long sections** with subheadings for better scanability (like we do in this newsletter).
+-   **Break up long sections** with subheadings for better scanability (like we do in this newsletter).
 
-- **Use short paragraphs** (3-4 lines maximum). Break up hard to read or overly long sentences. Avoid walls of text.
+-   **Use short paragraphs** (3-4 lines maximum). Break up hard to read or overly long sentences. Avoid walls of text.
 
-- **Use bullet points and numbered lists** as these help readers know where they are and create a sense of progress.
+-   **Use bullet points and numbered lists** as these help readers know where they are and create a sense of progress.
 
-- **Hide less important information** behind `<details>` tags and let readers expand it if they want. Our metrics show these create higher engagement, especially for optional points that we tag as “recommended”.
+-   **Hide less important information** behind `<details>` tags and let readers expand it if they want. Our metrics show these create higher engagement, especially for optional points that we tag as “recommended”.
 
-- **Add functional code samples**, annotated screenshots, graphics, and even memes. Visuals help keep readers’ attention and provide an alternative way to explain a concept.
+-   **Add functional code samples**, annotated screenshots, graphics, and even memes. Visuals help keep readers’ attention and provide an alternative way to explain a concept.
 
 When done well, docs don't look or read like a book. They have the variation and skimmability that helps readers find what they need fast.
 
@@ -122,11 +122,11 @@ You don't even need to scroll to find the first one.
 
 Examples are a great way to make sure your docs are practical. Always try to show rather than tell. For example:
 
-- Show a JSON structure of a data type rather than giving a summary of it.
+-   Show a JSON structure of a data type rather than giving a summary of it.
 
-- Show a screenshot or video of your UI rather than explaining its sections and buttons.
+-   Show a screenshot or video of your UI rather than explaining its sections and buttons.
 
-- Show a diagram of a workflow rather than walking through its steps.
+-   Show a diagram of a workflow rather than walking through its steps.
 
 ### When is the right time to explain abstractions?
 
@@ -146,7 +146,7 @@ This means ideas that apply to building a great product also apply to writing gr
 
 2. **Prioritize what really matters.** Use [analytics](/web-analytics) to see what users are actually reading. Use [session replays](/session-replay) to see where they are getting stuck. Constantly evaluate what docs are most important to work on, so you maximize your impact.
 
-3. **Invest in design and development.** The structure and navigability of your docs helps people find what they need. We're lucky to have a [Brand & Vibes](/teams/brand-vibes) to help us with this. They make the pages and components within those pages look good and work towards our goal.
+3. **Invest in design and development.** The structure and navigability of your docs helps people find what they need. We're lucky to have a [Brand & Vibes](/teams/brand) to help us with this. They make the pages and components within those pages look good and work towards our goal.
 
 4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/content/docs) of the docs team members are responsible for.
 
@@ -158,15 +158,14 @@ This can seem like a chore, but remember: docs are where many customers fall in 
 
 ## Great docs to take inspiration from
 
-- [Stripe](https://docs.stripe.com/?utm_source=posthog-newsletter) for its interactive elements, focus on examples, and connection between docs and product.
+-   [Stripe](https://docs.stripe.com/?utm_source=posthog-newsletter) for its interactive elements, focus on examples, and connection between docs and product.
 
-- [Tailwind](https://tailwindcss.com/docs/?utm_source=posthog-newsletter) for its ability to layer progressively complex concepts and its huge number of examples for every class.
+-   [Tailwind](https://tailwindcss.com/docs/?utm_source=posthog-newsletter) for its ability to layer progressively complex concepts and its huge number of examples for every class.
 
-- [Astro](https://docs.astro.build/en/getting-started/?utm_source=posthog-newsletter) for its step-by-step installation docs and getting started guide.
+-   [Astro](https://docs.astro.build/en/getting-started/?utm_source=posthog-newsletter) for its step-by-step installation docs and getting started guide.
 
-- [HTMX](https://htmx.org/docs/?utm_source=posthog-newsletter) for its single page skim- and searchability
+-   [HTMX](https://htmx.org/docs/?utm_source=posthog-newsletter) for its single page skim- and searchability
 
-- [ClickHouse](https://clickhouse.com/docs/?utm_source=posthog-newsletter) for its comprehensive reference docs and function explanations.
+-   [ClickHouse](https://clickhouse.com/docs/?utm_source=posthog-newsletter) for its comprehensive reference docs and function explanations.
 
 <NewsletterForm />
-

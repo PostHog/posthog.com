@@ -15,13 +15,13 @@
 
 /* category results */
 ul.whr-items {
-    @apply list-none p-0 m-0 border-gray-accent-light border border-dashed mt-4 mb-6;
+    @apply list-none p-0 m-0 border-primary border border-dashed mt-4 mb-6;
     @apply block !important; /* disable toggle */
 }
 
 li.whr-item {
     &:not(:first-child) {
-        @apply border-gray-accent-light border-t border-dashed;
+        @apply border-primary border-t border-dashed;
     }
 }
 

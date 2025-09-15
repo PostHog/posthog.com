@@ -38,6 +38,15 @@ export function getProductMetafield(product: ShopifyProduct, key: string): Metaf
     return metafield ? metafield.value : undefined
 }
 
+export function getProductMetafieldByNamespace(
+    product: ShopifyProduct,
+    namespace: string,
+    key: string
+): MetafieldValue | undefined {
+    const metafield = product.metafields?.find((m) => m.namespace === namespace && m.key === key)
+    return metafield ? metafield.value : undefined
+}
+
 export function getProductImages(media: ShopifyMediaItem[]): ShopifyMediaImage[] | null {
     if (!media || !Array.isArray(media)) return null
     return media
@@ -88,26 +97,39 @@ const validFormats = new Set([`jpg`, `jpeg`, `png`, `webp`, `auto`])
 
 export function urlBuilder({ width, height, baseUrl, format }: IUrlBuilderArgs<unknown>): string {
     if (!validFormats.has(format)) {
-        console.warn(`${format} is not a valid format. Valid formats are: ${[...validFormats].join(`, `)}`)
+        console.warn(`${format} is not a valid format. Valid formats are: ${Array.from(validFormats).join(`, `)}`)
         format = `auto`
     }
 
-    let [basename, version] = baseUrl.split(`?`)
-
+    let basename,
+        ext = '',
+        suffix = ''
+    const [base, version] = baseUrl.split(`?`)
+    basename = base
     const dot = basename.lastIndexOf(`.`)
-    let ext = ``
     if (dot !== -1) {
         ext = basename.slice(dot + 1)
         basename = basename.slice(0, dot)
     }
-    let suffix = ``
     if (format === ext || format === `auto`) {
         suffix = `.${ext}`
     } else {
         suffix = `.${ext}.${format}`
     }
-
     return `${basename}_${width}x${height}_crop_center${suffix}?${version}`
+}
+
+export function calculateAspectRatioDimensions(image: any, targetWidth = 500): { width: number; height: number } {
+    const { width: originalWidth, height: originalHeight } = image
+
+    if (!originalWidth || !originalHeight) {
+        return { width: targetWidth, height: targetWidth }
+    }
+
+    const aspectRatio = originalHeight / originalWidth
+    const proportionalHeight = Math.round(targetWidth * aspectRatio)
+
+    return { width: targetWidth, height: proportionalHeight }
 }
 
 export function getShopifyImage({ image, ...args }: any): IGatsbyImageData {
@@ -121,4 +143,11 @@ export function getShopifyImage({ image, ...args }: any): IGatsbyImageData {
         urlBuilder,
         formats: [`auto`],
     })
+}
+
+export function getDisplayTitle(product: ShopifyProduct): string {
+    const productName = getProductMetafield(product, 'name')
+    const productExtension = getProductMetafield(product, 'extension')
+
+    return productName && productExtension ? `${productName}.${productExtension}` : product.title
 }

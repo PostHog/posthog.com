@@ -2,9 +2,9 @@
 title: How ElevenLabs uses every tool PostHog has to launch new features
 customer: ElevenLabs
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711377704/posthog.com/contents/images/customers/elevenlabs/ElevenLabs_logo.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_light_d0ac4d4c6d.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711377739/posthog.com/contents/images/customers/elevenlabs/ElevenLabs_logo-dark.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_dark_0cf1dca507.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/eleven_labs_b5853d00b7.png
 industries:

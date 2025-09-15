@@ -11,11 +11,14 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const PricingPhilosophy = (): JSX.Element => {
     return (
-        <Layout parent={pricingMenu}>
-            <section className="bg-white dark:bg-accent-dark text-primary dark:text-primary-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto my-12 w-[calc(100%_-_3rem)] md:w-full max-w-3xl border border-transparent dark:border-dark">
+        <>
+            <section
+                id="philosophy"
+                className="bg-light dark:bg-dark text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 md:mx-auto mt-12 mb-20 w-[calc(100%_-_3rem)] @xl:w-full max-w-3xl border border-primary"
+            >
                 <SectionHeader>
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
-                    <h3>Our pricing is designed to make you happy</h3>
+                    <h3 className="text-xl">Our pricing is designed to make you happy</h3>
                 </SectionHeader>
 
                 <p className="mt-4">Here's what you should know about our pricing:</p>
@@ -38,8 +41,13 @@ const PricingPhilosophy = (): JSX.Element => {
                     </li>
                     <li>
                         The company in general has significant revenue, over 60,000 customers, runs{' '}
-                        <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">default alive</Link>,
-                        and aims to IPO rather than sell. This means{' '}
+                        <Link
+                            href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2"
+                            state={{ newWindow: true }}
+                        >
+                            default alive
+                        </Link>
+                        , and aims to IPO rather than sell. This means{' '}
                         <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course we aren’t
                         perfect, but this goes a long way to avoiding the average dumb vc-backed company stuff in
                         general - like running out of money or selling to a lame bigger company who just kills off our
@@ -70,43 +78,61 @@ const PricingPhilosophy = (): JSX.Element => {
                 </ul>
                 <p className="mb-4">If this makes you happy – like most people - just start here:</p>
                 <p>
-                    <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+                    <span className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
                         <PlanCTA />
                         <em className="opacity-75 text-sm">No credit card required</em>
-                    </div>
+                    </span>
                 </p>
                 <p>
-                    Or if you need more info, <Link href="/pricing#faq">read our FAQ</Link>,{' '}
-                    <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
-                    <Link href="/talk-to-a-human">talk to a human</Link>.
+                    Or if you need more info,{' '}
+                    <a
+                        href="#faq"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            const faq = document.getElementById('faq')
+                            if (faq) {
+                                faq.scrollIntoView({ behavior: 'smooth' })
+                            }
+                            window.history.replaceState(null, '', '#faq')
+                        }}
+                    >
+                        read our FAQ
+                    </a>
+                    ,{' '}
+                    <Link href="/questions/topic/pricing" state={{ newWindow: true }}>
+                        ask a question
+                    </Link>
+                    , or{' '}
+                    <Link href="/talk-to-a-human" state={{ newWindow: true }}>
+                        talk to a human
+                    </Link>
+                    .
                 </p>
 
                 <div className="flex gap-2 items-center">
-                    <Link
-                        href="/community/profiles/27732"
-                        className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
-                    >
+                    <Link href="/community/profiles/27732" state={{ newWindow: true }}>
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             quality={100}
                             alt="James Hawkins, CEO, Co-founder"
                             placeholder="none"
                             objectFit="contain"
-                            className="bg-yellow rounded-full"
+                            className="bg-yellow rounded-full overflow-hidden size-12 border border-primary p-0.5 dark:bg-dark relative"
+                            imgClassName="absolute inset-0 object-cover"
                         />
                     </Link>
-                    <p className="leading-tight mb-0">
-                        <Link href="/community/profiles/27732" className="flex">
+                    <p className="leading-tight my-0">
+                        <Link href="/community/profiles/27732" state={{ newWindow: true }} className="flex">
                             <strong>James Hawkins</strong>
                         </Link>
-                        <span className="text-sm opacity-70">Co-founder</span>
+                        <span className="text-sm text-secondary">Co-founder</span>
                     </p>
                 </div>
-                <p className="pl-14 text-sm opacity-75 italic">
+                <p className="pl-14 mt-0 text-sm text-muted italic">
                     When James isn't thinking about how to cut prices (again), you'll likely find him changing a diaper.
                 </p>
             </section>
-        </Layout>
+        </>
     )
 }
 

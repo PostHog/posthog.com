@@ -11,6 +11,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
     {
@@ -117,7 +118,7 @@ export const Content = ({ quickLinks = false }) => {
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
                     width="[calc(100%_+_3px)]"
                 >
                     Explore guides
@@ -152,38 +153,36 @@ export const Content = ({ quickLinks = false }) => {
 
 const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Feature flags - Docs - PostHog" />
 
-            <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Feature flags"
-                    description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
-                    buttonText="Create your first feature flag"
-                    buttonLink="/docs/feature-flags/installation"
-                    imageColumnClasses="max-w-96 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
-                    imageClasses=""
-                />
+            <Intro
+                subheader="Getting started"
+                title="Feature flags"
+                description="Toggle features for cohorts or individuals to test the impact before rolling out to everyone."
+                buttonText="Create your first feature flag"
+                buttonLink="/docs/feature-flags/installation"
+                imageColumnClasses="max-w-96 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
+                imageClasses=""
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'Why is there a delay in loading flags?',
-                        'How do I create a multivariate flag?',
-                        'Can I override a flag?',
-                    ]}
-                />
+            <AskMax
+                quickQuestions={[
+                    'Why is there a delay in loading flags?',
+                    'How do I create a multivariate flag?',
+                    'Can I override a flag?',
+                ]}
+            />
 
-                <Content />
+            <Content />
 
-                <div className="pt-8">
-                    <CallToAction to="/docs/feature-flags/manual" width="full">
-                        Visit the manual
-                    </CallToAction>
-                </div>
-            </PostLayout>
-        </Layout>
+            <div className="pt-8">
+                <CallToAction to="/docs/feature-flags/manual" width="full">
+                    Visit the manual
+                </CallToAction>
+            </div>
+        </ReaderView>
     )
 }
 

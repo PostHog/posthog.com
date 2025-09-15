@@ -1421,7 +1421,8 @@
         { "source": "/docs/cdp/taxonomy-standardizer", "destination": "/docs/cdp/transformations/taxonomy-plugin" },
         { "source": "/docs/cdp/downsampling", "destination": "/docs/cdp/transformations/downsampling-plugin" },
         { "source": "/docs/cdp/filter-out", "destination": "/docs/cdp/transformations/posthog-filter-out-plugin" },
-        { "source": "/docs/web-analytics/revenue-tracking", "destination": "/docs/web-analytics/revenue-analytics" },
+        { "source": "/docs/web-analytics/revenue-tracking", "destination": "/docs/revenue-analytics" },
+        { "source": "/docs/web-analytics/revenue-analytics", "destination": "/docs/revenue-analytics" },
         {
             "source": "/startups-alif",
             "destination": "/startups"
@@ -1473,6 +1474,10 @@
         {
             "source": "/teams/video",
             "destination": "/teams/content"
+        },
+        {
+            "source": "/customers/headshot-pro",
+            "destination": "/customers/headshotpro"
         },
         {
             "source": "/docs/api/user",
@@ -1583,8 +1588,20 @@
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
         },
         {
-            "source": "/docs/ai-engineering",
-            "destination": "/docs/llm-analytics"
+            "source": "/why",
+            "destination": "/about"
+        },
+        {
+            "source": "/services",
+            "destination": "/"
+        },
+        {
+            "source": "/platform-addons",
+            "destination": "/platform-packages"
+        },
+        {
+            "source": "/founder-lab",
+            "destination": "/startups"
         }
     ],
     "headers": [

@@ -197,4 +197,4 @@ Self-hosted billing is no longer supported except for legacy customers who were 
 
 ## Billing for data pipelines
 
-For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).
+For information about data pipeline pricing and billing, please visit our [pricing page](https://posthog.com/pricing).

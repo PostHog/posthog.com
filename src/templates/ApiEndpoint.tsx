@@ -19,6 +19,7 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import { docsMenu } from '../navs'
 import { CallToAction } from 'components/CallToAction'
+import ReaderView from 'components/ReaderView'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -55,10 +56,7 @@ function Endpoints({ paths }) {
                     {Object.entries(paths).map(([path, value]) => (
                         <React.Fragment key={value}>
                             {Object.keys(value).map((verb) => (
-                                <tr
-                                    key={verb}
-                                    className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0"
-                                >
+                                <tr key={verb} className="border-primary border-b first:border-t-0 last:border-b-0">
                                     <td>
                                         <code className={`method text-${mapVerbsColor[verb]}`}>
                                             {verb.toUpperCase()}
@@ -181,7 +179,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                         {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                             <div
                                                 type="link"
-                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-gray-accent hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-accent hover:bg-primary  hover:bg-accent-hover leading-[8px] text-black dark:text-white"
                                                 onClick={() => {
                                                     setOpenSubParams(
                                                         openSubParams.filter((item) => item !== param.schema.items.$ref)
@@ -203,7 +201,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                             <>
                                                 <div
                                                     type="link"
-                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-gray-accent-light dark:border-gray-accent-dark border-solid border hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-primary border hover:bg-primary hover:bg-accent-hover leading-[8px] text-black dark:text-white"
                                                     onClick={() =>
                                                         setOpenSubParams([...openSubParams, param.schema.items.$ref])
                                                     }
@@ -226,7 +224,7 @@ function Params({ params, objects, object, depth = 0 }) {
                             </div>
                             <div className="">
                                 <div>
-                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                    <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
                                         {param.schema.type}
                                     </span>
                                 </div>
@@ -263,7 +261,7 @@ function Params({ params, objects, object, depth = 0 }) {
                             <>
                                 {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                     <div>
-                                        <div className="params-wrapper bg-gray-accent-light dark:bg-gray-accent-dark rounded px-4 mr-2 my-1">
+                                        <div className="params-wrapper bg-accent rounded px-4 mr-2 my-1">
                                             <Params
                                                 objects={objects}
                                                 object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
@@ -327,7 +325,7 @@ function Security({ item }) {
 function RequestBody({ item, objects }) {
     const objectKey =
         item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
-        item.requestBody?.content?.['application/json']?.schema.items['$ref'].split('/').at(-1)
+        item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
 
@@ -614,144 +612,98 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
 
     return (
-        <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
+        <ReaderView>
             <SEO title={`${title} API Reference - PostHog`} />
-            <PostLayout
-                title={title}
-                questions={<CommunityQuestions />}
-                menu={menu}
-                tableOfContents={tableOfContents}
-                fullWidthContent={true}
-                hideSidebar
-                breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
-            >
-                <h2 className="!mt-0">{title}</h2>
-                <blockquote className="p-6 mb-4 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
-                    <p>
-                        For instructions on how to authenticate to use this endpoint, see{' '}
-                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
-                            API overview
-                        </a>
-                        .
-                    </p>
-                </blockquote>
 
-                {overviewNode?.body && (
-                    <>
-                        <div className="article-content mt-6">
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{overviewNode.body}</MDXRenderer>
-                            </MDXProvider>
-                        </div>
-                        <SectionDivider />
-                    </>
-                )}
+            <h2 className="!mt-0">{title}</h2>
+            <blockquote className="p-6 mb-4 rounded bg-accent">
+                <p>
+                    For instructions on how to authenticate to use this endpoint, see{' '}
+                    <a href="/docs/api/overview">API overview</a>.
+                </p>
+            </blockquote>
 
-                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+            {overviewNode?.body && (
+                <div className="article-content mt-6">
+                    <MDXProvider components={components}>
+                        <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                    </MDXProvider>
+                </div>
+            )}
 
-                <Divider />
+            <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
-                <Endpoints paths={paths} />
+            <Endpoints paths={paths} />
 
-                {items.map((item, index) => {
-                    item = item.operationSpec
-                    const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
+            {items.map((item) => {
+                item = item.operationSpec
+                const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
-                    return (
-                        <div key={item.operationId}>
-                            {index > 0 && <SectionDivider />}
-                            <div
-                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
-                                id={pathID(item.httpVerb, item.pathName)}
-                            >
-                                <div className="space-y-6">
-                                    <h2>{generateName(item)}</h2>
-                                    {mdxNode?.body && (
-                                        <>
-                                            <div className="article-content">
-                                                <MDXProvider components={components}>
-                                                    <MDXRenderer>{mdxNode.body}</MDXRenderer>
-                                                </MDXProvider>
+                return (
+                    <div className="mt-8" key={item.operationId}>
+                        <div
+                            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+                            id={pathID(item.httpVerb, item.pathName)}
+                        >
+                            <div className="space-y-6">
+                                <h2>{generateName(item)}</h2>
+                                {mdxNode?.body && (
+                                    <div className="article-content">
+                                        <MDXProvider components={components}>
+                                            <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                        </MDXProvider>
+                                    </div>
+                                )}
+                                <ReactMarkdown>
+                                    {!item.description || item.description === items[0].operationSpec?.description
+                                        ? pathDescription(item)
+                                        : item.description}
+                                </ReactMarkdown>
+                                <Security item={item} objects={objects} />
+                                <Parameters item={item} objects={objects} />
+
+                                <div>
+                                    <h4>Response</h4>
+                                    {Object.keys(item.responses).map((statusCode) => {
+                                        const response = item.responses[statusCode]
+                                        return (
+                                            <div key={statusCode} className="mb-4">
+                                                <h5 className="text-sm font-semibold mb-2">
+                                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                        Status {statusCode}
+                                                    </span>{' '}
+                                                    {response.description}
+                                                </h5>
+                                                <ResponseExample
+                                                    item={item}
+                                                    objects={objects}
+                                                    objectKey={
+                                                        response.content?.['application/json']?.schema['$ref']
+                                                            ?.split('/')
+                                                            .at(-1) ||
+                                                        response.content?.['application/json']?.schema.items?.['$ref']
+                                                            ?.split('/')
+                                                            .at(-1)
+                                                    }
+                                                    exampleLanguage={exampleLanguage}
+                                                    setExampleLanguage={setExampleLanguage}
+                                                />
                                             </div>
-                                            <Divider />
-                                        </>
-                                    )}
-                                    <ReactMarkdown>
-                                        {!item.description || item.description === items[0].operationSpec?.description
-                                            ? pathDescription(item)
-                                            : item.description}
-                                    </ReactMarkdown>
-
-                                    <Security item={item} objects={objects} />
-                                    {item.security?.[0]?.['PersonalAPIKeyAuth']?.length && <Divider />}
-
-                                    <Parameters item={item} objects={objects} />
-                                    {item.parameters?.filter((param) => param.in === 'path' || param.in === 'query')
-                                        ?.length > 0 && <Divider />}
-
-                                    <RequestBody item={item} objects={objects} />
-                                    {item.requestBody && <Divider />}
-
-                                    <ResponseBody item={item} objects={objects} />
-                                </div>
-                                <div className="lg:sticky top-[108px] space-y-6">
-                                    <div>
-                                        <h4>Request</h4>
-                                        <RequestExample
-                                            name={name}
-                                            item={item}
-                                            objects={objects}
-                                            exampleLanguage={exampleLanguage}
-                                            setExampleLanguage={setExampleLanguage}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <h4>Response</h4>
-                                        {Object.keys(item.responses).map((statusCode) => {
-                                            const response = item.responses[statusCode]
-                                            return (
-                                                <div key={statusCode} className="mb-4">
-                                                    <h5 className="text-sm font-semibold mb-2">
-                                                        <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                            Status {statusCode}
-                                                        </span>{' '}
-                                                        {response.description}
-                                                    </h5>
-                                                    <ResponseExample
-                                                        item={item}
-                                                        objects={objects}
-                                                        objectKey={
-                                                            response.content?.['application/json']?.schema['$ref']
-                                                                ?.split('/')
-                                                                .at(-1) ||
-                                                            response.content?.['application/json']?.schema.items['$ref']
-                                                                ?.split('/')
-                                                                .at(-1)
-                                                        }
-                                                        exampleLanguage={exampleLanguage}
-                                                        setExampleLanguage={setExampleLanguage}
-                                                    />
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>
-                    )
-                })}
+                    </div>
+                )
+            })}
 
-                {nextURL && (
-                    <>
-                        <SectionDivider />
-                        <CallToAction className="mt-8" to={nextURL}>
-                            Next page →
-                        </CallToAction>
-                    </>
-                )}
-            </PostLayout>
-        </Layout>
+            {nextURL && (
+                <CallToAction className="mt-8" to={nextURL}>
+                    Next page →
+                </CallToAction>
+            )}
+        </ReaderView>
     )
 }
 

@@ -1,0 +1,100 @@
+---
+title: Upload source maps with GitHub Actions
+showStepsToc: true
+---
+
+<Steps>
+
+<Step title="Prerequisites" badge="required">
+
+Uploading source maps with GitHub Actions requires your build to have already generated source maps. This action does not build your project, it only injects source map metadata into the built files and uploads them to PostHog. Make sure to run your production build first (for example, `npm run build`).
+
+</Step>
+
+<Step title="Use the GitHub action" badge="required">
+
+Add a workflow step to run the PostHog upload action after your build:
+
+```yaml
+name: Upload source maps to PostHog
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build_and_upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      # Inject and upload source maps using the PostHog action
+      - name: Inject & upload source maps to PostHog
+        uses: PostHog/upload-source-maps@v0.4.6
+        with:
+          directory: dist
+          env-id: ${{ secrets.POSTHOG_ENV_ID }}
+          cli-token: ${{ secrets.POSTHOG_CLI_TOKEN }}
+          # host: https://eu.posthog.com # Required only for EU cloud
+          # project: my-awesome-project  # Optional; falls back to repo name
+          # version: ${{ github.sha }}   # Optional; falls back to current commit SHA
+```
+
+This step:
+
+- Injects a `//# chunkId=...` comment into your built source files so PostHog can match them with uploaded source maps
+- Uploads the source maps to your PostHog project
+
+
+</Step>
+
+<Step title="Inputs" subtitle="Reference for action configuration">
+
+<div className="overflow-x-hidden">
+
+| **Name** | **Required** | **Description** |
+| --- | --- | --- |
+| `directory` | Yes | Directory containing built assets (for example, `dist`) |
+| `env-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/environment#variables) |
+| `cli-token` | Yes | Personal API key with error tracking write scope. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `project` | No | Project identifier. Defaults to the Git repository name when available |
+| `version` | No | Release/version (for example, commit SHA). Defaults to current commit SHA when available |
+| `host` | No | PostHog host URL. Defaults to `https://us.posthog.com`. For EU cloud, set it to `https://eu.posthog.com` | 
+
+</div>
+
+We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `POSTHOG_ENV_ID` and `POSTHOG_CLI_TOKEN`).
+
+</Step>
+
+<Step checkpoint title="Verify upload and injection">
+
+1. Confirm symbol sets are present in PostHog after the workflow runs.
+
+<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+    Check symbol sets in PostHog
+</CallToAction>
+
+2. Confirm your served production files include an injected comment at the end of the file similar to:
+
+```js
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+```
+
+</Step>
+
+<Step title="Serve injected assets" badge="required">
+
+You must deploy the injected build artifacts to production. PostHog reads the injected `chunkId` metadata during error capture to resolve stack traces. If you deploy files that were not processed by the action, uploaded source maps cannot be used to unminify your stack traces.
+
+</Step>
+
+</Steps>
+
+

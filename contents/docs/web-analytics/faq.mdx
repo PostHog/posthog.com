@@ -63,6 +63,8 @@ Our client-side bot detection code is available on [GitHub](https://github.com/P
 
 You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js/config) option if there's a specific user agent that you don't want to track - your custom user agent or maybe a bad actor you want to block.
 
+> **Note:** If you use Ahrefs, you need to switch to use the "Desktop" user agent. In other modes, the user agent doesn't contain information PostHog can use to block their crawl from analytics.
+
 ## Why am I getting a lot of direct traffic?
 
 Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:

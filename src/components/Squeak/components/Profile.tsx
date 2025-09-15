@@ -12,6 +12,7 @@ type ProfileProps = {
 export const Profile = ({ className, profile }: ProfileProps) => {
     return profile?.attributes ? (
         <Link
+            state={{ newWindow: true }}
             className={`flex items-center !text-black dark:!text-white relative ${className}`}
             to={`/community/profiles/${profile.id}`}
         >
