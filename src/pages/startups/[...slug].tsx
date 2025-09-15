@@ -15,6 +15,7 @@ import ODFLogo from '../../images/odf.svg'
 import Logo from 'components/Logo'
 import OSButton from 'components/OSButton'
 import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 // Partner configurations
 const partnerConfigs = [
@@ -193,7 +194,7 @@ export default function Startups(): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="not-prose grid grid-cols-2 @2xl:grid-cols-4 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
+                    <div className="not-prose grid grid-cols-2 @lg:grid-cols-3 @5xl:grid-cols-5 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
                         <div className="bg-[#FFD254] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_credits_a8487ef646.png" />
                             <h3 className="text-base my-1 leading-tight">{creditValue} in PostHog credits</h3>
@@ -224,7 +225,7 @@ export default function Startups(): JSX.Element {
                             </p>
                         </div>
                         <div className="bg-[#C4D9FF] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/chroma_d25cba6cf9.png" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png" />
                             <h3 className="text-base my-1 leading-tight">Better search with Chroma</h3>
                             <p className="text-sm mb-0">
                                 Building with AI? Chroma gives you $5,000 of credit for their search and retrieval
