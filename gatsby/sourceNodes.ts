@@ -723,7 +723,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             .replaceAll(
                                 /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
                                 ''
-                            ) // Remove lines about other companies maintaining destinations or contact support
+                            ) // Remove banner regarding the Actions-framework
                             .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove any line containing "Both of these destinations receive data from PostHog"
                             .trim()
                     }
