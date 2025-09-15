@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import {
     IconPieChart,
     IconThoughtBubble,
@@ -2699,15 +2700,23 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         ...products,
     ]
 
-    const allProducts = extendedProducts.map((product) => ({
-        ...product,
-        sharesFreeTier: product.sharesFreeTier
-            ? extendedProducts.find((extendedProduct) => extendedProduct.handle === product.sharesFreeTier)
-            : undefined,
-        worksWith: product.worksWith
-            ? product.worksWith.map((handle) => extendedProducts.find((product) => product.handle === handle))
-            : [],
-    }))
+    const allProducts = useMemo(
+        () =>
+            dedupe(
+                extendedProducts.map((product) => ({
+                    ...product,
+                    sharesFreeTier: product.sharesFreeTier
+                        ? extendedProducts.find((extendedProduct) => extendedProduct.handle === product.sharesFreeTier)
+                        : undefined,
+                    worksWith: product.worksWith
+                        ? product.worksWith.map((handle) =>
+                              extendedProducts.find((product) => product.handle === handle)
+                          )
+                        : [],
+                }))
+            ),
+        [products]
+    )
 
-    return handle ? allProducts.find((product) => product.handle === handle) : dedupe(allProducts)
+    return handle ? allProducts.find((product) => product.handle === handle) : allProducts
 }
