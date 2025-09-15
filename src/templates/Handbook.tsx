@@ -340,7 +340,7 @@ export default function Handbook({
             hideRightSidebar,
             contentMaxWidthClass,
         },
-        fields: { slug, contributors, appConfig, templateConfigs, commits },
+        fields: { slug, contributors, appConfig, templateConfigs, commits, contentWithSnippets },
         excerpt,
     } = post
 
@@ -401,6 +401,7 @@ export default function Handbook({
                 showSurvey
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}
+                markdownContent={contentWithSnippets}
             />
         </>
     )
@@ -435,6 +436,7 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                contentWithSnippets
                 commits {
                     author {
                         avatar_url
