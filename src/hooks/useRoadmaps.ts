@@ -48,8 +48,19 @@ export const useRoadmaps = ({ params = {}, limit }: { params?: any; limit?: numb
     const { data, size, setSize, isLoading, mutate, isValidating } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${query(params, offset, limit, isModerator)}`,
         async (url: string) => {
-            const jwt = isModerator && (await getJwt())
-            return fetch(url, jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) => r.json())
+            try {
+                const jwt = isModerator && (await getJwt())
+                const response = await fetch(url, jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined)
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch roadmaps: ${response.status}`)
+                }
+                
+                return response.json()
+            } catch (error) {
+                console.error('Error fetching roadmaps:', error)
+                throw error
+            }
         }
     )
     const roadmaps = React.useMemo(() => {
