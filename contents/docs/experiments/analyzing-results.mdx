@@ -1,0 +1,163 @@
+---
+title: Analyzing results
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: full
+  enterprise: full
+---
+
+import {ProductScreenshot} from 'components/ProductScreenshot'
+
+export const ExposuresPanelLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_light_04d3ee6606.png"
+export const ExposuresPanelDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_dark_6cf47da9eb.png"
+export const DeltaChartLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delta_chart_light_3010641eff.png"
+export const DeltaChartDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delta_chart_dark_82a4470a98.png"
+export const DeltaChartHoverLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_light_8fe379428f.png"
+export const DeltaChartHoverDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_dark_cd122710e7.png"
+export const FunnelBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_light_e933e07d24.png"
+export const FunnelBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_dark_c6a7c3e830.png"
+
+Once your experiment has been running and gathering data, you'll want to analyze the results to determine if your changes had a statistically significant impact. This guide walks you through understanding and interpreting experiment results in PostHog.
+
+## Understanding the results page
+
+### Exposures panel
+
+The exposures panel shows you how many users have been exposed to each variant of your experiment:
+
+<ProductScreenshot
+    imageLight={ExposuresPanelLight} 
+    imageDark={ExposuresPanelDark}
+    alt="Experiment exposures panel showing user distribution across variants" 
+    classes="rounded"
+/>
+
+This collapsible panel displays:
+- **Exposure count**: The total number of unique users who have seen each variant
+- **Percentage distribution**: How users are split between variants (typically 50/50 for two variants)
+
+The exposure numbers help you verify that:
+1. Your experiment is running and users are being assigned to variants
+2. The split between variants matches your expected allocation
+3. You have sufficient sample size for meaningful results
+
+### Metric results and significance
+
+For each metric you're tracking, PostHog displays a delta chart showing the performance of each variant compared to the control:
+
+<ProductScreenshot
+    imageLight={DeltaChartLight} 
+    imageDark={DeltaChartDark}
+    alt="Delta chart showing experiment results with confidence intervals" 
+    classes="rounded"
+/>
+
+## How to determine if a variant is significant
+
+The most important question when analyzing results is: **"Is my variant statistically significant?"**
+
+Look for these clear visual indicators in the delta chart:
+
+1. **Color-coded deltas**: When a variant achieves statistical significance:
+   - **Green with ↑ arrow**: The variant is winning (positive significant change)
+   - **Red with ↓ arrow**: The variant is losing (negative significant change)
+   - **No color**: The result is not statistically significant
+
+2. **Confidence/Credible intervals**: The horizontal bars show the 95% confidence interval (frequentist) or credible interval (Bayesian):
+   - If the interval doesn't cross zero, the result is statistically significant
+   - The narrower the interval, the more precise your estimate
+
+3. **Hover details**: When you hover over a variant in the delta chart, you'll see detailed statistics:
+
+<ProductScreenshot
+    imageLight={DeltaChartHoverLight} 
+    imageDark={DeltaChartHoverDark}
+    classes="max-w-40"
+    alt="Detailed statistics shown when hovering over a variant" 
+    classes="rounded"
+/>
+
+The hover popup shows:
+- **Significance status**: States if the variant "won", "lost", or is "not significant"
+- **Total value**: The actual measured value for this metric (e.g., mean for trends, conversion rate for funnels)
+- **Exposures**: Number of users exposed to this variant (matches the exposures panel)
+- **Chance to win** (Bayesian) or **p-value** (Frequentist): Statistical confidence measure
+- **Delta**: Percentage change compared to the control variant
+- **Confidence/Credible interval**: The range within which the true effect likely falls
+
+### Viewing detailed results and recordings
+
+Click on any variant in the delta chart to access detailed results. This opens a panel showing the same statistics as the hover popup, plus a **View recordings** button.
+
+Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
+
+## Interpreting different scenarios
+
+### Clear winner
+
+When all your primary metrics show green (positive) significance for a variant:
+- You have strong evidence that the variant improves your key metrics
+- Consider the magnitude of improvement – even statistically significant changes might not be practically significant
+- Review secondary metrics to ensure no unexpected negative impacts
+
+### Mixed results
+
+It's common to see some metrics improve while others decline. When this happens:
+
+1. **Prioritize your primary metric**: Focus on the metric you defined as most important when setting up the experiment
+2. **Understand the trade-offs**: 
+   - Is a 5% increase in conversion worth a 2% decrease in average order value?
+   - Does improved engagement justify slightly lower retention?
+3. **Dig deeper with analytics**:
+   - Break down results by user segments to understand who benefits and who doesn't
+   - Use session replays to see how users interact differently with each variant
+   - Create cohorts of users from each variant for further analysis
+4. **Consider the user journey**: Sometimes negative changes in one metric lead to positive downstream effects
+
+### No significant results
+
+If your experiment shows no significant differences:
+- **Check sample size**: You might need more data. Use the sample size calculator to estimate required duration
+- **Verify implementation**: Ensure the variants are actually different and the tracking is working correctly
+- **Consider effect size**: The actual difference might be too small to detect with your current sample size
+- **Learn from it**: Not all experiments win – this is valuable information about what doesn't move the needle
+
+## Funnel metrics analysis
+
+For funnel metrics, PostHog provides additional breakdown visualization:
+
+<ProductScreenshot
+    imageLight={FunnelBreakdownLight} 
+    imageDark={FunnelBreakdownDark}
+    alt="Funnel breakdown showing conversion at each step" 
+    classes="rounded"
+/>
+
+The funnel breakdown shows conversion rates at each step, helping you identify:
+- Where users drop off in each variant
+- Which steps are most affected by your changes
+- Unexpected impacts on parts of the funnel you didn't intend to change
+
+> **Important**: Statistical significance for funnels is always calculated between the first step (exposure event) and the final step. Intermediate steps are shown for analysis but don't affect the significance calculation.
+
+## Ending an experiment
+
+After you've analyzed your experiment metrics and you're ready to end your experiment, you can click the **Ship a variant** button on the experiment page to roll out a variant and stop the experiment.
+
+![Ship a variant](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_23_at_13_52_25_6c1cf85153.png)
+
+If you want more precise control over your release, you can also set the release condition for the feature flag and stop the experiment manually.
+
+Beyond this, we recommend:
+
+1. Sharing the results with your team.
+
+2. Documenting conclusions and findings in the description field your experiment. This helps preserve historical context for future team members.
+
+3. Removing the experiment and losing variant's code.
+
+4. Archiving the experiment.
+
+Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
