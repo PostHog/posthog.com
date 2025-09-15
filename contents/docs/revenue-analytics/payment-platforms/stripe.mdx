@@ -4,7 +4,22 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 When using revenue analytics, you can connect Stripe to PostHog as a source of revenue data. Revenue analytics will automatically use the data from Stripe to build your [revenue dashboard](/docs/revenue-analytics/dashboard).
+
+<CalloutBox icon="IconInfo" title="Already have a Stripe-connected source?" type="fyi">
+
+If you already have a Stripe-connected source, you can access the [revenue analytics settings](https://app.posthog.com/data-management/revenue) page and turn on the **Stripe** toggle to connect to your Stripe data.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_09_15_T19_19_35_872_Z_c1dc6ac4dc.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_09_15_T19_19_10_100_Z_b2634feed1.png"
+    alt="Turn on Stripe in revenue analytics settings"
+    classes="rounded"
+/>
+
+</CalloutBox>
 
 import Stripe from '../../cdp/sources/_snippets/source-stripe.mdx'
 
