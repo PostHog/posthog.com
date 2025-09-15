@@ -223,6 +223,14 @@ export default function Startups(): JSX.Element {
                                 months.
                             </p>
                         </div>
+                        <div className="bg-[#C4D9FF] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/chroma_d25cba6cf9.png" />
+                            <h3 className="text-base my-1 leading-tight">Better search with Chroma</h3>
+                            <p className="text-sm mb-0">
+                                Building an AI? Chroma gives you $5,000 of credit for their search and retrieval
+                                service.
+                            </p>
+                        </div>
                     </div>
 
                     <div className="m-4 @3xl:m-8 max-w-6xl border-y border-primary py-8 grid @2xl:grid-cols-2 gap-8">
@@ -425,6 +433,19 @@ export default function Startups(): JSX.Element {
                                     ),
                                 },
                                 {
+                                    trigger: 'Can I use credits to claim a BAA under the Boost plan?',
+                                    content: (
+                                        <p>
+                                            Unfortunately, no. Credits cannot be used to claim a BAA under the Boost
+                                            plan due to legal risk. If you'd like to claim a BAA, you can instead{' '}
+                                            <Link to="/talk-to-sales" className="underline font-semibold">
+                                                contact us to discuss options
+                                            </Link>
+                                            . Credits can be used towards all other aspects of the Boost add-on.
+                                        </p>
+                                    ),
+                                },
+                                {
                                     trigger: "Can I get this deal if I'm part of YC?",
                                     content: (
                                         <p>
@@ -463,12 +484,11 @@ export default function Startups(): JSX.Element {
                                     ),
                                 },
                                 {
-                                    trigger: 'How do I get the Mintlify/Speakeasy discount?',
+                                    trigger: 'How do I get the Mintlify/Speakeasy/Chroma discount?',
                                     content: (
                                         <p>
                                             Once you're accepted into the PostHog for Startups program, we'll email you
-                                            with a voucher code to get you 50% off Mintlify and Speakeasy for six
-                                            months.
+                                            with details on how to get the partner benefits.
                                         </p>
                                     ),
                                 },
