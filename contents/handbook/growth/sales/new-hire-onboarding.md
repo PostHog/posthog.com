@@ -85,6 +85,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
 - Make sure you're comfortable with the Shared Processes section of the Handbook
+- Once you start getting leads / accounts, ping [Simon](/community/profiles/28895) to be added to the [TAM quota tracker](https://us.posthog.com/project/2/dashboard/498582).
 
 ### In-person onboarding
 
@@ -204,6 +205,14 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 - [spark](https://sparkmailapp.com/) (app) AI powered inbox
 - [Superhuman](https://superhuman.com/) (app) AI powered inbox
 - [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
+
+## Alerting setup (for team leads)
+
+We have certain automations in Vitally and Zapier that your team lead needs to add you to. Please ask your team lead to add you.
+
+- <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/81d5c249-1e8f-4dfd-98b2-01e8ad904851"> Vitally name trait playbook </PrivateLink>: create a new branch that matches assigned AE to new team member. In this branch, add action to update account trait `AE name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
+- <PrivateLink url="https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb"> Failed payment alerting </PrivateLink>: in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
+- <PrivateLink url="https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088"> Annual plan credit alerting </PrivateLink>: in step 8 look up table, add new team member's email and Slack member ID 
 
 ## New hire frequently asked questions
 

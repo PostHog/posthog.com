@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import slugify from 'slugify'
 import { Link } from 'gatsby'
 import {
     StickerPineapple,
@@ -15,7 +14,6 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { slugifyTeamName } from 'lib/utils'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }
@@ -193,6 +191,28 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
+interface TeamData {
+    id: string
+    name: string
+    slug: string
+    miniCrest: {
+        gatsbyImageData: any
+    }
+    profiles: {
+        data: Array<{
+            attributes: {
+                pineappleOnPizza: boolean
+            }
+        }>
+    }
+}
+
+interface TeamWithPercentage {
+    name: string
+    slug: string
+    pineapplePercentage: string
+}
+
 export const Pizza = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -223,8 +243,9 @@ export const Pizza = () => {
                 nodes {
                     id
                     name
+                    slug
                     miniCrest {
-                        gatsbyImageData(width: 40, height: 40)
+                        gatsbyImageData(width: 80, height: 80)
                     }
                     profiles {
                         data {
@@ -238,24 +259,29 @@ export const Pizza = () => {
         }
     `)
 
-    const teamsWithPineapplePercentage = allTeams.nodes.map((team) => {
+    const teamsWithPineapplePercentage = allTeams.nodes.map((team: TeamData): TeamWithPercentage => {
         const teamLength = team.profiles?.data?.length || 0
         const pineappleLovers = team.profiles?.data?.filter(({ attributes }) => attributes.pineappleOnPizza).length || 0
         const percentage = teamLength > 0 ? (pineappleLovers / teamLength) * 100 : 0
 
         return {
             name: team.name,
+            slug: team.slug,
             pineapplePercentage: percentage.toFixed(1),
         }
     })
 
-    const groupedTeams = {
+    const groupedTeams: {
+        moreThan50: TeamWithPercentage[]
+        exactly50: TeamWithPercentage[]
+        lessThan50: TeamWithPercentage[]
+    } = {
         moreThan50: [],
         exactly50: [],
         lessThan50: [],
     }
 
-    teamsWithPineapplePercentage.forEach((team) => {
+    teamsWithPineapplePercentage.forEach((team: TeamWithPercentage) => {
         const percentage = parseFloat(team.pineapplePercentage)
         if (percentage > 50) {
             groupedTeams.moreThan50.push(team)
@@ -267,15 +293,14 @@ export const Pizza = () => {
     })
 
     // Sort teams within each group by percentage (highest to lowest)
-    Object.keys(groupedTeams).forEach((key) => {
+    ;(Object.keys(groupedTeams) as Array<keyof typeof groupedTeams>).forEach((key) => {
         groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
     })
 
     return (
-        <div className="px-4 max-w-7xl mx-auto py-12">
+        <section id="pizza" className="@container">
             <div className="text-center">
-                <div className="text-lg opacity-70 mb-2">Speaking of small teams...</div>
-                <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col md:flex-row leading-none">
+                <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col @4xl:flex-row leading-none">
                     <StickerPineapple className="inline-block size-10" />
                     Pineapple on pizza:{' '}
                     <span className="whitespace-nowrap">
@@ -284,36 +309,33 @@ export const Pizza = () => {
                 </h2>
                 <div className="max-w-2xl mx-auto">
                     <p>
-                        Our small teams meet up in various places around the world. Pizza is often involved. Pineapple
-                        on the pizza is <span className="opacity-60 line-through">optional</span> contentious.
-                    </p>
-                    <p className="mb-2">
-                        <strong>Here's how our teams feel.</strong> (Choose your team wisely.)
+                        Everyone at PostHog has an opinion about whether pineapple belongs on pizza (no matter how wrong
+                        they may be.) Here's how it breaks down for each small team.
                     </p>
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-10 md:gap-6 lg:gap-12 pt-6 pb-12">
+            <div className="grid @4xl:grid-cols-3 gap-10 @4xl:gap-6 @6xl:gap-12 pt-6 pb-12">
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                    <div className="mb-4 border-b border-primary pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleYes className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
+                        <div className="flex-1 items-baseline gap-1 @4xl:block">
+                            <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
+                                Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
                             <h3 className="text-[19px] leading-tight m-0 font-bold">
                                 <span className="text-green">CORRECTLY agree</span>
                             </h3>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] mb-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
                     </div>
 
-                    <ul className="list-none p-0 space-y-3">
+                    <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.moreThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
+                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
+                            const teamMiniCrest = getImage(teamData?.miniCrest)
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
@@ -321,13 +343,14 @@ export const Pizza = () => {
                                             <GatsbyImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
-                                                className="mr-2"
+                                                className="mr-2 size-10"
+                                                objectFit="contain"
                                             />
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugifyTeamName(team.name)}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                                to={`/teams/${team.slug}`}
+                                                className="text-[15px] font-semibold text-primary hover:underline"
                                             >
                                                 {team.name}
                                             </Link>
@@ -339,7 +362,7 @@ export const Pizza = () => {
                                                     ></div>
                                                 </div>
                                                 <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
+                                                    {Math.round(parseFloat(team.pineapplePercentage))}%
                                                 </span>
                                             </div>
                                         </div>
@@ -351,11 +374,11 @@ export const Pizza = () => {
                 </div>
 
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                    <div className="mb-4 border-b border-primary pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleUnknown className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
+                        <div className="flex-1 items-baseline gap-1 @4xl:block">
+                            <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
+                                Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
                             <div className="flex items-baseline gap-1">
                                 <h3 className="text-[19px] leading-tight m-0 font-bold">
@@ -363,16 +386,16 @@ export const Pizza = () => {
                                 </h3>
                                 on whether
                             </div>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] my-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
                     </div>
 
-                    <ul className="list-none p-0 space-y-3">
+                    <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.exactly50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
+                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
+                            const teamMiniCrest = getImage(teamData?.miniCrest)
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
@@ -380,13 +403,14 @@ export const Pizza = () => {
                                             <GatsbyImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
-                                                className="mr-2"
+                                                className="mr-2 size-10"
+                                                objectFit="contain"
                                             />
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugifyTeamName(team.name)}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                                to={`/teams/${team.slug}`}
+                                                className="text-[15px] font-semibold text-primary hover:underline"
                                             >
                                                 {team.name}
                                             </Link>
@@ -398,7 +422,7 @@ export const Pizza = () => {
                                                     ></div>
                                                 </div>
                                                 <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
+                                                    {Math.round(parseFloat(team.pineapplePercentage))}%
                                                 </span>
                                             </div>
                                         </div>
@@ -411,25 +435,25 @@ export const Pizza = () => {
                 </div>
 
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+                    <div className="mb-4 border-b border-primary pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleNo className="inline-block size-12" />
-                        <div className="flex-1 items-baseline gap-1 md:block">
-                            <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">
-                                Small teams who<span className="hidden md:inline-block">...</span>
+                        <div className="flex-1 items-baseline gap-1 @4xl:block">
+                            <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
+                                Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
                             <h3 className="text-[19px] leading-tight m-0 font-bold">
                                 <span className="text-red">shockingly DISAGREE</span>
                             </h3>
-                            <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] mb-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
                     </div>
 
-                    <ul className="list-none p-0 space-y-3">
+                    <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.lessThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
+                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
+                            const teamMiniCrest = getImage(teamData?.miniCrest)
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
@@ -437,13 +461,14 @@ export const Pizza = () => {
                                             <GatsbyImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
-                                                className="mr-2"
+                                                className="mr-2 size-10"
+                                                objectFit="contain"
                                             />
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugifyTeamName(team.name)}`}
-                                                className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                                to={`/teams/${team.slug}`}
+                                                className="text-[15px] font-semibold text-primary hover:underline"
                                             >
                                                 {team.name}
                                             </Link>
@@ -455,7 +480,7 @@ export const Pizza = () => {
                                                     ></div>
                                                 </div>
                                                 <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
+                                                    {Math.round(parseFloat(team.pineapplePercentage))}%
                                                 </span>
                                             </div>
                                         </div>
@@ -465,6 +490,19 @@ export const Pizza = () => {
                         })}
                     </ul>
                 </div>
+            </div>
+
+            <div>
+                <iframe
+                    title="Does pineapple belong on pizza?"
+                    src="https://www.youtube-nocookie.com/embed/QeU5MmpqBg0?rel=0"
+                    className="w-full aspect-video rounded"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                />
             </div>
 
             <h3 className="text-3xl mb-0 text-center">Speaking of pizza...</h3>
@@ -478,7 +516,7 @@ export const Pizza = () => {
                         className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${
                             filter === option
                                 ? 'border-red dark:border-yellow font-bold'
-                                : 'border-transparent hover:border-light dark:hover:border-dark text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
+                                : 'border-transparent hover:border text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
                         }`}
                     >
                         {option}
@@ -522,15 +560,15 @@ export const Pizza = () => {
                         </div>
                     </SwiperSlide>
                 ))}
-                <button className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border peer z-10">
-                    <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-r-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
+                <button className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] @4xl:z-30 p-2 xl:p-6 box-border peer z-10">
+                    <IconChevronDown className="hover-invert w-12 h-12 rounded-sm text-primary rotate-90 bg-secondary hover:bg-primary hover:backdrop-blur-sm active:backdrop-blur-sm border border-r-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
                 </button>
-                <button className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border peer z-10">
-                    <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 -rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-l-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
+                <button className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] @4xl:z-30 p-2 xl:p-6 box-border peer z-10">
+                    <IconChevronDown className="hover-invert w-12 h-12 rounded-sm text-primary -rotate-90 bg-secondary hover:bg-primary hover:backdrop-blur-sm active:backdrop-blur-sm border border-l-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
                 </button>
             </Swiper>
 
             {activeIndex !== null && <FullscreenModal image={filteredImages[activeIndex]} onClose={closeFullscreen} />}
-        </div>
+        </section>
     )
 }

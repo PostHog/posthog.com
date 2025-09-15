@@ -20,7 +20,7 @@ PostHog and [Sentry](/blog/best-sentry-alternatives) are multi-product platforms
 
 1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, code coverage, and more. It's built for engineers and devops teams.
  
-2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/docs/error-tracking), it includes [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), and more. It's built for engineers and product teams.
+2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/experiments), [surveys](/surveys), [LLM analytics](/llm-analytics), and more. It's built for engineers and product teams.
 
 ## How is PostHog different?
 
@@ -31,13 +31,15 @@ The core data each product cares about reveals a lot about their priorities:
 - PostHog cares about events and people.
 - Sentry cares about errors and code.
 
-PostHog is mostly a proactive tool that helps you make your product better. Sentry is mostly a reactive tool that helps prevent your product from getting worse.
+Broadly, PostHog is mostly a proactive tool that helps you make your product better. Sentry is mostly a reactive tool that helps prevent your product from getting worse.
 
 ### 2. We're free and usage-based
 
-We pride ourselves on having a generous free tier and this shows when compared to Sentry. Our free tier offers 100 times more session replays and 200 times more events (known as errors for Sentry).
+We pride ourselves on having a generous free tier and this shows when compared to Sentry. Our free tier offers 100 times more session replays and 20 times more errors.
 
-PostHog has usage-based pricing, meaning you can get everything for free if you stay within our limit. Sentry limits many of its features, including team collaboration, to its higher, paid tiers.
+Beyond our free tier, our pricing is usage-based and transparent. We also try to be as cheap as possible. Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator).
+
+Sentry also limits many of its features, including team collaboration, to its higher, paid tiers.
 
 ### 3. Flexibility and breadth
 
@@ -51,19 +53,20 @@ More examples of this flexibility include PostHog's simpler [custom event captur
 
 Tracking exceptions in PostHog enables you to easily integrate with all of the other products we offer. You can easily create insights to track errors over time, watch replays of users encountering an exception, or target surveys when a user faces a bug.
 
-Given PostHog already tracks context about your users, it is possible to understand the impact of exceptions more accurately. For example, you can filter issues affecting VIP user cohorts or find those affecting the most amount of sessions.
+Given PostHog already tracks context about your users, it is possible to understand the impact of exceptions more accurately. For example, you can filter issues affecting VIP user cohorts, debug errors by watching replays of their sessions, or find errors affecting the most amount of sessions.
 
 ### Core features
 
-The core of PostHog and Sentry are different. Sentry focuses entirely on error and performance monitoring, while PostHog has a broader suite of tools to help developers build better products.
+The core of PostHog and Sentry are different. Sentry focuses entirely on error and performance monitoring, while PostHog has error tracking along with a broader suite of tools to help developers build better products.
 
 <ComparisonTable column1="PostHog" column2="Sentry">
-  <ComparisonRow column1="Beta" column2={true} feature="Error monitoring" description="Track, debug, and resolve errors with context" />
+  <ComparisonRow column1={true} column2={true} feature="Error monitoring" description="Track, debug, and resolve errors with context" />
   <ComparisonRow column1="Partial" column2={true} feature="Performance monitoring" description="Trace requests or queries and profile functions" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product" />
   <ComparisonRow column1={true} column2={true} feature="Feedback" description="Capture user feedback with surveys" />
   <ComparisonRow column1={true} column2="Partial" feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={false} feature="LLM analytics" description="Monitor and debug your LLM-powered features" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for users or cohorts" />
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze impact" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
@@ -89,10 +92,11 @@ The core of PostHog and Sentry are different. Sentry focuses entirely on error a
 
 ### Error and performance monitoring
 
-Error and performance monitoring is the main focus of Sentry. PostHog's session replay tool includes the ability to track the network performance of sessions, but that is it (for now). 
+Error and performance monitoring is the main focus of Sentry. Although PostHog has a full error tracking product, it's missing some of the tracing and monitoring features that Sentry offers.
 
 <ComparisonTable column1="PostHog" column2="Sentry">
   <ComparisonRow column1={true} column2={true} feature="Exception capture" description="Capture errors and exceptions including stack traces" />
+  <ComparisonRow column1="100k" column2="5k" feature="Free errors" description="Free errors you can capture per month" />
   <ComparisonRow column1={true} column2={true} feature="Issue management" description="Monitor and manage issues" />
   <ComparisonRow column1={true} column2={true} feature="Code context" description="See the code related to the issue" />
   <ComparisonRow column1={false} column2={true} feature="Tracing" description="Track the path of a request across your system" />
@@ -111,7 +115,7 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
   <ComparisonRow column1={true} column2={true} feature="iOS" description="Record sessions from iOS apps" />
   <ComparisonRow column1={true} column2={true} feature="Android" description="Record sessions from Android apps" />
   <ComparisonRow column1={true} column2={true} feature="React Native" description="Record sessions from React Native apps" />
-  <ComparisonRow column1="Beta" column2="Beta" feature="Flutter" description="Record sessions from Flutter apps" />
+  <ComparisonRow column1={true} column2={true} feature="Flutter" description="Record sessions from Flutter apps" />
   <ComparisonRow column1={true} column2={true} feature="Sampling" description="Choose what sessions you record" />
   <ComparisonRow column1={true} column2={true} feature="Privacy" description="Censor private or personal information" />
   <ComparisonRow column1={true} column2={true} feature="Console" description="Capture console logs, errors" />
@@ -197,9 +201,11 @@ Every PostHog user gets a generous amount of free usage each month:
 
 | &nbsp;                                   | **Free usage per month** |
 |------------------------------------------|--------------------------|
-| **Product analytics and error tracking** | 1 million events         |
+| **Error tracking**                       | 100k errors              |
+| **Product analytics**                    | 1 million events         |
 | **Session replay**                       | 5,000 recordings         |
 | **Surveys**                              | 1500 responses           |
+| **LLM analytics**                        | 100k events         |
 | **Feature flags and A/B testing**        | 1 million API requests   |
 | **Data warehouse**                       | 1 million synced rows    |
 
@@ -225,7 +231,7 @@ Sentry has a 14-day free trial for paid features.
 
 ### How long does it take to implement PostHog?
 
-You can get started with PostHog in less than five minutes by installing [our web snippet](/docs/getting-started/install). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
+You can get started with PostHog in less than 90 seconds using our [AI install wizard](/docs/getting-started/install?tab=wizard). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
 
 ### Can I use PostHog with a CDP?
 

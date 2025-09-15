@@ -9,8 +9,7 @@ interface IInterviewProcess {
 const defaultInterviewProcess: IInterviewProcess[] = [
     {
         title: 'Application',
-        description:
-            "We're looking to see how your skills and experience align with our needs.",
+        description: "We're looking to see how your skills and experience align with our needs.",
         badge: 'Our talent team will review your application',
     },
     {
@@ -31,7 +30,7 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     },
     {
         title: 'PostHog SuperDay',
-        description: `You’ll meet a few more members of the team and work on an independent project. It's challenging, but most people say it's fun, and we'll pay you USD 1,000 for your efforts!`,
+        description: `You’ll meet a few more members of the team and work on an independent project. It's challenging, but most people say it's fun, and we'll pay you $1,000 for your efforts!`,
         badge: 'Paid day of work',
     },
     {
@@ -55,18 +54,28 @@ const roleInterviewProcess: Record<string, IInterviewProcess[]> = {
     ],
 }
 
-export default function InterviewProcess({ role, inApplicationProcess }: { role?: string, inApplicationProcess?: boolean }) {
+export default function InterviewProcess({
+    role,
+    inApplicationProcess,
+}: {
+    role?: string
+    inApplicationProcess?: boolean
+}) {
     return (
         <>
-            <ul className="list-none m-0 p-0 grid">
+            <ul className="not-prose list-none m-0 p-0 grid">
                 {((role && roleInterviewProcess[role.trim()]) || defaultInterviewProcess).map(
                     ({ title, description, badge }, index) => {
                         return (
                             <li
-                                className={`flex items-start py-3 space-x-4 relative before:absolute before:w-px before:top-0 before:bottom-0 before:left-6 before:bg-border dark:before:bg-border-dark last:before:bottom-12 ${inApplicationProcess ? 'first:bg-white dark:first:bg-accent-dark first:border first:border-b-3 first:border-light dark:first:border-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:before:hidden' : 'first:before:top-6'}`}
+                                className={`flex items-start py-3 space-x-4 relative before:absolute before:w-px before:top-0 before:bottom-0 before:left-6 before:bg-border dark:before:bg-border-dark last:before:bottom-24 @2xl:last:before:bottom-16 ${
+                                    inApplicationProcess
+                                        ? 'first:bg-white dark:first:bg-accent-dark first:border first:border-b-3 first:border-light dark:first:border-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:before:hidden'
+                                        : 'first:before:top-6'
+                                }`}
                                 key={title}
                             >
-                                <div className="w-12 h-12 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold relative">
+                                <div className="w-12 h-12 bg-accent border border-primary rounded-full flex items-center justify-center flex-shrink-0 font-semibold relative">
                                     <span>{index + 1}</span>
                                 </div>
                                 <div>
@@ -83,7 +92,7 @@ export default function InterviewProcess({ role, inApplicationProcess }: { role?
                         )
                     }
                 )}
-            </ul >
+            </ul>
         </>
     )
 }

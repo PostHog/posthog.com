@@ -32,12 +32,12 @@ export default function Profile({ profile }: ProfileProps): JSX.Element {
                 <Avatar
                     className={`w-24 h-24 ${
                         color ? `bg-${color}` : 'bg-accent dark:bg-dark'
-                    } rounded-full border border-border dark:border-dark`}
+                    } rounded-full border border-input`}
                     src={getAvatarURL(profile as any)}
                 />
                 <div>
                     <h2 className="m-0">{name}</h2>
-                    <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{companyRole}</p>
+                    <p className="text-muted text-sm  m-0">{companyRole}</p>
                     <div className="flex space-x-1 items-center mt-1">
                         <Stickers
                             country={country}
@@ -52,7 +52,7 @@ export default function Profile({ profile }: ProfileProps): JSX.Element {
             {biography ? (
                 <Markdown className="bio-sidebar">{biography}</Markdown>
             ) : (
-                <p className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 text-sm">
+                <p className="bg-accent border border-primary rounded p-4 text-sm">
                     {firstName} has been too busy writing code to fill out a bio!
                 </p>
             )}

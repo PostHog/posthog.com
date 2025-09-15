@@ -137,7 +137,7 @@ export default function GitHubTooltip({
                                 return (
                                     <li
                                         key={name}
-                                        className="px-2 py-1 bg-gray-accent-light border-black/80 rounded-sm font-semibold text-xs m-1 dark:text-black"
+                                        className="px-2 py-1 bg-accent-light border-black/80 rounded-sm font-semibold text-xs m-1 dark:text-black"
                                     >
                                         {name}
                                     </li>

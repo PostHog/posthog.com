@@ -2,6 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import { Stars } from './Reviews'
 import { Link as ScrollLink } from 'react-scroll'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 export default function Header() {
     const { allReviews } = useStaticQuery(graphql`
@@ -26,12 +27,10 @@ export default function Header() {
 
     return (
         <>
-            <h1 className="mb-2">PostHog Cloud</h1>
+            <h1 className="text-2xl mb-1">PostHog Cloud</h1>
             <ScrollLink to="g2-reviews" offset={-120} smooth className="flex items-center gap-2 mb-4 cursor-pointer">
                 <Stars rating={totalRating} />
-                <span className="text-red dark:text-yellow text-[15px] font-semibold">
-                    {allReviews.totalCount} reviews
-                </span>
+                <span className="text-[15px]">{allReviews.totalCount} reviews</span>
             </ScrollLink>
         </>
     )

@@ -12,6 +12,7 @@ import QuickLinks from 'components/QuickLinks'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import Link from 'components/Link'
+import ReaderView from 'components/ReaderView'
 type WebAnalyticsProps = {
     data: {
         tutorials: {
@@ -68,32 +69,30 @@ export const Content = ({ quickLinks = false }) => {
 
 const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Web analytics - Docs - PostHog" />
 
-            <PostLayout title={'Web analytics'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Web analytics"
-                    description="Track and monitor many of the most important metrics for your website."
-                    buttonText="Installation guide"
-                    buttonLink="/docs/web-analytics/installation"
-                    imageColumnClasses="mt-4 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png"
-                    imageClasses="max-h-48 md:max-h-64"
-                />
+            <Intro
+                subheader="Getting started"
+                title="Web analytics"
+                description="Track and monitor many of the most important metrics for your website."
+                buttonText="Installation guide"
+                buttonLink="/docs/web-analytics/installation"
+                imageColumnClasses="mt-4 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png"
+                imageClasses="max-h-48 md:max-h-64"
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'Do I need a cookie banner?',
-                        'How do I track conversions?',
-                        'Why do my metrics differ from other tools?',
-                    ]}
-                />
+            <AskMax
+                quickQuestions={[
+                    'Do I need a cookie banner?',
+                    'How do I track conversions?',
+                    'Why do my metrics differ from other tools?',
+                ]}
+            />
 
-                <Content />
-            </PostLayout>
-        </Layout>
+            <Content />
+        </ReaderView>
     )
 }
 
