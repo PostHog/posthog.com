@@ -43,6 +43,8 @@ import {
 import { useSearch } from 'components/Editor/SearchProvider'
 import ProgressBar from 'components/ProgressBar'
 import { Scroll } from 'lucide-react'
+import { useApp } from '../../context/App'
+import RoadmapWindow from './RoadmapWindow'
 
 interface IGitHubPage {
     title: string
@@ -261,6 +263,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
         title: string
     } | null>(null)
     const [localFilteredRoadmaps, setLocalFilteredRoadmaps] = useState()
+    const { addWindow } = useApp()
 
     // Get search context if available (from Editor)
     const searchContext = useSearch()
@@ -433,8 +436,9 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
             { name: 'Idea', width: 'minmax(200px, 1.5fr)', align: 'left' as const },
             { name: 'Details', width: 'minmax(300px, 2fr)', align: 'left' as const },
             { name: 'More info', width: 'minmax(100px, auto)', align: 'center' as const },
+            ...(isModerator ? [{ name: 'Actions', width: 'minmax(100px, auto)', align: 'center' as const }] : []),
         ]
-    }, [tableSort])
+    }, [tableSort, isModerator])
 
     // Sort the rows based on tableSort value
     const sortedRows = useMemo(() => {
@@ -607,6 +611,34 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                         ) : null,
                     className: 'text-center',
                 },
+                ...(isModerator
+                    ? [
+                          {
+                              content: (
+                                  <button
+                                      className="text-red dark:text-yellow font-bold"
+                                      onClick={() =>
+                                          addWindow(
+                                              <RoadmapWindow
+                                                  location={{ pathname: `edit-roadmap-${roadmap.id}` }}
+                                                  roadmap={roadmap}
+                                                  key={`edit-roadmap`}
+                                                  newWindow
+                                                  id={roadmap.id}
+                                                  status="under-consideration"
+                                                  onSubmit={() => {
+                                                      mutate()
+                                                  }}
+                                              />
+                                          )
+                                      }
+                                  >
+                                      Edit
+                                  </button>
+                              ),
+                          },
+                      ]
+                    : []),
             ]
 
             return {

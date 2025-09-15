@@ -917,6 +917,21 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'edit-roadmap': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
