@@ -38,7 +38,7 @@ In this article we’ll explore the crucial differences and similarities between
 ## How is PostHog different?
 
 ### 1. PostHog is an all-in one platform
-PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is a more limited, and requires you to adopt other platforms, such as Hotjar or [LaunchDarkly](/blog/posthog-vs-launchdarkly), to get comparable functionality to PostHog.
+PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is more limited, and requires you to adopt other platforms, such as Hotjar or [LaunchDarkly](/blog/posthog-vs-launchdarkly), to get comparable functionality to PostHog.
 
 ### 2. PostHog is built for engineers
 We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren’t available in tools like Pendo, which are built for more general audiences.
@@ -104,7 +104,7 @@ This difference is reflected in all levels of the product, but especially in pro
 
 - **Correlation analysis:** [Correlation analysis](/product-analytics) automatically highlights significant linking properties or events relevant to an insight. For example, you can find if users who complete a funnel are likely to be from a certain location, or have completed another event. In PostHog, correlation analysis is a standard part of analytics. 
 
-- **Formulas:** Formulas in PostHog enable you to create custom insights using your data. A simple example of a formula would be an equation to figure out a ratio or percentage (e.g. the percentage of user who completed two different events), though advanced formulas can use more elaborate functions, such as `COS` and `SIN`.
+- **Formulas:** Formulas in PostHog enable you to create custom insights using your data. A simple example of a formula would be an equation to figure out a ratio or percentage (e.g. the percentage of users who completed two different events), though advanced formulas can use more elaborate functions, such as `COS` and `SIN`.
 
 - **SQL access:** While both PostHog and Pendo have ready-made insights and visualization types, only PostHog gives you unlimited access to your data by [writing your own SQL queries](/docs/sql). This is ideal for data scientists, product managers, and engineers who want to perform advanced analysis on user data.
 
@@ -195,7 +195,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. Both platforms enable you to create tracked events manually, as well as offering autocapture to help you get started quickly.
 
-Autocapture is preferred by many users because it's faster to setup, but some argue that it creates too much noise or cost to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
+Autocapture is preferred by many users because it's faster to set up, but some argue that it creates too much noise or cost to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
 <ComparisonTable column1="PostHog" column2="Pendo">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Track manually instrumented events" />
   <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
