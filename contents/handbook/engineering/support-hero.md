@@ -145,20 +145,20 @@ Outside of your team's Support Hero rotation, you are also eligible to serve in 
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 
--   [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
--   New issues in the SDK repositories
-    -   [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
-    -   [posthog-ios](https://github.com/PostHog/posthog-ios)
-    -   [posthog-android](https://github.com/PostHog/posthog-android)
-    -   [posthog-flutter](https://github.com/PostHog/posthog-flutter)
-    -   [posthog-python](https://github.com/PostHog/posthog-python)
-    -   [posthog-php](https://github.com/PostHog/posthog-php)
-    -   [posthog-ruby](https://github.com/PostHog/posthog-ruby)
-    -   [posthog-java](https://github.com/PostHog/posthog-java)
-    -   [posthog-rs (Rust)](/docs/libraries/rust)
-    -   [posthog-go](/docs/libraries/go)
-    -   [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
-    -   Others, see /docs/libraries
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
+- New issues in the SDK repositories
+  - [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
+  - [posthog-ios](https://github.com/PostHog/posthog-ios)
+  - [posthog-android](https://github.com/PostHog/posthog-android)
+  - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
+  - [posthog-python](https://github.com/PostHog/posthog-python)
+  - [posthog-php](https://github.com/PostHog/posthog-php)
+  - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
+  - [posthog-java](https://github.com/PostHog/posthog-java)
+  - [posthog-rs (Rust)](/docs/libraries/rust)
+  - [posthog-go](/docs/libraries/go)
+  - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
+  - Others, see /docs/libraries
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
 
@@ -204,13 +204,13 @@ example: "Ah, I see what you mean, that's not ideal! Sorry. I'll dig in to that 
 As an engineer, when answering a question, your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. So, the following guidelines:
 
 -   Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/support/customer-support#response-targets), but you should always try to respond to tickets quickly.
-    -   If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
-    -   If you have no idea how to answer or fix their issue, @mention someone who does
-    -   They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
+  - If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
+  - If you have no idea how to answer or fix their issue, @mention someone who does
+  - They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
 -   Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
-    -   If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
-    -   Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
-    -   Even if you're using the support portal think about whether they'll see the message in Slack or email. A Slack message that reads like an email seems weirdly formal.
+  - If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
+  - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
+  - Even if you're using the support portal think about whether they'll see the message in Slack or email. A Slack message that reads like an email seems weirdly formal.
 -   Follow up!
 -   Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 -   If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store.
@@ -378,15 +378,15 @@ When we've added a new [team](/teams), or 🪓 split an existing team into two o
 -   [Add views](https://support.zendesk.com/hc/en-us/articles/4408888828570-Creating-views-to-build-customized-lists-of-tickets) (Tip: Clone an existing view, rename it, and tweak it.)
 -   Add Slack notification [triggers](https://posthoghelp.zendesk.com/admin/objects-rules/rules/triggers) (Tip: Clone an existing trigger, yada, yada)
 -   Add SLA breach alerts
-    -   [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
-        -   [Create a Slack app](https://api.slack.com/apps/new)
-        -   [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
-        -   [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
-    -   [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
-        -   Choose "Trigger or automation"
-        -   Paste the endpoint url you copied from the Slack app
+  - [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
+      - [Create a Slack app](https://api.slack.com/apps/new)
+      - [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
+      - [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
+  - [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
+      - Choose "Trigger or automation"
+      - Paste the endpoint url you copied from the Slack app
             (Note: The built-in tool for testing webhooks in ZD has been flakey while the UI has been changing lately. Failed tests don't always mean the hook won't work. 🫤)
-    -   [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
+  - [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
 -   If you've split a team, sort the tickets to the new groups as needed, then disable the triggers, automations, and views related to the old team.
 -   Carry on
 
