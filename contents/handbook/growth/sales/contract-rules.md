@@ -104,14 +104,13 @@ We also offer a way for customers to receive discounts on their usage without ta
 Requirements for self-serve discounts:
 
 -   3 or more paid invoices
--   Average of $500 or more across the last three invoices
+-   Average of $280 or more across the last three invoices
 -   No open invoices
 -   Not currently on the startup plan, a legacy plan, or having existing credits
 
 Additional notes on self-serve discounts:
 
--   The minimum purchase is $500/month, which equates to $6,000 upfront for the year.
--   For credit purchases between $6,000 and $20,000, the discount is 10% off. Above $20,000 follows the standard volume discount structure above.
+-   For credit purchases between $3,333 and $25,000, the discount is 10% off. Above $25,000 follows the standard volume discount structure above.
 -   Instead of providing all credits upfront, we apply 1/12 of the credits each month for the next 12 months. These credits do not expire for 1 year after they've been applied.
 -   If a customer uses all credits in a month, they will be billed for extra usage at the standard rate.
 
