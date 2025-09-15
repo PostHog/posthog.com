@@ -920,11 +920,11 @@ const appSettings: AppSettings = {
     'edit-roadmap': {
         size: {
             min: {
-                width: 500,
+                width: 650,
                 height: 500,
             },
             max: {
-                width: 500,
+                width: 650,
                 height: 500,
             },
         },
@@ -935,11 +935,11 @@ const appSettings: AppSettings = {
     'add-roadmap': {
         size: {
             min: {
-                width: 500,
+                width: 650,
                 height: 500,
             },
             max: {
-                width: 500,
+                width: 650,
                 height: 500,
             },
         },
