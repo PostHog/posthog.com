@@ -1,29 +1,26 @@
 
 # Onboarding Pipeline
 
-Stages:
+The onboarding team operates a high volume, high velocity sales pipeline with all pay-as-you-go (or YC) accounts that are forecasted to spend > $100 and are not otherwise engaged by Sales/CSM. As such, Onboarding is a linear flow moving from initial outreach to confirming the product is configured properly, ending with customers that are happy paying multiple bills. We aim to keep engagements to ~8 weeks, or 2 full billing periods, but in practice there is some spillover depending on responsiveness. 
+
+*Stages*:
 
 - `1. New Account`
-- `2. Usage Outreach Sent`
-- `3. First Call Booked`
-- `4. Intro Call Completed` 
-- `5. Follow-up Call Booked`
-- `6. Follow-up Call Completed`
-- `7. Last Bill Check In`
-- `8. Onboarded`
+- `2. Onboarding Initiated`
+- `3. Customer Engaged` 
+- `4. Nurture`
+- `5a. Onboarded`
+- `5b. Churned`
+- `5c. No Engagement`
+- `6. Sales Handoff`
 
-### Automations at each stage:
+### How this is organized in Vitally
 
-`1` -> Existing onboarding segment playbook does trait update in vitally
-`2` -> this stage change should be done when we
-`3` -> Calendly triggered [Zap](https://zapier.com/editor/288814325/published/_GEN_1755055085665/sample), updated to differentiate between the first call and subsequent (based on what the stage is) — each team member needs this up and working on their calendly account separately
-`4` -> Same Zap above handles this
+- [Onboarding Pipeline](https://posthog.vitally-eu.io/settings/traits/accounts) tracks the stage
+- [Onboarding Pipeline Main Workflow Playbook](https://posthog.vitally-eu.io/settings/playbooks/481c2fc5-1c52-412c-a20a-e062c9d02abc) controls setting timestamps for corresponding traits when accounts enter a specific stage. These should be treated as rough estimates, as the automations that move accounts from one stage to another are imperfect.
+- Additional automations use best effort to move accounts automatically from one stage to another, though are somewhat limited by Vitally's ability to trigger on specific data.
+		- Accounts that end up in the Onboarding segment get `1. New Account` automatically (set in main workflow playbook)
+		- Accounts we reach out to — any with a convo started by Cameron, Magda, or Dan, get set to `2. Onboarding Initiated` [here](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa)
+		- Accounts that respond or book a meeting — set to `3. Customer Engaged` [here](https://posthog.vitally-eu.io/settings/playbooks/bbce230d-ca70-40ef-a44d-c5d338fe80f7). Note we cannot track opens easily in Vitally or Gmail.
 
-### Timestamps for stage changes
-
-Each Stage has a respective trait corresponding to the time the account entered that stage. The initial stage is set using the Onboarding Segment Date Entered playbook, but all other stages are set [here](https://posthog.vitally-eu.io/settings/playbooks/481c2fc5-1c52-412c-a20a-e062c9d02abc). Note that upstream automations are required to actually change the status and this just sets the time of status change, no other logic. 
-
-### How this changes how we work:
-
-I propose we use this trait (`Onboarding Pipeline`) as the status indicator, and use the old `onboarding status` as a flag on whether the account needs action or not (personally I think we can simplify it basically to a boolean or a 3 option priority tag type thing, but am not touching it for now until we're comfortable with the above). Basically, I think we need to disentangle our 'this account needs attention' signal from the externally visible stage/tracking, because we should each be able to work how we want / set up our own 'this needs attention/here's how i'm prioritizing, and the way this evolved from just me to me+magda left those two things entangled.
-
+Each stage has a corresponding timestamp for when the account entered the stage, so we can track time in stage.
