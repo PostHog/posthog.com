@@ -278,15 +278,9 @@ interface RoadmapProps {
     searchQuery?: string
     filteredRoadmaps?: any[]
     groupByValue?: string | null
-    hideModerationButtons?: boolean
 }
 
-export default function Roadmap({
-    searchQuery = '',
-    filteredRoadmaps,
-    groupByValue,
-    hideModerationButtons = false,
-}: RoadmapProps) {
+export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByValue }: RoadmapProps) {
     const { search } = useLocation()
     const { user } = useUser()
     const [sortBy, setSortBy] = useState('popular')
@@ -774,34 +768,6 @@ export default function Roadmap({
                             Here's what we're thinking about building next. If you want to see what we've shipped
                             recently, <Link to="/changelog">visit the changelog</Link>.
                         </p>
-                        {!hideModerationButtons && isModerator && !adding && (
-                            <div className="flex justify-between items-center space-x-2 mb-4">
-                                <div className="relative">
-                                    <CallToAction
-                                        onClick={() => {
-                                            addWindow(
-                                                <RoadmapWindow
-                                                    location={{ pathname: `add-roadmap` }}
-                                                    key={`add-roadmap`}
-                                                    newWindow
-                                                    status="under-consideration"
-                                                    onSubmit={() => {
-                                                        mutate()
-                                                    }}
-                                                />
-                                            )
-                                        }}
-                                        size="xs"
-                                        type="secondary"
-                                    >
-                                        <Tooltip content="Only moderators can see this" placement="top">
-                                            <IconShieldLock className="w-6 h-6 inline-block" />
-                                        </Tooltip>
-                                        Add a feature
-                                    </CallToAction>
-                                </div>
-                            </div>
-                        )}
                         {isModerator && adding && (
                             <RoadmapForm
                                 status="under-consideration"

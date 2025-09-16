@@ -25,7 +25,7 @@ const RoadmapPage = () => {
         content: (
             <div className="p-4 @xl:p-8">
                 <h1>Roadmap</h1>
-                <Roadmap filteredRoadmaps={filteredRoadmaps} groupByValue={groupByValue} hideModerationButtons={true} />
+                <Roadmap filteredRoadmaps={filteredRoadmaps} groupByValue={groupByValue} />
             </div>
         ),
     })
