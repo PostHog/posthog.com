@@ -539,8 +539,6 @@ export default function Team({
                 setFieldValue={setFieldValue}
             />
 
-            {/* <DebugContainerQuery name="reader-content-container" /> */}
-
             <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-8 mb-8">
                 <div className={!teamImage?.image?.data && !editing ? 'col-span-2' : ''}>
                     <div className="@container/team-stats">
