@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-## Senior hiring at PostHog
+## Leadership hiring at PostHog
 
 We deliberately keep our [structure flat](/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more senior-type positions. 
 
