@@ -629,7 +629,7 @@ export const handbookSidebar = [
                         url: '/handbook/people/hiring-process/design-hiring',
                     },
                     {
-                        name: 'Exec hiring',
+                        name: 'Leadership hiring',
                         url: '/handbook/people/hiring-process/exec-hiring',
                     },
                     {
@@ -646,6 +646,20 @@ export const handbookSidebar = [
     {
         name: 'Team structure',
         url: '/handbook/team-structure',
+    },
+    {
+        name: 'Blitzscale',
+        url: '',
+        children: [
+            {
+                name: 'Annual planning',
+                url: '/handbook/exec/annual-planning',
+            },
+            {
+                name: 'All hands topics',
+                url: '/handbook/exec/all-hands-topics',
+            },
+        ],
     },
     {
         name: 'Brand & vibes',
@@ -1009,20 +1023,6 @@ export const handbookSidebar = [
             {
                 name: 'Tech talks',
                 url: '/handbook/engineering/tech-talks',
-            },
-        ],
-    },
-    {
-        name: 'Exec',
-        url: '',
-        children: [
-            {
-                name: 'Annual planning',
-                url: '/handbook/exec/annual-planning',
-            },
-            {
-                name: 'All hands topics',
-                url: '/handbook/exec/all-hands-topics',
             },
         ],
     },
