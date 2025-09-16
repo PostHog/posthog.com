@@ -19,6 +19,7 @@ import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
+import ExaLogo from '../components/CustomerLogos/ExaLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
@@ -194,6 +195,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         // logo: GrooveLogo,
     },
+    exa: {
+        name: 'Exa',
+        toolsUsed: ['session_replay', 'product_analytics', 'max_ai'],
+        notes: 'AI search engine',
+        featured: false,
+        logo: ExaLogo,
+        height: 8,
+    },
     hasura: {
         name: 'Hasura',
         toolsUsed: ['session_replay', 'product_analytics'],
@@ -212,7 +221,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     heygen: {
         name: 'Heygen',
-        // toolsUsed: ['data_warehouse', 'product_analytics'],
+        toolsUsed: ['data_warehouse', 'product_analytics'],
         notes: 'AI video editor',
         logo: HeygenLogo,
         featured: true,
@@ -486,9 +495,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/zealot_brandon_thumb_6c4b5ea067.png',
                     url: 'https://res.cloudinary.com/dmukukwp6/image/upload/zealot_brandon_ef6f4241d7.png',
                 },
-                quotes: [
-                    "I'm so glad you guys don't price based on seats. As soon as I realized that, I invited my whole team.",
-                ],
                 products: {
                     error_tracking:
                         'I can look at an error and see everyone who had it, then view their replays, in two clicks. That’s the part about PostHog that’s so cool: you get all these tools for free and the more you use, the more powerful they become.',
