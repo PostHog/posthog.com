@@ -2,15 +2,25 @@ The Stripe connector can link charges, customers, invoices, prices, products, su
 
 ## Creating a Stripe API key
 
-You need a Stripe API key to create a connector. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create).
+You need a [Stripe API key](https://dashboard.stripe.com/apikeys) to create a connector. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create).
 
-You need to give your API key the following **Read** permissions:
+You need to give your API key the following **Read** permissions in the **Permissions** column:
 
-| Resource Type | Required Read Permissions                                |
-|--------------|--------------------------------------------------------|
-| Core         | Balance transaction sources, Charges, Customer, Product, Disputes, Payouts  |
-| Billing      | Invoice, Price, Subscription, Credit notes                            |
-| Connected    | All resources                                           |
+| Resource Type | Required Read Permissions                                                    |
+|---------------|------------------------------------------------------------------------------|
+| Core          | Balance transaction sources, Charges, Customers, Disputes, Payouts, Products |
+| Billing       | Credit notes, Invoices, Prices, Subscriptions                                |
+| Connect       | Application Fees, Transfers (Or click **Read** in the **Connect** header)    |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_09_16_T15_55_07_193_Z_947eb9f69b.png"
+  alt="Stripe API key permissions"
+  classes="rounded"
+/>
+
+If you aren't concerned with giving us more permissions than necessary, you can also simply click **Read** on the **Core**, **Billing**, and **Connect** headers to give us the necessary permissions.
+
+If your Stripe account is in a language other than English, we suggest you update it to English before following the steps above to guarantee the correct permissions are set.
 
 ## Adding a data source 
 
