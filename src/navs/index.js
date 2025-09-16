@@ -1524,15 +1524,15 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/overview',
             },
             {
-                name: 'Revenue Adjustments',
+                name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
             {
-                name: 'Retention Metrics',
+                name: 'Retention metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
             {
-                name: 'Lifecycle Analysis',
+                name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
         ],
