@@ -2,7 +2,7 @@
     "id": "posthog-react-native",
     "hogRef": "0.3",
     "info": {
-        "version": "4.5.0",
+        "version": "4.5.1",
         "id": "posthog-react-native",
         "title": "PostHog React Native SDK",
         "description": "PostHog React Native SDK allows you to capture events and send them to PostHog from your React Native applications.",
@@ -16,7 +16,7 @@
             "functions": [
                 {
                     "category": "Initialization",
-                    "description": "PostHogProvider is a React component that provides PostHog functionality to your React Native app. You can find all configuration options in the [React Native SDK docs](https://posthog.com/docs/libraries/react-native#configuration-options).\nAutocapturing navigation requires further configuration. See the [React Native SDK navigation docs](https://posthog.com/docs/libraries/react-native#capturing-screen-views) for more information about autocapturing navigation.\nThis is the recommended way to set up PostHog for React Native. This utilizes the Context API to pass the PostHog client around, enable autocapture, and ensure that the queue is flushed at the right time.",
+                    "description": "PostHogProvider is a React component that provides PostHog functionality to your React Native app. You can find all configuration options in the [React Native SDK docs](https://posthog.com/docs/libraries/react-native#configuration-options).\nAutocapturing navigation requires further configuration. See the [React Native SDK navigation docs](https://posthog.com/docs/libraries/react-native#capturing-screen-views) for more information about autocapturing navigation.\nThis is the recommended way to set up PostHog for React Native. This utilizes the Context API to pass the PostHog client around, enable autocapture.",
                     "details": null,
                     "id": "PostHogProvider",
                     "showDocs": true,
@@ -2880,7 +2880,7 @@
             "name": "PostHogEventProperties",
             "properties": [],
             "path": "../core/src/types.ts",
-            "example": "{\n    [key: string]: JsonType;\n}"
+            "example": "// Properties for React Native events\n{\n    event: 'user_signed_up',\n    userId: 'user123',\n    timestamp: new Date().toISOString(),\n    distinct_id: 'user123',\n    $set: {\n        email: 'user@example.com',\n        name: 'John Doe'\n    }\n}"
         },
         {
             "id": "PostHogFeatureFlagDetails",
