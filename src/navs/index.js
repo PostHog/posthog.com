@@ -1838,7 +1838,7 @@ export const companyMenu = {
                 },
                 {
                     name: 'Exec',
-                    url: '/teams/exec',
+                    url: '/teams/blitzscale',
                 },
                 {
                     name: 'Marketing',
