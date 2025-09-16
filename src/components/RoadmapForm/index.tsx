@@ -306,28 +306,30 @@ const SocialSharing = ({ values, setFieldValue }) => {
         <>
             <Accordion
                 dataScheme="primary"
+                // triggerClassName="bg-accent"
                 items={[
                     {
                         value: 'social-sharing',
-                        trigger: <span className="bg-primary pr-2 relative z-10 select-none">Social sharing</span>,
+                        trigger: <span className="pr-2 relative z-10 select-none">Social sharing</span>,
                         content: (
-                            <div>
-                                <div className="divide-y divide-border dark:divide-border-dark mt-4">
-                                    <OSInput
-                                        label="Short title (supports HTML)"
-                                        direction="column"
-                                        placeholder="Short title (supports HTML)"
-                                        value={socialValues.title}
-                                        onChange={(e) => setFieldValue('social.title', e.target.value)}
-                                        className="-mx-4 -mb-1"
-                                    />
-                                    <div className="text-xs py-2">
-                                        Use <code className="text-xs">&lt;span class="text-red"&gt;</code> to emphasize
-                                        important parts and <code className="text-xs">&lt;br /&gt;</code> for a line
-                                        break
+                            <div className="p-2">
+                                <div className="divide-y divide-primary space-y-4">
+                                    <div>
+                                        <OSInput
+                                            label="Short title (supports HTML)"
+                                            direction="column"
+                                            placeholder="Short title (supports HTML)"
+                                            value={socialValues.title}
+                                            onChange={(e) => setFieldValue('social.title', e.target.value)}
+                                        />
+                                        <div className="text-xs pt-2">
+                                            Use <code className="text-xs">&lt;span class="text-red"&gt;</code> to
+                                            emphasize important parts and <code className="text-xs">&lt;br /&gt;</code>{' '}
+                                            for a line break
+                                        </div>
                                     </div>
-                                    <div className="py-4">
-                                        <label className="text-sm opacity-60 block">Title options</label>
+                                    <div className="">
+                                        <label className="text-sm text-secondary pt-4 block">Title options</label>
                                         <div className="flex w-full justify-evenly space-x-8">
                                             <RangeSlider
                                                 value={socialValues.titleSize}
@@ -345,8 +347,8 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="py-4">
-                                        <label className="text-sm opacity-60 block">Image customization</label>
+                                    <div className="">
+                                        <label className="text-sm text-secondary pt-4 block">Image customization</label>
                                         <div className="flex w-full justify-evenly space-x-8">
                                             <RangeSlider
                                                 value={socialValues.imageSize}
@@ -373,7 +375,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                     exit={{ height: 0 }}
                                                     className="overflow-hidden"
                                                 >
-                                                    <div className="py-2">
+                                                    <div className="">
                                                         <button
                                                             type="button"
                                                             onClick={() => setShowHogSelector(!showHogSelector)}
@@ -402,7 +404,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                         </AnimatePresence>
                                     </div>
                                 </div>
-                                <div className="mb-2 flex justify-between items-center border-t border-input pt-4">
+                                <div className="flex justify-between items-center border-t border-primary py-2">
                                     <label className="text-sm opacity-60">Preview</label>
                                     {downloaded ? (
                                         <Icons.IconCheck className="size-4 text-green" />
@@ -413,6 +415,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                             onClick={downloadImage}
                                             disabled={downloadDisabled}
                                         >
+                                            <Icons.IconDownload className="size-4 inline-block mr-1" />
                                             Download image
                                         </button>
                                     )}
@@ -635,7 +638,7 @@ export default function RoadmapForm({
 
     return (
         <form onSubmit={handleSubmit} className="">
-            <div data-scheme="primary" className="space-y-2">
+            <div data-scheme="primary" className="space-y-2 text-primary">
                 <OSInput
                     label="Title"
                     direction="column"
@@ -725,7 +728,7 @@ export default function RoadmapForm({
                 )}
                 {status !== 'under-consideration' && (
                     <div className="p-4 border border-primary">
-                        <label className="text-sm opacity-60 block mb-2">Options</label>
+                        <label className="text-sm text-secondary pt-4 block mb-2">Options</label>
                         {status === 'in-progress' && (
                             <Toggle
                                 checked={values.betaAvailable}
