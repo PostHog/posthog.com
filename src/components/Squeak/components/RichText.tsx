@@ -381,28 +381,21 @@ export default function RichText({
     }
 
     return (
-        <div className="relative not-prose" {...getRootProps()}>
+        <div className="relative" {...getRootProps()}>
             <div onClick={handleContainerClick}>
                 <input className="hidden" {...getInputProps()} />
                 {showPreview ? (
-                    <div>
-                        <div className={`pt-2`}>
-                            <label className={`font-medium text-[15px] mb-1 block`}>
-                                <span>{label}</span>
-                            </label>
-                        </div>
-                        <div className="bg-primary/50 border border-primary text-primary text-base h-[200px] py-3 px-4 resize-none w-full outline-none focus:ring-0 overflow-auto">
-                            <Markdown
-                                transformImageUri={(fakeImagePath) => {
-                                    const objectURL = values.images.find(
-                                        (image) => image.fakeImagePath === fakeImagePath
-                                    )?.objectURL
-                                    return objectURL || fakeImagePath
-                                }}
-                            >
-                                {value}
-                            </Markdown>
-                        </div>
+                    <div className="bg-primary text-primary border-none text-base h-[200px] py-3 px-4 resize-none w-full outline-none focus:ring-0 overflow-auto">
+                        <Markdown
+                            transformImageUri={(fakeImagePath) => {
+                                const objectURL = values.images.find(
+                                    (image) => image.fakeImagePath === fakeImagePath
+                                )?.objectURL
+                                return objectURL || fakeImagePath
+                            }}
+                        >
+                            {value}
+                        </Markdown>
                     </div>
                 ) : (
                     <div className="relative">
@@ -423,15 +416,15 @@ export default function RichText({
                                 )}
                             </AnimatePresence>
                         )}
-                        <div className="">
-                            <OSTextarea
-                                label={label || ''}
-                                direction="column"
-                                // showLabel={!!(label && value)}
+                        <div className="border-b border-secondary">
+                            {label && !!value && (
+                                <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
+                            )}
+                            <textarea
                                 onPaste={handlePaste}
                                 disabled={imageLoading}
                                 autoFocus={autoFocus}
-                                className={`bg-primary border-primary rounded-b-none text-base h-[200px] resize-none w-full text-primary p-4 ${className}`}
+                                className={`bg-primary border-none text-base h-[200px] resize-none w-full text-primary p-4 ${className}`}
                                 onBlur={(e) => e.preventDefault()}
                                 name="body"
                                 value={value}
@@ -439,10 +432,9 @@ export default function RichText({
                                 ref={textarea}
                                 required
                                 id="body"
-                                placeholder="Type more details..."
+                                placeholder={'Type more details...'}
                                 maxLength={maxLength}
                                 onKeyDown={handleKeyDown}
-                                rows={8}
                             />
                         </div>
                         {isDragActive && (
@@ -457,10 +449,7 @@ export default function RichText({
                         </span>
                     </div>
                 )}
-                <div
-                    data-scheme="secondary"
-                    className="bg-primary border border-primary rounded-b flex items-center justify-between border-t-0"
-                >
+                <div data-scheme="secondary" className="bg-primary flex items-center justify-between py-1">
                     <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
                         {buttons.map((button, index) => {
                             return (
@@ -559,17 +548,19 @@ export default function RichText({
                         <Spinner className="w-10 h-10" />
                     </div>
                 )}
-                <div className="absolute top-2 right-0">
-                    <a
-                        className="text-muted hover:text-secondary"
-                        href="https://www.markdownguide.org/cheat-sheet/"
-                        target="_blank"
-                        rel="noreferrer"
-                        title="Supports Markdown syntax"
-                    >
-                        <MarkdownLogo />
-                    </a>
-                </div>
+                {!value && (
+                    <div className="absolute top-4 right-4">
+                        <a
+                            className="text-muted hover:text-secondary"
+                            href="https://www.markdownguide.org/cheat-sheet/"
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Supports Markdown syntax"
+                        >
+                            <MarkdownLogo />
+                        </a>
+                    </div>
+                )}
             </div>
         </div>
     )
