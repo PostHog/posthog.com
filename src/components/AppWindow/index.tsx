@@ -179,7 +179,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
         }) ||
         appMenu.find(({ url }) => url === `/${item?.path?.split('/')[1]}`) ||
-        appMenu[0]
+        appMenu.find(({ name }) => name === 'Docs')
 
     const internalMenu = parent?.children || []
 
