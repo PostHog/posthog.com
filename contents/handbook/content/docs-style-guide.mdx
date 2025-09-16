@@ -166,6 +166,44 @@ This creates the following component in the docs, where the final link will dive
 
 This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
 
+### Inkeep AI assistant
+
+The Max AI component above is great, but it requires users to be logged in and have Max AI enabled. That's why we have a second version that's better suited to using in the blog and docs. This version relies on the Inkeep-powered site chat. This component is globally available and doesn't need to be imported per page.
+
+The InkeepCTA component opens our AI chat interface where users can ask questions and get instant answers based on our documentation, tutorials, and community knowledge. This is particularly useful for general questions about PostHog features, troubleshooting, or getting help with implementation.
+
+To add an AI assistant CTA to docs or tutorials, you can use the InkeepCTA component. It supports a `question` property which enables you to tailor the heading and four example questions that will appear as suggested questions in the chat using the `quickQuestions` property. The final line displays the body copy in the CTA.
+
+For example:
+
+```
+<InkeepCTA 
+  question="Need help with feature flags?"
+  quickQuestions={[
+    "How do I set up feature flags?",
+    "How do I create feature flag conditions?",
+    "How do I test feature flags locally?",
+    "How do I roll out feature flags gradually?"
+  ]}
+>
+  Max AI can help with that.
+</InkeepCTA>
+```
+
+The above config creates the following CTA: 
+
+<InkeepCTA 
+  question="Need help with feature flags?"
+  quickQuestions={[
+    "How do I set up feature flags?",
+    "How do I create feature flag conditions?",
+    "How do I test feature flags locally?",
+    "How do I roll out feature flags gradually?"
+  ]}
+>
+  Max AI can help with that.
+</InkeepCTA>
+
 ### Steps
 
 Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials. 

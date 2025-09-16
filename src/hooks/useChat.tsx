@@ -41,6 +41,15 @@ export function ChatProvider({
     const [loading, setLoading] = useState(true)
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
     const [quickQuestions, setQuickQuestions] = useState(initialQuickQuestions || defaultQuickQuestions)
+
+    // Create dynamic aiChatSettings with current quick questions
+    const dynamicAiChatSettings = useMemo(
+        () => ({
+            ...aiChatSettings,
+            quickQuestions: quickQuestions,
+        }),
+        [aiChatSettings, quickQuestions]
+    )
     const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
     const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
@@ -111,6 +120,22 @@ export function ChatProvider({
         renderChat()
         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
         setConversationHistory(conversations)
+    }, [])
+
+    // Handle quick questions from InkeepCTA
+    useEffect(() => {
+        const pendingQuickQuestions = localStorage.getItem('pendingQuickQuestions')
+        if (pendingQuickQuestions) {
+            try {
+                const quickQuestions = JSON.parse(pendingQuickQuestions)
+                console.log('InkeepCTA: Setting quick questions:', quickQuestions)
+                setQuickQuestions(quickQuestions)
+                localStorage.removeItem('pendingQuickQuestions')
+            } catch (error) {
+                console.error('InkeepCTA: Error parsing quick questions:', error)
+                localStorage.removeItem('pendingQuickQuestions')
+            }
+        }
     }, [])
 
     useEffect(() => {
@@ -186,7 +211,7 @@ export function ChatProvider({
                 conversationHistory,
                 resetConversationHistory,
                 EmbeddedChat,
-                aiChatSettings,
+                aiChatSettings: dynamicAiChatSettings,
                 baseSettings,
                 context,
                 setContext,
