@@ -6,7 +6,7 @@ description: "How to configure PostHog to send email campaigns"
 ## Introduction
 
 Email is the default messaging channel in PostHog.  
-You can use it to send **drip campaigns, transactional messages, or announcements** directly from the Campaign Builder.
+You can use it to send **[drip campaigns](/tutorials/email-drip-campaign), transactional messages, or announcements** directly from the Campaign Builder.
 
 Before you can send your first campaign, you need to:
 
