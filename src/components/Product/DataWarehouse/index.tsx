@@ -198,7 +198,7 @@ export const ProductDataWarehouse = () => {
             }
         }
         {
-            headshotpro: mdx(slug: { eq: "customers/headshot-pro" }) {
+            headshotpro: mdx(slug: { eq: "customers/headshotpro" }) {
                 ...ProductCustomerFragment
             }
             webshare: mdx(slug: { eq: "customers/webshare" }) {
@@ -269,7 +269,7 @@ export const ProductDataWarehouse = () => {
                     </ul>
                 </section>
 
-                <section className="bg-accent dark:bg-accent-dark">
+                <section className="bg-accent">
                     <Marquee product={product.capitalized} shortFade>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />

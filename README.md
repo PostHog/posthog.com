@@ -32,7 +32,7 @@ This is the repository for the PostHog website. It contains:
 
 1. **Pre-installation**
 
-    Install [Node](https://nodejs.org/en/download/) (version 18) - if you installed Node using nvm, you can run `nvm use` to automatically switch to the correct version.
+    Install [Node](https://nodejs.org/en/download/) (version 22) - if you installed Node using nvm, you can run `nvm use` to automatically switch to the correct version.
 
     Install [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
 
@@ -42,7 +42,7 @@ This is the repository for the PostHog website. It contains:
 
 
 
-1.  **Start developing**
+2.  **Start developing**
 
     Clone the repo and navigate into your new site’s directory:
 
@@ -66,7 +66,7 @@ This is the repository for the PostHog website. It contains:
 
     > **Tip:** Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
 
-1.  **Open the source code and start editing!**
+3.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8001`!
     

@@ -5,11 +5,11 @@ title: Managing small teams
 Small team pages are managed in a few places:
 
 1. MDX files in the repo under `/contents/teams/{team-name}`
-   - _Quarterly goals, team-specific handbook content_
+    - _Quarterly goals, team-specific handbook content_
 2. Team records in our CMS, with all fields editable directly on the small team page
-   - _Team photo, mission, crest_
+    - _Team photo, mission, crest_
 3. Small team FAQs
-   - _Aggregated from team member profiles, and from our CMS_
+    - _Aggregated from team member profiles, and from our CMS_
 
 ### Team page content
 
@@ -40,15 +40,16 @@ Until then, when adding quarterly goals for a new quarter, add them to the `inde
 </details>
 ```
 
-See the Brand & Vibes team's [small team page](/teams/brand-vibes) as an example of how it will look.
+See the Brand & Vibes team's [small team page](/teams/brand) as an example of how it will look.
 
---- 
+---
 
 ## Team management
 
 ### Creating a new small team
 
 #### Website steps
+
 1. Make sure you're logged in to your community account
 2. Navigate to `/teams`
 3. Click the _New team_ button
@@ -56,6 +57,7 @@ See the Brand & Vibes team's [small team page](/teams/brand-vibes) as an example
 5. Click _Save & publish_
 
 #### Repo steps
+
 1. Create a directory for the team in `/contents/teams/{team-name}` and duplicate `index.mdx` and `objectives.mdx` from another team as a starting point
 2. Add the team's name to `src/navs/index.js` under the `companyMenu` section in alphabetical order under the _Engineering_ or _Not engineering_ heading
 
@@ -83,14 +85,14 @@ Visit the new small team page to:
 #### Other tasks
 
 1. [Request a custom team crest](https://github.com/PostHog/posthog.com/issues/new?assignees=&labels=&projects=&template=art-request-template.md&title=Art+request+-+%7Btitle%7D) from Lottie. Describe your team with a few adjectives, maybe physical tools that can be used in an illustration, and a sentence or two about what you do. She'll create two versions: a large one (for your small team's page) and a mini crest used in other places (like the [careers page](/careers)).
-3. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
-4. [Create a new team on GitHub](https://github.com/orgs/PostHog/teams) and remove the new members from their previous team
-5. Give that newly-created team Direct Access with Write permission to the [`posthog`](https://github.com/PostHog/posthog/settings/access) and [`posthog.com`](https://github.com/PostHog/posthog.com/settings/access) repositories, as well as any other repos they will be contributing to frequently. This allows team members request review from their team instead of having to tag members individually.
-6. Create the new `feature/team-{team-name}` labels [on GitHub](https://github.com/PostHog/posthog/labels)
-7. On Slack, create a new channel called #team-{team-name}. Add a new People > User group with the handle @team-{team-name}-folks. Add / Remove people from other groups as necessary.
-8. If there are existing forum topics or roadmap items, re-assign them to the new team.
+2. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
+3. [Create a new team on GitHub](https://github.com/orgs/PostHog/teams) and remove the new members from their previous team
+4. Give that newly-created team Direct Access with Write permission to the [`posthog`](https://github.com/PostHog/posthog/settings/access) and [`posthog.com`](https://github.com/PostHog/posthog.com/settings/access) repositories, as well as any other repos they will be contributing to frequently. This allows team members request review from their team instead of having to tag members individually.
+5. Create the new `feature/team-{team-name}` labels [on GitHub](https://github.com/PostHog/posthog/labels)
+6. On Slack, create a new channel called #team-{team-name}. Add a new People > User group with the handle @team-{team-name}-folks. Add / Remove people from other groups as necessary.
+7. If there are existing forum topics or roadmap items, re-assign them to the new team.
     - Make sure there's [a group in Zendesk](https://posthoghelp.zendesk.com/admin/people/team/groups) for the new team, and add the `zendeskGroupID` to the team's record in Strapi so community questions are routed to the right team in Zendesk. (Ask the Website & Docs team for help here.)
-9. Update small team names in [Ashby](https://app.ashbyhq.com/admin/organizational-settings/custom-fields/job/6897f288-b46e-4d51-9bd9-aeb20ad8e62f). These are used to categorize jobs by team on the [careers page](/careers).
+8. Update small team names in [Ashby](https://app.ashbyhq.com/admin/organizational-settings/custom-fields/job/6897f288-b46e-4d51-9bd9-aeb20ad8e62f). These are used to categorize jobs by team on the [careers page](/careers).
 
 ### Managing a small team
 

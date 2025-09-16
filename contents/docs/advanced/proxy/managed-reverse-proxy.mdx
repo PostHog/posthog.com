@@ -9,8 +9,9 @@ PostHog's managed reverse proxy service enables you to route traffic through Pos
 ## Prerequisites
 
 Before setting up the managed reverse proxy, ensure you have the following:
-- A PostHog Cloud account with our [platforms add-ons](https://posthog.com/platform-addons)
-- Access to your domain's DNS settings.
+
+-   A PostHog Cloud account with our [platforms add-ons](https://posthog.com/platform-packages)
+-   Access to your domain's DNS settings.
 
 ## Creating a managed reverse proxy
 
@@ -18,8 +19,10 @@ Before setting up the managed reverse proxy, ensure you have the following:
 2. Click "New Managed Proxy"
 3. Enter a subdomain that you control. For example if you run posthog on `myapp.com`, you could use `ph.myapp.com`
 4. Go to your DNS provider and create a new CNAME record:
-  - The `@` or target should be set to the subdomain you chose in the previous step
-  - You will be shown a domain to use as the CNAME value when creating the record. It will look something like `4854cf84789d8596ad01.proxy-us.posthog.com.`
+
+-   The `@` or target should be set to the subdomain you chose in the previous step
+-   You will be shown a domain to use as the CNAME value when creating the record. It will look something like `4854cf84789d8596ad01.proxy-us.posthog.com.`
+
 5. Wait for the proxy to be created. It will go from "Waiting", to "Issuing" and finally "Live" once everything is set up. There is no further action required after creating the DNS record.
 6. Update your PostHog snippet or SDK to use the subdomain chosen in step 3 as the `api_host`. Make sure to also update the PostHog SDK's `ui_host` config property to `https://us.posthog.com` or `https://eu.posthog.com` depending on your Cloud region.
 

@@ -11,7 +11,7 @@ import {
     DataPipeline,
     DataWarehouse,
     WebAnalytics,
-    LLMObservability,
+    LLMAnalytics,
 } from './Slider/Slides'
 import { Chevron } from 'components/Icons'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
@@ -26,7 +26,7 @@ const slideContents = [
     Surveys,
     DataPipeline,
     DataWarehouse,
-    LLMObservability,
+    LLMAnalytics,
 ]
 
 type SlideButton = {
@@ -68,7 +68,7 @@ const SlideButton = ({
     const active = index === activeIndex
 
     return (
-        <div key={title} className="border-t border-border dark:border-dark first:border-0">
+        <div key={title} className="border-t border-input first:border-0">
             <Disclosure>
                 <Disclosure.Button
                     onClick={() => setActiveIndex(active ? null : index)}
@@ -127,7 +127,7 @@ export default function Accordion(): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)
 
     return (
-        <div className="border-border border dark:border-dark bg-accent dark:bg-accent-dark mx-5 rounded-sm md:hidden mb-6">
+        <div className="border border-primary bg-accent mx-5 rounded-sm md:hidden mb-6">
             {slideButtons.map((slideButton, index) => (
                 <SlideButton
                     key={index}

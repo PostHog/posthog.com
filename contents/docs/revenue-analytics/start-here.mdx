@@ -1,0 +1,119 @@
+---
+title: Getting started with revenue analytics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import DataWarehouseSources from './_snippets/data-warehouse-sources'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+
+
+import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+
+<RevAnalyticsBetaWarning />
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to understand your revenue!">
+
+<QuestLogItem
+    title="Configure your revenue data source"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+  You can configure PostHog to integrate with a revenue data source like Stripe, or you can explicitly capture revenue data as PostHog events.
+
+  ### Data warehouse sources
+
+  If your revenue data is already in one of these sources, you can link it to PostHog's data warehouse and start tracking your revenue.
+
+  <DataWarehouseSources />
+
+  ### Capture revenue events
+
+  If you're not using a supported data warehouse source, or you just want to track revenue manually, you can do so by capturing revenue events with revenue properties.
+
+  <CallToAction type="primary" to="/docs/revenue-analytics/capture-revenue-events">
+    Capture revenue events
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+    title="Choose your reporting currency"
+    subtitle="Required"
+    icon="IconHandMoney"
+>
+
+  PostHog automatically converts revenue from other currencies into your chosen reporting currency. For example, if someone makes a purchase in Canadian Dollars (CAD) and your reporting currency is US Dollars (USD), PostHog converts it into USD to ensure consistency.
+
+  <ProductScreenshot
+      imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/update_currency_light_9345e4640f.png" 
+      imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/update_currency_dark_dc5c40bd15.png"
+      alt="Revenue analytics currency picker" 
+      classes="rounded"
+  />
+
+
+  <CallToAction type="primary" to="https://app.posthog.com/data-management/revenue">
+    Configure your reporting currency
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Visit the revenue analytics dashboard"
+    subtitle="Recommended"
+    icon="IconGraph"
+>
+
+  Once you've configured your revenue data source, you can visit the [revenue analytics dashboard](/docs/revenue-analytics/dashboard) to better understand your revenue.
+
+  <ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png"
+    alt="Revenue analytics dashboard" 
+    classes="rounded"
+  />
+
+  <CallToAction type="primary" to="/docs/revenue-analytics/dashboard">
+    Visit the revenue analytics dashboard
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem
+  title="Connect to customers"
+  subtitle="Recommended"
+  icon="IconPeople"
+>
+
+  Linking your revenue data to your customers enables you to identify your top customers and see how much revenue they're generating.
+
+  When you collect revenue data through events, we'll automatically link the customer to the revenue data. If you're connecting to a payment platform like Stripe, you'll need to manually link the customer to the revenue data.
+
+  <CallToAction type="primary" to="/docs/revenue-analytics/connect-to-customers">
+    Connect to customers
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Try revenue analytics for free while it's in beta"
+  icon="IconPiggyBank"
+>
+
+  PostHog's revenue analytics is currently in beta, and you can try it for free. For now, you'll only be charged for revenue data stored in the data warehouse, or as captured events. 
+  
+  - If you're importing from a payment platform like Stripe, you'll get the first 1,000,000 rows in the [data warehouse](/pricing) for free, every month.
+  - If you're capturing revenue events manually, you'll get the first 1,000,000 events for free, every month.
+
+  PostHog is always built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. All of this applies to revenue analytics, too, when it's out of beta.
+
+  <CallToAction type="primary" to="/docs/revenue-analytics/payment-platforms">
+    Connect revenue data
+  </CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>

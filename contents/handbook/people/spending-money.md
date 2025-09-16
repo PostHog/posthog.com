@@ -12,9 +12,9 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
-> Need a one off budget increase? You can do this directly within Brex - just request the amount and duration for the relevant budget in the app, and the People & Ops team will automatically be notified for approval. 
+> Need a one off spend limit increase? You can do this directly within Brex - just request the amount and duration for the relevant spend limit in the app, and the People & Ops team will automatically be notified for approval. 
 
-You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. 
+You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. Please remember that you need to submit receipts for *all* purchases using your Revolut.
 
 For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
 
@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 ## Saving receipts
 
-Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with Janani.
+Make sure you *keep copies for all receipts $75 or more* for charges **on Brex**. You must save _all_ receipts for charges on Revolut. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />.
 
 You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
 
@@ -34,17 +34,17 @@ You should default to using your company card in all cases - it has no transacti
 
 We now use Brex Empower. This allows the People and Ops team to effectively track overall spending habits of the company without waiting for end of month reports, with very little changes to how you use your Brex account.
 
-- Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spending budget’ to your card. The budget you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ budget. When you then complete your purchase, the money will be taken from that specific budget and you will easily be able to see how much of your budget you have remaining.
+- Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spend limit’ to your card. The spend limit you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ spend limit. When you then complete your purchase, the money will be taken from that specific spend limit and you will easily be able to see how much of your spend limit you have remaining.
 - For subscriptions, you can [create a virtual card](https://dashboard.brex.com/p/wallet?expenses.wallet.view=all&walletCreateCard=true) and assign your subscriptions to that virtual card so all those charges will come from that spend limit and not your default card limit.
-- If you forget to assign a budget before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related budget. 
+- If you forget to assign a spend limit before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related spend limit. 
 - For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
 - You only need to submit receipts for purchases of $75 or more, within 14 days. You don’t need to keep receipts below this amount.
 
 By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
 
-To ensure complete financials, we ask that you provide a reasoning/justification for the expense being incurred in detail eg, if requesting a budget to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. For example, if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
+To ensure complete financials, we ask that you provide a reasoning/justification for the expense being incurred in detail eg, if requesting a spend limit to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. For example, if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
 
-If you have expenses that require payment from Brex via ACH or wire (i.e, you can't use your card to pay), you can upload the invoice directly into Brex via the 'draft bill' functionality. That allows someone from the People Ops/Finance team to go in and approve! Please include the context of what the invoice is for, which budget it will be coming out of, and how it was approved.
+If you have expenses that require payment from Brex via ACH or wire (i.e, you can't use your card to pay), you can upload the invoice directly into Brex via the 'draft bill' functionality. That allows someone from the People Ops/Finance team to go in and approve! Please include the context of what the invoice is for, which spend limit it will be coming out of, and how it was approved.
 
 If you have some invoice/receipt to share with the Finance team, send it to finance@posthog.com, and setup this email as the default billing email with vendors, software subscriptions, etc.
 
@@ -69,7 +69,7 @@ If your purchase fits within the policy below, there is no need to ask. We _cann
 
 If you don't have enough space on your company card, just ask Fraser to increase your limit.
 
-If you wish to pay for invoices but don't have the budget to do so, you can draft a bill on Brex, upload the invoice, provide an explanation on what the bill is for, and submit it for payment.
+If you wish to pay for invoices but don't have the limit to do so, you can draft a bill on Brex, upload the invoice, provide an explanation on what the bill is for, and submit it for payment.
 
 ## Equipment
 
@@ -90,7 +90,7 @@ We'd prefer you to use a laptop. This is so when we host meetups in real life, y
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
 
-Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
+Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen that meets our suggested monitor specs below. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
 > You need to purchase a laptop with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. Please do not purchase any other type.
 
@@ -98,7 +98,7 @@ If you are in the US only, when buying something at Apple we can get 3% cashback
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-> You can request a budget to buy a new laptop if your laptop is over 4 years old - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. We recommend wiping + reinstalling a minimum set of apps to verify this. 
+> You can request a spend limit to buy a new laptop if your laptop is over 4 years old or significantly impacting your productivity - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
 >
 > If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
@@ -150,7 +150,13 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 
-Every person has $100 per month for personal software - this is software that is purely for your individual use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+Every person has $100 per month for individual software use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+
+### AI tools & API
+
+This is expected to be a dedicated monthly budget to help you enhance your work productivity and empower you to ship faster. This budget of USD 300 per month for the Tech/R&D department, is separate from your regular software subscription. It is meant for work related tools only, such as AI coding assistants, API credits, other AI tool subscriptions. 
+
+These budgets shouldn't stop us from innovating, and we can approve an increase on a case-by-case basis.
 
 ### Optional software
 
@@ -165,6 +171,10 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
 - <Link to="https://www.zoom.us" external>Zoom</Link>
   
   We use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask <TeamMember name="Simon Fisher" photo />. (But does anyone _really_ need longer meetings?)
+
+- <Link to="https://superhuman.com" external>Superhuman</Link>
+  
+  Everyone has their own favorite email app, but Superhuman users will make sure you don’t forget theirs. We have a team plan to keep those folks happy with inbox zero and inner peace.
 
 ### IDEs
 
@@ -198,13 +208,15 @@ We have a company WeWork All Access account that allows you to book desks in any
 If you need to travel on PostHog’s behalf for in-person onboarding, meeting customers, and offsites, again please spend money in the best interests of the company. 
 
 We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
-- We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
+- We all travel economy by default – we don't pay for folks to fly premium or business class. Feel free to upgrade using your personal money/miles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat.
+- If you'd like to travel in a premium cabin using personal miles or points and can only book the flight using points, you can request a reimbursement for the cost of the economy fare in Brex. Submit your request with a screenshot of the cost of the economy fare at the time of booking.
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
-- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
-- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when travelling on behalf of PostHog.
+- Related to the above, consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when traveling to the US. PostHog will cover costs here.
+- When traveling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
+- When making charges on your card internationally, run the transaction using the local currency when given the option as Brex will generally have a better exchange rate.
+- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when traveling on behalf of PostHog.
 
-> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
+> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 
 ### Budget for working together/socializing
 

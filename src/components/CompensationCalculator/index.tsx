@@ -38,12 +38,13 @@ const Section = ({
             <div className="flex items-baseline gap-1">
                 {!hideTitle && <h3 className="!text-[15px] !m-0">{title}</h3>}
                 {subtitle && <span className="text-sm text-black/70 dark:text-white/70">{subtitle}</span>}
-                {description && <Tooltip placement="top" content={() => <div className="max-w-xs">{description}</div>}>
-                    <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px -left-0.5">
-                        <IconInfo className="size-4 inline-block" />
-                    </span>
-                </Tooltip>
-                }
+                {description && (
+                    <Tooltip placement="top" content={() => <div className="max-w-xs">{description}</div>}>
+                        <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px -left-0.5">
+                            <IconInfo className="size-4 inline-block" />
+                        </span>
+                    </Tooltip>
+                )}
             </div>
             {children}
         </div>
@@ -52,7 +53,7 @@ const Section = ({
 
 const Factor: React.FC = (props) => {
     return (
-        <li className="flex-col @sm:flex-row list-none px-1 py-1 flex !text-[15px] justify-between border-t border-light dark:border-dark first:border-none !leading-snug">
+        <li className="flex-col @sm:flex-row list-none px-1 py-1 flex !text-[15px] justify-between border-t border-primary first:border-none !leading-snug">
             {props.children}
         </li>
     )
@@ -197,7 +198,7 @@ export const CompensationCalculator = ({
                     <Section title="Level" description={descriptions['level'] && descriptions['level']}>
                         {breakpoints.sm ? (
                             <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
-                                <div className="w-full inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-gray-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
+                                <div className="w-full inline-flex flex-col items-stretch md:flex-row md:items-center bg-white  rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
                                     {Object.entries(levelModifier).map(([level, modifier]) => (
                                         <RadioGroup.Option
                                             as="button"
@@ -229,16 +230,18 @@ export const CompensationCalculator = ({
                             value={step}
                             onChange={setItem('step')}
                             options={Object.keys(stepModifier)}
-                            display={(step: string) => `${step} (${stepModifier[step]?.[0]} - ${stepModifier[step]?.[1]})`}
+                            display={(step: string) =>
+                                `${step} (${stepModifier[step]?.[0]} - ${stepModifier[step]?.[1]})`
+                            }
                         />
                     </Section>
                 </div>
             </div>
             {job && country && region && currentLocation && level && step ? (
                 <Section title="Salary calculator" hideTitle={hideFormula}>
-                    <div className={` ${hideFormula ? '' : 'px-4 py-2 my-2 max-w-lg border border-light dark:border-dark rounded'}`}>
+                    <div className={` ${hideFormula ? '' : 'px-4 py-2 my-2 max-w-lg border border-primary rounded'}`}>
                         {!hideFormula && job && country && currentLocation && level && step && (
-                            <ol className="ml-0 !mb-2 p-0 border-b-2 border-light dark:border-dark">
+                            <ol className="ml-0 !mb-2 p-0 border-b-2 border-primary">
                                 <Factor>
                                     <span>
                                         Benchmark ({currentLocation.country} - {currentLocation.area})
@@ -266,23 +269,32 @@ export const CompensationCalculator = ({
                                 </Factor>
                             </ol>
                         )}
-                        <div className={`rounded flex ${hideFormula ? 'border-t-2 justify-between border-light dark:border-dark pt-2' : 'justify-between'}`} id="compensation">
+                        <div
+                            className={`flex ${
+                                hideFormula ? 'border-t-2 justify-between border-primary pt-2' : 'justify-between'
+                            }`}
+                            id="compensation"
+                        >
                             <span className="font-bold">{hideFormula ? <span>Total</span> : 'Salary'}&nbsp;</span>
-                            <span className={`flex ${hideFormula ? 'gap-1 items-baseline' : 'flex-col justify-end text-right'}`}>
+                            <span
+                                className={`flex ${
+                                    hideFormula ? 'gap-1 items-baseline' : 'flex-col justify-end text-right'
+                                }`}
+                            >
                                 <span className="font-bold">
                                     {formatCur(
                                         sfBenchmark[job] *
-                                        currentLocation.locationFactor *
-                                        levelModifier[level] *
-                                        stepModifier[step][0],
+                                            currentLocation.locationFactor *
+                                            levelModifier[level] *
+                                            stepModifier[step][0],
                                         currentLocation.currency
                                     ) +
                                         ' - ' +
                                         formatCur(
                                             sfBenchmark[job] *
-                                            currentLocation.locationFactor *
-                                            levelModifier[level] *
-                                            stepModifier[step][1],
+                                                currentLocation.locationFactor *
+                                                levelModifier[level] *
+                                                stepModifier[step][1],
                                             currentLocation.currency
                                         )}
                                 </span>
@@ -292,6 +304,6 @@ export const CompensationCalculator = ({
                     </div>
                 </Section>
             ) : null}
-        </div >
+        </div>
     )
 }

@@ -115,13 +115,17 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits and start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
+We do offer additional discounts to nonprofits and start nonprofit discounts at 15% regardless of spend.
 
-When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
+If signing for an annual plan with a credit purchase between $25k and $80k, an additional 5% nonprofit discount is applied. For example, purchasing $25k in credits with an additional 5% nonprofit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
 
-To set up the non-profit discount in Stripe, follow the [instructions here](/handbook/growth/sales/billing#coupons-and-discounts).
+We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
-> Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
+When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. 
+
+To set up the nonprofit discount in Stripe, follow the [instructions here](/handbook/growth/sales/billing#coupons-and-discounts).
+
+> Nonprofit discounts only stack with annual discounts at a rate of 5%, and only if the credit purchase amount is less than $80,000.
 
 ### Legacy discounts
 
@@ -148,7 +152,7 @@ If a customer wishes to use subsequent year's credit early they must agree to pa
 
 The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.
 
-You can see a signed multi-year contract set up in this way [here](https://app.pandadoc.com/a/#/documents/WjZzCSt8CbRUFNKLxXK5fU).
+You can see a signed multi-year contract set up in this way by navigating to Documents -> Examples (folder) inside of [PandaDoc](https://app.pandadoc.com).
 
 ## Uptime SLA
 
@@ -206,18 +210,52 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
 
-## Varying terms
+## Varying contractual terms
 
-> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of potential changes.
+### When we vary terms
 
-The customer should redline the .docx version of the document in question.  You can find the latest versions of the templates in the Team Internal Info tab in the #team-sales Slack channel.  Once they have returned the redlines to you first check to ensure that they have used the template which you provided, and then share the document for review in the #legal channel.  There will usually be a few rounds of back and forth as we converge on an agreement.  
+If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these suggested changes (also known as "redlines").  
+
+At a minimum, we will only do this for contracts above $20k a year, and we should expect even higher amounts of committed revenue if they are asking for big changes (e.g. changing significant provisions, adding Service Level Agreements, etc.). A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of suggested changes. We [evaluate all requested changes proportionally against their annual committed spend](/handbook/growth/sales/contract-rules#what-customers-should-expect) with PostHog.  A customers annual committed spend needs to be defined before proceeding to a negotiation over legal terms, otherwise there is no frame of reference for the negotiation. 
+
+We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity where the potential annual revenue is understood.
+
+### How customers should suggest requested terms
+
+The customer should redline the current .docx version of the document in question.  You can find the latest versions of the templates in the Team Internal Info tab in the #team-sales Slack channel (do not save versions locally).  
 
 > We don't accept redlines on our standard terms of service and if a customer has proposed this you should share the correct templates with them before involving legal.
 
-We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity.
+Once they have returned the redlines to you first check to ensure that they have used the template which you provided, and then share the document for review in the #legal channel.  There will usually be a few rounds of back and forth as we converge on an agreement. You will continue to represent PostHog's position to your customer throughout the negotiation. Please work with #legal on the appropriate responses and speak clearly to our customers. 
 
-## Non-PostHog contracts
+### What customers should expect 
 
-If a customer requests to use a non-PostHog drafted contract for documents such as a DPA, MSA, Order Form, or BAA, we generally decline, except in special circumstances.  We avoid doing this as it adds too much risk for us, and also because reviewing and negotiating non-standard terms introduces significant operational inefficiencies and doesn't scale well as we continue to grow. We typically do not even consider using customer paper unless the deal is over $100k annually or involves an extremely blue-chip company. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. 
+PostHog evaluates legal risk assumed against annual revenue received. In other words, contractual terms will be varied in proportion to the customer's committed annual spend with PostHog.
+
+To illustrate with examples:
+
+- A customer committing to spend just $20k USD annually should not expect significant deviations from PostHog's standard terms. Minor, clarifying edits will be acceptable. We will not spend our time going back and forth for this amount. We may respond to significant changes with a polite, "no," rather than negotiating, to communicate clearly.
+- A customer committing to spend $80k USD annually would be able to request slightly more sigificant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
+- A customer committing to spend $160k USD annually (or more) would be able request even more sigificant deviations from PostHog's standard terms, and we will evaluate the suggested terms through the lens of legal risk assumed against annual revenue received. This will be a negotiation, and we will represent PostHog's position clearly as we go along.
+
+At any potential level of annual spend, PostHog will not proceed under unreasonable legal terms. Certain suggested terms may be non-starters for PostHog. 
+
+### Varying terms for trials and proofs of concept (POCs) for prospective customers
+
+We don't vary PostHog's standard terms for trials and proofs of concepts (POCs) for prospective customers. 
+
+All prospective customers are welcome to try PostHog for free and under our standard terms (including our standard DPA and BAA, if applicable).
+
+We don't negotiate terms for trials and POCs for three reasons:
+
+1. Unlike many of our competitors, an annual subscription is not required to access PostHog, so a negotiated agreement is not necessary to use our services. Our product-led motion is designed to support customers trying PostHog. 
+2. When [evaluating custom legal terms](/handbook/growth/sales/contract-rules#what-customers-should-expect), PostHog evaluates legal risk assumed against annual revenue received. 
+3. Because prospective customers are paying us $0 for a free, sales-led trial or POC, there is no frame of reference for us to evaluate any potential custom terms.  Spending our time and legal resources negotiating these terms is premature when a prospective customer doesn't know that they want to proceed with PostHog at all, much more at a qualifying level of annual usage. 
+
+Once the trial concludes, and [per our guidance on varying terms](/handbook/growth/sales/contract-rules#varying-contractual-terms), we will be happy to evaluate custom legal terms for an otherwise qualified PostHog customer. 
+
+## Using Non-PostHog contracts
+
+If a customer requests to use a non-PostHog drafted contract for documents such as a DPA, MSA, Order Form, or BAA, we generally decline, except in special circumstances (see ['When we vary terms for customers'](/handbook/growth/sales/contract-rules#when-we-vary-terms)).  We avoid doing this as it adds too much risk for us, and also because reviewing and negotiating non-standard terms introduces significant operational inefficiencies and doesn't scale well as we continue to grow. We typically do not even consider using customer paper unless the deal is over $200k annually or involves an extremely blue-chip company. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. 
 
 We are somewhat more flexible when it comes to NDAs. That said, since we contract through our U.S. entity, we require customer NDAs to be governed by U.S. law. This is necessary to maintain consistency and ensure we’re not taking on legal or operational risk in jurisdictions where we don’t operate or fully understand the legal landscape. This is mainly about ensuring we can review and manage agreements efficiently with our limited legal resources.

@@ -1,0 +1,98 @@
+---
+title: Model Context Protocol (MCP)
+---
+import CalloutBox from '../../../src/components/Docs/CalloutBox'
+import Tab from "components/Tab"
+import CursorSnippet from "./_snippets/cursor.mdx"
+import ClaudeDesktopSnippet from "./_snippets/claude-desktop.mdx"
+import WindsurfSnippet from "./_snippets/windsurf.mdx"
+import VSCodeSnippet from "./_snippets/vscode.mdx"
+import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
+import ZedSnippet from "./_snippets/zed.mdx"
+import MCPTools from '../../../src/components/Docs/MCPTools'
+
+The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
+
+
+## Quick install using the PostHog wizard
+
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor**, **Claude Code**, **Claude Desktop**, **VS Code** and **Zed**.
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below.
+
+## Manual install
+
+Start by getting a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
+
+This lets you add the MCP configuration to any desktop client you use, such as Cursor, Windsurf, or Claude Desktop.
+
+<CalloutBox icon="IconInfo" title="Don't forget to use your personal API key" type="action">
+
+In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER</code> environment variable placeholder with the personal API key you obtained in the first step.
+
+</CalloutBox>
+
+<Tab.Group tabs={['cursor', 'claude-desktop', 'windsurf', 'vscode', 'claude-code', 'zed']}>
+    <Tab.List>
+        <Tab>Claude Code</Tab>
+        <Tab>Claude Desktop</Tab>
+        <Tab>Cursor</Tab>
+        <Tab>Windsurf</Tab>
+        <Tab>VS Code</Tab>
+        <Tab>Zed</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <ClaudeCodeSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ClaudeDesktopSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <CursorSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <WindsurfSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <VSCodeSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ZedSnippet />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+<details>
+
+<summary>Security considerations</summary>
+
+We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
+
+- **Use the right API key permissions:** Use the provided **MCP Server** preset in the personal API key creator. If you use the MCP in an agentic workflow on production data, scope down the API key's permissions to only the permissions you want it to use. This prevents the AI from making unintended changes to your PostHog configuration or data.
+
+- **Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+
+- **Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+
+</details>
+
+
+## Available Tools
+
+Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. PostHog tools are also available in our [agent toolkit](/docs/ai-engineering/agent-toolkit) which can be integrated with AI agent frameworks like Vercel's AI SDK and LangChain.
+
+Here's a list of tools we provide:
+
+<MCPTools />
+
+
+## Next Steps
+
+- [PostHog MCP server](https://github.com/posthog/mcp): Check out GitHub repository for the MCP server
+- [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
+- [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?

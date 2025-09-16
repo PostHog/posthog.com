@@ -1,0 +1,19 @@
+---
+title: Troubleshooting and FAQs
+---
+
+
+## How much does LLM analytics cost?
+
+Your first 100,000 `$ai_model` events each month are free – i.e. if you never exceed this number, you can use LLM analytics for free.
+
+After this, we charge a small amount for each `$ai_*` event you send.
+
+Go to the [pricing page](/pricing) to use our calculator to get an estimate. You can also view an estimate on [your billing page](https://app.posthog.com/organization/billing).
+
+## Why can't I see any of my LLM events?
+
+There are a few reasons why you might not be seeing any LLM events:
+
+- There might be a delay in the events being processed. You can check the status of our ingestion [here](https://status.posthog.com/).
+- If you are in a serverless environment make sure you are calling `posthog.shutdown()` before ending the request.

@@ -1,7 +1,7 @@
 import React from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
-import './slider.scss'
+import './slider.css'
 
 // Thanks to https://codesandbox.io/s/rc-slider-log-demo-forked-xffr0
 

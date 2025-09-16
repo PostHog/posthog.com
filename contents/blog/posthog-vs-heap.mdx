@@ -6,13 +6,13 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
 featuredImageType: full
 author:
-  - andy-vandervell
+    - andy-vandervell
 category: General
 tags:
-  - Comparisons
+    - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -24,11 +24,11 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 What does this mean?
 
-- It means [we ship fast](/changelog) and iterate based on user feedback.
-- It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
-- It means we have extensive [public and private API endpoints](/docs/api), and a powerful [SQL query builder](/docs/product-analytics/sql).
-- It means we built [SDKs](/docs/libraries) for all popular (and many unpopular) client-side, backend, and mobile languages and frameworks.
-- It means we make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
+-   It means [we ship fast](/changelog) and iterate based on user feedback.
+-   It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
+-   It means we have extensive [public and private API endpoints](/docs/api), and a powerful [SQL query builder](/docs/product-analytics/sql).
+-   It means we built [SDKs](/docs/libraries) for all popular (and many unpopular) client-side, backend, and mobile languages and frameworks.
+-   It means we make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
 
 ### 2. We're an all-in-one platform
 
@@ -36,11 +36,11 @@ Heap is mainly focused on product analytics. This means you need to adopt additi
 
 ### 3. We're totally transparent
 
-- How much will PostHog cost? Use our [pricing calculator](/pricing). 
-- What are we working on? It's on our [public roadmap](/roadmap)? 
-- How does sales work? We have a [whole page on it](/sales).
-- What do we care about? We explain everything in our [public company handbook](/handbook).
-- How do we make money? That's [in the handbook](/handbook/how-we-make-money), too.
+-   How much will PostHog cost? Use our [pricing calculator](/pricing).
+-   What are we working on? It's on our [public roadmap](/roadmap)?
+-   How does sales work? We have a [whole page on it](/sales).
+-   What do we care about? We explain everything in our [public company handbook](/handbook).
+-   How do we make money? That's [in the handbook](/handbook/how-we-make-money), too.
 
 Oh, we're open source, too. Go take a peak at our code if you like on [our GitHub repo](https://github.com/PostHog).
 
@@ -49,37 +49,157 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
 ### Platform
 
 <ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Easy to use analytics for marketing websites" />
-  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Run tests on new features, optimize conversion funnels" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
-  <ComparisonRow column1="Beta" column2={false} feature="Customer data platform" description="Sync data with third-party tools" />
-  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="A single source for all your important data" />
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1="Beta" column2={false} feature="Error tracking" description="Track and monitor errors and exceptions in your code" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Product analytics"
+        description="Track events and conversion, analyze user behavior"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Web analytics"
+        description="Easy to use analytics for marketing websites"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Session replay"
+        description="Watch real users use your product, diagnose bugs"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Feature flags"
+        description="Roll out features safely, toggle features for cohorts or individuals"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Experiments"
+        description="Run tests on new features, optimize conversion funnels"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Surveys"
+        description="Collect and analyze feedback, run NPS and PMF surveys "
+    />
+    <ComparisonRow
+        column1="Beta"
+        column2={false}
+        feature="Customer data platform"
+        description="Sync data with third-party tools"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Data warehouse"
+        description="A single source for all your important data"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Heatmaps"
+        description="Visualize where users click in your app or website"
+    />
+    <ComparisonRow
+        column1="Beta"
+        column2={false}
+        feature="Error tracking"
+        description="Track and monitor errors and exceptions in your code"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Open source"
+        description="Build your own apps and contribute code"
+    />
 </ComparisonTable>
 
-> 💡 **Good to know:** PostHog can replace multiple tools, such as [Hotjar](/blog/posthog-vs-hotjar), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly). This makes it a lot easier to extract usable insights, since you don't have to constantly switch between tools. Running PostHog on both your product and website makes it easier to understand how marketing activity influences signups and usage, too. 
+> 💡 **Good to know:** PostHog can replace multiple tools, such as [Hotjar](/blog/posthog-vs-hotjar), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly). This makes it a lot easier to extract usable insights, since you don't have to constantly switch between tools. Running PostHog on both your product and website makes it easier to understand how marketing activity influences signups and usage, too.
 
 ### Product analytics
 
 <ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1="1 million events" column2="10k monthly tracked users" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={true} column2={false} feature="SQL query editor" description="Write your own queries in SQL" />
-  <ComparisonRow column1={false} column2={true} feature="AI insight builder" description="'Talk to your data' using AI" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company and account level" />
-  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
-  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
-  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
-  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize which users stay, for how long" />
-  <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
-  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
-  <ComparisonRow column1={true} column2={false} feature="Stickiness" description="Find out what events keep users coming back." />
+    <ComparisonRow
+        column1="1 million events"
+        column2="10k monthly tracked users"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Autocapture"
+        description="Capture events without manual logging"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="SQL query editor"
+        description="Write your own queries in SQL"
+    />
+    <ComparisonRow
+        column1={false}
+        column2={true}
+        feature="AI insight builder"
+        description="'Talk to your data' using AI"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Group analytics"
+        description="Track metrics at a company and account level"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Dashboards"
+        description="Combine insights into shareable dashboards"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Graphs and trends"
+        description="Build custom insights and visualizations"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Funnels"
+        description="Track users through a sequence of events"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Retention"
+        description="Visualize which users stay, for how long"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="User paths"
+        description="Track user flows and where they drop-off"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Cohorts"
+        description="Combine users based on properties and events for group analysis"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Lifecycle analysis"
+        description="Understand who is dormant, churning, and thriving"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Stickiness"
+        description="Find out what events keep users coming back."
+    />
 </ComparisonTable>
 
 > 💡 **Good to know** Every PostHog user gets [1 million events for free](/pricing) each month. You can also save money by sending us anonymous events for non-identified users, which are up to 80% cheaper than identified product analytics events. Anonymous events are ideal for tracking behavior on marketing websites, or mobile apps with large consumer audiences. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for more.
@@ -87,20 +207,90 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
 ### Session replays
 
 <ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1="5,000 web recordings, 2,500 mobile recordings" column2="Limited trial" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1={true} column2={true} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
-  <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a user's browser" />
-  <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
-  <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
-  <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
-  <ComparisonRow column1={true} column2={true} feature="Conditional capture" description="Only capture the sessions you want" />
-  <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
-  <ComparisonRow column1={true} column2={false} feature="Export recordings" description="Save important recordings offline" />
-  <ComparisonRow column1={true} column2={false} feature="Minimum duration" description="Only record sessions longer than the minimum duration" />
-  <ComparisonRow column1={true} column2={true} feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
-  <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
+    <ComparisonRow
+        column1="5,000 web recordings, 2,500 mobile recordings"
+        column2="Limited trial"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Web app recordings"
+        description="Capture recordings from single-page apps"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Mobile app recordings"
+        description="Capture recordings in iOS and Android apps"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Identity detection"
+        description="Link recordings to user IDs"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Console logs"
+        description="Capture extra content from a user's browser"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Playlists"
+        description="Sort recordings into static and dynamic playlists"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Performance monitoring"
+        description="Track network events within a session"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Privacy masking"
+        description="Censor personal information from playback"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Conditional capture"
+        description="Only capture the sessions you want"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="DOM explorer"
+        description="Explore an interactive snapshot of replays"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Export recordings"
+        description="Save important recordings offline"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Minimum duration"
+        description="Only record sessions longer than the minimum duration"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Sample recorded sessions"
+        description="Restrict the percentage of sessions that will be recorded"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Record via feature flag"
+        description="Only record sessions for users that have the flag enabled"
+    />
 </ComparisonTable>
 
 > 💡 **Good to know:** Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for [product-market fit](/founders/product-market-fit-game). Both Heap and PostHog offer session replay, though Heap lacks many developer-facing features like a DOM explorer, performance monitoring, and network events, which are useful for fixing bugs and performance issues.
@@ -108,17 +298,62 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
 ### Feature flags
 
 <ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1="1 million API requests" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={false} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={false} feature="Multivariate flags" description="Flags with multiple customizable values" />
-  <ComparisonRow column1={true} column2={false} feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Store flag definitions locally" />
-  <ComparisonRow column1={true} column2={false} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
+    <ComparisonRow
+        column1="1 million API requests"
+        column2="n/a"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Boolean flags"
+        description="Simple flags returning true or flag"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Multivariate flags"
+        description="Flags with multiple customizable values"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Payloads"
+        description="Flags with string, number, or JSON payloads"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Local evaluation"
+        description="Store flag definitions locally"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Percentage rollouts"
+        description="Target percentages of a group"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Custom targeting"
+        description="Target users based on user properties, custom contexts"
+    />
+    <ComparisonRow
+        column1="Partial"
+        column2={false}
+        feature="Environments"
+        description="Manage flags for dev, staging, prod"
+    />
+    <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Bootstrapping"
+        description="Flags available on frontend application load"
+    />
+    <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
 > 💡 **Good to know:** Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). Our feature flags are also tightly integrated with other features so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
@@ -126,15 +361,60 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
 ### Experiments
 
 <ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1="1 million API requests" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={false} feature="Custom goals" description="Customize metrics that a test tracks" />
-  <ComparisonRow column1={true} column2={false} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2={false} feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2={false} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={false} feature="Statistical significance" description="Automatically checks for statistical significance" />
-  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculates the recommended run time and sample size" />
-  <ComparisonRow column1="Partial" column2="n/a" feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
-  <ComparisonRow column1="Bayesian" column2="n/a" feature="Statistics engine" description="How the results of an experiment are calculated" />
+    <ComparisonRow
+        column1="1 million API requests"
+        column2="n/a"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Custom goals"
+        description="Customize metrics that a test tracks"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Secondary metrics"
+        description="Monitor impact on unrelated metrics"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Split testing"
+        description="Split participants into groups"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Multivariate (A/B/n) testing"
+        description="Test multiple variants of a change"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Statistical significance"
+        description="Automatically checks for statistical significance"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Recommended run time"
+        description="Calculates the recommended run time and sample size"
+    />
+    <ComparisonRow
+        column1="Partial"
+        column2="n/a"
+        feature="Holdout testing"
+        description="Withhold multiple features to measure cumulative impact"
+    />
+    <ComparisonRow
+        column1="Bayesian"
+        column2="n/a"
+        feature="Statistics engine"
+        description="How the results of an experiment are calculated"
+    />
 </ComparisonTable>
 
 > 💡 **Good to know:** Our experiments integrate seamlessly with our feature flag product. This means you can easily deploy the winning variant of an experiment with a single click from the experiment UI.
@@ -142,16 +422,36 @@ Oh, we're open source, too. Go take a peak at our code if you like on [our GitHu
 ### Security and compliance
 
 <ComparisonTable column1="PostHog" column2="Heap">
-  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
-  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
-  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1={true} column2={true} feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="User privacy options"
+        description="Anonymize users, drop personal data"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="History, audit logs"
+        description="Manage and view flag edits and related users"
+    />
+    <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+    <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+    <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="2FA"
+        description="Enforce login with two-factor authentication"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="SAML/SSO"
+        description="Use SAML or single sign-on authentication"
+    />
 </ComparisonTable>
 
-> 💡**Good to know:** Additional compliance features, such as HIPAA Business Associate Agreements, advanced permissions, and audit logs are available on our some of our [platform add-ons](/platform-addons), which also includes our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) and white labelling for surveys and shared dashboards.
+> 💡**Good to know:** Additional compliance features, such as HIPAA Business Associate Agreements, advanced permissions, and audit logs are available on our some of our [platform packages](/platform-packages), which also includes our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) and white labelling for surveys and shared dashboards.
 
 ## Frequently asked questions
 
@@ -177,7 +477,7 @@ Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshootin
 
 ### What about ad blockers?
 
-We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. 
+We recommend all users deploy a reverse proxy, which enables you to send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible.
 
 We offer a managed reverse proxy on our Team plans, and we have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs if you want to run your own.
 
@@ -187,8 +487,8 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
 ### Can you use PostHog on e-commerce websites?
 
-Absolutely. PostHog is easy to integrate with [Shopify](/docs/libraries/shopify) and [WooCommerce](/docs/libraries/woocommerce). You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
+Absolutely. PostHog is easy to integrate with [Shopify](/docs/libraries/shopify) and [WooCommerce](/docs/libraries/woocommerce). You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress).
 
 ### How does PostHog compare to Amplitude and Mixpanel?
 
-Amplitude and Mixpanel offer similar features to Heap. Read our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) guides for more info. You may also find guide to the [most popular Heap alternatives](/blog/best-heap-alternatives) useful.
+Amplitude and Mixpanel offer similar features to Heap. Read our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) and [PostHog vs Amplitude](/blog/posthog-vs-amplitude) guides for more info. You may also find guides to the [most popular Heap alternatives](/blog/best-heap-alternatives) useful.

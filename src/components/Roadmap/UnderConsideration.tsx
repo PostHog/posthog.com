@@ -45,7 +45,7 @@ export const Reactions = ({ reactions, className = '' }) => {
 export function UnderConsideration(props: IRoadmap) {
     const { title, html_url, number, reactions } = props.githubPages[0]
     return (
-        <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 px-4 py-4 sm:py-2 xl:pb-4 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-sm relative">
+        <li className="sm:flex xl:flex-col space-y-2 sm:space-y-0 px-4 py-4 sm:py-2 xl:pb-4 bg-accent border border-primary rounded-sm relative">
             <div className="flex-1 sm:mt-2">
                 <Link to={html_url} className="text-red flex-1 space-x-1 items-center">
                     <span>{title}</span>

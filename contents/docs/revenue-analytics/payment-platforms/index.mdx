@@ -1,0 +1,37 @@
+---
+title: Connect to payment platforms
+sidebar: Docs
+showTitle: true
+---
+
+import DataWarehouseSources from '../_snippets/data-warehouse-sources'
+import RevAnalyticsBetaWarning from '../_snippets/rev-analytics-beta-warning.mdx'
+
+<RevAnalyticsBetaWarning />
+
+The simplest way to get started with revenue analytics is to connect to a payment platform. 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_18_19_eeec8127a9.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_18_30_c7ad45d637.png"
+    alt="Data warehouse tables setup"
+    classes="rounded"
+/>
+
+Start by connecting your payment platform(s) to PostHog as a data source:
+
+<DataWarehouseSources />
+
+> We currently only support revenue analytics data from Stripe. The Chargebee connector already exists and integration with revenue analytics is coming soon. Integrations with RevenueCat and Polar are coming in the near future. Check our roadmap at [our team page](/teams/revenue-analytics).
+
+## How is the data stored?
+
+When you connect your payment platform(s) to PostHog, the data is transformed into standardized [managed views](/docs/revenue-analytics/managed-views). Revenue analytics uses this data to build your [revenue analytics dashboard](/docs/revenue-analytics/dashboard).
+
+The data is stored in the [data warehouse](/docs/data-warehouse) and is available for you to run custom queries and visualize like any other data in PostHog.
+
+## Deferred revenue
+
+When using revenue data from your data warehouse (from sources like Stripe), PostHog automatically defers revenue recognition to match your accounting practices. This means we spread the revenue across all the months a charge is relevant for.
+
+You can learn more about this on the [deferred revenue](/docs/revenue-analytics/deferred-revenue) page.
