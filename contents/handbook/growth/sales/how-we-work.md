@@ -84,6 +84,8 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - ARR from new annual deals sold
   - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
     - After 3 months, either you can keep working them if you believe they'll go annual, or they'll get handed over to a TAM or CSM
+  - For multiyear contracts we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
+    - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.

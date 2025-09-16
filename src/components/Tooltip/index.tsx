@@ -68,10 +68,10 @@ export default function Tooltip({
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}
                         {...attributes.popper}
                     >
-                        <div className="tooltip">
+                        <div className="tooltip" data-scheme="secondary">
                             <div
                                 className={`
-                            bg-accent dark:bg-accent-dark border border-border dark:border-dark
+                            bg-primary border border-primary
                             relative
                             shadow-lg
                             rounded-sm 
@@ -118,7 +118,10 @@ export default function Tooltip({
                             ${tooltipClassName}
                         `}
                             >
-                                <div className="bg-white dark:bg-dark border border-light dark:border-dark rounded px-2 py-1">
+                                <div
+                                    data-scheme="primary"
+                                    className="bg-primary border border-primary rounded px-2 py-1"
+                                >
                                     {title && (
                                         <h5
                                             className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}

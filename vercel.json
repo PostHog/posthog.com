@@ -1476,6 +1476,10 @@
             "destination": "/teams/content"
         },
         {
+            "source": "/customers/headshot-pro",
+            "destination": "/customers/headshotpro"
+        },
+        {
             "source": "/docs/api/user",
             "destination": "/docs/api/users"
         },
@@ -1582,6 +1586,26 @@
         {
             "source": "/docs/ai-engineering/traceloop-posthog",
             "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
+        },
+        {
+            "source": "/why",
+            "destination": "/about"
+        },
+        {
+            "source": "/services",
+            "destination": "/"
+        },
+        {
+            "source": "/platform-addons",
+            "destination": "/platform-packages"
+        },
+        {
+            "source": "/founder-lab",
+            "destination": "/startups"
+        },
+        {
+            "source": "/teams/exec",
+            "destination": "/teams/blitzscale"
         }
     ],
     "headers": [

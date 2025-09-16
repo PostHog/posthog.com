@@ -29,27 +29,43 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Being slow to reply to customers - even if it's just to acknowledge their message. Make sure you have notifications turned on for _all_ messages in your customer Slack channels (not just for mentions). 
 
 ## Sales & CS Tools
+Here are the common tools the Sales & CS teams use daily. 
 
+### Tools through Google and Single Sign-On (SSO) 
+
+- [BuildBetter](https://app.buildbetter.app)
+- Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
+- [PostHog Billing](https://billing.posthog.com)
+- PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances. Login to both as this is needed for admin access 
+  - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
+- [Pylon](https://usepylon.com/) - use Slack SSO
+- [QuoteHog](https://quote.posthog.net/)
+- [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
+- [Zoom](https://zoom.com/)
+- *Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
+  
+### Tools by invitation 
 [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) can help you out for access or invites for the following tools:
 
-- [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you
-- [BuildBetter](https://app.buildbetter.app) - use Google SSO
-- [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
-- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home)
-- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO, then ask Simon or Dana to upgrade your role so you can create traits and see success metrics
-- [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard) - use Google SSO
-- [QuoteHog](https://quote.posthog.net/) - use Google SSO
-- [Pylon](https://usepylon.com/) - use Slack SSO
-- [Zoom](https://zoom.com/) - use Google SSO
-- [PostHog Billing](https://billing.posthog.com)- use Google SSO
-- PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances - use Google SSO
-- [PostHog App + Website](https://us.posthog.com/project/2) within PostHog US instance - use Google SSO
-- Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
+- [LinkedIn Sales Navigator](https://www.linkedin.com/sales/home) - ask Mine for an invite if needed
+- [Salesforce](https://posthog.lightning.force.com/) - ask Mine to invite you if not done already
 - [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
+- [PandaDoc](https://app.pandadoc.com/) - ask Simon or Dana to invite you
 - [Pitch](https://app.pitch.com/) - ask Simon or Dana to invite you
-- Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
+- [Vitally](https://posthog.vitally-eu.io/) - use Google SSO, then ask Simon or Dana to upgrade your role so you can create traits and see success metrics
 
-*Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
+### Tools that you may find useful and not required
+
+- [Calendly.com](https://calendly.com/) for shared meeting booking links
+- [Clay](https://www.clay.com/) for account and contact enrichment
+- [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
+- [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
+- [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
+- [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (sign up as part of your software budget)
+- [spark](https://sparkmailapp.com/) (app) AI powered inbox
+- [Superhuman](https://superhuman.com/) (app) AI powered inbox
+- [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
+- Your next favorite tool! 
 
 ## Technical Account Executive ramp
 
@@ -85,6 +101,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
 - Make sure you're comfortable with the Shared Processes section of the Handbook
+- Once you start getting leads / accounts, ping [Simon](/community/profiles/28895) to be added to the [TAM quota tracker](https://us.posthog.com/project/2/dashboard/498582).
 
 ### In-person onboarding
 
@@ -193,17 +210,13 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 - Take calls at your desk. Don't dial in from your garden because it's a nice day and then spend the call apologizing for the lousy WiFi.
 - You don't have to go all ring light, but think about your background a bit. You don't have to construct some elaborate bookshelf situation behind you, but consider using one of our [nice wallpapers](/blog/posthog-wallpapers). 
 
-## Tools that you may find useful
+## Alerting setup (for team leads)
 
-- [Calendly.com](https://calendly.com/) for shared meeting booking links
-- [Clay](https://www.clay.com/) for account and contact enrichment
-- [Granola](https://www.granola.ai/) (app) for AI note taking in meetings
-- [In Your Face](https://www.inyourface.app/) (app) don't miss meeting notifications
-- [Loom](https://www.loom.com/) for short videos (Simon can invite you to the company account)
-- [Scratchpad](https://www.scratchpad.com/) for AI agents and a friendlier SFDC UI (sign up as part of your software budget)
-- [spark](https://sparkmailapp.com/) (app) AI powered inbox
-- [Superhuman](https://superhuman.com/) (app) AI powered inbox
-- [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) (app) for configuring provided YubiKey
+We have certain automations in Vitally and Zapier that your team lead needs to add you to. Please ask your team lead to add you.
+
+- <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/81d5c249-1e8f-4dfd-98b2-01e8ad904851"> Vitally name trait playbook </PrivateLink>: create a new branch that matches assigned AE to new team member. In this branch, add action to update account trait `AE name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
+- <PrivateLink url="https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb"> Failed payment alerting </PrivateLink>: in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
+- <PrivateLink url="https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088"> Annual plan credit alerting </PrivateLink>: in step 8 look up table, add new team member's email and Slack member ID 
 
 ## New hire frequently asked questions
 

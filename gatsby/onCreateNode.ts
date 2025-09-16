@@ -252,10 +252,15 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
         const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
         const contentWithSnippets = resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
+
+        // Prepend title as H1 if it exists
+        const title = node.frontmatter?.title
+        const contentWithSnippetsAndTitle = title ? `# ${title}\n\n${contentWithSnippets}` : contentWithSnippets
+
         createNodeField({
             node,
             name: `contentWithSnippets`,
-            value: contentWithSnippets,
+            value: contentWithSnippetsAndTitle,
         })
     }
 

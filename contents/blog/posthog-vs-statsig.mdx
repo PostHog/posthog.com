@@ -23,7 +23,7 @@ PostHog and Statsig both offer A/B testing and feature flags, but they're differ
 
 - **Statsig** is a dedicated testing platform that offers advanced statistical methods for running tests. It's ideal for data scientists and growth teams in large enterprises who need to conduct complex A/B testing.
 
-- **PostHog** is an all-in-one platform for engineers and product teams who want a more straightforward approach to experimentation. In addition to A/B testing, it offers [feature flags](/feature-flags), advanced [product analytics](/docs/product-analytics), [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
+- **PostHog** is an all-in-one platform for engineers and product teams who want a more straightforward approach to experimentation. In addition to A/B testing, it offers [feature flags](/feature-flags), advanced [product analytics](/product-analytics), [session replays](/docs/session-replay), [surveys](/surveys), and more.
 
 This post compares their platforms, experimentation features, pricing, and more.
 
@@ -54,13 +54,13 @@ We update [our changelog](/changelog) with a recap of new features every week, a
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={false} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
+  <ComparisonRow column1={true} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
   <ComparisonRow column1={true} column2={true} feature="Web session replays" description="Watch real users use your web app; debug behavior" />
   <ComparisonRow column1={true} column2={false} feature="Mobile session replays" description="Watch real users use your native mobile app" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
   <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
-  <ComparisonRow column1={false} column2={true} feature="Data warehouse experiments" description="Run A/B tests natively on data in your existing warehouse" />
+  <ComparisonRow column1="Beta" column2={true} feature="Data warehouse experiments" description="Run A/B tests natively on data in your existing warehouse" />
 </ComparisonTable>
 
 ### Experimentation

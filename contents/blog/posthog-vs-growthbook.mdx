@@ -23,7 +23,7 @@ PostHog and GrowthBook both provide open source, self-serve feature flags and ex
 
 - [GrowthBook](/blog/best-growthbook-alternatives) is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
 
-- PostHog is an all-in-one product and data platform. Beyond [feature flags](/docs/feature-flags) and [experiments](/docs/experiments), it includes [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [surveys](/docs/surveys), [CDP](/docs/cdp), and more.
+- PostHog is an all-in-one product and data platform. Beyond [feature flags](/feature-flags) and [experiments](/experiments), it includes [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [CDP](/cdp), and more.
 
 In this post, we'll cover these differences in more detail, and answer frequently asked questions about both tools.
 
@@ -35,7 +35,7 @@ PostHog brings together all the tools engineers need for testing, releasing, and
 
 ![PostHog homepage features](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-growthbook/build.png)
 
-PostHog combines usage, performance, and [behavioral data](/product-engineers/behavioral-analytics) with flags and experiments. PostHog’s [data warehouse](/docs/data-warehouse) also enables you to pull in data from external sources.
+PostHog combines usage, performance, and [behavioral data](/product-engineers/behavioral-analytics) with flags and experiments. PostHog’s [data warehouse](/data-warehouse) also enables you to pull in data from external sources.
 
 Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
 
@@ -47,7 +47,7 @@ As startups scale, PostHog also provides the more advanced tools they need to su
 
 GrowthBook, on the other hand, focuses only on later-stage, larger companies than PostHog. Many of their features, like their analytical A/B testing suite, are great for data teams which also come at a later stage.
 
-### 3. PostHog is easier to setup
+### 3. PostHog is easier to set up
 
 GrowthBook requires more setup than PostHog as it relies heavily on external tools and writing SQL:
 
@@ -114,7 +114,7 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
   <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
   <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
   <ComparisonRow column1={false} column2={true} feature="Namespaces" description="Avoid conflicts by assigning all users to a namespace" />
-  <ComparisonRow column1={false} column2={true} feature="Visual editor" description="Create and edit experiments in your app" />
+  <ComparisonRow column1="Beta" column2={true} feature="Visual editor" description="Create and edit experiments in your app" />
   <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the success of an experiment is calculated" />
 </ComparisonTable>
 
@@ -280,7 +280,7 @@ Feature flags and experiments are simple. They are a few lines of code in any of
 
 The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implementing the flag evaluation and relevant logic in your app. Many of the SDKs handle important aspects like local evaluation and event capture for you.
 
-You can reuse the PostHog implementation, like user identification, across products. Because PostHog is an all-in-one platform, analytics capture for targeting and A/B testing results doesn’t need set up or connection either.
+You can reuse the PostHog implementation, like user identification, across products. Because PostHog is an all-in-one platform, analytics capture for targeting and A/B testing results doesn’t need setup or connection either.
 
 ### How long does it take to implement GrowthBook?
 

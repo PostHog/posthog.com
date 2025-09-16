@@ -23,7 +23,7 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
     return (
         <div className={classes}>
             {qtyAdjustedItems?.length > 0 && (
-                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md p-4 text-primary dark:text-primary-dark">
+                <div className="border border-primary bg-accent rounded-md p-4 text-primary dark:text-primary-dark">
                     <div className="flex">
                         <div className="flex-shrink-0">
                             <IconInfo className="size-7" />
@@ -52,7 +52,7 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
             )}
 
             {removedItems?.length > 0 && (
-                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md p-4 text-primary dark:text-primary-dark">
+                <div className="border border-primary bg-accent rounded-md p-4 text-primary dark:text-primary-dark">
                     <div className="flex">
                         <div className="flex-shrink-0">
                             <IconInfo className="size-7" />

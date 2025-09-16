@@ -72,7 +72,8 @@ function App() {
         "query": {
           "kind": "HogQLQuery",
           "query": "select properties.$current_url from events where properties.$current_url != null limit 10"
-        }
+        },
+        "name": "get 10 non empty urls"
       }
       try {
         const response = await fetch(url, {
@@ -151,7 +152,8 @@ function App() {
                     GROUP BY date
                     ORDER BY date DESC
                     LIMIT 20`
-        }
+        },
+        "name": "get pageviews by date"
       }
       try {
         const response = await fetch(url, {
@@ -222,7 +224,8 @@ function App() {
                     GROUP BY pathname
                     ORDER BY pageview_count DESC
                     LIMIT 10`
-        }
+        },
+        "name": "pageviews count by pathname"
       }
       try {
         const response = await fetch(url, {
@@ -305,7 +308,8 @@ function App() {
                     GROUP BY date, browser
                     ORDER BY date DESC, pageview_count DESC
                     LIMIT 20`
-        }
+        },
+        "name": "pageviews count by date and browser"
       }
       try {
         const response = await fetch(url, {
@@ -393,7 +397,8 @@ function App() {
                       AND properties.$os IS NOT NULL
                     GROUP BY os
                     ORDER BY pageview_count DESC`
-        }
+        },
+        "name": "pageviews count by os"
       }
       try {
         const response = await fetch(url, {

@@ -4,6 +4,7 @@ import { PaperPlaneArrow, ThumbsDownOutline, ThumbsUpOutline } from 'components/
 import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
 import Link from 'components/Link'
+import TextareaAutosize from 'react-textarea-autosize'
 
 const button = cntl`
     w-full
@@ -23,9 +24,8 @@ const button = cntl`
     sm:py-5
     rounded
     border-2
-    text-primary/75
-    hover:text-primary/100
-    dark:text-primary-dark/100
+    text-secondary
+    hover:text-primary
     relative
     active:top-[1px]
     active:scale-[.98]
@@ -74,14 +74,12 @@ const buttonWithPaperPlaneArrow = cntl`
     rounded-[3px] 
     px-2.5 
     py-[7px] 
-    text-primary/50 
-    hover:text-primary/100 
-    dark:text-primary-dark/50 
-    dark:hover:text-primary-dark/100 
+    text-muted
+    hover:text-secondary
     bg-white 
     dark:bg-dark
     border-2
-    border-primary/50
+    border-input
     dark:border-primary-dark/50 
     shadow-[0_2px_0_0_#15151580]
     dark:shadow-[0_2px_0_0_#ffffff80]
@@ -139,10 +137,9 @@ const ResponseFeedback: React.FC<{
         <motion.div initial={{ translateY: '10%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
             <form onSubmit={handleSubmit} className="w-full space-y-4 mt-6">
                 <h3 className=" text-lg font-semibold m-0">{title}</h3>
-                <div className="flex space-x-2 items-center pt-2 pr-2.5 pb-3 bg-white dark:bg-[#202228] rounded border border-primary/50 dark:border-primary-dark/50">
-                    <textarea
+                <div className="flex space-x-2 items-start pt-2 pr-2.5 pb-3 bg-white dark:bg-[#202228] rounded border border-input-dark/50">
+                    <TextareaAutosize
                         className="w-full block resize-none border-0 focus:ring-0 text-base font-medium dark:bg-[#202228]"
-                        rows={1}
                         onChange={(event) => setFeedback(event.target.value)}
                         autoFocus
                         placeholder={placeholder}
@@ -153,7 +150,7 @@ const ResponseFeedback: React.FC<{
                     </button>
                 </div>
                 {filePath && (
-                    <p className="mt-2 text-[13px] font-medium text-primary/75 dark:text-primary-dark/75 ">
+                    <p className="mt-2 text-[13px] font-medium text-secondary ">
                         P.S. You can
                         <Link to={`https://github.com/PostHog/posthog.com/edit/master/contents/${filePath}`}>
                             <span className="text-red">&nbsp;submit a pull request&nbsp;</span>
@@ -170,9 +167,7 @@ const ResponseMessage = () => {
     return (
         <motion.div initial={{ translateY: '10%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
             <h3 className="text-xl font-bold m-0">Thanks for the feedback!</h3>
-            <p className="mt-2 font-medium text-primary/75 dark:text-primary-dark/75">
-                Your feedback has been submitted successfully.
-            </p>
+            <p className="mt-2 font-medium text-secondary">Your feedback has been submitted successfully.</p>
         </motion.div>
     )
 }

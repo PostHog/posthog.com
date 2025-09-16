@@ -19,10 +19,10 @@ const sizes = {
     `,
     sm: cntl`
     rounded-[6px]
-    text-[13px]
+    text-[14px]
     font-bold
-    px-3.5
-    py-1.5
+    px-3
+    py-1
     translate-y-[-2px]
     hover:translate-y-[-3px]
     active:translate-y-[-1px]
@@ -35,7 +35,7 @@ const sizes = {
     text-[14px]
     font-bold
     px-4
-    py-1.5
+    py-1
     translate-y-[-2px]
     hover:translate-y-[-4px]
     active:translate-y-[-1px]
@@ -73,10 +73,10 @@ const sizes = {
 
 const primary = cntl`
     bg-orange
-    text-primary
-    hover:text-primary
-    dark:text-primary
-    dark:hover:text-primary
+    text-black
+    hover:text-black
+    dark:text-black
+    dark:hover:text-black
     border-button
     dark:border-button-dark
     dark:bg-orange
@@ -113,17 +113,20 @@ const containerTypes = {
     primary: cntl`
         bg-button-shadow
         dark:bg-button-shadow-dark
+        !no-underline
     `,
     secondary: cntl`
         bg-orange
         dark:bg-button-secondary-shadow-dark
         dark:border-button-secondary-dark
+        !no-underline
     `,
     outline: cntl`
         bg-yellow/50
         border-dark/30
         dark:bg-white/10
         dark:border-white/20
+        !no-underline
     `,
     custom: cntl`
         bg-white/20
@@ -209,7 +212,11 @@ export interface TrackedCTAPropsType extends CTAPropsType {
     }
 }
 
-export const TrackedCTA = ({ width, event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
+export const TrackedCTA = ({
+    width,
+    event: { name: eventName, ...event },
+    ...props
+}: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
