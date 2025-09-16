@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SEO } from 'components/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
@@ -6,8 +6,10 @@ import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
 import { IconCheck, IconLogomark } from '@posthog/icons'
+import InstallationPlatforms from '../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
+import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
+import { CodeBlock } from 'components/CodeBlock'
 
 type ErrorTrackingProps = {
     data: {
@@ -19,27 +21,85 @@ type ErrorTrackingProps = {
     }
 }
 
+const maxWidth = 'max-w-4xl'
+
 export const Content = () => {
+    const javascriptCode = `posthog.captureException(error, {
+  user_id: "user123",
+  stack_trace: error.stack,
+  severity: "error"
+})`
+
+    const pythonCode = `posthog.capture_exception(
+  error,
+  distinct_id="user123",
+  properties={
+    "stack_trace": str(error),
+    "severity": "error"
+  }
+)`
+
+    const goCode = `client.CaptureException(posthog.CaptureException{
+  DistinctId: "user123",
+  Exception:  err,
+  Properties: map[string]interface{}{
+    "severity": "error",
+    "context":  "user_action",
+  },
+})`
+
+    const codeLanguages = [
+        {
+            label: 'JavaScript',
+            language: 'javascript',
+            code: javascriptCode,
+        },
+        {
+            label: 'Python',
+            language: 'python',
+            code: pythonCode,
+        },
+        {
+            label: 'Go',
+            language: 'go',
+            code: goCode,
+        },
+    ]
+
+    const [currentLanguage, setCurrentLanguage] = useState(codeLanguages[0])
+
+    const handleLanguageChange = (language: any) => {
+        setCurrentLanguage(language)
+    }
+
     return (
         <>
-            <section className="mb-6">
-                <h2 className="mb-1 text-xl">What is error tracking?</h2>
-                <p>
-                    Error tracking helps you capture and analyze errors in your application. It provides detailed stack
-                    traces, error context, and analytics to help you identify and fix issues quickly.
-                </p>
-                <p>
-                    Error tracking helps you capture and analyze errors in your application. It provides detailed stack
-                    traces, error context, and analytics to help you identify and fix issues quickly.
-                </p>
-                <p>
-                    Error tracking helps you capture and analyze errors in your application. It provides detailed stack
-                    traces, error context, and analytics to help you identify and fix issues quickly.
-                </p>
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <div>
+                    <p>
+                        Error tracking lets you track errors and resolve issues within your app, so you can ship fast
+                        with confidence.
+                    </p>
+                    <p>Error tracking is great for teams who:</p>
+                    <ul>
+                        <li>Need to ship faster with a fast growing product</li>
+                        <li>Need to consolidate dev tools and focus on product</li>
+                        <li>Need to streamline full-stack development </li>
+                        <li>Need to understand impact of errors</li>
+                    </ul>
+                </div>
+
+                <div className="mt-8">
+                    <CodeBlock currentLanguage={currentLanguage} onChange={handleLanguageChange}>
+                        {codeLanguages}
+                    </CodeBlock>
+
+                    <InstallationPlatforms columns={4} />
+                </div>
             </section>
 
-            <section className="mb-6">
-                <h2 className="mb-4 text-xl">All the features you'd expect</h2>
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4 text-xl">All the features you expect</h2>
                 <OSTable
                     columns={[
                         { name: '', width: '1fr', align: 'left' },
@@ -90,23 +150,32 @@ export const Content = () => {
                         },
                     ]}
                     size="sm"
-                    className="max-w-2xl"
+                    className={maxWidth}
                 />
             </section>
 
-            <section className="mb-6">
-                <h2 className="mb-4 text-xl">And features that will help you 10x</h2>
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4 text-xl">And the features that help you 10x</h2>
             </section>
 
-            <section className="mb-6">
-                <h2 className="mb-4 text-xl">Integration</h2>
-            </section>
-
-            <section className="mb-6">
-                <h2 className="mb-4 text-xl">Pricing</h2>
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4 text-xl">Usage-based pricing</h2>
+                <p>
+                    PostHog's error tracking is built to be cost-effective by default, with a generous free tier and
+                    transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog
+                    for free.
+                </p>
+                <p>
+                    No credit card required to start. You can also set billing limits to avoid surprise charges. See our{' '}
+                    <a href="/pricing">pricing page</a> for more up-to-date details
+                </p>
+                <div className="px-8 bg-white rounded-md border-primary border">
+                    <Pricing productType="error_tracking" />
+                </div>
             </section>
 
             <AskMax
+                className={`mx-auto ${maxWidth}`}
                 quickQuestions={[
                     'How do I see what the most common errors are?',
                     'How do I custom error groups?',
@@ -114,7 +183,7 @@ export const Content = () => {
                 ]}
             />
 
-            <section className="mb-6">
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
 
@@ -148,22 +217,24 @@ const ErrorTracking: React.FC<ErrorTrackingProps> = () => {
         <ReaderView>
             <SEO title="Error tracking - Docs - PostHog" />
 
-            <Intro
-                subheader="Getting started"
-                title="Error tracking"
-                description="Track and monitor errors and exceptions in your code."
-                buttonText="Installation guide"
-                buttonLink="/docs/error-tracking/start-here"
-                imageColumnClasses="mt-4 md:-mt-8"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
-                imageClasses="max-h-48 md:max-h-64"
-            />
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <Intro
+                    subheader="Getting started"
+                    title="Error tracking"
+                    description="Track and monitor errors and exceptions in your code."
+                    buttonText="Installation guide"
+                    buttonLink="/docs/error-tracking/start-here"
+                    imageColumnClasses="mt-4 md:-mt-8"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
+                    imageClasses="max-h-48 md:max-h-64"
+                />
+            </section>
 
             <Content />
 
             <div className="">
                 <CallToAction to="/docs/error-tracking/start-here" width="full">
-                    Visit the manual
+                    Start integrating
                 </CallToAction>
             </div>
         </ReaderView>
