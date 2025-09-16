@@ -3,7 +3,6 @@ title: Deciding which products we build
 sidebar: Handbook
 showTitle: true
 ---
-
 Providing all the tools in one is a core part of our strategy.
 
 Shipping them in the right order is key to a fast return on investment from every new product.
@@ -39,14 +38,10 @@ Products we build into the platform must:
 
 Ideally, but not necessarily, products we build should:
 
-* Help customers to build more successful products. This doesn't _just_ mean writing code, it means commercial stuff too.
-* Help us to offer all the tools in one - help us to, as quickly as possible, cover the "major" pieces of software that every startup uses.
+* [Equip developers to ship successful products](/handbook/why-does-posthog-exist#our-mission)
+  * Specifically, any product that either helps them ship faster, or gives them more context to ship products without help from others.
 * Help us to get in first - some tools are adopted earlier in the customer lifecycle than others. Starting with these avoids customers moving to competitors' products, then us having to migrate them over.
-* Help us to be the source of truth - some products are great at providing additional data, or working on top of the existing data PostHog stores. This means your product will probably help make multiple other products more powerful.
 * Increase our luck surface area - some products have more upside than others, for example, API access may yield surprising results compared to a super narrowly scoped new product like a cookie banner product.
 * Be very easy to integrate and turn on for existing customers. For example, users can enable the product without a code change.
 * Have crappy competitors - successful companies but horrible products and/or sales experience.
 
-![a diagram showing which products we could build in which order](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/product-order.png)
-
-At earlier stage companies, technical founders will do _every_ role, so tools traditionally used by those further from engineering (i.e. support) are likely to get usage if built into PostHog's platform. In later stage companies, we need - for now - to remain closer to engineering tools. Do not be afraid of shipping non-traditional "engineering" oriented products.
