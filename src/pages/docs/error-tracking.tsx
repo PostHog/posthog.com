@@ -1,18 +1,13 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
-import { docsMenu } from '../../navs'
-import { useLayoutData } from 'components/Layout/hooks'
-import QuickLinks from 'components/QuickLinks'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
-import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
+import OSTable from 'components/OSTable'
+import Logo from 'components/Logo'
+import { IconCheck, IconLogomark } from '@posthog/icons'
 
 type ErrorTrackingProps = {
     data: {
@@ -24,17 +19,102 @@ type ErrorTrackingProps = {
     }
 }
 
-export const Content = ({ quickLinks = false }) => {
-    const { compact } = useLayoutData()
+export const Content = () => {
     return (
         <>
-            {(quickLinks || compact) && (
-                <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'error tracking')?.children}
-                />
-            )}
+            <section className="mb-6">
+                <h2 className="mb-1 text-xl">What is error tracking?</h2>
+                <p>
+                    Error tracking helps you capture and analyze errors in your application. It provides detailed stack
+                    traces, error context, and analytics to help you identify and fix issues quickly.
+                </p>
+                <p>
+                    Error tracking helps you capture and analyze errors in your application. It provides detailed stack
+                    traces, error context, and analytics to help you identify and fix issues quickly.
+                </p>
+                <p>
+                    Error tracking helps you capture and analyze errors in your application. It provides detailed stack
+                    traces, error context, and analytics to help you identify and fix issues quickly.
+                </p>
+            </section>
 
-            <section className="mb-12">
+            <section className="mb-6">
+                <h2 className="mb-4 text-xl">All the features you'd expect</h2>
+                <OSTable
+                    columns={[
+                        { name: '', width: '1fr', align: 'left' },
+                        { name: <IconLogomark className="h-7" />, width: '120px', align: 'center' },
+                        { name: '', width: '1fr', align: 'left' },
+                        { name: <IconLogomark className="h-7" />, width: '120px', align: 'center' },
+                    ]}
+                    rows={[
+                        {
+                            cells: [
+                                { content: 'Error alerts' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: 'Exception capture' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: 'Issue management' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: 'Network performance monitoring' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: 'Error grouping' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: 'Source map support' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: 'Stack tracing' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: 'Integration with product analytics' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: 'Integration with session replays' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: 'Integration with A/B experiments' },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                    ]}
+                    size="sm"
+                    className="max-w-2xl"
+                />
+            </section>
+
+            <section className="mb-6">
+                <h2 className="mb-4 text-xl">And features that will help you 10x</h2>
+            </section>
+
+            <section className="mb-6">
+                <h2 className="mb-4 text-xl">Integration</h2>
+            </section>
+
+            <section className="mb-6">
+                <h2 className="mb-4 text-xl">Pricing</h2>
+            </section>
+
+            <AskMax
+                quickQuestions={[
+                    'How do I see what the most common errors are?',
+                    'How do I custom error groups?',
+                    'How do I assign someone an error?',
+                ]}
+            />
+
+            <section className="mb-6">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
 
@@ -63,7 +143,7 @@ export const Content = ({ quickLinks = false }) => {
     )
 }
 
-const ErrorTracking: React.FC<ErrorTrackingProps> = ({ data }) => {
+const ErrorTracking: React.FC<ErrorTrackingProps> = () => {
     return (
         <ReaderView>
             <SEO title="Error tracking - Docs - PostHog" />
@@ -77,14 +157,6 @@ const ErrorTracking: React.FC<ErrorTrackingProps> = ({ data }) => {
                 imageColumnClasses="mt-4 md:-mt-8"
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
                 imageClasses="max-h-48 md:max-h-64"
-            />
-
-            <AskMax
-                quickQuestions={[
-                    'How do I see what the most common errors are?',
-                    'How do I custom error groups?',
-                    'How do I assign someone an error?',
-                ]}
             />
 
             <Content />
