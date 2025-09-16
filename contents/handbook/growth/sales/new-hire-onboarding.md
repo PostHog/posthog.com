@@ -101,6 +101,7 @@ Here are the common tools the Sales & CS teams use daily.
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
 - Make sure you're comfortable with the Shared Processes section of the Handbook
+- Once you start getting leads / accounts, ping [Simon](/community/profiles/28895) to be added to the [TAM quota tracker](https://us.posthog.com/project/2/dashboard/498582).
 
 ### In-person onboarding
 

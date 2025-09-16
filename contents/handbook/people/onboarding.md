@@ -194,7 +194,7 @@ It can be especially helpful for new hires if support engineers demonstrate how 
 
 ## 30/60/90 day check-ins
 
-Managers are responsible for helping their new members navigate the [first 3 months probationary period](/handbook/people/compensation#notice-period). There is a strong importance on 1) providing feedback to the new team member, and 2) communicating with execs about unresolved performance issues, so that there is enough time for action. Managers are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the exec team, and is frankly a very rare situation - the vast majority of people we hire do pass their probationary period!
+Managers are responsible for helping their new members navigate the [first 3 months probationary period](/handbook/people/compensation#probation-period). There is a strong importance on 1) providing feedback to the new team member, and 2) communicating with execs about unresolved performance issues, so that there is enough time for action. Managers are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the exec team, and is frankly a very rare situation - the vast majority of people we hire do pass their probationary period!
 
 As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to serve as a reminder that these checkpoints have arrived and to make sure everything is on track for the probationary period to be passed.
 
