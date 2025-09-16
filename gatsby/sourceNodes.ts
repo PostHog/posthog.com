@@ -720,10 +720,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             .replaceAll('segmentio', 'posthog')
                             .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
                             .replaceAll(/> \w+ ""/g, '')
-                            .replaceAll(
-                                /> \*\*Good to know\*\*: This page is about the \[Actions-framework\].*?Both of these destinations receive data from PostHog\./g,
-                                ''
-                            ) // Remove banner regarding the Actions-framework
+                            .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
                             .replaceAll(
                                 /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
                                 ''
