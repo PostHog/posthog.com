@@ -142,7 +142,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const windowRef = useRef<HTMLDivElement>(null)
     const [rendered, setRendered] = useState(false)
     const [dragging, setDragging] = useState(false)
-    const [leftResizing, setLeftResizing] = useState(false)
+    const [leftDragResizing, setLeftDragResizing] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
     const [closing, setClosing] = useState(false)
@@ -215,18 +215,18 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         )
     }
 
-    const handleResize = (
+    const handleDragResize = (
         item: AppWindowType,
         info: PanInfo,
-        change: { fromLeft?: boolean } & ({ x: boolean } | { y: boolean } | { x: boolean; y: boolean })
+        change: { x: boolean } | { y: boolean } | { x: boolean; y: boolean }
     ) => {
         const update: { size?: { height?: number; width?: number }; position?: { x: number } } = {}
         if ('y' in change) update.size = { height: Math.max(size.height + info.delta.y, sizeConstraints.min.height) }
         if ('x' in change) {
             update.size ||= {}
-            const delta = change.fromLeft ? -1 * info.delta.x : info.delta.x
+            const delta = leftDragResizing ? -1 * info.delta.x : info.delta.x
             update.size.width = Math.max(size.width + delta, sizeConstraints.min.width)
-            if (change.fromLeft) update.position = { x: item.position.x + size.width - update.size.width }
+            if (leftDragResizing) update.position = { x: item.position.x + size.width - update.size.width }
         }
         updateWindow(item, update)
     }
@@ -620,7 +620,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     duration:
                                         siteSettings.experience === 'boring' ||
                                         siteSettings.performanceBoost ||
-                                        leftResizing
+                                        leftDragResizing
                                             ? 0
                                             : 0.2,
                                     scale: {
@@ -895,7 +895,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         drag="x"
                                         dragMomentum={false}
                                         dragConstraints={{ left: 0, right: 0 }}
-                                        onDrag={(_event, info) => handleResize(item, info, { x: true })}
+                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true })}
                                     >
                                         <div className="relative w-full h-full">
                                             <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
@@ -908,9 +908,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         drag="x"
                                         dragMomentum={false}
                                         dragConstraints={{ left: 0, right: 0 }}
-                                        onDragStart={() => setLeftResizing(true)}
-                                        onDrag={(_event, info) => handleResize(item, info, { x: true, fromLeft: true })}
-                                        onDragEnd={() => setLeftResizing(false)}
+                                        onDragStart={() => setLeftDragResizing(true)}
+                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true })}
+                                        onDragEnd={() => setLeftDragResizing(false)}
                                     >
                                         <div className="relative w-full h-full">
                                             <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-light-8" />
@@ -923,7 +923,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         drag="y"
                                         dragMomentum={false}
                                         dragConstraints={{ top: 0, bottom: 0 }}
-                                        onDrag={(_event, info) => handleResize(item, info, { y: true })}
+                                        onDrag={(_event, info) => handleDragResize(item, info, { y: true })}
                                     >
                                         <div className="relative w-full h-full">
                                             <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
@@ -935,7 +935,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         drag
                                         dragMomentum={false}
                                         dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                        onDrag={(_event, info) => handleResize(item, info, { x: true, y: true })}
+                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true, y: true })}
                                     >
                                         <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
                                             <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
@@ -946,11 +946,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         drag
                                         dragMomentum={false}
                                         dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                        onDragStart={() => setLeftResizing(true)}
-                                        onDrag={(_event, info) =>
-                                            handleResize(item, info, { x: true, y: true, fromLeft: true })
-                                        }
-                                        onDragEnd={() => setLeftResizing(false)}
+                                        onDragStart={() => setLeftDragResizing(true)}
+                                        onDrag={(_event, info) => handleDragResize(item, info, { x: true, y: true })}
+                                        onDragEnd={() => setLeftDragResizing(false)}
                                     >
                                         <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
                                             <div className="absolute -bottom-10 -left-10 group-hover:-bottom-5 group-hover:-left-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 rotate-45" />
