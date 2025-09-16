@@ -1,5 +1,5 @@
 ---
-title: Why Exa loves PostHog’s hedgehog in the corner
+title: Why Exa loves PostHog’s Max AI
 customer: Exa
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/lovable_dark_png_bf5d7c603c.png
