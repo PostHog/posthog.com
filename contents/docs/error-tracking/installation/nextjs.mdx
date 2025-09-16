@@ -3,6 +3,7 @@ title: Next.js error tracking installation
 showStepsToc: true
 ---
 
+
 import NextJSInstall from '../../integrate/_snippets/nextjs/install-nextjs.mdx'
 
 import Tab from "components/Tab"
@@ -16,12 +17,12 @@ import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 Next.js is a SSR framework with both client-side and server-side rendering. To track errors in your Next.js app, you need to install and configure the PostHog SDK for both **client-side** and **server-side**.
 
 <Steps>
-
 <Step title="Install PostHog SDK client-side" badge="required">
 
 <NextJSInstall />
 
 </Step>
+
 
 <Step title="Capture client-side exceptions" badge="required">
 
@@ -35,30 +36,20 @@ You can capture exceptions in client-side code in two ways:
 <JSWebErrorTracking />
 
 <Tab.Group tabs={[
-'App router',
-'Pages router']}>
-<Tab.List>
-
-<Tab>App router</Tab>
-
-<Tab>Pages router</Tab>
-
-</Tab.List>
-<Tab.Panels>
-
-<Tab.Panel>
-
-<AppRouterErrorTracking />
-
-</Tab.Panel>
-<Tab.Panel>
-
-<PagesRouterErrorTracking />
-
-</Tab.Panel>
-
-</Tab.Panels>
-
+  'App router', 
+  'Pages router']}>
+  <Tab.List>
+  <Tab>App router</Tab>
+  <Tab>Pages router</Tab>
+  </Tab.List>
+  <Tab.Panels>
+  <Tab.Panel>
+    <AppRouterErrorTracking />
+  </Tab.Panel>
+  <Tab.Panel>
+    <PagesRouterErrorTracking />
+  </Tab.Panel>
+  </Tab.Panels>
 </Tab.Group>
 
 </Step>
@@ -73,7 +64,7 @@ First, install the `posthog-node` library:
 
 <InstallNodePackageManagers />
 
-For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://app.posthog.com/settings/project).
+For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://app.posthog.com/settings/project). 
 
 This looks like this:
 
@@ -120,7 +111,7 @@ try {
 You should also see events and exceptions in PostHog coming from your server-side code in the activity feed.
 
 <CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/activity/explore" external={true}>
-Check for server events in PostHog
+  Check for server events in PostHog
 </CallToAction>
 
 </Step>
@@ -142,7 +133,7 @@ This looks like this:
 export function register() {
   // No-op for initialization
 }
- 
+
 export const onRequestError = async (err, request, context) => {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     const { getPostHogServer } = require('./lib/posthog-server')
