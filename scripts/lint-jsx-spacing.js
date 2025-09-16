@@ -123,7 +123,11 @@ function processFile(filePath) {
 // Get file patterns from command line args or default to MDX files
 const patterns = process.argv.slice(2)
 if (patterns.length === 0) {
-    patterns.push('contents/**/*.mdx', 'contents/**/*.md')
+  console.error('Error: Please specify file patterns or paths to process.')
+  console.error('Examples:')
+  console.error('  node scripts/lint-jsx-spacing.js "contents/docs/feature-flags/*.mdx"')
+  console.error('  node scripts/lint-jsx-spacing.js contents/docs/feature-flags/*.md')
+  process.exit(1)
 }
 
 console.log('=== The magical MDX fixer ===')
