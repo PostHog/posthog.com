@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
-import { AnimatePresence, motion, useDragControls } from 'framer-motion'
+import { AnimatePresence, motion, PanInfo, useDragControls } from 'framer-motion'
 import {
     IconChevronDown,
     IconDocument,
@@ -142,6 +142,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const windowRef = useRef<HTMLDivElement>(null)
     const [rendered, setRendered] = useState(false)
     const [dragging, setDragging] = useState(false)
+    const [leftResizing, setLeftResizing] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
     const [closing, setClosing] = useState(false)
@@ -212,6 +213,22 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             position.x < 0 ||
             position.y < 0
         )
+    }
+
+    const handleResize = (
+        item: AppWindowType,
+        info: PanInfo,
+        change: { fromLeft?: boolean } & ({ x: boolean } | { y: boolean } | { x: boolean; y: boolean })
+    ) => {
+        const update: { size?: { height?: number; width?: number }; position?: { x: number } } = {}
+        if ('y' in change) update.size = { height: Math.max(size.height + info.delta.y, sizeConstraints.min.height) }
+        if ('x' in change) {
+            update.size ||= {}
+            const delta = change.fromLeft ? -1 * info.delta.x : info.delta.x
+            update.size.width = Math.max(size.width + delta, sizeConstraints.min.width)
+            if (change.fromLeft) update.position = { x: item.position.x + size.width - update.size.width }
+        }
+        updateWindow(item, update)
     }
 
     const handleDoubleClick = () => {
@@ -601,7 +618,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : size.height,
                                 transition: {
                                     duration:
-                                        siteSettings.experience === 'boring' || siteSettings.performanceBoost ? 0 : 0.2,
+                                        siteSettings.experience === 'boring' ||
+                                        siteSettings.performanceBoost ||
+                                        leftResizing
+                                            ? 0
+                                            : 0.2,
                                     scale: {
                                         duration:
                                             siteSettings.experience === 'boring' ||
@@ -867,73 +888,75 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 )}
                             </div>
                             {!item.fixedSize && !item.minimal && (
-                                <motion.div
-                                    data-scheme="tertiary"
-                                    className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
-                                    drag="x"
-                                    dragMomentum={false}
-                                    dragConstraints={{ left: 0, right: 0 }}
-                                    onDrag={(_event, info) => {
-                                        updateWindow(item, {
-                                            size: {
-                                                width: Math.max(size.width + info.delta.x, sizeConstraints.min.width),
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <div className="relative w-full h-full">
-                                        <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
-                                        <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
-                                    </div>
-                                </motion.div>
-                            )}
-                            {!item.fixedSize && !item.minimal && (
-                                <motion.div
-                                    data-scheme="tertiary"
-                                    className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
-                                    drag="y"
-                                    dragMomentum={false}
-                                    dragConstraints={{ top: 0, bottom: 0 }}
-                                    onDrag={(_event, info) => {
-                                        updateWindow(item, {
-                                            size: {
-                                                height: Math.max(
-                                                    size.height + info.delta.y,
-                                                    sizeConstraints.min.height
-                                                ),
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <div className="relative w-full h-full">
-                                        <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
-                                        <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
-                                    </div>
-                                </motion.div>
-                            )}
-                            {!item.fixedSize && !item.minimal && (
-                                <motion.div
-                                    className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
-                                    drag
-                                    dragMomentum={false}
-                                    dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                    onDrag={(_event, info) => {
-                                        updateWindow(item, {
-                                            size: {
-                                                width: Math.max(size.width + info.delta.x, sizeConstraints.min.width),
-
-                                                height: Math.max(
-                                                    size.height + info.delta.y,
-                                                    sizeConstraints.min.height
-                                                ),
-                                            },
-                                        })
-                                    }}
-                                >
-                                    <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                        <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
-                                    </div>
-                                </motion.div>
+                                <>
+                                    <motion.div
+                                        data-scheme="tertiary"
+                                        className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
+                                        drag="x"
+                                        dragMomentum={false}
+                                        dragConstraints={{ left: 0, right: 0 }}
+                                        onDrag={(_event, info) => handleResize(item, info, { x: true })}
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
+                                            <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
+                                        </div>
+                                    </motion.div>
+                                    <motion.div
+                                        data-scheme="tertiary"
+                                        className="group absolute left-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
+                                        drag="x"
+                                        dragMomentum={false}
+                                        dragConstraints={{ left: 0, right: 0 }}
+                                        onDragStart={() => setLeftResizing(true)}
+                                        onDrag={(_event, info) => handleResize(item, info, { x: true, fromLeft: true })}
+                                        onDragEnd={() => setLeftResizing(false)}
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-light-8" />
+                                            <div className="hidden group-hover:block absolute -bottom-6 h-6 left-0 w-[2px] bg-light-8" />
+                                        </div>
+                                    </motion.div>
+                                    <motion.div
+                                        data-scheme="tertiary"
+                                        className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
+                                        drag="y"
+                                        dragMomentum={false}
+                                        dragConstraints={{ top: 0, bottom: 0 }}
+                                        onDrag={(_event, info) => handleResize(item, info, { y: true })}
+                                    >
+                                        <div className="relative w-full h-full">
+                                            <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
+                                            <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
+                                        </div>
+                                    </motion.div>
+                                    <motion.div
+                                        className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
+                                        drag
+                                        dragMomentum={false}
+                                        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+                                        onDrag={(_event, info) => handleResize(item, info, { x: true, y: true })}
+                                    >
+                                        <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
+                                            <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
+                                        </div>
+                                    </motion.div>
+                                    <motion.div
+                                        className="group absolute bottom-0 left-0 w-6 h-6 cursor-sw-resize flex items-center justify-center !transform-none"
+                                        drag
+                                        dragMomentum={false}
+                                        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+                                        onDragStart={() => setLeftResizing(true)}
+                                        onDrag={(_event, info) =>
+                                            handleResize(item, info, { x: true, y: true, fromLeft: true })
+                                        }
+                                        onDragEnd={() => setLeftResizing(false)}
+                                    >
+                                        <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
+                                            <div className="absolute -bottom-10 -left-10 group-hover:-bottom-5 group-hover:-left-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 rotate-45" />
+                                        </div>
+                                    </motion.div>
+                                </>
                             )}
                         </motion.div>
                     </>
