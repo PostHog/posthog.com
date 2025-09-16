@@ -124,7 +124,7 @@ These are guidelines to aim for when you have bandwidth after handling customer 
 ##### Consider rewarding with merch
 
 - A PR doesn't need to be merged to be reward-able
-- Folk took time to care about PostHog and merch is a great way to say thank you
+- Someone took time to care about PostHog and merch is a great way to say thank you
 
 #### Managing expectations
 
@@ -174,7 +174,7 @@ For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on
 
 ## Don't ask users to do work that you can do!
 
-If folk are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
+If folks are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
 
 For example don't ask them what version of posthog-js they're using or what their posthog config is when you can find out for yourself. Or visit their website and check the console instead of asking them if they had any errors.
 
