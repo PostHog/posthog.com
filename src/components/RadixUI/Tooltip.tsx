@@ -9,6 +9,7 @@ export interface TooltipProps {
     delay?: number
     side?: 'top' | 'right' | 'bottom' | 'left'
     sideOffset?: number
+    className?: string
 }
 
 const Tooltip = ({
@@ -19,12 +20,13 @@ const Tooltip = ({
     delay = 500,
     side = 'top',
     sideOffset = 0,
+    className = '',
 }: TooltipProps) => {
     return (
         <RadixTooltip.Provider delayDuration={delay}>
             <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
                 <RadixTooltip.Trigger asChild>
-                    <span>{trigger}</span>
+                    <span className={className}>{trigger}</span>
                 </RadixTooltip.Trigger>
                 <RadixTooltip.Portal>
                     <RadixTooltip.Content

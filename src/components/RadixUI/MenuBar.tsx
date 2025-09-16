@@ -47,6 +47,25 @@ const generateStableId = (baseId: string, ...parts: (string | number)[]): string
     return `${baseId}-${parts.join('-')}`
 }
 
+// Helper to render menu item content (icon + label + chevron)
+const MenuItemContent = (item: MenuItemType, forceIconIndent?: boolean) => {
+    const iconContent = item.icon ? (
+        <span className="mr-2 flex items-center">{item.icon}</span>
+    ) : forceIconIndent ? (
+        <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
+    ) : null
+
+    return (
+        <>
+            {iconContent}
+            {item.label}
+            <div className={ShortcutClasses}>
+                <IconChevronRight className="size-4" />
+            </div>
+        </>
+    )
+}
+
 // Process menu items for mobile display - truncate nesting to 2 levels max
 const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
     // Skip items marked for mobile omission
@@ -156,17 +175,23 @@ const MenuItem: React.FC<{
             const subContentId = generateStableId(baseId, 'sub-content', menuIndex, itemIndex)
             return (
                 <RadixMenubar.Sub key={itemId}>
-                    <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
-                        {item.icon ? (
-                            <span className="mr-2 flex items-center">{item.icon}</span>
-                        ) : forceIconIndent ? (
-                            <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
-                        ) : null}
-                        {item.label}
-                        <div className={ShortcutClasses}>
-                            <IconChevronRight className="size-4" />
-                        </div>
-                    </RadixMenubar.SubTrigger>
+                    {item.link ? (
+                        <Link
+                            to={item.link}
+                            state={{ newWindow: true }}
+                            externalNoIcon={item.external}
+                            className="no-underline"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
+                                {MenuItemContent(item, forceIconIndent)}
+                            </RadixMenubar.SubTrigger>
+                        </Link>
+                    ) : (
+                        <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
+                            {MenuItemContent(item, forceIconIndent)}
+                        </RadixMenubar.SubTrigger>
+                    )}
                     <RadixMenubar.Portal>
                         <RadixMenubar.SubContent
                             className={ContentClasses}
@@ -296,7 +321,6 @@ const MenuBar: React.FC<MenuBarProps> = ({
     id = 'menubar',
 }) => {
     const { isMobile, isLoaded } = useResponsive()
-
     const baseId = React.useMemo(() => {
         // Generate a stable ID based on the menu structure
         const menuSignature = menus

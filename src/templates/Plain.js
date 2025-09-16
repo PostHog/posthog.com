@@ -13,16 +13,18 @@ import { SEO } from 'components/seo'
 import TutorialsSlider from 'components/TutorialsSlider'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { OverflowXSection } from '../components/OverflowXSection'
 import { Tweet } from 'components/Tweet'
 import ReaderView from 'components/ReaderView'
+import { useApp } from '../context/App'
 
 const A = (props) => <Link {...props} />
 
 export default function Plain({ data }) {
+    const { updateSiteSettings, siteSettings } = useApp()
     const { pageData } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, showTitle, width = 'sm', noindex, images, isInFrame, seo } = pageData?.frontmatter
@@ -43,8 +45,17 @@ export default function Plain({ data }) {
         ...shortcodes,
     }
 
+    useEffect(() => {
+        if (isInFrame) {
+            updateSiteSettings({
+                ...siteSettings,
+                experience: 'boring',
+            })
+        }
+    }, [])
+
     return (
-        <ReaderView hideLeftSidebar>
+        <ReaderView hideLeftSidebar showQuestions={!isInFrame}>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
