@@ -137,7 +137,7 @@ const Stickers: React.FC<StickersProps> = ({ country, location, name, label, cla
         if (flagComponentName) {
             const FlagComponent = AllStickers[flagComponentName]
             if (FlagComponent) {
-                return <FlagComponent className={className} {...props} />
+                return <FlagComponent className={`text-white ${className}`} {...props} />
             }
         }
 
