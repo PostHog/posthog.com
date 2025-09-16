@@ -1,23 +1,23 @@
 ---
-title: Exec Hiring
+title: Leadership Hiring
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
 
-## Exec hiring at PostHog
+## Senior hiring at PostHog
 
-We deliberately keep our [structure flat](/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more executive-type positions. 
+We deliberately keep our [structure flat](/handbook/company/culture#structured-for-speed-and-autonomy) and we don’t believe in having a lot of fancy titles early on. However, as we grow, we will hire people into more senior-type positions. 
 
-With our exec hiring, more so than normal, we are aiming for speed, and as always, quality. If a candidate is amazing but doesn't fit with a specific role need we have _right now_, we still aim to treat the hiring process with the same urgency as if posthog.com has gone down. 
+With our senior leadership hiring, more so than normal, we are aiming for speed, and as always, quality. If a candidate is amazing but doesn't fit with a specific role need we have _right now_, we still aim to treat the hiring process with the same urgency as if posthog.com has gone down. 
 
-### Executive hiring process
+### Hiring process
 
 #### Preparation
 
-Before we kick-off the hiring process for an exec role, we make sure to have everything we need for the role prepared: 
+Before we kick-off the hiring process for a role, we make sure to have everything we need for the role prepared: 
 
-*   James or Tim to write job description, Exec team review
+*   James or Tim to write job description, Blitzscale team review
 *   Post the role - share in our networks (we may not publicize this in all our usual channels as these types of roles can attract a very high volume of candidates who are not relevant)
 *   Ask investors for referrals
 *   Agree on salary benchmark and equity level - this usually doesn't fit in our compensation calculator
@@ -46,7 +46,7 @@ In order to ensure speed, we aim to finish the process within 5 working days (as
 *   Technical deep-dive
 *   Scenario-based questions
 
-**Day 3: Meet rest of the Exec team - Charles -** _30-45 minutes_
+**Day 3: Meet rest of the team - Charles -** _30-45 minutes_
 
 *   Strategy and long term outlook
 *   Culture fit
