@@ -17,45 +17,45 @@ Next.js is a SSR framework with both client-side and server-side rendering. To t
 
 <Steps>
 
-  <Step title="Install PostHog SDK client-side" badge="required">
+<Step title="Install PostHog SDK client-side" badge="required">
 
-  <NextJSInstall />
+<NextJSInstall />
 
-  </Step>
+</Step>
 
 <Step title="Capture client-side exceptions" badge="required">
 
-  You can capture exceptions in client-side code in two ways:
+You can capture exceptions in client-side code in two ways:
 
-  1. **Manual capture**: Use `posthog.captureException()` in components that include `'use client'`.
-  2. **Autocapture**: PostHog will automatically capture `$exception` events when errors are thrown.
+1. **Manual capture**: Use `posthog.captureException()` in components that include `'use client'`.
+2. **Autocapture**: PostHog will automatically capture `$exception` events when errors are thrown.
 
-  #### Setting up exception autocapture
+#### Setting up exception autocapture
 
-  <JSWebErrorTracking />
+<JSWebErrorTracking />
 
-  <Tab.Group tabs={[
-  'App router',
-  'Pages router']}>
-  <Tab.List>
+<Tab.Group tabs={[
+'App router',
+'Pages router']}>
+<Tab.List>
 
-  <Tab>App router</Tab>
+<Tab>App router</Tab>
 
 <Tab>Pages router</Tab>
 
 </Tab.List>
 <Tab.Panels>
 
-  <Tab.Panel>
-
-  <AppRouterErrorTracking />
-
-  </Tab.Panel>
 <Tab.Panel>
 
-  <PagesRouterErrorTracking />
+<AppRouterErrorTracking />
 
-  </Tab.Panel>
+</Tab.Panel>
+<Tab.Panel>
+
+<PagesRouterErrorTracking />
+
+</Tab.Panel>
 
 </Tab.Panels>
 
@@ -67,15 +67,15 @@ Next.js is a SSR framework with both client-side and server-side rendering. To t
 
 <Step title="Installing PostHog SDK for server-side" subtitle="Your goal in this step: Install the PostHog Node.js SDK for server-side error tracking." badge="required">
 
-  Next.js enables you to both server-side render pages and add server-side functionality. To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
+Next.js enables you to both server-side render pages and add server-side functionality. To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
 
-  First, install the `posthog-node` library:
+First, install the `posthog-node` library:
 
-  <InstallNodePackageManagers />
+<InstallNodePackageManagers />
 
-  For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://app.posthog.com/settings/project).
+For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://app.posthog.com/settings/project).
 
-  This looks like this:
+This looks like this:
 
 ```js file=lib/posthog-server.js
 import { PostHog } from 'posthog-node'
@@ -98,7 +98,7 @@ export function getPostHogServer() {
 }
 ```
 
-  You can now use the `getPostHogServer` function to capture exceptions in server-side code.
+You can now use the `getPostHogServer` function to capture exceptions in server-side code.
 
 ```js
 const posthog = getPostHogServer()
@@ -113,36 +113,36 @@ try {
 }
 ```
 
-  </Step>
+</Step>
 
 <Step checkpoint title="Verify server-side exceptions" subtitle="Confirm capture is working server-side">
 
-  You should also see events and exceptions in PostHog coming from your server-side code in the activity feed.
+You should also see events and exceptions in PostHog coming from your server-side code in the activity feed.
 
-  <CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/activity/explore" external={true}>
-  Check for server events in PostHog
-  </CallToAction>
+<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/activity/explore" external={true}>
+Check for server events in PostHog
+</CallToAction>
 
 </Step>
 
 <Step title="Capturing server-side exceptions" subtitle="Your goal in this step: Capture your first server-side exception event." badge="required">
 
-  To capture errors that occur in your server-side code, you can set up a [`instrumentation.ts`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of your project. This provides a `onRequestError` hook that you can use to capture errors.
+To capture errors that occur in your server-side code, you can set up a [`instrumentation.ts`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of your project. This provides a `onRequestError` hook that you can use to capture errors.
 
-  Importantly, you need to:
+Importantly, you need to:
 
-  1. Set up a `posthog-node` client in your server-side code. See our doc on [setting up Next.js server-side analytics](/docs/libraries/next-js#server-side-analytics) for more.
-  2. Check the request is running in the `nodejs` runtime to ensure PostHog works. You can call `posthog.debug()` to get verbose logging.
-  3. Get the `distinct_id` from the cookie to connect the error to a specific user.
+1. Set up a `posthog-node` client in your server-side code. See our doc on [setting up Next.js server-side analytics](/docs/libraries/next-js#server-side-analytics) for more.
+2. Check the request is running in the `nodejs` runtime to ensure PostHog works. You can call `posthog.debug()` to get verbose logging.
+3. Get the `distinct_id` from the cookie to connect the error to a specific user.
 
-  This looks like this:
+This looks like this:
 
 ```js
 // instrumentation.js
 export function register() {
   // No-op for initialization
 }
-
+ 
 export const onRequestError = async (err, request, context) => {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     const { getPostHogServer } = require('./lib/posthog-server')
@@ -168,14 +168,14 @@ export const onRequestError = async (err, request, context) => {
 }
 ```
 
-  You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
+You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
 
-  </Step>
+</Step>
 
 <Step title="Upload source maps" badge="required">
 
-  <StepUploadSourceMaps urlPath="nextjs" framework="Next.js" />
+<StepUploadSourceMaps urlPath="nextjs" framework="Next.js" />
 
-  </Step>
+</Step>
 
 </Steps>

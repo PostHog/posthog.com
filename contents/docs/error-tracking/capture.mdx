@@ -22,7 +22,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Source maps" type="fyi">
 
-  If you serve minified or compiled code, PostHog needs source maps to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
+If you serve minified or compiled code, PostHog needs source maps to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
 
 </CalloutBox>
 
@@ -44,7 +44,7 @@ posthog.init('<ph_project_api_key>', {
 
 ### Manual exception capture
 
-You can also manually call the exception capture method. 
+You can also manually call the exception capture method.
 
 <MultiLanguage>
 
@@ -79,13 +79,13 @@ posthog.capture_exception(
 
 ## Customizing exception capture
 
-Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this. 
+Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this.
 
-Customizing exception capture lets you override exception properties to influence how they're grouped into issues. 
+Customizing exception capture lets you override exception properties to influence how they're grouped into issues.
 
 Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/product-analytics/data-warehouse).
 
-### Customizing exception properties 
+### Customizing exception properties
 
 #### During manual capture
 
@@ -155,21 +155,26 @@ posthog.capture_exception(
 
 #### During automatic capture
 
-When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event. 
+When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event.
 
 You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
 
 The process is slightly different depending on the SDK you're using.
 
 <Tab.Group tabs={['Web and Node.js', 'Python']}>
+
 <Tab.List>
-  <Tab>Web and Node.js</Tab>
-  <Tab>Python</Tab>
+
+<Tab>Web and Node.js</Tab>
+
+<Tab>Python</Tab>
+
 </Tab.List>
 <Tab.Panels>
-  <Tab.Panel>
 
-  In [JavaScript Web](/docs/libraries/javascript) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
+<Tab.Panel>
+
+In [JavaScript Web](/docs/libraries/javascript) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
 
   ```javascript 
   posthog.init('<ph_project_api_key>', {
@@ -191,11 +196,11 @@ The process is slightly different depending on the SDK you're using.
     }
   })
   ```
-  
-  </Tab.Panel>
-  <Tab.Panel>
 
-  In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#contexts) and tags. 
+</Tab.Panel>
+<Tab.Panel>
+
+In Python, you can override the default properties through the use of [contexts](/docs/libraries/python#contexts) and tags.
 
   ```python
   import posthog
@@ -215,14 +220,16 @@ The process is slightly different depending on the SDK you're using.
       # When this exception is automatically captured, it will be tagged with the custom properties
       raise Exception("Test custom exception")
   ```
-  
-  </Tab.Panel>
+
+</Tab.Panel>
+
 </Tab.Panels>
+
 </Tab.Group>
 
 ### Capturing properties for custom issue grouping rules
 
-Other than grouping with [custom fingerprints](#customizing-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
+Other than grouping with [custom fingerprints](#customizing-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues).
 
 For example:
 
@@ -230,7 +237,7 @@ For example:
 - Setting `feature_name`, `service_name`, or `service_version` to group exceptions together for a specific features and services.
 - Setting `intent` to group exceptions due to common interactions like accessing storage or network.
 
-It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them. 
+It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them.
 
 Note that grouping issues means that all exceptions will be grouped together under a **single issue**. You **cannot** group exceptions into multiple issues, but you can still [filter on custom properties](/docs/error-tracking/monitoring#finding-specific-issues) across multiple issues without grouping them.
 
