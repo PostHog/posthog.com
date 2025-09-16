@@ -38,7 +38,7 @@ We are also starting to experiment with cold outbound, specifically to those who
 
 We've linked to this section because you've been included in our [first few experiments.](#what-were-doing-today) We want to work together, but not at the expense of you hating us.
 
-So, if you'd rather we didn't reach out, just click here [LINK]. 
+So, if you'd rather we didn't reach out, you can just <button class="optout-button">click here</button>. 
 
 No forms, no 'are you sure?', no hurt feelings. You can always change your mind later by [reaching out to us directly](/talk-to-a-human). We would note that you're on our list because we think you're a good fit for PostHog, but that's for you to judge. 
 
