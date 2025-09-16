@@ -199,9 +199,22 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Exa',
         toolsUsed: ['session_replay', 'product_analytics', 'max_ai'],
         notes: 'AI search engine',
-        featured: false,
+        featured: true,
         logo: ExaLogo,
         height: 8,
+        quotes: {
+            liam_hinzman: {
+                name: 'Liam Hinzman',
+                role: 'Software Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/liam_d54ff8270b.jpg',
+                    url: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/liam_d54ff8270b.jpg',
+                },
+                products: {
+                    max_ai: 'I love that I can ask Max AI for help with things. If I’m struggling to find a feature or do something, I don’t have to dig through pages of docs — I just ask the hedgehog in the corner.',
+                },
+            },
+        },
     },
     hasura: {
         name: 'Hasura',
