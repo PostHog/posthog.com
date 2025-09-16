@@ -395,6 +395,7 @@ stroke-opacity-25
 stroke-opacity-50
 stroke-orange
 stroke-orange/10
+stroke-orange-dark
 stroke-pale-blue
 stroke-pale-blue-dark
 stroke-pink
