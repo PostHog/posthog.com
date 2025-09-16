@@ -630,7 +630,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Leadership hiring',
-                        url: '/handbook/people/hiring-process/leadership-hiring',
+                        url: '/handbook/people/hiring-process/exec-hiring',
                     },
                     {
                         name: 'Sales and CS hiring',
