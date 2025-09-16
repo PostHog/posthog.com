@@ -1394,28 +1394,36 @@ export default function ProfilePage({ params }: PageProps) {
                                                     .filter((teammate) => teammate.id !== data?.id)
                                                     .map((teammate) => {
                                                         return (
-                                                            <TeamMember
+                                                            <Link
                                                                 key={teammate.id}
-                                                                avatar={{
-                                                                    url:
-                                                                        teammate.attributes.avatar?.data?.attributes
-                                                                            ?.url || teammate.attributes.avatar?.url,
-                                                                }}
-                                                                firstName={teammate.attributes.firstName}
-                                                                lastName={teammate.attributes.lastName}
-                                                                companyRole={teammate.attributes.companyRole}
-                                                                country={teammate.attributes.country}
-                                                                location={teammate.attributes.location}
-                                                                squeakId={teammate.id}
-                                                                color={teammate.attributes.color || 'yellow'}
-                                                                biography={teammate.attributes.biography || ''}
-                                                                teamCrestMap={teamCrestMap}
-                                                                pineappleOnPizza={teammate.attributes.pineappleOnPizza}
-                                                                startDate={teammate.attributes.startDate}
-                                                                isTeamLead={team.attributes?.leadProfiles?.data?.some(
-                                                                    ({ id: leadID }) => leadID === teammate.id
-                                                                )}
-                                                            />
+                                                                to={`/community/profiles/${teammate.id}`}
+                                                                state={{ newWindow: true }}
+                                                            >
+                                                                <TeamMember
+                                                                    avatar={{
+                                                                        url:
+                                                                            teammate.attributes.avatar?.data?.attributes
+                                                                                ?.url ||
+                                                                            teammate.attributes.avatar?.url,
+                                                                    }}
+                                                                    firstName={teammate.attributes.firstName}
+                                                                    lastName={teammate.attributes.lastName}
+                                                                    companyRole={teammate.attributes.companyRole}
+                                                                    country={teammate.attributes.country}
+                                                                    location={teammate.attributes.location}
+                                                                    squeakId={teammate.id}
+                                                                    color={teammate.attributes.color || 'yellow'}
+                                                                    biography={teammate.attributes.biography || ''}
+                                                                    teamCrestMap={teamCrestMap}
+                                                                    pineappleOnPizza={
+                                                                        teammate.attributes.pineappleOnPizza
+                                                                    }
+                                                                    startDate={teammate.attributes.startDate}
+                                                                    isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                                                        ({ id: leadID }) => leadID === teammate.id
+                                                                    )}
+                                                                />
+                                                            </Link>
                                                         )
                                                     })}
                                             </div>
