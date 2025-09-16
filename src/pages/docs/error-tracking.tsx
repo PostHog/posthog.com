@@ -10,6 +10,8 @@ import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
 import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
 import { CodeBlock } from 'components/CodeBlock'
+import { Subfeature } from 'components/Products/Subfeature'
+import { IconRewindPlay, IconTrends, IconToggle, IconUser } from '@posthog/icons'
 
 type ErrorTrackingProps = {
     data: {
@@ -22,6 +24,36 @@ type ErrorTrackingProps = {
 }
 
 const maxWidth = 'max-w-4xl'
+
+const subfeatures = [
+    {
+        title: 'Session replay',
+        description:
+            'Watch session recordings of users who caused exceptions for more context about how to reproduce an issue',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
+    },
+    {
+        title: 'Product analytics',
+        description:
+            'Graph your <code>$exception</code> events, use filters and breakdowns to determine where errors happen and what to prioritize',
+        icon: <IconTrends />,
+        color: 'blue',
+    },
+    {
+        title: 'Feature flags',
+        description: 'Test fixes by rolling out code changes only to affected users',
+        icon: <IconToggle />,
+        color: 'seagreen',
+    },
+    {
+        title: 'User profiles',
+        description:
+            'See all <code>$exception</code> events for specific users in their event history log and find which feature flags were enabled at the time an error occurred',
+        icon: <IconUser />,
+        color: 'purple',
+    },
+]
 
 export const Content = () => {
     const javascriptCode = `posthog.captureException(error, {
@@ -59,11 +91,6 @@ export const Content = () => {
             language: 'python',
             code: pythonCode,
         },
-        {
-            label: 'Go',
-            language: 'go',
-            code: goCode,
-        },
     ]
 
     const [currentLanguage, setCurrentLanguage] = useState(codeLanguages[0])
@@ -78,28 +105,29 @@ export const Content = () => {
                 <div>
                     <p>
                         Error tracking lets you track errors and resolve issues within your app, so you can ship fast
-                        with confidence.
+                        with confidence. It's especiailly useful for engineers who:
                     </p>
-                    <p>Error tracking is great for teams who:</p>
                     <ul>
-                        <li>Need to ship faster with a fast growing product</li>
-                        <li>Need to consolidate dev tools and focus on product</li>
-                        <li>Need to streamline full-stack development </li>
-                        <li>Need to understand impact of errors</li>
+                        <li>Need to move fast and ship often</li>
+                        <li>Want fewer tools and more focus on building products</li>
+                        <li>Manage full-stack development teams</li>
+                        <li>Care about the impact errors have on users</li>
                     </ul>
                 </div>
 
                 <div className="mt-8">
+                    <i>
+                        [edwin] A technical, visual content goes here, something at the code-level (i.e., code block,
+                        image, gif, video, etc.)
+                    </i>
                     <CodeBlock currentLanguage={currentLanguage} onChange={handleLanguageChange}>
                         {codeLanguages}
                     </CodeBlock>
-
-                    <InstallationPlatforms columns={4} />
                 </div>
             </section>
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">All the features you expect</h2>
+                <h2 className="mb-4 text-xl">All the features you'd expect</h2>
                 <OSTable
                     columns={[
                         { name: '', width: '1fr', align: 'left' },
@@ -110,41 +138,59 @@ export const Content = () => {
                     rows={[
                         {
                             cells: [
-                                { content: 'Error alerts' },
+                                { content: <a href="/docs/error-tracking/capture">Capture exceptions</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                { content: 'Exception capture' },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
-                                { content: 'Issue management' },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                { content: 'Network performance monitoring' },
+                                {
+                                    content: (
+                                        <a href="/docs/error-tracking/capture#automatic-exception-capture">
+                                            Exception autocapture
+                                        </a>
+                                    ),
+                                },
                                 { content: <IconCheck className="h-5 text-green" /> },
                             ],
                         },
                         {
                             cells: [
-                                { content: 'Error grouping' },
+                                { content: <a href="/docs/error-tracking/stack-traces">Stack traces</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                { content: 'Source map support' },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
-                                { content: 'Stack tracing' },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                { content: 'Integration with product analytics' },
+                                { content: <a href="/docs/error-tracking/upload-source-maps">Source map uploads</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
                             ],
                         },
                         {
                             cells: [
-                                { content: 'Integration with session replays' },
+                                { content: <a href="/docs/error-tracking/managing-issues">Issue management</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                { content: 'Integration with A/B experiments' },
+                                { content: <a href="/docs/error-tracking/grouping-issues">Error grouping</a> },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: <a href="/docs/error-tracking/debugging-with-mcp">AI features</a> },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                {
+                                    content: (
+                                        <a href="docs/error-tracking/capture#customizing-exception-capture">
+                                            Custom event properties
+                                        </a>
+                                    ),
+                                },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: <a href="/docs/error-tracking/assigning-issues">Team assignments</a> },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                {
+                                    content: (
+                                        <a href="/docs/error-tracking/external-tracking">
+                                            Integrations with Linear and GitHub
+                                        </a>
+                                    ),
+                                },
                                 { content: <IconCheck className="h-5 text-green" /> },
                             ],
                         },
@@ -152,26 +198,37 @@ export const Content = () => {
                     size="sm"
                     className={maxWidth}
                 />
+
+                <p>Including a wide range of supported frameworks:</p>
+
+                <div className="mt-4">
+                    <InstallationPlatforms columns={4} />
+                </div>
             </section>
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">And the features that help you 10x</h2>
+                <h2 className="mb-4 text-xl">And features that will help you 10x</h2>
+                <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0">
+                    {subfeatures.map((subfeature, index) => (
+                        <Subfeature key={index} {...subfeature} />
+                    ))}
+                </ul>
             </section>
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">Usage-based pricing</h2>
+                <h2 className="mb-4 text-xl">Pricing</h2>
                 <p>
                     PostHog's error tracking is built to be cost-effective by default, with a generous free tier and
                     transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog
                     for free.
                 </p>
-                <p>
-                    No credit card required to start. You can also set billing limits to avoid surprise charges. See our{' '}
-                    <a href="/pricing">pricing page</a> for more up-to-date details
-                </p>
                 <div className="px-8 bg-white rounded-md border-primary border">
                     <Pricing productType="error_tracking" />
                 </div>
+                <p>No credit card required to start. You can also set billing limits to avoid surprise charges.</p>
+                <p>
+                    See our <a href="/pricing">pricing page</a> for more up-to-date details.
+                </p>
             </section>
 
             <AskMax
@@ -184,27 +241,27 @@ export const Content = () => {
             />
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h3 className="m-0 text-xl">Resources</h3>
-                <p className="text-[15px]">Real-world use cases to get you started</p>
+                <h2 className="m-0 text-xl">Next steps</h2>
+                <p className="text-[15px]">Check out these resources to get started</p>
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
-                        type="Guide"
-                        title="How to set up Next.js error monitoring"
-                        description="Track client and server errors in Next.js"
-                        url="/tutorials/nextjs-error-monitoring"
+                        type="Getting started"
+                        title="Get started with error tracking"
+                        description="A high-level guide that outlines the integration journey."
+                        url="/docs/error-tracking/start-here"
                     />
                     <ResourceItem
-                        type="Guide"
-                        title="How to set up Python error tracking"
-                        description="Learn how to track basic errors in Python and Flask"
-                        url="/tutorials/python-error-tracking"
+                        type="Quickstart"
+                        title="How to set up Next.js error tracking"
+                        description="Installation guide to set up error tracking in Next.js"
+                        url="/docs/error-tracking/installation/nextjs"
                     />
                     <ResourceItem
-                        type="Article"
-                        title="What is real user monitoring (and how to set it up)"
-                        description="How to set up RUM to get more context on errors"
-                        url="/product-engineers/real-user-monitoring"
+                        type="Concepts"
+                        title="Issues and exceptions"
+                        description="Learn how issues and exceptions fit into the workflow"
+                        url="/docs/error-tracking/issues-and-exceptions"
                     />
                 </ul>
             </section>
