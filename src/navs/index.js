@@ -3985,6 +3985,23 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'AI',
+                },
+                {
+                    name: 'Debugging with MCP',
+                    url: '/docs/error-tracking/debugging-with-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Fix with AI prompts',
+                    url: '/docs/error-tracking/fix-with-ai-prompts',
+                    icon: 'IconLlmPromptManagement',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
                     name: 'Resources',
                 },
                 {
