@@ -555,7 +555,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     ? 'border-b border-primary'
                                     : `${
                                           focusedWindow === item
-                                              ? 'shadow-2xl border-primary'
+                                              ? 'shadow-2xl border-[#df4313]'
                                               : 'shadow-lg border-input'
                                       } ${dragging ? '[&_*]:select-none' : ''} ${
                                           item.minimal
@@ -569,17 +569,23 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                 zIndex: item.zIndex,
                             }}
                             initial={{
-                                scale: 0.08,
-                                x: rendered
-                                    ? siteSettings.experience === 'boring' || !windowPosition
-                                        ? 0
-                                        : windowPosition.x
-                                    : item.fromOrigin?.x || windowPosition?.x || Math.round(position.x),
-                                y: rendered
-                                    ? siteSettings.experience === 'boring' || !windowPosition
-                                        ? 0
-                                        : windowPosition.y
-                                    : item.fromOrigin?.y || windowPosition?.y || Math.round(position.y),
+                                scale: siteSettings.experience === 'tiling' ? 1 : 0.08,
+                                x:
+                                    siteSettings.experience === 'tiling'
+                                        ? Math.round(position.x)
+                                        : rendered
+                                        ? siteSettings.experience === 'boring' || !windowPosition
+                                            ? 0
+                                            : windowPosition.x
+                                        : item.fromOrigin?.x || windowPosition?.x || Math.round(position.x),
+                                y:
+                                    siteSettings.experience === 'tiling'
+                                        ? Math.round(position.y)
+                                        : rendered
+                                        ? siteSettings.experience === 'boring' || !windowPosition
+                                            ? 0
+                                            : windowPosition.y
+                                        : item.fromOrigin?.y || windowPosition?.y || Math.round(position.y),
                                 width: siteSettings.experience === 'boring' ? '100%' : size.width,
                                 height:
                                     siteSettings.experience === 'boring'
@@ -601,16 +607,22 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         : size.height,
                                 transition: {
                                     duration:
-                                        siteSettings.experience === 'boring' || siteSettings.performanceBoost ? 0 : 0.2,
+                                        siteSettings.experience === 'boring' ||
+                                        siteSettings.experience === 'tiling' ||
+                                        siteSettings.performanceBoost
+                                            ? 0
+                                            : 0.2,
                                     scale: {
                                         duration:
                                             siteSettings.experience === 'boring' ||
+                                            siteSettings.experience === 'tiling' ||
                                             siteSettings.performanceBoost ||
                                             !windowPosition
                                                 ? 0
                                                 : 0.2,
                                         delay:
                                             siteSettings.experience === 'boring' ||
+                                            siteSettings.experience === 'tiling' ||
                                             siteSettings.performanceBoost ||
                                             !windowPosition
                                                 ? 0
@@ -849,7 +861,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
                                 }`}
                             >
-                                {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
+                                {(siteSettings.experience === 'tiling' ||
+                                    !animating ||
+                                    isSSR ||
+                                    item.appSettings?.size?.autoHeight) && (
                                     <Router
                                         minimizing={minimizing}
                                         onExit={() => {
@@ -866,7 +881,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </Router>
                                 )}
                             </div>
-                            {!item.fixedSize && !item.minimal && (
+                            {!item.fixedSize && !item.minimal && siteSettings.experience === 'posthog' && (
                                 <motion.div
                                     data-scheme="tertiary"
                                     className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
@@ -887,7 +902,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </div>
                                 </motion.div>
                             )}
-                            {!item.fixedSize && !item.minimal && (
+                            {!item.fixedSize && !item.minimal && siteSettings.experience === 'posthog' && (
                                 <motion.div
                                     data-scheme="tertiary"
                                     className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
@@ -911,7 +926,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                     </div>
                                 </motion.div>
                             )}
-                            {!item.fixedSize && !item.minimal && (
+                            {!item.fixedSize && !item.minimal && siteSettings.experience === 'posthog' && (
                                 <motion.div
                                     className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
                                     drag
