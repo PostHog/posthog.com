@@ -1,14 +1,12 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import { IconInfo, IconLightBulb, IconSend } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import MediaPlayer from 'components/MediaPlayer'
+import WistiaEmbed from 'components/WistiaEmbed'
 
 interface PostHogOnPostHogSlideProps {
     productData: {
         videos: {
             overview: {
                 youtube: string
+                wistia: string
             }
         }
         postHogOnPostHog: {
@@ -39,14 +37,10 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
             <h1 className="text-2xl text-center">{productData.postHogOnPostHog.description}</h1>
 
             <div className="px-8">
-                {/* <iframe
-          className="aspect-video rounded shadow-2xl w-full"
-          src={`https://www.youtube.com/embed/${productData.videos.overview.youtube}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        /> */}
-                <MediaPlayer videoId={productData.videos.overview.youtube} />
+                <WistiaEmbed
+                    mediaId={productData.videos.overview.wistia}
+                    className="aspect-video rounded shadow-2xl w-full"
+                />
             </div>
 
             <ul className={`grid gap-4 grid-cols-${productData.postHogOnPostHog.benefits?.length}`}>

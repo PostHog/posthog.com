@@ -51,6 +51,7 @@ export const featureFlags = {
     videos: {
         overview: {
             youtube: '1X2gha80fsA',
+            wistia: 'x8m2u14slo',
         },
     },
     hog: {
