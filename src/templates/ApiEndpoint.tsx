@@ -649,7 +649,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                             <div className="mt-8" key={item.operationId}>
                                 {index > 0 && <SectionDivider />}
                                 <div
-                                    className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+                                    className="grid grid-cols-1 @xl:grid-cols-2 gap-8 items-start"
                                     id={pathID(item.httpVerb, item.pathName)}
                                 >
                                     <div className="space-y-6">
