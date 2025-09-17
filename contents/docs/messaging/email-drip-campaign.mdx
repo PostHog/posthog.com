@@ -1,38 +1,35 @@
 ---
 title: "Set up an Email Drip Campaign"
-date: 2025-09-15
-author:
-  - abe-basu
-showTitle: true
-tags:
-  - feature flags
+showStepsToc: true
 ---
 
 In this tutorial we’ll walk through creating a simple **drip campaign**:  
 send a welcome email when a user signs up, then follow up 1 day later if they don't have a property set.
 
----
+<Steps>
 
-## Step 1: Create a campaign
+<Step title="Create a campaign" badge="required">
 
 Go to **Messaging → Create campaign → Workflow**.  
 You’ll see a trigger block connected to an exit.
 
----
+</Step>
 
-## Step 2: Add a trigger
+<Step title="Add a trigger" badge="required">
 
 Drag a **Trigger** and configure it for your signup event (`user signed up`).
 
----
+</Step>
 
-## Step 3: Send the first email
+<Step title="Send the first email" badge="required">
 
 Drag an **Email** action beneath the trigger.  
 Select your welcome email template or create a new one.
 
 
-## Step 4: Wait until condition branch
+</Step>
+
+<Step title="Wait until condition branch" badge="required">
 
 After the delay, add a **Wait until Condition branch**.  
 
@@ -47,12 +44,16 @@ This means if after 1 day the onbaording_completed person property is not set to
 - **Yes branch:** Exit (they’ve already activated).
 - **No branch:** Add another Email step with a follow-up.
 
----
+</Step>
 
-## Step 6: Review and launch
+<Step title="Review and launch" badge="required">
 
 Now the campaign should look like this![this](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
 
 Click **Create**, and voila the campaign is published.
-  
+
 Your new users will now automatically receive the drip sequence!
+
+</Step>
+
+</Steps>

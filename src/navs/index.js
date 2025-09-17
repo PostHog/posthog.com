@@ -4703,6 +4703,74 @@ export const docsMenu = {
                 },
             ],
         },
+        {
+            name: 'Messaging',
+            icon: 'IconMegaphone',
+            color: 'red',
+            url: '/docs/messaging',
+            description: 'Create campaigns to send messages to your users.',
+            children: [
+                {
+                    name: 'Messaging',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/messaging',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/messaging/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Set up email campaigns',
+                    url: '/docs/messaging/set-up-email',
+                    icon: 'IconMegaphone',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Campaign builder',
+                    url: '/docs/messaging/campaign-builder',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Triggers and actions',
+                    url: '/docs/messaging/triggers-and-actions',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Create a drip campaign',
+                    url: '/docs/messaging/email-drip-campaign',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/messaging/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+            ],
+        },
     ],
 }
 
