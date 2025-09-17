@@ -30,14 +30,10 @@ const mapVerbsColor = {
 }
 
 // Divider component for visual separation
-const Divider = ({ className = '' }) => (
-    <hr className={`border-0 border-t border-gray-accent-light dark:border-gray-accent-dark my-6 ${className}`} />
-)
+const Divider = ({ className = '' }) => <hr className={`border-0 border-t border-primary my-6 ${className}`} />
 
 // Section divider with more spacing for major sections
-const SectionDivider = ({ className = '' }) => (
-    <hr className={`border-0 border-t-2 border-gray-accent-light dark:border-gray-accent-dark my-8 ${className}`} />
-)
+const SectionDivider = ({ className = '' }) => <hr className={`border-0 border-t-2 border-primary my-8 ${className}`} />
 
 function Endpoints({ paths }) {
     const urlItems = []
@@ -56,7 +52,7 @@ function Endpoints({ paths }) {
                     {Object.entries(paths).map(([path, value]) => (
                         <React.Fragment key={value}>
                             {Object.keys(value).map((verb) => (
-                                <tr key={verb} className="border-primary border-b first:border-t-0 last:border-b-0">
+                                <tr key={verb}>
                                     <td>
                                         <code className={`method text-${mapVerbsColor[verb]}`}>
                                             {verb.toUpperCase()}
@@ -167,13 +163,10 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li
-                        key={index}
-                        className="py-3 border-b border-gray-accent-light dark:border-gray-accent-dark first:border-0 last:border-0"
-                    >
+                    <li key={index} className="py-3 border-b border-primary last:border-0">
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
-                                <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
+                                <span className="font-code font-semibold text-[13px] leading-7">{param.name} $$</span>
                                 {param.schema.items?.$ref && (
                                     <>
                                         {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
@@ -628,6 +621,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                     <MDXProvider components={components}>
                         <MDXRenderer>{overviewNode.body}</MDXRenderer>
                     </MDXProvider>
+                    <SectionDivider />
                 </div>
             )}
 
@@ -635,12 +629,13 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 
             <Endpoints paths={paths} />
 
-            {items.map((item) => {
+            {items.map((item, index) => {
                 item = item.operationSpec
                 const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
                 return (
                     <div className="mt-8" key={item.operationId}>
+                        {index > 0 && <SectionDivider />}
                         <div
                             className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
                             id={pathID(item.httpVerb, item.pathName)}
@@ -649,9 +644,11 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 <h2>{generateName(item)}</h2>
                                 {mdxNode?.body && (
                                     <div className="article-content">
-                                        <MDXProvider components={components}>
-                                            <MDXRenderer>{mdxNode.body}</MDXRenderer>
-                                        </MDXProvider>
+                                        <div className="text-primary">
+                                            <MDXProvider components={components}>
+                                                <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
                                     </div>
                                 )}
                                 <ReactMarkdown>
@@ -659,9 +656,30 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                         ? pathDescription(item)
                                         : item.description}
                                 </ReactMarkdown>
-                                <Security item={item} objects={objects} />
-                                <Parameters item={item} objects={objects} />
 
+                                <Security item={item} objects={objects} />
+                                {item.security?.[0]?.['PersonalAPIKeyAuth']?.length && <Divider />}
+
+                                <Parameters item={item} objects={objects} />
+                                {item.parameters?.filter((param) => param.in === 'path' || param.in === 'query')
+                                    ?.length > 0 && <Divider />}
+
+                                <RequestBody item={item} objects={objects} />
+                                {item.requestBody && <Divider />}
+
+                                <ResponseBody item={item} objects={objects} />
+                            </div>
+                            <div className="lg:sticky top-[108px] space-y-6">
+                                <div>
+                                    <h4>Request</h4>
+                                    <RequestExample
+                                        name={name}
+                                        item={item}
+                                        objects={objects}
+                                        exampleLanguage={exampleLanguage}
+                                        setExampleLanguage={setExampleLanguage}
+                                    />
+                                </div>
                                 <div>
                                     <h4>Response</h4>
                                     {Object.keys(item.responses).map((statusCode) => {
