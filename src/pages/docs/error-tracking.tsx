@@ -10,7 +10,7 @@ import OSTable from 'components/OSTable'
 import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
 import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
-import { CodeBlock } from 'components/CodeBlock'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser } from '@posthog/icons'
 
 type ErrorTrackingProps = {
@@ -57,50 +57,39 @@ const subfeatures = [
         url: '/docs/product-analytics/identify',
     },
 ]
-const javascriptCode = `posthog.captureException(error, {
-    user_id: "user123",
-    stack_trace: error.stack,
-    severity: "error"
-  })`
-
-const pythonCode = `posthog.capture_exception(
-    error,
-    distinct_id="user123",
-    properties={
-      "stack_trace": str(error),
-      "severity": "error"
-    }
-  )`
-
-const goCode = `client.CaptureException(posthog.CaptureException{
-    DistinctId: "user123",
-    Exception:  err,
-    Properties: map[string]interface{}{
-      "severity": "error",
-      "context":  "user_action",
-    },
-  })`
-
-const codeLanguages = [
-    {
-        label: 'JavaScript',
-        language: 'javascript',
-        code: javascriptCode,
-    },
-    {
-        label: 'Python',
-        language: 'python',
-        code: pythonCode,
-    },
-]
+const asciiPlaceholder = `┌─────────────┐
+│   PostHog   │
+│    SDKs     │
+└──────┬──────┘
+       │
+       │ Capture          posthog.captureException(error, {
+       ▼                      user_id: "user123",
+┌─────────────┐               ...
+│  Exception  │           })
+│   Events    │
+└──────┬──────┘
+       │
+       │ Store
+       ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           Data Warehouse                                │
+└───┬───────────┬───────────┬───────────┬───────────┬────────────┬───────┘
+    │           │           │           │           │            │
+    ▼           ▼           ▼           ▼           ▼            ▼
+┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────────┐
+│ Session │ │ Product │ │ Feature │ │  User   │ │   ...   │ │   PostHog   │
+│ Replay  │ │Analytics│ │  Flags  │ │Profiles │ │         │ │   Error     │
+└─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘ │  Tracking   │
+                                                            └──────┬──────┘
+                                                                   │
+                                                                   │ Fingerprint
+                                                                   ▼
+                                                            ┌─────────────┐
+                                                            │   Grouped   │
+                                                            │   Issues    │
+                                                            └─────────────┘`
 
 export const Content = () => {
-    const [currentLanguage, setCurrentLanguage] = useState(codeLanguages[0])
-
-    const handleLanguageChange = (language: any) => {
-        setCurrentLanguage(language)
-    }
-
     return (
         <>
             <section className={`mb-6 mx-auto ${maxWidth}`}>
@@ -118,13 +107,7 @@ export const Content = () => {
                 </div>
 
                 <div className="mt-8">
-                    <i>
-                        [edwin] A technical, visual content goes here, something at the code-level (i.e., code block,
-                        image, gif, video, etc.)
-                    </i>
-                    <CodeBlock currentLanguage={currentLanguage} onChange={handleLanguageChange}>
-                        {codeLanguages}
-                    </CodeBlock>
+                    <SingleCodeBlock language="ascii">{asciiPlaceholder}</SingleCodeBlock>
                 </div>
             </section>
 
