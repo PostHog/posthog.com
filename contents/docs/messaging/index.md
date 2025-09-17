@@ -9,7 +9,7 @@ Think of it as a way to **message your users** – you decide which users should
 
 Campaigns are made up of:
 
-- **A Trigger** – what starts the campaign. We let you start a campaign when an event if performed (e.g. a user signs up), or programmatically via a webhook.
+- **A Trigger** – what starts the campaign. We let you start a campaign when an event is performed (e.g. a user signs up), or programmatically via a webhook.
 - **Actions** – the messages you send, Email, Slack, SMS, Webhook, or any PostHog [real time destinations](/docs/cdp/destinations).
 - **Delays** – wait steps such as "wait 2 days" or "wait until condition is true."
 - **Audience splits** – Target and split the users you message with more specificity or try a/b testing with random branching.
