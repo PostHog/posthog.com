@@ -4,7 +4,7 @@ date: 2025-08-04
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/Marketing_Jam_305b0cb3f4.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/new0yroker_6bcbd9dd83.jpeg
 featuredImageType: full
 tags:
   - Culture
@@ -16,9 +16,7 @@ crosspost:
   - Product engineers
   - Blog
 ---
-
-![cartoon about meetings](https://res.cloudinary.com/dmukukwp6/image/upload/new0yroker_6bcbd9dd83.jpeg)  
-<Caption>Source: <a href="https://www.newyorker.com/cartoon/a28298">New Yorker</a></Caption>
+<Caption>Image source: <a href="https://www.newyorker.com/cartoon/a28298">New Yorker</a></Caption>
 
 Being a team lead is a strange job. You still code, but now the team's success is your responsibility too. It's two full-time jobs.
 
