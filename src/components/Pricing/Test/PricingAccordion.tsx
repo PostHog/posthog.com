@@ -86,6 +86,8 @@ const AccordionItem = ({
               }))
             : []
 
+    const Container = useMemo(() => (billedWith ? 'div' : 'button'), [billedWith])
+
     return (
         <li
             className={`border-t relative ${
@@ -94,12 +96,16 @@ const AccordionItem = ({
                     : 'inactive border-primary first:border-transparent'
             }`}
         >
-            <button
+            <Container
                 onClick={!billedWith ? onClick : undefined}
-                className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
+                className={`text-left w-full flex justify-between items-center transition-all rounded relative ${
                     isOpen
                         ? 'pt-2 pl-2 pr-3 pb-2 z-20'
-                        : 'px-2 text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                        : `px-2 text-secondary py-2 ${
+                              !billedWith
+                                  ? 'hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px] hover:text-primary'
+                                  : ''
+                          }`
                 }`}
             >
                 <div className="grid grid-cols-12 w-full gap-1 items-center">
@@ -148,7 +154,7 @@ const AccordionItem = ({
                         </span>
                     )}
                 </div>
-            </button>
+            </Container>
             {!billedWith && (
                 <motion.div
                     onAnimationComplete={onAnimationComplete}
