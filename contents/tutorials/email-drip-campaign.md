@@ -5,7 +5,8 @@ author:
   - abe-basu
 showTitle: true
 tags:
-  - feature flags
+tags:
+  - messaging
 ---
 
 In this tutorial we’ll walk through creating a simple **drip campaign**:  
