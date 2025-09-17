@@ -99,7 +99,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
  
 - **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR. This means being known for quality in all things we do.
 
-- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content-and-docs/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-are-building-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
+- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-are-building-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
 
 - **Launches:** Our team ships a lot of products and features. We need launches to break through the noise and get noticed. This helps create the momentum products need to succeed.
 
