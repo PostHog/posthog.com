@@ -12,6 +12,7 @@ const countryFlagMapping: Record<string, keyof typeof AllStickers> = {
     CL: 'StickerFlagCL',
     CO: 'StickerFlagCO',
     CY: 'StickerFlagCY',
+    CZ: 'StickerFlagCZ',
     DE: 'StickerFlagDE',
     DK: 'StickerFlagDK',
     DO: 'StickerFlagDO',
@@ -136,7 +137,7 @@ const Stickers: React.FC<StickersProps> = ({ country, location, name, label, cla
         if (flagComponentName) {
             const FlagComponent = AllStickers[flagComponentName]
             if (FlagComponent) {
-                return <FlagComponent className={className} {...props} />
+                return <FlagComponent className={`text-white ${className}`} {...props} />
             }
         }
 

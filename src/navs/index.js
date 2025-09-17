@@ -1521,15 +1521,15 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/overview',
             },
             {
-                name: 'Revenue Adjustments',
+                name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
             {
-                name: 'Retention Metrics',
+                name: 'Retention metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
             {
-                name: 'Lifecycle Analysis',
+                name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
         ],
@@ -1713,152 +1713,6 @@ export const companyMenu = {
             url: '/changelog/2025',
         },
         { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
-        {
-            name: 'Teams',
-            icon: 'IconShieldPeople',
-            color: 'purple',
-            url: '/teams',
-            children: [
-                {
-                    name: 'Small teams',
-                    url: '/teams',
-                },
-                {
-                    name: 'Engineering',
-                },
-                {
-                    name: 'Batch Exports',
-                    url: '/teams/batch-exports',
-                },
-                {
-                    name: 'Billing',
-                    url: '/teams/billing',
-                },
-                {
-                    name: 'ClickHouse',
-                    url: '/teams/clickhouse',
-                },
-                {
-                    name: 'CRM',
-                    url: '/teams/crm',
-                },
-                {
-                    name: 'Data Warehouse',
-                    url: '/teams/data-warehouse',
-                },
-                {
-                    name: 'Error Tracking',
-                    url: '/teams/error-tracking',
-                },
-                {
-                    name: 'Experiments',
-                    url: '/teams/experiments',
-                },
-                {
-                    name: 'Feature Flags',
-                    url: '/teams/feature-flags',
-                },
-                {
-                    name: 'Growth',
-                    url: '/teams/growth',
-                },
-                {
-                    name: 'Infrastructure',
-                    url: '/teams/infrastructure',
-                },
-                {
-                    name: 'Ingestion',
-                    url: '/teams/ingestion',
-                },
-                {
-                    name: 'LLM analytics',
-                    url: '/teams/llm-analytics',
-                },
-                {
-                    name: 'Max AI',
-                    url: '/teams/max-ai',
-                },
-                {
-                    name: 'Messaging',
-                    url: '/teams/messaging',
-                },
-                {
-                    name: 'Platform Analytics',
-                    url: '/teams/platform-analytics',
-                },
-                {
-                    name: 'Platform Features',
-                    url: '/teams/platform-features',
-                },
-                {
-                    name: 'Platform UX',
-                    url: '/teams/platform-ux',
-                },
-                {
-                    name: 'Product Analytics',
-                    url: '/teams/product-analytics',
-                },
-                {
-                    name: 'Replay',
-                    url: '/teams/replay',
-                },
-                {
-                    name: 'Revenue Analytics',
-                    url: '/teams/revenue-analytics',
-                },
-                {
-                    name: 'Surveys',
-                    url: '/teams/surveys',
-                },
-                {
-                    name: 'Web Analytics',
-                    url: '/teams/web-analytics',
-                },
-                {
-                    name: 'Not engineering',
-                },
-                {
-                    name: 'Brand & Vibes',
-                    url: '/teams/brand',
-                },
-                {
-                    name: 'Content',
-                    url: '/teams/content',
-                },
-                {
-                    name: 'Customer Success',
-                    url: '/teams/customer-success',
-                },
-                {
-                    name: 'Demand Gen',
-                    url: '/teams/demand-gen',
-                },
-                {
-                    name: 'Exec',
-                    url: '/teams/blitzscale',
-                },
-                {
-                    name: 'Marketing',
-                    url: '/teams/marketing',
-                },
-                {
-                    name: 'Onboarding',
-                    url: '/teams/onboarding',
-                },
-                {
-                    name: 'People & Ops',
-                    url: '/teams/people',
-                },
-                {
-                    name: 'Sales',
-                    url: '/teams/sales-cs',
-                },
-                {
-                    name: 'Support',
-                    url: '/teams/support',
-                },
-            ],
-        },
         { name: 'Handbook', icon: 'IconBook', color: 'seagreen', url: '/handbook', children: handbookSidebar },
         {
             name: 'Blog',

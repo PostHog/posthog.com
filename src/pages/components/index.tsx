@@ -11,7 +11,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
-import { OSInput, OSTextarea } from 'components/OSForm'
+import { OSInput, OSTextarea, OSSelect } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
 
 export default function Components(): JSX.Element {
@@ -1703,6 +1703,233 @@ export default function Components(): JSX.Element {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* OSSelect Component Showcase */}
+                        <section>
+                            <h2 className="">
+                                <code>&lt;OSSelect /&gt;</code>
+                            </h2>
+
+                            {/* Basic Examples */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Basic examples</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="Status"
+                                        options={[
+                                            { label: 'In Progress', value: 'in-progress' },
+                                            { label: 'Complete', value: 'complete' },
+                                            { label: 'Under Consideration', value: 'under-consideration' },
+                                        ]}
+                                        placeholder="Select status..."
+                                    />
+                                    <OSSelect
+                                        label="Priority"
+                                        options={[
+                                            { label: 'Low', value: 'low' },
+                                            { label: 'Medium', value: 'medium' },
+                                            { label: 'High', value: 'high' },
+                                            { label: 'Critical', value: 'critical' },
+                                        ]}
+                                        placeholder="Select priority..."
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Sizes */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Sizes</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="Small"
+                                        size="sm"
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="Small select"
+                                    />
+                                    <OSSelect
+                                        label="Medium"
+                                        size="md"
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="Medium select (default)"
+                                    />
+                                    <OSSelect
+                                        label="Large"
+                                        size="lg"
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="Large select"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Directions */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Label directions</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="Row direction"
+                                        direction="row"
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="Label on the left"
+                                    />
+                                    <OSSelect
+                                        label="Column direction"
+                                        direction="column"
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="Label above"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Features */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Features</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="With description"
+                                        description="Choose the appropriate status for this item"
+                                        options={[
+                                            { label: 'Draft', value: 'draft' },
+                                            { label: 'Published', value: 'published' },
+                                            { label: 'Archived', value: 'archived' },
+                                        ]}
+                                        placeholder="Select status..."
+                                    />
+                                    <OSSelect
+                                        label="With tooltip"
+                                        tooltip="This determines the visibility of your content"
+                                        options={[
+                                            { label: 'Public', value: 'public' },
+                                            { label: 'Private', value: 'private' },
+                                            { label: 'Unlisted', value: 'unlisted' },
+                                        ]}
+                                        placeholder="Select visibility..."
+                                    />
+                                    <OSSelect
+                                        label="Disabled"
+                                        disabled
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="This select is disabled"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Searchable Examples */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Searchable selects</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="Searchable (default)"
+                                        options={[
+                                            { label: 'Apple', value: 'apple', description: 'A red fruit' },
+                                            { label: 'Banana', value: 'banana', description: 'A yellow fruit' },
+                                            { label: 'Cherry', value: 'cherry', description: 'A small red fruit' },
+                                            { label: 'Date', value: 'date', description: 'A sweet dried fruit' },
+                                            {
+                                                label: 'Elderberry',
+                                                value: 'elderberry',
+                                                description: 'A dark purple berry',
+                                            },
+                                            { label: 'Fig', value: 'fig', description: 'A soft sweet fruit' },
+                                            { label: 'Grape', value: 'grape', description: 'Small round fruits' },
+                                            { label: 'Honeydew', value: 'honeydew', description: 'A sweet melon' },
+                                        ]}
+                                        placeholder="Search fruits..."
+                                        searchPlaceholder="Type to search fruits..."
+                                    />
+                                    <OSSelect
+                                        label="Non-searchable"
+                                        searchable={false}
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="No search available"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Error States */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Error states</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="Invalid selection"
+                                        touched={true}
+                                        error="Please select a valid option"
+                                        options={[
+                                            { label: 'Option 1', value: '1' },
+                                            { label: 'Option 2', value: '2' },
+                                            { label: 'Option 3', value: '3' },
+                                        ]}
+                                        placeholder="This has an error"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Complex Examples */}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold mb-4">Complex examples</h3>
+                                <div className="space-y-4">
+                                    <OSSelect
+                                        label="Full featured"
+                                        required
+                                        tooltip="Choose your team for this project"
+                                        description="This will determine who has access to this project"
+                                        options={[
+                                            {
+                                                label: 'Engineering',
+                                                value: 'engineering',
+                                                description: 'Software development team',
+                                            },
+                                            {
+                                                label: 'Design',
+                                                value: 'design',
+                                                description: 'User experience and visual design',
+                                            },
+                                            {
+                                                label: 'Product',
+                                                value: 'product',
+                                                description: 'Product strategy and management',
+                                            },
+                                            {
+                                                label: 'Marketing',
+                                                value: 'marketing',
+                                                description: 'Brand and growth marketing',
+                                            },
+                                        ]}
+                                        direction="column"
+                                        size="lg"
+                                        placeholder="Select your team..."
+                                    />
                                 </div>
                             </div>
                         </section>
