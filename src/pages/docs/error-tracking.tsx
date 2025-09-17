@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SEO } from 'components/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
-import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
@@ -12,6 +11,7 @@ import InstallationPlatforms from '../../../contents/docs/error-tracking/install
 import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser } from '@posthog/icons'
+import Card from 'components/Card'
 
 type ErrorTrackingProps = {
     data: {
@@ -25,7 +25,7 @@ type ErrorTrackingProps = {
 
 const maxWidth = 'max-w-4xl'
 
-const subfeatures = [
+const phFeatures = [
     {
         title: 'Session replay',
         description: 'Watch session recordings to help you reproduce an issue',
@@ -93,6 +93,7 @@ export const Content = () => {
     return (
         <>
             <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4 text-xl">Overview</h2>
                 <div>
                     <p>
                         Error tracking lets you capture exceptions and resolve issues within your app, so you can ship
@@ -108,6 +109,13 @@ export const Content = () => {
 
                 <div className="mt-8">
                     <SingleCodeBlock language="ascii">{asciiPlaceholder}</SingleCodeBlock>
+                </div>
+            </section>
+
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4 text-xl">SDKs and frameworks</h2>
+                <div className="mt-4">
+                    <InstallationPlatforms columns={4} />
                 </div>
             </section>
 
@@ -156,7 +164,7 @@ export const Content = () => {
                                 { content: <a href="/docs/error-tracking/fix-with-ai-prompts">Fix with AI</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
                                 {
-                                    content: <a href="/docs/error-tracking/alerts">Alerting</a>,
+                                    content: <a href="/docs/error-tracking/alerts">Alerts</a>,
                                 },
                                 { content: <IconCheck className="h-5 text-green" /> },
                             ],
@@ -182,36 +190,20 @@ export const Content = () => {
             </section>
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">Integrates with these frameworks</h2>
-                <div className="mt-4">
-                    <InstallationPlatforms columns={4} />
-                </div>
-            </section>
-
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4 text-xl">And 10x better with other PostHog products</h2>
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
-                    {subfeatures.map((subfeature, index) => (
-                        <li
-                            key={index}
-                            className="list-none bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded relative hover:top-[-2px] active:top-[1px] hover:transition-all overflow-hidden"
-                        >
-                            <Link
-                                to={`/docs/${subfeature.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                className="block not-prose"
-                                state={{ newWindow: true }}
-                            >
-                                <div className="px-4 py-3">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <div className={`text-${subfeature.color}`}>{subfeature.icon}</div>
-                                        <h4 className="font-semibold my-0">{subfeature.title}</h4>
-                                    </div>
-                                    <p className="text-secondary text-sm">{subfeature.description}</p>
+                <div className="flex flex-col gap-4 lg:grid lg:grid-cols-3">
+                    {phFeatures.map((feature, index) => (
+                        <Card key={index} url={feature.url} className="bg-accent dark:bg-accent-dark not-prose">
+                            <div key="content" className="px-4 py-3">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div className={`text-${feature.color}`}>{feature.icon}</div>
+                                    <h4 className="font-semibold my-0">{feature.title}</h4>
                                 </div>
-                            </Link>
-                        </li>
+                                <p className="text-secondary text-sm">{feature.description}</p>
+                            </div>
+                        </Card>
                     ))}
-                </ul>
+                </div>
             </section>
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
@@ -231,18 +223,8 @@ export const Content = () => {
                 </p>
             </section>
 
-            <AskMax
-                className={`mx-auto ${maxWidth}`}
-                quickQuestions={[
-                    'How do I see what the most common errors are?',
-                    'How do I custom error groups?',
-                    'How do I assign someone an error?',
-                ]}
-            />
-
             <section className={`mb-6 mx-auto ${maxWidth}`}>
                 <h2 className="m-0 text-xl">Next steps</h2>
-                <p className="text-[15px]">Check out these resources to get started</p>
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
@@ -253,8 +235,8 @@ export const Content = () => {
                     />
                     <ResourceItem
                         type="Quickstart"
-                        title="How to set up Next.js error tracking"
-                        description="Installation guide to set up error tracking in Next.js"
+                        title="Install Next.js error tracking"
+                        description="Set up error tracking in Next.js"
                         url="/docs/error-tracking/installation/nextjs"
                     />
                     <ResourceItem
@@ -290,9 +272,14 @@ const ErrorTracking: React.FC<ErrorTrackingProps> = () => {
             <Content />
 
             <div className="">
-                <CallToAction to="/docs/error-tracking/start-here" width="full">
-                    Start integrating
-                </CallToAction>
+                <AskMax
+                    className={`mx-auto ${maxWidth}`}
+                    quickQuestions={[
+                        'How do I see what the most common errors are?',
+                        'How do I custom error groups?',
+                        'How do I assign someone an error?',
+                    ]}
+                />
             </div>
         </ReaderView>
     )
