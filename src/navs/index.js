@@ -2377,7 +2377,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Users',
-                            url: '/docs/api/user',
+                            url: '/docs/api/users',
                         },
                         {
                             name: 'Web Analytics',
@@ -2385,7 +2385,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Data model',
-                            url: '/docs/data-model',
+                            url: '/docs/how-posthog-works/data-model',
                         },
                     ],
                 },
