@@ -575,8 +575,8 @@ export function Editor({
                                                 disabled={disableFilterChange}
                                                 placeholder={filter.label}
                                                 defaultValue={
-                                                    filters[filter.value || filter.label]?.value ||
-                                                    filter.initialValue ||
+                                                    filters[filter.value ?? filter.label]?.value ??
+                                                    filter.initialValue ??
                                                     filter.options[0].value
                                                 }
                                                 groups={[
@@ -590,7 +590,7 @@ export function Editor({
                                                 ]}
                                                 onValueChange={(value) =>
                                                     handleFilterChange(
-                                                        filter.value || filter.label,
+                                                        filter.value ?? filter.label,
                                                         value,
                                                         filter.filter
                                                     )
