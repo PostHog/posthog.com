@@ -18,7 +18,7 @@ showTitle: true
 
 - **Pre-roll video ads:** We haven't done anything like this yet, and we have a big old paid ads budget to spend, so...
 
-- **Way more educational content:** We've dipped into this a bit, but this will become a priority once we've scaled video further and have the resources to these consistently to a high standard.
+- **Way more educational content:** We've dipped into this a bit, but this will become a priority once we've scaled video further and have the resources to do these consistently to a high standard.
 
 - **Build a great YouTube channel:** This is a long term aspiration.
 
