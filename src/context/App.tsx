@@ -13,6 +13,7 @@ import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
+import { useTilingLayout } from './tiling'
 
 declare global {
     interface Window {
@@ -223,26 +224,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => {},
-    bringToFront: () => {},
+    closeWindow: () => undefined,
+    bringToFront: () => undefined,
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => {},
+    minimizeWindow: () => undefined,
     taskbarHeight: 0,
-    addWindow: () => {},
-    updateWindowRef: () => {},
-    updateWindow: () => {},
+    addWindow: () => undefined,
+    updateWindowRef: () => undefined,
+    updateWindow: () => undefined,
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => {},
-    handleSnapToSide: () => {},
+    openSearch: () => undefined,
+    handleSnapToSide: () => undefined,
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => {},
+    expandWindow: () => undefined,
     openSignIn: () => null,
-    openRegister: () => {},
-    openForgotPassword: () => {},
+    openRegister: () => undefined,
+    openForgotPassword: () => undefined,
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -254,23 +255,23 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => {},
-    openNewChat: () => {},
+    updateSiteSettings: () => undefined,
+    openNewChat: () => undefined,
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => {},
+    setIsNotificationsPanelOpen: () => undefined,
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => {},
+    setIsActiveWindowsPanelOpen: () => undefined,
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => {},
-    animateClosingAllWindows: () => {},
+    openStart: () => undefined,
+    animateClosingAllWindows: () => undefined,
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => {},
-    setClosingAllWindowsAnimation: () => {},
+    closeAllWindows: () => undefined,
+    setClosingAllWindowsAnimation: () => undefined,
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => {},
-    setConfetti: () => {},
+    setScreensaverPreviewActive: () => undefined,
+    setConfetti: () => undefined,
     confetti: false,
     posthogInstance: undefined,
 })
@@ -950,7 +951,7 @@ const appSettings: AppSettings = {
 } as const
 
 export interface SiteSettings {
-    experience: 'posthog' | 'boring'
+    experience: 'posthog' | 'boring' | 'tiling'
     colorMode: 'light' | 'dark' | 'system'
     theme: 'light' | 'dark'
     skinMode: 'modern' | 'classic'
@@ -1014,6 +1015,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
+    const { setTilingMasterRatio, setTilingMasterKey, tileWindows } = useTilingLayout({
+        experience: siteSettings.experience,
+        windows,
+        setWindows,
+        constraintsRef,
+    })
     const [confetti, setConfetti] = useState(false)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const { addToast } = useToast()
@@ -1305,6 +1312,17 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }
         }
 
+        // In tiling mode we never replace the focused window – we always add
+        if (siteSettings.experience === 'tiling') {
+            if (existingWindow) {
+                return bringToFront(existingWindow, element.props.location)
+            }
+            if (!windows.some((w) => w.key === newWindow.key)) {
+                return setWindows([...windows, newWindow])
+            }
+            return
+        }
+
         if (existingWindow) {
             bringToFront(existingWindow, element.props.location)
         } else if (
@@ -1515,49 +1533,81 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            const target = e.target as HTMLElement
+        const shouldIgnoreTarget = (target: HTMLElement) =>
+            target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.shadowRoot ||
+            (target instanceof HTMLElement && target.closest('.mdxeditor'))
 
-            if (
-                target.tagName === 'INPUT' ||
-                target.tagName === 'TEXTAREA' ||
-                target.shadowRoot ||
-                (target instanceof HTMLElement && target.closest('.mdxeditor'))
-            ) {
-                return
+        const cycleActiveWindows = (offset: number) => {
+            const candidates = windows.filter((w) => !w.minimized)
+            if (!candidates.length) {
+                return false
+            }
+            const currentIndex = candidates.findIndex((w) => w === focusedWindow)
+            const normalizedIndex =
+                currentIndex === -1
+                    ? offset === 1
+                        ? 0
+                        : candidates.length - 1
+                    : (currentIndex + offset + candidates.length) % candidates.length
+            bringToFront(candidates[normalizedIndex])
+            return true
+        }
+
+        const focusNextWindowInOrder = () => {
+            if (windows.length <= 1) {
+                return false
+            }
+            const currentIndex = windows.findIndex((w) => w === focusedWindow)
+            const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % windows.length
+            bringToFront(windows[nextIndex])
+            return true
+        }
+
+        const handleSearchShortcuts = (event: KeyboardEvent) => {
+            if (event.key === '/' && !event.shiftKey && !event.ctrlKey && !event.metaKey && !event.altKey) {
+                event.preventDefault()
+                openSearch()
+                return true
             }
 
-            // Global shortcuts
-            if (e.key === '/' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
+            if (event.key === 'k' && (event.metaKey || event.ctrlKey) && !event.shiftKey && !event.altKey) {
+                event.preventDefault()
                 openSearch()
+                return true
             }
-            // Cmd+K (Mac) or Ctrl+K (Windows/Linux) for search
-            if (e.key === 'k' && (e.metaKey || e.ctrlKey) && !e.shiftKey && !e.altKey) {
-                e.preventDefault()
-                openSearch()
-            }
-            if (e.key === '?' || (e.shiftKey && e.key === '/')) {
-                e.preventDefault()
+
+            if (event.key === '?' || (event.shiftKey && event.key === '/')) {
+                event.preventDefault()
                 openNewChat({ path: 'ask-max' })
+                return true
             }
-            if (e.key === ',' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                // Open display options
+
+            if (event.key === ',' && !event.shiftKey && !event.ctrlKey && !event.metaKey && !event.altKey) {
+                event.preventDefault()
                 navigate('/display-options', { state: { newWindow: true } })
+                return true
             }
-            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                // Open keyboard shortcuts pane
+
+            if (event.key === '.' && !event.shiftKey && !event.ctrlKey && !event.metaKey && !event.altKey) {
+                event.preventDefault()
                 navigate('/kbd', { state: { newWindow: true } })
+                return true
             }
 
-            // Theme toggle with \ key (without Shift)
-            if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                e.stopPropagation()
+            return false
+        }
 
-                // Cycle through system -> light -> dark -> system
+        const handleAppearanceShortcuts = (event: KeyboardEvent) => {
+            if (event.ctrlKey || event.metaKey || event.altKey) {
+                return false
+            }
+
+            if (event.key === '\\' && !event.shiftKey) {
+                event.preventDefault()
+                event.stopPropagation()
+
                 let nextMode: 'system' | 'light' | 'dark'
                 let toastMessage: React.ReactNode
 
@@ -1594,22 +1644,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                         theme: newTheme as SiteSettings['theme'],
                         colorMode: nextMode,
                     })
-                    // Add toast notification
                     addToast({
                         description: toastMessage,
                         duration: 2000,
                     })
                 }
+                return true
             }
 
-            // Wallpaper cycle with | key (which is Shift + \ on most keyboards)
-            if (e.key === '|') {
-                e.preventDefault()
-                e.stopPropagation()
+            if (event.key === '|' && event.shiftKey) {
+                event.preventDefault()
+                event.stopPropagation()
 
-                // Get current wallpaper index
                 const currentIndex = themeOptions.findIndex((theme) => theme.value === siteSettings.wallpaper)
-                // Cycle to next wallpaper (wrap around to first if at end)
                 const nextIndex = (currentIndex + 1) % themeOptions.length
                 const nextWallpaper = themeOptions[nextIndex]
 
@@ -1618,70 +1665,178 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     wallpaper: nextWallpaper.value as SiteSettings['wallpaper'],
                 })
 
-                // Add toast notification
                 addToast({
                     description: `Switched to ${nextWallpaper.label} wallpaper`,
                     duration: 2000,
                 })
+                return true
             }
 
-            // Window-specific shortcuts
-            if (e.shiftKey && e.key === 'ArrowLeft') {
+            return false
+        }
+
+        const handleWindowManagementShortcuts = (event: KeyboardEvent) => {
+            if (!event.shiftKey || event.metaKey || event.ctrlKey || event.altKey) {
+                return false
+            }
+
+            if (event.key === 'ArrowLeft') {
                 handleSnapToSide('left')
+                return true
             }
-            if (e.shiftKey && e.key === 'ArrowRight') {
+
+            if (event.key === 'ArrowRight') {
                 handleSnapToSide('right')
+                return true
             }
-            if (e.shiftKey && e.key === 'ArrowUp') {
+
+            if (event.key === 'ArrowUp') {
                 expandWindow()
+                return true
             }
-            if (e.shiftKey && e.key === 'ArrowDown') {
-                e.preventDefault()
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault()
                 if (focusedWindow) {
                     minimizeWindow(focusedWindow)
                 }
+                return true
             }
-            if (e.shiftKey && e.key.toLowerCase() === 'w') {
-                e.preventDefault()
+
+            if (event.key.toLowerCase() === 'w') {
+                event.preventDefault()
                 if (focusedWindow) {
-                    // Trigger the same close animation as clicking the X button
                     const closeEvent = new CustomEvent('windowClose', { detail: { windowKey: focusedWindow.key } })
                     document.dispatchEvent(closeEvent)
                 }
+                return true
             }
-            if (e.shiftKey && e.key === 'X') {
-                e.preventDefault()
-                // Close all windows with animation
-                animateClosingAllWindows()
-            }
-            if (e.shiftKey && e.key === 'Z') {
-                e.preventDefault()
-                // Start screensaver
-                setScreensaverPreviewActive(true)
-            }
-            if (e.shiftKey && e.key === '<') {
-                e.preventDefault()
-                // Open active windows panel
-                setIsActiveWindowsPanelOpen(true)
-            }
-            if (e.shiftKey && e.key === '>') {
-                e.preventDefault()
-                // Cycle to next window
-                if (windows.length > 1) {
-                    // Find the currently focused window index
-                    const currentIndex = windows.findIndex((w) => w === focusedWindow)
-                    // Calculate next window index (wrap around to first if at end)
-                    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % windows.length
-                    const nextWindow = windows[nextIndex]
 
-                    // Navigate to the next window
-                    if (nextWindow.path.startsWith('/')) {
-                        navigate(nextWindow.path)
-                    } else {
-                        bringToFront(nextWindow)
-                    }
+            if (event.key === 'X') {
+                event.preventDefault()
+                animateClosingAllWindows()
+                return true
+            }
+
+            if (event.key === 'Z') {
+                event.preventDefault()
+                setScreensaverPreviewActive(true)
+                return true
+            }
+
+            return false
+        }
+
+        const handleExperienceShortcuts = (event: KeyboardEvent) => {
+            if (
+                event.shiftKey &&
+                !event.metaKey &&
+                !event.ctrlKey &&
+                !event.altKey &&
+                event.key.toLowerCase() === 't'
+            ) {
+                event.preventDefault()
+                const next = siteSettings.experience === 'tiling' ? 'posthog' : 'tiling'
+                updateSiteSettings({ ...siteSettings, experience: next })
+                return true
+            }
+
+            return false
+        }
+
+        const handlePanelShortcuts = (event: KeyboardEvent) => {
+            if (!event.shiftKey || event.metaKey || event.ctrlKey || event.altKey) {
+                return false
+            }
+
+            if (event.key === '<') {
+                event.preventDefault()
+                setIsActiveWindowsPanelOpen(true)
+                return true
+            }
+
+            if (event.key === '>') {
+                event.preventDefault()
+                return focusNextWindowInOrder()
+            }
+
+            return false
+        }
+
+        const handleWindowCyclingShortcuts = (event: KeyboardEvent) => {
+            if (!event.altKey || event.ctrlKey || event.metaKey || event.key !== '`') {
+                return false
+            }
+
+            event.preventDefault()
+            const direction = event.shiftKey ? -1 : 1
+            return cycleActiveWindows(direction)
+        }
+
+        const handleTilingShortcuts = (event: KeyboardEvent) => {
+            if (siteSettings.experience !== 'tiling') {
+                return false
+            }
+
+            if (event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+                const key = event.key.toLowerCase()
+
+                if (key === 'j') {
+                    event.preventDefault()
+                    return cycleActiveWindows(1)
+                }
+
+                if (key === 'k') {
+                    event.preventDefault()
+                    return cycleActiveWindows(-1)
+                }
+
+                if (key === 'h') {
+                    event.preventDefault()
+                    setTilingMasterRatio((ratio) => Math.max(0.3, Math.round((ratio - 0.05) * 100) / 100))
+                    return true
+                }
+
+                if (key === 'l') {
+                    event.preventDefault()
+                    setTilingMasterRatio((ratio) => Math.min(0.8, Math.round((ratio + 0.05) * 100) / 100))
+                    return true
                 }
             }
+
+            if (event.altKey && !event.ctrlKey && !event.metaKey && event.key === 'Enter') {
+                event.preventDefault()
+                if (focusedWindow) {
+                    setTilingMasterKey(focusedWindow.key)
+                    tileWindows()
+                }
+                return true
+            }
+
+            if (event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey && event.key.toLowerCase() === 'c') {
+                event.preventDefault()
+                if (focusedWindow) {
+                    closeWindow(focusedWindow)
+                }
+                return true
+            }
+
+            return false
+        }
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            const target = event.target as HTMLElement
+            if (shouldIgnoreTarget(target)) {
+                return
+            }
+
+            if (handleSearchShortcuts(event)) return
+            if (handleAppearanceShortcuts(event)) return
+            if (handleWindowManagementShortcuts(event)) return
+            if (handleExperienceShortcuts(event)) return
+            if (handlePanelShortcuts(event)) return
+            if (handleWindowCyclingShortcuts(event)) return
+            handleTilingShortcuts(event)
         }
 
         document.addEventListener('keydown', handleKeyDown)
@@ -1690,23 +1845,24 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             document.removeEventListener('keydown', handleKeyDown)
         }
     }, [
-        handleSnapToSide,
-        expandWindow,
-        focusedWindow,
-        closeWindow,
-        openSearch,
-        openNewChat,
-        siteSettings,
-        updateSiteSettings,
         addToast,
         animateClosingAllWindows,
-        setScreensaverPreviewActive,
-        minimizeWindow,
-        setIsActiveWindowsPanelOpen,
-        windows,
         bringToFront,
-        setConfetti,
-        confetti,
+        closeWindow,
+        expandWindow,
+        focusedWindow,
+        handleSnapToSide,
+        minimizeWindow,
+        openNewChat,
+        openSearch,
+        setIsActiveWindowsPanelOpen,
+        setScreensaverPreviewActive,
+        setTilingMasterKey,
+        setTilingMasterRatio,
+        siteSettings,
+        tileWindows,
+        updateSiteSettings,
+        windows,
     ])
 
     useEffect(() => {
@@ -1850,6 +2006,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }}
         >
             {children}
+            {/* Tiling debug overlay */}
+            {siteSettings.experience === 'tiling' &&
+                typeof window !== 'undefined' &&
+                new URLSearchParams(window.location.search).get('tilingDebug') === '1' && (
+                    <TilingDebugOverlay windows={windows} constraintsRef={constraintsRef} />
+                )}
         </Context.Provider>
     )
 }
@@ -1862,4 +2024,50 @@ export const useApp = (): AppContextType => {
     }
 
     return context
+}
+function TilingDebugOverlay({
+    windows,
+    constraintsRef,
+}: {
+    windows: AppWindow[]
+    constraintsRef: React.RefObject<HTMLDivElement>
+}) {
+    const [offset, setOffset] = useState<{ left: number; top: number }>({ left: 0, top: 0 })
+    useEffect(() => {
+        const update = () => {
+            const rect = constraintsRef.current?.getBoundingClientRect()
+            setOffset({ left: rect?.left || 0, top: rect?.top || 0 })
+        }
+        update()
+        window.addEventListener('resize', update)
+        return () => window.removeEventListener('resize', update)
+    }, [constraintsRef])
+
+    return (
+        <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 999999 }}>
+            {windows
+                .filter((w) => !w.minimized)
+                .map((w) => (
+                    <div
+                        key={`dbg-${w.key}`}
+                        style={{
+                            position: 'absolute',
+                            left: offset.left + w.position.x,
+                            top: offset.top + w.position.y,
+                            width: w.size.width,
+                            height: w.size.height,
+                            border: '2px dashed rgba(255,0,0,0.6)',
+                            background: 'rgba(255,0,0,0.05)',
+                            color: '#f00',
+                            fontSize: 11,
+                        }}
+                    >
+                        <div style={{ background: 'rgba(255,0,0,0.2)', padding: '2px 4px' }}>
+                            {w.key} z:{w.zIndex} {Math.round(w.position.x)},{Math.round(w.position.y)}{' '}
+                            {Math.round(w.size.width)}x{Math.round(w.size.height)}
+                        </div>
+                    </div>
+                ))}
+        </div>
+    )
 }
