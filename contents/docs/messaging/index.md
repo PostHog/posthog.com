@@ -1,5 +1,5 @@
 ---
-title: "Messaging Overview"
+title: "Messaging overview"
 ---
 
 ## Introduction
