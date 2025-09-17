@@ -1,5 +1,5 @@
 ---
-title: From $0 to $40M ARR: Inside the tech that powers Bolt.new
+title: From $0 to $40M ARR - Inside the tech that powers Bolt.new
 date: 2025-09-16
 author:
   - lior-neu-ner
@@ -189,6 +189,5 @@ Suddenly WebContainer wasn’t just a clever runtime, it was also the perfect co
 Bolt pivoted their business into the moment and, with a [single tweet](https://x.com/boltdotnew/status/1841873251313844631), years of quiet work ignited into explosive growth.
 
 ![the tweet that started it all](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bolt_tweet_66619d0d22.jpg)  
-<Caption>The tweet that started it all</Caption>
 
 <NewsletterForm />
