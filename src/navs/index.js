@@ -4730,7 +4730,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Set up email campaigns',
+                    name: 'Design your first campaign',
                     url: '/docs/messaging/set-up-email',
                     icon: 'IconMegaphone',
                     color: 'blue',
