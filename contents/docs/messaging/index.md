@@ -37,6 +37,7 @@ After setting up your messaging channels or CDP destinations, [email example her
 There are just 2 steps to launching a campaign:
 
 1. **Design the workflow** – drag and drop steps in the builder.
-3. **Review and launch** – test, monitor, and iterate.
+1. **Design the workflow** – drag and drop steps in the builder.
+2. **Review and launch** – test, monitor, and iterate.
 
 > **Note:** Check out our email drip campaign [guide](/tutorials/email-drip-campaign), to see step by step instructions with an example
