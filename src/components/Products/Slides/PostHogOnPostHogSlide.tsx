@@ -22,7 +22,7 @@ interface PostHogOnPostHogSlideProps {
 
 export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogSlideProps) {
     return (
-        <div className="h-full flex flex-col bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
+        <div className="h-full flex flex-col gap-4 bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
             <div className="mb-4 pt-8 px-8">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 239 72" className="h-16 mx-auto">
                     <path
@@ -34,17 +34,19 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                 <h2 className="sr-only">Demo</h2>
             </div>
 
-            <h1 className="text-2xl text-center">{productData.postHogOnPostHog.description}</h1>
+            <h1 className="text-2xl text-center">{productData.postHogOnPostHog?.title}</h1>
 
-            <div className="px-8 relative flex-grow mb-6 mt-2">
+            <div className="px-8 relative flex-grow mb-6 mt-2 flex items-center justify-center">
                 <WistiaEmbed
-                    mediaId={productData.videos.overview.wistia}
-                    className="aspect-video rounded shadow-2xl h-full absolute inset-0 object-contain w-auto mx-auto"
+                    mediaId={productData.videos?.overview?.wistia}
+                    className="aspect-video rounded shadow-2xl w-full @2xl:h-full absolute inset-0 object-contain @2xl:w-auto m-auto"
                 />
             </div>
 
-            <ul className={`pb-8 px-8 grid gap-4 grid-cols-${productData.postHogOnPostHog.benefits?.length}`}>
-                {productData.postHogOnPostHog.benefits?.map((benefit) => (
+            <ul
+                className={`pb-8 px-8 grid gap-8 @2xl:gap-4 grid-cols-2 @2xl:grid-cols-${productData.postHogOnPostHog?.benefits?.length}`}
+            >
+                {productData.postHogOnPostHog?.benefits?.map((benefit) => (
                     <li key={benefit.title} className="text-xl">
                         <p>
                             <strong>{benefit.title}</strong> {benefit.description}

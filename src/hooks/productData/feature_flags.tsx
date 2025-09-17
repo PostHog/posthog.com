@@ -352,7 +352,7 @@ export const featureFlags = {
                 description: 'with beta cohorts or random sampling',
             },
             {
-                title: 'Create killswitches',
+                title: 'Create kill switches',
                 description: 'with always-on flags we can turn off instantly',
             },
             {

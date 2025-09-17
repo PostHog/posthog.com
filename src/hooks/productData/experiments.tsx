@@ -47,6 +47,12 @@ export const experiments = {
             imgClasses: 'rounded-t-md shadow-2xl',
         },
     },
+    videos: {
+        overview: {
+            // youtube: '',
+            wistia: 'tg7d3aw5af',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
         alt: 'Hedgehog experimenting',
@@ -255,6 +261,27 @@ export const experiments = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses PostHog to run experiments',
+        benefits: [
+            {
+                title: '',
+                description: '',
+            },
+            {
+                title: '',
+                description: '',
+            },
+            {
+                title: '',
+                description: '',
+            },
+            {
+                title: '',
+                description: '',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Does this new onboarding flow increase conversion?',
