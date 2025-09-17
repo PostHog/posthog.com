@@ -225,6 +225,11 @@ export default function CDP(): JSX.Element {
                     description
                     icon_url
                     type
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     status
                 }
             }
@@ -237,6 +242,11 @@ export default function CDP(): JSX.Element {
                     description
                     icon_url
                     type
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     status
                 }
             }
