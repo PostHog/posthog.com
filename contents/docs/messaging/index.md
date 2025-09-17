@@ -9,30 +9,35 @@ Think of it as a way to **message your users** – you decide which users should
 
 Campaigns are made up of:
 
-- **A Triggers** – what starts the campaign. We let you start a campaign why an event (e.g. a user signs up), or programmitcally via a webhook
-- **Actions** – the messages you send (Email, Slack, SMS, Webhook, or any PostHog CDP destination).
+- **A Trigger** – what starts the campaign. We let you start a campaign when an event is performed (e.g. a user signs up), or programmatically via a webhook.
+- **Actions** – the messages you send, Email, Slack, SMS, Webhook, or any PostHog [real time destinations](/docs/cdp/destinations).
 - **Delays** – wait steps such as "wait 2 days" or "wait until condition is true."
 - **Audience splits** – Target and split the users you message with more specificity or try a/b testing with random branching.
+- **PostHog Actions** - Change a person's properties, or trigger other events, once a person reaches a specific point in your campaign.
 
 A campaign always starts with a trigger and ends with an exit, but you can add as much logic in between as you like.
 
-![Example workflow](/images/docs/messaging/workflow-example.png)
+![Example workflow](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
 
 ---
 
 ## Why use Messaging?
 
-- **Native email support** with PostHog – no extra integrations needed.
-- **Composable CDP**: any PostHog real-time destination (see [CDP destinations](/docs/cdp)) can be dropped into a campaign as a messaging step.
-- **No-code** builder: drag, drop, and publish.
-- **Analytics-native**: use PostHog’s events, cohorts, and feature flags to target the right people.
+- **Leverage PostHog Analytics**: use PostHog’s events to quickly message the right people based on the actions they take on your site or app, without a complex integration.
+- **No-code** builder: drag, drop, and publish quickly, avoid brittle hardcoded twilio or mailgun campaigns.
+- **Composable CDP**: any PostHog real-time destination (see [CDP destinations](/docs/cdp/destinations)) can be dropped into a campaign as a messaging step.
+
 
 ---
 
 ## Getting started
 
-There are three steps to launching a campaign:
+After setting up your messaging channels or CDP destinations, [email example here](/docs/messaging/set-up/set-up-email)
+
+There are just 2 steps to launching a campaign:
 
 1. **Design the workflow** – drag and drop steps in the builder.
-2. **Set up your messaging channels** – email is supported out of the box, but you can configure others.
-3. **Review and launch** – test, monitor, and iterate.
+1. **Design the workflow** – drag and drop steps in the builder.
+2. **Review and launch** – test, monitor, and iterate.
+
+> **Note:** Check out our email drip campaign [guide](/tutorials/email-drip-campaign), to see step by step instructions with an example
