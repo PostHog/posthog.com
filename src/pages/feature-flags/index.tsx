@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
+import HowWeUseItSlide from 'components/Products/Slides/HowWeUseItSlide'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'feature_flags'
@@ -63,10 +64,35 @@ export default function FeatureFlags(): JSX.Element {
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
         // exclude: ['comparison-summary'],
-        // order: ['overview', 'pricing', 'features'],
+        order: [
+            'overview',
+            'customers',
+            'how-we-use-it',
+            'features',
+            'answers',
+            'pricing',
+            'comparison-summary',
+            'feature-comparison',
+            'docs',
+            'pairs-with',
+            'getting-started',
+        ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        custom: [
+            {
+                slug: 'how-we-use-it',
+                name: 'How we use it',
+                component: HowWeUseItSlide,
+                props: {
+                    title: "It's so good we use it ourselves",
+                    description: 'See how our own teams use feature flags to ship faster.',
+                    videoUrl: 'https://www.youtube-nocookie.com/embed/1X2gha80fsA',
+                    videoTitle: 'How PostHog uses feature flags',
+                },
+            },
+        ],
         content: {
             // answersDescription: 'Control the release of new features to your users', moved to json
         },
