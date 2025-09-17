@@ -16,7 +16,7 @@ Among other things, they
 
 ## Small team membership
 
-Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it.
+Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it. PMs join small team standups and planning whenever it makes sense, but they are not required to attend _all_ team meetings. This is up to the PM to decide when it makes sense to join these, and when their time is better spent elsewhere.
 
 Here is a overview that shows which of our PMs currently works with which team:
 

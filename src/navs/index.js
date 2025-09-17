@@ -6,9 +6,6 @@ export const dataPipelines = {
     description: 'Collect, enrich, and send data to your destinations',
     children: [
         {
-            name: 'Data pipelines integrations',
-        },
-        {
             name: 'Overview',
             url: '/docs/cdp',
             icon: 'IconHome',
@@ -3487,6 +3484,13 @@ export const docsMenu = {
                     icon: 'IconRocket',
                     featured: true,
                     color: 'green',
+                },
+                {
+                    name: 'Analyzing results',
+                    url: '/docs/experiments/analyzing-results',
+                    featured: true,
+                    icon: 'IconChartBar',
+                    color: 'purple',
                 },
                 {
                     name: 'No-code experiments',
