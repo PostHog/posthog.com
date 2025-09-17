@@ -1,5 +1,5 @@
 ---
-title: Video at PostHog
+title: How we do video at PostHog
 sidebar: Handbook
 showTitle: true
 ---
