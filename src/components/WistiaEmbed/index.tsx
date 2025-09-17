@@ -92,7 +92,7 @@ export default function WistiaEmbed({
             autoplay={autoPlay ? 'true' : 'false'}
             muted={muted ? 'true' : 'false'}
             controls={controls ? 'true' : 'false'}
-            className={className}
+            class={className}
         />
     )
 }

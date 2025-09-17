@@ -23,7 +23,7 @@ interface PostHogOnPostHogSlideProps {
 export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogSlideProps) {
     return (
         <div className="h-full flex flex-col bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
-            <div className="shrink mb-4 pt-8 px-8">
+            <div className="mb-4 pt-8 px-8">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 239 72" className="h-16 mx-auto">
                     <path
                         fill="#fff"
@@ -36,14 +36,14 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
 
             <h1 className="text-2xl text-center">{productData.postHogOnPostHog.description}</h1>
 
-            <div className="px-8 flex-1">
+            <div className="px-8 relative flex-grow mb-6 mt-2">
                 <WistiaEmbed
                     mediaId={productData.videos.overview.wistia}
-                    className="aspect-video rounded shadow-2xl h-full"
+                    className="aspect-video rounded shadow-2xl h-full absolute inset-0 object-contain w-auto mx-auto"
                 />
             </div>
 
-            <ul className={`shrink pb-8 px-8 grid gap-4 grid-cols-${productData.postHogOnPostHog.benefits?.length}`}>
+            <ul className={`pb-8 px-8 grid gap-4 grid-cols-${productData.postHogOnPostHog.benefits?.length}`}>
                 {productData.postHogOnPostHog.benefits?.map((benefit) => (
                     <li key={benefit.title} className="text-xl">
                         <p>
