@@ -63,6 +63,7 @@ export const posthog = new PostHog(
       captureNetworkTelemetry: true,
       // Throttling delay used to reduce the number of snapshots captured and reduce performance impact
       // The lower the number more snapshots will be captured but higher the performance impact
+      // Default is 1000ms
       throttleDelayMs: 1000,
     },
   },
