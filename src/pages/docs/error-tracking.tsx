@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { SEO } from 'components/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
+import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
@@ -10,7 +11,6 @@ import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
 import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
 import { CodeBlock } from 'components/CodeBlock'
-import { Subfeature } from 'components/Products/Subfeature'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser } from '@posthog/icons'
 
 type ErrorTrackingProps = {
@@ -28,71 +28,73 @@ const maxWidth = 'max-w-4xl'
 const subfeatures = [
     {
         title: 'Session replay',
-        description:
-            'Watch session recordings of users who caused exceptions for more context about how to reproduce an issue',
-        icon: <IconRewindPlay />,
+        description: 'Watch session recordings to help you reproduce an issue',
+        icon: <IconRewindPlay className="h-6" />,
         color: 'yellow',
+        url: '/docs/session-replay',
     },
     {
         title: 'Product analytics',
         description:
-            'Graph your <code>$exception</code> events, use filters and breakdowns to determine where errors happen and what to prioritize',
-        icon: <IconTrends />,
+            'Combine exception with analytics data to understand how your exceptions impact conversion and revenue',
+        icon: <IconTrends className="h-6" />,
         color: 'blue',
+        url: '/docs/product-analytics',
     },
     {
         title: 'Feature flags',
         description: 'Test fixes by rolling out code changes only to affected users',
-        icon: <IconToggle />,
+        icon: <IconToggle className="h-6" />,
         color: 'seagreen',
+        url: '/docs/feature-flags',
     },
     {
         title: 'User profiles',
         description:
-            'See all <code>$exception</code> events for specific users in their event history log and find which feature flags were enabled at the time an error occurred',
-        icon: <IconUser />,
+            'See all exception events for a users and find which feature flags were enabled at the time an error occurred',
+        icon: <IconUser className="h-6" />,
         color: 'purple',
+        url: '/docs/product-analytics/identify',
+    },
+]
+const javascriptCode = `posthog.captureException(error, {
+    user_id: "user123",
+    stack_trace: error.stack,
+    severity: "error"
+  })`
+
+const pythonCode = `posthog.capture_exception(
+    error,
+    distinct_id="user123",
+    properties={
+      "stack_trace": str(error),
+      "severity": "error"
+    }
+  )`
+
+const goCode = `client.CaptureException(posthog.CaptureException{
+    DistinctId: "user123",
+    Exception:  err,
+    Properties: map[string]interface{}{
+      "severity": "error",
+      "context":  "user_action",
+    },
+  })`
+
+const codeLanguages = [
+    {
+        label: 'JavaScript',
+        language: 'javascript',
+        code: javascriptCode,
+    },
+    {
+        label: 'Python',
+        language: 'python',
+        code: pythonCode,
     },
 ]
 
 export const Content = () => {
-    const javascriptCode = `posthog.captureException(error, {
-  user_id: "user123",
-  stack_trace: error.stack,
-  severity: "error"
-})`
-
-    const pythonCode = `posthog.capture_exception(
-  error,
-  distinct_id="user123",
-  properties={
-    "stack_trace": str(error),
-    "severity": "error"
-  }
-)`
-
-    const goCode = `client.CaptureException(posthog.CaptureException{
-  DistinctId: "user123",
-  Exception:  err,
-  Properties: map[string]interface{}{
-    "severity": "error",
-    "context":  "user_action",
-  },
-})`
-
-    const codeLanguages = [
-        {
-            label: 'JavaScript',
-            language: 'javascript',
-            code: javascriptCode,
-        },
-        {
-            label: 'Python',
-            language: 'python',
-            code: pythonCode,
-        },
-    ]
-
     const [currentLanguage, setCurrentLanguage] = useState(codeLanguages[0])
 
     const handleLanguageChange = (language: any) => {
@@ -104,14 +106,14 @@ export const Content = () => {
             <section className={`mb-6 mx-auto ${maxWidth}`}>
                 <div>
                     <p>
-                        Error tracking lets you track errors and resolve issues within your app, so you can ship fast
-                        with confidence. It's especiailly useful for engineers who:
+                        Error tracking lets you capture exceptions and resolve issues within your app, so you can ship
+                        fast with confidence. It's especiailly useful for engineers who:
                     </p>
                     <ul>
                         <li>Need to move fast and ship often</li>
                         <li>Want fewer tools and more focus on building products</li>
                         <li>Manage full-stack development teams</li>
-                        <li>Care about the impact errors have on users</li>
+                        <li>Care about the impact of errors on users</li>
                     </ul>
                 </div>
 
@@ -143,7 +145,7 @@ export const Content = () => {
                                 {
                                     content: (
                                         <a href="/docs/error-tracking/capture#automatic-exception-capture">
-                                            Exception autocapture
+                                            Autocapture
                                         </a>
                                     ),
                                 },
@@ -154,28 +156,24 @@ export const Content = () => {
                             cells: [
                                 { content: <a href="/docs/error-tracking/stack-traces">Stack traces</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                { content: <a href="/docs/error-tracking/upload-source-maps">Source map uploads</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
                                 { content: <a href="/docs/error-tracking/managing-issues">Issue management</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                { content: <a href="/docs/error-tracking/grouping-issues">Error grouping</a> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: <a href="/docs/error-tracking/grouping-issues">Custom error grouping</a> },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: <a href="/docs/error-tracking/debugging-with-mcp">MCP integration</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
                             ],
                         },
                         {
                             cells: [
-                                { content: <a href="/docs/error-tracking/debugging-with-mcp">AI features</a> },
+                                { content: <a href="/docs/error-tracking/fix-with-ai-prompts">Fix with AI</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
                                 {
-                                    content: (
-                                        <a href="docs/error-tracking/capture#customizing-exception-capture">
-                                            Custom event properties
-                                        </a>
-                                    ),
+                                    content: <a href="/docs/error-tracking/alerts">Alerting</a>,
                                 },
                                 { content: <IconCheck className="h-5 text-green" /> },
                             ],
@@ -198,19 +196,37 @@ export const Content = () => {
                     size="sm"
                     className={maxWidth}
                 />
+            </section>
 
-                <p>Including a wide range of supported frameworks:</p>
-
+            <section className={`mb-6 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4 text-xl">Integrates with these frameworks</h2>
                 <div className="mt-4">
                     <InstallationPlatforms columns={4} />
                 </div>
             </section>
 
             <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">And features that will help you 10x</h2>
-                <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0">
+                <h2 className="mb-4 text-xl">And 10x better with other PostHog products</h2>
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     {subfeatures.map((subfeature, index) => (
-                        <Subfeature key={index} {...subfeature} />
+                        <li
+                            key={index}
+                            className="list-none bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded relative hover:top-[-2px] active:top-[1px] hover:transition-all overflow-hidden"
+                        >
+                            <Link
+                                to={`/docs/${subfeature.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                className="block not-prose"
+                                state={{ newWindow: true }}
+                            >
+                                <div className="px-4 py-3">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <div className={`text-${subfeature.color}`}>{subfeature.icon}</div>
+                                        <h4 className="font-semibold my-0">{subfeature.title}</h4>
+                                    </div>
+                                    <p className="text-secondary text-sm">{subfeature.description}</p>
+                                </div>
+                            </Link>
+                        </li>
                     ))}
                 </ul>
             </section>
@@ -222,9 +238,10 @@ export const Content = () => {
                     transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog
                     for free.
                 </p>
-                <div className="px-8 bg-white rounded-md border-primary border">
+                <div className="px-8 rounded-md border-primary border">
                     <Pricing productType="error_tracking" />
                 </div>
+
                 <p>No credit card required to start. You can also set billing limits to avoid surprise charges.</p>
                 <p>
                     See our <a href="/pricing">pricing page</a> for more up-to-date details.

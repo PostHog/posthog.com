@@ -59,6 +59,6 @@ const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
         },
     ]
 
-    return <List className={`grid sm:grid-cols-2 md:grid-cols-${columns}`} items={platforms} />
+    return <List className={`grid gap-4 sm:grid-cols-2 md:grid-cols-${columns} not-prose`} items={platforms} />
 }
 export default InstallationPlatforms
