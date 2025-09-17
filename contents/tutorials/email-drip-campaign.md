@@ -67,7 +67,7 @@ This means:
 
 ## Step 6: Review and launch
 
-Now the campaign should look like this![this](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
+Now the campaign should look like this ![this](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
 
 Click **Create**, and voila the campaign is published.
 
