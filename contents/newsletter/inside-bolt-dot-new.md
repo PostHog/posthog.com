@@ -7,11 +7,12 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bolt_c70d0ec00f.jpg
 featuredImageType: full
 tags:
-  - Founders
   - Product
   - Product-market fit
+  - Engineering
 crosspost:
   - Product for Engineers
+  - Founders
   - Blog
 ---
 
@@ -187,7 +188,5 @@ WebContainer is clearly an impressive piece of technology, but what really matte
 Suddenly WebContainer wasn’t just a clever runtime, it was also the perfect companion for AI. With it, a one-line prompt could turn into a running full-stack app.
 
 Bolt pivoted their business into the moment and, with a [single tweet](https://x.com/boltdotnew/status/1841873251313844631), years of quiet work ignited into explosive growth.
-
-![the tweet that started it all](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bolt_tweet_66619d0d22.jpg)  
 
 <NewsletterForm />
