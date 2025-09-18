@@ -48,6 +48,7 @@ interface ReaderViewProps {
         contributors?: any[]
         date?: string
         featuredVideo?: string
+        tags?: { label: string; url: string }[]
     }
     title?: string
     hideTitle?: boolean
@@ -678,10 +679,23 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {title && !hideTitle && <h1>{title}</h1>}
-                                {(body.date || body.contributors) && (
-                                    <div className="flex items-center space-x-2 mb-4">
+                                {(body.date || body.contributors || body.tags) && (
+                                    <div className="flex items-center space-x-2 mb-4 flex-wrap">
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
+                                        {body.tags && (
+                                            <ul className="m-0 p-0 list-none text-sm flex flex-wrap">
+                                                {body.tags.map((tag, index) => {
+                                                    const isLast = index === body.tags.length - 1
+                                                    return (
+                                                        <li key={tag.url}>
+                                                            <Link to={tag.url}>{tag.label}</Link>
+                                                            {!isLast && ', '}
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        )}
                                     </div>
                                 )}
                                 {tableOfContents &&
