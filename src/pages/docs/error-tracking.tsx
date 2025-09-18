@@ -132,7 +132,7 @@ export const Content = () => {
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">SDKs and frameworks</h2>
                 <div className="mt-4">
-                    <InstallationPlatforms columns={2} />
+                    <InstallationPlatforms columns={3} />
                 </div>
             </section>
 
