@@ -11,7 +11,7 @@ assignees:
 
 _explain what's needed and link to additional context_
 
-> Note: See [docs ownership](https://posthog.com/handbook/content/docs) in the handbook for more context on who does what.
+> Note: See [docs ownership](/handbook/content/docs) in the handbook for more context on who does what.
 
 ## What kind of request is this?
 
