@@ -42,7 +42,7 @@ We provide developer infrastructure - by providing _every_ tool engineers need i
 - Automate everything better than anyone else can, by using AI across this wider context
 - Continue to provide all the tools engineering teams need as they grow
 
-### 2. Provide every tool needed to build successful products
+### 2. Provide every tool engineers need to build successful products
 
 We aim to offer every tool engineering teams need to debug, understand, and improve their products. From session replay for debugging to feature flags for safe deployments, we help engineers ship better code faster.
 
