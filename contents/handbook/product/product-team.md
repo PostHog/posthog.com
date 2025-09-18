@@ -1,10 +1,10 @@
 ---
-title: Product team overview
+title: Product management at PostHog
 sidebar: Handbook
 showTitle: true
 ---
 
-PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions. Read more on the role of the Product Team in this [blog post](/blog/product-at-posthog).
+PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions.
 
 So, what is the role of product managers at PostHog? PMs set context across multiple products for how products are being used, what the competitive landscape is like, what users are feeling about PostHog, and how they're using things.
 
