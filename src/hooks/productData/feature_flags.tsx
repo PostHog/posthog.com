@@ -349,22 +349,22 @@ export const featureFlags = {
         benefits: [
             {
                 title: 'Test new ideas',
-                description: 'with beta cohorts or random sampling',
+                description: 'with beta cohorts or random users',
             },
             {
-                title: 'Create kill switches',
-                description: 'with always-on flags we can turn off instantly',
+                title: 'Make kill switches',
+                description: 'with flags we can turn off',
             },
             {
                 title: 'Stagger roll-outs',
-                description: "just so we don't break everything at once",
+                description: "so we don't break everything",
             },
             {
                 title: 'Run simple experiments',
                 description: 'to see what works best',
             },
             {
-                title: 'Control user access',
+                title: 'Control access',
                 description: 'by using flags as permissions',
             },
         ],

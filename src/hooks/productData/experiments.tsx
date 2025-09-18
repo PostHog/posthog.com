@@ -265,20 +265,24 @@ export const experiments = {
         title: 'How PostHog uses PostHog to run experiments',
         benefits: [
             {
-                title: 'Test product ideas',
-                description: 'with small user groups before full rollout',
+                title: 'A/B tests',
+                description: 'to compare one idea against another',
             },
             {
-                title: 'Optimize conversion rates',
-                description: 'across signup flows and checkout processes',
+                title: 'A/A tests',
+                description: 'to test one idea against itself',
             },
             {
-                title: 'Validate feature changes',
-                description: 'using statistical significance',
+                title: 'A/B/N tests',
+                description: 'to test lots of ideas at once',
             },
             {
-                title: 'Monitor secondary metrics',
-                description: 'to catch unintended side effects',
+                title: 'Holdout tests',
+                description: 'to test ideas over a long period',
+            },
+            {
+                title: 'Fake door tests',
+                description: 'to test an idea before building it',
             },
         ],
     },
