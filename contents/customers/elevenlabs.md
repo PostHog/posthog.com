@@ -16,7 +16,6 @@ users:
 toolsUsed:
   - Feature flags
   - Product analytics
-  - Feature flags
   - User surveys
 date: 2024-03-25
 ---
