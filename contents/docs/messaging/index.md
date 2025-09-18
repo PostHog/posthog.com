@@ -32,12 +32,12 @@ A campaign always starts with a trigger and ends with an exit, but you can add a
 
 ## Getting started
 
-After setting up your messaging channels or CDP destinations, [email example here](/docs/messaging/set-up/set-up-email)
+After setting up your messaging channels or CDP destinations, [email example here](/docs/messaging/set-up/design-campaign)
 
 There are just 2 steps to launching a campaign:
 
 1. **Design the workflow** – drag and drop steps in the builder.
-1. **Design the workflow** – drag and drop steps in the builder.
-2. **Review and launch** – test, monitor, and iterate.
+2. **Design the workflow** – drag and drop steps in the builder.
+3. **Review and launch** – test, monitor, and iterate.
 
 > **Note:** Check out our email drip campaign [guide](/tutorials/email-drip-campaign), to see step by step instructions with an example

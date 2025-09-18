@@ -4730,8 +4730,15 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Configure a messaging channel',
+                    url: '/docs/messaging/channels',
+                    icon: 'IconMegaphone',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
                     name: 'Design your first campaign',
-                    url: '/docs/messaging/set-up-email',
+                    url: '/docs/messaging/design-campaign',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,

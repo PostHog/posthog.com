@@ -1,0 +1,123 @@
+---
+title: "Configure a messaging channel"
+showStepsToc: true
+---
+
+import Tab from "components/Tab"
+
+<Steps>
+
+<Step title="Create a new messaging channel" badge="required">
+
+Before you can design a campaign, you need to configure a messaging channel. Campaigns use messaging channels to deliver messages to your users.
+
+To create a new channel, go to messaging > [**Channels** tab](https://app.posthog.com/messaging/channels) > click **+ New channel**, and select the channel you want to configure:
+
+<Tab.Group tabs={[
+'Email', 
+'Slack', 
+'Twilio']}>
+<Tab.List>
+<Tab>Email</Tab>
+<Tab>Slack</Tab>
+<Tab>Twilio</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+Email is the default messaging channel in PostHog.  
+
+You can use it to send **[drip campaigns](/tutorials/email-drip-campaign), transactional messages, or announcements** directly from the Campaign Builder.
+
+### Configure the channel
+
+To configure the channel, you need to provide the following details:
+
+- Enter your **from name** (e.g. `PostHog Team`).
+- Enter your **from email** (e.g. `team@yourdomain.com`).
+
+This is the address that recipients will see in their inbox.
+
+### Verify your domain
+
+To maximize deliverability and avoid spam folders, you must verify your domain.
+
+1. After adding your email address, PostHog shows DNS records for **SPF** and **DKIM**.
+2. Copy these into your domain host (e.g. Cloudflare, GoDaddy).
+3. Verification may take a few minutes to propagate.
+
+Once verified, you'll see a green check mark in your settings.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_light_c2f3b925c5.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_8fc6c512da.png"
+    alt="How to verify your domain in PostHog" 
+    classes="rounded"
+/>
+
+</Tab.Panel>
+<Tab.Panel>
+
+placeholder
+
+</Tab.Panel>
+<Tab.Panel>
+
+placeholder
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Create a template" badge="required">
+
+Navigate to **Messaging** > **Templates** tab > click **+ Create new**.
+
+- Give your template a name.
+- Write your subject line and body content (HTML and text versions are supported).
+- Use variables like `{{ person.name }}` to personalize your message.
+
+Save your template — you'll be able to select it later when you design a campaign.
+
+</Step>
+
+<Step title="Test your setup" badge="required">
+
+Before going live, send a test message:
+
+- In the template editor, click **Send test**.
+- Choose your own user profile (must have a valid email property).
+- Confirm the email arrives as expected.
+
+</Step>
+
+<Step title="Use in a campaign" badge="required">
+
+1. Open the Campaign Builder.
+2. Drag an **Email** step into your workflow.
+3. Select the template you created.
+4. Connect it to your trigger and other steps.
+
+Once published, users who reach this step will receive your email.
+
+</Step>
+
+</Steps>
+
+## Troubleshooting
+
+- **Emails not sending?**  
+  Check that your domain is verified and you’ve added the DNS records correctly.
+
+- **Spam folder issues?**  
+  Ensure SPF/DKIM are valid, and consider setting up DMARC.
+
+- **Variables not populating?**  
+  Confirm the property exists on the person profile (e.g. `person.name`).
+
+## Next steps
+
+- Learn how to [build a drip campaign](/docs/messaging/email-drip-campaign)  
+- Explore other [messaging channels](/docs/messaging/start-here)
