@@ -684,11 +684,11 @@ function ReaderViewContent({
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
                                         {body.tags && (
-                                            <ul className="m-0 p-0 list-none text-sm flex flex-wrap">
+                                            <ul className="m-0 p-0 list-none text-sm flex flex-wrap gap-1">
                                                 {body.tags.map((tag, index) => {
                                                     const isLast = index === body.tags.length - 1
                                                     return (
-                                                        <li key={tag.url}>
+                                                        <li key={tag.url} className="p-0">
                                                             <Link to={tag.url}>{tag.label}</Link>
                                                             {!isLast && ', '}
                                                         </li>
