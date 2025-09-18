@@ -6,7 +6,9 @@ showTitle: true
 
 AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework) or ICP.
 
-We build for the highest-performing **product engineers** building the **most-loved products** at **high-growth startups**. We focus specifically on the **product engineers** (full-stack engineers skewed towards the frontend), but it should be usable by everyone on the product team (PMs, designers, data engineers).
+We build for the highest-performing **product engineers** (full-stack engineers skewed towards the frontend) building the **most-loved products** at **high-growth startups**. 
+
+We aren't focused on other members of the product team, such as PMs, designers, and data engineers, though we are aware they are oftentimes users of PostHog as well. We expect PostHog to be usable for them, but only prioritize their feature requests when they are in service of product engineering workflows and/or have been requested by product engineers as well.
 
 > Example: PostHog anytime from Series B to IPO
 
