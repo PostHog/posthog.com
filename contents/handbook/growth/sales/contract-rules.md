@@ -192,6 +192,17 @@ Some rules:
 
 > Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
 
+## New business renewal credits
+
+If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/blog/tags/comparisons), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
+
+1. If the competitor matches our much lower offer, and the customer accepts, we've reduced their revenue by a significant amount
+2. If the customer accepts, we've gained net new revenue we otherwise would have missed out on, and we have the opportunity to sell more.
+
+In order for this to not mess up later renewals, the way we do this is by giving them credit for the first year in order to reach a total discount of 40%. For example, if the quote from the competitor is $50k, and the total cost for our product (including other discounts) is $40k, we will give them additional credits worth $10k, in order to undercut the total quote by 40%.
+
+In order to qualify for this, the customer needs to send us the full quote document from the competitor.
+
 ## Credit over/under usage for annual contracts
 
 ### When they don't have enough credit to cover their term
