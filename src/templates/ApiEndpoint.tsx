@@ -158,7 +158,7 @@ function Params({ params, objects, object, depth = 0 }) {
                     <li key={index} className="py-3 border-b border-primary last:border-0">
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
-                                <span className="font-code font-semibold text-[13px] leading-7">{param.name} $$</span>
+                                <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
                                 {param.schema.items?.$ref && (
                                     <>
                                         {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
