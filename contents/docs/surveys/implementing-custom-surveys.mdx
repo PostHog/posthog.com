@@ -61,13 +61,113 @@ If you create a [popover survey](/docs/surveys/creating-surveys#presentation), u
 
 ## Rendering surveys programmatically
 
-Although we recommend using popover surveys and display conditions, if you want to show surveys programmatically without setting up all the extra logic needed for API surveys, you can render surveys programmatically with the `renderSurvey` method. This takes a survey ID and an HTML selector to render an **unstyled** survey.
+Although we recommend using popover surveys and display conditions, if you want to show surveys programmatically without setting up all the extra logic needed for API surveys, you can render surveys programmatically with the `displaySurvey` (recommended) or `renderSurvey` (deprecated) method.
 
 import OnSurveysLoaded from './_snippets/onsurveysloaded-callout.md'
 
 <OnSurveysLoaded />
 
-An example implementation in React looks like this:
+### Using displaySurvey (recommended)
+
+The `displaySurvey` method is the recommended way to show surveys programmatically. It supports two display types:
+
+1. **Popover surveys** - Shows surveys as styled popovers (same as regular surveys)
+2. **Inline surveys** - Renders surveys within a specific HTML element
+
+#### Popover surveys
+
+To display a survey as a popover, simply call `displaySurvey` with the survey ID:
+
+```js
+import React from 'react';
+import { DisplaySurveyType } from 'posthog-js';
+import { usePostHog } from 'posthog-js/react';
+
+const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+
+function App() {
+  const posthog = usePostHog();
+
+
+  const handleShowSurvey = () => {
+    // Display as popover (respects conditions defined in dashboard)
+    posthog.displaySurvey(coolSurveyID);
+  };
+
+  const handleForceShowSurvey = () => {
+    // Force display ignoring conditions and delays
+    posthog.displaySurvey(coolSurveyID, {
+      displayType: DisplaySurveyType.Popover,
+      ignoreConditions: true,
+      ignoreDelay: true
+    });
+  };
+
+  return (
+    <div className="App">
+      <h1>Survey Tutorial with PostHog</h1>
+      <div className="survey-controls">
+        <button onClick={handleShowSurvey}>
+          Show Survey (with conditions)
+        </button>
+        <button onClick={handleForceShowSurvey}>
+          Force Show Survey
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+#### Inline surveys
+
+To display a survey inline within a specific element, specify the `displayType` and `selector`:
+
+```js
+import React from 'react';
+import { DisplaySurveyType } from 'posthog-js';
+import { usePostHog } from 'posthog-js/react';
+
+const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+
+function App() {
+  const posthog = usePostHog();
+
+  const handleShowInlineSurvey = () => {
+    // Will ignore both conditions and delays
+    posthog.displaySurvey(coolSurveyID, {
+      displayType: DisplaySurveyType.Inline,
+      ignoreConditions: true,
+      ignoreDelay: true,
+      selector: '#survey-container'
+    });
+  };
+
+  return (
+    <div className="App">
+      <h1>Survey Tutorial with PostHog</h1>
+      <div className="survey-controls">
+        <button onClick={handleShowInlineSurvey}>
+          Show Inline Survey
+        </button>
+      </div>
+      <div id="survey-container">
+        <p>Survey will render here</p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Using renderSurvey (deprecated)
+
+> **Note:** The `renderSurvey` method is deprecated in favor of `displaySurvey`. While `renderSurvey` will continue to work for backwards compatibility, we recommend using `displaySurvey` for all new implementations as it supports both styled and unstyled surveys with more flexible options.
+
+The legacy `renderSurvey` method renders an **unstyled** survey in a specific HTML element, ignoring any display conditions:
 
 ```js
 import './App.css';
