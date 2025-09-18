@@ -7,7 +7,7 @@ import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 
-> **Note:** LiteLLM can be used as a Python SDK or as a proxy server. PostHog observability requires LiteLLM version X.Y.Z or higher.
+> **Note:** LiteLLM can be used as a Python SDK or as a proxy server.
 
 <Steps>
 
@@ -17,11 +17,11 @@ Choose your installation method based on how you want to use LiteLLM:
 
 <MultiLanguage>
 
-```bash file="Python SDK"
+```bash file=SDK
 pip install litellm
 ```
 
-```bash file="Proxy"
+```bash file=Proxy
 # Install via pip
 pip install 'litellm[proxy]'
 
@@ -31,8 +31,6 @@ docker run --rm -p 4000:4000 ghcr.io/berriai/litellm:latest
 
 </MultiLanguage>
 
-<LLMsSDKsCallout />
-
 </Step>
 
 <Step title="Configure PostHog observability" badge="required">
@@ -41,7 +39,7 @@ Configure PostHog by setting your API key and enabling observability. You can fi
 
 <MultiLanguage>
 
-```python file="Python SDK"
+```python file=SDK
 import os
 import litellm
 
@@ -54,7 +52,7 @@ litellm.success_callback = ["posthog"]
 litellm.failure_callback = ["posthog"]  # Optional: also log failures
 ```
 
-```yaml file="Proxy"
+```yaml file=Proxy
 # config.yaml
 model_list:
 - model_name: gpt-4o-mini
@@ -72,8 +70,6 @@ environment_variables:
 
 </MultiLanguage>
 
-<LLMsSDKsCallout />
-
 </Step>
 
 <Step title="Call LLMs through LiteLLM" badge="required">
@@ -82,21 +78,22 @@ Now, when you use LiteLLM to call various LLM providers, PostHog automatically c
 
 <MultiLanguage>
 
-```python file="Python SDK"
+```python file=SDK
 response = litellm.completion(
     model="gpt-4o-mini",
     messages=[
         {"role": "user", "content": "Tell me a fun fact about hedgehogs"}
     ],
     metadata={
-        "key": "value"
+        "user_id": "user_123",  # Maps to PostHog distinct_id
+        "company": "company_id_in_your_db"  # Custom property
     }
 )
 
 print(response.choices[0].message.content)
 ```
 
-```bash file="Proxy"
+```bash file=Proxy
 # Start the proxy (if not already running)
 litellm --config config.yaml
 
@@ -109,7 +106,8 @@ curl -X POST http://localhost:4000/chat/completions \
       {"role": "user", "content": "Tell me a fun fact about hedgehogs"}
     ],
     "metadata": {
-      "key": "value"
+      "user_id": "user_123",
+      "company": "company_id_in_your_db" # Custom property
     }
   }'
 ```
@@ -117,7 +115,6 @@ curl -X POST http://localhost:4000/chat/completions \
 </MultiLanguage>
 
 > **Notes:** 
-> - LiteLLM supports 100+ LLM providers including OpenAI, Anthropic, Cohere, Replicate, PaLM, Azure, Hugging Face, and more.
 > - This works with streaming responses by setting `stream=True`.
 > - To disable logging for specific requests, add `{"no-log": true}` to metadata.
 > - If you want to capture LLM events anonymously, **don't** pass a `user_id` in metadata. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more.
@@ -136,17 +133,18 @@ PostHog can also capture embedding generations as `$ai_embedding` events through
 
 <MultiLanguage>
 
-```python file="Python SDK"
+```python file=SDK
 response = litellm.embedding(
     input="The quick brown fox",
     model="text-embedding-3-small",
     metadata={
-        "key": "value"
+        "user_id": "user_123",  # Maps to PostHog distinct_id
+        "company": "company_id_in_your_db"  # Custom property
     }
 )
 ```
 
-```bash file="Proxy"
+```bash file=Proxy
 # Make an embeddings request to the proxy
 curl -X POST http://localhost:4000/embeddings \
   -H "Content-Type: application/json" \
@@ -154,7 +152,8 @@ curl -X POST http://localhost:4000/embeddings \
     "input": "The quick brown fox",
     "model": "text-embedding-3-small",
     "metadata": {
-      "key": "value"
+      "user_id": "user_123",
+      "company": "company_id_in_your_db" # Custom property
     }
   }'
 ```

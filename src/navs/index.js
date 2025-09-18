@@ -4294,6 +4294,10 @@ export const docsMenu = {
                             name: 'OpenRouter',
                             url: '/docs/llm-analytics/installation/openrouter',
                         },
+                        {
+                            name: 'LiteLLM',
+                            url: '/docs/llm-analytics/installation/litellm',
+                        },
                     ],
                 },
                 {
