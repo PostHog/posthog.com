@@ -8,24 +8,15 @@ showTitle: true
 
 Equip every developer to build successful products.
 
-## A few words
+## Why is that our mission?
 
-On the surface, PostHog's products are a bunch of different developer tools, which work together better than anyone else's. However, the secret to our success is our long term plan. By eventually shipping every product a product engineer will ever use in one place, we can automate the workflow of building software - combining all the context needed to decide what to build, shipping, generating more context and so on. In short, we call this product autonomy.
+Since the beginning, we've believed that engineers should be way more involved in making product decisions than they've been historically. In order to help them do that, we've built a collection of tools for engineers. 
 
-Critical to making this happen is to deliver each tool without compromise - better, cheaper and with all the context engineers need in one place. The way to achieve this is very simple - shipping every product that engineering teams use, from day one when there are just two technical cofounders. This is because if we get in with these developers, we're upstream of every need they'll have. The end result is that we can offer all the products in one place, with no need to charge as much as everyone else for each one, and most importantly with perfect quality context - customer data, session replays, errors, logs, metrics, usage data and everything else they need to ship products.
+Similar tools to the ones we've built have existed for a long time, but they were always built with other users in mind. By building things like product analytics, session replays, feature flags and a data warehouse for engineers first, we give engineers the ability to make product decisions themselves. This massively increases the speed at which engineers can make good decisions.
 
+The other way PostHog helps engineers is by combining _all_ the tools they need into one product. This avoids a ton of work integrating and linking up various products, both when integrating and ongoingly.
 
-I’d like to address a repeated argument against shipping multiple products, let alone all of them.
-
-### You can build more than a product or two
-
-The world of tech is changing fast.
-
-First, there’s just more money at better valuations than when this advice was created. Software companies, us included, have more leverage than ever before - with capital deployed well, we can do more than our predecessors.
-
-Second, software development is far quicker.
-
-Third, we’ve managed this very well so far. 
+We try to help engineers from the very beginning, when their product is just being built. We do that by having [generous free tiers](/pricing), and no need to talk to sales to get started.
 
 ## Our strategy
 
@@ -54,8 +45,12 @@ Since developers exist first in a startup, by getting in with them early, we are
 
 _Once_ we land a customer, we then let them pull _us_ upmarket as they grow. But not before. We don't want to hire a big enterprise sales team and go upmarket before our existing customers are there. This keeps us efficient and able to stay focused on building tools that engineers actually want to use.
 
+### 4. Automate the iteration process
+
+Because we have all the context on both users and the product, we can automate large chunks of the cycle of shipping -> observing -> iterating.
+
 ## Secret master plan
 
-* Ship every tool that engineering teams need to ship products. We call this developer infrastructure. It's the tools and all the context they need together.
-* Automate all of these tools - this is Max AI.
-* (not here yet) Expand the range of products to meet the needs of teams that aren't software-focused.
+* Ship every tool and all the data that engineering teams need to understand their product and users
+* Use that to speed up the cycle of shipping -> observing -> iterating
+* Eventually, automate the entire cycle

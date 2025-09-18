@@ -41,6 +41,7 @@ Ideally, but not necessarily, products we build should:
 * [Equip developers to ship successful products](/handbook/why-does-posthog-exist#our-mission)
   * Specifically, any product that either helps them ship faster, or gives them more context to ship products without help from others.
 * Help us to get in first - some tools are adopted earlier in the customer lifecycle than others. Starting with these avoids customers moving to competitors' products, then us having to migrate them over.
+* Increase the amount of data inside of PostHog. In some cases, that means building the product when we can get a large % of our users to switch over (like error tracking, logs), in other cases it just means integrating when switching costs or infrastructure requirements are high (like a production database, an auth product)
 * Increase our luck surface area - some products have more upside than others, for example, API access may yield surprising results compared to a super narrowly scoped new product like a cookie banner product.
 * Be very easy to integrate and turn on for existing customers. For example, users can enable the product without a code change.
 * Have crappy competitors - successful companies but horrible products and/or sales experience.
