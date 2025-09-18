@@ -8,9 +8,9 @@ showTitle: true
 
 - **The Changelog:** Our goal is to produce a great changelog update every two weeks with a theme that rotates every three months. This is produced by <TeamMember name="Jordo Dibb" photo /> based on recent changelog entries. We also have plans to turn this into a quarterly wrap-up.
 
-- **Launch videos:** We've made some already, but we're still developing how we do these. The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice. We're avoiding doing custom creatives for each launch for now, though this is something we'd like to explore at a later date. Examples include [Why we made an open-source developer toy](https://www.youtube.com/watch?v=lqeD2vvAA4w&t=17s) and [Introducing Max AI](https://www.youtube.com/watch?v=p7Iculwh7q8).
+- **Launch videos:** We've made some already, but we're still developing how we do these. The goal is to have a creative format that's repeatable and can be shot at (reasonably) short notice. We're avoiding doing custom creatives for each launch for now, though this is something we'd like to explore at a later date. Our first was [Introducing Max AI](https://www.youtube.com/watch?v=p7Iculwh7q8).
 
-- **Brand-centric hero videos:** We have a unique culture and brand, and we want to share that. A hackathon documentary shot at our Tulum offsite is currently in post-production, and we're developing some repeatable formats that showcase our culture. Our very first take on this was the [pop quiz video](https://www.youtube.com/watch?v=QeU5MmpqBg0).
+- **Brand-centric hero videos:** We have a unique culture and brand, and we want to share that. A hackathon documentary shot at our Tulum offsite is currently in post-production, and we're developing some repeatable formats that showcase our culture. Our very first takes on this are the [pop quiz video](https://www.youtube.com/watch?v=QeU5MmpqBg0), and [Why we made an open-source developer toy](https://www.youtube.com/watch?v=lqeD2vvAA4w&t).
 
 - **Core brand assets:** There are some core things we need right now, like punchy and up-to-date demo videos for the platform and individual products. We're starting with demo videos, and we'll expand from there.
 
