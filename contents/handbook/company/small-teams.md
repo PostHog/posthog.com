@@ -146,7 +146,7 @@ James or Tim will meet every hire we make - it's a standard startup failure for 
 #### How do we create new teams?
 
 - We want people with some time (~6 months at PostHog) to start new teams (rather than completely new people)
-  - The team that the person moves from: we only move people from teams that are well resourced
+  - We'll aim to only move people from teams that are well resourced to reduce disruption to teams
     - During the exec org tidy up meeting, we will figure out what products we want to build and who we want to build those products, so we can overstaff those teams
 
 
