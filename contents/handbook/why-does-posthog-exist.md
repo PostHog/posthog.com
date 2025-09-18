@@ -10,7 +10,7 @@ Equip every developer to build successful products.
 
 ## A few words
 
-On the surface, PostHog's products are a bunch of different developer tools, which work together better than anyone else's. However, the secret to our success is our long term plan: become the essential toolkit for product engineers by building around the unit they operate on - all the context they need to ship products.
+On the surface, PostHog's products are a bunch of different developer tools, which work together better than anyone else's. However, the secret to our success is our long term plan. By eventually shipping every product a product engineer will ever use in one place, we can automate the workflow of building software - combining all the context needed to decide what to build, shipping, generating more context and so on. In short, we call this product autonomy.
 
 Critical to making this happen is to deliver each tool without compromise - better, cheaper and with all the context engineers need in one place. The way to achieve this is very simple - shipping every product that engineering teams use, from day one when there are just two technical cofounders. This is because if we get in with these developers, we're upstream of every need they'll have. The end result is that we can offer all the products in one place, with no need to charge as much as everyone else for each one, and most importantly with perfect quality context - customer data, session replays, errors, logs, metrics, usage data and everything else they need to ship products.
 
