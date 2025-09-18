@@ -1,5 +1,6 @@
-import React from 'react'
-import WistiaEmbed from 'components/WistiaEmbed'
+import React, { useState, useCallback, useEffect } from 'react'
+import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
+import { useApp } from '../../../context/App'
 
 interface PostHogOnPostHogSlideProps {
     productData: {
@@ -20,9 +21,128 @@ interface PostHogOnPostHogSlideProps {
     }
 }
 
-export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogSlideProps) {
+// Video player window component
+const VideoPlayerWindow = ({ productData, startTime = 0 }: any) => {
     return (
-        <div className="h-full flex flex-col gap-4 bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
+        <div className="h-full w-full bg-black">
+            <WistiaCustomPlayer
+                mediaId={productData.videos?.overview?.wistia}
+                autoPlay={true}
+            />
+        </div>
+    )
+}
+
+export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogSlideProps) {
+    const { addWindow } = useApp()
+    const [isMaximized, setIsMaximized] = useState(false)
+    const [isThumbnail, setIsThumbnail] = useState(false)
+
+    // Detect if we're rendered inside a thumbnail context
+    useEffect(() => {
+        const checkThumbnailMode = () => {
+            // Get the root element of this component using the ID we set
+            const rootElement = document.getElementById(`posthog-slide-${productData.videos?.overview?.wistia}`)
+
+            if (rootElement) {
+                const rect = rootElement.getBoundingClientRect()
+
+                // Thumbnails are typically much smaller than full slides
+                // Landscape thumbnails: ~192px wide, Portrait: ~128px wide
+                // Full slides are typically > 600px wide
+                if (rect.width > 0 && rect.width < 250) {
+                    console.log(`PostHogOnPostHogSlide: Detected thumbnail mode (width: ${rect.width}px)`)
+                    setIsThumbnail(true)
+                    return true
+                }
+            }
+            return false
+        }
+
+        // Check immediately
+        if (!checkThumbnailMode()) {
+            // If not detected immediately, check again after layout
+            const timer1 = setTimeout(checkThumbnailMode, 50)
+            const timer2 = setTimeout(checkThumbnailMode, 150)
+
+            return () => {
+                clearTimeout(timer1)
+                clearTimeout(timer2)
+            }
+        }
+    }, [productData.videos?.overview?.wistia])
+
+    const handleMaximize = useCallback(() => {
+        setIsMaximized(!isMaximized)
+    }, [isMaximized])
+
+    const handlePopOut = useCallback((currentTime: number) => {
+        // Create a new app window with the video player
+        const windowElement = (
+            <VideoPlayerWindow
+                key="wistia-video-popout"
+                newWindow={true}
+                location={{ pathname: 'wistia-video-popout' }}
+                pageContext={{}}
+                data={{}}
+                params={{}}
+                path="wistia-video-popout"
+                minimal={false}
+                productData={productData}
+                startTime={currentTime}
+            />
+        ) as any
+        addWindow(windowElement)
+    }, [productData, addWindow])
+
+    // If we're in thumbnail mode, show a static preview
+    if (isThumbnail) {
+        return (
+            <div className="h-full flex flex-col bg-black text-white">
+                {/* Header with "Demo" text */}
+                <div className="text-center py-6">
+                    <h1 className="text-5xl font-serif italic text-white/90">Demo</h1>
+                </div>
+
+                {/* Main content area */}
+                <div className="flex-grow flex gap-8 px-8 pb-8">
+                    {/* Static thumbnail on the left */}
+                    <div className="flex-1 flex flex-col">
+                        <div className="relative bg-gray-dark rounded-lg overflow-hidden">
+                            <div className="aspect-video bg-black flex items-center justify-center">
+                                <div className="text-white/40">Video Player</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Benefits list on the right */}
+                    <div className="w-80">
+                        <h2 className="text-xl font-medium mb-6">
+                            {productData.postHogOnPostHog?.title || 'How PostHog uses PostHog'}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    // If maximized, show full-screen player
+    if (isMaximized) {
+        return (
+            <div className="fixed inset-0 z-50 bg-black">
+                <WistiaCustomPlayer
+                    mediaId={productData.videos?.overview?.wistia}
+                    onMaximize={handleMaximize}
+                    onPopOut={handlePopOut}
+                    subtitle="Hey everyone. My name is Adam and I'm a UX platform engineer at PostHog."
+                    className="h-full"
+                />
+            </div>
+        )
+    }
+
+    return (
+        <div className="h-full bg-gradient-to-b from-[#08080A] to-[#737385] text-white" id={`posthog-slide-${productData.videos?.overview?.wistia}`}>
             <div className="mb-4 pt-8 px-8">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 239 72" className="h-16 mx-auto">
                     <path
@@ -34,26 +154,44 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                 <h2 className="sr-only">Demo</h2>
             </div>
 
-            <h1 className="text-2xl text-center">{productData.postHogOnPostHog?.title}</h1>
+            {/* Main content area */}
+            <div className="flex-grow flex gap-8 px-8 pb-8">
+                {/* Video player on the left */}
+                <div className="flex-1 flex flex-col">
+                    <WistiaCustomPlayer
+                        mediaId={productData.videos?.overview?.wistia}
+                        onMaximize={handleMaximize}
+                        onPopOut={handlePopOut}
+                        subtitle="Hey everyone. My name is Adam and I'm a UX platform engineer at PostHog."
+                    />
 
-            <div className="px-8 relative flex-grow mb-6 mt-2 flex items-center justify-center">
-                <WistiaEmbed
-                    mediaId={productData.videos?.overview?.wistia}
-                    className="aspect-video rounded shadow-2xl w-full @2xl:h-full absolute inset-0 object-contain @2xl:w-auto m-auto"
-                />
+                    {/* Answers section below video */}
+                    <div className="mt-6 text-center">
+                        <button className="text-white/60 hover:text-white text-sm transition-colors">
+                            Answers
+                        </button>
+                        <p className="text-xs text-white/40 mt-1">No presenter notes for this slide.</p>
+                    </div>
+                </div>
+
+                {/* Benefits list on the right */}
+                <div className="w-80">
+                    <h2 className="text-xl font-medium mb-6">
+                        {productData.postHogOnPostHog?.title}
+                    </h2>
+                    <ul className="space-y-4">
+                        {productData.postHogOnPostHog?.benefits?.map((benefit) => (
+                            <li key={benefit.title} className="flex items-start">
+                                <span className="text-yellow mr-3 mt-1">•</span>
+                                <div>
+                                    <strong className="font-medium">{benefit.title}</strong>
+                                    <span className="text-white/70 ml-1">{benefit.description}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-
-            <ul
-                className={`pb-8 px-8 grid gap-8 @2xl:gap-4 grid-cols-2 @2xl:grid-cols-${productData.postHogOnPostHog?.benefits?.length}`}
-            >
-                {productData.postHogOnPostHog?.benefits?.map((benefit) => (
-                    <li key={benefit.title} className="text-xl">
-                        <p>
-                            <strong>{benefit.title}</strong> {benefit.description}
-                        </p>
-                    </li>
-                ))}
-            </ul>
         </div>
     )
 }
