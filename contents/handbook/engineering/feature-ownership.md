@@ -44,7 +44,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Mobile SDKs | **Primary: Mobile group**. Shared responsibility with the relevant Small Team for feature-owned areas. Start with the [Mobile group](https://github.com/orgs/PostHog/teams/team-mobile) for triage, loop in #support-client-libraries as needed. | <span class="lemon-tag gh-tag">feature/mobile</span> |
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Comments/Discussions | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/comments</span> |
-| CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |
+| Customer Analytics | [Team Customer Analytics][Team Customer Analytics]  |  <span class="lemon-tag gh-tag">feature/customer-analytics</span>  |
 | Dashboards | Shared responsibility with [Team Product Analytics][Team Product Analytics] & [Team Platform Analytics][Team Platform Analytics] |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data colors & themes | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/colors-and-themes</span> |
 | Data management | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
