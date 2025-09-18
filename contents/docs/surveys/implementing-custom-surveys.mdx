@@ -87,8 +87,9 @@ const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 
 function App() {
   const posthog = usePostHog();
+  const posthog = usePostHog();
 
-
+  const handleShowSurvey = () => {
   const handleShowSurvey = () => {
     // Display as popover (respects conditions defined in dashboard)
     posthog.displaySurvey(coolSurveyID);
