@@ -418,7 +418,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                     contributors,
                     date,
                     featuredVideo,
-                    tags: tags.map((tag) => ({ label: tag, url: `/${root}/${slugify(tag, { lower: true })}` })),
+                    tags: tags?.map((tag) => ({ label: tag, url: `/${root}/${slugify(tag, { lower: true })}` })),
                 }}
                 title={title}
                 tableOfContents={tableOfContents}
