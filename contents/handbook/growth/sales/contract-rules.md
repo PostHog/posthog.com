@@ -194,7 +194,7 @@ Some rules:
 
 ## New business renewal credits
 
-If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/blog/tags/comparisons), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those cusotmers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
+If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/blog/tags/comparisons), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
 
 1. If the competitor matches our much lower offer, and the customer accepts, we've reduced their revenue by a significant amount
 2. If the customer accepts, we've gained net new revenue we otherwise would have missed out on, and we have the opportunity to sell more.
