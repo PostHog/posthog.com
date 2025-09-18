@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import { useApp } from '../../../context/App'
-import { IconChevronDown } from '@posthog/icons'
+import { IconCollapse45 } from '@posthog/icons'
 
 interface PostHogOnPostHogSlideProps {
     productData: {
@@ -190,6 +190,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                         />
 
                         {/* Answers section below video */}
+                        {/*                         
                         {!isMaximized && (
                             <div className="mt-6 text-center">
                                 <button className="text-white/60 hover:text-white text-sm transition-colors">
@@ -197,7 +198,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                                 </button>
                                 <p className="text-xs text-white/40 mt-1">No presenter notes for this slide.</p>
                             </div>
-                        )}
+                        )} */}
                     </div>
 
                     {/* Benefits list on the right */}
@@ -222,17 +223,15 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
             {isMaximized && (
                 <>
                     <div className="absolute inset-0 z-40 bg-black" />
-                    <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-[60]">
+                    <div className="absolute top-0 left-0 right-0 flex justify-end items-center p-4 z-[60]">
+                        <div className="text-white/60 text-sm bg-black/50 px-3 py-1 rounded">ESC or</div>
                         <button
                             onClick={handleMaximize}
-                            className="text-white/70 hover:text-white p-2 bg-black/50 rounded"
+                            className="text-white bg-black/50 rounded"
                             aria-label="Exit fullscreen"
                         >
-                            <IconChevronDown className="w-6 h-6 rotate-180" />
+                            <IconCollapse45 className="w-6 h-6 rotate-180" />
                         </button>
-                        <div className="text-white/60 text-sm bg-black/50 px-3 py-1 rounded">
-                            Press ESC to exit fullscreen
-                        </div>
                     </div>
                 </>
             )}

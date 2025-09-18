@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
+import { IconPlayFilled, IconPauseFilled, IconExpand45 } from '@posthog/icons'
 import {
-    IconPlay,
-    IconPause,
-    IconExpand,
-    IconExternal,
-    IconX, // Placeholder - using X for muted volume
-    IconBell, // Placeholder - using Bell for Volume
-    IconChat, // Placeholder - using Chat for Subtitles
-    IconSearch,
-} from '@posthog/icons'
+    IconVolumeMuted,
+    IconVolumeFull,
+    IconPopout,
+    IconClosedCaptions,
+    IconClosedCaptionsFilled,
+} from 'components/OSIcons'
 import { Select } from 'components/RadixUI/Select'
 import Input from 'components/OSForm/input'
-import Tooltip from 'components/RadixUI/Tooltip'
+import OSButton from 'components/OSButton'
 
 interface WistiaCustomPlayerProps {
     mediaId: string
@@ -665,7 +663,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         // If in preview mode, show a static thumbnail
         if (isPreview) {
             return (
-                <div className={`flex flex-col bg-black rounded-lg overflow-hidden ${className}`}>
+                <div className={`flex flex-col overflow-hidden ${className}`}>
                     <div className="relative bg-black" style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}>
                         <div className="absolute inset-0 flex items-center justify-center">
                             {/* Wistia thumbnail */}
@@ -680,7 +678,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                             />
                             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                                 <div className="bg-black/50 rounded-full p-4">
-                                    <IconPlay className="w-8 h-8 text-white" />
+                                    <IconPlayFilled className="w-8 h-8 text-white" />
                                 </div>
                             </div>
                         </div>
@@ -693,7 +691,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         }
 
         return (
-            <div className={`flex flex-col bg-black rounded-lg overflow-hidden ${className}`}>
+            <div className={`flex flex-col ${className}`}>
                 {/* Video container */}
                 <div className="relative bg-black" style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}>
                     <div className="absolute inset-0">
@@ -703,7 +701,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         {/* Custom seek bar overlay at bottom of video */}
                         <div
                             ref={seekBarRef}
-                            className="absolute bottom-0 left-0 right-0 h-2 bg-gray/30 cursor-pointer group"
+                            className="absolute bottom-0 left-0 right-0 h-1 bg-accent rounded-full cursor-pointer group"
                             onMouseDown={handleSeekStart}
                             onClick={handleSeekBarClick}
                         >
@@ -720,13 +718,14 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         <div className="absolute top-2 right-2 flex gap-2">
                             {/* Volume controls */}
                             <div className="flex items-center gap-1 bg-black/50 rounded px-2 py-1">
-                                <button
+                                <OSButton
                                     onClick={handleMuteToggle}
-                                    className="text-white hover:text-yellow transition-colors p-1"
-                                    aria-label={isMuted ? 'Unmute' : 'Mute'}
-                                >
-                                    {isMuted ? <IconX className="w-4 h-4" /> : <IconBell className="w-4 h-4" />}
-                                </button>
+                                    variant="default"
+                                    size="lg"
+                                    icon={isMuted ? <IconVolumeMuted /> : <IconVolumeFull />}
+                                    className="!text-white hover:text-yellow transition-colors p-1"
+                                    tooltip={isMuted ? 'Unmute' : 'Mute'}
+                                />
                                 <input
                                     type="range"
                                     min="0"
@@ -742,28 +741,29 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                 </div>
 
                 {/* Custom controls below video */}
-                <div className="bg-gray-dark p-3">
+                <div className="pt-2">
                     {/* Play button and time display */}
-                    <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-3">
-                            <button
-                                onClick={handlePlayPause}
-                                className="bg-yellow text-black rounded-full w-8 h-8 flex items-center justify-center hover:bg-yellow/80 transition-colors"
-                                aria-label={isPlaying ? 'Pause' : 'Play'}
-                            >
-                                {isPlaying ? (
-                                    <IconPause className="w-4 h-4" />
-                                ) : (
-                                    <IconPlay className="w-4 h-4 ml-0.5" />
-                                )}
-                            </button>
-                            <span className="text-white text-sm font-mono">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3 shrink-0 basis-60">
+                            <span className="!text-white text-sm font-mono">
                                 {formatTime(currentTime)} / {formatTime(duration)}
                             </span>
                         </div>
 
+                        <div className="flex-1 flex justify-center">
+                            <OSButton
+                                onClick={handlePlayPause}
+                                variant="default"
+                                size="md"
+                                icon={isPlaying ? <IconPauseFilled /> : <IconPlayFilled />}
+                                className="bg-white text-secondary rounded-full w-8 h-8"
+                                zoomHover="lg"
+                                // tooltip={isPlaying ? 'Pause' : 'Play'}
+                            />
+                        </div>
+
                         {/* Right controls */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-end gap-2 shrink-0 basis-60">
                             {/* Chapters */}
                             {chapterGroups.length > 0 && (
                                 <Select
@@ -771,53 +771,49 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     value=""
                                     groups={chapterGroups}
                                     placeholder="Chapters"
-                                    className="text-white bg-black/50"
+                                    className="!text-white bg-black/50"
                                     dataScheme="tertiary"
                                 />
                             )}
 
                             {/* Quality selector */}
-                            <button className="text-white/70 hover:text-white px-2 py-1 text-xs font-medium">
+                            <OSButton variant="default" size="lg" className="!text-white px-2 py-1 text-xs font-medium">
                                 {selectedQuality}
-                            </button>
+                            </OSButton>
 
                             {/* Playback speed */}
-                            <button
+                            <OSButton
                                 onClick={() => {
                                     const rates = ['0.5', '0.75', '1', '1.25', '1.5', '2']
                                     const currentIndex = rates.indexOf(playbackRate.toString())
                                     const nextIndex = (currentIndex + 1) % rates.length
                                     handlePlaybackRateChange(rates[nextIndex])
                                 }}
-                                className="text-white/70 hover:text-white px-2 py-1 text-xs font-medium"
+                                variant="default"
+                                size="lg"
+                                className="!text-white px-2 py-1 text-xs font-medium"
                             >
                                 {playbackRate}x
-                            </button>
+                            </OSButton>
 
                             {/* Captions toggle */}
-                            <Tooltip
-                                trigger={
-                                    <button
-                                        onClick={handleCaptionToggle}
-                                        className={`p-1.5 transition-colors ${
-                                            showCaptions ? 'text-yellow' : 'text-white/70 hover:text-white'
-                                        }`}
-                                    >
-                                        <IconChat className="w-4 h-4" />
-                                    </button>
-                                }
-                            >
-                                {showCaptions ? 'Hide captions' : 'Show captions'}
-                            </Tooltip>
+                            <OSButton
+                                onClick={handleCaptionToggle}
+                                variant="default"
+                                size="lg"
+                                icon={showCaptions ? <IconClosedCaptionsFilled /> : <IconClosedCaptions />}
+                                className="!text-white p-1.5"
+                                tooltip={showCaptions ? 'Hide captions' : 'Show captions'}
+                            />
 
                             {/* Caption search */}
+                            {/* 
                             <Tooltip
                                 trigger={
                                     <button
                                         onClick={() => setShowCaptionSearch(!showCaptionSearch)}
-                                        className={`p-1.5 transition-colors ${
-                                            showCaptionSearch ? 'text-yellow' : 'text-white/70 hover:text-white'
-                                        }`}
+                                        className={`p-1.5 transition-colors ${showCaptionSearch ? 'text-yellow' : 'text-white'
+                                            }`}
                                     >
                                         <IconSearch className="w-4 h-4" />
                                     </button>
@@ -825,44 +821,41 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                             >
                                 Search captions
                             </Tooltip>
-
-                            {/* Maximize */}
-                            {onMaximize && (
-                                <Tooltip
-                                    trigger={
-                                        <button onClick={onMaximize} className="text-white/70 hover:text-white p-1.5">
-                                            <IconExpand className="w-4 h-4" />
-                                        </button>
-                                    }
-                                >
-                                    Maximize
-                                </Tooltip>
-                            )}
+                             */}
 
                             {/* Pop out */}
                             {onPopOut && (
-                                <Tooltip
-                                    trigger={
-                                        <button onClick={handlePopOut} className="text-white/70 hover:text-white p-1.5">
-                                            <IconExternal className="w-4 h-4" />
-                                        </button>
-                                    }
-                                >
-                                    Pop out to new window
-                                </Tooltip>
+                                <OSButton
+                                    onClick={handlePopOut}
+                                    variant="default"
+                                    size="lg"
+                                    icon={<IconPopout />}
+                                    className="!text-white p-1.5"
+                                    tooltip="Pop out to new window"
+                                />
+                            )}
+
+                            {/* Maximize */}
+                            {onMaximize && (
+                                <OSButton
+                                    onClick={onMaximize}
+                                    variant="default"
+                                    size="lg"
+                                    icon={<IconExpand45 />}
+                                    className="!text-white p-1.5"
+                                    tooltip="Maximize"
+                                />
                             )}
                         </div>
                     </div>
 
                     {/* Caption display area */}
                     {showCaptions && !showCaptionSearch && (
-                        <div className="text-center text-white text-sm mt-2 px-4 min-h-[32px] flex items-center justify-center">
+                        <div className="text-center text-white text-sm pt-4 px-4 min-h-[32px] flex items-center justify-center">
                             {captionText ? (
-                                <p className="bg-black/70 inline-block px-4 py-1.5 rounded-md max-w-2xl">
-                                    {captionText}
-                                </p>
+                                <p className="text-2xl font-medium">{captionText}</p>
                             ) : (
-                                <p className="text-white/30 text-xs italic">
+                                <p className="!text-white/30 text-xs italic">
                                     {captions.length > 0 ? '' : 'No captions available'}
                                 </p>
                             )}
@@ -880,10 +873,10 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     setCaptionSearchQuery(e.target.value)
                                 }
                                 showLabel={false}
-                                size="sm"
+                                size="lg"
                                 showClearButton
                                 onClear={() => setCaptionSearchQuery('')}
-                                className="bg-gray/50 border-gray text-white placeholder-white/50"
+                                className="text-primary"
                             />
                         </div>
                     )}
