@@ -1197,6 +1197,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/how-posthog-website-works',
                     },
                     {
+                        name: 'Technical architecture',
+                        url: '/handbook/engineering/posthog-com/technical-architecture',
+                    },
+                    {
                         name: 'MDX setup',
                         url: '/handbook/engineering/posthog-com/mdx-setup',
                     },
