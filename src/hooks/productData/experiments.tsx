@@ -265,20 +265,20 @@ export const experiments = {
         title: 'How PostHog uses PostHog to run experiments',
         benefits: [
             {
-                title: '',
-                description: '',
+                title: 'Test product ideas',
+                description: 'with small user groups before full rollout',
             },
             {
-                title: '',
-                description: '',
+                title: 'Optimize conversion rates',
+                description: 'across signup flows and checkout processes',
             },
             {
-                title: '',
-                description: '',
+                title: 'Validate feature changes',
+                description: 'using statistical significance',
             },
             {
-                title: '',
-                description: '',
+                title: 'Monitor secondary metrics',
+                description: 'to catch unintended side effects',
             },
         ],
     },
