@@ -12,7 +12,7 @@ export default function SingleProductPricing({ productType }: { productType: str
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
 
     return (
-        <div className="w-full flex-1 max-w-4xl">
+        <div className="w-full flex-1 max-w-4xl pb-4 ">
             <div className="mb-6">
                 <div className="grid grid-cols-8">
                     <div className="col-span-6">
