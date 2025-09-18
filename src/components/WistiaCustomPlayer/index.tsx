@@ -23,6 +23,8 @@ interface WistiaCustomPlayerProps {
     onPopOut?: (currentTime: number) => void
     subtitle?: string
     isPreview?: boolean  // For thumbnail mode
+    startTime?: number  // Start playback at specific time
+    onTimeUpdate?: (time: number) => void  // Callback for time updates
 }
 
 declare global {
@@ -32,7 +34,7 @@ declare global {
     }
 }
 
-export default function WistiaCustomPlayer({
+const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(({
     mediaId,
     aspectRatio = 1.7777777777777777,
     className = '',
@@ -42,7 +44,9 @@ export default function WistiaCustomPlayer({
     onPopOut,
     subtitle,
     isPreview = false,
-}: WistiaCustomPlayerProps) {
+    startTime = 0,
+    onTimeUpdate,
+}, ref) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const playerRef = useRef<any>(null)
     const [isPlaying, setIsPlaying] = useState(autoPlay)
@@ -51,8 +55,11 @@ export default function WistiaCustomPlayer({
     const [volume, setVolume] = useState(muted ? 0 : 1)
     const [isMuted, setIsMuted] = useState(muted)
     const [showCaptions, setShowCaptions] = useState(true)
-    const [captionText] = useState('')
+    const [captionText, setCaptionText] = useState('')
     const [playbackRate, setPlaybackRate] = useState(1)
+    const [captions, setCaptions] = useState<any[]>([])
+    const [isDragging, setIsDragging] = useState(false)
+    const seekBarRef = useRef<HTMLDivElement>(null)
     const [selectedQuality, setSelectedQuality] = useState('Auto')
     const [chapters, setChapters] = useState<Array<{ time: number; title: string }>>([])
     const [showCaptionSearch, setShowCaptionSearch] = useState(false)
@@ -70,6 +77,12 @@ export default function WistiaCustomPlayer({
         const rect = containerRef.current.getBoundingClientRect()
         if (rect.width < 300 || rect.height < 200) {
             console.log('Skipping video initialization - detected thumbnail size', rect.width, rect.height)
+            return
+        }
+
+        // Skip if player already exists
+        if (playerRef.current) {
+            console.log('Player already initialized, skipping')
             return
         }
 
@@ -105,17 +118,287 @@ export default function WistiaCustomPlayer({
                     smallPlayButton: false,
                     bigPlayButton: false,
                     playerColor: '000000',
+                    captionsOn: false,  // Disable native captions
+                    captionsDefault: false,
                 },
                 onReady: (video: any) => {
                     playerRef.current = video
+
+                    // Expose player instance to parent via ref
+                    if (ref && typeof ref !== 'function') {
+                        ref.current = {
+                            pause: () => video.pause(),
+                            play: () => video.play(),
+                            currentTime: video.time()
+                        }
+                    }
+
                     setIsReady(true)
                     setDuration(video.duration())
+
+                    // Handle captions - wait for plugin to be ready
+                    const setupCaptions = () => {
+                        const captionsPlugin = video.plugin?.captions
+
+                        if (!captionsPlugin) {
+                            console.log('Captions plugin not available yet')
+                            return false
+                        }
+
+                        // Disable native captions overlay
+                        captionsPlugin.disable()
+
+                        // Wait for captions to be ready
+                        const checkCaptions = () => {
+                            try {
+                                // Method 1: Get from plugin's captions array
+                                const availableCaptions = captionsPlugin.getAvailableCaptions?.()
+                                console.log('Available captions:', availableCaptions)
+
+                                if (availableCaptions && availableCaptions.length > 0) {
+                                    const firstLang = availableCaptions[0]
+                                    console.log('Using caption language:', firstLang)
+
+                                    // Try to get the caption data
+                                    const captionData = captionsPlugin.captionData?.(firstLang.language || 0)
+                                    if (captionData && captionData.length > 0) {
+                                        console.log('Loaded', captionData.length, 'caption entries')
+                                        setCaptions(captionData)
+                                        return true
+                                    }
+                                }
+
+                                // Method 2: Direct access to captions array
+                                if (captionsPlugin.captions && Array.isArray(captionsPlugin.captions)) {
+                                    console.log('Found captions array:', captionsPlugin.captions.length, 'languages')
+
+                                    if (captionsPlugin.captions.length > 0) {
+                                        const firstCaptions = captionsPlugin.captions[0]
+                                        if (firstCaptions.hash && firstCaptions.hash.length > 0) {
+                                            console.log('Loaded', firstCaptions.hash.length, 'caption entries from hash')
+                                            setCaptions(firstCaptions.hash)
+                                            return true
+                                        }
+                                        // Try lines property
+                                        if (firstCaptions.lines && firstCaptions.lines.length > 0) {
+                                            console.log('Loaded', firstCaptions.lines.length, 'caption entries from lines')
+                                            setCaptions(firstCaptions.lines)
+                                            return true
+                                        }
+                                    }
+                                }
+
+                                // Method 3: Access internal data
+                                const internalCaptions = video._impl?.data?.media?.captions
+                                if (internalCaptions && internalCaptions.length > 0) {
+                                    console.log('Found internal captions:', internalCaptions)
+                                    const firstInternal = internalCaptions[0]
+
+                                    // Check if it has a text field (full transcript)
+                                    if (firstInternal.text && typeof firstInternal.text === 'string') {
+                                        console.log('Found text-only captions, need to fetch VTT')
+                                        // This means we need to fetch the VTT file
+                                        // The text field is just a full transcript
+                                        // We should let the fetch method handle this
+                                        return false
+                                    }
+
+                                    if (firstInternal.hash && Array.isArray(firstInternal.hash)) {
+                                        console.log('Found caption hash with', firstInternal.hash.length, 'entries')
+                                        setCaptions(firstInternal.hash)
+                                        return true
+                                    }
+                                }
+
+                                console.log('Captions not ready yet, will retry...')
+                                return false
+                            } catch (e) {
+                                console.log('Error accessing captions:', e)
+                                return false
+                            }
+                        }
+
+                        // Try immediately
+                        if (!checkCaptions()) {
+                            // Retry multiple times
+                            let retries = 0
+                            const retryInterval = setInterval(() => {
+                                retries++
+                                if (checkCaptions() || retries > 10) {
+                                    clearInterval(retryInterval)
+                                }
+                            }, 500)
+                        }
+
+                        return true
+                    }
+
+                    // Start caption setup
+                    setupCaptions()
+
+                    // Also listen for caption-related events
+                    video.bind('captionsloaded', () => {
+                        console.log('Captions loaded event fired')
+                        setupCaptions()
+                    })
+
+                    video.bind('captionchange', (captionData: any) => {
+                        console.log('Caption change event:', captionData)
+                        if (captionData && captionData.caption) {
+                            setCaptionText(captionData.caption)
+                        }
+                    })
+
+                    // Fallback: Try to fetch captions from Wistia API
+                    const fetchCaptionsFromAPI = async () => {
+                        try {
+                            // Get video data to find caption URLs
+                            const videoData = video.data || video._impl?.data
+                            console.log('Video data for captions:', videoData)
+
+                            // Build the VTT URL from media ID if we have captions
+                            if (videoData?.media?.captions && videoData.media.captions.length > 0) {
+                                const caption = videoData.media.captions[0]
+
+                                // Construct VTT URL - Wistia uses a standard pattern
+                                let vttUrl = null
+
+                                // Try to get URL from caption object
+                                if (caption.url) {
+                                    vttUrl = caption.url
+                                } else if (videoData.media.hashedId || mediaId) {
+                                    // Construct URL from media ID
+                                    const vidId = videoData.media.hashedId || mediaId
+                                    vttUrl = `https://fast.wistia.net/embed/captions/${vidId}.vtt?language=${caption.language || 'eng'}`
+                                }
+
+                                if (vttUrl) {
+                                    console.log('Fetching captions from URL:', vttUrl)
+                                    const response = await fetch(vttUrl)
+
+                                    if (response.ok) {
+                                        const vttText = await response.text()
+                                        console.log('Fetched VTT captions:', vttText.substring(0, 200))
+
+                                        // Parse VTT format
+                                        const parsedCaptions = parseVTT(vttText)
+                                        if (parsedCaptions.length > 0) {
+                                            console.log('Parsed', parsedCaptions.length, 'caption entries from VTT')
+                                            setCaptions(parsedCaptions)
+                                            return
+                                        }
+                                    } else {
+                                        console.log('Failed to fetch VTT, status:', response.status)
+                                    }
+                                }
+                            }
+
+                            // Alternative: Check for captions in other locations
+                            const captionSources = [
+                                videoData?.captions,
+                                video.captions,
+                                video._captions
+                            ].filter(Boolean)
+
+                            for (const source of captionSources) {
+                                if (Array.isArray(source) && source.length > 0) {
+                                    const captionUrl = source[0].url || source[0].vtt_url
+                                    if (captionUrl) {
+                                        console.log('Fetching captions from alternate URL:', captionUrl)
+                                        const response = await fetch(captionUrl)
+                                        if (response.ok) {
+                                            const vttText = await response.text()
+                                            console.log('Fetched VTT captions:', vttText.substring(0, 200))
+
+                                            // Parse VTT format
+                                            const parsedCaptions = parseVTT(vttText)
+                                            if (parsedCaptions.length > 0) {
+                                                console.log('Parsed', parsedCaptions.length, 'caption entries from VTT')
+                                                setCaptions(parsedCaptions)
+                                                return
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (error) {
+                            console.log('Error fetching captions from API:', error)
+                        }
+                    }
+
+                    // Parse VTT format helper
+                    const parseVTT = (vttText: string) => {
+                        const lines = vttText.split('\n')
+                        const captions: any[] = []
+                        let currentCaption: any = {}
+
+                        for (let i = 0; i < lines.length; i++) {
+                            const line = lines[i].trim()
+
+                            // Skip WEBVTT header and empty lines
+                            if (line === 'WEBVTT' || line === '') continue
+
+                            // Check if it's a timestamp line
+                            if (line.includes('-->')) {
+                                const [start, end] = line.split('-->').map(t => {
+                                    const parts = t.trim().split(':')
+                                    if (parts.length === 3) {
+                                        const [h, m, s] = parts
+                                        return parseInt(h) * 3600 + parseInt(m) * 60 + parseFloat(s)
+                                    } else if (parts.length === 2) {
+                                        const [m, s] = parts
+                                        return parseInt(m) * 60 + parseFloat(s)
+                                    }
+                                    return 0
+                                })
+                                currentCaption = { start, end, text: '' }
+                            } else if (currentCaption.start !== undefined) {
+                                // This is caption text
+                                if (currentCaption.text) {
+                                    currentCaption.text += ' '
+                                }
+                                currentCaption.text += line
+
+                                // Check if next line is empty or a new timestamp
+                                if (i + 1 >= lines.length || lines[i + 1].trim() === '' || lines[i + 1].includes('-->')) {
+                                    if (currentCaption.text) {
+                                        captions.push({ ...currentCaption })
+                                    }
+                                    currentCaption = {}
+                                }
+                            }
+                        }
+
+                        return captions
+                    }
+
+                    // Try API fetch after a delay
+                    setTimeout(fetchCaptionsFromAPI, 1000)
+
+                    // Set start time if provided
+                    if (startTime > 0) {
+                        video.time(startTime)
+                    }
 
                     // Bind event listeners
                     video.bind('play', () => setIsPlaying(true))
                     video.bind('pause', () => setIsPlaying(false))
                     video.bind('end', () => setIsPlaying(false))
-                    video.bind('timechange', (t: number) => setCurrentTime(t))
+                    video.bind('timechange', (t: number) => {
+                        setCurrentTime(t)
+
+                        // Update ref with current time
+                        if (ref && typeof ref !== 'function') {
+                            ref.current.currentTime = t
+                        }
+
+                        // Call time update callback if provided
+                        if (onTimeUpdate) {
+                            onTimeUpdate(t)
+                        }
+
+                        // Update caption text will be done when captions state updates
+                    })
                     video.bind('volumechange', (v: number) => {
                         setVolume(v)
                         setIsMuted(v === 0)
@@ -155,7 +438,38 @@ export default function WistiaCustomPlayer({
         return () => {
             if (cleanup) cleanup()
         }
-    }, [mediaId, autoPlay, muted, isPreview])
+    }, [mediaId, autoPlay, muted, isPreview]) // Removed startTime, onTimeUpdate, ref from deps to prevent re-init
+
+    // Update caption text based on current time
+    useEffect(() => {
+        if (captions.length > 0 && showCaptions) {
+            const currentCaption = captions.find((caption: any) => {
+                // Handle different caption formats
+                const start = caption.start || caption.startTime || 0
+                const end = caption.end || caption.endTime || (start + (caption.duration || 0))
+                const inRange = currentTime >= start && currentTime <= end
+
+                // Debug first few captions
+                if (captions.indexOf(caption) < 3) {
+                    console.log(`Caption ${captions.indexOf(caption)}: start=${start}, end=${end}, currentTime=${currentTime}, inRange=${inRange}`)
+                }
+
+                return inRange
+            })
+
+            if (currentCaption) {
+                const text = currentCaption.text || currentCaption.caption || ''
+                console.log('Setting caption text:', text)
+                setCaptionText(text)
+            } else {
+                setCaptionText('')
+            }
+        } else if (!showCaptions) {
+            setCaptionText('')
+        } else if (captions.length === 0 && showCaptions) {
+            console.log('No captions loaded yet, showCaptions is', showCaptions)
+        }
+    }, [currentTime, captions, showCaptions])
 
     const handlePlayPause = useCallback(() => {
         if (playerRef.current && isReady) {
@@ -167,12 +481,48 @@ export default function WistiaCustomPlayer({
         }
     }, [isPlaying, isReady])
 
-    const handleSeek = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const time = parseFloat(e.target.value)
-        if (playerRef.current && isReady) {
-            playerRef.current.time(time)
+    const handleSeekBarClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        if (!seekBarRef.current || !playerRef.current || !isReady) return
+
+        const rect = seekBarRef.current.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const percentage = Math.max(0, Math.min(1, x / rect.width))
+        const time = percentage * duration
+
+        playerRef.current.time(time)
+    }, [duration, isReady])
+
+    const handleSeekStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        setIsDragging(true)
+        handleSeekBarClick(e)
+    }, [handleSeekBarClick])
+
+    const handleSeekMove = useCallback((e: MouseEvent) => {
+        if (!isDragging || !seekBarRef.current || !playerRef.current || !isReady) return
+
+        const rect = seekBarRef.current.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const percentage = Math.max(0, Math.min(1, x / rect.width))
+        const time = percentage * duration
+
+        playerRef.current.time(time)
+    }, [isDragging, duration, isReady])
+
+    const handleSeekEnd = useCallback(() => {
+        setIsDragging(false)
+    }, [])
+
+    // Add mouse event listeners for drag
+    useEffect(() => {
+        if (isDragging) {
+            document.addEventListener('mousemove', handleSeekMove)
+            document.addEventListener('mouseup', handleSeekEnd)
+            return () => {
+                document.removeEventListener('mousemove', handleSeekMove)
+                document.removeEventListener('mouseup', handleSeekEnd)
+            }
         }
-    }, [isReady])
+    }, [isDragging, handleSeekMove, handleSeekEnd])
 
     const handleVolumeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const vol = parseFloat(e.target.value)
@@ -279,19 +629,19 @@ export default function WistiaCustomPlayer({
                     <div ref={containerRef} className="w-full h-full" />
 
                     {/* Custom seek bar overlay at bottom of video */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray/30 cursor-pointer group">
-                        <input
-                            type="range"
-                            min="0"
-                            max={duration}
-                            value={currentTime}
-                            onChange={handleSeek}
-                            className="w-full h-full opacity-0 cursor-pointer"
-                        />
+                    <div
+                        ref={seekBarRef}
+                        className="absolute bottom-0 left-0 right-0 h-2 bg-gray/30 cursor-pointer group"
+                        onMouseDown={handleSeekStart}
+                        onClick={handleSeekBarClick}
+                    >
                         <div
-                            className="absolute top-0 left-0 h-full bg-yellow transition-all pointer-events-none"
+                            className="absolute top-0 left-0 h-full bg-yellow pointer-events-none"
                             style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
-                        />
+                        >
+                            {/* Playhead */}
+                            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-lg pointer-events-none" />
+                        </div>
                     </div>
 
                     {/* Top controls */}
@@ -427,9 +777,17 @@ export default function WistiaCustomPlayer({
                 </div>
 
                 {/* Caption display area */}
-                {showCaptions && !showCaptionSearch && captionText && (
-                    <div className="text-center text-white text-sm mt-2 px-4">
-                        <p className="bg-black/50 inline-block px-3 py-1 rounded">{captionText}</p>
+                {showCaptions && !showCaptionSearch && (
+                    <div className="text-center text-white text-sm mt-2 px-4 min-h-[32px] flex items-center justify-center">
+                        {captionText ? (
+                            <p className="bg-black/70 inline-block px-4 py-1.5 rounded-md max-w-2xl">
+                                {captionText}
+                            </p>
+                        ) : (
+                            <p className="text-white/30 text-xs italic">
+                                {captions.length > 0 ? '' : 'No captions available'}
+                            </p>
+                        )}
                     </div>
                 )}
 
@@ -450,13 +808,12 @@ export default function WistiaCustomPlayer({
                     </div>
                 )}
 
-                {/* Subtitle below player */}
-                {subtitle && (
-                    <div className="text-center text-white/60 text-xs mt-2">
-                        {subtitle}
-                    </div>
-                )}
+                {/* Remove static subtitle - captions will be shown above */}
             </div>
         </div>
     )
-}
+})
+
+WistiaCustomPlayer.displayName = 'WistiaCustomPlayer'
+
+export default WistiaCustomPlayer
