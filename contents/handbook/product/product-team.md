@@ -22,6 +22,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 <TeamMember name="Anna Szell" photo />
 
+- [Analytics Platform](/teams/analytics-platform)
 - [Data Warehouse](/teams/data-warehouse)
 - [Product Analytics](/teams/product-analytics)
 - [Analytics Platform](/teams/analytics-platform)
