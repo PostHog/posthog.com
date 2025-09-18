@@ -34,7 +34,7 @@ You may also want to write some overall thoughts about how the quarter generally
 
 ## HOGS (10 minutes - do beforehand solo)
 
-This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting.
+This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS). 
 
 - Hope
   - What are you most excited about this quarter?
