@@ -777,9 +777,11 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                             )}
 
                             {/* Quality selector */}
+                            {/*                             
                             <OSButton variant="default" size="lg" className="!text-white px-2 py-1 text-xs font-medium">
                                 {selectedQuality}
-                            </OSButton>
+                            </OSButton> 
+                            */}
 
                             {/* Playback speed */}
                             <OSButton
@@ -824,6 +826,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                              */}
 
                             {/* Pop out */}
+                            {/*                             
                             {onPopOut && (
                                 <OSButton
                                     onClick={handlePopOut}
@@ -833,7 +836,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     className="!text-white p-1.5"
                                     tooltip="Pop out to new window"
                                 />
-                            )}
+                            )} 
+                             */}
 
                             {/* Maximize */}
                             {onMaximize && (
