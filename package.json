@@ -29,7 +29,8 @@
         "check-links-post-build": "node scripts/check-links-post-build.js",
         "storybook": "start-storybook -s ./static -p 6006",
         "build-storybook": "build-storybook",
-        "postinstall": "patch-package"
+        "postinstall": "patch-package",
+        "format:docs": "git diff --name-only --diff-filter=AM \"*.mdx\" \"*.md\" | xargs node scripts/fix-mdx.js"
     },
     "dependencies": {
         "@dotlottie/react-player": "^1.6.6",
@@ -94,7 +95,7 @@
         "instantsearch.js": "^4.49.1",
         "jsdom": "^20.0.0",
         "jspdf": "^3.0.1",
-        "kea": "^3.1.6",
+        "kea": "3.1.6",
         "kea-loaders": "^3.1.1",
         "kea-localstorage": "^3.1.0",
         "kea-router": "^3.1.6",

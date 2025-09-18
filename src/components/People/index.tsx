@@ -203,7 +203,7 @@ export const TeamMember = (props: any) => {
                                 <div
                                     className={`bg-${color} w-full flex flex-col justify-center px-2 min-h-[30cqh] relative top-[0%] group-hover:top-full transition-all`}
                                 >
-                                    <div className="relative">
+                                    <div className="relative flex h-full items-center">
                                         {/* Show first team */}
                                         <div className="@container w-full pr-16">
                                             <div
@@ -221,9 +221,7 @@ export const TeamMember = (props: any) => {
                                                         trigger={
                                                             <>
                                                                 {' '}
-                                                                <span className="underline decoration-dotted  decoration-white">
-                                                                    +{teamData.length - 1}
-                                                                </span>
+                                                                <span className="">+{teamData.length - 1}</span>
                                                             </>
                                                         }
                                                     >
@@ -272,9 +270,11 @@ export const TeamMember = (props: any) => {
 
                             <div className="absolute left-0 w-full top-full pt-8 px-4 group-hover:top-[0%] transition-all text-black">
                                 <ReactMarkdown
-                                    disallowedElements={['a']}
                                     className="text-sm bio-preview"
                                     rehypePlugins={[rehypeRaw] as any}
+                                    components={{
+                                        a: ({ children }) => <span>{children}</span>,
+                                    }}
                                 >
                                     {biography || getBioPlaceholder() + ' Ask me if hot dogs are a form of taco!'}
                                 </ReactMarkdown>

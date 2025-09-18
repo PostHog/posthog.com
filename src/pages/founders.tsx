@@ -55,7 +55,7 @@ export const Sidebar = () => {
 
             <p>
                 You might also be interested in our{' '}
-                <Link to="/engineers" className="underline font-medium">
+                <Link to="/product-engineers" className="underline font-medium">
                     Product engineer's hub
                 </Link>
             </p>

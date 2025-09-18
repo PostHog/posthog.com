@@ -47,7 +47,7 @@ export const FeaturedImage = ({ url }: { url: string }) => {
     return (
         <Tooltip
             trigger={
-                <div className="max-h-8 max-w-48">
+                <div data-scheme="secondary" className="bg-primary max-h-8 max-w-48">
                     <CloudinaryImage
                         src={url as `https://res.cloudinary.com/${string}`}
                         imgClassName={`max-h-8 max-w-48 ${!isSmallImageLoaded ? 'hidden' : ''}`}
@@ -57,7 +57,7 @@ export const FeaturedImage = ({ url }: { url: string }) => {
                 </div>
             }
         >
-            <div className="relative min-h-4 min-w-12 max-h-72 max-w-72 transition-all bg-accent">
+            <div className="relative min-h-4 min-w-12 max-h-72 max-w-72 transition-all">
                 {!isLargeImageLoaded && (
                     <div className="flex items-center justify-center">
                         <div className="w-full">
