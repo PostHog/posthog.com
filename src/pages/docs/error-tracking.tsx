@@ -1,7 +1,6 @@
 import React from 'react'
 import { SEO } from 'components/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CallToAction } from 'components/CallToAction'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
@@ -10,8 +9,9 @@ import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
 import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
 import { SingleCodeBlock } from 'components/CodeBlock'
-import { IconRewindPlay, IconTrends, IconToggle, IconUser } from '@posthog/icons'
+import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, IconDatabase } from '@posthog/icons'
 import Card from 'components/Card'
+import Link from 'components/Link'
 
 type ErrorTrackingProps = {
     data: {
@@ -28,7 +28,7 @@ const maxWidth = 'max-w-4xl'
 const phFeatures = [
     {
         title: 'Session replay',
-        description: 'Watch session recordings to help you reproduce an issue',
+        description: 'Watch session recordings of users for more context and to help reproduce issues.',
         icon: <IconRewindPlay className="h-6" />,
         color: 'yellow',
         url: '/docs/session-replay',
@@ -36,28 +36,42 @@ const phFeatures = [
     {
         title: 'Product analytics',
         description:
-            'Combine exception with analytics data to understand how your exceptions impact conversion and revenue',
+            'Graph exception events and create trends to understand how exceptions impact conversion and revenue.',
         icon: <IconTrends className="h-6" />,
         color: 'blue',
         url: '/docs/product-analytics',
     },
     {
         title: 'Feature flags',
-        description: 'Test fixes by rolling out code changes only to affected users',
+        description: 'Revert feature flag roll out to users who are affected by an issue.',
         icon: <IconToggle className="h-6" />,
         color: 'seagreen',
         url: '/docs/feature-flags',
     },
     {
         title: 'User profiles',
-        description:
-            'See all exception events for a users and find which feature flags were enabled at the time an error occurred',
+        description: 'See all exception events for specific users in their event history log.',
         icon: <IconUser className="h-6" />,
-        color: 'purple',
+        color: 'red',
         url: '/docs/product-analytics/identify',
     },
+    {
+        title: 'LLM analytics',
+        description: 'Debug LLM calls and troubleshoot AI generation errors with full conversation traces.',
+        icon: <IconLlmAnalytics className="h-6" />,
+        color: 'purple',
+        url: '/docs/llm-analytics',
+    },
+    {
+        title: 'Data warehouse',
+        description: 'Write SQL to query exception events and product data directly from the data warehouse.',
+        icon: <IconDatabase className="h-6" />,
+        color: 'purple',
+        url: '/docs/data-warehouse',
+    },
 ]
-const asciiPlaceholder = `┌─────────────┐
+const asciiPlaceholder = `
+┌─────────────┐
 │   PostHog   │
 │    SDKs     │
 └──────┬──────┘
@@ -87,7 +101,8 @@ const asciiPlaceholder = `┌─────────────┐
                                                             ┌─────────────┐
                                                             │   Grouped   │
                                                             │   Issues    │
-                                                            └─────────────┘`
+                                                            └─────────────┘
+`
 
 export const Content = () => {
     return (
@@ -96,14 +111,18 @@ export const Content = () => {
                 <h2 className="mb-4 text-xl">Overview</h2>
                 <div>
                     <p>
-                        Error tracking lets you capture exceptions and resolve issues within your app, so you can ship
-                        fast with confidence. It's especiailly useful for engineers who:
+                        Error tracking enables you to capture, monitor, and resolve exceptions within your app, so you
+                        can ship quickly and confidently. Built on our{' '}
+                        <Link to="/customer-data-infrastructure">customer data infrastructure</Link>, PostHog error
+                        tracking connects issues directly to user data and product context for faster, more effective
+                        debugging.
                     </p>
+                    <p>It's particualrly useful for engineers who:</p>
                     <ul>
-                        <li>Need to move fast and ship often</li>
-                        <li>Want fewer tools and more focus on building products</li>
-                        <li>Manage full-stack development teams</li>
-                        <li>Care about the impact of errors on users</li>
+                        <li>Move fast and ship code often</li>
+                        <li>Work on full-stack, product-led engineering teams</li>
+                        <li>Prefer fewer tools within their development workflows</li>
+                        <li>Need to fully understand how errors impact their users and products</li>
                     </ul>
                 </div>
 
@@ -115,7 +134,7 @@ export const Content = () => {
             <section className={`mb-6 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4 text-xl">SDKs and frameworks</h2>
                 <div className="mt-4">
-                    <InstallationPlatforms columns={4} />
+                    <InstallationPlatforms columns={3} />
                 </div>
             </section>
 
@@ -185,7 +204,6 @@ export const Content = () => {
                         },
                     ]}
                     size="sm"
-                    className={maxWidth}
                 />
             </section>
 
@@ -209,15 +227,18 @@ export const Content = () => {
             <section className={`mb-6 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4 text-xl">Pricing</h2>
                 <p>
-                    PostHog's error tracking is built to be cost-effective by default, with a generous free tier and
-                    transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog
-                    for free.
+                    PostHog error tracking is built to be cost-effective by default, with a generous free tier and
+                    transparent usage-based pricing. Our generous free tier means more than 90% of companies{' '}
+                    <em>use PostHog for free</em>.
                 </p>
                 <div className="px-8 rounded-md border-primary border">
                     <Pricing productType="error_tracking" />
                 </div>
 
-                <p>No credit card required to start. You can also set billing limits to avoid surprise charges.</p>
+                <p>
+                    No credit card is required to get started. You can also set billing limits to avoid any surprise
+                    charges.
+                </p>
                 <p>
                     See our <a href="/pricing">pricing page</a> for more up-to-date details.
                 </p>
@@ -271,9 +292,9 @@ const ErrorTracking: React.FC<ErrorTrackingProps> = () => {
 
             <Content />
 
-            <div className="">
+            <div className={`mx-auto ${maxWidth}`}>
                 <AskMax
-                    className={`mx-auto ${maxWidth}`}
+                    className=""
                     quickQuestions={[
                         'How do I see what the most common errors are?',
                         'How do I custom error groups?',
