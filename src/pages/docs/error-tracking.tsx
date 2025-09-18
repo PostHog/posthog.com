@@ -83,11 +83,11 @@ const asciiPlaceholder = `
 │   • Errors           • Exceptions       • Crashes                     │
 │   • Stack traces     • Source maps      • Custom properties           │
 └───────────────────────────────────────────────────────────────────────┘
-                                  │ Events sent
-                                  ▼ 
+                                    │ Events sent
+                                    ▼ 
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   🦔 POSTHOG                                            │
-│                                  DATA WAREHOUSE                                         │
+│                                       🦔 POSTHOG                                        │
+│                                      DATA WAREHOUSE                                     │
 │ ╔═══════════════════╗ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
 │ ║   ERROR TRACKING  ║ │ PRODUCT ANALYTICS │ │ USER PROFILES     │ │ WEB ANALYTICS     │ │
 │ ║ • Manage issues   ║ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
