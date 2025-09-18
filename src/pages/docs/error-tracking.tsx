@@ -129,7 +129,7 @@ export const Content = () => {
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">SDKs and frameworks</h2>
                 <div className="mt-4">
-                    <InstallationPlatforms columns={3} />
+                    <InstallationPlatforms columns={2} />
                 </div>
             </section>
 
@@ -202,7 +202,7 @@ export const Content = () => {
 
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">But 10x better in the PostHog ecosystem</h2>
-                <div className="flex flex-col gap-4 lg:grid lg:grid-cols-3">
+                <div className="flex flex-col gap-4 lg:grid @lg:grid-cols-3">
                     {phFeatures.map((feature, index) => (
                         <Card key={index} url={feature.url} className="bg-accent dark:bg-accent-dark not-prose">
                             <div key="content" className="px-4 py-3">
@@ -228,7 +228,7 @@ export const Content = () => {
                     No credit card is required to get started. You can also set billing limits to avoid any surprise
                     charges.
                 </p>
-                <div className="px-8 rounded-md border-primary border">
+                <div className="px-8 pb-4 rounded-md border-primary border">
                     <Pricing productType="error_tracking" />
                 </div>
 
@@ -240,7 +240,7 @@ export const Content = () => {
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">Next steps</h2>
 
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
                     <ResourceItem
                         type="Getting started"
                         title="Start here"

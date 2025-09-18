@@ -44,7 +44,7 @@ export default function SingleProductPricing({ productType }: { productType: str
                     )}
                 </div>
 
-                <div className="mt-8 p-1 border border-border dark:border-dark rounded-md">
+                <div className="mt-8 p-1 border border-border dark:border-dark rounded-md hidden @md:block">
                     <PricingTiers plans={[{ tiers: costByTier }]} unit={billingData.unit} type={type} showSubtotal />
                 </div>
             </div>
