@@ -345,7 +345,7 @@ function ResponseBody({ item, objects }) {
             <h4>Response</h4>
             <div className="response-wrapper">
                 <button className="mt-2 text-sm text-red font-semibold" onClick={() => setShowResponse(!showResponse)}>
-                    {showResponse ? 'Hide' : 'Show'} response
+                    {showResponse ? 'Hide' : 'Show'} response body
                 </button>
                 <br />
                 {showResponse && (
@@ -684,7 +684,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                     </div>
                                     <div className="lg:sticky top-[108px] space-y-6">
                                         <div>
-                                            <h4>Request</h4>
+                                            <h4>Example request</h4>
                                             <RequestExample
                                                 name={name}
                                                 item={item}
@@ -694,7 +694,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                             />
                                         </div>
                                         <div>
-                                            <h4>Response</h4>
+                                            <h4>Example response</h4>
                                             {Object.keys(item.responses).map((statusCode) => {
                                                 const response = item.responses[statusCode]
                                                 return (
