@@ -13,16 +13,6 @@ import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, Ico
 import Card from 'components/Card'
 import Link from 'components/Link'
 
-type ErrorTrackingProps = {
-    data: {
-        tutorials: {
-            edges: {
-                node: any
-            }[]
-        }
-    }
-}
-
 const maxWidth = 'max-w-4xl'
 
 const phFeatures = [
@@ -100,6 +90,19 @@ const asciiPlaceholder = `
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 `
 
+const errorTrackingFeatures = [
+    { text: 'Capture exceptions', url: '/docs/error-tracking/capture' },
+    { text: 'Autocapture', url: '/docs/error-tracking/capture#automatic-exception-capture' },
+    { text: 'Stack traces', url: '/docs/error-tracking/stack-traces' },
+    { text: 'Custom error grouping', url: '/docs/error-tracking/grouping-issues' },
+    { text: 'Issue management', url: '/docs/error-tracking/managing-issues' },
+    { text: 'Team assignments', url: '/docs/error-tracking/assigning-issues' },
+    { text: 'MCP integration', url: '/docs/error-tracking/debugging-with-mcp' },
+    { text: 'Fix with AI', url: '/docs/error-tracking/fix-with-ai-prompts' },
+    { text: 'Alerts', url: '/docs/error-tracking/alerts' },
+    { text: 'Integrations with Linear and GitHub', url: '/docs/error-tracking/external-tracking' },
+]
+
 export const Content = () => {
     return (
         <>
@@ -142,60 +145,15 @@ export const Content = () => {
                         { name: '', width: '1fr', align: 'left' },
                         { name: <IconLogomark className="h-7" />, width: '120px', align: 'center' },
                     ]}
-                    rows={[
-                        {
-                            cells: [
-                                { content: <a href="/docs/error-tracking/capture">Capture exceptions</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                {
-                                    content: (
-                                        <a href="/docs/error-tracking/capture#automatic-exception-capture">
-                                            Autocapture
-                                        </a>
-                                    ),
-                                },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
-                                { content: <a href="/docs/error-tracking/stack-traces">Stack traces</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                { content: <a href="/docs/error-tracking/grouping-issues">Custom error grouping</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
-                                { content: <a href="/docs/error-tracking/managing-issues">Issue management</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                { content: <a href="/docs/error-tracking/assigning-issues">Team assignments</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
-                                { content: <a href="/docs/error-tracking/debugging-with-mcp">MCP integration</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                { content: <a href="/docs/error-tracking/fix-with-ai-prompts">Fix with AI</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
-                                { content: <a href="/docs/error-tracking/alerts">Alerts</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                                {
-                                    content: (
-                                        <a href="/docs/error-tracking/external-tracking">
-                                            Integrations with Linear and GitHub
-                                        </a>
-                                    ),
-                                },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                    ]}
+                    rows={errorTrackingFeatures.reduce((rows, feature, i) => {
+                        if (i % 2 === 0) rows.push({ cells: [] as any[] })
+                        const row = rows[rows.length - 1]
+                        row.cells.push(
+                            { content: <a href={feature.url}>{feature.text}</a> },
+                            { content: <IconCheck className="h-5 text-green" /> }
+                        )
+                        return rows
+                    }, [] as any[])}
                     size="sm"
                 />
             </section>
