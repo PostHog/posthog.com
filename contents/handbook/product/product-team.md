@@ -45,7 +45,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Batch Exports (light support)](/teams/batch-exports)
 - Embedded Analytics
 - Logs
-  
+- Logs
 **Teams with no PM currently**
 
 - [Customer Analytics](/teams/crm)
