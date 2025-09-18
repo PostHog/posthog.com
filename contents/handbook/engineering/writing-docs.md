@@ -68,5 +68,5 @@ For an example, see the [PostHog AI `README`](https://github.com/PostHog/posthog
 ## Further reading
 
 - [What nobody tells developers about documentation](/newsletter/what-nobody-tells-devs-about-docs)
-- [Docs style guide](/handbook/content-and-docs/docs-style-guide)
-- [PostHog style guide](/handbook/content-and-docs/posthog-style-guide)
+- [Docs style guide](/handbook/content/docs-style-guide)
+- [PostHog style guide](/handbook/content/posthog-style-guide)
