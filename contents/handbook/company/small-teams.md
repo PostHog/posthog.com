@@ -147,7 +147,8 @@ James or Tim will meet every hire we make - it's a standard startup failure for 
 
 - We want people with some time (~6 months at PostHog) to start new teams (rather than completely new people)
   - We'll aim to only move people from teams that are well resourced to reduce disruption to teams
-    - During the exec org tidy up meeting, we will figure out what products we want to build and who we want to build those products, so we can overstaff those teams
+    - During the exec org tidy up meeting, we will figure out what products we want to build and who we want to build those products, so we can overstaff teams who will lose people. We will aim to be transparent about this as we hire into your team.
+    - Because we have small teams and almost infinite things to build, it's likely your team will never truly feel overstaffed, so please give us a little grace here when we pull people (but let us know if it really feels like a bad move).
 
 
 #### Does a Small Team have a budget?
