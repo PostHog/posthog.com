@@ -24,29 +24,32 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 - [Data Warehouse](/teams/data-warehouse)
 - [Product Analytics](/teams/product-analytics)
-- [Web Analytics](web-analytics)
+- [Analytics Platform](/teams/analytics-platform)
+- [Web Analytics](/teams/web-analytics)
 
 <TeamMember name="Annika Schmid" photo />
 
-- [Session Replay](/teams/session-replay)
 - [Feature Flags](/teams/feature-flags)
 - [Experiments](/teams/experiments)
+- [Max AI](/teams/max-ai)
 
 <TeamMember name="Cory Slater" photo />
 
 - [Error Tracking](/teams/error-tracking)
 - [Surveys](/teams/surveys)
+- [Session Replay](/teams/session-replay)
 
 <TeamMember name="Abe Basu" photo />
 
-- [Messaging](/teams/messaging)
-- [CDP](/teams/cdp)
+- [Messaging & CDP](/teams/messaging)
+- [Batch Exports (light support)](/teams/batch-exports)
+- Embedded Analytics
+- Logs
   
 **Teams with no PM currently**
 
-- [CRM](/teams/crm)
+- [Customer Analytics](/teams/crm)
 - [LLM Analytics](/teams/llm-analytics)
-- [Max AI](/teams/max-ai)
 - [Revenue Analytics](/teams/revenue-analytics)
 
 ## Product goals
