@@ -57,7 +57,7 @@ const phFeatures = [
     },
     {
         title: 'LLM analytics',
-        description: 'Debug LLM calls and troubleshoot AI generation errors with full conversation traces.',
+        description: 'Debug LLM calls and AI generations with full conversation traces and built-in error tracking.',
         icon: <IconLlmAnalytics className="h-6" />,
         color: 'purple',
         url: '/docs/llm-analytics',
@@ -70,59 +70,54 @@ const phFeatures = [
         url: '/docs/data-warehouse',
     },
 ]
+
 const asciiPlaceholder = `
-┌─────────────┐
-│   PostHog   │
-│    SDKs     │
-└──────┬──────┘
-       │
-       │ Capture          posthog.captureException(error, {
-       ▼                      user_id: "user123",
-┌─────────────┐               ...
-│  Exception  │           })
-│   Events    │
-└──────┬──────┘
-       │
-       │ Store
-       ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           Data Warehouse                                │
-└───┬───────────┬───────────┬───────────┬───────────┬────────────┬───────┘
-    │           │           │           │           │            │
-    ▼           ▼           ▼           ▼           ▼            ▼
-┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────────┐
-│ Session │ │ Product │ │ Feature │ │  User   │ │   ...   │ │   PostHog   │
-│ Replay  │ │Analytics│ │  Flags  │ │Profiles │ │         │ │   Error     │
-└─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘ │  Tracking   │
-                                                            └──────┬──────┘
-                                                                   │
-                                                                   │ Fingerprint
-                                                                   ▼
-                                                            ┌─────────────┐
-                                                            │   Grouped   │
-                                                            │   Issues    │
-                                                            └─────────────┘
+┌───────────────────┐    ┌───────────────────┐    ┌───────────────────┐
+│     Frontend      │    │     Backend       │    │      Mobile       │
+│   [PostHog SDK]   │    │   [PostHog SDK]   │    │   [PostHog SDK]   │
+└───────────────────┘    └───────────────────┘    └───────────────────┘
+          │                      │                        │
+          ▼                      ▼                        ▼
+┌───────────────────────────────────────────────────────────────────────┐
+│                   AUTOCAPTURE OR MANUAL CAPTURE                       │
+│   • Errors           • Exceptions       • Crashes                     │
+│   • Stack traces     • Source maps      • Custom properties           │
+└───────────────────────────────────────────────────────────────────────┘
+                                  │ Events sent
+                                  ▼ 
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   🦔 POSTHOG                                            │
+│                                  DATA WAREHOUSE                                         │
+│ ╔═══════════════════╗ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
+│ ║   ERROR TRACKING  ║ │ PRODUCT ANALYTICS │ │ USER PROFILES     │ │ WEB ANALYTICS     │ │
+│ ║ • Manage issues   ║ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
+│ ║ • Stack traces    ║ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
+│ ║ • Group errors    ║ │ SESSION REPLAY    │ │ FEATURE FLAGS     │ │ EXPERIMENTS       │ │
+│ ║ • Assign owners   ║ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
+│ ║ • Set status      ║ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
+│ ║ • Fix with AI     ║ │ SQL ACCESS        │ │ LLM ANALYTICS     │ │ More...           │ │
+│ ╚═══════════════════╝ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
 `
 
 export const Content = () => {
     return (
         <>
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">Overview</h2>
+            <section className={`mb-8 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
                         Error tracking enables you to capture, monitor, and resolve exceptions within your app, so you
                         can ship quickly and confidently. Built on our{' '}
                         <Link to="/customer-data-infrastructure">customer data infrastructure</Link>, PostHog error
-                        tracking connects issues directly to user data and product context for faster, more effective
-                        debugging.
+                        tracking connects issues to user data and product context for faster, more effective debugging.
                     </p>
                     <p>It's particualrly useful for engineers who:</p>
                     <ul>
                         <li>Move fast and ship code often</li>
                         <li>Work on full-stack, product-led engineering teams</li>
                         <li>Prefer fewer tools within their development workflows</li>
-                        <li>Need to fully understand how errors impact their users and products</li>
+                        <li>Need to fully understand how errors impact their users and product flows</li>
                     </ul>
                 </div>
 
@@ -131,15 +126,15 @@ export const Content = () => {
                 </div>
             </section>
 
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">SDKs and frameworks</h2>
+            <section className={`mb-8 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4">SDKs and frameworks</h2>
                 <div className="mt-4">
                     <InstallationPlatforms columns={3} />
                 </div>
             </section>
 
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">All the features you'd expect</h2>
+            <section className={`mb-8 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4">All the features you'd expect</h2>
                 <OSTable
                     columns={[
                         { name: '', width: '1fr', align: 'left' },
@@ -166,31 +161,29 @@ export const Content = () => {
                             cells: [
                                 { content: <a href="/docs/error-tracking/stack-traces">Stack traces</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                { content: <a href="/docs/error-tracking/managing-issues">Issue management</a> },
-                                { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
                                 { content: <a href="/docs/error-tracking/grouping-issues">Custom error grouping</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
+                                { content: <a href="/docs/error-tracking/managing-issues">Issue management</a> },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                                { content: <a href="/docs/error-tracking/assigning-issues">Team assignments</a> },
+                                { content: <IconCheck className="h-5 text-green" /> },
+                            ],
+                        },
+                        {
+                            cells: [
                                 { content: <a href="/docs/error-tracking/debugging-with-mcp">MCP integration</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                            ],
-                        },
-                        {
-                            cells: [
                                 { content: <a href="/docs/error-tracking/fix-with-ai-prompts">Fix with AI</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
-                                {
-                                    content: <a href="/docs/error-tracking/alerts">Alerts</a>,
-                                },
-                                { content: <IconCheck className="h-5 text-green" /> },
                             ],
                         },
                         {
                             cells: [
-                                { content: <a href="/docs/error-tracking/assigning-issues">Team assignments</a> },
+                                { content: <a href="/docs/error-tracking/alerts">Alerts</a> },
                                 { content: <IconCheck className="h-5 text-green" /> },
                                 {
                                     content: (
@@ -207,8 +200,8 @@ export const Content = () => {
                 />
             </section>
 
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">And 10x better with other PostHog products</h2>
+            <section className={`mb-8 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4">But 10x better in the PostHog ecosystem</h2>
                 <div className="flex flex-col gap-4 lg:grid lg:grid-cols-3">
                     {phFeatures.map((feature, index) => (
                         <Card key={index} url={feature.url} className="bg-accent dark:bg-accent-dark not-prose">
@@ -224,46 +217,46 @@ export const Content = () => {
                 </div>
             </section>
 
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4 text-xl">Pricing</h2>
+            <section className={`mb-8 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4">Pricing</h2>
                 <p>
                     PostHog error tracking is built to be cost-effective by default, with a generous free tier and
                     transparent usage-based pricing. Our generous free tier means more than 90% of companies{' '}
                     <em>use PostHog for free</em>.
+                </p>
+                <p>
+                    No credit card is required to get started. You can also set billing limits to avoid any surprise
+                    charges.
                 </p>
                 <div className="px-8 rounded-md border-primary border">
                     <Pricing productType="error_tracking" />
                 </div>
 
                 <p>
-                    No credit card is required to get started. You can also set billing limits to avoid any surprise
-                    charges.
-                </p>
-                <p>
-                    See our <a href="/pricing">pricing page</a> for more up-to-date details.
+                    See our <a href="/pricing">pricing page</a> for more details.
                 </p>
             </section>
 
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <h2 className="m-0 text-xl">Next steps</h2>
+            <section className={`mb-8 mx-auto ${maxWidth}`}>
+                <h2 className="mb-4">Next steps</h2>
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Getting started"
-                        title="Get started with error tracking"
-                        description="A high-level guide that outlines the integration journey."
+                        title="Start here"
+                        description="A high-level overview of the integration process for error tracking"
                         url="/docs/error-tracking/start-here"
                     />
                     <ResourceItem
                         type="Quickstart"
-                        title="Install Next.js error tracking"
-                        description="Set up error tracking in Next.js"
+                        title="Set up Next.js error tracking"
+                        description="Install and configure error tracking in your Next.js app"
                         url="/docs/error-tracking/installation/nextjs"
                     />
                     <ResourceItem
                         type="Concepts"
                         title="Issues and exceptions"
-                        description="Learn how issues and exceptions fit into the workflow"
+                        description="Learn how to manage and track issues and exceptions"
                         url="/docs/error-tracking/issues-and-exceptions"
                     />
                 </ul>
