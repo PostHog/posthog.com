@@ -52,7 +52,7 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
-> **Note:** This feature requires `person_profiles: 'always'` to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
+> **Note:** This feature requires `person_profiles: 'always'` and calling `posthog.identify` on from the Web SDK to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
 
 In our experience, the tradeoffs to enabling this are **not** worthwhile for the majority of our users. They include:
 
