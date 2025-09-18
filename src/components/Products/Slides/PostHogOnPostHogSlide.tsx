@@ -140,7 +140,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                 </div>
 
                 {/* Main content area */}
-                <div className="flex-grow flex gap-8 px-8 pb-8">
+                <div className="flex-grow flex flex-col @2xl:flex-row gap-8 px-8 pb-8">
                     {/* Static thumbnail on the left */}
                     <div className="flex-1 flex flex-col">
                         <div className="relative bg-gray-dark rounded-lg overflow-hidden">
@@ -165,7 +165,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
         <div className="h-full relative" id={`posthog-slide-${productData.videos?.overview?.wistia}`}>
             {/* Regular content */}
             <div className="h-full bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
-                <div className="mb-4 pt-8 px-8">
+                <div className="mb-8 pt-8 px-8">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 239 72" className="h-16 mx-auto">
                         <path
                             fill="#fff"
@@ -177,7 +177,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                 </div>
 
                 {/* Main content area */}
-                <div className="flex-grow flex gap-8 px-8 pb-8">
+                <div className="flex-grow flex flex-col @2xl:flex-row gap-8 px-8 pb-8">
                     {/* Video player on the left */}
                     <div className={`flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
@@ -202,11 +202,13 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                     </div>
 
                     {/* Benefits list on the right */}
-                    <div className="w-80">
-                        <h2 className="text-xl font-medium mb-6">{productData.postHogOnPostHog?.title}</h2>
+                    <div className="@2xl:w-80">
+                        <h2 className="text-4xl @2xl:text-xl font-medium mb-6">
+                            {productData.postHogOnPostHog?.title}
+                        </h2>
                         <ul className="space-y-4">
                             {productData.postHogOnPostHog?.benefits?.map((benefit) => (
-                                <li key={benefit.title} className="flex items-start">
+                                <li key={benefit.title} className="flex items-start text-3xl @2xl:text-lg">
                                     <span className="text-yellow mr-3 mt-1">•</span>
                                     <div>
                                         <strong className="font-medium">{benefit.title}</strong>
