@@ -36,8 +36,8 @@ const LLMInstallationPlatforms = () => {
         },
         {
             label: 'LiteLLM',
-            url: '', // TODO: Add LiteLLM link
-            image: '/static/images/litellm-logo.png',
+            url: '/docs/llm-analytics/installation/litellm',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/litellm_3b2c4291f9.png',
         },
     ]
 
