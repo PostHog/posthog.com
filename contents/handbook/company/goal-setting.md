@@ -44,6 +44,7 @@ This should be done BEFORE the meeting by everyone, independently. During the me
   - What’s stopping you from shipping 2x what you’re shipping now?
 - Growth
   - What single thing would move the needle the most this quarter?
+    - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
   - What are users asking for? Which of these are we ignoring?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
