@@ -39,7 +39,7 @@ const phFeatures = [
         url: '/docs/feature-flags',
     },
     {
-        title: 'User profiles',
+        title: 'Person profiles',
         description: 'See all exception events for specific users in their event history log.',
         icon: <IconUser className="h-6" />,
         color: 'red',
@@ -70,7 +70,7 @@ const asciiPlaceholder = `
           ▼                      ▼                        ▼
 ┌───────────────────────────────────────────────────────────────────────┐
 │                   AUTOCAPTURE OR MANUAL CAPTURE                       │
-│   • Errors           • Exceptions       • Crashes                     │
+│   • Errors           • Exceptions       • Events                      │
 │   • Stack traces     • Source maps      • Custom properties           │
 └───────────────────────────────────────────────────────────────────────┘
                                     │ Events sent
@@ -79,7 +79,7 @@ const asciiPlaceholder = `
 │                                       🦔 POSTHOG                                        │
 │                                      DATA WAREHOUSE                                     │
 │ ╔═══════════════════╗ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
-│ ║   ERROR TRACKING  ║ │ PRODUCT ANALYTICS │ │ USER PROFILES     │ │ WEB ANALYTICS     │ │
+│ ║   ERROR TRACKING  ║ │ PRODUCT ANALYTICS │ │ PERSON PROFILES   │ │ WEB ANALYTICS     │ │
 │ ║ • Manage issues   ║ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
 │ ║ • Stack traces    ║ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
 │ ║ • Group errors    ║ │ SESSION REPLAY    │ │ FEATURE FLAGS     │ │ EXPERIMENTS       │ │

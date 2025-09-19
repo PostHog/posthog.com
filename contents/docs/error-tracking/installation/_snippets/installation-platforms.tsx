@@ -6,6 +6,12 @@ interface InstallationPlatformsProps {
 }
 
 const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
+    const columnClassMap = {
+        2: '@md:grid-cols-2',
+        3: '@md:grid-cols-3',
+        4: '@md:grid-cols-4',
+    }
+
     const platforms = [
         {
             label: 'Web',
@@ -59,6 +65,6 @@ const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
         },
     ]
 
-    return <List className={`grid gap-4 grid-cols-2 @md:grid-cols-${columns} not-prose`} items={platforms} />
+    return <List className={`grid gap-4 grid-cols-2 ${columnClassMap[columns]} not-prose`} items={platforms} />
 }
 export default InstallationPlatforms
