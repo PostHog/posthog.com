@@ -75,6 +75,67 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         components: JSON.stringify(spec.components),
     })
 
+    // PostHog SDK references
+
+    // We need to specify paths since some repos have multiple folders with references
+    const SDK_REFERENCES_FOLDER_PATHS = [
+        {
+            id: 'posthog-python',
+            repo: 'PostHog/posthog-python',
+            repo_branch: 'persist-references',
+            folder_path: 'references',
+        },
+    ]
+
+    const referencesData = {}
+    function parseReferencesVersion(version: string): string {
+        return version.split('-').pop()?.replace('.json', '') || ''
+    }
+
+    SDK_REFERENCES_FOLDER_PATHS.forEach(async (folderPath) => {
+        const response = await fetch(
+            `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}?ref=${folderPath.repo_branch}`
+        )
+        const data = await response.json()
+
+        data.forEach(async (item) => {
+            if (item.type === 'file') {
+                const response = await fetch(
+                    `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}/${item.name}?ref=${folderPath.repo_branch}`
+                )
+                const fileData = await response.json()
+                const version = parseReferencesVersion(item.name)
+                if (version) {
+                    referencesData[folderPath.id][version] = fileData.content
+                }
+            }
+        })
+    })
+
+    for (const id in referencesData) {
+        const node = {
+            id: createNodeId(`${id}`),
+            internal: {
+                type: `SdkReferences`,
+                contentDigest: createContentDigest(referencesData[id]),
+            },
+            ...referencesData[id],
+        }
+        createNode(node)
+
+        for (const version in referencesData[id]) {
+            const node = {
+                id: createNodeId(`${id}-${version}`),
+                internal: {
+                    type: `SdkReferences`,
+                    contentDigest: createContentDigest(referencesData[id][version]),
+                },
+                ...referencesData[id][version],
+            }
+            createNode(node)
+        }
+    }
+
     const postHogIssues = await fetch(
         'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
     ).then((res) => res.json())
