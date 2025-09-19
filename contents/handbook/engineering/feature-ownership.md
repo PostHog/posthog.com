@@ -77,7 +77,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Pipeline destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
 | Pipeline sources | [Team Data Warehouse][Team Data Warehouse] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
-| Project home page | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/home</span> |
+| Project home page | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property filters | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
 | Query performance | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
