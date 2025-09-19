@@ -1,10 +1,8 @@
-import { usePosts } from 'components/Edition/hooks/usePosts'
-import { getParams, Sidebar } from 'components/Edition/Posts'
+import { getParams } from 'components/Edition/Posts'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { getSortOption } from './BlogPost'
@@ -15,6 +13,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
 import { graphql, useStaticQuery } from 'gatsby'
+import { usePaginatedPosts } from 'components/Edition/hooks/usePaginatedPosts'
+import { IconSpinner } from '@posthog/icons'
 
 dayjs.extend(relativeTime)
 
@@ -81,6 +81,7 @@ export default function Posts({ pageContext }) {
             }
         }
     `)
+    const articleRef = useRef<HTMLDivElement>(null)
     const [authors, setAuthors] = useState<any[]>([])
     const [selectedTag, setSelectedTag] = useState(pageContext.selectedTag)
     const [root, setRoot] = useState(pageContext.root || null)
@@ -112,7 +113,20 @@ export default function Posts({ pageContext }) {
         []
     )
 
-    const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
+    const scrollToTop = () => {
+        const viewport = articleRef.current?.closest('[data-radix-scroll-area-viewport]')
+        viewport?.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
+    }
+
+    const handlePageChange = () => {
+        scrollToTop()
+    }
+
+    const { posts, isValidating, totalPages, currentPage, nextPage, prevPage, hasNextPage, hasPrevPage, goToPage } =
+        usePaginatedPosts({ params, onPageChange: handlePageChange })
 
     const handleFilterChange = (filters) => {
         if (filters.post_tags) {
@@ -160,12 +174,14 @@ export default function Posts({ pageContext }) {
 
     useEffect(() => {
         setParams(getParams(root, selectedTag, getSortOption(root).sort, selectedAuthor))
+        scrollToTop()
     }, [selectedTag, root, selectedAuthor])
 
     return (
         <>
             <SEO title="Posts - PostHog" />
             <Editor
+                articleRef={articleRef}
                 title="posts"
                 type="psheet"
                 maxWidth="100%"
@@ -233,8 +249,15 @@ export default function Posts({ pageContext }) {
             >
                 {posts.length > 0 && (
                     <OSTable
-                        fetchMore={hasMore ? fetchMore : undefined}
-                        loading={isValidating}
+                        pagination={{
+                            totalPages,
+                            currentPage,
+                            nextPage,
+                            prevPage,
+                            hasNextPage,
+                            hasPrevPage,
+                            goToPage,
+                        }}
                         rowAlignment="top"
                         columns={[
                             {
@@ -318,6 +341,11 @@ export default function Posts({ pageContext }) {
                             }
                         })}
                     />
+                )}
+                {isValidating && !posts.length && (
+                    <div className="flex items-center justify-center">
+                        <IconSpinner className="size-7 opacity-60 animate-spin" />
+                    </div>
                 )}
             </Editor>
         </>
