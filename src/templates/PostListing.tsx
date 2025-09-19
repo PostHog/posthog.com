@@ -205,22 +205,26 @@ export default function Posts({ pageContext }) {
                         ],
                         operator: 'eq',
                     },
-                    {
-                        label: 'tags',
-                        value: 'post_tags',
-                        initialValue: selectedTag,
-                        options: [
-                            {
-                                label: 'All',
-                                value: null,
-                            },
-                            ...tags.map((tag) => ({
-                                label: tag.attributes.label,
-                                value: tag.attributes.label,
-                            })),
-                        ],
-                        operator: 'includes',
-                    },
+                    ...(tags?.length > 0
+                        ? [
+                              {
+                                  label: 'tags',
+                                  value: 'post_tags',
+                                  initialValue: selectedTag,
+                                  options: [
+                                      {
+                                          label: 'All',
+                                          value: null,
+                                      },
+                                      ...tags.map((tag) => ({
+                                          label: tag.attributes.label,
+                                          value: tag.attributes.label,
+                                      })),
+                                  ],
+                                  operator: 'includes',
+                              },
+                          ]
+                        : []),
                     ...(authors.length > 0
                         ? [
                               {
