@@ -33,7 +33,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 ### Day 1
 
 - Meet with [Ben](/community/profiles/32367) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools.md)
+- Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
@@ -99,7 +99,7 @@ By the end of month 3:
 ### Day 1
 
 - Meet with [Landon](/community/profiles/33186) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools.md)
+- Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales standup.
   - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
