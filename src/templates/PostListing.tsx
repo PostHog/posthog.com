@@ -4,7 +4,7 @@ import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { getSortOption } from './BlogPost'
@@ -14,31 +14,9 @@ import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
+import { graphql, useStaticQuery } from 'gatsby'
 
 dayjs.extend(relativeTime)
-
-const categories = [
-    {
-        label: 'Tutorials',
-        root: 'tutorials',
-    },
-    {
-        label: 'Blog',
-        root: 'blog',
-    },
-    {
-        label: 'Founders',
-        root: 'founders',
-    },
-    {
-        label: 'Product engineers',
-        root: 'product-engineers',
-    },
-    {
-        label: 'Newsletter',
-        root: 'newsletter',
-    },
-]
 
 export const FeaturedImage = ({ url }: { url: string }) => {
     const [isSmallImageLoaded, setIsSmallImageLoaded] = useState(false)
@@ -77,20 +55,73 @@ export const FeaturedImage = ({ url }: { url: string }) => {
 }
 
 export default function Posts({ pageContext }) {
-    const [tags, setTags] = useState([])
-    const [authors, setAuthors] = useState([])
+    const { allPostCategory } = useStaticQuery(graphql`
+        {
+            allPostCategory(
+                filter: {
+                    attributes: {
+                        folder: { nin: [null, "customers", "spotlight", "changelog", "comparisons", "notes", "repost"] }
+                    }
+                }
+            ) {
+                nodes {
+                    attributes {
+                        label
+                        folder
+                        post_tags {
+                            data {
+                                attributes {
+                                    label
+                                    folder
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+    const [authors, setAuthors] = useState<any[]>([])
     const [selectedTag, setSelectedTag] = useState(pageContext.selectedTag)
-    const [root, setRoot] = useState(pageContext.root)
+    const [root, setRoot] = useState(pageContext.root || null)
     const [selectedAuthor, setSelectedAuthor] = useState()
     const [params, setParams] = useState(
         getParams(pageContext.root, pageContext.selectedTag, getSortOption(pageContext.root).sort, selectedAuthor)
+    )
+    const allTags = useMemo(
+        () =>
+            allPostCategory.nodes
+                .flatMap((category) => category.attributes.post_tags.data)
+                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label))
+                .filter(
+                    (tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label)
+                ),
+        []
+    )
+    const selectedCategory = useMemo(
+        () => allPostCategory.nodes.find((category) => category.attributes.folder === root),
+        [root]
+    )
+    const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+    const allCategories = useMemo(
+        () =>
+            allPostCategory.nodes.filter(
+                (category, index, self) =>
+                    index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
+            ),
+        []
     )
 
     const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
     const handleFilterChange = (filters) => {
         if (filters.post_tags) {
-            setSelectedTag(filters.post_tags.value)
+            const currentRoot = filters.root?.value || root
+            const exists = allCategories
+                .find((category) => category.attributes.folder === currentRoot)
+                ?.attributes.post_tags.data.some((tag) => tag.attributes.label === filters.post_tags.value)
+            const selectedTag = root === null || exists ? filters.post_tags.value : null
+            setSelectedTag(selectedTag)
         }
         if (filters.root) {
             setRoot(filters.root.value)
@@ -99,27 +130,6 @@ export default function Posts({ pageContext }) {
             setSelectedAuthor(filters.authors.value)
         }
     }
-
-    useEffect(() => {
-        const query = qs.stringify({
-            pagination: {
-                page: 1,
-                pageSize: 100,
-            },
-            filters: {
-                post_category: {
-                    folder: {
-                        $eq: pageContext.root,
-                    },
-                },
-            },
-        })
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-tags?${query}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setTags(data?.data)
-            })
-    }, [root])
 
     useEffect(() => {
         const query = qs.stringify(
@@ -167,10 +177,16 @@ export default function Posts({ pageContext }) {
                         label: 'category',
                         value: 'root',
                         initialValue: root,
-                        options: categories.map((category) => ({
-                            label: category.label,
-                            value: category.root,
-                        })),
+                        options: [
+                            {
+                                label: 'All',
+                                value: null,
+                            },
+                            ...allCategories.map((category) => ({
+                                label: category.attributes.label,
+                                value: category.attributes.folder,
+                            })),
+                        ],
                         operator: 'eq',
                     },
                     {

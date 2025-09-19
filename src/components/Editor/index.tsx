@@ -579,9 +579,11 @@ export function Editor({
                                                 disabled={disableFilterChange}
                                                 placeholder={filter.label}
                                                 defaultValue={
-                                                    filters[filter.value ?? filter.label]?.value ??
-                                                    filter.initialValue ??
-                                                    filter.options[0].value
+                                                    filter.initialValue === null
+                                                        ? null
+                                                        : filter.initialValue ??
+                                                          filters[filter.value ?? filter.label]?.value ??
+                                                          filter.options[0].value
                                                 }
                                                 groups={[
                                                     {
