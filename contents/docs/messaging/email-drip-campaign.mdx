@@ -3,30 +3,57 @@ title: "Set up an email drip campaign"
 showStepsToc: true
 ---
 
-In this tutorial we’ll walk through creating a simple **drip campaign**:  
+In this guide we’ll walk through creating a simple **drip campaign**:  
 send a welcome email when a user signs up, then follow up 1 day later if they don't have a property set.
 
 <Steps>
 
 <Step title="Create a campaign" badge="required">
 
-Go to **Messaging → New campaign**.  
+Go to **Messaging** and click the ** `+ New campaign` button**.  
+
+![click-button](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/messaging_empty_state_7a76cee4f6.png)
+
 You’ll see a trigger block connected to an exit.
+
+![fresh](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/fresh_campaign_aeecc715f2.png)
+
+You can see that the trigger is not set because it has a little exclamation mark.
 
 </Step>
 
-<Step title="Add a trigger" badge="required">
+<Step title="Set the trigger" badge="required">
 
-Click on the trigger and configure it for your signup event (`user signed up`).  It should look something like:
+Click on the trigger, there will be a warning that an event is required.
+
+![trigger-unset](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_unset_ea39720d30.png)
+
+Click the `add trigger event` button
+
+![select](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/select_trigger_event_b6c080df9d.png)
+
+Then search for your signup event (`user signed up`) and click it. It should look something like:
 
 ![Trigger](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_event_74ae2e44d9.png)
+
+Don't worry about the conversion goal or exit conditions for now, and exit this step by clicking on the back arrow in the sidepanel - this is how you will exit any step after configuring it.
+
+![small-back](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/back_arrow_8b6b01f77b.png)
 
 </Step>
 
 <Step title="Send the first email" badge="required">
 
-Drag an **Email** action beneath the trigger.  
-Select your welcome email template or create a new one.
+Drag an **Email** action beneath the trigger, into the campaign like this:
+![drag](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/drag_email_07b4d22856.png)
+
+The unconfigured email step will look like this:
+(https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unconfigured_email_b091c33ab4.png)
+
+You will need to set the subject line, and the sender:
+![subj]()
+
+And also select your welcome email template or create a new one, and then click out.
 
 ![Email](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/onboarding_email_acb053e59d.png)
 
@@ -35,7 +62,7 @@ Select your welcome email template or create a new one.
 
 <Step title="Wait until condition branch" badge="required">
 
-After the delay, add a **Wait until Condition branch**.  
+After the email, add a **Wait until Condition branch**.  
 
 By default there will be 1 branch, so add one more by clicking on then the `add filter` button.
 
