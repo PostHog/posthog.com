@@ -1433,6 +1433,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Tools',
+                        url: '/handbook/growth/sales/sales-and-cs-tools',
+                    },
+                    {
                         name: 'Managing our CRM',
                         url: '/handbook/growth/sales/crm',
                     },
