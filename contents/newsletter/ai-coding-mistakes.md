@@ -1,5 +1,5 @@
 ---
-title: 7 mistakes to avoid when coding with AI
+title: Avoid these AI coding mistakes
 date: 2025-09-16
 author:
  - ian-vanagas
