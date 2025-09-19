@@ -4,7 +4,7 @@ showStepsToc: true
 ---
 
 In this guide we’ll walk through creating a simple **drip campaign**:  
-send a welcome email when a user signs up, then follow up 1 day later if they don't have a property set.
+send a welcome email when a user signs up, then follow up 1 day later if they haven't completed onboarding.
 
 <Steps>
 
@@ -48,10 +48,10 @@ Drag an **Email** action beneath the trigger, into the campaign like this:
 ![drag](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/drag_email_07b4d22856.png)
 
 The unconfigured email step will look like this:
-(https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unconfigured_email_b091c33ab4.png)
+![unconf](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unconfigured_email_b091c33ab4.png)
 
 You will need to set the subject line, and the sender:
-![subj]()
+![subj](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_subject_sender_1904934c7e.png)
 
 And also select your welcome email template or create a new one, and then click out.
 
@@ -62,15 +62,29 @@ And also select your welcome email template or create a new one, and then click 
 
 <Step title="Wait until condition branch" badge="required">
 
-After the email, add a **Wait until Condition branch**.  
+This is where things get interesting. We will want to send a follow up email **only** to those users who have `not completed onboarding`. We can achieve this with a `wait until condition` step.
 
-By default there will be 1 branch, so add one more by clicking on then the `add filter` button.
+After the email, add a **Wait until Condition**.  
 
-For the `add filter` branch set the condition so that "`onboarding_completed = true`"
+![wu-first](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wu_first_00937c435b.png)
+
+By default there will be 1 branch that is configured, the wait time. In the campaign builder the wait time corresponds to the `no match` branch:
+
+![one-branch-conf](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/one_branch_conf_a2814aaaf0.png)
+
+So we need to configure the `if condition matches` branch, by clicking on the `add filter` button, and setting it. 
+
+Specifically we need to set a `person property` here (not an event property) so search for the person property related to onboarding like this:
+
+![search_prop](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/search_prop_584e043a77.png)
+
+Then set the condition so that `onboarding_completed = true`
+
+![set_prop](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_prop_1dd69a088b.png)
 
 For the wait time make it 1 day.
 
-This means if after 1 day the onbaording_completed person property is not set to true, then go down `no match` the branch, otherwise the condition matches, and we proceed down the `if condition matches` branch
+This means if after 1 day the onbaording_completed person property is not set to true, then go down the `no match` branch, otherwise the condition matches, and we proceed down the `if condition matches` branch
 
 ![Wait](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wait_until_cond_50ec1f7eea.png)
 
@@ -82,18 +96,18 @@ We now drag one more email to the `no match` branch of the `wait until condition
 
 This means:
 
-- **Yes branch:** Exit (they’ve already activated).
-- **No branch:** Add another Email step with a follow-up.
+- Exit the campaign if their person property `first_onboarding_complete` is set to `true` (they’ve already activated).
+- Receive another Email step with a follow-up, if they have not completed onboarding!
 
 </Step>
 
 <Step title="Review and launch" badge="required">
 
-Now the campaign should look like this ![this](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
+Now the complete campaign should look like this ![this](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
 
 Click **Create**, and voila the campaign is published.
 
-Your new users will now automatically receive the drip sequence!
+Your new users will now automatically receive the drip campaign!
 
 </Step>
 
