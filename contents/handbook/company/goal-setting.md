@@ -22,39 +22,52 @@ In terms of accountability, Scott will notify all the small teams and make sure 
 Teams should fill in the previous quarter and HOGS sections async in the doc before the meeting starts. The meeting itself should be 20% reviewing the past, and 80% talking about goals for next quarter. Don't fall into the trap of spending most of your time reviewing and then rushing the goals right at the end. 
 
 ```md
+
+Before meeting:
+- Read the quarterly planning section of the handbook
+- In a separate doc, each person should write-up HOGS
+- Feel free to propose possible goals as well
+
+During the meeting:
+- Discuss Q1 retrospective
+- HOGS discussion
+- Brainstorm goals for Q2
+- Draft goals and what we will ship
+
+After the meeting
+- PR for goals + review by team
+- Deal with any to-dos from HOGS
+
 ## Last quarter objectives reflection (5 mins - do as a team)
+[paste in q# objectives from the team page]
 
-[Paste in previous quarter objectives from the team page]
+For each objective, collectively write up a reflection. If you didn’t complete the goal, be specific as to why.
 
-For each objective, write up a reflection - usually the person who was the lead on the objective should do this, but some might be shared.
-
-What else did we get done? List items from the changelog or PRs merged if they were significant items that deviated from the original goals (changing goals mid-quarter is okay!)
-
-You may also want to write some overall thoughts about how the quarter generally went.
+What else did we get done? List items from the changelog or PRs merged.
 
 ## HOGS (10 minutes - do beforehand solo)
-
-This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting.
+This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting reading through everyone’s HOGS during the meeting.
 
 - Hope
   - What are you most excited about this quarter?
   - What exploration do you want to do?
-- Obstruction
+- Obstructions
   - Is there anything embarrassing about your product?
   - What’s stopping you from shipping 2x what you’re shipping now?
+    - If it’s more people, please expand on how many and exactly what type of hire you’d be looking for.
 - Growth
   - What single thing would move the needle the most this quarter?
-  - What are users asking for? Which of these are we ignoring?
+  - What are users asking for? Which of these are we’re ignoring?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?
 
 ## Themes (20 minutes - do as a team)
-
-What themes can we distill from the above HOGS list? What are categories of things we should consider working on? What are other things we might want to consider?
-
+What themes can we distill from the above list? What are categories of things we should consider working on based on the HOGS? What are other things we might want to consider?
 
 ## New goals (15 minutes - do as a team)
+Objectives:
+(Do this as a team) What should we focus on this quarter?
 
 This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
 
@@ -64,6 +77,10 @@ What we'll ship:
   - This thing (Name)
   - Another thing (Name)
   - Maybe another thing (Name)
+
+## Hiring priorities (5 minutes - do as a team) - starting Q1
+What type of people do we need to hire for this team, if any? What are the things they’d work on?
+
 ```  
 
 If you aren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
