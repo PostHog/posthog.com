@@ -301,7 +301,7 @@ export const CompensationCalculator = ({
                                 <span className="text-sm opacity-60">plus significant equity</span>
                             </span>
                         </div>
-                        {job.search('Engineer') && job != 'Support Engineer' && (
+                        {job.includes('Engineer') && job !== 'Support Engineer' && (
                             <div className="mt-2">
                                 We pay well beyond these ranges for exceptional talent. If this is you, please apply.
                             </div>
