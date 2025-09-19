@@ -13,7 +13,7 @@ At PostHog, the response is mixed. Some find autocomplete great, but need to rip
 
 What is clear for everyone is that coding with AI is a skill. It takes practice and a lot of mistakes to get good at it.
 
-We know this because we've made a bunch of mistakes over the past few years working with these tools, building AI-powered features, and working with companies in the space. We're sharing them here to help you avoid them.
+We know this because we've made a bunch of mistakes over the past few years working with these tools, [building AI-powered features](/newsletter/building-ai-features), and working with companies in the space. Here's what we've learned.
 
 ## 1. Forgetting about customers
 
