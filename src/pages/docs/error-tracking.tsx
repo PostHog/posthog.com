@@ -33,7 +33,7 @@ const phFeatures = [
     },
     {
         title: 'Feature flags',
-        description: 'Revert feature flag roll out to users who are affected by an issue.',
+       description: 'Safely roll out fixes to users affected by an issue.',
         icon: <IconToggle className="h-6" />,
         color: 'seagreen',
         url: '/docs/feature-flags',
@@ -137,7 +137,7 @@ export const Content = () => {
             </section>
 
             <section className={`mb-8 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4">All the features you'd expect</h2>
+                <h2 className="mb-4">All the features you expect</h2>
                 <OSTable
                     columns={[
                         { name: '', width: '1fr', align: 'left' },
@@ -178,9 +178,7 @@ export const Content = () => {
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">Pricing</h2>
                 <p>
-                    PostHog error tracking is built to be cost-effective by default, with a generous free tier and
-                    transparent usage-based pricing. Our generous free tier means more than 90% of companies{' '}
-                    <em>use PostHog for free</em>.
+                    PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies <em>use PostHog for free</em>.
                 </p>
                 <p>
                     No credit card is required to get started. You can also set billing limits to avoid any surprise
