@@ -120,7 +120,7 @@ export default function Posts({ pageContext }) {
             const exists = allCategories
                 .find((category) => category.attributes.folder === currentRoot)
                 ?.attributes.post_tags.data.some((tag) => tag.attributes.label === filters.post_tags.value)
-            const selectedTag = root === null || exists ? filters.post_tags.value : null
+            const selectedTag = currentRoot === null || exists ? filters.post_tags.value : null
             setSelectedTag(selectedTag)
         }
         if (filters.root) {
