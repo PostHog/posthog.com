@@ -298,12 +298,13 @@ export const CompensationCalculator = ({
                                             currentLocation.currency
                                         )}
                                 </span>
-                                <span className="text-sm opacity-60">plus significant equity</span>
+                                <span>+ significant equity</span>
                             </span>
                         </div>
-                        {job.includes('Engineer') && job !== 'Support Engineer' && (
+                        {job.search('Engineer') && job !== 'Support Engineer' && (
                             <div className="mt-2">
-                                We pay well beyond these ranges for exceptional talent. If this is you, please apply.
+                                We are open to paying well beyond these ranges for exceptional talent. If this is you,
+                                please apply.
                             </div>
                         )}
                     </div>
