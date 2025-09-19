@@ -87,12 +87,15 @@ const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 
 function App() {
   const posthog = usePostHog();
-  const posthog = usePostHog();
-
-  const handleShowSurvey = () => {
-    // Display as popover (respects conditions defined in dashboard)
-    posthog.displaySurvey(coolSurveyID);
-  };
+ 
+  useEffect(() => {
+    // Will be called only once on first load, respecting conditions defined in dashboard
+    posthog.displaySurvey(coolSurveyID, {
+      displayType: DisplaySurveyType.Popover,
+      ignoreConditions: false,
+      ignoreDelay: false
+    });
+  }, []);
 
   const handleForceShowSurvey = () => {
     // Force display ignoring conditions and delays
@@ -107,9 +110,6 @@ function App() {
     <div className="App">
       <h1>Survey Tutorial with PostHog</h1>
       <div className="survey-controls">
-        <button onClick={handleShowSurvey}>
-          Show Survey (with conditions)
-        </button>
         <button onClick={handleForceShowSurvey}>
           Force Show Survey
         </button>
@@ -135,7 +135,16 @@ const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
 function App() {
   const posthog = usePostHog();
 
-  const handleShowInlineSurvey = () => {
+  useEffect(() => {
+    posthog.displaySurvey(coolSurveyID, {
+      displayType: DisplaySurveyType.Inline,
+      ignoreConditions: false,
+      ignoreDelay: false,
+      selector: '#survey-container'
+    });
+  }, []);
+
+  const handleForceShowInlineSurvey = () => {
     // Will ignore both conditions and delays
     posthog.displaySurvey(coolSurveyID, {
       displayType: DisplaySurveyType.Inline,
@@ -149,8 +158,8 @@ function App() {
     <div className="App">
       <h1>Survey Tutorial with PostHog</h1>
       <div className="survey-controls">
-        <button onClick={handleShowInlineSurvey}>
-          Show Inline Survey
+        <button onClick={handleForceShowInlineSurvey}>
+          Force Show Inline Survey
         </button>
       </div>
       <div id="survey-container">
