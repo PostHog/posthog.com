@@ -29,9 +29,9 @@ Before meeting:
 - Feel free to propose possible goals as well
 
 During the meeting:
-- Discuss Q1 retrospective
+- Discuss last quarter retrospective
 - HOGS discussion
-- Brainstorm goals for Q2
+- Brainstorm goals for this quarter
 - Draft goals and what we will ship
 
 After the meeting
@@ -57,7 +57,7 @@ This should be done BEFORE the meeting by everyone, independently. During the me
     - If it’s more people, please expand on how many and exactly what type of hire you’d be looking for.
 - Growth
   - What single thing would move the needle the most this quarter?
-  - What are users asking for? Which of these are we’re ignoring?
+  - What are users asking for? Which of these are we ignoring?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?
@@ -66,8 +66,6 @@ This should be done BEFORE the meeting by everyone, independently. During the me
 What themes can we distill from the above list? What are categories of things we should consider working on based on the HOGS? What are other things we might want to consider?
 
 ## New goals (15 minutes - do as a team)
-Objectives:
-(Do this as a team) What should we focus on this quarter?
 
 This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
 
@@ -77,10 +75,6 @@ What we'll ship:
   - This thing (Name)
   - Another thing (Name)
   - Maybe another thing (Name)
-
-## Hiring priorities (5 minutes - do as a team) - starting Q1
-What type of people do we need to hire for this team, if any? What are the things they’d work on?
-
 ```  
 
 If you aren't on a product team, replace 'product' with the equivalent 'thing' on your team - e.g. if you do recruitment, your 'product' is how we do recruitment at PostHog and your users are job applicants. 
