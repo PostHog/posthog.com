@@ -377,7 +377,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "",
+                    "category": "Surveys",
                     "description": "Display a survey programmatically as either a popover or inline element.",
                     "details": null,
                     "id": "displaySurvey",
@@ -385,9 +385,19 @@
                     "title": "displaySurvey",
                     "examples": [
                         {
-                            "id": "display_as_popover_(respects_all_conditions_defined_in_the_dashboard)_posthog.displaysurvey('survey-id-123')",
-                            "name": "Display as popover (respects all conditions defined in the dashboard) posthog.displaySurvey('survey-id-123')",
-                            "code": "\n\n// Display as popover (respects all conditions defined in the dashboard) posthog.displaySurvey('survey-id-123')\n\n\n// Display inline in a specific element posthog.displaySurvey('survey-id-123', { displayType: DisplaySurveyType.Inline, selector: '#survey-container' })\n\n\n// Force display ignoring conditions and delays posthog.displaySurvey('survey-id-123', { displayType: DisplaySurveyType.Popover, ignoreConditions: true, ignoreDelay: true })\n\n"
+                            "id": "display_as_popover_(respects_all_conditions_defined_in_the_dashboard)",
+                            "name": "Display as popover (respects all conditions defined in the dashboard)",
+                            "code": "\n\n// Display as popover (respects all conditions defined in the dashboard)\nposthog.displaySurvey('survey-id-123')\n\n\n"
+                        },
+                        {
+                            "id": "display_inline_in_a_specific_element",
+                            "name": "Display inline in a specific element",
+                            "code": "\n\n// Display inline in a specific element\nposthog.displaySurvey('survey-id-123', {\n  displayType: DisplaySurveyType.Inline,\n  selector: '#survey-container'\n})\n\n\n"
+                        },
+                        {
+                            "id": "force_display_ignoring_conditions_and_delays",
+                            "name": "Force display ignoring conditions and delays",
+                            "code": "\n\n// Force display ignoring conditions and delays\nposthog.displaySurvey('survey-id-123', {\n  displayType: DisplaySurveyType.Popover,\n  ignoreConditions: true,\n  ignoreDelay: true\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -490,7 +500,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "Session replay",
+                    "category": "",
                     "description": "Returns the current session_id.",
                     "details": "This should only be used for informative purposes. Any actual internal use case for the session_id should be handled by the sessionManager.",
                     "id": "get_session_id",
@@ -1444,7 +1454,7 @@
                             "code": "\n\nposthog.renderSurvey(coolSurveyID, '#survey-container')\n\n\n\n"
                         }
                     ],
-                    "releaseTag": "deprecated",
+                    "releaseTag": "public",
                     "params": [
                         {
                             "description": "The ID of the survey to render.",
@@ -3602,7 +3612,7 @@
                     "name": "appearance"
                 },
                 {
-                    "type": "{\n        url?: string;\n        selector?: string;\n        seenSurveyWaitPeriodInDays?: number;\n        urlMatchType?: PropertyMatchType;\n        events: {\n            repeatedActivation?: boolean;\n            values: {\n                name: string;\n                properties?: Record<string, any>;\n            }[];\n        } | null;\n        actions: {\n            values: SurveyActionType[];\n        } | null;\n        deviceTypes?: string[];\n        deviceTypesMatchType?: PropertyMatchType;\n        linkedFlagVariant?: string;\n    } | null",
+                    "type": "{\n        url?: string;\n        selector?: string;\n        seenSurveyWaitPeriodInDays?: number;\n        urlMatchType?: PropertyMatchType;\n        events: {\n            repeatedActivation?: boolean;\n            values: {\n                name: string;\n            }[];\n        } | null;\n        actions: {\n            values: SurveyActionType[];\n        } | null;\n        deviceTypes?: string[];\n        deviceTypesMatchType?: PropertyMatchType;\n        linkedFlagVariant?: string;\n    } | null",
                     "name": "conditions"
                 },
                 {
