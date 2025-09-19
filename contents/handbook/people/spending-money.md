@@ -159,6 +159,8 @@ This is expected to be a dedicated monthly budget to help you enhance your work 
 
 These budgets shouldn't stop us from innovating, and we can approve an increase on a case-by-case basis.
 
+Folks outside of the Tech/R&D department should use their individual software budget for AI tools. If you use AI tools a lot and need the AI budget, you can request it.
+
 ### Optional software
 
 There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
