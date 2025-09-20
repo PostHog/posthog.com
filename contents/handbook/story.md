@@ -112,7 +112,7 @@ We hired two Customer Success experts dealing with all inbound requests. We hire
 
 We had a fantastic year. While the tech market crashed, we grew 6x and reached millions in revenue, with a sub-two-month CAC payback period. We set $10m ARR as our next goal, with a gross margin of 70% – both of which should mean we've got all the metrics needed for the next fundraise.
 
-We optimized revenue growth by implementing a product-led CRM for our [customer success team](/teams/sales-cs), adding to our [content team](/teams/content) size, and creating a two-person [growth engineering](/teams/growth) team. These teams all make a big difference!
+We optimized revenue growth by implementing a product-led CRM for our [customer success team](/teams/sales-cs), adding to our [content team](/teams/content) size, and creating a two-person growth engineering team. These teams all make a big difference!
 
 We deepened all of our product areas significantly – we frequently win deals as a standalone session recording, feature flagging or [experimentation](/experiments) tool. Session recording usage started to match product analytics usage.
 

@@ -65,10 +65,10 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Live events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Marketing analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/marketing-analytics</span> |
 | Max AI platform | [Team Max AI][Team Max AI]  | <span class="lemon-tag gh-tag">feature/max-ai</span>  |
-| MCP server | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
+| MCP server | [Team Max AI][Team Max AI]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
-| Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
+| Onboarding | [Team Content][Team Content]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Path cleaning | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/path-cleaning</span> |
 | Permissions and access control | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
@@ -77,7 +77,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Pipeline destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
 | Pipeline sources | [Team Data Warehouse][Team Data Warehouse] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
-| Project home page | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/home</span> |
+| Project home page | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property filters | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
 | Query performance | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
@@ -120,7 +120,6 @@ Some of the features we are building may exist in other products already. It is 
 [Team Billing]: /teams/billing
 [Team Platform Features]: /teams/platform-features
 [Team Feature Flags]: /teams/feature-flags
-[Team Growth]: /teams/growth
 [Team Infrastructure]: /teams/infrastructure
 [Team Ingestion]: /teams/ingestion
 [Team Platform UX]: /teams/platform-ux
@@ -132,3 +131,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Surveys]: /teams/surveys
 [Team Messaging]: /teams/messaging
 [Team Max AI]: /teams/max-ai
+[Team Content]: /teams/content

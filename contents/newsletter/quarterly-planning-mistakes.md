@@ -101,7 +101,7 @@ Some examples of goals from Q2 2025 include:
 
 - **😱 OMG so many destinations ([Team CDP](/teams/cdp#goals)):** "We want to have so many destinations that we cover all the CDP cases people could dream of and, most importantly, the tooling and product to scale this automatically using AI, community templates, etc."
 
-- **🧙 Automate the setup of 50% of PostHog installations ([Team Growth](/teams/growth#goals)):** "More integrations and workflows with setup wizard. Be the default analytics provider for vibe coders. Be the default option in boilerplates for Next.js, React, and React Native. Improve the onboarding experience for self-hosted users."
+- **🧙 Automate the setup of 50% of PostHog installations:** "More integrations and workflows with setup wizard. Be the default analytics provider for vibe coders. Be the default option in boilerplates for Next.js, React, and React Native. Improve the onboarding experience for self-hosted users."
 
 - 🏃 **Improve build times for PostHog apps ([Team Infrastructure](/teams/infrastructure#goals)):** "Make deployments great, fast, and more reliable. Use Argo UI extensions wherever it makes sense.""
 
