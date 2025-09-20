@@ -20,6 +20,7 @@ const CUSTOMER_ORDER = [
     'airbus',
     'researchgate',
     'startengine',
+    'exa',
     'hasura',
     'trust',
     'heygen',
