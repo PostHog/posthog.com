@@ -65,7 +65,7 @@ export default function AskMax({
                             </div>
 
                             <div className="flex flex-col text-center @lg:text-left">
-                                <h3 className="mb-0 !text-2xl @lg:!text-xl leading-tight">
+                                <h3 className="mb-0 mt-0 !text-2xl @lg:!text-xl leading-tight">
                                     Questions? <span className="text-red dark:text-yellow">Ask Max AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">

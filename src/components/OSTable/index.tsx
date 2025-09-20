@@ -8,7 +8,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { CallToAction } from 'components/CallToAction'
 
 interface Column {
-    name: string
+    name: string | React.ReactNode
     align?: 'left' | 'center' | 'right'
     width?: string
     className?: string
@@ -224,7 +224,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                   _groupBy(
                                       rows,
                                       `cells[${columns?.findIndex(
-                                          (col) => col.name === groupBy
+                                          (col) => typeof col.name === 'string' && col.name === groupBy
                                       )}].content.props.children`
                                   )
                               ).map(([_group, value], index) => (

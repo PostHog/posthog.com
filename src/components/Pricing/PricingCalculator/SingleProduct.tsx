@@ -12,7 +12,7 @@ export default function SingleProductPricing({ productType }: { productType: str
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
 
     return (
-        <div className="w-full flex-1 max-w-4xl">
+        <div className="w-full flex-1 max-w-4xl pb-4 ">
             <div className="mb-6">
                 <div className="grid grid-cols-8">
                     <div className="col-span-6">
@@ -44,7 +44,7 @@ export default function SingleProductPricing({ productType }: { productType: str
                     )}
                 </div>
 
-                <div className="mt-8 p-1 border border-border dark:border-dark rounded-md">
+                <div className="mt-8 p-1 border border-border dark:border-dark rounded-md hidden @md:block">
                     <PricingTiers plans={[{ tiers: costByTier }]} unit={billingData.unit} type={type} showSubtotal />
                 </div>
             </div>
