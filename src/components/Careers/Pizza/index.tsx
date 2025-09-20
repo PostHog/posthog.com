@@ -239,7 +239,7 @@ export const Pizza = () => {
 
     const { allTeams } = useStaticQuery(graphql`
         {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
                 nodes {
                     id
                     name
