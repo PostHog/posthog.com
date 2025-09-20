@@ -119,7 +119,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros (Cory, Lottie) to help.
 
-- **Developer influencers:** We sponsor creators like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
+- **Developer influencers:** We [sponsor creators](/handbook/growth/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
 - **Billboards:** Billboards are a way to get our brand in front of a lot of people.
 
