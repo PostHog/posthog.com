@@ -27,45 +27,13 @@ Your objectives are to:
 
 ### 1. Get people to talk to you
 
-This is usually the most difficult bit! Sometimes customers will proactively reach out to us because they see their bill rocketing, but we have many customers who have happily self-served to a very high level of spend without feeling any need to talk to us. In particular, engineers have no interest in jumping on a call with you 99% of the time. These are some of the tactics we have found to be helpful:
-
-- Offer to optimize their usage/reduce their billing - if they are pointlessly tracking a bunch of junk, tell them! Otherwise they'll just find out themselves and churn anyway.
-- Tell them about new or upcoming features or products that they may not be aware of which you know could be a great fit for them (and let them try them out for free).
-- Use multiple channels - email is usually the worst way to reach our ICP. Slack, in-app Surveys or even Telegram are all usually better. But try email first anyway.
-- Loom videos sharing your observations about their usage/account provide a personalized and human touch which can go a long way to building lasting relationships.  Ask Simon for an invitation to our company account if you don't have access.
-- Adding the contact on LinkedIn and sending a very human video or audio message can work really well - even for technical people (use the LinkedIn mobile app).  
-- Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn’t an engineer to talk to us given engineers don’t want to.
-- If they submit a support request, jump in and respond yourself to try and build a relationship. 
-- Ask the wider team for help - we have to get creative here! As a last resort, deploying the founder card can be surprisingly effective. 
-
-Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
-
-Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support.
-
-#### How to bust ghosts
-If you've had a a conversation with someone, there was interest on their side and then they suddenly go dark, using the The [John Barrows Ghosting Sequence](https://jbarrows.com/) can revivify them. 
-
-1. After 2 weeks of valuable follow-up and you've not heard back, reply-all to the latest email thread.
-Change the subject to: "Still interested?"
-
-And put in the body:
->`[Name]`
->
->Still looking at options like PostHog to solve `[business problem they previously acknowledged]?`
->
->Let me know either way.
-
-That last line is very important because it gives them a safe option to say "no". About half will respond.
-
-2. If there's no response again after another week, change the subject again to "Did I lose you?"
-
-Leave the body empty. This will pick up about 80% of people who go dark. If not, close out the opportunity 3 days after this final message.
+We have a handy guide to this [here](/handbook/growth/sales/getting-people-to-talk-to-you).
 
 ### 2. Get a longer term commitment (maybe!)
 
 Once you've established contact, you basically want to get them into the same flow as if they were a new customer (and give them the same level of attention). You will be doing a combo of [discovery and commercial evaluation](/handbook/growth/sales/new-sales#sales-process), as the customer will want to figure out whether an annual contract with PostHog makes sense vs. what they've already got.
 
-> Do not push for an annual contract no matter what - consider what actually makes sense here! Some customers are very highly likely to stick with PostHog even if they are paying monthly, e.g. if they have many users regularly logging in, lots of product activity, multi-product adoption etc. It can be actively harmful to turn up to a new customer and the first thing they hear from us is 'would you like an annual contract?'
+> Do not push for an annual contract no matter what - consider what actually makes sense here! Some customers are very highly likely to stick with PostHog even if they are paying monthly, e.g. if they have many users regularly logging in, lots of product activity, multi-product adoption etc. Do not turn up to a new customer and the first thing they hear from you be 'would you like an annual contract?'
 
 You'll also go through the same [contracting process](/handbook/growth/sales/contracts#annual-plans-and-more) with them. We usually find that convincing a customer happily paying monthly to switch to annual is quite difficult, especially if they are a fast-growing startup (who tend to value flexibility over pure cost saving). This means that the discounts may not be as effective. If you're finding this is the case, you can get them on an annual plan but paying monthly or quarterly and halve the discount you offer. 
 
