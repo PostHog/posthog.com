@@ -34,7 +34,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 - Use multiple channels - email is usually the worst way to reach our ICP. Slack, in-app Surveys or even Telegram are all usually better. But try email first anyway.
 - Loom videos sharing your observations about their usage/account provide a personalized and human touch which can go a long way to building lasting relationships.  Ask Simon for an invitation to our company account if you don't have access.
 - Adding the contact on LinkedIn and sending a very human video or audio message can work really well - even for technical people (use the LinkedIn mobile app).  
-- Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn’t an engineer to talk to us given engineers don’t want to.
+- Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn't an engineer to talk to us given engineers don't want to.
 - If they submit a support request, jump in and respond yourself to try and build a relationship. 
 - Ask the wider team for help - we have to get creative here! As a last resort, deploying the founder card can be surprisingly effective. 
 
@@ -91,8 +91,8 @@ You can use these signals alongside regular customer interactions to prioritize 
   - Use a tool like [The Org](https://theorg.com/) to help you identify new people. 
 - Then you need to find out what are they using now to solve the problem (if anything) - surface this during the check in calls that you already have scheduled as part of onboarding if it's the existing team. If you're talking a new team, you'll effectively run this as a [new sales process](/handbook/growth/sales/new-sales). 
 - Your approach will depend on the product that makes sense here:
-  - If it's already a mature product we have shipped, you should aim to show how the product complements what they _already_ are using in PostHog - don't just arbitrarily sell in a product for the sake of it. For example, you can say ‘other customers that look like you are doing X, this is what we’re seeing’.
-  - If it's something in beta or coming soon, you should start giving them sneak peeks of what's on our [roadmap](/roadmap). You can also schedule a feedback session with the relevant product engineer if they’re a great fit - customers _love_ this. Again, consider playing the founder card for something _really_ new and big.
+  - If it's already a mature product we have shipped, you should aim to show how the product complements what they _already_ are using in PostHog - don't just arbitrarily sell in a product for the sake of it. For example, you can say 'other customers that look like you are doing X, this is what we're seeing'.
+  - If it's something in beta or coming soon, you should start giving them sneak peeks of what's on our [roadmap](/roadmap). You can also schedule a feedback session with the relevant product engineer if they're a great fit - customers _love_ this. Again, consider playing the founder card for something _really_ new and big.
 - Understanding the blockers to using other products - these could be:
   - Privacy/compliance concerns (e.g. viewing session recordings) - we have a lot of documentation on this
   - Already doing it in house/with something else - demonstrated cool ways in which the products integrate and save their team time
@@ -112,12 +112,12 @@ These are typically combinations of products that we've seen be successful:
 
 The best way to do this is to expand usage of existing product with _new_ teams at the same company. This is a bit more straightforward conceptually, but may be harder to execute because you're likely to be starting with a new team from scratch. You may want to consider expanding usage of the same product within the same team if there is obvious scope to do so here, but this is difficult as it depends on the individual success of their product, which you can't control. 
 
-- Make sure you are asking for intros to other teams during the regularly scheduled checkin calls - ‘who else would benefit from this?’, 'are there other teams with similar pain points?'
+- Make sure you are asking for intros to other teams during the regularly scheduled checkin calls - 'who else would benefit from this?', 'are there other teams with similar pain points?'
 - In-person visits can help accelerate this
 
 ### Principles for visiting customers
 
-If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). 
+If you offer to do a meeting in person with a customer, they'll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). 
 
 Generally speaking you should be trying to regularly see customers in your book of business who are $60k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
 
@@ -128,3 +128,38 @@ If you regularly visit customers, you can (and should) take some sweet merch. Yo
 These are customers that are happily using PostHog long term, and are neither a churn risk nor likely to have expansion potential. Managing this group is much more automated and taken care of by CSMs, who do things like tracking usage and setting up alerts in Vitally to trigger outreach from us when a customer changes their usage behavior (either up or down). 
 
 An important part of retention here is also to ensure support issues are fixed in a timely manner. We deliberately don't want to invest a huge amount in hands-on customer success here, because that can often paper over cracks in the product experience or quality of our customer support, so staying hands-off here is an intentional strategy. In the future, we will build out this playbook a lot more. 
+
+## Enterprise account management
+
+Scott and Leon have recently started a new experimental role within the team. This is a more account management enterprise style approach, with a smaller book of accounts of around 6-7, and no inbound pipeline. The aim here is to give appropriate care and attention to our largest and highest potential customers. 
+With this added bandwidth, the aim should be to become much closer to the customers, build way more rapport, and ultimately elevate PostHog to being a fundamental platform for all engineering teams within the accounts.
+To do this, we've thought of some ideas to help bring bridge the gap to our customers. An initial framework of different interactions with the people within a customer account should help guide us in the right direction.
+
+The "Cake Layer" system 
+
+1. **Technical check-in**
+     - This should be a regular, recurring meeting with the core users of PostHog. 
+     - We will use this check-in to make sure we stay ahead of any issues that are brewing under the surface. Things like data discrepancies, performance issues, and other problems that later could grow into much larger issues for the customer. It's crucial we stay on top of these early, as we've seen that problems in these larger customers are often more complex, and when things fail, it can be detrimental to the customer's experience of PostHog.
+     - This will also allow us to meet more people, if the meeting is recurring, it forms a sort of office hours vibe, where different users can drop in and out as they see fit, and you'll end up organically engaging with loads of new folks, while simultaneously growing the relationship with the core users. 
+     - A lot of the trust is built here, this is the foundation for the relationship with the customer. Showing up and solving their issues frequently, will compound your credibility within the account, and make things like referrals and introductions a much easier ask. Ultimately being super helpful is what this team is all about.
+
+2. **The Quarterly Business Review** 
+     - Although this sounds quite corporate and yucky, it could be a real game changer for the team. It's tried and tested as a foundational process within the most successful account management teams. The QBR should be an hour, and typically with more than one person from the customer side, usually a more senior person here would be helpful for the customer to be able to voice their company level goals and concerns.
+     - The QBR allows us to align with the customer on a few things:
+       - The success they have had with PostHog in the last few months. Importantly this should be tied to their goals as a business, and not something like "Your event volume went up 50%! woohoo!". We should be clear on what our customers care about on a business level, and tie PostHog to that. "Your team launched 3 new experiments this quarter, and saw great results. 10% increase in signup conversions, and a 5% increase in Enterprise signups, which were two key metrics you noted last quarter" is a much more compelling argument to keep PostHog up and running!
+       - The next section should be spent aligning on their goals as a business. This may vary depending on the size of customer you're speaking to. A very large enterprise might have a 5 year roadmap, an AI startup might be working in sprints. You will need to meet them where they are! Fortunately, PostHog is in a position to help their developers build products, so if all else fails, we can attach PostHog to their product roadmap and help bring value there.
+       - Next we should discuss our roadmap, discuss what products we are building next, and open the room to what they would like to see next and why. Knowing what they want to see next is really important as it highlights where their priorities are at as a business.
+       - Action items and feedback should be clarified at the end of the review and followed up on with a concise and detailed message in the channel or by email.
+       - The snowball effect of QBR's is that it will give the Account Manager a direction to take for the upcoming months, cross-selling becomes easier and ultimately more valuable for the customer if we know what they care about as a business. We can build credibility by using anecdotes from other customers we work with. "My other customer Acme Inc also had a big push internally to sell to the French market, they developed localised landing pages and used flags to roll them out and experiment with, think this could be a good idea to test out?" is a really credible way to cross-sell rather than flogging a new product with nothing to back it up. At the next QBR we can discuss how we progressed towards the goals and the cycle continues.
+
+3. **Exec Review**
+     - We should try get our execs to meet our customers execs once a year. This should be used to discuss how PostHog impacted their business in the last year. Bringing our execs to the table shows our commitment to the customer, and often in this meeting, different feedback can be shared, and new goals illuminated. We should also use this time to praise the core users of PostHog who dedicate so much time and effort into the platform.
+     - It's another great medium for our execs to communicate our company direction and roadmap - who better for it to come from than the ones who are deciding it? 
+
+4. **Onsite Visits**
+     - We've highlighted the importance of onsite visits in the handbook already. It should be even more evident within these large customers. We use this as a way to build rapport, speak in a less formal environment with our customers, and build out the relationship with them on a human level. There's countless benefits to this type of interaction with our customers.
+     - As we work with more Enterprises, we'll see this becoming an expectation versus a nice to have. We'll probably also see our competitors doing this in a more traditional enterprise sales way. I think we can figure out a PostHog way to do this without falling back to steak dinners by default.
+     - Bonus points if you can combine a QBR or Exec review into an onsite visit!
+
+
+If the Account manager does all four of the above customer meetings with their entire book, it will have a profound effect on the relationships we have with customers. All of our core metrics will improve as a result. Retention, adoption and revenue will be natural byproducts of this framework.
