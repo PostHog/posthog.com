@@ -24,7 +24,7 @@ import zendesk from './images/customers/zendesk.svg'
 import researchgate from './images/customers/researchgate.svg'
 import supabase from './images/customers/supabase.svg'
 import heygen from './images/customers/heygen.svg'
-
+import rebtel from './images/customers/rebtel.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
