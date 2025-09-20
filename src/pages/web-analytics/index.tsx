@@ -132,7 +132,7 @@ export default function WebAnalytics(): JSX.Element {
     `)
 
     const slides = createSlideConfig({
-        // exclude: ['answers'],
+        exclude: ['posthog-on-posthog'],
         order: [
             'overview',
             'customers',

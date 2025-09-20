@@ -38,6 +38,7 @@ export const defaultSlides: Record<string, SlideConfig> = {
     overview: { slug: 'overview', name: 'Overview' },
     customers: { slug: 'customers', name: 'Customers' },
     features: { slug: 'features', name: 'Features' },
+    'posthog-on-posthog': { slug: 'posthog-on-posthog', name: 'How PostHog uses PostHog' },
     answers: { slug: 'answers', name: 'Answers' },
     pricing: { slug: 'pricing', name: 'Pricing' },
     'comparison-summary': { slug: 'comparison-summary', name: 'PostHog vs... (the tl;dr)' },

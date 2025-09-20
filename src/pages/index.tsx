@@ -657,6 +657,7 @@ const CompanyStageTabs = () => {
                             'session_replay',
                             'product_analytics',
                             'feature_flags',
+                            'error_tracking',
                             'surveys',
                             'llm_analytics',
                         ]}
@@ -670,11 +671,11 @@ const CompanyStageTabs = () => {
                             'session_replay',
                             'web_analytics',
                             'product_analytics',
+                            'error_tracking',
                             'experiments',
                             'feature_flags',
                             'surveys',
                             'dashboards',
-                            'error_tracking',
                             'cdp',
                         ]}
                     />

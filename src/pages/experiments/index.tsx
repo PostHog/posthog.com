@@ -415,6 +415,7 @@ export default function Experiments(): JSX.Element {
             'overview',
             'customers',
             'features',
+            'posthog-on-posthog',
             'statistical-methods',
             'pricing',
             'comparison-summary',

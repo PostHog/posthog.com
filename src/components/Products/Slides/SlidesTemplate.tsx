@@ -29,6 +29,7 @@ import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
+import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -359,6 +360,9 @@ export default function SlidesTemplate({
                         {...props}
                     />
                 )
+
+            case 'posthog-on-posthog':
+                return <PostHogOnPostHogSlide productData={productData} {...props} />
 
             case 'comparison-summary':
                 return (
