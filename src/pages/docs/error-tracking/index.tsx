@@ -14,8 +14,6 @@ import Card from 'components/Card'
 import Link from 'components/Link'
 import ErrorTrackingDiagram from './error-tracking-diagram'
 
-const maxWidth = 'max-w-4xl'
-
 const phFeatures = [
     {
         title: 'Session replay',
@@ -72,7 +70,7 @@ const errorTrackingFeatures = [
 export const Content = () => {
     return (
         <>
-            <section className={`mb-4 mx-auto ${maxWidth}`}>
+            <section className="mb-4">
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
@@ -99,14 +97,14 @@ export const Content = () => {
                 </div>
             </section>
 
-            <section className={`mb-8 mx-auto ${maxWidth}`}>
+            <section className="mb-8">
                 <h2 className="mb-4 mt-0">SDKs and frameworks</h2>
                 <div className="mt-4">
                     <InstallationPlatforms columns={3} />
                 </div>
             </section>
 
-            <section className={`mb-8 mx-auto ${maxWidth}`}>
+            <section className="mb-8">
                 <h2 className="mb-4">All the features you expect</h2>
                 <OSTable
                     columns={[
@@ -128,7 +126,7 @@ export const Content = () => {
                 />
             </section>
 
-            <section className={`mb-8 mx-auto ${maxWidth}`}>
+            <section className="mb-8">
                 <h2 className="mb-4">But 10x better in the PostHog ecosystem</h2>
                 <div className="flex flex-col gap-4 lg:grid @lg:grid-cols-3">
                     {phFeatures.map((feature, index) => (
@@ -145,7 +143,7 @@ export const Content = () => {
                 </div>
             </section>
 
-            <section className={`mb-8 mx-auto ${maxWidth}`}>
+            <section className="mb-8">
                 <h2 className="mb-4">Pricing</h2>
                 <p>
                     PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our
@@ -164,7 +162,7 @@ export const Content = () => {
                 </p>
             </section>
 
-            <section className={`mb-8 mx-auto ${maxWidth}`}>
+            <section className="mb-8">
                 <h2 className="mb-4">Next steps</h2>
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
                     <ResourceItem
@@ -196,30 +194,32 @@ const ErrorTracking: React.FC = () => {
         <ReaderView>
             <SEO title="Error tracking - Docs - PostHog" />
 
-            <section className={`mb-6 mx-auto ${maxWidth}`}>
-                <Intro
-                    subheader="Getting started"
-                    title="Error tracking"
-                    description="Track and monitor errors and exceptions in your code."
-                    buttonText="Installation guide"
-                    buttonLink="/docs/error-tracking/start-here"
-                    imageColumnClasses="mt-4 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
-                    imageClasses="max-h-48 md:max-h-64"
-                />
-            </section>
+            <div className="mx-auto max-w-4xl">
+                <section className="mb-6">
+                    <Intro
+                        subheader="Getting started"
+                        title="Error tracking"
+                        description="Track and monitor errors and exceptions in your code."
+                        buttonText="Installation guide"
+                        buttonLink="/docs/error-tracking/start-here"
+                        imageColumnClasses="mt-4 md:-mt-8"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
+                        imageClasses="max-h-48 md:max-h-64"
+                    />
+                </section>
 
-            <Content />
+                <Content />
 
-            <div className={`mx-auto ${maxWidth}`}>
-                <AskMax
-                    className=""
-                    quickQuestions={[
-                        'How do I see what the most common errors are?',
-                        'How do I custom error groups?',
-                        'How do I assign someone an error?',
-                    ]}
-                />
+                <div>
+                    <AskMax
+                        className=""
+                        quickQuestions={[
+                            'How do I see what the most common errors are?',
+                            'How do I custom error groups?',
+                            'How do I assign someone an error?',
+                        ]}
+                    />
+                </div>
             </div>
         </ReaderView>
     )
