@@ -91,7 +91,9 @@ export const Content = () => {
                 <div className="mt-8 -mx-4 @xl:-mx-8">
                     <ScrollArea fullWidth>
                         <div className="px-4 @xl:px-8">
-                            <ErrorTrackingDiagram className={`max-h-[28rem] min-h-[22rem] fill-primary`} />
+                            <ErrorTrackingDiagram
+                                className={`max-h-[28rem] min-h-[22rem] fill-black dark:fill-white`}
+                            />
                         </div>
                     </ScrollArea>
                 </div>
