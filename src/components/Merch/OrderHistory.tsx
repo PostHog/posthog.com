@@ -5,7 +5,7 @@ import { IconSpinner } from '@posthog/icons'
 
 export default function OrderHistory({ orders }: { orders: any[] }) {
     const formatPrice = (price: string) => {
-        const amount = parseFloat(price)
+        const amount = parseFloat(price) || 0
         return amount.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
