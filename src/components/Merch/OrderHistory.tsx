@@ -1,32 +1,15 @@
 import Logo from 'components/Logo'
-import { useUser } from 'hooks/useUser'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import dayjs from 'dayjs'
 import { IconSpinner } from '@posthog/icons'
 
-export default function OrderHistory() {
-    const [loading, setLoading] = useState(true)
-    const { user, getJwt } = useUser()
-    const [orders, setOrders] = useState([])
-
-    const fetchOrders = async () => {
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
-            headers: {
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        }).then((res) => res.json())
-        setOrders(data)
-        setLoading(false)
-    }
-
-    useEffect(() => {
-        if (user) {
-            fetchOrders()
-        }
-    }, [user])
-
+export default function OrderHistory({ orders }: { orders: any[] }) {
     const formatPrice = (price: string) => {
-        return parseFloat(price).toFixed(2)
+        const amount = parseFloat(price)
+        return amount.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })
     }
 
     const formatFulfillmentStatus = (status: string | null) => {
@@ -185,15 +168,6 @@ export default function OrderHistory() {
                     )
                 })}
             </div>
-            {loading ? (
-                <div className="text-center py-12">
-                    <IconSpinner className="size-7 opacity-60 animate-spin mx-auto" />
-                </div>
-            ) : ordersToDisplay.length === 0 ? (
-                <div className="text-center py-6">
-                    <p className="text-secondary">No orders found</p>
-                </div>
-            ) : null}
         </>
     )
 }

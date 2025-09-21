@@ -19,6 +19,7 @@ import AddressBar from 'components/OSChrome/AddressBar'
 import Fuse from 'fuse.js'
 import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
+import { useUser } from 'hooks/useUser'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -190,8 +191,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [hasInitialized, setHasInitialized] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
+    const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
     const { isMobile } = useApp()
+    const { getJwt, user } = useUser()
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
@@ -382,6 +385,21 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         [appWindow]
     )
 
+    const fetchOrders = async () => {
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+            headers: {
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        }).then((res) => res.json())
+        setOrders(data)
+    }
+
+    useEffect(() => {
+        if (user) {
+            fetchOrders()
+        }
+    }, [user])
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar
@@ -394,7 +412,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 onOrderHistoryOpen={handleOrderHistoryOpen}
                 onOrderHistoryClose={handleOrderHistoryClose}
                 showCart
-                showOrderHistory
+                showOrderHistory={orders?.length > 0}
                 showSearch
                 onSearch={handleSearch}
             />
@@ -420,7 +438,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                         <Cart className="h-full overflow-y-auto" />
                                     ) : orderHistoryIsOpen ? (
                                         <div className="h-full overflow-y-auto @container">
-                                            <OrderHistory />
+                                            <OrderHistory orders={orders} />
                                         </div>
                                     ) : selectedProduct ? (
                                         <ProductPanel
