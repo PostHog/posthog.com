@@ -5,13 +5,14 @@ import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import OSTable from 'components/OSTable'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconCheck, IconLogomark } from '@posthog/icons'
-import InstallationPlatforms from '../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
-import Pricing from '../../components/Pricing/PricingCalculator/SingleProduct'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import InstallationPlatforms from '../../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
+import Pricing from '../../../components/Pricing/PricingCalculator/SingleProduct'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, IconDatabase } from '@posthog/icons'
 import Card from 'components/Card'
 import Link from 'components/Link'
+import ErrorTrackingDiagram from './error-tracking-diagram'
 
 const maxWidth = 'max-w-4xl'
 
@@ -19,76 +20,41 @@ const phFeatures = [
     {
         title: 'Session replay',
         description: 'Watch session recordings of users for more context and to help reproduce issues.',
-        icon: <IconRewindPlay className="h-6" />,
-        color: 'yellow',
+        icon: <IconRewindPlay className="text-yellow" />,
         url: '/docs/session-replay',
     },
     {
         title: 'Product analytics',
         description:
             'Graph exception events and create trends to understand how exceptions impact conversion and revenue.',
-        icon: <IconTrends className="h-6" />,
-        color: 'blue',
+        icon: <IconTrends className="text-blue" />,
         url: '/docs/product-analytics',
     },
     {
         title: 'Feature flags',
-       description: 'Safely roll out fixes to users affected by an issue.',
-        icon: <IconToggle className="h-6" />,
-        color: 'seagreen',
+        description: 'Safely roll out fixes to users affected by an issue.',
+        icon: <IconToggle className="text-seagreen" />,
         url: '/docs/feature-flags',
     },
     {
         title: 'Person profiles',
         description: 'See all exception events for specific users in their event history log.',
-        icon: <IconUser className="h-6" />,
-        color: 'red',
+        icon: <IconUser className="text-red" />,
         url: '/docs/product-analytics/identify',
     },
     {
         title: 'LLM analytics',
         description: 'Debug LLM calls and AI generations with full conversation traces and built-in error tracking.',
-        icon: <IconLlmAnalytics className="h-6" />,
-        color: 'purple',
+        icon: <IconLlmAnalytics className="text-[#681291]" />,
         url: '/docs/llm-analytics',
     },
     {
         title: 'Data warehouse',
         description: 'Write SQL to query exception events and product data directly from the data warehouse.',
-        icon: <IconDatabase className="h-6" />,
-        color: 'purple',
+        icon: <IconDatabase className="text-purple" />,
         url: '/docs/data-warehouse',
     },
 ]
-
-const asciiPlaceholder = `
-┌───────────────────┐    ┌───────────────────┐    ┌───────────────────┐
-│     Frontend      │    │     Backend       │    │      Mobile       │
-│   [PostHog SDK]   │    │   [PostHog SDK]   │    │   [PostHog SDK]   │
-└───────────────────┘    └───────────────────┘    └───────────────────┘
-          │                      │                        │
-          ▼                      ▼                        ▼
-┌───────────────────────────────────────────────────────────────────────┐
-│                   AUTOCAPTURE OR MANUAL CAPTURE                       │
-│   • Errors           • Exceptions       • Events                      │
-│   • Stack traces     • Source maps      • Custom properties           │
-└───────────────────────────────────────────────────────────────────────┘
-                                    │ Events sent
-                                    ▼ 
-┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                                       🦔 POSTHOG                                        │
-│                                      DATA WAREHOUSE                                     │
-│ ╔═══════════════════╗ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
-│ ║   ERROR TRACKING  ║ │ PRODUCT ANALYTICS │ │ PERSON PROFILES   │ │ WEB ANALYTICS     │ │
-│ ║ • Manage issues   ║ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
-│ ║ • Stack traces    ║ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
-│ ║ • Group errors    ║ │ SESSION REPLAY    │ │ FEATURE FLAGS     │ │ EXPERIMENTS       │ │
-│ ║ • Assign owners   ║ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
-│ ║ • Set status      ║ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ │
-│ ║ • Fix with AI     ║ │ SQL ACCESS        │ │ LLM ANALYTICS     │ │ More...           │ │
-│ ╚═══════════════════╝ └───────────────────┘ └───────────────────┘ └───────────────────┘ │
-└─────────────────────────────────────────────────────────────────────────────────────────┘
-`
 
 const errorTrackingFeatures = [
     { text: 'Capture exceptions', url: '/docs/error-tracking/capture' },
@@ -106,7 +72,7 @@ const errorTrackingFeatures = [
 export const Content = () => {
     return (
         <>
-            <section className={`mb-8 mx-auto ${maxWidth}`}>
+            <section className={`mb-4 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
@@ -124,13 +90,17 @@ export const Content = () => {
                     </ul>
                 </div>
 
-                <div className="mt-8">
-                    <SingleCodeBlock language="ascii">{asciiPlaceholder}</SingleCodeBlock>
+                <div className="mt-8 -mx-4 @xl:-mx-8">
+                    <ScrollArea fullWidth>
+                        <div className="px-4 @xl:px-8">
+                            <ErrorTrackingDiagram className={`max-h-[28rem] min-h-[22rem] fill-primary`} />
+                        </div>
+                    </ScrollArea>
                 </div>
             </section>
 
             <section className={`mb-8 mx-auto ${maxWidth}`}>
-                <h2 className="mb-4">SDKs and frameworks</h2>
+                <h2 className="mb-4 mt-0">SDKs and frameworks</h2>
                 <div className="mt-4">
                     <InstallationPlatforms columns={3} />
                 </div>
@@ -141,9 +111,9 @@ export const Content = () => {
                 <OSTable
                     columns={[
                         { name: '', width: '1fr', align: 'left' },
-                        { name: <IconLogomark className="h-7" />, width: '120px', align: 'center' },
+                        { name: <IconLogomark className="h-7" />, width: '80px', align: 'center' },
                         { name: '', width: '1fr', align: 'left' },
-                        { name: <IconLogomark className="h-7" />, width: '120px', align: 'center' },
+                        { name: <IconLogomark className="h-7" />, width: '80px', align: 'center' },
                     ]}
                     rows={errorTrackingFeatures.reduce((rows, feature, i) => {
                         if (i % 2 === 0) rows.push({ cells: [] as any[] })
@@ -165,8 +135,8 @@ export const Content = () => {
                         <Card key={index} url={feature.url} className="bg-accent dark:bg-accent-dark not-prose">
                             <div key="content" className="px-4 py-3">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <div className={`text-${feature.color}`}>{feature.icon}</div>
-                                    <h4 className="font-semibold my-0">{feature.title}</h4>
+                                    <div className="w-6 h-6 flex-shrink-0">{feature.icon}</div>
+                                    <h4 className="font-semibold my-0 flex-1">{feature.title}</h4>
                                 </div>
                                 <p className="text-secondary text-sm">{feature.description}</p>
                             </div>
@@ -178,7 +148,8 @@ export const Content = () => {
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">Pricing</h2>
                 <p>
-                    PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies <em>use PostHog for free</em>.
+                    PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our
+                    large free tier means more than 90% of companies <em>use PostHog for free</em>.
                 </p>
                 <p>
                     No credit card is required to get started. You can also set billing limits to avoid any surprise
@@ -195,7 +166,6 @@ export const Content = () => {
 
             <section className={`mb-8 mx-auto ${maxWidth}`}>
                 <h2 className="mb-4">Next steps</h2>
-
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
                     <ResourceItem
                         type="Getting started"
@@ -221,7 +191,7 @@ export const Content = () => {
     )
 }
 
-const ErrorTracking: React.FC<ErrorTrackingProps> = () => {
+const ErrorTracking: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Error tracking - Docs - PostHog" />
