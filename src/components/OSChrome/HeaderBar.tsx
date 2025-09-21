@@ -15,6 +15,7 @@ import {
     IconBookmarkSolid,
     IconBottomPanel,
     IconChevronDown,
+    IconReceipt,
 } from '@posthog/icons'
 import { IconPDF } from 'components/OSIcons'
 import { useWindow } from '../../context/Window'
@@ -66,6 +67,10 @@ interface HeaderBarProps {
     onToggleDrawer?: () => void
     navIconClassName?: string
     isEditing?: boolean
+    showOrderHistory?: boolean
+    isOrderHistoryOpen?: boolean
+    onOrderHistoryOpen?: () => void
+    onOrderHistoryClose?: () => void
 }
 
 export default function HeaderBar({
@@ -97,6 +102,10 @@ export default function HeaderBar({
     onToggleDrawer,
     navIconClassName = '',
     isEditing = false,
+    showOrderHistory = false,
+    isOrderHistoryOpen = false,
+    onOrderHistoryOpen,
+    onOrderHistoryClose,
 }: HeaderBarProps) {
     const { compact, focusedWindow } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
@@ -125,6 +134,14 @@ export default function HeaderBar({
             onCartClose?.()
         } else {
             onCartOpen?.()
+        }
+    }
+
+    const handleOrderHistoryClick = () => {
+        if (isOrderHistoryOpen) {
+            onOrderHistoryClose?.()
+        } else {
+            onOrderHistoryOpen?.()
         }
     }
 
@@ -232,6 +249,20 @@ export default function HeaderBar({
                                         <KeyboardShortcut text="F" size="xs" />
                                     </div>
                                 </div>
+                            </Tooltip>
+                        )}
+                        {showOrderHistory && (
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        onClick={handleOrderHistoryClick}
+                                        active={isOrderHistoryOpen}
+                                        size="md"
+                                        icon={<IconReceipt />}
+                                    />
+                                }
+                            >
+                                Order history
                             </Tooltip>
                         )}
                         {showCart && (
