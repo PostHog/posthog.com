@@ -386,12 +386,18 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     )
 
     const fetchOrders = async () => {
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
-            headers: {
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        }).then((res) => res.json())
-        setOrders(data)
+    const fetchOrders = async () => {
+        try {
+            const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+                headers: {
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            }).then((res) => res.json())
+            setOrders(data)
+        } catch (error) {
+            console.error('Failed to fetch orders:', error)
+            setOrders([])
+        }
     }
 
     useEffect(() => {
