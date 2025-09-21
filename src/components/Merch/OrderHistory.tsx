@@ -30,7 +30,10 @@ export default function OrderHistory({ orders }: { orders: any[] }) {
         return dayjs(dateString).format('MMM D, YYYY h:mm A')
     }
 
-    const ordersToDisplay = orders
+    return (
+        <>
+            <div className="grid grid-cols-1 @xl:grid-cols-2 gap-4 p-4">
+                {orders.map((order: any) => {
 
     return (
         <>
