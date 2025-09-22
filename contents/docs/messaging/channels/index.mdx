@@ -58,12 +58,12 @@ Once verified, you'll see a green check mark in your settings.
 </Tab.Panel>
 <Tab.Panel>
 
-placeholder
+> Twilio support is coming soon. If there are other channels you'd like to see supported, please [let us know](https://app.posthog.com/messaging/campaigns#panel=support).
 
 </Tab.Panel>
 <Tab.Panel>
 
-placeholder
+> Webhook support is coming soon. If there are other channels you'd like to see supported, please [let us know](https://app.posthog.com/messaging/campaigns#panel=support).
 
 </Tab.Panel>
 </Tab.Panels>
@@ -71,55 +71,38 @@ placeholder
 
 </Step>
 
-<Step title="Create a template" badge="required">
+<Step title="Create a template" badge="recommended">
 
 Navigate to **Messaging** > **Templates** tab > click **+ Create new**.
 
 - Give your template a name.
 - Write your subject line and body content (HTML and text versions are supported).
-- Use variables like `{{ person.name }}` to personalize your message.
+- Use variables like `{{ person.name }}` to personalize your message. See the [campaign builder](/docs/messaging/campaign-builder) documentation for more information on available variables.
 
 Save your template — you'll be able to select it later when you design a campaign.
 
-</Step>
-
-<Step title="Test your setup" badge="required">
-
-{/* TODO: This doesn't seem to exist in the UI yet */}
-
-Before going live, send a test message:
-
-- In the template editor, click **Send test**.
-- Choose your own user profile (must have a valid email property).
-- Confirm the email arrives as expected.
+You'll still be able to edit the message in the campaign builder.
 
 </Step>
 
 <Step title="Use in a campaign" badge="required">
 
-1. Open the Campaign Builder.
-2. Drag an **Email** step into your workflow.
-3. Select the template you created.
-4. Connect it to your trigger and other steps.
+Once your channel is created, you can use it in a campaign to deliver messages to your users.
 
-Once published, users who reach this step will receive your email.
+<CallToAction type="primary" to="/docs/messaging/launch-campaign">
+  Launch your first campaign
+</CallToAction>
+
+</Step>
+
+<Step checkpoint title="Troubleshooting" subtitle="Common issues you may encounter">
+
+| Issue | Solution |
+| --- | --- |
+| Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
+| Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
+| Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
 
 </Step>
 
 </Steps>
-
-## Troubleshooting
-
-- **Emails not sending?**  
-  Check that your domain is verified and you’ve added the DNS records correctly.
-
-- **Spam folder issues?**  
-  Ensure SPF/DKIM are valid, and consider setting up DMARC.
-
-- **Variables not populating?**  
-  Confirm the property exists on the person profile (e.g. `person.name`).
-
-## Next steps
-
-- Learn how to [build a drip campaign](/docs/messaging/email-drip-campaign)  
-- Explore other [messaging channels](/docs/messaging/start-here)

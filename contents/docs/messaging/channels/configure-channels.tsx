@@ -10,14 +10,14 @@ const InstallationPlatforms = () => {
         },
         {
             label: 'Slack',
-            url: '/docs/messaging/channels/slack',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_EDCRACS_4_55ce672831.png',
+            badge: 'Coming soon',
         },
 
         {
             label: 'Twilio',
-            url: '/docs/messaging/channels/twilio',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/twilio_860042a891.png',
+            badge: 'Coming soon',
         },
     ]
 

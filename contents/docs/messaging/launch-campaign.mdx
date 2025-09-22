@@ -1,0 +1,153 @@
+---
+title: "Launch your first messaging campaign"
+showStepsToc: true
+---
+
+import Tab from "components/Tab"
+
+After setting up your [messaging channel](/docs/messaging/channels), you can launch your first campaign. Campaigns are workflows that deliver messages to your users based your configured logic.
+
+This guide covers creating a very basic campaign. See the [campaign builder](/docs/messaging/campaign-builder) for more information on the different components of a campaign, and see the end of this guide for more examples.
+
+<Steps>
+
+<Step title="Create a campaign" badge="required">
+
+Go to [Messaging](https://app.posthog.com/messaging/campaigns/new/workflow) and click the **+ New campaign button**.  
+
+This will open the campaign builder:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
+    classes="rounded"
+    alt="Fresh campaign with trigger block"
+/>
+
+The new campaign only has two blocks:
+- A trigger block: This defines the event that will start the campaign workflow.
+- An exit block: This defines the event that will end the campaign workflow.
+
+On the right side of the campaign builder, you can see the types of blocks available to add to your campaign.
+
+</Step>
+
+<Step title="Configure the trigger" badge="required">
+
+Now, let's click on the trigger block and configure it. In a new campaign, the trigger doesn't have any trigger events. Triggers tell PostHog what events will start the campaign workflow.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_light_40e539b7ee.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_dark_02b15cd094.png"
+    classes="rounded"
+    alt="Trigger warning that event is required"
+/>
+
+Click the **+ Add trigger event** button and search for the event you want to use as the trigger. In this example, we'll use a `pageview` event to send an email to **any** users who view a page on our website.
+
+You can use any PostHog event as a trigger. For example, you could add a button in your app that captures a `test_email` event when clicked.
+
+</Step>
+
+<Step title="Add an action" badge="required">
+
+Now that we have a trigger that can initiate the campaign workflow, we need to add an action to send a message to the users who trigger the campaign.
+
+<Tab.Group tabs={[
+'Email', 
+'Twilio', 
+'Webhook']}>
+<Tab.List>
+<Tab>Email</Tab>
+<Tab>Twilio</Tab>
+<Tab>Webhook</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+Drag an **Email** action beneath the trigger, into the campaign. Then, click on the email block to configure it.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_light_ed7a551fec.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_dark_a58f62c95f.png"
+    classes="rounded"
+    alt="Configure email template"
+/>
+
+In the email template, you can configure the following:
+- **From:** A sender address configured in your messaging channel.
+- **To:** The email address of the recipient. By default, it targets the user who's event triggered the campaign.
+- **Subject:** The subject line of the email.
+- **Preheader:** The optional preheader of the email.
+- **Body:** The body of the email. You can use the built in editor to format your email, or you can use a custom template.
+
+During testing, you can hardcode your own email address in the **To** field for testing.
+
+The email template has access to event and person properties of the trigger event. You can learn more about this in the [campaign builder](/docs/messaging/campaign-builder) documentation.
+
+</Tab.Panel>
+<Tab.Panel>
+
+> Twilio support is coming soon. If there are other channels you'd like to see supported, please [let us know](https://app.posthog.com/messaging/campaigns#panel=support).
+
+</Tab.Panel>
+<Tab.Panel>
+
+> Webhook support is coming soon. If there are other channels you'd like to see supported, please [let us know](https://app.posthog.com/messaging/campaigns#panel=support).
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step checkpoint title="Test the campaign" subtitle="Confirm you can trigger the campaign">
+
+Before publishing the campaign, you can test it to confirm it works as expected. On the right side of the campaign builder, you can see the **Test** button.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/test_campaign_light_898c0791af.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/test_campaign_dark_9ffc6cdd44.png"
+    classes="rounded"
+    alt="Test campaign"
+/>
+
+When you click the **Test** button, you will be directed to test the campaign by creating a mock trigger. The following options are available:
+
+- **Make a real request to PostHog:** When enabled, real messages will be delivered to the recipient. When disabled, API calls are mocked and logged.
+- **Test event:** Click to expand the test event configuration. An example event will be generated by default. You can click the **Load new event** to load a real event's data into the test event.
+
+You can click the ** Run test** button to send the test event.
+
+</Step>
+
+<Step title="Enable the campaign" badge="required">
+
+Once you have confirmed the campaign works as expected, you can enable it by clicking the **Enable** button at the top right of the campaign builder.
+
+This will publish the campaign and start delivering messages to your when the trigger event is triggered. For this example campaign, you can hardcode all emails to your own email address for testing.
+
+</Step>
+
+<Step checkpoint title="Monitor the campaign" subtitle="Confirm messages are being delivered">
+
+Once the campaign is enabled, you can monitor your campaign in the **Metrics** and **Logs** tabs of the campaign builder.
+
+To confirm your campaign is delivering messages, look for these signs:
+- In the **Metrics** tab, you should see a line chart showing the number of **succeeded** and **triggered** messages.
+- In the **Logs** tab, you can see logs of recently triggered campaign workflows. Confirm that there aren't any errors.
+- See the message delivered in your inbox.
+
+</Step>
+
+<Step checkpoint title="Troubleshooting" subtitle="Common issues you may encounter">
+
+| Issue | Solution |
+| --- | --- |
+| Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
+| Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
+| Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
+
+</Step>
+
+</Steps>

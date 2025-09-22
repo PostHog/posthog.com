@@ -4738,7 +4738,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Design your first campaign',
-                    url: '/docs/messaging/design-campaign',
+                    url: '/docs/messaging/launch-campaign',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
@@ -4749,12 +4749,6 @@ export const docsMenu = {
                 {
                     name: 'Campaign builder',
                     url: '/docs/messaging/campaign-builder',
-                    icon: 'IconDatabase',
-                    color: 'orange',
-                },
-                {
-                    name: 'Triggers and actions',
-                    url: '/docs/messaging/triggers-and-actions',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },

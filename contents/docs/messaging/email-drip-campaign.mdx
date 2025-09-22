@@ -3,20 +3,29 @@ title: "Set up an email drip campaign"
 showStepsToc: true
 ---
 
-In this guide we’ll walk through creating a simple **drip campaign**:  
-send a welcome email when a user signs up, then follow up 1 day later if they haven't completed onboarding.
+In this guide we'll walk through creating a simple **drip campaign**. After following this guide, you will:
+- Send a welcome email when a user signs up
+- Follow up 1 day later if they haven't completed onboarding
 
 <Steps>
 
 <Step title="Create a campaign" badge="required">
 
-Go to **Messaging** and click the ** `+ New campaign` button**.  
+Go to **Messaging** and click the **+ New campaign button**.  
 
-![click-button](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/messaging_empty_state_7a76cee4f6.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/messaging_empty_state_7a76cee4f6.png"
+    classes="rounded"
+    alt="Click the New Campaign button"
+/>
 
-You’ll see a trigger block connected to an exit.
+You'll see a trigger block connected to an exit.
 
-![fresh](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/fresh_campaign_aeecc715f2.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/fresh_campaign_aeecc715f2.png"
+    classes="rounded"
+    alt="Fresh campaign with trigger block"
+/>
 
 You can see that the trigger is not set because it has a little exclamation mark.
 
@@ -26,37 +35,68 @@ You can see that the trigger is not set because it has a little exclamation mark
 
 Click on the trigger, there will be a warning that an event is required.
 
-![trigger-unset](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_unset_ea39720d30.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_unset_ea39720d30.png"
+    classes="rounded"
+    alt="Trigger warning that event is required"
+/>
 
 Click the `add trigger event` button
 
-![select](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/select_trigger_event_b6c080df9d.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/select_trigger_event_b6c080df9d.png"
+    classes="rounded"
+    alt="Select trigger event button"
+/>
 
 Then search for your signup event (`user signed up`) and click it. It should look something like:
 
-![Trigger](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_event_74ae2e44d9.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_event_74ae2e44d9.png"
+    classes="rounded"
+    alt="Trigger event configuration"
+/>
 
 Don't worry about the conversion goal or exit conditions for now, and exit this step by clicking on the back arrow in the sidepanel - this is how you will exit any step after configuring it.
 
-![small-back](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/back_arrow_8b6b01f77b.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/back_arrow_8b6b01f77b.png"
+    classes="rounded"
+    alt="Back arrow in sidepanel"
+/>
 
 </Step>
 
 <Step title="Send the first email" badge="required">
 
 Drag an **Email** action beneath the trigger, into the campaign like this:
-![drag](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/drag_email_07b4d22856.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/drag_email_07b4d22856.png"
+    classes="rounded"
+    alt="Dragging email action"
+/>
 
 The unconfigured email step will look like this:
-![unconf](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unconfigured_email_b091c33ab4.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unconfigured_email_b091c33ab4.png"
+    classes="rounded"
+    alt="Unconfigured email step"
+/>
 
 You will need to set the subject line, and the sender:
-![subj](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_subject_sender_1904934c7e.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_subject_sender_1904934c7e.png"
+    classes="rounded"
+    alt="Setting subject line and sender"
+/>
 
 And also select your welcome email template or create a new one, and then click out.
 
-![Email](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/onboarding_email_acb053e59d.png)
-
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/onboarding_email_acb053e59d.png"
+    classes="rounded"
+    alt="Email template selection"
+/>
 
 </Step>
 
@@ -66,48 +106,84 @@ This is where things get interesting. We will want to send a follow up email **o
 
 After the email, add a **Wait until Condition**.  
 
-![wu-first](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wu_first_00937c435b.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wu_first_00937c435b.png"
+    classes="rounded"
+    alt="Adding wait until condition"
+/>
 
 By default there will be 1 branch that is configured, the wait time. In the campaign builder the wait time corresponds to the `no match` branch:
 
-![one-branch-conf](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/one_branch_conf_a2814aaaf0.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/one_branch_conf_a2814aaaf0.png"
+    classes="rounded"
+    alt="One branch configuration"
+/>
 
 So we need to configure the `if condition matches` branch, by clicking on the `add filter` button, and setting it. 
 
 Specifically we need to set a `person property` here (not an event property) so search for the person property related to onboarding like this:
 
-![search_prop](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/search_prop_584e043a77.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/search_prop_584e043a77.png"
+    classes="rounded"
+    alt="Searching person property"
+/>
 
 Then set the condition so that `onboarding_completed = true`
 
-![set_prop](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_prop_1dd69a088b.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_prop_1dd69a088b.png"
+    classes="rounded"
+    alt="Setting property condition"
+/>
 
 For the wait time make it 1 day.
 
 This means if after 1 day the onbaording_completed person property is not set to true, then go down the `no match` branch, otherwise the condition matches, and we proceed down the `if condition matches` branch
 
-![Wait](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wait_until_cond_50ec1f7eea.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wait_until_cond_50ec1f7eea.png"
+    classes="rounded"
+    alt="Wait until condition configuration"
+/>
 
-## Step 5: Follow up email or exit
+</Step>
 
-We now drag one more email to the `no match` branch of the `wait until condition`
+<Step title="Add follow up email" badge="required">
 
-![next](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/next_email_ebb71d38d8.png)
+For users who haven't completed onboarding after the wait period, we'll send a follow-up email. Drag an email action to the `no match` branch of the `wait until condition`.
 
-This means:
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/next_email_ebb71d38d8.png"
+    classes="rounded"
+    alt="Adding follow up email"
+/>
 
-- Exit the campaign if their person property `first_onboarding_complete` is set to `true` (they’ve already activated).
-- Receive another Email step with a follow-up, if they have not completed onboarding!
+Configure this email with content encouraging them to complete onboarding. Some tips:
+
+- Keep it short and focused
+- Include a clear call-to-action
+- Highlight the value they'll get from completing onboarding
+- Consider offering help or support
+
+The campaign will now:
+- Exit if their person property `first_onboarding_complete` is set to `true` (they've completed onboarding)
+- Send the follow-up email if they have not completed onboarding after the wait period
 
 </Step>
 
 <Step title="Review and launch" badge="required">
 
-Now the complete campaign should look like this ![this](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png)
+Now the complete campaign should look like this:
 
-Click **Create**, and voila the campaign is published.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png"
+    classes="rounded"
+    alt="Complete campaign workflow"
+/>
 
-Your new users will now automatically receive the drip campaign!
+Click **Create** to publish the campaign. Your new users will now automatically receive this drip campaign to help guide them through onboarding.
 
 </Step>
 
