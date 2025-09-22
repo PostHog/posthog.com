@@ -63,8 +63,10 @@ export const Discounts = () => (
                 <strong>Small OSS projects without corporate backing</strong>
                 <p className="text-[15px] mb-2">
                     If you have an open source project without corporate backing that has less than $200k annual
-                    revenue, you can get up to $50k credits per year to use PostHog for free, subject to approval. Get
-                    in touch through the app after signing up to see if you qualify!
+                    revenue, you can join our PostHog for Startups program to claim $50,000 of PostHog credits.{' '}
+                    <Link to="/startups" className="text-red dark:text-yellow font-semibold">
+                        Apply here.
+                    </Link>
                 </p>
             </li>
         </ul>
