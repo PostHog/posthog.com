@@ -79,7 +79,7 @@ export const Content = () => {
                         <Link to="/customer-data-infrastructure">customer data infrastructure</Link>, PostHog error
                         tracking connects issues to user data and product context for faster, more effective debugging.
                     </p>
-                    <p>It's particualrly useful for engineers who:</p>
+                    <p>It's particularly useful for engineers who:</p>
                     <ul>
                         <li>Move fast and ship code often</li>
                         <li>Work on full-stack, product-led engineering teams</li>
@@ -216,9 +216,9 @@ const ErrorTracking: React.FC = () => {
                     <AskMax
                         className=""
                         quickQuestions={[
-                            'How do I see what the most common errors are?',
-                            'How do I custom error groups?',
-                            'How do I assign someone an error?',
+                            'How do I see what the most common issues are?',
+                            'How do I customize error groups?',
+                            'How do I assign someone an issue?',
                         ]}
                     />
                 </div>
