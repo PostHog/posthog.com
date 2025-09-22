@@ -1,11 +1,11 @@
 import React from 'react'
 import List from 'components/List'
 
-const InstallationPlatforms = () => {
+const ChannelPlatforms = () => {
     const platforms = [
         {
             label: 'Email',
-            url: '/docs/messaging/channels/email',
+            url: '/docs/messaging/configure-channels?tab=Email',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/email_channel_dcb0bdadf1.svg',
         },
         {
@@ -23,4 +23,4 @@ const InstallationPlatforms = () => {
 
     return <List className="gap-4 grid sm:grid-cols-2 not-prose mt-8" items={platforms} />
 }
-export default InstallationPlatforms
+export default ChannelPlatforms

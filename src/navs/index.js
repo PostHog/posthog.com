@@ -4731,7 +4731,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Configure a messaging channel',
-                    url: '/docs/messaging/channels',
+                    url: '/docs/messaging/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
