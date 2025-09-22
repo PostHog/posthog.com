@@ -1,6 +1,6 @@
 ---
 title: Avoid these AI coding mistakes
-date: 2025-09-16
+date: 2025-09-22
 author:
  - ian-vanagas
 tags:
@@ -37,19 +37,21 @@ As one of our product engineers, Paul, said in [his blog on how he uses LLMs](ht
 
 > They're not actually very good software engineers… particularly since most of the data they've ingested about software engineering is "blogs on how to start something from scratch". So, if that's not the task. Then I find it often harder to prompt an LLM to do than to do it myself
 
-## 2. Not having rules and guardrails
+## 2. Not providing the right context, rules, and guardrails
 
 > DO NOT GIVE ME HIGH LEVEL SHIT, IF I ASK FOR FIX OR EXPLANATION, I WANT ACTUAL CODE OR EXPLANATION! I DON'T WANT "Here's how you can blablabla" - `posthog/.cursor/rules`
 
 As LLMs are non-deterministic, they can go off the rails in a lot of ways. You need a structure in place to keep them on track.
 
-Our [AI install wizard](/blog/envoy-wizard-llm-agent) is basically a big scaffold to do just this. Users could ask AI to install PostHog for them, but would quickly run into problems like out-of-date patterns, hallucinated API keys, and phantom libraries. The wizard prevents all of this thanks to the structure it provides.
+Our [AI install wizard](/blog/envoy-wizard-llm-agent) is basically a big scaffold to do just this. Users could ask AI to install PostHog for them, but would quickly start using out-of-date patterns, hallucinated API keys, and phantom libraries. By providing context on PostHog along with guardrails for implementing it, the wizard prevents all of this.
 
-Here's some rules and guardrails we rely on (and recommend):
+Unfortunately, these are rarely set up for you. You need to do this yourself. To help you do this, here are some context, rules, and guardrails we rely on (and recommend):
+
+- Reference examples of code already written whenever possible such as pre-built UI components, database schema, [optimized database queries](/handbook/engineering/databases/query-performance-optimization), testing patterns, and [state management structures](/handbook/engineering/conventions/frontend-coding).
+
+- Documentation, source code, and examples for the libraries, frameworks, or tools you are using. [Danilo](/community/profiles/31731) calls LLMs "a delayed, lossy, compressed snapshot of the web" so this ensures they have as complete of a picture as possible. We added "Copy as Markdown" buttons to all our docs pages to help with this.
 
 - `.cursor/rules`. Have different rule files for different languages (like [Python](https://github.com/PostHog/posthog/blob/master/.cursor/rules/django-python.mdc), [Typescript](https://github.com/PostHog/posthog/blob/master/.cursor/rules/react-typescript.mdc), and [Rust](https://github.com/PostHog/posthog/blob/master/.cursor/rules/rust.mdc)). Include principles, project structure, dependencies, best practices, naming conventions, logging, testing, and security details.
-
-- Reference examples of code already written whenever possible such as pre-built UI components, database schema, [optimized database queries](/handbook/engineering/databases/query-performance-optimization), testing patterns, and [opinionated state management](/handbook/engineering/conventions/frontend-coding).
 
 - `claude.md` and other specification files. A lot of what to include here overlaps with `.cursor/rules` but having clear spec of what you want to do matters a lot more as well as commands Claude can use for tests, linting, and building. [See ours here](https://github.com/PostHog/posthog/blob/e945beb317fc9d1a2830be758534881a9e81be29/CLAUDE.md?plain=1#L4).
 
