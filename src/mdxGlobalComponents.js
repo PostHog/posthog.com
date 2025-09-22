@@ -63,6 +63,7 @@ import TeamMember from './components/TeamMember'
 import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
 import OSButton from './components/OSButton'
+import AskMax from './components/AskMax'
 
 export const shortcodes = {
     ArrayCTA,
@@ -129,4 +130,5 @@ export const shortcodes = {
     TeamMember,
     Steps,
     Step,
+    AskMax,
 }
