@@ -134,7 +134,7 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 
 ### Startup plan discounts
 
-For customers on our [startup plan](/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiry date, they still have until the original expiry date to decide and claim the offer. When applied, the offer covers the first two full months of usage on their new annual plan. Our standard discounting rules are applied based on the number of credits the customer is actually paying for. 
+For customers on our [startup plan](/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. When applied, the offer covers the first two full months of usage on their new annual plan. Our standard discounting rules are applied based on the number of credits the customer is actually paying for. 
 
 ## Additional credit purchase
 
