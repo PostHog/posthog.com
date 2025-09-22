@@ -1,14 +1,6 @@
-### Q3 2025 objectives
+### Q4 2025 objectives
 
-#### Goal 1: General Availability Launch of LLM Analytics
-
-*Description*: Make LLM Analytics a fully supported PostHog product available to all customers. This will help teams reliably understand, monitor, and optimize their AI applications at scale.
-
-*What we will ship*: 
-- Comprehensive, easy-to-follow documentation covering all major workflows and SDKs
-- Integrated into the onboarding experience to help AI companies discover and set up LLM Analytics quickly
-
-#### Goal 2: Evals  
+#### Goal 1: Evals
 
 *Description*: AI systems are inherently unpredictable, outputs often vary even when inputs are the same. Evals will give teams a structured way to measure output quality, detect regressions, and prioritize improvements as their AI applications evolve.
 
@@ -18,3 +10,33 @@
 - Ability to run Evals in CI pipelines to catch issues before production
 - Tools for creating and managing **Datasets** for consistent, repeatable evaluations
 
+#### Goal 2: New Ingestion Pipeline
+
+*Description*: A dedicated ingestion pipeline built specifically for LLM events, enabling better performance and new capabilities for LLM tracking.
+
+*What we will ship*:
+- Independent ingestion endpoint optimized for LLM event data
+- Better scaling for high-volume customers
+
+#### Goal 3: Query Performance Improvements
+
+*Description*: Faster, more reliable queries in the LLM Analytics dashboard.
+
+*What we will ship*:
+- Optimized LLM events storage for fast querying, even for customers with large datasets
+
+#### Goal 4: Multi-Modal Messages
+
+*Description*: Support for including images, audio, and other media types alongside text in LLM events.
+
+*What we will ship*:
+- Allow sending and storing non-text data (images, audio, video) in LLM events
+
+#### Goal 5: Prompt Management
+
+*Description*: Manage and optimize your prompts directly in PostHog, with your application fetching the latest versions programatically.
+
+*What we will ship*:
+- Create and edit prompts in the PostHog UI
+- Prompts version control
+- Performance metrics for different prompt versions
