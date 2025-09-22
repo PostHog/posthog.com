@@ -34,11 +34,6 @@ export default function OrderHistory({ orders }: { orders: any[] }) {
         <>
             <div className="grid grid-cols-1 @xl:grid-cols-2 gap-4 p-4">
                 {orders.map((order: any) => {
-
-    return (
-        <>
-            <div className="grid grid-cols-1 @xl:grid-cols-2 gap-4 p-4">
-                {ordersToDisplay.map((order: any) => {
                     const orderDetails = order.orderDetails
 
                     return (

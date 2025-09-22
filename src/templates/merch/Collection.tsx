@@ -386,7 +386,6 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     )
 
     const fetchOrders = async () => {
-    const fetchOrders = async () => {
         try {
             const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
                 headers: {
