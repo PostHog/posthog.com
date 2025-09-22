@@ -100,7 +100,7 @@ Once you’ve got your anthropomorphized AI, you can get specific with the situa
 On the other side, our team finds AI sucks at:
 
 - Writing code in a language it is unfamiliar with, like our internal version of SQL, HogQL.
-- Using the correct (or even existing) methods, classes, libraries. It regularly hallucinates these and assumes their function of them based on their name (rather than their contents).
+- Using the correct (or even existing) methods, classes, libraries. It regularly hallucinates these and assumes their functionality based on their name (rather than their contents).
 - Following best, up to date, and existing practices. It often uses deprecated APIs for example.
 - Writing tests from scratch. Paul says there are so many bad examples of tests out there that LLMs often churn out the same.
 
@@ -142,7 +142,7 @@ As much as you might dislike AI personally, it is a mistake to not use it for tw
 
 2. **Your users are almost certainly using it.** They have AI in their workflows. Some of them will try to fit what you’ve built into those workflows. Especially if you are building for developers, you won’t understand the full experience of using AI in software development if you don’t try it. 
 
-In both cases, knowing the capabilities and limits of AI is helpful, and there is nothing that beats hands on experience. In this way, coding with AI can provide huge benefits even if you use none of the code it writes.
+In both cases, knowing the capabilities and limits of AI is helpful, and there is nothing that beats hands-on experience. In this way, coding with AI can provide huge benefits even if you use none of the code it writes.
 
 ## 6. Letting AI do everything for you
 
