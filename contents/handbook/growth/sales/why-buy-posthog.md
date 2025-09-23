@@ -28,7 +28,7 @@ By integrating PostHog into your app, you’ll be able to track and diagnose err
 
 > Self-serve analytics without needing to ask your engineers or data team for help.
 
-# Summary
+## Summary
 
 After your engineers integrate the PostHog SDK you’ll be able to self-serve analytics without asking your data team for insights.  We automatically track user interactions with your app and then let you tag key events for use in analytics.  You’ll also be able to navigate from the data to individual user interactions to see how users interact with your app and make informed product decisions.
 
