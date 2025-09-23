@@ -86,6 +86,8 @@ const AccordionItem = ({
               }))
             : []
 
+    const Container = useMemo(() => (billedWith ? 'div' : 'button'), [billedWith])
+
     return (
         <li
             className={`border-t relative ${
@@ -94,12 +96,16 @@ const AccordionItem = ({
                     : 'inactive border-primary first:border-transparent'
             }`}
         >
-            <button
-                onClick={onClick}
-                className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
+            <Container
+                onClick={!billedWith ? onClick : undefined}
+                className={`text-left w-full flex justify-between items-center transition-all rounded relative ${
                     isOpen
                         ? 'pt-2 pl-2 pr-3 pb-2 z-20'
-                        : 'px-2 text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                        : `px-2 text-secondary py-2 ${
+                              !billedWith
+                                  ? 'hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px] hover:text-primary'
+                                  : ''
+                          }`
                 }`}
             >
                 <div className="grid grid-cols-12 w-full gap-1 items-center">
@@ -138,47 +144,51 @@ const AccordionItem = ({
                             )
                         )}
                     </div>
-                    <span className="text-right">
-                        {isOpen ? (
-                            <IconMinus className="size-4 inline-block transform rotate-180" />
-                        ) : (
-                            <IconPlus className="size-4 inline-block transform rotate-0" />
-                        )}
-                    </span>
-                </div>
-            </button>
-            <motion.div
-                onAnimationComplete={onAnimationComplete}
-                ref={contentRef}
-                initial={{ height: 0 }}
-                animate={{ height: isOpen ? 'auto' : 0, transition: { duration: 0.3, type: 'tween' } }}
-                className={isOpen ? '' : 'overflow-hidden'}
-            >
-                <div className="px-3 pb-4">
-                    {includeAddonRates && addonData.length > 0 ? (
-                        <div className="space-y-6">
-                            {/* Main product pricing */}
-                            <div>
-                                <h5 className="text-sm font-semibold mb-3">{name}</h5>
-                                <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
-                            </div>
-                            {/* Addon products pricing */}
-                            {addonData.map((addon, index) => (
-                                <div key={index}>
-                                    <h5 className="text-sm font-semibold mb-3">{addon.name}</h5>
-                                    <PricingTiers
-                                        plans={addon.billingData?.plans}
-                                        type={addon.type}
-                                        unit={addon.billingData?.unit}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
+                    {!billedWith && (
+                        <span className="text-right">
+                            {isOpen ? (
+                                <IconMinus className="size-4 inline-block transform rotate-180" />
+                            ) : (
+                                <IconPlus className="size-4 inline-block transform rotate-0" />
+                            )}
+                        </span>
                     )}
                 </div>
-            </motion.div>
+            </Container>
+            {!billedWith && (
+                <motion.div
+                    onAnimationComplete={onAnimationComplete}
+                    ref={contentRef}
+                    initial={{ height: 0 }}
+                    animate={{ height: isOpen ? 'auto' : 0, transition: { duration: 0.3, type: 'tween' } }}
+                    className={isOpen ? '' : 'overflow-hidden'}
+                >
+                    <div className="px-3 pb-4">
+                        {includeAddonRates && addonData.length > 0 ? (
+                            <div className="space-y-6">
+                                {/* Main product pricing */}
+                                <div>
+                                    <h5 className="text-sm font-semibold mb-3">{name}</h5>
+                                    <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
+                                </div>
+                                {/* Addon products pricing */}
+                                {addonData.map((addon, index) => (
+                                    <div key={index}>
+                                        <h5 className="text-sm font-semibold mb-3">{addon.name}</h5>
+                                        <PricingTiers
+                                            plans={addon.billingData?.plans}
+                                            type={addon.type}
+                                            unit={addon.billingData?.unit}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
+                        )}
+                    </div>
+                </motion.div>
+            )}
         </li>
     )
 }

@@ -2,7 +2,7 @@
     "id": "posthog-js",
     "hogRef": "0.3",
     "info": {
-        "version": "1.260.2",
+        "version": "1.266.0",
         "id": "posthog-js",
         "title": "PostHog JavaScript Web SDK",
         "description": "Posthog-js allows you to automatically capture usage and send events to PostHog.",
@@ -15,6 +15,28 @@
             "id": "PostHog",
             "title": "PostHog",
             "functions": [
+                {
+                    "category": "",
+                    "description": "Constructs a new instance of the `PostHog` class",
+                    "details": null,
+                    "id": "PostHog",
+                    "showDocs": true,
+                    "title": "PostHog",
+                    "examples": [
+                        {
+                            "id": "posthog",
+                            "name": "Generated example for PostHog",
+                            "code": "// Generated example for PostHog\nposthog.PostHog();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "any",
+                        "name": "any"
+                    },
+                    "path": "lib/src/posthog-core.d.ts"
+                },
                 {
                     "category": "Identification",
                     "description": "Creates an alias linking two distinct user identifiers. Learn more about [identifying users](/docs/product-analytics/identify)",
@@ -355,6 +377,51 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
+                    "category": "Surveys",
+                    "description": "Display a survey programmatically as either a popover or inline element.",
+                    "details": null,
+                    "id": "displaySurvey",
+                    "showDocs": true,
+                    "title": "displaySurvey",
+                    "examples": [
+                        {
+                            "id": "display_as_popover_(respects_all_conditions_defined_in_the_dashboard)",
+                            "name": "Display as popover (respects all conditions defined in the dashboard)",
+                            "code": "\n\n// Display as popover (respects all conditions defined in the dashboard)\nposthog.displaySurvey('survey-id-123')\n\n\n"
+                        },
+                        {
+                            "id": "display_inline_in_a_specific_element",
+                            "name": "Display inline in a specific element",
+                            "code": "\n\n// Display inline in a specific element\nposthog.displaySurvey('survey-id-123', {\n  displayType: DisplaySurveyType.Inline,\n  selector: '#survey-container'\n})\n\n\n"
+                        },
+                        {
+                            "id": "force_display_ignoring_conditions_and_delays",
+                            "name": "Force display ignoring conditions and delays",
+                            "code": "\n\n// Force display ignoring conditions and delays\nposthog.displaySurvey('survey-id-123', {\n  displayType: DisplaySurveyType.Popover,\n  ignoreConditions: true,\n  ignoreDelay: true\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The survey ID to display",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "surveyId"
+                        },
+                        {
+                            "description": "Display configuration",
+                            "isOptional": true,
+                            "type": "DisplaySurveyOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "lib/src/posthog-core.d.ts"
+                },
+                {
                     "category": "Identification",
                     "description": "Returns the current distinct ID for the user.",
                     "details": "This is either the auto-generated ID or the ID set via `identify()`. The distinct ID is used to associate events with users in PostHog.",
@@ -378,6 +445,28 @@
                     "returnType": {
                         "id": "string",
                         "name": "string"
+                    },
+                    "path": "lib/src/posthog-core.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "Returns the explicit consent status of the user.",
+                    "details": "This can be used to check if the user has explicitly opted in or out of data capturing, or neither. This does not take the default config options into account, only whether the user has made an explicit choice, so this can be used to determine whether to show an initial cookie banner or not.",
+                    "id": "get_explicit_consent_status",
+                    "showDocs": true,
+                    "title": "get_explicit_consent_status",
+                    "examples": [
+                        {
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nconst consentStatus = posthog.get_explicit_consent_status()\nif (consentStatus === \"granted\") {\n    // user has explicitly opted in\n} else if (consentStatus === \"denied\") {\n    // user has explicitly opted out\n} else if (consentStatus === \"pending\"){\n    // user has not made a choice, show consent banner\n}\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "'granted' | 'denied' | 'pending'",
+                        "name": "'granted' | 'denied' | 'pending'"
                     },
                     "path": "lib/src/posthog-core.d.ts"
                 },
@@ -411,7 +500,7 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "Session replay",
+                    "category": "",
                     "description": "Returns the current session_id.",
                     "details": "This should only be used for informative purposes. Any actual internal use case for the session_id should be handled by the sessionManager.",
                     "id": "get_session_id",
@@ -2134,6 +2223,28 @@
             "example": "{\n    scroll_threshold_ms?: number;\n    selection_change_threshold_ms?: number;\n    mutation_threshold_ms?: number;\n    __onCapture?: ((click: DeadClickCandidate, properties: Properties) => void) | undefined;\n} & Pick<AutocaptureConfig, 'element_attribute_ignorelist'>"
         },
         {
+            "id": "DisplaySurveyOptions",
+            "name": "DisplaySurveyOptions",
+            "properties": [],
+            "path": "lib/src/posthog-surveys-types.d.ts",
+            "example": "DisplaySurveyPopoverOptions | DisplaySurveyInlineOptions"
+        },
+        {
+            "id": "DisplaySurveyType",
+            "name": "DisplaySurveyType",
+            "properties": [
+                {
+                    "type": "\"inline\"",
+                    "name": "Inline"
+                },
+                {
+                    "type": "\"popover\"",
+                    "name": "Popover"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
             "id": "DomAutocaptureEvents",
             "name": "DomAutocaptureEvents",
             "properties": [],
@@ -2397,13 +2508,6 @@
             "example": "\"$heatmaps_data\" | \"$opt_in\" | \"$exception\" | \"$$heatmap\" | \"$web_vitals\" | \"$dead_click\" | \"$autocapture\" | \"$rageclick\""
         },
         {
-            "id": "KnownUnsafeEditableEvent",
-            "name": "KnownUnsafeEditableEvent",
-            "properties": [],
-            "path": "lib/src/types.d.ts",
-            "example": "(typeof knownUnsafeEditableEvent)[number]"
-        },
-        {
             "id": "LinkSurveyQuestion",
             "name": "LinkSurveyQuestion",
             "properties": [
@@ -2532,9 +2636,29 @@
                     "name": "__add_tracing_headers"
                 },
                 {
+                    "description": "Prevents posthog-js from using the `navigator.sendBeacon` API to send events. Enabling this option may hurt the reliability of sending $pageleave events",
+                    "type": "boolean",
+                    "name": "__preview_disable_beacon"
+                },
+                {
+                    "description": "Disables sending credentials when using XHR requests.",
+                    "type": "boolean",
+                    "name": "__preview_disable_xhr_credentials"
+                },
+                {
+                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - ONLY USE WHEN TALKING TO POSTHOG SUPPORT Enables deprecated eager loading of session recording code, not just rrweb and network plugin we are switching the default to lazy loading because the bundle will ultimately be 18% smaller then keeping this around for a few days in case there are unexpected consequences that testing did not uncover",
+                    "type": "boolean",
+                    "name": "__preview_eager_load_replay"
+                },
+                {
                     "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Whether to use the new /flags/ endpoint",
                     "type": "boolean",
                     "name": "__preview_flags_v2"
+                },
+                {
+                    "description": "",
+                    "type": "boolean",
+                    "name": "__preview_lazy_load_replay"
                 },
                 {
                     "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Enables the new RemoteConfig approach to loading config instead of /flags?v=2&config=true",
@@ -3226,6 +3350,14 @@
                     "name": "data"
                 },
                 {
+                    "type": "('XHR' | 'fetch' | 'sendBeacon')[]",
+                    "name": "disableTransport"
+                },
+                {
+                    "type": "boolean",
+                    "name": "disableXHRCredentials"
+                },
+                {
                     "type": "{\n        cache?: RequestInit['cache'];\n        next?: NextOptions;\n    }",
                     "name": "fetchOptions"
                 },
@@ -3421,6 +3553,13 @@
                 }
             ],
             "path": "lib/src/types.d.ts"
+        },
+        {
+            "id": "SessionStartReason",
+            "name": "SessionStartReason",
+            "properties": [],
+            "path": "lib/src/types.d.ts",
+            "example": "\"sampling_overridden\" | \"recording_initialized\" | \"linked_flag_matched\" | \"linked_flag_overridden\" | \"session_id_changed\" | \"url_trigger_matched\" | \"event_trigger_matched\""
         },
         {
             "id": "SeverityLevel",

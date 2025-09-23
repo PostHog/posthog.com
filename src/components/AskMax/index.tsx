@@ -7,8 +7,10 @@ import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../context/App'
 import { useLocation } from '@reach/router'
+import { useWindow } from '../../context/Window'
 
 interface AskMaxProps {
+    title?: string
     border?: boolean
     className?: string
     quickQuestions?: string[]
@@ -17,6 +19,7 @@ interface AskMaxProps {
 }
 
 export default function AskMax({
+    title = 'Questions?',
     border = false,
     className = '',
     quickQuestions,
@@ -26,6 +29,7 @@ export default function AskMax({
     const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { openNewChat } = useApp()
+    const { appWindow } = useWindow()
     const location = useLocation()
     const {
         allDocsPages: { totalDocsCount },
@@ -41,7 +45,19 @@ export default function AskMax({
 
     const handleChatOpen = () => {
         posthog?.capture('Opened MaxAI chat')
-        openNewChat({ path: `ask-max-${location.pathname}`, quickQuestions })
+        openNewChat({
+            path: `ask-max-${location.pathname}`,
+            quickQuestions,
+            context: [
+                {
+                    type: 'page',
+                    value: {
+                        path: appWindow?.path || '',
+                        label: appWindow?.meta?.title || '',
+                    },
+                },
+            ],
+        })
     }
 
     if (linkOnly) {
@@ -65,8 +81,8 @@ export default function AskMax({
                             </div>
 
                             <div className="flex flex-col text-center @lg:text-left">
-                                <h3 className="mb-0 mt-0 !text-2xl @lg:!text-xl leading-tight">
-                                    Questions? <span className="text-red dark:text-yellow">Ask Max AI.</span>
+                                <h3 className="m-0 !text-2xl @lg:!text-xl leading-tight">
+                                    {title} <span className="text-red dark:text-yellow">Ask Max AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">
                                     It's easier than reading through{' '}

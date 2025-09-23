@@ -8,6 +8,7 @@ import {
     IconTextWidthFixed,
     IconTextWidth,
     IconRefresh,
+    IconPlus,
 } from '@posthog/icons'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
@@ -86,6 +87,7 @@ interface EditorProps {
         title: string
         description: string
     }
+    extraMenuOptions?: React.ReactNode
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -220,6 +222,7 @@ export function Editor({
     proseSize = 'sm',
     cta,
     bookmark,
+    extraMenuOptions,
     ...other
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
@@ -386,12 +389,6 @@ export function Editor({
             className: 'ml-auto flex items-center gap-px',
             children: (
                 <>
-                    <Options
-                        fullWidthContent={fullWidthContent}
-                        maxWidth={maxWidth}
-                        setMaxWidth={setMaxWidth}
-                        initialMaxWidth={initialMaxWidth}
-                    />
                     <OSButton size="md" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
                     {availableFilters && availableFilters.length > 0 && (
                         <OSButton
@@ -401,7 +398,14 @@ export function Editor({
                             onClick={() => setShowFilters(!showFilters)}
                         />
                     )}
+                    {extraMenuOptions}
                     {bookmark && <BookmarkButton bookmark={bookmark} />}
+                    <Options
+                        fullWidthContent={fullWidthContent}
+                        maxWidth={maxWidth}
+                        setMaxWidth={setMaxWidth}
+                        initialMaxWidth={initialMaxWidth}
+                    />
                     <div
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
@@ -575,8 +579,8 @@ export function Editor({
                                                 disabled={disableFilterChange}
                                                 placeholder={filter.label}
                                                 defaultValue={
-                                                    filters[filter.value || filter.label]?.value ||
-                                                    filter.initialValue ||
+                                                    filters[filter.value ?? filter.label]?.value ??
+                                                    filter.initialValue ??
                                                     filter.options[0].value
                                                 }
                                                 groups={[
@@ -590,7 +594,7 @@ export function Editor({
                                                 ]}
                                                 onValueChange={(value) =>
                                                     handleFilterChange(
-                                                        filter.value || filter.label,
+                                                        filter.value ?? filter.label,
                                                         value,
                                                         filter.filter
                                                     )

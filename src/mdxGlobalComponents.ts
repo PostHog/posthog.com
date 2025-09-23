@@ -23,6 +23,7 @@ import { ProductVideo } from './components/ProductVideo'
 import { StarRepoButton } from './components/StarRepoButton'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import { Steps, Step } from './components/Docs/Steps'
+import AskMax from './components/AskMax'
 
 export const shortcodes = {
     ArrayCTA,
@@ -51,4 +52,5 @@ export const shortcodes = {
     Step,
     SmallTeam,
     TeamMember,
+    AskMax,
 }

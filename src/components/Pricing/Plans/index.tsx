@@ -57,7 +57,7 @@ export const InclusionOnlyRow = ({ plans }) => (
             <Title
                 key={`inclusion-only-${plan_key}-${index}`}
                 title={included_if === 'no_active_subscription' ? 'Free' : 'Paid'}
-                className="font-bold max-w-[25%] w-full min-w-[105px]"
+                className="font-bold max-w-[25%] w-full min-w-[150px]"
             />
         ))}
     </Row>
@@ -131,7 +131,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             className={
                                 showSubtotal
                                     ? `col-span-4`
-                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`
+                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[150px]'}`
                             }
                         >
                             <Title
@@ -465,7 +465,7 @@ export default function Plans({
                                                     ? 'No credit card required'
                                                     : 'All features, no limitations'
                                             }
-                                            className="max-w-[25%] w-full min-w-[105px]"
+                                            className="max-w-[25%] w-full min-w-[150px]"
                                             key={plan_key}
                                         />
                                     )
@@ -477,7 +477,7 @@ export default function Plans({
                                     return (
                                         <p
                                             key={`${type}-${plan_key}`}
-                                            className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
+                                            className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[150px]"
                                         >
                                             {free_allocation ? (
                                                 <>
@@ -529,7 +529,7 @@ export default function Plans({
                                     {plans.map((plan, i) => (
                                         <div
                                             key={`${feature.key}-${type}-${i}`}
-                                            className="max-w-[25%] w-full min-w-[105px]"
+                                            className="max-w-[25%] w-full min-w-[150px]"
                                         >
                                             <Feature feature={plan.features?.find(({ key }) => key === feature.key)} />
                                         </div>
@@ -552,7 +552,7 @@ export default function Plans({
                                     {plans.map((plan, i) => {
                                         return (
                                             <div
-                                                className="max-w-[25%] w-full min-w-[105px]"
+                                                className="max-w-[25%] w-full min-w-[150px]"
                                                 key={`${addon.type}-${plan.plan_key}`}
                                             >
                                                 {plan.free_allocation && !plan.included_if ? (
@@ -590,7 +590,7 @@ export default function Plans({
                 <Row>
                     <div className="flex-grow" />
                     {plans.map((plan, index) => (
-                        <div className="max-w-[25%] w-full min-w-[105px]" key={`cta-${plan.product_key}-${index}`}>
+                        <div className="max-w-[25%] w-full min-w-[150px]" key={`cta-${plan.product_key}-${index}`}>
                             <CTA />
                         </div>
                     ))}
