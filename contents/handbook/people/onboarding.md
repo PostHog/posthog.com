@@ -3,7 +3,7 @@ title: Onboarding
 sidebar: Handbook
 showTitle: true
 ---
-
+vv
 Welcome to PostHog! 
 
 Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company. 
