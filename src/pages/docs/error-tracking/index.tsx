@@ -61,10 +61,10 @@ const errorTrackingFeatures = [
     { text: 'Custom error grouping', url: '/docs/error-tracking/grouping-issues' },
     { text: 'Issue management', url: '/docs/error-tracking/managing-issues' },
     { text: 'Team assignments', url: '/docs/error-tracking/assigning-issues' },
-    { text: 'MCP integration', url: '/docs/error-tracking/debugging-with-mcp' },
-    { text: 'Fix with AI', url: '/docs/error-tracking/fix-with-ai-prompts' },
     { text: 'Alerts', url: '/docs/error-tracking/alerts' },
     { text: 'Integrations with Linear and GitHub', url: '/docs/error-tracking/external-tracking' },
+    { text: 'MCP integration', url: '/docs/error-tracking/debugging-with-mcp' },
+    { text: 'Fix with AI', url: '/docs/error-tracking/fix-with-ai-prompts' },
 ]
 
 export const Content = () => {
