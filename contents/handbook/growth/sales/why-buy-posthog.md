@@ -32,7 +32,7 @@ By integrating PostHog into your app, you’ll be able to track and diagnose err
 
 After your engineers integrate the PostHog SDK you’ll be able to self-serve analytics without asking your data team for insights.  We automatically track user interactions with your app and then let you tag key events for use in analytics.  You’ll also be able to navigate from the data to individual user interactions to see how users interact with your app and make informed product decisions.
 
-# Use cases
+## Use cases
 - [Create trends, funnels and other insights](/product-analytics) without asking your engineers to instrument events.  We automatically track pageviews, clicks, rageclicks etc and then make it easy to visualize these with insights Product Managers will be familiar with.
 - [Track key metrics such as NPS, CSAT](/surveys) via in-app surveys and measure the trends over time.
 - [Easily uncover user friction](/session-replay) by following the drop-offs in a funnel to replays to understand what the user experiences.  Surface any errors to your engineering team via issue assignment to get your user problems solved quickly.
