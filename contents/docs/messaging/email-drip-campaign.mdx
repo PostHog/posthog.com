@@ -11,48 +11,50 @@ In this guide we'll walk through creating a simple **drip campaign**. After foll
 
 <Step title="Create a campaign" badge="required">
 
-Go to **Messaging** and click the **+ New campaign button**.  
+Go to [Messaging](https://app.posthog.com/messaging/campaigns/new/workflow) and click the **+ New campaign button**.  
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/messaging_empty_state_7a76cee4f6.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_light_c1f7b79b46.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_dark_6a4ea06e58.png"
     classes="rounded"
     alt="Click the New Campaign button"
 />
 
-You'll see a trigger block connected to an exit.
+This will open the campaign builder. 
+
+The new campaign only has two blocks:
+- A trigger block: This defines the event that will start the campaign workflow.
+- An exit block: This defines the event that will end the campaign workflow.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/fresh_campaign_aeecc715f2.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
     classes="rounded"
     alt="Fresh campaign with trigger block"
 />
 
-You can see that the trigger is not set because it has a little exclamation mark.
+The trigger block has a little exclamation mark. This means it is not configured. In general, if there are problems with a block, it will have a little exclamation mark.
 
 </Step>
 
 <Step title="Set the trigger" badge="required">
 
-Click on the trigger, there will be a warning that an event is required.
+Now, let's click on the trigger block and configure it. In a new campaign, the trigger doesn't have any default trigger events. Triggers tell PostHog what events will start the campaign workflow.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_unset_ea39720d30.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_light_40e539b7ee.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_dark_02b15cd094.png"
     classes="rounded"
     alt="Trigger warning that event is required"
 />
 
-Click the `add trigger event` button
+Click the **+ Add trigger event** button and search for the event you want to use as the trigger. 
+
+Search for your the signup event you capture with PostHog SDKs, (e.g. `user signed up`) and click it. This tells the campaign to start when this event is captured:
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/select_trigger_event_b6c080df9d.png"
-    classes="rounded"
-    alt="Select trigger event button"
-/>
-
-Then search for your signup event (`user signed up`) and click it. It should look something like:
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/trigger_event_74ae2e44d9.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_north,h_0.9,w_1.0/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_light_a08c890a53.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_north,h_0.9,w_1.0/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_dark_be58972ba1.png"
     classes="rounded"
     alt="Trigger event configuration"
 />
@@ -60,7 +62,8 @@ Then search for your signup event (`user signed up`) and click it. It should loo
 Don't worry about the conversion goal or exit conditions for now, and exit this step by clicking on the back arrow in the sidepanel - this is how you will exit any step after configuring it.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/back_arrow_8b6b01f77b.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,h_0.3,w_0.4,x_0.25,y_0.13/messaging_new_campaign_event_select_light_a08c890a53.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,h_0.3,w_0.4,x_0.25,y_0.13/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_dark_be58972ba1.png"
     classes="rounded"
     alt="Back arrow in sidepanel"
 />
@@ -71,29 +74,33 @@ Don't worry about the conversion goal or exit conditions for now, and exit this 
 
 Drag an **Email** action beneath the trigger, into the campaign like this:
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/drag_email_07b4d22856.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_email_light_98795f1414.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_email_dark_e2811207c7.png"
     classes="rounded"
     alt="Dragging email action"
 />
 
-The unconfigured email step will look like this:
+Then, click on the email block to configure it. Set the **subject line** and **sender**.
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unconfigured_email_b091c33ab4.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_light_ed7a551fec.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_dark_a58f62c95f.png"
     classes="rounded"
-    alt="Unconfigured email step"
+    alt="Configure email template"
 />
 
-You will need to set the subject line, and the sender:
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_subject_sender_1904934c7e.png"
-    classes="rounded"
-    alt="Setting subject line and sender"
-/>
+> If you haven't configured an email channel yet, you will need to do that first.
+> 
+> <CallToAction className="mb-4" type="primary" to="/docs/messaging/configure-channels">
+>   Configure an email channel
+> </CallToAction>
+> 
 
 And also select your welcome email template or create a new one, and then click out.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/onboarding_email_acb053e59d.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_template_editor_811f405d88.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_template_editor_dark_24acb77e74.png"
     classes="rounded"
     alt="Email template selection"
 />
@@ -107,46 +114,17 @@ This is where things get interesting. We will want to send a follow up email **o
 After the email, add a **Wait until Condition**.  
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wu_first_00937c435b.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/us_posthog_com_project_198052_messaging_campaigns_new_workflow_mode_build_and_node_action_wait_until_condition_bf71d044_c8e3_439f_88ed_39144053dc6c_11e113cc7a.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/us_posthog_com_project_198052_messaging_campaigns_new_workflow_mode_build_and_node_action_wait_until_condition_bf71d044_c8e3_439f_88ed_39144053dc6c_1_0b01bed325.png"
     classes="rounded"
     alt="Adding wait until condition"
 />
 
-By default there will be 1 branch that is configured, the wait time. In the campaign builder the wait time corresponds to the `no match` branch:
+In the **wait until condition** block, you can configure the following:
+- **Wait time**: The time to wait for the condition to be met. For this example, we'll wait 1 day.
+- **Conditions to wait for**: The condition to wait for. For this example, we'll wait for the person property `onboarding_completed` to be set to `true`. This can be a [person property](/docs/product-analytics/person-properties) set on users after they complete onboarding. 
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/one_branch_conf_a2814aaaf0.png"
-    classes="rounded"
-    alt="One branch configuration"
-/>
-
-So we need to configure the `if condition matches` branch, by clicking on the `add filter` button, and setting it. 
-
-Specifically we need to set a `person property` here (not an event property) so search for the person property related to onboarding like this:
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/search_prop_584e043a77.png"
-    classes="rounded"
-    alt="Searching person property"
-/>
-
-Then set the condition so that `onboarding_completed = true`
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/set_prop_1dd69a088b.png"
-    classes="rounded"
-    alt="Setting property condition"
-/>
-
-For the wait time make it 1 day.
-
-This means if after 1 day the onbaording_completed person property is not set to true, then go down the `no match` branch, otherwise the condition matches, and we proceed down the `if condition matches` branch
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wait_until_cond_50ec1f7eea.png"
-    classes="rounded"
-    alt="Wait until condition configuration"
-/>
+Click **Create** to create the wait until condition.
 
 </Step>
 
@@ -155,7 +133,8 @@ This means if after 1 day the onbaording_completed person property is not set to
 For users who haven't completed onboarding after the wait period, we'll send a follow-up email. Drag an email action to the `no match` branch of the `wait until condition`.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/next_email_ebb71d38d8.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/add_condition_email_light_e9e592cb19.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/add_condition_email_dark_0b6917818c.png"
     classes="rounded"
     alt="Adding follow up email"
 />
@@ -178,7 +157,8 @@ The campaign will now:
 Now the complete campaign should look like this:
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/email_drip_overview_light_a84567a8f9.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/email_drip_overview_dark_2bb57406d6.png"
     classes="rounded"
     alt="Complete campaign workflow"
 />
