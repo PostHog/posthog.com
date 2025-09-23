@@ -4,7 +4,8 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
+        { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" },
+        { "source": "/api/tiktok/", "destination": "/api/tiktok" }
     ],
     "redirects": [
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
