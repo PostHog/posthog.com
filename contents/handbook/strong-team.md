@@ -69,5 +69,10 @@ We do not acquire products that sit completely outside our platform (e.g. an IDE
 
 The exception would be if the product technically lives outside the platform but directly enhances PostHog’s value (e.g. a new way to use PostHog data inside a terminal), where we may consider paying a premium.  
 
+#### Existing customers
+We generally do not want to convert any existing customers you have into PostHog customers directly. They may be different from our ICP and put pressure on the team to build something different than what we would otherwise plan to offer. 
+
+Your customers are of course welcome to sign up for PostHog and use our existing products and new ones once they are launched, but we don't make promises to these customers about features or support for their existing workflows.
+
 ### Acquisitions for marketing
 We are not interested in acquiring companies just for their audience or marketing. That’s a distraction, and we’re confident in the strength of our own marketing team. If we want more marketing, we’ll invest in it directly.
