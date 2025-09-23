@@ -16,7 +16,7 @@ Campaigns are composed of the following components:
 | Component | Description |
 |-----------|-------------|
 | [Triggers](#triggers) | What starts the campaign. We let you start a campaign when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
-| [Actions](#actions) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
+| [Dispatches](#dispatches) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
 | [Delays](#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
 | [Audience splits](#audience-splits) | Target and split the users you message with more specificity or try a/b testing with random branching. |
 | [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your campaign. |
@@ -43,16 +43,16 @@ To filter your events, click on the three lines icon next to the event name and 
     alt="Event trigger filter"
 />
 
-## Actions
+## Dispatches
 
-Actions are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of actions:
+Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:
 
-| Action type | Description |
+| Dispatch type | Description |
 |--------------|-------------|
 | Email | Send an email natively through PostHog. Configured in the [messaging channels](/docs/messaging/channels) section. |
 | Slack | Send a message to a slack channel. Configured in the [messaging channels](/docs/messaging/channels) section. |
 | Webhook | Call external systems. Configured in the [messaging channels](/docs/messaging/channels) section. |
-| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an action step to deliver messages to users or other services. |
+| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
 ## Delays
 
