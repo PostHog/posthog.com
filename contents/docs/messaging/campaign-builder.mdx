@@ -1,0 +1,89 @@
+---
+title: Campaign builder
+---
+
+Campaigns are workflows that deliver messages to your users based your configured logic. In PostHog, you can create campaigns using a no-code campaign builder.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
+    classes="rounded"
+    alt="Fresh campaign with trigger block"
+/>
+
+Campaigns are composed of the following components:
+
+| Component | Description |
+|-----------|-------------|
+| [Triggers](#triggers) | What starts the campaign. We let you start a campaign when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
+| [Actions](#actions) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
+| [Delays](#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
+| [Audience splits](#audience-splits) | Target and split the users you message with more specificity or try a/b testing with random branching. |
+| [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your campaign. |
+
+## Triggers
+
+Every campaign starts with a trigger. Triggers represent actions taken by users that kick off the campaign workflow. There are two types of triggers:
+
+| Trigger type | Description |
+|--------------|-------------|
+| Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
+| Webhook trigger | Programmatically start a campaign with a webhook |
+
+### Event triggers
+
+Event triggers are any PostHog event. These can be manually or automatically [autocaptured](/docs/data/autocapture) by our SDKs. They can be filtered by the event properties and persons properties attached to the event. 
+
+To filter your events, click on the three lines icon next to the event name and select **Add filter**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_filters_light_bbc4307d87.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_filters_dark_423c919d26.png"
+    classes="rounded"
+    alt="Event trigger filter"
+/>
+
+## Actions
+
+Actions are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of actions:
+
+| Action type | Description |
+|--------------|-------------|
+| Email | Send an email natively through PostHog. Configured in the [messaging channels](/docs/messaging/channels) section. |
+| Slack | Send a message to a slack channel. Configured in the [messaging channels](/docs/messaging/channels) section. |
+| Webhook | Call external systems. Configured in the [messaging channels](/docs/messaging/channels) section. |
+| CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an action step to deliver messages to users or other services. |
+
+## Delays
+
+Delays help you control the timing of your messages. There are 3 types of delays:
+
+| Delay type | Description |
+|--------------|-------------|
+| Fixed wait | Wait for a fixed amount of time (minutes/hours/days). |
+| Wait until condition | Wait until a specific condition is met (e.g. user has property set to a specific value). |
+| Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5). |
+
+You can see an example of a delay in the [email drip campaign](/docs/messaging/email-drip-campaign) tutorial.
+
+## Audience splits
+
+Audience splits help you target your messages to specific groups of users. There are 2 types of audience splits:
+
+| Audience split type | Description |
+|--------------|-------------|
+| Conditional branch | Segment by [event](/docs/data/events) or [persons](/docs/product-analytics/identify) properties. |
+| Random branch | [Experiment or A/B test](/docs/experiments). |
+
+These can be used to target users based on their behavior or properties.
+
+## PostHog Actions
+
+PostHog Actions allow you to change a person's properties, trigger other events, or chain campaigns together once a person reaches a specific point in your campaign. There are 2 types of PostHog actions:
+
+| PostHog action type | Description |
+|--------------|-------------|
+| Capture Event | Trigger a PostHog event. This can be a useful way to chain campaigns together, or track the effectiveness of campaigns in analytics dashboards. |
+| Update Person Properties | Set a specific person property, or create a new one. This can be a useful way to chain campaigns together. |
+
+
