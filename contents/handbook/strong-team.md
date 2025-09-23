@@ -54,7 +54,7 @@ This is an efficient way to onboard great engineers without all the complexity o
 - We do not pay for acquihires - we just hire the people. Sometimes we’ll pay a premium if it makes hiring multiple people easier.  
   - For YC founders, we may sometimes pay a premium. This is treated like additional compensation that vests over the standard PostHog equity schedule (not a lump sum upfront).  
   - For engineers, we pay our normal salary plus a one-time bonus of ~20% of base salary. Hiring multiple engineers together compounds impact quickly, so we reward that benefit directly.  
-- We do not create “quit-and-buyback” incentives. That would be crazy.  
+- If you quit PostHog to start your own company, we won't acquire or acquihire you back (though former employees-turned-founders are welcome to apply and join again under normal hiring processes).
 - We never acquire companies bigger than one small team.  
 
 ### Acquiring products
