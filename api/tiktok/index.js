@@ -1,6 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node'
-
-export default function handler(req: VercelRequest, res: VercelResponse) {
+export default function handler(req, res) {
     console.log('JFBW: Vercel API tiktok/ endpoint hit:', req.url)
 
     res.setHeader('Content-Type', 'text/plain')
