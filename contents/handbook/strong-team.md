@@ -67,7 +67,7 @@ If we want a product inside PostHog but lack the domain expertise, we might acqu
 #### IP outside PostHog
 We do not acquire products that sit completely outside our platform (e.g. an IDE). Our strategy changes often, and owning something disconnected would create pressure to keep it alive.  
 
-The exception would be if the product technically lives outside the platform but directly enhances PostHog’s value (e.g. a new way to use PostHog data inside a terminal), where we may consider paying a premium.  
+The exception would be if the product technically lives outside the platform but directly enhances PostHog’s value (e.g. a new way to use PostHog data inside a terminal), where we may consider an acquihire or paying a premium.  
 
 #### Existing customers
 We generally do not want to convert any existing customers you have into PostHog customers directly. They may be different from our ICP and put pressure on the team to build something different than what we would otherwise plan to offer. 
