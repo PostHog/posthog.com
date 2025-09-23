@@ -125,7 +125,7 @@ LaunchDarkly and Statsig offer similar feature management and A/B testing featur
   <ComparisonRow column1={false} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig) (known as Dynamic Config in Statsig)" />
+  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1="Warehouse only" column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
