@@ -212,13 +212,6 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                         </div>
                     </ScrollArea>
                 </div>
-                <div className="lg:hidden mb-8">
-                    <AllPlansInclude />
-                    <div className="md:gap-12 xl:pl-6 mt-6">
-                        <p className="text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
-                        <Link to="/platform-packages">Check out our platform packages.</Link>
-                    </div>
-                </div>
                 <p
                     className="text-red dark:text-yellow font-bold cursor-pointer flex items-center justify-center mb-0"
                     onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}

@@ -1194,6 +1194,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/how-posthog-website-works',
                     },
                     {
+                        name: 'Technical architecture',
+                        url: '/handbook/engineering/posthog-com/technical-architecture',
+                    },
+                    {
                         name: 'MDX setup',
                         url: '/handbook/engineering/posthog-com/mdx-setup',
                     },
@@ -1429,6 +1433,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Tools',
+                        url: '/handbook/growth/sales/sales-and-cs-tools',
+                    },
+                    {
                         name: 'Managing our CRM',
                         url: '/handbook/growth/sales/crm',
                     },
@@ -1505,6 +1513,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/customer-onboarding.md',
                     },
                 ],
+            },
+            {
+                name: 'Getting people to talk to you',
+                url: '/handbook/growth/sales/getting-people-to-talk-to-you',
             },
             {
                 name: 'Customer FAQs',
@@ -4293,6 +4305,10 @@ export const docsMenu = {
                         {
                             name: 'OpenRouter',
                             url: '/docs/llm-analytics/installation/openrouter',
+                        },
+                        {
+                            name: 'LiteLLM',
+                            url: '/docs/llm-analytics/installation/litellm',
                         },
                     ],
                 },
