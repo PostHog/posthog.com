@@ -52,7 +52,7 @@ This is an efficient way to onboard great engineers without all the complexity o
 
 - **Everyone goes through our standard interview process.** There are no exceptions, even if you join as a group. <TeamMember name="Coua Phang" photo /> will organize each interview stage with your team members individually so everyone goes through the process in the same timeframe.
 - We do not pay for acquihires - we just hire the people. Sometimes we’ll pay a premium if it makes hiring multiple people easier.  
-  - For YC founders, we may pay a premium of ~$500k. This is treated like additional compensation that vests over the standard PostHog equity schedule (not a lump sum upfront).  
+  - For YC founders, we may sometimes pay a premium. This is treated like additional compensation that vests over the standard PostHog equity schedule (not a lump sum upfront).  
   - For engineers, we pay our normal salary plus a one-time bonus of ~20% of base salary. Hiring multiple engineers together compounds impact quickly, so we reward that benefit directly.  
 - We do not create “quit-and-buyback” incentives. That would be crazy.  
 - We never acquire companies bigger than one small team.  
