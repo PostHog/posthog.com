@@ -386,9 +386,6 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 # only services strictly required to run posthog
 ./bin/start --minimal
-
-# enable tracing for django services (jaeger and otel collector are part of the stack)
-./bin/start --enable-tracing
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -561,13 +558,9 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
-## Extra: Enable tracing with Jaeger
+## Extra: Use tracing with Jaeger
 
-To debug with Jaeger, you can use the following command:
-
-```bash
-./bin/start --enable-tracing
-```
+Jaeger is enabled by default after running `./bin/start`.
 
 Jaeger will be available at [http://localhost:16686](http://localhost:16686).
 
