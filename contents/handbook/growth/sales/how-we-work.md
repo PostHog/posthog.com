@@ -25,13 +25,13 @@ When we start to generate cold outbound leads, these will be routed to TAEs to w
 
 ### Technical Account Managers
 
-Each TAM is assigned up to 10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 15 accounts, so staying extremely focused is important. 
+Each TAM is assigned up to 10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 15 accounts, so staying extremely focused is important.
 
 We use the AM Managed Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to annual or cross-product adoption.
 
-At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
 ### Handing off customers to Technical CSMs
 
@@ -46,7 +46,7 @@ We want to ensure the expansion potential of a customer has been thoroughly exha
 3. Is there an opportunity to cross-sell to a different team?
    - Have a look at what they are tracking with PostHog.  If it's an app then maybe get in touch with the marketing team to talk about Web Analytics or No Code Testing
    - Are they a multi-product company?  Find out if there are other teams who aren't using us who could benefit from PostHog today, and then use your current users as an internal reference.
-   
+
 If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
 
 > A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
@@ -72,14 +72,14 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - When thinking about commission, we want to particularly incentivize:
   - Closing annual contracts with payment up front - better retention, de-risks PostHog financially.
   - Selling multiple products in a deal - all-in-one is how we will beat the competition.
-- We aim for a 50/50 split between base/commission when calculating OTE by default. 
+- We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
 
 **Variables**
 
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
-- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%. 
+- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
   - ARR from new annual deals sold
   - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
@@ -94,8 +94,8 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - For monthly customers, commission is only paid after all 3 invoices have been paid
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
-- In your first 3 months you'll be paid 100% OTE fixed. 
+  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did.
+- In your first 3 months you'll be paid 100% OTE fixed.
 
 ## How commission works - Technical Account Managers
 
@@ -104,16 +104,16 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - When thinking about commission, we want to particularly incentivize:
   - Cross selling new products - all-in-one is how we will beat the competition.
   - Closing annual contracts - better retention, de-risks PostHog financially.
-- We aim for a 50/50 split between base/commission when calculating OTE by default. 
+- We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
 
 **Variables**
 
-- Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount. 
+- Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount.
   - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure based on amounts invoiced.
   - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the different in these numbers is your attainment towards quota.
-- This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that. 
+- This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
@@ -126,7 +126,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
     - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
+  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did.
 - In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed.
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
@@ -144,11 +144,11 @@ To calculate the team quota we combine the quota of all team members, with prora
 
 Example: With a flat quota of $250,000 and 3 fully-ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
 
-> If someone leaves the team we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple. 
+> If someone leaves the team we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
 
 ## Travel to see customers
 
-You are likely to need to travel a lot more than the typical PostHog team member in order to meet customers. Please make sure that you follow our company [travel policy](/handbook/people/spending-money) and act in PostHog's best interests. We trust you to do the right thing here and won't pre-approve your travel plans, but we do keep track of what people are spending and the Ops team will follow up with you if it looks like you are wasting money here. We are not a giant company that pays for fancy flights, accommodation, and meals so please be sensible. 
+You are likely to need to travel a lot more than the typical PostHog team member in order to meet customers. Please make sure that you follow our company [travel policy](/handbook/people/spending-money) and act in PostHog's best interests. We trust you to do the right thing here and won't pre-approve your travel plans, but we do keep track of what people are spending and the Ops team will follow up with you if it looks like you are wasting money here. We are not a giant company that pays for fancy flights, accommodation, and meals so please be sensible.
 
 ## Working with engineering teams
 
@@ -162,7 +162,7 @@ Sometimes an existing or potential customer may ask us to fix an issue or build 
 - Provide as much internal context as you can. If a customer sends a one-liner in Slack, don't just copy and paste into a product team's channel - find out as much as you reasonably can first, ask clarifying questions up front etc. Otherwise the relevant team will just ask you to do this anyway.
 - We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
 
-Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness. 
+Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness.
 
 **Complicated technical questions**
 
@@ -184,7 +184,7 @@ To add Pylon to your customer channel:
 2. On the Settings tab, click Add apps.
 3. Type Pylon and click Add.
 4. In the popup that appears in the Slack channel, select Customer Channel.
-5. Add yourself as the Account Owner, and set the Triage channel to #support-customer-success.
+5. Add yourself as the Account Owner.
 6. Click Enable.
 7. Add Tim, Simon, Charles, and Abigail to the channel.
 
