@@ -15,7 +15,7 @@ In general, we recommend using our [SDKs](/docs/libraries) or [capture API](/doc
 
 ## How it works
 
-When you create an incoming webhook source, PostHog generates a unique URL that you can use to send data from your external systems. The webhook accepts POST requests with any JSON payload, and you can configure how to parse and map the incoming data to PostHog events.
+When you create an incoming webhook source, PostHog generates a unique URL that you can use to send data from your external systems. The webhook accepts POST requests with any JSON payload or GET requests with query parameters, and you can configure how to parse and map the incoming data to PostHog events.
 
 ### Webhook URL format
 
@@ -23,8 +23,6 @@ Your webhook URL will look like this:
 ```
 https://webhooks.us.posthog.com/public/webhooks/<UUID>
 ```
-
-Use this URL in your external system to send events to PostHog. The webhook can be called with a POST request and any JSON payload.
 
 
 ## Transforming the webhook payload
@@ -36,15 +34,16 @@ We recommend starting from the default [HTTP incoming webhook template](/docs/cd
 
 The request object is available for templating the inputs as well as the underlying Hog code. It contains the following properties:
 
+- `request.method`: The HTTP method of the request
+- `request.query`: The query parameters of the request parsed as a dictionary of strings
 - `request.body`: The body of the request parsed as JSON
 - `request.headers`: The headers of the request as a dictionary
-- `request.method`: The HTTP method of the request
 - `request.ip`: The IP address of the requester
 
 For example if you send a request with curl like so:
 
 ```bash
-curl -X POST https://webhooks.<region>.posthog.com/public/webhooks/<UUID> \
+curl -X POST https://webhooks.<region>.posthog.com/public/webhooks/<UUID>?test=123 \
   -H "Content-Type: application/json" \
   -d '{
     "event": "my example event",
@@ -57,6 +56,8 @@ Then the variables available to use will look like:
 ```hog
 print(request.method)
 // Outputs: 'POST'
+print(request.query)
+// Outputs: { 'test': '123' }
 print(request.headers)
 // Outputs: { 'Content-Type': 'application/json' }
 print(request.body)
