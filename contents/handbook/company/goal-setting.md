@@ -34,7 +34,7 @@ You may also want to write some overall thoughts about how the quarter generally
 
 ## HOGS (10 minutes - do beforehand solo)
 
-This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting.
+This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS). 
 
 - Hope
   - What are you most excited about this quarter?
@@ -44,6 +44,7 @@ This should be done BEFORE the meeting by everyone, independently. During the me
   - What’s stopping you from shipping 2x what you’re shipping now?
 - Growth
   - What single thing would move the needle the most this quarter?
+    - _If it’s more people, please expand on how many and exactly what type of hire you’d be looking for._
   - What are users asking for? Which of these are we ignoring?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?

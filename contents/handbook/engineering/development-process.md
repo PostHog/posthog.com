@@ -248,7 +248,7 @@ If you build it, [document it](/docs). You're in the best position to do this, a
 
 It's not the responsibility of either [Brand & Vibes](/teams/brand) or [Content](/teams/content) teams to document features.
 
-See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
+See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 
 ## Releasing
 

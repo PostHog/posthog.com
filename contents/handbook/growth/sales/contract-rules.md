@@ -104,14 +104,13 @@ We also offer a way for customers to receive discounts on their usage without ta
 Requirements for self-serve discounts:
 
 -   3 or more paid invoices
--   Average of $500 or more across the last three invoices
+-   Average of $280 or more across the last three invoices
 -   No open invoices
 -   Not currently on the startup plan, a legacy plan, or having existing credits
 
 Additional notes on self-serve discounts:
 
--   The minimum purchase is $500/month, which equates to $6,000 upfront for the year.
--   For credit purchases between $6,000 and $20,000, the discount is 10% off. Above $20,000 follows the standard volume discount structure above.
+-   For credit purchases between $3,333 and $25,000, the discount is 10% off. Above $25,000 follows the standard volume discount structure above.
 -   Instead of providing all credits upfront, we apply 1/12 of the credits each month for the next 12 months. These credits do not expire for 1 year after they've been applied.
 -   If a customer uses all credits in a month, they will be billed for extra usage at the standard rate.
 
@@ -135,7 +134,7 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 
 ### Startup plan discounts
 
-For customers on our [startup plan](/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog.
+For customers on our [startup plan](/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. When applied, the offer covers the first two full months of usage on their new annual plan. Our standard discounting rules are applied based on the number of credits the customer is actually paying for. 
 
 ## Additional credit purchase
 
@@ -192,6 +191,17 @@ Some rules:
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
 
 > Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
+
+## New business renewal credits
+
+If a customer is currently _not_ a paying user of PostHog, but is a user of one of [our competitors](/blog/tags/comparisons), about to renew, and is shopping for a better deal, we are willing to significantly undercut the quoted renewal price. This is because those customers are not that likely to move over to us anyway, and quoting them a lower price works out in our favour either way:
+
+1. If the competitor matches our much lower offer, and the customer accepts, we've reduced their revenue by a significant amount
+2. If the customer accepts, we've gained net new revenue we otherwise would have missed out on, and we have the opportunity to sell more.
+
+In order for this to not mess up later renewals, the way we do this is by giving them credit for the first year in order to reach a total discount of 40%. For example, if the quote from the competitor is $50k, and the total cost for our product (including other discounts) is $40k, we will give them additional credits worth $10k, in order to undercut the total quote by 40%.
+
+In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
 ## Credit over/under usage for annual contracts
 
