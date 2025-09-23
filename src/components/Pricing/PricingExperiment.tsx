@@ -65,8 +65,9 @@ export const Discounts = () => (
                     If you have an open source project without corporate backing that has less than $200k annual
                     revenue, you can join our PostHog for Startups program to claim $50,000 of PostHog credits.{' '}
                     <Link to="/startups" className="text-red dark:text-yellow font-semibold">
-                        Apply here.
-                    </Link>
+                        Apply here
+                    </Link>{' '}
+                    and reach out to our support to get the 12 month credit expiry limit waived.
                 </p>
             </li>
         </ul>
