@@ -20,7 +20,19 @@ Later on, you can then _innovate_ several ways:
 * features more specific to our ICP (make it more engineering-y, more customization, more power)
 * integrate it with our other products (either feature them _in_ the product you just built, or feature your product in _theirs_)
 
-## How to pick new products
+## Next products on deck
+
+From our [roadmap](/roadmap), here's what we're working on next:
+
+- Embedded analytics - `#project-embedded-analytics`
+- Logs - `#project-logs`
+- Tasks - currently within `#team-llm-analytics`
+- Customer analytics `#team-customer-analytics`
+- 100x the toolbar
+- Revenue analytics `#team-revenue-analytics`
+- Workflows `#team-messaging-cdp`
+
+## How we pick new products
 
 Products we build into the platform must:
 

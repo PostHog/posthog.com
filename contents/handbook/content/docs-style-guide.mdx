@@ -166,6 +166,38 @@ This creates the following component in the docs, where the final link will dive
 
 This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
 
+### AskMax
+
+The `<AskMax>` component opens the Max AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+
+```jsx
+<AskMax
+    title="Need help with feature flags?"
+    quickQuestions={[
+        'Why is there a delay in loading flags?',
+        'How do I create a multivariate flag?',
+        'Can I override a flag?',
+    ]}
+/>
+```
+
+<AskMax
+    title="Need help with feature flags?"
+    quickQuestions={[
+        'Why is there a delay in loading flags?',
+        'How do I create a multivariate flag?',
+        'Can I override a flag?',
+    ]}
+/>
+
+Available props:
+- `title`: Custom title text (defaults to "Questions?")
+- `quickQuestions`: Array of suggested questions to preload
+- `border`: Add top/bottom borders (defaults to false)
+- `linkOnly`: Render as a button only without the full UI (defaults to false)
+
+The component automatically tracks when users open Max AI and includes the current page context.
+
 ### Steps
 
 Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials. 
@@ -512,3 +544,22 @@ sequenceDiagram
 </Tab.Panels>
 </Tab.Group>
 
+## Debugging
+
+Gatsby's MDX parser has some quirks that can be hard to debug. Gatsby tends to throw 404s when it fails to build an MDX page. 
+
+To debug, check for the common issues below:
+
+- Avoid indenting by over 2 spaces. More indentation can confuse the parser.
+- Every JSX tag with inner markdown should have a line break after the opening tag and before the closing tag.
+- Make sure you're not missing imports and the imports are correct.
+- Every empty newline should actually be empty. Spaces on empty lines can confuse the parser.
+- Different snippets cannot share the same file name and import alias. When they do, they override each other.
+
+You can also try running the formatter script to fix some of the issues:
+
+```bash
+yarn format:docs
+```
+
+This will run the formatter against the current changes.

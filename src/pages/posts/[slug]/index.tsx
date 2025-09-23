@@ -11,9 +11,9 @@ const Skeleton = () => {
                 className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-3xl'}  md:px-8 2xl:px-12`}
             >
                 <div>
-                    <div className="bg-accent dark:bg-accent-dark h-[37px] w-2/3 rounded-md" />
-                    <div className="bg-accent dark:bg-accent-dark h-[27px] w-1/3 rounded-md mt-2" />
-                    <div className="bg-accent dark:bg-accent-dark aspect-video w-full rounded-md mt-2" />
+                    <div className="bg-accent h-[37px] w-2/3 rounded-md" />
+                    <div className="bg-accent h-[27px] w-1/3 rounded-md mt-2" />
+                    <div className="bg-accent aspect-video w-full rounded-md mt-2" />
                 </div>
             </div>
         </div>

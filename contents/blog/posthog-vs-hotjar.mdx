@@ -13,6 +13,9 @@ author:
   - andy-vandervell
 tags:
   - Comparisons
+seo:
+  metaTitle: PostHog vs Hotjar in-depth tool comparison
+  metaDescription: Looking for the best session replay and user research tool? Compare PostHog vs Hotjar on replays, heatmaps, surveys, analytics, and more to find the right fit.
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -88,7 +91,7 @@ Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clar
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug user problems and app errors" />
   <ComparisonRow column1={true} column2={false} feature="Network performance" description="See sessions web vitals and requests" />
   <ComparisonRow column1={true} column2={false} feature="Custom playlists" description="Create playlists of related replays" />
-  <ComparisonRow column1={false} column2={true} feature="Create highlights" description="Crop and save segments of recordings" />
+  <ComparisonRow column1="Beta" column2={true} feature="Create highlights" description="Crop and save segments of recordings" />
   <ComparisonRow column1={false} column2={true} feature="Frustration and engagement scores" description="Filter recordings by scores" />
   <ComparisonRow column1={true} column2={true} feature="Record via URL or event" description="Trigger recordings based on URL or event" />
   <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Trigger recordings based on feature flag variables" />
@@ -116,7 +119,7 @@ Hotjar supports more survey types than PostHog, but fewer targeting options.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Show surveys on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile surveys" description="Show surveys in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile surveys" description="Show surveys in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Popover surveys" description="Small surveys that popover bottom of screen" />
   <ComparisonRow column1={true} column2={true} feature="Button surveys" description="Surveys with a button CTA" />
   <ComparisonRow column1={true} column2={true} feature="Link surveys" description="Surveys with a link CTA" />
@@ -174,7 +177,7 @@ Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
 
 ### Surveys pricing
 
-It's similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
+It's a similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/surveys_light_d45a4a6318.jpg" 
@@ -252,7 +255,7 @@ Absolutely. We include an easy-to-use [web analytics dashboard](/web-analytics) 
 
 ### Can PostHog replace Mixpanel, Amplitude and Heap?
 
-It's what PostHog's designed to do. The beauty of PostHog is replaces multiple tools in your analytics and product stack, so you can stop juggling data between multiple tools, and save money by consolidating everything. See our comparisons with [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) for more.
+It's what PostHog's designed to do. The beauty of PostHog is that it replaces multiple tools in your analytics and product stack, so you can stop juggling data between multiple tools, and save money by consolidating everything. See our comparisons with [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) for more.
 
 ### Can I choose which sessions are recorded?
 

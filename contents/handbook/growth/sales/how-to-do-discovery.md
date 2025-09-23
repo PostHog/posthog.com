@@ -124,12 +124,12 @@ A key component of discovery is qualifying customers to ensure they are a good f
 
 **Disqualifiers:**
 
-- **No path to <$20K minimum annual spend** - Our team looks after customers who are paying or could pay [<$20k+/yr](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr)
+- **No path to >=$20K annual spend** - Our team looks after customers who are paying or could pay [>=$20k+/yr](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr)
 - **Not in ICP** - You can gather great product insights when chatting with people in other roles, but we tend to work best with our [ICP](/handbook/who-we-are-building-for)
 - **Can't meet technical requirements** - To be successful, the customer needs to (at minimum), be able to implement PostHog via the JS/SDKs
 - **Support request** - Be helpful, but if it's better suited for support, you can send them thru the available [Support](/docs/support-options) channels
 - **Startup program** - For companies who qualify, we have a special program designed for [startups](/handbook/brand/startups) interested in PostHog
-- **Requesting a BAA/DPA** - We built both a BAA and DPA generator where customers can self-serve. If a customer wants to [vary any terms](/handbook/growth/sales/contract-rules#varying-terms), we can review changes if the contract is above <$20k/year
+- **Needs to vary our terms** - Either to start [an evaluation/PoC of PostHog](/handbook/growth/sales/contract-rules#varying-terms-for-trials-and-proofs-of-concept-pocs) [or generally](/handbook/growth/sales/contract-rules#varying-terms) but without a path to >=$20k in annual spend
 - **No engineering resources** - There is some coding required for a tool like PostHog and customers will need some engineering support to be successful
 - **Strict compliance constraints** - A customer may ask for a very niche [security or privacy](/handbook/company/security) certification that we don't have
 - **Need self-hosted** - PostHog's [self-hosted](/docs/self-host/open-source/disclaimer) open-source deployment is made for hobbyists and since we're a small team, we can only provide limited support for it

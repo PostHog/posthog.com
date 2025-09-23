@@ -77,7 +77,7 @@ You can query over multiple tables together using the `JOIN` command. This combi
 
 4. `FULL JOIN`: All records matching either the left or right tables.
 
-The command then takes one table before it and another after it and combines them based on the join condition using the `ON` keyword. For example, below, the events table is the left table and the persons table is the right table:
+The command then takes one table before it and another after it and combines them based on the join condition using the `ON` keyword. For example, below, the [events table](/docs/data-warehouse/sources/posthog#events) is the left table and the [persons table](/docs/data-warehouse/sources/posthog#persons) is the right table:
 
 ```sql
 SELECT events.event, persons.is_identified
@@ -85,7 +85,7 @@ FROM events
 LEFT JOIN persons ON events.person_id = persons.id
 ```
 
-This is especially useful when querying using the [data warehouse](/docs/data-warehouse) and querying external sources. For example, once you set up the Stripe connector, you can query for a count of events from your customers like this:
+This is especially useful when combining [PostHog data](/docs/data-warehouse/sources/posthog) and an external source. For example, once you set up the Stripe connector, you can query for a count of events from your customers like this:
 
 ```sql
 SELECT events.distinct_id, COUNT() AS event_count

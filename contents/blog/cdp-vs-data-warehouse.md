@@ -58,7 +58,7 @@ Creating unified records for all your customers makes your data much more accura
   - Marketers sending customer segments to paid ads platforms to enhance ad targeting.
   - Growth teams using segments to target personalization and [experimentation](/docs/experiments) (A/B testing).
   - Salespeople enriching customer profiles with usage data, lifecycle marketing engagement, and more.
-  - Analysts getting more accurate and de-duplicated data in their analytics and business intelligence tools.
+  - Analysts getting more accurate and de-duplicated data in their analytics and [business intelligence tools](/blog/best-open-source-business-intelligence-tools).
 
 </CalloutBox>
 

@@ -26,7 +26,7 @@ The rough migration strategy looks like this:
 
 <details><summary>1. Create a new staging table _without_ materialized columns on 1 node on each of the shards.</summary>
 
-```sql
+```sql runInPostHog=false
 CREATE TABLE posthog.sharded_events_ordered_by_event(
     `uuid` UUID,
     `event` String,
@@ -62,7 +62,7 @@ Note that zookeeper path needs to be unique for this to work.
 
 <details><summary>2. `INSERT` data from the old table to the new staging table (using settings to enable fast copying) on each of the shards</summary>
 
-```sql
+```sql runInPostHog=false
 set max_block_size=200000, max_insert_block_size=200000, max_threads=20, max_insert_threads=20, optimize_on_insert=0, max_execution_time=0, max_partitions_per_insert_block=100000, max_memory_usage=100000000000
 
 INSERT INTO sharded_events_ordered_by_event(uuid, event, properties, timestamp, team_id, distinct_id, elements_hash, created_at, _timestamp, _offset, elements_chain)
@@ -74,7 +74,7 @@ FROM sharded_events
 
 <details><summary>3. Attach a _new_ kafka topic + materialized view + distributed table to catch up with the main table</summary>
 
-```sql
+```sql runInPostHog=false
 
 CREATE TABLE posthog.writable_events2
 (
@@ -104,7 +104,7 @@ Note that the kafka consumer group name needs be different from the previous one
 </details>
 <details><summary>4. Create the correct materialized columns on the staging table</summary>
 
-```sql
+```sql runInPostHog=false
 
 select concat('ALTER TABLE sharded_events_ordered_by_event ADD COLUMN ', name, ' VARCHAR MATERIALIZED ', default_expression, ';') from system.columns where table = 'sharded_events' and default_kind = 'DEFAULT' format TSV
 
@@ -116,7 +116,7 @@ The following commands worked for me during this migration, this will need to be
 </details>
 <details><summary>5. Remove duplicates from the dataset and materialize columns</summary>
 
-```sql
+```sql runInPostHog=false
 OPTIMIZE TABLE sharded_events_ordered_by_event FINAL DEDUPLICATE
 ```
 
@@ -127,7 +127,7 @@ Run this on each of the shards.
 
 Some sample queries used to drill into issues:
 
-```sql
+```sql runInPostHog=false
 select _table, count(), max(_timestamp) from merge('posthog', 'sharded_events.*') group by _table;
 
 select _table, count(), max(_timestamp) from merge('posthog', 'sharded_events.*') where timestamp < '2022-02-24' group by _table;
@@ -171,7 +171,7 @@ Get the `create_table_query` for the new table from system.tables and run it on 
 </details>
 <details><summary>8. Stop ingestion, swap the staging and main table names</summary>
 
-```sql
+```sql runInPostHog=false
 
 DROP TABLE IF EXISTS events_mv ON CLUSTER posthog;
 DROP TABLE IF EXISTS events_mv2 ON CLUSTER posthog;

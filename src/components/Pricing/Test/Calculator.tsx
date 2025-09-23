@@ -121,15 +121,14 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
     `)
 
     return (
-        <SectionLayout id="calculator">
+        <SectionLayout id="calculator" className="not-prose mb-12">
             <SectionHeader>
-                <h3>Pricing calculator</h3>
+                <h2>Pricing calculator</h2>
             </SectionHeader>
-
-            <div className="flex flex-col lgxl:flex-row lgxl:gap-8 2xl:gap-12 items-start pt-4">
+            <div className="flex flex-col @6xl:flex-row @6xl:gap-8 items-start">
                 <Tabbed />
 
-                <div className="grid md:grid-cols-2 lgxl:grid-cols-1 gap-8 mt-12 lgxl:mt-0 max-w-6xl lgxl:max-w-xs 2xl:max-w-sm sticky top-4">
+                <div className="grid @2xl:grid-cols-2 @6xl:grid-cols-1 gap-8 mt-12 @6xl:mt-0 @6xl:max-w-xs sticky top-4">
                     <div>
                         <h4 className="text-lg mb-2">How our pricing works</h4>
                         <SidebarList>
@@ -145,7 +144,7 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
                             <SidebarListItem>
                                 We also offer{' '}
                                 <Tooltip content={() => <Discounts />} placement="top">
-                                    <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                    <strong className="text-red dark:text-yellow border-b border-dashed border-primary cursor-help text-secondary">
                                         discounts
                                     </strong>
                                 </Tooltip>{' '}
@@ -157,15 +156,13 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
                         <h4 className="text-lg mb-2">Estimating usage</h4>
                         <SidebarList>
                             <SidebarListItem>
-                                Not sure what your volume looks like? Add the tracking code to your site and check
-                                back in a few days – no credit card required.
+                                Not sure what your volume looks like? Add the tracking code to your site and check back
+                                in a few days – no credit card required.
                             </SidebarListItem>
                             <SidebarListItem>
                                 If something stupid happens and you get an unexpected bill (like if{' '}
-                                <Link href="/side-project-insurance">
-                                    your side project unexpectedly goes viral
-                                </Link>{' '}
-                                or you're unhappy), we'll pretty much always refund it!
+                                <Link href="/side-project-insurance">your side project unexpectedly goes viral</Link> or
+                                you're unhappy), we'll pretty much always refund it!
                             </SidebarListItem>
                             <SidebarListItem>
                                 We've also written{' '}

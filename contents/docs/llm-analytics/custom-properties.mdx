@@ -1,0 +1,239 @@
+---
+title: Custom properties
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Custom properties in LLM analytics enable you to add metadata to your [AI generations](/docs/llm-analytics/generations), making it easier to filter, analyze, and understand your LLM usage patterns. 
+
+This guide shows you how to set custom properties using PostHog's LLM analytics SDKs and leverage them for better observability. For specific integration patterns, see our guides on [linking to session replay](/docs/llm-analytics/link-session-replay) and [linking to error tracking](/docs/llm-analytics/link-error-tracking).
+
+## Why use custom properties?
+
+Custom properties help you:
+- **Filter [traces](/docs/llm-analytics/traces)** by specific criteria (e.g., subscription tier, feature flags, account settings)
+- **Track prompt versions** to measure improvements over time
+- **Link backend LLM events** to [session replays](/docs/llm-analytics/link-session-replay) and [error tracking](/docs/llm-analytics/link-error-tracking)
+- **Group related [generations](/docs/llm-analytics/generations)** by custom business logic (e.g, sessions, conversations, tenants )
+- **Monitor costs** by user segments or features
+
+## Setting custom properties
+
+You can add custom properties to any LLM generation using the `posthogProperties` parameter (JavaScript) or `posthog_properties` parameter (Python). These properties will appear in the `$ai_generation` event alongside the automatically captured metrics in your PostHog dashboard.
+
+### Basic example
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+import { OpenAI } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
+
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_client_api_host>' }
+)
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  posthog: phClient
+})
+
+const response = await openai.responses.create({
+  model: 'gpt-5',
+  messages: [{ role: 'user', content: 'Hello' }],
+  posthogProperties: {
+    customProperty: 'customValue',
+    conversationId: 'conv_abc123',
+    subscriptionTier: 'premium',
+    feature: 'chatAssistant'
+  }
+})
+```
+
+```python file=Python
+from posthog.ai.openai import OpenAI
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>"
+)
+
+client = OpenAI(
+    api_key="sk-...",
+    posthog_client=posthog
+)
+
+response = client.responses.create(
+    model="gpt-5",
+    messages=[{"role": "user", "content": "Hello"}],
+    posthog_properties={
+        "custom_property": "custom_value",
+        "conversation_id": "conv_abc123",
+        "subscription_tier": "premium",
+        "feature": "chat_assistant"
+    }
+)
+```
+
+</MultiLanguage>
+
+## Common use cases
+
+### 1. Subscription tier tracking
+
+Track LLM usage by subscription tier or payment plan to monitor costs and usage patterns:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+const getSubscriptionTier = (userId) => {
+  // Your logic to determine the user subscription tier
+  return user.subscription?.tier || 'free'
+}
+
+const response = await openai.responses.create({
+  model: 'gpt-5',
+  messages: messages,
+  posthogDistinctId: userId,
+  posthogProperties: {
+    subscriptionTier: getSubscriptionTier(userId),
+    monthlyUsage: user.currentMonthUsage,
+    rateLimited: user.isRateLimited
+  }
+})
+```
+
+```python file=Python
+def get_subscription_tier(user_id):
+    # Your logic to determine the user's subscription tier
+    return user.subscription.tier if user.subscription else 'free'
+
+response = client.responses.create(
+    model="gpt-5",
+    messages=messages,
+    posthog_distinct_id=user_id,
+    posthog_properties={
+        "user_tier": get_subscription_tier(user_id),
+        "monthly_usage": user.current_month_usage,
+        "rate_limited": user.is_rate_limited
+    }
+)
+```
+
+</MultiLanguage>
+
+### 2. Prompt versioning
+
+Track different versions of your prompts to measure improvements:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+const PROMPT_VERSION = "v2.3.1"
+const PROMPT_ID = "customer_support_agent"
+
+const systemPrompt = getPromptTemplate(PROMPT_ID, PROMPT_VERSION)
+
+const response = await anthropic.messages.create({
+  model: 'claude-sonnet-4-0',
+  messages: [
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: userMessage }
+  ],
+  posthogProperties: {
+    prompt_id: PROMPT_ID,
+    prompt_version: PROMPT_VERSION,
+    prompt_tokens: systemPrompt.length,
+    experiment_variant: 'detailed_instructions'
+  }
+})
+```
+
+```python file=Python
+PROMPT_VERSION = "v2.3.1"
+PROMPT_ID = "customer_support_agent"
+
+system_prompt = get_prompt_template(PROMPT_ID, PROMPT_VERSION)
+
+response = client.messages.create(
+    model="claude-sonnet-4-0",
+    messages=[
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_message}
+    ],
+    posthog_properties={
+        "prompt_id": PROMPT_ID,
+        "prompt_version": PROMPT_VERSION,
+        "prompt_tokens": len(system_prompt),
+        "experiment_variant": "detailed_instructions"
+    }
+)
+```
+
+</MultiLanguage>
+
+### 3. Custom generation names
+
+Set meaningful names for your LLM generations to improve trace readability:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+// For Vercel AI SDK
+import { withTracing } from '@posthog/ai'
+import { generateText } from 'ai'
+
+const model = withTracing(
+  openaiClient('gpt-5'),
+  phClient,
+  {
+    posthogProperties: {
+      $ai_span_name: "Generate Product Description",
+      product_category: "electronics",
+      target_length: "short"
+    }
+  }
+)
+
+const { text } = await generateText({
+  model: model,
+  prompt: `Write a product description for: ${productName}`
+})
+```
+
+```python file=Python
+response = client.responses.create(
+    model="gpt-5",
+    messages=messages,
+    posthog_properties={
+        "$ai_span_name": "Generate Product Description",
+        "product_category": "electronics",
+        "target_length": "short"
+    }
+)
+```
+
+</MultiLanguage>
+
+The `$ai_span_name` property will appear as the primary label in your trace visualization, making it easier to identify specific operations.
+
+## Filtering in the dashboard
+
+Once you've set custom properties, they appear in the PostHog LLM analytics dashboard where you can:
+
+1. **Filter generations** by any custom property
+2. **Create insights** based on custom properties
+3. **Build dashboards** segmented by your custom fields
+
+For example, after setting a `conversation_id` property, you can:
+- Filter the generations table to show only events from a specific conversation
+- Create a funnel to track conversation completion rates
+- Build a dashboard showing average cost per conversation by user subscription tier
+
+Your custom properties will appear in the event details panel alongside the automatically captured properties like model, tokens, and latency.

@@ -13,6 +13,9 @@ featuredImageType: full
 category: General
 tags:
   - Comparisons
+seo:
+  metaTitle: PostHog vs Optimizely in-depth tool comparison
+  metaDescription: Looking for the best experimentation and feature flag tool? Compare PostHog vs Optimizely on feature flags, A/B testing, analytics, and more to find the right fit.
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -21,7 +24,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog and Optimizely are both multi-product tools to help you improve your apps and websites. Beyond experimentation and feature flags, they have significantly different focuses:
 
-- PostHog helps you build better product with tools like [product analytics](/product-analytics), [session replay](/session-replay), and [surveys](/surveys).
+- PostHog helps you build better products with tools like [product analytics](/product-analytics), [session replay](/session-replay), and [surveys](/surveys).
 
 - [Optimizely](/blog/best-optimizely-alternatives) is an all-in-one system for marketing that includes content management, campaign planning, asset management, and checkout customizations.
 
@@ -84,7 +87,7 @@ The core web experimentation features like traffic allocation, preview mode, cro
   <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users with custom attributes" />
   <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Set experiment goals to any metric" />
   <ComparisonRow column1={true} column2={true} feature="Single-page app support" description="Use app frameworks like React and Vue" />
-  <ComparisonRow column1={false} column2={true} feature="No-code experiments" description="Implement experiments without code" />
+  <ComparisonRow column1="Beta" column2={true} feature="No-code experiments" description="Implement experiments without code" />
   <ComparisonRow column1={true} column2={true} feature="Low-code experiments" description="Implement experiments with a small amount of code" />
   <ComparisonRow column1={true} column2={true} feature="Funnel tests" description="Use funnels as a goal" />
   <ComparisonRow column1={true} column2={false} feature="Native analytics" description="Track experiments without third-party tools" />
@@ -131,7 +134,7 @@ Feature experimentation relates to releasing and testing feature changes in your
   <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
 </ComparisonTable>
 
-In Optimizely, many of the feature experimentation features, like multi-armed bandits and custom segmentation, are only available are the higher tier plans. These are all available for free in PostHog.
+In Optimizely, many of the feature experimentation features, like multi-armed bandits and custom segmentation, are only available in higher tier plans. These are all available for free in PostHog.
 
 ## Pricing
 
@@ -144,7 +147,7 @@ PostHog and Optimizely are very different here. Optimizely is sales-driven and c
   <ComparisonRow column1={true} column2={true} feature="Per-product pricing" description="Separate pricing for each product" />
 </ComparisonTable>
 
-For many Optimizely products, there are also paid add-ons like advanced personalization, the data platform, and their Salesforce integration. PostHog only has free and paid tiers for each product with a single addition enterprise add-on for SSO, dedicated support, and advanced permissions.
+For many Optimizely products, there are also paid add-ons like advanced personalization, the data platform, and their Salesforce integration. PostHog only has free and paid tiers for each product with a single enterprise add-on for SSO, dedicated support, and advanced permissions.
 
 <ArrayCTA />
 
@@ -163,7 +166,7 @@ PostHog’s product analytics suite shines here. It treats feature flags and exp
   <ComparisonRow column1={true} column2={false} feature="Custom insights" description="Query and customize analytics" />
   <ComparisonRow column1={true} column2={false} feature="Trends" description="Visualize results as a trend" />
   <ComparisonRow column1={true} column2={false} feature="Funnels" description="Visualize results as a funnel" />
-  <ComparisonRow column1={false} column2={true} feature="Confidence interval" description="Show confidence in results" />
+  <ComparisonRow column1={true} column2={true} feature="Confidence interval" description="Show confidence in results" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="View user sessions related to the experiments" />
 </ComparisonTable>
 

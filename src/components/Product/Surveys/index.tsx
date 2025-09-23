@@ -446,7 +446,7 @@ export const ProductSurveys = () => {
                     </ul>
                 </section>
 
-                <section className="bg-accent dark:bg-accent-dark">
+                <section className="bg-accent">
                     <Marquee product={product.capitalized} shortFade={true}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />

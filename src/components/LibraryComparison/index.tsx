@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
+import OverflowContainer from '../OverflowContainer'
 
 type LibraryNode = {
     fields: {

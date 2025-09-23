@@ -47,7 +47,7 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 4. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others focus on specific PostHog user pain points.
 
-5. **Newsletters:** – Our [newsletter](/handbook/content-and-docs/newsletter), [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format. 
+5. **Newsletters:** – Our [newsletter](/handbook/content/newsletter), [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format. 
 
 ## Content distribution
 

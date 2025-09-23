@@ -1,89 +1,83 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
-import { SEO } from 'components/seo'
 import React from 'react'
-import Layout from 'components/Layout'
-import { heading, section } from 'components/Home/classes'
 import { SignupCTA } from 'components/SignupCTA'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
 import { TrackedCTA } from 'components/CallToAction'
 import { IconInfo } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
+import Editor from 'components/Editor'
 
 const heroTitle = 'PostHog for enterprise'
 
 export default function Enterprise() {
     return (
-        <Layout>
-            <SEO
-                title="PostHog for enterprise"
-                description="The same great product - just with all the awards."
-                image={`/images/enterprise.png`}
-            />
-            <div className={section('z-10 relative md:!mb-8')}>
-                <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>
-                    {heroTitle.split(' ').map((word, index) => (
-                        <span
-                            key={word}
-                            className={`${index > 1 ? 'text-red dark:text-yellow' : ''} ml-4 first:ml-0 inline-block`}
-                        >
-                            {word}
-                        </span>
-                    ))}
+        <Editor
+            // title="PostHog for enterprise"
+            type="mdx"
+            slug="/enterprise"
+            bookmark={{
+                title: 'PostHog for enterprise',
+                description: 'The same great product - just with all the awards.',
+            }}
+        >
+            <div className="@container">
+                <h1 className="!text-4xl">
+                    PostHog for <span className="text-red dark:text-yellow">enterprise</span>
                 </h1>
-                <h2 className={`mt-2 mb-6 text-xl font-semibold text-center home-hero-subtitle`}>
+                <h2 className="mt-2 mb-6 text-xl font-semibold">
                     The same great product -{' '}
                     <span className="text-red dark:text-yellow">just with all the awards. And badges.</span>
                 </h2>
-                <div className="flex justify-center items-center gap-2 home-hero-cta mb-16">
-                    <SignupCTA />
+                <div className="flex items-center gap-2 mb-8">
+                    <SignupCTA size="md" />
                     <TrackedCTA
                         event={{ name: `clicked Talk to a human` }}
                         href="/talk-to-a-human"
                         type="secondary"
-                        size="lg"
+                        size="md"
+                        state={{ newWindow: true }}
                     >
                         Talk to a human
                     </TrackedCTA>
                 </div>
 
-                <section className="flex flex-col md:flex-row justify-center items-center gap-8 lg:gap-16 mb-8 md:mb-20">
+                <section className="border-y border-primary py-8 flex flex-col @xl:flex-row gap-8">
                     <div>
-                        <h3 className="mb-1 text-3xl md:text-4xl text-balance">Flair transparency report</h3>
+                        <h2 className="mt-0">Flair transparency report</h2>
                         <p>We are actively working to increase our flair to match industry standards.</p>
 
                         <div className="flex items-center gap-2 mb-8">
                             <span className="whitespace-nowrap">Flair progress:</span>
-                            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full h-4 w-full relative">
+                            <div className="bg-accent border border-primary rounded-full h-4 w-full relative">
                                 <div className="bg-red dark:bg-yellow rounded-full w-[26.67%] absolute -top-px -left-px -bottom-px"></div>
                             </div>
                             <div className="flex items-center gap-1">
                                 <span className="font-semibold text-[15px]">27%</span>
                                 <Tooltip
-                                    content={() => (
-                                        <p className="mb-0">
-                                            A minimum of{' '}
-                                            <a
-                                                href="https://www.google.com/search?q=how+many+pieces+of+flair+is+the+minimum"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="text-red dark:text-yellow font-semibold"
-                                            >
-                                                15 pieces of flair is required
-                                            </a>
-                                            .
-                                        </p>
-                                    )}
+                                    trigger={
+                                        <span className="relative">
+                                            <IconInfo className="w-5 h-5 opacity-75 hover:opacity-100" />
+                                        </span>
+                                    }
+                                    delay={0}
                                 >
-                                    <span className="relative">
-                                        <IconInfo className="w-5 h-5 opacity-75 hover:opacity-100" />
-                                    </span>
+                                    <p className="mb-0">
+                                        A minimum of{' '}
+                                        <a
+                                            href="https://www.google.com/search?q=how+many+pieces+of+flair+is+the+minimum"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-red dark:text-yellow font-semibold"
+                                        >
+                                            15 pieces of flair is required
+                                        </a>
+                                        .
+                                    </p>
                                 </Tooltip>
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center gap-4 sm:gap-8 md:gap-4 lg:gap-8">
+                        <div className="flex justify-center items-center gap-4 @sm:gap-8 @xl:gap-4 @2xl:gap-8">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/soc-2type1.png"
                                 height={140}
@@ -96,7 +90,7 @@ export default function Enterprise() {
                                 height={120}
                                 width={225}
                                 alt="HIPAA compliant"
-                                className="relative md:top-2"
+                                className="relative @xl:top-2"
                                 placeholder="blurred"
                             />
                             <CloudinaryImage
@@ -116,7 +110,7 @@ export default function Enterprise() {
                         </div>
                     </div>
 
-                    <aside className="md:w-[580px] md:h-[320px] max-w-full">
+                    <aside className="w-96 mx-auto @xl:w-[580px] max-w-full">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/flair-hogs.png"
                             alt="We need to talk about your flair"
@@ -125,10 +119,8 @@ export default function Enterprise() {
                     </aside>
                 </section>
 
-                <h3 className="md:text-center mb-1 text-3xl md:text-4xl">
-                    Some people say we're a leader, others say we're a high performer.
-                </h3>
-                <p className="md:text-center mb-8 opacity-75 font-semibold text-lg">(But we'll let you decide...)</p>
+                <h3>Some people say we're a leader, others say we're a high performer.</h3>
+                <p>(But we'll let you decide...)</p>
 
                 <section className="flex flex-wrap justify-center gap-4 mb-8">
                     <img
@@ -521,11 +513,17 @@ export default function Enterprise() {
                 <section className="text-center mb-24">
                     <h3>Still not convinced?</h3>
 
-                    <TrackedCTA event={{ name: `clicked Get a demo` }} href="/demo" type="secondary" size="lg">
-                        Talk to sales
+                    <TrackedCTA
+                        event={{ name: `clicked Talk to a human` }}
+                        href="/talk-to-a-human"
+                        type="secondary"
+                        size="md"
+                        state={{ newWindow: true }}
+                    >
+                        Talk to a human
                     </TrackedCTA>
                 </section>
             </div>
-        </Layout>
+        </Editor>
     )
 }

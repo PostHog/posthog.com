@@ -5,6 +5,7 @@ showStepsToc: true
 
 import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 
 <Steps>
 
@@ -49,7 +50,7 @@ npm install @google/genai
 
 <Step title="Initialize PostHog and Google Gen AI client" badge="required">
 
-In the spot where you initialize the Google Gen AI SDK, import PostHog and our Google Gen AI wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our wrapper.
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to our Google Gen AI wrapper.
 
 <MultiLanguage>
 
@@ -73,13 +74,13 @@ import { GoogleGenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
-  { host: '<ph_client_api_host>' }
+    '<ph_project_api_key>',
+    { host: '<ph_client_api_host>' }
 )
 
 const client = new GoogleGenAI({
-  apiKey: '...', // Replace with your Gemini API key
-  posthog: phClient
+    apiKey: '...', // Replace with your Gemini API key
+    posthog: phClient
 })
 ```
 
@@ -89,9 +90,9 @@ const client = new GoogleGenAI({
 
 <Step title="Call Google Gen AI LLMs" badge="required">
 
-Now, when you use the Google Gen AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_cache_creation_input_tokens`, `$ai_latency`, `$ai_tools`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
+Now, when you use the Google Gen AI SDK to call LLMs, PostHog automatically captures an `$ai_generation` event.
 
-You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
+You can enrich the event with additional data such as the trace ID, distinct ID, custom properties, groups, and privacy mode options.
 
 <MultiLanguage>
 
@@ -126,7 +127,11 @@ phClient.shutdown()
 
 </MultiLanguage>
 
-**Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+> **Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+You can expect captured `$ai_generation` events to have the following properties:
+
+<NotableGenerationProperties />
 
 </Step>
 

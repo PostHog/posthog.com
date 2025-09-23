@@ -41,7 +41,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "select properties.$current_url from events where properties.$current_url like '\''%/blog%'\'' limit 100"
-        }
+        },
+        "name": "get 100 blog urls"
       }'
 ```
 
@@ -58,7 +59,8 @@ payload = {
     "query": {
         "kind": "HogQLQuery",
         "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
-    }
+    },
+    "name": "get 100 blog urls"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -78,7 +80,8 @@ async function createQuery() {
     "query": {
       "kind": "HogQLQuery",
       "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
-    }
+    },
+    "name": "get 100 blog urls"
   }
 
   const response = await fetch(url, {
@@ -109,7 +112,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "select properties.email from persons where properties.email is not null"
-        }
+        },
+        "name": "get user emails"
       }'
 ```
 
@@ -126,7 +130,8 @@ payload = {
     "query": {
         "kind": "HogQLQuery",
         "query": "select properties.email from persons where properties.email is not null"
-    }
+    },
+    "name": "get user emails"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -146,7 +151,8 @@ async function createQuery() {
     "query": {
       "kind": "HogQLQuery",
       "query": "select properties.email from persons where properties.email is not null"
-    }
+    },
+    "name": "get user emails"
   }
 
   const response = await fetch(url, {
@@ -164,7 +170,7 @@ createQuery()
 
 </MultiLanguage>
 
-Every query you run is logged in the `query_log` table along with details like duration, read bytes, read rows, and more.
+Every query you run is logged in the [`query_log` table](/docs/data/query-log) along with details like duration, read bytes, read rows, and more. The `name` parameter you provide appears in this log, making it easier to identify and analyze your queries.
 
 ## Writing performant queries
 
@@ -187,7 +193,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY"
-        }
+        },
+        "name": "event count in last 7 days"
       }'
 ```
 
@@ -207,9 +214,9 @@ payload = {
           SELECT count()
           FROM events
           WHERE timestamp >= now() - INTERVAL 7 DAY
-          LIMIT 100
         """
-    }
+    },
+    "name": "event count in last 7 days"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -234,7 +241,8 @@ async function createQuery() {
         WHERE timestamp >= now() - INTERVAL 7 DAY
         LIMIT 100
       `
-    }
+    },
+    "name": "event count in last 7 days"
   }
 
   const response = await fetch(url, {
@@ -278,7 +286,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "SELECT * FROM mat_event_count"
-        }
+        },
+        "name": "get materialized event count"
       }'
 ```
 
@@ -298,7 +307,8 @@ payload = {
           SELECT *
           FROM mat_event_count
         """
-    }
+    },
+    "name": "get materialized event count"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -321,7 +331,8 @@ async function createQuery() {
         SELECT *
         FROM mat_event_count
       `
-    }
+    },
+    "name": "get materialized counts"
   }
 
   const response = await fetch(url, {
@@ -386,9 +397,30 @@ SELECT *
 FROM ca_events
 ```
 
-### 4. Other SQL optimizations
+### 4. Name your queries for easier debugging
 
-Option 1 and 2 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
+Always provide a meaningful `name` parameter for your queries. This helps you:
+
+- Identify slow or problematic queries in the [`query_log` table](/docs/data/query-log)
+- Analyze query performance patterns over time
+- Debug issues more efficiently
+- Track resource usage by query type
+
+Good query names are descriptive and include the purpose:
+
+- `daily_active_users_last_7_days`
+- `funnel_signup_to_activation`
+- `revenue_by_country_monthly`
+
+Bad names are generic and vague:
+
+- `query1`
+- `test`
+- `data`
+
+### 5. Other SQL optimizations
+
+Options 1-4 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
 
 ## Query parameters
 
@@ -399,7 +431,7 @@ Top level request parameters include:
 - `refresh` (optional): Controls caching behavior and execution mode (sync vs async).
 - `filters_override` (optional): Dashboard-specific filters to apply.
 - `variables_override` (optional): Variable overrides for queries that support variables.
-- `name` (optional): A name for the query to better identify it in the `query_log` table.
+- `name` (optional): A descriptive name for the query to better identify it in the [`query_log` table](/docs/data/query-log). We strongly recommend providing meaningful names for easier debugging and performance analysis.
 
 ### Caching and execution modes
 
