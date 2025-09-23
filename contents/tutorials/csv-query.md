@@ -95,7 +95,7 @@ When your data relates to [people](/docs/data/persons) in PostHog, you can creat
 
 To do this:
 
-1. Go to the data warehouse tab and find the `persons` table, click the three dots next to it, and click **Add join**. 
+1. Go to the data warehouse tab and find the [`persons` table](/docs/data-warehouse/sources/posthog#persons), click the three dots next to it, and click **Add join**. 
 2. In the popup, set the **Source Table Key** to a property that both tables include, in our case, that is `email`. To access it, we use SQL to set our **Source Table Key** to `properties.email`. 
 3. Choose `csv_users` as your **Joining Table** and `email` as your **Joining Table Key.**
 4. Click **Save**.

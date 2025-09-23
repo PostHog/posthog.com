@@ -9,7 +9,7 @@ interface VisitLibraryProps {
 
 export const VisitLibrary = ({ name, to, official }: VisitLibraryProps) => {
     return (
-        <div className="md:flex justify-between items-center w-full p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark mb-5">
+        <div className="md:flex justify-between items-center w-full p-6 rounded bg-accent mb-5">
             <p className="text-center md:text-left md:mb-0 md:mr-4" style={{ lineHeight: '1.5' }}>
                 This is the{' '}
                 <strong>

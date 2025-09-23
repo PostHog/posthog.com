@@ -7,21 +7,20 @@ showTitle: true
 
 ## Managing billing
 
+> This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the billing team and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
 The Billing Service is the source of truth for product information, what plans are offered on those products (eg a free vs a paid plan on Session Replay), and feature entitlements on those plans. Our payment provider Stripe is the source of truth for customer information, invoices, and payments. The billing service communicates with Stripe to pull all the relevant information together before responding to customer requests.
 
 ### Annual Plan Automation
 
+
 To ensure consistency in the setup of annual plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
 #### Loading contract details
 
 Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
-
-#### Upfront vs Monthly Payment Schedule
-
-Customers can choose to pay their subscription fee upfront or in monthly installments. The setup process differs for each option, outlined below.
 
 ##### Upfront Payment Setup
 
@@ -40,7 +39,7 @@ If this is a new contract for an existing customer, you will need to add their e
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
 - Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
 
-**Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
+**Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
 > For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
 
@@ -58,38 +57,6 @@ If this is a new contract for an existing customer, you will need to add their e
     - Create a Subscription Schedule (as it may start in the future) containing all of the prices. We calculate the number of iterations based on the term of the contract. An iteration in this case is 1 year, the maximum allowed by Stripe.
     - Add the ID of the Subscription Schedule to the table
 
-##### Monthly Payment Setup
-
-###### Step 1: Update zapier table with existing Stripe ID
-- Add the existing Stripe customer ID to the column labeled "Stripe ID - existing" in your Zapier table. It's crucial to start with this step as you will add credits to this ID while creating a subscription on a new ID to correctly capture payment.
-
-###### Step 2: Create new Stripe ID
-- Click the "Create Stripe Customer" button to generate a new Stripe customer ID for the same customer.
-
-###### Step 3: Create new subscription
-- Click the “Create and Add - Monthly Sub” button in the Zapier sheet. This will do the following:
-  - Retrieve the annual cost from the "Price" column of your table.
-  - Calculate monthly payment by dividing the annual cost by 12.
-  - Under the "PostHog Credit" product category in Stripe, create a new custom pricing.
-  - Assign this new pricing plan to the customer’s account.
-  - Create a draft invoice for the first payment that is scheduled to go out in an hour.
-
-###### Step 4: Verify subscription and invoice details
-- Use the customer ID stored in the table to locate the customer's subscription in Stripe.
-- Ensure the subscription details, including start date and associated pricing plan, are accurate.
-- Verify the correctness of customer details such as billing/shipping addresses and Tax ID on the customer object.
-
-###### Step 5: Apply credits
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve completed verifying subscription and invoice details, and click the "Apply credit - monthly" button.
-- **If customer wishes to begin using credits in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
-
-> If a customer is paying us by bank transfer, the default is to receive these through Stripe. Each customer will receive individual virtual account information to send these payments for Stripe to reconcile. If you create a new customer profile on Stripe, this virtual account information will change so it's important to update the customer. Although these bank details are automatically included on the annual invoices sometimes customers will ask for the bank details as part of their vendor onboarding process, and you can generate them by viewing the Stripe customer record and then adding a new Bank Transfer Account in the Payments section.  You can then click through on that payment method to download a PDF with the bank details to share with the customer.  If a customer is requesting to send us a transfer outside of Stripe, eg directly to us, please post in #team-people-ops to request the correct banking info to share with the customer. 
-
-###### Step 6: Update Django Admin
-- Navigate to the billing admin detail page for the customer (should add a column for this in the zap table?)
-- Create a new Customer to stripe customer
-  - Copy and paste the new stripe customer id and new stripe subscription id
-  - Save!
 
 ### Failed/late payments
 
@@ -132,7 +99,7 @@ At this point they will be notified about this automatically via the billing ser
 
 ### Stripe Products & Prices
 
-> ⚠️ Modifying products and prices should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
+> ⚠️ Product and price modifications are restricted and handled exclusively by the billing team. These changes are only made in rare cases and require billing team approval and implementation. Do not attempt to modify products or prices directly - contact the billing team for any pricing-related requests.
 
 Each of our billable Products has an entry in Stripe with each Product having multiple Prices.
 We use a billing config file to determine what is shown in the UI and how billing should behave.
@@ -198,7 +165,7 @@ When calculating usage limits, discounts are taken into consideration _before_ t
 1. Add custom metadata if needed.
 
 ### Plans
-> ⚠️ Modifying plans should be done carefully. If you aren't sure at any point contact the #growth team to check what you are doing
+> ⚠️ Plan modifications are handled exclusively by the billing team. Do not attempt to modify plans directly, contact the billing team for any plan related requests.
 
 You can find a list of available plans in the billing repo. These are found inside `costants/plans`, divided by folder.
 Each plan can have a list of features, and a price.
@@ -230,4 +197,4 @@ Self-hosted billing is no longer supported except for legacy customers who were 
 
 ## Billing for data pipelines
 
-For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).
+For information about data pipeline pricing and billing, please visit our [pricing page](https://posthog.com/pricing).

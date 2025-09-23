@@ -40,7 +40,7 @@ ClickHouse was engineered to number crunch big data, returning aggregates at sub
 
 Like many open-source projects, ClickHouse can be optionally deployed via paid, managed solutions – including  one by ClickHouse Inc. known as ClickHouse Cloud, and another Kubernetes-based solution by Altinity Inc. known as Altinity.Cloud. 
 
-ClickHouse has enjoyed considerable success since its founding in 2016, counting Cloudflare, Microsoft, GitLab, Clearbit, and even us at PostHog as users. Because [ClickHouse](/docs/how-posthog-works/clickhouse) is often employed to power user-facing analytics, it comes as no surprise that its users are traditional tech companies. 
+ClickHouse has enjoyed considerable success since its founding in 2016, counting Cloudflare, Microsoft, GitLab, Clearbit, and even us at PostHog as users. Because [ClickHouse](/docs/how-posthog-works/clickhouse) is often employed to power [user-facing analytics](/tutorials/embedded-analytics), it comes as no surprise that its users are traditional tech companies. 
 
 ## What is Amazon Redshift?
 
@@ -70,7 +70,7 @@ The first is Redshift Spectrum, which refers to an army of EC2 machines that com
 
 ![Amazon Redshift Spectrum.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/Amazon_Redshift_Spectrum.png)
 
-The easiest way to describe this setup is to walk through a single query. Imagine a business intelligence (BI) tool that wants to learn the total sum of sales across a company’s history. In order: 
+The easiest way to describe this setup is to walk through a single query. Imagine a [business intelligence (BI) tool](/blog/best-open-source-business-intelligence-tools) that wants to learn the total sum of sales across a company’s history. In order: 
 
 1. A leader node accepts the query and delegates it to a compute node.
 2. A compute node employs Redshift Spectrum to execute the summation.

@@ -1,97 +1,38 @@
-import {
-    IconDatabase,
-    IconWarning,
-    IconFlask,
-    IconGraph,
-    IconMessage,
-    IconRewindPlay,
-    IconToggle,
-} from '@posthog/icons'
-import { allProductsData } from 'components/Pricing/Pricing'
+import React from 'react'
+// import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import { useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo, useState } from 'react'
 
+// Import individual product data
+import { productAnalytics } from './productData/product_analytics'
+import { sessionReplay } from './productData/session_replay'
+import { featureFlags } from './productData/feature_flags'
+import { surveys } from './productData/surveys'
+import { dataWarehouse } from './productData/data_warehouse'
+import { errorTracking } from './productData/error_tracking'
+import { cdp } from './productData/cdp'
+import { webAnalytics } from './productData/web_analytics'
+import { experiments } from './productData/experiments'
+import { max_ai } from './productData/max_ai'
+import { llmAnalytics } from './productData/llm_analytics'
+import { revenueAnalytics } from './productData/revenue_analytics'
+import { realtimeDestinations } from './productData/realtime_destinations'
+
 const initialProducts = [
-    {
-        Icon: IconGraph,
-        name: 'Analytics',
-        type: 'product_analytics',
-        color: 'blue',
-        slider: {
-            marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
-            min: 0,
-            max: MAX_PRODUCT_ANALYTICS,
-        },
-    },
-    {
-        Icon: IconRewindPlay,
-        name: 'Session replay',
-        type: 'session_replay',
-        color: 'yellow',
-        slider: {
-            marks: [5000, 25000, 120000, 500000],
-            min: 5000,
-            max: 500000,
-        },
-        volume: 5000,
-    },
-    {
-        Icon: IconToggle,
-        name: 'Feature flags',
-        type: 'feature_flags',
-        color: 'green',
-        slider: {
-            marks: [1000000, 10000000, 100000000, 1000000000],
-            min: 1000000,
-            max: 1000000000,
-        },
-        volume: 1000000,
-    },
-    {
-        Icon: IconFlask,
-        name: 'Experiments',
-        type: 'feature_flags',
-        color: 'purple',
-        billedWith: 'Feature flags',
-    },
-    {
-        Icon: IconMessage,
-        name: 'Surveys',
-        type: 'surveys',
-        color: 'red',
-        slider: {
-            marks: [1500, 5000, 20000, 100000],
-            min: 1500,
-            max: 100000,
-        },
-        volume: 1500,
-    },
-    {
-        Icon: IconDatabase,
-        name: 'Data warehouse',
-        type: 'data_warehouse',
-        color: 'purple',
-        slider: {
-            marks: [1000000, 10000000, 100000000, 1000000000],
-            min: 1000000,
-            max: 1000000000,
-        },
-        volume: 1000000,
-    },
-    {
-        Icon: IconWarning,
-        name: 'Error tracking',
-        type: 'error_tracking',
-        color: 'orange',
-        slider: {
-            marks: [100000, 1000000, 10000000, 50000000],
-            min: 100000,
-            max: 50000000,
-        },
-        volume: 100000,
-    },
+    productAnalytics,
+    sessionReplay,
+    featureFlags,
+    surveys,
+    dataWarehouse,
+    realtimeDestinations,
+    errorTracking,
+    cdp,
+    webAnalytics,
+    experiments,
+    max_ai,
+    llmAnalytics,
+    revenueAnalytics,
 ]
 
 export default function useProducts() {
@@ -103,27 +44,31 @@ export default function useProducts() {
 
     const [products, setProducts] = useState(
         initialProducts.map((product) => {
-            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.type)
+            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
+            const unit = billingData?.unit
             return {
                 ...product,
                 cost: 0,
                 billingData,
-                costByTier: calculatePrice(product.volume || 0, paidPlan?.tiers).costByTier,
+                costByTier: paidPlan?.tiers
+                    ? calculatePrice((product as any).volume || 0, paidPlan.tiers).costByTier
+                    : [],
                 freeLimit,
-                startsAt: startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                unit,
             }
         })
     )
 
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])
 
-    const setProduct = (type, data) => {
+    const setProduct = (handle: string, data: any) => {
         setProducts((products) =>
             products.map((product) => {
-                if (product.type === type && !product.billedWith) {
+                if (product.handle === handle && !(product as any).billedWith) {
                     return {
                         ...product,
                         ...data,
@@ -134,14 +79,14 @@ export default function useProducts() {
         )
     }
 
-    const setVolume = (type: string, volume: number) => {
+    const setVolume = (handle: string, volume: number) => {
         const rounded = Math.round(volume)
-        const product = products.find((product) => product.type === type)
+        const product = products.find((product) => product.handle === handle)
         const { total, costByTier } = calculatePrice(
             rounded,
             product?.billingData.plans.find((plan: any) => plan.tiers)?.tiers
         )
-        setProduct(type, {
+        setProduct(handle, {
             volume: rounded,
             cost: total,
             costByTier,
@@ -150,3 +95,109 @@ export default function useProducts() {
 
     return { products, setVolume, setProduct, monthlyTotal }
 }
+
+const allProductsData = graphql`
+    query {
+        allProductData {
+            nodes {
+                products {
+                    description
+                    docs_url
+                    image_url
+                    icon_key
+                    inclusion_only
+                    contact_support
+                    addons {
+                        contact_support
+                        description
+                        docs_url
+                        image_url
+                        icon_key
+                        inclusion_only
+                        name
+                        type
+                        unit
+                        legacy_product
+                        features {
+                            key
+                            name
+                            description
+                            category
+                            limit
+                            note
+                            entitlement_only
+                            is_plan_default
+                            unit
+                        }
+                        plans {
+                            description
+                            docs_url
+                            free_allocation
+                            image_url
+                            name
+                            plan_key
+                            product_key
+                            unit
+                            flat_rate
+                            unit_amount_usd
+                            features {
+                                key
+                                name
+                                description
+                                category
+                                limit
+                                note
+                                entitlement_only
+                                is_plan_default
+                                unit
+                            }
+                            tiers {
+                                current_amount_usd
+                                current_usage
+                                flat_amount_usd
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                    name
+                    type
+                    unit
+                    usage_key
+                    legacy_product
+                    plans {
+                        description
+                        docs_url
+                        features {
+                            key
+                            name
+                            description
+                            category
+                            limit
+                            note
+                            entitlement_only
+                            is_plan_default
+                            unit
+                        }
+                        free_allocation
+                        image_url
+                        included_if
+                        name
+                        plan_key
+                        product_key
+                        contact_support
+                        unit_amount_usd
+                        tiers {
+                            current_amount_usd
+                            current_usage
+                            flat_amount_usd
+                            unit_amount_usd
+                            up_to
+                        }
+                        unit
+                    }
+                }
+            }
+        }
+    }
+`

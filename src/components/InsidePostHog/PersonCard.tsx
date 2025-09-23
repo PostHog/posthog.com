@@ -3,13 +3,15 @@ import React from 'react'
 
 export default function PersonCard({ name, stat, image, url }) {
     return (
-        <li className="flex items-center gap-2">
-            {image}
-            <div>
+        <li className="flex items-start gap-2">
+            <div className="flex-shrink-0">{image}</div>
+            <div className="flex-1">
                 <p className="m-0 leading-tight">
-                    <Link to={url}>{name}</Link>
+                    <Link to={url} className="font-medium text-[15px] hover:underline" state={{ newWindow: true }}>
+                        {name}
+                    </Link>
                 </p>
-                <p className="text-[13px] leading-tight opacity-75 m-0">{stat}</p>
+                <p className="text-[13px] leading-tight text-secondary m-0">{stat}</p>
             </div>
         </li>
     )

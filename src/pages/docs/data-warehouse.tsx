@@ -11,6 +11,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import ReaderView from 'components/ReaderView'
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -48,34 +49,32 @@ export const Content = ({ quickLinks = false }) => {
 
 const DataWarehouse: React.FC = () => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Data warehouse - Docs - PostHog" />
 
-            <PostLayout title={'Data warehouse'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Data warehouse"
-                    description="A single source for all your important data."
-                    buttonText="Link your first source"
-                    buttonLink="/docs/cdp/sources"
-                    imageColumnClasses="mt-4 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
-                    imageClasses="max-h-48 md:max-h-64"
-                />
+            <Intro
+                subheader="Getting started"
+                title="Data warehouse"
+                description="A single source for all your important data."
+                buttonText="Link your first source"
+                buttonLink="/docs/cdp/sources"
+                imageColumnClasses="mt-4 md:-mt-8"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
+                imageClasses="max-h-48 md:max-h-64"
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'What are some cool things I can do?',
-                        'What is SQL access and why should I use it?',
-                        'How can I get external data into PostHog?',
-                    ]}
-                />
-                <Content />
-                <CallToAction to="/docs/data-warehouse/query" width="full">
-                    Visit the manual
-                </CallToAction>
-            </PostLayout>
-        </Layout>
+            <AskMax
+                quickQuestions={[
+                    'What are some cool things I can do?',
+                    'What is SQL access and why should I use it?',
+                    'How can I get external data into PostHog?',
+                ]}
+            />
+            <Content />
+            <CallToAction to="/docs/data-warehouse/start-here" width="full">
+                Visit the manual
+            </CallToAction>
+        </ReaderView>
     )
 }
 

@@ -14,7 +14,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: false
-  llmObservability: false
+  llmAnalytics: false
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -342,6 +342,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     sessionReplay = false
 
     // Session Replay configuration
+    // https://posthog.com/docs/session-replay/installation for more details
     sessionReplayConfig = PostHogSessionReplayConfig(...)
 
     // Whether the SDK should reuse the anonymous Id between user changes. 

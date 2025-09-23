@@ -58,7 +58,7 @@ Creating unified records for all your customers makes your data much more accura
   - Marketers sending customer segments to paid ads platforms to enhance ad targeting.
   - Growth teams using segments to target personalization and [experimentation](/docs/experiments) (A/B testing).
   - Salespeople enriching customer profiles with usage data, lifecycle marketing engagement, and more.
-  - Analysts getting more accurate and de-duplicated data in their analytics and business intelligence tools.
+  - Analysts getting more accurate and de-duplicated data in their analytics and [business intelligence tools](/blog/best-open-source-business-intelligence-tools).
 
 </CalloutBox>
 
@@ -97,10 +97,12 @@ It does this by having a significantly different structure from traditional data
 Once you’ve extracted data from the data warehouse, you usually rely on other tools to make use of it, such as  business intelligence tools for visualization or CDPs with reverse ETL functionality for activation.
 
 <CalloutBox icon="IconQuestion" title="What are some data warehouse use cases?" type="fyi">
+
   - Analysts building in-depth reports and forecasting based on historical data.
   - Executives viewing regular reports on KPIs, revenue, growth, churn, usage, and more using sources like analytics, payments, CRM, and more.
   - ML engineers preparing and processing data for forecasting, machine learning, and AI. Prepare historic, clean datasets for ML models.
   - Security and compliance teams storing access logs and audit trails for regulations like GDPR, HIPAA, SOC 2, CCPA.
+
 </CalloutBox>
 
 ## How do a CDP and a data warehouse compare?
@@ -191,7 +193,7 @@ We and our customers have found both to be essential so in our effort to “[equ
 
 1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from [Slack](/docs/cdp/destinations/slack) to [webhooks](/docs/cdp/destinations/webhook) to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
 
-2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Postgres](/docs/cdp/sources/postgres), [S3](/docs/cdp/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/sql) as well as [visualizations](/docs/data-warehouse/query) for this data.
+2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Postgres](/docs/cdp/sources/postgres), [S3](/docs/cdp/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/query) as well as [visualizations](/docs/data-warehouse/query#sql-visualizations) for this data.
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
 

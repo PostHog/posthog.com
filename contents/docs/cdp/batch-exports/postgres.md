@@ -21,7 +21,7 @@ Batch exports can be used to export data to a Postgres table.
 
 When executing a batch export, if the destination table doesn't exist, it will be created. `CREATE TABLE` and `USAGE` permissions are required for this reason. The other permissions that are required on the destination table are `INSERT`, `SELECT`, and `UPDATE`. You can and should block PostHog from doing anything else on any other tables. In particular, we recommend creating a new schema and only granting PostHog `CREATE TABLE` and `USAGE` access limited to that schema:
 
-```sql
+```sql runInPostHog=false
 CREATE USER posthog WITH PASSWORD 'insert-a-strong-password-here';
 CREATE SCHEMA posthog_exports;
 GRANT CREATE ON SCHEMA posthog_exports TO posthog;

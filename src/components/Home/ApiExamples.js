@@ -43,7 +43,7 @@ const WelderHog = () => {
 
 const examples = [
     {
-        title: 'User-facing analytics',
+        title: 'Embedded analytics',
         endpoint: 'query',
         description:
             'Query data captured into PostHog to show analytics for your users. Create your own visualizations and let PostHog fill in the data.',
@@ -120,9 +120,7 @@ export default function ApiExamples() {
                                     </div>
                                     <div className="flex-1">
                                         <h4 className="m-0 text-base font-bold">{title}</h4>
-                                        <p className="text-primary/75 dark:text-primary-dark/75 text-sm m-0">
-                                            {description}
-                                        </p>
+                                        <p className="text-secondary text-sm m-0">{description}</p>
                                     </div>
                                 </li>
                             )

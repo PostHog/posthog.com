@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [Brand & Vibes team](/teams/brand-vibes) is responsible for everything you see on posthog.com. We treat our website & docs as a product, which means we're constantly iterating on it and improving it.
+The [Brand & Vibes team](/teams/brand) is responsible for everything you see on posthog.com. We treat our website & docs as a product, which means we're constantly iterating on it and improving it.
 
 Because our website has a well-defined aesthetic, we often skip the hifi design process and jump straight from wireframes into code. Having a designer who can code means we can reach the desired level of polish without _always_ having to produce hifi designs, thus leading to huge time savings.
 
@@ -16,7 +16,7 @@ We often produce hi-fidelity wireframes because this allows us to closely envisi
 
 Our [Balsamiq project](https://balsamiq.cloud/sd0i9zq/poenphz/rADB6) contains many page iterations. Typically we share the most up-to-date versions in the relevant GitHub issue. (We sometimes use Balsamiq to prototype complex flows.)
 
-*Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!*
+_Note: Balsamiq uses its own Comic Sans-style font. Don't get hung up on this!_
 
 <img width="1434" alt="image" src="https://user-images.githubusercontent.com/154479/221651322-56a69559-7e68-4fd8-92ac-c1068cd202eb.png" />
 

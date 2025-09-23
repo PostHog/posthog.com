@@ -21,24 +21,24 @@ Vitally uses Playbooks to put Accounts and Users into Segments, which are useful
 We have the following Segmentation Playbooks defined:
 
 1. Segment Name: $60K ARR
-   * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/d90fa519-5162-4dc5-b530-5a9464689f70)
+   * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/d90fa519-5162-4dc5-b530-5a9464689f70">Playbook Link</PrivateLink>
    * Criteria
      * Account not in Startups Segment
      * ARR >= $60K
 2. Segment Name: $20K ARR
-   * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/69d760e6-3312-4ca0-8b79-55d59d36582f)
+   * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/69d760e6-3312-4ca0-8b79-55d59d36582f">Playbook Link</PrivateLink>
    * Criteria
       * Account not in Startups Segment
       * ARR >= $20K AND ARR < $60K
 3. Segment Name: Startup Plan
-   * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/b64b3483-485b-4892-a915-e5c424768cd7)
+   * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/b64b3483-485b-4892-a915-e5c424768cd7">Playbook Link</PrivateLink>
    * Used to track companies either on PostHog for Startups or the YC Program
    * Criteria
       * Stripe Account Balance < 0 (e.g. they have credit remaining)
       * Stripe Credit Expires at > 0 days from today (e.g. it hasn't expired yet)
       * Stripe Is Startup Plan Metadata is not false or null (e.g. they haven't been marked as being on a paid annual plan)
 4. Segment Name: Annual Plan
-   * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/5aa872ac-a78a-42d5-81d5-42b198ba0a4e)
+   * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/5aa872ac-a78a-42d5-81d5-42b198ba0a4e">Playbook Link</PrivateLink>
    * Criteria
      * Stripe Subscription interval is yearly
      * OR
@@ -46,11 +46,11 @@ We have the following Segmentation Playbooks defined:
      * Stripe Credit Expires at > 0 days from today (e.g. it hasn't expired yet)
      * Stripe Is Startup Plan Metadata is false or null (e.g. they haven't been marked as being on the startup plan)
 5. Segment Name: Active Trial
-   * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/bd306a59-f35a-4d6b-ac85-d5892277410d)
+   * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/bd306a59-f35a-4d6b-ac85-d5892277410d">Playbook Link</PrivateLink>
    * Criteria
       * Free Trial Until is greater than 0 days from now (comes from the Billing Postgres connection)
 6. Segment Name: First payment forecasted this month
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/bd306a59-f35a-4d6b-ac85-d5892277410d)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/bd306a59-f35a-4d6b-ac85-d5892277410d">Playbook Link</PrivateLink>
     * Criteria
         * Lifetime Value (LTV) is 0 (e.g. they have never paid us)
         * Stripe current period end is greater than 0 days from now
@@ -62,7 +62,7 @@ As Vitally has Subscription/Segment information it's the best place to drive Zen
 
 ### Ensuring that Vitally Accounts have corresponding Zendesk Organization and HubSpot Companies associated with them
 
-The [New Orgs to Zendesk and HubSpot via Zapier](https://posthog.vitally-eu.io/settings/playbooks/854c7f79-a6ad-4f63-91a8-aa86ae8ef009)
+The <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/854c7f79-a6ad-4f63-91a8-aa86ae8ef009">New Orgs to Zendesk and HubSpot via Zapier</PrivateLink>
 playbook triggers on Accounts where there is _no associated Zendesk ID_ but there _is a Stripe Customer email_, so that we can 
 look up the contact and company information in HubSpot.  When these criteria are matched the playbook sends the following traits to a webhook which triggers 
 the [Vitally Webhook to New Zendesk Org and HubSpot](https://zapier.com/editor/223482722/published) Zap:
@@ -99,39 +99,39 @@ As Vitally is the best source of truth for Active Subscription / Payment informa
 The Zap then updates the specific Zendesk Organization with the requested tags.
 
 1. Zendesk Tag: `priority_customer`
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/ec97ac42-015d-4714-b715-fc4c7456e70b)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/ec97ac42-015d-4714-b715-fc4c7456e70b">Playbook Link</PrivateLink>
     * Criteria
         * Account is PostHog
         * Account not in Startup Plan Segment
         * ARR >= $20K
         * Zendesk Org ID is set
 2. Zendesk Tag: `paying_customer`
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/44096139-7467-4840-aeee-85116488ad92)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/44096139-7467-4840-aeee-85116488ad92">Playbook Link</PrivateLink>
     * Criteria
         * Account not in Startup Plan Segment
         * ARR > 0 and < $20K
         * Zendesk Org ID is set
 3. Zendesk Tag: `non_paying`
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/60b3e128-03dc-40ee-95b6-c2eb1b58f05e)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/60b3e128-03dc-40ee-95b6-c2eb1b58f05e">Playbook Link</PrivateLink>
     * Criteria
         * Account is not PostHog  
         * Account not in Startup Plan or Active Trial Segments
         * ARR = 0
         * Zendesk Org ID is set
 4. Zendesk Tag: `churned`
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/18482a9c-fcfe-4051-8f02-6549059d9683)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/18482a9c-fcfe-4051-8f02-6549059d9683">Playbook Link</PrivateLink>
     * Criteria
         * Account is not PostHog
         * Account not in Active Trial Segment
         * Stripe Subscription Status is Cancelled
         * Zendesk Org ID is set
 5. Zendesk Tag: `startup_plan`
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/c679b8de-0dfe-4edd-9195-c9bf8c1ef431)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/c679b8de-0dfe-4edd-9195-c9bf8c1ef431">Playbook Link</PrivateLink>
     * Criteria
         * Account in Startup Plan Segment
         * Zendesk Org ID is set
 6. Zendesk Tag: `trial`
-    * [Playbook Link](https://posthog.vitally-eu.io/settings/playbooks/f416282c-75af-41b9-ad77-8134c3e2613c)
+    * <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/f416282c-75af-41b9-ad77-8134c3e2613c">Playbook Link</PrivateLink>
     * Criteria
         * Account in Active Trial Segment
         * Zendesk Org ID is set

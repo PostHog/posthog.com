@@ -64,14 +64,15 @@ In these cases, the process is:
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
 
-While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite. Some considerations to reduce the cost:
+While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite, which is $2,000 per person. Some considerations to reduce the cost:
 
   - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
-  - You should not need to plan a social activity
-  - Limit attendees to the members of your Small Team only that you think are needed to make it successful (e.g. if your team is 3+ people, not everyone needs to come - you have Offsites as well)
+  - Consider doing more casual social activities that are less expensive: dinners, drinks etc
+  - You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
+  - The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the the budget. 
   - See if there are any other onboardings at the same time you could pair up with
 
-Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex for any onboardings you are doing. 
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex in USD for any onboardings you are doing. There will of course be some exceptions to this, please just include the reasoning in your brex budget request, and ensure to list who the budget request is for.
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement. 
 
@@ -193,7 +194,7 @@ It can be especially helpful for new hires if support engineers demonstrate how 
 
 ## 30/60/90 day check-ins
 
-Managers are responsible for helping their new members navigate the [first 3 months probationary period](/handbook/people/compensation#notice-period). There is a strong importance on 1) providing feedback to the new team member, and 2) communicating with execs about unresolved performance issues, so that there is enough time for action. Managers are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the exec team, and is frankly a very rare situation - the vast majority of people we hire do pass their probationary period!
+Managers are responsible for helping their new members navigate the [first 3 months probationary period](/handbook/people/compensation#probation-period). There is a strong importance on 1) providing feedback to the new team member, and 2) communicating with execs about unresolved performance issues, so that there is enough time for action. Managers are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the exec team, and is frankly a very rare situation - the vast majority of people we hire do pass their probationary period!
 
 As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to serve as a reminder that these checkpoints have arrived and to make sure everything is on track for the probationary period to be passed.
 

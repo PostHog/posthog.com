@@ -144,7 +144,7 @@ The biggest piece of BigQuery’s appeal is that it’s a general-purpose column
 
 Meanwhile, ClickHouse is designed for companies that need to return aggregations ***quickly.*** For instance, ClickHouse was a fantastic fit for PostHog because we are an analytics platform – we need to return queries like “what is the median time to convert for users who saw a X feature?” in *real time* and *at the speed of click*. ClickHouse dramatically leveled-up our data warehouse from our old Postgres setup, enabling us to deliver billion-event insights efficiently.
 
-Other ClickHouse users include Github, YouTube, Twitter, and Slack, with ClickHouse typically powering user-facing analytics panels in each product. To be clear, these are **ClickHouse** users, not **ClickHouse Cloud**. ClickHouse Cloud is a very early product, and it hasn’t publicized any customers just yet.
+Other ClickHouse users include Github, YouTube, Twitter, and Slack, with ClickHouse typically powering [user-facing analytics](/tutorials/embedded-analytics) panels in each product. To be clear, these are **ClickHouse** users, not **ClickHouse Cloud**. ClickHouse Cloud is a very early product, and it hasn’t publicized any customers just yet.
 
 ## Summary
 

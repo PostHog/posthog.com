@@ -40,10 +40,11 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Batch exports | Team Batch Exports | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | Billing | [Team Billing][Team Billing]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Cache warming | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/cache-warming</span> |
-| Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
+| Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #support-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR). **For Mobile SDK issues, defer to the Mobile group first** | <span class="lemon-tag gh-tag">feature/libraries</span> |
+| Mobile SDKs | **Primary: Mobile group**. Shared responsibility with the relevant Small Team for feature-owned areas. Start with the [Mobile group](https://github.com/orgs/PostHog/teams/team-mobile) for triage, loop in #support-client-libraries as needed. | <span class="lemon-tag gh-tag">feature/mobile</span> |
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Comments/Discussions | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/comments</span> |
-| CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |
+| Customer Analytics | [Team Customer Analytics][Team Customer Analytics]  |  <span class="lemon-tag gh-tag">feature/customer-analytics</span>  |
 | Dashboards | Shared responsibility with [Team Product Analytics][Team Product Analytics] & [Team Platform Analytics][Team Platform Analytics] |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data colors & themes | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/colors-and-themes</span> |
 | Data management | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
@@ -64,10 +65,10 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Live events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Marketing analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/marketing-analytics</span> |
 | Max AI platform | [Team Max AI][Team Max AI]  | <span class="lemon-tag gh-tag">feature/max-ai</span>  |
-| MCP server | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
+| MCP server | [Team Max AI][Team Max AI]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
-| Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
+| Onboarding | [Team Content][Team Content]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Path cleaning | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/path-cleaning</span> |
 | Permissions and access control | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
@@ -76,19 +77,21 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Pipeline destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
 | Pipeline sources | [Team Data Warehouse][Team Data Warehouse] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
-| Project home page | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/home</span> |
-| Property filters | [Team Product UX][Team Product UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
+| Project home page | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/home</span> |
+| Property filters | [Team Platform UX][Team Platform UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
 | Query performance | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Quota limiting | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/quota-limiting</span>  |
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Revenue analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
 | Revenue data management | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-data-management</span>  |
+| Base currency | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/currency</span>  |
+| Currency rate dataset | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/currency-rate</span>  |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Session analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
-| Settings (personal & project) | Shared responsibility |  <span class="lemon-tag gh-tag">feature/settings</span> |
+| Settings (personal & project) | [Team Platform UX][Team Platform UX] for the structure, all teams manage their own settings |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SQL editor | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/sql-editor</span> |
 | SQL insights | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/sql-insights</span> |
 | SSO | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
@@ -96,7 +99,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Subscriptions | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/subscriptions</span> |
 | Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
 | Table exports | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/table-exports</span> |
-| Taxonomic filters | [Team Product UX][Team Product UX] | <span class="lemon-tag gh-tag">feature/taxonomic-filters</span> |
+| Taxonomic filters | [Team Platform UX][Team Platform UX] | <span class="lemon-tag gh-tag">feature/taxonomic-filters</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Usage reports | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
 | Variables | [Team Product Analytics][Team Product Analytics] | <span class="lemon-tag gh-tag">feature/variables</span>  |
@@ -117,7 +120,6 @@ Some of the features we are building may exist in other products already. It is 
 [Team Billing]: /teams/billing
 [Team Platform Features]: /teams/platform-features
 [Team Feature Flags]: /teams/feature-flags
-[Team Growth]: /teams/growth
 [Team Infrastructure]: /teams/infrastructure
 [Team Ingestion]: /teams/ingestion
 [Team Platform UX]: /teams/platform-ux
@@ -129,3 +131,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Surveys]: /teams/surveys
 [Team Messaging]: /teams/messaging
 [Team Max AI]: /teams/max-ai
+[Team Content]: /teams/content

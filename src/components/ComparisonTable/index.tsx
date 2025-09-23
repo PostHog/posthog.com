@@ -1,8 +1,9 @@
 import React from 'react'
+import { TABLE_CLASSES } from '../../constants'
 
 export const ComparisonTable = ({ column1, column2, children }) => {
     return (
-        <div className="min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">
+        <div className={TABLE_CLASSES}>
             <table className="w-full mt-4">
                 <thead>
                     <tr>

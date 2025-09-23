@@ -1,0 +1,89 @@
+---
+title: How PostHog.com works
+sidebar: Handbook
+showTitle: true
+---
+
+PostHog.com is built and maintained in-house by the <SmallTeam slug="brand" />. You've probably never seen a Gatsby.js site like this before. <TeamMember name="Eli Kinsey" photo /> is the mastermind behind how the site is structured.
+
+For more context, [read why we designed our website to look like an operating system](/blog/why-os).
+
+## The "operating system"
+
+1. At the top level, `gatsby-browser.tsx` loads `<Wrapper />`
+1. `<Wrapper />` renders the chrome of the "operating system"
+    1. `<TaskBarMenu />` – the MacOS-style menu bar
+    1. `<Desktop />` – the desktop app icons and desktop background
+    1. `<AppWindow />` – the chrome for each app and where the content renders
+    1. `<CookieBannerToast />`
+1. `<AppWindow />` loads `<WindowProvider />` and `<WindowContainer />`.
+    - This contains the window's top bar with the minimize, maximize, and close buttons. It also supports window resizing.
+    - Inside here is where the contents of each app renders
+
+## The apps
+
+Each "app" is simply a page like a normal Gatsby site. There are a handful of apps:
+
+1. `<ReaderView />` – used for all long-form content like the docs, handbook, blog
+1. `<Editor />` – a WYSIWYG page editor
+1. `<Explorer />` – an OS-style file explorer
+1. `<Inbox />` – an email-like app
+1. `<Presentation />` – a slide deck
+
+Each app can reference shared components like `<HeaderBar />` which contains the necessary navigational elements (like the back button, search, and filters).
+
+Let's look at a product page to see how it uses the `<Presentation />` template.
+
+### Example: `posthog.com/session-replay`
+
+This page (`/src/pages/session-replay/index.tsx`) includes two critical pieces:
+
+1. `<SlidesTemplate />` – the views where the content will display
+1. Defines the `PRODUCT_HANDLE`
+1. Specifies which slides should appear in this presentation using `createSlideConfig`
+
+`<SlidesTemplate />` loads up all the various templates needed (like `<OverviewComponent />`, `<CustomersSlide />`, `<FeaturesSlide />`) and sources the content using the `useProduct` hook.
+
+**`useProduct`** hook
+
+Each product's data is defined in a JSON file like:
+
+**`/src/hooks/productData/session_replay.tsx`**
+
+When the `session_replay` handle is passed into `useProduct`, it looks up the product's data like:
+
+-   icon
+-   color
+-   category
+-   SEO data
+-   screenshots array
+-   feature customers
+-   features array
+-   feature comparison chart
+-   etcc
+
+> Note: The <SmallTeam slug="billing" /> maintains a billing API that contains pricing tiers and entitlements. This is how pricing data and usage tiers stay in sync between the website and product. The plan is to eventually move the product data into the billing API so there's a single source of truth for every product.
+
+---
+
+## Services we use
+
+| Service       | Purpose                                                |
+| ------------- | ------------------------------------------------------ |
+| Vercel        | Hosting                                                |
+| Gatsby        | Static site framework                                  |
+| GitHub        | Source code repository                                 |
+| Ashby (API)   | Applicant tracking system                              |
+| Algolia (API) | Site search                                            |
+| Strapi        | Headless CMS for community profiles and changelog data |
+| PostHog       | Analytics, feature flags                               |
+| Inkeep        | AI-powered community answers                           |
+
+![Diagram of PostHog.com](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/website-diagram.png)
+
+Website content is stored in two places:
+
+1. Markdown/MDX files (in the [GitHub repo](https://github.com/posthog/posthog.com/)) - _most website content_
+    - Docs, handbook, most pages
+1. Strapi - _user-generated content_
+    - Community forum posts, community profiles

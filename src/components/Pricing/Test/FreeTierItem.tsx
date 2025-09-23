@@ -4,7 +4,7 @@ interface FreeTierItemProps {
     icon: React.ReactNode
     icon2?: React.ReactNode
     name: string
-    allocation?: string
+    allocation?: string | React.ReactNode
     description?: string
 }
 
@@ -25,4 +25,4 @@ const FreeTierItem = ({ icon, icon2, name, allocation, description }: FreeTierIt
     )
 }
 
-export default FreeTierItem 
+export default FreeTierItem

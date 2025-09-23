@@ -7,13 +7,13 @@ export const IngestionPipelinesList = () => {
     } = useStaticQuery<QueryResult>(query)
 
     return (
-        <ul className="list-none p-0 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+        <ul className="list-none p-0 border-t border-l border-dashed border-primary dark:">
             {pipelines.map((pipeline) => {
                 return (
                     <li
                         key={pipeline.id}
                         style={{ margin: 0 }}
-                        className="border-r border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
+                        className="border-r border-b border-dashed border-primary dark: hover:bg-primary hover:bg-accent"
                     >
                         <Link to={pipeline.frontmatter.documentation} className="flex p-2 !bg-none">
                             <div className="shrink-0 grow-0 basis-[84px] flex justify-center pt-1">

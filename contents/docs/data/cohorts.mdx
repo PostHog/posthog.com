@@ -71,7 +71,7 @@ You can use cohorts to answer questions like:
 
 Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analytics), but they each serve different purposes:
 
-- **Cohorts** represent a specific set of users – e.g., a list of users who's email contains a certain string (like a company's domain).
+- **Cohorts** represent a specific set of users – e.g., a list of users whose email contains a certain string (like a company's domain).
 
 - **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level (like a company or organization), as opposed to a user-level.
  
@@ -128,9 +128,16 @@ You have two options when creating a cohort:
 
 Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
 
+When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog. 
+
+You can identify users using either:
+
+- **Distinct IDs**: The identifiers you send to PostHog (e.g., email addresses, user IDs from your system)
+- **Person IDs**: PostHog's internal unique identifiers for persons (useful when exporting data from PostHog or other analytics tools)
+
 You can upload CSV files in two formats:
 
-**Single-column CSV**: Include one distinct ID per row (all rows are processed as data, no header required)
+**Single-column CSV**: Include one identifier per row. For distinct IDs, no header is necessary (for backwards compatibility):
 
 ```csv
 user123
@@ -138,7 +145,19 @@ user456
 test@example.com
 ```
 
-**Multi-column CSV**: Include a header row with a `distinct_id` or `distinct-id` column containing the user identifiers
+If you identify users with Person IDs, include a header (`person_id`, `person-id`, or `Person .id`):
+
+```csv
+person_id
+01234567-89ab-cdef-0123-456789abcdef
+fedcba98-7654-3210-fedc-ba9876543210
+11111111-2222-3333-4444-555555555555
+```
+
+**Multi-column CSV**: Include a header row with a column containing the user identifiers. Supported column headers are:
+
+- `distinct_id` or `distinct-id` for distinct IDs
+- `person_id`, `person-id`, or `Person .id` for person IDs
 
 ```csv
 email,distinct_id,name,segment
@@ -147,9 +166,23 @@ user2@team.com,user456,Bob Smith,standard
 user3@team.com,test@example.com,Carol Davis,premium
 ```
 
-For multi-column files, PostHog will extract the distinct IDs from the specified column and ignore all other columns, making it easy to upload exported cohort data without modification.
+Or using person UUIDs:
 
-To update the list, you can upload another CSV to add more users. You can also remove users by deleting their person profile from the list, noting that this will completely remove the person from PostHog.
+```csv
+email,person_id,name,segment
+user1@team.com,01234567-89ab-cdef-0123-456789abcdef,Alice Johnson,premium
+user2@team.com,fedcba98-7654-3210-fedc-ba9876543210,Bob Smith,standard
+user3@team.com,11111111-2222-3333-4444-555555555555,Carol Davis,premium
+```
+
+For multi-column files, PostHog will extract the user identifiers from the specified column and ignore all other columns, making it easy to upload exported cohort data without modification.
+
+**Column precedence rules:**
+
+- If both `distinct_id` and `person_id` columns exist, the `person_id` column takes precedence
+- For single-column uploads without matching headers, PostHog assumes distinct IDs (backwards compatibility)
+
+To update the list, you can upload another CSV to add more users. You can also remove users by deleting their [person profile](/docs/data/persons) from the list, noting that this will completely remove the person from PostHog.
 
 ### Dynamic cohorts
 

@@ -55,10 +55,8 @@ export default function CloudModal({ setOpen, open, hideActions, hideBadge }) {
                             </div>
 
                             <div className="mb-4 border border-white/10 rounded">
-                                <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
-                                    <div className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75">
-                                        Event volume
-                                    </div>
+                                <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-accent-light">
+                                    <div className="mb-0 text-sm text-secondary">Event volume</div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
@@ -80,16 +78,14 @@ export default function CloudModal({ setOpen, open, hideActions, hideBadge }) {
                             </div>
 
                             <div className="flex justify-between items-baseline">
-                                <div className="mb-0 text-sm font-bold text-primary/75 dark:text-primary-dark/75">
-                                    Monthly minimum price
-                                </div>
+                                <div className="mb-0 text-sm font-bold text-secondary">Monthly minimum price</div>
                                 <div className="mb-0 flex items-baseline">
                                     <div className="text-lg">{monthlyMinimumPrice}</div>
                                     <div className="opacity-50">/mo</div>
                                 </div>
                             </div>
 
-                            <hr className="border-gray-accent-light bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
+                            <hr className="border-primary bg-transparent border-dashed border-r-0 border-b-0 border-left-0 my-2 border-t" />
 
                             <div className="flex justify-between items-baseline">
                                 <div className="text-lg mb-0 font-bold">Estimated price</div>

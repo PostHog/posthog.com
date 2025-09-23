@@ -87,6 +87,6 @@ You can also disable capturing for specific UI elements for [product analytics](
 - [Product analytics privacy controls](/docs/product-analytics/privacy)
 - [Product analytics autocapture controls](/docs/product-analytics/autocapture#configuring-autocapture)
 - [Session replay privacy controls](/docs/session-replay/privacy)
-- [LLM observability](/docs/ai-engineering/observability#privacy-mode)
+- [LLM analytics](/docs/llm-analytics/privacy-mode)
 - [Privacy compliance](/docs/privacy)
 - [Property Filter app](/tutorials/property-filter)
