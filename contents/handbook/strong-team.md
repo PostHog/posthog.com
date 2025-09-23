@@ -48,7 +48,7 @@ While we will give direct feedback, if we don't see this being responded to quic
 We hire insanely talented people to build products ourselves, but sometimes acquihires or acquisitions help us move faster by adding engineering capacity and expertise. These situations are rare so we’re often reactive with these - but we’ve set clear principles to make sure we handle them consistently.
 
 ### Acquihiring
-This is an efficient way to onboard great engineers without all the complexity of an acquisition. For us, an acquihire means wrapping up your old company for your team to join PostHog purely as talent, which we will match up with our product teams where it makes sense.
+This is an efficient way to onboard great engineers without all the complexity of an acquisition. For us, an acquihire means closing down your old company as you and your team join PostHog purely as talent, which we will match up with our product teams where it makes sense.
 
 - **Everyone goes through our standard interview process.** There are no exceptions, even if you join as a group. <TeamMember name="Coua Phang" photo /> will organize each interview stage with your team members individually so everyone goes through the process in the same timeframe.
 - We do not pay for acquihires - we just hire the people. Sometimes we’ll pay a premium if it makes hiring multiple people easier.  
