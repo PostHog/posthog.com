@@ -19,15 +19,22 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-PostHog and Amplitude both help product teams understand user behavior, run experiments, manage feature flags, replay sessions, and make informed decisions.
+## TL;DR: Which one is better, PostHog or Amplitude?
 
-When deciding on the right option for you, there are a few differences worth considering:
+PostHog and Amplitude both help product teams understand user behavior, run experiments, manage feature flags, replay sessions, and make informed decisions. While both deliver on the core product analytics stack, the right choice varies depending on what you're optimizing for:
 
-1. Not all free tiers are created equal. PostHog includes 1M events, 5,000 session recordings, and 1,500 surveys each month. Amplitude's Starter plan covers 10k tracked users (which can work out to more total events, depending on usage), but only up to 1,000 recordings and no free surveys.  
-2. [PostHog is open source](/blog/best-open-source-analytics-tools), so developers can inspect the code, customize, and extend functionality. Engineers also rotate weekly as “support heroes,” meaning the people building the product help customers directly. Amplitude is closed-source and offers support through a more traditional model.  
-3. PostHog's pricing is usage-based, with costs scaling according to events, sessions recorded, flag requests, and other usage. Amplitude's pricing is tiered and primarily tied to monthly tracked users (MTUs), with costs increasing as that number grows. 
+* **Best product analytics tool for startups: PostHog** – generous free tiers, [$50k startup credits for eligible companies](/startups), usage-based pricing that keeps costs low, and a roadmap focused on building every product you need.  
+* **Best for product managers and marketers: Amplitude** – simpler interface, mature dashboards, and integrations that make it accessible to non-technical teams.  
+* **Best for flexibility and cost control: PostHog** – [usage-based pricing](/pricing), ability to cap spend, and transparent per-unit rates.  
+* **Best for scaling B2C apps with very high MTUs: Amplitude** – MTU-based pricing can be more predictable and cost-effective if you track millions of users with relatively few events.  
+* **Best for engineers and technical founders: PostHog** – open source, transparent roadmap, direct support from engineers, SQL access, and extensibility.  
+* **Best for warehouse-native analytics: Amplitude** – can run directly on top of your data warehouse, while PostHog syncs to/from warehouses but doesn’t sit on top of them.  
+* **Best for account-based analytics (B2B SaaS): PostHog** – group/account analytics are included in the free plan, and [Revenue Analytics](/docs/revenue-analytics/) *(beta)* lets SaaS teams connect tools like Stripe, track recurring revenue, and analyze top customers. Amplitude requires a paid add-on for account analytics.  
+* **Best all-in-one platform: PostHog** – combines web and product analytics, feature flags, replays, surveys, error tracking, and a data warehouse in one product.
 
-In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and the best fit for different use cases.
+Whichever you choose, setup is quick. Amplitude offers a polished SaaS experience with strong documentation and enterprise support. PostHog makes setup fast with a snippet or wizard install, automatic event capture, and templates (plus [AI assistance with MaxAI](/max)) to get insights running quickly.
+
+In this post, we'll cover the differences between the two in more detail, comparing features, pricing, reporting, integrations, and the best fit for different use cases.
 
 ## Why PostHog?
 
