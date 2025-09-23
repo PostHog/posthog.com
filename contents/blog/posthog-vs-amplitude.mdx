@@ -19,13 +19,13 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-PostHog and Amplitude both help product teams understand user behavior, run experiments, manage feature flags, replay sessions, and make smarter data-driven decisions.
+PostHog and Amplitude both help product teams understand user behavior, run experiments, manage feature flags, replay sessions, and make informed decisions.
 
-When it comes to choosing the right alternative for you, there are a few differences worth considering:
+When deciding on the right option for you, there are a few differences worth considering:
 
 1. Not all free tiers are created equal. PostHog includes 1M events, 5,000 session recordings, and 1,500 surveys each month. Amplitude's Starter plan covers 50k tracked users (which can work out to more total events, depending on usage), but only up to 1,000 recordings and no free surveys.  
 2. [PostHog is open source](/blog/best-open-source-analytics-tools), so developers can inspect the code, customize, and extend functionality. Engineers also rotate weekly as “support heroes,” meaning the people building the product help customers directly. Amplitude is closed-source and offers support through a more traditional model.  
-3. PostHog's pricing is usage-based, with costs scaling according to events and features used. Amplitude's pricing is primarily tied to monthly tracked users (MTUs), with costs increasing as that number grows. 
+3. PostHog's pricing is usage-based, with costs scaling according to events, sessions recorded, flag requests, and other usage. Amplitude's pricing is tiered and primarily tied to monthly tracked users (MTUs), with costs increasing as that number grows. 
 
 In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and the best fit for different use cases.
 
@@ -44,7 +44,7 @@ PostHog puts all your customer data in one place and combines it with every tool
 * [Surveys](/surveys) to capture user feedback, track NPS, and book interviews  
 * A built-in [data warehouse](/data-warehouse) to combine product and business data in one place
 
-In other words, it's everything you need in one app with a single login and contract. A *genuine* single source of truth for your product and customer data. And if something's missing today, it may be on the way tomorrow. We are [constantly shipping new products and features](/changelog) to make the platform more holistic, and you can see what's coming next (and even vote on it) in our public roadmap.
+In other words, it's everything you need in one app with a single login and contract. A *genuine* single source of truth for your product and customer data. And if something's missing today, it may be on the way tomorrow. We are [constantly shipping new products and features](/changelog) and you can see what's coming next (and even vote on it) in [our public roadmap](/roadmap).
 
 ### 2. By developers, for developers
 
@@ -56,9 +56,9 @@ This means you get support from the engineers who *actually build the product*, 
 
 ### 3. Transparent, usage-based cheap pricing
 
-We default to charging as little as possible while still making a profit, and are constantly [updating our pricing](/blog/session-replay-pricing) to [make products cheaper](/blog/analytics-pricing). Every product comes with a generous free tier, so you can start building without friction and only pay when your usage scales. **More than 90% of companies use PostHog for free!** 
+We default to charging as little as possible while still making a profit, and have [repeatedly](/blog/session-replay-pricing) [rolled out](/blog/data-pipeline-pricing) [pricing decreases](/blog/analytics-pricing) to that end. Every product comes with a generous free tier, so you can start building without friction and only pay when your usage scales. **More than 90% of companies use PostHog for free!** 
 
-Our [pricing](/pricing) is also 100% transparent. There are no hidden fees, surprise overages, or paywalled “premium” features – what you see is exactly what you'll pay. And unlike many SaaS tools, you don't need to book a call with sales or jump through hoops just to find out your costs. Whether you're a startup testing ideas or a larger team scaling rapidly, you'll always know where your spend stands.
+Our [pricing](/pricing) is also 100% transparent. There are no hidden fees or surprise overages – what you see is exactly what you'll pay. And unlike many SaaS tools, you don't need to book a call with sales or jump through hoops just to find out your costs, even our [enterprise discounts are public](/handbook/growth/sales/contract-rules#discounts). This means, no matter if you're a startup testing ideas or a larger team scaling rapidly, you'll always know where your spend stands.
 
 > 💡 Companies that qualify for [PostHog's startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits. 
 
@@ -79,8 +79,7 @@ Looking for something specific? Use the links below to jump straight to the sect
 
 ### Product analytics
 
-Both PostHog and Amplitude offer core product analytics, but advanced features like SQL queries, custom formulas, and group/account analytics are included in PostHog's free tier, while Amplitude provides them on paid plans.
-
+Both PostHog and Amplitude offer product analytics. Advanced features like SQL queries, custom formulas, and group/account analytics are included in PostHog's free tier, while Amplitude only provides them on paid plans.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
@@ -134,7 +133,7 @@ Both PostHog and Amplitude offer core product analytics, but advanced features l
     />
     <ComparisonRow
         column1={true}
-        column2="Plus/Growth plans and up"
+        column2="Paid add-on"
         feature="Group analytics"
         description="Track metrics at a company and account level"
     />
@@ -170,7 +169,7 @@ Both PostHog and Amplitude offer core product analytics, but advanced features l
 
 ### Feature flags
 
-Both PostHog and Amplitude provide robust feature flagging, supporting boolean and multivariate flags, local evaluation, payloads, targeting, and percentage rollouts. PostHog adds scheduling, environments, and early-access options, with pricing based on API requests, while Amplitude's pricing is tied to tracked users (a difference that can affect flexibility as you roll out and scale).
+Both PostHog and Amplitude provide robust feature flagging, supporting boolean and multivariate flags, local evaluation, payloads, targeting, and percentage rollouts. PostHog adds scheduling and early-access management, with pricing based on requests, while Amplitude's pricing is tied to impression (a difference that can affect flexibility as you roll out and scale).
 
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
@@ -238,7 +237,7 @@ Both PostHog and Amplitude provide robust feature flagging, supporting boolean a
 
 ### Experiments
 
-Both PostHog and Amplitude support core experimentation features like A/B/n testing, multivariate tests, custom and secondary metrics, and statistical significance checks. PostHog includes experiments in its free tier (1M API requests, including mobile support), while Amplitude Experiment is paid-only, web-focused, and uses sequential statistics. 
+Both PostHog and Amplitude support core experimentation features like A/B/n testing, multivariate tests, custom and secondary metrics, and statistical significance calculations. PostHog includes experiments in its free tier (1M requests per month, including mobile support), while Amplitude Experiment has much more experimentation features on paid tiers, focuses more on web, and uses sequential statistics. 
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
