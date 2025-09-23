@@ -5,7 +5,7 @@
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" },
-        { "source": "/api/tiktok/", "destination": "/api/tiktok" }
+        { "source": "/api/tiktok/", "destination": "/api/tiktok-verification" }
     ],
     "redirects": [
         { "source": "/youreastar", "destination": "https://www.youtube.com/watch?v=SD7B2teuLXk" },
