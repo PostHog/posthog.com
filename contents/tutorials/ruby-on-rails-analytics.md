@@ -71,10 +71,15 @@ Then migrate these changes to our database by running:
 bin/rails db:migrate
 ```
 
-Once done, we can create an article in the console by running these three commands:
+Once done, launch the Rails console by running:
 
 ```bash
 bin/rails console
+```
+
+Then create an article by running these commands in the rails console:
+
+```ruby
 article = Article.new(title: "Cool tutorial", body: "PostHog and Rails together!", author: "ian@posthog.com")
 article.save
 ```
@@ -123,9 +128,17 @@ Also, set up the details page in a new file at `app/views/articles/show.html.erb
 
 The last thing to do is add the ability to create a new article. First, in `app/controllers/articles_controller.rb`, add a `new` and `create` function. We want to define the article params in another function to ensure title, body, and author are all included in the request as well:
 
-```ruby
-# ...
-def new
+```ruby focusOnLines=8-26
+class ArticlesController < ApplicationController
+  def index
+    @articles = Article.all
+  end
+
+	def show
+    @article = Article.find(params[:id])
+  end
+
+  def new
     @article = Article.new
   end
 
@@ -139,14 +152,14 @@ def new
     end
   end
 	
-private
+  private
     def article_params
       params.require(:article).permit(:title, :body, :author)
     end
-# ...
+end
 ```
 
-Next, create a form page for article creation in `app/views/articles/new.html.erb`:
+Next, create a **new** form page for article creation in `app/views/articles/new.html.erb`:
 
 ```ruby
 <h1>New Article</h1>
@@ -179,13 +192,15 @@ You should now have a nice Ruby on Rails app with a home page, article pages, an
 
 ## 2. Integrating the PostHog snippet and Ruby library
 
-Now our Ruby on Rails app is ready to integrate with PostHog. There are two ways to do this; with the snippet, or the library. The first method enables you to quickly get started with most PostHog features, such as analytics and session recording. If also want to use advanced tools, such as feature flags and experiments, you need to use the library. 
+Now our Ruby on Rails app is ready to integrate with PostHog. There are two ways to do this; with the snippet, or the library. 
+- The first method enables you to quickly get started with most PostHog features, such as analytics and session recording. 
+- If you also want to use advanced tools, such as feature flags and experiments, you need to use the library. 
 
 ### Adding the JavaScript snippet
 
-The first way is to use the JavaScript snippet. This provides autocapture of events, pageviews, session recordings, and more.
+This tutorial uses the JavaScript snippet. This provides autocapture of events, pageviews, session recordings, and more.
 
-To set it up, [copy the code snippet from the PostHog docs](/docs/integrate) and add it to `views/layouts/application.html.erb`. With no other changes, this file looks like this:
+To set it up, [copy the code snippet from the PostHog docs](/docs/getting-started/install?tab=snippet) and add it to `views/layouts/application.html.erb`. With no other changes, this file looks like this:
 
 ```html
 <!DOCTYPE html>
@@ -197,10 +212,10 @@ To set it up, [copy the code snippet from the PostHog docs](/docs/integrate) and
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>'})
-    </script>
+    <script> // +
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]); // +
+        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>'}) // +
+    </script> // +
     <%= javascript_importmap_tags %>
   </head>
 
@@ -210,7 +225,7 @@ To set it up, [copy the code snippet from the PostHog docs](/docs/integrate) and
 </html>
 ```
 
-> Make sure to turn on session recordings in your PostHog project settings by scrolling down to "Recordings" and toggling on "Record user sessions"
+> Make sure to turn on session recordings in your PostHog project settings by scrolling down to [Session replay](https://us.posthog.com/settings/project-replay#replay) and toggling on **Record user sessions**.
 
 Once you've set this up and clicked around on the server, you should see events in your PostHog instance from the source `web`.
 
@@ -227,11 +242,14 @@ gem 'posthog-ruby'
 Next, in `config/initializers`, create a `posthog.rb` file and initialize PostHog as a global variable there like this:
 
 ```ruby
-$posthog = PostHog::Client.new(
-    api_key: '<ph_project_api_key>',
-    host: '<ph_client_api_host>',
-    on_error: Proc.new { |status, msg| print msg }
-)
+require 'posthog'
+
+# Initialize PostHog client
+$posthog = PostHog::Client.new({
+  api_key: '<ph_project_api_key>',
+  host: '<ph_client_api_host>',
+  on_error: Proc.new { |status, msg| Rails.logger.error "PostHog error: #{status} - #{msg}" }
+})
 ```
 
 Now, you can call `$posthog` throughout your Ruby on Rails application to access all the features of PostHog.
@@ -242,23 +260,23 @@ With both the library and snippet set up, we can use both of them to capture eve
 
 ### Capturing custom events
 
-The snippet provides autocaptures of pageviews, clicks, inputs, and some other events. If you want to capture events which are more nuanced or unique to your product, you must set up custom event capture.
+The client-side JavaScript snippet provides autocaptures of pageviews, clicks, inputs, and some other events. If you want to capture events which are more nuanced or unique to your product, you must set up custom event capture using the Ruby library.
 
-If we want to capture when someone submits a new article, we can call `$posthog.capture()` with the author string and an event name we choose. In `app/controllers/articles_controller.rb`, this looks like this:
+If you want to capture when someone submits a new article, you can call `$posthog.capture()` with the **author string** and an **event name** you choose. In `app/controllers/articles_controller.rb`, this looks like this:
 
 ```ruby
 # ...
 def create
     @article = Article.new(article_params)
 
-    if @article.save
-      $posthog.capture(
-        distinct_id: @article.author,
-        event: 'article_created',
-        properties: {
-          title: @article.title
-        }
-      )
+    if @article.save 
+      $posthog.capture( // +
+        distinct_id: @article.author, // +
+        event: 'article_created', // +
+        properties: { // +
+          title: @article.title // +
+        } // +
+      ) // +
       redirect_to @article
     else
       render :new, status: :unprocessable_entity
@@ -269,11 +287,11 @@ def create
 
 This creates an `Article created` event with a source from `posthog-ruby`.
 
-### Aliasing identified users
+### Connecting frontend and backend identities
 
-In your PostHog instance, you see that events are coming from two different people, one with an anonymous ID and another with an email. Even though both these "people" are you, they are treated as two separate people in PostHog, but we can combine them with an `alias` call. 
+In your PostHog instance, you see that events are coming from two different people, one with an anonymous ID and another with an email. Even though both these "people" are you, they are treated as two separate people in PostHog, but you can combine them with an `alias` call. 
 
-To do this, you need both the anonymous ID and the new distinct ID (email). We can get the distinct ID when we save the article (like we did for custom event capture) and the anonymous ID via the cookies in the request. We also need our project API to get the right cookie.
+To do this, you need both the distinct ID generated by the client side JavaScript snippet and the new distinct ID (email) from the author string. We can get the distinct ID when we save the article (like we did for custom event capture) and the anonymous ID via the cookies in the request. We also need our project API to get the right cookie.
 
 Altogether, this looks like this:
 
@@ -291,13 +309,13 @@ def create
         }
       )
 
-      @project_api_key = '<ph_project_api_key>'
-      @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"])
+      @project_api_key = 'phc_up2BnbdQluOFOQi3VOcZeQYLeyPgQBVHhDy5lCPgVF0' // +
+      @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"]) // +
 
-      $posthog.alias({
-        distinct_id: @article.author,
-        alias: @ph_cookie['distinct_id']
-      })
+      $posthog.alias({ // +
+        distinct_id: @ph_cookie['distinct_id'], // +
+        alias: @article.author // +
+      }) // +
 
       redirect_to @article
     else
@@ -307,38 +325,70 @@ def create
 #...
 ```
 
-You should see an `Alias` event in your PostHog instance, and when you check the person, you should see their distinct ID and anonymous IDs connected. This remains true for further events either send.
+<CalloutBox icon="IconInfo" title="Prefer identifying on the client" type="fyi">
+
+  PostHog client SDKs automatically generate an anonymous ID for users. When you call identify on the client, the anonymous ID is merged with a new distinct ID.
+
+  When possible, prefer identifying the user on the client-side when they **register** or **login**. Aliasing should be reserved for cases where your user has a server-only distinct ID that is not available on the client.
+
+</CalloutBox>
+
+You should see an `Alias` event in your PostHog instance, and when you check the person, you should see their distinct ID and anonymous IDs connected. All valid aliases will point to the same person in PostHog.
 
 ### Using feature flags
 
-The last feature to set up is feature flags. We will set up a feature flag to redirect to the homepage instead of the article details.
+The last feature to set up is [feature flags](/docs/feature-flags). We will set up a feature flag to redirect to the homepage instead of the article details.
 
-First, create the flag in PostHog. You can do so in "Feature Flags." Click "New feature flag," add a key (I chose `home-redirect`), set the release condition to 100% of users, and click save.
+First, create the flag in PostHog. You can do so in [**Feature Flags**](https://us.posthog.com/feature_flags). Click **New feature flag**, add a key (I chose `home-redirect`):
+
+1. Under **Evaluation runtime**, select **Both client and server**.
+2. Under **Served value**, select **Boolean**.
+3. Under **Release conditions**, slide to 100% of users.
+4. Finally, click **Save**.
 
 Once done, we can check for this flag in our Ruby code and redirect to the home page if it is active. Again, we need the distinct ID to call `is_feature_enabled()`, so use the author string. 
 
-```ruby
+```ruby focusOnLines=22-32
 # ...
-def create
-  @article = Article.new(article_params)
+  def create 
+    @article = Article.new(article_params)
 
-  if @article.save
-    if $posthog.is_feature_enabled(
-      'home-redirect',
-      @article.author
-    )
-      redirect_to root_path
-    else
-      redirect_to @article
+    if @article.save
+      $posthog.capture(
+        distinct_id: @article.author,
+        event: 'article_created',
+        properties: {
+          title: @article.title
+        }
+      )
+      
+      @project_api_key = 'phc_up2BnbdQluOFOQi3VOcZeQYLeyPgQBVHhDy5lCPgVF0'
+      @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"])
+
+
+      $posthog.alias({
+        distinct_id: @ph_cookie['distinct_id'],
+        alias: @article.author
+      })
+
+      if @article.save
+        if $posthog.is_feature_enabled(
+          'home-redirect',
+          @article.author
+        )
+          redirect_to root_path
+        else
+          redirect_to @article
+        end
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
-  else
-    render :new, status: :unprocessable_entity
   end
-end
 # ...
 ```
 
-You can then turn off the flag to check that it is redirecting back to the article and modify the conditions how you like. Just remember you must identify users with the properties before you can use them in your release conditions.
+You can then turn off the flag to check that it is redirecting back to the article and modify the conditions how you like. Just remember, if you configure the flag to filter by person properties, you must call `identify()` on users with the properties **before** you can use them in your release conditions.
 
 Once done, you have a basic Ruby on Rails app with many of the key features of PostHog setup. You can customize it to your liking. There are also more PostHog features to explore like group analytics, user and event properties, and experiments. Read more in [our Ruby documentation](/docs/integrate/server/ruby).
 
