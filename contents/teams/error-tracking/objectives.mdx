@@ -1,27 +1,56 @@
-### Q3 2025 Objectives
+### Q4 2025 Objectives
 
-#### SDK improvements and language support
-* Mobile support
-   * React Native JS (& Hermes source maps)
-   * Native iOS & Android
-   * Stretch: Flutter
-* Add error tracking to 3 more server side SDKs
-* Complete `posthog-js` and `posthog-js-lite` merge to a monorepo
-  * Stretch: continue with [the megaissue](https://github.com/PostHog/posthog-js/issues/2067) as time permits
+#### Go all in on AI <TeamMember name="David Newell" />
+* Implement issue autofixing
+  * Integrate with Tasks product for in-app experience
+  * Build terminal based experience within the CLI
+    * Add issue selection to MCP (e.g. by file, most impactful)
+    * Test generation to prevent regressions
+* Add exception capture auto instrumentation to the wizard
+* Intergrations to capture exceptions for popular LLM / agent tools (e.g. Langchain)
 
-#### Integrate with other products
-* Find issues that impact signup / activation / retention heavily (correlation query)
-* Use Data warehouse / Revenue analytics to order issues by revenue impact
-* Add session context to issue page (example: breadcrumbs)
-* AI: Add session summaries to issues
+#### Ship mobile error tracking
+* [Sequencing TBD]
+* Support suppression rules via remote config
+* Add suppression of minified exceptions before cymbal processing
+* Build dashboard template including crash free sessions / users
 
-#### Product experience
-* Gather more qualitative data
-  * Continue customer interviews
-  * Make sure existing customers remain happy
-* Make in-app searching more intuitive
-  * Add error tracking tab to taxonomic filter
-  * Add email to omnisearch
-  * Expose search via Max AI
-* Clearly call out issues with source maps and offer resolution steps
-* Support Docs team's goal to make error tracking docs amazing
+#### Research deep dive on customers <TeamMember name="Cory Slater" />
+* Understand push & pull factors with competitors
+* Understand the impression and usage of error tracking tools / workflows at AI-first companies
+* Decide whether customers see LMM issues as exceptions
+* Understand spend / contraction of existing customers
+* Every engineer to attend at least 2 customer interviews
+
+#### Increase trust in product
+* Improve issue grouping
+  * Introduce a measure of grouping accuracy to base changes off
+  * Add fingerprint versioning to avoid duplicate issues when iterating
+  * Fix obvious mis-groupings based on minor stack trace variances
+* RFC for moving issues into ClickHouse to avoid dual DB querying
+* Reduce the number of stacktrace-less issues
+* Give better context when a recording is not found / source maps missing
+
+#### Improving context on issues
+* Add breakdowns to issues (by release / person_id)
+* Show first affected release & relevant commit
+  * Stretch: Auto assign to commit author
+* Level up Node SDK (add contexts & tagging, $session_id propegation)
+* Integrate logs into session timeline
+* Capture code variables in Python
+
+#### Better controls for capturing relevant issues
+* Advanced snoozing (e.g. notify me if 100 more users affected)
+* Adaptive sampling configuration
+* Add billing limits to onboarding
+* Setup threshold based alerting / management (e.g. stop capturing spiking issues)
+
+#### Tracking spikes in usage
+* billing, threshold based alerting
+* update onboarding with more controls
+* Alert me if I get more than 1000 issues in an hour
+* Issues affecting more users
+
+#### Simplify setup
+- Rethink UI / UX of issue page
+- Simplify alerting / grouping / assignment
