@@ -1,0 +1,67 @@
+{
+    "name": "Product Directors",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "PostHog enables {companyName} to build world-class products.",
+            "description": "Empower your product team with comprehensive analytics, experimentation, and user feedback tools. Drive strategy with data, not opinions.",
+            "image": "/images/products/product-analytics/screenshot-dashboard.png"
+        },
+        "platform_overview": {
+            "template": "columns",
+            "name": "Platform Overview",
+            "title": "Complete product intelligence platform",
+            "description": "Everything your product team needs in one place. Analytics, experimentation, feature management, and user feedback - integrated and ready to scale.",
+            "image": "/images/products/product-analytics/screenshot-toolbar.png"
+        },
+        "product_analytics": {
+            "template": "product",
+            "handle": "product_analytics",
+            "screenshot": "overview",
+            "title": "Executive-level insights",
+            "description": "Track OKRs, monitor product health, and understand user behavior at scale. Real-time dashboards keep leadership aligned on metrics that matter."
+        },
+        "experiments": {
+            "template": "product",
+            "handle": "experiments",
+            "screenshot": "overview",
+            "title": "Culture of experimentation",
+            "description": "Enable your teams to test hypotheses quickly. Run multiple experiments simultaneously. Make decisions based on statistical significance, not gut feel."
+        },
+        "data_warehouse": {
+            "template": "product",
+            "handle": "data_warehouse",
+            "screenshot": "overview",
+            "title": "Unified data strategy",
+            "description": "Connect all your data sources. Query product, marketing, and business metrics together. Build a single source of truth for product decisions."
+        },
+        "team_enablement": {
+            "template": "columns",
+            "name": "Team Enablement",
+            "title": "Accelerate product velocity",
+            "description": "Self-serve analytics means PMs get answers instantly. Engineers ship with confidence using feature flags. Everyone works from the same data.",
+            "image": "/images/products/product-analytics/screenshot-notebooks.png"
+        },
+        "roi": {
+            "template": "columns",
+            "name": "ROI",
+            "title": "Clear ROI and cost control",
+            "description": "Replace 5+ tools with one platform. Usage-based pricing scales with your growth. Reduce tool overhead and increase team efficiency.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "security": {
+            "template": "columns",
+            "name": "Security",
+            "title": "Enterprise-ready",
+            "description": "SOC 2 Type II certified. GDPR compliant. Deploy on your infrastructure or use our cloud. Your data stays secure and private.",
+            "image": "/images/products/product-analytics/screenshot-privacy.png"
+        },
+        "cta": {
+            "template": "stacked",
+            "name": "Let's Talk",
+            "title": "Let's discuss your product strategy",
+            "description": "See how PostHog can transform your product organization. Book an executive briefing."
+        }
+    }
+}
