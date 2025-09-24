@@ -26,7 +26,7 @@ First, install Ruby. I used `rbenv` and a `~/.bash_profile` to install version `
 gem install rails
 ```
 
-Once done, we can start our blog by running the `rails new` command. going into the blog folder, and starting the server.
+Once done, we can start our blog by running the `rails new` command, go into the blog folder, and starting the server.
 
 ```bash
 rails new blog
@@ -48,7 +48,7 @@ Rails is nice because it has a bunch of commands you can use to generate parts o
 bin/rails generate controller Articles index --skip-routes
 ```
 
-We skip the routes because we will set those up manually. In `config/routes.rb`, add details to the route. The `resources` method lets us define a bunch of routes we want all a once:
+We skip the routes because we will set those up manually. In `config/routes.rb`, add details to the route. The `resources` method lets us define a bunch of routes we want all at once:
 
 ```bash
 Rails.application.routes.draw do
@@ -348,7 +348,7 @@ First, create the flag in PostHog. You can do so in [**Feature Flags**](https://
 
 Once done, we can check for this flag in our Ruby code and redirect to the home page if it is active. Again, we need the distinct ID to call `is_feature_enabled()`, so use the author string. 
 
-```ruby focusOnLines=22-32
+```ruby focusOnLines=22-29
 # ...
   def create 
     @article = Article.new(article_params)
@@ -371,17 +371,13 @@ Once done, we can check for this flag in our Ruby code and redirect to the home 
         alias: @article.author
       })
 
-      if @article.save
-        if $posthog.is_feature_enabled(
-          'home-redirect',
-          @article.author
-        )
-          redirect_to root_path
-        else
-          redirect_to @article
-        end
+      if $posthog.is_feature_enabled(
+        'home-redirect',
+        @article.author
+      )
+        redirect_to root_path
       else
-        render :new, status: :unprocessable_entity
+        redirect_to @article
       end
     end
   end
