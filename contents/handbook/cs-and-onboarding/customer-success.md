@@ -31,7 +31,7 @@ In order of priority, your objectives should be:
 
 ## Tips on success engagement
 
-- Highly recommend reviewing our section on [getting people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you). What we’ve found works really well when establishing an initial connection is to be candid about wanting to learn more about your customer’s business, how they are currently utilizing PostHog, and to get a better understanding of where you may be able to add value for them. Most customers are pretty receptive to wanting to help, especially if it can benefit them in some way, so don’t be afraid to ask directly.
+- Highly recommend reviewing our section on [getting people to talk to you](/handbook/growth/sales/getting-people-to-talk-to-you). What we’ve found works really well when establishing an initial connection is to be candid about wanting to learn more about your customer’s business, how they are currently utilizing PostHog, and to get a better understanding of where you may be able to add value for them. Most customers are pretty receptive to wanting to help, especially if it can benefit them in some way, so don’t be afraid to ask directly.
 
 - Review your existing book of business to see how many products each of your customers is currently engaged with so that in your conversations, you can better understand why they may or may not be using certain products or if they find upcoming beta features useful. Make note of how many of them are on specific plans and if there are any opportunities you could help the customer save (always a great topic to help interest customers to engage).
 
