@@ -38,9 +38,9 @@ export default function NextSteps({ location }) {
     ]
     useEffect(() => {
         async function getCustomer() {
-            const name = location.pathname.split('/')[2]
-            if (name) {
-                const customer = await fetch(`/api/customer?name=${name}`).then((res) => res.json())
+            const domain = location.pathname.split('/')[2]
+            if (domain) {
+                const customer = await fetch(`/api/customer?domain=${domain}`).then((res) => res.json())
                 setCustomer(customer)
             }
             setLoading(false)
