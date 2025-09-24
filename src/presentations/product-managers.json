@@ -1,0 +1,67 @@
+{
+    "name": "Product Managers",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "PostHog helps {companyName} make better product decisions.",
+            "description": "Understand user behavior, validate assumptions, and measure the impact of every feature. All the product analytics tools you need in one platform.",
+            "image": "/images/products/product-analytics/screenshot-dashboard.png"
+        },
+        "product_analytics": {
+            "template": "product",
+            "handle": "product_analytics",
+            "screenshot": "overview",
+            "title": "Deep user insights",
+            "description": "Track user journeys, analyze funnels, and understand retention. Get answers to your product questions without writing SQL or waiting for analysts."
+        },
+        "experiments": {
+            "template": "product",
+            "handle": "experiments",
+            "screenshot": "overview",
+            "title": "Validate with A/B tests",
+            "description": "Test your hypotheses with real users. Run experiments on features, copy, and flows. Statistical significance calculated automatically."
+        },
+        "surveys": {
+            "template": "product",
+            "handle": "surveys",
+            "screenshot": "overview",
+            "title": "Get qualitative feedback",
+            "description": "Ask users directly what they think. Target surveys to specific segments, measure NPS, and collect feature requests."
+        },
+        "session_replay": {
+            "template": "product",
+            "handle": "session_replay",
+            "screenshot": "overview",
+            "title": "See the user experience",
+            "description": "Watch how real users interact with your product. Identify UX issues, understand drop-offs, and build empathy with your users."
+        },
+        "feature_flags": {
+            "template": "product",
+            "handle": "feature_flags",
+            "screenshot": "overview",
+            "title": "Control feature rollouts",
+            "description": "Launch features to specific user segments. Get early feedback, iterate quickly, and roll back instantly if needed."
+        },
+        "insights": {
+            "template": "columns",
+            "name": "Insights",
+            "title": "Answer any product question",
+            "description": "Flexible analytics that adapt to your needs. Build custom dashboards, share insights with stakeholders, and make data-driven decisions.",
+            "image": "/images/products/product-analytics/screenshot-trends.png"
+        },
+        "pricing": {
+            "template": "columns",
+            "name": "Pricing",
+            "title": "Start free, scale as you grow",
+            "description": "Generous free tier with no time limit. Usage-based pricing means you only pay for what you use. No per-seat charges.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "cta": {
+            "template": "stacked",
+            "name": "Get Started",
+            "title": "Ready to understand your users better?",
+            "description": "Start using PostHog today or book a demo to learn more."
+        }
+    }
+}

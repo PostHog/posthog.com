@@ -1,0 +1,60 @@
+{
+    "name": "Engineering Managers",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "PostHog helps {companyName} ship better products, faster.",
+            "description": "Give your team the tools they need to understand users, test features, and measure impact. One platform instead of multiple tools means less overhead and more shipping.",
+            "image": "/images/products/product-analytics/screenshot-dashboard.png"
+        },
+        "product_analytics": {
+            "template": "product",
+            "handle": "product_analytics",
+            "screenshot": "overview",
+            "title": "Full visibility into product metrics",
+            "description": "Track key metrics, build dashboards, and share insights across your team. Know exactly how your product is performing and where to focus engineering efforts."
+        },
+        "error_tracking": {
+            "template": "product",
+            "handle": "error_tracking",
+            "screenshot": "overview",
+            "title": "Proactive error monitoring",
+            "description": "Catch bugs before customers complain. See error rates, stack traces, and affected users. Integrate with your existing workflow and alerting tools."
+        },
+        "feature_flags": {
+            "template": "product",
+            "handle": "feature_flags",
+            "screenshot": "overview",
+            "title": "De-risk deployments",
+            "description": "Ship features behind flags, roll out gradually, and instantly disable problematic code. Your team can ship faster with confidence."
+        },
+        "session_replay": {
+            "template": "product",
+            "handle": "session_replay",
+            "screenshot": "overview",
+            "title": "Debug issues faster",
+            "description": "See exactly what users experienced when they hit a bug. No more back-and-forth with support or trying to reproduce issues."
+        },
+        "team_productivity": {
+            "template": "columns",
+            "name": "Team Productivity",
+            "title": "Boost team productivity",
+            "description": "Replace multiple tools with one platform. Reduce context switching, simplify your tech stack, and let engineers focus on building.",
+            "image": "/images/products/product-analytics/screenshot-toolbar.png"
+        },
+        "pricing": {
+            "template": "columns",
+            "name": "Pricing",
+            "title": "Predictable costs",
+            "description": "Usage-based pricing with no seat limits. Set billing caps to control costs. Start free and scale as you grow.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "cta": {
+            "template": "stacked",
+            "name": "Get a Demo",
+            "title": "See PostHog in action",
+            "description": "Book a demo to see how PostHog can help your engineering team ship better products."
+        }
+    }
+}
