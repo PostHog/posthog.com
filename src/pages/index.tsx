@@ -370,7 +370,7 @@ const AIAgents = () => {
     return <OSTable columns={columns} rows={rows} size="sm" />
 }
 
-const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'heygen']
+const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
 
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
@@ -406,6 +406,7 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        'exa',
         'heygen',
         // "posthog"
     ],
@@ -422,6 +423,7 @@ const companyAttributes = {
         'raycast',
         // "researchgate",
         // "heygen",
+        // 'exa',
         'posthog',
     ],
     hardware: [
@@ -437,6 +439,7 @@ const companyAttributes = {
         // "raycast",
         // "researchgate",
         // "heygen",
+        // 'exa',
         'posthog',
     ],
     planes: [
@@ -452,6 +455,7 @@ const companyAttributes = {
         // "raycast",
         // "researchgate",
         // "heygen",
+        // 'exa',
         // "posthog"
     ],
     highValue: [
@@ -467,6 +471,7 @@ const companyAttributes = {
         // "raycast",
         // "researchgate",
         // "heygen",
+        // 'exa',
         // "posthog"
     ],
     caseStudy: [
@@ -481,6 +486,7 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        'exa',
         // "heygen",
         'posthog',
     ],
@@ -496,6 +502,7 @@ const companyAttributes = {
         // "mistralai",
         'raycast',
         // "researchgate",
+        'exa',
         'heygen',
         'posthog',
     ],
@@ -511,6 +518,7 @@ const companyAttributes = {
         // "mistralai",
         'raycast',
         'researchgate',
+        //'exa',
         // "heygen",
         'posthog',
     ],
@@ -526,6 +534,7 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        'exa',
         // "heygen",
         // "posthog"
     ],
@@ -541,6 +550,7 @@ const companyAttributes = {
         // "mistralai",
         'raycast',
         // "researchgate",
+        'exa',
         'heygen',
         'posthog',
     ],
@@ -556,6 +566,7 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        //'exa',
         // "heygen",
         'posthog',
     ],
@@ -571,6 +582,7 @@ const companyAttributes = {
         // "mistralai",
         // "raycast",
         'researchgate',
+        'exa',
         'heygen',
         'posthog',
     ],
@@ -586,6 +598,7 @@ const companyAttributes = {
         'mistralai',
         'raycast',
         // "researchgate",
+        'exa',
         'heygen',
         // "posthog"
     ],

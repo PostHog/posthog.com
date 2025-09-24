@@ -24,6 +24,9 @@ import zendesk from './images/customers/zendesk.svg'
 import researchgate from './images/customers/researchgate.svg'
 import supabase from './images/customers/supabase.svg'
 import heygen from './images/customers/heygen.svg'
+import exa from './images/customers/exa.svg'
+
+                    <Customer url="/customers/exa" className="max-h-[32px]" image={exa} alt="Exa" />
 
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
