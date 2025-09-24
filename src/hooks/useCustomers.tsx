@@ -631,24 +631,24 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: QredLogo,
         height: 8,
     },
-    swype: {
-        name: 'Swype',
-        toolsUsed: ['session_replay', 'product_analytics'],
-        industries: ['Recruitment', 'Data'],
-        users: ['Founders', 'Engineering'],
-        notes: 'Talent acquisition platform',
-        featured: false,
-        // logo: SwypeLogo, // Logo not available
-    },
-    wowzer: {
-        name: 'Wowzer',
-        toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
-        industries: ['AI'],
-        users: ['Growth', 'Engineering', 'Product'],
-        notes: 'AI-powered platform',
-        featured: false,
-        // logo: WowzerLogo, // Logo not available
-    },
+    // swype: {
+    //     name: 'Swype',
+    //     toolsUsed: ['session_replay', 'product_analytics'],
+    //     industries: ['Recruitment', 'Data'],
+    //     users: ['Founders', 'Engineering'],
+    //     notes: 'Talent acquisition platform',
+    //     featured: false,
+    //     // logo: SwypeLogo, // Logo not available
+    // },
+    // wowzer: {
+    //     name: 'Wowzer',
+    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+    //     industries: ['AI'],
+    //     users: ['Growth', 'Engineering', 'Product'],
+    //     notes: 'AI-powered platform',
+    //     featured: false,
+    //     // logo: WowzerLogo, // Logo not available
+    // },
 }
 
 export const useCustomers = () => {
