@@ -1,5 +1,5 @@
 ---
-title: 'How Octomind's marketing team uses PostHog with ease'
+title: "How Octomind's marketing team uses PostHog with ease"
 customer: Octomind
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog_octomind_bb047603a6.jpg
