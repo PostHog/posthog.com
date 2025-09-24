@@ -1,0 +1,178 @@
+---
+title: "Set up an email drip campaign"
+showStepsToc: true
+---
+
+In this guide we'll walk through creating a simple **drip campaign**. After following this guide, you will:
+- Send a welcome email when a user signs up
+- Follow up 1 day later if they haven't completed onboarding
+
+<Steps>
+
+<Step title="Create a campaign" badge="required">
+
+Go to [Messaging](https://app.posthog.com/messaging/campaigns/new/workflow) and click the **+ New campaign button**.  
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_light_c1f7b79b46.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_dark_6a4ea06e58.png"
+    classes="rounded"
+    alt="Click the New Campaign button"
+/>
+
+This will open the campaign builder. 
+
+The new campaign only has two blocks:
+- A trigger block: This defines the event that will start the campaign workflow.
+- An exit block: This defines the event that will end the campaign workflow.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
+    classes="rounded"
+    alt="Fresh campaign with trigger block"
+/>
+
+The trigger block has a little exclamation mark. This means it is not configured. In general, if there are problems with a block, it will have a little exclamation mark.
+
+</Step>
+
+<Step title="Set the trigger" badge="required">
+
+Now, let's click on the trigger block and configure it. In a new campaign, the trigger doesn't have any default trigger events. Triggers tell PostHog what events will start the campaign workflow.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_light_40e539b7ee.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_dark_02b15cd094.png"
+    classes="rounded"
+    alt="Trigger warning that event is required"
+/>
+
+Click the **+ Add trigger event** button and search for the event you want to use as the trigger. 
+
+Search for your the signup event you capture with PostHog SDKs, (e.g. `user signed up`) and click it. This tells the campaign to start when this event is captured:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_north,h_0.9,w_1.0/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_light_a08c890a53.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_north,h_0.9,w_1.0/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_dark_be58972ba1.png"
+    classes="rounded"
+    alt="Trigger event configuration"
+/>
+
+Don't worry about the conversion goal or exit conditions for now, and exit this step by clicking on the back arrow in the sidepanel - this is how you will exit any step after configuring it.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,h_0.3,w_0.4,x_0.25,y_0.13/messaging_new_campaign_event_select_light_a08c890a53.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,h_0.3,w_0.4,x_0.25,y_0.13/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_dark_be58972ba1.png"
+    classes="rounded"
+    alt="Back arrow in sidepanel"
+/>
+
+</Step>
+
+<Step title="Send the first email" badge="required">
+
+Drag an **Email** dispatch beneath the trigger, into the campaign like this:
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_email_light_98795f1414.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_email_dark_e2811207c7.png"
+    classes="rounded"
+    alt="Dragging email dispatch"
+/>
+
+Then, click on the email block to configure it. Set the **subject line** and **sender**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_light_ed7a551fec.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/configure_email_template_dark_a58f62c95f.png"
+    classes="rounded"
+    alt="Configure email template"
+/>
+
+> If you haven't configured an email channel yet, you will need to do that first.
+> 
+> <CallToAction className="mb-4" type="primary" to="/docs/messaging/configure-channels">
+>   Configure an email channel
+> </CallToAction>
+> 
+
+And also select your welcome email template or create a new one, and then click out.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_template_editor_811f405d88.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/email_template_editor_dark_24acb77e74.png"
+    classes="rounded"
+    alt="Email template selection"
+/>
+
+</Step>
+
+<Step title="Wait until condition branch" badge="required">
+
+This is where things get interesting. We will want to send a follow up email **only** to those users who have `not completed onboarding`. We can achieve this with a `wait until condition` step.
+
+After the email, add a **Wait until Condition**.  
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/us_posthog_com_project_198052_messaging_campaigns_new_workflow_mode_build_and_node_action_wait_until_condition_bf71d044_c8e3_439f_88ed_39144053dc6c_11e113cc7a.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/us_posthog_com_project_198052_messaging_campaigns_new_workflow_mode_build_and_node_action_wait_until_condition_bf71d044_c8e3_439f_88ed_39144053dc6c_1_0b01bed325.png"
+    classes="rounded"
+    alt="Adding wait until condition"
+/>
+
+In the **wait until condition** block, you can configure the following:
+- **Wait time**: The time to wait for the condition to be met. For this example, we'll wait 1 day.
+- **Conditions to wait for**: The condition to wait for. For this example, we'll wait for the person property `onboarding_completed` to be set to `true`. This can be a [person property](/docs/product-analytics/person-properties) set on users after they complete onboarding. 
+
+Click **Create** to create the wait until condition.
+
+</Step>
+
+<Step title="Add follow up email" badge="required">
+
+For users who haven't completed onboarding after the wait period, we'll send a follow-up email. Drag an email dispatch to the `no match` branch of the `wait until condition`.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/add_condition_email_light_e9e592cb19.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/add_condition_email_dark_0b6917818c.png"
+    classes="rounded"
+    alt="Adding follow up email"
+/>
+
+Configure this email with content encouraging them to complete onboarding. Some tips:
+
+- Keep it short and focused
+- Include a clear call-to-action
+- Highlight the value they'll get from completing onboarding
+- Consider offering help or support
+
+The campaign will now:
+- Exit if their person property `first_onboarding_complete` is set to `true` (they've completed onboarding)
+- Send the follow-up email if they have not completed onboarding after the wait period
+
+</Step>
+
+<Step title="Review and launch" badge="required">
+
+Now the complete campaign should look like this:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/email_drip_overview_light_a84567a8f9.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/email_drip_overview_dark_2bb57406d6.png"
+    classes="rounded"
+    alt="Complete campaign workflow"
+/>
+
+Click **Create** to publish the campaign. 
+
+</Step>
+
+<Step title="Enable the campaign" badge="required">
+
+Once you have confirmed the campaign works as expected, you can enable it by clicking the **Enable** button at the top right of the campaign builder.
+
+Your new users will now automatically receive this drip campaign to help guide them through onboarding.
+
+</Step>
+
+</Steps>

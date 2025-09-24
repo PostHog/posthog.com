@@ -26,6 +26,8 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
 
+> ⭐ **Small open source projects** without corporate backing and less than $200k annual revenue can contact support to have the 12-month credit expiry waived.
+
 All applications are **automatically approved**, then **manually reviewed** for eligibility.
 
 We track all PostHog for Startups applications in [this Zapier table](http://tables.zapier.com/app/tables/t/01JRARGWTSDYCGNS12HXN3B6DY).

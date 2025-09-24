@@ -35,6 +35,7 @@ import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
+import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
@@ -352,6 +353,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: RaycastLogo,
         featured: true,
         height: 12,
+    },
+    rebtel: {
+        name: 'Rebtel',
+        toolsUsed: ['product_analytics', 'experiments'],
+        notes: 'Telecom',
+        logo: RebtelLogo,
+        featured: false,
+        height: 10,
     },
     researchgate: {
         name: 'ResearchGate',

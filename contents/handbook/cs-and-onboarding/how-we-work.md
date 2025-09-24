@@ -29,7 +29,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 ## How contractual bonus works - Technical CSMs
 
-CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback. 
+CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback.
 
 > This plan will _also_ almost certainly change as we scale up the size and complexity of our success machine! As above, we will always ensure folks are treated fairly when we make changes.
 
@@ -37,7 +37,7 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 
 - Your OTE comprises a 90/10 split between base and contractual bonus.
 - Bonus is paid based on revenue retention above 100%, and is _uncapped_.
-  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus. 
+  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus.
   - While the Q2 2025 target is 120%, this may change in future depending on how things go.
   - To calculate retention we use the total quarterly usage and annualize this.
     - For monthly customers this is the total of their 3 invoices multiplied by 4
@@ -67,7 +67,7 @@ Sometimes an existing or potential customer may ask us to fix an issue or build 
 - We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
 - For any [feature requests](/handbook/cs-and-onboarding/feature-requests) customers care deeply about, we should file and track those in Vitally.
 
-Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness. 
+Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness.
 
 **Complicated technical questions**
 
@@ -88,7 +88,7 @@ To add Pylon to your customer channel:
 2. On the Settings tab, click Add apps.
 3. Type Pylon and click Add.
 4. In the popup that appears in the Slack channel, select Customer Channel.
-5. Add yourself as the Account Owner, and set the Triage channel to #support-customer-success.
+5. Add yourself as the Account Owner.
 6. Click Enable.
 7. Add Tim, Charles, and Abigail to the channel.
 
@@ -98,7 +98,7 @@ Once enabled, you can add the :ticket: emoji to a Slack thread to create a new T
 
 ## Tools we use
 **Gmail**
-We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details. 
+We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details.
 
 **Calendly:**
 We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.
