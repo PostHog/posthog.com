@@ -7,7 +7,7 @@
                 "title": "Hey John!",
                 "description": "We've prepared this custom presentation specifically for the Hasura team to show how PostHog can accelerate your product development."
             },
-            "product_analytics": {
+            "error_tracking": {
                 "inherit": "product-engineers",
                 "slideKey": "error_tracking"
             },
