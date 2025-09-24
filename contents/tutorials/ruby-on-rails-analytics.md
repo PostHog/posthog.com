@@ -309,7 +309,7 @@ def create
         }
       )
 
-      @project_api_key = 'phc_up2BnbdQluOFOQi3VOcZeQYLeyPgQBVHhDy5lCPgVF0' // +
+      @project_api_key = '<ph_project_api_key>' // +
       @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"]) // +
 
       $posthog.alias({ // +
@@ -362,7 +362,7 @@ Once done, we can check for this flag in our Ruby code and redirect to the home 
         }
       )
       
-      @project_api_key = 'phc_up2BnbdQluOFOQi3VOcZeQYLeyPgQBVHhDy5lCPgVF0'
+      @project_api_key = '<ph_project_api_key>'
       @ph_cookie = JSON.parse(cookies["ph_#{@project_api_key}_posthog"])
 
 
