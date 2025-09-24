@@ -15,12 +15,21 @@ import productEngineersConfig from '../../presentations/product-engineers.json'
 import engineeringManagersConfig from '../../presentations/engineering-managers.json'
 import productManagersConfig from '../../presentations/product-managers.json'
 import productDirectorsConfig from '../../presentations/product-directors.json'
+import { useWindow } from '../../context/Window'
 
 const roleConfigs = {
     'product-engineers': productEngineersConfig,
     'engineering-managers': engineeringManagersConfig,
     'product-managers': productManagersConfig,
     'product-directors': productDirectorsConfig,
+}
+
+interface SalesRep {
+    name: string
+    title: string
+    email: string
+    photo: string
+    color: string
 }
 
 interface CompanyData {
@@ -49,15 +58,17 @@ interface PresentationConfig {
     slides: Record<string, SlideConfig>
 }
 
-const CustomPresentationPage = ({ params }: { params: { path?: string } }) => {
+const CustomPresentationPage = () => {
+    const { appWindow } = useWindow()
     const [companyData, setCompanyData] = useState<CompanyData>({})
     const [isLoading, setIsLoading] = useState(true)
     const [calendlyLoaded, setCalendlyLoaded] = useState(false)
+    const [salesRep, setSalesRep] = useState<SalesRep | null>(null)
 
     // Parse the URL path
-    const pathSegments = params.path ? params.path.split('/') : []
-    const companyDomain = pathSegments[0] || ''
-    const roleOrId = pathSegments[1] || ''
+    const pathSegments = appWindow?.path ? appWindow?.path.split('/') : []
+    const companyDomain = pathSegments[2] || ''
+    const roleOrId = pathSegments[3] || ''
 
     // Redirect to homepage if no company is specified
     useEffect(() => {
@@ -141,9 +152,18 @@ const CustomPresentationPage = ({ params }: { params: { path?: string } }) => {
                 if (response.ok) {
                     const data = await response.json()
                     setCompanyData({
-                        name: data.name || companyDomain,
-                        domain: data.domain || companyDomain,
-                        logo: data.logo || null,
+                        name: data?.companyInfo?.name || companyDomain,
+                        domain: data?.companyInfo?.domain || companyDomain,
+                        logo: data?.companyInfo?.logo || null,
+                    })
+                    setSalesRep({
+                        email: data?.accountManager?.email,
+                        name: [data?.accountManager?.firstName, data?.accountManager?.lastName]
+                            .filter(Boolean)
+                            .join(' '),
+                        title: data?.accountManager?.companyRole,
+                        photo: data?.accountManager?.avatar?.url,
+                        color: data?.accountManager?.color,
                     })
                 } else {
                     // Fallback if Clearbit fails
@@ -182,15 +202,6 @@ const CustomPresentationPage = ({ params }: { params: { path?: string } }) => {
             }
         }
     }, [config, calendlyLoaded])
-
-    // Hard-coded sales rep data for now
-    const salesRep = {
-        name: 'Chris Mair',
-        title: 'Sales Engineer',
-        email: 'chris.m@posthog.com',
-        photo: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/contents/profiles/chris-m',
-        color: 'blue',
-    }
 
     // Create slide content based on template
     const createSlideContent = (slideKey: string, slideConfig: SlideConfig) => {
