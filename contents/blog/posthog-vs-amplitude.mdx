@@ -78,6 +78,71 @@ Jump to:
 - [Integrations comparison](#integrations)
 - [Security and compliance comparison](#security-and-compliance)
 
+### So... which one is better, PostHog or Amplitude?
+
+While both PostHog and Amplitude deliver on the core product analytics stack, the right choice varies on what you're optimizing for.
+
+<details>
+  <summary>Best product analytics tool for startups</summary>
+
+**PostHog**. Generous free tiers, [$50k startup credits for eligible companies](/startups), usage-based pricing that keeps costs low, and a roadmap focused on building every product you need.  
+
+</details>
+<details>
+  <summary>Best for product managers and marketers</summary>
+
+**Amplitude**. Simpler interface, mature dashboards, and integrations that make it accessible to non-technical teams.  
+</details>
+<details>
+  <summary>Best for flexibility and cost control</summary>
+
+**PostHog**. [Usage-based pricing](/pricing), ability to cap spend, and transparent per-unit rates.    
+
+</details>
+<details>
+  <summary>Best for scaling B2C apps with very high MTUs</summary>
+
+**Amplitude**. MTU-based pricing can be more predictable and cost-effective if you track millions of users with relatively few events.  
+
+</details>
+<details>
+  <summary>Best for engineers and technical founders</summary>
+
+**PostHog**. Open source, transparent roadmap, direct support from engineers, SQL access, and extensibility.  
+
+</details>
+<details>
+  <summary>Best for warehouse-native analytics</summary>
+
+**Amplitude**. Can run directly on top of your data warehouse, while PostHog syncs to/from warehouses but doesn't sit on top of them.  
+
+</details>
+<details>
+  <summary>Best for account-based analytics (B2B SaaS)</summary>
+
+**PostHog**. Group/account analytics are included in the free plan, and [Revenue analytics](/docs/revenue-analytics/) *(beta)* lets SaaS teams connect tools like Stripe, track recurring revenue, and analyze top customers. Amplitude requires a paid add-on for account analytics.  
+
+</details>
+<details>
+  <summary>Best all-in-one platform</summary>
+
+**PostHog**. PostHog** – combines web and product analytics, feature flags, replays, surveys, error tracking, and a data warehouse in one product.
+
+</details>
+
+Whichever you choose, setup is quick. Amplitude offers a polished SaaS experience with strong documentation and enterprise support. PostHog makes setup fast with a snippet or wizard install, automatic event capture, and templates (plus [AI assistance with MaxAI](/max)) to get insights running quickly.
+
+Have another question? Just ask AI.
+
+<AskMax
+    title="PostHog or Amplitude?"
+    quickQuestions={[
+        'What features does PostHog include that Amplitude doesn’t?',
+        'What’s the difference between PostHog and Amplitude for session replay?',
+        'Can I run experiments in both?',
+    ]}
+/>
+
 ### Product analytics
 
 Both PostHog and Amplitude offer product analytics. Advanced features like SQL queries, custom formulas, and group/account analytics are included in PostHog's free tier, while Amplitude only provides them on paid plans.
@@ -164,14 +229,14 @@ Both PostHog and Amplitude offer product analytics. Advanced features like SQL q
     />
 </ComparisonTable>
 
-> 💡 **Good to know:** PostHog supports [autocapture](/docs/product-analytics/autocapture), which means you can implement PostHog in mere minutes and ensure you don't miss out on events you haven't manually instrumented. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) – we offer the best of both worlds.
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-<br />
+PostHog supports [autocapture](/docs/product-analytics/autocapture), which means you can implement PostHog in mere minutes and ensure you don't miss out on events you haven't manually instrumented. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) – we offer the best of both worlds.
+</CalloutBox>
 
 ### Feature flags
 
 Both PostHog and Amplitude provide robust feature flagging, supporting boolean and multivariate flags, local evaluation, payloads, targeting, and percentage rollouts. PostHog adds scheduling and early-access management, with pricing based on requests, while Amplitude's pricing is tied to impression (a difference that can affect flexibility as you roll out and scale).
-
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
@@ -232,9 +297,11 @@ Both PostHog and Amplitude provide robust feature flagging, supporting boolean a
     <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-> 💡 **Good to know:** PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-<br />
+PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
+
+</CalloutBox>
 
 ### Experiments
 
@@ -304,9 +371,11 @@ Both PostHog and Amplitude support core experimentation features like A/B/n test
     />
 </ComparisonTable>
 
-> 💡 **Good to know:** Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-<br />
+Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+
+</CalloutBox>
 
 ### Session replay
 
@@ -399,9 +468,11 @@ Both PostHog and Amplitude offer session replay with free tiers and heatmaps. Po
     />
 </ComparisonTable>
 
-> 💡 **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, are masked.
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-<br />
+Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, are masked.
+
+</CalloutBox>
 
 ### Surveys
 
@@ -461,9 +532,11 @@ PostHog includes surveys out of the box, with 1,500 free responses per month and
     <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
-> 💡 **Good to know:** [Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to for more on how to use surveys.
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-<br />
+[Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to for more on how to use surveys.
+
+</CalloutBox>
 
 ## Price comparison
 
@@ -479,7 +552,7 @@ This usage-based approach means costs scale with your actual activity, whether t
 
 This model can be easier to predict if you run a large product with millions of users who generate relatively few events per person. It also means teams don't have to think about event volume when forecasting costs. However, it can feel less flexible if you're working with a smaller but more active user base, since a few highly engaged users won't change your MTU count.
 
-> If you have 50,000 users who generate just a handful of events each month, usage-based pricing may be much lower than an MTU-based system, since your bill only scales with events sent. On the other hand, if those same users generate millions of events each, your costs will rise faster with an event-based model, while an MTU plan  stays more predictable regardless of event volume.
+> If you have 50,000 users who generate just a handful of events each month, usage-based pricing may be much lower than an MTU-based system, since your bill only scales with events sent. On the other hand, if those same users generate millions of events each, your costs will rise faster with an event-based model, while an MTU plan stays more predictable regardless of event volume.
 
 ## Platform comparison
 
@@ -554,95 +627,52 @@ This model can be easier to predict if you run a large product with millions of 
     />
 </ComparisonTable>
 
-> 💡 **Good to know:** We offer a Business Associate Agreement (BAA) for any customer on our platform packages, which also includes priority support, SSO enforcement, and additional collaboration features.
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-<br />
+We offer a Business Associate Agreement (BAA) for any customer on our platform packages, which also includes priority support, SSO enforcement, and additional collaboration features.
 
-## So... which one is better, PostHog or Amplitude?
-
-While both PostHog and Amplitude deliver on the core product analytics stack, the right choice varies on what you're optimizing for:
-
-* **Best product analytics tool for startups: PostHog** – generous free tiers, [$50k startup credits for eligible companies](/startups), usage-based pricing that keeps costs low, and a roadmap focused on building every product you need.  
-* **Best for product managers and marketers: Amplitude** – simpler interface, mature dashboards, and integrations that make it accessible to non-technical teams.  
-* **Best for flexibility and cost control: PostHog** – [usage-based pricing](/pricing), ability to cap spend, and transparent per-unit rates.  
-* **Best for scaling B2C apps with very high MTUs: Amplitude** – MTU-based pricing can be more predictable and cost-effective if you track millions of users with relatively few events.  
-* **Best for engineers and technical founders: PostHog** – open source, transparent roadmap, direct support from engineers, SQL access, and extensibility.  
-* **Best for warehouse-native analytics: Amplitude** – can run directly on top of your data warehouse, while PostHog syncs to/from warehouses but doesn’t sit on top of them.  
-* **Best for account-based analytics (B2B SaaS): PostHog** – group/account analytics are included in the free plan, and [Revenue analytics](/docs/revenue-analytics/) *(beta)* lets SaaS teams connect tools like Stripe, track recurring revenue, and analyze top customers. Amplitude requires a paid add-on for account analytics.  
-* **Best all-in-one platform: PostHog** – combines web and product analytics, feature flags, replays, surveys, error tracking, and a data warehouse in one product.
-
-Whichever you choose, setup is quick. Amplitude offers a polished SaaS experience with strong documentation and enterprise support. PostHog makes setup fast with a snippet or wizard install, automatic event capture, and templates (plus [AI assistance with MaxAI](/max)) to get insights running quickly.
+</CalloutBox>
 
 ## FAQ
 
-### Does PostHog offer a free trial?
+<details>
+  <summary>Does PostHog offer a free trial?</summary>
 
-We don't need to. Every customer gets a generous free usage allowance each month, so you can sign up and start using PostHog for nothing. Here's how PostHog and Amplitude's free tiers compare:
+We don't need to. Every customer gets a generous free usage allowance each month, so you can sign up and start using PostHog for nothing. 
 
-<ComparisonTable column1="PostHog" column2="Amplitude">
-    <ComparisonRow
-        column1="1 million events"
-        column2="50k tracked users"
-        feature="Free analytics usage"
-        description="Free tier usage each month"
-    />
-    <ComparisonRow
-        column1="5,000 recordings"
-        column2="1,000 recordings"
-        feature="Free replay usage"
-        description="Free tier usage each month"
-    />
-    <ComparisonRow
-        column1="Unlimited"
-        column2="10 only"
-        feature="Saved insights"
-        description="Number of you charts you can create"
-    />
-    <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Cohorts"
-        description="Combine users based on properties and events for group analysis"
-    />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Formulas"
-        description="Create custom insights using formulas"
-    />
-    <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Release and control features" />
-    <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
-    <ComparisonRow
-        column1={true}
-        column2={false}
-        feature="Surveys"
-        description="Gather feedback and book user interviews"
-    />
-</ComparisonTable>
-
-Companies that qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits.
-
-### Can PostHog replace Google Analytics?
+</details>
+<details>
+  <summary>Can PostHog replace Google Analytics?</summary>
 
 Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using [Google Tag Manager](/docs/libraries/google-tag-manager) and find an [easy-to-use web analytics dashboard](/web-analytics) in-app. See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [an intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
-### Is PostHog easy to deploy?
+</details>
+<details>
+  <summary>Is PostHog easy to deploy?</summary>
 
 Yes. Just paste our web snippet within the `<head>` tags your product or website and you're good to go in just a few minutes. This works for apps, blogs, scripts, no-code site builders, and more. See our [installation documentation](/docs/getting-started/install) for more options. We support dozens of client-side and server-side SDKs.
 
-### How can I estimate my usage?
+</details>
+<details>
+  <summary>How can I estimate my usage?</summary>
 
 The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integrate our snippet, then check the projection on your billing page after a few days. Alternatively, you can guesstimate by multiplying your current monthly active users by an estimate of events generated per user – 50 to 100 per user is a good starting point. See [Estimating usage & costs](/docs/billing/estimating-usage-costs) in our docs for more.
 
-### Does PostHog block bots by default?
+</details>
+<details>
+  <summary>Does PostHog block bots by default?</summary>
 
 Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default). You need to manually enable bot blocking in Amplitude. This means event and DAU counts can look higher in Amplitude than PostHog.
 
-### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
+</details>
+<details>
+  <summary>Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)</summary>
 
 Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
-### How does PostHog compare to other Amplitude alternatives?
+</details>
+<details>
+  <summary>How does PostHog compare to other Amplitude alternatives?</summary>
 
 Still need some convincing? See our guide to the [most popular Amplitude alternatives](/blog/best-amplitude-alternatives).
+</details>
