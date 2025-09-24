@@ -11,6 +11,7 @@ import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
@@ -26,6 +27,7 @@ import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
+import QredLogo from '../components/CustomerLogos/QredLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
@@ -47,6 +49,7 @@ export interface Customer {
     slug: string
     name: string
     toolsUsed: string[]
+    toolsUsedHandles?: string[] // Original handles for product lookup
     industries?: string[]
     users?: string[]
     notes?: React.ReactNode
@@ -615,7 +618,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Gaming platform',
         featured: false,
-        // logo: GanksterLogo, // Logo not available
+        logo: GanksterLogo,
+        height: 10,
     },
     qred: {
         name: 'Qred',
@@ -624,7 +628,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product', 'Marketing'],
         notes: 'Business loans and financial services',
         featured: false,
-        // logo: QredLogo, // Logo not available
+        logo: QredLogo,
+        height: 8,
     },
     swype: {
         name: 'Swype',
@@ -686,8 +691,13 @@ export const useCustomers = () => {
             ...customer,
             slug: key,
             logo,
+            // Keep original handles for product lookup
+            toolsUsedHandles: customer.toolsUsed || [],
             // Convert handles to human-readable product names for display
-            toolsUsed: customer.toolsUsed?.map((tool) => getProductTitleByHandle(tool)).filter(Boolean) || [],
+            toolsUsed:
+                customer.toolsUsed
+                    ?.map((tool) => getProductTitleByHandle(tool))
+                    .filter((name): name is string => name !== undefined) || [],
             // Dynamically check if customer has a case study
             hasCaseStudy: customersWithCaseStudies.has(key),
         }

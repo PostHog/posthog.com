@@ -1,24 +1,8 @@
 ---
 title: 'How Mintlify launched user-facing analytics, powered by PostHog'
 customer: Mintlify
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo.svg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/mintlify_posthog_f60afa6a38.png
-industries:
-  - 'SaaS, DevTool'
-users:
-  - Leadership
-  - Engineering
-  - Product
-  - Users
-toolsUsed:
-  - Session replay
-  - Autocapture
-  - PostHog Cloud
-  - API
 date: 2023-04-06
 ---
 

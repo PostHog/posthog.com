@@ -1,23 +1,8 @@
 ---
 title: How Wowzer increased conversion rate by 10% with A/B tests and product analytics
 customer: wowzer
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/wowzer_posthog_ee9cb61596.png
-industries:
-  - AI
-users:
-  - Growth
-  - Engineering
-  - Product
-toolsUsed:
-  - Experimentation
-  - Product analytics
-  - Surveys
-  - LLM analytics
 date: 2024-05-29
 ---
 
