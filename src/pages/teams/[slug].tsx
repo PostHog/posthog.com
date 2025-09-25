@@ -696,15 +696,17 @@ export default function TeamPage(props: TeamPageProps) {
                                                       <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
                                                           <button
                                                               onClick={() => removeTeamMember(id)}
-                                                              className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red text-white"
+                                                              className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-white text-black"
                                                               title="Remove team member"
                                                           >
                                                               <IconX className="w-4 h-4" />
                                                           </button>
                                                           <button
                                                               onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
-                                                                  isTeamLead(id) ? 'bg-yellow' : 'bg-accent'
+                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center ${
+                                                                  isTeamLead(id)
+                                                                      ? 'bg-yellow text-white'
+                                                                      : 'bg-accent text-black dark:text-white'
                                                               }`}
                                                               title={
                                                                   isTeamLead(id) ? 'Remove team lead' : 'Make team lead'
