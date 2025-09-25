@@ -4,7 +4,7 @@ import { IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { useResponsive } from '../../hooks/useResponsive'
+import { useApp } from '../../context/App'
 
 // Types
 export type MenuItemType = {
@@ -320,7 +320,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
     customTriggerClasses,
     id = 'menubar',
 }) => {
-    const { isMobile, isLoaded } = useResponsive()
+    const { isMobile } = useApp()
     const baseId = React.useMemo(() => {
         // Generate a stable ID based on the menu structure
         const menuSignature = menus
@@ -332,7 +332,6 @@ const MenuBar: React.FC<MenuBarProps> = ({
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
         // Wait for responsive detection to load before processing
-        if (!isLoaded) return menus
         if (!isMobile) return menus
 
         return menus.map((menu) => {
@@ -346,7 +345,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
                 items: processMobileMenuItems(menu.items),
             }
         })
-    }, [menus, isMobile, isLoaded])
+    }, [menus, isMobile])
 
     return (
         <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`} id={baseId}>
@@ -356,7 +355,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
                 const contentId = generateStableId(baseId, 'content', menuIndex)
 
                 // On mobile, if menu has mobileLink, make it a direct link
-                if (isLoaded && isMobile && menu.mobileLink) {
+                if (isMobile && menu.mobileLink) {
                     return (
                         <Link
                             key={menuId}
