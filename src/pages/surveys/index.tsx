@@ -71,7 +71,7 @@ export default function Surveys(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        exclude: ['answers', 'posthog-on-posthog'],
+        exclude: ['answers'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
