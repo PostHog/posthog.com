@@ -3,6 +3,10 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Logo from 'components/Logo'
 import { IconHeartFilled } from '@posthog/icons'
 
+// @TODOS
+// - Right now the Hogzill image is hard-coded. We have support for a custom image (which will hide Hogzilla) but it's not formatted
+// - Design basically expects content to fit around Hogzilla. Probably need ability to offset/shrink Hogzilla and/or allow right-padding to compensate for the width of an image.
+
 interface SmartDescriptionProps {
     content: string
     className?: string
@@ -57,7 +61,7 @@ export default function StackedTemplate({
     slideKey,
 }: StackedTemplateProps) {
     return (
-        <div className={`h-full flex flex-col relative bg-${bgColor} ${textColor}`}>
+        <div className={`h-full flex flex-col relative bg-${bgColor} text-black`}>
             <div className="relative z-10 pt-8 px-8 flex flex-col">
                 <div className="flex justify-between items-center mb-8 @2xl:mb-4">
                     <div className="flex items-center gap-4">
@@ -83,13 +87,11 @@ export default function StackedTemplate({
                                 width={116}
                             />
                             <div className="text-left">
-                                <div className="text-2xl font-semibold text-primary @2xl:leading-none">
-                                    {salesRep.name}
-                                </div>
-                                <div className="text-xl text-secondary @2xl:leading-none">{salesRep.title}</div>
+                                <div className="text-2xl font-semibold @2xl:leading-tight">{salesRep.name}</div>
+                                <div className="text-xl opacity-75 @2xl:leading-tight">{salesRep.title}</div>
                                 <a
                                     href={`mailto:${salesRep.email}`}
-                                    className="block pt-0.5 text-lg underline font-semibold @2xl:leading-none"
+                                    className="block pt-0.5 text-lg underline font-semibold @2xl:leading-tight"
                                 >
                                     {salesRep.email}
                                 </a>
@@ -99,7 +101,7 @@ export default function StackedTemplate({
                 </div>
 
                 <h1
-                    className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${textColor} ${
+                    className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${
                         image ? '' : '@2xl:max-w-xl'
                     }`}
                     dangerouslySetInnerHTML={{
@@ -109,9 +111,7 @@ export default function StackedTemplate({
                 {description && (
                     <SmartDescription
                         content={description.replace('{companyName}', companyName || '')}
-                        className={`prose text-2xl @2xl:text-xl text-balance ${textColor} ${
-                            image ? '' : '@2xl:max-w-2xl'
-                        }`}
+                        className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : '@2xl:max-w-2xl'}`}
                     />
                 )}
             </div>
