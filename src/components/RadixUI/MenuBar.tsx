@@ -98,7 +98,11 @@ const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
                         return {
                             ...subItem,
                             type: 'item' as const,
-                            link: subItem.link || subItem.mobileDestination || '#',
+                            link:
+                                subItem.link ||
+                                subItem.mobileDestination ||
+                                subItem.items?.find((subItem) => !!subItem?.link)?.link ||
+                                '#',
                             items: undefined,
                         }
                     }
@@ -291,7 +295,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
-        // Wait for responsive detection to load before processing
         if (!isMobile) return menus
 
         return menus.map((menu) => {
