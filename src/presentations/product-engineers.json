@@ -9,6 +9,7 @@
         },
         "error_tracking": {
             "template": "product",
+            "name": "Error Tracking",
             "handle": "error_tracking",
             "screenshot": "home",
             "title": "Automated error tracking",
@@ -16,6 +17,7 @@
         },
         "feature_flags": {
             "template": "product",
+            "name": "Feature Flags",
             "handle": "feature_flags",
             "screenshot": "home",
             "title": "Gradually roll out new features",
@@ -23,6 +25,7 @@
         },
         "experiments": {
             "template": "product",
+            "name": "Experiments",
             "handle": "experiments",
             "screenshot": "home",
             "title": "Test new features",
@@ -30,6 +33,7 @@
         },
         "llm_analytics": {
             "template": "product",
+            "name": "LLM Analytics",
             "handle": "llm_analytics",
             "screenshot": "home",
             "title": "LLM Analytics",
@@ -44,7 +48,7 @@
         },
         "cta": {
             "template": "stacked",
-            "name": "Get a Demo",
+            "name": "Get a demo",
             "title": "Get a demo",
             "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time below.</p>"
         }
