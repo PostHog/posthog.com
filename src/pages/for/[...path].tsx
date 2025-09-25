@@ -222,10 +222,10 @@ const CustomPresentationPage = () => {
                         imageAlt={props.imageAlt}
                         bgColor={props.bgColor}
                         textColor={props.textColor}
-                        companyLogo={slideKey === 'overview' ? props.companyLogo : undefined}
+                        companyLogo={props.companyLogo}
                         companyName={props.companyName}
                         salesRep={salesRep}
-                        isOverview={slideKey === 'overview'}
+                        slideKey={slideKey}
                     >
                         {slideKey === 'cta' && calendlyLoaded && (
                             <div className="w-full max-w-4xl mx-auto">
