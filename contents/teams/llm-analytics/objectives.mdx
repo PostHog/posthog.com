@@ -12,7 +12,7 @@
 
 #### Goal 2: New Ingestion Pipeline
 
-*Description*: A dedicated ingestion pipeline built specifically for LLM events, enabling better performance and new capabilities for LLM tracking.
+*Description*: A dedicated ingestion pipeline built specifically for LLM events, enabling better performance and new capabilities for LLM tracking. Without this, models with large context windows might exceed our current event size limits, preventing proper tracking. This pipeline is also a prerequisite for multimodal support and compliance requirements.
 
 *What we will ship*:
 - Independent ingestion endpoint optimized for LLM event data
