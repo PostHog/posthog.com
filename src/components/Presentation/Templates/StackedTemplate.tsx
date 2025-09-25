@@ -148,7 +148,6 @@ export default function StackedTemplate({
                         <>
                             <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB]">
                                 <CloudinaryImage
-                                    loading="lazy"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                                     alt=""
                                     width={2574}
