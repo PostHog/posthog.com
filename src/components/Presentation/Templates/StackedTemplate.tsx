@@ -1,5 +1,23 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Logo from 'components/Logo'
+import { IconHeartFilled } from '@posthog/icons'
+
+interface SmartDescriptionProps {
+    content: string
+    className?: string
+}
+
+function SmartDescription({ content, className }: SmartDescriptionProps) {
+    // Check if content starts with an HTML element
+    const startsWithHtmlElement = /^<[a-zA-Z][^>]*>/.test(content.trim())
+
+    if (startsWithHtmlElement) {
+        return <div className={className} dangerouslySetInnerHTML={{ __html: content }} />
+    }
+
+    return <p className={className} dangerouslySetInnerHTML={{ __html: content }} />
+}
 
 interface SalesRep {
     name: string
@@ -21,7 +39,7 @@ interface StackedTemplateProps {
     companyLogo?: string
     companyName?: string
     salesRep?: SalesRep
-    isOverview?: boolean
+    slideKey?: string
 }
 
 export default function StackedTemplate({
@@ -36,61 +54,69 @@ export default function StackedTemplate({
     companyLogo,
     companyName,
     salesRep,
-    isOverview = false,
+    slideKey,
 }: StackedTemplateProps) {
     return (
-        <div className={`h-full flex flex-col items-center relative bg-${bgColor} ${textColor}`}>
-            {/* Sales Rep Info - positioned in top right for overview slides */}
-            {isOverview && salesRep && (
-                <div className="absolute top-4 right-4 @2xl:top-8 @2xl:right-8 p-3 rounded-lg bg-white/90 dark:bg-dark/90 backdrop-blur-sm border border-primary/20 shadow-lg z-10">
-                    <div className="flex items-center gap-3">
-                        <CloudinaryImage
-                            src={salesRep.photo as `https://res.cloudinary.com/${string}`}
-                            alt={salesRep.name}
-                            className={`size-12 @2xl:size-14 rounded-full overflow-hidden bg-${salesRep.color}`}
-                            imgClassName="object-cover"
-                            width={56}
-                        />
-                        <div className="text-left">
-                            <div className="text-sm @2xl:text-base font-semibold text-primary">{salesRep.name}</div>
-                            <div className="text-xs @2xl:text-sm text-secondary">{salesRep.title}</div>
-                            <a
-                                href={`mailto:${salesRep.email}`}
-                                className="text-xs @2xl:text-sm text-blue hover:text-blue-dark hover:underline"
-                            >
-                                {salesRep.email}
-                            </a>
+        <div className={`h-full flex flex-col relative bg-${bgColor} ${textColor}`}>
+            <div className="relative z-10 pt-8 px-8 flex flex-col">
+                <div className="flex justify-between items-center mb-8 @2xl:mb-4">
+                    <div className="flex items-center gap-4">
+                        <Logo noText className="size-20" />
+                        {companyLogo && (
+                            <>
+                                <IconHeartFilled className="size-12 inline-block text-red" />
+                                <img
+                                    src={companyLogo}
+                                    alt={companyName || 'Company logo'}
+                                    className="h-12 @2xl:h-16 object-contain rounded"
+                                />
+                            </>
+                        )}
+                    </div>
+                    {salesRep && (
+                        <div className="flex items-center gap-3">
+                            <CloudinaryImage
+                                src={salesRep.photo as `https://res.cloudinary.com/${string}`}
+                                alt={salesRep.name}
+                                className={`size-20 rounded-full overflow-hidden border-2 border-${salesRep.color} p-[1.5px]`}
+                                imgClassName={`object-cover rounded-full bg-${salesRep.color}`}
+                                width={116}
+                            />
+                            <div className="text-left">
+                                <div className="text-2xl font-semibold text-primary @2xl:leading-none">
+                                    {salesRep.name}
+                                </div>
+                                <div className="text-xl text-secondary @2xl:leading-none">{salesRep.title}</div>
+                                <a
+                                    href={`mailto:${salesRep.email}`}
+                                    className="block pt-0.5 text-lg underline font-semibold @2xl:leading-none"
+                                >
+                                    {salesRep.email}
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
-            )}
 
-            <div className="pt-8 px-4 @2xl:pt-12 @2xl:px-8 mb-4 w-full flex flex-col">
-                {companyLogo && (
-                    <div className="flex justify-center items-center gap-4 mb-6">
-                        <img
-                            src={companyLogo}
-                            alt={companyName || 'Company logo'}
-                            className="h-12 @2xl:h-16 object-contain"
-                        />
-                    </div>
-                )}
                 <h1
-                    className={`text-5xl @2xl:text-6xl mb-4 @2xl:mb-2 font-bold text-center leading-tight drop-shadow-2xl text-balance ${textColor}`}
+                    className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${textColor} ${
+                        image ? '' : '@2xl:max-w-xl'
+                    }`}
                     dangerouslySetInnerHTML={{
                         __html: title.replace('{companyName}', companyName || ''),
                     }}
                 />
                 {description && (
-                    <p
-                        className={`text-2xl @2xl:text-3xl text-center leading-snug drop-shadow text-balance mx-auto ${textColor}`}
-                    >
-                        {description}
-                    </p>
+                    <SmartDescription
+                        content={description.replace('{companyName}', companyName || '')}
+                        className={`prose text-2xl @2xl:text-xl text-balance ${textColor} ${
+                            image ? '' : '@2xl:max-w-2xl'
+                        }`}
+                    />
                 )}
             </div>
 
-            {image && (
+            {image ? (
                 <div className="relative flex-1 w-full px-4">
                     {imageDark ? (
                         <>
@@ -109,6 +135,24 @@ export default function StackedTemplate({
                         <img src={image} alt={imageAlt || ''} className="max-w-full h-auto mx-auto" />
                     )}
                 </div>
+            ) : (
+                <>
+                    {slideKey === 'overview' && (
+                        <>
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB]">
+                                <CloudinaryImage
+                                    loading="lazy"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
+                                    alt=""
+                                    width={2574}
+                                    height={1256}
+                                    className="absolute inset-0 flex items-end justify-end"
+                                    imgClassName="max-w-none h-[44rem] -mr-12 @2xl:mr-0 @2xl:max-h-[628px] h-auto @2xl:w-full z-10"
+                                />
+                            </div>
+                        </>
+                    )}
+                </>
             )}
 
             {children && <div className="px-4 pb-4 w-full">{children}</div>}
