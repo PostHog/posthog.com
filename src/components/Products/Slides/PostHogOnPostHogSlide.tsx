@@ -4,6 +4,7 @@ import { useApp } from '../../../context/App'
 import { IconCollapse45 } from '@posthog/icons'
 import { useWistiaThumbnail } from '../../../hooks/useWistiaThumbnail'
 import { PresentationModeContext } from '../../RadixUI/Tabs'
+import { useWindow } from '../../../context/Window'
 
 interface PostHogOnPostHogSlideProps {
     productData: {
@@ -34,18 +35,55 @@ const VideoPlayerWindow = ({ productData, startTime = 0 }: any) => {
 }
 
 export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogSlideProps) {
-    const { addWindow } = useApp()
+    const { addWindow, siteSettings } = useApp()
+    const { appWindow } = useWindow()
     const [isMaximized, setIsMaximized] = useState(false)
     const [isThumbnail, setIsThumbnail] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const mainPlayerRef = useRef<any>(null)
+    const [isPortraitMode, setIsPortraitMode] = useState(false)
 
     // Add context access
     const presentationContext = useContext(PresentationModeContext)
-    const isPortraitMode = presentationContext.isPortrait || false
 
     // Add thumbnail fetching
     const { thumbnailUrl, isLoading: thumbnailLoading } = useWistiaThumbnail(productData.videos?.overview?.wistia || '')
+
+    // Determine portrait mode based on context and window size
+    useEffect(() => {
+        const checkPortraitMode = () => {
+            // Use context value if available (for presentation mode)
+            if (presentationContext.isPresenting && presentationContext.isPortrait !== undefined) {
+                setIsPortraitMode(presentationContext.isPortrait)
+                return
+            }
+
+            // For thumbnail mode, check container width
+            if (isThumbnail) {
+                const containerWidth =
+                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
+                        ? window.innerWidth
+                        : appWindow?.size?.width
+
+                // Below @2xl (672px) should show portrait thumbnails
+                setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
+                return
+            }
+
+            // Default to landscape
+            setIsPortraitMode(false)
+        }
+
+        checkPortraitMode()
+
+        // Listen for window resize to update portrait mode
+        const handleResize = () => {
+            checkPortraitMode()
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [presentationContext, appWindow, siteSettings, isThumbnail])
 
     // Detect if we're rendered inside a thumbnail context
     useEffect(() => {
