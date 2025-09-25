@@ -25,7 +25,7 @@ export default function ParseHtml({ content, className }: ParseHtmlProps) {
                 // This is an internal link - we'll handle it specially
                 link.setAttribute('data-internal-link', href)
                 link.setAttribute('data-link-text', link.textContent || '')
-                link.innerHTML = `<span class="font-semibold underline">${link.textContent}</span>`
+                link.innerHTML = `<span class="font-bold underline">${link.textContent}</span>`
             }
         })
 

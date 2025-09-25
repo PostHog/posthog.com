@@ -17,6 +17,7 @@ import engineeringManagersConfig from '../../presentations/engineering-managers.
 import productManagersConfig from '../../presentations/product-managers.json'
 import productDirectorsConfig from '../../presentations/product-directors.json'
 import { useWindow } from '../../context/Window'
+import OSButton from 'components/OSButton'
 
 const roleConfigs = {
     'product-engineers': productEngineersConfig,
@@ -228,12 +229,25 @@ const CustomPresentationPage = () => {
                         salesRep={salesRep}
                         slideKey={slideKey}
                     >
-                        {slideKey === 'cta' && calendlyLoaded && (
-                            <div className="w-full max-w-4xl mx-auto">
+                        {slideKey === 'cta' && (
+                            <div className="w-full max-w-4xl mx-auto text-center pt-4">
+                                <OSButton
+                                    asLink
+                                    to="https://calendly.com/chris-m-posthog"
+                                    state={{ newWindow: true }}
+                                    variant="primary"
+                                    size="xl"
+                                    external
+                                >
+                                    Schedule a demo
+                                </OSButton>
+                                {/* 
+TODO: Embed uses cookies, need to get consent first
                                 <DemoScheduler
                                     iframeSrc="https://calendly.com/chris-m-posthog"
                                     className="h-72 w-full"
                                 />
+ */}
                             </div>
                         )}
                         {props.children}
