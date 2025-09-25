@@ -1,4 +1,5 @@
 import React from 'react'
+import ParseHtml from '../Utilities/parseHtml'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Logo from 'components/Logo'
 import { IconHeartFilled } from '@posthog/icons'
@@ -6,22 +7,6 @@ import { IconHeartFilled } from '@posthog/icons'
 // @TODOS
 // - Right now the Hogzill image is hard-coded. We have support for a custom image (which will hide Hogzilla) but it's not formatted
 // - Design basically expects content to fit around Hogzilla. Probably need ability to offset/shrink Hogzilla and/or allow right-padding to compensate for the width of an image.
-
-interface SmartDescriptionProps {
-    content: string
-    className?: string
-}
-
-function SmartDescription({ content, className }: SmartDescriptionProps) {
-    // Check if content starts with an HTML element
-    const startsWithHtmlElement = /^<[a-zA-Z][^>]*>/.test(content.trim())
-
-    if (startsWithHtmlElement) {
-        return <div className={className} dangerouslySetInnerHTML={{ __html: content }} />
-    }
-
-    return <p className={className} dangerouslySetInnerHTML={{ __html: content }} />
-}
 
 interface SalesRep {
     name: string
@@ -100,19 +85,41 @@ export default function StackedTemplate({
                     )}
                 </div>
 
-                <h1
-                    className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${
-                        image ? '' : '@2xl:max-w-xl'
-                    }`}
-                    dangerouslySetInnerHTML={{
-                        __html: title.replace('{companyName}', companyName || ''),
-                    }}
-                />
-                {description && (
-                    <SmartDescription
-                        content={description.replace('{companyName}', companyName || '')}
-                        className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : '@2xl:max-w-2xl'}`}
-                    />
+                {slideKey === 'overview' && (
+                    <>
+                        <h1
+                            className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${
+                                image ? '' : '@2xl:max-w-xl'
+                            }`}
+                            dangerouslySetInnerHTML={{
+                                __html: title.replace('{companyName}', companyName || ''),
+                            }}
+                        />
+                        {description && (
+                            <ParseHtml
+                                content={description.replace('{companyName}', companyName || '')}
+                                className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : '@2xl:max-w-2xl'}`}
+                            />
+                        )}
+                    </>
+                )}
+
+                {slideKey === 'cta' && (
+                    <>
+                        <h1
+                            className={`text-5xl @2xl:text-5xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance text-center`}
+                            dangerouslySetInnerHTML={{
+                                __html: title.replace('{companyName}', companyName || ''),
+                            }}
+                        />
+                        {description && (
+                            <ParseHtml
+                                content={description.replace('{companyName}', companyName || '')}
+                                className={`prose text-2xl @2xl:text-2xl text-center text-balance`}
+                            />
+                        )}
+                        {children}
+                    </>
                 )}
             </div>
 

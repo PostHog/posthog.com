@@ -6,9 +6,11 @@ import usePostHog from '../../hooks/usePostHog'
 export const DemoScheduler = ({
     iframeSrc = 'https://calendly.com/d/hxx-tx7-qrs/posthog-15-minute-quick-chat',
     type = 'scale',
+    className = '',
 }: {
     iframeSrc?: string
     type?: string
+    className?: string
 }): JSX.Element => {
     const posthog = usePostHog()
     const calendlyEventScheduled = (e: EventScheduledEvent) => {
@@ -21,13 +23,10 @@ export const DemoScheduler = ({
     }
 
     return (
-        <>
-            <div>
-                <CalendlyEventListener onEventScheduled={calendlyEventScheduled}>
-                    <InlineWidget url={iframeSrc} styles={{ height: '1000px', margin: '0 auto' }} />
-                </CalendlyEventListener>
-            </div>
-            <Spacer height={100} />
-        </>
+        <div className={className}>
+            <CalendlyEventListener onEventScheduled={calendlyEventScheduled}>
+                <InlineWidget url={iframeSrc} />
+            </CalendlyEventListener>
+        </div>
     )
 }
