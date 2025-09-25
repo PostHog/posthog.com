@@ -232,7 +232,7 @@ const CustomPresentationPage = () => {
                             <div className="w-full max-w-4xl mx-auto">
                                 <DemoScheduler
                                     iframeSrc="https://calendly.com/chris-m-posthog"
-                                    className="h-36 w-full"
+                                    className="h-72 w-full"
                                 />
                             </div>
                         )}
