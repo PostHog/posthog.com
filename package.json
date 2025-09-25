@@ -55,6 +55,7 @@
         "@types/react-slick": "^0.23.10",
         "@types/styled-components": "^5.1.26",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
+        "@wistia/wistia-player-react": "^0.1.17",
         "ahooks": "^3.7.8",
         "algoliasearch": "^4.14.2",
         "chart.js": "^4.3.3",

@@ -152,7 +152,9 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         // Always set icon and color for submenus if present
         if (item.icon) {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
-            baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            if (IconComponent) {
+                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            }
         }
         let grouped = groupBySectionDividers(children)
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
@@ -172,7 +174,9 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         }
         if (item.icon) {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
-            baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            if (IconComponent) {
+                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            }
         }
         return baseItem
     }

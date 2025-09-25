@@ -24,6 +24,36 @@ export const surveys = {
             'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
         textColor: 'text-white', // tw
     },
+    videos: {
+        overview: {
+            wistia: 'qn3p9oer5q',
+        },
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses surveys',
+        benefits: [
+            {
+                title: 'Track NPS scores',
+                description: 'by asking users if they would recommend us',
+            },
+            {
+                title: 'Get beta feedback',
+                description: 'by linking surveys to feature flags',
+            },
+            {
+                title: 'Organize user interviews',
+                description: 'because there is a template for that too',
+            },
+            {
+                title: 'Improve customer support',
+                description: 'by linking surveys to actions like solved tickets',
+            },
+            {
+                title: 'Gather testimonials',
+                description: 'by asking if anyone wants some free merch',
+            },
+        ],
+    },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png',
