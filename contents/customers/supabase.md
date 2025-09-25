@@ -1,22 +1,8 @@
 ---
 title: How Supabase 10Xed with the help of PostHog
 customer: Supabase
-logo: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/supabase_light_30e9fe4a90.png
-logoDark: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/supabase_dark_91fbc944e4.png
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/445225882_d7aa6795_3350_4e88_9ca7_091c61e86e39_0ed5ee1f16.jpg
-industries:
-    - Devtool
-users:
-    - Engineering
-    - Growth
-    - Marketing
-toolsUsed:
-    - Max AI
-    - Experimentation
-    - Product analytics
 date: 2025-06-15
 ---
 

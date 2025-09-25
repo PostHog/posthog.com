@@ -1,15 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-// todos:
-// - import roles, industries from MDX
-// - source "tools used" exclusively from useCustomers
-//   - read tools used by slug, check useProduct hook to get name, link, and link product name to presentation (product page)
-// - make 'featured' filter work, default page to feature = true
-// - open filters bar by default on /customers page
-// - don't we have a case study we link to for ourselves? can't find it offline.
-// - link PostHog's "Read [how we use PostHog](/blog/posthog-marketing) at PostHog." from PostHog row's notes (whether it be Markdown link parsing or dangerouslySetInnerHtml)
-
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
@@ -20,11 +11,13 @@ import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
+import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -34,6 +27,7 @@ import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
+import QredLogo from '../components/CustomerLogos/QredLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
@@ -50,13 +44,15 @@ import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import useProducts from './useProducts'
 
 export interface Customer {
     slug: string
     name: string
     toolsUsed: string[]
+    toolsUsedHandles?: string[] // Original handles for product lookup
+    industries?: string[]
+    users?: string[]
     notes?: React.ReactNode
     logo?:
         | React.ComponentType<any>
@@ -78,11 +74,14 @@ export interface Customer {
         }
     >
     featured: boolean
+    hasCaseStudy: boolean // Now always populated dynamically
 }
 
 interface BaseCustomer {
     name: string
     toolsUsed: string[]
+    industries?: string[]
+    users?: string[]
     notes?: React.ReactNode
     logo?:
         | React.ComponentType<any>
@@ -90,6 +89,8 @@ interface BaseCustomer {
               light: string
               dark: string
           }
+    legacyLogo?: string // Temporary until SVG component created
+    legacyLogoDark?: string // Temporary until SVG component created
     height?: number
     quotes?: Record<
         string,
@@ -112,27 +113,45 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     '4dayweek': {
         name: '4DayWeek',
         toolsUsed: ['experiments', 'product_analytics'],
+        industries: ['Recruitment'],
+        users: ['Marketing', 'Leadership', 'Founders'],
         notes: 'Job board',
         featured: false,
-        // logo: 4DayWeekLogo,
+        // logo: 4DayWeekLogo, // TODO: Create SVG component
+        legacyLogo:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo.png',
+        legacyLogoDark:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png',
     },
     '11x': {
         name: '11x',
         toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
+        industries: ['AI'],
+        users: ['Marketing', 'Leadership', 'Founders', 'Engineering'],
         notes: 'AI SDR',
         featured: false,
-        // logo: 11xLogo,
+        // logo: 11xLogo, // TODO: Create SVG component
+        legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/11x_logo_light_8c7d326edb.png',
+        legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/11x_logo_dark_0934407584.png',
     },
     adauris: {
         name: 'Adauris',
         toolsUsed: ['experiments', 'session_replay', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Growth', 'Engineering', 'Product', 'Marketing'],
         notes: 'Generative AI audio',
         featured: false,
-        // logo: AdaurisLogo,
+        // logo: AdaurisLogo, // TODO: Create SVG component
+        legacyLogo:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo.png',
+        legacyLogoDark:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo-dark.png',
     },
     airbus: {
         name: 'Airbus',
-        toolsUsed: [],
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
         height: 9,
@@ -140,7 +159,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     brainboard: {
         name: 'Brainboard',
-        toolsUsed: ['experiments', 'product_analytics', 'apps'],
+        toolsUsed: ['experiments', 'product_analytics'],
+        industries: ['SaaS', 'Devtool'],
+        users: ['Product', 'Engineering', 'Growth', 'Marketing'],
         notes: 'Collaborative DevOps',
         logo: BrainboardLogo,
         featured: false,
@@ -149,6 +170,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     carvertical: {
         name: 'carVertical',
         toolsUsed: ['feature_flags', 'product_analytics'],
+        industries: ['Recruitment'],
+        users: ['Growth', 'Engineering', 'Product'],
         notes: 'Vehicle history reports',
         logo: CarVerticalLogo,
         featured: false,
@@ -157,6 +180,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     contra: {
         name: 'Contra',
         toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
+        industries: ['SaaS'],
+        users: ['Product', 'Engineering'],
         notes: 'Creative freelance marketplace',
         logo: ContraLogo,
         featured: false,
@@ -165,6 +190,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     creatify: {
         name: 'Creatify',
         toolsUsed: ['web_analytics', 'product_analytics'],
+        industries: ['AI'],
+        users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI video editor',
         logo: {
             light: CreatifyLogo,
@@ -175,29 +202,43 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     elevenlabs: {
         name: 'ElevenLabs',
-        toolsUsed: ['feature_flags', 'product_analytics', 'feature_flags', 'surveys'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'surveys'],
+        industries: ['AI'],
+        users: ['Marketing', 'Growth', 'Engineering'],
         notes: 'AI voice generator',
         logo: ElevenLabsLogo,
         height: 8,
         featured: true,
     },
-    greatexpectations: {
+    'great-expectations': {
         name: 'Great Expectations',
         toolsUsed: ['product_analytics'],
+        industries: ['SaaS', 'Data'],
+        users: ['Growth', 'Engineering', 'Product', 'Marketing'],
         notes: 'Data quality SaaS platform',
         featured: false,
-        // logo: GreatExpectationsLogo,
+        // logo: GreatExpectationsLogo, // TODO: Create SVG component
+        legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png',
+        legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png',
     },
     groove: {
         name: 'Groove',
         toolsUsed: ['experiments', 'product_analytics', 'surveys'],
+        industries: ['Support'],
+        users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'Help desk platform',
         featured: false,
-        // logo: GrooveLogo,
+        // logo: GrooveLogo, // TODO: Create SVG component
+        legacyLogo:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo.png',
+        legacyLogoDark:
+            'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo-dark.png',
     },
     hasura: {
         name: 'Hasura',
-        toolsUsed: ['session_replay', 'product_analytics'],
+        toolsUsed: ['funnels', 'session_replay'],
+        industries: ['Devtool'],
+        users: ['Engineering', 'User Experience', 'Marketing'],
         notes: 'Open source GraphQL engine',
         logo: HasuraLogo,
         featured: true,
@@ -206,6 +247,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     headshotpro: {
         name: 'HeadshotPro',
         toolsUsed: ['data_warehouse', 'product_analytics'],
+        industries: ['AI'],
+        users: ['Growth', 'Engineering', 'Product'],
         notes: 'AI photo generator',
         logo: HeadshotProLogo,
         featured: false,
@@ -213,7 +256,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     heygen: {
         name: 'Heygen',
-        // toolsUsed: ['data_warehouse', 'product_analytics'],
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
         notes: 'AI video editor',
         logo: HeygenLogo,
         featured: true,
@@ -222,6 +267,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     hostai: {
         name: 'HostAI',
         toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        industries: ['AI'],
+        users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI for vacation rentals managers',
         featured: false,
         logo: HostAILogo,
@@ -229,7 +276,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     lovable: {
         name: 'Lovable',
-        toolsUsed: [],
+        toolsUsed: ['llm_analytics', 'experiments', 'feature_flags'],
+        industries: ['Devtool'],
+        users: ['Engineering'],
         notes: 'AI app & website builder',
         featured: true,
         logo: LovableLogo,
@@ -238,14 +287,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     juicebox: {
         name: 'Juicebox',
         toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
+        industries: ['AI'],
+        users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI recruitment platform',
         featured: false,
         logo: JuiceboxLogo,
         height: 10,
     },
-    mentionme: {
+    'mention-me': {
         name: 'Mention Me',
-        toolsUsed: ['product_analytics', 'session_replay'],
+        toolsUsed: ['funnels', 'session_replay'],
+        industries: ['Marketing platform'],
+        users: ['Product', 'Engineering', 'User Experience'],
         notes: 'Marketing referral campaigns',
         logo: MentionMeLogo,
         featured: false,
@@ -254,6 +307,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     mintlify: {
         name: 'Mintlify',
         toolsUsed: ['session_replay', 'api'],
+        industries: ['SaaS', 'Devtool'],
+        users: ['Leadership', 'Engineering', 'Product'],
         notes: 'Product and technical docs',
         logo: MintlifyLogo,
         featured: false,
@@ -261,7 +316,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     mistralai: {
         name: 'Mistral AI',
-        toolsUsed: [],
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
         notes: 'Open source LLMs',
         logo: MistralAILogo,
         height: 12,
@@ -269,7 +326,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     netdata: {
         name: 'Netdata',
-        toolsUsed: ['session_replay', 'apps'],
+        toolsUsed: ['session_replay', 'product_analytics'],
+        industries: ['SaaS', 'Devtool'],
+        users: ['Product', 'Engineering'],
         notes: 'Open source monitoring',
         logo: NetdataLogo,
         height: 8,
@@ -278,13 +337,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     octomind: {
         name: 'Octomind',
         toolsUsed: ['experiments', 'surveys', 'product_analytics', 'web_analytics'],
+        industries: ['Devtool', 'SaaS'],
+        users: ['Marketing'],
         notes: 'AI-powered end-to-end testing',
         featured: false,
-        // logo: OctomindLogo,
+        // logo: OctomindLogo, // TODO: Create SVG component
+        legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_dark_a89deeee90.png',
+        legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_673e0ed777.png',
     },
     opensauced: {
         name: 'OpenSauced',
         toolsUsed: ['product_analytics'],
+        industries: ['SaaS', 'Devtool'],
+        users: ['Leadership', 'Investors', 'Founders', 'Marketing', 'Design', 'Engineering'],
         notes: 'Open source contribution tracker',
         logo: OpenSaucedLogo,
         featured: false,
@@ -293,6 +358,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     phantom: {
         name: 'Phantom',
         toolsUsed: ['data_warehouse', 'feature_flags'],
+        industries: ['Cryptocurrency & blockchain'],
+        users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Crypto wallet',
         logo: PhantomLogo,
         featured: false,
@@ -300,7 +367,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     pry: {
         name: 'Pry',
-        toolsUsed: ['product_analytics', 'session_replay', 'heatmaps'],
+        toolsUsed: ['product_analytics', 'funnels', 'session_replay', 'heatmaps'],
+        industries: ['Financial planning software'],
+        users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Financial planning for SMBs, acquired by Brex',
         logo: PryLogo,
         height: 8,
@@ -328,6 +397,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     purplewave: {
         name: 'Purple Wave',
         toolsUsed: ['surveys'],
+        industries: ['E-commerce'],
+        users: ['Product'],
         notes: 'Heavy duty equipment marketplace',
         logo: PurpleWaveLogo,
         height: 24,
@@ -348,7 +419,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
-        toolsUsed: [],
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
@@ -365,6 +438,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     researchgate: {
         name: 'ResearchGate',
         toolsUsed: ['experiments', 'feature_flags', 'product_analytics'],
+        industries: ['Science', 'Social network'],
+        users: ['Growth', 'Engineering', 'Product', 'Marketing'],
         notes: "World's largest professional network for scientists",
         logo: ResearchGateLogo,
         height: 8,
@@ -373,6 +448,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     significa: {
         name: 'Significa',
         toolsUsed: ['web_analytics', 'product_analytics'],
+        industries: ['Agency'],
+        users: ['Marketing'],
         notes: 'Digital agency',
         logo: SignificaLogo,
         height: 12,
@@ -394,7 +471,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     speakeasy: {
         name: 'Speakeasy',
-        toolsUsed: ['feature_flags', 'product_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'dashboards'],
+        industries: ['Devtool'],
+        users: ['Product', 'Engineering', 'Growth', 'Developer Relations'],
         notes: 'API generator',
         logo: SpeakeasyLogo,
         featured: false,
@@ -425,6 +504,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     supabase: {
         name: 'Supabase',
         toolsUsed: ['max_ai', 'experiments', 'product_analytics'],
+        industries: ['Devtool'],
+        users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Postgres in the cloud',
         logo: SupabaseLogo,
         featured: true,
@@ -432,7 +513,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     startengine: {
         name: 'StartEngine',
-        toolsUsed: [],
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
         notes: 'Crowdfunding for startups',
         logo: StartEngineLogo,
         height: 14,
@@ -440,7 +523,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     trust: {
         name: 'Trust',
-        toolsUsed: [],
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
         notes: 'Crypto wallet',
         logo: TrustWalletLogo,
         featured: true,
@@ -448,7 +533,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     vendasta: {
         name: 'Vendasta',
-        toolsUsed: ['experiments', 'apps', 'cdp'],
+        toolsUsed: ['experiments', 'cdp'],
+        industries: ['SaaS'],
+        users: ['Product', 'Engineering'],
         notes: 'Channel partner platform',
         logo: VendastaLogo,
         featured: false,
@@ -456,7 +543,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     webshare: {
         name: 'Webshare',
-        toolsUsed: ['data_warehouse', 'experiments', 'product_analytics'],
+        toolsUsed: ['experiments', 'product_analytics'],
+        industries: ['Devtool'],
+        users: ['Marketing', 'Leadership', 'Customer Success'],
         notes: 'Proxy server',
         logo: WebshareLogo,
         featured: false,
@@ -464,15 +553,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     wittyworks: {
         name: 'Witty Works',
-        toolsUsed: ['apps', 'product_analytics'],
-        notes: '',
+        toolsUsed: ['dashboards'],
+        industries: ['SaaS', 'Browser extension'],
+        users: ['Marketing', 'Engineering'],
+        notes: 'AI writing assistant',
         logo: WittyWorksLogo,
         featured: false,
         height: 10,
     },
     ycombinator: {
         name: 'Y Combinator',
-        toolsUsed: ['experiments', 'insights'],
+        toolsUsed: ['experiments', 'product_analytics'],
+        industries: ['SaaS', 'Education'],
+        users: ['Leadership', 'Engineering', 'Product'],
         notes: "World's premier startup accelerator",
         logo: YCombinatorLogo,
         height: 10,
@@ -480,7 +573,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['error_tracking', 'session_replay', 'error_tracking', 'product_analytics'],
+        toolsUsed: ['llm_analytics', 'session_replay', 'error_tracking', 'product_analytics'],
+        industries: ['Recruitment'],
+        users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI customer activation platform',
         logo: {
             light: ZealotLogo,
@@ -505,10 +600,70 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    // New customers from MDX files
+    assemblyai: {
+        name: 'AssemblyAI',
+        toolsUsed: ['experiments', 'product_analytics'],
+        industries: ['API Platform'],
+        users: ['Leadership', 'Marketing', 'Engineering'],
+        notes: 'Speech-to-text and audio intelligence API',
+        logo: AssemblyAILogo,
+        featured: false,
+        height: 10,
+    },
+    // rebtel: { // Will be added via PR
+    //     name: 'Rebtel',
+    //     toolsUsed: ['product_analytics', 'experiments'],
+    //     industries: ['Telecom'],
+    //     users: [],
+    //     notes: 'International calling and messaging',
+    //     featured: false,
+    //     // logo: RebtelLogo, // Logo not available
+    // },
+    gankster: {
+        name: 'Gankster',
+        toolsUsed: ['max_ai', 'session_replay', 'product_analytics'],
+        industries: ['Gaming'],
+        users: ['Engineering', 'Growth', 'Marketing'],
+        notes: 'Gaming platform',
+        featured: false,
+        logo: GanksterLogo,
+        height: 10,
+    },
+    qred: {
+        name: 'Qred',
+        toolsUsed: ['feature_flags', 'session_replay', 'experiments', 'product_analytics', 'cdp'],
+        industries: ['Fintech'],
+        users: ['Engineering', 'Product', 'Marketing'],
+        notes: 'Business loans and financial services',
+        featured: false,
+        logo: QredLogo,
+        height: 8,
+    },
+    // swype: {
+    //     name: 'Swype',
+    //     toolsUsed: ['session_replay', 'product_analytics'],
+    //     industries: ['Recruitment', 'Data'],
+    //     users: ['Founders', 'Engineering'],
+    //     notes: 'Talent acquisition platform',
+    //     featured: false,
+    //     // logo: SwypeLogo, // Logo not available
+    // },
+    // wowzer: {
+    //     name: 'Wowzer',
+    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+    //     industries: ['AI'],
+    //     users: ['Growth', 'Engineering', 'Product'],
+    //     notes: 'AI-powered platform',
+    //     featured: false,
+    //     // logo: WowzerLogo, // Logo not available
+    // },
 }
 
 export const useCustomers = () => {
     const { products } = useProducts()
+
+    // Query only to detect which customers have case studies
     const data = useStaticQuery(graphql`
         query {
             allCustomers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
@@ -516,67 +671,53 @@ export const useCustomers = () => {
                     fields {
                         slug
                     }
-                    frontmatter {
-                        customer
-                        toolsUsed
-                        notes
-                        logo {
-                            publicURL
-                        }
-                        logoDark {
-                            publicURL
-                        }
-                    }
                 }
             }
         }
     `)
 
+    // Create a set of customer slugs that have MDX case studies
+    const customersWithCaseStudies = new Set(
+        data.allCustomers.nodes.map((node: any) => node.fields.slug.split('/').pop() || '')
+    )
+
     const getProductTitleByHandle = (handle: string) => {
         return products.find((product) => product.handle === handle)?.name
     }
 
-    // Create a map of frontmatter customers for quick lookup
-    const frontmatterCustomers = data.allCustomers.nodes.reduce((acc: Record<string, any>, node: any) => {
-        const key = node.fields.slug.split('/').pop() || ''
-        acc[key] = node
-        return acc
-    }, {})
-
-    // Merge markdown data with our base customer data
+    // Transform customer data with product titles and case study info
     const customers = Object.entries(CUSTOMER_DATA).reduce((acc, [key, customer]) => {
-        const markdownData = frontmatterCustomers[key]
+        // Use logo if available, otherwise fall back to legacy logo URLs
+        let logo = customer.logo
+        if (!logo && customer.legacyLogo && customer.legacyLogoDark) {
+            logo = {
+                light: customer.legacyLogo,
+                dark: customer.legacyLogoDark,
+            }
+        }
+
         const customerWithSlug: Customer = {
             ...customer,
             slug: key,
+            logo,
+            // Keep original handles for product lookup
+            toolsUsedHandles: customer.toolsUsed || [],
+            // Convert handles to human-readable product names for display
+            toolsUsed:
+                customer.toolsUsed
+                    ?.map((tool) => getProductTitleByHandle(tool))
+                    .filter((name): name is string => name !== undefined) || [],
+            // Dynamically check if customer has a case study
+            hasCaseStudy: customersWithCaseStudies.has(key),
         }
 
-        const toolsUsed =
-            markdownData?.frontmatter?.toolsUsed ||
-            customer?.toolsUsed?.map((tool) => getProductTitleByHandle(tool)).filter(Boolean)
+        // Remove legacy fields from final object
+        delete (customerWithSlug as any).legacyLogo
+        delete (customerWithSlug as any).legacyLogoDark
 
-        if (markdownData) {
-            return {
-                ...acc,
-                [key]: {
-                    ...customerWithSlug,
-                    name: markdownData.frontmatter.customer || customer.name,
-                    toolsUsed,
-                    notes: markdownData.frontmatter.notes || customer.notes,
-                    logo:
-                        customer.logo ||
-                        (markdownData.frontmatter.logo?.publicURL
-                            ? {
-                                  light: markdownData.frontmatter.logo.publicURL,
-                                  dark: markdownData.frontmatter.logoDark.publicURL,
-                              }
-                            : undefined),
-                },
-            }
-        }
         return {
             ...acc,
-            [key]: { ...customerWithSlug, toolsUsed },
+            [key]: customerWithSlug,
         }
     }, {} as Record<string, Customer>)
 
@@ -589,7 +730,7 @@ export const useCustomers = () => {
     }
 
     const hasCaseStudy = (slug: string): boolean => {
-        return !!frontmatterCustomers[slug]
+        return customers[slug]?.hasCaseStudy ?? false
     }
 
     const isFeatured = (slug: string): boolean => {
