@@ -7,6 +7,7 @@ import SlideThumbnails from 'components/Products/Slides/SlideThumbnails'
 import StackedTemplate from 'components/Presentation/Templates/StackedTemplate'
 import ColumnsTemplate from 'components/Presentation/Templates/ColumnsTemplate'
 import ProductTemplate from 'components/Presentation/Templates/ProductTemplate'
+import { DemoScheduler } from 'components/DemoScheduler'
 import SEO from 'components/seo'
 
 // Import configuration files
@@ -229,10 +230,9 @@ const CustomPresentationPage = () => {
                     >
                         {slideKey === 'cta' && calendlyLoaded && (
                             <div className="w-full max-w-4xl mx-auto">
-                                <div
-                                    className="calendly-inline-widget"
-                                    data-url="https://calendly.com/posthog-demo/30min"
-                                    style={{ height: '700px' }}
+                                <DemoScheduler
+                                    iframeSrc="https://calendly.com/chris-m-posthog"
+                                    className="h-36 w-full"
                                 />
                             </div>
                         )}
