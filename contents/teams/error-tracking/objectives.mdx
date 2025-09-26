@@ -13,13 +13,15 @@
 * [Sequencing TBD]
 * Support suppression rules via remote config
 * Add suppression of minified exceptions before cymbal processing
-* Build dashboard template including crash free sessions / users
+* Build dashboard template including crash free sessions / users metric
 
 #### Research deep dive on customers (Driver: <TeamMember name="Cory Slater" />)
-* Understand push & pull factors with competitors
-* Understand the impression and usage of error tracking tools / workflows at AI-first companies
-* Decide whether customers see LLM issues as exceptions
-* Understand spend / contraction of existing customers
+* Interview existing, potential, and recently churned customers to understand:
+  * What makes people switch from competitors and what pulls them back?
+  * What value would convince customers to remove billing limits?
+  * How do AI-first companies handle errors differently?
+  * What context would let customers skip steps in their workflow? 
+  * What drives month to month swings in spend vs contraction?
 * Every engineer to attend at least 2 customer interviews
 
 #### Increase trust in product (Driver: <TeamMember name="Hugues Pouillot" />)
@@ -30,6 +32,7 @@
 * RFC for moving issues into ClickHouse to avoid dual DB querying
 * Reduce the number of stacktrace-less issues
 * Give better context when a recording is not found / source maps missing
+* Rethink UI / UX of issue page
 
 #### Improving context on issues  (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
 * Add breakdowns to issues (by release / person_id)
@@ -39,17 +42,16 @@
 * Integrate logs into session timeline
 * Capture code variables in Python
 
-#### Better controls for capturing relevant issues
-* Advanced snoozing (e.g. notify me if 100 more users affected)
-* Adaptive sampling configuration
+#### Billing, spikes and alerts
+* **Email** alerts for total exceptions ingested volume spikes
 * Add billing limits to onboarding
-* Setup threshold based alerting / management (e.g. stop capturing spiking issues)
-
-#### Tracking spikes in usage
-* billing, threshold based alerting
-* update onboarding with more controls
-* Alert me if I get more than 1000 issues in an hour
-* Issues affecting more users
+* Fixed issue sampling (manually configured, drop X% of exceptions for this issue)
+  * Stretch: Adaptive sampling (spread exception capture over billing period)
+* Threshold based alerting per-issue, based on product analytics insight alerts
+  * Support "X occurrences per Y duration"
+  * Add to alerting step during onboarding
+  * Stretch: Support "X affected users per Y duration"
+* Issue time-based snoozing (drop all exceptions for X hours/days, re-open the issue if seen after that period)
 
 #### Simplify setup
 - Rethink UI / UX of issue page
