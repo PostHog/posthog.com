@@ -12,7 +12,7 @@ In order of priority, your objectives should be:
 
 - Retention - establish multiple strong lines of communication
 - Expansion - cross-sell additional products
-- Retention - secure an discounted, credit-based commitment (maybe, but not always - hard to do on just a single product!)
+- Retention - secure a discounted, credit-based commitment (maybe, but not always - hard to do on just a single product!)
 - Expansion - expand usage of the same product into new teams
 - Expansion - expand usage of the same product in the same team
 
