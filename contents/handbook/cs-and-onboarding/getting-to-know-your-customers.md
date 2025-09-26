@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Getting to know your customers
-
 As CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously you’ll learn more about customers that you actually talk to, but there’s still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available. 
 
 ## Discovery call
