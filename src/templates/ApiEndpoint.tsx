@@ -658,7 +658,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                 >
                                     <div className="space-y-6">
                                         <div
-                                            className="flex-col items-center relative"
+                                            className="flex flex-col items-center relative"
                                             onMouseEnter={() => setHovered(true)}
                                             onMouseLeave={() => setHovered(false)}
                                         >
