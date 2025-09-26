@@ -220,7 +220,7 @@ By this point, you may have started running into some objections. These are the 
 
 Hooray! This is defined as when the contract is signed by _everyone_. 'They're about to sign' - NOT CLOSED. 'I've sent a DocuSign' - NOT CLOSED EITHER.
 
-If an op moves forward with PostHog on a month-to-month basis, but is below $20k annual spend, change the type to "Monthly Contract" and mark it as closed - won in Salesforce.
+If an opp moves forward with PostHog on a month-to-month basis, but is below $20k annual spend, change the type to "Monthly Contract" and mark it as closed - won in Salesforce.
 
 Once the contract is signed, it lives in PandaDoc. Next step - get them set up with [billing](/handbook/growth/sales/billing).
 
