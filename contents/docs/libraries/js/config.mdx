@@ -86,12 +86,6 @@ But if you need more control, we also provide a `rageclick` config that takes an
 | Attribute | Description |
 |-----------|-------------|
 | `css_selector_ignorelist`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | List of CSS selectors to ignore rage clicks on, e.g. `['.carousel-button', '.next-button']`. Elements matching these selectors (or their parents) won't trigger rage click events. An empty array disables rage click events all together. Providing any value overrides the defaults, so PostHog will *only* ignore the selectors you explicitly provide in the array. |
-
-
-Do we want to mention that an empty list is equivalent to disabling rageclick
-
-Or that setting any value replaces the defauls
-
 ## Advanced configuration
 
 These are features for advanced users and may lead to unintended side effects if not reviewed carefully. 
