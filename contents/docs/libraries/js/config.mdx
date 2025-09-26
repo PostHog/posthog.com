@@ -62,6 +62,7 @@ Some of the most relevant options are:
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)                                                                                                                                                                                                                    |
 | `session_idle_timeout_seconds`<br/><br/>**Type:** Integer<br/>**Default:** `1800`                                                                                                         | The maximum amount of time a session can be inactive before it is split into a new session.                                                                                                                                                                                                                    |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                             | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                                                                                                                                                                                                              |
+| `rageclick`<br/><br/>**Type:** Boolean or RageclickConfig<br/>**Default:** `true`                                                                                                      | Determines if PostHog should automatically capture rage click events when users rapidly click on elements that don't respond. [See below for `RageclickConfig`](#configuring-rageclick)                                                                          |                                                                    |
 
 ## Configuring autocapture
 
@@ -75,6 +76,14 @@ The `autocapture` config takes an object providing full control of autocapture's
 | `css_selector_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`       | An array of CSS selectors to enable autocapture on. An empty array means no CSS selectors are allowed for capture, `undefined` means all CSS selectors are.                                                                                  |
 | `element_attribute_ignorelist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined` | An array of element attributes that autocapture will not capture. Both an empty array and `undefined` mean any of the attributes from the element are captured.                                                                              |
 | `capture_copied_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                        | When set to true, autocapture will capture the text of any element that is cut or copied.                                                                                                                                                    | 
+
+## Configuring rageclick
+
+The `rageclick` config takes an object providing control over rage click event detection.
+
+| Attribute | Description |
+|-----------|-------------|
+| `css_selector_ignorelist`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | List of CSS selectors to ignore rage clicks on, e.g. `['.carousel-button', '.next-button']`. Elements matching these selectors (or their parents) won't trigger rage click events. By default, elements with `.ph-no-rageclick` or `.ph-no-capture` classes are ignored. |
 
 ## Advanced configuration
 
