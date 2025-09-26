@@ -1,54 +1,86 @@
-## Q3 2025 Objectives
+### Q4 2025 Objectives
 
-### Objective 1: Behavioral Cohort Targeting
-
-Motivation: Enable dynamic behavioral targeting across PostHog – let customers target users based on what they've done (or haven't done) recently. In other words, enable customers to target feature flags on [behavioral cohorts](/docs/data/cohorts).
-
-This is an objective shared across multiple teams ([Messaging](/teams/messaging), [Feature Flags](/teams/feature-flags), [Ingestion](/teams/ingestion), and [Surveys](/teams/surveys)) who all need behavioral targeting to enhance their products. We'll build a platform that integrates with our ingestion pipeline to pre-process event data for targeting, then integrate this service into existing product targeting functionality.
-
-We'll deliver this in 3 stages with Stage 1 well-defined and Stages 2-3 evolving based on how Stage 1 goes. Note that stages can overlap – we may begin customer partnerships and product integrations as soon as the POC works well enough, potentially before Stage 2 is completed.
-
-**Stage 1: Proof-of-concept**
-
-Build a proof of concept behavioral cohort data ingestion service as the foundation. Owned by <TeamMember name ="Ben White" photo /> (CDP/Messaging) and <TeamMember name="Dylan Martin" photo /> (Feature Flags).
+#### Objective 1: Awesome documentation <TeamMember name="Dylan Martin" photo />
+Motivation: Present feature flags as a mature and sophisticated product through excellent documentation, following the experiments team's successful approach.
 
 What we will ship:
-* **Support behavioral cohort filter as Hog bytecode** – Make cohort filters representable as Hog code for our CDP pipeline <TeamMember name="Dylan Martin" photo />
-* **Build system for loading/matching/saving targeting results** – Create a system that writes matches to a low-latency datastore (not Clickhouse) that other applications can query <TeamMember name="Ben White" photo />
-* **Validate with ingestion team** – Ensure the POC doesn't negatively impact ingestion latency or scale (TBD owner from [Ingestion](/teams/ingestion))
+* Partner with the docs team for comprehensive refresh
+* Clear structure covering all SDK types and evaluation methods  
+* Real-world scenario walkthroughs
+* AI-related content – examples of how to use flags with AI features
+* Easy navigation from app to relevant docs
 
-**Stage 2: Make it scale**
-
-Implement the scaling solution based on POC learnings and ingestion team collaboration. Specific work TBD based on Stage 1 results.
-
-**Stage 3: Integrate across PostHog**
-
-Add behavioral cohort targeting to existing products using our new low-latency datastore.
+#### Objective 2: Make local evaluation the default <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
+Motivation: Enable faster, more reliable flag evaluations by making local evaluation the default for server-side SDKs, while also improving the durability of the `/local_evaluation` endpoint itself.
 
 What we will ship:
-* **Behavioral Cohort Targeting for Feature Flags** – Add behavioral cohorts to existing feature flag targeting <TeamMember name ="Dylan Martin" photo />
-* **Behavioral Cohort Targeting for Surveys** – Add behavioral cohorts to existing survey targeting (owner TBD)
-* **Behavioral Cohort Targeting for Messaging** – Enable behavioral targeting in messaging (owner TBD)
+* **HyperCache + local eval completion** – Finish implementation of `/local_evaluation` powered by HyperCache <TeamMember name="Phil Haack" photo />
+* **Properties solution** – Solve the blocker preventing wider local eval adoption: make it easier for users to provide properties needed for flag evaluation <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
+* **Better documentation & guides** – Create how-to guides for local evaluation setup <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
+* **Endpoint resilience** – Make the `/local_evaluation` endpoint completely resilient to database outages <TeamMember name="Phil Haack" photo />
+* **ETag support** – Implement efficient caching for reduced bandwidth <TeamMember name="Phil Haack" photo />
 
-**Customer Validation:** Partner with 5-10 key customers to validate use cases, gather feedback, and measure impact on conversion and engagement. This can begin as soon as we have a working POC, potentially in parallel with Stage 2 work. <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Annika Schmid" photo />
-
-### Objective 2: Flag Management & Advanced Features  
-Motivation: Solve flag management pain points for large customers and add advanced flag targeting capabilities.
-
-What we will ship:
-* **Flag categorization system** – Let customers organize flags into categories and only request the ones they need such, e.g. client flags, server flags, both. <TeamMember name="Phil Haack" photo />
-* **Automatic stale flag pruning** – Build tools to identify and help customers clean up unused/stale flags automatically <TeamMember name="Phil Haack" photo />
-* **Flag rollouts based on other flags** – Enable targeting on flags where flag's evaluation result can determine another's rollout <TeamMember name="Phil Haack" photo />
-
-### Objective 3: Platform Reliability & Scale
-Motivation: Create a highly stable, resilient feature flag system capable of supporting our largest (and soon-to-be largest) customers with enterprise-grade reliability.
+#### Objective 3: UI/UX improvements [Team](/teams/feature-flags)
+Motivation: Fix known UI issues and identify future improvements through systematic user research.
 
 What we will ship:
-* **Complete /flags rollout** – Roll everyone onto /flags endpoint and deprecate /decide, measure performance improvements <TeamMember name="Andy Zhao" photo />
-* **Enhanced observability** – Add tracking for big customer experience, implement alerting and internal SLOs/external SLAs <TeamMember name="Andy Zhao" photo />
-* **System resilience** – Decouple flag service from writer database, implement circuit breakers, build remote caches into server-side SDKs <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Dylan Martin" photo />
-* **SDK standardization** – Implement unified error handling framework and ensure all SDKs use latest (v2) flags response format <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Phil Haack" photo />
+* **Known issue fixes** – Address existing backlog of cohort UI bugs & UX issues <TeamMember name="Gustavo Strassburger" />
+* **10+ user interviews** – Conduct user interviews across the team focusing on flags UI and cohort usage [Team](/teams/feature-flags)
+* **Cohort improvements roadmap** – Define what we need to build to supercharge cohorts [Team](/teams/feature-flags)
+* **Flags UI improvements roadmap** – Define concrete next steps for UI improvements based on research [Team](/teams/feature-flags)
 
-**Service Level SLOs:**
-* **Latency:** p99 latency < 50ms. We already meet this today, but still have some spikes from experience continuity flags
-* **Availability:** alarm and investigate on > 10 `5xx` errors in a 1-min period. At 85k req/min, that is a 99.988% availability
+#### Objective 4: SDK standardization <TeamMember name="Dustin Byrne" photo />
+Motivation: Create a consistent experience across all SDKs, making it easier for teams to adopt PostHog across their entire stack.
+
+What we will ship:
+* **Java SDK** – Ship initial version and mature based on customer feedback
+* **SDK consistency** – Burn down [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425)
+
+#### Objective 5: Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
+Motivation: Help teams manage technical debt from stale flags with automated detection and cleanup tools.
+
+What we will ship:
+* **Stale flag detection** – Identify and surface stale flags in the PostHog UI
+* **In-app cleanup tools** – Provide easy tools to clean up stale flags directly in PostHog
+* **Code cleanup prompts** – Generate prompts for Cursor/Claude Code to clean up flag debt in codebases
+* **Automated actions** (stretch) – Additional automated cleanup options (create PR)
+
+#### Objective 6: Natural language flag creation <TeamMember name="Phil Haack" photo />
+Motivation: Enable users to create feature flags using natural language with AI assistance.
+
+What we will ship:
+* **"Build a flag with Max"** – Natural language interface for creating feature flags with AI
+
+#### Objective 7: Platform infrastructure improvements <TeamMember name="Dylan Martin" photo />
+Motivation: Reduce technical debt and improve system performance for better reliability and faster development.
+
+What we will ship:
+* **Persons Database split completion** – Finish the persons database split from the feature flags perspective (a shared goal with the Ingestion team)
+* **Deprecate /decide** – Remove the `/decide` endpoint from the latest version of the hosted PostHog app while maintaining self-hosted compatibility in the SDKs.
+* **Rewrite /evaluation_reasons** – Modernize `/evaluation_reasons` endpoint
+* **Behavioral cohort completion** – Finish remaining behavioral cohort targeting work
+
+#### Objective 8: Enhanced debugging capabilities <TeamMember name="Dylan Martin" photo />
+Motivation: Improve visibility into flag evaluations for better debugging and troubleshooting.
+
+What we will ship:
+* **Enhanced $feature_flag_called** – Include properties used for evaluation in the event
+* **Historical evaluation view** – Show flag evaluation results for a person over time
+
+#### Objective 9: Real-time feature flags <TeamMember name="Gustavo Strassburger" photo />
+Motivation: Enable real-time use cases for feature flags, allowing instant updates without page refreshes or app restarts.
+
+What we will ship:
+* **Real-time flag updates** – Implement WebSocket/SSE-based real-time flag changes
+* **SDK support** – Add real-time capabilities to key SDKs
+
+#### Objective 10: Remote config as secret store exploration <TeamMember name="Dustin Byrne" photo />
+Motivation: Explore the viability of extending remote config feature flags to serve as a secure configuration and secrets management system.
+
+What we will ship:
+* **Feasibility research** – Investigate technical requirements and security implications
+
+#### Future exploration (Q1 2025 candidates)
+* **Centralized evaluation logic** – Explore unified targeting via wasm/dll ([details](https://github.com/PostHog/product-internal/pull/799))
+* **Platform integrations** – Integrate feature flags with PostHog workflows, error tracking, events, logs
+* **AI use cases** – Identify more AI-powered features for flags
