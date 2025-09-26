@@ -190,7 +190,7 @@ Some rules:
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
 
-> Normal commission rules apply here - commission is paid in the quarter in which the customer pay their  invoice.
+> Normal commission rules apply here - commission is paid in the quarter in which the customer pays their invoice.
 
 ## New business renewal credits
 
