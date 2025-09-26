@@ -1,0 +1,54 @@
+---
+title: AI engineering with PostHog
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+[AI engineering](https://www.latent.space/p/ai-engineer) is the practice of integrating, building, and shipping software that utilizes LLMs. 
+
+At the cutting edge, this might mean building multimodal RAG pipelines and productionizing fine-tuned models at scale. But in our opinion, it also encompasses the practical work of tinkering with prompts, coding in Cursor, or installing the OpenAI SDKs, anything that helps developers leverage AI to build great products.
+
+You'll find this page and its resources useful if you're:
+
+- Building your products with AI 
+- Integrating LLM-powered features into your product
+- A vibe coder or engineer who uses AI agents and tools
+- Just here to try cool AI features in PostHog
+
+PostHog is all the product tools you need in one. When you add AI on top of that, and with enough data, your product should be able to build itself. That's our long-term vision for AI at PostHog, so we're building the tools you need to get there. 
+
+It's a bit like the dream of a self-driving car, but for your product.
+
+## AI features
+
+Here are the AI products, tools, and resources we offer so far:
+
+| AI feature | Use case | Vibe | Repo |
+|------------|----------|------|------|
+| [Max AI](/docs/max-ai) | Ask Max, our in-app AI agent, anything about your product data and PostHog. He can write SQL, create dashboards, find session replays, and more. | 🤖 | <Link to="https://github.com/PostHog/posthog/tree/master/ee/hogai" external>Code</Link> |
+| [AI wizard](/docs/ai-engineering/ai-wizard) | Magically add PostHog to your codebase with a single CLI command using AI. | 🧙 | <Link to="https://github.com/PostHog/wizard" external>Code</Link> |
+| [PostHog MCP](/docs/model-context-protocol) | Enable your AI agents and tools to interact with PostHog's API with our MCP server.  | 🧰 | <Link to="https://github.com/PostHog/mcp" external>Code</Link> |
+| [Agent toolkit](/docs/ai-engineering/agent-toolkit) | Integrate with AI agent frameworks with PostHog's native function calling toolkit.  | 🛠️ | <Link to="https://github.com/PostHog/mcp/tree/main/typescript" external>Code</Link> |
+| [LLM analytics](/docs/llm-analytics) | Track and analyze the usage of LLMs in your applications, including token usage, latency, and cost. | 📊 | <Link to="https://github.com/PostHog/posthog/tree/master/products/llm_analytics" external>Code</Link> |
+| [Markdown and llms.txt](/docs/ai-engineering/markdown-llms-txt) | Feed your AI agents more context. All of our docs pages are available in raw Markdown. | 📚 | <Link to="https://posthog.com/llms.txt" external>Code</Link> |
+
+Everything here is open source. Feel free to take our AI code, fork it, and use it yourself. Just remember to check the license and open a PR if you have any feedback.
+
+We're always thinking of new AI features that can make PostHog *even* better. If you have any ideas or requests, comment on this page or open a feature request on [GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml).
+
+<CalloutBox icon="IconInfo" title="Software licenses" type="fyi">
+
+The listed projects are licensed under either:
+
+- MIT License – free to use and modify
+- [PostHog Enterprise License](https://github.com/PostHog/posthog/blob/master/ee/LICENSE) – free to use and modify for development and testing purposes, but requires a valid license for production use
+
+</CalloutBox>
+
+## Recommended reading 
+
+If you're interested in AI engineering and how we approach it here at PostHog, we recommend these blog posts:
+
+- [What we've learned about building AI-powered features](/newsletter/building-ai-features)
+- [We built an AI envoy, you can too](/blog/envoy-wizard-llm-agent)
+- [Devtools advice in the age of robots](/blog/devtools-advice-agent-llm)

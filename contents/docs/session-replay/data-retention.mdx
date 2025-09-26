@@ -2,28 +2,43 @@
 title: Replay data retention
 ---
 
+export const ImgReplayRetentionSettings = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/configure_retention_period_in_replay_settings_81e98b6e9f.png"
+
 Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
 
 > **Note:** Any individual recording you want to preserve can be downloaded as a JSON file by clicking "Export to JSON" in the more options menu in the top right of a recording. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
 
 ## PostHog Cloud
 
-Recordings are automatically deleted after **1 month** (**3 months** for paid customers). 
+The retention period for your recordings can be configured in the [**Data Retention** section of the session replay settings](https://app.posthog.com/settings/project-replay#replay-retention):
 
-The deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI.
+<ProductScreenshot
+    imageLight={ImgReplayRetentionSettings}
+    alt="Configure data retention settings for your recordings"
+    classes="rounded"
+/>
 
-### One year retention
+The longest available retention period depends on your PostHog plan:
 
-Some recordings are stored for 1 year:
+| Plan | Data retention |
+|-----------|---------------|
+| Free | Up to 30 days
+| Pay-as-you-go | Up to 90 days
+| Boost | Up to 1 year
+| Scale | Up to 1 year
+| Enterprise | Up to 5 years
 
-* pinned to a playlist
-* shared publicly
-* added to a notebook
+> **Note:** When a recording expires, the deletion is not immediate. Recordings may still appear for a short time after the retention period expires or when manually deleted via the UI. Once a recording has been deleted we are unable to restore it - this makes data retention a useful feature if you are subject to data protection regulations.
+
+## Long-term storage
+
+Regardless of your data retention settings, some recordings are stored for a full year:
+
+* recordings pinned to a playlist
+* recordings shared publicly
+* recordings added to a notebook
 
 >  🧠 **Heads up:** This isn't meant to be a storage hack! We limit storage to keep replay prices low for everyone. If it looks like someone's gaming the system (e.g. automating these actions to stockpile recordings), we might apply a fair-use limitation and block automation against these endpoints for their project.
-
-### Exporting your recordings
-
 
 ## Self-hosted installations
 
@@ -37,12 +52,12 @@ You can also edit your docker-compose file to replace `image: posthog/posthog:$P
 
 ### Managing storage
 
-Self-hosted installations pinned to earlier versions can control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
+Self-hosted installations pinned to earlier versions can control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page.
 
-Please note that you need to manage the available capacity for versions of PostHog that rely on Clickhouse storage. 
-Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). 
+Please note that you need to manage the available capacity for versions of PostHog that rely on Clickhouse storage.
+Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value).
 ClickHouse requires abundant free disk space to manage the `session_recording_events` table.
 
-In later versions (which do not use Clickhouse for recording storage), 
-the installation will be relying on its configured blob storage. 
+In later versions (which do not use Clickhouse for recording storage),
+the installation will be relying on its configured blob storage.
 You can manage storage using blob storage lifecycle policies. This will vary by environment.

@@ -35,6 +35,20 @@ Hence the explicit separation between the data and view layers.
   - Props for both logics and components are PascalCase and end with `Props` (`DashboardLogicProps` & `DashboardMenuProps`)
   - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx` or `dashboardLogic.ts` or `Dashboard.scss`. Pay attention to the case.
   - Avoid `index.ts`, `styles.css`, and other generic names, even if this is the only file in a directory.
+- Scenes & tabs
+  - Our app is built of _tabs that contain scenes_, managed through a scene router in `sceneLogic`.
+  - A scene is the smallest unit in the router and for code splitting. Usually we split scenes by resource type (dashboard, insight) and function (edit, index).
+  - Each scene (e.g. Dashboards) exports an object of type `SceneExport`, containing the scene's root `logic` and its React `component`.
+  - The scene's logic is automatically mounted if on a tab, and receives a `tabId: string` prop. It's strongly recommended to key your logic with this `tabId`.
+  - It's also strongly recommended to add the `tabAwareScene()` function to your scene's logic. This catches bugs when mounting the logic from somewhere without the `tabId` prop.
+  - Instead of `urlToAction` and `actionToUrl`, use `tabAwareUrlToAction` and `tabAwareActionToUrl`. Try to only only use them on the scene's logic, not in any deeper logics.
+  - When a scene becomes inactive (you open a different tab), it's still around in the background. However any logics mounted by React components through the view layer will unmount. Use `useAttachedLogic(dataNoteLogic(propsFromComponent), mySceneLogic({ tabId }))` to attach any logic to a scene logic. It'll persist until the scene's logic is unmounted, surviving React component remounts.
+  - You can control what's shown on the tab via the `breadcrumbs` selector in your scene's logic. The last breadcrumb controls the title and the icon, the one before that controls the back button. If there are more breadcrumbs, they will be ignored.
+- Kea
+  - It's worth repeating: think of the data flow. Then work to simplify it. Derive as much state as possible via selectors, update the source via cascading actions, and avoid complex loops where a value triggers a subscription which calls an action which changes the value which triggers the subscription, ...
+  - Use `subscriptions` and `propsChanged` sparingly, only if you can't find any other way. These have a high chance of leading to messy, cyclic or slow data flows.
+  - Try to write your code such that you only use `urlToAction` in your scene's logic (e.g. `insightSceneLogic`), and never deeper down in e.g. `propertyFilterLogic`.
+  - Take the time and read through [the Kea docs](https://keajs.org/) until you can explain how all the various operations (actions, reducers, selectors, listeners, subscriptions, props, events, hooks, etc) work behind the scenes. It's worth knowing your tools.
 - CSS
   - We use Tailwind CSS wherever possible
   - Where it's not possible

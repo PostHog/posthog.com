@@ -2,42 +2,42 @@
 date: 2023-11-01
 title: How we designed our company for speed
 author:
-  - james-hawkins
+    - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
-  - Founders
-  - Product engineers
-  - Engineering
-  - Culture
+    - Founders
+    - Product engineers
+    - Engineering
+    - Culture
 crosspost:
-  - Product engineers
-  - Blog
+    - Product engineers
+    - Blog
 ---
 
 Clearly there are exceptions, but we ship a lot faster than the average company.
 
 Our first line of code was January 22nd, 2020, after a pivot during a YC batch. Since then, we've shipped:
 
-* [Product analytics](/product-analytics)
-* [Session replay](/session-replay)
-* [Feature flags](/feature-flags)
-* [A/B testing](/experiments)
-* [User surveys](/docs/surveys)
-* [Heatmaps](/docs/toolbar/heatmaps)
-* [SDKs](/docs/libraries) for all the above
-* A basic [CDP](/docs/cdp) to stream data to warehouses
-* [Data warehouse](/docs/data-warehouse) MVP
-* A wildly extensive website
+-   [Product analytics](/product-analytics)
+-   [Session replay](/session-replay)
+-   [Feature flags](/feature-flags)
+-   [A/B testing](/experiments)
+-   [User surveys](/docs/surveys)
+-   [Heatmaps](/docs/toolbar/heatmaps)
+-   [SDKs](/docs/libraries) for all the above
+-   A basic [CDP](/docs/cdp) to stream data to warehouses
+-   [Data warehouse](/docs/data-warehouse) MVP
+-   A wildly extensive website
 
 ...and those are just the things that worked.
 
 All the above are being used a lot, too. We're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service, and over 100k user signups.
 
-I often get asked how we build so much, so quickly. 
+I often get asked how we build so much, so quickly.
 
-The answer is simple: we deliberately designed our company for speed.  
+The answer is simple: we deliberately designed our company for speed.
 
 We did this because we want to build [lots of products in one](/handbook/why-does-posthog-exist) – it's a lot to ship!
 
@@ -47,7 +47,7 @@ When we started, we felt the best engineers would eventually quit if they felt d
 
 As we grew, we realized that engineers can design the UX of a product, especially if we hire people that have this skill set and provide a framework for their work.
 
-We invested considerable time getting our design *system* up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
+We invested considerable time getting our design _system_ up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
 
 Today, we have people that can help engineers with design, but they are very happy to work reactively and fast – and they don't block merging work during QA. This means we do ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
 
@@ -57,15 +57,15 @@ For example, we've redesigned this entire website ~5 times.
 
 The responsibilities of a product manager still exist, but our engineers:
 
-* Talk to users.
-* Decide what to build within their product (and sometimes pitch whole new products).
-* Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
+-   Talk to users.
+-   Decide what to build within their product (and sometimes pitch whole new products).
+-   Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
 
 The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an engineer who is product-minded and autonomous, rather than mindlessly filing tickets.
 
 We have one product manager who steps in reactively if a small team needs more support.
 
-The above requires a lot of context setting from the company. To that end, we're *unusually transparent*. There are two main ways we do this.
+The above requires a lot of context setting from the company. To that end, we're _unusually transparent_. There are two main ways we do this.
 
 ### i) We make clear what we're trying to achieve.
 
@@ -103,7 +103,7 @@ At the time of writing, [we are 37 people](/people), only 11 of whom are in Go T
 
 ![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
-We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [exec team](/teams/exec) is only 3 people. These things are all by design. 
+We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [Blitzscale Team](/teams/blitzscale) is only 3 people. These things are all by design.
 
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 
@@ -117,7 +117,7 @@ We have learned, often painfully, that some meetings are necessary, but we defau
 
 I've had lots of founders tell me that they can't pursue idea X because some other startups are tackling it.
 
-This makes me laugh because we simply won't build a new product unless there is a $1bn+ competitor already offering it. We *love* competition. It shows you there's demand.
+This makes me laugh because we simply won't build a new product unless there is a $1bn+ competitor already offering it. We _love_ competition. It shows you there's demand.
 
 The magic in our platform (after an individual product is working well for our users) is then integrating everything together.
 
@@ -125,7 +125,7 @@ For non-God tier product people, such as me, I think it's easier to build a bett
 
 ## 8. We raised venture capital
 
-Obviously, this matters. 
+Obviously, this matters.
 
 We didn't raise or spend a ridiculous amount compared to other companies we compete with – we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
 
@@ -145,7 +145,7 @@ Since we handle a lot of data, at scale, this has meant performance has, well, u
 
 ## Should you optimize for speed?
 
-Think hard about what your product should be optimized for before you start making changes. 
+Think hard about what your product should be optimized for before you start making changes.
 
 If you're shipping the latest iPhone, complete design control is more important to your users than having all the features.
 

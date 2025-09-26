@@ -37,7 +37,7 @@ Channel type is the type of acquisition channel the user came from, for example:
 | Push             | A push notification.                                                            |
 | Unknown          | A link from an unknown source.                                                  |
 
-It is calculated using the referring domain, [UTM tags](/docs/data/utm-segmentation), and advertising IDs that are present in the URL when the user first lands on your website,.
+It is calculated using the referring domain, [UTM tags](/docs/data/utm-segmentation), and advertising IDs that are present in the URL when the user first lands on your website.
 
 ## Custom channel types
 
@@ -73,7 +73,7 @@ These rules are applied in order, and the first one that matches is used to dete
 | Paid Social      | Traffic is paid, and `referring_domain` matches our list of social sources (e.g. `facebook.com`, `linkedin.com`, `twitter.com`)                   |
 | Paid Video       | Traffic is paid, and `referring_domain` matches our list of video sources (e.g. `youtube.com`, `twitch.tv`, `disneyplus.com`)                     |
 | Paid Shopping    | Traffic is paid, and `referring_domain` matches our list of shopping sources (e.g. `amazon.com`, `etsy.com`, `ebay.co.uk`)                        |
-| Paid Shopping    | Traffic is paid, and `utm_campaign` matches the regular expression <code class="text-inherit p-1 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark !text-[13px]">^(.&#42;((&#91;^a-df-z&#93;&#124;^)shop&#124;shopping).&#42;)$</code> |
+| Paid Shopping    | Traffic is paid, and `utm_campaign` matches the regular expression <code class="text-inherit p-1 rounded bg-accent border border-primary !text-[13px]">^(.&#42;((&#91;^a-df-z&#93;&#124;^)shop&#124;shopping).&#42;)$</code> |
 | Paid Social      | Traffic is paid, and `utm_medium` matches our list of social mediums (e.g. `sm`, `social-media`, `social-network`)                                |
 | Paid Video       | Traffic is paid, and `utm_medium` matches our list of video mediums (e.g. `video`)                                                                |
 | Display          | Traffic is paid, and `utm_medium` matches our list of display mediums (e.g. `display`, `interstitial`, `banner`)                                  |
@@ -92,7 +92,7 @@ These rules are applied in order, and the first one that matches is used to dete
 | Organic Social   | `referring_domain` matches our list of social sources (e.g. `facebook.com`, `linkedin.com`, `twitter.com`)                                        |
 | Organic Video    | `referring_domain` matches our list of video sources (e.g. `youtube.com`, `twitch.tv`, `disneyplus.com`)                                          |
 | Organic Shopping | `referring_domain` matches our list of shopping sources (e.g. `amazon.com`, `etsy.com`, `ebay.co.uk`)                                             |
-| Organic Shopping | `utm_campaign` matches the regular expression <code class="text-inherit p-1 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark !text-[13px]">^(.&#42;((&#91;^a-df-z&#93;&#124;^)shop&#124;shopping).&#42;)$</code>|
+| Organic Shopping | `utm_campaign` matches the regular expression <code class="text-inherit p-1 rounded bg-accent border border-primary !text-[13px]">^(.&#42;((&#91;^a-df-z&#93;&#124;^)shop&#124;shopping).&#42;)$</code>|
 | Organic Social   | `utm_medium` matches our list of social mediums (e.g. `sm`, `social-media`, `social-network`)                                                     |
 | Organic Video    | `utm_medium` matches our list of video mediums (e.g. `video`)                                                                                     |
 | Affiliate        | `utm_medium` matches our list of affiliate mediums (e.g. `affiliate`)                                                                             |

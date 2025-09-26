@@ -12,9 +12,9 @@ A generation is a single call to an LLM.
 | `$ai_parent_id` | *(Optional)* Parent span ID for tree view grouping | 
 | `$ai_model` | The model used <br/>Example: `gpt-5-mini` |
 | `$ai_provider` | The LLM provider <br/>Example: `openai`, `anthropic`, `gemini` |
-| `$ai_input` | List of messages sent to the LLM <br/>Example: `[{"role": "user", "content": [{"type": "text", "text": "What's in this image?"}, {"type": "image", "image": "https://example.com/image.jpg"}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
+| `$ai_input` | List of messages sent to the LLM. Each message should have a `role` property with one of: `"user"`, `"system"`, or `"assistant"` <br/>Example: `[{"role": "user", "content": [{"type": "text", "text": "What's in this image?"}, {"type": "image", "image": "https://example.com/image.jpg"}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
 | `$ai_input_tokens` | The number of tokens in the input (often found in response.usage) |
-| `$ai_output_choices` | List of response choices from the LLM <br/>Example: `[{"role": "assistant", "content": [{"type": "text", "text": "I can see a hedgehog in the image."}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
+| `$ai_output_choices` | List of response choices from the LLM. Each choice should have a `role` property with one of: `"user"`, `"system"`, or `"assistant"` <br/>Example: `[{"role": "assistant", "content": [{"type": "text", "text": "I can see a hedgehog in the image."}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
 | `$ai_output_tokens` | The number of tokens in the output (often found in response.usage) |
 | `$ai_latency` | *(Optional)* The latency of the LLM call in seconds |
 | `$ai_http_status` | *(Optional)* The HTTP status code of the response |

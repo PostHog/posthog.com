@@ -15,6 +15,7 @@ showTitle: true
 ### Backend
 
 - Framework: [Django](https://www.djangoproject.com/)
+- High scale services: [Rust](https://www.rust-lang.org/)
 - Databases: [PostgreSQL](https://www.postgresql.org/) and [ClickHouse](https://clickhouse.tech/)
 - Task queue/event streaming: [Redis](https://redis.io/) and [Apache Kafka](https://kafka.apache.org/)
 - Task Worker: [Celery](https://docs.celeryproject.org/)
