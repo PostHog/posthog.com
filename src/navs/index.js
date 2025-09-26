@@ -1392,7 +1392,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
                     },
                     {
-                        name: 'Basic foundation model checklist',
+                        name: 'Basic account review checklist',
                         url: '/handbook/cs-and-onboarding/foundation-check',
                     },
                     {
