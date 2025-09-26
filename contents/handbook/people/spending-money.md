@@ -218,7 +218,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - When traveling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
 - When making charges on your card internationally, run the transaction using the local currency when given the option as Brex will generally have a better exchange rate.
 - PostHog has international insurance for our work trips, so you will not need to buy travel insurance when traveling on behalf of PostHog.
-- It's fine to book your outbound / return flights for a different today to when you are required to be there as long as the flight is a similar price or less. Any other costs outside of the days you are required to be at an event are of course _not_ covered.
+- It's fine to book your outbound / return flights for a different day to when you are required to be there as long as the flight is a similar price or less. Any other costs outside of the days you are required to be at an event are of course _not_ covered.
 
 > If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 
