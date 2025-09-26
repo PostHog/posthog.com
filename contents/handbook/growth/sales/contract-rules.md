@@ -118,7 +118,7 @@ Additional notes on self-serve discounts:
 
 We do offer additional discounts to non-profits and start non-profit discounts at 15% regardless of spend.
 
-If signing for an prepaid credit plan with a credit purchase between $25k and $80k, an additional 5% non-profit discount is applied. For example, purchasing $25k in credits with an additional 5% non-profit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
+If signing for a prepaid credit plan with a credit purchase between $25k and $80k, an additional 5% non-profit discount is applied. For example, purchasing $25k in credits with an additional 5% non-profit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
 
 We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
