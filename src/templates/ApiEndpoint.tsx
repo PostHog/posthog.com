@@ -15,7 +15,7 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
-import { CopyAnchor } from 'components/Heading'
+import { Heading } from 'components/Heading'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -657,14 +657,9 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                     id={pathID(item.httpVerb, item.pathName)}
                                 >
                                     <div className="space-y-6">
-                                        <div
-                                            className="relative"
-                                            onMouseEnter={() => setHovered(true)}
-                                            onMouseLeave={() => setHovered(false)}
-                                        >
-                                            <CopyAnchor id={pathID(item.httpVerb, item.pathName)} hovered={hovered} />
-                                            <h2>{generateName(item)}</h2>
-                                        </div>
+                                        <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
+                                            {generateName(item)}
+                                        </Heading>
                                         {mdxNode?.body && (
                                             <div className="article-content">
                                                 <div className="text-primary">
