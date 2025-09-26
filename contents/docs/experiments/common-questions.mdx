@@ -89,3 +89,14 @@ You can check your current exposure count on the experiment results page. If you
 - Verify your feature flag implementation.
 - Consider increasing your feature flag's rollout percentage.
 - Ensure your exposure events are firing correctly.
+
+## Why do my experiment's exposure counts not match insights?
+
+Currently, insights aren't able to account for users that have been exposed to `$multiple` variants of your feature flag. We are actively working on improving this, however in the meantime exposures as measured by the experiment metrics are more accurate.
+
+If you are wondering why you see `$multiple` exposures, this most commonly happens when a feature flag is evaluated for a user before and after sign in, but they are assigned a different variant. To fix this, you could consider either:
+
+- Only evaluating the feature flag after calling `identify`
+- If this isn't possible, consider enabling [flag persistence](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps)
+
+You're also able to select how [`$multiple` exposures are handled](https://posthog.com/docs/experiments/exposures#handling-multiple-exposures) in your experiment results.
