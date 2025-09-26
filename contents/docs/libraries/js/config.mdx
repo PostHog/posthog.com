@@ -79,11 +79,18 @@ The `autocapture` config takes an object providing full control of autocapture's
 
 ## Configuring rageclick
 
-The `rageclick` config takes an object providing control over rage click event detection.
+We provide a convenient `.ph-no-rageclick` class that automatically excludes elements from rage click tracking. 
+
+But if you need more control, we also provide a `rageclick` config that takes an object providing control over rage click event detection. 
 
 | Attribute | Description |
 |-----------|-------------|
-| `css_selector_ignorelist`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | List of CSS selectors to ignore rage clicks on, e.g. `['.carousel-button', '.next-button']`. Elements matching these selectors (or their parents) won't trigger rage click events. By default, elements with `.ph-no-rageclick` or `.ph-no-capture` classes are ignored. |
+| `css_selector_ignorelist`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | List of CSS selectors to ignore rage clicks on, e.g. `['.carousel-button', '.next-button']`. Elements matching these selectors (or their parents) won't trigger rage click events. An empty array disables rage click events all together. Providing any value overrides the defaults, so PostHog will *only* ignore the selectors you explicitly provide in the array. |
+
+
+Do we want to mention that an empty list is equivalent to disabling rageclick
+
+Or that setting any value replaces the defauls
 
 ## Advanced configuration
 
