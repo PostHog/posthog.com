@@ -18,6 +18,10 @@ The reasons have to be _genuinely helpful_ ones - just 'having a point of contac
 - You can make them aware of upcoming or new products that are specifically useful for their use case
 - You can be a shortcut to premium support, if they are in your book of business
 
+If you go down the 'saving money' route, bear in mind two things:
+- Prepaid credit never works as an opener - 'save money by fixing implementation' >>> 'save money by committing to credit at a discount'
+- Buying a bunch of credits at a nice discount is much nicer to hear than 'please commit to a scary annual plan' - they can commit for a year, 6 months, whatever so long as they buy >$20k up front 
+
 ## How to get people to talk to you
 
 This is usually the most difficult bit! Sometimes customers will proactively reach out to us because they see their bill rocketing, but we have many customers who have happily self-served to a very high level of spend without feeling any need to talk to us. In particular, engineers have no interest in jumping on a call with you 99% of the time.
