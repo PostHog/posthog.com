@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-AKA our Value Proposition, these are some of the things we've found useful to share when chatting to customers about why PostHog is different and better than our competitors.  As a company the primary user persona we are building for are Product Engineers so we focus on them first and then provide messaging for the other roles we may encounter in an inbound sales cycle, and still want to be successful when selling to them.
+AKA our Value Proposition, these are some of the things we've found useful to share when chatting to customers about why PostHog is different and better than our competitors. As a company, the primary user persona we are building for are Product Engineers, so we focus on them first. We then provide messaging for the other roles we may encounter in an inbound sales cycle, and still want to be successful when selling to them.
 
 ## Product Engineers
 
