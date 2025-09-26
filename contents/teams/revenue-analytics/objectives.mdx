@@ -1,42 +1,27 @@
-## Q3 2025 objectives
+## Q4 2025 objectives
 
-- Web Analytics-like default dashboard containing the following metrics, and its evolution over time <TeamMember name="Rafael Audibert" photo />
-    - Net Revenue
-    - MRR (Monthly Recurring Revenue)
-        - Revenue from subscriptions only
-    - ARR (Annual Run Rate)
-    - Active + New + Churned Customers
-    - Active + New + Churned Subscriptions
-    - ARPU (Average Revenue Per User)
-    - LTV (Lifetime Value)
-    - Revenue/User Churn + Growth + Retention + Expansion + Contraction
-- Closer integration with CRM and Max AI <TeamMember name="Rafael Audibert" photo />
-    - Let customers see data for a specific customer (B2C)
-    - Let Max AI answer revenue-related questions using Revenue data
-- Research whether it makes sense to use Data Warehouse-only data or if we should expand
-into storing data separately to DW + use webhooks <TeamMember name="Rafael Audibert" photo />
+This quarter will last only 6 weeks, so we need to be very focused on what we can achieve.
+After that time, we'll be changing focus to work on Growth.
 
-
-### Stretch goal
-
-These aren't obligatory, but they'd be achievable if we could get the time + a new engineer on the team.
-
-- Support ChargeBee and RevenueCat connectors <FutureTeamMember />
-    - For ChargeBee this is simply creating the view mapping from our DW to our managed views
-    - For RevenueCat this is a bit more complex because we'd need to create a new DW source
-- Stripe OAuth integration to simplify setup even further - and display PostHog inside Stripe to foster adoption (great for CRM)
+- Launch GA Revenue Analytics Dashboard <TeamMember name="Rafael Audibert" photo />
+- Transform revenue analytics into a platform for other teams <TeamMember name="Rafael Audibert" photo />
+  - Turn Revenue Analytics'managed views into actual database-level views that can be materialized
+  - These views lifecycle should be totally managed by ourselves including the auto-materialization
+  - Introduce a new MRR managed view to improve calculation speed
+- Stretch goals: Stripe OAuth integration to simplify setup even further + Polar integration
 
 ## Recap
 
-### What did we do in Q2 2025?
+### What did we do in Q3 2025?
 
 A lot! Non-trivial work was done to guarantee we have a solid foundation for the Revenue analytics page using
-data coming in both from events and Data Warehouse sources.
+data coming in both from events and Data Warehouse sources. We also released the product in Open Beta.
 
 Non-exhaustive list:
-- Split it off of Web Analytics' dashboard, with a basic Revenue analytics page with focus on Net Revenue
-- Reimplemented most of the breakdown/filtering logic so that it also works for Data Warehouse data rather than just events
-- Guarantee customers simply need to connect their Stripe account to get started + improve Stripe setup UX
-- Expose managed revenue analytics view to customers (and internally)
-- Support revenue goals in our charts - which implied supporting goals globally for our insights
-- Currency conversion support
+- All required charts: MRR/ARR/Gross Revenue/Subscriptions/Customers Churn, etc.
+- Max AI integration
+- Access control to the dashboard + settings
+- New breakdown filters
+- Onboarding UI
+- New `persons/groups_revenue_analytics` tables to be used by other teams
+- MRR support for event sources
