@@ -114,9 +114,14 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
         }
     `)
 
-    const person = nodes.find(
+    // Find all people with matching name
+    const matchingPeople = nodes.filter(
         ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
+
+    // Prefer active team members (those with teams and start dates)
+    const person =
+        matchingPeople.find((person) => person.teams?.data?.length > 0 && person.startDate) || matchingPeople[0]
 
     return person ? <TeamMemberLink {...person} /> : null
 }
