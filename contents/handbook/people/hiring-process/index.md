@@ -105,45 +105,59 @@ Ashby also had a partnership with YC's job board so all roles to YC's [Work at a
 
 Every time we open a new role, we will share the details and ideal profile with the team during All Hands.
 
-#### Personal referral
+#### What Qualifies as a Referral?
 
+A referral must meet these criteria to be eligible for a bonus:
+* *No retroactive referrals*: You cannot claim a referral for someone who has already applied to PostHog
+* *Must provide valuable context*: Your referral should include meaningful insights beyond basic resume information
+* *Be proactive*: Don't only wait for your network contacts to apply first - actively identify and reach out to potential candidates
+
+#### Personal Referral
 If you know someone who would be a great addition to the team, please submit them as a personal referral. If they're successfully hired, you'll receive a $2,500 referral bonus! The bonus can be either paid to you directly, or towards a charity of your choice where we will match the amount! You can also split the amount between you and the charity.
 
-Please make sure the candidate has given their consent before putting them forward. 
+#### What makes a strong personal referral:
+* You've worked directly with this person and can speak to their abilities
+* You can provide context about their motivations, work style, or how they'd fit with our team
+* You can help with closing them if they're interested (explaining PostHog culture, answering questions, etc.)
+
+#### Examples of insufficient referrals:
+* "Worked with X at Y company, very nice person"
+* Basic resume forwarding without additional context
+* Generic LinkedIn connections you don't actually know
+
+Please make sure the candidate has given their consent before putting them forward.
 
 We occasionally open up short term contracts, and you'll receive a $1,000 referral bonus if you recommend someone here too! The contract just needs to be on a full time basis and at least 3 months long.
 
-Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Charles. 
+Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Tim.
 
-#### What's the process?
+#### Help with your network 
+We recognize everyone is busy with limited bandwidth. If you'd like help identifying potential referrals from your network:
+* Reach out to the Talent team! We can go through your network and find interesting candidates.
+* We'll collaborate on outreach strategy
+* Together we'll decide who makes the initial contact
+* You'll still receive the referral bonus if they're hired
 
-*   If there is an ongoing conversation, please cc careers@ into the email thread with the referred candidate, and we will take it over from there.
-*   Otherwise, please upload the profile to the [Ashby referral page](https://app.ashbyhq.com/referrals). 
-*   If they have applied themselves already, let careers@ know within 48 hours of them applying.
+#### What's the Process?
+If there is an ongoing conversation, please cc careers@ into the email thread with the referred candidate, and we will take it over from there. Otherwise, please upload the profile to the [Ashby referral page](https://app.ashbyhq.com/referrals).
 
-#### Social referral
+**Important**: If they have applied themselves already, you cannot claim them as a referral - this includes candidates who applied weeks or months ago.
 
-Refer someone you know on the <PrivateLink url="https://app.ashbyhq.com/referrals/direct/">Ashby referral page</PrivateLink> by clicking the _Refer_ button. You'll need their resume to submit them.
+#### Social Referral
+You will sometimes get people emailing or messaging you on LinkedIn asking to chat about a role or get referred in. If you have a chat with them and think they are worth referring, but you don’t know them enough to provide the talent team with valuable context, you can submit them as a social referral. If you don't know them, you can point them back to our [careers page](https://posthog.com/careers), or just ignore them. We get dozens of these kinds of messages every day, so don't feel bad about not engaging! If they are asking for advice, you can point them to [this article](https://posthog.com/newsletter/how-to-get-job-startup).
 
-If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach out to, this also counts as a social referral.
+The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.
 
-The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
+#### Referral Payouts
+You'll get paid the bonus 3 months from the new team member's start date, and it will be processed as part of payroll. Bear in mind that you might be liable for income tax on the bonus.
 
-> You will sometimes get people emailing or messaging you on LinkedIn asking to chat about a role or get referred in. If you don't know them, you can point them back to our [careers page](/careers), or just ignore them. We get dozens of these kinds of messages every day, so don't feel bad about not engaging! If they are asking for advice, you can point them to [this article](/newsletter/how-to-get-job-startup).
-
-#### Referral payouts
-
-You'll get paid the bonus 3 months from the new team member's start date, and it will be processed as part of payroll. Bear in mind that you might be liable for income tax on the bonus. 
-
-#### Non-team referrals
-
+#### Non-team Referrals
 We also welcome external referrals, e.g. from:
+* From our investors
+* From the PostHog community (by posting on our social media profiles for our followers to see)
+* From the YC community (Slack / WhatsApp / Forum)
+As a thank you, we will give you $50 credit for our [merch shop](https://posthog.com/merch).
 
-*   From our investors
-*   From the PostHog community (by posting on our social media profiles for our followers to see)
-*   From the YC community (Slack / WhatsApp / Forum)
-
-As a thank you, we will give you $50 credit for our [merch shop](https://merch.posthog.com/).
 
 ## Managing candidates
 
