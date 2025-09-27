@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Matching PostHog to a business type
-
 This guide provides detailed instructions on how to achieve key business metrics using PostHog's analytics platform. Each business type has specific metrics that matter most, and this guide shows you exactly how to set up PostHog to track and optimize for those metrics.
 
 ## B2B SaaS
