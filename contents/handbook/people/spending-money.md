@@ -75,7 +75,7 @@ If you wish to pay for invoices but don't have the limit to do so, you can draft
 
 PostHog is an all-remote company. This means it's important you have an ergonomic setup at home to be as productive as possible.
 
-PostHog will provide you with office equipment. Please note that it remains PostHog's property and is returned in offboarding.
+PostHog will provide you with office equipment. 
 
 ### YubiKey
 
