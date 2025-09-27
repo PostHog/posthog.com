@@ -1,42 +1,94 @@
-### Q3 2025 objectives
+### Q4 2025 objectives
 
-1. Deep research
+💰 Pricing structure (just do itTM) <TeamMember name="Annika Schmid" />  
+📚 Deep research release <TeamMember name="Emanuele Capparelli" />, <TeamMember name="Alessandro Pogliaghi" />
 
-    Complex, multistep reports delivered by Max, **replacing** OpenAI Deep Research for product research:
-    - Report planning, and re-planning
-    - PostHog data access using sub-agents: query creation, session summarization
-    - Web search
-    - Output in the form of notebooks
+* Pricing  
+* Single loop executor  
+* Draft report denoising  
+* Support session summaries  
+* (bonus) integrate with AI platform
 
-    Goal: At least a few PostHog users who can't stop using Max Deep Research. A set of real-world-like evaluation cases, passing. Research mode released at a higher price point.
+📺 Session summaries release <TeamMember name="Alex Lebedev" />
 
-2. Session summaries
-    
-    Learnings extracted by an LLM's ability to analyze hundreds of session recordings, including the associated event data:
-    - Max tool (usable by Deep Research)
-    - Session summaries scene UX
-    - Data from more products included
+* Pricing  
+* Notebooks UX \-\> <TeamMember name="Michael Matloka" />  
+* Figure out evals  
+* Video/image grounding
 
-    Goal: Dozens of retaining active users of session summaries.
+🔎 Use traces for iteration <TeamMember name="Georgiy Tarasov" />
 
-3. Universal assistant
+* Traces Day to identify what users think Max should do, failures modes, errors  
+* Start adding traces to datasets
 
-    Reliably assist the user across all of PostHog:
-    - Universal filtering API - shared foundation for filtering recordings, events, LLM traces, error tracking issues, and other types of data
-    - Universal search – allow Max to search user-created resources as well, such as insight, feature flags, or experiments
-    - Perform insight and cohort search in query creation
-    - "Create dashboard" tool
-    - Smooth flow of adding insights to dashboards with Max
-    - Prefill memory with web search without interrupting user
-    - Expand existing suites of curated evals
-    - Help the LLM observability team ship valuable automated evals on prod data
+🔌 AI architecture / platform
 
-    Goal: All the above features shipped. A query quality improvement every week.
+* Search resources in PostHog, incl. UI presentation <TeamMember name="Denada Korita" />  
+* Max being as single-loop agent <TeamMember name="Georgiy Tarasov" />  
+* Unify MCP server and Max tools to the extent sensible <TeamMember name="Emanuele Capparelli" />  
+* Codify the revamped AI platform for teams <TeamMember name="Alessandro Pogliaghi" />
 
-4. Max 🤝 other products
+📈 SQL quality <TeamMember name="Georgiy Tarasov" /><TeamMember name="Denada Korita" />
 
-    Last but not least, we're here to help other teams easily ship valuable, Max-integrated AI features:
-    - Constantly review RFCs and PRs from other product teams
-    - Build missing Max tooling when it's a blocker
+* Pull 'Fix SQL' into Max as a tool  
+* Specify only listed functions in the prompt adapted from HogQL docs are allowed  
+* SQL mode (“morphing” the root node)  
+* Latency improvements
 
-    Goal: PostHog avoids _death by AI widgets_. No team is blocked significantly waiting for Max AI input.
+🤖 Gaps from ChatGPT <TeamMember name="Michael Matloka" />
+
+* Reasoning as an option  
+* Web search
+
+**Should**
+
+🎨 UI sparks joy  <TeamMember name="Michael Matloka" /> <TeamMember name="Georgiy Tarasov" />
+
+* Show full thinking  
+* Show every tool use clearly  
+* UI freshness like shimmering text <TeamMember name="Emanuele Capparelli" />  
+* Meta: Hire UI designer
+
+🔎 Use traces for iteration <TeamMember name="Georgiy Tarasov" />
+
+* Finish rollout of running evals on prod datasets
+
+**Could (nice to have)**
+
+💪 Experiments
+
+* Explore post-training a small model <TeamMember name="Georgiy Tarasov" /> <TeamMember name="Alex Lebedev" /><TeamMember name="Denada Korita" /><TeamMember name="Alessandro Pogliaghi" />
+
+🔎 Use traces for iteration <TeamMember name="Georgiy Tarasov" />
+
+* Build a simple online evals thing (not product)
+
+💭 Context platform <TeamMember name="Georgiy Tarasov" />
+
+* Connect third-party tools (an MCP store?) <TeamMember name="Emanuele Capparelli" />  
+* Uploaded files <TeamMember name="Alessandro Pogliaghi" />  
+* Code search <TeamMember name="Michael Matloka" />  
+* Attach resources with a @ <TeamMember name="Michael Matloka" />  
+* Improve formation of memories and surface in chat UI
+
+🔌 Internal API optimizations
+
+* Unify LangChain and Temporal mix into Temporal <TeamMember name="Alessandro Pogliaghi" />  
+* Use LLM proxy <TeamMember name="Denada Korita" />  
+* Profile Temporal Django handoff, perf tracing <TeamMember name="Georgiy Tarasov" /> <TeamMember name="Alessandro Pogliaghi" />
+
+💡 Product Pulse (proactive data signals / suggestions)
+
+### Open product questions
+
+Pricing structure, then work with deep research & session summaries on concrete pricing
+Provide suggestions on some UI/UX bits, that will also help with pricing / tool differentiation
+Then: Figure out line between Max and Array if not clear yet
+Then: Figure out MCP vs Max, if not clear yet
+Then: Jobs to be done, if not clear yet
+
+Where is the line between Max and Array, what is the handover, is Max read, and Array write?
+Is everything ‘write’ Array? Such as creating a feature flag
+What jobs to be done are we solving? How do we define business / product autonomy exactly?
+Sit down with users to clarify product autonomy
+MCP vs Max, where do they overlap, where not? Venn diagram style
