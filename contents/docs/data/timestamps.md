@@ -54,4 +54,4 @@ Although we recommend using the `ISO 8601` format, PostHog can also detect sever
 
 In detection, day and month are interchangeable so MM-DD-YYYY would be detected as a date.
 
-Ten and thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp."
+Ten and thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp," but are still treated like a regular number in some situations, such as feature flags conditions, so it's best to stick with ISO 8601 to ensure maximum compatibility with PostHog.
