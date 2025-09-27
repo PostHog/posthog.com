@@ -219,6 +219,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const logout = async (): Promise<void> => {
         posthog?.capture('squeak logout')
 
+        addToast({
+            title: 'Successfully signed out of PostHog.com',
+            description: (
+                <Link to="https://app.posthog.com" className="text-red dark:text-yellow font-semibold">
+                    Looking for the app?
+                </Link>
+            ),
+        })
+
         clearUser()
     }
 

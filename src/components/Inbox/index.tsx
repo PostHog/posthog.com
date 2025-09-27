@@ -9,7 +9,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification } from '@posthog/icons'
+import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconSearch } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
@@ -170,7 +170,7 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const { addWindow } = useApp()
+    const { addWindow, openSearch } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -299,7 +299,8 @@ export default function Inbox(props) {
                         showForward
                         showSearch
                         rightActionButtons={
-                            <>
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <OSButton icon={<IconSearch />} onClick={() => openSearch('questions')} />
                                 <CallToAction
                                     size="sm"
                                     onClick={() =>
@@ -322,10 +323,10 @@ export default function Inbox(props) {
                                         options={layoutOptions}
                                         onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
                                         value={sideBySide ? 'side-by-side' : 'stacked'}
-                                        className="-my-1 ml-2"
+                                        className="-my-1"
                                     />
                                 ) : null}
-                            </>
+                            </div>
                         }
                     />
 
