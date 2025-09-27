@@ -14,7 +14,7 @@ What we will ship:
 Motivation: Enable faster, more reliable flag evaluations by making local evaluation the default for server-side SDKs, while also improving the durability of the `/local_evaluation` endpoint itself.
 
 What we will ship:
-* **HyperCache + local eval completion** – Finish implementation of `/local_evaluation` powered by HyperCache <TeamMember name="Phil Haack" photo />
+* **HyperCache + `/local_evaluation`** – Finish implementation of `/local_evaluation` powered by HyperCache <TeamMember name="Phil Haack" photo />
 * **Properties solution** – Solve the blocker preventing wider local eval adoption: make it easier for users to provide properties needed for flag evaluation <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
 * **Better documentation & guides** – Create how-to guides for local evaluation setup <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
 * **Endpoint resilience** – Make the `/local_evaluation` endpoint completely resilient to database outages <TeamMember name="Phil Haack" photo />
@@ -29,11 +29,16 @@ What we will ship:
 * **Cohort improvements roadmap** – Define what we need to build to supercharge cohorts
 * **Flags UI improvements roadmap** – Define concrete next steps for UI improvements based on research
 
-### Objective 4: SDK standardization <TeamMember name="Dustin Byrne" photo />
+### Objective 4: Java SDK <TeamMember name="Dustin Byrne" photo />
+Motivation: Support Java developers with an officially-supported SDK, expanding PostHog's reach to Java-based applications and teams.
+
+What we will ship:
+* **Java SDK** – Ship initial version and iterate on customer feedback
+
+### Objective 5: SDK standardization <TeamMember name="Dustin Byrne" photo />
 Motivation: Create a consistent experience across all SDKs, making it easier for teams to adopt PostHog across their entire stack.
 
 What we will ship:
-* **Java SDK** – Ship initial version and mature based on customer feedback
 * **SDK consistency** – Burn down [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425)
 
 ### Objective 5: Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
@@ -57,11 +62,11 @@ Motivation: Reduce technical debt and improve system performance for better reli
 What we will ship:
 * **Persons Database split completion** – Finish the persons database split from the feature flags perspective (a shared goal with the Ingestion team)
 * **Deprecate /decide** – Remove the `/decide` endpoint from the latest version of the hosted PostHog app while maintaining self-hosted compatibility in the SDKs.
-* **Rewrite /evaluation_reasons** – Modernize `/evaluation_reasons` endpoint
+* **Rewrite /evaluation_reasons** – Modernize `/evaluation_reasons` endpoint to use the Rust-based flag targeting code instead of Django
 * **Behavioral cohort completion** – Finish remaining behavioral cohort targeting work
 
 ### Objective 8: Enhanced debugging capabilities <TeamMember name="Dylan Martin" photo />
-Motivation: Improve visibility into flag evaluations for better debugging and troubleshooting.
+Motivation: Improve visibility into flag evaluations for better debugging and troubleshooting, and push these insights to our users wherever possible
 
 What we will ship:
 * **Enhanced $feature_flag_called** – Include properties used for evaluation in the event
