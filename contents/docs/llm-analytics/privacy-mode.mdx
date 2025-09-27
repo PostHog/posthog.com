@@ -1,0 +1,80 @@
+---
+title: Privacy mode
+---
+
+To avoid storing potentially sensitive prompt and completion data, you can enable privacy mode. This excludes the `$ai_input` and `$ai_output_choices` properties from being captured.
+
+## SDK config
+
+This can be done by setting the `privacy_mode` config option in the SDK like this:
+
+<MultiLanguage>
+
+```python
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>",
+    privacy_mode=True
+)
+```
+
+```ts
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { 
+    host: '<ph_client_api_host>',
+    privacyMode: true
+  }
+)
+```
+
+</MultiLanguage>
+
+## Request parameter
+
+It can also be set at the request level by setting the `privacy_mode` parameter to `True` in the request. The exact setup depends on the LLM platform you're using:
+
+<MultiLanguage>
+
+```python file=OpenAI.py
+client.responses.create(
+    model="gpt-4o-mini",
+    input=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```typescript file=OpenAI.ts
+const completion = await openai.responses.create({
+    model: "gpt-4o-mini",
+    input: [...],
+    posthogPrivacyMode: true
+});
+```
+
+```python file=Anthropic
+response = client.messages.create(
+    model="claude-3-opus-20240229",
+    messages=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```python file=Google
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```python file=LangChain
+callback_handler = PosthogCallbackHandler(
+    client,
+    privacy_mode=True
+)
+```
+
+</MultiLanguage>

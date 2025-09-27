@@ -14,8 +14,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: false
-  errorTracking: false
+  llmAnalytics: false
 ---
 
 import FlutterIdentify from './_snippets/identify.mdx'
@@ -62,7 +61,7 @@ await Posthog().alias(
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Anonymous vs identfied events
+## Anonymous vs identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
 
@@ -80,9 +79,9 @@ import HowToCaptureIdentifiedEventsFlutter from '../../product-analytics/_snippe
 
 <HowToCaptureIdentifiedEventsFlutter />
 
-## Super Properties
+## Super properties
 
-Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
+Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
 
 They are set using `Posthog().register`, which takes a key and value, and they persist across sessions.
 
@@ -94,13 +93,13 @@ import 'package:posthog_flutter/posthog_flutter.dart';
 await Posthog().register("team_id", 22)
 ```
 
-The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `Posthog().register` call, since they all include the specified Super Property.
+The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `Posthog().register` call, since they all include the specified super property.
 
 However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `Posthog().identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
-### Removing stored Super Properties
+### Removing stored super properties
 
-Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `Posthog().unregister`, like so:
+Super properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a super property with events, you can use `Posthog().unregister`, like so:
 
 ```dart
 import 'package:posthog_flutter/posthog_flutter.dart';
@@ -108,9 +107,9 @@ import 'package:posthog_flutter/posthog_flutter.dart';
 await Posthog().unregister("team_id")
 ```
 
-This will remove the Super Property and subsequent events will not include it.
+This will remove the super property and subsequent events will not include it.
 
-If you are doing this as part of a user logging out you can instead simply use `Posthog().reset()` which takes care of clearing all stored Super Properties and more.
+If you are doing this as part of a user logging out you can instead simply use `Posthog().reset()` which takes care of clearing all stored super properties and more.
 
 ## Group analytics
 
@@ -137,7 +136,7 @@ await Posthog().group(
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
-## Feature Flags
+## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
@@ -149,7 +148,7 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 ## Session replay
 
-> **Note: ** Session replay is supported on the Flutter Web, Android and iOS environments.
+> **Note:** Session replay is supported on the Flutter Web, Android and iOS environments.
 
 To set up [session replay web](/docs/session-replay) or [mobile session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Flutter SDK, follow the [additional installation instructions](/docs/session-replay/installation?tab=Flutter), and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
@@ -158,14 +157,35 @@ This is needed as Flutter renders your app using a browser canvas element.
 
 ## Surveys
 
-> **Note:** Surveys is currently supported in Flutter for **Web** and **iOS** platforms only. 
+> **Note:** Surveys is supported in Flutter for **Web**, **iOS** and **Android** platforms. 
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
-## Issues
+## Offline behavior
 
-Please file any issues, bugs, or feature requests in our [GitHub repository](https://github.com/posthog/posthog-flutter/issues/new).
+The PostHog Flutter SDK will continue to capture events when the device is offline for Android and Apple platforms. The events are stored in a queue in the device's file storage and are flushed when the device is online.
 
-## Contributing
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed when the app is restarted and the device is online.
 
-If you wish to contribute a change to this repo, please send a [Pull Request](https://github.com/posthog/posthog-flutter/pulls).
+## Opt out of data capture
+
+You can disable data collection for a user at any time using the `disable()` method:
+
+```dart
+await Posthog().disable();
+```
+
+This prevents any future events from being sent. It doesn’t remove events already captured for the user.
+To opt the user back in:
+
+```dart
+await Posthog().enable();
+```
+
+To check if a user is opted out:
+
+```dart
+await Posthog().isOptedOut();
+```

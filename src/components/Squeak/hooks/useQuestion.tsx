@@ -152,6 +152,41 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             const token = await getJwt()
 
+            if (questionData) {
+                const now = new Date().toISOString()
+                const optimisticReply = {
+                    id: Date.now(),
+                    attributes: {
+                        body,
+                        createdAt: now,
+                        updatedAt: now,
+                        publishedAt: now,
+                        profile: {
+                            data: user?.profile
+                                ? {
+                                      id: user.profile.id,
+                                      attributes: user.profile,
+                                  }
+                                : null,
+                        },
+                        upvoteProfiles: { data: [] },
+                        downvoteProfiles: { data: [] },
+                    },
+                }
+
+                const optimisticData = {
+                    ...questionData,
+                    attributes: {
+                        ...questionData.attributes,
+                        replies: {
+                            data: [...(questionData.attributes.replies?.data || []), optimisticReply],
+                        },
+                    },
+                }
+
+                mutate(optimisticData, false)
+            }
+
             const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
                 method: 'POST',
                 headers: {
@@ -192,6 +227,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 body,
                 error: JSON.stringify(error),
             })
+
+            await mutate()
 
             throw error
         }

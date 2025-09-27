@@ -44,6 +44,13 @@ import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
 Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
 
+> **Note:** New fields may be added to these models over time. 
+> 
+> To maintain consistency, these fields are not automatically added to database destination tables.
+If a particular field is missing from your tables, you can manually add the field and it will be populated in future exports.
+In the case of S3, these new fields will be added to the exported files as soon as they become available.
+
+
 ### Events model
 
 The events model is the default model for all batch exports, and it represents a view into the events received by PostHog.
@@ -79,7 +86,7 @@ More information, including any additional necessary permissions, schema informa
 * [Postgres](/docs/cdp/batch-exports/postgres)
 * [Redshift](/docs/cdp/batch-exports/redshift)
 
-## Sessions model <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded ml-1">Beta</span>
+### Sessions model
 
 > **Note:** The sessions model is currently in `beta`. This means the schema of this model is subject to change.
 >

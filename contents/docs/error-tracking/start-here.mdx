@@ -1,0 +1,168 @@
+---
+title: Getting started with error tracking
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import InstallationPlatforms from './installation/_snippets/installation-platforms'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
+
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate error tracking!">
+
+<QuestLogItem 
+    title="Capture your first exception"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+  To get started with [error tracking](/docs/error-tracking), the first step is to install the PostHog SDK to start capturing exception events within your application.
+
+  ### Platforms
+
+  <InstallationPlatforms />
+
+  ### Auto and manual capture
+
+  Exception autocapture can be enabled for most platforms. When enabled, PostHog automatically captures `$exception` events whenever errors are thrown by the client or server application.
+
+  You can also call the capture method `posthog.captureException()` to manually send exceptions to PostHog with custom properties. 
+
+  <CallToAction type="primary" to="/docs/error-tracking/installation">
+    Install PostHog SDK
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Get accurate stack traces"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+  The second step is to upload source maps to get accurate, readable stack traces for your captured exceptions. This helps you quickly identify and debug issues by showing you the original code context where the error occurred.
+
+  <ProductScreenshot
+      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
+      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
+      alt="Stack traces example"
+      classes="rounded"
+      padding={false}
+  />
+
+
+  <CallToAction type="primary" to="/docs/error-tracking/upload-source-maps">
+    Upload source maps
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Monitor and resolve issues"
+  subtitle="Required"
+  icon="IconWarning"
+>
+
+  Once you're capturing errors, the next step is to stay on top of issues. Exception events are grouped into issues for your team to manage based on event information, such as the exception type, message, and stack trace. 
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_ryub_aa8398de10.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_rzmm_23fa3181c4.png"
+    alt="Error tracking overview"
+    classes="rounded"
+    padding={false}
+/>
+
+  Use the PostHog error tracking dashboard to: 
+  
+  - Manage, resolve, and auto-assign issues to team members
+  - Customize issue grouping with rules 
+  - Set up real-time alerts based on event triggers, filters, and trends
+  - Integrate with Slack, Discord, Teams, or an HTTP webhook
+
+
+  <CallToAction type="primary" to="/docs/error-tracking/issues">
+    Learn about issues
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Debug with AI"
+  subtitle="Recommended"
+  icon="IconLlmPromptEvaluation"
+>
+
+Let AI investigate and debug errors for you. 
+
+Connect with the PostHog MCP server to enable autonomous debugging with AI agents. You can also copy our [premade AI prompts](/docs/error-tracking/fix-with-ai-prompts) which include full stack traces and curated instructions for the AI to follow.
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/mcp_error_tracking_debugging30_6e25828d88.mp4" 
+    alt="Use PostHog MCP to debug errors" 
+    classes="rounded"
+    autoPlay={false}
+/>
+
+<CallToAction type="primary" to="/docs/error-tracking/debugging-with-mcp">
+  Explore AI features
+</CallToAction>
+
+</QuestLogItem>
+
+
+<QuestLogItem 
+  title="Integrate customer data"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  Take advantage of PostHog's [customer infrastructure](/docs) features to help you move from application errors to product improvements.
+
+  ### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay
+
+  See exactly what users did before and after the error with [session replays](/docs/session-replay).
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/error_tracking_session_replay_investigate_afdaef02a5.mp4" 
+    alt="Use session replay to investigate errors" 
+    autoPlay="true"
+    loop="true"
+  />
+
+  ###  <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
+
+  Use `$exception` events with [product analytics](/docs/product-analytics) to create trends, funnels, or retention insights to spot patterns and prioritize issues. You can also see exceptions by individual users in their event history log.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sgre_98426bdbdb.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sgvz_a9af4766fe.png"
+    alt="Product analytics dashboards"
+    classes="rounded"
+    padding={false}
+  />
+
+  ###  <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/>  Feature flags
+
+  Roll out or revert code updates with [feature flags](/docs/feature-flags) based on users who’ve hit specific exceptions.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sirw_4622f2f7d0.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sivj_9e5d71bb69.png"
+    alt="Feature flags taregting error cohorts"
+    classes="rounded"
+    padding={false}
+  />
+
+   --- 
+
+  That's it! You're ready to start integrating.
+
+  <CallToAction type="primary" to="/docs/error-tracking/installation">
+    Install error tracking
+  </CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>

@@ -25,7 +25,7 @@ We track the count of these products in Vitally using the `Total paid product co
 
 ### Doing the allocation
 
-It's Simon's job, with input from Dana and Charles, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs.  We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in.  Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer.  Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Dana and Charles, to review the list of <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3">$20K accounts without an owner</PrivateLink>, as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -43,11 +43,11 @@ To help the new owner of a customer hit the ground running, we should make sure 
 - TAE -> CSM 1-3 months after the initial contract is signed and the customer is onboarded into 3 or more primary products.
 - TAE -> CSM after sufficient cross-product expansion has take place.
 
-For handover to take place there should be an Account Plan and the customer should have been onboarded properly to the products they are currently paying for.
+For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for. 
 
 ### Account Plan
 
-Our [account planning template](/handbook/growth/sales/account-planning) is an ideal document to share with the new owner detailing everything they need to know about the customer.  The existing owner should have this up to date and then schedule a handover call for the new owner.  Feel free to push back and ask for it as the new owner if this doesn't happen!
+Our [account planning template](/handbook/growth/sales/account-planning) is an ideal document to share with the new owner detailing everything they need to know about the customer.  The existing owner should have this up to date and then schedule a handover call for the new owner.  Feel free to push back and ask for it as the new owner if this doesn't happen!  Feel free to ask [Dana](/community/profiles/32545) or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
 
 ### Product Onboarding
 
@@ -85,7 +85,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 
 #### Data warehouse
 
-- They have connected up the sources the need to.
+- They have connected up the sources they need to.
 - They are aware of the difference between incremental and full sync and the impact on billing.
 - We've conducted training on using SQL in PostHog, creating views and joining on person data.
 

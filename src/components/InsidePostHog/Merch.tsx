@@ -27,8 +27,8 @@ export default function Merch() {
 
     return (
         <div>
-            <div className="bg-white dark:bg-accent-dark p-4 border border-light dark:border-dark mt-4 mb-0 rounded">
-                <h3 className="text-sm text-center italic leading-tight">
+            <div className="bg-white dark:bg-accent flex flex-col items-center p-4 border border-primary mt-4 mb-0 rounded">
+                <h3 className="text-sm text-center italic leading-tight mb-4 font-medium">
                     "This merch store has some of the best company swag I've ever seen"
                 </h3>
                 {/* quote source: https://posthog.slack.com/archives/C011L071P8U/p1710758940243199 */}

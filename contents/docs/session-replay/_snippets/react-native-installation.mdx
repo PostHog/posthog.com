@@ -12,7 +12,7 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 <ReactNativeInstall />
 
-> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js-lite/releases), and it's recommended to always use the latest version.
+> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js/releases), and it's recommended to always use the latest version.
 
 Install the session replay plugin.
 
@@ -61,11 +61,10 @@ export const posthog = new PostHog(
       // No data is captured from the request or response body.
       // iOS only
       captureNetworkTelemetry: true,
-      // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
-      // Ps: it was 500ms (0.5s) by default until version 3.3.7
-      androidDebouncerDelayMs: 1000,
-      // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
-      iOSdebouncerDelayMs: 1000,
+      // Throttling delay used to reduce the number of snapshots captured and reduce performance impact
+      // The lower the number more snapshots will be captured but higher the performance impact
+      // Default is 1000ms
+      throttleDelayMs: 1000,
     },
   },
 );

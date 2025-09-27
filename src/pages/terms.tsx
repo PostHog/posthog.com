@@ -3,7 +3,6 @@ import Layout from 'components/Layout'
 import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
 import { LinkedIn, Twitter, YouTube } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -16,7 +15,7 @@ const termsClasses = cntl`
   full-terms
   grid
   grid-cols-1
-  md:grid-cols-2
+  @2xl:grid-cols-2
   max-w-6xl
   px-4
   lg:px-8
@@ -25,7 +24,7 @@ const termsClasses = cntl`
   [&div]:p-4
   [&>div:nth-child(even)]:relative
   [&>div:nth-child(even)]:before:relative
-  md:[&>div:nth-child(even)]:before:hidden
+  @2xl:[&>div:nth-child(even)]:before:hidden
   [&>div:nth-child(even)]:before:text-sm
   [&>div:nth-child(even)]:before:-top-2
   [&>div:nth-child(even)]:before:pb-2
@@ -34,32 +33,32 @@ const termsClasses = cntl`
   [&>div:nth-child(even)]:before:font-bold
   [&>div:nth-child(even)]:before:content-['What_it_means']
   [&>div:nth-child(even)>p]:border-l-4
-  md:[&>div:nth-child(even)>p]:border-l-0
-  [&>div:nth-child(even)>p]:border-light
+  @2xl:[&>div:nth-child(even)>p]:border-l-0
+  [&>div:nth-child(even)>p]:border-primary
   [&>div:nth-child(even)>p]:pl-3
   [&>div:nth-child(even)>ul]:border-l-4
-  md:[&>div:nth-child(even)>ul]:border-l-0
-  [&>div:nth-child(even)>ul]:border-light
+  @2xl:[&>div:nth-child(even)>ul]:border-l-0
+  [&>div:nth-child(even)>ul]:border-primary
   [&>div:nth-child(even)>ul]:pl-3
   [&>div:nth-child(even)_li]:ml-4
-  dark:[&>div:nth-child(even)]:border-dark
-  md:[&>div:nth-child(even)]:border-l
+  @2xl:[&>div:nth-child(even)]:border-l
   [&>div:nth-child(odd)]:pr-8
-  md:[&>div:nth-child(even)>p]:pl-0
-  md:[&>div:nth-child(even)]:pl-8
-  md:[&>div:nth-child(even)]:border-light
-  dark:md:[&>div:nth-child(even)]:border-dark
+  @2xl:[&>div:nth-child(even)>p]:pl-0
+  @2xl:[&>div:nth-child(even)]:pl-8
+  @2xl:[&>div:nth-child(even)]:border-primary
   [&>div:nth-child(odd)_p]:text-[15px]
   [&>div:nth-child(even)>p]:text-lg
 `
 
 function Terms() {
-    const [headers, setHeaders] = useState([])
+    const [headers, setHeaders] = useState<HTMLElement[]>([])
 
     useEffect(() => {
         const fullTerms = document.querySelector('.full-terms')
-        const h2s = fullTerms.querySelectorAll(':nth-child(odd) h2')
-        setHeaders(Array.from(h2s))
+        if (fullTerms) {
+            const h2s = fullTerms.querySelectorAll(':nth-child(odd) h2')
+            setHeaders(Array.from(h2s) as HTMLElement[])
+        }
     }, [])
 
     return (
@@ -68,8 +67,8 @@ function Terms() {
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'terms')}
         >
             <SEO title="Terms, PostHog style" description="Terms, PostHog style" image={`/images/og/terms.png`} />
-            <div>
-                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
+            <div className="prose dark:prose-invert">
+                <div className="@container/legal-content max-w-2xl mx-auto py-4 @2xl:py-8">
                     <h1 className="text-5xl text-center">
                         Terms,{' '}
                         <span className="whitespace-nowrap text-red dark:text-yellow">
@@ -77,16 +76,15 @@ function Terms() {
                         </span>
                     </h1>
 
-                    <p className="mt-2 text-lg font-semibold mb-2 text-center text-balance">
-                        The internet has wrecked our attention span. <em>(Thanks, Zuck!)</em>
-                    </p>
+                    <h2 className="text-center text-balance mt-0">
+                        The internet has wrecked our attention span.
+                        <br />
+                        <em className="text-xs font-normal">(Thanks, Zuck!)</em>
+                    </h2>
 
-                    <p className="mb-2 text-center">
-                        Long paragraphs are boring. So we've summarized our terms for you.
-                    </p>
-
-                    <p className="mb-2 text-center">
-                        Here's the gist in a familiar format you can probably skim while driving. (Or 💩.)
+                    <p className="text-center">
+                        Long paragraphs are boring. So we've summarized our terms for you. Here's the gist in a familiar
+                        format you can probably skim while driving. (Or 💩.)
                     </p>
 
                     <h3 className="text-2xl pt-8 text-center">Summary of our terms</h3>
@@ -95,7 +93,7 @@ function Terms() {
                         <span className="text-xl">
                             <strong>Semi-important legal notice</strong> from{' '}
                             <Tooltip content={() => <Lawyers />} placement="bottom" className="[&_button]:cursor-auto">
-                                <span className="border-b border-dashed border-dark/50 dark:border-light/60 dark:hover:border-light/80 inline-block !leading-tight">
+                                <span className="border-b border-dashed border-primary inline-block !leading-tight">
                                     our over-zealous legal team
                                 </span>
                             </Tooltip>
@@ -105,16 +103,16 @@ function Terms() {
                             (Serif font demonstrates how important this disclaimer is)
                         </span>
                         The following is not legally binding. It is a summary of PostHog's terms. Please read{' '}
-                        <SmoothScrollLink
-                            to="full-terms"
-                            spy={true}
-                            smooth={true}
-                            offset={-128}
-                            duration={1500}
-                            className="cursor-pointer"
+                        <button
+                            onClick={() => {
+                                const el = document.querySelector('#full-terms')
+                                if (!el) return
+                                el.scrollIntoView({ behavior: 'smooth' })
+                            }}
+                            className="cursor-pointer hover:underline"
                         >
                             the full terms of service
-                        </SmoothScrollLink>{' '}
+                        </button>{' '}
                         and don't rely on 140 characters of "terms" at a time.
                     </p>
 
@@ -150,7 +148,7 @@ function Terms() {
                             <Link
                                 href="https://giphy.com/gifs/cat-pizza-crazy-3o7TKJwsoLn5QAmqw8"
                                 externalNoIcon
-                                className="font-normal text-xs text-primary/50 dark:text-primary-dark/50"
+                                className="font-normal text-xs text-muted"
                             >
                                 Thanks, Giphy!
                             </Link>
@@ -200,61 +198,58 @@ function Terms() {
                     The full <span className="text-red dark:text-yellow">(but still easy to understand)</span> terms
                 </h2>
 
-                <div className="px-4">
-                    <div className="max-w-lg mx-auto pb-6">
-                        <p className="mb-2">
-                            For your sanity, we've summarized each paragraph of legalese with plain English.
-                        </p>
-                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
-                            (This was inspired by{' '}
-                            <Link href="https://500px.com/terms" externalNoIcon>
-                                500px
-                            </Link>{' '}
-                            who did it first and deserve full credit! We tried to do it better but we couldn't.)
-                        </p>
-                        <p className="mb-2">
-                            You probably realize this, but the summaries{' '}
-                            <span className="md:hidden">
-                                below each section in blockquotes (under the <em>"What it means</em> subheaders)
-                            </span>
-                            <span className="hidden md:inline-block">in the right-hand column</span> exist solely to aid
-                            your comprehension and alleviate boredom. They're not legally binding.
-                        </p>
-                        <p className="mb-2">
-                            Should you wish to be legally bound to us, please stick with the <em>actual</em> terms{' '}
-                            <span className="md:hidden">
-                                which is everything <em>not in blockquotes</em>
-                            </span>
-                            <span className="hidden md:inline-block">in the left column</span>.
-                        </p>
-                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
-                            (Can you believe we actually had to clarify this?)
-                        </p>
-                    </div>
+                <div className="max-w-2xl mx-auto">
+                    <p className="">For your sanity, we've summarized each paragraph of legalese with plain English.</p>
+                    <p className=" text-secondary">
+                        (This was inspired by{' '}
+                        <Link href="https://500px.com/terms" externalNoIcon>
+                            500px
+                        </Link>{' '}
+                        who did it first and deserve full credit! We tried to do it better but we couldn't.)
+                    </p>
+                    <p className="">
+                        You probably realize this, but the summaries{' '}
+                        <span className="md:hidden">
+                            below each section in blockquotes (under the <em>"What it means</em> subheaders)
+                        </span>
+                        <span className="hidden md:inline-block">in the right-hand column</span> exist solely to aid
+                        your comprehension and alleviate boredom. They're not legally binding.
+                    </p>
+                    <p className="">
+                        Should you wish to be legally bound to us, please stick with the <em>actual</em> terms{' '}
+                        <span className="md:hidden">
+                            which is everything <em>not in blockquotes</em>
+                        </span>
+                        <span className="hidden md:inline-block">in the left column</span>.
+                    </p>
+                    <p className=" text-secondary">(Can you believe we actually had to clarify this?)</p>
                 </div>
 
-                <div className="px-4">
-                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 list-none flex flex-col gap-1 md:gap-2">
+                <div className="pt-4">
+                    <ol
+                        data-scheme="primary"
+                        className="table-of-contents not-prose max-w-2xl mx-auto bg-accent border border-primary rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2"
+                    >
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
-                                <SmoothScrollLink
-                                    to={header.id}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-128}
-                                    duration={1000}
-                                    className="group cursor-pointer top-16 md:top-24 lg:top-32 text-sm md:text-base"
+                                <button
+                                    className="group cursor-pointer text-sm md:text-base font-semibold hover:underline block p-1"
+                                    onClick={() => {
+                                        const el = document.querySelector(`#${header.id}`)
+                                        if (!el) return
+                                        el.scrollIntoView({ behavior: 'smooth' })
+                                    }}
                                 >
                                     {header.innerText}
                                     <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 dark:group-hover:opacity-70 text-primary dark:text-primary-dark" />
-                                </SmoothScrollLink>
+                                </button>
                             </li>
                         ))}
                     </ol>
                 </div>
 
-                <div className={termsClasses}>
+                <div className={`${termsClasses}`}>
                     <div>
                         <h2 id="intro" className="mb-1 text-4xl">
                             The full terms
@@ -680,8 +675,8 @@ function Terms() {
                             notice to Customer (which may be sent by email). If Customer believes that PostHog has
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
-                            to receive an adjustment or credit. Inquiries should be submitted via 
-                            an in-app support ticket to the Company's customer success department.
+                            to receive an adjustment or credit. Inquiries should be submitted via an in-app support
+                            ticket to the Company's customer success department.
                         </p>
                     </div>
                     <div className="md:pt-10">
@@ -947,31 +942,35 @@ function Terms() {
                     <div className="pb-12">
                         <h2 id="sla">13. Uptime SLA</h2>
                         <p>
-                            PostHog will use commercially reasonable efforts to make the Software available with all material features and services operating and available for use, in each calendar month with an uptime percentage of 99.95% as displayed on status.posthog.com only to those customers who have purchased the Enterprise add-on or where it has been agreed as a special term in your annual contract. Uptime SLAs are not otherwise available to customers as standard. 
-
-                            If the uptime percentage for the month is less than 99.95%, we will provide you with credit during the month as below:
-
-                            - 99.90% to 99.94% inclusive -	5% credit
-                            - 99.00% to 99.89% inclusive - 10% credit
-                            - Less than 99%	- 20% credit
-
-                            If PostHog fails to maintain an uptime percentage of greater than 99% for any 3 months in a 6 month period, Customer may terminate their agreement upon 10 days written notice to PostHog. 
-
-                            The calculations of uptime do not include:
-
-                            - Delays to data ingestion
-                            - Scheduled maintenance time: PostHog will notify Customer in advance of any scheduled routine maintenance
-                            - Emergency maintenance time (non-scheduled): PostHog will promptly notify Customer (via email or through the Software) of any non-scheduled or emergency maintenance and any other anticipated outages or performance degradation
-                            - Suspension or termination of your account
-                            - Failure of Customer or third-party equipment, software or technology upon which the Software is dependent, including, but not limited to, cloud infrastructure services upon which the Software operates, and inaccessibility to the Internet, provided that such failure or inaccessibility is not caused by PostHog’s infrastructure and is otherwise outside of PostHog’s control
-                            - Force majeure event
-                            - An attack on PostHog’s infrastructure, including without limitation, a denial of service attack or unauthorized access, provided that such attack did not occur as a result of PostHog’s failure to maintain industry standard organizational controls and technical measures
-                            - Unavailability caused by Customer’s breach of this Agreement
+                            PostHog will use commercially reasonable efforts to make the Software available with all
+                            material features and services operating and available for use, in each calendar month with
+                            an uptime percentage of 99.95% as displayed on status.posthog.com only to those customers
+                            who have purchased the Enterprise add-on or where it has been agreed as a special term in
+                            your annual contract. Uptime SLAs are not otherwise available to customers as standard. If
+                            the uptime percentage for the month is less than 99.95%, we will provide you with credit
+                            during the month as below: - 99.90% to 99.94% inclusive - 5% credit - 99.00% to 99.89%
+                            inclusive - 10% credit - Less than 99% - 20% credit If PostHog fails to maintain an uptime
+                            percentage of greater than 99% for any 3 months in a 6 month period, Customer may terminate
+                            their agreement upon 10 days written notice to PostHog. The calculations of uptime do not
+                            include: - Delays to data ingestion - Scheduled maintenance time: PostHog will notify
+                            Customer in advance of any scheduled routine maintenance - Emergency maintenance time
+                            (non-scheduled): PostHog will promptly notify Customer (via email or through the Software)
+                            of any non-scheduled or emergency maintenance and any other anticipated outages or
+                            performance degradation - Suspension or termination of your account - Failure of Customer or
+                            third-party equipment, software or technology upon which the Software is dependent,
+                            including, but not limited to, cloud infrastructure services upon which the Software
+                            operates, and inaccessibility to the Internet, provided that such failure or inaccessibility
+                            is not caused by PostHog’s infrastructure and is otherwise outside of PostHog’s control -
+                            Force majeure event - An attack on PostHog’s infrastructure, including without limitation, a
+                            denial of service attack or unauthorized access, provided that such attack did not occur as
+                            a result of PostHog’s failure to maintain industry standard organizational controls and
+                            technical measures - Unavailability caused by Customer’s breach of this Agreement
                         </p>
                     </div>
                     <div className="md:pt-10 pb-12">
                         <p>
-                            If you buy PostHog Enterprise or have a special annual contract with us, we will agree to an SLA with you. 
+                            If you buy PostHog Enterprise or have a special annual contract with us, we will agree to an
+                            SLA with you.
                         </p>
                     </div>
                 </div>

@@ -28,7 +28,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
                 Add topics
             </Popover.Button>
 
-            <Popover.Panel className="fixed z-[9999] text-black mb-0 w-64 top-[5vh] h-[90vh] px-4 mt-3 transform sm:px-0 overflow-y-scroll overscroll-contain bg-white dark:bg-accent-dark rounded border border-light dark:border-dark shadow-sm">
+            <Popover.Panel className="fixed z-[9999] text-black mb-0 w-64 top-[5vh] h-[90vh] px-4 mt-3 transform sm:px-0 overflow-y-scroll overscroll-contain bg-white dark:bg-accent-dark rounded border border-primary shadow-sm">
                 <ol className="list-none p-0 m-0">
                     {data?.map((topic) => {
                         const isSelected = question?.attributes?.topics?.data?.find((t) => t.id === topic.id)
@@ -36,7 +36,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
                         return (
                             <li key={topic.id} className="m-0 p-0">
                                 <button
-                                    className="w-full border-b border-light dark:border-dark text-sm px-3 py-1.5 flex items-center space-x-2 hover:bg-gray-accent-light dark:hover:bg-black/30 dark:text-white"
+                                    className="w-full border-b border-primary text-sm px-3 py-1.5 flex items-center space-x-2 hover:bg-primary dark:hover:bg-black/30 dark:text-white"
                                     onClick={isSelected ? () => removeTopic(topic) : () => addTopic(topic)}
                                 >
                                     {isSelected ? (

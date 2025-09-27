@@ -32,10 +32,6 @@ const nextConfig = {
         source: "/<ph_proxy_path>/:path*",
         destination: "https://us.i.posthog.com/:path*",
       },
-      {
-        source: "/<ph_proxy_path>/flags",
-        destination: "https://us.i.posthog.com/flags",
-      },
     ];
   },
   // This is required to support PostHog trailing slash API requests

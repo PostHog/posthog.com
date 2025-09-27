@@ -3,7 +3,7 @@ title: React Native
 sidebarTitle: React Native
 sidebar: Docs
 showTitle: true
-github: 'https://github.com/PostHog/posthog-js-lite/tree/main/posthog-react-native'
+github: 'https://github.com/PostHog/posthog-js/tree/main/packages/react-native'
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg
 features:
@@ -14,8 +14,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: false
-  errorTracking: false
+  llmAnalytics: false
 ---
 
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
@@ -58,7 +57,7 @@ You can further customize how PostHog works through its configuration on initial
 | `captureAppLifecycleEvents`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                         | Captures app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active, and Application Backgrounded. By default, this is false.                                                                                                                  |
 | `disableGeoip`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                      | When true, disables automatic GeoIP resolution for events and feature flags.                                                                                                                                                                                                                               |
 | `enableSessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | Enable Recording of Session replay for Android and iOS.                                                                                                                                                                                                                                                    |
-| `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `null`                                 | Session Replay configuration.                                                                                                                                                                                                                                                                              |
+| `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `null`                                 | Session replay configuration. See the [replay install docs](/docs/session-replay/installation) for more details.                                                                                                                                                                                                       |
 | `enablePersistSessionIdAcrossRestart`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | When true, persists the `$session_id` across app restarts. If false, `$session_id` always resets on app restart.                                                                                                                                                                                           |
 
 ## Capturing events
@@ -230,6 +229,14 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 ```javascript
 posthog.reset()
 ```
+
+## Offline behavior
+
+The PostHog React Native SDK will continue to capture events when the device is offline. When `persistence` is set to `file` (by default), the events are stored in a queue in the device's file storage. Even when the app is closed, the events are persisted and will be flushed when the app is opened again.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed only when the device is online.
 
 ## Opt in/out
 

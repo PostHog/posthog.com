@@ -15,6 +15,7 @@ showTitle: true
 ### Backend
 
 - Framework: [Django](https://www.djangoproject.com/)
+- High scale services: [Rust](https://www.rust-lang.org/)
 - Databases: [PostgreSQL](https://www.postgresql.org/) and [ClickHouse](https://clickhouse.tech/)
 - Task queue/event streaming: [Redis](https://redis.io/) and [Apache Kafka](https://kafka.apache.org/)
 - Task Worker: [Celery](https://docs.celeryproject.org/)
@@ -26,7 +27,6 @@ showTitle: true
 
 ### Additional tools
 
-- Application monitoring: [Sentry](https://sentry.io/welcome/)
 - CI/CD: [GitHub Actions](https://github.com/features/actions)
 - Containerization: [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 - Linter (frontend): [ESLint](https://eslint.org/)

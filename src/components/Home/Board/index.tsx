@@ -45,7 +45,7 @@ import {
     IconLlmPromptEvaluation,
     IconWarning,
     IconSend,
-    IconLlmObservability,
+    IconLlmAnalytics,
     IconListCheck,
     IconApp,
     IconPhone,
@@ -59,6 +59,9 @@ import {
     IconStack,
     IconQuestion,
     IconMagic,
+    IconCodeInsert,
+    IconBolt,
+    IconSparkles,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
@@ -379,12 +382,12 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM observability',
+        name: 'LLM analytics',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
-        Icon: IconLlmObservability,
-        description: 'Build AI features with full visibility – both in development and production.',
-        pricingKey: 'product_analytics',
+        Icon: IconLlmAnalytics,
+        description: 'Build AI features with full visibility – both in development and production',
+        pricingKey: 'llm_analytics',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },
@@ -403,12 +406,72 @@ const products: Product[] = [
                 </>
             )
         },
+        status: 'Production',
+        pricing: {
+            cta: {
+                url: '/llm-analytics',
+                text: 'Learn more',
+            },
+        },
+    },
+    {
+        name: 'MCP Server',
+        color: 'seagreen',
+        Icon: IconCode,
+        description: 'Give your agents full control over PostHog.',
+        types: ['AI'],
+        features: [
+            { title: 'Use PostHog in your editor', Icon: IconCode },
+            { title: 'Automate tasks based on PostHog data', Icon: IconSparkles },
+            { title: 'Build agent workflows with PostHog', Icon: IconBolt },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_6d2cab1b66" />
+                    </div>
+                </>
+            )
+        },
         status: 'WIP',
         badge: 'BETA',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/settings/user-feature-previews#llm-observability',
-                text: 'Try it out',
+                url: '/docs/model-context-protocol',
+                text: 'Get started',
+            },
+        },
+    },
+    {
+        name: 'Embedded analytics',
+        color: '[#36C46F]',
+        Icon: IconCodeInsert,
+        description: 'Easily share a subset of data you capture with your customers so they can do analysis too.',
+        types: ['Data'],
+        features: [
+            { title: 'Query API', Icon: IconCode },
+            { title: 'Full SQL access', Icon: IconDatabase },
+            { title: 'Materialize views for speed', Icon: IconBolt },
+            { title: 'Visualize how you want', Icon: IconGraph },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_39_41_2x_9123ae5225.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_20_at_16_40_01_2x_d24eae394d.png" />
+                    </div>
+                </>
+            )
+        },
+        status: 'WIP',
+        pricing: {
+            cta: {
+                url: '/tutorials/embedded-analytics',
+                text: 'Get started',
             },
         },
     },
@@ -420,14 +483,37 @@ const products: Product[] = [
         status: 'WIP',
         roadmapID: 1999,
     },
-
     {
         name: 'Revenue analytics',
+        color: '[#36C46F]',
         Icon: IconPiggyBank,
-        color: 'orange',
+        description: 'Track and analyze your revenue metrics to understand your business performance and growth.',
         types: ['Sales'],
+        features: [
+            { title: 'MRR and Gross Revenue', Icon: IconPiggyBank },
+            { title: 'Breakdowns by country, product, plan, and customer', Icon: IconGlobe },
+            { title: 'Growth/Churn Rate', Icon: IconLineGraph },
+        ],
+        Images: () => {
+            return (
+                <>
+                    <div className="block dark:hidden">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png" />
+                    </div>
+                    <div className="hidden dark:block">
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png" />
+                    </div>
+                </>
+            )
+        },
         status: 'WIP',
-        roadmapID: 2206,
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/docs/revenue-analytics/start-here',
+                text: 'Get started',
+            },
+        },
     },
     {
         name: 'Product tours',
@@ -487,14 +573,6 @@ const products: Product[] = [
         types: ['AI'],
         status: 'Roadmap',
         roadmapID: 2168,
-    },
-    {
-        name: 'Code editor',
-        Icon: IconCode,
-        color: 'seagreen',
-        types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2169,
     },
     {
         name: 'AI docs chat',
@@ -569,7 +647,7 @@ const RoadmapProductDetails = ({
     const staticLikeCount = product.roadmap?.githubPages?.[0]?.reactions?.total_count || 0
 
     return (
-        <div className="bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
+        <div className="bg-white dark:bg-accent-dark border border-input md:max-w-[700px] w-full overflow-hidden">
             <div className="p-6 relative">
                 <ProductNavButtons onNext={onNext} onPrev={onPrev} />
                 <h2 className="text-xl m-0 flex space-x-2">
@@ -623,13 +701,13 @@ const ProductNavButtons = ({ onNext, onPrev }: { onNext: () => void; onPrev: () 
     return (
         <div className="flex space-x-1 absolute top-2 right-2">
             <button
-                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                 onClick={onPrev}
             >
                 <IconArrowLeft className="size-5" />
             </button>
             <button
-                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-light dark:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                className="flex items-start gap-1 text-sm font-medium click rounded-md px-1.5 py-0.5 transition-all w-full border border-b-3 border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                 onClick={onNext}
             >
                 <IconArrowRight className="size-5" />
@@ -646,7 +724,7 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
     const lottieRef = useRef()
 
     return (
-        <div className="@container bg-white dark:bg-accent-dark border border-border dark:border-dark md:max-w-[700px] w-full overflow-hidden">
+        <div className="@container bg-white dark:bg-accent-dark border border-input md:max-w-[700px] w-full overflow-hidden">
             <div className="px-6 pt-6 relative">
                 <ProductNavButtons onNext={onNext} onPrev={onPrev} />
                 <h2 className="text-xl m-0 flex space-x-2 items-center">
@@ -665,9 +743,7 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
                     )}
 
                     <span>{name}</span>
-                    {badge && (
-                        <span className="bg-accent dark:bg-accent-dark rounded-md px-2 py-1 text-sm">{badge}</span>
-                    )}
+                    {badge && <span className="bg-accent rounded-md px-2 py-1 text-sm">{badge}</span>}
                 </h2>
                 {description && <p className="text-sm opacity-70 ml-10">{description}</p>}
                 {Images && (
@@ -679,7 +755,7 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
                 )}
             </div>
             {features?.length > 0 && (
-                <ul className="grid @xs:grid-cols-2 @2xl:grid-cols-3 gap-x-4 gap-y-2 @xl:gap-x-8 list-none px-6 py-6 border-t border-border dark:border-dark relative bg-accent dark:bg-accent-dark">
+                <ul className="grid @xs:grid-cols-2 @2xl:grid-cols-3 gap-x-4 gap-y-2 @xl:gap-x-8 list-none px-6 py-6 border-t border-input relative bg-accent">
                     {features?.map(({ title, Icon }) => (
                         <li key={title} className="flex items-start space-x-2 text-base font-semibold">
                             <div className="size-8 bg-border dark:bg-border-dark rounded-md p-1 flex items-center justify-center">
@@ -691,7 +767,7 @@ const ProductDetails = ({ product, onNext, onPrev }: { product: Product; onNext:
                 </ul>
             )}
             {(billingData || pricing) && (
-                <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark relative">
+                <div className="grid md:grid-cols-3 md:gap-0 gap-2 p-6 border-t border-input bg-accent relative">
                     <div>
                         {pricing?.FreeTier ||
                             (billingData && (
@@ -814,7 +890,7 @@ const ProductButton = ({
                         <li key={name}>
                             <button
                                 className={`flex items-start gap-1 text-sm font-medium click rounded-md px-3 py-1.5 transition-all w-full 
-                        border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
+                        border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all
                         ${active ? 'md:!border-light md:dark:!border-dark md:!bg-accent md:dark:!bg-accent-dark' : ''}
                         ${isInActiveStatus ? '' : 'opacity-30'} ${status === 'Roadmap' ? 'italic' : ''}`}
                                 onClick={() => {
@@ -923,7 +999,7 @@ export default function Hero(): JSX.Element {
             <div>
                 <Slider
                     activeIndex={filters.findIndex(({ name }) => name === activeStatus)}
-                    className="max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark"
+                    className="max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-input"
                 >
                     {filters.map(({ name, color }) => {
                         const active = activeStatus === name
@@ -986,11 +1062,11 @@ export default function Hero(): JSX.Element {
                     </ul>
 
                     <div className="mr-8 mx-4 md:mx-0">
-                        <p className="text-sm text-primary/70 dark:text-primary-dark/70 mt-8 pb-3 mb-0">
+                        <p className="text-sm text-secondary mt-8 pb-3 mb-0">
                             Each product offers the lowest pricing vs. every competitor at scale.
                         </p>
                     </div>
-                    <div className="border-t border-border dark:border-dark pt-3 mx-4 md:mx-0 text-sm text-primary/70 dark:text-primary-dark/70">
+                    <div className="border-t border-input pt-3 mx-4 md:mx-0 text-sm text-secondary">
                         Just starting out? <Link to="/founder-stack">Explore our founder stack.</Link>
                     </div>
                 </div>

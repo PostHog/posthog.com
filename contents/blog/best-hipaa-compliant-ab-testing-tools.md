@@ -6,13 +6,13 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - andy-vandervell
+    - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 category: General
 tags:
-  - Privacy
+    - Privacy
 ---
 
 What do [Optimizely](/blog/posthog-vs-optimizely), Convert, and Webtrends Optimize have in common?
@@ -30,11 +30,11 @@ There are three ways to comply with the Privacy rule when adopting analytics and
 
 1. **Anonymize all PHI and identifiers:** There are two so-called "[De-identification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)" – "Expert Determination," where an expert verifies that data isn't personally identifiable, and "Safe Harbor" where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
 
-2. **Sign a BAA with a third-party tool:** You must sign a Business Associate Agreement (BAA) with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also any tools you use for importing and exporting data from your data warehouse.
+2. **Sign a BAA with a third-party tool:** You must sign a Business Associate Agreement (BAA) with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also any tools you use for importing and exporting data from your [data warehouse](/blog/cdp-vs-data-warehouse).
 
 3. **Self-host and keep control of all your data:** The less common is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAAs and general legal wrangling needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so, and you are wholly liable for any security breaches.
 
-These are the broad principles, but **please consult an expert** before making any final decision on how to implement tools in compliance with HIPAA. 
+These are the broad principles, but **please consult an expert** before making any final decision on how to implement tools in compliance with HIPAA.
 
 ## The best HIPAA-compliant A/B testing tools
 
@@ -44,20 +44,20 @@ These are the broad principles, but **please consult an expert** before making a
 
 #### Features
 
-- **Product analytics:** <span className="text-green text-lg">✔</span>
-- **Web analytics:** <span className="text-green text-lg">✔</span>
-- **Session replay:** <span className="text-green text-lg">✔</span>
-- **Feature flags:** <span className="text-green text-lg">✔</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-green text-lg">✔</span>
-- **Self-hostable:** <span className="text-green text-lg">✔</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-green text-lg">✔</span>
+-   **Web analytics:** <span className="text-green text-lg">✔</span>
+-   **Session replay:** <span className="text-green text-lg">✔</span>
+-   **Feature flags:** <span className="text-green text-lg">✔</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-green text-lg">✔</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 #### Summary
 
 [PostHog](https://posthog.com/) is an open source all-in-one platform that combines A/B testing with product analytics, session replay, feature management, and user surveys – everything you need to understand user behavior. All these tools are seamlessly integrated and, because you get everything in one, you only need to sign one BAA for all your analytics needs.
 
-PostHog offers a BAA on its [platform add-ons](/platform-addons), which start at $250 and include [generous monthly free allowances](/pricing), such as 1 million analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarantee. 
+PostHog offers a BAA on its [platform packages](/platform-packages), which start at $250 and include [generous monthly free allowances](/pricing), such as 1 million analytics events every month. You can also self-host the open-source edition for free, though this isn't recommended as it's provided without support or guarantee.
 
 ### 2. Kameleoon
 
@@ -65,14 +65,14 @@ PostHog offers a BAA on its [platform add-ons](/platform-addons), which start at
 
 #### Features
 
-- **Product analytics:** <span className="text-red text-lg">✖</span>
-- **Web analytics:** <span className="text-red text-lg">✖</span>
-- **Session replay:** <span className="text-red text-lg">✖</span>
-- **Feature flags:** <span className="text-green text-lg">✔</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-red text-lg">✖</span>
+-   **Web analytics:** <span className="text-red text-lg">✖</span>
+-   **Session replay:** <span className="text-red text-lg">✖</span>
+-   **Feature flags:** <span className="text-green text-lg">✔</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 #### Summary
 
@@ -86,14 +86,14 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 
 #### Features
 
-- **Product analytics:** <span className="text-red text-lg">✖</span>
-- **Web analytics:** <span className="text-green text-lg">✔</span>
-- **Session replay:** <span className="text-green text-lg">✔</span>
-- **Feature flags:** <span className="text-green text-lg">✔</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-green text-lg">✔</span>
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-red text-lg">✖</span>
+-   **Web analytics:** <span className="text-green text-lg">✔</span>
+-   **Session replay:** <span className="text-green text-lg">✔</span>
+-   **Feature flags:** <span className="text-green text-lg">✔</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-green text-lg">✔</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 #### Summary
 
@@ -107,26 +107,26 @@ Unlike most tools in this list, VWO charges separately for website and mobile ap
 
 #### Features
 
-- **Product analytics:** <span className="text-red text-lg">✖</span>
-- **Web analytics:** <span className="text-red text-lg">✖</span>
-- **Session replay:** <span className="text-red text-lg">✖</span>
-- **Feature flags:** <span className="text-green text-lg">✔</span>
-- **A/B testing:** <span className="text-green text-lg">✔</span>
-- **Surveys:** <span className="text-red text-lg">✖</span>
-- **Self-hostable:** <span className="text-red text-lg">✖</span>
-- **BAA available:** <span className="text-green text-lg">✔</span>
+-   **Product analytics:** <span className="text-red text-lg">✖</span>
+-   **Web analytics:** <span className="text-red text-lg">✖</span>
+-   **Session replay:** <span className="text-red text-lg">✖</span>
+-   **Feature flags:** <span className="text-green text-lg">✔</span>
+-   **A/B testing:** <span className="text-green text-lg">✔</span>
+-   **Surveys:** <span className="text-red text-lg">✖</span>
+-   **Self-hostable:** <span className="text-red text-lg">✖</span>
+-   **BAA available:** <span className="text-green text-lg">✔</span>
 
 #### Summary
 
 [LaunchDarkly](/blog/best-launchdarkly-alternatives) is primarily a feature management platform for controlling what users see and when, and managing the rollout of new features. However, it also offers an experimentation suite, albeit as a paid add-on.
 
-As a tool designed for engineers, LaunchDarkly supports running experiments on the front and back end. This enables engineers to run experiments to measure the performance impact of API and infrastructure changes, for example. 
+As a tool designed for engineers, LaunchDarkly supports running experiments on the front and back end. This enables engineers to run experiments to measure the performance impact of API and infrastructure changes, for example.
 
 ## FAQ
 
 ### Who does HIPAA apply to?
 
-HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity. 
+HIPAA applies to "covered entities," such as healthcare providers who transmit any health information in electronic form, health plans, and healthcare clearinghouses. Mobile apps fall under HIPAA if they store protected health information (PHI), and share it with any covered entity.
 
 HIPAA also applies to "business associates," which, according to the [US Department of Health and Human Services](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html), are "a subcontractor that creates, receives, maintains, or transmits protected health information on behalf of another business associate."
 
@@ -134,7 +134,7 @@ Under HIPAA, the A/B testing tools in this guide would all be considered busines
 
 ### What is PHI (Protected Health Information)?
 
-Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual. 
+Protected Health Information (PHI) is any information about health status, provision of healthcare, or payment for healthcare that can be linked to an individual.
 
 This includes medical records, laboratory results, billing information, and any other information that identifies an individual and relates to their past, present, or future physical or mental health condition, treatment, or payment for healthcare services.
 

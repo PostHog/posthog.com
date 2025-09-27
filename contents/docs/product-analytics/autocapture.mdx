@@ -9,82 +9,136 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { Tab } from 'components/Tab'
+
 export const ImgClipboardAuocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-light.png"
 export const ImgClipboardAuocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-dark.png"
 
-PostHog can capture frontend events automatically using autocapture. This captures events like `pageview`, `screen`, `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
+PostHog can automatically capture a variety of events in your app without specific tracking code. This page covers the different types of events that PostHog can capture and how to configure them.
 
-This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
+## Types of autocaptured events
 
-Autocapture is available in the following SDKs:  
+PostHog can automatically capture these types of data without specific tracking code:
+
+| Type | Description |
+|------|-------------|
+| [Interaction](/docs/product-analytics/autocapture#interaction-autocapture) | Captures clicks, taps, and other user interactions |
+| [Navigation](/docs/product-analytics/autocapture#navigation-autocapture) | Captures pageviews, pageleaves, and screen views |
+| [Clipboard](/docs/product-analytics/autocapture#clipboard-autocapture) | Captures copy and paste actions |
+| [Heatmap](/docs/product-analytics/autocapture#heatmap-autocapture) | Shows where users interact with your product the most |
+| [Dead clicks](/docs/product-analytics/autocapture#dead-clicks-autocapture) | Captures clicks that don't trigger a change to the page |
+| [Exception](/docs/error-tracking/start-here) | Captures errors and crashes. See the [error tracking](/docs/error-tracking/start-here) docs for more information. |
+| [Session](/docs/session-replay/installation) | Records real user behavior for playback. See the [session replay](/docs/session-replay/installation) docs for more information. |
+| [Web vitals](/docs/web-analytics/web-vitals) | Captures largest contentful paint, first input delay, cumulative layout shift, and first contentful paint |
+| [Lifecycle](/docs/product-analytics/autocapture#navigation-and-lifecycle-event-autocapture) | Captures app launches, backgrounds, and updates. |
+
+
+## Supported SDKs
+
+Autocapture is available in the following SDKs, each with a different set of captured events:  
 
 - [JavaScript Web](/docs/libraries/js) - enabled by default
 - [React](/docs/libraries/react) - enabled by default
 - [React Native](/docs/libraries/react-native) - disabled by default
 - [iOS](/docs/libraries/ios) - disabled by default
 
-## Configuring autocapture
+<CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
 
-> This covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
+  You can also autocapture session and exception events. See [session replay](/docs/session-replay/installation) and [error tracking](/docs/error-tracking/start-here) for more information.
 
-### Capturing pageviews in single-page apps
+</CalloutBox>
 
-Because PostHog hooks to the `navigator` API, we'll automatically capture pageviews and pageleaves. Make sure you've set `defaults: '<ph_posthog_js_defaults>'` in your `posthog.init` call to opt-in to this behavior.
+## Interaction autocapture
+
+<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>iOS</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+### Web interaction autocapture
+
+The [JavaScript web SDK](/docs/libraries/js) captures the following events by default:
+
+- Interactions like clicks with a tag like `a`, `button`, `form`, `input`, `select`, `textarea`, `label`
+- Form submissions and form changes
+- Changes on content with `contenteditable="true"`. 
+- Copies from clipboard
+
+Autocaptures are [displayed](https://app.posthog.com/activity/explore) with names like `clicked span with text "Delete"`. You can filter for **Autocapture** events to see all interactions.
+
+#### Configuring interaction autocapture
+
+You can configure `posthog-js` to autocapture information that users copy or cut on your page with the `capture_copied_text` config option. 
+
+You can configure the following options:
+
+| Option | Description |
+|--------|-------------|
+| `url_allowlist`<br/>**Type:** `(string \| RegExp)[]` | List of URLs to enable autocapture on. Can be strings to match or regexes (e.g., `['https://example.com', 'test.com/.*']`). Useful when you want to autocapture on specific pages only. If both `url_allowlist` and `url_ignorelist` are set, the allowlist is checked first, then the ignorelist (which can override the allowlist). |
+| `url_ignorelist`<br/>**Type:** `(string \| RegExp)[]` | List of URLs to not enable autocapture on. Can be strings to match or regexes (e.g., `['https://example.com', 'test.com/.*']`). Useful when you want to autocapture on most pages but not some specific ones. |
+| `dom_event_allowlist`<br/>**Type:** `DomAutocaptureEvents[]` | List of DOM events to enable autocapture on (e.g., `['click', 'change', 'submit']`). |
+| `element_allowlist`<br/>**Type:** `AutocaptureCompatibleElement[]` | List of DOM elements to enable autocapture on (e.g., `['a', 'button', 'form', 'input', 'select', 'textarea', 'label']`). We consider the element tree from root to target, so if `button` is in the allowlist, clicks on `button` or its children (like `svg`) are captured, but not clicks on parent `div` elements. |
+| `css_selector_allowlist`<br/>**Type:** `string[]` | List of CSS selectors to enable autocapture on (e.g., `['[ph-capture]']`). We consider the element tree from root to target, so if `['[id]']` is in the allowlist, clicks on elements with IDs or their parents with IDs are captured. Everything is enabled when there's no allowlist. |
+| `element_attribute_ignorelist`<br/>**Type:** `string[]` | Exclude certain element attributes from autocapture (e.g., `['aria-label']` or `['data-attr-pii']`). |
+| `capture_copied_text`<br/>**Type:** `boolean` | When set to `true`, autocapture will capture the text of any element that is cut or copied. |
+
+Here's a full example of how to configure autocapture:
 
 ```js-web
-posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_client_api_host>",
-  defaults: '<ph_posthog_js_defaults>',
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    autocapture: {
+        // URL filtering
+        url_allowlist: ['https://example.com', 'test.com/.*'],
+        url_ignorelist: ['https://example.com/admin', 'test.com/private/.*'],
+        
+        // Event filtering
+        dom_event_allowlist: ['click', 'change', 'submit', 'input'],
+        
+        // Element filtering
+        element_allowlist: ['a', 'button', 'form', 'input', 'select', 'textarea', 'label'],
+        css_selector_allowlist: ['[ph-capture]', '[data-track]'],
+        
+        // Attribute filtering
+        element_attribute_ignorelist: ['aria-label', 'data-attr-pii', 'data-sensitive'],
+        
+        // Copy/cut capture
+        capture_copied_text: true,
+    },
 })
 ```
 
-### Reducing events with an allow and ignorelist
+#### Disabling interaction autocapture
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists` (NB some options use allow behavior and some use ignore behavior. 
-
-These are an array of events, URLs, elements, and CSS selectors that you want autocapture to allow or ignore.
-
-For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` and don't contain the data attribute `data-attr-pii="email"`, you can do the following:
-
-import AutocaptureConfig from './_snippets/multilanguage/autocapture-config.mdx'
-
-<AutocaptureConfig />
-
-Allow and ignorelists only filter autocapture events. They don't affect the data collected by session recordings or custom events.
-
-> **Note:** When using `element_allowlist` or `css_selector_allowlist`, PostHog considers the entire tree of elements from the root to the target element of the click event, not just the element that was directly clicked. If *any* element or selector is in the tree *and* allow list, the click is captured.
-
-### Preventing sensitive data capture
-
-For security reasons and to prevent sensitive data capture, PostHog is conservative about capturing `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/docs/product-analytics/capture-events).
-
-If there are specific elements you _don't_ want to capture, add the `ph-no-capture` class name.
-
-```html
-<button class='ph-no-capture'>Sensitive information here</button>
-```
-
-## Disabling autocapture
-
-You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js/config). If _one_ of these is disabled, autocapture is disabled.
-
-> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
-
-You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
-
-Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
-
-You can update any of these config options at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method like this:
+You can disable autocapture in two ways:
+- In your [project settings](https://us.posthog.com/project/settings)
+- By setting `autocapture: false` in the [config](/docs/libraries/js/config)
 
 ```js-web
-posthog.set_config({ capture_pageview: false })
+// Before initialization
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    autocapture: false,
+})
+
+// Or after initialization
+posthog.set_config({ autocapture: false })
 ```
 
-## Capturing additional properties in autocapture events
+> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
+>
+> Disabling autocapture does not disable capture of page views or page leaves. See [navigation autocapture](#navigation-autocapture) for more information.
+
+#### Capturing additional properties in autocapture events
 
 If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events. 
-
-### Get the value of an element
 
 As an example, say you have a notification bell with a value like this:
 
@@ -101,7 +155,7 @@ You can include the unread count in the autocapture event by adding the `data-ph
 
 The autocapture event for clicks on the bell will include the unread count as an `unread-notifications-count` property.
 
-### Tracking metadata
+#### Tracking metadata
 
 You can also attach metadata to autocapture events by adding data attributes to the element that triggers the event. This helps you track something like a customer performing a transaction (adding an item to a cart or completing a purchase).
 
@@ -128,7 +182,7 @@ properties: {
 }
 ```
 
-## Sending custom properties with autocaptured form submissions
+#### Sending custom properties with autocaptured form submissions
 
 To prevent accidental sensitive data capture, we do not automatically capture form values from form submissions. To add custom properties to form submissions, you can use the `data-ph-capture-attribute` attribute on the form element.
 
@@ -161,24 +215,338 @@ const MyForm = () => {
 }
 ```
 
-## Autocaptured events
+#### Rage clicks autocapture
 
-Autocaptured events include:
+A rage click is when a user clicks a button multiple times in quick succession, specifically more than 3 clicks in 1 second.
 
-- `$autocapture`: Clicks, taps, inputs, typing, form submissions, and more.
-- `$pageview`: Triggers on page load. You might need to manually capture these in single-page apps like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views).
-- `$pageleave`: Triggers on `onpagehide` when a user navigates away from a page.
-- `$rageclick`: A second click within 1000ms within 30px of the first click.
-- `$screen`: When a user navigates on a mobile app.
-- Application lifecycle events like `Application Opened`, `Application Became Active`, `Application Backgrounded`, `Application Installed`, and `Application Updated` for mobile SDKs like [React Native](/docs/libraries/react-native#autocapture).
+The event is captured as a `$rageclick` event. You can use this event to identify opportunities to improve your UI, as it shows where users are frustrated with your product.
 
-> **Note:** Since pageview autocapture relies on the browser page load events, it captures the initial pageview but not subsequent ones. You might need to implement your own pageview capture using custom events. See our guides for doing this in [Next.js](/docs/libraries/next-js#client-side-setup), [React](/tutorials/single-page-app-pageviews), [Vue](/docs/libraries/vue-js#capturing-pageviews), and [Angular](/docs/libraries/angular#tracking-pageviews).
+</Tab.Panel>
+<Tab.Panel>
 
-## Autocaptured properties
+### iOS interaction autocapture
 
-Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo.
+The PostHog [iOS SDK](/docs/libraries/ios) captures the following events by default:
 
-You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts), but the most important ones include:
+- User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll`
+- Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`
+
+Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
+
+> 🚧 **Note:** Interaction autocapture is currently supported only in UIKit.
+
+#### Configuring interaction autocapture
+
+Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
+
+```swift
+let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+
+config.captureElementInteractions = true // Disabled by default
+
+PostHogSDK.shared.setup(config)
+```
+
+You can find more details about how to configure autocapture in the [iOS SDK docs](/docs/libraries/ios#autocapture-configuration).
+
+#### Preventing sensitive data capture
+
+To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
+
+```swift
+// This view is excluded from autocapture
+let view = UIView()
+view.accessibilityLabel = "ph-no-capture"
+```
+
+> **Note:** By default, PostHog will make a best effort to automatically exclude fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
+
+For more details on how to setup masking for session replay, please refer to our [privacy controls documentation](/docs/session-replay/privacy?tab=iOS).
+
+
+</Tab.Panel>
+<Tab.Panel>
+
+### React Native interaction autocapture
+
+The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen. To enable this, set the `captureTouches` config option to true in your autocapture config like this:
+
+```jsx
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    captureTouches: true,
+}}>
+    ...
+</PostHogProvider>
+
+Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...`.
+
+#### Configuring interaction autocapture
+
+You can configure the following options:
+
+| Option | Description |
+|--------|-------------|
+| `captureTouches` | **Type:** `boolean`. When set to `true`, autocapture will capture touch events. |
+| `ignoreLabels` | **Type:** `string[]`. List of labels to ignore from the stack in touch events. |
+| `customLabelProp` | **Type:** `string`. Default: `ph-label`. If you set a custom label prop such as `<View ph-label="product-card">`, the UI element will display as `product-card` instead of a generic `View`. |
+| `maxElementsCaptured` | **Type:** `number`. The maximum number of elements to capture in the component hierarchy. |
+| `noCaptureProp` | **Type:** `string`. Default: `ph-no-capture`. The prop to use for no capture. For example, if set to `data-no-tracking` the component `<Button data-no-tracking>This won't be tracked</Button>` will be ignored. |
+| `propsToCapture` | **Type:** `string[]`. List of props to capture from the component hierarchy. By default, identifiers and text content are captured. |
+
+```jsx
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    captureTouches: true,
+    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
+    customLabelProp: "ph-label",
+    maxElementsCaptured: 20,
+    noCaptureProp: "ph-no-capture",
+    propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
+}}>
+    ...
+</PostHogProvider>
+```
+
+
+#### Preventing sensitive data capture
+
+To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` (or your custom `noCaptureProp`) as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
+
+```jsx
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    captureTouches: true,
+    noCaptureProp: "ph-no-capture", // Optionally, you can use a custom prop like "data-no-capture"
+    // ...
+}}>
+    ...
+</PostHogProvider>
+
+// This view will be excluded from autocapture
+<View ph-no-capture>
+    ...
+</View>
+```
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+---
+
+## Navigation and lifecycle event autocapture
+
+<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>iOS</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+### Web navigation autocapture
+
+PostHog automatically captures navigation events as `$pageview` and `$pageleave` events. 
+
+#### Configuring page navigation autocapture
+
+You can configure the following options:
+
+| Option | Description |
+|--------|-------------|
+| `capture_pageview` | **Type:** `boolean`, `'history_change'` (default). When set to `history_change`, autocapture will capture pageviews. This also works on single-page apps. |
+| `capturePageleaves` | **Type:** `boolean`, `'if_capture_pageview'` (default). When set to `true`, autocapture will capture pageleaves. If set to `'if_capture_pageview'`, it only captures pageleaves if `capturePageviews` is also set to `true` or `'history_change'`. |
+
+For example, your initialization code might look like this:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    capture_pageview: 'history_change',
+    capture_pageleave: 'if_capture_pageview'
+})
+```
+
+#### Disabling page navigation autocapture
+
+You can disable `$pageview` and `$pageleave` autocapture in two ways:
+- In your [project settings](https://us.posthog.com/project/settings)
+- By setting `capturePageviews: false` and `capture_pageleave: false` in the [config](/docs/libraries/js/config)
+
+For example:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    capture_pageview: false,
+    capture capture_pageleave ageleaves: false,
+})
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+### iOS navigation and lifecycle autocapture
+
+PostHog can automatically captures navigation and lifecycle events as the user navigates in the app and when the app is launched, updated, or backgrounded.
+
+PostHog captures the following events:
+
+| Event Name | Description |
+|------------|-------------|
+| `$screen` | Screen view changes, with screen name as property |
+| `Application Installed` | First app launch |
+| `Application Updated` | App version updates |
+| `Application Opened` | App becomes active/foreground |
+| `Application Backgrounded` | App moves to background |
+
+
+#### Configuring screen navigation autocapture
+
+Screen navigation autocapture is not enabled by default. You can enable it by setting `captureScreenViews` to `true` in the config.
+
+| Option | Description |
+|--------|-------------|
+| `captureScreenViews` | **Type:** `boolean`. When set to `true`, autocapture will capture screen views. |
+| `captureApplicationLifecycleEvents` | **Type:** `boolean`. When set to `true`, autocapture will capture application lifecycle events. |
+
+For example, your initialization code might look like this:
+
+```swift
+let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+
+config.captureElementInteractions = true // Disabled by default
+config.captureApplicationLifecycleEvents = true // Disabled by default
+
+PostHogSDK.shared.setup(config)
+```
+
+
+</Tab.Panel>
+<Tab.Panel>
+
+### React Native navigation and lifecycle autocapture
+
+PostHog can automatically captures navigation and lifecycle events as the user navigates in the app and when the app is launched, updated, or backgrounded.
+
+#### Configuring screen navigation autocapture
+
+Screen navigation autocapture is **not enabled by default**. You can enable it by setting `captureScreens` to `true` in the config. When enable, PostHog autocaptures events like:
+
+| `$screen` | When the user navigates. If using `@react-navigation/native` (v6 or lower) or `react-native-navigation`. See [React Native docs](/docs/libraries/react-native#capturing-screen-views) for config options. |
+| `Application Installed` | When app is first installed |
+| `Application Updated` | When app is updated to new version |
+| `Application Opened` | When app is opened from cold start |
+| `Application Became Active` | When app becomes active from background |
+| `Application Backgrounded` | When app goes to background |
+
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+---
+
+## Clipboard autocapture
+
+> **Note:** This is only available for the JavaScript web SDK and framework libraries for web like React and Next.js.
+
+When enabled with `capture_copied_text` set to true, we capture the copied or cut text as a **Clipboard autocapture** event. You can then use the `$selected_content` property in analysis or use the [activity page](/docs/activity) to view the copied content in context.
+
+<ProductScreenshot
+  imageLight={ImgClipboardAuocaptureLight} 
+  imageDark={ImgClipboardAuocaptureDark} 
+  alt="The activity view showing the copied content highlighted in context" 
+  classes="rounded"
+/>
+
+Clipboard autocapture respects other privacy settings. For example, won't capture content from a password field.
+
+> **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.import { useSelector } from 'react-redux'
+
+
+## Heatmap autocapture
+
+> **Note:** This is only available for the JavaScript web SDK and framework libraries for web like React and Next.js.
+
+If you use our JavaScript libraries and enable heatmap autocapture in your [project settings](https://app.posthog.com/settings/project-autocapture#heatmaps), we can capture general clicks, mouse movements, and scrolling to create [heatmaps](/docs/toolbar/heatmaps). No additional events are created.
+
+Whereas autocapture creates events whenever it can uniquely identify an interacted element, heatmaps are generated based on overall mouse or touch positions and are useful for understanding more general user behavior across your site.
+
+
+## Dead clicks autocapture
+
+A dead click (or slow click) is a click which isn't followed by a change to the page. 
+
+Dead clicks are a great way to identify opportunities to improve your UI, showing you where your users expect to be able to interact with the page but cannot.
+
+You can collect dead clicks with the Web SDK by enabling them in [your project settings](https://app.posthog.com/settings/project-autocapture#dead-clicks-autocapture). 
+
+Or by setting your config:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    capture_dead_clicks: true,
+    // any other config
+})
+```
+
+> **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
+
+
+## Analyzing autocaptured events and properties
+
+Autocapture events and properties can be used like any other [event type](/docs/data/events). You can use them in trends, funnels, cohorts, surveys, and more. Beyond this, they come with some special features:
+
+- When using the autocapture event series, you can filter by the autocaptured element's tag name, text, `href` target, and/or CSS selector.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/auto_light_b669bff067.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/auto_dark_c52206511f.png"
+  alt="Trends using autocapture properties" 
+  classes="rounded"
+/>
+
+- Autocapture events can be organized and renamed using [actions](/docs/data/actions).
+
+- You can query autocapture `elements_chain` using [SQL](/tutorials/hogql-autocapture).
+
+### Common autocapture filtering patterns
+
+#### Searching for autocapture events by text
+
+For UI interactions, you may see autocaptured events such as `clicked span with text "Delete"`. You can filter these events by the UI text by using the **Element text** property.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/element_text_light_6cadb0a9a9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/element_text_dark_99c0ae37a5.png"
+  alt="Element text property" 
+  classes="rounded"
+/>
+
+#### Filter by interaction type
+
+Autocaptured events have a more specific event type. For example, you can filter for all clicks by filtering for **Autocapture** events with the **Event type** property set to `click`. Check the [interaction autocapture](#interaction-autocapture) docs for more information on the different interaction types.
+
+#### Filter for interactions with specific elements
+
+Autocaptured events can also be filtered by its CSS selector. For example, you can filter for all interactions with a specific element by filtering for the **CSS selector** property as `#my-element` or `.button--submit`.
+
+### Captured properties
+
+<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>iOS</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://app.posthog.com/data-management/properties) or in [the references](/docs/references/posthog-js/types/Properties).
 
 | Name                        | Key                      | Example value                  |
 |-----------------------------|--------------------------|--------------------------------|
@@ -197,7 +565,6 @@ You can see a full list in [PostHog](https://us.posthog.com/data-management/prop
 | Viewport Width              | `$viewport_width`        | `1903`                         |
 | Library                     | `$lib`                   | `web`                          |
 | Library Version             | `$lib_version`           | `1.31.0`                       |
-| Search Engine               | `$search_engine`         | `google`                       |
 | Referrer URL                | `$referrer`              | `https://google.com`           |
 | Referring Domain            | `$referring_domain`      | `www.google.com`               |
 | Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
@@ -220,80 +587,85 @@ You can see a full list in [PostHog](https://us.posthog.com/data-management/prop
 | Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
 | Instagram Share Id          | `$igshid`                | `testIgshid123`                |
 | TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
-| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
-| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
-| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
 | IP Address                  | `$ip`                    | `192.168.1.1`                  |
 
-> **Notes:**
-> - If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties.
-> - Many of these are also captured as [session properties](/docs/data/sessions).
-> - Mobile libraries capture additional properties like `$app_build`, `$app_name`, `$app_namespace`, and `$app_version`.
-> - These properties can be hidden in activity by checking the "Hide PostHog properties" box.
+#### Notes:
+- If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties at ingestion.
+- Many of these are also captured as [session properties](/docs/data/sessions).
+- These properties can be hidden in activity by checking the **Hide PostHog properties** box.
 
-## Analyzing autocaptured events and properties
+</Tab.Panel>
+<Tab.Panel>
 
-Autocapture events and properties can be used like any other [event type](/docs/data/events). You can use them in trends, funnels, cohorts, surveys, and more. Beyond this, they come with some special features:
+On autocaptured iOS events, you can find the following properties (on top of the default event properties):
 
-- When using the autocapture event series, you can filter by the autocaptured element's tag name, text, `href` target, and/or CSS selector.
+| Property | Description |
+|----------|-------------|
+| `description` | Type of user interaction |
+| `text` | Element text/value (sanitized) |
+| `screen_name` | Current view controller name |
+| `elements_chain` | View hierarchy from target to root |
 
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/auto_light_b669bff067.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/auto_dark_c52206511f.png"
-  alt="Trends using autocapture properties" 
-  classes="rounded"
-/>
+Where `description` is one of the following types of user interaction:
 
-- Autocapture events can be organized and renamed using [actions](/docs/data/actions).
+| Description | When Captured |
+|-------------|---------------|
+| `"touch"` | Tap gestures on views |
+| `"swipe"` | Swipe gestures |
+| `"pan"` | Pan/drag gestures |
+| `"pinch"` | Pinch to zoom |
+| `"rotation"` | Rotation gestures |
+| `"long_press"` | Long press gestures |
+| `"scroll"` | Scroll view changes |
+| `"value_changed"` | Control value changes |
+| `"submit"` | Form submission |
+| `"toggle"` | Switch/checkbox changes |
+| `"primary_action"` | Main control actions |
+| `"menu_action"` | Menu actions |
+| `"change"` | General editing changes |
 
-- You can query autocapture `elements_chain` using [SQL](/tutorials/hogql-autocapture).
+Where `elements_chain` is a list of elements from the target to the root of the view hierarchy.
 
+| Element Type | Format |
+|--------------|--------|
+| **With Text** | `"ClassName:text=\"value\""` |
+| **With Base Class** | `"ClassName:attr__class=\"baseClass\""` |
+| **With Label** | `"ClassName:attr_id=\"label\""` |
+| **Plain** | `"ClassName"` |
 
-## Clipboard autocapture
+Where rules are:
 
-You can configure `posthog-js` to autocapture information that users copy or cut on your page with the `capture_copied_text` config option.
+| Rule | Description |
+|------|-------------|
+| **Length Limit** | Maximum 255 characters |
+| **Whitespace** | Multiple spaces/line breaks → single space |
+| **Unicode** | Zero-width characters removed |
+| **Sensitive** | Password fields automatically excluded |
 
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
-    autocapture: {
-        capture_copied_text: true,
-        // any other autocapture config
-    },
-})
-```
+Where `text` is the text of the element.
 
-We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis or use the [activity page](/docs/activity) to view the copied content in context.
+| Control Type | Debounce Interval |
+|--------------|------------------|
+| **UISlider** | 0.3 seconds |
+| **UISwitch** | 0.4 seconds |
+| **UIPickerView** | 0.0 seconds |
+| **UIScrollView** | 0.0 seconds |
+| **Text Fields** | 0.0 seconds |
 
-<ProductScreenshot
-  imageLight={ImgClipboardAuocaptureLight} 
-  imageDark={ImgClipboardAuocaptureDark} 
-  alt="The activity view showing the copied content highlighted in context" 
-  classes="rounded"
-/>
+</Tab.Panel>
+<Tab.Panel>
 
-Clipboard autocapture respects other privacy settings. For example, won't capture content from a password field.
+On autocaptured React Native events, you can find the following properties (on top of the default event properties):
 
-> **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.import { useSelector } from 'react-redux'
+| Property | Description |
+|----------|-------------|
+| `description` | Type of user interaction (e.g., "touch") |
+| `text` | Element text/value (sanitized) |
+| `screen_name` | Current screen name |
+| `elements_chain` | Component hierarchy from target to root |
 
-## Dead clicks autocapture
+The `elements_chain` follows a similar format to iOS, showing the component tree structure with props and text content where available.
 
-A dead click (or slow click) is a click which isn't followed by a change to the page. 
-
-Dead clicks are a great way to identify opportunities to improve your UI, showing you where your users expect to be able to interact with the page but cannot.
-
-You can collect dead clicks with the Web SDK by enabling them in PostHog settings. 
-
-Or by setting your config:
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
-    capture_dead_clicks: true,
-    // any other config
-})
-```
-
-> **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>

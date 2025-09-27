@@ -3,7 +3,7 @@ import * as Icons from '@posthog/icons'
 
 const typeStyles = {
     action: 'bg-yellow/15 border-yellow',
-    fyi: 'bg-gray/10 border-gray',
+    fyi: 'bg-accent border-primary',
     caution: 'bg-red/15 border-red',
 }
 

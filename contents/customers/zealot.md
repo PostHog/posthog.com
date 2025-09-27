@@ -1,23 +1,8 @@
 ---
 title: Why Zealot switched to PostHog from Amplitude and BugSnag
 customer: Zealot
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/logo_zealot_light_de961d2a17.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/logo_zealot_dark_c10566a321.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/zealot_posthog_error_tracking_14fb1ab6cb.jpg
-industries:
-  - Recruitment
-users:
-  - Engineering
-  - Leadership
-  - Founder
-toolsUsed:
-  - LLM observability
-  - Session recording
-  - Error tracking
-  - Product analytics
 date: 2025-04-02
 ---
 
@@ -79,4 +64,4 @@ You can even use [Max AI](/docs/max-ai), the in-app AI agent, to search for simi
 
 “This is one of the things I love most about PostHog, that you have so many tools in one place and they all work together. It makes it a no-brainer for you to install PostHog early on and then, when you get to the point where you need a new tool or to get serious about your data — everything you need is already there.”
 
-“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/ai-engineering) is going to be there for us when we’re ready.”
+“We’re about to launch a whole suite of AI tools, for example. And it’s so great knowing that [LLM observability](/docs/llm-analytics) is going to be there for us when we’re ready.”

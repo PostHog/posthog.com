@@ -27,7 +27,7 @@ This creates a `react-charts-example` folder with everything we need to get star
 
 Assuming you have data in PostHog to query, the next step is to set up our query request to PostHog.
 
-> **Don't have data to query?** Check out [our guide to setting up analytics in Next.js](/tutorials/nextjs-app-directory-analytics) to start capturing some.
+> **Don't have data to query?** Check out [our guide to setting up analytics in Next.js](/tutorials/nextjs-analytics) to start capturing some.
 
 Start by creating a personal API key. You can do this by going to [personal API keys](https://us.posthog.com/settings/user-api-keys) in your project settings, clicking **Create personal API key**, giving it a label, choosing the **Performing analytics queries** scope (AKA query read), and clicking **Create key**.
 
@@ -80,7 +80,8 @@ export default function Home() {
       "query": {
         "kind": "HogQLQuery",
         "query": "select properties.$current_url from events where properties.$current_url != null limit 10"
-      }
+      }, 
+      "name": "get 100 blog urls"
     }
     try {
       const result = await fetchQuery(payload);
@@ -148,7 +149,8 @@ export default function Home() {
                   GROUP BY date
                   ORDER BY date DESC
                   LIMIT 20`
-      }
+      },
+      "name": "get pageviews count by date"
     }
     try {
       const result = await fetchQuery(payload);
@@ -233,7 +235,8 @@ export default function Home() {
                   GROUP BY pathname
                   ORDER BY pageview_count DESC
                   LIMIT 10`
-      }
+      },
+      "name": "pageviews count by pathname"
     }
     try {
       const result = await fetchQuery(payload);
@@ -366,7 +369,8 @@ export default function Home() {
                   GROUP BY date, browser
                   ORDER BY date DESC, pageview_count DESC
                   LIMIT 10`
-        }
+        },
+        "name": "number of pageviews by browser and date"
     }
     try {
       const result = await fetchQuery(payload);
@@ -449,6 +453,6 @@ This creates a stacked area chart like this:
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
-- [How to set up customer-facing analytics](/tutorials/customer-facing-analytics)
+- [How to set up embedded analytics](/tutorials/embedded-analytics)
 
 <NewsletterForm />

@@ -168,7 +168,7 @@ const Category = ({ onClick, value, active }) => {
         <>
             <button
                 onClick={() => onClick(value)}
-                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark w-auto ${
+                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-input w-auto ${
                     active ? 'border-inherit dark:border-inherit' : ''
                 }`}
             >
@@ -213,7 +213,7 @@ const PostHogNode = ({ data, isMobile }) => {
     return (
         <div>
             <div className="max-w-sm">
-                <div className="p-3 rounded-full bg-white border border-light dark:border-dark">
+                <div className="p-3 rounded-full bg-white border border-primary">
                     {data.icons && <img src={data.icons[0]} alt={data.label} className="size-10" />}
                 </div>
             </div>
@@ -242,7 +242,7 @@ const CustomNode = ({ data }) => (
                     return (
                         <li
                             key={icon}
-                            className="rounded-full bg-white size-8 overflow-hidden border border-light dark:border-dark inline-block even:!-ml-2 relative"
+                            className="rounded-full bg-white size-8 overflow-hidden border border-primary inline-block even:!-ml-2 relative"
                         >
                             <img src={icon} alt={data.label} className="size-full absolute inset-0" />
                         </li>
@@ -471,7 +471,7 @@ export const NotifyMe = ({ pipeline }) => {
     }, [user])
 
     return (
-        <div className="border border-border dark:border-dark rounded p-4 bg-accent dark:bg-accent-dark">
+        <div className="border border-input rounded p-4 bg-accent">
             {submitted ? (
                 <p className="!m-0">
                     Thanks for your interest! We'll notify you when <strong>{pipeline.name}</strong> is available.
@@ -486,7 +486,7 @@ export const NotifyMe = ({ pipeline }) => {
                         <input
                             type="email"
                             placeholder="Email"
-                            className="w-full border border-border dark:border-dark rounded-md p-2 max-w-sm text-primary"
+                            className="w-full border border-input rounded-md p-2 max-w-sm text-primary"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -534,7 +534,7 @@ const PipelinePreview = ({ pipeline }) => {
                 )}
             </div>
 
-            <div className="border-t border-border dark:border-dark pt-4">
+            <div className="border-t border-input pt-4">
                 {pipeline.status === 'coming_soon' ? (
                     <NotifyMe pipeline={pipeline} />
                 ) : (
@@ -554,6 +554,7 @@ function PipelinesPage({ location }) {
     const {
         destinations: { nodes },
         transformations: { nodes: transformations },
+        source_webhooks: { nodes: source_webhooks },
     } = useStaticQuery(query)
 
     const [searchValue, setSearchValue] = React.useState('')
@@ -562,7 +563,7 @@ function PipelinesPage({ location }) {
     const [selectedType, setSelectedType] = React.useState('All')
 
     const pipelines = {
-        Sources: sources,
+        Sources: [...sources, ...source_webhooks],
         Destinations: nodes,
         Transformations: transformations,
     }
@@ -575,7 +576,10 @@ function PipelinesPage({ location }) {
             (node) => selectedCategory === 'All' || node.category.includes(selectedCategory)
         )
     }, [selectedType, selectedCategory, pipelines])
-    const fuse = useMemo(() => new Fuse(nodesByCategory, { keys: ['name', 'description'] }), [nodesByCategory])
+    const fuse = useMemo(
+        () => new Fuse(nodesByCategory, { keys: ['name', 'description'], threshold: 0.3 }),
+        [nodesByCategory]
+    )
     const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
     const [selectedDestination, setSelectedDestination] = React.useState(null)
     const [modalOpen, setModalOpen] = React.useState(false)
@@ -623,6 +627,13 @@ function PipelinesPage({ location }) {
                                     className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ml-1`}
                                 >
                                     Roadmap
+                                </p>
+                            )}
+                            {source_webhooks.includes(selectedDestination) && (
+                                <p
+                                    className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50 border border-purple flex-shrink-0 ml-1`}
+                                >
+                                    Early access
                                 </p>
                             )}
                         </div>
@@ -811,6 +822,15 @@ function PipelinesPage({ location }) {
                                                                 Roadmap
                                                             </p>
                                                         )}
+                                                        {source_webhooks.includes(destination) && (
+                                                            <p
+                                                                className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs font-medium rounded px-1 m-0 !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50 border border-purple flex-shrink-0 ${
+                                                                    selectedType === 'All' ? '!ml-1' : ''
+                                                                }`}
+                                                            >
+                                                                Early access
+                                                            </p>
+                                                        )}
                                                     </div>
                                                     <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
                                                         {description}
@@ -917,6 +937,31 @@ const query = graphql`
             }
         }
         transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
+                    required
+                    description
+                }
+                status
+            }
+        }
+        source_webhooks: allPostHogPipeline(filter: { type: { eq: "source_webhook" } }) {
             nodes {
                 id
                 slug

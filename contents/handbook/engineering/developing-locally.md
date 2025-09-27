@@ -57,9 +57,13 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `uv sync`
-7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
-8. Open browser to http://localhost:8010/.
-9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+    - If this doesn't activate your python virtual environment, run `uv venv`
+7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
+8. Now run `DEBUG=1 ./bin/migrate`
+9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
+10. Run `./bin/start`.
+11. Open browser to http://localhost:8010/.
+12. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -140,11 +144,12 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
-You can do this in one line with:
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` and line `::1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
+You can do this with:
 
 ```bash
 echo '127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
+echo '::1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
@@ -553,6 +558,12 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
+## Extra: Use tracing with Jaeger
+
+Jaeger is enabled by default after running `./bin/start`.
+
+Jaeger will be available at [http://localhost:16686](http://localhost:16686).
+
 #### Production usage
 
 We send our PostHog Cloud emails via Customer.io using their HTTP API. If Customer.io is not configured but SMTP is, it will fall back to SMTP. We do this so we can continue to support SMTP emails for self-hosted instances.
@@ -593,72 +604,8 @@ When creating a new email, there are a few steps to take. It's important to add 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
-In PostHog you'll want to add the Stripe public key so it can load on the client. To do so, go to 1Password and find "Local PostHog environment variables". Take that value and put it into a `.env` file at the root of your PostHog repo locally. If your server is already running, you'll want to restart it.
+## Extra: Working with the data warehouse
 
-## Extra: Working with the data warehouse and a MySQL source
-
-If you want to set up a local MySQL database as a source for the data warehouse, there are a few extra set up steps you'll need to complete:
-1. Setting up a local MySQL database to connect to.
-2. Installing MS SQL drivers on your machine.
-3. Defining additional environment variables for the Temporal task runner.
-
-First, install MySQL:
-
-```bash
-brew install mysql
-brew services start mysql
-```
-
-Once MySQL is installed, create a database and table, insert a row, and create a user who can connect to it:
-
-```bash
-mysql -u root
-```
-```sql
-CREATE DATABASE posthog_dw_test;
-CREATE TABLE IF NOT EXISTS payments (id INT AUTO_INCREMENT PRIMARY KEY, timestamp DATETIME, distinct_id VARCHAR(255), amount DECIMAL(10,2));
-INSERT INTO payments (timestamp, distinct_id, amount) VALUES (NOW(), 'testuser@example.com', 99.99);
-CREATE USER 'posthog'@'%' IDENTIFIED BY 'posthog';
-GRANT ALL PRIVILEGES ON posthog_dw_test.* TO 'posthog'@'%';
-FLUSH PRIVILEGES;
-```
-
-Next, you'll need to install some MS SQL drivers for PostHog the application to connect to the MySQL database. Learn the entire process in [posthog/warehouse/README.md](https://github.com/PostHog/posthog/blob/master/posthog/warehouse/README.md). Without the drivers, you'll get the following error when connecting a SQL database to data warehouse:
-
-```
-symbol not found in flat namespace '_bcp_batch'
-```
-
-Lastly, you'll need to define these environment variables in order for the Temporal task runner monitor the correct queue and work as expected:
-
-```
-# Ask for the values in #team-data-warehouse
-export PYTHONUNBUFFERED=
-export DJANGO_SETTINGS_MODULE=
-export DEBUG=
-export CLICKHOUSE_SECURE=
-export KAFKA_HOSTS=
-export DATABASE_URL=
-export SKIP_SERVICE_VERSION_REQUIREMENTS=
-export PRINT_SQL=
-export BUCKET_URL=
-export AIRBYTE_BUCKET_KEY=
-export AIRBYTE_BUCKET_SECRET=
-export AIRBYTE_BUCKET_REGION=
-export AIRBYTE_BUCKET_DOMAIN=
-export TEMPORAL_TASK_QUEUE=
-export AWS_S3_ALLOW_UNSAFE_RENAME=
-export HUBSPOT_APP_CLIENT_ID=
-export HUBSPOT_APP_CLIENT_SECRET=
-```
-
-If you put them in a `.temporal-worker-settings` file, you can run `source .temporal-worker-settings` before you call `DEBUG=1 ./bin/start`.
-
-To verify everything is working as expected:
-1. Navigate to "Data pipeline" in the PostHog application.
-2. Create a new MySQL source using the settings above.
-3. Once the source is created, click on the "MySQL" item. In the schemas table, click on the triple dot menu and select the "Reload" option.
-
-After the job runs, clicking on the synced table name should take you to your data.
+[See here for working with data warehouse](/handbook/engineering/data-warehouse)

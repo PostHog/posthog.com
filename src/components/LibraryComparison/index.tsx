@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
+import OverflowContainer from '../OverflowContainer'
 
 type LibraryNode = {
     fields: {
@@ -21,7 +22,7 @@ type LibraryFeatures = {
     sessionRecording?: boolean
     userIdentification: boolean
     surveys?: boolean
-    llmObservability?: boolean
+    llmAnalytics?: boolean
     errorTracking?: boolean
 }
 
@@ -54,6 +55,7 @@ export const LibraryComparison = () => {
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                    errorTracking
                 }
             }
         }
@@ -78,6 +80,7 @@ export const LibraryComparison = () => {
                         <th>Session recording</th>
                         <th>Feature flags</th>
                         <th>Group analytics</th>
+                        <th>Error tracking</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +97,7 @@ export const LibraryComparison = () => {
                                 <td>{renderAvailability(lib.frontmatter.features?.sessionRecording)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
+                                <td>{renderAvailability(lib.frontmatter.features?.errorTracking)}</td>
                             </tr>
                         ))}
                 </tbody>

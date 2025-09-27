@@ -1,24 +1,8 @@
 ---
 title: 'How Mintlify launched user-facing analytics, powered by PostHog'
 customer: Mintlify
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo.svg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/mintlify/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/mintlify_posthog_f60afa6a38.png
-industries:
-  - 'SaaS, DevTool'
-users:
-  - Leadership
-  - Engineering
-  - Product
-  - Users
-toolsUsed:
-  - Session replay
-  - Autocapture
-  - PostHog Cloud
-  - API
 date: 2023-04-06
 ---
 
@@ -57,8 +41,8 @@ Adding session replay increased the scope, but just three days later Mintlify ha
 
 Best of all, because all data is already tracked in Mintlify’s own PostHog instance, there’s no need for setting up additional projects or reports — all user-facing data is simply segmented and pulled out of Mintlify’s existing instance. 
 
-Mintlify is also tracking engagement with its [user-facing analytics](/tutorials/customer-facing-analytics) in PostHog which, in turn, powers the user-facing analytics Mintlify has built. It’s a self-reinforcing product improvement loop!
+Mintlify is also tracking engagement with its [embedded analytics](/tutorials/embedded-analytics) in PostHog which, in turn, powers the user-facing analytics Mintlify has built. It’s a self-reinforcing product improvement loop!
 
 “This is still only version 0.01,” says Han. “We have a lot more data points we want to add. What is the feedback ratio? Are people voting pages up or down? How many users scroll to the bottom of the page? These are all great things we’re tracking internally, we just need to build them out. But I’ve been amazed at how easy it is to build on top of PostHog in this way.”
 
-> Ready to try this yourself? Follow our [tutorial about setting up user-facing analytics with PostHog, Next.js and Tremor](/tutorials/customer-facing-analytics)!
+> Ready to try this yourself? Follow our [tutorial about setting up embedded analytics with PostHog, Next.js and Recharts](/tutorials/embedded-analytics)!

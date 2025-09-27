@@ -13,7 +13,7 @@ export default function TutorialsSlider({ topic, slugs }: { topic?: string; slug
     })
 
     return (
-        <ul className="list-none m-0 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+        <ul className="">
             {tutorials.map(({ id, frontmatter: { title, featuredImage }, fields: { slug } }) => {
                 return <ResourceItem key={id} title={title} url={slug} gatsbyImage={featuredImage} />
             })}

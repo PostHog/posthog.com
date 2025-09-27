@@ -16,7 +16,7 @@ const FeatureItem = ({ name, description, size }: { name: string; description: s
             <p
                 className={`$${
                     size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
-                } text-primary/75 dark:text-primary-dark/75 mb-0`}
+                } text-secondary mb-0`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>
@@ -58,12 +58,12 @@ const PlatformAddons = (): JSX.Element => {
             <section className="xl:w-11/12 mx-auto px-4 md:px-8 2xl:px-12 py-8 relative">
                 <div className="flex flex-col-reverse md:flex-row gap-4">
                     <div className="flex-1">
-                        <h1 className="text-4xl xl:text-5xl mb-2">Platform add-ons</h1>
+                        <h1 className="text-4xl xl:text-5xl mb-2">Platform packages</h1>
                         <p className="text-[17px] 2xl:text-lg font-semibold opacity-75">
-                            Our platform add-ons are designed to help you manage your teams securely and efficiently on
+                            Our platform packages are designed to help you manage your teams securely and efficiently on
                             PostHog as you grow.
                         </p>
-                        <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
+                        <div className="max-w-sm rounded border border-primary bg-accent p-4">
                             <div className="font-semibold opacity-70 mb-1">Jump to:</div>
                             <ol className="pl-6">
                                 {platformAddons.map((addon: any) => (
@@ -113,16 +113,16 @@ const PlatformAddons = (): JSX.Element => {
 
                 {showComparison && (
                     <div className="overflow-x-auto my-6">
-                        <table className="min-w-full border border-light dark:border-dark bg-white dark:bg-accent-dark text-sm">
+                        <table className="min-w-full border border-primary bg-white dark:bg-accent-dark text-sm">
                             <thead>
                                 <tr>
-                                    <th className="border border-light dark:border-dark px-3 py-2 text-left bg-accent/50 dark:bg-black/75 font-semibold text-primary/75 dark:text-primary-dark/75">
+                                    <th className="border border-primary px-3 py-2 text-left bg-accent font-semibold text-secondary">
                                         Feature
                                     </th>
                                     {platformAddons.map((addon: any) => (
                                         <th
                                             key={addon.name}
-                                            className="border border-light dark:border-dark px-3 py-2 bg-accent/50 dark:bg-black/75 font-semibold text-primary/75 dark:text-primary-dark/75 text-center min-w-[160px]"
+                                            className="border border-primary px-3 py-2 bg-accent font-semibold text-secondary text-center min-w-[160px]"
                                         >
                                             {addon.name}
                                         </th>
@@ -131,11 +131,8 @@ const PlatformAddons = (): JSX.Element => {
                             </thead>
                             <tbody>
                                 {allFeatureNames.map((featureName: string, rowIdx: number) => (
-                                    <tr
-                                        key={featureName}
-                                        className={rowIdx % 2 === 0 ? 'bg-accent/20 dark:bg-black/10' : ''}
-                                    >
-                                        <td className="border border-light dark:border-dark px-3 py-2 font-semibold text-primary/75 dark:text-primary-dark/75 text-left align-middle">
+                                    <tr key={featureName} className={rowIdx % 2 === 0 ? 'bg-accent' : ''}>
+                                        <td className="border border-primary px-3 py-2 font-semibold text-secondary text-left align-middle">
                                             {featureName}
                                         </td>
                                         {platformAddons.map((addon: any) => {
@@ -145,7 +142,7 @@ const PlatformAddons = (): JSX.Element => {
                                             return (
                                                 <td
                                                     key={addon.name}
-                                                    className="border border-light dark:border-dark px-3 py-2 text-center align-middle min-w-[160px]"
+                                                    className="border border-primary px-3 py-2 text-center align-middle min-w-[160px]"
                                                 >
                                                     {feature ? (
                                                         <div className="flex flex-col items-center justify-center min-h-[24px] gap-y-1">
@@ -184,7 +181,7 @@ const PlatformAddons = (): JSX.Element => {
                             className="grid md:grid-cols-12 gap-x-12 gap-y-4 mt-12"
                             id={name.toLowerCase().replace(/\s+/g, '-')}
                         >
-                            <div className="md:col-span-12 border-b border-light dark:border-dark pb-2">
+                            <div className="md:col-span-12 border-b border-primary pb-2">
                                 <h2 className="mb-1">{name}</h2>
                             </div>
                             <div className="md:col-span-4 md:sticky top-[120px] self-start">
@@ -232,7 +229,7 @@ const PlatformAddons = (): JSX.Element => {
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">
                                         <h5 className="mb-2 text-lg">Pricing breakdown</h5>
-                                        <div className="border border-light dark:border-dark rounded divide-y divide-light dark:divide-dark bg-accent/50 dark:bg-accent-dark">
+                                        <div className="border border-primary rounded divide-y divide-primary bg-accent">
                                             <PricingTiers plans={plans} type={type} unit={unit} test />
                                         </div>
                                     </div>
@@ -241,7 +238,7 @@ const PlatformAddons = (): JSX.Element => {
                         </div>
                     )
                 })}
-                <div className="my-12 border-t border-light dark:border-dark pt-6 flex flex-col items-center">
+                <div className="my-12 border-t border-primary pt-6 flex flex-col items-center">
                     <p>Subscribe to add-ons after signing up.</p>
 
                     <CallToAction

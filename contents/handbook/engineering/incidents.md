@@ -6,6 +6,8 @@ showTitle: true
 
 Incidents are going to happen.
 
+If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+
 ## When to raise an incident
 
 > **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
@@ -43,6 +45,8 @@ Some examples of security-related issues that warrant raising an incident includ
 - Receiving a credible report of a vulnerability or exploit affecting company systems
 
 **When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
+
+> **Need to make a security advisory?** We have a page for that with [more detail on the process for security vulnerabilities](/handbook/company/security-advisories). 
 
 ### Incident severity
 

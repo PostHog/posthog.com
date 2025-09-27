@@ -27,8 +27,10 @@ static/fonts/MatterSQItalicVF.woff2
 static/fonts/MatterSQVF.woff
 static/fonts/MatterSQVF.woff2
 yarn.lock
-src/components/Layout/Fonts.scss
 .vercel
 .env
 *Type.ts
 .env.development
+
+# Generated data files
+src/data/mcp-tools.json

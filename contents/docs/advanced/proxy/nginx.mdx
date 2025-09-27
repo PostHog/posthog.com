@@ -6,12 +6,14 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
   1. <ProxyWarning />
   2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
 
 </CalloutBox>
 
@@ -22,10 +24,9 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-Next, create the `nginx.conf` file with the reverse proxy configuration. The following checks the `Referer` header to ensure the request is coming from your domain (set as `hogbook.com` in this case), then proxies the request to PostHog Cloud US. Change `us` to `eu` to proxy to our EU Cloud.
+Next, create the `nginx.conf` file with the reverse proxy configuration. Change `us` to `eu` to proxy to our EU Cloud.
 
 ```nginx.conf
-# The main context
 events {
     worker_connections 1024;
 }
@@ -38,32 +39,31 @@ http {
 
         # Specify DNS resolver for variables, this is Google Public DNS
         # You should adjust this to a DNS resolver of your choice
-        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::]:8888 [2001:4860:4860::]:8844 valid=300s;
-        resolver_timeout 5s;  # Timeout for DNS resolution
+        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::8888] [2001:4860:4860::8844] valid=300s;
+        resolver_timeout 5s;
 
-        # Check Referer header
-        # Change hogbook to your domain as needed to ensure requests only come from your domain
-        set $valid_referer 0;
-        if ($http_referer ~* "^https?://(localhost|([a-zA-Z0-9-]+)\.hogbook\.com)") {
-            set $valid_referer 1;
-        }
+        proxy_http_version 1.1;
+        proxy_ssl_server_name on;
 
-        if ($valid_referer = 0) {
-            return 403;  # Return forbidden if the Referer header is invalid
-        }
-
+        set $posthog_main_host "us.i.posthog.com"; # Change to "eu.i.posthog.com" for EU
+        set $posthog_assets_host "us-assets.i.posthog.com"; # Change to "eu-assets.i.posthog.com" for EU
+    
         location ~ ^/static/(.*)$ {
-            set $posthog_static "https://us-assets.i.posthog.com/static/";
-            # use variable to force proper DNS re-resolution, also must manually pass along path
-            proxy_pass $posthog_static$1$is_args$args;
-            proxy_set_header Host "us-assets.i.posthog.com";
-        }
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
 
-        location ~ ^/(.*)$ {
-            set $posthog_main "https://us.i.posthog.com/";
-            # use variable to force proper DNS re-resolution, also must manually pass along path
-            proxy_pass $posthog_main$1$is_args$args;
-            proxy_set_header Host "us.i.posthog.com";
+            proxy_pass https://$posthog_assets_host/static/$1$is_args$args;
+            proxy_set_header Host $posthog_assets_host;
+        }
+    
+        location / {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            proxy_pass https://$posthog_main_host/$1$is_args$args;
+            proxy_set_header Host $posthog_main_host;
         }
     }
 }

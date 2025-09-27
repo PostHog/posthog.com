@@ -153,6 +153,9 @@ Due to the the nature of how our infrastructure works, events and properties can
 
 > If they need to remove data immediately, the only way to do this is the delete the project.  There are no other alternatives.
 
+#### Handling sales leads
+
+If a support ticket should be handled by one of the sales/onboarding teams, use the `Create a lead` macro in Zendesk to respond to the customer. The macro adds the `sf-lead` tag to the ticket, which will automatically create a new lead in Salesforce. This automation is documented in the [Sales area of the handbook](/handbook/growth/sales/crm#zendesk-integration).
 
 ## Community
 

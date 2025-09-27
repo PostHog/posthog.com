@@ -26,7 +26,7 @@ showTitle: true
 
 Like many things at PostHog, this handbook has scrappy origins.
 
-[Tim](/tim) and [James](/james) were planning on launching on [HackerNews](https://news.ycombinator.com/), and wanted to look as mature as possible. We felt that few people would want to use a flaky new startup's product seriously. So we asked ourselves: how do we signal that we're mature? 
+[Tim](/tim) and [James](/james) were planning on launching on [Hacker News](https://news.ycombinator.com/), and wanted to look as mature as possible. We felt that few people would want to use a flaky new startup's product seriously. So we asked ourselves: how do we signal that we're mature? 
 
 We looked around at some big, boring companies and realized they all had huge footer sections on their websites with lots of links! How do we produce a lot of content to add to our footer when the product, at that time, was so simple? The answer: we should write up how we want to work.
 
@@ -112,7 +112,7 @@ We hired two Customer Success experts dealing with all inbound requests. We hire
 
 We had a fantastic year. While the tech market crashed, we grew 6x and reached millions in revenue, with a sub-two-month CAC payback period. We set $10m ARR as our next goal, with a gross margin of 70% – both of which should mean we've got all the metrics needed for the next fundraise.
 
-We optimized revenue growth by implementing a product-led CRM for our [customer success team](/teams/sales-cs), adding to our [content team](/teams/content) size, and creating a two-person [growth engineering](/teams/growth) team. These teams all make a big difference!
+We optimized revenue growth by implementing a product-led CRM for our [customer success team](/teams/sales-cs), adding to our [content team](/teams/content) size, and creating a two-person growth engineering team. These teams all make a big difference!
 
 We deepened all of our product areas significantly – we frequently win deals as a standalone session recording, feature flagging or [experimentation](/experiments) tool. Session recording usage started to match product analytics usage.
 

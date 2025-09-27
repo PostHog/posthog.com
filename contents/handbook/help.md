@@ -37,9 +37,9 @@ If you've just joined us, there's a lot you probably don't know. That's okay! Ho
   - We expect you to read the docs
   - If it takes you more than 10 mins to figure it out, then ask someone internally.
 
-You can also try self-serving an answer in our <PrivateLink href="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max Slack channel</PrivateLink>. It's trained on our handbook and documentation, so it's capable of answering both questions about internal processes and procedures, as well as product-related questions.
+You can also try self-serving an answer in our <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max Slack channel</PrivateLink>. It's trained on our handbook and documentation, so it's capable of answering both questions about internal processes and procedures, as well as product-related questions.
 
-If you don't get the context you're looking for, try <PrivateLink href="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> where team members are willing to point you in the right direction. Take a moment to explain how you've tried to help yourself and linking to resources. That saves others valuable time searching the docs again, or typing up a suggestion to do just that.
+If you don't get the context you're looking for, try <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> where team members are willing to point you in the right direction. Take a moment to explain how you've tried to help yourself and linking to resources. That saves others valuable time searching the docs again, or typing up a suggestion to do just that.
 
 ## Don't expect perfection
 

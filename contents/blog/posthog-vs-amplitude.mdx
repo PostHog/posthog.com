@@ -2,14 +2,17 @@
 title: 'In-depth: PostHog vs Amplitude'
 date: 2024-09-10
 author:
-  - andy-vandervell
+    - andy-vandervell
 rootpage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/amplitude.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/amplitude.jpeg
 featuredImageType: full
 category: General
 tags:
   - Comparisons
+seo:
+  metaTitle: PostHog vs Amplitude in-depth tool comparison
+  metaDescription: Looking for the best product analytics platform? Compare PostHog vs Amplitude on analytics, feature flags, A/B testing, pricing, and more to find the right fit.
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -22,12 +25,12 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 What does this mean?
 
-- It means our pricing is 100% transparent. 
-- It means engineers make product decisions.
-- It means [we ship fast](/changelog) and iterate based on user feedback. 
-- It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
-- It means we work in the open – [our roadmap](/roadmap) and [company handbook](/handbook) are public.  
-- It means no jumping on a "quick call" (unless you want to) – see [how we do sales](/sales).
+-   It means our pricing is 100% transparent.
+-   It means engineers make product decisions.
+-   It means [we ship fast](/changelog) and iterate based on user feedback.
+-   It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
+-   It means we work in the open – [our roadmap](/roadmap) and [company handbook](/handbook) are public.
+-   It means no jumping on a "quick call" (unless you want to) – see [how we do sales](/sales).
 
 ### 2. Affordable and transparent pricing
 
@@ -35,7 +38,7 @@ We're committed to [sustainably low pricing](/pricing/philosophy), and every cus
 
 ### 3. Analytics and data warehouse in one
 
-Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to analyze data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Salesforce, and [Zendesk](/tutorials/stripe-reports). 
+Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to analyze data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Salesforce, and [Zendesk](/tutorials/stripe-reports).
 
 Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to analyze your data in PostHog, and [batch export event and person data](/docs/cdp/batch-exports) from PostHog to your data warehouse.
 
@@ -44,20 +47,85 @@ Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to a
 ### Product analytics
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="1 million events" column2="50k tracked users (Starter plan only)" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
-  <ComparisonRow column1={true} column2="Add on" feature="Query editor" description="Write your own queries in SQL" />
-  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
-  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
-  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
-  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize which users stay, for how long" />
-  <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
-  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at a company and account level" />
-  <ComparisonRow column1={true} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
-  <ComparisonRow column1={true} column2={true} feature="Stickiness" description="Find out what events keep users coming back." />
-  <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
-  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregate traffic, sources, campaigns, and session metrics" />
+    <ComparisonRow
+        column1="1 million events"
+        column2="50k tracked users (Starter plan only)"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Autocapture"
+        description="Capture events without manual logging"
+    />
+    <ComparisonRow column1={true} column2="Add on" feature="Query editor" description="Write your own queries in SQL" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Dashboards"
+        description="Combine insights into shareable dashboards"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Graphs and trends"
+        description="Build custom insights and visualizations"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Funnels"
+        description="Track users through a sequence of events"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Retention"
+        description="Visualize which users stay, for how long"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="User paths"
+        description="Track user flows and where they drop-off"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Cohorts"
+        description="Combine users based on properties and events for group analysis"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Group analytics"
+        description="Track metrics at a company and account level"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Lifecycle analysis"
+        description="Understand who is dormant, churning, and thriving"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Stickiness"
+        description="Find out what events keep users coming back."
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Custom formulas"
+        description="Use formulas to calculate unique insights"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Web analytics"
+        description="Simple dashboard of aggregate traffic, sources, campaigns, and session metrics"
+    />
 </ComparisonTable>
 
 > 💡 **Good to know:** PostHog supports [autocapture](/docs/product-analytics/autocapture), which means you can implement PostHog in mere minutes and ensure you don't miss out on events you haven't manually instrumented. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) – we offer the best of both worlds.
@@ -67,17 +135,62 @@ Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to a
 ### Feature flags
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="1 million API requests" column2="50k tracked users" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate flags" description="Flags with multiple customizable values" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Store flag definitions locally" />
-  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
-  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, staging, prod" />
-  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
+    <ComparisonRow
+        column1="1 million API requests"
+        column2="50k tracked users"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Boolean flags"
+        description="Simple flags returning true or flag"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Multivariate flags"
+        description="Flags with multiple customizable values"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Payloads"
+        description="Flags with string, number, or JSON payloads"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Local evaluation"
+        description="Store flag definitions locally"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Percentage rollouts"
+        description="Target percentages of a group"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Custom targeting"
+        description="Target users based on user properties, custom contexts"
+    />
+    <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+    <ComparisonRow
+        column1="Partial"
+        column2={false}
+        feature="Environments"
+        description="Manage flags for dev, staging, prod"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Bootstrapping"
+        description="Flags available on frontend application load"
+    />
+    <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
 > 💡 **Good to know:** PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
@@ -87,17 +200,67 @@ Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to a
 ### Experiments
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="1 million API requests" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={true} feature="Web experiments" description="Run A/B tests on web apps and websites" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile experiments" description="Run A/B tests on Android and iOS apps" />
-  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
-  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Statistical significance" description="Automatically checks for statistical significance" />
-  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculates the recommended run time and sample size" />
-  <ComparisonRow column1="Partial" column2={true} feature="Holdout testing" description="Withhold multiple features to measure cumulative impact" />
-  <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
+    <ComparisonRow
+        column1="1 million API requests"
+        column2="None"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Web experiments"
+        description="Run A/B tests on web apps and websites"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Mobile experiments"
+        description="Run A/B tests on Android and iOS apps"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Custom goals"
+        description="Customize metrics that a test tracks"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Secondary metrics"
+        description="Monitor impact on unrelated metrics"
+    />
+    <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Multivariate (A/B/n) testing"
+        description="Test multiple variants of a change"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Statistical significance"
+        description="Automatically checks for statistical significance"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Recommended run time"
+        description="Calculates the recommended run time and sample size"
+    />
+    <ComparisonRow
+        column1="Partial"
+        column2={true}
+        feature="Holdout testing"
+        description="Withhold multiple features to measure cumulative impact"
+    />
+    <ComparisonRow
+        column1="Bayesian"
+        column2="Sequential"
+        feature="Statistics engine"
+        description="How the results of an experiment are calculated"
+    />
 </ComparisonTable>
 
 > 💡 **Good to know:** Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
@@ -107,20 +270,90 @@ Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to a
 ### Session replay
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="5,000 recordings" column2="1,000 recordings" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1={true} column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
-  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a user's browser" />
-  <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
-  <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
-  <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
-  <ComparisonRow column1={true} column2={false} feature="Conditional recording" description="Only capture the sessions you want" />
-  <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
-  <ComparisonRow column1={true} column2={false} feature="Export recordings" description="Save important recordings offline" />
-  <ComparisonRow column1={true} column2={false} feature="Sample recorded sessions" description="Restrict the percentage of sessions that will be recorded" />
-  <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
+    <ComparisonRow
+        column1="5,000 recordings"
+        column2="1,000 recordings"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Web app recordings"
+        description="Capture recordings from single-page apps"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Mobile app recordings"
+        description="Capture recordings in iOS and Android apps"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Heatmaps"
+        description="Visualize where users click in your app or website"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Identity detection"
+        description="Link recordings to user IDs"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Console logs"
+        description="Capture extra content from a user's browser"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Playlists"
+        description="Sort recordings into static and dynamic playlists"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Performance monitoring"
+        description="Track network events within a session"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Privacy masking"
+        description="Censor personal information from playback"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Conditional recording"
+        description="Only capture the sessions you want"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="DOM explorer"
+        description="Explore an interactive snapshot of replays"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Export recordings"
+        description="Save important recordings offline"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Sample recorded sessions"
+        description="Restrict the percentage of sessions that will be recorded"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Record via feature flag"
+        description="Only record sessions for users that have the flag enabled"
+    />
 </ComparisonTable>
 
 > 💡 **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, are masked.
@@ -130,17 +363,57 @@ Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to a
 ### Surveys
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="250" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={false} feature="Open text" description="Free text answers and feedback" />
-  <ComparisonRow column1={true} column2={false} feature="Product rating" description="Rank using emojis or number" />
-  <ComparisonRow column1={true} column2={false} feature="Single choice" description="Select one answer from multiple" />
-  <ComparisonRow column1={true} column2={false} feature="Multiple choice" description="Select more than one answer from multiple" />
-  <ComparisonRow column1={true} column2={false} feature="NPS surveys" description="Net Promoter Score survey template" />
-  <ComparisonRow column1={true} column2={false} feature="PMF surveys" description="Product-market fit survey template" />
-  <ComparisonRow column1={true} column2={false} feature="User property targeting" description="Target users based on any of their user properties" />
-  <ComparisonRow column1={true} column2={false} feature="Custom colors & positioning" description="Customize the colors of your surveys to match your brand" />
-  <ComparisonRow column1={true} column2={false} feature="Custom HTML" description="Add custom HTML to your survey text" />
-  <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
+    <ComparisonRow
+        column1="1500"
+        column2="n/a"
+        feature="Free usage"
+        description="How much free usage do you get each month?"
+    />
+    <ComparisonRow column1={true} column2={false} feature="Open text" description="Free text answers and feedback" />
+    <ComparisonRow column1={true} column2={false} feature="Product rating" description="Rank using emojis or number" />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Single choice"
+        description="Select one answer from multiple"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Multiple choice"
+        description="Select more than one answer from multiple"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="NPS surveys"
+        description="Net Promoter Score survey template"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="PMF surveys"
+        description="Product-market fit survey template"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="User property targeting"
+        description="Target users based on any of their user properties"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Custom colors & positioning"
+        description="Customize the colors of your surveys to match your brand"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Custom HTML"
+        description="Add custom HTML to your survey text"
+    />
+    <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
 > 💡 **Good to know:** [Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to for more on how to use surveys.
@@ -150,49 +423,49 @@ Already have a warehouse? You can [link it with ours](/docs/data-warehouse) to a
 ## Price comparison
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_light_6accf68a1d.jpg" 
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_dark_6271c3bfa7.jpg"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_light_6accf68a1d.jpg"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_dark_6271c3bfa7.jpg"
     classes="rounded"
     alt="product analytics pricing"
 />
 
-PostHog charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs). 
+PostHog charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs).
 
 In the comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
 
-| **Monthly tracked users** | **Amplitude Growth** | **PostHog** | &nbsp                                                                   |
-|-------------------------|----------------------|-------------|-------------------------------------------------------------------------|
-| 1k                      | $61                  | $0          | <strong class="text-green">$732 per year cheaper</strong>    |
-| 2.5k                    | $99                  | $0          | <strong class="text-green">$1,888 per year cheaper</strong>  |
-| 5k                      | $124                 | $0          | <strong class="text-green">$1,488 per year cheaper</strong>  |
-| 10k                     | $186                 | $0          | <strong class="text-green">$2,232 per year cheaper</strong>  |
-| 25k                     | $249                 | $217        | <strong class="text-green">$1,128 per year cheaper</strong>  |
-| 50k                     | $561                 | $430        | <strong class="text-green">$1,572 per year cheaper</strong>  |
-| 75k                     | $841                 | $625        | <strong class="text-green">$2,592 per year cheaper</strong>  |
-| 100k                    | $1,061               | $820        | <strong class="text-green">$2,892 per year cheaper</strong>  |
-| 150k                    | $1,584               | $1,207      | <strong class="text-green">$4,524 per year cheaper</strong>  |
-| 200k                    | $2,100               | $1,600      | <strong class="text-green">$6,000 per year cheaper</strong>  |
-| 300k                    | $3,150               | $2,091      | <strong class="text-green">$12,708 per year cheaper</strong> |
+| **Monthly tracked users** | **Amplitude Growth** | **PostHog** | &nbsp                                                        |
+| ------------------------- | -------------------- | ----------- | ------------------------------------------------------------ |
+| 1k                        | $61                  | $0          | <strong class="text-green">$732 per year cheaper</strong>    |
+| 2.5k                      | $99                  | $0          | <strong class="text-green">$1,888 per year cheaper</strong>  |
+| 5k                        | $124                 | $0          | <strong class="text-green">$1,488 per year cheaper</strong>  |
+| 10k                       | $186                 | $0          | <strong class="text-green">$2,232 per year cheaper</strong>  |
+| 25k                       | $249                 | $217        | <strong class="text-green">$1,128 per year cheaper</strong>  |
+| 50k                       | $561                 | $430        | <strong class="text-green">$1,572 per year cheaper</strong>  |
+| 75k                       | $841                 | $625        | <strong class="text-green">$2,592 per year cheaper</strong>  |
+| 100k                      | $1,061               | $820        | <strong class="text-green">$2,892 per year cheaper</strong>  |
+| 150k                      | $1,584               | $1,207      | <strong class="text-green">$4,524 per year cheaper</strong>  |
+| 200k                      | $2,100               | $1,600      | <strong class="text-green">$6,000 per year cheaper</strong>  |
+| 300k                      | $3,150               | $2,091      | <strong class="text-green">$12,708 per year cheaper</strong> |
 
 We also provide numerous ways to [control how many events you send](/tutorials/fewer-unwanted-events) and reduce your costs, including the option to send cheaper **anonymous events**.
 
 ### Identified vs anonymous events
 
-Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. 
+Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information.
 
-They're useful if you're tracking a huge number of users and only want to analyze aggregate data, such as on a content website with millions of visitors. 
+They're useful if you're tracking a huge number of users and only want to analyze aggregate data, such as on a content website with millions of visitors.
 
-Anonymous events are cheaper for us to ingest, so we charge you between 55% and 80% less for them. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
+Anonymous events are cheaper for us to ingest, so we charge you between 55% and 80% less for them. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user.
 
-| **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
-|--------------------|--------------------------|-----------------------------------|----------------|
-| <strong class="text-15px">0-1 million</strong>      | Free | Free  | &nbsp |
-| <strong class="text-15px">1-2 million</strong>      | <span class="text-[15px] font-semibold">$0.0002480</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000500</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">80% cheaper</strong> |
-| <strong class="text-15px">2-15 million</strong>     | <span class="text-[15px] font-semibold">$0.0001040</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000343</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">67% cheaper</strong> |
-| <strong class="text-15px">15-50 million</strong>    | <span class="text-[15px] font-semibold">$0.0000655</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000295</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">55% cheaper</strong> |
-| <strong class="text-15px">50-100 million</strong>   | <span class="text-[15px] font-semibold">$0.0000364</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000218</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">40% cheaper</strong> |
-| <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
-| <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
+| **Monthly events**                                 | **Identified events**                                                                                   | **Anonymous events**                                                                                    | **Change**                                      |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| <strong class="text-15px">0-1 million</strong>     | Free                                                                                                    | Free                                                                                                    | &nbsp                                           |
+| <strong class="text-15px">1-2 million</strong>     | <span class="text-[15px] font-semibold">$0.0002480</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000500</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">80% cheaper</strong> |
+| <strong class="text-15px">2-15 million</strong>    | <span class="text-[15px] font-semibold">$0.0001040</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000343</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">67% cheaper</strong> |
+| <strong class="text-15px">15-50 million</strong>   | <span class="text-[15px] font-semibold">$0.0000655</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000295</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">55% cheaper</strong> |
+| <strong class="text-15px">50-100 million</strong>  | <span class="text-[15px] font-semibold">$0.0000364</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000218</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">40% cheaper</strong> |
+| <strong class="text-15px">100-250 million</strong> | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
+| <strong class="text-15px">250+ million</strong>    | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
 
 See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for more on the difference between anonymous and identified events. You can use the [calculator on our pricing page](/pricing) to estimate how much you'll pay.
 
@@ -201,16 +474,36 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
 ### Integrations
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-   <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
-   <ComparisonRow column1={true} column2={true} feature="Exports" description="Export data to data warehouses other destinations" />
-   <ComparisonRow column1={true} column2={true} feature="Segment" description="Send events via Segment" />   
-   <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
-   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
-   <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Two-way integration for customer support" />
-   <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
-   <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
-   <ComparisonRow column1={true} column2={false} feature="Community integrations" description="Build your own integration" />
-   <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Imports"
+        description="Import data from data warehouses and other sources"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="Exports"
+        description="Export data to data warehouses other destinations"
+    />
+    <ComparisonRow column1={true} column2={true} feature="Segment" description="Send events via Segment" />
+    <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+    <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Zendesk"
+        description="Two-way integration for customer support"
+    />
+    <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+    <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Community integrations"
+        description="Build your own integration"
+    />
+    <ComparisonRow column1={true} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />
 </ComparisonTable>
 
 > 💡 **Good to know:** This is just a small sample of available integrations. See our [data pipeline docs](/docs/cdp) for a full list of destinations, and our [data warehouse docs](/docs/data-warehouse) for a complete list of sources.
@@ -220,16 +513,36 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
 ### Security and compliance
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
-  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
-  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
-  <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2 Type II" description="SOC 2 security certification" />
-  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="User privacy options"
+        description="Anonymize users, drop personal data"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="History, audit logs"
+        description="Manage and view flag edits and related users"
+    />
+    <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+    <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
+    <ComparisonRow column1={true} column2={true} feature="SOC 2 Type II" description="SOC 2 security certification" />
+    <ComparisonRow
+        column1={true}
+        column2={true}
+        feature="2FA"
+        description="Enforce login with two-factor authentication"
+    />
+    <ComparisonRow
+        column1="Enterprise"
+        column2="Enterprise"
+        feature="SAML/SSO"
+        description="Use SAML or single sign-on authentication"
+    />
 </ComparisonTable>
 
-> 💡 **Good to know:** We offer a Business Associate Agreement (BAA) for any customer on our platform add-ons, which also includes priority support, SSO enforcement, and additional collaboration features.
+> 💡 **Good to know:** We offer a Business Associate Agreement (BAA) for any customer on our platform packages, which also includes priority support, SSO enforcement, and additional collaboration features.
 
 <br />
 
@@ -240,18 +553,48 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
 We don't need to. Every customer gets a generous free usage allowance each month, so you can sign up and start using PostHog for nothing. Here's how PostHog and Amplitude's free tiers compare:
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-   <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free analytics usage" description="Free tier usage each month" />
-   <ComparisonRow column1="5,000 recordings" column2="1,000 recordings" feature="Free replay usage" description="Free tier usage each month" />
-   <ComparisonRow column1="Unlimited" column2="10 only" feature="Saved insights" description="Number of you charts you can create" />   
-   <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
-   <ComparisonRow column1={true} column2={false} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-   <ComparisonRow column1={true} column2={false} feature="Formulas" description="Create custom insights using formulas" />
-   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Release and control features" />
-   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
-   <ComparisonRow column1={true} column2={false} feature="Surveys" description="Gather feedback and book user interviews" />
+    <ComparisonRow
+        column1="1 million events"
+        column2="50k tracked users"
+        feature="Free analytics usage"
+        description="Free tier usage each month"
+    />
+    <ComparisonRow
+        column1="5,000 recordings"
+        column2="1,000 recordings"
+        feature="Free replay usage"
+        description="Free tier usage each month"
+    />
+    <ComparisonRow
+        column1="Unlimited"
+        column2="10 only"
+        feature="Saved insights"
+        description="Number of you charts you can create"
+    />
+    <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Cohorts"
+        description="Combine users based on properties and events for group analysis"
+    />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Formulas"
+        description="Create custom insights using formulas"
+    />
+    <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Release and control features" />
+    <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
+    <ComparisonRow
+        column1={true}
+        column2={false}
+        feature="Surveys"
+        description="Gather feedback and book user interviews"
+    />
 </ComparisonTable>
 
-Companies that qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits. 
+Companies that qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits.
 
 ### Can PostHog replace Google Analytics?
 

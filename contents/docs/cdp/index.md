@@ -15,7 +15,7 @@ Destinations require the data pipeline add-on in [your billing settings](https:/
 
 ## Billing for data pipelines
 
-For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).
+For information about data pipeline pricing and billing, please visit our [pricing page](https://posthog.com/pricing).
 
 ## Use cases
 
@@ -29,6 +29,6 @@ Pipelines can be used for a wide variety of use cases, such as:
 
 - **Label events.** To facilitate sorting through your events, you can use transformations to determine arbitrary logic to label an event (e.g. by setting a `label` property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data elsewhere.
 
-- **Correlate costs with impact.** You can use the data warehouse to import cost data from sources like ads and cloud infrastructure platforms, and then use it in queries alongside product data to understand the impact and ROI of your spend. 
+- **Correlate costs with impact.** You can [use the data warehouse](/blog/data-warehouse-at-posthog) to import cost data from sources like ads and cloud infrastructure platforms, and then use it in queries alongside product data to understand the impact and ROI of your spend. 
 
 For a full list of transformations and destinations currently available, see the [destinations](https://us.posthog.com/pipeline/destinations) and [transformations](https://us.posthog.com/pipeline/transformations) tabs under data pipeline in-app.

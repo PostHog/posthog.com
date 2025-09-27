@@ -35,7 +35,7 @@ It is a talent partner's responsibility to screen applications at the top of the
 * have they displayed high levels of ownership
 * are they [weird](https://posthog.com/handbook/values#do-more-weird)?
 
-Once you've screened the candidate and passed them through, then you are going to screen that candidate. You are screen for culture fit and role suitability. We also want to ensure that we are putting relevant and motivated candidates through to the next round. 
+Once you’ve screened the application and moved them forward you will have a culture screening call. We also want to ensure that we are putting relevant and motivated candidates through to the next round. 
 At the screening stage it is important to make sure your notes are well organised and clear, not just for the next stage. These notes will be reviewed at SuperDay and will be taken into consideration if we are going to hire this person so make sure to have these in good order. 
 
 ## Post-screen, pre-SuperDay
@@ -52,6 +52,8 @@ Talent partners are responsible for scheduling these, you can read more [here](h
 At PostHog, we have two major forces playing against each other when it comes to hiring. We want to move quickly, when we want to hire somebody, usually they should have started last week. The reason for that is we always want to hire for quality, and this takes time. This makes life as a talent partner a constant balance between these two things.
 The way we try and balance these things is try and move as quickly as possible with the things in our control. We aim to review applications ASAP, usually within 48 hours of application. Then we want to make sure that candidates can book their first round call with us within 2 business days. This keeps the momentum going from a candidate deciding to apply, to speaking to somebody.
 Our aim is to get back to every candidate by the end of the day after their interview, this is difficult, so whilst it's an aim we don't always hit it. We should be pushing interviewers to get feedback to us ASAP. The longer we leave canddiates without a decision the slower we will move. 
+
+Speed is a team effort, we should always keep things moving for each other. This means that if we see something that needs arranged and you can do it now, do it. No need to wait for the person who was last in contact to come online, just give them a heads up that it's done. This shared ownership mentality of speed is what will help us succeed. 
 
 When it comes to quality, we are always looking to be impressed. We use a rating system out of 4 and it is rare that we would hire somebody without receiving a 4 from somebody in the process. We know that exceptional people are usually spiky, they don't have an evenly distributed skill set so people can have reservations about a certain area and they can still be exceptional. 
 Talent partners need to be aware of when to push and pull when it comes to hiring decisions. There will be circumstances when there are hard decisions over whether we should hire somebody or not and talent partners should be prepared to offer opinions. This could be vouching for a candidate that is similar to other successful team members who we might be hesitating on and conversely stepping in when it looks like we might be making a hiring that isn't appropriate. 

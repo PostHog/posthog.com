@@ -21,7 +21,7 @@ We also made a hedgehog puppet, who is my cohost in the video above.
 
 We already offer [everything developers need to build successful products](/why) in one platform.
 
-Five years ago we were just product analytics, but we expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
+Five years ago we were just product analytics, but we expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse), too.
 
 We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
 
@@ -39,7 +39,7 @@ This means sending emails when customers abandon their basket. Triggering survey
 
 By having all the tools and data together in one platform, we can use AI to help automate a lot of the manual work needed to build products people love, and run your business more successfully. The more products we build, the better this gets.
 
-You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, data warehouse, and so on. We also have great coverage for product, engineering, and growth use cases.
+You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, [data warehouse](/blog/data-warehouse-at-posthog), and so on. We also have great coverage for product, engineering, and growth use cases.
 
 This funding round means we can build more products for support, sales, and marketing use cases, keep up with demand for our existing products, and ultimately automate the entire chain of tools that businesses use to grow by creating a perfect customer record.
 
@@ -49,7 +49,7 @@ Watching AI come crashing into the world of tech has been exhilarating.
 
 We've long believed software was becoming commoditized. More open-source libraries, better tooling, more abstraction, and just more people in software engineering. These things were already speeding up development and gave us the confidence that we could build many products in one.
 
-This was good for our customers (fewer vendors, lower prices per product, all your customer context in one place) and AI is enabling us to move even faster, and ship experiences that have never been possible before. 
+This was good for our customers (fewer vendors, lower prices per product, all your customer context in one place) and [AI is enabling us to move even faster](/newsletter/building-ai-features), and ship experiences that have never been possible before. 
 
 Today, we have [Max AI](/max) – now generally available as an open beta – and an increasingly powerful AI installation wizard, which people love.
 

@@ -16,7 +16,6 @@ import {
     IconCheck,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -44,7 +43,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useUser } from 'hooks/useUser'
 import { VoteBox } from 'components/Roadmap'
-import { useToast } from 'hooks/toast'
+import { useToast } from '../../../hooks/toast'
 import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
 import { Authentication } from 'components/Squeak'
@@ -153,7 +152,7 @@ const Roadmap = () => {
         mutate()
         setVoteLoading((prev) => ({ ...prev, [roadmap.id]: false }))
         addToast({
-            message: liked ? 'Removed your vote.' : 'Thanks for voting!',
+            description: liked ? 'Removed your vote.' : 'Thanks for voting!',
         })
     }
 
@@ -185,16 +184,16 @@ const Roadmap = () => {
             if (res.ok) {
                 setSubscribed((prev) => ({ ...prev, [roadmap.id]: !isSubscribed }))
                 addToast({
-                    message: isSubscribed
+                    description: isSubscribed
                         ? `Unsubscribed from ${roadmap.attributes.title}. You will no longer receive updates.`
                         : `Subscribed to ${roadmap.attributes.title}. We'll email you with updates!`,
                 })
             } else {
-                addToast({ error: true, message: 'Whoops! Something went wrong.' })
+                addToast({ error: true, description: 'Whoops! Something went wrong.' })
             }
         } catch (error) {
             console.error(error)
-            addToast({ error: true, message: 'Whoops! Something went wrong.' })
+            addToast({ error: true, description: 'Whoops! Something went wrong.' })
         } finally {
             setLoading((prev) => ({ ...prev, [roadmap.id]: false }))
         }
@@ -298,13 +297,7 @@ const Roadmap = () => {
                             )
                             .map((roadmap: RoadmapItem) => (
                                 <div key={roadmap.id} className="p-4">
-                                    <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
-                                        <VoteBox
-                                            likeCount={roadmap.attributes.likes.data.length}
-                                            liked={roadmap.attributes.likes.data.some(
-                                                ({ id }) => id === user?.profile?.id
-                                            )}
-                                        />
+                                    <div className="flex space-x-4">
                                         <div className="flex-1">
                                             <h4 className="text-lg font-bold mb-1 leading-tight">
                                                 {roadmap.attributes.title}
@@ -810,7 +803,7 @@ export const ProductMax = () => {
                             </p>
                             <p>
                                 Feel free to{' '}
-                                <Link href="https://github.com/PostHog/posthog/issues" external>
+                                <Link to="https://github.com/PostHog/posthog/issues" external>
                                     create a GitHub issue
                                 </Link>{' '}
                                 and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
@@ -825,7 +818,7 @@ export const ProductMax = () => {
                         />
                     </div>
 
-                    <section className="mt-20 dark:text-primary">
+                    <section id="roadmap" className="mt-20 dark:text-primary">
                         <Roadmap />
                     </section>
 
@@ -861,6 +854,7 @@ export const ProductMax = () => {
                         <Comparison
                             comparison={comparison}
                             columnCount={comparisonColumnCount}
+                            truncate={false}
                             className="text-primary"
                         />
                     </section>
@@ -961,91 +955,6 @@ export const ProductMax = () => {
                     </section>
                 </div>
             </div>
-            {/* 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-
-                <div className="mt-12">
-                    <ul
-                        className={`grid md:grid-cols-2 lg:grid-cols-${subfeaturesItemCount} gap-8 mt-12 list-none p-0`}
-                    >
-                        {subfeatures.map((subfeature, index) => (
-                            <Subfeature key={index} {...subfeature} />
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="mt-12">
-                    <ul className={`grid md:grid-cols-2 lg:grid-cols-${featuresPerRow} gap-8 list-none p-0`}>
-                        {features.map((feature, index) => (
-                            <Feature key={index} {...feature} />
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="mt-8 mb-12">
-                    <CalloutBox icon="IconLightBulb" title="Max is still getting smarter" type="action">
-                        <div className="flex items-start gap-8">
-                            <div className="flex-1 mt-2">
-                                Max is just getting started and he's getting smarter every day. Soon he'll sync with
-                                your code, track changes, and help you ship improvements based on customer behaviour.
-                                For now, sign up to the in-app waitlist and we'll let you know when Max is ready to
-                                level up!
-                                <div className="mt-4">
-                                    <CallToAction
-                                        type="secondary"
-                                        size="sm"
-                                        to="https://app.posthog.com/settings/user-feature-previews#advanced-max-ai-features"
-                                    >
-                                        Sign up to the waitlist
-                                    </CallToAction>
-                                </div>
-                            </div>
-                            <div className="shrink-0">
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/reader_7e54eb67f7.png"
-                                    alt="Max reading a book"
-                                    className="w-28"
-                                />
-                            </div>
-                        </div>
-                    </CalloutBox>
-                </div>
-
-                <section>
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
-                        <div className="flex-1">
-                            <h2 className="text-4xl">
-                                "Hang on,{' '}
-                                <span className="text-red dark:text-yellow">how does Max AI use my data?</span>"
-                            </h2>
-                            <p>
-                                Max can access any data which is already stored in PostHog, such as events, persons,
-                                sessions and groups, as well as various schema and data warehouse tables. You can also
-                                give him additional information directly, which he can remember if asked.
-                            </p>
-                            <p>
-                                When you ask a question, relevant data gets shared with{' '}
-                                <a href="/docs/max-ai#is-my-data-shared-with-third-parties">our LLM providers</a>. All
-                                of these providers are bound by regulations such as GDPR, CCPA, and others. We also
-                                offer a <a href="/dpa">DP-yay policy</a>, which you can sign if you want additional
-                                peace of mind.
-                            </p>
-                            <p>
-                                Want more info about how PostHog handles GDPR, HIPAA, and other regulations? Check{' '}
-                                <a href="/docs/privacy">our privacy docs</a>.
-                            </p>
-                        </div>
-                        <aside className="shrink-0 md:basis-[400px] self-end">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/confused_small_8cc411c714.png"
-                                alt="confused hedgehog"
-                                className="w-full max-w-[350px]"
-                            />
-                        </aside>
-                    </div>
-                </section> 
-            </div>
-            */}
         </>
     )
 }

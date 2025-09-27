@@ -1,21 +1,8 @@
 ---
 title: How Vendasta replaced Snowplow and cut onboarding drop-off by 50%
 customer: Vendasta
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/vendasta/logo.svg
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/vendasta/logo_dark.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/vendasta_posthog_792f5dff6f.png
-industries:
-  - SaaS
-users:
-  - Product
-  - Engineering
-toolsUsed:
-  - Experimentation
-  - Plugins
-  - Apps
 date: 2022-03-07
 ---
 

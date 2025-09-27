@@ -1,0 +1,123 @@
+import React from 'react'
+import { SEO } from 'components/seo'
+import ResourceItem from 'components/Docs/ResourceItem'
+import Intro from 'components/Docs/Intro'
+import ReaderView from 'components/ReaderView'
+import OSTable from 'components/OSTable'
+import Link from 'components/Link'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { Caption } from 'components/Caption'
+import ChannelPlatforms from '../../../../contents/docs/messaging/_snippets/channel-platforms'
+
+export const Content = () => {
+    return (
+        <>
+            <section className="mb-8">
+                <h2 className="mb-4">Overview</h2>
+                <div>
+                    <p>
+                        Messaging is PostHog's no-code, drag-and-drop tool for building automated campaigns. Think of it
+                        as a way to <em>message your users</em>. You decide who receives messages, when they're sent,
+                        and how they're delivered.
+                    </p>
+                    <p>
+                        <Link to="/docs/messaging/campaign-builder">Campaigns</Link> are made up of components that you
+                        can arrange into a flow; triggers, actions, delays, audience splits, and PostHog actions. Every
+                        campaign starts with a trigger and ends with an exit, but you can add as much logic in between
+                        as needed.
+                    </p>
+                    <div className="flex justify-center mb-8">
+                        <div className="text-center">
+                            {' '}
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png"
+                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png"
+                                alt="Example campaign"
+                                padding={false}
+                                classes="rounded @md:max-w-2xl"
+                            />
+                            <Caption>Build and design campaigns with PostHog messaging</Caption>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 mt-0">Why use messaging?</h2>
+                <div>
+                    <ul>
+                        <li>
+                            <b>Leverage product analytics</b>: Use PostHog events to quickly message the right people
+                            based on the actions they take on your site or app.
+                        </li>
+                        <li>
+                            <b>No-code builder</b>: Drag, drop, and publish quickly. Avoid brittle hardcoded Twilio or
+                            Mailgun campaigns.
+                        </li>
+                        <li>
+                            <b>Composable CDP</b>: Add any{' '}
+                            <Link to="/docs/cdp/destinations">PostHog real-time destination</Link> to a campaign as a
+                            messaging step.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 mt-0">Channels and platforms</h2>
+                <ChannelPlatforms />
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4">Next steps</h2>
+                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
+                    <ResourceItem
+                        type="Getting started"
+                        title="Start here"
+                        description="A high-level overview of the integration process for messaging"
+                        url="/docs/messaging/start-here"
+                    />
+                    <ResourceItem
+                        type="Quickstart"
+                        title="Set up a messaging channel"
+                        description="Configure a messaging channel for your first campaign"
+                        url="/docs/messaging/configure-channels"
+                    />
+                    <ResourceItem
+                        type="Concepts"
+                        title="Issues and exceptions"
+                        description="Learn how to manage and track issues and exceptions"
+                        url="/docs/error-tracking/issues-and-exceptions"
+                    />
+                </ul>
+            </section>
+        </>
+    )
+}
+
+const Messaging: React.FC = () => {
+    return (
+        <ReaderView>
+            <SEO title="Messaging - Docs - PostHog" />
+
+            <div className="mx-auto max-w-4xl">
+                <section className="mb-6">
+                    <Intro
+                        subheader="Getting started"
+                        title="Messaging"
+                        description="Create campaigns to send messages to your users."
+                        buttonText="Installation guide"
+                        buttonLink="/docs/messaging/start-here"
+                        imageColumnClasses="mt-4 md:-mt-8"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png"
+                        imageClasses="max-h-48 md:max-h-64"
+                    />
+                </section>
+
+                <Content />
+            </div>
+        </ReaderView>
+    )
+}
+
+export default Messaging

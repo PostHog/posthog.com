@@ -9,9 +9,12 @@ export const eventDark = 'https://res.cloudinary.com/dmukukwp6/image/upload/v171
 
 PostHog makes it easy to get data about traffic and usage of your Shopify store. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, A/B testing, and more.
 
-This guide walks you through integrating PostHog into your Shopify store using either a manual (recommended) implementation or the third-party [PixieHog](https://pixiehog.com/) Shopify app (unofficial).
+This guide walks you through integrating PostHog into your Shopify store using a manual implementation. 
 
-## Option 1: Installing PostHog manually into the theme (recommended)
+> **Third-party solutions**
+> There are several unofficial, third-party Shopify x PostHog integrations, such as [PixieHog](https://pixiehog.com/). Some users find success with these integrations, but we're unable to provide support for them as they are created and run by third-party teams. Instead, we recommend following the guide below as a first step. 
+
+## Installing PostHog manually into the theme
 
 ![Shopify Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/shopify/shopify-dashboard.png)
 
@@ -110,33 +113,3 @@ You can use this data to answer questions like:
 - Which products are being _purchased together_ most often?
 - Which marketing campaigns are driving sales of different products?
 - How does regionality of shoppers affect the products they buy?
-
-## Option 2: PixieHog Shopify app
-
-> [PixieHog](https://pixiehog.com/) is a third-party tool created by CeladonWorks. It's not an official PostHog app and you should use it at your own risk. We're unable to provide official support or guidance for this app.
-
-<details>
-<summary>Installing PixieHog?</summary>
-PixieHog is a Shopify app that sets up PostHog with [Shopify Customer Privacy API](https://shopify.dev/docs/api/customer-privacy) and [Shopify Web Pixels API](https://shopify.dev/docs/api/web-pixels-api). To do this:
-
-1. Install PixieHog from the [Shopify App Store](https://apps.shopify.com/pixiehog)
-2. Get your PostHog project API key and client host from [your project settings](https://app.posthog.com/settings/project#variables) and enter these into the account setup section. We also recommend setting up a [reverse proxy](/docs/advanced/proxy) to capture more usage data
-
-![PixieHog - Home UI](https://res.cloudinary.com/dmukukwp6/image/upload/home_min_359bf3d7a4.png)
-
-3. Go to **Web Pixels Events**, turn on the channel and:
-    - Opt in [PostHog Ecommerce Spec](/docs/data/event-spec/ecommerce-events) to use standardized event names and extend payloads with the spec properties.
-    - Select the relevant events for your use case.
-
-![PixieHog - Web Pixel Events UI](https://res.cloudinary.com/dmukukwp6/image/upload/pixie_58fbd8b8fc.webp)
-
-4. Go to **JS Web Config**, turn on the channel, enable PixieHog app embed on your live theme, and make sure to save the theme editor session.
- 
- 5. Set `ui_host` to match your PostHog Cloud region.
- 
- 6. Choose the relevant config for your use case.  You can find these in PostHog's [JavaScript Web configuration docs](/docs/libraries/js/config).
-
-![PixieHog - JS Web Config UI](https://res.cloudinary.com/dmukukwp6/image/upload/js_web_config_min_1810179fd3.png)
-
-For more details, see the [PixieHog documentation](https://pixiehog.com/docs/introduction) or check out the [source code on GitHub](https://github.com/celadonworks/pixiehog-app). PixieHog is also self-hostable if you prefer.
-</details>

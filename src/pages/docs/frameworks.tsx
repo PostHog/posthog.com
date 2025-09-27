@@ -8,6 +8,7 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
 import List from 'components/List'
+import ReaderView from 'components/ReaderView'
 
 type QuickLinks = {
     name: string
@@ -92,10 +93,6 @@ export const quickLinks: QuickLinks = [
         to: '/docs/libraries/segment',
     },
     {
-        name: 'Sentry',
-        to: '/docs/libraries/sentry',
-    },
-    {
         name: 'Slack',
         to: '/docs/libraries/slack',
     },
@@ -137,47 +134,44 @@ type IntegrationsProps = {
 
 const Integrations: React.FC<IntegrationsProps> = () => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Frameworks - Documentation - PostHog" />
+            <CloudinaryImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+            />
+            <h1 className="text-4xl mt-0 mb-2">Framework guides</h1>
+            <h3 className="text-lg font-semibold text-secondary leading-tight">
+                PostHog works with most popular web frameworks and services.
+            </h3>
 
-            <PostLayout title={'Integrations'} hideSurvey hideSidebar>
-                <CloudinaryImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+            {/* Quick links */}
+            <section className="my-12 clear-both">
+                <h3 className="mb-6 mt-0">Library</h3>
+                <List
+                    className="grid md:grid-cols-2 gap-1"
+                    items={quickLinks.map(({ color, icon, name, to, description }) => ({
+                        label: name,
+                        url: to,
+                        icon,
+                        iconColor: color,
+                        description,
+                    }))}
                 />
-                <h1 className="text-4xl mt-0 mb-2">Framework guides</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    PostHog works with most popular web frameworks and services.
-                </h3>
+            </section>
 
-                {/* Quick links */}
-                <section className="my-12 clear-both">
-                    <h3 className="mb-6 mt-0">Library</h3>
-                    <List
-                        className="grid md:grid-cols-2 gap-1"
-                        items={quickLinks.map(({ color, icon, name, to, description }) => ({
-                            label: name,
-                            url: to,
-                            icon,
-                            iconColor: color,
-                            description,
-                        }))}
-                    />
-                </section>
+            <hr />
 
-                <hr />
-
-                <p>
-                    Interested in writing a framework guide?{' '}
-                    <Link to="https://github.com/posthog/posthog.com" external>
-                        Submit a PR to our website repo on GitHub.
-                    </Link>
-                </p>
-            </PostLayout>
-        </Layout>
+            <p>
+                Interested in writing a framework guide?{' '}
+                <Link to="https://github.com/posthog/posthog.com" external>
+                    Submit a PR to our website repo on GitHub.
+                </Link>
+            </p>
+        </ReaderView>
     )
 }
 

@@ -23,7 +23,7 @@ Once your survey is created, submit a few sample responses.
 
 You have two options for creating your Zap and setting its trigger:
 
-### Option 1: Via the PostHog app in Zapier  <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded">recommended</span>
+### Option 1: Via the PostHog app in Zapier  <span class="bg-accent text-gray font-semibold align-middle text-sm p-1 rounded">recommended</span>
 
 1. In PostHog, go to the [actions tab](https://us.posthog.com/project/data-management/actions).
 2. Click **New action** and then **From event or pageview**.

@@ -17,7 +17,7 @@ export default function TeamName({
             {editing ? (
                 <div className="font-bold flex space-x-1 items-baseline">
                     <AutosizeInput
-                        inputClassName="p-2 rounded-md bg-white dark:bg-accent-dark border border-border dark:border-dark"
+                        inputClassName="p-2 rounded-md bg-white dark:bg-accent-dark border border-input"
                         placeholder="Team name"
                         type="text"
                         name="name"
