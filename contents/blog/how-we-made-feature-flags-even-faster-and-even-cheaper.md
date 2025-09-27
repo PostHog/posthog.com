@@ -1,6 +1,6 @@
 ---
-date: 2023-09-08
-title: How we made feature flags even faster, even more reliable, and much cheaper
+date: 2025-10-03
+title: How we made feature flags even faster and even more reliable
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -14,43 +14,67 @@ category: Engineering
 hideLastUpdated: false
 ---
 
-Feature flag infrastructure occupies a unique position in the stack. Unlike analytics pipelines or product telemetry, flags can't afford to be "eventually consistent" or "best effort." When your flags are slow, your customer's entire application slows down. When they're unreliable, it's not just your customers who notice—it's their customers too.
+Feature-flags-as-a-service is an interesting space. If your service stops working, it affects both your customers _and_ your customer's customers, since they rely on you to make sure their app works. When your flags are slow, your customer's entire application slows down. When they're unreliable, it's not just your customers who notice—it's their customers too.
 
-We've [written before](/blog/how-we-improved-feature-flags-resiliency) about making PostHog's feature flags more resilient through local evaluation, caching strategies, and architectural improvements. This post is about the next chapter: rewriting our `/flags` endpoint from scratch to make it faster, cheaper, and more reliable.
+We've [written before](/blog/how-we-improved-feature-flags-resiliency) about making PostHog's feature flags more resilient through local evaluation, caching strategies, and architectural improvements. Those improvements worked well, but as we've grown significantly over the past two years since that post, we hit new scaling challenges that required a more fundamental approach.
 
-The goal was simple: better performance, better reliability, and lower cost. The result exceeded our expectations on all three fronts.
+This post is about the next chapter: we completely rewrote our feature flag evaluation service from scratch in Rust to make it faster, more reliable, and dramatically cheaper to operate.
+
+The goals were straightforward – better performance, better reliability, and lower operational costs. What we achieved exceeded our expectations on all fronts.
 
 ## Why rewrite?
 
-Our [previous work on flag reliability](/blog/how-we-improved-feature-flags-resiliency) focused on architectural patterns like local evaluation, caching, and graceful degradation. Those improvements worked well, but the core `/flags` endpoint still had fundamental performance bottlenecks.
+Our [previous work on flag reliability](/blog/how-we-improved-feature-flags-resiliency) focused on architectural patterns like local evaluation, caching, and graceful degradation. Those improvements worked well, but the core Django-based service still had fundamental bottlenecks that no amount of optimization could fix.
 
-The previous implementation had accumulated technical debt over time. Database queries were doing heavy lifting that belonged in application code. Cohort evaluations required expensive joins. The service relied on PgBouncer, which introduced connection pooling complexity and additional failure modes.
+The problems fell into a few categories:
 
-Most critically, we were evaluating flag conditions inside database queries rather than in memory. This meant every flag evaluation required parsing conditions in SQL, joining across multiple tables, and transferring more data than necessary.
+**Technical debt had accumulated over time.** Database queries were doing heavy lifting that belonged in application code. Cohort evaluations required expensive joins across multiple tables. Most critically, we were evaluating flag conditions inside database queries rather than in memory, which meant every flag evaluation required parsing conditions in SQL and transferring more data than necessary.
+
+**We were hitting hard efficiency limits.** The Django service was handling ~500k requests per minute but required 300 pods to do so, costing around $8k per month just for compute resources. For context, that's a lot of money for what should be a relatively simple operation.
+
+**Reliability was still fragile.** The service relied heavily on PgBouncer for connection pooling, which introduced complexity and additional failure modes. We lacked proper code-level timeout primitives and were relying on PgBouncer settings that were clunky and often failed during database slowdowns, leading to cascading failures.
+
+When we looked at projections for 5x-ing our current load, the math didn't work. We needed a fundamentally different approach.
 
 ## What we changed
 
-### Rust for the runtime
+### Rewriting in Rust
 
-We rewrote the service in Rust, which immediately gave us a more efficient concurrency model, better memory management, and predictable performance characteristics. Rust's zero-cost abstractions meant we could write expressive code without sacrificing speed.
+Moving from Django to Rust was a significant decision that we didn't take lightly. We evaluated several options:
 
-### In-memory condition evaluation
+- **FastAPI with async Python** would have been the easiest migration path, reusing business logic, but offered limited performance gains and still lacked good timeout primitives.
+- **Node.js with HyperExpress** showed promising benchmarks but locked us into a C++ binding with a small community (1.3k GitHub stars), creating future maintenance risk.
+- **Rust with axum** required starting from scratch but offered the best long-term characteristics.
 
-Instead of evaluating flag conditions in the database, we now:
+The benchmark differences were stark: Rust's axum framework was achieving ~32k requests per second compared to Django's ~1.5k—a 21x throughput improvement. But beyond raw performance, Rust offered several advantages crucial for flag infrastructure:
 
-1. Fetch all relevant person properties at the start of each request
+The language's type system makes it much harder to write buggy code, which matters when you're building infrastructure that thousands of applications depend on. We also had confidence from our capture service rewrite, where Rust had already demonstrated massive efficiency gains.
+
+Most importantly, Rust gave us proper code-level timeout primitives, eliminating our problematic dependency on PgBouncer-level settings. No more relying on external connection pooling for reliability.
+
+### Moving evaluation logic out of the database
+
+The biggest architectural change was moving flag condition evaluation from SQL to application code. Previously, we were doing complex property matching inside database queries, which required expensive joins and data transfers.
+
+Now we:
+
+1. Fetch all relevant person properties in a single query at the start of each request
 2. Evaluate all flag conditions in memory, in parallel
 3. Return results without additional database round-trips
 
-This approach front-loads the database work while moving the CPU-intensive evaluation logic to where it belongs—in application code that can leverage multiple cores effectively.
+This front-loads the database work while moving CPU-intensive evaluation logic to where it belongs—in application code that can leverage multiple cores effectively. It also means we're transferring less data and can cache person properties more effectively.
 
-### Application-level cohort caching
+### Cohort caching
 
-Cohort membership is now cached at the application level rather than computed on-demand. This eliminates expensive database joins for cohort-based flags, which were previously some of our slowest queries.
+Cohort-based flags were some of our slowest queries because they required complex joins to determine membership. We now cache cohort membership at the application level rather than computing it on-demand for every flag evaluation.
 
-### Simplified deployment architecture
+This eliminated one of our biggest performance bottlenecks and made cohort-based flags just as fast as simple property-based flags.
 
-We removed PgBouncer from the equation entirely and consolidated our deployment footprint. Fewer moving parts means fewer things that can break, and simpler debugging when they do.
+### Simplified architecture
+
+We removed PgBouncer from the deployment entirely. Fewer moving parts means fewer things that can break, and much simpler debugging when they do.
+
+The new service connects directly to the database with proper connection pooling built into the Rust application itself, giving us much better control over timeouts and error handling.
 
 ## Results
 
@@ -63,22 +87,34 @@ The improvements were immediate and substantial:
 - p90 latency: 81ms → 22ms (73% improvement)
 - p50 latency: 16ms → 4.4ms (72% improvement)
 
+These aren't just synthetic benchmarks—these are real-world improvements under production load with the same traffic patterns.
+
 **Cost reduction:**
-The new service uses just 17% of the compute resources compared to the previous implementation while serving the same traffic volume. These infrastructure savings translate directly into cost reductions for our customers.
+
+The efficiency gains were similarly ridiculous. Our Django service required ~300 pods to handle ~500k requests per minute at a cost of ~$8k/month. The new Rust service handles the same ~500k req/min using only 60 pods, costing around ~$1k/month.
+
+That's an 87% reduction in compute costs while serving identical traffic. The new service uses just 13% of the compute resources compared to the previous implementation.
 
 **Reliability improvements:**
-By decoupling flag evaluation from database performance, we've eliminated a major source of cascading failures. Even during periods of database pressure or maintenance, the flags service remains responsive. Cohort-based flags, which previously required complex joins, now resolve from cache.
+
+By decoupling flag evaluation from database performance, we've eliminated a major source of cascading failures. Even during periods of database pressure or maintenance, the flags service remains responsive.
+
+Cohort-based flags, which were previously our achilles heel requiring complex joins, now resolve instantly from cache. The proper timeout handling means we fail fast and gracefully instead of hanging indefinitely when things go wrong.
+
+Since fully migrating to this new service, we've had zero feature flag outages. *Knocks on wood* — feel free to link back to this post if that streak ever ends.
 
 ## The bigger picture
 
-This rewrite exemplifies a principle we've learned repeatedly: sometimes the best optimization is doing less. Fewer database queries, fewer service dependencies, and fewer opportunities for things to go wrong.
+This rewrite reinforces a principle we've learned repeatedly at PostHog: sometimes the best optimization is doing less. Fewer database queries, fewer service dependencies, fewer opportunities for things to go wrong.
 
-The performance gains are significant, but the reliability improvements matter more. Feature flags are infrastructure that needs to be boring—predictable, fast, and invisible when working correctly. By simplifying the architecture and reducing external dependencies, we've built a system that's easier to reason about and harder to break.
+The performance gains are impressive, but the reliability improvements matter more. Feature flags are infrastructure that needs to be boring—predictable, fast, and invisible when working correctly. When flags start having issues, they don't just affect your monitoring dashboards; they affect your customers' actual applications.
+
+By simplifying the architecture and eliminating external dependencies like PgBouncer, we've built a system that's much easier to reason about and significantly harder to break. It's one of those rewrites where everything just works better.
 
 ## What's next
 
-If you're using PostHog's `/flags` endpoint, you're already benefiting from these improvements. No configuration changes or migration steps are required—the performance and reliability gains are automatic.
+If you're using PostHog's feature flags, you're already benefiting from these improvements automatically. No configuration changes, no migration steps—just better performance and reliability.
 
-For even faster flag evaluation on the server-side, consider enabling [local evaluation](/docs/feature-flags/local-evaluation). While this rewrite dramatically improved the `/flags` endpoint, local evaluation eliminates network hops entirely by computing flags directly on your server. It's the fastest way to evaluate flags, especially for high-traffic applications.
+For even faster flag evaluation, consider enabling [local evaluation](/docs/feature-flags/local-evaluation) for your server-side applications. While this rewrite dramatically improved our `/flags` endpoint, local evaluation eliminates network round-trips entirely by evaluating flags directly on your server. It's the fastest possible way to evaluate flags, especially for high-traffic applications.
 
-As we continue evolving our feature flag infrastructure, our focus remains on the fundamentals: making flags fast, reliable, and cost-effective. Because at the end of the day, the best feature flag service is one you never have to think about.
+As we continue evolving our feature flag infrastructure, our focus remains on the fundamentals: making flags fast, reliable, and cost-effective. Because the best feature flag service is one you never have to think about.
