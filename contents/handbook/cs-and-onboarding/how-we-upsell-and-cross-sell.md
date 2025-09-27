@@ -51,7 +51,7 @@ These questions will naturally surface use cases for session replay, feature fla
 * Quarterly business reviews when setting future goals  
 * After successful outcomes with current products  
 * During team growth phases (new stakeholders bring new needs)  
-* Annual renewal conversations (bundling opportunities)  
+* Credit renewal conversations (bundling opportunities)  
 * When customers mention relevant challenges organically  
 * Following positive business announcements (follow your accounts company pages on Linkedin, set Google alerts, etc)
 
