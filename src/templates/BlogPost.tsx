@@ -35,6 +35,7 @@ import { usePosts } from 'components/Edition/hooks/usePosts'
 import { TreeMenu } from 'components/TreeMenu'
 import { postsMenu as menu } from '../navs/posts'
 import MenuBar from 'components/RadixUI/MenuBar'
+import slugify from 'slugify'
 const A = (props) => <Link {...props} state={{ newWindow: true }} />
 
 export const Intro = ({
@@ -410,7 +411,15 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         )}
                     </>
                 }
-                body={{ type: 'mdx', content: body, featuredImage, contributors, date, featuredVideo }}
+                body={{
+                    type: 'mdx',
+                    content: body,
+                    featuredImage,
+                    contributors,
+                    date,
+                    featuredVideo,
+                    tags: tags?.map((tag) => ({ label: tag, url: `/${root}/${slugify(tag, { lower: true })}` })),
+                }}
                 title={title}
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
