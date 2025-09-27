@@ -24,7 +24,7 @@ The goals were straightforward – better performance, better reliability, and l
 
 ## Why rewrite?
 
-Our [previous work on flag reliability](/blog/how-we-improved-feature-flags-resiliency) focused on architectural patterns like local evaluation, caching, and graceful degradation. Those improvements worked well, but the core Django-based service still had fundamental bottlenecks that no amount of optimization could fix.
+Our previous work focused on architectural patterns like local evaluation, caching, and graceful degradation. Those improvements worked well, but the core Django-based service still had fundamental bottlenecks that no amount of optimization could fix.
 
 The problems fell into a few categories:
 
