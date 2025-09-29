@@ -242,6 +242,8 @@ Always request a review on your pull request by a fellow team member (or leave u
 
 Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 
+We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status. 
+
 ## Documenting
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
