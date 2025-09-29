@@ -40,6 +40,7 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
+        websiteMode,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -239,7 +240,9 @@ export default function TaskBarMenu() {
                 ref={taskbarRef}
                 id="taskbar"
                 data-scheme="primary"
-                className="w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
+                className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2 items-center ${
+                    websiteMode ? 'sticky top-0' : 'bg-accent/75'
+                }`}
             >
                 <MenuBar
                     menus={menuData}

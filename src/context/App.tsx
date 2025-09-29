@@ -118,6 +118,7 @@ interface AppContextType {
     setConfetti: (isActive: boolean) => void
     confetti: boolean
     posthogInstance?: string
+    websiteMode: boolean
 }
 
 interface AppProviderProps {
@@ -223,26 +224,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
-    handleSnapToSide: () => { },
+    openSearch: () => {},
+    handleSnapToSide: () => {},
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => { },
+    expandWindow: () => {},
     openSignIn: () => null,
-    openRegister: () => { },
-    openForgotPassword: () => { },
+    openRegister: () => {},
+    openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -254,23 +255,23 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => { },
-    openNewChat: () => { },
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => { },
+    setIsNotificationsPanelOpen: () => {},
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => { },
+    setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => { },
-    animateClosingAllWindows: () => { },
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => { },
-    setClosingAllWindowsAnimation: () => { },
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => { },
-    setConfetti: () => { },
+    setScreensaverPreviewActive: () => {},
+    setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
 })
@@ -956,13 +957,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-    | 'keyboard-garden'
-    | 'hogzilla'
-    | 'startup-monopoly'
-    | 'office-party'
-    | '2001-bliss'
-    | 'parade'
-    | 'coding-at-night'
+        | 'keyboard-garden'
+        | 'hogzilla'
+        | 'startup-monopoly'
+        | 'office-party'
+        | '2001-bliss'
+        | 'parade'
+        | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -1115,12 +1116,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                              }
                             : w
                     )
                 )
@@ -1216,9 +1217,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: isSSR ? 0 : window.innerWidth * 0.9,
-                    height: isSSR ? 0 : window.innerHeight * 0.9,
-                })
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1273,9 +1274,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1805,6 +1806,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
+    const websiteMode = siteSettings.experience === 'boring'
+
     return (
         <Context.Provider
             value={{
@@ -1849,6 +1852,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setConfetti,
                 confetti,
                 posthogInstance,
+                websiteMode,
             }}
         >
             {children}

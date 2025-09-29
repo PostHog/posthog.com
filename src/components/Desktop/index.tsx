@@ -167,6 +167,7 @@ export default function Desktop() {
         confetti,
         compact,
         windows,
+        websiteMode,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -292,241 +293,245 @@ export default function Desktop() {
 
     return (
         <>
-            <ContextMenu
-                menuItems={[
-                    {
-                        type: 'item',
-                        children: (
-                            <Link to="/about" state={{ newWindow: true }}>
-                                About PostHog
-                            </Link>
-                        ),
-                    },
-                    {
-                        type: 'item',
-                        children: (
-                            <Link to="/display-options" state={{ newWindow: true }}>
-                                Display options
-                            </Link>
-                        ),
-                        shortcut: [','],
-                    },
-                    {
-                        type: 'item',
-                        children: (
-                            <Link to="/kbd" state={{ newWindow: true }}>
-                                Keyboard shortcuts
-                            </Link>
-                        ),
-                        shortcut: ['.'],
-                    },
-                    {
-                        type: 'item',
-                        children: (
-                            <button
-                                onClick={() => {
-                                    localStorage.removeItem(STORAGE_KEY)
-                                    setIconPositions(generateInitialPositions())
-                                }}
-                            >
-                                Reset icons
-                            </button>
-                        ),
-                    },
-                ]}
-            >
-                <div
-                    data-scheme="primary"
-                    data-app="Desktop"
-                    className="fixed size-full"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+            {!websiteMode && (
+                <ContextMenu
+                    menuItems={[
+                        {
+                            type: 'item',
+                            children: (
+                                <Link to="/about" state={{ newWindow: true }}>
+                                    About PostHog
+                                </Link>
+                            ),
+                        },
+                        {
+                            type: 'item',
+                            children: (
+                                <Link to="/display-options" state={{ newWindow: true }}>
+                                    Display options
+                                </Link>
+                            ),
+                            shortcut: [','],
+                        },
+                        {
+                            type: 'item',
+                            children: (
+                                <Link to="/kbd" state={{ newWindow: true }}>
+                                    Keyboard shortcuts
+                                </Link>
+                            ),
+                            shortcut: ['.'],
+                        },
+                        {
+                            type: 'item',
+                            children: (
+                                <button
+                                    onClick={() => {
+                                        localStorage.removeItem(STORAGE_KEY)
+                                        setIconPositions(generateInitialPositions())
+                                    }}
+                                >
+                                    Reset icons
+                                </button>
+                            ),
+                        },
+                    ]}
                 >
-                    <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
-                    {/* Hogzilla */}
-                    <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
-                            alt=""
-                            width={2574}
-                            height={1256}
-                            className="absolute inset-0 flex items-end justify-end"
-                            imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
-                        />
-                    </div>
-
-                    {/* Startup Monopoly */}
-                    <div className="hidden select-none wallpaper-startup-monopoly:block absolute inset-0">
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
-                            alt=""
-                            width={1087}
-                            height={540}
-                            className="absolute right-0 top-0 w-[1087px] h-[540px]"
-                        />
-                    </div>
-
-                    {/* Office party */}
-                    <div className="hidden select-none wallpaper-office-party:block absolute inset-0">
-                        <div
-                            className="absolute inset-0 opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
-                                backgroundSize: '200px 198px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
-                                backgroundSize: '200px 198px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
-                            alt=""
-                            width={997}
-                            height={858}
-                            className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
-                        />
-                    </div>
-
-                    {/* Keyboard garden */}
-                    <div className="hidden select-none wallpaper-keyboard-garden:block">
-                        <div
-                            className="absolute inset-0 opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_03a349af5c.png')",
-                                backgroundSize: '100px 100px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100"
-                            style={{
-                                backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
-                                backgroundSize: '200px 200px',
-                                backgroundRepeat: 'repeat',
-                            }}
-                        />
-                        <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                    <div
+                        data-scheme="primary"
+                        data-app="Desktop"
+                        className="fixed size-full"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
+                        {/* Hogzilla */}
+                        <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
                             <CloudinaryImage
                                 loading="lazy"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                                 alt=""
-                                width={1401}
-                                height={1400}
-                                className="size-[300px] md:size-[700px] dark:hidden"
-                            />
-                            <CloudinaryImage
-                                loading="lazy"
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
-                                alt=""
-                                width={1401}
-                                height={1400}
-                                className="size-[300px] md:size-[700px] hidden dark:block"
+                                width={2574}
+                                height={1256}
+                                className="absolute inset-0 flex items-end justify-end"
+                                imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
                             />
                         </div>
-                    </div>
 
-                    {/* 2001 bliss */}
-                    <div
-                        className="hidden select-none wallpaper-2001-bliss:block absolute inset-0 bg-repeat bg-center"
-                        style={{
-                            backgroundImage:
-                                "url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')",
-                            backgroundSize: '1180px 738px',
-                        }}
-                    >
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
-                            alt=""
-                            width={1180}
-                            height={738}
-                            imgClassName="hidden"
-                        />
-                        <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
-                    </div>
+                        {/* Startup Monopoly */}
+                        <div className="hidden select-none wallpaper-startup-monopoly:block absolute inset-0">
+                            <CloudinaryImage
+                                loading="lazy"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
+                                alt=""
+                                width={1087}
+                                height={540}
+                                className="absolute right-0 top-0 w-[1087px] h-[540px]"
+                            />
+                        </div>
 
-                    {/* Parade */}
-                    <div className="hidden select-none wallpaper-parade:flex items-end fixed inset-0">
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
-                            alt=""
-                            width={1565}
-                            height={744}
-                            imgClassName="dark:hidden w-full"
-                        />
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
-                            alt=""
-                            width={1565}
-                            height={744}
-                            imgClassName="hidden dark:block"
-                        />
-                    </div>
+                        {/* Office party */}
+                        <div className="hidden select-none wallpaper-office-party:block absolute inset-0">
+                            <div
+                                className="absolute inset-0 opacity-100"
+                                style={{
+                                    backgroundImage:
+                                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
+                                    backgroundSize: '200px 198px',
+                                    backgroundRepeat: 'repeat',
+                                }}
+                            />
+                            <div
+                                className="absolute inset-0 opacity-0 dark:opacity-100"
+                                style={{
+                                    backgroundImage:
+                                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
+                                    backgroundSize: '200px 198px',
+                                    backgroundRepeat: 'repeat',
+                                }}
+                            />
+                            <CloudinaryImage
+                                loading="lazy"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
+                                alt=""
+                                width={997}
+                                height={858}
+                                className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
+                            />
+                        </div>
 
-                    {/* Coding at night */}
-                    <div className="hidden select-none wallpaper-coding-at-night:flex items-end fixed inset-0">
-                        <CloudinaryImage
-                            loading="lazy"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
-                            alt=""
-                            width={2360}
-                            height={696}
-                            className="w-full"
-                        />
-                    </div>
+                        {/* Keyboard garden */}
+                        <div className="hidden select-none wallpaper-keyboard-garden:block">
+                            <div
+                                className="absolute inset-0 opacity-100"
+                                style={{
+                                    backgroundImage:
+                                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_03a349af5c.png')",
+                                    backgroundSize: '100px 100px',
+                                    backgroundRepeat: 'repeat',
+                                }}
+                            />
+                            <div
+                                className="absolute inset-0 opacity-0 dark:opacity-100"
+                                style={{
+                                    backgroundImage:
+                                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
+                                    backgroundSize: '200px 200px',
+                                    backgroundRepeat: 'repeat',
+                                }}
+                            />
+                            <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
+                                <CloudinaryImage
+                                    loading="lazy"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
+                                    alt=""
+                                    width={1401}
+                                    height={1400}
+                                    className="size-[300px] md:size-[700px] dark:hidden"
+                                />
+                                <CloudinaryImage
+                                    loading="lazy"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
+                                    alt=""
+                                    width={1401}
+                                    height={1400}
+                                    className="size-[300px] md:size-[700px] hidden dark:block"
+                                />
+                            </div>
+                        </div>
 
-                    <nav
-                        className={`transition-opacity duration-300 ${
-                            windows.length <= 0 || navVisible ? 'opacity-100' : 'opacity-0'
-                        }`}
-                    >
-                        <motion.ul
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: rendered ? 1 : 0 }}
-                            className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
+                        {/* 2001 bliss */}
+                        <div
+                            className="hidden select-none wallpaper-2001-bliss:block absolute inset-0 bg-repeat bg-center"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')",
+                                backgroundSize: '1180px 738px',
+                            }}
                         >
-                            {allApps.map((app) => {
-                                const position = iconPositions[app.label] || { x: 0, y: 0 }
+                            <CloudinaryImage
+                                loading="lazy"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
+                                alt=""
+                                width={1180}
+                                height={738}
+                                imgClassName="hidden"
+                            />
+                            <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
+                        </div>
 
-                                return (
-                                    <DraggableDesktopIcon
-                                        key={app.label}
-                                        app={app}
-                                        initialPosition={position}
-                                        onPositionChange={(newPosition) => handlePositionChange(app.label, newPosition)}
-                                    />
-                                )
-                            })}
-                        </motion.ul>
-                    </nav>
-                </div>
-                {!compact && (
-                    <Screensaver
-                        isActive={isInactive || screensaverPreviewActive}
-                        onDismiss={() => {
-                            setScreensaverPreviewActive(false)
-                            dismiss()
-                        }}
-                    />
-                )}
-                <HedgeHogModeEmbed />
-            </ContextMenu>
+                        {/* Parade */}
+                        <div className="hidden select-none wallpaper-parade:flex items-end fixed inset-0">
+                            <CloudinaryImage
+                                loading="lazy"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
+                                alt=""
+                                width={1565}
+                                height={744}
+                                imgClassName="dark:hidden w-full"
+                            />
+                            <CloudinaryImage
+                                loading="lazy"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
+                                alt=""
+                                width={1565}
+                                height={744}
+                                imgClassName="hidden dark:block"
+                            />
+                        </div>
+
+                        {/* Coding at night */}
+                        <div className="hidden select-none wallpaper-coding-at-night:flex items-end fixed inset-0">
+                            <CloudinaryImage
+                                loading="lazy"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
+                                alt=""
+                                width={2360}
+                                height={696}
+                                className="w-full"
+                            />
+                        </div>
+
+                        <nav
+                            className={`transition-opacity duration-300 ${
+                                windows.length <= 0 || navVisible ? 'opacity-100' : 'opacity-0'
+                            }`}
+                        >
+                            <motion.ul
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: rendered ? 1 : 0 }}
+                                className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
+                            >
+                                {allApps.map((app) => {
+                                    const position = iconPositions[app.label] || { x: 0, y: 0 }
+
+                                    return (
+                                        <DraggableDesktopIcon
+                                            key={app.label}
+                                            app={app}
+                                            initialPosition={position}
+                                            onPositionChange={(newPosition) =>
+                                                handlePositionChange(app.label, newPosition)
+                                            }
+                                        />
+                                    )
+                                })}
+                            </motion.ul>
+                        </nav>
+                    </div>
+                    {!compact && (
+                        <Screensaver
+                            isActive={isInactive || screensaverPreviewActive}
+                            onDismiss={() => {
+                                setScreensaverPreviewActive(false)
+                                dismiss()
+                            }}
+                        />
+                    )}
+                    <HedgeHogModeEmbed />
+                </ContextMenu>
+            )}
             <NotificationsPanel />
             {confetti && (
                 <div className="fixed inset-0">
