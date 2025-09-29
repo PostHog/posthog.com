@@ -66,7 +66,6 @@ const CustomPresentationPage = () => {
     const { appWindow } = useWindow()
     const [companyData, setCompanyData] = useState<CompanyData>({})
     const [isLoading, setIsLoading] = useState(true)
-    const [calendlyLoaded, setCalendlyLoaded] = useState(false)
     const [salesRep, setSalesRep] = useState<SalesRep | null>(null)
 
     // Parse the URL path
@@ -192,21 +191,6 @@ const CustomPresentationPage = () => {
         fetchCompanyData()
     }, [companyDomain])
 
-    // Load Calendly widget dynamically for CTA slide
-    useEffect(() => {
-        if (!calendlyLoaded && config.slides.cta) {
-            const script = document.createElement('script')
-            script.src = 'https://assets.calendly.com/assets/external/widget.js'
-            script.async = true
-            script.onload = () => setCalendlyLoaded(true)
-            document.body.appendChild(script)
-
-            return () => {
-                document.body.removeChild(script)
-            }
-        }
-    }, [config, calendlyLoaded])
-
     // Create slide content based on template
     const createSlideContent = (slideKey: string, slideConfig: SlideConfig) => {
         const props = {
@@ -231,25 +215,6 @@ const CustomPresentationPage = () => {
                         salesRep={salesRep}
                         slideKey={slideKey}
                     >
-                        {slideKey === 'cta' && (
-                            <div className="w-full max-w-4xl mx-auto text-center pt-4">
-                                {/*                                 
-                                <OSButton
-                                    asLink
-                                    to="https://calendly.com/chris-m-posthog"
-                                    state={{ newWindow: true }}
-                                    variant="primary"
-                                    size="xl"
-                                    external
-                                >
-                                    Schedule a demo
-                                </OSButton> */}
-                                <DemoScheduler
-                                    iframeSrc="https://calendly.com/chris-m-posthog"
-                                    className="h-72 w-full"
-                                />
-                            </div>
-                        )}
                         {props.children}
                     </StackedTemplate>
                 )
@@ -344,7 +309,7 @@ const CustomPresentationPage = () => {
                 thumbnailContent: rawContent,
             }
         })
-    }, [config, companyData, calendlyLoaded])
+    }, [config, companyData])
 
     if (isLoading) {
         return (
