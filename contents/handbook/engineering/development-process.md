@@ -240,7 +240,7 @@ Our testing, reviewing and building process should be good enough that we're com
 
 Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (especially for posthog.com).
 
-Once you merge a pull request, it will automatically deploy to all environments. Check out the `#platform-bots` Slack channel to see how your deploy is progressing.
+Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 
 ## Documenting
 
