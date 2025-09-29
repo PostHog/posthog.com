@@ -19,6 +19,7 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import { AskMax } from 'components/AskMax'
 
 Choosing the right analytics platform often comes down to trade-offs. PostHog and Amplitude both cover the essentials – analytics, experimentation, feature flags, session replay, and more – but their strengths show up in different places.
 
@@ -131,6 +132,17 @@ While both PostHog and Amplitude deliver on the core product analytics stack, th
 </details>
 
 Whichever you choose, setup is quick. Amplitude offers a polished SaaS experience with strong documentation and enterprise support. PostHog makes setup fast with a snippet or wizard install, automatic event capture, and templates (plus [AI assistance with MaxAI](/max)) to get insights running quickly.
+
+Have a direct question? Just ask Max.
+
+<AskMax
+    title="PostHog or Amplitude?"
+    quickQuestions={[
+        'What features does PostHog include that Amplitude does not?',
+        'What is the difference between PostHog and Amplitude for session replay?',
+        'Can I run experiments in both?',
+    ]}
+/>
 
 ### Product analytics
 
