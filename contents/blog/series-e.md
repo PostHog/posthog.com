@@ -1,5 +1,5 @@
 ---
-date: 2025-09-11
+date: 2025-09-29
 title: "\"E\"xciting news"
 author:
   - james-hawkins
