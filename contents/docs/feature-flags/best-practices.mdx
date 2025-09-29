@@ -87,3 +87,25 @@ When using dependencies, keep the dependency chains simple and avoid circular de
 ## 11. Reducing your bill
 
 We aim to be significantly cheaper than our competitors. To help you reduce your bill, we've created a [dedicated guide](/docs/feature-flags/cutting-costs) to estimating and reducing your feature flag costs.
+
+## 12. Consistent flag evaluations across frontend and backend 
+
+For feature flags with flag persistence enabled and used across both your frontend and backend, you will need to do one of the following to ensure the evaluation result of the flag is consistent between both environments:
+
+1. Identify the user on the frontend and use the same identified distinct ID when getting the flag on the backend.
+2. If you are unable to call identify on the frontend, and only have access to the anonymous distinct ID when it comes time to get the flag on the backend, then you can include the anonymous distinct ID as a person property override in the `getFeatureFlag` call.
+```js
+// Frontend: Get the anonymous ID (before identify is called)
+const anonId = posthog.getAnonymousId()
+
+// Backend: Pass the anonymous ID as a person property override
+const flagValue = await posthog.getFeatureFlag(
+  'my-flag',
+  'user123', // identified distinct ID
+  {
+    personProperties: {
+      $anon_distinct_id: anonId
+    }
+  }
+)
+```
