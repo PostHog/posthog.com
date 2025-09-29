@@ -45,6 +45,7 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import Link from 'components/Link'
 import useProducts from './useProducts'
+import ExaLogo from 'components/CustomerLogos/ExaLogo'
 
 export interface Customer {
     slug: string
@@ -568,6 +569,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Leadership', 'Engineering', 'Product'],
         notes: "World's premier startup accelerator",
         logo: YCombinatorLogo,
+        height: 10,
+        featured: true,
+    },
+    exa: {
+        name: 'Exa',
+        toolsUsed: ['Max AI', 'product_analytics'],
+        industries: ['AI', 'Search'],
+        users: ['Engineering', 'Product'],
+        notes: 'Search API for AI products',
+        logo: ExaLogo,
         height: 10,
         featured: true,
     },
