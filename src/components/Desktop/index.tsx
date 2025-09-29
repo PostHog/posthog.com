@@ -421,7 +421,6 @@ export default function Desktop() {
                                     className="hover:!border-transparent active:!bg-transparent"
                                 >
                                     <CloudinaryImage
-                                        loading="lazy"
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/series_e_b3934cffe7.png"
                                         alt="We raised a Series E"
                                         width={452}
