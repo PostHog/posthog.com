@@ -574,7 +574,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
-        toolsUsed: ['Max AI', 'product_analytics'],
+        toolsUsed: ['max_ai', 'session_replay', 'product_analytics'],
         industries: ['AI', 'Search'],
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
