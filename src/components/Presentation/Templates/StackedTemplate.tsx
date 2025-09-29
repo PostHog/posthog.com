@@ -153,7 +153,7 @@ export default function StackedTemplate({
                                     width={2574}
                                     height={1256}
                                     className="absolute inset-0 flex items-end justify-end"
-                                    imgClassName="max-w-none h-[44rem] -mr-12 @2xl:mr-0 @2xl:max-h-[628px] h-auto @2xl:w-full z-10"
+                                    imgClassName="max-w-none @2xl/slide-thumbnails:h-full h-[44rem] -mr-12 @2xl:mr-0 @2xl:max-h-[628px] @2xl:w-full z-10"
                                 />
                             </div>
                         </>

@@ -51,23 +51,23 @@ export default function PricingTemplate({
     const [expanded, setExpanded] = useState(false)
 
     return (
-        <div className={`h-full flex flex-col relative bg-white text-black p-8`}>
+        <div className={`h-full flex flex-col relative bg-gradient-to-b from-[#FFF1D5] to-[#fff] text-black p-8`}>
             <h1 className="text-5xl text-center mb-4">Usage-based pricing with a monthly free tier</h1>
-            <p className="text-center text-2xl mb-8 text-secondary">Pricing decreases with volume</p>
+            <p className="text-center text-2xl mb-8 text-secondary dark:text-black/75">Pricing decreases with volume</p>
 
             <div className="grid @2xl:grid-cols-2 gap-4 mb-4">
                 <fieldset className="">
-                    <legend className="text-2xl font-semibold">1. Monthly free tier</legend>
+                    <legend className="text-2xl font-semibold bg-transparent">1. Monthly free tier</legend>
                     <div className={`grid grid-cols-3 gap-x-2 gap-y-6 py-6`}>
                         <FreeTier size="large" />
                     </div>
                 </fieldset>
 
                 <fieldset className="">
-                    <legend className="text-2xl font-semibold">2. Usage-based pricing</legend>
+                    <legend className="text-2xl font-semibold bg-transparent">2. Usage-based pricing</legend>
                     <div className="py-2">
                         <div className="h-96">
-                            <ScrollArea className="min-h-0 h-full pr-4">
+                            <ScrollArea className="min-h-0 h-full pr-4 [&_span]:dark:text-black/75 [&_em]:dark:text-black/75 [&_li]:!bg-transparent [&_button]:hover:!bg-transparent">
                                 <Accordion allExpanded={expanded} setAllExpanded={setExpanded} />
                             </ScrollArea>
                         </div>
@@ -75,7 +75,7 @@ export default function PricingTemplate({
                 </fieldset>
             </div>
 
-            <p className="text-center text-2xl mb-4 text-secondary">
+            <p className="text-center text-2xl mb-4 text-secondary dark:text-black/75">
                 Discounts available for startups, non-profits, and long-term relationships
             </p>
         </div>

@@ -34,8 +34,8 @@ export default function ProductTemplate({
         <div className={`h-full flex flex-col @2xl:gap-8 bg-${effectiveBgColor} ${effectiveTextColor}`}>
             <div className="flex justify-center pt-8 px-8">
                 <div className="flex items-center gap-3 mb-4">
-                    {productData.Icon && <productData.Icon className={`size-12 @2xl:size-16 ${effectiveTextColor}`} />}
-                    <span className={`text-3xl @2xl:text-4xl font-semibold ${effectiveTextColor}`}>
+                    {productData.Icon && <productData.Icon className={`size-12 ${effectiveTextColor}`} />}
+                    <span className={`text-3xl font-semibold leading-tight ${effectiveTextColor}`}>
                         {productData.name}
                     </span>
                 </div>
