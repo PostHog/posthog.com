@@ -18,6 +18,7 @@ import productManagersConfig from '../../presentations/product-managers.json'
 import productDirectorsConfig from '../../presentations/product-directors.json'
 import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
+import PricingTemplate from 'components/Presentation/Templates/PricingTemplate'
 
 const roleConfigs = {
     'product-engineers': productEngineersConfig,
@@ -278,6 +279,17 @@ TODO: Embed uses cookies, need to get consent first
                         description={props.description}
                         bgColor={props.bgColor}
                         textColor={props.textColor}
+                    />
+                )
+
+            case 'pricing':
+                return (
+                    <PricingTemplate
+                        title={props.title || ''}
+                        description={props.description}
+                        image={props.image}
+                        imageDark={props.imageDark}
+                        imageAlt={props.imageAlt}
                     />
                 )
 

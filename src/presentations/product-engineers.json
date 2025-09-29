@@ -40,7 +40,7 @@
             "description": "Understand how your users consume AI in your product, and monitor performance and cost when using different models."
         },
         "pricing": {
-            "template": "columns",
+            "template": "pricing",
             "name": "Pricing",
             "title": "Pricing",
             "description": "PostHog offers usage-based pricing. This means you only pay for what you use, and you can set billing limits so you never get an unexpected bill.",
