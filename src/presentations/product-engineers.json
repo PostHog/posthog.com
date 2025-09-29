@@ -47,7 +47,7 @@
             "image": "/images/products/product-analytics/screenshot-billing.png"
         },
         "cta": {
-            "template": "calendly",
+            "template": "booking",
             "name": "Get a demo",
             "title": "Get a demo",
             "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"

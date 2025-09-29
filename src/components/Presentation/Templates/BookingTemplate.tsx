@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ParseHtml from '../Utilities/parseHtml'
 import { DemoScheduler } from 'components/DemoScheduler'
 import SalesRep from '../Utilities/SalesRep'
@@ -34,6 +34,8 @@ export default function ColumnsTemplate({
     salesRep,
     slideKey,
 }: ColumnsTemplateProps) {
+    const [showScheduler, setShowScheduler] = useState(false)
+
     return (
         <div
             className={`h-full flex flex-col @2xl:flex-row gap-8 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] text-black`}
@@ -69,24 +71,21 @@ export default function ColumnsTemplate({
 
             <aside className="flex-1 flex items-center justify-center">
                 <div className="w-full h-full max-w-4xl mx-auto text-center bg-white border-t @2xl:border-t-0 @2xl:border-l border-primary shadow-2xl">
-                    {/*                                 
-            <OSButton
-                asLink
-                to="https://calendly.com/chris-m-posthog"
-                state={{ newWindow: true }}
-                variant="primary"
-                size="xl"
-                external
-            >
-                Schedule a demo
-            </OSButton> */}
-                    {/*             
-          <DemoScheduler
-            iframeSrc="https://calendly.com/chris-m-posthog"
-            className="h-full w-full"
-          /> */}
-
-                    <iframe src="https://scheduler.default.com/12920/queue/3441" className="h-full w-full border-0" />
+                    {!showScheduler ? (
+                        <div className="h-full w-full flex flex-col items-center justify-center gap-2 px-4">
+                            <OSButton variant="secondary" size="xl" onClick={() => setShowScheduler(true)}>
+                                Load scheduler iframe
+                            </OSButton>
+                            <p className="text-sm opacity-75 text-balance max-w-md mt-2">
+                                We use Default.com who may set a cookie, so we wanted to get your permission first.
+                            </p>
+                        </div>
+                    ) : (
+                        <iframe
+                            src="https://scheduler.default.com/12920/queue/3441"
+                            className="h-full w-full border-0"
+                        />
+                    )}
                 </div>
                 {image && (
                     <>

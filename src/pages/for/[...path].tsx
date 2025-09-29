@@ -19,7 +19,7 @@ import productDirectorsConfig from '../../presentations/product-directors.json'
 import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
 import PricingTemplate from 'components/Presentation/Templates/PricingTemplate'
-import CalendlyTemplate from 'components/Presentation/Templates/CalendlyTemplate'
+import BookingTemplate from 'components/Presentation/Templates/BookingTemplate'
 
 const roleConfigs = {
     'product-engineers': productEngineersConfig,
@@ -296,9 +296,9 @@ const CustomPresentationPage = () => {
                     />
                 )
 
-            case 'calendly':
+            case 'booking':
                 return (
-                    <CalendlyTemplate
+                    <BookingTemplate
                         title={props.title || ''}
                         description={props.description}
                         image={props.image}
@@ -312,7 +312,7 @@ const CustomPresentationPage = () => {
                         slideKey={slideKey}
                     >
                         {props.children}
-                    </CalendlyTemplate>
+                    </BookingTemplate>
                 )
 
             default:
