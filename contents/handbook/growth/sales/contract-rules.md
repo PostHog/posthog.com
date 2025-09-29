@@ -106,7 +106,7 @@ Requirements for self-serve discounts:
 -   3 or more paid invoices
 -   Average of $280 or more across the last three invoices
 -   No open invoices
--   Not currently on the startup plan, a legacy plan, or having existing credits
+-   Not currently on the up plan, a legacy plan, or having existing credits
 
 Additional notes on self-serve discounts:
 
@@ -116,7 +116,7 @@ Additional notes on self-serve discounts:
 
 ### Non-profit discounts
 
-We do offer additional discounts to non-profits and start non-profit discounts at 15% regardless of spend.
+We do offer additional discounts to non-profits and  non-profit discounts at 15% regardless of spend.
 
 If signing for a prepaid credit plan with a credit purchase between $25k and $80k, an additional 5% non-profit discount is applied. For example, purchasing $25k in credits with an additional 5% non-profit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
 
@@ -134,7 +134,17 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 
 ### Startup plan discounts
 
-For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. You will need to estimate what 2 months' worth of credit looks like, and then offer it if they are not signing an annual plan. If they do sign an annual plan, they just get the first 2 months free. 
+For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. The amount of free credits is determined by how much they purchase on a prepaid plan. By default, we work with customers on prepaid plans that will cover their usage for the next 12 months. 
+
+You should follow the same [inbound sales process](https://posthog.com/handbook/growth/sales/new-sales) and work with the customer on understanding and optimizing their usage. Then follow these additional steps take to present the prepaid plan + free credits option(s):
+1. Review the customer's average monthly cost
+2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
+3. Inform them they can take advantage of this offer, which gives them the option to purchase [monthly cost x 10] and still have 12-months of coverage.
+4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts) 
+5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
+6. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
 
 ## Additional credit purchase
 
