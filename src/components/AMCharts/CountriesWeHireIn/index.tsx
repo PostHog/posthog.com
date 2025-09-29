@@ -3,8 +3,6 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
-import { PatternSet, LinePattern } from '@amcharts/amcharts5'
-
 type ExclusionReason = 'sanctions' | 'high-cost' | 'possible-high-cost' | 'germany' | 'timezone'
 
 interface CountryRestriction {
@@ -18,6 +16,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Cuba: { code: 'CU', reason: 'sanctions' },
     Iran: { code: 'IR', reason: 'sanctions' },
     'North Korea': { code: 'KP', reason: 'sanctions' },
+    Russia: { code: 'RU', reason: 'sanctions' },
     Syria: { code: 'SY', reason: 'sanctions' },
 
     // High employer costs (EOR not available)
@@ -38,9 +37,10 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     // Germany (10 employee limit)
     Germany: { code: 'DE', reason: 'germany' },
 
-    // Outside timezone range (UTC+3 and beyond)
+    // Outside timezone range (UTC+3 and beyond, or UTC-9 and beyond)
     Afghanistan: { code: 'AF', reason: 'timezone' },
     Armenia: { code: 'AM', reason: 'timezone' },
+    Australia: { code: 'AU', reason: 'timezone' },
     Azerbaijan: { code: 'AZ', reason: 'timezone' },
     Bahrain: { code: 'BH', reason: 'timezone' },
     Bangladesh: { code: 'BD', reason: 'timezone' },
@@ -56,10 +56,12 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Fiji: { code: 'FJ', reason: 'timezone' },
     Georgia: { code: 'GE', reason: 'timezone' },
     India: { code: 'IN', reason: 'timezone' },
+    Indonesia: { code: 'ID', reason: 'timezone' },
     Iraq: { code: 'IQ', reason: 'timezone' },
     Japan: { code: 'JP', reason: 'timezone' },
     Jordan: { code: 'JO', reason: 'timezone' },
     Kenya: { code: 'KE', reason: 'timezone' },
+    Kazakhstan: { code: 'KZ', reason: 'timezone' },
     Kiribati: { code: 'KI', reason: 'timezone' },
     Kuwait: { code: 'KW', reason: 'timezone' },
     Kyrgyzstan: { code: 'KG', reason: 'timezone' },
@@ -78,7 +80,6 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     'Papua New Guinea': { code: 'PG', reason: 'timezone' },
     Philippines: { code: 'PH', reason: 'timezone' },
     Qatar: { code: 'QA', reason: 'timezone' },
-    Russia: { code: 'RU', reason: 'timezone' },
     Samoa: { code: 'WS', reason: 'timezone' },
     'Saudi Arabia': { code: 'SA', reason: 'timezone' },
     Seychelles: { code: 'SC', reason: 'timezone' },
@@ -104,18 +105,18 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
 }
 
 const reasonColors: { [key in ExclusionReason]: number } = {
-    sanctions: 0x333333, // Dark gray
-    'high-cost': 0xcc6666, // Red
-    'possible-high-cost': 0xf4b427, // Yellow (will have pattern)
-    germany: 0x6699cc, // Blue
+    sanctions: 0xf35454, // Red
+    'high-cost': 0xb62ad9, // Purple
+    'possible-high-cost': 0xf7a501, // Orange (will have pattern)
+    germany: 0x3b2b26, // Dark brown
     timezone: 0xaaaaaa, // Light gray
 }
 
 const reasonLabels: { [key in ExclusionReason]: string } = {
     sanctions: 'Restricted due to US sanctions',
     'high-cost': 'High employer costs',
-    'possible-high-cost': 'High employer costs (possible with more research)',
-    germany: 'Limited to 10 employees',
+    'possible-high-cost': 'Unlikely to hire (high employer costs)',
+    germany: 'No longer hiring (limited to 10 employees)',
     timezone: 'Outside of timezones we currently hire in',
 }
 
@@ -136,11 +137,56 @@ export default function CountriesWeHireIn({
 
         const chart = root.container.children.push(
             am5map.MapChart.new(root, {
-                projection: am5map.geoMercator(),
+                projection: am5map.geoEqualEarth(),
                 panX: 'rotateX',
-                minZoomLevel: 0.8,
+                panY: 'translateY',
+                wheelY: 'zoom',
+                homeGeoPoint: { latitude: 20, longitude: 0 },
+                zoomLevel: 1.2,
             })
         )
+
+        // Add zoom control
+        chart.set(
+            'zoomControl',
+            am5map.ZoomControl.new(root, {
+                position: 'absolute',
+            })
+        )
+
+        // Log zoom level and rotation when they change
+        chart.events.on('wheelended', function () {
+            console.log('Zoom level:', chart.get('zoomLevel'))
+            console.log('Rotation X:', chart.get('rotationX'))
+            console.log('Rotation Y:', chart.get('rotationY'))
+        })
+
+        chart.events.on('panended', function () {
+            console.log('Zoom level:', chart.get('zoomLevel'))
+            console.log('Rotation X:', chart.get('rotationX'))
+            console.log('Rotation Y:', chart.get('rotationY'))
+        })
+
+        // Add background series with rounded edges
+        const backgroundSeries = chart.series.unshift(am5map.MapPolygonSeries.new(root, {}))
+
+        backgroundSeries.mapPolygons.template.setAll({
+            fill: am5.color(0xf5f5f5),
+            stroke: am5.color(0xcccccc),
+            strokeWidth: 1,
+        })
+
+        backgroundSeries.data.push({
+            geometry: am5map.getGeoRectangle(90, 180, -90, -180),
+        })
+
+        // Add graticule (grid lines)
+        const graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {}))
+
+        graticuleSeries.mapLines.template.setAll({
+            stroke: am5.color(0x000000),
+            strokeOpacity: 0.1,
+        })
 
         const polygonSeries = chart.series.push(
             am5map.MapPolygonSeries.new(root, {
@@ -163,6 +209,24 @@ export default function CountriesWeHireIn({
             interactive: true,
         })
 
+        // Style tooltip with white background and black text
+        const tooltip = am5.Tooltip.new(root, {
+            getFillFromSprite: false,
+            getStrokeFromSprite: false,
+            autoTextColor: false,
+            pointerOrientation: 'vertical',
+        })
+        tooltip.get('background')?.setAll({
+            fill: am5.color(0xffffff),
+            fillOpacity: 1,
+            stroke: am5.color(0xcccccc),
+            strokeWidth: 1,
+        })
+        tooltip.label.setAll({
+            fill: am5.color(0x000000),
+        })
+        polygonSeries.set('tooltip', tooltip)
+
         // Set fill color and pattern based on exclusion reason
         polygonSeries.mapPolygons.template.adapters.add('fill', (_fill, target) => {
             const dataItem = target.dataItem as am5.DataItem<any>
@@ -172,64 +236,30 @@ export default function CountriesWeHireIn({
             if (restriction) {
                 return am5.color(reasonColors[restriction.reason])
             }
-            return am5.color(0xf4b427) // PostHog yellow for hiring countries
-        })
-
-        // Add diagonal pattern for Brazil and Uruguay using stroke
-        polygonSeries.mapPolygons.template.adapters.add('stroke', (_stroke, target) => {
-            const dataItem = target.dataItem as am5.DataItem<any>
-            const id = (dataItem?.dataContext as any)?.id
-
-            if (id === 'BR' || id === 'UY') {
-                return am5.color(0x333333)
-            }
-            return am5.color(0xffffff)
-        })
-
-        polygonSeries.mapPolygons.template.adapters.add('strokeWidth', (_strokeWidth, target) => {
-            const dataItem = target.dataItem as am5.DataItem<any>
-            const id = (dataItem?.dataContext as any)?.id
-
-            if (id === 'BR' || id === 'UY') {
-                return 3
-            }
-            return 0.5
-        })
-
-        polygonSeries.mapPolygons.template.adapters.add('strokeDasharray', (_strokeDasharray, target) => {
-            const dataItem = target.dataItem as am5.DataItem<any>
-            const id = (dataItem?.dataContext as any)?.id
-
-            if (id === 'BR' || id === 'UY') {
-                return [5, 5]
-            }
-            return []
+            return am5.color(0x2f80fa) // Blue for hiring countries
         })
 
         // Set tooltip based on exclusion reason
-        polygonSeries.mapPolygons.template.adapters.add('tooltipText', (_text, target) => {
+        polygonSeries.mapPolygons.template.adapters.add('tooltipHTML', (_html, target) => {
             const dataItem = target.dataItem as am5.DataItem<any>
             const id = (dataItem?.dataContext as any)?.id
             const name = (dataItem?.dataContext as any)?.name
 
+            const checkIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 4px; color: #22c55e;"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+            const xIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 4px; color: #ef4444;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`
+
             const restriction = restrictionMap.get(id)
             if (restriction) {
-                return `${name}\n${reasonLabels[restriction.reason]}`
+                return `${xIcon}<strong>${name}</strong><br/><span style="margin-left: 28px;">${
+                    reasonLabels[restriction.reason]
+                }</span>`
             }
-            return `We hire from ${name}!`
+            return `${checkIcon} We hire from ${name}!`
         })
 
         polygonSeries.mapPolygons.template.states.create('hover', {
             fill: am5.color(0xff6a00), // PostHog orange on hover
         })
-
-        // Add zoom control
-        chart.set(
-            'zoomControl',
-            am5map.ZoomControl.new(root, {
-                position: 'absolute',
-            })
-        )
 
         return () => {
             root.dispose()
@@ -238,82 +268,30 @@ export default function CountriesWeHireIn({
 
     return (
         <div>
-            <div ref={chartRef} style={{ width: '100%', height: '500px' }} />
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '1rem',
-                    marginTop: '1rem',
-                    fontSize: '0.875rem',
-                }}
-            >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: '#f4b427',
-                            border: '1px solid #ddd',
-                        }}
-                    />
+            <div ref={chartRef} style={{ width: '100%', height: '400px' }} />
+            <div className="flex flex-wrap gap-2 mt-4 text-sm">
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-blue rounded-sm" />
                     <span>Countries we hire from</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: '#333333',
-                            border: '1px solid #ddd',
-                        }}
-                    />
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-red rounded-sm" />
                     <span>US sanctions</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: '#cc6666',
-                            border: '1px solid #ddd',
-                        }}
-                    />
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-purple rounded-sm" />
                     <span>High employer costs</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: '#f4b427',
-                            backgroundImage:
-                                'repeating-linear-gradient(45deg, #333 0, #333 2px, transparent 2px, transparent 6px)',
-                            border: '1px solid #ddd',
-                        }}
-                    />
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-yellow rounded-sm" />
                     <span>High employer costs (possible with research)</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: '#6699cc',
-                            border: '1px solid #ddd',
-                        }}
-                    />
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-brown rounded-sm" />
                     <span>Limited to 10 employees</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: '#aaaaaa',
-                            border: '1px solid #ddd',
-                        }}
-                    />
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-gray rounded-sm" />
                     <span>Outside hiring timezone range</span>
                 </div>
             </div>
