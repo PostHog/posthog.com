@@ -93,6 +93,13 @@ We aim to be significantly cheaper than our competitors. To help you reduce your
 For feature flags with flag persistence enabled and used across both your frontend and backend, you will need to do one of the following to ensure the evaluation result of the flag is consistent between both environments:
 
 1. Identify the user on the frontend and use the same identified distinct ID when getting the flag on the backend.
+```
+// Frontend: Identify the user
+posthog.identify('user123')
+
+// Backend: Use the same distinct ID
+const flagValue = await posthog.getFeatureFlag('my-flag', 'user123')
+```
 2. If you are unable to call identify on the frontend, and only have access to the anonymous distinct ID when it comes time to get the flag on the backend, then you can include the anonymous distinct ID as a person property override in the `getFeatureFlag` call.
 ```js
 // Frontend: Get the anonymous ID (before identify is called)
