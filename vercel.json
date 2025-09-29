@@ -1604,6 +1604,7 @@
             "destination": "/teams/blitzscale"
         },
         { "source": "/teams/growth", "destination": "/teams" },
+        { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" }
     ],
     "headers": [
