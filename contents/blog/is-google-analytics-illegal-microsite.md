@@ -1,24 +1,24 @@
 ---
 date: 2022-05-09
 title: >-
-  Using Google Analytics was deemed 'illegal' in some EU countries. We built a
-  microsite in 48 hours to capitalize on the news.
+    Using Google Analytics was deemed 'illegal' in some EU countries. We built a
+    microsite in 48 hours to capitalize on the news.
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/is-ga-illegal-microsite.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/is-ga-illegal-microsite.png
 author:
-  - cory-watilo
+    - cory-watilo
 category: Inside PostHog
 tags:
-  - Privacy
+    - Privacy
 ---
 
 On January 14, 2022, the world learned that Austria had declared Google Analytics to be illegal (in its default form), since it transmits IP addresses to the United States. The Netherlands declared the same view only days later.
 
-Given that PostHog is an open source, self-hostable analytics tool that eliminates the need to transmit data to *any* third party, this was obviously a perfect opportunity for us to capitalize on the news.
+Given that PostHog is an open source, self-hostable analytics tool that eliminates the need to transmit data to _any_ third party, this was obviously a perfect opportunity for us to capitalize on the news.
 
 Within five days, we launched [IsGoogleAnalyticsIllegal.com](https://isgoogleanalyticsillegal.com) and shared it with the Hacker News community. Here’s the story of how we built it in two days, how it was received by the HN community, and our missteps along the way.
 
@@ -57,18 +57,18 @@ Thankfully one of our marketing values is “No sneaky shit.” I can’t say it
 
 How can we:
 
-- have a little fun with this site concept
-- provide real value to our visitors
-- see an uptick in traffic to PostHog.com
-- make it obvious we’re not trying to make this solely a marketing stunt?
+-   have a little fun with this site concept
+-   provide real value to our visitors
+-   see an uptick in traffic to PostHog.com
+-   make it obvious we’re not trying to make this solely a marketing stunt?
 
 ### 1. Provide value: **Include our competitors and let anyone add to the list**
 
 We seeded our [Google Analytics alternatives](https://isgoogleanalyticsillegal.com/alternatives) page with all of the competitors we could think of who would solve this problem for companies affected by this ruling:
 
-- Open-source analytics tools
-- Self-hostable analytics tools
-- Analytics providers in the EU, where customer data isn’t transmitted to the United States
+-   Open-source analytics tools
+-   Self-hostable analytics tools
+-   Analytics providers in the EU, where customer data isn’t transmitted to the United States
 
 We also [published our codebase on GitHub](https://github.com/PostHog/isgoogleanalyticsillegal.com), where anyone can submit a pull request to add another competitor to the list.
 
@@ -84,7 +84,7 @@ We tried to find the balance between providing real value without trying to look
 
 ### 3. Make it abundantly clear who’s behind this
 
-Like a cigarette pack that has to include a giant health warning, we tried to go over the top to disclose who was behind the site. (You can’t demonize a *little* self-promotion, right?)
+Like a cigarette pack that has to include a giant health warning, we tried to go over the top to disclose who was behind the site. (You can’t demonize a _little_ self-promotion, right?)
 
 ![PostHog is clearly behind this](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/we-not-hiding-it-bro.png)
 
@@ -94,7 +94,7 @@ Our [Hacker News post](https://news.ycombinator.com/item?id=29994183) jumped to 
 
 ### Maybe don’t use hosted Google Fonts on a website where you’re trying to point out Google tracking is bad
 
-In our haste to get the site live, we used a hosted Google font. This was quickly pointed out by a commenter (and rightfully so). We [fixed it](https://github.com/PostHog/isgoogleanalyticsillegal.com/commit/66061d3e77902caf84482b11f888feea8dd615e9), but unfortunately that became the most popular comment, and is the top comment to this day. 
+In our haste to get the site live, we used a hosted Google font. This was quickly pointed out by a commenter (and rightfully so). We [fixed it](https://github.com/PostHog/isgoogleanalyticsillegal.com/commit/66061d3e77902caf84482b11f888feea8dd615e9), but unfortunately that became the most popular comment, and is the top comment to this day.
 
 ### Don’t use page URLs that get blocked by privacy tools
 
@@ -106,14 +106,14 @@ As it turns out, uBlock is allergic to the following slug:
 
 Since that page was inaccessible to uBlock users, we had to [change the path](https://github.com/PostHog/isgoogleanalyticsillegal.com/pull/7) to `/alternatives`.
 
-### The difference between *website analytics* and *product analytics* isn’t as understood as we thought
+### The difference between _website analytics_ and _product analytics_ isn’t as understood as we thought
 
 We see a differentiation between:
 
-- *Website analytics* - tool to analyze web-based traffic
-- *Product analytics* - a larger, more in-depth toolset, designed for product teams and engineers to analyze and learn insights about in-app usage, whether web app or mobile
+-   _Website analytics_ - tool to analyze web-based traffic
+-   _Product analytics_ - a larger, more in-depth toolset, designed for product teams and engineers to analyze and learn insights about in-app usage, whether web app or mobile
 
-We were very specific in saying *product analytics* and not *website analytics*. Unfortunately some mistook our statement as the latter, and the claim we’re the only open source website analytics platform would be false!
+We were very specific in saying _product analytics_ and not _website analytics_. Unfortunately some mistook our statement as the latter, and the claim we’re the only open source website analytics platform would be false!
 
 ![6EF42A7B-3EED-4852-884C-DEAA407A701E.jpeg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/6EF42A7B-3EED-4852-884C-DEAA407A701E.jpeg)
 
@@ -121,13 +121,13 @@ We were very specific in saying *product analytics* and not *website analytics*.
 
 As the designer on this microsite, I’d like to extend a shout out to melissalobos for the design love. (As a designer with perpetual imposter syndrome, it’s always nice to hear!)
 
-It was quickly followed up by the contrarian opinion, followed by a discussion about said opinions. (Would it really be a Hacker News thread if it *didn’t* go down this rabbit hole?)
+It was quickly followed up by the contrarian opinion, followed by a discussion about said opinions. (Would it really be a Hacker News thread if it _didn’t_ go down this rabbit hole?)
 
 ![7BCF2377-DE39-4B1F-8019-1180C49D55CC.jpeg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/is-ga-illegal-microsite/7BCF2377-DE39-4B1F-8019-1180C49D55CC.jpeg)
 
-### Consider how people will interpret what you’re *not* actually saying
+### Consider how people will interpret what you’re _not_ actually saying
 
-On the site, we ask the question: “Is Google Analytics illegal?” We are not stating Google Analytics *is* illegal.
+On the site, we ask the question: “Is Google Analytics illegal?” We are not stating Google Analytics _is_ illegal.
 
 Countries required to follow GDPR can still use Google Analytics if they don’t transmit personal data like IP address.
 
@@ -145,7 +145,7 @@ Ultimately our goal was brand awareness. In the 30 days following the site's lau
 
 ## What’s next?
 
-We continue to update the site as there are further developments across the EU. We also launched [PostHog Cloud EU](https://posthog.com/eu), providing a fully-managed [EU-hosted Google Analytics alternative](/blog/ga4-alternatives) for our customers.
+We continue to update the site as there are further developments across the EU. We also launched PostHog Cloud EU, providing a fully-managed [EU-hosted Google Analytics alternative](/blog/ga4-alternatives) for our customers.
 
 More recently, France found Google Analytics to be illegal, so we recently [added that to the site.](https://isgoogleanalyticsillegal.com/france/) In fact, we saw a huge spike in traffic to the site around this time.
 
