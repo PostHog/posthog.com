@@ -41,7 +41,7 @@ export default function ProductTemplate({
                 </div>
             </div>
 
-            <div className="grid @2xl:grid-cols-3 @2xl:items-center">
+            <div className="grid @2xl:grid-cols-3 @2xl:items-center gap-8">
                 <div className="px-8">
                     <div>
                         <h2

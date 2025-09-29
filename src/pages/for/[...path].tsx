@@ -19,6 +19,7 @@ import productDirectorsConfig from '../../presentations/product-directors.json'
 import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
 import PricingTemplate from 'components/Presentation/Templates/PricingTemplate'
+import CalendlyTemplate from 'components/Presentation/Templates/CalendlyTemplate'
 
 const roleConfigs = {
     'product-engineers': productEngineersConfig,
@@ -232,6 +233,7 @@ const CustomPresentationPage = () => {
                     >
                         {slideKey === 'cta' && (
                             <div className="w-full max-w-4xl mx-auto text-center pt-4">
+                                {/*                                 
                                 <OSButton
                                     asLink
                                     to="https://calendly.com/chris-m-posthog"
@@ -241,14 +243,11 @@ const CustomPresentationPage = () => {
                                     external
                                 >
                                     Schedule a demo
-                                </OSButton>
-                                {/* 
-TODO: Embed uses cookies, need to get consent first
+                                </OSButton> */}
                                 <DemoScheduler
                                     iframeSrc="https://calendly.com/chris-m-posthog"
                                     className="h-72 w-full"
                                 />
- */}
                             </div>
                         )}
                         {props.children}
@@ -265,6 +264,10 @@ TODO: Embed uses cookies, need to get consent first
                         imageAlt={props.imageAlt}
                         bgColor={props.bgColor}
                         textColor={props.textColor}
+                        salesRep={salesRep}
+                        slideKey={slideKey}
+                        companyLogo={props.companyLogo}
+                        companyName={props.companyName}
                     >
                         {props.children}
                     </ColumnsTemplate>
@@ -291,6 +294,25 @@ TODO: Embed uses cookies, need to get consent first
                         imageDark={props.imageDark}
                         imageAlt={props.imageAlt}
                     />
+                )
+
+            case 'calendly':
+                return (
+                    <CalendlyTemplate
+                        title={props.title || ''}
+                        description={props.description}
+                        image={props.image}
+                        imageDark={props.imageDark}
+                        imageAlt={props.imageAlt}
+                        bgColor={props.bgColor}
+                        textColor={props.textColor}
+                        companyLogo={props.companyLogo}
+                        companyName={props.companyName}
+                        salesRep={salesRep}
+                        slideKey={slideKey}
+                    >
+                        {props.children}
+                    </CalendlyTemplate>
                 )
 
             default:

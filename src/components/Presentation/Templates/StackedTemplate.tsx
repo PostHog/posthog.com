@@ -3,6 +3,8 @@ import ParseHtml from '../Utilities/parseHtml'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Logo from 'components/Logo'
 import { IconHeartFilled } from '@posthog/icons'
+import SalesRep from '../Utilities/SalesRep'
+import Logos from '../Utilities/Logos'
 
 // @TODOS
 // - Right now the Hogzill image is hard-coded. We have support for a custom image (which will hide Hogzilla) but it's not formatted
@@ -47,82 +49,6 @@ export default function StackedTemplate({
 }: StackedTemplateProps) {
     return (
         <div className={`h-full flex flex-col relative bg-${bgColor} text-black`}>
-            <div className="relative z-10 pt-8 px-8 flex flex-col">
-                <div className="flex justify-between items-center mb-8 @2xl:mb-4">
-                    <div className="flex items-center gap-4">
-                        <Logo noText className="size-20" />
-                        {companyLogo && (
-                            <>
-                                <IconHeartFilled className="size-12 inline-block text-red" />
-                                <img
-                                    src={companyLogo}
-                                    alt={companyName || 'Company logo'}
-                                    className="h-12 @2xl:h-16 object-contain rounded"
-                                />
-                            </>
-                        )}
-                    </div>
-                    {salesRep && (
-                        <div className="flex items-center gap-3">
-                            <CloudinaryImage
-                                src={salesRep.photo as `https://res.cloudinary.com/${string}`}
-                                alt={salesRep.name}
-                                className={`size-20 rounded-full overflow-hidden border-2 border-${salesRep.color} p-[1.5px]`}
-                                imgClassName={`object-cover rounded-full bg-${salesRep.color}`}
-                                width={116}
-                            />
-                            <div className="text-left">
-                                <div className="text-2xl font-semibold @2xl:leading-tight">{salesRep.name}</div>
-                                <div className="text-xl opacity-75 @2xl:leading-tight">{salesRep.title}</div>
-                                <a
-                                    href={`mailto:${salesRep.email}`}
-                                    className="block pt-0.5 text-lg underline font-semibold @2xl:leading-tight"
-                                >
-                                    {salesRep.email}
-                                </a>
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                {slideKey === 'overview' && (
-                    <>
-                        <h1
-                            className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${
-                                image ? '' : '@2xl:max-w-xl'
-                            }`}
-                            dangerouslySetInnerHTML={{
-                                __html: title.replace('{companyName}', companyName || ''),
-                            }}
-                        />
-                        {description && (
-                            <ParseHtml
-                                content={description.replace('{companyName}', companyName || '')}
-                                className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : '@2xl:max-w-2xl'}`}
-                            />
-                        )}
-                    </>
-                )}
-
-                {slideKey === 'cta' && (
-                    <>
-                        <h1
-                            className={`text-5xl @2xl:text-5xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance text-center`}
-                            dangerouslySetInnerHTML={{
-                                __html: title.replace('{companyName}', companyName || ''),
-                            }}
-                        />
-                        {description && (
-                            <ParseHtml
-                                content={description.replace('{companyName}', companyName || '')}
-                                className={`prose text-2xl @2xl:text-2xl text-center text-balance`}
-                            />
-                        )}
-                        {children}
-                    </>
-                )}
-            </div>
-
             {image ? (
                 <div className="relative flex-1 w-full px-4">
                     {imageDark ? (
@@ -160,6 +86,37 @@ export default function StackedTemplate({
                     )}
                 </>
             )}
+
+            <div className="relative z-10 pt-8 px-8 flex flex-col">
+                <div className="flex justify-between items-center mb-8 @2xl:mb-4">
+                    <Logos companyLogo={companyLogo} companyName={companyName || ''} />
+
+                    {salesRep && (
+                        <>
+                            <SalesRep salesRep={salesRep} />
+                        </>
+                    )}
+                </div>
+
+                {slideKey === 'overview' && (
+                    <>
+                        <h1
+                            className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${
+                                image ? '' : '@2xl:max-w-xl'
+                            }`}
+                            dangerouslySetInnerHTML={{
+                                __html: title.replace('{companyName}', companyName || ''),
+                            }}
+                        />
+                        {description && (
+                            <ParseHtml
+                                content={description.replace('{companyName}', companyName || '')}
+                                className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : '@2xl:max-w-2xl'}`}
+                            />
+                        )}
+                    </>
+                )}
+            </div>
 
             {children && <div className="px-4 pb-4 w-full">{children}</div>}
         </div>
