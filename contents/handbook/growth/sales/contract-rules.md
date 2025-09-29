@@ -203,7 +203,7 @@ In order for this to not mess up later renewals, the way we do this is by giving
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
-## Credit over/under usage for  contracts
+## Credit over/under usage for contracts
 
 ### When they don't have enough credit to cover their term
 
