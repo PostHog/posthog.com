@@ -88,6 +88,7 @@ interface EditorProps {
         description: string
     }
     extraMenuOptions?: React.ReactNode
+    articleRef?: React.RefObject<HTMLDivElement>
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -223,6 +224,7 @@ export function Editor({
     cta,
     bookmark,
     extraMenuOptions,
+    articleRef,
     ...other
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
@@ -579,9 +581,11 @@ export function Editor({
                                                 disabled={disableFilterChange}
                                                 placeholder={filter.label}
                                                 defaultValue={
-                                                    filters[filter.value ?? filter.label]?.value ??
-                                                    filter.initialValue ??
-                                                    filter.options[0].value
+                                                    filter.initialValue === null
+                                                        ? null
+                                                        : filter.initialValue ??
+                                                          filters[filter.value ?? filter.label]?.value ??
+                                                          filter.options[0].value
                                                 }
                                                 groups={[
                                                     {
@@ -667,6 +671,7 @@ export function Editor({
                         ) : (
                             <ScrollArea>
                                 <article
+                                    ref={articleRef ?? undefined}
                                     style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
                                     className={`${getProseClasses(
                                         proseSize
