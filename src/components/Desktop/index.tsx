@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
@@ -166,12 +166,15 @@ export default function Desktop() {
         setConfetti,
         confetti,
         compact,
+        windows,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
         enabled: !siteSettings.screensaverDisabled,
     })
     const [rendered, setRendered] = useState(false)
+    const [navVisible, setNavVisible] = useState(false)
+    const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
 
     function generateInitialPositions(): IconPositions {
@@ -259,6 +262,9 @@ export default function Desktop() {
 
         return () => {
             window.removeEventListener('resize', handleResize)
+            if (hoverTimeoutRef.current) {
+                clearTimeout(hoverTimeoutRef.current)
+            }
         }
     }, [])
 
@@ -266,6 +272,20 @@ export default function Desktop() {
         const newPositions = { ...iconPositions, [appLabel]: position }
         setIconPositions(newPositions)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newPositions))
+    }
+
+    const handleMouseEnter = () => {
+        if (hoverTimeoutRef.current) {
+            clearTimeout(hoverTimeoutRef.current)
+            hoverTimeoutRef.current = null
+        }
+        setNavVisible(true)
+    }
+
+    const handleMouseLeave = () => {
+        hoverTimeoutRef.current = setTimeout(() => {
+            setNavVisible(false)
+        }, 2000)
     }
 
     const allApps = [...productLinks, ...apps]
@@ -315,7 +335,13 @@ export default function Desktop() {
                     },
                 ]}
             >
-                <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
+                <div
+                    data-scheme="primary"
+                    data-app="Desktop"
+                    className="fixed size-full"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
                     <div className="hidden select-none wallpaper-hogzilla:flex items-end justify-end absolute inset-0">
@@ -465,7 +491,11 @@ export default function Desktop() {
                         />
                     </div>
 
-                    <nav>
+                    <nav
+                        className={`transition-opacity duration-300 ${
+                            windows.length <= 0 || navVisible ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    >
                         <motion.ul
                             initial={{ opacity: 0 }}
                             animate={{ opacity: rendered ? 1 : 0 }}
