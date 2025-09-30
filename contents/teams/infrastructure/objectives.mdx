@@ -1,11 +1,21 @@
-### 💽 Keep on going with RDS split 
-> To meet performance and scaling demands, we need to split out some services from using the main DB. We lead this effort as this is cross-team! 
 
-### 🏃Actually tackle: Improve build times for posthog apps
-> Make deployments great, fast and more reliable and use Argo UI extensions wherever it makes sense
+### 🪵 LogHog
+> Ship that v1!
 
 ### ↔ Managed reversed proxy for everyone
-> Managed reversed proxy for everyone 
+> Try this with istio gateway or another alternative
 
 ### 🔒DevEx friendly Secrets Management
 > Iterate on the current secrets management and make it a DevEx-centered self-service which is not needing us to operate. 
+
+### 💽 Help team ingestion make persons split happening
+> To meet performance and scaling demands, we need to split out some services from using the main DB. We lead this effort as this is cross-team! Also make sure that we can run db migrations for several clusters safely and reliably
+
+### 📄 Make bigger chart adjustments less risky
+> We're currently replacing helm charts in place on all envs, we need a better approach so we can test this safely per environment without hefty workarounds
+
+### Clean AWS Account and kubernetes bootstrapping
+> Spinning up new EKS clusters should be easy and fast, so that we can move towards immutable infrastructure - clickhouse-* accounts as an example
+
+### Security
+See [security goals][https://github.com/PostHog/posthog-cloud-infra/issues/5217]
