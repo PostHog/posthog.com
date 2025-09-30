@@ -6,7 +6,7 @@ showTitle: true
 
 This is our playbook for new customer success engagement. These are customers who have been with us for a while and we are ready to establish an ongoing relationship with them.
 
-The core job of a Customer Success Manager (CSM) is to ensure the longevity of the customer by ensuring their overall success and that they are getting the most value out of using PostHog. This may include helping the customer with onboarding, training, support, strategies, cost-saving, and more. Ultimately, the CSM serves as the customer's champion within the company and advocates on their behalf, and ensures the customer is successful. 
+The core job of a Customer Success Manager (CSM) is to ensure the longevity of the customer by ensuring their overall success and that they are getting the most value out of using PostHog. This may include helping the customer with onboarding, training, support, strategies, cost-saving, and more. Ultimately, the CSM serves as the customer's champion within the company and advocates on their behalf, and ensures the customer is successful.
 
 **Four principles to bear in mind:**
 
@@ -27,18 +27,14 @@ In order of priority, your objectives should be:
 
 - Set up a Vitally Playbook notification to get alerts when new conversations occur for your book of business, allowing you to keep a pulse on when your customers write in. Use this <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/f811379c-9b0b-4ff4-98d4-654df4f02d40">Playbook Template</PrivateLink> as a reference. You should also set up a Vitally Open Tickets Tracker to view all of your customer's open tickets in a single view. To do this, clone this <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/cc9ce419-fa0c-4d78-80e8-25e0760e459d">Open Tickets Tracker</PrivateLink>, remove the existing filters, then add a filter for the assigned CSM, and save to your account.
 
-- Add yourself to all your existing customer Slack channels and invite customers who are not in Slack yet to offer them an easier way to communicate with our team for their needs. Make sure to add Pylon and relevant team members on our side. Adding customers to Slack has the added benefit of giving us an additional communication channel, as email is usually one of the worst ways to reach our ICP (though you should start with email). We've found that informing customers you'll be sending them a Slack Connect invite, then sending the invite, works significantly better than asking customers if they'd like to join us on Slack.
+- Add yourself to all your existing customer Slack channels and invite customers who are not in Slack yet to offer them an easier way to communicate with our team for their needs. Make sure to add Pylon and relevant team members on our side. Adding customers to Slack has the added benefit of giving us an additional communication channel, as email is usually one of the worst ways to reach our ICP (though you should start with email). We've found that informing customers you'll be sending them a Slack Connect invite, then sending the invite, works significantly better than asking customers if they'd like to join us on Slack. A couple of tips to set up [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels)
 
 ## Tips on success engagement
 
-- Highly recommend reviewing our section on [getting people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you). What we’ve found works really well when establishing an initial connection is to be candid about wanting to learn more about your customer’s business, how they are currently utilizing PostHog, and to get a better understanding of where you may be able to add value for them. Most customers are pretty receptive to wanting to help, especially if it can benefit them in some way, so don’t be afraid to ask directly.
+- Highly recommend reviewing our section on [getting people to talk to you](/handbook/growth/sales/getting-people-to-talk-to-you). What we’ve found works really well when establishing an initial connection is to be candid about wanting to learn more about your customer’s business, how they are currently utilizing PostHog, and to get a better understanding of where you may be able to add value for them. Most customers are pretty receptive to wanting to help, especially if it can benefit them in some way, so don’t be afraid to ask directly.
 
 - Review your existing book of business to see how many products each of your customers is currently engaged with so that in your conversations, you can better understand why they may or may not be using certain products or if they find upcoming beta features useful. Make note of how many of them are on specific plans and if there are any opportunities you could help the customer save (always a great topic to help interest customers to engage).
 
 - Don’t focus on a specific champion during your initial outreach. When prioritizing outreach, do look at engaged users and user types but aim to connect with multiple team members. You never know who will be responsive and become your best point of contact. Don’t focus on just reaching out to an identified champion (if one exists).
 
 - On initial engagement calls initiated from you to learn more about the customer, it is helpful to prepare a simple agenda and re-iterate this on the call to make it easier for customers to understand what you'll be discussing, particularly if you're not familiar with their business, and what you hope to get out of the meeting, then wrap up with a summary of any action items you'll be taking to follow up with the customer. This can be a great time to gauge if the customer is interested in setting up a recurring check-in call.
-
-
-
-

@@ -62,7 +62,7 @@ export default function SessionReplay(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        // exclude: ['comparison-summary'],
+        exclude: ['posthog-on-posthog'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'columns', // Use the horizontal split layout

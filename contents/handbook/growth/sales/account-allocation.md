@@ -43,11 +43,11 @@ To help the new owner of a customer hit the ground running, we should make sure 
 - TAE -> CSM 1-3 months after the initial contract is signed and the customer is onboarded into 3 or more primary products.
 - TAE -> CSM after sufficient cross-product expansion has take place.
 
-For handover to take place there should be an Account Plan and the customer should have been onboarded properly to the products they are currently paying for.
+For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for. 
 
 ### Account Plan
 
-Our [account planning template](/handbook/growth/sales/account-planning) is an ideal document to share with the new owner detailing everything they need to know about the customer.  The existing owner should have this up to date and then schedule a handover call for the new owner.  Feel free to push back and ask for it as the new owner if this doesn't happen!
+Our [account planning template](/handbook/growth/sales/account-planning) is an ideal document to share with the new owner detailing everything they need to know about the customer.  The existing owner should have this up to date and then schedule a handover call for the new owner.  Feel free to push back and ask for it as the new owner if this doesn't happen!  Feel free to ask [Dana](/community/profiles/32545) or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
 
 ### Product Onboarding
 

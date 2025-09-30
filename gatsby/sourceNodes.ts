@@ -793,7 +793,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const fetchPostHogPipelines = async (
-        type: 'transformation' | 'destination',
+        type: 'transformation' | 'destination' | 'source_webhook',
         generateSlug: (pipeline: any) => string
     ) => {
         const { results } = await fetch(
@@ -861,4 +861,5 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
     await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
+    await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
 }

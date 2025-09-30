@@ -259,7 +259,7 @@ Use video calls if you find yourself going back and forth in an issue/via email 
 9. We end on the scheduled time. Again, it might feel rude to end a meeting, but you're actually allowing all attendees to be on time for their next meeting.
 10. It is unusual to smoke or vape in an open office, and the same goes for video calls - please don't do this out of respect for others on the call.
 
-For external meetings, the above is also helpful. We also have separate guidance on [how to run a great demo](/handbook/growth/sales/demos).
+For external meetings, the above is also helpful.
 
 ### Indicating availability
 
