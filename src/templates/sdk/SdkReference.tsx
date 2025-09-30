@@ -13,7 +13,6 @@ import { Heading } from '../../components/Heading'
 import Chip from '../../components/Chip'
 import ReaderView from 'components/ReaderView'
 import { Popover } from 'components/RadixUI/Popover'
-import OSButton from 'components/OSButton'
 import { IconChevronDown } from '@posthog/icons'
 
 export interface Parameter {
@@ -56,6 +55,8 @@ export interface Class {
 export interface SdkReferenceData {
     id: string
     hogRef: string
+    referenceId: string
+    version: string
     info: {
         description: string
         id: string

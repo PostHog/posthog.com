@@ -110,22 +110,34 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return version.split('-').pop()?.replace('.json', '') || ''
     }
 
-    for (const folderPath of SDK_REFERENCES_FOLDER_PATHS) {
+    // Fetch all folder contents in parallel
+    const folderPromises = SDK_REFERENCES_FOLDER_PATHS.map(async (folderPath) => {
         const url = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}?ref=${folderPath.repo_branch}`
         const response = await fetch(url)
         const data = await response.json()
+        return { folderPath, data }
+    })
 
+    const folderResults = await Promise.all(folderPromises)
+
+    for (const { folderPath, data } of folderResults) {
         referencesData[folderPath.id] = {}
 
-        for (const item of data) {
-            if (item.type === 'file') {
+        const filePromises = data
+            .filter((item) => item.type === 'file')
+            .map(async (item) => {
                 const fileUrl = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}/${item.name}?ref=${folderPath.repo_branch}`
                 const fileResponse = await fetch(fileUrl)
                 const fileData = await fileResponse.json()
                 const version = parseReferencesVersion(item.name)
-                if (version) {
-                    referencesData[folderPath.id][version] = fileData.content
-                }
+                return { version, content: fileData.content }
+            })
+
+        const fileResults = await Promise.all(filePromises)
+
+        for (const { version, content } of fileResults) {
+            if (version) {
+                referencesData[folderPath.id][version] = content
             }
         }
     }
