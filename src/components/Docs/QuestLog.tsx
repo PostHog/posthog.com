@@ -26,7 +26,7 @@ export const QuestLog: React.FC<{
     lastSpeechBubble = "You're ready to start building!",
 }) => {
     // Animation timing constants
-    const INITIAL_LOAD_DELAY = 1000
+    const INITIAL_LOAD_DELAY = 250
     const SPEECH_BUBBLE_SHOW_DELAY = 200
     const SPEECH_BUBBLE_AUTO_HIDE_DELAY = 3000
     const SMOOTH_SCROLL_DURATION = 1000
