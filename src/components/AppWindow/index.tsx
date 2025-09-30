@@ -30,6 +30,7 @@ import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
+import Modal from 'components/RadixUI/Modal'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -55,7 +56,7 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 const snapThreshold = -50
 
 const Router = (props) => {
-    const { minimizeWindow } = useApp()
+    const { minimizeWindow, closeWindow } = useApp()
     const { appWindow } = useWindow()
     const { children, path, minimizing, onExit } = props
 
@@ -87,7 +88,17 @@ const Router = (props) => {
     if (['/terms', '/privacy', '/dpa', '/baa'].includes(path)) {
         return <Legal defaultTab={path}>{children}</Legal>
     }
-    return (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
+    return (
+        <>
+            {appWindow?.modal?.type === 'standard' ? (
+                <Modal open onOpenChange={(open) => closeWindow(appWindow)}>
+                    {appWindow.element}
+                </Modal>
+            ) : (
+                (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
+            )}
+        </>
+    )
 }
 
 const WindowContainer = ({ children, closing }: { children: React.ReactNode; closing: boolean }) => {

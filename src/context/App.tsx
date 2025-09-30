@@ -274,6 +274,7 @@ export const Context = createContext<AppContextType>({
     setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
+    websiteMode: false,
 })
 
 export interface AppSetting {
@@ -997,6 +998,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const constraintsRef = useRef<HTMLDivElement>(null)
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
+    const websiteMode = siteSettings.experience === 'boring' && !isMobile
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const [windows, setWindows] = useState<AppWindow[]>(
@@ -1010,7 +1013,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             undefined
         )
     }, [windows])
-    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
@@ -1089,6 +1091,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                         bringToFront(nextFocusedWindow)
                     }
                 } else {
+                    if (websiteMode) {
+                        navigate('/')
+                    }
                     window.history.pushState({}, '', '/')
                 }
                 setWindows(windowsFiltered)
@@ -1293,6 +1298,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
+        if (websiteMode && newWindow.appSettings?.size.fixed) {
+            newWindow.modal = { type: 'standard' }
+        }
+
         return newWindow
     }
 
@@ -1301,7 +1310,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
-            if (newWindow.key.startsWith('/')) {
+            if (!newWindow.appSettings?.size.fixed) {
                 return replaceFocusedWindow(newWindow)
             } else {
                 return setWindows([...windows, newWindow])
@@ -1806,7 +1815,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
-    const websiteMode = siteSettings.experience === 'boring' && !isMobile
+    useEffect(() => {
+        if (websiteMode) {
+            const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
+            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
+            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed)
+            const newWindows = [
+                ...(currentWindow ? [currentWindow] : []),
+                ...(modalWindow ? [{ ...modalWindow, modal: { type: 'standard' } }] : []),
+            ]
+            setWindows(newWindows)
+        } else {
+            const newWindows = windows.map((w) => ({ ...w, modal: undefined }))
+            setWindows(newWindows)
+        }
+    }, [websiteMode])
 
     return (
         <Context.Provider
