@@ -336,73 +336,78 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     type
                 }
             }
-            allTypes: allSdkReferencesJson {
-                edges {
-                    node {
-                        info {
-                            version
-                            id
-                            title
+            allSdkReferences {
+                nodes {
+                    info {
+                        description
+                        id
+                        specUrl
+                        slugPrefix
+                        title
+                        version
+                    }
+                    referenceId
+                    hogRef
+                    id
+                    categories
+                    classes {
+                        description
+                        functions {
+                            category
                             description
-                            slugPrefix
-                        }
-                        types {
-                            id
-                            name
-                            properties {
-                                description
-                                type
+                            details
+                            examples {
+                                code
                                 name
+                                id
+                            }
+                            id
+                            params {
+                                description
+                                isOptional
+                                name
+                                type
                             }
                             path
-                            example
+                            releaseTag
+                            showDocs
+                            returnType {
+                                id
+                                name
+                            }
+                            title
                         }
+                        id
+                        title
                     }
+                    version
                 }
             }
-            allSdkReferencesJson {
-                edges {
-                    node {
+            allSdkTypes: allSdkReferences {
+                nodes {
+                    id
+                    version
+                    referenceId
+                    info {
+                        description
                         id
-                        hogRef
-                        info {
-                            version
+                        slugPrefix
+                        specUrl
+                        title
+                        version
+                    }
+                    hogRef
+                    categories
+                    types {
+                        example
+                        id
+                        name
+                        path
+                        properties {
                             description
-                            id
-                            slugPrefix
-                            specUrl
-                            title
+                            name
+                            type
                         }
-                        classes {
-                            description
-                            id
-                            title
-                            functions {
-                                category
-                                description
-                                details
-                                id
-                                showDocs
-                                title
-                                releaseTag
-                                examples {
-                                    code
-                                    id
-                                    name
-                                }
-                                params {
-                                    description
-                                    isOptional
-                                    type
-                                    name
-                                }
-                                returnType {
-                                    id
-                                    name
-                                }
-                            }
-                        }
-                        categories
                     }
                 }
             }
@@ -829,36 +834,75 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    const types = result.data.allTypes.edges.map(({ node }) => node.types.map(({ name }) => name)).flat()
-    result.data.allSdkReferencesJson.edges.forEach(({ node }) => {
-        createPage({
-            path: `/docs/references/${node.info.slugPrefix}`,
-            component: SdkReferenceTemplate,
-            context: {
-                name: node.info.title,
-                description: node.info.description,
-                fullReference: node,
-                regex: `/docs/references/${node.info.slugPrefix}`,
-                types,
-            },
-        })
+    // Grab types available for each SDK and version
+    const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
+        const { referenceId, version, ...types } = node
+
+        if (!acc[referenceId]) {
+            acc[referenceId] = {}
+        }
+
+        acc[referenceId][version] = types.types.map(({ name }) => name)
+
+        return acc
+    }, {} as Record<string, Record<string, any>>)
+
+    result.data.allSdkReferences.nodes.forEach((node) => {
+        if (node.version.includes('latest')) {
+            createPage({
+                path: `/docs/references/${node.referenceId}`,
+                component: SdkReferenceTemplate,
+                context: {
+                    name: node.info.title,
+                    description: node.info.description,
+                    fullReference: node,
+                    regex: `/docs/references/${node.referenceId}`,
+                    types: sdkTypesByReference[node.referenceId][node.version],
+                },
+            })
+        } else {
+            createPage({
+                path: `/docs/references/${node.id}`,
+                component: SdkReferenceTemplate,
+                context: {
+                    name: node.info.title,
+                    description: node.info.description,
+                    fullReference: node,
+                    regex: `/docs/references/${node.id}`,
+                    types: sdkTypesByReference[node.referenceId][node.version],
+                },
+            })
+        }
     })
 
-    result.data.allTypes.edges.forEach(({ node }) => {
-        const version = node.info.version
+    result.data.allSdkTypes.nodes.forEach((node) => {
         node.types?.forEach((type) => {
             if (type.id && (type.properties || type.example)) {
-                createPage({
-                    path: `/docs/references/${node.info.slugPrefix}/types/${type.id}`,
-                    component: SdkTypeTemplate,
-                    context: {
-                        typeData: type,
-                        version,
-                        id: node.info.id,
-                        types,
-                        slugPrefix: node.info.slugPrefix,
-                    },
-                })
+                if (node.version.includes('latest')) {
+                    createPage({
+                        path: `/docs/references/${node.referenceId}/types/${type.id}`,
+                        component: SdkTypeTemplate,
+                        context: {
+                            typeData: type,
+                            version: node.version,
+                            id: node.id,
+                            types: sdkTypesByReference[node.referenceId][node.version],
+                            slugPrefix: node.referenceId,
+                        },
+                    })
+                } else {
+                    createPage({
+                        path: `/docs/references/${node.id}/types/${type.id}`,
+                        component: SdkTypeTemplate,
+                        context: {
+                            typeData: type,
+                            version: node.version,
+                            id: node.id,
+                            types: sdkTypesByReference[node.referenceId][node.version],
+                            slugPrefix: node.id,
+                        },
+                    })
+                }
             }
         })
     })

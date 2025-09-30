@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import Layout from '../../components/Layout'
+import { graphql } from 'gatsby'
 import SEO from '../../components/seo'
-import PostLayout from '../../components/PostLayout'
-import CommunityQuestions from '../../components/CommunityQuestions'
-import { docsMenu } from '../../navs'
 import ReactMarkdown from 'react-markdown'
 import Accordion from '../../components/SdkReferences/Accordion'
 import Parameters from '../../components/SdkReferences/Parameters'
 import FunctionReturn from '../../components/SdkReferences/Return'
 import FunctionExamples from '../../components/SdkReferences/Examples'
-import CopyMarkdownActionsDropdown from '../../components/MarkdownActionsDropdown'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
 import Chip from '../../components/Chip'
 import ReaderView from 'components/ReaderView'
+import { Popover } from 'components/RadixUI/Popover'
+import OSButton from 'components/OSButton'
+import { IconChevronDown } from '@posthog/icons'
 
 export interface Parameter {
     name: string
@@ -75,6 +73,16 @@ export interface PageContext {
     types: string[]
 }
 
+export interface VersionsData {
+    allSdkReferences: {
+        nodes: Array<{
+            id: string
+            version: string
+            referenceId: string
+        }>
+    }
+}
+
 const padDescription = (description: string): string => {
     return description?.replace(/\n/g, '\n\n') || ''
 }
@@ -121,7 +129,7 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
     return ordered
 }
 
-export default function SdkReference({ pageContext }: { pageContext: PageContext }) {
+export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
     const { fullReference } = pageContext
     const location = useLocation()
 
@@ -129,8 +137,27 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
     const validTypes = pageContext.types
 
+    const sdkVersions = data.allSdkReferences.nodes
+
+    // Get versions for current referenceId
+    const currentReferenceId = fullReference.info.id
+    // Sort versions by version string (descending)
+    const availableVersions = sdkVersions
+        .filter((version) => version.referenceId === currentReferenceId)
+        .sort((a, b) => {
+            if (a.version === 'latest') return -1
+            if (b.version === 'latest') return 1
+            return b.version.localeCompare(a.version, undefined, { numeric: true })
+        })
+
     // State for filtering
     const [currentFilter, setCurrentFilter] = useState('all')
+    const [versionPopoverOpen, setVersionPopoverOpen] = useState(false)
+
+    // Derive current version from fullReference.id
+    const getCurrentVersion = () => {
+        return fullReference.id.replace(`${currentReferenceId}-`, '')
+    }
 
     // Pre-transform classes with sorted functions
     const sortedClasses = fullReference.classes.map((classData) => ({
@@ -159,6 +186,17 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         setCurrentFilter(category)
         const queryParam = categoryToQueryParam(category)
         navigate(`${location.pathname}?filter=${queryParam}`)
+    }
+
+    // Go to selected version page
+    const handleVersionChange = (version: string) => {
+        setVersionPopoverOpen(false)
+        const versionId = `${currentReferenceId}-${version}`
+        if (version === 'latest') {
+            navigate(`/docs/references/${currentReferenceId}`)
+        } else {
+            navigate(`/docs/references/${versionId}`)
+        }
     }
 
     // Initialize filter from query params
@@ -213,22 +251,6 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
 
     const filteredClasses = getFilteredClasses()
 
-    // Generate ToC from filtered classes and functions
-    const tableOfContents = filteredClasses.flatMap((classData) => [
-        {
-            url: classData.id,
-            value: `${classData.title}`,
-            depth: 0,
-        },
-        ...classData.sortedFunctions.flatMap(({ functions }) =>
-            functions.map((func) => ({
-                url: `${classData.id}-${func.id}`,
-                value: `${func.title}()`,
-                depth: 1,
-            }))
-        ),
-    ])
-
     return (
         <ReaderView markdownContent={JSON.stringify(fullReference, null, 2)}>
             <SEO title={`${fullReference.info.title} - PostHog`} />
@@ -240,8 +262,37 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                 <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{fullReference.info.title}</h1>
                                 <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
                                     <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
-                                        SDK Version: {fullReference.info.version}
+                                        SDK Version:
                                     </p>
+                                    <Popover
+                                        trigger={
+                                            <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none gap-2">
+                                                <span>
+                                                    {getCurrentVersion()}
+                                                    {getCurrentVersion() === 'latest' && (
+                                                        <span className="text-xs text-primary/60 dark:text-primary-dark/60">
+                                                            {' '}
+                                                            ({fullReference.info.version})
+                                                        </span>
+                                                    )}
+                                                </span>
+                                                <IconChevronDown className="size-6" />
+                                            </button>
+                                        }
+                                        dataScheme="secondary"
+                                        open={versionPopoverOpen}
+                                        onOpenChange={setVersionPopoverOpen}
+                                    >
+                                        {availableVersions.map((version) => (
+                                            <button
+                                                key={version.version}
+                                                onClick={() => handleVersionChange(version.version)}
+                                                className="flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full"
+                                            >
+                                                <span>{version.version}</span>
+                                            </button>
+                                        ))}
+                                    </Popover>
                                 </div>
                             </div>
                         </div>
@@ -305,7 +356,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                         </Accordion>
                                                     )}
                                                     <Parameters
-                                                        slugPrefix={fullReference.info.slugPrefix}
+                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
                                                         params={func.params}
                                                         validTypes={validTypes}
                                                     />
@@ -314,7 +365,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                 <div className="lg:sticky top-[108px] space-y-6">
                                                     <FunctionExamples examples={func.examples} language={sdkLanguage} />
                                                     <FunctionReturn
-                                                        slugPrefix={fullReference.info.slugPrefix}
+                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
                                                         returnType={func.returnType}
                                                         validTypes={validTypes}
                                                     />
@@ -331,3 +382,15 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         </ReaderView>
     )
 }
+
+export const query = graphql`
+    query SdkReferencesQuery {
+        allSdkReferences {
+            nodes {
+                id
+                version
+                referenceId
+            }
+        }
+    }
+`

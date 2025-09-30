@@ -77,13 +77,31 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     // PostHog SDK references
 
-    // We need to specify paths since some repos have multiple folders with references
+    // Paths to the SDK references folders
     const SDK_REFERENCES_FOLDER_PATHS = [
         {
             id: 'posthog-python',
-            repo: 'PostHog/posthog-python',
-            repo_branch: 'persist-references',
+            repo: 'gewenyu99/posthog-python',
+            repo_branch: 'master',
             folder_path: 'references',
+        },
+        {
+            id: 'posthog-js',
+            repo: 'gewenyu99/posthog-js',
+            repo_branch: 'main',
+            folder_path: 'packages/browser/references',
+        },
+        {
+            id: 'posthog-node',
+            repo: 'gewenyu99/posthog-js',
+            repo_branch: 'main',
+            folder_path: 'packages/node/references',
+        },
+        {
+            id: 'posthog-react-native',
+            repo: 'gewenyu99/posthog-js',
+            repo_branch: 'main',
+            folder_path: 'packages/react-native/references',
         },
     ]
 
@@ -92,47 +110,53 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return version.split('-').pop()?.replace('.json', '') || ''
     }
 
-    SDK_REFERENCES_FOLDER_PATHS.forEach(async (folderPath) => {
-        const response = await fetch(
-            `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}?ref=${folderPath.repo_branch}`
-        )
+    for (const folderPath of SDK_REFERENCES_FOLDER_PATHS) {
+        const url = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}?ref=${folderPath.repo_branch}`
+        const response = await fetch(url)
         const data = await response.json()
 
-        data.forEach(async (item) => {
+        referencesData[folderPath.id] = {}
+
+        for (const item of data) {
             if (item.type === 'file') {
-                const response = await fetch(
-                    `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}/${item.name}?ref=${folderPath.repo_branch}`
-                )
-                const fileData = await response.json()
+                const fileUrl = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}/${item.name}?ref=${folderPath.repo_branch}`
+                const fileResponse = await fetch(fileUrl)
+                const fileData = await fileResponse.json()
                 const version = parseReferencesVersion(item.name)
                 if (version) {
                     referencesData[folderPath.id][version] = fileData.content
                 }
             }
-        })
-    })
+        }
+    }
 
     for (const id in referencesData) {
-        const node = {
-            id: createNodeId(`${id}`),
-            internal: {
-                type: `SdkReferences`,
-                contentDigest: createContentDigest(referencesData[id]),
-            },
-            ...referencesData[id],
-        }
-        createNode(node)
-
+        // Create version-specific nodes
         for (const version in referencesData[id]) {
-            const node = {
-                id: createNodeId(`${id}-${version}`),
+            // Decode the base64 data first
+            const versionDataBase64 = referencesData[id][version]
+            let versionData
+
+            try {
+                const decodedString = Buffer.from(versionDataBase64, 'base64').toString('utf-8')
+                versionData = JSON.parse(decodedString)
+            } catch (error) {
+                console.error(`Failed to decode version ${version} for ${id}:`, error)
+                continue
+            }
+            versionData.id = `${id}-${version}`
+            const versionNode = {
+                parent: null,
+                children: [],
                 internal: {
                     type: `SdkReferences`,
-                    contentDigest: createContentDigest(referencesData[id][version]),
+                    contentDigest: createContentDigest(versionData),
                 },
-                ...referencesData[id][version],
+                referenceId: id,
+                version: version,
+                ...versionData, // Spread the decoded JSON data
             }
-            createNode(node)
+            createNode(versionNode)
         }
     }
 
