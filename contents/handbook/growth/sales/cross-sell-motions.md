@@ -27,7 +27,7 @@ Since we have different folks at different stages of ramp and onboarding, instea
 2. Number of in-person visits
 3. Product adoption quarter over quarter
 4. Churn rate by total number of products
-5. Church rate by specific products
+5. Churn rate by specific products
 	1. i.e. are there products that once adopted lead to a noticeably lower (or higher) churn rate.
 6. Percentage of revenue from a customer spread across products
 	1. i.e. is all the revenue for a customer coming from person profiles or is is spread between recordings, events, feature flags, and exceptions
@@ -103,7 +103,7 @@ This doesn't always need to be a formal QBR process, but some form of research -
 ## Suggested bundles
 If we want customers to use more products, we should incentivize new product adoption. This could be in the form of credits for a specific timeframe to cover adoption and usage of the specific product. For example, if a customer wants to try out data warehouse, we offer 2-3 months of credit for any data warehouse usage as they figure out how they would use it and where it provides additional insight.
 
-These sorts of cross sell / bundles fit well within PostHog, and can be pitched in grouping by feature or my user needs:
+These sorts of cross sell / bundles fit well within PostHog, and can be pitched in grouping by feature or by user needs:
 
 ### Features
 - [Product analytics + error tracking](/handbook/growth/sales/cross-selling)
@@ -116,7 +116,7 @@ These sorts of cross sell / bundles fit well within PostHog, and can be pitched 
 - Feature flags + LLM analytics - ability to granularly segment features based on cost / engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend
 
 ### User Needs
-#### The "the early stage growth" stack
+#### The "early stage growth" stack
 
 **Products**: Analytics + Session Replay + Surveys  
 **Value story**: "You know what users do, see how they struggle, and can ask them why"  
@@ -128,7 +128,7 @@ These sorts of cross sell / bundles fit well within PostHog, and can be pitched 
 **Value story**: "Roll out safely, catch issues instantly, measure impact scientifically"  
 **Ideal for**: High-velocity teams with continuous deployment
 
-### The "revenue optimization"stack
+### The "revenue optimization" stack
 
 **Products**: Analytics + Experiments + Revenue Analytics (via Data Warehouse)  
 **Value story**: "Track user behavior, test pricing changes, measure revenue impact" 
@@ -137,7 +137,7 @@ These sorts of cross sell / bundles fit well within PostHog, and can be pitched 
 #### The "vibey AI startup" stack
 **Products**: Analytics + Flags + LLM Analytics + Error tracking
 **Value story**: "Tie user behavior to run cost, launching features that are both user requested and revenue generating"
-**Ideal for:**
+**Ideal for:** AI-focused startups optimizing for cost efficiency and user engagement
 ## Incentivizing adoption
 We have opportunities to get creative with how we incentivize new product adoption with users. A few ideas are: 
 
@@ -179,7 +179,7 @@ We've already seen indicators that are worth paying attention to when it comes t
 	1. Reach out proactively to main technical contact if there is overlap
 	2. Mention our support (and lack of competitor support)
 	3. Send any pertinent docs
-	4. Follow up regularly with 
+	4. Follow up regularly with status updates and additional resources
 7. Eng/marketing hiring - is the customer hiring more technical roles? Could we do this through LinkedIn?
 	1. Prep PostHog onboarding for new user
 	2. Offer call / support for getting them up to speed
