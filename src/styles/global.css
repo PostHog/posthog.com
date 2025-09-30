@@ -2421,10 +2421,10 @@ body.dark .max-ai-body {
 }
 
 .quest-log-sprite-animate {
-    animation: quest-log-sprite-walk 0.25s steps(11) 7;
+    animation: quest-log-sprite-walk 0.5s steps(11) 4;
 }
 
-@keyframes speechBounce {
+@keyframes speechBubble {
     0% {
         transform: translateY(-50%) scale(0.8) translateX(-10px);
         opacity: 0;
@@ -2439,7 +2439,7 @@ body.dark .max-ai-body {
     }
 }
 
-@keyframes speechBounceLeft {
+@keyframes speechBubbleLeft {
     0% {
         transform: translateY(-50%) scale(0.8) translateX(10px);
         opacity: 0;

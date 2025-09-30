@@ -425,7 +425,7 @@ export const QuestLog: React.FC<{
                                         ref={spriteRef}
                                         className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
                                         style={{
-                                            backgroundImage: 'url(/images/game-walk.png)',
+                                            backgroundImage: 'url(/images/questlog-walk-sprite.png)',
                                             backgroundSize: '528px 48px',
                                             backgroundRepeat: 'no-repeat',
                                             height: '48px',
@@ -446,14 +446,14 @@ export const QuestLog: React.FC<{
                                         style={{
                                             animation: showSpeechBubble
                                                 ? selectedQuest === questItems.length - 1
-                                                    ? 'speechBounceLeft 0.5s ease-out'
-                                                    : 'speechBounce 0.5s ease-out'
+                                                    ? 'speechBubbleLeft 0.5s ease-out'
+                                                    : 'speechBubble 0.5s ease-out'
                                                 : 'none',
                                             zIndex: 60, // Higher than your sticky nav
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative bg-white dark:bg-accent-dark rounded-lg shadow-md border-1 border-white dark:border-dark px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-white border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
                                             <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
                                                 <span className="inline-block">{speechText}</span>
@@ -461,25 +461,12 @@ export const QuestLog: React.FC<{
 
                                             {/* Speech Bubble Tail */}
                                             <div
-                                                className={`absolute ${
-                                                    selectedQuest === questItems.length - 1 ? 'left-full' : 'right-full'
-                                                } top-1/2 transform -translate-y-1/2`}
-                                            >
-                                                <div
-                                                    className={`w-0 h-0 border-t-[7px] border-b-[7px] ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? 'border-l-[10px] border-l-white dark:border-l-dark'
-                                                            : 'border-r-[10px] border-r-white dark:border-r-dark'
-                                                    } border-t-transparent border-b-transparent`}
-                                                ></div>
-                                                <div
-                                                    className={`absolute ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? '-left-[8px] border-l-[8px] border-l-white dark:border-l-accent-dark'
-                                                            : '-right-[8px] border-r-[8px] border-r-white dark:border-r-accent-dark'
-                                                    } top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent`}
-                                                ></div>
-                                            </div>
+                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-white rotate-45 ${
+                                                    selectedQuest === questItems.length - 1
+                                                        ? 'border-r border-t left-full -translate-x-1/2'
+                                                        : 'border-l border-b right-full translate-x-1/2'
+                                                }`}
+                                            ></div>
                                         </div>
                                     </div>
                                 </div>
