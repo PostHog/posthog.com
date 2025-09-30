@@ -16,6 +16,7 @@ import { motion } from 'framer-motion'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
+import OSButton from 'components/OSButton'
 
 interface Product {
     name: string
@@ -357,6 +358,24 @@ export default function Desktop() {
                                 className="absolute inset-0 flex items-end justify-end"
                                 imgClassName="max-w-none md:max-h-[628px] h-auto md:h-full w-[700px] md:w-auto z-10"
                             />
+                            <div className="absolute -left-20 md:-left-40 bottom-20 md:bottom-48">
+                                <OSButton
+                                    asLink
+                                    zoomHover="lg"
+                                    to="/blog/series-e"
+                                    tooltip="We raised a Series E"
+                                    state={{ newWindow: true }}
+                                    className="hover:!border-transparent active:!bg-transparent"
+                                >
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/series_e_b3934cffe7.png"
+                                        alt="We raised a Series E"
+                                        width={452}
+                                        height={569}
+                                        className="w-24 md:w-auto md:max-w-[226px] inline-block"
+                                    />
+                                </OSButton>
+                            </div>
                         </div>
 
                         {/* Startup Monopoly */}
