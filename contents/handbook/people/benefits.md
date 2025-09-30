@@ -22,11 +22,13 @@ In countries where you are employed under Deel's EOR service, we make pension co
 
 ### Private health insurance
 
-We offer private health insurance in countries where the health system struggles with long wait times for appointments or high out-of-pocket costs. Currently, we provide private health insurance in the US and UK.
+We offer private health insurance in countries where it is seen as market standard, usually as a result of struggling health care systems with long wait times or high out-of-pocket costs. Currently, we provide private health insurance in the US, UK, Ireland, Spain, Netherlands, Portugal & Canada.
 
 In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Deel](https://app.deel.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents. Manage your benefits through [Employee Navigator](https://www.employeenavigator.com/).
 
 In the UK, we use [Aviva](https://www.aviva.co.uk/business/health-protection-wellbeing/health-insurance/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
+
+For Ireland, Spain, Netherlands, Portugal & Canada the health insurer varies depending on market and offering via the Deel platform and can be subject to change. Please login to Deel to find the policy relevant to your market or reach out to the Ops team if you have any questions. 
 
 ### Mental health support
 
