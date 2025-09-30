@@ -132,6 +132,8 @@ export default function CountriesWeHireIn({
     useLayoutEffect(() => {
         if (!chartRef.current) return
 
+        am5.addLicense('AM5M-1930-8548-3690-4255')
+
         const root = am5.Root.new(chartRef.current)
         root.setThemes([am5themes_Animated.new(root)])
 
@@ -284,7 +286,7 @@ export default function CountriesWeHireIn({
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-yellow rounded-sm" />
-                    <span>High employer costs (possible with research)</span>
+                    <span>Unlikely to hire (high employer costs)</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-brown rounded-sm" />
