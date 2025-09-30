@@ -37,6 +37,8 @@ These are presented in the most likely order that you will be able to discover t
 
 They are also available as Opportunity fields in Salesforce and as such you should keep them up to date when you learn more.
 
+> Always follow the [lead to opportunity conversion guidelines](/handbook/growth/sales/crm#lead-to-opportunity-conversion-guidelines) when creating opportunities in Salesforce
+
 ## Sales process
 
 This is an overview for what you should actually be doing with a customer at each stage of the sales process. For details on how to manage this in our CRM, visit our [Salesforce docs](/handbook/growth/sales/crm). The steps are:
