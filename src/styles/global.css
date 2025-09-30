@@ -2421,10 +2421,20 @@ body.dark .max-ai-body {
 }
 
 .questlog-sprite-walk {
+    background-image: url(/images/questlog-walk-sprite.png);
+    background-size: 528px 48px;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
     animation: questlog-sprite-animate 0.5s steps(11) 4;
 }
 
 .questlog-sprite-jump {
+    background-image: url(/images/questlog-jump-sprite.png);
+    background-size: 528px 48px;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
     animation: questlog-sprite-animate 0.75s steps(11) 3;
 }
 

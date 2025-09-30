@@ -84,6 +84,7 @@ export const QuestLog: React.FC<{
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
     const [isJumping, setIsJumping] = useState(false)
+    const [animationKey, setAnimationKey] = useState(0)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -146,41 +147,34 @@ export const QuestLog: React.FC<{
     }
 
     const restartSpriteAnimation = (shouldJump = false) => {
-        if (spriteRef.current) {
-            // Determine animation type
-            const animationType = shouldJump ? 'questlog-sprite-jump' : 'questlog-sprite-walk'
+        // Set jumping state for opacity transition
+        setIsJumping(shouldJump)
 
-            // Remove any existing animation classes
-            spriteRef.current.classList.remove('questlog-sprite-walk', 'questlog-sprite-jump')
-            void spriteRef.current.offsetWidth // Force reflow
+        // Force React to recreate elements by changing key
+        setAnimationKey((prev) => prev + 1)
 
-            // Set jumping state and add appropriate class
-            setIsJumping(shouldJump)
-            spriteRef.current.classList.add(animationType)
+        // Only show speech bubble for specific quests
+        if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+            // Update speech bubble - use first message for first quest, last message for last quest
+            const message =
+                selectedQuest === questItems.length - 1
+                    ? lastSpeechBubble // Last quest message
+                    : firstSpeechBubble // First quest message
+            setSpeechText(message)
+            setShowSpeechBubble(false)
 
-            // Only show speech bubble for specific quests
-            if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
-                // Update speech bubble - use first message for first quest, last message for last quest
-                const message =
-                    selectedQuest === questItems.length - 1
-                        ? lastSpeechBubble // Last quest message
-                        : firstSpeechBubble // First quest message
-                setSpeechText(message)
-                setShowSpeechBubble(false)
+            // Show new speech bubble after brief delay
+            setTimeout(() => {
+                setShowSpeechBubble(true)
 
-                // Show new speech bubble after brief delay
+                // Auto-hide speech bubble after delay
                 setTimeout(() => {
-                    setShowSpeechBubble(true)
-
-                    // Auto-hide speech bubble after delay
-                    setTimeout(() => {
-                        setShowSpeechBubble(false)
-                    }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
-                }, SPEECH_BUBBLE_SHOW_DELAY)
-            } else {
-                // Hide speech bubble for other quests
-                setShowSpeechBubble(false)
-            }
+                    setShowSpeechBubble(false)
+                }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
+            }, SPEECH_BUBBLE_SHOW_DELAY)
+        } else {
+            // Hide speech bubble for other quests
+            setShowSpeechBubble(false)
         }
     }
 
@@ -320,7 +314,8 @@ export const QuestLog: React.FC<{
             isFirstRender.current = false
             previousQuestRef.current = selectedQuest
             // On first render, always walk (no previous position to compare)
-            restartSpriteAnimation(false)
+            setIsJumping(false)
+            setAnimationKey((prev) => prev + 1)
             return
         }
 
@@ -441,20 +436,22 @@ export const QuestLog: React.FC<{
                                     }}
                                 >
                                     {/* Walking/Jumping Sprite */}
-                                    <div
-                                        ref={spriteRef}
-                                        className={`${
-                                            isJumping ? 'questlog-sprite-jump' : 'questlog-sprite-walk'
-                                        } w-[48px] h-[48px] pointer-events-none`}
-                                        style={{
-                                            backgroundImage: isJumping
-                                                ? 'url(/images/questlog-jump-sprite.png)'
-                                                : 'url(/images/questlog-walk-sprite.png)',
-                                            backgroundSize: '528px 48px',
-                                            backgroundRepeat: 'no-repeat',
-                                            height: '48px',
-                                        }}
-                                    />
+                                    <div ref={spriteRef} className="relative w-[48px] h-[48px] pointer-events-none">
+                                        {/* Walking Sprite */}
+                                        <div
+                                            key={`walk-${animationKey}`}
+                                            className={`absolute inset-0 questlog-sprite-walk transition-opacity duration-200 ${
+                                                !isJumping ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                        />
+                                        {/* Jumping Sprite */}
+                                        <div
+                                            key={`jump-${animationKey}`}
+                                            className={`absolute inset-0 questlog-sprite-jump transition-opacity duration-200 ${
+                                                isJumping ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                        />
+                                    </div>
 
                                     {/* Speech Bubble */}
                                     <div
