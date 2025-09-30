@@ -50,7 +50,7 @@ Key features:
 - **Backward compatible**: Flags without evaluation tags continue to work as before
 
 To configure evaluation tags:
-1. Click the bolt icon (⚡) next to the tags field
+1. Click the bolt icon <IconBolt className="inline w-4 h-4" /> next to the tags field
 2. Select which tags should act as evaluation constraints
 3. These tags will display with a green background and bolt icon
 
@@ -58,6 +58,8 @@ When using evaluation tags:
 - SDKs must send `evaluation_environments` parameter with matching tags for the flag to evaluate
 - Flags with no evaluation tags will evaluate for all requests (default behavior)
 - At least one evaluation tag must match for the flag to be included in the evaluation
+
+Learn more in the [evaluation flags docs](/docs/feature-flags/evaluation-tags)
 
 > **Important:** After setting evaluation tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation tags won't take effect.
 

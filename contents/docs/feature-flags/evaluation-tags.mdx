@@ -1,5 +1,5 @@
 ---
-title: Evaluation tags (environment constraints)
+title: Evaluation tags (user-specified flag evaluation environment constraints)
 sidebar: Docs
 showTitle: true
 availability:
@@ -36,7 +36,7 @@ Reduce unnecessary flag evaluations and associated costs by:
 - Minimizing server-side processing
 
 ### 3. Better organization
-Group and filter flags by their intended context:
+Group and filter flags by their intended context in the feature flags UI, for example:
 - Product area (e.g., "checkout", "onboarding", "admin")
 - Platform (e.g., "web", "mobile", "api")
 - Team ownership (e.g., "growth", "platform", "security")
@@ -45,40 +45,35 @@ Group and filter flags by their intended context:
 Smaller, more focused flag sets mean:
 - Faster evaluation times
 - Reduced memory usage in SDKs
-- Cleaner flag management interfaces
 
 ## Setting up evaluation tags
 
-### Step 1: Configure tags as evaluation tags
-
-In your PostHog organization settings, certain tags can be designated as "evaluation tags". These are regular tags that have been given the special ability to act as environment constraints.
-
-### Step 2: Apply evaluation tags to flags
+### Step 1: Apply evaluation tags to flags
 
 When creating or editing a feature flag:
 
 1. Navigate to the tags section
-2. Click the bolt icon (⚡) to configure evaluation constraints
+2. Click the bolt icon <IconBolt className="inline w-4 h-4" /> to configure evaluation constraints
 3. Select which tags should act as evaluation constraints
 4. Selected evaluation tags will display with a green background and bolt icon
 
-> **Remember:** Setting tags in the PostHog app is only half the setup. Your application needs to know which environment it's in, which requires updating your SDK configuration (Step 3).
+> **Remember:** Setting tags in the PostHog app is only half the setup. Your application needs to know which environment it's in, which requires updating your SDK configuration (Step 2).
 
-### Step 3: Configure your SDKs (Critical!)
+### Step 2: Configure your SDKs
 
 **This step is essential** - After setting evaluation tags in the PostHog app, you must update your SDK configuration to tell your application which environment it's running in. Without this, your application won't know its deployment context and evaluation tags won't work.
 
 Update your SDK initialization to include evaluation environments:
 
-#### JavaScript/TypeScript
-```javascript
+<MultiLanguage>
+
+```js-web
 posthog.init('YOUR_API_KEY', {
     api_host: 'https://app.posthog.com',
     evaluation_environments: ['production', 'web', 'checkout']
 })
 ```
 
-#### Python
 ```python
 posthog = Posthog(
     'YOUR_API_KEY',
@@ -87,8 +82,7 @@ posthog = Posthog(
 )
 ```
 
-#### React
-```jsx
+```react
 <PostHogProvider 
     apiKey='YOUR_API_KEY'
     options={{
@@ -100,13 +94,14 @@ posthog = Posthog(
 </PostHogProvider>
 ```
 
-#### Node.js
-```javascript
+```node
 const posthog = new PostHog('YOUR_API_KEY', {
     host: 'https://app.posthog.com',
     evaluation_environments: ['staging', 'api', 'backend']
 })
 ```
+
+</MultiLanguage>
 
 ## How evaluation works
 
@@ -133,24 +128,24 @@ If an SDK is configured with `evaluation_environments: ["production", "mobile"]`
 
 ## Best practices
 
-### 1. Start simple
+### Start simple
 Begin with high-level environment distinctions:
-- `production` vs `staging` vs `development`
-- `web` vs `mobile` vs `api`
+- `production` vs. `staging` vs. `development`
+- `web` vs. `mobile` vs. `api`
 
-### 2. Use consistent naming
+### Use consistent naming
 Establish a naming convention for your organization:
 - Environment: `prod`, `staging`, `dev`
 - Platform: `web`, `ios`, `android`, `api`
 - Product area: `checkout`, `onboarding`, `admin`
 
-### 3. Document your tags
+### Document your tags
 Maintain a list of standard evaluation tags and their purposes to ensure consistent usage across teams.
 
-### 4. Gradual adoption
+### Gradual adoption
 You don't need to add evaluation tags to all flags at once. Start with new flags or high-traffic flags where the benefits are most significant.
 
-### 5. Monitor impact
+### Monitor impact
 Track the reduction in flag evaluations and associated cost savings after implementing evaluation tags.
 
 ## Differences from evaluation runtime
@@ -163,7 +158,7 @@ While both features control where flags evaluate, they serve different purposes:
 | **Control** | User-defined tags | Predefined options (client/server/all) |
 | **Granularity** | Unlimited custom contexts | Three fixed options |
 | **Configuration** | Per-organization tags | Per-flag setting |
-| **Use case** | Environment isolation, cost optimization | Client vs server separation |
+| **Use case** | Environment isolation, cost optimization | Client vs. server separation |
 
 ## Common use cases
 
@@ -232,22 +227,12 @@ To adopt evaluation tags in an existing PostHog setup:
 2. **Define tag taxonomy**: Create a consistent naming scheme for your environments
 3. **Configure organization tags**: Set up evaluation tags in organization settings
 4. **Update high-impact flags first**: Start with flags that have the most evaluations
-5. **Update SDKs gradually**: Roll out SDK changes with evaluation_environments per environment
+5. **Update SDKs gradually**: Roll out SDK changes with `evaluation_environments` per environment
 6. **Monitor and adjust**: Track the impact and refine your tag strategy
 
 ## SDK support
 
 Evaluation tags are supported in the following SDKs:
-- JavaScript Web (version X.X+)
-- Node.js (version X.X+)
-- Python (version X.X+)
-- React (version X.X+)
-- React Native (version X.X+)
-- iOS (version X.X+)
-- Android (version X.X+)
-- Go (version X.X+)
-- Ruby (version X.X+)
-- PHP (version X.X+)
-- Flutter (version X.X+)
+- [JavaScript Web (version 1.270.0+)](/docs/libraries/js/config#evaluation_environments)
 
 > **Note:** Check your SDK documentation for the minimum version required and specific implementation details.
