@@ -12,5 +12,5 @@ If you come across an account with growth potential or stable high-level spend (
 
 If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. If it’s clear there’s a duplication issue and we shouldn’t be involved, ping Mine to double-check the logic.
 
-Lastly, if you see an account with a promising, positive growth trajectory, but they may achieve the $ treshold after finish the onboarding program, set a task in Vitally in order to circle back after some time and see if they're eligible for being passed on to Sales.
+Lastly, if you see an account with a promising, positive growth trajectory, but they may achieve the $ threshold after finishing the onboarding program, set a task in Vitally in order to circle back after some time and see if they're eligible for being passed on to Sales.
 
