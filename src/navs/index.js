@@ -1440,7 +1440,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline
+                        url: '/handbook/onboarding/onboarding-pipeline',
                     }
                     {
                         name: 'Sales Handover',
