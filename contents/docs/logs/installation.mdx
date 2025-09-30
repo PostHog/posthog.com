@@ -1,0 +1,333 @@
+---
+title: "Install OpenTelemetry logging"
+showStepsToc: true
+---
+
+import Tab from "components/Tab"
+
+<Steps>
+
+<Step title="Choose your OpenTelemetry client" badge="required">
+
+PostHog Logs works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages - just use standard OpenTelemetry libraries.
+
+<Tab.Group tabs={[
+'Node.js', 
+'Python', 
+'Java',
+'Go',
+'Other']}>
+<Tab.List>
+<Tab>Node.js</Tab>
+<Tab>Python</Tab>
+<Tab>Java</Tab>
+<Tab>Go</Tab>
+<Tab>Other</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+### Install OpenTelemetry packages
+
+```bash
+npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs
+```
+
+### Configure the SDK
+
+```javascript
+import { NodeSDK } from '@opentelemetry/sdk-node';
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
+import { SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs';
+
+const sdk = new NodeSDK({
+  logRecordProcessor: new SimpleLogRecordProcessor(
+    new OTLPLogExporter({
+      url: 'http://your-posthog-host:4317/v1/logs',
+      headers: {
+        'Authorization': `Bearer ${jwtTokenWithTeamId}`
+      }
+    })
+  )
+});
+
+sdk.start();
+```
+
+### Use standard OpenTelemetry logging
+
+```javascript
+import { logs } from '@opentelemetry/api-logs';
+
+const logger = logs.getLogger('my-app');
+
+// Log with different levels
+logger.info('User action', { userId: '123', action: 'login' });
+logger.warn('Deprecated API used', { endpoint: '/old-api' });
+logger.error('Database connection failed', { error: 'Connection timeout' });
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+### Install OpenTelemetry packages
+
+```bash
+pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
+```
+
+### Configure the SDK
+
+```python
+from opentelemetry import logs
+from opentelemetry.sdk.logs import LoggerProvider, LoggingHandler
+from opentelemetry.sdk.logs.export import BatchLogRecordProcessor
+from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
+
+# Configure the logger provider
+logger_provider = LoggerProvider()
+logs.set_logger_provider(logger_provider)
+
+# Create OTLP exporter
+otlp_exporter = OTLPLogExporter(
+    endpoint="http://your-posthog-host:4317",
+    headers={"Authorization": f"Bearer {jwt_token_with_team_id}"}
+)
+
+# Add processor
+logger_provider.add_log_record_processor(
+    BatchLogRecordProcessor(otlp_exporter)
+)
+
+# Get logger
+logger = logs.get_logger("my-app")
+```
+
+### Use standard Python logging
+
+```python
+import logging
+
+# Configure logging to use OpenTelemetry
+logging.basicConfig(level=logging.INFO)
+logging.getLogger().addHandler(LoggingHandler())
+
+# Use standard Python logging
+logger = logging.getLogger("my-app")
+logger.info("User action", extra={"userId": "123", "action": "login"})
+logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
+logger.error("Database connection failed", extra={"error": "Connection timeout"})
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+### Add OpenTelemetry dependencies
+
+```xml
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-api</artifactId>
+    <version>1.32.0</version>
+</dependency>
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-sdk</artifactId>
+    <version>1.32.0</version>
+</dependency>
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-exporter-otlp</artifactId>
+    <version>1.32.0</version>
+</dependency>
+```
+
+### Configure the SDK
+
+```java
+import io.opentelemetry.api.logs.GlobalLoggerProvider;
+import io.opentelemetry.sdk.logs.SdkLoggerProvider;
+import io.opentelemetry.sdk.logs.export.BatchLogRecordProcessor;
+import io.opentelemetry.exporter.otlp.logs.OtlpGrpcLogRecordExporter;
+
+SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
+    .addLogRecordProcessor(
+        BatchLogRecordProcessor.builder(
+            OtlpGrpcLogRecordExporter.builder()
+                .setEndpoint("http://your-posthog-host:4317")
+                .addHeader("Authorization", "Bearer " + jwtTokenWithTeamId)
+                .build()
+        ).build()
+    )
+    .build();
+
+GlobalLoggerProvider.set(loggerProvider);
+```
+
+### Use standard OpenTelemetry logging
+
+```java
+import io.opentelemetry.api.logs.Logger;
+
+Logger logger = GlobalLoggerProvider.get().get("my-app");
+
+logger.logRecordBuilder()
+    .setBody("User action")
+    .setAttributes(Attributes.of(
+        AttributeKey.stringKey("userId"), "123",
+        AttributeKey.stringKey("action"), "login"
+    ))
+    .emit();
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+### Install OpenTelemetry packages
+
+```bash
+go get go.opentelemetry.io/otel/sdk/log
+go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc
+```
+
+### Configure the SDK
+
+```go
+package main
+
+import (
+    "context"
+    "go.opentelemetry.io/otel"
+    "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc"
+    "go.opentelemetry.io/otel/sdk/log"
+)
+
+func main() {
+    ctx := context.Background()
+    
+    // Create OTLP exporter
+    exporter, err := otlploggrpc.New(ctx,
+        otlploggrpc.WithEndpoint("your-posthog-host:4317"),
+        otlploggrpc.WithHeaders(map[string]string{
+            "Authorization": "Bearer " + jwtTokenWithTeamId,
+        }),
+    )
+    if err != nil {
+        panic(err)
+    }
+    
+    // Create logger provider
+    loggerProvider := log.NewLoggerProvider(
+        log.WithBatcher(exporter),
+    )
+    
+    otel.SetLoggerProvider(loggerProvider)
+}
+```
+
+### Use standard OpenTelemetry logging
+
+```go
+import (
+    "go.opentelemetry.io/otel/log"
+)
+
+logger := otel.GetLoggerProvider().Logger("my-app")
+
+logger.Info(ctx, "User action",
+    log.String("userId", "123"),
+    log.String("action", "login"),
+)
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+PostHog Logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
+
+The key requirements are:
+- Use OTLP (OpenTelemetry Protocol) for log export
+- Send logs to `http://your-posthog-host:4317/v1/logs`
+- Include JWT token in Authorization header: `Bearer {your-jwt-token}`
+- JWT token must contain `team_id` claim
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Generate JWT token" badge="required">
+
+You need a JWT token that contains your team ID. The token must include a `team_id` claim.
+
+### Example JWT payload
+
+```json
+{
+  "team_id": "your-team-id",
+  "exp": 1735689600
+}
+```
+
+### Generate token (Node.js example)
+
+```javascript
+import jwt from 'jsonwebtoken';
+
+const payload = {
+  team_id: 'your-team-id',
+  exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // 24 hours
+};
+
+const token = jwt.sign(payload, 'your-jwt-secret');
+```
+
+### Generate token (Python example)
+
+```python
+import jwt
+import time
+
+payload = {
+    'team_id': 'your-team-id',
+    'exp': int(time.time()) + (60 * 60 * 24)  # 24 hours
+}
+
+token = jwt.encode(payload, 'your-jwt-secret', algorithm='HS256')
+```
+
+</Step>
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog Logs interface for your log entries
+3. Verify the logs appear with the correct team association
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+  View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<Step checkpoint title="Next steps" subtitle="What you can do with your logs">
+
+| Action | Description |
+| --- | --- |
+| **Search logs** | Use the search interface to find specific log entries |
+| **Filter by level** | Filter by INFO, WARN, ERROR, etc. |
+| **Set up alerts** | Get notified when specific log patterns occur |
+| **Correlate with events** | Connect log data with your PostHog analytics |
+
+<CallToAction type="primary" to="/docs/logs/troubleshooting">
+  Troubleshoot common issues
+</CallToAction>
+
+</Step>
+
+</Steps>

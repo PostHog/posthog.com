@@ -1,0 +1,72 @@
+---
+title: Logs troubleshooting and FAQs
+---
+
+## Authentication errors
+
+**Problem**: Getting 401 Unauthorized errors when sending logs.
+
+**Solutions**:
+- Verify your JWT token is valid and not expired
+- Ensure the JWT token contains a `team_id` claim
+- Check that the JWT secret matches between your client and the log capture service
+- Verify the Authorization header format: `Bearer {your-jwt-token}`
+
+## Connection issues
+
+**Problem**: Cannot connect to the log capture service on port 4317.
+
+**Solutions**:
+- Verify the log capture service is running: `curl http://your-posthog-host:8000/_readiness`
+- Check that port 4317 is accessible from your application
+- Ensure firewall rules allow outbound connections to port 4317
+- Verify the endpoint URL format: `http://your-posthog-host:4317/v1/logs`
+
+## Logs not appearing in PostHog
+
+**Problem**: Logs are being sent but don't appear in the PostHog interface.
+
+**Solutions**:
+- Check that the JWT token contains the correct `team_id`
+- Verify logs are being sent in the correct OTLP format
+- Check the log capture service logs for processing errors
+- Ensure your team has access to the Logs feature in PostHog
+
+## Performance issues
+
+**Problem**: High memory usage or slow log processing.
+
+**Solutions**:
+- Adjust the batch size in your OpenTelemetry configuration
+- Consider using asynchronous log processing
+- Monitor the log capture service metrics at `/metrics`
+- Check for network latency between your application and the log service
+
+## Log format problems
+
+**Problem**: Logs are being received but not parsed correctly.
+
+**Solutions**:
+- Ensure you're using the standard OTLP log format
+- Verify log levels are set correctly (INFO, WARN, ERROR, etc.)
+- Check that log attributes are properly structured
+- Use the OpenTelemetry logging APIs instead of raw log libraries
+
+## Team association issues
+
+**Problem**: Logs are appearing under the wrong team or not associated with any team.
+
+**Solutions**:
+- Verify the `team_id` in your JWT token matches your PostHog team ID
+- Check that the JWT token is being sent with each log batch
+- Ensure the log capture service is using the correct JWT secret for validation
+- Contact support if team IDs are not matching expected values
+
+## Still having issues?
+
+If you're still experiencing problems:
+
+1. Check the log capture service logs for detailed error messages
+2. Verify your OpenTelemetry client configuration matches the examples
+3. Test with a simple log message first before sending complex logs
+4. Contact PostHog support with your specific error messages and configuration details

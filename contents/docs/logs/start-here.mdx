@@ -1,0 +1,107 @@
+---
+title: Getting started with logs
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
+
+<QuestLogItem 
+    title="Install OpenTelemetry logging"
+    subtitle="Required"
+    icon="IconCode"
+>
+
+PostHog Logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP). 
+Unlike traditional logging services, you don't need any PostHog-specific SDKs – just use standard OpenTelemetry libraries.
+
+PostHog's log capture service receives logs via gRPC on port 4317 and processes them based on team authentication using JWT tokens.
+
+<CallToAction type="primary" to="/docs/logs/installation">
+  Install OpenTelemetry logging
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Configure your logging client"
+  subtitle="Required"
+  icon="IconSettings"
+>
+
+Once you have OpenTelemetry installed, you need to configure your client to send logs to PostHog:
+
+- Set the gRPC endpoint to `http://your-posthog-host:4317`
+- Include a JWT token with your team ID in the Authorization header
+- Use the standard OTLP log format
+
+The beauty of PostHog Logs is that it's fully OTLP-compliant, so it works with any OpenTelemetry-compatible client.
+
+<CallToAction type="primary" to="/docs/logs/installation">
+  Configure your logging client
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Search and analyze your logs"
+  subtitle="Required"
+  icon="IconSearch"
+>
+
+Once your logs are flowing into PostHog, you can:
+
+- **Search through logs** by level, message content, or custom attributes
+- **Filter by time ranges** to find specific events
+- **Analyze log patterns** with built-in aggregation tools
+- **Set up alerts** based on log content or error rates
+- **Correlate logs with events** from your PostHog analytics
+
+Navigate to the Logs section in your PostHog dashboard to start exploring your log data.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+  View your logs in PostHog
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Troubleshooting"
+  subtitle="Recommended"
+  icon="IconSettings"
+>
+
+Common issues you might encounter when setting up logging:
+
+- **Authentication errors** - Make sure your JWT token includes the correct team_id
+- **Connection issues** - Verify the gRPC endpoint and port 4317 are accessible
+- **Log format problems** - Ensure you're using the standard OTLP log format
+
+<CallToAction type="primary" to="/docs/logs/troubleshooting">
+  Troubleshoot common issues
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Cookbooks and recipes"
+  subtitle="Recommended"
+  icon="IconBook"
+>
+
+We've created a few tutorials for common use cases to get you started:
+
+- [How to create a drip campaign](/docs/messaging/email-drip-campaign)
+
+---
+
+<CallToAction type="primary" to="https://app.posthog.com/messaging/campaigns/new/overview">
+  Try the campaign builder
+</CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>
