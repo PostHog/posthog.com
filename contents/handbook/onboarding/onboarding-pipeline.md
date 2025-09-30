@@ -1,4 +1,11 @@
 
+---
+title: Onboarding Pipeline
+sidebar: Handbook
+showTitle: true
+---
+
+# Onboarding Pipeline
 # Onboarding Pipeline
 
 The onboarding team operates a high volume, high velocity sales pipeline with all pay-as-you-go (or YC) accounts that are forecasted to spend > $100 and are not otherwise engaged by Sales/CSM. As such, Onboarding is a linear flow moving from initial outreach to confirming the product is configured properly, ending with customers that are happy paying multiple bills. We aim to keep engagements to ~8 weeks, or 2 full billing periods, but in practice there is some spillover depending on responsiveness. 
