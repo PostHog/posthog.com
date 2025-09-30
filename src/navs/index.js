@@ -1304,6 +1304,16 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/incidents#customer-communications',
             },
             {
+                name: 'Internal processes',
+                url: '',
+                children: [
+                    {
+                        name: 'Support zero weeks',
+                        url: '/handbook/support/support-zero',
+                    },
+                ],
+            },
+            {
                 name: 'Troubleshooting tips',
                 url: '/handbook/support/troubleshooting-tips',
             },
