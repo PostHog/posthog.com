@@ -226,9 +226,9 @@ As a rule of thumb, everyone interviewing must feel a genuine sense of excitemen
 
 For engineering roles only: during high-volume seasons, this round might be recorded for training purposes to help us onboard and train new interviewers faster. The candidate will, of course, have the chance to opt out by either letting their recruiter know in advance or letting the interviewer know at the start of the interview. 
 
-### 3. Small Team interview with an Exec Team Member
+### 3. Culture and motivation interview with a Blitzcale Team Member
 
-This is a call with either James, Tim, Raquel, or Charles depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
+This is a call with either James, Tim, Raquel, or Charles. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
 
 Candidates who are unsuccessful at this stage should receive a short email with feedback. 
 
