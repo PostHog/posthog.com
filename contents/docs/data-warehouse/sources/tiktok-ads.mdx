@@ -1,5 +1,5 @@
 ---
-title: Linking Tiktok Ads as a source
+title: Linking TikTok Ads as a source
 sidebar: Docs
 showTitle: true
 availability:
