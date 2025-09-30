@@ -1357,6 +1357,10 @@ export const handbookSidebar = [
                                 name: 'Cross-selling',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
+                            {
+                                name: 'Cross sell motions',
+                                url: '/handbook/growth/sales/cross-sell-motions',
+                            },
                         ],
                     },
 
