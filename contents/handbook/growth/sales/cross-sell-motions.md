@@ -4,9 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Context
-This is a very rough work in progress, but I hope this can be a foundation for feedback / discussion that can turn this into a real playbook for how we win at cross-sell. This is a distillation of a discussion that happened in London during an onboarding, where the team discussed how to get better at cross selling.
-
 ## Problem statement
 
 Cross sell is a primary focus for product led sales team , but we don't have a specific playbook / motion / plan on how to do cross sell well. As a result, TAM managed accounts are only *slightly* better than average when it comes to product adoption. We can change this. We have the technology.
