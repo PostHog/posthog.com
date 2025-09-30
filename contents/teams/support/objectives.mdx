@@ -1,24 +1,50 @@
-### Deflect common implementation-related tickets with SDK doctor
-- **Owner:** <TeamMember name="Steven Shults" photo />, <TeamMember name="Luke Belton" photo />
-- **Rationale:** Providing customers with a tool to check common implementation issues / mistakes = fewer tickets related to these
-- **What we'll ship:** A tool available to customers in the side panel to help diagnose SDK implementation issues
-- **We'll know we're successful when:** SDK doctor exists in the side panel, reliably detecting at least 3 common issues, and the tool is accessible to some customers.
+### Implement two way sync for community questions with Zendesk
+- **Owner:** <TeamMember name="Christian Rafferty" photo />
+- **Rationale:** A centralised tool for managing both community and non-community tickets will give the support team full visibility into all customer questions without splitting focus across multiple platforms. This also creates the groundwork for being able to offer some level of support to free customers.
+- **What we'll ship:** When a community question is posted, ensure that it is raised in Zendesk and assigned to the correct agent group. When follow up replies are posted on the community question thread, ensure that these are posted onto the Zendesk ticket and the ticket status changes appropriately. Allow agents to post their reply in Zendesk as a public comment which will be posted to the community thread (internal comments will remain only in Zendesk). Ensure that the desired behaivour is achieved relative to existing triggers and automations that exist in Zendesk.
+- **We'll know we're successful when:** All community tickets and their replies are tracked in Zendesk, community tickets follow the same status rules as non-community tickets, and we are able to start considering target response times for community questions.
+- **Stretch Goal:** Set the `Org plan level` on the ticket.
 
-### Improve support experience with Max AI 
+### Create a reliable way to surface if we are experiencing a customer facing incident
+- **Owner:** <TeamMember name="Joshua Ordehi" photo />
+- **Rationale:** Being able to surface incidents faster means that we as a company can jump on those incidents and fix them sooner.
+- **What we'll ship:** Improvements to the existing reporting and alerting that Joshua has created which looks at support tickets created from customer facing errors. The goal is to make the detection more accurate (considering both specific product areas and being able to identify cross-functional issues) and less noisy. The next stage of implementation will also look at the related error tracking issue to discover if more customers are experiencing this error/incident (within a specific timeframe) but aren't reporting it in support tickets.
+- **We'll know we're successful when:** We feel confident enough in the accuracy of the incident identification to put the alert into #tell-posthog-anything.
+
+### Make it more obvious how to submit tickets during the login workflow
+- **Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
+- **Rationale:** Prevent customer frustration and improve support experience by making it more obvious how to submit tickets during the login workflow.
+- **What we'll ship:** Implement a more obvious prompt to the user for how to submit a support ticket.
+- **We'll know we're successful when:** Fewer tickets with the `email-closed` tag that have been created due to issues encountered during the login workflow.
+
+### Develop a framework that will give us confidence in how Max is being used as a support tool
+- **Owner:** <TeamMember name="Luke Belton" photo />
+- **Rationale:** Max is being used as a support tool and we don't really know what the quality of that support is. We want to ensure that users are receiving the best support experience and that Max is monitored with that in mind. If Max gives bad support advice then we will confuse our customers and worst case leave them looking for solutions from PostHog alternatives.
+- **What we'll ship:** This is a research piece that will outline a future framework for evaluating Max as a member of the support team.
+- **We'll know we're successful when:** We have a clear route forwards on how we want to be testing Max's support output. We'll have a good understanding of how to feedback Max's performance on support and iterate to improve him.
+
+### Get SDK Doctor into active beta and collecting feedback from users
+- **Owner:** <TeamMember name="Steven Shults" photo />
+- **Rationale:** Getting SDK doctor into active beta will help our customers understand if they are staying up to date with the latest version of our SDKs or if they are trying to call feature flags too soon. Having this in active beta will allow us to see how users respond (and address some feedback) before extending the functionality of SDK doctor.
+- **What we'll ship:** We'll complete all beta prep including creating public documentation, getting the code reviewed by engineering, tightening up and extending our test cases, and generally shipping SDK doctor into an active beta state. We can also implement any feedback we receive from customers that we think is reasonable.
+- **We'll know we're successful when:** SDK doctor is in active beta and feedback tickets about SDK Doctor are coming into Zendesk from customers.
+
+### Investigate and design a tool that will become our omnisearch and source of knowledge that we use while solving tickets
 - **Owner:** <TeamMember name="Ben Lea" photo />, <TeamMember name="Ben Haynes" photo />
-- **Rationale:** Encouraging customers to use Max AI will decrease the number of support tickets, allowing us to focus time and effort on more complicated tickets.
-- **What we'll ship:** Improvements to the way Max is used in the support sidebar so that more customers are directed to use Max AI and/or their questions are run through Max AI as a precursor to sending the ticket to support.
-- **We'll know we're successful when:** The support contact rate is decreasing.
-- **Stretch goal:** Allow customers to submit support requests via Max AI and get Max to help formulate a more useful support request for us (i.e. with chat history with Max etc).
+- **Rationale:** Having better AI tooling and search ability for support engineers makes us more efficient in diagnosing issues and answering support tickets.
+- **What we'll ship:** Do investigation into approaches we can take to create this tool (whether we use a third party or something homegrown). Design and implement a minimum prototype of this tool that can be used by the support team.
+- **We'll know we're successful when:** We have a design for this tool and have a prototype we can build on.
 
-### Integrate error tracking information back into the app
-- **Owner:** <TeamMember name="Joshua Ordehi" photo />, <TeamMember name="Luke Belton" photo />
-- **Rationale:** Providing more information about error tracking, including GitHub issue if it exists etc, should reduce the need for customers to create tickets when they encounter an error in-app.
-- **What we'll ship:** Integrate our error tracking and information into error handling in-app
-- **We'll know we're successful when:** We receive fewer tickets with just the error pasted or saying 'I encountered this error'.
+### Design a tool that helps us to troubleshoot customer implementations of PostHog
+- **Owner:** <TeamMember name="Kyle Swank" photo />
+- **Rationale:** Having better tooling for support engineers makes us more efficient in diagnosing issues and answering support tickets.
+- **What we'll ship:** Design a tool (we'll consider browser extensions, using the toolbar, implementations in PostHog, etc) which helps support engineers to more easily troubleshoot customer's implementations of PostHog. Consider two of the most common things we as support engineers need to surface from a customer's implementation when troubleshooting, and design a tool which can more easily surface these things.
+- **We'll know we're successful when:** We have a design for this tool and have begun implementing a minimum functioning version of it.
 
-### Create a strategy for Community and GitHub support 
-- **Owner:** <TeamMember name="Abigail Richardson" photo />
-- **Rationale:** More community engagement = more happy customers = good word of mouth
-- **What we'll ship:** A strategy for getting more involved in community and GitHub issues raised by customers
-- **We'll know we're successful when:** The support team are starting to respond more on community tickets and we have a strategy for dealing with customer-raised GitHub issues.
+### Things <TeamMember name="Abigail Richardson" photo /> is focusing on this quarter:
+- Implementing Support Zero weeks to enable the team to reach more of our quarterly goals
+- Outlining a strategy for SMEs and how we get there to enable the team to deal with the rising complexity in tickets
+- Outlining a strategy for products coming out of beta and into support
+- Outlining a strategy for community support
+- Hiring and onboarding to improve support coverage
+- Improving reporting, especially on coverage and where tickets come from
