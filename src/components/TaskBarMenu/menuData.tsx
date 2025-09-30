@@ -315,7 +315,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile } = useApp()
+    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile, websiteMode } = useApp()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -823,6 +823,7 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: logoMenuItems,
+            mobileLink: websiteMode ? '/' : undefined,
         },
         // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),

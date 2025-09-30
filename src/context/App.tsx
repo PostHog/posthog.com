@@ -1806,7 +1806,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
-    const websiteMode = siteSettings.experience === 'boring'
+    const websiteMode = siteSettings.experience === 'boring' && !isMobile
 
     return (
         <Context.Provider

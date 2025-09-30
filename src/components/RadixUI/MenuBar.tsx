@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useApp } from '../../context/App'
+import { navigate } from 'gatsby'
 
 // Types
 export type MenuItemType = {
@@ -291,7 +292,9 @@ export interface MenuBarProps {
 }
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
-    const { isMobile } = useApp()
+    const { isMobile, websiteMode } = useApp()
+
+    const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
@@ -330,12 +333,42 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                 }
 
                 return (
-                    <RadixMenubar.Menu key={menuIndex} data-scheme="primary">
+                    <RadixMenubar.Menu
+                        key={menuIndex}
+                        data-scheme="primary"
+                        {...(websiteMode
+                            ? {
+                                  open: openMenuIndex === menuIndex,
+                                  onOpenChange: (open: boolean) => {
+                                      setOpenMenuIndex(open ? menuIndex : null)
+                                  },
+                              }
+                            : {})}
+                    >
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
                             className={`${triggerAsChild ? '' : TriggerClasses} ${
                                 menu.bold ? 'font-bold' : 'font-medium'
-                            } ${customTriggerClasses}`}
+                            } ${customTriggerClasses} ${
+                                websiteMode ? (openMenuIndex === menuIndex ? '!bg-accent' : '!bg-transparent') : ''
+                            }`}
+                            onMouseEnter={
+                                websiteMode
+                                    ? () => {
+                                          setOpenMenuIndex(menuIndex)
+                                      }
+                                    : undefined
+                            }
+                            onClick={
+                                websiteMode
+                                    ? () => {
+                                          const url = menu.mobileLink || menu.items.find((item) => item.link)?.link
+                                          if (url) {
+                                              navigate(url, { state: { newWindow: true } })
+                                          }
+                                      }
+                                    : undefined
+                            }
                         >
                             {menu.trigger}
                         </RadixMenubar.Trigger>
@@ -346,6 +379,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
+                                onMouseLeave={
+                                    websiteMode
+                                        ? () => {
+                                              setOpenMenuIndex(null)
+                                          }
+                                        : undefined
+                                }
                             >
                                 {menu.items.map((item, itemIndex) => (
                                     <MenuItem key={`${menuIndex}-${itemIndex}`} item={item} menuIndex={menuIndex} />
