@@ -68,3 +68,13 @@ If you want to use an alternative reverse proxy that we have not documented, it 
     reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need
     to adjust your limits.
 </CalloutBox>
+
+## FAQ
+
+### Why doesn't PostHog use its own proxy?
+
+We do use a proxy for our own analytics! However, ad blockers specifically target well-known analytics and tracking domains. When ad blockers visit `posthog.com`, they identify and catalog the tracking scripts and domains we use, then add them to their block lists.
+
+This means that even if we proxy our own tracking through a subdomain like `e.posthog.com`, ad blockers will still block it because they've specifically identified it as a PostHog tracking endpoint.
+
+Your proxy works differently because ad blockers haven't specifically visited your domain to catalog your tracking setup. When you use a domain like `e.yourdomain.com`, it appears to ad blockers as just another part of your application rather than a known tracking service.
