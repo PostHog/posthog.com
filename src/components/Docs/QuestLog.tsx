@@ -83,11 +83,13 @@ export const QuestLog: React.FC<{
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
+    const [isJumping, setIsJumping] = useState(false)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
     const spriteRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
+    const previousQuestRef = useRef(0)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
         QuestLogItemProps & {
@@ -143,11 +145,18 @@ export const QuestLog: React.FC<{
         return questIndex === firstQuest || questIndex === lastQuest
     }
 
-    const restartSpriteAnimation = () => {
+    const restartSpriteAnimation = (shouldJump = false) => {
         if (spriteRef.current) {
-            spriteRef.current.classList.remove('quest-log-sprite-animate')
+            // Determine animation type
+            const animationType = shouldJump ? 'questlog-sprite-jump' : 'questlog-sprite-walk'
+
+            // Remove any existing animation classes
+            spriteRef.current.classList.remove('questlog-sprite-walk', 'questlog-sprite-jump')
             void spriteRef.current.offsetWidth // Force reflow
-            spriteRef.current.classList.add('quest-log-sprite-animate')
+
+            // Set jumping state and add appropriate class
+            setIsJumping(shouldJump)
+            spriteRef.current.classList.add(animationType)
 
             // Only show speech bubble for specific quests
             if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
@@ -223,15 +232,15 @@ export const QuestLog: React.FC<{
         return () => window.removeEventListener('hashchange', onHashChange)
     }, [questItems])
 
-    // Initial page load delay
+    // Initial page load delay - only run once on mount
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasInitialLoadSettled(true)
-            restartSpriteAnimation()
 
             // Show initial speech bubble only if first quest should show it (it should, since it's index 0)
-            if (questItems.length === 0 || shouldShowSpeechBubble(0, questItems.length)) {
-                setSpeechText(firstSpeechBubble) // Set initial message
+            if (questItems.length === 0 || shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+                const message = selectedQuest === questItems.length - 1 ? lastSpeechBubble : firstSpeechBubble
+                setSpeechText(message)
                 setShowSpeechBubble(true)
 
                 // Auto-hide initial speech bubble after delay
@@ -309,9 +318,20 @@ export const QuestLog: React.FC<{
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false
+            previousQuestRef.current = selectedQuest
+            // On first render, always walk (no previous position to compare)
+            restartSpriteAnimation(false)
             return
         }
-        restartSpriteAnimation()
+
+        // Determine if we should jump (more than 1 step forward)
+        const shouldJump = selectedQuest > previousQuestRef.current + 1
+
+        // Update previous quest reference
+        previousQuestRef.current = selectedQuest
+
+        // Restart animation with appropriate mode
+        restartSpriteAnimation(shouldJump)
     }, [selectedQuest])
 
     // Handle dropdown outside clicks
@@ -420,12 +440,16 @@ export const QuestLog: React.FC<{
                                         height: '48px',
                                     }}
                                 >
-                                    {/* Walking Sprite */}
+                                    {/* Walking/Jumping Sprite */}
                                     <div
                                         ref={spriteRef}
-                                        className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
+                                        className={`${
+                                            isJumping ? 'questlog-sprite-jump' : 'questlog-sprite-walk'
+                                        } w-[48px] h-[48px] pointer-events-none`}
                                         style={{
-                                            backgroundImage: 'url(/images/questlog-walk-sprite.png)',
+                                            backgroundImage: isJumping
+                                                ? 'url(/images/questlog-jump-sprite.png)'
+                                                : 'url(/images/questlog-walk-sprite.png)',
                                             backgroundSize: '528px 48px',
                                             backgroundRepeat: 'no-repeat',
                                             height: '48px',

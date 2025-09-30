@@ -2411,7 +2411,7 @@ body.dark .max-ai-body {
     border: 0;
 }
 
-@keyframes quest-log-sprite-walk {
+@keyframes questlog-sprite-animate {
     0% {
         background-position: 0 0;
     }
@@ -2420,8 +2420,12 @@ body.dark .max-ai-body {
     }
 }
 
-.quest-log-sprite-animate {
-    animation: quest-log-sprite-walk 0.5s steps(11) 4;
+.questlog-sprite-walk {
+    animation: questlog-sprite-animate 0.5s steps(11) 4;
+}
+
+.questlog-sprite-jump {
+    animation: questlog-sprite-animate 0.75s steps(11) 3;
 }
 
 @keyframes speechBubble {
