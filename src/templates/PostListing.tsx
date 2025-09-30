@@ -1,10 +1,8 @@
-import { usePosts } from 'components/Edition/hooks/usePosts'
-import { getParams, Sidebar } from 'components/Edition/Posts'
+import { getParams } from 'components/Edition/Posts'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { getSortOption } from './BlogPost'
@@ -14,31 +12,11 @@ import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
+import { graphql, useStaticQuery } from 'gatsby'
+import { usePaginatedPosts } from 'components/Edition/hooks/usePaginatedPosts'
+import { IconSpinner } from '@posthog/icons'
 
 dayjs.extend(relativeTime)
-
-const categories = [
-    {
-        label: 'Tutorials',
-        root: 'tutorials',
-    },
-    {
-        label: 'Blog',
-        root: 'blog',
-    },
-    {
-        label: 'Founders',
-        root: 'founders',
-    },
-    {
-        label: 'Product engineers',
-        root: 'product-engineers',
-    },
-    {
-        label: 'Newsletter',
-        root: 'newsletter',
-    },
-]
 
 export const FeaturedImage = ({ url }: { url: string }) => {
     const [isSmallImageLoaded, setIsSmallImageLoaded] = useState(false)
@@ -77,20 +55,87 @@ export const FeaturedImage = ({ url }: { url: string }) => {
 }
 
 export default function Posts({ pageContext }) {
-    const [tags, setTags] = useState([])
-    const [authors, setAuthors] = useState([])
+    const { allPostCategory } = useStaticQuery(graphql`
+        {
+            allPostCategory(
+                filter: {
+                    attributes: {
+                        folder: { nin: [null, "customers", "spotlight", "changelog", "comparisons", "notes", "repost"] }
+                    }
+                }
+            ) {
+                nodes {
+                    attributes {
+                        label
+                        folder
+                        post_tags {
+                            data {
+                                attributes {
+                                    label
+                                    folder
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+    const articleRef = useRef<HTMLDivElement>(null)
+    const [authors, setAuthors] = useState<any[]>([])
     const [selectedTag, setSelectedTag] = useState(pageContext.selectedTag)
-    const [root, setRoot] = useState(pageContext.root)
+    const [root, setRoot] = useState(pageContext.root || null)
     const [selectedAuthor, setSelectedAuthor] = useState()
     const [params, setParams] = useState(
         getParams(pageContext.root, pageContext.selectedTag, getSortOption(pageContext.root).sort, selectedAuthor)
     )
+    const allTags = useMemo(
+        () =>
+            allPostCategory.nodes
+                .flatMap((category) => category.attributes.post_tags.data)
+                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label))
+                .filter(
+                    (tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label)
+                ),
+        []
+    )
+    const selectedCategory = useMemo(
+        () => allPostCategory.nodes.find((category) => category.attributes.folder === root),
+        [root]
+    )
+    const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
+    const allCategories = useMemo(
+        () =>
+            allPostCategory.nodes.filter(
+                (category, index, self) =>
+                    index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
+            ),
+        []
+    )
 
-    const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
+    const scrollToTop = () => {
+        const viewport = articleRef.current?.closest('[data-radix-scroll-area-viewport]')
+        viewport?.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
+    }
+
+    const handlePageChange = () => {
+        scrollToTop()
+    }
+
+    const { posts, isValidating, totalPages, currentPage, nextPage, prevPage, hasNextPage, hasPrevPage, goToPage } =
+        usePaginatedPosts({ params, onPageChange: handlePageChange })
 
     const handleFilterChange = (filters) => {
         if (filters.post_tags) {
-            setSelectedTag(filters.post_tags.value)
+            const currentRoot = filters.root?.value || root
+            const exists = allCategories
+                .find((category) => category.attributes.folder === currentRoot)
+                ?.attributes.post_tags.data.some((tag) => tag.attributes.label === filters.post_tags.value)
+            const selectedTag = currentRoot === null || exists ? filters.post_tags.value : null
+            setSelectedTag(selectedTag)
         }
         if (filters.root) {
             setRoot(filters.root.value)
@@ -99,27 +144,6 @@ export default function Posts({ pageContext }) {
             setSelectedAuthor(filters.authors.value)
         }
     }
-
-    useEffect(() => {
-        const query = qs.stringify({
-            pagination: {
-                page: 1,
-                pageSize: 100,
-            },
-            filters: {
-                post_category: {
-                    folder: {
-                        $eq: pageContext.root,
-                    },
-                },
-            },
-        })
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-tags?${query}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setTags(data?.data)
-            })
-    }, [root])
 
     useEffect(() => {
         const query = qs.stringify(
@@ -150,12 +174,14 @@ export default function Posts({ pageContext }) {
 
     useEffect(() => {
         setParams(getParams(root, selectedTag, getSortOption(root).sort, selectedAuthor))
+        scrollToTop()
     }, [selectedTag, root, selectedAuthor])
 
     return (
         <>
             <SEO title="Posts - PostHog" />
             <Editor
+                articleRef={articleRef}
                 title="posts"
                 type="psheet"
                 maxWidth="100%"
@@ -167,28 +193,38 @@ export default function Posts({ pageContext }) {
                         label: 'category',
                         value: 'root',
                         initialValue: root,
-                        options: categories.map((category) => ({
-                            label: category.label,
-                            value: category.root,
-                        })),
-                        operator: 'eq',
-                    },
-                    {
-                        label: 'tags',
-                        value: 'post_tags',
-                        initialValue: selectedTag,
                         options: [
                             {
                                 label: 'All',
                                 value: null,
                             },
-                            ...tags.map((tag) => ({
-                                label: tag.attributes.label,
-                                value: tag.attributes.label,
+                            ...allCategories.map((category) => ({
+                                label: category.attributes.label,
+                                value: category.attributes.folder,
                             })),
                         ],
-                        operator: 'includes',
+                        operator: 'eq',
                     },
+                    ...(tags?.length > 0
+                        ? [
+                              {
+                                  label: 'tags',
+                                  value: 'post_tags',
+                                  initialValue: selectedTag,
+                                  options: [
+                                      {
+                                          label: 'All',
+                                          value: null,
+                                      },
+                                      ...tags.map((tag) => ({
+                                          label: tag.attributes.label,
+                                          value: tag.attributes.label,
+                                      })),
+                                  ],
+                                  operator: 'includes',
+                              },
+                          ]
+                        : []),
                     ...(authors.length > 0
                         ? [
                               {
@@ -217,8 +253,15 @@ export default function Posts({ pageContext }) {
             >
                 {posts.length > 0 && (
                     <OSTable
-                        fetchMore={hasMore ? fetchMore : undefined}
-                        loading={isValidating}
+                        pagination={{
+                            totalPages,
+                            currentPage,
+                            nextPage,
+                            prevPage,
+                            hasNextPage,
+                            hasPrevPage,
+                            goToPage,
+                        }}
                         rowAlignment="top"
                         columns={[
                             {
@@ -302,6 +345,11 @@ export default function Posts({ pageContext }) {
                             }
                         })}
                     />
+                )}
+                {isValidating && !posts.length && (
+                    <div className="flex items-center justify-center">
+                        <IconSpinner className="size-7 opacity-60 animate-spin" />
+                    </div>
                 )}
             </Editor>
         </>

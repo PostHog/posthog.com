@@ -1765,11 +1765,6 @@ body.dark {
     }
 }
 
-iframe[src*='youtube.com'],
-iframe[src*='youtube-nocookie.com'] {
-    @apply aspect-video w-full h-auto;
-}
-
 .about-nav .slick-track,
 .careers-nav .slick-track,
 .product-nav .slick-track {

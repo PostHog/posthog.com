@@ -38,6 +38,8 @@ import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CustomerMetadata from './CustomerMetadata'
+
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -526,6 +528,12 @@ function ReaderViewContent({
     const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
+
+    // Check if this is a customer page and get customer key
+    const isCustomerPage = appWindow?.path?.startsWith('/customers/')
+    const customerSlug = isCustomerPage ? appWindow.path.split('/').pop() : null
+    // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
+    const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
     const {
         isNavVisible,
         isTocVisible,
@@ -700,6 +708,11 @@ function ReaderViewContent({
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div className={'@container'}>
+                                            {/* Display customer metadata if this is a customer page */}
+                                            {isCustomerPage && customerKey && (
+                                                <CustomerMetadata customerKey={customerKey} />
+                                            )}
+
                                             <MDXProvider components={mdxComponents}>
                                                 <MDXRenderer>{body.content}</MDXRenderer>
                                             </MDXProvider>

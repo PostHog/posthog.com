@@ -29,7 +29,7 @@ There are separate limits for different kinds of resources.
 
 - For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
 
-- The [`query`](/docs/api/queries) endpoint has a rate limit of `1200/hour`. This counts queries, rather than returned results. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports).
+- The [`query`](/docs/api/queries) endpoint has a rate limit of `2400/hour`. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports).
 
 - For [feature flag local evaluation](/docs/feature-flags/local-evaluation) (which is enabled in SDKs when you input a personal API key), the rate limit is `600/minute`.
 

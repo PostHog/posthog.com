@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our primary focus is on making our paying customers successful, not forcing sales through. Today, we follow a 100% inbound sales model - our approach to [product-led growth](/handbook/strategy/overview) means that we do not do cold outbound yet, though we'll probably run some experiments here later in 2025 as we scale. 
+Our primary focus is on making our paying customers successful, not forcing sales through. This mostly means an inbound sales model, but we are also running some outbound sales experiments.
 
 While this means working with a smaller number of users than typical B2B SaaS companies, we know that the people we talk to are mostly already pre-qualified and genuinely interested in potentially using PostHog. 
 
