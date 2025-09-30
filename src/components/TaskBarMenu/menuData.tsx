@@ -791,24 +791,28 @@ export function useMenuData(): MenuType[] {
         : [
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              { type: 'separator' as const },
-              {
-                  type: 'item' as const,
-                  label: 'Start screensaver',
-                  onClick: () => {
-                      setScreensaverPreviewActive(true)
-                  },
-                  shortcut: ['Shift', 'Z'],
-              },
-              {
-                  type: 'item' as const,
-                  label: 'Close all windows',
-                  disabled: windows.length < 1,
-                  onClick: () => {
-                      animateClosingAllWindows()
-                  },
-                  shortcut: ['Shift', 'X'],
-              },
+              ...(!websiteMode
+                  ? [
+                        { type: 'separator' as const },
+                        {
+                            type: 'item' as const,
+                            label: 'Start screensaver',
+                            onClick: () => {
+                                setScreensaverPreviewActive(true)
+                            },
+                            shortcut: ['Shift', 'Z'],
+                        },
+                        {
+                            type: 'item' as const,
+                            label: 'Close all windows',
+                            disabled: windows.length < 1,
+                            onClick: () => {
+                                animateClosingAllWindows()
+                            },
+                            shortcut: ['Shift', 'X'],
+                        },
+                    ]
+                  : []),
           ]
 
     return [
