@@ -1434,6 +1434,18 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
+                        name: 'Onboarding Program',
+                        url: '/handbook/onboarding/onboarding-program',
+                    },
+                    {
+                        name: 'Onboarding Pipeline',
+                        url: '/handbook/onboarding/onboarding-pipeline',
+                    },
+                    {
+                        name: 'Sales Handover',
+                        url: '/handbook/onboarding/sales-handover',
+                    },
+                    {
                         name: 'New hire onboarding',
                         url: '/handbook/onboarding/new-hire-onboarding',
                     },
@@ -1502,6 +1514,10 @@ export const handbookSidebar = [
                     {
                         name: 'Customer health checks',
                         url: '/handbook/cs-and-onboarding/health-checks',
+                    },
+                    {
+                        name: 'Learn from churn',
+                        url: '/handbook/cs-and-onboarding/customer-churn-retros',
                     },
                     {
                         name: 'Historical imports',
