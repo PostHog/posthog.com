@@ -39,7 +39,7 @@ export default function Destinations(): JSX.Element {
                         <strong>PostgreSQL:</strong> Export to PostgreSQL databases
                     </li>
                     <li>
-                        <strong>ClickHouse:</strong> High-performance analytics database exports
+                        <strong>Redshift:</strong> Send data to Redshift data warehouse
                     </li>
                 </ul>
                 <p>Batch export features:</p>
