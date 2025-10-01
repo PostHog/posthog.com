@@ -68,11 +68,11 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
     return (
         <div className="relative w-full mt-4">
             <Combobox onChange={handleChange}>
-                <div className="rounded-md bg-accent dark:bg-accent-dark border border-border dark:border-dark w-full flex justify-between items-center overflow-hidden relative">
+                <div className="rounded-md bg-accent border border-input w-full flex justify-between items-center overflow-hidden relative">
                     <Combobox.Input
                         autoFocus
                         placeholder="Type to search"
-                        className="bg-accent dark:bg-accent-dark border-0 flex-grow py-2 px-4"
+                        className="bg-accent border-0 flex-grow py-2 px-4"
                         onChange={(e) => setQuery(e.target.value)}
                     />
                     <button onClick={() => setShowMods(false)} className="absolute -right-2 w-8 outline-none">
@@ -80,19 +80,19 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
                     </button>
                 </div>
 
-                <Combobox.Options className="list-none m-0 p-0 mt-1 max-h-80 overflow-auto divide-y divide-border dark:divide-border-dark rounded-md border border-border dark:border-dark absolute w-full z-[50]">
+                <Combobox.Options className="list-none m-0 p-0 mt-1 max-h-80 overflow-auto divide-y divide-border dark:divide-border-dark rounded-md border border-input absolute w-full z-[50]">
                     {filteredMods.map((mod) => {
                         const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
                         return (
                             <Combobox.Option key={mod.id} value={mod} className="!m-0">
                                 {({ active }) => (
                                     <div
-                                        className={`bg-accent dark:bg-accent-dark p-3 py-2 text-base flex space-x-3 items-center cursor-pointer border-border dark:border-dark ${
+                                        className={`bg-accent p-3 py-2 text-base flex space-x-3 items-center cursor-pointer border-input ${
                                             active ? 'bg-border dark:bg-border-dark' : ''
                                         }`}
                                     >
                                         <img
-                                            className="rounded-full w-[32px] h-[32px] bg-border dark:bg-border-dark border border-border dark:border-dark"
+                                            className="rounded-full w-[32px] h-[32px] bg-border dark:bg-border-dark border border-input"
                                             src={mod?.profile?.avatar?.url}
                                         />
                                         <span>{name}</span>
@@ -222,7 +222,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <li
-                                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] group"
+                                className="bg-accent border border-primary rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] group"
                                 key={name}
                             >
                                 <Link
@@ -232,9 +232,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                     <div className="flex flex-col justify-between px-3 pt-4 pb-3 w-full mr-24 @lg:mr-28">
                                         <div>
                                             <h3 className="!m-0 text-base leading-tight">{name}</h3>
-                                            <p className="text-primary/50 !m-0 !text-sm dark:text-primary-dark/50">
-                                                {companyRole}
-                                            </p>
+                                            <p className="text-muted !m-0 !text-sm ">{companyRole}</p>
                                         </div>
 
                                         <span className="flex items-center gap-2 mt-1">
@@ -266,7 +264,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                             e.preventDefault()
                                                             handleTeamLead(member.id, false)
                                                         }}
-                                                        className="group-hover:visible inline-block border-2 border-primary/10 dark:border-primary-dark/10 border-dashed rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-primary/40 dark:text-primary-dark/40 invisible"
+                                                        className="group-hover:visible inline-block border-2 border-primary/10 dark:border-primary-dark/10 border-dashed rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-muted invisible"
                                                     >
                                                         Team lead?
                                                     </button>
@@ -284,7 +282,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                 </Link>
                                 {isModerator && (
                                     <button
-                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-3 -right-3"
+                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent border border-input absolute -top-3 -right-3"
                                         onClick={(e) => removeTeamMember(member)}
                                     >
                                         <Close className="w-3 h-3" />

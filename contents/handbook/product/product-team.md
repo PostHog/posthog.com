@@ -1,10 +1,10 @@
 ---
-title: Product team overview
+title: Product management at PostHog
 sidebar: Handbook
 showTitle: true
 ---
 
-PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions. Read more on the role of the Product Team in this [blog post](/blog/product-at-posthog).
+PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions.
 
 So, what is the role of product managers at PostHog? PMs set context across multiple products for how products are being used, what the competitive landscape is like, what users are feeling about PostHog, and how they're using things.
 
@@ -16,37 +16,40 @@ Among other things, they
 
 ## Small team membership
 
-Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it.
+Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it. PMs join small team standups and planning whenever it makes sense, but they are not required to attend _all_ team meetings. This is up to the PM to decide when it makes sense to join these, and when their time is better spent elsewhere.
 
 Here is a overview that shows which of our PMs currently works with which team:
 
 <TeamMember name="Anna Szell" photo />
 
+- [Analytics Platform](/teams/analytics-platform)
 - [Data Warehouse](/teams/data-warehouse)
 - [Product Analytics](/teams/product-analytics)
-- [Web Analytics](web-analytics)
+- [Web Analytics](/teams/web-analytics)
 
 <TeamMember name="Annika Schmid" photo />
 
-- [Session Replay](/teams/session-replay)
 - [Feature Flags](/teams/feature-flags)
 - [Experiments](/teams/experiments)
+- [Max AI](/teams/max-ai)
 
 <TeamMember name="Cory Slater" photo />
 
 - [Error Tracking](/teams/error-tracking)
 - [Surveys](/teams/surveys)
+- [Session Replay](/teams/session-replay)
 
 <TeamMember name="Abe Basu" photo />
 
-- [Messaging](/teams/messaging)
-- [CDP](/teams/cdp)
-  
+- [Messaging & CDP](/teams/messaging)
+- [Batch Exports (light support)](/teams/batch-exports)
+- Embedded Analytics
+- Logs
+
 **Teams with no PM currently**
 
-- [CRM](/teams/crm)
+- [Customer Analytics](/teams/crm)
 - [LLM Analytics](/teams/llm-analytics)
-- [Max AI](/teams/max-ai)
 - [Revenue Analytics](/teams/revenue-analytics)
 
 ## Product goals

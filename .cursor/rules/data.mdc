@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Hooks for product, customer, and navigation data
+
+PostHog is a multi-product company, so data is stored in strucutred files in few central locations which makes it available across the site.
+
+## Product data
+
+1. @useProduct.ts is the first place to check for product information. This is used for beta products, unreleased products, and other "apps" that aren't fully-fledged products that customers typically pay for. (For example, there are entries for things like Webhooks and Notebooks for the purposes of displaying icons for these products.)
+2. If the product's slug or handle isn't found in there, @useProduct.ts is extended using @useProducts.tsx. When referencing product data, only refer to @useProduct.ts and let that file handle the data extending.
+
+## Customer data
+
+We reference customer names, logos, and sometimes quotes in various places on the site. This data is sourced from @useCustomers.ts.
+
+## Navigation menus
+
+[index.js](mdc:src/navs/index.js) is the source for all navigation data. This includes:
+
+1. `companyMenu`
+1. `handbookSidebar`
+1. `communityMenu`
+1. `sexyLegalMenu`
+1. `companyMenu`
+1. `docsMenu`
+1. `pricingMenu`
+1. `productMenu`
+1. `menu`
+
+During the development of this website (as of June 2025), this file can't be modified because it's in use with the live website. As a result, there are several places where this json data is filtered on the front end.
+

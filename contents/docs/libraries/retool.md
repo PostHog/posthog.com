@@ -27,7 +27,7 @@ First, create a new app from the Retool dashboard:
 
 ![Retool Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/retool/dashboard.png)
 
-You will then need to create a new resource i.e. set up the configuration for where you'll pull the date from. If you have not created any resources before, Retool will prompt you to create one. 
+You will then need to create a new resource i.e. set up the configuration for where you'll pull the data from. If you have not created any resources before, Retool will prompt you to create one. 
 
 Otherwise, you can add a new resource on the queries tab at the bottom of the page, by creating a new query and selecting '+ Add a new resource' on the query tab.
 

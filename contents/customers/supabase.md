@@ -1,26 +1,12 @@
 ---
 title: How Supabase 10Xed with the help of PostHog
 customer: Supabase
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/supabase_light_30e9fe4a90.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/supabase_dark_91fbc944e4.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/445225882_d7aa6795_3350_4e88_9ca7_091c61e86e39_0ed5ee1f16.jpg
-industries:
-  - Devtool
-users:
-  - Engineering
-  - Growth
-  - Marketing
-toolsUsed:
-  - Max AI
-  - Experimentation
-  - Product analytics
+    https://res.cloudinary.com/dmukukwp6/image/upload/445225882_d7aa6795_3350_4e88_9ca7_091c61e86e39_0ed5ee1f16.jpg
 date: 2025-06-15
 ---
 
-When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](https://posthog.com/blog/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking. 
+When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](/blog/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking.
 
 “The result was that it was quite challenging to do even basic attribution or usage-pattern analysis with the data,” says Aleksi. “We were self-hosting Plausible, and we had some data there, but it was quite limited, and the UI was just a little too slow for people to want to use it. So we did basically everything through BigQuery.”
 
@@ -28,7 +14,7 @@ When he joined Supabase’s marketing team, Aleksi Immonen says most of the data
 
 Data wasn’t just fragmented — it was also incomplete due to the limitations of each individual platform and differences in their interoperability. Events tracked in internal tools, for example, didn’t always match 1:1 with data from Plausible, and no individual team had ownership of it all.
 
-“None of us really had a full view of what event data we were tracking or the event definitions,” he explains. “But I’d used PostHog at my previous company at [Twice Commerce](https://www.twicecommerce.com/), really liked it, and knew it could help us a lot with attribution, funnel analysis, and A/B testing. PostHog’s open-source nature was also a plus.” 
+“None of us really had a full view of what event data we were tracking or the event definitions,” he explains. “But I’d used PostHog at my previous company at [Twice Commerce](https://www.twicecommerce.com/), really liked it, and knew it could help us a lot with attribution, funnel analysis, and A/B testing. PostHog’s open-source nature was also a plus.”
 
 <BorderWrapper>
 <Quote
@@ -48,11 +34,12 @@ Now, every Supabase team can use the same set of data and interact with it effor
 
 "PostHog has proven to be easy to use and adopt for product engineers. It’s also very easy to slice and dice data and to trace events back to a user, project, or an organization. PostHog also comes with built-in analysis tools—like funnels, retention, and user journey breakdowns—that make digging into the data easy."
 
-Max AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can Max easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need. 
+Max AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can Max easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need.
 
 “I like Max as an AI helper because it knows PostHog terminology, as well as the data model, and schemas. It can fix my mistakes, help me join the right tables, and more. It makes everything a lot easier and faster.”
 
 ![supabase growth chart](https://res.cloudinary.com/dmukukwp6/image/upload/Supabase_growth_chart_603d22cf6b.png)
+
 <Caption>Supabase's growth in user sign-ups over time. Can you tell when data started helping them grow?</Caption>
 
 ## How PostHog helped Supabase 10X weekly new user acquisition

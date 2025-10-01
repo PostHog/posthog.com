@@ -1,21 +1,8 @@
 ---
 title: How carVertical uses feature flags and analytics without autocapture
 customer: carVertical
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/carvertical_logo.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/carvertical_logo_dark.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/carvertical_528ae93e37.png
-industries:
-  - Recruitment
-users:
-  - Growth
-  - Engineering
-  - Product
-toolsUsed:
-  - Feature flags
-  - Product analytics
 date: 2023-12-01
 ---
 

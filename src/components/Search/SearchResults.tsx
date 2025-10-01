@@ -180,12 +180,12 @@ const SearchBox = () => {
     }, [query])
 
     return (
-        <div className="relative flex items-center border-b border-gray-accent-light/50 dark:border-black dark:border-b-2">
+        <div className="relative flex items-center border-b border-input dark:border-black dark:border-b-2">
             <div className="absolute left-4 z-20">
                 <Search className="w-5 h-5 opacity-40" />
             </div>
             <Combobox.Input
-                className="w-full py-3 pl-11 pr-4 font-medium focus:outline-none bg-white dark:bg-gray-accent-dark border-none ring-0 focus:ring-0 placeholder:text-black/25 dark:placeholder:text-white/25"
+                className="w-full py-3 pl-11 pr-4 font-medium focus:outline-none bg-white  border-none ring-0 focus:ring-0 placeholder:text-black/25 dark:placeholder:text-white/25"
                 placeholder="Search PostHog.com..."
                 autoComplete="off"
                 onKeyDown={(event: React.KeyboardEvent) => (event.key === 'Tab' ? event.preventDefault() : null)}
@@ -198,7 +198,7 @@ const SearchBox = () => {
 
             <kbd
                 role="button"
-                className="hidden md:block absolute right-4 text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans cursor-pointer"
+                className="hidden md:block absolute right-4 text-xs border border-b-2 border-input dark:/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans cursor-pointer"
                 onClick={close}
                 style={{ fontSize: '10px' }}
             >
@@ -244,11 +244,7 @@ const RefinementList: React.FC<RefinementListProps> = (props) => {
     }, [props.category])
 
     return (
-        <RadioGroup
-            value={props.category}
-            onChange={props.setCategory}
-            className="bg-tan/25 dark:bg-gray-accent-dark -mt-[1px]"
-        >
+        <RadioGroup value={props.category} onChange={props.setCategory} className="bg-tan/25  -mt-[1px]">
             <RadioGroup.Label className="sr-only">Filter results by category</RadioGroup.Label>
             <div className="flex items-center md:flex-wrap list-none p-0 overflow-auto dark:border-t dark:border-black">
                 {categories.map((item) => {
@@ -330,18 +326,15 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
     }
 
     return (
-        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light dark:border-gray-accent-dark">
-            <section className="overscroll-none bg-white dark:bg-gray-accent-dark text-left overflow-y-auto border-r border-gray-accent-light/50 dark:border-gray-accent-dark/50">
+        <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-primary dark:">
+            <section className="overscroll-none bg-white  text-left overflow-y-auto border-r border-input dark:/50">
                 {!initialLoad || status === 'stalled' ? (
                     <ol className="list-none m-0 p-0 dark:bg-black">
                         {new Array(5).fill({}).map((_, index) => (
-                            <li
-                                key={index}
-                                className="px-2 py-3 space-y-1 border-y border-gray-accent-light/20 dark:border-gray-accent-dark/80 -mt-px"
-                            >
-                                <div className="w-24 bg-gray-accent-light/60 dark:bg-gray-accent-dark/80 h-3.5 animate-pulse rounded-sm"></div>
-                                <div className="w-64 bg-gray-accent-light/60 dark:bg-gray-accent-dark/80 h-5 animate-pulse rounded-sm"></div>
-                                <div className="w-32 bg-gray-accent-light/60 dark:bg-gray-accent-dark/80 h-3 animate-pulse rounded-sm"></div>
+                            <li key={index} className="px-2 py-3 space-y-1 border-y border-input dark:/80 -mt-px">
+                                <div className="w-24 bg-accent-light/60 /80 h-3.5 animate-pulse rounded-sm"></div>
+                                <div className="w-64 bg-accent-light/60 /80 h-5 animate-pulse rounded-sm"></div>
+                                <div className="w-32 bg-accent-light/60 /80 h-3 animate-pulse rounded-sm"></div>
                             </li>
                         ))}
                     </ol>
@@ -352,7 +345,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                 <Combobox.Option
                                     key={hit.objectID}
                                     value={hit}
-                                    className="group ui-active:bg-tan/50 dark:ui-active:bg-gray-accent-dark hover:bg-tan/50 dark:hover:bg-gray-accent-dark/50 border-b border-t -mt-px border-gray-accent-light/25 hover:border-gray-accent-light/30 dark:border-gray-accent-dark/80 dark:hover:border-gray-accent-dark/90 ui-active:border-gray-accent-light/30 dark:ui-active:border-gray-accent-dark/90 last:border-b-0 pl-3 pr-2"
+                                    className="group ui-active:bg-tan/50 dark:ui-active:bg-accent-dark hover:bg-tan/50 hover:bg-accent border-b border-t -mt-px border-input hover:border-primary/30 dark:/80 dark:hover:/90 ui-active:border-primary/30 dark:ui-active:/90 last:border-b-0 pl-3 pr-2"
                                 >
                                     <Link
                                         className="w-full px-2 py-3 text-black/75 dark:text-white/75 group-hover:text-black/100 dark:group-hover:text-white/100 font-semibold flex flex-col space-y-0.5 focus:outline-none leading-tight"
@@ -411,7 +404,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                 />
                             </div>
 
-                            <div className="border border-gray-accent-light dark:border-gray-accent-dark p-4 rounded bg-tan/50 dark:bg-primary">
+                            <div className="border border-primary dark: p-4 rounded bg-tan/50 dark:bg-primary">
                                 <h5 className="text-base opacity-75 mb-0">Tip: Ask the community</h5>
                                 <p className="text-sm mb-4 opacity-80">
                                     Our team monitor the Questions page. Somone's bound to know the answer!
@@ -427,7 +420,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
             </section>
             <section className="hidden md:block overflow-y-auto bg-tan/50 dark:bg-primary p-2 h-full">
                 {activeOption ? (
-                    <div className="p-6 bg-white dark:bg-gray-accent-dark rounded border border-gray-accent-light/40 dark:border-gray-accent-dark">
+                    <div className="p-6 bg-white  rounded border border-primary/40 dark:">
                         <div className="text-left">
                             <span
                                 className={`block text-sm font-semibold text-black/50 dark:text-white/50 ${
@@ -439,7 +432,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                             <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
                             <p className="text-black/70 dark:text-white/80 text-[15px] mb-0">{activeOption.excerpt}</p>
                             {activeOption.resolved && (
-                                <div className="mt-4 bg-accent/40 dark:bg-accent-dark/40 rounded-md p-4 border border-border dark:border-dark">
+                                <div className="mt-4 bg-accent rounded-md p-4 border border-input">
                                     <h5 className="text-green flex space-x-1 m-0 mb-2">
                                         <IconCheckCircle className="w-5 flex-shrink-0" />
                                         <span>Answer</span>

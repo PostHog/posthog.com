@@ -1,5 +1,6 @@
 import React from 'react'
 import TypeLink from './TypeLink'
+import { TABLE_CLASSES } from '../../constants'
 
 const FunctionReturn = ({
     returnType,
@@ -26,7 +27,7 @@ const FunctionReturn = ({
     return (
         <div className="mb-4">
             <h4 className="text-lg font-semibold mb-2">Returns</h4>
-            <div className="min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">
+            <div className={TABLE_CLASSES}>
                 <table className="w-full table-auto">
                     <thead className="bg-gray-accent-light dark:bg-gray-accent-dark">
                         <tr>

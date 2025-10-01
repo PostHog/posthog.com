@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
+import Input from 'components/OSForm/input'
+import * as yup from 'yup'
+
+const emailSchema = yup.object().shape({
+    email: yup.string().email('Please enter a valid email address').required('Email is required'),
+})
 
 interface VariantProp {
     title?: string
@@ -22,26 +28,30 @@ interface ProductProp {
 export function BackInStockForm({ variant, product }: { variant?: VariantProp; product: ProductProp }) {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const [error, setError] = useState('')
     const posthog = usePostHog()
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setError('')
 
-        // Extract title with fallbacks: variant title -> variant.product title -> product title
-        const title = variant?.product?.title || variant?.title?.replace('Default Title', '') || product?.title
+        try {
+            await emailSchema.validate({ email })
+            const title = variant?.product?.title || variant?.title?.replace('Default Title', '') || product?.title
+            const shopifyId = variant?.shopifyId || product?.shopifyId
 
-        // Extract shopifyId with fallback: variant shopifyId -> product shopifyId
-        const shopifyId = variant?.shopifyId || product?.shopifyId
+            const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
+            const productData = { title, size, shopifyId }
 
-        const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
-        const productData = { title, size, shopifyId }
-
-        posthog?.capture('back_in_stock_form_submitted', { email, product: productData })
-        setSubmitted(true)
+            posthog?.capture('back_in_stock_form_submitted', { email, product: productData })
+            setSubmitted(true)
+        } catch (validationError: any) {
+            setError(validationError.message)
+        }
     }
 
     return (
-        <div className="border-t border border-border dark:border-dark p-4 bg-accent dark:bg-accent-dark rounded-md">
+        <div data-scheme="primary" className="border border-primary p-4 bg-primary rounded-md">
             {submitted ? (
                 <p className="m-0 text-sm">Thanks! We'll email you when it's back in stock.</p>
             ) : (
@@ -51,19 +61,23 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
                         Enter your email and we'll get back to you as soon as this product is back in stock
                     </p>
                     <form onSubmit={handleSubmit} className="flex space-x-2 items-center m-0">
-                        <input
-                            placeholder="Email"
-                            className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark py-1.5 px-2 text-base mt-[2px] w-full"
+                        <Input
+                            label="Email"
                             type="email"
+                            placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            showLabel={false}
+                            dataScheme="secondary"
+                            containerClassName="flex-1"
                         />
                         <div className="shrink-0">
-                            <CallToAction size="md" type="primary">
+                            <CallToAction size="lg" type="primary">
                                 Notify me
                             </CallToAction>
                         </div>
                     </form>
+                    {error && <p className="m-0 my-2 text-sm text-red font-bold">{error}</p>}
                 </>
             )}
         </div>

@@ -8,15 +8,8 @@ export const HomepageCards = [
         top: 'You enjoy "jumping on a quick call" with sales',
         bottom: (
             <>
-                Sorry, we don't force you to talk to anyone. But you can{' '}
-                <Link to="/demo" className="!text-red">
-                    watch a recorded demo
-                </Link>{' '}
-                (at your own pace) or{' '}
-                <Link to="/talk-to-a-human" className="!text-red">
-                    request a personalized demo
-                </Link>{' '}
-                if you like.
+                Sorry, we don't force you to talk to anyone. But you can <Link to="/demo">watch a recorded demo</Link>{' '}
+                (at your own pace) or <Link to="/talk-to-a-human">request a personalized demo</Link> if you like.
             </>
         ),
         color: '#FFD89E',
@@ -26,17 +19,13 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/i_love_telemarketing_d72bc8079b.png"
             />
         ),
-        ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
+        // ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
     },
     {
         top: 'You love needlessly wasting company money',
         bottom: (
             <>
-                We only have usage-based pricing that{' '}
-                <Link to="/pricing" className="!text-red">
-                    decreases exponentially
-                </Link>{' '}
-                with scale.
+                We only have usage-based pricing that <Link to="/pricing">decreases exponentially</Link> with scale.
             </>
         ),
         color: '#DCE7D0',
@@ -46,7 +35,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/wasting_money_decf55197a.png"
             />
         ),
-        ImageSize: 'w-full mt-8',
+        // ImageSize: 'w-full mt-8',
     },
     {
         top: (
@@ -57,11 +46,7 @@ export const HomepageCards = [
         bottom: (
             <>
                 We offer a free tier so large that only a fraction of our customers pay us anything. Even worse, we
-                continually try to{' '}
-                <Link to="/blog/multi-product-pricing" className="!text-red">
-                    reduce our pricing
-                </Link>
-                .
+                continually try to <Link to="/blog/multi-product-pricing">reduce our pricing</Link>.
             </>
         ),
         color: '#D9E1FC',
@@ -71,7 +56,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/try_buy_3c54a911c5.png"
             />
         ),
-        ImageSize: 'w-[240px] -mt-4',
+        // ImageSize: 'w-[240px] -mt-4',
     },
     {
         top: 'You think your email is a good trade for that free whitepaper',
@@ -83,7 +68,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/bad_trade_81f36c9a2a.png"
             />
         ),
-        ImageSize: 'w-full mt-4',
+        // ImageSize: 'w-full mt-4',
     },
     {
         top: 'You give out your credit card details to strangers',
@@ -95,16 +80,13 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/stranger_danger_eb6694e03d.png"
             />
         ),
-        ImageSize: 'w-[230px] mt-6',
+        // ImageSize: 'w-[230px] mt-6',
     },
     {
         top: "You're desperate for commitment",
         bottom: (
             <>
-                Sadly, we don't offer annual contracts (unless you{' '}
-                <Link to="/talk-to-a-human" className="!text-red">
-                    ask for one
-                </Link>
+                Sadly, we don't offer annual contracts (unless you <Link to="/talk-to-a-human">ask for one</Link>
                 ).
             </>
         ),
@@ -115,17 +97,13 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/commitment_issues_d433b343b5.png"
             />
         ),
-        ImageSize: 'w-full mt-4',
+        // ImageSize: 'w-full mt-4',
     },
     {
         top: 'You loathe new features, and bug fixes',
         bottom: (
             <>
-                Unfortunately we release{' '}
-                <Link to="/changelog" className="!text-red">
-                    new updates weekly
-                </Link>
-                .
+                Unfortunately we release <Link to="/changelog">new updates weekly</Link>.
             </>
         ),
         color: '#D9E1FC',
@@ -135,7 +113,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/i_hate_change_6e54f0e9cc.png"
             />
         ),
-        ImageSize: 'w-full',
+        // ImageSize: 'w-full',
     },
     {
         top: "You'd rather buy disparate tools and mangle them together",
@@ -147,7 +125,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/mangle_ec73b24da8.png"
             />
         ),
-        ImageSize: 'w-[230px] mt-6',
+        // ImageSize: 'w-[230px] mt-6',
     },
     {
         top: 'You like buying a whole product suite to get access to one tool',
@@ -159,7 +137,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/creative_suite_sucks_07b81c5a82.png"
             />
         ),
-        ImageSize: 'w-[230px] mt-4',
+        // ImageSize: 'w-[230px] mt-4',
     },
     {
         top: 'You think CSMs are your friends',
@@ -168,21 +146,14 @@ export const HomepageCards = [
         Image: (
             <CloudinaryImage width={250} src="https://res.cloudinary.com/dmukukwp6/image/upload/csms_ce310839fd.png" />
         ),
-        ImageSize: 'w-[230px] mt-8',
+        // ImageSize: 'w-[230px]',
     },
     {
         top: 'You enjoy sitting through hours of training more than using the product',
         bottom: (
             <>
-                No training is required to use PostHog, though we have plenty of{' '}
-                <Link to="/docs" className="!text-red">
-                    docs
-                </Link>{' '}
-                and{' '}
-                <Link to="/guides" className="!text-red">
-                    guides
-                </Link>{' '}
-                if you need some guidance.
+                No training is required to use PostHog, though we have plenty of <Link to="/docs">docs</Link> and{' '}
+                <Link to="/guides">guides</Link> if you need some guidance.
             </>
         ),
         color: '#FFD89E',
@@ -192,7 +163,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/training_c209c09991.png"
             />
         ),
-        ImageSize: 'w-[250px] mt-8',
+        // ImageSize: 'w-[250px] mt-8',
     },
     {
         top: "Data privacy isn't a big deal to you. (GDP-what now?)",
@@ -204,7 +175,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/gdpwut_aaec809dca.png"
             />
         ),
-        ImageSize: 'w-[250px] mt-8',
+        // ImageSize: 'w-[250px] mt-8',
     },
     {
         top: 'Networking events are your things',
@@ -216,25 +187,14 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/ru_bizdev_9fcd6556d0.png"
             />
         ),
-        ImageSize: 'w-[250px]',
+        // ImageSize: 'w-[250px]',
     },
     {
         top: 'You love being out of the loop',
         bottom: (
             <>
-                We publish our{' '}
-                <Link to="/roadmap" className="!text-red">
-                    roadmap
-                </Link>
-                ,{' '}
-                <Link to="/handbook/company/strategy" className="!text-red">
-                    strategy
-                </Link>
-                , and{' '}
-                <Link to="/handbook" className="!text-red">
-                    company handbook
-                </Link>
-                .
+                We publish our <Link to="/roadmap">roadmap</Link>, <Link to="/handbook/company/strategy">strategy</Link>
+                , and <Link to="/handbook">company handbook</Link>.
             </>
         ),
         color: '#DCE7D0',
@@ -244,7 +204,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/loop_hole_f5f7d3eb18.png"
             />
         ),
-        ImageSize: 'w-full',
+        // ImageSize: 'w-full',
     },
     {
         top: 'Your CRM is a Rolodex',
@@ -256,7 +216,7 @@ export const HomepageCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/rolodex_b1aee8688d.png"
             />
         ),
-        ImageSize: 'w-[230px] -mt-4',
+        // ImageSize: 'w-[230px] -mt-4',
     },
 ]
 
@@ -277,11 +237,7 @@ export const CareersCards = [
         top: 'You aspire to manage a large team',
         bottom: (
             <>
-                Our{' '}
-                <Link to="/teams" className="!text-red">
-                    small teams
-                </Link>{' '}
-                operate like startups within the company.
+                Our <Link to="/teams">small teams</Link> operate like startups within the company.
             </>
         ),
         color: '#DCE7D0',

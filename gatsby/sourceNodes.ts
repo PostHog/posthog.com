@@ -429,6 +429,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         nodes {
                           value
                           key
+                          namespace
                         }
                       }
                       options {
@@ -449,6 +450,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                       title
                       tags
                       totalInventory
+                      createdAt
+                      category {
+                        id
+                        name
+                        level
+                        parentId
+                      }
                     }
                   }
                 }
@@ -688,7 +696,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const fetchPostHogPipelines = async (
-        type: 'transformation' | 'destination',
+        type: 'transformation' | 'destination' | 'source_webhook',
         generateSlug: (pipeline: any) => string
     ) => {
         const { results } = await fetch(
@@ -712,10 +720,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             .replaceAll('segmentio', 'posthog')
                             .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
                             .replaceAll(/> \w+ ""/g, '')
-                            .replaceAll(
-                                /> \*\*Good to know\*\*: This page is about the \[Actions-framework\].*?Both of these destinations receive data from PostHog\./g,
-                                ''
-                            ) // Remove banner regarding the Actions-framework
+                            .replaceAll(/^.*Both of these destinations receive data from PostHog.*$/gm, '') // Remove banner regarding the Actions-framework
                             .replaceAll(
                                 /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
                                 ''
@@ -759,4 +764,5 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
     await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
+    await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
 }

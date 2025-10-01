@@ -1,5 +1,7 @@
 import path from 'path'
 import fs from 'fs'
+import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
+import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
 
 // Function to generate raw markdown files
 export const generateRawMarkdownPages = async (pages) => {
@@ -16,7 +18,6 @@ export const generateRawMarkdownPages = async (pages) => {
         '/service-message',
         '/services',
         '/request-received',
-        '/application-received',
         '/teams/',
         '/hosthog',
         '/startups',
@@ -174,6 +175,143 @@ ${jsonContent}
     })
 
     console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/open-api-spec/`)
+}
+
+export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) => {
+    const sdkSpecDir = path.join(process.cwd(), 'public', 'docs', 'references')
+    if (!fs.existsSync(sdkSpecDir)) {
+        fs.mkdirSync(sdkSpecDir, { recursive: true })
+    }
+
+    const sdkLanguage = getLanguageFromSdkId(sdkReferences.info.id)
+    const filePath = path.join(sdkSpecDir, `${sdkReferences.info.slugPrefix}.md`)
+
+    const renderTypeAsText = (type: string): string => {
+        return type
+    }
+
+    const renderParameters = (params: any[]): string => {
+        if (!params || params.length === 0) return ''
+
+        const paramLines = params.map((param) => {
+            const name = param.isOptional ? `${param.name}?` : param.name
+            const type = renderTypeAsText(param.type)
+            let paramLine = `- **\`${name}\`** (\`${type}\`)`
+
+            if (param.description) {
+                paramLine += ` - ${param.description}`
+            }
+            return paramLine
+        })
+
+        return `### Parameters\n\n${paramLines.join('\n')}`
+    }
+
+    const renderReturnType = (returnType: any): string => {
+        if (!returnType) return ''
+
+        const typeString = returnType.name
+        const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
+
+        if (isUnionOrIntersection) {
+            const separator = typeString.includes('|') ? '|' : '&'
+            const types = typeString.split(separator).map((t: string) => t.trim())
+            const label = separator === '|' ? 'Union of' : 'Intersection of'
+
+            const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
+            return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
+        } else {
+            return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
+        }
+    }
+
+    const renderExamples = (examples: any[], language: string): string => {
+        if (!examples || examples.length === 0) return ''
+
+        if (examples.length === 1) {
+            return `### Examples\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
+        } else {
+            const exampleBlocks = examples.map(
+                (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
+            )
+            return `### Examples\n\n${exampleBlocks.join('\n\n')}`
+        }
+    }
+
+    const markdownNodes: string[] = []
+
+    markdownNodes.push(`# ${sdkReferences.info.title}`)
+    markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    markdownNodes.push(sdkReferences.info.description)
+
+    if (sdkReferences.categories && sdkReferences.categories.length > 0) {
+        markdownNodes.push('## Categories')
+        markdownNodes.push(sdkReferences.categories.map((cat) => `- ${cat}`).join('\n'))
+    }
+
+    sdkReferences.classes.forEach((classData) => {
+        markdownNodes.push(`## ${classData.title}`)
+
+        if (classData.description) {
+            markdownNodes.push(classData.description)
+        }
+
+        const functionsByCategory = new Map<string, any[]>()
+
+        classData.functions.forEach((func) => {
+            const category = func.category || 'Other methods'
+            if (!functionsByCategory.has(category)) {
+                functionsByCategory.set(category, [])
+            }
+            functionsByCategory.get(category)!.push(func)
+        })
+
+        functionsByCategory.forEach((functions, category) => {
+            if (category !== 'Other methods') {
+                markdownNodes.push(`### ${category} methods`)
+            } else {
+                markdownNodes.push(`### Other methods`)
+            }
+
+            functions.forEach((func) => {
+                markdownNodes.push(`#### ${func.title}()`)
+
+                if (func.releaseTag) {
+                    markdownNodes.push(`**Release Tag:** ${func.releaseTag}`)
+                }
+
+                if (func.description) {
+                    markdownNodes.push(func.description)
+                }
+
+                if (func.details) {
+                    markdownNodes.push(`**Notes:**`)
+                    markdownNodes.push(func.details)
+                }
+
+                const paramsMarkdown = renderParameters(func.params)
+                if (paramsMarkdown) {
+                    markdownNodes.push(paramsMarkdown)
+                }
+
+                const returnMarkdown = renderReturnType(func.returnType)
+                if (returnMarkdown) {
+                    markdownNodes.push(returnMarkdown)
+                }
+
+                const examplesMarkdown = renderExamples(func.examples, sdkLanguage)
+                if (examplesMarkdown) {
+                    markdownNodes.push(examplesMarkdown)
+                }
+
+                markdownNodes.push('---')
+            })
+        })
+    })
+
+    const markdownContent = markdownNodes.join('\n\n')
+
+    fs.writeFileSync(filePath, markdownContent, 'utf8')
 }
 
 // Function to generate llms.txt file according to spec

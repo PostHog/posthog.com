@@ -48,9 +48,7 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                         }}
                         className="bg-primary-dark dark:bg-primary rounded-full w-2 h-2 z-10 absolute transition-all"
                     />
-                    <p className="text-primary/75 opacity-100 dark:text-primary-dark/75 text-lg mt-0 mb-4 font-bold">
-                        On this page
-                    </p>
+                    <p className="text-secondary opacity-100 text-lg mt-0 mb-4 font-bold">On this page</p>
                     <Scrollspy
                         offset={-50}
                         onUpdate={handleInternalNavUpdate}
