@@ -27,7 +27,7 @@ const slugify = (text: string): string => {
 const FEATURE_DATA: Record<string, BaseFeature> = {
     actions: {
         feature: 'Actions',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
     },
     'activity-log': {
         feature: 'Activity log',
@@ -40,7 +40,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     alerts: {
         feature: 'Alerts',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
     },
     annotations: {
         feature: 'Annotations',
@@ -61,7 +61,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     autocapture: {
         feature: 'Autocapture',
-        owner: ['platform-features', 'web-analytics'],
+        owner: ['analytics-platform', 'web-analytics'],
     },
     'base-currency': {
         feature: 'Base currency',
@@ -78,7 +78,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -106,17 +106,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     dashboards: {
         feature: 'Dashboards',
-        owner: ['product-analytics', 'platform-features'],
-        notes: <>Shared responsibility</>,
+        owner: ['product-analytics', 'analytics-platform'],
     },
     'data-colors-themes': {
         feature: 'Data colors & themes',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
         label: 'feature/colors-and-themes',
     },
     'data-management': {
         feature: 'Data management',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
     },
     'data-table': {
         feature: 'Data table',
@@ -254,6 +253,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['infrastructure'],
         label: 'feature/platform',
     },
+    'PostHog.com': {
+        feature: 'PostHog.com',
+        owner: ['brand'],
+        label: false,
+    },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
@@ -271,7 +275,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
         label: 'feature/insights',
     },
     'quota-limiting': {
@@ -375,7 +379,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     subscriptions: {
         feature: 'Subscriptions',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
     },
     surveys: {
         feature: 'Surveys',
@@ -383,7 +387,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'table-exports': {
         feature: 'Table exports',
-        owner: ['platform-features'],
+        owner: ['analytics-platform'],
     },
     'taxonomic-filters': {
         feature: 'Taxonomic filters',
