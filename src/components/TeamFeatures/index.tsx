@@ -2,6 +2,7 @@ import React from 'react'
 import { useFeatureOwnership } from '../../hooks/useFeatureOwnership'
 import SmallTeam from '../SmallTeam'
 import Link from '../Link'
+import { Fieldset } from 'components/OSFieldset'
 
 interface TeamFeaturesProps {
     teamSlug: string
@@ -11,7 +12,7 @@ export default function TeamFeatures({ teamSlug }: TeamFeaturesProps): JSX.Eleme
     const { features } = useFeatureOwnership({ teamSlug })
 
     return features.length > 0 ? (
-        <div>
+        <Fieldset legend="Feature ownership">
             <ul>
                 {features.map((feature) => (
                     <li
@@ -70,6 +71,6 @@ export default function TeamFeatures({ teamSlug }: TeamFeaturesProps): JSX.Eleme
                     </li>
                 ))}
             </ul>
-        </div>
+        </Fieldset>
     ) : null
 }
