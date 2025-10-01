@@ -92,7 +92,8 @@ We aim to be significantly cheaper than our competitors. To help you reduce your
 
 For feature flags with flag persistence enabled and used across both your frontend and backend, you will need to do one of the following to ensure the evaluation result of the flag is consistent between both environments:
 
-1. Identify the user on the frontend and use the same identified distinct ID when getting the flag on the backend.
+1. Identify the user on the frontend and use the same identified distinct ID when evaluating the flag on the backend.
+
 ```js
 // Frontend: Identify the user
 posthog.identify('user123')
