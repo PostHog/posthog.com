@@ -1,13 +1,33 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useRef, useEffect } from 'react'
 import { useFeatureOwnership } from '../../hooks/useFeatureOwnership'
 import SmallTeam from '../SmallTeam'
 import Link from '../Link'
 import { OSInput } from '../OSForm'
+import Mark from 'mark.js'
+
+// Helper function to extract text from React nodes
+const extractTextFromReactNode = (node: React.ReactNode): string => {
+    if (typeof node === 'string') {
+        return node
+    }
+    if (typeof node === 'number') {
+        return String(node)
+    }
+    if (Array.isArray(node)) {
+        return node.map(extractTextFromReactNode).join(' ')
+    }
+    if (React.isValidElement(node)) {
+        return extractTextFromReactNode(node.props.children)
+    }
+    return ''
+}
 
 export default function FeatureOwnershipTable(): JSX.Element {
     const { getAllFeatures } = useFeatureOwnership()
     const [searchQuery, setSearchQuery] = useState('')
     const allFeatures = getAllFeatures()
+    const tableRef = useRef<HTMLTableElement>(null)
+    const markedRef = useRef<Mark | null>(null)
 
     // Filter features based on search query
     const features = useMemo(() => {
@@ -22,6 +42,11 @@ export default function FeatureOwnershipTable(): JSX.Element {
                 return true
             }
 
+            // Search in owner team slugs (e.g., "platform-analytics", "replay")
+            if (feature.owner.some((teamSlug) => teamSlug.toLowerCase().includes(searchLower))) {
+                return true
+            }
+
             // Search in label(s)
             if (feature.label !== false) {
                 if (Array.isArray(feature.label)) {
@@ -33,23 +58,68 @@ export default function FeatureOwnershipTable(): JSX.Element {
                 }
             }
 
+            // Search in notes if they exist (extract text from React nodes)
+            if (feature.notes) {
+                const notesText = extractTextFromReactNode(feature.notes)
+                if (notesText.toLowerCase().includes(searchLower)) {
+                    return true
+                }
+            }
+
             return false
         })
     }, [allFeatures, searchQuery])
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(e.target.value)
+        const value = e.target.value
+        setSearchQuery(value)
+
+        // Apply highlighting after a brief delay
+        setTimeout(() => {
+            if (tableRef.current && value.trim()) {
+                if (markedRef.current) {
+                    markedRef.current.unmark()
+                }
+                // Highlight in feature names and labels
+                const searchableElements = tableRef.current.querySelectorAll('[data-searchable]')
+                if (searchableElements.length > 0) {
+                    const elements = Array.from(searchableElements) as HTMLElement[]
+                    markedRef.current = new Mark(elements)
+                    markedRef.current.mark(value, {
+                        separateWordSearch: false,
+                        accuracy: 'partially',
+                    })
+                }
+            } else if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }, 100)
     }
 
     const handleSearchKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Escape') {
             setSearchQuery('')
+            if (markedRef.current) {
+                markedRef.current.unmark()
+            }
         }
     }
 
     const handleClearSearch = () => {
         setSearchQuery('')
+        if (markedRef.current) {
+            markedRef.current.unmark()
+        }
     }
+
+    // Cleanup highlighting on unmount
+    useEffect(() => {
+        return () => {
+            if (markedRef.current) {
+                markedRef.current.unmark()
+            }
+        }
+    }, [])
 
     return (
         <>
@@ -71,7 +141,7 @@ export default function FeatureOwnershipTable(): JSX.Element {
             </div>
 
             <div className="overflow-x-auto">
-                <table className="w-full">
+                <table ref={tableRef} className="w-full">
                     <thead>
                         <tr>
                             <th className="text-left">Feature</th>
@@ -82,16 +152,22 @@ export default function FeatureOwnershipTable(): JSX.Element {
                     <tbody>
                         {features.map((feature) => (
                             <tr key={feature.slug}>
-                                <td className="align-top">{feature.feature}</td>
+                                <td className="align-top">
+                                    <span data-searchable>{feature.feature}</span>
+                                </td>
                                 <td className="align-top">
                                     {feature.owner.length > 0 ? (
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="flex flex-wrap gap-2" data-searchable>
                                             {feature.owner.map((teamSlug) => (
                                                 <SmallTeam key={teamSlug} slug={teamSlug} noMiniCrest />
                                             ))}
                                         </div>
                                     ) : null}
-                                    {feature.notes && <div className="mt-1 text-sm">{feature.notes}</div>}
+                                    {feature.notes && (
+                                        <div className="mt-1 text-sm" data-searchable>
+                                            {feature.notes}
+                                        </div>
+                                    )}
                                 </td>
                                 <td className="align-top">
                                     {feature.label !== false && (
@@ -106,7 +182,7 @@ export default function FeatureOwnershipTable(): JSX.Element {
                                                         className="lemon-tag gh-tag !no-underline hover:!underline"
                                                         externalNoIcon
                                                     >
-                                                        {label}
+                                                        <span data-searchable>{label}</span>
                                                     </Link>
                                                 ))
                                             ) : (
@@ -117,7 +193,7 @@ export default function FeatureOwnershipTable(): JSX.Element {
                                                     className="lemon-tag gh-tag !no-underline hover:!underline"
                                                     externalNoIcon
                                                 >
-                                                    {feature.label}
+                                                    <span data-searchable>{feature.label}</span>
                                                 </Link>
                                             )}
                                         </div>
