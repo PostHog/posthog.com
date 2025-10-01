@@ -17,6 +17,8 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 </CalloutBox>
 
+## Creating a nginx container
+
 You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to build a nginx container:
 
 ```dockerfile
@@ -24,47 +26,80 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-Next, create the `nginx.conf` file with the reverse proxy configuration. Change `us` to `eu` to proxy to our EU Cloud.
+Next, create the `nginx.conf` file with the reverse proxy configuration.
 
 ```nginx.conf
-events {
-    worker_connections 1024;
-}
-
+worker_processes auto;
+events { worker_connections 1024; }
 http {
+    sendfile on;
     server {
-        listen 8080;  # Set the port to 8080
-
-        server_name _;  # Accept requests for any domain
-
-        # Specify DNS resolver for variables, this is Google Public DNS
-        # You should adjust this to a DNS resolver of your choice
+        listen 8080;
+        server_name _;
+        
+        # DNS resolver - increased cache time for stability
         resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::8888] [2001:4860:4860::8844] valid=300s;
         resolver_timeout 5s;
-
-        proxy_http_version 1.1;
-        proxy_ssl_server_name on;
-
-        set $posthog_main_host "us.i.posthog.com"; # Change to "eu.i.posthog.com" for EU
-        set $posthog_assets_host "us-assets.i.posthog.com"; # Change to "eu-assets.i.posthog.com" for EU
-    
-        location ~ ^/static/(.*)$ {
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-
-            proxy_pass https://$posthog_assets_host/static/$1$is_args$args;
-            proxy_set_header Host $posthog_assets_host;
+        
+        # Static assets - trailing slashes preserve path mapping
+        location /static/ {
+            # for US region
+            proxy_pass https://us-assets.i.posthog.com/static/;
+            proxy_set_header Host "us-assets.i.posthog.com";
+            # for EU region
+            # proxy_pass https://eu-assets.i.posthog.com/static/;
+            # proxy_set_header Host "eu-assets.i.posthog.com";
+            proxy_ssl_server_name on;
+            
+            proxy_hide_header 'Access-Control-Allow-Origin';
+            proxy_hide_header 'Access-Control-Allow-Methods';
+            proxy_hide_header 'Access-Control-Allow-Headers';
+            proxy_hide_header 'Access-Control-Expose-Headers';
+            
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
         }
-    
+        
+        # Main API endpoints
         location / {
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-
-            proxy_pass https://$posthog_main_host/$1$is_args$args;
-            proxy_set_header Host $posthog_main_host;
+            # for US region
+            proxy_pass https://us.i.posthog.com;
+            proxy_set_header Host "us.i.posthog.com";
+            # for EU region
+            # proxy_pass https://eu.i.posthog.com;
+            # proxy_set_header Host "eu.i.posthog.com";
+            proxy_ssl_server_name on;
+            
+            proxy_hide_header 'Access-Control-Allow-Origin';
+            proxy_hide_header 'Access-Control-Allow-Methods';
+            proxy_hide_header 'Access-Control-Allow-Headers';
+            proxy_hide_header 'Access-Control-Expose-Headers';
+            
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
         }
     }
 }
+```
+
+## Running the nginx container
+
+```bash
+docker build -t posthog-nginx . 
+docker run --rm -p 8080:8080 -e POSTHOG_CLOUD_REGION=us posthog-nginx
+```
+
+Now you can connect to PostHog through this proxy by configuring the PostHog client to use `http://localhost:8080`.
+
+```js
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+    ui_host: 'https://us.posthog.com', // for the toolbar to work
+    // for EU Cloud
+    // ui_host: 'https://eu.posthog.com',
+});
 ```
