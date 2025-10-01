@@ -19,7 +19,7 @@ These are the statuses we use to track users in the new **Onboarding Pipeline** 
 - `4a. Intro Call Completed` - Assigned when the first call is completed.
 - `4b. Second Call Completed` - Assigned when we complete the second call, diving deeper into specific KPIs and business goals.
 - `4c. Homework Offered` - Assigned only to customers who have completed a second call with us, and receive tailored homework.
-- `5. Awaiting Final Outreach`- Assigned to both engaged and unengaged customers; the final stage where we review the account, and wrap up the onboarding process.
+- `5. Awaiting Final Outreach` - Assigned to both engaged and unengaged customers; the final stage where we review the account, and wrap up the onboarding process.
 - `6a. Onboarded — No Engagement` - Assigned to customers that never engaged with us in any way.
 - `6b. Onboarded — Engaged` - Assigned to those who engaged either over email or also in a call.
 - `6c. Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/onboarding/sales-handover). This can happen at any stage throughout the process.
