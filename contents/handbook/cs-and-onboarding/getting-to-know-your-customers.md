@@ -4,18 +4,15 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously you’ll learn more about customers that you actually talk to, but there’s still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available.
+As CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously you’ll learn more about customers that you actually talk to, but there’s still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available. 
 
-## Discovery call
+## Getting-to-know-you call
 
-A traditional “discovery call” is one of the most effective ways to learn what you need to learn about a customer because you can ask direct questions and should spend a LOT of time listening to their responses.
+This is one of the most effective ways to learn what you need to learn about a customer because you can ask direct questions and should spend a LOT of time listening to their responses. A quick call up front is often better than a month of back and forth in Slack. 
 
 Typically this is a 15-30 minute conversation with the aim of establishing rapport, understanding pain points, and beginning to formulate how you can best help them. See [this page](/handbook/cs-and-onboarding/saying-hi-to-your-customers#mission-start) for more on having a first call with a champion.
 
-
-Additionally, here are some recommended questions you could use.
-
-Note: Please do not simply interrogate a customer with each of these questions, this is more of a question bank to use for inspiration!
+Here are some recommended questions you could use. Please do not simply interrogate a customer with each of these questions, this is more of a question bank to use for inspiration!
 
 - Can you describe your current analytics setup and any specific tools or libraries you use alongside PostHog?
 - Which user flows or features do you most want to understand better?
