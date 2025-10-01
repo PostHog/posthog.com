@@ -39,6 +39,11 @@ const DWInstallationPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Ads_logo_b59e784792.svg',
         },
         {
+            label: 'TikTok Ads',
+            url: '/docs/data-warehouse/sources/tiktok-ads',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/tiktok_svgrepo_com_9315a2fa30.svg',
+        },
+        {
             label: 'Google Cloud Storage',
             url: '/docs/data-warehouse/sources/gcs',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Cloud_14ebf7693d.svg',
