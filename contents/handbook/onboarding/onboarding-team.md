@@ -8,7 +8,7 @@ showTitle: true
 
 ### What does this team do?
 
-The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked here ([link](https://us.posthog.com/project/2/dashboard/363452)).
+The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked here ([link](https://app.posthog.com/project/2/dashboard/363452)).
 
 We also care about net dollar retention for this segment, but we treat it as an auxiliary metric.
 
