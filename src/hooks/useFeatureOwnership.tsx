@@ -7,14 +7,14 @@ export interface Feature {
     feature: string
     owner: string[]
     notes?: React.ReactNode
-    label: string | false
+    label: string | string[] | false
 }
 
 interface BaseFeature {
     feature: string
     owner: string[]
     notes?: React.ReactNode
-    label?: string | false
+    label?: string | string[] | false
 }
 
 const slugify = (text: string): string => {
@@ -93,6 +93,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     comments: {
         feature: 'Comments/Discussions',
         owner: ['platform-features'],
+        label: 'feature/comments',
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
@@ -144,8 +145,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['error-tracking'],
     },
     experimentation: {
-        feature: 'Experimentation',
+        feature: 'Experiments',
         owner: ['experiments'],
+        label: ['experiments/new-engine', 'experiments/no-code'],
     },
     'feature-flags': {
         feature: 'Feature flags',
@@ -181,6 +183,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'live-events': {
         feature: 'Live events',
         owner: ['clickhouse'],
+        label: false,
     },
     'marketing-analytics': {
         feature: 'Marketing analytics',
@@ -274,6 +277,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'quota-limiting': {
         feature: 'Quota limiting',
         owner: ['billing', 'platform-features'],
+        label: false,
     },
     replay: {
         feature: 'Replay',
@@ -333,6 +337,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'self-hosting': {
         feature: 'Self-hosting',
         owner: ['infrastructure'],
+        label: false,
     },
     'sentry-integration': {
         feature: 'Sentry integration',
@@ -348,6 +353,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Settings structure (personal & project)',
         owner: ['platform-ux'],
         notes: <>All teams manage their own settings</>,
+        label: 'feature/settings',
     },
     'sql-editor': {
         feature: 'SQL editor',
@@ -356,10 +362,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'sql-insights': {
         feature: 'SQL insights',
         owner: ['data-warehouse'],
+        label: false,
     },
     sso: {
         feature: 'SSO',
         owner: ['platform-features'],
+        label: false,
     },
     'statistical-analysis': {
         feature: 'Statistical analysis',
@@ -388,6 +396,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'usage-reports': {
         feature: 'Usage reports',
         owner: ['billing', 'platform-features'],
+        label: false,
     },
     variables: {
         feature: 'Variables',
