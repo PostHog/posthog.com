@@ -1344,7 +1344,7 @@ export const handbookSidebar = [
                             {
                                 name: 'Cross-sell motions',
                                 url: '/handbook/growth/sales/cross-selling',
-                             },
+                            },
                         ],
                     },
                     {
@@ -1426,7 +1426,7 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding Specialist overview',
+                        name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
                     },
                     {
@@ -1434,15 +1434,15 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
-                        name: 'Onboarding Program',
+                        name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
+                        name: 'Onboarding tracking',
+                        url: '/handbook/onboarding/onboarding-tracking',
                     },
                     {
-                        name: 'Sales Handover',
+                        name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
                     {
