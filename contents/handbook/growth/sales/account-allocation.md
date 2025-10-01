@@ -17,7 +17,7 @@ We have different roles within the team who manage customers at various stages i
 
 We track whether a customer is paying for each product in Vitally using the `Paying for <Product Name>` trait.
 
-- Customers already paying for all of the primary primary products are considered expanded to the Max and should go to a Customer Success Manager.  They should be pretty sticky as a customer so the main focus here is retention.
+- Customers already paying for all of the primary products are considered expanded to the Max and should go to a Customer Success Manager.  They should be pretty sticky as a customer so the main focus here is retention.
 - Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
 
 > Today we have lots of customers who aren't paying for the three primary products so it might make sense to allocate some customers who are paying for 2 out of the 3 to a CSM whilst we are hiring more TAMs.
