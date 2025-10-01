@@ -152,18 +152,23 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 
 ### Lead to opportunity conversion guidelines
 
-Use the following criteria to determine when a lead should be converted to an opportunity:
+Use the following criteria (loosely based on traditional BANT qualification) to determine when a lead should be converted to an opportunity:
 
--   You've had an initial call and have decided to work this as a hands-on sale.
--   There's a clearly identified problem that PostHog can solve.
--   The customer has taken a concrete, identifiable action toward further evaluating PostHog. The action will be evaluated in context, but the goal is to identify something they have done that provides evidence they're serious. Examples include:
-    -   Signing up for a PostHog organization
-    -   Implementing PostHog
-    -   Getting an MNDA in place
-    -   Accepting a Slack Connect invite and asking questions in a Slack channel
-    -   Accepting a call invite with their boss/buying committee
+- You've had at least one call with the customer to establish a relationship.
+- There's a clearly identified problem that PostHog can solve.
+- They have acknowledged that the problem is important enough to work on solving now.
+- You've had a rough pricing discussion, and confirmed that their budget is in the same ballpark.
+- The person you're in touch with is the decision maker, or has committed to introducing you to the decision maker.
+- You have an agreed next step which moves things forwards such as:
+  -   Signing up for a PostHog organization
+  -   Implementing PostHog
+  -   Getting an MNDA in place
+  -   Accepting a Slack Connect invite and asking questions in a Slack channel
+  -   Accepting a call invite with their boss/buying committee
 
-All three criteria should be met. Converting at this stage (rather than waiting until later) helps us get a more accurate view of our pipeline and standardize our approach across territories and team members.
+All of the above criteria should be met before creating an opportunity.  By doing so you drastically increase the odds of bringing them onboard as a successful customer.
+
+If you aren't able to confidently say that you have covered the above, you should keep them as a Lead in the Nurturing stage.
 
 ### Support requests
 
@@ -215,7 +220,7 @@ Annual Plan: Select this type when the customer agrees to pay for a year-long+ s
 
 Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services. Amount field still reflects ARR here.
 
-### How to create an qpportunity
+### How to create an opportunity
 
 #### Convert a lead
 

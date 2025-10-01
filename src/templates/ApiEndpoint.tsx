@@ -15,6 +15,7 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
+import { Heading } from 'components/Heading'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -614,10 +615,12 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     // Find overview.mdx node for this API entity
     const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
 
+    const [hovered, setHovered] = useState(false)
+
     return (
         <ScrollSpyProvider>
             <ReaderView>
-                <div ref={contentContainerRef}>
+                <div ref={contentContainerRef} className="p-4">
                     <SEO title={`${title} API Reference - PostHog`} />
 
                     <h2 className="!mt-0">{title}</h2>
@@ -648,12 +651,15 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         return (
                             <div className="mt-8" key={item.operationId}>
                                 {index > 0 && <SectionDivider />}
+
                                 <div
                                     className="grid grid-cols-1 @xl:grid-cols-2 gap-8 items-start"
                                     id={pathID(item.httpVerb, item.pathName)}
                                 >
                                     <div className="space-y-6">
-                                        <h2>{generateName(item)}</h2>
+                                        <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
+                                            {generateName(item)}
+                                        </Heading>
                                         {mdxNode?.body && (
                                             <div className="article-content">
                                                 <div className="text-primary">

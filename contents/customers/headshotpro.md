@@ -1,21 +1,8 @@
 ---
 title: How HeadshotPro analyzes Google Adwords data in PostHog
 customer: HeadshotPro
-logo: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/headshot_light_22c5a2ce27.png
-logoDark: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/headshot_dark_b36935a453.png
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/headshot_pro_posthog_56e4ed68be.png
-industries:
-    - AI
-users:
-    - Growth
-    - Engineering
-    - Product
-toolsUsed:
-    - Data warehouse
-    - Product analytics
 date: 2024-06-02
 ---
 

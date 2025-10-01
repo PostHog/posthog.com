@@ -143,6 +143,7 @@ export default function ErrorTracking(): JSX.Element {
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
+        exclude: ['posthog-on-posthog'],
         custom: [
             {
                 slug: 'product-os-benefits',

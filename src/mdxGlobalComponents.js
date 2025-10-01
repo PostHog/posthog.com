@@ -27,16 +27,10 @@ import { Quote } from './components/Pricing/Quote'
 import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
 import ImageSlider from './components/ImageSlider'
-import { AbTesting } from './components/Product/AbTesting'
-import { FeatureFlags } from './components/Product/FeatureFlags'
-import { ProductAnalytics } from './components/Product/ProductAnalytics'
 import { ProductOS } from './components/Product/ProductOS'
-import { SessionReplay } from './components/Product/SessionReplay'
-import { Surveys } from './components/Product/Surveys'
 import { ProductScreenshot } from './components/ProductScreenshot'
 import { ProductVideo } from './components/ProductVideo'
 import { Competitor } from './components/Products/Competitor'
-import { CustomerCard } from './components/Products/CustomerCard'
 import { DocsLinks } from './components/Products/DocsLinks'
 import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
@@ -64,6 +58,8 @@ import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
 import OSButton from './components/OSButton'
 import AskMax from './components/AskMax'
+import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
+import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 
 export const shortcodes = {
     ArrayCTA,
@@ -95,16 +91,10 @@ export const shortcodes = {
     OSButton,
     Link,
     PrivateLink,
-    AbTesting,
-    FeatureFlags,
-    ProductAnalytics,
     ProductOS,
-    SessionReplay,
-    Surveys,
     ProductScreenshot,
     ProductVideo,
     Competitor,
-    CustomerCard,
     DocsLinks,
     FAQ,
     Feature,
@@ -131,4 +121,6 @@ export const shortcodes = {
     Steps,
     Step,
     AskMax,
+    CountriesWeHireIn,
+    FeatureOwnershipTable,
 }
