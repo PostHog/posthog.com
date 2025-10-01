@@ -1,5 +1,5 @@
 ---
-title: Onboarding Program
+title: Onboarding program
 sidebar: Handbook
 showTitle: true
 ---
@@ -31,7 +31,7 @@ The current program spans over **8 weeks** and involves the following:
 - **PostHog homework** - It’s sent in the follow-up email to reinforce concepts we covered on the call.
 - **Final outreach** - A last check to ensure usage and configuration are solid. We share additional educational resources and highlight where to find ongoing help. 
 
-#### Timeline (approximate)
+### Timeline (approximate)
 
 Our customers enter the segment at different points in their journey (e.g., credits roll off, projecting a first bill). Our goal is to reach out to them within the first week since they enter our segment, schedule the first call within the second/third week, schedule the second call within their fourth/fifth week, offer homework within the fifth/sixth week, and check in with them one more time on the seventh/eighth week.
 

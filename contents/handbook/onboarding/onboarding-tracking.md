@@ -1,5 +1,5 @@
 ---
-title: Onboarding Tracking
+title: Onboarding tracking
 sidebar: Handbook
 showTitle: true
 ---

@@ -1431,19 +1431,19 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding Specialist overview',
+                        name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
                     },
                     {
-                        name: 'Onboarding Program',
+                        name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Onboarding Pipeline',
-                        url: '/handbook/onboarding/onboarding-pipeline',
+                        name: 'Onboarding tracking',
+                        url: '/handbook/onboarding/onboarding-tracking',
                     },
                     {
-                        name: 'Sales Handover',
+                        name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
                     {
