@@ -47,7 +47,7 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 
 Refer them to <TeamMember name="Joe Martin" />. He'll give them the bad news / explore any opportunities.
 
-If another company is interested in building an integration with PostHog, speak to the [Growth Team](/teams/growth).
+If another company is interested in building an integration with PostHog, raise this with our integrations engineer.
 </details>
 
 <details>

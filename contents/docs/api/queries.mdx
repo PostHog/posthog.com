@@ -418,9 +418,54 @@ Bad names are generic and vague:
 - `test`
 - `data`
 
-### 5. Other SQL optimizations
+### 5. Use timestamp-based pagination instead of OFFSET
 
-Options 1-4 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
+When querying large datasets like `events` or `query_log` over multiple batches, avoid using `OFFSET` for pagination. Instead, use timestamp-based pagination, which is much more efficient and scales better.
+
+**❌ Inefficient approach using OFFSET:**
+```sql
+-- First batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000;
+
+-- Second batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000 OFFSET 1000;  -- This gets slower with each page
+```
+
+**✅ Efficient approach using timestamp pagination:**
+```sql
+-- First batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000;
+
+-- Second batch (use timestamp of last event from previous batch)
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp > '2024-01-01 12:34:56.789'  -- timestamp from last row of previous batch
+ORDER BY timestamp
+LIMIT 1000;
+```
+
+This approach is more efficient because:
+- **Constant performance**: Each query executes in similar time regardless of how many rows you've already retrieved
+- **Index-friendly**: Uses the timestamp index effectively for filtering
+- **Scalable**: Performance doesn't degrade as you paginate through millions of rows
+
+**For geeks:** OFFSET-based pagination gets progressively slower because the database must scan and skip all the offset rows for each query. With timestamp-based pagination, the database uses the timestamp index to directly jump to the right starting point, maintaining consistent performance across all pages.
+
+### 6. Other SQL optimizations
+
+Options 1-5 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
 
 ## Query parameters
 
@@ -503,10 +548,10 @@ curl \
 
 API queries are limited at the project-level to:
 
-- 1200 requests per hour
-- 120 requests per minute
+- 2400 requests per hour
+- 240 requests per minute
 - 3 queries running concurrently
-- 80 threads per query
+- 60 threads per query
 - 10 seconds of max execution time
   - applies to query execution time, not HTTP request duration
 

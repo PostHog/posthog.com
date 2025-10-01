@@ -17,7 +17,7 @@ const MCP_SERVER_CONFIG = {
         'Authorization:${POSTHOG_AUTH_HEADER}',
     ],
     env: {
-        POSTHOG_AUTH_HEADER: 'Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE} // HIGHLIGHT',
+        POSTHOG_AUTH_HEADER: 'Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE}// HIGHLIGHT',
     },
 }
 

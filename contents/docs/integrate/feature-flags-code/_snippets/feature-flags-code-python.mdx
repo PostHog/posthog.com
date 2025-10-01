@@ -36,11 +36,11 @@ There are two methods you can use to include feature flag information in your ev
 
 ```python
 posthog.capture(
-    distinct_id="distinct_id_of_the_user"
-    'event_name',
-    {
-        '$feature/feature-flag-key': 'variant-key' # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
-    }
+    "event_name",
+    distinct_id="distinct_id_of_the_user",
+    properties={
+        "$feature/feature-flag-key": "variant-key"  # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+    },
 )
 ```
 

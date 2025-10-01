@@ -8,7 +8,7 @@ We make money from those that have it and like our products. We don't make money
 
 ## How we do sales is based on the best experience for our Ideal Customer Profile
 
-I cannot think of any harder group than developers to convince, via a cold-call or email, to buy software. We should focus all our energy on inbound – that's why we don't do outbound sales.
+I cannot think of any harder group than developers to convince, via a cold-call or email, to buy software. We should focus on inbound.
 
 All the other rules here are based on what we felt would be the best experience for an engineering customer, whilst allowing us to grow revenue in the long run.
 
