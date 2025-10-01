@@ -23,9 +23,8 @@ const extractTextFromReactNode = (node: React.ReactNode): string => {
 }
 
 export default function FeatureOwnershipTable(): JSX.Element {
-    const { getAllFeatures } = useFeatureOwnership()
+    const { features: allFeatures } = useFeatureOwnership()
     const [searchQuery, setSearchQuery] = useState('')
-    const allFeatures = getAllFeatures()
     const tableRef = useRef<HTMLTableElement>(null)
     const markedRef = useRef<Mark | null>(null)
 

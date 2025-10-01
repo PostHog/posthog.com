@@ -5,24 +5,15 @@ import Link from '../Link'
 
 interface TeamFeaturesProps {
     teamSlug: string
-    renderWrapper?: (content: JSX.Element) => JSX.Element
 }
 
-export default function TeamFeatures({ teamSlug, renderWrapper }: TeamFeaturesProps): JSX.Element | null {
-    const { getAllFeatures } = useFeatureOwnership()
-    const allFeatures = getAllFeatures()
+export default function TeamFeatures({ teamSlug }: TeamFeaturesProps): JSX.Element | null {
+    const { features } = useFeatureOwnership({ teamSlug })
 
-    // Filter features owned by this team
-    const teamFeatures = allFeatures.filter((feature) => feature.owner.includes(teamSlug))
-
-    if (teamFeatures.length === 0) {
-        return null
-    }
-
-    const content = (
+    return features.length > 0 ? (
         <div>
             <ul>
-                {teamFeatures.map((feature) => (
+                {features.map((feature) => (
                     <li
                         key={feature.slug}
                         className="grid @xs/team-stats:grid-cols-2 gap-x-4 gap-y-1 text-sm border-t first:border-t-0 border-primary py-2 first:pt-0 last:pb-0"
@@ -80,7 +71,5 @@ export default function TeamFeatures({ teamSlug, renderWrapper }: TeamFeaturesPr
                 ))}
             </ul>
         </div>
-    )
-
-    return renderWrapper ? renderWrapper(content) : content
+    ) : null
 }

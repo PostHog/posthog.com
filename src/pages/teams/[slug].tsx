@@ -612,14 +612,9 @@ export default function TeamPage(props: TeamPageProps) {
                                         <PineapplePieChart percentage={pineapplePercentage} />
                                     </Fieldset>
                                 </div>
-                                <TeamFeatures
-                                    teamSlug={slug}
-                                    renderWrapper={(content) => (
-                                        <div>
-                                            <Fieldset legend="Feature ownership">{content}</Fieldset>
-                                        </div>
-                                    )}
-                                />
+                                <Fieldset legend="Feature ownership">
+                                    <TeamFeatures teamSlug={slug} />
+                                </Fieldset>
                                 <div>
                                     {teamEmojis?.length > 0 && (
                                         <Fieldset legend="Custom emojis">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import TeamMember from '../components/TeamMember'
 import { PrivateLink } from '../components/PrivateLink'
 
@@ -417,7 +417,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
 }
 
-export const useFeatureOwnership = () => {
+export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}) => {
     const features = Object.entries(FEATURE_DATA).reduce((acc, [key, feature]) => {
         const featureWithSlug: Feature = {
             ...feature,
@@ -431,22 +431,15 @@ export const useFeatureOwnership = () => {
         }
     }, {} as Record<string, Feature>)
 
-    const getFeature = (slug: string): Feature | undefined => {
-        return features[slug]
-    }
-
-    const getFeatures = (slugs: string[]): Feature[] => {
-        return slugs.map((slug) => features[slug]).filter(Boolean) as Feature[]
-    }
-
-    const getAllFeatures = (): Feature[] => {
-        return Object.values(features).sort((a, b) => a.feature.localeCompare(b.feature))
-    }
+    const filteredFeatures = useMemo(() => {
+        const sortedFeatures = Object.values(features).sort((a, b) => a.feature.localeCompare(b.feature))
+        if (!teamSlug) {
+            return sortedFeatures
+        }
+        return sortedFeatures.filter((feature) => feature.owner.includes(teamSlug))
+    }, [teamSlug])
 
     return {
-        features,
-        getFeature,
-        getFeatures,
-        getAllFeatures,
+        features: filteredFeatures,
     }
 }
