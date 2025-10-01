@@ -36,7 +36,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({ isOpen, onClose, tit
                             <h3 className="text-lg font-semibold text-primary">{title}</h3>
                             <OSButton icon={<IconX />} onClick={onClose} />
                         </div>
-                        <div className="flex-1 min-h-0 overflow-auto">{children}</div>
+                        <div className="flex-1 min-h-0 overflow-auto text-primary">{children}</div>
                     </motion.div>
                 </>
             )}
