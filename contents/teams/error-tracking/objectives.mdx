@@ -29,7 +29,8 @@
   * Introduce a measure of grouping accuracy to base changes off
   * Add fingerprint versioning to avoid duplicate issues when iterating
   * Fix obvious mis-groupings based on minor stack trace variances
-* RFC for moving issues into ClickHouse to avoid dual DB querying
+  * Ship embeddings to support merge suggestions
+* Decide with Team ClickHouse on approach to avoid dual DB querying
 * Reduce the number of stacktrace-less issues
 * Give better context when a recording is not found / source maps missing
 * Rethink UI / UX of issue page
@@ -39,10 +40,11 @@
 * Show first affected release & relevant commit
   * Stretch: Auto assign to commit author
 * Level up Node SDK (add contexts & tagging, $session_id propagation)
-* Integrate logs into session timeline
 * Capture code variables in Python
+* Stretch: Integrate logs into session timeline
 
-#### Billing, spikes and alerts (Driver: <TeamMember name="Oliver Browne" />)
+#### Stretch: Billing, spikes and alerts (Driver: <TeamMember name="Oliver Browne" />)
+(Note: this goal largely depends on the capacity Olly has outside of mobile error tracking, which takes precedence)
 * **Email** alerts for total exceptions ingested volume spikes
 * Add billing limits to onboarding
 * Fixed issue sampling (manually configured, drop X% of exceptions for this issue)
