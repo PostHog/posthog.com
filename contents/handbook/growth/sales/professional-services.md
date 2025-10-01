@@ -25,7 +25,7 @@ For ongoing training, this is something that we are solving for separately, but 
 
 ## What work is included
 
-Typically we will send a forward deployed engineer to work with a customer for a week in person. What we charge depends heavily on the nature and scope of the implementation, but in any case at starting at $10k. Simon will work with you to figure out the relevant scope of work and contractual terms. 
+Typically we will send a forward deployed engineer to work with a customer for a week in person. What we charge depends heavily on the nature and scope of the implementation, but in any case starting at $10k. Simon will work with you to figure out the relevant scope of work and contractual terms.
 
 We don't offer this for free, because it is a valuable service that customers expect to pay for. We also don't offer it as a freebie negotiation tactic, because that devalues it for all other customers. 
 
