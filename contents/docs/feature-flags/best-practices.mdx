@@ -101,7 +101,9 @@ posthog.identify('user123')
 // Backend: Use the same distinct ID
 const flagValue = await posthog.getFeatureFlag('my-flag', 'user123')
 ```
-2. If you are unable to call identify on the frontend, and only have access to the anonymous distinct ID when it comes time to get the flag on the backend, then you can include the anonymous distinct ID as a person property override in the `getFeatureFlag` call.
+
+2. If you are unable to call identify on the frontend, and only have access to the anonymous distinct ID when evaluating the flag on the backend, you can include the anonymous distinct ID as a person property override in the `getFeatureFlag` call.
+
 ```js
 // Frontend: Get the anonymous ID (before identify is called)
 const anonId = posthog.getAnonymousId()
