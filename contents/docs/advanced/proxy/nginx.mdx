@@ -23,7 +23,10 @@ You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to
 
 ```dockerfile
 FROM nginx:alpine
-COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY nginx.conf /etc/nginx/nginx.conf.template
+
+CMD ["sh", "-c", "envsubst '\\$POSTHOG_CLOUD_REGION' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
 ```
 
 Next, create the `nginx.conf` file with the reverse proxy configuration.
