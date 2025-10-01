@@ -1,6 +1,6 @@
 ---
 date: 2025-10-03
-title: How we made feature flags even faster and even more reliable
+title: How we made feature flags even faster and more reliable
 rootPage: /blog
 sidebar: Blog
 showTitle: true
