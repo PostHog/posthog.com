@@ -33,7 +33,7 @@ export default function Destinations(): JSX.Element {
                         <strong>Snowflake:</strong> Send data to Snowflake data warehouse
                     </li>
                     <li>
-                        <strong>Amazon S3:</strong> Store data in S3 buckets for flexible processing
+                        <strong>Amazon S3:</strong> Store data in S3-compatible object storage for flexible processing
                     </li>
                     <li>
                         <strong>PostgreSQL:</strong> Export to PostgreSQL databases
