@@ -1,42 +1,55 @@
-Elixir supports a subset of what our [feature flag API](/docs/api/flags) provides.
+`PostHog.FeatureFlags.check/2` is the main function for checking a feature flag in Elixir.
+
+```elixir
+# Simple boolean feature flag
+iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
+{:ok, true}
+
+# Note how it automatically sets `$feature/example-feature-flag-1` property in the context
+iex> PostHog.get_context()
+%{"$feature/example-feature-flag-1" => true}
+
+# It will attempt to take distinct_id from the context if it's not provided
+iex> PostHog.set_context(%{distinct_id: "user123"})
+:ok
+iex> PostHog.FeatureFlags.check("example-feature-flag-1")
+{:ok, true}
+
+# You can also pass a map with body parameters that will be sent to the /flags API as-is
+iex> PostHog.FeatureFlags.check("example-feature-flag-1", %{distinct_id: "user123", groups: %{group_type: "group_id"}})
+{:ok, true}
+
+# It returns variant if it's set
+iex> PostHog.FeatureFlags.check("example-feature-flag-2", "user123")
+{:ok, "variant2"}
+
+# Returns error if feature flag doesn't exist
+iex> PostHog.FeatureFlags.check("example-feature-flag-3", "user123")
+{:error, %PostHog.UnexpectedResponseError{message: "Feature flag example-feature-flag-3 was not found in the response", response: ...}}
+```
 
 #### Boolean feature flags
 
 ```elixir
-is_my_flag_enabled = Posthog.feature_flag_enabled?("flag-key", "distinct_id_of_your_user")
-
-if is_my_flag_enabled
-    # Do something differently for this user
-    # Optional: fetch the payload
-    {:ok, feature_flag} = Posthog.feature_flag("flag-key", "distinct_id_of_your_user")
-end
+iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
+{:ok, true}
 ```
+
+It will attempt to take `distinct_id` from the context if it's not provided.
+
+```elixir
+iex> PostHog.set_context(%{distinct_id: "user123"})
+:ok
+iex> PostHog.FeatureFlags.check("example-feature-flag-1")
+{:ok, true}
+```
+
 
 #### Multivariate feature flags
 
 ```elixir
-{:ok, feature_flag} = Posthog.feature_flag("flag-key", "distinct_id_of_your_user")
-#  %Posthog.FeatureFlag{ name: "flag-key", payload: %{"variant-1" => "value-1", "variant-2" => "value-2"}, enabled: "variant-2" }
-
-if feature_flag.enabled == 'variant-2' # replace 'variant-2' with the key of your variant
-    # Do something differently for this user
-end
+iex> PostHog.FeatureFlags.check("example-feature-flag-1", "user123")
+{:ok, 'variant2'}
 ```
 
-#### Fetching all feature flags
-
-```elixir
-Posthog.feature_flags("distinct_id_of_your_user")
-
-{:ok,
- %{
-   "featureFlagPayloads" => %{
-     "feature-1" => 1,
-     "feature-2" => %{"variant-1" => "value-1", "variant-2" => "value-2"}
-   },
-   "featureFlags" => %{"feature-1" => true, "feature-2" => "variant-2"}
- }}
-
-```
-
-More documentation can be found in the [repository](https://github.com/posthog/posthog-elixir).
+More documentation can be found in the [HexPM Docs](https://hexdocs.pm/posthog/PostHog.FeatureFlags.html).
