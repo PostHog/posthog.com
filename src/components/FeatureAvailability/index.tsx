@@ -30,7 +30,6 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
 
     const getGridColsClass = () => {
         const count = typeof availability === 'boolean' ? 1 : Object.keys(availability).length
-        console.log(count)
         const columnCount = Math.max(3, count) // minimum 3 columns
         return `grid-cols-${columnCount}`
     }
