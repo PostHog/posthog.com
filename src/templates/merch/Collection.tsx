@@ -6,7 +6,6 @@ import { CollectionPageContext } from './types'
 import SEO from 'components/seo'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
 import { getProductMetafieldByNamespace } from './utils'
@@ -20,6 +19,7 @@ import Fuse from 'fuse.js'
 import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
+import MobileDrawer from 'components/MobileDrawer'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -430,7 +430,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                    {(cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
+                    {!isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
                         <motion.aside
                             data-scheme="secondary"
                             className="not-prose bg-primary border-l border-primary h-full text-primary relative"
@@ -473,6 +473,42 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 }}
                             />
                         </motion.aside>
+                    )}
+
+                    {isMobile && (
+                        <MobileDrawer
+                            isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
+                            onClose={() => {
+                                if (cartIsOpen) handleCartClose()
+                                if (selectedProduct) setSelectedProduct(null)
+                                if (orderHistoryIsOpen) handleOrderHistoryClose()
+                            }}
+                            title={
+                                cartIsOpen
+                                    ? 'Cart'
+                                    : orderHistoryIsOpen
+                                    ? 'Order History'
+                                    : selectedProduct?.title || 'Product'
+                            }
+                        >
+                            {cartIsOpen ? (
+                                <Cart className="h-full overflow-y-auto" />
+                            ) : orderHistoryIsOpen ? (
+                                <div className="h-full overflow-y-auto @container">
+                                    <OrderHistory orders={orders} />
+                                </div>
+                            ) : selectedProduct ? (
+                                <ProductPanel
+                                    product={selectedProduct}
+                                    setIsCart={() => undefined}
+                                    onClick={() => undefined}
+                                    updateURL={handleProductSelect}
+                                    onCartOpen={handleCartOpen}
+                                    className="!p-4 !pt-4"
+                                    containerWidth={asideWidth}
+                                />
+                            ) : null}
+                        </MobileDrawer>
                     )}
 
                     <main
