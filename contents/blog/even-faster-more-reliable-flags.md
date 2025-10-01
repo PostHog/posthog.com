@@ -87,22 +87,9 @@ The improvements were immediate and substantial:
 
 These aren't just synthetic benchmarks—these are real-world improvements under production load with the same traffic patterns.
 
-<div style="display: flex; gap: 20px; margin: 20px 0;">
-  <div style="flex: 1;">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_09_30_at_11_29_10_deecd68b52.png" alt="New service latency" style="width: 100%; height: 300px; object-fit: contain;" />
-  </div>
-  <div style="flex: 1;">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_09_30_at_11_29_26_8245787895.png" alt="Old service latency" style="width: 100%; height: 300px; object-fit: contain;" />
-  </div>
-</div>
-
 **Cost reduction:**
 
 The efficiency gains were also substantial. Our Django service required ~300 pods to handle ~500k requests per minute at a cost of ~$8.8k/month. The new Rust service handles the same ~500k req/min using ~90 pods, costing around ~$2.8k/month.
-
-![old service cost](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_09_30_at_11_52_51_43eb1d255e.png)
-
-![new service cost](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_09_30_at_11_55_28_567964d412.png)
 
 That's a 68% reduction in compute costs while serving identical traffic. The new service uses just 32% of the compute resources compared to the previous implementation.
 
