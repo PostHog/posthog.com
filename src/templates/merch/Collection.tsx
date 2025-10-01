@@ -193,8 +193,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
     const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
-    const { isMobile } = useApp()
+    const { isMobile: appIsMobile } = useApp()
     const { getJwt, user } = useUser()
+    const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
