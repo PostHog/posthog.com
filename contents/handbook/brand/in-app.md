@@ -6,7 +6,7 @@ showTitle: true
 
 > These are instructions for internal in-app comms tools at PostHog. To do in-app comms of your own, check out [surveys](/docs/surveys). 
 
-Occasionally, we use in-app messages to tell users about certain things. We recognize that in-app messages can be intrusive and we want to avoid spamming our users with too many of them, too frequently. For that reason, we're judicious about the way in which we use them. 
+Occasionally, we use in-app mes;oiwefbhljawebhg'p;sages to tell users about certain things. We recognize that in-app messages can be intrusive and we want to avoid spamming our users with too many of them, too frequently. For that reason, we're judicious about the way in which we use them. 
 
 We currently don't have a separate system for tracking in-app messages, so Brand currently owns the channel and is responsible for ensuring that messages aren't used excessively.
 
