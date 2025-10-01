@@ -39,6 +39,21 @@ const DWInstallationPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Ads_logo_b59e784792.svg',
         },
         {
+            label: 'LinkedIn Ads',
+            url: '/docs/data-warehouse/sources/linkedin-ads',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/4221chis9yaztef5phd0v3lal_12c6e6b2a1.svg',
+        },
+        {
+            label: 'Reddit Ads',
+            url: '/docs/data-warehouse/sources/reddit-ads',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/reddit_logo_f6d4c5cb0b.svg',
+        },
+        {
+            label: 'Meta Ads',
+            url: '/docs/data-warehouse/sources/meta-ads',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/meta_logo_56e02d5502.svg',
+        },
+        {
             label: 'TikTok Ads',
             url: '/docs/data-warehouse/sources/tiktok-ads',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/tiktok_svgrepo_com_9315a2fa30.svg',
