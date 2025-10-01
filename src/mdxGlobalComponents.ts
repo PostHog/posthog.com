@@ -25,6 +25,7 @@ import { CalloutBox } from './components/Docs/CalloutBox'
 import { Steps, Step } from './components/Docs/Steps'
 import AskMax from './components/AskMax'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
+import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 
 export const shortcodes = {
     ArrayCTA,
@@ -55,4 +56,5 @@ export const shortcodes = {
     TeamMember,
     AskMax,
     CountriesWeHireIn,
+    FeatureOwnershipTable,
 }
