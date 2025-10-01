@@ -6,7 +6,7 @@ showTitle: true
 
 Some potential customers either expect to pay for professional services to help them get set up. There are others who don't ask for this, but where we can tell it would be helpful for them. 
 
-> For now this is only a service we offer to potential customers by default, so this will mainly be of interested to the [New Business](/teams/sales-cs) team.
+> For now this is only a service we offer to potential customers by default, so this will mainly be of interest to the [New Business](/teams/sales-cs) team.
 
 ## Who we can offer professional services to
 
