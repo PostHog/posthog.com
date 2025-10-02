@@ -30,7 +30,7 @@ export default function Pricing() {
         { url: 'plans', value: 'Plans', depth: 0 },
         { url: 'calculator', value: 'Pricing calculator', depth: 0 },
         { url: 'addons', value: 'Add-ons', depth: 0 },
-        { url: 'g2-reviews', value: 'Reviews', depth: 0 },
+        // { url: 'g2-reviews', value: 'Reviews', depth: 0 },
         { url: 'faq', value: 'FAQ', depth: 0 },
         { url: 'cta', value: 'Shameless CTA', depth: 0 },
     ]
@@ -176,7 +176,7 @@ export default function Pricing() {
 
             <PurchasedWith />
 
-            <Reviews />
+            {/* <Reviews /> */}
 
             <SectionLayout id="faq" className="mb-12">
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>

@@ -12,6 +12,7 @@ import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
+import slugify from 'slugify'
 import { graphql, useStaticQuery } from 'gatsby'
 import { usePaginatedPosts } from 'components/Edition/hooks/usePaginatedPosts'
 import { IconSpinner } from '@posthog/icons'
@@ -315,9 +316,22 @@ export default function Posts({ pageContext }) {
                                         content: (
                                             <ul className="list-none m-0 p-0">
                                                 <li className="text-sm">
-                                                    {post.attributes.post_tags.data
-                                                        .map((tag) => tag.attributes.label)
-                                                        .join(', ')}
+                                                    {post.attributes.post_tags.data.map((tag, index) => {
+                                                        const label = tag.attributes.label
+                                                        const base =
+                                                            post.attributes.post_category.data.attributes.folder
+                                                        const url = `/${base}/${slugify(label, { lower: true })}`
+                                                        const isLast =
+                                                            index === post.attributes.post_tags.data.length - 1
+                                                        return (
+                                                            <>
+                                                                <Link key={tag.id} to={url}>
+                                                                    {label}
+                                                                </Link>
+                                                                {!isLast && ', '}
+                                                            </>
+                                                        )
+                                                    })}
                                                 </li>
                                             </ul>
                                         ),
