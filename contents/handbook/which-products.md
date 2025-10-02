@@ -27,8 +27,10 @@ From our [roadmap](/roadmap), here's what we're working on next:
 - Embedded analytics - `#project-embedded-analytics`
 - Logs - `#project-logs`
 - Tasks - currently within `#team-llm-analytics`
-- Auth
-- Support
+- Customer analytics `#team-customer-analytics`
+- 100x the toolbar
+- Revenue analytics `#team-revenue-analytics`
+- Workflows `#team-messaging-cdp`
 
 ## How we pick new products
 

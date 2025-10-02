@@ -51,7 +51,7 @@ Each engineering team has its own list of tickets in Zendesk:
 -   [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/33125360060571)
 -   [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/33125190975131)
 
-Your job is simple: ship features and fixes, and resolve ticket after ticket from your team's list.
+Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and respond to open-source PRs assigned to your team.
 
 There are three sources of tickets:
 
@@ -73,26 +73,92 @@ If not much is happening, feel free to do feature work – but in the case of a 
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
 
+### Responding to external PRs
+
+When capacity allows, the support hero serves as the first point of contact for external (open-source) PRs that affect your team's product. While we want to be good open-source citizens, **customer support always takes priority** — if you're dealing with a heavy support load, it's acceptable for PR reviews to be delayed or handled more briefly.
+
+#### How external PRs are assigned
+
+External PRs typically reach your team through one of two methods:
+
+- **CODEOWNERS automation**: If your team has CODEOWNERS configured, PRs modifying your team's files will automatically be assigned to your team
+- **Manual assignment**: For teams without CODEOWNERS set up, external PRs may be manually assigned to your team handle by other engineers who spot them
+
+#### Best practices for handling external PRs
+
+These are guidelines to aim for when you have bandwidth after handling customer support. Adapt them based on your workload:
+
+##### Initial response (when possible)
+
+- Acknowledge the PR with a thank you comment when you can
+- Quick check: Are there obvious blockers like failed tests or merge conflicts? If so, politely ask the contributor to address them first
+- If your support queue is overwhelming, it's okay to delay this or keep it brief
+
+##### Review approach
+
+- Be welcoming and constructive - contributors are volunteering their time
+- Provide actionable feedback when you have time for a thorough review
+- Consider the effort/reward tradeoff - some PRs may need more work than they're worth
+- It's better to politely decline quickly than to let a PR sit without feedback for weeks
+
+##### Communication tips
+
+- Set realistic expectations based on your current workload
+- Remember that external contributors can't ping us directly like teammates can
+- If you know you won't get to a PR this week, a quick "Thanks for the contribution! Our team is currently focused on customer issues but we'll review this when we can" is better than silence
+
+##### Common blockers to address upfront (when doing a full review)
+
+- Ask contributors to respond to Greptile feedback before your review
+- Require merge conflicts to be resolved before reviewing
+- Ensure tests are passing (or understand why they're not)
+- Check that the PR follows our existing code patterns and conventions
+
+##### When to escalate or defer
+
+- If the PR touches critical infrastructure or security-sensitive code
+- If you're unsure about the product implications
+- If your support load is too high to give it proper attention
+- If a PR requires extensive back-and-forth that you don't have bandwidth for
+
+##### Consider rewarding with merch
+
+- A PR doesn't need to be merged to be reward-able
+- Someone took time to care about PostHog and merch is a great way to say thank you
+
+#### Managing expectations
+
+The reality is that support hero weeks vary significantly in intensity across teams and time periods. Some weeks you might have capacity to thoroughly review several PRs; other weeks, you might barely have time to acknowledge them. That's okay. The goal is to engage with external contributions in good faith within your available bandwidth, not to maintain a perfect response rate at the expense of customer support or your well-being.
+
+If you find yourself overwhelmed, remember:
+
+- Customer issues come first
+- A brief acknowledgment is better than nothing
+- It's acceptable to hand off complex PRs to the next support hero
+- Teams aren't expected to handle unlimited PRs
+
+The key principle: We want to be responsive to our open-source community when we can, but not at the cost of our primary support responsibilities or team sustainability.
+
 ## What do I do as a SDK Support Hero?
 
 Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 
--   [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
--   New issues in the SDK repositories
-    -   [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
-    -   [posthog-ios](https://github.com/PostHog/posthog-ios)
-    -   [posthog-android](https://github.com/PostHog/posthog-android)
-    -   [posthog-flutter](https://github.com/PostHog/posthog-flutter)
-    -   [posthog-python](https://github.com/PostHog/posthog-python)
-    -   [posthog-php](https://github.com/PostHog/posthog-php)
-    -   [posthog-ruby](https://github.com/PostHog/posthog-ruby)
-    -   [posthog-java](https://github.com/PostHog/posthog-java)
-    -   [posthog-rs (Rust)](/docs/libraries/rust)
-    -   [posthog-go](/docs/libraries/go)
-    -   [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
-    -   Others, see /docs/libraries
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
+- New issues in the SDK repositories
+  - [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
+  - [posthog-ios](https://github.com/PostHog/posthog-ios)
+  - [posthog-android](https://github.com/PostHog/posthog-android)
+  - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
+  - [posthog-python](https://github.com/PostHog/posthog-python)
+  - [posthog-php](https://github.com/PostHog/posthog-php)
+  - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
+  - [posthog-java](https://github.com/PostHog/posthog-java)
+  - [posthog-rs (Rust)](/docs/libraries/rust)
+  - [posthog-go](/docs/libraries/go)
+  - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
+  - Others, see /docs/libraries
 
 You don't have to be an expert in all of the SDKs, but it can be a great opportunity to dive into parts unknown.
 
@@ -108,7 +174,7 @@ For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on
 
 ## Don't ask users to do work that you can do!
 
-If folk are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
+If folks are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
 
 For example don't ask them what version of posthog-js they're using or what their posthog config is when you can find out for yourself. Or visit their website and check the console instead of asking them if they had any errors.
 
@@ -138,13 +204,13 @@ example: "Ah, I see what you mean, that's not ideal! Sorry. I'll dig in to that 
 As an engineer, when answering a question, your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. So, the following guidelines:
 
 -   Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/support/customer-support#response-targets), but you should always try to respond to tickets quickly.
-    -   If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
-    -   If you have no idea how to answer or fix their issue, @mention someone who does
-    -   They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
+  - If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
+  - If you have no idea how to answer or fix their issue, @mention someone who does
+  - They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
 -   Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
-    -   If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
-    -   Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
-    -   Even if you're using the support portal think about whether they'll see the message in Slack or email. A Slack message that reads like an email seems weirdly formal.
+  - If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
+  - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
+  - Even if you're using the support portal think about whether they'll see the message in Slack or email. A Slack message that reads like an email seems weirdly formal.
 -   Follow up!
 -   Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 -   If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store.
@@ -312,15 +378,15 @@ When we've added a new [team](/teams), or 🪓 split an existing team into two o
 -   [Add views](https://support.zendesk.com/hc/en-us/articles/4408888828570-Creating-views-to-build-customized-lists-of-tickets) (Tip: Clone an existing view, rename it, and tweak it.)
 -   Add Slack notification [triggers](https://posthoghelp.zendesk.com/admin/objects-rules/rules/triggers) (Tip: Clone an existing trigger, yada, yada)
 -   Add SLA breach alerts
-    -   [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
-        -   [Create a Slack app](https://api.slack.com/apps/new)
-        -   [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
-        -   [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
-    -   [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
-        -   Choose "Trigger or automation"
-        -   Paste the endpoint url you copied from the Slack app
+  - [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
+      - [Create a Slack app](https://api.slack.com/apps/new)
+      - [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
+      - [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
+  - [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
+      - Choose "Trigger or automation"
+      - Paste the endpoint url you copied from the Slack app
             (Note: The built-in tool for testing webhooks in ZD has been flakey while the UI has been changing lately. Failed tests don't always mean the hook won't work. 🫤)
-    -   [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
+  - [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
 -   If you've split a team, sort the tickets to the new groups as needed, then disable the triggers, automations, and views related to the old team.
 -   Carry on
 

@@ -38,6 +38,8 @@ import {
     StickerPineappleUnknown,
     StickerPineapple,
 } from 'components/Stickers/Index'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import TeamFeatures from 'components/TeamFeatures'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -75,8 +77,8 @@ const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
                     <StickerPineappleNo className="w-12 h-12" />
                 )}
             </div>
-            <div className="flex-1">
-                <p className="text-sm text-secondary mb-0">Does pineapple belong on pizza?</p>
+            <div className="flex-1 leading-tight">
+                <p className="text-sm text-secondary mb-1">Does pineapple belong on pizza?</p>
                 {percentage > 50 ? (
                     <>
                         <strong>{percentage}%</strong> of this team say <strong className="text-green">yes</strong>!
@@ -555,14 +557,65 @@ export default function TeamPage(props: TeamPageProps) {
                     ),
                 } as any)}
             >
-                <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-8 mb-8">
-                    <div className={!teamImage?.image?.data && !editing ? 'col-span-2' : ''}>
+                {/* <DebugContainerQuery />
+                <DebugContainerQuery name="reader-content" /> */}
+
+                <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-8 mb-8">
+                    {heightToHedgehogs > 0 && (
+                        <div className="col-span-2">
+                            <Fieldset
+                                legend={
+                                    (
+                                        <span className="flex items-center gap-1">
+                                            Team height in hedgehogs{' '}
+                                            <Tooltip trigger={<IconInfo className="w-4" />} delay={0}>
+                                                The average hedgehog is{' '}
+                                                {(posthog as any)?.getFeatureFlag?.('are-you-in-the-us')
+                                                    ? '7 inches'
+                                                    : '17 centimeters'}{' '}
+                                                long
+                                            </Tooltip>
+                                        </span>
+                                    ) as any
+                                }
+                                className="mb-0"
+                            >
+                                <ul className="list-none m-0 p-0 flex flex-wrap">
+                                    {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
+                                        <li className="m-0.5" key={i}>
+                                            <Hedgehog />
+                                        </li>
+                                    ))}
+                                    {hedgehogPercentage && (
+                                        <li
+                                            style={{
+                                                width: hedgehogPercentage,
+                                            }}
+                                            className="overflow-hidden relative m-0.5"
+                                        >
+                                            <Hedgehog className="absolute object-none object-left" />
+                                        </li>
+                                    )}
+                                </ul>
+                            </Fieldset>
+                        </div>
+                    )}
+                    <div
+                        className={`col-span-2 grid @lg/reader-content:grid-cols-2 gap-4 @2xl/reader-content:gap-8 ${
+                            !teamImage?.image?.data && !editing ? '' : ''
+                        }`}
+                    >
                         <div className="@container/team-stats">
-                            <div className="grid @xl/team-stats:grid-cols-2 gap-4">
+                            <div className="grid @lg/team-stats:grid-cols-2 gap-4">
                                 <div>
                                     <Fieldset legend="Pineapple on pizza">
                                         <PineapplePieChart percentage={pineapplePercentage} />
                                     </Fieldset>
+                                </div>
+
+                                <TeamFeatures teamSlug={slug} />
+
+                                <div>
                                     {teamEmojis?.length > 0 && (
                                         <Fieldset legend="Custom emojis">
                                             <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
@@ -580,58 +633,20 @@ export default function TeamPage(props: TeamPageProps) {
                                         </Fieldset>
                                     )}
                                 </div>
-                                {heightToHedgehogs > 0 && (
-                                    <div>
-                                        <Fieldset
-                                            legend={
-                                                (
-                                                    <span className="flex items-center gap-1">
-                                                        Team height in hedgehogs{' '}
-                                                        <Tooltip trigger={<IconInfo className="w-4" />} delay={0}>
-                                                            The average hedgehog is{' '}
-                                                            {(posthog as any)?.getFeatureFlag?.('are-you-in-the-us')
-                                                                ? '7 inches'
-                                                                : '17 centimeters'}{' '}
-                                                            long
-                                                        </Tooltip>
-                                                    </span>
-                                                ) as any
-                                            }
-                                        >
-                                            <ul className="list-none m-0 p-0 flex flex-wrap">
-                                                {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
-                                                    <li className="m-0.5" key={i}>
-                                                        <Hedgehog />
-                                                    </li>
-                                                ))}
-                                                {hedgehogPercentage && (
-                                                    <li
-                                                        style={{
-                                                            width: hedgehogPercentage,
-                                                        }}
-                                                        className="overflow-hidden relative m-0.5"
-                                                    >
-                                                        <Hedgehog className="absolute object-none object-left" />
-                                                    </li>
-                                                )}
-                                            </ul>
-                                        </Fieldset>
-                                    </div>
-                                )}
                             </div>
                         </div>
-                    </div>
 
-                    {loading ? (
-                        <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
-                    ) : (
-                        <TeamImage
-                            values={values}
-                            setFieldValue={setFieldValue}
-                            teamImage={teamImage}
-                            editing={editing}
-                        />
-                    )}
+                        {loading ? (
+                            <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
+                        ) : (
+                            <TeamImage
+                                values={values}
+                                setFieldValue={setFieldValue}
+                                teamImage={teamImage}
+                                editing={editing}
+                            />
+                        )}
+                    </div>
                 </div>
 
                 <Fieldset legend="Members">
@@ -657,6 +672,7 @@ export default function TeamPage(props: TeamPageProps) {
                                                   location,
                                                   companyRole,
                                                   pineappleOnPizza,
+                                                  teams,
                                               },
                                           } = profile
                                           // const name = [firstName, lastName].filter(Boolean).join(' ')
@@ -678,20 +694,23 @@ export default function TeamPage(props: TeamPageProps) {
                                                       pineappleOnPizza={pineappleOnPizza}
                                                       startDate={profile.attributes.startDate}
                                                       isTeamLead={isTeamLead(id)}
+                                                      teams={teams}
                                                   />
                                                   {editing && (
                                                       <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
                                                           <button
                                                               onClick={() => removeTeamMember(id)}
-                                                              className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
+                                                              className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-white text-black"
                                                               title="Remove team member"
                                                           >
                                                               <IconX className="w-4 h-4" />
                                                           </button>
                                                           <button
                                                               onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
-                                                                  isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center ${
+                                                                  isTeamLead(id)
+                                                                      ? 'bg-yellow text-white'
+                                                                      : 'bg-accent text-black dark:text-white'
                                                               }`}
                                                               title={
                                                                   isTeamLead(id) ? 'Remove team lead' : 'Make team lead'

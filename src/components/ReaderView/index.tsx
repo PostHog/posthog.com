@@ -38,6 +38,8 @@ import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CustomerMetadata from './CustomerMetadata'
+
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -48,6 +50,7 @@ interface ReaderViewProps {
         contributors?: any[]
         date?: string
         featuredVideo?: string
+        tags?: { label: string; url: string }[]
     }
     title?: string
     hideTitle?: boolean
@@ -526,6 +529,12 @@ function ReaderViewContent({
     const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
+
+    // Check if this is a customer page and get customer key
+    const isCustomerPage = appWindow?.path?.startsWith('/customers/')
+    const customerSlug = isCustomerPage ? appWindow.path.split('/').pop() : null
+    // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
+    const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
     const {
         isNavVisible,
         isTocVisible,
@@ -678,10 +687,23 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {title && !hideTitle && <h1>{title}</h1>}
-                                {(body.date || body.contributors) && (
-                                    <div className="flex items-center space-x-2 mb-4">
+                                {(body.date || body.contributors || body.tags) && (
+                                    <div className="flex items-center space-x-2 mb-4 flex-wrap">
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
+                                        {body.tags && (
+                                            <ul className="m-0 p-0 list-none text-sm flex flex-wrap gap-1">
+                                                {body.tags.map((tag, index) => {
+                                                    const isLast = index === body.tags.length - 1
+                                                    return (
+                                                        <li key={tag.url} className="p-0">
+                                                            <Link to={tag.url}>{tag.label}</Link>
+                                                            {!isLast && ', '}
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        )}
                                     </div>
                                 )}
                                 {tableOfContents &&
@@ -700,6 +722,11 @@ function ReaderViewContent({
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div className={'@container'}>
+                                            {/* Display customer metadata if this is a customer page */}
+                                            {isCustomerPage && customerKey && (
+                                                <CustomerMetadata customerKey={customerKey} />
+                                            )}
+
                                             <MDXProvider components={mdxComponents}>
                                                 <MDXRenderer>{body.content}</MDXRenderer>
                                             </MDXProvider>

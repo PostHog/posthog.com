@@ -1,19 +1,8 @@
 ---
 title: Why Significa switched from Plausible to PostHog
 customer: Significa
-logo: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/v1711025316/posthog.com/contents/images/customers/significa/wordmark.png
-logoDark: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/v1711025316/posthog.com/contents/images/customers/significa/wordmark.png
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/significa_ef952b52a3.png
-industries:
-    - Agency
-users:
-    - Marketing
-toolsUsed:
-    - Web analytics
-    - Product analytics
 date: 2024-03-20
 ---
 

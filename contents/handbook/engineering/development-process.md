@@ -240,7 +240,9 @@ Our testing, reviewing and building process should be good enough that we're com
 
 Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (especially for posthog.com).
 
-Once you merge a pull request, it will automatically deploy to all environments. Check out the `#platform-bots` Slack channel to see how your deploy is progressing.
+Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
+
+We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status. 
 
 ## Documenting
 
@@ -248,7 +250,7 @@ If you build it, [document it](/docs). You're in the best position to do this, a
 
 It's not the responsibility of either [Brand & Vibes](/teams/brand) or [Content](/teams/content) teams to document features.
 
-See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
+See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 
 ## Releasing
 

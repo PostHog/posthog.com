@@ -27,7 +27,6 @@ import {
     IconSparksJoy,
 } from 'components/OSIcons'
 import { useApp } from '../../context/App'
-import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 
@@ -152,7 +151,9 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         // Always set icon and color for submenus if present
         if (item.icon) {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
-            baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            if (IconComponent) {
+                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            }
         }
         let grouped = groupBySectionDividers(children)
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
@@ -172,7 +173,9 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         }
         if (item.icon) {
             const IconComponent = Icons[item.icon as keyof typeof Icons]
-            baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            if (IconComponent) {
+                baseItem.icon = <IconComponent className={`text-${item.color || 'gray'} size-4`} />
+            }
         }
         return baseItem
     }
@@ -312,8 +315,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive } = useApp()
-    const { isMobile, isLoaded } = useResponsive()
+    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile } = useApp()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -772,43 +774,42 @@ export function useMenuData(): MenuType[] {
     }
 
     // On mobile, include main navigation items in the logo menu
-    const logoMenuItems =
-        isLoaded && isMobile
-            ? [
-                  {
-                      type: 'item' as const,
-                      label: 'home.mdx',
-                      link: '/',
+    const logoMenuItems = isMobile
+        ? [
+              {
+                  type: 'item' as const,
+                  label: 'home.mdx',
+                  link: '/',
+              },
+              { type: 'separator' as const },
+              // Main navigation items processed for mobile
+              ...processMobileNavItems(),
+              { type: 'separator' as const },
+              // System items
+              ...baseLogoMenuItems,
+          ]
+        : [
+              // Desktop: only show system items
+              ...baseLogoMenuItems,
+              { type: 'separator' as const },
+              {
+                  type: 'item' as const,
+                  label: 'Start screensaver',
+                  onClick: () => {
+                      setScreensaverPreviewActive(true)
                   },
-                  { type: 'separator' as const },
-                  // Main navigation items processed for mobile
-                  ...processMobileNavItems(),
-                  { type: 'separator' as const },
-                  // System items
-                  ...baseLogoMenuItems,
-              ]
-            : [
-                  // Desktop: only show system items
-                  ...baseLogoMenuItems,
-                  { type: 'separator' as const },
-                  {
-                      type: 'item' as const,
-                      label: 'Start screensaver',
-                      onClick: () => {
-                          setScreensaverPreviewActive(true)
-                      },
-                      shortcut: ['Shift', 'Z'],
+                  shortcut: ['Shift', 'Z'],
+              },
+              {
+                  type: 'item' as const,
+                  label: 'Close all windows',
+                  disabled: windows.length < 1,
+                  onClick: () => {
+                      animateClosingAllWindows()
                   },
-                  {
-                      type: 'item' as const,
-                      label: 'Close all windows',
-                      disabled: windows.length < 1,
-                      onClick: () => {
-                          animateClosingAllWindows()
-                      },
-                      shortcut: ['Shift', 'X'],
-                  },
-              ]
+                  shortcut: ['Shift', 'X'],
+              },
+          ]
 
     return [
         {
@@ -824,7 +825,7 @@ export function useMenuData(): MenuType[] {
             items: logoMenuItems,
         },
         // On desktop, show main navigation items
-        ...(isLoaded && !isMobile ? mainNavItems : []),
+        ...(!isMobile ? mainNavItems : []),
     ]
 }
 

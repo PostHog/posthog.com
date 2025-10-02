@@ -99,7 +99,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
  
 - **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR. This means being known for quality in all things we do.
 
-- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content-and-docs/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-are-building-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
+- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-are-building-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
 
 - **Launches:** Our team ships a lot of products and features. We need launches to break through the noise and get noticed. This helps create the momentum products need to succeed.
 
@@ -119,7 +119,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros (Cory, Lottie) to help.
 
-- **Developer influencers:** We sponsor creators like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
+- **Developer influencers:** We [sponsor creators](/handbook/growth/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
 - **Billboards:** Billboards are a way to get our brand in front of a lot of people.
 

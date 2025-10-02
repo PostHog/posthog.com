@@ -55,7 +55,7 @@ export const Content = ({ quickLinks = true }) => {
                         <Link to="/docs/revenue-analytics/deferred-revenue">What's deferred revenue?</Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/metrics">
+                        <Link to="/docs/revenue-analytics/dashboard">
                             What are the key metrics available in Revenue analytics?
                         </Link>
                     </li>

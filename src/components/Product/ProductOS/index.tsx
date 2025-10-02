@@ -21,7 +21,6 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -104,29 +103,6 @@ const subfeatures = [
 ]
 
 export const ProductOS = () => {
-    const { researchgate, elevenlabs } = useStaticQuery(graphql`
-        fragment ProductCustomerFragment on Mdx {
-            fields {
-                slug
-            }
-            frontmatter {
-                logo {
-                    publicURL
-                }
-                logoDark {
-                    publicURL
-                }
-            }
-        }
-        {
-            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
-                ...ProductCustomerFragment
-            }
-            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
-                ...ProductCustomerFragment
-            }
-        }
-    `)
     const { fullWidthContent } = useLayoutData()
     return (
         <>
@@ -179,18 +155,7 @@ export const ProductOS = () => {
 
                     <section id="customers" className="-mt-36 pt-36">
                         <h3 className="text-3xl text-center my-4 md:my-8">Customer stories</h3>
-                        <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
-                            <CustomerCard
-                                outcome="tracks over 25M users accessing more than 160M publications"
-                                quote="We have 100s of millions of pageviews, but it still only takes 10 minutes to set up really detailed insights and funnels"
-                                customer={researchgate}
-                            />
-                            <CustomerCard
-                                outcome="uses every single tool PostHog has to launch new features"
-                                quote="We used to have dashboards in Looker, GA4, and lots of other tools. Now, it's just PostHog and Stripe."
-                                customer={elevenlabs}
-                            />
-                        </ul>
+                        <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20"></ul>
                     </section>
 
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">

@@ -1,0 +1,3407 @@
+{
+    "id": "posthog-react-native",
+    "hogRef": "0.3",
+    "info": {
+        "version": "4.5.1",
+        "id": "posthog-react-native",
+        "title": "PostHog React Native SDK",
+        "description": "PostHog React Native SDK allows you to capture events and send them to PostHog from your React Native applications.",
+        "slugPrefix": "posthog-react-native",
+        "specUrl": "https://github.com/PostHog/posthog-js"
+    },
+    "classes": [
+        {
+            "id": "PostHog",
+            "title": "PostHog",
+            "functions": [
+                {
+                    "category": "Initialization",
+                    "description": "PostHogProvider is a React component that provides PostHog functionality to your React Native app. You can find all configuration options in the [React Native SDK docs](https://posthog.com/docs/libraries/react-native#configuration-options).\nAutocapturing navigation requires further configuration. See the [React Native SDK navigation docs](https://posthog.com/docs/libraries/react-native#capturing-screen-views) for more information about autocapturing navigation.\nThis is the recommended way to set up PostHog for React Native. This utilizes the Context API to pass the PostHog client around, enable autocapture.",
+                    "details": null,
+                    "id": "PostHogProvider",
+                    "showDocs": true,
+                    "title": "PostHogProvider",
+                    "examples": [
+                        {
+                            "id": "add_to_app.(js|ts)",
+                            "name": "Add to App.(js|ts)",
+                            "code": "\n\n// Add to App.(js|ts)\nimport { usePostHog, PostHogProvider } from 'posthog-react-native'\n\nexport function MyApp() {\n    return (\n        <PostHogProvider apiKey=\"<ph_project_api_key>\" options={{\n            host: '<ph_client_api_host>',\n        }}>\n            <MyComponent />\n        </PostHogProvider>\n    )\n}\n\n// And access the PostHog client via the usePostHog hook\nimport { usePostHog } from 'posthog-react-native'\n\nconst MyComponent = () => {\n    const posthog = usePostHog()\n\n    useEffect(() => {\n        posthog.capture(\"event_name\")\n    }, [posthog])\n}\n\n\n\n"
+                        },
+                        {
+                            "id": "using_with_existing_client",
+                            "name": "Using with existing client",
+                            "code": "\n\n// Using with existing client\nimport { PostHog } from 'posthog-react-native'\n\nconst posthog = new PostHog('<ph_project_api_key>', {\n    host: '<ph_client_api_host>'\n})\n\nexport function MyApp() {\n    return (\n        <PostHogProvider client={posthog}>\n            <MyComponent />\n        </PostHogProvider>\n    )\n}\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogProviderProps",
+                            "name": "{ children, client, options, apiKey, autocapture, style, debug, }"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "JSX.Element | null",
+                        "name": "JSX.Element | null"
+                    }
+                },
+                {
+                    "category": "Initialization",
+                    "description": "Creates a new PostHog instance for React Native. You can find all configuration options in the [React Native SDK docs](https://posthog.com/docs/libraries/react-native#configuration-options).\nIf you prefer not to use the PostHogProvider, you can initialize PostHog in its own file and import the instance from there.",
+                    "details": null,
+                    "id": "PostHog",
+                    "showDocs": true,
+                    "title": "PostHog",
+                    "examples": [
+                        {
+                            "id": "posthog.ts",
+                            "name": "posthog.ts",
+                            "code": "\n\n// posthog.ts\nimport PostHog from 'posthog-react-native'\n\nexport const posthog = new PostHog('<ph_project_api_key>', {\n  host: '<ph_client_api_host>'\n})\n\n// Then you can access PostHog by importing your instance\n// Another file:\nimport { posthog } from './posthog'\n\nexport function MyApp1() {\n    useEffect(async () => {\n        posthog.capture('event_name')\n    }, [posthog])\n\n    return <View>Your app code</View>\n}\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "Your PostHog API key",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "apiKey"
+                        },
+                        {
+                            "description": "PostHog configuration options",
+                            "isOptional": true,
+                            "type": "PostHogOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "any",
+                        "name": "any"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Identification",
+                    "description": "Assigns an alias to the current user.\nSometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.",
+                    "details": null,
+                    "id": "alias",
+                    "showDocs": true,
+                    "title": "alias",
+                    "examples": [
+                        {
+                            "id": "set_alias_for_current_user",
+                            "name": "set alias for current user",
+                            "code": "\n\n// set alias for current user\nposthog.alias('distinct_id')\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The alias to assign to the current user",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "alias"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "fetch",
+                    "showDocs": true,
+                    "title": "fetch",
+                    "examples": [
+                        {
+                            "id": "fetch",
+                            "name": "Generated example for fetch",
+                            "code": "// Generated example for fetch\nposthog.fetch();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "url"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogFetchOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<PostHogFetchResponse>",
+                        "name": "Promise<PostHogFetchResponse>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Capture",
+                    "description": "Manually flushes the event queue.\nYou can set the number of events in the configuration that should queue before flushing. Setting this to 1 will send events immediately and will use more battery. This is set to 20 by default. You can also manually flush the queue. If a flush is already in progress it returns a promise for the existing flush.",
+                    "details": null,
+                    "id": "flush",
+                    "showDocs": true,
+                    "title": "flush",
+                    "examples": [
+                        {
+                            "id": "manually_flush_the_queue",
+                            "name": "manually flush the queue",
+                            "code": "\n\n// manually flush the queue\nawait posthog.flush()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getCommonEventProperties",
+                    "showDocs": true,
+                    "title": "getCommonEventProperties",
+                    "examples": [
+                        {
+                            "id": "getcommoneventproperties",
+                            "name": "Generated example for getCommonEventProperties",
+                            "code": "// Generated example for getCommonEventProperties\nposthog.getCommonEventProperties();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "PostHogEventProperties",
+                        "name": "PostHogEventProperties"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getCustomUserAgent",
+                    "showDocs": true,
+                    "title": "getCustomUserAgent",
+                    "examples": [
+                        {
+                            "id": "getcustomuseragent",
+                            "name": "Generated example for getCustomUserAgent",
+                            "code": "// Generated example for getCustomUserAgent\nposthog.getCustomUserAgent();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Identification",
+                    "description": "Gets the current user's distinct ID.\nYou may find it helpful to get the current user's distinct ID. For example, to check whether you've already called identify for a user or not. This returns either the ID automatically generated by PostHog or the ID that has been passed by a call to identify().",
+                    "details": null,
+                    "id": "getDistinctId",
+                    "showDocs": true,
+                    "title": "getDistinctId",
+                    "examples": [
+                        {
+                            "id": "get_current_distinct_id",
+                            "name": "get current distinct ID",
+                            "code": "\n\n// get current distinct ID\nconst distinctId = posthog.getDistinctId()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Gets the value of a feature flag for the current user.\nDefaults to undefined if not loaded yet or if there was a problem loading. Multivariant feature flags are returned as a string.",
+                    "details": null,
+                    "id": "getFeatureFlag",
+                    "showDocs": true,
+                    "title": "getFeatureFlag",
+                    "examples": [
+                        {
+                            "id": "get_feature_flag_value",
+                            "name": "get feature flag value",
+                            "code": "\n\n// get feature flag value\nconst value = posthog.getFeatureFlag('key-for-your-boolean-flag')\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The feature flag key",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "boolean | string | undefined",
+                        "name": "boolean | string | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Gets the payload of a feature flag for the current user.\nReturns JsonType or undefined if not loaded yet or if there was a problem loading.",
+                    "details": null,
+                    "id": "getFeatureFlagPayload",
+                    "showDocs": true,
+                    "title": "getFeatureFlagPayload",
+                    "examples": [
+                        {
+                            "id": "get_feature_flag_payload",
+                            "name": "get feature flag payload",
+                            "code": "\n\n// get feature flag payload\nconst payload = posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The feature flag key",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "JsonType | undefined",
+                        "name": "JsonType | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getLibraryId",
+                    "showDocs": true,
+                    "title": "getLibraryId",
+                    "examples": [
+                        {
+                            "id": "getlibraryid",
+                            "name": "Generated example for getLibraryId",
+                            "code": "// Generated example for getLibraryId\nposthog.getLibraryId();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getLibraryVersion",
+                    "showDocs": true,
+                    "title": "getLibraryVersion",
+                    "examples": [
+                        {
+                            "id": "getlibraryversion",
+                            "name": "Generated example for getLibraryVersion",
+                            "code": "// Generated example for getLibraryVersion\nposthog.getLibraryVersion();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getPersistedProperty",
+                    "showDocs": true,
+                    "title": "getPersistedProperty",
+                    "examples": [
+                        {
+                            "id": "getpersistedproperty",
+                            "name": "Generated example for getPersistedProperty",
+                            "code": "// Generated example for getPersistedProperty\nposthog.getPersistedProperty();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogPersistedProperty",
+                            "name": "key"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "T | undefined",
+                        "name": "T | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getSessionId",
+                    "showDocs": true,
+                    "title": "getSessionId",
+                    "examples": [
+                        {
+                            "id": "getsessionid",
+                            "name": "Generated example for getSessionId",
+                            "code": "// Generated example for getSessionId\nposthog.getSessionId();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getSurveys",
+                    "showDocs": true,
+                    "title": "getSurveys",
+                    "examples": [
+                        {
+                            "id": "getsurveys",
+                            "name": "Generated example for getSurveys",
+                            "code": "// Generated example for getSurveys\nposthog.getSurveys();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<SurveyResponse['surveys']>",
+                        "name": "Promise<SurveyResponse['surveys']>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Group analytics",
+                    "description": "Associates the current user with a group.\nGroup analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). This is a paid feature and is not available on the open-source or free cloud plan.",
+                    "details": null,
+                    "id": "group",
+                    "showDocs": true,
+                    "title": "group",
+                    "examples": [
+                        {
+                            "id": "associate_with_a_group",
+                            "name": "associate with a group",
+                            "code": "\n\n// associate with a group\nposthog.group('company', 'company_id_in_your_db')\n\n\n"
+                        },
+                        {
+                            "id": "associate_with_a_group_and_update_properties",
+                            "name": "associate with a group and update properties",
+                            "code": "\n\n// associate with a group and update properties\nposthog.group('company', 'company_id_in_your_db', {\n  name: 'Awesome Inc.',\n  employees: 11,\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The type of group (e.g. 'company', 'team')",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "groupType"
+                        },
+                        {
+                            "description": "The unique identifier for the group",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "groupKey"
+                        },
+                        {
+                            "description": "Optional properties to set for the group",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Identification",
+                    "description": "Associates events with a specific user. Learn more about [identifying users](https://posthog.com/docs/product-analytics/identify)",
+                    "details": null,
+                    "id": "identify",
+                    "showDocs": true,
+                    "title": "identify",
+                    "examples": [
+                        {
+                            "id": "basic_identify",
+                            "name": "Basic identify",
+                            "code": "\n\n// Basic identify\nposthog.identify('distinctID', {\n  email: 'user@posthog.com',\n  name: 'My Name'\n})\n\n\n"
+                        },
+                        {
+                            "id": "using_$set_and_$set_once",
+                            "name": "Using $set and $set_once",
+                            "code": "\n\n// Using $set and $set_once\nposthog.identify('distinctID', {\n  $set: {\n    email: 'user@posthog.com',\n    name: 'My Name'\n  },\n  $set_once: {\n    date_of_first_log_in: '2024-03-01'\n  }\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "A unique identifier for your user. Typically either their email or database ID.",
+                            "isOptional": true,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "Optional dictionary with key:value pairs to set the person properties",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "Optional capture options",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "initReactNativeNavigation",
+                    "showDocs": true,
+                    "title": "initReactNativeNavigation",
+                    "examples": [
+                        {
+                            "id": "initreactnativenavigation",
+                            "name": "Generated example for initReactNativeNavigation",
+                            "code": "// Generated example for initReactNativeNavigation\nposthog.initReactNativeNavigation();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogAutocaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "boolean",
+                        "name": "boolean"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Checks if a feature flag is enabled for the current user.\nDefaults to undefined if not loaded yet or if there was a problem loading.",
+                    "details": null,
+                    "id": "isFeatureEnabled",
+                    "showDocs": true,
+                    "title": "isFeatureEnabled",
+                    "examples": [
+                        {
+                            "id": "check_if_feature_flag_is_enabled",
+                            "name": "check if feature flag is enabled",
+                            "code": "\n\n// check if feature flag is enabled\nconst isEnabled = posthog.isFeatureEnabled('key-for-your-boolean-flag')\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The feature flag key",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "boolean | undefined",
+                        "name": "boolean | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Privacy",
+                    "description": "Opts the user in to data capture.\nBy default, PostHog has tracking enabled unless it is forcefully disabled by default using the option  defaultOptIn: false . Once this has been called it is persisted and will be respected until optOut is called again or the reset function is called.",
+                    "details": null,
+                    "id": "optIn",
+                    "showDocs": true,
+                    "title": "optIn",
+                    "examples": [
+                        {
+                            "id": "opt_in_to_tracking",
+                            "name": "opt in to tracking",
+                            "code": "\n\n// opt in to tracking\nposthog.optIn()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Privacy",
+                    "description": "Opts the user out of data capture.\nYou can completely opt-out users from data capture. Once this has been called it is persisted and will be respected until optIn is called again or the reset function is called.",
+                    "details": null,
+                    "id": "optOut",
+                    "showDocs": true,
+                    "title": "optOut",
+                    "examples": [
+                        {
+                            "id": "opt_out_of_tracking",
+                            "name": "opt out of tracking",
+                            "code": "\n\n// opt out of tracking\nposthog.optOut()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Capture",
+                    "description": "Registers super properties that are sent with every event.\nSuper properties are properties associated with events that are set once and then sent with every capture call. They persist across sessions and are stored locally.",
+                    "details": null,
+                    "id": "register",
+                    "showDocs": true,
+                    "title": "register",
+                    "examples": [
+                        {
+                            "id": "register_super_properties",
+                            "name": "register super properties",
+                            "code": "\n\n// register super properties\nposthog.register({\n    'icecream pref': 'vanilla',\n    team_id: 22,\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "An associative array of properties to store about the user",
+                            "isOptional": false,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Reloads feature flags from the server.\nPostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. If you want to manually trigger a refresh, you can call this method.",
+                    "details": null,
+                    "id": "reloadFeatureFlags",
+                    "showDocs": true,
+                    "title": "reloadFeatureFlags",
+                    "examples": [
+                        {
+                            "id": "reload_feature_flags",
+                            "name": "reload feature flags",
+                            "code": "\n\n// reload feature flags\nposthog.reloadFeatureFlags()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Reloads feature flags from the server asynchronously.\nPostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. If you want to manually trigger a refresh and get the result, you can call this method.",
+                    "details": null,
+                    "id": "reloadFeatureFlagsAsync",
+                    "showDocs": true,
+                    "title": "reloadFeatureFlagsAsync",
+                    "examples": [
+                        {
+                            "id": "reload_feature_flags_and_get_result",
+                            "name": "reload feature flags and get result",
+                            "code": "\n\n// reload feature flags and get result\nposthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<Record<string, boolean | string> | undefined>",
+                        "name": "Promise<Record<string, boolean | string> | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Identification",
+                    "description": "Resets the user's ID and anonymous ID after logout.\nTo reset the user's ID and anonymous ID, call reset. Usually you would do this right after the user logs out. This also clears all stored super properties and more.",
+                    "details": null,
+                    "id": "reset",
+                    "showDocs": true,
+                    "title": "reset",
+                    "examples": [
+                        {
+                            "id": "reset_after_logout",
+                            "name": "reset after logout",
+                            "code": "\n\n// reset after logout\nposthog.reset()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Resets group properties for feature flag evaluation.",
+                    "details": null,
+                    "id": "resetGroupPropertiesForFlags",
+                    "showDocs": true,
+                    "title": "resetGroupPropertiesForFlags",
+                    "examples": [
+                        {
+                            "id": "reset_group_properties_for_flags",
+                            "name": "reset group properties for flags",
+                            "code": "\n\n// reset group properties for flags\nposthog.resetGroupPropertiesForFlags()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Resets person properties for feature flag evaluation.",
+                    "details": null,
+                    "id": "resetPersonPropertiesForFlags",
+                    "showDocs": true,
+                    "title": "resetPersonPropertiesForFlags",
+                    "examples": [
+                        {
+                            "id": "reset_person_properties_for_flags",
+                            "name": "reset person properties for flags",
+                            "code": "\n\n// reset person properties for flags\nposthog.resetPersonPropertiesForFlags()\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "resetSessionId",
+                    "showDocs": true,
+                    "title": "resetSessionId",
+                    "examples": [
+                        {
+                            "id": "resetsessionid",
+                            "name": "Generated example for resetSessionId",
+                            "code": "// Generated example for resetSessionId\nposthog.resetSessionId();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Capture",
+                    "description": "Captures a screen view event.",
+                    "details": "This function requires a name. You may also pass in an optional properties object. Screen name is automatically registered for the session and will be included in subsequent events.",
+                    "id": "screen",
+                    "showDocs": true,
+                    "title": "screen",
+                    "examples": [
+                        {
+                            "id": "basic_screen_capture",
+                            "name": "Basic screen capture",
+                            "code": "\n\n// Basic screen capture\nposthog.screen('dashboard')\n\n\n"
+                        },
+                        {
+                            "id": "screen_capture_with_properties",
+                            "name": "Screen capture with properties",
+                            "code": "\n\n// Screen capture with properties\nposthog.screen('dashboard', {\n    background: 'blue',\n    hero: 'superhog',\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The name of the screen",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "name"
+                        },
+                        {
+                            "description": "Optional properties to include with the screen event",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "Optional capture options",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Sets group properties for feature flag evaluation.\nThese properties are automatically attached to the current group (set via posthog.group()). When you change the group, these properties are reset.",
+                    "details": null,
+                    "id": "setGroupPropertiesForFlags",
+                    "showDocs": true,
+                    "title": "setGroupPropertiesForFlags",
+                    "examples": [
+                        {
+                            "id": "set_group_properties_for_flags",
+                            "name": "set group properties for flags",
+                            "code": "\n\n// set group properties for flags\nposthog.setGroupPropertiesForFlags({'company': {'property1': 'value', property2: 'value2'}})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The group properties to set for flag evaluation",
+                            "isOptional": false,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "properties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "setPersistedProperty",
+                    "showDocs": true,
+                    "title": "setPersistedProperty",
+                    "examples": [
+                        {
+                            "id": "setpersistedproperty",
+                            "name": "Generated example for setPersistedProperty",
+                            "code": "// Generated example for setPersistedProperty\nposthog.setPersistedProperty();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogPersistedProperty",
+                            "name": "key"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "T | null",
+                            "name": "value"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Feature flags",
+                    "description": "Sets person properties for feature flag evaluation.\nSometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with this call. These are set for the entire session. Successive calls are additive: all properties you set are combined together and sent for flag evaluation.",
+                    "details": null,
+                    "id": "setPersonPropertiesForFlags",
+                    "showDocs": true,
+                    "title": "setPersonPropertiesForFlags",
+                    "examples": [
+                        {
+                            "id": "set_person_properties_for_flags",
+                            "name": "set person properties for flags",
+                            "code": "\n\n// set person properties for flags\nposthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The person properties to set for flag evaluation",
+                            "isOptional": false,
+                            "type": "Record<string, string>",
+                            "name": "properties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Capture",
+                    "description": "Removes a super property so it won't be sent with future events.\nSuper Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant.",
+                    "details": null,
+                    "id": "unregister",
+                    "showDocs": true,
+                    "title": "unregister",
+                    "examples": [
+                        {
+                            "id": "remove_a_super_property",
+                            "name": "remove a super property",
+                            "code": "\n\n// remove a super property\nposthog.unregister('icecream pref')\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The name of the super property to remove",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "property"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "autocapture",
+                    "showDocs": true,
+                    "title": "autocapture",
+                    "examples": [
+                        {
+                            "id": "autocapture",
+                            "name": "Generated example for autocapture",
+                            "code": "// Generated example for autocapture\nposthog.autocapture();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "eventType"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogAutocaptureElement[]",
+                            "name": "elements"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "capture",
+                    "showDocs": true,
+                    "title": "capture",
+                    "examples": [
+                        {
+                            "id": "capture",
+                            "name": "Generated example for capture",
+                            "code": "// Generated example for capture\nposthog.capture();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "event"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Error tracking",
+                    "description": "Capture a caught exception manually",
+                    "details": null,
+                    "id": "captureException",
+                    "showDocs": true,
+                    "title": "captureException",
+                    "examples": [
+                        {
+                            "id": "capture_a_caught_exception",
+                            "name": "Capture a caught exception",
+                            "code": "\n\n// Capture a caught exception\ntry {\n  // something that might throw\n} catch (error) {\n  posthog.captureException(error)\n}\n\n\n"
+                        },
+                        {
+                            "id": "with_additional_properties",
+                            "name": "With additional properties",
+                            "code": "\n\n// With additional properties\nposthog.captureException(error, {\n  customProperty: 'value',\n  anotherProperty: ['I', 'can be a list'],\n  ...\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The error to capture",
+                            "isOptional": false,
+                            "type": "unknown",
+                            "name": "error"
+                        },
+                        {
+                            "description": "Any additional properties to add to the error event",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "additionalProperties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "LLM analytics",
+                    "description": "Capture written user feedback for a LLM trace. Numeric values are converted to strings.",
+                    "details": null,
+                    "id": "captureTraceFeedback",
+                    "showDocs": true,
+                    "title": "captureTraceFeedback",
+                    "examples": [
+                        {
+                            "id": "capturetracefeedback",
+                            "name": "Generated example for captureTraceFeedback",
+                            "code": "// Generated example for captureTraceFeedback\nposthog.captureTraceFeedback();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The trace ID to capture feedback for.",
+                            "isOptional": false,
+                            "type": "string | number",
+                            "name": "traceId"
+                        },
+                        {
+                            "description": "The feedback to capture.",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "userFeedback"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "LLM analytics",
+                    "description": "Capture a metric for a LLM trace. Numeric values are converted to strings.",
+                    "details": null,
+                    "id": "captureTraceMetric",
+                    "showDocs": true,
+                    "title": "captureTraceMetric",
+                    "examples": [
+                        {
+                            "id": "capturetracemetric",
+                            "name": "Generated example for captureTraceMetric",
+                            "code": "// Generated example for captureTraceMetric\nposthog.captureTraceMetric();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "The trace ID to capture the metric for.",
+                            "isOptional": false,
+                            "type": "string | number",
+                            "name": "traceId"
+                        },
+                        {
+                            "description": "The name of the metric to capture.",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "metricName"
+                        },
+                        {
+                            "description": "The value of the metric to capture.",
+                            "isOptional": false,
+                            "type": "string | number | boolean",
+                            "name": "metricValue"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Identification",
+                    "description": "Returns the current anonymous ID.\nThis is the ID assigned to users before they are identified. It's used to track anonymous users and link them to identified users when they sign up.",
+                    "details": null,
+                    "id": "getAnonymousId",
+                    "showDocs": true,
+                    "title": "getAnonymousId",
+                    "examples": [
+                        {
+                            "id": "get_the_anonymous_id",
+                            "name": "get the anonymous ID",
+                            "code": "\n\n// get the anonymous ID\nconst anonId = posthog.getAnonymousId()\nconsole.log('Anonymous ID:', anonId)\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagDetails",
+                    "showDocs": true,
+                    "title": "getFeatureFlagDetails",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagdetails",
+                            "name": "Generated example for getFeatureFlagDetails",
+                            "code": "// Generated example for getFeatureFlagDetails\nposthog.getFeatureFlagDetails();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "PostHogFeatureFlagDetails | undefined",
+                        "name": "PostHogFeatureFlagDetails | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagPayloads",
+                    "showDocs": true,
+                    "title": "getFeatureFlagPayloads",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagpayloads",
+                            "name": "Generated example for getFeatureFlagPayloads",
+                            "code": "// Generated example for getFeatureFlagPayloads\nposthog.getFeatureFlagPayloads();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "PostHogFlagsResponse['featureFlagPayloads'] | undefined",
+                        "name": "PostHogFlagsResponse['featureFlagPayloads'] | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlags",
+                    "showDocs": true,
+                    "title": "getFeatureFlags",
+                    "examples": [
+                        {
+                            "id": "getfeatureflags",
+                            "name": "Generated example for getFeatureFlags",
+                            "code": "// Generated example for getFeatureFlags\nposthog.getFeatureFlags();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "PostHogFlagsResponse['featureFlags'] | undefined",
+                        "name": "PostHogFlagsResponse['featureFlags'] | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagsAndPayloads",
+                    "showDocs": true,
+                    "title": "getFeatureFlagsAndPayloads",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagsandpayloads",
+                            "name": "Generated example for getFeatureFlagsAndPayloads",
+                            "code": "// Generated example for getFeatureFlagsAndPayloads\nposthog.getFeatureFlagsAndPayloads();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "{\n        flags: PostHogFlagsResponse['featureFlags'] | undefined;\n        payloads: PostHogFlagsResponse['featureFlagPayloads'] | undefined;\n    }",
+                        "name": "{\n        flags: PostHogFlagsResponse['featureFlags'] | undefined;\n        payloads: PostHogFlagsResponse['featureFlagPayloads'] | undefined;\n    }"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getKnownFeatureFlags",
+                    "showDocs": true,
+                    "title": "getKnownFeatureFlags",
+                    "examples": [
+                        {
+                            "id": "getknownfeatureflags",
+                            "name": "Generated example for getKnownFeatureFlags",
+                            "code": "// Generated example for getKnownFeatureFlags\nposthog.getKnownFeatureFlags();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "PostHogFlagsResponse['featureFlags'] | undefined",
+                        "name": "PostHogFlagsResponse['featureFlags'] | undefined"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "groupIdentify",
+                    "showDocs": true,
+                    "title": "groupIdentify",
+                    "examples": [
+                        {
+                            "id": "groupidentify",
+                            "name": "Generated example for groupIdentify",
+                            "code": "// Generated example for groupIdentify\nposthog.groupIdentify();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "groupType"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string | number",
+                            "name": "groupKey"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "* ** GROUPS *",
+                    "details": null,
+                    "id": "groups",
+                    "showDocs": true,
+                    "title": "groups",
+                    "examples": [
+                        {
+                            "id": "groups",
+                            "name": "Generated example for groups",
+                            "code": "// Generated example for groups\nposthog.groups();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogGroupProperties",
+                            "name": "groups"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "on",
+                    "showDocs": true,
+                    "title": "on",
+                    "examples": [
+                        {
+                            "id": "on",
+                            "name": "Generated example for on",
+                            "code": "// Generated example for on\nposthog.on();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "event"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "(...args: any[]) => void",
+                            "name": "cb"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "() => void",
+                        "name": "() => void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "onFeatureFlag",
+                    "showDocs": true,
+                    "title": "onFeatureFlag",
+                    "examples": [
+                        {
+                            "id": "onfeatureflag",
+                            "name": "Generated example for onFeatureFlag",
+                            "code": "// Generated example for onFeatureFlag\nposthog.onFeatureFlag();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "(value: FeatureFlagValue) => void",
+                            "name": "cb"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "() => void",
+                        "name": "() => void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "onFeatureFlags",
+                    "showDocs": true,
+                    "title": "onFeatureFlags",
+                    "examples": [
+                        {
+                            "id": "onfeatureflags",
+                            "name": "Generated example for onFeatureFlags",
+                            "code": "// Generated example for onFeatureFlags\nposthog.onFeatureFlags();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "(flags: PostHogFlagsResponse['featureFlags']) => void",
+                            "name": "cb"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "() => void",
+                        "name": "() => void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "overrideFeatureFlag",
+                    "showDocs": true,
+                    "title": "overrideFeatureFlag",
+                    "examples": [
+                        {
+                            "id": "overridefeatureflag",
+                            "name": "Generated example for overrideFeatureFlag",
+                            "code": "// Generated example for overrideFeatureFlag\nposthog.overrideFeatureFlag();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogFlagsResponse['featureFlags'] | null",
+                            "name": "flags"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "registerForSession",
+                    "showDocs": true,
+                    "title": "registerForSession",
+                    "examples": [
+                        {
+                            "id": "registerforsession",
+                            "name": "Generated example for registerForSession",
+                            "code": "// Generated example for registerForSession\nposthog.registerForSession();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "reloadRemoteConfigAsync",
+                    "showDocs": true,
+                    "title": "reloadRemoteConfigAsync",
+                    "examples": [
+                        {
+                            "id": "reloadremoteconfigasync",
+                            "name": "Generated example for reloadRemoteConfigAsync",
+                            "code": "// Generated example for reloadRemoteConfigAsync\nposthog.reloadRemoteConfigAsync();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<PostHogRemoteConfig | undefined>",
+                        "name": "Promise<PostHogRemoteConfig | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "setupBootstrap",
+                    "showDocs": true,
+                    "title": "setupBootstrap",
+                    "examples": [
+                        {
+                            "id": "setupbootstrap",
+                            "name": "Generated example for setupBootstrap",
+                            "code": "// Generated example for setupBootstrap\nposthog.setupBootstrap();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Partial<PostHogCoreOptions>",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "unregisterForSession",
+                    "showDocs": true,
+                    "title": "unregisterForSession",
+                    "examples": [
+                        {
+                            "id": "unregisterforsession",
+                            "name": "Generated example for unregisterForSession",
+                            "code": "// Generated example for unregisterForSession\nposthog.unregisterForSession();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "property"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "addPendingPromise",
+                    "showDocs": true,
+                    "title": "addPendingPromise",
+                    "examples": [
+                        {
+                            "id": "addpendingpromise",
+                            "name": "Generated example for addPendingPromise",
+                            "code": "// Generated example for addPendingPromise\nposthog.addPendingPromise();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "Promise<T>",
+                            "name": "promise"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<T>",
+                        "name": "Promise<T>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "aliasStateless",
+                    "showDocs": true,
+                    "title": "aliasStateless",
+                    "examples": [
+                        {
+                            "id": "aliasstateless",
+                            "name": "Generated example for aliasStateless",
+                            "code": "// Generated example for aliasStateless\nposthog.aliasStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "alias"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "aliasStatelessImmediate",
+                    "showDocs": true,
+                    "title": "aliasStatelessImmediate",
+                    "examples": [
+                        {
+                            "id": "aliasstatelessimmediate",
+                            "name": "Generated example for aliasStatelessImmediate",
+                            "code": "// Generated example for aliasStatelessImmediate\nposthog.aliasStatelessImmediate();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "alias"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "captureStateless",
+                    "showDocs": true,
+                    "title": "captureStateless",
+                    "examples": [
+                        {
+                            "id": "capturestateless",
+                            "name": "Generated example for captureStateless",
+                            "code": "// Generated example for captureStateless\nposthog.captureStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "event"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "captureStatelessImmediate",
+                    "showDocs": true,
+                    "title": "captureStatelessImmediate",
+                    "examples": [
+                        {
+                            "id": "capturestatelessimmediate",
+                            "name": "Generated example for captureStatelessImmediate",
+                            "code": "// Generated example for captureStatelessImmediate\nposthog.captureStatelessImmediate();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "event"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Initialization",
+                    "description": "Enables or disables debug mode for detailed logging.",
+                    "details": "Debug mode logs all PostHog calls to the console for troubleshooting. This is useful during development to understand what data is being sent.",
+                    "id": "debug",
+                    "showDocs": true,
+                    "title": "debug",
+                    "examples": [
+                        {
+                            "id": "enable_debug_mode",
+                            "name": "enable debug mode",
+                            "code": "\n\n// enable debug mode\nposthog.debug(true)\n\n\n"
+                        },
+                        {
+                            "id": "disable_debug_mode",
+                            "name": "disable debug mode",
+                            "code": "\n\n// disable debug mode\nposthog.debug(false)\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "enabled"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "* ** QUEUEING AND FLUSHING *",
+                    "details": null,
+                    "id": "enqueue",
+                    "showDocs": true,
+                    "title": "enqueue",
+                    "examples": [
+                        {
+                            "id": "enqueue",
+                            "name": "Generated example for enqueue",
+                            "code": "// Generated example for enqueue\nposthog.enqueue();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "type"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "any",
+                            "name": "_message"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getCustomHeaders",
+                    "showDocs": true,
+                    "title": "getCustomHeaders",
+                    "examples": [
+                        {
+                            "id": "getcustomheaders",
+                            "name": "Generated example for getCustomHeaders",
+                            "code": "// Generated example for getCustomHeaders\nposthog.getCustomHeaders();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "{\n        [key: string]: string;\n    }",
+                        "name": "{\n        [key: string]: string;\n    }"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagDetailsStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagDetailsStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagdetailsstateless",
+                            "name": "Generated example for getFeatureFlagDetailsStateless",
+                            "code": "// Generated example for getFeatureFlagDetailsStateless\nposthog.getFeatureFlagDetailsStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string | number>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "string[]",
+                            "name": "flagKeysToEvaluate"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<PostHogFeatureFlagDetails | undefined>",
+                        "name": "Promise<PostHogFeatureFlagDetails | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagDetailStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagDetailStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagdetailstateless",
+                            "name": "Generated example for getFeatureFlagDetailStateless",
+                            "code": "// Generated example for getFeatureFlagDetailStateless\nposthog.getFeatureFlagDetailStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<{\n        response: FeatureFlagDetail | undefined;\n        requestId: string | undefined;\n    } | undefined>",
+                        "name": "Promise<{\n        response: FeatureFlagDetail | undefined;\n        requestId: string | undefined;\n    } | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagPayloadsStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagPayloadsStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagpayloadsstateless",
+                            "name": "Generated example for getFeatureFlagPayloadsStateless",
+                            "code": "// Generated example for getFeatureFlagPayloadsStateless\nposthog.getFeatureFlagPayloadsStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "string[]",
+                            "name": "flagKeysToEvaluate"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<PostHogFlagsResponse['featureFlagPayloads'] | undefined>",
+                        "name": "Promise<PostHogFlagsResponse['featureFlagPayloads'] | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagPayloadStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagPayloadStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagpayloadstateless",
+                            "name": "Generated example for getFeatureFlagPayloadStateless",
+                            "code": "// Generated example for getFeatureFlagPayloadStateless\nposthog.getFeatureFlagPayloadStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<JsonType | undefined>",
+                        "name": "Promise<JsonType | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagsAndPayloadsStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagsAndPayloadsStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagsandpayloadsstateless",
+                            "name": "Generated example for getFeatureFlagsAndPayloadsStateless",
+                            "code": "// Generated example for getFeatureFlagsAndPayloadsStateless\nposthog.getFeatureFlagsAndPayloadsStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string | number>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "string[]",
+                            "name": "flagKeysToEvaluate"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<{\n        flags: PostHogFlagsResponse['featureFlags'] | undefined;\n        payloads: PostHogFlagsResponse['featureFlagPayloads'] | undefined;\n        requestId: PostHogFlagsResponse['requestId'] | undefined;\n    }>",
+                        "name": "Promise<{\n        flags: PostHogFlagsResponse['featureFlags'] | undefined;\n        payloads: PostHogFlagsResponse['featureFlagPayloads'] | undefined;\n        requestId: PostHogFlagsResponse['requestId'] | undefined;\n    }>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagsStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagsStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagsstateless",
+                            "name": "Generated example for getFeatureFlagsStateless",
+                            "code": "// Generated example for getFeatureFlagsStateless\nposthog.getFeatureFlagsStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string | number>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "string[]",
+                            "name": "flagKeysToEvaluate"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<{\n        flags: PostHogFlagsResponse['featureFlags'] | undefined;\n        payloads: PostHogFlagsResponse['featureFlagPayloads'] | undefined;\n        requestId: PostHogFlagsResponse['requestId'] | undefined;\n    }>",
+                        "name": "Promise<{\n        flags: PostHogFlagsResponse['featureFlags'] | undefined;\n        payloads: PostHogFlagsResponse['featureFlagPayloads'] | undefined;\n        requestId: PostHogFlagsResponse['requestId'] | undefined;\n    }>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getFeatureFlagStateless",
+                    "showDocs": true,
+                    "title": "getFeatureFlagStateless",
+                    "examples": [
+                        {
+                            "id": "getfeatureflagstateless",
+                            "name": "Generated example for getFeatureFlagStateless",
+                            "code": "// Generated example for getFeatureFlagStateless\nposthog.getFeatureFlagStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "key"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "boolean",
+                            "name": "disableGeoip"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<{\n        response: FeatureFlagValue | undefined;\n        requestId: string | undefined;\n    }>",
+                        "name": "Promise<{\n        response: FeatureFlagValue | undefined;\n        requestId: string | undefined;\n    }>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "* ** FEATURE FLAGS *",
+                    "details": null,
+                    "id": "getFlags",
+                    "showDocs": true,
+                    "title": "getFlags",
+                    "examples": [
+                        {
+                            "id": "getflags",
+                            "name": "Generated example for getFlags",
+                            "code": "// Generated example for getFlags\nposthog.getFlags();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string | number>",
+                            "name": "groups"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, string>",
+                            "name": "personProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, Record<string, string>>",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "Record<string, any>",
+                            "name": "extraPayload"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<PostHogFlagsResponse | undefined>",
+                        "name": "Promise<PostHogFlagsResponse | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "getRemoteConfig",
+                    "showDocs": true,
+                    "title": "getRemoteConfig",
+                    "examples": [
+                        {
+                            "id": "getremoteconfig",
+                            "name": "Generated example for getRemoteConfig",
+                            "code": "// Generated example for getRemoteConfig\nposthog.getRemoteConfig();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<PostHogRemoteConfig | undefined>",
+                        "name": "Promise<PostHogRemoteConfig | undefined>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "* ** SURVEYS *",
+                    "details": null,
+                    "id": "getSurveysStateless",
+                    "showDocs": true,
+                    "title": "getSurveysStateless",
+                    "examples": [
+                        {
+                            "id": "getsurveysstateless",
+                            "name": "Generated example for getSurveysStateless",
+                            "code": "// Generated example for getSurveysStateless\nposthog.getSurveysStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "Promise<SurveyResponse['surveys']>",
+                        "name": "Promise<SurveyResponse['surveys']>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "* ** GROUPS *",
+                    "details": null,
+                    "id": "groupIdentifyStateless",
+                    "showDocs": true,
+                    "title": "groupIdentifyStateless",
+                    "examples": [
+                        {
+                            "id": "groupidentifystateless",
+                            "name": "Generated example for groupIdentifyStateless",
+                            "code": "// Generated example for groupIdentifyStateless\nposthog.groupIdentifyStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "groupType"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string | number",
+                            "name": "groupKey"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "groupProperties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "eventProperties"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "description": "* ** TRACKING *",
+                    "details": null,
+                    "id": "identifyStateless",
+                    "showDocs": true,
+                    "title": "identifyStateless",
+                    "examples": [
+                        {
+                            "id": "identifystateless",
+                            "name": "Generated example for identifyStateless",
+                            "code": "// Generated example for identifyStateless\nposthog.identifyStateless();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "identifyStatelessImmediate",
+                    "showDocs": true,
+                    "title": "identifyStatelessImmediate",
+                    "examples": [
+                        {
+                            "id": "identifystatelessimmediate",
+                            "name": "Generated example for identifyStatelessImmediate",
+                            "code": "// Generated example for identifyStatelessImmediate\nposthog.identifyStatelessImmediate();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "distinctId"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogEventProperties",
+                            "name": "properties"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "logMsgIfDebug",
+                    "showDocs": true,
+                    "title": "logMsgIfDebug",
+                    "examples": [
+                        {
+                            "id": "logmsgifdebug",
+                            "name": "Generated example for logMsgIfDebug",
+                            "code": "// Generated example for logMsgIfDebug\nposthog.logMsgIfDebug();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "() => void",
+                            "name": "fn"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "sendImmediate",
+                    "showDocs": true,
+                    "title": "sendImmediate",
+                    "examples": [
+                        {
+                            "id": "sendimmediate",
+                            "name": "Generated example for sendImmediate",
+                            "code": "// Generated example for sendImmediate\nposthog.sendImmediate();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "string",
+                            "name": "type"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "any",
+                            "name": "_message"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "PostHogCaptureOptions",
+                            "name": "options"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "Initialization",
+                    "description": "Shuts down the PostHog instance and ensures all events are sent.\nCall shutdown() once before the process exits to ensure that all events have been sent and all promises have resolved. Do not use this function if you intend to keep using this PostHog instance after calling it. Use flush() for per-request cleanup instead.",
+                    "details": null,
+                    "id": "shutdown",
+                    "showDocs": true,
+                    "title": "shutdown",
+                    "examples": [
+                        {
+                            "id": "shutdown_before_process_exit",
+                            "name": "shutdown before process exit",
+                            "code": "\n\n// shutdown before process exit\nprocess.on('SIGINT', async () => {\n  await posthog.shutdown()\n  process.exit(0)\n})\n\n\n\n"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "Maximum time to wait for shutdown in milliseconds",
+                            "isOptional": true,
+                            "type": "number",
+                            "name": "shutdownTimeoutMs"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "Promise<void>",
+                        "name": "Promise<void>"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                },
+                {
+                    "category": "",
+                    "details": null,
+                    "id": "wrap",
+                    "showDocs": true,
+                    "title": "wrap",
+                    "examples": [
+                        {
+                            "id": "wrap",
+                            "name": "Generated example for wrap",
+                            "code": "// Generated example for wrap\nposthog.wrap();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [
+                        {
+                            "description": "",
+                            "isOptional": false,
+                            "type": "() => void",
+                            "name": "fn"
+                        }
+                    ],
+                    "returnType": {
+                        "id": "void",
+                        "name": "void"
+                    },
+                    "path": "dist/posthog-rn.d.ts"
+                }
+            ]
+        }
+    ],
+    "types": [
+        {
+            "id": "ActionStepStringMatching",
+            "name": "ActionStepStringMatching",
+            "properties": [
+                {
+                    "type": "\"contains\"",
+                    "name": "Contains"
+                },
+                {
+                    "type": "\"exact\"",
+                    "name": "Exact"
+                },
+                {
+                    "type": "\"regex\"",
+                    "name": "Regex"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "ActionStepType",
+            "name": "ActionStepType",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    event?: string;\n    selector?: string;\n    text?: string;\n    text_matching?: ActionStepStringMatching;\n    href?: string;\n    href_matching?: ActionStepStringMatching;\n    url?: string;\n    url_matching?: ActionStepStringMatching;\n}"
+        },
+        {
+            "id": "BasicSurveyQuestion",
+            "name": "BasicSurveyQuestion",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "SurveyQuestionBase & {\n    type: SurveyQuestionType.Open;\n}"
+        },
+        {
+            "id": "Compression",
+            "name": "Compression",
+            "properties": [
+                {
+                    "type": "\"base64\"",
+                    "name": "Base64"
+                },
+                {
+                    "type": "\"gzip-js\"",
+                    "name": "GZipJS"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "EndBranching",
+            "name": "EndBranching",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    type: SurveyQuestionBranchingType.End;\n}"
+        },
+        {
+            "id": "EvaluationReason",
+            "name": "EvaluationReason",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    code: string | undefined;\n    condition_index: number | undefined;\n    description: string | undefined;\n}"
+        },
+        {
+            "id": "FeatureFlagDetail",
+            "name": "FeatureFlagDetail",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    key: string;\n    enabled: boolean;\n    variant: string | undefined;\n    reason: EvaluationReason | undefined;\n    metadata: FeatureFlagMetadata | undefined;\n}"
+        },
+        {
+            "id": "FeatureFlagMetadata",
+            "name": "FeatureFlagMetadata",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    id: number | undefined;\n    version: number | undefined;\n    description: string | undefined;\n    payload: string | undefined;\n}"
+        },
+        {
+            "id": "FeatureFlagValue",
+            "name": "FeatureFlagValue",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "string | boolean"
+        },
+        {
+            "id": "FeatureFlagWithPayload",
+            "name": "FeatureFlagWithPayload",
+            "properties": [],
+            "path": "dist/hooks/useFeatureFlag.d.ts",
+            "example": "[FeatureFlagValue | undefined, JsonType | undefined]"
+        },
+        {
+            "id": "JsonType",
+            "name": "JsonType",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "string | number | boolean | null | {\n    [key: string]: JsonType;\n} | Array<JsonType> | JsonType[]"
+        },
+        {
+            "id": "LinkSurveyQuestion",
+            "name": "LinkSurveyQuestion",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "SurveyQuestionBase & {\n    type: SurveyQuestionType.Link;\n    link?: string;\n}"
+        },
+        {
+            "id": "MultipleSurveyQuestion",
+            "name": "MultipleSurveyQuestion",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "SurveyQuestionBase & {\n    type: SurveyQuestionType.SingleChoice | SurveyQuestionType.MultipleChoice;\n    choices: string[];\n    hasOpenChoice?: boolean;\n    shuffleOptions?: boolean;\n}"
+        },
+        {
+            "id": "NextQuestionBranching",
+            "name": "NextQuestionBranching",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    type: SurveyQuestionBranchingType.NextQuestion;\n}"
+        },
+        {
+            "id": "PartialWithRequired",
+            "name": "PartialWithRequired",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "keyof T> = {\n    [P in K]: T[P];\n} & {\n    [P in Exclude<keyof T, K>]?: T[P];\n}"
+        },
+        {
+            "id": "PostHogAutocaptureElement",
+            "name": "PostHogAutocaptureElement",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    $el_text?: string;\n    tag_name: string;\n    href?: string;\n    nth_child?: number;\n    nth_of_type?: number;\n    order?: number;\n} & PostHogEventProperties"
+        },
+        {
+            "id": "PostHogAutocaptureNavigationTrackerOptions",
+            "name": "PostHogAutocaptureNavigationTrackerOptions",
+            "properties": [],
+            "path": "dist/types.d.ts",
+            "example": "{\n    routeToName?: (name: string, params: any) => string;\n    routeToProperties?: (name: string, params: any) => Record<string, any>;\n}"
+        },
+        {
+            "id": "PostHogAutocaptureOptions",
+            "name": "PostHogAutocaptureOptions",
+            "properties": [],
+            "path": "dist/types.d.ts",
+            "example": "{\n    captureTouches?: boolean;\n    customLabelProp?: string;\n    noCaptureProp?: string;\n    maxElementsCaptured?: number;\n    ignoreLabels?: string[];\n    propsToCapture?: string[];\n    captureScreens?: boolean;\n    navigation?: PostHogAutocaptureNavigationTrackerOptions;\n    navigationRef?: PostHogNavigationRef;\n}"
+        },
+        {
+            "id": "PostHogCaptureOptions",
+            "name": "PostHogCaptureOptions",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    uuid?: string;\n    timestamp?: Date;\n    disableGeoip?: boolean;\n}"
+        },
+        {
+            "id": "PostHogCoreOptions",
+            "name": "PostHogCoreOptions",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    host?: string;\n    flushAt?: number;\n    flushInterval?: number;\n    maxBatchSize?: number;\n    maxQueueSize?: number;\n    disabled?: boolean;\n    defaultOptIn?: boolean;\n    sendFeatureFlagEvent?: boolean;\n    preloadFeatureFlags?: boolean;\n    disableRemoteConfig?: boolean;\n    disableSurveys?: boolean;\n    bootstrap?: {\n        distinctId?: string;\n        isIdentifiedId?: boolean;\n        featureFlags?: Record<string, FeatureFlagValue>;\n        featureFlagPayloads?: Record<string, JsonType>;\n    };\n    fetchRetryCount?: number;\n    fetchRetryDelay?: number;\n    requestTimeout?: number;\n    featureFlagsRequestTimeoutMs?: number;\n    remoteConfigRequestTimeoutMs?: number;\n    sessionExpirationTimeSeconds?: number;\n    disableCompression?: boolean;\n    disableGeoip?: boolean;\n    historicalMigration?: boolean;\n}"
+        },
+        {
+            "id": "PostHogCustomAppProperties",
+            "name": "PostHogCustomAppProperties",
+            "properties": [
+                {
+                    "description": "Build number like \"1.2.2\" or \"122\"",
+                    "type": "string | null",
+                    "name": "$app_build"
+                },
+                {
+                    "description": "Name of the app as displayed below the icon like \"PostHog\"",
+                    "type": "string | null",
+                    "name": "$app_name"
+                },
+                {
+                    "description": "Namespace of the app usually like \"com.posthog.app\"",
+                    "type": "string | null",
+                    "name": "$app_namespace"
+                },
+                {
+                    "description": "Human friendly app version like what a user would see in the app store like \"1.2.2\"",
+                    "type": "string | null",
+                    "name": "$app_version"
+                },
+                {
+                    "description": "Manufacturer like \"Apple\", \"Samsung\" or \"Android\"",
+                    "type": "string | null",
+                    "name": "$device_manufacturer"
+                },
+                {
+                    "description": "Model identifier like \"iPhone13,2\" or \"SM-S921B\"",
+                    "type": "string | null",
+                    "name": "$device_model"
+                },
+                {
+                    "description": "Readable model name like \"iPhone 12\" or \"Samsung Galaxy S24\"",
+                    "type": "string | null",
+                    "name": "$device_name"
+                },
+                {
+                    "description": "Device type (\"Mobile\" | \"Desktop\" | \"Web\")",
+                    "type": "string | null",
+                    "name": "$device_type"
+                },
+                {
+                    "description": "Locale (language) of the device like \"en-US\"",
+                    "type": "string | null",
+                    "name": "$locale"
+                },
+                {
+                    "description": "Operating system name like iOS or Android",
+                    "type": "string | null",
+                    "name": "$os_name"
+                },
+                {
+                    "description": "Operating system version \"14.0\"",
+                    "type": "string | null",
+                    "name": "$os_version"
+                },
+                {
+                    "description": "Timezone of the device like \"Europe/Berlin\"",
+                    "type": "string | null",
+                    "name": "$timezone"
+                }
+            ],
+            "path": "dist/types.d.ts"
+        },
+        {
+            "id": "PostHogCustomStorage",
+            "name": "PostHogCustomStorage",
+            "properties": [
+                {
+                    "type": "(key: string) => string | null | Promise<string | null>",
+                    "name": "getItem"
+                },
+                {
+                    "type": "(key: string, value: string) => void | Promise<void>",
+                    "name": "setItem"
+                }
+            ],
+            "path": "dist/types.d.ts"
+        },
+        {
+            "id": "PostHogEventProperties",
+            "name": "PostHogEventProperties",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "// Properties for React Native events\n{\n    event: 'user_signed_up',\n    userId: 'user123',\n    timestamp: new Date().toISOString(),\n    distinct_id: 'user123',\n    $set: {\n        email: 'user@example.com',\n        name: 'John Doe'\n    }\n}"
+        },
+        {
+            "id": "PostHogFeatureFlagDetails",
+            "name": "PostHogFeatureFlagDetails",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "\"flags\" | \"featureFlags\" | \"featureFlagPayloads\" | \"requestId\""
+        },
+        {
+            "id": "PostHogFetchOptions",
+            "name": "PostHogFetchOptions",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    method: 'GET' | 'POST' | 'PUT' | 'PATCH';\n    mode?: 'no-cors';\n    credentials?: 'omit';\n    headers: {\n        [key: string]: string;\n    };\n    body?: string | Blob;\n    signal?: AbortSignal;\n}"
+        },
+        {
+            "id": "PostHogFetchResponse",
+            "name": "PostHogFetchResponse",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    status: number;\n    text: () => Promise<string>;\n    json: () => Promise<any>;\n}"
+        },
+        {
+            "id": "PostHogFlagsResponse",
+            "name": "PostHogFlagsResponse",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "Omit<PostHogRemoteConfig, 'surveys' | 'hasFeatureFlags'> & {\n    featureFlags: {\n        [key: string]: FeatureFlagValue;\n    };\n    featureFlagPayloads: {\n        [key: string]: JsonType;\n    };\n    flags: {\n        [key: string]: FeatureFlagDetail;\n    };\n    errorsWhileComputingFlags: boolean;\n    sessionRecording?: boolean | {\n        [key: string]: JsonType;\n    };\n    quotaLimited?: string[];\n    requestId?: string;\n}"
+        },
+        {
+            "id": "PostHogGroupProperties",
+            "name": "PostHogGroupProperties",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    [type: string]: string | number;\n}"
+        },
+        {
+            "id": "PostHogNavigationRef",
+            "name": "PostHogNavigationRef",
+            "properties": [],
+            "path": "dist/types.d.ts",
+            "example": "{\n    getCurrentRoute(): any | undefined;\n    isReady: () => boolean;\n    current?: PostHogNavigationRef | any | undefined;\n}"
+        },
+        {
+            "id": "PostHogOptions",
+            "name": "PostHogOptions",
+            "properties": [],
+            "path": "dist/posthog-rn.d.ts",
+            "example": "PostHogCoreOptions & {\n    persistence?: 'memory' | 'file';\n    customAppProperties?: PostHogCustomAppProperties | ((properties: PostHogCustomAppProperties) => PostHogCustomAppProperties);\n    customStorage?: PostHogCustomStorage;\n    captureAppLifecycleEvents?: boolean;\n    enableSessionReplay?: boolean;\n    sessionReplayConfig?: PostHogSessionReplayConfig;\n    enablePersistSessionIdAcrossRestart?: boolean;\n}"
+        },
+        {
+            "id": "PostHogPersistedProperty",
+            "name": "PostHogPersistedProperty",
+            "properties": [
+                {
+                    "type": "\"anonymous_id\"",
+                    "name": "AnonymousId"
+                },
+                {
+                    "type": "\"bootstrap_feature_flag_details\"",
+                    "name": "BootstrapFeatureFlagDetails"
+                },
+                {
+                    "type": "\"bootstrap_feature_flag_payloads\"",
+                    "name": "BootstrapFeatureFlagPayloads"
+                },
+                {
+                    "type": "\"bootstrap_feature_flags\"",
+                    "name": "BootstrapFeatureFlags"
+                },
+                {
+                    "type": "\"distinct_id\"",
+                    "name": "DistinctId"
+                },
+                {
+                    "type": "\"feature_flag_details\"",
+                    "name": "FeatureFlagDetails"
+                },
+                {
+                    "type": "\"feature_flag_payloads\"",
+                    "name": "FeatureFlagPayloads"
+                },
+                {
+                    "type": "\"feature_flags\"",
+                    "name": "FeatureFlags"
+                },
+                {
+                    "type": "\"flags_endpoint_was_hit\"",
+                    "name": "FlagsEndpointWasHit"
+                },
+                {
+                    "type": "\"group_properties\"",
+                    "name": "GroupProperties"
+                },
+                {
+                    "type": "\"installed_app_build\"",
+                    "name": "InstalledAppBuild"
+                },
+                {
+                    "type": "\"installed_app_version\"",
+                    "name": "InstalledAppVersion"
+                },
+                {
+                    "type": "\"opted_out\"",
+                    "name": "OptedOut"
+                },
+                {
+                    "type": "\"override_feature_flags\"",
+                    "name": "OverrideFeatureFlags"
+                },
+                {
+                    "type": "\"person_properties\"",
+                    "name": "PersonProperties"
+                },
+                {
+                    "type": "\"props\"",
+                    "name": "Props"
+                },
+                {
+                    "type": "\"queue\"",
+                    "name": "Queue"
+                },
+                {
+                    "type": "\"remote_config\"",
+                    "name": "RemoteConfig"
+                },
+                {
+                    "type": "\"session_id\"",
+                    "name": "SessionId"
+                },
+                {
+                    "type": "\"session_timestamp\"",
+                    "name": "SessionLastTimestamp"
+                },
+                {
+                    "type": "\"session_replay\"",
+                    "name": "SessionReplay"
+                },
+                {
+                    "type": "\"session_start_timestamp\"",
+                    "name": "SessionStartTimestamp"
+                },
+                {
+                    "type": "\"survey_last_seen_date\"",
+                    "name": "SurveyLastSeenDate"
+                },
+                {
+                    "type": "\"surveys\"",
+                    "name": "Surveys"
+                },
+                {
+                    "type": "\"surveys_seen\"",
+                    "name": "SurveysSeen"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "PostHogProviderProps",
+            "name": "PostHogProviderProps",
+            "properties": [
+                {
+                    "description": "Your PostHog API key",
+                    "type": "string",
+                    "name": "apiKey"
+                },
+                {
+                    "description": "Autocapture configuration - can be a boolean or detailed options",
+                    "type": "boolean | PostHogAutocaptureOptions",
+                    "name": "autocapture"
+                },
+                {
+                    "description": "The child components to render within the PostHog context",
+                    "type": "React.ReactNode",
+                    "name": "children"
+                },
+                {
+                    "description": "An existing PostHog client instance",
+                    "type": "PostHog",
+                    "name": "client"
+                },
+                {
+                    "description": "Enable debug mode for additional logging",
+                    "type": "boolean",
+                    "name": "debug"
+                },
+                {
+                    "description": "PostHog configuration options",
+                    "type": "PostHogOptions",
+                    "name": "options"
+                },
+                {
+                    "description": "Custom styles for the provider wrapper View",
+                    "type": "StyleProp<ViewStyle>",
+                    "name": "style"
+                }
+            ],
+            "path": "dist/PostHogProvider.d.ts"
+        },
+        {
+            "id": "PostHogRemoteConfig",
+            "name": "PostHogRemoteConfig",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    sessionRecording?: boolean | {\n        [key: string]: JsonType;\n    };\n    supportedCompression?: Compression[];\n    surveys?: boolean | Survey[];\n    hasFeatureFlags?: boolean;\n}"
+        },
+        {
+            "id": "PostHogSessionReplayConfig",
+            "name": "PostHogSessionReplayConfig",
+            "properties": [],
+            "path": "dist/types.d.ts",
+            "example": "{\n    maskAllTextInputs?: boolean;\n    maskAllImages?: boolean;\n    maskAllSandboxedViews?: boolean;\n    captureLog?: boolean;\n    iOSdebouncerDelayMs?: number;\n    androidDebouncerDelayMs?: number;\n    captureNetworkTelemetry?: boolean;\n}"
+        },
+        {
+            "id": "PostHogSurveyProviderProps",
+            "name": "PostHogSurveyProviderProps",
+            "properties": [],
+            "path": "dist/surveys/PostHogSurveyProvider.d.ts",
+            "example": "{\n    defaultSurveyAppearance?: SurveyAppearance;\n    overrideAppearanceWithDefault?: boolean;\n    client?: PostHog;\n    children: React.ReactNode;\n}"
+        },
+        {
+            "id": "RatingSurveyQuestion",
+            "name": "RatingSurveyQuestion",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "SurveyQuestionBase & {\n    type: SurveyQuestionType.Rating;\n    display: SurveyRatingDisplay;\n    scale: 3 | 5 | 7 | 10;\n    lowerBoundLabel: string;\n    upperBoundLabel: string;\n}"
+        },
+        {
+            "id": "ResponseBasedBranching",
+            "name": "ResponseBasedBranching",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    type: SurveyQuestionBranchingType.ResponseBased;\n    responseValues: Record<string, any>;\n}"
+        },
+        {
+            "id": "RetriableOptions",
+            "name": "RetriableOptions",
+            "properties": [
+                {
+                    "type": "(err: unknown) => boolean",
+                    "name": "retryCheck"
+                },
+                {
+                    "type": "number",
+                    "name": "retryCount"
+                },
+                {
+                    "type": "number",
+                    "name": "retryDelay"
+                }
+            ],
+            "path": "../core/src/utils/index.ts"
+        },
+        {
+            "id": "SpecificQuestionBranching",
+            "name": "SpecificQuestionBranching",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    type: SurveyQuestionBranchingType.SpecificQuestion;\n    index: number;\n}"
+        },
+        {
+            "id": "Survey",
+            "name": "Survey",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    id: string;\n    name: string;\n    description?: string;\n    type: SurveyType;\n    feature_flag_keys?: {\n        key: string;\n        value?: string;\n    }[];\n    linked_flag_key?: string;\n    targeting_flag_key?: string;\n    internal_targeting_flag_key?: string;\n    questions: SurveyQuestion[];\n    appearance?: SurveyAppearance;\n    conditions?: {\n        url?: string;\n        selector?: string;\n        seenSurveyWaitPeriodInDays?: number;\n        urlMatchType?: SurveyMatchType;\n        events?: {\n            repeatedActivation?: boolean;\n            values?: {\n                name: string;\n            }[];\n        };\n        actions?: {\n            values: SurveyActionType[];\n        };\n        deviceTypes?: string[];\n        deviceTypesMatchType?: SurveyMatchType;\n        linkedFlagVariant?: string;\n    };\n    start_date?: string;\n    end_date?: string;\n    current_iteration?: number;\n    current_iteration_start_date?: string;\n}"
+        },
+        {
+            "id": "SurveyActionType",
+            "name": "SurveyActionType",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    id: number;\n    name?: string;\n    steps?: ActionStepType[];\n}"
+        },
+        {
+            "id": "SurveyAppearance",
+            "name": "SurveyAppearance",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    backgroundColor?: string;\n    submitButtonColor?: string;\n    submitButtonText?: string;\n    submitButtonTextColor?: string;\n    ratingButtonColor?: string;\n    ratingButtonActiveColor?: string;\n    autoDisappear?: boolean;\n    displayThankYouMessage?: boolean;\n    thankYouMessageHeader?: string;\n    thankYouMessageDescription?: string;\n    thankYouMessageDescriptionContentType?: SurveyQuestionDescriptionContentType;\n    thankYouMessageCloseButtonText?: string;\n    borderColor?: string;\n    position?: SurveyPosition;\n    placeholder?: string;\n    shuffleQuestions?: boolean;\n    surveyPopupDelaySeconds?: number;\n    widgetType?: SurveyWidgetType;\n    widgetSelector?: string;\n    widgetLabel?: string;\n    widgetColor?: string;\n}"
+        },
+        {
+            "id": "SurveyAppearanceTheme",
+            "name": "SurveyAppearanceTheme",
+            "properties": [],
+            "path": "dist/surveys/surveys-utils.d.ts",
+            "example": "\"widgetSelector\" | \"widgetType\" | \"widgetColor\" | \"widgetLabel\" | \"shuffleQuestions\""
+        },
+        {
+            "id": "SurveyMatchType",
+            "name": "SurveyMatchType",
+            "properties": [
+                {
+                    "type": "\"exact\"",
+                    "name": "Exact"
+                },
+                {
+                    "type": "\"icontains\"",
+                    "name": "Icontains"
+                },
+                {
+                    "type": "\"is_not\"",
+                    "name": "IsNot"
+                },
+                {
+                    "type": "\"not_icontains\"",
+                    "name": "NotIcontains"
+                },
+                {
+                    "type": "\"not_regex\"",
+                    "name": "NotRegex"
+                },
+                {
+                    "type": "\"regex\"",
+                    "name": "Regex"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyModalProps",
+            "name": "SurveyModalProps",
+            "properties": [],
+            "path": "dist/surveys/components/SurveyModal.d.ts",
+            "example": "{\n    survey: Survey;\n    appearance: SurveyAppearanceTheme;\n    onShow: () => void;\n    onClose: (submitted: boolean) => void;\n}"
+        },
+        {
+            "id": "SurveyPosition",
+            "name": "SurveyPosition",
+            "properties": [
+                {
+                    "type": "\"center\"",
+                    "name": "Center"
+                },
+                {
+                    "type": "\"left\"",
+                    "name": "Left"
+                },
+                {
+                    "type": "\"middle_center\"",
+                    "name": "MiddleCenter"
+                },
+                {
+                    "type": "\"middle_left\"",
+                    "name": "MiddleLeft"
+                },
+                {
+                    "type": "\"middle_right\"",
+                    "name": "MiddleRight"
+                },
+                {
+                    "type": "\"right\"",
+                    "name": "Right"
+                },
+                {
+                    "type": "\"top_center\"",
+                    "name": "TopCenter"
+                },
+                {
+                    "type": "\"top_left\"",
+                    "name": "TopLeft"
+                },
+                {
+                    "type": "\"top_right\"",
+                    "name": "TopRight"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyQuestion",
+            "name": "SurveyQuestion",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "BasicSurveyQuestion | LinkSurveyQuestion | RatingSurveyQuestion | MultipleSurveyQuestion"
+        },
+        {
+            "id": "SurveyQuestionBase",
+            "name": "SurveyQuestionBase",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    question: string;\n    id?: string;\n    description?: string;\n    descriptionContentType?: SurveyQuestionDescriptionContentType;\n    optional?: boolean;\n    buttonText?: string;\n    originalQuestionIndex: number;\n    branching?: NextQuestionBranching | EndBranching | ResponseBasedBranching | SpecificQuestionBranching;\n}"
+        },
+        {
+            "id": "SurveyQuestionBranchingType",
+            "name": "SurveyQuestionBranchingType",
+            "properties": [
+                {
+                    "type": "\"end\"",
+                    "name": "End"
+                },
+                {
+                    "type": "\"next_question\"",
+                    "name": "NextQuestion"
+                },
+                {
+                    "type": "\"response_based\"",
+                    "name": "ResponseBased"
+                },
+                {
+                    "type": "\"specific_question\"",
+                    "name": "SpecificQuestion"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyQuestionDescriptionContentType",
+            "name": "SurveyQuestionDescriptionContentType",
+            "properties": [
+                {
+                    "type": "\"html\"",
+                    "name": "Html"
+                },
+                {
+                    "type": "\"text\"",
+                    "name": "Text"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyQuestionType",
+            "name": "SurveyQuestionType",
+            "properties": [
+                {
+                    "type": "\"link\"",
+                    "name": "Link"
+                },
+                {
+                    "type": "\"multiple_choice\"",
+                    "name": "MultipleChoice"
+                },
+                {
+                    "type": "\"open\"",
+                    "name": "Open"
+                },
+                {
+                    "type": "\"rating\"",
+                    "name": "Rating"
+                },
+                {
+                    "type": "\"single_choice\"",
+                    "name": "SingleChoice"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyRatingDisplay",
+            "name": "SurveyRatingDisplay",
+            "properties": [
+                {
+                    "type": "\"emoji\"",
+                    "name": "Emoji"
+                },
+                {
+                    "type": "\"number\"",
+                    "name": "Number"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyResponse",
+            "name": "SurveyResponse",
+            "properties": [],
+            "path": "../core/src/types.ts",
+            "example": "{\n    surveys: Survey[];\n}"
+        },
+        {
+            "id": "SurveyType",
+            "name": "SurveyType",
+            "properties": [
+                {
+                    "type": "\"api\"",
+                    "name": "API"
+                },
+                {
+                    "type": "\"external_survey\"",
+                    "name": "ExternalSurvey"
+                },
+                {
+                    "type": "\"popover\"",
+                    "name": "Popover"
+                },
+                {
+                    "type": "\"widget\"",
+                    "name": "Widget"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        },
+        {
+            "id": "SurveyWidgetType",
+            "name": "SurveyWidgetType",
+            "properties": [
+                {
+                    "type": "\"button\"",
+                    "name": "Button"
+                },
+                {
+                    "type": "\"selector\"",
+                    "name": "Selector"
+                },
+                {
+                    "type": "\"tab\"",
+                    "name": "Tab"
+                }
+            ],
+            "path": "../core/src/types.ts"
+        }
+    ],
+    "categories": [
+        "Initialization",
+        "Identification",
+        "Capture",
+        "Feature flags",
+        "Group analytics",
+        "Privacy",
+        "Error tracking",
+        "LLM analytics"
+    ]
+}

@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Input from 'components/OSForm/input'
+import * as yup from 'yup'
+
+const emailSchema = yup.object().shape({
+    email: yup.string().email('Please enter a valid email address').required('Email is required'),
+})
 
 interface VariantProp {
     title?: string
@@ -23,22 +28,26 @@ interface ProductProp {
 export function BackInStockForm({ variant, product }: { variant?: VariantProp; product: ProductProp }) {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const [error, setError] = useState('')
     const posthog = usePostHog()
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setError('')
 
-        // Extract title with fallbacks: variant title -> variant.product title -> product title
-        const title = variant?.product?.title || variant?.title?.replace('Default Title', '') || product?.title
+        try {
+            await emailSchema.validate({ email })
+            const title = variant?.product?.title || variant?.title?.replace('Default Title', '') || product?.title
+            const shopifyId = variant?.shopifyId || product?.shopifyId
 
-        // Extract shopifyId with fallback: variant shopifyId -> product shopifyId
-        const shopifyId = variant?.shopifyId || product?.shopifyId
+            const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
+            const productData = { title, size, shopifyId }
 
-        const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
-        const productData = { title, size, shopifyId }
-
-        posthog?.capture('back_in_stock_form_submitted', { email, product: productData })
-        setSubmitted(true)
+            posthog?.capture('back_in_stock_form_submitted', { email, product: productData })
+            setSubmitted(true)
+        } catch (validationError: any) {
+            setError(validationError.message)
+        }
     }
 
     return (
@@ -68,6 +77,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
                             </CallToAction>
                         </div>
                     </form>
+                    {error && <p className="m-0 my-2 text-sm text-red font-bold">{error}</p>}
                 </>
             )}
         </div>
