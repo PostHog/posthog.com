@@ -54,6 +54,13 @@ interface CompanyData {
     logo?: string
 }
 
+interface ContentItem {
+    handle: string
+    title: string
+    description: string
+    screenshot: string
+}
+
 interface SlideConfig {
     template: string
     name?: string
@@ -70,6 +77,7 @@ interface SlideConfig {
     children?: React.ReactNode
     bgColor?: string
     textColor?: string
+    content?: ContentItem[]
 }
 
 interface PresentationConfig {
@@ -249,6 +257,7 @@ const CustomPresentationPage = () => {
                         slideKey={slideKey}
                         companyLogo={props.companyLogo}
                         companyName={props.companyName}
+                        content={props.content}
                     >
                         {props.children}
                     </ColumnsTemplate>
