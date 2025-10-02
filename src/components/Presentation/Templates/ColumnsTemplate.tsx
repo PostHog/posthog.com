@@ -84,11 +84,11 @@ export default function ColumnsTemplate({
     content,
 }: ColumnsTemplateProps) {
     return (
-        <div className={`h-full flex flex-col @2xl:gap-8 bg-${bgColor} ${textColor}`}>
+        <div className={`h-full flex flex-col @2xl:gap-8 bg-gradient-to-b from-[#FFF1D5] to-white ${textColor}`}>
             <div className="pt-8 px-8">
-                <h2 className={`text-5xl @2xl:text-6xl mb-4 font-bold leading-tight ${textColor}`}>{title}</h2>
+                <h2 className={`text-4xl @2xl:text-5xl mb-4 font-bold leading-tight ${textColor}`}>{title}</h2>
                 {description && (
-                    <p className={`text-2xl @2xl:text-3xl leading-snug opacity-80 ${textColor}`}>{description}</p>
+                    <p className={`text-xl @2xl:text-2xl leading-snug opacity-80 ${textColor}`}>{description}</p>
                 )}
                 {children && <div className="mt-6">{children}</div>}
             </div>

@@ -19,8 +19,8 @@
         "all_in_one": {
             "template": "columns",
             "name": "All-in-one",
-            "title": "PostHog apps work together",
-            "description": "Understand usage, identify friction, assign issues – all in one place.",
+            "title": "PostHog apps have great synergy",
+            "description": "Identify a trend, see what happened, assign issues – all in one place.",
             "content": [
                 {
                     "handle": "product_analytics",
