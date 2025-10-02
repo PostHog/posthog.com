@@ -82,9 +82,7 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 
 ### Cross-domain tracking
 
-If you track multiple domains or websites, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
-
-For tracking users across different websites (for example, a marketing site at `marketing.com` and an app at `app.com`), PostHog automatically handles cross-subdomain tracking when using first-party cookies. For tracking across completely different domains, you need to pass the user's `distinct_id` and `session_id` between domains. See our [cross-domain tracking tutorial](/tutorials/cross-domain-tracking) for detailed implementation steps.
+For tracking users across different domains or websites (for example, a marketing site at `marketing.com` and an app at `app.com`), you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed. This typically means you need to pass the user's `distinct_id` and `session_id` between domains but check the guide for complete instructions.
 
 This ensures that:
 - Campaign attribution is preserved across domain transitions
