@@ -40,8 +40,8 @@ export default function ProductTemplate({
     const screenshotData = screenshot && productData.screenshots?.[screenshot]
 
     return (
-        <div className={`h-full flex flex-col gap-8 bg-${effectiveBgColor} ${effectiveTextColor}`}>
-            <div className="flex-1 flex flex-col gap-8">
+        <div className={`h-full flex flex-col gap-8 min-h-0 bg-${effectiveBgColor} ${effectiveTextColor}`}>
+            <div className="flex-1 flex flex-col gap-8 min-h-0">
                 <div className="px-8 pt-8">
                     <h2
                         className={`flex-1 text-5xl @2xl:text-5xl font-bold leading-tight text-center @2xl:text-left ${effectiveTextColor}`}
