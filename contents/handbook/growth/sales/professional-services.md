@@ -29,4 +29,4 @@ Typically we will send a forward deployed engineer to work with a customer for a
 
 We don't offer this for free, because it is a valuable service that customers expect to pay for. We also don't offer it as a freebie negotiation tactic, because that devalues it for all other customers. 
 
-The specific checklist of what will be implemented depends on the customer, but [this page](https://posthog.com/handbook/cs-and-onboarding/health-checks) is a good starting point and the [onboarding section](https://posthog.com/handbook/onboarding/onboarding-program) of the Handbook is a good starting point, as well as obviously the relevant [Docs](/docs). 
+The specific checklist of what will be implemented depends on the customer, but [this page](/handbook/cs-and-onboarding/health-checks) is a good starting point and the [onboarding section](/handbook/onboarding/onboarding-program) of the Handbook is a good starting point, as well as obviously the relevant [docs](/docs). 
