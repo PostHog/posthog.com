@@ -226,7 +226,7 @@ Below are a list of Slack channels you may find helpful:
 - `#brand-mentions`
 - `#do-more-weird`
 - `#newsletters`
-- `#team-exec`
+- `#team-blitzscale`
 - `#dev`
 - `#general`
 - `#alerts`
