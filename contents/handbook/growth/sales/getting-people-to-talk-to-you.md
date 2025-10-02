@@ -40,6 +40,20 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission. 
 
+### Your first email
+Often when you get a lead, you will be reaching out via email to someone we have never spoken to before. Despite the organization using PostHog, they may not recognize you / PostHog, or may not even be the correct person to talk to about PostHog, which means your email needs to be well crafted to elicit a response.
+
+When you consider crafting an email, consider the following:
+
+1. Your initial outreach isn't about you, it is about them. We need to lead with customer centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. [Tim has some great thoughts on this subject](https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549)
+2. Avoid fluff in your emails. "I'm just reaching out to, I just wanted to, etc..." are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
+3. Lead with value within the first sentence. If it takes a paragraph to get there, you wont get responses.
+4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?
+
+An example good email could look like:
+
+> Hello, It looks like your Product Analytics usage has increased over the past month and I wanted to ensure that the increase was expected. [Here are some tools you can use](https://posthog.com/docs/product-analytics/cutting-costs) to ensure you are collecting the correct events and getting valuable insights from them. We have a whole host of [tutorials and guides](https://posthog.com/docs/product-analytics/tutorials) to help you get the most out of PostHog. If you have any questions, don't hesitate to ask.
+
 ## Just been handed an account?
 
 Sometimes you'll get a customer in your book who was previously working with someone else on the PostHog team. A pre-existing relationship can help, but it's not guaranteed they'll want to talk to you. 
