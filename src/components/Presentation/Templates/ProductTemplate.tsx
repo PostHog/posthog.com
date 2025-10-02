@@ -50,7 +50,7 @@ export default function ProductTemplate({
                     </h2>
                 </div>
 
-                <div className="flex flex-col @2xl:flex-row @2xl:items-start gap-8">
+                <div className="flex-1 flex flex-col @2xl:flex-row @2xl:items-start gap-8">
                     <div className={`px-8 @2xl:pr-0 ${contentWidth}`}>
                         {description && (
                             <ParseHtml
@@ -89,7 +89,9 @@ export default function ProductTemplate({
                     )}
                 </div>
             </div>
-            <div className="shrink-auto flex gap-4 justify-between items-center pt-4 pb-6 border-t-2 border-white mx-8">
+            <div
+                className={`basis-auto flex gap-4 justify-between items-center pt-4 pb-6 border-t-2 border-${effectiveTextColor}/50 mx-8`}
+            >
                 <div>
                     <Logos companyLogo={companyLogo} companyName={companyName} color={effectiveTextColor} size="sm" />
                 </div>
