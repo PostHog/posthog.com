@@ -15,14 +15,10 @@ export const Content = () => {
                 <div>
                     <p>
                         PostHog Logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
-                        Unlike traditional logging services, you don't need any vendor-specific SDKs - just use standard
-                        OpenTelemetry libraries to send logs to PostHog.
+                        You don't need any vendor-specific SDKs - just use standard OpenTelemetry libraries to send logs
+                        to PostHog.
                     </p>
-                    <p>
-                        PostHog's log capture service receives logs and processes them based on team authentication
-                        using JWT tokens. This makes it easy to integrate with your existing OpenTelemetry setup while
-                        getting the benefits of PostHog's analytics platform.
-                    </p>
+                    {/*
                     <div className="flex justify-center mb-8">
                         <div className="text-center">
                             <ProductScreenshot
@@ -35,6 +31,7 @@ export const Content = () => {
                             <Caption>Search and analyze your logs in PostHog</Caption>
                         </div>
                     </div>
+                    */}
                 </div>
             </section>
 
@@ -43,18 +40,15 @@ export const Content = () => {
                 <div>
                     <ul>
                         <li>
-                            <b>Zero PostHog dependencies</b>: Use standard OpenTelemetry SDKs - no PostHog packages
-                            required. Works with any OpenTelemetry-compatible client.
+                            <b>OpenTelemetry-compatible</b>: Use standard OpenTelemetry SDKs - no PostHog packages
+                            required. Works with any compatible client.
                         </li>
                         <li>
                             <b>Integrated analytics</b>: Correlate logs with your PostHog events and user data for
                             deeper insights.
                         </li>
                         <li>
-                            <b>Cost-effective</b>: No vendor lock-in, works with your existing OpenTelemetry setup.
-                        </li>
-                        <li>
-                            <b>JWT authentication</b>: Secure log ingestion with team-based access control.
+                            <b>Cost-effective</b>: No vendor lock-in, works with your existing setup.
                         </li>
                     </ul>
                 </div>
@@ -68,15 +62,11 @@ export const Content = () => {
                         simple:
                     </p>
                     <ol>
-                        <li>Configure your OpenTelemetry client to send logs to PostHog's gRPC endpoint</li>
-                        <li>Include a JWT token with your team ID in the Authorization header</li>
                         <li>Use standard OpenTelemetry logging APIs in your application</li>
+                        <li>Include a JWT token with your team ID in the Authorization header</li>
+                        <li>Configure your OpenTelemetry client to send logs to PostHog's endpoint</li>
                         <li>Search and analyze your logs in the PostHog interface</li>
                     </ol>
-                    <p>
-                        The beauty of PostHog Logs is that it's fully OTLP-compliant, so it works with any
-                        OpenTelemetry-compatible client without requiring any PostHog-specific libraries.
-                    </p>
                 </div>
             </section>
 
@@ -90,9 +80,9 @@ export const Content = () => {
                         url="/docs/logs/start-here"
                     />
                     <ResourceItem
-                        type="Installation"
-                        title="Install OpenTelemetry logging"
-                        description="Set up OpenTelemetry logging for your application"
+                        type="Getting started"
+                        title="Installation"
+                        description="An overview of installing an OpenTelemetry client"
                         url="/docs/logs/installation"
                     />
                     <ResourceItem
@@ -117,8 +107,8 @@ const Logs: React.FC = () => {
                     <Intro
                         subheader="Getting started"
                         title="Logs"
-                        description="Search and analyze your application logs with OpenTelemetry."
-                        buttonText="Installation guide"
+                        description="Search and analyze your application logs with PostHog and OpenTelemetry."
+                        buttonText="Get started!"
                         buttonLink="/docs/logs/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
                         imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie-logs-icon.png"

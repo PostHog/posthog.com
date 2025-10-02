@@ -16,12 +16,10 @@ import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
 >
 
 PostHog Logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP). 
-Unlike traditional logging services, you don't need any PostHog-specific SDKs – just use standard OpenTelemetry libraries.
-
-PostHog's log capture service receives logs via gRPC on port 4317 and processes them based on team authentication using JWT tokens.
+You don't need any vendor specific SDKs – just use standard OpenTelemetry libraries.
 
 <CallToAction type="primary" to="/docs/logs/installation">
-  Install OpenTelemetry logging
+  Install logging client
 </CallToAction>
 
 </QuestLogItem>
@@ -37,8 +35,6 @@ Once you have OpenTelemetry installed, you need to configure your client to send
 - Set the gRPC endpoint to `http://your-posthog-host:4317`
 - Include a JWT token with your team ID in the Authorization header
 - Use the standard OTLP log format
-
-The beauty of PostHog Logs is that it's fully OTLP-compliant, so it works with any OpenTelemetry-compatible client.
 
 <CallToAction type="primary" to="/docs/logs/installation">
   Configure your logging client
@@ -56,8 +52,6 @@ Once your logs are flowing into PostHog, you can:
 
 - **Search through logs** by level, message content, or custom attributes
 - **Filter by time ranges** to find specific events
-- **Analyze log patterns** with built-in aggregation tools
-- **Set up alerts** based on log content or error rates
 - **Correlate logs with events** from your PostHog analytics
 
 Navigate to the Logs section in your PostHog dashboard to start exploring your log data.
@@ -92,15 +86,9 @@ Common issues you might encounter when setting up logging:
   icon="IconBook"
 >
 
-We've created a few tutorials for common use cases to get you started:
-
-- [How to create a drip campaign](/docs/messaging/email-drip-campaign)
+Coming soon!
 
 ---
-
-<CallToAction type="primary" to="https://app.posthog.com/messaging/campaigns/new/overview">
-  Try the campaign builder
-</CallToAction>
 
 </QuestLogItem>
 

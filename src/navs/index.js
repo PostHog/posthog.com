@@ -4716,7 +4716,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Install OpenTelemetry logging',
+                    name: 'Install logging client',
                     url: '/docs/logs/installation',
                     icon: 'IconCode',
                     color: 'blue',
