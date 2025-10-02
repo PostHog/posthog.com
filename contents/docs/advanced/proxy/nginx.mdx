@@ -26,7 +26,6 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf.template
 
-CMD ["sh", "-c", "envsubst '\\$POSTHOG_CLOUD_REGION' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
 ```
 
 Next, create the `nginx.conf` file with the reverse proxy configuration.
@@ -46,12 +45,8 @@ http {
         
         # Static assets - trailing slashes preserve path mapping
         location /static/ {
-            # for US region
-            proxy_pass https://us-assets.i.posthog.com/static/;
-            proxy_set_header Host "us-assets.i.posthog.com";
-            # for EU region
-            # proxy_pass https://eu-assets.i.posthog.com/static/;
-            # proxy_set_header Host "eu-assets.i.posthog.com";
+            proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/static/;
+            proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
             proxy_ssl_server_name on;
             
             proxy_hide_header 'Access-Control-Allow-Origin';
@@ -67,12 +62,8 @@ http {
         
         # Main API endpoints
         location / {
-            # for US region
-            proxy_pass https://us.i.posthog.com;
-            proxy_set_header Host "us.i.posthog.com";
-            # for EU region
-            # proxy_pass https://eu.i.posthog.com;
-            # proxy_set_header Host "eu.i.posthog.com";
+            proxy_pass https://${POSTHOG_CLOUD_REGION}.i.posthog.com;
+            proxy_set_header Host "${POSTHOG_CLOUD_REGION}.i.posthog.com";
             proxy_ssl_server_name on;
             
             proxy_hide_header 'Access-Control-Allow-Origin';
@@ -99,8 +90,8 @@ docker run --rm -p 8080:8080 -e POSTHOG_CLOUD_REGION=us posthog-nginx
 Now you can connect to PostHog through this proxy by configuring the PostHog client to use `http://localhost:8080`.
 
 ```js
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+posthog.init(<ph_project_api_key>, {
+    api_host: <ph_client_api_host>,
     ui_host: 'https://us.posthog.com', // for the toolbar to work
     // for EU Cloud
     // ui_host: 'https://eu.posthog.com',
