@@ -39,6 +39,7 @@ import {
     StickerPineapple,
 } from 'components/Stickers/Index'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import TeamFeatures from 'components/TeamFeatures'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -611,6 +612,9 @@ export default function TeamPage(props: TeamPageProps) {
                                         <PineapplePieChart percentage={pineapplePercentage} />
                                     </Fieldset>
                                 </div>
+
+                                <TeamFeatures teamSlug={slug} />
+
                                 <div>
                                     {teamEmojis?.length > 0 && (
                                         <Fieldset legend="Custom emojis">

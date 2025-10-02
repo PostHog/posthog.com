@@ -91,6 +91,14 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/reddit-ads',
                 },
                 {
+                    name: 'Meta Ads',
+                    url: '/docs/cdp/sources/meta-ads',
+                },
+                {
+                    name: 'Tiktok Ads',
+                    url: '/docs/cdp/sources/tiktok-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -4105,6 +4113,14 @@ export const docsMenu = {
                         {
                             name: 'Reddit Ads',
                             url: '/docs/data-warehouse/sources/reddit-ads',
+                        },
+                        {
+                            name: 'Meta Ads',
+                            url: '/docs/data-warehouse/sources/meta-ads',
+                        },
+                        {
+                            name: 'Tiktok Ads',
+                            url: '/docs/data-warehouse/sources/tiktok-ads',
                         },
                         {
                             name: 'Google Sheets',
