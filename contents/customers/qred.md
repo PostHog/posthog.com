@@ -1,25 +1,8 @@
 ---
 title: How Qred Bank ditched four separate tools for one source of truth
 customer: Qred
-logo: >- 
-  https://res.cloudinary.com/dmukukwp6/image/upload/qred_logo_light_24ad1306ee.png
-logoDark: >- 
-  https://res.cloudinary.com/dmukukwp6/image/upload/qred_logo_dark_de17dafa9c.png
 featuredImage: >- 
   https://res.cloudinary.com/dmukukwp6/image/upload/dimension_56cccccb2c.jpg
-Industries:
-  - Fintech
-users:
-  - Engineering
-  - Product
-  - Marketing
-toolsUsed:
-  - Feature flags
-  - Session recording
-  - Experimentation
-  - Product analytics
-  - MCP
-  - Data pipelines
 date: 2025-08-26
 ---
 When Lezgin Zilan, CTO at Swedish fintech [Qred Bank](https://www.qred.se/en), looked at their onboarding flow, he saw a problem — not in the onboarding itself, but rather in the path to improving it and building a better product. 

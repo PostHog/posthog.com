@@ -24,13 +24,20 @@ export default function CookieBannerToast() {
                         </p>
                         <p className="pr-28">
                             No data is sent to a third party. (
-
-                            <Tooltip trigger={<span className="border-b border-primary border-dashed">Ursula von der Leyen</span>} delay={0}
+                            <Tooltip
+                                trigger={
+                                    <span className="border-b border-primary border-dashed">Ursula von der Leyen</span>
+                                }
+                                delay={0}
                             >
                                 <div className="max-w-64">
-                                    <span className="text-sm">Ursula von der Leyen is the President of the European Commission – NOT to be confused with Hilary Clinton.</span>
+                                    <span className="text-sm">
+                                        Ursula von der Leyen is the President of the European Commission – NOT to be
+                                        confused with Hillary Clinton.
+                                    </span>
                                 </div>
-                            </Tooltip>{' '} would be so proud.)
+                            </Tooltip>{' '}
+                            would be so proud.)
                         </p>
                     </>
                 ),
@@ -48,7 +55,7 @@ export default function CookieBannerToast() {
                     posthog?.set_config({ persistence: 'localStorage+cookie' })
                 },
                 actionLabel: 'Close',
-                actionAsIcon: (<IconX className="size-4" />),
+                actionAsIcon: <IconX className="size-4" />,
                 verticalAlign: 'items-start',
                 duration: 999999999,
             })

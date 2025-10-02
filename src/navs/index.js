@@ -17,10 +17,15 @@ export const dataPipelines = {
             icon: 'IconBook',
             color: 'blue',
             featured: true,
+            dynamicChildren: 'data-pipeline-source-webhooks',
             children: [
                 {
                     name: 'Overview',
                     url: '/docs/cdp/sources/',
+                },
+                {
+                    name: 'Incoming webhooks',
+                    url: '/docs/cdp/sources/incoming-webhooks',
                 },
                 {
                     name: 'Managed',
@@ -86,6 +91,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/reddit-ads',
                 },
                 {
+                    name: 'Meta Ads',
+                    url: '/docs/cdp/sources/meta-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -115,6 +124,9 @@ export const dataPipelines = {
                 {
                     name: 'Google Cloud Storage',
                     url: '/docs/cdp/sources/gcs',
+                },
+                {
+                    name: 'Webhooks',
                 },
             ],
         },
@@ -1324,6 +1336,20 @@ export const handbookSidebar = [
                     {
                         name: 'Product-led sales',
                         url: '/handbook/growth/sales/product-led-sales',
+                        children: [
+                            {
+                                name: 'Expansion, cross-sell & retention',
+                                url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                            {
+                                name: 'Account planning',
+                                url: '/handbook/growth/sales/account-planning',
+                            },
+                            {
+                                name: 'Cross-sell motions',
+                                url: '/handbook/growth/sales/cross-selling',
+                            },
+                        ],
                     },
                     {
                         name: 'Outbound sales',
@@ -1336,25 +1362,6 @@ export const handbookSidebar = [
                     {
                         name: 'Selling and procuring via AWS Marketplace',
                         url: '/handbook/growth/sales/selling-via-aws',
-                    },
-                    {
-                        name: 'Expansion, cross-sell & retention',
-                        url: '/handbook/growth/sales/expansion-and-retention',
-                        children: [
-                            {
-                                name: 'Account planning',
-                                url: '/handbook/growth/sales/account-planning',
-                            },
-                            {
-                                name: 'Cross-selling',
-                                url: '/handbook/growth/sales/cross-selling',
-                            },
-                        ],
-                    },
-
-                    {
-                        name: 'Utilization by business type',
-                        url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
                         name: 'How we work',
@@ -1389,6 +1396,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
                     },
                     {
+                        name: 'Basic account review checklist',
+                        url: '/handbook/cs-and-onboarding/foundation-check',
+                    },
+                    {
                         name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
@@ -1419,8 +1430,24 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding Specialist overview',
+                        name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'Onboarding program',
+                        url: '/handbook/onboarding/onboarding-program',
+                    },
+                    {
+                        name: 'Onboarding tracking',
+                        url: '/handbook/onboarding/onboarding-tracking',
+                    },
+                    {
+                        name: 'Sales handover',
+                        url: '/handbook/onboarding/sales-handover',
                     },
                     {
                         name: 'New hire onboarding',
@@ -1443,6 +1470,10 @@ export const handbookSidebar = [
                     {
                         name: 'Lead scoring',
                         url: '/handbook/growth/sales/lead-scoring',
+                    },
+                    {
+                        name: 'Matching PostHog to a business type',
+                        url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
                         name: 'Contract rules',
@@ -1489,6 +1520,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/health-checks',
                     },
                     {
+                        name: 'Learn from churn',
+                        url: '/handbook/cs-and-onboarding/customer-churn-retros',
+                    },
+                    {
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
@@ -1501,10 +1536,6 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/feature-requests',
                     },
                     {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
                         name: 'New hire onboarding exercise',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
                     },
@@ -1513,6 +1544,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/customer-onboarding.md',
                     },
                 ],
+            },
+            {
+                name: 'Getting people to talk to you',
+                url: '/handbook/growth/sales/getting-people-to-talk-to-you',
             },
             {
                 name: 'Customer FAQs',
@@ -1949,6 +1984,16 @@ export const docsMenu = {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: 'Setup and features',
+                                    url: '/docs/libraries/react-native',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-react-native',
+                                },
+                            ],
                         },
                         {
                             name: 'Ruby',
@@ -4066,6 +4111,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/sources/reddit-ads',
                         },
                         {
+                            name: 'Meta Ads',
+                            url: '/docs/data-warehouse/sources/meta-ads',
+                        },
+                        {
                             name: 'Google Sheets',
                             url: '/docs/data-warehouse/sources/google-sheets',
                         },
@@ -4586,6 +4635,75 @@ export const docsMenu = {
                     name: 'Security',
                     url: '/docs/max-ai#is-my-data-shared-with-third-parties',
                     icon: 'IconShield',
+                    color: 'red',
+                },
+            ],
+        },
+        {
+            name: 'Messaging',
+            icon: 'IconMegaphone',
+            color: 'red',
+            url: '/docs/messaging',
+            description: 'Create campaigns to send messages to your users.',
+            children: [
+                {
+                    name: 'Messaging',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/messaging',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/messaging/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Configure a messaging channel',
+                    url: '/docs/messaging/configure-channels',
+                    icon: 'IconMegaphone',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Design your first campaign',
+                    url: '/docs/messaging/launch-campaign',
+                    icon: 'IconMegaphone',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Campaign builder',
+                    url: '/docs/messaging/campaign-builder',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Guides',
+                },
+                {
+                    name: 'Create a drip campaign',
+                    url: '/docs/messaging/email-drip-campaign',
+                    icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/messaging/troubleshooting',
+                    icon: 'IconQuestion',
                     color: 'red',
                 },
             ],

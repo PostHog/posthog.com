@@ -1,24 +1,8 @@
 ---
-title: 'How Octomind’s marketing team uses PostHog with ease'
+title: "How Octomind's marketing team uses PostHog with ease"
 customer: Octomind
-logo: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_dark_a89deeee90.png
-logoDark: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_673e0ed777.png
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog_octomind_bb047603a6.jpg
-featuredCustomer: false
-industries:
-    - 'Devtool, SaaS'
-users:
-    - Marketing
-toolsUsed:
-    - Experiments
-    - Surveys
-    - PostHog Cloud
-    - Insights
-    - Web analytics
-    - Product analytics
 date: 2024-11-10
 ---
 
