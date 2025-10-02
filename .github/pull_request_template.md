@@ -8,7 +8,7 @@
 
 - [ ] Words are spelled using American English
 - [ ] Titles are in [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)
-- [ ] Don't capitalize product features. It's "product analytics" not "Product Analytics" and so on.
+- [ ] Feature names are in **[sentence case too](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case)**. It's "product analytics" not "Product Analytics" and so on.
 - [ ] Use relative URLs for internal links
 - [ ] If I moved a page, I added a redirect in `vercel.json`
 - [ ] Remove this template if you're not going to fill it out!
