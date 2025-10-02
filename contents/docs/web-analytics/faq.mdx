@@ -98,16 +98,14 @@ If your users are typically inactive for longer than 30 minutes within one perio
 
 ## How do I set up attribution tracking across multiple websites?
 
-If you're running campaigns or tracking users across different domains (for example, a marketing website at `example.com` and an app at `app.example.com` or even a completely different domain), you'll need to ensure proper attribution setup.
-
-### Cross-domain tracking for attribution
+If you're running campaigns or tracking users across different websites (for example, a marketing site at `marketing.com` and an app at `app.com`), you'll need to ensure proper attribution setup beyond the cross-domain tracking mentioned above.
 
 PostHog automatically handles cross-subdomain tracking when using first-party cookies. For tracking across different domains, you need to pass the user's `distinct_id` and `session_id` between domains. See our [cross-domain tracking tutorial](/tutorials/cross-domain-tracking) for detailed implementation steps.
 
 This ensures that:
 - Campaign attribution is preserved across domain transitions
-- Session replays continue across domains
 - User journeys are tracked accurately from first touch to conversion
+- Analytics data from both sites is associated with the same user profile
 
 ## Why does PostHog impact my PageSpeed score?
 
