@@ -26,6 +26,7 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf.template
 
+CMD ["sh", "-c", "envsubst '\\$POSTHOG_CLOUD_REGION' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
 ```
 
 Next, create the `nginx.conf` file with the reverse proxy configuration.
@@ -91,7 +92,7 @@ Now you can connect to PostHog through this proxy by configuring the PostHog cli
 
 ```js
 posthog.init(<ph_project_api_key>, {
-    api_host: <ph_client_api_host>,
+    api_host: localhost:8080,
     ui_host: 'https://us.posthog.com', // for the toolbar to work
     // for EU Cloud
     // ui_host: 'https://eu.posthog.com',
