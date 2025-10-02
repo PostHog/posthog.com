@@ -14,29 +14,29 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        PostHog Logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
+                        PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
                         You don't need any vendor-specific SDKs - just use standard OpenTelemetry libraries to send logs
-                        to PostHog.
+                        to PostHog. You can migrate to PostHog logs by configuring your _existing_ OpenTelemetry client
+                        to send logs to PostHog's gRPC endpoint.
                     </p>
-                    {/*
+
                     <div className="flex justify-center mb-8">
                         <div className="text-center">
                             <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logs-search-interface.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logs-search-interface-dark.png"
-                                alt="PostHog Logs search interface"
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_light_dd81ff5093.png"
+                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/logs_dark_d7135f1b22.png"
+                                alt="PostHog logs search interface"
                                 padding={false}
                                 classes="rounded @md:max-w-2xl"
                             />
                             <Caption>Search and analyze your logs in PostHog</Caption>
                         </div>
                     </div>
-                    */}
                 </div>
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Why use PostHog Logs?</h2>
+                <h2 className="mb-4 mt-0">Why use PostHog logs?</h2>
                 <div>
                     <ul>
                         <li>
@@ -58,7 +58,7 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0">How it works</h2>
                 <div>
                     <p>
-                        PostHog Logs acts as a generic OTLP receiver that happens to be built by PostHog. The process is
+                        PostHog logs acts as a generic OTLP receiver that happens to be built by PostHog. The process is
                         simple:
                     </p>
                     <ol>
@@ -88,7 +88,7 @@ export const Content = () => {
                     <ResourceItem
                         type="Troubleshooting"
                         title="Troubleshooting and FAQs"
-                        description="Common issues and solutions for PostHog Logs"
+                        description="Common issues and solutions for PostHog logs"
                         url="/docs/logs/troubleshooting"
                     />
                 </ul>

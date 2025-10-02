@@ -4,36 +4,156 @@ showStepsToc: true
 ---
 
 import Tab from "components/Tab"
+import { Steps, Step } from 'components/Docs/Steps'
 
 <Steps>
 
-<Step title="Choose your OpenTelemetry client" badge="required">
+<Step title="Install OpenTelemetry packages" badge="required">
 
-PostHog Logs works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages - just use standard OpenTelemetry libraries.
+PostHog logs works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages - just use standard OpenTelemetry libraries.
 
 <Tab.Group tabs={[
-'Node.js', 
-'Python', 
+'Node.js',
+'Python',
 'Java',
 'Go',
 'Other']}>
 <Tab.List>
+
 <Tab>Node.js</Tab>
 <Tab>Python</Tab>
 <Tab>Java</Tab>
 <Tab>Go</Tab>
 <Tab>Other</Tab>
+
 </Tab.List>
 <Tab.Panels>
-<Tab.Panel>
 
-### Install OpenTelemetry packages
+<Tab.Panel>
 
 ```bash
 npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/api-logs
 ```
 
-### Configure the SDK
+</Tab.Panel>
+<Tab.Panel>
+
+```bash
+pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+```xml
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-api</artifactId>
+    <version>1.32.0</version>
+</dependency>
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-sdk</artifactId>
+    <version>1.32.0</version>
+</dependency>
+<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-exporter-otlp</artifactId>
+    <version>1.32.0</version>
+</dependency>
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+```bash
+go get go.opentelemetry.io/otel/sdk/log
+go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
+
+The key requirements are:
+- Use OTLP (OpenTelemetry Protocol) for log export
+- Send logs with gRPC to `http://your-posthog-host:4317/v1/logs`
+- Include JWT token in Authorization header: `Bearer {your-jwt-token}`
+- JWT token must contain `team_id` claim
+
+</Tab.Panel>
+
+</Tab.Panels>
+
+</Tab.Group>
+
+</Step>
+
+<Step title="Generate JWT token" badge="required">
+
+You need a JWT token that contains your team ID. The token must include a `team_id` claim.
+
+```json
+{
+  "team_id": "your-team-id",
+  "exp": 1735689600
+}
+```
+
+You can generate JWT tokens with any JWT library with the same payload. Here are examples for Node.js and Python.
+
+<MultiLanguage>
+
+```javascript
+import jwt from 'jsonwebtoken';
+
+const payload = {
+  team_id: 'your-team-id',
+  exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // 24 hours
+};
+
+const token = jwt.sign(payload, 'your-jwt-secret');
+```
+
+```python
+import jwt
+import time
+
+payload = {
+    'team_id': 'your-team-id',
+    'exp': int(time.time()) + (60 * 60 * 24)  # 24 hours
+}
+
+token = jwt.encode(payload, 'your-jwt-secret', algorithm='HS256')
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to send logs to PostHog.
+
+<Tab.Group tabs={[
+'Node.js',
+'Python',
+'Java',
+'Go',
+'Other']}>
+<Tab.List>
+
+<Tab>Node.js</Tab>
+<Tab>Python</Tab>
+<Tab>Java</Tab>
+<Tab>Go</Tab>
+<Tab>Other</Tab>
+
+</Tab.List>
+<Tab.Panels>
+
+<Tab.Panel>
 
 ```javascript
 import { NodeSDK } from '@opentelemetry/sdk-node';
@@ -54,29 +174,8 @@ const sdk = new NodeSDK({
 sdk.start();
 ```
 
-### Use standard OpenTelemetry logging
-
-```javascript
-import { logs } from '@opentelemetry/api-logs';
-
-const logger = logs.getLogger('my-app');
-
-// Log with different levels
-logger.info('User action', { userId: '123', action: 'login' });
-logger.warn('Deprecated API used', { endpoint: '/old-api' });
-logger.error('Database connection failed', { error: 'Connection timeout' });
-```
-
 </Tab.Panel>
 <Tab.Panel>
-
-### Install OpenTelemetry packages
-
-```bash
-pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
-```
-
-### Configure the SDK
 
 ```python
 from opentelemetry import logs
@@ -103,46 +202,8 @@ logger_provider.add_log_record_processor(
 logger = logs.get_logger("my-app")
 ```
 
-### Use standard Python logging
-
-```python
-import logging
-
-# Configure logging to use OpenTelemetry
-logging.basicConfig(level=logging.INFO)
-logging.getLogger().addHandler(LoggingHandler())
-
-# Use standard Python logging
-logger = logging.getLogger("my-app")
-logger.info("User action", extra={"userId": "123", "action": "login"})
-logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
-logger.error("Database connection failed", extra={"error": "Connection timeout"})
-```
-
 </Tab.Panel>
 <Tab.Panel>
-
-### Add OpenTelemetry dependencies
-
-```xml
-<dependency>
-    <groupId>io.opentelemetry</groupId>
-    <artifactId>opentelemetry-api</artifactId>
-    <version>1.32.0</version>
-</dependency>
-<dependency>
-    <groupId>io.opentelemetry</groupId>
-    <artifactId>opentelemetry-sdk</artifactId>
-    <version>1.32.0</version>
-</dependency>
-<dependency>
-    <groupId>io.opentelemetry</groupId>
-    <artifactId>opentelemetry-exporter-otlp</artifactId>
-    <version>1.32.0</version>
-</dependency>
-```
-
-### Configure the SDK
 
 ```java
 import io.opentelemetry.api.logs.GlobalLoggerProvider;
@@ -164,33 +225,8 @@ SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
 GlobalLoggerProvider.set(loggerProvider);
 ```
 
-### Use standard OpenTelemetry logging
-
-```java
-import io.opentelemetry.api.logs.Logger;
-
-Logger logger = GlobalLoggerProvider.get().get("my-app");
-
-logger.logRecordBuilder()
-    .setBody("User action")
-    .setAttributes(Attributes.of(
-        AttributeKey.stringKey("userId"), "123",
-        AttributeKey.stringKey("action"), "login"
-    ))
-    .emit();
-```
-
 </Tab.Panel>
 <Tab.Panel>
-
-### Install OpenTelemetry packages
-
-```bash
-go get go.opentelemetry.io/otel/sdk/log
-go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc
-```
-
-### Configure the SDK
 
 ```go
 package main
@@ -225,7 +261,95 @@ func main() {
 }
 ```
 
-### Use standard OpenTelemetry logging
+</Tab.Panel>
+<Tab.Panel>
+
+PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
+
+The key requirements are:
+- Use OTLP (OpenTelemetry Protocol) for log export
+- Send logs to `http://your-posthog-host:4317/v1/logs`
+- Include JWT token in Authorization header: `Bearer {your-jwt-token}`
+- JWT token must contain `team_id` claim
+
+</Tab.Panel>
+
+</Tab.Panels>
+
+</Tab.Group>
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Now you can start logging with OpenTelemetry. Here are examples for each language:
+
+<Tab.Group tabs={[
+'Node.js',
+'Python',
+'Java',
+'Go',
+'Other']}>
+<Tab.List>
+
+<Tab>Node.js</Tab>
+<Tab>Python</Tab>
+<Tab>Java</Tab>
+<Tab>Go</Tab>
+<Tab>Other</Tab>
+
+</Tab.List>
+<Tab.Panels>
+
+<Tab.Panel>
+
+```javascript
+import { logs } from '@opentelemetry/api-logs';
+
+const logger = logs.getLogger('my-app');
+
+// Log with different levels
+logger.info('User action', { userId: '123', action: 'login' });
+logger.warn('Deprecated API used', { endpoint: '/old-api' });
+logger.error('Database connection failed', { error: 'Connection timeout' });
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+```python
+import logging
+
+# Configure logging to use OpenTelemetry
+logging.basicConfig(level=logging.INFO)
+logging.getLogger().addHandler(LoggingHandler())
+
+# Use standard Python logging
+logger = logging.getLogger("my-app")
+logger.info("User action", extra={"userId": "123", "action": "login"})
+logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
+logger.error("Database connection failed", extra={"error": "Connection timeout"})
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+```java
+import io.opentelemetry.api.logs.Logger;
+
+Logger logger = GlobalLoggerProvider.get().get("my-app");
+
+logger.logRecordBuilder()
+    .setBody("User action")
+    .setAttributes(Attributes.of(
+        AttributeKey.stringKey("userId"), "123",
+        AttributeKey.stringKey("action"), "login"
+    ))
+    .emit();
+```
+
+</Tab.Panel>
+<Tab.Panel>
 
 ```go
 import (
@@ -243,7 +367,7 @@ logger.Info(ctx, "User action",
 </Tab.Panel>
 <Tab.Panel>
 
-PostHog Logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
+PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
 
 The key requirements are:
 - Use OTLP (OpenTelemetry Protocol) for log export
@@ -252,50 +376,10 @@ The key requirements are:
 - JWT token must contain `team_id` claim
 
 </Tab.Panel>
+
 </Tab.Panels>
+
 </Tab.Group>
-
-</Step>
-
-<Step title="Generate JWT token" badge="required">
-
-You need a JWT token that contains your team ID. The token must include a `team_id` claim.
-
-### Example JWT payload
-
-```json
-{
-  "team_id": "your-team-id",
-  "exp": 1735689600
-}
-```
-
-### Generate token (Node.js example)
-
-```javascript
-import jwt from 'jsonwebtoken';
-
-const payload = {
-  team_id: 'your-team-id',
-  exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // 24 hours
-};
-
-const token = jwt.sign(payload, 'your-jwt-secret');
-```
-
-### Generate token (Python example)
-
-```python
-import jwt
-import time
-
-payload = {
-    'team_id': 'your-team-id',
-    'exp': int(time.time()) + (60 * 60 * 24)  # 24 hours
-}
-
-token = jwt.encode(payload, 'your-jwt-secret', algorithm='HS256')
-```
 
 </Step>
 
@@ -304,11 +388,11 @@ token = jwt.encode(payload, 'your-jwt-secret', algorithm='HS256')
 Once everything is configured, test that logs are flowing into PostHog:
 
 1. Send a test log from your application
-2. Check the PostHog Logs interface for your log entries
+2. Check the PostHog logs interface for your log entries
 3. Verify the logs appear with the correct team association
 
 <CallToAction type="primary" to="https://app.posthog.com/logs">
-  View your logs in PostHog
+View your logs in PostHog
 </CallToAction>
 
 </Step>
@@ -318,12 +402,12 @@ Once everything is configured, test that logs are flowing into PostHog:
 | Action | Description |
 | --- | --- |
 | **Search logs** | Use the search interface to find specific log entries |
-| **Filter by level** | Filter by INFO, WARN, ERROR, etc. |
+| **Filter by level** | Filter by `INFO`, `WARN`, `ERROR`, etc. |
 | **Set up alerts** | Get notified when specific log patterns occur |
 | **Correlate with events** | Connect log data with your PostHog analytics |
 
 <CallToAction type="primary" to="/docs/logs/troubleshooting">
-  Troubleshoot common issues
+Troubleshoot common issues
 </CallToAction>
 
 </Step>
