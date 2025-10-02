@@ -62,7 +62,7 @@ Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovab
 
 </CalloutBox>
 
-### 3. Transparent and low prices, generous free tiers
+### 3. Transparent pricing, generous free tiers
 
 Our [pricing](/pricing) is 100% transparent. There are no hidden fees or surprise overages – what you see is exactly what you'll pay. 
 
@@ -70,13 +70,13 @@ We also default to charging as little as possible while still making a sensible 
 
 <CalloutBox icon="IconPiggyBank" title="We love to cut prices" type="fyi">
 
-In 2024, we [cut prices for session [replay]](/blog/session-replay-pricing) and [analytics events](/blog/analytics-pricing). In 2025, we've [cut prices for data pipelines surveys](/blog/data-pipeline-pricing) and surveys. If we can cut pass a saving onto our customers, we always will. 
+In 2024, we [cut prices for session replay](/blog/session-replay-pricing) and [analytics events](/blog/analytics-pricing). In 2025, we've [cut prices for data pipelines](/blog/data-pipeline-pricing) and surveys. If we can cut pass a saving onto our customers, we always will. 
 
 </CalloutBox>
 
 ## Comparing PostHog and Amplitude 
 
-### Platform
+PostHog and Amplitude offer a similar suite of products, but Amplitude lacks things like error tracking and LLM analytics.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
@@ -124,12 +124,24 @@ In 2024, we [cut prices for session [replay]](/blog/session-replay-pricing) and 
     <ComparisonRow
         column1={true}
         column2={false}
-        feature="LLM observability"
+        feature="LLM analytics"
         description="Gather usage and performance data for your AI and LLM product"
     />
+    <ComparisonRow
+        column1="Beta"
+        column2={true}
+        feature="Marketing analytics"
+        description="Track conversion and campaign ROI"
+    />
+    <ComparisonRow
+        column1={false}
+        column2={true}
+        feature="Product tours"
+        description="Create guides for new users"
+    />            
 </ComparisonTable>
 
-The rest of this page includes detailed feature comparisons between PostHog and Amplitude for things like [product analytics](#product-analytics), [session replay](#session-replay), and more, but here's a quick summary: 
+The rest of this page includes detailed feature comparisons for things like [product analytics](#product-analytics), [session replay](#session-replay), and more, but here's a quick summary: 
 
 <details>
   <summary>What's the best product analytics tool for startups?</summary>
@@ -275,7 +287,7 @@ PostHog supports [autocapture](/docs/product-analytics/autocapture), which means
 
 ### Feature flags
 
-Both PostHog and Amplitude provide robust feature flagging, supporting boolean and multivariate flags, local evaluation, payloads, targeting, and percentage rollouts. PostHog adds scheduling and early-access management, with pricing based on requests, while Amplitude's pricing is tied to impression (a difference that can affect flexibility as you roll out and scale).
+Both PostHog and Amplitude provide robust feature management tools, including boolean and multivariate flags, local evaluation, payloads, targeting, and percentage rollouts.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
@@ -344,7 +356,7 @@ PostHog's feature flags are tightly integrated with other features, so you can t
 
 ### Experiments
 
-Both PostHog and Amplitude support core experimentation features like A/B/n testing, multivariate tests, custom and secondary metrics, and statistical significance calculations. PostHog includes experiments in its free tier (1M requests per month, including mobile support), while Amplitude Experiment has much more experimentation features on paid tiers, focuses more on web, and uses sequential statistics. 
+Both PostHog and Amplitude support core experimentation features like A/B/n testing, multivariate tests, custom and secondary metrics, and statistical significance calculations. PostHog includes experiments in its free tier (1M requests per month, including mobile support). Most Amplitude Experiments features are locked behind paid plans.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
@@ -412,7 +424,7 @@ Amplitude's Web Experiments feature isn't available on any self-serve plan and t
 
 ### Session replay
 
-Both PostHog and Amplitude offer session replay with free tiers and heatmaps. PostHog extends this with mobile support, advanced controls (conditional recording, sampling, feature-flag targeting), and debugging tools like console logs, DOM explorer, and performance monitoring. Amplitude is limited to web heatmaps and basic replay, with fewer customization and diagnostic features.
+Both PostHog and Amplitude offer session replay, but PostHog offers more features that are useful for developers, like console logs, DOM explorer, and performance monitoring. 
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
     <ComparisonRow
@@ -585,7 +597,7 @@ This usage-based approach means costs scale with your actual activity, whether t
 
 **Amplitude charges based on Monthly Tracked Users (MTUs)**. Each tracked user is counted once per month, regardless of how many events they generate. Plans scale as your MTUs grow, with higher tiers unlocking more advanced analytics, experimentation, and enterprise features.
 
-This model can be easier to predict if you run a large product with millions of users who generate relatively few events per person. It also means teams don't have to think about event volume when forecasting costs. However, it can feel less flexible if you're working with a smaller but more active user base, since a few highly engaged users won't change your MTU count.
+This model can be easier to predict if you run a large product with millions of users, but it's less flexible because there's no way to reduce how much you spend. Every user is counted equally regardless of how valuable they are to you.
 
 <CalloutBox icon="IconInfo" title="Example" type="fyi">
 
