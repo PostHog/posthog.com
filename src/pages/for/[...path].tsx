@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { navigate } from 'gatsby'
 import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
@@ -20,6 +20,18 @@ import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
 import PricingTemplate from 'components/Presentation/Templates/PricingTemplate'
 import BookingTemplate from 'components/Presentation/Templates/BookingTemplate'
+import { DotLottiePlayer } from '@dotlottie/react-player'
+import Logos from 'components/Presentation/Utilities/Logos'
+import ProgressBar from 'components/ProgressBar'
+
+const Loading = () => {
+    const lottieRef = useRef(null)
+    return (
+        <div className="size-12">
+            <DotLottiePlayer loop lottieRef={lottieRef} src="/lotties/loading.lottie" autoplay />
+        </div>
+    )
+}
 
 const roleConfigs = {
     'product-engineers': productEngineersConfig,
@@ -321,8 +333,10 @@ const CustomPresentationPage = () => {
 
     if (isLoading) {
         return (
-            <div className="h-screen flex items-center justify-center">
-                <div className="text-2xl">Loading presentation...</div>
+            <div className="h-full flex flex-col gap-2 items-center justify-center">
+                {/* <Loading /> */}
+                <ProgressBar title="presentation" />
+                {/* <div className="text-xl text-secondary">Loading presentation...</div> */}
             </div>
         )
     }
