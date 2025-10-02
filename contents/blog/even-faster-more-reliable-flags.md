@@ -1,6 +1,6 @@
 ---
 title: How we made feature flags even faster and more reliable
-date: 2025-10-03
+date: 2025-10-02
 author:
   - dylan-martin
 featuredImage: >-
