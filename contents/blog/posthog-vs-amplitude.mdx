@@ -1,6 +1,6 @@
 ---
 title: 'In-depth: PostHog vs Amplitude'
-date: 2024-09-10
+date: 2025-10-02
 author:
     - andy-vandervell
 rootpage: /blog
@@ -320,7 +320,7 @@ Both PostHog and Amplitude provide robust feature flagging, supporting boolean a
         feature="Custom targeting"
         description="Target users based on user properties, custom contexts"
     />
-    <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
+    <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
     <ComparisonRow
         column1="Partial"
         column2={false}
@@ -361,7 +361,7 @@ Both PostHog and Amplitude support core experimentation features like A/B/n test
     />
     <ComparisonRow
         column1={true}
-        column2={false}
+        column2={true}
         feature="Mobile experiments"
         description="Run A/B tests on Android and iOS apps"
     />
@@ -392,18 +392,12 @@ Both PostHog and Amplitude support core experimentation features like A/B/n test
     />
     <ComparisonRow
         column1={true}
-        column2={false}
-        feature="Recommended run time"
-        description="Calculates the recommended run time and sample size"
-    />
-    <ComparisonRow
-        column1="Partial"
         column2={true}
         feature="Holdout testing"
         description="Withhold multiple features to measure cumulative impact"
     />
     <ComparisonRow
-        column1="Bayesian"
+        column1="Bayesian or Sequential"
         column2="Sequential"
         feature="Statistics engine"
         description="How the results of an experiment are calculated"
@@ -435,13 +429,13 @@ Both PostHog and Amplitude offer session replay with free tiers and heatmaps. Po
     />
     <ComparisonRow
         column1={true}
-        column2={false}
+        column2={true}
         feature="Mobile app recordings"
         description="Capture recordings in iOS and Android apps"
     />
     <ComparisonRow
         column1={true}
-        column2={false}
+        column2={true}
         feature="Heatmaps"
         description="Visualize where users click in your app or website"
     />
