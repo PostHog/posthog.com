@@ -1,5 +1,4 @@
-`PostHog.FeatureFlags.check/2` is the main function for checking a feature flag in Elixir.
-More documentation can be found in the [HexPM Docs](https://hexdocs.pm/posthog/PostHog.FeatureFlags.html).
+`PostHog.FeatureFlags.check/2` is the main function for checking a feature flag in Elixir. More documentation on it can be found in the [HexPM Docs](https://hexdocs.pm/posthog/PostHog.FeatureFlags.html).
 
 
 #### Boolean feature flags
@@ -35,4 +34,4 @@ iex> PostHog.FeatureFlags.check("example-feature-flag-3", "user123")
 {:error, %PostHog.UnexpectedResponseError{message: "Feature flag example-feature-flag-3 was not found in the response", response: ...}}
 ```
 
-You can also use `PostHog.FeatureFlags.check!/2` if you're feeling adventurous/running a script if you'd prefer errors to be raised instead.
+You can also use `PostHog.FeatureFlags.check!/2` if you're feeling adventurous or running a script and prefer errors to be raised instead.

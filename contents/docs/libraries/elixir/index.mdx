@@ -40,11 +40,11 @@ import ElixirFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets
 
 <ElixirFeatureFlagsCode />
 
-## Error Tracking
+## Error tracking
 
-Error Tracking is enabled by default. It will automatically capture exceptions thrown by the application.
+Error tracking is enabled by default. It will automatically captures exceptions thrown by the application.
 
-As a matter of fact, since this is built on top of Elixir's `Logger` module, it will automatically capture any `Logger.error` calls.
+As a matter of fact, since this is built on top of Elixir's `Logger` module, it automatically captures any `Logger.error` calls.
 
 You can always disable it by setting `enable_error_tracking` to false:
 
@@ -57,7 +57,7 @@ config :posthog,
 
 By default, PostHog starts its own supervision tree and attaches a logger handler.
 
-However, in certain cases you might want to run this supervision tree yourself. You can do this by disabling the default supervisor and adding PostHog.Supervisor to your application tree with its own configuration:
+In certain cases, you might want to run this supervision tree yourself. You can do this by disabling the default supervisor and adding PostHog.Supervisor to your application tree with its own configuration:
 
 ```elixir file=config.exs
 config :posthog, enable: false
@@ -124,6 +124,4 @@ PostHog.capture(AnotherPostHog, "user_signed_up", %{distinct_id: "user123"})
 
 ## Thanks
 
-The library is maintained by the PostHog team since February 2025.
-Thanks to [nkezhaya](https://github.com/nkezhaya) for contributing v0.1.0.
-Thanks to [alexmartsinovich](https://github.com/alexmartsinovich) for contributing v2.0.0.
+The library is maintained by the PostHog team since February 2025. Thanks to [nkezhaya](https://github.com/nkezhaya) for contributing v0.1.0. Thanks to [alexmartsinovich](https://github.com/alexmartsinovich) for contributing v2.0.0.
