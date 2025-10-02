@@ -15,7 +15,7 @@ With an annual plan you'll:
 
 ## How it works
 
-* Our annual plans are credit-based, meaning you get a discount on pre-paid PostHog credit.  You can use this credit on any of our current and future products during the contract term (usually 12 months). Those are the [contract rules](/handbook/growth/sales/contract-rules#discounts) we follow to calculate discounts.
+* Our annual plans are credit-based, meaning you get a discount on pre-paid PostHog credit.  You can use this credit on any of our current and future products during the contract term (usually 12 months). These are the [contract rules](/handbook/growth/sales/contract-rules#discounts) we follow to calculate discounts.
 * We'll ask you to sign an order form which captures the credit amount, term, discount percentage and payment terms (Net 30 by default).  We use PandaDoc for e-signatures here.
 * The order form will also specify that you can buy additional credit at the same discount level in the first 6 months, meaning that you aren't penalised for underestimating your usage across the term.
 * You can then subscribe to any of our [monthly plans](/pricing) and track your credit usage on the [billing page](https://app.posthog.com/organization/billing)
