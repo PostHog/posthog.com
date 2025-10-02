@@ -13,6 +13,7 @@ Some potential customers either expect to pay for professional services to help 
 A good candidate for this probably has some combination of the following:
 
 - ARR in the $100k+ region, either today or in the next 12 months (actual spend, not credit)
+- Large-ish company with complex needs
 - Have explicitly asked about paid implementation services and training
 - The team adopting PostHog work in person at a single location
 - They are not set up with PostHog yet, ie. we would be helping them implement PostHog in their codebase
