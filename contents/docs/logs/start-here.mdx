@@ -10,7 +10,7 @@ import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to search through your logs!">
 
 <QuestLogItem 
-    title="Install OpenTelemetry logging"
+    title="Install and configure logging"
     subtitle="Required"
     icon="IconCode"
 >
@@ -18,19 +18,7 @@ import { IconCode, IconSearch, IconSettings } from '@posthog/icons'
 PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP). 
 You don't need any vendor specific SDKs – just use standard OpenTelemetry libraries.
 
-<CallToAction type="primary" to="/docs/logs/installation">
-  Install logging client
-</CallToAction>
-
-</QuestLogItem>
-
-<QuestLogItem 
-  title="Configure your logging client"
-  subtitle="Required"
-  icon="IconSettings"
->
-
-Once you have OpenTelemetry installed, you need to configure your client to send logs to PostHog:
+Install and or update your existing logging client configuration to send logs to PostHog:
 
 - Set the gRPC endpoint to `http://your-posthog-host:4317`
 - Include a JWT token with your team ID in the Authorization header
