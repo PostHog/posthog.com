@@ -12,7 +12,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 
 const TeamsPage = () => {
     const [searchTerm, setSearchTerm] = useState('')
-    const [, setSelectedIndex] = useState(0)
+    const [selectedIndex, setSelectedIndex] = useState(0)
     const { isModerator } = useUser()
 
     const { allTeams } = useStaticQuery(graphql`
@@ -364,4 +364,3 @@ const TeamsPage = () => {
 }
 
 export default TeamsPage
-
