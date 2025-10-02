@@ -12,47 +12,34 @@ Data Team's mission is to provide a storage and query engine that meets these re
 
 In service of this mission, our goals are:
 
-**Goals for Q3 2025:**
+**Goals for Q4 2025:**
 
 ## Clickhouse Tooling
 
-- **Migration (P1)**
+- **Migration (P0)** - _Paweł Szczur_
 
-- **Chargeback (P0)** - _Paweł Szczur_
-    - Enable our customers to self service performance issues
-    - Surface resource consumption
-    - Usecase: Query analysis to avoid querying big ranges
+- **Chargeback (P1)** - _Paweł Szczur, Jovan Sakovic_
+    - Let product teams know about query tagging properly
+    - Reject queries that are not tagged
+    - Proactively notify teams of bad performance
+    - Report top ClickHouse cost per team
 
-- **SlopCop (query scheduling) (P0)** - _Ted Kaemming, Paweł Szczur_
-    - Rate limiting
-    - Queuing
-    - Debouncing
+- **SlopCop (query scheduling) (P1)** - _Jovan Sakovic, Paweł Szczur_
+    - Avoid retrying queries that are already running
+    - Query prioritization
 
-- **Inserter & ShuffleHog (P0)** - _James Greenhill_
+- **Clickhouse MCP for internal users (P2)** - _James Greenhill_
 
-- **Mutator (P0)** - _Daniel Escribano, Ted Kaemming_
-    - Dagster + table + interface
-    - Mutation monitoring
-    - Ensure Deletes Run
+- **ClickHouse Handbook(s) (P1)** - _Jovan Sakovic_
+    - Collab on HQL Handbook
+
 
 ## Clickhouse Ops
 
-- **Make ClickHouse ops easy** - _Daniel Escribano, James Greenhill_
-    - Complete cluster management through IaC
-    - EU coordinators
-    - Bringing up and down nodes should require no thought
-    - Runbook - more ideally automation
-    - Tooling? 
-    - Much faster critical procedures (rely on ZK configuration more)
-    - ClickHouseKeeping through Dagster
-        - Part moving
-        - Detached/unneeded parts cleaning
-        - Resizing parts?
-    - Disk management
-        - Automatic disk provisioning based on thresholds (and limits)
-    - Events TTL and actual data tiering
-        - Some tables in Iceberg (Antalya)
-        - Query_log
-        - Query_metrics_log
-        - Plan for events migration to Iceberg
-    - ClickHouse more on K8s
+- **US resharding to 16 shards (P0)** - _Daniel Escribano, James Greenhill_
+- **Backup restore procedure (P0)** - _Daniel Escribano_
+    - Automated backup restored procedure
+- **ClickHouse security (P1)** - _Daniel Escribano_
+    - More constrained privilege on the users' access to the cluster
+    - Cluster locked down
+    - Audit log of activity on clusters
