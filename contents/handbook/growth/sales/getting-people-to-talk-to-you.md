@@ -47,7 +47,7 @@ When you consider crafting an email, consider the following:
 
 1. Your initial outreach isn't about you, it is about them. We need to lead with customer centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. [Tim has some great thoughts on this subject](https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549)
 2. Avoid fluff in your emails. "I'm just reaching out to, I just wanted to, etc..." are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
-3. Lead with value within the first sentence. If it takes a paragraph to get there, you wont get responses.
+3. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
 4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?
 
 An example good email could look like:
