@@ -8,44 +8,63 @@ availability:
   enterprise: full
 ---
 
-export const WarehouseLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_14_05_39_2x_5a280bacfd.png"
-export const WarehouseDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_14_05_53_2x_32a95cbe79.png"
+SQL variables enable you to dynamically set values in your queries. 
 
-SQL variables enable you to create configurable, reusable queries by defining placeholders that can be dynamically replaced with different values.
+## Creating SQL variables
+
+To create a variable, go to the [SQL editor](https://us.posthog.com/sql), click the **Variables** tab, click **Add variable**, and choose your variable type (string, number, date, list, or boolean). Enter the variable name and value(s) and click **Save** and you'll be able to use it in your queries.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_10_02_at_17_04_16_2x_aac766c379.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_10_02_at_17_04_41_2x_aaefee30c4.png"
+  alt="Creating a variable"
+  classes="rounded"
+/>
 
 ## Using variables in SQL queries
 
-You must first create a variable in the variable sidebar panel. Once created, variables in PostHog SQL are defined using the `{variables.<variable-name>}` syntax. When you write a query with variables, you'll be prompted to provide values for each variable.
-
-
-For example, this query uses a variable to filter events by a specific date range:
+Once created, variables can be used with the `{variables.<variable-name>}` syntax like this:
 
 ```sql
-SELECT 
-    event,
-    count() as count
-FROM events
-WHERE timestamp >= {variables.startdate}
-    AND timestamp <= {variables.enddate}
-GROUP BY event
-ORDER BY count DESC
-LIMIT 10
+select * 
+from events 
+where event = {variables.event_names}
 ```
 
-When you run this query, you'll be prompted to provide values for `startdate` and `enddate`.
+You can set the value for the variable in the same **Variables** tab, on the insight, or on the dashboard once you've created and added an SQL insight to it.
 
 <ProductScreenshot
-  imageLight={WarehouseLight}
-  imageDark={WarehouseDark}
-  alt="SQL Editor variable example"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_02_at_17_12_45_2x_0e6a9a873a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_02_at_17_12_27_2x_b5f9fcff28.png"
+  alt="Using a variable in a SQL query"
+  classes="rounded"
 />
 
-## Variable types
+## Dashboard filter variables
 
-Variables can be used for various data types:
+Beyond the SQL variables you set up, there are also some variables that are automatically available to you when using SQL insights in a dashboard. You can access the dashboard's filters through the `filters` variable.
 
-- **String**: Text values like event names or property values
-- **Number**: Numeric values for thresholds or limits
-- **Date**: Timestamp values for time-based filtering
-- **List**: List of pre-defined values to select
-- **Boolean**: True/false values for conditional logic
+They include:
+
+- `filters.dateRange.from` - Start date of the dashboard date range
+- `filters.dateRange.to` - End date of the dashboard date range
+- `filters.properties` - Array of property filters applied at the dashboard level
+- `filters.breakdown_filter` - Breakdown configuration from dashboard filters
+- `filters.compare` - Comparison settings if enabled
+- `filters.interval` - Time interval setting from dashboard
+
+For example, to add the dashboard's date range to the query, you can use the `filters.dateRange.from` and `filters.dateRange.to` variables like this:
+
+```sql
+select * 
+from events 
+where event = {variables.event_names}
+and timestamp >= {filters.dateRange.from} and timestamp < {filters.dateRange.to}
+```
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_02_at_17_16_57_2x_161c9b6f38.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_02_at_17_17_11_2x_a670c7930a.png"
+  alt="Using dashboard filter variables in a SQL query"
+  classes="rounded"
+/>
