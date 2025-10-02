@@ -4,6 +4,19 @@ to-[rgb(var(--bg))]
 [&_ul]:mb-0
 [&_a]:text-white
 @xl:max-w-2xs
+@2xl:basis-3/12
+@2xl:basis-4/12
+@2xl:basis-5/12
+@2xl:basis-6/12
+@2xl:basis-7/12
+@2xl:basis-8/12
+@2xl:basis-9/12
+@2xl:ml-8
+@2xl:mr-8
+@2xl:pl-0
+@2xl:w-1/2
+@2xl:w-2/5
+@2xl:w-3/5
 [&_.bg-front]:fill-yellow
 [&_.bg-front]:fill-blue
 [&_.bg-front]:fill-salmon
@@ -326,6 +339,7 @@ md:w-48
 md:w-60
 min-w-[10rem]
 mt-16
+mx-8
 opacity-1
 opacity-100
 opacity-40
@@ -341,6 +355,7 @@ pr-32
 rotate-180
 rotate-45
 rotate-90
+rounded-l-md
 scale-50
 scale-55
 scale-60

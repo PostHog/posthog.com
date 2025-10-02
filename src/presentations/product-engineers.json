@@ -5,7 +5,8 @@
             "template": "stacked",
             "name": "Overview",
             "title": "Product Engineers debug and ship faster with PostHog",
-            "description": "<p>By integrating PostHog into {companyName}, you'll be able to:</p><ul><li>track and diagnose errors</li><li>roll out and test new features</li><li>gain a better understanding of users</li></ul><p>Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.</p>"
+            "description": "<p>By integrating PostHog into {companyName}, you'll be able to:</p><ul><li>track and diagnose errors</li><li>roll out and test new features</li><li>gain a better understanding of users</li></ul><p>Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.</p>",
+            "descriptionWidth": "@2xl:w-3/5"
         },
         "error_tracking": {
             "template": "product",

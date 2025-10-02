@@ -47,8 +47,11 @@ interface SlideConfig {
     name?: string
     title?: string
     description?: string
+    descriptionWidth?: string
     handle?: string
     screenshot?: string
+    screenshotClasses?: string
+    contentWidth?: string
     image?: string
     imageDark?: string
     imageAlt?: string
@@ -205,6 +208,7 @@ const CustomPresentationPage = () => {
                     <StackedTemplate
                         title={props.title || ''}
                         description={props.description}
+                        descriptionWidth={props.descriptionWidth}
                         image={props.image}
                         imageDark={props.imageDark}
                         imageAlt={props.imageAlt}
@@ -243,10 +247,14 @@ const CustomPresentationPage = () => {
                     <ProductTemplate
                         handle={props.handle || ''}
                         screenshot={props.screenshot}
+                        screenshotClasses={props.screenshotClasses}
                         title={props.title || ''}
                         description={props.description}
+                        contentWidth={props.contentWidth}
                         bgColor={props.bgColor}
                         textColor={props.textColor}
+                        companyLogo={props.companyLogo}
+                        companyName={props.companyName}
                     />
                 )
 

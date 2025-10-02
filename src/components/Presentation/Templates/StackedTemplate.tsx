@@ -21,9 +21,11 @@ interface SalesRep {
 interface StackedTemplateProps {
     title: string
     description?: string
+    descriptionWidth?: string
     image?: string
     imageDark?: string
     imageAlt?: string
+    imageClasses?: string
     children?: React.ReactNode
     bgColor?: string
     textColor?: string
@@ -36,6 +38,7 @@ interface StackedTemplateProps {
 export default function StackedTemplate({
     title,
     description,
+    descriptionWidth,
     image,
     imageDark,
     imageAlt,
@@ -53,11 +56,7 @@ export default function StackedTemplate({
                 <div className="relative flex-1 w-full px-4">
                     {imageDark ? (
                         <>
-                            <img
-                                src={image}
-                                alt={imageAlt || ''}
-                                className="hidden dark:hidden block max-w-full h-auto mx-auto"
-                            />
+                            <img src={image} alt={imageAlt || ''} className="dark:hidden max-w-full h-auto mx-auto" />
                             <img
                                 src={imageDark}
                                 alt={imageAlt || ''}
@@ -111,7 +110,7 @@ export default function StackedTemplate({
                         {description && (
                             <ParseHtml
                                 content={description.replace('{companyName}', companyName || '')}
-                                className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : '@2xl:max-w-2xl'}`}
+                                className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : descriptionWidth}`}
                             />
                         )}
                     </>

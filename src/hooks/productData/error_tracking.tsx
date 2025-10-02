@@ -33,6 +33,13 @@ export const errorTracking = {
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
+        impact: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_impact_light_2c8fd5ef48.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_impact_dark_586d389b43.png',
+            alt: 'Error impact',
+            // classes: 'justify-end items-end pl-4 @lg:pl-6',
+            // imgClasses: 'rounded-tl-md shadow-2xl',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
