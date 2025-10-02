@@ -96,6 +96,19 @@ If you track multiple domains or websites, you might need to set up [cross-domai
 
 If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/docs/libraries/js/config).
 
+## How do I set up attribution tracking across multiple websites?
+
+If you're running campaigns or tracking users across different domains (for example, a marketing website at `example.com` and an app at `app.example.com` or even a completely different domain), you'll need to ensure proper attribution setup.
+
+### Cross-domain tracking for attribution
+
+PostHog automatically handles cross-subdomain tracking when using first-party cookies. For tracking across different domains, you need to pass the user's `distinct_id` and `session_id` between domains. See our [cross-domain tracking tutorial](/tutorials/cross-domain-tracking) for detailed implementation steps.
+
+This ensures that:
+- Campaign attribution is preserved across domain transitions
+- Session replays continue across domains
+- User journeys are tracked accurately from first touch to conversion
+
 ## Why does PostHog impact my PageSpeed score?
 
 The simple answer: PostHog, like any other web analytics tool, consumes resources (CPU) and execution time to load the resources that make it work. This isn't without cost, but PageSpeed Insights makes this cost seem larger than it actually is. 
