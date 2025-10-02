@@ -84,6 +84,13 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 
 If you track multiple domains or websites, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
 
+For tracking users across different websites (for example, a marketing site at `marketing.com` and an app at `app.com`), PostHog automatically handles cross-subdomain tracking when using first-party cookies. For tracking across completely different domains, you need to pass the user's `distinct_id` and `session_id` between domains. See our [cross-domain tracking tutorial](/tutorials/cross-domain-tracking) for detailed implementation steps.
+
+This ensures that:
+- Campaign attribution is preserved across domain transitions
+- User journeys are tracked accurately from first touch to conversion
+- Analytics data from both sites is associated with the same user profile
+
 ### Session timeout
 
 1. A user visits a site (for example, `google.com`) that links to yours.
@@ -95,17 +102,6 @@ If you track multiple domains or websites, you might need to set up [cross-domai
 4. User comes back to their computer, goes to the already-open browser tab with your site, and clicks an internal link. A new session starts and the referrer is your own site.
 
 If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/docs/libraries/js/config).
-
-## How do I set up attribution tracking across multiple websites?
-
-If you're running campaigns or tracking users across different websites (for example, a marketing site at `marketing.com` and an app at `app.com`), you'll need to ensure proper attribution setup beyond the cross-domain tracking mentioned above.
-
-PostHog automatically handles cross-subdomain tracking when using first-party cookies. For tracking across different domains, you need to pass the user's `distinct_id` and `session_id` between domains. See our [cross-domain tracking tutorial](/tutorials/cross-domain-tracking) for detailed implementation steps.
-
-This ensures that:
-- Campaign attribution is preserved across domain transitions
-- User journeys are tracked accurately from first touch to conversion
-- Analytics data from both sites is associated with the same user profile
 
 ## Why does PostHog impact my PageSpeed score?
 
