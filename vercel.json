@@ -1468,10 +1468,6 @@
             "destination": "/?utm_source=billboard&utm_campaign=may25-triples"
         },
         {
-            "source": "/teams/marketing",
-            "destination": "/teams/content"
-        },
-        {
             "source": "/teams/video",
             "destination": "/teams/content"
         },

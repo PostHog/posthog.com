@@ -277,4 +277,20 @@ We recommend you set your Google Calendar access permissions to 'Make available 
 
 ### Calendly
 
-We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account. 
+We use Calendly for scheduling external meetings, such as demos or product feedback calls. If you need an account, ask Charles to invite you to the PostHog team account.
+
+## Communication Methods
+
+PostHog employees are frequent targets of scams and phishing. Expect all communication to occur over Slack. Phone calls, SMS, and WhatsApp are **never** used for initiating requests, approvals, or asking for sensitive info. With few exceptions, email is never used for this either.
+
+If someone contacts you outside of Slack, treat it as **untrusted until verified**. Message them on Slack to confirm, and only continue the conversation over Slack. Other communication methods are susceptible to phishing, but our Slack instance is locked down and generally well protected from phishing and impersonation.
+
+### Best practices
+
+James, Tim, and other execs will never ask for wire transfers, gift cards, MFA codes, or access changes over email/SMS/WhatsApp/phone. Treat such requests as phishing and report them to `#project-security`.
+
+By email: Only trust `@posthog.com` senders. Verify via the company directory. Be cautious of look-alike domains (e.g., `posthog.co` vs `posthog.com`), unexpected attachments, and “urgent” requests.
+
+Phone/SMS/WhatsApp: **Never** used for initiating requests, approvals, or asking for sensitive info.
+
+If something feels off, it probably is. When in doubt, slow down and verify in Slack.

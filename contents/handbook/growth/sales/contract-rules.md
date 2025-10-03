@@ -13,9 +13,9 @@ We get it, nobody likes rules. As we scale the Sales and CS teams we need to be 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We can be super transparent about the levers we have in discounting PostHog:
 
 1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
-2. **Annual plan:** We offer a 20% discount on an annual paid-up-front plan, because it's beneficial to PostHog to have a customer committed for a year.
-3. **Higher spend:** We offer an additional 5% and then 15% on top of the annual plans when the customer spends above $60k and $100k respectively.
-4. **Multi-year:** We offer an additional 5% for each additional year of commitment, as longer commitments are beneficial to PostHog (see table below). Credits rollover in-between for multi-year contracts.
+2. **Prepaid credit:** We offer a 20% discount on a paid-up-front plan of >$20k, because it's beneficial to PostHog to have a customer committed.
+3. **Higher spend:** We offer an additional 5% and then 15% on top of the prepaid credit plans when the customer spends above $60k and $100k respectively.
+4. **Multi-year:** We offer an additional 5% for each additional committed credit renewal under a prepaid contract, as longer commitments are beneficial to PostHog (see table below). Credits rollover in-between for multi-year contracts.
 5. **Up-front payment:** We offer an additional 3% where a _multi-year_ contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
@@ -106,7 +106,7 @@ Requirements for self-serve discounts:
 -   3 or more paid invoices
 -   Average of $280 or more across the last three invoices
 -   No open invoices
--   Not currently on the startup plan, a legacy plan, or having existing credits
+-   Not currently on the up plan, a legacy plan, or having existing credits
 
 Additional notes on self-serve discounts:
 
@@ -116,9 +116,9 @@ Additional notes on self-serve discounts:
 
 ### Non-profit discounts
 
-We do offer additional discounts to non-profits and start non-profit discounts at 15% regardless of spend.
+We do offer additional discounts to non-profits and  non-profit discounts at 15% regardless of spend.
 
-If signing for an annual plan with a credit purchase between $25k and $80k, an additional 5% non-profit discount is applied. For example, purchasing $25k in credits with an additional 5% non-profit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
+If signing for a prepaid credit plan with a credit purchase between $25k and $80k, an additional 5% non-profit discount is applied. For example, purchasing $25k in credits with an additional 5% non-profit discount would result in a 25% discount. At a credit purchase of $80k or more, the standard discounts (outlined in the table above) take effect.
 
 We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
@@ -126,7 +126,7 @@ When evaluating a discount, it’s important to <PrivateLink url="https://docs.g
 
 To set up the non-profit discount in Stripe, [follow these instructions](/handbook/growth/sales/billing#coupons-and-discounts).
 
-> Non-profit discounts only stack with annual discounts at a rate of 5%, and only if the credit purchase amount is less than $80,000.
+> Non-profit discounts only stack with prepaid discounts at a rate of 5%, and only if the credit purchase amount is less than $80,000.
 
 ### Legacy discounts
 
@@ -134,11 +134,21 @@ You might see some customers with a 30% discount on their monthly Stripe subscri
 
 ### Startup plan discounts
 
-For customers on our [startup plan](/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. When applied, the offer covers the first two full months of usage on their new annual plan. Our standard discounting rules are applied based on the number of credits the customer is actually paying for. 
+For customers on our [startup plan](/startups), we offer two months free credit when signing a prepaid deal. This encourages startups to use their credits to understand usage, and then commit to a longer term plan with PostHog. This offer is available until the first billing date after the credits expire. If a customer has used up their credits before the expiration date, they still have until the original expiration date to decide and claim the offer. The amount of free credits is determined by how much they purchase on a prepaid plan. By default, we work with customers on prepaid plans that will cover their usage for the next 12 months. 
+
+You should follow the same [inbound sales process](https://posthog.com/handbook/growth/sales/new-sales) and work with the customer on understanding and optimizing their usage. Then follow these additional steps take to present the prepaid plan + free credits option(s):
+1. Review the customer's average monthly cost
+2. Estimate the prepaid equivalent for 12 months of coverage (e.g. [monthly cost x 12])
+3. Inform them they can take advantage of this offer, which gives them the option to purchase [monthly cost x 10] and still have 12-months of coverage.
+4. Check whether buying [monthly cost x 10] gives them a lower [discount rate](https://posthog.com/handbook/growth/sales/contract-rules#discounts) 
+5. If so, you should ALSO present the option to buy [monthly cost x12], and they'll receive [monthly cost x14] AND take advantage of the higher discount.
+6. If the customer wants to purchase fewer credits than either option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
+
+All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional, one-time credit (offered to customers in exchange for rolling off the Startup plan) in the amount of USD XXXXX will be applied upon contract start date with the same expiration date."
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for the term of the annual plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
+As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
 
 ## Multi-year credit allocation
 
@@ -161,7 +171,7 @@ You can see a signed multi-year contract set up in this way by navigating to Doc
 Customers only get an uptime SLA if:
 
 1. They have subscribed to the Enterprise add-on; or
-2. You agree it with them as a special term as part of their annual contract if they are spending $100k+
+2. You agree it with them as a special term as part of their contract if they are spending $100k+ ARR post discount
 
 An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study).
 
@@ -190,7 +200,7 @@ Some rules:
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
 
-> Normal commission rules apply here - commission is paid in the quarter in which the customer pay their annual invoice.
+> Normal commission rules apply here - commission is paid in the quarter in which the customer pays their invoice.
 
 ## New business renewal credits
 
@@ -203,7 +213,7 @@ In order for this to not mess up later renewals, the way we do this is by giving
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
-## Credit over/under usage for annual contracts
+## Credit over/under usage for contracts
 
 ### When they don't have enough credit to cover their term
 
@@ -215,7 +225,7 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
-For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the annual spend.
+For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the spend.
 
 > In scenario one above, if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract. We won't issue a refund for the difference in spend when the expansion order form discount tier is greater than the discount tier of the original order form.
 

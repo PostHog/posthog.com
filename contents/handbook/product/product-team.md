@@ -48,7 +48,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 **Teams with no PM currently**
 
-- [Customer Analytics](/teams/crm)
+- [Customer Analytics](/teams/customer-analytics)
 - [LLM Analytics](/teams/llm-analytics)
 - [Revenue Analytics](/teams/revenue-analytics)
 
@@ -68,5 +68,3 @@ In Q3 2025, those are:
 
 **Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
 * We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
-
-
