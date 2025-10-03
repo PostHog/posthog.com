@@ -47,7 +47,7 @@ Please be aware that PostHog cannot always provide context around why people are
 
 ## The offboarding process
 
-# For Team leads
+## For Team leads
 
 If a team lead has resigned, the blitzscale team should figure out who will take on the team lead responsibilities and have that prepared to let the team knows just before the resignation is announced or as part of the announcement. 
 
