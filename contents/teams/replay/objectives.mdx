@@ -1,52 +1,58 @@
-See more detail in our MegaIssue https://github.com/PostHog/posthog/issues/34760
+See more detail in our MegaIssue https://github.com/PostHog/posthog/issues/39011
 
-## 🚀 Goal 1: Get Tue rocketing
+## 🚀 Goal 1: Get Kim and Hayne rocketing
 
-It's great to have Tue on the team, let's make the time and priority to make it a success
+It's great to have new folk on the team, let's make the time and priority to make it a success
 
-## 🚀 Goal 2: Keeping momentum on the things that are working
+## 👀 Goal 2: See the value of each recording - deep integrations into other tools @TueHaulund with @veryayskiy
 
-Just because it's a new quarter doesn't mean existing work disappears
+* Build on the manual crip and intercom integrations to make it easy to add replay into every support tool
+* Easy link to share clips to github/linear/jira etc
+* Easy links from salesforce
+* Easy links to AI/vibe-coding platforms
+* A zendesk app to have two way links
+* more ...?
 
-Over recent months we've primarily talked to people for specific reasons mostly session summarization
-Let's talk to some happy users.
+### Why?
 
-We want to get feedback on recent changes (@veryayskiy) and find out why people are happy and what keeps them happy (all)
+Replay is a great debugging and support tool, let's help folk discover that
 
-And we'll drive through on (at least):
+## ⌚ Goal 3: See the value of each recording - nail watching in context @veryayskiy
 
-* Commenting on recordings 
-* Weekly digest (which has great retention)
-* Cinema mode
-* filtering changes
+For example....
 
-## Goal 3: Make support take less time
+It’s hard to get from a funnel to the recordings for the funnel. It should be easy to watch them, summarise them, track them
 
-We've fixed all the easy bugs (honest) and now what's left are support tickets that can each take multiple days of complicated work... that's no good, let's make it easier or remove it all together. This will mean incremental rollout of recorder changes, resolving performance issues, easier rrweb debugging, and more
+imagine being able to ask Max: "hey max, 12% of people drop off this funnel at step 2 - summarize those sessions and tell me why"
 
-This will affect us all as we do support rotations, but @pauldambra will lead on this
+And not just funnels but everywhere
 
-## Goal 4: Act on results of the churn survey (@veryskyiy)
+* If a recording doesn’t exist, upsell adding it - make it easy to know why i can’t watch, and make it easy to watch the ones i do have
+* get from where you are (flag, funnel, insight, etc) to the point in time in the recording
+* split the list of recordings out of the actors modal
+* view recording button should be session aware
 
-[The churn survey is giving great insight](https://github.com/PostHog/product-internal/pull/802 )... let's react to that. For sure, it's telling us that often the solution is already there and easy _and_ folk aren't able to find it. We can improve the settings presentation, and the onboarding flow. If nothing else.
+### Why?
 
-# Then there are things that folk are consistently asking for 
+Folk should be able to watch the recordings they need to where they are, without needing to figure out how to find them in replay
 
-## Goal 5: Recording retention (tue with paul)
+## 💰 Goal 4: Refresh price comparisons @fivestarspicy supported by us all
 
-Mostly folk want longer retention, sometimes (around GDPR) they want shorter retention. This is a great up-sell opportunity and a great way to delight customers. We'll need to reorganise how we manage files in blob storage, keep a handle on storage costs, and improve the UI and querying.
+Are we still competitive? Do recent infrastructure improvements change things?
 
-## Goal 6: Recording deletion (@verayskiy)
+## 🏎️ Goal 5: Replay the rocket @pauldambra with @TueHaulund
 
-We infrequently get requests for deleting recordings in batches. There's no good sulution here and it's always a bad time for folks. We can support batch recording and make these support journeys awesome.
-    
-## Goal 7: Conditional recording 3000 (@pauldambra)
+We hear (some) people tell us replay is slow... let's fix that
 
-We've got customer sponsors here who want to do more complex triggering than we support, let's make this spark joy. Support e.g. different sample rates for different SDKs. Or multiple different groups of triggers.
+* Snappy in the browser so we don’t need to decompress in the API
+* Don’t load the whole 2hour recording to play it
+* Performance in the browser generally for playback
+* Performance impact when recording
+* Listing speed should be blazing fast
+* Precache the recording homepage data when you login or start a session?
 
-The groundwork is in the SDK - now we act on it.
+### Why?
 
-## Goal 8: Working with customers who are building on top of us (@veryayskiy)
+Replay is awesome, waiting for things is not
 
-More and more people are building on top of us. We've not designed for that, and don't understand their needs. We want to understand this (_but not only that_) we want to improve this experience. It's currently a drain on infra and on those customers time. This might be batch export out to S3, but we're concerned folk don't want to pay for this...
 
