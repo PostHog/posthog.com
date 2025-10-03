@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Outside of our [generous pay and equity](/handbook/people/compensation), we also offer several other exceptional benefits to our team. We want to provide exceptional benefits when it comes to things that help you do your job better, and in line with market for everything else.
+Outside of our [generous pay and equity](/handbook/people/compensation), we also offer several other exceptional benefits to our team. We want to provide exceptional benefits when it comes to things that help you do your job better, and in line with the market for well-funded startups for everything else.
 
 If you have any ideas for how we can improve our benefits offering, then please let us know!
 
