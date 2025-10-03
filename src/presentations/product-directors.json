@@ -4,64 +4,82 @@
         "overview": {
             "template": "stacked",
             "name": "Overview",
-            "title": "PostHog enables {companyName} to build world-class products.",
-            "description": "Empower your product team with comprehensive analytics, experimentation, and user feedback tools. Drive strategy with data, not opinions.",
-            "image": "/images/products/product-analytics/screenshot-dashboard.png"
-        },
-        "platform_overview": {
-            "template": "columns",
-            "name": "Platform Overview",
-            "title": "Complete product intelligence platform",
-            "description": "Everything your product team needs in one place. Analytics, experimentation, feature management, and user feedback - integrated and ready to scale.",
-            "image": "/images/products/product-analytics/screenshot-toolbar.png"
+            "title": "Get your team data faster from a single-source of truth.",
+            "description": "<p>PostHog can provide {companyName} with actionable insights that don't require your data team. Get your engineers and product managers working together in a single platform with all the data you need to make informed product decisions.</p><p>Navigate from broad data to individual user interactions to see how users interact with your app. Focus on revenue, current product usage or new product development from the same suite of tools.</p>",
+            "descriptionWidth": "@2xl:w-1/2"
         },
         "product_analytics": {
             "template": "product",
+            "name": "Product Analytics",
             "handle": "product_analytics",
             "screenshot": "overview",
-            "title": "Executive-level insights",
-            "description": "Track OKRs, monitor product health, and understand user behavior at scale. Real-time dashboards keep leadership aligned on metrics that matter."
+            "title": "Create trends, funnels and other insights without asking your engineers to instrument events",
+            "description": "<p>PostHog automatically tracks pageviews, clicks, rage clicks, and more, then makes it easy to visualize these with insights Product Managers will be familiar with.</p>"
         },
-        "experiments": {
-            "template": "product",
-            "handle": "experiments",
-            "screenshot": "overview",
-            "title": "Culture of experimentation",
-            "description": "Enable your teams to test hypotheses quickly. Run multiple experiments simultaneously. Make decisions based on statistical significance, not gut feel."
-        },
-        "data_warehouse": {
-            "template": "product",
-            "handle": "data_warehouse",
-            "screenshot": "overview",
-            "title": "Unified data strategy",
-            "description": "Connect all your data sources. Query product, marketing, and business metrics together. Build a single source of truth for product decisions."
-        },
-        "team_enablement": {
+        "all_in_one": {
             "template": "columns",
-            "name": "Team Enablement",
-            "title": "Accelerate product velocity",
-            "description": "Self-serve analytics means PMs get answers instantly. Engineers ship with confidence using feature flags. Everyone works from the same data.",
-            "image": "/images/products/product-analytics/screenshot-notebooks.png"
+            "name": "All-in-one",
+            "title": "PostHog apps have great synergy",
+            "description": "Identify a trend, see what happened, assign issues – all in one place.",
+            "content": [
+                {
+                    "handle": "product_analytics",
+                    "title": "Product Analytics",
+                    "description": "<p>Easily uncover user friction by following the drop-offs in a funnel.</p>",
+                    "screenshot": "funnelVertical"
+                },
+
+                {
+                    "handle": "session_replay",
+                    "title": "Session Replay",
+                    "description": "<p>Watch session recordings to understand friction in the user experience.</p>",
+                    "screenshot": "home"
+                },
+                {
+                    "handle": "error_tracking",
+                    "title": "Error Tracking",
+                    "description": "<p>Assign issues to engineers to get user problems solved quickly.</p>",
+                    "screenshot": "errorsCropped"
+                }
+            ]
         },
-        "roi": {
-            "template": "columns",
-            "name": "ROI",
-            "title": "Clear ROI and cost control",
-            "description": "Replace 5+ tools with one platform. Usage-based pricing scales with your growth. Reduce tool overhead and increase team efficiency.",
+        "surveys": {
+            "template": "product",
+            "name": "Surveys",
+            "handle": "surveys",
+            "screenshot": "home",
+            "title": "Track key metrics like NPS & CSAT",
+            "description": "<p>Trigger in-app surveys to measure the trends over time, collect user feedback, and get AI summaries of the results.</p>"
+        },
+        "revenue_analytics": {
+            "template": "product",
+            "name": "Revenue Analytics",
+            "handle": "revenue_analytics",
+            "screenshot": "overview",
+            "title": "Correlate revenue data with product metrics",
+            "description": "<p>Get a deeper understanding of what drives revenue growth in your product. It’s only a few clicks to integrate most data sources and then you’ll be able to enrich your user data with additional metrics without a data team.</p>"
+        },
+        "max_ai": {
+            "template": "product",
+            "name": "Max AI",
+            "handle": "max_ai",
+            "screenshot": "sidebarInitialCropped",
+            "screenshotClasses": "max-w-[724px] rounded-md shadow-2xl overflow-hidden [&_img]:w-[724px] [&_img]:max-w-[724px]",
+            "title": "Ask questions about your product usage",
+            "description": "<p>We create the insights for you, all you need to do is ask Max AI questions about your product.</p>"
+        },
+        "pricing": {
+            "template": "pricing",
+            "name": "Pricing",
+            "title": "Pricing",
+            "description": "PostHog offers usage-based pricing. This means you only pay for what you use, and you can set billing limits so you never get an unexpected bill.",
             "image": "/images/products/product-analytics/screenshot-billing.png"
         },
-        "security": {
-            "template": "columns",
-            "name": "Security",
-            "title": "Enterprise-ready",
-            "description": "SOC 2 Type II certified. GDPR compliant. Deploy on your infrastructure or use our cloud. Your data stays secure and private.",
-            "image": "/images/products/product-analytics/screenshot-privacy.png"
-        },
         "cta": {
-            "template": "stacked",
-            "name": "Let's Talk",
-            "title": "Let's discuss your product strategy",
-            "description": "See how PostHog can transform your product organization. Book an executive briefing."
+            "template": "booking",
+            "name": "Get a demo",
+            "title": "Get a demo",
+            "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"
         }
     }
 }
