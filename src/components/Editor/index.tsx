@@ -242,7 +242,7 @@ export function Editor({
     const { addWindow, focusedWindow, websiteMode } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
-    const [maxWidth, setMaxWidth] = useState(websiteMode ? 1200 : initialMaxWidth ?? 768)
+    const [maxWidth, setMaxWidth] = useState(initialMaxWidth ?? 768)
     const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
 
     const toggleSearch = () => {
@@ -656,8 +656,9 @@ export function Editor({
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
                                     data-scheme="primary"
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all`}
+                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
+                                        fullWidthContent ? 'max-w-full' : websiteMode ? 'max-w-5xl' : 'max-w-3xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
@@ -674,10 +675,11 @@ export function Editor({
                             <ScrollArea>
                                 <article
                                     ref={articleRef ?? undefined}
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
                                     className={`${getProseClasses(
                                         proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all`}
+                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all ${
+                                        fullWidthContent ? 'max-w-full' : websiteMode ? 'max-w-5xl' : 'max-w-3xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
