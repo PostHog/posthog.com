@@ -1,0 +1,268 @@
+---
+title: Custom presentations
+---
+
+Custom presentations are PostHog's version of landing pages.
+
+They're designed to look like product slideshows, but can be more easily customized to include slides with custom content that span multiple products.
+
+They can be used to tailor content for:
+
+-   a particular persona
+-   the needs of a specific company
+-   an individual
+
+> This is an MVP and ultimately needs to be refactored a bit. Check with <TeamMember name="Cory Watilo" /> if you'd like to use this feature.
+
+The example below shows a presentation that is personalized for a particular company and includes the person within PostHog assigned to that account.
+
+![Custom presentation example](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_10_03_T15_26_37_168_Z_017d35c9ab.png)
+
+## Features
+
+-   Sources slide structure and content from a json file (one per primary persona)
+-   Custom presentations can source content from default slides but also override content to personalize it further
+-   Can enrich with a target company using Clearbit
+    -   Supports some variables like `{companyName}` and `{companyLogo}` that can be used within slides
+-   Connects with Salesforce to personalize the presentation with the assigned rep
+-   Embeds a Default.com scheduling form
+-   And yes, they're fully responsive, and if an uploaded screenshot has a dark mode equivalent, it will be used in dark mode
+
+## How it works
+
+Presentations are accessed via the URL pattern:
+
+```
+/for/{company-domain}/{role-or-id}
+```
+
+**Example:**
+
+```
+/for/example.com/engineering-managers
+/for/example.com/123456 ## see "Overiding default content" below
+```
+
+The system will:
+
+1. Look up company data from Clearbit (using the company's URL)
+2. Load the appropriate presentation JSON
+3. Render slides with company-specific data
+4. Display sales rep information if available
+
+```
+src/
+├── components/Presentation/
+│   ├── Templates/          # Slide templates
+│   │   ├── StackedTemplate.tsx
+│   │   ├── ColumnsTemplate.tsx
+│   │   ├── ProductTemplate.tsx
+│   │   ├── PricingTemplate.tsx
+│   │   └── BookingTemplate.tsx
+│   └── Utilities/          # Shared utilities
+└── presentations/          # JSON configuration files
+    ├── default.json
+    ├── product-managers.json
+    ├── product-engineers.json
+    ├── product-directors.json
+    ├── engineering-managers.json
+    └── dream-customers/
+        └── example.com.json
+```
+
+### Presentation structure
+
+Here's a general structure for a presentation using the various templates. You can add multiple product slides by adding additional entries. See a full example on GitHub in [product-engineers.json](https://github.com/PostHog/posthog.com/blob/master/src/presentations/product-engineers.json).
+
+```
+{
+    "name": "Product Engineers",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "Title goes here",
+            "description": "<p>You can add the {companyName} and it will get inserted when enriched with Clearbit.</p>",
+            "descriptionWidth": "@2xl:w-3/5"
+        },
+        "error_tracking": {
+            "template": "product",
+            "name": "Error Tracking",
+            "handle": "error_tracking",
+            "screenshot": "home",
+            "title": "Title goes here",
+            "description": "<p>Description</p>"
+        },
+        "all_in_one": {
+            "template": "columns",
+            "name": "All-in-one",
+            "title": "Multiple products on one slide",
+            "description": "Supports multiple columns of content",
+            "content": [
+                {
+                    "handle": "product_analytics",
+                    "title": "Product Analytics",
+                    "description": "<p>Description goes here.</p>",
+                    "screenshot": "funnelVertical"
+                },
+                {
+                    "handle": "session_replay",
+                    "title": "Session Replay",
+                    "description": "<p>Description goes here.</p>",
+                    "screenshot": "home"
+                },
+                {
+                    "handle": "error_tracking",
+                    "title": "Error Tracking",
+                    "description": "<p>Description goes here.</p>",
+                    "screenshot": "errorsCropped"
+                }
+            ]
+        },
+        "pricing": {
+            "template": "pricing",
+            "name": "Pricing",
+            "title": "Pricing",
+            "description": "PostHog offers usage-based pricing. This means you only pay for what you use, and you can set billing limits so you never get an unexpected bill.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "cta": {
+            "template": "booking",
+            "name": "Get a demo",
+            "title": "Get a demo",
+            "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"
+        }
+    }
+}
+
+```
+
+## Templates
+
+Different templates support different features.
+
+### `stacked`
+
+Content is stacked top to bottom and optionally supports an `image` which replaces the default Hogzilla background image.
+
+![Stacked slide template](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_10_03_T16_20_20_450_Z_54aef6de44.png)
+
+The above example does not use the `image` prop, thus Hogzilla is included.
+
+```
+"overview": {
+    "template": "stacked",
+    "name": "Overview",
+    "title": "Title goes here",
+    "description": "<p>You can add the {companyName} and it will get inserted when enriched with Clearbit.</p>",
+    "descriptionWidth": "@2xl:w-3/5"
+},
+```
+
+### `product`
+
+This imports the [`useProduct.ts`](https://github.com/PostHog/posthog.com/blob/master/src/hooks/useProduct.ts) hook to fetch product data based on the `handle` passed in. It allows it to access things like the product name, icon, color, and array of screenshots.
+
+![Product template screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_10_03_T16_01_25_534_Z_3385ee0466.png)
+
+In the above example, it uses the "[`home`](https://github.com/PostHog/posthog.com/blob/6b6eae68e9d5b8665b082d7809edfe645db4215f/src/hooks/productData/llm_analytics.tsx#L64)" screenshot from the `llm_analytics` product:
+
+```
+"llm_analytics": {
+    "template": "product",
+    "name": "LLM Analytics",
+    "handle": "llm_analytics",
+    "screenshot": "home",
+    "title": "LLM Analytics",
+    "description": "Understand how your users consume AI in your product, and monitor performance and cost when using different models."
+},
+```
+
+### `columns`
+
+This is a multi-column layout that supports multiple products or features side-by-side.
+
+> There is currently no logic to wrap items, so it works best for 2-4 columns for now.
+
+![Columns template example](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_10_03_T16_03_24_005_Z_6eaa5fb09d.png)
+
+```
+"all_in_one": {
+    "template": "columns",
+    "name": "All-in-one",
+    "title": "PostHog apps have great synergy",
+    "description": "Identify a trend, see what happened, assign issues – all in one place.",
+    "content": [
+        {
+            "handle": "product_analytics",
+            "title": "Product Analytics",
+            "description": "<p>Easily uncover user friction by following the drop-offs in a funnel.</p>",
+            "screenshot": "funnelVertical"
+        },
+
+        {
+            "handle": "session_replay",
+            "title": "Session Replay",
+            "description": "<p>Watch session recordings to understand friction in the user experience.</p>",
+            "screenshot": "home"
+        },
+        {
+            "handle": "error_tracking",
+            "title": "Error Tracking",
+            "description": "<p>Assign issues to engineers to get user problems solved quickly.</p>",
+            "screenshot": "errorsCropped"
+        }
+    ]
+},
+```
+
+### `pricing`
+
+![Pricing slide screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_10_03_T16_04_59_422_Z_cfa6cf9ea7.png)
+
+```
+"pricing": {
+    "template": "pricing",
+    "name": "Pricing",
+    "title": "Pricing",
+},
+```
+
+### `booking`
+
+![Booking slide screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2025_10_03_T16_05_39_271_Z_1d826814f8.png)
+
+```
+"cta": {
+    "template": "booking",
+    "name": "Get a demo",
+    "title": "Get a demo",
+    "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"
+}
+```
+
+## Overriding default content
+
+You can create an entirely personalized presentation, use the `dream-customers` folder. Set the json filename to the company's domain name and inside the file, set an arbitrary ID that will be used in the URL, like:
+
+```
+/for/hasura.io/123456
+```
+
+Reference content from any persona file with `inherit`, or override the content by adding your own.
+
+```
+  "overview": {
+      "template": "stacked",
+      "title": "Hey John!",
+      "description": "We've prepared this custom presentation specifically for the Hasura team to show how PostHog can accelerate your product development."
+  },
+  "error_tracking": {
+      "inherit": "product-engineers",
+      "slideKey": "error_tracking"
+  },
+  "feature_management": {
+      "inherit": "engineering-managers",
+      "slideKey": "feature_flags"
+  },
+```
