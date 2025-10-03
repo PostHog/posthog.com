@@ -118,6 +118,7 @@ interface AppContextType {
     setConfetti: (isActive: boolean) => void
     confetti: boolean
     posthogInstance?: string
+    websiteMode: boolean
 }
 
 interface AppProviderProps {
@@ -223,26 +224,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
-    handleSnapToSide: () => { },
+    openSearch: () => {},
+    handleSnapToSide: () => {},
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => { },
+    expandWindow: () => {},
     openSignIn: () => null,
-    openRegister: () => { },
-    openForgotPassword: () => { },
+    openRegister: () => {},
+    openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -254,25 +255,26 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => { },
-    openNewChat: () => { },
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => { },
+    setIsNotificationsPanelOpen: () => {},
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => { },
+    setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => { },
-    animateClosingAllWindows: () => { },
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => { },
-    setClosingAllWindowsAnimation: () => { },
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => { },
-    setConfetti: () => { },
+    setScreensaverPreviewActive: () => {},
+    setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
+    websiteMode: false,
 })
 
 export interface AppSetting {
@@ -956,13 +958,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-    | 'keyboard-garden'
-    | 'hogzilla'
-    | 'startup-monopoly'
-    | 'office-party'
-    | '2001-bliss'
-    | 'parade'
-    | 'coding-at-night'
+        | 'keyboard-garden'
+        | 'hogzilla'
+        | 'startup-monopoly'
+        | 'office-party'
+        | '2001-bliss'
+        | 'parade'
+        | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -996,6 +998,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const constraintsRef = useRef<HTMLDivElement>(null)
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
+    const websiteMode = siteSettings.experience === 'boring' && !isMobile
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const [windows, setWindows] = useState<AppWindow[]>(
@@ -1009,7 +1013,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             undefined
         )
     }, [windows])
-    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
@@ -1088,6 +1091,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                         bringToFront(nextFocusedWindow)
                     }
                 } else {
+                    if (websiteMode) {
+                        navigate('/')
+                    }
                     window.history.pushState({}, '', '/')
                 }
                 setWindows(windowsFiltered)
@@ -1115,12 +1121,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                              }
                             : w
                     )
                 )
@@ -1216,9 +1222,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: isSSR ? 0 : window.innerWidth * 0.9,
-                    height: isSSR ? 0 : window.innerHeight * 0.9,
-                })
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1273,9 +1279,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1292,6 +1298,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
+        if (websiteMode && newWindow.appSettings?.size.fixed) {
+            newWindow.modal = { type: 'standard' }
+        }
+
         return newWindow
     }
 
@@ -1300,7 +1310,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
-            if (newWindow.key.startsWith('/')) {
+            if (!newWindow.appSettings?.size.fixed) {
                 return replaceFocusedWindow(newWindow)
             } else {
                 return setWindows([...windows, newWindow])
@@ -1684,6 +1694,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     }
                 }
             }
+            if (e.shiftKey && e.key.toLowerCase() === 'm') {
+                e.preventDefault()
+                // Toggle between OS mode and website mode
+                const newExperience = siteSettings.experience === 'posthog' ? 'boring' : 'posthog'
+                updateSiteSettings({
+                    ...siteSettings,
+                    experience: newExperience,
+                })
+
+                // Add toast notification
+                addToast({
+                    description: `Switched to ${newExperience === 'posthog' ? 'OS mode' : 'website mode'}`,
+                    duration: 2000,
+                })
+            }
         }
 
         document.addEventListener('keydown', handleKeyDown)
@@ -1805,6 +1830,22 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
+    useEffect(() => {
+        if (websiteMode) {
+            const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
+            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
+            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed)
+            const newWindows = [
+                ...(currentWindow ? [currentWindow] : []),
+                ...(modalWindow ? [{ ...modalWindow, modal: { type: 'standard' } }] : []),
+            ]
+            setWindows(newWindows)
+        } else {
+            const newWindows = windows.map((w) => ({ ...w, modal: undefined }))
+            setWindows(newWindows)
+        }
+    }, [websiteMode])
+
     return (
         <Context.Provider
             value={{
@@ -1849,6 +1890,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setConfetti,
                 confetti,
                 posthogInstance,
+                websiteMode,
             }}
         >
             {children}

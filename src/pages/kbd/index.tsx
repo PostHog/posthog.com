@@ -47,6 +47,7 @@ export default function KBDShortcuts(): JSX.Element {
         {
             title: 'Window management',
             shortcuts: [
+                { keys: ['Shift', 'M'], description: 'Toggle OS mode / website mode' },
                 { keys: ['Shift', '<'], description: 'Show active windows panel' },
                 { keys: ['Shift', '>'], description: 'Focus next open window' },
                 { keys: ['Shift', 'X'], description: 'Close all windows' },

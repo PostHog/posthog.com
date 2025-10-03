@@ -315,7 +315,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile } = useApp()
+    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile, websiteMode } = useApp()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -791,24 +791,28 @@ export function useMenuData(): MenuType[] {
         : [
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              { type: 'separator' as const },
-              {
-                  type: 'item' as const,
-                  label: 'Start screensaver',
-                  onClick: () => {
-                      setScreensaverPreviewActive(true)
-                  },
-                  shortcut: ['Shift', 'Z'],
-              },
-              {
-                  type: 'item' as const,
-                  label: 'Close all windows',
-                  disabled: windows.length < 1,
-                  onClick: () => {
-                      animateClosingAllWindows()
-                  },
-                  shortcut: ['Shift', 'X'],
-              },
+              ...(!websiteMode
+                  ? [
+                        { type: 'separator' as const },
+                        {
+                            type: 'item' as const,
+                            label: 'Start screensaver',
+                            onClick: () => {
+                                setScreensaverPreviewActive(true)
+                            },
+                            shortcut: ['Shift', 'Z'],
+                        },
+                        {
+                            type: 'item' as const,
+                            label: 'Close all windows',
+                            disabled: windows.length < 1,
+                            onClick: () => {
+                                animateClosingAllWindows()
+                            },
+                            shortcut: ['Shift', 'X'],
+                        },
+                    ]
+                  : []),
           ]
 
     return [
@@ -823,6 +827,7 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: logoMenuItems,
+            mobileLink: websiteMode ? '/' : undefined,
         },
         // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),

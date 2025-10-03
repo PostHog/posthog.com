@@ -208,7 +208,7 @@ export function Editor({
     hasTabs = false,
     children,
     availableFilters,
-    maxWidth: initialMaxWidth = 768,
+    maxWidth: initialMaxWidth,
     onSearchChange,
     showFilters: initialShowFilters = false,
     disableFilterChange = false,
@@ -233,17 +233,17 @@ export function Editor({
     const [filters, setFilters] = useState({})
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
-    const [maxWidth, setMaxWidth] = useState(initialMaxWidth)
-    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
     const { search } = useLocation()
-    const { addWindow, focusedWindow } = useApp()
+    const { addWindow, focusedWindow, websiteMode } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
+    const [maxWidth, setMaxWidth] = useState(initialMaxWidth ?? 768)
+    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -550,9 +550,11 @@ export function Editor({
     return (
         <SearchProvider onSearchChange={onSearchChange}>
             <div className="@container w-full h-full flex flex-col min-h-1">
-                <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
-                    <Toolbar elements={toolbarElements} />
-                </aside>
+                {!websiteMode && (
+                    <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
+                        <Toolbar elements={toolbarElements} />
+                    </aside>
+                )}
                 <div className="flex flex-col flex-grow min-h-0">
                     <main
                         data-app="Editor"
@@ -654,8 +656,9 @@ export function Editor({
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
                                     data-scheme="primary"
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all`}
+                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
+                                        fullWidthContent ? 'max-w-full' : websiteMode ? 'max-w-5xl' : 'max-w-3xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
@@ -672,10 +675,11 @@ export function Editor({
                             <ScrollArea>
                                 <article
                                     ref={articleRef ?? undefined}
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
                                     className={`${getProseClasses(
                                         proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all`}
+                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all ${
+                                        fullWidthContent ? 'max-w-full' : websiteMode ? 'max-w-5xl' : 'max-w-3xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
