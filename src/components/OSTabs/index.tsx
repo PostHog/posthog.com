@@ -35,6 +35,7 @@ interface OSTabsProps {
     tabContentClassName?: string
     scrollable?: boolean
     scrollAreaClasses?: string
+    forceMount?: true | undefined
 }
 
 export default function OSTabs({
@@ -55,6 +56,7 @@ export default function OSTabs({
     tabContentClassName,
     scrollable = true,
     scrollAreaClasses = '',
+    forceMount,
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const initialOrderedTabs = (state as any)?.orderedTabs
@@ -225,7 +227,15 @@ export default function OSTabs({
                     </Tabs.List>
                 </div>
                 {tabs.map((tab) => (
-                    <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
+                    <Tabs.Content
+                        forceMount={forceMount}
+                        data-scheme="primary"
+                        key={tab.value}
+                        value={tab.value}
+                        className={`flex-1 h-full ${
+                            forceMount ? (controlledValue === tab.value ? 'block' : 'hidden') : ''
+                        }`}
+                    >
                         <TabContentContainer
                             className={`@container bg-primary h-full min-h-0 ${
                                 border ? 'border border-primary rounded-md' : ''
