@@ -95,6 +95,6 @@ In countries where you are employed under Deel's EOR service, we make pension co
 
 #### Private health insurance
 
-We offer private health insurance in countries where it is considered market to do so. Currently, we provide private health insurance in the US, UK.
-
+We offer private health insurance in countries where it is considered market to do so.
+For Ireland, Spain, Netherlands, Portugal & Canada the health insurer varies depending on market and offering via the Deel platform and can be subject to change. Please login to Deel to find the policy relevant to your market or reach out to the Ops team if you have any questions. 
 

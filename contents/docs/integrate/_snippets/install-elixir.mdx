@@ -1,11 +1,11 @@
-> This library was built by the community but it's being maintained by the PostHog core team since v1.0.0. Thank you to [Nick Kezhaya](https://github.com/nkezhaya) for building it originally.
+> This library was built by the community but it's being maintained by the PostHog core team since v1.0.0. Thank you to [Nick Kezhaya](https://github.com/nkezhaya) for building it originally. Thank you to [Alex Martsinovich](https://github.com/martosaur) for contributing v2.0.0.
 
 The package can be installed by adding `posthog` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:posthog, "~> 1.1.0"}
+    {:posthog, "~> 2.0.0"}
   ]
 end
 ```
@@ -14,34 +14,17 @@ end
 
 ```elixir file=config/config.exs
 config :posthog,
-  api_url: "<ph_client_api_host>",
-  api_key: "<ph_project_api_key>"
-
-# Optional configurations
-config :posthog,
-  json_library: Jason,   # Default JSON parser (optional)
-  enabled_capture: true, # Enable/disable PostHog tracking (optional, defaults to true)
-  http_client: Posthog.HTTPClient.Hackney,  # Default HTTP client (optional)
-  http_client_opts: [    # HTTP client options (optional)
-    timeout: 5_000,      # Request timeout in milliseconds (default: 5_000)
-    retries: 3,          # Number of retries on failure (default: 3)
-    retry_delay: 1_000   # Delay between retries in milliseconds (default: 1_000)
-  ]
+  enable: true,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_api_key>",
+  in_app_otp_apps: [:my_app]
 ```
 
-#### Advanced configuration
+You can see all the available configuration options in the [PostHog.Config](https://hexdocs.pm/posthog/PostHog.Config.html) module.
 
-The default JSON parser is `Jason` but you can pass in a custom JSON library via the `json_library` config.
+Optionally, you might want to enable the [Plug integration](https://hexdocs.pm/posthog/PostHog.Integrations.Plug.html) to automatically capture events from your Plug-based applications including Phoenix.
 
-The default HTTP client is `Hackney` but you can pass in a custom HTTP client via the `http_client` config. This client should implement the `Posthog.HTTPClient` behaviour. For testing purposes, you'll likely want a mock HTTP client implementation.
-
-You can refer to the library's [README.md](https://github.com/posthog/posthog-elixir) for more information on the advanced configuration options.
 
 #### Development/Test mode
 
-If you are running in development or test mode, you can pass in a `enabled_capture: false` value to the config. This causes events to be dropped instead of sent to PostHog.
-
-```elixir file=config/test.exs
-config :posthog,
-  enabled_capture: false # Disable tracking in test mode
-```
+For a test environment, you can pass in `test_mode: true` value to the config. This causes events to be dropped instead of sent to PostHog.

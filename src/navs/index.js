@@ -3437,6 +3437,12 @@ export const docsMenu = {
                     icon: 'IconClock',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Evaluation tags',
+                    url: '/docs/feature-flags/evaluation-tags',
+                    icon: 'IconDecisionTree',
+                    color: 'red',
+                },
             ],
         },
         {
