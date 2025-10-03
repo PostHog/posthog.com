@@ -4,9 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework) or ICP.
-
-We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most-loved products** at **high-growth startups**. We focus specifically on the **product engineers** (full-stack engineers skewed towards the frontend), but it should be usable by everyone on the product team.
+We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most-loved products** at **high-growth startups**. This is our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (or ICP). Within that ICP, we focus on the **product engineers** (full-stack engineers skewed towards the frontend) as our persona, though PostHog should be usable by everyone on the product team.
 
 > Example: PostHog anytime from Series B to IPO
 
@@ -21,10 +19,24 @@ Why? We believe that the best tech companies are increasingly engineering-led. B
 | **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
 | **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO'ed |
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
-| **Job role** | We build for the power users of the **product team**<br /><br />**Primary focus**<br />- [Product engineers](/blog/what-is-a-product-engineer)<br/>- Technical founders <br />- Highly technical product managers <br /><br />**Should be usable by**:<br />- Designers<br />- Less technical product managers<br />- Marketers<br />|
 | **Examples** | PostHog anytime from their Series B to IPO, Linear, Ramp, Vercel, Retool |
 
 Each team will focus more or less on different members of the product team. This is detailed on their team pages.
+
+## Our current Persona
+
+
+We build for the power users of the **product team**
+
+**Primary focus**
+- [Product engineers](/blog/what-is-a-product-engineer)
+- Technical founders
+- Highly technical product managers
+
+**Should be usable by**:
+- Designers
+- Less technical product managers
+- Marketers
 
 ## FAQs
 
