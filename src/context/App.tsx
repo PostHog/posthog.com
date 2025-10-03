@@ -1694,6 +1694,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     }
                 }
             }
+            if (e.shiftKey && e.key.toLowerCase() === 'm') {
+                e.preventDefault()
+                // Toggle between OS mode and website mode
+                const newExperience = siteSettings.experience === 'posthog' ? 'boring' : 'posthog'
+                updateSiteSettings({
+                    ...siteSettings,
+                    experience: newExperience,
+                })
+
+                // Add toast notification
+                addToast({
+                    description: `Switched to ${newExperience === 'posthog' ? 'OS mode' : 'website mode'}`,
+                    duration: 2000,
+                })
+            }
         }
 
         document.addEventListener('keydown', handleKeyDown)
