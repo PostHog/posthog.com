@@ -3,6 +3,8 @@ via-[color-mix(in_srgb,rgb(var(--bg))_75%,transparent)]
 to-[rgb(var(--bg))]
 [&_ul]:mb-0
 [&_a]:text-white
+[&_img]:w-[724px]
+[&_img]:max-w-[724px]
 @xl:max-w-2xs
 @2xl:basis-3/12
 @2xl:basis-4/12
@@ -329,6 +331,7 @@ max-w-4xl
 max-w-5xl
 max-w-screen-md
 max-w-xl
+max-w-[724px]
 mb-4
 mdlg:text-primary
 mdlg:text-primary-dark

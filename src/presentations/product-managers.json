@@ -63,7 +63,8 @@
             "template": "product",
             "name": "Max AI",
             "handle": "max_ai",
-            "screenshot": "overview",
+            "screenshot": "sidebarInitialCropped",
+            "screenshotClasses": "max-w-[724px] rounded-md shadow-2xl overflow-hidden [&_img]:w-[724px] [&_img]:max-w-[724px]",
             "title": "Ask questions about your product usage",
             "description": "<p>We create the insights for you, all you need to do is ask Max AI questions about your product.</p>"
         },
