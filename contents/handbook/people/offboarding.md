@@ -49,7 +49,7 @@ Please be aware that PostHog cannot always provide context around why people are
 
 ## For Team leads
 
-If a team lead has resigned, the blitzscale team should figure out who will take on the team lead responsibilities and have that prepared to let the team knows just before the resignation is announced or as part of the announcement. 
+If a team lead has resigned, the Blitzscale team should figure out who will take on the team lead responsibilities and have that prepared to let the team know just before the resignation is announced or as part of the announcement.
 
 For involuntary leavers, we will schedule a call. During the call, someone on the ops team needs to complete the [offboarding checklist](#offboarding-checklist). 
 
