@@ -39,6 +39,8 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
+import IntegrationPrompt from 'components/IntegrationPrompt'
+import { motion } from 'framer-motion'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -87,23 +89,30 @@ const HomeHappyHog = () => {
 }
 
 const CTAs = () => {
+    const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
-        <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
-            <CallToAction
-                to="https://app.posthog.com/signup"
-                size="md"
-                state={{ newWindow: true, initialTab: 'signup' }}
+        <div>
+            <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
+                <CallToAction
+                    to="https://app.posthog.com/signup"
+                    size="md"
+                    state={{ newWindow: true, initialTab: 'signup' }}
+                >
+                    Get started - free
+                </CallToAction>
+                <CallToAction type="secondary" size="md" onClick={() => setShowIntegrationPrompt(true)}>
+                    Install with AI
+                </CallToAction>
+            </div>
+            <motion.div
+                className="overflow-hidden"
+                initial={{ height: 0 }}
+                animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
             >
-                Get started - free
-            </CallToAction>
-            <CallToAction
-                to="https://app.posthog.com/signup"
-                type="secondary"
-                size="md"
-                state={{ newWindow: true, initialTab: 'ai' }}
-            >
-                Install with AI
-            </CallToAction>
+                <div className="mt-4 p-4 border border-primary rounded-md bg-accent [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0">
+                    <IntegrationPrompt />
+                </div>
+            </motion.div>
         </div>
     )
 }
