@@ -12,7 +12,7 @@ SQL variables enable you to dynamically set values in your queries.
 
 ## Creating SQL variables
 
-To create a variable, go to the [SQL editor](https://app.posthog.com/sql), click the **Variables** tab, click **Add variable**, and choose your variable type (string, number, date, list, or boolean). Enter the variable name and value(s) and click **Save** and you'll be able to use it in your queries.
+To create a variable, go to the [SQL editor](https://app.posthog.com/sql), click the **Variables** tab, click **Add variable**, and choose your variable type (string, number, date, list, or boolean). Enter the variable name and value(s) and click **Save** and you'll be able to use it in any of your project's queries.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_10_02_at_17_04_16_2x_aac766c379.png"
@@ -23,7 +23,7 @@ To create a variable, go to the [SQL editor](https://app.posthog.com/sql), click
 
 ## Using variables in SQL queries
 
-Once created, variables can be used with the `{variables.<variable-name>}` syntax like this:
+Once created, variables can be used in queries with the `{variables.<variable-name>}` syntax like this:
 
 ```sql
 select * 
@@ -31,7 +31,7 @@ from events
 where event = {variables.event_names}
 ```
 
-You can set the value for the variable in the same **Variables** tab, on the insight, or on the dashboard once you've created and added an SQL insight to it.
+You can set the value for the variable in the same **Variables** tab, on the insight, or on the dashboard once you've created and added an SQL insight to it. For example, below we set the "event names" variable to `$autocapture` on the dashboard. This means every instance of `{variables.event_names}` in the queries on the dashboard is replaced with `$autocapture`. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_02_at_17_12_45_2x_0e6a9a873a.png"
