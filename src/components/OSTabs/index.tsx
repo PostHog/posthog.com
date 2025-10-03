@@ -62,7 +62,7 @@ export default function OSTabs({
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const initialOrderedTabs = (state as any)?.orderedTabs
-    const [controlledValue, setControlledValue] = useState(defaultValue || tabs[0]?.value)
+    const [controlledValue, setControlledValue] = useState(value || defaultValue || tabs[0]?.value)
 
     // Only use orderedTabs logic for horizontal orientation
     const [orderedTabs, setOrderedTabs] = useState<TabItem[][]>(
