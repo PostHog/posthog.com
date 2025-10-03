@@ -36,6 +36,7 @@ interface OSTabsProps {
     scrollable?: boolean
     scrollAreaClasses?: string
     forceMount?: true | undefined
+    autoCalculateTabRows?: boolean
 }
 
 export default function OSTabs({
@@ -57,6 +58,7 @@ export default function OSTabs({
     scrollable = true,
     scrollAreaClasses = '',
     forceMount,
+    autoCalculateTabRows = true,
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const initialOrderedTabs = (state as any)?.orderedTabs
@@ -70,6 +72,7 @@ export default function OSTabs({
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
+            if (!autoCalculateTabRows) return
             if (orientation === 'vertical') {
                 setOrderedTabs([tabs])
                 return
