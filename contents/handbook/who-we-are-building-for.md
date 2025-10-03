@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most-loved products** at **high-growth startups**. This is our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (or ICP). Within that ICP, we focus on the **product engineers** (full-stack engineers skewed towards the frontend) as our persona, though PostHog be usable by everyone on the product team.
+We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most-loved products** at **high-growth startups**. This is our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (or ICP). Within that ICP, we focus on the **product engineers** (full-stack engineers skewed towards the frontend) as our persona, though PostHog should be usable by everyone on the product team.
 
 > Example: PostHog anytime from Series B to IPO
 
