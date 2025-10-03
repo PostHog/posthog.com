@@ -1252,7 +1252,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         const newWindow: AppWindow = {
             element,
-            zIndex: windows.length + 1,
+            zIndex: element.props.hidden ? windows.length : windows.length + 1,
             key: element.key,
             coordinates: location?.state?.coordinates || { x: 0, y: 0 },
             minimized: false,
