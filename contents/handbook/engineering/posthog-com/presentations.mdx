@@ -33,13 +33,19 @@ The example below shows a presentation that is personalized for a particular com
 Presentations are accessed via the URL pattern:
 
 ```
+/for/{persona}
 /for/{company-domain}/{role-or-id}
 ```
 
-**Example:**
+**Examples:**
 
 ```
-/for/example.com/engineering-managers
+/for/product-engineers
+/for/engineering-managers
+/for/product-managers
+/for/engineering-managers
+/for/engineering-directors
+/for/example.com/product-engineers
 /for/example.com/123456 ## see "Overriding default content" below
 ```
 
