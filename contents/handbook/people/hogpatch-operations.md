@@ -1,3 +1,10 @@
+---
+title: HogPatch operations
+sidebar: Handbook
+showTitle: true
+---
+
+
 Although Hogpatch is primarily catered to YC founders to cultivate their ideas in our coworking space, we encourage employees at PostHog who live in the Bay Area or are visiting to enjoy the space as well. If you have any questions that aren’t already addressed in this section here, please reach out to **Judy** or **Scott**.
 
 **<TeamMember name="Judy Opperwall" photo />**, our Office Manager, is on site **Mondays to Thursdays from 9am–5pm**. For any issues while she is not in, please reach out to the `#project-hogpatch` channel or DM her directly.
