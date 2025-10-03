@@ -110,7 +110,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return version.split('-').pop()?.replace('.json', '') || ''
     }
 
-    // Fetch all folder contents in parallel
+    // Fetch all folder contents in a batch
     const folderPromises = SDK_REFERENCES_FOLDER_PATHS.map(async (folderPath) => {
         const url = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}?ref=${folderPath.repo_branch}`
         const response = await fetch(url)
@@ -118,7 +118,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         return { folderPath, data }
     })
 
-    const folderResults = await Promise.all(folderPromises)
+    const folderResults = await Promise.allSettled(folderPromises).then((results) =>
+        results
+            .map((result) => {
+                if (result.status === 'fulfilled' && result.value?.data && Array.isArray(result.value.data)) {
+                    return { folderPath: result.value.folderPath, data: result.value.data }
+                }
+                console.error('Failed to fetch SDK reference files')
+                return null
+            })
+            .filter((result) => result !== null)
+    )
 
     for (const { folderPath, data } of folderResults) {
         referencesData[folderPath.id] = {}
@@ -133,9 +143,17 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 return { version, content: fileData.content }
             })
 
-        const fileResults = await Promise.all(filePromises)
+        const fileResults = await Promise.allSettled(filePromises).then((results) =>
+            results.map((result) => {
+                if (result.status === 'fulfilled' && result.value?.version && result.value?.content) {
+                    return { version: result.value.version, content: result.value.content }
+                }
+                console.error(`Failed to fetch SDK reference file in ${folderPath.repo}/${folderPath.folder_path}`)
+                return null
+            })
+        )
 
-        for (const { version, content } of fileResults) {
+        for (const { version, content } of fileResults.filter((result) => result !== null)) {
             if (version) {
                 referencesData[folderPath.id][version] = content
             }

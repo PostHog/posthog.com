@@ -857,7 +857,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     description: node.info.description,
                     fullReference: node,
                     regex: `/docs/references/${node.referenceId}`,
-                    types: sdkTypesByReference[node.referenceId][node.version],
+                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
             })
         } else {
@@ -869,7 +869,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     description: node.info.description,
                     fullReference: node,
                     regex: `/docs/references/${node.id}`,
-                    types: sdkTypesByReference[node.referenceId][node.version],
+                    // Null checks, only affects type crosslinking, won't break build
+                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
             })
         }
@@ -886,7 +887,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             typeData: type,
                             version: node.version,
                             id: node.id,
-                            types: sdkTypesByReference[node.referenceId][node.version],
+                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                             slugPrefix: node.referenceId,
                         },
                     })
@@ -898,7 +899,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             typeData: type,
                             version: node.version,
                             id: node.id,
-                            types: sdkTypesByReference[node.referenceId][node.version],
+                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                             slugPrefix: node.id,
                         },
                     })
