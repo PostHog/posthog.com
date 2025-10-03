@@ -25,66 +25,74 @@ interface Product {
     color?: string
 }
 
-export const productLinks: AppItem[] = [
-    {
-        label: 'home.mdx',
-        Icon: <AppIcon name="doc" />,
-        url: '/',
-        source: 'desktop',
-    },
-    {
-        label: 'Product OS',
-        Icon: <AppIcon name="folder" />,
-        url: '/products',
-        source: 'desktop',
-    },
-    {
-        label: 'Pricing',
-        Icon: <AppIcon name="pricing" />,
-        url: '/pricing',
-        source: 'desktop',
-    },
-    {
-        label: 'customers.mdx',
-        Icon: <AppIcon name="spreadsheet" />,
-        url: '/customers',
-        source: 'desktop',
-    },
-    {
-        label: 'demo.mov',
-        Icon: IconDemoThumb,
-        url: '/demo',
-        className: 'size-14 -my-1',
-        source: 'desktop',
-    },
-    {
-        label: 'Docs',
-        Icon: <AppIcon name="notebook" />,
-        url: '/docs',
-        source: 'desktop',
-    },
-    {
-        label: 'Talk to a human',
-        Icon: <AppIcon name="envelope" />,
-        url: '/talk-to-a-human',
-        source: 'desktop',
-    },
+export const useProductLinks = () => {
+    const { posthogInstance } = useApp()
 
-    {
-        label: 'Sign up ↗',
-        Icon: <AppIcon name="compass" />,
-        url: 'https://app.posthog.com/signup',
-        external: true,
-        source: 'desktop',
-    },
-    {
-        label: 'Open app ↗',
-        Icon: <AppIcon name="computerCoffee" />,
-        url: 'https://app.posthog.com',
-        external: true,
-        source: 'desktop',
-    },
-]
+    return [
+        {
+            label: 'home.mdx',
+            Icon: <AppIcon name="doc" />,
+            url: '/',
+            source: 'desktop',
+        },
+        {
+            label: 'Product OS',
+            Icon: <AppIcon name="folder" />,
+            url: '/products',
+            source: 'desktop',
+        },
+        {
+            label: 'Pricing',
+            Icon: <AppIcon name="pricing" />,
+            url: '/pricing',
+            source: 'desktop',
+        },
+        {
+            label: 'customers.mdx',
+            Icon: <AppIcon name="spreadsheet" />,
+            url: '/customers',
+            source: 'desktop',
+        },
+        {
+            label: 'demo.mov',
+            Icon: IconDemoThumb,
+            url: '/demo',
+            className: 'size-14 -my-1',
+            source: 'desktop',
+        },
+        {
+            label: 'Docs',
+            Icon: <AppIcon name="notebook" />,
+            url: '/docs',
+            source: 'desktop',
+        },
+        {
+            label: 'Talk to a human',
+            Icon: <AppIcon name="envelope" />,
+            url: '/talk-to-a-human',
+            source: 'desktop',
+        },
+        ...(posthogInstance
+            ? [
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
+            : [
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
+    ]
+}
 
 export const apps: AppItem[] = [
     {
@@ -143,6 +151,7 @@ const STORAGE_KEY = 'desktop-icon-positions'
 const validateIconPositions = (positions: IconPositions, constraintsRef: React.RefObject<HTMLDivElement>): boolean => {
     const iconWidth = 112
     const iconHeight = 75
+    const productLinks = useProductLinks()
     const allApps = [...productLinks, ...apps]
 
     for (const app of allApps) {
@@ -174,6 +183,7 @@ const validateIconPositions = (positions: IconPositions, constraintsRef: React.R
 }
 
 export default function Desktop() {
+    const productLinks = useProductLinks()
     const {
         constraintsRef,
         siteSettings,
