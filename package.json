@@ -132,7 +132,7 @@
         "react": "^18.2.0",
         "react-animate-height": "^2.0.23",
         "react-burger-menu": "^3.0.6",
-        "react-calendly": "^2.2.2",
+        "react-calendly": "^4.4.0",
         "react-chartjs-2": "^5.2.0",
         "react-compare-slider": "^2.1.0",
         "react-confetti": "^6.1.0",

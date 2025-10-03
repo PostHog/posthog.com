@@ -24604,10 +24604,10 @@ react-burger-menu@^3.0.6:
     prop-types "^15.7.2"
     snapsvg-cjs "0.0.6"
 
-react-calendly@^2.2.2:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/react-calendly/-/react-calendly-2.2.3.tgz#3ed3fca006a02bbeca7d3b257787e376f54b3d34"
-  integrity sha512-+OkZE4ZrOYoeEbhOEw9mljruvnMlT6a114mpNx27tL5FEmRiJA+Tn1NJvTqYuF1p+BF7p3WQTWO+ZD45Uu7iBQ==
+react-calendly@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-calendly/-/react-calendly-4.4.0.tgz#ce4f09ca3232b61cdcdac7dc1b9b1ec4e7a0c3c2"
+  integrity sha512-kMd8fEby0plL5aCebhjq9aesOJ6YWcmR3Pjs3bufncykrp7b6TryaCnWGoq4xZc/oipyudAVCIRgPVUjUEr8nQ==
 
 react-chartjs-2@^5.2.0:
   version "5.3.0"

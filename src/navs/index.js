@@ -1254,6 +1254,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/changelog',
                     },
                     {
+                        name: 'Custom presentations',
+                        url: '/handbook/engineering/posthog-com/presentations',
+                    },
+                    {
                         name: 'Editing API docs',
                         url: '/handbook/engineering/posthog-com/api-docs',
                     },
