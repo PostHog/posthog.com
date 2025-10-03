@@ -17,8 +17,7 @@ import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
-import Tooltip from 'components/Tooltip'
-import { IconChevronDown, IconShieldLock } from '@posthog/icons'
+import { IconChevronDown, IconPlus, IconShieldLock } from '@posthog/icons'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import CloudinaryImage from 'components/CloudinaryImage'
 import uniqBy from 'lodash/uniqBy'
@@ -34,6 +33,10 @@ import useProduct from 'hooks/useProduct'
 import ProgressBar from 'components/ProgressBar'
 import OSTabs from 'components/OSTabs'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
+import OSButton from 'components/OSButton'
+import { useApp } from '../context/App'
+import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -454,6 +457,8 @@ export default function Changelog({ pageContext }) {
             filters: { dateCompleted: { $notNull: true }, ...strapiFilters },
         },
     })
+    const { addWindow } = useApp()
+    const { isModerator } = useUser()
 
     useEffect(() => {
         const query = qs.stringify({
@@ -546,6 +551,20 @@ export default function Changelog({ pageContext }) {
         ),
     })
 
+    const handleAddFeature = () => {
+        addWindow(
+            <RoadmapWindow
+                location={{ pathname: `add-roadmap` }}
+                key={`add-roadmap`}
+                newWindow
+                status="complete"
+                onSubmit={() => {
+                    mutate()
+                }}
+            />
+        )
+    }
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -620,6 +639,19 @@ export default function Changelog({ pageContext }) {
                     title: 'Changelog',
                     description: 'Latest updates and releases',
                 }}
+                extraMenuOptions={
+                    isModerator ? (
+                        <>
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
+                                delay={0}
+                            >
+                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Add
+                                roadmap item
+                            </Tooltip>
+                        </>
+                    ) : null
+                }
             >
                 <OSTabs
                     tabs={tabs}

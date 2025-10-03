@@ -85,10 +85,16 @@ Visit the new small team page to:
 #### Other tasks
 
 1. [Request a custom team crest](https://github.com/PostHog/posthog.com/issues/new?assignees=&labels=&projects=&template=art-request-template.md&title=Art+request+-+%7Btitle%7D) from Lottie. Describe your team with a few adjectives, maybe physical tools that can be used in an illustration, and a sentence or two about what you do. She'll create two versions: a large one (for your small team's page) and a mini crest used in other places (like the [careers page](/careers)).
-2. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
-3. [Create a new team on GitHub](https://github.com/orgs/PostHog/teams) and remove the new members from their previous team
+2. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership).
+
+    - Features are managed in [`/src/hooks/useFeatureOwnership.tsx`](https://github.com/PostHog/posthog.com/blob/master/src/hooks/useFeatureOwnership.tsx).
+    - `owner`: Use the team's slug (seen in the URL when visiting a small team's page). Supports an array for shared ownership.
+    - `notes`: (Optional) Displays below owners. (Wrap string in &lt;em&gt;brackets&lt;/em&gt;)
+    - `label`: Defaults to the feature name, but slugified. Override with a custom tag if necessary. Supports `false` to hide the label if one doesn't exist.
+
+3. [Create a new team on GitHub](https://github.com/orgs/PostHog/teams) and remove the new members from their previous team. If moving a previous team lead, remove their team lead status from the previous team first.
 4. Give that newly-created team Direct Access with Write permission to the [`posthog`](https://github.com/PostHog/posthog/settings/access) and [`posthog.com`](https://github.com/PostHog/posthog.com/settings/access) repositories, as well as any other repos they will be contributing to frequently. This allows team members request review from their team instead of having to tag members individually.
-5. Create the new `feature/team-{team-name}` labels [on GitHub](https://github.com/PostHog/posthog/labels)
+5. Create the new `feature/team-{team-name}` labels [on GitHub](https://github.com/PostHog/posthog/labels).
 6. On Slack, create a new channel called #team-{team-name}. Add a new People > User group with the handle @team-{team-name}-folks. Add / Remove people from other groups as necessary.
 7. If there are existing forum topics or roadmap items, re-assign them to the new team.
     - Make sure there's [a group in Zendesk](https://posthoghelp.zendesk.com/admin/people/team/groups) for the new team, and add the `zendeskGroupID` to the team's record in Strapi so community questions are routed to the right team in Zendesk. (Ask the Website & Docs team for help here.)
