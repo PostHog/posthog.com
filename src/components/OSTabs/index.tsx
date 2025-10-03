@@ -148,7 +148,7 @@ export default function OSTabs({
 
         setTimeout(() => {
             calculateTabRows()
-        }, 300)
+        }, 400)
 
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
