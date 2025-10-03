@@ -236,7 +236,7 @@ export default function OSTabs({
                         key={tab.value}
                         value={tab.value}
                         className={`flex-1 h-full ${
-                            forceMount ? (controlledValue === tab.value ? 'block' : 'hidden') : ''
+                            forceMount ? ((value || controlledValue) === tab.value ? 'block' : 'hidden') : ''
                         }`}
                     >
                         <TabContentContainer
