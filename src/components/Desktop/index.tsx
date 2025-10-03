@@ -69,6 +69,21 @@ export const productLinks: AppItem[] = [
         url: '/talk-to-a-human',
         source: 'desktop',
     },
+
+    {
+        label: 'Sign up ↗',
+        Icon: <AppIcon name="compass" />,
+        url: 'https://us.posthog.com/signup',
+        external: true,
+        source: 'desktop',
+    },
+    {
+        label: 'Open app ↗',
+        Icon: <AppIcon name="computerCoffee" />,
+        url: 'https://app.posthog.com',
+        external: true,
+        source: 'desktop',
+    },
 ]
 
 export const apps: AppItem[] = [
@@ -167,6 +182,7 @@ export default function Desktop() {
         setConfetti,
         confetti,
         compact,
+        posthogInstance,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({

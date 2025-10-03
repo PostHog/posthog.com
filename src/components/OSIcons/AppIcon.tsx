@@ -41,7 +41,7 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_001e7ec29a.png',
     },
-    tour: {
+    compass: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_8ae29710fc.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_2994e40ea9.png',
     },
@@ -161,8 +161,8 @@ const PRODUCT_ICON_MAP = {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Modern_b3a6093647.png',
     },
     typewriter: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_classic_6362f6fbc5.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_modern_9beb68e461.png',
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_classic_3e6454d7f6.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_modern_ac5baf1493.png',
     },
     envelope: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/envelope_classic_8ccd5e8abc.png',
@@ -183,6 +183,10 @@ const PRODUCT_ICON_MAP = {
     handbook: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_classic_b7cd7f26f7.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_modern_cf862d2ae6.png',
+    },
+    computerCoffee: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/computer_coffee_classic_66d12712d9.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/computer_coffee_modern_41959ceb31.png',
     },
 } as const satisfies Record<string, AppIconVariants>
 
@@ -279,6 +283,7 @@ export interface AppItem {
     hasDragged?: boolean
     orientation?: 'row' | 'column'
     source?: string
+    external?: boolean
 }
 
 export const AppLink = ({
@@ -294,6 +299,7 @@ export const AppLink = ({
     hasDragged,
     orientation = 'column',
     source,
+    external,
 }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
     const { getThemeSpecificBackgroundColors } = useTheme()
@@ -406,7 +412,7 @@ export const AppLink = ({
             {url ? (
                 <Link
                     to={url}
-                    state={{ newWindow: true }}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : { state: { newWindow: true } })}
                     className={`${commonClassName} ${orientationClassName}`}
                     onClick={(e) => {
                         if (hasDragged) {
