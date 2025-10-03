@@ -1,10 +1,10 @@
 ---
-title: Product team overview
+title: Product management at PostHog
 sidebar: Handbook
 showTitle: true
 ---
 
-PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions. Read more on the role of the Product Team in this [blog post](/blog/product-at-posthog).
+PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions.
 
 So, what is the role of product managers at PostHog? PMs set context across multiple products for how products are being used, what the competitive landscape is like, what users are feeling about PostHog, and how they're using things.
 
@@ -22,31 +22,34 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 <TeamMember name="Anna Szell" photo />
 
+- [Analytics Platform](/teams/analytics-platform)
 - [Data Warehouse](/teams/data-warehouse)
 - [Product Analytics](/teams/product-analytics)
-- [Web Analytics](web-analytics)
+- [Web Analytics](/teams/web-analytics)
 
 <TeamMember name="Annika Schmid" photo />
 
-- [Session Replay](/teams/session-replay)
 - [Feature Flags](/teams/feature-flags)
 - [Experiments](/teams/experiments)
+- [Max AI](/teams/max-ai)
 
 <TeamMember name="Cory Slater" photo />
 
 - [Error Tracking](/teams/error-tracking)
 - [Surveys](/teams/surveys)
+- [Session Replay](/teams/session-replay)
 
 <TeamMember name="Abe Basu" photo />
 
-- [Messaging](/teams/messaging)
-- [CDP](/teams/cdp)
-  
+- [Messaging & CDP](/teams/messaging)
+- [Batch Exports (light support)](/teams/batch-exports)
+- Embedded Analytics
+- Logs
+
 **Teams with no PM currently**
 
-- [CRM](/teams/crm)
+- [Customer Analytics](/teams/customer-analytics)
 - [LLM Analytics](/teams/llm-analytics)
-- [Max AI](/teams/max-ai)
 - [Revenue Analytics](/teams/revenue-analytics)
 
 ## Product goals
@@ -65,5 +68,3 @@ In Q3 2025, those are:
 
 **Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
 * We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
-
-

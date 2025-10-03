@@ -47,6 +47,12 @@ export const experiments = {
             imgClasses: 'rounded-t-md shadow-2xl',
         },
     },
+    videos: {
+        overview: {
+            // youtube: '',
+            wistia: 'tg7d3aw5af',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
         alt: 'Hedgehog experimenting',
@@ -255,6 +261,31 @@ export const experiments = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses experiments',
+        benefits: [
+            {
+                title: 'A/B tests',
+                description: 'to compare one idea against another',
+            },
+            {
+                title: 'A/A tests',
+                description: 'to test one idea against itself',
+            },
+            {
+                title: 'A/B/N tests',
+                description: 'to test lots of ideas at once',
+            },
+            {
+                title: 'Holdout tests',
+                description: 'to test ideas over a long period',
+            },
+            {
+                title: 'Fake door tests',
+                description: 'to test an idea before building it',
+            },
+        ],
+    },
     questions: [
         {
             question: 'Does this new onboarding flow increase conversion?',

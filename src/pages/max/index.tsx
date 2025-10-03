@@ -234,7 +234,16 @@ export default function MaxAI(): JSX.Element {
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
-        exclude: ['customers', 'features', 'ai', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with'],
+        exclude: [
+            'customers',
+            'features',
+            'ai',
+            'comparison-summary',
+            'feature-comparison',
+            'docs',
+            'pairs-with',
+            'posthog-on-posthog',
+        ],
         custom: [
             {
                 slug: 'roadmap',

@@ -271,7 +271,7 @@ for (let food, value in arr) {
 
 ## Hog's standard library
 
-Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/hogvm/python/stl/__init__.py).
+Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/stl/__init__.py).
 
 ### Type conversion
 
@@ -315,13 +315,14 @@ Hog's standard library includes the following functions and will expand. To see 
 - `generateUUIDv4(): string`
 - `position(haystack: string, needle: string): integer`
 - `positionCaseInsensitive(haystack: string, needle: string): integer`
+- `substring(arg: string, start: int, length?: int): string` - `start` is 1-based, e.g. `substring('hello world',1,5)` will return `hello`
 
 ### Objects and arrays
 - `length(arg: any[] | object): integer`
 - `empty(arg: any[] | object): boolean`
 - `notEmpty(arg: any[] | object): boolean`
 - `keys(arg: any[] | object): string[]`
-- `vaues(arg: any[] | object): string[]`
+- `values(arg: any[] | object): string[]`
 - `indexOf(array: any[], elem: any): integer`
 - `has(array: any[], element: any)`
 - `arrayPushBack(arr: any[], value: any): any[]`

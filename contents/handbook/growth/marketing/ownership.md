@@ -47,13 +47,13 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 
 Refer them to <TeamMember name="Joe Martin" />. He'll give them the bad news / explore any opportunities.
 
-If another company is interested in building an integration with PostHog, speak to the [Growth Team](/teams/growth).
+If another company is interested in building an integration with PostHog, raise this with our integrations engineer.
 </details>
 
 <details>
 <summary>Someone wants us to sponsor them</summary>
 
-If it's an influencer or podcast, refer them to <TeamMember name="Ian Vanagas" />.
+If it's an [influencer](/handbook/growth/marketing/influencers) or podcast, refer them to <TeamMember name="Ian Vanagas" />.
 
 We're not currently running newsletter sponsorships, but contact <TeamMember name="Lior Neu-ner" /> if you think it's sufficiently interesting.
 

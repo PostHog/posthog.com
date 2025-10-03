@@ -92,7 +92,7 @@ Because it's the right thing to do for both our users and our business.
 
 Most of our competitors are inefficient. They employ huge [outbound sales teams](/founders/negotiate-software-better) to grow revenue. Their salaries and commissions for closing deals are passed onto their customers through higher prices.
 
-In contrast, we're 100% inbound, we [grow mostly through word of mouth](/handbook/how-we-get-users), and we charge based on actual usage. 
+In contrast, we [grow mostly through word of mouth](/handbook/how-we-get-users), and we charge based on actual usage. 
 
 We don't believe in loss-leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we can get away with charging.
 

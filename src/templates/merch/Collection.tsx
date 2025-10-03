@@ -18,6 +18,8 @@ import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
 import Fuse from 'fuse.js'
 import { useApp } from '../../context/App'
+import OrderHistory from 'components/Merch/OrderHistory'
+import { useUser } from 'hooks/useUser'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -184,12 +186,15 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [cartIsOpen, setCartIsOpen] = useState(false)
+    const [orderHistoryIsOpen, setOrderHistoryIsOpen] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [hasInitialized, setHasInitialized] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
+    const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
     const { isMobile } = useApp()
+    const { getJwt, user } = useUser()
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
@@ -342,15 +347,29 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     // Product handlers - close cart when product is opened
     const handleProductSelect = (product: any) => {
         setSelectedProduct(product)
+        setOrderHistoryIsOpen(false)
         setCartIsOpen(false) // Close cart when product is opened
     }
 
     // Cart handlers - close product when cart is opened
     const handleCartOpen = () => {
         setCartIsOpen(true)
+        setOrderHistoryIsOpen(false)
         setSelectedProduct(null) // Close product when cart is opened
     }
     const handleCartClose = () => setCartIsOpen(false)
+
+    const handleOrderHistoryOpen = () => {
+        setOrderHistoryIsOpen(true)
+        setCartIsOpen(false)
+        setSelectedProduct(null)
+    }
+
+    const handleOrderHistoryClose = () => {
+        setOrderHistoryIsOpen(false)
+        setCartIsOpen(false)
+        setSelectedProduct(null)
+    }
 
     const handleValueChange = (value: string) => {
         // Use custom category change handler for filtering
@@ -366,6 +385,26 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         [appWindow]
     )
 
+    const fetchOrders = async () => {
+        try {
+            const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+                headers: {
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            }).then((res) => res.json())
+            setOrders(data)
+        } catch (error) {
+            console.error('Failed to fetch orders:', error)
+            setOrders([])
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            fetchOrders()
+        }
+    }, [user])
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar
@@ -374,7 +413,11 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
                 isCartOpen={cartIsOpen}
+                isOrderHistoryOpen={orderHistoryIsOpen}
+                onOrderHistoryOpen={handleOrderHistoryOpen}
+                onOrderHistoryClose={handleOrderHistoryClose}
                 showCart
+                showOrderHistory={orders?.length > 0}
                 showSearch
                 onSearch={handleSearch}
             />
@@ -387,7 +430,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                    {(cartIsOpen || selectedProduct) && (
+                    {(cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
                         <motion.aside
                             data-scheme="secondary"
                             className="not-prose bg-primary border-l border-primary h-full text-primary relative"
@@ -398,6 +441,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 <div className="flex-1 overflow-auto">
                                     {cartIsOpen ? (
                                         <Cart className="h-full overflow-y-auto" />
+                                    ) : orderHistoryIsOpen ? (
+                                        <div className="h-full overflow-y-auto @container">
+                                            <OrderHistory orders={orders} />
+                                        </div>
                                     ) : selectedProduct ? (
                                         <ProductPanel
                                             product={selectedProduct}

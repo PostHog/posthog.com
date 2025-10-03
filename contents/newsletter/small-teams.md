@@ -80,7 +80,7 @@ A team lead’s remit is deliberately more product-focused.
 
 Regardless of size or scope, each team has its own mission that feeds into our overall company mission of equipping every developer to build successful products.
 
-The [growth team’s mission](/teams/growth) is to maximize the number of people who get value out of PostHog, and help them realize and leverage all the value we offer. The [infrastructure team’s mission](/teams/infrastructure) is to make deploying, scaling, and managing PostHog easy, fast, and reliable.
+The growth team’s mission is to maximize the number of people who get value out of PostHog, and help them realize and leverage all the value we offer. The [infrastructure team’s mission](/teams/infrastructure) is to make deploying, scaling, and managing PostHog easy, fast, and reliable.
 
 As well as a main mission, each small team also sets:
 
