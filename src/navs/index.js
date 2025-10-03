@@ -91,6 +91,14 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/reddit-ads',
                 },
                 {
+                    name: 'Meta Ads',
+                    url: '/docs/cdp/sources/meta-ads',
+                },
+                {
+                    name: 'Tiktok Ads',
+                    url: '/docs/cdp/sources/tiktok-ads',
+                },
+                {
                     name: 'Google Sheets',
                     url: '/docs/cdp/sources/google-sheets',
                 },
@@ -1332,6 +1340,20 @@ export const handbookSidebar = [
                     {
                         name: 'Product-led sales',
                         url: '/handbook/growth/sales/product-led-sales',
+                        children: [
+                            {
+                                name: 'Expansion, cross-sell & retention',
+                                url: '/handbook/growth/sales/expansion-and-retention',
+                            },
+                            {
+                                name: 'Account planning',
+                                url: '/handbook/growth/sales/account-planning',
+                            },
+                            {
+                                name: 'Cross-sell motions',
+                                url: '/handbook/growth/sales/cross-selling',
+                            },
+                        ],
                     },
                     {
                         name: 'Outbound sales',
@@ -1356,6 +1378,10 @@ export const handbookSidebar = [
                             {
                                 name: 'Cross-selling',
                                 url: '/handbook/growth/sales/cross-selling',
+                            },
+                            {
+                                name: 'Cross sell motions',
+                                url: '/handbook/growth/sales/cross-sell-motions',
                             },
                         ],
                     },
@@ -1397,7 +1423,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
                     },
                     {
-                        name: 'Basic foundation model checklist',
+                        name: 'Basic account review checklist',
                         url: '/handbook/cs-and-onboarding/foundation-check',
                     },
                     {
@@ -1431,15 +1457,23 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding Specialist overview',
+                        name: 'Onboarding team',
                         url: '/handbook/onboarding/onboarding-team',
                     },
                     {
-                        name: 'Onboarding Program',
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Sales Handover',
+                        name: 'Onboarding tracking',
+                        url: '/handbook/onboarding/onboarding-tracking',
+                    },
+                    {
+                        name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
                     {
@@ -1463,6 +1497,10 @@ export const handbookSidebar = [
                     {
                         name: 'Lead scoring',
                         url: '/handbook/growth/sales/lead-scoring',
+                    },
+                    {
+                        name: 'Matching PostHog to a business type',
+                        url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
                         name: 'Contract rules',
@@ -1523,10 +1561,6 @@ export const handbookSidebar = [
                     {
                         name: 'Tracking feature requests',
                         url: '/handbook/cs-and-onboarding/feature-requests',
-                    },
-                    {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
                         name: 'New hire onboarding exercise',
@@ -3426,6 +3460,12 @@ export const docsMenu = {
                     icon: 'IconClock',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Evaluation tags',
+                    url: '/docs/feature-flags/evaluation-tags',
+                    icon: 'IconDecisionTree',
+                    color: 'red',
+                },
             ],
         },
         {
@@ -4102,6 +4142,14 @@ export const docsMenu = {
                         {
                             name: 'Reddit Ads',
                             url: '/docs/data-warehouse/sources/reddit-ads',
+                        },
+                        {
+                            name: 'Meta Ads',
+                            url: '/docs/data-warehouse/sources/meta-ads',
+                        },
+                        {
+                            name: 'Tiktok Ads',
+                            url: '/docs/data-warehouse/sources/tiktok-ads',
                         },
                         {
                             name: 'Google Sheets',
