@@ -39,7 +39,7 @@ In either case, we will usually ask the team member to stop working immediately.
 
 ## Communicating departures
 
-In the case of voluntary departure, we will ask the team member if they wish to share what they're up to next with the team. If you have resigned, please speak to the relevant team Blitzscale member to agree on who will communicate you are leaving. Please don't announce your resignation until the relevant member of the the Blizscale team has given the go ahead as they may need to prepare accordignly for the impact of your resignation.
+In the case of voluntary departure, we will ask the team member if they wish to share what they're up to next with the team. If you have resigned, please speak to the relevant team Blitzscale member to agree on who will communicate you are leaving. Please don't announce your resignation until the relevant member of the Blitzscale team has given the go ahead as they may need to prepare accordingly for the impact of your resignation.
 
 In the case of involuntary departure, we will aim to be as transparent as possible about the reasons behind the departure, while respecting the individual's privacy.
 
