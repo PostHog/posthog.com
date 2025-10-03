@@ -73,7 +73,7 @@ export const productLinks: AppItem[] = [
     {
         label: 'Sign up ↗',
         Icon: <AppIcon name="compass" />,
-        url: 'https://us.posthog.com/signup',
+        url: 'https://app.posthog.com/signup',
         external: true,
         source: 'desktop',
     },
