@@ -26,7 +26,7 @@
                     "handle": "product_analytics",
                     "title": "Product Analytics",
                     "description": "<p>Easily uncover user friction by following the drop-offs in a funnel.</p>",
-                    "screenshot": "home"
+                    "screenshot": "funnelVertical"
                 },
 
                 {
@@ -39,7 +39,7 @@
                     "handle": "error_tracking",
                     "title": "Error Tracking",
                     "description": "<p>Assign issues to engineers to get user problems solved quickly.</p>",
-                    "screenshot": "home"
+                    "screenshot": "errorsCropped"
                 }
             ]
         },

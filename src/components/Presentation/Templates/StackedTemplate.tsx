@@ -100,7 +100,7 @@ export default function StackedTemplate({
                 {slideKey === 'overview' && (
                     <>
                         <h1
-                            className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight text-balance ${
+                            className={`text-5xl @2xl:text-4xl mb-4 @2xl:mb-4 font-bold leading-tight @2xl:text-balance ${
                                 image ? '' : '@2xl:max-w-xl'
                             }`}
                             dangerouslySetInnerHTML={{
@@ -110,7 +110,9 @@ export default function StackedTemplate({
                         {description && (
                             <ParseHtml
                                 content={description.replace('{companyName}', companyName || '')}
-                                className={`prose text-2xl @2xl:text-xl text-balance ${image ? '' : descriptionWidth}`}
+                                className={`prose text-2xl @2xl:text-xl @2xl:text-balance ${
+                                    image ? '' : descriptionWidth
+                                }`}
                             />
                         )}
                     </>

@@ -46,6 +46,11 @@ export const productAnalytics = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png',
             alt: 'Product analytics screenshot',
         },
+        funnelVertical: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_light_3909cad637.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_dark_e0854a4c86.png',
+            alt: 'Product analytics funnel',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
