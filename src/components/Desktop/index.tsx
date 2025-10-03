@@ -512,11 +512,7 @@ export default function Desktop() {
                             />
                         </div>
 
-                        <nav
-                            className={`transition-opacity duration-300 ${
-                                windows.length <= 0 || navVisible ? 'opacity-100' : 'opacity-0'
-                            }`}
-                        >
+                        <nav className={``}>
                             <motion.ul
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: rendered ? 1 : 0 }}
