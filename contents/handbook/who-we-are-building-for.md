@@ -76,6 +76,8 @@ We build for the power users of the **product team**
 
 - These kinds of users are speaking to customers, looking at data, and quickly building and shipping features. They operate collaboratively within a diverse team including designers, other PMs, marketers, and executives. We want to be loved by the sophisticated power users and still good to use for the others on the team.
 
+- They evaluate our trajectory as much as our current capabilities. They choose PostHog to avoid tool sprawl and future migrations – they're betting on our velocity and roadmap breadth, not just today's feature set. A credible promise of future integration matters as much as current depth.
+
 - For product analytics, product managers who are technical (ex-engineers, for example) are the power users of analytics. They have the desire and the time to go significantly deeper into the data.
 
 ### What is a high-_potential_ customer and why do they matter?
