@@ -125,7 +125,7 @@ We find that most people already have a desk and chair that are comfortable.
 
 If you do not, then buy yourself one within our set budget. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable. For example, if you would like a standing desk, buy one you consider to be good value.
 
-We would expect to spend $250 on a desk (up to $800 for a good quality standing desk, if you regularly work while standing), and around $500 for a chair. If you wish, you can switch out the chair for a walking treadmill instead. 
+We would expect to spend $300 on a regular desk or up to $800 for a good quality standing desk, if you regularly work while standing, and around $500 for a chair. If you wish, you can switch out the chair for a walking treadmill instead. 
 
 If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value than buying something new but of lower quality.
 
