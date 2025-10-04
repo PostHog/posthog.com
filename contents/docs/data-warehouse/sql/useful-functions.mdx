@@ -58,6 +58,8 @@ FROM events
 WHERE timestamp > now() - interval 1 day
 ```
 
+If you want to access dashboard or insight date filters, you can use the [`filters` variable](/docs/data-warehouse/sql/variables) like `filters.dateRange.from` and `filters.dateRange.to`.
+
 > Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
 
 ### String

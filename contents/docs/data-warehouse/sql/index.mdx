@@ -12,7 +12,7 @@ The [SQL editor](https://us.posthog.com/sql) enables you to directly access all 
 
 You create SQL queries out of a list of commands that shape what data, filters, aggregations, and ordering we want to see. 
 
-> SQL queries in PostHog don’t require the trailing semicolon (`;`) of traditional SQL queries.
+> SQL queries in PostHog don't require the trailing semicolon (`;`) of traditional SQL queries.
 
 ### SELECT
 
@@ -112,7 +112,7 @@ WHERE event = '$pageview'
    AND properties.$current_url LIKE '%/blog%'
 ```
 
-To have the insight or dashboard date range selector apply to the insight, include `{filters}` in query like this:
+To have the insight or dashboard date range and other filters apply to the insight, include [`{filters}` variable](/docs/data-warehouse/sql/variables) in your query like this:
 
 ```sql
 SELECT *
