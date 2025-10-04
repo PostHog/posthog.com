@@ -581,7 +581,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                     siteSettings.experience === 'boring' ? '' : 'border rounded'
                                                 }`
                                       }`
-                            } ${chrome ? 'overflow-hidden' : ''}`}
+                            } ${chrome ? 'overflow-hidden' : ''} ${item.hidden ? 'hidden' : ''}`}
                             style={{
                                 zIndex: item.zIndex,
                             }}
@@ -605,47 +605,51 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         ? 'auto'
                                         : size.height,
                             }}
-                            animate={{
-                                scale: 1,
-                                x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
-                                y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
-                                width: siteSettings.experience === 'boring' ? '100%' : size.width,
-                                height:
-                                    siteSettings.experience === 'boring'
-                                        ? '100%'
-                                        : item.appSettings?.size?.autoHeight
-                                        ? 'auto'
-                                        : size.height,
-                                transition: {
-                                    duration:
-                                        siteSettings.experience === 'boring' ||
-                                        siteSettings.performanceBoost ||
-                                        leftDragResizing
-                                            ? 0
-                                            : 0.2,
-                                    scale: {
-                                        duration:
-                                            siteSettings.experience === 'boring' ||
-                                            siteSettings.performanceBoost ||
-                                            !windowPosition
-                                                ? 0
-                                                : 0.2,
-                                        delay:
-                                            siteSettings.experience === 'boring' ||
-                                            siteSettings.performanceBoost ||
-                                            !windowPosition
-                                                ? 0
-                                                : 0.2,
-                                        ease: [0.2, 0.2, 0.8, 1],
-                                    },
-                                    width: {
-                                        duration: 0,
-                                    },
-                                    height: {
-                                        duration: 0,
-                                    },
-                                },
-                            }}
+                            animate={
+                                item.hidden
+                                    ? {}
+                                    : {
+                                          scale: 1,
+                                          x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
+                                          y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
+                                          width: siteSettings.experience === 'boring' ? '100%' : size.width,
+                                          height:
+                                              siteSettings.experience === 'boring'
+                                                  ? '100%'
+                                                  : item.appSettings?.size?.autoHeight
+                                                  ? 'auto'
+                                                  : size.height,
+                                          transition: {
+                                              duration:
+                                                  siteSettings.experience === 'boring' ||
+                                                  siteSettings.performanceBoost ||
+                                                  leftDragResizing
+                                                      ? 0
+                                                      : 0.2,
+                                              scale: {
+                                                  duration:
+                                                      siteSettings.experience === 'boring' ||
+                                                      siteSettings.performanceBoost ||
+                                                      !windowPosition
+                                                          ? 0
+                                                          : 0.2,
+                                                  delay:
+                                                      siteSettings.experience === 'boring' ||
+                                                      siteSettings.performanceBoost ||
+                                                      !windowPosition
+                                                          ? 0
+                                                          : 0.2,
+                                                  ease: [0.2, 0.2, 0.8, 1],
+                                              },
+                                              width: {
+                                                  duration: 0,
+                                              },
+                                              height: {
+                                                  duration: 0,
+                                              },
+                                          },
+                                      }
+                            }
                             exit={{
                                 scale: 0.005,
                                 ...(closing || !windowPosition ? {} : { x: windowPosition.x, y: windowPosition.y }),

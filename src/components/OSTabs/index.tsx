@@ -35,6 +35,8 @@ interface OSTabsProps {
     tabContentClassName?: string
     scrollable?: boolean
     scrollAreaClasses?: string
+    forceMount?: true | undefined
+    autoCalculateTabRows?: boolean
 }
 
 export default function OSTabs({
@@ -55,10 +57,12 @@ export default function OSTabs({
     tabContentClassName,
     scrollable = true,
     scrollAreaClasses = '',
+    forceMount,
+    autoCalculateTabRows = true,
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const initialOrderedTabs = (state as any)?.orderedTabs
-    const [controlledValue, setControlledValue] = useState(defaultValue || tabs[0]?.value)
+    const [controlledValue, setControlledValue] = useState(value || defaultValue || tabs[0]?.value)
 
     // Only use orderedTabs logic for horizontal orientation
     const [orderedTabs, setOrderedTabs] = useState<TabItem[][]>(
@@ -68,6 +72,7 @@ export default function OSTabs({
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
+            if (!autoCalculateTabRows) return
             if (orientation === 'vertical') {
                 setOrderedTabs([tabs])
                 return
@@ -146,7 +151,7 @@ export default function OSTabs({
 
         setTimeout(() => {
             calculateTabRows()
-        }, 300)
+        }, 400)
 
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
@@ -225,7 +230,15 @@ export default function OSTabs({
                     </Tabs.List>
                 </div>
                 {tabs.map((tab) => (
-                    <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
+                    <Tabs.Content
+                        forceMount={forceMount}
+                        data-scheme="primary"
+                        key={tab.value}
+                        value={tab.value}
+                        className={`flex-1 h-full ${
+                            forceMount ? ((value || controlledValue) === tab.value ? 'block' : 'hidden') : ''
+                        }`}
+                    >
                         <TabContentContainer
                             className={`@container bg-primary h-full min-h-0 ${
                                 border ? 'border border-primary rounded-md' : ''
