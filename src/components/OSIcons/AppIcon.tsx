@@ -315,7 +315,7 @@ export const AppLink = ({
                 const urlObj = new URL(initialUrl)
                 return `${
                     posthogInstance
-                        ? posthogInstance
+                        ? posthogInstance.replace(/"/g, '')
                         : posthog?.isFeatureEnabled?.('direct-to-eu-cloud')
                         ? `https://eu.posthog.com`
                         : posthog?.isFeatureEnabled?.('direct-to-us-cloud') === false
