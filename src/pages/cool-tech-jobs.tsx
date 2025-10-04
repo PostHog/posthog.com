@@ -316,7 +316,7 @@ const CompanyRows = ({
                         className="border border-primary rounded-md"
                     >
                         <div className="flex flex-col lg:flex-row lg:items-center gap-6 border-b border-primary p-4">
-                            <div title={name} className="flex-shrink-0">
+                            <div title={name} className="flex-shrink-0 basis-40">
                                 {(logoLight || logoDark) && (
                                     <>
                                         {company.attributes.url ? (
