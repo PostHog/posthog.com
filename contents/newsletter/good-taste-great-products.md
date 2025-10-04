@@ -177,7 +177,7 @@ This approach is so important that Apple keeps a whole [prototyping team](https:
 
 Best of all, prototyping is cheaper than ever. 
 
-Code generation tools like Cursor and Lovable make rich, complex design experiments easy to build _and_ discard.
+[Code generation tools](/newsletter/ai-coding-mistakes) like Cursor and Lovable make rich, complex design experiments easy to build _and_ discard.
 
 >  **Recommended reading:** Prototyping can also help get [nosy, opinionated stakeholders off your back.](https://www.folklore.org/Calculator_Construction_Set.html?sort=date)
 

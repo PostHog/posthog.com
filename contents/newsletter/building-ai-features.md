@@ -113,6 +113,7 @@ For example, Max can write better SQL because it knows which tables are availabl
 Now that you have an idea of what you want to build, you need to make sure it actually works. Here are some core bits to focus on getting right:
 
 ### 4. Your app’s context and state are critical
+
 Everyone can call the OpenAI API, but your app's context is unique. This can include data like:
 
 - What a user is trying to do
@@ -173,7 +174,7 @@ We find doing this, combined with optimizing our model choice, is more effective
 
 ### 5. Steer AI to success with query planning and conditional routing
 
-AI will run off and do all sorts of crazy things if you let it. It needs guidance to be successful.
+AI will run off and [do all sorts of crazy things](/newsletter/ai-coding-mistakes) if you let it. It needs guidance to be successful.
 
 We do this by orchestrating and chaining together multiple steps like query planning → data retrieval → visualization.
 
