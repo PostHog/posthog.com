@@ -148,10 +148,13 @@ type IconPositions = Record<string, IconPosition>
 
 const STORAGE_KEY = 'desktop-icon-positions'
 
-const validateIconPositions = (positions: IconPositions, constraintsRef: React.RefObject<HTMLDivElement>): boolean => {
+const validateIconPositions = (
+    positions: IconPositions,
+    constraintsRef: React.RefObject<HTMLDivElement>,
+    productLinks: ReturnType<typeof useProductLinks>
+): boolean => {
     const iconWidth = 112
     const iconHeight = 75
-    const productLinks = useProductLinks()
     const allApps = [...productLinks, ...apps]
 
     for (const app of allApps) {
@@ -262,7 +265,7 @@ export default function Desktop() {
                 const parsedPositions = JSON.parse(savedPositions)
 
                 // Validate that all positions are within viewport bounds
-                if (validateIconPositions(parsedPositions, constraintsRef)) {
+                if (validateIconPositions(parsedPositions, constraintsRef, productLinks)) {
                     setIconPositions(parsedPositions)
                 } else {
                     // Some icons are out of bounds, reset to initial positions
@@ -280,14 +283,16 @@ export default function Desktop() {
             setIconPositions(generateInitialPositions())
         }
 
-        setRendered(true)
+        setTimeout(() => {
+            setRendered(true)
+        }, 400)
 
         window.addEventListener('resize', handleResize)
 
         return () => {
             window.removeEventListener('resize', handleResize)
         }
-    }, [])
+    }, [posthogInstance])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
