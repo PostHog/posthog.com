@@ -1,31 +1,40 @@
-## Q3 2025 Objectives
+## Q4 2025 Objectives
 
-### Pato
-
-- Work with Data Warehouse team on the new dbt pipelines and the new revenue data model
-- Lead pricing implementations (new products + changes in existing products)
-- Move Stripe flows to Billing admin UI (permissions, traceability, logging, etc)
-- Optimize API response times (performance, caching, split endpoints)
-- Improvements in Forecasting + Spike detector
 
 ### Pawel
 
-- Enable Max to answer the majority of billing support tickets
-- Improve billing error tracking and alerting to detect and resolve new errors and failing tasks ASAP
-- Improve the stability and performance of usage reporting and quota limiting
-- Improve pricing UX to make it easier to understand and anticipate
-- Benchmark product analytics pricing against competitors for different customer profiles (example/guide for product teams)
+- Implement pricing changes and launches (e.g. Data warehouse, Max, Tasks, Logs, Messaging/Workflows)
+- Launch a new, more compact billing page
+- Investigate and improve subscribe flow (e.g. status check timeouts, 3DS)
+- Experiment with the unsubscribe flow to reduce churn
+- Research usage-based billing providers to learn how they deal with challenges we face
+
+### Pato
+
+- Improve billing system, introducing pattern designs and abstractions (strategies for billing limits, forecasting and usage report)
+- Update legacy Stripe API version
+- Move Stripe flows to billing admin (e.g. credit notes, refunds, payments)
+- Collaborate with Mine & BigTimeData to deliver new revenue models
+- Implement pricing changes and launches (with Pawel)
+
+### Marce
+
+- Produce and maintain a single source of truth for billing logic
+- Comprehensive set of assertions on the billing system (incl. historical tables)
+- Real-time usage reporting RFC
 
 ### Mine
 
-- Migrate all key business metrics to the new revenue model as our single source of truth
-- Help Fraser and Janani deliver fully reconciled, audit ready revenue reporting
-- Launch end to end marketing -> sales -> revenue attribution, tying marketing leads to SFDC to revenue
-- Complete switch from leads to tasks in Salesforce with updated workflows
+- Deliver v1 reconciled revenue reporting with monthly reconciled revenue numbers and migrate all key metrics to the new model as the single source of truth
+- Update lifecycle metrics under new revenue model to include resurrected/paused accounts so expansion/churn views are more realistic
+- Create an end to end dashboard tying marketing -> sales pipeline -> revenue attribution 
+- Ship custom posthog org object in salesforce
+- Work with sales team on automation and tracking of outbound leads
 
-### Nice to haves
+### Bonus
 
-- Enable billing support for platform organizations (e.g. API access, usage reports, quota limiting)
-- Enable local payment methods (e.g. UPI in India)
-- Improve self-serve credit purchase flow
-- Improve trial handling (e.g. skip billing, per product trials)
+- Upgrade billing postgres
+- Enable local payment options in key markets (e.g. India, China; verify the need/ROI first)
+- Improve self-serve credit purchase flow (credit expiry logic, granting credits upfront)
+- Enable billing through partners (e.g. AWS self-serve, Vercel)
+- Support coupons (e.g. newsletters, hackathons)
