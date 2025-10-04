@@ -184,7 +184,16 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
     }
 
     const sdkLanguage = getLanguageFromSdkId(sdkReferences.info.id)
-    const filePath = path.join(sdkSpecDir, `${sdkReferences.info.slugPrefix}.md`)
+
+    // Follow the same path logic as createPages.ts
+    let fileName: string
+    if (sdkReferences.version.includes('latest')) {
+        fileName = `${sdkReferences.referenceId}.md`
+    } else {
+        fileName = `${sdkReferences.id}.md`
+    }
+
+    const filePath = path.join(sdkSpecDir, fileName)
 
     const renderTypeAsText = (type: string): string => {
         return type
