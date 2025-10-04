@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useEffect } from 'react'
-import { SEO } from 'components/seo'
+import { IconPlus } from '@posthog/icons'
 import Link from 'components/Link'
-import { graphql, useStaticQuery } from 'gatsby'
-import TeamPatch from 'components/TeamPatch'
-import { useUser } from 'hooks/useUser'
-import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
-import Tooltip from "components/RadixUI/Tooltip"
-import { IconPlus, IconX } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import Tooltip from 'components/RadixUI/Tooltip'
+import ReaderView from 'components/ReaderView'
+import { SEO } from 'components/seo'
+import TeamPatch from 'components/TeamPatch'
+import { TreeMenu } from 'components/TreeMenu'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useUser } from 'hooks/useUser'
+import React, { useEffect, useMemo, useState } from 'react'
 
 const TeamsPage = () => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -82,7 +82,7 @@ const TeamsPage = () => {
                 .map((team: any) => ({
                     name: team.name,
                     url: `/teams/${team.slug}`,
-                }))
+                })),
         ]
     }, [allTeams.nodes])
 
@@ -158,13 +158,7 @@ const TeamsPage = () => {
     // Create New team button for header
     const newTeamButton = isModerator ? (
         <span>
-            <Tooltip trigger={<OSButton
-                asLink
-                to="/teams/new"
-                size="md"
-                icon={<IconPlus />}
-            />}
-            >
+            <Tooltip trigger={<OSButton asLink to="/teams/new" size="md" icon={<IconPlus />} />}>
                 New small team
             </Tooltip>
         </span>
@@ -189,11 +183,9 @@ const TeamsPage = () => {
             >
                 <div className="@container">
                     <p className="mt-0">
-                        We've organized the company into small teams that are multi-disciplinary and as self-sufficient as possible.{' '}
-                        <Link
-                            to="/handbook/company/small-teams"
-                            state={{ newWindow: true }}
-                        >
+                        We've organized the company into small teams that are multi-disciplinary and as self-sufficient
+                        as possible.{' '}
+                        <Link to="/handbook/company/small-teams" state={{ newWindow: true }}>
                             Learn how small teams work.
                         </Link>{' '}
                     </p>
@@ -218,9 +210,9 @@ const TeamsPage = () => {
                                     index: number
                                 ) => {
                                     // Check if any team member matches the search
-                                    const hasMatchingMember = searchTerm && profiles?.data?.some((profile: any) =>
-                                        isTeamMemberMatch(profile, searchTerm)
-                                    )
+                                    const hasMatchingMember =
+                                        searchTerm &&
+                                        profiles?.data?.some((profile: any) => isTeamMemberMatch(profile, searchTerm))
 
                                     return (
                                         <Link
@@ -237,21 +229,29 @@ const TeamsPage = () => {
                                                 />
                                             </div>
 
-                                            <div className="absolute -bottom-4 left-0 right-0 justify-center -mr-3 transform transition-all duration-100">
+                                            <div className="relative bottom-4 left-0 right-0 justify-center -mr-3 transform transition-all duration-100">
                                                 <div className="flex flex-wrap justify-center" dir="rtl">
                                                     {profiles.data.length > 6 && (
                                                         <span
-                                                            className={`${hasMatchingMember ? 'visible' : 'invisible group-hover:visible'} cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark ${hasMatchingMember ? '' : 'animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500'} group-hover:animate-delay-[${5 * 100
-                                                                }ms]`}
+                                                            className={`${
+                                                                hasMatchingMember
+                                                                    ? 'visible'
+                                                                    : 'invisible group-hover:visible'
+                                                            } cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark ${
+                                                                hasMatchingMember
+                                                                    ? ''
+                                                                    : 'animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500'
+                                                            } group-hover:animate-delay-[${5 * 100}ms]`}
                                                         >
                                                             <Tooltip
-                                                                trigger={<div className="size-10 rounded-full bg-accent dark:bg-accent-dark border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
-                                                                    {profiles.data.length - 5}+
-                                                                </div>}
+                                                                trigger={
+                                                                    <div className="size-10 rounded-full bg-accent dark:bg-accent-dark border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
+                                                                        {profiles.data.length - 5}+
+                                                                    </div>
+                                                                }
                                                                 side="bottom"
                                                             >
                                                                 {profiles.data.length - 5} more
-
                                                             </Tooltip>
                                                         </span>
                                                     )}
@@ -289,25 +289,49 @@ const TeamsPage = () => {
                                                                 return (
                                                                     <span
                                                                         key={`${name}-${index}`}
-                                                                        className={`${hasMatchingMember ? 'visible' : 'invisible group-hover:visible'} cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${isMatchingMember ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10' : 'border-accent dark:border-accent-dark'} ${hasMatchingMember ? '' : 'animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500'} group-hover:animate-delay-[${(Math.min(
-                                                                            profiles.data.length > 6
-                                                                                ? 5
-                                                                                : profiles.data.length,
-                                                                            6
-                                                                        ) -
-                                                                            index -
-                                                                            1) *
+                                                                        className={`${
+                                                                            hasMatchingMember
+                                                                                ? 'visible'
+                                                                                : 'invisible group-hover:visible'
+                                                                        } cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${
+                                                                            isMatchingMember
+                                                                                ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
+                                                                                : 'border-accent dark:border-accent-dark'
+                                                                        } ${
+                                                                            hasMatchingMember
+                                                                                ? ''
+                                                                                : 'animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500'
+                                                                        } group-hover:animate-delay-[${
+                                                                            (Math.min(
+                                                                                profiles.data.length > 6
+                                                                                    ? 5
+                                                                                    : profiles.data.length,
+                                                                                6
+                                                                            ) -
+                                                                                index -
+                                                                                1) *
                                                                             100
-                                                                            }ms]`}
+                                                                        }ms]`}
                                                                     >
                                                                         <Tooltip
-                                                                            trigger={<img
-                                                                                src={avatar?.data?.attributes?.url}
-                                                                                className={`size-10 rounded-full bg-${color ??
-                                                                                    'accent dark:bg-accent-dark'
-                                                                                    } border ${isMatchingMember ? 'border-red dark:border-yellow' : 'border-light dark:border-dark'} transform ${isMatchingMember ? 'scale-125' : 'scale-100'} hover:scale-125 transition-all`}
-                                                                                alt={name}
-                                                                            />}
+                                                                            trigger={
+                                                                                <img
+                                                                                    src={avatar?.data?.attributes?.url}
+                                                                                    className={`size-10 rounded-full bg-${
+                                                                                        color ??
+                                                                                        'accent dark:bg-accent-dark'
+                                                                                    } border ${
+                                                                                        isMatchingMember
+                                                                                            ? 'border-red dark:border-yellow'
+                                                                                            : 'border-light dark:border-dark'
+                                                                                    } transform ${
+                                                                                        isMatchingMember
+                                                                                            ? 'scale-125'
+                                                                                            : 'scale-100'
+                                                                                    } hover:scale-125 transition-all`}
+                                                                                    alt={name}
+                                                                                />
+                                                                            }
                                                                             side="bottom"
                                                                             delay={0}
                                                                         >
@@ -327,13 +351,8 @@ const TeamsPage = () => {
 
                     {filteredTeams.length === 0 && searchTerm && (
                         <div className="text-center py-12">
-                            <p className="text-lg text-secondary">
-                                No teams found matching "{searchTerm}"
-                            </p>
-                            <button
-                                onClick={() => setSearchTerm('')}
-                                className="mt-4 text-blue hover:underline"
-                            >
+                            <p className="text-lg text-secondary">No teams found matching "{searchTerm}"</p>
+                            <button onClick={() => setSearchTerm('')} className="mt-4 text-blue hover:underline">
                                 Clear search
                             </button>
                         </div>
