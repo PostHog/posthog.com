@@ -195,7 +195,8 @@ const JobsByDepartment = ({
 }
 
 const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isLoading: boolean }) => {
-    const { websiteTheme } = useValues(layoutLogic)
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
 
     const scrollToCompany = (companyId: number) => {
         const element = document.getElementById(`company-${companyId}`)
@@ -209,7 +210,12 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
 
     return (
         <div className="mb-8">
-            {!isLoading && <h3 className="text-lg font-semibold mb-4">Jump to company</h3>}
+            {!isLoading && (
+                <>
+                    <h3 className="text-lg font-semibold mb-0">Featuring roles from these cool companies...</h3>
+                    <p className="text-sm text-secondary">(Click a logo to jump to a company)</p>
+                </>
+            )}
             <div className="flex flex-wrap gap-2">
                 {companies
                     .filter((company) => company.attributes.jobs.data.length > 0)
@@ -227,12 +233,12 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                             >
                                 {logoLight || logoDark ? (
                                     <img
-                                        className="min-h-6 max-h-8 object-contain"
-                                        src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                        className="min-h-4 max-h-6 object-contain"
+                                        src={logoDark && isDark ? logoDark : logoLight}
                                         alt={name}
                                     />
                                 ) : (
-                                    <div className="w-16 h-12 bg-accent rounded flex items-center justify-center">
+                                    <div className="bg-accent rounded flex items-center justify-center">
                                         <span className="text-sm font-semibold text-muted">
                                             {name.charAt(0).toUpperCase()}
                                         </span>
@@ -272,7 +278,8 @@ const CompanyRows = ({
     fetchMore: () => void
 }) => {
     const { isModerator } = useUser()
-    const { websiteTheme } = useValues(layoutLogic)
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
     const [ref, inView] = useInView({
         threshold: 0.5,
     })
@@ -368,37 +375,39 @@ const CompanyRows = ({
                                             <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
                                                 <img
                                                     className="max-w-40 mb-3 w-full"
-                                                    src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                    src={logoDark && isDark ? logoDark : logoLight}
                                                     alt={name}
                                                 />
                                             </Link>
                                         ) : (
                                             <img
                                                 className="max-w-40 mb-3 w-full"
-                                                src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                src={logoDark && isDark ? logoDark : logoLight}
                                                 alt={name}
                                             />
                                         )}
                                     </>
                                 )}
                                 {isModerator && (
-                                    <div className="flex mt-4">
-                                        <button
-                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-2 py-1"
+                                    <div className="flex mt-4 space-x-0.5">
+                                        <OSButton
+                                            icon={<IconPencil />}
                                             onClick={() => {
                                                 openAddAJobWindow(company.id)
                                             }}
+                                            size="sm"
+                                            hover="background"
                                         >
-                                            <IconPencil className="size-3" />
-                                            <span>Edit</span>
-                                        </button>
-                                        <button
-                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-2 py-1"
+                                            Edit
+                                        </OSButton>
+                                        <OSButton
+                                            icon={<IconTrash />}
                                             onClick={() => deleteCompany(company.id, name)}
+                                            size="sm"
+                                            hover="background"
                                         >
-                                            <IconTrash className="size-3" />
-                                            <span>Delete</span>
-                                        </button>
+                                            Delete
+                                        </OSButton>
                                     </div>
                                 )}
                             </div>
@@ -406,11 +415,11 @@ const CompanyRows = ({
                             <div className="flex-grow">
                                 {company.attributes.description?.trim() && (
                                     <div className="mb-4">
-                                        <p className="text-sm">{company.attributes.description}</p>
+                                        <p className="my-0 text-sm">{company.attributes.description}</p>
                                         {company.attributes.url && (
                                             <OSButton
                                                 to={`${company.attributes.url}?utm_source=posthog`}
-                                                className="px-3 rounded-full border-primary"
+                                                className="px-3 rounded-full border-primary mt-2"
                                                 size="sm"
                                                 external
                                                 asLink
@@ -422,7 +431,7 @@ const CompanyRows = ({
                                 )}
 
                                 <div>
-                                    <h3 className="text-sm font-medium text-muted m-0 leading-none mb-2">
+                                    <h3 className="text-sm font-medium text-muted dark:text-secondary m-0 leading-none mb-2">
                                         Company perks
                                     </h3>
                                     <Perks company={company} className="flex gap-x-1 flex-wrap" />
