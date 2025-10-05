@@ -16,7 +16,7 @@ This document explains the technical causes, the customer's solution, and how to
 
 | Issue | Explanation |
 |------|-------------|
-| PostHog re-initialized on every extension wake | Chrome Extensions create a new runtime context when switching from idle to active. Each context re-initialized PostHog without access to prior storage. |
+| PostHog re-initialized on every extension wake | Chrome extensions create a new runtime context when switching from idle to active. Each context re-initialized PostHog without access to prior storage. |
 | A new `distinct_id` was created each time | Since local storage is isolated per context, the PostHog SDK could not persist the ID. This triggered a new anonymous ID on each wake cycle. |
 | `identify()` was called repeatedly | Each new ID triggered a comparison to the persisted UUID. Since they always differed, `identify()` was called each time. |
 | `identify()` triggered `reloadFeatureFlags()` | Every call to `identify()` refreshed feature flags. |
