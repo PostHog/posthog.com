@@ -208,7 +208,7 @@ const Row = ({
                             onClick={onShowMore}
                             className="text-primary hover:text-accent font-semibold text-[13px] w-full py-1"
                         >
-                            Show {moreCount} more {type}
+                            Show {moreCount} more {moreCount === 1 ? type : `${type}s`}
                         </button>
                     </div>
                 ) : null}

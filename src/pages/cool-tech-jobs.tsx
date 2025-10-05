@@ -69,43 +69,43 @@ interface ToggleFilter {
 
 const toggleFilters: ToggleFilter[] = [
     {
-        icon: <StickerLaptop className="size-6" />,
+        icon: <StickerLaptop className="size-7" />,
         label: 'Remote',
         key: 'isRemote',
         appliesTo: 'job',
     },
     {
-        icon: <StickerPullRequest className="size-6" />,
+        icon: <StickerPullRequest className="size-7" />,
         label: 'Engineers decide what to build',
         key: 'engineersDecideWhatToBuild',
         appliesTo: 'company',
     },
     {
-        icon: <StickerLaptop className="size-6" />,
+        icon: <StickerLaptop className="size-7" />,
         label: 'Remote only company',
         key: 'remoteOnly',
         appliesTo: 'company',
     },
     {
-        icon: <StickerPalmTree className="size-6" />,
+        icon: <StickerPalmTree className="size-7" />,
         label: 'Exotic off-sites',
         key: 'exoticOffsites',
         appliesTo: 'company',
     },
     {
-        icon: <StickerDnd className="size-6" />,
+        icon: <StickerDnd className="size-7" />,
         label: 'Meeting-free days',
         key: 'meetingFreeDays',
         appliesTo: 'company',
     },
     {
-        icon: <StickerEngineerRatio className="size-6" />,
+        icon: <StickerEngineerRatio className="size-7" />,
         label: 'High engineer ratio',
         key: 'highEngineerRatio',
         appliesTo: 'company',
     },
     {
-        icon: <StickerHourglass className="size-6" />,
+        icon: <StickerHourglass className="size-7" />,
         label: 'No deadlines',
         key: 'noDeadlines',
         appliesTo: 'company',
@@ -168,7 +168,7 @@ const JobsByDepartment = ({
                     const showPosted = postedDate && postedDate !== '1970-01-01T00:00:00.000Z'
 
                     return (
-                        <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
+                        <li key={job.id} className="flex justify-between items-start last:mb-6 mt-2 first:mt-0">
                             <Link
                                 externalNoIcon={!isPostHog}
                                 className="group !text-inherit underline"
@@ -279,6 +279,7 @@ const CompanyRows = ({
                                         externalNoIcon={!isPostHog}
                                         className="group !text-inherit underline font-medium"
                                         to={url + (isPostHog ? '' : '?utm_source=posthog')}
+                                        state={isPostHog ? { newWindow: true } : undefined}
                                     >
                                         <span className="relative">
                                             {job.attributes.title}
@@ -370,7 +371,7 @@ const CompanyRows = ({
                                     <h3 className="text-sm font-medium text-muted m-0 leading-none mb-2">
                                         Company perks
                                     </h3>
-                                    <Perks company={company} className="flex gap-2 flex-wrap" />
+                                    <Perks company={company} className="flex gap-x-1 flex-wrap" />
                                 </div>
                             </div>
                         </div>
@@ -382,7 +383,7 @@ const CompanyRows = ({
                                     rows={jobRows}
                                     rowAlignment="center"
                                     groupBy="Department"
-                                    type="roles"
+                                    type="role"
                                 />
                             ) : (
                                 <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
@@ -1369,8 +1370,7 @@ export default function JobsPage() {
                 image={`/images/og/cool-tech-jobs.png`}
             />
             <Editor
-                title="cool_tech_jobs"
-                type="psheet"
+                title="Cool tech jobs"
                 slug="/cool-tech-jobs"
                 maxWidth="100%"
                 onSearchChange={(search) => {
@@ -1402,7 +1402,7 @@ export default function JobsPage() {
                 }}
             >
                 <section>
-                    <p className="my-0 mb-4 -mt-1">
+                    <p className="my-0 mb-4">
                         Find open roles for product engineers (and other jobs) from companies with unique perks and
                         great culture.
                     </p>
