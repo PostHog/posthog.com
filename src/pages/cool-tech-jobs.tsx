@@ -131,10 +131,12 @@ const JobsByDepartment = ({
     jobs,
     department,
     initialOpen = false,
+    type,
 }: {
     jobs: Job[]
     department: string
     initialOpen?: boolean
+    type: string
 }) => {
     const [open, setOpen] = useState(initialOpen)
     return (
@@ -189,20 +191,6 @@ const JobsByDepartment = ({
                 })}
             </motion.ul>
         </div>
-    )
-}
-
-const JobList = ({ jobs }: { jobs: Job[] }) => {
-    const jobsGroupedByDepartment = groupBy(jobs, 'attributes.department')
-
-    return (
-        <ul className="list-none p-0 m-0 mt-2 flex-grow">
-            {Object.entries(jobsGroupedByDepartment).map(([department, jobs], index) => (
-                <li key={department}>
-                    <JobsByDepartment jobs={jobs} department={department} initialOpen={index === 0} />
-                </li>
-            ))}
-        </ul>
     )
 }
 
@@ -394,6 +382,7 @@ const CompanyRows = ({
                                     rows={jobRows}
                                     rowAlignment="center"
                                     groupBy="Department"
+                                    type="roles"
                                 />
                             ) : (
                                 <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
