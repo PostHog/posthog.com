@@ -115,10 +115,13 @@ git clone https://github.com/PostHog/posthog && cd posthog/
 ```
 
 > [!NOTE]
-> The `posthog-feature-flags-1` container relies on the presence of the GeoLite cities database in the `/share`. You can download a copy via [this github repo](https://github.com/P3TERX/GeoLite.mmdb) which makes frequent releases. You may also need to modify the permissions of the database with:
+> The `posthog-feature-flags-1` container relies on the presence of the GeoLite
+> cities database in the `/share`. You can download a copy via [this github
+> repo](https://github.com/P3TERX/GeoLite.mmdb) which makes frequent releases.
+> You may also need to modify the file permissions of the database.
 >
 > ```sh
-> chmod ./share/GeoLite-Cities2.mmdb
+> chmod 0755 ./share/GeoLite2-City.mmdb
 > ```
 
 ### Instant setup
