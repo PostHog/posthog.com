@@ -1517,8 +1517,10 @@ export default function JobsPage() {
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [search, setSearch] = useState('')
+    const [pendingCompaniesCount, setPendingCompaniesCount] = useState<number>(0)
     const { addWindow } = useApp()
     const { appWindow } = useWindow()
+    const { getJwt, isModerator } = useUser()
 
     const {
         companies: initialCompanies,
@@ -1529,6 +1531,26 @@ export default function JobsPage() {
         deleteCompany,
         isValidating: companiesValidating,
     } = useCompanies({ companyFilters, jobFilters, search })
+
+    const fetchPendingCompaniesCount = useCallback(async () => {
+        if (!isModerator) return
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            const data = await response.json()
+            setPendingCompaniesCount(data.data?.length || 0)
+        } catch (error) {
+            console.error('Error fetching pending companies count:', error)
+        }
+    }, [isModerator, getJwt])
+
+    useEffect(() => {
+        fetchPendingCompaniesCount()
+    }, [fetchPendingCompaniesCount])
 
     const openIssueWindow = () => {
         addWindow(
@@ -1545,6 +1567,7 @@ export default function JobsPage() {
                 companyId={companyId}
                 onSuccess={() => {
                     mutate()
+                    fetchPendingCompaniesCount()
                 }}
                 onClose={() => {
                     setCompanyId(undefined)
@@ -1552,8 +1575,6 @@ export default function JobsPage() {
             />
         )
     }
-
-    const { isModerator } = useUser()
 
     return (
         <>
@@ -1600,14 +1621,15 @@ export default function JobsPage() {
                         great culture.
                     </p>
 
-                    {isModerator && (
+                    {isModerator && pendingCompaniesCount > 0 && (
                         <div
                             data-scheme="secondary"
                             className="border border-primary bg-primary rounded mb-4 p-4 @md:py-2 flex flex-col @md:flex-row @md:items-center gap-2 @md:gap-4 w-full"
                         >
                             <div className="flex-1">
                                 <IconShieldLock className="block @md:inline-block size-10 @md:size-6 text-secondary relative -top-0.5 mr-2" />{' '}
-                                There are 3 companies waiting to be approved.
+                                There {pendingCompaniesCount === 1 ? 'is' : 'are'} {pendingCompaniesCount}{' '}
+                                {pendingCompaniesCount === 1 ? 'company' : 'companies'} awaiting approval.
                             </div>
                             <aside>
                                 <OSButton
