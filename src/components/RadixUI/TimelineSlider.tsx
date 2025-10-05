@@ -302,7 +302,7 @@ export const TimelineSlider = ({
                                 } else if (intensity >= 3) {
                                     colorClass = 'bg-green opacity-100'
                                 }
-                                const finalClass = inRange ? colorClass : 'bg-light-6'
+                                const finalClass = colorClass
                                 return (
                                     <div
                                         key={`${i}-${k}`}

@@ -12,7 +12,7 @@ import { Heading } from 'components/Heading'
 import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
-import { Link, navigate } from 'gatsby'
+import { graphql, Link, navigate, useStaticQuery } from 'gatsby'
 import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import RoadmapForm from 'components/RoadmapForm'
@@ -460,6 +460,15 @@ export default function Changelog({ pageContext }) {
     })
     const { addWindow } = useApp()
     const { isModerator } = useUser()
+    const data = useStaticQuery(graphql`
+        {
+            allRoadmap(filter: { complete: { eq: true } }, sort: { fields: date }) {
+                nodes {
+                    date
+                }
+            }
+        }
+    `)
 
     useEffect(() => {
         const query = qs.stringify({
@@ -517,7 +526,7 @@ export default function Changelog({ pageContext }) {
 
     // Ensure at least 2024–2025 and provide one-year buffer on both sides
     const buffer = 1
-    const startYear = Math.min(2024, detectedYears.startYear - buffer)
+    const startYear = Math.min(2020, detectedYears.startYear - buffer)
     const endYear = Math.max(2025, detectedYears.endYear + buffer)
 
     // Build month items across all years
@@ -554,12 +563,13 @@ export default function Changelog({ pageContext }) {
         })
     }, [roadmaps, monthRange, startYear])
 
-    // Activity bins across the entire span
+    // Activity bins across the entire span (built from build-time GraphQL data)
     const activity = useMemo(() => {
         const bins = 4
         const acc: number[][] = Array.from({ length: monthItems.length }, () => Array.from({ length: bins }, () => 0))
-        for (const r of roadmaps || []) {
-            const d = r?.attributes?.dateCompleted
+        const nodes = data?.allRoadmap?.nodes || []
+        for (const n of nodes) {
+            const d = n?.date
             if (!d) {
                 continue
             }
@@ -574,7 +584,7 @@ export default function Changelog({ pageContext }) {
             acc[idx][binIndex] += 1
         }
         return acc
-    }, [roadmaps, monthItems, startYear])
+    }, [data, monthItems, startYear])
 
     // Reset range to data bounds when data changes
     useEffect(() => {
@@ -592,8 +602,6 @@ export default function Changelog({ pageContext }) {
     }, [roadmaps, startYear, endYear])
 
     const groupedRoadmaps = lodashGroupBy(visibleRoadmaps, groupBy)
-
-    console.log(activity)
 
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/changelog/2025',
