@@ -146,6 +146,15 @@ export const TimelineSlider = ({
         }
     }
 
+    const handleWindowDoubleClick = () => {
+        if (max <= 0) {
+            return
+        }
+        const endIndex = Math.max(0, Math.min(max, value[1]))
+        const startIndex = Math.max(0, endIndex - 1)
+        onValueChange([startIndex, endIndex])
+    }
+
     // Setup resize observer on viewport to know available width
     React.useLayoutEffect(() => {
         const el = viewportRef.current
@@ -350,6 +359,7 @@ export const TimelineSlider = ({
                             onPointerMove={handleWindowPointerMove}
                             onPointerUp={handleWindowPointerUp}
                             onPointerCancel={handleWindowPointerUp}
+                            onDoubleClick={handleWindowDoubleClick}
                         >
                             {/* Resize handles */}
                             <div
