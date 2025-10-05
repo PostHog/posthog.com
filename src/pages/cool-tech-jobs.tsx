@@ -7,6 +7,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
 import {
     IconChevronDown,
+    IconShieldLock,
     IconArrowUpRight,
     IconX,
     IconPencil,
@@ -55,6 +56,7 @@ import ProgressBar from 'components/ProgressBar'
 import CloudinaryImage from 'components/CloudinaryImage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import { navigate } from 'gatsby'
 
 dayjs.extend(relativeTime)
 
@@ -794,7 +796,8 @@ const ModeratorInitialView = ({
     }, [])
 
     return pendingCompanies.length > 0 ? (
-        <div>
+        <div data-scheme="primary">
+            <h2 className="mb-2">Companies awaiting approval</h2>
             <Select
                 value={selectedCompany?.id?.toString()}
                 onValueChange={(value) => {
@@ -814,17 +817,25 @@ const ModeratorInitialView = ({
             />
             {selectedCompany && (
                 <div className="mt-4">
-                    <CallToAction onClick={() => onStartFromPendingCompany(selectedCompany)} size="md" width="full">
+                    <OSButton
+                        onClick={() => onStartFromPendingCompany(selectedCompany)}
+                        size="md"
+                        variant="primary"
+                        width="full"
+                    >
                         {`Continue with ${selectedCompany?.attributes.name}`}
-                    </CallToAction>
+                    </OSButton>
                 </div>
             )}
-            <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base">
+            <h4
+                data-scheme="secondary"
+                className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base"
+            >
                 <span className="bg-primary px-2 relative">or</span>
             </h4>
-            <CallToAction size="md" width="full" type="secondary" onClick={onAddNewCompany}>
+            <OSButton size="md" width="full" variant="secondary" onClick={onAddNewCompany}>
                 Add a new company
-            </CallToAction>
+            </OSButton>
         </div>
     ) : null
 }
@@ -1377,14 +1388,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             <div className="space-y-2 !mt-5">
                 <div>
                     <h4 className="text-base font-semibold m-0">Company logos</h4>
-                    <p className="text-sm opacity-70 m-0">Upload the company logos in SVG or PNG format</p>
+                    <p className="text-sm opacity-70 m-0">Upload the company logos in SVG or (transparent) PNG</p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
+                            className={`h-auto rounded-sm !bg-light ${
                                 touched.logoLight && errors.logoLight ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoLight', file)}
@@ -1397,7 +1408,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input bg-black ${
+                            className={`h-auto rounded-sm !bg-dark ${
                                 touched.logoDark && errors.logoDark ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
@@ -1406,19 +1417,19 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
                         />
                     </label>
-
+                    {/* 
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logomark</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
-                                touched.logomark && errors.logomark ? 'border-red' : ''
-                            }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logomark && errors.logomark ? 'border-red' : ''
+                                }`}
                             onDrop={(file) => setFieldValue('logomark', file)}
                             onRemove={() => setFieldValue('logomark', null)}
                             image={values.logomark}
                             accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
                         />
-                    </label>
+                    </label> 
+                    */}
                 </div>
                 {(touched.logoLight && errors.logoLight) ||
                 (touched.logoDark && errors.logoDark) ||
@@ -1432,8 +1443,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </p>
                 ) : null}
             </div>
-            <div className="!mt-8">
-                <CallToAction disabled={isSubmitting} width="full">
+            <div>
+                <OSButton disabled={isSubmitting} width="full" variant="primary">
                     {isSubmitting ? (
                         <div className="flex items-center justify-center">
                             <Spinner className="!size-6" />
@@ -1445,7 +1456,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     ) : (
                         'Submit application'
                     )}
-                </CallToAction>
+                </OSButton>
             </div>
         </form>
     )
@@ -1542,6 +1553,8 @@ export default function JobsPage() {
         )
     }
 
+    const { isModerator } = useUser()
+
     return (
         <>
             <SEO
@@ -1586,6 +1599,29 @@ export default function JobsPage() {
                         Find open roles for product engineers (and other jobs) from companies with unique perks and
                         great culture.
                     </p>
+
+                    {isModerator && (
+                        <div
+                            data-scheme="secondary"
+                            className="border border-primary bg-primary rounded mb-4 p-4 @md:py-2 flex flex-col @md:flex-row @md:items-center gap-2 @md:gap-4 w-full"
+                        >
+                            <div className="flex-1">
+                                <IconShieldLock className="block @md:inline-block size-10 @md:size-6 text-secondary relative -top-0.5 mr-2" />{' '}
+                                There are 3 companies waiting to be approved.
+                            </div>
+                            <aside>
+                                <OSButton
+                                    onClick={() => {
+                                        openAddAJobWindow()
+                                    }}
+                                    variant="secondary"
+                                    size="md"
+                                >
+                                    View pending companies
+                                </OSButton>
+                            </aside>
+                        </div>
+                    )}
                     <ul className="mb-8">
                         <li>
                             Looking to work at PostHog?{' '}
@@ -1599,7 +1635,7 @@ export default function JobsPage() {
                                 className="text-red dark:text-yellow font-semibold"
                                 onClick={() => openAddAJobWindow(companyId)}
                             >
-                                Apply to get your jobs listed here.
+                                Apply to get your jobs listed.
                             </button>
                         </li>
                         <li>
