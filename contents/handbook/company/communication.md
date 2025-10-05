@@ -89,7 +89,7 @@ Please be sure to read the README of the repo for guidelines on how to file spec
 
 **Examples of information that should NOT go here:**
 - ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...).
-- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo if private or `meta` if public. 
+- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo if private or `meta` if public.
 - ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 
 ## Written communication
@@ -148,15 +148,17 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 > Slack canvasses are useful for storing information like schedules, bookmarks, personal to-do lists, scratch notes etc. However, things like quarterly goals, runbooks, sprint plans, FAQs etc. should live in the Handbook, Docs, or in a GitHub RFC or Issue by default. If you find yourself documenting something useful in Slack, it's much better to put it in GitHub instead and link to it from Slack so that Max AI can include it in future search results. Slack canvasses are terrible for searchability!
 
+> [Slack recap](https://slack.com/help/articles/25076892548883-Guide-to-AI-features-in-Slack#01JM0PAPCT4K0TWNWGJRQDXTBA) is a great way to learn from others by adding channels like `#ask-max` and `#today-i-learned` to the recap. You can also use it to keep tabs on teams you may not directly work on, but still want to know what's being discussed.
+
 **Slack etiquette**
 
 Slack is used differently in different organizations. Here are some guidelines for how we use Slack at PostHog:
 
 1. Keep `#general` open for company-wide announcements.
-1. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
-1. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
-1. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
-1. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
+2. `@channel` or `@here` mentions should be reserved for urgent or time-sensitive posts that require immediate attention by everyone in the channel. (Examples: changing a meeting invite URL just before a meeting, or soliciting urgent help for a service disruption, where you're not sure who is immediately available)
+3. Make use of threads when responding to a post. This allows informal discussion to take place without notifications being sent to everyone in the channel on every reply.
+4. When possible, summarize multiple thoughts into a single message instead of sending multiple messages sequentially.
+5. You don't need to tell people if you're away from your computer, especially on no-meeting days. There's no general expectation people are available to reply to messages in real time, including in Slack.
 
 Channel naming conventions so people don't get confused:
 
@@ -166,7 +168,7 @@ Channel naming conventions so people don't get confused:
 - `#alerts-xxxxx` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
 - `#support-xxxxx` - similarly, useful to feed support requests in if helpful without adding clutter
 
-On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there. 
+On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there.
 
 ### Google Docs and Slides
 
@@ -200,7 +202,7 @@ James (H) and Cory are admins on the Pitch account. Because Pitch charges per se
 
 ## Requests for comment (RFCs)
 
-We use RFCs to communicate and gather feedback on a decision. RFCs are useful because they help us stay transparent, and the process of writing them forces you to clearly articulate your thoughts in a structured way. 
+We use RFCs to communicate and gather feedback on a decision. RFCs are useful because they help us stay transparent, and the process of writing them forces you to clearly articulate your thoughts in a structured way.
 
 Here are the steps for an RFC:
 1. Identify a problem and a decision to be made
@@ -244,7 +246,7 @@ An RFC is likely to be unhelpful as a first step in other circumstances. Specifi
 
 ## Internal meetings
 
-PostHog uses [Google Meet](https://meet.google.com/) for video communications. For large meetings, use `CMD + minus key` to zoom out and see everyone - you'll usually need to do this in All Hands. 
+PostHog uses [Google Meet](https://meet.google.com/) for video communications. For large meetings, use `CMD + minus key` to zoom out and see everyone - you'll usually need to do this in All Hands.
 
 Use video calls if you find yourself going back and forth in an issue/via email or over chat. Sometimes it is still more valuable to have a 40+ message conversation via chat as it improves transparency, is easy to refer back to, and is friendlier to newcomers getting up to speed.
 
