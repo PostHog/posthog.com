@@ -294,12 +294,20 @@ const CompanyRows = ({
     )
 
     const displayCompanies = useMemo(() => {
-        return companies.filter((company) => {
-            const hasJobs = company.attributes.jobs.data.length > 0
-            const hasFilters = companyFilters.length > 0 || jobFilters.length > 0
-            return (isModerator && !search && !hasFilters) || hasJobs
-        })
-    }, [companies])
+        const companiesWithJobs = companies.filter((company) => company.attributes.jobs.data.length > 0)
+        const companiesWithoutJobs = companies.filter((company) => company.attributes.jobs.data.length === 0)
+        const hasFilters = companyFilters.length > 0 || jobFilters.length > 0
+
+        // Always show companies with jobs
+        let result = companiesWithJobs
+
+        // For moderators, also show companies without jobs (but only when no search/filters)
+        if (isModerator && !search && !hasFilters) {
+            result = [...companiesWithJobs, ...companiesWithoutJobs]
+        }
+
+        return result
+    }, [companies, isModerator, search, companyFilters, jobFilters])
 
     useEffect(() => {
         if (inView && hasMore) {
@@ -307,9 +315,14 @@ const CompanyRows = ({
         }
     }, [inView])
 
+    const companiesWithJobs = displayCompanies.filter((company) => company.attributes.jobs.data.length > 0)
+    const companiesWithoutJobs = displayCompanies.filter((company) => company.attributes.jobs.data.length === 0)
+    const showCompaniesWithoutJobs = isModerator && !search && companyFilters.length === 0 && jobFilters.length === 0
+
     return (
         <div className="space-y-8">
-            {displayCompanies.map((company, index) => {
+            {/* Companies with jobs */}
+            {companiesWithJobs.map((company, index) => {
                 const { name } = company.attributes
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
@@ -457,6 +470,108 @@ const CompanyRows = ({
                     </div>
                 )
             })}
+
+            {/* Companies without jobs (moderators only) */}
+            {showCompaniesWithoutJobs && companiesWithoutJobs.length > 0 && (
+                <>
+                    <h2 className="text-xl font-semibold text-muted dark:text-secondary mt-12 mb-6">
+                        Companies with no active RootClasses
+                    </h2>
+                    <p className="text-secondary">(Only visible to moderators)</p>
+                    {companiesWithoutJobs.map((company, index) => {
+                        const { name } = company.attributes
+                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
+                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+
+                        return (
+                            <div
+                                key={company.id}
+                                id={`company-${company.id}`}
+                                className="border border-primary rounded-md flex flex-col @2xl:flex-row opacity-60"
+                            >
+                                <div className="@2xl:basis-72 flex flex-col gap-4 p-4">
+                                    <div title={name} className="flex-shrink-0">
+                                        {(logoLight || logoDark) && (
+                                            <>
+                                                {company.attributes.url ? (
+                                                    <Link
+                                                        to={`${company.attributes.url}?utm_source=posthog`}
+                                                        externalNoIcon
+                                                    >
+                                                        <img
+                                                            className="max-w-40 mb-3 w-full"
+                                                            src={logoDark && isDark ? logoDark : logoLight}
+                                                            alt={name}
+                                                        />
+                                                    </Link>
+                                                ) : (
+                                                    <img
+                                                        className="max-w-40 mb-3 w-full"
+                                                        src={logoDark && isDark ? logoDark : logoLight}
+                                                        alt={name}
+                                                    />
+                                                )}
+                                            </>
+                                        )}
+                                        <div className="flex mt-4 space-x-0.5">
+                                            <OSButton
+                                                icon={<IconPencil />}
+                                                onClick={() => {
+                                                    openAddAJobWindow(company.id)
+                                                }}
+                                                size="sm"
+                                                hover="background"
+                                            >
+                                                Edit
+                                            </OSButton>
+                                            <OSButton
+                                                icon={<IconTrash />}
+                                                onClick={() => deleteCompany(company.id, name)}
+                                                size="sm"
+                                                hover="background"
+                                            >
+                                                Delete
+                                            </OSButton>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex-grow">
+                                        {company.attributes.description?.trim() && (
+                                            <div className="mb-4">
+                                                <p className="my-0 text-sm">{company.attributes.description}</p>
+                                                {company.attributes.url && (
+                                                    <OSButton
+                                                        to={`${company.attributes.url}?utm_source=posthog`}
+                                                        className="px-3 rounded-full border-primary mt-2"
+                                                        size="sm"
+                                                        external
+                                                        asLink
+                                                    >
+                                                        Website
+                                                    </OSButton>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <h3 className="text-sm font-medium text-muted dark:text-secondary m-0 leading-none mb-2">
+                                                Company perks
+                                            </h3>
+                                            <Perks company={company} className="flex gap-x-1 flex-wrap" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex-1 p-4">
+                                    <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
+                                        <em>No jobs currently available</em>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </>
+            )}
 
             {displayCompanies.length === 0 && !isLoading && (
                 <div className="text-center py-12 text-secondary">
