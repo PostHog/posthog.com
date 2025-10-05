@@ -1577,6 +1577,16 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Use Cases',
+                url: '',
+                children: [
+                    {
+                        name: 'Chrome Extension Billing Issues',
+                        url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
+                    },
+                ],
+            },
+            {
                 name: 'Getting people to talk to you',
                 url: '/handbook/growth/sales/getting-people-to-talk-to-you',
             },
