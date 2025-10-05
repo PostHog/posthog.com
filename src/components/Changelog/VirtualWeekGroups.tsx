@@ -1,6 +1,7 @@
 import React from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import dayjs from 'dayjs'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 type RoadmapType = {
     id?: string | number
@@ -109,62 +110,65 @@ export default function VirtualWeekGroups({
         if (!containerRef.current || !scrollToEndOnMount) {
             return
         }
-        // Scroll to the far right (newest) after first render of items
-        const el = containerRef.current
-        el.scrollLeft = el.scrollWidth
-        setScrollLeft(el.scrollLeft)
-        // Only run on initial items mount
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [groups.length])
+        const scrollableElement = containerRef.current?.closest('[data-radix-scroll-area-viewport]')
+        if (!scrollableElement) {
+            return
+        }
+        scrollableElement.scrollTo({
+            left: scrollableElement.scrollWidth,
+        })
+    }, [groups.length, containerRef.current, scrollToEndOnMount])
 
     return (
-        <div
-            ref={containerRef}
-            className={`relative w-full overflow-x-auto overflow-y-hidden ${className}`}
-            style={{ height }}
-            onScroll={(e) => setScrollLeft((e.target as HTMLDivElement).scrollLeft)}
-        >
-            <div style={{ width: rowVirtualizer.getTotalSize(), height: '100%', position: 'relative' }}>
-                {rowVirtualizer.getVirtualItems().map((vi) => {
-                    const group = groups[vi.index]
-                    const left = vi.start
-                    return (
-                        <div
-                            key={group.key}
-                            className="absolute top-0"
-                            style={{ left, width: cardWidth, height: '100%' }}
-                        >
-                            <div className="h-full w-full rounded-xl bg-white dark:bg-accent-dark border border-input shadow-[0_1px_0_rgba(0,0,0,0.05)] flex flex-col overflow-hidden">
-                                <div className="px-4 pt-3 pb-1 flex items-center justify-between">
-                                    <h3 className="m-0 text-lg font-semibold">{group.label}</h3>
-                                    <div className="text-xs font-semibold px-2 py-0.5 rounded-full border border-input">
-                                        {group.items.length}
+        <ScrollArea style={{ height }}>
+            <div
+                ref={containerRef}
+                className={`relative w-full ${className}`}
+                style={{ height }}
+                onScroll={(e) => setScrollLeft((e.target as HTMLDivElement).scrollLeft)}
+            >
+                <div style={{ width: rowVirtualizer.getTotalSize(), height: '100%', position: 'relative' }}>
+                    {rowVirtualizer.getVirtualItems().map((vi) => {
+                        const group = groups[vi.index]
+                        const left = vi.start
+                        return (
+                            <div
+                                key={group.key}
+                                className="absolute top-0"
+                                style={{ left, width: cardWidth, height: '100%' }}
+                            >
+                                <div className="h-full w-full rounded-xl bg-white dark:bg-accent-dark border border-input shadow-[0_1px_0_rgba(0,0,0,0.05)] flex flex-col overflow-hidden">
+                                    <div className="px-4 pt-3 pb-1 flex items-center justify-between">
+                                        <h3 className="m-0 text-lg font-semibold">{group.label}</h3>
+                                        <div className="text-xs font-semibold px-2 py-0.5 rounded-full border border-input">
+                                            {group.items.length}
+                                        </div>
+                                    </div>
+                                    <div className="px-3 pb-3 space-y-2 overflow-y-auto">
+                                        {group.items.map((r, idx) => {
+                                            const title = r?.attributes?.title
+                                            const team = r?.attributes?.teams?.data?.[0]?.attributes?.name
+                                            return (
+                                                <div
+                                                    key={idx}
+                                                    className="rounded-md border border-input bg-accent px-3 py-2"
+                                                >
+                                                    <div className="font-semibold underline text-base leading-tight">
+                                                        {title}
+                                                    </div>
+                                                    {team ? (
+                                                        <div className="text-sm text-secondary mt-1">{team}</div>
+                                                    ) : null}
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
-                                <div className="px-3 pb-3 space-y-2 overflow-y-auto">
-                                    {group.items.map((r, idx) => {
-                                        const title = r?.attributes?.title
-                                        const team = r?.attributes?.teams?.data?.[0]?.attributes?.name
-                                        return (
-                                            <div
-                                                key={idx}
-                                                className="rounded-md border border-input bg-accent px-3 py-2"
-                                            >
-                                                <div className="font-semibold underline text-base leading-tight">
-                                                    {title}
-                                                </div>
-                                                {team ? (
-                                                    <div className="text-sm text-secondary mt-1">{team}</div>
-                                                ) : null}
-                                            </div>
-                                        )
-                                    })}
-                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
-        </div>
+        </ScrollArea>
     )
 }
