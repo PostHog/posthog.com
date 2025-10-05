@@ -454,7 +454,7 @@ const CompanyRows = ({
 
                         <div className="@container flex-1 py-4 pl-4 @container/not-full-width">
                             {hasJobs ? (
-                                <div className="@xl:pr-4">
+                                <div className="pr-4 md:@2xs:pr-0 md:@xl:pr-4">
                                     <OSTable
                                         columns={jobColumns}
                                         rows={jobRows}
