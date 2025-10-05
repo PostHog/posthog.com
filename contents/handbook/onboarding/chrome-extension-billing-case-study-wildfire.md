@@ -63,7 +63,7 @@ If a customer is using a Chrome Extension without proper initialization, you wil
 - Indicates extension wake cycles creating new sessions and IDs
 
 #### 5. No Batch Exports, minimal standard library usage
-- Chrome Extensions often do not use session replay, heatmaps, or full web libraries
+- Chrome extensions often do not use session replay, heatmaps, or full web libraries
 - You may see a custom library version or just raw SDK usage
 
 #### 6. High `$set`, `$identify`, `$groupidentify` volume with few custom events
