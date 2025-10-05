@@ -277,9 +277,9 @@ const OSTable: React.FC<OSTableProps> = ({
     }, [lastRowInView])
 
     return (
-        <div className="-mx-4 @xl:-mx-8">
+        <div className="-mx-4 @xl:-mx-8 md:@2xs/not-full-width:mx-0">
             <ScrollArea fullWidth>
-                <div className="px-4 @xl:px-8">
+                <div className="px-4 @xl:px-8 md:@2xs/not-full-width:px-0">
                     <div
                         className={`text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] min-w-full w-0 [&>div]:px-2 ${
                             size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'

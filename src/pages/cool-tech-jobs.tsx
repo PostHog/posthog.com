@@ -155,7 +155,7 @@ const JobsByDepartment = ({
             </button>
             <motion.ul
                 initial={{ height: 0 }}
-                className="list-none p-0 m-0 overflow-hidden @2xl:ml-7"
+                className="list-none p-0 m-0 overflow-hidden @4xl:ml-7"
                 animate={open ? { height: 'auto' } : { height: 0 }}
             >
                 {jobs.map((job) => {
@@ -378,9 +378,9 @@ const CompanyRows = ({
                         key={company.id}
                         id={`company-${company.id}`}
                         ref={index === displayCompanies.length - 1 ? ref : null}
-                        className="border border-primary rounded-md flex flex-col @2xl:flex-row"
+                        className="border border-primary rounded-md flex flex-col @4xl:flex-row"
                     >
-                        <div className="@2xl:basis-72 flex flex-col gap-4 p-4">
+                        <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                             <div title={name} className="flex-shrink-0">
                                 {(logoLight || logoDark) && (
                                     <>
@@ -447,20 +447,22 @@ const CompanyRows = ({
                                     <h3 className="text-sm font-medium text-muted dark:text-secondary m-0 leading-none mb-2">
                                         Company perks
                                     </h3>
-                                    <Perks company={company} className="flex gap-x-1 flex-wrap" />
+                                    <Perks company={company} className="flex gap-x-4 flex-wrap" />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex-1 p-4">
+                        <div className="@container flex-1 py-4 pl-4 @container/not-full-width">
                             {hasJobs ? (
-                                <OSTable
-                                    columns={jobColumns}
-                                    rows={jobRows}
-                                    rowAlignment="center"
-                                    groupBy="Department"
-                                    type="role"
-                                />
+                                <div className="@xl:pr-4">
+                                    <OSTable
+                                        columns={jobColumns}
+                                        rows={jobRows}
+                                        rowAlignment="center"
+                                        groupBy="Department"
+                                        type="role"
+                                    />
+                                </div>
                             ) : (
                                 <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
                                     <em>No jobs currently available</em>
@@ -487,9 +489,9 @@ const CompanyRows = ({
                             <div
                                 key={company.id}
                                 id={`company-${company.id}`}
-                                className="border border-primary rounded-md flex flex-col @2xl:flex-row opacity-60"
+                                className="border border-primary rounded-md flex flex-col @4xl:flex-row opacity-60"
                             >
-                                <div className="@2xl:basis-72 flex flex-col gap-4 p-4">
+                                <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                                     <div title={name} className="flex-shrink-0">
                                         {(logoLight || logoDark) && (
                                             <>
@@ -557,7 +559,7 @@ const CompanyRows = ({
                                             <h3 className="text-sm font-medium text-muted dark:text-secondary m-0 leading-none mb-2">
                                                 Company perks
                                             </h3>
-                                            <Perks company={company} className="flex gap-x-1 flex-wrap" />
+                                            <Perks company={company} className="flex gap-x-4 flex-wrap" />
                                         </div>
                                     </div>
                                 </div>
