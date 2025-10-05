@@ -37,6 +37,7 @@ import OSButton from 'components/OSButton'
 import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
+import TimelineSlider from 'components/RadixUI/TimelineSlider'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -497,7 +498,102 @@ export default function Changelog({ pageContext }) {
         setStrapiFilters(getStrapiFilters(filters))
     }
 
-    const groupedRoadmaps = lodashGroupBy(roadmaps, groupBy)
+    // Determine overall year span from data
+    const detectedYears = useMemo(() => {
+        if (!Array.isArray(roadmaps) || roadmaps.length === 0) {
+            const yr = pageContext.year || dayjs().year()
+            return { startYear: yr, endYear: yr }
+        }
+        const years = roadmaps
+            .map((r) => r?.attributes?.dateCompleted)
+            .filter(Boolean)
+            .map((d) => dayjs(d).year())
+        if (years.length === 0) {
+            const yr = pageContext.year || dayjs().year()
+            return { startYear: yr, endYear: yr }
+        }
+        return { startYear: Math.min(...years), endYear: Math.max(...years) }
+    }, [roadmaps, pageContext.year])
+
+    // Ensure at least 2024–2025 and provide one-year buffer on both sides
+    const buffer = 1
+    const startYear = Math.min(2024, detectedYears.startYear - buffer)
+    const endYear = Math.max(2025, detectedYears.endYear + buffer)
+
+    // Build month items across all years
+    const monthItems = useMemo(() => {
+        const items: Array<{ label: string; key: string; year: number }> = []
+        for (let y = startYear; y <= endYear; y++) {
+            for (let m = 0; m < 12; m++) {
+                items.push({ label: dayjs().month(m).format('MMM'), key: `${y}-${m}`, year: y })
+            }
+        }
+        return items
+    }, [startYear, endYear])
+
+    const getMonthIndex = (dateString: string) => {
+        const d = dayjs(dateString)
+        return (d.year() - startYear) * 12 + d.month()
+    }
+
+    // Global month-range across all years
+    const [monthRange, setMonthRange] = useState<[number, number]>([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
+
+    // Visible roadmaps filtered by selected month range across years
+    const visibleRoadmaps = useMemo(() => {
+        if (!Array.isArray(roadmaps) || roadmaps.length === 0) {
+            return []
+        }
+        return roadmaps.filter((r) => {
+            const date = r?.attributes?.dateCompleted
+            if (!date) {
+                return false
+            }
+            const idx = getMonthIndex(date)
+            return idx >= monthRange[0] && idx <= monthRange[1]
+        })
+    }, [roadmaps, monthRange, startYear])
+
+    // Activity bins across the entire span
+    const activity = useMemo(() => {
+        const bins = 4
+        const acc: number[][] = Array.from({ length: monthItems.length }, () => Array.from({ length: bins }, () => 0))
+        for (const r of roadmaps || []) {
+            const d = r?.attributes?.dateCompleted
+            if (!d) {
+                continue
+            }
+            const idx = getMonthIndex(d)
+            if (idx < 0 || idx >= acc.length) {
+                continue
+            }
+            const dateObj = dayjs(d)
+            const dayInMonth = dateObj.date()
+            const daysInMonth = dateObj.daysInMonth()
+            const binIndex = Math.min(bins - 1, Math.floor((dayInMonth / daysInMonth) * bins))
+            acc[idx][binIndex] += 1
+        }
+        return acc
+    }, [roadmaps, monthItems, startYear])
+
+    // Reset range to data bounds when data changes
+    useEffect(() => {
+        if (Array.isArray(roadmaps) && roadmaps.length > 0) {
+            const indices = roadmaps
+                .map((r) => r?.attributes?.dateCompleted)
+                .filter(Boolean)
+                .map((d) => getMonthIndex(d))
+            if (indices.length > 0) {
+                setMonthRange([Math.min(...indices), Math.max(...indices)])
+                return
+            }
+        }
+        setMonthRange([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
+    }, [roadmaps, startYear, endYear])
+
+    const groupedRoadmaps = lodashGroupBy(visibleRoadmaps, groupBy)
+
+    console.log(activity)
 
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/changelog/2025',
@@ -517,7 +613,7 @@ export default function Changelog({ pageContext }) {
                 <ScrollArea>
                     {isValidating && roadmaps.length === 0 ? (
                         <ProgressBar title="changelog" />
-                    ) : roadmaps.length > 0 ? (
+                    ) : visibleRoadmaps.length > 0 ? (
                         groupBy ? (
                             <ul className="list-none m-0 p-0 space-y-4">
                                 {Object.keys(groupedRoadmaps).map((key) => {
@@ -535,7 +631,7 @@ export default function Changelog({ pageContext }) {
                             </ul>
                         ) : (
                             <RoadmapTable
-                                roadmaps={roadmaps}
+                                roadmaps={visibleRoadmaps}
                                 loading={isValidating}
                                 onLastRowInView={() => {
                                     if (hasMore && !isValidating) {
@@ -653,6 +749,17 @@ export default function Changelog({ pageContext }) {
                     ) : null
                 }
             >
+                <div className="p-4 pt-0">
+                    <TimelineSlider
+                        months={monthItems}
+                        value={monthRange}
+                        onValueChange={setMonthRange}
+                        minStepsBetweenThumbs={0}
+                        activity={activity}
+                        binsPerMonth={4}
+                        showYearLabels
+                    />
+                </div>
                 <OSTabs
                     tabs={tabs}
                     defaultValue="/changelog/2025"
