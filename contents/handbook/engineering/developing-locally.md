@@ -305,7 +305,6 @@ pnpm --filter=@posthog/plugin-server install
 ```
 
 > **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
-
 ```bash
 brew install python-setuptools
 ```
