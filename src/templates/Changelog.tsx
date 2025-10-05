@@ -18,7 +18,7 @@ import { Video } from 'cloudinary-react'
 import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
 import { IconChevronDown, IconPlus, IconShieldLock } from '@posthog/icons'
-import { useRoadmaps } from 'hooks/useRoadmaps'
+// import { useRoadmaps } from 'hooks/useRoadmaps'
 import CloudinaryImage from 'components/CloudinaryImage'
 import uniqBy from 'lodash/uniqBy'
 import SEO from 'components/seo'
@@ -38,6 +38,8 @@ import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
 import TimelineSlider from 'components/RadixUI/TimelineSlider'
+import VirtualRoadmaps from 'components/Changelog/VirtualRoadmaps'
+import VirtualWeekGroups from 'components/Changelog/VirtualWeekGroups'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -451,20 +453,33 @@ export default function Changelog({ pageContext }) {
     const [topics, setTopics] = useState([])
     const [expandAll, setExpandAll] = useState(false)
     const [groupBy, setGroupBy] = useState<string>()
-    const { roadmaps, isValidating, mutate, hasMore, fetchMore } = useRoadmaps({
-        limit: 100,
-        params: {
-            sort: ['dateCompleted:desc'],
-            filters: { dateCompleted: { $notNull: true }, ...strapiFilters },
-        },
-    })
+    // Build-time GraphQL data (see useStaticQuery below) + client filtering replaces useRoadmaps
+    const mutate = () => {}
+    const isValidating = false
     const { addWindow } = useApp()
     const { isModerator } = useUser()
     const data = useStaticQuery(graphql`
         {
-            allRoadmap(filter: { complete: { eq: true } }, sort: { fields: date }) {
+            allRoadmap(filter: { date: { ne: null } }, sort: { fields: date }) {
                 nodes {
                     date
+                    title
+                    description
+                    topic {
+                        data {
+                            attributes {
+                                label
+                            }
+                        }
+                    }
+                    teams {
+                        data {
+                            id
+                            attributes {
+                                name
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -509,12 +524,13 @@ export default function Changelog({ pageContext }) {
 
     // Determine overall year span from data
     const detectedYears = useMemo(() => {
-        if (!Array.isArray(roadmaps) || roadmaps.length === 0) {
+        const nodes = data?.allRoadmap?.nodes || []
+        if (!Array.isArray(nodes) || nodes.length === 0) {
             const yr = pageContext.year || dayjs().year()
             return { startYear: yr, endYear: yr }
         }
-        const years = roadmaps
-            .map((r) => r?.attributes?.dateCompleted)
+        const years = nodes
+            .map((r) => r?.date)
             .filter(Boolean)
             .map((d) => dayjs(d).year())
         if (years.length === 0) {
@@ -522,7 +538,7 @@ export default function Changelog({ pageContext }) {
             return { startYear: yr, endYear: yr }
         }
         return { startYear: Math.min(...years), endYear: Math.max(...years) }
-    }, [roadmaps, pageContext.year])
+    }, [data, pageContext.year])
 
     // Ensure at least 2024–2025 and provide one-year buffer on both sides
     const buffer = 1
@@ -547,21 +563,49 @@ export default function Changelog({ pageContext }) {
 
     // Global month-range across all years
     const [monthRange, setMonthRange] = useState<[number, number]>([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
+    const [debouncedRange, setDebouncedRange] = useState<[number, number]>(monthRange)
+    useEffect(() => {
+        const id = setTimeout(() => setDebouncedRange(monthRange), 200)
+        return () => clearTimeout(id)
+    }, [monthRange])
 
-    // Visible roadmaps filtered by selected month range across years
+    // Normalize GraphQL nodes to the shape used by components, then filter by debounced range
+    const allGraphRoadmaps = useMemo(() => {
+        const nodes = data?.allRoadmap?.nodes || []
+        return nodes.map((n: any, i: number) => ({
+            id: i,
+            attributes: {
+                title: n?.title,
+                description: n?.description,
+                dateCompleted: n?.date,
+                topic: n?.topic?.data?.attributes?.label
+                    ? { data: { attributes: { label: n?.topic?.data?.attributes?.label } } }
+                    : undefined,
+                teams: n?.teams?.data
+                    ? {
+                          data: n.teams.data.map((t: any, idx: number) => ({
+                              id: t?.id ?? idx,
+                              attributes: { name: t?.attributes?.name },
+                          })),
+                      }
+                    : undefined,
+            },
+        }))
+    }, [data])
+
     const visibleRoadmaps = useMemo(() => {
-        if (!Array.isArray(roadmaps) || roadmaps.length === 0) {
+        if (!Array.isArray(allGraphRoadmaps) || allGraphRoadmaps.length === 0) {
             return []
         }
-        return roadmaps.filter((r) => {
+        return allGraphRoadmaps.filter((r) => {
             const date = r?.attributes?.dateCompleted
             if (!date) {
                 return false
             }
             const idx = getMonthIndex(date)
-            return idx >= monthRange[0] && idx <= monthRange[1]
+            return idx >= debouncedRange[0] && idx <= debouncedRange[1]
         })
-    }, [roadmaps, monthRange, startYear])
+    }, [allGraphRoadmaps, debouncedRange, startYear])
 
     // Activity bins across the entire span (built from build-time GraphQL data)
     const activity = useMemo(() => {
@@ -588,8 +632,9 @@ export default function Changelog({ pageContext }) {
 
     // Reset range to data bounds when data changes
     useEffect(() => {
-        if (Array.isArray(roadmaps) && roadmaps.length > 0) {
-            const indices = roadmaps
+        const nodes = allGraphRoadmaps
+        if (Array.isArray(nodes) && nodes.length > 0) {
+            const indices = nodes
                 .map((r) => r?.attributes?.dateCompleted)
                 .filter(Boolean)
                 .map((d) => getMonthIndex(d))
@@ -599,7 +644,7 @@ export default function Changelog({ pageContext }) {
             }
         }
         setMonthRange([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
-    }, [roadmaps, startYear, endYear])
+    }, [allGraphRoadmaps, startYear, endYear])
 
     const groupedRoadmaps = lodashGroupBy(visibleRoadmaps, groupBy)
 
@@ -619,35 +664,21 @@ export default function Changelog({ pageContext }) {
                     </div>
                 </div>
                 <ScrollArea>
-                    {isValidating && roadmaps.length === 0 ? (
-                        <ProgressBar title="changelog" />
-                    ) : visibleRoadmaps.length > 0 ? (
+                    {visibleRoadmaps.length > 0 ? (
                         groupBy ? (
                             <ul className="list-none m-0 p-0 space-y-4">
                                 {Object.keys(groupedRoadmaps).map((key) => {
+                                    const groupItems = groupedRoadmaps[key]
                                     return (
                                         <li key={key}>
                                             <h3 className="text-lg font-semibold mb-2">{key}</h3>
-                                            <RoadmapTable
-                                                key={key}
-                                                roadmaps={groupedRoadmaps[key]}
-                                                expandAll={expandAll}
-                                            />
+                                            <VirtualRoadmaps items={groupItems} height={720} rowHeight={260} />
                                         </li>
                                     )
                                 })}
                             </ul>
                         ) : (
-                            <RoadmapTable
-                                roadmaps={visibleRoadmaps}
-                                loading={isValidating}
-                                onLastRowInView={() => {
-                                    if (hasMore && !isValidating) {
-                                        fetchMore()
-                                    }
-                                }}
-                                expandAll={expandAll}
-                            />
+                            <VirtualWeekGroups items={visibleRoadmaps} height={640} cardWidth={360} />
                         )
                     ) : null}
                 </ScrollArea>
@@ -676,7 +707,7 @@ export default function Changelog({ pageContext }) {
                 hasTabs
                 type="changelog"
                 maxWidth="100%"
-                dataToFilter={roadmaps}
+                dataToFilter={allGraphRoadmaps}
                 handleFilterChange={handleFilterChange}
                 showFilters={false}
                 availableGroups={[
