@@ -108,6 +108,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 #### Cloning the repository
 
+
 Clone the [PostHog repo](https://github.com/posthog/posthog). All future commands assume you're inside the `posthog/` folder.
 
 ```bash
@@ -288,18 +289,15 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     rustup-init
     # Select 1 to proceed with default installation
     ```
-
 - On Debian-based Linux:
     ```bash
     sudo apt install -y brotli
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
-
 2. Run `pnpm --filter=@posthog/plugin-server install` to install all required packages. We'll actually run the plugin server in a later step.
 
 > **Note:** If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
-
 ```bash
 export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
 export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
@@ -313,7 +311,6 @@ brew install python-setuptools
 ```
 
 > **Troubleshooting plugin server issues:** If you encounter problems starting up the plugin server, try these debugging steps:
-
 ```bash
 cd plugin-server
 pnpm rebuild
@@ -325,15 +322,12 @@ pnpm i
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
     - On macOS:
-
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
-
         > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma).
 
     - On Debian-based Linux:
-
         ```bash
         sudo apt install -y libxml2 libxmlsec1-dev libffi-dev pkg-config
         ```
@@ -343,7 +337,6 @@ pnpm i
     - On macOS, you can do so with Homebrew: `brew install python@3.11`.
 
     - On Debian-based Linux:
-
         ```bash
         sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update
@@ -509,6 +502,7 @@ Our database migrations must be applied linearly in order, to avoid any conflict
 
 To help with this, we have introduced a tool called [django-linear-migrations](https://github.com/adamchainz/django-linear-migrations). When a migration-caused merge conflict arises, you can solve it by running `python manage.py rebase_migration <conflicted Django app> && git add <app>/migrations` (in our case the app is either `posthog` or `ee`).
 
+
 ## Extra: Working with feature flags
 
 When developing locally with environment variable `DEBUG=1` (which enables a setting called `SELF_CAPTURE`),
@@ -562,7 +556,7 @@ While developing, there are times you may want to connect to the database to que
 
 ## Extra: Accessing the Django Admin
 
-If you cannot access the Django admin <http://localhost:8000/admin/>, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
+If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
 
 ## Extra: Sending emails
 
@@ -618,7 +612,6 @@ When creating a new email, there are a few steps to take. It's important to add 
 2. Add the new Customer.io template to the `CUSTOMER_IO_TEMPLATE_ID_MAP` in `posthog/email.py`
 3. Create a template in PostHog as an SMTP backup. Make sure the file name matches the key used in the template map.
 4. Trigger the email with something like this:
-
     ```python
     message = EmailMessage(
         use_http=True,  # This will attempt to send via Customer.io before falling back to SMTP
