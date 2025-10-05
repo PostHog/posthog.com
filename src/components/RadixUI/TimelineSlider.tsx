@@ -178,6 +178,20 @@ export const TimelineSlider = ({
         setOffsetPx((prev) => Math.max(minOffset, Math.min(0, prev)))
     }, [viewportWidth, months.length, minMonthWidth])
 
+    // Snap timeline so the start of the selected window is visible near the left when value changes
+    React.useEffect(() => {
+        if (contentWidth <= viewportWidth || max === 0) {
+            return
+        }
+        const startPercent = value[0] / max
+        const targetLeft = startPercent * contentWidth
+        // Center-ish bias: leave small padding
+        const padding = 24
+        const nextOffset = Math.min(0, Math.max(viewportWidth - contentWidth, -targetLeft + padding))
+        setOffsetPx(nextOffset)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value[0], contentWidth, viewportWidth, max])
+
     const beginPan = (e: React.PointerEvent<HTMLDivElement>) => {
         // Only enable when content wider than viewport
         if (contentWidth <= viewportWidth) {

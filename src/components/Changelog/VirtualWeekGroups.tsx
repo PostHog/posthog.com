@@ -56,6 +56,7 @@ interface VirtualWeekGroupsProps {
     cardGap?: number
     overscan?: number
     className?: string
+    scrollToEndOnMount?: boolean
 }
 
 export default function VirtualWeekGroups({
@@ -65,6 +66,7 @@ export default function VirtualWeekGroups({
     cardGap = 16,
     overscan = 3,
     className = '',
+    scrollToEndOnMount = true,
 }: VirtualWeekGroupsProps): JSX.Element {
     const containerRef = React.useRef<HTMLDivElement | null>(null)
     const [scrollLeft, setScrollLeft] = React.useState(0)
@@ -102,6 +104,18 @@ export default function VirtualWeekGroups({
         horizontal: true,
         overscan,
     })
+
+    React.useLayoutEffect(() => {
+        if (!containerRef.current || !scrollToEndOnMount) {
+            return
+        }
+        // Scroll to the far right (newest) after first render of items
+        const el = containerRef.current
+        el.scrollLeft = el.scrollWidth
+        setScrollLeft(el.scrollLeft)
+        // Only run on initial items mount
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [groups.length])
 
     return (
         <div

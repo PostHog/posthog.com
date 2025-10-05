@@ -545,10 +545,10 @@ export default function Changelog({ pageContext }) {
         return { startYear: Math.min(...years), endYear: Math.max(...years) }
     }, [data, pageContext.year])
 
-    // Ensure at least 2024–2025 and provide one-year buffer on both sides
-    const buffer = 1
-    const startYear = Math.min(2020, detectedYears.startYear - buffer)
-    const endYear = Math.max(2025, detectedYears.endYear + buffer)
+    // Show all previous years up to current year; window to current year initially
+    const currentYear = dayjs().year()
+    const startYear = detectedYears.startYear
+    const endYear = Math.min(detectedYears.endYear, currentYear)
 
     // Build month items across all years
     const monthItems = useMemo(() => {
@@ -566,8 +566,13 @@ export default function Changelog({ pageContext }) {
         return (d.year() - startYear) * 12 + d.month()
     }
 
-    // Global month-range across all years
-    const [monthRange, setMonthRange] = useState<[number, number]>([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
+    // Global month-range across all years (initially set to the current year window)
+    const currentYearStartIndex = (currentYear - startYear) * 12
+    const initialRange: [number, number] = [
+        Math.max(0, currentYearStartIndex),
+        Math.min(currentYearStartIndex + 11, (endYear - startYear + 1) * 12 - 1),
+    ]
+    const [monthRange, setMonthRange] = useState<[number, number]>(initialRange)
     const [debouncedRange, setDebouncedRange] = useState<[number, number]>(monthRange)
     useEffect(() => {
         const id = setTimeout(() => setDebouncedRange(monthRange), 200)
@@ -635,21 +640,14 @@ export default function Changelog({ pageContext }) {
         return acc
     }, [data, monthItems, startYear])
 
-    // Reset range to data bounds when data changes
+    // If the year span changes (e.g. first load), snap the window to the current year
     useEffect(() => {
-        const nodes = allGraphRoadmaps
-        if (Array.isArray(nodes) && nodes.length > 0) {
-            const indices = nodes
-                .map((r) => r?.attributes?.dateCompleted)
-                .filter(Boolean)
-                .map((d) => getMonthIndex(d))
-            if (indices.length > 0) {
-                setMonthRange([Math.min(...indices), Math.max(...indices)])
-                return
-            }
-        }
-        setMonthRange([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
-    }, [allGraphRoadmaps, startYear, endYear])
+        setMonthRange([
+            Math.max(0, (currentYear - startYear) * 12),
+            Math.min((currentYear - startYear) * 12 + 11, (endYear - startYear + 1) * 12 - 1),
+        ])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [startYear, endYear])
 
     useEffect(() => {
         if (containerRef.current && timelineContainerRef.current) {
