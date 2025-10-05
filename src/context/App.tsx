@@ -853,15 +853,13 @@ const appSettings: AppSettings = {
     'cool-tech-jobs-add-a-job': {
         size: {
             min: {
-                width: 500,
-                height: 500,
+                width: 600,
+                height: 400,
             },
             max: {
-                width: 500,
-                height: 500,
+                width: 600,
+                height: 775,
             },
-            fixed: true,
-            autoHeight: true,
         },
         position: {
             center: true,

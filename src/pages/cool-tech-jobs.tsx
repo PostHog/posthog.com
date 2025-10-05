@@ -20,7 +20,7 @@ import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Toggle from 'components/Toggle'
-import Select from 'components/Select'
+import { Select } from 'components/RadixUI/Select'
 import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
@@ -52,6 +52,8 @@ import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import { useInView } from 'react-intersection-observer'
 import ProgressBar from 'components/ProgressBar'
+import CloudinaryImage from "components/CloudinaryImage"
+import ScrollArea from "components/RadixUI/ScrollArea"
 
 dayjs.extend(relativeTime)
 
@@ -467,27 +469,35 @@ const IssueForm = () => {
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
             <div>
                 <Select
-                    className={`!p-0`}
-                    options={companies.map((company) => {
-                        const { name } = company.attributes
-                        return { label: name, value: name }
-                    })}
                     value={values.company}
-                    onChange={(value) => setFieldValue('company', value)}
+                    onValueChange={(value) => setFieldValue('company', value)}
                     placeholder="Select a company"
-                    onBlur={() => setFieldTouched('company')}
+                    groups={[
+                        {
+                            label: 'Companies',
+                            items: companies.map((company) => {
+                                const { name } = company.attributes
+                                return { label: name, value: name }
+                            }),
+                        },
+                    ]}
+                    className="w-full"
                 />
                 {touched.company && errors.company && <p className="text-red text-sm m-0 mt-1">{errors.company}</p>}
             </div>
 
             <div>
                 <Select
-                    className={`!p-0 !rounded-md`}
-                    options={issueTypeOptions.map((option) => ({ label: option.label, value: option.label }))}
                     value={values.issueType}
-                    onChange={(value) => setFieldValue('issueType', value)}
+                    onValueChange={(value) => setFieldValue('issueType', value)}
                     placeholder="Select an issue type"
-                    onBlur={() => setFieldTouched('issueType')}
+                    groups={[
+                        {
+                            label: 'Issue Types',
+                            items: issueTypeOptions.map((option) => ({ label: option.label, value: option.label })),
+                        },
+                    ]}
+                    className="w-full"
                 />
                 {touched.issueType && errors.issueType && (
                     <p className="text-red text-sm m-0 mt-1">{errors.issueType}</p>
@@ -499,9 +509,8 @@ const IssueForm = () => {
                 <textarea
                     id="description"
                     rows={4}
-                    className={`w-full p-2 border rounded-md bg-transparent ${
-                        touched.description && errors.description ? 'border-red' : 'border-input'
-                    }`}
+                    className={`w-full p-2 border rounded-md bg-transparent ${touched.description && errors.description ? 'border-red' : 'border-input'
+                        }`}
                     placeholder="Please provide details about the issue"
                     {...getFieldProps('description')}
                 />
@@ -533,9 +542,8 @@ const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...
             <Component
                 {...props}
                 rows={multiline ? rows : undefined}
-                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${
-                    touched && error ? 'border-red' : 'border-input'
-                }`}
+                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${touched && error ? 'border-red' : 'border-input'
+                    }`}
             />
             {touched && error && <p className="text-red text-sm m-0 mt-1">{error}</p>}
         </div>
@@ -615,13 +623,21 @@ const ModeratorInitialView = ({
     return pendingCompanies.length > 0 ? (
         <div>
             <Select
-                className="!p-0"
-                options={pendingCompanies.map((company) => ({ label: company.attributes.name, value: company.id }))}
-                value={selectedCompany?.id}
-                onChange={(value) => {
-                    setSelectedCompany(pendingCompanies.find((company) => company.id === value) || null)
+                value={selectedCompany?.id?.toString()}
+                onValueChange={(value) => {
+                    setSelectedCompany(pendingCompanies.find((company) => company.id.toString() === value) || null)
                 }}
                 placeholder="Continue with a pending company"
+                groups={[
+                    {
+                        label: 'Pending Companies',
+                        items: pendingCompanies.map((company) => ({
+                            label: company.attributes.name,
+                            value: company.id.toString()
+                        })),
+                    },
+                ]}
+                className="w-full"
             />
             {selectedCompany && (
                 <div className="mt-4">
@@ -643,6 +659,16 @@ const ModeratorInitialView = ({
 const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     return (
         <div className="prose dark:prose-dark">
+            <div data-scheme="primary" className="not-prose bg-primary border border-primary rounded px-4 pb-4 text-center">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
+                    alt="This hog has an answer"
+                    width={400}
+                    placeholder="blurred"
+                    className="max-w-[300px] @xl:max-w-[300px]"
+                />
+            </div>
+            <h2 className="text-xl mt-4 mb-2">Are we missing some cool tech jobs?</h2>
             <p>
                 Our job board is designed to help product engineers (and other tech-adjacent candidates) find companies
                 that have a similar vibe to PostHog – where employees are empowered to do their best work.
@@ -652,7 +678,7 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
                 <li>
                     At least one unique perk listed in our filters
                     <br />{' '}
-                    <span className="text-[15px] opacity-80">(Have a great perk we don't list? Let us know!)</span>
+                    <span className="text-[15px] opacity-80">(Have a great perk we don't list? <Link to="https://x.com/ninepixelgrid" external>Let us know!</Link>)</span>
                 </li>
                 <li>
                     A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up to date
@@ -824,8 +850,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     values.slug !== company?.attributes?.slug
                 // Create initial company without images in case of failure
                 const companyResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${
-                        canUpdate ? `/${companyId}` : ''
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${canUpdate ? `/${companyId}` : ''
                     }?populate=*`,
                     {
                         method: canUpdate ? 'PUT' : 'POST',
@@ -890,18 +915,18 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                                 ...(uploadedLogoLight
                                     ? { logoLight: uploadedLogoLight.id }
                                     : usingPending && logoLight
-                                    ? { logoLight: company?.attributes.logoLight.data?.id }
-                                    : {}),
+                                        ? { logoLight: company?.attributes.logoLight.data?.id }
+                                        : {}),
                                 ...(uploadedLogoDark
                                     ? { logoDark: uploadedLogoDark.id }
                                     : usingPending && logoDark
-                                    ? { logoDark: company?.attributes.logoDark.data?.id }
-                                    : {}),
+                                        ? { logoDark: company?.attributes.logoDark.data?.id }
+                                        : {}),
                                 ...(uploadedLogomark
                                     ? { logomark: uploadedLogomark.id }
                                     : usingPending && logomark
-                                    ? { logomark: company?.attributes.logomark.data?.id }
-                                    : {}),
+                                        ? { logomark: company?.attributes.logomark.data?.id }
+                                        : {}),
                             },
                         }),
                     }
@@ -1006,13 +1031,12 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div
-            className={`p-4 rounded-md border ${
-                confirmationMessage.type === 'success'
-                    ? 'border-green bg-green/20'
-                    : confirmationMessage.type === 'warning'
+            className={`p-4 rounded-md border ${confirmationMessage.type === 'success'
+                ? 'border-green bg-green/20'
+                : confirmationMessage.type === 'warning'
                     ? 'border-yellow bg-yellow/20'
                     : 'border-red bg-red/20'
-            }`}
+                }`}
         >
             <h4 className="text-base m-0">{confirmationMessage.title}</h4>
             <p
@@ -1060,21 +1084,29 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 touched={touched.url}
             />
 
-            <div>
+            <div data-scheme="primary">
+                <label className="block text-base font-semibold mb-1">Job board type</label>
                 <Select
-                    className="!p-0"
-                    options={[
-                        ...supportedJobBoardTypes,
-                        ...(isModerator ? [{ value: 'kadoa', label: 'Kadoa' }] : []),
-                        { value: 'other', label: 'Other' },
-                    ]}
                     value={values.jobBoardType}
-                    onChange={(value) => setFieldValue('jobBoardType', value)}
+                    onValueChange={(value) => setFieldValue('jobBoardType', value)}
                     placeholder="Job board type"
+                    groups={[
+                        {
+                            label: 'Job board types',
+                            items: [
+                                ...supportedJobBoardTypes,
+                                ...(isModerator ? [{ value: 'kadoa', label: 'Kadoa' }] : []),
+                                { value: 'other', label: 'Other' },
+                            ],
+                        },
+                    ]}
+                    className="w-full"
                 />
                 {touched.jobBoardType && errors.jobBoardType && (
                     <p className="text-red text-sm m-0 mt-1">{errors.jobBoardType}</p>
                 )}
+            </div>
+            <div>
                 {supportedJobBoardTypes.some((type) => type.value === values.jobBoardType) && (
                     <div className="mt-2">
                         <label className="block text-base font-semibold">Job board slug</label>
@@ -1082,9 +1114,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             <p className="m-0 text-sm opacity-70">{jobBoardBaseURLs[values.jobBoardType]}</p>
                             <div className="flex-grow relative">
                                 <input
-                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
-                                        touched.slug && errors.slug ? 'border-red' : 'border-input'
-                                    }`}
+                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${touched.slug && errors.slug ? 'border-red' : 'border-input'
+                                        }`}
                                     placeholder="bluth-company"
                                     {...getFieldProps('slug')}
                                 />
@@ -1168,9 +1199,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
-                                touched.logoLight && errors.logoLight ? 'border-red' : ''
-                            }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logoLight && errors.logoLight ? 'border-red' : ''
+                                }`}
                             onDrop={(file) => setFieldValue('logoLight', file)}
                             onRemove={() => setFieldValue('logoLight', null)}
                             image={values.logoLight}
@@ -1181,9 +1211,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
-                                touched.logoDark && errors.logoDark ? 'border-red' : ''
-                            }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logoDark && errors.logoDark ? 'border-red' : ''
+                                }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
                             onRemove={() => setFieldValue('logoDark', null)}
                             image={values.logoDark}
@@ -1194,9 +1223,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logomark</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
-                                touched.logomark && errors.logomark ? 'border-red' : ''
-                            }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logomark && errors.logomark ? 'border-red' : ''
+                                }`}
                             onDrop={(file) => setFieldValue('logomark', file)}
                             onRemove={() => setFieldValue('logomark', null)}
                             image={values.logomark}
@@ -1205,14 +1233,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </label>
                 </div>
                 {(touched.logoLight && errors.logoLight) ||
-                (touched.logoDark && errors.logoDark) ||
-                (touched.logomark && errors.logomark) ? (
+                    (touched.logoDark && errors.logoDark) ||
+                    (touched.logomark && errors.logomark) ? (
                     <p className="text-red text-sm m-0 mt-1">
                         {touched.logoLight && errors.logoLight
                             ? errors.logoLight
                             : touched.logoDark && errors.logoDark
-                            ? errors.logoDark
-                            : errors.logomark}
+                                ? errors.logoDark
+                                : errors.logomark}
                     </p>
                 ) : null}
             </div>
@@ -1271,14 +1299,18 @@ const AddAJobWindow = ({
     }, [])
 
     return (
-        <div
-            data-scheme="secondary"
-            className={`bg-primary p-4 overflow-y-auto ${
-                siteSettings.experience === 'boring' ? 'size-full' : 'max-h-[500px]'
-            }`}
-        >
-            <CompanyForm companyId={companyId} onSuccess={onSuccess} />
-        </div>
+        <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
+            <div
+                data-scheme="secondary"
+                className={`bg-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'
+                    }`}
+            >
+
+                <div className="p-4">
+                    <CompanyForm companyId={companyId} onSuccess={onSuccess} />
+                </div>
+            </div>
+        </ScrollArea>
     )
 }
 
