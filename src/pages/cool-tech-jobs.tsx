@@ -194,6 +194,58 @@ const JobsByDepartment = ({
     )
 }
 
+const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isLoading: boolean }) => {
+    const { websiteTheme } = useValues(layoutLogic)
+
+    const scrollToCompany = (companyId: number) => {
+        const element = document.getElementById(`company-${companyId}`)
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            })
+        }
+    }
+
+    return (
+        <div className="mb-8">
+            {!isLoading && <h3 className="text-lg font-semibold mb-4">Jump to company</h3>}
+            <div className="flex flex-wrap gap-2">
+                {companies
+                    .filter((company) => company.attributes.jobs.data.length > 0)
+                    .map((company) => {
+                        const { name } = company.attributes
+                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
+                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+
+                        return (
+                            <OSButton
+                                key={company.id}
+                                onClick={() => scrollToCompany(company.id)}
+                                hover="border"
+                                className=""
+                            >
+                                {logoLight || logoDark ? (
+                                    <img
+                                        className="min-h-6 max-h-8 object-contain"
+                                        src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                        alt={name}
+                                    />
+                                ) : (
+                                    <div className="w-16 h-12 bg-accent rounded flex items-center justify-center">
+                                        <span className="text-sm font-semibold text-muted">
+                                            {name.charAt(0).toUpperCase()}
+                                        </span>
+                                    </div>
+                                )}
+                            </OSButton>
+                        )
+                    })}
+            </div>
+        </div>
+    )
+}
+
 const CompanyRows = ({
     companyFilters,
     jobFilters,
@@ -304,6 +356,7 @@ const CompanyRows = ({
                 return (
                     <div
                         key={company.id}
+                        id={`company-${company.id}`}
                         ref={index === displayCompanies.length - 1 ? ref : null}
                         className="border border-primary rounded-md flex flex-col @2xl:flex-row"
                     >
@@ -360,6 +413,7 @@ const CompanyRows = ({
                                                 className="px-3 rounded-full border-primary"
                                                 size="sm"
                                                 external
+                                                asLink
                                             >
                                                 Website
                                             </OSButton>
@@ -1217,7 +1271,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
+                            className={`h-auto aspect-square rounded-sm border border-input bg-black ${
                                 touched.logoDark && errors.logoDark ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
@@ -1280,7 +1334,7 @@ const IssueWindow = () => {
     }, [])
 
     return (
-        <div data-scheme="secondary" className="bg-primary p-4 size-full">
+        <div data-scheme="secondary" className="bg-primary text-primary p-4 size-full">
             <IssueForm />
         </div>
     )
@@ -1310,7 +1364,7 @@ const AddAJobWindow = ({
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
             <div
                 data-scheme="secondary"
-                className={`bg-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'}`}
+                className={`bg-primary text-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'}`}
             >
                 <div className="p-4">
                     <CompanyForm companyId={companyId} onSuccess={onSuccess} />
@@ -1430,6 +1484,8 @@ export default function JobsPage() {
                             .
                         </li>
                     </ul>
+
+                    <CompanyNavigation companies={initialCompanies} isLoading={companiesLoading} />
                     <CompanyRows
                         companyFilters={companyFilters}
                         jobFilters={jobFilters}
