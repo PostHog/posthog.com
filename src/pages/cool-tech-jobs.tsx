@@ -52,8 +52,9 @@ import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import { useInView } from 'react-intersection-observer'
 import ProgressBar from 'components/ProgressBar'
-import CloudinaryImage from "components/CloudinaryImage"
-import ScrollArea from "components/RadixUI/ScrollArea"
+import CloudinaryImage from 'components/CloudinaryImage'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from 'components/OSButton'
 
 dayjs.extend(relativeTime)
 
@@ -117,7 +118,7 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     return (
         <ul className={`list-none p-0 m-0 ${className}`}>
             {perks.filter(Boolean).map((perk) => (
-                <li key={`${company.id}-${perk.key}`} className="flex gap-1.5 items-center">
+                <li key={`${company.id}-${perk.key}`} className="flex gap-1.5 items-center p-0">
                     {perk.icon}
                     <span className="text-sm font-medium">{perk.label}</span>
                 </li>
@@ -315,9 +316,9 @@ const CompanyRows = ({
                     <div
                         key={company.id}
                         ref={index === displayCompanies.length - 1 ? ref : null}
-                        className="border border-primary rounded-md"
+                        className="border border-primary rounded-md flex flex-col @2xl:flex-row"
                     >
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-6 border-b border-primary p-4">
+                        <div className="@2xl:basis-72 flex flex-col gap-4 p-4">
                             <div title={name} className="flex-shrink-0">
                                 {(logoLight || logoDark) && (
                                     <>
@@ -363,22 +364,22 @@ const CompanyRows = ({
                             <div className="flex-grow">
                                 {company.attributes.description?.trim() && (
                                     <div className="mb-4">
-                                        <p className="text-sm m-0">{company.attributes.description}</p>
+                                        <p className="text-sm">{company.attributes.description}</p>
                                         {company.attributes.url && (
-                                            <Link
+                                            <OSButton
                                                 to={`${company.attributes.url}?utm_source=posthog`}
-                                                className="group inline-flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold"
-                                                externalNoIcon
+                                                className="px-3 rounded-full border-primary"
+                                                size="sm"
+                                                external
                                             >
-                                                Learn more
-                                                <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
-                                            </Link>
+                                                Website
+                                            </OSButton>
                                         )}
                                     </div>
                                 )}
 
                                 <div>
-                                    <h3 className="text-sm font-medium text-muted m-0 leading-none mb-1">
+                                    <h3 className="text-sm font-medium text-muted m-0 leading-none mb-2">
                                         Company perks
                                     </h3>
                                     <Perks company={company} className="flex gap-2 flex-wrap" />
@@ -386,7 +387,7 @@ const CompanyRows = ({
                             </div>
                         </div>
 
-                        <div className="p-4">
+                        <div className="flex-1 p-4">
                             {hasJobs ? (
                                 <OSTable
                                     columns={jobColumns}
@@ -509,8 +510,9 @@ const IssueForm = () => {
                 <textarea
                     id="description"
                     rows={4}
-                    className={`w-full p-2 border rounded-md bg-transparent ${touched.description && errors.description ? 'border-red' : 'border-input'
-                        }`}
+                    className={`w-full p-2 border rounded-md bg-transparent ${
+                        touched.description && errors.description ? 'border-red' : 'border-input'
+                    }`}
                     placeholder="Please provide details about the issue"
                     {...getFieldProps('description')}
                 />
@@ -542,8 +544,9 @@ const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...
             <Component
                 {...props}
                 rows={multiline ? rows : undefined}
-                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${touched && error ? 'border-red' : 'border-input'
-                    }`}
+                className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${
+                    touched && error ? 'border-red' : 'border-input'
+                }`}
             />
             {touched && error && <p className="text-red text-sm m-0 mt-1">{error}</p>}
         </div>
@@ -633,7 +636,7 @@ const ModeratorInitialView = ({
                         label: 'Pending Companies',
                         items: pendingCompanies.map((company) => ({
                             label: company.attributes.name,
-                            value: company.id.toString()
+                            value: company.id.toString(),
                         })),
                     },
                 ]}
@@ -659,7 +662,10 @@ const ModeratorInitialView = ({
 const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     return (
         <div className="prose dark:prose-dark">
-            <div data-scheme="primary" className="not-prose bg-primary border border-primary rounded px-4 pb-4 text-center">
+            <div
+                data-scheme="primary"
+                className="not-prose bg-primary border border-primary rounded px-4 pb-4 text-center"
+            >
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                     alt="This hog has an answer"
@@ -678,7 +684,13 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
                 <li>
                     At least one unique perk listed in our filters
                     <br />{' '}
-                    <span className="text-[15px] opacity-80">(Have a great perk we don't list? <Link to="https://x.com/ninepixelgrid" external>Let us know!</Link>)</span>
+                    <span className="text-[15px] opacity-80">
+                        (Have a great perk we don't list?{' '}
+                        <Link to="https://x.com/ninepixelgrid" external>
+                            Let us know!
+                        </Link>
+                        )
+                    </span>
                 </li>
                 <li>
                     A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up to date
@@ -850,7 +862,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     values.slug !== company?.attributes?.slug
                 // Create initial company without images in case of failure
                 const companyResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${canUpdate ? `/${companyId}` : ''
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}${
+                        canUpdate ? `/${companyId}` : ''
                     }?populate=*`,
                     {
                         method: canUpdate ? 'PUT' : 'POST',
@@ -915,18 +928,18 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                                 ...(uploadedLogoLight
                                     ? { logoLight: uploadedLogoLight.id }
                                     : usingPending && logoLight
-                                        ? { logoLight: company?.attributes.logoLight.data?.id }
-                                        : {}),
+                                    ? { logoLight: company?.attributes.logoLight.data?.id }
+                                    : {}),
                                 ...(uploadedLogoDark
                                     ? { logoDark: uploadedLogoDark.id }
                                     : usingPending && logoDark
-                                        ? { logoDark: company?.attributes.logoDark.data?.id }
-                                        : {}),
+                                    ? { logoDark: company?.attributes.logoDark.data?.id }
+                                    : {}),
                                 ...(uploadedLogomark
                                     ? { logomark: uploadedLogomark.id }
                                     : usingPending && logomark
-                                        ? { logomark: company?.attributes.logomark.data?.id }
-                                        : {}),
+                                    ? { logomark: company?.attributes.logomark.data?.id }
+                                    : {}),
                             },
                         }),
                     }
@@ -1031,12 +1044,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div
-            className={`p-4 rounded-md border ${confirmationMessage.type === 'success'
-                ? 'border-green bg-green/20'
-                : confirmationMessage.type === 'warning'
+            className={`p-4 rounded-md border ${
+                confirmationMessage.type === 'success'
+                    ? 'border-green bg-green/20'
+                    : confirmationMessage.type === 'warning'
                     ? 'border-yellow bg-yellow/20'
                     : 'border-red bg-red/20'
-                }`}
+            }`}
         >
             <h4 className="text-base m-0">{confirmationMessage.title}</h4>
             <p
@@ -1114,8 +1128,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             <p className="m-0 text-sm opacity-70">{jobBoardBaseURLs[values.jobBoardType]}</p>
                             <div className="flex-grow relative">
                                 <input
-                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${touched.slug && errors.slug ? 'border-red' : 'border-input'
-                                        }`}
+                                    className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
+                                        touched.slug && errors.slug ? 'border-red' : 'border-input'
+                                    }`}
                                     placeholder="bluth-company"
                                     {...getFieldProps('slug')}
                                 />
@@ -1199,8 +1214,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logoLight && errors.logoLight ? 'border-red' : ''
-                                }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${
+                                touched.logoLight && errors.logoLight ? 'border-red' : ''
+                            }`}
                             onDrop={(file) => setFieldValue('logoLight', file)}
                             onRemove={() => setFieldValue('logoLight', null)}
                             image={values.logoLight}
@@ -1211,8 +1227,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logoDark && errors.logoDark ? 'border-red' : ''
-                                }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${
+                                touched.logoDark && errors.logoDark ? 'border-red' : ''
+                            }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
                             onRemove={() => setFieldValue('logoDark', null)}
                             image={values.logoDark}
@@ -1223,8 +1240,9 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logomark</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logomark && errors.logomark ? 'border-red' : ''
-                                }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${
+                                touched.logomark && errors.logomark ? 'border-red' : ''
+                            }`}
                             onDrop={(file) => setFieldValue('logomark', file)}
                             onRemove={() => setFieldValue('logomark', null)}
                             image={values.logomark}
@@ -1233,14 +1251,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </label>
                 </div>
                 {(touched.logoLight && errors.logoLight) ||
-                    (touched.logoDark && errors.logoDark) ||
-                    (touched.logomark && errors.logomark) ? (
+                (touched.logoDark && errors.logoDark) ||
+                (touched.logomark && errors.logomark) ? (
                     <p className="text-red text-sm m-0 mt-1">
                         {touched.logoLight && errors.logoLight
                             ? errors.logoLight
                             : touched.logoDark && errors.logoDark
-                                ? errors.logoDark
-                                : errors.logomark}
+                            ? errors.logoDark
+                            : errors.logomark}
                     </p>
                 ) : null}
             </div>
@@ -1302,10 +1320,8 @@ const AddAJobWindow = ({
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
             <div
                 data-scheme="secondary"
-                className={`bg-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'
-                    }`}
+                className={`bg-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'}`}
             >
-
                 <div className="p-4">
                     <CompanyForm companyId={companyId} onSuccess={onSuccess} />
                 </div>
