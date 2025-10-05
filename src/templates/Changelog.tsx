@@ -1,6 +1,6 @@
 import CommunityLayout from 'components/Community/Layout'
 import { topicIcons } from 'components/Questions/TopicsTable'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
 import lodashGroupBy from 'lodash.groupby'
@@ -31,15 +31,15 @@ import { motion } from 'framer-motion'
 import qs from 'qs'
 import useProduct from 'hooks/useProduct'
 import ProgressBar from 'components/ProgressBar'
-import OSTabs from 'components/OSTabs'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
+// import OSTabs from 'components/OSTabs'
+// import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import OSButton from 'components/OSButton'
 import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
 import TimelineSlider from 'components/RadixUI/TimelineSlider'
-import VirtualRoadmaps from 'components/Changelog/VirtualRoadmaps'
 import VirtualWeekGroups from 'components/Changelog/VirtualWeekGroups'
+import { useWindow } from '../context/Window'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -452,12 +452,17 @@ export default function Changelog({ pageContext }) {
     const [teams, setTeams] = useState([])
     const [topics, setTopics] = useState([])
     const [expandAll, setExpandAll] = useState(false)
-    const [groupBy, setGroupBy] = useState<string>()
+    // Removed grouping – we always show a horizontal week list
     // Build-time GraphQL data (see useStaticQuery below) + client filtering replaces useRoadmaps
     const mutate = () => {}
     const isValidating = false
     const { addWindow } = useApp()
     const { isModerator } = useUser()
+    const [listHeight, setListHeight] = useState(0)
+    const listContainerRef = useRef<HTMLDivElement>(null)
+    const timelineContainerRef = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { appWindow } = useWindow()
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { date: { ne: null } }, sort: { fields: date }) {
@@ -646,45 +651,14 @@ export default function Changelog({ pageContext }) {
         setMonthRange([0, Math.max(0, (endYear - startYear + 1) * 12 - 1)])
     }, [allGraphRoadmaps, startYear, endYear])
 
-    const groupedRoadmaps = lodashGroupBy(visibleRoadmaps, groupBy)
+    useEffect(() => {
+        if (containerRef.current && timelineContainerRef.current) {
+            const height = containerRef.current?.clientHeight - timelineContainerRef.current?.clientHeight
+            setListHeight(height)
+        }
+    }, [appWindow?.size?.height])
 
-    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/changelog/2025',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <div className="flex justify-between items-baseline pb-4">
-                    <h1>Changelog</h1>
-                    <div>
-                        <button
-                            onClick={() => setExpandAll(!expandAll)}
-                            className="text-sm font-semibold text-red dark:text-yellow hover:text-red/80 dark:hover:text-yellow/80 mb-4"
-                        >
-                            {expandAll ? 'Collapse all' : 'Expand all'}
-                        </button>
-                    </div>
-                </div>
-                <ScrollArea>
-                    {visibleRoadmaps.length > 0 ? (
-                        groupBy ? (
-                            <ul className="list-none m-0 p-0 space-y-4">
-                                {Object.keys(groupedRoadmaps).map((key) => {
-                                    const groupItems = groupedRoadmaps[key]
-                                    return (
-                                        <li key={key}>
-                                            <h3 className="text-lg font-semibold mb-2">{key}</h3>
-                                            <VirtualRoadmaps items={groupItems} height={720} rowHeight={260} />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        ) : (
-                            <VirtualWeekGroups items={visibleRoadmaps} height={640} cardWidth={360} />
-                        )
-                    ) : null}
-                </ScrollArea>
-            </div>
-        ),
-    })
+    // Grouping disabled; we just show a horizontal week view
 
     const handleAddFeature = () => {
         addWindow(
@@ -710,15 +684,6 @@ export default function Changelog({ pageContext }) {
                 dataToFilter={allGraphRoadmaps}
                 handleFilterChange={handleFilterChange}
                 showFilters={false}
-                availableGroups={[
-                    {
-                        label: 'Topic',
-                        value: 'attributes.topic.data.attributes.label',
-                    },
-                ]}
-                onGroupChange={(group) => {
-                    setGroupBy(group === 'none' ? undefined : group)
-                }}
                 availableFilters={[
                     {
                         label: 'year',
@@ -788,28 +753,24 @@ export default function Changelog({ pageContext }) {
                     ) : null
                 }
             >
-                <div className="p-4 pt-0">
-                    <TimelineSlider
-                        months={monthItems}
-                        value={monthRange}
-                        onValueChange={setMonthRange}
-                        minStepsBetweenThumbs={0}
-                        activity={activity}
-                        binsPerMonth={4}
-                        showYearLabels
-                    />
+                <div ref={containerRef} className="flex flex-col gap-4 h-full">
+                    <div ref={listContainerRef} className="min-h-0 px-4 my-4">
+                        {visibleRoadmaps.length > 0 ? (
+                            <VirtualWeekGroups items={visibleRoadmaps} height={listHeight} cardWidth={360} />
+                        ) : null}
+                    </div>
+                    <div ref={timelineContainerRef} className="min-h-0 flex-shrink-0 px-4 my-4">
+                        <TimelineSlider
+                            months={monthItems}
+                            value={monthRange}
+                            onValueChange={setMonthRange}
+                            minStepsBetweenThumbs={0}
+                            activity={activity}
+                            binsPerMonth={4}
+                            showYearLabels
+                        />
+                    </div>
                 </div>
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/changelog/2025"
-                    onValueChange={handleTabChange}
-                    padding
-                    contentPadding={false}
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
             </Editor>
         </>
     )

@@ -106,7 +106,7 @@ export default function VirtualWeekGroups({
     return (
         <div
             ref={containerRef}
-            className={`relative w-full overflow-x-auto overflow-y-hidden border border-input rounded-md bg-accent ${className}`}
+            className={`relative w-full overflow-x-auto overflow-y-hidden ${className}`}
             style={{ height }}
             onScroll={(e) => setScrollLeft((e.target as HTMLDivElement).scrollLeft)}
         >
@@ -117,10 +117,10 @@ export default function VirtualWeekGroups({
                     return (
                         <div
                             key={group.key}
-                            className="absolute top-0 p-2"
+                            className="absolute top-0"
                             style={{ left, width: cardWidth, height: '100%' }}
                         >
-                            <div className="h-full w-full rounded-xl bg-white dark:bg-accent-dark border border-input shadow-[0_1px_0_rgba(0,0,0,0.05)] flex flex-col">
+                            <div className="h-full w-full rounded-xl bg-white dark:bg-accent-dark border border-input shadow-[0_1px_0_rgba(0,0,0,0.05)] flex flex-col overflow-hidden">
                                 <div className="px-4 pt-3 pb-1 flex items-center justify-between">
                                     <h3 className="m-0 text-lg font-semibold">{group.label}</h3>
                                     <div className="text-xs font-semibold px-2 py-0.5 rounded-full border border-input">
