@@ -2411,7 +2411,7 @@ body.dark .max-ai-body {
     border: 0;
 }
 
-@keyframes quest-log-sprite-walk {
+@keyframes questlog-sprite-animate {
     0% {
         background-position: 0 0;
     }
@@ -2420,11 +2420,25 @@ body.dark .max-ai-body {
     }
 }
 
-.quest-log-sprite-animate {
-    animation: quest-log-sprite-walk 0.25s steps(11) 7;
+.questlog-sprite-walk {
+    background-image: url(/images/questlog-walk-sprite.png);
+    background-size: 528px 48px;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
+    animation: questlog-sprite-animate 0.5s steps(11) 4;
 }
 
-@keyframes speechBounce {
+.questlog-sprite-jump {
+    background-image: url(/images/questlog-jump-sprite.png);
+    background-size: 528px 48px;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
+    animation: questlog-sprite-animate 0.75s steps(11) 3;
+}
+
+@keyframes speechBubble {
     0% {
         transform: translateY(-50%) scale(0.8) translateX(-10px);
         opacity: 0;
@@ -2439,7 +2453,7 @@ body.dark .max-ai-body {
     }
 }
 
-@keyframes speechBounceLeft {
+@keyframes speechBubbleLeft {
     0% {
         transform: translateY(-50%) scale(0.8) translateX(10px);
         opacity: 0;
