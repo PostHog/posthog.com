@@ -377,9 +377,9 @@ Instead, pull the rows you need **once** and save it as a [materialized view](/d
 Start by saving this materialized view, e.g. as `base_events`:
 
 ```sql
-    SELECT event, properties.$geoip_country_code as country
-    FROM events
-    WHERE properties.$geoip_country_code IN ('US', 'CA')
+SELECT event, properties.$geoip_country_code as country
+FROM events
+WHERE properties.$geoip_country_code IN ('US', 'CA')
 ```
 
 You can then query from `base_events` in your main query, which avoids scanning the raw `events` table multiple times:
