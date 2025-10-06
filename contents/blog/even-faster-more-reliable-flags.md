@@ -1,17 +1,15 @@
 ---
-date: 2025-10-03
 title: How we made feature flags even faster and more reliable
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
+date: 2025-10-02
 author:
   - dylan-martin
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/flags_c5beffa331.png
 featuredImageType: full
 category: Engineering
-hideLastUpdated: false
+tags:
+  - Inside PostHog
+  - Engineering
 ---
 
 [Feature flags](/feature-flags) are high stakes. An outage affects not only our customers, but our customer's customers, who's experience it impacts. When flags are slow, our customer's entire application slows down. Unreliability doesn't just make us look bad, but our customers too.
