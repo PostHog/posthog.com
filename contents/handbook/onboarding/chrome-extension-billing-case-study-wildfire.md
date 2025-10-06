@@ -12,7 +12,7 @@ showTitle: true
 
 This document explains the technical causes, the customer's solution, and how to identify similar cases using Metabase.
 
-### Technical Root Cause
+### Technical root cause
 
 | Issue | Explanation |
 |------|-------------|
