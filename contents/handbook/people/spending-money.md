@@ -12,7 +12,7 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
-> Need a one off spend limit increase? You can do this directly within Brex - just request the amount, add the duration purpose for the relevant spend limit, along with the people who can spend in the budget through Brex, and the People & Ops team will automatically be notified for approval. 
+> Need a one off spend limit increase? You can do this directly within Brex - just request the amount, add the duration and purpose for the relevant spend limit, along with the people who can spend in the budget through Brex, and the People & Ops team will automatically be notified for approval.
 
 You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. Please remember that you need to submit receipts for *all* purchases using your Revolut.
 
