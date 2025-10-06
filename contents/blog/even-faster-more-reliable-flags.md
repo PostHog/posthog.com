@@ -1,6 +1,10 @@
 ---
 title: How we made feature flags even faster and more reliable
 date: 2025-10-07
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
 author:
   - dylan-martin
 featuredImage: >-
@@ -10,6 +14,11 @@ category: Engineering
 tags:
   - Inside PostHog
   - Engineering
+seo: {
+  metaTitle: "How we made feature flags even faster and more reliable",
+  metaDescription: "Learn how we rewrote PostHog's feature flag service in Rust to handle more throughput, improve reliability, and reduce costs."
+}
+
 ---
 
 [Feature flags](/feature-flags) are high stakes. An outage affects not only our customers, but our customer's customers, who's experience it impacts. When flags are slow, our customer's entire application slows down. Unreliability doesn't just make us look bad, but our customers too.
@@ -32,9 +41,9 @@ The problems fell into a few categories:
 
 When we looked at projections for 5x-ing our current load, the math didn't work. We needed a fundamentally different approach.
 
-## What we changed
+## What changed
 
-### Rewriting in Rust
+### We rewrote it in Rust
 
 Moving from Django to Rust was a significant decision that we didn't take lightly. We evaluated several options:
 
@@ -48,7 +57,7 @@ The language's type system makes it much harder to write buggy code, which matte
 
 Most importantly, Rust gave us proper code-level timeout primitives, eliminating our problematic dependency on PgBouncer-level settings. No more relying on external connection pooling for reliability.
 
-### Moving evaluation logic out of the database
+### We moved evaluation logic out of the database
 
 The biggest architectural change was moving flag condition evaluation from SQL to application code. Previously, we were doing complex property matching inside database queries, which required expensive joins and data transfers.
 
@@ -60,13 +69,13 @@ Now we:
 
 This front-loads the database work while moving CPU-intensive evaluation logic to where it belongs – in application code that can leverage multiple cores effectively. It also means we're transferring less data and can cache person properties more effectively.
 
-### Cohort caching
+### We implemented app-level cohort caching
 
 [Cohort-based flags](/docs/data/cohorts) were some of our slowest queries because they required complex joins to determine membership. We now cache cohort membership at the application level rather than computing it on-demand for every flag evaluation.
 
 This eliminated one of our biggest performance bottlenecks and made cohort-based flags just as fast as simple property-based flags.
 
-### Simplified architecture
+### We simplified the architecture
 
 We removed PgBouncer from the deployment entirely. Fewer moving parts means fewer things that can break, and much simpler debugging when they do.
 
