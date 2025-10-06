@@ -1,5 +1,5 @@
 ---
-title: Chrome Extension Billing Case Study: Wildfire Systems
+title: Chrome extension billing case study: Wildfire Systems
 sidebar: Handbook
 showTitle: true
 ---
