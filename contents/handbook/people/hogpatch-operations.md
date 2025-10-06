@@ -34,7 +34,7 @@ PostHog teammates don’t need an invite to use Hogpatch — the space is open f
 - We have a garage in the building that allows up to **4–5 cars max**.
 - This is for **internal employees only**, and spots are limited.
 - Please ask **<TeamMember name="Judy Opperwall" photo />** if you’d like a **fob**.
-- If you don’t plan to drive in often, let <TeamMember name="Judy Opperwall" photo /> know beforehand so she can let you in/out on the day you visit.
+- If you don’t plan to drive in often, let <TeamMember name="Judy Opperwall" photo /> know beforehand so she can let you in/out on the day you visit. Always remember to close the garage door when leaving the premises. If you're worried you have forgotten, can double check this via CCTV.
 
 ---
 
@@ -44,7 +44,6 @@ PostHog teammates don’t need an invite to use Hogpatch — the space is open f
 
 - If you notice anything missing or that needs replenishing, reach out to <TeamMember name="Judy Opperwall" photo /> on the `#project-hogpatch` channel.
 - We’ll have teething problems while we figure out how folks use the space, so bear with us. We are constantly learning.
-- If you have specific requests, ask <TeamMember name="Judy Opperwall" photo />.
 
 - A **cleaner** is scheduled to come in **once a week** to tidy up and water plants. This will be updated when we open to YC founders/frequent visitors.
 - A **gardener** comes in **every two weeks** to maintain the plants around the space.
