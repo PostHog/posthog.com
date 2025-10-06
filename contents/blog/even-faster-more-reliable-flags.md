@@ -117,4 +117,4 @@ For even faster flag evaluation, consider enabling [local evaluation](/docs/feat
 
 As we continue evolving our feature flag infrastructure, our focus remains on the fundamentals: making flags fast, reliable, and cost-effective. Because the best feature flag service is one you never have to think about.
 
-[^1]: Yes, I did curse myself by writing this and we had one last week.
+[^1]: Yes, I did curse myself by writing this [and we had one last week](https://github.com/PostHog/post-mortems/blob/main/2025-09-29-flags-is-down.md).
