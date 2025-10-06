@@ -6,9 +6,7 @@ showTitle: true
 
 ### Summary
 
-<PrivateLink url="https://posthog.vitally-eu.io/customers/0195813b-45fa-0000-7223-0ca3ec1f188a-793cf903/dashboards/7ca5e210-3473-4cf0-b048-df00d1acd0b2/conversations/active/5cac43a2-b9c6-4194-838e-3b852f7a0391">
-  Wildfire Systems
-</PrivateLink> implemented PostHog in a Chrome Extension environment. Due to how extensions handle session and identity persistence, they experienced unusually high event volume and feature flag calls, which led to inflated billing.
+<PrivateLink url="https://posthog.vitally-eu.io/customers/0195813b-45fa-0000-7223-0ca3ec1f188a-793cf903/dashboards/7ca5e210-3473-4cf0-b048-df00d1acd0b2/conversations/active/5cac43a2-b9c6-4194-838e-3b852f7a0391">Wildfire Systems</PrivateLink> implemented PostHog in a Chrome Extension environment. Due to how extensions handle session and identity persistence, they experienced unusually high event volume and feature flag calls, which led to inflated billing.
 
 This document explains the technical causes, the customer's solution, and how to identify similar cases using Metabase.
 
