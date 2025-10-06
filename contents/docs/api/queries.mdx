@@ -372,15 +372,20 @@ SELECT *
 FROM ca_events
 ```
 
-Instead, pull the rows you need **once**, typically in a first CTE, and have every later step reference that CTE like this:
+Instead, pull the rows you need **once** and save it as a materizlied view. You can then query from that materizlied view in all the other steps.
+
+Start by saving this materialized view, e.g. as `base_events`:
 
 ```sql
-WITH base_events AS (              -- one read only
     SELECT event, properties.$geoip_country_code as country
     FROM events
     WHERE properties.$geoip_country_code IN ('US', 'CA')
-),
-us_events AS (
+```
+
+You can then query from `base_events` in your main query, which avoids scanning the raw `events` table multiple times:
+
+```sql
+WITH us_events AS (
     SELECT event
     FROM base_events
     WHERE country = 'US'
