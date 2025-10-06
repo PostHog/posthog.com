@@ -48,6 +48,12 @@ export const featureFlags = {
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
+    videos: {
+        overview: {
+            youtube: '1X2gha80fsA',
+            wistia: 'x8m2u14slo',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
         alt: 'A hedgehog toggling a feature flag',
@@ -338,6 +344,31 @@ export const featureFlags = {
             ],
         },
     ],
+    postHogOnPostHog: {
+        title: 'How PostHog uses feature flags',
+        benefits: [
+            {
+                title: 'Test new ideas',
+                description: 'with beta cohorts or random users',
+            },
+            {
+                title: 'Make kill switches',
+                description: 'with flags we can turn off',
+            },
+            {
+                title: 'Stagger roll-outs',
+                description: "so we don't break everything",
+            },
+            {
+                title: 'Run simple experiments',
+                description: 'to see what works best',
+            },
+            {
+                title: 'Control access',
+                description: 'by using flags as permissions',
+            },
+        ],
+    },
     answersHeadline: "How-to's with Feature Flags",
     answersDescription: 'Learn how to do some interesting things with Feature Flags.',
     questions: [

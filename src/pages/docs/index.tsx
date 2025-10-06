@@ -484,7 +484,13 @@ export const DocsIndex = () => {
                 </section>
                 <div className="flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full p-2 @xl:p-4">
                     <section className="flex-1">
-                        <SearchUI initialFilter="docs" hideFilters isRefinedClassName="bg-white" className="mb-4" />
+                        <SearchUI
+                            initialFilter="docs"
+                            hideFilters
+                            isRefinedClassName="bg-white"
+                            className="mb-4"
+                            autoFocus={false}
+                        />
                         <ScrollArea>
                             <div className="@md:-ml-3">
                                 {accordionItems.map((item, index) => (

@@ -50,6 +50,10 @@ You can see a full example of this in our tutorial on [how to send survey respon
 
 ## FAQ
 
+### Why can't I see all my Slack channels in the dropdown?
+
+Slack integrations will only show channels that the authorizing user has access to.
+
 ### Is the source code for this destination available?
 
 PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/slack/template_slack.py) is available on GitHub.

@@ -220,7 +220,12 @@ export default function QuestionsSlide({
                 </div>
                 {questions.map((question: Question, index: number) => {
                     const type = question.url ? question.url.split('/')[1] ?? 'tutorial' : 'tutorial'
-                    const singularType = type === 'docs' ? 'documentation' : pluralizeWord.singular(type)
+                    const singularType =
+                        type === 'docs'
+                            ? 'documentation'
+                            : type === 'product-engineers'
+                            ? 'post'
+                            : pluralizeWord.singular(type)
 
                     return (
                         <Tabs.Content

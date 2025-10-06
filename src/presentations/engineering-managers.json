@@ -1,0 +1,65 @@
+{
+    "name": "Engineering Managers",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "Reduce SaaS spaghetti & ship faster with PostHog",
+            "description": "<p>Replace 10+ devtools with PostHog, the all-in-one solution. Give your engineers all the context they need in one place – without having to juggle multiple contracts and wrestling with broken data pipelines.</p><ul><li>A single source of truth for product data</li><li>Slash vendor costs and complexity</li><li>Focus the team on building features, not babysitting integrations</li></ul>",
+            "descriptionWidth": "@2xl:w-1/2"
+        },
+        "error_tracking": {
+            "template": "product",
+            "name": "Error Tracking",
+            "handle": "error_tracking",
+            "screenshot": "impact",
+            "title": "Rank bugs by business impact",
+            "description": "<p>Error Tracking is infused with business context. You can identify which issues kill conversions and which ones just clutter your logs.</p><p>It's built for product engineers who need to prioritize fixes based on revenue impact, not just error volume.</p>"
+        },
+        "feature_flags": {
+            "template": "product",
+            "name": "Feature Flags",
+            "handle": "feature_flags",
+            "screenshot": "home",
+            "title": "Ship features without begging the data team",
+            "description": "<p>Deploy to user segments and watch real business metrics change in real-time. Get user feedback instantly through integrated <a href='/surveys'>Surveys</a>.</p><p>No waiting weeks for custom dashboards or statistical analysis - everything you need is already built in.</p>"
+        },
+        "experiments": {
+            "template": "product",
+            "name": "Experiments",
+            "handle": "experiments",
+            "screenshot": "home",
+            "title": "Run statistically significant experiments",
+            "description": "<p>Split experiences between users and let our statistical engine tell you definitively when you have a winner. Then roll it out to everyone with confidence.</p><p>No more \"<em>let's run it for another week</em>\" meetings where nothing gets decided.</p>"
+        },
+        "cdp": {
+            "template": "product",
+            "name": "CDP",
+            "handle": "cdp",
+            "screenshot": "home",
+            "title": "Build your data infrastructure once",
+            "description": "<p>We handle all the ETL, transformations, and real-time streaming as you scale.</p><p>No hiring data engineers, no managing vendor integrations that break at 2 AM.</p><p>Just product engineers building products, like it should be.</p>"
+        },
+        "llm_analytics": {
+            "template": "product",
+            "name": "LLM Analytics",
+            "handle": "llm_analytics",
+            "screenshot": "home",
+            "title": "Stop wasting money on AI models that don't work",
+            "description": "<p>See exactly how users interact with your AI features and which models deliver actual results versus expensive disappointments.</p><p>Monitor costs across providers so you can optimize spend based on real performance data.</p>"
+        },
+        "pricing": {
+            "template": "pricing",
+            "name": "Pricing",
+            "title": "Pricing",
+            "description": "PostHog offers usage-based pricing. This means you only pay for what you use, and you can set billing limits so you never get an unexpected bill.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "cta": {
+            "template": "booking",
+            "name": "Get a demo",
+            "title": "Get a demo",
+            "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"
+        }
+    }
+}

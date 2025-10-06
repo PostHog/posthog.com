@@ -37,6 +37,8 @@ These are presented in the most likely order that you will be able to discover t
 
 They are also available as Opportunity fields in Salesforce and as such you should keep them up to date when you learn more.
 
+> Always follow the [lead to opportunity conversion guidelines](/handbook/growth/sales/crm#lead-to-opportunity-conversion-guidelines) when creating opportunities in Salesforce
+
 ## Sales process
 
 This is an overview for what you should actually be doing with a customer at each stage of the sales process. For details on how to manage this in our CRM, visit our [Salesforce docs](/handbook/growth/sales/crm). The steps are:
@@ -220,7 +222,7 @@ By this point, you may have started running into some objections. These are the 
 
 Hooray! This is defined as when the contract is signed by _everyone_. 'They're about to sign' - NOT CLOSED. 'I've sent a DocuSign' - NOT CLOSED EITHER.
 
-If an op moves forward with PostHog, but is below an annual contract, change the type to "Monthly Contract" and mark it as closed - won in Salesforce.
+If an opp moves forward with PostHog on a month-to-month basis, but is below $20k annual spend, change the type to "Monthly Contract" and mark it as closed - won in Salesforce.
 
 Once the contract is signed, it lives in PandaDoc. Next step - get them set up with [billing](/handbook/growth/sales/billing).
 

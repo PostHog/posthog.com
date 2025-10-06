@@ -1,22 +1,8 @@
 ---
 title: How Gankster leveled up retention with Max AI
 customer: Gankster
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/gankster_0cb7aed231.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/gankster_0cb7aed231.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/gankster_f4fd8da892.jpg
-industries:
-  - Gaming
-users:
-  - Engineering
-  - Growth
-  - Marketing
-toolsUsed:
-  - Max AI
-  - Session replays
-  - Product analytics
 date: 2025-08-21
 ---
 
