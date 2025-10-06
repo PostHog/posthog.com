@@ -22,7 +22,7 @@ PostHog teammates don’t need an invite to use Hogpatch — the space is open f
 
 - If you are visiting for the first time, ring the **black intercom doorbell** on the front door.
 - <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
-- In the future, we will set up an **NFC reader** for guests/visitors that will automatically expire after a set time.
+- In the future, guests/visitors will be able to unlock doors with digital wallet passes that automatically expire after a set time.
 - These passes will be sent to **YC founders and PostHog visitors via email invite**.
 
 ---
