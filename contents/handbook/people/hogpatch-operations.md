@@ -24,6 +24,8 @@ PostHog teammates don’t need an invite to use Hogpatch — the space is open f
 - <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
 - In the future, guests/visitors will be able to unlock doors with digital wallet passes that automatically expire after a set time.
 - These passes will be sent to **YC founders and PostHog visitors via email invite**.
+- There’s no check-in or reservations needed, it's a very relaxed setup.
+
 
 ---
 
