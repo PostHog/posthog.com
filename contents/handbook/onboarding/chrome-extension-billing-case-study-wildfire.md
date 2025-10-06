@@ -23,7 +23,7 @@ This document explains the technical causes, the customer's solution, and how to
 | `/flags` requests were billed, even when quota-limited | PostHog counted these requests toward the usage quota, even if the response returned no flags. |
 | Added budget mid-cycle had no effect | When the team increased their billing limit, it did not retroactively unlock flags. Only new requests after the monthly reset were allowed. |
 
-### Fix Implemented by the Customer
+### Fix implemented by the customer
 
 The Wildfire team applied the correct approach:
 
@@ -42,7 +42,7 @@ The Wildfire team applied the correct approach:
 5. **Used PostHog dashboard to monitor**
    The "My PostHog Billable Usage" dashboard showed real-time data to verify that fixes worked.
 
-### How to Spot This in Metabase
+### How to spot this in metabase
 
 If a customer is using a Chrome Extension without proper initialization, you will often see the following patterns in the usage dashboard:
 
@@ -62,7 +62,7 @@ If a customer is using a Chrome Extension without proper initialization, you wil
 - Graphs show sharp daily spikes at regular intervals
 - Indicates extension wake cycles creating new sessions and IDs
 
-#### 5. No Batch Exports, minimal standard library usage
+#### 5. No batch exports, minimal standard library usage
 - Chrome extensions often do not use session replay, heatmaps, or full web libraries
 - You may see a custom library version or just raw SDK usage
 
@@ -75,7 +75,7 @@ If confirmed, you can share bootstrapping and identity persistence best practice
 
 ---
 
-### Recommendations for Extension Developers
+### Recommendations for extension developers
 
 | Task | Details |
 |------|---------|
