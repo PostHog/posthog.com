@@ -15,7 +15,10 @@ Hogpatch is our San Francisco coworking space, shared with a handpicked group of
 
 ---
 
-## Building Access
+## Building access
+
+PostHog teammates don’t need an invite to use Hogpatch — the space is open for you whenever you’re in town. If you know your SF travel dates in advance, it’s helpful to post in the #sf-bay-area channel so we can make sure the space is ready for you.
+
 
 - If you are visiting for the first time, ring the **black intercom doorbell** on the front door.
 - <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
