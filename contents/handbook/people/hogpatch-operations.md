@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-Hogpatch is our San Francisco coworking space, shared with a handpicked group of YC founders who are active PostHog users. Teammates in the Bay Area (or visiting) are welcome to drop in regularly to work, meet users, gather feedback, or join events we host in the space. Here’s a quick guide to how it all operates.
+HogPatch is our San Francisco coworking space, shared with a handpicked group of YC founders who are active PostHog users. Teammates in the Bay Area (or visiting) are welcome to drop in regularly to work, meet users, gather feedback, or join events we host in the space. Here’s a quick guide to how it all operates.
 
 
 **<TeamMember name="Judy Opperwall" photo />**, our Office Manager, is on site **Mondays to Thursdays from 9am–5pm**. For any issues while she is not in, please reach out to the `#project-hogpatch` channel or DM her directly.
@@ -17,7 +17,7 @@ Hogpatch is our San Francisco coworking space, shared with a handpicked group of
 
 ## Building access
 
-PostHog teammates don’t need an invite to use Hogpatch — the space is open for you whenever you’re in town. If you know your SF travel dates in advance, it’s helpful to post in the #sf-bay-area channel so we can make sure the space is ready for you.
+PostHog teammates don’t need an invite to use HogPatch — the space is open for you whenever you’re in town. If you know your SF travel dates in advance, it’s helpful to post in the #sf-bay-area channel so we can make sure the space is ready for you.
 
 
 - If you are visiting for the first time, ring the **black intercom doorbell** on the front door.
