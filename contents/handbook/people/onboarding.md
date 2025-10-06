@@ -10,7 +10,7 @@ Giving a new joiner a great onboarding experience is super important to us. We w
 
 > Want to introduce a new joiner to the People team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
 
-Our [team](/people) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
+Our [team](/people) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to meet one of our team members at our HogPatch in SF or our London base. Team Leads may also travel to where the new joiner is based, so the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
 
 ## Onboarding checklist
 
@@ -48,7 +48,7 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 ### Guidance for onboarding buddies
 
 - Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure that you don't have any leave booked in the week before and the two weeks after the new starter joins_
-- We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
+- We will intro the new joiner and the onboarding buddy via Slack - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
 - Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
     - Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
@@ -56,7 +56,7 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to consider the Hedgehouse as a location for in-person onboarding. Regardless of location, everyone should have their own bedroom.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to first consider HogPatch (SF Office) or London as a location for in-person onboarding. This makes coordinating things like laptops and work spaces much easier. Regardless of location, everyone should have their own bedroom.
 
 In these cases, the process is:
 
@@ -66,7 +66,7 @@ In these cases, the process is:
 
 While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite, which is $2,000 per person. Some considerations to reduce the cost:
 
-  - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
+  - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible. 
   - Consider doing more casual social activities that are less expensive: dinners, drinks etc
   - You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
   - The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the the budget. 
@@ -117,9 +117,9 @@ We use a number of different tools to organise our work and communicate at PostH
 - Slack - we have an internal workspace and a users Slack as well
 - Brex (US, RoW) or Revolut (UK, EU) - company cards and expenses tracking
 - Shopify - powers our merch store
-- CharlieHR - holiday tracking, personal details
+- Deel HRIS - holiday tracking, personal details
 - Gusto - payroll and benefits (US)
-- Deel - contractor payroll (EU and special arrangements)
+- Deel EOR - contractor payroll (EU and special arrangements)
 
 ### Engineering
 - AWS
