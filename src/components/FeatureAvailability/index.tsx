@@ -10,7 +10,8 @@ type FeatureAvailabilityProps = {
               openSource?: boolean
               free: boolean
               selfServe: boolean
-              teams?: boolean
+              boost?: boolean
+              scale?: boolean
               enterprise: boolean
           }
         | boolean
@@ -27,17 +28,19 @@ const renderAvailabilityIcon = (isAvailable: boolean) => {
 export function FeatureAvailability({ availability }: FeatureAvailabilityProps): JSX.Element {
     const diffOpenSource = typeof availability !== 'boolean' && 'openSource' in availability
 
+    const getGridColsClass = () => {
+        const count = typeof availability === 'boolean' ? 1 : Object.keys(availability).length
+        const columnCount = Math.max(3, count) // minimum 3 columns
+        return `grid-cols-${columnCount}`
+    }
+
+    const gridColsClass = getGridColsClass()
+
     return (
         <div className="border-t border-b border-solid border-primary dark: py-2 space-y-2 mt-2 mb-5 ">
             <h6 className="text-muted !my-0 font-semibold text-base">Where is this feature available?</h6>
 
-            <div
-                className={`grid grid-flow-col-dense ${
-                    diffOpenSource
-                        ? 'grid-rows-4 grid-cols-2 sm:grid-cols-4 sm:grid-rows-2'
-                        : 'grid-rows-3 grid-cols-2 sm:grid-cols-3 sm:grid-rows-2'
-                } sm:grid-flow-row-dense gap-x-4 items-center`}
-            >
+            <div className={`grid grid-flow-col-dense ${gridColsClass} sm:grid-flow-row-dense gap-x-4 items-center`}>
                 {diffOpenSource ? (
                     <div>
                         <h5 className="flex items-center space-x-1.5 text-base !my-0">
@@ -73,10 +76,23 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     </h5>
                 </div>
 
-                {availability.teams && (
+                {typeof availability === 'object' && 'boost' in availability && (
                     <div>
                         <h5 className="flex items-center space-x-1.5 text-base !my-0">
-                            <span>Teams</span>
+                            <span>Boost</span>
+                            <Tooltip content="Available on PostHog Cloud">
+                                <span>
+                                    <InfoIcon className="w-4 h-4" />
+                                </span>
+                            </Tooltip>
+                        </h5>
+                    </div>
+                )}
+
+                {typeof availability === 'object' && 'scale' in availability && (
+                    <div>
+                        <h5 className="flex items-center space-x-1.5 text-base !my-0">
+                            <span>Scale</span>
                             <Tooltip content="Available on PostHog Cloud">
                                 <span>
                                     <InfoIcon className="w-4 h-4" />
@@ -103,8 +119,17 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
 
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.selfServe)}
 
-                {availability.teams &&
-                    renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.teams)}
+                {typeof availability === 'object' &&
+                    'boost' in availability &&
+                    renderAvailabilityIcon(
+                        typeof availability === 'boolean' ? availability : availability.boost || false
+                    )}
+
+                {typeof availability === 'object' &&
+                    'scale' in availability &&
+                    renderAvailabilityIcon(
+                        typeof availability === 'boolean' ? availability : availability.scale || false
+                    )}
 
                 {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.enterprise)}
             </div>

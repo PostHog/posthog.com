@@ -213,7 +213,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
-const categoriesHideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
+const categoriesHideFromIndex = [null, 'customers', 'spotlight', 'changelog', 'comparisons', 'notes', 'repost']
 export const tagsHideFromIndex = ['Comparisons']
 
 export const getParams = (root, tag, sort, authorId) => {

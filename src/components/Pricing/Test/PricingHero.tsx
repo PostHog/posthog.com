@@ -4,10 +4,9 @@ import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, 
 import Header from '../Test/Header'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Link as ScrollLink } from 'react-scroll'
-import * as Icons from '@posthog/icons'
-import FreeTierItem from './FreeTierItem'
 import PlanContent from './PlanContent'
 import Tooltip from 'components/Tooltip'
+import FreeTier from './FreeTier'
 
 interface PricingHeroProps {
     activePlan: string
@@ -223,71 +222,8 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                     <span className="opacity-75 text-sm">(resets monthly)</span>
                 </div>
 
-                <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2">
-                    <FreeTierItem
-                        name="Analytics"
-                        allocation="1M events"
-                        icon={<Icons.IconGraph className="text-blue size-5" />}
-                        icon2={<Icons.IconPieChart className="text-green size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Session replay"
-                        allocation="5K recordings"
-                        icon={<Icons.IconRewindPlay className="text-yellow size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Feature flags"
-                        allocation="1M requests"
-                        icon={<Icons.IconToggle className="text-seagreen size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Experiments"
-                        description="Billed with feature flags"
-                        icon={<Icons.IconFlask className="text-purple size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Error tracking"
-                        allocation="100K exceptions"
-                        icon={<Icons.IconWarning className="text-orange size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Surveys"
-                        allocation="1500 responses"
-                        icon={<Icons.IconMessage className="text-red size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Data warehouse"
-                        allocation="1M rows"
-                        icon={<Icons.IconDatabase className="text-purple size-5" />}
-                    />
-                    <FreeTierItem
-                        name="Data pipelines"
-                        allocation={
-                            <>
-                                10K events + 1M rows{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Real-time destinations: Send events to Slack, webhooks, and 40+ tools as
-                                            they happen.
-                                            <br />
-                                            Batch exports: Reliable scheduled exports to S3, Snowflake, BigQuery, and
-                                            more
-                                        </>
-                                    )}
-                                    placement="top"
-                                >
-                                    <Icons.IconInfo className="size-3 inline-block relative -top-px" />
-                                </Tooltip>
-                            </>
-                        }
-                        icon={<Icons.IconDecisionTree className="text-seagreen size-5" />}
-                    />
-                    <FreeTierItem
-                        name="LLM analytics"
-                        allocation="100K events"
-                        icon={<Icons.IconLlmAnalytics className="text-purple size-5" />}
-                    />
+                <div className={`grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2`}>
+                    <FreeTier />
                 </div>
             </div>
         </>

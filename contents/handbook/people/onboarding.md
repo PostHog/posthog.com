@@ -22,22 +22,9 @@ We send an introductory email to all new hires to welcome them to the team and e
 
 > Once you've joined PostHog, we will **not** use email for communicating with each other. For example, James or Tim will never ask you to do something critical over email only – they'll always confirm it over Slack, and so will everyone else. Be extremely cautious of direct emails from James, Tim, or other people of PostHog. 
 
-The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we send email using Gmail Layouts. You can access Gmail Layouts with this button: 
+The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we landed on a simple email with the necessary links.
 
-![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layouts-button.png)
-
-If this is the first time you've used Gmail Layouts, select `Default Styling` before choosing a template. Choosing Black `#00000` as your primary colour will create simple black buttons which match the design of other emails. Please also upload a PostHog logo and enter our Twitter and LinkedIn links. You can use the following text in your email footers. 
-
-```
-No hedgehogs were harmed in the making of this email.
-PostHog's mailing address is 2261 Market Street #4008 in the city of San Francisco, CA 94114
-```
-
-With default styling set, you can now choose the 'Call to action' template. 
-
-![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layout-email.png)
-
-With an email template chosen, you can then enter the copy you want to send. <PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
+ <PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
@@ -226,7 +213,7 @@ Below are a list of Slack channels you may find helpful:
 - `#brand-mentions`
 - `#do-more-weird`
 - `#newsletters`
-- `#team-exec`
+- `#team-blitzscale`
 - `#dev`
 - `#general`
 - `#alerts`
