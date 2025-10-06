@@ -104,13 +104,13 @@ Statsig, as its name suggests, is an A/B testing tool first and foremost. While 
   <ComparisonRow column1={false} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1="Beta" column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={true} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
@@ -165,13 +165,13 @@ LaunchDarkly and Statsig offer similar feature management and A/B testing featur
   <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1={false} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1="Warehouse only" column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1="Alpha" column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1="Enterprise" column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
@@ -226,13 +226,13 @@ Amplitude is missing some of the more complex statistical features of Statsig, b
   <ComparisonRow column1="Enterprise" column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
@@ -288,14 +288,14 @@ On paper, Optimizely is quite similar to Statsig, but it's more focused on marke
   <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={false} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
   <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1="Warehouse only" column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1={false} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
@@ -354,14 +354,14 @@ VWO is closer to Optimizely than Statsig, though it offers most of the same feat
   <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={false} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
   <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={false} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
@@ -420,14 +420,14 @@ GrowthBook is a much more focused tool than others on this list. It is primarily
   <ComparisonRow column1="Pro" column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={true} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1="Pro" column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={false} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
   <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1="Partial" column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1={false} column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1="Via self-hosting" column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
@@ -481,14 +481,14 @@ Like Statsig, Kameleoon is an A/B testing platform first and foremost, though it
   <ComparisonRow column1={true} column2="Pro" feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1={false} column2={true} feature="Mutually exclusive experiments" description="Isolate user groups for simultaneous, independent experiments." />
   <ComparisonRow column1={true} column2={true} feature="No code experiments" description="Create A/B tests using a visual editor" />
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and payloads" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
   <ComparisonRow column1={false} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads (known as Dynamic Config in Statsig)" />
   <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual logging" />
   <ComparisonRow column1={false} column2={false} feature="Query editor" description="Query your analytics data directly using SQL" />
   <ComparisonRow column1={false} column2={true} feature="Session replay" description="Record and play back real user sessions to analyze usage" />
+  <ComparisonRow column1="Beta" column2={false} feature="Surveys" description="Collect feedback and measure NPS score on page, without code" />
   <ComparisonRow column1={true} column2={false} feature="EU hosting option" description="Choose where your data is stored" />
   <ComparisonRow column1={true} column2={false} feature="Independent" description="Standalone product not owned by a larger company" />
 </ComparisonTable>
