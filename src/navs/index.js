@@ -1577,7 +1577,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Use Cases',
+                name: 'Use cases',
                 url: '',
                 children: [
                     {
