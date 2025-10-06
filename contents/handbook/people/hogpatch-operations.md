@@ -43,7 +43,7 @@ PostHog teammates don’t need an invite to use Hogpatch — the space is open f
 ### How to make service/supply requests
 
 - If you notice anything missing or that needs replenishing, reach out to <TeamMember name="Judy Opperwall" photo /> on the `#project-hogpatch` channel.
-- We’ll have teething problems while we figure out how folks use the space—so bear with us.
+- We’ll have teething problems while we figure out how folks use the space, so bear with us. We are constantly learning.
 - If you have specific requests, ask <TeamMember name="Judy Opperwall" photo />.
 
 - A **cleaner** is scheduled to come in **once a week** to tidy up and water plants. This will be updated when we open to YC founders/frequent visitors.
