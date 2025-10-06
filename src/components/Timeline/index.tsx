@@ -77,7 +77,7 @@ export default function Timeline({
         const firstMonth = document.getElementById(`timeline-1`)
         if (!firstMonth || !containerRef.current) return
         const firstMonthRect = firstMonth.getBoundingClientRect()
-        setWindowWidth(firstMonthRect.width)
+        setWindowWidth(firstMonthRect.width + 1)
         setWindowX(firstMonthRect.left - containerRef.current.getBoundingClientRect().left || 0)
     }, [])
 
