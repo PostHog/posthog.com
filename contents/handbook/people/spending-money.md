@@ -12,11 +12,11 @@ PostHog is a lean organization - the less we spend, the more time we have to mak
 
 If it's a trivial expense, just buy it. We provide you with a company card to cover 99% of the spending you might need to do. We use Brex for everyone, and also provide UK team members with an additional Revolut card. 
 
-> Need a one off spend limit increase? You can do this directly within Brex - just request the amount and duration for the relevant spend limit in the app, and the People & Ops team will automatically be notified for approval. 
+> Need a one off spend limit increase? You can do this directly within Brex - just request the amount, add the duration purpose for the relevant spend limit, along with the people who can spend in the budget through Brex, and the People & Ops team will automatically be notified for approval. 
 
 You should use your Revolut card for UK-specific spending (i.e. ordering from UK sites, hotels/food/drink/... in the UK), and Brex for everything else. This lets us claim VAT back on UK spending. Please remember that you need to submit receipts for *all* purchases using your Revolut.
 
-For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead. 
+For larger expenses which don't fit into the items here, please _raise a policy suggestion for it as a pull request on this page_, so we can document our decision making into our policy, rather than making everything case by case. If it's likely to just be a one-off, you can post in #team-people-and-ops in Slack instead.
 
 ## Trivial expenses
 
@@ -37,14 +37,14 @@ We now use Brex Empower. This allows the People and Ops team to effectively trac
 - Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spend limit’ to your card. The spend limit you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ spend limit. When you then complete your purchase, the money will be taken from that specific spend limit and you will easily be able to see how much of your spend limit you have remaining.
 - For subscriptions, you can [create a virtual card](https://dashboard.brex.com/p/wallet?expenses.wallet.view=all&walletCreateCard=true) and assign your subscriptions to that virtual card so all those charges will come from that spend limit and not your default card limit.
 - If you forget to assign a spend limit before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related spend limit. 
-- For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
-- You only need to submit receipts for purchases of $75 or more, within 14 days. You don’t need to keep receipts below this amount.
+- You must upload receipts and invoices of your expenses/charges that are $75 or more. If it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email, Slack or reply to the SMS notification.
+- You only need to submit receipts for purchases of $75 or more, within 14 days for charges on Brex. You don’t need to keep receipts below this amount.
 
-By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
+By default, the email forwarding feature only accepts emails from your PostHog email address. You can contact Brex support to enable forwarding from your personal email address if needed.
 
 To ensure complete financials, we ask that you provide a reasoning/justification for the expense being incurred in detail eg, if requesting a spend limit to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. For example, if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
 
-If you have expenses that require payment from Brex via ACH or wire (i.e, you can't use your card to pay), you can upload the invoice directly into Brex via the 'draft bill' functionality. That allows someone from the People Ops/Finance team to go in and approve! Please include the context of what the invoice is for, which spend limit it will be coming out of, and how it was approved.
+Only People, Ops and Finance team members have access to the 'Bill Pay' functionality on Brex. If you have expenses/invoices that require payment via ACH or wire (i.e, you can't use your card to pay), you can send the invoice to finance@posthog.com along with a note of what the invoice is for, and the budget it should come out of.
 
 If you have some invoice/receipt to share with the Finance team, send it to finance@posthog.com, and setup this email as the default billing email with vendors, software subscriptions, etc.
 
@@ -52,7 +52,7 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 
 - Buy something on your Revolut card.
 - If it's a digital invoice, just forward it to ukinvoices@posthog.com with a note explaining what it is for. If it's a physical receipt, take a picture and forward it to the same place with a note. 
-- You need to submit receipts for _all_ purchases. This should be an itemised receipt. not a receipt from a credit card machine. We need to know what was purchased. 
+- You need to submit receipts for _all_ purchases incurred using your Revolut. This should be an itemised receipt. not a receipt from a credit card machine. We need to know what was purchased. 
 
 ### Your personal card
 
@@ -61,7 +61,11 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge, click on "repay" - more details [here](https://www.brex.com/support/employee-repayments). The Finance team will reach out to you with the Wire instructions for repayment (the repayment, unfortunately, is not processed through Brex).
+
+If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog.
+
+Your Brex card **may not** be used for personal expenses, under any circumstance.
 
 ## Making larger purchases
 
@@ -218,6 +222,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when traveling to the US. PostHog will cover costs here.
 - When traveling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
+- Wifi on flights don't tend to be effective for work, PostHog does not cover charges for the Wifi.
 - When making charges on your card internationally, run the transaction using the local currency when given the option as Brex will generally have a better exchange rate.
 - PostHog has international insurance for our work trips, so you will not need to buy travel insurance when traveling on behalf of PostHog.
 - It's fine to book your outbound / return flights for a different day to when you are required to be there as long as the flight is a similar price or less. Any other costs outside of the days you are required to be at an event are of course _not_ covered.
