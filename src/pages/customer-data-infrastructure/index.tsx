@@ -246,7 +246,7 @@ export default function CDP(): JSX.Element {
                     </Fieldset>
                 </div>
                 <p className="text-lg font-bold">
-                    Analyze product and customer data in PostHog – <em>no matter where it was generated.</em>
+                    Analyze product and customer data in PostHog. <em>No matter where it was generated.</em>
                 </p>
                 <p>
                     Whether you're looking for an ETL, reverse ETL, a data warehouse, event pipelines, a CDP built for
