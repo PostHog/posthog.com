@@ -85,7 +85,7 @@ The best way to do this is to expand usage of existing product with _new_ teams 
 
 ### Principles for visiting customers
 
-If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). 
+If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). If necessary you can [request a budget for travel and accomodation](https://posthog.com/handbook/people/spending-money) in Brex.
 
 Generally speaking you should be trying to regularly see customers in your book of business who are $100k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
 
