@@ -23,10 +23,25 @@ Why? We believe that the best tech companies are increasingly engineering-led. B
 | **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
 | **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO'ed |
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
-| **Job role** | We build for engineers<br /><br />**Primary focus**<br />- [Product engineers](/blog/what-is-a-product-engineer)<br/>- Technical founders <br />- Highly technical product managers <br /><br />**Should be usable by**:<br />- Designers<br />- Less technical product managers<br />- Data engineers<br />- Marketers<br />|
 | **Examples** | PostHog anytime from their Series B to IPO, Supabase, 11Labs |
 
 Each team will focus more or less on different members of the product team. This is detailed on their team pages.
+
+## Our current Persona
+
+
+We build for the power users of the **product team**
+
+**Primary focus**
+- [Product engineers](/blog/what-is-a-product-engineer)
+- Technical founders
+- Highly technical product managers
+
+**Should be usable by**:
+- Designers
+- Less technical product managers
+- Data engineers
+- Marketers
 
 ## FAQs
 
@@ -65,6 +80,8 @@ Each team will focus more or less on different members of the product team. This
 - Generally, we should build for the **best product engineers** building the **most-loved products** at **high-growth startups**.
 
 - These kinds of users are speaking to customers, looking at data, and quickly building and shipping features. They operate collaboratively within a diverse team including designers, other PMs, marketers, and executives. We want to be loved by the sophisticated power users and still good to use for the others on the team.
+
+- They look at what PostHog will be in the future as much as what we currently offer. They choose PostHog to avoid tool sprawl and future migrations – they're betting on us shipping more and more things that make sense for them.
 
 - For product analytics, product managers who are technical (ex-engineers, for example) are the power users of analytics. They have the desire and the time to go significantly deeper into the data.
 

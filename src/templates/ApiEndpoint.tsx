@@ -1,8 +1,6 @@
-import { Link } from 'react-scroll'
-import Scrollspy from 'react-scrollspy'
+import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import '@fontsource/source-code-pro'
 import { CodeBlock, SingleCodeBlock } from 'components/CodeBlock'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
 import { graphql } from 'gatsby'
@@ -10,16 +8,14 @@ import { getCookie, setCookie } from 'lib/utils'
 import * as OpenAPISampler from 'openapi-sampler'
 import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
-import PostLayout from 'components/PostLayout'
-import CommunityQuestions from 'components/CommunityQuestions'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { shortcodes } from '../mdxGlobalComponents'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
-import { docsMenu } from '../navs'
 import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
+import { Heading } from 'components/Heading'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -30,56 +26,49 @@ const mapVerbsColor = {
 }
 
 // Divider component for visual separation
-const Divider = ({ className = '' }) => (
-    <hr className={`border-0 border-t border-gray-accent-light dark:border-gray-accent-dark my-6 ${className}`} />
-)
+const Divider = ({ className = '' }) => <hr className={`border-0 border-t border-primary my-6 ${className}`} />
 
 // Section divider with more spacing for major sections
-const SectionDivider = ({ className = '' }) => (
-    <hr className={`border-0 border-t-2 border-gray-accent-light dark:border-gray-accent-dark my-8 ${className}`} />
-)
+const SectionDivider = ({ className = '' }) => <hr className={`border-0 border-t-2 border-primary my-8 ${className}`} />
 
-function Endpoints({ paths }) {
-    const urlItems = []
-    Object.entries(paths).map(([path, value]) => Object.keys(value).map((verb) => urlItems.push(pathID(verb, path))))
-
+function Endpoints({
+    paths,
+    containerRef,
+}: {
+    paths: Record<string, Record<string, unknown>>
+    containerRef: React.RefObject<HTMLDivElement>
+}) {
     return (
         <div>
             <h3>Endpoints</h3>
             <table className="table-auto">
-                <Scrollspy
-                    offset={-50}
-                    className="list-none m-0 p-0 flex flex-col space-y-2"
-                    items={urlItems}
-                    currentClassName="active-link"
-                >
+                <tbody className="list-none m-0 p-0 flex flex-col">
                     {Object.entries(paths).map(([path, value]) => (
-                        <React.Fragment key={value}>
-                            {Object.keys(value).map((verb) => (
-                                <tr key={verb} className="border-primary border-b first:border-t-0 last:border-b-0">
-                                    <td>
-                                        <code className={`method text-${mapVerbsColor[verb]}`}>
+                        <React.Fragment key={path}>
+                            {Object.keys(value as Record<string, unknown>).map((verb) => (
+                                <tr key={verb} className="border-0">
+                                    <td className="py-1 px-0">
+                                        <code
+                                            className={`method text-${
+                                                mapVerbsColor[verb as keyof typeof mapVerbsColor]
+                                            }`}
+                                        >
                                             {verb.toUpperCase()}
                                         </code>
                                     </td>
-                                    <td>
-                                        <Link
-                                            offset={-50}
-                                            className="cursor-pointer"
-                                            smooth
-                                            duration={300}
-                                            to={pathID(verb, path)}
-                                            hashSpy
-                                            spy
-                                        >
-                                            <code>{path.replaceAll('{', ':').replaceAll('}', '')}</code>
-                                        </Link>
+                                    <td className="py-1 px-4">
+                                        <ElementScrollLink
+                                            id={pathID(verb, path)}
+                                            label={<code>{path.replaceAll('{', ':').replaceAll('}', '')}</code>}
+                                            element={containerRef}
+                                            className="cursor-pointer hover:underline"
+                                        />
                                     </td>
                                 </tr>
                             ))}
                         </React.Fragment>
                     ))}
-                </Scrollspy>
+                </tbody>
             </table>
         </div>
     )
@@ -167,10 +156,7 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li
-                        key={index}
-                        className="py-3 border-b border-gray-accent-light dark:border-gray-accent-dark first:border-0 last:border-0"
-                    >
+                    <li key={index} className="py-3 border-b border-primary last:border-0">
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
@@ -360,7 +346,7 @@ function ResponseBody({ item, objects }) {
             <h4>Response</h4>
             <div className="response-wrapper">
                 <button className="mt-2 text-sm text-red font-semibold" onClick={() => setShowResponse(!showResponse)}>
-                    {showResponse ? 'Hide' : 'Show'} response
+                    {showResponse ? 'Hide' : 'Show'} response body
                 </button>
                 <br />
                 {showResponse && (
@@ -570,7 +556,24 @@ const pathDescription = (item) => {
     }
 }
 
-export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, breadcrumbBase, tableOfContents } }) {
+interface ApiEndpointData {
+    data: {
+        name: string
+        nextURL?: string
+        items: string
+    }
+    apiComponents: {
+        components: string
+    }
+    allMdx: {
+        nodes?: Array<{
+            slug: string
+            body: string
+        }>
+    }
+}
+
+export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
     const {
         apiComponents: { components: apiComponents },
         allMdx,
@@ -596,6 +599,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     const objects = JSON.parse(apiComponents)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
+    const contentContainerRef = useRef<HTMLDivElement>(null)
 
     const setExampleLanguage = (language) => {
         setCookie('api_docs_example_language', language)
@@ -611,99 +615,136 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     // Find overview.mdx node for this API entity
     const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
 
+    const [hovered, setHovered] = useState(false)
+
     return (
-        <ReaderView>
-            <SEO title={`${title} API Reference - PostHog`} />
+        <ScrollSpyProvider>
+            <ReaderView>
+                <div ref={contentContainerRef} className="p-4">
+                    <SEO title={`${title} API Reference - PostHog`} />
 
-            <h2 className="!mt-0">{title}</h2>
-            <blockquote className="p-6 mb-4 rounded bg-accent">
-                <p>
-                    For instructions on how to authenticate to use this endpoint, see{' '}
-                    <a href="/docs/api/overview">API overview</a>.
-                </p>
-            </blockquote>
+                    <h2 className="!mt-0">{title}</h2>
+                    <blockquote className="p-6 mb-4 rounded bg-accent">
+                        <p>
+                            For instructions on how to authenticate to use this endpoint, see{' '}
+                            <a href="/docs/api/overview">API overview</a>.
+                        </p>
+                    </blockquote>
 
-            {overviewNode?.body && (
-                <div className="article-content mt-6">
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{overviewNode.body}</MDXRenderer>
-                    </MDXProvider>
-                </div>
-            )}
+                    {overviewNode?.body && (
+                        <div className="article-content mt-6">
+                            <MDXProvider components={components}>
+                                <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                            </MDXProvider>
+                            <SectionDivider />
+                        </div>
+                    )}
 
-            <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+                    <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
-            <Endpoints paths={paths} />
+                    <Endpoints paths={paths} containerRef={contentContainerRef} />
 
-            {items.map((item) => {
-                item = item.operationSpec
-                const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
+                    {items.map((item, index) => {
+                        item = item.operationSpec
+                        const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
-                return (
-                    <div className="mt-8" key={item.operationId}>
-                        <div
-                            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
-                            id={pathID(item.httpVerb, item.pathName)}
-                        >
-                            <div className="space-y-6">
-                                <h2>{generateName(item)}</h2>
-                                {mdxNode?.body && (
-                                    <div className="article-content">
-                                        <MDXProvider components={components}>
-                                            <MDXRenderer>{mdxNode.body}</MDXRenderer>
-                                        </MDXProvider>
-                                    </div>
-                                )}
-                                <ReactMarkdown>
-                                    {!item.description || item.description === items[0].operationSpec?.description
-                                        ? pathDescription(item)
-                                        : item.description}
-                                </ReactMarkdown>
-                                <Security item={item} objects={objects} />
-                                <Parameters item={item} objects={objects} />
+                        return (
+                            <div className="mt-8" key={item.operationId}>
+                                {index > 0 && <SectionDivider />}
 
-                                <div>
-                                    <h4>Response</h4>
-                                    {Object.keys(item.responses).map((statusCode) => {
-                                        const response = item.responses[statusCode]
-                                        return (
-                                            <div key={statusCode} className="mb-4">
-                                                <h5 className="text-sm font-semibold mb-2">
-                                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                        Status {statusCode}
-                                                    </span>{' '}
-                                                    {response.description}
-                                                </h5>
-                                                <ResponseExample
-                                                    item={item}
-                                                    objects={objects}
-                                                    objectKey={
-                                                        response.content?.['application/json']?.schema['$ref']
-                                                            ?.split('/')
-                                                            .at(-1) ||
-                                                        response.content?.['application/json']?.schema.items?.['$ref']
-                                                            ?.split('/')
-                                                            .at(-1)
-                                                    }
-                                                    exampleLanguage={exampleLanguage}
-                                                    setExampleLanguage={setExampleLanguage}
-                                                />
+                                <div
+                                    className="grid grid-cols-1 @xl:grid-cols-2 gap-8 items-start"
+                                    id={pathID(item.httpVerb, item.pathName)}
+                                >
+                                    <div className="space-y-6">
+                                        <Heading id={pathID(item.httpVerb, item.pathName)} as="h2">
+                                            {generateName(item)}
+                                        </Heading>
+                                        {mdxNode?.body && (
+                                            <div className="article-content">
+                                                <div className="text-primary">
+                                                    <MDXProvider components={components}>
+                                                        <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                                    </MDXProvider>
+                                                </div>
                                             </div>
-                                        )
-                                    })}
+                                        )}
+                                        <ReactMarkdown>
+                                            {!item.description ||
+                                            item.description === items[0].operationSpec?.description
+                                                ? pathDescription(item)
+                                                : item.description}
+                                        </ReactMarkdown>
+
+                                        <Security item={item} objects={objects} />
+                                        {item.security?.[0]?.['PersonalAPIKeyAuth']?.length && <Divider />}
+
+                                        <Parameters item={item} objects={objects} />
+                                        {item.parameters?.filter((param) => param.in === 'path' || param.in === 'query')
+                                            ?.length > 0 && <Divider />}
+
+                                        <RequestBody item={item} objects={objects} />
+                                        {item.requestBody && <Divider />}
+
+                                        <ResponseBody item={item} objects={objects} />
+                                    </div>
+                                    <div className="lg:sticky top-[108px] space-y-6">
+                                        <div>
+                                            <h4>Example request</h4>
+                                            <RequestExample
+                                                name={name}
+                                                item={item}
+                                                objects={objects}
+                                                exampleLanguage={exampleLanguage}
+                                                setExampleLanguage={setExampleLanguage}
+                                            />
+                                        </div>
+                                        <div>
+                                            <h4>Example response</h4>
+                                            {Object.keys(item.responses).map((statusCode) => {
+                                                const response = item.responses[statusCode]
+                                                return (
+                                                    <div key={statusCode} className="mb-4">
+                                                        <h5 className="text-sm font-semibold mb-2">
+                                                            <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                                Status {statusCode}
+                                                            </span>{' '}
+                                                            {response.description}
+                                                        </h5>
+                                                        <ResponseExample
+                                                            item={item}
+                                                            objects={objects}
+                                                            objectKey={
+                                                                response.content?.['application/json']?.schema['$ref']
+                                                                    ?.split('/')
+                                                                    .at(-1) ||
+                                                                response.content?.['application/json']?.schema.items?.[
+                                                                    '$ref'
+                                                                ]
+                                                                    ?.split('/')
+                                                                    .at(-1)
+                                                            }
+                                                            exampleLanguage={exampleLanguage}
+                                                            setExampleLanguage={setExampleLanguage}
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                )
-            })}
+                        )
+                    })}
 
-            {nextURL && (
-                <CallToAction className="mt-8" to={nextURL}>
-                    Next page →
-                </CallToAction>
-            )}
-        </ReaderView>
+                    {nextURL && (
+                        <CallToAction className="mt-8" to={nextURL}>
+                            Next page →
+                        </CallToAction>
+                    )}
+                </div>
+            </ReaderView>
+        </ScrollSpyProvider>
     )
 }
 

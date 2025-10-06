@@ -11,12 +11,21 @@ showTitle: true
 
 Before jumping into setup, let's dissect a PostHog.
 
-The app itself is made up of 4 components that run simultaneously:
+The app itself is made up of 4 main components that run simultaneously:
 
 -   Celery worker (handles execution of background tasks)
 -   Django server
 -   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
+
+We also have a growing collection of Rust services that handle performance-critical operations:
+
+-   capture – receives HTTP event capture requests and extracts event payloads
+-   feature-flags – handles feature flag evaluation
+-   cymbal – processes source maps for error tracking
+-   property-defs-rs – extracts and infers property definitions from events
+-   hook services – manages webhooks with high performance
+-   hogvm – evaluates HogQL bytecode via a stack machine implementation
 
 These components rely on a few external services:
 
@@ -57,9 +66,13 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `uv sync`
-7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
-8. Open browser to http://localhost:8010/.
-9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+    - If this doesn't activate your python virtual environment, run `uv venv`
+7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
+8. Now run `DEBUG=1 ./bin/migrate`
+9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
+10. Run `./bin/start`.
+11. Open browser to http://localhost:8010/.
+12. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -289,6 +302,13 @@ pnpm --filter=@posthog/plugin-server install
 brew install python-setuptools
 ```
 
+> **Troubleshooting plugin server issues:** If you encounter problems starting up the plugin server, try these debugging steps:
+```bash
+cd plugin-server
+pnpm rebuild
+pnpm i
+```
+
 #### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -382,9 +402,6 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 # only services strictly required to run posthog
 ./bin/start --minimal
-
-# enable tracing for django services (jaeger and otel collector are part of the stack)
-./bin/start --enable-tracing
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -557,13 +574,9 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
-## Extra: Enable tracing with Jaeger
+## Extra: Use tracing with Jaeger
 
-To debug with Jaeger, you can use the following command:
-
-```bash
-./bin/start --enable-tracing
-```
+Jaeger is enabled by default after running `./bin/start`.
 
 Jaeger will be available at [http://localhost:16686](http://localhost:16686).
 

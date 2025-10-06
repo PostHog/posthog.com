@@ -62,7 +62,7 @@ posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
 
 ### Reloading flags
 
-PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. 
+PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag.
 
 If want to manually trigger a refresh, you can call `reloadFeatureFlagsAsync()`:
 
@@ -74,6 +74,27 @@ Or when you want to trigger the reload, but don't care about the result:
 
 ```react-native
 posthog.reloadFeatureFlags()
+```
+
+### Feature flag caching
+
+The React Native SDK caches feature flag values in AsyncStorage. Cached values persist indefinitely with no TTL until updated by a successful API call. This enables offline support and reduces latency, but means **inactive users may see stale flag values** from their last session.
+
+For example, if a user last opened your app when a flag was `false`, that value remains cached even after you roll it out to 100%. When they reopen the app, the SDK returns the cached `false` first, then fetches the fresh `true` value from the API.
+
+To ensure fresh flag values:
+
+```react-native
+// Force refresh on app start
+await posthog.reloadFeatureFlagsAsync()
+```
+
+Or clear cached values for inactive users:
+
+```react-native
+if (lastActiveDate < migrationDate) {
+  posthog.reset() // Clears all cached data
+}
 ```
 
 ### Request timeout

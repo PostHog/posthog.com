@@ -25,6 +25,7 @@ const teamQuery = (slug: string) =>
                                 name: true,
                             },
                         },
+                        teams: true,
                     },
                 },
                 leadProfiles: true,

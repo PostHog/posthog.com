@@ -4,121 +4,77 @@ sidebar: Handbook
 showTitle: true
 ---
 
-AKA our Value Proposition, these are some of the things we've found useful to share when chatting to customers about why PostHog is different and better than our competitors.
+AKA our Value Proposition, these are some of the things we've found useful to share when chatting to customers about why PostHog is different and better than our competitors. As a company, the primary user persona we are building for are Product Engineers, so we focus on them first. We then provide messaging for the other roles we may encounter in an inbound sales cycle, and still want to be successful when selling to them.
 
-# In short
+## Product Engineers
 
-Our messaging varies depending on whether our users have a data engineering team and warehouse already.  If they don't:
+### One-liner
 
-> PostHog is an all-in-one data warehouse providing the only tools you need to understand and work better with your customers.
+> We help you debug and ship your product faster.
 
-If they already have a data engineering team and warehouse already:
+### Summary
 
-> PostHog provides the tools you need to understand and work better with your customers, and integrates seamlessly with your existing data stack.
+By integrating PostHog into your app, you’ll be able to track and diagnose errors, roll out and test new features and gain a better understanding of your users.  Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.
 
-## Everybody needs a data warehouse, not everybody needs a data team
+### Use cases
+- [Automated error tracking](/error-tracking) for front and back end coupled with other capabilities like product analytics and session replay lets you understand where the biggest issues are in your app, see them happening in real time and then diagnose and fix them.
+- [Target new features](/feature-flags) at a segment of your user base, see them experiencing them in real time and get feedback via surveys on what’s working and what’s not.
+- [Test out new features](/experiments) by splitting old and new experiences between users - PostHog’s statistical model will help you understand which variant of a feature to choose and then safely roll that out to all of your users.
+- [Understand and debug](/llm-analytics) how your users consume AI in your product, and monitor performance and cost when using different models.
 
-For teams of all sizes, it's important to have your product, revenue and operational data available in a single place. Our data warehouse is optimized for product engineers - no data team needed. 
+## Product Managers
 
-- We allow you to bring in data from multiple sources such as your production database, payments provider, CRM and other SaaS tools and query them alongside your user behavioral data.
-- You don't need to implement and maintain a complex stack of tools - we handle the complexity for you.
-- Integrations with SaaS platforms are super simple to set up - normally all you need is an API credential.
+### One-liner
 
-### Example use case: integrating revenue data from Stripe
+> Self-serve analytics without needing to ask your engineers or data team for help.
 
-It's easy to connect Stripe revenue data using just an API key.  You'll be able to then join your Stripe data to person data in PostHog via a common identifier (e.g. email) and answer questions such as:
+### Summary
 
-1. Which features drive the most paying customers, or;
-2. Which user behaviors are correlated with customer churn.
+After your engineers integrate the PostHog SDK you’ll be able to self-serve analytics without asking your data team for insights.  We automatically track user interactions with your app and then let you tag key events for use in analytics.  You’ll also be able to navigate from the data to individual user interactions to see how users interact with your app and make informed product decisions.
 
-Product analytics data in isolation won't help you with these and other questions which are critical to your business.
+### Use cases
+- [Create trends, funnels and other insights](/product-analytics) without asking your engineers to instrument events.  We automatically track pageviews, clicks, rageclicks etc and then make it easy to visualize these with insights Product Managers will be familiar with.
+- [Track key metrics such as NPS, CSAT](/surveys) via in-app surveys and measure the trends over time.
+- [Easily uncover user friction](/session-replay) by following the drop-offs in a funnel to replays to understand what the user experiences.  Surface any errors to your engineering team via issue assignment to get your user problems solved quickly.
+- [Enrich your product data](/bi) with revenue and other data to gain a deeper understanding of what drives revenue growth in your product.  It’s only a few clicks to integrate most data sources and then you’ll be able to enrich your user data with additional metrics without a data team.  We do the heavy lifting for you.
+- [Ask questions of your product](/max) - We create the insights for you, all you need to do is ask Max AI questions about your product.
 
-All this can be self served by product engineers.
 
-## An integrated place to view all of your user data
+## Marketing
 
-With disparate tools, it's hard to get an understanding of your users both individually and at an aggregate level.  By integrating a range of products into one platform we provide a greater picture of our customer's users.  Common cross-product use cases are:
+### One-liner
 
- - When looking at a conversion funnel, click a dropped off segment of users to view their session replays.  This helps you understand potential friction/interface issues. 
- - After launching an experiment, click to see the session replays of users experiencing a specific variant, showing you whether your users are experiencing it as intended.
- - Create a survey tied to an experiment (via the feature flag), letting you gather qualitative feedback from users who are experiencing this new feature for the first time.
- - Attach revenue data stored in our data warehouse from Stripe to product analytics to see behaviors which drive revenue acquisition and growth.
- - Use Heatmaps to identify potential dead zones on your website, roll out a [no-code experiment](/docs/experiments/no-code-web-experiments) with your conversion funnel as a goal.
+> A familiar analytics experience with all of the integrations you need to decide where to focus your marketing efforts.
 
-## Consolidated pricing
+### Summary
 
-As we have a low price point and can help replace a number of disparate tools they may be running customers are highly likely to save versus the cost of running multiple tools in parallel:
+By deploying our simple JavaScript snippet on your website you’ll capture all of the data you need to measure channel performance, and then visualize that data in a familiar format without any additional report writing.  Optionally hook up Stripe or other revenue sources to measure revenue attribution.
 
- - We are competitive for each of our individual products
- - You only need to pay for 1 Teams or Enterprise plan versus 5 or 6
- - We make it easy to buy from us, and once you're done you don't need to run multiple vendor procurement processes for additional tools
+### Use cases
+- [Replace Google Analytics](/web-analytics) to get a view on your marketing data which is familiar to experienced marketers.  Recent updates to GA4 have not sat well with that persona so folks are looking for something more familiar.
+- [Define conversion funnels](/funnels) to understand which content drives your users to sign up to your product.  
+- [View aggregated page engagement](/heatmaps) with heatmaps and scroll depth tracking understanding what’s popular in your content.
+- [Easily connect revenue data](/revenue-analytics) with a few clicks to get a deeper understanding of which marketing efforts drive the most revenue.
+- [Ad platform connection](/docs/cdp/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
 
-## A great buying _and_ product experience for large enterprises
 
-It’s easy to fall-back on the magic we create when using multiple products, but positioning for startups and enterprises can be _very_ different. For some enterprises, anything other than the single product they have come in for would be project-killing, scope creep. Our typical, multi-product talk track doesn’t always work here, so it's worth focusing on the more [philosophical points](/why) such as:
+## Data Engineers
 
-- Everybody codes
-- Transparent pricing
-- Engineers talk to customers
-- We ship any missing features fast
+### One-liner
 
-That being said, there are still individual product and feature nuggets that enterprises in particular like:
+> A complete analytics platform which fits into your existing data stack.
 
-- HoqQL
-- Group analytics
-- Debug mode
-- Annotations
-- Event & property correlation analysis
-- Edit SQL directly
-- Subscriptions
-- Notebooks
-- Direct access to underlying data (SQL & API)
+### Summary
 
-# Vibes and personas
+Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
 
-You should apply different messaging to companies at different stages (inspired by the [vibe-based sales matrix](https://docs.google.com/spreadsheets/d/12scJrtw2vVok_-BNI6xOYsiNTUDrfkJJO_K0JKkz69w/edit?gid=0#gid=0)), and the role you're speaking with.  The broad messages we can take to customers are:
+### Use cases
+- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
+- Let your engineers and product team self-serve analytics and error tracking from within a familiar platform.
 
-1. **You need a data warehouse** and PostHog can be it, without needing to implement a complex supporting data stack.  
-     - Even if it's not a priority for you right now, it soon will be, and it's better to start early and have it built by people who know what they're doing (us!)
-2. **You need a better data warehouse** because running one without a data engineering team is hard.
-     - You'll need to run a complete stack of tools such as Airbyte/Fivetran for ETL, the warehouse itself (BigQuery, Snowflake etc.), a BI layer (Looker) and perhaps DBT for modelling too.  
-     - All of these have costs both in terms of licensing and time to actually maintain them.
-     - Without a data team it's down to your product engineers to maintain these tools which will distract from their day job.
-     - By using PostHog, we hide all of this complexity for you.
-3. **You can self-serve data** as opposed to rely on a data engineering team to surface insights to you.
-     - It's easy to connect sources into PostHog using just an API key for your other SaaS tools.
-     - We hide all of the complexity for you.
-4. **You can capture everything you need to understand about your users** and send it to your existing warehouse.
+# General talking points for all roles
 
-## Applied by company type
-
-### Startups
-
-Normally they don't have anything in place, and the pitch is (1) - You need a data warehouse or you will do soon.  In the unlikely event that they have a data team already, it's (4) - we integrate with their warehouse.  YC and other startups will be concerned with what metrics they need to capture and demonstrate for their first/next funding round.  PostHog helps you capture and show those all in one place.
-
-### Scaleups
-
-- If they have a warehouse and data team in place already it's difficult to displace, so we should offer the coexistence story (4).
-- If they have deployed a warehouse but don't have a data team, we should pitch (2) - implement a better data warehouse by removing all of the complexity associated with running a traditional data stack.
-- Otherwise, we should focus on the role of the person we are speaking with:
-  - For **Engineers** and **Leadership** e.g. CTO, it's (1) You need a data warehouse, and (3) can self serve rather than building a data team.
-  - For **Product** and **Growth**, it's (3) - You're able to self-serve connecting and querying data from SaaS platforms without engineering help.
-
-### Larger companies
-
-- They will typically be interested in one or two products and have a data team in place already so stick with (4) - we coexist with your existing tools.
-
-They may still want to integrate data from their existing warehouse or other SaaS tools into PostHog to do things like:
-
-- Experiment analysis with data from their warehouse or other tools.
-- Enrich person information with properties from their production database.
-
-# Common objections and how to handle them
-
-1. I'm here for product analytics, why are you talking to me about data warehouse?
-   - Yes, and very soon you'll want to answer questions like "Which features are driving the most revenue" or "Which sales leads have the highest potential to convert" and for those you'll need additional context inside PostHog.
-2. Is PostHog _really_ a data warehouse though?
-   - Yes, although we automate a lot of the hard work for you such as ETL and optimizing sync schedules to reduce costs.  
-   - We also use ClickHouse which is designed to run analytical queries on large datasets _fast_.
-   
-
+- By having [all of the products you need in one place](/why-does-posthog-exist), you reduce the burden of navigating and paying for different tools on all of your teams.  
+- [We only build products which we know people use today already](/handbook/which-products) (e.g. have product market fit) but provide them in an integrated and cost-effective manner.  
+- Our [usage-based pricing](/handbook/how-we-make-money) means that you’ll only pay for what you use and have full control of those costs, unlike opaque software contracts, where the prices go up every year with zero innovation attached.  
+- Plus, [the way we do sales is different](/sales).

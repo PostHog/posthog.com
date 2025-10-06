@@ -5,9 +5,9 @@ showTitle: true
 ---
 
 ### Renewal principals
-Being on an annual plan is a win-win solution for both PostHog and the customer. Customers get discounts on the credits they purchase and PostHog gets confirmed revenue.
+Being on a prepaid credit plan - usually annual - is a win-win solution for both PostHog and the customer. Customers get discounts on the credits they purchase and PostHog gets confirmed revenue.
 
-When estimating renewal amount, we want to make sure we accurately determine the amount of credits the customer will need in the next 12 months. This is not an opportunity to upsell.
+When estimating renewal amount, we want to make sure we accurately determine the amount of credits the customer will need in the next 12 months (or equivalent period, e.g. if they prepaid for 6 months). This is not an opportunity to upsell - do that later by encouraging product usage. 
 
 This page walks through recommendations for approaching and handling renewals. [Contract rules](/handbook/growth/sales/contract-rules) and [how to create contracts](/handbook/growth/sales/contracts) are covered in relevant pages under our shared processes. 
 

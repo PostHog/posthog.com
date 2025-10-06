@@ -48,6 +48,10 @@ const CONFIG = {
     ],
     SITEMAP_PATH: path.join(process.cwd(), 'public', 'sitemap', 'sitemap-0.xml'),
     CONTENTS_DIR: 'contents',
+    // Special case URLs that should be considered valid even if not in sitemap
+    SPECIAL_CASE_URLS: [
+        '/startups', // Dynamic route in sitemap as /startups/[...slug]
+    ],
 }
 
 // Global cache for anchor links
@@ -280,6 +284,12 @@ function extractAnchorsFromHtml(htmlPath) {
 // Check if internal URL exists in sitemap
 function validateInternalUrl(url, pages) {
     const [baseUrl] = url.split('#')
+
+    // Check special case URLs that should be considered valid
+    if (CONFIG.SPECIAL_CASE_URLS.includes(baseUrl)) {
+        return true
+    }
+
     return urlExistsInSitemap(baseUrl, pages)
 }
 

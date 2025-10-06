@@ -1,20 +1,20 @@
 ---
-title: Managing Contracts
+title: Managing contracts
 sidebar: Handbook
 showTitle: true
 ---
 
-# Creating and managing contracts
+## Creating and managing contracts
 
 For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
 ### What about monthly customers?
 
-Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up.
+Anyone on a monthly plan simply agrees to our [terms](/terms) and [privacy policy](/privacy) when they sign up.
 
 ## QuoteHog pricing calculator
 
-While we offer [transparent pricing available to all](/pricing), you can use [QuoteHog](https://quote.posthog.net) (internal only) for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
+While we offer [transparent pricing available to all](/pricing), you can use <PrivateLink url="https://quote.posthog.net">QuoteHog</PrivateLink> for customers who need a "formal quote," or who have very high volumes, or otherwise have bespoke needs.
 
 Sign into QuoteHog via your PostHog Google account/SSO. Upon login, you will see a list of existing quotes, sorted by the created date. You can view a previously created quote or create a new quote using the "New Quote" button at the top right.
 
@@ -24,11 +24,11 @@ The quoting interface is intuitive and, of course, uses the same pricing we disp
 
 Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
 
-QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the [Profile page](https://quote.posthog.net/profile). As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
 
 When building a quote for an annual plan conversion or renewal, consider:
 
-1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in Quotehog):
+1. How is usage trending? Looking at the past 6 month's of usage (usage history tab in QuoteHog):
 
 -   If usage is trending up, calculate the growth rate and project expected volume for a year.
 -   If usage is stable, project based on the latest month's volume or the average or the maximum.
@@ -39,23 +39,22 @@ When building a quote for an annual plan conversion or renewal, consider:
 
 You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
 
-The legacy pricing calculator is available [here](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only).
+The legacy pricing calculator is available <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">here</PrivateLink>.
 
-## Order Form
+## Order form
 
-An Order Form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both
-PostHog and the Customer. They are either governed by our standard terms or a custom MSA (see below).
+An order form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both PostHog and the customer. They are either governed by our standard terms or a custom MSA (see below).
 
-You will likely need to use [QuoteHog](https://quote.posthog.com/) to get the correct credit amount to be included in the order form.
+You will likely need to use <PrivateLink url="https://quote.posthog.com">QuoteHog</PrivateLink> to get the correct credit amount to be included in the order form.
 
-### Creating an Order Form
+### Creating an order form
 
-We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature. Ask Mine or Simon for access if you don't have it.
+We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature. Ask <TeamMember name="Mine Katsu" showOnlyFirstName photo /> or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> for access if you don't have it.
 
-1. The [order form template](https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>`
+1. The <PrivateLink url="https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B">order form template</PrivateLink> to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>`
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
-    1. Replace `<MMM YYYY>` with the month and year the contract starts (e.g. March 2023)
+    1. Replace `<MM YYYY>` with the month and year the contract starts (e.g. March 2023)
     2. Add the Client email, first and last name
     3. Add the PostHog Signer email - normally the team member who is responsible for the customer (AE or CSM).
     4. Click continue
@@ -94,7 +93,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
 10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
-### Routing an Order Form for review and signature
+### Routing an order form for review and signature
 
 1. When viewing the order form, check the recipients tab in the sidebar. The Client and PostHog roles should be filled in.
 2. A signing order should also be set, with the Client signing first (so they can review it before we sign).
@@ -105,7 +104,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.
 8. Celebrate!
 
-### Manual upload of signed Order Form
+### Manual upload of signed order form
 
 We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer to sign a PDF copy. One way to minimize this is to send contracts for initial review via PandaDoc when possible. It is ok to have multiple drafts in PandaDoc as long as we have the final signed copy in there as well. When a client signs an order form outside of PandaDoc, please follow these steps to complete the process:
 
@@ -141,7 +140,7 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
 1. Ask the customer to subscribe to the platform add-on (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
-2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
+2. Create a new document from the <PrivateLink url="https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a">PandaDoc template</PrivateLink>.
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.

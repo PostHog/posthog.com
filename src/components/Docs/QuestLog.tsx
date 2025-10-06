@@ -26,7 +26,7 @@ export const QuestLog: React.FC<{
     lastSpeechBubble = "You're ready to start building!",
 }) => {
     // Animation timing constants
-    const INITIAL_LOAD_DELAY = 1000
+    const INITIAL_LOAD_DELAY = 250
     const SPEECH_BUBBLE_SHOW_DELAY = 200
     const SPEECH_BUBBLE_AUTO_HIDE_DELAY = 3000
     const SMOOTH_SCROLL_DURATION = 1000
@@ -83,11 +83,14 @@ export const QuestLog: React.FC<{
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
+    const [isJumping, setIsJumping] = useState(false)
+    const [animationKey, setAnimationKey] = useState(0)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
     const spriteRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
+    const previousQuestRef = useRef(0)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
         QuestLogItemProps & {
@@ -143,35 +146,35 @@ export const QuestLog: React.FC<{
         return questIndex === firstQuest || questIndex === lastQuest
     }
 
-    const restartSpriteAnimation = () => {
-        if (spriteRef.current) {
-            spriteRef.current.classList.remove('quest-log-sprite-animate')
-            void spriteRef.current.offsetWidth // Force reflow
-            spriteRef.current.classList.add('quest-log-sprite-animate')
+    const restartSpriteAnimation = (shouldJump = false) => {
+        // Set jumping state for opacity transition
+        setIsJumping(shouldJump)
 
-            // Only show speech bubble for specific quests
-            if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
-                // Update speech bubble - use first message for first quest, last message for last quest
-                const message =
-                    selectedQuest === questItems.length - 1
-                        ? lastSpeechBubble // Last quest message
-                        : firstSpeechBubble // First quest message
-                setSpeechText(message)
-                setShowSpeechBubble(false)
+        // Force React to recreate elements by changing key
+        setAnimationKey((prev) => prev + 1)
 
-                // Show new speech bubble after brief delay
+        // Only show speech bubble for specific quests
+        if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+            // Update speech bubble - use first message for first quest, last message for last quest
+            const message =
+                selectedQuest === questItems.length - 1
+                    ? lastSpeechBubble // Last quest message
+                    : firstSpeechBubble // First quest message
+            setSpeechText(message)
+            setShowSpeechBubble(false)
+
+            // Show new speech bubble after brief delay
+            setTimeout(() => {
+                setShowSpeechBubble(true)
+
+                // Auto-hide speech bubble after delay
                 setTimeout(() => {
-                    setShowSpeechBubble(true)
-
-                    // Auto-hide speech bubble after delay
-                    setTimeout(() => {
-                        setShowSpeechBubble(false)
-                    }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
-                }, SPEECH_BUBBLE_SHOW_DELAY)
-            } else {
-                // Hide speech bubble for other quests
-                setShowSpeechBubble(false)
-            }
+                    setShowSpeechBubble(false)
+                }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
+            }, SPEECH_BUBBLE_SHOW_DELAY)
+        } else {
+            // Hide speech bubble for other quests
+            setShowSpeechBubble(false)
         }
     }
 
@@ -223,15 +226,15 @@ export const QuestLog: React.FC<{
         return () => window.removeEventListener('hashchange', onHashChange)
     }, [questItems])
 
-    // Initial page load delay
+    // Initial page load delay - only run once on mount
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasInitialLoadSettled(true)
-            restartSpriteAnimation()
 
             // Show initial speech bubble only if first quest should show it (it should, since it's index 0)
-            if (questItems.length === 0 || shouldShowSpeechBubble(0, questItems.length)) {
-                setSpeechText(firstSpeechBubble) // Set initial message
+            if (questItems.length === 0 || shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+                const message = selectedQuest === questItems.length - 1 ? lastSpeechBubble : firstSpeechBubble
+                setSpeechText(message)
                 setShowSpeechBubble(true)
 
                 // Auto-hide initial speech bubble after delay
@@ -309,9 +312,21 @@ export const QuestLog: React.FC<{
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false
+            previousQuestRef.current = selectedQuest
+            // On first render, always walk (no previous position to compare)
+            setIsJumping(false)
+            setAnimationKey((prev) => prev + 1)
             return
         }
-        restartSpriteAnimation()
+
+        // Determine if we should jump (more than 1 step forward)
+        const shouldJump = selectedQuest > previousQuestRef.current + 1
+
+        // Update previous quest reference
+        previousQuestRef.current = selectedQuest
+
+        // Restart animation with appropriate mode
+        restartSpriteAnimation(shouldJump)
     }, [selectedQuest])
 
     // Handle dropdown outside clicks
@@ -420,17 +435,23 @@ export const QuestLog: React.FC<{
                                         height: '48px',
                                     }}
                                 >
-                                    {/* Walking Sprite */}
-                                    <div
-                                        ref={spriteRef}
-                                        className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
-                                        style={{
-                                            backgroundImage: 'url(/images/game-walk.png)',
-                                            backgroundSize: '528px 48px',
-                                            backgroundRepeat: 'no-repeat',
-                                            height: '48px',
-                                        }}
-                                    />
+                                    {/* Walking/Jumping Sprite */}
+                                    <div ref={spriteRef} className="relative w-[48px] h-[48px] pointer-events-none">
+                                        {/* Walking Sprite */}
+                                        <div
+                                            key={`walk-${animationKey}`}
+                                            className={`absolute inset-0 questlog-sprite-walk transition-opacity duration-200 ${
+                                                !isJumping ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                        />
+                                        {/* Jumping Sprite */}
+                                        <div
+                                            key={`jump-${animationKey}`}
+                                            className={`absolute inset-0 questlog-sprite-jump transition-opacity duration-200 ${
+                                                isJumping ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                        />
+                                    </div>
 
                                     {/* Speech Bubble */}
                                     <div
@@ -446,14 +467,14 @@ export const QuestLog: React.FC<{
                                         style={{
                                             animation: showSpeechBubble
                                                 ? selectedQuest === questItems.length - 1
-                                                    ? 'speechBounceLeft 0.5s ease-out'
-                                                    : 'speechBounce 0.5s ease-out'
+                                                    ? 'speechBubbleLeft 0.5s ease-out'
+                                                    : 'speechBubble 0.5s ease-out'
                                                 : 'none',
                                             zIndex: 60, // Higher than your sticky nav
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative bg-white dark:bg-accent-dark rounded-lg shadow-md border-1 border-white dark:border-dark px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-white border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
                                             <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
                                                 <span className="inline-block">{speechText}</span>
@@ -461,25 +482,12 @@ export const QuestLog: React.FC<{
 
                                             {/* Speech Bubble Tail */}
                                             <div
-                                                className={`absolute ${
-                                                    selectedQuest === questItems.length - 1 ? 'left-full' : 'right-full'
-                                                } top-1/2 transform -translate-y-1/2`}
-                                            >
-                                                <div
-                                                    className={`w-0 h-0 border-t-[7px] border-b-[7px] ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? 'border-l-[10px] border-l-white dark:border-l-dark'
-                                                            : 'border-r-[10px] border-r-white dark:border-r-dark'
-                                                    } border-t-transparent border-b-transparent`}
-                                                ></div>
-                                                <div
-                                                    className={`absolute ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? '-left-[8px] border-l-[8px] border-l-white dark:border-l-accent-dark'
-                                                            : '-right-[8px] border-r-[8px] border-r-white dark:border-r-accent-dark'
-                                                    } top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent`}
-                                                ></div>
-                                            </div>
+                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-white rotate-45 ${
+                                                    selectedQuest === questItems.length - 1
+                                                        ? 'border-r border-t left-full -translate-x-1/2'
+                                                        : 'border-l border-b right-full translate-x-1/2'
+                                                }`}
+                                            ></div>
                                         </div>
                                     </div>
                                 </div>
@@ -575,14 +583,12 @@ export const QuestLogItem: React.FC<QuestLogItemProps> = ({ title, subtitle, ico
                 </div>
                 <div className="flex-1 min-w-0">
                     <strong
-                        className={`text-sm md:text-base font-bold leading-tight ${
-                            isSelected ? 'text-red dark:text-yellow' : ''
-                        }`}
+                        className={`text-sm font-bold leading-tight ${isSelected ? 'text-red dark:text-yellow' : ''}`}
                     >
                         {title}
                     </strong>
                     {subtitle && (
-                        <div className="text-xs md:text-sm text-primary/40 dark:text-primary-dark leading-tight">
+                        <div className="text-xs text-primary/40 dark:text-primary-dark leading-tight">
                             <strong>
                                 <em>{subtitle}</em>
                             </strong>

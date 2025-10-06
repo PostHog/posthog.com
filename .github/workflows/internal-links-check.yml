@@ -20,6 +20,10 @@ jobs:
     check-internal-links:
         runs-on: ubuntu-latest
 
+        env:
+            NODE_OPTIONS: '--max-old-space-size=8192 --expose-gc'
+            GATSBY_CPU_COUNT: 1
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v4

@@ -1289,21 +1289,20 @@ export default function ProfilePage({ params }: PageProps) {
                     }
                 />
             </div>
-            <ScrollArea>
-                <div
-                    data-scheme="primary"
-                    className="mx-auto max-w-screen-xl px-4 pb-4 @container"
-                    style={
-                        values.backgroundImage
-                            ? {
-                                  backgroundImage: `url(${values.backgroundImage.url})`,
-                                  backgroundSize: values.backgroundImage.backgroundSize || 'auto',
-                                  backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
-                                  backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
-                              }
-                            : undefined
-                    }
-                >
+            <ScrollArea
+                className="min-h-0 h-full"
+                style={
+                    values.backgroundImage
+                        ? {
+                              backgroundImage: `url(${values.backgroundImage.url})`,
+                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                          }
+                        : undefined
+                }
+            >
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-4 pb-4 @container">
                     <div className="flex flex-col @2xl:flex-row gap-6 p-4">
                         <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             <AvatarBlock

@@ -1,0 +1,51 @@
+---
+title: Debugging with MCP
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes [function calling tools](/docs/ai-engineering/agent-toolkit) to any MCP client, enabling AI agents to interact with PostHog's API via the MCP protocol.
+
+When combining our MCP server with error tracking, your AI agents can take actions based on PostHog data which unlocks powerful, autonomous debugging capabilities.
+
+For example, with MCP, your agents can: 
+
+- **Triage issues**: Fetching the latest issues with details like status, frequency, users affected, last seen, etc.
+- **Inspect error details**: Accessing full stack traces, error messages, and relevant metadata.
+- **Explain or reproduce errors**: Identifying failure points and performing root cause analysis using the captured stack trace context.
+- **Debug and create fixes**: Proposing or even generating code fixes based on the error details.
+
+All of this happens directly inside the MCP client, like Cursor, Windsurf, or Claude Code, so you can investigate and resolve product issues without ever leaving the code editor.
+
+## See it in action
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/mcp_error_tracking_debugging30_6e25828d88.mp4" 
+    alt="Use PostHog MCP to debug errors" 
+    classes="rounded"
+    autoPlay={false}
+/>
+
+<Caption> Use Claude Code to debug and fix errors with PostHog's MCP server</Caption>
+
+Try these example questions and directives with your MCP-enabled agent:
+
+```
+- Show me my most common errors.  
+- What’s the full stack trace for the most recent error?  
+- Create a fix and show me how to reproduce the error with the highest severity.
+- Which error is causing the most crashes in production?  
+```
+
+## Install the MCP server
+
+To start debugging with PostHog MCP, install the MCP server in your preferred MCP client. 
+
+The easiest way is to use the [AI wizard](/docs/ai-engineering/ai-wizard), which supports setup for agents like Claude, Cursor, Windsurf, VS Code, and more. The wizard guides you through the installation step by step. 
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also install the MCP server by [configuring it manually](/docs/model-context-protocol#manual-install). 
+
+Check out the [MCP server documentation](/docs/model-context-protocol) for more detailed instructions and information.
+

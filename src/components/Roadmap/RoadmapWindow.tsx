@@ -132,7 +132,7 @@ export default function RoadmapWindow({
 
     return (
         <ScrollArea>
-            <div className="p-4">
+            <div data-scheme="secondary" className="p-4 bg-primary">
                 {(initialValues && id) || !id ? (
                     <RoadmapForm
                         status={status || 'in-progress'}
