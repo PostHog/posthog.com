@@ -1,0 +1,85 @@
+{
+    "name": "Product Managers",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "Self-serve analytics. No need to get engineers or data team involved.",
+            "description": "<p>PostHog can automatically track user interactions in {companyName} with autocapture.</p><p>Tag and organize events how you like, then see how users interact with your app so you can make informed product decisions.</p>",
+            "descriptionWidth": "@2xl:w-1/2"
+        },
+        "product_analytics": {
+            "template": "product",
+            "name": "Product Analytics",
+            "handle": "product_analytics",
+            "screenshot": "overview",
+            "title": "Create trends, funnels and other insights without asking your engineers to instrument events",
+            "description": "<p>PostHog automatically tracks pageviews, clicks, rage clicks, and more, then makes it easy to visualize these with insights Product Managers will be familiar with.</p>"
+        },
+        "all_in_one": {
+            "template": "columns",
+            "name": "All-in-one",
+            "title": "PostHog apps have great synergy",
+            "description": "Identify a trend, see what happened, assign issues – all in one place.",
+            "content": [
+                {
+                    "handle": "product_analytics",
+                    "title": "Product Analytics",
+                    "description": "<p>Easily uncover user friction by following the drop-offs in a funnel.</p>",
+                    "screenshot": "funnelVertical"
+                },
+
+                {
+                    "handle": "session_replay",
+                    "title": "Session Replay",
+                    "description": "<p>Watch session recordings to understand friction in the user experience.</p>",
+                    "screenshot": "home"
+                },
+                {
+                    "handle": "error_tracking",
+                    "title": "Error Tracking",
+                    "description": "<p>Assign issues to engineers to get user problems solved quickly.</p>",
+                    "screenshot": "errorsCropped"
+                }
+            ]
+        },
+        "surveys": {
+            "template": "product",
+            "name": "Surveys",
+            "handle": "surveys",
+            "screenshot": "home",
+            "title": "Track key metrics like NPS & CSAT",
+            "description": "<p>Trigger in-app surveys to measure the trends over time, collect user feedback, and get AI summaries of the results.</p>"
+        },
+        "revenue_analytics": {
+            "template": "product",
+            "name": "Revenue Analytics",
+            "handle": "revenue_analytics",
+            "screenshot": "overview",
+            "title": "Correlate revenue data with product metrics",
+            "description": "<p>Get a deeper understanding of what drives revenue growth in your product. It’s only a few clicks to integrate most data sources and then you’ll be able to enrich your user data with additional metrics without a data team.</p>"
+        },
+        "max_ai": {
+            "template": "product",
+            "name": "Max AI",
+            "handle": "max_ai",
+            "screenshot": "sidebarInitialCropped",
+            "screenshotClasses": "max-w-[724px] rounded-md shadow-2xl overflow-hidden [&_img]:w-[724px] [&_img]:max-w-[724px]",
+            "title": "Ask questions about your product usage",
+            "description": "<p>We create the insights for you, all you need to do is ask Max AI questions about your product.</p>"
+        },
+        "pricing": {
+            "template": "pricing",
+            "name": "Pricing",
+            "title": "Pricing",
+            "description": "PostHog offers usage-based pricing. This means you only pay for what you use, and you can set billing limits so you never get an unexpected bill.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "cta": {
+            "template": "booking",
+            "name": "Get a demo",
+            "title": "Get a demo",
+            "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"
+        }
+    }
+}

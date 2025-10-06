@@ -25,51 +25,74 @@ interface Product {
     color?: string
 }
 
-export const productLinks: AppItem[] = [
-    {
-        label: 'home.mdx',
-        Icon: <AppIcon name="doc" />,
-        url: '/',
-        source: 'desktop',
-    },
-    {
-        label: 'Product OS',
-        Icon: <AppIcon name="folder" />,
-        url: '/products',
-        source: 'desktop',
-    },
-    {
-        label: 'Pricing',
-        Icon: <AppIcon name="pricing" />,
-        url: '/pricing',
-        source: 'desktop',
-    },
-    {
-        label: 'customers.mdx',
-        Icon: <AppIcon name="spreadsheet" />,
-        url: '/customers',
-        source: 'desktop',
-    },
-    {
-        label: 'demo.mov',
-        Icon: IconDemoThumb,
-        url: '/demo',
-        className: 'size-14 -my-1',
-        source: 'desktop',
-    },
-    {
-        label: 'Docs',
-        Icon: <AppIcon name="notebook" />,
-        url: '/docs',
-        source: 'desktop',
-    },
-    {
-        label: 'Talk to a human',
-        Icon: <AppIcon name="envelope" />,
-        url: '/talk-to-a-human',
-        source: 'desktop',
-    },
-]
+export const useProductLinks = () => {
+    const { posthogInstance } = useApp()
+
+    return [
+        {
+            label: 'home.mdx',
+            Icon: <AppIcon name="doc" />,
+            url: '/',
+            source: 'desktop',
+        },
+        {
+            label: 'Product OS',
+            Icon: <AppIcon name="folder" />,
+            url: '/products',
+            source: 'desktop',
+        },
+        {
+            label: 'Pricing',
+            Icon: <AppIcon name="pricing" />,
+            url: '/pricing',
+            source: 'desktop',
+        },
+        {
+            label: 'customers.mdx',
+            Icon: <AppIcon name="spreadsheet" />,
+            url: '/customers',
+            source: 'desktop',
+        },
+        {
+            label: 'demo.mov',
+            Icon: IconDemoThumb,
+            url: '/demo',
+            className: 'size-14 -my-1',
+            source: 'desktop',
+        },
+        {
+            label: 'Docs',
+            Icon: <AppIcon name="notebook" />,
+            url: '/docs',
+            source: 'desktop',
+        },
+        {
+            label: 'Talk to a human',
+            Icon: <AppIcon name="envelope" />,
+            url: '/talk-to-a-human',
+            source: 'desktop',
+        },
+        ...(posthogInstance
+            ? [
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
+            : [
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
+    ]
+}
 
 export const apps: AppItem[] = [
     {
@@ -125,7 +148,11 @@ type IconPositions = Record<string, IconPosition>
 
 const STORAGE_KEY = 'desktop-icon-positions'
 
-const validateIconPositions = (positions: IconPositions, constraintsRef: React.RefObject<HTMLDivElement>): boolean => {
+const validateIconPositions = (
+    positions: IconPositions,
+    constraintsRef: React.RefObject<HTMLDivElement>,
+    productLinks: ReturnType<typeof useProductLinks>
+): boolean => {
     const iconWidth = 112
     const iconHeight = 75
     const allApps = [...productLinks, ...apps]
@@ -159,6 +186,7 @@ const validateIconPositions = (positions: IconPositions, constraintsRef: React.R
 }
 
 export default function Desktop() {
+    const productLinks = useProductLinks()
     const {
         constraintsRef,
         siteSettings,
@@ -167,6 +195,7 @@ export default function Desktop() {
         setConfetti,
         confetti,
         compact,
+        posthogInstance,
     } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
@@ -236,7 +265,7 @@ export default function Desktop() {
                 const parsedPositions = JSON.parse(savedPositions)
 
                 // Validate that all positions are within viewport bounds
-                if (validateIconPositions(parsedPositions, constraintsRef)) {
+                if (validateIconPositions(parsedPositions, constraintsRef, productLinks)) {
                     setIconPositions(parsedPositions)
                 } else {
                     // Some icons are out of bounds, reset to initial positions
@@ -254,14 +283,16 @@ export default function Desktop() {
             setIconPositions(generateInitialPositions())
         }
 
-        setRendered(true)
+        setTimeout(() => {
+            setRendered(true)
+        }, 400)
 
         window.addEventListener('resize', handleResize)
 
         return () => {
             window.removeEventListener('resize', handleResize)
         }
-    }, [])
+    }, [posthogInstance])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }

@@ -39,6 +39,30 @@ This is the name of the key you use in your code to evaluate the feature flag.
 
 Metadata to describe and share information about your feature flag in the PostHog app.
 
+### Evaluation tags (environment constraints)
+
+Evaluation tags are a special type of tag that constrains feature flag evaluation to specific environments. When evaluation tags are configured, the feature flag will only evaluate when the SDK provides matching environment tags in the evaluation request.
+
+Key features:
+- **Environment isolation**: Prevent flags from evaluating in unintended environments (e.g., marketing site vs. app vs. docs)
+- **Cost optimization**: Reduce unnecessary flag evaluations and associated costs
+- **Better organization**: Group flags by their intended usage context
+- **Backward compatible**: Flags without evaluation tags continue to work as before
+
+To configure evaluation tags:
+1. Click the bolt icon <IconBolt className="inline w-4 h-4" /> next to the tags field
+2. Select which tags should act as evaluation constraints
+3. These tags will display with a green background and bolt icon
+
+When using evaluation tags:
+- SDKs must send `evaluation_environments` parameter with matching tags for the flag to evaluate
+- Flags with no evaluation tags will evaluate for all requests (default behavior)
+- At least one evaluation tag must match for the flag to be included in the evaluation
+
+Learn more in the [evaluation flags docs](/docs/feature-flags/evaluation-tags)
+
+> **Important:** After setting evaluation tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation tags won't take effect.
+
 ## Enable feature flag
 
 This determines whether your flag is enabled. Disabled flags return `undefined` or `null`.
@@ -89,6 +113,8 @@ They enable you to configure functionality related to your flag inside PostHog, 
 You can control where your feature flags are evaluated by specifying an evaluation runtime. This helps optimize performance and reduce unnecessary network traffic by ensuring flags are only sent to the appropriate environments.
 
 Runtime filtering also reduces evaluation latency and prevents feature flag bloat by only sending relevant flags to each environment, making it easier to manage flags in your app and organize the flags you actually evaluate.
+
+> **Note:** Evaluation runtime is different from [evaluation tags](/docs/feature-flags/evaluation-tags). Runtime filtering is based on SDK type (client vs server), while evaluation tags provide fine-grained environment constraints that you define (e.g., "production", "staging", "app", "marketing-site").
 
 ### Runtime options
 
