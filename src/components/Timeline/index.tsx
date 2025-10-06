@@ -78,7 +78,13 @@ export default function Timeline({
         if (!firstMonth || !containerRef.current) return
         const firstMonthRect = firstMonth.getBoundingClientRect()
         setWindowWidth(firstMonthRect.width + 1)
-        setWindowX(firstMonthRect.left - containerRef.current.getBoundingClientRect().left || 0)
+
+        const scrollViewport = containerRef.current.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (scrollViewport) {
+            scrollViewport.scrollTo({
+                left: scrollViewport.scrollWidth,
+            })
+        }
     }, [])
 
     useEffect(() => {
@@ -88,8 +94,6 @@ export default function Timeline({
         const containerLeft = containerRef.current.getBoundingClientRect().left || 0
         const targetLeft = el.getBoundingClientRect().left - containerLeft
         setWindowX(targetLeft || 0)
-        // Ensure the selected month is visible in the horizontal scroll area
-        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
     }, [activeMonth])
 
     return (

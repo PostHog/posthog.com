@@ -164,7 +164,6 @@ export default function Changelog(): JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
     const { addWindow } = useApp()
     const { isModerator } = useUser()
-    const [activeMonth, setActiveMonth] = useState(1)
     const [windowX, setWindowX] = useState(0)
     const [windowDragging, setWindowDragging] = useState(false)
     const data = useStaticQuery(graphql`
@@ -192,6 +191,22 @@ export default function Changelog(): JSX.Element {
             }
         }
     `)
+
+    // Calculate the last available month (counting sequentially from startYear)
+    const totalMonths = useMemo(() => {
+        const now = dayjs.utc()
+        const currentYear = now.year()
+        const currentMonthIndex = now.month() // 0-based
+        const startYear = 2020
+        let count = 0
+        for (let y = startYear; y <= currentYear; y++) {
+            const lastMonthIndexForYear = y === currentYear ? currentMonthIndex : 11
+            count += lastMonthIndexForYear + 1
+        }
+        return count
+    }, [])
+
+    const [activeMonth, setActiveMonth] = useState(totalMonths)
 
     const handleAddFeature = () => {
         addWindow(
