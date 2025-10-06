@@ -30,7 +30,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ### What is PostHog?
 
-PostHog is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, user surveys, and more. We also have a [data warehouse](/docs/data-warehouse) to sync and query data from external sources and a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse) to send data to destinations.
+PostHog is an open-source, all-in-one developer platform for feature management, A/B testing, product analytics, session replay, user surveys, and more. We also have a [data warehouse](/docs/data-warehouse) to sync and query data from external sources and a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse) to send data to destinations.
 
 By combining all these tools into one platform, PostHog eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [Lovable](/customers/lovable), which use PostHog for both feature flags and analytics.
 
