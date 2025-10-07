@@ -33,12 +33,11 @@ Motivation: Create a consistent experience across all SDKs, making it easier for
 What we will ship:
 * **SDK consistency** – Burn down this [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425)
 
-#### Customer interviews around UI/UX improvements (Shared goal across the team)
-Motivation: Identify future product improvements through systematic user research.
+#### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
+Motivation: Cohorts hasn't had a clear product owner for a long time, and the UX of the product has ossified somewhat. We want to clear out the existing backlog of cohort issues as much as possible.
 
-* **10+ user interviews** – Conduct user interviews across the team focusing on flags UI and cohort usage
-* **Cohort improvements roadmap** – Define what we need to build to supercharge cohorts
-* **Flags UI improvements roadmap** – Define concrete next steps for UI improvements based on research
+What we will ship:
+* **Clear the cohort issue backlog** – Address existing backlog of cohort UI bugs & UX issues. Ideally cohorts will be UI bug-free by the end of Q4.
 
 #### Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
 Motivation: Enable real-time use cases for feature flags, allowing instant updates without page refreshes or app restarts.
@@ -52,12 +51,6 @@ Motivation: we've almost finished building a system for tracking behavioral coho
 
 What we will ship:
 * **Behavioral cohort completion** – Finish remaining behavioral cohort feature flag targeting work that was started last quarter
-
-#### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
-Motivation: Cohorts hasn't had a clear product owner for a long time, and the UX of the product has ossified somewhat. We want to clear out the existing backlog of cohort issues as much as possible.
-
-What we will ship:
-* **Clear the cohort issue backlog** – Address existing backlog of cohort UI bugs & UX issues. Ideally cohorts will be UI bug-free by the end of Q4.
 
 #### Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
 Motivation: Help teams manage technical debt from stale flags with automated detection and cleanup tools.
@@ -89,3 +82,10 @@ What we will ship:
 * **Decouple the writer database from the feature flags platform** – `/flags` should still be up even when we can't connect to the writer database
 * **Rewrite /evaluation_reasons** – Modernize `/evaluation_reasons` endpoint to use the Rust-based flag targeting code instead of Django
 * **Deprecate /decide** – Remove the legacy `/decide` endpoint from the latest version of the hosted PostHog app while maintaining self-hosted compatibility in the SDKs.
+
+#### Customer interviews around UI/UX improvements (Shared goal across the team)
+Motivation: Identify future product improvements through systematic user research.
+
+* **10+ user interviews** – Conduct user interviews across the team focusing on flags UI and cohort usage
+* **Cohort improvements roadmap** – Define what we need to build to supercharge cohorts
+* **Flags UI improvements roadmap** – Define concrete next steps for UI improvements based on research
