@@ -30,8 +30,8 @@ This is a security and performance feature - you might not want sensitive server
 
 Evaluation tags add environment-based constraints that determine when a flag should be evaluated:
 
-- Flags only evaluate when the SDK provides matching environment tags
-- At least one tag must match for the flag to be included
+- Flags evaluate when at least one tag matches between the flag and the SDK
+- If a flag has `["staging", "api"]`, it will evaluate for any SDK with "staging" OR "api"  
 - Flags without evaluation tags evaluate for all requests (backward compatibility)
 
 This helps with cost optimization, environment isolation, and better organization of your flags.
@@ -46,7 +46,7 @@ These features apply as sequential filters in the evaluation pipeline:
 Think of it as a two-stage security checkpoint:
 
 - Runtime checks if you have the right type of ID (client or server)
-- Tags check if you're going to the right destination (production, staging, etc.)
+- Tags check if at least one of your destinations matches
 
 ### Example filtering flow
 
@@ -59,8 +59,8 @@ Here's what happens in different scenarios:
 
 | SDK Type | Environment Tags | Result |
 |----------|-----------------|--------|
-| JavaScript Web | `["production", "web"]` | ❌ Blocked by runtime (client SDK) |
-| Node.js | `["staging", "api"]` | ❌ Blocked by tags (no "production") |
+| JavaScript Web | `["production", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
+| Node.js | `["staging", "backend"]` | ❌ Blocked by tags (neither "staging" nor "backend" match flag's tags) |
 | Node.js | `["production", "api"]` | ✅ Both filters pass |
 | Python | `["production", "backend"]` | ✅ Both filters pass ("production" matches) |
 
@@ -118,76 +118,103 @@ posthog = Posthog(
 
 ## Common use cases
 
-### 1. Sensitive server-only features with environment isolation
+### 1. API rate limits that shouldn't be exposed to clients
 
-**Scenario**: Database migration flags that should never leak to clients and only run in specific environments.
+**Scenario**: You have rate limiting logic that varies by customer tier, but you don't want to expose these business rules to client-side code where competitors could inspect them.
 
 **Configuration**:
 
 - Runtime: `server`
-- Evaluation tags: `["production", "migration-runner"]`
+- Evaluation tags: `["api"]`
 
-**Result**: Only server-side SDKs in production with the "migration-runner" tag can evaluate this flag.
+**Why both features?** Runtime ensures the flag never reaches browsers where it could be inspected. Tags let you exclude this flag from other server contexts (like background workers) to reduce evaluation costs.
 
 ```javascript
-// Migration service
+// API service - Gets the flag
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['production', 'migration-runner']
+    evaluation_environments: ['production', 'api']
 })
 
-// This service can evaluate the migration flag
-const shouldRunMigration = await posthog.isFeatureEnabled('db-migration-v2')
+// Web browser - Never sees this flag (blocked by runtime)
+// Background worker - Doesn't get the flag (no 'api' tag)
+const posthog = new PostHog('KEY', {
+    evaluation_environments: ['production', 'workers']
+})
 ```
 
-### 2. Platform-specific client features
+### 2. Preventing staging features from affecting production
 
-**Scenario**: Mobile-only features that should work differently in staging vs production.
-
-**Configuration**:
-
-- Runtime: `client`
-- Evaluation tags: `["mobile", "ios"]`
-
-**Production iOS app:**
-
-```swift
-// Production iOS app gets the flag
-posthog.setup(apiKey: "KEY", host: "https://app.posthog.com", 
-              evaluationEnvironments: ["production", "mobile", "ios"])
-```
-
-**Staging iOS app:**
-
-```swift
-// Staging iOS app doesn't get this flag (missing "production" tag)
-posthog.setup(apiKey: "KEY", host: "https://app.posthog.com",
-              evaluationEnvironments: ["staging", "mobile", "ios"])
-```
-
-### 3. Cross-platform features with environment control
-
-**Scenario**: New checkout flow that needs testing across web and mobile, but only in staging.
+**Scenario**: You're testing a new recommendation algorithm in staging, but some services are shared between staging and production environments.
 
 **Configuration**:
 
 - Runtime: `all`
-- Evaluation tags: `["staging", "checkout"]`
+- Evaluation tags: `["staging"]`
 
-This allows both client and server SDKs to evaluate the flag, but only in staging environments with checkout functionality.
+**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but ONLY in staging. The tag ensures production services never evaluate this flag, even if they share code with staging.
 
-### 4. Gradual rollout with platform separation
+```python
+# Staging recommendation service - Gets the flag
+posthog = Posthog('KEY', 
+    evaluation_environments=['staging', 'recommendations'])
 
-**Scenario**: Rolling out a feature to web first, then mobile apps.
+# Production recommendation service - Doesn't get the flag
+posthog = Posthog('KEY',
+    evaluation_environments=['production', 'recommendations'])
+```
 
-**Initial configuration**:
+### 3. Rolling out mobile features without affecting web
+
+**Scenario**: You're testing a new native camera feature that only makes sense on mobile apps, and you want to ensure web users never download this flag's code.
+
+**Configuration**:
 
 - Runtime: `client`
-- Evaluation tags: `["production", "web"]`
+- Evaluation tags: `["mobile"]`
 
-**After web validation, expand to mobile**:
+**Why both features?** Runtime: `client` prevents server-side services from evaluating this UI-specific flag. The `mobile` tag ensures web browsers don't download or evaluate it, improving performance.
 
-- Runtime: `client`
-- Evaluation tags: `["production", "web"]`, `["production", "mobile"]`
+```javascript
+// React Native app - Gets the flag
+posthog.init('KEY', {
+    evaluation_environments: ['production', 'mobile']
+})
+
+// Web app - Doesn't get the flag (no 'mobile' tag)
+posthog.init('KEY', {
+    evaluation_environments: ['production', 'web']
+})
+
+// API server - Never sees this flag (blocked by runtime)
+```
+
+### 4. A/B testing pricing only where it matters
+
+**Scenario**: You're testing new pricing tiers, but only want to evaluate this in your billing service and checkout UI, not in every service and client.
+
+**Configuration**:
+
+- Runtime: `all`
+- Evaluation tags: `["billing"]`
+
+**Why both features?** The pricing affects both frontend (checkout UI) and backend (billing service), so runtime is `all`. But you don't want every service and client evaluating this flag thousands of times - only the specific parts that handle billing.
+
+```javascript
+// Checkout UI component - Gets the flag
+const posthog = new PostHog('KEY', {
+    evaluation_environments: ['production', 'billing', 'web']
+})
+
+// Billing service - Gets the flag  
+const posthog = new PostHog('KEY', {
+    evaluation_environments: ['production', 'billing', 'api']
+})
+
+// Main app dashboard - Doesn't get the flag (no 'billing' tag)
+const posthog = new PostHog('KEY', {
+    evaluation_environments: ['production', 'dashboard', 'web']
+})
+```
 
 ## Best practices
 
@@ -200,14 +227,11 @@ Set runtime to `server` for flags that:
 - Manage rate limits or quotas
 - Control infrastructure settings
 
-### 2. Use tags for environment organization
+### 2. Use tags carefully for environment organization
 
-Use evaluation tags to:
-
-- Separate staging from production
-- Isolate different products or teams
-- Target specific microservices
-- Control rollout to different platforms
+- For strict environment isolation, use single tags like `["production"]` or `["staging"]`
+- For precise targeting, combine terms into single tags like `["production-web"]` or `["staging-api"]`
+- Remember: `["staging", "checkout"]` will match ANY staging OR ANY checkout
 
 ### 3. Start simple, add complexity gradually
 
@@ -276,12 +300,17 @@ Avoid configurations that can never evaluate:
 ❌ **Wrong**: Runtime `server` with evaluation tag `mobile-app`
 ✅ **Right**: Runtime `client` with evaluation tag `mobile-app`
 
-### 3. Over-tagging initially
+### 3. Misunderstanding tag logic
+
+❌ **Wrong**: Using `["staging", "checkout"]` for staging-only checkout features
+✅ **Right**: Using `["staging"]` only, or a single combined tag like `["staging-checkout"]`
+
+### 4. Over-tagging initially
 
 ❌ **Wrong**: Starting with 20+ specific tags before understanding needs
 ✅ **Right**: Start with 3-5 high-level tags, expand as needed
 
-### 4. Missing backward compatibility
+### 5. Missing backward compatibility
 
 Remember that missing `evaluation_environments` in SDK means all flags evaluate:
 
