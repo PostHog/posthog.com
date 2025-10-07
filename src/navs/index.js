@@ -1473,6 +1473,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
+                        name: 'Onboarding Pipeline',
+                        url: '/handbook/onboarding/onboarding-pipeline',
+                    },
+                    {
                         name: 'Onboarding tracking',
                         url: '/handbook/onboarding/onboarding-tracking',
                     },

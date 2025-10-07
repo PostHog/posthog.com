@@ -427,7 +427,6 @@ export default function Desktop() {
                         />
                         <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
                             <CloudinaryImage
-                                loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
                                 alt=""
                                 width={1401}
@@ -442,24 +441,6 @@ export default function Desktop() {
                                 height={1400}
                                 className="size-[300px] md:size-[700px] hidden dark:block"
                             />
-                            <div className="absolute -left-20 md:-left-40 bottom-20 md:bottom-48">
-                                <OSButton
-                                    asLink
-                                    zoomHover="lg"
-                                    to="/blog/series-e"
-                                    tooltip="We raised a Series E"
-                                    state={{ newWindow: true }}
-                                    className="hover:!border-transparent active:!bg-transparent"
-                                >
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/series_e_b3934cffe7.png"
-                                        alt="We raised a Series E"
-                                        width={452}
-                                        height={569}
-                                        className="w-24 md:w-auto md:max-w-[226px] inline-block"
-                                    />
-                                </OSButton>
-                            </div>
                         </div>
                     </div>
 

@@ -292,7 +292,7 @@ export default function Crest({
                                 onRemove={() => setFieldValue('miniCrest', null)}
                                 onDrop={(image) => setFieldValue('miniCrest', image)}
                                 image={values.miniCrest}
-                                className="!size-full bg-white rounded-full border border-primary overflow-hidden !p-2"
+                                className="!size-full bg-white rounded-full border border-primary overflow-hidden"
                             />
                         ) : values.miniCrest?.objectURL ? (
                             <div className="size-full">
