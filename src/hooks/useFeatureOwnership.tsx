@@ -51,10 +51,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: [],
         notes: <>Shared responsibility, with features owned by the relevant small team.</>,
     },
-    'async-migrations': {
-        feature: 'Async migrations',
-        owner: ['messaging'],
-    },
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
@@ -183,6 +179,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Live events',
         owner: ['clickhouse'],
         label: false,
+    },
+    'managed-migrations': {
+        feature: 'Managed migrations',
+        owner: ['ingestion'],
     },
     'marketing-analytics': {
         feature: 'Marketing analytics',
