@@ -78,7 +78,11 @@ Talking about long-term career plans every now and again is also important but e
 
 We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a team lead, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but you should proactively give feedback and raise concerns with your exec.
 
-- We expect you to regularly give proactive, actionable feedback to everyone on your team - it’s the most direct way to help troubleshoot issues upstream. This is particularly important at the 30-day and 80-day check-ins after a new starter joins.
+- We expect you to regularly give proactive, actionable feedback to everyone on your team - it’s the most direct way to help troubleshoot issues upstream. This is particularly important at the 30-day, 60-day and 80-day check-ins after a new starter joins.
+-  The team lead will be asked to consider the following questions that are aligned with our values:
+      i. Is the person a driver or a passenger?
+      ii. Does this person get things done proactively?
+      iii. Are they optimistic by default
 - We expect you to actively raise performance issues with your exec.
   - Once you do, your exec will take the lead on the process. You’ll likely deliver feedback directly to the employee, but your exec will support and coach you through those conversations.
   - Your exec will look after the process and make any decisions required.
@@ -88,9 +92,10 @@ We care about having a consistent, transparent, and fair way to handle recurring
 
 As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#youre-the-driver) high - we can't centralize this with the founders. To help us scale this, the relevant exec team member will regularly check in with their respective team leads to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year:
 
-1. Ask the team lead 'if X was leaving for a similar role at another company, would you try to keep them?'
-2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
-3. Make sure the manager is sharing all of this feedback with their team to help them improve.
+1. Ask the team lead 'if X was leaving for a similar role at another company, would you try to keep them?' - the answers should be derived from our values, similar to the questions above.
+3. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
+4. Make sure the manager is sharing all of this feedback with their team to help them improve.
+
 
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
