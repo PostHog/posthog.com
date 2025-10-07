@@ -21,7 +21,11 @@ const defaultBaseSettings: InkeepBaseSettings = {
     primaryBrandColor: '#E5E7E0',
     organizationDisplayName: 'PostHog',
     colorMode: {
-        forcedColorMode: 'light',
+        sync: {
+            target: document.body,
+            attributes: ['class'],
+            isDarkMode: (attrs) => attrs['class']?.includes('dark'),
+        },
     },
     theme: {
         styles: [
