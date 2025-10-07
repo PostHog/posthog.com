@@ -86,6 +86,7 @@ ORDER BY groupidentify_event_count DESC
 We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
 
 ## Are feature flags resilient?
+
 ### Falling back to working code
 It is important that hitting the flags endpoint does not block an application from otherwise functioning correctly. If the flag fails to load or returns an unexpected value for any reason, such as `None`, `(empty string)`, or `false` you should [always fall back to working code.](/docs/feature-flags/best-practices#9-fallback-to-working-code)
 
