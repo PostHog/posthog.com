@@ -44,12 +44,14 @@ These features apply as sequential filters in the evaluation pipeline:
 2. **Tag filter second**: Further filters based on environment context
 
 Think of it as a two-stage security checkpoint:
+
 - Runtime checks if you have the right type of ID (client or server)
 - Tags check if you're going to the right destination (production, staging, etc.)
 
 ### Example filtering flow
 
 Consider a flag with:
+
 - Runtime: `server`
 - Evaluation tags: `["production", "api"]`
 
@@ -69,11 +71,11 @@ Here's what happens in different scenarios:
 When creating or editing a feature flag:
 
 1. **Set the evaluation runtime**:
-   - Find the "Evaluation runtime" dropdown
-   - Choose `server`, `client`, or `all`
+   - Find the "Evaluation runtime" selector
+   - Choose `server`, `client`, or `all` (the default is `all`)
 
 2. **Add evaluation tags**:
-   - Navigate to the tags section
+   - Click on "Add tags" and create your tag(s)
    - Click the bolt icon ⚡ to configure evaluation constraints
    - Select which tags should act as evaluation constraints
 
@@ -82,6 +84,7 @@ When creating or editing a feature flag:
 Update your SDK initialization to include evaluation environments. Here's how to set it up for different scenarios:
 
 **Production API server (Node.js):**
+
 ```javascript
 const posthog = new PostHog('YOUR_API_KEY', {
     host: 'https://app.posthog.com',
@@ -90,6 +93,7 @@ const posthog = new PostHog('YOUR_API_KEY', {
 ```
 
 **Production web app (React):**
+
 ```jsx
 <PostHogProvider 
     apiKey='YOUR_API_KEY'
@@ -103,6 +107,7 @@ const posthog = new PostHog('YOUR_API_KEY', {
 ```
 
 **Staging microservice (Python):**
+
 ```python
 posthog = Posthog(
     'YOUR_API_KEY',
@@ -118,6 +123,7 @@ posthog = Posthog(
 **Scenario**: Database migration flags that should never leak to clients and only run in specific environments.
 
 **Configuration**:
+
 - Runtime: `server`
 - Evaluation tags: `["production", "migration-runner"]`
 
@@ -138,10 +144,12 @@ const shouldRunMigration = await posthog.isFeatureEnabled('db-migration-v2')
 **Scenario**: Mobile-only features that should work differently in staging vs production.
 
 **Configuration**:
+
 - Runtime: `client`
 - Evaluation tags: `["mobile", "ios"]`
 
 **Production iOS app:**
+
 ```swift
 // Production iOS app gets the flag
 posthog.setup(apiKey: "KEY", host: "https://app.posthog.com", 
@@ -149,6 +157,7 @@ posthog.setup(apiKey: "KEY", host: "https://app.posthog.com",
 ```
 
 **Staging iOS app:**
+
 ```swift
 // Staging iOS app doesn't get this flag (missing "production" tag)
 posthog.setup(apiKey: "KEY", host: "https://app.posthog.com",
@@ -160,6 +169,7 @@ posthog.setup(apiKey: "KEY", host: "https://app.posthog.com",
 **Scenario**: New checkout flow that needs testing across web and mobile, but only in staging.
 
 **Configuration**:
+
 - Runtime: `all`
 - Evaluation tags: `["staging", "checkout"]`
 
@@ -170,10 +180,12 @@ This allows both client and server SDKs to evaluate the flag, but only in stagin
 **Scenario**: Rolling out a feature to web first, then mobile apps.
 
 **Initial configuration**:
+
 - Runtime: `client`
 - Evaluation tags: `["production", "web"]`
 
 **After web validation, expand to mobile**:
+
 - Runtime: `client`
 - Evaluation tags: `["production", "web"]`, `["production", "mobile"]`
 
@@ -182,6 +194,7 @@ This allows both client and server SDKs to evaluate the flag, but only in stagin
 ### 1. Use runtime for security boundaries
 
 Set runtime to `server` for flags that:
+
 - Control access to sensitive features
 - Contain business logic that shouldn't be exposed
 - Manage rate limits or quotas
@@ -190,6 +203,7 @@ Set runtime to `server` for flags that:
 ### 2. Use tags for environment organization
 
 Use evaluation tags to:
+
 - Separate staging from production
 - Isolate different products or teams
 - Target specific microservices
@@ -198,6 +212,7 @@ Use evaluation tags to:
 ### 3. Start simple, add complexity gradually
 
 Begin with basic separations:
+
 1. Start with runtime only (`server` vs `client`)
 2. Add high-level environment tags (`production`, `staging`)
 3. Gradually add more specific tags as needed
@@ -205,7 +220,8 @@ Begin with basic separations:
 ### 4. Document your conventions
 
 Create a tagging guide for your team:
-```
+
+```text
 Environments: production, staging, development
 Platforms: web, ios, android, api
 Services: auth-service, payment-service, notification-service
@@ -215,6 +231,7 @@ Teams: growth, platform, security
 ### 5. Monitor the impact
 
 Track metrics after implementing both features:
+
 - Reduction in unnecessary flag evaluations
 - Improved page load times (fewer client flags)
 - Reduced API traffic
@@ -281,23 +298,27 @@ const posthog = new PostHog('KEY', {
 If you're adding these features to an existing PostHog setup:
 
 ### Phase 1: Audit and plan
+
 1. List all your environments and platforms
 2. Identify sensitive flags that should be server-only
 3. Map which flags are used where
 
 ### Phase 2: Set runtimes first
+
 1. Update server-only flags to runtime: `server`
 2. Update client-only flags to runtime: `client`
 3. Leave shared flags as `all`
 4. Deploy and verify everything still works
 
 ### Phase 3: Add evaluation tags
+
 1. Define your tag taxonomy
 2. Add tags to flags in batches
 3. Update SDKs one environment at a time
 4. Monitor evaluation metrics
 
 ### Phase 4: Optimize
+
 1. Review metrics after 1-2 weeks
 2. Adjust tags for better filtering
 3. Document patterns for your team
