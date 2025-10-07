@@ -15,5 +15,127 @@ To determine the pricing for a model, we use a two-step matching process:
 For cached LLM responses, our pricing models include cached token pricing which we automatically apply.
 
 We also take into account the reasoning / thinking tokens for models that support it.
- 
+
+## Setting custom pricing
+
+You can override PostHog's automatic cost calculation by providing custom pricing for your LLM models. This is useful when:
+
+- You have negotiated custom pricing with your LLM provider
+- You're using a model that PostHog doesn't support yet
+- PostHog's automatic pricing doesn't match your specific use case
+
+### Option 1: Custom price per token
+
+If you know your pricing per token, you can set the following [custom properties](/docs/llm-analytics/custom-properties) when calling your LLM:
+
+- `$ai_input_token_price` (required): Price per input/prompt token
+- `$ai_output_token_price` (required): Price per output/completion token
+- `$ai_cache_read_token_price` (optional): Price per cached token read
+- `$ai_cache_write_token_price` (optional): Price per cached token write
+
+**Important:** These prices should be per individual token, not per million tokens. For example, if your provider charges $0.03 per 1M tokens, you would set `$ai_input_token_price: 0.00000003` (0.03 / 1,000,000).
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+import { OpenAI } from '@posthog/ai'
+import { PostHog } from 'posthog-node'
+
+const phClient = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_client_api_host>' }
+)
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  posthog: phClient
+})
+
+const response = await openai.responses.create({
+  model: 'my-custom-model',
+  messages: [{ role: 'user', content: 'Hello' }],
+  posthogProperties: {
+    $ai_input_token_price: 0.00000003,   // $0.03 per 1M tokens = $0.00000003 per token
+    $ai_output_token_price: 0.00000006,  // $0.06 per 1M tokens = $0.00000006 per token
+    // Optional: cache pricing
+    $ai_cache_read_token_price: 0.000000015,
+    $ai_cache_write_token_price: 0.0000000375
+  }
+})
+```
+
+```python file=Python
+from posthog.ai.openai import OpenAI
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>"
+)
+
+client = OpenAI(
+    api_key="sk-...",
+    posthog_client=posthog
+)
+
+response = client.responses.create(
+    model="my-custom-model",
+    messages=[{"role": "user", "content": "Hello"}],
+    posthog_properties={
+        "$ai_input_token_price": 0.00000003,   # $0.03 per 1M tokens = $0.00000003 per token
+        "$ai_output_token_price": 0.00000006,  # $0.06 per 1M tokens = $0.00000006 per token
+        # Optional: cache pricing
+        "$ai_cache_read_token_price": 0.000000015,
+        "$ai_cache_write_token_price": 0.0000000375
+    }
+)
+```
+
+</MultiLanguage>
+
+Both `$ai_input_token_price` and `$ai_output_token_price` must be provided for custom pricing to take effect. PostHog will then calculate the total cost based on the token counts and your custom prices.
+
+### Option 2: Pre-calculated costs
+
+If you've already calculated the total costs yourself, you can send them directly:
+
+- `$ai_input_cost_usd`: Total cost for input/prompt tokens in USD
+- `$ai_output_cost_usd`: Total cost for output/completion tokens in USD
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+const response = await openai.responses.create({
+  model: 'my-custom-model',
+  messages: [{ role: 'user', content: 'Hello' }],
+  posthogProperties: {
+    $ai_input_cost_usd: 0.0042,   // Total input cost you calculated
+    $ai_output_cost_usd: 0.0028   // Total output cost you calculated
+  }
+})
+```
+
+```python file=Python
+response = client.responses.create(
+    model="my-custom-model",
+    messages=[{"role": "user", "content": "Hello"}],
+    posthog_properties={
+        "$ai_input_cost_usd": 0.0042,   # Total input cost you calculated
+        "$ai_output_cost_usd": 0.0028   # Total output cost you calculated
+    }
+)
+```
+
+</MultiLanguage>
+
+PostHog will use these values directly without any additional calculation.
+
+### Precedence
+
+Custom pricing follows this precedence order:
+
+1. **Pre-calculated costs** (`$ai_input_cost_usd` and `$ai_output_cost_usd`): These values are used directly
+2. **Custom price per token** (`$ai_input_token_price` and `$ai_output_token_price`): PostHog calculates costs from token counts
+3. **Automatic matching**: PostHog uses the standard primary and fallback matching process
+
 You can find the code for this on [GitHub](https://github.com/PostHog/posthog/tree/master/plugin-server/src/ingestion/ai-costs).
