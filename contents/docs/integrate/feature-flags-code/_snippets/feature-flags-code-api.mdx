@@ -96,6 +96,169 @@ sendFlagsRequest();
 
 > **Note:** The `groups` key is only required for group-based feature flags. If you use it, replace `group_type` and `group_id` with the values for your group such as `company: "Twitter"`.
 
+#### Using evaluation tags and runtime filtering without SDKs
+
+When making direct API calls to the `/flags` endpoint, you can control which flags are evaluated using evaluation tags and runtime filtering.
+
+##### Evaluation tags
+
+To filter flags by evaluation environment, include the `evaluation_environments` field in your request body:
+
+<MultiLanguage>
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_your_user",
+    "evaluation_environments": ["production", "web"]
+}' "<ph_client_api_host>/flags?v=2"
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/flags?v=2"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "user distinct id",
+    "evaluation_environments": ["production", "web"]
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```javascript
+const response = await fetch("<ph_client_api_host>/flags?v=2", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        api_key: "<ph_project_api_key>",
+        distinct_id: "user-distinct-id",
+        evaluation_environments: ["production", "web"]
+    }),
+});
+const data = await response.json();
+```
+
+</MultiLanguage>
+
+Only flags that have matching evaluation tags (or no tags at all) will be returned. For example:
+- Flag with evaluation tags `["production", "api"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
+- Flag with evaluation tags `["staging"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no matching tags)
+- Flag with no evaluation tags = ✅ Always evaluates (backward compatibility)
+
+##### Runtime detection
+
+Evaluation runtime (server vs. client) is automatically detected based on your request headers and user-agent. This determines which flags are available based on their runtime setting (server-only, client-only, or all).
+
+**How runtime is detected:**
+
+1. **User-Agent patterns** - The system analyzes the User-Agent header:
+   - **Client-side patterns**: `Mozilla/`, `Chrome/`, `Safari/`, `Firefox/`, `Edge/` (browsers), or mobile SDKs like `posthog-android/`, `posthog-ios/`, `posthog-react-native/`, `posthog-flutter/`
+   - **Server-side patterns**: `posthog-python/`, `posthog-ruby/`, `posthog-php/`, `posthog-java/`, `posthog-go/`, `posthog-node/`, `posthog-dotnet/`, `posthog-elixir/`, `python-requests/`, `curl/`
+
+2. **Browser-specific headers** - Presence of these headers indicates client-side:
+   - `Origin` header
+   - `Referer` header  
+   - `Sec-Fetch-Mode` header
+   - `Sec-Fetch-Site` header
+
+3. **Default behavior** - If runtime can't be determined, the system includes flags with no runtime requirement and those set to "all"
+
+**Examples of runtime detection:**
+
+```javascript
+// Browser fetch - Detected as CLIENT runtime
+// Will receive: client-only flags + "all" flags
+// Won't receive: server-only flags
+const response = await fetch("<ph_client_api_host>/flags?v=2", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        // Browser automatically adds Origin, Referer, Sec-Fetch-* headers
+    },
+    body: JSON.stringify({
+        api_key: "<ph_project_api_key>",
+        distinct_id: "user-id"
+    })
+});
+```
+
+```python
+# Python requests - Detected as SERVER runtime
+# Will receive: server-only flags + "all" flags
+# Won't receive: client-only flags
+import requests
+
+response = requests.post(
+    "<ph_client_api_host>/flags?v=2",
+    json={
+        "api_key": "<ph_project_api_key>",
+        "distinct_id": "user-id"
+    }
+    # python-requests/ in User-Agent indicates server-side
+)
+```
+
+```shell
+# curl - Detected as SERVER runtime
+# Will receive: server-only flags + "all" flags
+# Won't receive: client-only flags
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "user-id"
+}' "<ph_client_api_host>/flags?v=2"
+# curl/ in User-Agent indicates server-side
+```
+
+```javascript
+// Node.js with custom User-Agent - Control runtime detection
+const response = await fetch("<ph_client_api_host>/flags?v=2", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "posthog-node/3.0.0"  // Explicitly indicates server-side
+    },
+    body: JSON.stringify({
+        api_key: "<ph_project_api_key>",
+        distinct_id: "user-id"
+    })
+});
+```
+
+##### Combining evaluation tags and runtime filtering
+
+Both features work together as sequential filters:
+
+```javascript
+// Example: Production web client
+const response = await fetch("<ph_client_api_host>/flags?v=2", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        // Browser headers will trigger client runtime detection
+    },
+    body: JSON.stringify({
+        api_key: "<ph_project_api_key>",
+        distinct_id: "user-id",
+        evaluation_environments: ["production", "web"]
+    })
+});
+
+// This request will only receive flags that:
+// 1. Have runtime set to "client" OR "all" (due to browser headers)
+// AND
+// 2. Have evaluation tags matching "production" OR "web" (or no tags)
+```
+
+This allows precise control over which flags are evaluated in different contexts, helping optimize costs and improve security by ensuring flags only evaluate where intended.
+
 #### Response
 
 The response varies depending on whether you include the `config=true` query parameter:
