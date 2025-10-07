@@ -1,90 +1,63 @@
 ### Q4 2025 Objectives
-This quarter we're making feature flags faster, more reliable, and way more automated. That means better SDKs, more powerful local evaluation (it should ideally be the default for server-side flag evaluations), streaming real-time flag evaluation results, and using AI to handle the tedious stuff around creating and managing flags. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
+This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
 
 #### Objective: Awesome documentation <TeamMember name="Dylan Martin" photo />
-Motivation: Present feature flags as a mature and sophisticated product through excellent documentation, following the [experiments team's](/team/experiments) successful approach last quarter.
 
-What we will ship:
-* Partner with the [content team](/teams/content) for comprehensive docs refresh
-* Write additional real-world scenario walkthroughs (e.g. "how to use flags to do X", "how to clean up flag tech debt", etc)
-* AI-related content – examples of how to use flags with AI features
-* Easy navigation from app to relevant docs
+Our docs should be as good as the [experiments team's](/teams/experiments). We're partnering with the [content team](/teams/content) to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
 
 #### Make local evaluation the default server-side evaluation strategy <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
-Motivation: Enable faster, cheaper, more reliable flag evaluations for our customers using server-side SDKs by making local evaluation the default as much as possible (while also improving the durability of the `/local_evaluation` endpoint itself)
 
-What we will ship:
-* **HyperCache + `/local_evaluation`** – Finish implementation of `/local_evaluation` powered by HyperCache. This will decouple `/local_evaluation` from Postgres and help with the endpoint's reliability <TeamMember name="Phil Haack" photo />
-* **Properties solution** – Solve the blocker preventing wider local eval adoption: make it easier for users to provide the properties needed for flag evaluation when using local evaluation <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
-* **Better documentation & guides** – Create how-to guides for different types of local evaluation setups (this ties into the "Awesome documentation" objective) <TeamMember name="Dylan Martin" photo />
-* **ETag support** – Implement efficient caching for reduced bandwidth <TeamMember name="Phil Haack" photo /> 
-* **Rust re-write** – Rewrite the endpoint in Rust to take advantage of the new Rust flag matching and make the endpoint more performant under the increase in scale that will come with making local evaluation the default <TeamMember name="Phil Haack" photo />
+Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
+- Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
+- Solving the properties problem that's been blocking adoption (it's not very ergonomic to bring your own properties to everything)
+- Rewriting the endpoint in Rust for better performance
+- Adding ETag support for efficient caching
+- Writing better docs and guides
 
 #### Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
-Motivation: Support Java developers with an official PostHog SDK, opening up the possibility of customers integrating their Java applications with PostHog.
 
-What we will ship:
-* **Java SDK** – Ship an initial version and iterate based on customer feedback
+Java developers need an official SDK. We're shipping one and iterating based on feedback.
 
 #### Improve SDK standardization <TeamMember name="Dustin Byrne" photo />
-Motivation: Create a consistent experience across all SDKs, making it easier for teams to adopt PostHog across their entire stack – when things are inconsistent, it leads to customers writing bugs.
 
-What we will ship:
-* **SDK consistency** – Burn down this [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425)
+Inconsistent SDKs lead to bugs. We're burning down the [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425) to create a consistent experience across the stack.
 
 #### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
-Motivation: Cohorts hasn't had a clear product owner for a long time, and the UX of the product has ossified somewhat. We want to clear out the existing backlog of cohort issues as much as possible.
 
-What we will ship:
-* **Clear the cohort issue backlog** – Address existing backlog of cohort UI bugs & UX issues. Ideally cohorts will be UI bug-free by the end of Q4.
+Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so cohorts is actually pleasant to use by end of Q4.
 
 #### Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
-Motivation: Enable real-time use cases for feature flags, allowing instant updates without page refreshes or app restarts.
 
-What we will ship:
-* **Real-time flag updates** – Implement WebSocket/SSE-based real-time flag changes
-* **SDK support** – Add real-time capabilities to key SDKs
+Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
 
 #### Finish behavioral cohort targeting <TeamMember name="Dylan Martin" photo />
-Motivation: we've almost finished building a system for tracking behavioral cohort membership information in a fast data store on ingress, which will enable us to target feature flags based on those behavioral cohorts.
 
-What we will ship:
-* **Behavioral cohort completion** – Finish remaining behavioral cohort feature flag targeting work that was started last quarter
+We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
 
 #### Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
-Motivation: Help teams manage technical debt from stale flags with automated detection and cleanup tools.
 
-What we will ship:
-* **Stale flag detection** – Identify and surface stale flags in the PostHog UI
-* **In-app cleanup tools** – Provide easy tools to clean up stale flags directly in PostHog
-* **Code cleanup prompts** – Generate prompts for Cursor/Claude Code to clean up flag debt in codebases
-* **Automated actions** (stretch) – Additional automated cleanup options (create PR)
+Stale flags are tech debt. We're building tools to:
+- Detect and surface stale flags in the UI
+- Make cleanup easy with in-app tools
+- Generate prompts for Cursor/Claude Code to remove flags from your codebase
+- (Stretch) Automated actions like creating cleanup PRs
 
 #### Natural language flag creation <TeamMember name="Phil Haack" photo />
-Motivation: Enable users to create feature flags using natural language with AI assistance.
 
-What we will ship:
-* **"Build a flag with Max"** – Natural language interface for creating feature flags, powered by Max
+Building flags with AI. You describe what you want in plain English, Max builds the flag.
 
 #### Enhanced flag evaluation debugging capabilities <TeamMember name="Dylan Martin" photo />
-Motivation: Improve visibility into flag evaluations for better debugging and troubleshooting, and push these insights to our users wherever possible.
 
-What we will ship:
-* **Enhanced $feature_flag_called events** – Include properties used for evaluation in the event
-* **Historical evaluation view** – [Show flag evaluation results for a person over time](https://github.com/PostHog/posthog/issues/38669)
+Better visibility into why flags evaluate the way they do. We're adding evaluation properties to `$feature_flag_called` events and [showing flag evaluation history for each person](https://github.com/PostHog/posthog/issues/38669).
 
 #### Platform improvements <TeamMember name="Dylan Martin" photo />
-Motivation: Reduce technical debt and improve system performance for better reliability and faster development.
 
-What we will ship:
-* **Persons database split (shared with the [Ingestion team](/teams/ingestion))** – Finish the persons database split; this will let us scale the database that powers the `/flags` service independently from the rest of the PostHog app
-* **Decouple the writer database from the feature flags platform** – `/flags` should still be up even when we can't connect to the writer database
-* **Rewrite /evaluation_reasons** – Modernize `/evaluation_reasons` endpoint to use the Rust-based flag targeting code instead of Django
-* **Deprecate /decide** – Remove the legacy `/decide` endpoint from the latest version of the hosted PostHog app while maintaining self-hosted compatibility in the SDKs.
+Fixing the foundations:
+- Finishing the persons database split (shared with ingestion team)
+- Decoupling `/flags` from the writer database so flags stay up even when the database is down
+- Rewriting `/evaluation_reasons` in Rust
+- Deprecating the legacy `/decide` endpoint
 
 #### Customer interviews around UI/UX improvements (Shared goal across the team)
-Motivation: Identify future product improvements through systematic user research.
 
-* **10+ user interviews** – Conduct user interviews across the team focusing on flags UI and cohort usage
-* **Cohort improvements roadmap** – Define what we need to build to supercharge cohorts
-* **Flags UI improvements roadmap** – Define concrete next steps for UI improvements based on research
+We're doing 10+ user interviews about flags UI and cohorts to figure out what to build next. This feeds directly into our roadmap for both products.
