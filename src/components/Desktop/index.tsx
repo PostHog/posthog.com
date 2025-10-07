@@ -26,7 +26,7 @@ interface Product {
 }
 
 export const useProductLinks = () => {
-    const { posthogInstance } = useApp()
+    const { posthogInstance, openNewChat } = useApp()
 
     return [
         {
@@ -72,6 +72,12 @@ export const useProductLinks = () => {
             url: '/talk-to-a-human',
             source: 'desktop',
         },
+        {
+            label: 'Ask a question',
+            Icon: <AppIcon name="forums" />,
+            onClick: () => openNewChat({ path: `ask-max` }),
+            source: 'desktop',
+        },
         ...(posthogInstance
             ? [
                   {
@@ -105,12 +111,6 @@ export const apps: AppItem[] = [
         label: 'Roadmap',
         Icon: <AppIcon name="map" />,
         url: '/roadmap',
-        source: 'desktop',
-    },
-    {
-        label: 'Forums',
-        Icon: <AppIcon name="forums" />,
-        url: '/questions',
         source: 'desktop',
     },
     {
