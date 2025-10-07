@@ -145,7 +145,6 @@ export const onRequestError = async (err, request, context) => {
         ? request.headers.cookie.join('; ') 
         : request.headers.cookie
 
-      const cookieString = request.headers.cookie
       const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
 
       if (postHogCookieMatch && postHogCookieMatch[1]) {
