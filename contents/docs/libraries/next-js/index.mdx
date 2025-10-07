@@ -191,7 +191,7 @@ Before updating the JavaScript Web SDK's default behavior when capturing pagevie
 
 > **Note:** This approach of manually capturing pageviews is no longer recommended. We recommend using `defaults: '2025-05-24'` or `capture_pageview: 'history_change'` instead, which automatically handles both `$pageview` and `$pageleave` events.
 >
-> If you're still capturing pageviews manually, you should also capture `$pageleave` events to track important engagement metrics like time on page (`$prev_pageview_duration`) and scroll depth (`$prev_pageview_max_scroll_percentage`). To do this, set up a listener on window unload (similar to [how PostHog does it](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/posthog-core.ts#L644-L763)):
+> If you're still capturing pageviews manually, you should also capture `$pageleave` events to track important engagement metrics like time on page (`$prev_pageview_duration`) and scroll depth (`$prev_pageview_max_scroll_percentage`). To do this, set up a listener on window unload (similar to [how PostHog does it](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/posthog-core.ts#L644-L646)):
 >
 > ```js
 > useEffect(() => {
