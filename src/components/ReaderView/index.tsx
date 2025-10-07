@@ -74,6 +74,7 @@ interface ReaderViewProps {
     parent?: MenuItem
     markdownContent?: string
     showQuestions?: boolean
+    breadcrumb?: { name: string; url: string }[]
 }
 
 interface BackgroundImageOption {
@@ -363,6 +364,7 @@ export default function ReaderView({
     parent,
     markdownContent,
     showQuestions = true,
+    breadcrumb,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -391,6 +393,7 @@ export default function ReaderView({
                 parent={parent}
                 markdownContent={markdownContent}
                 showQuestions={showQuestions}
+                breadcrumb={breadcrumb}
             >
                 {children}
             </ReaderViewContent>
@@ -524,6 +527,7 @@ function ReaderViewContent({
     parent,
     markdownContent,
     showQuestions = true,
+    breadcrumb,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -735,14 +739,19 @@ function ReaderViewContent({
                                         children
                                     )}
                                 </div>
-                                {showQuestions && (
-                                    <div className="mt-8">
-                                        <h3 id="squeak-questions" className="mb-4">
-                                            Community questions
-                                        </h3>
-                                        <Questions slug={appWindow?.path} />
-                                    </div>
-                                )}
+                                {showQuestions &&
+                                    (() => {
+                                        const parentName =
+                                            breadcrumb && breadcrumb?.length > 1 ? breadcrumb[1]?.name : undefined
+                                        return (
+                                            <div className="mt-8">
+                                                <h3 id="squeak-questions" className="mb-4">
+                                                    Community questions
+                                                </h3>
+                                                <Questions slug={appWindow?.path} parentName={parentName} />
+                                            </div>
+                                        )
+                                    })()}
                                 {showSurvey && (
                                     <div className="mt-8">
                                         <DocsPageSurvey filePath={filePath} />

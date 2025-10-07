@@ -402,6 +402,7 @@ export default function Handbook({
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}
                 markdownContent={contentWithSnippets}
+                breadcrumb={breadcrumb}
             />
         </>
     )
