@@ -148,9 +148,10 @@ const data = await response.json();
 
 </MultiLanguage>
 
-Only flags that have matching evaluation tags (or no tags at all) will be returned. For example:
-- Flag with evaluation tags `["production", "api"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
-- Flag with evaluation tags `["staging"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no matching tags)
+Only flags where at least one evaluation tag matches (or flags with no tags at all) will be returned. For example:
+- Flag with evaluation tags `["production", "api", "backend"]` + request with `["production", "web"]` = ✅ Flag evaluates ("production" matches)
+- Flag with evaluation tags `["staging", "api"]` + request with `["production", "web"]` = ❌ Flag doesn't evaluate (no tags match)
+- Flag with evaluation tags `["web", "mobile"]` + request with `["production", "web"]` = ✅ Flag evaluates ("web" matches)
 - Flag with no evaluation tags = ✅ Always evaluates (backward compatibility)
 
 ##### Runtime detection
