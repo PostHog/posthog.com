@@ -1,8 +1,8 @@
 ### Q4 2025 Objectives
+This quarter we're focused on making feature flags more powerful, reliable, and automated – improving developer experience through better SDKs and local evaluation, expanding into real-time use cases, building AI-powered automation to reduce manual work, and strengthening our platform foundations. We're also conducting deep user research to guide our roadmap and shipping key product improvements to make flags more dynamic and easier to manage at scale.
 
-#### Developer Experience & SDKs
 
-##### Objective: Awesome documentation <TeamMember name="Dylan Martin" photo />
+#### Objective: Awesome documentation <TeamMember name="Dylan Martin" photo />
 Motivation: Present feature flags as a mature and sophisticated product through excellent documentation, following the [experiments team's](/team/experiments) successful approach last quarter.
 
 What we will ship:
@@ -11,7 +11,7 @@ What we will ship:
 * AI-related content – examples of how to use flags with AI features
 * Easy navigation from app to relevant docs
 
-##### Objective: Make local evaluation the default server-side evaluation strategy <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
+#### Make local evaluation the default server-side evaluation strategy <TeamMember name="Dylan Martin" photo /> <TeamMember name="Phil Haack" photo />
 Motivation: Enable faster, cheaper, more reliable flag evaluations for our customers using server-side SDKs by making local evaluation the default as much as possible (while also improving the durability of the `/local_evaluation` endpoint itself)
 
 What we will ship:
@@ -21,51 +21,45 @@ What we will ship:
 * **ETag support** – Implement efficient caching for reduced bandwidth <TeamMember name="Phil Haack" photo /> 
 * **Rust re-write** – Rewrite the endpoint in Rust to take advantage of the new Rust flag matching and make the endpoint more performant under the increase in scale that will come with making local evaluation the default <TeamMember name="Phil Haack" photo />
 
-##### Objective: Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
+#### Ship a Java SDK <TeamMember name="Dustin Byrne" photo />
 Motivation: Support Java developers with an official PostHog SDK, opening up the possibility of customers integrating their Java applications with PostHog.
 
 What we will ship:
 * **Java SDK** – Ship an initial version and iterate based on customer feedback
 
-##### Objective: Improve SDK standardization <TeamMember name="Dustin Byrne" photo />
+#### Improve SDK standardization <TeamMember name="Dustin Byrne" photo />
 Motivation: Create a consistent experience across all SDKs, making it easier for teams to adopt PostHog across their entire stack – when things are inconsistent, it leads to customers writing bugs.
 
 What we will ship:
 * **SDK consistency** – Burn down this [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425)
 
-#### Research & Strategy
-
-##### Objective: Customer interviews around UI/UX improvements (Shared goal across the team)
+#### Customer interviews around UI/UX improvements (Shared goal across the team)
 Motivation: Identify future product improvements through systematic user research.
 
 * **10+ user interviews** – Conduct user interviews across the team focusing on flags UI and cohort usage
 * **Cohort improvements roadmap** – Define what we need to build to supercharge cohorts
 * **Flags UI improvements roadmap** – Define concrete next steps for UI improvements based on research
 
-#### Product Features
-
-##### Objective: Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Real-time feature flags <TeamMember name="Gustavo Henrique Strassburger" photo />
 Motivation: Enable real-time use cases for feature flags, allowing instant updates without page refreshes or app restarts.
 
 What we will ship:
 * **Real-time flag updates** – Implement WebSocket/SSE-based real-time flag changes
 * **SDK support** – Add real-time capabilities to key SDKs
 
-##### Objective: Finish behavioral cohort targeting <TeamMember name="Dylan Martin" photo />
+#### Finish behavioral cohort targeting <TeamMember name="Dylan Martin" photo />
 Motivation: we've almost finished building a system for tracking behavioral cohort membership information in a fast data store on ingress, which will enable us to target feature flags based on those behavioral cohorts.
 
 What we will ship:
 * **Behavioral cohort completion** – Finish remaining behavioral cohort feature flag targeting work that was started last quarter
 
-##### Objective: Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Mature the Cohorts UI/UX <TeamMember name="Gustavo Henrique Strassburger" photo />
 Motivation: Cohorts hasn't had a clear product owner for a long time, and the UX of the product has ossified somewhat. We want to clear out the existing backlog of cohort issues as much as possible.
 
 What we will ship:
 * **Clear the cohort issue backlog** – Address existing backlog of cohort UI bugs & UX issues. Ideally cohorts will be UI bug-free by the end of Q4.
 
-#### Intelligence & Automation
-
-##### Objective: Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
+#### Flag staleness cleanup system <TeamMember name="Phil Haack" photo />
 Motivation: Help teams manage technical debt from stale flags with automated detection and cleanup tools.
 
 What we will ship:
@@ -74,22 +68,20 @@ What we will ship:
 * **Code cleanup prompts** – Generate prompts for Cursor/Claude Code to clean up flag debt in codebases
 * **Automated actions** (stretch) – Additional automated cleanup options (create PR)
 
-##### Objective: Natural language flag creation <TeamMember name="Phil Haack" photo />
+#### Natural language flag creation <TeamMember name="Phil Haack" photo />
 Motivation: Enable users to create feature flags using natural language with AI assistance.
 
 What we will ship:
 * **"Build a flag with Max"** – Natural language interface for creating feature flags, powered by Max
 
-##### Objective: Enhanced flag evaluation debugging capabilities <TeamMember name="Dylan Martin" photo />
+#### Enhanced flag evaluation debugging capabilities <TeamMember name="Dylan Martin" photo />
 Motivation: Improve visibility into flag evaluations for better debugging and troubleshooting, and push these insights to our users wherever possible.
 
 What we will ship:
 * **Enhanced $feature_flag_called events** – Include properties used for evaluation in the event
 * **Historical evaluation view** – [Show flag evaluation results for a person over time](https://github.com/PostHog/posthog/issues/38669)
 
-#### Platform & Infrastructure
-
-##### Objective: Platform improvements <TeamMember name="Dylan Martin" photo />
+#### Platform improvements <TeamMember name="Dylan Martin" photo />
 Motivation: Reduce technical debt and improve system performance for better reliability and faster development.
 
 What we will ship:
