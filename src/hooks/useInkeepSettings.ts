@@ -22,7 +22,7 @@ const defaultBaseSettings: InkeepBaseSettings = {
     organizationDisplayName: 'PostHog',
     colorMode: {
         sync: {
-            target: document.body,
+            target: typeof document !== 'undefined' ? document.body : null,
             attributes: ['class'],
             isDarkMode: (attrs) => attrs['class']?.includes('dark') ?? false,
         },
