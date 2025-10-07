@@ -293,24 +293,17 @@ Setting evaluation tags in PostHog is only half the setup. Your SDKs must declar
 ❌ **Wrong**: Setting tags in PostHog but not configuring SDKs
 ✅ **Right**: Configure both PostHog flags AND SDK environments
 
-### 2. Conflicting settings
-
-Avoid configurations that can never evaluate:
-
-❌ **Wrong**: Runtime `server` with evaluation tag `mobile-app`
-✅ **Right**: Runtime `client` with evaluation tag `mobile-app`
-
-### 3. Misunderstanding tag logic
+### 2. Misunderstanding tag logic
 
 ❌ **Wrong**: Using `["staging", "checkout"]` for staging-only checkout features
 ✅ **Right**: Using `["staging"]` only, or a single combined tag like `["staging-checkout"]`
 
-### 4. Over-tagging initially
+### 3. Over-tagging initially
 
 ❌ **Wrong**: Starting with 20+ specific tags before understanding needs
 ✅ **Right**: Start with 3-5 high-level tags, expand as needed
 
-### 5. Missing backward compatibility
+### 4. Missing backward compatibility
 
 Remember that missing `evaluation_environments` in SDK means all flags evaluate:
 
