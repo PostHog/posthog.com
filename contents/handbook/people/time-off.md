@@ -84,11 +84,11 @@ Parental leave is exceptional as it needs to be significantly longer than a typi
 
 If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 6 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year the following guidance is relevant for parental leave
 
-## Maternity leave
+### Maternity leave
 
 If you have been at PostHog for under 6 months before your child is born, you will receive 3 weeks of paid parental leave. If you have been at PostHog for between 6-12 months you will receive 6 weeks of paid parental leave. In either situation, please contact Fraser with how much time you intend to take off. 
 
-## Paternity leave
+### Paternity leave
 
 If you have been at PostHog for under 12 months we would expect you to take 2-3 weeks PTO when your child has arrived. 
 
