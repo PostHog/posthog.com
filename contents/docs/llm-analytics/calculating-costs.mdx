@@ -97,7 +97,7 @@ Both `$ai_input_token_price` and `$ai_output_token_price` must be provided for c
 
 ### Option 2: Pre-calculated costs
 
-If you've already calculated the total costs yourself, you can send them directly:
+If you're [manually capturing](/docs/llm-analytics/manual-capture) LLM events and have already calculated the total costs yourself, you can send them directly:
 
 - `$ai_input_cost_usd`: Total cost for input/prompt tokens in USD
 - `$ai_output_cost_usd`: Total cost for output/completion tokens in USD
@@ -105,23 +105,32 @@ If you've already calculated the total costs yourself, you can send them directl
 <MultiLanguage>
 
 ```javascript file=JavaScript
-const response = await openai.responses.create({
-  model: 'my-custom-model',
-  messages: [{ role: 'user', content: 'Hello' }],
-  posthogProperties: {
-    $ai_input_cost_usd: 0.0042,   // Total input cost you calculated
-    $ai_output_cost_usd: 0.0028   // Total output cost you calculated
-  }
+// After making your LLM call and calculating costs
+posthog.capture('$ai_generation', {
+  $ai_trace_id: traceId,
+  $ai_model: 'my-custom-model',
+  $ai_provider: 'my-provider',
+  $ai_input_tokens: inputTokens,
+  $ai_output_tokens: outputTokens,
+  $ai_input_cost_usd: 0.0042,
+  $ai_output_cost_usd: 0.0028
+  // ... other required properties
 })
 ```
 
 ```python file=Python
-response = client.responses.create(
-    model="my-custom-model",
-    messages=[{"role": "user", "content": "Hello"}],
-    posthog_properties={
-        "$ai_input_cost_usd": 0.0042,   # Total input cost you calculated
-        "$ai_output_cost_usd": 0.0028   # Total output cost you calculated
+# After making your LLM call and calculating costs
+posthog.capture(
+    event='$ai_generation',
+    properties={
+        '$ai_trace_id': trace_id,
+        '$ai_model': 'my-custom-model',
+        '$ai_provider': 'my-provider',
+        '$ai_input_tokens': input_tokens,
+        '$ai_output_tokens': output_tokens,
+        '$ai_input_cost_usd': 0.0042,
+        '$ai_output_cost_usd': 0.0028
+        # ... other required properties
     }
 )
 ```
