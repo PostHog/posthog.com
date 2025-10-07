@@ -118,7 +118,7 @@ posthog = Posthog(
 
 ## Common use cases
 
-### 1. API rate limits that shouldn't be exposed to clients
+### API rate limits that shouldn't be exposed to clients
 
 **Scenario**: You have rate limiting logic that varies by customer tier, but you don't want to expose these business rules to client-side code where competitors could inspect them.
 
@@ -142,7 +142,7 @@ const posthog = new PostHog('KEY', {
 })
 ```
 
-### 2. Preventing staging features from affecting production
+### Preventing staging features from affecting production
 
 **Scenario**: You're testing a new recommendation algorithm in staging, but some services are shared between staging and production environments.
 
@@ -163,7 +163,7 @@ posthog = Posthog('KEY',
     evaluation_environments=['production', 'recommendations'])
 ```
 
-### 3. Rolling out mobile features without affecting web
+### Rolling out mobile features without affecting web
 
 **Scenario**: You're testing a new native camera feature that only makes sense on mobile apps, and you want to ensure web users never download this flag's code.
 
@@ -188,7 +188,7 @@ posthog.init('KEY', {
 // API server - Never sees this flag (blocked by runtime)
 ```
 
-### 4. A/B testing pricing only where it matters
+### A/B testing pricing only where it matters
 
 **Scenario**: You're testing new pricing tiers, but only want to evaluate this in your billing service and checkout UI, not in every service and client.
 
@@ -218,7 +218,7 @@ const posthog = new PostHog('KEY', {
 
 ## Best practices
 
-### 1. Use runtime for security boundaries
+### Use runtime for security boundaries
 
 Set runtime to `server` for flags that:
 
@@ -227,13 +227,13 @@ Set runtime to `server` for flags that:
 - Manage rate limits or quotas
 - Control infrastructure settings
 
-### 2. Use tags carefully for environment organization
+### Use tags carefully for environment organization
 
 - For strict environment isolation, use single tags like `["production"]` or `["staging"]`
 - For precise targeting, combine terms into single tags like `["production-web"]` or `["staging-api"]`
 - Remember: `["staging", "checkout"]` will match ANY staging OR ANY checkout
 
-### 3. Start simple, add complexity gradually
+### Start simple, add complexity gradually
 
 Begin with basic separations:
 
@@ -241,7 +241,7 @@ Begin with basic separations:
 2. Add high-level environment tags (`production`, `staging`)
 3. Gradually add more specific tags as needed
 
-### 4. Document your conventions
+### Document your conventions
 
 Create a tagging guide for your team:
 
@@ -252,7 +252,7 @@ Services: auth-service, payment-service, notification-service
 Teams: growth, platform, security
 ```
 
-### 5. Monitor the impact
+### Monitor the impact
 
 Track metrics after implementing both features:
 
@@ -286,24 +286,24 @@ Check this sequence:
 
 ## Common pitfalls to avoid
 
-### 1. Forgetting SDK configuration
+### Forgetting SDK configuration
 
 Setting evaluation tags in PostHog is only half the setup. Your SDKs must declare their environment:
 
 ❌ **Wrong**: Setting tags in PostHog but not configuring SDKs
 ✅ **Right**: Configure both PostHog flags AND SDK environments
 
-### 2. Misunderstanding tag logic
+### Misunderstanding tag logic
 
 ❌ **Wrong**: Using `["staging", "checkout"]` for staging-only checkout features
 ✅ **Right**: Using `["staging"]` only, or a single combined tag like `["staging-checkout"]`
 
-### 3. Over-tagging initially
+### Over-tagging initially
 
 ❌ **Wrong**: Starting with 20+ specific tags before understanding needs
 ✅ **Right**: Start with 3-5 high-level tags, expand as needed
 
-### 4. Missing backward compatibility
+### Missing backward compatibility
 
 Remember that missing `evaluation_environments` in SDK means all flags evaluate:
 
