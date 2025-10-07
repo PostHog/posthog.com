@@ -115,6 +115,13 @@ Clone the [PostHog repo](https://github.com/posthog/posthog). All future command
 git clone https://github.com/PostHog/posthog && cd posthog/
 ```
 
+> [!NOTE] 
+> The `feature-flags` container relies on the presence of the GeoLite cities
+> database in the `/share` directory. You can download a copy via [this github repo](https://github.com/P3TERX/GeoLite.mmdb) 
+> which makes frequent releases. You may also need to modify the file permissions of the database.
+>
+> `chmod 0755 ./share/GeoLite2-City.mmdb`
+
 ### Instant setup
 
 You can set your development environment up instantly using [Flox](https://flox.dev/).
