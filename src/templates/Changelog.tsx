@@ -21,15 +21,23 @@ type RoadmapNode = { id: number | string; date: string; title: string }
 
 interface RoadmapCardsProps {
     roadmaps: RoadmapNode[]
-    activeMonth: number
-    startYear: number
-    endYear: number
     onIndexChange: (activeMonth: number) => void
+    setWindowWidth: (width: number) => void
+    setPercentageOfScrollInView: (percentage: number) => void
 }
 
-const RoadmapCards = ({ roadmaps, activeMonth, startYear, endYear, onIndexChange }: RoadmapCardsProps) => {
+const RoadmapCards = ({
+    roadmaps,
+    onIndexChange,
+    setWindowWidth,
+    setPercentageOfScrollInView,
+    windowPercentageFromLeft,
+    setRoadmapsPercentageFromLeft,
+}: RoadmapCardsProps) => {
     const { appWindow } = useWindow()
-    const width = appWindow?.size.width || 0
+    const width = 350
+    const startYear = dayjs.utc(roadmaps[0].date).year()
+    const endYear = dayjs.utc(roadmaps[roadmaps.length - 1].date).year()
 
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -37,7 +45,7 @@ const RoadmapCards = ({ roadmaps, activeMonth, startYear, endYear, onIndexChange
         return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
     }
 
-    const months = useMemo(() => {
+    const weeks = useMemo(() => {
         const monthWeeks: RoadmapNode[][][] = []
         const now = dayjs.utc()
         const currentYear = now.year()
@@ -59,19 +67,20 @@ const RoadmapCards = ({ roadmaps, activeMonth, startYear, endYear, onIndexChange
                 monthWeeks.push(arr)
             }
         }
-        return monthWeeks
+        return monthWeeks.flat()
     }, [roadmaps, startYear, endYear])
 
     const virtualizer = useVirtualizer({
         horizontal: true,
-        count: months.length,
+        count: weeks.length,
         getScrollElement: () => containerRef.current,
         estimateSize: () => width,
         overscan: 5,
-        rangeExtractor: (range) => {
-            onIndexChange(Math.max(range.startIndex, range.endIndex) + 1)
-            return defaultRangeExtractor(range)
-        },
+        gap: 15,
+        // rangeExtractor: (range) => {
+        //     onIndexChange(Math.max(range.startIndex, range.endIndex) + 1)
+        //     return defaultRangeExtractor(range)
+        // },
     })
 
     useLayoutEffect(() => {
@@ -79,81 +88,87 @@ const RoadmapCards = ({ roadmaps, activeMonth, startYear, endYear, onIndexChange
     }, [width, virtualizer])
 
     useEffect(() => {
-        virtualizer.scrollToIndex(activeMonth - 1)
-    }, [activeMonth])
+        const percentageOfScrollInView = (appWindow?.size?.width / (containerRef.current?.scrollWidth || 0)) * 100
+        setPercentageOfScrollInView(percentageOfScrollInView)
+    }, [appWindow?.size?.width])
+
+    useEffect(() => {
+        containerRef?.current?.scrollTo({
+            left: (windowPercentageFromLeft / 100) * (containerRef.current?.scrollWidth || 0),
+        })
+    }, [windowPercentageFromLeft])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setRoadmapsPercentageFromLeft(
+                ((containerRef.current?.scrollLeft || 0) / (containerRef.current?.scrollWidth || 0)) * 100
+            )
+        }
+        containerRef.current?.addEventListener('scroll', handleScroll)
+        return () => {
+            containerRef.current?.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     return (
         <div
             ref={containerRef}
-            className="h-full snap-x"
+            className="size-full"
             style={{
-                width,
                 overflow: 'auto',
             }}
         >
             <div
                 style={{
                     width: `${virtualizer.getTotalSize()}px`,
-                    height: '100%',
-                    position: 'relative',
                 }}
+                className="h-full relative"
             >
-                {virtualizer.getVirtualItems().map((virtualColumn) => (
-                    <div
-                        key={virtualColumn.index}
-                        className="grid grid-cols-4 gap-4 px-2 snap-center"
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            height: '100%',
-                            width: `${virtualColumn.size}px`,
-                            transform: `translateX(${virtualColumn.start}px)`,
-                        }}
-                    >
-                        {months[virtualColumn.index].map((weeks, index) => {
-                            return (
-                                <div
-                                    key={`${virtualColumn.index}-${index}`}
-                                    className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary"
-                                >
-                                    <div className="mb-2">
-                                        <h4 className="m-0 text-lg">
-                                            {dayjs().month(virtualColumn.index).format('MMMM')} - Week {index + 1}
-                                        </h4>
-                                    </div>
-
-                                    <ul className="list-none m-0 space-y-2 p-0">
-                                        {weeks.map((roadmap) => (
-                                            <li key={roadmap.id} className="p-0 mt-0">
-                                                <button className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between">
-                                                    <div>
-                                                        <h5 className="m-0 underline text-base leading-tight mb-1">
-                                                            {roadmap.title}
-                                                        </h5>
-                                                        <p className="!m-0 text-sm">
-                                                            {roadmap.teams?.data?.[0]?.attributes?.name} Team
-                                                        </p>
-                                                    </div>
-                                                    <div className="shrink-0">
-                                                        <CloudinaryImage
-                                                            className="w-10"
-                                                            width={80}
-                                                            src={
-                                                                roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
-                                                                    ?.attributes?.url
-                                                            }
-                                                        />
-                                                    </div>
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )
-                        })}
-                    </div>
-                ))}
+                {virtualizer.getVirtualItems().map((virtualColumn) => {
+                    return (
+                        <div
+                            key={virtualColumn.index}
+                            className="flex justify-center"
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                height: '100%',
+                                width: `${virtualColumn.size}px`,
+                                transform: `translateX(${virtualColumn.start}px)`,
+                            }}
+                        >
+                            <ul className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary m-0 list-none">
+                                {weeks[virtualColumn.index].map((roadmap, index) => {
+                                    return (
+                                        <li key={roadmap.id} className="p-0 mt-0">
+                                            <button className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between">
+                                                <div>
+                                                    <h5 className="m-0 underline text-base leading-tight mb-1">
+                                                        {roadmap.title}
+                                                    </h5>
+                                                    <p className="!m-0 text-sm">
+                                                        {roadmap.teams?.data?.[0]?.attributes?.name} Team
+                                                    </p>
+                                                </div>
+                                                <div className="shrink-0">
+                                                    <CloudinaryImage
+                                                        className="w-10"
+                                                        width={80}
+                                                        src={
+                                                            roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
+                                                                ?.attributes?.url
+                                                        }
+                                                    />
+                                                </div>
+                                            </button>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )
@@ -166,6 +181,10 @@ export default function Changelog(): JSX.Element {
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
     const [windowDragging, setWindowDragging] = useState(false)
+    const [windowWidth, setWindowWidth] = useState(0)
+    const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
+    const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
+    const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -206,8 +225,6 @@ export default function Changelog(): JSX.Element {
         return count
     }, [])
 
-    const [activeMonth, setActiveMonth] = useState(totalMonths)
-
     const handleAddFeature = () => {
         addWindow(
             React.createElement(RoadmapWindow, {
@@ -219,13 +236,9 @@ export default function Changelog(): JSX.Element {
         )
     }
 
-    const handleMonthClick = (monthInView: number) => {
-        setActiveMonth(monthInView)
-    }
-
-    const handleDrag = (monthInView: number) => {
+    const handleDrag = (percentageFromLeft: number) => {
         setWindowDragging(true)
-        setActiveMonth(monthInView)
+        setWindowPercentageFromLeft(percentageFromLeft)
     }
     const handleDragEnd = () => {
         setWindowDragging(false)
@@ -293,10 +306,13 @@ export default function Changelog(): JSX.Element {
                     <div className="min-h-0 flex-grow pt-4">
                         <RoadmapCards
                             roadmaps={data.allRoadmap.nodes}
-                            activeMonth={activeMonth}
                             startYear={2020}
                             endYear={2025}
                             onIndexChange={handleIndexChange}
+                            setWindowWidth={setWindowWidth}
+                            setPercentageOfScrollInView={setPercentageOfScrollInView}
+                            windowPercentageFromLeft={windowPercentageFromLeft}
+                            setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
                         />
                     </div>
                     <div className="min-h-0 flex-shrink-0 mt-auto">
@@ -308,8 +324,9 @@ export default function Changelog(): JSX.Element {
                             onDragEnd={handleDragEnd}
                             windowX={windowX}
                             setWindowX={setWindowX}
-                            onMonthClick={handleMonthClick}
                             containerRef={timelineContainerRef}
+                            percentageOfScrollInView={percentageOfScrollInView}
+                            roadmapsPercentageFromLeft={roadmapsPercentageFromLeft}
                         />
                     </div>
                 </div>
