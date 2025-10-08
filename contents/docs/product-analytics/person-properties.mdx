@@ -143,6 +143,8 @@ The display name is the person property value shown in the PostHog UI to represe
 
 PostHog attempts to set the following properties when using the `posthog-js` library or JavaScript snippet. These properties are set when the person profile is created and updated via person events (e.g., `$set`, `$identify`).
 
+> **Note:** By default, only identified users have person profiles. See our [anonymous vs identified events documentation](/docs/data/anonymous-vs-identified-events) for more details.
+
 | Property | Property Name | Description | Example |
 | :--- | :--- | :--- | :--- |
 | `utm_campaign` | UTM Campaign | UTM campaign tag (last-touch). | feature launch, discount |
