@@ -23,25 +23,25 @@ When you configure evaluation tags on a feature flag:
 
 ## Why use evaluation tags?
 
-### 1. Environment isolation
+### Environment isolation
 Prevent feature flags from accidentally affecting the wrong environment. For example:
 - Marketing site flags won't affect your main application
 - Documentation site flags won't impact your mobile apps
 - Staging flags won't evaluate in production
 
-### 2. Cost optimization
+### Cost optimization
 Reduce unnecessary flag evaluations and associated costs by:
 - Only evaluating relevant flags per environment
 - Reducing network payload sizes
 - Minimizing server-side processing
 
-### 3. Better organization
+### Better organization
 Group and filter flags by their intended context in the feature flags UI, for example:
 - Product area (e.g., "checkout", "onboarding", "admin")
 - Platform (e.g., "web", "mobile", "api")
 - Team ownership (e.g., "growth", "platform", "security")
 
-### 4. Improved performance
+### Improved performance
 Smaller, more focused flag sets mean:
 - Faster evaluation times
 - Reduced memory usage in SDKs
@@ -148,17 +148,7 @@ You don't need to add evaluation tags to all flags at once. Start with new flags
 ### Monitor impact
 Track the reduction in flag evaluations and associated cost savings after implementing evaluation tags.
 
-## Differences from evaluation runtime
-
-While both features control where flags evaluate, they serve different purposes:
-
-| Feature | Evaluation Tags | Evaluation Runtime |
-|---------|----------------|-------------------|
-| **Purpose** | Fine-grained environment constraints | SDK type filtering |
-| **Control** | User-defined tags | Predefined options (client/server/all) |
-| **Granularity** | Unlimited custom contexts | Three fixed options |
-| **Configuration** | Per-organization tags | Per-flag setting |
-| **Use case** | Environment isolation, cost optimization | Client vs. server separation |
+> **Note:** Evaluation tags are different from [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime). Runtime filters by SDK type (client vs server), while evaluation tags provide fine-grained environment constraints that you define. For practical examples of using both together, see [How to use evaluation runtimes and tags together](/tutorials/evaluation-runtimes-and-tags).
 
 ## Common use cases
 
