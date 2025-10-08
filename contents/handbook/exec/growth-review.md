@@ -17,6 +17,7 @@ Sections:
 
 - Marketing/top of funnel TBD
 - Revenue and Finance
+  - <PrivateLink url="https://docs.google.com/spreadsheets/d/14GdsNILsIC5gtNa_vxlsxKPiOQSlVtg-V7vZ5zrwgFQ/edit?gid=0#gid=0">Sales growth metrics</PrivateLink>
   - <PrivateLink url="https://docs.google.com/spreadsheets/d/1SOXJos-eBLEmy9EKkFJkFdN78WOgEXpioNSbRU95IBk/edit?gid=1393550865#gid=1393550865">Monthly Investor Update</PrivateLink>, mostly to cover GTM, funnel etc. For now, use <PrivateLink url="https://docs.google.com/spreadsheets/d/1WLNNKODanF6ApVjl1zkv3BFM_2nogCFtNTB2aOCQzNM/edit?gid=2096742176#gid=2096742176">this quarterly one</PrivateLink> until the monthly one is done
   - <PrivateLink url="https://app.mosaic.tech/analysis/document/84787eb0-e738-49fe-b2cc-81e4618734e0">Mosaic dashboard</PrivateLink> for spending actuals, bad debt
 - Product
