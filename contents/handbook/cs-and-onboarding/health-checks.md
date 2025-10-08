@@ -84,3 +84,13 @@ ORDER BY groupidentify_event_count DESC
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
 We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
+
+## Are feature flags resilient?
+
+### Falling back to working code
+It is important that hitting the flags endpoint does not block an application from otherwise functioning correctly. If the flag fails to load or returns an unexpected value for any reason, such as `None`, `(empty string)`, or `false` you should [always fall back to working code.](/docs/feature-flags/best-practices#9-fallback-to-working-code)
+
+### Server side local evaluation
+Implementing [Server-side local evaluation](/docs/feature-flags/local-evaluation) will ensure that flags continue to return values regardless of the network status of the flags endpoint. By default, PostHog will attempt to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
+
+As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key) than other flag requests.
