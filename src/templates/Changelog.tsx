@@ -300,65 +300,67 @@ const RoadmapCards = ({
 
     return (
         <ScrollArea className="size-full [&>div>div]:size-full">
-            <div
-                ref={containerRef}
-                style={{
-                    width: `${virtualizer.getTotalSize()}px`,
-                }}
-                className="h-full relative px-4"
-            >
-                {virtualizer.getVirtualItems().map((virtualColumn) => {
-                    return (
-                        <div
-                            key={virtualColumn.index}
-                            className="flex justify-center"
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                height: '100%',
-                                width: `${virtualColumn.size}px`,
-                                transform: `translateX(${virtualColumn.start}px)`,
-                            }}
-                        >
-                            <ul className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary m-0 list-none">
-                                {weeks[virtualColumn.index].map((roadmap) => {
-                                    return (
-                                        <li key={roadmap.id} className="p-0 mt-0">
-                                            <button
-                                                className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between"
-                                                onClick={() => onRoadmapClick(roadmap)}
-                                            >
-                                                <div>
-                                                    <h5 className="m-0 underline text-base leading-tight mb-1">
-                                                        {roadmap.title}
-                                                    </h5>
-                                                    <p className="!m-0 text-sm">
-                                                        {roadmap.teams?.data?.[0]?.attributes?.name} Team
-                                                    </p>
-                                                </div>
-                                                {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data?.attributes
-                                                    ?.url && (
-                                                    <div className="shrink-0">
-                                                        <CloudinaryImage
-                                                            className="w-10"
-                                                            width={80}
-                                                            src={
-                                                                roadmap.teams.data[0].attributes.miniCrest.data
-                                                                    .attributes
-                                                                    .url as `https://res.cloudinary.com/${string}`
-                                                            }
-                                                        />
+            <div className="h-full px-4">
+                <div
+                    ref={containerRef}
+                    style={{
+                        width: `${virtualizer.getTotalSize()}px`,
+                    }}
+                    className="h-full relative"
+                >
+                    {virtualizer.getVirtualItems().map((virtualColumn) => {
+                        return (
+                            <div
+                                key={virtualColumn.index}
+                                className="flex justify-center"
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    height: '100%',
+                                    width: `${virtualColumn.size}px`,
+                                    transform: `translateX(${virtualColumn.start}px)`,
+                                }}
+                            >
+                                <ul className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary m-0 list-none">
+                                    {weeks[virtualColumn.index].map((roadmap) => {
+                                        return (
+                                            <li key={roadmap.id} className="p-0 mt-0">
+                                                <button
+                                                    className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between"
+                                                    onClick={() => onRoadmapClick(roadmap)}
+                                                >
+                                                    <div>
+                                                        <h5 className="m-0 underline text-base leading-tight mb-1">
+                                                            {roadmap.title}
+                                                        </h5>
+                                                        <p className="!m-0 text-sm">
+                                                            {roadmap.teams?.data?.[0]?.attributes?.name} Team
+                                                        </p>
                                                     </div>
-                                                )}
-                                            </button>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                    )
-                })}
+                                                    {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data?.attributes
+                                                        ?.url && (
+                                                        <div className="shrink-0">
+                                                            <CloudinaryImage
+                                                                className="w-10"
+                                                                width={80}
+                                                                src={
+                                                                    roadmap.teams.data[0].attributes.miniCrest.data
+                                                                        .attributes
+                                                                        .url as `https://res.cloudinary.com/${string}`
+                                                                }
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </button>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </ScrollArea>
     )
@@ -543,7 +545,7 @@ export default function Changelog(): JSX.Element {
                 }
             >
                 <div className="relative h-full flex">
-                    <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full px-4">
+                    <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
                         <div className="min-h-0 flex-grow pt-4">
                             <RoadmapCards
                                 roadmaps={data.allRoadmap.nodes}

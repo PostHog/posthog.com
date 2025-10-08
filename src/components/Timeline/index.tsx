@@ -171,70 +171,72 @@ export default function Timeline({
 
     return (
         <ScrollArea>
-            <div ref={containerRef} className="flex py-8 relative">
-                {(() => {
-                    const now = dayjs()
-                    const currentYear = now.year()
-                    const yearsToRender = Array.from(
-                        { length: Math.max(0, Math.min(endYear, currentYear) - startYear + 1) },
-                        (_, i) => startYear + i
-                    )
-                    return yearsToRender
-                })().map((year, yearIndex) => {
-                    const now = dayjs()
-                    const currentYear = now.year()
-                    const lastMonthForYear = year === currentYear ? now.month() + 1 : 12 // month is 1-12 here
-                    return Array.from({ length: lastMonthForYear }, (_, i) => i + 1).map((month) => {
-                        const isFirstMonth = month === 1
-                        return (
-                            <button
-                                className="relative flex flex-col gap-1 items-center py-1 px-2 border-r border-primary"
-                                key={`${year}-${month}`}
-                                id={`timeline-${month + yearIndex * 12}`}
-                                onPointerDown={handlePointerDown}
-                            >
-                                {isFirstMonth && (
-                                    <p className="text-sm m-0 font-semibold absolute -top-6 left-0">{year}</p>
-                                )}
-                                <div className="flex gap-1">
-                                    {Array.from({ length: 4 }, (_, i) => i + 1).map((day) => {
-                                        const count = data?.[year]?.[month]?.[day]?.count || 0
-                                        const color = getAcivityColor(count)
-                                        return (
-                                            <div
-                                                style={{ width: WEEK_BOX_SIZE, height: WEEK_BOX_SIZE }}
-                                                className={`rounded-[1px] ${color}`}
-                                                key={`${year}-${month}-${day}`}
-                                            />
-                                        )
-                                    })}
-                                </div>
-                                <p className="text-sm text-primary m-0 font-semibold absolute translate-y-1/2">
-                                    {dayjs()
-                                        .month(month - 1)
-                                        .format('MMM')}
-                                </p>
-                            </button>
+            <div className="px-4">
+                <div ref={containerRef} className="flex py-8 relative">
+                    {(() => {
+                        const now = dayjs()
+                        const currentYear = now.year()
+                        const yearsToRender = Array.from(
+                            { length: Math.max(0, Math.min(endYear, currentYear) - startYear + 1) },
+                            (_, i) => startYear + i
                         )
-                    })
-                })}
-                <motion.div
-                    ref={windowRef}
-                    onDrag={handleDrag}
-                    onDragEnd={handleDragEnd}
-                    animate={{ x: windowX, y: 0, top: 0 }}
-                    drag="x"
-                    dragDirectionLock
-                    dragMomentum={false}
-                    dragConstraints={containerRef}
-                    transformTemplate={({ x, scale }) => {
-                        const xValue = typeof x === 'number' ? `${x}px` : x || '0px'
-                        const scaleValue = typeof scale === 'number' ? scale : 1
-                        return `translate3d(${xValue}, 50%, 0) scale(${scaleValue})`
-                    }}
-                    style={{ width: windowWidth, y: 0, top: 0 }}
-                    className="absolute left-0 top-0 h-[48px] border-[1px] border-primary rounded !m-0"
-                />
+                        return yearsToRender
+                    })().map((year, yearIndex) => {
+                        const now = dayjs()
+                        const currentYear = now.year()
+                        const lastMonthForYear = year === currentYear ? now.month() + 1 : 12 // month is 1-12 here
+                        return Array.from({ length: lastMonthForYear }, (_, i) => i + 1).map((month) => {
+                            const isFirstMonth = month === 1
+                            return (
+                                <button
+                                    className="relative flex flex-col gap-1 items-center py-1 px-2 border-r border-primary"
+                                    key={`${year}-${month}`}
+                                    id={`timeline-${month + yearIndex * 12}`}
+                                    onPointerDown={handlePointerDown}
+                                >
+                                    {isFirstMonth && (
+                                        <p className="text-sm m-0 font-semibold absolute -top-6 left-0">{year}</p>
+                                    )}
+                                    <div className="flex gap-1">
+                                        {Array.from({ length: 4 }, (_, i) => i + 1).map((day) => {
+                                            const count = data?.[year]?.[month]?.[day]?.count || 0
+                                            const color = getAcivityColor(count)
+                                            return (
+                                                <div
+                                                    style={{ width: WEEK_BOX_SIZE, height: WEEK_BOX_SIZE }}
+                                                    className={`rounded-[1px] ${color}`}
+                                                    key={`${year}-${month}-${day}`}
+                                                />
+                                            )
+                                        })}
+                                    </div>
+                                    <p className="text-sm text-primary m-0 font-semibold absolute translate-y-1/2">
+                                        {dayjs()
+                                            .month(month - 1)
+                                            .format('MMM')}
+                                    </p>
+                                </button>
+                            )
+                        })
+                    })}
+                    <motion.div
+                        ref={windowRef}
+                        onDrag={handleDrag}
+                        onDragEnd={handleDragEnd}
+                        animate={{ x: windowX, y: 0, top: 0 }}
+                        drag="x"
+                        dragDirectionLock
+                        dragMomentum={false}
+                        dragConstraints={containerRef}
+                        transformTemplate={({ x, scale }) => {
+                            const xValue = typeof x === 'number' ? `${x}px` : x || '0px'
+                            const scaleValue = typeof scale === 'number' ? scale : 1
+                            return `translate3d(${xValue}, 50%, 0) scale(${scaleValue})`
+                        }}
+                        style={{ width: windowWidth, y: 0, top: 0 }}
+                        className="absolute left-0 top-0 h-[48px] border-[1px] border-primary rounded !m-0"
+                    />
+                </div>
             </div>
         </ScrollArea>
     )
