@@ -23,6 +23,5 @@ Sections:
 - Product
   - <PrivateLink url="https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit?gid=726133473#gid=726133473">Product growth reviews</PrivateLink>, to compare MoM growth for each revenue-generating product
 - Hiring/talent
-  - Metrics on # of hires made (link TBD)
-
+  - <PrivateLink url="https://app.ashbyhq.com/dashboards/saved/6611ab5e-61e2-4499-b98a-628999481b93">Metrics on # of hires made</PrivateLink>
 
