@@ -142,12 +142,6 @@ The system then filters which flags are returned based on their configured runti
 
 ### When to use each evaluation runtime
 
-<CalloutBox icon="IconInfo" title="Limited dependencies with different run times" type="fyi">
-
-Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
-
-</CalloutBox>
-
 1. **Use server-only evaluation** for:
    - Sensitive feature rollouts that shouldn't be exposed to clients
    - Backend system configurations
@@ -193,5 +187,11 @@ For more sophisticated feature rollouts, you can also create **feature flag depe
 - Setting up safety mechanisms where critical flags must be active first
 
 Learn more about [feature flag dependencies](/docs/feature-flags/dependencies).
+
+<CalloutBox icon="IconInfo" title="Limited dependencies with different run times" type="fyi">
+
+Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+
+</CalloutBox>
 
 > **Can I migrate my feature flags from another tool?** If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).
