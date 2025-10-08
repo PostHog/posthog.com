@@ -1606,7 +1606,8 @@
         },
         { "source": "/teams/growth", "destination": "/teams" },
         { "source": "/eu", "destination": "/pricing" },
-        { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" }
+        { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
+        { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" }
     ],
     "headers": [
         {
