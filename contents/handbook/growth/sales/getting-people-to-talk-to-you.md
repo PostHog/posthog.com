@@ -60,7 +60,7 @@ An example good email could look like:
 ### Asking for introductions
 
 If you feel like you have done a good job with a customer, and have genuinely been helpful, it's ok to ask for a favor back. You can be specific and ask for a direct introduction to a person you want to talk to, or try go a bit more broad and ask the person if they know anyone who would benefit from some help with PostHog. Either way, a warm introduction from a colleague is always going to be better than reaching out on your own.
-Something like "Hey Leon, our session last week seemed to have landed well. I'm glad you found it useful. I was wondering if you could help me out. Your team is growing really quickly, and there's a bunch of new folks starting to use PostHog. I imagine not all of them are super comfortable with the platform yet and could use a helpind hand. Could you introduce me to Simon, Charles and Scott?"
+Something like "Hey Leon, our session last week seemed to have landed well. I'm glad you found it useful. I was wondering if you could help me out. Your team is growing really quickly, and there's a bunch of new folks starting to use PostHog. I imagine not all of them are super comfortable with the platform yet and could use a helping hand. Could you introduce me to Simon, Charles and Scott?"
 ### Just been handed an account?
 
 Sometimes you'll get a customer in your book who was previously working with someone else on the PostHog team. A pre-existing relationship can help, but it's not guaranteed they'll want to talk to you. 
