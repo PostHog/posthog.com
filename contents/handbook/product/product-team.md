@@ -53,7 +53,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
--   [Messaging & CDP](/teams/messaging)
+-   [Workflows](/teams/workflows)
 -   [Batch Exports (light support)](/teams/batch-exports)
 -   Embedded Analytics
 -   Logs
