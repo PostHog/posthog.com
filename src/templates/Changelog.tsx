@@ -17,6 +17,8 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
+import { Select } from 'components/RadixUI/Select'
+import Filters from 'components/Changelog/Filters'
 
 dayjs.extend(utc)
 
@@ -239,13 +241,14 @@ const RoadmapCards = ({
             return viewport
         },
         estimateSize: () => width,
+
         overscan: 5,
         gap: 15,
     })
 
     useLayoutEffect(() => {
         virtualizer.measure()
-    }, [width, virtualizer])
+    }, [width])
 
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
@@ -254,7 +257,7 @@ const RoadmapCards = ({
         const percentageOfScrollInView = (containerWidth / viewport.scrollWidth) * 100
         setPercentageOfScrollInView(percentageOfScrollInView)
         virtualizer.measure()
-    }, [containerWidth, virtualizer])
+    }, [containerWidth])
 
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
@@ -308,7 +311,7 @@ const RoadmapCards = ({
         // Delay to ensure virtualizer has measured content
         const timer = setTimeout(scrollToLastWeek, 100)
         return () => clearTimeout(timer)
-    }, [weeks, width, virtualizer])
+    }, [weeks, width])
 
     return (
         <ScrollArea className="size-full [&>div>div]:size-full">
@@ -404,6 +407,7 @@ export default function Changelog(): JSX.Element {
     const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
     const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(null)
     const [containerWidth, setContainerWidth] = useState(0)
+    const [teamFilter, setTeamFilter] = useState('all')
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -481,6 +485,16 @@ export default function Changelog(): JSX.Element {
         // Drag ended - no action needed currently
     }
 
+    const filteredData = useMemo(
+        () =>
+            teamFilter === 'all'
+                ? data.allRoadmap.nodes
+                : data.allRoadmap.nodes.filter((roadmap: { teams: { data: { attributes: { name: string } }[] } }) =>
+                      roadmap.teams.data.some((team) => team.attributes.name === teamFilter)
+                  ),
+        [teamFilter, data.allRoadmap.nodes]
+    )
+
     const roadmapsGrouped = useMemo(() => {
         const grouped: {
             [year: number]: {
@@ -490,7 +504,7 @@ export default function Changelog(): JSX.Element {
             }
         } = {}
 
-        data.allRoadmap.nodes.forEach((roadmap: { date: string }) => {
+        filteredData.forEach((roadmap: { date: string }) => {
             const d = dayjs.utc(roadmap.date)
             const year = d.year()
             const month = d.month() + 1 // 1-12
@@ -505,7 +519,7 @@ export default function Changelog(): JSX.Element {
         })
 
         return grouped
-    }, [data.allRoadmap.nodes])
+    }, [filteredData])
 
     useEffect(() => {
         if (!resizeObserverRef.current) return
@@ -573,9 +587,10 @@ export default function Changelog(): JSX.Element {
             >
                 <div className="relative h-full flex">
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
-                        <div className="min-h-0 flex-grow pt-4">
+                        <Filters onTeamChange={setTeamFilter} teamFilterValue={teamFilter} />
+                        <div className="min-h-0 flex-grow pt-2">
                             <RoadmapCards
-                                roadmaps={data.allRoadmap.nodes}
+                                roadmaps={filteredData}
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}
                                 setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
