@@ -241,7 +241,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     page,
                     pageSize: 100,
                 },
-                populate: ['image', 'teams.miniCrest', 'topic', 'cta'],
+                populate: {
+                    image: true,
+                    teams: {
+                        populate: {
+                            miniCrest: true,
+                        },
+                    },
+                    topic: true,
+                    cta: true,
+                    profiles: {
+                        populate: {
+                            avatar: true,
+                            teams: {
+                                populate: {
+                                    miniCrest: true,
+                                },
+                            },
+                        },
+                    },
+                },
             },
             {
                 encodeValuesOnly: true,

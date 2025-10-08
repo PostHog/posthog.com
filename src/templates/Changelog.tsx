@@ -12,9 +12,11 @@ import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Timeline from 'components/Timeline'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { useWindow } from '../context/Window'
 import CloudinaryImage from 'components/CloudinaryImage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { AnimatePresence, motion, PanInfo } from 'framer-motion'
+import Markdown from 'components/Squeak/components/Markdown'
+import Link from 'components/Link'
 
 dayjs.extend(utc)
 
@@ -22,6 +24,38 @@ type RoadmapNode = {
     id: number | string
     date: string
     title: string
+    description?: string
+    profiles?: {
+        data?: Array<{
+            id?: number | string
+            attributes?: {
+                firstName?: string
+                lastName?: string
+                avatar?: {
+                    data?: {
+                        attributes?: {
+                            url?: string
+                        }
+                    }
+                }
+                color?: string
+                teams?: {
+                    data?: Array<{
+                        attributes?: {
+                            name?: string
+                            miniCrest?: {
+                                data?: {
+                                    attributes?: {
+                                        url?: string
+                                    }
+                                }
+                            }
+                        }
+                    }>
+                }
+            }
+        }>
+    }
     teams?: {
         data?: Array<{
             attributes?: {
@@ -38,11 +72,107 @@ type RoadmapNode = {
     }
 }
 
+const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
+    const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
+    const [width, setWidth] = useState(450)
+    const [isResizing, setIsResizing] = useState(false)
+
+    const handleDragResize = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        setIsResizing(true)
+        setWidth((prev) => Math.max(300, Math.min(800, prev - info.delta.x)))
+    }
+
+    return (
+        <motion.div
+            className="h-full border-l border-primary bg-white overflow-auto flex-shrink-0 relative"
+            initial={{ width: 0 }}
+            animate={{ width }}
+            exit={{ width: 0 }}
+            transition={{ duration: isResizing ? 0 : 0.3 }}
+        >
+            <div className="p-4">
+                <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
+                <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
+                {hasProfiles && (
+                    <div className="p-2 border border-primary rounded-md bg-accent mt-2">
+                        {roadmap.profiles?.data?.map((profile) => {
+                            const avatar = profile.attributes?.avatar?.data?.attributes?.url
+                            const name = [profile.attributes?.firstName, profile.attributes?.lastName]
+                                .filter(Boolean)
+                                .join(' ')
+                            const team = profile.attributes?.teams?.data?.[0]
+                            return (
+                                <Link
+                                    to={`/community/profiles/${profile.id}`}
+                                    state={{ newWindow: true }}
+                                    key={profile.id}
+                                    className="flex gap-2 items-center justify-between"
+                                >
+                                    <div className="flex gap-2 items-center">
+                                        {avatar && (
+                                            <div
+                                                className={`size-10 rounded-full overflow-hidden bg-${profile.attributes?.color}`}
+                                            >
+                                                <CloudinaryImage
+                                                    className={`w-full`}
+                                                    src={avatar as `https://res.cloudinary.com/${string}`}
+                                                    alt={profile.attributes?.firstName}
+                                                />
+                                            </div>
+                                        )}
+                                        <div>
+                                            <h5 className="m-0 leading-tight">{name}</h5>
+                                            <p className="!m-0 text-sm leading-tight">{team?.attributes?.name}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {team?.attributes?.miniCrest?.data?.attributes?.url && (
+                                            <CloudinaryImage
+                                                className="w-10"
+                                                src={
+                                                    team.attributes.miniCrest.data.attributes
+                                                        .url as `https://res.cloudinary.com/${string}`
+                                                }
+                                                alt={team.attributes.name}
+                                            />
+                                        )}
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                )}
+                {roadmap.description && (
+                    <div className="mt-2">
+                        <Markdown>{roadmap.description}</Markdown>
+                    </div>
+                )}
+            </div>
+
+            {/* Resize handle */}
+            <motion.div
+                className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none z-10"
+                drag="x"
+                dragMomentum={false}
+                dragConstraints={{ left: 0, right: 0 }}
+                onDrag={handleDragResize}
+                onDragEnd={() => setIsResizing(false)}
+            >
+                <div className="relative w-full h-full">
+                    <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-primary opacity-50" />
+                </div>
+            </motion.div>
+        </motion.div>
+    )
+}
+
 interface RoadmapCardsProps {
     roadmaps: RoadmapNode[]
     setPercentageOfScrollInView: (percentage: number) => void
     windowPercentageFromLeft: number
     setRoadmapsPercentageFromLeft: (percentage: number) => void
+    onRoadmapClick: (roadmap: RoadmapNode) => void
+    containerWidth: number
 }
 
 const RoadmapCards = ({
@@ -50,8 +180,9 @@ const RoadmapCards = ({
     setPercentageOfScrollInView,
     windowPercentageFromLeft,
     setRoadmapsPercentageFromLeft,
+    onRoadmapClick,
+    containerWidth,
 }: RoadmapCardsProps) => {
-    const { appWindow } = useWindow()
     const width = 350
     const startYear = dayjs.utc(roadmaps[0].date).year()
     const endYear = dayjs.utc(roadmaps[roadmaps.length - 1].date).year()
@@ -107,9 +238,11 @@ const RoadmapCards = ({
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
-        const percentageOfScrollInView = ((appWindow?.size?.width || 0) / viewport.scrollWidth) * 100
+
+        const percentageOfScrollInView = (containerWidth / viewport.scrollWidth) * 100
         setPercentageOfScrollInView(percentageOfScrollInView)
-    }, [appWindow?.size?.width])
+        virtualizer.measure()
+    }, [containerWidth, virtualizer])
 
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
@@ -160,7 +293,10 @@ const RoadmapCards = ({
                                 {weeks[virtualColumn.index].map((roadmap) => {
                                     return (
                                         <li key={roadmap.id} className="p-0 mt-0">
-                                            <button className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between">
+                                            <button
+                                                className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between"
+                                                onClick={() => onRoadmapClick(roadmap)}
+                                            >
                                                 <div>
                                                     <h5 className="m-0 underline text-base leading-tight mb-1">
                                                         {roadmap.title}
@@ -198,13 +334,15 @@ const RoadmapCards = ({
 
 export default function Changelog(): JSX.Element {
     const timelineContainerRef = useRef<HTMLDivElement>(null)
-    const containerRef = useRef<HTMLDivElement>(null)
+    const resizeObserverRef = useRef<HTMLDivElement>(null)
     const { addWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
     const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
     const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
     const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
+    const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(null)
+    const [containerWidth, setContainerWidth] = useState(0)
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -212,6 +350,38 @@ export default function Changelog(): JSX.Element {
                     id
                     date
                     title
+                    description
+                    profiles {
+                        data {
+                            id
+                            attributes {
+                                firstName
+                                lastName
+                                avatar {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                                color
+                                teams {
+                                    data {
+                                        attributes {
+                                            name
+                                            miniCrest {
+                                                data {
+                                                    attributes {
+                                                        url
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     teams {
                         data {
                             attributes {
@@ -276,6 +446,25 @@ export default function Changelog(): JSX.Element {
         return grouped
     }, [data.allRoadmap.nodes])
 
+    useEffect(() => {
+        if (!resizeObserverRef.current) return
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                setContainerWidth(entry.contentRect.width)
+            }
+        })
+
+        resizeObserver.observe(resizeObserverRef.current)
+
+        // Set initial width
+        setContainerWidth(resizeObserverRef.current.clientWidth)
+
+        return () => {
+            resizeObserver.disconnect()
+        }
+    }, [])
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -301,29 +490,34 @@ export default function Changelog(): JSX.Element {
                     ) : null
                 }
             >
-                <div className="flex flex-col h-full px-4" ref={containerRef}>
-                    <div className="min-h-0 flex-grow pt-4">
-                        <RoadmapCards
-                            roadmaps={data.allRoadmap.nodes}
-                            setPercentageOfScrollInView={setPercentageOfScrollInView}
-                            windowPercentageFromLeft={windowPercentageFromLeft}
-                            setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
-                        />
+                <div className="relative h-full flex">
+                    <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full px-4">
+                        <div className="min-h-0 flex-grow pt-4">
+                            <RoadmapCards
+                                roadmaps={data.allRoadmap.nodes}
+                                setPercentageOfScrollInView={setPercentageOfScrollInView}
+                                windowPercentageFromLeft={windowPercentageFromLeft}
+                                setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
+                                onRoadmapClick={setActiveRoadmap}
+                                containerWidth={containerWidth}
+                            />
+                        </div>
+                        <div className="min-h-0 flex-shrink-0 mt-auto">
+                            <Timeline
+                                startYear={2020}
+                                endYear={2025}
+                                data={roadmapsGrouped}
+                                onDrag={handleDrag}
+                                onDragEnd={handleDragEnd}
+                                windowX={windowX}
+                                setWindowX={setWindowX}
+                                containerRef={timelineContainerRef}
+                                percentageOfScrollInView={percentageOfScrollInView}
+                                roadmapsPercentageFromLeft={roadmapsPercentageFromLeft}
+                            />
+                        </div>
                     </div>
-                    <div className="min-h-0 flex-shrink-0 mt-auto">
-                        <Timeline
-                            startYear={2020}
-                            endYear={2025}
-                            data={roadmapsGrouped}
-                            onDrag={handleDrag}
-                            onDragEnd={handleDragEnd}
-                            windowX={windowX}
-                            setWindowX={setWindowX}
-                            containerRef={timelineContainerRef}
-                            percentageOfScrollInView={percentageOfScrollInView}
-                            roadmapsPercentageFromLeft={roadmapsPercentageFromLeft}
-                        />
-                    </div>
+                    <AnimatePresence>{activeRoadmap && <Roadmap roadmap={activeRoadmap} />}</AnimatePresence>
                 </div>
             </Editor>
         </>
