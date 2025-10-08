@@ -26,4 +26,4 @@ Any mocks in pages that appear to be faded out are considered _old_ and _out of 
 
 Even with this loosely-documented process, things move quickly and we don't always follow this process. If you're looking for something in particular, it's worth pinging in the <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-brand</PrivateLink> channel.
 
-We're also working on creating a singular place for [product screenshots[(https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&t=uOmubb0vnyeVpXn4-1)], which are exported in light and dark mode using [html.to.design](https://html.to.design).
+We're also working on creating a singular place for [product screenshots](https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&t=uOmubb0vnyeVpXn4-1), which are exported in light and dark mode using [html.to.design](https://html.to.design).
