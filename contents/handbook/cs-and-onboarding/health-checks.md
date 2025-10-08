@@ -84,3 +84,11 @@ ORDER BY groupidentify_event_count DESC
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
 We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/features#resetting-a-user).
+
+### Reverse Proxies 
+
+It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/docs/advanced/proxy/managed-reverse-proxy) or to configure their own for events to be sent from their own domain. 
+
+For either ours or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. You can review this with a customer as it currently is not set anywhere relative to their account. 
+
+
