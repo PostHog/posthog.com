@@ -6,7 +6,7 @@ showTitle: true
 
 ## Introduction
 
-With team members across several countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
+With team members across many countries, it's important for us to practice clear communication in ways that help us stay connected and work more efficiently.
 
 To accomplish this, we use **asynchronous communication as a starting point** and stay as open and transparent as we can by communicating on GitHub through public issues and pull requests, as well as in our PostHog User and internal Slack.
 
@@ -29,42 +29,44 @@ To accomplish this, we use **asynchronous communication as a starting point** an
 
 We make things public by default because [transparency](/handbook/company/culture#transparency) is core to our culture. The kinds of information we share falls into one of three buckets:
 
-- _Public_ - most things, including our product, roadmap, handbook and strategy.
-- _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
-- _Private internally_ - personal team information, i.e. compensation, disciplinary issues.
+-   _Public_ - most things, including our product, roadmap, handbook and strategy.
+-   _Shared internally_ - almost everything else, such as financial performance, security, fundraising and recruitment.
+-   _Private internally_ - personal team information, i.e. compensation, disciplinary issues.
 
 Information that is not publicly shared is in areas with complex signals that can impact our ability to sell, raise money or are inappropriate to share more widely for personal privacy reasons.
-
 
 We have two repos to centralize and document private internal communication. These are the source of truth for any internal information, and anything that should be written down (as established in these guidelines) should live in these repos or (better) in this Handbook, not on Slack. This will make it easier when having to search for older stuff, sharing context between public and internal repos, and for newcomers to have all information they might need readily available.
 
 ### Company Internal
+
 Repository can be found in https://github.com/PostHog/company-internal
 
 Documents any company-wide information that can't be shared publicly within People, Ops, Legal, Finance or Strategy.
 
 **Examples of information that should go here:**
-- ✅ Hiring plans and discussions _before_ we post a job ad
-- ✅ People discussions, e.g. benefits, pensions, share options, org structure
-- ✅ Onboarding/offboarding checklists
-- ✅ Non-engineering team sprint planning (as these will often be a mix of public and private tasks and we don't want to restrict people)
-- ✅ Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
-- ✅ [Sometimes] Discussions about replacing or adding tools, services, and systems that we use
+
+-   ✅ Hiring plans and discussions _before_ we post a job ad
+-   ✅ People discussions, e.g. benefits, pensions, share options, org structure
+-   ✅ Onboarding/offboarding checklists
+-   ✅ Non-engineering team sprint planning (as these will often be a mix of public and private tasks and we don't want to restrict people)
+-   ✅ Sensitive discussions about future positioning, customer strategy, fundraising, board meetings
+-   ✅ [Sometimes] Discussions about replacing or adding tools, services, and systems that we use
 
 For company-related issues that _can_ be discussed publicly, these should go in the `meta` repo which can be found in https://github.com/PostHog/meta/
 
 **Examples of information that should NOT go here:**
-- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...). Things like:
-  - Some marketing campaigns where it doesn't matter if our competitors see it; retros after campaigns
-  - Offsite planning and retros
-  - Discussions about future positioning and strategy that will end up in the Handbook anyway
-  - Discussions about tools where there isn't a security risk and it interfaces with our customers (e.g. marketing, customer support)
-  - Generally anything that will end up in the Handbook anyway, including culture and values discussions
-- ❌ Bug reports, security issues, or any other engineering-related discussions. These should go in the [Product Internal](#product-internal) repo.
-- ❌ Billing issues, product or growth discussions. These should go in the [Product Internal](#product-internal) repo.
 
+-   ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...). Things like:
+    -   Some marketing campaigns where it doesn't matter if our competitors see it; retros after campaigns
+    -   Offsite planning and retros
+    -   Discussions about future positioning and strategy that will end up in the Handbook anyway
+    -   Discussions about tools where there isn't a security risk and it interfaces with our customers (e.g. marketing, customer support)
+    -   Generally anything that will end up in the Handbook anyway, including culture and values discussions
+-   ❌ Bug reports, security issues, or any other engineering-related discussions. These should go in the [Product Internal](#product-internal) repo.
+-   ❌ Billing issues, product or growth discussions. These should go in the [Product Internal](#product-internal) repo.
 
 ### Product Internal
+
 Repository can be found in https://github.com/PostHog/product-internal
 
 Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
@@ -75,22 +77,23 @@ This repository was introduced to aid maintenance and day-to-day usage of intern
 Please be sure to read the README of the repo for guidelines on how to file specific issues.
 </blockquote>
 
-
 **Examples of information that should go here:**
-- ✅ Vulnerabilities (security bugs) reports
-- ✅ Bug reports where most of the context of the report depends on customer's PII. *Some bug reports require screenshots, recordings, or some other information that contains PII and as such can't be public.*
-- ✅ Post-mortems on outages, or other issues affecting a large portion of customers. The results of these should usually be made public though.
-- ✅ Documentation of internal infrastructure, where if it was public knowledge could provide valuable information to an attacker.
-- ✅ Experiment (A/B testing) results.
-- ✅ Product or growth strategy discussions (unless they should be public).
-- ✅ Interview exercises or questions for engineering, product, growth or design tasks that should not be public.
-- ✅ Documentation of engineering or product requirements documents that can't be public (these should be quite rare).
-- ✅ Billing or pricing-related discussions that is not yet public.
+
+-   ✅ Vulnerabilities (security bugs) reports
+-   ✅ Bug reports where most of the context of the report depends on customer's PII. _Some bug reports require screenshots, recordings, or some other information that contains PII and as such can't be public._
+-   ✅ Post-mortems on outages, or other issues affecting a large portion of customers. The results of these should usually be made public though.
+-   ✅ Documentation of internal infrastructure, where if it was public knowledge could provide valuable information to an attacker.
+-   ✅ Experiment (A/B testing) results.
+-   ✅ Product or growth strategy discussions (unless they should be public).
+-   ✅ Interview exercises or questions for engineering, product, growth or design tasks that should not be public.
+-   ✅ Documentation of engineering or product requirements documents that can't be public (these should be quite rare).
+-   ✅ Billing or pricing-related discussions that is not yet public.
 
 **Examples of information that should NOT go here:**
-- ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...).
-- ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo if private or `meta` if public. 
-- ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
+
+-   ❌ Any information that should be public (see guidelines on [public by default](/handbook/company/communication#public-by-default)), this should go in the public repositories (`posthog`, `posthog.com`, `meta`, ...).
+-   ❌ Any internal information that does not fall under the scope of purely engineering, product, growth or design. This should go in the [Company Internal](#company-internal) repo if private or `meta` if public.
+-   ❌ Bug reports that don't contain any PII or where the PII only contains supporting information. In this case, file the bug under the relevant public repo and add a protected link to the additional information (e.g. a private Slack link, or a link to this repo).
 
 ## Written communication
 
@@ -119,11 +122,12 @@ However, it is still important to maintain focus when opening issues by defining
 Keeping track of everything that's happening in GitHub can be daunting, but it's important to make sure your team receives reviews and feedback on a timely manner.
 
 To keep on top of this, we suggest going through issues where you've been mentioned regularly. Some tricks which can help are:
-- (Highly recommended) [Turn on Github slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
-  - This will send you a slack notification when someone mentions you in a PR or issue. You can also get periodic reminders for PRs that you've been requested to review.
-- (Highly recommended) Join the `#github-rfcs` channel on Slack. This is where we post all the RFCs.
-- [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and use filters to focus on your teams activity.
-- [Using the GitHub notifier extension.](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
+
+-   (Highly recommended) [Turn on Github slack notifications](https://rasim.pro/blog/personal-slack-github-notifications-for-pull-requests-reviewers-how-to-set-up/)
+    -   This will send you a slack notification when someone mentions you in a PR or issue. You can also get periodic reminders for PRs that you've been requested to review.
+-   (Highly recommended) Join the `#github-rfcs` channel on Slack. This is where we post all the RFCs.
+-   [Turning on GitHub email notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/configuring-notifications) and use filters to focus on your teams activity.
+-   [Using the GitHub notifier extension.](https://chrome.google.com/webstore/detail/notifier-for-github/lmjdlojahmbbcodnpecnjnmlddbkjhnn?hl=en)
 
 #### Tip for easy searching through everything
 
@@ -160,13 +164,13 @@ Slack is used differently in different organizations. Here are some guidelines f
 
 Channel naming conventions so people don't get confused:
 
-- `#team-xxxxx` - small team channels, only as listed on the [teams](/teams) page
-- `#project-xxxxxx` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
-- `#posthog-xxxxx` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#xxxxxx-posthog` instead)
-- `#alerts-xxxxx` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
-- `#support-xxxxx` - similarly, useful to feed support requests in if helpful without adding clutter
+-   `#team-xxxxx` - small team channels, only as listed on the [teams](/teams) page
+-   `#project-xxxxxx` - one-off initiatives that may involve people across multiple teams, but don't fit neatly into a team channel
+-   `#posthog-xxxxx` - shared channels with _customers_ only (if you want to create a shared channel with an external partner, use `#xxxxxx-posthog` instead)
+-   `#alerts-xxxxx` - useful to create a separate channel for your team to send alerts into, so your main channel doesn't get noisy
+-   `#support-xxxxx` - similarly, useful to feed support requests in if helpful without adding clutter
 
-On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there. 
+On the very rare occasions you need to create a private channel for some reason - most commonly hiring-related - then it's probably worth sticking `#private-xxxxx` in front so people don't accidentally add external parties who shouldn't be in there.
 
 ### Google Docs and Slides
 
@@ -184,9 +188,9 @@ James (H) and Cory are admins on the Pitch account. Because Pitch charges per se
 
 1. Internal email should be avoided in nearly all cases. Use GitHub for feature / product discussion, use Slack if you cannot use GitHub, and use Google Docs for anything else.
 1. The only uses we have for internal email are:
-   - Obtaining approvals for legal things
-   - Sending some types of more official company documents (e.g. job offers, payroll forms)
-   - Communicating with external partners
+    - Obtaining approvals for legal things
+    - Sending some types of more official company documents (e.g. job offers, payroll forms)
+    - Communicating with external partners
 
 ### Writing style
 
@@ -200,9 +204,10 @@ James (H) and Cory are admins on the Pitch account. Because Pitch charges per se
 
 ## Requests for comment (RFCs)
 
-We use RFCs to communicate and gather feedback on a decision. RFCs are useful because they help us stay transparent, and the process of writing them forces you to clearly articulate your thoughts in a structured way. 
+We use RFCs to communicate and gather feedback on a decision. RFCs are useful because they help us stay transparent, and the process of writing them forces you to clearly articulate your thoughts in a structured way.
 
 Here are the steps for an RFC:
+
 1. Identify a problem and a decision to be made
 2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/product-internal/tree/main/requests-for-comments/templates).
     - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
@@ -216,35 +221,36 @@ Here are the steps for an RFC:
 ### When does it work best to write an RFC?
 
 Writing an RFC may be helpful when any of the following is true:
-- You want to clarify something for yourself or it affects just one team
-- It is a relatively non controversial change/idea that doesn't require much extra context. In other words, it doesn't create problems for another team.
-- It will be a large amount of work (more than 2-3 weeks of people's time)
-- It's [introducing a new technology](/newsletter/choosing-technologies)
-- It's a major new feature, change to the product, or change to the company
-- It will have a major customer impact
+
+-   You want to clarify something for yourself or it affects just one team
+-   It is a relatively non controversial change/idea that doesn't require much extra context. In other words, it doesn't create problems for another team.
+-   It will be a large amount of work (more than 2-3 weeks of people's time)
+-   It's [introducing a new technology](/newsletter/choosing-technologies)
+-   It's a major new feature, change to the product, or change to the company
+-   It will have a major customer impact
 
 ### When does a meeting / another approach work better than an RFC?
 
 An RFC is likely to be unhelpful as a first step in other circumstances. Specifically, when you want to ship or suggest a change to something that significantly affects teams outside your own. In this instance, we've seen that RFCS can lead to 10 to 25+ comments, which feels antagonistic (teams having to explain all the context around their strategy down to why this decision is something they perhaps disagree with), and creates a lot of work. A single call in this instance is likely much faster than lots of frustrated people in 1/1s talking about it _and_ the energy/time needed to respond to everything in a long thread.
 
-*However* please write notes on such a call - to ensure everyone _is_ on the same page. This could then be copy pasted into an RFC for transparency's sake / future reference.
+_However_ please write notes on such a call - to ensure everyone _is_ on the same page. This could then be copy pasted into an RFC for transparency's sake / future reference.
 
 ### Top tips for RFCs
 
-- RFCs can be very short and are often better than making decisions by Slack threads.
-- You don't need to have a long decision-making time - 2 days is fine for smaller changes if you receive the relevant input and are confident in your decision.
-- You don't need to reach full agreement to decide, particularly if the decision is reversible. Instead, it should be when the decision maker has considered the feedback and is confident in their decision.
-- Double-check whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
-- As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
-- If you're introducing new technologies, you'll likely want to tag someone from Team Infrastructure.
-- You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
-- Make it easy for others to give feedback, e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
-- Write your RFC with the busy reader in mind. For example, if there is a lot of technical context to give, write a summary that people can read through quickly to get a high level overview of the proposed changes, then go deeper below, or in appendices.
-- It's fine to nudge people on slack if they are being slow to give feedback
+-   RFCs can be very short and are often better than making decisions by Slack threads.
+-   You don't need to have a long decision-making time - 2 days is fine for smaller changes if you receive the relevant input and are confident in your decision.
+-   You don't need to reach full agreement to decide, particularly if the decision is reversible. Instead, it should be when the decision maker has considered the feedback and is confident in their decision.
+-   Double-check whether your input will be useful or add noise. Or wait for the people closest to first discuss the problem. At PostHog, we don't make decisions by committee - instead we have great people divide and conquer. This particularly applies to the controversial areas such as pricing.
+-   As the decision maker, you should use your judgment as to which comments you want to respond fully to. It's fine to politely decline a question if you think it's not required for the decision being made.
+-   If you're introducing new technologies, you'll likely want to tag someone from Team Infrastructure.
+-   You don't need to wait until the date you've said to make the decision if you've already consulted with the key people.
+-   Make it easy for others to give feedback, e.g. if you only need input from someone on the Infra team about adding websockets then say that, rather than leaving it for them to work out
+-   Write your RFC with the busy reader in mind. For example, if there is a lot of technical context to give, write a summary that people can read through quickly to get a high level overview of the proposed changes, then go deeper below, or in appendices.
+-   It's fine to nudge people on slack if they are being slow to give feedback
 
 ## Internal meetings
 
-PostHog uses [Google Meet](https://meet.google.com/) for video communications. For large meetings, use `CMD + minus key` to zoom out and see everyone - you'll usually need to do this in All Hands. 
+PostHog uses [Google Meet](https://meet.google.com/) for video communications. For large meetings, use `CMD + minus key` to zoom out and see everyone - you'll usually need to do this in All Hands.
 
 Use video calls if you find yourself going back and forth in an issue/via email or over chat. Sometimes it is still more valuable to have a 40+ message conversation via chat as it improves transparency, is easy to refer back to, and is friendlier to newcomers getting up to speed.
 
