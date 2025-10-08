@@ -414,7 +414,7 @@ export const dataPipelines = {
 
 export const handbookSidebar = [
     {
-        name: 'Handbook',
+        name: 'The Book of PostHog',
     },
     {
         name: 'Table of contents',
@@ -489,7 +489,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Working at PostHog',
+        name: 'Working here',
     },
     {
         name: 'How we work',
@@ -588,30 +588,24 @@ export const handbookSidebar = [
                 url: '/handbook/strategy/brand',
             },
             {
-                name: 'Design',
-                url: '',
-                children: [
-                    {
-                        name: 'Art requests',
-                        url: '/handbook/brand/art-requests',
-                    },
-                    {
-                        name: 'Logos, brand, and hedgehogs',
-                        url: '/handbook/company/brand-assets',
-                    },
-                    {
-                        name: 'Our design philosophy',
-                        url: '/handbook/brand/philosophy',
-                    },
-                    {
-                        name: 'Product design for engineers',
-                        url: '/handbook/engineering/product-design',
-                    },
-                    {
-                        name: 'Product design process',
-                        url: '/handbook/brand/process',
-                    },
-                ],
+                name: 'Art requests',
+                url: '/handbook/brand/art-requests',
+            },
+            {
+                name: 'Logos, brand, and hedgehogs',
+                url: '/handbook/company/brand-assets',
+            },
+            {
+                name: 'Our design philosophy',
+                url: '/handbook/brand/philosophy',
+            },
+            {
+                name: 'Product design for engineers',
+                url: '/handbook/engineering/product-design',
+            },
+            {
+                name: 'Product design process',
+                url: '/handbook/brand/process',
             },
         ],
     },
