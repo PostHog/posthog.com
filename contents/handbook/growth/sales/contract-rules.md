@@ -91,7 +91,7 @@ As an exception, a customer can choose to contract for a year but pay quarterly 
 
 ### Credit for case studies
 
-We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them.  We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
+We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them. We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
 
 ### Self-serve discounts
 
