@@ -193,8 +193,13 @@ const RoadmapCards = ({
         return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
     }
 
+    const toRomanNumeral = (num: number): string => {
+        const romanNumerals: Record<number, string> = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV' }
+        return romanNumerals[num] || num.toString()
+    }
+
     const weeks = useMemo(() => {
-        const monthWeeks: RoadmapNode[][][] = []
+        const monthWeeks: Array<{ roadmaps: RoadmapNode[]; year: number; month: number; week: number }> = []
         const now = dayjs.utc()
         const currentYear = now.year()
         const currentMonthIndex = now.month() // 0-based
@@ -211,11 +216,18 @@ const RoadmapCards = ({
                     if (!buckets[week]) buckets[week] = []
                     buckets[week].push(item)
                 })
-                const arr: RoadmapNode[][] = [buckets[1] || [], buckets[2] || [], buckets[3] || [], buckets[4] || []]
-                monthWeeks.push(arr)
+                // Create week entries with metadata
+                for (let w = 1; w <= 4; w++) {
+                    monthWeeks.push({
+                        roadmaps: buckets[w] || [],
+                        year: y,
+                        month: m, // 0-based
+                        week: w,
+                    })
+                }
             }
         }
-        return monthWeeks.flat()
+        return monthWeeks
     }, [roadmaps, startYear, endYear])
 
     const virtualizer = useVirtualizer({
@@ -273,7 +285,7 @@ const RoadmapCards = ({
 
         // Find the last week that has roadmap items
         const lastNonEmptyWeekIndex = weeks.reduce((lastIndex, week, index) => {
-            return week.length > 0 ? index : lastIndex
+            return week.roadmaps.length > 0 ? index : lastIndex
         }, -1)
 
         if (lastNonEmptyWeekIndex === -1) return
@@ -309,6 +321,11 @@ const RoadmapCards = ({
                     className="h-full relative"
                 >
                     {virtualizer.getVirtualItems().map((virtualColumn) => {
+                        const weekData = weeks[virtualColumn.index]
+                        const monthName = dayjs.utc().year(weekData.year).month(weekData.month).format('MMMM')
+                        const weekRoman = toRomanNumeral(weekData.week)
+                        const count = weekData.roadmaps.length
+
                         return (
                             <div
                                 key={virtualColumn.index}
@@ -322,41 +339,51 @@ const RoadmapCards = ({
                                     transform: `translateX(${virtualColumn.start}px)`,
                                 }}
                             >
-                                <ul className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary m-0 list-none">
-                                    {weeks[virtualColumn.index].map((roadmap) => {
-                                        return (
-                                            <li key={roadmap.id} className="p-0 mt-0">
-                                                <button
-                                                    className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between"
-                                                    onClick={() => onRoadmapClick(roadmap)}
-                                                >
-                                                    <div>
-                                                        <h5 className="m-0 underline text-base leading-tight mb-1">
-                                                            {roadmap.title}
-                                                        </h5>
-                                                        <p className="!m-0 text-sm">
-                                                            {roadmap.teams?.data?.[0]?.attributes?.name} Team
-                                                        </p>
-                                                    </div>
-                                                    {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data?.attributes
-                                                        ?.url && (
-                                                        <div className="shrink-0">
-                                                            <CloudinaryImage
-                                                                className="w-10"
-                                                                width={80}
-                                                                src={
-                                                                    roadmap.teams.data[0].attributes.miniCrest.data
-                                                                        .attributes
-                                                                        .url as `https://res.cloudinary.com/${string}`
-                                                                }
-                                                            />
+                                <div className="w-full h-full flex flex-col bg-white rounded border border-primary overflow-hidden">
+                                    <div className="flex items-center justify-between p-4 border-b border-primary">
+                                        <h4 className="m-0 text-lg font-semibold">
+                                            {monthName} {weekData.year} - Week {weekRoman}
+                                        </h4>
+                                        <div className="size-7 flex items-center justify-center bg-accent rounded-full text-sm font-semibold">
+                                            {count}
+                                        </div>
+                                    </div>
+                                    <ul className="w-full flex-1 overflow-y-auto p-4 m-0 list-none">
+                                        {weekData.roadmaps.map((roadmap) => {
+                                            return (
+                                                <li key={roadmap.id} className="p-0 mt-0">
+                                                    <button
+                                                        className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between"
+                                                        onClick={() => onRoadmapClick(roadmap)}
+                                                    >
+                                                        <div>
+                                                            <h5 className="m-0 underline text-base leading-tight mb-1">
+                                                                {roadmap.title}
+                                                            </h5>
+                                                            <p className="!m-0 text-sm">
+                                                                {roadmap.teams?.data?.[0]?.attributes?.name} Team
+                                                            </p>
                                                         </div>
-                                                    )}
-                                                </button>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
+                                                        {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
+                                                            ?.attributes?.url && (
+                                                            <div className="shrink-0">
+                                                                <CloudinaryImage
+                                                                    className="w-10"
+                                                                    width={80}
+                                                                    src={
+                                                                        roadmap.teams.data[0].attributes.miniCrest.data
+                                                                            .attributes
+                                                                            .url as `https://res.cloudinary.com/${string}`
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </button>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
                             </div>
                         )
                     })}
