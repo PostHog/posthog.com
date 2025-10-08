@@ -59,7 +59,7 @@ An example good email could look like:
 
 ### Asking for introductions:
 
-If you feel like you have done a goob job with a customer, and have genuinely been helpful, it's ok to ask for a favour back. Ultimately, helping out more people within an account, helps them do their job better. PostHog can be intimidating for less technical users, and we want to reach out to those people and help them get up to speed with the platform. The easiest way to do this, is to ask for introductions directly. 
+If you feel like you have done a good job with a customer, and have genuinely been helpful, it's ok to ask for a favour back.
 You can be specific and ask for a direct introduction to a person you want to talk to, or try go a bit more broad and ask the person if they know anyone who would benefit from some help with PostHog. Either way, a warm introduction from a colleague is always going to be better than reaching out on your own.
 
 ### Just been handed an account?
