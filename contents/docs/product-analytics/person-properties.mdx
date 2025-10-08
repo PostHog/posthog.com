@@ -141,7 +141,7 @@ The display name is the person property value shown in the PostHog UI to represe
 
 ## Default person properties
 
-PostHog attempts to set the following properties for all users when using the `posthog-js` library or JavaScript snippet:
+PostHog sets the following properties when using the `posthog-js` library or JavaScript snippet. These properties are set when the person profile is created or updated via person events (e.g., `$set`, `$identify`).
 
 | Property | Property Name | Description | Example |
 | :--- | :--- | :--- | :--- |
