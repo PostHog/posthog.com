@@ -115,7 +115,7 @@ const RoadmapCards = ({ roadmaps, activeMonth, startYear, endYear, onIndexChange
                             return (
                                 <div
                                     key={`${virtualColumn.index}-${index}`}
-                                    className="w-full p-4 bg-white rounded border border-primary"
+                                    className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary"
                                 >
                                     <div className="mb-2">
                                         <h4 className="m-0 text-lg">
