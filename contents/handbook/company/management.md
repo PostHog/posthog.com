@@ -82,7 +82,7 @@ We care about having a consistent, transparent, and fair way to handle recurring
 -  The team lead will be asked to consider the following questions that are aligned with our values:
       i. Is the person a driver or a passenger?
       ii. Does this person get things done proactively?
-      iii. Are they optimistic by default
+      iii. Are they optimistic by default?
 - We expect you to actively raise performance issues with your exec.
   - Once you do, your exec will take the lead on the process. You’ll likely deliver feedback directly to the employee, but your exec will support and coach you through those conversations.
   - Your exec will look after the process and make any decisions required.
