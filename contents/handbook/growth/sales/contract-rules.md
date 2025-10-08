@@ -91,11 +91,7 @@ As an exception, a customer can choose to contract for a year but pay quarterly 
 
 ### Credit for case studies
 
-We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional year 1 credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us, so don't assume you can just offer this.
-
-This should be added as a special term into the order form as follows:
-
-> PostHog will add an additional $XXXXX of credit to Customer account upon successful publishing of a case study on Customer's usage of PostHog on PostHog.com.
+We don't offer additional discounts in exchange for a case study, as paying for case studies can devalue them.  We should be working to get our customers to a state of happiness such that they are willing to tell everyone how great PostHog is without needing to pay for it.
 
 ### Self-serve discounts
 
