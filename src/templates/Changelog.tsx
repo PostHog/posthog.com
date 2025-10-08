@@ -266,6 +266,38 @@ const RoadmapCards = ({
         }
     }, [])
 
+    // Scroll to latest week with roadmaps on mount
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
+        // Find the last week that has roadmap items
+        const lastNonEmptyWeekIndex = weeks.reduce((lastIndex, week, index) => {
+            return week.length > 0 ? index : lastIndex
+        }, -1)
+
+        if (lastNonEmptyWeekIndex === -1) return
+
+        // Wait for content to be rendered and measured
+        const scrollToLastWeek = () => {
+            const virtualItems = virtualizer.getVirtualItems()
+            if (virtualItems.length === 0) return
+
+            // Calculate scroll position for the last week with content
+            // We want to show the last few weeks, not scroll all the way to the absolute end
+            const targetIndex = Math.max(0, lastNonEmptyWeekIndex)
+            const scrollLeft = targetIndex * (width + 15) // width + gap
+
+            viewport.scrollTo({
+                left: scrollLeft,
+            })
+        }
+
+        // Delay to ensure virtualizer has measured content
+        const timer = setTimeout(scrollToLastWeek, 100)
+        return () => clearTimeout(timer)
+    }, [weeks, width, virtualizer])
+
     return (
         <ScrollArea className="size-full [&>div>div]:size-full">
             <div
@@ -463,6 +495,26 @@ export default function Changelog(): JSX.Element {
         return () => {
             resizeObserver.disconnect()
         }
+    }, [])
+
+    // Scroll timeline to the end on mount
+    useEffect(() => {
+        if (!timelineContainerRef.current) return
+
+        const timelineViewport = timelineContainerRef.current.closest(
+            '[data-radix-scroll-area-viewport]'
+        ) as HTMLElement | null
+        if (!timelineViewport) return
+
+        const scrollToEnd = () => {
+            timelineViewport.scrollTo({
+                left: timelineViewport.scrollWidth,
+            })
+        }
+
+        // Delay to ensure timeline is rendered
+        const timer = setTimeout(scrollToEnd, 100)
+        return () => clearTimeout(timer)
     }, [])
 
     return (
