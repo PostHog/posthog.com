@@ -192,7 +192,6 @@ const posthog = new PostHog('KEY', {
 })
 ```
 
-
 ## Summary
 
 - **Runtime** filters by SDK type (security boundary)
@@ -200,5 +199,6 @@ const posthog = new PostHog('KEY', {
 - They work sequentially: runtime blocks first, then tags filter
 
 For implementation details:
+
 - [Evaluation tags documentation](/docs/feature-flags/evaluation-tags)
 - [Evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime)
