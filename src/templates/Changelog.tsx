@@ -14,6 +14,7 @@ import Timeline from 'components/Timeline'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { useWindow } from '../context/Window'
 import CloudinaryImage from 'components/CloudinaryImage'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 dayjs.extend(utc)
 
@@ -89,7 +90,11 @@ const RoadmapCards = ({
     const virtualizer = useVirtualizer({
         horizontal: true,
         count: weeks.length,
-        getScrollElement: () => containerRef.current,
+        getScrollElement: () => {
+            // Get the ScrollArea viewport element
+            const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+            return viewport
+        },
         estimateSize: () => width,
         overscan: 5,
         gap: 15,
@@ -100,42 +105,42 @@ const RoadmapCards = ({
     }, [width, virtualizer])
 
     useEffect(() => {
-        const percentageOfScrollInView =
-            ((appWindow?.size?.width || 0) / (containerRef.current?.scrollWidth || 0)) * 100
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+        const percentageOfScrollInView = ((appWindow?.size?.width || 0) / viewport.scrollWidth) * 100
         setPercentageOfScrollInView(percentageOfScrollInView)
     }, [appWindow?.size?.width])
 
     useEffect(() => {
-        containerRef?.current?.scrollTo({
-            left: (windowPercentageFromLeft / 100) * (containerRef.current?.scrollWidth || 0),
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+        viewport.scrollTo({
+            left: (windowPercentageFromLeft / 100) * viewport.scrollWidth,
         })
     }, [windowPercentageFromLeft])
 
     useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
         const handleScroll = () => {
-            setRoadmapsPercentageFromLeft(
-                ((containerRef.current?.scrollLeft || 0) / (containerRef.current?.scrollWidth || 0)) * 100
-            )
+            setRoadmapsPercentageFromLeft(((viewport.scrollLeft || 0) / (viewport.scrollWidth || 0)) * 100)
         }
-        containerRef.current?.addEventListener('scroll', handleScroll)
+
+        viewport.addEventListener('scroll', handleScroll)
         return () => {
-            containerRef.current?.removeEventListener('scroll', handleScroll)
+            viewport.removeEventListener('scroll', handleScroll)
         }
     }, [])
 
     return (
-        <div
-            ref={containerRef}
-            className="size-full"
-            style={{
-                overflow: 'auto',
-            }}
-        >
+        <ScrollArea className="size-full [&>div>div]:size-full">
             <div
+                ref={containerRef}
                 style={{
                     width: `${virtualizer.getTotalSize()}px`,
                 }}
-                className="h-full relative"
+                className="h-full relative px-4"
             >
                 {virtualizer.getVirtualItems().map((virtualColumn) => {
                     return (
@@ -187,7 +192,7 @@ const RoadmapCards = ({
                     )
                 })}
             </div>
-        </div>
+        </ScrollArea>
     )
 }
 
@@ -296,7 +301,7 @@ export default function Changelog(): JSX.Element {
                     ) : null
                 }
             >
-                <div className="flex flex-col h-full" ref={containerRef}>
+                <div className="flex flex-col h-full px-4" ref={containerRef}>
                     <div className="min-h-0 flex-grow pt-4">
                         <RoadmapCards
                             roadmaps={data.allRoadmap.nodes}
