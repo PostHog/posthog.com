@@ -20,6 +20,8 @@ Each PM belongs to a small number of our small engineering teams, so that all te
 
 Here is a overview that shows which of our PMs currently works with which team:
 
+<div className="grid @md:grid-cols-2 gap-4">
+
 <fieldset>
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
@@ -66,6 +68,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 -   [Revenue Analytics](/teams/revenue-analytics)
 
 </fieldset>
+
+</div>
 
 ## Product goals
 
