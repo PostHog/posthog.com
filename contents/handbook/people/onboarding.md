@@ -199,7 +199,7 @@ As part of the onboarding checklist, the Ops team will schedule reminders for a 
     -   Exec team will get involved as necessary to provide an additional layer of feedback to the team member.
 -   90-day checkin
     -   We've made it! Congratulate the new team member on passing their probationary period.
-    -   Give any extra feedback as necesssary, though things _should_ feel like they're humming at this point.
+    -   Give any extra feedback as necessary, though things _should_ feel like they're humming at this point.
 
 Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
 
