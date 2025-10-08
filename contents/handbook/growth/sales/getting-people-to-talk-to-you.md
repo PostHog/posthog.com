@@ -57,10 +57,9 @@ An example good email could look like:
 > [Here are some tools you can use](https://posthog.com/docs/product-analytics/cutting-costs) to ensure you are collecting the correct events and getting valuable insights from them. We have a whole host of [tutorials and guides](https://posthog.com/docs/product-analytics/tutorials) to help you get the most out of PostHog.
 > If you have any questions, don't hesitate to ask.
 
-### Asking for introductions:
+### Asking for introductions
 
-If you feel like you have done a good job with a customer, and have genuinely been helpful, it's ok to ask for a favour back.
-You can be specific and ask for a direct introduction to a person you want to talk to, or try go a bit more broad and ask the person if they know anyone who would benefit from some help with PostHog. Either way, a warm introduction from a colleague is always going to be better than reaching out on your own.
+If you feel like you have done a good job with a customer, and have genuinely been helpful, it's ok to ask for a favor back. You can be specific and ask for a direct introduction to a person you want to talk to, or try go a bit more broad and ask the person if they know anyone who would benefit from some help with PostHog. Either way, a warm introduction from a colleague is always going to be better than reaching out on your own.
 
 ### Just been handed an account?
 
