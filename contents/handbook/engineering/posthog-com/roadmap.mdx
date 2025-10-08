@@ -4,74 +4,86 @@ title: Managing the company roadmap
 
 ## Creating a new roadmap item
 
-- Log in to posthog.com
-- Visit posthog.com/roadmap
-- Click the **+** button at the top of the window
+-   Log in to posthog.com
+-   Visit posthog.com/roadmap
+-   Click the **+** button at the top of the window
 
 ![plus button at top](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_06_at_10_35_24_2x_c59b4ef7e6.png)
 
-- Filled out the details and click **Create**
+-   Fill out the details and click **Create**
 
 ### Roadmap fields
 
 #### Title
+
 The title of the roadmap item. Self-explanatory.
 
 #### Description
+
 A brief description of what the roadmap item intends to accomplish.
 
 #### Projected completion date / Date completed
+
 The projected completion/completion date of the roadmap item. If the “Complete” checkbox is checked, this field label will change from “Projected completion date” to “Date completed”.
 
-This field also controls where the roadmap item appears on the roadmap page. 
+This field also controls where the roadmap item appears on the roadmap page.
 
-- If no date is present, it will appear under “Under consideration”. 
-- If a projected completion date exists, it will appear under “In progress”. 
-- If a completed date is added, it will appear under “Recently shipped”
+-   If no date is present, it will appear under “Under consideration”.
+-   If a projected completion date exists, it will appear under “In progress”.
+-   If a completed date is added, it will appear under “Recently shipped”
 
 #### Category
+
 Used to group roadmap items together. We only use this field to categorize the milestones on the homepage.
 
 #### Add GitHub URL
+
 If a GitHub issue is relevant to the roadmap item, you can paste the entire URL here. There is no limit on how many issues you can attach.
 
 This field is used to display GitHub issue titles and links on roadmap items under the “Under consideration” section. It also determines the progress of the roadmap items under the “In progress” section.
 
 #### Image
-Used to show album art for roadmap items under the “In progress” section. Images should be square, at least 200 x 200 pixels, and not contain any borders or shadows. Images are optional. If you need a new image, [request it through the normal process](/handbook/brand/art-requests). 
+
+Used to show album art for roadmap items under the “In progress” section. Images should be square, at least 200 x 200 pixels, and not contain any borders or shadows. Images are optional. If you need a new image, [request it through the normal process](/handbook/brand/art-requests).
 
 #### Complete
+
 Used to determine if the roadmap item is complete. If checked, the date field will change from “Projected completion date” to “Date completed”.
 
 #### Milestone
+
 If checked, the roadmap item will appear on the roadmap section of the homepage.
 
 #### Beta available
+
 If checked, buttons under the “In progress” section change from “Subscribe for updates” to “Get early access”.
 
 #### Notify subscribers
+
 Only appears when editing an existing roadmap item. See [here](#notifying-roadmap-subscribers) for more info on how to use this feature.
 
 ## Notifying roadmap subscribers
 
-- Log in to Strapi
-- Click Roadmap in the sidebar
-- Click Edit on a roadmap item
-- Make the necessary changes to the roadmap item
-- Check the “Notify subscribers” checkbox
-- Click “Next”
+-   Visit the item in the roadmap
+-   Click Edit on a roadmap item
+-   Make the necessary changes to the roadmap item
+-   Check the “Notify subscribers” checkbox
+-   Click “Next”
 
 You’ll see a couple of new fields.
 
 #### Subject
+
 The subject of the notification email.
 
 #### Content
+
 The body of the notification email. Supports Markdown.
 
 This field will auto-populate with any changes you’ve made to the roadmap item. For instance, if you check the “Beta available” field before clicking “Next”, the content will be auto-populated with “Beta is now available”.
 
 #### View subscribers
+
 Click this button to see all subscribers who will receive the email.
 
 Once your email body and subject are ready, click “Update & notify subscribers” to add the emails to the Customer.io email queue. Any emails sent from Squeak are automatically placed in “Draft”.
