@@ -293,11 +293,6 @@ Setting evaluation tags in PostHog is only half the setup. Your SDKs must declar
 ❌ **Wrong**: Setting tags in PostHog but not configuring SDKs
 ✅ **Right**: Configure both PostHog flags AND SDK environments
 
-### Misunderstanding tag logic
-
-❌ **Wrong**: Using `["staging", "checkout"]` for staging-only checkout features
-✅ **Right**: Using `["staging"]` only, or a single combined tag like `["staging-checkout"]`
-
 ### Over-tagging initially
 
 ❌ **Wrong**: Starting with 20+ specific tags before understanding needs
@@ -305,7 +300,7 @@ Setting evaluation tags in PostHog is only half the setup. Your SDKs must declar
 
 ### Missing backward compatibility
 
-Remember that missing `evaluation_environments` in SDK means all flags evaluate:
+Remember that missing `evaluation_environments` in SDK means that _all_ flags evaluate in that SDK, no matter what the tags are:
 
 ```javascript
 // This SDK gets ALL flags (no filtering)
