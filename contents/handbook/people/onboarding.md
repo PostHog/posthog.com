@@ -56,7 +56,7 @@ While there is no fixed budget for onboardings they should be relatively less ex
 -   Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
 -   Consider doing more casual social activities that are less expensive: dinners, drinks etc
 -   You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
--   The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the the budget.
+-   The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the budget.
 -   See if there are any other onboardings at the same time you could pair up with
 
 Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex in USD for any onboardings you are doing. There will of course be some exceptions to this, please just include the reasoning in your brex budget request, and ensure to list who the budget request is for.
