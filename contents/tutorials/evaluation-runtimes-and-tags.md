@@ -40,6 +40,7 @@ Here's what happens in different scenarios:
 ## Quick setup
 
 Configure both features in PostHog:
+
 1. Set **evaluation runtime** to `server`, `client`, or `all`
 2. Add **evaluation tags** and mark them as constraints (bolt icon ⚡)
 
@@ -150,6 +151,7 @@ const posthog = new PostHog('KEY', {
 ### Use runtime for security boundaries
 
 Set runtime to `server` for flags containing:
+
 - Sensitive business logic
 - Rate limits or quotas
 - Infrastructure settings
