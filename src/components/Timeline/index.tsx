@@ -18,7 +18,6 @@ interface TimelineProps {
     onDrag: (monthInView: number) => void
     windowX: number
     setWindowX: (windowX: number) => void
-    onMonthClick: (monthInView: number) => void
     onDragEnd: () => void
     containerRef: React.RefObject<HTMLDivElement>
     percentageOfScrollInView: number
@@ -34,7 +33,6 @@ export default function Timeline({
     onDrag,
     windowX,
     setWindowX,
-    onMonthClick,
     onDragEnd,
     containerRef,
     percentageOfScrollInView,
@@ -48,19 +46,6 @@ export default function Timeline({
         if (count === 1) return 'bg-green opacity-60'
         if (count === 2) return 'bg-green opacity-80'
         if (count >= 3) return 'bg-green'
-    }
-
-    const handleMonthClick = (month: number) => {
-        onMonthClick(month)
-    }
-
-    const getMonthInView = (left?: number) => {
-        if (!containerRef.current || !windowRef.current) return 0
-        const windowRect = windowRef.current.getBoundingClientRect()
-        const desiredLeft = left ?? windowRect.left - (containerRef.current?.getBoundingClientRect().left || 0)
-        const inView = desiredLeft + windowWidth
-        const monthInView = inView / windowWidth
-        return Math.round(monthInView)
     }
 
     const handleDrag = () => {
@@ -85,34 +70,7 @@ export default function Timeline({
     const handleDragEnd = () => {
         setIsDragging(false)
         onDragEnd()
-        // const monthInView = getMonthInView()
-        // const el = document.getElementById(`timeline-${monthInView}`)
-        // if (!el || !containerRef.current) return
-        // setWindowX(el.getBoundingClientRect().left - containerRef.current.getBoundingClientRect().left || 0)
     }
-
-    // useEffect(() => {
-    //     const firstMonth = document.getElementById(`timeline-1`)
-    //     if (!firstMonth || !containerRef.current) return
-    //     const firstMonthRect = firstMonth.getBoundingClientRect()
-    //     setWindowWidth(firstMonthRect.width + 1)
-
-    //     const scrollViewport = containerRef.current.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-    //     if (scrollViewport) {
-    //         scrollViewport.scrollTo({
-    //             left: scrollViewport.scrollWidth,
-    //         })
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     if (!activeMonth || !containerRef.current) return
-    //     const el = document.getElementById(`timeline-${activeMonth}`)
-    //     if (!el) return
-    //     const containerLeft = containerRef.current.getBoundingClientRect().left || 0
-    //     const targetLeft = el.getBoundingClientRect().left - containerLeft
-    //     setWindowX(targetLeft || 0)
-    // }, [activeMonth])
 
     const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
         if (!containerRef.current) return

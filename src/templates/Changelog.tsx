@@ -11,25 +11,41 @@ import { useApp } from '../context/App'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Timeline from 'components/Timeline'
-import { useVirtualizer, defaultRangeExtractor } from '@tanstack/react-virtual'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import { useWindow } from '../context/Window'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 dayjs.extend(utc)
 
-type RoadmapNode = { id: number | string; date: string; title: string }
+type RoadmapNode = {
+    id: number | string
+    date: string
+    title: string
+    teams?: {
+        data?: Array<{
+            attributes?: {
+                name?: string
+                miniCrest?: {
+                    data?: {
+                        attributes?: {
+                            url?: string
+                        }
+                    }
+                }
+            }
+        }>
+    }
+}
 
 interface RoadmapCardsProps {
     roadmaps: RoadmapNode[]
-    onIndexChange: (activeMonth: number) => void
-    setWindowWidth: (width: number) => void
     setPercentageOfScrollInView: (percentage: number) => void
+    windowPercentageFromLeft: number
+    setRoadmapsPercentageFromLeft: (percentage: number) => void
 }
 
 const RoadmapCards = ({
     roadmaps,
-    onIndexChange,
-    setWindowWidth,
     setPercentageOfScrollInView,
     windowPercentageFromLeft,
     setRoadmapsPercentageFromLeft,
@@ -77,10 +93,6 @@ const RoadmapCards = ({
         estimateSize: () => width,
         overscan: 5,
         gap: 15,
-        // rangeExtractor: (range) => {
-        //     onIndexChange(Math.max(range.startIndex, range.endIndex) + 1)
-        //     return defaultRangeExtractor(range)
-        // },
     })
 
     useLayoutEffect(() => {
@@ -88,7 +100,8 @@ const RoadmapCards = ({
     }, [width, virtualizer])
 
     useEffect(() => {
-        const percentageOfScrollInView = (appWindow?.size?.width / (containerRef.current?.scrollWidth || 0)) * 100
+        const percentageOfScrollInView =
+            ((appWindow?.size?.width || 0) / (containerRef.current?.scrollWidth || 0)) * 100
         setPercentageOfScrollInView(percentageOfScrollInView)
     }, [appWindow?.size?.width])
 
@@ -139,7 +152,7 @@ const RoadmapCards = ({
                             }}
                         >
                             <ul className="w-full h-full overflow-y-auto p-4 bg-white rounded border border-primary m-0 list-none">
-                                {weeks[virtualColumn.index].map((roadmap, index) => {
+                                {weeks[virtualColumn.index].map((roadmap) => {
                                     return (
                                         <li key={roadmap.id} className="p-0 mt-0">
                                             <button className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between">
@@ -151,16 +164,20 @@ const RoadmapCards = ({
                                                         {roadmap.teams?.data?.[0]?.attributes?.name} Team
                                                     </p>
                                                 </div>
-                                                <div className="shrink-0">
-                                                    <CloudinaryImage
-                                                        className="w-10"
-                                                        width={80}
-                                                        src={
-                                                            roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
-                                                                ?.attributes?.url
-                                                        }
-                                                    />
-                                                </div>
+                                                {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data?.attributes
+                                                    ?.url && (
+                                                    <div className="shrink-0">
+                                                        <CloudinaryImage
+                                                            className="w-10"
+                                                            width={80}
+                                                            src={
+                                                                roadmap.teams.data[0].attributes.miniCrest.data
+                                                                    .attributes
+                                                                    .url as `https://res.cloudinary.com/${string}`
+                                                            }
+                                                        />
+                                                    </div>
+                                                )}
                                             </button>
                                         </li>
                                     )
@@ -180,8 +197,6 @@ export default function Changelog(): JSX.Element {
     const { addWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
-    const [windowDragging, setWindowDragging] = useState(false)
-    const [windowWidth, setWindowWidth] = useState(0)
     const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
     const [windowPercentageFromLeft, setWindowPercentageFromLeft] = useState(0)
     const [roadmapsPercentageFromLeft, setRoadmapsPercentageFromLeft] = useState(0)
@@ -211,20 +226,6 @@ export default function Changelog(): JSX.Element {
         }
     `)
 
-    // Calculate the last available month (counting sequentially from startYear)
-    const totalMonths = useMemo(() => {
-        const now = dayjs.utc()
-        const currentYear = now.year()
-        const currentMonthIndex = now.month() // 0-based
-        const startYear = 2020
-        let count = 0
-        for (let y = startYear; y <= currentYear; y++) {
-            const lastMonthIndexForYear = y === currentYear ? currentMonthIndex : 11
-            count += lastMonthIndexForYear + 1
-        }
-        return count
-    }, [])
-
     const handleAddFeature = () => {
         addWindow(
             React.createElement(RoadmapWindow, {
@@ -237,11 +238,11 @@ export default function Changelog(): JSX.Element {
     }
 
     const handleDrag = (percentageFromLeft: number) => {
-        setWindowDragging(true)
         setWindowPercentageFromLeft(percentageFromLeft)
     }
+
     const handleDragEnd = () => {
-        setWindowDragging(false)
+        // Drag ended - no action needed currently
     }
 
     const roadmapsGrouped = useMemo(() => {
@@ -269,13 +270,6 @@ export default function Changelog(): JSX.Element {
 
         return grouped
     }, [data.allRoadmap.nodes])
-
-    const handleIndexChange = (activeMonth: number) => {
-        if (windowDragging) return
-        const el = document.getElementById(`timeline-${activeMonth}`)
-        if (!el || !timelineContainerRef.current) return
-        setWindowX(el.getBoundingClientRect().left - timelineContainerRef.current.getBoundingClientRect().left || 0)
-    }
 
     return (
         <>
@@ -306,10 +300,6 @@ export default function Changelog(): JSX.Element {
                     <div className="min-h-0 flex-grow pt-4">
                         <RoadmapCards
                             roadmaps={data.allRoadmap.nodes}
-                            startYear={2020}
-                            endYear={2025}
-                            onIndexChange={handleIndexChange}
-                            setWindowWidth={setWindowWidth}
                             setPercentageOfScrollInView={setPercentageOfScrollInView}
                             windowPercentageFromLeft={windowPercentageFromLeft}
                             setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
