@@ -548,7 +548,7 @@ export const handbookSidebar = [
         name: 'Hiring',
         url: '',
         children: [
-            { name: 'Overview', url: '/handbook/people/hiring-process' },
+            { name: 'Hiring process', url: '/handbook/people/hiring-process' },
             { name: 'How to interview', url: '/handbook/people/hiring-process/how-to-interview' },
             { name: 'Engineering hiring', url: '/handbook/people/hiring-process/engineering-hiring' },
             { name: 'Marketing hiring', url: '/handbook/people/hiring-process/marketing-hiring' },
