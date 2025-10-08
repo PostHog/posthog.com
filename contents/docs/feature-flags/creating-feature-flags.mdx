@@ -141,6 +141,8 @@ The system then filters which flags are returned based on their configured runti
 
 ### When to use each evaluation runtime
 
+> **Important:** Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+
 1. **Use server-only evaluation** for:
    - Sensitive feature rollouts that shouldn't be exposed to clients
    - Backend system configurations
@@ -157,8 +159,6 @@ The system then filters which flags are returned based on their configured runti
    - When you're unsure or need maximum flexibility
 
 > **Note:** Feature flags without an explicit evaluation runtime setting will continue to work as before, being evaluated in all environments for backward compatibility.
-
-> **Important:** Currently, feature flag dependencies are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
 
 ## Release conditions
 
