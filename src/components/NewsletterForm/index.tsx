@@ -47,7 +47,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 className={`
                 flex flex-col @md:flex-row @md:justify-center items-center gap-4 @md:gap-8 border-primary ${placementClasses} ${className}`}
             >
-                <div className="text-center @lg:hidden @xl:block">
+                <div className="text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
                         objectFit="contain"
@@ -57,13 +57,6 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 <div className="w-full max-w-md">
                     {!submitted ? (
                         <>
-                            <div className="float-right hidden @lg:block -mt-6 @sm:m-0">
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
-                                    objectFit="contain"
-                                    className="w-full h-full max-w-[170px]"
-                                />
-                            </div>
                             <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
                             <h4 className="relative !text-2xl !m-0 !leading-tight">Product for Engineers</h4>
                             <p className="!m-0 !text-sm @lg:!text-[15px] !leading-normal !pt-1">
@@ -86,7 +79,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                                         <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
                                     </button>
                                 </form>
-                                <p className="!text-sm opacity-50 text-center @lg:text-left !mb-0">
+                                <p className="!text-sm opacity-50 text-center @sm:text-left !mb-0">
                                     We'll share your email with{' '}
                                     <span className="whitespace-nowrap">
                                         Substack
