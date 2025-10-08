@@ -3,7 +3,7 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
-type ExclusionReason = 'sanctions' | 'high-cost' | 'possible-high-cost' | 'germany' | 'timezone'
+type ExclusionReason = 'sanctions' | 'high-cost' | 'only-contractor-setup' | 'germany' | 'timezone'
 
 interface CountryRestriction {
     code: string
@@ -30,9 +30,9 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Sweden: { code: 'SE', reason: 'high-cost' },
     Switzerland: { code: 'CH', reason: 'high-cost' },
 
-    // Possible with more research
-    Brazil: { code: 'BR', reason: 'possible-high-cost' },
-    Uruguay: { code: 'UY', reason: 'possible-high-cost' },
+    // Only contractor setup
+    Brazil: { code: 'BR', reason: 'only-contractor-setup' },
+    Uruguay: { code: 'UY', reason: 'only-contractor-setup' },
 
     // Germany (10 employee limit)
     Germany: { code: 'DE', reason: 'germany' },
@@ -74,6 +74,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Myanmar: { code: 'MM', reason: 'timezone' },
     Nauru: { code: 'NR', reason: 'timezone' },
     Nepal: { code: 'NP', reason: 'timezone' },
+    'New Caledonia': { code: 'NC', reason: 'timezone' },
     'New Zealand': { code: 'NZ', reason: 'timezone' },
     Oman: { code: 'OM', reason: 'timezone' },
     Pakistan: { code: 'PK', reason: 'timezone' },
@@ -88,6 +89,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Somalia: { code: 'SO', reason: 'timezone' },
     'South Korea': { code: 'KR', reason: 'timezone' },
     'Sri Lanka': { code: 'LK', reason: 'timezone' },
+    'Taiwan': { code: 'TW', reason: 'timezone' },
     Tajikistan: { code: 'TJ', reason: 'timezone' },
     Tanzania: { code: 'TZ', reason: 'timezone' },
     Thailand: { code: 'TH', reason: 'timezone' },
@@ -107,7 +109,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
 const reasonColors: { [key in ExclusionReason]: number } = {
     sanctions: 0xf35454, // Red
     'high-cost': 0xb62ad9, // Purple
-    'possible-high-cost': 0xf7a501, // Orange (will have pattern)
+    'only-contractor-setup': 0xf7a501, // Orange (will have pattern)
     germany: 0x3b2b26, // Dark brown
     timezone: 0xaaaaaa, // Light gray
 }
@@ -115,7 +117,7 @@ const reasonColors: { [key in ExclusionReason]: number } = {
 const reasonLabels: { [key in ExclusionReason]: string } = {
     sanctions: 'Restricted due to US sanctions',
     'high-cost': 'High employer costs',
-    'possible-high-cost': 'Unlikely to hire (high employer costs)',
+    'only-contractor-setup': 'Only contractor setup',
     germany: 'No longer hiring (limited to 10 employees)',
     timezone: 'Outside of timezones we currently hire in',
 }
