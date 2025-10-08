@@ -2,7 +2,7 @@
 title: How to use evaluation runtimes and tags together for fine-grained flag control
 date: 2025-10-07
 author:
-  - posthog
+  - dylan-martin
 showTitle: true
 sidebar: Docs
 tags:
@@ -25,12 +25,12 @@ These features apply as sequential filters:
 
 Consider a flag with:
 
-- Runtime: `server`
-- Evaluation tags: `["production", "api"]`
+- Runtime filter: `server`
+- Evaluation tags filter: `["production", "api"]`
 
-Here's what happens in different scenarios:
+Here's what happens when you try to evaluate feature flags from an SDK:
 
-| SDK Type | Environment Tags | Result |
+| SDK type | Environment tags | Result |
 |----------|-----------------|--------|
 | JavaScript Web | `["production", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
 | Node.js | `["staging", "backend"]` | ❌ Blocked by tags (neither "staging" nor "backend" match flag's tags) |
@@ -39,7 +39,7 @@ Here's what happens in different scenarios:
 
 ## Quick setup
 
-Configure both features in PostHog:
+You can configure both features when creating or editing a feature flag in PostHog:
 
 1. Set **evaluation runtime** to `server`, `client`, or `all`
 2. Add **evaluation tags** and mark them as constraints (bolt icon ⚡)
@@ -81,7 +81,7 @@ const posthog = new PostHog('KEY', {
 - Runtime: `all`
 - Evaluation tags: `["staging"]`
 
-**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but ONLY in staging. The tag ensures production services never evaluate this flag, even if they share code with staging.
+**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** in staging. The tag ensures production services never evaluate this flag, even if they share code with staging.
 
 ```python
 # Staging recommendation service - Gets the flag
@@ -158,7 +158,7 @@ Set runtime to `server` for flags containing:
 
 ### Layer tags for precise control
 
-Remember that tags use OR logic: `["staging", "checkout"]` matches ANY staging OR ANY checkout. For AND logic, use compound tags like `["staging-checkout"]`.
+Remember that tags use OR logic: `["staging", "checkout"]` matches evaluation environments with `staging` OR `checkout`. For AND logic, use compound tags like `["staging-checkout"]`.
 
 ### Start simple
 

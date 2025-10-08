@@ -141,7 +141,11 @@ The system then filters which flags are returned based on their configured runti
 
 ### When to use each evaluation runtime
 
-> **Important:** Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+<CalloutBox icon="IconInfo" title="Limited dependencies with different run times" type="fyi">
+
+Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+
+</CalloutBox>
 
 1. **Use server-only evaluation** for:
    - Sensitive feature rollouts that shouldn't be exposed to clients
