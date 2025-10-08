@@ -414,7 +414,7 @@ export const dataPipelines = {
 
 export const handbookSidebar = [
     {
-        name: 'Handbook',
+        name: 'Chapters',
     },
     {
         name: 'Table of contents',
@@ -422,70 +422,68 @@ export const handbookSidebar = [
         // icon: 'IconInfo',
     },
     {
-        name: 'Chapters',
-        url: '',
-        children: [
-            {
-                name: '1. Why does PostHog exist?',
-                url: '/handbook/why-does-posthog-exist',
-            },
-            {
-                name: '2. How we got here',
-                url: '/handbook/story',
-            },
-            {
-                name: '3. How we get users',
-                url: '/handbook/how-we-get-users',
-            },
-            {
-                name: '4. Who we are building for',
-                url: '/handbook/who-we-are-building-for',
-            },
-            {
-                name: '5. How we make users happy',
-                url: '/handbook/making-users-happy',
-            },
-            {
-                name: '6. How we make money',
-                url: '/handbook/how-we-make-money',
-            },
-            {
-                name: '7. Enduringly low prices',
-                url: '/handbook/low-prices',
-            },
-            {
-                name: '8. Deciding which products to build',
-                url: '/handbook/which-products',
-            },
-            {
-                name: '9. A wide company with small teams',
-                url: '/handbook/wide-company',
-            },
-            {
-                name: "10. How we're building a world-class team",
-                url: '/handbook/strong-team',
-            },
-            {
-                name: '11. What we value',
-                url: '/handbook/values',
-            },
-            {
-                name: '12. Providing a world-class engineering environment',
-                url: '/handbook/world-class-engineering',
-            },
-            {
-                name: '13. Not running out of money',
-                url: '/handbook/finance',
-            },
-            {
-                name: '14. Where are we going?',
-                url: '/handbook/future',
-            },
-            {
-                name: '15. How you can help',
-                url: '/handbook/help',
-            },
-        ],
+        name: '1. Why does PostHog exist?',
+        url: '/handbook/why-does-posthog-exist',
+    },
+    {
+        name: '2. How we got here',
+        url: '/handbook/story',
+    },
+    {
+        name: '3. How we get users',
+        url: '/handbook/how-we-get-users',
+    },
+    {
+        name: '4. Who we are building for',
+        url: '/handbook/who-we-are-building-for',
+    },
+    {
+        name: '5. How we make users happy',
+        url: '/handbook/making-users-happy',
+    },
+    {
+        name: '6. How we make money',
+        url: '/handbook/how-we-make-money',
+    },
+    {
+        name: '7. Enduringly low prices',
+        url: '/handbook/low-prices',
+    },
+    {
+        name: '8. Deciding which products to build',
+        url: '/handbook/which-products',
+    },
+    {
+        name: '9. A wide company with small teams',
+        url: '/handbook/wide-company',
+    },
+    {
+        name: "10. How we're building a world-class team",
+        url: '/handbook/strong-team',
+    },
+    {
+        name: '11. What we value',
+        url: '/handbook/values',
+    },
+    {
+        name: '12. Providing a world-class engineering environment',
+        url: '/handbook/world-class-engineering',
+    },
+    {
+        name: '13. Not running out of money',
+        url: '/handbook/finance',
+    },
+    {
+        name: '14. Where are we going?',
+        url: '/handbook/future',
+    },
+    {
+        name: '15. How you can help',
+        url: '/handbook/help',
+    },
+
+    {
+        name: 'Resources',
     },
     {
         name: 'Working at PostHog',
@@ -652,13 +650,6 @@ export const handbookSidebar = [
                 ],
             },
         ],
-    },
-    {
-        name: 'Resources',
-    },
-    {
-        name: 'Team structure',
-        url: '/handbook/team-structure',
     },
     {
         name: 'Blitzscale',

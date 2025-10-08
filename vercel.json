@@ -493,6 +493,7 @@
             "source": "/handbook/engineering/app-east",
             "destination": "/handbook/people/team-structure/product-analytics"
         },
+        { "source": "/handbook/team-structure", "destination": "/handbook/company/small-teams" },
         { "source": "/handbook/people/team-structure/app-east", "destination": "/handbook/small-teams/app-east" },
         { "source": "/docs/integrate/client/browser-extension", "destination": "/docs/integrate/browser-extension" },
         { "source": "/handbook/company/website-design-process", "destination": "/handbook/designing-posthog-website" },
