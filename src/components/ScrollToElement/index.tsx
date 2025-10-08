@@ -11,6 +11,36 @@ interface ScrollToElementProps {
     [key: string]: any
 }
 
+export const scrollToElement = (targetId: string, offset = 0, behavior: 'auto' | 'smooth' = 'smooth'): void => {
+    const targetElement = document.getElementById(targetId)
+    if (!targetElement) {
+        return
+    }
+
+    // Check for Radix ScrollArea container
+    const scrollViewport = targetElement.closest('[data-radix-scroll-area-viewport]') as HTMLElement
+
+    if (scrollViewport) {
+        // Radix ScrollArea scrolling (same logic as ElementScrollLink)
+        const parentRect = scrollViewport.getBoundingClientRect()
+        const targetRect = targetElement.getBoundingClientRect()
+        const relativeTop = targetRect.top - parentRect.top + scrollViewport.scrollTop + offset
+
+        scrollViewport.scrollTo({
+            top: relativeTop,
+            behavior,
+        })
+    } else {
+        // Standard window scrolling fallback
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + offset
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior,
+        })
+    }
+}
+
 /**
  * A component that scrolls to a target element by ID when clicked.
  * Works with both Radix ScrollArea containers and standard window scrolling.
@@ -34,33 +64,7 @@ export const ScrollToElement: React.FC<ScrollToElementProps> = ({
 }) => {
     const handleClick = useCallback(
         (e: React.MouseEvent) => {
-            const targetElement = document.getElementById(targetId)
-            if (!targetElement) {
-                return
-            }
-
-            // Check for Radix ScrollArea container
-            const scrollViewport = targetElement.closest('[data-radix-scroll-area-viewport]') as HTMLElement
-
-            if (scrollViewport) {
-                // Radix ScrollArea scrolling (same logic as ElementScrollLink)
-                const parentRect = scrollViewport.getBoundingClientRect()
-                const targetRect = targetElement.getBoundingClientRect()
-                const relativeTop = targetRect.top - parentRect.top + scrollViewport.scrollTop + offset
-
-                scrollViewport.scrollTo({
-                    top: relativeTop,
-                    behavior,
-                })
-            } else {
-                // Standard window scrolling fallback
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + offset
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior,
-                })
-            }
+            scrollToElement(targetId, offset, behavior)
 
             // Call original onClick if provided
             if (onClick) {
