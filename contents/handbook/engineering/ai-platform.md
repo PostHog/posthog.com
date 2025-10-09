@@ -35,7 +35,7 @@ Everyone. Max is designed to be useful whether you're:
 Max is built on a single-loop agent architecture with dynamic mode switching. When you send a message, Max analyzes your request, determines which specialized "modes" it needs to activate, and dynamically loads the appropriate tools and expertise. For example, if you ask Max to "create a funnel tracking the signup flow," it might:
 
 1. Use the `read_taxonomy` tool to check which events actually exist
-1. Switch to Analytics mode to access insight creation tools
+2. Switch to Analytics mode to access insight creation tools
 3. Switch to SQL mode if you need custom transformations
 4. Switch to CDP mode if you want to set up a destination based on the funnel results
 
