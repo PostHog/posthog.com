@@ -7,6 +7,7 @@ import Tooltip from 'components/Tooltip'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import OSButton from 'components/OSButton'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
@@ -14,343 +15,342 @@ import am5geodata_usaLow from '@amcharts/amcharts5-geodata/usaLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 
 type Event = {
+    date: string // YYYY-MM-DD
+    startTime?: string // HH:MM in 24hr format
     name: string
-    location: { label: string; lat: number; lng: number }
-    date: string
-    format: string[]
-    audience: string[]
-    attendees: number
-    speakers: string[]
-    partners: string[]
-    vibeScore: number
-    link: string
-    closed?: boolean
-    // Enhanced properties for past events
-    starRating?: number
-    aiSummary?: string
-    imageGallery?: string[]
-    chaos?: string
-    funFact?: string
-    snackRating?: string
+    description?: string
+    location: {
+        label: string // Location display name
+        lat?: number
+        lng?: number
+        venue?: string // Venue name
+    }
+    private?: boolean
+    format?: string
+    audience?: string[]
+    speakers?: string[]
+    speakerTopic?: string
+    partners?: Array<{ name: string; url?: string }>
+    attendees?: number
+    vibeScore?: number
+    photos?: string[]
+    video?: string
+    deck?: string
+    link?: string
+}
+
+// Helper to parse month name to number
+const parseMonth = (monthStr: string): number => {
+    const months: { [key: string]: number } = {
+        January: 0,
+        February: 1,
+        March: 2,
+        April: 3,
+        May: 4,
+        June: 5,
+        July: 6,
+        August: 7,
+        September: 8,
+        October: 9,
+        November: 10,
+        December: 11,
+    }
+    return months[monthStr] || 0
+}
+
+// Helper to parse time to 24hr format
+const parseTime = (timeStr?: string): string | undefined => {
+    if (!timeStr) return undefined
+    const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i)
+    if (!match) return undefined
+    let [_, hours, minutes, period] = match
+    let hour = parseInt(hours)
+    if (period.toUpperCase() === 'PM' && hour !== 12) hour += 12
+    if (period.toUpperCase() === 'AM' && hour === 12) hour = 0
+    return `${hour.toString().padStart(2, '0')}:${minutes}`
+}
+
+// Helper to split comma-separated values
+const splitValues = (str?: string): string[] | undefined => {
+    if (!str || str === '-') return undefined
+    return str.split(',').map((s) => s.trim()).filter(Boolean)
+}
+
+// Helper to parse partners
+const parsePartners = (str?: string): Array<{ name: string; url?: string }> | undefined => {
+    const values = splitValues(str)
+    if (!values) return undefined
+    return values.map((name) => ({ name }))
 }
 
 const eventsData: Event[] = [
     {
-        name: 'AGI Builders Meetup with PostHog',
-        location: { label: 'San Francisco, CA', lat: 37.7749, lng: -122.4194 },
-        date: '2025-07-22',
-        format: ['Talks', 'Fireside'],
-        audience: ['SF AI Enthusiasts'],
-        attendees: 112,
-        speakers: ['Peter K', 'James'],
-        partners: ['AGI Builders'],
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/company-internal/issues/1999',
-        starRating: 4.8,
-        aiSummary:
-            "An electrifying evening where 112 AI enthusiasts gathered to discuss the future of AGI. Peter K dropped some seriously hot takes about model interpretability while James casually mentioned he's teaching his toaster to write code. The energy was IMMACULATE.",
-        imageGallery: ['agi-1.jpg', 'agi-2.jpg', 'agi-3.jpg'],
-        chaos: 'Someone brought a robot arm that kept photobombing the speakers',
-        funFact: "17 people claimed they were 'building the next ChatGPT'",
-        snackRating: 'Pizza was mid but the AI-generated fortune cookies went HARD 🔥',
-    },
-    {
-        name: 'AI Product Breakfast: AI Decisioning',
-        location: { label: 'Austin, TX', lat: 30.2672, lng: -97.7431 },
-        date: '2025-08-12',
-        format: ['Breakfast', 'OST'],
-        audience: ['AI Engineers'],
-        attendees: 25,
-        speakers: ['Haven'],
-        partners: ['AITX'],
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/334',
-        starRating: 4.9,
-        aiSummary:
-            'Intimate breakfast gathering where Haven absolutely CRUSHED the AI decisioning talk. OST format led to some wild conversations about autonomous agents making life choices for us. Someone suggested an AI to decide what to have for breakfast at a breakfast event. Meta.',
-        imageGallery: ['breakfast-1.jpg', 'breakfast-2.jpg'],
-        chaos: 'The coffee machine broke and someone joked it was an AI uprising',
-        funFact: "Haven's slides were actually generated by an AI that made decisions about what slides to show",
-        snackRating: 'Texas-sized breakfast tacos. Absolutely legendary. 11/10',
-    },
-    {
-        name: 'PostHog hardware hacknight',
-        location: { label: 'Vermont, USA', lat: 44.5588, lng: -72.5778 },
-        date: '2025-09-16',
-        format: ['Meetup'],
-        audience: ['Engineers', 'Founders'],
-        attendees: 19,
-        speakers: ['Danilo'],
-        partners: [],
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/322',
-        starRating: 5.0,
-        aiSummary:
-            'Danilo hosted an absolutely UNHINGED hardware hacknight in Vermont. People built physical things with their bare hands. In 2025. Soldering irons were involved. Someone made a hedgehog-shaped robot that tracks analytics. Peak PostHog energy.',
-        imageGallery: ['hardware-1.jpg', 'hardware-2.jpg', 'hardware-3.jpg'],
-        chaos: 'Multiple smoke alarms triggered. Standard hardware hacknight behavior.',
-        funFact: 'The hedgehog robot is now a permanent office fixture and has its own Slack channel',
-        snackRating: "Artisanal Vermont cheese and maple everything. Chef's kiss.",
-    },
-    {
-        name: 'MCP Builders Breakfast',
-        location: { label: 'Amsterdam, NL', lat: 52.3676, lng: 4.9041 },
-        date: '2025-09-25',
-        format: ['Breakfast', 'OST'],
-        audience: ['MCP practitioners'],
-        attendees: 20,
-        speakers: ['Jonathan'],
-        partners: ['Fiberplane'],
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/356',
-        starRating: 4.7,
-        aiSummary:
-            'Jonathan brought the MCP heat to Amsterdam. 20 practitioners geeking out about protocols over Dutch breakfast. The OST format meant conversations went DEEP into technical weeds. Beautiful chaos.',
-        imageGallery: ['mcp-1.jpg', 'mcp-2.jpg'],
-        chaos: 'Someone tried to explain their MCP implementation using only bread and cheese',
-        funFact: '3 people arrived on bikes. Very Amsterdam.',
-        snackRating: 'Stroopwafels and hagelslag. Dutch breakfast supremacy confirmed.',
-    },
-    {
-        name: "From Open Source to Scale: A Conversation with PostHog's Tim Glaser",
-        location: { label: 'Dublin, IE', lat: 53.3498, lng: -6.2603 },
-        date: '2025-09-26',
-        format: ['Panel'],
-        audience: ['Founders'],
-        attendees: 55,
-        speakers: ['Tim'],
-        partners: [],
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/371',
-        starRating: 4.9,
-        aiSummary:
-            "Tim absolutely crushed it talking about PostHog's journey from scrappy open source project to CRUSHING IT at scale. 55 founders hanging on every word about fundraising, hiring, and why hedgehogs are the superior mascot choice.",
-        imageGallery: ['dublin-1.jpg', 'dublin-2.jpg', 'dublin-3.jpg'],
-        chaos: 'Someone asked if Tim would accept payment in Guinness',
-        funFact: 'Tim revealed he codes in dark mode exclusively. Based.',
-        snackRating: 'Irish whiskey and fancy cheese. Solid 9/10.',
-    },
-    {
-        name: 'Paellas and Agents with PostHog',
-        location: { label: 'Barcelona, ES', lat: 41.3851, lng: 2.1734 },
-        date: '2025-09-28',
-        format: ['Workshop'],
-        audience: ['AI engineers'],
-        attendees: 22,
-        speakers: ['Georgiy'],
-        partners: [],
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/333',
-        starRating: 4.6,
-        aiSummary:
-            'Georgiy ran a workshop on AI agents while we literally cooked paella together. Multi-tasking level: LEGENDARY. People were debugging agent hallucinations while stirring saffron rice. This is the future of tech events.',
-        imageGallery: ['paella-1.jpg', 'paella-2.jpg'],
-        chaos: "Someone's agent accidentally ordered 50kg of rice to the venue",
-        funFact: "The paella was actually better than most Barcelona restaurants. Don't @ me.",
-        snackRating: 'Fresh paella cooked on-site. Literally perfect. ∞/10',
-    },
-    {
-        name: 'Valio Con',
-        location: { label: 'San Diego, CA', lat: 33.1939, lng: -117.3827 },
-        date: '2025-09-14',
-        format: ['Conf sponsorship'],
-        audience: ['Designers'],
-        attendees: 65,
-        speakers: ['Cory'],
-        partners: [],
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/343',
-        starRating: 4.3,
-        aiSummary:
-            "Cory represented PostHog at Valio Con, spreading the good word about product analytics to 65 designers. Lots of conversations about beautiful dashboards and why comic sans should be a valid font choice (it shouldn't).",
-        imageGallery: ['https://res.cloudinary.com/dmukukwp6/image/upload/cory_valio_con_c6989afcef.jpeg', 'valio-2.jpg'],
-        chaos: 'Design twitter beef erupted over button radius. Classic.',
-        funFact: 'Someone designed a hedgehog logo redesign and it was... interesting',
-        snackRating: 'Conference snacks. Standard fare. 6/10',
-    },
-    {
-        name: 'PostHog Founders Lunch',
-        location: { label: 'Cardiff, UK', lat: 51.4816, lng: -3.1791 },
-        date: '2025-09-23',
-        format: ['Lunch', 'OST'],
-        audience: ['Founders'],
-        attendees: 25,
-        speakers: ['Adam'],
-        partners: [],
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/372',
-        starRating: 4.5,
-        aiSummary:
-            "Adam hosted an intimate founders lunch in Cardiff. OST format meant deep conversations about fundraising, pivots, and whether it's ethical to name your company after an animal. Unanimous consensus: yes.",
-        imageGallery: ['cardiff-1.jpg'],
-        chaos: 'Someone pivoted their startup idea mid-lunch',
-        funFact: 'Zero people knew Cardiff was in Wales before this event',
-        snackRating: 'Welsh cakes and local lamb. Surprisingly fire. 8/10',
-    },
-    {
-        name: '[Closed Event] James dinner with ODF founders',
-        location: { label: 'San Francisco, CA', lat: 37.7749, lng: -122.4194 },
-        date: '2025-09-24',
-        format: ['Dinner'],
-        audience: ['Founders'],
-        attendees: 11,
-        speakers: ['James'],
-        partners: ['ODF'],
-        vibeScore: 4,
-        link: 'https://posthog.slack.com/archives/C08CG24E3SR/p1758828510754499',
-        closed: true,
-        starRating: 4.8,
-        aiSummary:
-            'Exclusive dinner where James and ODF founders discussed [REDACTED]. The vibes were immaculate. The conversation was [REDACTED]. Someone may or may not have [REDACTED].',
-        imageGallery: ['redacted.jpg'],
-        chaos: '[REDACTED]',
-        funFact: "This event is so exclusive we can't tell you the fun fact",
-        snackRating: "Michelin-level cuisine. We think. It's classified. ??/10",
-    },
-    {
-        name: 'Jersey City Tech Meetup with PostHog',
-        location: { label: 'Jersey City, NJ', lat: 40.7178, lng: -74.0431 },
-        date: '2025-09-30',
-        format: ['Talks', 'Panel', 'Networking'],
-        audience: ['Product managers', 'Engineers'],
-        attendees: 70,
-        speakers: ['Abe'],
-        partners: ['Apprenticeio'],
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/339',
-        starRating: 4.4,
-        aiSummary:
-            "Abe brought PostHog to Jersey City for talks, panels, and networking. 70 PMs and engineers talking about product development, analytics, and why Jersey gets a bad rap (it doesn't deserve it... mostly).",
-        imageGallery: ['jersey-1.jpg', 'jersey-2.jpg'],
-        chaos: "Heated debate about whether it's called 'pork roll' or 'taylor ham'",
-        funFact: 'Best view of Manhattan skyline from any PostHog event to date',
-        snackRating: 'Pizza and bagels. Jersey does food right. 9/10',
-    },
-    {
-        name: 'MCP After Hours: AI Dev Tools Demo Night',
-        location: { label: 'San Francisco, CA', lat: 37.7749, lng: -122.4194 },
         date: '2025-07-10',
-        format: ['Talks'],
-        audience: ['Founders', 'Engineers'],
+        name: 'MCP After Hours: AI Dev Tools Demo Night',
+        location: { label: 'San Francisco, CA' },
+        format: 'Talks',
+        audience: splitValues('Founders, engineers'),
+        speakers: splitValues('Peter K'),
+        partners: parsePartners('Speakeasy'),
         attendees: 85,
-        speakers: ['Peter K'],
-        partners: ['Speakeasy'],
         vibeScore: 3,
         link: 'https://github.com/PostHog/meta/issues/325',
-        starRating: 4.1,
-        aiSummary:
-            'Peter K hosted demo night for AI dev tools. 85 people watching live demos of tools that may or may not ship. Classic startup energy. Someone demoed a tool that writes demos for demo nights. Peak meta.',
-        imageGallery: ['demo-1.jpg', 'demo-2.jpg'],
-        chaos: 'Three demos crashed during the actual demo',
-        funFact: "Someone's 'AI pair programmer' suggested replacing their entire codebase with PHP",
-        snackRating: 'Standard tech event pizza and beer. Mid. 5/10',
     },
     {
-        name: 'Building With and For AI: Developer Tools for Modern Apps',
-        location: { label: 'New York, NY', lat: 40.7128, lng: -74.006 },
-        date: '2025-08-21',
-        format: ['Talks', 'Networking'],
-        audience: ['Engineers', 'Engineering managers'],
-        attendees: 50,
-        speakers: ['Abe'],
-        partners: ['Vercel', 'Profound'],
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/342',
-        starRating: 4.2,
-        aiSummary:
-            "Abe teamed up with Vercel and Profound for a deep dive into AI dev tools. 50 engineers and managers discussing the bleeding edge of AI tooling. Someone asked when we'll have AI that writes the AI that writes the code. Soon™.",
-        imageGallery: ['nyc-1.jpg'],
-        chaos: 'Networking session turned into impromptu recruitment fair',
-        funFact:
-            'Someone was taking notes using an AI scribe that was running on a framework that was demoed at the event',
-        snackRating: 'NYC bagels and coffee. Proper. 8/10',
+        date: '2025-07-22',
+        name: 'AGI Builders Meetup with PostHog',
+        location: { label: 'San Francisco, CA' },
+        format: 'Talks, Fireside',
+        audience: splitValues('SF AI Enthusiasts'),
+        speakers: splitValues('Peter K + James'),
+        partners: parsePartners('AGI Builders'),
+        attendees: 112,
+        vibeScore: 5,
+        link: 'https://github.com/PostHog/company-internal/issues/1999',
     },
     {
-        name: 'The Future of Developer Experience: Toronto Edition',
-        location: { label: 'Toronto, ON', lat: 43.6532, lng: -79.3832 },
-        date: '2025-08-26',
-        format: ['Talks', 'Networking'],
-        audience: ['Startup founders'],
-        attendees: 75,
-        speakers: ['Vincent'],
-        partners: ['Deskree'],
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/347',
-        starRating: 4.0,
-        aiSummary:
-            "Vincent brought the DX conversation to Toronto. 75 founders debating what makes a good developer experience. Spoiler: it's good docs, fast builds, and tools that don't make you want to flip your desk.",
-        imageGallery: ['toronto-1.jpg', 'toronto-2.jpg'],
-        chaos: "Someone's laptop died during their talk about reliable infrastructure",
-        funFact: 'Everyone apologized at least once. Very Canadian.',
-        snackRating: 'Poutine and Tim Hortons. When in Rome. 7/10',
-    },
-    {
-        name: 'Stealth Mode Mornings with PostHog',
-        location: { label: 'New York, NY', lat: 40.7128, lng: -74.006 },
         date: '2025-07-24',
-        format: ['Breakfast'],
-        audience: ['Stealth founders'],
+        name: 'Stealth Mode Mornings with PostHog',
+        location: { label: 'New York City, NY' },
+        format: 'Breakfast',
+        audience: splitValues('Stealth founders'),
+        speakers: splitValues('Mine'),
+        partners: parsePartners('Starcycle, Cooley'),
         attendees: 7,
-        speakers: ['Mine'],
-        partners: ['Starcycle', 'Cooley'],
         vibeScore: 2,
         link: 'https://github.com/PostHog/meta/issues/330',
-        starRating: 3.8,
-        aiSummary:
-            "Intimate breakfast with 7 stealth founders. Everyone signed NDAs. We still don't know what anyone is building. Could be the next big thing. Could be another food delivery app. The mystery continues.",
-        imageGallery: ['stealth-1.jpg'],
-        chaos: 'Someone accidentally almost revealed their stealth startup and everyone gasped',
-        funFact: 'This event was so stealth we almost forgot to have it',
-        snackRating: 'Fancy breakfast but portions were TINY. 4/10',
     },
     {
-        name: 'Pubquiz at Flutter & friends',
-        location: { label: 'Stockholm, SE', lat: 59.3293, lng: 18.0686 },
-        date: '2025-08-31',
-        format: ['Pub quiz'],
-        audience: ['Flutter engineers'],
+        date: '2025-08-12',
+        name: 'AI Product Breakfast: AI Decisioning',
+        location: { label: 'Austin, TX' },
+        format: 'Breakfast + OST',
+        audience: splitValues('AI Engineers'),
+        speakers: splitValues('Haven'),
+        partners: parsePartners('AITX'),
+        attendees: 25,
+        vibeScore: 5,
+        link: 'https://github.com/PostHog/meta/issues/334',
+    },
+    {
+        date: '2025-08-21',
+        name: 'Building With and For AI: Developer Tools for Modern Apps',
+        location: { label: 'New York City, NY' },
+        format: 'Talks, Networking',
+        audience: splitValues('Engineers, Engineering managers'),
+        speakers: splitValues('Abe'),
+        partners: parsePartners('Vercel, Profound'),
         attendees: 50,
-        speakers: ['Manoel'],
-        partners: [],
+        vibeScore: 3,
+        link: 'https://github.com/PostHog/meta/issues/342',
+    },
+    {
+        date: '2025-08-26',
+        name: 'The Future of Developer Experience: Toronto Edition',
+        location: { label: 'Toronto, Canada' },
+        format: 'Talks, Networking',
+        audience: splitValues('Startup founders'),
+        speakers: splitValues('Vincent'),
+        partners: parsePartners('Deskree'),
+        attendees: 75,
+        vibeScore: 3,
+        link: 'https://github.com/PostHog/meta/issues/347',
+    },
+    {
+        date: '2025-08-31',
+        name: 'Pubquiz at Flutter & friends',
+        location: { label: 'Stockholm, Sweeden' },
+        format: 'Pub quiz',
+        audience: splitValues('Flutter engineers'),
+        speakers: splitValues('Manoel'),
+        attendees: 50,
         vibeScore: 2,
         link: 'https://github.com/PostHog/meta/issues/358',
-        starRating: 3.9,
-        aiSummary:
-            "Manoel hosted a pub quiz at Flutter & friends conference. 50 Flutter engineers proving they're better at writing Dart than answering trivia. Lots of debate about whether Flutter counts as 'real' native development. (It does.)",
-        imageGallery: ['pubquiz-1.jpg'],
-        chaos: 'Quiz master asked a question about SwiftUI and got booed',
-        funFact: "Winning team's name was 'Widget Tree Huggers'",
-        snackRating: 'Swedish pub food and beer. Solid. 7/10',
     },
     {
-        name: "München Hogtoberfest '25",
-        location: { label: 'Munich, DE', lat: 48.1351, lng: 11.582 },
+        date: '2025-09-14',
+        name: 'Valio Con',
+        location: { label: 'Oceanside, CA', lat: 33.1939, lng: -117.3827, venue: 'Seabird Hotel' },
+        format: 'Conf sponsorship',
+        audience: splitValues('Designers'),
+        speakers: splitValues('Cory Watilo'),
+        speakerTopic: 'Why doing design wrong feels so right',
+        attendees: 65,
+        vibeScore: 4,
+        photos: ['https://res.cloudinary.com/dmukukwp6/image/upload/cory_valio_con_c6989afcef.jpeg'],
+        deck: 'https://www.figma.com/slides/nteoqVgdXmpjeQAOLIyTm7/Valio-Con-2025?node-id=1-42&t=khKhBYwd4m5wkAp4-1',
+        link: 'https://github.com/PostHog/meta/issues/343',
+    },
+    {
+        date: '2025-09-16',
+        name: 'PostHog hardware hacknight',
+        location: { label: 'Vermont' },
+        format: 'Meetup',
+        audience: splitValues('Engineers and founders'),
+        speakers: splitValues('Danilo'),
+        attendees: 19,
+        vibeScore: 5,
+        link: 'https://github.com/PostHog/meta/issues/322',
+    },
+    {
+        date: '2025-09-23',
+        name: 'PostHog Founders Lunch',
+        location: { label: 'Cardiff, UK' },
+        format: 'Lunch + OST',
+        audience: splitValues('Founders'),
+        speakers: splitValues('Adam'),
+        attendees: 25,
+        vibeScore: 4,
+        link: 'https://github.com/PostHog/meta/issues/372',
+    },
+    {
         date: '2025-09-24',
-        format: ['Drinks'],
-        audience: ['Founders', 'Engineers'],
+        name: 'James dinner with ODF founders',
+        location: { label: 'San Francisco, CA' },
+        private: true,
+        format: 'Dinner',
+        audience: splitValues('Founders'),
+        speakers: splitValues('James'),
+        partners: parsePartners('ODF'),
+        attendees: 11,
+        vibeScore: 4,
+        link: 'https://posthog.slack.com/archives/C08CG24E3SR/p1758828510754499',
+    },
+    {
+        date: '2025-09-24',
+        name: "München Hogtoberfest '25",
+        location: { label: 'Munich, Germany' },
+        format: 'Drinks',
+        audience: splitValues('Founders and engineers'),
+        partners: parsePartners('Speedinvest'),
         attendees: 7,
-        speakers: [],
-        partners: ['Speedinvest'],
         vibeScore: 2,
         link: 'https://github.com/PostHog/meta/issues/361',
-        starRating: 4.2,
-        aiSummary:
-            'Small but mighty gathering in Munich. 7 people, infinite beer, and discussions about European startup ecosystems. Speedinvest brought the VC perspective. Everyone wore lederhosen. (Just kidding. Nobody wore lederhosen.)',
-        imageGallery: ['munich-1.jpg'],
-        chaos: 'Someone tried to expense their Oktoberfest outfit',
-        funFact: 'Smallest PostHog event by attendance, highest beer-to-person ratio',
-        snackRating: 'German pretzels and beer. Legendary. 10/10',
+    },
+    {
+        date: '2025-09-25',
+        name: 'MCP Builders Breakfast',
+        location: { label: 'Amsterdam, Denmark' },
+        format: 'Breakfast + OST',
+        audience: splitValues('MCP practitioners'),
+        speakers: splitValues('Jonathan'),
+        partners: parsePartners('Fiberplane'),
+        attendees: 20,
+        vibeScore: 5,
+        link: 'https://github.com/PostHog/meta/issues/356',
+    },
+    {
+        date: '2025-09-26',
+        name: "From Open Source to Scale: A Conversation with PostHog's Tim Glaser",
+        location: { label: 'Dublin, Ireland' },
+        format: 'Panel',
+        audience: splitValues('Founders'),
+        speakers: splitValues('Tim'),
+        attendees: 55,
+        vibeScore: 5,
+        link: 'https://github.com/PostHog/meta/issues/371',
+    },
+    {
+        date: '2025-09-28',
+        name: 'Paellas and Agents with PostHog',
+        location: { label: 'Barcelona, Spain' },
+        format: 'Workshop',
+        audience: splitValues('AI engineers'),
+        speakers: splitValues('Georgiy'),
+        attendees: 22,
+        vibeScore: 5,
+        link: 'https://github.com/PostHog/meta/issues/333',
+    },
+    {
+        date: '2025-09-30',
+        name: 'Jersey City Tech Meetup with PostHog',
+        location: { label: 'Jersey City, New Jersey' },
+        format: 'Talks, Panel, Networking',
+        audience: splitValues('Product managers and engineers'),
+        speakers: splitValues('Abe'),
+        partners: parsePartners('Apprenticeio'),
+        attendees: 70,
+        vibeScore: 4,
+        link: 'https://github.com/PostHog/meta/issues/339',
+    },
+    {
+        date: '2025-10-10',
+        name: 'Product Weekend',
+        location: { label: 'Toronto, Canada', lat: 43.6532, lng: -79.3832 },
+        format: 'Workshop',
+        audience: splitValues('Product managers'),
+        speakers: splitValues('Zach'),
+        link: 'theproductweekend.com/toronto-oct2025',
+    },
+    {
+        date: '2025-10-14',
+        startTime: '18:00',
+        name: 'AI LA Salon with PostHog',
+        location: { label: 'Los Angeles, CA', lat: 34.0522, lng: -118.2437 },
+        format: 'Talks',
+        audience: splitValues('Founders and engineers'),
+        speakers: splitValues('Raquel'),
+        partners: parsePartners('AI LA'),
+        link: 'lu.ma/ailasalon-posthog',
+    },
+    {
+        date: '2025-10-15',
+        startTime: '17:30',
+        name: 'MCP After Hours London: AI Tooling Demos',
+        location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
+        format: 'Demos',
+        audience: splitValues('AI engineers'),
+        speakers: splitValues('Josh'),
+        partners: parsePartners('Speakeasy'),
+        link: 'https://luma.com/3f2mh0no',
+    },
+    {
+        date: '2025-10-16',
+        startTime: '19:00',
+        name: 'Dev Korea #3',
+        location: { label: 'Seoul, South Korea', lat: 37.5665, lng: 126.978, venue: 'Google for Startups Campus' },
+        format: 'Talks, Networking',
+        audience: splitValues('Developers'),
+        speakerTopic: 'Using PostHog to prioritize and understand user needs',
+        link: 'https://dev-korea.com/events/dev-korea-3-october-2025',
+    },
+    {
+        date: '2025-10-21',
+        startTime: '17:30',
+        name: 'Granola Fireside with James Hawkins',
+        location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
+        format: 'Fireside chat',
+        audience: splitValues('Founders and engineers'),
+        partners: parsePartners('Granola'),
+        link: 'https://luma.com/t5e4fyah',
+    },
+    {
+        date: '2025-11-14',
+        startTime: '15:00',
+        name: 'Product Weekend',
+        location: { label: 'Dublin, Ireland', lat: 53.3498, lng: -6.2603 },
+        format: 'Workshop',
+        audience: splitValues('Product managers'),
+        speakers: splitValues('Alessandro'),
+        speakerTopic: 'Leveraging AI in Product Development',
+        link: 'https://theproductweekend.com/dublin-nov2025',
     },
 ]
 
 function Events() {
-    const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('past')
+    const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
     const [chartKey, setChartKey] = useState(0)
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
     const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
+
+    // Generate unique event key
+    const getEventKey = (event: Event) => {
+        const slug = event.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+        return `${event.date}-${slug}`
+    }
 
     const today = new Date()
     const pastEvents = eventsData
@@ -366,7 +366,7 @@ function Events() {
     const handleEventClick = (event: Event) => {
         setSelectedEvent(event)
         // Hide tooltip and zoom to the event location with animation (deeper zoom for active state)
-        if (chartInstanceRef.current && pointSeriesRef.current) {
+        if (chartInstanceRef.current && pointSeriesRef.current && event.location.lat && event.location.lng) {
             pointSeriesRef.current.hideTooltip()
 
             // Calculate longitude offset to account for detail panel (384px wide)
@@ -885,8 +885,11 @@ function Events() {
     useEffect(() => {
         if (!pointSeriesRef.current || !chartInstanceRef.current) return
 
-        const pointsData = displayEvents.map((event) => ({
-            geometry: { type: 'Point', coordinates: [event.location.lng, event.location.lat] },
+        // Filter events that have coordinates
+        const eventsWithCoords = displayEvents.filter((e) => e.location.lat && e.location.lng)
+
+        const pointsData = eventsWithCoords.map((event) => ({
+            geometry: { type: 'Point', coordinates: [event.location.lng!, event.location.lat!] },
             name: event.name,
             location: event.location.label,
             date: new Date(event.date).toLocaleDateString('en-US', {
@@ -895,8 +898,8 @@ function Events() {
                 year: 'numeric',
             }),
             eventData: event,
-            isSelected: selectedEvent?.name === event.name,
-            isHovered: hoveredEvent?.name === event.name,
+            isSelected: selectedEvent ? getEventKey(selectedEvent) === getEventKey(event) : false,
+            isHovered: hoveredEvent ? getEventKey(hoveredEvent) === getEventKey(event) : false,
         }))
 
         pointSeriesRef.current.data.setAll(pointsData)
@@ -918,7 +921,7 @@ function Events() {
                     const clusterBullets = (chartInstanceRef.current as any).clusterBullets
                     console.log('🔵 Total cluster bullets:', clusterBullets?.size || 0)
                 }
-                ; (chartInstanceRef.current as any).updateClusterColors()
+                (chartInstanceRef.current as any).updateClusterColors()
             }, 50)
         }
     }, [displayEvents, selectedEvent, hoveredEvent])
@@ -932,9 +935,13 @@ function Events() {
         setTimeout(() => {
             if (!chartInstanceRef.current) return
 
+            // Filter events with coordinates
+            const eventsWithCoords = displayEvents.filter((e) => e.location.lat && e.location.lng)
+            if (eventsWithCoords.length === 0) return
+
             // Calculate bounds of all events
-            const lats = displayEvents.map((e) => e.location.lat)
-            const lngs = displayEvents.map((e) => e.location.lng)
+            const lats = eventsWithCoords.map((e) => e.location.lat!)
+            const lngs = eventsWithCoords.map((e) => e.location.lng!)
             const minLat = Math.min(...lats)
             const maxLat = Math.max(...lats)
             const minLng = Math.min(...lngs)
@@ -966,9 +973,13 @@ function Events() {
     // Zoom back to show all events when closing detail pane
     useEffect(() => {
         if (!selectedEvent && chartInstanceRef.current && displayEvents.length > 0) {
+            // Filter events with coordinates
+            const eventsWithCoords = displayEvents.filter((e) => e.location.lat && e.location.lng)
+            if (eventsWithCoords.length === 0) return
+
             // Calculate bounds of all events
-            const lats = displayEvents.map((e) => e.location.lat)
-            const lngs = displayEvents.map((e) => e.location.lng)
+            const lats = eventsWithCoords.map((e) => e.location.lat!)
+            const lngs = eventsWithCoords.map((e) => e.location.lng!)
             const minLat = Math.min(...lats)
             const maxLat = Math.max(...lats)
             const minLng = Math.min(...lngs)
@@ -1031,40 +1042,37 @@ function Events() {
                         <ScrollArea className="flex-1">
                             <div className="p-4 h-96 @xl:h-full">
                                 <div className="space-y-3">
-                                    {displayEvents.map((event, idx) => (
+                                    {displayEvents.map((event) => (
                                         <button
                                             data-scheme="primary"
-                                            key={idx}
+                                            key={getEventKey(event)}
                                             onClick={() => handleEventClick(event)}
                                             onMouseEnter={() => setHoveredEvent(event)}
                                             onMouseLeave={() => setHoveredEvent(null)}
                                             className={cntl`
                       w-full text-left p-3 rounded border transition-all bg-primary
-                      ${selectedEvent?.name === event.name
+                      ${selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
                                                     ? 'border-primary outline outline-orange outline-2 outline-offset-1'
                                                     : 'border-primary'
                                                 }
                     `}
                                         >
-                                            <div className="font-semibold text-sm mb-1 line-clamp-2">{event.name}</div>
-                                            <div className="text-xs text-muted space-y-1">
+                                            <div className="text-secondary text-[13px]">
+                                                {new Date(event.date).toLocaleDateString('en-US', {
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    year: 'numeric',
+                                                })}
+                                            </div>
+                                            <div className="font-semibold text-sm line-clamp-2">{event.name}</div>
+                                            <div className="text-[13px] text-secondary">
                                                 <div>{event.location.label}</div>
-                                                <div>
-                                                    {new Date(event.date).toLocaleDateString('en-US', {
-                                                        month: 'short',
-                                                        day: 'numeric',
-                                                        year: 'numeric',
-                                                    })}
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    {Array.from({ length: event.vibeScore }).map((_, i) => (
-                                                        <span key={i}>🔥</span>
-                                                    ))}
-                                                </div>
-                                                {event.starRating && (
+
+                                                {event.vibeScore && (
                                                     <div className="flex items-center gap-1">
-                                                        <span className="text-orange">★</span>
-                                                        <span>{event.starRating.toFixed(1)}</span>
+                                                        {Array.from({ length: event.vibeScore }).map((_, i) => (
+                                                            <span key={i}>🔥</span>
+                                                        ))}
                                                     </div>
                                                 )}
                                             </div>
@@ -1090,13 +1098,15 @@ function Events() {
                                         <h2 className="text-xl font-bold mb-2 pr-12">{selectedEvent.name}</h2>
 
                                         <div className="space-y-3 text-sm mb-4">
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Location</div>
-                                                <div>{selectedEvent.location.label}</div>
-                                            </div>
+
+                                            {selectedEvent.private && (
+                                                <div data-scheme="secondary" className="border border-primary bg-primary rounded p-2">
+                                                    <div className="text-secondary text-[13px]">This event is closed to the public</div>
+                                                </div>
+                                            )}
 
                                             <div>
-                                                <div className="text-muted text-xs mb-1">Date</div>
+                                                <div className="text-secondary text-[13px] mb-1">Date</div>
                                                 <div>
                                                     {new Date(selectedEvent.date).toLocaleDateString('en-US', {
                                                         month: 'long',
@@ -1106,100 +1116,166 @@ function Events() {
                                                 </div>
                                             </div>
 
-                                            {selectedEvent.starRating && (
+                                            {selectedEvent.startTime && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">Rating</div>
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="text-orange text-lg">★</span>
-                                                        <span className="text-lg font-semibold">
-                                                            {selectedEvent.starRating.toFixed(1)}
-                                                        </span>
-                                                        <span className="text-muted">/ 5.0</span>
+                                                    <div className="text-secondary text-[13px] mb-1">Start Time</div>
+                                                    <div>
+                                                        {(() => {
+                                                            const [hours, minutes] = selectedEvent.startTime.split(':').map(Number)
+                                                            const period = hours >= 12 ? 'PM' : 'AM'
+                                                            const displayHours = hours % 12 || 12
+                                                            return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`
+                                                        })()}
                                                     </div>
                                                 </div>
                                             )}
 
                                             <div>
-                                                <div className="text-muted text-xs mb-1">Format</div>
-                                                <div className="flex flex-wrap gap-1">
-                                                    {selectedEvent.format.map((f, i) => (
-                                                        <span key={i} className="px-2 py-1 bg-accent rounded text-xs">
-                                                            {f}
-                                                        </span>
-                                                    ))}
-                                                </div>
+                                                <div className="text-secondary text-[13px] mb-1">Location</div>
+                                                {selectedEvent.location.venue && (
+                                                    <div className="text-primary font-semibold mt-1">{selectedEvent.location.venue}</div>
+                                                )}
+                                                <div>{selectedEvent.location.label}</div>
                                             </div>
 
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Vibe Score</div>
-                                                <div className="flex gap-1">
-                                                    {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
-                                                        <span key={i} className="text-lg">
-                                                            🔥
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Attendees</div>
-                                                <div>{selectedEvent.attendees} people</div>
-                                            </div>
-
-                                            {selectedEvent.speakers.length > 0 && (
+                                            {selectedEvent.description && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">Speakers</div>
+                                                    <div className="text-secondary text-[13px] mb-1">Description</div>
+                                                    <div className="text-sm leading-relaxed">{selectedEvent.description}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.format && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Format</div>
+                                                    <div>{selectedEvent.format}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.audience && selectedEvent.audience.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Audience</div>
+                                                    <div>{selectedEvent.audience.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}</div>
                                                     <div>{selectedEvent.speakers.join(', ')}</div>
                                                 </div>
                                             )}
 
-                                            {selectedEvent.partners.length > 0 && (
+                                            {selectedEvent.speakerTopic && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">Partners</div>
-                                                    <div>{selectedEvent.partners.join(', ')}</div>
+                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
+                                                    <div>{selectedEvent.speakerTopic}</div>
                                                 </div>
                                             )}
 
-                                            {selectedEvent.aiSummary && (
+                                            {selectedEvent.partners && selectedEvent.partners.length > 0 && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">AI Summary</div>
-                                                    <div className="text-sm leading-relaxed">
-                                                        {selectedEvent.aiSummary}
+                                                    <div className="text-secondary text-[13px] mb-1">Partners</div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedEvent.partners.map((partner, i) => (
+                                                            partner.url ? (
+                                                                <a
+                                                                    key={i}
+                                                                    href={partner.url}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-orange hover:underline"
+                                                                >
+                                                                    {partner.name}
+                                                                </a>
+                                                            ) : (
+                                                                <span key={i}>{partner.name}</span>
+                                                            )
+                                                        ))}
                                                     </div>
                                                 </div>
                                             )}
 
-                                            {selectedEvent.funFact && (
+                                            {selectedEvent.attendees && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">Fun Fact</div>
-                                                    <div className="text-sm">{selectedEvent.funFact}</div>
+                                                    <div className="text-secondary text-[13px] mb-1">Attendees</div>
+                                                    <div>{selectedEvent.attendees} people</div>
                                                 </div>
                                             )}
 
-                                            {selectedEvent.chaos && (
+                                            {selectedEvent.vibeScore && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">Chaos Level</div>
-                                                    <div className="text-sm">{selectedEvent.chaos}</div>
+                                                    <div className="text-secondary text-[13px] mb-1">Vibe Score</div>
+                                                    <div className="flex gap-1">
+                                                        {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
+                                                            <span key={i} className="text-lg">🔥</span>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             )}
 
-                                            {selectedEvent.snackRating && (
+                                            {selectedEvent.photos && selectedEvent.photos.length > 0 && (
                                                 <div>
-                                                    <div className="text-muted text-xs mb-1">Snack Rating</div>
-                                                    <div className="text-sm">{selectedEvent.snackRating}</div>
+                                                    <div className="text-secondary text-[13px] mb-1">Photos</div>
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        {selectedEvent.photos.map((photo, i) => (
+                                                            <img
+                                                                key={i}
+                                                                src={photo}
+                                                                alt={`Event photo ${i + 1}`}
+                                                                className="w-full h-32 object-cover rounded"
+                                                            />
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             )}
 
-                                            <div>
-                                                <a
-                                                    href={selectedEvent.link}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-orange hover:underline text-sm"
-                                                >
-                                                    View details →
-                                                </a>
-                                            </div>
+                                            {selectedEvent.video && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Video</div>
+                                                    <a
+                                                        href={selectedEvent.video}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-orange hover:underline text-sm"
+                                                    >
+                                                        Watch video →
+                                                    </a>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.deck && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Deck</div>
+                                                    <a
+                                                        href={selectedEvent.deck}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-orange hover:underline text-sm"
+                                                    >
+                                                        View deck →
+                                                    </a>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.link && (
+                                                <div>
+                                                    <OSButton
+                                                        asLink
+                                                        to={selectedEvent.link}
+                                                        variant={
+                                                            new Date(selectedEvent.date) >= new Date(new Date().toISOString().split('T')[0])
+                                                                ? 'primary'
+                                                                : 'secondary'
+                                                        }
+                                                        width="full"
+                                                        size="md"
+                                                        external
+                                                    >
+                                                        View details
+                                                    </OSButton>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </ScrollArea>
