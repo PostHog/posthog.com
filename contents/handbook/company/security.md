@@ -80,6 +80,10 @@ Security vulnerabilities and other security related findings can be reported via
 
 For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
 
+## Reporting phishing
+
+If you receive a phishing or malicious email, it's useful to report it to the security team so that they can make other employees aware. Forward these emails to [security-internal@posthog.com](mailto:security-internal@posthog.com).
+
 ## Secure communication (aka preventing or detecting social engineering)
 
 We have a few policies in place to prevent social engineering attacks. 
