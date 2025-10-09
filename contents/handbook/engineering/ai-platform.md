@@ -12,7 +12,7 @@ The AI platform consists of several user-facing products (Max, Deep Research, Se
 
 ## User-Facing Products
 
-### Max: Our In-App Agent [Beta]
+### Max: Our in-app agent [Beta]
 
 Max is PostHog's primary in-app agent, accessible through a chat interface embedded directly into the product. Think of Max as a fundamentally different way to interact with PostHog—instead of clicking buttons and filling out forms, you ask questions and make requests in natural language.
 
@@ -120,7 +120,7 @@ Think of Max as your coworker who can quickly pull up data, and Deep Research as
 
 Access Deep Research by toggling "Research" mode in Max, or via the dedicated Deep Research UI. It's a paid feature with a generous free tier (see [Pricing](#pricing-and-product-positioning)).
 
-**Current Status & Owneship**
+**Current Status & Ownership**
 
 Deep Research is under active development. The Max AI team owns Deep Research. The architecture is implemented but we're still refining the research strategies and denoising algorithms. Early results show it can find patterns and insights that human analysts miss, but it occasionally goes down rabbit holes or misinterprets data—we're working on improving these edge cases.
 
@@ -189,11 +189,11 @@ The underlying technology is the same—watch many recordings, find patterns, cl
 
 Access Session Summaries through Max, Deep Research, or its dedicated UI entry points. It's a paid feature with a generous free tier (see [Pricing](#pricing-and-product-positioning)).
 
-**Current Status & Owneship**
+**Current Status & Ownership**
 
 Session Summaries is in alpha. The Max AI team owns Session Summaries. It's working well for error and frustration detection, and early users report finding issues they would have missed. We're refining the clustering algorithms (sometimes it groups issues too broadly or too narrowly) and integrating video and GIF analysis to support findings with visual confirmation.
 
-### Array: PostHog in Action [Under development]
+### Array: PostHog in action [Under development]
 
 Array is our most ambitious bet: a desktop agent that automatically turns PostHog data into shipped code. The vision is to free product engineers from distractions so they can focus on what they love—building great features—by automating all the chores that eat up their day.
 
@@ -263,7 +263,7 @@ When Array isn't the right fit (maybe you don't trust AI to ship code automatica
 
 The dedicated Array team owns the product. See [Team Structure](#team-structure-and-collaboration) for collaboration details.
 
-### Wizard: AI-Powered Onboarding [General availability]
+### Wizard: AI-powered onboarding [General availability]
 
 The Wizard is PostHog's AI-powered installation assistant that gets you from zero to collecting data in minutes instead of hours. Instead of reading documentation, finding the right SDK, figuring out configuration, and manually integrating PostHog into your codebase, you run one command and the Wizard handles everything.
 
@@ -329,7 +329,7 @@ The Wizard is in general availability and actively used during customer onboardi
 
 The Wizard's future direction—particularly whether it should integrate with Array for continuous instrumentation or remain a standalone onboarding tool—is being evaluated as part of the broader AI platform strategy.
 
-### MCP: PostHog for Third-Party Tools [General availability]
+### MCP: PostHog for third-party tools [General availability]
 
 The MCP (Model Context Protocol) server is PostHog's way of meeting engineers where they already are. Not everyone wants to switch to the PostHog UI to analyze data—many prefer to stay in their code editor, terminal, or favorite AI tool. The MCP server makes that possible.
 
@@ -372,7 +372,7 @@ The MCP server also supports session state (active project ID, org ID, distinct 
 Both Max and MCP give you access to the same PostHog capabilities, but they serve different workflows:
 
 **Use Max when:**
-- You want the best possible UX with sharing, navigation, and linking between AI results and PostHog artefacts
+- You want the best possible UX with sharing, navigation, and linking between AI results and PostHog artifacts
 - You're doing exploratory analysis and want to iterate quickly
 - You need Deep Research or Session Summaries capabilities
 - You want AI specifically trained on PostHog patterns and your actual usage data
@@ -391,7 +391,7 @@ MCP is in general availability. The Max AI team owns the MCP server, with Josh S
 
 ## Max, how does it work?
 
-### Single-Loop Agent with Mode Switching
+### Single-loop agent with mode switching
 
 Max is based on a single-loop agent architecture, heavily inspired by Claude Code, with some PostHog unique flavour. The core insight is simple: instead of routing between multiple specialized agents that act as black boxes, we have one agent that maintains full conversation context and can dynamically load expertise as needed.
 
@@ -427,13 +427,13 @@ This architecture allows product teams to create their own modes without touchin
 
 **When do black-box sub-agents still make sense?** There are exceptions. Some processes benefit from being hidden from the main agent—usually when the logic is completely detached from the conversation context, or when you want to use strategies or optimizations that would confuse the main agent if exposed. Our agentic RAG system for insight search is a good example: it iteratively searches through insights and cherry-picks the best ones using a complex scoring system. The main agent doesn't need to see all that—it just needs the final result.
 
-### How Max and MCP Share the Same Capabilities
+### How Max and MCP share the same capabilities
 
 The problem we needed to solve: Max and the MCP server were developed by different teams, didn't offer the same tools, and had completely different architectures. Users would find features in Max that didn't exist in the MCP, and vice versa.
 
 The solution is an abstraction layer. Agent modes expose both high-level LLM tools (like "create a funnel with these parameters") and low-level API endpoint tools (like "call POST /api/projects/{id}/insights"). Both Max and the MCP have access to the same capabilities, just through different interfaces.
 
-### How Array and Wizard Fit In
+### How Array and Wizard fit in
 
 Both Array and the Wizard currently consume the MCP. This integration gives them access to all the agent modes we're building. If Claude Code (which Array uses for code generation) ever becomes a bottleneck, we could swap in PostHog's own single-loop agent since they share the same mental model. We'd need to copy over Claude Code's terminal and file system tools (bash, grep, etc.) and add them as core tools.
 
@@ -469,7 +469,7 @@ Maintain consistency. AI features should follow PostHog's design patterns and UX
 
 ## Pricing and Product Positioning
 
-### How We Think About Pricing
+### How we think about pricing
 
 We think about AI features in two categories:
 
@@ -479,9 +479,9 @@ We think about AI features in two categories:
 
 Right now everything is in beta and pricing is subject to change as we learn what users value.
 
-### How Users Should Think About Our Products
+### How users should think about our products
 
-**Max** is the main PostHog product for AI interactions. It's where most users will spend their time. You can switch between Core, Deep Research, and Session Summaries modes depending on what you're trying to do. The UX is better than external tools because we can support sharing, navigation, and linking between AI results and PostHog artefacts. Max is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
+**Max** is the main PostHog product for AI interactions. It's where most users will spend their time. You can switch between Core, Deep Research, and Session Summaries modes depending on what you're trying to do. The UX is better than external tools because we can support sharing, navigation, and linking between AI results and PostHog artifacts. Max is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
 
 **Deep Research** is a mode available within Max, but also accessible through its own dedicated UI if you want to jump straight into research mode. Use it for open-ended investigative work where you're trying to understand a complex problem.
 
@@ -493,7 +493,7 @@ Right now everything is in beta and pricing is subject to change as we learn wha
 
 ## Future Directions
 
-### Third-Party Context Integration
+### Third-party context integration
 
 We want to connect Max to third-party tools for additional context. Imagine Max analyzing data across PostHog, Slack messages, and Zendesk tickets to understand not just what users are doing, but what they're saying and reporting. This data could also generate signals for the Array product—if users are complaining about a bug in Slack and PostHog sees errors in the same area, that's a strong signal for Array to investigate and potentially fix it automatically.
 
@@ -519,7 +519,7 @@ This is in the idea stage right now, but the Max AI team will likely start worki
 
 ## Implementation Recommendations
 
-### For Engineers Adding AI Features
+### For engineers adding AI features
 
 If your feature **reads or writes PostHog data**, build it into Max or have it hand off to Max after initiation. For example, if you're adding a "Fix with AI" button to debug SQL queries, that button should open Max with context about the query, so users can iteratively debug with AI assistance.
 
