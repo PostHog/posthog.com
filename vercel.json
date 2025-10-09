@@ -493,6 +493,7 @@
             "source": "/handbook/engineering/app-east",
             "destination": "/handbook/people/team-structure/product-analytics"
         },
+        { "source": "/handbook/team-structure", "destination": "/handbook/company/small-teams" },
         { "source": "/handbook/people/team-structure/app-east", "destination": "/handbook/small-teams/app-east" },
         { "source": "/docs/integrate/client/browser-extension", "destination": "/docs/integrate/browser-extension" },
         { "source": "/handbook/company/website-design-process", "destination": "/handbook/designing-posthog-website" },
@@ -647,6 +648,7 @@
         { "source": "/manual/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
+        { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
@@ -1605,7 +1607,8 @@
         },
         { "source": "/teams/growth", "destination": "/teams" },
         { "source": "/eu", "destination": "/pricing" },
-        { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" }
+        { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
+        { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" }
     ],
     "headers": [
         {

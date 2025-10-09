@@ -20,37 +20,56 @@ Each PM belongs to a small number of our small engineering teams, so that all te
 
 Here is a overview that shows which of our PMs currently works with which team:
 
-<TeamMember name="Anna Szell" photo />
+<div className="grid @md:grid-cols-2 gap-4">
 
-- [Analytics Platform](/teams/analytics-platform)
-- [Data Warehouse](/teams/data-warehouse)
-- [Product Analytics](/teams/product-analytics)
-- [Web Analytics](/teams/web-analytics)
+<fieldset>
+<legend><TeamMember name="Anna Szell" photo /></legend>
 
-<TeamMember name="Annika Schmid" photo />
+-   [Analytics Platform](/teams/analytics-platform)
+-   [Data Warehouse](/teams/data-warehouse)
+-   [Product Analytics](/teams/product-analytics)
+-   [Web Analytics](/teams/web-analytics)
 
-- [Feature Flags](/teams/feature-flags)
-- [Experiments](/teams/experiments)
-- [Max AI](/teams/max-ai)
+</fieldset>
 
-<TeamMember name="Cory Slater" photo />
+<fieldset>
+<legend><TeamMember name="Annika Schmid" photo /></legend>
 
-- [Error Tracking](/teams/error-tracking)
-- [Surveys](/teams/surveys)
-- [Session Replay](/teams/session-replay)
+-   [Feature Flags](/teams/feature-flags)
+-   [Experiments](/teams/experiments)
+-   [Max AI](/teams/max-ai)
 
-<TeamMember name="Abe Basu" photo />
+</fieldset>
 
-- [Messaging & CDP](/teams/messaging)
-- [Batch Exports (light support)](/teams/batch-exports)
-- Embedded Analytics
-- Logs
+<fieldset>
+<legend><TeamMember name="Cory Slater" photo /></legend>
 
-**Teams with no PM currently**
+-   [Error Tracking](/teams/error-tracking)
+-   [Surveys](/teams/surveys)
+-   [Session Replay](/teams/session-replay)
 
-- [Customer Analytics](/teams/customer-analytics)
-- [LLM Analytics](/teams/llm-analytics)
-- [Revenue Analytics](/teams/revenue-analytics)
+</fieldset>
+
+<fieldset>
+<legend><TeamMember name="Abe Basu" photo /></legend>
+
+-   [Messaging & CDP](/teams/messaging)
+-   [Batch Exports (light support)](/teams/batch-exports)
+-   Embedded Analytics
+-   Logs
+
+</fieldset>
+
+<fieldset>
+<legend>Teams with no PM currently</legend>
+
+-   [Customer Analytics](/teams/customer-analytics)
+-   [LLM Analytics](/teams/llm-analytics)
+-   [Revenue Analytics](/teams/revenue-analytics)
+
+</fieldset>
+
+</div>
 
 ## Product goals
 
@@ -63,8 +82,10 @@ As the PM team, we are also pursuing a couple of side projects each quarter with
 In Q3 2025, those are:
 
 **Goal 1: Investigate if we can automate growth reviews, some parts at least** -> <TeamMember name="Anna Szell" photo /> & <TeamMember name="Cory Slater" photo />
-* Something along the lines of having a materialized view per metric
-* Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
+
+-   Something along the lines of having a materialized view per metric
+-   Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
 
 **Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
-* We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
+
+-   We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
