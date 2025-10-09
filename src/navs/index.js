@@ -1051,6 +1051,10 @@ export const handbookSidebar = [
                 url: '/handbook/people/talent',
             },
             {
+                name: 'Hogpatch operations',
+                url: '/handbook/people/hogpatch-operations',
+            },
+            {
                 name: 'Merch store',
                 url: '/handbook/company/merch-store',
             },
