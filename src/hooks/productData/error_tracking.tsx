@@ -11,8 +11,9 @@ export const errorTracking = {
     colorSecondary: 'red',
     category: 'product_engineering',
     seo: {
-        title: 'Error Tracking - PostHog',
-        description: 'Track errors and exceptions in your code, then assign them as issues.',
+        title: 'Error Tracking – Catch and fix issues faster with PostHog',
+        description:
+            'Capture, monitor, and resolve exceptions with Error Tracking. Connect product analytics and session replay to ship confidently with full context.',
     },
     overview: {
         title: 'Track errors and resolve issues',

@@ -15,8 +15,9 @@ export const dataWarehouse = {
     colorSecondary: 'lilac',
     // category: 'data',
     seo: {
-        title: 'Data Warehouse - PostHog',
-        description: 'Unify and query data from any source and analyze it alongside your product data.',
+        title: 'Data Warehouse – Sync and query product data in PostHog',
+        description:
+            "Centralize your product data with PostHog's Data Warehouse. Query events, build transformations, and analyze results in one place.",
     },
     overview: {
         title: 'Query & visualize product and third party data together',

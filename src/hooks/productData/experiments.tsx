@@ -14,8 +14,9 @@ export const experiments = {
     colorSecondary: 'lilac',
     category: 'product_engineering',
     seo: {
-        title: 'Experiments - PostHog',
-        description: 'Run statistically-significant multivariate tests and robust targeting & exclusion rules.',
+        title: 'Experiments – Run A/B tests and validate ideas with PostHog',
+        description:
+            'Validate feature impact and make release decisions confidently with Experiments. Run A/B and multivariate tests with robust targeting & exclusion rules.',
     },
     overview: {
         title: 'Test changes with statistical significance',

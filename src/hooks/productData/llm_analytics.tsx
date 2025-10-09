@@ -51,9 +51,9 @@ export const llmAnalytics = {
     },
     volume: 100000,
     seo: {
-        title: 'LLM analytics - PostHog',
+        title: 'LLM Analytics – Observe and optimize AI products in PostHog',
         description:
-            'Track every conversation, model performance, costs, and errors in your LLM applications. 10x cheaper than other LLM observability tools.',
+            'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation, model performance, cost, and error.',
     },
     overview: {
         title: 'Monitor and debug your AI products',

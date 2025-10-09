@@ -13,9 +13,9 @@ export const webAnalytics = {
     category: 'analytics',
     billedWith: 'Product analytics',
     seo: {
-        title: 'Web analytics - PostHog',
+        title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
-            'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. Built for people who really liked GA3...',
+            'Track traffic, funnels, and performance with Web Analytics. Get privacy-friendly insights, pre-built dashboards, real-time data, and no sampling.',
     },
     overview: {
         title: 'Privacy-focused web analytics',
