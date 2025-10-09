@@ -935,42 +935,49 @@ function Events() {
     }, [selectedEvent, displayEvents])
 
     return (
-        <Explorer
-            template="generic"
-            slug="events"
-            title="Cool tech events"
-            fullScreen
-            viewportClasses="[&>div>div]:h-full"
-        >
-            <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
-                <aside
-                    data-scheme="secondary"
-                    className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
-                >
-                    <div className="border-b border-primary px-4 pt-4 pb-4">
-                        <ToggleGroup
-                            title=""
-                            hideTitle
-                            options={[
-                                { label: `Upcoming (${upcomingEvents.length})`, value: 'upcoming' },
-                                { label: `Past (${pastEvents.length})`, value: 'past' },
-                            ]}
-                            onValueChange={(value) => setActiveTab(value as 'past' | 'upcoming')}
-                            value={activeTab}
-                        />
-                    </div>
+        <>
+            <SEO
+                title="Cool tech events - PostHog"
+                description="Real-life events for people who like tech and people who build things"
+                image={`/images/og/default.png`}
+            />
 
-                    <ScrollArea className="flex-1">
-                        <div className="p-4 h-96 @xl:h-full">
-                            <div className="space-y-3">
-                                {displayEvents.map((event, idx) => (
-                                    <button
-                                        data-scheme="primary"
-                                        key={idx}
-                                        onClick={() => handleEventClick(event)}
-                                        onMouseEnter={() => setHoveredEvent(event)}
-                                        onMouseLeave={() => setHoveredEvent(null)}
-                                        className={cntl`
+            <Explorer
+                template="generic"
+                slug="events"
+                title="Cool tech events"
+                fullScreen
+                viewportClasses="[&>div>div]:h-full"
+            >
+                <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+                    <aside
+                        data-scheme="secondary"
+                        className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
+                    >
+                        <div className="border-b border-primary px-4 pt-4 pb-4">
+                            <ToggleGroup
+                                title=""
+                                hideTitle
+                                options={[
+                                    { label: `Upcoming (${upcomingEvents.length})`, value: 'upcoming' },
+                                    { label: `Past (${pastEvents.length})`, value: 'past' },
+                                ]}
+                                onValueChange={(value) => setActiveTab(value as 'past' | 'upcoming')}
+                                value={activeTab}
+                            />
+                        </div>
+
+                        <ScrollArea className="flex-1">
+                            <div className="p-4 h-96 @xl:h-full">
+                                <div className="space-y-3">
+                                    {displayEvents.map((event, idx) => (
+                                        <button
+                                            data-scheme="primary"
+                                            key={idx}
+                                            onClick={() => handleEventClick(event)}
+                                            onMouseEnter={() => setHoveredEvent(event)}
+                                            onMouseLeave={() => setHoveredEvent(null)}
+                                            className={cntl`
                       w-full text-left p-3 rounded border transition-all bg-primary
                       ${
                           selectedEvent?.name === event.name
@@ -978,169 +985,172 @@ function Events() {
                               : 'border-primary'
                       }
                     `}
-                                    >
-                                        <div className="font-semibold text-sm mb-1 line-clamp-2">{event.name}</div>
-                                        <div className="text-xs text-muted space-y-1">
-                                            <div>{event.location.label}</div>
-                                            <div>
-                                                {new Date(event.date).toLocaleDateString('en-US', {
-                                                    month: 'short',
-                                                    day: 'numeric',
-                                                    year: 'numeric',
-                                                })}
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                                {Array.from({ length: event.vibeScore }).map((_, i) => (
-                                                    <span key={i}>🔥</span>
-                                                ))}
-                                            </div>
-                                            {event.starRating && (
+                                        >
+                                            <div className="font-semibold text-sm mb-1 line-clamp-2">{event.name}</div>
+                                            <div className="text-xs text-muted space-y-1">
+                                                <div>{event.location.label}</div>
+                                                <div>
+                                                    {new Date(event.date).toLocaleDateString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                        year: 'numeric',
+                                                    })}
+                                                </div>
                                                 <div className="flex items-center gap-1">
-                                                    <span className="text-orange">★</span>
-                                                    <span>{event.starRating.toFixed(1)}</span>
+                                                    {Array.from({ length: event.vibeScore }).map((_, i) => (
+                                                        <span key={i}>🔥</span>
+                                                    ))}
+                                                </div>
+                                                {event.starRating && (
+                                                    <div className="flex items-center gap-1">
+                                                        <span className="text-orange">★</span>
+                                                        <span>{event.starRating.toFixed(1)}</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </ScrollArea>
+                    </aside>
+
+                    <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
+                        {selectedEvent && (
+                            <div className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col">
+                                <button
+                                    onClick={() => setSelectedEvent(null)}
+                                    className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
+                                >
+                                    ✕
+                                </button>
+
+                                <ScrollArea className="flex-1">
+                                    <div className="p-4">
+                                        <h2 className="text-xl font-bold mb-2 pr-12">{selectedEvent.name}</h2>
+
+                                        <div className="space-y-3 text-sm mb-4">
+                                            <div>
+                                                <div className="text-muted text-xs mb-1">Location</div>
+                                                <div>{selectedEvent.location.label}</div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-muted text-xs mb-1">Date</div>
+                                                <div>
+                                                    {new Date(selectedEvent.date).toLocaleDateString('en-US', {
+                                                        month: 'long',
+                                                        day: 'numeric',
+                                                        year: 'numeric',
+                                                    })}
+                                                </div>
+                                            </div>
+
+                                            {selectedEvent.starRating && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">Rating</div>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-orange text-lg">★</span>
+                                                        <span className="text-lg font-semibold">
+                                                            {selectedEvent.starRating.toFixed(1)}
+                                                        </span>
+                                                        <span className="text-muted">/ 5.0</span>
+                                                    </div>
                                                 </div>
                                             )}
-                                        </div>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </ScrollArea>
-                </aside>
 
-                <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
-                    {selectedEvent && (
-                        <div className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col">
-                            <button
-                                onClick={() => setSelectedEvent(null)}
-                                className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
-                            >
-                                ✕
-                            </button>
-
-                            <ScrollArea className="flex-1">
-                                <div className="p-4">
-                                    <h2 className="text-xl font-bold mb-2 pr-12">{selectedEvent.name}</h2>
-
-                                    <div className="space-y-3 text-sm mb-4">
-                                        <div>
-                                            <div className="text-muted text-xs mb-1">Location</div>
-                                            <div>{selectedEvent.location.label}</div>
-                                        </div>
-
-                                        <div>
-                                            <div className="text-muted text-xs mb-1">Date</div>
                                             <div>
-                                                {new Date(selectedEvent.date).toLocaleDateString('en-US', {
-                                                    month: 'long',
-                                                    day: 'numeric',
-                                                    year: 'numeric',
-                                                })}
-                                            </div>
-                                        </div>
-
-                                        {selectedEvent.starRating && (
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Rating</div>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-orange text-lg">★</span>
-                                                    <span className="text-lg font-semibold">
-                                                        {selectedEvent.starRating.toFixed(1)}
-                                                    </span>
-                                                    <span className="text-muted">/ 5.0</span>
+                                                <div className="text-muted text-xs mb-1">Format</div>
+                                                <div className="flex flex-wrap gap-1">
+                                                    {selectedEvent.format.map((f, i) => (
+                                                        <span key={i} className="px-2 py-1 bg-accent rounded text-xs">
+                                                            {f}
+                                                        </span>
+                                                    ))}
                                                 </div>
                                             </div>
-                                        )}
 
-                                        <div>
-                                            <div className="text-muted text-xs mb-1">Format</div>
-                                            <div className="flex flex-wrap gap-1">
-                                                {selectedEvent.format.map((f, i) => (
-                                                    <span key={i} className="px-2 py-1 bg-accent rounded text-xs">
-                                                        {f}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div className="text-muted text-xs mb-1">Vibe Score</div>
-                                            <div className="flex gap-1">
-                                                {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
-                                                    <span key={i} className="text-lg">
-                                                        🔥
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div className="text-muted text-xs mb-1">Attendees</div>
-                                            <div>{selectedEvent.attendees} people</div>
-                                        </div>
-
-                                        {selectedEvent.speakers.length > 0 && (
                                             <div>
-                                                <div className="text-muted text-xs mb-1">Speakers</div>
-                                                <div>{selectedEvent.speakers.join(', ')}</div>
+                                                <div className="text-muted text-xs mb-1">Vibe Score</div>
+                                                <div className="flex gap-1">
+                                                    {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
+                                                        <span key={i} className="text-lg">
+                                                            🔥
+                                                        </span>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        )}
 
-                                        {selectedEvent.partners.length > 0 && (
                                             <div>
-                                                <div className="text-muted text-xs mb-1">Partners</div>
-                                                <div>{selectedEvent.partners.join(', ')}</div>
+                                                <div className="text-muted text-xs mb-1">Attendees</div>
+                                                <div>{selectedEvent.attendees} people</div>
                                             </div>
-                                        )}
 
-                                        {selectedEvent.aiSummary && (
+                                            {selectedEvent.speakers.length > 0 && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">Speakers</div>
+                                                    <div>{selectedEvent.speakers.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.partners.length > 0 && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">Partners</div>
+                                                    <div>{selectedEvent.partners.join(', ')}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.aiSummary && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">AI Summary</div>
+                                                    <div className="text-sm leading-relaxed">
+                                                        {selectedEvent.aiSummary}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.funFact && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">Fun Fact</div>
+                                                    <div className="text-sm">{selectedEvent.funFact}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.chaos && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">Chaos Level</div>
+                                                    <div className="text-sm">{selectedEvent.chaos}</div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.snackRating && (
+                                                <div>
+                                                    <div className="text-muted text-xs mb-1">Snack Rating</div>
+                                                    <div className="text-sm">{selectedEvent.snackRating}</div>
+                                                </div>
+                                            )}
+
                                             <div>
-                                                <div className="text-muted text-xs mb-1">AI Summary</div>
-                                                <div className="text-sm leading-relaxed">{selectedEvent.aiSummary}</div>
+                                                <a
+                                                    href={selectedEvent.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-orange hover:underline text-sm"
+                                                >
+                                                    View details →
+                                                </a>
                                             </div>
-                                        )}
-
-                                        {selectedEvent.funFact && (
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Fun Fact</div>
-                                                <div className="text-sm">{selectedEvent.funFact}</div>
-                                            </div>
-                                        )}
-
-                                        {selectedEvent.chaos && (
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Chaos Level</div>
-                                                <div className="text-sm">{selectedEvent.chaos}</div>
-                                            </div>
-                                        )}
-
-                                        {selectedEvent.snackRating && (
-                                            <div>
-                                                <div className="text-muted text-xs mb-1">Snack Rating</div>
-                                                <div className="text-sm">{selectedEvent.snackRating}</div>
-                                            </div>
-                                        )}
-
-                                        <div>
-                                            <a
-                                                href={selectedEvent.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-orange hover:underline text-sm"
-                                            >
-                                                View details →
-                                            </a>
                                         </div>
                                     </div>
-                                </div>
-                            </ScrollArea>
-                        </div>
-                    )}
+                                </ScrollArea>
+                            </div>
+                        )}
 
-                    <div key={chartKey} ref={chartRef} className="w-full h-full" />
+                        <div key={chartKey} ref={chartRef} className="w-full h-full" />
+                    </div>
                 </div>
-            </div>
-        </Explorer>
+            </Explorer>
+        </>
     )
 }
 
