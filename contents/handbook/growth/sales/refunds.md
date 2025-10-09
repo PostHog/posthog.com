@@ -131,6 +131,21 @@ You need Support specialist level access to Stripe, ask Simon for access.
 5. Add brief comment to explain the reason and link to Zendesk ticket
 6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.
 
+### Fixed fee product refunds
+For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.
+
+Example: A customer subscribes to a fixed fee add on by accident and requests a refund. After we issue a credit note, they cancel their subscription. When this happens, Stripe automatically creates a prorated “unused time” line item on the next upcoming invoice. This results in the customer being credited twice:
+- once via the manual credit note
+- again via the prorated unused time credit
+
+To prevent overcrediting, we need to manually delete the pending invoice item that Stripe creates after the subscription cancellation.
+
+Steps:
+1. Find customer profile in Stripe (you can search by organization id)
+2. Locate the proration adjustment under Pending Invoice Items.
+3. Manually delete the line item.
+4. Add a note in Zendesk documenting that the proration line was removed to avoid double crediting.
+
 ### Spotting suspicious stuff - watch out for:
 
 -   Multiple accounts that seem connected - easiest way to spot this is to look up user profile in Vitally and check connected accounts. If one email is connected to multiple accounts it is good to check previous requests and refunds on all related accounts as well.
