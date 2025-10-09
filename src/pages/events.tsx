@@ -367,9 +367,18 @@ function Events() {
         // Hide tooltip and zoom to the event location with animation (deeper zoom for active state)
         if (chartInstanceRef.current && pointSeriesRef.current) {
             pointSeriesRef.current.hideTooltip()
+
+            // Calculate longitude offset to account for detail panel (384px wide)
+            // At zoom level 8, roughly 1 degree = 100px, so offset by ~4 degrees to the right
+            const zoomLevel = 10
+            const longitudeOffset = -6 // Shift the map center to the right
+
             chartInstanceRef.current.zoomToGeoPoint(
-                { latitude: event.location.lat, longitude: event.location.lng },
-                7,
+                {
+                    latitude: event.location.lat,
+                    longitude: event.location.lng + longitudeOffset,
+                },
+                zoomLevel,
                 true
             )
         }
@@ -434,70 +443,67 @@ function Events() {
             fill: am5.color(0x9ca3af),
         })
 
-        // Add US states layer (will be shown when zoomed in)
-        const usStatesSeries = chart.series.push(
+        // Add US states and Canadian provinces layer (shown when zoomed in)
+        // We'll create this as a separate series that sits on top of the base map
+        const subRegionSeries = chart.series.push(
             am5map.MapPolygonSeries.new(root, {
                 geoJSON: am5geodata_usaLow,
-                visible: false,
             })
         )
 
-        usStatesSeries.mapPolygons.template.setAll({
+        subRegionSeries.mapPolygons.template.setAll({
             fill: am5.color(0xd1d5db),
-            fillOpacity: 1,
-            stroke: am5.color(0xffffff),
+            fillOpacity: 0, // Transparent fill, only borders visible
+            stroke: am5.color(0x666666),
             strokeWidth: 1,
+            strokeOpacity: 0, // Start hidden, will be shown via animation
             interactive: false,
         })
 
-        usStatesSeries.mapPolygons.template.states.create('hover', {
-            fill: am5.color(0x9ca3af),
-        })
+        // Wait for the series data to be loaded before setting up zoom handlers
+        subRegionSeries.events.once('datavalidated', () => {
+            console.log('🗺️ Sub-region series loaded with', subRegionSeries.mapPolygons.length, 'polygons')
 
-        // Make borders more visible when zoomed in and show US states
-        const updateBordersAndStates = () => {
-            const zoomLevel = chart.get('zoomLevel', 1)
-            console.log('🔍 Zoom level changed:', zoomLevel)
+            // Now set up zoom handler
+            const updateBordersAndStates = () => {
+                const zoomLevel = chart.get('zoomLevel', 1)
+                console.log('🔍 Zoom level:', zoomLevel)
 
-            if (zoomLevel > 2) {
-                polygonSeries.mapPolygons.template.setAll({
-                    strokeWidth: 1.5,
-                    strokeOpacity: 0.8,
-                })
-                // Show US states if zoomed in enough
-                if (zoomLevel > 3) {
-                    console.log('🗺️ Attempting to show US states at zoom level:', zoomLevel)
-                    console.log('🗺️ US states series before:', {
-                        visible: usStatesSeries.get('visible'),
-                        isHidden: usStatesSeries.isHidden(),
-                        dataLength: usStatesSeries.data.length,
-                    })
-                    usStatesSeries.set('visible', true)
-                    usStatesSeries.show()
-                    console.log('🗺️ US states series after:', {
-                        visible: usStatesSeries.get('visible'),
-                        isHidden: usStatesSeries.isHidden(),
+                // Update country borders
+                if (zoomLevel > 2) {
+                    polygonSeries.mapPolygons.template.setAll({
+                        strokeWidth: 1.5,
+                        strokeOpacity: 0.8,
                     })
                 } else {
-                    console.log('❌ Not zoomed in enough for US states (need > 3, got:', zoomLevel, ')')
-                    usStatesSeries.set('visible', false)
-                    usStatesSeries.hide()
+                    polygonSeries.mapPolygons.template.setAll({
+                        strokeWidth: 0.5,
+                        strokeOpacity: 1,
+                    })
                 }
-            } else {
-                polygonSeries.mapPolygons.template.setAll({
-                    strokeWidth: 0.5,
-                    strokeOpacity: 1,
+
+                // Show/hide state/province borders based on zoom
+                const targetOpacity = zoomLevel > 3 ? 0.5 : 0
+                console.log('🗺️ Setting sub-region strokeOpacity to:', targetOpacity)
+
+                subRegionSeries.mapPolygons.each((polygon) => {
+                    polygon.animate({
+                        key: 'strokeOpacity',
+                        to: targetOpacity,
+                        duration: 300,
+                        easing: am5.ease.out(am5.ease.cubic),
+                    })
                 })
-                usStatesSeries.set('visible', false)
-                usStatesSeries.hide()
             }
-        }
 
-        ;(chart.events as any).on('wheelended', updateBordersAndStates)
-        ;(chart.events as any).on('panended', updateBordersAndStates)
+            // Attach zoom handlers
+            ;(chart.events as any).on('wheelended', updateBordersAndStates)
+            ;(chart.events as any).on('panended', updateBordersAndStates)
+            ;(chart.events as any).on('zoomended', updateBordersAndStates)
 
-        // Also update on zoom from clicking
-        ;(chart.events as any).on('zoomended', updateBordersAndStates)
+            // Run once to set initial state
+            updateBordersAndStates()
+        })
 
         // Add point series (event markers) with clustering
         const pointSeries = chart.series.push(
@@ -574,7 +580,7 @@ function Events() {
             )
 
             // Use adapter to dynamically check if cluster contains hovered event
-            circle.adapters.add('fill', (fill) => {
+            circle.adapters.add('fill', () => {
                 // Try multiple ways to access cluster children
                 const bullets = (dataItem as any).bullets
                 const points = (dataItem as any).points
@@ -679,7 +685,7 @@ function Events() {
                 return am5.color(0xffffff) // White border normally
             })
 
-            const label = container.children.push(
+            container.children.push(
                 am5.Label.new(root, {
                     centerX: am5.p50,
                     centerY: am5.p50,
@@ -745,7 +751,6 @@ function Events() {
         const tooltipBg = tooltip.get('background')
         if (tooltipBg) {
             tooltipBg.set('opacity', 1)
-            tooltipBg.set('animationDuration', 0)
             tooltipBg.states.create('default', { opacity: 1 })
             tooltipBg.states.create('hidden', { opacity: 1 })
         }
@@ -787,44 +792,47 @@ function Events() {
 
         // Force refresh of bullets to update cluster colors based on hover state
         pointSeriesRef.current.markDirty()
-
-        // Center map on events when switching tabs or first load
-        if (!selectedEvent && displayEvents.length > 0) {
-            // Small delay to ensure data is rendered
-            setTimeout(() => {
-                if (!chartInstanceRef.current) return
-
-                // Calculate bounds of all events
-                const lats = displayEvents.map((e) => e.location.lat)
-                const lngs = displayEvents.map((e) => e.location.lng)
-                const minLat = Math.min(...lats)
-                const maxLat = Math.max(...lats)
-                const minLng = Math.min(...lngs)
-                const maxLng = Math.max(...lngs)
-
-                // Calculate center point
-                const centerLat = (minLat + maxLat) / 2
-                const centerLng = (minLng + maxLng) / 2
-
-                // Calculate span in degrees
-                const latSpan = maxLat - minLat
-                const lngSpan = maxLng - minLng
-                const maxSpan = Math.max(latSpan, lngSpan)
-
-                // Calculate appropriate zoom level (empirical formula)
-                // Zoom level roughly corresponds to how many degrees are visible
-                // Lower span = higher zoom needed
-                let zoomLevel = 1.5
-                if (maxSpan < 5) zoomLevel = 5
-                else if (maxSpan < 10) zoomLevel = 4
-                else if (maxSpan < 20) zoomLevel = 3
-                else if (maxSpan < 40) zoomLevel = 2.5
-                else if (maxSpan < 80) zoomLevel = 2
-
-                chartInstanceRef.current.zoomToGeoPoint({ latitude: centerLat, longitude: centerLng }, zoomLevel, true)
-            }, 100)
-        }
     }, [displayEvents, selectedEvent, hoveredEvent])
+
+    // Center map on events when switching tabs or first load (separate effect to avoid zoom on hover)
+    useEffect(() => {
+        if (!chartInstanceRef.current) return
+        if (selectedEvent || displayEvents.length === 0) return
+
+        // Small delay to ensure data is rendered
+        setTimeout(() => {
+            if (!chartInstanceRef.current) return
+
+            // Calculate bounds of all events
+            const lats = displayEvents.map((e) => e.location.lat)
+            const lngs = displayEvents.map((e) => e.location.lng)
+            const minLat = Math.min(...lats)
+            const maxLat = Math.max(...lats)
+            const minLng = Math.min(...lngs)
+            const maxLng = Math.max(...lngs)
+
+            // Calculate center point
+            const centerLat = (minLat + maxLat) / 2
+            const centerLng = (minLng + maxLng) / 2
+
+            // Calculate span in degrees
+            const latSpan = maxLat - minLat
+            const lngSpan = maxLng - minLng
+            const maxSpan = Math.max(latSpan, lngSpan)
+
+            // Calculate appropriate zoom level (empirical formula)
+            // Zoom level roughly corresponds to how many degrees are visible
+            // Lower span = higher zoom needed
+            let zoomLevel = 1.5
+            if (maxSpan < 5) zoomLevel = 5
+            else if (maxSpan < 10) zoomLevel = 4
+            else if (maxSpan < 20) zoomLevel = 3
+            else if (maxSpan < 40) zoomLevel = 2.5
+            else if (maxSpan < 80) zoomLevel = 2
+
+            chartInstanceRef.current.zoomToGeoPoint({ latitude: centerLat, longitude: centerLng }, zoomLevel, true)
+        }, 100)
+    }, [displayEvents, selectedEvent])
 
     // Zoom back to show all events when closing detail pane
     useEffect(() => {
@@ -938,7 +946,7 @@ function Events() {
 
                             <ScrollArea className="flex-1">
                                 <div className="p-4">
-                                    <h2 className="text-xl font-bold mb-2">{selectedEvent.name}</h2>
+                                    <h2 className="text-xl font-bold mb-2 pr-12">{selectedEvent.name}</h2>
 
                                     <div className="space-y-3 text-sm mb-4">
                                         <div>
