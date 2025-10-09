@@ -22,7 +22,7 @@ For more information about our security practices, see our [main security page](
 
 ## Reporting security issues
 
-If you discover a security vulnerability in PostHog products or services, please report it to us at **[security@posthog.com](mailto:security@posthog.com)**. Valid findings will be rewarded with PostHog swag.
+Security vulnerabilities and other security related findings can be reported via our [vulnerability disclosure program](https://bugcrowd.com/engagements/posthog-vdp-pro) or by emailing [security-reports@posthog.com](mailto:security-reports@posthog.com). Valid findings will be rewarded with PostHog swag.
 
 ## Updating this page
 
