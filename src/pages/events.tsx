@@ -7,7 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import { Select } from 'components/RadixUI/Select'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import TeamMember from 'components/TeamMember'
-import OSTabs from 'components/OSTabs'
+import OSTabs from 'componsdfghjkl;sents/OSTabs'
 
 // Animated Image Stack Component
 const AnimatedImageStack: React.FC = () => {
