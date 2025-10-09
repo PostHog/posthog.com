@@ -114,6 +114,12 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
+        label: 'Cool tech events',
+        Icon: <AppIcon name="invite" />,
+        url: '/events',
+        source: 'desktop',
+    },
+    {
         label: 'Company handbook',
         Icon: <AppIcon name="handbook" />,
         url: '/handbook',
