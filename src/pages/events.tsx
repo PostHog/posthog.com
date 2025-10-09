@@ -151,7 +151,7 @@ const eventsData: Event[] = [
     },
     {
         name: 'Valio Con',
-        location: { label: 'San Diego, CA', lat: 32.7157, lng: -117.1611 },
+        location: { label: 'San Diego, CA', lat: 33.1939, lng: -117.3827 },
         date: '2025-09-14',
         format: ['Conf sponsorship'],
         audience: ['Designers'],
@@ -163,7 +163,7 @@ const eventsData: Event[] = [
         starRating: 4.3,
         aiSummary:
             "Cory represented PostHog at Valio Con, spreading the good word about product analytics to 65 designers. Lots of conversations about beautiful dashboards and why comic sans should be a valid font choice (it shouldn't).",
-        imageGallery: ['valio-1.jpg', 'valio-2.jpg'],
+        imageGallery: ['https://res.cloudinary.com/dmukukwp6/image/upload/cory_valio_con_c6989afcef.jpeg', 'valio-2.jpg'],
         chaos: 'Design twitter beef erupted over button radius. Classic.',
         funFact: 'Someone designed a hedgehog logo redesign and it was... interesting',
         snackRating: 'Conference snacks. Standard fare. 6/10',
@@ -399,13 +399,27 @@ function Events() {
 
     // Initialize the map
     useLayoutEffect(() => {
-        if (!chartRef.current) return
+        console.log('🚀 Map initialization started')
+        if (!chartRef.current) {
+            console.log('❌ Chart ref not available')
+            return
+        }
 
+        const rect = chartRef.current.getBoundingClientRect()
+        console.log('📐 Container dimensions:', { width: rect.width, height: rect.height })
+
+        if (rect.width === 0 || rect.height === 0) {
+            console.log('⚠️ Warning: Container has 0 dimensions')
+        }
+
+        console.log('📦 Creating amCharts root')
         am5.addLicense('AM5M-1930-8548-3690-4255')
 
         const root = am5.Root.new(chartRef.current)
         root.setThemes([am5themes_Animated.new(root)])
+        console.log('✅ Root created')
 
+        console.log('🗺️ Creating map chart')
         const chart = root.container.children.push(
             am5map.MapChart.new(root, {
                 projection: am5map.geoMercator(),
@@ -416,6 +430,7 @@ function Events() {
                 minZoomLevel: 1,
             })
         )
+        console.log('✅ Map chart created')
 
         chartInstanceRef.current = chart
 
@@ -425,12 +440,14 @@ function Events() {
         zoomControl.homeButton.set('visible', true)
 
         // Add polygon series (countries)
+        console.log('🌍 Creating polygon series for countries')
         const polygonSeries = chart.series.push(
             am5map.MapPolygonSeries.new(root, {
                 geoJSON: am5geodata_worldLow,
                 exclude: ['AQ'], // Antarctica
             })
         )
+        console.log('✅ Polygon series created')
 
         polygonSeries.mapPolygons.template.setAll({
             fill: am5.color(0xd1d5db),
@@ -446,11 +463,13 @@ function Events() {
 
         // Add US states and Canadian provinces layer (shown when zoomed in)
         // We'll create this as a separate series that sits on top of the base map
+        console.log('🗺️ Creating sub-region series for US states')
         const subRegionSeries = chart.series.push(
             am5map.MapPolygonSeries.new(root, {
                 geoJSON: am5geodata_usaLow,
             })
         )
+        console.log('✅ Sub-region series created')
 
         subRegionSeries.mapPolygons.template.setAll({
             fill: am5.color(0xd1d5db),
@@ -497,22 +516,24 @@ function Events() {
                 })
             }
 
-            // Attach zoom handlers
-            ;(chart.events as any).on('wheelended', updateBordersAndStates)
-            ;(chart.events as any).on('panended', updateBordersAndStates)
-            ;(chart.events as any).on('zoomended', updateBordersAndStates)
+                // Attach zoom handlers
+                ; (chart.events as any).on('wheelended', updateBordersAndStates)
+                ; (chart.events as any).on('panended', updateBordersAndStates)
+                ; (chart.events as any).on('zoomended', updateBordersAndStates)
 
             // Run once to set initial state
             updateBordersAndStates()
         })
 
         // Add point series (event markers) with clustering
+        console.log('📍 Creating point series for event markers')
         const pointSeries = chart.series.push(
             am5map.ClusteredPointSeries.new(root, {
                 minDistance: 30, // Minimum distance between markers before clustering
             })
         )
         pointSeriesRef.current = pointSeries
+        console.log('✅ Point series created')
 
         // Individual marker bullet
         pointSeries.bullets.push((root, _series, dataItem) => {
@@ -527,9 +548,9 @@ function Events() {
                     fill: isSelected
                         ? am5.color(0x2f80fa) // Blue when selected (active)
                         : isHovered
-                        ? am5.color(0xff6a00) // Darker orange when hovered
-                        : am5.color(0xff9500), // Normal orange
-                    stroke: isHovered ? am5.color(0x000000) : am5.color(0xffffff), // Black outline when hovered
+                            ? am5.color(0xef4444) // Red when hovered
+                            : am5.color(0xff9500), // Orange by default
+                    stroke: am5.color(0xffffff), // Always white border
                     strokeWidth: isSelected ? 3 : 2,
                     tooltipText: '{name}\n{location}\n{date}',
                     cursorOverStyle: 'pointer',
@@ -552,17 +573,20 @@ function Events() {
                 }
             })
 
-            // Adjust marker size to remain constant at different zoom levels
-            ;(chart.events as any).on('wheelended', () => {
-                const zoomLevel = chart.get('zoomLevel', 1)
-                const baseScale = 1 / Math.sqrt(zoomLevel)
-                circle.set('scale', Math.max(baseScale, 0.6))
-            })
+                // Adjust marker size to remain constant at different zoom levels
+                ; (chart.events as any).on('wheelended', () => {
+                    const zoomLevel = chart.get('zoomLevel', 1)
+                    const baseScale = 1 / Math.sqrt(zoomLevel)
+                    circle.set('scale', Math.max(baseScale, 0.6))
+                })
 
             return am5.Bullet.new(root, {
                 sprite: container,
             })
         })
+
+        // Store cluster bullets for manual updates
+        const clusterBullets = new Map<any, am5.Circle>()
 
         // Cluster bullet
         pointSeries.set('clusteredBullet', (root, _series, dataItem) => {
@@ -574,116 +598,18 @@ function Events() {
                 am5.Circle.new(root, {
                     radius: 12,
                     tooltipText: '{value} events',
-                    fill: am5.color(0xff9500),
-                    stroke: am5.color(0xffffff),
+                    fill: am5.color(0xff9500), // Orange by default
+                    stroke: am5.color(0xffffff), // White border
                     strokeWidth: 2,
                 })
             )
 
-            // Use adapter to dynamically check if cluster contains hovered event
-            circle.adapters.add('fill', () => {
-                // Try multiple ways to access cluster children
-                const bullets = (dataItem as any).bullets
-                const points = (dataItem as any).points
-                const children = bullets || points
+            // Store reference to this cluster circle for manual updates
+            clusterBullets.set(dataItem, circle)
 
-                if (children && Array.isArray(children)) {
-                    for (const child of children) {
-                        // Try different ways to access the data
-                        const childData = child.dataItem?.dataContext || child.dataContext
-                        if (childData?.isHovered) {
-                            return am5.color(0xff6a00) // Darker orange if contains hovered event
-                        }
-                    }
-                }
-
-                // Also check series data directly by matching coordinates
-                const lat = dataItem.get('latitude')
-                const lng = dataItem.get('longitude')
-                if (lat && lng && _series.data.length > 0) {
-                    for (const point of _series.data.values) {
-                        const pointData = point as any
-                        if (pointData.geometry?.coordinates) {
-                            const [pLng, pLat] = pointData.geometry.coordinates
-                            // Check if coordinates are very close (within cluster range)
-                            if (Math.abs(pLat - lat) < 0.01 && Math.abs(pLng - lng) < 0.01) {
-                                if (pointData.isHovered) {
-                                    return am5.color(0xff6a00)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return am5.color(0xff9500) // Normal orange
-            })
-
-            circle.adapters.add('strokeWidth', () => {
-                const bullets = (dataItem as any).bullets
-                const points = (dataItem as any).points
-                const children = bullets || points
-
-                if (children && Array.isArray(children)) {
-                    for (const child of children) {
-                        const childData = child.dataItem?.dataContext || child.dataContext
-                        if (childData?.isHovered) {
-                            return 3
-                        }
-                    }
-                }
-
-                // Check series data directly
-                const lat = dataItem.get('latitude')
-                const lng = dataItem.get('longitude')
-                if (lat && lng && _series.data.length > 0) {
-                    for (const point of _series.data.values) {
-                        const pointData = point as any
-                        if (pointData.geometry?.coordinates) {
-                            const [pLng, pLat] = pointData.geometry.coordinates
-                            if (Math.abs(pLat - lat) < 0.01 && Math.abs(pLng - lng) < 0.01) {
-                                if (pointData.isHovered) {
-                                    return 3
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return 2
-            })
-
-            circle.adapters.add('stroke', () => {
-                const bullets = (dataItem as any).bullets
-                const points = (dataItem as any).points
-                const children = bullets || points
-
-                if (children && Array.isArray(children)) {
-                    for (const child of children) {
-                        const childData = child.dataItem?.dataContext || child.dataContext
-                        if (childData?.isHovered) {
-                            return am5.color(0x000000) // Black border when hovered
-                        }
-                    }
-                }
-
-                // Check series data directly
-                const lat = dataItem.get('latitude')
-                const lng = dataItem.get('longitude')
-                if (lat && lng && _series.data.length > 0) {
-                    for (const point of _series.data.values) {
-                        const pointData = point as any
-                        if (pointData.geometry?.coordinates) {
-                            const [pLng, pLat] = pointData.geometry.coordinates
-                            if (Math.abs(pLat - lat) < 0.01 && Math.abs(pLng - lng) < 0.01) {
-                                if (pointData.isHovered) {
-                                    return am5.color(0x000000) // Black border when hovered
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return am5.color(0xffffff) // White border normally
+            // Add hover state for clusters
+            circle.states.create('hover', {
+                scale: 1.2,
             })
 
             container.children.push(
@@ -758,13 +684,92 @@ function Events() {
 
         pointSeries.set('tooltip', tooltip)
 
-        // Hide tooltip when zoom/pan starts
-        ;(chart.events as any).on('wheelstarted', () => {
-            pointSeries.hideTooltip()
-        })
-        ;(chart.events as any).on('panstarted', () => {
-            pointSeries.hideTooltip()
-        })
+            // Hide tooltip when zoom/pan starts
+            ; (chart.events as any).on('wheelstarted', () => {
+                pointSeries.hideTooltip()
+            })
+            ; (chart.events as any).on('panstarted', () => {
+                pointSeries.hideTooltip()
+            })
+
+        // Function to update cluster colors based on hover state
+        const updateClusterColors = () => {
+            if (!pointSeriesRef.current) return
+
+            // Get all current data with hover states
+            const allData = pointSeriesRef.current.data.values as any[]
+
+            // Create a map of hovered event coordinates
+            const hoveredCoords = new Set<string>()
+            for (const data of allData) {
+                if (data.isHovered && data.geometry?.coordinates) {
+                    const [lng, lat] = data.geometry.coordinates
+                    hoveredCoords.add(`${lat.toFixed(4)},${lng.toFixed(4)}`)
+                }
+            }
+
+            // For each cluster bullet, check if it contains a hovered event
+            clusterBullets.forEach((circle, clusterDataItem) => {
+                const clusterLat = clusterDataItem.get('latitude')
+                const clusterLng = clusterDataItem.get('longitude')
+
+                if (!clusterLat || !clusterLng) {
+                    circle.set('fill', am5.color(0xff9500))
+                    return
+                }
+
+                // Find all events at or very near this cluster location
+                // Clusters form when multiple points are within minDistance (30px)
+                // At different zoom levels this is different geographic distances
+                // Use a smaller threshold and check for near-exact matches
+                let hasHoveredEvent = false
+                let eventsInCluster = 0
+
+                for (const data of allData) {
+                    if (data.geometry?.coordinates) {
+                        const [lng, lat] = data.geometry.coordinates
+                        // Check if this event is very close to cluster center
+                        const latDiff = Math.abs(lat - clusterLat)
+                        const lngDiff = Math.abs(lng - clusterLng)
+
+                        // Use a small threshold (about 1km at equator)
+                        if (latDiff < 0.01 && lngDiff < 0.01) {
+                            eventsInCluster++
+                            if (data.isHovered) {
+                                console.log(
+                                    '✅ Found hovered event in cluster:',
+                                    data.name,
+                                    'at',
+                                    [lat, lng],
+                                    'cluster center:',
+                                    [clusterLat, clusterLng]
+                                )
+                                hasHoveredEvent = true
+                                break
+                            }
+                        }
+                    }
+                }
+
+                if (eventsInCluster > 0 && hoveredCoords.size > 0) {
+                    console.log(
+                        `📊 Cluster at [${clusterLat}, ${clusterLng}] has ${eventsInCluster} events, hasHovered: ${hasHoveredEvent}`
+                    )
+                }
+
+                // Update circle color based on whether it contains hovered event
+                if (hasHoveredEvent) {
+                    circle.set('fill', am5.color(0xef4444)) // Red when contains hovered event
+                } else {
+                    circle.set('fill', am5.color(0xff9500)) // Orange by default
+                }
+            })
+        }
+
+        // Store reference for use in effects
+        chartInstanceRef.current = chart
+            ; (chartInstanceRef.current as any).updateClusterColors = updateClusterColors
+            ; (chartInstanceRef.current as any).clusterBullets = clusterBullets
 
         // Handle window/container resize
         let lastWidth = 0
@@ -817,7 +822,7 @@ function Events() {
             resizeTimeout = setTimeout(handleResize, 500)
         }
 
-        const resizeObserver = new ResizeObserver((entries) => {
+        const resizeObserver = new ResizeObserver(() => {
             debouncedResize()
         })
 
@@ -828,6 +833,44 @@ function Events() {
             lastWidth = rect.width
             lastHeight = rect.height
         }
+
+        // Check if canvas was created and force resize if needed
+        setTimeout(() => {
+            if (chartRef.current) {
+                const canvasElements = chartRef.current.querySelectorAll('canvas')
+                const rect = chartRef.current.getBoundingClientRect()
+                console.log('🎨 Canvas check after initialization:', canvasElements.length, 'canvas elements found')
+                console.log('📐 Container dimensions during check:', { width: rect.width, height: rect.height })
+
+                if (canvasElements.length === 0) {
+                    console.error('❌ ERROR: No canvas elements were created during initialization!')
+                    console.log('🔄 Attempting to force resize...')
+
+                    if (rect.width > 0 && rect.height > 0) {
+                        try {
+                            root.resize()
+                            console.log('✅ Forced resize completed')
+
+                            // Check again after resize
+                            setTimeout(() => {
+                                const canvasCheck = chartRef.current?.querySelectorAll('canvas')
+                                console.log('🎨 Canvas check after forced resize:', canvasCheck?.length || 0, 'elements')
+                                if (!canvasCheck || canvasCheck.length === 0) {
+                                    console.error('❌ Still no canvas after forced resize - triggering remount')
+                                    setChartKey((prev) => prev + 1)
+                                }
+                            }, 100)
+                        } catch (err) {
+                            console.error('Error forcing resize:', err)
+                        }
+                    } else {
+                        console.error('❌ Container still has 0 dimensions - will wait for resize event')
+                    }
+                } else {
+                    console.log('✅ Map initialization complete and canvas rendered')
+                }
+            }
+        }, 150)
 
         return () => {
             if (resizeTimeout) {
@@ -858,8 +901,26 @@ function Events() {
 
         pointSeriesRef.current.data.setAll(pointsData)
 
-        // Force refresh of bullets to update cluster colors based on hover state
+        // Force complete refresh to update both individual and cluster bullets
         pointSeriesRef.current.markDirty()
+
+        // Update cluster colors based on hover state
+        if ((chartInstanceRef.current as any).updateClusterColors) {
+            setTimeout(() => {
+                const hoveredName = hoveredEvent?.name
+                if (hoveredName) {
+                    console.log('🎯 Updating clusters for hovered event:', hoveredName)
+                    const hoveredData = pointsData.find((p) => p.eventData.name === hoveredName)
+                    if (hoveredData?.geometry?.coordinates) {
+                        console.log('📍 Hovered event coords:', hoveredData.geometry.coordinates)
+                    }
+
+                    const clusterBullets = (chartInstanceRef.current as any).clusterBullets
+                    console.log('🔵 Total cluster bullets:', clusterBullets?.size || 0)
+                }
+                ; (chartInstanceRef.current as any).updateClusterColors()
+            }, 50)
+        }
     }, [displayEvents, selectedEvent, hoveredEvent])
 
     // Center map on events when switching tabs or first load (separate effect to avoid zoom on hover)
@@ -979,11 +1040,10 @@ function Events() {
                                             onMouseLeave={() => setHoveredEvent(null)}
                                             className={cntl`
                       w-full text-left p-3 rounded border transition-all bg-primary
-                      ${
-                          selectedEvent?.name === event.name
-                              ? 'border-primary outline outline-orange outline-2 outline-offset-1'
-                              : 'border-primary'
-                      }
+                      ${selectedEvent?.name === event.name
+                                                    ? 'border-primary outline outline-orange outline-2 outline-offset-1'
+                                                    : 'border-primary'
+                                                }
                     `}
                                         >
                                             <div className="font-semibold text-sm mb-1 line-clamp-2">{event.name}</div>
