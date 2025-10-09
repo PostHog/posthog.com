@@ -146,7 +146,7 @@ graph TB
 
 Notebooks are the perfect format for research because they combine narrative explanation with data visualization. You can see not just the conclusions ("conversion drops 40% at the payment step") but the evidence (charts showing the drop, session recordings showing users struggling, error logs showing timeouts).
 
-We're building customizable notebook templates similar to what Granola does. You'll be able to pick a template or modify one ahead of time, so research results come back in exactly the format you need. This is especially useful for recurring research tasks where you want consistency.
+We're building customizable notebook templates similar to what [Granola](https://help.granola.ai/article/customise-notes-with-templates) does. You'll be able to pick a template or modify one ahead of time, so research results come back in exactly the format you need. This is especially useful for recurring research tasks where you want consistency.
 
 **Key Differences from Max**
 
@@ -196,7 +196,7 @@ Here's what happens under the hood:
 
 1. **Collection**: Session Summaries retrieves all the recordings matching your criteria (time range, company, feature area, etc.)
 
-2. **Analysis**: An AI agent watches each recording (at high speed), noting significant events: errors, timeouts, rage clicks, confusion indicators (rapid back-and-forth navigation), unexpected user paths, and other behavioral signals.
+2. **Analysis**: An AI agent "watches" a session recording (right now, analyzing the stream of metadata, and soon enough, by watching video clips), noting significant events: errors, timeouts, rage clicks, confusion indicators (rapid back-and-forth navigation), unexpected user paths, and other behavioral signals.
 
 3. **Clustering**: Instead of giving you 50 individual summaries, Session Summaries clusters similar issues together. For example, if 15 users all experience timeout errors at checkout, these get grouped into a single issue: "Timeout errors during payment processing (affects 15/50 users)."
 
@@ -240,7 +240,7 @@ Array is our most ambitious bet: a desktop agent that automatically turns PostHo
 
 **The Problem We're Solving**
 
-Today, product engineers spend most of their day managing random inputs: Slack messages, GitHub notifications, tickets, emails, and alerts from various monitoring tools. This work is essential but time-consuming. Experienced AI-native engineers have already evolved a workaround — they practice "structured development," creating PRDs, breaking work into tasks, and shipping incrementally. Tools like Claude Code or Cursor only work well when given clean context and well-defined tasks.
+Today, product engineers spend most of their day managing random inputs: Slack messages, GitHub notifications, tickets, emails, and alerts from various monitoring tools. This work is essential but time-consuming. Experienced AI-native engineers have already evolved a workaround — they practice "structured development," creating PRDs, breaking work into tasks, and shipping incrementally. Tools like [Claude Code](https://www.claude.com/product/claude-code) or [Cursor](https://cursor.com/) only work well when given clean context and well-defined tasks.
 
 Array aims to productize that discipline, turning chaos into structured, buildable work.
 
@@ -479,7 +479,7 @@ The following diagram shows how all components of the AI platform work together:
 graph TB
     subgraph "User Facing Products"
         MaxUI[Max<br/>In-app Agent]
-        DeepResearch[Deep Research<br/>Research Mode]
+        DeepResearch[Deep Research]
         SessionSum[Session Summaries]
         ArrayApp[Array<br/>Desktop App]
         Wizard[Wizard<br/>CLI Tool]
@@ -487,7 +487,7 @@ graph TB
     end
 
     subgraph "Core AI Infrastructure"
-        subgraph "Max Single-Loop Agent"
+        subgraph "Single-Loop Agent"
             Agent[Agent with<br/>Full Context]
             CoreTools[Core Tools<br/>search, read_data,<br/>read_taxonomy,<br/>todo_write]
             Modes[Agent Modes<br/>SQL, Analytics, CDP,<br/>Custom Product Modes]
@@ -497,9 +497,9 @@ graph TB
         TaskGen[Task Generation<br/>Temporal Jobs]
     end
 
-    MaxUI --> Agent
-    DeepResearch --> Agent
-    SessionSum --> Agent
+    Agent --> MaxUI
+    Agent --> DeepResearch
+    Agent --> SessionSum
 
     Agent --> CoreTools
     Agent --> Modes
@@ -518,7 +518,7 @@ graph TB
 
 **Key Integration Points:**
 
-1. **Max exposes tools via Agent Modes**: The single-loop agent architecture in Max uses dynamically loadable modes that expose PostHog capabilities.
+1. **The agent exposes tools via agent modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
 
 2. **MCP provides universal access**: The MCP server makes agent modes accessible to any MCP-compatible client, including Array, Wizard, and third-party tools like Claude Code.
 
@@ -526,9 +526,9 @@ graph TB
 
 4. **Shared capabilities**: Array, Wizard, and external tools all consume the same agent modes through the MCP, ensuring consistency across the platform.
 
-## Max, how does it work?
+## Single-loop agent, how does it work?
 
-### Single-loop agent with mode switching
+### Mode switching
 
 Max is based on a single-loop agent architecture, heavily inspired by Claude Code, with some PostHog unique flavour. The core insight is simple: instead of routing between multiple specialized agents that act as black boxes, we have one agent that maintains full conversation context and can dynamically load expertise as needed.
 

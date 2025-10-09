@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This guide provides technical guidance for implementing AI features at PostHog. For information on working with the Max AI team, see [Working with Max AI](/handbook/engineering/working-with-max-ai).
+This guide provides technical guidance for implementing AI features at PostHog. For information on working with the Max AI team, see [AI Platform](/handbook/engineering/ai-platform).
 
 ## We use LLMs to solve real problems
 
