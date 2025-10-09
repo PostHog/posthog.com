@@ -74,7 +74,9 @@ You can learn the following from funnels:
 
 ### Adding steps
 
-Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow. Next, add intermediate events users need to go through to be successful and finish with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew results.
+Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow. 
+
+Next, add events users need to complete to proceed through the funnel, ending with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew results.
 
 <ProductScreenshot
     imageLight = {funnelStepsLight} 
@@ -83,11 +85,18 @@ Select the steps to include in your funnel, ideally starting with the first even
     alt="Funnel steps"
 />
 
-By default, funnel steps must be completed sequentially, however you are able to change this behavior by selecting one of three different step orders:
+By default, funnel steps must be completed **sequentially**, however you are able to change this behavior by selecting one of three different step orders:
 
 1. **Sequential** – Step B must happen after Step A, but any number events can happen between A and B.
 2. **Strict order** – Step B must happen directly after Step A without any events in between.
 3. **Any order** – Steps can be completed in any sequence.
+
+<CalloutBox icon="IconInfo" title="Duplicate steps" type="info">
+
+If you add multiple steps with the same event type, it will require the user to **trigger that event multiple times**. Think of funnels steps as actions to be performed, not filters to be applied.
+
+For example, adding a `clicked button` step, then a second `clicked button` step that filters for the "Sign Up" button, will require the user to perform **two** distinct button clicks.
+</CalloutBox>
 
 ### Filtering steps
 
