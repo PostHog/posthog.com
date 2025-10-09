@@ -10,6 +10,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
+import am5geodata_usaLow from '@amcharts/amcharts5-geodata/usaLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 
 type Event = {
@@ -345,9 +346,10 @@ const eventsData: Event[] = [
 function Events() {
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('past')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
+    const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
-    const pointSeriesRef = useRef<am5map.MapPointSeries | null>(null)
+    const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
 
     const today = new Date()
     const pastEvents = eventsData
@@ -362,15 +364,28 @@ function Events() {
 
     const handleEventClick = (event: Event) => {
         setSelectedEvent(event)
-        // Zoom to the event location with animation
-        if (chartInstanceRef.current) {
+        // Hide tooltip and zoom to the event location with animation (deeper zoom for active state)
+        if (chartInstanceRef.current && pointSeriesRef.current) {
+            pointSeriesRef.current.hideTooltip()
             chartInstanceRef.current.zoomToGeoPoint(
                 { latitude: event.location.lat, longitude: event.location.lng },
-                5,
+                7,
                 true
             )
         }
     }
+
+    // Handle ESC key to close detail panel
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && selectedEvent) {
+                setSelectedEvent(null)
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [selectedEvent])
 
     // Initialize the map
     useLayoutEffect(() => {
@@ -387,7 +402,6 @@ function Events() {
                 panX: 'translateX',
                 panY: 'translateY',
                 wheelY: 'zoom',
-                homeGeoPoint: { latitude: 20, longitude: 0 },
                 maxZoomLevel: 10,
                 minZoomLevel: 1,
             })
@@ -420,45 +434,101 @@ function Events() {
             fill: am5.color(0x9ca3af),
         })
 
-        // Make borders more visible when zoomed in
-        chart.events.on('wheelended', () => {
+        // Add US states layer (will be shown when zoomed in)
+        const usStatesSeries = chart.series.push(
+            am5map.MapPolygonSeries.new(root, {
+                geoJSON: am5geodata_usaLow,
+                visible: false,
+            })
+        )
+
+        usStatesSeries.mapPolygons.template.setAll({
+            fill: am5.color(0xd1d5db),
+            fillOpacity: 1,
+            stroke: am5.color(0xffffff),
+            strokeWidth: 1,
+            interactive: false,
+        })
+
+        usStatesSeries.mapPolygons.template.states.create('hover', {
+            fill: am5.color(0x9ca3af),
+        })
+
+        // Make borders more visible when zoomed in and show US states
+        const updateBordersAndStates = () => {
             const zoomLevel = chart.get('zoomLevel', 1)
+            console.log('🔍 Zoom level changed:', zoomLevel)
+
             if (zoomLevel > 2) {
                 polygonSeries.mapPolygons.template.setAll({
                     strokeWidth: 1.5,
                     strokeOpacity: 0.8,
                 })
+                // Show US states if zoomed in enough
+                if (zoomLevel > 3) {
+                    console.log('🗺️ Attempting to show US states at zoom level:', zoomLevel)
+                    console.log('🗺️ US states series before:', {
+                        visible: usStatesSeries.get('visible'),
+                        isHidden: usStatesSeries.isHidden(),
+                        dataLength: usStatesSeries.data.length,
+                    })
+                    usStatesSeries.set('visible', true)
+                    usStatesSeries.show()
+                    console.log('🗺️ US states series after:', {
+                        visible: usStatesSeries.get('visible'),
+                        isHidden: usStatesSeries.isHidden(),
+                    })
+                } else {
+                    console.log('❌ Not zoomed in enough for US states (need > 3, got:', zoomLevel, ')')
+                    usStatesSeries.set('visible', false)
+                    usStatesSeries.hide()
+                }
             } else {
                 polygonSeries.mapPolygons.template.setAll({
                     strokeWidth: 0.5,
                     strokeOpacity: 1,
                 })
+                usStatesSeries.set('visible', false)
+                usStatesSeries.hide()
             }
-        })
+        }
 
-        // Add point series (event markers)
-        const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}))
+        ;(chart.events as any).on('wheelended', updateBordersAndStates)
+        ;(chart.events as any).on('panended', updateBordersAndStates)
+
+        // Also update on zoom from clicking
+        ;(chart.events as any).on('zoomended', updateBordersAndStates)
+
+        // Add point series (event markers) with clustering
+        const pointSeries = chart.series.push(
+            am5map.ClusteredPointSeries.new(root, {
+                minDistance: 30, // Minimum distance between markers before clustering
+            })
+        )
         pointSeriesRef.current = pointSeries
 
-        const bullet = pointSeries.bullets.push((root, series, dataItem) => {
+        // Individual marker bullet
+        pointSeries.bullets.push((root, _series, dataItem) => {
             const container = am5.Container.new(root, {})
-            const isSelected = (dataItem.dataContext as any)?.isSelected
+            const eventData = dataItem.dataContext as any
+            const isSelected = eventData?.isSelected
+            const isHovered = eventData?.isHovered
 
             const circle = container.children.push(
                 am5.Circle.new(root, {
                     radius: 8,
-                    fill: am5.color(0xff9500),
-                    stroke: am5.color(0xffffff),
+                    fill: isSelected
+                        ? am5.color(0x2f80fa) // Blue when selected (active)
+                        : isHovered
+                        ? am5.color(0xff6a00) // Darker orange when hovered
+                        : am5.color(0xff9500), // Normal orange
+                    stroke: isHovered ? am5.color(0x000000) : am5.color(0xffffff), // Black outline when hovered
                     strokeWidth: isSelected ? 3 : 2,
                     tooltipText: '{name}\n{location}\n{date}',
                     cursorOverStyle: 'pointer',
-                    // Keep marker size constant regardless of zoom
                     scale: 1,
                     centerX: am5.p50,
                     centerY: am5.p50,
-                    shadowColor: isSelected ? am5.color(0xff9500) : undefined,
-                    shadowBlur: isSelected ? 10 : 0,
-                    shadowOpacity: isSelected ? 0.6 : 0,
                 })
             )
 
@@ -468,14 +538,15 @@ function Events() {
 
             // Handle clicks on the circle
             circle.events.on('click', () => {
-                const event = (dataItem.dataContext as any).eventData as Event
+                const event = eventData.eventData as Event
                 if (event) {
+                    pointSeries.hideTooltip()
                     handleEventClick(event)
                 }
             })
 
             // Adjust marker size to remain constant at different zoom levels
-            chart.events.on('wheelended', () => {
+            ;(chart.events as any).on('wheelended', () => {
                 const zoomLevel = chart.get('zoomLevel', 1)
                 const baseScale = 1 / Math.sqrt(zoomLevel)
                 circle.set('scale', Math.max(baseScale, 0.6))
@@ -486,7 +557,159 @@ function Events() {
             })
         })
 
-        // Configure tooltip
+        // Cluster bullet
+        pointSeries.set('clusteredBullet', (root, _series, dataItem) => {
+            const container = am5.Container.new(root, {
+                cursorOverStyle: 'pointer',
+            })
+
+            const circle = container.children.push(
+                am5.Circle.new(root, {
+                    radius: 12,
+                    tooltipText: '{value} events',
+                    fill: am5.color(0xff9500),
+                    stroke: am5.color(0xffffff),
+                    strokeWidth: 2,
+                })
+            )
+
+            // Use adapter to dynamically check if cluster contains hovered event
+            circle.adapters.add('fill', (fill) => {
+                // Try multiple ways to access cluster children
+                const bullets = (dataItem as any).bullets
+                const points = (dataItem as any).points
+                const children = bullets || points
+
+                if (children && Array.isArray(children)) {
+                    for (const child of children) {
+                        // Try different ways to access the data
+                        const childData = child.dataItem?.dataContext || child.dataContext
+                        if (childData?.isHovered) {
+                            return am5.color(0xff6a00) // Darker orange if contains hovered event
+                        }
+                    }
+                }
+
+                // Also check series data directly by matching coordinates
+                const lat = dataItem.get('latitude')
+                const lng = dataItem.get('longitude')
+                if (lat && lng && _series.data.length > 0) {
+                    for (const point of _series.data.values) {
+                        const pointData = point as any
+                        if (pointData.geometry?.coordinates) {
+                            const [pLng, pLat] = pointData.geometry.coordinates
+                            // Check if coordinates are very close (within cluster range)
+                            if (Math.abs(pLat - lat) < 0.01 && Math.abs(pLng - lng) < 0.01) {
+                                if (pointData.isHovered) {
+                                    return am5.color(0xff6a00)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return am5.color(0xff9500) // Normal orange
+            })
+
+            circle.adapters.add('strokeWidth', () => {
+                const bullets = (dataItem as any).bullets
+                const points = (dataItem as any).points
+                const children = bullets || points
+
+                if (children && Array.isArray(children)) {
+                    for (const child of children) {
+                        const childData = child.dataItem?.dataContext || child.dataContext
+                        if (childData?.isHovered) {
+                            return 3
+                        }
+                    }
+                }
+
+                // Check series data directly
+                const lat = dataItem.get('latitude')
+                const lng = dataItem.get('longitude')
+                if (lat && lng && _series.data.length > 0) {
+                    for (const point of _series.data.values) {
+                        const pointData = point as any
+                        if (pointData.geometry?.coordinates) {
+                            const [pLng, pLat] = pointData.geometry.coordinates
+                            if (Math.abs(pLat - lat) < 0.01 && Math.abs(pLng - lng) < 0.01) {
+                                if (pointData.isHovered) {
+                                    return 3
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return 2
+            })
+
+            circle.adapters.add('stroke', () => {
+                const bullets = (dataItem as any).bullets
+                const points = (dataItem as any).points
+                const children = bullets || points
+
+                if (children && Array.isArray(children)) {
+                    for (const child of children) {
+                        const childData = child.dataItem?.dataContext || child.dataContext
+                        if (childData?.isHovered) {
+                            return am5.color(0x000000) // Black border when hovered
+                        }
+                    }
+                }
+
+                // Check series data directly
+                const lat = dataItem.get('latitude')
+                const lng = dataItem.get('longitude')
+                if (lat && lng && _series.data.length > 0) {
+                    for (const point of _series.data.values) {
+                        const pointData = point as any
+                        if (pointData.geometry?.coordinates) {
+                            const [pLng, pLat] = pointData.geometry.coordinates
+                            if (Math.abs(pLat - lat) < 0.01 && Math.abs(pLng - lng) < 0.01) {
+                                if (pointData.isHovered) {
+                                    return am5.color(0x000000) // Black border when hovered
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return am5.color(0xffffff) // White border normally
+            })
+
+            const label = container.children.push(
+                am5.Label.new(root, {
+                    centerX: am5.p50,
+                    centerY: am5.p50,
+                    fill: am5.color(0xffffff),
+                    fontSize: 11,
+                    fontWeight: 'bold',
+                    populateText: true,
+                    text: '{value}',
+                })
+            )
+
+            // Handle click to zoom in on cluster
+            circle.events.on('click', () => {
+                pointSeries.hideTooltip()
+                if (dataItem && chartInstanceRef.current) {
+                    const lat = dataItem.get('latitude') as number
+                    const lng = dataItem.get('longitude') as number
+                    const currentZoom = chartInstanceRef.current.get('zoomLevel', 1)
+                    // Zoom in more aggressively to break up clusters
+                    const newZoom = Math.min(currentZoom * 3.5, 10)
+                    chartInstanceRef.current.zoomToGeoPoint({ latitude: lat, longitude: lng }, newZoom, true)
+                }
+            })
+
+            return am5.Bullet.new(root, {
+                sprite: container,
+            })
+        })
+
+        // Configure tooltip with no animations or fades
         const tooltip = am5.Tooltip.new(root, {
             getFillFromSprite: false,
             getStrokeFromSprite: false,
@@ -495,27 +718,56 @@ function Events() {
             paddingBottom: 8,
             paddingLeft: 12,
             paddingRight: 12,
+            animationDuration: 0,
         })
+
         tooltip.get('background')?.setAll({
             fill: am5.color(0x1d1d1d),
-            fillOpacity: 0.95,
+            fillOpacity: 1,
             stroke: am5.color(0xffffff),
             strokeWidth: 1,
         })
+
         tooltip.label.setAll({
             fill: am5.color(0xffffff),
             fontSize: 12,
         })
+
+        // Completely disable all animations on show and hide
+        tooltip.show(0)
+        tooltip.hide(0)
+
+        // Set animation properties to 0
+        tooltip.set('animationDuration', 0)
+        tooltip.set('animationEasing', am5.ease.linear)
+
+        // Disable fade animations on the background
+        const tooltipBg = tooltip.get('background')
+        if (tooltipBg) {
+            tooltipBg.set('opacity', 1)
+            tooltipBg.set('animationDuration', 0)
+            tooltipBg.states.create('default', { opacity: 1 })
+            tooltipBg.states.create('hidden', { opacity: 1 })
+        }
+
         pointSeries.set('tooltip', tooltip)
+
+        // Hide tooltip when zoom/pan starts
+        ;(chart.events as any).on('wheelstarted', () => {
+            pointSeries.hideTooltip()
+        })
+        ;(chart.events as any).on('panstarted', () => {
+            pointSeries.hideTooltip()
+        })
 
         return () => {
             root.dispose()
         }
     }, [])
 
-    // Update map data when displayEvents changes
+    // Update map data when displayEvents, selectedEvent, or hoveredEvent changes
     useEffect(() => {
-        if (!pointSeriesRef.current) return
+        if (!pointSeriesRef.current || !chartInstanceRef.current) return
 
         const pointsData = displayEvents.map((event) => ({
             geometry: { type: 'Point', coordinates: [event.location.lng, event.location.lat] },
@@ -528,25 +780,83 @@ function Events() {
             }),
             eventData: event,
             isSelected: selectedEvent?.name === event.name,
+            isHovered: hoveredEvent?.name === event.name,
         }))
 
         pointSeriesRef.current.data.setAll(pointsData)
 
-        // Update marker appearance based on selection - this will be handled by the bullet template
-        // The visual feedback will be provided through the shadow and stroke width in the data
+        // Force refresh of bullets to update cluster colors based on hover state
+        pointSeriesRef.current.markDirty()
 
-        // Zoom out to show all events when switching tabs
-        if (chartInstanceRef.current && !selectedEvent) {
-            chartInstanceRef.current.goHome()
+        // Center map on events when switching tabs or first load
+        if (!selectedEvent && displayEvents.length > 0) {
+            // Small delay to ensure data is rendered
+            setTimeout(() => {
+                if (!chartInstanceRef.current) return
+
+                // Calculate bounds of all events
+                const lats = displayEvents.map((e) => e.location.lat)
+                const lngs = displayEvents.map((e) => e.location.lng)
+                const minLat = Math.min(...lats)
+                const maxLat = Math.max(...lats)
+                const minLng = Math.min(...lngs)
+                const maxLng = Math.max(...lngs)
+
+                // Calculate center point
+                const centerLat = (minLat + maxLat) / 2
+                const centerLng = (minLng + maxLng) / 2
+
+                // Calculate span in degrees
+                const latSpan = maxLat - minLat
+                const lngSpan = maxLng - minLng
+                const maxSpan = Math.max(latSpan, lngSpan)
+
+                // Calculate appropriate zoom level (empirical formula)
+                // Zoom level roughly corresponds to how many degrees are visible
+                // Lower span = higher zoom needed
+                let zoomLevel = 1.5
+                if (maxSpan < 5) zoomLevel = 5
+                else if (maxSpan < 10) zoomLevel = 4
+                else if (maxSpan < 20) zoomLevel = 3
+                else if (maxSpan < 40) zoomLevel = 2.5
+                else if (maxSpan < 80) zoomLevel = 2
+
+                chartInstanceRef.current.zoomToGeoPoint({ latitude: centerLat, longitude: centerLng }, zoomLevel, true)
+            }, 100)
         }
-    }, [displayEvents, selectedEvent])
+    }, [displayEvents, selectedEvent, hoveredEvent])
 
-    // Zoom out when closing detail pane
+    // Zoom back to show all events when closing detail pane
     useEffect(() => {
-        if (!selectedEvent && chartInstanceRef.current) {
-            chartInstanceRef.current.goHome()
+        if (!selectedEvent && chartInstanceRef.current && displayEvents.length > 0) {
+            // Calculate bounds of all events
+            const lats = displayEvents.map((e) => e.location.lat)
+            const lngs = displayEvents.map((e) => e.location.lng)
+            const minLat = Math.min(...lats)
+            const maxLat = Math.max(...lats)
+            const minLng = Math.min(...lngs)
+            const maxLng = Math.max(...lngs)
+
+            // Calculate center point
+            const centerLat = (minLat + maxLat) / 2
+            const centerLng = (minLng + maxLng) / 2
+
+            // Calculate span in degrees
+            const latSpan = maxLat - minLat
+            const lngSpan = maxLng - minLng
+            const maxSpan = Math.max(latSpan, lngSpan)
+
+            // Calculate appropriate zoom level
+            let zoomLevel = 1.5
+            if (maxSpan < 5) zoomLevel = 5
+            else if (maxSpan < 10) zoomLevel = 4
+            else if (maxSpan < 20) zoomLevel = 3
+            else if (maxSpan < 40) zoomLevel = 2.5
+            else if (maxSpan < 80) zoomLevel = 2
+
+            chartInstanceRef.current.zoomToGeoPoint({ latitude: centerLat, longitude: centerLng }, zoomLevel, true)
         }
-    }, [selectedEvent])
+    }, [selectedEvent, displayEvents])
 
     return (
         <Explorer template="generic" slug="events" title="Cool tech events" fullScreen>
@@ -576,9 +886,15 @@ function Events() {
                                         data-scheme="primary"
                                         key={idx}
                                         onClick={() => handleEventClick(event)}
+                                        onMouseEnter={() => setHoveredEvent(event)}
+                                        onMouseLeave={() => setHoveredEvent(null)}
                                         className={cntl`
-                      w-full text-left p-3 rounded border transition-all
-                      ${selectedEvent?.name === event.name ? 'border-orange' : 'bg-primary border-primary'}
+                      w-full text-left p-3 rounded border transition-all bg-primary
+                      ${
+                          selectedEvent?.name === event.name
+                              ? 'border-primary outline outline-orange outline-2 outline-offset-1'
+                              : 'border-primary'
+                      }
                     `}
                                     >
                                         <div className="font-semibold text-sm mb-1 line-clamp-2">{event.name}</div>
