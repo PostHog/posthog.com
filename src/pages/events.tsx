@@ -7,9 +7,9 @@ import { CallToAction } from 'components/CallToAction'
 import { Select } from 'components/RadixUI/Select'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import TeamMember from 'components/TeamMember'
-import OSTabs from 'componsdfghjkl;sents/OSTabs'
+import OSTabs from 'components/OSTabs'
 
-// Animated Image Stack Component ZZZZZZZZZ
+// Animated Image Stack Component
 const AnimatedImageStack: React.FC = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
