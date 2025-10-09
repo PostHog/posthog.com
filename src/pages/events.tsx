@@ -1,15 +1,16 @@
 import cntl from 'cntl'
 import Layout from 'components/Layout'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-
-const geoUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+import * as am5 from '@amcharts/amcharts5'
+import * as am5map from '@amcharts/amcharts5/map'
+import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
+import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 
 type Event = {
     name: string
@@ -344,7 +345,9 @@ const eventsData: Event[] = [
 function Events() {
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('past')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
-    const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
+    const chartRef = useRef<HTMLDivElement>(null)
+    const chartInstanceRef = useRef<am5map.MapChart | null>(null)
+    const pointSeriesRef = useRef<am5map.MapPointSeries | null>(null)
 
     const today = new Date()
     const pastEvents = eventsData
@@ -357,56 +360,193 @@ function Events() {
 
     const displayEvents = activeTab === 'past' ? pastEvents : upcomingEvents
 
-    // Calculate center of all events for better initial positioning
-    const calculateCenter = (events: Event[]) => {
-        if (events.length === 0) return [0, 20]
-        const avgLng = events.reduce((sum, e) => sum + e.location.lng, 0) / events.length
-        const avgLat = events.reduce((sum, e) => sum + e.location.lat, 0) / events.length
-        return [avgLng, avgLat]
-    }
-
-    const initialCenter = calculateCenter(displayEvents)
-    const [position, setPosition] = useState({ coordinates: initialCenter, zoom: 1.2 })
-
-    // Recenter map when switching tabs
-    useEffect(() => {
-        const center = calculateCenter(displayEvents)
-        setPosition({ coordinates: center, zoom: 1.2 })
-        setSelectedEvent(null)
-    }, [activeTab])
-
     const handleEventClick = (event: Event) => {
         setSelectedEvent(event)
-        setPosition({
-            coordinates: [event.location.lng, event.location.lat],
-            zoom: 4,
+        // Zoom to the event location with animation
+        if (chartInstanceRef.current) {
+            chartInstanceRef.current.zoomToGeoPoint(
+                { latitude: event.location.lat, longitude: event.location.lng },
+                5,
+                true
+            )
+        }
+    }
+
+    // Initialize the map
+    useLayoutEffect(() => {
+        if (!chartRef.current) return
+
+        am5.addLicense('AM5M-1930-8548-3690-4255')
+
+        const root = am5.Root.new(chartRef.current)
+        root.setThemes([am5themes_Animated.new(root)])
+
+        const chart = root.container.children.push(
+            am5map.MapChart.new(root, {
+                projection: am5map.geoMercator(),
+                panX: 'translateX',
+                panY: 'translateY',
+                wheelY: 'zoom',
+                homeGeoPoint: { latitude: 20, longitude: 0 },
+                maxZoomLevel: 10,
+                minZoomLevel: 1,
+            })
+        )
+
+        chartInstanceRef.current = chart
+
+        // Add zoom control
+        const zoomControl = am5map.ZoomControl.new(root, {})
+        chart.set('zoomControl', zoomControl)
+        zoomControl.homeButton.set('visible', true)
+
+        // Add polygon series (countries)
+        const polygonSeries = chart.series.push(
+            am5map.MapPolygonSeries.new(root, {
+                geoJSON: am5geodata_worldLow,
+                exclude: ['AQ'], // Antarctica
+            })
+        )
+
+        polygonSeries.mapPolygons.template.setAll({
+            fill: am5.color(0xd1d5db),
+            fillOpacity: 1,
+            stroke: am5.color(0xffffff),
+            strokeWidth: 0.5,
+            interactive: false,
         })
-    }
 
-    const handleMoveEnd = (position: any) => {
-        setPosition(position)
-    }
+        polygonSeries.mapPolygons.template.states.create('hover', {
+            fill: am5.color(0x9ca3af),
+        })
 
-    const handleZoomIn = () => {
-        setPosition((prev) => ({
-            ...prev,
-            zoom: Math.min(prev.zoom * 1.5, 10),
+        // Make borders more visible when zoomed in
+        chart.events.on('wheelended', () => {
+            const zoomLevel = chart.get('zoomLevel', 1)
+            if (zoomLevel > 2) {
+                polygonSeries.mapPolygons.template.setAll({
+                    strokeWidth: 1.5,
+                    strokeOpacity: 0.8,
+                })
+            } else {
+                polygonSeries.mapPolygons.template.setAll({
+                    strokeWidth: 0.5,
+                    strokeOpacity: 1,
+                })
+            }
+        })
+
+        // Add point series (event markers)
+        const pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}))
+        pointSeriesRef.current = pointSeries
+
+        const bullet = pointSeries.bullets.push((root, series, dataItem) => {
+            const container = am5.Container.new(root, {})
+            const isSelected = (dataItem.dataContext as any)?.isSelected
+
+            const circle = container.children.push(
+                am5.Circle.new(root, {
+                    radius: 8,
+                    fill: am5.color(0xff9500),
+                    stroke: am5.color(0xffffff),
+                    strokeWidth: isSelected ? 3 : 2,
+                    tooltipText: '{name}\n{location}\n{date}',
+                    cursorOverStyle: 'pointer',
+                    // Keep marker size constant regardless of zoom
+                    scale: 1,
+                    centerX: am5.p50,
+                    centerY: am5.p50,
+                    shadowColor: isSelected ? am5.color(0xff9500) : undefined,
+                    shadowBlur: isSelected ? 10 : 0,
+                    shadowOpacity: isSelected ? 0.6 : 0,
+                })
+            )
+
+            circle.states.create('hover', {
+                scale: 1.3,
+            })
+
+            // Handle clicks on the circle
+            circle.events.on('click', () => {
+                const event = (dataItem.dataContext as any).eventData as Event
+                if (event) {
+                    handleEventClick(event)
+                }
+            })
+
+            // Adjust marker size to remain constant at different zoom levels
+            chart.events.on('wheelended', () => {
+                const zoomLevel = chart.get('zoomLevel', 1)
+                const baseScale = 1 / Math.sqrt(zoomLevel)
+                circle.set('scale', Math.max(baseScale, 0.6))
+            })
+
+            return am5.Bullet.new(root, {
+                sprite: container,
+            })
+        })
+
+        // Configure tooltip
+        const tooltip = am5.Tooltip.new(root, {
+            getFillFromSprite: false,
+            getStrokeFromSprite: false,
+            autoTextColor: false,
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 12,
+            paddingRight: 12,
+        })
+        tooltip.get('background')?.setAll({
+            fill: am5.color(0x1d1d1d),
+            fillOpacity: 0.95,
+            stroke: am5.color(0xffffff),
+            strokeWidth: 1,
+        })
+        tooltip.label.setAll({
+            fill: am5.color(0xffffff),
+            fontSize: 12,
+        })
+        pointSeries.set('tooltip', tooltip)
+
+        return () => {
+            root.dispose()
+        }
+    }, [])
+
+    // Update map data when displayEvents changes
+    useEffect(() => {
+        if (!pointSeriesRef.current) return
+
+        const pointsData = displayEvents.map((event) => ({
+            geometry: { type: 'Point', coordinates: [event.location.lng, event.location.lat] },
+            name: event.name,
+            location: event.location.label,
+            date: new Date(event.date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+            }),
+            eventData: event,
+            isSelected: selectedEvent?.name === event.name,
         }))
-    }
 
-    const handleZoomOut = () => {
-        setPosition((prev) => ({
-            ...prev,
-            zoom: Math.max(prev.zoom / 1.5, 0.8),
-        }))
-    }
+        pointSeriesRef.current.data.setAll(pointsData)
 
-    // Type assertion for react-simple-maps compatibility with React 19
-    const Map = ComposableMap as any
-    const ZoomGroup = ZoomableGroup as any
-    const Geos = Geographies as any
-    const Geo = Geography as any
-    const MapMarker = Marker as any
+        // Update marker appearance based on selection - this will be handled by the bullet template
+        // The visual feedback will be provided through the shadow and stroke width in the data
+
+        // Zoom out to show all events when switching tabs
+        if (chartInstanceRef.current && !selectedEvent) {
+            chartInstanceRef.current.goHome()
+        }
+    }, [displayEvents, selectedEvent])
+
+    // Zoom out when closing detail pane
+    useEffect(() => {
+        if (!selectedEvent && chartInstanceRef.current) {
+            chartInstanceRef.current.goHome()
+        }
+    }, [selectedEvent])
 
     return (
         <Explorer template="generic" slug="events" title="Cool tech events" fullScreen>
@@ -599,131 +739,7 @@ function Events() {
                         </div>
                     )}
 
-                    <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-10">
-                        <button
-                            onClick={handleZoomIn}
-                            className="w-10 h-10 flex items-center justify-center rounded bg-primary border border-primary hover:bg-accent text-primary shadow-lg text-xl font-bold"
-                            aria-label="Zoom in"
-                        >
-                            +
-                        </button>
-                        <button
-                            onClick={handleZoomOut}
-                            className="w-10 h-10 flex items-center justify-center rounded bg-primary border border-primary hover:bg-accent text-primary shadow-lg text-xl font-bold"
-                            aria-label="Zoom out"
-                        >
-                            −
-                        </button>
-                    </div>
-
-                    <div className="absolute top-0 left-0 w-full h-full bg-accent/10">
-                        <Map
-                            projection="geoMercator"
-                            projectionConfig={{
-                                scale: 147,
-                            }}
-                            style={{ width: '100%', height: '100%' }}
-                        >
-                            <ZoomGroup
-                                center={position.coordinates as [number, number]}
-                                zoom={position.zoom}
-                                onMoveEnd={handleMoveEnd}
-                            >
-                                <Geos geography={geoUrl}>
-                                    {({ geographies }: any) =>
-                                        geographies.map((geo: any) => (
-                                            <Geo
-                                                key={geo.rsmKey}
-                                                geography={geo}
-                                                fill="#d1d5db"
-                                                stroke="#ffffff"
-                                                strokeWidth={0.5}
-                                                style={{
-                                                    default: { outline: 'none' },
-                                                    hover: { outline: 'none', fill: '#9ca3af' },
-                                                    pressed: { outline: 'none' },
-                                                }}
-                                            />
-                                        ))
-                                    }
-                                </Geos>
-                                {displayEvents.map((event, idx) => (
-                                    <MapMarker
-                                        key={idx}
-                                        coordinates={[event.location.lng, event.location.lat]}
-                                        onClick={() => handleEventClick(event)}
-                                        onMouseEnter={() => setHoveredEvent(event)}
-                                        onMouseLeave={() => setHoveredEvent(null)}
-                                    >
-                                        <g>
-                                            <circle
-                                                r={selectedEvent?.name === event.name ? 8 : 6}
-                                                fill="#FF9500"
-                                                stroke="#ffffff"
-                                                strokeWidth={2}
-                                                className="cursor-pointer hover:opacity-80 transition-all"
-                                                style={{
-                                                    filter:
-                                                        selectedEvent?.name === event.name
-                                                            ? 'drop-shadow(0 0 8px rgba(255, 149, 0, 0.6))'
-                                                            : 'none',
-                                                }}
-                                            />
-                                            {hoveredEvent?.name === event.name && (
-                                                <g>
-                                                    <rect
-                                                        x="10"
-                                                        y="-40"
-                                                        width="200"
-                                                        height="60"
-                                                        rx="4"
-                                                        fill="#1d1d1d"
-                                                        stroke="#ffffff"
-                                                        strokeWidth="1"
-                                                        opacity="0.95"
-                                                    />
-                                                    <text
-                                                        x="15"
-                                                        y="-25"
-                                                        fontSize="12"
-                                                        fontWeight="bold"
-                                                        fill="#ffffff"
-                                                        style={{ pointerEvents: 'none' }}
-                                                    >
-                                                        {event.name.length > 30
-                                                            ? event.name.substring(0, 30) + '...'
-                                                            : event.name}
-                                                    </text>
-                                                    <text
-                                                        x="15"
-                                                        y="-10"
-                                                        fontSize="10"
-                                                        fill="#cccccc"
-                                                        style={{ pointerEvents: 'none' }}
-                                                    >
-                                                        {event.location.label}
-                                                    </text>
-                                                    <text
-                                                        x="15"
-                                                        y="5"
-                                                        fontSize="10"
-                                                        fill="#cccccc"
-                                                        style={{ pointerEvents: 'none' }}
-                                                    >
-                                                        {new Date(event.date).toLocaleDateString('en-US', {
-                                                            month: 'short',
-                                                            day: 'numeric',
-                                                            year: 'numeric',
-                                                        })}
-                                                    </text>
-                                                </g>
-                                            )}
-                                        </g>
-                                    </MapMarker>
-                                ))}
-                            </ZoomGroup>
-                        </Map>
-                    </div>
+                    <div ref={chartRef} className="absolute top-0 left-0 w-full h-full" />
                 </div>
             </div>
         </Explorer>
