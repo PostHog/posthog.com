@@ -8,11 +8,13 @@ import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import OSButton from 'components/OSButton'
+import TeamMember from 'components/TeamMember'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
 import am5geodata_usaLow from '@amcharts/amcharts5-geodata/usaLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
+import { ZoomImage } from 'components/ZoomImage'
 
 type Event = {
     date: string // YYYY-MM-DD
@@ -63,7 +65,7 @@ const parseTime = (timeStr?: string): string | undefined => {
     if (!timeStr) return undefined
     const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i)
     if (!match) return undefined
-    let [_, hours, minutes, period] = match
+    const [_, hours, minutes, period] = match
     let hour = parseInt(hours)
     if (period.toUpperCase() === 'PM' && hour !== 12) hour += 12
     if (period.toUpperCase() === 'AM' && hour === 12) hour = 0
@@ -90,7 +92,7 @@ const eventsData: Event[] = [
         location: { label: 'San Francisco, CA' },
         format: 'Talks',
         audience: splitValues('Founders, engineers'),
-        speakers: splitValues('Peter K'),
+        speakers: splitValues('Peter Kirkham'),
         partners: parsePartners('Speakeasy'),
         attendees: 85,
         vibeScore: 3,
@@ -102,7 +104,7 @@ const eventsData: Event[] = [
         location: { label: 'San Francisco, CA' },
         format: 'Talks, Fireside',
         audience: splitValues('SF AI Enthusiasts'),
-        speakers: splitValues('Peter K + James'),
+        speakers: splitValues('Peter Kirkham, James Hawkins'),
         partners: parsePartners('AGI Builders'),
         attendees: 112,
         vibeScore: 5,
@@ -114,7 +116,7 @@ const eventsData: Event[] = [
         location: { label: 'New York City, NY' },
         format: 'Breakfast',
         audience: splitValues('Stealth founders'),
-        speakers: splitValues('Mine'),
+        speakers: splitValues('Mine Kansu'),
         partners: parsePartners('Starcycle, Cooley'),
         attendees: 7,
         vibeScore: 2,
@@ -126,7 +128,7 @@ const eventsData: Event[] = [
         location: { label: 'Austin, TX' },
         format: 'Breakfast + OST',
         audience: splitValues('AI Engineers'),
-        speakers: splitValues('Haven'),
+        speakers: splitValues('Haven Barnes'),
         partners: parsePartners('AITX'),
         attendees: 25,
         vibeScore: 5,
@@ -138,7 +140,7 @@ const eventsData: Event[] = [
         location: { label: 'New York City, NY' },
         format: 'Talks, Networking',
         audience: splitValues('Engineers, Engineering managers'),
-        speakers: splitValues('Abe'),
+        speakers: splitValues('Abe Basu'),
         partners: parsePartners('Vercel, Profound'),
         attendees: 50,
         vibeScore: 3,
@@ -150,7 +152,7 @@ const eventsData: Event[] = [
         location: { label: 'Toronto, Canada' },
         format: 'Talks, Networking',
         audience: splitValues('Startup founders'),
-        speakers: splitValues('Vincent'),
+        speakers: splitValues('Vincent Ge'),
         partners: parsePartners('Deskree'),
         attendees: 75,
         vibeScore: 3,
@@ -162,7 +164,7 @@ const eventsData: Event[] = [
         location: { label: 'Stockholm, Sweeden' },
         format: 'Pub quiz',
         audience: splitValues('Flutter engineers'),
-        speakers: splitValues('Manoel'),
+        speakers: splitValues('Manoel Aranda Neto'),
         attendees: 50,
         vibeScore: 2,
         link: 'https://github.com/PostHog/meta/issues/358',
@@ -171,8 +173,8 @@ const eventsData: Event[] = [
         date: '2025-09-14',
         name: 'Valio Con',
         location: { label: 'Oceanside, CA', lat: 33.1939, lng: -117.3827, venue: 'Seabird Hotel' },
-        format: 'Conf sponsorship',
-        audience: splitValues('Designers'),
+        format: 'Conference sponsorship',
+        audience: splitValues('Designers, Creatives'),
         speakers: splitValues('Cory Watilo'),
         speakerTopic: 'Why doing design wrong feels so right',
         attendees: 65,
@@ -187,7 +189,7 @@ const eventsData: Event[] = [
         location: { label: 'Vermont' },
         format: 'Meetup',
         audience: splitValues('Engineers and founders'),
-        speakers: splitValues('Danilo'),
+        speakers: splitValues('Danilo Campos'),
         attendees: 19,
         vibeScore: 5,
         link: 'https://github.com/PostHog/meta/issues/322',
@@ -198,7 +200,7 @@ const eventsData: Event[] = [
         location: { label: 'Cardiff, UK' },
         format: 'Lunch + OST',
         audience: splitValues('Founders'),
-        speakers: splitValues('Adam'),
+        speakers: splitValues('Adam Leith'),
         attendees: 25,
         vibeScore: 4,
         link: 'https://github.com/PostHog/meta/issues/372',
@@ -210,7 +212,7 @@ const eventsData: Event[] = [
         private: true,
         format: 'Dinner',
         audience: splitValues('Founders'),
-        speakers: splitValues('James'),
+        speakers: splitValues('James Hawkins'),
         partners: parsePartners('ODF'),
         attendees: 11,
         vibeScore: 4,
@@ -221,7 +223,7 @@ const eventsData: Event[] = [
         name: "München Hogtoberfest '25",
         location: { label: 'Munich, Germany' },
         format: 'Drinks',
-        audience: splitValues('Founders and engineers'),
+        audience: splitValues('Founders, Engineers'),
         partners: parsePartners('Speedinvest'),
         attendees: 7,
         vibeScore: 2,
@@ -233,7 +235,7 @@ const eventsData: Event[] = [
         location: { label: 'Amsterdam, Denmark' },
         format: 'Breakfast + OST',
         audience: splitValues('MCP practitioners'),
-        speakers: splitValues('Jonathan'),
+        speakers: splitValues('Jonathan Mieloo'),
         partners: parsePartners('Fiberplane'),
         attendees: 20,
         vibeScore: 5,
@@ -245,7 +247,7 @@ const eventsData: Event[] = [
         location: { label: 'Dublin, Ireland' },
         format: 'Panel',
         audience: splitValues('Founders'),
-        speakers: splitValues('Tim'),
+        speakers: splitValues('Tim Glaser'),
         attendees: 55,
         vibeScore: 5,
         link: 'https://github.com/PostHog/meta/issues/371',
@@ -256,7 +258,7 @@ const eventsData: Event[] = [
         location: { label: 'Barcelona, Spain' },
         format: 'Workshop',
         audience: splitValues('AI engineers'),
-        speakers: splitValues('Georgiy'),
+        speakers: splitValues('Georgiy Tarasov'),
         attendees: 22,
         vibeScore: 5,
         link: 'https://github.com/PostHog/meta/issues/333',
@@ -267,8 +269,8 @@ const eventsData: Event[] = [
         location: { label: 'Jersey City, New Jersey' },
         format: 'Talks, Panel, Networking',
         audience: splitValues('Product managers and engineers'),
-        speakers: splitValues('Abe'),
-        partners: parsePartners('Apprenticeio'),
+        speakers: splitValues('Abe Basu'),
+        partners: parsePartners('Apprentice.io'),
         attendees: 70,
         vibeScore: 4,
         link: 'https://github.com/PostHog/meta/issues/339',
@@ -279,7 +281,7 @@ const eventsData: Event[] = [
         location: { label: 'Toronto, Canada', lat: 43.6532, lng: -79.3832 },
         format: 'Workshop',
         audience: splitValues('Product managers'),
-        speakers: splitValues('Zach'),
+        speakers: splitValues('Zach Waterfield'),
         link: 'theproductweekend.com/toronto-oct2025',
     },
     {
@@ -289,7 +291,7 @@ const eventsData: Event[] = [
         location: { label: 'Los Angeles, CA', lat: 34.0522, lng: -118.2437 },
         format: 'Talks',
         audience: splitValues('Founders and engineers'),
-        speakers: splitValues('Raquel'),
+        speakers: splitValues('Raquel Smith'),
         partners: parsePartners('AI LA'),
         link: 'lu.ma/ailasalon-posthog',
     },
@@ -300,7 +302,7 @@ const eventsData: Event[] = [
         location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
         format: 'Demos',
         audience: splitValues('AI engineers'),
-        speakers: splitValues('Josh'),
+        speakers: splitValues('Joshua Snyder'),
         partners: parsePartners('Speakeasy'),
         link: 'https://luma.com/3f2mh0no',
     },
@@ -311,6 +313,7 @@ const eventsData: Event[] = [
         location: { label: 'Seoul, South Korea', lat: 37.5665, lng: 126.978, venue: 'Google for Startups Campus' },
         format: 'Talks, Networking',
         audience: splitValues('Developers'),
+        speakers: splitValues('Max Wiersma'),
         speakerTopic: 'Using PostHog to prioritize and understand user needs',
         link: 'https://dev-korea.com/events/dev-korea-3-october-2025',
     },
@@ -321,6 +324,7 @@ const eventsData: Event[] = [
         location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
         format: 'Fireside chat',
         audience: splitValues('Founders and engineers'),
+        speakers: splitValues('James Hawkins'),
         partners: parsePartners('Granola'),
         link: 'https://luma.com/t5e4fyah',
     },
@@ -331,7 +335,7 @@ const eventsData: Event[] = [
         location: { label: 'Dublin, Ireland', lat: 53.3498, lng: -6.2603 },
         format: 'Workshop',
         audience: splitValues('Product managers'),
-        speakers: splitValues('Alessandro'),
+        speakers: splitValues('Alessandro Pogliaghi'),
         speakerTopic: 'Leveraging AI in Product Development',
         link: 'https://theproductweekend.com/dublin-nov2025',
     },
@@ -1043,40 +1047,57 @@ function Events() {
                             <div className="p-4 h-96 @xl:h-full">
                                 <div className="space-y-3">
                                     {displayEvents.map((event) => (
-                                        <button
+                                        <OSButton
                                             data-scheme="primary"
                                             key={getEventKey(event)}
                                             onClick={() => handleEventClick(event)}
                                             onMouseEnter={() => setHoveredEvent(event)}
                                             onMouseLeave={() => setHoveredEvent(null)}
-                                            className={cntl`
-                      w-full text-left p-3 rounded border transition-all bg-primary
+                                            align="left"
+                                            width="full"
+                                            zoomHover="md"
+                                            className={`bg-primary border border-primary active:bg-primary
+                      
                       ${selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
                                                     ? 'border-primary outline outline-orange outline-2 outline-offset-1'
                                                     : 'border-primary'
                                                 }
                     `}
                                         >
-                                            <div className="text-secondary text-[13px]">
-                                                {new Date(event.date).toLocaleDateString('en-US', {
-                                                    month: 'short',
-                                                    day: 'numeric',
-                                                    year: 'numeric',
-                                                })}
-                                            </div>
-                                            <div className="font-semibold text-sm line-clamp-2">{event.name}</div>
-                                            <div className="text-[13px] text-secondary">
-                                                <div>{event.location.label}</div>
+                                            <div className="w-full">
 
-                                                {event.vibeScore && (
-                                                    <div className="flex items-center gap-1">
-                                                        {Array.from({ length: event.vibeScore }).map((_, i) => (
-                                                            <span key={i}>🔥</span>
-                                                        ))}
+                                                {event.photos && event.photos.length > 0 && (
+                                                    <div className="float-right ml-2 max-w-20">
+                                                        {event.photos[0] && (
+                                                            <img
+                                                                src={event.photos[0]}
+                                                                alt={`Event photo`}
+                                                                className="w-20 max-h-20 object-cover rounded"
+                                                            />
+                                                        )}
                                                     </div>
                                                 )}
+                                                <div className="text-secondary text-[13px]">
+                                                    {new Date(event.date).toLocaleDateString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                        year: 'numeric',
+                                                    })}
+                                                </div>
+                                                <div className="font-semibold text-sm line-clamp-2">{event.name}</div>
+                                                <div className="text-[13px] text-secondary">
+                                                    <div>{event.location.label}</div>
+
+                                                    {event.vibeScore && (
+                                                        <div className="flex items-center gap-1">
+                                                            {Array.from({ length: event.vibeScore }).map((_, i) => (
+                                                                <span key={i}>🔥</span>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
-                                        </button>
+                                        </OSButton>
                                     ))}
                                 </div>
                             </div>
@@ -1095,7 +1116,14 @@ function Events() {
 
                                 <ScrollArea className="flex-1">
                                     <div className="p-4">
-                                        <h2 className="text-xl font-bold mb-2 pr-12">{selectedEvent.name}</h2>
+                                        <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
+                                        <div className="mb-2 text-secondary">
+                                            {new Date(selectedEvent.date).toLocaleDateString('en-US', {
+                                                month: 'long',
+                                                day: 'numeric',
+                                                year: 'numeric',
+                                            })}
+                                        </div>
 
                                         <div className="space-y-3 text-sm mb-4">
 
@@ -1105,20 +1133,9 @@ function Events() {
                                                 </div>
                                             )}
 
-                                            <div>
-                                                <div className="text-secondary text-[13px] mb-1">Date</div>
-                                                <div>
-                                                    {new Date(selectedEvent.date).toLocaleDateString('en-US', {
-                                                        month: 'long',
-                                                        day: 'numeric',
-                                                        year: 'numeric',
-                                                    })}
-                                                </div>
-                                            </div>
-
                                             {selectedEvent.startTime && (
                                                 <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Start Time</div>
+                                                    <div className="text-secondary text-[13px] mb-1">Start time</div>
                                                     <div>
                                                         {(() => {
                                                             const [hours, minutes] = selectedEvent.startTime.split(':').map(Number)
@@ -1145,6 +1162,34 @@ function Events() {
                                                 </div>
                                             )}
 
+                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}</div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedEvent.speakers.map((speaker, i) => (
+                                                            <TeamMember key={i} name={speaker} photo />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {selectedEvent.speakerTopic && (
+                                                <div>
+                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
+                                                    <div>{selectedEvent.speakerTopic}</div>
+                                                    {selectedEvent.deck && (
+                                                        <a
+                                                            href={selectedEvent.deck}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="block mt-1 font-semibold underline"
+                                                        >
+                                                            View slide deck
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            )}
+
                                             {selectedEvent.format && (
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Format</div>
@@ -1156,20 +1201,6 @@ function Events() {
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Audience</div>
                                                     <div>{selectedEvent.audience.join(', ')}</div>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}</div>
-                                                    <div>{selectedEvent.speakers.join(', ')}</div>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.speakerTopic && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
-                                                    <div>{selectedEvent.speakerTopic}</div>
                                                 </div>
                                             )}
 
@@ -1219,12 +1250,13 @@ function Events() {
                                                     <div className="text-secondary text-[13px] mb-1">Photos</div>
                                                     <div className="grid grid-cols-2 gap-2">
                                                         {selectedEvent.photos.map((photo, i) => (
-                                                            <img
-                                                                key={i}
-                                                                src={photo}
-                                                                alt={`Event photo ${i + 1}`}
-                                                                className="w-full h-32 object-cover rounded"
-                                                            />
+                                                            <ZoomImage key={i}>
+                                                                <img
+                                                                    src={photo}
+                                                                    alt={`Event photo ${i + 1}`}
+                                                                    className="w-full h-32 object-cover rounded"
+                                                                />
+                                                            </ZoomImage>
                                                         ))}
                                                     </div>
                                                 </div>
@@ -1240,20 +1272,6 @@ function Events() {
                                                         className="text-orange hover:underline text-sm"
                                                     >
                                                         Watch video →
-                                                    </a>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.deck && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Deck</div>
-                                                    <a
-                                                        href={selectedEvent.deck}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-orange hover:underline text-sm"
-                                                    >
-                                                        View deck →
                                                     </a>
                                                 </div>
                                             )}
