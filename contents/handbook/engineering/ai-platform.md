@@ -101,6 +101,47 @@ Deep Research's architecture is based on Google's [test-time diffusion researche
 
 6. **Final report**: Once complete, you get a structured notebook with the findings, including embedded session recordings, charts, and data that support each conclusion.
 
+**Architecture Diagram**
+
+```mermaid
+graph TB
+
+    Input[User Question] --> DraftReport[Draft report<br/>with speculative findings]
+    Input[User Question] --> ResearchPlan[Research Plan<br/>with questions to investigate]
+
+    ResearchPlan --> Investigate[Iterative Investigation]
+
+    subgraph Investigation
+        Investigate --> Sessions[Session Summaries]
+        Investigate --> Analytics[Run Analytics<br/>Queries]
+        Investigate --> Errors[Check Error<br/>Logs]
+        Investigate --> Cohorts[Compare<br/>Cohorts]
+    end
+
+    Sessions --> Findings[Add Findings to<br/>Draft Report]
+    Analytics --> Findings
+    Errors --> Findings
+    Cohorts --> Findings
+
+    Findings --> Denoise[Denoising Process]
+
+    subgraph Denoising
+        Denoise --> Remove[Remove speculative<br/>parts that are wrong]
+        Denoise --> Strengthen[Strengthen findings<br/>with data support]
+        Denoise --> NewQ[Identify new<br/>questions]
+    end
+
+    NewQ --> |Add to plan| ResearchPlan
+
+    Remove --> Check{Report fully<br/>denoised?}
+    Strengthen --> Check
+
+    Check --> |No| Investigate
+    Check --> |Yes| Final[Final Notebook Report<br/>with embedded recordings,<br/>charts, and data]
+
+    DraftReport -.->|Continuously updated| Denoise
+```
+
 **Why Notebooks?**
 
 Notebooks are the perfect format for research because they combine narrative explanation with data visualization. You can see not just the conclusions ("conversion drops 40% at the payment step") but the evidence (charts showing the drop, session recordings showing users struggling, error logs showing timeouts).
@@ -244,6 +285,47 @@ Array is built as an Electron app for speed, familiarity (React), and cross-plat
 **Local agent** (more permissionless): We spin up Claude Code-like execution in the background on your local filesystem. This is the most permissionless version, closest to how developers use Claude Code today. We still give it access to the MCP and PostHog tools, and we likely need to proxy through our infrastructure to maintain control and provide a smooth experience.
 
 We support both modes, but push for cloud execution as the optimal experience.
+
+**Architecture Diagram**
+
+```mermaid
+graph TB
+    subgraph "Array Desktop App (Electron)"
+        UI[Task List UI]
+        Backend[Backend Service]
+    end
+
+    subgraph "Task Generation"
+        Signals[PostHog Signals<br/>Errors, Frustration, etc.]
+        DR[Deep Research]
+        SS[SessionSummaries]
+        TaskGen[Temporal Job<br/>Task Generation]
+    end
+
+    subgraph "Execution: Cloud Agent (Preferred)"
+        CloudSDK[SDK Wrapping<br/>Coding Agent]
+        Sandbox[Sandbox + API<br/>Micro VM]
+    end
+
+    subgraph "Execution: Local Agent"
+        LocalRepo[Local Repo<br/>User Filesystem]
+        LocalExec[Local Execution<br/>Claude Code-like]
+    end
+
+    Signals --> TaskGen
+    DR --> TaskGen
+    SS --> TaskGen
+
+    TaskGen --> Backend
+    Backend --> UI
+
+    UI --> Backend
+    Backend --> CloudSDK
+    Backend --> LocalExec
+
+    CloudSDK --> Sandbox
+    LocalExec --> LocalRepo
+```
 
 **What Kinds of Tasks?**
 
@@ -389,6 +471,61 @@ Our goal is to make Max so good that users want to "own" their workflow in PostH
 
 MCP is in general availability. The Max AI team owns the MCP server, with Josh Snyder as the primary support contact. We're actively working on dynamic tool discovery to reduce context window usage and aligning the server with our mode switching framework to share capabilities with Max.
 
+## AI Platform Architecture Overview
+
+The following diagram shows how all components of the AI platform work together:
+
+```mermaid
+graph TB
+    subgraph "User Facing Products"
+        MaxUI[Max<br/>In-app Agent]
+        DeepResearch[Deep Research<br/>Research Mode]
+        SessionSum[Session Summaries]
+        ArrayApp[Array<br/>Desktop App]
+        Wizard[Wizard<br/>CLI Tool]
+        ClaudeCode[Claude Code /<br/>Other AI Tools]
+    end
+
+    subgraph "Core AI Infrastructure"
+        subgraph "Max Single-Loop Agent"
+            Agent[Agent with<br/>Full Context]
+            CoreTools[Core Tools<br/>search, read_data,<br/>read_taxonomy,<br/>todo_write]
+            Modes[Agent Modes<br/>SQL, Analytics, CDP,<br/>Custom Product Modes]
+        end
+
+        MCP[MCP Server<br/>CloudFlare<br/>Model Context Protocol]
+        TaskGen[Task Generation<br/>Temporal Jobs]
+    end
+
+    MaxUI --> Agent
+    DeepResearch --> Agent
+    SessionSum --> Agent
+
+    Agent --> CoreTools
+    Agent --> Modes
+
+    Modes --> MCP
+
+    MCP --> ArrayApp
+    MCP --> Wizard
+    MCP --> ClaudeCode
+
+    SessionSum --> TaskGen
+    DeepResearch --> TaskGen
+
+    TaskGen --> ArrayApp
+```
+
+**Key Integration Points:**
+
+1. **Max exposes tools via Agent Modes**: The single-loop agent architecture in Max uses dynamically loadable modes that expose PostHog capabilities.
+
+2. **MCP provides universal access**: The MCP server makes agent modes accessible to any MCP-compatible client, including Array, Wizard, and third-party tools like Claude Code.
+
+3. **Task generation feeds Array**: Signals from PostHog data, Max conversations, and Deep Research investigations are processed into structured tasks that Array can execute automatically.
+
+4. **Shared capabilities**: Array, Wizard, and external tools all consume the same agent modes through the MCP, ensuring consistency across the platform.
+
 ## Max, how does it work?
 
 ### Single-loop agent with mode switching
@@ -396,6 +533,34 @@ MCP is in general availability. The Max AI team owns the MCP server, with Josh S
 Max is based on a single-loop agent architecture, heavily inspired by Claude Code, with some PostHog unique flavour. The core insight is simple: instead of routing between multiple specialized agents that act as black boxes, we have one agent that maintains full conversation context and can dynamically load expertise as needed.
 
 The single-loop agent has direct access to all tools, uses a todo-list pattern to track progress across long-running tasks (just like Claude Code), and provides complete visibility into every step it takes. When it needs specialized knowledge, it doesn't delegate to a sub-agent — it switches its own mode to become an expert in that domain.
+
+**How the Single-Loop Agent Works**
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Agent as Single-Loop Agent<br/>(Full Context)
+    participant Tools
+
+    User->>Agent: "Create a funnel for signup flow"
+
+    Agent->>Tools: Call read_taxonomy<br/>(check what events exist)
+    Tools-->>Agent: Returns actual events:<br/>'user_signed_up', 'account_created'
+
+    Agent->>Tools: Call enable_mode("Analytics")<br/>(load funnel creation tools)
+    Tools-->>Agent: Analytics mode enabled<br/>with insight creation tools
+
+    Agent->>Tools: Create funnel with correct events:<br/>'user_signed_up' → 'account_created'
+    Tools-->>Agent: Funnel created successfully
+
+    Agent-->>User: "I've created a funnel tracking your signup flow.<br/>It shows 45% conversion from 'user_signed_up'<br/>to 'account_created'"
+```
+
+The key differences from older architectures:
+- **No hallucination**: Agent checks `read_taxonomy` before assuming event names exist
+- **Full visibility**: All tool calls are visible to the agent throughout the conversation
+- **Maintained context**: The agent remembers every decision it made and can build on them
+- **Explainable**: The agent can justify every choice because it has complete visibility
 
 #### Core Tools: Always Available
 
@@ -426,6 +591,44 @@ A **system prompt** that contains expert instructions for this domain. When the 
 This architecture allows product teams to create their own modes without touching the core agent. Modes can be composed and nested. Think of it as "thousands of agents" through mode combinations, rather than a fixed set of AI products.
 
 **When do black-box sub-agents still make sense?** There are exceptions. Some processes benefit from being hidden from the main agent — usually when the logic is completely detached from the conversation context, or when you want to use strategies or optimizations that would confuse the main agent if exposed. Our agentic RAG system for insight search is a good example: it iteratively searches through insights and cherry-picks the best ones using a complex scoring system. The main agent doesn't need to see all that — it just needs the final result.
+
+**Architecture Diagram**
+
+```mermaid
+graph TB
+    User[User Message] --> Router[Small Model Router<br/>Analyze request]
+
+    Router --> |Enable default modes| Agent[Single-Loop Agent<br/>Full conversation context]
+
+    subgraph "Core Tools (Always Available)"
+        Search[search<br/>docs, insights, etc.]
+        ReadData[read_data<br/>schema, billing]
+        ReadTax[read_taxonomy<br/>events, properties]
+        TodoWrite[todo_write<br/>task tracking]
+        EnableMode[enable_mode<br/>switch expertise]
+    end
+
+    Agent --> CoreTools[Core Tools]
+    CoreTools --> Search
+    CoreTools --> ReadData
+    CoreTools --> ReadTax
+    CoreTools --> TodoWrite
+    CoreTools --> EnableMode
+
+    EnableMode --> |Dynamic loading| Modes[Agent Modes]
+
+    subgraph Modes
+        SQLMode[SQL Mode<br/>+ SQL tools<br/>+ SQL system prompt<br/>+ SQL trajectories]
+        AnalyticsMode[Analytics Mode<br/>+ insight tools<br/>+ analytics prompt<br/>+ analytics trajectories]
+        CDPMode[CDP Mode<br/>+ destination tools<br/>+ CDP prompt<br/>+ CDP trajectories]
+        CustomMode[Custom Product Mode<br/>+ product tools<br/>+ product prompt<br/>+ product trajectories]
+    end
+
+    Modes --> Agent
+    Agent --> |Execute with full context| Actions[Actions<br/>Create insights, write SQL,<br/>set up destinations, etc.]
+
+    Actions --> Response[Response to User]
+```
 
 ### How Max and MCP share the same capabilities
 
