@@ -2533,7 +2533,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Data egress',
-                                    url: '/docs/self-host/configure/data-egress',
+                                    url: '/docs/self-host/configure/egress',
                                 },
                             ],
                         },
