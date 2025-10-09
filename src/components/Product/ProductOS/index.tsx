@@ -107,8 +107,8 @@ export const ProductOS = () => {
     return (
         <>
             <SEO
-                title="Product OS - PostHog"
-                description="The product data infrastructure that powers the PostHog platform"
+                title="PostHog Product OS – Developer tools for product engineers"
+                description="Build better products with PostHog – developer tools for analytics, feature flags, session replay, experiments, error tracking, and more. Get started free."
                 image={`/images/og/product-os.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>

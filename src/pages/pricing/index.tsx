@@ -154,7 +154,10 @@ export default function Pricing() {
             showQuestions={false}
             hideMobileTableOfContents
         >
-            <SEO title="Pricing - PostHog" description="Find out how much it costs to use PostHog" />
+            <SEO
+                title="PostHog Pricing – Transparent, usage-based, generous free tier"
+                description="Find out exactly how much it costs to use PostHog. Start free and scale affordably with usage-based pricing. Get $50K in credits if you’re an eligible startup."
+            />
 
             <PricingExperiment
                 activePlan={activePlan}

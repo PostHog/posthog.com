@@ -1219,9 +1219,9 @@ export default function Home() {
     return (
         <>
             <SEO
-                title="PostHog is for product engineers"
+                title="PostHog – The all-in-one platform for product engineers"
                 updateWindowTitle={false}
-                description="We’re building every tool for product engineers to build successful products."
+                description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
             <MDXEditor
