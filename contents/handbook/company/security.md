@@ -80,17 +80,10 @@ Security vulnerabilities and other security related findings can be reported via
 
 For information about current and past security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
 
-## Secure communication (aka preventing or detecting social engineering)
+## Reporting phishing
 
-We have a few policies in place to prevent social engineering attacks. 
+If you receive a phishing or malicious email, it's useful to report it to the security team so that they can make other employees aware. Forward these emails to [security-internal@posthog.com](mailto:security-internal@posthog.com).
 
-For our internal communications, we have the following policies:
-- We do not use email for critical communications. 
-- We do not use SMS for critical communications. 
-- We do not use phone for critical communications. 
+## Secure communication (aka preventing social engineering)
 
--> We only use Slack for critical communications
-
-In case you should receive a suspicious email or other form of communication, please do not click on any links or open any attachments. Instead, please contact the team or person directly via Slack. E.g. if someone claims to be James, send them a message on Slack and ask "James, am I in a call with you right now?". This is a great and easy way to verify if this is legit. The same goes for any other form of communication. 
-
-Please report any suspicious communications to `#project-security` on Slack. 
+We follow several best practices to combat social engineering attacks. See [Communication Methods](/handbook/company/communication#communication-methods) for more information.
