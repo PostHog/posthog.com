@@ -14,9 +14,9 @@ You use it by passing image URLs to the `imageLight` and `imageDark` props like 
 
 ```
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png" 
-  alt="Sampling config shown set to 100% i.e. no sampling" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
+  alt="Sampling config shown set to 100% i.e. no sampling"
   classes="rounded"
 />
 ```
@@ -47,45 +47,45 @@ Th `<ProductVideo />` component works the same as product screenshots (above) bu
 
 1. Import the video(s) at the top of the post (directly following the MDX file's frontmatter and dashes):
 
-  ```
-  ---
+```
+---
 export const NewFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel.mp4"
 export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel-dark.mp4"
 
-  ```
+```
 
 1. Use the component wherever you want the video(s) to appear.
 
-  ```
-  <ProductVideo
-    videoLight={NewFunnelLight} 
-    videoDark={NewFunnelDark} 
-    classes="rounded"
-  />
-  ```
+```
+<ProductVideo
+  videoLight={NewFunnelLight}
+  videoDark={NewFunnelDark}
+  classes="rounded"
+/>
+```
 
-  _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
+_Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
 
 ## Codeblocks
 
 The PostHog website has a custom codeblock component that comes with a number of useful features built-in:
 
-- [Syntax highDarking](#adding-syntax-highlighting)
-- [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
-- [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
+-   [Syntax highDarking](#adding-syntax-highlighting)
+-   [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
+-   [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
 
 ### Basic codeblock
 
 Codeblocks in PostHog are created by enclosing your snippet using three backticks (\`\`\`) or three tildes (\~\~\~), as shown below:
 
-~~~mdx
+````mdx
 ```
 {
     "name": "Max, Hedgehog in Residence",
     "age": 2
 }
 ```
-~~~
+````
 
 This will produce the following codeblock:
 
@@ -100,14 +100,14 @@ This will produce the following codeblock:
 
 Syntax highlighting can be added by specifying a language for the codeblock, which is done by appending the name of the language directly after the opening backticks or tildes as shown below.
 
-~~~mdx
+````mdx
 ```json
 {
     "name": "Max, Hedgehog in Residence",
     "age": 2
 }
 ```
-~~~
+````
 
 This will produce the following output:
 
@@ -124,57 +124,56 @@ Here is a list of all the languages that are supported in codeblocks:
 
 ##### Frontend
 
-|  |  |
-| -- | -- |
-| HTML | `html` |
+|                   |                |
+| ----------------- | -------------- |
+| HTML              | `html`         |
 | CSS / SCSS / LESS | `css` / `less` |
-| JavaScript | `js` |
-| JSX | `jsx` |
-| TypeScript | `ts` |
-| TSX | `tsx` |
-| Swift | `swift` |
-| Dart | `dart` |
-| Objective-C | `objectivec` |
+| JavaScript        | `js`           |
+| JSX               | `jsx`          |
+| TypeScript        | `ts`           |
+| TSX               | `tsx`          |
+| Swift             | `swift`        |
+| Dart              | `dart`         |
+| Objective-C       | `objectivec`   |
 
 ##### Backend
 
-| | |
-| -- | -- |
-| Node.js | `node` |
-| Elixir | `elixir` |
-| Golang | `go` |
-| Java | `java` |
-| PHP | `php` |
-| Ruby | `ruby` |
-| Python | `python` |
-| C / C++ | `c` / `cpp`
+|         |             |
+| ------- | ----------- |
+| Node.js | `node`      |
+| Elixir  | `elixir`    |
+| Golang  | `go`        |
+| Java    | `java`      |
+| PHP     | `php`       |
+| Ruby    | `ruby`      |
+| Python  | `python`    |
+| C / C++ | `c` / `cpp` |
 
 ##### Misc.
 
-| | |
-| -- | -- |
+|          |                   |
+| -------- | ----------------- |
 | Terminal | `bash` or `shell` |
-| JSON | `json` |
-| XML | `xml` |
-| SQL | `sql` |
-| GraphQL | `graphql` |
-| Markdown | `markdown` |
-| MDX | `mdx` |
-| YAML | `yaml` |
-| Git | `git` |
+| JSON     | `json`            |
+| XML      | `xml`             |
+| SQL      | `sql`             |
+| GraphQL  | `graphql`         |
+| Markdown | `markdown`        |
+| MDX      | `mdx`             |
+| YAML     | `yaml`            |
+| Git      | `git`             |
 
 > **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the imports [here](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
-
 
 ### Multiple code snippets in one block
 
 With PostHog's `MultiLanguage` component, it's possible to group multiple code snippets together into a single block.
 
-~~~mdx
+````mdx
 <MultiLanguage>
 
 ```js
-console.log("Hello world!")
+console.log('Hello world!')
 ```
 
 ```html
@@ -182,7 +181,7 @@ console.log("Hello world!")
 ```
 
 </MultiLanguage>
-~~~
+````
 
 > **Note:** Make sure to include empty lines between all your code snippets, as well as above and below the `MultiLanguage` tag
 
@@ -191,7 +190,7 @@ This will render the following codeblock:
 <MultiLanguage>
 
 ```js
-console.log("Hello world!")
+console.log('Hello world!')
 ```
 
 ```html
@@ -204,7 +203,7 @@ console.log("Hello world!")
 
 You can specify a filename that a code snippet belongs to using the `file` parameter, which will be displayed in the top bar of the block.
 
-~~~mdx
+````mdx
 ```yaml file=values.yaml
 cloud: 'aws'
 ingress:
@@ -214,7 +213,7 @@ ingress:
 cert-manager:
     enabled: true
 ```
-~~~
+````
 
 > **Note:** Make sure **not** to surround your filename in quotes. Each parameter-value pair is delimited by spaces.
 
@@ -242,11 +241,10 @@ Use Markdown's standard syntax for linking internally.
 
 Be sure to use _relative links_ (exclude `https://posthog.com`) with _absolute paths_ (reference the root of the domain with a preceding `/`).
 
-| | |
-|-----------	|------------------------------------------	|
-| **Correct syntax**   	| `/absolute-path/to/url`                  	|
-| **Incorrect syntax** 	| `https://posthog.com/absolute-path/to/url` 	|
-
+|                      |                                            |
+| -------------------- | ------------------------------------------ |
+| **Correct syntax**   | `/absolute-path/to/url`                    |
+| **Incorrect syntax** | `https://posthog.com/absolute-path/to/url` |
 
 ### Linking externally
 
@@ -254,8 +252,8 @@ The `<Link />` component is used throughout the site, and is accessible within M
 
 While that doesn't apply here, using it comes with some handy parameters that you can see in action via the link above:
 
-- Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
-- If, for some reason, you need to hide the icon, use `externalNoIcon` instead
+-   Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
+-   If, for some reason, you need to hide the icon, use `externalNoIcon` instead
 
 Example:
 
@@ -289,21 +287,33 @@ Use this component to mention a team member in a post. It will link to their com
 
 There's also a `photo` parameter which will inline their photo next to their name like this: <TeamMember name="Cory Watilo" photo />
 
+## Mention a small team
+
+Use this component to mention a small team in a post. It will link to their team page and appears like this: <SmallTeam slug="brand" />
+
+```
+<SmallTeam slug="brand" />
+```
+
+The default version shows the team's mini crest and name in a bordered "chip" style. There's also a `noMiniCrest` parameter to omit the mini crest and border for inline usage like this: <SmallTeam slug="brand" noMiniCrest />
+
+```
+<SmallTeam slug="brand" noMiniCrest />
+```
+
+Both versions will show the full team crest on hover. Clicking the tooltip will open the team page in a new window.
+
 ## Embedded posts
 
 You can embed what looks like ~~a Tweet~~ an X post using the `<Tweet>` component. It's used on the [terms](/terms) and [privacy policy](/privacy) pages, but was componentized for use in blog posts to break up bullet points at the top of the post.
 
 _Note: This does **not** actually embed an X post; it's just styled to look like one._
 
-<Tweet
-    alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
->
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component.">
     Here's what a post looks like. It's designed to have a familiar look that makes it easy to scan.
 </Tweet>
 
-<Tweet
-    alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
->
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component.">
     If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
 </Tweet>
 

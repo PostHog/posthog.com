@@ -11,6 +11,7 @@ import {
     StickerFlagCL,
     StickerFlagCO,
     StickerFlagCY,
+    StickerFlagCZ,
     StickerFlagDE,
     StickerFlagDK,
     StickerFlagDO,
@@ -28,6 +29,7 @@ import {
     StickerFlagPL,
     StickerFlagPR,
     StickerFlagPT,
+    StickerFlagRS,
     StickerFlagSE,
     StickerFlagUnknown,
     StickerFlagUS,
@@ -37,10 +39,26 @@ import {
     StickerPineappleUnknown,
 } from 'components/Stickers/Index'
 
-const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id, handleTeamLead }) => {
+const Stickers = ({
+    location,
+    country,
+    pineappleOnPizza,
+    isTeamLead,
+    editing,
+    id,
+    handleTeamLead,
+}: {
+    location: string
+    country: string
+    pineappleOnPizza: boolean
+    isTeamLead: boolean
+    editing: boolean
+    id: string
+    handleTeamLead: (id: string, isTeamLead: boolean) => void
+}) => {
     const TeamLeadContainer = editing && handleTeamLead ? 'span' : 'button'
 
-    const handleTeamLeadClick = (e) => {
+    const handleTeamLeadClick = (e: React.MouseEvent<HTMLSpanElement>) => {
         e.stopPropagation()
         handleTeamLead(id, isTeamLead)
     }
@@ -96,12 +114,16 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagCO className="w-8 h-8" />
                 ) : country === 'CY' ? (
                     <StickerFlagCY className="w-8 h-8" />
+                ) : country === 'CZ' ? (
+                    <StickerFlagCZ className="w-8 h-8" />
                 ) : country === 'PL' ? (
                     <StickerFlagPL className="w-8 h-8" />
                 ) : country === 'PR' ? (
                     <StickerFlagPR className="w-8 h-8" />
                 ) : country === 'PT' ? (
                     <StickerFlagPT className="w-8 h-8" />
+                ) : country === 'RS' ? (
+                    <StickerFlagRS className="w-8 h-8" />
                 ) : country === 'SE' ? (
                     <StickerFlagSE className="w-8 h-8" />
                 ) : country === 'UY' ? (
@@ -110,7 +132,7 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}
             </Tooltip>
-            <span>
+            <span className="hidden">
                 {pineappleOnPizza === null ? (
                     <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
                         <StickerPineappleUnknown className="w-8 h-8" />

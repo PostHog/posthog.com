@@ -1,0 +1,41 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Environment & site structure
+
+PostHog.com is the website for PostHog. It contains marketing materials, technical docs, tutorials, a headless Shopify merch store, and a community forum setup built in-house.
+
+It's a static website built on Gatsby and hosted with Vercel.
+
+## Resources and servers
+
+-   Use yarn instead of npm
+-   Run the app with `yarn start`. To make sure everything is fresh, run `yarn clean && yarn && yarn start`.
+-   The site runs on port `8001`. If you need to test something, check if it's already running on that port – no need to spin up a new server if so.
+-   Sometimes the project is run inside a parent folder so a VS Code Workspace can include the squeak-strapi repo in another subfolder. Always verify your directory when searching for files or trying to run commands.
+
+## Site features
+
+PostHog.com is designed to replicate the experience of a desktop operating system within the browser. It has:
+
+-   A MacOS-style global header bar
+-   The ability to have multiple windows open simultaneously
+-   Windows that are draggable, resizeable, and can be snapped, maximized, or minimized
+-   A panel to see all open windows
+
+## Site structure
+
+-   The desktop is rendered in [index.tsx](mdc:src/components/Desktop/index.tsx). Apps (windows) can be launched by clicking an icon.
+-   Apps are opened by passing `state={{ newWindow: true}}` and use various templates as specified by the "app".
+-   When a page is opened (like /products [index.tsx](mdc:src/pages/products/index.tsx)), it opens inside of the desktop-style window component using [index.tsx](mdc:src/components/AppWindow/index.tsx). Then the page passes content into the app.
+-   The window references `appSettings` in [App.tsx](mdc:src/context/App.tsx) to check for window size settings.
+
+## "Apps"
+
+-   ReaderView: [index.tsx](mdc:src/components/ReaderView/index.tsx)
+-   Wizard: [index.tsx](mdc:src/components/Wizard/index.tsx)
+-   Explorer: [index.tsx](mdc:src/components/Explorer/index.tsx)
+-   etc

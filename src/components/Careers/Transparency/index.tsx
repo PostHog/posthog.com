@@ -66,9 +66,9 @@ export const Transparency = () => {
     }
 
     return (
-        <div className="careers-transparency py-12">
-            <div className="w-11/12 max-w-4xl mx-auto md:text-center">
-                <h2 className="text-4xl md:text-5xl">
+        <section id="transparency" className="@container careers-transparency">
+            <div className="w-11/12 max-w-4xl mx-auto @2xl:text-center">
+                <h2 className="text-2xl @3xl:text-4xl">
                     The most transparent company, <em className="text-red dark:text-yellow">ever</em>
                 </h2>
                 <h4 className="lg:text-center opacity-70 font-medium max-w-2xl mx-auto leading-tight text-lg">
@@ -77,8 +77,8 @@ export const Transparency = () => {
                 </h4>
             </div>
 
-            <div className="w-full max-w-screen-xl md:px-4 md:mx-auto mt-8 mb-16 text-left grid md:grid-cols-3 gap-4">
-                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+            <div className="w-full max-w-screen-xl @2xl:mx-auto mt-8 mb-16 text-left grid @2xl:grid-cols-3 gap-4">
+                <div className="bg-accent mx-4 @2xl:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Board meetings" Image={BoardMeetings} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
                             We share slides from each board meeting internally. When everyone knows the direction we're
@@ -87,7 +87,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                <div className="bg-accent mx-4 @2xl:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Fundraising & finances" Image={Finances} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
                             We keep our team informed about fundraising during the process and share a monthly report
@@ -97,7 +97,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                <div className="bg-accent mx-4 @2xl:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Constructive feedback" Image={Feedback} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
                             Transparency is a two-way street. We encourage individual feedback and run regular
@@ -110,10 +110,10 @@ export const Transparency = () => {
             <h3 className="text-3xl lg:text-4xl mb-4 text-center">Latest monthly financial report</h3>
 
             <div className="flex justify-center max-w-5xl mx-auto">
-                <div className="bg-white aspect-video dark:bg-accent-dark rounded-md p-4 xs:px-6 xl:py-6 xl:px-8 mx-4 xl:mx-8 border border-light dark:border-dark relative w-full">
+                <div className="bg-white aspect-video dark:bg-accent-dark rounded-md p-4 xs:px-6 xl:py-6 xl:px-8 mx-4 xl:mx-8 border border-primary relative w-full">
                     <div className="absolute left-0 top-0 w-full h-full bg-black/40 z-10 rounded-md"></div>
-                    <Logo className="h-6 xs:h-8 sm:h-12 -ml-3 xs:ml-0 mb-4 sm:mb-8 md:mb-10" />
-                    <div className="text-2xl xs:text-[1.5rem] sm:text-[2rem] md:text-[3rem] lg:text-[4rem] font-extrabold font-['Helvetica','Arial'] mb-1 xs:mb-2 md:mb-4 lg:mb-8">
+                    <Logo className="h-6 xs:h-8 sm:h-12 -ml-3 xs:ml-0 mb-4 sm:mb-8 @2xl:mb-10" />
+                    <div className="text-2xl xs:text-[1.5rem] sm:text-[2rem] @2xl:text-[3rem] lg:text-[4rem] font-extrabold font-['Helvetica','Arial'] mb-1 xs:mb-2 @2xl:mb-4 lg:mb-8">
                         Management report
                     </div>
                     <div className="text-lg xs:text-xl sm:text-2xl lg:text-4xl font-semibold font-['Helvetica','Arial']">
@@ -127,11 +127,11 @@ export const Transparency = () => {
                             width={260}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png"
                             alt="This hog's presenting in a suit and tie"
-                            className="w-32 xs:w-32 sm:w-48 md:w-64"
+                            className="w-32 xs:w-32 sm:w-48 @2xl:w-64"
                         />
                     </div>
                     <div className="absolute bottom-3 left-3 xs:bottom-6 xs:left-6">
-                        <span className="text-red uppercase border border-red rounded-sm text-xs md:text-sm p-1 font-bold font-['Helvetica','Arial']">
+                        <span className="text-red uppercase border border-red rounded-sm text-xs @2xl:text-sm p-1 font-bold font-['Helvetica','Arial']">
                             Confidential
                         </span>
                     </div>
@@ -142,6 +142,6 @@ export const Transparency = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

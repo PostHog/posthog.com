@@ -1,11 +1,10 @@
 import SettingProperties from "./setting-properties-text.mdx"
 import NamingTip from "./naming-tip.mdx"
-import Intro from "./intro.mdx" 
 
-<Intro />
+To capture an event, use `PostHog.capture/2`:
 
 ```elixir
-Posthog.capture("user_signed_up", distinct_id_of_the_user)
+PostHog.capture("user_signed_up", %{distinct_id: "distinct_id_of_the_user"})
 ```
 
 <NamingTip />
@@ -13,16 +12,53 @@ Posthog.capture("user_signed_up", distinct_id_of_the_user)
 <SettingProperties />
 
 ```elixir
-Posthog.capture("user_signed_up", distinct_id_of_the_user, %{
+PostHog.capture("user_signed_up", %{
+  distinct_id: "distinct_id_of_the_user",
   login_type: "email",
   is_free_trial: true
 })
 ```
+### Context
+
+Carrying `distinct_id` around all the time might not be the most convenient approach, so PostHog lets you store it and other properties in a context.
+
+The context is stored in the `Logger` metadata and PostHog automatically attaches these properties to any events you capture with `PostHog.capture/2`, as long as they happen in the same process.
+
+```elixir
+PostHog.set_context(%{distinct_id: "distinct_id_of_the_user"})
+PostHog.capture("page_opened")
+```
+
+You can also scope the context to a specific event name:
+
+```elixir
+PostHog.set_event_context("sensitive_event", %{"$process_person_profile": false})
+```
 
 ### Batching events
 
-To capture multiple events at once, use `batch()`:
+Events are automatically batched and sent to PostHog via a background job.
+
+### Special events
+
+`PostHog.capture/2` is very powerful and enables you to send events that have special meaning.
+
+In other libraries you'll usually find helpers for these special events, but they must be explicitly sent in Elixir.
+
+For example:
+
+#### Create alias
 
 ```elixir
-Posthog.batch([{"user_signed_up", distinct_id_of_the_user, %{}}])
+PostHog.capture("$create_alias", %{distinct_id: "frontend_id", alias: "backend_id"})
+```
+
+#### Group analytics
+
+```elixir
+PostHog.capture("$groupidentify", %{
+  distinct_id: "static_string_used_for_all_group_events",
+  "$group_type": "company",
+  "$group_key": "company_id_in_your_db"
+})
 ```

@@ -9,7 +9,7 @@ featuredImageType: full
 tags:
   - Product engineers
   - Engineering
-  - Feature managemen
+  - Feature management
 crosspost:
   - Blog
 ---

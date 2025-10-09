@@ -1,26 +1,8 @@
 ---
 title: 'How ResearchGate tests product changes for over 25M users'
 customer: ResearchGate
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_logo_1627258295.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/resaerchgate_logo_dark_e8ea7ae745.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_posthog_7a5a2cf3ac.png
-featuredCustomer: false
-industries:
-  - Science
-  - Social network
-users:
-  - Growth
-  - Engineering
-  - Product
-  - Marketing
-toolsUsed:
-  - Experiments
-  - Feature Flags
-  - PostHog Cloud
-  - Insights
 date: 2024-06-25
 ---
 

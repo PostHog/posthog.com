@@ -20,7 +20,7 @@ export default function Configuration({ inputs_schema }: { inputs_schema: any[] 
                         <tr key={input.key}>
                             <td>
                                 <div className="mb-6 w-40">
-                                    <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded !whitespace-normal">
+                                    <code className=" dark:text-white bg-accent-light text-inherit p-1 rounded !whitespace-normal">
                                         {input.label}
                                     </code>
                                 </div>

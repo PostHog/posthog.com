@@ -97,6 +97,10 @@ You can cancel their subscription in Stripe - navigate to their Stripe customer 
 
 At this point they will be notified about this automatically via the billing service.
 
+#### Repeated failed payments
+
+After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
+
 ### Stripe Products & Prices
 
 > ⚠️ Product and price modifications are restricted and handled exclusively by the billing team. These changes are only made in rare cases and require billing team approval and implementation. Do not attempt to modify products or prices directly - contact the billing team for any pricing-related requests.
@@ -197,4 +201,4 @@ Self-hosted billing is no longer supported except for legacy customers who were 
 
 ## Billing for data pipelines
 
-For information about data pipeline pricing and billing, please visit our [add-ons page](https://posthog.com/addons#data-pipelines).
+For information about data pipeline pricing and billing, please visit our [pricing page](https://posthog.com/pricing).

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading } from 'types'
 import { AnchorIcon } from './AnchorIcon'
-import './style.scss'
+import './style.css'
 
 const getNodeText = (children: string | React.ReactNode): string => {
     let text = ''

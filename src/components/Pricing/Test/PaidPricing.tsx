@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
-import { section } from './Sections'
+import { section, SectionHeader } from './Sections'
 import * as Icons from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from './PricingAccordion'
-import { Link as ScrollLink } from 'react-scroll'
+import ScrollToElement from 'components/ScrollToElement'
 
 export const PaidPricing = () => {
     const [expanded, setExpanded] = useState(false)
 
     return (
-        <section className={`${section} `}>
-            <div className="grid md:grid-cols-2 gap-12">
+        <section id="rates" className={`${section} `}>
+            <div className="grid @4xl:grid-cols-2 gap-12">
                 <div>
-                    <div className="max-w-lg">
-                        <h4 className="text-2xl">Usage-based pricing</h4>
+                    <div className="@4xl:max-w-lg">
+                        <div className="@4xl:hidden">
+                            <SectionHeader>
+                                <h2>Usage-based pricing</h2>
+                            </SectionHeader>
+                        </div>
+
+                        <h3 className="hidden @4xl:block text-2xl font-bold">Usage-based pricing</h3>
                         <p>
                             If your usage goes beyond the free tier limits, we offer{' '}
                             <strong>usage-based pricing.</strong> You can set a billing limit for each product so you
@@ -49,11 +55,16 @@ export const PaidPricing = () => {
                             </li>
                         </ul>
 
-                        <ScrollLink to="calculator" offset={-120} smooth className="inline-block mb-4">
+                        <ScrollToElement
+                            targetId="calculator"
+                            offset={-20}
+                            as="div"
+                            className="inline-block mb-4 cursor-pointer"
+                        >
                             <CallToAction size="sm" type="secondary">
                                 Pricing calculator
                             </CallToAction>
-                        </ScrollLink>
+                        </ScrollToElement>
                     </div>
                 </div>
                 <div>

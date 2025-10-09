@@ -1,40 +1,46 @@
 import React from 'react'
-import List from 'components/List'
+import { OSList } from 'components/OSList'
+import { IconOpenAI, IconAnthropic, IconGemini, IconLangChain, IconVercel, IconOpenRouter } from 'components/OSIcons'
 
 const LLMInstallationPlatforms = () => {
     const platforms = [
         {
             label: 'OpenAI',
             url: '/docs/llm-analytics/installation/openai',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/openai_d86c68d66f.svg',
+            icon: <IconOpenAI />,
         },
         {
             label: 'Anthropic',
             url: '/docs/llm-analytics/installation/anthropic',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/anthropic_093714e898.svg',
+            icon: <IconAnthropic />,
         },
         {
-            label: 'Google',
+            label: 'Google Gemini',
             url: '/docs/llm-analytics/installation/google',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/gemini_3b2348da64.svg',
+            icon: <IconGemini />,
         },
         {
             label: 'LangChain',
             url: '/docs/llm-analytics/installation/langchain',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/langchain_bb97e9da36.svg',
+            icon: <IconLangChain />,
         },
         {
             label: 'Vercel AI SDK',
             url: '/docs/llm-analytics/installation/vercel-ai',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/vercel_ded5edb1ef.svg',
+            icon: <IconVercel />,
         },
         {
             label: 'OpenRouter',
             url: '/docs/llm-analytics/installation/openrouter',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/openrouterai_8260e8b011.png',
+            icon: <IconOpenRouter />,
+        },
+        {
+            label: 'LiteLLM',
+            url: '/docs/llm-analytics/installation/litellm',
+            icon: <img className='size-full' src='https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/litellm_3b2c4291f9.png' />,
         },
     ]
 
-    return <List className="grid sm:grid-cols-2" items={platforms} />
+    return <OSList className="grid" items={platforms} />
 }
 export default LLMInstallationPlatforms

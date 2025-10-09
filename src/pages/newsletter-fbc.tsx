@@ -119,13 +119,13 @@ function NewsletterSubscribeForm({
     }, [user])
 
     return (
-        <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark mx-auto">
+        <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-primary rounded bg-accent mx-auto">
             <div className="w-full">
                 {!submitted ? (
                     <>
                         <h1 className="relative !text-2xl !m-0 !leading-tight text-center">Product for Engineers</h1>
                         <p className="!m-0 !text-lg md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
-                            Read by 60,000+ founders and builders
+                            Read by 100,000+ founders and builders
                         </p>
                         <div className="">
                             <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2 my-4 lg:my-2">
@@ -134,7 +134,7 @@ function NewsletterSubscribeForm({
                                     onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     placeholder="Email address"
-                                    className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1 max-w-xs"
+                                    className="dark:bg-accent-dark border border-primary rounded text-[15px] w-full flex-1 max-w-xs"
                                     value={email}
                                 />
                                 <button className={`${container(undefined, 'md')} -mt-px w-full max-w-xs`}>
@@ -215,7 +215,7 @@ function NewsletterFBC(): JSX.Element {
                                     to={issue.url}
                                     state={{ isComingFromAd: true }}
                                     onClick={() => handleNewsletterClick(issue.title)}
-                                    className="group flex flex-col items-center text-center transition-opacity border border-light dark:border-dark rounded bg-white dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
+                                    className="group flex flex-col items-center text-center transition-opacity border border-primary rounded bg-light dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
                                 >
                                     <div className="w-full mb-1 overflow-hidden rounded-t">
                                         <CloudinaryImage src={issue.image} className="rounded-none" />
