@@ -14,13 +14,13 @@ The AI platform consists of several user-facing products (Max, Deep Research, Se
 
 ### Max: Our in-app agent [Beta]
 
-Max is PostHog's primary in-app agent, accessible through a chat interface embedded directly into the product. Think of Max as a fundamentally different way to interact with PostHog—instead of clicking buttons and filling out forms, you ask questions and make requests in natural language.
+Max is PostHog's primary in-app agent, accessible through a chat interface embedded directly into the product. Think of Max as a fundamentally different way to interact with PostHog — instead of clicking buttons and filling out forms, you ask questions and make requests in natural language.
 
 **The Problem We're Solving**
 
 PostHog has grown incredibly powerful, but that power comes with complexity. New users face a learning curve: Which insight type should I use? How do I filter for the data I need? What's the right SQL syntax for this query? Even experienced users spend time navigating through menus and forms to accomplish what they already know they want to do.
 
-Max eliminates this friction. You don't need to know where a feature lives or how to configure it—you just describe what you want, and Max handles the details.
+Max eliminates this friction. You don't need to know where a feature lives or how to configure it — you just describe what you want, and Max handles the details.
 
 **Who Uses Max**
 
@@ -39,7 +39,7 @@ Max is built on a single-loop agent architecture with dynamic mode switching. Wh
 3. Switch to SQL mode if you need custom transformations
 4. Switch to CDP mode if you want to set up a destination based on the funnel results
 
-Throughout this entire process, Max maintains full context—it can see all previous messages, all decisions it's made, and all tools it's used. This is fundamentally different from older architectures we implemented where specialized sub-agents worked in isolation.
+Throughout this entire process, Max maintains full context — it can see all previous messages, all decisions it's made, and all tools it's used. This is fundamentally different from older architectures we implemented where specialized sub-agents worked in isolation.
 
 For a technical deep dive on how this works, see the ["Max, how does it work?"](#max-how-does-it-work) section below.
 
@@ -67,11 +67,11 @@ The Max AI team owns the architecture, performance, and UX/UI of Max. Product te
 
 ### Deep Research [Under development]
 
-Deep Research is Max's bigger sibling—where Max gives you quick answers, Deep Research digs deep to understand complex, open-ended problems.
+Deep Research is Max's bigger sibling — where Max gives you quick answers, Deep Research digs deep to understand complex, open-ended problems.
 
 **The Problem We're Solving**
 
-Product analytics often requires real investigative work. You don't just want to know "what's my conversion rate?"—you want to understand *why* it's dropping, *which* user segments are affected, *where* in the flow they're getting stuck, and *what* patterns exist across multiple data sources. This kind of research is time-consuming. You might spend hours jumping between dashboards, filtering recordings, cross-referencing error logs, and synthesizing findings.
+Product analytics often requires real investigative work. You don't just want to know "what's my conversion rate?" — you want to understand *why* it's dropping, *which* user segments are affected, *where* in the flow they're getting stuck, and *what* patterns exist across multiple data sources. This kind of research is time-consuming. You might spend hours jumping between dashboards, filtering recordings, cross-referencing error logs, and synthesizing findings.
 
 Deep Research automates this investigative work. It can spend minutes or hours (depending on complexity) systematically exploring your data, following leads, and producing a comprehensive research report that would take a human analyst half a day or more.
 
@@ -95,9 +95,9 @@ Deep Research's architecture is based on Google's [test-time diffusion researche
 
 3. **Iterative research**: The agent systematically investigates each part of the research plan. It might filter session recordings, run analytics queries, check error logs, compare cohorts, and more. Each investigation adds findings to the draft report.
 
-4. **Denoising**: As research progresses, Deep Research "denoises" the draft report—removing speculative parts that turned out to be wrong, strengthening findings that are supported by data, and identifying new questions to investigate.
+4. **Denoising**: As research progresses, Deep Research "denoises" the draft report — removing speculative parts that turned out to be wrong, strengthening findings that are supported by data, and identifying new questions to investigate.
 
-5. **Loop**: Research continues until the draft report is fully denoised—meaning all sections are supported by actual findings rather than speculation.
+5. **Loop**: Research continues until the draft report is fully denoised — meaning all sections are supported by actual findings rather than speculation.
 
 6. **Final report**: Once complete, you get a structured notebook with the findings, including embedded session recordings, charts, and data that support each conclusion.
 
@@ -122,7 +122,7 @@ Access Deep Research by toggling "Research" mode in Max, or via the dedicated De
 
 **Current Status & Ownership**
 
-Deep Research is under active development. The Max AI team owns Deep Research. The architecture is implemented but we're still refining the research strategies and denoising algorithms. Early results show it can find patterns and insights that human analysts miss, but it occasionally goes down rabbit holes or misinterprets data—we're working on improving these edge cases.
+Deep Research is under active development. The Max AI team owns Deep Research. The architecture is implemented but we're still refining the research strategies and denoising algorithms. Early results show it can find patterns and insights that human analysts miss, but it occasionally goes down rabbit holes or misinterprets data — we're working on improving these edge cases.
 
 ### Session Summaries [Alpha]
 
@@ -130,7 +130,7 @@ Session Summaries solves a specific but painful problem: you have dozens or hund
 
 **The Problem We're Solving**
 
-Session recordings are incredibly valuable—they show you exactly what users are experiencing. But they're also time-consuming to review. If you have 100 recordings from users reporting checkout issues, do you really want to watch all 100? Most people watch a few, spot some patterns, and hope they caught the important stuff. This means you miss edge cases, low-frequency issues, and patterns that only emerge across many sessions.
+Session recordings are incredibly valuable — they show you exactly what users are experiencing. But they're also time-consuming to review. If you have 100 recordings from users reporting checkout issues, do you really want to watch all 100? Most people watch a few, spot some patterns, and hope they caught the important stuff. This means you miss edge cases, low-frequency issues, and patterns that only emerge across many sessions.
 
 Session Summaries changes this calculus. You can analyze hundreds of recordings in minutes, with confidence that you're seeing all the significant patterns, not just the ones that happened to appear in the first few recordings you watched.
 
@@ -183,7 +183,7 @@ We're expanding Session Summaries beyond just finding problems. Future capabilit
 - **Feature discovery**: "Which features do power users rely on that casual users don't know about?"
 - **Delight moments**: "Find sessions where users had a particularly smooth experience"
 
-The underlying technology is the same—watch many recordings, find patterns, cluster similar behaviors—but the training and prompts can be tuned for different objectives.
+The underlying technology is the same — watch many recordings, find patterns, cluster similar behaviors — but the training and prompts can be tuned for different objectives.
 
 **Access and Pricing**
 
@@ -195,11 +195,11 @@ Session Summaries is in alpha. The Max AI team owns Session Summaries. It's work
 
 ### Array: PostHog in action [Under development]
 
-Array is our most ambitious bet: a desktop agent that automatically turns PostHog data into shipped code. The vision is to free product engineers from distractions so they can focus on what they love—building great features—by automating all the chores that eat up their day.
+Array is our most ambitious bet: a desktop agent that automatically turns PostHog data into shipped code. The vision is to free product engineers from distractions so they can focus on what they love — building great features — by automating all the chores that eat up their day.
 
 **The Problem We're Solving**
 
-Today, product engineers spend most of their day managing random inputs: Slack messages, GitHub notifications, tickets, emails, and alerts from various monitoring tools. This work is essential but time-consuming. Experienced AI-native engineers have already evolved a workaround—they practice "structured development," creating PRDs, breaking work into tasks, and shipping incrementally. Tools like Claude Code or Cursor only work well when given clean context and well-defined tasks.
+Today, product engineers spend most of their day managing random inputs: Slack messages, GitHub notifications, tickets, emails, and alerts from various monitoring tools. This work is essential but time-consuming. Experienced AI-native engineers have already evolved a workaround — they practice "structured development," creating PRDs, breaking work into tasks, and shipping incrementally. Tools like Claude Code or Cursor only work well when given clean context and well-defined tasks.
 
 Array aims to productize that discipline, turning chaos into structured, buildable work.
 
@@ -209,15 +209,15 @@ Array is designed for experienced product engineers who already use AI coding to
 
 **How It Works: From Signals to Shipped Code**
 
-The core insight is that PostHog collects massive amounts of data across all our products—analytics, session recordings, error tracking, surveys, experiments. All of this data can be transformed into actionable "tasks" that describe real problems to fix or opportunities to pursue.
+The core insight is that PostHog collects massive amounts of data across all our products — analytics, session recordings, error tracking, surveys, experiments. All of this data can be transformed into actionable "tasks" that describe real problems to fix or opportunities to pursue.
 
 Here's the flow:
 
 1. **Signal generation**: Something happens in PostHog that indicates work needs to be done. This could be a recurring error pattern, frustration signals from session recordings, a survey response indicating a missing feature, or experiment results suggesting an optimization. The Max AI team focuses on surfacing this data in useful ways.
 
-2. **Task creation**: An LLM-based system receives these signals, deduplicates them across data types, and translates them into concrete tasks with appropriate context. This uses a non-deterministic approach—we use a document store and LLMs to judge how to structure tasks. A vague signal like "users seem frustrated during checkout" becomes a specific task: "Investigate and fix timeout issues in payment processing, affecting 15% of transactions from company X."
+2. **Task creation**: An LLM-based system receives these signals, deduplicates them across data types, and translates them into concrete tasks with appropriate context. This uses a non-deterministic approach — we use a document store and LLMs to judge how to structure tasks. A vague signal like "users seem frustrated during checkout" becomes a specific task: "Investigate and fix timeout issues in payment processing, affecting 15% of transactions from company X."
 
-3. **Task execution**: Once a task is defined, it gets assigned to a workflow. Different tasks need different approaches—a well-defined bug fix might be a one-shot fix with human QA, while a vague feature request might need definition, breaking into chunks, gradual shipping behind a flag, and automated feedback collection.
+3. **Task execution**: Once a task is defined, it gets assigned to a workflow. Different tasks need different approaches — a well-defined bug fix might be a one-shot fix with human QA, while a vague feature request might need definition, breaking into chunks, gradual shipping behind a flag, and automated feedback collection.
 
 4. **Coding**: Array uses an agent running in a cloud sandbox (though we support local execution too). The agent clones your repo, reads your codebase for context, makes changes, writes tests, and opens a pull request. Changes are automatically wrapped in feature flags when appropriate.
 
@@ -227,7 +227,7 @@ Here's the flow:
 
 This is a crucial design decision. We could have built Array directly into the PostHog web app, and it would work. But it wouldn't generate the adoption we need.
 
-Desktop apps win because of bottom-up adoption. Individual engineers can choose tools that make them more productive in a permissionless, frictionless way. A desktop app feels like a personal tool—like VS Code, Cursor, or your terminal—rather than a team product that requires management buy-in. Engineers already make personal choices about vim vs VSCode, which terminal to use, which AI coding assistant to try. Array slots into that category.
+Desktop apps win because of bottom-up adoption. Individual engineers can choose tools that make them more productive in a permissionless, frictionless way. A desktop app feels like a personal tool — like VS Code, Cursor, or your terminal — rather than a team product that requires management buy-in. Engineers already make personal choices about vim vs VSCode, which terminal to use, which AI coding assistant to try. Array slots into that category.
 
 The UX also matters more for tools you use all day, not just a few times a week. Array is designed to feel like something between Warp, Ghostty, and Cursor: super fast, keyboard-first with lots of shortcuts, easy to navigate with tabs and split windows. Think of it as having the directness of a CLI but with the richness of a UI when you need it.
 
@@ -239,7 +239,7 @@ Array is tab-based with the home tab being a task list. You navigate with arrow 
 
 Array is built as an Electron app for speed, familiarity (React), and cross-platform ease. When a task kicks off, we have two execution options:
 
-**Cloud agent** (preferred): Tasks execute in a cloud sandbox. The agent runs in an isolated environment, clones the repo, does its work, and pushes to a branch. The downside is you need to grant GitHub app access. The upside is truly magical—Array can work on tasks while you sleep, and you wake up to PRs ready for review.
+**Cloud agent** (preferred): Tasks execute in a cloud sandbox. The agent runs in an isolated environment, clones the repo, does its work, and pushes to a branch. The downside is you need to grant GitHub app access. The upside is truly magical — Array can work on tasks while you sleep, and you wake up to PRs ready for review.
 
 **Local agent** (more permissionless): We spin up Claude Code-like execution in the background on your local filesystem. This is the most permissionless version, closest to how developers use Claude Code today. We still give it access to the MCP and PostHog tools, and we likely need to proxy through our infrastructure to maintain control and provide a smooth experience.
 
@@ -253,7 +253,7 @@ Even inspiration-driven features (not from user data) benefit from Array's workf
 
 **Current Status**
 
-Right now we're focused on dogfooding—getting the Array team to build everything using Array itself. This lets us refine product quality and identify friction fast. The Max AI team is supporting this by focusing on surfacing useful data that can be converted into Array tasks.
+Right now we're focused on dogfooding — getting the Array team to build everything using Array itself. This lets us refine product quality and identify friction fast. The Max AI team is supporting this by focusing on surfacing useful data that can be converted into Array tasks.
 
 **For Engineers Not Using Array**
 
@@ -271,7 +271,7 @@ The Wizard is PostHog's AI-powered installation assistant that gets you from zer
 
 Setting up analytics is tedious. You need to pick the right SDK for your tech stack, install dependencies, configure authentication, add initialization code in the right place, set up your first events, and verify everything works. For a developer who just wants to start tracking user behavior, this feels like unnecessary friction before you even get value from the product.
 
-Even experienced developers waste 15-30 minutes on setup. For new developers or teams trying PostHog for the first time, it can take much longer—and if anything goes wrong, they might give up entirely.
+Even experienced developers waste 15-30 minutes on setup. For new developers or teams trying PostHog for the first time, it can take much longer — and if anything goes wrong, they might give up entirely.
 
 The Wizard eliminates this friction. You run a single command, answer a few questions, and the Wizard writes all the integration code for you.
 
@@ -291,7 +291,7 @@ The Wizard is a CLI tool that runs locally in your development environment. Here
 
 1. **Detection**: The Wizard scans your codebase to detect your tech stack (React, Next.js, Python, etc.), framework version, and project structure.
 
-2. **Configuration**: It asks you a few questions—which PostHog project to connect to, whether you want autocapture enabled, any custom configuration. The questions are contextual based on what it detected.
+2. **Configuration**: It asks you a few questions — which PostHog project to connect to, whether you want autocapture enabled, any custom configuration. The questions are contextual based on what it detected.
 
 3. **Code generation**: The Wizard writes the integration code. This includes:
    - Installing the appropriate PostHog SDK via your package manager
@@ -301,7 +301,7 @@ The Wizard is a CLI tool that runs locally in your development environment. Here
 
 4. **Verification**: The Wizard verifies the integration works by sending a test event to PostHog and confirming it arrives.
 
-5. **Next steps**: It suggests what to do next—track your first custom event, set up a dashboard, or explore session recordings.
+5. **Next steps**: It suggests what to do next — track your first custom event, set up a dashboard, or explore session recordings.
 
 The entire experience uses Clack.cc for a polished CLI interface with clear prompts, progress indicators, and helpful error messages.
 
@@ -316,8 +316,8 @@ Right now, the Wizard handles installation and basic setup across PostHog's supp
 **Future Direction**
 
 The Wizard's long-term vision is much broader than one-time setup. Imagine:
-- **Continuous instrumentation**: The Wizard could watch your codebase and suggest event tracking for new features. "I noticed you added a new checkout flow—want me to add tracking events?"
-- **Instrumentation improvements**: "Your signup flow isn't tracking all the steps—I can add events to fill the gaps."
+- **Continuous instrumentation**: The Wizard could watch your codebase and suggest event tracking for new features. "I noticed you added a new checkout flow — want me to add tracking events?"
+- **Instrumentation improvements**: "Your signup flow isn't tracking all the steps — I can add events to fill the gaps."
 - **Best practices**: "You're tracking events in 5 different ways. I can standardize this for you."
 - **Integration with Array**: When Array generates code that needs PostHog instrumentation (feature flags, experiments, custom events), the Wizard could handle that automatically.
 
@@ -327,15 +327,15 @@ This would turn the Wizard from a one-time setup tool into an ongoing assistant 
 
 The Wizard is in general availability and actively used during customer onboarding. It's currently owned by the Growth team.
 
-The Wizard's future direction—particularly whether it should integrate with Array for continuous instrumentation or remain a standalone onboarding tool—is being evaluated as part of the broader AI platform strategy.
+The Wizard's future direction — particularly whether it should integrate with Array for continuous instrumentation or remain a standalone onboarding tool — is being evaluated as part of the broader AI platform strategy.
 
 ### MCP: PostHog for third-party tools [General availability]
 
-The MCP (Model Context Protocol) server is PostHog's way of meeting engineers where they already are. Not everyone wants to switch to the PostHog UI to analyze data—many prefer to stay in their code editor, terminal, or favorite AI tool. The MCP server makes that possible.
+The MCP (Model Context Protocol) server is PostHog's way of meeting engineers where they already are. Not everyone wants to switch to the PostHog UI to analyze data — many prefer to stay in their code editor, terminal, or favorite AI tool. The MCP server makes that possible.
 
 **The Problem We're Solving**
 
-Context switching is expensive. If you're deep in debugging code in VS Code and need to check PostHog analytics, opening a browser, navigating to PostHog, finding the right insight, and coming back to your editor breaks your flow. It's even worse when you're using an AI coding assistant—you want to ask "which error is affecting the most users?" or "create a funnel for the checkout flow" without leaving your development environment.
+Context switching is expensive. If you're deep in debugging code in VS Code and need to check PostHog analytics, opening a browser, navigating to PostHog, finding the right insight, and coming back to your editor breaks your flow. It's even worse when you're using an AI coding assistant — you want to ask "which error is affecting the most users?" or "create a funnel for the checkout flow" without leaving your development environment.
 
 The MCP server solves this by bringing PostHog directly into the tools engineers already use. No context switching, no mental overhead.
 
@@ -353,13 +353,13 @@ The [Model Context Protocol (MCP)](#glossary) is a standard for connecting AI as
 
 1. **Connection**: Your MCP client (like Claude Code) connects to `https://mcp.posthog.com/mcp` with your PostHog API key for authentication.
 
-2. **Tool discovery**: The client asks the MCP server what tools are available. The server returns a list of about 30 tools covering PostHog's API surface—everything from creating insights to filtering session recordings to managing feature flags.
+2. **Tool discovery**: The client asks the MCP server what tools are available. The server returns a list of about 30 tools covering PostHog's API surface — everything from creating insights to filtering session recordings to managing feature flags.
 
 3. **Dynamic filtering**: You can control which tools load using query parameters: `https://mcp.posthog.com/mcp?features=flags,insights,workspace`. This keeps context windows small by only loading relevant tools.
 
 4. **Execution**: When you ask the AI assistant to do something with PostHog, it calls the appropriate MCP tools. These tools interface with PostHog's APIs (and eventually dedicated `/ai` endpoints, under development) to accomplish the task.
 
-5. **Mode switching**: The MCP server is being aligned with our mode switching framework. This means AI agents can dynamically enable and disable different modes during a conversation, loading only the expertise they need when they need it. This solves the context window problem—currently, loading all tools takes up about 14% of Claude Code's context window, which we're reducing through dynamic tool discovery.
+5. **Mode switching**: The MCP server is being aligned with our mode switching framework. This means AI agents can dynamically enable and disable different modes during a conversation, loading only the expertise they need when they need it. This solves the context window problem — currently, loading all tools takes up about 14% of Claude Code's context window, which we're reducing through dynamic tool discovery.
 
 **Key Architectural Decisions**
 
@@ -395,7 +395,7 @@ MCP is in general availability. The Max AI team owns the MCP server, with Josh S
 
 Max is based on a single-loop agent architecture, heavily inspired by Claude Code, with some PostHog unique flavour. The core insight is simple: instead of routing between multiple specialized agents that act as black boxes, we have one agent that maintains full conversation context and can dynamically load expertise as needed.
 
-The single-loop agent has direct access to all tools, uses a todo-list pattern to track progress across long-running tasks (just like Claude Code), and provides complete visibility into every step it takes. When it needs specialized knowledge, it doesn't delegate to a sub-agent—it switches its own mode to become an expert in that domain.
+The single-loop agent has direct access to all tools, uses a todo-list pattern to track progress across long-running tasks (just like Claude Code), and provides complete visibility into every step it takes. When it needs specialized knowledge, it doesn't delegate to a sub-agent — it switches its own mode to become an expert in that domain.
 
 #### Core Tools: Always Available
 
@@ -403,7 +403,7 @@ No matter what mode the agent is in, it always has access to a core set of tools
 
 The **search** tool is unified search with a `kind` discriminator. You can search documentation (`kind=docs`), search existing insights (`kind=insights`), or search other resources as we add them. This replaced having separate `search_docs` and `search_insights` tools.
 
-The **read_data** tool lets the agent read database schema and billing information. The **read_taxonomy** tool is how the agent explores your events, entities, actions, and properties. These are crucial for avoiding hallucination problems we had before—the agent can always check what data actually exists before making assumptions.
+The **read_data** tool lets the agent read database schema and billing information. The **read_taxonomy** tool is how the agent explores your events, entities, actions, and properties. These are crucial for avoiding hallucination problems we had before — the agent can always check what data actually exists before making assumptions.
 
 The **enable_mode** tool is how the agent switches between different areas of expertise, which we'll discuss in detail next.
 
@@ -425,7 +425,7 @@ A **system prompt** that contains expert instructions for this domain. When the 
 
 This architecture allows product teams to create their own modes without touching the core agent. Modes can be composed and nested. Think of it as "thousands of agents" through mode combinations, rather than a fixed set of AI products.
 
-**When do black-box sub-agents still make sense?** There are exceptions. Some processes benefit from being hidden from the main agent—usually when the logic is completely detached from the conversation context, or when you want to use strategies or optimizations that would confuse the main agent if exposed. Our agentic RAG system for insight search is a good example: it iteratively searches through insights and cherry-picks the best ones using a complex scoring system. The main agent doesn't need to see all that—it just needs the final result.
+**When do black-box sub-agents still make sense?** There are exceptions. Some processes benefit from being hidden from the main agent — usually when the logic is completely detached from the conversation context, or when you want to use strategies or optimizations that would confuse the main agent if exposed. Our agentic RAG system for insight search is a good example: it iteratively searches through insights and cherry-picks the best ones using a complex scoring system. The main agent doesn't need to see all that — it just needs the final result.
 
 ### How Max and MCP share the same capabilities
 
@@ -443,7 +443,7 @@ We could also tag modes for specific interfaces. For example, a `CodingMode(tags
 
 ### Who Does What
 
-**The Max AI team** is responsible for the architecture, performance, and UX/UI of the AI platform. We review PRs from product teams to ensure they meet our quality bar. We build and maintain the core tooling (search, read_data, read_taxonomy, enable_mode). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products—things like SQL generation or universal filtering.
+**The Max AI team** is responsible for the architecture, performance, and UX/UI of the AI platform. We review PRs from product teams to ensure they meet our quality bar. We build and maintain the core tooling (search, read_data, read_taxonomy, enable_mode). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products — things like SQL generation or universal filtering.
 
 **The Array team** is responsible for the Array desktop product, the cloud and local coding agent, and signals and tasks generation. They might at some point own the Wizard or integrate it directly into the main Array product.
 
@@ -459,7 +459,7 @@ If you need AI capabilities for your product area, here's the process:
 
 **Plan the collaboration.** We'll figure out the best approach together. This might mean sending an engineer from the Max team to your team for a sprint or two, or building the feature directly in Max without your team's heavy involvement, or just giving you enough guidance that you can do it solo. There's no one-size-fits-all model.
 
-**Coordinate sprints.** Align on timing and resource allocation if needed. This shouldn't feel like a heavyweight process—if it does, we should change it.
+**Coordinate sprints.** Align on timing and resource allocation if needed. This shouldn't feel like a heavyweight process — if it does, we should change it.
 
 ### Best Practices
 
@@ -473,7 +473,7 @@ Maintain consistency. AI features should follow PostHog's design patterns and UX
 
 We think about AI features in two categories:
 
-**Features that don't add new capabilities** are things you could do by clicking around the UI, but AI makes them faster or easier. Max falls into this category—it's a different interaction model, not a new capability. These features are important for learning PostHog and improving adoption, so we keep them free (with reasonable caps for non-subscribers).
+**Features that don't add new capabilities** are things you could do by clicking around the UI, but AI makes them faster or easier. Max falls into this category — it's a different interaction model, not a new capability. These features are important for learning PostHog and improving adoption, so we keep them free (with reasonable caps for non-subscribers).
 
 **Features that add new capabilities** are things you couldn't do before, or would take so long that you practically couldn't do them. Deep Research and Session Summaries fall into this category. These features can find signals in data that humans would miss, or accomplish in minutes what would take hours manually. We make these paid features with generous free tiers, just like our other products.
 
@@ -487,7 +487,7 @@ Right now everything is in beta and pricing is subject to change as we learn wha
 
 **Session Summaries** is callable from Max and Deep Research, and also has its own UI. Use it when you need to analyze many session recordings and extract patterns or issues.
 
-**Array** is a desktop product for single-engineer use. It's separate from Max because the workflow is different—you're not asking questions, you're letting an AI agent watch PostHog for problems and automatically fix them in your codebase. Think of it as an AI assistant that lives in your development environment.
+**Array** is a desktop product for single-engineer use. It's separate from Max because the workflow is different — you're not asking questions, you're letting an AI agent watch PostHog for problems and automatically fix them in your codebase. Think of it as an AI assistant that lives in your development environment.
 
 **MCP** is for users who prefer to work in third-party tools like Claude Code or VS Code. You get access to PostHog's data and can combine it with other MCP servers (like Hubspot or Zendesk). The trade-off is you don't get Max's polished UX or PostHog-specific training.
 
@@ -495,7 +495,7 @@ Right now everything is in beta and pricing is subject to change as we learn wha
 
 ### Third-party context integration
 
-We want to connect Max to third-party tools for additional context. Imagine Max analyzing data across PostHog, Slack messages, and Zendesk tickets to understand not just what users are doing, but what they're saying and reporting. This data could also generate signals for the Array product—if users are complaining about a bug in Slack and PostHog sees errors in the same area, that's a strong signal for Array to investigate and potentially fix it automatically.
+We want to connect Max to third-party tools for additional context. Imagine Max analyzing data across PostHog, Slack messages, and Zendesk tickets to understand not just what users are doing, but what they're saying and reporting. This data could also generate signals for the Array product — if users are complaining about a bug in Slack and PostHog sees errors in the same area, that's a strong signal for Array to investigate and potentially fix it automatically.
 
 This is in the idea stage right now, but the Max AI team will likely start working on it soon.
 
@@ -523,7 +523,7 @@ This is in the idea stage right now, but the Max AI team will likely start worki
 
 If your feature **reads or writes PostHog data**, build it into Max or have it hand off to Max after initiation. For example, if you're adding a "Fix with AI" button to debug SQL queries, that button should open Max with context about the query, so users can iteratively debug with AI assistance.
 
-If your feature **triggers code changes**, feed it as a signal into the Array product. You can also offer a "copy prompt" option for engineers who don't want to use Array—they can paste the AI-generated prompt into their own code editor.
+If your feature **triggers code changes**, feed it as a signal into the Array product. You can also offer a "copy prompt" option for engineers who don't want to use Array — they can paste the AI-generated prompt into their own code editor.
 
 If your feature **doesn't fit either category**, use your judgment and consult with the Max AI team if you're unsure. We're still figuring out where some things fit.
 
