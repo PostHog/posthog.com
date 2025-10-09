@@ -347,6 +347,7 @@ function Events() {
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('past')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
+    const [chartKey, setChartKey] = useState(0)
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
     const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
@@ -765,10 +766,77 @@ function Events() {
             pointSeries.hideTooltip()
         })
 
+        // Handle window/container resize
+        let lastWidth = 0
+        let lastHeight = 0
+        let resizeTimeout: NodeJS.Timeout | null = null
+
+        const handleResize = () => {
+            if (!chartRef.current || root.isDisposed()) return
+
+            const rect = chartRef.current.getBoundingClientRect()
+            const { width, height } = rect
+
+            // Skip if dimensions haven't changed significantly
+            const widthChanged = Math.abs(width - lastWidth) > 5
+            const heightChanged = Math.abs(height - lastHeight) > 5
+
+            if (!widthChanged && !heightChanged) {
+                return
+            }
+
+            // Skip if dimensions are invalid
+            if (width === 0 || height === 0) {
+                return
+            }
+
+            // Check if canvas exists
+            const canvasElements = chartRef.current.querySelectorAll('canvas')
+
+            if (canvasElements.length === 0) {
+                // Force a complete remount of the chart by updating the key
+                setChartKey((prev) => prev + 1)
+                return
+            }
+
+            lastWidth = width
+            lastHeight = height
+
+            try {
+                root.resize()
+            } catch (err) {
+                console.error('Error resizing map:', err)
+            }
+        }
+
+        const debouncedResize = () => {
+            if (resizeTimeout) {
+                clearTimeout(resizeTimeout)
+            }
+            // Wait 500ms after resize stops before re-rendering
+            resizeTimeout = setTimeout(handleResize, 500)
+        }
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            debouncedResize()
+        })
+
+        if (chartRef.current) {
+            resizeObserver.observe(chartRef.current)
+            // Store initial dimensions
+            const rect = chartRef.current.getBoundingClientRect()
+            lastWidth = rect.width
+            lastHeight = rect.height
+        }
+
         return () => {
+            if (resizeTimeout) {
+                clearTimeout(resizeTimeout)
+            }
+            resizeObserver.disconnect()
             root.dispose()
         }
-    }, [])
+    }, [chartKey])
 
     // Update map data when displayEvents, selectedEvent, or hoveredEvent changes
     useEffect(() => {
@@ -867,11 +935,17 @@ function Events() {
     }, [selectedEvent, displayEvents])
 
     return (
-        <Explorer template="generic" slug="events" title="Cool tech events" fullScreen>
-            <div data-scheme="primary" className="flex flex-col @lg:flex-row text-primary h-full">
+        <Explorer
+            template="generic"
+            slug="events"
+            title="Cool tech events"
+            fullScreen
+            viewportClasses="[&>div>div]:h-full"
+        >
+            <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
                 <aside
                     data-scheme="secondary"
-                    className="@lg:basis-80 bg-primary border-t @md:border-t-0 @md:border-r border-primary h-full flex flex-col"
+                    className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary h-full flex flex-col"
                 >
                     <div className="border-b border-primary px-4 pt-4 pb-4">
                         <ToggleGroup
@@ -887,7 +961,7 @@ function Events() {
                     </div>
 
                     <ScrollArea className="flex-1">
-                        <div className="p-4">
+                        <div className="p-4 h-96 @xl:h-full">
                             <div className="space-y-3">
                                 {displayEvents.map((event, idx) => (
                                     <button
@@ -934,7 +1008,7 @@ function Events() {
                     </ScrollArea>
                 </aside>
 
-                <div className="flex-1 relative h-full">
+                <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
                     {selectedEvent && (
                         <div className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col">
                             <button
@@ -1063,7 +1137,7 @@ function Events() {
                         </div>
                     )}
 
-                    <div ref={chartRef} className="absolute top-0 left-0 w-full h-full" />
+                    <div key={chartKey} ref={chartRef} className="w-full h-full" />
                 </div>
             </div>
         </Explorer>
