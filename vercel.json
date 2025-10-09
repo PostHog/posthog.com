@@ -648,6 +648,7 @@
         { "source": "/manual/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
+        { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
