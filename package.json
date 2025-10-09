@@ -120,7 +120,7 @@
         "parse-link-header": "^2.0.0",
         "patch-package": "^8.0.0",
         "pluralize": "^8.0.0",
-        "posthog-js": "1.273.1",
+        "posthog-js": "1.274.0",
         "posthog-node": "^4.2.0",
         "prism-react-renderer": "^1.3.5",
         "prismjs": "^1.29.0",
