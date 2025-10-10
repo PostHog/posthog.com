@@ -15,7 +15,7 @@ export const webAnalytics = {
     seo: {
         title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
-            'Track traffic, funnels, and performance with Web Analytics. Get privacy-friendly insights, pre-built dashboards, real-time data, and no sampling.',
+            'Track traffic and performance with Web Analytics. Get privacy-friendly insights, a pre-built dashboard, real-time data, and no sampling.',
     },
     overview: {
         title: 'Privacy-focused web analytics',

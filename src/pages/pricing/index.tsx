@@ -156,7 +156,7 @@ export default function Pricing() {
         >
             <SEO
                 title="PostHog Pricing – Transparent, usage-based, generous free tier"
-                description="Find out exactly how much it costs to use PostHog. Start free and scale affordably with usage-based pricing. Get $50K in credits if you’re an eligible startup."
+                description="Find out exactly how much it costs to use PostHog. Start free and scale affordably with usage-based pricing."
             />
 
             <PricingExperiment

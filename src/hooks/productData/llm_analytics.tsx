@@ -53,7 +53,7 @@ export const llmAnalytics = {
     seo: {
         title: 'LLM Analytics – Observe and optimize AI products in PostHog',
         description:
-            'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation, model performance, cost, and error.',
+            'Monitor and optimize AI products with LLM Analytics. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
         title: 'Monitor and debug your AI products',

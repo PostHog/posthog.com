@@ -17,7 +17,7 @@ export const surveys = {
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
-            'Collect and analyze product feedback with Surveys. Launch no-code surveys fast or use the API for full control and deeper user insights.',
+            'Collect and analyze product feedback with Surveys. Launch customizable no-code surveys fast on web and mobile with templates for NPS, CSAT, user interviews, and more.',
     },
     overview: {
         title: 'Ask anything with no-code surveys',

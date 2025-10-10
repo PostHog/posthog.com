@@ -15,9 +15,9 @@ export const max_ai = {
     status: 'beta',
     hideFromPricingTable: true,
     seo: {
-        title: 'MaxAI – Your AI copilot for PostHog data and insights',
+        title: 'Max AI – Your AI copilot for PostHog data and insights',
         description:
-            'Your AI-powered product analyst and product manager. Query and analyze PostHog data instantly, find insights, and speed up product decisions with MaxAI.',
+            'Your AI-powered product analyst. Write natural language to query and analyze PostHog data instantly, find insights, and speed up product decisions with Max AI.',
     },
     overview: {
         title: 'Our resident AI agent who understands your product and data',
