@@ -1236,16 +1236,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const contact = urlObj.searchParams.get('contact')
         if (contact) {
-            const padding = 20
-            const middlePadding = padding / 2
-            const halfWidth = window.innerWidth / 2
-            const availableWidth = halfWidth - padding - middlePadding
-            const availableHeight = window.innerHeight - taskbarHeight - padding * 2
+            const initialWindowSize = { width: window.innerWidth * 0.58, height: window.innerHeight * 0.8 }
+            const formWindowWidth = window.innerWidth * 0.4
+            const formWindowSize = {
+                width: formWindowWidth,
+                height: formWindowWidth <= 545 ? 732 : 568,
+            }
+            const padding = [65, 20]
 
             const initialWindow = createNewWindow(element, [], location, isSSR, taskbarHeight, {
-                size: { width: availableWidth, height: availableHeight },
-                position: { x: padding, y: padding },
-                zIndex: 1,
+                size: initialWindowSize,
+                position: { x: padding[0], y: padding[1] },
+                zIndex: 2,
             })
             const formWindow = createNewWindow(
                 <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />,
@@ -1254,9 +1256,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 isSSR,
                 taskbarHeight,
                 {
-                    size: { width: availableWidth, height: availableHeight },
-                    position: { x: halfWidth + middlePadding, y: padding },
-                    zIndex: 2,
+                    size: formWindowSize,
+                    position: {
+                        x: window.innerWidth - formWindowSize.width - padding[0],
+                        y: window.innerHeight - formWindowSize.height - padding[1] - taskbarHeight,
+                    },
+                    zIndex: 0,
                 }
             )
             return [initialWindow, formWindow]
