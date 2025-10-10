@@ -1232,6 +1232,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getInitialWindows(element: any) {
+        if (isSSR) return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
         const urlObj = new URL(location.href)
         const contact = urlObj.searchParams.get('contact')
         if (contact) {
