@@ -33,6 +33,8 @@
         "format:docs": "git diff --name-only --diff-filter=AM \"*.mdx\" \"*.md\" | xargs node scripts/fix-mdx.js"
     },
     "dependencies": {
+        "@amcharts/amcharts5": "^5.13.6",
+        "@amcharts/amcharts5-geodata": "^5.1.5",
         "@dotlottie/react-player": "^1.6.6",
         "@fontsource/source-code-pro": "^4.5.4",
         "@headlessui/react": "^1.7.13",
@@ -118,7 +120,7 @@
         "parse-link-header": "^2.0.0",
         "patch-package": "^8.0.0",
         "pluralize": "^8.0.0",
-        "posthog-js": "1.268.9",
+        "posthog-js": "1.274.3",
         "posthog-node": "^4.2.0",
         "prism-react-renderer": "^1.3.5",
         "prismjs": "^1.29.0",
@@ -130,7 +132,7 @@
         "react": "^18.2.0",
         "react-animate-height": "^2.0.23",
         "react-burger-menu": "^3.0.6",
-        "react-calendly": "^2.2.2",
+        "react-calendly": "^4.4.0",
         "react-chartjs-2": "^5.2.0",
         "react-compare-slider": "^2.1.0",
         "react-confetti": "^6.1.0",

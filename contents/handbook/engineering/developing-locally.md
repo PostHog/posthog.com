@@ -11,12 +11,21 @@ showTitle: true
 
 Before jumping into setup, let's dissect a PostHog.
 
-The app itself is made up of 4 components that run simultaneously:
+The app itself is made up of 4 main components that run simultaneously:
 
 -   Celery worker (handles execution of background tasks)
 -   Django server
 -   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
+
+We also have a growing collection of Rust services that handle performance-critical operations:
+
+-   capture – receives HTTP event capture requests and extracts event payloads
+-   feature-flags – handles feature flag evaluation
+-   cymbal – processes source maps for error tracking
+-   property-defs-rs – extracts and infers property definitions from events
+-   hook services – manages webhooks with high performance
+-   hogvm – evaluates HogQL bytecode via a stack machine implementation
 
 These components rely on a few external services:
 
@@ -105,6 +114,13 @@ Clone the [PostHog repo](https://github.com/posthog/posthog). All future command
 ```bash
 git clone https://github.com/PostHog/posthog && cd posthog/
 ```
+
+> [!NOTE] 
+> The `feature-flags` container relies on the presence of the GeoLite cities
+> database in the `/share` directory. You can download a copy via [this github repo](https://github.com/P3TERX/GeoLite.mmdb) 
+> which makes frequent releases. You may also need to modify the file permissions of the database.
+>
+> `chmod 0755 ./share/GeoLite2-City.mmdb`
 
 ### Instant setup
 
@@ -291,6 +307,13 @@ pnpm --filter=@posthog/plugin-server install
 > **Note:** If you face an error like `import gyp  # noqa: E402`, most probably need to install `python-setuptools`. To fix this, run:
 ```bash
 brew install python-setuptools
+```
+
+> **Troubleshooting plugin server issues:** If you encounter problems starting up the plugin server, try these debugging steps:
+```bash
+cd plugin-server
+pnpm rebuild
+pnpm i
 ```
 
 #### 4. Prepare the Django server

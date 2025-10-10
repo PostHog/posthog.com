@@ -6,13 +6,13 @@ showTitle: true
 
 As a Technical Account Manager, you'll spend as much time managing your existing book of business as you will closing [product-led leads](/handbook/growth/sales/product-led-sales). Your first priority is retaining them - we have to work twice as hard if we're trying to close new deals and make up for lost customers. You'll typically be assigned a bunch of customers who are paying monthly - this means they could turn off PostHog at any time. 
 
-Once you're confident that a customer isn't going anywhere, then you want to think about how you can expand their usage. Usually (but not always) this is after they've signed an annual contract. 
+Once you're confident that a customer isn't going anywhere, then you want to think about how you can expand their usage. Usually (but not always) this is after they've signed an prepaid credit contract. 
 
 In order of priority, your objectives should be:
 
 - Retention - establish multiple strong lines of communication
 - Expansion - cross-sell additional products
-- Retention - secure an annual commitment (maybe, but not always - very hard to do on just a single product!)
+- Retention - secure a discounted, credit-based commitment (maybe, but not always - hard to do on just a single product!)
 - Expansion - expand usage of the same product into new teams
 - Expansion - expand usage of the same product in the same team
 
@@ -31,11 +31,11 @@ We have a handy guide to this [here](/handbook/growth/sales/getting-people-to-ta
 
 ### 2. Get a longer term commitment (maybe!)
 
-Once you've established contact, you basically want to get them into the same flow as if they were a new customer (and give them the same level of attention). You will be doing a combo of [discovery and commercial evaluation](/handbook/growth/sales/new-sales#sales-process), as the customer will want to figure out whether an annual contract with PostHog makes sense vs. what they've already got.
+Once you've established contact, you basically want to get them into the same flow as if they were a new customer (and give them the same level of attention). You will be doing a combo of [discovery and commercial evaluation](/handbook/growth/sales/new-sales#sales-process), as the customer will want to figure out whether a prepaid credit contract with PostHog makes sense vs. what they've already got.
 
-> Do not push for an annual contract no matter what - consider what actually makes sense here! Some customers are very highly likely to stick with PostHog even if they are paying monthly, e.g. if they have many users regularly logging in, lots of product activity, multi-product adoption etc. Do not turn up to a new customer and the first thing they hear from you be 'would you like an annual contract?'
+> Do not push for discounted, credit-based plan no matter what - consider what actually makes sense here! Some customers are very highly likely to stick with PostHog even if they are paying monthly, e.g. if they have many users regularly logging in, lots of product activity, multi-product adoption etc. Do not turn up to a new customer and the first thing they hear from you be 'would you like to pre-purchase credits?'
 
-You'll also go through the same [contracting process](/handbook/growth/sales/contracts#annual-plans-and-more) with them. We usually find that convincing a customer happily paying monthly to switch to annual is quite difficult, especially if they are a fast-growing startup (who tend to value flexibility over pure cost saving). This means that the discounts may not be as effective. If you're finding this is the case, you can get them on an annual plan but paying monthly or quarterly and halve the discount you offer. 
+You'll also go through the same [contracting process](/handbook/growth/sales/contracts#annual-plans-and-more) with them. We usually find that convincing a customer happily paying monthly to switch to prepaid credits is quite difficult, especially if they are a fast-growing startup (who tend to value flexibility over pure cost saving). This means that the discounts may not be as effective. If you're finding this is the case, you can get them on an prepaid credit plan but paying monthly or quarterly and halve the discount you offer. 
 
 ## Expansion & Cross-sell
 
@@ -85,9 +85,9 @@ The best way to do this is to expand usage of existing product with _new_ teams 
 
 ### Principles for visiting customers
 
-If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). 
+If you offer to do a meeting in person with a customer, they’ll then feel obliged to introduce you to other people to make good use of your time. Trying to get them to adopt more products can be a good trigger, but generally you should be matching the cadence for in-person meetings with the size of contract (ie. more regular for Very Large, less regular for Large). If necessary you can [request a budget for travel and accommodation](https://posthog.com/handbook/people/spending-money) in Brex.
 
-Generally speaking you should be trying to regularly see customers in your book of business who are $60k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
+Generally speaking you should be trying to regularly see customers in your book of business who are $100k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
 
 If you regularly visit customers, you can (and should) take some sweet merch. You can self-serve this using [a discount code pinned in our team Slack channel](https://posthog.slack.com/archives/C01MGUHFH6G/p1734015156043549) to get 100% off your order.
 

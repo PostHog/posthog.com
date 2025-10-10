@@ -58,6 +58,8 @@ import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
 import OSButton from './components/OSButton'
 import AskMax from './components/AskMax'
+import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
+import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 
 export const shortcodes = {
     ArrayCTA,
@@ -119,4 +121,6 @@ export const shortcodes = {
     Steps,
     Step,
     AskMax,
+    CountriesWeHireIn,
+    FeatureOwnershipTable,
 }

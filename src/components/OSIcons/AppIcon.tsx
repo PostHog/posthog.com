@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { BaseIcon, type IconProps } from './Icons'
 import Link from 'components/Link'
 import { useRef } from 'react'
 import useTheme from '../../hooks/useTheme'
+import { useApp } from '../../context/App'
+import usePostHog from 'hooks/usePostHog'
 
 // App icon mapping for different skins
 type AppIconVariants = {
@@ -41,7 +43,7 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_001e7ec29a.png',
     },
-    tour: {
+    compass: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_8ae29710fc.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_2994e40ea9.png',
     },
@@ -161,8 +163,8 @@ const PRODUCT_ICON_MAP = {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Modern_b3a6093647.png',
     },
     typewriter: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_classic_6362f6fbc5.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_modern_9beb68e461.png',
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_classic_3e6454d7f6.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/typewriter_modern_ac5baf1493.png',
     },
     envelope: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/envelope_classic_8ccd5e8abc.png',
@@ -183,6 +185,10 @@ const PRODUCT_ICON_MAP = {
     handbook: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_classic_b7cd7f26f7.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/handbook_modern_cf862d2ae6.png',
+    },
+    computerCoffee: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/computer_coffee_classic_66d12712d9.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/computer_coffee_modern_41959ceb31.png',
     },
 } as const satisfies Record<string, AppIconVariants>
 
@@ -273,12 +279,14 @@ export interface AppItem {
     background?: string
     label: string
     url?: string
+    onClick?: () => void
     className?: string
     extension?: string
     children?: React.ReactNode
     hasDragged?: boolean
     orientation?: 'row' | 'column'
     source?: string
+    external?: boolean
 }
 
 export const AppLink = ({
@@ -287,16 +295,41 @@ export const AppLink = ({
     color,
     background,
     label,
-    url,
+    url: initialUrl,
+    onClick,
     className,
     extension,
     children,
     hasDragged,
     orientation = 'column',
     source,
+    external,
 }: AppItem) => {
+    const posthog = usePostHog()
+    const { posthogInstance } = useApp()
     const ref = useRef<HTMLSpanElement>(null)
     const { getThemeSpecificBackgroundColors } = useTheme()
+
+    const url = useMemo(() => {
+        if (!initialUrl) return initialUrl
+        if (/(eu|us|app)\.posthog\.com/.test(initialUrl)) {
+            try {
+                const urlObj = new URL(initialUrl)
+                return `${
+                    posthogInstance
+                        ? posthogInstance.replace(/"/g, '')
+                        : posthog?.isFeatureEnabled?.('direct-to-eu-cloud')
+                        ? `https://eu.posthog.com`
+                        : posthog?.isFeatureEnabled?.('direct-to-us-cloud') === false
+                        ? `https://us.posthog.com`
+                        : `https://app.posthog.com`
+                }${urlObj.pathname}`
+            } catch {
+                return initialUrl
+            }
+        }
+        return initialUrl
+    }, [initialUrl, posthogInstance, posthog])
 
     // Helper function to get conditional child icon classes based on parentIcon type
     const getChildIconClasses = () => {
@@ -406,7 +439,7 @@ export const AppLink = ({
             {url ? (
                 <Link
                     to={url}
-                    state={{ newWindow: true }}
+                    {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
                     className={`${commonClassName} ${orientationClassName}`}
                     onClick={(e) => {
                         if (hasDragged) {
@@ -417,6 +450,20 @@ export const AppLink = ({
                 >
                     {content}
                 </Link>
+            ) : onClick ? (
+                <button
+                    onClick={(e) => {
+                        if (hasDragged) {
+                            e.preventDefault()
+                            e.stopPropagation()
+                        } else {
+                            onClick()
+                        }
+                    }}
+                    className={`${commonClassName} ${orientationClassName}`}
+                >
+                    {content}
+                </button>
             ) : (
                 <span className={`${commonClassName} ${orientationClassName} cursor-not-allowed opacity-75`}>
                     {content}

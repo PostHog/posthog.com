@@ -111,6 +111,10 @@ If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember na
 
 We very rarely receive messages from people wishing to make a legal claim against PostHog, such as cease and desist letters. These can come via the app, or [Community Questions](/questions). Do not respond to these requests. Instead, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> immediately. They will either take this on, or advise you on how to reply.
 
+### Dealing with billing issues
+
+Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to the billing team, however some issues require technical investigation before the billing issue can be resolved. In such cases, add <TeamMember name="Eleftheria Trivyzaki" /> as a follower to the support ticket from the outset, and leave an internal note briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to the billing team.
+
 ### Users asking for demos, consultations or partnerships
 
 We often receive requests for demos, consultations or other sales-related requests. Most of the time these can be escalated to the [Sales team](/handbook/growth/sales/overview) if they arrive via Zendesk. If they arrive directly via email you can forward them to sales@posthog.com.

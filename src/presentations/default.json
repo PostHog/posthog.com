@@ -1,0 +1,57 @@
+{
+    "name": "Product Engineers",
+    "slides": {
+        "overview": {
+            "template": "stacked",
+            "name": "Overview",
+            "title": "Product Engineers debug and ship faster with PostHog",
+            "description": "<p>By integrating PostHog into {companyName}, you'll be able to:</p><ul><li>track and diagnose errors</li><li>roll out and test new features</li><li>gain a better understanding of users</li></ul><p>Getting all of these capabilities through one SDK means you reduce the overhead of maintaining your app and can focus on shipping your product.</p>",
+            "descriptionWidth": "@2xl:w-3/5"
+        },
+        "error_tracking": {
+            "template": "product",
+            "name": "Error Tracking",
+            "handle": "error_tracking",
+            "screenshot": "home",
+            "title": "Automated error tracking",
+            "description": "<p>Track front and back end exceptions. Use with <a href='/product-analytics'>Product Analytics</a> and <a href='/session-replay'>Session Replay</a> to identify the biggest issues in your app, see them happen in real time, and diagnose and fix them.</p>"
+        },
+        "feature_flags": {
+            "template": "product",
+            "name": "Feature Flags",
+            "handle": "feature_flags",
+            "screenshot": "home",
+            "title": "Gradually roll out new features",
+            "description": "<p>Target a segment of users, see them experiencing them in real time, and get feedback via <a href='/surveys'>Surveys</a> on what's working and what's not.</p>"
+        },
+        "experiments": {
+            "template": "product",
+            "name": "Experiments",
+            "handle": "experiments",
+            "screenshot": "home",
+            "title": "Test new features",
+            "description": "<p>Split old and new experiences between users.</p><p>PostHog's statistical models will help you understand which variant of a feature to choose and then safely roll that out to all of your users.</p>"
+        },
+        "llm_analytics": {
+            "template": "product",
+            "name": "LLM Analytics",
+            "handle": "llm_analytics",
+            "screenshot": "home",
+            "title": "LLM Analytics",
+            "description": "Understand how your users consume AI in your product, and monitor performance and cost when using different models."
+        },
+        "pricing": {
+            "template": "pricing",
+            "name": "Pricing",
+            "title": "Pricing",
+            "description": "PostHog offers usage-based pricing. This means you only pay for what you use, and you can set billing limits so you never get an unexpected bill.",
+            "image": "/images/products/product-analytics/screenshot-billing.png"
+        },
+        "cta": {
+            "template": "booking",
+            "name": "Get a demo",
+            "title": "Get a demo",
+            "description": "<p><strong>No demos required</strong> – you can try PostHog without ever talking to us. But if you'd like personalized demo, book a time.</p>"
+        }
+    }
+}

@@ -21,15 +21,15 @@ TAEs work with:
 - People who book a demo via contact sales
 - Other triggers we see in product, supplemented by data from Clay
 
-When we start to generate cold outbound leads, these will be routed to TAEs to work with as well. Customers move off of a TAE to a TAM or CSM 3 months after closing on an annual contract - you have to ensure they are well set up, not just contract signed!
+As we start to generate cold outbound leads, these will be routed to TAEs to work with as well. Customers move off of a TAE to a TAM or CSM 3 months after closing on a prepaid contract (usually annual) - you have to ensure they are well set up, not just contract signed!
 
 ### Technical Account Managers
 
 Each TAM is assigned up to 10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 15 accounts, so staying extremely focused is important.
 
-We use the AM Managed Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Charles), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
 
-For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to annual or cross-product adoption.
+For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
@@ -103,7 +103,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 - When thinking about commission, we want to particularly incentivize:
   - Cross selling new products - all-in-one is how we will beat the competition.
-  - Closing annual contracts - better retention, de-risks PostHog financially.
+  - Closing prepaid credit contracts (often annual, but may not be) - better retention, de-risks PostHog financially.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
@@ -117,7 +117,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
-  - Convert monthly customers to annual - in this case, their monthly usage invoices paid with annual credits will count 1.25x towards your quota
+  - Convert monthly customers to a prepaid annual plan - in this case, their monthly usage invoices paid with annual credits will count 1.25x towards your quota
   - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid

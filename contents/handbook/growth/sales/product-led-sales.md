@@ -34,7 +34,7 @@ Even if after speaking with them you think they may not end up at $20k+, you sho
 
 ## Startup plan roll off
 
-Customers who are rolling off the startup plan present a unique opportunity, as they are already using PostHog and will be at a spend level that would justify an annual contract. Just like any other customer, we want to help them reduce spend and get the most out of their existing usage, while also educating them on the savings involved with an annual deal.
+Customers who are rolling off the startup plan present a unique opportunity, as they are already using PostHog and may well be spending >$20k annually. Just like any other customer, we want to help them reduce spend and get the most out of their existing usage, while also educating them on the savings involved with an discounted, credit-based plan.
 
 For customers that may have started implementation late, or ran into issues during their startup period, at our discretion, we can extend the life of their credits by 3 months. To do so, visit that customer's billing admin page (linked in Vitally), scroll to the bottom, and click the `extend startup plan` button. 
 
