@@ -609,6 +609,14 @@
             "destination": "/docs/feature-flags/creating-feature-flags"
         },
         { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
+        {
+            "source": "/docs/feature-flags/evaluation-tags",
+            "destination": "/docs/feature-flags/evaluation-environments"
+        },
+        {
+            "source": "/tutorials/evaluation-runtimes-and-tags",
+            "destination": "/tutorials/evaluation-runtimes-and-environments"
+        },
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
         { "source": "/docs/migrate/ingest-historic-data", "destination": "/docs/migrate" },

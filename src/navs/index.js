@@ -3352,8 +3352,8 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Evaluation tags',
-                    url: '/docs/feature-flags/evaluation-tags',
+                    name: 'Evaluation environments',
+                    url: '/docs/feature-flags/evaluation-environments',
                     icon: 'IconDecisionTree',
                     color: 'red',
                 },
