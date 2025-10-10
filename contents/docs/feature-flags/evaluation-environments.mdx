@@ -74,6 +74,13 @@ posthog.init('YOUR_API_KEY', {
 })
 ```
 
+```node
+const posthog = new PostHog('YOUR_API_KEY', {
+    host: 'https://app.posthog.com',
+    evaluation_environments: ['production', 'api', 'backend']
+})
+```
+
 ```python
 posthog = Posthog(
     'YOUR_API_KEY',
@@ -94,11 +101,61 @@ posthog = Posthog(
 </PostHogProvider>
 ```
 
-```node
-const posthog = new PostHog('YOUR_API_KEY', {
+```react-native
+import PostHog from 'posthog-react-native'
+
+const posthogAsync = PostHog.initAsync('YOUR_API_KEY', {
     host: 'https://app.posthog.com',
-    evaluation_environments: ['staging', 'api', 'backend']
+    evaluationEnvironments: ['production', 'mobile', 'app']
 })
+```
+
+```android
+val config = PostHogConfig(
+    apiKey = "YOUR_API_KEY",
+    host = "https://app.posthog.com"
+).apply {
+    evaluationEnvironments = listOf("production", "android", "mobile")
+}
+PostHogAndroid.setup(context, config)
+```
+
+```ios
+let config = PostHogConfig(
+    apiKey: "YOUR_API_KEY",
+    host: "https://app.posthog.com"
+)
+config.evaluationEnvironments = ["production", "ios", "mobile"]
+PostHogSDK.shared.setup(config)
+```
+
+```ruby
+posthog = PostHog::Client.new({
+    api_key: 'YOUR_API_KEY',
+    host: 'https://app.posthog.com',
+    evaluation_environments: ['production', 'api', 'backend']
+})
+```
+
+```go
+client, _ := posthog.NewWithConfig("YOUR_API_KEY", posthog.Config{
+    Endpoint: "https://app.posthog.com",
+    EvaluationEnvironments: []string{"production", "api", "backend"},
+})
+```
+
+```php
+PostHog::init('YOUR_API_KEY', [
+    'host' => 'https://app.posthog.com',
+    'evaluation_environments' => ['production', 'api', 'backend']
+]);
+```
+
+```java
+PostHog posthog = new PostHog.Builder("YOUR_API_KEY")
+    .host("https://app.posthog.com")
+    .evaluationEnvironments(Arrays.asList("production", "api", "backend"))
+    .build();
 ```
 
 </MultiLanguage>
@@ -237,5 +294,9 @@ To adopt evaluation environments in an existing PostHog setup:
 
 Evaluation environments are supported in the following SDKs:
 - [JavaScript Web (version 1.270.0+)](/docs/libraries/js/config#evaluation_environments)
+- [React Native (version 3.5.0+)](/docs/libraries/react-native/config#evaluation_environments)
+- [Node.js (version 4.3.0+)](/docs/libraries/node/config#evaluation_environments)
+- [Android (version 3.10.0+)](/docs/libraries/android#evaluation_environments)
+- [iOS (version 3.16.0+)](/docs/libraries/ios#evaluation_environments)
 
 > **Note:** Check your SDK documentation for the minimum version required and specific implementation details.

@@ -319,6 +319,10 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Preload feature flags automatically. (on/true by default)
     preloadFeatureFlags = true
 
+    // Environment tags that constrain which feature flags are evaluated. (not set by default)
+    // When set, only flags with matching evaluation tags (or no evaluation tags) will be returned.
+    evaluationEnvironments = listOf("production", "android", "mobile")
+
     // Callback that is called when feature flags are loaded (not set by default)
     onFeatureFlags = { ... }
 
