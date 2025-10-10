@@ -11,6 +11,8 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
+    IconCheck,
+    IconCopy,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -40,6 +42,9 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
+        copyDesktopParams,
+        desktopCopied,
+        desktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -81,6 +86,10 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
+    }
+
+    const handleCopyDesktopParams = () => {
+        copyDesktopParams()
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -288,6 +297,30 @@ export default function TaskBarMenu() {
                             {posthogInstance ? 'Dashboard' : 'Get started – free'}
                         </OSButton>
                     </div>
+                    <Tooltip
+                        trigger={
+                            <OSButton
+                                disabled={!desktopParams}
+                                onClick={handleCopyDesktopParams}
+                                size="sm"
+                                className="relative top-px"
+                            >
+                                {desktopCopied ? (
+                                    <IconCheck className="size-5 text-green" />
+                                ) : (
+                                    <IconCopy className="size-5" />
+                                )}
+                            </OSButton>
+                        }
+                    >
+                        <div className="flex flex-col items-center gap-1">
+                            <p className="text-sm mb-0">Share your desktop</p>
+                            <div className="flex items-center gap-1">
+                                <KeyboardShortcut text="Shift" size="sm" />
+                                <KeyboardShortcut text="C" size="sm" />
+                            </div>
+                        </div>
+                    </Tooltip>
                     <Tooltip
                         trigger={
                             <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
