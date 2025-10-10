@@ -4,7 +4,9 @@ title: Manual error tracking installation
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face.
 
-If you're using the API or an SDK without exception autocapture or `capture_exception` method, you can manually capture errors by using the [capture API](/docs/api/capture) or `capture` method to capture an `$exception` event with the following properties:
+If the SDK you use does not support error tracking, we recommend that you reach out to us or contribute to our open-source SDKs before attempting to manually send exceptions.
+
+If you work with an esoteric language or still need to manually send exceptions, you can use the [capture API](/docs/api/capture) or `capture` method to capture an `$exception` event with the following properties:
 
 | Property | Description |
 |----------|-------------|
@@ -32,15 +34,15 @@ curl -X POST "<ph_client_api_host>/i/v0/e/" \
                      "type": "raw",
                      "frames": [
                          {
-                             "platform": "custom", // Required
-                             "lang": "your_language", // Required
-                             "function": "Array.forEach", // Required
-                             "filename": "../loop.js", // Optional
-                             "lineno": 1, // Optional
-                             "colno": 2, // Optional
-                             "module": "iteration", // Optional
-                             "resolved": true, // Optional
-                             "in_app": false, // Optional
+                             "platform": "custom", // (Required) Must be custom
+                             "lang": "javascript", // (Required) Your programming language
+                             "function": "Array.forEach", // (Required)
+                             "filename": "../loop.js", // (Optional)
+                             "lineno": 1, // (Optional)
+                             "colno": 2, // (Optional)
+                             "module": "iteration", // (Optional)
+                             "resolved": true, // (Optional)
+                             "in_app": false, // (Optional)
                          },
                          /* Additional frames omitted for brevity */
                      ]
