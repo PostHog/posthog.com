@@ -14,7 +14,7 @@ At times we can really struggle to pull ourselves away from tickets and focus on
 
 ## How do support zero weeks work?
 
-Each support team member is given an allocation of 2 support zero weeks in each quarter (i.e. 10 working days). These are weeks that each team member can book, similar to holiday (although it's not holiday!).
+Each support team member is given an allocation of *2 support zero weeks in each quarter* (i.e. 10 working days). These are weeks that each team member can book, similar to holiday (although it's not holiday!).
 
 Team members are encouraged to consider taking the same zero weeks as someone else working on the same quarterly goal (so it can be done hackathon-style, you can consider using your meetup budget, etc)
 
@@ -47,7 +47,7 @@ Team members are encouraged to consider taking the same zero weeks as someone el
 - [ ] Consider if this is a good stage in your goal to seek feedback from the team (likely via your meta GitHub issue or a different RFC). Please do consider if it's worth the team's time at this stage.
 - [ ] Get stuck into tickets!
 
-### What does this mean for side quests outside of quarterly goal work?
+## What does this mean for side quests outside of quarterly goal work?
   - Do them!
   - The purpose of zero weeks is to give space and focus for quarterly goal work, not restrict what you can do on a day-to-day basis.
   - Where you have small things you'd like to do (docs updates, small PRs/bug fixes, setting up example apps, etc), you can absolutely do these alongside your ticket work.
