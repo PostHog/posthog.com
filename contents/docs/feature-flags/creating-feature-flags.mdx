@@ -40,29 +40,29 @@ This is the name of the key you use in your code to evaluate the feature flag.
 
 Metadata to describe and share information about your feature flag in the PostHog app.
 
-### Evaluation tags (environment constraints)
+### Evaluation environments
 
-Evaluation tags are a special type of tag that constrains feature flag evaluation to specific environments. When evaluation tags are configured, the feature flag will only evaluate when the SDK provides matching environment tags in the evaluation request.
+Evaluation environment tags are a special type of tag that constrains feature flag evaluation to specific environments. When evaluation environment are configured, the feature flag will only evaluate when the SDK provides matching evaluation environments in the `/flags` request.
 
 Key features:
 - **Environment isolation**: Prevent flags from evaluating in unintended environments (e.g., marketing site vs. app vs. docs)
 - **Cost optimization**: Reduce unnecessary flag evaluations and associated costs
 - **Better organization**: Group flags by their intended usage context
-- **Backward compatible**: Flags without evaluation tags continue to work as before
+- **Backward compatible**: Flags without evaluation environments continue to work as before
 
-To configure evaluation tags:
+To configure evaluation environments:
 1. Click the bolt icon <IconBolt className="inline w-4 h-4" /> next to the tags field
 2. Select which tags should act as evaluation constraints
 3. These tags will display with a green background and bolt icon
 
-When using evaluation tags:
+When using evaluation environment tags:
 - SDKs must send `evaluation_environments` parameter with matching tags for the flag to evaluate
-- Flags with no evaluation tags will evaluate for all requests (default behavior)
+- Flags with no evaluation environment tags will evaluate for all requests (default behavior)
 - At least one evaluation tag must match for the flag to be included in the evaluation
 
 Learn more in the [evaluation environments docs](/docs/feature-flags/evaluation-environments)
 
-> **Important:** After setting evaluation tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation tags won't take effect.
+> **Important:** After setting evaluation environment tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation environment tags won't take effect.
 
 ## Enable feature flag
 

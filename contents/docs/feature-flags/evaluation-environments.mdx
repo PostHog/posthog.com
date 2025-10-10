@@ -14,11 +14,11 @@ Evaluation environments provide fine-grained control over where and when your fe
 
 ## What are evaluation environments?
 
-Evaluation environments are constraints that determine when a feature flag should be evaluated. They're configured in the PostHog UI by tagging your flags and marking those tags as "evaluation tags" (with the bolt icon ⚡). Unlike standard tags (which are purely organizational), evaluation tags actively filter which flags are returned during evaluation requests.
+Evaluation environments are constraints that determine when a feature flag should be evaluated. They're configured in the PostHog UI by tagging your flags and marking those tags as "evaluation environment tags" (with the bolt icon ⚡). Unlike standard tags (which are purely organizational), evaluation environment tags actively filter which flags are returned during evaluation requests.
 
-When you configure evaluation tags on a feature flag:
+When you configure evaluation environment tags on a feature flag:
 - The flag will **only** evaluate when the SDK provides matching environments via `evaluation_environments`
-- Flags without evaluation tags continue to work as before (evaluating for all requests)
+- Flags without evaluation environment tags continue to work as before (evaluating for all requests)
 - At least one environment must match for the flag to be included
 
 ## Why use evaluation environments?
@@ -48,16 +48,16 @@ Smaller, more focused flag sets mean:
 
 ## Setting up evaluation environments
 
-### Step 1: Apply evaluation tags to flags in the UI
+### Step 1: Apply evaluation environments to flags in the UI
 
 When creating or editing a feature flag:
 
 1. Navigate to the tags section
 2. Add tags that represent your environments (e.g., "production", "staging", "web", "mobile")
 3. Click the bolt icon <IconBolt className="inline w-4 h-4" /> to mark these tags as evaluation constraints
-4. Selected evaluation tags will display with a green background and bolt icon
+4. Selected evaluation environment tags will display with a green background and bolt icon
 
-> **Remember:** Setting evaluation tags in the PostHog app is only half the setup. Your application needs to declare its environment via the SDK configuration (Step 2).
+> **Remember:** Setting evaluation environment tags in the PostHog app is only half the setup. Your application needs to declare its environment via the SDK configuration (Step 2).
 
 ### Step 2: Configure your SDKs
 
@@ -109,17 +109,17 @@ When a flag evaluation request is made:
 
 1. **SDK sends environments**: The SDK includes its configured `evaluation_environments` in the request
 2. **PostHog filters flags**: Only flags matching these criteria are evaluated:
-   - Flags with no evaluation tags (backward compatibility)
-   - Flags with empty evaluation tags
+   - Flags with no evaluation environment tags (backward compatibility)
+   - Flags with empty evaluation environment tags
    - Flags where at least one evaluation tag matches the SDK's declared environments
 3. **Results returned**: Only the filtered flags are returned to the SDK
 
 ### Example scenario
 
-Consider these feature flags (with their evaluation tags in the UI):
-- Flag A: No evaluation tags → Evaluates for all requests
-- Flag B: Evaluation tags `["production", "web"]` → Only evaluates when SDK declares "production" OR "web"
-- Flag C: Evaluation tags `["staging"]` → Only evaluates when SDK declares "staging"
+Consider these feature flags (with their evaluation environment tags in the UI):
+- Flag A: No evaluation environment tags → Evaluates for all requests
+- Flag B: Evaluation environment tags `["production", "web"]` → Only evaluates when SDK declares "production" OR "web"
+- Flag C: Evaluation environment tags `["staging"]` → Only evaluates when SDK declares "staging"
 
 If an SDK is configured with `evaluation_environments: ["production", "mobile"]`:
 - ✅ Flag A evaluates (no constraints)
@@ -134,7 +134,7 @@ Begin with high-level environment distinctions:
 - `web` vs. `mobile` vs. `api`
 
 ### Use consistent naming
-Establish a naming convention for your environment tags:
+Establish a naming convention for your evaluation environment tags:
 - Environment: `prod`, `staging`, `dev`
 - Platform: `web`, `ios`, `android`, `api`
 - Product area: `checkout`, `onboarding`, `admin`
@@ -143,7 +143,7 @@ Establish a naming convention for your environment tags:
 Maintain a list of standard environment names and their purposes to ensure consistent usage across teams.
 
 ### Gradual adoption
-You don't need to add evaluation tags to all flags at once. Start with new flags or high-traffic flags where the benefits are most significant.
+You don't need to add evaluation environment tags to all flags at once. Start with new flags or high-traffic flags where the benefits are most significant.
 
 ### Monitor impact
 Track the reduction in flag evaluations and associated cost savings after implementing evaluation environments.
@@ -204,7 +204,7 @@ posthog.init('KEY', { evaluation_environments: ['staging', 'platform-team'] })
 ## Troubleshooting
 
 ### Flags not evaluating
-If a flag with evaluation tags isn't evaluating:
+If a flag with evaluation environment tags isn't evaluating:
 1. **Check that your SDK is configured with `evaluation_environments`** - This is the most common issue. Your application must explicitly declare its environments.
 2. Verify at least one evaluation tag in the UI matches your SDK's `evaluation_environments`
 3. Ensure the tags are properly marked as evaluation constraints (bolt icon) in PostHog
@@ -218,7 +218,7 @@ If you're still seeing all flags despite using evaluation environments:
 
 ### Performance not improved
 If you don't see performance improvements:
-1. Ensure you've added evaluation tags to high-traffic flags
+1. Ensure you've added evaluation environment tags to high-traffic flags
 2. Check that your environments are specific enough to filter effectively
 3. Monitor the reduction in evaluated flags using PostHog analytics
 

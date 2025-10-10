@@ -26,7 +26,7 @@ These features apply as sequential filters:
 Consider a flag with:
 
 - Runtime: `server`
-- Evaluation tags: `["production", "api"]`
+- Evaluation environments: `["production", "api"]`
 
 Here's what happens in different scenarios:
 
@@ -42,7 +42,7 @@ Here's what happens in different scenarios:
 You can configure both features when creating or editing a feature flag in PostHog:
 
 1. Set **evaluation runtime** to `server`, `client`, or `all`
-2. Add **evaluation tags** and mark them as constraints (bolt icon ⚡)
+2. Add **evaluation environments** and mark them as constraints (bolt icon ⚡)
 
 Then configure your SDKs with matching `evaluation_environments`. See the [evaluation environments documentation](/docs/feature-flags/evaluation-environments#step-2-configure-your-sdks) for SDK configuration examples.
 
@@ -55,7 +55,7 @@ Then configure your SDKs with matching `evaluation_environments`. See the [evalu
 **Configuration**:
 
 - Runtime: `server`
-- Evaluation tags: `["api"]`
+- Evaluation environments: `["api"]`
 
 **Why both features?** Runtime ensures the flag never reaches browsers where it could be inspected. Environments let you exclude this flag from other server contexts (like background workers) to reduce evaluation costs.
 
@@ -79,7 +79,7 @@ const posthog = new PostHog('KEY', {
 **Configuration**:
 
 - Runtime: `all`
-- Evaluation tags: `["staging"]`
+- Evaluation environments: `["staging"]`
 
 **Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** in staging. The environment constraint ensures production services never evaluate this flag, even if they share code with staging.
 
@@ -100,7 +100,7 @@ posthog = Posthog('KEY',
 **Configuration**:
 
 - Runtime: `client`
-- Evaluation tags: `["mobile"]`
+- Evaluation environments: `["mobile"]`
 
 **Why both features?** Runtime: `client` prevents server-side services from evaluating this UI-specific flag. The `mobile` tag ensures web browsers don't download or evaluate it, improving performance.
 
@@ -125,7 +125,7 @@ posthog.init('KEY', {
 **Configuration**:
 
 - Runtime: `all`
-- Evaluation tags: `["billing"]`
+- Evaluation environments: `["billing"]`
 
 **Why both features?** The pricing affects both frontend (checkout UI) and backend (billing service), so runtime is `all`. But you don't want every service and client evaluating this flag thousands of times - only the specific parts that handle billing.
 
@@ -158,12 +158,12 @@ Set runtime to `server` for flags containing:
 
 ### Layer environments for precise control
 
-Remember that evaluation tags use OR logic: `["staging", "checkout"]` matches ANY staging OR ANY checkout. For AND logic, use compound tags like `["staging-checkout"]`.
+Remember that evaluation environments use OR logic: `["staging", "checkout"]` matches ANY staging OR ANY checkout. For AND logic, use compound tags like `["staging-checkout"]`.
 
 ### Start simple
 
 1. Set runtime first (security boundary)
-2. Add basic environment tags
+2. Add basic evaluation environment tags
 3. Refine with specific tags as needed
 
 ## Troubleshooting combined setups
@@ -180,7 +180,7 @@ For detailed troubleshooting steps, see the [evaluation environments documentati
 
 ### Forgetting the two-stage filter
 
-Runtime blocks first, then environments. A server-only flag will never reach client SDKs, regardless of evaluation tags.
+Runtime blocks first, then environments. A server-only flag will never reach client SDKs, regardless of evaluation environments.
 
 ### Missing SDK configuration
 
