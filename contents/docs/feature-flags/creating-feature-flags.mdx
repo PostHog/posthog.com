@@ -60,7 +60,7 @@ When using evaluation tags:
 - Flags with no evaluation tags will evaluate for all requests (default behavior)
 - At least one evaluation tag must match for the flag to be included in the evaluation
 
-Learn more in the [evaluation flags docs](/docs/feature-flags/evaluation-tags)
+Learn more in the [evaluation environments docs](/docs/feature-flags/evaluation-environments)
 
 > **Important:** After setting evaluation tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation tags won't take effect.
 
@@ -115,7 +115,7 @@ You can control where your feature flags are evaluated by specifying an evaluati
 
 Runtime filtering also reduces evaluation latency and prevents feature flag bloat by only sending relevant flags to each environment, making it easier to manage flags in your app and organize the flags you actually evaluate.
 
-> **Note:** Evaluation runtime is different from [evaluation tags](/docs/feature-flags/evaluation-tags). Runtime filtering is based on SDK type (client vs server), while evaluation tags provide fine-grained environment constraints that you define (e.g., "production", "staging", "app", "marketing-site").
+> **Note:** Evaluation runtime is different from [evaluation environments](/docs/feature-flags/evaluation-environments). Runtime filtering is based on SDK type (client vs server), while evaluation environments provide fine-grained environment constraints that you define (e.g., "production", "staging", "app", "marketing-site").
 
 ### Runtime options
 

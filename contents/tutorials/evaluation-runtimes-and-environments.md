@@ -1,5 +1,5 @@
 ---
-title: How to use evaluation runtimes and tags together for fine-grained flag control
+title: How to use evaluation runtimes and environments together for fine-grained flag control
 date: 2025-10-07
 author:
   - dylan-martin
@@ -10,30 +10,30 @@ tags:
   - configuration
 ---
 
-Evaluation runtimes and evaluation tags are two complementary features that give you precise control over where and when your feature flags evaluate. This guide shows practical examples of using them together effectively.
+Evaluation runtimes and evaluation environments are two complementary features that give you precise control over where and when your feature flags evaluate. This guide shows practical examples of using them together effectively.
 
-> **Prerequisites:** First understand [evaluation tags](/docs/feature-flags/evaluation-tags) and [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime) individually.
+> **Prerequisites:** First understand [evaluation environments](/docs/feature-flags/evaluation-environments) and [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime) individually.
 
 ## How they work together
 
 These features apply as sequential filters:
 
 1. **Runtime filter first**: Excludes flags based on the SDK type (client vs server)
-2. **Tag filter second**: Further filters based on environment context
+2. **Environment filter second**: Further filters based on environment context
 
 ### Example filtering flow
 
 Consider a flag with:
 
-- Runtime filter: `server`
-- Evaluation tags filter: `["production", "api"]`
+- Runtime: `server`
+- Evaluation tags: `["production", "api"]`
 
-Here's what happens when you try to evaluate feature flags from an SDK:
+Here's what happens in different scenarios:
 
-| SDK type | Environment tags | Result |
-|----------|-----------------|--------|
+| SDK Type | Environment Values | Result |
+|----------|-------------------|--------|
 | JavaScript Web | `["production", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
-| Node.js | `["staging", "backend"]` | ❌ Blocked by tags (neither "staging" nor "backend" match flag's tags) |
+| Node.js | `["staging", "backend"]` | ❌ Blocked by environments (neither "staging" nor "backend" match flag's tags) |
 | Node.js | `["production", "api"]` | ✅ Both filters pass |
 | Python | `["production", "backend"]` | ✅ Both filters pass ("production" matches) |
 
@@ -44,7 +44,7 @@ You can configure both features when creating or editing a feature flag in PostH
 1. Set **evaluation runtime** to `server`, `client`, or `all`
 2. Add **evaluation tags** and mark them as constraints (bolt icon ⚡)
 
-Then configure your SDKs with matching `evaluation_environments`. See the [evaluation tags documentation](/docs/feature-flags/evaluation-tags#step-2-configure-your-sdks) for SDK configuration examples.
+Then configure your SDKs with matching `evaluation_environments`. See the [evaluation environments documentation](/docs/feature-flags/evaluation-environments#step-2-configure-your-sdks) for SDK configuration examples.
 
 ## Common use cases
 
@@ -57,7 +57,7 @@ Then configure your SDKs with matching `evaluation_environments`. See the [evalu
 - Runtime: `server`
 - Evaluation tags: `["api"]`
 
-**Why both features?** Runtime ensures the flag never reaches browsers where it could be inspected. Tags let you exclude this flag from other server contexts (like background workers) to reduce evaluation costs.
+**Why both features?** Runtime ensures the flag never reaches browsers where it could be inspected. Environments let you exclude this flag from other server contexts (like background workers) to reduce evaluation costs.
 
 ```javascript
 // API service - Gets the flag
@@ -81,7 +81,7 @@ const posthog = new PostHog('KEY', {
 - Runtime: `all`
 - Evaluation tags: `["staging"]`
 
-**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** in staging. The tag ensures production services never evaluate this flag, even if they share code with staging.
+**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** in staging. The environment constraint ensures production services never evaluate this flag, even if they share code with staging.
 
 ```python
 # Staging recommendation service - Gets the flag
@@ -156,9 +156,9 @@ Set runtime to `server` for flags containing:
 - Rate limits or quotas
 - Infrastructure settings
 
-### Layer tags for precise control
+### Layer environments for precise control
 
-Remember that tags use OR logic: `["staging", "checkout"]` matches evaluation environments with `staging` OR `checkout`. For AND logic, use compound tags like `["staging-checkout"]`.
+Remember that evaluation tags use OR logic: `["staging", "checkout"]` matches ANY staging OR ANY checkout. For AND logic, use compound tags like `["staging-checkout"]`.
 
 ### Start simple
 
@@ -171,23 +171,23 @@ Remember that tags use OR logic: `["staging", "checkout"]` matches evaluation en
 When a flag isn't working as expected, check in this order:
 
 1. **Runtime filter**: Is the SDK type (client/server) allowed?
-2. **Tag filter**: Does at least one tag match?
+2. **Environment filter**: Does at least one evaluation tag match?
 3. **SDK config**: Is `evaluation_environments` set?
 
-For detailed troubleshooting steps, see the [evaluation tags documentation](/docs/feature-flags/evaluation-tags#troubleshooting).
+For detailed troubleshooting steps, see the [evaluation environments documentation](/docs/feature-flags/evaluation-environments#troubleshooting).
 
 ## Common pitfalls
 
 ### Forgetting the two-stage filter
 
-Runtime blocks first, then tags. A server-only flag will never reach client SDKs, regardless of tags.
+Runtime blocks first, then environments. A server-only flag will never reach client SDKs, regardless of evaluation tags.
 
 ### Missing SDK configuration
 
-Without `evaluation_environments` in your SDK, tag filtering won't work:
+Without `evaluation_environments` in your SDK, environment filtering won't work:
 
 ```javascript
-// This SDK ignores all tag filtering!
+// This SDK ignores all environment filtering!
 const posthog = new PostHog('KEY', {
     host: 'https://app.posthog.com'
     // evaluation_environments not set!
@@ -197,10 +197,9 @@ const posthog = new PostHog('KEY', {
 ## Summary
 
 - **Runtime** filters by SDK type (security boundary)
-- **Tags** filter by environment (organization)
-- They work sequentially: runtime blocks first, then tags filter
+- **Environments** filter by context (organization)
+- They work sequentially: runtime blocks first, then environments filter
 
 For implementation details:
-
-- [Evaluation tags documentation](/docs/feature-flags/evaluation-tags)
+- [Evaluation environments documentation](/docs/feature-flags/evaluation-environments)
 - [Evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime)
