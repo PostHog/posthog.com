@@ -175,9 +175,13 @@ interface RoadmapCardsProps {
     setRoadmapsPercentageFromLeft: (percentage: number) => void
     onRoadmapClick: (roadmap: RoadmapNode) => void
     containerWidth: number
+    startYear: number
+    endYear: number
 }
 
 const RoadmapCards = ({
+    startYear,
+    endYear,
     roadmaps,
     setPercentageOfScrollInView,
     windowPercentageFromLeft,
@@ -186,8 +190,6 @@ const RoadmapCards = ({
     containerWidth,
 }: RoadmapCardsProps) => {
     const width = 350
-    const startYear = dayjs.utc(roadmaps[0].date).year()
-    const endYear = dayjs.utc(roadmaps[roadmaps.length - 1].date).year()
 
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -590,6 +592,8 @@ export default function Changelog(): JSX.Element {
                         <Filters onTeamChange={setTeamFilter} teamFilterValue={teamFilter} />
                         <div className="min-h-0 flex-grow pt-2">
                             <RoadmapCards
+                                startYear={2020}
+                                endYear={2025}
                                 roadmaps={filteredData}
                                 setPercentageOfScrollInView={setPercentageOfScrollInView}
                                 windowPercentageFromLeft={windowPercentageFromLeft}

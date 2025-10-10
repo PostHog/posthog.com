@@ -41,6 +41,7 @@ export default function Timeline({
     const [isDragging, setIsDragging] = useState(false)
     const [windowWidth, setWindowWidth] = useState(0)
     const windowRef = useRef<HTMLDivElement>(null)
+    const isScrollingRef = useRef(false)
     const getAcivityColor = (count: number) => {
         if (count <= 0) return 'bg-black'
         if (count === 1) return 'bg-green opacity-60'
@@ -140,8 +141,8 @@ export default function Timeline({
     }, [roadmapsPercentageFromLeft, windowWidth, isDragging])
 
     useEffect(() => {
-        // Skip during dragging
-        if (isDragging) return
+        // Skip during dragging or if already scrolling
+        if (isDragging || isScrollingRef.current) return
         if (!containerRef.current) return
 
         const scrollViewport = containerRef.current.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
@@ -156,16 +157,32 @@ export default function Timeline({
         // Check if window is out of view and scroll by full viewport width
         if (windowRight < viewportScrollLeft) {
             // Window is completely to the left, scroll left by viewport width
+            isScrollingRef.current = true
             scrollViewport.scrollTo({
                 left: Math.max(0, viewportScrollLeft - viewportWidth),
                 behavior: 'smooth',
             })
+
+            // Listen for scroll end to reset the flag
+            const handleScrollEnd = () => {
+                isScrollingRef.current = false
+                scrollViewport.removeEventListener('scrollend', handleScrollEnd)
+            }
+            scrollViewport.addEventListener('scrollend', handleScrollEnd)
         } else if (windowLeft > viewportScrollRight) {
             // Window is completely to the right, scroll right by viewport width
+            isScrollingRef.current = true
             scrollViewport.scrollTo({
                 left: viewportScrollLeft + viewportWidth,
                 behavior: 'smooth',
             })
+
+            // Listen for scroll end to reset the flag
+            const handleScrollEnd = () => {
+                isScrollingRef.current = false
+                scrollViewport.removeEventListener('scrollend', handleScrollEnd)
+            }
+            scrollViewport.addEventListener('scrollend', handleScrollEnd)
         }
     }, [windowX, windowWidth, isDragging])
 
