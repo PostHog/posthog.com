@@ -37,7 +37,7 @@ Team members are encouraged to consider taking the same zero weeks as someone el
 - [ ] Do consider that you may get pulled back onto tickets on a particular day if absolutely necessary (to be avoided as much as possible).
 - [ ] Make sure to keep notes and design choices publicly available on your meta GitHub issue.
 
-> [!WARNING]
+> :warning:
 > Team members who are working on tickets need to be aware of ticket queue and highlight in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) if the workload is getting too high
 
 ### After your zero week
