@@ -90,12 +90,13 @@ We care about having a consistent, transparent, and fair way to handle recurring
 
 ### The keeper test
 
-As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#youre-the-driver) high - we can't centralize this with the founders. To help us scale this, the relevant exec team member will regularly check in with their respective team leads to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year:
+As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#youre-the-driver) high - we can't centralize this with the founders. To help us scale this, each team lead will be asked to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year, this will be sent in an automated form, by Deel, through Slack. The format is as follows:
 
 1. Ask the team lead 'if X was leaving for a similar role at another company, would you try to keep them?' - the answers should be derived from our values, similar to the questions above.
-3. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
-4. Make sure the manager is sharing all of this feedback with their team to help them improve.
+2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
+3. Make sure the manager is sharing all of this feedback with their team to help them improve.
 
+That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
