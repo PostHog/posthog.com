@@ -25,11 +25,11 @@ jobs:
         name: Automerge if requested
         runs-on: ubuntu-latest
         env:
-            IS_POSTHOG_BOT_AVAILABLE: ${{ secrets.POSTHOG_BOT_GITHUB_TOKEN != '' }}
+            IS_POSTHOG_BOT_AVAILABLE: ${{ secrets.POSTHOG_BOT_PAT != '' }}
         steps:
             - name: Automerge
               if: env.IS_POSTHOG_BOT_AVAILABLE == 'true'
               uses: pascalgn/automerge-action@v0.15.5
               env:
-                  GITHUB_TOKEN: ${{ secrets.POSTHOG_BOT_GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.POSTHOG_BOT_PAT }}
             - run: echo
