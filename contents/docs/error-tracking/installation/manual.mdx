@@ -8,10 +8,8 @@ If you're using the API or an SDK without exception autocapture or `capture_exce
 
 | Property | Description |
 |----------|-------------|
-| `$exception_list` | A list of exception objects with detailed information about each error. Each exception can include a `type`, `value`, `mechanism`, `module`, `thread_id`, and a `stacktrace` with `frames` and `type`. You can find the expected schema as types for both [exception](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L31) and [stack frames](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L55) in our JS repo |
+| `$exception_list` | A list of exception objects with detailed information about each error. Each exception can include a `type`, `value`, `mechanism`, `module`, and a `stacktrace` with `frames` and `type`. You can find the expected schema as types for both [exception](https://github.com/PostHog/posthog/blob/master/rust/cymbal/src/types/mod.rs#L39) and [stack frames](https://github.com/PostHog/posthog/blob/master/rust/cymbal/src/langs/custom.rs#L12) in our Rust repo |
 | `$exception_fingerprint` | (Optional) The identifier used to group issues. If not set, a unique hash based on the exception pattern will be generated during ingestion |
-
-The expected schema is described as [a type in our JS repo](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L24-L29). 
 
 ## Example exception API capture
 
@@ -31,15 +29,18 @@ curl -X POST "<ph_client_api_host>/i/v0/e/" \
                      "synthetic": false
                  },
                  "stacktrace": {
-                     "type": "resolved",
+                     "type": "raw",
                      "frames": [
                          {
-                             "raw_id": "89f3907385ddb1bdc2feebd77625387d685e3da2f9a68bcf2634e3b3b39122e51f895e5c880def374525c558899b2e90eed214900ff9c8f949243e4b79eb32a9",
-                             "mangled_name": "Array.forEach",
-                             "in_app": false,
-                             "resolved_name": "Array.forEach",
-                             "lang": "javascript",
-                             "resolved": true
+                             "platform": "custom", // Required
+                             "lang": "your_language", // Required
+                             "function": "Array.forEach", // Required
+                             "filename": "../loop.js", // Optional
+                             "lineno": 1, // Optional
+                             "colno": 2, // Optional
+                             "module": "iteration", // Optional
+                             "resolved": true, // Optional
+                             "in_app": false, // Optional
                          },
                          /* Additional frames omitted for brevity */
                      ]
