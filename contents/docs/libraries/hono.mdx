@@ -75,7 +75,7 @@ import { PostHog } from 'posthog-node'
 const posthog = new PostHog(process.env.POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
 
 app.onError(async (err, c) => {
-  posthog.captureException(new Error(err.message, { cause: err }), 'user_distinct_id_with_err_rethrow', {
+  posthog.captureException(err, 'user_distinct_id_with_err_rethrow', {
     path: c.req.path,
     method: c.req.method,
     url: c.req.url,
