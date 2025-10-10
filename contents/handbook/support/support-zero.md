@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Support isn't just about tickets! I mean.. it's a lot about tickets - but we don't judge the success of support engineers solely by how many tickets they solve. Instead, we like to free up support engineers to spend some time working on other tasks which help users. These tasks can include working on their [quarterly goals](/teams/support), building new support features, contributing small PRs for bug fixes, or whatever else they think will help us move faster.
+Support isn't just about tickets! Well... it's a lot about tickets - but we don't judge the success of support engineers solely by how many tickets they solve. Instead, we like to free up support engineers to spend some time working on other tasks which help users. These tasks can include working on their [quarterly goals](/teams/support), building new support features, contributing small PRs for bug fixes, or whatever else they think will help us move faster.
 
 
 ## Why are support zero weeks useful?
