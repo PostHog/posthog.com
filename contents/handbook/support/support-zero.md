@@ -14,7 +14,7 @@ At times we can really struggle to pull ourselves away from tickets and focus on
 
 ## How do support zero weeks work?
 
-Each support team member is given an allocation of *2 support zero weeks in each quarter* (i.e. 10 working days). These are weeks that each team member can book, similar to holiday (although it's not holiday!).
+Each support team member is given an allocation of *2 support zero weeks in each quarter* (i.e. 10 working days). These are weeks that each team member can book.
 
 Team members are encouraged to consider taking the same zero weeks as someone else working on the same quarterly goal (so it can be done hackathon-style, you can consider using your meetup budget, etc)
 
