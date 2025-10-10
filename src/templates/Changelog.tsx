@@ -449,6 +449,7 @@ export default function Changelog(): JSX.Element {
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
+    const [hideEmpty, setHideEmpty] = useState(false)
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -632,6 +633,8 @@ export default function Changelog(): JSX.Element {
                                 teamFilterValue={teamFilter}
                                 onCategoryChange={setCategoryFilter}
                                 categoryFilterValue={categoryFilter}
+                                hideEmpty={hideEmpty}
+                                onHideEmptyChange={setHideEmpty}
                             />
                             {isModerator && (
                                 <Tooltip
