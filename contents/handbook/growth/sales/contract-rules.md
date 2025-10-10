@@ -230,7 +230,7 @@ For any of the above scenarios you should use our [discounting principles](contr
 We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
 
 ### When a customer doesn't renew their credit purchase
-When a customer chooses not to renew, we automatically remove any remaining credits. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.
+When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.
 
 ## Varying contractual terms
 
