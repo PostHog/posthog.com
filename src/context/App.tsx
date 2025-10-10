@@ -13,6 +13,7 @@ import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
+import ContactSales from 'components/ContactSales'
 
 declare global {
     interface Window {
@@ -223,26 +224,26 @@ const updateCursor = (cursor: string) => {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
-    handleSnapToSide: () => { },
+    openSearch: () => {},
+    handleSnapToSide: () => {},
     constraintsRef: { current: null },
     taskbarRef: { current: null },
-    expandWindow: () => { },
+    expandWindow: () => {},
     openSignIn: () => null,
-    openRegister: () => { },
-    openForgotPassword: () => { },
+    openRegister: () => {},
+    openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
         experience: 'posthog',
@@ -254,23 +255,23 @@ export const Context = createContext<AppContextType>({
         clickBehavior: 'double',
         performanceBoost: false,
     },
-    updateSiteSettings: () => { },
-    openNewChat: () => { },
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
     isNotificationsPanelOpen: false,
-    setIsNotificationsPanelOpen: () => { },
+    setIsNotificationsPanelOpen: () => {},
     isActiveWindowsPanelOpen: false,
-    setIsActiveWindowsPanelOpen: () => { },
+    setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => { },
-    animateClosingAllWindows: () => { },
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
-    closeAllWindows: () => { },
-    setClosingAllWindowsAnimation: () => { },
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
     screensaverPreviewActive: false,
-    setScreensaverPreviewActive: () => { },
-    setConfetti: () => { },
+    setScreensaverPreviewActive: () => {},
+    setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
 })
@@ -954,13 +955,13 @@ export interface SiteSettings {
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
-    | 'keyboard-garden'
-    | 'hogzilla'
-    | 'startup-monopoly'
-    | 'office-party'
-    | '2001-bliss'
-    | 'parade'
-    | 'coding-at-night'
+        | 'keyboard-garden'
+        | 'hogzilla'
+        | 'startup-monopoly'
+        | 'office-party'
+        | '2001-bliss'
+        | 'parade'
+        | 'coding-at-night'
     screensaverDisabled?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
@@ -997,9 +998,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const [windows, setWindows] = useState<AppWindow[]>(
-        location.key === 'initial' && location.pathname === '/' && isMobile
-            ? []
-            : [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+        location.key === 'initial' && location.pathname === '/' && isMobile ? [] : getInitialWindows(element)
     )
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
@@ -1113,12 +1112,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                              }
                             : w
                     )
                 )
@@ -1214,9 +1213,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: isSSR ? 0 : window.innerWidth * 0.9,
-                    height: isSSR ? 0 : window.innerHeight * 0.9,
-                })
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -1232,12 +1231,49 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    function getInitialWindows(element: any) {
+        const urlObj = new URL(location.href)
+        const contact = urlObj.searchParams.get('contact')
+        if (contact) {
+            const padding = 20
+            const middlePadding = padding / 2
+            const halfWidth = window.innerWidth / 2
+            const availableWidth = halfWidth - padding - middlePadding
+            const availableHeight = window.innerHeight - taskbarHeight - padding * 2
+
+            const initialWindow = createNewWindow(element, [], location, isSSR, taskbarHeight, {
+                size: { width: availableWidth, height: availableHeight },
+                position: { x: padding, y: padding },
+                zIndex: 1,
+            })
+            const formWindow = createNewWindow(
+                <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />,
+                [],
+                { pathname: `talk-to-a-human` },
+                isSSR,
+                taskbarHeight,
+                {
+                    size: { width: availableWidth, height: availableHeight },
+                    position: { x: halfWidth + middlePadding, y: padding },
+                    zIndex: 2,
+                }
+            )
+            return [initialWindow, formWindow]
+        }
+        return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+    }
+
     function createNewWindow(
         element: WindowElement,
         windows: AppWindow[],
         location: any,
         isSSR: boolean,
-        taskbarHeight: number
+        taskbarHeight: number,
+        options = {} as {
+            size?: { width: number; height: number }
+            position?: { x: number; y: number }
+            zIndex?: number
+        }
     ) {
         const size = getInitialSize(element.key)
         const position =
@@ -1271,9 +1307,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -1290,7 +1326,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
-        return newWindow
+        return { ...newWindow, ...options }
     }
 
     const updatePages = (element: WindowElement) => {
