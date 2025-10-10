@@ -18,7 +18,7 @@ interface TimelineProps {
     onDrag: (monthInView: number) => void
     windowX: number
     setWindowX: (windowX: number) => void
-    onDragEnd: () => void
+    onDragEnd?: () => void
     containerRef: React.RefObject<HTMLDivElement>
     percentageOfScrollInView: number
     roadmapsPercentageFromLeft: number
@@ -70,7 +70,7 @@ export default function Timeline({
 
     const handleDragEnd = () => {
         setIsDragging(false)
-        onDragEnd()
+        onDragEnd?.()
     }
 
     const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
@@ -100,7 +100,7 @@ export default function Timeline({
         // Reset dragging state after a short delay to allow the scroll to happen
         setTimeout(() => {
             setIsDragging(false)
-            onDragEnd()
+            onDragEnd?.()
         }, 100)
     }
 
@@ -251,7 +251,7 @@ export default function Timeline({
                             return `translate3d(${xValue}, 50%, 0) scale(${scaleValue})`
                         }}
                         style={{ width: windowWidth, y: 0, top: 0 }}
-                        className="absolute left-0 top-0 h-[48px] border-[1px] border-primary rounded !m-0"
+                        className="absolute left-0 top-0 h-[48px] border-[2px] border-primary dark:border-[#d1d5db] rounded !m-0"
                     />
                 </div>
             </div>

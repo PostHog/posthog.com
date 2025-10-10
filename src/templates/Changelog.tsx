@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPlus, IconShieldLock } from '@posthog/icons'
+import { IconPencil, IconPlus, IconShieldLock } from '@posthog/icons'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
@@ -17,7 +17,6 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
-import { Select } from 'components/RadixUI/Select'
 import Filters from 'components/Changelog/Filters'
 
 dayjs.extend(utc)
@@ -72,9 +71,18 @@ type RoadmapNode = {
             }
         }>
     }
+    topic?: {
+        data?: {
+            attributes?: {
+                label?: string
+            }
+        }
+    }
 }
 
 const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
+    const { isModerator } = useUser()
+    const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
@@ -84,17 +92,42 @@ const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
         setWidth((prev) => Math.max(300, Math.min(800, prev - info.delta.x)))
     }
 
+    const handleEditRoadmap = () => {
+        addWindow(
+            <RoadmapWindow
+                location={{ pathname: `edit-roadmap-${roadmap.id}` }}
+                key={`edit-roadmap`}
+                newWindow
+                id={roadmap.id}
+                status="complete"
+            />
+        )
+    }
+
     return (
         <motion.div
-            className="h-full border-l border-primary bg-white overflow-auto flex-shrink-0 relative"
+            className="h-full border-l border-primary bg-white dark:bg-dark overflow-auto flex-shrink-0 relative"
             initial={{ width: 0 }}
             animate={{ width }}
             exit={{ width: 0 }}
             transition={{ duration: isResizing ? 0 : 0.3 }}
         >
             <div className="p-4">
-                <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
-                <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
+                <div className="flex justify-between space-x-2">
+                    <div>
+                        <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
+                        <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
+                    </div>
+                    {isModerator && (
+                        <Tooltip
+                            trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
+                            delay={0}
+                        >
+                            <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Edit
+                            roadmap item
+                        </Tooltip>
+                    )}
+                </div>
                 {hasProfiles && (
                     <div className="p-2 border border-primary rounded-md bg-accent mt-2">
                         {roadmap.profiles?.data?.map((profile) => {
@@ -177,6 +210,7 @@ interface RoadmapCardsProps {
     containerWidth: number
     startYear: number
     endYear: number
+    activeRoadmap: RoadmapNode | null
 }
 
 const RoadmapCards = ({
@@ -188,6 +222,7 @@ const RoadmapCards = ({
     setRoadmapsPercentageFromLeft,
     onRoadmapClick,
     containerWidth,
+    activeRoadmap,
 }: RoadmapCardsProps) => {
     const width = 350
 
@@ -344,7 +379,7 @@ const RoadmapCards = ({
                                     transform: `translateX(${virtualColumn.start}px)`,
                                 }}
                             >
-                                <div className="w-full h-full flex flex-col bg-white rounded border border-primary overflow-hidden">
+                                <div className="w-full h-full flex flex-col bg-white dark:bg-dark rounded border border-primary overflow-hidden">
                                     <div className="flex items-center justify-between p-4 border-b border-primary">
                                         <h4 className="m-0 text-lg font-semibold">
                                             {monthName} {weekData.year} - Week {weekRoman}
@@ -355,10 +390,13 @@ const RoadmapCards = ({
                                     </div>
                                     <ul className="w-full flex-1 overflow-y-auto p-4 m-0 list-none">
                                         {weekData.roadmaps.map((roadmap) => {
+                                            const active = activeRoadmap?.id === roadmap.id
                                             return (
                                                 <li key={roadmap.id} className="p-0 mt-0">
                                                     <button
-                                                        className="w-full text-left p-2 rounded-md border border-primary bg-accent flex justify-between"
+                                                        className={`w-full text-left p-2 rounded-md border bg-accent flex justify-between ${
+                                                            active ? 'border-black dark:border-white' : 'border-primary'
+                                                        }`}
                                                         onClick={() => onRoadmapClick(roadmap)}
                                                     >
                                                         <div>
@@ -410,11 +448,12 @@ export default function Changelog(): JSX.Element {
     const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(null)
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
+    const [categoryFilter, setCategoryFilter] = useState('all')
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
                 nodes {
-                    id
+                    id: strapiID
                     date
                     title
                     description
@@ -463,6 +502,13 @@ export default function Changelog(): JSX.Element {
                             }
                         }
                     }
+                    topic {
+                        data {
+                            attributes {
+                                label
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -483,19 +529,23 @@ export default function Changelog(): JSX.Element {
         setWindowPercentageFromLeft(percentageFromLeft)
     }
 
-    const handleDragEnd = () => {
-        // Drag ended - no action needed currently
-    }
+    const filteredData = useMemo(() => {
+        let filtered = data.allRoadmap.nodes
 
-    const filteredData = useMemo(
-        () =>
-            teamFilter === 'all'
-                ? data.allRoadmap.nodes
-                : data.allRoadmap.nodes.filter((roadmap: { teams: { data: { attributes: { name: string } }[] } }) =>
-                      roadmap.teams.data.some((team) => team.attributes.name === teamFilter)
-                  ),
-        [teamFilter, data.allRoadmap.nodes]
-    )
+        if (teamFilter !== 'all') {
+            filtered = filtered.filter((roadmap: RoadmapNode) =>
+                roadmap.teams?.data?.some((team) => team.attributes?.name === teamFilter)
+            )
+        }
+
+        if (categoryFilter !== 'all') {
+            filtered = filtered.filter(
+                (roadmap: RoadmapNode) => roadmap.topic?.data?.attributes?.label === categoryFilter
+            )
+        }
+
+        return filtered
+    }, [teamFilter, categoryFilter, data.allRoadmap.nodes])
 
     const roadmapsGrouped = useMemo(() => {
         const grouped: {
@@ -573,23 +623,27 @@ export default function Changelog(): JSX.Element {
                     title: 'Changelog',
                     description: 'Latest updates and releases',
                 }}
-                extraMenuOptions={
-                    isModerator ? (
-                        <>
-                            <Tooltip
-                                trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
-                                delay={0}
-                            >
-                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Add
-                                roadmap item
-                            </Tooltip>
-                        </>
-                    ) : null
-                }
             >
                 <div className="relative h-full flex">
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
-                        <Filters onTeamChange={setTeamFilter} teamFilterValue={teamFilter} />
+                        <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
+                            <Filters
+                                onTeamChange={setTeamFilter}
+                                teamFilterValue={teamFilter}
+                                onCategoryChange={setCategoryFilter}
+                                categoryFilterValue={categoryFilter}
+                            />
+                            {isModerator && (
+                                <Tooltip
+                                    trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
+                                    delay={0}
+                                >
+                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                    Add roadmap item
+                                </Tooltip>
+                            )}
+                        </div>
+
                         <div className="min-h-0 flex-grow pt-2">
                             <RoadmapCards
                                 startYear={2020}
@@ -600,6 +654,7 @@ export default function Changelog(): JSX.Element {
                                 setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
                                 onRoadmapClick={setActiveRoadmap}
                                 containerWidth={containerWidth}
+                                activeRoadmap={activeRoadmap}
                             />
                         </div>
                         <div className="min-h-0 flex-shrink-0 mt-auto">
@@ -608,7 +663,6 @@ export default function Changelog(): JSX.Element {
                                 endYear={2025}
                                 data={roadmapsGrouped}
                                 onDrag={handleDrag}
-                                onDragEnd={handleDragEnd}
                                 windowX={windowX}
                                 setWindowX={setWindowX}
                                 containerRef={timelineContainerRef}
