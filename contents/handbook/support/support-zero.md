@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Support isn't just about tickets! I mean.. it's a lot about tickets - but we don't judge the success of support engineers solely by how many tickets they solve. Instead, we like to free up support engineers to spend some time working on other tasks which help users. These tasks can include working on their [quarterly goals](/teams/support/objectives), building new support features, contributing small PRs for bug fixes, or whatever else they think will help us move faster.
+Support isn't just about tickets! I mean.. it's a lot about tickets - but we don't judge the success of support engineers solely by how many tickets they solve. Instead, we like to free up support engineers to spend some time working on other tasks which help users. These tasks can include working on their [quarterly goals](/teams/support), building new support features, contributing small PRs for bug fixes, or whatever else they think will help us move faster.
 
 
 ## Why are support zero weeks useful?
@@ -27,7 +27,7 @@ Team members are encouraged to consider taking the same zero weeks as someone el
 
 ### Before your zero week
 - [ ] Hand over all of your in-progress tickets (including any in a pending state that you believe are ongoing / going to come back). Do this as a message into [#team-support](https://posthog.slack.com/archives/C075D3C5HST).
-- [ ] Set yourself as unavailable in Zendesk using the [Out of Office app](https://posthoghelp.zendesk.com/agent/apps/out-of-office).
+- [ ] Set yourself as unavailable in Zendesk [using the Out of Office app](https://posthoghelp.zendesk.com/agent/apps/out-of-office).
 - [ ] Set a status in Slack so it's clear to the rest of the team that you're on a zero week 
 
 ### During your zero week
