@@ -400,6 +400,7 @@ export default function RichText({
                                         iconClassName="size-5 justify-center items-center flex"
                                         className="!text-secondary hover:!text-primary"
                                         tooltip={!imageLoading && !showPreview ? button.tooltipContent : undefined}
+                                        tooltipDelay={500}
                                         disabled={imageLoading || showPreview}
                                         onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
                                     />
@@ -415,6 +416,7 @@ export default function RichText({
                                 iconClassName="size-5 justify-center items-center flex"
                                 className="!text-secondary hover:!text-primary"
                                 tooltip={!imageLoading && !showPreview ? 'Image' : undefined}
+                                tooltipDelay={500}
                                 onClick={(e) => {
                                     e.preventDefault()
                                     open()
