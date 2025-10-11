@@ -1390,39 +1390,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         className="pt-6"
                                     >
                                         <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
-                                            {profile.teams.data[0].attributes.profiles.data
-                                                .filter((teammate) => teammate.id !== data?.id)
-                                                .map((teammate) => {
-                                                    return (
-                                                        <Link
-                                                            key={teammate.id}
-                                                            to={`/community/profiles/${teammate.id}`}
-                                                            state={{ newWindow: true }}
-                                                        >
-                                                            <TeamMember
-                                                                avatar={{
-                                                                    url:
-                                                                        teammate.attributes.avatar?.data?.attributes
-                                                                            ?.url || teammate.attributes.avatar?.url,
-                                                                }}
-                                                                firstName={teammate.attributes.firstName}
-                                                                lastName={teammate.attributes.lastName}
-                                                                companyRole={teammate.attributes.companyRole}
-                                                                country={teammate.attributes.country}
-                                                                location={teammate.attributes.location}
-                                                                squeakId={teammate.id}
-                                                                color={teammate.attributes.color || 'yellow'}
-                                                                biography={teammate.attributes.biography || ''}
-                                                                teamCrestMap={teamCrestMap}
-                                                                pineappleOnPizza={teammate.attributes.pineappleOnPizza}
-                                                                startDate={teammate.attributes.startDate}
-                                                                isTeamLead={profile.teams.data[0].attributes?.leadProfiles?.data?.some(
-                                                                    ({ id: leadID }) => leadID === teammate.id
-                                                                )}
-                                                            />
-                                                        </Link>
-                                                    )
-                                                })}
+                                            <TeamMembersList self={profile} team={profile.teams.data[0]} />
                                         </div>
                                     </Block>
                                 </div>
@@ -1445,42 +1413,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                             <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
                                                         </Link>
                                                     </div>
-                                                    {team.attributes.profiles.data
-                                                        .filter((teammate) => teammate.id !== data?.id)
-                                                        .map((teammate) => {
-                                                            return (
-                                                                <Link
-                                                                    key={teammate.id}
-                                                                    to={`/community/profiles/${teammate.id}`}
-                                                                    state={{ newWindow: true }}
-                                                                >
-                                                                    <TeamMember
-                                                                        avatar={{
-                                                                            url:
-                                                                                teammate.attributes.avatar?.data
-                                                                                    ?.attributes?.url ||
-                                                                                teammate.attributes.avatar?.url,
-                                                                        }}
-                                                                        firstName={teammate.attributes.firstName}
-                                                                        lastName={teammate.attributes.lastName}
-                                                                        companyRole={teammate.attributes.companyRole}
-                                                                        country={teammate.attributes.country}
-                                                                        location={teammate.attributes.location}
-                                                                        squeakId={teammate.id}
-                                                                        color={teammate.attributes.color || 'yellow'}
-                                                                        biography={teammate.attributes.biography || ''}
-                                                                        teamCrestMap={teamCrestMap}
-                                                                        pineappleOnPizza={
-                                                                            teammate.attributes.pineappleOnPizza
-                                                                        }
-                                                                        startDate={teammate.attributes.startDate}
-                                                                        isTeamLead={team.attributes?.leadProfiles?.data?.some(
-                                                                            ({ id: leadID }) => leadID === teammate.id
-                                                                        )}
-                                                                    />
-                                                                </Link>
-                                                            )
-                                                        })}
+                                                    <TeamMembersList self={profile} team={team} />
                                                 </div>
                                             ),
                                         }))}
@@ -1509,6 +1442,43 @@ export default function ProfilePage({ params }: PageProps) {
                 </div>
             </ScrollArea>
         </div>
+    )
+}
+
+const TeamMembersList = ({ self, team }) => {
+    const selfTeammate = team.attributes.profiles.data.find((teammate) => teammate.id === self.id)
+    const otherTeammates = team.attributes.profiles.data.filter((teammate) => teammate.id !== self.id)
+    const teammates = [selfTeammate, ...otherTeammates].filter(Boolean)
+
+    return (
+        <>
+            {teammates.map((teammate) => {
+                return (
+                    <Link key={teammate.id} to={`/community/profiles/${teammate.id}`} state={{ newWindow: true }}>
+                        <TeamMember
+                            avatar={{
+                                url:
+                                    teammate.attributes.avatar?.data?.attributes?.url ||
+                                    teammate.attributes.avatar?.url,
+                            }}
+                            firstName={teammate.attributes.firstName}
+                            lastName={teammate.attributes.lastName}
+                            companyRole={teammate.attributes.companyRole}
+                            country={teammate.attributes.country}
+                            location={teammate.attributes.location}
+                            squeakId={teammate.id}
+                            color={teammate.attributes.color || 'yellow'}
+                            biography={teammate.attributes.biography || ''}
+                            pineappleOnPizza={teammate.attributes.pineappleOnPizza}
+                            startDate={teammate.attributes.startDate}
+                            isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                ({ id: leadID }) => leadID === teammate.id
+                            )}
+                        />
+                    </Link>
+                )
+            })}
+        </>
     )
 }
 
