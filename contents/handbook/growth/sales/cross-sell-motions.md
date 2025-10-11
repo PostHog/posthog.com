@@ -203,6 +203,60 @@ What alerts would be helpful to have that would indicate good cross sell opportu
 2. Could we use signals in Vitally / PostHog to notify about new power users?
 3. Could we get an alert when an account tries a new product for the first time?
 
+## Example questions to ask
+
+The questions below are designed to spark thoughtful conversations with customers. They help uncover how teams are currently solving problems and whether there might be simpler or more effective ways to do so using PostHog. 
+
+Use these questions in preparing for calls and use them as examples for developing your own questions. Each includes the **question**, the **pain revealed**, and the **PostHog advantage**.
+
+### Error Tracking
+
+| Question | Pain Revealed | PostHog Advantage |
+| --- | --- | --- |
+| When an error occurs, how easy is it for you to see exactly which user actions led up to it and how it affected the experience? | Debugging relies often relies on reproducing error | Error Tracking tied directly to replays makes root cause and impact obvious. |
+| If you’ve built your own error tracking, how much effort goes into maintaining and correlating it with analytics? | Time wasted maintaining infra, blind spots in analysis. | Lightweight SDK that's tightly integrated with other products. |
+| How do you decide which errors to fix first? | Prioritizing by gut feeling or frequency, not business impact. | Error Tracking + Product & Revenue Analytics can show which errors have the greatest impact. |
+
+### LLM Analytics
+
+| Question | Pain Revealed | PostHog Advantage |
+| --- | --- | --- |
+| When your LLM-driven features underperform, how do you pinpoint why? | No clear visibility into model errors or user friction. | LLM Analytics shows usage, performance, and cost data together. |
+| How do you know which LLM features are helping vs hurting users? | No clear way to measure LLM impact on user behavior or business outcomes. | LLM Analytics + Session Replay shows which interactions drive value vs cause drop-offs. |
+| How do you evaluate your LLM analytics in the context of broader product goals? | Standalone tools miss product context. | Integration ties LLM performance to actual product outcomes. |
+
+### Session Replay
+
+| Question | Pain Revealed | PostHog Advantage |
+| --- | --- | --- |
+| When debugging, how often do you rely on logs or secondhand reports to reconstruct what happened? | Time lost piecing together events. | Session Replay shows exact user journey, reducing guesswork. |
+| How do you confirm if a bug is isolated or widespread across users? | Hard to prioritize fixes without scope clarity. | Replays + analytics show impact |
+| How do you identify user friction today? | Lacks visibility into real interactions without PM background. | Session Replay gives direct user perspective for product calls. |
+
+### Feature Flags
+
+| Question | Pain Revealed | PostHog Advantage |
+| --- | --- | --- |
+| When launching a new feature, how do you manage risk of rollouts failing? | “Big bang” releases increase risk + stress. | Feature Flags enable safe, gradual rollouts & rollbacks. |
+| How do you measure whether users actually engage with a feature once it’s enabled? | No feedback loop between rollout and usage metrics. | PostHog connects flags directly to analytics & experiments. |
+| What’s your process for debugging an experiment if users drop off unexpectedly? | Experiments may fail without clarity on root cause. | Session Replay + Error Tracking pinpoint where the experience broke down. |
+| How do you currently measure the business impact (e.g., revenue, retention) of an experiment? | Results limited to engagement metrics, missing real business outcomes. | Revenue Analytics + Product Analytics + Data Warehous show both engagement and business impact. |
+
+### Revenue Analytics
+
+| Question | Pain Revealed | PostHog Advantage |
+| --- | --- | --- |
+| How do you measure the direct revenue impact of your features? | Work disconnected from business outcomes. | Revenue Analytics ties feature usage to revenue & LTV. |
+| How do you weigh roadmap decisions against revenue impact today? | Guesswork in prioritization. | Revenue Analytics reveals which features drive business outcomes. |
+
+### Surveys
+
+| Question | Pain Revealed | PostHog Advantage |
+| --- | --- | --- |
+| When analyzing survey responses, how easy is it to connect them to specific user behaviors or outcomes? | Responses are siloed, making it hard to correlate feedback with analytics or events. | Surveys integrate natively with Product Analytics and Session Replay, linking responses to user journeys and metrics. |
+| How do you target surveys to the right users without manual segmentation or guesswork? | Less targeted surveys lead to low relevance and response rates. Custom targeting requires dev time. | Display conditions use cohorts, feature flags, and events to show surveys only to specifics users, with built-in response limits. |
+
+
 ## Next steps for tactical execution
 1. Build out example playbooks for bundles above
 2. Case studies on specific cross-product adoption goodness
