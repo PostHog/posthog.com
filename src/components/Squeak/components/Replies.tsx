@@ -14,6 +14,26 @@ const getBadge = (questionProfileID: string, replyProfileID: string) => {
     return questionProfileID === replyProfileID ? 'Author' : null
 }
 
+const Squiggle = ({ className }: { className: string }) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 11" className={`h-2 ${className}`}>
+            <path d="m13.5 8.793 4.646-4.647.707.708-5.353 5.353-8.5-8.5-3.646 3.647-.708-.708L5 .293l8.5 8.5Z" />
+        </svg>
+    )
+}
+
+const Squiggles = ({ className = '' }: { className: string }) => {
+    return (
+        <div className="flex [&_svg]:ml-[-1.25px] mt-3">
+            <Squiggle className={className} />
+            <Squiggle className={className} />
+            <Squiggle className={className} />
+            <Squiggle className={className} />
+            <Squiggle className={className} />
+        </div>
+    )
+}
+
 type RepliesProps = {
     expanded: boolean
     setExpanded: (expanded: boolean) => void
@@ -82,25 +102,51 @@ const Collapsed = ({ setExpanded, replies, resolvedBy, isInForum }: CollapsedPro
     return (
         <>
             <li
-                className={`pr-[5px] pl-[30px] !mb-0 relative  ${
-                    isInForum ? '' : 'border-l border-solid border-primary squeak-left-border before:border-l-0'
+                className={`!mb-0 relative  ${
+                    isInForum
+                        ? ''
+                        : 'pr-[5px] pl-[30px] border-l border-solid border-primary squeak-left-border before:border-l-0'
                 }`}
             >
-                <div className="pb-8 flex items-center space-x-4">
-                    <div className="flex items-center">
-                        {avatars.map((avatar, index) => {
-                            return (
-                                <div key={index} className="relative -mr-2">
-                                    <Avatar className="w-[25px] rounded-full" image={avatar} />
-                                </div>
-                            )
-                        })}
-                    </div>
+                {isInForum ? (
+                    <div
+                        className={`pb-4 justify-center !pl-0 flex items-center w-full relative before:content-[''] before:absolute before:top-[15px] before:left-0 before:w-full before:h-full before:border-t before:border-primary`}
+                    >
+                        <div className="bg-primary flex justify-center -top-1/2 relative space-x-4">
+                            <Squiggles className="fill-border" />
+                            <div className="flex items-center">
+                                {avatars.map((avatar, index) => {
+                                    return (
+                                        <div key={index} className="relative -mr-2">
+                                            <Avatar className="w-[25px] rounded-full" image={avatar} />
+                                        </div>
+                                    )
+                                })}
+                            </div>
 
-                    <button className="text-sm font-semibold hover:underline" onClick={() => setExpanded(true)}>
-                        View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
-                    </button>
-                </div>
+                            <button className="text-sm font-semibold hover:underline" onClick={() => setExpanded(true)}>
+                                View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
+                            </button>
+                            <Squiggles className="fill-border" />
+                        </div>
+                    </div>
+                ) : (
+                    <div className={`pb-8 -my-2 flex items-center space-x-4`}>
+                        <div className="flex items-center">
+                            {avatars.map((avatar, index) => {
+                                return (
+                                    <div key={index} className="relative -mr-2">
+                                        <Avatar className="w-[25px] rounded-full" image={avatar} />
+                                    </div>
+                                )
+                            })}
+                        </div>
+
+                        <button className="text-sm font-semibold hover:underline" onClick={() => setExpanded(true)}>
+                            View {replyCount - 1} more {replyCount === 1 ? 'reply' : 'replies'}
+                        </button>
+                    </div>
+                )}
             </li>
 
             <li

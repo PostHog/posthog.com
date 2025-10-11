@@ -413,7 +413,7 @@ export default function Inbox(props) {
                                                             <div className="hidden @3xl:block w-24 text-center">
                                                                 {numReplies}
                                                             </div>
-                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 ">
+                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
                                                                 <Tooltip trigger={dayjs(activeAt).fromNow()}>
                                                                     {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
                                                                     {dayjs(activeAt).format('h:mm A')}
