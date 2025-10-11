@@ -83,7 +83,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
                         {description && <p className="text-sm text-secondary m-0 mt-0.5">{description}</p>}
                     </div>
                 )}
-                <div className={`${direction === 'column' ? 'w-full leading-[0]' : 'flex-1'}`}>
+                <div className={`leading-[0] ${direction === 'column' ? 'w-full' : 'flex-1'}`}>
                     <textarea
                         ref={ref}
                         className={`bg-primary border border-primary rounded ring-0 focus:ring-1 resize-y ${

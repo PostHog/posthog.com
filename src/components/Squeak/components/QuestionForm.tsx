@@ -10,14 +10,13 @@ import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
-import { Listbox } from '@headlessui/react'
-import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
+import { OSSelect } from 'components/OSForm'
 
 type QuestionFormValues = {
     subject: string
@@ -48,7 +47,7 @@ type QuestionFormMainProps = {
 export const Select = ({
     value,
     setFieldValue,
-    label = 'Please select a topic',
+    label = 'Select a topic',
     className = '',
 }: {
     value?: Topic
@@ -57,64 +56,58 @@ export const Select = ({
     className?: string
 }) => {
     const [topicGroups, setTopicGroups] = useState([])
+    const [options, setOptions] = useState([])
 
-    const handleChange = (topic: Topic) => {
-        setFieldValue('topic', topic)
+    const handleChange = (selectedValue: any) => {
+        setFieldValue('topic', selectedValue)
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) =>
-            setTopicGroups(topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic'))
-        )
+        fetchTopicGroups().then((topicGroups) => {
+            const filteredGroups = topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic')
+            setTopicGroups(filteredGroups)
+
+            // Flatten topic groups into options array with section headers
+            const flatOptions = filteredGroups
+                .sort(
+                    (a, b) =>
+                        topicGroupsSorted.indexOf(a?.attributes?.label) -
+                        topicGroupsSorted.indexOf(b?.attributes?.label)
+                )
+                .flatMap(({ attributes: { label: groupLabel, topics } }) => {
+                    const header = {
+                        label: groupLabel,
+                        value: null,
+                        isHeader: true,
+                    }
+                    const options =
+                        topics?.data.map((topic) => ({
+                            label: topic.attributes.label,
+                            value: topic,
+                        })) || []
+                    return [header, ...options]
+                })
+
+            setOptions(flatOptions)
+        })
     }, [])
 
     return (
-        <div className={`relative border-b border-input ${className}`}>
-            <Listbox value={value || {}} onChange={handleChange}>
-                <Listbox.Button
-                    className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left  ${
-                        !value?.attributes?.label ? 'opacity-60' : ''
-                    }`}
-                >
-                    {label && !!value && <label className="text-sm opacity-60 -mb-0.5 block">{label}</label>}
-                    <div className="flex items-center justify-between">
-                        <span>{value?.attributes?.label || label}</span>
-                        <Chevron className="w-2.5" />
-                    </div>
-                </Listbox.Button>
-                {topicGroups?.length > 0 && (
-                    <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30">
-                        {topicGroups
-                            .sort(
-                                (a, b) =>
-                                    topicGroupsSorted.indexOf(a?.attributes?.label) -
-                                    topicGroupsSorted.indexOf(b?.attributes?.label)
-                            )
-                            .map(({ attributes: { label, topics } }) => {
-                                return (
-                                    <div key={label}>
-                                        <h5 className="m-0 py-2 px-4 sticky top-0 bg-white">{label}</h5>
-                                        {topics?.data.map((topic) => (
-                                            <Listbox.Option key={topic.id} value={topic}>
-                                                {({ selected }) => (
-                                                    <div
-                                                        className={`${
-                                                            selected
-                                                                ? 'bg-accent text-primary'
-                                                                : 'prose-invert bg-white text-black hover:bg-accent'
-                                                        } py-2 px-4 cursor-pointer transition-all`}
-                                                    >
-                                                        {topic.attributes.label}
-                                                    </div>
-                                                )}
-                                            </Listbox.Option>
-                                        ))}
-                                    </div>
-                                )
-                            })}
-                    </Listbox.Options>
-                )}
-            </Listbox>
+        <div className={`relative ${className}`}>
+            <OSSelect
+                label={label}
+                direction="column"
+                value={value}
+                onChange={handleChange}
+                options={options}
+                placeholder={label}
+                searchable={true}
+                searchPlaceholder="Search topics..."
+                height="!h-96"
+                maxHeight="max-h-[300px]"
+                showLabel={false}
+                className=""
+            />
         </div>
     )
 }
@@ -215,29 +208,22 @@ function QuestionFormMain({
                                         />
                                     </>
                                 )}
-                                <div className="leading-[0]">
-                                    <RichText
-                                        onSubmit={submitForm}
-                                        autoFocus={!subject}
-                                        setFieldValue={setFieldValue}
-                                        initialValue={initialValues?.body}
-                                        values={values}
-                                        mentions={formType === 'reply'}
-                                        loading={loading}
-                                        isValid={isValid}
-                                        user={user}
-                                        cta={() => (
-                                            <OSButton
-                                                disabled={loading || !isValid}
-                                                type="submit"
-                                                variant="primary"
-                                                size="md"
-                                            >
-                                                {loading ? 'Posting...' : user ? 'Post' : 'Login & post'}
-                                            </OSButton>
-                                        )}
-                                    />
-                                </div>
+                                <RichText
+                                    onSubmit={submitForm}
+                                    autoFocus={!subject}
+                                    setFieldValue={setFieldValue}
+                                    initialValue={initialValues?.body}
+                                    values={values}
+                                    mentions={formType === 'reply'}
+                                    loading={loading}
+                                    isValid={isValid}
+                                    user={user}
+                                    cta={() => (
+                                        <OSButton disabled={loading || !isValid} type="submit" variant="primary">
+                                            {loading ? 'Posting...' : user ? 'Post' : 'Login & post'}
+                                        </OSButton>
+                                    )}
+                                />
                                 <Field
                                     className="opacity-0 absolute left-0 top-0 h-0 w-0 -z-[50] border-0 p-0"
                                     name="url"
