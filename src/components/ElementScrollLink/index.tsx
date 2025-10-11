@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, useEffect, useState, useContext, createContext, useMemo } from 'react'
 import { useLocation } from '@reach/router'
+import { createUrlWithHash } from '../../lib/utils'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     id: string
@@ -100,7 +101,7 @@ export default function ElementScrollLink({ id, label, element, className = '', 
                 behavior: 'smooth',
             })
 
-            const url = `${href.replace(/#.*/, '')}#${id}`
+            const url = createUrlWithHash(href, id)
             window.history.replaceState(null, '', url)
         }
     }

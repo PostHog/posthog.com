@@ -3,6 +3,7 @@ import { useLocation } from '@reach/router'
 import { LinkedIn, LinkIcon, Mail, Twitter } from 'components/Icons'
 import { usePost } from './hooks'
 import Tooltip from 'components/Tooltip'
+import { removeHashFromUrl } from '../../lib/utils'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626
@@ -29,7 +30,7 @@ export default function ShareLinks(): JSX.Element | null {
     const { href } = useLocation()
     const [copied, setCopied] = useState(false)
     const handleCopyClick = () => {
-        const url = `${href.replace(/#.*/, '')}`
+        const url = removeHashFromUrl(href)
         navigator.clipboard.writeText(url)
         setCopied(true)
         setTimeout(() => {

@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { useLocation } from '@reach/router'
 import { IconLink } from '../OSIcons'
 import { useToast } from '../../context/Toast'
+import { createUrlWithHash } from '../../lib/utils'
 
 export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
     const { addToast } = useToast()
     const { href } = useLocation()
 
     const handleClick = () => {
-        const url = `${href.replace(/#.*/, '')}#${id}`
+        const url = createUrlWithHash(href, id)
         navigator.clipboard.writeText(url)
         window.history.replaceState(null, '', url)
         addToast({ description: 'Copied to clipboard!' })
