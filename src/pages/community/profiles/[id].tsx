@@ -1381,15 +1381,16 @@ export default function ProfilePage({ params }: PageProps) {
                                 errors={errors}
                                 setFieldValue={setFieldValue}
                             />
-                            {profile?.teams?.data?.map((team) => (
-                                <div className="mt-6" key={team.attributes.id}>
+                            {profile?.teams?.data?.length === 1 ? (
+                                // Single team - use Block (OSFieldset)
+                                <div className="mt-6">
                                     <Block
-                                        title={`${team.attributes.name} Team`}
-                                        url={`/teams/${team.attributes.slug}`}
+                                        title={`${profile.teams.data[0].attributes.name} Team`}
+                                        url={`/teams/${profile.teams.data[0].attributes.slug}`}
                                         className="pt-6"
                                     >
                                         <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
-                                            {team.attributes.profiles.data
+                                            {profile.teams.data[0].attributes.profiles.data
                                                 .filter((teammate) => teammate.id !== data?.id)
                                                 .map((teammate) => {
                                                     return (
@@ -1415,7 +1416,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                                 teamCrestMap={teamCrestMap}
                                                                 pineappleOnPizza={teammate.attributes.pineappleOnPizza}
                                                                 startDate={teammate.attributes.startDate}
-                                                                isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                                                isTeamLead={profile.teams.data[0].attributes?.leadProfiles?.data?.some(
                                                                     ({ id: leadID }) => leadID === teammate.id
                                                                 )}
                                                             />
@@ -1425,7 +1426,69 @@ export default function ProfilePage({ params }: PageProps) {
                                         </div>
                                     </Block>
                                 </div>
-                            ))}
+                            ) : profile?.teams?.data?.length > 1 ? (
+                                // Multiple teams - use OSTabs
+                                <div className="mt-6" data-scheme="secondary">
+                                    <OSTabs
+                                        tabs={profile.teams.data.map((team) => ({
+                                            value: team.attributes.slug,
+                                            label: <>{team.attributes.name} Team</>,
+                                            content: (
+                                                <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4">
+                                                    <div className="col-span-full border-b border-primary pb-2 mb-10">
+                                                        <Link
+                                                            to={`/teams/${team.attributes.slug}`}
+                                                            state={{ newWindow: true }}
+                                                            className="group font-bold flex items-center gap-1 hover:underline"
+                                                        >
+                                                            {team.attributes.name} Team
+                                                            <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
+                                                        </Link>
+                                                    </div>
+                                                    {team.attributes.profiles.data
+                                                        .filter((teammate) => teammate.id !== data?.id)
+                                                        .map((teammate) => {
+                                                            return (
+                                                                <Link
+                                                                    key={teammate.id}
+                                                                    to={`/community/profiles/${teammate.id}`}
+                                                                    state={{ newWindow: true }}
+                                                                >
+                                                                    <TeamMember
+                                                                        avatar={{
+                                                                            url:
+                                                                                teammate.attributes.avatar?.data
+                                                                                    ?.attributes?.url ||
+                                                                                teammate.attributes.avatar?.url,
+                                                                        }}
+                                                                        firstName={teammate.attributes.firstName}
+                                                                        lastName={teammate.attributes.lastName}
+                                                                        companyRole={teammate.attributes.companyRole}
+                                                                        country={teammate.attributes.country}
+                                                                        location={teammate.attributes.location}
+                                                                        squeakId={teammate.id}
+                                                                        color={teammate.attributes.color || 'yellow'}
+                                                                        biography={teammate.attributes.biography || ''}
+                                                                        teamCrestMap={teamCrestMap}
+                                                                        pineappleOnPizza={
+                                                                            teammate.attributes.pineappleOnPizza
+                                                                        }
+                                                                        startDate={teammate.attributes.startDate}
+                                                                        isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                                                            ({ id: leadID }) => leadID === teammate.id
+                                                                        )}
+                                                                    />
+                                                                </Link>
+                                                            )
+                                                        })}
+                                                </div>
+                                            ),
+                                        }))}
+                                        defaultValue={profile.teams.data[0].attributes.slug}
+                                        triggerDataScheme="primary"
+                                    />
+                                </div>
+                            ) : null}
 
                             {profile.amaEnabled && (
                                 <div className="mt-6">
