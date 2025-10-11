@@ -34,6 +34,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             required = false,
             rows = 4,
             dataScheme,
+            className = '',
             ...props
         },
         ref
@@ -87,7 +88,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
                         ref={ref}
                         className={`bg-primary border border-primary rounded ring-0 focus:ring-1 resize-y ${
                             touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                        } ${sizeClasses[size]} ${widthClasses[width]}`}
+                        } ${sizeClasses[size]} ${widthClasses[width]} ${className}`}
                         id={textareaId}
                         placeholder={props.placeholder || label}
                         rows={rows}

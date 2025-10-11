@@ -10,7 +10,7 @@ import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconFeatures, IconX } from '@posthog/icons'
+import { IconFeatures, IconImage, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
 import OSTextarea from 'components/OSForm/textarea'
@@ -239,6 +239,7 @@ export default function RichText({
     mentions = false,
     bodyKey = 'body',
     className = '',
+    cta = React.ReactNode,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -384,72 +385,10 @@ export default function RichText({
         <div className="relative" {...getRootProps()}>
             <div onClick={handleContainerClick}>
                 <input className="hidden" {...getInputProps()} />
-                {showPreview ? (
-                    <div className="bg-primary text-primary border-none text-base h-[200px] py-3 px-4 resize-none w-full outline-none focus:ring-0 overflow-auto">
-                        <Markdown
-                            transformImageUri={(fakeImagePath) => {
-                                const objectURL = values.images.find(
-                                    (image) => image.fakeImagePath === fakeImagePath
-                                )?.objectURL
-                                return objectURL || fakeImagePath
-                            }}
-                        >
-                            {value}
-                        </Markdown>
-                    </div>
-                ) : (
-                    <div className="relative">
-                        {mentions && (
-                            <AnimatePresence>
-                                {showMentionProfiles && (
-                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
-                                        <MentionProfiles
-                                            body={value}
-                                            selectionStart={textarea.current?.selectionStart}
-                                            onClose={() => {
-                                                setShowMentionProfiles(false)
-                                                textarea.current?.focus()
-                                            }}
-                                            onSelect={handleProfileSelect}
-                                        />
-                                    </div>
-                                )}
-                            </AnimatePresence>
-                        )}
-                        <div className="border-b border-secondary">
-                            {label && !!value && (
-                                <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
-                            )}
-                            <textarea
-                                onPaste={handlePaste}
-                                disabled={imageLoading}
-                                autoFocus={autoFocus}
-                                className={`bg-primary border-none text-base h-[200px] resize-none w-full text-primary p-4 ${className}`}
-                                onBlur={(e) => e.preventDefault()}
-                                name="body"
-                                value={value}
-                                onChange={handleChange}
-                                ref={textarea}
-                                required
-                                id="body"
-                                placeholder={'Type more details...'}
-                                maxLength={maxLength}
-                                onKeyDown={handleKeyDown}
-                            />
-                        </div>
-                        {isDragActive && (
-                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:dark: after:rounded-md">
-                                <p className="m-0 font-semibold">Drop image here</p>
-                            </div>
-                        )}
-                        <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
-                            <span className="text-xs opacity-70">
-                                {values[bodyKey]?.length} / {maxLength}
-                            </span>
-                        </span>
-                    </div>
-                )}
-                <div data-scheme="secondary" className="bg-primary flex items-center justify-between py-1">
+                <div
+                    data-scheme="secondary"
+                    className="not-prose bg-primary flex items-center justify-between py-0.5 border border-primary rounded-t"
+                >
                     <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
                         {buttons.map((button, index) => {
                             return (
@@ -459,7 +398,9 @@ export default function RichText({
                                         size="md"
                                         icon={button.icon}
                                         iconClassName="size-5 justify-center items-center flex"
-                                        tooltip={button.tooltipContent}
+                                        className="!text-secondary hover:!text-primary"
+                                        tooltip={!imageLoading && !showPreview ? button.tooltipContent : undefined}
+                                        disabled={imageLoading || showPreview}
                                         onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
                                     />
                                 </li>
@@ -469,30 +410,15 @@ export default function RichText({
                             <OSButton
                                 variant="default"
                                 size="md"
-                                icon={
-                                    <svg
-                                        className="w-4"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 16 14"
-                                    >
-                                        <path
-                                            d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
-                                            fill="currentColor"
-                                        />
-                                        <path
-                                            d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
-                                            fill="currentColor"
-                                        />
-                                    </svg>
-                                }
+                                disabled={imageLoading || showPreview}
+                                icon={<IconImage />}
                                 iconClassName="size-5 justify-center items-center flex"
-                                tooltip="Image"
+                                className="!text-secondary hover:!text-primary"
+                                tooltip={!imageLoading && !showPreview ? 'Image' : undefined}
                                 onClick={(e) => {
                                     e.preventDefault()
                                     open()
                                 }}
-                                className="!p-2"
                             />
                         </li>
                         {preview && (
@@ -543,13 +469,82 @@ export default function RichText({
                         )}
                     </ul>
                 </div>
+                {showPreview ? (
+                    <div className="bg-primary text-primary text-base h-[200px] px-3 py-2 resize-none w-full outline-none focus:ring-0 overflow-auto border border-primary border-t-0">
+                        <Markdown
+                            transformImageUri={(fakeImagePath) => {
+                                const objectURL = values.images.find(
+                                    (image) => image.fakeImagePath === fakeImagePath
+                                )?.objectURL
+                                return objectURL || fakeImagePath
+                            }}
+                        >
+                            {value}
+                        </Markdown>
+                    </div>
+                ) : (
+                    <div className="relative border border-primary border-t-0 rounded-b">
+                        {mentions && (
+                            <AnimatePresence>
+                                {showMentionProfiles && (
+                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
+                                        <MentionProfiles
+                                            body={value}
+                                            selectionStart={textarea.current?.selectionStart}
+                                            onClose={() => {
+                                                setShowMentionProfiles(false)
+                                                textarea.current?.focus()
+                                            }}
+                                            onSelect={handleProfileSelect}
+                                        />
+                                    </div>
+                                )}
+                            </AnimatePresence>
+                        )}
+                        {label && !!value && (
+                            <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
+                        )}
+                        <OSTextarea
+                            onPaste={handlePaste}
+                            disabled={imageLoading}
+                            autoFocus={autoFocus}
+                            className={`w-full [field-sizing:content] border-none rounded-b min-h-40 markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold max-h-[500px] ${className}`}
+                            onBlur={(e) => e.preventDefault()}
+                            name="body"
+                            value={value}
+                            onChange={handleChange}
+                            ref={textarea}
+                            required
+                            id="body"
+                            placeholder={'Type more details...'}
+                            maxLength={maxLength}
+                            onKeyDown={handleKeyDown}
+                            showLabel={false}
+                        />
+
+                        {isDragActive && (
+                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:dark: after:rounded-md">
+                                <p className="m-0 font-semibold">Drop image here</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 {imageLoading && (
                     <div className="w-full h-full inset-0 bg-white/50 dark:bg-black/50 absolute flex justify-center items-center">
                         <Spinner className="w-10 h-10" />
                     </div>
                 )}
-                {!value && (
-                    <div className="absolute top-4 right-4">
+
+                <div className="flex justify-between items-center mt-2">
+                    <div>{typeof cta === 'function' ? cta() : cta}</div>
+                    <aside className="flex items-center gap-1">
+                        <span className="bg-white dark:bg-accent-dark px-1 rounded-sm">
+                            <span className="text-xs opacity-70">
+                                {values[bodyKey]?.length} / {maxLength}
+                            </span>
+                        </span>
+
                         <a
                             className="text-muted hover:text-secondary"
                             href="https://www.markdownguide.org/cheat-sheet/"
@@ -559,8 +554,8 @@ export default function RichText({
                         >
                             <MarkdownLogo />
                         </a>
-                    </div>
-                )}
+                    </aside>
+                </div>
             </div>
         </div>
     )

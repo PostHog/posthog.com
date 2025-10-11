@@ -17,6 +17,7 @@ import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
 import Link from 'components/Link'
+import Input from 'components/OSForm/input'
 
 type QuestionFormValues = {
     subject: string
@@ -177,12 +178,9 @@ function QuestionFormMain({
                                 />
                             </div>
 
-                            <div
-                                data-scheme="primary"
-                                className="bg-primary text-primary border border-primary rounded-md overflow-hidden mb-4"
-                            >
+                            <div data-scheme="primary" className="pl-[55px] space-y-2">
                                 {status && status !== 'none' && (
-                                    <div className="p-4 bg-accent border-b border-primary">
+                                    <div data-scheme="secondary" className="p-4 bg-primary border border-primary">
                                         <h5 className="m-0">Heads up!</h5>
                                         <p className="m-0 text-sm">
                                             We're currently experiencing an incident. Check{' '}
@@ -197,18 +195,23 @@ function QuestionFormMain({
                                         </p>
                                     </div>
                                 )}
+
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
-                                        <Field
+                                        <Input
+                                            label="Subject"
                                             autoFocus={autoFocus}
-                                            className="font-semibold text-primary bg-primary border-x-0 border-t-0 border-b border-primary text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className=""
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
                                             name="subject"
-                                            placeholder="Title"
+                                            placeholder="Subject"
                                             maxLength="140"
+                                            showLabel={false}
+                                            value={values.subject}
+                                            onChange={(e) => setFieldValue('subject', e.target.value)}
                                         />
                                     </>
                                 )}
@@ -220,6 +223,19 @@ function QuestionFormMain({
                                         initialValue={initialValues?.body}
                                         values={values}
                                         mentions={formType === 'reply'}
+                                        loading={loading}
+                                        isValid={isValid}
+                                        user={user}
+                                        cta={() => (
+                                            <OSButton
+                                                disabled={loading || !isValid}
+                                                type="submit"
+                                                variant="primary"
+                                                size="md"
+                                            >
+                                                {loading ? 'Posting...' : user ? 'Post' : 'Login & post'}
+                                            </OSButton>
+                                        )}
                                     />
                                 </div>
                                 <Field
@@ -231,11 +247,6 @@ function QuestionFormMain({
                                     autoComplete="off"
                                 />
                             </div>
-                            <span className="ml-[50px]">
-                                <OSButton disabled={loading || !isValid} type="submit" variant="primary" width="full">
-                                    {loading ? 'Posting...' : user ? 'Post' : 'Login & post'}
-                                </OSButton>
-                            </span>
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
