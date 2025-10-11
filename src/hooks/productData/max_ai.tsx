@@ -23,14 +23,28 @@ export const max_ai = {
         description:
             'Max builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
         layout: 'ai',
+        textColor: 'text-white',
     },
-    // screenshots: [
-    //     {
-    //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
-    //         alt: "Screenshot of PostHog's CDP",
-    //         classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
-    //     },
-    // ],
+    screenshots: {
+        // overview: {
+        //     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png',
+        //     alt: 'Product analytics screenshot',
+        //     classes: '',
+        // },
+        sidebarInitial: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_light_1fbdd896ec.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_f80f0d13ac.png',
+            alt: 'Max chat',
+            // imgClasses: 'max-h-full'
+        },
+        sidebarInitialCropped: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_light_cropped_d4ac0441a1.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_cropped_240b38f95e.png',
+            alt: 'Max chat',
+            imgClasses: 'max-w-[444px]',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_max_e80de99727.png',
         alt: "Hi, I'm Max!",

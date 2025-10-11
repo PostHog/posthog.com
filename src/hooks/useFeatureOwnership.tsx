@@ -51,10 +51,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: [],
         notes: <>Shared responsibility, with features owned by the relevant small team.</>,
     },
-    'async-migrations': {
-        feature: 'Async migrations',
-        owner: ['messaging'],
-    },
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
@@ -127,7 +123,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-pipelines': {
         feature: 'Data pipelines',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipeline',
     },
     'data-warehouse': {
@@ -184,6 +180,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    'managed-migrations': {
+        feature: 'Managed migrations',
+        owner: ['ingestion'],
+    },
     'marketing-analytics': {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
@@ -200,7 +200,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     messaging: {
         feature: 'Messaging',
-        owner: ['messaging'],
+        owner: ['workflows'],
     },
     notebooks: {
         feature: 'Notebooks',
@@ -235,12 +235,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-transformations': {
         feature: 'Pipeline transformations',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipelines',
     },
     'pipeline-destinations': {
         feature: 'Pipeline destinations',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/cdp',
     },
     'pipeline-sources': {
@@ -412,7 +412,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'webhook-delivery': {
         feature: 'Webhook delivery service',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipelines',
     },
 }

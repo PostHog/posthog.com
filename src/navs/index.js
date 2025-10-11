@@ -414,13 +414,14 @@ export const dataPipelines = {
 
 export const handbookSidebar = [
     {
-        name: 'Handbook',
+        name: 'The Book of PostHog',
     },
     {
         name: 'Table of contents',
         url: '/handbook',
         // icon: 'IconInfo',
     },
+
     {
         name: 'Chapters',
         url: '',
@@ -488,177 +489,77 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Working at PostHog',
+        name: 'Working here',
+    },
+    {
+        name: 'How we work',
         url: '',
         children: [
-            {
-                name: 'How we work',
-                url: '',
-                children: [
-                    {
-                        name: 'Culture',
-                        url: '/handbook/company/culture',
-                    },
-                    {
-                        name: 'Small teams',
-                        url: '/handbook/company/small-teams',
-                    },
-                    {
-                        name: 'Meetings',
-                        url: '/handbook/getting-started/meetings',
-                    },
-                    {
-                        name: 'Using GitHub',
-                        url: '/handbook/company/new-to-github',
-                    },
-                    {
-                        name: 'Goal setting',
-                        url: '/handbook/company/goal-setting',
-                    },
-                    {
-                        name: 'A grown-up company',
-                        url: '/handbook/company/grown-ups',
-                    },
-                    {
-                        name: 'Communication',
-                        url: '/handbook/company/communication',
-                    },
-                    {
-                        name: 'Fuzzy ownership',
-                        url: '/handbook/company/fuzzy-ownership',
-                    },
-                    {
-                        name: 'Kudos',
-                        url: '/handbook/company/kudos',
-                    },
-                    {
-                        name: 'Management',
-                        url: '/handbook/company/management',
-                    },
-                    {
-                        name: 'Sprints',
-                        url: '/handbook/company/sprints',
-                    },
-                    {
-                        name: 'Offsites',
-                        url: '/handbook/company/offsites',
-                    },
-                    {
-                        name: 'Security',
-                        url: '/handbook/company/security',
-                    },
-                    {
-                        name: 'Advisories & CVEs',
-                        url: '/handbook/company/security-advisories',
-                    },
-                    {
-                        name: 'Adding tools',
-                        url: '/handbook/company/adding-tools',
-                    },
-                ],
-            },
-            {
-                name: 'Compensation',
-                url: '/handbook/people/compensation',
-            },
-            {
-                name: 'Share options',
-                url: '/handbook/people/share-options',
-            },
-            {
-                name: 'Benefits',
-                url: '/handbook/people/benefits',
-            },
-            {
-                name: 'Time off',
-                url: '/handbook/people/time-off',
-            },
-            {
-                name: 'Spending money',
-                url: '/handbook/people/spending-money',
-            },
-            {
-                name: 'Progression',
-                url: '/handbook/people/career-progression',
-            },
-            {
-                name: 'Training',
-                url: '/handbook/people/training',
-            },
-            {
-                name: 'Side gigs',
-                url: '/handbook/people/side-gigs',
-            },
-            {
-                name: 'Feedback',
-                url: '/handbook/people/feedback',
-            },
-            {
-                name: 'BookHog',
-                url: '/handbook/people/bookhog',
-            },
-            {
-                name: 'Lore',
-                url: '/handbook/company/lore',
-            },
-            {
-                name: 'Onboarding',
-                url: '/handbook/people/onboarding',
-            },
-            {
-                name: 'Offboarding',
-                url: '/handbook/people/offboarding',
-            },
-            {
-                name: 'HR processes',
-                url: '/handbook/people/grievances',
-            },
-            {
-                name: 'Hiring processes',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/people/hiring-process',
-                    },
-                    {
-                        name: 'How to interview',
-                        url: '/handbook/people/hiring-process/how-to-interview',
-                    },
-                    {
-                        name: 'Engineering hiring',
-                        url: '/handbook/people/hiring-process/engineering-hiring',
-                    },
-                    {
-                        name: 'Marketing hiring',
-                        url: '/handbook/people/hiring-process/marketing-hiring',
-                    },
-                    {
-                        name: 'Operations hiring',
-                        url: '/handbook/people/hiring-process/operations-hiring',
-                    },
-                    {
-                        name: 'Design hiring',
-                        url: '/handbook/people/hiring-process/design-hiring',
-                    },
-                    {
-                        name: 'Leadership hiring',
-                        url: '/handbook/people/hiring-process/exec-hiring',
-                    },
-                    {
-                        name: 'Sales and CS hiring',
-                        url: '/handbook/people/hiring-process/sales-cs-hiring',
-                    },
-                ],
-            },
+            { name: 'Culture', url: '/handbook/company/culture' },
+            { name: 'Lore', url: '/handbook/company/lore' },
+            { name: 'A grown-up company', url: '/handbook/company/grown-ups' },
+            { name: 'Small teams', url: '/handbook/company/small-teams' },
+            { name: 'Fuzzy ownership', url: '/handbook/company/fuzzy-ownership' },
+            { name: 'Goal setting', url: '/handbook/company/goal-setting' },
+            { name: 'Sprints', url: '/handbook/company/sprints' },
+            { name: 'Management', url: '/handbook/company/management' },
+            { name: 'Communication', url: '/handbook/company/communication' },
+            { name: 'Meetings', url: '/handbook/getting-started/meetings' },
+            { name: 'Kudos', url: '/handbook/company/kudos' },
+            { name: 'Offsites', url: '/handbook/company/offsites' },
+        ],
+    },
+    {
+        name: 'Tools & processes',
+        url: '',
+        children: [
+            { name: 'Spending money', url: '/handbook/people/spending-money' },
+            { name: 'Using GitHub', url: '/handbook/company/new-to-github' },
+            { name: 'Adding tools', url: '/handbook/company/adding-tools' },
+            { name: 'Security', url: '/handbook/company/security' },
+            { name: 'Advisories & CVEs', url: '/handbook/company/security-advisories' },
+        ],
+    },
+    {
+        name: 'People ops',
+        url: '',
+        children: [
+            { name: 'Onboarding', url: '/handbook/people/onboarding' },
+            { name: 'Side gigs', url: '/handbook/people/side-gigs' },
+            { name: 'Training', url: '/handbook/people/training' },
+            { name: 'Feedback', url: '/handbook/people/feedback' },
+            { name: 'Progression', url: '/handbook/people/career-progression' },
+            { name: 'HR processes', url: '/handbook/people/grievances' },
+            { name: 'BookHog', url: '/handbook/people/bookhog' },
+            { name: 'Offboarding', url: '/handbook/people/offboarding' },
+        ],
+    },
+    {
+        name: 'Pay & perks',
+        url: '',
+        children: [
+            { name: 'Compensation', url: '/handbook/people/compensation' },
+            { name: 'Share options', url: '/handbook/people/share-options' },
+            { name: 'Benefits', url: '/handbook/people/benefits' },
+            { name: 'Time off', url: '/handbook/people/time-off' },
+        ],
+    },
+    {
+        name: 'Hiring',
+        url: '',
+        children: [
+            { name: 'Hiring process', url: '/handbook/people/hiring-process' },
+            { name: 'How to interview', url: '/handbook/people/hiring-process/how-to-interview' },
+            { name: 'Engineering hiring', url: '/handbook/people/hiring-process/engineering-hiring' },
+            { name: 'Marketing hiring', url: '/handbook/people/hiring-process/marketing-hiring' },
+            { name: 'Operations hiring', url: '/handbook/people/hiring-process/operations-hiring' },
+            { name: 'Design hiring', url: '/handbook/people/hiring-process/design-hiring' },
+            { name: 'Leadership hiring', url: '/handbook/people/hiring-process/exec-hiring' },
+            { name: 'Sales and CS hiring', url: '/handbook/people/hiring-process/sales-cs-hiring' },
         ],
     },
     {
         name: 'Resources',
-    },
-    {
-        name: 'Team structure',
-        url: '/handbook/team-structure',
     },
     {
         name: 'Blitzscale',
@@ -675,52 +576,36 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Brand & vibes',
+        name: 'Brand & design',
         url: '',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/brand/brand-and-vibes',
-            },
-            {
-                name: 'Design',
-                url: '',
-                children: [
-                    {
-                        name: 'Art requests',
-                        url: '/handbook/brand/art-requests',
-                    },
-                    {
-                        name: 'Logos, brand, and hedgehogs',
-                        url: '/handbook/company/brand-assets',
-                    },
-                    {
-                        name: 'Our design philosophy',
-                        url: '/handbook/brand/philosophy',
-                    },
-                    {
-                        name: 'Product design for engineers',
-                        url: '/handbook/engineering/product-design',
-                    },
-                    {
-                        name: 'Product design process',
-                        url: '/handbook/brand/process',
-                    },
-                ],
-            },
-            {
-                name: 'Website',
-                url: '',
-                children: [
-                    {
-                        name: 'Designing PostHog website',
-                        url: '/handbook/brand/designing-posthog-website',
-                    },
-                ],
+                url: '/handbook/brand/overview',
             },
             {
                 name: 'Brand strategy',
                 url: '/handbook/strategy/brand',
+            },
+            {
+                name: 'Art requests',
+                url: '/handbook/brand/art-requests',
+            },
+            {
+                name: 'Logos, brand, and hedgehogs',
+                url: '/handbook/company/brand-assets',
+            },
+            {
+                name: 'Our design philosophy',
+                url: '/handbook/brand/philosophy',
+            },
+            {
+                name: 'Product design for engineers',
+                url: '/handbook/engineering/product-design',
+            },
+            {
+                name: 'Product design process',
+                url: '/handbook/brand/process',
             },
         ],
     },
@@ -1166,6 +1051,10 @@ export const handbookSidebar = [
                 url: '/handbook/people/talent',
             },
             {
+                name: 'Hogpatch operations',
+                url: '/handbook/people/hogpatch-operations',
+            },
+            {
                 name: 'Merch store',
                 url: '/handbook/company/merch-store',
             },
@@ -1175,6 +1064,70 @@ export const handbookSidebar = [
         name: 'PostHog.com',
         url: '',
         children: [
+            {
+                name: 'Developing the website',
+                url: '/handbook/engineering/posthog-com/developing-the-website',
+            },
+            {
+                name: 'How PostHog.com works',
+                url: '/handbook/engineering/posthog-com/how-posthog-website-works',
+            },
+            {
+                name: 'Designing PostHog.com',
+                url: '/handbook/brand/designing-posthog-website',
+            },
+            {
+                name: 'Technical architecture',
+                url: '/handbook/engineering/posthog-com/technical-architecture',
+            },
+            {
+                name: 'MDX setup',
+                url: '/handbook/engineering/posthog-com/mdx-setup',
+            },
+            {
+                name: 'MDX components',
+                url: '/handbook/engineering/posthog-com/markdown',
+            },
+            {
+                name: 'Uploading assets',
+                url: '/handbook/engineering/posthog-com/assets',
+            },
+            {
+                name: 'Merch store',
+                url: '/handbook/engineering/posthog-com/merch-store',
+            },
+            {
+                name: 'Posting a new job',
+                url: '/handbook/engineering/posthog-com/jobs',
+            },
+            {
+                name: 'Managing cool tech jobs',
+                url: '/handbook/engineering/posthog-com/cool-tech-jobs',
+            },
+            {
+                name: 'Managing small teams',
+                url: '/handbook/engineering/posthog-com/small-teams',
+            },
+            {
+                name: 'Adding a team member',
+                url: '/handbook/engineering/posthog-com/add-team-member',
+            },
+            {
+                name: 'Managing the company roadmap',
+                url: '/handbook/engineering/posthog-com/roadmap',
+            },
+            {
+                name: 'Changelog entries',
+                url: '/handbook/engineering/posthog-com/changelog',
+            },
+            {
+                name: 'Custom presentations',
+                url: '/handbook/engineering/posthog-com/presentations',
+            },
+            {
+                name: 'Editing API docs',
+                url: '/handbook/engineering/posthog-com/api-docs',
+            },
             {
                 name: 'Community',
                 url: '',
@@ -1190,72 +1143,6 @@ export const handbookSidebar = [
                     {
                         name: 'Profiles',
                         url: '/handbook/community/profiles',
-                    },
-                ],
-            },
-            {
-                name: 'Designing PostHog.com',
-                url: '/handbook/brand/designing-posthog-website',
-            },
-            {
-                name: 'Developing PostHog.com',
-                url: '',
-                children: [
-                    {
-                        name: 'Developing the website',
-                        url: '/handbook/engineering/posthog-com/developing-the-website',
-                    },
-                    {
-                        name: 'How PostHog.com works',
-                        url: '/handbook/engineering/posthog-com/how-posthog-website-works',
-                    },
-                    {
-                        name: 'Technical architecture',
-                        url: '/handbook/engineering/posthog-com/technical-architecture',
-                    },
-                    {
-                        name: 'MDX setup',
-                        url: '/handbook/engineering/posthog-com/mdx-setup',
-                    },
-                    {
-                        name: 'MDX components',
-                        url: '/handbook/engineering/posthog-com/markdown',
-                    },
-                    {
-                        name: 'Uploading assets',
-                        url: '/handbook/engineering/posthog-com/assets',
-                    },
-                    {
-                        name: 'Merch store',
-                        url: '/handbook/engineering/posthog-com/merch-store',
-                    },
-                    {
-                        name: 'Posting a new job',
-                        url: '/handbook/engineering/posthog-com/jobs',
-                    },
-                    {
-                        name: 'Managing cool tech jobs',
-                        url: '/handbook/engineering/posthog-com/cool-tech-jobs',
-                    },
-                    {
-                        name: 'Managing small teams',
-                        url: '/handbook/engineering/posthog-com/small-teams',
-                    },
-                    {
-                        name: 'Adding a team member',
-                        url: '/handbook/engineering/posthog-com/add-team-member',
-                    },
-                    {
-                        name: 'Managing the company roadmap',
-                        url: '/handbook/engineering/posthog-com/roadmap',
-                    },
-                    {
-                        name: 'Changelog entries',
-                        url: '/handbook/engineering/posthog-com/changelog',
-                    },
-                    {
-                        name: 'Editing API docs',
-                        url: '/handbook/engineering/posthog-com/api-docs',
                     },
                 ],
             },
@@ -1368,6 +1255,29 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/selling-via-aws',
                     },
                     {
+                        name: 'Expansion, cross-sell & retention',
+                        url: '/handbook/growth/sales/expansion-and-retention',
+                        children: [
+                            {
+                                name: 'Account planning',
+                                url: '/handbook/growth/sales/account-planning',
+                            },
+                            {
+                                name: 'Cross-selling',
+                                url: '/handbook/growth/sales/cross-selling',
+                            },
+                            {
+                                name: 'Cross sell motions',
+                                url: '/handbook/growth/sales/cross-sell-motions',
+                            },
+                        ],
+                    },
+
+                    {
+                        name: 'Utilization by business type',
+                        url: '/handbook/growth/sales/utilization-by-business-type',
+                    },
+                    {
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                         children: [
@@ -1444,6 +1354,10 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding program',
                         url: '/handbook/onboarding/onboarding-program',
+                    },
+                    {
+                        name: 'Onboarding Pipeline',
+                        url: '/handbook/onboarding/onboarding-pipeline',
                     },
                     {
                         name: 'Onboarding tracking',
@@ -2623,7 +2537,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Data egress',
-                                    url: '/docs/self-host/configure/data-egress',
+                                    url: '/docs/self-host/configure/egress',
                                 },
                             ],
                         },
@@ -3436,6 +3350,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/scheduled-flag-changes',
                     icon: 'IconClock',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Evaluation environments',
+                    url: '/docs/feature-flags/evaluation-environments',
+                    icon: 'IconDecisionTree',
+                    color: 'red',
                 },
             ],
         },

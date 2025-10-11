@@ -526,7 +526,7 @@ function ReaderViewContent({
     showQuestions = true,
 }) {
     const { openNewChat, compact } = useApp()
-    const { appWindow } = useWindow()
+    const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
 
@@ -740,7 +740,7 @@ function ReaderViewContent({
                                         <h3 id="squeak-questions" className="mb-4">
                                             Community questions
                                         </h3>
-                                        <Questions slug={appWindow?.path} />
+                                        <Questions slug={appWindow?.path} parentName={activeInternalMenu?.name} />
                                     </div>
                                 )}
                                 {showSurvey && (

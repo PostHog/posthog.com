@@ -57,7 +57,7 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 ### Your personal card
 
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. Please avoid using your personal card over your Brex card. The company get points which we use towards billboard campaigns, we also can't process lots of reimbursement requests for people looking to get their own points. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
+- If you do need to use your personal card, please use the request reimbursement function in Brex.
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
@@ -109,6 +109,8 @@ For monitors, we suggest you pick one that supports 4K. This means you'll get a 
 
 We would expect to spend $250 to $350 on a monitor. Philips have a [great value model](https://www.amazon.com/Philips-276E8VJSB-3840x2160-UltraNarrow-DispalyPort/dp/B07JXCR263). It comes with an HDMI cable, but you'll need an adaptor to USB-C with most Apple laptops.
 
+For engineers (because of the high density screen) and sales people (because of the in built high quality webcam and microphone), we recommend a Mac Studio Display ([Amazon US](https://www.amazon.com/Apple-Studio-Display-Standard-Tilt-Adjustable/dp/B0DZDDWSBG/ref=sr_1_1_sspa), [Amazon UK](https://www.amazon.co.uk/dp/B0DZDC2Q1N?tag=georiot-trd-21&th=1&ascsubtag=dcw-gb-1631306176175088319-21&geniuslink=true), as long as you can get them for < $2k. If you buy one and leave PostHog, we do expect you to ship these back.
+
 ### Keyboard, mouse, and laptop stand
 
 We'd encourage you to buy a keyboard, mouse and laptop stand.
@@ -123,7 +125,7 @@ We find that most people already have a desk and chair that are comfortable.
 
 If you do not, then buy yourself one within our set budget. We aren't yet at the stage where we can afford the latest and greatest here, but we will aim to be reasonable. For example, if you would like a standing desk, buy one you consider to be good value.
 
-We would expect to spend $250 on a desk, and around the same for a chair. If you wish, you can switch out the chair for a walking treadmill instead. 
+We would expect to spend $300 on a regular desk or up to $800 for a good quality standing desk, if you regularly work while standing, and around $500 for a chair. If you wish, you can switch out the chair for a walking treadmill instead. 
 
 If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture, which you might find better value than buying something new but of lower quality.
 

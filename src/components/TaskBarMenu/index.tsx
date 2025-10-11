@@ -279,7 +279,7 @@ export default function TaskBarMenu() {
                     /> */}
                     <div className="relative mr-1">
                         <OSButton
-                            variant="secondary"
+                            variant="primary"
                             size="md"
                             asLink
                             to={posthogInstance ? posthogInstance.replace(/"/g, '') : 'https://app.posthog.com/signup'}

@@ -41,14 +41,14 @@ Customer must meet the following criteria to get a refund:
 
 ## Repeat incidents
 
-For first incident response, we follow standard policy above and provide guidance for preventing future incidents (e.g. ask them to implement billing limits).
+For first incident response, we follow standard policy above and provide guidance for preventing future incidents (e.g. ask them to implement billing limits)
 
 Subsequent incidents:
-
--   Check if the user followed PostHog’s recommendations in the previous incident. For example, if a billing limit was suggested to prevent future spikes, was it implemented?
--   We issue up to 50% refund or up to 100% credits that can apply on future usage depending on the issue severity and previous actions taken to prevent spikes.
--   Provide warning that in the event that this happens again PostHog may not be able to support. Remind them of the measures necessary to take to avoid such issues going forward.
--   After 2 incidents, further refunds for similar issues may be declined unless there are extraordinary circumstances.
+- First, check if the customer has acted on PostHog’s earlier recommendations.
+- If they have not yet fixed the issue, refunds are conditional. Give them a window to implement the fix, and offer a partial refund (up to 50%) while they address it.
+- If they have made good faith fixes but the issue still occurred, then we issue a full or partial refund depending on severity.
+- Always warn that repeated incidents may not be refunded again.
+- For third incident and beyond, refunds may be declined unless there are extraordinary circumstances (e.g. a PostHog bug).
 
 ## Request channels and processing
 
@@ -130,6 +130,21 @@ You need Support specialist level access to Stripe, ask Simon for access.
 4. Specify the refund amount (default is full refund, remember to change as needed using instructions above)
 5. Add brief comment to explain the reason and link to Zendesk ticket
 6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.
+
+### Fixed fee product refunds
+For fixed-fee subscriptions (e.g. Boost plan), Stripe’s default proration behavior can cause double crediting.
+
+Example: A customer subscribes to a fixed fee add on by accident and requests a refund. After we issue a credit note, they cancel their subscription. When this happens, Stripe automatically creates a prorated “unused time” line item on the next upcoming invoice. This results in the customer being credited twice:
+- once via the manual credit note
+- again via the prorated unused time credit
+
+To prevent overcrediting, we need to manually delete the pending invoice item that Stripe creates after the subscription cancellation.
+
+Steps:
+1. Find customer profile in Stripe (you can search by organization id)
+2. Locate the proration adjustment under Pending Invoice Items.
+3. Manually delete the line item.
+4. Add a note in Zendesk documenting that the proration line was removed to avoid double crediting.
 
 ### Spotting suspicious stuff - watch out for:
 

@@ -3,13 +3,19 @@ title: A primer on using GitHub at PostHog
 showTitle: true
 ---
 
-<blockquote><p>If you’re new to GitHub, it can be a little confusing. (Heck, I’ve been using GitHub for years and it’s <em>still</em> confusing.) It doesn’t have the best search and notifications can get out of hand — and in general, it can be really intimidating to join a company that uses a tool you’ve never used before as its primary means of communication.</p><p>I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team's organization on GitHub.</p><p><em>- <a href="/cory">Cory Watilo</a>, Lead Designer</em></p><p>P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this <a href="/handbook/company/new-to-github#filing-an-issue">later in the article</a>!</p></blockquote>
+> If you’re new to GitHub, it can be a little confusing. (Heck, I’ve been using GitHub for years and it’s _still_ confusing.) It doesn’t have the best search and notifications can get out of hand — and in general, it can be really intimidating to join a company that uses a tool you’ve never used before as its primary means of communication.
+>
+> I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team's organization on GitHub.
+>
+> &emdash; <TeamMember name="Cory Watilo" photo />
+>
+>     P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this [later in the article](#filing-an-issue)!
 
 ## Key concepts
 
 At its core, GitHub essentially hosts code that helps keep everyone in sync. Each team member can download this code, make changes, and upload their changes back into GitHub.
 
-Code is stored in a “repository” (or “repo” for short) - it’s like a folder for code. (As of writing this, PostHog has [333 repos](https://github.com/posthog) - like the code for [posthog.com](http://posthog.com) and even a repo for internal company discussions that doesn’t actually contain any code.) This is because each repo comes with a handful of collaboration tools. Here’s a list of the key concepts on GitHub:
+Code is stored in a “repository” (or “repo” for short) - it’s like a folder for code. (As of writing this, PostHog has [401 repos](https://github.com/posthog) - like the code for [posthog.com](http://posthog.com) and even a repo for internal company discussions that doesn’t actually contain any code.) This is because each repo comes with a handful of collaboration tools. Here’s a list of the key concepts on GitHub:
 
 1. Discussions
 2. Issues
@@ -19,11 +25,11 @@ Code is stored in a “repository” (or “repo” for short) - it’s like a f
 
 You can take any task linearly from start to finish using this set of tools, though you don’t have to use them all. (For example, PostHog doesn’t really use Discussions, and Projects are only used by certain teams.) But if you wanted to use the whole suite, here’s how it would work:
 
-1. If you decide you want to change something in the product or website, you could start a *discussion* about it. This is like a casual forum-style conversation. (Again, we don't use these.
-2. A discussion can be converted to an *issue*, which is a formalized proposal of the discussion.) People can reply to these posts with feedback.
-3. In my workflow, this is a good time to add the issue to a *project*, because it’s something you want to track through to completion. Project boards are a great way to stack-rank tasks (issues), because you can order them in a way that makes sense based upon the project and see everything in one place. This helps keep a team in sync.
-4. A *pull request* (also known as a *PR*) references the code that’s changed to solve an *issue*. It’s a way to summarize the changes in code and explain them so others can review them.
-5. *Actions* usually occur after you commit code. It makes sure things are working as expected (and that whoever wrote the code didn’t break anything). (Don't worry about these for now.)
+1. If you decide you want to change something in the product or website, you could start a _discussion_ about it. This is like a casual forum-style conversation. (Again, we don't use these.
+2. A discussion can be converted to an _issue_, which is a formalized proposal of the discussion.) People can reply to these posts with feedback.
+3. In my workflow, this is a good time to add the issue to a _project_, because it’s something you want to track through to completion. Project boards are a great way to stack-rank tasks (issues), because you can order them in a way that makes sense based upon the project and see everything in one place. This helps keep a team in sync.
+4. A _pull request_ (also known as a _PR_) references the code that’s changed to solve an _issue_. It’s a way to summarize the changes in code and explain them so others can review them.
+5. _Actions_ usually occur after you commit code. It makes sure things are working as expected (and that whoever wrote the code didn’t break anything). (Don't worry about these for now.)
 
 You can use any of these features on their own, or use them together. Primarily, PostHog uses issues, pull requests, and actions. If you’re not super familiar with GitHub, just focus on issues and pull requests, as that’s where the bulk of the interesting work happens.
 
@@ -74,26 +80,26 @@ It can take some getting used to if you’ve never written Markdown syntax. Fort
 
 **Tips for faster writing**
 
-- You can use keyboard shortcuts like you would in a word processor.
-- Quickly insert a link by copying it to your clipboard, selecting the word or phrase you’d like to link, then using `Cmd + V`. GitHub will automatically convert the text into a link.
-- Create a checklist by typing `- [ ] Your text`. You (and others) can check things off of this list after the issue/PR is created.
-- Paste an image from your clipboard directly into an issue/PR. It’s much faster than attaching from your computer. For example, if you’re screenshotting something on a Mac, use `Cmd + Shift + Ctrl + 4` to select part of your screen, then `Cmd + V` into an issue. GitHub will upload the image automatically and add the Markdown embed code for you. Voila!
+-   You can use keyboard shortcuts like you would in a word processor.
+-   Quickly insert a link by copying it to your clipboard, selecting the word or phrase you’d like to link, then using `Cmd + V`. GitHub will automatically convert the text into a link.
+-   Create a checklist by typing `- [ ] Your text`. You (and others) can check things off of this list after the issue/PR is created.
+-   Paste an image from your clipboard directly into an issue/PR. It’s much faster than attaching from your computer. For example, if you’re screenshotting something on a Mac, use `Cmd + Shift + Ctrl + 4` to select part of your screen, then `Cmd + V` into an issue. GitHub will upload the image automatically and add the Markdown embed code for you. Voila!
 
 ## Creating a pull request
 
-If you see something minor on [posthog.com](http://posthog.com) (in Handbook or Docs) that needs to be updated, you can easily propose the change by creating a pull request _without_ having to run the full codebase on your computer. (This is a great way to contribute if you're in a less-technical role.) To make a small change, find the *Edit this page* link within the Handbook or Docs which will take you to GitHub where you’ll see the source file. From there, click the pencil icon. (Our Handbook and Docs use the same Markdown format as GitHub’s issue and PR editor, so this should look familiar!)
+If you see something minor on [posthog.com](http://posthog.com) (in Handbook or Docs) that needs to be updated, you can easily propose the change by creating a pull request _without_ having to run the full codebase on your computer. (This is a great way to contribute if you're in a less-technical role.) To make a small change, find the _Edit this page_ link within the Handbook or Docs which will take you to GitHub where you’ll see the source file. From there, click the pencil icon. (Our Handbook and Docs use the same Markdown format as GitHub’s issue and PR editor, so this should look familiar!)
 
-When you’re done making your changes, be sure to preview what the changes look like (to make sure formatting is accurate). At the bottom of the page, you’ll see a section called *Commit changes*. Here’s how to use it:
+When you’re done making your changes, be sure to preview what the changes look like (to make sure formatting is accurate). At the bottom of the page, you’ll see a section called _Commit changes_. Here’s how to use it:
 
-- Briefly describe the change you made in the top line
-- Optionally add a more detailed description
-- Choose “Create a new branch...” and optionally give it a name (but not required)
+-   Briefly describe the change you made in the top line
+-   Optionally add a more detailed description
+-   Choose “Create a new branch...” and optionally give it a name (but not required)
 
-Clicking *Propose changes* will create a pull request!
+Clicking _Propose changes_ will create a pull request!
 
 ### "Closing keywords"
 
-If you’re changing code to address an open issue, you can tell GitHub to automatically close the issue when the PR is merged by using a closing keyword. For example, in your PR description, you can write “Closes #123” (where #123 is an issue number). 
+If you’re changing code to address an open issue, you can tell GitHub to automatically close the issue when the PR is merged by using a closing keyword. For example, in your PR description, you can write “Closes #123” (where #123 is an issue number).
 
 ### Requesting a review
 

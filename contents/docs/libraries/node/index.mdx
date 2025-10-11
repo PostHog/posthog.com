@@ -36,6 +36,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
+| `evaluation_environments`     | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. | `undefined`                |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 

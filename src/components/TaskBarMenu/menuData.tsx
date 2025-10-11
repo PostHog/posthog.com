@@ -414,12 +414,39 @@ export function useMenuData(): MenuType[] {
             items: mergedDocsMenu(allProducts),
         },
         {
-            trigger: 'Library',
+            trigger: 'Community',
             items: [
                 {
                     type: 'item',
                     label: 'PostHog newspaper',
                     link: '/community',
+                    icon: <Icons.IconNewspaper className="size-4 text-orange" />,
+                },
+                {
+                    type: 'item' as const,
+                    label: 'Forums',
+                    link: '/questions',
+                    icon: <Icons.IconMessage className="size-4 text-green" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Merch store',
+                    link: '/merch',
+                    icon: <Icons.IconStore className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Cool tech jobs',
+                    link: '/cool-tech-jobs',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Content',
+                    disabled: true,
                 },
                 {
                     type: 'item',
@@ -430,11 +457,6 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Blog',
                     link: '/blog',
-                },
-                {
-                    type: 'item',
-                    label: "Everything we've learned",
-                    disabled: true,
                 },
                 {
                     type: 'item',
@@ -567,18 +589,6 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: [
-                {
-                    type: 'item',
-                    label: 'Merch store',
-                    link: '/merch',
-                    icon: <Icons.IconStore className="size-4 text-purple" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Cool tech jobs',
-                    link: '/cool-tech-jobs',
-                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
-                },
                 {
                     type: 'item',
                     label: 'DeskHog',
@@ -860,12 +870,6 @@ export const DocsItemsEnd = [
         label: 'Tracks',
         link: '/tracks',
         icon: <Icons.IconGraduationCap className="size-4 text-black" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Forums',
-        link: '/questions',
-        icon: <Icons.IconMessage className="size-4 text-green" />,
     },
 ]
 

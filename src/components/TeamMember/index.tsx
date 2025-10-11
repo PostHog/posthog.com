@@ -18,6 +18,7 @@ export const TeamMemberLink = ({
     photo = false,
     showOnlyFirstName = false,
     children,
+    href,
 }: {
     firstName: string
     lastName?: string
@@ -31,19 +32,21 @@ export const TeamMemberLink = ({
     photo?: boolean
     showOnlyFirstName?: boolean
     children?: JSX.Element
+    href?: string
 }): JSX.Element => {
     const displayName = showOnlyFirstName ? firstName : [firstName, lastName].filter(Boolean).join(' ')
     const avatarUrl = avatar?.formats?.thumbnail?.url
 
     return (
         <span className="relative inline-block">
-            <Link to={squeakId ? `/community/profiles/${squeakId}` : ''} state={{ newWindow: true }}>
+            <Link to={href || (squeakId ? `/community/profiles/${squeakId}` : '')} state={{ newWindow: true }}>
                 {photo && (
                     <span
-                        className={`invisible max-h-4 inline-flex items-center ${photo
-                            ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                            : 'border-b border-primary border-dashed'
-                            }`}
+                        className={`invisible max-h-4 inline-flex items-center ${
+                            photo
+                                ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                                : 'border-b border-primary border-dashed'
+                        }`}
                     >
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
                             {avatarUrl ? (
@@ -63,10 +66,11 @@ export const TeamMemberLink = ({
                     </span>
                 )}
                 <span
-                    className={`inline-flex items-center ${photo
-                        ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                        : 'border-b border-primary border-dashed'
-                        } ${className}`}
+                    className={`inline-flex items-center ${
+                        photo
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                            : 'border-b border-primary border-dashed'
+                    } ${className}`}
                 >
                     {photo ? (
                         <>
@@ -93,8 +97,9 @@ export const TeamMemberLink = ({
                                     {avatarUrl ? (
                                         <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-dark border border-primary">
                                             <div
-                                                className={`bg-${color ? color : 'red'
-                                                    } rounded-full overflow-hidden w-full aspect-square`}
+                                                className={`bg-${
+                                                    color ? color : 'red'
+                                                } rounded-full overflow-hidden w-full aspect-square`}
                                             >
                                                 <img
                                                     src={avatarUrl}
@@ -138,10 +143,8 @@ export const TeamMemberLink = ({
     )
 }
 
-export const FutureTeamMember = (): JSX.Element => (
-    <a href="/careers">
-        <TeamMemberLink firstName="You?" photo showOnlyFirstName />
-    </a>
+export const FutureTeamMember = ({ href }: { href: string }): JSX.Element => (
+    <TeamMemberLink firstName="You?" photo showOnlyFirstName href={href || '/careers'} />
 )
 
 export default function TeamMember({
