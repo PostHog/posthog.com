@@ -113,3 +113,11 @@ export const slugifyTeamName = (name: string): string => {
         remove: /and/,
     })
 }
+
+export const removeHashFromUrl = (url: string): string => {
+    return url.replace(/#.*/, '')
+}
+
+export const createUrlWithHash = (baseUrl: string, hash: string): string => {
+    return `${removeHashFromUrl(baseUrl)}#${hash}`
+}
