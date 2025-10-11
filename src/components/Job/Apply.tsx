@@ -224,8 +224,7 @@ const Form = ({ onSubmit, info, id }: { onSubmit: () => void; info: any; id: str
     return (
         <div>
             <h4 className="!text-lg mb-0">(Now for the fun part...)</h4>
-            <p>Just fill out this painless form and we'll get back to you within a few days. Thanks in advance!</p>
-            {/*             
+            <p>Just fill out this painless form and we'll get back to you within a few days. After you submit your application, you will receive an email acknowledging receipt. (If you do not receive this email, you can assume we did not receive your application, sadly - please try submitting it again.) Thanks in advance! </p>
             <p className="opacity-50 text-sm">
                 <span className="font-bold">Bolded fields</span> are required
             </p> 
