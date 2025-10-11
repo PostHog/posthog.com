@@ -24,9 +24,9 @@ export const productAnalytics = {
     colorSecondary: 'sky-blue',
     category: 'analytics',
     seo: {
-        title: 'Product analytics - PostHog',
+        title: 'Product Analytics – Understand your product with PostHog',
         description:
-            'PostHog is the only product analytics platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects replays, experiments, feature flags, and more for full product insight.',
     },
     overview: {
         title: 'Product analytics with autocapture',

@@ -70,8 +70,8 @@ export default function ContactSales({ location }) {
                 }}
             />
             <SEO
-                title="Talk to a human - PostHog"
-                description="PostHog is self-serve, but you can talk to a real person if you need to!"
+                title="Talk to a human – Book a demo with PostHog"
+                description="PostHog is self-serve, but our team is here if you need us. Book a demo to get setup help, discuss your technical requirements, or see features in action."
                 image={`/images/og/talk-to-a-human.png`}
             />
             <ScrollArea>
