@@ -17,9 +17,10 @@ const getBadge = (questionProfileID: string, replyProfileID: string) => {
 type RepliesProps = {
     expanded: boolean
     setExpanded: (expanded: boolean) => void
+    isInForum?: boolean
 }
 
-export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
+export const Replies = ({ expanded, setExpanded, isInForum = false }: RepliesProps) => {
     const { user } = useUser()
     const {
         question: { replies, resolvedBy, profile },
@@ -28,11 +29,17 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
     const isOP = profile?.data?.id === user?.profile?.id
 
     return replies && replies.data.length > 0 ? (
-        <ul className="ml-5 !mb-0 p-0 list-none">
-            {expanded || replies.data.length < 3 ? (
-                <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} isOP={isOP} />
+        <ul className={`${isInForum ? '' : 'ml-5'} !mb-0 p-0 list-none`}>
+            {expanded || replies.data.length < 3 || (isInForum && !resolvedBy?.data?.id) ? (
+                <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} isOP={isOP} isInForum={isInForum} />
             ) : (
-                <Collapsed replies={replies} setExpanded={setExpanded} resolvedBy={resolvedBy?.data?.id} isOP={isOP} />
+                <Collapsed
+                    replies={replies}
+                    setExpanded={setExpanded}
+                    resolvedBy={resolvedBy?.data?.id}
+                    isOP={isOP}
+                    isInForum={isInForum}
+                />
             )}
         </ul>
     ) : null
@@ -42,9 +49,10 @@ type CollapsedProps = {
     setExpanded: (expanded: boolean) => void
     replies: StrapiData<ReplyData[]>
     resolvedBy: number
+    isInForum: boolean
 }
 
-const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
+const Collapsed = ({ setExpanded, replies, resolvedBy, isInForum }: CollapsedProps) => {
     const reply = replies?.data?.find((reply) => reply?.id === resolvedBy) || replies.data[replies.data.length - 1]
     const replyCount = replies.data.length
     const maxAvatars = Math.min(replyCount - 1, 3)
@@ -73,7 +81,11 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
     return (
         <>
-            <li className="pr-[5px] pl-[30px] !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0">
+            <li
+                className={`pr-[5px] pl-[30px] !mb-0 relative  ${
+                    isInForum ? '' : 'border-l border-solid border-primary squeak-left-border before:border-l-0'
+                }`}
+            >
                 <div className="pb-8 flex items-center space-x-4">
                     <div className="flex items-center">
                         {avatars.map((avatar, index) => {
@@ -85,10 +97,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                         })}
                     </div>
 
-                    <button
-                        className="text-red dark:text-yellow text-base font-semibold"
-                        onClick={() => setExpanded(true)}
-                    >
+                    <button className="text-sm font-semibold hover:underline" onClick={() => setExpanded(true)}>
                         View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
                     </button>
                 </div>
@@ -96,9 +105,11 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
             <li
                 key={reply?.id}
-                className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0`}
+                className={`pr-[5px] pl-[30px] !mb-0 relative ${
+                    isInForum ? '' : 'border-l border-solid border-primary squeak-left-border before:border-l-0'
+                }`}
             >
-                <Reply reply={reply} badgeText={badgeText} />
+                <Reply reply={reply} badgeText={badgeText} isInForum={isInForum} />
             </li>
         </>
     )
@@ -106,6 +117,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
 type ExpandedProps = {
     replies: StrapiData<ReplyData[]>
+    isInForum: boolean
 }
 
 const getComunityClasses = (reply, isResolution) => {
@@ -117,7 +129,7 @@ const getComunityClasses = (reply, isResolution) => {
     }`
 }
 
-const Expanded = ({ replies }: ExpandedProps) => {
+const Expanded = ({ replies, isInForum }: ExpandedProps) => {
     const {
         question: {
             profile: {
@@ -133,12 +145,13 @@ const Expanded = ({ replies }: ExpandedProps) => {
                 return (
                     <li
                         key={reply.id}
-                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0 pb-4 ${getComunityClasses(
-                            reply,
-                            resolvedBy?.data?.id === reply.id
-                        )}`}
+                        className={`pr-[5px] !mb-0 relative pb-4 border-primary ${
+                            isInForum
+                                ? 'border-t pt-4 px-5'
+                                : 'border-l border-solid squeak-left-border before:border-l-0 pl-[30px]'
+                        } ${getComunityClasses(reply, resolvedBy?.data?.id === reply.id)}`}
                     >
-                        <Reply reply={reply} badgeText={badgeText} />
+                        <Reply reply={reply} badgeText={badgeText} isInForum={isInForum} />
                     </li>
                 )
             })}

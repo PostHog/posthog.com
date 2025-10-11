@@ -4,19 +4,27 @@ import { IconCheck, IconX } from '@posthog/icons'
 import RichText from './RichText'
 import { useFormik } from 'formik'
 import transformValues from '../util/transformValues'
+import OSButton from 'components/OSButton'
 
 export default function EditWrapper({
     data,
     onSubmit,
     children,
     type,
+    onEditingChange,
 }: {
     data: any
     onSubmit: () => void
     children: (props: { setEditing: (editing: boolean) => void }) => React.ReactNode
     type: 'reply' | 'question'
+    onEditingChange?: (editing: boolean) => void
 }): JSX.Element {
     const [editing, setEditing] = useState(false)
+
+    const handleSetEditing = (value: boolean) => {
+        setEditing(value)
+        onEditingChange?.(value)
+    }
     const [loading, setLoading] = useState(false)
     const { user, getJwt } = useUser()
     const body = data?.attributes?.body
@@ -48,7 +56,7 @@ export default function EditWrapper({
             )
             await onSubmit()
             setLoading(false)
-            setEditing(false)
+            handleSetEditing(false)
         },
     })
 
@@ -64,26 +72,22 @@ export default function EditWrapper({
                             onSubmit={submitForm}
                         />
                     </div>
-                    <div className="flex items-baseline justify-end space-x-1">
-                        <button
-                            onClick={() => setEditing(false)}
-                            className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                        >
-                            <IconX className="size-4 mr-1 text-red inline-block" />
-                            Cancel
-                        </button>
-                        <button
+                    <div className="flex items-baseline space-x-1">
+                        <OSButton
                             disabled={loading || values.body?.trim() === body?.trim()}
                             onClick={submitForm}
-                            className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50 disabled:opacity-60 disabled:!bg-transparent disabled:cursor-not-allowed"
+                            variant="primary"
+                            size="md"
                         >
-                            <IconCheck className="size-4 mr-1 text-green inline-block" />
                             {loading ? 'Saving...' : 'Save'}
-                        </button>
+                        </OSButton>
+                        <OSButton onClick={() => handleSetEditing(false)} variant="secondary" size="md">
+                            Cancel
+                        </OSButton>
                     </div>
                 </>
             ) : (
-                children({ setEditing })
+                children({ setEditing: handleSetEditing })
             )}
         </div>
     )

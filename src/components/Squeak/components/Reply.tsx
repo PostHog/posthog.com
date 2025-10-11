@@ -32,6 +32,7 @@ type ReplyProps = {
     reply: StrapiRecord<ReplyData>
     badgeText?: string | null
     className?: string
+    isInForum?: boolean
 }
 
 const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
@@ -281,7 +282,7 @@ const VoteButton = ({
     )
 }
 
-export default function Reply({ reply, badgeText }: ReplyProps) {
+export default function Reply({ reply, badgeText, isInForum = false }: ReplyProps) {
     const {
         id,
         attributes: { body, createdAt, profile, publishedAt, meta, edits },
@@ -356,7 +357,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             >
                                 <div className="mr-2 relative ml-[-2px]">
                                     <Avatar
-                                        className="w-[25px] h-[25px] rounded-full"
+                                        className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
                                         image={getAvatarURL(profile?.data?.attributes)}
                                         color={profile?.data.attributes.color}
                                     />
@@ -383,7 +384,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`w-[25px] h-[25px] rounded-full ${
+                                className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
@@ -420,7 +421,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 )}
             </div>
 
-            <div className="border-l-0 ml-[33px] pl-0 pb-1">
+            <div className={`border-l-0 ${isInForum ? 'ml-[calc(33px_+_1.25rem)]' : 'ml-[33px]'} pl-0 pb-1`}>
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&

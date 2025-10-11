@@ -1,10 +1,11 @@
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { User, useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
 import { IconBell } from '@posthog/icons'
 import SideModal from 'components/Modal/SideModal'
 import Authentication from './Authentication'
+import OSButton from 'components/OSButton'
 
 export const Button = ({
     className,
@@ -15,18 +16,13 @@ export const Button = ({
     subscribed: boolean | null
     handleSubscribe: () => Promise<void>
 }) => (
-    <button
-        className={`flex rounded-sm p-1 ${
-            !subscribed
-                ? 'relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]'
-                : 'bg-red text-white dark:text-white'
-        } ${className}`}
+    <OSButton
         onClick={handleSubscribe}
-    >
-        <span className={`w-6 h-6 rotate-6 ${subscribed ? 'animate-wiggle origin-top' : ''}`}>
-            <IconBell />
-        </span>
-    </button>
+        className={subscribed ? 'animate-wiggle origin-top !border-green !bg-green !text-white' : ''}
+        hover="border"
+        icon={<IconBell />}
+        size="md"
+    />
 )
 
 export default function SubscribeButton({
@@ -82,22 +78,24 @@ export default function SubscribeButton({
 
                 <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
             </SideModal>
+
             <Tooltip
-                content={() => (
-                    <div style={{ maxWidth: 320 }}>
-                        {user
-                            ? `Email notifications: ${subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'}`
-                            : 'Sign in to subscribe'}
-                    </div>
-                )}
+                trigger={
+                    <span className="relative">
+                        <Button
+                            subscribed={subscribed}
+                            handleSubscribe={handleSubscribe}
+                            className={`${className} p-0 relative font-bold`}
+                        />
+                    </span>
+                }
+                delay={0}
             >
-                <span className="relative">
-                    <Button
-                        subscribed={subscribed}
-                        handleSubscribe={handleSubscribe}
-                        className={`${className} p-0 relative font-bold`}
-                    />
-                </span>
+                <div style={{ maxWidth: 320 }}>
+                    {user
+                        ? `Email notifications: ${subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'}`
+                        : 'Sign in to subscribe'}
+                </div>
             </Tooltip>
         </>
     ) : null
