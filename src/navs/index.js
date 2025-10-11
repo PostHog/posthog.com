@@ -664,6 +664,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Changelog',
+                url: '/handbook/content/changelog',
+            },
+            {
                 name: 'Writing for PostHog',
                 url: '',
                 children: [
