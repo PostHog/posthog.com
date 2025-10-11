@@ -43,7 +43,7 @@ export const Authentication = ({
 
     return (
         <div data-scheme="primary" className="bg-primary">
-            {showProfile && <Avatar className="w-[40px] h-[40px] mr-[10px]" />}
+            {showProfile && <Avatar className="w-[40px] h-[40px]" />}
             {formValues && (
                 <div className="items-center border border-primary bg-accent rounded flex py-2 px-4 max-w-xl mb-2">
                     <div className="items-baseline flex flex-1 min-w-0 whitespace-nowrap overflow-hidden">

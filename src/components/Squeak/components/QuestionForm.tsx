@@ -165,7 +165,7 @@ function QuestionFormMain({
                 {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
-                            <div className="w-[40px] h-[40px] mr-[10px] float-left rounded-full overflow-hidden">
+                            <div className="w-[40px] h-[40px] float-left rounded-full overflow-hidden">
                                 <Avatar
                                     className="w-[40px] aspect-fill"
                                     image={getAvatarURL(user?.profile)}
