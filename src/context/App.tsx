@@ -1101,6 +1101,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 minimized: item === el ? false : el.minimized,
                 location: item === el ? location || el.location : el.location,
                 position: item === el ? position || el.position : el.position,
+                hidden: false,
             }))
         )
     }, [])
@@ -1291,7 +1292,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         const newWindow: AppWindow = {
             element,
-            zIndex: windows.length + 1,
+            zIndex: element.props.hidden ? windows.length : windows.length + 1,
             key: element.key,
             coordinates: location?.state?.coordinates || { x: 0, y: 0 },
             minimized: false,
@@ -1320,6 +1321,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
             location,
+            hidden: element.props.hidden ?? false,
         }
 
         // Adjust width if window extends beyond right edge
@@ -1440,7 +1442,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
-    const openStart = ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => {
+    const openStart = ({
+        subdomain,
+        initialTab,
+        hidden,
+    }: {
+        subdomain?: string
+        initialTab?: string
+        hidden?: boolean
+    }) => {
         addWindow(
             <Start
                 subdomain={subdomain}
@@ -1448,6 +1458,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 location={{ pathname: `start` }}
                 key="start"
                 newWindow
+                hidden={hidden}
             />
         )
     }
@@ -1843,6 +1854,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setPosthogInstance(instanceCookie)
             }
         }
+    }, [])
+
+    useEffect(() => {
+        openStart({ hidden: true })
     }, [])
 
     return (
