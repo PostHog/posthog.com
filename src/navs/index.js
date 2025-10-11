@@ -573,6 +573,10 @@ export const handbookSidebar = [
                 name: 'All hands topics',
                 url: '/handbook/exec/all-hands-topics',
             },
+            {
+                name: 'Growth review',
+                url: '/handbook/exec/growth-review',
+            },
         ],
     },
     {
@@ -928,18 +932,6 @@ export const handbookSidebar = [
         name: 'Growth',
         url: '',
         children: [
-            {
-                name: 'Growth reviews',
-                url: '/handbook/growth/growth-engineering/growth-sessions',
-            },
-            {
-                name: 'Pricing principles',
-                url: '/handbook/engineering/feature-pricing',
-            },
-            {
-                name: 'Revenue and forecasting',
-                url: '/handbook/engineering/revenue-and-forecasting',
-            },
             {
                 name: 'Product intents',
                 url: '/handbook/growth/growth-engineering/product-intents',
@@ -1492,6 +1484,10 @@ export const handbookSidebar = [
             {
                 name: 'Lifecycle analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
+            },
+            {
+                name: 'Pricing principles',
+                url: '/handbook/engineering/feature-pricing',
             },
         ],
     },
