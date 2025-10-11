@@ -525,7 +525,7 @@ export function Question(props: QuestionProps) {
                         </p>
                     )}
                     <div
-                        className={`flex items-center space-x-2 w-full ${isInForum ? 'pt-5 px-5' : ''} ${
+                        className={`flex items-center space-x-2 w-full ${isInForum ? 'pt-5 pl-5 pr-8' : ''} ${
                             !questionData.attributes.subject && '-mb-2'
                         }`}
                     >
@@ -595,7 +595,7 @@ export function Question(props: QuestionProps) {
                     <div className={archived ? 'opacity-50' : ''}>
                         <div
                             className={`pb-4 ${
-                                isInForum ? 'ml-10 pl-[30px]' : 'border-l border-primary ml-5 pl-[30px]'
+                                isInForum ? 'pl-[calc(2.5rem_+_30px)] pr-8' : 'border-l border-primary ml-5 pl-[30px]'
                             }`}
                         >
                             {questionData.attributes.subject && (
@@ -667,6 +667,7 @@ export function Question(props: QuestionProps) {
                             formType="reply"
                             reply={reply}
                             onSubmit={handleReply}
+                            isInForum={isInForum}
                         />
                     </div>
                 </div>

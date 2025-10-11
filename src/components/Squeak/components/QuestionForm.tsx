@@ -42,6 +42,7 @@ type QuestionFormMainProps = {
     showTopicSelector?: boolean
     disclaimer?: boolean
     autoFocus?: boolean
+    isInForum?: boolean
 }
 
 export const Select = ({
@@ -122,13 +123,14 @@ function QuestionFormMain({
     disclaimer = true,
     formType,
     autoFocus = true,
+    isInForum = false,
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
     const { status } = useAppStatus()
 
     return (
-        <div className="flex-1 mb-1">
+        <div className={`flex-1 mb-1 ${isInForum ? 'pr-8' : ''}`}>
             {title && <h2>{title}</h2>}
             <Formik
                 initialValues={{
@@ -263,6 +265,7 @@ type QuestionFormProps = {
     subject?: boolean
     disclaimer?: boolean
     autoFocus?: boolean
+    isInForum?: boolean
 }
 
 export const QuestionForm = ({
@@ -278,6 +281,7 @@ export const QuestionForm = ({
     subject,
     disclaimer,
     autoFocus,
+    isInForum = false,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -431,6 +435,7 @@ export const QuestionForm = ({
                             showTopicSelector={showTopicSelector}
                             formType={formType}
                             autoFocus={autoFocus}
+                            isInForum={isInForum}
                         />
                     ),
                     auth: (
