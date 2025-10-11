@@ -12,6 +12,10 @@ tags:
   - Product-market fit
 crosspost:
   - Blog
+seo: {
+  metaTitle: "Finding product-market fit (PMF): A 5 level framework",
+  metaDescription: "A framework for defining and finding product-market fit (PMF) in your startup"
+}
 ---
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 
