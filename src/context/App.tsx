@@ -123,6 +123,7 @@ interface AppContextType {
     desktopParams?: string
     copyDesktopParams: () => void
     desktopCopied: boolean
+    shareableDesktopURL: string
 }
 
 interface AppProviderProps {
@@ -281,6 +282,7 @@ export const Context = createContext<AppContextType>({
     desktopParams: undefined,
     copyDesktopParams: () => {},
     desktopCopied: false,
+    shareableDesktopURL: '',
 })
 
 export interface AppSetting {
@@ -1069,6 +1071,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             : undefined
     }, [windows, taskbarHeight, location, isSSR])
 
+    const shareableDesktopURL = useMemo(() => {
+        const url = `${location.origin}${desktopParams}`
+        return url
+    }, [location, desktopParams])
+
     const injectDynamicChildren = useCallback((menu: Menu) => {
         return menu?.map((item) => {
             const processedItem = { ...item }
@@ -1563,21 +1570,20 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const copyDesktopParams = () => {
         if (!desktopParams) return
         try {
-            const url = `${location.origin}${desktopParams}`
-            navigator.clipboard.writeText(url)
+            navigator.clipboard.writeText(shareableDesktopURL)
             setDesktopCopied(true)
             setTimeout(() => {
                 setDesktopCopied(false)
             }, 2000)
             addToast({
-                description: 'Saved desktop URL to clipboard',
+                description: 'Desktop link copied to clipboard',
                 duration: 2000,
             })
         } catch (error) {
             console.error(error)
             addToast({
                 error: true,
-                description: 'Failed to copy desktop URL to clipboard',
+                description: 'Failed to copy desktop link to clipboard',
                 duration: 2000,
             })
         }
@@ -2009,6 +2015,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 desktopParams,
                 copyDesktopParams,
                 desktopCopied,
+                shareableDesktopURL,
             }}
         >
             {children}
