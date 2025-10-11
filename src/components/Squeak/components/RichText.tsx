@@ -539,7 +539,7 @@ export default function RichText({
                 )}
 
                 <div className="flex justify-between items-center mt-2">
-                    <div>{typeof cta === 'function' ? cta() : cta}</div>
+                    <div className="flex gap-2 items-center">{typeof cta === 'function' ? cta() : cta}</div>
                     <aside className="flex items-center gap-2">
                         <span className="text-xs opacity-70">
                             {values[bodyKey]?.length} / {maxLength}

@@ -5,6 +5,12 @@
 @tailwind utilities;
 
 @layer components {
+    .markdown.prose {
+        img {
+            @apply m-0 rounded;
+        }
+    }
+
     .prose {
         @apply max-w-none;
 

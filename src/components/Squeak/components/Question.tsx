@@ -244,12 +244,12 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
 
 const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForum: boolean }) => {
     return (
-        <ul className="ml-5 !mb-0 p-0 list-none">
+        <ul className="list-none">
             <li
-                className={`pr-[5px] pl-[30px] pb-2 !mb-0 ${
+                className={`pb-2 !mb-0 ${
                     isInForum
-                        ? ''
-                        : 'border-l border-solid border-primary squeak-left-border relative before:border-l-0'
+                        ? 'px-5'
+                        : 'pr-[5px] pl-[30px] border-l border-solid border-primary squeak-left-border relative before:border-l-0'
                 }`}
             >
                 <Tooltip
@@ -259,7 +259,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                             <div className="flex items-center !text-black dark:!text-white">
                                 <div className="mr-2 relative">
                                     <Avatar
-                                        className="w-[25px] h-[25px] rounded-full"
+                                        className={` ${isInForum ? 'size-[40px]' : 'w-[25px] h-[25px]'} rounded-full`}
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
@@ -275,7 +275,13 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                         Max AI is our resident AI assistant. Double-check responses for accuracy.
                     </div>
                 </Tooltip>
-                <div className="ml-[33px] mt-1 py-2 px-4 bg-accent rounded-md border border-primary">{children}</div>
+                <div
+                    className={` mt-1 py-2 px-4 bg-accent rounded-md border border-primary ${
+                        isInForum ? 'ml-[calc(44px_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
+                    }`}
+                >
+                    {children}
+                </div>
             </li>
         </ul>
     )
@@ -321,7 +327,7 @@ const AskMaxLoading = ({ isInForum }: { isInForum: boolean }) => {
                     <Loading />
                 </div>
                 <div className="flex-1 font-normal question-content community-post-markdown !p-0">
-                    <p className="!mt-1 !mb-0 !pb-0">
+                    <p>
                         <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                     </p>
                     <p
@@ -409,7 +415,9 @@ const AskMax = ({
     ) : !confident ? (
         <MaxReply isInForum={isInForum}>
             <div className="text-secondary font-normal question-content community-post-markdown !p-0">
-                <p>Dang, we couldn't find anything this time. A community member will hopefully respond soon!</p>
+                <p className="!mb-0">
+                    Dang, we couldn't find anything this time. A community member will hopefully respond soon!
+                </p>
             </div>
         </MaxReply>
     ) : null
@@ -645,8 +653,11 @@ export function Question(props: QuestionProps) {
                         })}
                     </div>
                     <div
+                        {...(isInForum && { 'data-scheme': 'primary' })}
                         className={` pb-1 relative w-full ${
-                            isInForum ? 'border-t border-primary pt-4 pl-4' : 'ml-5 pl-8 pr-5 squeak-left-border'
+                            isInForum
+                                ? 'bg-primary border-t border-primary pt-4 pl-4'
+                                : 'ml-5 pl-8 pr-5 squeak-left-border'
                         } ${archived ? 'opacity-25' : ''}`}
                     >
                         <QuestionForm

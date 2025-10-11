@@ -64,27 +64,27 @@ export default function EditWrapper({
         <div>
             {editing ? (
                 <>
-                    <div className="bg-white dark:bg-accent-dark border border-primary rounded-md overflow-hidden mb-2">
-                        <RichText
-                            initialValue={values.body}
-                            setFieldValue={setFieldValue}
-                            values={values}
-                            onSubmit={submitForm}
-                        />
-                    </div>
-                    <div className="flex items-baseline space-x-1">
-                        <OSButton
-                            disabled={loading || values.body?.trim() === body?.trim()}
-                            onClick={submitForm}
-                            variant="primary"
-                            size="md"
-                        >
-                            {loading ? 'Saving...' : 'Save'}
-                        </OSButton>
-                        <OSButton onClick={() => handleSetEditing(false)} variant="secondary" size="md">
-                            Cancel
-                        </OSButton>
-                    </div>
+                    <RichText
+                        initialValue={values.body}
+                        setFieldValue={setFieldValue}
+                        values={values}
+                        onSubmit={submitForm}
+                        cta={() => (
+                            <>
+                                <OSButton
+                                    disabled={loading || values.body?.trim() === body?.trim()}
+                                    onClick={submitForm}
+                                    variant="primary"
+                                    size="md"
+                                >
+                                    {loading ? 'Saving...' : 'Save'}
+                                </OSButton>
+                                <OSButton onClick={() => handleSetEditing(false)} variant="secondary" size="md">
+                                    Cancel
+                                </OSButton>
+                            </>
+                        )}
+                    />
                 </>
             ) : (
                 children({ setEditing: handleSetEditing })

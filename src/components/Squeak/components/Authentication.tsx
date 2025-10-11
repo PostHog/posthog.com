@@ -6,6 +6,7 @@ import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import ResetPassword from './auth/ResetPassword'
 import OSButton from 'components/OSButton'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 export const inputClasses = `rounded-md border border-black/30 dark:border-white/30 block mb-5 py-2 px-4 w-full text-base text-black`
 export const labelClasses = `block text-base font-semibold mb-1 opacity-60`
@@ -44,7 +45,7 @@ export const Authentication = ({
         <div data-scheme="primary" className="bg-primary">
             {showProfile && <Avatar className="w-[40px] h-[40px] mr-[10px]" />}
             {formValues && (
-                <div className="items-center border border-black/20 dark:border-white/20 rounded-md border-b-0 flex max-w-[600px] py-2 px-4 rounded-bl-none rounded-br-none">
+                <div className="items-center border border-primary bg-accent rounded flex py-2 px-4 max-w-xl mb-2">
                     <div className="items-baseline flex flex-1 min-w-0 whitespace-nowrap overflow-hidden">
                         {formValues?.subject && (
                             <h3 className="overflow-hidden text-ellipsis whitespace-nowrap font-bold m-0 text-base mr-2 shrink-0">
@@ -63,49 +64,36 @@ export const Authentication = ({
                     </div>
                 </div>
             )}
-            <div style={showProfile ? { marginLeft: 50 } : {}}>
+            <div style={showProfile ? { marginLeft: 54 } : {}}>
                 {showBanner && (
-                    <div className="bg-[#FFF7E9] dark:bg-accent-dark border border-primary text-primary dark:text-primary-dark border-b-0 py-2 px-4 rounded-tr-0 rounded-tl-0">
+                    <div className="bg-[#FFF7E9] border border-primary rounded mb-2 p-4 max-w-xl">
                         <h4 className="m-0 text-base pb-1 text-primary dark:text-primary-dark">
-                            Please signup to post.
+                            Please sign up to post.
                         </h4>
                         <p className="m-0 text-sm">Create an account to ask questions & help others.</p>
                     </div>
                 )}
-                <div className={`overflow-hidden relative ${showBanner ? 'rounded-tr-none rounded-tl-none' : ''}`}>
-                    <div className="border-y grid grid-cols-2 relative border-black/[.2] dark:border-white/[.2]">
-                        <button
-                            className={`${
-                                view === 'sign-in' ? 'text-red dark:text-yellow' : 'text-black/50 dark:text-white/50'
-                            } text-sm font-bold py-3 px-1`}
-                            onClick={() => setView('sign-in')}
-                        >
-                            Login
-                        </button>
-                        <button
-                            className={`${
-                                view === 'sign-up' ? 'text-red dark:text-yellow' : 'text-black/50 dark:text-white/50'
-                            } text-sm font-bold py-3 px-1`}
-                            onClick={() => setView('sign-up')}
-                        >
-                            Signup
-                        </button>
-                        <div
-                            style={{
-                                opacity: view === 'forgot-password' || view === 'reset-password' ? 0 : 1,
-                            }}
-                            className={`bottom-[-1px] w-1/2 left-0 bg-red dark:bg-yellow h-[2px] transition-all absolute rounded-md ${
-                                view === 'sign-up' ? 'translate-x-full' : ''
-                            }`}
+                <div className={`overflow-hidden relative max-w-sm ${showBanner ? '' : ''}`}>
+                    {view !== 'forgot-password' && view !== 'reset-password' && (
+                        <ToggleGroup
+                            title="Authentication"
+                            hideTitle
+                            options={[
+                                { label: 'Login', value: 'sign-in' },
+                                { label: 'Signup', value: 'sign-up' },
+                            ]}
+                            value={view}
+                            onValueChange={(value) => setView(value)}
+                            className="mb-2"
                         />
-                    </div>
+                    )}
                     <div>
                         {message && (
-                            <p className="bg-[#FFF7E9] border-b border-black/20 dark:border-white/20 py-2 px-4 m-0 text-[red] font-semibold">
+                            <p className="bg-[#FFF7E9] border border-primary rounded py-2 px-4 m-0 text-red font-semibold mb-4">
                                 {message}
                             </p>
                         )}
-                        <div className="pt-4 px-6 bg-accent">
+                        <div className="space-y-2">
                             {
                                 {
                                     'sign-in': (

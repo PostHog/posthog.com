@@ -156,7 +156,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     ]
 
     return (
-        <div className="p-4 border border-primary rounded bg-accent mt-1 mb-3">
+        <div data-scheme="primary" className="p-4 border border-primary bg-accent rounded mt-1 mb-3">
             {helpful === null ? (
                 <p className="m-0 text-sm">
                     <IconFeatures className="size-6 relative mr-1 -top-0.5 text-primary dark:text-primary-dark opacity-50 inline-block" />
