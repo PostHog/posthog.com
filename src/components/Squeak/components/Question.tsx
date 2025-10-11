@@ -645,9 +645,9 @@ export function Question(props: QuestionProps) {
                         })}
                     </div>
                     <div
-                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full ${isInForum ? '' : 'squeak-left-border'} ${
-                            archived ? 'opacity-25' : ''
-                        }`}
+                        className={` pb-1 relative w-full ${
+                            isInForum ? 'border-t border-primary pt-4 pl-4' : 'ml-5 pl-8 pr-5 squeak-left-border'
+                        } ${archived ? 'opacity-25' : ''}`}
                     >
                         <QuestionForm
                             archived={archived}
