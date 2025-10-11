@@ -40,7 +40,7 @@ export const Days = ({ created, edits, profile }: { created: string | undefined;
         <Tooltip
             trigger={
                 <div className="max-h-[160px] overflow-y-auto">
-                    <span className="text-sm opacity-50 relative cursor-default">
+                    <span className="text-sm text-muted relative cursor-default">
                         {hasEdits ? 'Edited ' : ''}
                         {dayjs(hasEdits ? edits[0].date : created).fromNow()}
                     </span>

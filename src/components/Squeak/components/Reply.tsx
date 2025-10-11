@@ -23,7 +23,7 @@ import {
 } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import EditWrapper from './EditWrapper'
 import { Authentication } from '..'
 import SideModal from 'components/Modal/SideModal'
@@ -403,39 +403,41 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
             <div className="pb-1 flex items-center space-x-2">
                 {isMax ? (
                     <Tooltip
-                        content={() => (
-                            <div className="text-sm max-w-64">
-                                Max AI is our resident AI assistant. Double-check responses for accuracy.
+                        trigger={
+                            <div className="relative">
+                                <Link
+                                    state={{ newWindow: true }}
+                                    className="flex items-center !text-black dark:!text-white"
+                                    to={`/community/profiles/${profile.data.id}`}
+                                >
+                                    <div className="mr-2 relative ml-[-2px]">
+                                        <Avatar
+                                            className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
+                                            image={getAvatarURL(profile?.data?.attributes)}
+                                            color={profile?.data.attributes.color}
+                                        />
+                                        {isTeamMember && (
+                                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
+                                                <Logomark className="w-[16px]" />
+                                            </span>
+                                        )}
+                                    </div>
+                                    <strong>
+                                        {profile.data.attributes.firstName || 'Anonymous'}{' '}
+                                        {profile.data.attributes.lastName || 'Anonymous'}
+                                    </strong>
+                                    {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
+                                    <IconFeatures className="size-5 ml-1 text-primary dark:text-primary-dark opacity-50 inline-block" />
+                                </Link>
                             </div>
-                        )}
-                        placement="top"
+                        }
+                        delay={0}
                     >
-                        <div className="relative">
-                            <Link
-                                state={{ newWindow: true }}
-                                className="flex items-center !text-black dark:!text-white"
-                                to={`/community/profiles/${profile.data.id}`}
-                            >
-                                <div className="mr-2 relative ml-[-2px]">
-                                    <Avatar
-                                        className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
-                                        image={getAvatarURL(profile?.data?.attributes)}
-                                        color={profile?.data.attributes.color}
-                                    />
-                                    {isTeamMember && (
-                                        <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
-                                            <Logomark className="w-[16px]" />
-                                        </span>
-                                    )}
-                                </div>
-                                <strong>
-                                    {profile.data.attributes.firstName || 'Anonymous'}{' '}
-                                    {profile.data.attributes.lastName || 'Anonymous'}
-                                </strong>
-                                {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
-                                <IconFeatures className="size-5 ml-1 text-primary dark:text-primary-dark opacity-50 inline-block" />
-                            </Link>
-                        </div>
+                        <p>
+                            Max AI is our resident AI assistant.
+                            <br />
+                            Double-check responses for accuracy.
+                        </p>
                     </Tooltip>
                 ) : (
                     <Link
@@ -521,7 +523,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                 </div>
             </div>
 
-            <div className={`border-l-0 ${isInForum ? 'ml-[calc(33px_+_1.25rem)]' : 'ml-[33px]'} pl-0 pb-1`}>
+            <div className={`border-l-0 ${isInForum ? 'ml-[calc(44px_+_.5rem)] -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&

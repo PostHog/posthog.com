@@ -466,7 +466,7 @@ export function Question(props: QuestionProps) {
     }, [questionData])
 
     if (isLoading) {
-        return <QuestionSkeleton />
+        return <QuestionSkeleton isInForum={isInForum} />
     }
 
     if (isError) {
