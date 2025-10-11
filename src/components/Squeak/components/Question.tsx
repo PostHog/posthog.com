@@ -510,9 +510,12 @@ export function Question(props: QuestionProps) {
         >
             <div className={`text-primary ${isModerator && !publishedAt ? '' : ''}`}>
                 {archived && (
-                    <div className="font-medium text-sm m-0 mb-6 bg-accent border border-primary p-4 rounded text-center">
-                        <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
-                        <p className="!text-sm !m-0">
+                    <div
+                        data-scheme="secondary"
+                        className="m-4 mb-0 bg-primary border border-primary p-4 rounded text-center"
+                    >
+                        <p className="font-bold text-base !m-0 !p-0">The following thread has been archived.</p>
+                        <p className="!text-sm !m-0 text-balance">
                             It's likely out of date, no longer relevant, or the answer has been added to our{' '}
                             <Link to="/docs">documentation</Link>.
                         </p>
