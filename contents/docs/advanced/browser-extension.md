@@ -44,7 +44,7 @@ import { PostHog } from 'posthog-js/dist/module.no-external'
 
 // Additional features (import only what you need in a given context)
 import 'posthog-js/dist/posthog-recorder' // For session replay
-import 'posthog-js/dist/surveys' // For surveys  
+import 'posthog-js/dist/surveys' // For surveys
 import 'posthog-js/dist/exception-autocapture' // For error tracking
 import 'posthog-js/dist/tracing-headers' // For tracking across client and server
 import 'posthog-js/dist/web-vitals' // For web vitals tracking
@@ -54,7 +54,7 @@ You can also use `import 'posthog-js/dist/array.no-external.js'` as the core imp
 
 ### 2. Import a compatible session recording module if required
 
-Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64. 
+Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64.
 
 To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this Github comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
 
@@ -122,6 +122,8 @@ The default `localStorage+cookie`, and `cookie` persistence methods are problema
 
 Since PostHog instances in different contexts can't share the same storage for persistence, you should manage `distinct_id` values on your own to maintain continuity across contexts. See below for details.
 
+> **Note**: Improper distinct ID management in extensions can lead to billing issues due to repeated `identify()` calls and feature flag requests. See our [Chrome extension billing case study](/handbook/onboarding/chrome-extension-billing-case-study-wildfire) for details on how to avoid these problems.
+
 ## PostHog usage across extension contexts
 
 Browser extensions run in multiple contexts, each with different capabilities and limitations. Here's how to use PostHog effectively across them:
@@ -143,7 +145,7 @@ export async function getSharedDistinctId() {
     if (stored.posthog_distinct_id) {
         return stored.posthog_distinct_id;
     }
-    
+
     // Generate new distinct ID and store it
     const distinctId = uuidv7();
     await chrome.storage.local.set({ posthog_distinct_id: distinctId });
