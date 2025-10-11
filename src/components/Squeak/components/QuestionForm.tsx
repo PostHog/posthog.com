@@ -8,12 +8,11 @@ import RichText from './RichText'
 import getAvatarURL from '../util/getAvatar'
 import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
-import Button from './Button'
+import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
-import Spinner from 'components/Spinner'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
@@ -233,14 +232,9 @@ function QuestionFormMain({
                                 />
                             </div>
                             <span className="ml-[50px]">
-                                <Button
-                                    loading={loading}
-                                    disabled={loading || !isValid}
-                                    type="submit"
-                                    className="w-[calc(100%_-_50px)]"
-                                >
-                                    {user ? 'Post' : 'Login & post'}
-                                </Button>
+                                <OSButton disabled={loading || !isValid} type="submit" variant="primary" width="full">
+                                    {loading ? 'Posting...' : user ? 'Post' : 'Login & post'}
+                                </OSButton>
                             </span>
 
                             {disclaimer && (
@@ -461,15 +455,21 @@ export const QuestionForm = ({
                             color={user?.profile?.color}
                         />
                     </div>
-                    <Button
+                    <OSButton
                         id="question-form-button"
                         disabled={archived}
                         onClick={() => setView('question-form')}
-                        buttonType={formType === 'reply' ? 'outline' : 'primary'}
+                        // variant={formType === 'reply' ? 'secondary' : 'primary'}
                         size="md"
+                        width="full"
+                        align="left"
+                        variant="underlineOnHover"
+                        className={`border border-primary bg-accent !p-2 ${
+                            formType === 'reply' ? 'min-h-4' : 'min-h-8'
+                        }`}
                     >
                         {buttonText}
-                    </Button>
+                    </OSButton>
                 </div>
             )}
         </div>

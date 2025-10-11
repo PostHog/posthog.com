@@ -5,7 +5,7 @@ import Avatar from './Avatar'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import ResetPassword from './auth/ResetPassword'
-import Button from './Button'
+import OSButton from 'components/OSButton'
 
 export const inputClasses = `rounded-md border border-black/30 dark:border-white/30 block mb-5 py-2 px-4 w-full text-base text-black`
 export const labelClasses = `block text-base font-semibold mb-1 opacity-60`
@@ -147,14 +147,9 @@ export const Authentication = ({
                                 }[view]
                             }
                             {view !== 'forgot-password' && view !== 'reset-password' && (
-                                <Button
-                                    width="full"
-                                    buttonType="outline"
-                                    className="mt-2 mb-4"
-                                    onClick={handleForgotPassword}
-                                >
+                                <OSButton width="full" variant="secondary" onClick={handleForgotPassword}>
                                     Forgot password
-                                </Button>
+                                </OSButton>
                             )}
                         </div>
                     </div>
