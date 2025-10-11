@@ -1,36 +1,24 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
 import { IconLink } from '../OSIcons'
+import { useToast } from '../../context/Toast'
 
 export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
-    const [visible, setVisible] = useState(false)
+    const { addToast } = useToast()
     const { href } = useLocation()
+
     const handleClick = () => {
         const url = `${href.replace(/#.*/, '')}#${id}`
         navigator.clipboard.writeText(url)
-        setVisible(true)
-        setTimeout(() => {
-            setVisible(false)
-        }, 1000)
+        window.history.replaceState(null, '', url)
+        addToast({ description: 'Copied to clipboard!' })
     }
 
     return (
         <span
-            style={{ opacity: hovered || visible ? '1' : '0' }}
+            style={{ opacity: hovered ? '1' : '0' }}
             className="absolute left-0 top-2 -translate-x-4 @md/reader-content:-translate-x-5 @lg/reader-content:-translate-x-full pr-2 hidden xl:flex justify-center transition-opacity"
         >
-            <AnimatePresence>
-                {visible && (
-                    <motion.div
-                        initial={{ position: 'absolute', translateY: '-50%', opacity: 0 }}
-                        animate={{ translateY: '-120%', opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <span className="text-sm">Copied!</span>
-                    </motion.div>
-                )}
-            </AnimatePresence>
             <button className="hover:opacity-100 opacity-20 transition-opacity" onClick={handleClick}>
                 <IconLink className="size-4" />
             </button>

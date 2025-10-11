@@ -1,4 +1,5 @@
 import React, { ButtonHTMLAttributes, useEffect, useState, useContext, createContext, useMemo } from 'react'
+import { useLocation } from '@reach/router'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     id: string
@@ -55,6 +56,7 @@ export function ScrollSpyProvider({ children }: { children: React.ReactNode }): 
 
 export default function ElementScrollLink({ id, label, element, className = '', ...buttonProps }: Props): JSX.Element {
     const { setSectionData, activeSection } = useContext(ScrollSpyContext)
+    const { href } = useLocation()
     const isActive = activeSection === id
 
     useEffect(() => {
@@ -97,6 +99,9 @@ export default function ElementScrollLink({ id, label, element, className = '', 
                 top: relativeTop,
                 behavior: 'smooth',
             })
+
+            const url = `${href.replace(/#.*/, '')}#${id}`
+            window.history.replaceState(null, '', url)
         }
     }
 
