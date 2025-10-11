@@ -208,6 +208,7 @@
         "@types/react-helmet": "^6.1.0",
         "@types/react-input-autosize": "^2.2.4",
         "@types/react-scroll": "^1.8.7",
+        "@types/react-simple-maps": "^3.0.6",
         "@typescript-eslint/parser": "^4.5.0",
         "autoprefixer": "^10.4.7",
         "babel-loader": "^8.2.2",
