@@ -44,9 +44,6 @@ export default function TaskBarMenu() {
         taskbarRef,
         posthogInstance,
         copyDesktopParams,
-        desktopCopied,
-        desktopParams,
-        shareableDesktopURL,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -88,11 +85,6 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
-    }
-
-    const handleCopyDesktopParams = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        copyDesktopParams()
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -300,52 +292,6 @@ export default function TaskBarMenu() {
                             {posthogInstance ? 'Dashboard' : 'Get started – free'}
                         </OSButton>
                     </div>
-                    <Popover
-                        contentClassName=""
-                        dataScheme="primary"
-                        trigger={
-                            <span>
-                                <OSButton disabled={!desktopParams} size="sm" className="relative top-px">
-                                    <IconShare className="size-5" />
-                                </OSButton>
-                            </span>
-                        }
-                    >
-                        <div className="p-2">
-                            <h3 className="text-sm font-semibold m-0">Share your desktop</h3>
-                            <p className="text-xs text-secondary m-0 mb-2 leading-relaxed">
-                                Copy the URL below to share your open windows & layout.
-                            </p>
-                            <form onSubmit={handleCopyDesktopParams} className="flex gap-1">
-                                <input
-                                    disabled
-                                    type="url"
-                                    value={shareableDesktopURL}
-                                    className="text-xs font-mono border border-primary rounded-md flex-grow bg-white dark:bg-dark"
-                                />
-                                <OSButton
-                                    type="submit"
-                                    size="sm"
-                                    disabled={!desktopParams}
-                                    className="shrink-0 !w-[34px] border border-primary rounded-md"
-                                >
-                                    {desktopCopied ? (
-                                        <IconCheck className="size-4 text-green" />
-                                    ) : (
-                                        <IconCopy className="size-4" />
-                                    )}
-                                </OSButton>
-                            </form>
-                            <p className="text-xs text-secondary m-0 mt-2 flex items-center gap-1">
-                                <span>Tip: Press</span>
-                                <div className="flex items-center gap-1">
-                                    <KeyboardShortcut text="Shift" size="sm" />
-                                    <KeyboardShortcut text="C" size="sm" />
-                                </div>
-                                <span>to copy instantly.</span>
-                            </p>
-                        </div>
-                    </Popover>
                     <Tooltip
                         trigger={
                             <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">

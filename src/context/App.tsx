@@ -1575,10 +1575,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setTimeout(() => {
                 setDesktopCopied(false)
             }, 2000)
-            addToast({
-                description: 'Desktop link copied to clipboard',
-                duration: 2000,
-            })
         } catch (error) {
             console.error(error)
             addToast({
@@ -1799,6 +1795,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 e.preventDefault()
                 if (!desktopParams) return
                 copyDesktopParams()
+                addToast({
+                    description: 'Desktop link copied to clipboard',
+                    duration: 2000,
+                })
             }
         }
 
