@@ -320,6 +320,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const [pendingDelete, setPendingDelete] = useState(false)
     const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const toastCreatedAtRef = useRef<number | null>(null)
+    const setEditingRef = useRef<((editing: boolean) => void) | null>(null)
     const { addToast, removeToast } = useToast()
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
@@ -515,7 +516,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         <OSButton
                             size="sm"
                             tooltip="Edit reply"
-                            onClick={() => setEditing(true)}
+                            onClick={() => setEditingRef.current?.(true)}
                             icon={<IconPencil />}
                         />
                     )}
@@ -545,6 +546,9 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     ))}
                 <EditWrapper data={reply} type="reply" onSubmit={() => mutate()}>
                     {({ setEditing }) => {
+                        // Store setEditing in ref so it can be accessed from outside EditWrapper
+                        setEditingRef.current = setEditing
+
                         return (
                             <>
                                 <div

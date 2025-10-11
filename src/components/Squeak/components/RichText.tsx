@@ -394,6 +394,7 @@ export default function RichText({
                             return (
                                 <li key={index}>
                                     <OSButton
+                                        type="button"
                                         variant="default"
                                         size="md"
                                         icon={button.icon}
@@ -409,6 +410,7 @@ export default function RichText({
                         })}
                         <li>
                             <OSButton
+                                type="button"
                                 variant="default"
                                 size="md"
                                 disabled={imageLoading || showPreview}
@@ -427,6 +429,7 @@ export default function RichText({
                             <>
                                 <li className="!ml-auto">
                                     <OSButton
+                                        type="button"
                                         variant="default"
                                         size="md"
                                         icon={<Edit />}
@@ -438,6 +441,7 @@ export default function RichText({
                                 </li>
                                 <li>
                                     <OSButton
+                                        type="button"
                                         variant="default"
                                         size="md"
                                         icon={
