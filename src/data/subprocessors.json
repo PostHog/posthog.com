@@ -88,5 +88,23 @@
         },
         "categories": "Customer's end users",
         "details": "https://servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486"
+    },
+    {
+        "name": "Wiz, Inc.",
+        "type": "cloud",
+        "contact": "One Manhattan West, 57th Floor<br />New York, NY 10001<br />USA,<br />privacy@wiz.io",
+        "subject": "Personal data of users of the Controller's web product(s)",
+        "duration": "Duration of the agreement",
+        "reason": "Security vulnerability management and detection",
+        "location": "USA, Germany",
+        "dataTypes": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Customer's end users",
+        "details": "https://trust.wiz.io"
     }
 ]
