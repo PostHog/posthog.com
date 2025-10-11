@@ -574,7 +574,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 )}
 
                                 <div className="space-y-1 mt-2">
-                                    {(isModerator || resolvable) && (
+                                    {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
                                         <OSButton
                                             onClick={() => handleResolve(true, id)}
                                             variant="secondary"
