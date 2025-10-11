@@ -821,8 +821,8 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Working with Max AI',
-                url: '/handbook/engineering/working-with-max-ai',
+                name: 'AI Platform',
+                url: '/handbook/engineering/ai-platform',
             },
             {
                 name: 'Implementing AI features',
