@@ -256,7 +256,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             })
 
             if (!replyRes.ok) {
-                throw new Error('Failed to update reply data')
+                const errorText = await replyRes.text()
+                throw new Error(`Failed to update reply data: ${replyRes.status} ${errorText}`)
             }
 
             await replyRes.json()

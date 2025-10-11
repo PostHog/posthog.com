@@ -530,9 +530,9 @@ export function Question(props: QuestionProps) {
                             profile={questionData.attributes.profile?.data}
                             edits={questionData.attributes.edits}
                         />
-                        <div className="!ml-auto flex items-center space-x-px">
+                        <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
                             {user?.role?.type === 'moderator' && showActions && (
-                                <div className="flex items-center space-x-px border border-primary px-0.5 py-0.5 rounded [&>*]:inline-flex">
+                                <>
                                     {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
                                     <EscalateButton escalate={escalate} escalated={escalated} />
                                     {!archived ? (
@@ -567,7 +567,7 @@ export function Question(props: QuestionProps) {
                                         }
                                         askedMax={questionData?.attributes.askedMax}
                                     />
-                                </div>
+                                </>
                             )}
                             {!isQuestionAuthor && <ReportSpamButton type="question" id={questionData.id} />}
                             {!archived && (props.subscribeButton ?? true) && (

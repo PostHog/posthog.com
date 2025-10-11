@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState, useRef, useEffect } from 'react'
 import { User, useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
@@ -14,6 +14,7 @@ import {
     IconCheck,
     IconInfo,
     IconPencil,
+    IconShieldLock,
     IconThumbsDown,
     IconThumbsDownFilled,
     IconThumbsUp,
@@ -27,6 +28,8 @@ import EditWrapper from './EditWrapper'
 import { Authentication } from '..'
 import SideModal from 'components/Modal/SideModal'
 import ReportSpamButton from './ReportSpamButton'
+import OSButton from 'components/OSButton'
+import { useToast } from '../../../context/Toast'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -256,9 +259,6 @@ const VoteButton = ({
         }
     }
 
-    const Icon =
-        type === 'up' ? (voted ? IconThumbsUpFilled : IconThumbsUp) : voted ? IconThumbsDownFilled : IconThumbsDown
-
     return (
         <>
             <AuthModal
@@ -271,13 +271,34 @@ const VoteButton = ({
                     }
                 }}
             />
-            <button
+            <OSButton
                 onClick={handleClick}
-                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                icon={
+                    type === 'up' ? (
+                        voted ? (
+                            <IconThumbsUpFilled className="text-white" />
+                        ) : (
+                            <IconThumbsUp />
+                        )
+                    ) : voted ? (
+                        <IconThumbsDownFilled className="text-white" />
+                    ) : (
+                        <IconThumbsDown />
+                    )
+                }
+                size="md"
+                className={
+                    type === 'up'
+                        ? voted
+                            ? '!bg-green !text-white !border-green'
+                            : ''
+                        : voted
+                        ? '!bg-red !text-white !border-red'
+                        : ''
+                }
             >
-                <Icon className="size-4 mr-1 text-secondary inline-block" />
-                {votes}
-            </button>
+                <strong>{votes}</strong>
+            </OSButton>
         </>
     )
 }
@@ -296,7 +317,10 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
         mutate,
     } = useContext(CurrentQuestionContext)
 
-    const [confirmDelete, setConfirmDelete] = useState(false)
+    const [pendingDelete, setPendingDelete] = useState(false)
+    const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const toastCreatedAtRef = useRef<number | null>(null)
+    const { addToast, removeToast } = useToast()
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
@@ -309,16 +333,53 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
-        if (confirmDelete) {
+
+        const TOAST_DURATION = 5000
+
+        // Create timestamp that will be used by both the toast and our timeout
+        const createdAt = Date.now()
+        toastCreatedAtRef.current = createdAt
+
+        // Mark as pending delete and fade out
+        setPendingDelete(true)
+
+        // Set timeout to actually delete after toast expires
+        deleteTimeoutRef.current = setTimeout(async () => {
             await handleReplyDelete(id)
-        } else {
-            setConfirmDelete(true)
-        }
+            setPendingDelete(false)
+
+            // Remove the toast once deletion is complete
+            if (toastCreatedAtRef.current) {
+                removeToast(toastCreatedAtRef.current)
+                toastCreatedAtRef.current = null
+            }
+        }, TOAST_DURATION)
+
+        // Show toast with undo (createdAt will be set internally but we track it separately)
+        addToast({
+            description: 'Reply deleted',
+            duration: TOAST_DURATION,
+            createdAt, // Pass the timestamp so the toast context uses the same one
+            onUndo: () => {
+                // Cancel the deletion
+                if (deleteTimeoutRef.current) {
+                    clearTimeout(deleteTimeoutRef.current)
+                    deleteTimeoutRef.current = null
+                }
+                setPendingDelete(false)
+                toastCreatedAtRef.current = null
+            },
+        })
     }
 
-    const handleContainerClick = () => {
-        setConfirmDelete(false)
-    }
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (deleteTimeoutRef.current) {
+                clearTimeout(deleteTimeoutRef.current)
+            }
+        }
+    }, [])
 
     const pronouns = profile?.data?.attributes?.pronouns
     const helpful = useMemo(() => reply?.attributes?.helpful, [])
@@ -338,7 +399,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const isMax = profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return profile?.data ? (
-        <div onClick={handleContainerClick}>
+        <div className={`transition-opacity duration-300 ${pendingDelete ? 'opacity-30 pointer-events-none' : ''}`}>
             <div className="pb-1 flex items-center space-x-2">
                 {isMax ? (
                     <Tooltip
@@ -419,6 +480,45 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         )}
                     </>
                 )}
+                <div className="!ml-auto flex items-center space-x-1">
+                    {isModerator && (
+                        <OSButton
+                            size="sm"
+                            tooltip={
+                                <>
+                                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                    {publishedAt ? 'Unpublish' : 'Publish'}
+                                </>
+                            }
+                            onClick={() => handlePublishReply(!!publishedAt, id)}
+                            icon={<IconArchive />}
+                        />
+                    )}
+                    {isModerator && (
+                        <OSButton
+                            size="sm"
+                            tooltip={
+                                <>
+                                    <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                    Delete reply
+                                </>
+                            }
+                            onClick={handleDelete}
+                            icon={<IconTrash />}
+                            disabled={pendingDelete}
+                        />
+                    )}
+
+                    {isReplyAuthor && (
+                        <OSButton
+                            size="sm"
+                            tooltip="Edit reply"
+                            onClick={() => setEditing(true)}
+                            icon={<IconPencil />}
+                        />
+                    )}
+                    {!isReplyAuthor && !isMax && <ReportSpamButton type="reply" id={id} />}
+                </div>
             </div>
 
             <div className={`border-l-0 ${isInForum ? 'ml-[calc(33px_+_1.25rem)]' : 'ml-[33px]'} pl-0 pb-1`}>
@@ -473,16 +573,18 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     </div>
                                 )}
 
-                                <div
-                                    className={`flex ${
-                                        isModerator ? 'justify-end border-t border-primary mt-4' : ''
-                                    } mt-1 pt-1 pb-2`}
-                                >
-                                    <div
-                                        className={`inline-flex space-x-1 flex-wrap ${
-                                            isModerator ? `bg-primary px-1 mr-4 -mt-5` : ''
-                                        }`}
-                                    >
+                                <div className="space-y-1 mt-2">
+                                    {(isModerator || resolvable) && (
+                                        <OSButton
+                                            onClick={() => handleResolve(true, id)}
+                                            variant="secondary"
+                                            size="md"
+                                            icon={<IconCheck />}
+                                        >
+                                            Mark as solution
+                                        </OSButton>
+                                    )}
+                                    <div className="flex items-center gap-1">
                                         <VoteButton
                                             id={id}
                                             type="up"
@@ -497,43 +599,6 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                             votes={downvotes}
                                             onVote={() => mutate()}
                                         />
-                                        {isReplyAuthor && (
-                                            <button
-                                                onClick={() => setEditing(true)}
-                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconPencil className="size-4 mr-1 text-secondary inline-block" />
-                                                Edit
-                                            </button>
-                                        )}
-                                        {(isModerator || resolvable) && (
-                                            <button
-                                                onClick={() => handleResolve(true, id)}
-                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconCheck className="size-4 mr-1 text-green inline-block" />
-                                                Mark as solution
-                                            </button>
-                                        )}
-                                        {!isReplyAuthor && !isMax && <ReportSpamButton type="reply" id={id} />}
-                                        {isModerator && (
-                                            <button
-                                                onClick={() => handlePublishReply(!!publishedAt, id)}
-                                                className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconArchive className="size-4 mr-1 text-muted inline-block" />
-                                                {publishedAt ? 'Unpublish' : 'Publish'}
-                                            </button>
-                                        )}
-                                        {isModerator && (
-                                            <button
-                                                onClick={handleDelete}
-                                                className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                                            >
-                                                <IconTrash className="size-4 mr-1 text-muted inline-block" />
-                                                {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                                            </button>
-                                        )}
                                     </div>
                                 </div>
                             </>

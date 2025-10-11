@@ -26,7 +26,7 @@ export const Provider = ({ children }: { children: React.ReactNode }): JSX.Eleme
     const [toasts, setToasts] = useState<Toast[]>([])
 
     const addToast = (toast: Toast) => {
-        const createdAt = Date.now()
+        const createdAt = toast.createdAt ?? Date.now()
         setToasts((prevToasts) => [...prevToasts, { ...toast, createdAt }])
     }
 

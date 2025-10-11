@@ -441,7 +441,7 @@ export default function Inbox(props) {
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Lottie
                                                         animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75"
+                                                        className="size-6 opacity-75 text-secondary"
                                                         title="Loading questions..."
                                                     />
                                                 </div>
