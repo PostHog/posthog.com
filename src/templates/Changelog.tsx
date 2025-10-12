@@ -211,6 +211,7 @@ interface RoadmapCardsProps {
     startYear: number
     endYear: number
     activeRoadmap: RoadmapNode | null
+    hideEmpty: boolean
 }
 
 const RoadmapCards = ({
@@ -223,6 +224,7 @@ const RoadmapCards = ({
     onRoadmapClick,
     containerWidth,
     activeRoadmap,
+    hideEmpty,
 }: RoadmapCardsProps) => {
     const width = 350
 
@@ -266,7 +268,7 @@ const RoadmapCards = ({
                 }
             }
         }
-        return monthWeeks
+        return hideEmpty ? monthWeeks.filter((week) => week.roadmaps.length > 0) : monthWeeks
     }, [roadmaps, startYear, endYear])
 
     const virtualizer = useVirtualizer({
@@ -449,7 +451,7 @@ export default function Changelog(): JSX.Element {
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
-    const [hideEmpty, setHideEmpty] = useState(false)
+    const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -633,8 +635,6 @@ export default function Changelog(): JSX.Element {
                                 teamFilterValue={teamFilter}
                                 onCategoryChange={setCategoryFilter}
                                 categoryFilterValue={categoryFilter}
-                                hideEmpty={hideEmpty}
-                                onHideEmptyChange={setHideEmpty}
                             />
                             {isModerator && (
                                 <Tooltip
@@ -647,7 +647,7 @@ export default function Changelog(): JSX.Element {
                             )}
                         </div>
 
-                        <div className="min-h-0 flex-grow pt-2">
+                        <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
                             <RoadmapCards
                                 startYear={2020}
                                 endYear={2025}
@@ -658,21 +658,31 @@ export default function Changelog(): JSX.Element {
                                 onRoadmapClick={setActiveRoadmap}
                                 containerWidth={containerWidth}
                                 activeRoadmap={activeRoadmap}
+                                hideEmpty={hideEmpty}
                             />
                         </div>
-                        <div className="min-h-0 flex-shrink-0 mt-auto">
-                            <Timeline
-                                startYear={2020}
-                                endYear={2025}
-                                data={roadmapsGrouped}
-                                onDrag={handleDrag}
-                                windowX={windowX}
-                                setWindowX={setWindowX}
-                                containerRef={timelineContainerRef}
-                                percentageOfScrollInView={percentageOfScrollInView}
-                                roadmapsPercentageFromLeft={roadmapsPercentageFromLeft}
-                            />
-                        </div>
+                        <AnimatePresence>
+                            {!hideEmpty && (
+                                <motion.div
+                                    initial={{ height: 0 }}
+                                    animate={{ height: 'auto' }}
+                                    exit={{ height: 0 }}
+                                    className="min-h-0 flex-shrink-0 mt-auto overflow-hidden"
+                                >
+                                    <Timeline
+                                        startYear={2020}
+                                        endYear={2025}
+                                        data={roadmapsGrouped}
+                                        onDrag={handleDrag}
+                                        windowX={windowX}
+                                        setWindowX={setWindowX}
+                                        containerRef={timelineContainerRef}
+                                        percentageOfScrollInView={percentageOfScrollInView}
+                                        roadmapsPercentageFromLeft={roadmapsPercentageFromLeft}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                     <AnimatePresence>{activeRoadmap && <Roadmap roadmap={activeRoadmap} />}</AnimatePresence>
                 </div>
