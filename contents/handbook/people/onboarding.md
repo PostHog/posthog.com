@@ -207,12 +207,19 @@ These check-ins are designed to ensure every new starter is set up for success. 
 
 If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people
 
+## Finding answers at PostHog
+
+Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start with #ask-max, our AI that's read every handbook and documentation page. It'll point you to relevant docs instantly and is available 24/7.
+
+Of course, if you're stuck or need context beyond what's documented, just ask in the relevant channel - people are always happy to help. The goal isn't to make you figure everything out alone, it's to give you the fastest path to answers.
+
 ## Slack Channels
 
 Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
+-   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
 -   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
 -   `#brand-mentions`
 -   `#do-more-weird`
