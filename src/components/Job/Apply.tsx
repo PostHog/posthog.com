@@ -13,6 +13,7 @@ import Textarea from '../OSForm/textarea'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { IconSpinner } from '@posthog/icons'
 
 const allowedFileTypes = ['application/pdf']
 
@@ -190,36 +191,48 @@ const components = {
 const Form = ({ onSubmit, info, id }: { onSubmit: () => void; info: any; id: string }) => {
     const { setConfetti } = useApp()
     const [error, setError] = useState<string | null>(null)
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const [loading, setLoading] = useState(false)
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const data = new FormData(e.currentTarget)
-        const form = new FormData()
-        let error: string | null = null
-        for (const [name, value] of data as any) {
-            const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
-            const path = el?.dataset.path
-            if (el?.type === 'file') {
-                if (!allowedFileTypes.includes((value as File).type)) {
-                    error = `Allowed file types: ${allowedFileTypes.join(', ')}`
-                    break
+        setLoading(true)
+        setError(null)
+
+        try {
+            const data = new FormData(e.currentTarget)
+            const form = new FormData()
+
+            for (const [name, value] of data as any) {
+                const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
+                const path = el?.dataset.path
+                if (el?.type === 'file') {
+                    if (!allowedFileTypes.includes((value as File).type)) {
+                        throw new Error(`Allowed file types: ${allowedFileTypes.join(', ')}`)
+                    }
+                    form.append(name, value)
+                    form.append(path || '', name)
+                } else {
+                    form.append(path || '', value as string)
                 }
-                form.append(name, value)
-                form.append(path || '', name)
-            } else {
-                form.append(path || '', value as string)
             }
-        }
-        setError(error)
-        form.append('jobPostingId', id)
-        fetch('/api/apply', {
-            method: 'POST',
-            body: form,
-        })
-            .then((res) => res.json())
-            .then(() => {
-                onSubmit()
-                setConfetti(true)
+
+            form.append('jobPostingId', id)
+
+            const res = await fetch('/api/apply', {
+                method: 'POST',
+                body: form,
             })
+
+            if (!res.ok) {
+                throw new Error('Failed to submit application. Please try again.')
+            }
+
+            onSubmit()
+            setConfetti(true)
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.')
+        } finally {
+            setLoading(false)
+        }
     }
     return (
         <div>
@@ -274,8 +287,10 @@ const Form = ({ onSubmit, info, id }: { onSubmit: () => void; info: any; id: str
                         })}
                     </div>
                     {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
-                    <button className={`${container()} mt-6 shadow-none !w-full box-border`}>
-                        <span className={child()}>Submit</span>
+                    <button className={`${container()} mt-6 shadow-none !w-full box-border`} disabled={loading}>
+                        <span className={child()}>
+                            {loading ? <IconSpinner className="size-5 animate-spin mx-auto" /> : 'Submit'}
+                        </span>
                     </button>
                 </form>
             </div>
