@@ -102,9 +102,9 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
-        label: 'Roadmap',
-        Icon: <AppIcon name="map" />,
-        url: '/roadmap',
+        label: 'Changelog',
+        Icon: <AppIcon name="invite" />,
+        url: '/changelog',
         source: 'desktop',
     },
     {
