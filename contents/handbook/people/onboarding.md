@@ -96,7 +96,7 @@ Based on this ongoing learning process, here are our **five rules for onboarding
 
 ## Welcome package
 
-Expect a physical PostHog welcome package to arrive at your doorstep within a few weeks of joining.
+Expect a physical PostHog welcome package to arrive at your doorstep within a few weeks of joining. The Talent team is in charge of making this happen.
 
 Inside: productivity essentials like stickers, and other merch.
 But most importantly, our welcome package includes three books. **Three titles we find foundational for success at PostHog:**
