@@ -18,6 +18,7 @@ import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 dayjs.extend(utc)
 
@@ -29,6 +30,9 @@ type RoadmapNode = {
     cta?: {
         label?: string
         url?: string
+    }
+    media?: {
+        gatsbyImageData?: any
     }
     profiles?: {
         data?: Array<{
@@ -132,6 +136,11 @@ const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
                         </Tooltip>
                     )}
                 </div>
+                {roadmap.media?.gatsbyImageData && (
+                    <div className="mt-2">
+                        <GatsbyImage image={roadmap.media.gatsbyImageData} alt={roadmap.title} />
+                    </div>
+                )}
                 {hasProfiles && (
                     <div className="p-2 border border-primary rounded-md bg-accent mt-2">
                         {roadmap.profiles?.data?.map((profile) => {
@@ -480,6 +489,9 @@ export default function Changelog(): JSX.Element {
                     cta {
                         label
                         url
+                    }
+                    media {
+                        gatsbyImageData
                     }
                     profiles {
                         data {
