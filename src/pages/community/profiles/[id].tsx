@@ -1390,7 +1390,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         className="pt-6"
                                     >
                                         <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
-                                            <TeamMembersList self={profile} team={profile.teams.data[0]} />
+                                            <TeamMembersList self={data} team={profile.teams.data[0]} />
                                         </div>
                                     </Block>
                                 </div>
@@ -1413,7 +1413,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                             <IconArrowUpRight className="size-3 text-muted group-hover:text-secondary" />
                                                         </Link>
                                                     </div>
-                                                    <TeamMembersList self={profile} team={team} />
+                                                    <TeamMembersList self={data} team={team} />
                                                 </div>
                                             ),
                                         }))}
