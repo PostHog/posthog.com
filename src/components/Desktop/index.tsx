@@ -18,6 +18,9 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import ProgressBar from 'components/ProgressBar'
 import OSButton from 'components/OSButton'
+import Lottie from 'lottie-react'
+import hourglassAnimation from 'images/icons8-hourglass.json'
+import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 
 interface Product {
     name: string
@@ -81,23 +84,23 @@ export const useProductLinks = () => {
         },
         ...(posthogInstance
             ? [
-                {
-                    label: 'Open app ↗',
-                    Icon: <AppIcon name="computerCoffee" />,
-                    url: 'https://app.posthog.com',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]
+                  {
+                      label: 'Open app ↗',
+                      Icon: <AppIcon name="computerCoffee" />,
+                      url: 'https://app.posthog.com',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]
             : [
-                {
-                    label: 'Sign up ↗',
-                    Icon: <AppIcon name="compass" />,
-                    url: 'https://app.posthog.com/signup',
-                    external: true,
-                    source: 'desktop',
-                },
-            ]),
+                  {
+                      label: 'Sign up ↗',
+                      Icon: <AppIcon name="compass" />,
+                      url: 'https://app.posthog.com/signup',
+                      external: true,
+                      source: 'desktop',
+                  },
+              ]),
     ]
 }
 
@@ -186,6 +189,15 @@ const validateIconPositions = (
     return true
 }
 
+const LOADING_MESSAGES = [
+    'Booting the PostHog experience',
+    'Compiling hedgehog shaders',
+    'Rebuilding webpack',
+    'Hydrating the hedgehogs',
+    'Sourcing and transforming nodes',
+    'Running <code>yarn serve</code>',
+]
+
 export default function Desktop() {
     const productLinks = useProductLinks()
     const {
@@ -204,6 +216,8 @@ export default function Desktop() {
     })
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
+    const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
+    const [isMessageExiting, setIsMessageExiting] = useState(false)
 
     function generateInitialPositions(): IconPositions {
         const positions: IconPositions = {}
@@ -294,6 +308,21 @@ export default function Desktop() {
             window.removeEventListener('resize', handleResize)
         }
     }, [posthogInstance])
+
+    useEffect(() => {
+        if (rendered) return
+
+        const interval = setInterval(() => {
+            setIsMessageExiting(true)
+
+            setTimeout(() => {
+                setCurrentMessageIndex((prev) => (prev + 1) % LOADING_MESSAGES.length)
+                setIsMessageExiting(false)
+            }, 300)
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [rendered, currentMessageIndex])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
@@ -540,8 +569,33 @@ export default function Desktop() {
                 </div>
             )}
             {!rendered && (
-                <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
-                    <ProgressBar title="desktop" />
+                <div
+                    data-scheme="secondary"
+                    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center"
+                >
+                    <div className="flex items-center justify-center gap-2 w-80 bg-primary/75 backdrop-blur border border-primary rounded p-4">
+                        <div>
+                            <Lottie
+                                animationData={hourglassAnimation}
+                                className="size-6 opacity-75 dark:hidden"
+                                title="Loading desktop..."
+                            />
+                            <Lottie
+                                animationData={hourglassAnimationWhite}
+                                className="size-6 opacity-75 hidden dark:block"
+                                title="Loading desktop..."
+                            />
+                        </div>
+                        <div className="flex-1 relative">
+                            <strong
+                                key={currentMessageIndex}
+                                className={`font-medium text-secondary block ${
+                                    isMessageExiting ? 'animate-slide-up-fade-out' : 'animate-slide-up-fade-in'
+                                }`}
+                                dangerouslySetInnerHTML={{ __html: LOADING_MESSAGES[currentMessageIndex] }}
+                            />
+                        </div>
+                    </div>
                 </div>
             )}
         </>
