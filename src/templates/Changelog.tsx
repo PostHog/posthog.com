@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconPlus, IconShieldLock } from '@posthog/icons'
+import { IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
@@ -19,6 +19,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import Explorer from 'components/Explorer'
 
 dayjs.extend(utc)
 
@@ -88,7 +89,7 @@ type RoadmapNode = {
     }
 }
 
-const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
+const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => void }) => {
     const { isModerator } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
@@ -110,6 +111,10 @@ const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
                 status="complete"
             />
         )
+    }
+
+    const handleClose = () => {
+        onClose()
     }
 
     return (
@@ -135,6 +140,7 @@ const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
                             roadmap item
                         </Tooltip>
                     )}
+                    <OSButton size="md" icon={<IconX />} onClick={handleClose} />
                 </div>
                 {roadmap.media?.gatsbyImageData && (
                     <div className="mt-2">
@@ -378,6 +384,25 @@ const RoadmapCards = ({
         return () => clearTimeout(timer)
     }, [weeks, width])
 
+    // Map vertical scroll to horizontal scroll
+    useEffect(() => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+
+        const handleWheel = (e: WheelEvent) => {
+            // Only handle vertical scrolling (deltaY)
+            if (e.deltaY !== 0) {
+                e.preventDefault()
+                viewport.scrollLeft += e.deltaY
+            }
+        }
+
+        viewport.addEventListener('wheel', handleWheel, { passive: false })
+        return () => {
+            viewport.removeEventListener('wheel', handleWheel)
+        }
+    }, [])
+
     return (
         <ScrollArea className="size-full [&>div>div]:size-full">
             <div className="h-full px-4">
@@ -416,44 +441,52 @@ const RoadmapCards = ({
                                             {count}
                                         </div>
                                     </div>
-                                    <ul className="w-full flex-1 overflow-y-auto p-4 m-0 list-none">
-                                        {weekData.roadmaps.map((roadmap) => {
-                                            const active = activeRoadmap?.id === roadmap.id
-                                            return (
-                                                <li key={roadmap.id} className="p-0 mt-0">
-                                                    <button
-                                                        className={`w-full text-left p-2 rounded-md border bg-accent flex justify-between ${
-                                                            active ? 'border-black dark:border-white' : 'border-primary'
-                                                        }`}
-                                                        onClick={() => onRoadmapClick(roadmap)}
-                                                    >
-                                                        <div>
-                                                            <h5 className="m-0 underline text-base leading-tight mb-1">
-                                                                {roadmap.title}
-                                                            </h5>
-                                                            <p className="!m-0 text-sm">
-                                                                {roadmap.teams?.data?.[0]?.attributes?.name} Team
-                                                            </p>
-                                                        </div>
-                                                        {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
-                                                            ?.attributes?.url && (
-                                                            <div className="shrink-0">
-                                                                <CloudinaryImage
-                                                                    className="w-10"
-                                                                    width={80}
-                                                                    src={
-                                                                        roadmap.teams.data[0].attributes.miniCrest.data
-                                                                            .attributes
-                                                                            .url as `https://res.cloudinary.com/${string}`
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        )}
-                                                    </button>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
+                                    <div className="w-full flex-1 min-h-0">
+                                        <ScrollArea className="h-full">
+                                            <ul className="p-4 m-0 list-none space-y-2">
+                                                {weekData.roadmaps.map((roadmap) => {
+                                                    const active = activeRoadmap?.id === roadmap.id
+                                                    return (
+                                                        <li key={roadmap.id} className="p-0 mt-0">
+                                                            <button
+                                                                data-scheme="secondary"
+                                                                className={`w-full text-left p-2 rounded-md border bg-primary flex justify-between ${
+                                                                    active
+                                                                        ? 'border-black dark:border-white'
+                                                                        : 'border-primary'
+                                                                }`}
+                                                                onClick={() => onRoadmapClick(roadmap)}
+                                                            >
+                                                                <div>
+                                                                    <h5 className="m-0 underline text-[15px] leading-tight mb-1">
+                                                                        {roadmap.title}
+                                                                    </h5>
+                                                                    <p className="!m-0 text-sm">
+                                                                        {roadmap.teams?.data?.[0]?.attributes?.name}{' '}
+                                                                        Team
+                                                                    </p>
+                                                                </div>
+                                                                {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
+                                                                    ?.attributes?.url && (
+                                                                    <div className="shrink-0">
+                                                                        <CloudinaryImage
+                                                                            className="w-10"
+                                                                            width={80}
+                                                                            src={
+                                                                                roadmap.teams.data[0].attributes
+                                                                                    .miniCrest.data.attributes
+                                                                                    .url as `https://res.cloudinary.com/${string}`
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                )}
+                                                            </button>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </ScrollArea>
+                                    </div>
                                 </div>
                             </div>
                         )
@@ -651,16 +684,17 @@ export default function Changelog(): JSX.Element {
     return (
         <>
             <SEO title="Changelog - PostHog" />
-            <Editor
-                hasTabs
-                type="changelog"
-                maxWidth="100%"
+            <Explorer
+                fullScreen
+                template="generic"
+                slug="changelog"
+                title="Changelog"
                 bookmark={{
                     title: 'Changelog',
                     description: 'Latest updates and releases',
                 }}
             >
-                <div className="relative h-full flex">
+                <div data-scheme="secondary" className="bg-primary text-primary relative h-full flex">
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
                         <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
                             <Filters
@@ -717,9 +751,11 @@ export default function Changelog(): JSX.Element {
                             )}
                         </AnimatePresence>
                     </div>
-                    <AnimatePresence>{activeRoadmap && <Roadmap roadmap={activeRoadmap} />}</AnimatePresence>
+                    <AnimatePresence>
+                        {activeRoadmap && <Roadmap roadmap={activeRoadmap} onClose={() => setActiveRoadmap(null)} />}
+                    </AnimatePresence>
                 </div>
-            </Editor>
+            </Explorer>
         </>
     )
 }
