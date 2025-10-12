@@ -466,15 +466,17 @@ const RoadmapCards = ({
                                                         >
                                                             <button
                                                                 data-scheme="secondary"
-                                                                className={`w-full text-left py-2 px-4 hover:bg-primary flex justify-between gap-1 ${
-                                                                    active
-                                                                        ? 'border-black dark:border-white'
-                                                                        : 'border-primary'
+                                                                className={`group w-full text-left py-2 px-4 flex justify-between gap-1 ${
+                                                                    active ? 'bg-primary' : 'hover:bg-primary'
                                                                 }`}
                                                                 onClick={() => onRoadmapClick(roadmap)}
                                                             >
                                                                 <div>
-                                                                    <h5 className="m-0 underline text-[15px] leading-tight mb-1">
+                                                                    <h5
+                                                                        className={`m-0  text-[15px] leading-tight mb-1 ${
+                                                                            active ? '' : 'group-hover:underline'
+                                                                        }`}
+                                                                    >
                                                                         {roadmap.title}
                                                                     </h5>
                                                                     <p className="!m-0 text-[13px]">
