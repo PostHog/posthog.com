@@ -242,8 +242,7 @@
         { "source": "/product/feature-flags", "destination": "/feature-flags" },
         { "source": "/product/experimentation-suite", "destination": "/experiments" },
         { "source": "/ab-testing", "destination": "/experiments" },
-        { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
-        { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
+        { "source": "/product/heatmaps", "destination": "/heatmaps", "statusCode": 301 },
         { "source": "/docs/tutorials/b2b", "destination": "/tutorials/b2b" },
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
@@ -493,6 +492,7 @@
             "source": "/handbook/engineering/app-east",
             "destination": "/handbook/people/team-structure/product-analytics"
         },
+        { "source": "/handbook/team-structure", "destination": "/handbook/company/small-teams" },
         { "source": "/handbook/people/team-structure/app-east", "destination": "/handbook/small-teams/app-east" },
         { "source": "/docs/integrate/client/browser-extension", "destination": "/docs/integrate/browser-extension" },
         { "source": "/handbook/company/website-design-process", "destination": "/handbook/designing-posthog-website" },
@@ -609,6 +609,14 @@
             "destination": "/docs/feature-flags/creating-feature-flags"
         },
         { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
+        {
+            "source": "/docs/feature-flags/evaluation-tags",
+            "destination": "/docs/feature-flags/evaluation-environments"
+        },
+        {
+            "source": "/tutorials/evaluation-runtimes-and-tags",
+            "destination": "/tutorials/evaluation-runtimes-and-environments"
+        },
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
         { "source": "/docs/migrate/ingest-historic-data", "destination": "/docs/migrate" },
@@ -647,6 +655,7 @@
         { "source": "/manual/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
+        { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
@@ -1468,10 +1477,6 @@
             "destination": "/?utm_source=billboard&utm_campaign=may25-triples"
         },
         {
-            "source": "/teams/marketing",
-            "destination": "/teams/content"
-        },
-        {
             "source": "/teams/video",
             "destination": "/teams/content"
         },
@@ -1602,7 +1607,15 @@
         {
             "source": "/founder-lab",
             "destination": "/startups"
-        }
+        },
+        {
+            "source": "/teams/exec",
+            "destination": "/teams/blitzscale"
+        },
+        { "source": "/teams/growth", "destination": "/teams" },
+        { "source": "/eu", "destination": "/pricing" },
+        { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
+        { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" }
     ],
     "headers": [
         {

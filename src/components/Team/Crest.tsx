@@ -20,12 +20,13 @@ const ModalViewButton = ({
         <button
             type="button"
             onClick={onClick}
-            className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${active
-                ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
+            className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${
+                active
+                    ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
                 after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b
                 bg-light dark:bg-dark font-bold`
-                : 'opacity-70 hover:opacity-100'
-                }`}
+                    : 'opacity-70 hover:opacity-100'
+            }`}
         >
             {children}
         </button>
@@ -60,7 +61,8 @@ export default function Crest({
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="mt-28 max-w-2xl w-full relative flex flex-col rounded-md border border-primary overflow-hidden"
+                        data-scheme="primary"
+                        className="bg-primary text-primary mt-28 max-w-2xl w-full relative flex flex-col rounded-md border border-primary overflow-hidden h-[450px]"
                     >
                         <div className="bg-accent border-b border-primary flex justify-between items-center">
                             <div className="flex -mt-[1px]">
@@ -290,7 +292,7 @@ export default function Crest({
                                 onRemove={() => setFieldValue('miniCrest', null)}
                                 onDrop={(image) => setFieldValue('miniCrest', image)}
                                 image={values.miniCrest}
-                                className="!size-full bg-white rounded-full border border-primary overflow-hidden !p-2"
+                                className="!size-full bg-white rounded-full border border-primary overflow-hidden"
                             />
                         ) : values.miniCrest?.objectURL ? (
                             <div className="size-full">

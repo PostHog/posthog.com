@@ -48,7 +48,7 @@ I had a lot of fun in building it with <TeamMember name="Eli Kinsey" />. Through
 It was also an interesting learning curve for me in figuring out how to organize five years worth of content while making it scalable for the future. Some of the technical highlights:
 
 -   Separation of visual layer from content
-    -   All product pages are now powered from JSON files (<a to="https://github.com/PostHog/posthog.com/blob/windows-n-such/src/hooks/productData/session_replay.tsx" external>example</a>). This means that JSON dictates page layouts, content presentation, feature-level competitor comparison charts, and more. It also contains an array of screenshots used in various places (both in light and dark mode, of course).
+    -   All product pages are now powered from JSON files (<a to="https://github.com/PostHog/posthog.com/blob/master/src/hooks/productData/session_replay.tsx" external>example</a>). This means that JSON dictates page layouts, content presentation, feature-level competitor comparison charts, and more. It also contains an array of screenshots used in various places (both in light and dark mode, of course).
     -   Eventually this will move to a repository that’s shared with the PostHog app, so all the information is powered from the same source.
 -   Skinning a site with themes _and_ color schemes
     -   How do you maintain light and dark mode, along with themes across a handful of accent variations (primary, secondary, tertiary) in a way that all play well together? (I found this out, and I’ll write about it sometime!)
@@ -58,7 +58,7 @@ It was also an interesting learning curve for me in figuring out how to organize
 
 For a lot of this site, I was designing it _while_ I was building UIs in Typescript and Tailwind. (The entire site is just a Git branch off our current site – it's all technically the same codebase. I just merged along the way over the last few months.)
 
-Prototyping in a production-level environment was a great way to ideate and develop features along the way – stuff I never would have built if I were just going off of mockups. I did find myself [popping open Balsamiq <a to="https://x.com/ninepixelgrid/status/1936994050625679692" external>while I was building</a> – but just long enough to flesh out some ideas.
+Prototyping in a production-level environment was a great way to ideate and develop features along the way – stuff I never would have built if I were just going off of mockups. I did find myself <a to="https://x.com/ninepixelgrid/status/1936994050625679692" external>popping open Balsamiq while I was building</a> – but just long enough to flesh out some ideas.
 
 So how will this pan out? Well, we’re about to find out. This feels like an early MVP – there’s a ton of stuff to improve upon from here.
 

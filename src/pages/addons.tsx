@@ -8,14 +8,16 @@ import { PricingTiers } from 'components/Pricing/Plans'
 import { Link } from 'react-scroll'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
+import { EXCLUDED_ADDON_TYPES } from '../constants/addons'
 
 const FeatureItem = ({ name, description, size }) => (
     <div className="flex gap-2">
         <div className="flex-1">
             <h4 className="text-base my-1">{name}</h4>
             <p
-                className={`${size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
-                    } text-secondary mb-0`}
+                className={`${
+                    size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
+                } text-secondary mb-0`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>
@@ -94,7 +96,9 @@ const Features = ({ title, addonName, features }) => {
 
 const Addons = (): JSX.Element => {
     const products = useProducts()
-    const productAddons = products.flatMap((product) => product.addons)
+    const productAddons = products
+        .flatMap((product) => product.addons)
+        .filter((addon) => !EXCLUDED_ADDON_TYPES.includes(addon.type))
     const allAddons = productAddons
 
     return (
@@ -179,28 +183,28 @@ const Addons = (): JSX.Element => {
                                 <div className="grid gap-x-8 gap-y-3 md:grid-cols-1">
                                     {customAddon
                                         ? customAddon.features?.map((feature) => {
-                                            return (
-                                                <Features
-                                                    key={`${name}-${feature.group}`}
-                                                    addonName={name}
-                                                    features={feature.items}
-                                                    title={feature.group}
-                                                />
-                                            )
-                                        })
+                                              return (
+                                                  <Features
+                                                      key={`${name}-${feature.group}`}
+                                                      addonName={name}
+                                                      features={feature.items}
+                                                      title={feature.group}
+                                                  />
+                                              )
+                                          })
                                         : Object.keys(featuresByCategory)
-                                            .sort((feature) => (feature === 'Features' ? -1 : 1))
-                                            ?.map((category) => {
-                                                const features = featuresByCategory[category]
-                                                return (
-                                                    <Features
-                                                        key={`${name}-${category}`}
-                                                        title={category}
-                                                        addonName={name}
-                                                        features={features}
-                                                    />
-                                                )
-                                            })}
+                                              .sort((feature) => (feature === 'Features' ? -1 : 1))
+                                              ?.map((category) => {
+                                                  const features = featuresByCategory[category]
+                                                  return (
+                                                      <Features
+                                                          key={`${name}-${category}`}
+                                                          title={category}
+                                                          addonName={name}
+                                                          features={features}
+                                                      />
+                                                  )
+                                              })}
                                 </div>
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">

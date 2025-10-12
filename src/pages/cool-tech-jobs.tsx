@@ -7,6 +7,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { useValues } from 'kea'
 import {
     IconChevronDown,
+    IconShieldLock,
     IconArrowUpRight,
     IconX,
     IconPencil,
@@ -20,7 +21,7 @@ import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Toggle from 'components/Toggle'
-import Select from 'components/Select'
+import { Select } from 'components/RadixUI/Select'
 import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Index'
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
@@ -52,6 +53,10 @@ import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import { useInView } from 'react-intersection-observer'
 import ProgressBar from 'components/ProgressBar'
+import CloudinaryImage from 'components/CloudinaryImage'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from 'components/OSButton'
+import { navigate } from 'gatsby'
 
 dayjs.extend(relativeTime)
 
@@ -66,43 +71,43 @@ interface ToggleFilter {
 
 const toggleFilters: ToggleFilter[] = [
     {
-        icon: <StickerLaptop className="size-6" />,
+        icon: <StickerLaptop className="size-7" />,
         label: 'Remote',
         key: 'isRemote',
         appliesTo: 'job',
     },
     {
-        icon: <StickerPullRequest className="size-6" />,
+        icon: <StickerPullRequest className="size-7" />,
         label: 'Engineers decide what to build',
         key: 'engineersDecideWhatToBuild',
         appliesTo: 'company',
     },
     {
-        icon: <StickerLaptop className="size-6" />,
+        icon: <StickerLaptop className="size-7" />,
         label: 'Remote only company',
         key: 'remoteOnly',
         appliesTo: 'company',
     },
     {
-        icon: <StickerPalmTree className="size-6" />,
+        icon: <StickerPalmTree className="size-7" />,
         label: 'Exotic off-sites',
         key: 'exoticOffsites',
         appliesTo: 'company',
     },
     {
-        icon: <StickerDnd className="size-6" />,
+        icon: <StickerDnd className="size-7" />,
         label: 'Meeting-free days',
         key: 'meetingFreeDays',
         appliesTo: 'company',
     },
     {
-        icon: <StickerEngineerRatio className="size-6" />,
+        icon: <StickerEngineerRatio className="size-7" />,
         label: 'High engineer ratio',
         key: 'highEngineerRatio',
         appliesTo: 'company',
     },
     {
-        icon: <StickerHourglass className="size-6" />,
+        icon: <StickerHourglass className="size-7" />,
         label: 'No deadlines',
         key: 'noDeadlines',
         appliesTo: 'company',
@@ -115,7 +120,7 @@ const Perks = ({ company, className }: { company: Company; className?: string })
     return (
         <ul className={`list-none p-0 m-0 ${className}`}>
             {perks.filter(Boolean).map((perk) => (
-                <li key={`${company.id}-${perk.key}`} className="flex gap-1.5 items-center">
+                <li key={`${company.id}-${perk.key}`} className="flex gap-1.5 items-center p-0">
                     {perk.icon}
                     <span className="text-sm font-medium">{perk.label}</span>
                 </li>
@@ -128,10 +133,12 @@ const JobsByDepartment = ({
     jobs,
     department,
     initialOpen = false,
+    type,
 }: {
     jobs: Job[]
     department: string
     initialOpen?: boolean
+    type: string
 }) => {
     const [open, setOpen] = useState(initialOpen)
     return (
@@ -150,7 +157,7 @@ const JobsByDepartment = ({
             </button>
             <motion.ul
                 initial={{ height: 0 }}
-                className="list-none p-0 m-0 overflow-hidden @2xl:ml-7"
+                className="list-none p-0 m-0 overflow-hidden @4xl:ml-7"
                 animate={open ? { height: 'auto' } : { height: 0 }}
             >
                 {jobs.map((job) => {
@@ -163,7 +170,7 @@ const JobsByDepartment = ({
                     const showPosted = postedDate && postedDate !== '1970-01-01T00:00:00.000Z'
 
                     return (
-                        <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
+                        <li key={job.id} className="flex justify-between items-start last:mb-6 mt-2 first:mt-0">
                             <Link
                                 externalNoIcon={!isPostHog}
                                 className="group !text-inherit underline"
@@ -189,17 +196,61 @@ const JobsByDepartment = ({
     )
 }
 
-const JobList = ({ jobs }: { jobs: Job[] }) => {
-    const jobsGroupedByDepartment = groupBy(jobs, 'attributes.department')
+const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isLoading: boolean }) => {
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+
+    const scrollToCompany = (companyId: number) => {
+        const element = document.getElementById(`company-${companyId}`)
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            })
+        }
+    }
 
     return (
-        <ul className="list-none p-0 m-0 mt-2 flex-grow">
-            {Object.entries(jobsGroupedByDepartment).map(([department, jobs], index) => (
-                <li key={department}>
-                    <JobsByDepartment jobs={jobs} department={department} initialOpen={index === 0} />
-                </li>
-            ))}
-        </ul>
+        <div className="mb-8">
+            {!isLoading && (
+                <>
+                    <h3 className="text-lg font-semibold mb-0">Featuring roles from these cool companies...</h3>
+                    <p className="text-sm text-secondary">(Click a logo to jump to a company)</p>
+                </>
+            )}
+            <div className="flex flex-wrap gap-2">
+                {companies
+                    .filter((company) => company.attributes.jobs.data.length > 0)
+                    .map((company) => {
+                        const { name } = company.attributes
+                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
+                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+
+                        return (
+                            <OSButton
+                                key={company.id}
+                                onClick={() => scrollToCompany(company.id)}
+                                hover="border"
+                                className=""
+                            >
+                                {logoLight || logoDark ? (
+                                    <img
+                                        className="min-h-4 max-h-6 object-contain"
+                                        src={logoDark && isDark ? logoDark : logoLight}
+                                        alt={name}
+                                    />
+                                ) : (
+                                    <div className="bg-accent rounded flex items-center justify-center">
+                                        <span className="text-sm font-semibold text-muted">
+                                            {name.charAt(0).toUpperCase()}
+                                        </span>
+                                    </div>
+                                )}
+                            </OSButton>
+                        )
+                    })}
+            </div>
+        </div>
     )
 }
 
@@ -229,7 +280,8 @@ const CompanyRows = ({
     fetchMore: () => void
 }) => {
     const { isModerator } = useUser()
-    const { websiteTheme } = useValues(layoutLogic)
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
     const [ref, inView] = useInView({
         threshold: 0.5,
     })
@@ -244,12 +296,20 @@ const CompanyRows = ({
     )
 
     const displayCompanies = useMemo(() => {
-        return companies.filter((company) => {
-            const hasJobs = company.attributes.jobs.data.length > 0
-            const hasFilters = companyFilters.length > 0 || jobFilters.length > 0
-            return (isModerator && !search && !hasFilters) || hasJobs
-        })
-    }, [companies])
+        const companiesWithJobs = companies.filter((company) => company.attributes.jobs.data.length > 0)
+        const companiesWithoutJobs = companies.filter((company) => company.attributes.jobs.data.length === 0)
+        const hasFilters = companyFilters.length > 0 || jobFilters.length > 0
+
+        // Always show companies with jobs
+        let result = companiesWithJobs
+
+        // For moderators, also show companies without jobs (but only when no search/filters)
+        if (isModerator && !search && !hasFilters) {
+            result = [...companiesWithJobs, ...companiesWithoutJobs]
+        }
+
+        return result
+    }, [companies, isModerator, search, companyFilters, jobFilters])
 
     useEffect(() => {
         if (inView && hasMore) {
@@ -257,9 +317,14 @@ const CompanyRows = ({
         }
     }, [inView])
 
+    const companiesWithJobs = displayCompanies.filter((company) => company.attributes.jobs.data.length > 0)
+    const companiesWithoutJobs = displayCompanies.filter((company) => company.attributes.jobs.data.length === 0)
+    const showCompaniesWithoutJobs = isModerator && !search && companyFilters.length === 0 && jobFilters.length === 0
+
     return (
         <div className="space-y-8">
-            {displayCompanies.map((company, index) => {
+            {/* Companies with jobs */}
+            {companiesWithJobs.map((company, index) => {
                 const { name } = company.attributes
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
@@ -288,6 +353,7 @@ const CompanyRows = ({
                                         externalNoIcon={!isPostHog}
                                         className="group !text-inherit underline font-medium"
                                         to={url + (isPostHog ? '' : '?utm_source=posthog')}
+                                        state={isPostHog ? { newWindow: true } : undefined}
                                     >
                                         <span className="relative">
                                             {job.attributes.title}
@@ -312,10 +378,11 @@ const CompanyRows = ({
                 return (
                     <div
                         key={company.id}
+                        id={`company-${company.id}`}
                         ref={index === displayCompanies.length - 1 ? ref : null}
-                        className="border border-primary rounded-md"
+                        className="border border-primary rounded-md flex flex-col @4xl:flex-row"
                     >
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-6 border-b border-primary p-4">
+                        <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                             <div title={name} className="flex-shrink-0">
                                 {(logoLight || logoDark) && (
                                     <>
@@ -323,37 +390,39 @@ const CompanyRows = ({
                                             <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
                                                 <img
                                                     className="max-w-40 mb-3 w-full"
-                                                    src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                    src={logoDark && isDark ? logoDark : logoLight}
                                                     alt={name}
                                                 />
                                             </Link>
                                         ) : (
                                             <img
                                                 className="max-w-40 mb-3 w-full"
-                                                src={logoDark && websiteTheme === 'dark' ? logoDark : logoLight}
+                                                src={logoDark && isDark ? logoDark : logoLight}
                                                 alt={name}
                                             />
                                         )}
                                     </>
                                 )}
                                 {isModerator && (
-                                    <div className="flex mt-4">
-                                        <button
-                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-2 py-1"
+                                    <div className="flex mt-4 space-x-0.5">
+                                        <OSButton
+                                            icon={<IconPencil />}
                                             onClick={() => {
                                                 openAddAJobWindow(company.id)
                                             }}
+                                            size="sm"
+                                            hover="background"
                                         >
-                                            <IconPencil className="size-3" />
-                                            <span>Edit</span>
-                                        </button>
-                                        <button
-                                            className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-2 py-1"
+                                            Edit
+                                        </OSButton>
+                                        <OSButton
+                                            icon={<IconTrash />}
                                             onClick={() => deleteCompany(company.id, name)}
+                                            size="sm"
+                                            hover="background"
                                         >
-                                            <IconTrash className="size-3" />
-                                            <span>Delete</span>
-                                        </button>
+                                            Delete
+                                        </OSButton>
                                     </div>
                                 )}
                             </div>
@@ -361,37 +430,41 @@ const CompanyRows = ({
                             <div className="flex-grow">
                                 {company.attributes.description?.trim() && (
                                     <div className="mb-4">
-                                        <p className="text-sm m-0">{company.attributes.description}</p>
+                                        <p className="my-0 text-sm">{company.attributes.description}</p>
                                         {company.attributes.url && (
-                                            <Link
+                                            <OSButton
                                                 to={`${company.attributes.url}?utm_source=posthog`}
-                                                className="group inline-flex items-center gap-0.5 text-sm text-red dark:text-yellow font-semibold"
-                                                externalNoIcon
+                                                className="px-3 rounded-full border-primary mt-2"
+                                                size="sm"
+                                                external
+                                                asLink
                                             >
-                                                Learn more
-                                                <IconArrowUpRight className="size-4 opacity-0 group-hover:opacity-50 text-primary dark:text-primary-dark" />
-                                            </Link>
+                                                Website
+                                            </OSButton>
                                         )}
                                     </div>
                                 )}
 
                                 <div>
-                                    <h3 className="text-sm font-medium text-muted m-0 leading-none mb-1">
+                                    <h3 className="text-sm font-medium text-muted dark:text-secondary m-0 leading-none mb-2">
                                         Company perks
                                     </h3>
-                                    <Perks company={company} className="flex gap-2 flex-wrap" />
+                                    <Perks company={company} className="flex gap-x-4 flex-wrap" />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-4">
+                        <div className="@container flex-1 py-4 pl-4 @container/not-full-width">
                             {hasJobs ? (
-                                <OSTable
-                                    columns={jobColumns}
-                                    rows={jobRows}
-                                    rowAlignment="center"
-                                    groupBy="Department"
-                                />
+                                <div className="pr-4 md:@2xs:pr-0 md:@xl:pr-4">
+                                    <OSTable
+                                        columns={jobColumns}
+                                        rows={jobRows}
+                                        rowAlignment="center"
+                                        groupBy="Department"
+                                        type="role"
+                                    />
+                                </div>
                             ) : (
                                 <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
                                     <em>No jobs currently available</em>
@@ -401,6 +474,108 @@ const CompanyRows = ({
                     </div>
                 )
             })}
+
+            {/* Companies without jobs (moderators only) */}
+            {showCompaniesWithoutJobs && companiesWithoutJobs.length > 0 && (
+                <>
+                    <h2 className="text-xl font-semibold text-muted dark:text-secondary mt-12 mb-6">
+                        Companies with no active RootClasses
+                    </h2>
+                    <p className="text-secondary">(Only visible to moderators)</p>
+                    {companiesWithoutJobs.map((company, index) => {
+                        const { name } = company.attributes
+                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
+                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+
+                        return (
+                            <div
+                                key={company.id}
+                                id={`company-${company.id}`}
+                                className="border border-primary rounded-md flex flex-col @4xl:flex-row opacity-60"
+                            >
+                                <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
+                                    <div title={name} className="flex-shrink-0">
+                                        {(logoLight || logoDark) && (
+                                            <>
+                                                {company.attributes.url ? (
+                                                    <Link
+                                                        to={`${company.attributes.url}?utm_source=posthog`}
+                                                        externalNoIcon
+                                                    >
+                                                        <img
+                                                            className="max-w-40 mb-3 w-full"
+                                                            src={logoDark && isDark ? logoDark : logoLight}
+                                                            alt={name}
+                                                        />
+                                                    </Link>
+                                                ) : (
+                                                    <img
+                                                        className="max-w-40 mb-3 w-full"
+                                                        src={logoDark && isDark ? logoDark : logoLight}
+                                                        alt={name}
+                                                    />
+                                                )}
+                                            </>
+                                        )}
+                                        <div className="flex mt-4 space-x-0.5">
+                                            <OSButton
+                                                icon={<IconPencil />}
+                                                onClick={() => {
+                                                    openAddAJobWindow(company.id)
+                                                }}
+                                                size="sm"
+                                                hover="background"
+                                            >
+                                                Edit
+                                            </OSButton>
+                                            <OSButton
+                                                icon={<IconTrash />}
+                                                onClick={() => deleteCompany(company.id, name)}
+                                                size="sm"
+                                                hover="background"
+                                            >
+                                                Delete
+                                            </OSButton>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex-grow">
+                                        {company.attributes.description?.trim() && (
+                                            <div className="mb-4">
+                                                <p className="my-0 text-sm">{company.attributes.description}</p>
+                                                {company.attributes.url && (
+                                                    <OSButton
+                                                        to={`${company.attributes.url}?utm_source=posthog`}
+                                                        className="px-3 rounded-full border-primary mt-2"
+                                                        size="sm"
+                                                        external
+                                                        asLink
+                                                    >
+                                                        Website
+                                                    </OSButton>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <h3 className="text-sm font-medium text-muted dark:text-secondary m-0 leading-none mb-2">
+                                                Company perks
+                                            </h3>
+                                            <Perks company={company} className="flex gap-x-4 flex-wrap" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex-1 p-4">
+                                    <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
+                                        <em>No jobs currently available</em>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </>
+            )}
 
             {displayCompanies.length === 0 && !isLoading && (
                 <div className="text-center py-12 text-secondary">
@@ -467,27 +642,35 @@ const IssueForm = () => {
         <form onSubmit={handleSubmit} className="space-y-4 m-0">
             <div>
                 <Select
-                    className={`!p-0`}
-                    options={companies.map((company) => {
-                        const { name } = company.attributes
-                        return { label: name, value: name }
-                    })}
                     value={values.company}
-                    onChange={(value) => setFieldValue('company', value)}
+                    onValueChange={(value) => setFieldValue('company', value)}
                     placeholder="Select a company"
-                    onBlur={() => setFieldTouched('company')}
+                    groups={[
+                        {
+                            label: 'Companies',
+                            items: companies.map((company) => {
+                                const { name } = company.attributes
+                                return { label: name, value: name }
+                            }),
+                        },
+                    ]}
+                    className="w-full"
                 />
                 {touched.company && errors.company && <p className="text-red text-sm m-0 mt-1">{errors.company}</p>}
             </div>
 
             <div>
                 <Select
-                    className={`!p-0 !rounded-md`}
-                    options={issueTypeOptions.map((option) => ({ label: option.label, value: option.label }))}
                     value={values.issueType}
-                    onChange={(value) => setFieldValue('issueType', value)}
+                    onValueChange={(value) => setFieldValue('issueType', value)}
                     placeholder="Select an issue type"
-                    onBlur={() => setFieldTouched('issueType')}
+                    groups={[
+                        {
+                            label: 'Issue Types',
+                            items: issueTypeOptions.map((option) => ({ label: option.label, value: option.label })),
+                        },
+                    ]}
+                    className="w-full"
                 />
                 {touched.issueType && errors.issueType && (
                     <p className="text-red text-sm m-0 mt-1">{errors.issueType}</p>
@@ -613,29 +796,46 @@ const ModeratorInitialView = ({
     }, [])
 
     return pendingCompanies.length > 0 ? (
-        <div>
+        <div data-scheme="primary">
+            <h2 className="mb-2">Companies awaiting approval</h2>
             <Select
-                className="!p-0"
-                options={pendingCompanies.map((company) => ({ label: company.attributes.name, value: company.id }))}
-                value={selectedCompany?.id}
-                onChange={(value) => {
-                    setSelectedCompany(pendingCompanies.find((company) => company.id === value) || null)
+                value={selectedCompany?.id?.toString()}
+                onValueChange={(value) => {
+                    setSelectedCompany(pendingCompanies.find((company) => company.id.toString() === value) || null)
                 }}
                 placeholder="Continue with a pending company"
+                groups={[
+                    {
+                        label: 'Pending Companies',
+                        items: pendingCompanies.map((company) => ({
+                            label: company.attributes.name,
+                            value: company.id.toString(),
+                        })),
+                    },
+                ]}
+                className="w-full"
             />
             {selectedCompany && (
                 <div className="mt-4">
-                    <CallToAction onClick={() => onStartFromPendingCompany(selectedCompany)} size="md" width="full">
+                    <OSButton
+                        onClick={() => onStartFromPendingCompany(selectedCompany)}
+                        size="md"
+                        variant="primary"
+                        width="full"
+                    >
                         {`Continue with ${selectedCompany?.attributes.name}`}
-                    </CallToAction>
+                    </OSButton>
                 </div>
             )}
-            <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base">
+            <h4
+                data-scheme="secondary"
+                className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base"
+            >
                 <span className="bg-primary px-2 relative">or</span>
             </h4>
-            <CallToAction size="md" width="full" type="secondary" onClick={onAddNewCompany}>
+            <OSButton size="md" width="full" variant="secondary" onClick={onAddNewCompany}>
                 Add a new company
-            </CallToAction>
+            </OSButton>
         </div>
     ) : null
 }
@@ -643,6 +843,19 @@ const ModeratorInitialView = ({
 const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     return (
         <div className="prose dark:prose-dark">
+            <div
+                data-scheme="primary"
+                className="not-prose bg-primary border border-primary rounded px-4 pb-4 text-center"
+            >
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
+                    alt="This hog has an answer"
+                    width={400}
+                    placeholder="blurred"
+                    className="max-w-[300px] @xl:max-w-[300px]"
+                />
+            </div>
+            <h2 className="text-xl mt-4 mb-2">Are we missing some cool tech jobs?</h2>
             <p>
                 Our job board is designed to help product engineers (and other tech-adjacent candidates) find companies
                 that have a similar vibe to PostHog – where employees are empowered to do their best work.
@@ -652,7 +865,13 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
                 <li>
                     At least one unique perk listed in our filters
                     <br />{' '}
-                    <span className="text-[15px] opacity-80">(Have a great perk we don't list? Let us know!)</span>
+                    <span className="text-[15px] opacity-80">
+                        (Have a great perk we don't list?{' '}
+                        <Link to="https://x.com/ninepixelgrid" external>
+                            Let us know!
+                        </Link>
+                        )
+                    </span>
                 </li>
                 <li>
                     A public job board (like Ashby or Greenhouse) so we can automatically keep our job board up to date
@@ -1060,21 +1279,29 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 touched={touched.url}
             />
 
-            <div>
+            <div data-scheme="primary">
+                <label className="block text-base font-semibold mb-1">Job board type</label>
                 <Select
-                    className="!p-0"
-                    options={[
-                        ...supportedJobBoardTypes,
-                        ...(isModerator ? [{ value: 'kadoa', label: 'Kadoa' }] : []),
-                        { value: 'other', label: 'Other' },
-                    ]}
                     value={values.jobBoardType}
-                    onChange={(value) => setFieldValue('jobBoardType', value)}
+                    onValueChange={(value) => setFieldValue('jobBoardType', value)}
                     placeholder="Job board type"
+                    groups={[
+                        {
+                            label: 'Job board types',
+                            items: [
+                                ...supportedJobBoardTypes,
+                                ...(isModerator ? [{ value: 'kadoa', label: 'Kadoa' }] : []),
+                                { value: 'other', label: 'Other' },
+                            ],
+                        },
+                    ]}
+                    className="w-full"
                 />
                 {touched.jobBoardType && errors.jobBoardType && (
                     <p className="text-red text-sm m-0 mt-1">{errors.jobBoardType}</p>
                 )}
+            </div>
+            <div>
                 {supportedJobBoardTypes.some((type) => type.value === values.jobBoardType) && (
                     <div className="mt-2">
                         <label className="block text-base font-semibold">Job board slug</label>
@@ -1161,14 +1388,14 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
             <div className="space-y-2 !mt-5">
                 <div>
                     <h4 className="text-base font-semibold m-0">Company logos</h4>
-                    <p className="text-sm opacity-70 m-0">Upload the company logos in SVG or PNG format</p>
+                    <p className="text-sm opacity-70 m-0">Upload the company logos in SVG or (transparent) PNG</p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
+                            className={`h-auto rounded-sm !bg-light ${
                                 touched.logoLight && errors.logoLight ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoLight', file)}
@@ -1181,7 +1408,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
+                            className={`h-auto rounded-sm !bg-dark ${
                                 touched.logoDark && errors.logoDark ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
@@ -1190,19 +1417,19 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
                         />
                     </label>
-
+                    {/* 
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logomark</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-input ${
-                                touched.logomark && errors.logomark ? 'border-red' : ''
-                            }`}
+                            className={`h-auto aspect-square rounded-sm border border-input ${touched.logomark && errors.logomark ? 'border-red' : ''
+                                }`}
                             onDrop={(file) => setFieldValue('logomark', file)}
                             onRemove={() => setFieldValue('logomark', null)}
                             image={values.logomark}
                             accept={{ 'image/png': ['.png'], 'image/svg': ['.svg'] }}
                         />
-                    </label>
+                    </label> 
+                    */}
                 </div>
                 {(touched.logoLight && errors.logoLight) ||
                 (touched.logoDark && errors.logoDark) ||
@@ -1216,8 +1443,8 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     </p>
                 ) : null}
             </div>
-            <div className="!mt-8">
-                <CallToAction disabled={isSubmitting} width="full">
+            <div>
+                <OSButton disabled={isSubmitting} width="full" variant="primary">
                     {isSubmitting ? (
                         <div className="flex items-center justify-center">
                             <Spinner className="!size-6" />
@@ -1229,7 +1456,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     ) : (
                         'Submit application'
                     )}
-                </CallToAction>
+                </OSButton>
             </div>
         </form>
     )
@@ -1244,7 +1471,7 @@ const IssueWindow = () => {
     }, [])
 
     return (
-        <div data-scheme="secondary" className="bg-primary p-4 size-full">
+        <div data-scheme="secondary" className="bg-primary text-primary p-4 size-full">
             <IssueForm />
         </div>
     )
@@ -1271,14 +1498,16 @@ const AddAJobWindow = ({
     }, [])
 
     return (
-        <div
-            data-scheme="secondary"
-            className={`bg-primary p-4 overflow-y-auto ${
-                siteSettings.experience === 'boring' ? 'size-full' : 'max-h-[500px]'
-            }`}
-        >
-            <CompanyForm companyId={companyId} onSuccess={onSuccess} />
-        </div>
+        <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
+            <div
+                data-scheme="secondary"
+                className={`bg-primary text-primary ${siteSettings.experience === 'boring' ? 'size-full' : 'h-full'}`}
+            >
+                <div className="p-4">
+                    <CompanyForm companyId={companyId} onSuccess={onSuccess} />
+                </div>
+            </div>
+        </ScrollArea>
     )
 }
 
@@ -1288,8 +1517,10 @@ export default function JobsPage() {
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [search, setSearch] = useState('')
+    const [pendingCompaniesCount, setPendingCompaniesCount] = useState<number>(0)
     const { addWindow } = useApp()
     const { appWindow } = useWindow()
+    const { getJwt, isModerator } = useUser()
 
     const {
         companies: initialCompanies,
@@ -1300,6 +1531,26 @@ export default function JobsPage() {
         deleteCompany,
         isValidating: companiesValidating,
     } = useCompanies({ companyFilters, jobFilters, search })
+
+    const fetchPendingCompaniesCount = useCallback(async () => {
+        if (!isModerator) return
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/pending-companies`, {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            const data = await response.json()
+            setPendingCompaniesCount(data.data?.length || 0)
+        } catch (error) {
+            console.error('Error fetching pending companies count:', error)
+        }
+    }, [isModerator, getJwt])
+
+    useEffect(() => {
+        fetchPendingCompaniesCount()
+    }, [fetchPendingCompaniesCount])
 
     const openIssueWindow = () => {
         addWindow(
@@ -1316,6 +1567,7 @@ export default function JobsPage() {
                 companyId={companyId}
                 onSuccess={() => {
                     mutate()
+                    fetchPendingCompaniesCount()
                 }}
                 onClose={() => {
                     setCompanyId(undefined)
@@ -1332,8 +1584,7 @@ export default function JobsPage() {
                 image={`/images/og/cool-tech-jobs.png`}
             />
             <Editor
-                title="cool_tech_jobs"
-                type="psheet"
+                title="Cool tech jobs"
                 slug="/cool-tech-jobs"
                 maxWidth="100%"
                 onSearchChange={(search) => {
@@ -1365,13 +1616,40 @@ export default function JobsPage() {
                 }}
             >
                 <section>
-                    <p className="my-0 mb-4 -mt-1">
+                    <p className="my-0 mb-4">
                         Find open roles for product engineers (and other jobs) from companies with unique perks and
                         great culture.
                     </p>
+
+                    {isModerator && pendingCompaniesCount > 0 && (
+                        <div
+                            data-scheme="secondary"
+                            className="border border-primary bg-primary rounded mb-4 p-4 @md:py-2 flex flex-col @md:flex-row @md:items-center gap-2 @md:gap-4 w-full"
+                        >
+                            <div className="flex-1">
+                                <IconShieldLock className="block @md:inline-block size-10 @md:size-6 text-secondary relative -top-0.5 mr-2" />{' '}
+                                There {pendingCompaniesCount === 1 ? 'is' : 'are'} {pendingCompaniesCount}{' '}
+                                {pendingCompaniesCount === 1 ? 'company' : 'companies'} awaiting approval.
+                            </div>
+                            <aside>
+                                <OSButton
+                                    onClick={() => {
+                                        openAddAJobWindow()
+                                    }}
+                                    variant="secondary"
+                                    size="md"
+                                >
+                                    View pending companies
+                                </OSButton>
+                            </aside>
+                        </div>
+                    )}
                     <ul className="mb-8">
                         <li>
-                            Looking to work at PostHog? <Link to="/careers">Visit our careers page.</Link>
+                            Looking to work at PostHog?{' '}
+                            <Link to="/careers" state={{ newWindow: true }}>
+                                Visit our careers page.
+                            </Link>
                         </li>
                         <li>
                             Work at a company with great perks?{' '}
@@ -1379,7 +1657,7 @@ export default function JobsPage() {
                                 className="text-red dark:text-yellow font-semibold"
                                 onClick={() => openAddAJobWindow(companyId)}
                             >
-                                Apply to get your jobs listed here.
+                                Apply to get your jobs listed.
                             </button>
                         </li>
                         <li>
@@ -1390,6 +1668,8 @@ export default function JobsPage() {
                             .
                         </li>
                     </ul>
+
+                    <CompanyNavigation companies={initialCompanies} isLoading={companiesLoading} />
                     <CompanyRows
                         companyFilters={companyFilters}
                         jobFilters={jobFilters}

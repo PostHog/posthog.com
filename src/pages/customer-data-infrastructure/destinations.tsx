@@ -33,13 +33,13 @@ export default function Destinations(): JSX.Element {
                         <strong>Snowflake:</strong> Send data to Snowflake data warehouse
                     </li>
                     <li>
-                        <strong>Amazon S3:</strong> Store data in S3 buckets for flexible processing
+                        <strong>Amazon S3:</strong> Store data in S3-compatible object storage for flexible processing
                     </li>
                     <li>
                         <strong>PostgreSQL:</strong> Export to PostgreSQL databases
                     </li>
                     <li>
-                        <strong>ClickHouse:</strong> High-performance analytics database exports
+                        <strong>Redshift:</strong> Send data to Redshift data warehouse
                     </li>
                 </ul>
                 <p>Batch export features:</p>
@@ -102,15 +102,6 @@ export default function Destinations(): JSX.Element {
                         <strong>SaaS tools:</strong> Send events to SaaS tools like Braze, Customer.io, and more
                     </li>
                     <li>
-                        <strong>Kafka:</strong> Stream events to Apache Kafka topics for high-throughput processing
-                    </li>
-                    <li>
-                        <strong>Amazon Kinesis:</strong> Direct integration with AWS Kinesis streams
-                    </li>
-                    <li>
-                        <strong>Google Pub/Sub:</strong> Stream to Google Cloud Pub/Sub topics
-                    </li>
-                    <li>
                         <strong>Custom destinations:</strong> Build your own destination using our plugin framework
                     </li>
                 </ul>
@@ -169,9 +160,6 @@ export default function Destinations(): JSX.Element {
                     <li>
                         <strong>Parquet:</strong> Columnar format for efficient warehouse storage
                     </li>
-                    <li>
-                        <strong>Avro:</strong> Schema-based format for streaming platforms
-                    </li>
                 </ul>
 
                 <h3>Delivery methods</h3>
@@ -180,13 +168,7 @@ export default function Destinations(): JSX.Element {
                         <strong>HTTP/HTTPS:</strong> RESTful APIs and webhooks
                     </li>
                     <li>
-                        <strong>SFTP:</strong> Secure file transfer for batch exports
-                    </li>
-                    <li>
                         <strong>Cloud storage:</strong> Direct writes to S3, GCS, Azure Blob
-                    </li>
-                    <li>
-                        <strong>Streaming:</strong> Kafka, Kinesis, Pub/Sub protocols
                     </li>
                 </ul>
 

@@ -38,6 +38,8 @@ import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CustomerMetadata from './CustomerMetadata'
+
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -48,6 +50,7 @@ interface ReaderViewProps {
         contributors?: any[]
         date?: string
         featuredVideo?: string
+        tags?: { label: string; url: string }[]
     }
     title?: string
     hideTitle?: boolean
@@ -58,6 +61,8 @@ interface ReaderViewProps {
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
+    hideRightSidebar?: boolean
+    contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
     homeURL?: string
@@ -345,6 +350,8 @@ export default function ReaderView({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideRightSidebar = false,
+    contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
     homeURL,
@@ -371,6 +378,8 @@ export default function ReaderView({
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
+                hideRightSidebar={hideRightSidebar}
+                contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
                 homeURL={homeURL}
@@ -502,6 +511,8 @@ function ReaderViewContent({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideRightSidebar = false,
+    contentMaxWidthClass,
     padding = true,
     proseSize,
     homeURL,
@@ -515,9 +526,15 @@ function ReaderViewContent({
     showQuestions = true,
 }) {
     const { openNewChat, compact } = useApp()
-    const { appWindow } = useWindow()
+    const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
+
+    // Check if this is a customer page and get customer key
+    const isCustomerPage = appWindow?.path?.startsWith('/customers/')
+    const customerSlug = isCustomerPage ? appWindow.path.split('/').pop() : null
+    // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
+    const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
     const {
         isNavVisible,
         isTocVisible,
@@ -530,7 +547,7 @@ function ReaderViewContent({
         setFullWidthContent,
     } = useReaderView()
 
-    const showSidebar = tableOfContents && tableOfContents?.length > 0
+    const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
 
     // Determine if we should render the left sidebar at all (separate from animation state)
     const renderLeftSidebar = !compact && !hideLeftSidebar
@@ -658,7 +675,9 @@ function ReaderViewContent({
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
                                 } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                    fullWidthContent || body?.type !== 'mdx'
+                                        ? 'max-w-full'
+                                        : contentMaxWidthClass || 'max-w-2xl'
                                 }`}
                             >
                                 {/* <DebugContainerQuery /> */}
@@ -668,25 +687,46 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {title && !hideTitle && <h1>{title}</h1>}
-                                {(body.date || body.contributors) && (
-                                    <div className="flex items-center space-x-2 mb-4">
+                                {(body.date || body.contributors || body.tags) && (
+                                    <div className="flex items-center space-x-2 mb-4 flex-wrap">
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                         {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
+                                        {body.tags && (
+                                            <ul className="m-0 p-0 list-none text-sm flex flex-wrap gap-1">
+                                                {body.tags.map((tag, index) => {
+                                                    const isLast = index === body.tags.length - 1
+                                                    return (
+                                                        <li key={tag.url} className="p-0">
+                                                            <Link to={tag.url}>{tag.label}</Link>
+                                                            {!isLast && ', '}
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        )}
                                     </div>
                                 )}
-                                {tableOfContents && tableOfContents.length > 0 && !hideMobileTableOfContents && (
-                                    <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
-                                        <TableOfContents
-                                            tableOfContents={tableOfContents}
-                                            contentRef={contentRef}
-                                            title="Contents"
-                                        />
-                                    </div>
-                                )}
+                                {tableOfContents &&
+                                    tableOfContents.length > 0 &&
+                                    !hideMobileTableOfContents &&
+                                    !hideRightSidebar && (
+                                        <div data-scheme="secondary" className="@4xl/app-reader:hidden mt-4">
+                                            <TableOfContents
+                                                tableOfContents={tableOfContents}
+                                                contentRef={contentRef}
+                                                title="Contents"
+                                            />
+                                        </div>
+                                    )}
                                 {body.featuredVideo && <iframe src={body.featuredVideo} />}
                                 <div className="reader-content-container">
                                     {body.type === 'mdx' ? (
                                         <div className={'@container'}>
+                                            {/* Display customer metadata if this is a customer page */}
+                                            {isCustomerPage && customerKey && (
+                                                <CustomerMetadata customerKey={customerKey} />
+                                            )}
+
                                             <MDXProvider components={mdxComponents}>
                                                 <MDXRenderer>{body.content}</MDXRenderer>
                                             </MDXProvider>
@@ -700,7 +740,7 @@ function ReaderViewContent({
                                         <h3 id="squeak-questions" className="mb-4">
                                             Community questions
                                         </h3>
-                                        <Questions slug={appWindow?.path} />
+                                        <Questions slug={appWindow?.path} parentName={activeInternalMenu?.name} />
                                     </div>
                                 )}
                                 {showSurvey && (

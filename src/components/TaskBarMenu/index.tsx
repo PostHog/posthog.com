@@ -39,6 +39,7 @@ export default function TaskBarMenu() {
         setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
+        posthogInstance,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -205,8 +206,28 @@ export default function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Sign in',
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in to PostHog.com',
                           onClick: handleSignInClick,
+                      },
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Go to...',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'PostHog app',
+                          link: 'https://app.posthog.com',
+                          icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          external: true,
                       },
                   ],
         },
@@ -258,12 +279,13 @@ export default function TaskBarMenu() {
                     /> */}
                     <div className="relative mr-1">
                         <OSButton
-                            variant="secondary"
+                            variant="primary"
                             size="md"
-                            onClick={() => navigate('/start', { state: { newWindow: true } })}
+                            asLink
+                            to={posthogInstance ? posthogInstance.replace(/"/g, '') : 'https://app.posthog.com/signup'}
                             className=""
                         >
-                            Get started – free
+                            {posthogInstance ? 'Dashboard' : 'Get started – free'}
                         </OSButton>
                     </div>
                     <Tooltip

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { IconCheck } from '@posthog/icons'
-import { Link as ScrollLink } from 'react-scroll'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
+import ScrollToElement from 'components/ScrollToElement'
 
 const SignupEmbed = (props: any) => {
     const { setWindowTitle } = useApp()
@@ -88,14 +88,13 @@ export const PaidPlanContent = ({
             )}
 
             <p className="text-sm mt-2">
-                <ScrollLink
-                    to="calculator"
-                    offset={-120}
-                    smooth
+                <ScrollToElement
+                    targetId="calculator"
+                    offset={-20}
                     className="font-semibold text-[15px] cursor-pointer underline"
                 >
                     Estimate your price
-                </ScrollLink>
+                </ScrollToElement>
             </p>
 
             <ul className="list-none p-0 mb-4 space-y-1">

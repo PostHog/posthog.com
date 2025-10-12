@@ -308,6 +308,7 @@ const AvatarBlock = ({
     values: any
     errors: any
 }) => {
+    const { isModerator } = useUser()
     const inputRef = useRef<HTMLInputElement>(null)
     const [imageURL, setImageURL] = useState(values?.avatar)
 
@@ -345,7 +346,7 @@ const AvatarBlock = ({
                             type="file"
                         />
                     </div>
-                    {imageURL && (
+                    {imageURL && !isModerator && (
                         <button
                             onClick={() => setFieldValue('avatar', null)}
                             className="p-2 border-l border-b border-primary bg-primary"
@@ -753,7 +754,7 @@ const Block = ({ title, children, url }) => {
     )
 }
 
-const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
+const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue, maxLength }) => {
     return (
         <div className="bg-white dark:bg-accent-dark rounded-md border border-primary overflow-hidden">
             <RichText
@@ -762,6 +763,7 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
                 setFieldValue={setFieldValue}
                 bodyKey={bodyKey}
                 className="h-[400px]"
+                maxLength={maxLength}
             />
         </div>
     )
@@ -816,6 +818,7 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                               setFieldValue={setFieldValue}
                               bodyKey="readme"
                               initialValue={profile.readme}
+                              maxLength={10000}
                           />
                       ) : (
                           <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
@@ -1286,21 +1289,20 @@ export default function ProfilePage({ params }: PageProps) {
                     }
                 />
             </div>
-            <ScrollArea>
-                <div
-                    data-scheme="primary"
-                    className="mx-auto max-w-screen-xl px-4 pb-4 @container"
-                    style={
-                        values.backgroundImage
-                            ? {
-                                  backgroundImage: `url(${values.backgroundImage.url})`,
-                                  backgroundSize: values.backgroundImage.backgroundSize || 'auto',
-                                  backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
-                                  backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
-                              }
-                            : undefined
-                    }
-                >
+            <ScrollArea
+                className="min-h-0 h-full"
+                style={
+                    values.backgroundImage
+                        ? {
+                              backgroundImage: `url(${values.backgroundImage.url})`,
+                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                          }
+                        : undefined
+                }
+            >
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-4 pb-4 @container">
                     <div className="flex flex-col @2xl:flex-row gap-6 p-4">
                         <div className="@2xl:max-w-xs w-full flex-shrink-0 pb-4">
                             <AvatarBlock

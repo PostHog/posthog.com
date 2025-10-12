@@ -13,6 +13,8 @@ import {
     IconHome,
     IconUser,
     IconMinus,
+    IconPencil,
+    IconDownload,
 } from '@posthog/icons'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { Skeleton } from 'components/Questions/QuestionsTable'
@@ -28,7 +30,7 @@ import Slider from 'components/Slider'
 import CommunityLayout from 'components/Community/Layout'
 import { companyMenu } from '../../navs'
 import Fuse from 'fuse.js'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import Spinner from 'components/Spinner'
 import { slugifyTeamName } from 'lib/utils'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -42,7 +44,9 @@ import {
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
 import ProgressBar from 'components/ProgressBar'
-import { Scroll } from "lucide-react"
+import { Scroll } from 'lucide-react'
+import { useApp } from '../../context/App'
+import RoadmapWindow from './RoadmapWindow'
 
 interface IGitHubPage {
     title: string
@@ -69,6 +73,37 @@ export interface IRoadmap {
     }
     projectedCompletion: string
     githubPages: IGitHubPage[]
+}
+
+export const ExportSubscribersButton = ({ roadmap }: { roadmap: any }) => {
+    const subscribers = roadmap.attributes.subscribers?.data || []
+    const likes = roadmap.attributes.likes?.data || []
+    const handleExport = async () => {
+        const csv = `First name,Last name,Email,Type\n${subscribers
+            .map(({ attributes: { user, firstName, lastName } }) => {
+                return `${firstName},${lastName},${user?.data?.attributes?.email},Subscriber`
+            })
+            .join('\n')}
+${likes
+    .map(({ attributes: { user, firstName, lastName } }) => {
+        return `${firstName},${lastName},${user?.data?.attributes?.email},Voter`
+    })
+    .join('\n')}`
+        const blob = new Blob([csv], { type: 'text/csv' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `${roadmap.attributes.title} subscribers.csv`
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        URL.revokeObjectURL(url)
+    }
+    return (
+        <button onClick={handleExport}>
+            <IconDownload className="size-5" />
+        </button>
+    )
 }
 
 export const VoteBox = ({ likeCount, liked }) => {
@@ -220,10 +255,11 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${active
-                ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
-                : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
-                } ${className}`}
+            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
+                active
+                    ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
+                    : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
+            } ${className}`}
         >
             {children}
         </button>
@@ -260,6 +296,8 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
         title: string
     } | null>(null)
     const [localFilteredRoadmaps, setLocalFilteredRoadmaps] = useState()
+    const { addWindow } = useApp()
+    const isModerator = user?.role?.type === 'moderator'
 
     // Get search context if available (from Editor)
     const searchContext = useSearch()
@@ -381,7 +419,6 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
         (roadmap) => `${roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'} Team`
     )
     const teams = Object.keys(roadmapsGroupedByTeam).sort()
-    const isModerator = user?.role?.type === 'moderator'
 
     const toggleDescription = (id: number) => {
         setExpandedDescriptions((prev) => ({
@@ -432,8 +469,14 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
             { name: 'Idea', width: 'minmax(200px, 1.5fr)', align: 'left' as const },
             { name: 'Details', width: 'minmax(300px, 2fr)', align: 'left' as const },
             { name: 'More info', width: 'minmax(100px, auto)', align: 'center' as const },
+            ...(isModerator
+                ? [
+                      { name: '', width: '50px', align: 'center' as const },
+                      { name: '', width: '50px', align: 'center' as const },
+                  ]
+                : []),
         ]
-    }, [tableSort])
+    }, [tableSort, isModerator])
 
     // Sort the rows based on tableSort value
     const sortedRows = useMemo(() => {
@@ -459,16 +502,18 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
         // Since we're regenerating cells for each sort option to include/exclude date column,
         // we need to rebuild the rows from scratch for the sorted roadmaps
         return sortedRoadmaps.map((roadmap: any) => {
+            const subscriberCount = roadmap.attributes.subscribers?.data?.length || 0
+            const likeCount = roadmap.attributes.likes?.data?.length || 0
             const teamName = roadmap.attributes.teams?.data?.[0]?.attributes?.name
             const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === roadmap.id)
 
             // Format date if available
             const formattedDate = roadmap.attributes.createdAt
                 ? new Date(roadmap.attributes.createdAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                })
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                  })
                 : 'Unknown'
 
             // Access highlighted fields
@@ -519,11 +564,11 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                 },
                 ...(tableSort === 'newest' || tableSort === 'oldest'
                     ? [
-                        {
-                            content: <span className="text-sm font-medium">{formattedDate}</span>,
-                            className: 'text-secondary dark:text-secondary-dark',
-                        },
-                    ]
+                          {
+                              content: <span className="text-sm font-medium">{formattedDate}</span>,
+                              className: 'text-secondary dark:text-secondary-dark',
+                          },
+                      ]
                     : []),
                 {
                     content: teamName ? (
@@ -606,6 +651,51 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                         ) : null,
                     className: 'text-center',
                 },
+                ...(isModerator
+                    ? [
+                          {
+                              content: (
+                                  <Tooltip
+                                      className="my-auto flex"
+                                      trigger={
+                                          <button
+                                              onClick={() =>
+                                                  addWindow(
+                                                      <RoadmapWindow
+                                                          location={{ pathname: `edit-roadmap-${roadmap.id}` }}
+                                                          key={`edit-roadmap`}
+                                                          newWindow
+                                                          id={roadmap.id}
+                                                          status="under-consideration"
+                                                          onSubmit={() => {
+                                                              mutate()
+                                                          }}
+                                                      />
+                                                  )
+                                              }
+                                          >
+                                              <IconPencil className="size-5" />
+                                          </button>
+                                      }
+                                  >
+                                      <p className="text-sm m-0">Edit</p>
+                                  </Tooltip>
+                              ),
+                          },
+                          {
+                              content: (
+                                  <Tooltip
+                                      className="my-auto flex"
+                                      trigger={<ExportSubscribersButton roadmap={roadmap} />}
+                                  >
+                                      <p className="text-sm m-0">
+                                          Export subscriber list ({subscriberCount + likeCount})
+                                      </p>
+                                  </Tooltip>
+                              ),
+                          },
+                      ]
+                    : []),
             ]
 
             return {
@@ -676,24 +766,8 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                     <>
                         <p className="mt-0">
                             Here's what we're thinking about building next. If you want to see what we've shipped
-                            recently,{' '}
-                            <Link to="/changelog/2025" state={{ newWindow: true }}>
-                                visit the changelog
-                            </Link>
-                            .
+                            recently, <Link to="/changelog">visit the changelog</Link>.
                         </p>
-                        <div className="flex justify-between items-center space-x-2 mb-4">
-                            {isModerator && !adding && (
-                                <div className="relative">
-                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                        <Tooltip content="Only moderators can see this" placement="top">
-                                            <IconShieldLock className="w-6 h-6 inline-block" />
-                                        </Tooltip>
-                                        Add a feature
-                                    </CallToAction>
-                                </div>
-                            )}
-                        </div>
                         {isModerator && adding && (
                             <RoadmapForm
                                 status="under-consideration"

@@ -10,6 +10,7 @@ import { IconFilter } from '@posthog/icons'
 import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
+import Input from 'components/OSForm/input'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -27,8 +28,9 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
                         onClick={() => {
                             refine(item.value)
                         }}
-                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${item.isRefined ? isRefinedClassName : ''
-                            }`}
+                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${
+                            item.isRefined ? isRefinedClassName : ''
+                        }`}
                     >
                         <span className="text-sm">{capitalizeFirstLetter(item.label)}</span>{' '}
                         <span className="text-xs opacity-60 font-semibold">({item.count})</span>
@@ -48,7 +50,7 @@ const Search = ({
     autoFocus = true,
     onEscape,
 }: {
-    initialFilter: string
+    initialFilter?: string
     className?: string
     onChange?: () => void
     isRefinedClassName?: string
@@ -95,14 +97,18 @@ const Search = ({
         <div className={`flex flex-col ${className}`} onMouseDown={(e) => dragControls.start(e)}>
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
-                    <div className="bg-white rounded border !border-primary overflow-hidden relative">
+                    <div className="bg-accent rounded border !border-primary overflow-hidden relative">
                         <Combobox.Input
-                            className="w-full !border-none !text-[15px] !px-2.5 !py-1.5"
-                            onChange={(e) => setQuery(e.target.value)}
+                            as={Input}
+                            label=""
+                            showLabel={false}
+                            className="w-full text-primary border-0 bg-transparent focus:ring-0"
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
                             onKeyDown={handleKeyDown}
                             placeholder={`Search ${initialFilter ? 'the ' + initialFilter : 'PostHog.com'}...`}
                             autoFocus={autoFocus}
                             value={query}
+                            containerClassName="m-0"
                         />
                         {!hideFilters && (
                             <div data-scheme="secondary" className="absolute right-1 top-1/2 -translate-y-1/2">
@@ -125,7 +131,7 @@ const Search = ({
                         <Combobox.Options
                             static
                             hold
-                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-white"
+                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl"
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>
@@ -135,10 +141,14 @@ const Search = ({
                                         {({ active }) => (
                                             <li
                                                 data-scheme="secondary"
-                                                className={`cursor-pointer ${active ? 'bg-primary' : ''}`}
+                                                className={`cursor-pointer text-primary ${
+                                                    active ? 'bg-accent' : 'bg-primary'
+                                                }`}
                                             >
                                                 <div className="py-2 px-4 block">
-                                                    <p className="text-[13px] text-red font-medium m-0">/{hit.slug}</p>
+                                                    <p className="text-[13px] text-red dark:text-yellow font-medium m-0">
+                                                        /{hit.slug}
+                                                    </p>
                                                     <h5 className="text-[15px] m-0 font-bold line-clamp-1">
                                                         {hit.title}
                                                     </h5>

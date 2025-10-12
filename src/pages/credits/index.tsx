@@ -76,7 +76,7 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                 { label: 'Small teams', value: allTeams.nodes.length },
                 { label: 'Customers', value: CUSTOMER_COUNT.toLocaleString() },
                 { label: 'Revenue', value: 'Lots' },
-                { label: 'Funding', value: '$107,000,000' },
+                { label: 'Funding', value: '$182,000,000' },
                 {
                     label: 'Locations',
                     value: (
@@ -217,6 +217,12 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                                     </CallToAction>
                                 </div>
                             )}
+
+                            <p className="text-sm text-secondary text-center text-balance">
+                                <Link to="/blog/why-os" state={{ newWindow: true }} className="underline">
+                                    Why does PostHog.com look like an operating system?
+                                </Link>
+                            </p>
 
                             <p className="text-sm text-secondary">
                                 <Link

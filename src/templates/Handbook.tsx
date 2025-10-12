@@ -333,8 +333,14 @@ export default function Handbook({
 }) {
     const {
         body,
-        frontmatter: { title, seo, tableOfContents: frontmatterTableOfContents },
-        fields: { slug, contributors, appConfig, templateConfigs, commits },
+        frontmatter: {
+            title,
+            seo,
+            tableOfContents: frontmatterTableOfContents,
+            hideRightSidebar,
+            contentMaxWidthClass,
+        },
+        fields: { slug, contributors, appConfig, templateConfigs, commits, contentWithSnippets },
         excerpt,
     } = post
 
@@ -393,6 +399,9 @@ export default function Handbook({
                 homeURL={breadcrumbBase.url}
                 description={seo?.metaDescription || excerpt}
                 showSurvey
+                hideRightSidebar={hideRightSidebar}
+                contentMaxWidthClass={contentMaxWidthClass}
+                markdownContent={contentWithSnippets}
             />
         </>
     )
@@ -427,6 +436,7 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+                contentWithSnippets
                 commits {
                     author {
                         avatar_url
@@ -472,6 +482,8 @@ export const query = graphql`
                 title
                 description
                 showTitle
+                hideRightSidebar
+                contentMaxWidthClass
                 hideAnchor
                 hideLastUpdated
                 github

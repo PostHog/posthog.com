@@ -16,7 +16,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 - Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
-- Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools)
+- Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools)
   - Integrate Gmail with Salesforce and Vitally to enable centralized communication history
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first CS and Onboarding standup.

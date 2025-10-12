@@ -36,51 +36,7 @@ The best way to do this is **adding an optional override** to your [release cond
     classes = "rounded"
 />
 
-Once you test it works, you're ready to launch your experiment.
-
-> **Notes:** 
-> - The feature flag is activated only when you launch the experiment, or if you've manually checked the "Enable feature flag" box.
-> - While the [PostHog toolbar](/docs/toolbar) enables you to toggle feature flags on and off, this only works for active feature flags and won't work for your experiment feature flag while it is still in draft mode.
-
-## Viewing experiment results
-
-While the experiment is running, you can see results on the details page:
-
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_22_at_10_05_11_2f5017a50c.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_22_at_10_05_31_0e81dd9c8e.png"
-  alt = "Viewing experiment results"
-  classes = "rounded"
-/>
-
-This page shows:
-
-- Status, whether draft, running, or complete as well as whether it has reached significance or not.
-- Data collection progress based on an estimated target number of participants and [minimum detectable effect](/docs/experiments/sample-size-running-time#minimum-detectable-effect-mde).
-- Win probability for each variant.
-- [Statistical significance](/docs/experiments/statistics) for the results.
-- Variants, their release conditions and distribution.
-- [Primary and secondary metrics](/docs/experiments/metrics).
-
-Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
-
-## Ending an experiment
-
-After you've analyzed your experiment metrics and you're ready to end your experiment, you can click the **Ship a variant** button on the experiment page to roll out a variant and stop the experiment. _This button only appears when the experiment has reached statistical significance and its feature flag is not rolled out to 100% for any variant yet._
-
-![Ship a variant](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_23_at_13_52_25_6c1cf85153.png)
-
-If you want more precise control over your release, you can also set the release condition for the feature flag and stop the experiment manually.
-
-Beyond this, we recommend:
-
-1. Sharing the results with your team.
-
-2. Documenting conclusions and findings in the description field your experiment. This helps preserve historical context for future team members.
-
-3. Removing the experiment and losing variant's code.
-
-4. Archiving the experiment.
+Once you test it works, launch your experiment.
 
 ## Further reading
 

@@ -94,7 +94,12 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     <WordArt text="Install without AI" theme="italicOutline" fontSize={24} />
                     <br />
                     <div className="relative">
-                        <SignupCTA size="absurd" type="primary" className="animate-grow mt-2 mb-1" />
+                        <SignupCTA
+                            size="absurd"
+                            type="primary"
+                            className="animate-grow mt-2 mb-1"
+                            state={{ initialTab: 'signup' }}
+                        />
                         <br />
                         <WordArt
                             text="(Yes this is a real button, you can actually click it)"

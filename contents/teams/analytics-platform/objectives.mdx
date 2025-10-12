@@ -1,20 +1,12 @@
-### Q3 2025 objectives
+### Q4 2025 objectives
 
-> Note: this was reset mid way through the quarter based on the team split
-
-* Shared dashboards/insights (carryover from global team goals) [ Sandy ]
-    * password protected
-    * (new) date filters
-    * (new) monitoring for embedding + shared + configurations + redirect bug
-* Subscriptions [ Sandy ]
-    * make sure temporal is stable for slack / email
-    * make sure errors/exceptions are properly surfaced (auto alert with post to slack)
-* Dashboards [ Sandy ]
-    * improve the initial load of dashboards from viewset/ response structure optimization
-* Cache warming [ Nima ]
-    * Better understanding of who's hitting the cache warming and refreshing the data
-    * Improve efficiency of the logic + distribute when it's running
-    * Roll out to as many paid teams as possible
-* HogQL Query Service [ Sandy ]
-    * Consensus on the end state + migration
-    * Begin work on the migration
+* Alerts / exports / subscriptions stability <TeamMember name="Andy Zhao" photo /> <TeamMember name="Vasco de Krijger" photo />
+  * Improve observability and alerting
+  * Reduce error rate and improve stability using what we learn from the above
+  * Unify the insight execution path
+* Schema validation <TeamMember name="Sandy Spicer" photo />
+  * Define and ship a beta / MVP for the schema validation system
+* Query performance <TeamMember name="Robbie Coomber" photo />
+  * Instrument where time is spent while users are waiting for query responses
+  * Fix queries that are slow due to JSON property references
+  * Implement sessions on events

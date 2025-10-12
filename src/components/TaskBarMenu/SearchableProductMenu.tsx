@@ -46,8 +46,8 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
 
     // Simple fuzzy search - matches if all characters appear in order (case insensitive)
     const filteredProducts = useMemo(() => {
-        // First filter out hidden products
-        let filtered = products.filter((product) => !hiddenSlugs.includes(product.slug))
+        // First filter out hidden products and products without categories (already filtered out from browsed navigation and products)
+        let filtered = products.filter((product) => !hiddenSlugs.includes(product.slug) && product.category)
 
         if (searchTerm.trim()) {
             const searchLower = searchTerm.toLowerCase()

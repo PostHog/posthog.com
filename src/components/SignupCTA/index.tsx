@@ -12,6 +12,7 @@ export const SignupCTA = ({
     type = 'primary',
     width,
     size = 'lg',
+    state,
     ...other
 }: {
     text?: string
@@ -20,6 +21,7 @@ export const SignupCTA = ({
     width?: string
     event?: any
     size?: 'lg' | 'sm' | 'md' | 'absurd'
+    state?: any
 }): JSX.Element => {
     const posthog = usePostHog()
 
@@ -38,6 +40,7 @@ export const SignupCTA = ({
                     to={`https://us.posthog.com/signup`}
                     event={event}
                     size={size}
+                    state={state}
                 >
                     {text}
                 </CallToAction>
@@ -50,6 +53,7 @@ export const SignupCTA = ({
                     to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'us'}.posthog.com/signup`}
                     event={event}
                     size={size}
+                    state={state}
                 >
                     {text}
                 </CallToAction>

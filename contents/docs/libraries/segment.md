@@ -75,7 +75,7 @@ Similarly, the `analytics.page()` function sends `$pageview` events and the `ana
 
 ### Identifying users
 
-To add identify users and add person properties, you can use Segment's `identify` function.
+To identify users and add person properties, you can use Segment's `identify` function.
 
 ```js
 analytics.identify('userId123', {

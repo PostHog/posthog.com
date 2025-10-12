@@ -17,6 +17,7 @@ import { experiments } from './productData/experiments'
 import { max_ai } from './productData/max_ai'
 import { llmAnalytics } from './productData/llm_analytics'
 import { revenueAnalytics } from './productData/revenue_analytics'
+import { realtimeDestinations } from './productData/realtime_destinations'
 
 const initialProducts = [
     productAnalytics,
@@ -24,6 +25,7 @@ const initialProducts = [
     featureFlags,
     surveys,
     dataWarehouse,
+    realtimeDestinations,
     errorTracking,
     cdp,
     webAnalytics,
@@ -130,6 +132,7 @@ const allProductsData = graphql`
                         plans {
                             description
                             docs_url
+                            free_allocation
                             image_url
                             name
                             plan_key

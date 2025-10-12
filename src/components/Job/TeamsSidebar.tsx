@@ -103,7 +103,7 @@ export const TeamInfoDisplay = ({
     const isFallback = !team
 
     const teamLength = displayTeam?.profiles?.data?.length
-    const teamURL = `/teams/${displayTeam?.slug || ''}`
+    const teamURL = displayTeam?.slug ? `/teams/${displayTeam.slug}` : null
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
@@ -119,8 +119,8 @@ export const TeamInfoDisplay = ({
         return (
             <div className="flex flex-col @md:flex-row @md:gap-4">
                 <div className="flex justify-center mb-4 max-w-48 mx-auto">
-                    {isFallback ? (
-                        // Don't link the fallback team
+                    {isFallback || !teamURL ? (
+                        // Don't link the fallback team or teams without slug
                         <TeamPatch
                             name={displayTeam.name}
                             imageUrl={displayTeam.crest?.data?.attributes?.url}
@@ -128,7 +128,7 @@ export const TeamInfoDisplay = ({
                             className="w-full"
                         />
                     ) : (
-                        // Link real teams
+                        // Link real teams with valid slug
                         <Link to={teamURL} state={{ newWindow: true }}>
                             <TeamPatch
                                 name={displayTeam.name}
@@ -212,8 +212,8 @@ export const TeamInfoDisplay = ({
                 </div>
                 <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
                     <div className="w-48 @md:w-full @3xl:max-w-60 mx-auto">
-                        {isFallback ? (
-                            // Don't link the fallback team
+                        {isFallback || !teamURL ? (
+                            // Don't link the fallback team or teams without slug
                             <TeamPatch
                                 name={displayTeam.name}
                                 imageUrl={displayTeam.crest?.data?.attributes?.url}
@@ -221,7 +221,7 @@ export const TeamInfoDisplay = ({
                                 className="w-full"
                             />
                         ) : (
-                            // Link real teams
+                            // Link real teams with valid slug
                             <Link to={teamURL} state={{ newWindow: true }}>
                                 <TeamPatch
                                     name={displayTeam.name}

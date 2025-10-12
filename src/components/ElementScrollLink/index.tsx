@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes, useEffect, useState, useContext, createCon
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     id: string
-    label: string
+    label: string | React.ReactNode
     element: React.RefObject<HTMLElement>
     className?: string
 }
@@ -19,9 +19,11 @@ interface ScrollSpyContextType {
     activeSection: string | null
 }
 
-const ScrollSpyContext = createContext<ScrollSpyContextType>({
+export const ScrollSpyContext = createContext<ScrollSpyContextType>({
     sections: {},
-    setSectionData: () => { },
+    setSectionData: () => {
+        /* no-op default */
+    },
     activeSection: null,
 })
 

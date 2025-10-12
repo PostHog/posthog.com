@@ -440,6 +440,12 @@ configuration.sendFeatureFlagEvent = true
 configuration.preloadFeatureFlags = true
 
 /**
+ * Environment tags that constrain which feature flags are evaluated. (not set by default)
+ * When set, only flags with matching evaluation tags (or no evaluation tags) will be returned.
+ */
+configuration.evaluationEnvironments = ["production", "ios", "mobile"]
+
+/**
  * Logs the SDK messages into Logcat. (off/false by default)
  */
 configuration.debug = false
@@ -475,6 +481,7 @@ configuration.sessionReplay = false
 
 /**
  * Session Replay configuration
+ * https://posthog.com/docs/session-replay/installation for more details
  */
 configuration.sessionReplayConfig = .init()
 

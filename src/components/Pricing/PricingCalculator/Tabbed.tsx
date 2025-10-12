@@ -9,12 +9,13 @@ import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
+import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 
-const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
+export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
     const [percentage, setPercentage] = useState(50)
@@ -112,7 +113,15 @@ export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData
     ) : null
 }
 
-const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, analyticsData, setAnalyticsData }) => {
+export const TabContent = ({
+    activeProduct,
+    addons,
+    setVolume,
+    setAddons,
+    setProduct,
+    analyticsData,
+    setAnalyticsData,
+}) => {
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
 
@@ -133,6 +142,12 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                             Experiments is currently bundled with Feature flags and share a free tier and volume
                             pricing.
                         </div>
+                    ) : activeProduct.addonSliders ? (
+                        <StandaloneAddonsTab
+                            activeProduct={activeProduct}
+                            setVolume={setVolume}
+                            setProduct={setProduct}
+                        />
                     ) : (
                         <>
                             <div className="grid grid-cols-8">
@@ -346,7 +361,7 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
-                        {products.map(({ name, Icon, cost, color, billingData }, index) => {
+                        {products.map(({ name, Icon, cost, color, billingData, handle, categoryName }, index) => {
                             const active = activeTab === index
                             const addonsPrice = productAddons
                                 .filter(
@@ -369,7 +384,7 @@ export default function Tabbed() {
                                                     <Icon className={`w-5 h-6 text-${color}`} />
                                                 </span>
                                             )}
-                                            <span>{name}</span>
+                                            <span>{categoryName || name}</span>
                                         </div>
                                         {name == 'Experiments' ? (
                                             <span className="opacity-25">--</span>

@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
+import { navigate } from 'gatsby'
+import { useWindow } from '../../context/Window'
 
 const ChangelogPage = () => {
+    const { appWindow } = useWindow()
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
         value: '/changelog/2025',
         content: <></>,
     })
+
+    useEffect(() => {
+        if (appWindow?.path === '/changelog') {
+            navigate('/changelog/2025')
+        }
+    }, [])
 
     return (
         <>

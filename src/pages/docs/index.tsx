@@ -21,7 +21,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
 import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
 import { SearchUI } from 'components/SearchUI'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const keyboardShortcut =
     'box-content p-[5px] border border-b-2 border-primary  rounded-[3px] inline-flex text-black/35 dark:text-white/40'
@@ -255,13 +255,21 @@ export const DocsIndex = () => {
         // Top level sections from Product OS
         ...topLevelSections.map((section: any) => ({
             value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
-            trigger: <span className="bg-primary pr-2 relative z-10">{section.name}</span>,
+            trigger: (
+                <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
+                    {section.name}
+                </span>
+            ),
             content: renderSectionContent(section.children || []),
         })),
         // Products section
         {
             value: 'products',
-            trigger: <span className="bg-primary pr-2 relative z-10">Products</span>,
+            trigger: (
+                <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
+                    Products
+                </span>
+            ),
             content: (
                 <div
                     data-scheme="primary"
@@ -290,7 +298,6 @@ export const DocsIndex = () => {
 
     const imagePositioning =
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
-
 
     return (
         <div data-scheme="secondary" className="bg-primary h-full text-primary">
@@ -477,7 +484,13 @@ export const DocsIndex = () => {
                 </section>
                 <div className="flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full p-2 @xl:p-4">
                     <section className="flex-1">
-                        <SearchUI initialFilter="docs" hideFilters isRefinedClassName="bg-white" className="mb-4" />
+                        <SearchUI
+                            initialFilter="docs"
+                            hideFilters
+                            isRefinedClassName="bg-white"
+                            className="mb-4"
+                            autoFocus={false}
+                        />
                         <ScrollArea>
                             <div className="@md:-ml-3">
                                 {accordionItems.map((item, index) => (

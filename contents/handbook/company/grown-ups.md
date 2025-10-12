@@ -27,7 +27,7 @@ We have tried many different tactics over the years, and these are the things we
 - We pay people for [SuperDays](/handbook/people/hiring-process#4-posthog-superday) because we think this is the right thing to do and it enables those who could not otherwise take a day off work to participate in our recruitment process. 
 - [Unlimited vacation policy](/handbook/people/time-off) with a mandatory minimum time off - so you can fit work around your life.
 - We discourage heavy drinking at company events - you’ll need to join another company if you’re a bro, alas.
-- Political issues can be more important to people than work, and they are frequently divisive and distract from our purpose. We therefore don’t stand for any political cause.
+- Political issues can be more important to people than work, and they are frequently divisive and distract from our purpose. We therefore don’t stand for any political cause and don't tolerate or allow political discussions in Slack, GitHub, or any other PostHog-owned or sponsored tools or events.
 - We don’t care about college degrees. We care about what you’ve achieved.
 - We expect people to act kindly and inclusively towards each other. We take a very [strict stance](/handbook/people/grievances) on people behaving inappropriately towards others.
 

@@ -15,6 +15,7 @@ import {
     IconBookmarkSolid,
     IconBottomPanel,
     IconChevronDown,
+    IconReceipt,
 } from '@posthog/icons'
 import { IconPDF } from 'components/OSIcons'
 import { useWindow } from '../../context/Window'
@@ -66,6 +67,10 @@ interface HeaderBarProps {
     onToggleDrawer?: () => void
     navIconClassName?: string
     isEditing?: boolean
+    showOrderHistory?: boolean
+    isOrderHistoryOpen?: boolean
+    onOrderHistoryOpen?: () => void
+    onOrderHistoryClose?: () => void
 }
 
 export default function HeaderBar({
@@ -97,8 +102,12 @@ export default function HeaderBar({
     onToggleDrawer,
     navIconClassName = '',
     isEditing = false,
+    showOrderHistory = false,
+    isOrderHistoryOpen = false,
+    onOrderHistoryOpen,
+    onOrderHistoryClose,
 }: HeaderBarProps) {
-    const { compact, focusedWindow } = useApp()
+    const { compact, focusedWindow, posthogInstance } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
@@ -128,9 +137,26 @@ export default function HeaderBar({
         }
     }
 
+    const handleOrderHistoryClick = () => {
+        if (isOrderHistoryOpen) {
+            onOrderHistoryClose?.()
+        } else {
+            onOrderHistoryOpen?.()
+        }
+    }
+
     useEffect(() => {
         if (appWindow?.ref?.current) {
             const handleKeyDown = (e: KeyboardEvent) => {
+                const target = e.target as HTMLElement
+                if (
+                    target.tagName === 'INPUT' ||
+                    target.tagName === 'TEXTAREA' ||
+                    target.shadowRoot ||
+                    (target instanceof HTMLElement && target.closest('.mdxeditor'))
+                ) {
+                    return
+                }
                 // Only handle Shift+F if this window is the focused/active window
                 if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
                     e.preventDefault()
@@ -208,7 +234,7 @@ export default function HeaderBar({
                                 {appWindow?.meta?.title}
                             </div>
                         ))}
-                    <div className="flex items-center gap-px relative">
+                    <div className="flex items-center gap-0.5 relative">
                         {rightActionButtons}
                         {showSearch && (searchContentRef || onSearch) && !isEditing && (
                             <Tooltip
@@ -223,6 +249,20 @@ export default function HeaderBar({
                                         <KeyboardShortcut text="F" size="xs" />
                                     </div>
                                 </div>
+                            </Tooltip>
+                        )}
+                        {showOrderHistory && (
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        onClick={handleOrderHistoryClick}
+                                        active={isOrderHistoryOpen}
+                                        size="md"
+                                        icon={<IconReceipt />}
+                                    />
+                                }
+                            >
+                                Order history
                             </Tooltip>
                         )}
                         {showCart && (
@@ -300,18 +340,29 @@ export default function HeaderBar({
                 )}
                 <div className="flex items-center gap-1">
                     {showDrawerToggle && (
-                        <Tooltip
-                            trigger={
-                                <OSButton
-                                    size="md"
-                                    icon={<IconBottomPanel />}
-                                    active={isDrawerOpen}
-                                    onClick={onToggleDrawer}
-                                />
-                            }
-                        >
-                            {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
-                        </Tooltip>
+                        <>
+                            <OSButton
+                                variant="secondary"
+                                size="md"
+                                asLink
+                                to="https://app.posthog.com/signup"
+                                className="mr-1"
+                            >
+                                Get started – free
+                            </OSButton>
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        size="md"
+                                        icon={<IconBottomPanel />}
+                                        active={isDrawerOpen}
+                                        onClick={onToggleDrawer}
+                                    />
+                                }
+                            >
+                                {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
+                            </Tooltip>
+                        </>
                     )}
                     {exportToPdf && (
                         <Tooltip

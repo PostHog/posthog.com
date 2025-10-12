@@ -74,30 +74,28 @@ const PeoplePage = () => {
                 label: 'People named',
                 operator: 'is',
                 options: [
-                    { label: 'Any', value: null },
+                    { label: 'Any', value: 'any' },
                     { label: 'Ben', value: 'Ben' },
                     { label: 'Daniel', value: 'Daniel' },
                 ],
-                filter: (person, value) => {
-                    if (!value) return true
-                    return person.firstName === value
-                },
+                filter: (person, value) => value === 'any' || person.firstName === value,
             },
             {
                 label: 'Pineapple on pizza',
                 operator: 'is',
                 options: [
-                    { label: 'All', value: null },
-                    { label: 'True', value: true },
-                    { label: 'False', value: false },
+                    { label: 'All', value: 'all' },
+                    { label: 'True', value: 'true' },
+                    { label: 'False', value: 'false' },
                     { label: 'Undecided', value: 'undecided' },
                 ],
                 filter: (person, value) => {
-                    if (value === null) return true
+                    if (value === 'all') return true
+                    if (value === 'true') return person.pineappleOnPizza
+                    if (value === 'false') return person.pineappleOnPizza === false
                     if (value === 'undecided') {
                         return person.pineappleOnPizza === null || person.pineappleOnPizza === undefined
                     }
-                    return person.pineappleOnPizza === value
                 },
             },
         ],

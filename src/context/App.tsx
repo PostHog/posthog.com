@@ -13,6 +13,7 @@ import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
+import ContactSales from 'components/ContactSales'
 
 declare global {
     interface Window {
@@ -117,6 +118,7 @@ interface AppContextType {
     setScreensaverPreviewActive: (isActive: boolean) => void
     setConfetti: (isActive: boolean) => void
     confetti: boolean
+    posthogInstance?: string
 }
 
 interface AppProviderProps {
@@ -271,6 +273,7 @@ export const Context = createContext<AppContextType>({
     setScreensaverPreviewActive: () => {},
     setConfetti: () => {},
     confetti: false,
+    posthogInstance: undefined,
 })
 
 export interface AppSetting {
@@ -303,7 +306,7 @@ const appSettings: AppSettings = {
                 height: 500,
             },
             max: {
-                width: 800,
+                width: 850,
                 height: 1000,
             },
             fixed: false,
@@ -608,11 +611,11 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 300,
-                height: 625,
+                height: 700,
             },
             max: {
                 width: 300,
-                height: 625,
+                height: 700,
             },
             fixed: true,
         },
@@ -851,15 +854,13 @@ const appSettings: AppSettings = {
     'cool-tech-jobs-add-a-job': {
         size: {
             min: {
-                width: 500,
-                height: 500,
+                width: 600,
+                height: 400,
             },
             max: {
-                width: 500,
-                height: 500,
+                width: 600,
+                height: 775,
             },
-            fixed: true,
-            autoHeight: true,
         },
         position: {
             center: true,
@@ -893,6 +894,53 @@ const appSettings: AppSettings = {
             },
             fixed: true,
             autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    'application-success': {
+        size: {
+            min: {
+                width: 575,
+                height: 500,
+            },
+            max: {
+                width: 575,
+                height: 1000,
+            },
+            autoHeight: true,
+            fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    'edit-roadmap': {
+        size: {
+            min: {
+                width: 650,
+                height: 500,
+            },
+            max: {
+                width: 650,
+                height: 800,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
+    'add-roadmap': {
+        size: {
+            min: {
+                width: 650,
+                height: 500,
+            },
+            max: {
+                width: 650,
+                height: 800,
+            },
         },
         position: {
             center: true,
@@ -950,9 +998,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const [windows, setWindows] = useState<AppWindow[]>(
-        location.key === 'initial' && location.pathname === '/' && isMobile
-            ? []
-            : [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+        location.key === 'initial' && location.pathname === '/' && isMobile ? [] : getInitialWindows(element)
     )
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
@@ -966,17 +1012,20 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [closingAllWindowsAnimation, setClosingAllWindowsAnimation] = useState(false)
     const [screensaverPreviewActive, setScreensaverPreviewActive] = useState(false)
     const [confetti, setConfetti] = useState(false)
+    const [posthogInstance, setPosthogInstance] = useState<string>()
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
+    const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
+            'data-pipeline-source-webhooks': sourceWebhooksNav,
         }),
-        [destinationNav, transformationNav]
+        [destinationNav, transformationNav, sourceWebhooksNav]
     )
 
     const injectDynamicChildren = useCallback((menu: Menu) => {
@@ -1182,12 +1231,55 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    function getInitialWindows(element: any) {
+        if (isSSR) return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+        const urlObj = new URL(location.href)
+        const contact = urlObj.searchParams.get('contact')
+        if (contact) {
+            const initialWindowSize = { width: window.innerWidth * 0.58, height: window.innerHeight * 0.8 }
+            const formWindowWidth = window.innerWidth * 0.4
+            const formWindowSize = {
+                width: formWindowWidth,
+                height: formWindowWidth <= 545 ? 732 : 568,
+            }
+            const padding = [65, 20]
+
+            const initialWindow = createNewWindow(element, [], location, isSSR, taskbarHeight, {
+                size: initialWindowSize,
+                position: { x: padding[0], y: padding[1] },
+                zIndex: 2,
+            })
+            const formWindow = createNewWindow(
+                <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />,
+                [],
+                { pathname: `talk-to-a-human` },
+                isSSR,
+                taskbarHeight,
+                {
+                    size: formWindowSize,
+                    position: {
+                        x: window.innerWidth - formWindowSize.width - padding[0],
+                        y: window.innerHeight - formWindowSize.height - padding[1] - taskbarHeight,
+                    },
+                    zIndex: 0,
+                }
+            )
+            return [initialWindow, formWindow]
+        }
+        return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+    }
+
     function createNewWindow(
         element: WindowElement,
         windows: AppWindow[],
         location: any,
         isSSR: boolean,
-        taskbarHeight: number
+        taskbarHeight: number,
+        options = {} as {
+            size?: { width: number; height: number }
+            position?: { x: number; y: number }
+            zIndex?: number
+        }
     ) {
         const size = getInitialSize(element.key)
         const position =
@@ -1240,7 +1332,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
-        return newWindow
+        return { ...newWindow, ...options }
     }
 
     const updatePages = (element: WindowElement) => {
@@ -1741,6 +1833,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [location.pathname])
 
+    useEffect(() => {
+        if (window) {
+            const instanceCookie = document.cookie
+                .split('; ')
+                ?.filter((row) => row.startsWith('ph_current_instance='))
+                ?.map((c) => c.split('=')?.[1])?.[0]
+            if (instanceCookie) {
+                setPosthogInstance(instanceCookie)
+            }
+        }
+    }, [])
+
     return (
         <Context.Provider
             value={{
@@ -1784,6 +1888,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setScreensaverPreviewActive,
                 setConfetti,
                 confetti,
+                posthogInstance,
             }}
         >
             {children}

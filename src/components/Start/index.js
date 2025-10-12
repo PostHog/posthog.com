@@ -77,10 +77,8 @@ const BoomerInstall = () => (
 )
 
 export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
-    const posthog = usePostHog()
     const [activeTab, setActiveTab] = useState(initialTab)
     const { search } = useLocation()
-
     useEffect(() => {
         const params = new URLSearchParams(search)
         const flow = params.get('flow')

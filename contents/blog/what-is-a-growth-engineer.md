@@ -19,7 +19,7 @@ Every startup loves to see its growth metrics – signups, subscriptions, and re
 
 In this post, we'll explain the benefits of growth engineers, the type of people who succeed as growth engineers, their skills, what they work on, why you should hire them, and how growth engineering works at PostHog.
 
-> **Who are we?** [PostHog](/) is an open source suite of product and data tools built to help engineers build successful products. Relevant to this post, we have a [team of growth engineers](/teams/growth) who work to maximize the number of people who get value out of PostHog.
+> **Who are we?** [PostHog](/) is an open source suite of product and data tools built to help engineers build successful products. Relevant to this post, we have a team of growth engineers who work to maximize the number of people who get value out of PostHog.
 
 ## What are the characteristics of a growth engineer?
 
@@ -93,7 +93,7 @@ So what do growth engineers apply their skills to? We already covered that they 
 
 ## Growth engineering at PostHog
 
-At PostHog, our [growth engineers](/teams/growth) are key to how we onboard, deal with pricing, drive signups, and interact with customers in-app. Without them, we would leave a lot on the table. To explain how they do this, we can look at their three areas of focus over the past few months:
+At PostHog, our growth engineers are key to how we onboard, deal with pricing, drive signups, and interact with customers in-app. Without them, we would leave a lot on the table. To explain how they do this, we can look at their three areas of focus over the past few months:
 
 ### Billing
 
@@ -128,9 +128,7 @@ We've seen this from our growth team. Building cross-product features, like bill
 
 Growth engineers likely won't help you find traction, they need products to connect and optimize to thrive. Once you have traction, it might be the right time to hire a [growth engineer](/newsletter/think-like-a-growth-engineer) to fuel rapid growth.
 
-From our experience, we'd recommend the technical and entrepreneurial growth engineer, this often arises in former founders. Later-stage teams often find success with larger growth teams, and more marketing-focused roles, but we haven't made it that far yet. 
-
-Still curious about our growth team? Check out [their small team page](/teams/growth).
+From our experience, we'd recommend the technical and entrepreneurial growth engineer, this often arises in former founders. Later-stage teams often find success with larger growth teams, and more marketing-focused roles, but we haven't made it that far yet.
 
 ## Further reading
 

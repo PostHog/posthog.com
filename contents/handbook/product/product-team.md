@@ -1,10 +1,10 @@
 ---
-title: Product team overview
+title: Product management at PostHog
 sidebar: Handbook
 showTitle: true
 ---
 
-PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions. Read more on the role of the Product Team in this [blog post](/blog/product-at-posthog).
+PostHog has a [product-minded engineering organization](/blog/turning-engineers-into-product-people). Engineers own sprint planning and spec'ing out solutions.
 
 So, what is the role of product managers at PostHog? PMs set context across multiple products for how products are being used, what the competitive landscape is like, what users are feeling about PostHog, and how they're using things.
 
@@ -16,38 +16,60 @@ Among other things, they
 
 ## Small team membership
 
-Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it.
+Each PM belongs to a small number of our small engineering teams, so that all teams have a strong sense that the PM is there to support them equally. This also ensures that the PM has the time to dive deep into issues that require it. PMs join small team standups and planning whenever it makes sense, but they are not required to attend _all_ team meetings. This is up to the PM to decide when it makes sense to join these, and when their time is better spent elsewhere.
 
 Here is a overview that shows which of our PMs currently works with which team:
 
-<TeamMember name="Anna Szell" photo />
+<div className="grid @md:grid-cols-2 gap-4">
 
-- [Data Warehouse](/teams/data-warehouse)
-- [Product Analytics](/teams/product-analytics)
-- [Web Analytics](web-analytics)
+<fieldset>
+<legend><TeamMember name="Anna Szell" photo /></legend>
 
-<TeamMember name="Annika Schmid" photo />
+-   [Analytics Platform](/teams/analytics-platform)
+-   [Data Warehouse](/teams/data-warehouse)
+-   [Product Analytics](/teams/product-analytics)
+-   [Web Analytics](/teams/web-analytics)
 
-- [Session Replay](/teams/session-replay)
-- [Feature Flags](/teams/feature-flags)
-- [Experiments](/teams/experiments)
+</fieldset>
 
-<TeamMember name="Cory Slater" photo />
+<fieldset>
+<legend><TeamMember name="Annika Schmid" photo /></legend>
 
-- [Error Tracking](/teams/error-tracking)
-- [Surveys](/teams/surveys)
+-   [Feature Flags](/teams/feature-flags)
+-   [Experiments](/teams/experiments)
+-   [Max AI](/teams/max-ai)
 
-<TeamMember name="Abe Basu" photo />
+</fieldset>
 
-- [Messaging](/teams/messaging)
-- [CDP](/teams/cdp)
-  
-**Teams with no PM currently**
+<fieldset>
+<legend><TeamMember name="Cory Slater" photo /></legend>
 
-- [CRM](/teams/crm)
-- [LLM Analytics](/teams/llm-analytics)
-- [Max AI](/teams/max-ai)
-- [Revenue Analytics](/teams/revenue-analytics)
+-   [Error Tracking](/teams/error-tracking)
+-   [Surveys](/teams/surveys)
+-   [Session Replay](/teams/session-replay)
+
+</fieldset>
+
+<fieldset>
+<legend><TeamMember name="Abe Basu" photo /></legend>
+
+-   [Workflows](/teams/workflows)
+-   [Batch Exports (light support)](/teams/batch-exports)
+-   Embedded Analytics
+-   Logs
+
+</fieldset>
+
+<fieldset>
+<legend>Teams with no PM currently</legend>
+
+-   [Customer Analytics](/teams/customer-analytics)
+-   [LLM Analytics](/teams/llm-analytics)
+-   [Revenue Analytics](/teams/revenue-analytics)
+
+</fieldset>
+
+</div>
 
 ## Product goals
 
@@ -60,10 +82,10 @@ As the PM team, we are also pursuing a couple of side projects each quarter with
 In Q3 2025, those are:
 
 **Goal 1: Investigate if we can automate growth reviews, some parts at least** -> <TeamMember name="Anna Szell" photo /> & <TeamMember name="Cory Slater" photo />
-* Something along the lines of having a materialized view per metric
-* Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
+
+-   Something along the lines of having a materialized view per metric
+-   Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
 
 **Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
-* We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
 
-
+-   We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?

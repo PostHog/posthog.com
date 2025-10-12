@@ -131,7 +131,7 @@ export default function MSPaint({
                 if (rect.width > 0 && rect.height > 0) {
                     return {
                         width: Math.floor(rect.width - 8), // Account for padding and borders
-                        height: Math.floor(rect.height - 8)
+                        height: Math.floor(rect.height - 8),
                     }
                 }
             }
@@ -175,7 +175,7 @@ export default function MSPaint({
                     const newHeight = Math.floor(height - 4)
 
                     if (newWidth !== state.canvasSize?.width || newHeight !== state.canvasSize?.height) {
-                        setState(prev => ({ ...prev, canvasSize: { width: newWidth, height: newHeight } }))
+                        setState((prev) => ({ ...prev, canvasSize: { width: newWidth, height: newHeight } }))
                     }
                 }
             }
@@ -282,7 +282,14 @@ export default function MSPaint({
                 isModified: false,
             }))
         }
-    }, [initialImage, state.initialImageLoaded, threshold, state.canvasSize?.width, state.canvasSize?.height, initialCanvasSize])
+    }, [
+        initialImage,
+        state.initialImageLoaded,
+        threshold,
+        state.canvasSize?.width,
+        state.canvasSize?.height,
+        initialCanvasSize,
+    ])
 
     // Save to history
     const saveToHistory = useCallback(() => {
@@ -376,13 +383,14 @@ export default function MSPaint({
         return () => window.removeEventListener('keydown', handleKeyDown, true)
     }, [undo, redo])
 
-    useEffect(() => {
-        if (appWindow && appWindow.element && typeof appWindow.element === 'object' && 'props' in appWindow.element) {
-            updateWindow(appWindow, {
-                element: { ...appWindow.element, props: { ...appWindow.element.props, initialState: state } },
-            })
-        }
-    }, [state])
+    // @TODO: Investigate if this window update is necessary for state persistence
+    // const updateWindowWithState = useCallback(() => {
+    //     if (appWindow && appWindow.element && typeof appWindow.element === 'object' && 'props' in appWindow.element) {
+    //         updateWindow(appWindow, {
+    //             element: { ...appWindow.element, props: { ...appWindow.element.props, initialState: state } },
+    //         })
+    //     }
+    // }, [appWindow, updateWindow, state])
 
     useEffect(() => {
         const { canvasHistory, historyIndex } = initialState || {}
@@ -781,10 +789,10 @@ export default function MSPaint({
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
         return result
             ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16),
-            }
+                  r: parseInt(result[1], 16),
+                  g: parseInt(result[2], 16),
+                  b: parseInt(result[3], 16),
+              }
             : null
     }
 
@@ -1053,7 +1061,10 @@ export default function MSPaint({
                     label: 'Redo',
                     shortcut: '⌘⇧Z',
                     onClick: redo,
-                    disabled: !state.canvasHistory || state.historyIndex === undefined || state.historyIndex >= state.canvasHistory.length - 1,
+                    disabled:
+                        !state.canvasHistory ||
+                        state.historyIndex === undefined ||
+                        state.historyIndex >= state.canvasHistory.length - 1,
                 },
                 { type: 'separator' as const },
                 ...(state.originalImageData
@@ -1147,10 +1158,11 @@ export default function MSPaint({
                             <button
                                 key={t}
                                 onClick={() => setState((prev) => ({ ...prev, tool: t }))}
-                                className={`w-6 h-6 border flex items-center justify-center ${state.tool === t
-                                    ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
-                                    : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0] hover:bg-[#dfdfdf]'
-                                    }`}
+                                className={`w-6 h-6 border flex items-center justify-center ${
+                                    state.tool === t
+                                        ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
+                                        : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0] hover:bg-[#dfdfdf]'
+                                }`}
                                 title={tooltip}
                             >
                                 <Icon className="w-4 h-4" />
@@ -1165,10 +1177,11 @@ export default function MSPaint({
                                 <button
                                     key={size}
                                     onClick={() => setState((prev) => ({ ...prev, brushSize: size }))}
-                                    className={`w-5 h-5 border flex items-center justify-center ${state.brushSize === size
-                                        ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
-                                        : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0]'
-                                        }`}
+                                    className={`w-5 h-5 border flex items-center justify-center ${
+                                        state.brushSize === size
+                                            ? 'border-[#000000] border-b-[#ffffff] border-r-[#ffffff] bg-[#ffffff]'
+                                            : 'border-t-[#ffffff] border-l-[#ffffff] border-b-[#808080] border-r-[#808080] bg-[#c0c0c0]'
+                                    }`}
                                 >
                                     <div
                                         className="bg-black rounded-full"
@@ -1188,13 +1201,16 @@ export default function MSPaint({
                         style={{
                             transform: `scale(${state.zoomLevel || 1})`,
                             transformOrigin: 'top left',
-                            width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto'
+                            width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
                         }}
                     >
-                        <div className="relative" style={{
-                            width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
-                            height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto'
-                        }}>
+                        <div
+                            className="relative"
+                            style={{
+                                width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
+                                height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto',
+                            }}
+                        >
                             <canvas
                                 ref={canvasRef}
                                 width={state.canvasSize?.width || 640}
@@ -1205,11 +1221,11 @@ export default function MSPaint({
                                         state.tool === 'picker'
                                             ? 'crosshair'
                                             : state.tool === 'zoom'
-                                                ? 'zoom-in'
-                                                : 'default',
+                                            ? 'zoom-in'
+                                            : 'default',
                                     width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
                                     height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto',
-                                    display: 'block'
+                                    display: 'block',
                                 }}
                                 onMouseDown={handleMouseDown}
                                 onMouseMove={handleMouseMove}
@@ -1224,7 +1240,7 @@ export default function MSPaint({
                                 className="absolute top-0 left-0 pointer-events-none"
                                 style={{
                                     width: initialCanvasSize && initialCanvasSize.width >= 1000 ? '100%' : 'auto',
-                                    height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto'
+                                    height: initialCanvasSize && initialCanvasSize.height >= 500 ? '100%' : 'auto',
                                 }}
                             />
                             {children}
