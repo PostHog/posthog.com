@@ -107,6 +107,7 @@ const Input = ({
                     id={inputId}
                     placeholder={props.placeholder || label}
                     value={value}
+                    required={required}
                     {...props}
                 />
                 {showClearButton && value && (
