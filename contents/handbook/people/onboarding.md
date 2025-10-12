@@ -94,6 +94,19 @@ Based on this ongoing learning process, here are our **five rules for onboarding
 4. Pair whenever possible. You're all sitting next to each other, so pick work that can benefit from in-person collaboration.
 5. Have fun, because life isn't all work! Do some sightseeing, go out for dinner, or find a fun activity – just hang out together any way you like.
 
+## Welcome package
+
+Expect a physical PostHog welcome package to arrive at your doorstep within a few weeks of joining.
+
+Inside: productivity essentials like stickers, and other merch.
+But most importantly, our welcome package includes three books. **Three titles we find foundational for success at PostHog:**
+
+- ["No Rules Rules"](https://www.goodreads.com/book/show/49099937-no-rules-rules) by Reed Hastings & Erin Meyer
+- ["Don't Make Me Think"](https://www.goodreads.com/book/show/18197267-don-t-make-me-think-revisited) by Steve Krug
+- ["The Mom Test"](https://www.goodreads.com/book/show/52283963-the-mom-test) by Rob Fitzpatrick
+
+There's no quiz looming – but do give these a read, and you'll have a much deeper understanding of our culture at PostHog.
+
 ## Tools we use
 
 We use a number of different tools to organise our work and communicate at PostHog. Below is a summary list of the most important ones - this list is not intended to be exhaustive
