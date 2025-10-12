@@ -19,7 +19,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
-    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
     const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
@@ -810,16 +809,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     }
-
-    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
-        createPage({
-            path: `/changelog/${year}`,
-            component: ChangelogTemplate,
-            context: {
-                year: Number(year),
-            },
-        })
-    })
 
     result.data.postHogPipelines.nodes.forEach((node) => {
         createPage({
