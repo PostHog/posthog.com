@@ -19,8 +19,7 @@ import ReactConfetti from 'react-confetti'
 import ProgressBar from 'components/ProgressBar'
 import OSButton from 'components/OSButton'
 import Lottie from 'lottie-react'
-import hourglassAnimation from 'images/icons8-hourglass.json'
-import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
+import { hourglassAnimation, hourglassAnimationWhite } from './lottieAnimations'
 
 interface Product {
     name: string
