@@ -26,6 +26,10 @@ type RoadmapNode = {
     date: string
     title: string
     description?: string
+    cta?: {
+        label?: string
+        url?: string
+    }
     profiles?: {
         data?: Array<{
             id?: number | string
@@ -112,7 +116,7 @@ const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
             exit={{ width: 0 }}
             transition={{ duration: isResizing ? 0 : 0.3 }}
         >
-            <div className="p-4">
+            <div className="p-4 h-full flex flex-col">
                 <div className="flex justify-between space-x-2">
                     <div>
                         <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
@@ -180,6 +184,19 @@ const Roadmap = ({ roadmap }: { roadmap: RoadmapNode }) => {
                 {roadmap.description && (
                     <div className="mt-2">
                         <Markdown>{roadmap.description}</Markdown>
+                    </div>
+                )}
+                {roadmap.cta?.url && (
+                    <div className="mt-auto">
+                        <OSButton
+                            asLink
+                            to={roadmap.cta.url}
+                            variant="secondary"
+                            width="full"
+                            state={{ newWindow: true }}
+                        >
+                            {roadmap.cta.label}
+                        </OSButton>
                     </div>
                 )}
             </div>
@@ -460,6 +477,10 @@ export default function Changelog(): JSX.Element {
                     date
                     title
                     description
+                    cta {
+                        label
+                        url
+                    }
                     profiles {
                         data {
                             id
