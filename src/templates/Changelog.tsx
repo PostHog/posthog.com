@@ -119,115 +119,128 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
 
     return (
         <motion.div
-            className="h-full border-l border-primary bg-white dark:bg-dark overflow-auto flex-shrink-0 relative"
+            className="h-full border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden"
             initial={{ width: 0 }}
             animate={{ width }}
             exit={{ width: 0 }}
-            transition={{ duration: isResizing ? 0 : 0.3 }}
+            transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
         >
-            <div className="p-4 h-full flex flex-col">
-                <div className="flex justify-between space-x-2">
-                    <div>
-                        <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
-                        <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
-                    </div>
-                    {isModerator && (
-                        <Tooltip
-                            trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
-                            delay={0}
-                        >
-                            <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Edit
-                            roadmap item
-                        </Tooltip>
-                    )}
-                    <OSButton size="md" icon={<IconX />} onClick={handleClose} />
-                </div>
-                {roadmap.media?.gatsbyImageData && (
-                    <div className="mt-2">
-                        <GatsbyImage image={roadmap.media.gatsbyImageData} alt={roadmap.title} />
-                    </div>
-                )}
-                {hasProfiles && (
-                    <div className="p-2 border border-primary rounded-md bg-accent mt-2">
-                        {roadmap.profiles?.data?.map((profile) => {
-                            const avatar = profile.attributes?.avatar?.data?.attributes?.url
-                            const name = [profile.attributes?.firstName, profile.attributes?.lastName]
-                                .filter(Boolean)
-                                .join(' ')
-                            const team = profile.attributes?.teams?.data?.[0]
-                            return (
-                                <Link
-                                    to={`/community/profiles/${profile.id}`}
-                                    state={{ newWindow: true }}
-                                    key={profile.id}
-                                    className="flex gap-2 items-center justify-between"
-                                >
-                                    <div className="flex gap-2 items-center">
-                                        {avatar && (
-                                            <div
-                                                className={`size-10 rounded-full overflow-hidden bg-${profile.attributes?.color}`}
-                                            >
-                                                <CloudinaryImage
-                                                    className={`w-full`}
-                                                    src={avatar as `https://res.cloudinary.com/${string}`}
-                                                    alt={profile.attributes?.firstName}
-                                                />
-                                            </div>
-                                        )}
-                                        <div>
-                                            <h5 className="m-0 leading-tight">{name}</h5>
-                                            <p className="!m-0 text-sm leading-tight">{team?.attributes?.name}</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        {team?.attributes?.miniCrest?.data?.attributes?.url && (
-                                            <CloudinaryImage
-                                                className="w-10"
-                                                src={
-                                                    team.attributes.miniCrest.data.attributes
-                                                        .url as `https://res.cloudinary.com/${string}`
-                                                }
-                                                alt={team.attributes.name}
-                                            />
-                                        )}
-                                    </div>
-                                </Link>
-                            )
-                        })}
-                    </div>
-                )}
-                {roadmap.description && (
-                    <div className="mt-2">
-                        <Markdown>{roadmap.description}</Markdown>
-                    </div>
-                )}
-                {roadmap.cta?.url && (
-                    <div className="mt-auto">
-                        <OSButton
-                            asLink
-                            to={roadmap.cta.url}
-                            variant="secondary"
-                            width="full"
-                            state={{ newWindow: true }}
-                        >
-                            {roadmap.cta.label}
-                        </OSButton>
-                    </div>
-                )}
-            </div>
-
-            {/* Resize handle */}
             <motion.div
-                className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none z-10"
-                drag="x"
-                dragMomentum={false}
-                dragConstraints={{ left: 0, right: 0 }}
-                onDrag={handleDragResize}
-                onDragEnd={() => setIsResizing(false)}
+                className="h-full overflow-auto"
+                style={{ width }}
+                initial={{ x: width }}
+                animate={{ x: 0 }}
+                exit={{ x: width }}
+                transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
             >
-                <div className="relative w-full h-full">
-                    <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-primary opacity-50" />
+                <div className="p-4 h-full flex flex-col">
+                    <div className="flex justify-between space-x-2">
+                        <div className="flex-1">
+                            <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
+                            <p className="m-0 opacity-50 text-sm mt-1">
+                                {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                            </p>
+                        </div>
+                        <aside>
+                            {isModerator && (
+                                <Tooltip
+                                    trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
+                                    delay={0}
+                                >
+                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                    Edit roadmap item
+                                </Tooltip>
+                            )}
+                            <OSButton size="md" icon={<IconX />} onClick={handleClose} />
+                        </aside>
+                    </div>
+                    {roadmap.media?.gatsbyImageData && (
+                        <div className="mt-2">
+                            <GatsbyImage image={roadmap.media.gatsbyImageData} alt={roadmap.title} />
+                        </div>
+                    )}
+                    {hasProfiles && (
+                        <div className="p-2 border border-primary rounded-md bg-accent mt-2">
+                            {roadmap.profiles?.data?.map((profile) => {
+                                const avatar = profile.attributes?.avatar?.data?.attributes?.url
+                                const name = [profile.attributes?.firstName, profile.attributes?.lastName]
+                                    .filter(Boolean)
+                                    .join(' ')
+                                const team = profile.attributes?.teams?.data?.[0]
+                                return (
+                                    <Link
+                                        to={`/community/profiles/${profile.id}`}
+                                        state={{ newWindow: true }}
+                                        key={profile.id}
+                                        className="flex gap-2 items-center justify-between"
+                                    >
+                                        <div className="flex gap-2 items-center">
+                                            {avatar && (
+                                                <div
+                                                    className={`size-10 rounded-full overflow-hidden bg-${profile.attributes?.color}`}
+                                                >
+                                                    <CloudinaryImage
+                                                        className={`w-full`}
+                                                        src={avatar as `https://res.cloudinary.com/${string}`}
+                                                        alt={profile.attributes?.firstName}
+                                                    />
+                                                </div>
+                                            )}
+                                            <div>
+                                                <h5 className="m-0 leading-tight">{name}</h5>
+                                                <p className="!m-0 text-sm leading-tight">{team?.attributes?.name}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {team?.attributes?.miniCrest?.data?.attributes?.url && (
+                                                <CloudinaryImage
+                                                    className="w-10"
+                                                    src={
+                                                        team.attributes.miniCrest.data.attributes
+                                                            .url as `https://res.cloudinary.com/${string}`
+                                                    }
+                                                    alt={team.attributes.name}
+                                                />
+                                            )}
+                                        </div>
+                                    </Link>
+                                )
+                            })}
+                        </div>
+                    )}
+                    {roadmap.description && (
+                        <div className="mt-2">
+                            <Markdown>{roadmap.description}</Markdown>
+                        </div>
+                    )}
+                    {roadmap.cta?.url && (
+                        <div className="mt-auto">
+                            <OSButton
+                                asLink
+                                to={roadmap.cta.url}
+                                variant="secondary"
+                                width="full"
+                                state={{ newWindow: true }}
+                            >
+                                {roadmap.cta.label}
+                            </OSButton>
+                        </div>
+                    )}
                 </div>
+
+                {/* Resize handle */}
+                <motion.div
+                    className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none z-10"
+                    drag="x"
+                    dragMomentum={false}
+                    dragConstraints={{ left: 0, right: 0 }}
+                    onDrag={handleDragResize}
+                    onDragEnd={() => setIsResizing(false)}
+                >
+                    <div className="relative w-full h-full">
+                        <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-primary opacity-50" />
+                    </div>
+                </motion.div>
             </motion.div>
         </motion.div>
     )
@@ -443,14 +456,17 @@ const RoadmapCards = ({
                                     </div>
                                     <div className="w-full flex-1 min-h-0">
                                         <ScrollArea className="h-full">
-                                            <ul className="p-4 m-0 list-none space-y-2">
+                                            <ul className="p-0 m-0 list-none">
                                                 {weekData.roadmaps.map((roadmap) => {
                                                     const active = activeRoadmap?.id === roadmap.id
                                                     return (
-                                                        <li key={roadmap.id} className="p-0 mt-0">
+                                                        <li
+                                                            key={roadmap.id}
+                                                            className="p-0 mt-0 border-b border-primary"
+                                                        >
                                                             <button
                                                                 data-scheme="secondary"
-                                                                className={`w-full text-left p-2 rounded-md border bg-primary flex justify-between ${
+                                                                className={`w-full text-left py-2 px-4 hover:bg-primary flex justify-between gap-1 ${
                                                                     active
                                                                         ? 'border-black dark:border-white'
                                                                         : 'border-primary'
@@ -461,14 +477,14 @@ const RoadmapCards = ({
                                                                     <h5 className="m-0 underline text-[15px] leading-tight mb-1">
                                                                         {roadmap.title}
                                                                     </h5>
-                                                                    <p className="!m-0 text-sm">
+                                                                    <p className="!m-0 text-[13px]">
                                                                         {roadmap.teams?.data?.[0]?.attributes?.name}{' '}
                                                                         Team
                                                                     </p>
                                                                 </div>
                                                                 {roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
                                                                     ?.attributes?.url && (
-                                                                    <div className="shrink-0">
+                                                                    <div className="shrink-0 leading-[0]">
                                                                         <CloudinaryImage
                                                                             className="w-10"
                                                                             width={80}
