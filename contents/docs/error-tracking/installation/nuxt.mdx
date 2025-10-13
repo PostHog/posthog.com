@@ -61,12 +61,12 @@ export default defineNuxtConfig({
 
   posthogConfig: {
     publicKey: '<ph_project_api_key>', // Find it in project settings https://app.posthog.com/settings/project
-    host: '<ph_client_api_host>', // defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
+    host: '<ph_client_api_host>', // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
     clientConfig: {
-      capture_exceptions: true, // enables automatic exception capture on the client-side (Vue)
+      capture_exceptions: true, // Enables automatic exception capture on the client-side (Vue)
     },
     serverConfig: {
-      enableExceptionAutocapture: true, // enables automatic exception capture on the server-side (Nitro)
+      enableExceptionAutocapture: true, // Enables automatic exception capture on the server-side (Nitro)
     },
     sourcemaps: {
       enabled: true,
@@ -103,7 +103,7 @@ To send errors manually on the client side, import it and use the `captureExcept
 </script>
 ```
 
-On the server side, you have to spawn `PostHog` yourself.
+On the server side instantiate PostHog using:
 
 ```js file=server/api/example.js focusOnLines=4-21
 export default defineEventHandler(async (event) => {

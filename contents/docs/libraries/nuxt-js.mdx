@@ -50,8 +50,8 @@ bun add @posthog/nuxt
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   posthogConfig: {
-    publicKey: '<ph_project_api_key>',
-    host: '<ph_client_api_host>', // Optional, defaults to https://us.i.posthog.com
+    publicKey: '<ph_project_api_key>', // Find it in project settings https://app.posthog.com/settings/project
+    host: '<ph_client_api_host>', // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
     clientConfig: {
       // Optional: PostHog client configuration options
     },
@@ -73,9 +73,25 @@ $posthog().capture('<event_name>')
 
 ### Usage on the server side
 
-> **Important**: The PostHog client instance initialized by the module on the server side is intended exclusively for error tracking. If you require additional PostHog functionality (like feature flags or custom events), please instantiate a separate PostHog Node client as shown in the [Nuxt v3.0 to v3.6 section](#nuxt-v30-to-v36) below.
+Instantiate PostHog using:
 
-The module automatically captures exceptions on the server side. For manual error tracking or additional functionality, create a separate PostHog instance as needed.
+```js file=server/api/example.js focusOnLines=4-21
+export default defineEventHandler(async (event) => {
+  const distinctId = getCookie(event, 'distinct_id')
+
+  const { PostHog } = await import('posthog-node');
+  const runtimeConfig = useRuntimeConfig()
+
+  const posthog = new PostHog(
+    runtimeConfig.public.posthogPublicKey,
+    { 
+      host: runtimeConfig.public.posthogHost, 
+    }
+  );
+
+  posthog.capture('<event-name>')
+})
+```
 
 <DetailSetUpReverseProxy />
 
