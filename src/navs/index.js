@@ -3681,6 +3681,16 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/error-tracking/installation/nuxt',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/error-tracking/installation/nuxt',
+                                },
+                                {
+                                    name: '3.6 and below',
+                                    url: '/docs/error-tracking/installation/nuxt-3-6',
+                                },
+                            ],
                         },
                         {
                             name: 'SvelteKit',

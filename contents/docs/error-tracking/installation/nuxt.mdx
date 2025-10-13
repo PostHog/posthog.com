@@ -12,9 +12,7 @@ import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
 import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
-## Nuxt 3.7 and above
-
-For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module which provides automatic error tracking with built-in sourcemap support.
+For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module which provides automatic error tracking with built-in sourcemap support. 
 
 <Steps>
 <Step title="Install the PostHog Nuxt module" subtitle="Your goal in this step: Install and configure the PostHog Nuxt module." badge="required">
@@ -155,91 +153,5 @@ You can verify the injection is successful by checking your `.mjs.map` source ma
 </Step>
 
 <StepVerifyErrorTracking />
-
-</Steps>
-
-## Nuxt 3.6 and below
-
-For older versions of Nuxt, you'll need to manually set up error tracking and sourcemap uploads.
-
-<Steps>
-<Step title="Installing PostHog Nuxt SDK" subtitle="Your goal in this step: Install the PostHog Nuxt.js SDK." badge="required">
-
-<InstallNuxt />
-
-</Step>
-
-<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
-
-Before proceeding, confirm that you can [capture events](/docs/libraries/nuxt-js#capture-custom-events) using `posthog.capture('test_event')`.
-
-</Step>
-
-<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Nuxt application." badge="required">
-
-To send errors directly using the PostHog client, import it and use the `captureException` method like this:
-
-```vue component.vue
-<script>
-  const { $posthog } = useNuxtApp()
-
-  if ($posthog) {
-    const posthog = $posthog()
-    posthog.captureException(new Error("Important error message"))
-  }
-</script>
-```
-
-On the server side, you can use the `posthog` object directly.
-
-```js file=server/api/example.js focusOnLines=4-21
-export default defineEventHandler(async (event) => {
-  const distinctId = getCookie(event, 'distinct_id')
-
-  const { PostHog } = await import('posthog-node');
-  const runtimeConfig = useRuntimeConfig()
-
-  const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
-    { 
-      host: runtimeConfig.public.posthogHost, 
-    }
-  );
-
-  try {
-    const results = await DB.query.users.findMany()
-    return results
-  } catch (error) {
-    posthog.captureException(error)
-  }
-})
-```
-
-</Step>
-
-<Step title="Configuring exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Nuxt application." badge="required">
-
-Update your `posthog.client.js` to add an error hook
-
-```js
-export default defineNuxtPlugin((nuxtApp) => {
-    ...
-    nuxtApp.hook('vue:error', (error) => {
-        posthogClient.captureException(error)
-    })
-    ...
-})
-```
-
-</Step>
-
-<StepVerifyErrorTracking />
-
-
-<Step title="Upload source maps" badge="required">
-
-<StepUploadSourceMaps urlPath="nuxt" framework="Nuxt" />
-
-</Step>
 
 </Steps>
