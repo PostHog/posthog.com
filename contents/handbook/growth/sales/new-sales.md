@@ -21,7 +21,7 @@ Selling software, especially to larger companies, can be a complex process with 
 * Pain - Do they have a problem?  
   * Is it painful enough right now that they are willing to adopt a new solution to solve it?  
   * Will PostHog solve this problem for them?
-* Timeline - When do whey want to have a contract signed/solution in place?
+* Timeline - When do they want to have a contract signed/solution in place?
 * Pricing - We should know the rough size of the opportunity, and that that is in line with expectations and budget of the customer.
 * Champion - Are you working with a champion who is going to sell internally?
   * Are they the buyer (see below) or do they know who the buyer is?
@@ -162,7 +162,7 @@ When engineers aren't on the call, your goal is to earn a second call with their
    - Articulate PostHog's vision
    - Scope their use case
 
-2. **Qualify or Disqualify** (10 min) - we do this politely and constructively. The customer's time is valueable and we know best who succceeds with PostHog, so we're driving the sale. 
+2. **Qualify or Disqualify** (10 min) - we do this politely and constructively. The customer's time is valuable and we know best who succeeds with PostHog, so we're driving the sale. 
    - **Qualify if:** They have technical capability to succeed, engineers will be involved in the sales process, and there's product/solution fit
    - **Disqualify if:** They're non-technical with no engineer involvement, or there's no product/solution fit
 
@@ -188,7 +188,7 @@ Before you demo, make sure there is enough data to properly showcase our feature
 
 You should give a relevant and pointed demo - don't just throw everything in, as the customer will get overwhelmed. If you don't show what's important first, people on the call will become distracted.
 
-For example, a customer may say "we need to see how our customers our using our platform". In this case, a good approach is to go straight to Session Replay, then tie Replay into Analytics, then go from there.
+For example, a customer may say "we need to see how our customers are using our platform". In this case, a good approach is to go straight to Session Replay, then tie Replay into Analytics, then go from there.
 
 > Start with what their biggest problem/request is, stay there until they are happy, then move on to point two. We don't want to fall into the trap of doing the same demo for each customer regardless of what they say at the beginning.
 
