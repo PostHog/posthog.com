@@ -49,36 +49,11 @@ bun add @posthog/nuxt
 ```typescript file=nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
-
-  // Enable sourcemaps for error tracking (optional but recommended)
-  sourcemap: { 
-    client: 'hidden' 
-  },
-  nitro: {
-    rollupConfig: {
-      output: {
-        sourcemapExcludeSources: false,
-      },
-    },
-  },
-
   posthogConfig: {
     publicKey: '<ph_project_api_key>',
     host: '<ph_client_api_host>', // Optional, defaults to https://us.i.posthog.com
     clientConfig: {
       // Optional: PostHog client configuration options
-      capture_exceptions: true,
-    },
-    serverConfig: {
-      // Optional: PostHog server configuration options (for error tracking only)
-      enableExceptionAutocapture: true,
-    },
-    sourcemaps: {
-      enabled: true, // Enable sourcemap upload for error tracking
-      envId: '<ph_environment_id>', // Your environment ID from PostHog settings
-      personalApiKey: '<ph_personal_api_key>', // Your personal API key from PostHog settings
-      project: 'my-application', // Optional: defaults to git repository name
-      version: '1.0.0', // Optional: defaults to current git commit
     },
   },
 })
@@ -106,13 +81,14 @@ The module automatically captures exceptions on the server side. For manual erro
 
 <DetailGroupProductsInOneProject />
 
+### Error tracking
+
+For a detailed error tracking installation guide, including automatic exception capture and sourcemap configuration, see the [Nuxt error tracking installation docs](/docs/error-tracking/installation/nuxt).
+
 ### Troubleshooting
 
 **TypeScript errors in posthog config:**
 Remove the `.nuxt` directory and rebuild your project to regenerate config types.
-
-**Missing line context in error tracking:**
-Ensure sourcemaps are enabled in your `nuxt.config.ts` for both Vue (client) and Nitro (server) as shown in the configuration above.
 
 ## Nuxt v3.0 to v3.6
 
