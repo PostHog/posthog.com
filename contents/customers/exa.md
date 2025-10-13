@@ -36,7 +36,7 @@ Eventually, frustrated with a scattered stack, the team decided to centralize as
 
 ## Using PostHog for an AI-assisted engineering loop
 
-Now, with analytics centralized into PostHog, the team can much more flexibly and reliably interrogate data from multiple sources using a mix of ready-made visualization tools ([funnels](/docs/product-analytics/funnels), [paths](/docs/product-analytics/paths), etc.) and [SQL](/data-warehouse/sql) when needed.
+Now, with analytics centralized into PostHog, the team can much more flexibly and reliably interrogate data from multiple sources using a mix of ready-made visualization tools ([funnels](/docs/product-analytics/funnels), [paths](/docs/product-analytics/paths), etc.) and [SQL](/docs/data-warehouse/sql) when needed.
 
 “The best thing for me is [Max AI](/max),” says Liam. “It’s really nice to have it help with SQL queries when you’re like 80-90% of the way there and it can finish them for you. If I get something wrong with one of my SQL operations, Max AI can just fix it up for me.”
 
