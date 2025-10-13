@@ -13,8 +13,8 @@ tags:
 crosspost:
   - Blog
 seo: {
-  metaTitle: "Finding product-market fit (PMF): A 5 level framework",
-  metaDescription: "A framework for defining and finding product-market fit (PMF) in your startup"
+  metaTitle: "How to find product-market fit (PMF): A 5 level framework",
+  metaDescription: "A product market fit framework designed for founders. Learn the five levels of product market fit validation, from finding a problem to work on to onboarding customers."
 }
 ---
 
