@@ -69,7 +69,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
 
 ### Use cases
-- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
+- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/cdp/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
 - Let your engineers and product team self-serve analytics and error tracking from within a familiar platform.
 
 # General talking points for all roles
