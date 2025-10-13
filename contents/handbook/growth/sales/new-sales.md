@@ -162,7 +162,7 @@ When engineers aren't on the call, your goal is to earn a second call with their
    - Articulate PostHog's vision
    - Scope their use case
 
-2. **Qualify or Disqualify** (10 min) - we do this politely and constructively. The customer's time is valuable and we know best who succceeds with PostHog, so we're driving the sale. 
+2. **Qualify or Disqualify** (10 min) - we do this politely and constructively. The customer's time is valuable and we know best who succeeds with PostHog, so we're driving the sale.
    - **Qualify if:** They have technical capability to succeed, engineers will be involved in the sales process, and there's product/solution fit
    - **Disqualify if:** They're non-technical with no engineer involvement, or there's no product/solution fit
 
