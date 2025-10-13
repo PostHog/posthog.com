@@ -120,6 +120,16 @@ Below is a list of some of the properties that PostHog captures by default in cl
 | Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
 | IP Address                  | `$ip`                    | `192.168.1.1`                  |
 
+### Different timestamp properties
+
+An event has 2 `DATETIME` type fields - `timestamp` and `created_at`.
+
+The `timestamp` field is the time at which your app or website has made the SDK call to capture the event. It defaults to `now()`, unless specified on the SDK call.
+
+The `created_at` field is the time at which our server received the event and started processing it.
+
+Generally, work with and build insights and queries with `timestamp` and only reach for `created_at` if you're investigating the difference between the two.
+
 ## Managing event definitions
 
 On the [events management page](https://us.posthog.com/data-management/events), you can edit event tags and descriptions. These show up when searching for events throughout PostHog and provide more context about the purpose of the event.
