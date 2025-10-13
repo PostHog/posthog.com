@@ -31,7 +31,7 @@ Hogpatch is invite-only, and isn't open to the whole batch. We keep numbers low 
 
 ### Passes
 
-Once you've been invited, Judy (our office manager) will send you and your cofounders a digital wallet pass. The pass gives you 24/7 self-service access to the space, ideal for late-night sprints or weekend hacking sessions. You can come in anytime, day or night. There's no check-in or reservations needed.
+Once you've been invited, Judy (our [office manager](https://posthog.com/community/profiles/36433)) will send you and your cofounders a digital wallet pass. The pass gives you 24/7 self-service access to the space, ideal for late-night sprints or weekend hacking sessions. You can come in anytime, day or night. There's no check-in or reservations needed.
 
 ### Location
 
