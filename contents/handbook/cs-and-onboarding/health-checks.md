@@ -89,6 +89,6 @@ We have guidance on when to call `posthog.reset()` [here](/docs/libraries/js/fea
 
 It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/docs/advanced/proxy/managed-reverse-proxy) or to configure their own for events to be sent from their own domain. 
 
-For either ours or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. You can review this with a customer as it currently is not set anywhere relative to their account. 
+For either ours or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
 
 
