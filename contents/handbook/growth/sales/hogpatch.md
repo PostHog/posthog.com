@@ -1,5 +1,5 @@
 ---
-title: HogPatch
+title: Hogpatch
 sidebar: Handbook
 showTitle: true
 ---
