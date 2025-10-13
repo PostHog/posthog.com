@@ -91,7 +91,7 @@ Generally speaking you should be trying to regularly see customers in your book 
 
 If you regularly visit customers, you can (and should) take some sweet merch. You can self-serve this using [a discount code pinned in our team Slack channel](https://posthog.slack.com/archives/C01MGUHFH6G/p1734015156043549) to get 100% off your order.
 
-It's worth noting, within our ICP, it is not very common for software vendors to come onsite and visit the way we do.  This is an advantage, but it's also worth being mindful of the fact this may be one of the first times the team you're working with has had a salesperson come onsite for an extended period.
+It's worth noting, within our ICP, it is not very common for software vendors to come onsite and visit the way we do. This is an advantage, but it's also worth being mindful of the fact this may be one of the first times the team you're working with has had a salesperson come onsite for an extended period.
 We should aim to take as much of the operational and logistical overhead off of our customer's plate. This can be as simple as suggesting specific times and dates that work, but also suggesting that they book a meeting room for 1-3 hours per session depending on the agenda. Ideally we want to visit the same customers more than once, and these simple suggestions and tips help make the customer more comfortable and more likely to invite you back!
 
 ## Steady state retention
