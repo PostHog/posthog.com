@@ -7,9 +7,15 @@ import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
 import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
 
-> **Note:** If you're using Nuxt 3.7 or above, we recommend using the `@posthog/nuxt` module which handles sourcemap generation and upload automatically. See the [Nuxt error tracking installation guide](/docs/error-tracking/installation/nuxt) for setup instructions.
+## Nuxt 3.7 and above
 
-The following instructions are for Nuxt 3.6 and below using the PostHog CLI.
+For Nuxt 3.7 and above, the `@posthog/nuxt` module automatically handles sourcemap generation and upload during the build process. 
+
+No manual configuration is needed - simply follow the [Nuxt error tracking installation guide](/docs/error-tracking/installation/nuxt) to set up the module, and sourcemaps will be automatically generated and uploaded when you build your project.
+
+## Nuxt 3.6 and below
+
+For older versions of Nuxt, you'll need to manually configure sourcemap generation and upload using the PostHog CLI.
 
 <Steps>
 <Step title="Install the PostHog CLI" badge="required">
