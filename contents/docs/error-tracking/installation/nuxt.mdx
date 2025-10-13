@@ -60,18 +60,18 @@ export default defineNuxtConfig({
   },
 
   posthogConfig: {
-    publicKey: '<ph_project_api_key>',
-    host: '<ph_client_api_host>',
+    publicKey: '<ph_project_api_key>', // Find it in project settings https://app.posthog.com/settings/project
+    host: '<ph_client_api_host>', // defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
     clientConfig: {
-      capture_exceptions: true, // this enabled automatic exception capture on the client-side (Vue)
+      capture_exceptions: true, // enables automatic exception capture on the client-side (Vue)
     },
     serverConfig: {
-      enableExceptionAutocapture: true, // this enabled automatic exception capture on the server-side (Nitro)
+      enableExceptionAutocapture: true, // enables automatic exception capture on the server-side (Nitro)
     },
     sourcemaps: {
       enabled: true,
-      envId: '<ph_environment_id>', // Your environment ID from PostHog settings
-      personalApiKey: '<ph_personal_api_key>', // Your personal API key from PostHog settings
+      envId: '<ph_environment_id>', // Your environment ID from PostHog settings https://app.posthog.com/settings/environment#variables
+      personalApiKey: '<ph_personal_api_key>', // Your personal API key from PostHog settings https://app.posthog.com/settings/user-api-keys
       project: 'my-application', // Optional: defaults to git repository name
       version: '1.0.0', // Optional: defaults to current git commit
     },
