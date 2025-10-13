@@ -60,7 +60,7 @@ Most people fill in the [form](/talk-to-a-human) via the website. Some email sal
 
 ### 2. We assign and qualify
 
-Info on how leads are assigned can be [found here](handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
+Info on how leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
 
 - What is their [Lead Score](/handbook/growth/sales/lead-scoring)?
 - Which products are they looking to use? What's their use case?
