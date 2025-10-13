@@ -63,6 +63,15 @@ Aim to keep things sensible and cheap. As always, use your best judgement when [
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
 
+### Your first week
+
+Your first week can definitely be a bit overwhelming at any new company, so here's what you can (roughly) expect!
+- You will meet (either in person or virtually) your team lead to discuss goals and aims over the next 30/60/90 days and beyond
+- You will get all your equipment set up and get access to all the accounts you need
+- You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company
+- You should try and set up a few calls with a range of people to introduce yourself
+- You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
+
 ### Engineering
 
 We hire engineers on a regular basis, running in-person onboarding practically every time. Over the years, we've learned a lot about doing this efficiently and there's much to gain from sharing the knowledge between teams.
