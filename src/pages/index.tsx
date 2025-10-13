@@ -379,7 +379,7 @@ const companyBreakdowns = {
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
-    highValue: { col1: "Companies with >1 $B's in their valuations", col2: 'Everyone else (for now)' },
+    highValue: { col1: "Companies worth more than $2 billion", col2: 'Everyone else (for now)' },
     caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
     easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
     goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
