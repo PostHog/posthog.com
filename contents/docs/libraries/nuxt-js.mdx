@@ -73,7 +73,7 @@ export default defineNuxtConfig({
       // Optional: PostHog server configuration options (for error tracking only)
       enableExceptionAutocapture: true,
     },
-    sourceMaps: {
+    sourcemaps: {
       enabled: true, // Enable sourcemap upload for error tracking
       envId: '<ph_environment_id>', // Your environment ID from PostHog settings
       personalApiKey: '<ph_personal_api_key>', // Your personal API key from PostHog settings
@@ -92,11 +92,7 @@ You can access the PostHog client in your Vue components using:
 <script setup>
 const { $posthog } = useNuxtApp()
 
-// Capture events
-$posthog.capture('event_name', { property: 'value' })
-
-// Identify users
-$posthog.identify('user_id', { email: 'user@example.com' })
+$posthog().capture('<event_name>')
 </script>
 ```
 
