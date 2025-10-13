@@ -46,7 +46,7 @@ Judy, our office manager, keeps things running smoothly 9am–5pm, Mon–Fri. Ou
 ### Workspots & hangouts
 
 * **Desks & phone booths** - no booking system, no hassle. Just grab a spot when you arrive.
-* **Visitors:** you're welcome to bring in customers, investors, or anyone else you need to meet with but the space is dedicated to working so we ask you not to bring friends or un-invited YC founders. The space is yours to use - just don't host a house party here.
+* **Visitors:** you're welcome to bring in customers, investors, or anyone else you need to meet with, but the space is dedicated to working so we ask you not to bring friends or un-invited YC founders. The space is yours to use - just don't host a house party here.
 * **Events:** every few weeks we'll host something in the space. You're welcome to stick around or join in, but we'll always do our best not to disrupt your focus.
 
 ## Are you trying to sell me PostHog?
