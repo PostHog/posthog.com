@@ -19,7 +19,13 @@ As we've grown, I've frankly underestimated how sharply the importance of commun
 
 The number of people each exec is responsible for is increasing exponentially as we scale. In the early days, we had zero direct or indirect reports each, at 15 people, we had roughly 8 people per exec. Today, it's around 35. By the next big offsite, it will be around 80.
 
-There are some unfortunate consequences of this! Less communication is felt and it seems more out of the blue or like it has come from "more DMs". That can make things seem disjointed. The reality is - we've kept up about the same level of public communication, and really don't suddenly hold lots of secret meetings, but the team or individual level comms are now further removed from an "unrelated" employee (since you can't be buddies with 139 other people), who is more likely as a result to be blindsided by a change we've decided to make. That doesn't feel good for anyone.
+There are unfortunate consequences of this: 
+
+- Less communication is felt 
+- It seems more out of the blue
+- Everyone thinks it has come from "more DMs". 
+
+This can make things seem disjointed. The reality is - we've kept up about the same level of public communication, and really don't suddenly hold lots of secret meetings, but the team or individual level comms are now further removed from an "unrelated" employee (since you can't be buddies with 149 other people), who is more likely as a result to be blindsided by a change we've decided to make. That doesn't feel good for anyone.
 
 ## Not knowing everything that is happening
 
