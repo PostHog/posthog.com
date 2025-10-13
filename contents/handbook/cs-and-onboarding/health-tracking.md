@@ -12,7 +12,7 @@ We use Vitally as a customer success platform.  You can log in via Google SSO to
 
 Health scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall <PrivateLink url="https://posthog.vitally-eu.io/settings/health/accounts">health score</PrivateLink> out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs <PrivateLink url="https://docs.vitally.io/account-health-scores-and-metrics/health-scores">here</PrivateLink>.
 
-Health score metrics are divided into two categories: Customer Engagement (20%) and Product Engagement (80%).
+Health score metrics are divided into two categories: Customer Engagement (25%) and Product Engagement (75%).
 
 [**Customer engagement**](/handbook/cs-and-onboarding/health-tracking#customer-engagement)
 

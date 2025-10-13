@@ -1,20 +1,8 @@
 ---
 title: How Lovable builds better agents with LLM analytics and experimentation
 customer: Lovable
-logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/lovable_dark_png_bf5d7c603c.png
-logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/lovable_light_png_cb215659ae.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c_ef5bcb4589.png
-industries:
-  - Devtool
-users:
-  - Engineering
-toolsUsed:
-  - LLM analytics
-  - Experimentation
-  - Feature flags
 date: 2025-08-19
 ---
 As a software engineer focused on [Lovable](https://lovable.dev/)’s core agent loop, Viktor Eriksson asks himself the same questions every day:
@@ -28,7 +16,7 @@ As a software engineer focused on [Lovable](https://lovable.dev/)’s core agent
 
 He isn’t alone. Lovable’s engineer-led culture empowers everyone to ship faster and bolder, gathering the insights they need along the way. And that’s where PostHog comes in. 
 
-“We started using PostHog very early on,” Viktor says. “We [use feature flags to roll out releases gradually](/tutorials/phased-rollout), experiments to test new ideas, and LLM analytics too. It’s a crucial part of how we debug traces and ask ourselves questions like, ‘Why is the LLM doing that?’”
+“We started using PostHog very early on,” Viktor says. “We [use feature flags to roll out releases gradually](/tutorials/phased-rollout), experiments to test new ideas, and [LLM analytics](/llm-analytics) too. It’s a crucial part of how we debug traces and ask ourselves questions like, ‘Why is the LLM doing that?’”
 
 That last capability has been especially valuable with the release of OpenAI’s new GPT-5 models. When OpenAI’s updates led to Lovable seeing unusual results, Viktor turned to PostHog to find the cause by inspecting traces and debugging. Eventually, the team realized the LLM was giving parts of the context window different amounts of attention.
 

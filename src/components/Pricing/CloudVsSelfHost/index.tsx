@@ -16,17 +16,17 @@ export const CloudVsSelfHost = ({ className = '' }) => {
                 </h3>
                 <ul className="list-none m-0 p-0">
                     <li className="py-4 sm:text-lg md:text-xl">Hosted & managed by PostHog</li>
-                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border border-l-0 border-r-0">
+                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-primary border border-l-0 border-r-0">
                         Start using immediately
                     </li>
                     <li className="pt-4 sm:text-lg md:text-xl">Automatic upgrades</li>
                 </ul>
             </div>
-            <div className="md:after:block after:hidden after:absolute after:h-[60%] after:border-dashed after:border-gray-accent-light after:border-l after:left-1/2 after:-translate-x-1/2 after:bottom-0">
+            <div className="md:after:block after:hidden after:absolute after:h-[60%] after:border-dashed after:border-primary after:border-l after:left-1/2 after:-translate-x-1/2 after:bottom-0">
                 <h3 className="sm:text-3xl md:mb-16">Self-hosting</h3>
                 <ul className="list-none m-0 p-0">
                     <li className="py-4 sm:text-lg md:text-xl">User data stays on your infrastructure</li>
-                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-gray-accent-light border border-l-0 border-r-0">
+                    <li className="py-4 sm:text-lg md:text-xl border-dashed border-primary border border-l-0 border-r-0">
                         Full access to production instance
                     </li>
                     <li className="pt-4 sm:text-lg md:text-xl">

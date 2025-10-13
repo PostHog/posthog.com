@@ -17,56 +17,84 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 </CalloutBox>
 
+## Creating a nginx container
+
 You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to build a nginx container:
 
 ```dockerfile
 FROM nginx:alpine
-COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY nginx.conf /etc/nginx/nginx.conf.template
+
+CMD ["sh", "-c", "envsubst '\\$POSTHOG_CLOUD_REGION' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
 ```
 
-Next, create the `nginx.conf` file with the reverse proxy configuration. The following checks the `Referer` header to ensure the request is coming from your domain (set as `hogbook.com` in this case), then proxies the request to PostHog Cloud US. Change `us` to `eu` to proxy to our EU Cloud.
+Next, create the `nginx.conf` file with the reverse proxy configuration.
 
 ```nginx.conf
-# The main context
-events {
-    worker_connections 1024;
-}
-
+worker_processes auto;
+events { worker_connections 1024; }
 http {
+    sendfile on;
     server {
-        listen 8080;  # Set the port to 8080
-
-        server_name _;  # Accept requests for any domain
-
-        # Specify DNS resolver for variables, this is Google Public DNS
-        # You should adjust this to a DNS resolver of your choice
-        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::]:8888 [2001:4860:4860::]:8844 valid=300s;
-        resolver_timeout 5s;  # Timeout for DNS resolution
-
-        # Check Referer header
-        # Change hogbook to your domain as needed to ensure requests only come from your domain
-        set $valid_referer 0;
-        if ($http_referer ~* "^https?://(localhost|([a-zA-Z0-9-]+)\.hogbook\.com)") {
-            set $valid_referer 1;
+        listen 8080;
+        server_name _;
+        
+        # DNS resolver - increased cache time for stability
+        resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::8888] [2001:4860:4860::8844] valid=300s;
+        resolver_timeout 5s;
+        
+        # Static assets - trailing slashes preserve path mapping
+        location /static/ {
+            proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/static/;
+            proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
+            proxy_ssl_server_name on;
+            
+            proxy_hide_header 'Access-Control-Allow-Origin';
+            proxy_hide_header 'Access-Control-Allow-Methods';
+            proxy_hide_header 'Access-Control-Allow-Headers';
+            proxy_hide_header 'Access-Control-Expose-Headers';
+            
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
         }
-
-        if ($valid_referer = 0) {
-            return 403;  # Return forbidden if the Referer header is invalid
-        }
-
-        location ~ ^/static/(.*)$ {
-            set $posthog_static "https://us-assets.i.posthog.com/static/";
-            # use variable to force proper DNS re-resolution, also must manually pass along path
-            proxy_pass $posthog_static$1$is_args$args;
-            proxy_set_header Host "us-assets.i.posthog.com";
-        }
-
-        location ~ ^/(.*)$ {
-            set $posthog_main "https://us.i.posthog.com/";
-            # use variable to force proper DNS re-resolution, also must manually pass along path
-            proxy_pass $posthog_main$1$is_args$args;
-            proxy_set_header Host "us.i.posthog.com";
+        
+        # Main API endpoints
+        location / {
+            proxy_pass https://${POSTHOG_CLOUD_REGION}.i.posthog.com;
+            proxy_set_header Host "${POSTHOG_CLOUD_REGION}.i.posthog.com";
+            proxy_ssl_server_name on;
+            
+            proxy_hide_header 'Access-Control-Allow-Origin';
+            proxy_hide_header 'Access-Control-Allow-Methods';
+            proxy_hide_header 'Access-Control-Allow-Headers';
+            proxy_hide_header 'Access-Control-Expose-Headers';
+            
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
         }
     }
 }
+```
+
+## Running the nginx container
+
+```bash
+docker build -t posthog-nginx . 
+docker run --rm -p 8080:8080 -e POSTHOG_CLOUD_REGION=us posthog-nginx
+```
+
+Now you can connect to PostHog through this proxy by configuring the PostHog client to use `http://localhost:8080`.
+
+```js
+posthog.init(<ph_project_api_key>, {
+    api_host: localhost:8080,
+    ui_host: 'https://us.posthog.com', // for the toolbar to work
+    // for EU Cloud
+    // ui_host: 'https://eu.posthog.com',
+});
 ```

@@ -4,7 +4,7 @@ import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
 import Accordion from './Accordion'
-import './hero.scss'
+import './hero.css'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
 import { SignupCTA } from 'components/SignupCTA'
@@ -63,7 +63,7 @@ const Feature = ({ title, icon, url }) => {
         <li className="w-24">
             <a
                 href={url}
-                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-gray-accent-light"
+                className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-primary"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />
                 <div className="text-[14px] lg:text-[15px] mt-2 leading-tight">{title}</div>
@@ -128,7 +128,7 @@ const WhitepaperBanner = ({ onClose }) => {
         <motion.div
             initial={{ translateX: '100%', opacity: 1 }}
             animate={{ translateX: '0%', opacity: 1, transition: { duration: 10 } }}
-            className="bg-white dark:bg-border-dark rounded-md border border-border dark:border-dark fixed bottom-16 md:bottom-4 right-4 z-[50] flex flex-col md:flex-row"
+            className="bg-white dark:bg-border-dark rounded-md border border-input fixed bottom-16 md:bottom-4 right-4 z-[50] flex flex-col md:flex-row"
         >
             <button onClick={onClose} className="flex items-center justify-center absolute top-4 right-4">
                 <IconX className="w-6 h-6" />
@@ -136,7 +136,7 @@ const WhitepaperBanner = ({ onClose }) => {
             <div
                 className={`${
                     blackPaper ? 'bg-black dark' : 'bg-white'
-                } basis-[200px] md:basis-auto text-center w-auto md:w-[340px] p-4 flex items-center flex-col m-2 border border-light dark:border-dark`}
+                } basis-[200px] md:basis-auto text-center w-auto md:w-[340px] p-4 flex items-center flex-col m-2 border border-primary`}
             >
                 <div className="dark:hidden max-h-[300px] max-w-[200px] md:max-w-full md:max-h-auto">
                     <img
@@ -200,7 +200,7 @@ const WhitepaperBanner = ({ onClose }) => {
                                 : '/brand/Copy of whitepaper (2) - final FINAL.docx.pdf'
                         }
                         download
-                        className="w-full inline-block text-center appearance-none bg-initial bg-gray-accent dark:bg-gray-accent-dark border border-light dark:border-dark py-2"
+                        className="w-full inline-block text-center appearance-none bg-initial bg-accent  border border-primary py-2"
                     >
                         Get your free {blackPaper ? 'blackpaper' : 'whitepaper'} now!
                     </a>
@@ -234,7 +234,7 @@ export default function Hero() {
     return (
         <>
             <Modal open={showNPS} setOpen={handleCloseNPS}>
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-border dark:border-dark">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[300px] dark:bg-border-dark p-4 rounded-md border border-input">
                     <div className="float-right ml-4">
                         <button onClick={handleCloseNPS}>
                             <IconX className="w-4 h-4" />
@@ -245,7 +245,7 @@ export default function Hero() {
                         We're always trying to improve our web site for you. Please rate your experience before
                         continuing.
                     </p>
-                    <div className="grid grid-cols-10 rounded-sm border bg-white dark:bg-black text-black dark:text-white border-border dark:border-dark divide-x divide-border dark:divide-border-dark overflow-hidden">
+                    <div className="grid grid-cols-10 rounded-sm border bg-white dark:bg-black text-black dark:text-white border-input divide-x divide-border dark:divide-border-dark overflow-hidden">
                         {Array.from({ length: 10 }, (_, index) => (
                             <button
                                 onClick={() => setSelectedIndex(index)}
@@ -264,7 +264,7 @@ export default function Hero() {
                     </div>
                     <button
                         onClick={handleCloseNPS}
-                        className="w-full appearance-none bg-initial bg-gray-accent dark:bg-gray-accent-dark border border-light dark:border-dark py-2"
+                        className="w-full appearance-none bg-initial bg-accent  border border-primary py-2"
                     >
                         Submit
                     </button>
@@ -311,7 +311,7 @@ export default function Hero() {
                                 </TrackedCTA>
                             </div>
                             {!showIntegrationPrompt && (
-                                <p className="text-sm text-center m-0 mt-5 font-semibold text-primary/85 dark:text-primary-dark/85 hidden md:block">
+                                <p className="text-sm text-center m-0 mt-5 font-semibold text-secondary dark:text-primary-dark/85 hidden md:block">
                                     Or{' '}
                                     <button
                                         className="font-bold text-red dark:text-yellow"

@@ -1,0 +1,184 @@
+---
+title: Getting started with experiments
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { CallToAction } from 'components/CallToAction'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductVideo } from 'components/ProductVideo'
+import { IconRewindPlay, IconToggle, IconFlask, IconGraph } from '@posthog/icons'
+import ExperimentInstallationPlatforms from './installation/_snippets/installation-platforms.tsx'
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to start experimenting!">
+
+<QuestLogItem 
+    title="Install PostHog SDK"
+    subtitle="Required"
+    icon="IconCode2"
+>
+
+Experiments enable you to test the impact of product changes and understand how they affect your users' behavior. For example, testing different onboarding flows, app designs, or pricing strategies.
+
+The first step is to install PostHog with the library you want to run experiments in:
+
+<ExperimentInstallationPlatforms />
+
+<CallToAction type="primary" to="/docs/experiments/installation">
+  Install PostHog SDK
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Create your first experiment"
+  subtitle="Required"
+  icon="IconFlask"
+>
+
+Once PostHog is installed, create your experiment by going to the [experiments tab](https://app.posthog.com/experiments) and clicking **New experiment**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.15_AM.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1716976005/posthog.com/contents/Screenshot_2024-05-29_at_10.46.03_AM.png"
+    alt="How to create an experiment in PostHog" 
+    classes="rounded"
+/>
+
+Fill in the experiment details:
+- **Feature flag key**: This will be used in your code to check which variant a user gets
+- **Variants**: By default, you get `control` and `test` variants (you can add more)
+- **Participants**: Choose between user-level or group-level experiments
+
+<CallToAction type="primary" to="/docs/experiments/creating-an-experiment">
+  Create an experiment
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Add experiment code"
+  subtitle="Required"
+  icon="IconCode"
+>
+
+With your experiment created, add the code to check which variant users see. Simply fetch the feature flag and customize the experience based on its value:
+
+```js
+// Example: Testing a new checkout flow
+if (posthog.getFeatureFlag('new-checkout-flow') === 'test') {
+    // Show new checkout experience
+    showNewCheckout()
+} else {
+    // Show current checkout (control)
+    showCurrentCheckout()
+}
+```
+
+That's it! When you call `getFeatureFlag()`, PostHog automatically tracks exposures and starts collecting data for your experiment.
+
+<CallToAction type="primary" to="/docs/experiments/adding-experiment-code">
+  View code examples for all SDKs
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Add metrics"
+  subtitle="Required"
+  icon="IconGraph"
+>
+
+Before launching, add at least one metric to measure your experiment's success. Go to your experiment and click **Add metric** in the Primary metrics section.
+
+Choose from:
+- **Funnel metrics**: For conversion rates (e.g., signup → purchase)
+- **Mean metrics**: For averages and sums (e.g., revenue per user)  
+- **Ratio metrics**: For custom calculations (e.g., revenue per order)
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_53_2x_928092c2ee.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_10_17_22_2x_e0b179b143.png"
+    alt="Primary metrics in PostHog experiments"
+    classes="rounded"
+/>
+
+<CallToAction type="primary" to="/docs/experiments/metrics">
+  Learn about experiment metrics
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Monitor and analyze results"
+  subtitle="Recommended"
+  icon="IconTrending"
+>
+
+Once your experiment is running, monitor the results in real-time. PostHog shows:
+
+- **Statistical significance**: Whether your results are reliable
+- **Win probability**: The likelihood each variant is better
+- **Confidence intervals**: The range of possible effect sizes
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_22_at_10_05_11_2f5017a50c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_22_at_10_05_31_0e81dd9c8e.png"
+  alt="Viewing experiment results"
+  classes="rounded"
+/>
+
+When your experiment reaches significance, you can ship the winning variant with confidence using the **Ship a variant** button.
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Advanced features"
+  subtitle="Optional"
+  icon="IconLogomark"
+>
+
+Take your experiments to the next level with advanced PostHog features:
+
+### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay  
+See exactly what users experienced in each variant with session recordings tied to your experiment results.
+
+### <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/> Feature flags
+Target specific user segments, implement gradual rollouts, or run experiments on user groups instead of individuals.
+
+### <IconFlask className="text-red w-7 -mt-1 inline-block"/> Advanced experimentation
+Choose between Bayesian and frequentist statistical approaches, handle multiple variants, and configure outlier detection.
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Free 1M requests/mo"
+  icon="IconPiggyBank">
+
+  PostHog's experiments is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. 
+
+  Experiments are billed with feature flags requests.  
+
+  ### TL;DR 💸 
+
+  - No credit card required to start
+  - First 1 million feature flag requests per month are free
+  - Above 1 million we have usage-based pricing starting at $0.0001/request with discounts as volume increases
+  - Set billing limits to avoid surprise charges
+  - See our [pricing page](/experiments#pricing) for more up-to-date details
+
+
+---
+
+That's it! You're ready to start running successful experiments.
+
+<CallToAction type="primary" to="/docs/experiments/installation">
+  Create your first experiment
+</CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>

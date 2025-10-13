@@ -10,7 +10,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: true
+  llmAnalytics: true
   errorTracking: true
 ---
 
@@ -182,12 +182,32 @@ export function PHProvider({
 
 The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
 
-### Why did the pageview component need a `useEffect`? 
+### Why did the pageview component need a `useEffect`?
 
 Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2025-05-24'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
 
-1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation. 
-2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers. 
+1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation.
+2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers.
+
+> **Note:** This approach of manually capturing pageviews is no longer recommended. We recommend using `defaults: '2025-05-24'` or `capture_pageview: 'history_change'` instead, which automatically handles both `$pageview` and `$pageleave` events.
+>
+> If you're still capturing pageviews manually, you should also capture `$pageleave` events to track important engagement metrics like time on page (`$prev_pageview_duration`) and scroll depth (`$prev_pageview_max_scroll_percentage`). To do this, set up a listener on window unload (similar to [how PostHog does it](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/posthog-core.ts#L644-L646)):
+>
+> ```js
+> useEffect(() => {
+>   const handlePageLeave = () => {
+>     posthog.capture('$pageleave', null, { transport: 'sendBeacon' })
+>   }
+>
+>   // Use pagehide if available for better reliability, otherwise fallback to unload
+>   const event = 'onpagehide' in window ? 'pagehide' : 'unload'
+>   window.addEventListener(event, handlePageLeave)
+>
+>   return () => window.removeEventListener(event, handlePageLeave)
+> }, [])
+> ```
+>
+> Using `sendBeacon` ensures the event is sent even when users quickly close tabs. See our [time on page tutorial](/tutorials/time-on-page) for more details on using these metrics. 
 
 ## Further reading
 

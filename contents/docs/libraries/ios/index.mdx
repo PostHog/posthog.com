@@ -14,7 +14,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmObservability: false
+  llmAnalytics: false
 ---
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
@@ -440,6 +440,12 @@ configuration.sendFeatureFlagEvent = true
 configuration.preloadFeatureFlags = true
 
 /**
+ * Environment tags that constrain which feature flags are evaluated. (not set by default)
+ * When set, only flags with matching evaluation tags (or no evaluation tags) will be returned.
+ */
+configuration.evaluationEnvironments = ["production", "ios", "mobile"]
+
+/**
  * Logs the SDK messages into Logcat. (off/false by default)
  */
 configuration.debug = false
@@ -475,6 +481,7 @@ configuration.sessionReplay = false
 
 /**
  * Session Replay configuration
+ * https://posthog.com/docs/session-replay/installation for more details
  */
 configuration.sessionReplayConfig = .init()
 
@@ -493,10 +500,9 @@ configuration.reuseAnonymousId = false
 
 
 /**
- * Enable Surveys. (off/false by default)
- * Experimental feature under @_spi(Experimental)
+ * Enable Surveys. (on/true by default)
  */
-configuration.surveys = false
+configuration.surveys = true
 
 /**
  * Hook that allows for amending, sampling, or dropping events before they are sent to PostHog.

@@ -47,14 +47,16 @@ Some guidelines:
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. Also, it's a good idea to have an expectation-setting session (can be async in a Figjam) to ensure everyone is on the same page about what the outcome/output of the offsite should be.
 - Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
 - Everyone should have their own bedroom which they don't need to share.
+- You should do a [360 degree feedback session](/handbook/people/feedback#ground-rules). It can feel uncomfortable doing these, but almost everyone who's done one at PostHog has come out feeling better and with a whole host of things they can improve. These are best in person.
+    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
+
 
 Ideas for the agenda:
 
+- 360 degree feedback session (mandatory!)
 - A spoken README session early in the week to share "Who am I/How I work best"
 - Planning session – what does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](/handbook/team-structure#small-teams) - what needs to be updated?
-- [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
-    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
 - Dogfooding session – set PostHog up in a toy project from scratch, looking for pain points
 - Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
 - Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
@@ -86,6 +88,7 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 - [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
 - [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
+- [Ruby Stella hotel](https://www.ruby-hotels.com/en/destinations/london/ruby-stella)
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 

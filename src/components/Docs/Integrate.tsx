@@ -38,7 +38,7 @@ type LibraryFeatures = {
     sessionRecording: boolean
     userIdentification: boolean
     surveys: boolean
-    llmObservability: boolean
+    llmAnalytics: boolean
     errorTracking: boolean
 }
 
@@ -56,7 +56,7 @@ export const SDKs = () => {
 
     return (
         <List
-            className="grid sm:grid-cols-2 md:grid-cols-3"
+            className="grid @sm:grid-cols-2 @xl:grid-cols-3"
             items={sdks.nodes.map(({ fields: { slug }, frontmatter: { title, icon } }) => ({
                 label: title,
                 url: slug,
@@ -71,7 +71,7 @@ export const Frameworks = () => {
 
     return (
         <List
-            className="grid sm:grid-cols-2 md:grid-cols-3"
+            className="grid @sm:grid-cols-2 @xl:grid-cols-3"
             items={frameworks.nodes.map(({ fields: { slug }, frontmatter: { title, icon } }) => ({
                 label: title,
                 url: slug,
@@ -182,7 +182,7 @@ const query = graphql`
                 featureFlags
                 groupAnalytics
                 surveys
-                llmObservability
+                llmAnalytics
                 errorTracking
             }
         }

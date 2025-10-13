@@ -5,8 +5,7 @@ showStepsToc: true
 
 import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
 import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
-
-LLM analytics is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 
 <Steps>
 
@@ -44,13 +43,11 @@ npm install openai
 
 </MultiLanguage>
 
-<LLMsSDKsCallout />
-
 </Step>
 
 <Step title="Initialize PostHog and OpenAI client" badge="required">
 
-In the spot where you initialize the OpenAI SDK, import PostHog and our OpenAI wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our OpenAI wrapper.
+Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), then pass it to our OpenAI wrapper. 
 
 <MultiLanguage>
 
@@ -93,13 +90,17 @@ phClient.shutdown()
 
 > **Note:** This also works with the `AsyncOpenAI` client. 
 
+
+<LLMsSDKsCallout />
+
+
 </Step>
 
 <Step title="Call OpenAI LLMs" badge="required">
 
-Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_reasoning_tokens`, `$ai_tools`, `$ai_output_choices`, and `$ai_output_tokens`.
+Now, when you use the OpenAI SDK to call LLMs, PostHog automatically captures an `$ai_generation` event.
 
-You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
+You can enrich the event with additional data such as the trace ID, distinct ID, custom properties, groups, and privacy mode options.
 
 <MultiLanguage>
 
@@ -140,6 +141,10 @@ console.log(completion.choices[0].message.content)
 > - We also support the old `chat.completions` API.
 > - This works with responses where `stream=True`.
 > - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+
+You can expect captured `$ai_generation` events to have the following properties:
+
+<NotableGenerationProperties />
 
 </Step>
 

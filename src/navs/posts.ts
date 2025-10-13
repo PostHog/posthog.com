@@ -237,7 +237,7 @@ export const postsMenu: IMenu[] = [
                 name: 'LLM analytics',
                 url: '/tutorials/ai-engineering',
                 color: 'purple',
-                icon: 'IconAI',
+                icon: 'IconLlmAnalytics',
                 tag: 'LLM analytics',
             },
         ],

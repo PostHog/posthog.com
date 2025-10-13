@@ -177,7 +177,7 @@ Now, when we run `npm run dev` again and submit an input, we should see a respon
 
 ## 3. Viewing generations in PostHog
 
-Once you generate a few responses, go to PostHog and enable the [LLM analytics feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability). Once enabled, go to the LLM analytics tab to get an overview of traces, users, costs, and more.
+Once you generate a few responses, go to PostHog's [LLM analytics tab](https://app.posthog.com/llm-analytics) to get an overview of traces, users, costs, and more.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_05_at_10_00_08_2x_a4773a9cd5.png"

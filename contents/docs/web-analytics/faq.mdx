@@ -63,6 +63,8 @@ Our client-side bot detection code is available on [GitHub](https://github.com/P
 
 You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js/config) option if there's a specific user agent that you don't want to track - your custom user agent or maybe a bad actor you want to block.
 
+> **Note:** If you use Ahrefs, you need to switch to use the "Desktop" user agent. In other modes, the user agent doesn't contain information PostHog can use to block their crawl from analytics.
+
 ## Why am I getting a lot of direct traffic?
 
 Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
@@ -80,7 +82,12 @@ This is called self-referral traffic, having a small amount (less than 5%) of se
 
 ### Cross-domain tracking
 
-If you track multiple domains or websites, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
+For tracking users across different domains or websites, for example a marketing site at `marketing.com` and an app at `app.com`, or in some cases between subdomains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed. This typically means you need to pass the user's `distinct_id` and `session_id` between domains but check the guide for complete instructions.
+
+This ensures that:
+- Campaign attribution is preserved across domain transitions
+- User journeys are tracked accurately from first touch to conversion
+- Analytics data from both sites is associated with the same user profile
 
 ### Session timeout
 

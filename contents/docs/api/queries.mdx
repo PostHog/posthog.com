@@ -15,7 +15,7 @@ API queries enable you to query your data in PostHog. This is useful for:
 > **When should you _not_ use API queries?**
 > 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
 > 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
-> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
+> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views/materialize) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
 
 ## Prerequisites
 
@@ -41,7 +41,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "select properties.$current_url from events where properties.$current_url like '\''%/blog%'\'' limit 100"
-        }
+        },
+        "name": "get 100 blog urls"
       }'
 ```
 
@@ -58,7 +59,8 @@ payload = {
     "query": {
         "kind": "HogQLQuery",
         "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
-    }
+    },
+    "name": "get 100 blog urls"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -78,7 +80,8 @@ async function createQuery() {
     "query": {
       "kind": "HogQLQuery",
       "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
-    }
+    },
+    "name": "get 100 blog urls"
   }
 
   const response = await fetch(url, {
@@ -109,7 +112,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "select properties.email from persons where properties.email is not null"
-        }
+        },
+        "name": "get user emails"
       }'
 ```
 
@@ -126,7 +130,8 @@ payload = {
     "query": {
         "kind": "HogQLQuery",
         "query": "select properties.email from persons where properties.email is not null"
-    }
+    },
+    "name": "get user emails"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -146,7 +151,8 @@ async function createQuery() {
     "query": {
       "kind": "HogQLQuery",
       "query": "select properties.email from persons where properties.email is not null"
-    }
+    },
+    "name": "get user emails"
   }
 
   const response = await fetch(url, {
@@ -164,7 +170,7 @@ createQuery()
 
 </MultiLanguage>
 
-Every query you run is logged in the `query_log` table along with details like duration, read bytes, read rows, and more.
+Every query you run is logged in the [`query_log` table](/docs/data/query-log) along with details like duration, read bytes, read rows, and more. The `name` parameter you provide appears in this log, making it easier to identify and analyze your queries.
 
 ## Writing performant queries
 
@@ -187,7 +193,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY"
-        }
+        },
+        "name": "event count in last 7 days"
       }'
 ```
 
@@ -207,9 +214,9 @@ payload = {
           SELECT count()
           FROM events
           WHERE timestamp >= now() - INTERVAL 7 DAY
-          LIMIT 100
         """
-    }
+    },
+    "name": "event count in last 7 days"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -234,7 +241,8 @@ async function createQuery() {
         WHERE timestamp >= now() - INTERVAL 7 DAY
         LIMIT 100
       `
-    }
+    },
+    "name": "event count in last 7 days"
   }
 
   const response = await fetch(url, {
@@ -254,7 +262,7 @@ createQuery()
 
 ### 2. Materialize a view for the data you need
 
-The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views#materializing-and-scheduling-a-view) of your data. This means that the view is precomputed, which can significantly improve query performance.
+The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views/materialize) of your data. This means that the view is precomputed, which can significantly improve query performance.
 
 To do this, write your query in the [SQL editor](https://us.posthog.com/sql), click **Materialize**, then **Save and materialize**, and give it a name without spaces (I chose `mat_event_count`). You can also schedule to update the view at a specific interval.
 
@@ -278,7 +286,8 @@ curl \
         "query": {
           "kind": "HogQLQuery",
           "query": "SELECT * FROM mat_event_count"
-        }
+        },
+        "name": "get materialized event count"
       }'
 ```
 
@@ -298,7 +307,8 @@ payload = {
           SELECT *
           FROM mat_event_count
         """
-    }
+    },
+    "name": "get materialized event count"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
@@ -321,7 +331,8 @@ async function createQuery() {
         SELECT *
         FROM mat_event_count
       `
-    }
+    },
+    "name": "get materialized counts"
   }
 
   const response = await fetch(url, {
@@ -361,15 +372,20 @@ SELECT *
 FROM ca_events
 ```
 
-Instead, pull the rows you need **once**, typically in a first CTE, and have every later step reference that CTE like this:
+Instead, pull the rows you need **once** and save it as a [materialized view](/docs/data-warehouse/views/materialize). You can then query from that materialized view in all the other steps.
+
+Start by saving this materialized view, e.g. as `base_events`:
 
 ```sql
-WITH base_events AS (              -- one read only
-    SELECT event, properties.$geoip_country_code as country
-    FROM events
-    WHERE properties.$geoip_country_code IN ('US', 'CA')
-),
-us_events AS (
+SELECT event, properties.$geoip_country_code as country
+FROM events
+WHERE properties.$geoip_country_code IN ('US', 'CA')
+```
+
+You can then query from `base_events` in your main query, which avoids scanning the raw `events` table multiple times:
+
+```sql
+WITH us_events AS (
     SELECT event
     FROM base_events
     WHERE country = 'US'
@@ -386,9 +402,75 @@ SELECT *
 FROM ca_events
 ```
 
-### 4. Other SQL optimizations
+### 4. Name your queries for easier debugging
 
-Option 1 and 2 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
+Always provide a meaningful `name` parameter for your queries. This helps you:
+
+- Identify slow or problematic queries in the [`query_log` table](/docs/data/query-log)
+- Analyze query performance patterns over time
+- Debug issues more efficiently
+- Track resource usage by query type
+
+Good query names are descriptive and include the purpose:
+
+- `daily_active_users_last_7_days`
+- `funnel_signup_to_activation`
+- `revenue_by_country_monthly`
+
+Bad names are generic and vague:
+
+- `query1`
+- `test`
+- `data`
+
+### 5. Use timestamp-based pagination instead of OFFSET
+
+When querying large datasets like `events` or `query_log` over multiple batches, avoid using `OFFSET` for pagination. Instead, use timestamp-based pagination, which is much more efficient and scales better.
+
+**❌ Inefficient approach using OFFSET:**
+```sql
+-- First batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000;
+
+-- Second batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000 OFFSET 1000;  -- This gets slower with each page
+```
+
+**✅ Efficient approach using timestamp pagination:**
+```sql
+-- First batch
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp
+LIMIT 1000;
+
+-- Second batch (use timestamp of last event from previous batch)
+SELECT timestamp, event, distinct_id
+FROM events
+WHERE timestamp > '2024-01-01 12:34:56.789'  -- timestamp from last row of previous batch
+ORDER BY timestamp
+LIMIT 1000;
+```
+
+This approach is more efficient because:
+- **Constant performance**: Each query executes in similar time regardless of how many rows you've already retrieved
+- **Index-friendly**: Uses the timestamp index effectively for filtering
+- **Scalable**: Performance doesn't degrade as you paginate through millions of rows
+
+**For geeks:** OFFSET-based pagination gets progressively slower because the database must scan and skip all the offset rows for each query. With timestamp-based pagination, the database uses the timestamp index to directly jump to the right starting point, maintaining consistent performance across all pages.
+
+### 6. Other SQL optimizations
+
+Options 1-5 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
 
 ## Query parameters
 
@@ -399,7 +481,7 @@ Top level request parameters include:
 - `refresh` (optional): Controls caching behavior and execution mode (sync vs async).
 - `filters_override` (optional): Dashboard-specific filters to apply.
 - `variables_override` (optional): Variable overrides for queries that support variables.
-- `name` (optional): A name for the query to better identify it in the `query_log` table.
+- `name` (optional): A descriptive name for the query to better identify it in the [`query_log` table](/docs/data/query-log). We strongly recommend providing meaningful names for easier debugging and performance analysis.
 
 ### Caching and execution modes
 
@@ -471,10 +553,10 @@ curl \
 
 API queries are limited at the project-level to:
 
-- 1200 requests per hour
-- 120 requests per minute
+- 2400 requests per hour
+- 240 requests per minute
 - 3 queries running concurrently
-- 80 threads per query
+- 60 threads per query
 - 10 seconds of max execution time
   - applies to query execution time, not HTTP request duration
 

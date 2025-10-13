@@ -12,11 +12,11 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: false
-  llmObservability: true
+  llmAnalytics: true
   errorTracking: true
 ---
 
-If you're working with Node.js (versions 15+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
+If you're working with Node.js (versions 20+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
 ## Installation
 
@@ -36,6 +36,7 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
+| `evaluation_environments`     | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. | `undefined`                |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 

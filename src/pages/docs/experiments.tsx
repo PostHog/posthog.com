@@ -11,6 +11,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
+import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
     {
@@ -94,7 +95,7 @@ export const Content = ({ quickLinks = false }) => {
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-primary/75 dark:text-primary-dark/75 group-hover:text-primary/100 dark:group-hover:text-primary-dark/100 !bg-white dark:!bg-dark !border-light dark:!border-dark"
+                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
                     width="[calc(100%_+_3px)]"
                 >
                     Explore guides
@@ -106,38 +107,36 @@ export const Content = ({ quickLinks = false }) => {
 
 const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="Experiments - Docs - PostHog" />
 
-            <PostLayout title={'Experiments'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="Experiments"
-                    description="Test different variations of your product and measure the impact."
-                    buttonText="Roll out your first experiment"
-                    buttonLink="/docs/experiments/installation"
-                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
-                    imageClasses=""
-                />
+            <Intro
+                subheader="Getting started"
+                title="Experiments"
+                description="Test different variations of your product and measure the impact."
+                buttonText="Roll out your first experiment"
+                buttonLink="/docs/experiments/start-here"
+                imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
+                imageClasses=""
+            />
 
-                <AskMax
-                    quickQuestions={[
-                        'How can I watch recordings of users in my experiment?',
-                        'Can I override a release condition?',
-                        "How do I know if I've reached statistical significance?",
-                    ]}
-                />
+            <AskMax
+                quickQuestions={[
+                    'How can I watch recordings of users in my experiment?',
+                    'Can I override a release condition?',
+                    "How do I know if I've reached statistical significance?",
+                ]}
+            />
 
-                <Content />
+            <Content />
 
-                <div className="">
-                    <CallToAction to="/docs/experiments/installation" width="full">
-                        Visit the manual
-                    </CallToAction>
-                </div>
-            </PostLayout>
-        </Layout>
+            <div className="">
+                <CallToAction to="/docs/experiments/start-here" width="full">
+                    Visit the manual
+                </CallToAction>
+            </div>
+        </ReaderView>
     )
 }
 

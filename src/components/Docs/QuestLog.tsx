@@ -1,17 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import * as Icons from '@posthog/icons'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Slugger from 'github-slugger'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import Scrollspy from 'react-scrollspy'
+import ElementScrollLink, { ScrollSpyProvider, ScrollSpyContext } from 'components/ElementScrollLink'
 
 export interface QuestLogItemProps {
     title: string
     subtitle?: string
     icon?: string
     children: React.ReactNode
+    index?: number
+    isSelected?: boolean
+    questRef?: React.Ref<HTMLDivElement>
+    onSelect?: () => void
 }
 
 export const QuestLog: React.FC<{
@@ -23,11 +25,8 @@ export const QuestLog: React.FC<{
     firstSpeechBubble = "We're going on an adventure!",
     lastSpeechBubble = "You're ready to start building!",
 }) => {
-    const SCROLLSPY_OFFSET = 0
-    const MOBILE_SCROLLSPY_OFFSET = 125
-
     // Animation timing constants
-    const INITIAL_LOAD_DELAY = 1000
+    const INITIAL_LOAD_DELAY = 250
     const SPEECH_BUBBLE_SHOW_DELAY = 200
     const SPEECH_BUBBLE_AUTO_HIDE_DELAY = 3000
     const SMOOTH_SCROLL_DURATION = 1000
@@ -81,15 +80,17 @@ export const QuestLog: React.FC<{
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const [headerHeight, setHeaderHeight] = useState(0)
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
     const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
+    const [isJumping, setIsJumping] = useState(false)
+    const [animationKey, setAnimationKey] = useState(0)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
     const spriteRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
+    const previousQuestRef = useRef(0)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
         QuestLogItemProps & {
@@ -145,35 +146,35 @@ export const QuestLog: React.FC<{
         return questIndex === firstQuest || questIndex === lastQuest
     }
 
-    const restartSpriteAnimation = () => {
-        if (spriteRef.current) {
-            spriteRef.current.classList.remove('quest-log-sprite-animate')
-            void spriteRef.current.offsetWidth // Force reflow
-            spriteRef.current.classList.add('quest-log-sprite-animate')
+    const restartSpriteAnimation = (shouldJump = false) => {
+        // Set jumping state for opacity transition
+        setIsJumping(shouldJump)
 
-            // Only show speech bubble for specific quests
-            if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
-                // Update speech bubble - use first message for first quest, last message for last quest
-                const message =
-                    selectedQuest === questItems.length - 1
-                        ? lastSpeechBubble // Last quest message
-                        : firstSpeechBubble // First quest message
-                setSpeechText(message)
-                setShowSpeechBubble(false)
+        // Force React to recreate elements by changing key
+        setAnimationKey((prev) => prev + 1)
 
-                // Show new speech bubble after brief delay
+        // Only show speech bubble for specific quests
+        if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+            // Update speech bubble - use first message for first quest, last message for last quest
+            const message =
+                selectedQuest === questItems.length - 1
+                    ? lastSpeechBubble // Last quest message
+                    : firstSpeechBubble // First quest message
+            setSpeechText(message)
+            setShowSpeechBubble(false)
+
+            // Show new speech bubble after brief delay
+            setTimeout(() => {
+                setShowSpeechBubble(true)
+
+                // Auto-hide speech bubble after delay
                 setTimeout(() => {
-                    setShowSpeechBubble(true)
-
-                    // Auto-hide speech bubble after delay
-                    setTimeout(() => {
-                        setShowSpeechBubble(false)
-                    }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
-                }, SPEECH_BUBBLE_SHOW_DELAY)
-            } else {
-                // Hide speech bubble for other quests
-                setShowSpeechBubble(false)
-            }
+                    setShowSpeechBubble(false)
+                }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
+            }, SPEECH_BUBBLE_SHOW_DELAY)
+        } else {
+            // Hide speech bubble for other quests
+            setShowSpeechBubble(false)
         }
     }
 
@@ -195,21 +196,26 @@ export const QuestLog: React.FC<{
 
     const questIds = questItems.map((item) => `quest-item-${generateQuestSlug(item.props.title)}`)
 
-    // Restore Scrollspy onUpdate for both desktop and mobile
-    const handleScrollspyUpdate = (el: HTMLElement | null) => {
-        // Only allow scrollspy updates after user has actually interacted with the page
-        if (!hasInitialLoadSettled) return
+    // ScrollSpy context reference for quest detection
+    const questContentRef = useRef<HTMLDivElement>(null)
 
-        // Prevent updates during smooth scrolling
-        if (isSmoothScrolling) return
+    // Inner component to use ScrollSpyContext
+    const QuestScrollTracker: React.FC = () => {
+        const { activeSection } = useContext(ScrollSpyContext)
 
-        if (el && el.id) {
-            const questIndex = questIds.findIndex((id) => id === el.id)
+        useEffect(() => {
+            if (!hasInitialLoadSettled || isSmoothScrolling || !activeSection) {
+                return
+            }
+
+            const questIndex = questIds.findIndex((id) => id === activeSection)
             if (questIndex >= 0 && questIndex !== selectedQuest) {
                 setSelectedQuest(questIndex)
-                window.history.replaceState(null, '', `#${el.id}`)
+                window.history.replaceState(null, '', `#${activeSection}`)
             }
-        }
+        }, [activeSection])
+
+        return null
     }
 
     useEffect(() => {
@@ -220,15 +226,15 @@ export const QuestLog: React.FC<{
         return () => window.removeEventListener('hashchange', onHashChange)
     }, [questItems])
 
-    // Initial page load delay
+    // Initial page load delay - only run once on mount
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasInitialLoadSettled(true)
-            restartSpriteAnimation()
 
             // Show initial speech bubble only if first quest should show it (it should, since it's index 0)
-            if (questItems.length === 0 || shouldShowSpeechBubble(0, questItems.length)) {
-                setSpeechText(firstSpeechBubble) // Set initial message
+            if (questItems.length === 0 || shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+                const message = selectedQuest === questItems.length - 1 ? lastSpeechBubble : firstSpeechBubble
+                setSpeechText(message)
                 setShowSpeechBubble(true)
 
                 // Auto-hide initial speech bubble after delay
@@ -254,7 +260,7 @@ export const QuestLog: React.FC<{
         }
     }, [])
 
-    // Update bracket position on quest change
+    // Update bracket position when inner containers change size (not browser window)
     useEffect(() => {
         const updateBracketPosition = () => {
             const selectedElement = questRefs.current[selectedQuest]
@@ -270,18 +276,57 @@ export const QuestLog: React.FC<{
             }
         }
 
+        // Initial positioning
         updateBracketPosition()
+
+        // Use ResizeObserver to watch inner containers that actually change size
+        let resizeObserver: ResizeObserver | null = null
+        if (typeof ResizeObserver !== 'undefined') {
+            const containersToWatch = [
+                document.querySelector('[data-scheme="primary"] [data-radix-scroll-area-viewport]'), // Scroll viewport
+                document.querySelector('.quest-log-container'), // QuestLog container
+            ].filter((el): el is Element => el !== null) // Remove null elements with type guard
+
+            if (containersToWatch.length > 0) {
+                resizeObserver = new ResizeObserver(() => {
+                    // Small delay to ensure DOM has settled after resize
+                    requestAnimationFrame(updateBracketPosition)
+                })
+
+                containersToWatch.forEach((container) => {
+                    resizeObserver?.observe(container)
+                })
+            }
+        }
+
+        // Fallback: still listen to window resize for edge cases
         window.addEventListener('resize', updateBracketPosition)
-        return () => window.removeEventListener('resize', updateBracketPosition)
+
+        return () => {
+            window.removeEventListener('resize', updateBracketPosition)
+            resizeObserver?.disconnect()
+        }
     }, [selectedQuest])
 
     // Trigger sprite animation on quest change
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false
+            previousQuestRef.current = selectedQuest
+            // On first render, always walk (no previous position to compare)
+            setIsJumping(false)
+            setAnimationKey((prev) => prev + 1)
             return
         }
-        restartSpriteAnimation()
+
+        // Determine if we should jump (more than 1 step forward)
+        const shouldJump = selectedQuest > previousQuestRef.current + 1
+
+        // Update previous quest reference
+        previousQuestRef.current = selectedQuest
+
+        // Restart animation with appropriate mode
+        restartSpriteAnimation(shouldJump)
     }, [selectedQuest])
 
     // Handle dropdown outside clicks
@@ -297,22 +342,6 @@ export const QuestLog: React.FC<{
         }
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [dropdownOpen])
-
-    // Handle header height for sticky positioning
-    useEffect(() => {
-        const handleResize = () => {
-            // Calculate header height
-            const headerElement = document.getElementById('header')
-            if (headerElement) {
-                const headerRect = headerElement.getBoundingClientRect()
-                setHeaderHeight(headerRect.height)
-            }
-        }
-
-        handleResize() // Set initial value
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
 
     // Handle initial scroll after images load
     useEffect(() => {
@@ -352,34 +381,24 @@ export const QuestLog: React.FC<{
         : 'calc(0% - 10px)'
 
     return (
-        <>
+        <ScrollSpyProvider>
+            <QuestScrollTracker />
             <div className="max-w-7xl mx-auto pb-6 quest-log-container">
-                <div
-                    id={questIds[0]}
-                    style={{ position: 'absolute', top: 0, height: 0, width: 0 }}
-                    aria-hidden="true"
-                />
                 <div className="quest-main-content">
                     {/* Quest Details */}
-                    <div className="quest-details">
+                    <div className="quest-details" ref={questContentRef}>
                         <div className="space-y-4">
                             {questItems.map((questItem, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-sm p-4 md:p-6"
+                                    className="bg-white dark:bg-accent-dark border border-primary dark:border-primary rounded-sm shadow-sm p-4 md:p-6"
                                 >
-                                    {index === 0 ? (
-                                        <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32">
-                                            {questItem.props.title}
-                                        </h2>
-                                    ) : (
-                                        <h2
-                                            id={questIds[index]}
-                                            className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
-                                        >
-                                            {questItem.props.title}
-                                        </h2>
-                                    )}
+                                    <h2
+                                        id={questIds[index]}
+                                        className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
+                                    >
+                                        {questItem.props.title}
+                                    </h2>
                                     {questItem.props.children || (
                                         <div>
                                             <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
@@ -393,12 +412,7 @@ export const QuestLog: React.FC<{
                     </div>
 
                     {/* Quest List - Sticky Container */}
-                    <div
-                        className="quest-sidebar bg-light dark:bg-dark"
-                        style={{
-                            top: `${headerHeight}px`,
-                        }}
-                    >
+                    <div className="quest-sidebar z-30 bg-primary">
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-3 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
@@ -421,17 +435,23 @@ export const QuestLog: React.FC<{
                                         height: '48px',
                                     }}
                                 >
-                                    {/* Walking Sprite */}
-                                    <div
-                                        ref={spriteRef}
-                                        className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
-                                        style={{
-                                            backgroundImage: 'url(/images/game-walk.png)',
-                                            backgroundSize: '528px 48px',
-                                            backgroundRepeat: 'no-repeat',
-                                            height: '48px',
-                                        }}
-                                    />
+                                    {/* Walking/Jumping Sprite */}
+                                    <div ref={spriteRef} className="relative w-[48px] h-[48px] pointer-events-none">
+                                        {/* Walking Sprite */}
+                                        <div
+                                            key={`walk-${animationKey}`}
+                                            className={`absolute inset-0 questlog-sprite-walk transition-opacity duration-200 ${
+                                                !isJumping ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                        />
+                                        {/* Jumping Sprite */}
+                                        <div
+                                            key={`jump-${animationKey}`}
+                                            className={`absolute inset-0 questlog-sprite-jump transition-opacity duration-200 ${
+                                                isJumping ? 'opacity-100' : 'opacity-0'
+                                            }`}
+                                        />
+                                    </div>
 
                                     {/* Speech Bubble */}
                                     <div
@@ -447,14 +467,14 @@ export const QuestLog: React.FC<{
                                         style={{
                                             animation: showSpeechBubble
                                                 ? selectedQuest === questItems.length - 1
-                                                    ? 'speechBounceLeft 0.5s ease-out'
-                                                    : 'speechBounce 0.5s ease-out'
+                                                    ? 'speechBubbleLeft 0.5s ease-out'
+                                                    : 'speechBubble 0.5s ease-out'
                                                 : 'none',
                                             zIndex: 60, // Higher than your sticky nav
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative bg-white dark:bg-accent-dark rounded-lg shadow-md border-1 border-white dark:border-dark px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-white border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
                                             <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
                                                 <span className="inline-block">{speechText}</span>
@@ -462,25 +482,12 @@ export const QuestLog: React.FC<{
 
                                             {/* Speech Bubble Tail */}
                                             <div
-                                                className={`absolute ${
-                                                    selectedQuest === questItems.length - 1 ? 'left-full' : 'right-full'
-                                                } top-1/2 transform -translate-y-1/2`}
-                                            >
-                                                <div
-                                                    className={`w-0 h-0 border-t-[7px] border-b-[7px] ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? 'border-l-[10px] border-l-white dark:border-l-dark'
-                                                            : 'border-r-[10px] border-r-white dark:border-r-dark'
-                                                    } border-t-transparent border-b-transparent`}
-                                                ></div>
-                                                <div
-                                                    className={`absolute ${
-                                                        selectedQuest === questItems.length - 1
-                                                            ? '-left-[8px] border-l-[8px] border-l-white dark:border-l-accent-dark'
-                                                            : '-right-[8px] border-r-[8px] border-r-white dark:border-r-accent-dark'
-                                                    } top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent`}
-                                                ></div>
-                                            </div>
+                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-white rotate-45 ${
+                                                    selectedQuest === questItems.length - 1
+                                                        ? 'border-r border-t left-full -translate-x-1/2'
+                                                        : 'border-l border-b right-full translate-x-1/2'
+                                                }`}
+                                            ></div>
                                         </div>
                                     </div>
                                 </div>
@@ -503,15 +510,18 @@ export const QuestLog: React.FC<{
                                 {BOTTOM_RIGHT_CORNER_SVG}
                             </div>
 
-                            <Scrollspy
-                                items={questIds}
-                                currentClassName="active"
-                                offset={SCROLLSPY_OFFSET}
-                                className="space-y-4"
-                                style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
-                                rootEl="#content-menu-wrapper"
-                                onUpdate={handleScrollspyUpdate}
-                            >
+                            <div className="space-y-4">
+                                {/* Hidden ElementScrollLink components for scrollspy tracking */}
+                                {questItems.map((_, index) => (
+                                    <ElementScrollLink
+                                        key={`tracker-${index}`}
+                                        id={questIds[index]}
+                                        label=""
+                                        element={questContentRef}
+                                        className="hidden"
+                                    />
+                                ))}
+                                {/* Visible quest navigation items */}
                                 {questItems.map((child, index) => (
                                     <a
                                         key={index}
@@ -529,44 +539,29 @@ export const QuestLog: React.FC<{
                                         })}
                                     </a>
                                 ))}
-                            </Scrollspy>
+                            </div>
                         </div>
 
                         {/* Mobile Navigation */}
                         <div className="quest-mobile-nav">
-                            <Scrollspy
-                                items={questIds}
-                                currentClassName="active"
-                                offset={MOBILE_SCROLLSPY_OFFSET}
-                                componentTag="div"
-                                onUpdate={handleScrollspyUpdate}
-                            >
-                                <MobileQuestLogItem
-                                    questItems={questItems}
-                                    selectedQuest={selectedQuest}
-                                    dropdownOpen={dropdownOpen}
-                                    onDropdownToggle={setDropdownOpen}
-                                    dropdownRef={dropdownRef}
-                                    questIds={questIds}
-                                    onNavClick={handleMobileNavClick}
-                                />
-                            </Scrollspy>
+                            <MobileQuestLogItem
+                                questItems={questItems}
+                                selectedQuest={selectedQuest}
+                                dropdownOpen={dropdownOpen}
+                                onDropdownToggle={setDropdownOpen}
+                                dropdownRef={dropdownRef}
+                                questIds={questIds}
+                                onNavClick={handleMobileNavClick}
+                            />
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+        </ScrollSpyProvider>
     )
 }
 
-export const QuestLogItem: React.FC<
-    QuestLogItemProps & {
-        index?: number
-        isSelected?: boolean
-        questRef?: React.Ref<HTMLDivElement>
-        onSelect?: () => void
-    }
-> = ({ title, subtitle, icon, isSelected = false, questRef, onSelect }) => {
+export const QuestLogItem: React.FC<QuestLogItemProps> = ({ title, subtitle, icon, isSelected = false, questRef }) => {
     const Icon = Icons[icon as keyof typeof Icons] || Icons.IconInfo
 
     return (
@@ -575,7 +570,7 @@ export const QuestLogItem: React.FC<
             className={`relative rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
                 isSelected
                     ? 'border border-orange shadow-md opacity-100 bg-orange/10 dark:bg-orange/10'
-                    : 'border border-light dark:border-dark opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
+                    : 'border border-primary dark:border-primary opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
             }`}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
@@ -588,14 +583,12 @@ export const QuestLogItem: React.FC<
                 </div>
                 <div className="flex-1 min-w-0">
                     <strong
-                        className={`text-sm md:text-base font-bold leading-tight ${
-                            isSelected ? 'text-red dark:text-yellow' : 'text-primary dark:text-primary-dark'
-                        }`}
+                        className={`text-sm font-bold leading-tight ${isSelected ? 'text-red dark:text-yellow' : ''}`}
                     >
                         {title}
                     </strong>
                     {subtitle && (
-                        <div className="text-xs md:text-sm text-primary/40 dark:text-primary-dark leading-tight">
+                        <div className="text-xs text-primary/40 dark:text-primary-dark leading-tight">
                             <strong>
                                 <em>{subtitle}</em>
                             </strong>
@@ -647,7 +640,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                             {Number.isFinite(selectedQuest) ? questItems[selectedQuest]?.props.title || '' : ''}
                         </strong>
                         {Number.isFinite(selectedQuest) && questItems[selectedQuest]?.props.subtitle && (
-                            <div className="text-xs text-primary/40 dark:text-primary-dark leading-tight">
+                            <div className="text-xs leading-tight">
                                 <strong>
                                     <em>{questItems[selectedQuest].props.subtitle}</em>
                                 </strong>
@@ -664,7 +657,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
 
             {dropdownOpen && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
-                    {questItems.map((child, index) => (
+                    {questItems.map((_, index) => (
                         <a
                             key={index}
                             href={`#${questIds[index]}`}
@@ -679,9 +672,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                             <div className="flex items-center space-x-2.5">
                                 <div
                                     className={`flex-shrink-0 w-5 h-5 ${
-                                        selectedQuest === index
-                                            ? 'text-red dark:text-yellow'
-                                            : 'text-primary/40 dark:text-primary-dark'
+                                        selectedQuest === index ? 'text-red dark:text-yellow' : ''
                                     }`}
                                 >
                                     {(() => {

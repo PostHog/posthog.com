@@ -36,13 +36,11 @@ export function Quantity(props: QuantityProps): React.ReactElement {
     const classes = cn('', className)
 
     return (
-        <div
-            className={`${classes} bg-light dark:bg-dark inline-flex items-center border border-light dark:border-dark rounded px-2`}
-        >
+        <div className={`${classes} bg-light dark:bg-dark inline-flex items-center border border-primary rounded px-2`}>
             <button
                 disabled={disabled}
                 onClick={decreaseQuantity}
-                className="disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none w-8 h-8 inline-flex justify-center items-center hover:bg-accent dark:bg-accent-dark border border-transparent hover:border-light dark:hover:border-dark border-b-[3px] rounded relative hover:top-[-1px] hover:scale-[1.05] active:top-[1px] active:scale-[.99]"
+                className="disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none w-8 h-8 inline-flex justify-center items-center hover:bg-accent border border-transparent hover:border border-b-[3px] rounded relative hover:top-[-1px] hover:scale-[1.05] active:top-[1px] active:scale-[.99]"
             >
                 <IconMinus className="w-4 h-4" />
             </button>
@@ -57,7 +55,7 @@ export function Quantity(props: QuantityProps): React.ReactElement {
             <button
                 disabled={disabled}
                 onClick={increaseQuantity}
-                className="disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none w-8 h-8 inline-flex justify-center items-center hover:bg-accent dark:bg-accent-dark border border-transparent hover:border-light dark:hover:border-dark border-b-[3px] rounded relative hover:top-[-1px] hover:scale-[1.05] active:top-[1px] active:scale-[.99]"
+                className="disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none w-8 h-8 inline-flex justify-center items-center hover:bg-accent border border-transparent hover:border border-b-[3px] rounded relative hover:top-[-1px] hover:scale-[1.05] active:top-[1px] active:scale-[.99]"
             >
                 <IconPlus className="w-4 h-4" />
             </button>

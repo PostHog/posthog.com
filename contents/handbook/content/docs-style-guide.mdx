@@ -114,7 +114,9 @@ You can add callout boxes to documentation to ensure skimmers don't miss essenti
 
 ```jsx
 <CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
-  Here is some information
+
+Here is some information
+
 </CalloutBox>
 ```
 
@@ -127,15 +129,21 @@ Three styles are available:
 They look like this:
 
 <CalloutBox icon="IconInfo" title="Here is some information" type="fyi">
-  Provide detail here. You can go on at length if necessary.
+
+Provide detail here. You can go on at length if necessary.
+
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="Here is some information" type="action">
-  Provide detail here. You can go on at length if necessary.
+
+Provide detail here. You can go on at length if necessary.
+
 </CalloutBox>
 
 <CalloutBox icon="IconWarning" title="Here is some information" type="caution">
-  Provide detail here. You can go on at length if necessary.
+
+Provide detail here. You can go on at length if necessary.
+
 </CalloutBox>
 
 Valid icons are listed in PostHog's <PrivateLink url="https://github.com/posthog/icons#posthogicons">icon library</PrivateLink>.
@@ -157,6 +165,38 @@ This creates the following component in the docs, where the final link will dive
 <MaxCTA question="What's my churn rate?" />
 
 This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
+
+### AskMax
+
+The `<AskMax>` component opens the Max AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+
+```jsx
+<AskMax
+    title="Need help with feature flags?"
+    quickQuestions={[
+        'Why is there a delay in loading flags?',
+        'How do I create a multivariate flag?',
+        'Can I override a flag?',
+    ]}
+/>
+```
+
+<AskMax
+    title="Need help with feature flags?"
+    quickQuestions={[
+        'Why is there a delay in loading flags?',
+        'How do I create a multivariate flag?',
+        'Can I override a flag?',
+    ]}
+/>
+
+Available props:
+- `title`: Custom title text (defaults to "Questions?")
+- `quickQuestions`: Array of suggested questions to preload
+- `border`: Add top/bottom borders (defaults to false)
+- `linkOnly`: Render as a button only without the full UI (defaults to false)
+
+The component automatically tracks when users open Max AI and includes the current page context.
 
 ### Steps
 
@@ -348,6 +388,29 @@ print('Hello, world!')
 </Tab.Panels>
 </Tab.Group>
 
+### Magic placeholders
+
+You can use magic placeholders to replace the project API key, project name, app host, region, and proxy path in the code block.
+
+- If the user is logged into the PostHog app, the placeholder will be replaced with the actual value from their project.
+- If the user is not logged into the PostHog app, the placeholder will display as is.
+
+| Placeholder | Description | Default |
+| --- | --- | --- |
+| `<ph_project_api_key>` | Your PostHog project API key | `<ph_project_api_key>` |
+| `<ph_project_name>` | Your PostHog project name | `<ph_project_name>` |
+| `<ph_app_host>` | Your PostHog instance URL | `<ph_app_host>` |
+| `<ph_client_api_host>` | Your PostHog client API host | `https://us.i.posthog.com` |
+| `<ph_region>` | Your PostHog region (us/eu) | `<ph_region>` |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2025-05-24` |
+| `<ph_proxy_path>` | Your proxy path | `relay-XXXX` (last 4 digits of project API key) |
+
+You can use these placeholders in the code block like this:
+
+```js
+const client = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
+```
+
 ### Code highlighting
 
 Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
@@ -504,3 +567,22 @@ sequenceDiagram
 </Tab.Panels>
 </Tab.Group>
 
+## Debugging
+
+Gatsby's MDX parser has some quirks that can be hard to debug. Gatsby tends to throw 404s when it fails to build an MDX page. 
+
+To debug, check for the common issues below:
+
+- Avoid indenting by over 2 spaces. More indentation can confuse the parser.
+- Every JSX tag with inner markdown should have a line break after the opening tag and before the closing tag.
+- Make sure you're not missing imports and the imports are correct.
+- Every empty newline should actually be empty. Spaces on empty lines can confuse the parser.
+- Different snippets cannot share the same file name and import alias. When they do, they override each other.
+
+You can also try running the formatter script to fix some of the issues:
+
+```bash
+yarn format:docs
+```
+
+This will run the formatter against the current changes.

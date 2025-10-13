@@ -11,12 +11,21 @@ showTitle: true
 
 Before jumping into setup, let's dissect a PostHog.
 
-The app itself is made up of 4 components that run simultaneously:
+The app itself is made up of 4 main components that run simultaneously:
 
 -   Celery worker (handles execution of background tasks)
 -   Django server
 -   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
+
+We also have a growing collection of Rust services that handle performance-critical operations:
+
+-   capture – receives HTTP event capture requests and extracts event payloads
+-   feature-flags – handles feature flag evaluation
+-   cymbal – processes source maps for error tracking
+-   property-defs-rs – extracts and infers property definitions from events
+-   hook services – manages webhooks with high performance
+-   hogvm – evaluates HogQL bytecode via a stack machine implementation
 
 These components rely on a few external services:
 
@@ -57,9 +66,13 @@ This is a faster option to get up and running. If you don't want to or can't use
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
 5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
 6. Then run `uv sync`
-7. Now run `DEBUG=1 ./bin/migrate` and then `./bin/start`.
-8. Open browser to http://localhost:8010/.
-9. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
+    - If this doesn't activate your python virtual environment, run `uv venv`
+7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
+8. Now run `DEBUG=1 ./bin/migrate`
+9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
+10. Run `./bin/start`.
+11. Open browser to http://localhost:8010/.
+12. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
 ## Option 2: Developing locally
 
@@ -102,6 +115,13 @@ Clone the [PostHog repo](https://github.com/posthog/posthog). All future command
 git clone https://github.com/PostHog/posthog && cd posthog/
 ```
 
+> [!NOTE] 
+> The `feature-flags` container relies on the presence of the GeoLite cities
+> database in the `/share` directory. You can download a copy via [this github repo](https://github.com/P3TERX/GeoLite.mmdb) 
+> which makes frequent releases. You may also need to modify the file permissions of the database.
+>
+> `chmod 0755 ./share/GeoLite2-City.mmdb`
+
 ### Instant setup
 
 You can set your development environment up instantly using [Flox](https://flox.dev/).
@@ -140,11 +160,12 @@ Alternatively, if you'd prefer not to use [Flox-based instant setup](#instant-se
 
 In this step we will start all the external services needed by PostHog to work.
 
-First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
-You can do this in one line with:
+First, append line `127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage` and line `::1 kafka clickhouse clickhouse-coordinator objectstorage` to `/etc/hosts`. Our ClickHouse and Kafka data services won't be able to talk to each other without these mapped hosts.
+You can do this with:
 
 ```bash
 echo '127.0.0.1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
+echo '::1 kafka clickhouse clickhouse-coordinator objectstorage' | sudo tee -a /etc/hosts
 ```
 
 > If you are using a newer (>=4.1) version of Podman instead of Docker, the host machine's `/etc/hosts` is used as the base hosts file for containers by default, instead of container's `/etc/hosts` like in Docker. This can make hostname resolution fail in the ClickHouse container, and can be mended by setting `base_hosts_file="none"` in [`containers.conf`](https://github.com/containers/common/blob/main/docs/containers.conf.5.md#containers-table).
@@ -288,6 +309,13 @@ pnpm --filter=@posthog/plugin-server install
 brew install python-setuptools
 ```
 
+> **Troubleshooting plugin server issues:** If you encounter problems starting up the plugin server, try these debugging steps:
+```bash
+cd plugin-server
+pnpm rebuild
+pnpm i
+```
+
 #### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -381,9 +409,6 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 # only services strictly required to run posthog
 ./bin/start --minimal
-
-# enable tracing for django services (jaeger and otel collector are part of the stack)
-./bin/start --enable-tracing
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -556,13 +581,9 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
-## Extra: Enable tracing with Jaeger
+## Extra: Use tracing with Jaeger
 
-To debug with Jaeger, you can use the following command:
-
-```bash
-./bin/start --enable-tracing
-```
+Jaeger is enabled by default after running `./bin/start`.
 
 Jaeger will be available at [http://localhost:16686](http://localhost:16686).
 

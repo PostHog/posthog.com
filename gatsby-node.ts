@@ -14,13 +14,49 @@ export { onPreBootstrap } from './gatsby/onPreBootstrap'
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
 export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
-    const { createPage } = actions
+    const { createPage, deletePage } = actions
+
+    // Add build time to credits page using environment variable
+    if (page.path === '/credits/') {
+        // Use Vercel's VERCEL_ENV variable or current time as fallback
+        const buildDate = process.env.VERCEL_GIT_COMMIT_SHA
+            ? new Date() // This will be the actual build time when deployed
+            : new Date()
+
+        const options: Intl.DateTimeFormatOptions = {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true,
+            timeZone: 'America/Los_Angeles',
+        }
+        const buildTime = buildDate.toLocaleString('en-US', options)
+
+        deletePage(page)
+        createPage({
+            ...page,
+            context: {
+                ...page.context,
+                buildTime,
+                // Also pass the commit SHA if available for debugging
+                commitSha: process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'local',
+            },
+        })
+    }
+
     if (page.path.match(/^\/community\/profiles/)) {
         page.matchPath = '/community/profiles/*'
         createPage(page)
     }
     if (page.path.match(/^\/next\-steps/)) {
         page.matchPath = '/next-steps/*'
+        createPage(page)
+    }
+    // Add client-side routing for custom presentations
+    if (page.path.match(/^\/for\//)) {
+        page.matchPath = '/for/*'
         createPage(page)
     }
 }
@@ -44,7 +80,6 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         },
     })
 }
-
 
 exports.createPages = async ({ actions }) => {
     const { createPage } = actions

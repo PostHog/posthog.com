@@ -80,7 +80,8 @@ export default function Home() {
       "query": {
         "kind": "HogQLQuery",
         "query": "select properties.$current_url from events where properties.$current_url != null limit 10"
-      }
+      }, 
+      "name": "get 100 blog urls"
     }
     try {
       const result = await fetchQuery(payload);
@@ -148,7 +149,8 @@ export default function Home() {
                   GROUP BY date
                   ORDER BY date DESC
                   LIMIT 20`
-      }
+      },
+      "name": "get pageviews count by date"
     }
     try {
       const result = await fetchQuery(payload);
@@ -233,7 +235,8 @@ export default function Home() {
                   GROUP BY pathname
                   ORDER BY pageview_count DESC
                   LIMIT 10`
-      }
+      },
+      "name": "pageviews count by pathname"
     }
     try {
       const result = await fetchQuery(payload);
@@ -366,7 +369,8 @@ export default function Home() {
                   GROUP BY date, browser
                   ORDER BY date DESC, pageview_count DESC
                   LIMIT 10`
-        }
+        },
+        "name": "number of pageviews by browser and date"
     }
     try {
       const result = await fetchQuery(payload);

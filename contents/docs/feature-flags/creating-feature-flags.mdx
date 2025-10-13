@@ -8,6 +8,7 @@ availability:
   enterprise: full
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 export const CreateNewFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/create-new-feature-flag-light-mode.png"
 export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/create-new-feature-flag-dark-mode.png"
 export const ReleaseConditionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-light-mode.png"
@@ -39,6 +40,30 @@ This is the name of the key you use in your code to evaluate the feature flag.
 
 Metadata to describe and share information about your feature flag in the PostHog app.
 
+### Evaluation environments
+
+Evaluation environment tags are a special type of tag that constrains feature flag evaluation to specific environments. When evaluation environment are configured, the feature flag will only evaluate when the SDK provides matching evaluation environments in the `/flags` request.
+
+Key features:
+- **Environment isolation**: Prevent flags from evaluating in unintended environments (e.g., marketing site vs. app vs. docs)
+- **Cost optimization**: Reduce unnecessary flag evaluations and associated costs
+- **Better organization**: Group flags by their intended usage context
+- **Backward compatible**: Flags without evaluation environments continue to work as before
+
+To configure evaluation environments:
+1. Click the bolt icon <IconBolt className="inline w-4 h-4" /> next to the tags field
+2. Select which tags should act as evaluation constraints
+3. These tags will display with a green background and bolt icon
+
+When using evaluation environment tags:
+- SDKs must send `evaluation_environments` parameter with matching tags for the flag to evaluate
+- Flags with no evaluation environment tags will evaluate for all requests (default behavior)
+- At least one evaluation tag must match for the flag to be included in the evaluation
+
+Learn more in the [evaluation environments docs](/docs/feature-flags/evaluation-environments)
+
+> **Important:** After setting evaluation environment tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation environment tags won't take effect.
+
 ## Enable feature flag
 
 This determines whether your flag is enabled. Disabled flags return `undefined` or `null`.
@@ -52,7 +77,7 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
-> **Note:** This feature requires `person_profiles: 'always'` to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
+> **Note:** This feature requires `person_profiles: 'always'` and calling `posthog.identify` from the JavaScript Web SDK to function as expected. [Learn more about anonymous vs identified events here](/docs/data/anonymous-vs-identified-events).
 
 In our experience, the tradeoffs to enabling this are **not** worthwhile for the majority of our users. They include:
 
@@ -84,6 +109,56 @@ A payload is an additional piece of information sent to your app when a flag is 
 
 They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
 
+## Evaluation runtime
+
+You can control where your feature flags are evaluated by specifying an evaluation runtime. This helps optimize performance and reduce unnecessary network traffic by ensuring flags are only sent to the appropriate environments.
+
+Runtime filtering also reduces evaluation latency and prevents feature flag bloat by only sending relevant flags to each environment, making it easier to manage flags in your app and organize the flags you actually evaluate.
+
+> **Note:** Evaluation runtime is different from [evaluation environments](/docs/feature-flags/evaluation-environments). Runtime filtering is based on SDK type (client vs server), while evaluation environments provide fine-grained environment constraints that you define (e.g., "production", "staging", "app", "marketing-site").
+
+### Runtime options
+
+Feature flags can be configured to evaluate in one of three runtime environments:
+
+- **Server**: Flags are only evaluated on server-side SDKs (Node.js, Python, Ruby, Go, PHP, etc.)
+- **Client**: Flags are only evaluated on client-side SDKs (JavaScript, React, mobile SDKs)
+- **All (default)**: Flags are evaluated in both server and client environments
+
+### How it works
+
+When you specify an evaluation runtime, PostHog automatically detects the requesting environment based on:
+- User-Agent headers
+- Browser-specific headers
+- SDK type indicators
+
+The system then filters which flags are returned based on their configured runtime, ensuring:
+- Smaller payload sizes for client applications
+- Reduced evaluation latency by eliminating irrelevant flags
+- Prevention of feature flag bloat in each environment
+- Improved performance by reducing unnecessary flag evaluations
+- Better security by keeping server-only flags away from client environments
+- Cleaner flag management with environment-specific organization
+
+### When to use each evaluation runtime
+
+1. **Use server-only evaluation** for:
+   - Sensitive feature rollouts that shouldn't be exposed to clients
+   - Backend system configurations
+   - Internal features or admin capabilities
+
+2. **Use client-only evaluation** for:
+   - UI/UX experiments
+   - Frontend-specific features
+   - Visual changes that don't require backend logic
+
+3. **Use "All" (default)** for:
+   - Features that span both frontend and backend
+   - Gradual rollouts that need consistent behavior across environments
+   - When you're unsure or need maximum flexibility
+
+> **Note:** Feature flags without an explicit evaluation runtime setting will continue to work as before, being evaluated in all environments for backward compatibility.
+
 ## Release conditions
 
 This specifies the conditions a user must meet to access the feature flag and receive a value. Condition sets are evaluated from top to bottom, and the first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
@@ -102,5 +177,21 @@ Percentage rollouts are available for all flags. More options depend on your Pos
     alt="Feature flags release conditions" 
     classes="rounded"
 />
+
+### Advanced release conditions
+
+For more sophisticated feature rollouts, you can also create **feature flag dependencies** where one flag's activation depends on another flag's state. This enables complex scenarios like:
+
+- Enabling features only for users in beta programs
+- Creating conditional experiments based on other feature participation
+- Setting up safety mechanisms where critical flags must be active first
+
+Learn more about [feature flag dependencies](/docs/feature-flags/dependencies).
+
+<CalloutBox icon="IconInfo" title="Limited dependencies with different run times" type="fyi">
+
+Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+
+</CalloutBox>
 
 > **Can I migrate my feature flags from another tool?** If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).

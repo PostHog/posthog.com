@@ -1,5 +1,5 @@
 ---
-title: Model context protocol (MCP)
+title: Model Context Protocol (MCP)
 ---
 import CalloutBox from '../../../src/components/Docs/CalloutBox'
 import Tab from "components/Tab"
@@ -23,6 +23,7 @@ npx @posthog/wizard mcp add
 ```
 
 We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below.
+
 ## Manual install
 
 Start by getting a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
@@ -83,13 +84,15 @@ We recommend the following best practices to mitigate security risks when using 
 
 ## Available Tools
 
-Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
+Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. PostHog tools are also available in our [agent toolkit](/docs/ai-engineering/agent-toolkit) which can be integrated with AI agent frameworks like Vercel's AI SDK and LangChain.
+
+Here's a list of tools we provide:
 
 <MCPTools />
 
 
 ## Next Steps
 
-- [PostHog MCP server](https://github.com/posthog/mcp): Check out GitHub repository for the MCP server
+- [PostHog MCP server](https://github.com/PostHog/posthog/tree/master/products/mcp): Check out GitHub repository for the MCP server
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
 - [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?
