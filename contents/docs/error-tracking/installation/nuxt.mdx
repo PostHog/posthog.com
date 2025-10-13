@@ -12,6 +12,160 @@ import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
 import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
+## Nuxt 3.7 and above
+
+For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module which provides automatic error tracking with built-in sourcemap support.
+
+<Steps>
+<Step title="Install the PostHog Nuxt module" subtitle="Your goal in this step: Install and configure the PostHog Nuxt module." badge="required">
+
+1. Install the PostHog Nuxt module using your package manager:
+
+<MultiLanguage>
+
+```bash file=npm
+npm install @posthog/nuxt
+```
+
+```bash file=Yarn
+yarn add @posthog/nuxt
+```
+
+```bash file=pnpm
+pnpm add @posthog/nuxt
+```
+
+```bash file=Bun
+bun add @posthog/nuxt
+```
+
+</MultiLanguage>
+
+2. Add the module to your `nuxt.config.ts` file:
+
+```typescript file=nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@posthog/nuxt'],
+
+  // Enable sourcemaps for error tracking
+  sourcemap: { 
+    client: 'hidden' 
+  },
+  nitro: {
+    rollupConfig: {
+      output: {
+        sourcemapExcludeSources: false,
+      },
+    },
+  },
+
+  posthogConfig: {
+    publicKey: '<ph_project_api_key>',
+    host: '<ph_client_api_host>',
+    clientConfig: {
+      capture_exceptions: true,
+    },
+    serverConfig: {
+      enableExceptionAutocapture: true,
+    },
+    sourceMaps: {
+      enabled: true,
+      envId: '<ph_environment_id>', // Your environment ID from PostHog settings
+      personalApiKey: '<ph_personal_api_key>', // Your personal API key from PostHog settings
+      project: 'my-application', // Optional: defaults to git repository name
+      version: '1.0.0', // Optional: defaults to current git commit
+    },
+  },
+})
+```
+
+The module will automatically:
+- Initialize PostHog on both Vue (client-side) and Nitro (server-side)
+- Capture exceptions on both client and server
+- Generate and upload sourcemaps during build
+
+</Step>
+
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that you can capture events using `$posthog.capture('test_event')` in your Vue components:
+
+```vue
+<script setup>
+const { $posthog } = useNuxtApp()
+$posthog.capture('test_event')
+</script>
+```
+
+</Step>
+
+<Step title="Manually capture exceptions (optional)" subtitle="Learn how to manually capture exceptions when needed.">
+
+The module automatically captures uncaught exceptions, but you can also manually capture errors:
+
+**Client-side (Vue components):**
+
+```vue component.vue
+<script setup>
+const { $posthog } = useNuxtApp()
+
+try {
+  // Your code
+} catch (error) {
+  $posthog.captureException(error)
+}
+</script>
+```
+
+**Server-side (API routes):**
+
+```js file=server/api/example.js
+export default defineEventHandler(async (event) => {
+  try {
+    const results = await DB.query.users.findMany()
+    return results
+  } catch (error) {
+    // The module automatically captures server-side exceptions
+    // But you can also manually capture if needed
+    throw error
+  }
+})
+```
+
+</Step>
+
+<Step title="Build your project for production" badge="required">
+
+Build your project for production by running the following command:
+
+```bash
+nuxt build
+```
+
+The PostHog module will automatically generate and upload sourcemaps to PostHog during the build process.
+
+</Step>
+
+<Step checkpoint title="Verify source map upload" subtitle="Confirm sourcemaps are being properly uploaded">
+
+Before proceeding, confirm that sourcemaps are being properly uploaded.
+
+You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
+
+<CallToAction type="secondary" className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+    Check symbol sets in PostHog
+</CallToAction>
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+</Steps>
+
+## Nuxt 3.6 and below
+
+For older versions of Nuxt, you'll need to manually set up error tracking and sourcemap uploads.
+
 <Steps>
 <Step title="Installing PostHog Nuxt SDK" subtitle="Your goal in this step: Install the PostHog Nuxt.js SDK." badge="required">
 
@@ -92,4 +246,4 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 </Step>
 
-</Steps> 
+</Steps>
