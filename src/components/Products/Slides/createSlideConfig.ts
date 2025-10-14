@@ -51,6 +51,9 @@ export const defaultSlides: Record<string, SlideConfig> = {
 // AI slide configuration (not included by default, only when ai data exists)
 export const aiSlide: SlideConfig = { slug: 'ai', name: 'AI' }
 
+// AI Ask slide configuration
+export const aiAskSlide: SlideConfig = { slug: 'ai-ask', name: 'Ask AI' }
+
 /**
  * Create a customized slide configuration for a product page
  *

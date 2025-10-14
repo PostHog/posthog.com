@@ -24,9 +24,10 @@ import ComparisonSummarySlide from './ComparisonSummarySlide'
 import FeatureComparisonSlide from './FeatureComparisonSlide'
 import DocsSlide from './DocsSlide'
 import AISlide from './AISlide'
+import AIAskSlide from './AIAskSlide'
 import PairsWithSlide from './PairsWithSlide'
 import GettingStartedSlide from './GettingStartedSlide'
-import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide } from './createSlideConfig'
+import { SlideConfig, SlideConfigResult, defaultSlides, aiSlide, aiAskSlide } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
 import DemoSlide from './DemoSlide'
 import PostHogOnPostHogSlide from './PostHogOnPostHogSlide'
@@ -397,6 +398,9 @@ export default function SlidesTemplate({
 
             case 'ai':
                 return <AISlide ai={productData?.ai} productName={productData?.name} />
+
+            case 'ai-ask':
+                return <AIAskSlide productName={productData?.name} />
 
             case 'pairs-with':
                 return (

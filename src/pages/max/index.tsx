@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import AIAskSlide from 'components/Products/Slides/AIAskSlide'
 import { useContentData } from 'hooks/useContentData'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useUser } from 'hooks/useUser'
@@ -250,8 +251,13 @@ export default function MaxAI(): JSX.Element {
                 name: 'Roadmap',
                 component: CustomRoadmapSlide,
             },
+            {
+                slug: 'ai-ask',
+                name: 'Ask AI',
+                component: AIAskSlide,
+            },
         ],
-        order: ['overview', 'roadmap', 'features', 'pricing', 'answers', 'getting-started'],
+        order: ['overview', 'roadmap', 'features', 'ai-ask', 'pricing', 'answers', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'columns',
