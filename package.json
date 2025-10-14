@@ -87,7 +87,7 @@
         "gatsby-plugin-sitemap": "^5.20.0",
         "gatsby-plugin-smoothscroll": "^1.2.0",
         "gatsby-remark-autolink-headers": "^5.20.0",
-        "gatsby-source-ashby": "^1.0.4",
+        "gatsby-source-ashby": "^1.0.5",
         "gatsby-source-filesystem": "^4.20.0",
         "gatsby-transformer-json": "^4.20.0",
         "git-url-parse": "^11.6.0",
