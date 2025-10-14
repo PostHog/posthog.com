@@ -234,7 +234,7 @@ Below are a list of Slack channels you may find helpful:
 
 ### Social channels
 
-We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't descriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
+We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
 
 -   `#food`
 -   `#kids`
