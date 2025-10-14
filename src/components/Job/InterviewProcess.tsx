@@ -26,7 +26,7 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     {
         title: 'Culture & Motivation interview',
         description: `You have reached the final boss. It's time to chat with one of our Blitzscale team members.`,
-        badge: '15 minutes, varies by role',
+        badge: '20 minutes, varies by role',
     },
     {
         title: 'PostHog SuperDay',
