@@ -8,19 +8,63 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconRewindPlay, IconToggle } from '@posthog/icons'
 import ChannelPlatforms from './_snippets/channel-platforms'
 
-
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to launch your first workflow!">
 
 <QuestLogItem 
+  title="Design your first workflow"
+  subtitle="Required"
+  icon="IconRocket"
+>
+
+The [workflow builder](/docs/messaging/workflow-builder) is a powerful, no-code tool for automating processes and sending messages to your users. 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_flow_light_06d64b58a8.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_flow_dark_6afdc7aab4.png"
+    alt="How to create a workflow in PostHog" 
+    classes="rounded"
+/>
+
+There are many features to explore, but you can get a taste with this example:
+
+<CallToAction type="primary" to="/docs/messaging/launch-workflow">
+  Design and launch your first workflow
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Explore workflow components"
+  subtitle="Recommended"
+  icon="IconDecisionTree"
+>
+
+Workflows are made up of the following building blocks:
+
+| Component | Description |
+|-----------|-------------|
+| [Triggers](/docs/messaging/workflow-builder#triggers) | What starts the workflow. We let you start a workflow when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
+| [Dispatches](/docs/messaging/workflow-builder#dispatches) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
+| [Delays](/docs/messaging/workflow-builder#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
+| [Audience splits](/docs/messaging/workflow-builder#audience-splits) | Target and split the users you message with more specificity or try a/b testing with random branching. |
+| [PostHog actions](/docs/messaging/workflow-builder#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
+
+Familiarize yourself with these components to explore the full power of the workflow builder.
+
+<CallToAction type="primary" to="/docs/messaging/workflow-builder">
+  Learn about workflow components
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
     title="Create a messaging channel"
-    subtitle="Required"
+    subtitle="optional"
     icon="IconMegaphone"
 >
 
-Messaging is PostHog's no-code drag-and-drop tool for building automated campaigns.
-Think of it as a way to communicate with your users – you decide which users should receive which messages, when, and through which channel.
-
-Before you can launch a campaign, you need to configure a messaging channel:
+Workflows is PostHog's no-code drag-and-drop tool for automating a process or delivering messages to your users.
+If you want to send your users a message you will need to use a preconfigured destination or configure a messaging channel yourself. This guide shows you how.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/create_channel_light_47b7abdc40.png"
@@ -40,53 +84,6 @@ Before you can launch a campaign, you need to configure a messaging channel:
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Design your first campaign"
-  subtitle="Required"
-  icon="IconRocket"
->
-
-The [campaign builder](/docs/messaging/campaign-builder) is a powerful, no-code tool for building campaigns. 
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_flow_light_06d64b58a8.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_flow_dark_6afdc7aab4.png"
-    alt="How to create an automated campaign in PostHog" 
-    classes="rounded"
-/>
-
-There are many features to explore, but you can get a taste with this example:
-
-<CallToAction type="primary" to="/docs/messaging/launch-campaign">
-  Design and launch your first campaign
-</CallToAction>
-
-</QuestLogItem>
-
-<QuestLogItem 
-  title="Explore campaign components"
-  subtitle="Recommended"
-  icon="IconDecisionTree"
->
-
-Campaigns are made up of the following building blocks:
-
-| Component | Description |
-|-----------|-------------|
-| [Triggers](/docs/messaging/campaign-builder#triggers) | What starts the campaign. We let you start a campaign when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
-| [Dispatches](/docs/messaging/campaign-builder#dispatches) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
-| [Delays](/docs/messaging/campaign-builder#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
-| [Audience splits](/docs/messaging/campaign-builder#audience-splits) | Target and split the users you message with more specificity or try a/b testing with random branching. |
-| [PostHog actions](/docs/messaging/campaign-builder#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your campaign. |
-
-Familiarize yourself with these components to explore the full power of the campaign builder.
-
-<CallToAction type="primary" to="/docs/messaging/campaign-builder">
-  Learn about campaign components
-</CallToAction>
-
-</QuestLogItem>
-
-<QuestLogItem 
   title="Cookbooks and recipes"
   subtitle="Recommended"
   icon="IconBook"
@@ -94,12 +91,12 @@ Familiarize yourself with these components to explore the full power of the camp
 
 We've created a few tutorials for common use cases to get you started:
 
-- [How to create a drip campaign](/docs/messaging/email-drip-campaign)
+- [How to create an email drip campaign](/docs/messaging/email-drip-campaign)
 
 ---
 
 <CallToAction type="primary" to="https://app.posthog.com/messaging/campaigns/new/overview">
-  Try the campaign builder
+  Try the workflow builder
 </CallToAction>
 
 </QuestLogItem>
