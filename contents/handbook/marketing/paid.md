@@ -66,7 +66,7 @@ We use a variety of creative campaigns here which we don't list in the Handbook,
 - We are open to using gated content if it is fun and/or weird and/or actually useful
 - Gated content must be freely available elsewhere
 
-The full flow of how this works can be found [here](https://www.figma.com/board/1WkL0kLqG0OzYDYa2EWEdU/Ads--Copy--Landing-Page-Synergy?node-id=1-40&t=BVbxo8tRm3Xh8Cpl-0#1452470455). 
+The full flow of how this works can be found <PrivateLink url="https://www.figma.com/board/1WkL0kLqG0OzYDYa2EWEdU/Ads--Copy--Landing-Page-Synergy?node-id=1-40&t=BVbxo8tRm3Xh8Cpl-0#1452470455">here</PrivateLink>. 
 
 ### Landing pages
 
@@ -96,8 +96,8 @@ If we have a particular campaign in mind that _really does_ require a new, one-o
 
 ### Budget
 
-<TeamMember name="Brian Young" /> maintains the media plan, which can be found [here](https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU/edit?gid=218274017#gid=218274017).
+<TeamMember name="Brian Young" /> maintains the media plan, which can be found <PrivateLink url="https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU/edit?gid=218274017#gid=218274017">here</PrivateLink>.
 
 ### Growth review
 
-<TeamMember name="Brian Young" /> runs a monthly growth review with Charles where we look at the main performance metrics for the month prior. Main sheet can be found [here](https://docs.google.com/spreadsheets/d/1JxE2t0C6P9s_5Ee_TTsbNrayNAgwx1kjA9jgqdp3dDw/edit?gid=0#gid=0), and he also writes some [commentary](https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.m8x9ro13rh7a#heading=h.6inc6rvynqga). For completeness, this also covers the organic funnel, though the main focus is still paid. 
+<TeamMember name="Brian Young" /> runs a monthly growth review with Charles where we look at the main performance metrics for the month prior. Here are the <PrivateLink url="https://docs.google.com/spreadsheets/d/1JxE2t0C6P9s_5Ee_TTsbNrayNAgwx1kjA9jgqdp3dDw/edit?gid=0#gid=0">main sheet</PrivateLink> and <PrivateLink url="https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.m8x9ro13rh7a#heading=h.6inc6rvynqga">commentary</PrivateLink>. For completeness, this also covers the organic funnel, though the main focus is still paid. 
