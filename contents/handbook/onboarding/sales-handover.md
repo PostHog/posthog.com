@@ -9,7 +9,7 @@ If you see that a customer is spending **more than ~$1,667 monthly**, conduct a 
 We typically hand the account over to Sales when a customer is interested in the annual plan or requires additional contractual or legal support. In the case of unresponsive customers, historically, there's still a good chance that they'll talk with Sales after passing them on! AEs have been successful in reaching out and securing long-term commitments.
 
 ### Lead creation
-If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past two - three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement, you can add them to the `Create AE lead` segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic.
+If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past two - three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement, you can add them to the `Create Product-led lead` segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic.
 
 After a few minutes, your lead will appear in the #sales-leads Slack channel, tagged as "Onboarding referral". As a good practice, ping the assigned Account Executive on a thread with some relevant context on the customer.
 
