@@ -4,59 +4,100 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
+The paid ads team exists to do two things only:
 
-As we believe in [product-led growth](/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy in the long term. Instead, we see them as an important way to kick start and then amplify the work we are doing in other areas of marketing and product. 
+- Convert high intent people searching for PostHog or products we offer into signups
+- Generate leads for the new business sales team
 
-We work with an agency, [Hey Digital](https://www.heydigital.co/) to manage paid ads. Specifically, they help us with:
-- Paid ad tactics and monthly media plan
-- Creating paid ad assets for each channel
-- Manage paid channels on our behalf 
+We don't do paid ads for general awareness - our website, content, and word of mouth are much better (and cheaper) ways to do this. 
 
-We communicate with them via a shared internal Slack channel, and have 2 check-in calls with them each month. We have a very light approvals process for creative:
-
-- Hey Digital team share asset(s) for feedback in Slack
-- PostHog team approve - usually Charles or Andy, but anyone can jump in and give feedback
-- If approval is not given within 48 hours, Hey Digital will process regardless
-
-Specific details of our media plan are shared internally only, as they contain commercially sensitive information that could be beneficial to our competitors. 
-
-## Brand guidelines
-
-Hey Digital create our ad assets for most of our main channels. These guidelines may be useful to you however if you are doing one-off assets for things like paid newsletter sponsorships or one off campaigns on more niche paid channels. 
-
-- For specific messaging to use in copy, you can use our [copy bank](https://docs.google.com/spreadsheets/d/1VOwyDs8qmXw38KgCiPeJMIGS-SedSAZLXfb2zvB_1jE/edit#gid=0), or our [value propositions](/handbook/growth/marketing/value-propositions) if you need to create something from scratch.
-- We have [a handy set of assets](/media) that you can use. Please make sure you follow these so our brand and design language remain consistent across all our various platforms. 
+> For now paid ads sits within the [new business sales team](/teams/sales-cs), but will become its own thing once we have more people. This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
 
 ## Channels
 
 We currently run ads on:
 - Google Search - _conversion_
-- Twitter - _awareness_
-- LinkedIn - _awareness_
-- Reddit - _awareness_
-- Quora - _awareness_
+- Bing (for DuckDuckGo) - _conversion_
+- LinkedIn - _leads_
+- Reddit - _leads_
+- YouTube - _leads_
 
-We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing, Product Hunt, Carbon Ads, and Google Display, as they did not drive high quality user signups. 
+We have previous tried and no longer use X, Product Hunt, Carbon Ads, and Google Display, as they did not drive high quality user signups or leads. We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups and leads.
 
-We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups. For any GDPR-specific campaigns, we target all EU countries. 
+We work with [Hey](https://www.heydigital.co/) to manage these channels - they set up the campaigns and ensure that spend is paced properly. We have a shared internal Slack channel, and Brian has 2 check-in calls with them each month.
 
-## Tracking conversion
+## Mission 1 - converting people to signup
 
-We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. 
+We do this through search ads on Google and Bing, and you can find the master sheet of ad copy [here](https://docs.google.com/spreadsheets/d/1uO8dxflZfHbBLN1OlHdNZrl7WuiklhYO3DQ0U4naGxM/edit?gid=0#gid=0).
 
-For Google Ads specifically, we have [an app](https://github.com/PostHog/plugin-write-google-ads-to-zapier) which syncs PostHog signups to Zapier, which connects to a Google Sheet that is than synced automatically to our Google Ads account once a day.
+We change up campaigns frequently, but generally run campaigns for:
 
-## Dog-fooding new destinations
+- Brand
+- Individual products
+- Competitors
 
-Occasionally, we want to help the CDP team by testing new destinations, such as ad platforms. But we also have a strict policy against third-party cookies. So, here are some guidelines to make sure testing works smoothly. 
+We generally turn these on and off depending on performance and spend, and review copy every 4 weeks. The flow is Brian writes copy, Charles reviews. We try both fun and straightforward copy. Even if the fun stuff doesn't convert super well, we keep it if it's doing ok as it helps with our brand - we know people screenshot and share it sometimes. 
 
-* If it creates third-party cookies for us, don't do it. 
+We aim for as much product coverage as possible unless there are compelling reasons to not do them (e.g. it's just very expensive). We prioritize ads for those products closest to our [ICP](/handbook/who-we-are-building-for). 
+
+> It is typically only worth running paid ads for individual products once they are generally available, with pricing, and where we feel the feature set is broadly on parity with the main comptitors. 
+
+### Tracking conversion
+
+Using 3rd party trackers or pixels like Google Tag Manager is against our brand and values, so we use a combination of PostHog, BiqQuery and Census. 
+
+We take privacy seriously, and follow these principles:
+
+* If it creates third-party cookies for us, don't do it
 * All testing must align with [our privacy policy](/privacy)
-* Always verify what data is collected and how it is used. 
-* Don't collect any PII, obviously. 
-* Limit data collection only to what is _absolutely_ required. 
-* Always be transparent with users about what we're collecting, if any. 
-* Document changes in the handbook by opening a PR and getting a review. 
-* One week later, follow-up to verify it's working as expected.
-* In the event something goes wrong, let the People & Ops team know. 
+* Always verify what data is collected and how it is used
+* Don't collect any PII, obviously
+* Limit data collection only to what is _absolutely_ required
+* Always be transparent with users about what we're collecting, if any
+
+## Mission 2 - generating new business leads
+
+We have three ways we prospect for new leads:
+- ABM on LinkedIn
+- Prospecting on LinkedIn
+- Prospecting on Reddit
+
+We use a variety of creative campaigns here which we don't list in the Handbook, as they keep changing over time. Some principles though:
+- We are open to using gated content if it is fun and/or weird and/or actually useful
+- Gated content must be freely available elsewhere
+
+The full flow of how this works can be found [here](https://www.figma.com/board/1WkL0kLqG0OzYDYa2EWEdU/Ads--Copy--Landing-Page-Synergy?node-id=1-40&t=BVbxo8tRm3Xh8Cpl-0#1452470455). 
+
+### Landing pages
+
+We use custom presentations that match the style of our website as our landing pages. We have an internal guide on how to create these [here](https://github.com/PostHog/posthog.com/blob/915fe9ad366dcec8516bc0285af8a63d0e9c4b48/contents/handbook/engineering/posthog-com/presentations.mdx).
+
+If you add `?contact=true` to the end of the page URL, that will add a 'contact us' popup. 
+
+## How we work
+
+### Brand guidelines and creative
+
+By default, all paid ads visual creative should be based on stuff that already exists in some form on one of:
+
+- [Our website](https://posthog.com)
+- [Product for Engineers](https://newsletter.posthog.com/)
+- [Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=0-1) library
+- [Merch](https://posthog.com/merch)
+- Events
+- [Video](https://www.youtube.com/@PostHog)
+- Billboards
+
+We take anything we’ve ever created there, and then repurpose/reformat/reconfigure it as an ad. This minimizes approvals - because these assets have previous been through a round of approval with design, we can use them knowing we don't need to get approval again. The only check required is then between Charles and Brian on the concept and/or copy. This means we are doing less creative work, but the upside is that we can move faster (and have a lot of Lego bricks to play with). Brian works with Daniel H on this.
+
+For the copy itself, we also use the search ads copy where we can as a starting point, so we're not repeating work. 
+
+If we have a particular campaign in mind that _really does_ require a new, one-off asset, then we request it from Lottie in [the usual way](/handbook/brand/art-requests).
+
+### Budget
+
+Brian maintains the media plan, which can be found [here](https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU/edit?gid=218274017#gid=218274017).
+
+### Growth review
+
+Brian runs a monthly growth review with Charles where we look at the main performance metrics for the month prior. Main sheet can be found [here](https://docs.google.com/spreadsheets/d/1JxE2t0C6P9s_5Ee_TTsbNrayNAgwx1kjA9jgqdp3dDw/edit?gid=0#gid=0), and he also writes some [commentary](https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.m8x9ro13rh7a#heading=h.6inc6rvynqga). For completeness, this also covers the organic funnel, though the main focus is still paid. 
