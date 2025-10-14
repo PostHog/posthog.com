@@ -220,6 +220,7 @@ export default function Desktop() {
         const paddingHorizontal = 4
         const paddingVertical = 20
         const columnSpacing = 128 // Space between columns (icon width + gap)
+        const isMobile = window.innerWidth < 768
 
         const startY = paddingVertical
         const availableHeight = containerHeight - paddingVertical * 2 // Top and bottom padding
@@ -227,7 +228,8 @@ export default function Desktop() {
 
         // Position productLinks starting from the left
         let currentColumn = 0
-        productLinks.forEach((app, index) => {
+        const leftIcons = isMobile ? [...productLinks, ...apps] : productLinks
+        leftIcons.forEach((app, index) => {
             const columnIndex = Math.floor(index / maxIconsPerColumn)
             const positionInColumn = index % maxIconsPerColumn
 
@@ -238,6 +240,10 @@ export default function Desktop() {
 
             currentColumn = Math.max(currentColumn, columnIndex + 1)
         })
+
+        if (isMobile) {
+            return positions
+        }
 
         // Start from the rightmost position and flow left
         const rightmostStart = containerWidth - paddingHorizontal - iconWidth
