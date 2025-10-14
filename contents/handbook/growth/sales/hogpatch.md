@@ -41,7 +41,7 @@ Hogpatch is just 100 yards from YC's office, with the nearest Muni stop at 20th 
 
 You'll bump into our product engineers from time to time. They're in the space because they enjoy chatting with founders, and they're happy to give product feedback or help set up your dashboards ahead of demo day.
 
-Judy, our office manager, keeps things running smoothly 9am–5pm, Mon–Fri. Outside those hours, treat the space like it's your own. If anything urgent comes up, Judy's your go-to. Her details are in your welcome email.
+<TeamMember name="Judy Opperwall" photo />, our office manager, keeps things running smoothly 9am–5pm, Mon–Fri. Outside those hours, treat the space like it's your own. If anything urgent comes up, Judy's your go-to. Her details are in your welcome email.
 
 ### Workspots & hangouts
 
