@@ -4,32 +4,103 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
-
-Select your Nuxt.js version to see the appropriate installation instructions:
-
-## [Nuxt v3.7 and above](/docs/libraries/nuxt-js-3-7)
 
 For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module. This module provides:
 - Automatic PostHog client initialization for both Vue (client-side) and Nitro (server-side)
 - Automatic exception capture for error tracking
 - Sourcemap configuration and upload for error tracking
 
-[View installation instructions →](/docs/libraries/nuxt-js-3-7)
+## Installation
 
-## [Nuxt v3.0 to v3.6](/docs/libraries/nuxt-js-3-6)
+1. Install the PostHog Nuxt module using your package manager:
 
-For Nuxt versions 3.0 to 3.6, follow the manual installation guide which includes setting up PostHog on both client and server side.
+<MultiLanguage>
 
-You can see a working example in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs).
+```bash file=npm
+npm install @posthog/nuxt
+```
 
-[View installation instructions →](/docs/libraries/nuxt-js-3-6)
+```bash file=Yarn
+yarn add @posthog/nuxt
+```
 
-## [Nuxt v2.16 and below](/docs/libraries/nuxt-js-2)
+```bash file=pnpm
+pnpm add @posthog/nuxt
+```
 
-For Nuxt v2.16 and below running in `spa` or `universal` mode, follow the legacy installation guide using the Nuxt.js plugin system.
+```bash file=Bun
+bun add @posthog/nuxt
+```
 
-[View installation instructions →](/docs/libraries/nuxt-js-2)
+</MultiLanguage>
+
+## Configuration
+
+2. Add the module to your `nuxt.config.ts` file:
+
+```typescript file=nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@posthog/nuxt'],
+  posthogConfig: {
+    publicKey: '<ph_project_api_key>', // Find it in project settings https://app.posthog.com/settings/project
+    host: '<ph_client_api_host>', // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
+    clientConfig: {
+      // Optional: PostHog client configuration options
+    },
+  },
+})
+```
+
+## Usage on the client side
+
+You can access the PostHog client in your Vue components using:
+
+```vue filename=index.vue
+<script setup>
+const { $posthog } = useNuxtApp()
+
+$posthog().capture('<event_name>')
+</script>
+```
+
+## Usage on the server side
+
+Instantiate PostHog using:
+
+```js file=server/api/example.js focusOnLines=4-21
+export default defineEventHandler(async (event) => {
+  const distinctId = getCookie(event, 'distinct_id')
+
+  const { PostHog } = await import('posthog-node');
+  const runtimeConfig = useRuntimeConfig()
+
+  const posthog = new PostHog(
+    runtimeConfig.public.posthogPublicKey,
+    { 
+      host: runtimeConfig.public.posthogHost, 
+    }
+  );
+
+  posthog.capture('<event-name>')
+})
+```
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
+## Error tracking
+
+For a detailed error tracking installation guide, including automatic exception capture and sourcemap configuration, see the [Nuxt error tracking installation docs](/docs/error-tracking/installation/nuxt).
+
+## Troubleshooting
+
+**TypeScript errors in posthog config:**
+Remove the `.nuxt` directory and rebuild your project to regenerate config types.
 
 ## Next steps
 
