@@ -22,7 +22,7 @@ We currently run ads on:
 - Reddit - _leads_
 - YouTube - _leads_
 
-We have previous tried and no longer use X, Product Hunt, Carbon Ads, and Google Display, as they did not drive high quality user signups or leads. We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups and leads.
+We have previously tried and no longer use X, Product Hunt, Carbon Ads, and Google Display, as they did not drive high quality user signups or leads. We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups and leads.
 
 We work with [Hey](https://www.heydigital.co/) to manage these channels - they set up the campaigns and ensure that spend is paced properly. We have a shared internal Slack channel, and <TeamMember name="Brian Young" /> has 2 check-in calls with them each month.
 
