@@ -28,7 +28,7 @@ We work with [Hey](https://www.heydigital.co/) to manage these channels - they s
 
 ## Mission 1 - converting people to signup
 
-We do this through search ads on Google and Bing, and you can find the master sheet of ad copy <PrivateLink url=https://docs.google.com/spreadsheets/d/1uO8dxflZfHbBLN1OlHdNZrl7WuiklhYO3DQ0U4naGxM/edit?gid=0#gid=0>here</PrivateLink>.
+We do this through search ads on Google and Bing, and you can find the master sheet of ad copy <PrivateLink url="https://docs.google.com/spreadsheets/d/1uO8dxflZfHbBLN1OlHdNZrl7WuiklhYO3DQ0U4naGxM/edit?gid=0#gid=0">here</PrivateLink>.
 
 We change up campaigns frequently, but generally run campaigns for:
 
