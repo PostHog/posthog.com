@@ -16,15 +16,14 @@ export const Content = () => {
                 <h2 className="mb-4">Overview</h2>
                 <div>
                     <p>
-                        Messaging is PostHog's no-code, drag-and-drop tool for building automated campaigns. Think of it
-                        as a way to <em>message your users</em>. You decide who receives messages, when they're sent,
-                        and how they're delivered.
+                        Workflows is PostHog's no-code, drag-and-drop tool for building logic that automates processes
+                        or sends messages to your users. You decide how and when a process is triggered, who receives
+                        messages and when they're sent.
                     </p>
                     <p>
-                        <Link to="/docs/messaging/campaign-builder">Campaigns</Link> are made up of components that you
-                        can arrange into a flow; triggers, actions, delays, audience splits, and PostHog actions. Every
-                        campaign starts with a trigger and ends with an exit, but you can add as much logic in between
-                        as needed.
+                        <Link to="/docs/messaging/workflow-builder">Workflows</Link> are made up of components that you
+                        arrange; triggers, actions, delays, audience splits, and PostHog actions. Every workflow starts
+                        with a trigger and ends with an exit, but you can add as much logic in between as needed.
                     </p>
                     <div className="flex justify-center mb-8">
                         <div className="text-center">
@@ -36,23 +35,23 @@ export const Content = () => {
                                 padding={false}
                                 classes="rounded @md:max-w-2xl"
                             />
-                            <Caption>Build and design campaigns with PostHog messaging</Caption>
+                            <Caption>Build and design workflows with PostHog Workflows</Caption>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Why use messaging?</h2>
+                <h2 className="mb-4 mt-0">Why use workflows?</h2>
                 <div>
                     <ul>
                         <li>
-                            <b>Leverage product analytics</b>: Use PostHog events to quickly message the right people
-                            based on the actions they take on your site or app.
+                            <b>Leverage product analytics</b>: Use PostHog events to quickly automate the right actions
+                            or send messages to the right people based on the actions they take on your site or app.
                         </li>
                         <li>
-                            <b>No-code builder</b>: Drag, drop, and publish quickly. Avoid brittle hardcoded Twilio or
-                            Mailgun campaigns.
+                            <b>No-code builder</b>: Drag, drop, and publish quickly. Avoid brittle hardcoded API calls
+                            for example to Twilio or Mailgun.
                         </li>
                         <li>
                             <b>Composable CDP</b>: Add any{' '}
@@ -104,8 +103,8 @@ const Messaging: React.FC = () => {
                 <section className="mb-6">
                     <Intro
                         subheader="Getting started"
-                        title="Messaging"
-                        description="Create campaigns to send messages to your users."
+                        title="Workflows"
+                        description="Create workflows that automate actions or send messages to your users."
                         buttonText="Installation guide"
                         buttonLink="/docs/messaging/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"

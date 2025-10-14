@@ -4578,14 +4578,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Messaging',
+            name: 'Workflows',
             icon: 'IconMegaphone',
             color: 'red',
             url: '/docs/messaging',
-            description: 'Create campaigns to send messages to your users.',
+            description: 'Create automations or campaigns to send messages to your users.',
             children: [
                 {
-                    name: 'Messaging',
+                    name: 'Workflows',
                 },
                 {
                     name: 'Overview',
@@ -4611,8 +4611,8 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Design your first campaign',
-                    url: '/docs/messaging/launch-campaign',
+                    name: 'Launch your first workflow',
+                    url: '/docs/messaging/launch-workflow',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
@@ -4621,8 +4621,8 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Campaign builder',
-                    url: '/docs/messaging/campaign-builder',
+                    name: 'Workflow builder',
+                    url: '/docs/messaging/workflow-builder',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
