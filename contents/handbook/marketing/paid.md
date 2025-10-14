@@ -88,7 +88,7 @@ By default, all paid ads visual creative should be based on stuff that already e
 - [Video](https://www.youtube.com/@PostHog)
 - Billboards
 
-We take anything we’ve ever created there, and then repurpose/reformat/reconfigure it as an ad. This minimizes approvals - because these assets have previous been through a round of approval with design, we can use them knowing we don't need to get approval again. The only check required is then between <TeamMember name="Charles Cook" /> and <TeamMember name="Brian Young" /> on the concept and/or copy. This means we are doing less creative work, but the upside is that we can move faster (and have a lot of Lego bricks to play with). <TeamMember name="Brian Young" /> works with <TeamMember name="Daniel Hawkins" /> on this.
+We take anything we've ever created there, and then repurpose/reformat/reconfigure it as an ad. This minimizes approvals - because these assets have previously been through a round of approval with design, we can use them knowing we don't need to get approval again. The only check required is then between <TeamMember name="Charles Cook" /> and <TeamMember name="Brian Young" /> on the concept and/or copy. This means we are doing less creative work, but the upside is that we can move faster (and have a lot of Lego bricks to play with). <TeamMember name="Brian Young" /> works with <TeamMember name="Daniel Hawkins" /> on this.
 
 For the copy itself, we also use the search ads copy where we can as a starting point, so we're not repeating work. 
 
