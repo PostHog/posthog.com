@@ -44,7 +44,7 @@ We aim for as much product coverage as possible unless there are compelling reas
 
 ### Tracking conversion
 
-Using 3rd party trackers or pixels like Google Tag Manager is against our brand and values, so we use a combination of PostHog, BiqQuery and Census. 
+Using 3rd party trackers or pixels like Google Tag Manager is against our brand and values, so we use a combination of PostHog, BigQuery and Census. 
 
 We take privacy seriously, and follow these principles:
 
