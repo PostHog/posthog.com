@@ -959,23 +959,23 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Product Marketing',
+                name: 'Product marketing',
                 url: '/handbook/marketing/product-announcements',
             },
             {
-                name: 'Paid Advertising',
+                name: 'Paid ads',
                 url: '/handbook/marketing/paid',
             },
             {
-                name: 'Product Positioning',
+                name: 'Product positioning',
                 url: '/handbook/marketing/positioning',
             },
             {
-                name: 'Marketing Events',
+                name: 'Events',
                 url: '/handbook/marketing/events',
             },
             {
-                name: 'Email & Communications',
+                name: 'Email & comms',
                 url: '',
                 children: [
                     {
