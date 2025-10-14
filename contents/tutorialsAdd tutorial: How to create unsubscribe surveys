@@ -1,0 +1,90 @@
+---
+title: How to create unsubscribe surveys
+date: 2025-10-15
+tags: [surveys, unsubscribe, retention, tutorial]
+---
+
+# How to create unsubscribe surveys
+
+Unsubscribe surveys are a simple way to learn why users are leaving your product or mailing list. With PostHog, you can quickly create an in-app or email-triggered survey to capture this feedback and use it to improve retention.
+
+In this tutorial, we'll walk through creating an unsubscribe survey, triggering it when users unsubscribe, and analyzing responses.
+
+---
+
+## Prerequisites
+
+- A [PostHog account](https://app.posthog.com/signup) with Surveys enabled  
+- Access to your app or email tool where unsubscribe events are tracked  
+- (Optional) A Slack workspace or webhook integration for sending responses
+
+---
+
+## Step 1: Create a new survey
+
+1. Go to **PostHog → Surveys** in the left-hand menu.  
+2. Click **New survey**.  
+3. Choose **Start from scratch** or pick an **Unsubscribe feedback** template if available.  
+4. Give your survey a name like *Unsubscribe reasons survey*.
+
+---
+
+## Step 2: Add survey questions
+
+- Add a **multiple-choice** question like:  
+  *“Why are you unsubscribing?”* with options such as:  
+  - Too many emails  
+  - Content not relevant  
+  - Switching to a competitor  
+  - Other  
+
+- (Optional) Add a **short text input** field:  
+  *“Anything we could do better?”*  
+
+Keep the survey short — 1–2 questions is usually enough.
+
+---
+
+## Step 3: Configure the trigger
+
+1. In the **Targeting & Triggers** section, choose when the survey should appear.  
+   - **In-app unsubscribe flow**: Trigger when a user clicks an unsubscribe button or reaches an “unsubscribe success” page.  
+   - **Email unsubscribe link**: Use your email platform to redirect unsubscribers to a page where the PostHog survey is embedded.  
+
+2. You can target based on events like:  
+   - `$pageview` of `/unsubscribe-confirmation`  
+   - Custom event `email_unsubscribed`
+
+---
+
+## Step 4: Publish the survey
+
+- Save and publish your survey.  
+- Test the unsubscribe flow yourself to confirm the survey appears at the right moment.  
+
+---
+
+## Step 5: Analyze responses
+
+1. Go to **PostHog → Surveys → Results**.  
+2. View counts for each multiple-choice option to see the most common reasons.  
+3. Export responses to CSV, or connect them to:  
+   - **Slack integration** (send each new response to a channel).  
+   - **Webhooks** for custom workflows.  
+
+This feedback can guide product, marketing, or support improvements.
+
+---
+
+## Best practices
+
+- Keep surveys short to maximize completion.  
+- Rotate questions occasionally to avoid survey fatigue.  
+- Share results with your product and marketing teams regularly.  
+
+---
+
+## Next steps
+
+- Learn more in the [PostHog Surveys documentation](https://posthog.com/docs/surveys).  
+- Try combining unsubscribe survey data with retention analysis in [Insights](https://posthog.com/docs/insights).  
