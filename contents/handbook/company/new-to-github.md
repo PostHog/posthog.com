@@ -9,7 +9,7 @@ showTitle: true
 >
 > — <TeamMember name="Cory Watilo" photo />
 >
->     P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this [later in the article](#filing-an-issue)!
+>  P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this [later in the article](#filing-an-issue)!
 
 ## Key concepts
 
