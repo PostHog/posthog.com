@@ -40,7 +40,7 @@ We generally turn these on and off depending on performance and spend, and revie
 
 We aim for as much product coverage as possible unless there are compelling reasons to not do them (e.g. it's just very expensive). We prioritize ads for those products closest to our [ICP](/handbook/who-we-are-building-for). 
 
-> It is typically only worth running paid ads for individual products once they are generally available, with pricing, and where we feel the feature set is broadly on parity with the main comptitors. 
+> It is typically only worth running paid ads for individual products once they are generally available, with pricing, and where we feel the feature set is broadly on parity with the main competitors. 
 
 ### Tracking conversion
 
