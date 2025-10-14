@@ -1,10 +1,10 @@
 ---
-title: Paid Advertising
+title: Paid ads
 sidebar: Handbook
 showTitle: true
 ---
 
-> This page is for paid ads for the PostHog product. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
+> This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, [click here](handbook/content/newsletter-ads).
 
 As we believe in [product-led growth](/blog/product-led-growth), paid ads are _not_ at the heart of our marketing strategy in the long term. Instead, we see them as an important way to kick start and then amplify the work we are doing in other areas of marketing and product. 
 
