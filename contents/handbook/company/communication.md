@@ -293,7 +293,7 @@ If someone contacts you outside of Slack, treat it as **untrusted until verified
 
 ### Best practices
 
-James, Tim, and other execs will never ask for wire transfers, gift cards, MFA codes, or access changes over email/SMS/WhatsApp/phone. Treat such requests as phishing and report them to `#project-security`.
+James, Tim, and other execs will never ask for wire transfers, gift cards, MFA codes, or access changes over email/SMS/WhatsApp/phone. Treat such requests as phishing and report them to `#phishing-attempts`.
 
 By email: Only trust `@posthog.com` senders. Verify via the company directory. Be cautious of look-alike domains (e.g., `posthog.co` vs `posthog.com`), unexpected attachments, and “urgent” requests.
 
