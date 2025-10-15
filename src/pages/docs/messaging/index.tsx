@@ -8,12 +8,14 @@ import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
 import ChannelPlatforms from '../../../../contents/docs/messaging/_snippets/channel-platforms'
+import Beta from '../../../../contents/docs/messaging/_snippets/beta.mdx'
 
 export const Content = () => {
     return (
         <>
             <section className="mb-8">
                 <h2 className="mb-4">Overview</h2>
+                <Beta />
                 <div>
                     <p>
                         Workflows is PostHog's no-code, drag-and-drop tool for building logic that automates processes
@@ -65,6 +67,11 @@ export const Content = () => {
             <section className="mb-8">
                 <h2 className="mb-4 mt-0">Channels and platforms</h2>
                 <ChannelPlatforms />
+            </section>
+
+            <section className="mb-8">
+                <h2 className="mb-4 mt-0">Pricing</h2>
+                <p>PLACEHOLDER</p>
             </section>
 
             <section className="mb-8">
