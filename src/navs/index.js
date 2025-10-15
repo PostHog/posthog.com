@@ -1297,6 +1297,10 @@ export const handbookSidebar = [
                             },
                         ],
                     },
+                                        {
+                        name: 'Hogpatch',
+                        url: '/handbook/growth/sales/Hogpatch',
+                    }
                 ],
             },
             {
