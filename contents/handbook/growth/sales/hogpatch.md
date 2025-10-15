@@ -1,10 +1,8 @@
 ---
-title: Hogpatch
+title: Hogpatch - Our SF Home for YC Founders
 sidebar: Handbook
 showTitle: true
 ---
-
-# Hogpatch: Our SF Home for YC Founders
 
 Hogpatch is our dedicated coworking space in San Francisco for YC founders in the current batch - a lofty, airy, light-filled warehouse just around the corner from YC. It's invite-only and open 24/7, giving you a reliable place to work whenever you need it. We've set it up because we know how valuable a quiet space is when you're bouncing between office hours, customer calls, and late-night sprints.
 
