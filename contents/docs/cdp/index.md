@@ -11,8 +11,6 @@ Data pipeline provides a full-featured customer data platform (CDP) in PostHog, 
 
 - **Destinations** send PostHog data to other sources in [realtime](/docs/cdp/destinations) or as [batch exports](/docs/cdp/batch-exports) which reliably send data to a destination on a schedule.
 
-Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
-
 ## Billing for data pipelines
 
 For information about data pipeline pricing and billing, please visit our [pricing page](https://posthog.com/pricing).
