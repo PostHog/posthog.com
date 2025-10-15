@@ -7,8 +7,8 @@ import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
-import ChannelPlatforms from '../../../../contents/docs/messaging/_snippets/channel-platforms'
-import Beta from '../../../../contents/docs/messaging/_snippets/beta.mdx'
+import ChannelPlatforms from '../../../../contents/docs/workflows/_snippets/channel-platforms'
+import Beta from '../../../../contents/docs/workflows/_snippets/beta.mdx'
 
 export const Content = () => {
     return (
