@@ -388,12 +388,6 @@ The PostHog iOS SDK uses method swizzling to intercept and modify method calls a
 - **Surveys** - Displays surveys at appropriate times (`config.surveys`)
 - **Advanced metrics tracking** - Provides more precise session ID calculation and rotation by detecting user activity and idleness
 
-### Session metrics management 
-
-Method swizzling is particularly important for accurate [session metrics tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
-
-With swizzling disabled, the SDK only uses application open/backgrounded events to detect user activity, which can lead to a sub-optimal session calculation. 
-
 ### Disabling method swizzling
 
 Since version 3.34.0, you can opt out of swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
@@ -405,6 +399,12 @@ PostHogSDK.shared.setup(config)
 ```
 
 > **Note:** When method swizzling is disabled, features that depend on it will not work even if they are individually enabled in the config. For example, if you set `config.sessionReplay = true` and `config.enableSwizzling = false`, session replay will **not** be enabled. 
+
+### Session metrics management 
+
+Method swizzling is particularly important for accurate [session metrics tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
+
+With swizzling disabled, the SDK only uses application open/backgrounded events to detect user activity, which can lead to a sub-optimal session calculation. 
 
 ## All configuration options
 
