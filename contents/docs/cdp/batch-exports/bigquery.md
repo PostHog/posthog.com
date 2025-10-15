@@ -111,7 +111,7 @@ The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and e
 2. Click **+ New destination** in the top-right corner.
 3. Select **BigQuery** as the batch export destination.
 4. Fill in the necessary [configuration details](#bigquery-configuration).
-5. Finalize the creation by clicking on "Create".
+5. Finalize the creation by clicking on **Create**.
 6. Done! The batch export will schedule its first run on the start of the next period.
 
 ## BigQuery configuration
