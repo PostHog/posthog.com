@@ -43,39 +43,48 @@ export default function AIAskSlide({ productName = 'PostHog AI' }: AIAskSlidePro
     }
 
     return (
-        <div className="h-full bg-gray-50 flex flex-col">
-            {/* Top two-thirds: Title and chat interface */}
-            <div className="flex-1 flex px-16 py-12 gap-16">
+        <div className="h-full bg-gray-50 flex flex-col items-center relative">
+            <div className="flex-1 flex px-16 pt-12 gap-4">
                 {/* Left side - Title */}
-                <div className="flex-1 flex flex-col justify-center">
-                    <div>
-                        <h1 className="text-5xl font-bold text-gray-900 mb-2">What can Max AI help with?</h1>
-                        <p className="text-xl text-gray-700">Ask him yourself...</p>
-                        {/* Curved arrow pointing right */}
-                        <div className="mt-4">
-                            <svg width="60" height="40" viewBox="0 0 60 40" className="text-gray-900">
-                                <path
-                                    d="M10 20 Q30 5 50 20"
-                                    stroke="currentColor"
-                                    strokeWidth="3"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                />
-                                <path
-                                    d="M45 15 L50 20 L45 25"
-                                    stroke="currentColor"
-                                    strokeWidth="3"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </div>
+                <div className="flex-1 flex flex-col">
+                    <div className="relative">
+                        <h2 className="text-5xl font-bold text-gray-900 mb-6 text-center">
+                            What can Max AI help with?
+                        </h2>
+                        <h3 className="text-3xl text-gray text-center">Ask him yourself...</h3>
+                        {/* Curved arrow pointing right - absolutely positioned */}
+                        <svg
+                            width="120"
+                            height="80"
+                            viewBox="0 0 60 40"
+                            className="absolute -right-12 top-3/4 text-gray-900"
+                        >
+                            <path
+                                d="M10 20 Q30 5 50 20"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                fill="none"
+                                strokeLinecap="round"
+                            />
+                            <path
+                                d="M45 15 L50 20 L45 25"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
                     </div>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/magic_bb77a577f4.png"
+                        alt="Max AI Magic"
+                        className="absolute bottom-0 left-16 max-w-lg w-full"
+                    />
                 </div>
 
                 {/* Right side - Max chat mockup */}
-                <div className="flex-1 flex flex-col justify-center">
+                <div className="flex-1 flex flex-col gap-8">
                     <div className="max-w-md mx-auto">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_10159_8cb595de1b.png"
@@ -83,23 +92,7 @@ export default function AIAskSlide({ productName = 'PostHog AI' }: AIAskSlidePro
                             className="w-full"
                         />
                     </div>
-                </div>
-            </div>
-
-            {/* Bottom third: Hedgehog illustration and LLM buttons */}
-            <div className="flex-shrink-0 px-16 py-8">
-                <div className="flex gap-16 items-end">
-                    {/* Left side - Magic hedgehog image */}
-                    <div className="flex-1 flex justify-start items-end">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/magic_bb77a577f4.png"
-                            alt="Max AI Magic"
-                            className="max-w-[400px] w-full"
-                        />
-                    </div>
-
-                    {/* Right side - LLM buttons */}
-                    <div className="flex-1 flex flex-col justify-center">
+                    <div className="flex-1 flex flex-col">
                         <div className="text-center mb-6">
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">
                                 Still not sure if PostHog AI is right for you?
