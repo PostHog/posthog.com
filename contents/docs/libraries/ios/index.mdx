@@ -386,17 +386,17 @@ The PostHog iOS SDK uses method swizzling to intercept and modify method calls a
 - **Element interactions** - Automatically tracks user interactions with UI elements (`config.captureElementInteractions`)  
 - **Session replay** - Records user sessions (`config.sessionReplay`)
 - **Surveys** - Displays surveys at appropriate times (`config.surveys`)
-- **Advanced session management** - Provides more precise session ID calculation and rotation by detecting user activity and idleness
+- **Advanced metrics tracking** - Provides more precise session ID calculation and rotation by detecting user activity and idleness
 
-### Session management 
+### Session metrics management 
 
-Method swizzling is particularly important for accurate [session tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
+Method swizzling is particularly important for accurate [session metrics tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
 
 With swizzling disabled, the SDK only uses application open/backgrounded events to detect user activity, which can lead to a sub-optimal session calculation. 
 
 ### Disabling method swizzling
 
-Since version 3.34.0, you can opt in or out of swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
+Since version 3.34.0, you can opt out of swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
 
 ```swift
 let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
