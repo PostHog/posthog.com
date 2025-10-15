@@ -50,7 +50,39 @@ Since MCP tools are mostly just async functions passed to `server.tool()`, wrapp
 
 Unlike web frameworks with middleware pipelines or class-based systems with decorators, MCP's functional design means wrapper patterns work seamlessly without fighting the framework.
 
-## 1. The withAnalytics wrapper
+## Diagram 
+
+
+
+## 1. Define the analyitcs provider interface
+
+The interface approach makes your code testable and flexible—swap analytics providers without touching your server code. Want to try Mixpanel instead? Write a new implementation. Need to debug locally? Create a file-based logger. Running tests? Use a no-emit version that tracks calls without sending data:
+
+```typescript
+// src/analytics.ts (add to existing file)
+export interface AnalyticsProvider {
+  /**
+   * Track a successful tool execution with timing information
+   * @param toolName - Name of the tool that was executed
+   * @param result - Execution results including duration and success status
+   */
+  trackTool(toolName: string, result: any): Promise<void>;
+  
+  /**
+   * Track an error that occurred during tool execution
+   * @param error - The error object that was thrown
+   * @param context - Additional context about the error (tool name, duration, etc.)
+   */
+  trackError(error: Error, context: any): Promise<void>;
+  
+  /**
+   * Gracefully shut down the analytics client and flush pending events
+   */
+  close(): Promise<void>;
+}
+```
+
+## 2. The withAnalytics wrapper
 
 Here's the wrapper that makes analytics automatic by intercepting every tool call, measuring its performance, and tracking the results:
 
@@ -96,7 +128,8 @@ This wrapper function:
 - Preserves normal error handling
 - Works even without analytics (graceful degradation)
 
-## Step 2: Create your tools
+
+## 3. Create your tools
 
 First, pure business logic with zero analytics dependencies. Keeping your tools clean means they're easier to test, maintain, and reuse across different contexts:
 
@@ -122,9 +155,13 @@ export async function analyzeData(data: string) {
   await new Promise(resolve => setTimeout(resolve, 1000));
   return { result: `Analysis complete`, confidence: 0.92 };
 }
-Step 3: Wire up analytics
+```
+
+## 4. Register tools with analytics
+
 Now register your tools, wrapping each one:
-typescript// src/server.ts
+
+```typescript// src/server.ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -179,41 +216,11 @@ export async function createServer(analytics?: AnalyticsProvider) {
 }
 ```
 
-Notice how clean this is—just wrap each handler and you're done.
+Notice how clean this is. Just wrap each handler and you're done.
 
-## Step 3: Connect PostHog
+## 5. Implement PostHog tracking
 
 Now let's send those analytics somewhere useful.
-
-Define the provider interface
-
-The interface approach makes your code testable and flexible—swap analytics providers without touching your server code. Want to try Mixpanel instead? Write a new implementation. Need to debug locally? Create a file-based logger. Running tests? Use a no-emit version that tracks calls without sending data:
-
-```typescript
-// src/analytics.ts (add to existing file)
-export interface AnalyticsProvider {
-  /**
-   * Track a successful tool execution with timing information
-   * @param toolName - Name of the tool that was executed
-   * @param result - Execution results including duration and success status
-   */
-  trackTool(toolName: string, result: any): Promise<void>;
-  
-  /**
-   * Track an error that occurred during tool execution
-   * @param error - The error object that was thrown
-   * @param context - Additional context about the error (tool name, duration, etc.)
-   */
-  trackError(error: Error, context: any): Promise<void>;
-  
-  /**
-   * Gracefully shut down the analytics client and flush pending events
-   */
-  close(): Promise<void>;
-}
-```
-
-## Step 4: Implement PostHog tracking
 
 ```typescript
 // src/posthog.ts
@@ -259,10 +266,11 @@ export class PostHogAnalyticsProvider implements AnalyticsProvider {
 }
 ```
 
-PostHog exception properties: Properties prefixed with $ are special PostHog properties that enable enhanced features. For example, $exception_type, $exception_message, and $exception_stack are automatically recognized by PostHog's error tracking dashboards, giving you built-in filtering and grouping capabilities. 
+PostHog exception properties: Properties prefixed with $ are special PostHog properties that enable enhanced features. For example, `$exception_type`, `$exception_message`, and `$exception_stack` are automatically recognized by PostHog's error tracking dashboards, giving you built-in filtering and grouping capabilities. 
 
 This makes it easy to identify which errors are most common and track error trends over time without any additional configuration.
-Wire it all together
+
+## 6. Create the MCP server
 
 ```typescript
 // src/index.ts
@@ -292,7 +300,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Step 5: Test with Claude
+## 7. Test with Claude
 
 ### Configure Claude Desktop:
 
@@ -344,6 +352,26 @@ return withAnalytics(
   }
 );
 ```
+
+## 8. Create MCP analytics dashboards
+
+### Creating dashboards
+
+In PostHog, create these visualizations:
+
+### Performance dashboard
+
+P95 latency by tool (bar chart) to find slow operations
+
+### Reliability dashboard
+
+Success rate by tool (table) to identify problem areas
+
+### Usage dashboard
+
+Tool popularity over time (line chart) to understand patterns
+
+--- 
 
 ### Sanitizing sensitive data
 
@@ -407,22 +435,6 @@ export async function createServer(analytics?: PostHogAnalyticsProvider) {
   // ... rest of setup
 }
 ```
-
-### Creating dashboards
-
-In PostHog, create these visualizations:
-
-#### Performance dashboard
-
-P95 latency by tool (bar chart) to find slow operations
-
-#### Reliability dashboard
-
-Success rate by tool (table) to identify problem areas
-
-#### Usage dashboard
-
-Tool popularity over time (line chart) to understand patterns
 
 ## Further reading
 
