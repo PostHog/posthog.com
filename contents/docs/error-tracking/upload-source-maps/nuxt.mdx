@@ -7,15 +7,15 @@ import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
 import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
 
-## Nuxt 3.7 and above
+## Nuxt v3.7 and above
 
-For Nuxt 3.7 and above, the `@posthog/nuxt` module automatically handles sourcemap generation and upload during the build process. 
+For Nuxt v3.7 and above, the `@posthog/nuxt` module automatically handles source map generation and upload during the build process. 
 
 No manual configuration is needed - follow the [Nuxt error tracking installation guide](/docs/error-tracking/installation/nuxt) to set up the module, and source maps are automatically generated and uploaded when you build your project.
 
-## Nuxt 3.6 and below
+## Nuxt v3.6 and below
 
-For older versions of Nuxt, you'll need to manually configure sourcemap generation and upload using the PostHog CLI.
+For older versions of Nuxt, you'll need to manually configure source map generation and upload using the PostHog CLI.
 
 <Steps>
 <Step title="Install the PostHog CLI" badge="required">
@@ -24,7 +24,7 @@ For older versions of Nuxt, you'll need to manually configure sourcemap generati
 <Step title="Authenticate the PostHog CLI" badge="required">
 <CLIAuthenticate />
 </Step>
-<Step title="Generate sourcemaps during build" badge="required">
+<Step title="Generate source maps during build" badge="required">
 
 You can hook into the `close` event to generate and upload source maps for your Nuxt application like this:
 
@@ -63,13 +63,13 @@ Build your project for production by running the following command:
 nuxt build
 ```
 
-Post-build scripts should automatically generate and upload sourcemaps to PostHog.
+Post-build scripts should automatically generate and upload source maps to PostHog.
 
 </Step>
 
-<Step checkpoint title="Verify source map upload" subtitle="Confirm sourcemaps are being properly uploaded">
+<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are being properly uploaded">
 
-Before proceeding, confirm that sourcemaps are being properly uploaded.
+Before proceeding, confirm that source maps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
 

@@ -39,13 +39,13 @@ See the [JavaScript SDK docs](/docs/libraries/js/features) for all usable functi
 
 ## Setting up PostHog on the server side
 
-1. Install `posthog-node` using your package manager:
+Install `posthog-node` using your package manager:
 
 import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
 
 <InstallNodePackageManagers />
 
-2. Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
+Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
@@ -59,7 +59,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [server route](https://nuxt.com/docs/guide/directory-structure/server#server-routes):
+Initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [server route](https://nuxt.com/docs/guide/directory-structure/server#server-routes):
 
 ```js file=server/api/example.js focusOnLines=7-27
 export default defineEventHandler(async (event) => {

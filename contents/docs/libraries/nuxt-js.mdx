@@ -10,13 +10,13 @@ import DetailGroupProductsInOneProject from "../integrate/_snippets/details/grou
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
 For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module. This module provides:
-- Automatic PostHog client initialization for both Vue (client-side) and Nitro (server-side)
+- Automatic PostHog client initialization for both Vue (client side) and Nitro (server side)
 - Automatic exception capture for error tracking
-- Sourcemap configuration and upload for error tracking
+- Source map configuration and upload for error tracking
 
 ## Installation
 
-1. Install the PostHog Nuxt module using your package manager:
+Install the PostHog Nuxt module using your package manager:
 
 <MultiLanguage>
 
@@ -40,7 +40,7 @@ bun add @posthog/nuxt
 
 ## Configuration
 
-2. Add the module to your `nuxt.config.ts` file:
+Add the module to your `nuxt.config.ts` file:
 
 ```typescript file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -95,7 +95,7 @@ export default defineEventHandler(async (event) => {
 
 ## Error tracking
 
-For a detailed error tracking installation guide, including automatic exception capture and sourcemap configuration, see the [Nuxt error tracking installation docs](/docs/error-tracking/installation/nuxt).
+For a detailed error tracking installation guide, including automatic exception capture and source map configuration, see the [Nuxt error tracking installation docs](/docs/error-tracking/installation/nuxt).
 
 ## Troubleshooting
 

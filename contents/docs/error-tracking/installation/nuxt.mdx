@@ -12,12 +12,12 @@ import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
 import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
-For Nuxt 3.7 and above, we recommend using the official `@posthog/nuxt` module which provides automatic error tracking with built-in sourcemap support. 
+For Nuxt v3.7 and above, we recommend using the official `@posthog/nuxt` module which provides automatic error tracking with built-in source map support. 
 
 <Steps>
 <Step title="Install the PostHog Nuxt module" subtitle="Your goal in this step: Install and configure the PostHog Nuxt module." badge="required">
 
-1. Install the PostHog Nuxt module using your package manager:
+Install the PostHog Nuxt module using your package manager:
 
 <MultiLanguage>
 
@@ -39,13 +39,13 @@ bun add @posthog/nuxt
 
 </MultiLanguage>
 
-2. Add the module to your `nuxt.config.ts` file:
+Add the module to your `nuxt.config.ts` file:
 
 ```typescript file=nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
 
-  // Enable sourcemaps generation in both vue and nitro
+  // Enable source maps generation in both vue and nitro
   sourcemap: { 
     client: 'hidden' 
   },
@@ -61,10 +61,10 @@ export default defineNuxtConfig({
     publicKey: '<ph_project_api_key>', // Find it in project settings https://app.posthog.com/settings/project
     host: '<ph_client_api_host>', // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
     clientConfig: {
-      capture_exceptions: true, // Enables automatic exception capture on the client-side (Vue)
+      capture_exceptions: true, // Enables automatic exception capture on the client side (Vue)
     },
     serverConfig: {
-      enableExceptionAutocapture: true, // Enables automatic exception capture on the server-side (Nitro)
+      enableExceptionAutocapture: true, // Enables automatic exception capture on the server side (Nitro)
     },
     sourcemaps: {
       enabled: true,
@@ -78,9 +78,9 @@ export default defineNuxtConfig({
 ```
 
 The module will automatically:
-- Initialize PostHog on both Vue (client-side) and Nitro (server-side)
+- Initialize PostHog on both Vue (client side) and Nitro (server side)
 - Capture exceptions on both client and server
-- Generate and upload sourcemaps during build
+- Generate and upload source maps during build
 
 </Step>
 
@@ -136,13 +136,13 @@ Build your project for production by running the following command:
 nuxt build
 ```
 
-The PostHog module will automatically generate and upload sourcemaps to PostHog during the build process.
+The PostHog module will automatically generate and upload source maps to PostHog during the build process.
 
 </Step>
 
-<Step checkpoint title="Verify source map upload" subtitle="Confirm sourcemaps are being properly uploaded">
+<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are being properly uploaded">
 
-Before proceeding, confirm that sourcemaps are being properly uploaded.
+Before proceeding, confirm that source maps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
 
