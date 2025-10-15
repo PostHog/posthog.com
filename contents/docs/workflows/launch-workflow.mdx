@@ -35,16 +35,16 @@ This will open the workflow builder:
 />
 
 The new workflow only has two blocks:
-- A trigger block: This defines the event that will start the workflow workflow.
-- An exit block: This defines the event that will end the workflow workflow.
+- A trigger block: This defines the event that will start the workflow.
+- An exit block: This defines the event that will end the workflow.
 
-On the right side of the workflow builder, you can see the types of blocks available to add to your campaign.
+On the right side of the workflow builder, you can see the types of blocks available to add to your workflow.
 
 </Step>
 
 <Step title="Configure the trigger" badge="required">
 
-Now, let's click on the trigger block and configure it. In a new workflow, the trigger doesn't have any trigger events. Triggers tell PostHog what events will start the workflow workflow.
+Now, let's click on the trigger block and configure it. In a new workflow, the trigger doesn't have any trigger events. Triggers tell PostHog what events will start the workflow.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
@@ -63,7 +63,7 @@ Change the frequency drop down to `"One time"` this means a user cannot be re-en
 
 <Step title="Add an Dispatch" badge="required">
 
-Now that we have a trigger that can initiate the workflow workflow, we need to add an Dispatch to send a message to the users who trigger the workflow.
+Now that we have a trigger that can initiate the workflow, we need to add an Dispatch to send a message to the users who trigger the workflow.
 
 <Tab.Group tabs={[
 'Email', 
@@ -147,7 +147,7 @@ Once the workflow is enabled, you can monitor your workflow in the **Metrics** a
 
 To confirm your workflow is delivering messages, look for these signs:
 - In the **Metrics** tab, you should see a line chart showing the number of **succeeded** and **triggered** messages.
-- In the **Logs** tab, you can see logs of recently triggered workflow workflows. Confirm that there aren't any errors.
+- In the **Logs** tab, you can see logs of recently triggered workflows. Confirm that there aren't any errors.
 - See the message delivered in your inbox.
 
 </Step>
