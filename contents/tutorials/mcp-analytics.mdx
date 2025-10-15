@@ -1,0 +1,431 @@
+---
+title: How to set up MCP analytics and feature flags for tool calls
+date: 2025-10-14
+author:
+  - arda-eren
+tags:
+  - MCP
+  - product analytics
+  - feature flags
+---
+
+MCP servers give LLMs powerful capabilities, but without analytics you have no visibility into their usage. Which tools get called? How often? Where are the bottlenecks? What's failing? You're flying blind.
+
+This tutorial will show you how to add analytics to any MCP server using a simple wrapper pattern. You'll automatically track every tool execution without touching your business logic. 
+
+By the end, your MCP server will be able to:
+
+- Track execution time for every tool call
+- Capture errors with context
+- Record custom metrics
+- Sanitize sensitive data
+
+This integration pattern works for any MCP server and is vendor-agnostic. We'll use PostHog for analytics for this tutorial but you can use any other tool you prefer.
+
+You can follow along with the code in this [GitHub repository](https://github.com/posthog/mcp-analytics-demo).
+
+## Prerequisites
+
+- Node.js 18+ 
+- PostHog account (free tier works)
+- Claude Desktop to test your server
+- Basic TypeScript knowledge
+- Code editor (e.g., VS Code, Cursor)
+
+## Understanding the wrapper pattern for MCP tools
+
+MCP servers have an architecture that makes the wrapper pattern a natural fit for analytics. Here's what the boilerplate code looke like for registerintg a tool: 
+
+```typescript
+// This is how MCP tools are registered, already functional style
+server.tool(
+  "toolName",
+  { /* schema */ },
+  { /* metadata */ },
+  async (args) => { /* handler function */ }
+);
+```
+
+Since MCP tools are mostly just async functions passed to `server.tool()`, wrapping the handler function is a clean and lightweight way of adding or extending functionality – in this case, analytics.
+
+Unlike web frameworks with middleware pipelines or class-based systems with decorators, MCP's functional design means wrapper patterns work seamlessly without fighting the framework.
+
+## 1. The withAnalytics wrapper
+
+Here's the wrapper that makes analytics automatic by intercepting every tool call, measuring its performance, and tracking the results:
+
+```typescript file="src/analytics.ts"
+// src/analytics.ts
+export async function withAnalytics<T>(
+  analytics: AnalyticsProvider | undefined,
+  toolName: string,
+  handler: () => Promise<T>
+): Promise<T> {
+  const start = Date.now();
+  
+  try {
+    const result = await handler();
+    const duration_ms = Date.now() - start;
+    
+    // Track successful execution
+    await analytics?.trackTool(toolName, { 
+      duration_ms, 
+      success: true 
+    });
+    
+    return result;
+    
+  } catch (error) {
+    const duration_ms = Date.now() - start;
+    
+    // Track the error with context
+    await analytics?.trackError(error as Error, {
+      tool_name: toolName,
+      duration_ms
+    });
+    
+    throw error; // Re-throw so MCP handles it normally
+  }
+}
+```
+
+This wrapper function:
+
+- Times every execution automatically
+- Tracks success/failure without extra code
+- Preserves normal error handling
+- Works even without analytics (graceful degradation)
+
+## Step 2: Create your tools
+
+First, pure business logic with zero analytics dependencies. Keeping your tools clean means they're easier to test, maintain, and reuse across different contexts:
+
+```typescript
+// src/tools.ts
+export async function getInventory() {
+  return [
+    { id: '1', name: 'Widget', stock: 42 },
+    { id: '2', name: 'Gadget', stock: 17 }
+  ];
+}
+
+export async function checkStock(productId: string) {
+  const stock = { '1': 42, '2': 17 }[productId];
+  if (!stock) {
+    throw new Error(`Product ${productId} not found`);
+  }
+  return { productId, stock };
+}
+
+export async function analyzeData(data: string) {
+  // Simulate expensive operation
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return { result: `Analysis complete`, confidence: 0.92 };
+}
+Step 3: Wire up analytics
+Now register your tools, wrapping each one:
+typescript// src/server.ts
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+import * as tools from "./tools.js";
+import { withAnalytics } from "./analytics.js";
+
+export async function createServer(analytics?: AnalyticsProvider) {
+  const server = new McpServer({
+    name: "analytics-demo",
+    version: "1.0.0"
+  });
+
+  // Register each tool wrapped with analytics
+  server.tool(
+    "getInventory",
+    {},
+    { title: "Get product inventory" },
+    async () => withAnalytics(
+      analytics, 
+      "getInventory", 
+      tools.getInventory
+    )
+  );
+
+  server.tool(
+    "checkStock",
+    { productId: z.string() },
+    { title: "Check stock for a product" },
+    async (args) => withAnalytics(
+      analytics,
+      "checkStock",
+      () => tools.checkStock(args.productId)
+    )
+  );
+
+  server.tool(
+    "analyzeData",
+    { data: z.string() },
+    { title: "Analyze data (slow)" },
+    async (args) => withAnalytics(
+      analytics,
+      "analyzeData",
+      () => tools.analyzeData(args.data)
+    )
+  );
+
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  
+  console.error("[MCP] Server running");
+  return server;
+}
+```
+
+Notice how clean this is—just wrap each handler and you're done.
+
+## Step 3: Connect PostHog
+
+Now let's send those analytics somewhere useful.
+
+Define the provider interface
+
+The interface approach makes your code testable and flexible—swap analytics providers without touching your server code. Want to try Mixpanel instead? Write a new implementation. Need to debug locally? Create a file-based logger. Running tests? Use a no-emit version that tracks calls without sending data:
+
+```typescript
+// src/analytics.ts (add to existing file)
+export interface AnalyticsProvider {
+  /**
+   * Track a successful tool execution with timing information
+   * @param toolName - Name of the tool that was executed
+   * @param result - Execution results including duration and success status
+   */
+  trackTool(toolName: string, result: any): Promise<void>;
+  
+  /**
+   * Track an error that occurred during tool execution
+   * @param error - The error object that was thrown
+   * @param context - Additional context about the error (tool name, duration, etc.)
+   */
+  trackError(error: Error, context: any): Promise<void>;
+  
+  /**
+   * Gracefully shut down the analytics client and flush pending events
+   */
+  close(): Promise<void>;
+}
+```
+
+## Step 4: Implement PostHog tracking
+
+```typescript
+// src/posthog.ts
+import { PostHog } from "posthog-node";
+import { AnalyticsProvider } from "./analytics.js";
+
+export class PostHogAnalyticsProvider implements AnalyticsProvider {
+  private client: PostHog;
+  private sessionId: string;
+
+  constructor(apiKey: string, host?: string) {
+    this.client = new PostHog(apiKey, { host });
+    this.sessionId = `mcp_${Date.now()}_${process.pid}`;
+  }
+  
+  async trackTool(toolName: string, result: any): Promise<void> {
+    this.client.capture({
+      distinctId: this.sessionId,
+      event: "mcp_tool_executed",
+      properties: { tool_name: toolName, ...result }
+    });
+    
+    console.error(
+      `[Analytics] ${toolName}: ${result.success ? "✓" : "✗"} (${result.duration_ms}ms)`
+    );
+  }
+  
+  async trackError(error: Error, context: any): Promise<void> {
+    this.client.capture({
+      distinctId: this.sessionId,
+      event: "mcp_tool_error",
+      properties: {
+        $exception_type: error.name,
+        $exception_message: error.message,
+        ...context
+      }
+    });
+  }
+  
+  async close(): Promise<void> {
+    await this.client.shutdown();
+  }
+}
+```
+
+PostHog exception properties: Properties prefixed with $ are special PostHog properties that enable enhanced features. For example, $exception_type, $exception_message, and $exception_stack are automatically recognized by PostHog's error tracking dashboards, giving you built-in filtering and grouping capabilities. 
+
+This makes it easy to identify which errors are most common and track error trends over time without any additional configuration.
+Wire it all together
+
+```typescript
+// src/index.ts
+import "dotenv/config";
+import { createServer } from "./server.js";
+import { PostHogAnalyticsProvider } from "./posthog.js";
+
+async function main() {
+  let analytics;
+  
+  if (process.env.POSTHOG_API_KEY) {
+    analytics = new PostHogAnalyticsProvider(
+      process.env.POSTHOG_API_KEY,
+      process.env.POSTHOG_HOST
+    );
+  }
+
+  const server = await createServer(analytics);
+
+  process.on("SIGINT", async () => {
+    await server.close();
+    await analytics?.close();
+    process.exit(0);
+  });
+}
+
+main().catch(console.error);
+```
+
+## Step 5: Test with Claude
+
+### Configure Claude Desktop:
+
+```json
+// ~/Library/Application Support/Claude/claude_desktop_config.json
+{
+  "mcpServers": {
+    "analytics-demo": {
+      "command": "/path/to/node",
+      "args": ["/path/to/project/build/index.js"]
+    }
+  }
+}
+```
+
+Build and restart Claude:
+
+```bash
+npm run build
+```
+
+### Restart Claude Desktop (Cmd+Q and reopen)
+
+Try these prompts:
+
+- "Show me the inventory" → Fast success
+- "Check stock for product 999" → Error tracking
+- "Analyze this data: quarterly sales" → Slow operation timing
+
+
+You can adapt the wrapper pattern for your specific needs without changing your tool implementations:
+
+Track custom metrics
+
+```typescript
+// Pass additional context
+return withAnalytics(
+  analytics,
+  "getInventory",
+  async () => {
+    const result = await tools.getInventory();
+    analytics?.trackTool("getInventory", {
+      duration_ms,
+      success: true,
+      items_returned: result.length,  // Custom metric
+      cache_hit: false                 // Custom metric
+    });
+    return result;
+  }
+);
+```
+
+### Sanitizing sensitive data
+
+If your tools handle sensitive information, you can sanitize it before tracking. PostHog offers both US and EU hosting options, so you can choose the region that meets your compliance requirements:
+
+```typescript
+async trackError(error: Error, context: any) {
+  // Redact sensitive information in production
+  const sanitized = {
+    ...context,
+    args: process.env.NODE_ENV === 'production' ? "[REDACTED]" : context.args,
+    $exception_message: process.env.NODE_ENV === 'production' 
+      ? error.name  // Only track error type, not the message
+      : error.message
+  };
+  
+  this.client.capture({
+    distinctId: this.sessionId,
+    event: "mcp_tool_error",
+    properties: sanitized
+  });
+}
+```
+For GDPR compliance, use PostHog's EU cloud when initializing: host: 'https://eu.i.posthog.com'. This ensures all your data stays within EU data centers.
+
+### Feature flags for gradual rollouts
+
+Use PostHog's feature flags to control tool availability without redeploying:
+
+```typescript
+// src/posthog.ts - add this method to PostHogAnalyticsProvider
+export class PostHogAnalyticsProvider implements AnalyticsProvider {
+  // ... existing code ...
+  
+  async isFeatureEnabled(flagKey: string): Promise<boolean> {
+    return await this.client.isFeatureEnabled(flagKey, this.sessionId) || false;
+  }
+}
+
+// src/server.ts - conditionally register tools
+export async function createServer(analytics?: PostHogAnalyticsProvider) {
+  const server = new McpServer({
+    name: "analytics-demo",
+    version: "1.0.0"
+  });
+
+  // Always register stable tools
+  server.tool("getInventory", {}, { title: "Get product inventory" },
+    async () => withAnalytics(analytics, "getInventory", tools.getInventory)
+  );
+
+  // Only register experimental tools if feature flag is enabled
+  if (analytics && await analytics.isFeatureEnabled('enable-experimental-tools')) {
+    server.tool("analyzeData", { data: z.string() }, { title: "Analyze data" },
+      async (args) => withAnalytics(analytics, "analyzeData", 
+        () => tools.analyzeData(args.data)
+      )
+    );
+  }
+
+  // ... rest of setup
+}
+```
+
+### Creating dashboards
+
+In PostHog, create these visualizations:
+
+#### Performance dashboard
+
+P95 latency by tool (bar chart) to find slow operations
+
+#### Reliability dashboard
+
+Success rate by tool (table) to identify problem areas
+
+#### Usage dashboard
+
+Tool popularity over time (line chart) to understand patterns
+
+## Further reading
+
+- Complete code on GitHub
+- MCP TypeScript SDK documentation
+- PostHog Node.js library reference
