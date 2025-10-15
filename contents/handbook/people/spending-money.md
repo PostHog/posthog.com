@@ -222,7 +222,6 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when traveling to the US. PostHog will cover costs here.
 - When traveling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
-- Wifi on flights don't tend to be effective for work, PostHog does not cover charges for the Wifi.
 - When making charges on your card internationally, run the transaction using the local currency when given the option as Brex will generally have a better exchange rate.
 - PostHog has international insurance for our work trips, so you will not need to buy travel insurance when traveling on behalf of PostHog.
 - It's fine to book your outbound / return flights for a different day to when you are required to be there as long as the flight is a similar price or less. Any other costs outside of the days you are required to be at an event are of course _not_ covered.
