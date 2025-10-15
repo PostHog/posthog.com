@@ -3,8 +3,15 @@ title: Non-obvious advice about pricing your product
 date: 2025-10-15
 author:
  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_fccbcec132.png
+featuredImageType: full
 tags:
- - feature flags
+  - Product
+  - Founders
+crosspost:
+  - Founders
+  - Blog
 ---
 
 We care a lot about pricing at PostHog. As proof:
