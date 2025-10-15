@@ -1,34 +1,37 @@
 ---
-title: Campaign builder
+title: Workflow builder
 ---
+import Beta from './_snippets/beta.mdx'
 
-Campaigns are workflows that deliver messages to your users based your configured logic. In PostHog, you can create campaigns using a no-code campaign builder.
+<Beta />
+
+Workflows are a collection of steps that automate a process or deliver messages to your users based on your configured logic. In PostHog, you can create a workflow using our no-code workflow builder.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
     classes="rounded"
-    alt="Fresh campaign with trigger block"
+    alt="Fresh workflow with trigger block"
 />
 
-Campaigns are composed of the following components:
+Workflows are composed of the following components:
 
 | Component | Description |
 |-----------|-------------|
-| [Triggers](#triggers) | What starts the campaign. We let you start a campaign when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
+| [Triggers](#triggers) | What starts the workflow. We let you start a workflow when an event is performed (e.g. a user signs up), or programmatically via a webhook. |
 | [Dispatches](#dispatches) | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. |
 | [Delays](#delays) | Wait steps such as "wait 2 days" or "wait until condition is true." |
-| [Audience splits](#audience-splits) | Target and split the users you message with more specificity or try a/b testing with random branching. |
-| [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your campaign. |
+| [Audience splits](#audience-splits) | Target and split your users so you can automate some action for them or send a message with more specificity. |
+| [PostHog actions](#posthog-actions) | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow. |
 
 ## Triggers
 
-Every campaign starts with a trigger. Triggers represent actions taken by users that kick off the campaign workflow. There are two types of triggers:
+Every workflow starts with a trigger. Triggers represent actions taken by users that kick off the workflow. There are two types of triggers:
 
 | Trigger type | Description |
 |--------------|-------------|
 | Event trigger | A captured [PostHog event](/docs/data/events) (e.g. `signed up`) |
-| Webhook trigger | Programmatically start a campaign with a webhook |
+| Webhook trigger | Programmatically start a workflow with a webhook |
 
 ### Event triggers
 
@@ -49,9 +52,9 @@ Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog 
 
 | Dispatch type | Description |
 |--------------|-------------|
-| Email | Send an email natively through PostHog. Configured in the [messaging channels](/docs/messaging/configure-channels) section. |
-| Slack | Send a message to a slack channel. Configured in the [messaging channels](/docs/messaging/configure-channels) section. |
-| Webhook | Call external systems. Configured in the [messaging channels](/docs/messaging/configure-channels) section. |
+| Email | Send an email natively through PostHog. Configured in the [messaging channels](/docs/workflows/configure-channels) section. |
+| Slack | Send a message to a slack channel. Configured in the [messaging channels](/docs/workflows/configure-channels) section. |
+| Webhook | Call external systems. Configured in the [messaging channels](/docs/workflows/configure-channels) section. |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
 ## Delays
@@ -64,11 +67,11 @@ Delays help you control the timing of your messages. There are 3 types of delays
 | Wait until condition | Wait until a specific condition is met (e.g. user has property set to a specific value). |
 | Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5). |
 
-You can see an example of a delay in the [email drip campaign](/docs/messaging/email-drip-campaign) tutorial.
+You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
 ## Audience splits
 
-Audience splits help you target your messages to specific groups of users. There are 2 types of audience splits:
+Audience splits help you target your automation or messages to specific groups of users. There are 2 types of audience splits:
 
 | Audience split type | Description |
 |--------------|-------------|

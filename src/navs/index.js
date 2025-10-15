@@ -4606,18 +4606,18 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Messaging',
+            name: 'Workflows',
             icon: 'IconMegaphone',
             color: 'red',
-            url: '/docs/messaging',
-            description: 'Create campaigns to send messages to your users.',
+            url: '/docs/workflows',
+            description: 'Create automations or campaigns to send messages to your users.',
             children: [
                 {
-                    name: 'Messaging',
+                    name: 'Workflows',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/messaging',
+                    url: '/docs/workflows',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
@@ -4626,21 +4626,21 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/messaging/start-here',
+                    url: '/docs/workflows/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Configure a messaging channel',
-                    url: '/docs/messaging/configure-channels',
+                    url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Design your first campaign',
-                    url: '/docs/messaging/launch-campaign',
+                    name: 'Launch your first workflow',
+                    url: '/docs/workflows/launch-workflow',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
@@ -4649,8 +4649,8 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Campaign builder',
-                    url: '/docs/messaging/campaign-builder',
+                    name: 'Workflow builder',
+                    url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
@@ -4659,7 +4659,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Create a drip campaign',
-                    url: '/docs/messaging/email-drip-campaign',
+                    url: '/docs/workflows/email-drip-campaign',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
@@ -4668,7 +4668,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Troubleshooting and FAQs',
-                    url: '/docs/messaging/troubleshooting',
+                    url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },
