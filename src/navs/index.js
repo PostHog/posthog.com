@@ -374,6 +374,10 @@ export const dataPipelines = {
                     name: 'Redshift',
                     url: '/docs/cdp/batch-exports/redshift',
                 },
+                {
+                    name: 'Databricks',
+                    url: '/docs/cdp/batch-exports/databricks',
+                },
             ],
         },
         {
