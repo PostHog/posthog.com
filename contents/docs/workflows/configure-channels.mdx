@@ -12,9 +12,9 @@ import Beta from './_snippets/beta.mdx'
 
 <Step title="Create a new messaging channel" badge="required">
 
-Before you can design a campaign, you need to configure a messaging channel. Campaigns use messaging channels to deliver messages to your users.
+Before you can design a workflow, you need to configure a messaging channel. Workflows that send messages use messaging channels to deliver messages to your users.
 
-To create a new channel, go to messaging > [**Channels** tab](https://app.posthog.com/messaging/channels) > click **+ New channel**, and select the channel you want to configure:
+To create a new channel, go to workflows > [**Channels** tab](https://app.posthog.com/messaging/channels) > click **+ New channel**, and select the channel you want to configure:
 
 <Tab.Group tabs={[
 'Email', 
@@ -30,7 +30,7 @@ To create a new channel, go to messaging > [**Channels** tab](https://app.postho
 
 Email is the default messaging channel in PostHog.  
 
-You can use it to send **[drip campaigns](/docs/messaging/email-drip-campaign), transactional messages, or announcements** directly from the Campaign Builder.
+You can use it to send **[drip campaigns](/docs/workflows/email-drip-campaign), transactional messages, or announcements** directly from the Campaign Builder.
 
 ### Configure the channel
 
@@ -80,7 +80,7 @@ Navigate to **Messaging** > **Templates** tab > click **+ Create new**.
 
 - Give your template a name.
 - Write your subject line and body content (HTML and text versions are supported).
-- Use variables like `{{ person.name }}` to personalize your message. See the [campaign builder](/docs/messaging/campaign-builder) documentation for more information on available variables.
+- Use variables like `{{ person.name }}` to personalize your message. See the [campaign builder](/docs/workflows/campaign-builder) documentation for more information on available variables.
 
 Save your template — you'll be able to select it later when you design a campaign.
 
@@ -88,12 +88,12 @@ You'll still be able to edit the message in the campaign builder.
 
 </Step>
 
-<Step title="Use in a campaign" badge="required">
+<Step title="Use in a workflow" badge="required">
 
-Once your channel is created, you can use it in a campaign to deliver messages to your users.
+Once your channel is created, you can use it in a workflow to deliver messages to your users.
 
-<CallToAction type="primary" to="/docs/messaging/launch-campaign">
-  Launch your first campaign
+<CallToAction type="primary" to="/docs/workflows/launch-workflow">
+  Launch your first workflow
 </CallToAction>
 
 </Step>

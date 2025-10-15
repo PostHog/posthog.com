@@ -25,7 +25,7 @@ export const Content = () => {
                         messages and when they're sent.
                     </p>
                     <p>
-                        <Link to="/docs/messaging/workflow-builder">Workflows</Link> are made up of components that you
+                        <Link to="/docs/workflows/workflow-builder">Workflows</Link> are made up of components that you
                         arrange; triggers, actions, delays, audience splits, and PostHog actions. Every workflow starts
                         with a trigger and ends with an exit, but you can add as much logic in between as needed.
                     </p>
@@ -79,7 +79,11 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
-                <p>PLACEHOLDER</p>
+                <p>
+                    Workflows is currently in early beta. While in beta, workflows is free to use. After the beta, we
+                    are planning to charge for usage based on the number of real-time destinations and messages sent per
+                    month, with a generous free tier.
+                </p>
             </section>
 
             <section className="mb-8">
@@ -90,14 +94,14 @@ export const Content = () => {
                     <ResourceItem
                         type="Getting started"
                         title="Start here"
-                        description="A high-level overview of the integration process for messaging"
-                        url="/docs/messaging/start-here"
+                        description="A high-level overview of the integration process for workflows"
+                        url="/docs/workflows/start-here"
                     />
                     <ResourceItem
                         type="Quickstart"
                         title="Set up a messaging channel"
                         description="Configure a messaging channel for your first campaign"
-                        url="/docs/messaging/configure-channels"
+                        url="/docs/workflows/configure-channels"
                     />
                     <ResourceItem
                         type="Concepts"
@@ -114,7 +118,7 @@ export const Content = () => {
 const Messaging: React.FC = () => {
     return (
         <ReaderView>
-            <SEO title="Messaging - Docs - PostHog" />
+            <SEO title="Workflows - Docs - PostHog" />
 
             <div className="mx-auto max-w-4xl">
                 <section className="mb-6">
@@ -123,7 +127,7 @@ const Messaging: React.FC = () => {
                         title="Workflows"
                         description="Create workflows that automate actions or send messages to your users."
                         buttonText="Installation guide"
-                        buttonLink="/docs/messaging/start-here"
+                        buttonLink="/docs/workflows/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
                         imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png"
                         imageClasses="max-h-48 md:max-h-64"

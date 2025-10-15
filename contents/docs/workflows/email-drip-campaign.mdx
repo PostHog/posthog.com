@@ -44,9 +44,11 @@ The trigger block has a little exclamation mark. This means it is not configured
 
 Now, let's click on the trigger block and configure it. In a new workflow, the trigger doesn't have any default trigger events. Triggers tell PostHog what events will start the workflow workflow.
 
+Change the frequency drop down to `"One time"` this means a user will only go through this workflow once, and cannot be re-enrolled.
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_light_40e539b7ee.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_dark_02b15cd094.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
     classes="rounded"
     alt="Trigger warning that event is required"
 />
@@ -94,7 +96,7 @@ Then, click on the email block to configure it. Set the **subject line** and **s
 
 > If you haven't configured an email channel yet, you will need to do that first.
 > 
-> <CallToAction className="mb-4" type="primary" to="/docs/messaging/configure-channels">
+> <CallToAction className="mb-4" type="primary" to="/docs/workflows/configure-channels">
 >   Configure an email channel
 > </CallToAction>
 > 
