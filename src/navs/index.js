@@ -2001,6 +2001,20 @@ export const docsMenu = {
                         {
                             name: 'Nuxt.js',
                             url: '/docs/libraries/nuxt-js',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/libraries/nuxt-js',
+                                },
+                                {
+                                    name: '3.0 to 3.6',
+                                    url: '/docs/libraries/nuxt-js-3-6',
+                                },
+                                {
+                                    name: '2.16 and below',
+                                    url: '/docs/libraries/nuxt-js-2',
+                                },
+                            ],
                         },
                         {
                             name: 'n8n',
@@ -3691,6 +3705,16 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/error-tracking/installation/nuxt',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/error-tracking/installation/nuxt',
+                                },
+                                {
+                                    name: '3.6 and below',
+                                    url: '/docs/error-tracking/installation/nuxt-3-6',
+                                },
+                            ],
                         },
                         {
                             name: 'SvelteKit',
