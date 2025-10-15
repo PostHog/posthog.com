@@ -79,10 +79,12 @@ export const Content = () => {
                 <h2 className="mb-4 mt-0" id="pricing">
                     Pricing
                 </h2>
+                <p>Workflows is currently in early beta. While in beta, workflows is free to use.</p>
                 <p>
-                    Workflows is currently in early beta. While in beta, workflows is free to use. After the beta, we
-                    are planning to charge for usage based on the number of real-time destinations and messages sent per
-                    month, with a generous free tier.
+                    After the beta, we are planning to charge for usage based on the number of real-time destinations
+                    used and messages sent per month. Workflows with more destinations or messages will count as higher
+                    usage than those with fewer. We are planning a generous free tier of 10,000 real time
+                    destinations/messages per month, and then volume discounts as usage increases.
                 </p>
             </section>
 
