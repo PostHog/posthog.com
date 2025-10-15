@@ -14,7 +14,9 @@ export const Content = () => {
     return (
         <>
             <section className="mb-8">
-                <h2 className="mb-4">Overview</h2>
+                <h2 className="mb-4" id="overview">
+                    Overview
+                </h2>
                 <Beta />
                 <div>
                     <p>
@@ -44,7 +46,9 @@ export const Content = () => {
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Why use workflows?</h2>
+                <h2 className="mb-4 mt-0" id="why-use-workflows">
+                    Why use workflows?
+                </h2>
                 <div>
                     <ul>
                         <li>
@@ -65,17 +69,23 @@ export const Content = () => {
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Channels and platforms</h2>
+                <h2 className="mb-4 mt-0" id="channels-and-platforms">
+                    Channels and platforms
+                </h2>
                 <ChannelPlatforms />
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4 mt-0">Pricing</h2>
+                <h2 className="mb-4 mt-0" id="pricing">
+                    Pricing
+                </h2>
                 <p>PLACEHOLDER</p>
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4">Next steps</h2>
+                <h2 className="mb-4" id="next-steps">
+                    Next steps
+                </h2>
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
                     <ResourceItem
                         type="Getting started"
