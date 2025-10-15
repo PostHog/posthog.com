@@ -4,13 +4,11 @@ templateId:
     - template-june
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You can send analytics events to June to enrich your customer data in real-time.
 
-<Requirements />
 
 ## Configuring June
 
