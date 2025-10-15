@@ -1,90 +1,163 @@
 ---
 title: How to create unsubscribe surveys
 date: 2025-10-15
-tags: [surveys, unsubscribe, retention, tutorial]
+author:
+  - Faisal
+showTitle: true
+sidebar: Docs
+tags:
+  - surveys
+  - feedback
+  - product-analytics
 ---
 
-# How to create unsubscribe surveys
+If users unsubscribe from your newsletter or stop using your product, it's important to understand **why**.  
+With PostHog Surveys, you can create a quick, automated **unsubscribe survey** to capture feedback right when users decide to leave — helping your team reduce churn and improve user experience.
 
-Unsubscribe surveys are a simple way to learn why users are leaving your product or mailing list. With PostHog, you can quickly create an in-app or email-triggered survey to capture this feedback and use it to improve retention.
-
-In this tutorial, we'll walk through creating an unsubscribe survey, triggering it when users unsubscribe, and analyzing responses.
-
----
-
-## Prerequisites
-
-- A [PostHog account](https://app.posthog.com/signup) with Surveys enabled  
-- Access to your app or email tool where unsubscribe events are tracked  
-- (Optional) A Slack workspace or webhook integration for sending responses
-
----
-
-## Step 1: Create a new survey
-
-1. Go to **PostHog → Surveys** in the left-hand menu.  
-2. Click **New survey**.  
-3. Choose **Start from scratch** or pick an **Unsubscribe feedback** template if available.  
-4. Give your survey a name like *Unsubscribe reasons survey*.
+In this tutorial, we’ll create an unsubscribe survey that automatically appears when a user clicks an unsubscribe link or completes a “cancel” action in your app.
 
 ---
 
-## Step 2: Add survey questions
+## Step 1: Create an unsubscribe survey
 
-- Add a **multiple-choice** question like:  
-  *“Why are you unsubscribing?”* with options such as:  
-  - Too many emails  
-  - Content not relevant  
-  - Switching to a competitor  
-  - Other  
+1. Go to your [PostHog Surveys dashboard](https://us.posthog.com/surveys).
+2. Click **+ New survey**.
+3. Choose the **Website survey** type.
+4. Set your **title** to `Unsubscribe feedback survey`.
+5. Under **Questions**, add something like:
+   - “What made you decide to unsubscribe?”
+   - “How could we improve your experience?”
+6. For the response type, select **Short text** or **Long text** depending on your use case.
+7. Click **Next** to continue.
 
-- (Optional) Add a **short text input** field:  
-  *“Anything we could do better?”*  
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1729000001/unsubscribe-survey-create.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1729000001/unsubscribe-survey-create-dark.png"
+  alt="Creating a new unsubscribe survey in PostHog"
+  classes="rounded"
+/>
 
-Keep the survey short — 1–2 questions is usually enough.
-
----
-
-## Step 3: Configure the trigger
-
-1. In the **Targeting & Triggers** section, choose when the survey should appear.  
-   - **In-app unsubscribe flow**: Trigger when a user clicks an unsubscribe button or reaches an “unsubscribe success” page.  
-   - **Email unsubscribe link**: Use your email platform to redirect unsubscribers to a page where the PostHog survey is embedded.  
-
-2. You can target based on events like:  
-   - `$pageview` of `/unsubscribe-confirmation`  
-   - Custom event `email_unsubscribed`
+> 💡 **Tip:** Keep your survey short — one or two questions are ideal.  
+> The goal is to capture insights without interrupting the user too much.
 
 ---
 
-## Step 4: Publish the survey
+## Step 2: Set a trigger for the unsubscribe event
 
-- Save and publish your survey.  
-- Test the unsubscribe flow yourself to confirm the survey appears at the right moment.  
+Next, we’ll configure PostHog to automatically trigger the survey when a user performs an unsubscribe or cancel action.
+
+### Option 1: Use an event-based trigger
+
+1. In your survey setup, go to the **Targeting** section.
+2. Under **Show survey when**, choose **Event performed**.
+3. Select the event you use for unsubscribe actions, such as `user unsubscribed` or `subscription_cancelled`.
+4. Adjust filters if needed (for example, only for specific plans or countries).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1729000002/unsubscribe-event-trigger.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1729000002/unsubscribe-event-trigger-dark.pn"
+  alt="Setting unsubscribe event trigger in PostHog"
+  classes="rounded"
+/>
+
+### Option 2: Trigger manually via JavaScript
+
+If your unsubscribe action isn’t tracked yet, you can manually call the PostHog survey trigger in your frontend code:
+
+```js
+posthog.capture('user_unsubscribed', {
+  plan: 'Pro',
+  reason: 'Too expensive',
+})
+Then in your survey, select user_unsubscribed as the event trigger.
 
 ---
 
-## Step 5: Analyze responses
+### Step 3: Customize survey appearance and placement
 
-1. Go to **PostHog → Surveys → Results**.  
-2. View counts for each multiple-choice option to see the most common reasons.  
-3. Export responses to CSV, or connect them to:  
-   - **Slack integration** (send each new response to a channel).  
-   - **Webhooks** for custom workflows.  
+1. In the **Appearance** tab, choose a subtle placement — for example, *center modal* or *bottom-right corner*.
+2. Change colors or background to match your brand style.
+3. Set **display frequency** to *Once per user*.
 
-This feedback can guide product, marketing, or support improvements.
+> **🖌️ Tip:** Keep the design minimal — users unsubscribing are less likely to engage if the popup feels intrusive.
 
 ---
 
-## Best practices
+### Step 4: Publish and test
 
-- Keep surveys short to maximize completion.  
-- Rotate questions occasionally to avoid survey fatigue.  
-- Share results with your product and marketing teams regularly.  
+1. Click **Publish survey**.
+2. In your app or test page, perform the **unsubscribe action**.
+3. The survey should appear automatically.
+   If it doesn’t, check that your **event name matches exactly** in both your code and PostHog.
+
+```html
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1729000003/unsubscribe-survey-preview.png"
+  imageDark="hhttps://res.cloudinary.com/dmukukwp6/image/upload/v1729000003/unsubscribe-survey-preview-dark.pn"
+  alt="Testing the unsubscribe survey in PostHog"
+  classes="rounded"
+/>
+```
 
 ---
 
-## Next steps
+### Step 5: Analyze unsubscribe feedback
 
-- Learn more in the [PostHog Surveys documentation](https://posthog.com/docs/surveys).  
-- Try combining unsubscribe survey data with retention analysis in [Insights](https://posthog.com/docs/insights).  
+1. After users start unsubscribing, responses will appear under **Surveys → Results**.
+2. View text responses to understand common reasons for churn.
+3. Tag recurring themes such as *price*, *frequency*, or *content relevance*.
+4. Correlate survey data with user events — for example, check if users who unsubscribed also had low engagement metrics.
+
+You can also visualize this data in **Insights**:
+
+1. Go to **Insights**.
+2. Create a new insight using the `user_unsubscribed` event.
+3. Add filters for `$survey_response` properties.
+4. Plot a trend line of unsubscribe reasons over time.
+
+---
+
+### Step 6: Automate follow-ups (optional)
+
+To act on feedback, you can send survey responses to your **CRM or Slack workspace**.
+
+For example, connect via **Zapier** or **Data Pipelines** to automatically:
+
+* Create a “feedback” ticket in your help desk.
+* Notify your customer success team in Slack when someone unsubscribes.
+
+```html
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/demo/image/upload/v1729000000/unsubscribe-zapier.png"
+  imageDark="https://res.cloudinary.com/demo/image/upload/v1729000000/unsubscribe-zapier-dark.png"
+  alt="Automating unsubscribe feedback in Zapier"
+  classes="rounded"
+/>
+```
+
+---
+
+### Available properties
+
+You can extract the following properties from surveys:
+
+| Property                                           | Description                                 |
+| -------------------------------------------------- | ------------------------------------------- |
+| `event.properties.$survey_name`                    | The name of the unsubscribe survey          |
+| `event.properties.$survey_response_{response_key}` | The user’s feedback text                    |
+| `event.properties.$survey_completed`               | Whether the user completed the survey       |
+| `person.email`                                     | The email address of the unsubscribed user  |
+| `person.properties.plan`                           | The user’s subscription plan (if available) |
+
+---
+
+### Further reading
+
+- [How to set up surveys in Next.js](/tutorials/nextjs-surveys)
+- [How to show a survey after a delay](/tutorials/delayed-survey)
+- [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+```html
+<NewsletterForm />
+```
+
