@@ -137,7 +137,7 @@ For the purposes of these examples, assume that these two batch exports have alr
 
 The following query can be used to count the number of unique persons that have triggered events:
 
-```sql
+```sql runInPostHog=false
 SELECT
   event,
   COUNT(persons.person_id) AS unique_persons_count

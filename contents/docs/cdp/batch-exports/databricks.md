@@ -30,7 +30,7 @@ To create a batch export to Databricks, you need the following:
 
 Batch exports uses SQL warehouses to export data into your Delta tables.
 
-Can can use either an existing warehouse, or you can [create a new one](https://docs.databricks.com/aws/en/compute/sql-warehouse/create).
+You can use either an existing warehouse, or you can [create a new one](https://docs.databricks.com/aws/en/compute/sql-warehouse/create).
 
 You will need to make a note of the **Server hostname** and **HTTP path** for your warehouse:
 
@@ -87,10 +87,9 @@ The service principal needs the following permissions:
 
 You can grant these permissions using SQL commands in Databricks:
 
-```sql
+```sql runInPostHog=false
 -- Grant catalog permissions
 GRANT USE CATALOG ON CATALOG <catalog_name> TO <service_principal_name>;
-GRANT CREATE SCHEMA ON CATALOG <catalog_name> TO <service_principal_name>;
 
 -- Grant schema permissions
 GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_name>;
@@ -101,12 +100,47 @@ GRANT MODIFY ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_name>;
 > **Note:** Replace `<catalog_name>`, `<schema_name>`, and `<service_principal_name>` with your actual values.
 
 
+## Creating the batch export
+
+1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+2. Click **+ New destination** in the top-right corner.
+3. Search for **Databricks**.
+4. Click the **+ Create** button.
+5. Follow the steps to create a Databricks integration (if you haven't already):
+   - Enter a name for the integration
+   - Enter your **Server hostname** (from [step 1](#1-sql-warehouse))
+   - Enter your **Client ID** (from [step 4](#4-generate-oauth-credentials))
+   - Enter your **Client Secret** (from [step 4](#4-generate-oauth-credentials))
+6. Fill in the necessary [configuration details](#databricks-configuration).
+7. Finalize the creation by clicking on "Create".
+8. Done! The batch export will schedule its first run on the start of the next period.
+
+## Databricks configuration
+
+Configuring a batch export targeting Databricks requires the following configuration values:
+
+**Connection settings:**
+* **Integration:** Select the Databricks integration you created (or create a new one). The integration stores your server hostname and OAuth credentials securely.
+* **HTTP Path:** The HTTP path value for your SQL warehouse or all-purpose compute cluster (e.g., `/sql/1.0/warehouses/abc123def456`).
+
+**Destination settings:**
+* **Catalog:** The name of the Databricks catalog where the table will be created.
+* **Schema:** The name of the schema within the catalog where the table will be created.
+* **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically.
+
+**Advanced settings (optional):**
+* **Table partition field:** The field to partition the table by. Partitioning can improve query performance for large tables. By default:
+  - Events model: partitioned by `timestamp`
+  - Sessions model: partitioned by `end_timestamp`
+  - Persons model: no default partitioning
+* **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields. Enabled by default. Requires Databricks Runtime 15.3 or above. If disabled, `STRING` type will be used instead.
+
 
 ## Models
 
 This section describes the models that can be exported to Databricks.
 
-> **Note:** New fields may be added to these models over time. If automatic schema evolution is enabled (the default), new fields will be automatically added to your destination tables. Otherwise, you can manually add missing fields, and they will be populated in future exports.
+> **Note:** New fields may be added to these models over time. PostHog uses Databricks' [automatic schema evolution](https://docs.databricks.com/aws/en/delta/update-schema#automatic-schema-evolution-for-delta-lake-merge) feature, which means these new fields will be automatically added to your destination tables. Existing columns are never removed or modified.
 
 ### Events model
 
@@ -140,124 +174,39 @@ The schema of the model as created in Databricks is:
 
 The Databricks table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`.
 
-## Creating the batch export
-
-1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
-2. Click **+ New destination** in the top-right corner.
-3. Search for **Databricks**.
-4. Click the **+ Create** button.
-5. Follow the steps to create a Databricks integration (if you haven't already):
-   - Enter a name for the integration
-   - Enter your **Server hostname** (from step 5 in [Setting up Databricks access](#setting-up-databricks-access))
-   - Enter your **Client ID** (from step 2 in [Setting up Databricks access](#setting-up-databricks-access))
-   - Enter your **Client Secret** (from step 2 in [Setting up Databricks access](#setting-up-databricks-access))
-6. Fill in the necessary [configuration details](#databricks-configuration).
-7. Finalize the creation by clicking on "Create".
-8. Done! The batch export will schedule its first run on the start of the next period.
-
-## Databricks configuration
-
-Configuring a batch export targeting Databricks requires the following configuration values:
-
-**Connection settings:**
-* **Integration:** Select the Databricks integration you created (or create a new one). The integration stores your server hostname and OAuth credentials securely.
-* **HTTP Path:** The HTTP path value for your SQL warehouse or all-purpose compute cluster (e.g., `/sql/1.0/warehouses/abc123def456`).
-
-**Destination settings:**
-* **Catalog:** The name of the Databricks catalog where the table will be created.
-* **Schema:** The name of the schema within the catalog where the table will be created.
-* **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically.
-
-**Advanced settings (optional):**
-* **Table partition field:** The field to partition the table by. Partitioning can improve query performance for large tables. By default:
-  - Events model: partitioned by `timestamp`
-  - Sessions model: partitioned by `end_timestamp`
-  - Persons model: no default partitioning
-* **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields. Enabled by default. Requires Databricks Runtime 15.3 or above. If disabled, `STRING` type will be used instead.
-* **Automatic schema evolution:** Whether to automatically add new fields to the destination table when they appear in the source data. Enabled by default. This uses Databricks' [automatic schema evolution](https://docs.databricks.com/aws/en/delta/update-schema#automatic-schema-evolution-for-delta-lake-merge) feature. Note that columns are never dropped from the destination table.
-
-## Examples
-
-These examples illustrate how to use the data from batch exports in Databricks.
-
-### Requirements
-
-Two batch exports need to be created:
-* An events model batch export.
-* A persons model batch export.
-
-For the purposes of these examples, assume that these two batch exports have already been created and have exported some data to Databricks in tables `example_catalog.example_schema.events` and `example_catalog.example_schema.persons`.
-
-### Example: Count unique persons that have triggered an event
-
-The following query can be used to count the number of unique persons that have triggered events:
-
-```sql
-SELECT
-  event,
-  COUNT(DISTINCT persons.person_id) AS unique_persons_count
-FROM
-  example_catalog.example_schema.events AS events
-LEFT JOIN
-  example_catalog.example_schema.persons AS persons
-  ON events.distinct_id = persons.distinct_id
-  AND events.team_id = persons.team_id
-WHERE
-  persons.person_id IS NOT NULL
-GROUP BY
-  event
-ORDER BY
-  unique_persons_count DESC
-```
-
-### Example: Query properties using VARIANT type
-
-If you're using the `VARIANT` type for properties, you can query nested JSON fields efficiently:
-
-```sql
-SELECT
-  event,
-  properties:$browser AS browser,
-  properties:$current_url AS current_url,
-  COUNT(*) AS event_count
-FROM
-  example_catalog.example_schema.events
-WHERE
-  timestamp >= CURRENT_DATE() - INTERVAL 7 DAYS
-GROUP BY
-  event,
-  browser,
-  current_url
-ORDER BY
-  event_count DESC
-LIMIT 100
-```
-
-> **Note:** The `:` notation is used to access fields within VARIANT columns. See [Databricks VARIANT documentation](https://docs.databricks.com/aws/en/semi-structured/variant) for more details.
 
 ## FAQ
 
-### How does PostHog keep the persons model (or any mutable model) up to date?
+### How is data exported into Databricks?
 
-Exporting a mutable model can be divided into new rows that have to be inserted, and existing rows that have to be updated. When a PostHog batch export exports mutable data (like the persons model) to Databricks, it executes a merge operation to apply new updates to existing rows.
+The batch export process follows a consistent pattern regardless of the model being exported, with variations depending on whether the model is mutable (like persons) or immutable (like events).
 
-The operation the PostHog batch export executes in Databricks roughly involves the following steps:
+**For immutable models (e.g., events):**
 
-1. Creating a temporary stage table and a temporary volume.
-2. Uploading data as Parquet files to the temporary volume.
-3. Copying data from the volume into the stage table.
-4. Executing a merge operation between the existing table and stage table:
-   - Any rows that match in the final table and for which any of the stage table's version fields is higher are updated.
-   - Any new rows not found in the final table are inserted.
-5. Drop the stage table and temporary volume.
+1. Create a temporary volume to store Parquet files.
+2. Create the destination table if it doesn't exist.
+3. Query data from PostHog and transform it into Parquet format.
+4. Upload Parquet files to the temporary volume.
+5. Copy data directly from the volume into the destination table using Databricks' `COPY INTO` command.
+6. Delete the temporary volume.
 
-This ensures that your persons data always reflects the latest state while maintaining historical records that haven't been updated.
+**For mutable models (e.g., persons, sessions):**
 
-### Why are additional permissions required to export the persons model?
+1. Create a temporary volume to store Parquet files.
+2. Create the destination table if it doesn't exist.
+3. Create a temporary stage table with the same schema as the destination table.
+4. Query data from PostHog and transform it into Parquet format.
+5. Upload Parquet files to the temporary volume.
+6. Copy data from the volume into the **stage table** using `COPY INTO`.
+7. Execute a `MERGE` operation between the stage table and the destination table:
+   - Update existing rows where the stage table has newer versions.
+   - Insert new rows that don't exist in the destination table.
+8. Delete the stage table and temporary volume.
 
-The merge operation described above explains why a mutable export requires additional permissions beyond those required for exporting the events model:
-- `CREATE TABLE` permission is needed to create temporary stage tables.
-- `DELETE` permission (or table modification permissions) is needed to drop the stage tables after the merge operation completes.
+The merge operation for mutable models ensures that:
+- Rows that match in the destination table and have newer version fields in the stage table are updated.
+- New rows not found in the destination table are inserted.
+- Your data always reflects the latest state while maintaining historical records that haven't been updated.
 
 ### What is the benefit of table partitioning?
 
@@ -271,17 +220,6 @@ By default, PostHog automatically partitions:
 
 You can override this by specifying a different partition field in the configuration.
 
-### What is automatic schema evolution?
-
-Automatic schema evolution is a feature that automatically adds new columns to your destination table when they appear in the source data. This is useful because PostHog may add new fields over time, and with automatic schema evolution enabled, you don't need to manually update your table schema.
-
-When enabled (the default), PostHog uses Databricks' `MERGE WITH SCHEMA EVOLUTION` feature to handle schema changes automatically. Note that:
-- New columns are added automatically
-- Existing columns are never removed
-- Column types are never changed
-
-If you prefer to manage schema changes manually, you can disable this option in the configuration.
-
 ### Should I use VARIANT or STRING type for JSON fields?
 
 We recommend using `VARIANT` (the default) for the following reasons:
@@ -294,12 +232,3 @@ However, you should use `STRING` if:
 - You're using Databricks Runtime older than 15.3
 - You need to export the data to another system that doesn't support VARIANT
 - You prefer to handle JSON parsing in your application code
-
-### What's the difference between a SQL warehouse and an all-purpose cluster?
-
-For batch exports, we recommend using a **SQL warehouse** rather than an all-purpose cluster because:
-- SQL warehouses are optimized for SQL workloads and data export tasks
-- They provide better cost management with auto-suspend features
-- They offer better concurrency and performance for analytics queries
-
-However, both will work for batch exports as long as you have the correct HTTP path configured.
