@@ -1,5 +1,5 @@
 ---
-title: Hogpatch: Our SF Home for YC Founders
+title: Hogpatch - Our SF Home for YC Founders
 sidebar: Handbook
 showTitle: true
 ---
