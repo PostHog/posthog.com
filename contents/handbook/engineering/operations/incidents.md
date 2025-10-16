@@ -7,7 +7,7 @@ showTitle: true
 # The TL;DR 
 
 * If you get paged, acknowledge the page and look at the associated metrics - if it looks even slightly bad and not recovering - **CREATE AN INCIDENT**
-* If you notice something broken with the app, or a user reports something clearly broken - **CREATE AN INCIDENT**
+* If you notice something broken with the app (not just a bug) - **CREATE AN INCIDENT**
 * If you are not sure - **CREATE AN INCIDENT**
 * _How?_ 
   * Click the `Declare incident` button on an alert or do `/inc` in any slack channel
@@ -48,6 +48,7 @@ Things that _shouldn’t_ be an incident
 - Expected disruption which happens as part of scheduled maintenance
 
 > Planning some maintenance? Check the [announcements](/handbook/growth/brand/product-announcements) section instead.
+
 
 ### Security-specific guidance
 
