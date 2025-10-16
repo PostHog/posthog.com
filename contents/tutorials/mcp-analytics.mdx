@@ -1,5 +1,5 @@
 ---
-title: How to set up MCP analytics and feature flags for tool calls
+title: How to set up MCP analytics and error tracking
 date: 2025-10-14
 author:
   - arda-eren
@@ -9,9 +9,9 @@ tags:
   - feature flags
 ---
 
-MCP servers give LLMs powerful capabilities, but without analytics you have no visibility into their usage. Which tools get called? How often? Where are the bottlenecks? What's failing? You're flying blind.
+MCP servers give LLMs powerful capabilities, but without analytics and error tracking you're flying blind with no visibility into usage or performance. Which tools get called? How often? Where are the bottlenecks? What's failing?
 
-This tutorial will show you how to add analytics to any MCP server using a simple wrapper pattern. You'll automatically track every tool execution without touching your business logic. 
+This tutorial will show you how to add product analytics and error tracking to any MCP server using a simple wrapper pattern. You'll automatically track every tool execution without touching your business logic. 
 
 By the end, your MCP server will be able to:
 
@@ -20,21 +20,26 @@ By the end, your MCP server will be able to:
 - Record custom metrics
 - Sanitize sensitive data
 
-This integration pattern works for any MCP server and is vendor-agnostic. We'll use PostHog for analytics for this tutorial but you can use any other tool you prefer.
+This integration pattern works for any MCP server and is vendor-agnostic. We'll use PostHog for this tutorial but you can use any developer tool you prefer.
 
-You can follow along with the code in this [GitHub repository](https://github.com/posthog/mcp-analytics-demo).
+The full source code is available in this [GitHub repository](https://github.com/arda-e/mcp-posthog-analytics).
 
 ## Prerequisites
 
 - Node.js 18+ 
-- PostHog account (free tier works)
-- Claude Desktop to test your server
+- PostHog account (free tier)
+- Claude Desktop or another MCP client to test your MCP server
 - Basic TypeScript knowledge
 - Code editor (e.g., VS Code, Cursor)
 
-## Understanding the wrapper pattern for MCP tools
+## A high-level overview of MCP analytics
 
-MCP servers have an architecture that makes the wrapper pattern a natural fit for analytics. Here's what the boilerplate code looke like for registerintg a tool: 
+
+## The wrapper pattern for MCP tools
+
+MCP servers have an architecture that makes the wrapper pattern a natural fit for extended functionality like analytics and error tracking. Why? MCP's functional design means wrapper patterns work seamlessly, unlike other web frameworks with middleware pipelines or class-based systems with decorators.
+
+Here's what the boilerplate code looks like for MCP tool registration: 
 
 ```typescript
 // This is how MCP tools are registered, already functional style
@@ -48,18 +53,19 @@ server.tool(
 
 Since MCP tools are mostly just async functions passed to `server.tool()`, wrapping the handler function is a clean and lightweight way of adding or extending functionality – in this case, analytics.
 
-Unlike web frameworks with middleware pipelines or class-based systems with decorators, MCP's functional design means wrapper patterns work seamlessly without fighting the framework.
+This is the key integration pattern we'll use to build MCP analytics.
 
-## Diagram 
+## 1. Define the MCP analytics provider 
 
+The first step is define an interface for an analytics provider. It defines a standard set of methods for sending analytics data from your MCP server. 
 
+We'll give it three core abilities:
 
-## 1. Define the analyitcs provider interface
+1. Track tool calls 
+2. Capture errors 
+3. Close the analytics client
 
-The interface approach makes your code testable and flexible—swap analytics providers without touching your server code. Want to try Mixpanel instead? Write a new implementation. Need to debug locally? Create a file-based logger. Running tests? Use a no-emit version that tracks calls without sending data:
-
-```typescript
-// src/analytics.ts (add to existing file)
+```typescript file="src/analytics.ts"
 export interface AnalyticsProvider {
   /**
    * Track a successful tool execution with timing information
@@ -82,9 +88,13 @@ export interface AnalyticsProvider {
 }
 ```
 
-## 2. The withAnalytics wrapper
+This approach makes your code testable and flexible. Think of it as a generic adapter for analytics calls. 
 
-Here's the wrapper that makes analytics automatic by intercepting every tool call, measuring its performance, and tracking the results:
+Want to use a different analytics provider? Write a new implementation. Need to debug locally? Create a file-based logger. Running tests? Use a no-emit version that tracks calls without sending data.
+
+## 2. Create the withAnalytics wrapper
+
+The next step is create a wrapper that intercepts every tool call. The wrapper function is responsible for invoking the analytics provider methods we defined in the previous step.
 
 ```typescript file="src/analytics.ts"
 // src/analytics.ts
@@ -121,19 +131,18 @@ export async function withAnalytics<T>(
 }
 ```
 
-This wrapper function:
+The `withAnalytics()` wrapper function:
 
-- Times every execution automatically
-- Tracks success/failure without extra code
+- Times every tool call execution 
+- Tracks success/failure 
 - Preserves normal error handling
-- Works even without analytics (graceful degradation)
+- Works without an analytics provider
 
+## 3. Create MCP tools
 
-## 3. Create your tools
+Now that our analytics wrapper is ready, let's create our MCP tools. For this tutorial, we'll hardcode simple datasets and results for the tools to fetch. 
 
-First, pure business logic with zero analytics dependencies. Keeping your tools clean means they're easier to test, maintain, and reuse across different contexts:
-
-```typescript
+```typescript file="src/tools.ts"
 // src/tools.ts
 export async function getInventory() {
   return [
@@ -157,11 +166,14 @@ export async function analyzeData(data: string) {
 }
 ```
 
+Notice that these tools contain *only* business logic, with zero analytics dependencies. Keeping your tool definitions decoupled from other external logic makes them easier to test, maintain, and reuse across different contexts.
+ 
 ## 4. Register tools with analytics
 
-Now register your tools, wrapping each one:
+Now it's time to register your tools with the MCP server, wrapping each handler function with the `withAnalytics()` wrapper.
 
-```typescript// src/server.ts
+```typescript file="src/server.ts"
+// src/server.ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -216,13 +228,39 @@ export async function createServer(analytics?: AnalyticsProvider) {
 }
 ```
 
-Notice how clean this is. Just wrap each handler and you're done.
+If you want capture additional custom properties, you can adapt the wrapper pattern and call the `trackTool()` method with the additional properties.
+
+```typescript file="src/server.ts"
+// In src/server.ts
+server.tool(
+  "getInventory",
+  {},
+  { title: "Get product inventory" },
+  async () => withAnalytics(
+    analytics,
+    "getInventory",
+    async () => {
+      const result = await tools.getInventory();
+      
+      // Track additional custom metrics as a SEPARATE event
+      await analytics?.trackTool("inventory_metrics", {
+        duration_ms: 0,
+        success: true,
+        items_returned: result.length,
+        cache_hit: false
+      });
+      
+      return result;
+    }
+  )
+);
+```
 
 ## 5. Implement PostHog tracking
 
-Now let's send those analytics somewhere useful.
+Now let's send those analytics somewhere useful. The next integration step is to initialize a PostHog SDK client that implements the `AnalyticsProvider` interface. 
 
-```typescript
+```typescript file="src/posthog.ts"
 // src/posthog.ts
 import { PostHog } from "posthog-node";
 import { AnalyticsProvider } from "./analytics.js";
@@ -249,14 +287,10 @@ export class PostHogAnalyticsProvider implements AnalyticsProvider {
   }
   
   async trackError(error: Error, context: any): Promise<void> {
-    this.client.capture({
-      distinctId: this.sessionId,
-      event: "mcp_tool_error",
-      properties: {
-        $exception_type: error.name,
-        $exception_message: error.message,
-        ...context
-      }
+    this.client?.captureException(error, "", {
+        sessionId: this.sessionId,
+        duration_ms: context.duration_ms,
+        args: this.anonymizeData ? this.anonymize(context.args) : context.args,
     });
   }
   
@@ -266,13 +300,13 @@ export class PostHogAnalyticsProvider implements AnalyticsProvider {
 }
 ```
 
-PostHog exception properties: Properties prefixed with $ are special PostHog properties that enable enhanced features. For example, `$exception_type`, `$exception_message`, and `$exception_stack` are automatically recognized by PostHog's error tracking dashboards, giving you built-in filtering and grouping capabilities. 
-
-This makes it easy to identify which errors are most common and track error trends over time without any additional configuration.
+The `PostHogAnalyticsProvider` class leverages the PostHog [Node.js SDK](/docs/libraries/node) to capture [custom events](/docs/product-analytics/capture-events) for product analytics and exceptions for built-in [error tracking](/docs/error-tracking).
 
 ## 6. Create the MCP server
 
-```typescript
+The last implementation step is to create the MCP server with our `PostHogAnalyticsProvider` instance.
+
+```typescript file="src/index.ts"
 // src/index.ts
 import "dotenv/config";
 import { createServer } from "./server.js";
@@ -300,9 +334,17 @@ async function main() {
 main().catch(console.error);
 ```
 
-## 7. Test with Claude
+## 7. Test with Claude Desktop
 
-### Configure Claude Desktop:
+Now we can test our MCP server with Claude Desktop, or any compatible MCP client, to see MCP analytics in action.
+
+Build the MCP server:
+
+```bash
+npm install && npm run build
+```
+
+Configure Claude Desktop to use the MCP server:
 
 ```json
 // ~/Library/Application Support/Claude/claude_desktop_config.json
@@ -310,70 +352,61 @@ main().catch(console.error);
   "mcpServers": {
     "analytics-demo": {
       "command": "/path/to/node",
-      "args": ["/path/to/project/build/index.js"]
+      "args": ["/path/to/project/build/index.js"],
+      "env": {
+        "POSTHOG_API_KEY": "<ph_project_api_key>",
+        "POSTHOG_HOST": "<ph_client_api_host>" // e.g. https://us.i.posthog.com
+      }
     }
   }
 }
 ```
 
-Build and restart Claude:
-
-```bash
-npm run build
-```
-
-### Restart Claude Desktop (Cmd+Q and reopen)
-
 Try these prompts:
 
-- "Show me the inventory" → Fast success
-- "Check stock for product 999" → Error tracking
-- "Analyze this data: quarterly sales" → Slow operation timing
+- "Show me the inventory" → Should successfully return the inventory.
+- "Check stock for product 999" → Should throw an error.
+- "Analyze this data: quarterly sales" → Simulates a slow operation.
 
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_tool_call_compressed_bc097fc4ae.mp4"
+  alt="MCP server tool calls with Claude Desktop"
+  classes="rounded"
+  autoPlay={true}
+  loop={true}
+/>
 
-You can adapt the wrapper pattern for your specific needs without changing your tool implementations:
-
-Track custom metrics
-
-```typescript
-// Pass additional context
-return withAnalytics(
-  analytics,
-  "getInventory",
-  async () => {
-    const result = await tools.getInventory();
-    analytics?.trackTool("getInventory", {
-      duration_ms,
-      success: true,
-      items_returned: result.length,  // Custom metric
-      cache_hit: false                 // Custom metric
-    });
-    return result;
-  }
-);
-```
+<Caption>
+Our MCP server executing tool calls.
+</Caption>
 
 ## 8. Create MCP analytics dashboards
 
-### Creating dashboards
+Now that our MCP server is creating MCP analytics, we can create insights and dashboards in PostHog to visualize the data. We can create:
 
-In PostHog, create these visualizations:
+ - Performance dashboard
+ - Reliability dashboard
+ - Usage dashboard
 
-### Performance dashboard
+Image tk...
 
+<Caption>
 P95 latency by tool (bar chart) to find slow operations
+</Caption>
 
-### Reliability dashboard
+Image tk...
 
+<Caption>
 Success rate by tool (table) to identify problem areas
+</Caption>
 
-### Usage dashboard
+Image tk...
 
+<Caption>
 Tool popularity over time (line chart) to understand patterns
+</Caption>
 
---- 
-
-### Sanitizing sensitive data
+## Privacy and feature flags
 
 If your tools handle sensitive information, you can sanitize it before tracking. PostHog offers both US and EU hosting options, so you can choose the region that meets your compliance requirements:
 
@@ -395,11 +428,9 @@ async trackError(error: Error, context: any) {
   });
 }
 ```
-For GDPR compliance, use PostHog's EU cloud when initializing: host: 'https://eu.i.posthog.com'. This ensures all your data stays within EU data centers.
+For GDPR compliance, use PostHog's EU cloud when initializing `host: 'https://eu.i.posthog.com'`. This ensures all your data stays within EU data centers.
 
-### Feature flags for gradual rollouts
-
-Use PostHog's feature flags to control tool availability without redeploying:
+You can also use PostHog's feature flags to roll out tool availability without redeploying:
 
 ```typescript
 // src/posthog.ts - add this method to PostHogAnalyticsProvider
@@ -438,6 +469,7 @@ export async function createServer(analytics?: PostHogAnalyticsProvider) {
 
 ## Further reading
 
-- Complete code on GitHub
-- MCP TypeScript SDK documentation
-- PostHog Node.js library reference
+- Complete code on [GitHub](https://github.com/arda-e/mcp-posthog-analytics)
+- [MCP: machine copy/paste](/blog/machine-copy-paste-mcp-intro)
+- [What we've leanred about AI-powered features](/newsletter/building-ai-features)
+- [Avoid these AI coding mistakes](/newsletter/ai-coding-mistakes)
