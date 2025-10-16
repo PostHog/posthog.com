@@ -5,6 +5,8 @@ showTitle: true
 hideAnchor: false
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 The goal of our [small teams structure](/handbook/company/small-teams) is to remain fast, innovative, and autonomous as we scale.
 
 This means team changes should happen quickly (in less than one week) and transparently. 

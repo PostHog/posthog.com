@@ -5,6 +5,8 @@ showTitle: true
 hideAnchor: false
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 PostHog is structured for speed, autonomy and innovation.
 
 Many traditional organizations have big, separate functions. You have a product team, an engineering team, customer support, and so on. This slows things down when you scale because there are more layers of communication and complex approval chains. This stifles innovation because you have to get your boss to talk to someone else's boss to get work done. It also means that people can't really see the impact of their work.
