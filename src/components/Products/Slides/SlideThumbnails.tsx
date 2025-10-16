@@ -4,6 +4,7 @@ import { useWindow } from '../../../context/Window'
 import { useApp } from '../../../context/App'
 import { getIsMobile } from 'components/Presentation'
 import { PresentationModeContext } from '../../RadixUI/Tabs'
+import slugify from 'slugify'
 
 interface Slide {
     name: string
@@ -92,13 +93,17 @@ const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProp
 
     useEffect(() => {
         const hash = appWindow?.element?.props?.location?.hash?.slice(1)
-        if (!hasScrolledToHash && hash?.toLowerCase() === slide?.slug?.toLowerCase()) {
+        if (
+            !hasScrolledToHash &&
+            hash &&
+            slugify(slide?.name?.toLowerCase(), { lower: true }) === slugify(hash?.toLowerCase(), { lower: true })
+        ) {
             const selector = slideId ? `[data-slide-id="${slideId}"][data-slide="${index}"]` : `[data-slide="${index}"]`
             const slideElement = document.querySelector(selector)
             slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             setHasScrolledToHash(true)
         }
-    }, [slide])
+    }, [slide, appWindow])
 
     return (
         <div
