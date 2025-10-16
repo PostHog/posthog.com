@@ -172,7 +172,7 @@ To show how to capture events with PostHog, we capture an event when the button 
 def api_dashboard():
     email = request.form.get('email')
     posthog.capture(
-        'home_api_called'
+        'home_api_called',
         distinct_id=email,
     )
     return '', 204
