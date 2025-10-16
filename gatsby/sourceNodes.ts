@@ -81,25 +81,25 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const SDK_REFERENCES_FOLDER_PATHS = [
         {
             id: 'posthog-python',
-            repo: 'gewenyu99/posthog-python',
+            repo: 'posthog/posthog-python',
             repo_branch: 'master',
             folder_path: 'references',
         },
         {
             id: 'posthog-js',
-            repo: 'gewenyu99/posthog-js',
+            repo: 'posthog/posthog-js',
             repo_branch: 'main',
             folder_path: 'packages/browser/references',
         },
         {
             id: 'posthog-node',
-            repo: 'gewenyu99/posthog-js',
+            repo: 'posthog/posthog-js',
             repo_branch: 'main',
             folder_path: 'packages/node/references',
         },
         {
             id: 'posthog-react-native',
-            repo: 'gewenyu99/posthog-js',
+            repo: 'posthog/posthog-js',
             repo_branch: 'main',
             folder_path: 'packages/react-native/references',
         },
