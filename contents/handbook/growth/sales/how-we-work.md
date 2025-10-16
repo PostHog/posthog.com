@@ -23,6 +23,20 @@ TAEs work with:
 
 As we start to generate cold outbound leads, these will be routed to TAEs to work with as well. Customers move off of a TAE to a TAM or CSM 3 months after closing on a prepaid contract (usually annual) - you have to ensure they are well set up, not just contract signed!
 
+#### TAE Territory Review
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AE is picked at random, and we spend 30min going through:
+
+1. Recent Closed Won
+2. Where are you going to end up vs quota this quarter?   a. Confidence (scale of 1-5? a percentage out of 100? what's keeping it from being 5 or 100%?)
+3. Review deals (use this <PrivateLink url="https://www.google.com/url?q=https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view&sa=D&source=calendar&ust=1760881670100431&usg=AOvVaw1WPubzWMOn9rCllOqHkzaw">Salesforce view</>) for this quarter by Commit -> Best Case -> Pipeline
+   a. For "Commit", how could it possibly end up "closed lost?"
+   b. For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
+   c. For "Pipeline", 1-2 opps you're excited about or want to share with the group
+4. Outbound successes and failures
+
+> The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
+
 ### Technical Account Managers
 
 Each TAM is assigned up to 15 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
@@ -32,6 +46,16 @@ We use the "AM Managed" Segment in Vitally to show that an account is part of so
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
+
+#### TAM Territory Review
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
+
+1. Rate your relationship with them (no connection yet/made contact/answering their questions in Slack/trusted advisor)
+2. What's your next step with that customer (annual plan, cross-sell etc).
+3. Are they a churn risk and why?
+
+> The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
 ### Handing off customers to Technical CSMs
 
@@ -50,20 +74,6 @@ We want to ensure the expansion potential of a customer has been thoroughly exha
 If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
 
 > A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
-
-## Weekly sales standup
-
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standups on Wednesday. A Technical AE is picked at random, and we spend 30 min on each going in depth through:
-
-- What has closed since you last reviewed your book?
-- What is your path to quota this quarter? Talk through your ops closing this quarter.
-- What is the plan for any customers over $100k?  Do you have a visit planned?
-- Which accounts are at risk? Look at red health score or sentiment in Vitally.
-- How is cross-adoption going in your existing accounts? Check against Vitally goals.
-
-Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
-
-The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
 ## How commission works - Technical Account Executives
 
