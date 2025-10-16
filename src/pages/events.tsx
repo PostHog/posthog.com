@@ -15,6 +15,7 @@ import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
 import am5geodata_usaLow from '@amcharts/amcharts5-geodata/usaLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import { ZoomImage } from 'components/ZoomImage'
+import { useWindow } from '../context/Window'
 
 type Event = {
     date: string // YYYY-MM-DD
@@ -75,7 +76,10 @@ const parseTime = (timeStr?: string): string | undefined => {
 // Helper to split comma-separated values
 const splitValues = (str?: string): string[] | undefined => {
     if (!str || str === '-') return undefined
-    return str.split(',').map((s) => s.trim()).filter(Boolean)
+    return str
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
 }
 
 // Helper to parse partners
@@ -349,6 +353,7 @@ function Events() {
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
     const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
+    const { appWindow } = useWindow()
 
     // Generate unique event key
     const getEventKey = (event: Event) => {
@@ -520,10 +525,10 @@ function Events() {
                 })
             }
 
-                // Attach zoom handlers
-                ; (chart.events as any).on('wheelended', updateBordersAndStates)
-                ; (chart.events as any).on('panended', updateBordersAndStates)
-                ; (chart.events as any).on('zoomended', updateBordersAndStates)
+            // Attach zoom handlers
+            ;(chart.events as any).on('wheelended', updateBordersAndStates)
+            ;(chart.events as any).on('panended', updateBordersAndStates)
+            ;(chart.events as any).on('zoomended', updateBordersAndStates)
 
             // Run once to set initial state
             updateBordersAndStates()
@@ -552,8 +557,8 @@ function Events() {
                     fill: isSelected
                         ? am5.color(0x2f80fa) // Blue when selected (active)
                         : isHovered
-                            ? am5.color(0xef4444) // Red when hovered
-                            : am5.color(0xff9500), // Orange by default
+                        ? am5.color(0xef4444) // Red when hovered
+                        : am5.color(0xff9500), // Orange by default
                     stroke: am5.color(0xffffff), // Always white border
                     strokeWidth: isSelected ? 3 : 2,
                     tooltipText: '{name}\n{location}\n{date}',
@@ -577,12 +582,12 @@ function Events() {
                 }
             })
 
-                // Adjust marker size to remain constant at different zoom levels
-                ; (chart.events as any).on('wheelended', () => {
-                    const zoomLevel = chart.get('zoomLevel', 1)
-                    const baseScale = 1 / Math.sqrt(zoomLevel)
-                    circle.set('scale', Math.max(baseScale, 0.6))
-                })
+            // Adjust marker size to remain constant at different zoom levels
+            ;(chart.events as any).on('wheelended', () => {
+                const zoomLevel = chart.get('zoomLevel', 1)
+                const baseScale = 1 / Math.sqrt(zoomLevel)
+                circle.set('scale', Math.max(baseScale, 0.6))
+            })
 
             return am5.Bullet.new(root, {
                 sprite: container,
@@ -688,13 +693,13 @@ function Events() {
 
         pointSeries.set('tooltip', tooltip)
 
-            // Hide tooltip when zoom/pan starts
-            ; (chart.events as any).on('wheelstarted', () => {
-                pointSeries.hideTooltip()
-            })
-            ; (chart.events as any).on('panstarted', () => {
-                pointSeries.hideTooltip()
-            })
+        // Hide tooltip when zoom/pan starts
+        ;(chart.events as any).on('wheelstarted', () => {
+            pointSeries.hideTooltip()
+        })
+        ;(chart.events as any).on('panstarted', () => {
+            pointSeries.hideTooltip()
+        })
 
         // Function to update cluster colors based on hover state
         const updateClusterColors = () => {
@@ -772,8 +777,8 @@ function Events() {
 
         // Store reference for use in effects
         chartInstanceRef.current = chart
-            ; (chartInstanceRef.current as any).updateClusterColors = updateClusterColors
-            ; (chartInstanceRef.current as any).clusterBullets = clusterBullets
+        ;(chartInstanceRef.current as any).updateClusterColors = updateClusterColors
+        ;(chartInstanceRef.current as any).clusterBullets = clusterBullets
 
         // Handle window/container resize
         let lastWidth = 0
@@ -858,7 +863,11 @@ function Events() {
                             // Check again after resize
                             setTimeout(() => {
                                 const canvasCheck = chartRef.current?.querySelectorAll('canvas')
-                                console.log('🎨 Canvas check after forced resize:', canvasCheck?.length || 0, 'elements')
+                                console.log(
+                                    '🎨 Canvas check after forced resize:',
+                                    canvasCheck?.length || 0,
+                                    'elements'
+                                )
                                 if (!canvasCheck || canvasCheck.length === 0) {
                                     console.error('❌ Still no canvas after forced resize - triggering remount')
                                     setChartKey((prev) => prev + 1)
@@ -883,7 +892,7 @@ function Events() {
             resizeObserver.disconnect()
             root.dispose()
         }
-    }, [chartKey])
+    }, [chartKey, appWindow])
 
     // Update map data when displayEvents, selectedEvent, or hoveredEvent changes
     useEffect(() => {
@@ -925,7 +934,7 @@ function Events() {
                     const clusterBullets = (chartInstanceRef.current as any).clusterBullets
                     console.log('🔵 Total cluster bullets:', clusterBullets?.size || 0)
                 }
-                (chartInstanceRef.current as any).updateClusterColors()
+                ;(chartInstanceRef.current as any).updateClusterColors()
             }, 50)
         }
     }, [displayEvents, selectedEvent, hoveredEvent])
@@ -1058,14 +1067,14 @@ function Events() {
                                             zoomHover="md"
                                             className={`bg-primary border border-primary active:bg-primary
                       
-                      ${selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
-                                                    ? 'border-primary outline outline-orange outline-2 outline-offset-1'
-                                                    : 'border-primary'
-                                                }
+                      ${
+                          selectedEvent && getEventKey(selectedEvent) === getEventKey(event)
+                              ? 'border-primary outline outline-orange outline-2 outline-offset-1'
+                              : 'border-primary'
+                      }
                     `}
                                         >
                                             <div className="w-full">
-
                                                 {event.photos && event.photos.length > 0 && (
                                                     <div className="float-right ml-2 max-w-20">
                                                         {event.photos[0] && (
@@ -1126,10 +1135,14 @@ function Events() {
                                         </div>
 
                                         <div className="space-y-3 text-sm mb-4">
-
                                             {selectedEvent.private && (
-                                                <div data-scheme="secondary" className="border border-primary bg-primary rounded p-2">
-                                                    <div className="text-secondary text-[13px]">This event is closed to the public</div>
+                                                <div
+                                                    data-scheme="secondary"
+                                                    className="border border-primary bg-primary rounded p-2"
+                                                >
+                                                    <div className="text-secondary text-[13px]">
+                                                        This event is closed to the public
+                                                    </div>
                                                 </div>
                                             )}
 
@@ -1138,10 +1151,14 @@ function Events() {
                                                     <div className="text-secondary text-[13px] mb-1">Start time</div>
                                                     <div>
                                                         {(() => {
-                                                            const [hours, minutes] = selectedEvent.startTime.split(':').map(Number)
+                                                            const [hours, minutes] = selectedEvent.startTime
+                                                                .split(':')
+                                                                .map(Number)
                                                             const period = hours >= 12 ? 'PM' : 'AM'
                                                             const displayHours = hours % 12 || 12
-                                                            return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`
+                                                            return `${displayHours}:${minutes
+                                                                .toString()
+                                                                .padStart(2, '0')} ${period}`
                                                         })()}
                                                     </div>
                                                 </div>
@@ -1150,7 +1167,9 @@ function Events() {
                                             <div>
                                                 <div className="text-secondary text-[13px] mb-1">Location</div>
                                                 {selectedEvent.location.venue && (
-                                                    <div className="text-primary font-semibold mt-1">{selectedEvent.location.venue}</div>
+                                                    <div className="text-primary font-semibold mt-1">
+                                                        {selectedEvent.location.venue}
+                                                    </div>
                                                 )}
                                                 <div>{selectedEvent.location.label}</div>
                                             </div>
@@ -1158,13 +1177,17 @@ function Events() {
                                             {selectedEvent.description && (
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Description</div>
-                                                    <div className="text-sm leading-relaxed">{selectedEvent.description}</div>
+                                                    <div className="text-sm leading-relaxed">
+                                                        {selectedEvent.description}
+                                                    </div>
                                                 </div>
                                             )}
 
                                             {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
                                                 <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}</div>
+                                                    <div className="text-secondary text-[13px] mb-1">
+                                                        Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                    </div>
                                                     <div className="flex flex-wrap gap-2">
                                                         {selectedEvent.speakers.map((speaker, i) => (
                                                             <TeamMember key={i} name={speaker} photo />
@@ -1208,7 +1231,7 @@ function Events() {
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Partners</div>
                                                     <div className="flex flex-wrap gap-2">
-                                                        {selectedEvent.partners.map((partner, i) => (
+                                                        {selectedEvent.partners.map((partner, i) =>
                                                             partner.url ? (
                                                                 <a
                                                                     key={i}
@@ -1222,7 +1245,7 @@ function Events() {
                                                             ) : (
                                                                 <span key={i}>{partner.name}</span>
                                                             )
-                                                        ))}
+                                                        )}
                                                     </div>
                                                 </div>
                                             )}
@@ -1239,7 +1262,9 @@ function Events() {
                                                     <div className="text-secondary text-[13px] mb-1">Vibe Score</div>
                                                     <div className="flex gap-1">
                                                         {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
-                                                            <span key={i} className="text-lg">🔥</span>
+                                                            <span key={i} className="text-lg">
+                                                                🔥
+                                                            </span>
                                                         ))}
                                                     </div>
                                                 </div>
@@ -1282,7 +1307,8 @@ function Events() {
                                                         asLink
                                                         to={selectedEvent.link}
                                                         variant={
-                                                            new Date(selectedEvent.date) >= new Date(new Date().toISOString().split('T')[0])
+                                                            new Date(selectedEvent.date) >=
+                                                            new Date(new Date().toISOString().split('T')[0])
                                                                 ? 'primary'
                                                                 : 'secondary'
                                                         }
