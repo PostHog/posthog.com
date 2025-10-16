@@ -32,7 +32,7 @@ You can use the template in company internal to do so, a version of which is sha
 
 ## Problem(s) making this change will solve
 
-[words here, bullet points are preferred]
+[words here]
 
 ## Changes of feature ownership (if applicable)
 
@@ -55,7 +55,7 @@ You can use the template in company internal to do so, a version of which is sha
 
 Please share the issue in the relevant team Slack channels, the #team-blitzscale Slack channel, and any relevant public channels, requesting feedback.
 
-It's generally best to post once and then forward that message to other relevant channels.
+It's generally best to post once and then forward that message to other relevant channels to keep things tidy.
 
 Include the deadline for the decision in your message and tag the directly affected people.
 
@@ -65,7 +65,7 @@ Our goal is to make the best possible decision as fast as possible. When giving 
 
 - Are there considerations the proposer isn't aware of that could impact the decision we make? Please share them and suggest solutions. Often these relate to feature ownership. 
 
-- Is there a better or alternative solution? Disagreeing with a proposal is fine, but it's always best to propose a solution than to just disagree without an alternative.
+- Is there a better or alternative solution? Disagreeing with a proposal is fine, but it's always best to propose a solution than to just disagree without an alternative. If you think no change is necessary, explain why.
 
 - Be direct and clear about how strongly you feel. If you're strongly against a change, explain why and make that clear. Likewise, if you're unsure about a change, but don't feel strongly, articulate that. Consensus is not our goal and decisions being blocked by people who are less invested in the outcome will slow us down and lead to worse decision-making.
 
