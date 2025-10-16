@@ -107,7 +107,7 @@ export const ProductOS = () => {
     return (
         <>
             <SEO
-                title="PostHog Product OS – Developer tools for product engineers"
+                title="Product OS by PostHog – Developer tools for product engineers"
                 description="Build better products with PostHog – developer tools for analytics, feature flags, session replay, experiments, error tracking, and more. Get started free."
                 image={`/images/og/product-os.jpg`}
             />
