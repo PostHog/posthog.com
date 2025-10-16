@@ -13,7 +13,7 @@ export const errorTracking = {
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
-            'Capture, monitor, and resolve exceptions with error tracking. Connect product analytics and session replay to ship confidently with full context.',
+            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
     },
     overview: {
         title: 'Track errors and resolve issues',
