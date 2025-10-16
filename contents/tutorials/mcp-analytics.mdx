@@ -58,7 +58,7 @@ This is the key integration pattern we'll use to build MCP analytics.
 
 ## 1. Define the MCP analytics provider 
 
-The first step is define an interface for an analytics provider. It defines a standard set of methods for sending analytics data from your MCP server. 
+The first step is to define an interface for an analytics provider. It defines a standard set of methods for sending analytics data from your MCP server. 
 
 We'll give it three core abilities:
 
@@ -95,7 +95,7 @@ Want to use a different analytics provider? Write a new implementation. Need to 
 
 ## 2. Create the withAnalytics wrapper
 
-The next step is create a wrapper that intercepts every tool call. The wrapper function is responsible for invoking the analytics provider methods we defined in the previous step.
+The next step is to create a wrapper that intercepts every tool call. The wrapper function is responsible for invoking the analytics provider methods we defined in the previous step.
 
 ```typescript file="src/analytics.ts"
 // src/analytics.ts
@@ -288,7 +288,7 @@ export class PostHogAnalyticsProvider implements AnalyticsProvider {
   }
   
   async trackError(error: Error, context: any): Promise<void> {
-    this.client?.captureException(error, "", {
+    this.client?.captureException(error, undefined, {
         sessionId: this.sessionId,
         duration_ms: context.duration_ms,
         args: this.anonymizeData ? this.anonymize(context.args) : context.args,
@@ -472,5 +472,5 @@ export async function createServer(analytics?: PostHogAnalyticsProvider) {
 
 - Complete code on [GitHub](https://github.com/arda-e/mcp-posthog-analytics)
 - [MCP: machine copy/paste](/blog/machine-copy-paste-mcp-intro)
-- [What we've leanred about AI-powered features](/newsletter/building-ai-features)
+- [What we've learned about AI-powered features](/newsletter/building-ai-features)
 - [Avoid these AI coding mistakes](/newsletter/ai-coding-mistakes)
