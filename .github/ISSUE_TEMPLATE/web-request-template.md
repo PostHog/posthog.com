@@ -16,7 +16,7 @@ assignees:
 > - If your request is genuinely urgent, please share in #posthogdotcom channel and mention Cory.
 
 ## Assignee
-@corywaitlo & @smallbrownbike
+@corywatilo & @smallbrownbike
 
 ## Outline
 _Explain what you need broadly_
