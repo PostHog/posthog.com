@@ -24,7 +24,7 @@ You can request access via the [in-app support form](https://app.posthog.com/#pa
 
 To create a batch export to Databricks, you need the following:
 
-- A Databricks account with the [Premium plan or above](https://www.databricks.com/product/pricing/platform-addons)
+- A Databricks account with serverless SQL warehouses enabled
 - A Databricks workspace with Unity Catalog enabled
 - A SQL warehouse
 - A catalog and schema you wish to use
@@ -52,7 +52,7 @@ You will need to make a note of the **Server hostname** and **HTTP path** for yo
 2. Create a schema within that catalog (or use an existing one).
 3. Note the names of both the catalog and schema – you'll need these when configuring the batch export.
 
-> **Note:** You can also create the destination table manually, however, in general we recommend allowing PostHog to create tables for you to ensure the data schemas are correct.
+> **Note:** You don't need to create tables manually. PostHog will create destination tables for you to ensure the data schemas are correct.
 
 ### 3. Create a service principal
 
