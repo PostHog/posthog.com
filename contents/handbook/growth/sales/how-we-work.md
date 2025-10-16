@@ -29,10 +29,10 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
 
 1. Recent Closed Won
 2. Where are you going to end up vs quota this quarter?   a. Confidence (scale of 1-5? a percentage out of 100? what's keeping it from being 5 or 100%?)
-3. Review deals (use this <PrivateLink url="https://www.google.com/url?q=https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view&sa=D&source=calendar&ust=1760881670100431&usg=AOvVaw1WPubzWMOn9rCllOqHkzaw">Salesforce view</>) for this quarter by Commit -> Best Case -> Pipeline
-   a. For "Commit", how could it possibly end up "closed lost?"
-   b. For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
-   c. For "Pipeline", 1-2 opps you're excited about or want to share with the group
+3. Review deals (use this <PrivateLink url="https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view">Salesforce view</PrivateLink>) for this quarter by Commit -> Best Case -> Pipeline 
+   - For "Commit", how could it possibly end up "closed lost?"
+   - For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
+   - For "Pipeline", 1-2 opps you're excited about or want to share with the group
 4. Outbound successes and failures
 
 > The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
