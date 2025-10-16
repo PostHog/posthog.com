@@ -155,8 +155,8 @@ export default function Pricing() {
             hideMobileTableOfContents
         >
             <SEO
-                title="PostHog Pricing – Transparent, usage-based, generous free tier"
-                description="Find out exactly how much it costs to use PostHog. Start free and scale affordably with usage-based pricing."
+                title="PostHog pricing – Transparent, usage-based, generous free tier"
+                description="Find out exactly how much it costs to use PostHog (spoiler: it's cheaper than every major competitor). Generous free tiers and no unexpected bills."
             />
 
             <PricingExperiment

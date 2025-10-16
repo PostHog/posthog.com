@@ -22,7 +22,7 @@ export const sessionReplay = {
     seo: {
         title: 'Session Replay – Debug and analyze sessions with PostHog',
         description:
-            'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and correlate with product usage.',
+            'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and understand user behavior.',
     },
     overview: {
         title: 'Watch people use your product',

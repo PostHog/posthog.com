@@ -26,7 +26,7 @@ export const productAnalytics = {
     seo: {
         title: 'Product Analytics – Understand your product with PostHog',
         description:
-            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects replays, experiments, feature flags, and more for full product insight.',
+            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
     },
     overview: {
         title: 'Product analytics with autocapture',
