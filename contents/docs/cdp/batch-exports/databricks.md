@@ -50,7 +50,7 @@ You will need to make a note of the **Server hostname** and **HTTP path** for yo
 
 1. In your Databricks workspace, create a catalog (or use an existing one) where PostHog will export data.
 2. Create a schema within that catalog (or use an existing one).
-3. Note the names of both the catalog and schema - you'll need these when configuring the batch export.
+3. Note the names of both the catalog and schema – you'll need these when configuring the batch export.
 
 > **Note:** You can also create the destination table manually, however, in general we recommend allowing PostHog to create tables for you to ensure the data schemas are correct.
 
