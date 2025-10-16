@@ -125,7 +125,7 @@ GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<servi
    - Enter your **Server hostname** (from [step 1](#1-sql-warehouse))
    - Enter your **Client ID** (from [step 4](#4-generate-oauth-credentials))
    - Enter your **Client Secret** (from [step 4](#4-generate-oauth-credentials))
-7. Finalize the creation by clicking on "Create".
+7. Finalize the creation by clicking on **Create**.
 8. Done! The batch export will schedule its first run on the start of the next period.
 
 ## Databricks configuration
