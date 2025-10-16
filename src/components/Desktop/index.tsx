@@ -18,8 +18,7 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import ProgressBar from 'components/ProgressBar'
 import OSButton from 'components/OSButton'
-import Lottie from 'lottie-react'
-import { hourglassAnimation, hourglassAnimationWhite } from './lottieAnimations'
+import HourglassSpinner from './HourglassSpinner'
 
 interface Product {
     name: string
@@ -573,18 +572,7 @@ export default function Desktop() {
                     className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center"
                 >
                     <div className="flex items-center justify-center gap-2 w-80 bg-primary/75 backdrop-blur border border-primary rounded p-4">
-                        <div>
-                            <Lottie
-                                animationData={hourglassAnimation}
-                                className="size-6 opacity-75 dark:hidden"
-                                title="Loading desktop..."
-                            />
-                            <Lottie
-                                animationData={hourglassAnimationWhite}
-                                className="size-6 opacity-75 hidden dark:block"
-                                title="Loading desktop..."
-                            />
-                        </div>
+                        <HourglassSpinner className="text-primary opacity-75" />
                         <div className="flex-1 relative">
                             <strong
                                 key={currentMessageIndex}
