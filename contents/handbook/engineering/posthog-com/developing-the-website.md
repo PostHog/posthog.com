@@ -4,15 +4,23 @@ sidebar: Handbook
 showTitle: true
 ---
 
-You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
-1. You can create a pull request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
+> **TL;DR**
+> - Text-only edits: use **Edit this page** → open a quick PR in GitHub.
+> - Anything more complex: run the site locally or in Codespaces and open a PR.
+> - **Product/landing page slides**: use the **Website request** flow (below) so Website can review/ship quickly while we keep consistency high.
+> - **Vibe-coding** is fine for prototypes and exploration (see guidelines) — production merges still go through Website review.
 
-2. You can run the posthog.com website in development and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
+You can contribute to the PostHog documentation, handbook, and blog in three ways:
 
-Below, we'll explain the two options for option two.
+1. **Quick edits via GitHub UI.** For any page with an **Edit this page** link, you can use the GitHub web editor. This is best for text-only edits and basic file manipulation (renames, moving files).
+2. **Local/Codespaces development.** Run the website locally or in Codespaces, create a branch, commit changes, and open a PR. This is recommended for anything non-trivial. There are guidelines on how to get setup and do this below.
+3. **Request changes via the Website team.** This is the recommended approach for creating new landing pages or altering product pages, where there are some non-obvious design elements that require a lot of context to work with. 
 
-## Option 1: Running with codespaces
+Details on how to get started with each of these options is below.
+
+<details>
+<summary>Method 1: Running with codespaces</summary>
 
 ### Creating/running the codespace
 
@@ -49,20 +57,24 @@ Use the built-in Git tab in VS Code to commit and push your changes.
 1. Now that your changes are committed, it's time to publish them to GitHub.
     ![Publish changes](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_publish_81f21426e4.png)
 
-> **Note:** After finish changes on your branch, be sure to switch back to `master` so you don't inadvertently make future changes to your current branch.
+> **Note:** After finishing changes on your branch, be sure to switch back to `master` so you don't inadvertently make future changes to your current branch.
 > ![Checkout to master](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_checkout_master_4821478b5e.png)
 > ![Switch to master](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_select_branch_58c9512cee.png)
 
 ### Stopping the server
 
 1. Place your cursor into Terminal and type `Cmd+C` to stop the server.
-1. In the bottom left corner of the window, click **Codspaces: [your codespace name]**, then **Stop current codespace.**
+1. In the bottom left corner of the window, click **Codespaces: [your codespace name]**, then **Stop current codespace.**
 
 ### Notes
 
 If you plan on using this codespace frequently, disable **Auto-delete codespace** in the `...` menu under the **Code > Codespaces**  dropdown [in the repo](https://github.com/posthog/posthog.com).
 
-## Option 2: Editing posthog.com locally
+Once you have Codespaces setup, you can easily start making edits. 
+</details>
+
+<details>
+<summary>Method 2: Editing posthog.com locally</summary>
 
 ### Before you begin
 
@@ -171,8 +183,6 @@ Once you have cloned the repo, the `contents/` directory contains a few key area
 
 Inside each of these are a series of markdown files for you to edit.
 
-## Making edits
-
 ### Creating a new Git branch
 
 When editing locally, changes should be made on a new Git branch. Branches should be given an "at a glance" informative name. For example, `posthog-website-contribution`.
@@ -190,7 +200,6 @@ When editing locally, changes should be made on a new Git branch. Branches shoul
     git checkout -b posthog-website-contribution
     ```
 
-
 - **via GitHub Desktop**
 
     You can also create a new branch in GitHub Desktop by selecting the dropdown next to the **Current Branch** name and clicking **New Branch**.
@@ -201,7 +210,104 @@ When editing locally, changes should be made on a new Git branch. Branches shoul
 
     ![GitHub Desktop - new branch dialog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/visual-studio-code-new-branch-dialog.png)
 
-    Once you have a new branch, you can make changes.
+    Once you have a new branch, you can make changes to the site in your IDE, save them to the branch, and open a PR. 
+</details>
+
+<details>
+<summary>Method 3: Briefing the website team</summary>
+Some parts of the site have non-obvious design elements, such as responsive layouts, which are currently best handled by the Website team. If you want to make changes to these sections, or create wholly new pages with unique layouts, you should request them from the Website team. 
+
+We have a template setup to help you brief the team directly. You should aim to give the Website team at least two weeks notice of your request if possible and should provide a full draft of the content you want on the new page. All new web requests are tagged with the `new landing page` tag so you can filter them easily. 
+
+If you have questions about a brief, please ask in [the #posthogdotcom Slack channel](https://posthog.slack.com/archives/C08UABF7PB7).
+
+</details>
+
+## How PostHog.com works
+
+PostHog.com is built and maintained in-house by the <SmallTeam slug="brand" />. You've probably never seen a Gatsby.js site like this before. <TeamMember name="Eli Kinsey" photo /> is the mastermind behind how the site is structured.
+
+For more context, [read why we designed our website to look like an operating system](/blog/why-os).
+
+## The "operating system"
+
+1. At the top level, `gatsby-browser.tsx` loads `<Wrapper />`
+1. `<Wrapper />` renders the chrome of the "operating system"
+    1. `<TaskBarMenu />` – the MacOS-style menu bar
+    1. `<Desktop />` – the desktop app icons and desktop background
+    1. `<AppWindow />` – the chrome for each app and where the content renders
+    1. `<CookieBannerToast />`
+1. `<AppWindow />` loads `<WindowProvider />` and `<WindowContainer />`.
+    - This contains the window's top bar with the minimize, maximize, and close buttons. It also supports window resizing.
+    - Inside here is where the contents of each app renders
+
+## The apps
+
+Each "app" is simply a page like a normal Gatsby site. There are a handful of apps:
+
+1. `<ReaderView />` – used for all long-form content like the docs, handbook, blog
+1. `<Editor />` – a WYSIWYG page editor
+1. `<Explorer />` – an OS-style file explorer
+1. `<Inbox />` – an email-like app
+1. `<Presentation />` – a slide deck
+
+Each app can reference shared components like `<HeaderBar />` which contains the necessary navigational elements (like the back button, search, and filters).
+
+Let's look at a product page to see how it uses the `<Presentation />` template.
+
+### Example: `posthog.com/session-replay`
+
+This page (`/src/pages/session-replay/index.tsx`) includes two critical pieces:
+
+1. `<SlidesTemplate />` – the views where the content will display
+1. Defines the `PRODUCT_HANDLE`
+1. Specifies which slides should appear in this presentation using `createSlideConfig`
+
+`<SlidesTemplate />` loads up all the various templates needed (like `<OverviewComponent />`, `<CustomersSlide />`, `<FeaturesSlide />`) and sources the content using the `useProduct` hook.
+
+**`useProduct`** hook
+
+Each product's data is defined in a JSON file like:
+
+**`/src/hooks/productData/session_replay.tsx`**
+
+When the `session_replay` handle is passed into `useProduct`, it looks up the product's data like:
+
+-   icon
+-   color
+-   category
+-   SEO data
+-   screenshots array
+-   feature customers
+-   features array
+-   feature comparison chart
+-   etc.
+
+> Note: The <SmallTeam slug="billing" /> maintains a billing API that contains pricing tiers and entitlements. This is how pricing data and usage tiers stay in sync between the website and product. The plan is to eventually move the product data into the billing API so there's a single source of truth for every product.
+
+---
+
+## Services we use
+
+| Service       | Purpose                                                |
+| ------------- | ------------------------------------------------------ |
+| Vercel        | Hosting                                                |
+| Gatsby        | Static site framework                                  |
+| GitHub        | Source code repository                                 |
+| Ashby (API)   | Applicant tracking system                              |
+| Algolia (API) | Site search                                            |
+| Strapi        | Headless CMS for community profiles and changelog data |
+| PostHog       | Analytics, feature flags                               |
+| Inkeep        | AI-powered community answers                           |
+
+![Diagram of PostHog.com](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/website-diagram.png)
+
+Website content is stored in two places:
+
+1. Markdown/MDX files (in the [GitHub repo](https://github.com/posthog/posthog.com/)) - _most website content_
+    - Docs, handbook, most pages
+1. Strapi - _user-generated content_
+    - Community forum posts, community profiles
 
 ### Markdown details
 
@@ -211,7 +317,7 @@ Most PostHog pages utilize frontmatter as a way of providing additional data to 
 
 ##### Blog
 
-Markdown files located in `/contents/blog``
+Markdown files located in `/contents/blog`
 
 ```markdown
 ---
@@ -263,7 +369,7 @@ tags: ['filters', 'settings']
 
 - `date`: the date the tutorial was posted
 - `title`: the title that appears at the top of the tutorial and on the tutorial listing page
-- `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
+- `author`: the author(s) of the tutorial. Correlates to your handle located in /src/data/authors.json
 - `featuredTutorial`: determines if tutorial should be featured on the homepage
 - `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
 - `featuredImage`: the Cloudinary URL of the image that appears at the top of the tutorial and on the tutorial listing page
@@ -272,8 +378,6 @@ tags: ['filters', 'settings']
 - `seo`: object containing SEO metadata:
   - `metaTitle`: String
   - `metaDescription`: String
-
-
 
 ##### Docs & Handbook
 
