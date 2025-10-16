@@ -1297,6 +1297,10 @@ export const handbookSidebar = [
                             },
                         ],
                     },
+                                        {
+                        name: 'Hogpatch',
+                        url: '/handbook/growth/sales/hogpatch',
+                    }
                 ],
             },
             {
@@ -2001,6 +2005,20 @@ export const docsMenu = {
                         {
                             name: 'Nuxt.js',
                             url: '/docs/libraries/nuxt-js',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/libraries/nuxt-js',
+                                },
+                                {
+                                    name: '3.0 to 3.6',
+                                    url: '/docs/libraries/nuxt-js-3-6',
+                                },
+                                {
+                                    name: '2.16 and below',
+                                    url: '/docs/libraries/nuxt-js-2',
+                                },
+                            ],
                         },
                         {
                             name: 'n8n',
@@ -3691,6 +3709,16 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/error-tracking/installation/nuxt',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/error-tracking/installation/nuxt',
+                                },
+                                {
+                                    name: '3.6 and below',
+                                    url: '/docs/error-tracking/installation/nuxt-3-6',
+                                },
+                            ],
                         },
                         {
                             name: 'SvelteKit',
@@ -4578,18 +4606,18 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Messaging',
+            name: 'Workflows',
             icon: 'IconMegaphone',
             color: 'red',
-            url: '/docs/messaging',
-            description: 'Create campaigns to send messages to your users.',
+            url: '/docs/workflows',
+            description: 'Create automations or campaigns to send messages to your users.',
             children: [
                 {
-                    name: 'Messaging',
+                    name: 'Workflows',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/messaging',
+                    url: '/docs/workflows',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
@@ -4598,21 +4626,21 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/messaging/start-here',
+                    url: '/docs/workflows/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Configure a messaging channel',
-                    url: '/docs/messaging/configure-channels',
+                    url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Design your first campaign',
-                    url: '/docs/messaging/launch-campaign',
+                    name: 'Launch your first workflow',
+                    url: '/docs/workflows/launch-workflow',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
@@ -4621,8 +4649,8 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Campaign builder',
-                    url: '/docs/messaging/campaign-builder',
+                    name: 'Workflow builder',
+                    url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
@@ -4631,7 +4659,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Create a drip campaign',
-                    url: '/docs/messaging/email-drip-campaign',
+                    url: '/docs/workflows/email-drip-campaign',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
@@ -4640,7 +4668,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Troubleshooting and FAQs',
-                    url: '/docs/messaging/troubleshooting',
+                    url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },

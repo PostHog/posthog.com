@@ -36,3 +36,15 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
         }),
     ])
 }
+
+export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+    const filteredComponents = getHeadComponents().filter((component) => {
+        // remove the inline script added by the gatsby-remark-autolink-headers plugin
+        if (component?.type === 'script' && component?.key === 'gatsby-remark-autolink-headers-script') {
+            return false
+        }
+        return true
+    })
+
+    replaceHeadComponents(filteredComponents)
+}

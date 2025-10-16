@@ -2,6 +2,9 @@
 title: "Set up an email drip campaign"
 showStepsToc: true
 ---
+import Beta from './_snippets/beta.mdx'
+
+<Beta />
 
 In this guide we'll walk through creating a simple **drip campaign**. After following this guide, you will:
 - Send a welcome email when a user signs up
@@ -9,28 +12,28 @@ In this guide we'll walk through creating a simple **drip campaign**. After foll
 
 <Steps>
 
-<Step title="Create a campaign" badge="required">
+<Step title="Create a workflow" badge="required">
 
-Go to [Messaging](https://app.posthog.com/messaging/campaigns/new/workflow) and click the **+ New campaign button**.  
+Go to [Workflows](https://app.posthog.com/messaging/campaigns/new/workflow) and click the **+ New workflow button**.  
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_light_c1f7b79b46.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_dark_6a4ea06e58.png"
     classes="rounded"
-    alt="Click the New Campaign button"
+    alt="Click the New Workflow button"
 />
 
-This will open the campaign builder. 
+This will open the workflow builder. 
 
-The new campaign only has two blocks:
-- A trigger block: This defines the event that will start the campaign workflow.
-- An exit block: This defines the event that will end the campaign workflow.
+The new workflow only has two blocks:
+- A trigger block: This defines the event that will start the workflow.
+- An exit block: This defines the event that will end the workflow.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_light_acfabde4ca.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_campaign_dark_8ed34dd06e.png"
     classes="rounded"
-    alt="Fresh campaign with trigger block"
+    alt="Fresh workflow with trigger block"
 />
 
 The trigger block has a little exclamation mark. This means it is not configured. In general, if there are problems with a block, it will have a little exclamation mark.
@@ -39,18 +42,20 @@ The trigger block has a little exclamation mark. This means it is not configured
 
 <Step title="Set the trigger" badge="required">
 
-Now, let's click on the trigger block and configure it. In a new campaign, the trigger doesn't have any default trigger events. Triggers tell PostHog what events will start the campaign workflow.
+Now, let's click on the trigger block and configure it. In a new workflow, the trigger doesn't have any default trigger events. Triggers tell PostHog what events will start the workflow.
+
+Change the frequency drop down to `"One time"` this means a user will only go through this workflow once, and cannot be re-enrolled.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_light_40e539b7ee.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/trigger_settings_dark_02b15cd094.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/frequency_trigger_ff50a0016d.png"
     classes="rounded"
     alt="Trigger warning that event is required"
 />
 
 Click the **+ Add trigger event** button and search for the event you want to use as the trigger. 
 
-Search for your the signup event you capture with PostHog SDKs, (e.g. `user signed up`) and click it. This tells the campaign to start when this event is captured:
+Search for your the signup event you capture with PostHog SDKs, (e.g. `user signed up`) and click it. This tells the workflow to start when this event is captured:
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,g_north,h_0.9,w_1.0/w_1600,c_limit,q_auto,f_auto/messaging_new_campaign_event_select_light_a08c890a53.png"
@@ -72,7 +77,7 @@ Don't worry about the conversion goal or exit conditions for now, and exit this 
 
 <Step title="Send the first email" badge="required">
 
-Drag an **Email** dispatch beneath the trigger, into the campaign like this:
+Drag an **Email** dispatch beneath the trigger, into the workflow like this:
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_email_light_98795f1414.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/new_email_dark_e2811207c7.png"
@@ -91,7 +96,7 @@ Then, click on the email block to configure it. Set the **subject line** and **s
 
 > If you haven't configured an email channel yet, you will need to do that first.
 > 
-> <CallToAction className="mb-4" type="primary" to="/docs/messaging/configure-channels">
+> <CallToAction className="mb-4" type="primary" to="/docs/workflows/configure-channels">
 >   Configure an email channel
 > </CallToAction>
 > 
@@ -146,7 +151,7 @@ Configure this email with content encouraging them to complete onboarding. Some 
 - Highlight the value they'll get from completing onboarding
 - Consider offering help or support
 
-The campaign will now:
+The workflow will now:
 - Exit if their person property `first_onboarding_complete` is set to `true` (they've completed onboarding)
 - Send the follow-up email if they have not completed onboarding after the wait period
 
@@ -154,24 +159,24 @@ The campaign will now:
 
 <Step title="Review and launch" badge="required">
 
-Now the complete campaign should look like this:
+Now the complete workflow should look like this:
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/email_drip_overview_light_a84567a8f9.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/email_drip_overview_dark_2bb57406d6.png"
     classes="rounded"
-    alt="Complete campaign workflow"
+    alt="Complete drip campaign workflow"
 />
 
-Click **Create** to publish the campaign. 
+Click **Create** to publish the workflow. 
 
 </Step>
 
-<Step title="Enable the campaign" badge="required">
+<Step title="Enable the workflow" badge="required">
 
-Once you have confirmed the campaign works as expected, you can enable it by clicking the **Enable** button at the top right of the campaign builder.
+Once you have confirmed the workflow works as expected, you can enable it by clicking the **Enable** button at the top right of the workflow builder.
 
-Your new users will now automatically receive this drip campaign to help guide them through onboarding.
+Your new users will now automatically receive this email drip campaign to help guide them through onboarding.
 
 </Step>
 

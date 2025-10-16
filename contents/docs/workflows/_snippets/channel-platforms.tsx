@@ -5,7 +5,7 @@ const ChannelPlatforms = () => {
     const platforms = [
         {
             label: 'Email',
-            url: '/docs/messaging/configure-channels?tab=Email',
+            url: '/docs/workflows/configure-channels?tab=Email',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/email_channel_dcb0bdadf1.svg',
         },
         {
