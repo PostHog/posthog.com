@@ -130,7 +130,7 @@ GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<servi
 
 ## Databricks configuration
 
-Configuring a batch export targeting Databricks requires the following configuration values:
+You'll need to specify the following configuration settings in PostHog:
 
 **Connection settings:**
 * **Integration:** Select the Databricks integration you created (or create a new one). The integration stores your server hostname and OAuth credentials securely.
@@ -234,9 +234,7 @@ You can override this by specifying a different partition field in the configura
 ### Should I use VARIANT or STRING type for JSON fields?
 
 We recommend using `VARIANT` (the default) for the following reasons:
-- Better query performance for nested JSON data
-- More efficient storage
-- Type safety and validation
+- Better query performance
 - Native support for JSON operators and functions
 
 However, you should use `STRING` if:
