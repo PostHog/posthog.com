@@ -7,11 +7,15 @@ hideAnchor: false
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-The goal of our [small teams structure](/handbook/company/small-teams) is to remain fast, innovative, and autonomous as we scale.
+There are three key principles here:
 
-This means team changes should happen quickly (in less than one week) and transparently. 
+1. Anyone can propose a change by [creating an issue](https://github.com/PostHog/company-internal/issues/new?template=team-change-proposal.md) suggesting the change.
+2. Decisions should be made quickly – i.e. less than a week.
+3. Team Blitzscale ultimately own the decision to make a change or not.
 
-We should never run lengthy consultations or meetings with all those affected by a proposed team change, but there should always be time for people to share feedback, and alternative solutions, before a decision is made.
+Complete consensus isn't necessary, but there should always be time for people to share feedback, and alternative solutions, before a decision is made.
+
+We should never run lengthy consultations, or individual meetings with all those affected by a proposed team change, but a group meeting to make a final call can be useful provided you follow the process below first.
 
 ## How to propose a team change
 
@@ -19,36 +23,13 @@ Follow this process whether you're proposing creating a new team, splitting up a
 
 ### 1. Create a team change proposal issue
 
-You can use the template in company internal to do so, a version of which is shared below. A good proposal should:
+You can use the [team change proposal template](https://github.com/PostHog/company-internal/issues/new?template=team-change-proposal.md) in company internal to do so. A good proposal should:
 
 - Tag all those **directly** affected by the change, and the Blitzscale Team member directly responsible for this area of the business.
 
 - Include context about why you're suggesting the change and the goals you think this change will help us achieve.
 
 - Be as concise as possible. This isn't an RFC, our goal is to make a quick decision.
-
-```
-## Summary of proposed team change
-
-_[bullet points are preferred]_
-
-## Why we should make this change
-
-_[explain the problems this will solve and/or opportunities this change will unlock]_
-
-## Changes of feature ownership (if applicable)
-
-_[list any changes to feature ownership if they apply]_
-
-## People affected by the change
-
-_[tag everyone directly affected]_
-
-## Decider & deadline
-
-- **Decider:** [usually the Blitzscale team member responsible for this area of the business]
-- **Deadline:** [no more than three working days after the proposal is made]
-```
 
 ### 2. Share your proposal widely
 

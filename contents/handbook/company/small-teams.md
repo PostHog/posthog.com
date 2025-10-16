@@ -5,8 +5,6 @@ showTitle: true
 hideAnchor: false
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
 PostHog is structured for speed, autonomy and innovation.
 
 Many traditional organizations have big, separate functions. You have a product team, an engineering team, customer support, and so on. This slows things down when you scale because there are more layers of communication and complex approval chains. This stifles innovation because you have to get your boss to talk to someone else's boss to get work done. It also means that people can't really see the impact of their work.
@@ -206,23 +204,7 @@ Regardless of the team, we aim to retain a high bar for new hires. In the words 
 
 ### How do we create new teams, or make changes to existing teams?
 
-There are three key principles here:
-
-1. Anyone can propose a change by creating an issue suggesting the change.
-2. Decisions should be made quickly – i.e. less than a week. We don't conduct lengthy consultations.
-3. Team Blitzscale ultimately own the decision to make a change or not.
-
 See [how we make team changes](/handbook/company/team-changes) for a more detailed breakdown of the process.
-
-Some other important notes:
-
-- If moving people between teams, we aim to only move people from teams that are well resourced to reduce disruption to teams.
-
-- During the exec org tidy up meeting, we will figure out what products we want to build, and who we want to build those products, so we can over staff teams who will lose people. We will aim to be transparent about this as we hire into your team.
-
-- Because we have small teams and almost infinite things to build, it's likely your team will never truly feel overstaffed. You should give feedback on the suggested change if you feel strongly it's the wrong decision, but do not block changes purely because they'll weaken your team in the short term. 
-
-- Ultimately, we should default to moving fast and taking some short term pain in order to enjoy the long term benefits of making a decisive change when it's needed. We shouldn't delay changes that are necessary because they're inconvenient in the short term.
 
 ### Does a small team have a budget?
 
