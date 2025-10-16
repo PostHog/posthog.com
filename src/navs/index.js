@@ -514,6 +514,7 @@ export const handbookSidebar = [
         url: '',
         children: [
             { name: 'Spending money', url: '/handbook/people/spending-money' },
+            { name: 'Team changes', url: '/handbook/company/team-changes' },           
             { name: 'Using GitHub', url: '/handbook/company/new-to-github' },
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
