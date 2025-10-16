@@ -1213,6 +1213,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/overview',
                     },
                     {
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
@@ -1236,6 +1240,10 @@ export const handbookSidebar = [
                                 name: 'Cross-sell motions',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
+                            {
+                                name: 'Cross sell motions',
+                                url: '/handbook/growth/sales/cross-sell-motions',
+                            },
                         ],
                     },
                     {
@@ -1251,37 +1259,12 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/selling-via-aws',
                     },
                     {
-                        name: 'Expansion, cross-sell & retention',
-                        url: '/handbook/growth/sales/expansion-and-retention',
-                        children: [
-                            {
-                                name: 'Account planning',
-                                url: '/handbook/growth/sales/account-planning',
-                            },
-                            {
-                                name: 'Cross-selling',
-                                url: '/handbook/growth/sales/cross-selling',
-                            },
-                            {
-                                name: 'Cross sell motions',
-                                url: '/handbook/growth/sales/cross-sell-motions',
-                            },
-                        ],
-                    },
-
-                    {
                         name: 'Utilization by business type',
                         url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
-                        children: [
-                            {
-                                name: 'New team member onboarding',
-                                url: '/handbook/growth/sales/new-hire-onboarding',
-                            },
-                        ],
                     },
                 ],
             },
