@@ -103,7 +103,7 @@ The person who raised the incident is the incident lead. It’s their responsibi
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
-[You can find all of our production runbooks + specific strategies for debugging outages here (internal)](http://runbooks/)
+[You can find all of our production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
 ### Customer communications
 

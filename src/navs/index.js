@@ -765,28 +765,20 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Internal processes',
+                name: 'Operations',
                 url: '',
                 children: [
                     {
                         name: 'Support hero',
-                        url: '/handbook/engineering/support-hero',
-                    },
-                    {
-                        name: 'Feature ownership',
-                        url: '/handbook/engineering/feature-ownership',
-                    },
-                    {
-                        name: 'Handling incidents',
-                        url: '/handbook/engineering/incidents',
+                        url: '/handbook/engineering/operations/support-hero',
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/on-call-rotation',
+                        url: '/handbook/engineering/operations/on-call-rotation',
                     },
                     {
-                        name: 'Bug prioritization',
-                        url: '/handbook/engineering/bug-prioritization',
+                        name: 'Handling incidents',
+                        url: '/handbook/engineering/operations/incidents',
                     },
                 ],
             },
@@ -909,6 +901,14 @@ export const handbookSidebar = [
                         ],
                     },
                 ],
+            },
+            {
+                name: 'Feature ownership',
+                url: '/handbook/engineering/feature-ownership',
+            },
+            {
+                name: 'Bug prioritization',
+                url: '/handbook/engineering/bug-prioritization',
             },
             {
                 name: 'Shipping & releasing',
@@ -1280,10 +1280,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                                        {
+                    {
                         name: 'Hogpatch',
                         url: '/handbook/growth/sales/hogpatch',
-                    }
+                    },
                 ],
             },
             {
