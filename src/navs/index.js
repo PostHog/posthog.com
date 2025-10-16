@@ -1196,7 +1196,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Incidents & maintenance',
-                url: '/handbook/engineering/incidents#customer-communications',
+                url: '/handbook/engineering/operations/incidents#customer-communications',
             },
             {
                 name: 'Internal processes',

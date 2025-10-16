@@ -50,6 +50,11 @@ And 2 weekend layers:
 - **Europe Weekend** (06:00 to 18:00 UTC) - (12 hours)
 - **Americas Weekend** (18:00 to 06:00 UTC) - (12 hours)
 
+### Why is the on-call rotation spread across all engineers?
+
+If you're in a product team, it's tempting to think that service alerts don't apply to you, or that when you're on call you can just hand everything off to the infrastructure team. That's not the case, because it's important that every engineer has a basic understanding of how our software is deployed, where the weak points in our systems are, and what the failure modes look like. This understanding should be all that's needed to follow the runbooks, and if you follow the causes of alerts, ultimately you'll be less likely to ship code that takes PostHog down.
+
+Besides knowledge, being on call requires availability – including weekends. If teams had their own separate rotations, there would be more people on call in total, and each would have to stand by 24/7 as our teams aren't big enough to follow the sun. This would be more stressful because of availability constraints, while being less productive because of the rare alerts being spread across multiple people.
 
 ## Before going on call
 
@@ -74,8 +79,9 @@ If you are unavailable for any of your schedules you need to act!
 To be ready, make sure you have access to:
 
 - PostHog Cloud admin interfaces ([🇺🇸 US](https://us.posthog.com/admin/)  / [🇪🇺 EU](https://eu.posthog.com/admin/)) - post in #ask-posthog-anything to be added
-- Metabase ([🇺🇸 US](https://metabase.prod-us.posthog.dev/)  / [🇪🇺 EU](https://metabase.prod-eu.posthog.dev/)) - post in #ask-posthog-anything to be invited
+- Grafana ([🇺🇸 US](https://grafana.prod-us.posthog.dev/)  / [🇪🇺 EU](https://grafana.prod-eu.posthog.dev/))
 - [ArgoCD](https://argocd-internal.internal.posthog.dev) - this is where 99% of cluster operations take place such as restarting pods, scaling things up and down etc.
+- Metabase ([🇺🇸 US](https://metabase.prod-us.posthog.dev/)  / [🇪🇺 EU](https://metabase.prod-eu.posthog.dev/)) - post in #ask-posthog-anything to be invited
 
 
 ### More advanced access
@@ -87,27 +93,25 @@ As well as the above access you should ensure you have access and feel comfortab
 - Our tailnet, which gates our internal services (such as Grafana, Metabase, or runbooks) – follow [this guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network) to join
 
 
-## When on call
+## Responding to alerts when on-call
 
-You just go about your day, paying no attention to being on call most of the time! But the moment you get paged, it's time to switch gears and start investigating the alert.
+![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/incidentio_alert_343ed2062b.png)
 
+Critical alerts will trigger per-team escalation policies which go like this:
+1. If available, a member of the team associated with the alert is paged first
+1. If nobody is available or nobody responds within the configured time, the `escalators` group is additionally paged with the same conditions
+1. If nobody is available or nobody responds within the configured time then the `On call: global` schedule is paged
 
-### Responding to alerts
+> **If at any point you get paged - always respond!** You can mark yourself as unavailable and incident.io will automatically move up the escaltion path. If you are in working hours, or 
 
-Critical alerts 
+By default if you are being paged, especially as the global on-call, the alert is considered critical, meaning it almost definitely requires attention. Your primary job is to:
 
+Every alert should have associated Grafana and Runbook links allowing you to quickly get more visual details of what is going on and how to respond.
 
-A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [https://runbooks.posthog.com/](https://runbooks.posthog.com/).
+When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. In any case, your first priority will be to understand what's going on, and the right starting point will almost always be Grafana. 
 
-When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
-In any case, your first priority will be to understand what's going on, and the right starting point will almost always be Grafana: [🇺🇸 US](http://grafana-prod-us/) / [🇪🇺 EU](http://grafana-prod-eu/).
+Sometimes alerts are purposefully overly-sensitive and might already be fixing themselves by the time you see them. **Use your best judgement here**. If the linked graph has a spike that is clearly coming down, watch it closely and give it time for the alert to auto-resolve.
 
-[If the alert is starting to have any noticeable impact on users, go raise an incident.](/handbook/engineering/incidents) It's that simple.
+[If the alert is starting to have any noticeable impact on users or you are not sure whether to raise an incident - go raise an incident.](/handbook/engineering/operations/incidents) It's that simple.
 
 If you're stumped and no resource is of help, get someone from the relevant team to shadow you while you sort the problem out. The idea is that they can help you understand the issue and where to find how to debug it. The idea is _not_ for them to take over at this point, as otherwise you won't be able to learn from this incident.
-
-## Why is the on-call rotation spread across all engineers?
-
-If you're in a product team, it's tempting to think that service alerts don't apply to you, or that when you're on call you can just hand everything off to the infrastructure team. That's not the case, because it's important that every engineer has a basic understanding of how our software is deployed, where the weak points in our systems are, and what the failure modes look like. This understanding should be all that's needed to follow the runbooks, and if you follow the causes of alerts, ultimately you'll be less likely to ship code that takes PostHog down.
-
-Besides knowledge, being on call requires availability – including weekends. If teams had their own separate rotations, there would be more people on call in total, and each would have to stand by 24/7 as our teams aren't big enough to follow the sun. This would be more stressful because of availability constraints, while being less productive because of the rare alerts being spread across multiple people.

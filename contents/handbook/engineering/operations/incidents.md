@@ -4,15 +4,31 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Incidents are going to happen.
+# The TL;DR 
 
-If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+* If you get paged, acknowledge the page and look at the associated metrics - if it looks even slightly bad and not recovering - **CREATE AN INCIDENT**
+* If you notice something broken with the app, or a user reports something clearly broken - **CREATE AN INCIDENT**
+* If you are not sure - **CREATE AN INCIDENT**
+* _How?_ 
+  * Click the `Declare incident` button on an alert or do `/inc` in any slack channel
+* _What?_ 
+  * Join the incident channel
+  * Assign yourself as lead (you can always re-assign later)
+  * Share whatever info you have at that time
+  * Escalate by bringing in the relevant team, engineers or via incident.io using the options a the top of the channel
+  * Update the statuspage if there is any noticeable impact to users
 
-## When to raise an incident
+## Raising an incident
 
-> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
+![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/incidentio_alert_343ed2062b.png)
 
-To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will  trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
+
+Incidents are going to happen. If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+
+
+> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not.  
+
+To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
 
 Once an incident is raised an automatic workflow begins that will help you summarize the issue and escalate it appropriately. 
 
@@ -27,7 +43,7 @@ Some things that should definitely be an incident
 Things that _shouldn’t_ be an incident
 
 - Insights returning incorrect data
-- Events being < 5 minutes behind
+- Events being < 5-10 minutes behind (E2E ingestion lag)
 - Unable to save insights, create feature flags
 - Expected disruption which happens as part of scheduled maintenance
 

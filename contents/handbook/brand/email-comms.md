@@ -37,7 +37,7 @@ These emails are usually tagged as `Service updates` in Customer.io when they in
 
 Important service updates are the _only_ type of email we may send to unsubscribed users, and only if we feel it is warranted to do so.
 
-> `Service updates` emails are often part of an [engineering incident](/handbook/engineering/incidents). We handle comms for those too. 
+> `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
 Whenever we need to send an email broadcast like this we begin by creating an issue in [the Meta repo](https://github.com/PostHog/meta/), unless it involves discussion of personal information - in which case it is discussed in [Company Internal](https://github.com/PostHog/company-internal). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone log in to Customer.io. Issues are closed when an email is sent. 
 
