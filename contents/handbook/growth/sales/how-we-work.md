@@ -102,7 +102,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 **General principles**
 
 - When thinking about commission, we want to particularly incentivize:
-  - Cross selling new products - all-in-one is how we will beat the competition.
+  - Cross-selling new products - all-in-one is how we will beat the competition.
   - Closing prepaid credit contracts (often annual, but may not be) - better retention, de-risks PostHog financially.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
@@ -135,16 +135,20 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
 
-## Team target
+## Team lead quota
 
-To calculate the team quota we combine the quota of all team members, with proration applied if they are still ramping:
+From your first full quarter as a team lead in Sales, you will move to a 60% base 40% commission split in reflection of your new player/coach role.  This will be based on your team's quota attainment although you will still have your own individual quota target.
 
- - For fully-ramped team members we add 100% of their quota to the team quota.
+> Your individual quota will be lower than others in the team as you'll be spending more time on managing the team, but we still want you to demonstrate the sales individual contributor skills to your team.  You should aim for 80% team management, 20% IC work, and the quota will reflect that.
+
+To calculate the team quota, we combine the quota of all team members with proration applied if they are still ramping:
+
+ - For fully ramped team members we add 100% of their quota to the team quota.
  - For team members who begin the quarter still in their first three months in the role we add 50% of their quota to the team quota.
 
-Example: With a flat quota of $250,000 and 3 fully-ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
+Example: With a flat quota of $250,000 and 3 fully ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
 
-> If someone leaves the team we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
+> If someone leaves the team, we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
 
 ## Travel to see customers
 
