@@ -67,7 +67,7 @@ Before going on call, make sure you have the **Incident.io mobile app** [Android
 To get a calendar with all your on-call shifts from incident.io go to the [schedules section](https://app.incident.io/posthog/on-call/schedules), select `Sync calendar` at the top right and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
 
 
-## Make sure your availablity is up-to-date
+## Make sure your availability is up-to-date
 
 If you are unavailable for any of your schedules you need to act!
 
