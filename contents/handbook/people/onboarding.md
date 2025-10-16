@@ -121,7 +121,7 @@ We use a number of different tools to organise our work and communicate at PostH
 ### Engineering
 
 -   AWS
--   PagerDuty
+-   Incident.io
 -   Heroku
 -   Grafana
 

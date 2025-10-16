@@ -111,7 +111,7 @@ Examples
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
 
-- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
+- Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`). 
     - We use Atlassian for hosting our status page. It is automatically updated from the incident.io slack command.

@@ -20,9 +20,9 @@ Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-c
 * `On call: {team}`
     - This is the working-hours rotation. Each engineer should have their working hours in place here Mon-Fri with a sensible working day
     - For example 8:00-17:00 for EU based engineers is likely preferable as there will be US engineers who can take 17:00 onwards
-    - Each member is responsible for ensuring this is up-to-date with PTO. You can create an override 
+    - Each member is responsible for ensuring this is up-to-date with PTO. You can create an override for your schedule simply assigned to "No one".
 * `Support: {team}`
-    - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the customer support rotation 
+    - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the customer support rotation as well as the out of-hours-escalation for the extreme case
 
 ### Escalator schedules
 
@@ -44,7 +44,7 @@ PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. 
 This schedule has 3 week day layers:
 - **Europe** (06:00 to 16:00 UTC) - (10 hours)
 - **Americas East** (14:00 to 23:00 UTC) - (8 hours)
-- **Americas West** (https://posthog.pagerduty.com/schedules#P3J10CZ) (24:00 to 06:00 UTC) - (6 hours)
+- **Americas West**  (24:00 to 06:00 UTC) - (6 hours)
 
 And 2 weekend layers:
 - **Europe Weekend** (06:00 to 18:00 UTC) - (12 hours)
