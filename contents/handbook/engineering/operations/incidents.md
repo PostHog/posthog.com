@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# The TL;DR 
+## The TL;DR 
 
 * If you get paged, acknowledge the page and look at the associated metrics - if it looks even slightly bad and not recovering - **CREATE AN INCIDENT**
 * If you notice something broken with the app (not just a bug) - **CREATE AN INCIDENT**
