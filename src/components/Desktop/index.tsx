@@ -272,6 +272,12 @@ export default function Desktop() {
     }
 
     useEffect(() => {
+        // Hide the initial SSR loader once React has hydrated
+        const initialLoader = document.getElementById('initial-loader')
+        if (initialLoader) {
+            initialLoader.style.display = 'none'
+        }
+
         const savedPositions = localStorage.getItem(STORAGE_KEY)
         if (savedPositions) {
             try {
