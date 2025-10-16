@@ -22,7 +22,7 @@ To create a batch export to Databricks, you need the following:
 - A Databricks workspace with Unity Catalog enabled
 - A SQL warehouse
 - A catalog and schema you wish to use
-- A service principal with [OAuth Machine-to-Machine (M2M)](https://docs.databricks.com/aws/en/dev-tools/auth/oauth-m2m) authentication configured. This is the only authentication type we support currently. This service principle must have the appropriate permissions (see below)
+- A service principal with [OAuth Machine-to-Machine (M2M)](https://docs.databricks.com/aws/en/dev-tools/auth/oauth-m2m) authentication configured. This is the only authentication type we support currently. This service principal must have the appropriate permissions (see below)
 
 ## Setup instructions
 
@@ -46,7 +46,7 @@ You will need to make a note of the **Server hostname** and **HTTP path** for yo
 2. Create a schema within that catalog (or use an existing one).
 3. Note the names of both the catalog and schema - you'll need these when configuring the batch export.
 
-> **Note:** You can also create the destination table manually, however, in general we recommended allowing PostHog to create tables for you to ensure the data schemas are correct
+> **Note:** You can also create the destination table manually, however, in general we recommend allowing PostHog to create tables for you to ensure the data schemas are correct.
 
 ### 3. Create a service principal
 
@@ -92,16 +92,16 @@ You can grant these permissions using SQL commands in Databricks:
 
 ```sql runInPostHog=false
 -- Grant catalog permissions
-GRANT USE CATALOG ON CATALOG <catalog_name> TO <service_principal_id_or_group>;
+GRANT USE CATALOG ON CATALOG `<catalog_name>` TO `<service_principal_id_or_group>`;
 
 -- Grant schema permissions
-GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_id_or_group>;
-GRANT CREATE TABLE ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_id_or_group>;
-GRANT CREATE VOLUME ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_id_or_group>;
+GRANT USE SCHEMA ON SCHEMA `<catalog_name>`.`<schema_name>` TO `<service_principal_id_or_group>`;
+GRANT CREATE TABLE ON SCHEMA `<catalog_name>`.`<schema_name>` TO `<service_principal_id_or_group>`;
+GRANT CREATE VOLUME ON SCHEMA `<catalog_name>`.`<schema_name>` TO `<service_principal_id_or_group>`;
 
 -- Grant table permissions (only needed if the table already exists)
-GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO <service_principal_id_or_group>;
-GRANT MODIFY ON TABLE <catalog_name>.<schema_name>.<table_name> TO <service_principal_id_or_group>;
+GRANT SELECT ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<service_principal_id_or_group>`;
+GRANT MODIFY ON TABLE `<catalog_name>`.`<schema_name>`.`<table_name>` TO `<service_principal_id_or_group>`;
 ```
 
 > **Note:** Replace `<catalog_name>`, `<schema_name>`, `<table_name>`, and `<service_principal_id_or_group>` with your actual values. You can either assign permissions to the service principal directly or via a [group](https://docs.databricks.com/aws/en/admin/users-groups/groups).
@@ -140,7 +140,7 @@ Configuring a batch export targeting Databricks requires the following configura
   - Events model: partitioned by `timestamp`
   - Sessions model: partitioned by `end_timestamp`
   - Persons model: no default partitioning
-* **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields. Enabled by default. Requires Databricks Runtime 15.3 or above. If disabled, `STRING` type will be used instead.
+* **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields (like `properties` and `person_properties`). Enabled by default. The `VARIANT` type is optimized for semi-structured data and provides better querying performance. However, it requires **Databricks Runtime 15.3 or above**. If you're using an older runtime version, disable this setting to use `STRING` type instead.
 
 
 ## Models
@@ -163,8 +163,6 @@ This is the default model for Databricks batch exports. The schema of the model 
 | timestamp                      | `TIMESTAMP` | The timestamp associated with an event                         |
 | databricks_ingested_timestamp  | `TIMESTAMP` | An additional metadata column, indicating when the event was ingested into Databricks          |
 
-> **Note on VARIANT vs STRING:** By default, JSON fields like `properties` use Databricks' `VARIANT` type, which is optimized for semi-structured data and enables better querying performance. This requires Databricks Runtime 15.3 or above. If you're using an older runtime, you can configure the export to use `STRING` type instead.
-
 ### Persons model
 
 The schema of the model as created in Databricks is:
@@ -184,7 +182,7 @@ The Databricks table will contain one row per `(team_id, distinct_id)` pair, and
 
 ## FAQ
 
-### How is data exported into Databricks?
+### How does the batch export process work?
 
 The batch export process follows a consistent pattern regardless of the model being exported, with variations depending on whether the model is mutable (like persons) or immutable (like events).
 
