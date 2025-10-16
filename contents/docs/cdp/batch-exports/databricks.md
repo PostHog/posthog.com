@@ -10,9 +10,15 @@ availability:
 
 Batch exports can be used to export data to a Databricks Delta table.
 
-> **Note:** The Databricks destination is currently in `beta`. This means the configuration and features are subject to change.
->
-> You can request access via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Databricks destination is in beta" type="fyi">
+
+The Databricks destination is currently in `beta`. This means the configuration and features are subject to change.
+
+You can request access via the [in-app support form](https://app.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
+
+</CalloutBox>
 
 ## Requirements
 
