@@ -28,27 +28,24 @@ You can use the template in company internal to do so, a version of which is sha
 ```
 ## Summary of proposed team change
 
-[words here, bullet points are preferred]
+_[bullet points are preferred]_
 
-## Problem(s) making this change will solve
+## Why we should make this change
 
-[words here]
+_[explain the problems this will solve and/or opportunities this change will unlock]_
 
 ## Changes of feature ownership (if applicable)
 
-[list any changes to feature ownership if they apply]
+_[list any changes to feature ownership if they apply]_
 
 ## People affected by the change
 
-[tag everyone directly affected]
+_[tag everyone directly affected]_
 
-## Decision maker
+## Decider & deadline
 
-[usually the Blitzscale team member responsible for this area of the business]
-
-## Deadline for decision
-
-[no more than three working days after the proposal is made]
+- **Decider:** [usually the Blitzscale team member responsible for this area of the business]
+- **Deadline:** [no more than three working days after the proposal is made]
 ```
 
 ### 2. Share your proposal widely
