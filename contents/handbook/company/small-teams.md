@@ -7,25 +7,25 @@ hideAnchor: false
 
 PostHog is structured for speed, autonomy and innovation.
 
-Many traditional organizations have big, separate functions. You have a product team, an engineering team, customer support, and so on. This slows things down when you scale because there are more layers of communication and complex approval chains. This stifles innovation - you have to get your boss to talk to someone else's boss to get work done. It also means that people can't really see the impact of their work.
+Many traditional organizations have big, separate functions. You have a product team, an engineering team, customer support, and so on. This slows things down when you scale because there are more layers of communication and complex approval chains. This stifles innovation because you have to get your boss to talk to someone else's boss to get work done. It also means that people can't really see the impact of their work.
 
 PostHog started off as a completely flat company with one big goal: to increase the number of successful products in the world.
 
 As we are getting bigger, we anticipate that it will get harder for people to see the direct impact of their work, which reduces the sense of ownership.
 
-We have therefore introduced Small Teams. These are designed to each operate like a startup. We maintain our full org chart <PrivateLink url="https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report">in Deel</PrivateLink>.
+We have therefore introduced small teams. These are designed to each operate like a startup. We maintain our full org chart <PrivateLink url="https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report">in Deel</PrivateLink>.
 
 ## How it works
 
--   The overall goal for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes
--   A Small Team should _strictly_ be between 2-6 people
+-   The overall goal for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes.
+-   A Small Team should _strictly_ be between 2-6 people.
 -   A Small Team has a Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
--   A Small Team must have a customer (internal or external)
+-   A Small Team must have a customer (internal or external).
 -   There may be certain functions where at our current stage we don't need a Small Team yet.
 -   Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
 -   A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
--   A Small Team will, at some stage, be able to create its own pricing (too complex in immediate future to do this, however)
--   A Small Team is responsible for talking to users, documenting what they build, and ensuring their features are highlighted in releases
+-   A Small Team will, at some stage, be able to create its own pricing.
+-   A Small Team is responsible for talking to users, documenting what they build, and ensuring their features are highlighted in releases.
 
 ## What does owning an area of the product mean?
 
@@ -48,16 +48,16 @@ During the quarter:
 3. Monitor relevant metrics including those covering Usage, Quality and Revenue
 4. Triage and fix related bugs
 5. Assist the support hero in answering related questions
-6. Collaborate with other Small Teams such as marketing
+6. Collaborate with other small teams such as marketing
 7. Become power users of their area of PostHog and use PostHog in their processes
 
 ## What is the role of the team lead?
 
-Overall, the team lead is responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
+Overall, the team lead is responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themselves.
 
-Team leads do not necessarily = managers. [Read more about how we think about management.](/handbook/company/management)
+Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new Team Lead is appointed or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md), along with a checklist of actions.
+Once a new Team Lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md), along with a checklist of actions.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
@@ -71,7 +71,7 @@ Further details on how to do this are available in [the new small team template]
 
 ### Launching new products and features
 
-It's the responsibility of the team lead to keep Marketing and Billing teams informed about product progress so that product marketers can coordinate launches and the Billing team can implement pricing.
+It's the responsibility of the team lead to keep Marketing and Billing teams informed about product progress, so that product marketers can coordinate launches and the Billing team can implement pricing.
 
 Some guidelines on how to do this are below, but if in doubt team leads should always aim to overcommunicate with Marketing and Billing teams.
 
@@ -130,33 +130,35 @@ See the [list of all small teams](/small-teams).
 
 ## Forming new small teams
 
-Organizational changes usually happen at the small team level. Here’s what happens when we form a new small team:
+We have a defined [process or proposing changes to teams](/handbook/company/team-changes), or creating a new team.
 
--   [ ] Exec discusses with relevant team leads (and/or managers if applicable).
--   [ ] Exec discusses with relevant team member(s).
+Once a decision is made, the following happens:
+
 -   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
 -   [ ] Ops creates an issue with [the small teams template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md) and assigns the team lead
 -   [ ] Exec informs everyone else in the company in the next all hands session.
 
-The small teams template contains a list of tasks for the Ops team and the team lead. These include standard tasks, such as creating Slack groups and a team page to ensure the team can communicate efficiently.
+The small teams template contains a list of tasks for the Ops team and the team lead. 
+
+These include standard tasks, such as creating Slack groups and a team page to ensure the team can communicate efficiently.
 
 ## FAQ
 
-#### Who do Small Teams report to? How does this work with management?
+#### Who do small teams report to? How does this work with management?
 
-The Team Lead has the final say in a given Small Team's decision making - they decide what to build / work on.
+The team lead has the final say in a given small team's decision-making - they decide what to build / work on.
 
-Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which Small Team they're in, will report to an engineer. It's important to note that [management at PostHog](/handbook/company/management) is very minimalistic - it's critical that managers don't set tasks for those in Small Teams.
+Each person's line manager is their role's functional leader (if possible). For example, engineers, no matter which small team they're in, will report to an engineer. 
 
-Think of the Small Team as the company you work for, and your line manager as your coach.
+It's important to note that [management at PostHog](/handbook/company/management) is very minimalistic – it's critical that managers don't set tasks for those in small teams.
 
-#### Can someone be in multiple Small Teams?
+Think of the small team as the company you work for, and your line manager as your coach.
 
-No. This defeats the purpose of ownership. We should be hiring in both places. Sometimes that'll mean we "overstaff" certain teams, but in reality there will always be further projects we can move people onto if they run out of work. It's better to do this than to be perpetually understaffed and for our product to suffer as a result.
+#### Can someone be in multiple small teams?
 
-Despite not being possible to be in multiple small teams - you can certainly attend the meetings of other small teams and otherwise work closely with them for the purposes of collaboration with your small team.
+Only if they're in some kind of supportive role. For example, product managers and designers can be attached to more than one team, but product engineers should never be in more than one team because this acts against proper ownership.
 
-#### Who is in a Small Team?
+#### Who is in a small team?
 
 No more than 6 people, but that's the only rule. It could be any group of people working together.
 
@@ -166,7 +168,9 @@ Eventually, yes. Other companies have a UX team that build components for everyo
 
 #### Can I still [step on toes](/handbook/company/values)?
 
-Yes. In fact it's actively encouraged. We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
+Yes. In fact, it's actively encouraged. 
+
+We still expect people to have an understanding of the entire company and what various people are working on. In engineering, we still expect you to understand how the entire system works, even if you're only working on infrastructure. You can only do your job well if you understand how it fits in with other parts of the system.
 
 You're actively encouraged to raise pull requests or propose changes to stuff that doesn't have anything to do with your small team.
 
@@ -176,31 +180,47 @@ We try to keep moves infrequent and when needed. We anticipate moving people rou
 
 There are two scenarios that will trigger a move:
 
--   The Small Team may realize they no-longer need someone, or that they could really do with someone currently in another Small Team internally.
+-   The small team may realize they no-longer need someone, or that they could really do with someone currently in another small team internally.
+
 -   An individual team member may wish to move in order to develop their skills or experience.
 
 It is at the discretion of the _manager_ of that person if they can move.
 
-#### Aren't most Small Teams way too small?
+#### Aren't most small teams way too small?
 
-In general, no - it's surprisingly great how much just 2-6 people can get done.
+In general, no – it's surprisingly great how much just 2-6 people can get done.
 
 If more mature product areas cannot cope with the workload, small teams will clarify where we need to hire too. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
 
-#### How does hiring in the Small Team work?
+#### How does hiring in the small team work?
 
-The Small Team is responsible for creating roles for those that they need.
+The small team is responsible for creating roles for those that they need.
 
 We have a centralized team that will then help you hire.
 
-James or Tim will meet every hire we make - it's a standard startup failure for founders to get too removed from hiring. We are very happy to then give you complete autonomy on the work you do, as best we can.
+James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
 
-#### How do we create new teams?
+Regardless of the team, we aim to retain a high bar for new hires. In the words of James Greenhill: "If it's not a hell yes, it's a hell no." See [how we hire](/handbook/people/hiring-process) for more on this. 
 
--   We want people with some time (~6 months at PostHog) to start new teams (rather than completely new people)
-    -   We'll aim to only move people from teams that are well resourced to reduce disruption to teams
-        -   During the exec org tidy up meeting, we will figure out what products we want to build and who we want to build those products, so we can overstaff teams who will lose people. We will aim to be transparent about this as we hire into your team.
-        -   Because we have small teams and almost infinite things to build, it's likely your team will never truly feel overstaffed, so please give us a little grace here when we pull people (but let us know if it really feels like a bad move).
+#### How do we create new teams, or make changes to existing teams?
+
+There are three key principles here:
+
+1. Anyone can propose a change by creating an issue suggesting the change.
+2. Decisions should be made quickly – i.e. less than a week. We don't conduct lengthy consultations.
+3. Team Blitzscale ultimately own the decision to make a change or not.
+
+See [how we make team changes](/handbook/company/team-changes) for more a more detailed breakdown of the process.
+
+Some other important notes:
+
+- If moving people between teams, we aim to only move people from teams that are well resourced to reduce disruption to teams.
+
+- During the exec org tidy up meeting, we will figure out what products we want to build, and who we want to build those products, so we can over staff teams who will lose people. We will aim to be transparent about this as we hire into your team.
+
+- Because we have small teams and almost infinite things to build, it's likely your team will never truly feel overstaffed. You should give feedback on the suggested change if you feel strongly it's the wrong decision, but do not block changes purely because they'll weaken your team in the short term. 
+
+- Ultimately, we should default to moving fast and taking some short term pain in order enjoy the long term benefits of making a decisive change when it's needed. We shouldn't delay changes that are necessary because they're inconvenient in the short term.
 
 #### Does a Small Team have a budget?
 
@@ -208,7 +228,7 @@ Spend money when it makes sense to do so. See our [general policy on spending mo
 
 #### How do you keep the product together as a company?
 
-James and Tim are ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+James and Tim are ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all small teams are working on something rational. This is how we manage the product.
 
 #### How do you stop duplicate work?
 
