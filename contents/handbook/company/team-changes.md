@@ -73,7 +73,7 @@ Our goal is to make the best possible decision as fast as possible. When giving 
 
 ### 3. Share the final decision in Slack
 
-The final decision should always be made the relevant member(s) of the Blitzscale Team in a timely fashion.
+The final decision should always be made by the relevant member(s) of the Blitzscale Team in a timely fashion.
 
 Once made, they should share their decision in #tell-posthog-anything and the relevant team channels, alongside a short summary of why we're making that change.
 

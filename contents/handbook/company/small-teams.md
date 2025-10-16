@@ -130,7 +130,7 @@ See the [list of all small teams](/small-teams).
 
 ## Forming new small teams
 
-We have a defined [process or proposing changes to teams](/handbook/company/team-changes), or creating a new team.
+We have a defined [process for proposing changes to teams](/handbook/company/team-changes), or creating a new team.
 
 Once a decision is made, the following happens:
 
@@ -210,7 +210,7 @@ There are three key principles here:
 2. Decisions should be made quickly – i.e. less than a week. We don't conduct lengthy consultations.
 3. Team Blitzscale ultimately own the decision to make a change or not.
 
-See [how we make team changes](/handbook/company/team-changes) for more a more detailed breakdown of the process.
+See [how we make team changes](/handbook/company/team-changes) for a more detailed breakdown of the process.
 
 Some other important notes:
 
@@ -220,7 +220,7 @@ Some other important notes:
 
 - Because we have small teams and almost infinite things to build, it's likely your team will never truly feel overstaffed. You should give feedback on the suggested change if you feel strongly it's the wrong decision, but do not block changes purely because they'll weaken your team in the short term. 
 
-- Ultimately, we should default to moving fast and taking some short term pain in order enjoy the long term benefits of making a decisive change when it's needed. We shouldn't delay changes that are necessary because they're inconvenient in the short term.
+- Ultimately, we should default to moving fast and taking some short term pain in order to enjoy the long term benefits of making a decisive change when it's needed. We shouldn't delay changes that are necessary because they're inconvenient in the short term.
 
 #### Does a Small Team have a budget?
 
