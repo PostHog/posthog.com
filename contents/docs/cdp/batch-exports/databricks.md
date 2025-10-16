@@ -37,14 +37,16 @@ You will need to make a note of the **Server hostname** and **HTTP path** for yo
 1. In Databricks, navigate to **SQL Warehouses**.
 2. Select your SQL warehouse.
 3. Go to the **Connection details** tab.
-4. Copy the **Server hostname** (e.g., `abc123.cloud.databricks.com`).
-5. Copy the **HTTP path** (e.g., `/sql/1.0/warehouses/abc123def456`).
+4. Copy the **Server hostname** (e.g. `abc123.cloud.databricks.com`).
+5. Copy the **HTTP path** (e.g. `/sql/1.0/warehouses/abc123def456`).
 
 ### 2. Set up catalog and schema
 
 1. In your Databricks workspace, create a catalog (or use an existing one) where PostHog will export data.
 2. Create a schema within that catalog (or use an existing one).
 3. Note the names of both the catalog and schema - you'll need these when configuring the batch export.
+
+> **Note:** You can also create the destination table manually, however, in general we recommended allowing PostHog to create tables for you to ensure the data schemas are correct
 
 ### 3. Create a service principal
 
@@ -53,7 +55,7 @@ Service principals give automated tools and scripts API-only access to Databrick
 1. In your Databricks workspace, navigate to **Settings** > **Identity and access** > **Service principals**.
 2. Click **Add service principal**.
 3. Click **Add new**.
-4. Enter a name for your service principal (e.g., "PostHog Batch Exports").
+4. Enter a name for your service principal (e.g. "PostHog Batch Exports").
 5. Click **Add**.
 
 ### 4. Generate OAuth credentials
@@ -73,31 +75,36 @@ The service principal needs the following permissions:
 
 **At the catalog level:**
 - `USE CATALOG` - Required to access the catalog
-- `USE SCHEMA` - Required to access schemas within the catalog
-- `CREATE TABLE` - Required to create the export table if it doesn't exist
 
 **At the schema level:**
 - `USE SCHEMA` - Required to access the schema
-- `CREATE TABLE` - Required to create tables
-- `MODIFY` - Required to insert and update data
+- `CREATE TABLE` - Required to create new tables (if the destination table doesn't exist)
+- `CREATE VOLUME` - Required to create temporary volumes for staging data
 
-**For the persons model (mutable data):**
-- `CREATE TABLE` - Required to create temporary stage tables
-- `DELETE` - Required to drop stage tables after merge operations
+**At the table level:**
+
+(Only needed if your table already exists. In general it is recommended to allow PostHog to create tables for you to ensure the data schemas are correct)
+
+- `SELECT` - Required to read the table schema
+- `MODIFY` - Required to insert and update data
 
 You can grant these permissions using SQL commands in Databricks:
 
 ```sql runInPostHog=false
 -- Grant catalog permissions
-GRANT USE CATALOG ON CATALOG <catalog_name> TO <service_principal_name>;
+GRANT USE CATALOG ON CATALOG <catalog_name> TO <service_principal_id_or_group>;
 
 -- Grant schema permissions
-GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_name>;
-GRANT CREATE TABLE ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_name>;
-GRANT MODIFY ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_name>;
+GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_id_or_group>;
+GRANT CREATE TABLE ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_id_or_group>;
+GRANT CREATE VOLUME ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_id_or_group>;
+
+-- Grant table permissions (only needed if the table already exists)
+GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO <service_principal_id_or_group>;
+GRANT MODIFY ON TABLE <catalog_name>.<schema_name>.<table_name> TO <service_principal_id_or_group>;
 ```
 
-> **Note:** Replace `<catalog_name>`, `<schema_name>`, and `<service_principal_name>` with your actual values.
+> **Note:** Replace `<catalog_name>`, `<schema_name>`, `<table_name>`, and `<service_principal_id_or_group>` with your actual values. You can either assign permissions to the service principal directly or via a [group](https://docs.databricks.com/aws/en/admin/users-groups/groups).
 
 
 ## Creating the batch export
@@ -106,12 +113,12 @@ GRANT MODIFY ON SCHEMA <catalog_name>.<schema_name> TO <service_principal_name>;
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Databricks**.
 4. Click the **+ Create** button.
-5. Follow the steps to create a Databricks integration (if you haven't already):
+5. Fill in the necessary [configuration details](#databricks-configuration)
+6. Create a Databricks integration (if you haven't already):
    - Enter a name for the integration
    - Enter your **Server hostname** (from [step 1](#1-sql-warehouse))
    - Enter your **Client ID** (from [step 4](#4-generate-oauth-credentials))
    - Enter your **Client Secret** (from [step 4](#4-generate-oauth-credentials))
-6. Fill in the necessary [configuration details](#databricks-configuration).
 7. Finalize the creation by clicking on "Create".
 8. Done! The batch export will schedule its first run on the start of the next period.
 
@@ -121,12 +128,12 @@ Configuring a batch export targeting Databricks requires the following configura
 
 **Connection settings:**
 * **Integration:** Select the Databricks integration you created (or create a new one). The integration stores your server hostname and OAuth credentials securely.
-* **HTTP Path:** The HTTP path value for your SQL warehouse or all-purpose compute cluster (e.g., `/sql/1.0/warehouses/abc123def456`).
+* **HTTP Path:** The HTTP path value for your SQL warehouse or all-purpose compute cluster (e.g. `/sql/1.0/warehouses/abc123def456`).
 
 **Destination settings:**
 * **Catalog:** The name of the Databricks catalog where the table will be created.
 * **Schema:** The name of the schema within the catalog where the table will be created.
-* **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically.
+* **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically (this is the recommended approach).
 
 **Advanced settings (optional):**
 * **Table partition field:** The field to partition the table by. Partitioning can improve query performance for large tables. By default:
@@ -154,7 +161,7 @@ This is the default model for Databricks batch exports. The schema of the model 
 | distinct_id                    | `STRING`    | The `distinct_id` of the user who sent the event               |
 | team_id                        | `BIGINT`    | The `team_id` for the event                                    |
 | timestamp                      | `TIMESTAMP` | The timestamp associated with an event                         |
-| databricks_ingested_timestamp  | `TIMESTAMP` | The timestamp when the event was queried from PostHog          |
+| databricks_ingested_timestamp  | `TIMESTAMP` | An additional metadata column, indicating when the event was ingested into Databricks          |
 
 > **Note on VARIANT vs STRING:** By default, JSON fields like `properties` use Databricks' `VARIANT` type, which is optimized for semi-structured data and enables better querying performance. This requires Databricks Runtime 15.3 or above. If you're using an older runtime, you can configure the export to use `STRING` type instead.
 
@@ -167,7 +174,7 @@ The schema of the model as created in Databricks is:
 | team_id                    | `BIGINT`    | The id of the project (team) the person belongs to                                                             |
 | distinct_id                | `STRING`    | A `distinct_id` associated with the person                                                                     |
 | person_id                  | `STRING`    | The id of the person associated to this (`team_id`, `distinct_id`) pair                                        |
-| properties                 | `VARIANT` or `STRING` | A JSON object with all the latest properties of the person                                               |
+| properties                 | `VARIANT` or `STRING` | A JSON object with all the latest properties of the person                                           |
 | person_version             | `BIGINT`    | Internal version of the person properties, used by batch export in merge operation                             |
 | person_distinct_id_version | `BIGINT`    | Internal version of the person to `distinct_id` mapping, used by batch export in merge operation               |
 | created_at                 | `TIMESTAMP` | The timestamp when the person was created                                                                      |
@@ -181,7 +188,7 @@ The Databricks table will contain one row per `(team_id, distinct_id)` pair, and
 
 The batch export process follows a consistent pattern regardless of the model being exported, with variations depending on whether the model is mutable (like persons) or immutable (like events).
 
-**For immutable models (e.g., events):**
+**For immutable models (e.g. events):**
 
 1. Create a temporary volume to store Parquet files.
 2. Create the destination table if it doesn't exist.
@@ -190,7 +197,7 @@ The batch export process follows a consistent pattern regardless of the model be
 5. Copy data directly from the volume into the destination table using Databricks' `COPY INTO` command.
 6. Delete the temporary volume.
 
-**For mutable models (e.g., persons, sessions):**
+**For mutable models (e.g. persons, sessions):**
 
 1. Create a temporary volume to store Parquet files.
 2. Create the destination table if it doesn't exist.
