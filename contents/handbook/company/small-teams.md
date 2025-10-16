@@ -17,15 +17,15 @@ We have therefore introduced small teams. These are designed to each operate lik
 
 ## How it works
 
--   The overall goal for a Small Team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes.
--   A Small Team should _strictly_ be between 2-6 people.
--   A Small Team has a Team Lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
--   A Small Team must have a customer (internal or external).
--   There may be certain functions where at our current stage we don't need a Small Team yet.
--   Each Small Team runs its own retrospective + sprint every week. This must be done transparently.
--   A Small Team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
--   A Small Team will, at some stage, be able to create its own pricing.
--   A Small Team is responsible for talking to users, documenting what they build, and ensuring their features are highlighted in releases.
+-   The overall goal for a small team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes.
+-   A small team should _strictly_ be between 2-6 people.
+-   A small team has a team lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
+-   A small team must have a customer (internal or external).
+-   There may be certain functions where at our current stage we don't need a small team yet.
+-   Each small team runs its own retrospective + sprint every week. This must be done transparently.
+-   A small team has the final call in which of its features get into production, with no need for external QA/control - within our existing release schedule.
+-   A small team will, at some stage, be able to create its own pricing.
+-   A small team is responsible for talking to users, documenting what they build, and ensuring their features are highlighted in releases.
 
 ## What does owning an area of the product mean?
 
@@ -39,7 +39,7 @@ The product small team is responsible for everything related to their area, part
 
 Each quarter:
 
-1. Create good quarterly OKRs
+1. Create good quarterly goals
 
 During the quarter:
 
@@ -57,7 +57,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new Team Lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md), along with a checklist of actions.
+Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md), along with a checklist of actions.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
@@ -144,7 +144,7 @@ These include standard tasks, such as creating Slack groups and a team page to e
 
 ## FAQ
 
-#### Who do small teams report to? How does this work with management?
+### Who do small teams report to? How does this work with management?
 
 The team lead has the final say in a given small team's decision-making - they decide what to build / work on.
 
@@ -154,19 +154,19 @@ It's important to note that [management at PostHog](/handbook/company/management
 
 Think of the small team as the company you work for, and your line manager as your coach.
 
-#### Can someone be in multiple small teams?
+### Can someone be in multiple small teams?
 
 Only if they're in some kind of supportive role. For example, product managers and designers can be attached to more than one team, but product engineers should never be in more than one team because this acts against proper ownership.
 
-#### Who is in a small team?
+### Who is in a small team?
 
 No more than 6 people, but that's the only rule. It could be any group of people working together.
 
-#### Will this lead to inconsistent design?
+### Will this lead to inconsistent design?
 
 Eventually, yes. Other companies have a UX team that build components for everyone to use. Since we currently use [Ant Design](https://ant.design/), we don't need this just yet.
 
-#### Can I still [step on toes](/handbook/company/values)?
+### Can I still [step on toes](/handbook/company/values)?
 
 Yes. In fact, it's actively encouraged. 
 
@@ -174,7 +174,7 @@ We still expect people to have an understanding of the entire company and what v
 
 You're actively encouraged to raise pull requests or propose changes to stuff that doesn't have anything to do with your small team.
 
-#### Can people change teams?
+### Can people change teams?
 
 We try to keep moves infrequent and when needed. We anticipate moving people roughly every 3-9 months. We'd rather hire new people than create gaps by shifting people around.
 
@@ -186,13 +186,13 @@ There are two scenarios that will trigger a move:
 
 It is at the discretion of the _manager_ of that person if they can move.
 
-#### Aren't most small teams way too small?
+### Aren't most small teams way too small?
 
 In general, no – it's surprisingly great how much just 2-6 people can get done.
 
 If more mature product areas cannot cope with the workload, small teams will clarify where we need to hire too. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
 
-#### How does hiring in the small team work?
+### How does hiring in the small team work?
 
 The small team is responsible for creating roles for those that they need.
 
@@ -202,7 +202,7 @@ James and Tim used to interview every candidate because it's a standard startup 
 
 Regardless of the team, we aim to retain a high bar for new hires. In the words of James Greenhill: "If it's not a hell yes, it's a hell no." See [how we hire](/handbook/people/hiring-process) for more on this. 
 
-#### How do we create new teams, or make changes to existing teams?
+### How do we create new teams, or make changes to existing teams?
 
 There are three key principles here:
 
@@ -222,20 +222,20 @@ Some other important notes:
 
 - Ultimately, we should default to moving fast and taking some short term pain in order to enjoy the long term benefits of making a decisive change when it's needed. We shouldn't delay changes that are necessary because they're inconvenient in the short term.
 
-#### Does a Small Team have a budget?
+### Does a small team have a budget?
 
 Spend money when it makes sense to do so. See our [general policy on spending money](/handbook/people/spending-money).
 
-#### How do you keep the product together as a company?
+### How do you keep the product together as a company?
 
 James and Tim are ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all small teams are working on something rational. This is how we manage the product.
 
-#### How do you stop duplicate work?
+### How do you stop duplicate work?
 
 James and Tim have the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 
-#### Can a Small Team "own" another Small Team?
+### Can a small team "own" another small team?
 
 Not for now, no. Perhaps when we're much larger this is something to think about.
