@@ -35,7 +35,7 @@ export const Content = () => {
                             <ProductScreenshot
                                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png"
                                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/complete_onboarding_workflow_09c6e2c6ad.png"
-                                alt="Example campaign"
+                                alt="Example workflow"
                                 padding={false}
                                 classes="rounded @md:max-w-2xl"
                             />
@@ -61,8 +61,8 @@ export const Content = () => {
                         </li>
                         <li>
                             <b>Composable CDP</b>: Add any{' '}
-                            <Link to="/docs/cdp/destinations">PostHog real-time destination</Link> to a campaign as a
-                            messaging step.
+                            <Link to="/docs/cdp/destinations">PostHog real-time destination</Link> to a workflow as a
+                            dispatch step.
                         </li>
                     </ul>
                 </div>
@@ -81,10 +81,9 @@ export const Content = () => {
                 </h2>
                 <p>Workflows is currently in early beta. While in beta, workflows is free to use.</p>
                 <p>
-                    After the beta, we are planning to charge for usage based on the number of real-time destinations
-                    used and messages sent per month. Workflows with more destinations or messages will count as higher
-                    usage than those with fewer. We are planning a generous free tier of 10,000 real time
-                    destinations/messages per month, and then volume discounts as usage increases.
+                    After the beta, pricing will be based on how many real-time destinations you use and how many
+                    messages you send each month. You’ll get 10,000 destinations or messages free each month, with
+                    discounts as your usage grows.
                 </p>
             </section>
 
@@ -102,7 +101,7 @@ export const Content = () => {
                     <ResourceItem
                         type="Quickstart"
                         title="Set up a messaging channel"
-                        description="Configure a messaging channel for your first campaign"
+                        description="Configure a messaging channel for your first workflow"
                         url="/docs/workflows/configure-channels"
                     />
                     <ResourceItem
