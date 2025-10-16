@@ -28,7 +28,8 @@ As we start to generate cold outbound leads, these will be routed to TAEs to wor
 In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AE is picked at random, and we spend 30min going through:
 
 1. Recent Closed Won
-2. Where are you going to end up vs quota this quarter?   a. Confidence (scale of 1-5? a percentage out of 100? what's keeping it from being 5 or 100%?)
+2. Where are you going to end up vs quota this quarter?   
+   - Confidence (scale of 1-5? a percentage out of 100? what's keeping it from being 5 or 100%?)
 3. Review deals (use this <PrivateLink url="https://posthog.lightning.force.com/lightning/r/Report/00OVx000003qcc9MAA/view">Salesforce view</PrivateLink>) for this quarter by Commit -> Best Case -> Pipeline 
    - For "Commit", how could it possibly end up "closed lost?"
    - For "Best Case", how does it advance to "Commit" (or what's keeping it from doing so?)
