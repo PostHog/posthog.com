@@ -60,7 +60,7 @@ We do not typically do public relations for anything other than company-level ne
 
 Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption. 
 
-> If you're aware of any upcoming maintenance which would cause disruption, please inform the Support, Marketing, and Customer Success teams as soon as possible. MArketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
+> If you're aware of any upcoming maintenance which would cause disruption, please inform the Support, Marketing, and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
 
 Typically, Product Marketers take responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
 
