@@ -645,7 +645,7 @@ export function Question(props: QuestionProps) {
                         {...(isInForum && { 'data-scheme': 'primary' })}
                         className={` pb-1 relative w-full ${
                             isInForum
-                                ? 'bg-primary border-t border-primary pt-4 pl-4'
+                                ? 'bg-primary border-t border-primary pt-4 px-4'
                                 : 'ml-5 pl-8 pr-5 squeak-left-border'
                         } ${archived ? 'opacity-25' : ''}`}
                     >

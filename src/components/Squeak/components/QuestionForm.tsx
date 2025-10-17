@@ -130,7 +130,7 @@ function QuestionFormMain({
     const { status } = useAppStatus()
 
     return (
-        <div className={`flex-1 mb-1 ${isInForum ? 'pr-8' : ''}`}>
+        <div className={`flex-1 mb-1`}>
             {title && <h2>{title}</h2>}
             <Formik
                 initialValues={{
