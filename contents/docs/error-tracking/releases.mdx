@@ -1,0 +1,19 @@
+---
+title: Releases
+showTitle: true
+sidebar: Docs
+---
+
+Releases describe a single deployment: the artefacts you uploaded, the version that produced them, and any build metadata PostHog can infer.
+
+## Creating releases
+
+`posthog-cli sourcemap inject` finds or creates the release for the project and version it detects, and stores that link inside each sourcemap. You can specify `--project` and `--version` yourself; otherwise the CLI inspects Git metadata (like the repo name and commit SHA) to choose sensible values. Artefacts are locked to their release once written, so they cannot move between releases later.
+
+## Uploading artefacts
+
+`posthog-cli sourcemap upload` uploads the artefacts, associating them with a release if it was injected. You can then see release details on issues, link between stack traces and code files, and filter issues based on release information.
+
+## Release context in error tracking
+
+Captured exceptions inherit the release information recorded during injection. PostHog attaches the release, project, and Git metadata to each exception captured as we capture it in our ingestion pipeline.
