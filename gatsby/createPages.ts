@@ -409,7 +409,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             monorepoDocs: allMdx(
                 filter: {
                     fileAbsolutePath: { regex: "/\\.posthog-monorepo-cache/" }
-                    frontmatter: { title: { ne: "" } }
                 }
             ) {
                 nodes {
