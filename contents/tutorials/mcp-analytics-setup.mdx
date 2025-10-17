@@ -179,7 +179,7 @@ export async function checkStock(productId: string) {
 
 export async function analyzeData(data: string) {
   console.error(`[Tool] analyzeData called with data: ${data}`);
-  setTimeout(() => {}, 1000);
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return {
     content: [
       { type: "text" as const, text: `Analyzed data: ${data}` }
