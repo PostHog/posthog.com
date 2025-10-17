@@ -1,10 +1,29 @@
 const fetch = require(`node-fetch`)
 const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
+const fs = require('fs')
+const path = require('path')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
+
+// Conditional plugin for monorepo docs (PoC)
+// Safe to merge - won't break if monorepo not available
+const monorepoDocsPath = process.env.POSTHOG_REPO_PATH
+    ? `${process.env.POSTHOG_REPO_PATH}/docs/published`
+    : path.join(__dirname, '..', 'posthog', 'docs', 'published')
+
+const monorepoDocsPlugin = fs.existsSync(monorepoDocsPath) || process.env.POSTHOG_DOCS_REF
+    ? {
+          resolve: `gatsby-source-filesystem`,
+          options: {
+              name: `monorepo-docs`,
+              path: monorepoDocsPath,
+              ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+          },
+      }
+    : null
 
 const getQuestionPages = async (base) => {
     const fetchQuestions = async (page) => {
@@ -170,6 +189,8 @@ module.exports = {
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
+        // Monorepo docs plugin (PoC) - safely skipped if not available
+        monorepoDocsPlugin,
         {
             resolve: `gatsby-source-strapi-pages`,
             options: {
@@ -397,5 +418,5 @@ module.exports = {
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),
-    ],
+    ].filter(Boolean), // Remove null plugins (e.g., monorepo docs if not available)
 }
