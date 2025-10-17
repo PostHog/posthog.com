@@ -687,6 +687,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug: monorepoDartPath,
                 links,
                 searchFilter: 'docs',
+                nextURL: '', // Required by HandbookTemplate
             },
         })
     })
