@@ -197,7 +197,7 @@ function QuestionFormMain({
                                         <Input
                                             label="Subject"
                                             autoFocus={autoFocus}
-                                            className=""
+                                            className="text-primary"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
