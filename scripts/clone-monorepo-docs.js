@@ -57,11 +57,21 @@ try {
         process.exit(0)
     }
 
-    // Clone at specific ref
-    const cloneCmd = `git clone --depth 1 --single-branch --branch ${refToClone} https://github.com/PostHog/posthog.git ${monorepoDest}`
+    // Clone only docs directory with sparse-checkout (shallow, minimal data)
+    console.log(`📦 Setting up sparse clone for docs/ only...`)
 
-    console.log(`Running: ${cloneCmd}`)
-    execSync(cloneCmd, { stdio: 'inherit' })
+    // Step 1: Initialize repo with no checkout
+    execSync(
+        `git clone --depth 1 --single-branch --branch ${refToClone} --no-checkout https://github.com/PostHog/posthog.git ${monorepoDest}`,
+        {
+            stdio: 'inherit',
+        }
+    )
+
+    // Step 2: Enable sparse-checkout and fetch only docs/
+    execSync(`cd ${monorepoDest} && git sparse-checkout set docs && git checkout`, {
+        stdio: 'inherit',
+    })
 
     console.log('✅ Monorepo docs cloned successfully')
     process.exit(0)
