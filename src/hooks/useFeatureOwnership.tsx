@@ -308,7 +308,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile group first.</strong>
+                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
             </>
         ),
         label: 'feature/libraries',
@@ -322,11 +322,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <br />
                 <br /> Start with the{' '}
                 <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile group
+                    Mobile team
                 </a>{' '}
                 for triage, loop in
-                <PrivateLink url="https://posthog.slack.com/archives/C04MZFDA5KK">
-                    #support-client-libraries
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">
+                    #support-mobile
                 </PrivateLink>{' '}
                 as needed.
             </>
