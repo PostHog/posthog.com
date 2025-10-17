@@ -1540,7 +1540,6 @@ body.dark {
         stroke-width: 3px !important;
     }
     .label,
-    .label .nodeLabel,
     .cluster .cluster-label .nodeLabel {
         @apply dark:!text-white;
     }
