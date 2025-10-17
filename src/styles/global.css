@@ -1540,6 +1540,7 @@ body.dark {
         stroke-width: 3px !important;
     }
     .label,
+    .label .nodeLabel,
     .cluster .cluster-label .nodeLabel {
         @apply dark:!text-white;
     }
@@ -1547,32 +1548,28 @@ body.dark {
         @apply !text-secondary;
     }
     .loopText {
-        @apply dark:!fill-gray dark:!stroke-gray;
+        @apply dark:!fill-light !stroke-light;
     }
     #flowchart-pointStart,
     #flowchart-pointEnd,
-    .arrowheadPath {
-        @apply dark:!fill-gray dark:!stroke-gray;
-    }
-    .edgePaths path {
-        @apply dark:!stroke-gray;
-    }
-    marker path,
-    .arrowheadPath path,
-    .flowchart-pointStart path,
-    .flowchart-pointEnd path {
-        @apply dark:!fill-gray dark:!stroke-gray;
+    .link,
+    .arrowheadPath,
+    .edgePath,
+    .arrowMarkerPath,
+    marker,
+    marker path {
+        @apply dark:!fill-light dark:!stroke-light;
     }
     path.flowchart-link,
     path.path,
     .root .clusters .cluster rect,
     line {
-        @apply dark:!stroke-gray;
+        @apply dark:!stroke-light;
     }
     g rect,
     g polygon,
     g.node path {
-        @apply fill-accent;
+        @apply dark:!fill-accent;
     }
 
     line-height: 1;
