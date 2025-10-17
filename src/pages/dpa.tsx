@@ -1641,14 +1641,23 @@ function DpaGenerator() {
                                             <div className="pt-2">
                                                 <strong>Details</strong>
                                                 <br />
-                                                <a
-                                                    href={subprocessor.details}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="[word-break:break-word]"
-                                                >
-                                                    {subprocessor.details}
-                                                </a>
+                                                <div className="space-y-1">
+                                                    {subprocessor.details.map((detail, index) => (
+                                                        <div key={index}>
+                                                            <a
+                                                                href={detail}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="[word-break:break-word]"
+                                                            >
+                                                                {detail
+                                                                    .replace('https://', '')
+                                                                    .replace('http://', '')
+                                                                    .replace('www.', '')}
+                                                            </a>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1664,7 +1673,7 @@ function DpaGenerator() {
                                                 <strong className="block">
                                                     Geographical location of the processing
                                                 </strong>
-                                                <div>{subprocessor.location}</div>
+                                                <div dangerouslySetInnerHTML={{ __html: subprocessor.location }} />
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1726,14 +1735,23 @@ function DpaGenerator() {
                                             <div className="pt-2">
                                                 <strong>Details</strong>
                                                 <br />
-                                                <a
-                                                    href={subprocessor.details}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="[word-break:break-word]"
-                                                >
-                                                    {subprocessor.details}
-                                                </a>
+                                                <div className="space-y-1">
+                                                    {subprocessor.details.map((detail, index) => (
+                                                        <div key={index}>
+                                                            <a
+                                                                href={detail}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="[word-break:break-word]"
+                                                            >
+                                                                {detail
+                                                                    .replace('https://', '')
+                                                                    .replace('http://', '')
+                                                                    .replace('www.', '')}
+                                                            </a>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1749,7 +1767,10 @@ function DpaGenerator() {
                                                 <strong className="block">
                                                     Geographical location of the processing
                                                 </strong>
-                                                <div>{subprocessor.location}</div>
+                                                <div
+                                                    className="space-y-1"
+                                                    dangerouslySetInnerHTML={{ __html: subprocessor.location }}
+                                                />
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
