@@ -407,14 +407,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             monorepoDocs: allMdx(
-                filter: { fields: { sourceInstanceName: { eq: "monorepo-docs" } }, frontmatter: { title: { ne: "" } } }
+                filter: {
+                    fileAbsolutePath: { regex: "/\\.posthog-monorepo-cache/" }
+                    frontmatter: { title: { ne: "" } }
+                }
             ) {
                 nodes {
                     id
                     slug
                     fields {
                         slug
-                        sourceInstanceName
                     }
                     headings {
                         depth
