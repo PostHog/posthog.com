@@ -49,14 +49,6 @@ const monorepoDest = path.join(__dirname, '..', '.posthog-monorepo-cache')
 console.log(`📦 Cloning posthog at ${refToClone}...`)
 
 try {
-    const docsPath = path.join(monorepoDest, 'docs')
-
-    // Check if docs already exist - if yes, skip clone
-    if (fs.existsSync(docsPath)) {
-        console.log('ℹ️  Monorepo docs already present, skipping clone')
-        process.exit(0)
-    }
-
     // Clone only docs directory with sparse-checkout (shallow, minimal data)
     console.log(`📦 Setting up sparse clone for docs/ only...`)
 
