@@ -10,3 +10,16 @@ Next, set up the client with your PostHog project key.
 ```rust
 let client = posthog_rs::client(env!("<ph_project_api_key>"));
 ```
+
+### Sync client
+
+Our Rust SDK supports both synchronous and asynchronous clients. The asynchronous client is the default and is recommended for most use cases.
+
+If you need to use a synchronous client instead - like we do in our [CLI](https://github.com/PostHog/posthog/tree/master/cli) -, you can opt into it by disabling the asynchronous feature on your `Cargo.toml` file.
+
+```toml
+[dependencies]
+posthog-rs = { version = "0.3.5", default-features = false }
+```
+
+You can continue to use the client as you would normally with the exception that the client will now be synchronous.
