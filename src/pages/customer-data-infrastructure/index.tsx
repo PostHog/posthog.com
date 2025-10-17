@@ -288,7 +288,7 @@ export default function CDP(): JSX.Element {
                 <h3>Built for product engineers</h3>
                 <div className="my-6">
                     <WistiaCustomPlayer 
-                        mediaId="zcyze15pzj" 
+                        mediaId="1cv9e1aimw" 
                         aspectRatio={16/9}
                         className="max-w-4xl mx-auto"
                     />
