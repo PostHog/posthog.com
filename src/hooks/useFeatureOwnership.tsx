@@ -86,7 +86,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Cohorts',
         owner: ['feature-flags'],
     },
-    comments: {
+    'command-palette': {
         feature: 'Command palette',
         owner: ['platform-ux'],
         label: 'feature/command-bar',
