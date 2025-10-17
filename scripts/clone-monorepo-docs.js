@@ -53,6 +53,12 @@ console.log('🔍 Paths:', {
 console.log(`📦 Cloning posthog at ${refToClone}...`)
 
 try {
+    // Check if already cloned (prebuild runs twice in the build process)
+    if (fs.existsSync(monorepoDest)) {
+        console.log('ℹ️  Monorepo cache directory already exists, skipping clone')
+        process.exit(0)
+    }
+
     // Clone only docs directory with sparse-checkout (shallow, minimal data)
     console.log(`📦 Setting up sparse clone for docs/ only...`)
 
