@@ -265,12 +265,12 @@ function DpaGenerator() {
             </section>
 
             <section
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
                 <div
-                    className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 print:hidden @3xl:sticky @3xl:top-0`}
+                    className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0`}
                 >
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
@@ -1823,12 +1823,13 @@ function DpaGenerator() {
             </section>
 
             <section className="text-center mt-20 @3xl:mt-40 pb-20 @3xl:pb-24 print:hidden">
-                <h3>Need a custom MSA?</h3>
+                <h3 className="mb-4">Need a custom MSA?</h3>
                 <TrackedCTA
                     event={{ name: `clicked Talk to a human` }}
                     href="/talk-to-a-human"
                     type="secondary"
                     size="lg"
+                    state={{ newWindow: true }}
                 >
                     Talk to sales
                 </TrackedCTA>
