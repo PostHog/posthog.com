@@ -2417,7 +2417,7 @@ export const docsMenu = {
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
+                            name: 'PostHog AI',
                             url: '/docs/posthog-ai',
                         },
                         {
@@ -4556,14 +4556,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
                 {
-                    name: 'Max AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Overview',
