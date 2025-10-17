@@ -406,6 +406,26 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            monorepoDocs: allMdx(
+                filter: { fields: { sourceInstanceName: { eq: "monorepo-docs" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    slug
+                    fields {
+                        slug
+                        sourceInstanceName
+                    }
+                    headings {
+                        depth
+                        value
+                    }
+                    rawBody
+                    frontmatter {
+                        title
+                    }
+                }
+            }
         }
     `)) as GatsbyContentResponse
 
@@ -640,6 +660,29 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         regex: `$${node.url}/`,
     }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
+
+    // Monorepo docs - served at /docs-from-monorepo/ during PoC
+    result.data.monorepoDocs?.nodes?.forEach((node) => {
+        const links =
+            node?.rawBody &&
+            markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
+        const slug = node.fields?.slug || node.slug
+        // Prefix monorepo docs with /docs-from-monorepo/ for PoC phase
+        const monorepoDartPath = `/docs-from-monorepo${slug}`
+        const tableOfContents = node.headings && formatToc(node.headings)
+
+        createPage({
+            path: replacePath(monorepoDartPath),
+            component: HandbookTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug: monorepoDartPath,
+                links,
+                searchFilter: 'docs',
+            },
+        })
+    })
 
     result.data.tutorials.nodes.forEach((node) => {
         const { slug } = node.fields
