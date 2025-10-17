@@ -72,7 +72,7 @@ npm install --save-dev typescript @types/node tsx
 
 ```typescript file="./src/index.ts"
 import "dotenv/config";
-import { createServer } from "./server.js";
+import { startStdioServer } from "./server.js";
 
 async function main() {
   const handle = await startStdioServer();
