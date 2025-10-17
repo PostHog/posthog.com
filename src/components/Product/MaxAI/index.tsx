@@ -394,13 +394,13 @@ const Roadmap = () => {
 
 const product = {
     slug: 'max-ai',
-    lowercase: 'Max AI',
-    capitalized: 'Max AI',
+    lowercase: 'PostHog AI',
+    capitalized: 'PostHog AI',
     freeTier: 'JOETBD',
 }
 
-const team = 'Max AI'
-const teamSlug = '/teams/max-ai'
+const team = 'PostHog AI'
+const teamSlug = '/teams/posthog-ai'
 
 const featuresPerRow = 3
 const features = [

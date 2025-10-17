@@ -37,7 +37,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   [Feature Flags](/teams/feature-flags)
 -   [Experiments](/teams/experiments)
--   [Max AI](/teams/max-ai)
+-   [PostHog AI](/teams/posthog-ai)
 
 </fieldset>
 
