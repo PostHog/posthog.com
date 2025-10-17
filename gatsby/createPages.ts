@@ -688,6 +688,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 links,
                 searchFilter: 'docs',
                 nextURL: '', // Required by HandbookTemplate
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
             },
         })
     })
