@@ -13,7 +13,7 @@ require('dotenv').config({
 // Points to /docs/ which includes both published/ and internal/ subdirectories
 const monorepoDocsPath = process.env.POSTHOG_REPO_PATH
     ? `${process.env.POSTHOG_REPO_PATH}/docs`
-    : path.join(__dirname, '..', 'posthog', 'docs')
+    : path.join(__dirname, '..', '.posthog-monorepo-cache', 'docs')
 
 const pathExists = fs.existsSync(monorepoDocsPath)
 const envVarSet = process.env.POSTHOG_DOCS_REF

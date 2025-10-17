@@ -44,14 +44,16 @@ if (!shouldClone) {
     process.exit(0)
 }
 
-const monorepoDest = path.join(__dirname, '..', 'posthog')
+const monorepoDest = path.join(__dirname, '..', '.posthog-monorepo-cache')
 
 console.log(`📦 Cloning posthog at ${refToClone}...`)
 
 try {
-    // Check if already exists
-    if (fs.existsSync(monorepoDest)) {
-        console.log('ℹ️  Monorepo already cloned, skipping')
+    const docsPath = path.join(monorepoDest, 'docs')
+
+    // Check if docs already exist - if yes, skip clone
+    if (fs.existsSync(docsPath)) {
+        console.log('ℹ️  Monorepo docs already present, skipping clone')
         process.exit(0)
     }
 
