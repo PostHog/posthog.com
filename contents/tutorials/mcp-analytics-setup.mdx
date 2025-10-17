@@ -75,13 +75,12 @@ import "dotenv/config";
 import { createServer } from "./server.js";
 
 async function main() {
-
-  const server = await createServer();
+  const handle = await startStdioServer();
 
   process.on("SIGINT", async () => {
-    await server.close();
-    process.exit(0);
+    await stopStdioServer(handle);
   });
+}
 }
 
 main().catch(console.error);
