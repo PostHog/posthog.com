@@ -18,7 +18,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 - **Tuesday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - some teams do sprint planning here as well. [Engineering tech talks/brown bags](/handbook/engineering/tech-talks) happen every second week, ClickHouse office hours happen on the alternate week. 
 - **Thursday** - Meeting-free - no regularly scheduled internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
-- **Friday** - extracurricular type meetings like [BookHog](/handbook/people/clubs#clubs-at-posthog) often end up here!
+- **Friday** - extracurricular type meetings like [BookHog](/handbook/people/bookhog) often end up here!
 
 ## The all-hands
 

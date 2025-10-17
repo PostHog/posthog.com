@@ -9,6 +9,11 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Heads up!" type="caution">
+Evaluation environments are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
+</CalloutBox>
 
 Evaluation environments provide fine-grained control over where and when your feature flags evaluate. By constraining flag evaluation to specific environments or contexts, you can reduce unnecessary evaluations, optimize costs, and better organize your feature management strategy.
 

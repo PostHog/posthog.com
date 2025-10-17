@@ -63,6 +63,15 @@ Aim to keep things sensible and cheap. As always, use your best judgement when [
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
 
+### Your first week
+
+Your first week can definitely be a bit overwhelming at any new company, so here's what you can (roughly) expect!
+- You will meet (either in person or virtually) your team lead to discuss goals and aims over the next 30/60/90 days and beyond
+- You will get all your equipment set up and get access to all the accounts you need
+- You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company
+- You should try and set up a few calls with a range of people to introduce yourself
+- You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
+
 ### Engineering
 
 We hire engineers on a regular basis, running in-person onboarding practically every time. Over the years, we've learned a lot about doing this efficiently and there's much to gain from sharing the knowledge between teams.
@@ -207,12 +216,19 @@ These check-ins are designed to ensure every new starter is set up for success. 
 
 If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people
 
+## Finding answers at PostHog
+
+Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start with #ask-max, our AI that's read every handbook and documentation page. It'll point you to relevant docs instantly and is available 24/7.
+
+Of course, if you're stuck or need context beyond what's documented, just ask in the relevant channel - people are always happy to help. The goal isn't to make you figure everything out alone, it's to give you the fastest path to answers.
+
 ## Slack Channels
 
 Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
+-   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
 -   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
 -   `#brand-mentions`
 -   `#do-more-weird`
@@ -225,8 +241,10 @@ Below are a list of Slack channels you may find helpful:
 
 ### Social channels
 
+We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
+
 -   `#food`
--   `#parenting`
+-   `#kids`
 -   `#no-context-posthog`
 -   `#random`
 -   `#whereintheworld`

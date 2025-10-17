@@ -155,7 +155,7 @@ Since version 3.28.0, you can provide a `BeforeSendBlock` function when initiali
 <summary>Redact URLs in event properties</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Redact URLs
@@ -171,7 +171,7 @@ config.setBeforeSend { event in
 <summary>Redact sensitive information from event properties</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Redact sensitive information
@@ -189,7 +189,7 @@ config.setBeforeSend { event in
 <summary>Drop events by event name</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Drop all events named "Stale Event"
@@ -210,7 +210,7 @@ Sampling lets you choose to send only a percentage of events to PostHog. It is a
 <summary>Sample events by event name</summary>
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
 
 config.setBeforeSend { event in
     // Sample 10% of Sampled Event events
@@ -234,7 +234,7 @@ config.setBeforeSend { event in
 You can provide an array of `BeforeSendBlock` functions to be called one after the other:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
 
 config.setBeforeSend(
     // First block: Drop all events named "Stale Event"
@@ -378,6 +378,34 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
+## Method swizzling
+
+The PostHog iOS SDK uses method swizzling to intercept and modify method calls at runtime to provide advanced features like:
+
+- **Screen view tracking** - Automatically captures when view controllers are presented (`config.captureScreenViews`)
+- **Element interactions** - Automatically tracks user interactions with UI elements (`config.captureElementInteractions`)  
+- **Session replay** - Records user sessions (`config.sessionReplay`)
+- **Surveys** - Displays surveys at appropriate times (`config.surveys`)
+- **Advanced metrics tracking** - Provides more precise session ID calculation and rotation by detecting user activity and idleness
+
+### Disabling method swizzling
+
+Since version 3.34.0, you can opt out of swizzling using the `enableSwizzling` configuration option. When you disable swizzling, the SDK disables the features listed above. 
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
+config.enableSwizzling = false
+PostHogSDK.shared.setup(config)
+```
+
+> **Note:** When method swizzling is disabled, features that depend on it will not work even if they are individually enabled in the config. For example, if you set `config.sessionReplay = true` and `config.enableSwizzling = false`, session replay will **not** be enabled. 
+
+### Session metrics management 
+
+Method swizzling is particularly important for accurate [session metrics tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
+
+With swizzling disabled, the SDK only uses application open/backgrounded events to detect user activity, which can lead to a sub-optimal session calculation. 
+
 ## All configuration options
 
 The `configuration` element contains several other settings you can toggle:
@@ -421,6 +449,13 @@ configuration.captureApplicationLifecycleEvents = true
  * Application delegate's applicationDidFinishLaunching method. (on/true by default)
  */
 configuration.captureScreenViews = true
+
+/**
+ * Enable method swizzling for SDK functionality that depends on it. When disabled, functionality that 
+ * requires swizzling (like autocapture, screen views, session replay, surveys) will not be installed.
+ * (on/true by default)
+ */
+configuration.enableSwizzling = true
 
 /**
 * (UIKit only) Whether the posthog client should automatically make a capture call when the user interacts with an element in a screen.
