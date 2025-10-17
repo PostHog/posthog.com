@@ -26,6 +26,13 @@ const fs = require('fs')
 const isVercel = process.env.VERCEL === '1'
 const docsRef = process.env.POSTHOG_DOCS_REF
 
+// Debug: log environment
+console.log('🔍 Environment:', {
+    VERCEL: process.env.VERCEL,
+    isVercel,
+    POSTHOG_DOCS_REF: docsRef,
+})
+
 // Only clone if:
 // 1. On Vercel (defaults to master), or
 // 2. Explicitly told to with POSTHOG_DOCS_REF (for local testing)

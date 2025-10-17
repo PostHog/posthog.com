@@ -15,16 +15,28 @@ const monorepoDocsPath = process.env.POSTHOG_REPO_PATH
     ? `${process.env.POSTHOG_REPO_PATH}/docs`
     : path.join(__dirname, '..', 'posthog', 'docs')
 
-const monorepoDocsPlugin = fs.existsSync(monorepoDocsPath) || process.env.POSTHOG_DOCS_REF
-    ? {
-          resolve: `gatsby-source-filesystem`,
-          options: {
-              name: `monorepo-docs`,
-              path: monorepoDocsPath,
-              ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
-          },
-      }
-    : null
+const pathExists = fs.existsSync(monorepoDocsPath)
+const envVarSet = process.env.POSTHOG_DOCS_REF
+
+console.log('🔍 Monorepo docs config:', {
+    monorepoDocsPath,
+    pathExists,
+    POSTHOG_REPO_PATH: process.env.POSTHOG_REPO_PATH,
+    POSTHOG_DOCS_REF: envVarSet,
+    shouldActivate: pathExists || envVarSet,
+})
+
+const monorepoDocsPlugin =
+    pathExists || envVarSet
+        ? {
+              resolve: `gatsby-source-filesystem`,
+              options: {
+                  name: `monorepo-docs`,
+                  path: monorepoDocsPath,
+                  ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+              },
+          }
+        : null
 
 const getQuestionPages = async (base) => {
     const fetchQuestions = async (page) => {

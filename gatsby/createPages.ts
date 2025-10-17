@@ -662,6 +662,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     // Monorepo docs - served at /docs-from-monorepo/ during PoC
+    console.log('🔍 Monorepo docs found:', result.data.monorepoDocs?.nodes?.length || 0)
     result.data.monorepoDocs?.nodes?.forEach((node) => {
         const links =
             node?.rawBody &&
