@@ -19,6 +19,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { TextureTan } from 'components/Textures'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useWindow } from '../../context/Window'
+import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -285,6 +286,13 @@ export default function CDP(): JSX.Element {
                 </OSButton> 
                 */}
                 <h3>Built for product engineers</h3>
+                <div className="my-6">
+                    <WistiaCustomPlayer 
+                        mediaId="zcyze15pzj" 
+                        aspectRatio={16/9}
+                        className="max-w-4xl mx-auto"
+                    />
+                </div>
                 <p>
                     PostHog's customer data infrastructure is built for product engineers who want to{' '}
                     <em>understand how product usage</em> (tracked with PostHog) <em>correlates with business data</em>{' '}
