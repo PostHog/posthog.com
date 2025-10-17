@@ -29,6 +29,19 @@ import UploadSourceMapPlatforms from  './upload-source-maps/_snippets/upload-sou
 
 <UploadSourceMapPlatforms />
 
+## Release context in stack traces
+
+Error tracking displays release information over stack traces to help you track down the root cause of an issue, down to the commit and version that produced it. This context can be defined when you [upload sourcemaps](/docs/error-tracking/upload-source-maps/).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/release_light_d5955d3b5e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/release_dark_67fed14b12.png"
+    alt="Error tracking releases"
+    classes="rounded"
+/>
+
+Learn more about [releases](/docs/error-tracking/releases/) in error tracking.
+
 ## Troubleshooting symbol sets
 
 Compiled or minified languages requires additional information to perform a process called symbolification to produce the same stack trace and code context output shown above. The additional information is known as a symbol set.
