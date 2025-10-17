@@ -237,7 +237,7 @@ function QuestionFormMain({
                             </div>
 
                             {disclaimer && (
-                                <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
+                                <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
                                     If you need to share personal info relating to a bug or issue with your account, we
                                     suggest filing a support ticket in the app.
                                 </p>
