@@ -269,7 +269,9 @@ function DpaGenerator() {
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
-                <div className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 print:hidden`}>
+                <div
+                    className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 print:hidden @3xl:sticky @3xl:top-0`}
+                >
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -433,7 +435,7 @@ function DpaGenerator() {
                 <div
                     ref={divRef}
                     id="page"
-                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl print:shadow-none rounded relative"
+                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-b-0 border-primary @3xl:border-l print:shadow-none rounded relative"
                 >
                     <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10">
                         <div className="text-lg font-bold dark:text-primary">Preview</div>
