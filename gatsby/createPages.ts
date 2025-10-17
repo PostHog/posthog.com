@@ -430,7 +430,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     `)) as GatsbyContentResponse
 
     if (result.error) {
+        console.error('🔍 GraphQL Error:', result.error)
         return Promise.reject(result.error)
+    }
+
+    if (!result.data) {
+        console.error('🔍 No data returned from GraphQL query')
+        return Promise.reject(new Error('No data returned from GraphQL query'))
     }
 
     const menuFlattened = flattenMenu(menu)
@@ -662,7 +668,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     // Monorepo docs - served at /docs-from-monorepo/ during PoC
-    console.log('🔍 Monorepo docs found:', result.data.monorepoDocs?.nodes?.length || 0)
+    console.log('🔍 Monorepo docs query result:', {
+        hasMonorepoDocs: !!result.data.monorepoDocs,
+        count: result.data.monorepoDocs?.nodes?.length || 0,
+    })
     result.data.monorepoDocs?.nodes?.forEach((node) => {
         const links =
             node?.rawBody &&

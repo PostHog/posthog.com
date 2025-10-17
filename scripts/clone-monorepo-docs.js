@@ -22,8 +22,8 @@ const { execSync } = require('child_process')
 const path = require('path')
 const fs = require('fs')
 
-// Detect if running on Vercel
-const isVercel = process.env.VERCEL === '1'
+// Detect if running on Vercel - check for any truthy value
+const isVercel = !!process.env.VERCEL
 const docsRef = process.env.POSTHOG_DOCS_REF
 
 // Debug: log environment
