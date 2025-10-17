@@ -436,7 +436,11 @@ Now we can test our MCP server with Claude Desktop, or any compatible MCP client
 
 >**Note**: The client will run our server as a child process so we don't need to run our server in our terminal. We modify the Claude's config file to make sure the Claude Desktop can run our build. 
 
-```json file=~/Library/Application Support/Claude/claude_desktop_config.json
+Open Claude Desktop's **Settings** > **Developer**. Then select **Edit Config** to open the configuration file. 
+
+Update the `claude_desktop_config.json` file to include the following:
+
+```json 
 {
   "mcpServers": {
     "analytics-demo": {
