@@ -44,12 +44,11 @@ if (!shouldClone) {
     process.exit(0)
 }
 
-const monorepoDest = path.join(__dirname, '..', '.posthog-monorepo-cache')
+const monorepoDest = path.join(process.cwd(), '.posthog-monorepo-cache')
 
 console.log('🔍 Paths:', {
-    __dirname,
-    monorepoDest,
     cwd: process.cwd(),
+    monorepoDest,
 })
 console.log(`📦 Cloning posthog at ${refToClone}...`)
 
