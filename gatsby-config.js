@@ -10,9 +10,10 @@ require('dotenv').config({
 
 // Conditional plugin for monorepo docs (PoC)
 // Safe to merge - won't break if monorepo not available
+// Points to /docs/ which includes both published/ and internal/ subdirectories
 const monorepoDocsPath = process.env.POSTHOG_REPO_PATH
-    ? `${process.env.POSTHOG_REPO_PATH}/docs/published`
-    : path.join(__dirname, '..', 'posthog', 'docs', 'published')
+    ? `${process.env.POSTHOG_REPO_PATH}/docs`
+    : path.join(__dirname, '..', 'posthog', 'docs')
 
 const monorepoDocsPlugin = fs.existsSync(monorepoDocsPath) || process.env.POSTHOG_DOCS_REF
     ? {
