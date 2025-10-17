@@ -151,18 +151,17 @@ const Contributors = (props) => {
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
-            {location.pathname.startsWith('/docs/cdp/destinations') &&
-                location.pathname !== '/docs/cdp/destinations' && (
-                    <div className="p-4 mb-8 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
-                        <h5 className="m-0 text-lg font-bold leading-tight">Did somebody say destinations?</h5>
-                        <p className="text-sm m-0 mb-3 mt-1.5">
-                            We're building more destinations and prioritzing them based on your feedback.
-                        </p>
-                        <CallToAction size="sm" to="/cdp#library">
-                            Browse the library
-                        </CallToAction>
-                    </div>
-                )}
+            {location.pathname.startsWith('/docs/cdp/destinations') && location.pathname !== '/docs/cdp/destinations' && (
+                <div className="p-4 mb-8 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
+                    <h5 className="m-0 text-lg font-bold leading-tight">Did somebody say destinations?</h5>
+                    <p className="text-sm m-0 mb-3 mt-1.5">
+                        We're building more destinations and prioritzing them based on your feedback.
+                    </p>
+                    <CallToAction size="sm" to="/cdp#library">
+                        Browse the library
+                    </CallToAction>
+                </div>
+            )}
             {contributors && (
                 <SidebarSection title="Contributors">
                     <Contributors contributors={contributors} />
@@ -329,12 +328,12 @@ const A = (props) => <Link {...props} />
 
 export default function Handbook({
     data: { post },
-    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
+    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter, titleFallback },
 }) {
     const {
         body,
         frontmatter: {
-            title,
+            title: frontmatterTitle,
             seo,
             tableOfContents: frontmatterTableOfContents,
             hideRightSidebar,
@@ -343,6 +342,9 @@ export default function Handbook({
         fields: { slug, contributors, appConfig, templateConfigs, commits, contentWithSnippets },
         excerpt,
     } = post
+
+    // Use titleFallback (from h1 heading) if frontmatter title not provided
+    const title = frontmatterTitle || titleFallback
 
     const components = {
         Team,

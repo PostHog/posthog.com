@@ -678,6 +678,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const monorepoDartPath = `/docs-from-monorepo${slug}`
         const tableOfContents = node.headings && formatToc(node.headings)
 
+        // Fallback to first h1 heading if frontmatter title not provided
+        const titleFallback = node.frontmatter?.title || node.headings?.find((h) => h.depth === 1)?.value || 'Untitled'
+
         createPage({
             path: replacePath(monorepoDartPath),
             component: HandbookTemplate,
@@ -689,6 +692,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 searchFilter: 'docs',
                 nextURL: '', // Required by HandbookTemplate
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
+                titleFallback, // Use first h1 heading if frontmatter title missing
             },
         })
     })
