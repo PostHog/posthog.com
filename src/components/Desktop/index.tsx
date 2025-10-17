@@ -199,7 +199,9 @@ const LOADING_MESSAGES = [
     'Rebuilding webpack',
     'Hydrating the hedgehogs',
     'Sourcing and transforming nodes',
-    'Running <code>yarn serve</code>',
+    <>
+        Running <code>yarn serve</code>
+    </>,
 ]
 
 export default function Desktop() {
@@ -581,7 +583,7 @@ export default function Desktop() {
             {!rendered && (
                 <div
                     data-scheme="secondary"
-                    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center"
+                    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center z-50"
                 >
                     <div className="flex items-center justify-center gap-2 w-80 bg-primary/75 backdrop-blur border border-primary rounded p-4">
                         <HourglassSpinner className="text-primary opacity-75" />
@@ -591,8 +593,9 @@ export default function Desktop() {
                                 className={`font-medium text-secondary block ${
                                     isMessageExiting ? 'animate-slide-up-fade-out' : 'animate-slide-up-fade-in'
                                 }`}
-                                dangerouslySetInnerHTML={{ __html: LOADING_MESSAGES[currentMessageIndex] }}
-                            />
+                            >
+                                {LOADING_MESSAGES[currentMessageIndex]}
+                            </strong>
                         </div>
                     </div>
                 </div>
