@@ -87,6 +87,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['feature-flags'],
     },
     comments: {
+        feature: 'Command palette',
+        owner: ['platform-ux'],
+        label: 'feature/command-bar',
+    },
+    comments: {
         feature: 'Comments/Discussions',
         owner: ['platform-features'],
         label: 'feature/comments',
@@ -332,6 +337,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             </>
         ),
         label: 'feature/mobile',
+    },
+    search: {
+        feature: 'Search',
+        owner: ['platform-ux'],
+        label: false,
     },
     security: {
         feature: 'Security',
