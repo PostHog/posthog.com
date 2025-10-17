@@ -693,6 +693,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 nextURL: '', // Required by HandbookTemplate
                 breadcrumbBase: { name: 'Docs', url: '/docs' },
                 titleFallback, // Use first h1 heading if frontmatter title missing
+                hideTitle: !node.frontmatter?.title, // Hide rendered title if using h1 fallback
             },
         })
     })

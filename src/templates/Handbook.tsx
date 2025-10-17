@@ -328,7 +328,15 @@ const A = (props) => <Link {...props} />
 
 export default function Handbook({
     data: { post },
-    pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter, titleFallback },
+    pageContext: {
+        menu,
+        breadcrumb = [],
+        breadcrumbBase,
+        tableOfContents,
+        searchFilter,
+        titleFallback,
+        hideTitle: contextHideTitle,
+    },
 }) {
     const {
         body,
@@ -338,6 +346,7 @@ export default function Handbook({
             tableOfContents: frontmatterTableOfContents,
             hideRightSidebar,
             contentMaxWidthClass,
+            hideTitle: frontmatterHideTitle,
         },
         fields: { slug, contributors, appConfig, templateConfigs, commits, contentWithSnippets },
         excerpt,
@@ -345,6 +354,8 @@ export default function Handbook({
 
     // Use titleFallback (from h1 heading) if frontmatter title not provided
     const title = frontmatterTitle || titleFallback
+    // Don't render title twice if we're using h1 as fallback
+    const hideTitle = contextHideTitle || frontmatterHideTitle || false
 
     const components = {
         Team,
@@ -394,6 +405,7 @@ export default function Handbook({
             <ReaderView
                 body={{ type: 'mdx', content: body }}
                 title={title}
+                hideTitle={hideTitle}
                 tableOfContents={frontmatterTableOfContents || tableOfContents}
                 mdxComponents={components}
                 commits={commits}
