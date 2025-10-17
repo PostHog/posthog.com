@@ -427,15 +427,8 @@ export function Question(props: QuestionProps) {
     const { id, question, showSlug, buttonText, showActions = true, isInForum = false, ...other } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const [editingSetter, setEditingSetter] = useState<((editing: boolean) => void) | null>(null)
     const { user, notifications, setNotifications, isModerator } = useUser()
     const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
-
-    useEffect(() => {
-        if (editingSetter && isEditingQuestion) {
-            editingSetter(true)
-        }
-    }, [isEditingQuestion, editingSetter])
 
     useEffect(() => {
         if (
@@ -615,17 +608,10 @@ export function Question(props: QuestionProps) {
                                 data={questionData}
                                 type="question"
                                 onSubmit={() => mutate()}
-                                onEditingChange={(editing) => setIsEditingQuestion(editing)}
+                                onEditingChange={setIsEditingQuestion}
+                                editing={isEditingQuestion}
                             >
-                                {({ setEditing }) => {
-                                    // Store the setEditing function for later use
-                                    if (!editingSetter) {
-                                        setEditingSetter(() => setEditing)
-                                    }
-                                    return (
-                                        <Markdown className="question-content">{questionData.attributes.body}</Markdown>
-                                    )
-                                }}
+                                <Markdown className="question-content">{questionData.attributes.body}</Markdown>
                             </EditWrapper>
 
                             {!isEditingQuestion && showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (

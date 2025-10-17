@@ -8,21 +8,20 @@ import OSButton from 'components/OSButton'
 
 export default function EditWrapper({
     data,
+    editing,
+    onEditingChange,
     onSubmit,
     children,
     type,
-    onEditingChange,
 }: {
     data: any
+    editing: boolean
+    onEditingChange: (editing: boolean) => void
     onSubmit: () => void
-    children: (props: { setEditing: (editing: boolean) => void }) => React.ReactNode
+    children: React.ReactNode
     type: 'reply' | 'question'
-    onEditingChange?: (editing: boolean) => void
 }): JSX.Element {
-    const [editing, setEditing] = useState(false)
-
     const handleSetEditing = (value: boolean) => {
-        setEditing(value)
         onEditingChange?.(value)
     }
     const [loading, setLoading] = useState(false)
@@ -87,7 +86,7 @@ export default function EditWrapper({
                     />
                 </>
             ) : (
-                children({ setEditing: handleSetEditing })
+                children
             )}
         </div>
     )
