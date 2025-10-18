@@ -702,11 +702,11 @@ export default function Changelog(): JSX.Element {
     return (
         <>
             <SEO title="Changelog - PostHog" />
-            <Explorer
-                fullScreen
-                template="generic"
-                slug="changelog"
-                title="Changelog"
+            <Editor
+                hideToolbar
+                hasTabs
+                type="changelog"
+                maxWidth="100%"
                 bookmark={{
                     title: 'Changelog',
                     description: 'Latest updates and releases',
@@ -773,7 +773,7 @@ export default function Changelog(): JSX.Element {
                         {activeRoadmap && <Roadmap roadmap={activeRoadmap} onClose={() => setActiveRoadmap(null)} />}
                     </AnimatePresence>
                 </div>
-            </Explorer>
+            </Editor>
         </>
     )
 }
