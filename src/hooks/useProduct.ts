@@ -1,29 +1,19 @@
 import { useMemo } from 'react'
 import {
-    IconPieChart,
     IconThoughtBubble,
-    IconPlug,
-    IconMessage,
     IconDashboard,
     IconNotebook,
-    IconAI,
     IconMagicWand,
-    IconPiggyBank,
     IconToolbar,
-    IconBrackets,
-    IconAsterisk,
     IconWebhooks,
     IconClockRewind,
     IconRocket,
     IconLifecycle,
     IconClock,
     IconPeople,
-    IconDatabase,
     IconTerminal,
     IconGraph,
     IconFunnels,
-    IconBolt,
-    IconArrowUpRight,
     IconUserPaths,
     IconCorrelationAnalysis,
     IconRetention,
@@ -32,7 +22,6 @@ import {
     IconDecisionTree,
 } from '@posthog/icons'
 import useProducts from './useProducts'
-import { IconEnvelope } from 'components/OSIcons'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -69,7 +58,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'communication',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: 'messaging',
-            status: 'WIP',
+            status: 'alpha',
         },
         {
             name: 'User interviews',

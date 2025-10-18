@@ -3,7 +3,7 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
-type ExclusionReason = 'sanctions' | 'high-cost' | 'possible-high-cost' | 'germany' | 'timezone'
+type ExclusionReason = 'sanctions' | 'high-cost' | 'contractors' | 'germany' | 'timezone'
 
 interface CountryRestriction {
     code: string
@@ -30,9 +30,9 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Sweden: { code: 'SE', reason: 'high-cost' },
     Switzerland: { code: 'CH', reason: 'high-cost' },
 
-    // Possible with more research
-    Brazil: { code: 'BR', reason: 'possible-high-cost' },
-    Uruguay: { code: 'UY', reason: 'possible-high-cost' },
+    // Contractors only
+    Brazil: { code: 'BR', reason: 'contractors' },
+    Uruguay: { code: 'UY', reason: 'contractors' },
 
     // Germany (10 employee limit)
     Germany: { code: 'DE', reason: 'germany' },
@@ -107,7 +107,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
 const reasonColors: { [key in ExclusionReason]: number } = {
     sanctions: 0xf35454, // Red
     'high-cost': 0xb62ad9, // Purple
-    'possible-high-cost': 0xf7a501, // Orange (will have pattern)
+    contractors: 0xf7a501, // Orange (will have pattern)
     germany: 0x3b2b26, // Dark brown
     timezone: 0xaaaaaa, // Light gray
 }
@@ -115,7 +115,7 @@ const reasonColors: { [key in ExclusionReason]: number } = {
 const reasonLabels: { [key in ExclusionReason]: string } = {
     sanctions: 'Restricted due to US sanctions',
     'high-cost': 'High employer costs',
-    'possible-high-cost': 'Unlikely to hire (high employer costs)',
+    contractors: 'Hired as contractors',
     germany: 'No longer hiring (limited to 10 employees)',
     timezone: 'Outside of timezones we currently hire in',
 }
@@ -252,7 +252,9 @@ export default function CountriesWeHireIn({
 
             const restriction = restrictionMap.get(id)
             if (restriction) {
-                return `${xIcon}<strong>${name}</strong><br/><span style="margin-left: 28px;">${
+                const icon = restriction.reason === 'contractors' ? '' : xIcon
+                const marginStyle = restriction.reason === 'contractors' ? '' : 'margin-left: 28px;'
+                return `${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${
                     reasonLabels[restriction.reason]
                 }</span>`
             }
@@ -277,16 +279,16 @@ export default function CountriesWeHireIn({
                     <span>Countries we hire from</span>
                 </div>
                 <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-yellow rounded-sm" />
+                    <span>Hired as contractors</span>
+                </div>
+                <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-red rounded-sm" />
                     <span>US sanctions</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-purple rounded-sm" />
                     <span>High employer costs</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-yellow rounded-sm" />
-                    <span>Unlikely to hire (high employer costs)</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-brown rounded-sm" />

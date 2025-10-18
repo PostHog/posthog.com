@@ -362,6 +362,26 @@ module.exports = {
                     '0%, 100%': { 'background-position': '0% 50%' },
                     '50%': { 'background-position': '100% 50%' },
                 },
+                slideUpFadeIn: {
+                    from: {
+                        opacity: '0',
+                        transform: 'translateY(10px)',
+                    },
+                    to: {
+                        opacity: '1',
+                        transform: 'translateY(0)',
+                    },
+                },
+                slideUpFadeOut: {
+                    from: {
+                        opacity: '1',
+                        transform: 'translateY(0)',
+                    },
+                    to: {
+                        opacity: '0',
+                        transform: 'translateY(-10px)',
+                    },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -381,6 +401,8 @@ module.exports = {
                 'spin-slow': 'spin-slow 4s linear infinite',
                 'spin-slow-reverse': 'spin-slow-reverse 4s linear infinite',
                 'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
+                'slide-up-fade-in': 'slideUpFadeIn 300ms ease-out forwards',
+                'slide-up-fade-out': 'slideUpFadeOut 300ms ease-in forwards',
             },
             containers: {
                 '2xs': '16rem',

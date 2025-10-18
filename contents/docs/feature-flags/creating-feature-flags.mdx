@@ -8,6 +8,7 @@ availability:
   enterprise: full
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 export const CreateNewFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/create-new-feature-flag-light-mode.png"
 export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/create-new-feature-flag-dark-mode.png"
 export const ReleaseConditionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-light-mode.png"
@@ -39,29 +40,29 @@ This is the name of the key you use in your code to evaluate the feature flag.
 
 Metadata to describe and share information about your feature flag in the PostHog app.
 
-### Evaluation tags (environment constraints)
+### Evaluation environments
 
-Evaluation tags are a special type of tag that constrains feature flag evaluation to specific environments. When evaluation tags are configured, the feature flag will only evaluate when the SDK provides matching environment tags in the evaluation request.
+Evaluation environment tags are a special type of tag that constrains feature flag evaluation to specific environments. When evaluation environment are configured, the feature flag will only evaluate when the SDK provides matching evaluation environments in the `/flags` request.
 
 Key features:
 - **Environment isolation**: Prevent flags from evaluating in unintended environments (e.g., marketing site vs. app vs. docs)
 - **Cost optimization**: Reduce unnecessary flag evaluations and associated costs
 - **Better organization**: Group flags by their intended usage context
-- **Backward compatible**: Flags without evaluation tags continue to work as before
+- **Backward compatible**: Flags without evaluation environments continue to work as before
 
-To configure evaluation tags:
+To configure evaluation environments:
 1. Click the bolt icon <IconBolt className="inline w-4 h-4" /> next to the tags field
 2. Select which tags should act as evaluation constraints
 3. These tags will display with a green background and bolt icon
 
-When using evaluation tags:
+When using evaluation environment tags:
 - SDKs must send `evaluation_environments` parameter with matching tags for the flag to evaluate
-- Flags with no evaluation tags will evaluate for all requests (default behavior)
+- Flags with no evaluation environment tags will evaluate for all requests (default behavior)
 - At least one evaluation tag must match for the flag to be included in the evaluation
 
-Learn more in the [evaluation flags docs](/docs/feature-flags/evaluation-tags)
+Learn more in the [evaluation environments docs](/docs/feature-flags/evaluation-environments)
 
-> **Important:** After setting evaluation tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation tags won't take effect.
+> **Important:** After setting evaluation environment tags on your flags, you must update your SDK configuration to include the corresponding `evaluation_environments` parameter. Without this SDK update, your application won't know which environment it's deployed in, and the evaluation environment tags won't take effect.
 
 ## Enable feature flag
 
@@ -114,7 +115,7 @@ You can control where your feature flags are evaluated by specifying an evaluati
 
 Runtime filtering also reduces evaluation latency and prevents feature flag bloat by only sending relevant flags to each environment, making it easier to manage flags in your app and organize the flags you actually evaluate.
 
-> **Note:** Evaluation runtime is different from [evaluation tags](/docs/feature-flags/evaluation-tags). Runtime filtering is based on SDK type (client vs server), while evaluation tags provide fine-grained environment constraints that you define (e.g., "production", "staging", "app", "marketing-site").
+> **Note:** Evaluation runtime is different from [evaluation environments](/docs/feature-flags/evaluation-environments). Runtime filtering is based on SDK type (client vs server), while evaluation environments provide fine-grained environment constraints that you define (e.g., "production", "staging", "app", "marketing-site").
 
 ### Runtime options
 
@@ -158,8 +159,6 @@ The system then filters which flags are returned based on their configured runti
 
 > **Note:** Feature flags without an explicit evaluation runtime setting will continue to work as before, being evaluated in all environments for backward compatibility.
 
-> **Important:** Currently, feature flag dependencies are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
-
 ## Release conditions
 
 This specifies the conditions a user must meet to access the feature flag and receive a value. Condition sets are evaluated from top to bottom, and the first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
@@ -188,5 +187,11 @@ For more sophisticated feature rollouts, you can also create **feature flag depe
 - Setting up safety mechanisms where critical flags must be active first
 
 Learn more about [feature flag dependencies](/docs/feature-flags/dependencies).
+
+<CalloutBox icon="IconInfo" title="Limited dependencies with different run times" type="fyi">
+
+Currently, [feature flag dependencies](docs/feature-flags/dependencies) are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+
+</CalloutBox>
 
 > **Can I migrate my feature flags from another tool?** If you can pull feature flag data from them, you can use [our API](/docs/api/feature-flags) to migrate them. We even wrote guides for doing this with [LaunchDarkly](/docs/migrate/launchdarkly) and [Statsig](/docs/migrate/statsig).

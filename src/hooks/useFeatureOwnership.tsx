@@ -51,10 +51,6 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: [],
         notes: <>Shared responsibility, with features owned by the relevant small team.</>,
     },
-    'async-migrations': {
-        feature: 'Async migrations',
-        owner: ['messaging'],
-    },
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
@@ -89,6 +85,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     cohorts: {
         feature: 'Cohorts',
         owner: ['feature-flags'],
+    },
+    'command-palette': {
+        feature: 'Command palette',
+        owner: ['platform-ux'],
+        label: 'feature/command-bar',
     },
     comments: {
         feature: 'Comments/Discussions',
@@ -127,7 +128,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-pipelines': {
         feature: 'Data pipelines',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipeline',
     },
     'data-warehouse': {
@@ -184,6 +185,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    'managed-migrations': {
+        feature: 'Managed migrations',
+        owner: ['ingestion'],
+    },
     'marketing-analytics': {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
@@ -200,7 +205,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     messaging: {
         feature: 'Messaging',
-        owner: ['messaging'],
+        owner: ['workflows'],
     },
     notebooks: {
         feature: 'Notebooks',
@@ -235,12 +240,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-transformations': {
         feature: 'Pipeline transformations',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipelines',
     },
     'pipeline-destinations': {
         feature: 'Pipeline destinations',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/cdp',
     },
     'pipeline-sources': {
@@ -308,7 +313,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile group first.</strong>
+                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
             </>
         ),
         label: 'feature/libraries',
@@ -322,16 +327,21 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <br />
                 <br /> Start with the{' '}
                 <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile group
+                    Mobile team
                 </a>{' '}
                 for triage, loop in
-                <PrivateLink url="https://posthog.slack.com/archives/C04MZFDA5KK">
-                    #support-client-libraries
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">
+                    #support-mobile
                 </PrivateLink>{' '}
                 as needed.
             </>
         ),
         label: 'feature/mobile',
+    },
+    search: {
+        feature: 'Search',
+        owner: ['platform-ux'],
+        label: false,
     },
     security: {
         feature: 'Security',
@@ -412,7 +422,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'webhook-delivery': {
         feature: 'Webhook delivery service',
-        owner: ['messaging'],
+        owner: ['workflows'],
         label: 'feature/pipelines',
     },
 }

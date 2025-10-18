@@ -57,7 +57,7 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 ### Your personal card
 
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. Please avoid using your personal card over your Brex card. The company get points which we use towards billboard campaigns, we also can't process lots of reimbursement requests for people looking to get their own points. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
+- If you do need to use your personal card, please use the request reimbursement function in Brex.
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 

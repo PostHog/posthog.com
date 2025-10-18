@@ -199,7 +199,7 @@ import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
 By default, the library buffers events before sending them to the capture endpoint, for better performance. This can lead to lost events in serverless environments, if the Python process is terminated by the platform before the buffer is fully flushed. To avoid this, you can either:
 
-- Ensure that `posthog.flush()` is called after processing every request by adding a middleware to your server. This allows `posthog.capture()` to remain asynchronous for better performance. `posthog.flush()` is blocking.
+- Ensure that `posthog.shutdown()` is called after processing every request by adding a middleware to your server. This allows `posthog.capture()` to remain asynchronous for better performance. `posthog.shutdown()` is blocking.
 - Enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
 
 ## Django

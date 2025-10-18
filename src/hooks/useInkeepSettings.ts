@@ -21,12 +21,22 @@ const defaultBaseSettings: InkeepBaseSettings = {
     primaryBrandColor: '#E5E7E0',
     organizationDisplayName: 'PostHog',
     colorMode: {
-        forcedColorMode: 'light',
+        sync: {
+            target: typeof document !== 'undefined' ? document.body : null,
+            attributes: ['class'],
+            isDarkMode: (attrs) => attrs['class']?.includes('dark') ?? false,
+        },
     },
     theme: {
+        disableLoadingDefaultFont: true,
         styles: [
             {
-                key: 'inkeep-chat-styles',
+                key: 'google-fonts',
+                type: 'link',
+                value: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap',
+            },
+            {
+                key: 'custom-theme',
                 type: 'style',
                 value: `
 .ikp-ai-chat__header {
@@ -37,6 +47,9 @@ b,
 strong, 
 .ikp-message-header__name {
 font-variation-settings: "wght" 800;
+}
+
+.ikp-ai-chat-message-wrapper {
 }
 
 .ikp-ai-chat-message-loading {

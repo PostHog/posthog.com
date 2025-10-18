@@ -279,6 +279,7 @@ export interface AppItem {
     background?: string
     label: string
     url?: string
+    onClick?: () => void
     className?: string
     extension?: string
     children?: React.ReactNode
@@ -295,6 +296,7 @@ export const AppLink = ({
     background,
     label,
     url: initialUrl,
+    onClick,
     className,
     extension,
     children,
@@ -448,6 +450,20 @@ export const AppLink = ({
                 >
                     {content}
                 </Link>
+            ) : onClick ? (
+                <button
+                    onClick={(e) => {
+                        if (hasDragged) {
+                            e.preventDefault()
+                            e.stopPropagation()
+                        } else {
+                            onClick()
+                        }
+                    }}
+                    className={`${commonClassName} ${orientationClassName}`}
+                >
+                    {content}
+                </button>
             ) : (
                 <span className={`${commonClassName} ${orientationClassName} cursor-not-allowed opacity-75`}>
                     {content}

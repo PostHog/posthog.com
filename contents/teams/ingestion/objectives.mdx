@@ -1,32 +1,28 @@
-## Q3 objectives
+## Q4 objectives
 
-### Prepare the system for 4x the traffic
+### Implement the LLM Analytics Pipeline
 
-We need to improve several pieces of the ingestion pipeline to support the increase in traffic:
+- Build a new endpoint to handle LLM analytics events with large contexts
+- Include support for multi-modal models
 
-- Make persons database horizontally scalable
-- Support 4x ingestion throughput
-- Make deployments smoother
-- Optimize Kafka consumers
+### Define the event ingestion boundaries and enforce them
 
-### Design system architecture for next 10x growth
+- Make it clear which use cases and traffic patterns are supported
+- Enforce boundaries to improve the resilience of the ingestion pipeline
 
-We will be able to scale the system horizontally for some time, but we’re expecting to hit some harder limits soon after that. We need to understand how we’re going to scale the system further:
+### Prototype Persons API
 
-- Implement a PoC for the next generation ingestion architecture
-- Make an informed decision on how far Postgres will take us
+- Encapsulate database access to improve maintainability, scalability and performance
+- Enable more frequent and granular updates of person profiles
 
-### Improve operational maturity
+### Prototype multi-threaded ingestion
 
-We’re working on improving the reliability of the ingestion pipeline, so that the system performs better for the customers and we have fewer distractions from shipping features:
+- Increase the maximum per-partition event throughput of the ingestion pipeline in Node.js
+- Prepare for a possible future rewrite
 
-- Improve ingestion and infrastructure dashboards
-- Make ingestion logs usable
-- Write runbooks for incident response for out-of-hours incidents
+### Do at least one thing that improves data quality for customers
 
-### Reduce event duplication
-
-We’ve received support requests and questions from customers about event duplication. We would like to provide a solution that solves the majority of the problem:
-
-- Add metrics for event duplication
-- Ship an improvement for at least one source of event duplication
+Potential options:
+- Schema management
+- Authorized events
+- Better timestamp handling

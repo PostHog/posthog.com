@@ -140,7 +140,11 @@ export const onRequestError = async (err, request, context) => {
     const posthog = await getPostHogServer()
     let distinctId = null
     if (request.headers.cookie) {
-      const cookieString = request.headers.cookie
+      // Normalize multiple cookie arrays to string
+      const cookieString = Array.isArray(request.headers.cookie) 
+        ? request.headers.cookie.join('; ') 
+        : request.headers.cookie
+
       const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
 
       if (postHogCookieMatch && postHogCookieMatch[1]) {

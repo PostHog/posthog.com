@@ -16,7 +16,9 @@ import { motion } from 'framer-motion'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
+import ProgressBar from 'components/ProgressBar'
 import OSButton from 'components/OSButton'
+import HourglassSpinner from './HourglassSpinner'
 
 interface Product {
     name: string
@@ -26,7 +28,7 @@ interface Product {
 }
 
 export const useProductLinks = () => {
-    const { posthogInstance } = useApp()
+    const { posthogInstance, openNewChat } = useApp()
 
     return [
         {
@@ -72,6 +74,12 @@ export const useProductLinks = () => {
             url: '/talk-to-a-human',
             source: 'desktop',
         },
+        {
+            label: 'Ask a question',
+            Icon: <AppIcon name="forums" />,
+            onClick: () => openNewChat({ path: `ask-max` }),
+            source: 'desktop',
+        },
         ...(posthogInstance
             ? [
                   {
@@ -107,12 +115,12 @@ export const apps: AppItem[] = [
         url: '/changelog',
         source: 'desktop',
     },
-    {
-        label: 'Forums',
-        Icon: <AppIcon name="forums" />,
-        url: '/questions',
-        source: 'desktop',
-    },
+    // {
+    //     label: 'Cool tech events',
+    //     Icon: <AppIcon name="invite" />,
+    //     url: '/events',
+    //     source: 'desktop',
+    // },
     {
         label: 'Company handbook',
         Icon: <AppIcon name="handbook" />,
@@ -185,6 +193,17 @@ const validateIconPositions = (
     return true
 }
 
+const LOADING_MESSAGES = [
+    'Booting the PostHog experience',
+    'Compiling hedgehog shaders',
+    'Rebuilding webpack',
+    'Hydrating the hedgehogs',
+    'Sourcing and transforming nodes',
+    <>
+        Running <code>yarn serve</code>
+    </>,
+]
+
 export default function Desktop() {
     const productLinks = useProductLinks()
     const {
@@ -203,6 +222,8 @@ export default function Desktop() {
     })
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
+    const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
+    const [isMessageExiting, setIsMessageExiting] = useState(false)
 
     function generateInitialPositions(): IconPositions {
         const positions: IconPositions = {}
@@ -259,6 +280,12 @@ export default function Desktop() {
     }
 
     useEffect(() => {
+        // Hide the initial SSR loader once React has hydrated
+        const initialLoader = document.getElementById('initial-loader')
+        if (initialLoader) {
+            initialLoader.style.display = 'none'
+        }
+
         const savedPositions = localStorage.getItem(STORAGE_KEY)
         if (savedPositions) {
             try {
@@ -293,6 +320,21 @@ export default function Desktop() {
             window.removeEventListener('resize', handleResize)
         }
     }, [posthogInstance])
+
+    useEffect(() => {
+        if (rendered) return
+
+        const interval = setInterval(() => {
+            setIsMessageExiting(true)
+
+            setTimeout(() => {
+                setCurrentMessageIndex((prev) => (prev + 1) % LOADING_MESSAGES.length)
+                setIsMessageExiting(false)
+            }, 300)
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [rendered, currentMessageIndex])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
@@ -427,7 +469,6 @@ export default function Desktop() {
                         />
                         <div className="absolute bottom-4 md:bottom-12 -right-4 xs:right-8 md:right-0">
                             <CloudinaryImage
-                                loading="lazy"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
                                 alt=""
                                 width={1401}
@@ -442,24 +483,6 @@ export default function Desktop() {
                                 height={1400}
                                 className="size-[300px] md:size-[700px] hidden dark:block"
                             />
-                            <div className="absolute -left-20 md:-left-40 bottom-20 md:bottom-48">
-                                <OSButton
-                                    asLink
-                                    zoomHover="lg"
-                                    to="/blog/series-e"
-                                    tooltip="We raised a Series E"
-                                    state={{ newWindow: true }}
-                                    className="hover:!border-transparent active:!bg-transparent"
-                                >
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/series_e_b3934cffe7.png"
-                                        alt="We raised a Series E"
-                                        width={452}
-                                        height={569}
-                                        className="w-24 md:w-auto md:max-w-[226px] inline-block"
-                                    />
-                                </OSButton>
-                            </div>
                         </div>
                     </div>
 
@@ -555,6 +578,26 @@ export default function Desktop() {
                         recycle={false}
                         numberOfPieces={1000}
                     />
+                </div>
+            )}
+            {!rendered && (
+                <div
+                    data-scheme="secondary"
+                    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center z-50"
+                >
+                    <div className="flex items-center justify-center gap-2 w-80 bg-primary/75 backdrop-blur border border-primary rounded p-4">
+                        <HourglassSpinner className="text-primary opacity-75" />
+                        <div className="flex-1 relative">
+                            <strong
+                                key={currentMessageIndex}
+                                className={`font-medium text-secondary block ${
+                                    isMessageExiting ? 'animate-slide-up-fade-out' : 'animate-slide-up-fade-in'
+                                }`}
+                            >
+                                {LOADING_MESSAGES[currentMessageIndex]}
+                            </strong>
+                        </div>
+                    </div>
                 </div>
             )}
         </>
