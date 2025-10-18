@@ -19,7 +19,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import Explorer from 'components/Explorer'
+import { useWindow } from '../context/Window'
 
 dayjs.extend(utc)
 
@@ -519,6 +519,7 @@ export default function Changelog(): JSX.Element {
     const timelineContainerRef = useRef<HTMLDivElement>(null)
     const resizeObserverRef = useRef<HTMLDivElement>(null)
     const { addWindow } = useApp()
+    const { appWindow } = useWindow()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
     const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
@@ -697,6 +698,17 @@ export default function Changelog(): JSX.Element {
         // Delay to ensure timeline is rendered
         const timer = setTimeout(scrollToEnd, 100)
         return () => clearTimeout(timer)
+    }, [])
+
+    useEffect(() => {
+        const href = appWindow?.element?.props?.location?.href
+        if (href) {
+            const urlObj = new URL(href)
+            const team = urlObj.searchParams.get('team')
+            const category = urlObj.searchParams.get('category')
+            if (team) setTeamFilter(team)
+            if (category) setCategoryFilter(category)
+        }
     }, [])
 
     return (
