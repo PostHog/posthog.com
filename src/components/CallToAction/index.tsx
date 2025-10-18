@@ -2,6 +2,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
+import { IconArrowUpRight } from '@posthog/icons'
 
 const sizes = {
     xs: cntl`
@@ -258,8 +259,8 @@ export const CallToAction = ({
         <Link
             disabled={disabled}
             state={state}
-            external={external}
-            externalNoIcon={externalNoIcon}
+            external={false}
+            externalNoIcon={external || externalNoIcon}
             onClick={wrappedOnClick}
             to={url}
             event={event}
@@ -275,7 +276,14 @@ export const CallToAction = ({
                     color
                 )} ${childClassName}`}
             >
-                {children}
+                {external ? (
+                    <span className="inline-flex justify-between items-center group">
+                        <span className="font-semibold underline">{children}</span>
+                        <IconArrowUpRight className={`size-4 text-muted group-hover:text-secondary relative`} />
+                    </span>
+                ) : (
+                    children
+                )}
             </span>
         </Link>
     )
