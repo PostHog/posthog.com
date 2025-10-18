@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import SEO from 'components/seo'
@@ -530,6 +530,7 @@ export default function Changelog(): JSX.Element {
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
     const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
+    const href = appWindow?.location?.href
     const data = useStaticQuery(graphql`
         {
             allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date }) {
@@ -701,7 +702,6 @@ export default function Changelog(): JSX.Element {
     }, [])
 
     useEffect(() => {
-        const href = appWindow?.element?.props?.location?.href
         if (href) {
             const urlObj = new URL(href)
             const team = urlObj.searchParams.get('team')
@@ -709,7 +709,16 @@ export default function Changelog(): JSX.Element {
             if (team) setTeamFilter(team)
             if (category) setCategoryFilter(category)
         }
-    }, [])
+    }, [href])
+
+    const filterNavigate = (key: string, value: string) => {
+        if (href) {
+            const urlObj = new URL(href)
+            urlObj.searchParams.set(key, value)
+            const params = urlObj.searchParams.toString()
+            navigate(`?${params}`)
+        }
+    }
 
     return (
         <>
@@ -728,9 +737,9 @@ export default function Changelog(): JSX.Element {
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
                         <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
                             <Filters
-                                onTeamChange={setTeamFilter}
+                                onTeamChange={(value) => filterNavigate('team', value)}
                                 teamFilterValue={teamFilter}
-                                onCategoryChange={setCategoryFilter}
+                                onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
                             />
                             {isModerator && (
