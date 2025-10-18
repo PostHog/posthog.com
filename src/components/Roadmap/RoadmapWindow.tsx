@@ -151,7 +151,7 @@ export default function RoadmapWindow({
                                         : 'Roadmap created successfully',
                                 description:
                                     status === 'complete'
-                                        ? 'Your changes will be live on the next build'
+                                        ? 'Your changes will be live on the next build.'
                                         : id
                                         ? 'Roadmap updated successfully'
                                         : 'Roadmap created successfully',
