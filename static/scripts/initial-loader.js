@@ -1,5 +1,13 @@
 (function () {
     try {
+        const LOADING_MESSAGES = [
+            'Booting the PostHog experience',
+            'Compiling hedgehog shaders',
+            'Rebuilding webpack',
+            'Hydrating the hedgehogs',
+            'Sourcing and transforming nodes',
+            `Running <code>yarn serve</code>`,
+        ]
         const body = document.body;
         const loadingWrapper = document.createElement('div');
         const loadingStyles = document.createElement('style');
@@ -82,6 +90,24 @@
         `;
         body.appendChild(loadingStyles);
         body.appendChild(loadingWrapper);
+        let currentMessageIndex = 0;
+        const intervalId = setInterval(() => {
+            const currentMessage = LOADING_MESSAGES[currentMessageIndex];
+            loadingWrapper.querySelector('#initial-loader-text').innerHTML = currentMessage;
+            currentMessageIndex = (currentMessageIndex + 1) % LOADING_MESSAGES.length;
+        }, 1300);
+
+        const cleanup = () => {
+            clearInterval(intervalId);
+            loadingWrapper.remove();
+            loadingStyles.remove();
+        };
+
+        if (window.__desktopLoaded) {
+            cleanup();
+        } else {
+            window.addEventListener('desktopLoaded', cleanup, { once: true });
+        }
     } catch (error) {
         console.error('Failed to initialize loading spinner:', error);
     }
