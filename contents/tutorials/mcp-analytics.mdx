@@ -11,7 +11,7 @@ tags:
 
 MCP servers give LLMs powerful capabilities, but without analytics and error tracking you're flying blind with no visibility into usage or performance. Which tools get called? How often? Where are the bottlenecks? What's failing?
 
-This tutorial will walk you through how product analytics and error tracking can be addedto any MCP server using a simple wrapper pattern. This implementation tracks every tool execution without touching core business logic. 
+This tutorial walks you through how to add product analytics and error tracking to any MCP server using a simple wrapper pattern. This implementation tracks every tool execution without touching core business logic. 
 
 In the finished setup, the MCP server:
 
@@ -24,7 +24,7 @@ The full source code is available in this [GitHub repository](https://github.com
 ## Prerequisites
 
 - Node.js 18+ 
-- PostHog account (free tier)
+- PostHog account ([sign up for free](http://app.posthog.com/signup))
 - Claude Desktop or another MCP client to test your MCP server
 - Basic TypeScript knowledge
 - Code editor (e.g., VS Code, Cursor)
@@ -51,19 +51,19 @@ Since MCP tools are mostly just async functions passed to `server.tool()`, wrapp
 
 ## 1. MCP server setup
 
-First, let's clone the repository of our MCP server.
+To get us started quickly, we've built an MCP server for you to add product analytics and error tracking to. Start by cloning the repository.
 
 ```bash
 git clone https://github.com/arda-e/mcp-posthog-analytics.git
 ```
 
-Next install the dependencies.
+Next, install the dependencies.
 
 ```bash
 npm install
 ```
 
-Then build the server.
+Finally, build the server.
 
 ```bash
 npm run build
@@ -93,7 +93,8 @@ MCP-POSTHOG-ANALYTICS/
 
 ## 2. Tool definitions
 
-Now that our MCP server is compiling successfully, let's take a look our MCP tools in the `tools.ts` file. 
+Now that we built our MCP server, let's take a look our MCP tools in the `tools.ts` file. 
+
 For this tutorial, we've hardcoded simple datasets and results for the tools to fetch. 
 
 ```typescript file=./src/tools.ts
@@ -445,7 +446,7 @@ Update the `claude_desktop_config.json` file to include the following:
   "mcpServers": {
     "analytics-demo": {
       "command": "/path/to/node",
-      "args": ["/path/to/project/build/index.js"],
+      "args": ["/path/to/mcp-posthog-analytics/build/index.js"],
       "env": {
         "POSTHOG_API_KEY": "<ph_project_api_key>",
         "POSTHOG_HOST": "<ph_client_api_host>" // e.g. https://us.i.posthog.com
@@ -464,7 +465,7 @@ It should look like the following in Claude Desktop's **Settings** > **Developer
   padding={false}
 />
 
-Restart Claude Desktop and try these prompts:
+You can then try these prompts:
 
 - "Show me the inventory" → Should successfully return the inventory.
 - "Check stock for product 999" → Should throw an error.
