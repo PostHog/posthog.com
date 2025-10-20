@@ -242,8 +242,7 @@
         { "source": "/product/feature-flags", "destination": "/feature-flags" },
         { "source": "/product/experimentation-suite", "destination": "/experiments" },
         { "source": "/ab-testing", "destination": "/experiments" },
-        { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
-        { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
+        { "source": "/product/heatmaps", "destination": "/heatmaps", "statusCode": 301 },
         { "source": "/docs/tutorials/b2b", "destination": "/tutorials/b2b" },
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
@@ -610,6 +609,14 @@
             "destination": "/docs/feature-flags/creating-feature-flags"
         },
         { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
+        {
+            "source": "/docs/feature-flags/evaluation-tags",
+            "destination": "/docs/feature-flags/evaluation-environments"
+        },
+        {
+            "source": "/tutorials/evaluation-runtimes-and-tags",
+            "destination": "/tutorials/evaluation-runtimes-and-environments"
+        },
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
         { "source": "/docs/migrate/ingest-historic-data", "destination": "/docs/migrate" },
@@ -1608,7 +1615,8 @@
         { "source": "/teams/growth", "destination": "/teams" },
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
-        { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" }
+        { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
+        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" }
     ],
     "headers": [
         {
@@ -1616,7 +1624,7 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net; frame-src 'self' https://www.youtube-nocookie.com; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
                 },
                 {
                     "key": "Reporting-Endpoints",

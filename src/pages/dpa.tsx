@@ -265,11 +265,13 @@ function DpaGenerator() {
             </section>
 
             <section
-                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
+                className={`grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4 ${
                     isSubmitted ? 'hidden' : 'block'
                 }`}
             >
-                <div className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:py-4 print:hidden`}>
+                <div
+                    className={`@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0`}
+                >
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -433,7 +435,7 @@ function DpaGenerator() {
                 <div
                     ref={divRef}
                     id="page"
-                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-y-0 border-primary @3xl:shadow-xl print:shadow-none rounded relative"
+                    className="@container prose @3xl:col-span-3 bg-white text-primary dark:text-black px-4 @3xl:px-8 pt-4 border-y @3xl:border-b-0 border-primary @3xl:border-l print:shadow-none rounded relative"
                 >
                     <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 @3xl:pr-4 flex items-center justify-between print:hidden sticky top-0 z-10">
                         <div className="text-lg font-bold dark:text-primary">Preview</div>
@@ -1641,14 +1643,23 @@ function DpaGenerator() {
                                             <div className="pt-2">
                                                 <strong>Details</strong>
                                                 <br />
-                                                <a
-                                                    href={subprocessor.details}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="[word-break:break-word]"
-                                                >
-                                                    {subprocessor.details}
-                                                </a>
+                                                <div className="space-y-1">
+                                                    {subprocessor.details.map((detail, index) => (
+                                                        <div key={index}>
+                                                            <a
+                                                                href={detail}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="[word-break:break-word]"
+                                                            >
+                                                                {detail
+                                                                    .replace('https://', '')
+                                                                    .replace('http://', '')
+                                                                    .replace('www.', '')}
+                                                            </a>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1664,7 +1675,7 @@ function DpaGenerator() {
                                                 <strong className="block">
                                                     Geographical location of the processing
                                                 </strong>
-                                                <div>{subprocessor.location}</div>
+                                                <div dangerouslySetInnerHTML={{ __html: subprocessor.location }} />
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1726,14 +1737,23 @@ function DpaGenerator() {
                                             <div className="pt-2">
                                                 <strong>Details</strong>
                                                 <br />
-                                                <a
-                                                    href={subprocessor.details}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="[word-break:break-word]"
-                                                >
-                                                    {subprocessor.details}
-                                                </a>
+                                                <div className="space-y-1">
+                                                    {subprocessor.details.map((detail, index) => (
+                                                        <div key={index}>
+                                                            <a
+                                                                href={detail}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="[word-break:break-word]"
+                                                            >
+                                                                {detail
+                                                                    .replace('https://', '')
+                                                                    .replace('http://', '')
+                                                                    .replace('www.', '')}
+                                                            </a>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1749,7 +1769,10 @@ function DpaGenerator() {
                                                 <strong className="block">
                                                     Geographical location of the processing
                                                 </strong>
-                                                <div>{subprocessor.location}</div>
+                                                <div
+                                                    className="space-y-1"
+                                                    dangerouslySetInnerHTML={{ __html: subprocessor.location }}
+                                                />
                                             </div>
                                         </div>
                                         <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
@@ -1800,12 +1823,13 @@ function DpaGenerator() {
             </section>
 
             <section className="text-center mt-20 @3xl:mt-40 pb-20 @3xl:pb-24 print:hidden">
-                <h3>Need a custom MSA?</h3>
+                <h3 className="mb-4">Need a custom MSA?</h3>
                 <TrackedCTA
                     event={{ name: `clicked Talk to a human` }}
                     href="/talk-to-a-human"
                     type="secondary"
                     size="lg"
+                    state={{ newWindow: true }}
                 >
                     Talk to sales
                 </TrackedCTA>

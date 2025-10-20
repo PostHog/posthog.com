@@ -26,7 +26,14 @@ Using API queries requires:
 
 ## Creating a query
 
-To create a query, you make a `POST` request to the `/api/projects/:project_id/query/` endpoint. The body of the request should be a JSON object with a `query` property with a `kind` and `query` property. 
+To create a query, you make a `POST` request to the `/api/projects/:project_id/query/` endpoint. The body of the request should be a JSON object with a `query` property with a `kind` and `query` property.
+
+<CalloutBox icon="IconInfo" type="fyi" title="Query limits">
+
+By default, API queries return up to 100 rows. If you specify your own `LIMIT` value, you can return up to 50k rows per query before we suggest [paginating](#5-use-timestamp-based-pagination-instead-of-offset).
+
+</CalloutBox>
+
 
 For example, to create a query that gets events where the `$current_url` contains blog, you use `kind: HogQLQuery` and SQL like:
 

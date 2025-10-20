@@ -35,6 +35,27 @@ There are three kinds of heatmaps in the toolbar:
 
 3. **Clickmap:** AKA the OG heatmap. It uses autocapture to show you the elements users are clicking on your website.
 
+## Viewing heatmaps in PostHog (beta)
+
+You can also view heatmaps directly in the PostHog. This method is currently in beta and provides almost the same functionality as the toolbar.
+
+To view heatmaps in the app:
+
+1. Enable the [**In-App Heatmaps** feature preview](https://app.posthog.com/settings/user-feature-previews#heatmaps-ui)
+1. Go to the [Heatmaps section in PostHog](https://us.posthog.com/heatmaps)
+2. Type the URL of your website in the **Display URL** field
+3. Optional: Use wildcard URL matching for the **Heatmap data URL** to combine data from similar pages
+
+![Heatmaps in PostHog app interface](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_in_app_9b447c455e.png)
+
+The in-app heatmap viewer provides the same three types of heatmaps as the toolbar:
+
+1. **Heatmap:** Visual representation of mouse movements, clicks, dead clicks, and rageclicks
+2. **Scrollmap:** Shows how far users scroll down your page
+3. **Clickmap:** Displays click counts on specific elements with rageclick indicators
+
+All configuration options available in the toolbar (aggregation, viewport accuracy, color palette, fixed positioning) are also available in the in-app version.
+
 ## Heatmaps
 
 The heatmap shows where on the page users are clicking, dead clicking, rageclicking, or moving their mouse. Unlike the clickmap, the user doesn't need to click on a clickable element, so you can see where users are trying to click.

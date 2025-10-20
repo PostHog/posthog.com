@@ -506,6 +506,7 @@ export default function RichText({
                                         tooltip="Edit"
                                         onClick={() => setShowPreview(false)}
                                         active={!showPreview}
+                                        type="button"
                                     />
                                 </li>
                                 <li>
@@ -537,6 +538,7 @@ export default function RichText({
                                         onClick={() => setShowPreview(true)}
                                         active={showPreview}
                                         iconClassName="size-5 justify-center items-center flex"
+                                        type="button"
                                     />
                                 </li>
                             </>

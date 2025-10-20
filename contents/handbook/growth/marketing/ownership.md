@@ -19,7 +19,7 @@ We run email campaigns through Customer.io. Speak to <TeamMember name="Joe Marti
 <details>
 <summary>I'm interested in running, attending, or speaking at an event</summary>
 
-You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party planner". Read the [events strategy handbook](/handbook/brand/events) for more. 
+You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party planner". Read the [events strategy handbook](/handbook/marketing/events) for more. 
 </details>
 
 <details>

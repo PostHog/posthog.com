@@ -1,0 +1,80 @@
+---
+title: Android error tracking installation
+showStepsToc: true
+tableOfContents: [
+  {
+    url: 'install-posthog-android-sdk',
+    value: 'Install PostHog Android SDK',
+    depth: 1,
+  },
+  {
+    url: 'set-up-exception-autocapture',
+    value: 'Set up exception autocapture',
+    depth: 1,
+  },
+  {
+    url: 'manually-capture-exceptions',
+    value: 'Manually capture exceptions',
+    depth: 1,
+  },
+  {
+    url: 'verify-error-tracking',
+    value: 'Verify error tracking',
+    depth: 1,
+  }
+]
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+import InstallAndroid from "../../integrate/_snippets/install-android.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+
+> **Note:** We currently don't support demangling stacktraces of minified builds ([isMinifyEnabled=true](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization)). We're actively working on adding support for it.
+
+> **Note:** We currently don't support [source code context](/docs/error-tracking/stack-traces) associated with an exception. We'll add support for it later.
+
+<Steps>
+<Step title="Install PostHog Android SDK" badge="required">
+
+> **Note:** A minimum SDK version of [3.24.0](https://github.com/PostHog/posthog-android/releases/tag/android-v3.24.0) is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+<InstallAndroid />
+
+</Step>
+
+<Step title="Set up exception autocapture" badge="optional">
+
+> **Note:** This configuration is client-side only. We'll add support for the [Error tracking remote config](https://app.posthog.com/settings/project-error-tracking#exception-autocapture) later.
+
+You can autocapture exceptions by setting the `errorTrackingConfig.autoCapture` argument to `true` when initializing the PostHog SDK.
+
+```kotlin
+import com.posthog.android.PostHogAndroidConfig
+
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+    ...
+    errorTrackingConfig.autoCapture = true
+}
+...
+```
+
+When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `Thread.UncaughtExceptionHandler` listener.
+
+</Step>
+
+<Step title="Manually capture exceptions" badge="optional">
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```kotlin
+PostHog.captureException(exception, properties = additionalProperties)
+```
+
+This is helpful if you've built your own error handling logic or want to capture exceptions that are handled by your application code.
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+</Steps> 

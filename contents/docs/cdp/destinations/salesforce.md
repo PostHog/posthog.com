@@ -5,13 +5,11 @@ templateId:
     - template-salesforce-update
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 This destination connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested.
 
-<Requirements />
 
 You'll also need access to the relevant Salesforce account.
 
