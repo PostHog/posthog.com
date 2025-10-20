@@ -3,11 +3,8 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-// removed unused import: useUser
-// removed unused import: VoteBox
 import Markdown from 'components/Squeak/components/Markdown'
 import { IconCheck, IconLightBulb } from '@posthog/icons'
-// removed unused import: MaxQuestionInput
 import Cards from 'components/Cards'
 import { MaxExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -28,7 +25,6 @@ interface RoadmapItem {
 }
 
 const CustomRoadmapSlide = () => {
-    // removed unused variable: user
     const { roadmaps, isLoading } = useRoadmaps({
         params: {
             filters: {

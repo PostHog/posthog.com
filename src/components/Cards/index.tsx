@@ -3,37 +3,15 @@ import React, { useRef } from 'react'
 import OSButton from 'components/OSButton'
 
 type CardProps = {
-    top: React.ReactNode
+    top: string
     bottom: React.ReactNode
     Image: React.ReactNode
-    ImageSize?: string
+    imageClassName?: string
     color?: string
 }
 
-// Helper function to extract text content from React.ReactNode
-const extractTextFromNode = (node: React.ReactNode): string => {
-    if (typeof node === 'string') {
-        return node
-    }
-    if (typeof node === 'number') {
-        return node.toString()
-    }
-    if (React.isValidElement(node)) {
-        if (typeof node.props.children === 'string') {
-            return node.props.children
-        }
-        if (Array.isArray(node.props.children)) {
-            return node.props.children.map(extractTextFromNode).join('')
-        }
-        return extractTextFromNode(node.props.children)
-    }
-    return ''
-}
-
-const Card = ({ top, bottom, Image, ImageSize, color }: CardProps) => {
-    // Extract text from the top field and create Max URL
-    const questionText = extractTextFromNode(top)
-    const encodedQuestion = encodeURIComponent(questionText)
+const Card = ({ top, bottom, Image, imageClassName, color }: CardProps) => {
+    const encodedQuestion = encodeURIComponent(top)
     const maxUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
     return (
@@ -46,7 +24,7 @@ const Card = ({ top, bottom, Image, ImageSize, color }: CardProps) => {
                 <p className="text-3xl @2xl:text-lg text-black m-0 relative leading-normal">{bottom}</p>
             </div>
             <figure
-                className={`flex-1 flex w-full justify-center items-center scale-[2] @2xl:scale-110 mb-8 ${ImageSize}`}
+                className={`flex-1 flex w-full justify-center items-center scale-[2] @2xl:scale-110 mb-8 ${imageClassName}`}
             >
                 {Image}
             </figure>
