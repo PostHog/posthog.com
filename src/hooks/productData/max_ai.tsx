@@ -65,6 +65,9 @@ export const max_ai = {
     },
     features: [
         {
+            label: 'Analytics',
+        },
+        {
             title: 'Web Analytics',
             headline: 'Web Analytics',
             layout: 'ai',
@@ -83,7 +86,7 @@ export const max_ai = {
             ],
             skills: [
                 {
-                    name: 'Traffic seer',
+                    name: 'Traffic watcher',
                     description: 'Illuminates pathways through clickthrough chaos and millions of pageviews',
                     sticker: <StickerPath className="size-12" />,
                     percent: 80,
@@ -121,19 +124,19 @@ export const max_ai = {
             ],
             skills: [
                 {
-                    name: 'Insight composer',
+                    name: 'Insight conductor',
                     description: 'Builds insights and entire dashboards from a single prompt',
                     sticker: <StickerPath className="size-6" />,
                     percent: 80,
                 },
                 {
-                    name: 'Anomaly hunter',
+                    name: 'Anomaly detective',
                     description: 'Flags metric spikes, dips, and weirdness – and explains the root cause',
                     sticker: <StickerPath className="size-6" />,
                     percent: 100,
                 },
                 {
-                    name: 'Query forgemaster',
+                    name: 'Query crafter',
                     description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
                     sticker: <StickerPath className="size-6" />,
                     percent: 90,
@@ -147,6 +150,125 @@ export const max_ai = {
             ],
         },
         {
+            title: 'LLM Analytics',
+            headline: 'LLM Analytics',
+            layout: 'ai',
+            icon: <IconLlmAnalytics className="size-5" />,
+            color: 'purple',
+            description:
+                "Why was today's token spend more than your salary? Use LLM-as-a-judge for automated evals, then have PostHog AI interpret the scores.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1742425353/llm_obvs_86706b1ab7.png',
+                    alt: 'LLM Analytics',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                // {
+                //     name: 'Eval',
+                //     description: 'Builds single dashboard entire dashboards from a single thought',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 80,
+                // },
+                // {
+                //     name: 'Eval',
+                //     description: 'Links multiple metrics together to uncover deeper relationships',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 100,
+                // },
+                // {
+                //     name: 'Eval',
+                //     description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
+                //     sticker: <StickerPath className="size-6" />,
+                //     percent: 90,
+                // },
+            ],
+        },
+        {
+            label: 'Product engineering',
+        },
+        {
+            title: 'Session Replay',
+            headline: 'Session Replay',
+            layout: 'ai',
+            icon: <IconRewindPlay className="size-5" />,
+            color: 'yellow',
+            description:
+                "Don't scrub through hours of recordings — let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/session_replay_67e4cf38de.png',
+                    alt: 'Session replay',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Session summoner',
+                    description: 'Filters 10,000 sessions and teleports you to the 3 that matter',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 80,
+                },
+                {
+                    name: 'Rage click wrangler',
+                    description:
+                        'Groups frustration patterns into categories (scroll loops, failed clicks, hesitations)',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 100,
+                },
+                {
+                    name: 'Empathy engine',
+                    description: 'Explains what the user was trying to do, not just what they did',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 90,
+                },
+            ],
+        },
+        {
+            title: 'Feature Flags',
+            headline: 'Feature Flags',
+            layout: 'ai',
+            icon: <IconToggle className="size-5" />,
+            color: 'green',
+            description:
+                'Feature flags without the config file? PostHog AI builds complex targeting logic, percentage splits, and override rules — all from a simple prompt.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
+                    alt: 'Feature Flags',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Multiverse manager',
+                    description: 'Runs parallel realities where different features exist',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 80,
+                },
+                {
+                    name: 'Chaos coordinator',
+                    description: 'Sets up kill switches to mitigate damage control',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 100,
+                },
+                {
+                    name: 'Targeting sniper',
+                    description: 'Flags cohorts and specific users with surgical precision',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 90,
+                },
+            ],
+        },
+
+        {
             title: 'Experiments',
             headline: 'Experiments',
             layout: 'ai',
@@ -156,7 +278,7 @@ export const max_ai = {
                 "Statistical significance calculated automatically (p-values are no longer your problem). PostHog AI generates test variations you hadn't thought of.",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/experiments_90a59408f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/experiments_1dc7831033.png',
                     alt: 'Experiments',
                     className: 'max-h-64',
                     // stylize: true,
@@ -185,81 +307,7 @@ export const max_ai = {
             ],
         },
         {
-            title: 'Feature Flags',
-            headline: 'Feature Flags',
-            layout: 'ai',
-            icon: <IconToggle className="size-5" />,
-            color: 'green',
-            description:
-                'Feature flags without the config file? PostHog AI builds complex targeting logic, percentage splits, and override rules — all from a simple prompt.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/feature_flags_90a59408f5.png',
-                    alt: 'Feature Flags',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Multiverse manager',
-                    description: 'Runs parallel realities where different features exist',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Chaos coordinator',
-                    description: 'Sets up kill switches to mitigate damage control',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Targeting sniper',
-                    description: 'Flags cohorts and specific users with surgical precision',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 90,
-                },
-            ],
-        },
-        {
-            title: 'Session Replay',
-            headline: 'Session Replay',
-            layout: 'ai',
-            icon: <IconRewindPlay className="size-5" />,
-            color: 'yellow',
-            description:
-                "Don't scrub through hours of recordings — let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/session_replay_90a59408f5.png',
-                    alt: 'Session replay',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Session summoner',
-                    description: 'Filters 10,000 sessions and teleports you to the 3 that matter',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Rage click roundup',
-                    description:
-                        'Groups frustration patterns into categories (scroll loops, failed clicks, hesitations)',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Empathy engine',
-                    description: 'Explains what the user was trying to do, not just what they did',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 90,
-                },
-            ],
+            label: 'Communication',
         },
         {
             title: 'Surveys',
@@ -271,7 +319,7 @@ export const max_ai = {
                 "Describe what you want to know, get a working survey in seconds. It's never been easier to get roasted by users (and advised on next steps by PostHog AI).",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/surveys_90a59408f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/surveys_e13b99220b.png',
                     alt: 'Surveys',
                     className: 'max-h-64',
                     // stylize: true,
@@ -280,106 +328,69 @@ export const max_ai = {
             ],
             skills: [
                 {
-                    name: 'Question smith',
+                    name: 'Question curator',
                     description: 'Generates complete surveys based on your research goals',
                     sticker: <StickerPath className="size-6" />,
                     percent: 80,
                 },
                 {
-                    name: 'Salt screen',
+                    name: 'Salt sifter',
                     description: 'Separates legitimate responses from people having a bad day',
                     sticker: <StickerPath className="size-6" />,
                     percent: 100,
                 },
                 {
-                    name: 'Query forgemaster',
+                    name: 'Insight disseminator',
                     description: 'Translates sentiment summaries into actionable product insights',
                     sticker: <StickerPath className="size-6" />,
                     percent: 90,
                 },
             ],
         },
-        {
-            title: 'LLM Analytics',
-            headline: 'LLM Analytics',
-            layout: 'ai',
-            icon: <IconLlmAnalytics className="size-5" />,
-            color: 'purple',
-            description:
-                "Why was today's token spend more than your salary? Use LLM-as-a-judge for automated evals, then have PostHog AI interpret the scores.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/llm_analytics_90a59408f5.png',
-                    alt: 'LLM Analytics',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Eval',
-                    description: 'Builds single dashboard entire dashboards from a single thought',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Eval',
-                    description: 'Links multiple metrics together to uncover deeper relationships',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Eval',
-                    description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 90,
-                },
-            ],
-        },
-        {
-            title: 'Workflows',
-            headline: 'Workflows',
-            layout: 'ai',
-            icon: <IconBolt className="size-5" />,
-            color: 'blue',
-            description: 'Need more info...',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/workflows_90a59408f5.png',
-                    alt: 'Workflows',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Skill name',
-                    description: 'Skill description',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Skill name',
-                    description: 'Skill description',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Skill name',
-                    description: 'Skill description',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 90,
-                },
-                {
-                    name: 'Skill name',
-                    description: 'Skill description',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 70,
-                },
-            ],
-        },
+
+        // {
+        //     title: 'Workflows',
+        //     headline: 'Workflows',
+        //     layout: 'ai',
+        //     icon: <IconBolt className="size-5" />,
+        //     color: 'blue',
+        //     description: 'Need more info...',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/workflows_90a59408f5.png',
+        //             alt: 'Workflows',
+        //             className: 'max-h-64',
+        //             // stylize: true,
+        //             // shadow: true,
+        //         },
+        //     ],
+        //     skills: [
+        //         {
+        //             name: 'Skill name',
+        //             description: 'Skill description',
+        //             sticker: <StickerPath className="size-6" />,
+        //             percent: 80,
+        //         },
+        //         {
+        //             name: 'Skill name',
+        //             description: 'Skill description',
+        //             sticker: <StickerPath className="size-6" />,
+        //             percent: 100,
+        //         },
+        //         {
+        //             name: 'Skill name',
+        //             description: 'Skill description',
+        //             sticker: <StickerPath className="size-6" />,
+        //             percent: 90,
+        //         },
+        //         {
+        //             name: 'Skill name',
+        //             description: 'Skill description',
+        //             sticker: <StickerPath className="size-6" />,
+        //             percent: 70,
+        //         },
+        //     ],
+        // },
         {
             title: 'Error Tracking',
             headline: 'Error Tracking',
@@ -390,7 +401,7 @@ export const max_ai = {
                 'Find out what broke before your users tweet about it. PostHog AI helps identify error patterns and correlate signals across your product data.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/error_tracking_90a59408f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806655/error_tracking_4e0dff38af.png',
                     alt: 'Error Tracking',
                     className: 'max-h-64',
                     // stylize: true,
@@ -407,6 +418,9 @@ export const max_ai = {
             ],
         },
         {
+            label: 'Customer data infrastructure',
+        },
+        {
             title: 'Data Warehouse',
             headline: 'Data Warehouse',
             layout: 'ai',
@@ -416,7 +430,7 @@ export const max_ai = {
                 'Dump all your Stripe, Hubspot, and whatever-else data into one place. PostHog AI generates HogQL queries to join tables you forgot existed.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/data_warehouse_90a59408f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/data_warehouse_99ac92f444.png',
                     alt: 'Data Warehouse',
                     className: 'max-h-64',
                     // stylize: true,

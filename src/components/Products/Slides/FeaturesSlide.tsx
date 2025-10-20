@@ -11,11 +11,12 @@ interface Feature {
 
 interface FeatureItem {
     layout?: string
-    title: string
-    headline: string
+    title?: string
+    headline?: string
     description?: string
     icon?: any
     color?: string
+    label?: string
     features?: Feature[]
     skills?: Array<{ name: string; description?: string; sticker?: React.ReactNode; percent?: number } | string>
     images?: Image[]
@@ -34,7 +35,9 @@ interface FeaturesSlideProps {
 }
 
 export default function FeaturesSlide({ features, backgroundImage }: FeaturesSlideProps) {
-    const [currentTab, setCurrentTab] = useState(0)
+    // Find the first non-label item to use as the default tab
+    const firstNonLabelIndex = features.findIndex((item) => !item.label)
+    const [currentTab, setCurrentTab] = useState(firstNonLabelIndex >= 0 ? firstNonLabelIndex : 0)
 
     if (!features || features.length === 0) {
         return <div className="p-4">No features available</div>
@@ -56,21 +59,37 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                 >
                     <ScrollArea className="overflow-y-hidden @2xl:overflow-y-auto">
                         <Tabs.List className="flex @2xl:flex-col" aria-label="Features">
-                            {features.map((item: FeatureItem, index: number) => (
-                                <Tabs.Trigger
-                                    key={index}
-                                    value={`tab-${index}`}
-                                    icon={(item as any).icon}
-                                    color={(item as any).color}
-                                    className="text-left"
-                                >
-                                    {item.title}
-                                </Tabs.Trigger>
-                            ))}
+                            {features.map((item: FeatureItem, index: number) => {
+                                // Render label if it's a label item
+                                if (item.label) {
+                                    return (
+                                        <Tabs.Label key={index} className="hidden @2xl:block">
+                                            {item.label}
+                                        </Tabs.Label>
+                                    )
+                                }
+                                // Otherwise render trigger
+                                return (
+                                    <Tabs.Trigger
+                                        key={index}
+                                        value={`tab-${index}`}
+                                        icon={(item as any).icon}
+                                        color={(item as any).color}
+                                        className="text-left"
+                                    >
+                                        {item.title}
+                                    </Tabs.Trigger>
+                                )
+                            })}
                         </Tabs.List>
                     </ScrollArea>
                 </div>
                 {features.map((item: FeatureItem, index: number) => {
+                    // Skip label items (they don't have content)
+                    if (item.label) {
+                        return null
+                    }
+
                     // AI Layout - completely different structure
                     if (item.layout === 'ai') {
                         return (
