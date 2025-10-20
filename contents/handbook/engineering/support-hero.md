@@ -170,7 +170,6 @@ At the end of the week, please write a public handover message in `#support-clie
 ### Mobile SDKs
 
 For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on Mobile Apps may take weeks or even months.
-If you see a high-priority issue, please escalate it to the [Mobile team](/teams/mobile) as soon as possible (@mobile-folks on Slack or Mobile group on Zendesk).
 
 - [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/42222680081819)
 - New issues in the SDK repositories
@@ -178,6 +177,14 @@ If you see a high-priority issue, please escalate it to the [Mobile team](/teams
   - [posthog-ios](https://github.com/PostHog/posthog-ios)
   - [posthog-android](https://github.com/PostHog/posthog-android)
   - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
+
+Mobile support tickets reported by the PostHog app - Contact support panel with the Mobile topic will be assigned to the Mobile group on Zendesk and triaged by the Mobile team.
+
+The Mobile team will triage and fix them if they are in our domain area or reassign them to the related team.
+
+If you see a Mobile SDK issue, please escalate it to the [Mobile team](/teams/mobile) as soon as possible (@mobile-folks on Slack, Mobile group on Zendesk, and @team-mobile on GitHub).
+
+The Mobile team is also happy to collaborate on any non-Mobile SDK issue that requires knowledge in the Mobile ecosystem, e.g., you're debugging person profiles from customers using the Mobile SDKs, and you don't have context on how the SDK works/identifies users.
 
 ## Don't ask users to do work that you can do!
 
