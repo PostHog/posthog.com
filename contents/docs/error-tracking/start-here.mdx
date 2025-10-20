@@ -7,6 +7,7 @@ contentMaxWidthClass: max-w-5xl
 import InstallationPlatforms from './installation/_snippets/installation-platforms'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate error tracking!">
@@ -29,9 +30,9 @@ import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
 
   You can also call the capture method `posthog.captureException()` to manually send exceptions to PostHog with custom properties. 
 
-  <CallToAction type="primary" to="/docs/error-tracking/installation">
+  <OSButton variant="primary" asLink={true} to="/docs/error-tracking/installation">
     Install PostHog SDK
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -52,9 +53,9 @@ import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
   />
 
 
-  <CallToAction type="primary" to="/docs/error-tracking/upload-source-maps">
+  <OSButton variant="primary" asLink={true} to="/docs/error-tracking/upload-source-maps">
     Upload source maps
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -82,9 +83,9 @@ import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
   - Integrate with Slack, Discord, Teams, or an HTTP webhook
 
 
-  <CallToAction type="primary" to="/docs/error-tracking/issues">
+  <OSButton variant="primary" asLink={true} to="/docs/error-tracking/issues">
     Learn about issues
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -105,9 +106,9 @@ Connect with the PostHog MCP server to enable autonomous debugging with AI agent
     autoPlay={false}
 />
 
-<CallToAction type="primary" to="/docs/error-tracking/debugging-with-mcp">
+<OSButton variant="primary" asLink={true} to="/docs/error-tracking/debugging-with-mcp">
   Explore AI features
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -159,9 +160,9 @@ Connect with the PostHog MCP server to enable autonomous debugging with AI agent
 
   That's it! You're ready to start integrating.
 
-  <CallToAction type="primary" to="/docs/error-tracking/installation">
+  <OSButton variant="primary" asLink={true} to="/docs/error-tracking/installation">
     Install error tracking
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 

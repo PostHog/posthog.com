@@ -146,9 +146,9 @@ Before proceeding, confirm that source maps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
 
-<CallToAction type="secondary" className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+<OSButton variant="secondary" asLink={true} className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
-</CallToAction>
+</OSButton>
 
 </Step>
 

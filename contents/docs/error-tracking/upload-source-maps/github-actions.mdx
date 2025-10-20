@@ -77,9 +77,9 @@ We recommend storing `env-id` and `cli-token` in GitHub Secrets (for example, `P
 
 1. Confirm symbol sets are present in PostHog after the workflow runs.
 
-<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+<OSButton variant="secondary" asLink={true} className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
-</CallToAction>
+</OSButton>
 
 2. Confirm your served production files include an injected comment at the end of the file similar to:
 

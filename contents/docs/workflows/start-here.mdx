@@ -7,6 +7,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconRewindPlay, IconToggle } from '@posthog/icons'
 import ChannelPlatforms from './_snippets/channel-platforms'
+import OSButton from 'components/OSButton'
 
 import Beta from './_snippets/beta.mdx'
 
@@ -31,9 +32,9 @@ The [workflow builder](/docs/workflows/workflow-builder) is a powerful, no-code 
 
 There are many features to explore, but you can get a taste with this example:
 
-<CallToAction type="primary" to="/docs/workflows/launch-workflow">
+<OSButton variant="primary" asLink={true} to="/docs/workflows/launch-workflow">
   Design and launch your first workflow
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -55,9 +56,9 @@ Workflows are made up of the following building blocks:
 
 Familiarize yourself with these components to explore the full power of the workflow builder.
 
-<CallToAction type="primary" to="/docs/workflows/workflow-builder">
+<OSButton variant="primary" asLink={true} to="/docs/workflows/workflow-builder">
   Learn about workflow components
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -81,9 +82,9 @@ If you want to send your users a message you will need to use a preconfigured de
 
 ---
 
-<CallToAction type="primary" to="/docs/workflows/configure-channels">
+<OSButton variant="primary" asLink={true} to="/docs/workflows/configure-channels">
   Configure your messaging channel
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -99,9 +100,9 @@ We've created a few tutorials for common use cases to get you started:
 
 ---
 
-<CallToAction type="primary" to="https://app.posthog.com/workflows/new/workflow">
+<OSButton variant="primary" asLink={true} to="https://app.posthog.com/workflows/new/workflow" external>
   Try the workflow builder
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 

@@ -7,6 +7,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
 import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
+import OSButton from 'components/OSButton'
 
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate LLM analytics!">
@@ -31,9 +32,9 @@ The first step is to install a PostHog SDK to capture conversations, requests, a
 
 <LLMsInstallationPlatforms />
 
-<CallToAction type="primary" to="/docs/llm-analytics/installation">
+<OSButton variant="primary" asLink={true} to="/docs/llm-analytics/installation">
 Install PostHog SDK
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -61,9 +62,9 @@ Install PostHog SDK
 
 PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
   
-<CallToAction type="primary" to="/docs/llm-analytics/generations">
+<OSButton variant="primary" asLink={true} to="/docs/llm-analytics/generations">
   Learn about generations
-</CallToAction>
+</OSButton>
 
 </QuestLogItem>
 
@@ -82,9 +83,9 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
   classes="rounded"
 />
 
-  <CallToAction type="primary" to="/docs/llm-analytics/dashboard">
+  <OSButton variant="primary" asLink={true} to="/docs/llm-analytics/dashboard">
     Analyze LLM performance
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
@@ -151,9 +152,9 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
 
 That's it! You're ready to start integrating.
 
-  <CallToAction type="primary" to="/docs/llm-analytics/installation">
+  <OSButton variant="primary" asLink={true} to="/docs/llm-analytics/installation">
     Install LLM analytics
-  </CallToAction>
+  </OSButton>
 
 </QuestLogItem>
 
