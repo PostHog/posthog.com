@@ -1365,7 +1365,7 @@
             "destination": "/handbook/content/tags-and-categories"
         },
         { "source": "/handbook/growth/marketing/components", "destination": "/handbook/content/components" },
-        { "source": "/handbook/content/writing-for-posthog", "destination": "/handbook/content/writing-for-posthog" },
+        { "source": "/handbook/content/writing-for-posthog", "destination": "/handbook/content" },
         { "source": "/handbook/content/tags-and-categories", "destination": "/handbook/content/metadata" },
         { "source": "/handbook/growth/marketing/paid", "destination": "/handbook/brand/paid" },
         {
