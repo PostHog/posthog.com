@@ -18,6 +18,8 @@ The Databricks destination is currently in `beta`. This means the configuration 
 
 You can request access via the [in-app support form](https://app.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
 
+We love feature requests and feedback. Please tell us what you think using the same link above.
+
 </CalloutBox>
 
 ## Requirements
@@ -142,10 +144,6 @@ You'll need to specify the following configuration settings in PostHog:
 * **Table name:** The name of the table where data will be exported. If the table doesn't exist, it will be created automatically (this is the recommended approach).
 
 **Advanced settings (optional):**
-* **Table partition field:** The field to partition the table by. Partitioning can improve query performance for large tables. By default:
-  - Events model: partitioned by `timestamp`
-  - Sessions model: partitioned by `end_timestamp`
-  - Persons model: no default partitioning
 * **Use VARIANT type:** Whether to use Databricks' `VARIANT` type for JSON fields (like `properties` and `person_properties`). Enabled by default. The `VARIANT` type is optimized for semi-structured data and provides better querying performance. However, it requires **Databricks Runtime 15.3 or above**. If you're using an older runtime version, disable this setting to use `STRING` type instead.
 
 
@@ -219,17 +217,6 @@ The merge operation for mutable models ensures that:
 - New rows not found in the destination table are inserted.
 - Your data always reflects the latest state while maintaining historical records that haven't been updated.
 
-### What is the benefit of table partitioning?
-
-Partitioning your Databricks table can significantly improve query performance, especially for large datasets. When you partition by a field like `timestamp`, Databricks can skip reading entire partitions of data when you filter by that field in your queries.
-
-For example, if you partition by `timestamp` and run a query filtering for events from the last 7 days, Databricks will only scan the relevant partitions rather than the entire table.
-
-By default, PostHog automatically partitions:
-- Events tables by `timestamp`
-- Sessions tables by `end_timestamp`
-
-You can override this by specifying a different partition field in the configuration.
 
 ### Should I use VARIANT or STRING type for JSON fields?
 
