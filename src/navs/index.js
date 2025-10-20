@@ -1284,10 +1284,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                                        {
+                    {
                         name: 'Hogpatch',
                         url: '/handbook/growth/sales/hogpatch',
-                    }
+                    },
                 ],
             },
             {
@@ -3714,6 +3714,10 @@ export const docsMenu = {
                         {
                             name: 'Hono',
                             url: '/docs/error-tracking/installation/hono',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/error-tracking/installation/android',
                         },
                         {
                             name: 'Manual/API',
