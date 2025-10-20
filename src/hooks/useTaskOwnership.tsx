@@ -23,7 +23,7 @@ const PEOPLE_TASK_DATA: Record<
     { name: string; columns: Array<{ key: string; label: string }>; tasks: Task[] }
 > = {
     people_ops: {
-        name: 'People Ops',
+        name: 'People ops',
         columns: [
             { key: 'task', label: 'Task' },
             { key: 'owner', label: 'Owner' },
