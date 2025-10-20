@@ -20,7 +20,7 @@ The main folders are:
 - `/contents/product-engineers` - Posts written for product engineers.
 - `/contents/newsletter` - Newsletters republished from Product for Engineers.
 - `/contents/tutorials` - Tutorials
-- `/content/customers` - Customer stories
+- `/contents/customers` - Customer stories
 - `/contents/spotlight` - Startup spotlight
 - `/contents/handbook` - The PostHog company handbook
 
@@ -52,7 +52,7 @@ The frontmatter for tutorials is similar, but they don't require a featured imag
 ```
 ---
 title: "Your headline here"
-date: YYY-MM-DD
+date: YYYY-MM-DD
 author: ["your-name"]
 tags:
   - Content tag here
