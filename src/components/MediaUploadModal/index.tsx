@@ -29,9 +29,22 @@ declare global {
     }
 }
 
-const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type }, ext, width, height }: any) => {
+const Image = ({
+    name,
+    previewUrl,
+    provider_metadata: { public_id, resource_type },
+    ext,
+    width,
+    height,
+    tags: initialTags = [],
+}: any) => {
     const { addToast } = useToast()
+    const { getJwt } = useUser()
     const [loadingSize, setLoadingSize] = useState<string | number | null>(null)
+    const [library, setLibrary] = useState<string>('Uncategorized')
+    const [tags, setTags] = useState<string>(Array.isArray(initialTags) ? initialTags.join(', ') : '')
+    const [savingMetadata, setSavingMetadata] = useState(false)
+    const [metadataLoaded, setMetadataLoaded] = useState(false)
 
     const cloudinaryBase = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
 
@@ -42,6 +55,76 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     const maxDimension = Math.max(width || 0, height || 0)
 
     const availableSizes = isImage ? resizeSizes.filter((size) => size < maxDimension) : []
+
+    const libraryOptions = ['Uncategorized', 'Creative library', 'Docs/handbook screenshots', 'Post images']
+
+    // Load metadata when component mounts
+    useEffect(() => {
+        const loadMetadata = async () => {
+            try {
+                const jwt = await getJwt()
+                const response = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/metadata?publicId=${public_id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    }
+                )
+
+                if (response.ok) {
+                    const data = await response.json()
+                    setLibrary(data.library || 'Uncategorized')
+                    setTags(Array.isArray(data.tags) ? data.tags.join(', ') : '')
+                    setMetadataLoaded(true)
+                }
+            } catch (err) {
+                console.error('Failed to load metadata:', err)
+            }
+        }
+
+        loadMetadata()
+    }, [public_id])
+
+    const handleSaveMetadata = async () => {
+        setSavingMetadata(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({
+                    publicId: public_id,
+                    library,
+                    tags: tags
+                        .split(',')
+                        .map((t) => t.trim())
+                        .filter(Boolean),
+                }),
+            })
+
+            if (response.ok) {
+                addToast({
+                    description: 'Metadata saved successfully',
+                    duration: 3000,
+                })
+            } else {
+                throw new Error('Failed to save metadata')
+            }
+        } catch (err) {
+            console.error('Failed to save metadata:', err)
+            addToast({
+                description: 'Failed to save metadata',
+                error: true,
+                duration: 3000,
+            })
+        } finally {
+            setSavingMetadata(false)
+        }
+    }
 
     const generateCloudinaryUrl = (size: string | number) => {
         if (size === 'orig') {
@@ -82,7 +165,10 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     return (
         <li className="flex space-x-2 items-start">
             <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
-                <img src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')} loading="lazy" />
+                <img
+                    src={resource_type === 'video' ? previewUrl : generateCloudinaryUrl('orig-optimized')}
+                    loading="lazy"
+                />
             </div>
             <div className="flex-grow">
                 <p className="m-0 font-bold line-clamp-1 text-ellipsis max-w-xl">
@@ -137,6 +223,50 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
                         </button>
                     </div>
                 )}
+
+                {/* Metadata fields */}
+                <div className="mt-3 space-y-2 pt-2 border-t border-input">
+                    <div className="flex gap-2 items-end">
+                        <div className="flex-grow">
+                            <label className="text-xs text-secondary mb-1 block">Library</label>
+                            <select
+                                value={library}
+                                onChange={(e) => setLibrary(e.target.value)}
+                                className="text-xs w-full rounded"
+                            >
+                                {libraryOptions.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="text-xs text-secondary mb-1 block">Tags (comma-separated)</label>
+                        <input
+                            type="text"
+                            value={tags}
+                            onChange={(e) => setTags(e.target.value)}
+                            placeholder="tag1, tag2, tag3"
+                            className="text-xs w-full rounded"
+                        />
+                    </div>
+                    <button
+                        onClick={handleSaveMetadata}
+                        disabled={savingMetadata}
+                        className="text-xs px-3 py-1.5 rounded bg-orange text-white hover:bg-opacity-90 transition-colors disabled:opacity-50 w-full flex items-center justify-center gap-1"
+                    >
+                        {savingMetadata ? (
+                            <>
+                                <Loading className="size-3" />
+                                Saving...
+                            </>
+                        ) : (
+                            'Save metadata'
+                        )}
+                    </button>
+                </div>
             </div>
         </li>
     )
@@ -302,8 +432,9 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
-                        }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
+                        node.type === 'file' ? 'draggable' : ''
+                    }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -372,8 +503,12 @@ export default function MediaUploadModal() {
     const { getJwt, user } = useUser()
     const [loading, setLoading] = useState(0)
     const [images, setImages] = useState<any[]>([])
+    const [allImages, setAllImages] = useState<any[]>([])
     const [searchQuery, setSearchQuery] = useState('')
     const [isPasting, setIsPasting] = useState(false)
+    const [showAllUploads, setShowAllUploads] = useState(false)
+    const [selectedTag, setSelectedTag] = useState<string>('')
+    const [availableTags, setAvailableTags] = useState<string[]>([])
     const { addToast } = useToast()
     const isModerator = user?.role?.type === 'moderator'
 
@@ -402,14 +537,81 @@ export default function MediaUploadModal() {
         }
     }, [])
 
+    // Fetch all images when showAllUploads is enabled
+    useEffect(() => {
+        const fetchAllImages = async () => {
+            if (!showAllUploads) {
+                setAllImages([])
+                return
+            }
+
+            try {
+                const jwt = await getJwt()
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/images`, {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+
+                if (response.ok) {
+                    const data = await response.json()
+                    setAllImages(data)
+                }
+            } catch (err) {
+                console.error('Failed to fetch all images:', err)
+                addToast({
+                    description: 'Failed to load all uploads',
+                    error: true,
+                    duration: 3000,
+                })
+            }
+        }
+
+        fetchAllImages()
+    }, [showAllUploads])
+
+    // Fetch available tags
+    useEffect(() => {
+        const fetchTags = async () => {
+            try {
+                const jwt = await getJwt()
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/cloudinary-metadata/tags`, {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+
+                if (response.ok) {
+                    const data = await response.json()
+                    setAvailableTags(data.tags || [])
+                }
+            } catch (err) {
+                console.error('Failed to fetch tags:', err)
+            }
+        }
+
+        fetchTags()
+    }, [])
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    // Filter images based on search query
-    const allImages = [...images, ...((user?.profile as any)?.images || [])]
+    // Filter images based on search query and tag
+    const displayImages = showAllUploads ? allImages : [...images, ...((user?.profile as any)?.images || [])]
 
-    const filteredImages = searchQuery
-        ? allImages.filter((image) => image.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        : allImages
+    let filteredImages = displayImages
+
+    // Apply search filter
+    if (searchQuery) {
+        filteredImages = filteredImages.filter((image) => image.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    }
+
+    // Apply tag filter
+    if (selectedTag) {
+        filteredImages = filteredImages.filter((image) => {
+            const imageTags = Array.isArray(image.tags) ? image.tags : []
+            return imageTags.includes(selectedTag)
+        })
+    }
 
     // Handle ESC key to clear search and paste events
     useEffect(() => {
@@ -449,8 +651,9 @@ export default function MediaUploadModal() {
                 if (validFiles.length > 0) {
                     await onDrop(validFiles)
                     addToast({
-                        description: `Pasted ${validFiles.length} image${validFiles.length > 1 ? 's' : ''
-                            } from clipboard`,
+                        description: `Pasted ${validFiles.length} image${
+                            validFiles.length > 1 ? 's' : ''
+                        } from clipboard`,
                         duration: 3000,
                     })
                 }
@@ -491,16 +694,18 @@ export default function MediaUploadModal() {
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                    isDragActive
                                         ? 'bg-input border-primary'
                                         : isPasting
-                                            ? 'bg-input border-primary animate-pulse'
-                                            : ''
-                                    }`}
+                                        ? 'bg-input border-primary animate-pulse'
+                                        : ''
+                                }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive || isPasting ? '' : 'opacity-50'
-                                        }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${
+                                        isDragActive || isPasting ? '' : 'opacity-50'
+                                    }`}
                                 >
                                     {isPasting ? (
                                         <Loading className="size-12 mb-4" />
@@ -511,8 +716,8 @@ export default function MediaUploadModal() {
                                         {isPasting
                                             ? 'Pasting image...'
                                             : isDragActive
-                                                ? 'Drop files here'
-                                                : 'Drop files or paste to upload'}
+                                            ? 'Drop files here'
+                                            : 'Drop files or paste to upload'}
                                     </p>
                                     <p className="text-sm text-secondary text-center mt-2 m-0">
                                         {isPasting
@@ -529,26 +734,65 @@ export default function MediaUploadModal() {
                     </div>
 
                     <div className="flex flex-col">
-                        <h3 className="m-0">Your uploads</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
-
-                        <div className="relative mb-4">
-                            <input
-                                type="text"
-                                className="w-full pr-8 rounded"
-                                placeholder="Search filenames..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            {searchQuery && (
+                        <div className="flex items-center justify-between mb-2">
+                            <div>
+                                <h3 className="m-0">{showAllUploads ? 'All uploads' : 'Your uploads'}</h3>
+                                <p className="text-sm text-secondary mt-1">Recent uploads to Cloudinary</p>
+                            </div>
+                            <div className="flex gap-2">
                                 <button
-                                    onClick={() => setSearchQuery('')}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
-                                    aria-label="Clear search"
+                                    onClick={() => setShowAllUploads(false)}
+                                    className={`text-sm px-3 py-1.5 rounded transition-colors ${
+                                        !showAllUploads ? 'bg-orange text-white' : 'bg-accent hover:bg-opacity-70'
+                                    }`}
                                 >
-                                    <IconX className="size-4" />
+                                    My uploads
                                 </button>
-                            )}
+                                <button
+                                    onClick={() => setShowAllUploads(true)}
+                                    className={`text-sm px-3 py-1.5 rounded transition-colors ${
+                                        showAllUploads ? 'bg-orange text-white' : 'bg-accent hover:bg-opacity-70'
+                                    }`}
+                                >
+                                    All uploads
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-2 mb-4">
+                            <div className="relative flex-grow">
+                                <input
+                                    type="text"
+                                    className="w-full pr-8 rounded"
+                                    placeholder="Search filenames..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
+                                {searchQuery && (
+                                    <button
+                                        onClick={() => setSearchQuery('')}
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
+                                        aria-label="Clear search"
+                                    >
+                                        <IconX className="size-4" />
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="relative">
+                                <select
+                                    value={selectedTag}
+                                    onChange={(e) => setSelectedTag(e.target.value)}
+                                    className="rounded pr-8 min-w-[150px]"
+                                >
+                                    <option value="">All tags</option>
+                                    {availableTags.map((tag) => (
+                                        <option key={tag} value={tag}>
+                                            {tag}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
                         <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
