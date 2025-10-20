@@ -141,27 +141,33 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                                         }
                                                         return (
                                                             <div key={skillIndex}>
-                                                                <div className="flex items-center gap-2 mb-2">
+                                                                <div className="flex gap-2 mb-2 w-full">
                                                                     {skill.sticker && (
-                                                                        <div className="shrink-0">{skill.sticker}</div>
+                                                                        <div className="shrink-0 mt-1 size-12">
+                                                                            {skill.sticker}
+                                                                        </div>
                                                                     )}
-                                                                    <div className="text-lg font-medium">
-                                                                        {skill.name}
+                                                                    <div className="flex-1">
+                                                                        <div className="text-lg font-medium">
+                                                                            {skill.name}
+                                                                        </div>
+                                                                        {skill.description && (
+                                                                            <p className="text-base text-secondary mb-2">
+                                                                                {skill.description}
+                                                                            </p>
+                                                                        )}
+                                                                        {skill.percent !== undefined && (
+                                                                            <div className="w-full h-2 bg-input rounded-full">
+                                                                                <div
+                                                                                    className="h-2 rounded-full bg-red dark:bg-yellow"
+                                                                                    style={{
+                                                                                        width: `${skill.percent}%`,
+                                                                                    }}
+                                                                                />
+                                                                            </div>
+                                                                        )}
                                                                     </div>
                                                                 </div>
-                                                                {skill.description && (
-                                                                    <p className="text-base text-secondary mb-2">
-                                                                        {skill.description}
-                                                                    </p>
-                                                                )}
-                                                                {skill.percent !== undefined && (
-                                                                    <div className="w-full h-2 bg-input rounded-full">
-                                                                        <div
-                                                                            className="h-2 rounded-full bg-red dark:bg-yellow"
-                                                                            style={{ width: `${skill.percent}%` }}
-                                                                        />
-                                                                    </div>
-                                                                )}
                                                             </div>
                                                         )
                                                     })}

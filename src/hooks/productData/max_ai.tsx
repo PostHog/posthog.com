@@ -81,14 +81,15 @@ export const max_ai = {
             title: 'Web Analytics',
             headline: 'Web Analytics',
             layout: 'ai',
-            icon: <IconPieChart className="size-5 text-green" />,
+            icon: <IconPieChart className="size-5" />,
             color: 'green',
             description:
                 "Privacy-friendly web analytics that doesn't require selling your soul (or your users' data). PostHog AI surfaces why traffic tanked, and what's actually converting.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
-                    alt: 'Stack traces',
+                    alt: 'Web analytics',
+                    className: 'max-h-64',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -97,7 +98,7 @@ export const max_ai = {
                 {
                     name: 'Traffic seer',
                     description: 'Illuminates pathways through clickthrough chaos and millions of pageviews',
-                    sticker: <StickerPath className="size-6" />,
+                    sticker: <StickerPath className="size-12" />,
                     percent: 80,
                 },
                 {
@@ -122,14 +123,15 @@ export const max_ai = {
             title: 'Product Analytics',
             headline: 'Product Analytics',
             layout: 'ai',
-            icon: <IconGraph className="size-5 text-blue" />,
+            icon: <IconGraph className="size-5" />,
             color: 'blue',
             description:
                 'Less digging - more dialogue. PostHog AI lives in your product data. Create insights and dashboards, and generate complex HogQL queries with natural language. ',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/product_analytics_90a59408f5.png',
-                    alt: 'Stack traces',
+                    alt: 'Product analytics',
+                    className: 'max-h-64',
                     // stylize: true,
                     // shadow: true,
                 },
