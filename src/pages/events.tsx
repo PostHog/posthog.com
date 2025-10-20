@@ -1,9 +1,5 @@
-import cntl from 'cntl'
-import Layout from 'components/Layout'
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import SEO from 'components/seo'
-import Link from 'components/Link'
-import Tooltip from 'components/Tooltip'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
@@ -16,20 +12,23 @@ import am5geodata_usaLow from '@amcharts/amcharts5-geodata/usaLow'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import { ZoomImage } from 'components/ZoomImage'
 import { useWindow } from '../context/Window'
+import { graphql, useStaticQuery } from 'gatsby'
+import dayjs from 'dayjs'
 
 type Event = {
     date: string // YYYY-MM-DD
-    startTime?: string // HH:MM in 24hr format
     name: string
     description?: string
     location: {
         label: string // Location display name
         lat?: number
         lng?: number
-        venue?: string // Venue name
+        venue?: {
+            name: string
+        }
     }
     private?: boolean
-    format?: string
+    format?: string[]
     audience?: string[]
     speakers?: string[]
     speakerTopic?: string
@@ -38,314 +37,91 @@ type Event = {
     vibeScore?: number
     photos?: string[]
     video?: string
-    deck?: string
+    presentation?: string
     link?: string
+    startTime?: string // HH:mm format
 }
 
-// Helper to parse month name to number
-const parseMonth = (monthStr: string): number => {
-    const months: { [key: string]: number } = {
-        January: 0,
-        February: 1,
-        March: 2,
-        April: 3,
-        May: 4,
-        June: 5,
-        July: 6,
-        August: 7,
-        September: 8,
-        October: 9,
-        November: 10,
-        December: 11,
+const transformStrapiEvent = (strapiEvent: any): Event => {
+    const {
+        private: isPrivate,
+        speakers: speakersData,
+        partners: partnersData,
+        photos: photosData,
+    } = strapiEvent.attributes
+
+    const photos = photosData?.data?.map((photo: any) => photo.attributes?.url)
+    const speakers = speakersData?.data?.map((s: any) =>
+        [s.attributes?.firstName, s.attributes?.lastName].filter(Boolean).join(' ')
+    )
+    const partners = partnersData?.map((p: any) => ({ name: p.name, url: p.url || undefined }))
+
+    return {
+        ...strapiEvent.attributes,
+        private: isPrivate === true,
+        speakers,
+        partners,
+        photos,
     }
-    return months[monthStr] || 0
 }
 
-// Helper to parse time to 24hr format
-const parseTime = (timeStr?: string): string | undefined => {
-    if (!timeStr) return undefined
-    const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i)
-    if (!match) return undefined
-    const [_, hours, minutes, period] = match
-    let hour = parseInt(hours)
-    if (period.toUpperCase() === 'PM' && hour !== 12) hour += 12
-    if (period.toUpperCase() === 'AM' && hour === 12) hour = 0
-    return `${hour.toString().padStart(2, '0')}:${minutes}`
-}
+// Fetch events from GraphQL
+const useEvents = (): Event[] => {
+    const data = useStaticQuery(graphql`
+        query EventsQuery {
+            allEvent {
+                nodes {
+                    attributes {
+                        name
+                        description
+                        date
+                        private
+                        format
+                        audience
+                        speakerTopic
+                        attendees
+                        vibeScore
+                        video
+                        presentation
+                        link
+                        location {
+                            label
+                            lat
+                            lng
+                            venue {
+                                name
+                            }
+                        }
+                        partners {
+                            name
+                            url
+                        }
+                        photos {
+                            data {
+                                attributes {
+                                    url
+                                }
+                            }
+                        }
+                        speakers {
+                            data {
+                                attributes {
+                                    firstName
+                                    lastName
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
 
-// Helper to split comma-separated values
-const splitValues = (str?: string): string[] | undefined => {
-    if (!str || str === '-') return undefined
-    return str
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
+    return data.allEvent.nodes.map(transformStrapiEvent)
 }
-
-// Helper to parse partners
-const parsePartners = (str?: string): Array<{ name: string; url?: string }> | undefined => {
-    const values = splitValues(str)
-    if (!values) return undefined
-    return values.map((name) => ({ name }))
-}
-
-const eventsData: Event[] = [
-    {
-        date: '2025-07-10',
-        name: 'MCP After Hours: AI Dev Tools Demo Night',
-        location: { label: 'San Francisco, CA' },
-        format: 'Talks',
-        audience: splitValues('Founders, engineers'),
-        speakers: splitValues('Peter Kirkham'),
-        partners: parsePartners('Speakeasy'),
-        attendees: 85,
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/325',
-    },
-    {
-        date: '2025-07-22',
-        name: 'AGI Builders Meetup with PostHog',
-        location: { label: 'San Francisco, CA' },
-        format: 'Talks, Fireside',
-        audience: splitValues('SF AI Enthusiasts'),
-        speakers: splitValues('Peter Kirkham, James Hawkins'),
-        partners: parsePartners('AGI Builders'),
-        attendees: 112,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/company-internal/issues/1999',
-    },
-    {
-        date: '2025-07-24',
-        name: 'Stealth Mode Mornings with PostHog',
-        location: { label: 'New York City, NY' },
-        format: 'Breakfast',
-        audience: splitValues('Stealth founders'),
-        speakers: splitValues('Mine Kansu'),
-        partners: parsePartners('Starcycle, Cooley'),
-        attendees: 7,
-        vibeScore: 2,
-        link: 'https://github.com/PostHog/meta/issues/330',
-    },
-    {
-        date: '2025-08-12',
-        name: 'AI Product Breakfast: AI Decisioning',
-        location: { label: 'Austin, TX' },
-        format: 'Breakfast + OST',
-        audience: splitValues('AI Engineers'),
-        speakers: splitValues('Haven Barnes'),
-        partners: parsePartners('AITX'),
-        attendees: 25,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/334',
-    },
-    {
-        date: '2025-08-21',
-        name: 'Building With and For AI: Developer Tools for Modern Apps',
-        location: { label: 'New York City, NY' },
-        format: 'Talks, Networking',
-        audience: splitValues('Engineers, Engineering managers'),
-        speakers: splitValues('Abe Basu'),
-        partners: parsePartners('Vercel, Profound'),
-        attendees: 50,
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/342',
-    },
-    {
-        date: '2025-08-26',
-        name: 'The Future of Developer Experience: Toronto Edition',
-        location: { label: 'Toronto, Canada' },
-        format: 'Talks, Networking',
-        audience: splitValues('Startup founders'),
-        speakers: splitValues('Vincent Ge'),
-        partners: parsePartners('Deskree'),
-        attendees: 75,
-        vibeScore: 3,
-        link: 'https://github.com/PostHog/meta/issues/347',
-    },
-    {
-        date: '2025-08-31',
-        name: 'Pubquiz at Flutter & friends',
-        location: { label: 'Stockholm, Sweeden' },
-        format: 'Pub quiz',
-        audience: splitValues('Flutter engineers'),
-        speakers: splitValues('Manoel Aranda Neto'),
-        attendees: 50,
-        vibeScore: 2,
-        link: 'https://github.com/PostHog/meta/issues/358',
-    },
-    {
-        date: '2025-09-14',
-        name: 'Valio Con',
-        location: { label: 'Oceanside, CA', lat: 33.1939, lng: -117.3827, venue: 'Seabird Hotel' },
-        format: 'Conference sponsorship',
-        audience: splitValues('Designers, Creatives'),
-        speakers: splitValues('Cory Watilo'),
-        speakerTopic: 'Why doing design wrong feels so right',
-        attendees: 65,
-        vibeScore: 4,
-        photos: ['https://res.cloudinary.com/dmukukwp6/image/upload/cory_valio_con_c6989afcef.jpeg'],
-        deck: 'https://www.figma.com/slides/nteoqVgdXmpjeQAOLIyTm7/Valio-Con-2025?node-id=1-42&t=khKhBYwd4m5wkAp4-1',
-        link: 'https://github.com/PostHog/meta/issues/343',
-    },
-    {
-        date: '2025-09-16',
-        name: 'PostHog hardware hacknight',
-        location: { label: 'Vermont' },
-        format: 'Meetup',
-        audience: splitValues('Engineers and founders'),
-        speakers: splitValues('Danilo Campos'),
-        attendees: 19,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/322',
-    },
-    {
-        date: '2025-09-23',
-        name: 'PostHog Founders Lunch',
-        location: { label: 'Cardiff, UK' },
-        format: 'Lunch + OST',
-        audience: splitValues('Founders'),
-        speakers: splitValues('Adam Leith'),
-        attendees: 25,
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/372',
-    },
-    {
-        date: '2025-09-24',
-        name: 'James dinner with ODF founders',
-        location: { label: 'San Francisco, CA' },
-        private: true,
-        format: 'Dinner',
-        audience: splitValues('Founders'),
-        speakers: splitValues('James Hawkins'),
-        partners: parsePartners('ODF'),
-        attendees: 11,
-        vibeScore: 4,
-        link: 'https://posthog.slack.com/archives/C08CG24E3SR/p1758828510754499',
-    },
-    {
-        date: '2025-09-24',
-        name: "München Hogtoberfest '25",
-        location: { label: 'Munich, Germany' },
-        format: 'Drinks',
-        audience: splitValues('Founders, Engineers'),
-        partners: parsePartners('Speedinvest'),
-        attendees: 7,
-        vibeScore: 2,
-        link: 'https://github.com/PostHog/meta/issues/361',
-    },
-    {
-        date: '2025-09-25',
-        name: 'MCP Builders Breakfast',
-        location: { label: 'Amsterdam, Denmark' },
-        format: 'Breakfast + OST',
-        audience: splitValues('MCP practitioners'),
-        speakers: splitValues('Jonathan Mieloo'),
-        partners: parsePartners('Fiberplane'),
-        attendees: 20,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/356',
-    },
-    {
-        date: '2025-09-26',
-        name: "From Open Source to Scale: A Conversation with PostHog's Tim Glaser",
-        location: { label: 'Dublin, Ireland' },
-        format: 'Panel',
-        audience: splitValues('Founders'),
-        speakers: splitValues('Tim Glaser'),
-        attendees: 55,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/371',
-    },
-    {
-        date: '2025-09-28',
-        name: 'Paellas and Agents with PostHog',
-        location: { label: 'Barcelona, Spain' },
-        format: 'Workshop',
-        audience: splitValues('AI engineers'),
-        speakers: splitValues('Georgiy Tarasov'),
-        attendees: 22,
-        vibeScore: 5,
-        link: 'https://github.com/PostHog/meta/issues/333',
-    },
-    {
-        date: '2025-09-30',
-        name: 'Jersey City Tech Meetup with PostHog',
-        location: { label: 'Jersey City, New Jersey' },
-        format: 'Talks, Panel, Networking',
-        audience: splitValues('Product managers and engineers'),
-        speakers: splitValues('Abe Basu'),
-        partners: parsePartners('Apprentice.io'),
-        attendees: 70,
-        vibeScore: 4,
-        link: 'https://github.com/PostHog/meta/issues/339',
-    },
-    {
-        date: '2025-10-10',
-        name: 'Product Weekend',
-        location: { label: 'Toronto, Canada', lat: 43.6532, lng: -79.3832 },
-        format: 'Workshop',
-        audience: splitValues('Product managers'),
-        speakers: splitValues('Zach Waterfield'),
-        link: 'theproductweekend.com/toronto-oct2025',
-    },
-    {
-        date: '2025-10-14',
-        startTime: '18:00',
-        name: 'AI LA Salon with PostHog',
-        location: { label: 'Los Angeles, CA', lat: 34.0522, lng: -118.2437 },
-        format: 'Talks',
-        audience: splitValues('Founders and engineers'),
-        speakers: splitValues('Raquel Smith'),
-        partners: parsePartners('AI LA'),
-        link: 'lu.ma/ailasalon-posthog',
-    },
-    {
-        date: '2025-10-15',
-        startTime: '17:30',
-        name: 'MCP After Hours London: AI Tooling Demos',
-        location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
-        format: 'Demos',
-        audience: splitValues('AI engineers'),
-        speakers: splitValues('Joshua Snyder'),
-        partners: parsePartners('Speakeasy'),
-        link: 'https://luma.com/3f2mh0no',
-    },
-    {
-        date: '2025-10-16',
-        startTime: '19:00',
-        name: 'Dev Korea #3',
-        location: { label: 'Seoul, South Korea', lat: 37.5665, lng: 126.978, venue: 'Google for Startups Campus' },
-        format: 'Talks, Networking',
-        audience: splitValues('Developers'),
-        speakers: splitValues('Max Wiersma'),
-        speakerTopic: 'Using PostHog to prioritize and understand user needs',
-        link: 'https://dev-korea.com/events/dev-korea-3-october-2025',
-    },
-    {
-        date: '2025-10-21',
-        startTime: '17:30',
-        name: 'Granola Fireside with James Hawkins',
-        location: { label: 'London, UK', lat: 51.5074, lng: -0.1278 },
-        format: 'Fireside chat',
-        audience: splitValues('Founders and engineers'),
-        speakers: splitValues('James Hawkins'),
-        partners: parsePartners('Granola'),
-        link: 'https://luma.com/t5e4fyah',
-    },
-    {
-        date: '2025-11-14',
-        startTime: '15:00',
-        name: 'Product Weekend',
-        location: { label: 'Dublin, Ireland', lat: 53.3498, lng: -6.2603 },
-        format: 'Workshop',
-        audience: splitValues('Product managers'),
-        speakers: splitValues('Alessandro Pogliaghi'),
-        speakerTopic: 'Leveraging AI in Product Development',
-        link: 'https://theproductweekend.com/dublin-nov2025',
-    },
-]
 
 function Events() {
+    const eventsData = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
@@ -1127,11 +903,7 @@ function Events() {
                                     <div className="p-4">
                                         <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
                                         <div className="mb-2 text-secondary">
-                                            {new Date(selectedEvent.date).toLocaleDateString('en-US', {
-                                                month: 'long',
-                                                day: 'numeric',
-                                                year: 'numeric',
-                                            })}
+                                            {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
                                         </div>
 
                                         <div className="space-y-3 text-sm mb-4">
@@ -1150,16 +922,9 @@ function Events() {
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Start time</div>
                                                     <div>
-                                                        {(() => {
-                                                            const [hours, minutes] = selectedEvent.startTime
-                                                                .split(':')
-                                                                .map(Number)
-                                                            const period = hours >= 12 ? 'PM' : 'AM'
-                                                            const displayHours = hours % 12 || 12
-                                                            return `${displayHours}:${minutes
-                                                                .toString()
-                                                                .padStart(2, '0')} ${period}`
-                                                        })()}
+                                                        {dayjs(
+                                                            `${selectedEvent.date} ${selectedEvent.startTime}`
+                                                        ).format('h:mm A')}
                                                     </div>
                                                 </div>
                                             )}
@@ -1168,7 +933,7 @@ function Events() {
                                                 <div className="text-secondary text-[13px] mb-1">Location</div>
                                                 {selectedEvent.location.venue && (
                                                     <div className="text-primary font-semibold mt-1">
-                                                        {selectedEvent.location.venue}
+                                                        {selectedEvent.location.venue.name}
                                                     </div>
                                                 )}
                                                 <div>{selectedEvent.location.label}</div>
@@ -1200,9 +965,9 @@ function Events() {
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Topic</div>
                                                     <div>{selectedEvent.speakerTopic}</div>
-                                                    {selectedEvent.deck && (
+                                                    {selectedEvent.presentation && (
                                                         <a
-                                                            href={selectedEvent.deck}
+                                                            href={selectedEvent.presentation}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="block mt-1 font-semibold underline"
@@ -1216,7 +981,7 @@ function Events() {
                                             {selectedEvent.format && (
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Format</div>
-                                                    <div>{selectedEvent.format}</div>
+                                                    <div>{selectedEvent.format.join(', ')}</div>
                                                 </div>
                                             )}
 

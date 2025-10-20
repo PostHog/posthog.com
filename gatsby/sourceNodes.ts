@@ -880,4 +880,40 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
     await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
     await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
+
+    const fetchEvents = async (page = 1) => {
+        const eventsQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                sort: ['date:desc'],
+                populate: {
+                    location: {
+                        populate: ['venue'],
+                    },
+                    photos: true,
+                    speakers: true,
+                    partners: true,
+                },
+            },
+            { encodeValuesOnly: true }
+        )
+        const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
+        const { data: events, meta } = await fetch(eventsUrl).then((res) => res.json())
+        events.forEach((event) => {
+            const node = {
+                ...event,
+                id: createNodeId(`event-${event.id}`),
+                internal: {
+                    type: 'Event',
+                    contentDigest: createContentDigest(event),
+                },
+            }
+            createNode(node)
+        })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
+    }
+    await fetchEvents()
 }
