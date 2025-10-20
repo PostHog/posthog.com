@@ -212,7 +212,7 @@ export default function Desktop() {
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
 
-    function generateInitialPositions(): IconPositions {
+    function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
         // Default positions if container isn't available yet
@@ -235,7 +235,8 @@ export default function Desktop() {
 
         // Position productLinks starting from the left
         let currentColumn = 0
-        productLinks.forEach((app, index) => {
+        const leftIcons = columns === 1 ? [...productLinks, ...apps] : productLinks
+        leftIcons.forEach((app, index) => {
             const columnIndex = Math.floor(index / maxIconsPerColumn)
             const positionInColumn = index % maxIconsPerColumn
 
@@ -246,6 +247,10 @@ export default function Desktop() {
 
             currentColumn = Math.max(currentColumn, columnIndex + 1)
         })
+
+        if (columns === 1) {
+            return positions
+        }
 
         // Start from the rightmost position and flow left
         const rightmostStart = containerWidth - paddingHorizontal - iconWidth
@@ -262,6 +267,20 @@ export default function Desktop() {
                 y: startY + positionInColumn * iconHeight,
             }
         })
+
+        if (columns > 1) {
+            const isAnyIconOutOfBounds = Object.values(positions).some(
+                (position) =>
+                    position.x < 0 ||
+                    position.y < 0 ||
+                    position.x + iconWidth > containerWidth ||
+                    position.y + iconHeight > containerHeight
+            )
+
+            if (isAnyIconOutOfBounds) {
+                return generateInitialPositions(1)
+            }
+        }
 
         return positions
     }
