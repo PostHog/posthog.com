@@ -650,6 +650,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Changelog',
+                url: '/handbook/content/changelog',
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
                 children: [
@@ -664,34 +668,20 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Changelog',
-                url: '/handbook/content/changelog',
+                name: 'SEO best practices',
+                url: '/handbook/content/seo-guide',
             },
             {
-                name: 'Writing for PostHog',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/writing-for-posthog',
-                    },
-                    {
-                        name: 'SEO best practices',
-                        url: '/handbook/content/seo-guide',
-                    },
-                    {
-                        name: 'Style guide',
-                        url: '/handbook/content/posthog-style-guide',
-                    },
-                    {
-                        name: 'Tags and categories',
-                        url: '/handbook/content/tags-and-categories',
-                    },
-                    {
-                        name: 'Content components',
-                        url: '/handbook/content/components',
-                    },
-                ],
+                name: 'Style guide',
+                url: '/handbook/content/posthog-style-guide',
+            },
+            {
+                name: 'Writing metadata',
+                url: '/handbook/content/metadata',
+            },
+            {
+                name: 'Content components',
+                url: '/handbook/content/components',
             },
         ],
     },
@@ -1284,10 +1274,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                                        {
+                    {
                         name: 'Hogpatch',
                         url: '/handbook/growth/sales/hogpatch',
-                    }
+                    },
                 ],
             },
             {

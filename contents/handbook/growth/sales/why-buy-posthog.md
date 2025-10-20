@@ -74,7 +74,7 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 # General talking points for all roles
 
-- By having [all of the products you need in one place](/why-does-posthog-exist), you reduce the burden of navigating and paying for different tools on all of your teams.  
+- By having [all of the products you need in one place](/handbook/why-does-posthog-exist), you reduce the burden of navigating and paying for different tools on all of your teams.  
 - [We only build products which we know people use today already](/handbook/which-products) (e.g. have product market fit) but provide them in an integrated and cost-effective manner.  
 - Our [usage-based pricing](/handbook/how-we-make-money) means that you’ll only pay for what you use and have full control of those costs, unlike opaque software contracts, where the prices go up every year with zero innovation attached.  
 - Plus, [the way we do sales is different](/sales).
