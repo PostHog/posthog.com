@@ -10,31 +10,32 @@ import {
     IconLlmAnalytics,
     IconWarning,
     IconAsterisk,
+    IconSparkles,
 } from '@posthog/icons'
 import { StickerPath } from 'components/Stickers/Stickers'
 
 export const posthog_ai = {
-    name: 'Max',
+    name: 'PostHog AI',
     parentIcon: 'aiMax',
-    // Icon: IconMagicWand,
+    Icon: IconSparkles,
     description: 'Your AI-powered product analyst and product manager',
     role: 'Helpful chatbot',
     handle: 'posthog_ai',
     color: 'ai-blue',
     colorSecondary: 'lilac',
-    category: 'ai',
-    slug: 'max',
+    category: 'product_os',
+    slug: 'ai',
     status: 'beta',
     hideFromPricingTable: true,
     seo: {
-        title: 'Max AI – Your AI copilot for PostHog data and insights',
+        title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
-            'Your AI-powered product analyst. Write natural language to query and analyze PostHog data instantly, find insights, and speed up product decisions with Max AI.',
+            'Your AI-powered product analyst. Write natural language to query and analyze PostHog data instantly, find insights, and speed up product decisions with PostHog AI.',
     },
     overview: {
         title: 'Our resident AI agent who understands your product and data',
         description:
-            'Max builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
+            'PostHog AI builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
         layout: 'ai',
         textColor: 'text-white',
     },

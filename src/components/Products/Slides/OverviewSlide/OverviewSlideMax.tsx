@@ -24,11 +24,11 @@ export default function OverviewSlideMax() {
                     />
                 </aside>
                 <div className="flex-1 prose">
-                    <h2 className="text-5xl font-bold text-primary mb-4">Meet Max, your AI product assistant.</h2>
+                    <h2 className="text-5xl font-bold text-primary mb-4">Meet PostHog AI, your product assistant.</h2>
                     <p className="text-2xl text-secondary mx-auto">
-                        Max is deeply connected with your data, and lives inside of the PostHog app.
+                        PostHog AI is deeply connected with your data, and lives inside of the PostHog app.
                     </p>
-                    <h3 className="text-2xl mt-4">Unlike other agents, Max can:</h3>
+                    <h3 className="text-2xl mt-4">Unlike other agents, PostHog AI can:</h3>
                     <ul>
                         {skills.map((skill: string) => (
                             <li key={skills.indexOf(skill)} className="text-xl">

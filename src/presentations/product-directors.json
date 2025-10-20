@@ -61,12 +61,12 @@
         },
         "posthog_ai": {
             "template": "product",
-            "name": "Max AI",
+            "name": "PostHog AI",
             "handle": "posthog_ai",
             "screenshot": "sidebarInitialCropped",
             "screenshotClasses": "max-w-[724px] rounded-md shadow-2xl overflow-hidden [&_img]:w-[724px] [&_img]:max-w-[724px]",
             "title": "Ask questions about your product usage",
-            "description": "<p>We create the insights for you, all you need to do is ask Max AI questions about your product.</p>"
+            "description": "<p>We create the insights for you, all you need to do is ask PostHog AI questions about your product.</p>"
         },
         "pricing": {
             "template": "pricing",

@@ -5,7 +5,7 @@ import * as Icons from '@posthog/icons'
 export const popularProducts = ['web_analytics', 'product_analytics', 'session_replay', 'feature_flags', 'experiments']
 
 // Newest products to highlight in the menu
-export const newestProducts = ['llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
+export const newestProducts = ['posthog_ai', 'llm_analytics', 'error_tracking', 'revenue_analytics', 'web_analytics']
 
 // Category ordering for display
 export const categoryOrder = [
@@ -16,7 +16,6 @@ export const categoryOrder = [
     'product',
     // 'engineering',
     'communication',
-    'posthog_ai',
     'product_os',
 ] as const
 
@@ -70,8 +69,7 @@ export const productOrder: Record<string, string[]> = {
         'bi',
     ],
     communication: ['surveys', 'messaging', 'user-interviews'],
-    posthog_ai: ['posthog_ai'],
-    product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
+    product_os: ['posthog_ai', 'api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
 // Non-product pages that appear in the product navigation

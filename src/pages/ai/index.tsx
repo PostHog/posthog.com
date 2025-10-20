@@ -219,7 +219,8 @@ const CustomPricingSlide = () => {
             <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
                 <div className="text-2xl font-bold mb-4">PostHog AI is free during beta.</div>
                 <p className="text-xl">
-                    Eventually we may charge a nominal, flat monthly fee – we're thinking something like ~$15/mo.
+                    Eventually we'll charge usage-based pricing and will offer a generous monthly free tier, as we do
+                    with all of our paid products.
                 </p>
             </div>
         </div>
@@ -337,8 +338,13 @@ export default function MaxAI(): JSX.Element {
                 name: 'Demo',
                 component: CustomDemoSlide,
             },
+            // {
+            //     slug: 'manifesto',
+            //     name: 'AI manifesto',
+            //     component: CustomManifestoSlide,
+            // },
         ],
-        order: ['overview', 'demo', 'roadmap', 'features', 'pricing', 'getting-started'],
+        order: ['overview', 'features', 'demo', 'roadmap', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',

@@ -284,7 +284,7 @@ const defaultAiChatSettings: InkeepAIChatSettings = {
         light: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
         dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/max_c5dd553db8.png',
     },
-    aiAssistantName: 'Max AI',
+    aiAssistantName: 'PostHog AI',
     isFirstExampleQuestionHighlighted: false,
     conversationVisibility: 'public',
 }
