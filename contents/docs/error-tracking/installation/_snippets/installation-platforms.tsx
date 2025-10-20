@@ -61,7 +61,7 @@ const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
         {
             label: 'Android',
             url: '/docs/error-tracking/installation/android',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg',
         },
         {
             label: 'Manual/API',
