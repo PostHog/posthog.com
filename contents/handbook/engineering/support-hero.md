@@ -147,14 +147,11 @@ Your primary responsibility is simply to make sure SDK questions get some love. 
 
 - [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
 - New issues in the SDK repositories
-  - [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
-  - [posthog-ios](https://github.com/PostHog/posthog-ios)
-  - [posthog-android](https://github.com/PostHog/posthog-android)
-  - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
+  - [posthog-js (Web, Web Lite, React, Next, Node, AI)](https://github.com/PostHog/posthog-js/)
   - [posthog-python](https://github.com/PostHog/posthog-python)
   - [posthog-php](https://github.com/PostHog/posthog-php)
   - [posthog-ruby](https://github.com/PostHog/posthog-ruby)
-  - [posthog-java](https://github.com/PostHog/posthog-java)
+  - [posthog-java](https://github.com/PostHog/posthog-android/tree/main/posthog-server)
   - [posthog-rs (Rust)](/docs/libraries/rust)
   - [posthog-go](/docs/libraries/go)
   - [posthog-dotnet](https://github.com/PostHog/posthog-dotnet)
@@ -170,7 +167,17 @@ Next, please work on SDK tickets in Zendesk, and GitHub issues labelled `SDK Sup
 
 At the end of the week, please write a public handover message in `#support-client-libraries`, to let the next person know what work is in progress, let the team know how the support rotation is going in general, and to share any learnings or feedback.
 
-For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on Mobile Apps may take weeks or even months. So, if you see a high-priority issue, please try to figure it out but if you get stuck, escalate it to the relevant team as soon as possible or ping @mobile-folks on Slack.
+### Mobile SDKs
+
+For Mobile SDK issues, the SLA has to be a bit faster since rolling out fixes on Mobile Apps may take weeks or even months.
+If you see a high-priority issue, please escalate it to the [Mobile team](/teams/mobile) as soon as possible (@mobile-folks on Slack or Mobile group on Zendesk).
+
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/42222680081819)
+- New issues in the SDK repositories
+  - [posthog-js (React Native)](https://github.com/PostHog/posthog-js/tree/main/packages/react-native)
+  - [posthog-ios](https://github.com/PostHog/posthog-ios)
+  - [posthog-android](https://github.com/PostHog/posthog-android)
+  - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
 
 ## Don't ask users to do work that you can do!
 
