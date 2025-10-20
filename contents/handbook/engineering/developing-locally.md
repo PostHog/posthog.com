@@ -415,13 +415,16 @@ DEBUG=1 ./bin/migrate
 
 #### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with one of:
 
 ```bash
 ./bin/start
 
 # only services strictly required to run posthog
 ./bin/start --minimal
+
+# if you want to log additionally each process to a /tmp/posthog-<process-name>.log file for AI code editors to be able to grep
+./bin/start --custom bin/mprocs-with-logging.yaml
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
