@@ -4573,14 +4573,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/posthog-ai#how-do-i-access-max',
+                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
                     name: 'Data access',
-                    url: '/docs/posthog-ai#what-access-does-max-have-to-my-data',
+                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
