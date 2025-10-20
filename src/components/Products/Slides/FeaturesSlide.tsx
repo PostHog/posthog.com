@@ -148,23 +148,23 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                                                         </div>
                                                                     )}
                                                                     <div className="flex-1">
-                                                                        <div className="text-lg font-medium">
+                                                                        <div className="text-xl font-bold mb-2">
                                                                             {skill.name}
                                                                         </div>
-                                                                        {skill.description && (
-                                                                            <p className="text-base text-secondary mb-2">
-                                                                                {skill.description}
-                                                                            </p>
-                                                                        )}
                                                                         {skill.percent !== undefined && (
                                                                             <div className="w-full h-2 bg-input rounded-full">
                                                                                 <div
-                                                                                    className="h-2 rounded-full bg-red dark:bg-yellow"
+                                                                                    className={`h-2 rounded-full bg-${item.color}`}
                                                                                     style={{
                                                                                         width: `${skill.percent}%`,
                                                                                     }}
                                                                                 />
                                                                             </div>
+                                                                        )}
+                                                                        {skill.description && (
+                                                                            <p className="text-lg text-secondary my-2">
+                                                                                {skill.description}
+                                                                            </p>
                                                                         )}
                                                                     </div>
                                                                 </div>
