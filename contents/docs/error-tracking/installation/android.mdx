@@ -30,7 +30,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 import InstallAndroid from "../../integrate/_snippets/install-android.mdx"
 import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
 
-> **Note:** We currently don't support demangling of minified builds (`isMinifyEnabled=true`), we're adding support for it as we speak.
+> **Note:** We currently don't support demangling stacktraces of minified builds (`isMinifyEnabled=true`), we're adding support for it as we speak.
 
 <Steps>
 <Step title="Install PostHog Android SDK" badge="required">
@@ -72,6 +72,8 @@ PostHog.captureException(exception, properties = additionalProperties)
 This is helpful if you've built your own error handling logic or want to capture exceptions that are handled by your application code.
 
 </Step>
+
+> **Note:** We currently don't support [source code context](/docs/error-tracking/stack-traces) associated with an exception, we'll add support for it later.
 
 <StepVerifyErrorTracking />
 

@@ -270,25 +270,7 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 ## Error tracking
 
-> **Note: ** Requires PostHog Android SDK version [3.24.0](https://github.com/PostHog/posthog-android/releases/tag/android-v3.24.0) or higher.
-
-You can [autocapture exceptions](/docs/error-tracking/installation) by setting the `errorTrackingConfig.autoCapture` argument to `true` when initializing the PostHog SDK.
-
-```kotlin
-import com.posthog.android.PostHogAndroidConfig
-
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
-    ...
-    errorTrackingConfig.autoCapture = true
-}
-...
-```
-
-You can also manually capture exceptions using the `captureException` method:
-
-```kotlin
-PostHog.captureException(exception, properties = additionalProperties)
-```
+To set up [error tracking](/docs/error-tracking/installation/android) in your project, all you need to do is install the Android SDK, and enable `errorTrackingConfig.autoCapture=true` when initializing the PostHog SDK.
 
 ## Session replay
 
