@@ -176,7 +176,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                                             <div key={skillIndex}>
                                                                 <div className="flex gap-4 mb-2 w-full">
                                                                     {skill.sticker && (
-                                                                        <div>
+                                                                        <div className="hidden">
                                                                             <div className="mt-1 size-12 [&>svg]:size-12">
                                                                                 {skill.sticker}
                                                                             </div>
