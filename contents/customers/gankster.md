@@ -38,3 +38,7 @@ In other words, while creating a group might seem like a more intentional user e
 “So, we shifted things around. We made it _harder_ to create a group where before it was very easy. We added more friction there and added automations, so it’s faster to get into a game after signing up. This led to a huge bump in our retention rate, with a flat 5% improvement across the board.”
 
 “We’ve made these sort of discoveries multiple times thanks to having all our data in PostHog — and this is why we’re always so data driven. When you’re making changes that drive a 5% improvement, you only need a few wins before things really start to snowball.”
+
+<CalloutBox icon="IconInfo" title="Max who?" type="fyi">
+We renamed Max to PostHog AI. It's also [10X more powerful](https://posthog.com/max) than when this was written.
+</CalloutBox>

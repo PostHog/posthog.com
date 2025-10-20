@@ -43,3 +43,7 @@ Now, with analytics centralized into PostHog, the team can much more flexibly an
 Exa didn’t stop at just bringing analytics into PostHog, however. Tools such as session replay have also enabled the team to debug errors and even ship code faster than before.
 
 “For me, a lot of product engineering work is less about implementation, and more about aligning myself to a truth,” explains Liam. “Session replay really helps with that. You can see where people get confused. You can quickly validate hypotheses by using it with analytics. Then, I can work with an AI to deploy a fix — it’s an incredibly efficient way for me to work and there are still so many features in PostHog we haven’t adopted yet, like [surveys](/surveys) and [revenue analytics](/revenue-analytics).”
+
+<CalloutBox icon="IconInfo" title="Max who?" type="fyi">
+We renamed Max to PostHog AI. It's also [10X more powerful](https://posthog.com/max) than when this was written.
+</CalloutBox>
