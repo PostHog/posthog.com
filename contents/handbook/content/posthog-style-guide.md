@@ -34,20 +34,6 @@ We are opinionated at PostHog. That means avoiding hedging like saying "it's com
 2. Provide an example.
 3. Do the research until you can do 1. or 2.
 
-## Brand guidelines
-
-### We're an analytics platform, not a product analytics tool
-
-Unless directly referring to our product analytics suite, substitute references to "product analytics" or "product analytics tool" with the phrase "analytics platform".
-
-> **Example:** “A data warehouse or product analytics tool like PostHog can be helpful here.” would become “A data warehouse or analytics platform like PostHog can be helpful here.
-
-Product OS is also an acceptable alternative – use your judgement based on the context.
-
-### Do not capitalize product features
-
-It's "product analytics" not "Product Analytics" and so on.
-
 ## Style rules
 
 ### Use American English
