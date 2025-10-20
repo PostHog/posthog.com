@@ -485,28 +485,57 @@ Our MCP server executing tool calls.
 
 ## 9. Create MCP analytics dashboards
 
-Now that our MCP server is creating MCP analytics, we can create insights and dashboards in PostHog to visualize the data. We can create:
+Now that our MCP server is creating MCP analytics and sending them as events to PostHog, we can build insights and dashboards in PostHog to visualize the data. We can set up:
 
- - Performance dashboard
- - Reliability dashboard
- - Usage dashboard
+ - Performance dashboards
+ - Reliability dashboards
+ - Usage dashboards
 
-Image tk...
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/MCP_analytics_events_f755896fef.png"
+  alt="MCP analytics PostHog events"
+  classes="rounded"
+/>
 
 <Caption>
-P95 latency by tool (bar chart) to find slow operations
+MCP analytics sent to PostHog as captured events and exceptions
 </Caption>
 
-Image tk...
+<br/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/p95_tool_call_duration_b549d3039e.png"
+  alt="P95 latency by tool"
+  classes="rounded"
+/>
 
 <Caption>
-Success rate by tool (table) to identify problem areas
+P95 duration by tool (ms)
 </Caption>
 
-Image tk...
+<br/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tool_call_by_name_0db1e87cf7.png"
+  alt="Tool calls over time"
+  classes="rounded"
+/>
 
 <Caption>
-Tool popularity over time (line chart) to understand patterns
+Tool calls over time to understand usage
+</Caption>
+
+<br/>
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/tool_call_error_tracking_cd243d4f50.png"
+  alt="Tool calls over time"
+  classes="rounded"
+/>
+
+
+<Caption>
+Tool call error tracking with stack traces
 </Caption>
 
 ## Further reading
