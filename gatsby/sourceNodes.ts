@@ -877,6 +877,49 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         )
     }
 
+    const fetchAchievements = async () => {
+        const query = qs.stringify({
+            populate: ['icon', 'achievement_group.achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
+            res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-${achievement.id}`),
+                internal: {
+                    type: 'Achievement',
+                    contentDigest: createContentDigest(achievement),
+                },
+                strapiID: achievement.id,
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    const fetchAchievementGroups = async () => {
+        const query = qs.stringify({
+            populate: ['achievements.icon'],
+        })
+        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
+            (res) => res.json()
+        )
+        data.forEach((achievement) => {
+            const node = {
+                id: createNodeId(`achievement-group-${achievement.id}`),
+                internal: {
+                    type: 'AchievementGroup',
+                    contentDigest: createContentDigest(achievement),
+                },
+                ...achievement?.attributes,
+            }
+            createNode(node)
+        })
+    }
+
+    await fetchAchievements()
+    await fetchAchievementGroups()
     await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))
     await fetchPostHogPipelines('destination', (pipeline) => pipeline.id.replace('template-', ''))
     await fetchPostHogPipelines('source_webhook', (pipeline) => pipeline.id.replace('template-', ''))
