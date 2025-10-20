@@ -8,7 +8,7 @@ export const MaxExampleCards = [
         top: 'What changed across my product this week?',
         bottom: (
             <>
-                PostHog AI connects every data point to <strong>see the full picture</strong>
+                PostHog AI connects every data point to <strong>see the full picture.</strong>
             </>
         ),
         color: '#FFD89E',
@@ -24,7 +24,7 @@ export const MaxExampleCards = [
         top: 'Find sessions where users got stuck',
         bottom: (
             <>
-                PostHog AI can <strong>summarize recordings</strong> and suggest next steps
+                PostHog AI can <strong>summarize recordings</strong> and suggest next steps.
             </>
         ),
         color: '#DCE7D0',
@@ -34,13 +34,13 @@ export const MaxExampleCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/recorder_replay_camera_playback_video_bec1d778fd.png"
             />
         ),
-        // ImageSize: 'w-full mt-8',
+        ImageSize: '-mt-8',
     },
     {
         top: <>Build a dashboard for onboarding retention</>,
         bottom: (
             <>
-                PostHog AI builds dashboards and insights <strong>from plain English</strong>
+                PostHog AI builds dashboards and insights <strong>from plain English.</strong>
             </>
         ),
         color: '#D9E1FC',
@@ -56,7 +56,7 @@ export const MaxExampleCards = [
         top: 'Analyze LLM token usage over the past 7 days',
         bottom: (
             <>
-                PostHog AI helps you <strong>build better AI products</strong> (how meta)
+                PostHog AI helps you <strong>build better AI products.</strong> (How meta.)
             </>
         ),
         color: '#FDBAF2',
@@ -83,13 +83,13 @@ export const MaxExampleCards = [
                 imgClassName="w-[150px]"
             />
         ),
-        ImageSize: '-mt-4',
+        ImageSize: '-mt-12',
     },
     {
         top: "What's the right SQL syntax for this query?",
         bottom: (
             <>
-                PostHog AI <strong>writes and debugs SQL queries</strong> (so you don’t have to)
+                PostHog AI <strong>writes and debugs SQL queries</strong> (so you don’t have to).
             </>
         ),
         color: '#DCE7D0',
@@ -99,13 +99,13 @@ export const MaxExampleCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/database_db_sql_53db9b69d6.png"
             />
         ),
-        // ImageSize: 'w-full mt-4',
+        ImageSize: '-mt-8',
     },
     {
         top: 'Find the top 10 orgs by number of active users',
         bottom: (
             <>
-                PostHog AI joins with <strong>external data sources</strong> for even more context
+                PostHog AI joins with <strong>external data sources</strong> for even more context.
             </>
         ),
         color: '#D9E1FC',
@@ -115,13 +115,13 @@ export const MaxExampleCards = [
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/desk_laptop_employee_fb674180cb.png"
             />
         ),
-        // ImageSize: 'w-full',
+        ImageSize: '-mt-8',
     },
     {
         top: 'How do I set up a feature flag?',
         bottom: (
             <>
-                PostHog AI is expert in <strong>how to use PostHog products</strong> (duh)
+                PostHog AI is expert in <strong>how to use PostHog products.</strong> (Duh!)
             </>
         ),
         color: '#FDBAF2',
@@ -132,6 +132,6 @@ export const MaxExampleCards = [
                 imgClassName="w-[160px]"
             />
         ),
-        ImageSize: '-rotate-3 mt-6',
+        ImageSize: '-rotate-3',
     },
 ]

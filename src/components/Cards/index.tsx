@@ -1,6 +1,6 @@
-import { IconChevronDown } from '@posthog/icons'
+import { IconChevronDown, IconLogomark } from '@posthog/icons'
 import React, { useRef } from 'react'
-import { useLayoutData } from '../Layout/hooks'
+import OSButton from 'components/OSButton'
 
 type CardProps = {
     top: React.ReactNode
@@ -10,20 +10,60 @@ type CardProps = {
     color?: string
 }
 
+// Helper function to extract text content from React.ReactNode
+const extractTextFromNode = (node: React.ReactNode): string => {
+    if (typeof node === 'string') {
+        return node
+    }
+    if (typeof node === 'number') {
+        return node.toString()
+    }
+    if (React.isValidElement(node)) {
+        if (typeof node.props.children === 'string') {
+            return node.props.children
+        }
+        if (Array.isArray(node.props.children)) {
+            return node.props.children.map(extractTextFromNode).join('')
+        }
+        return extractTextFromNode(node.props.children)
+    }
+    return ''
+}
+
 const Card = ({ top, bottom, Image, ImageSize, color }: CardProps) => {
-    const { enterpriseMode } = useLayoutData()
+    // Extract text from the top field and create Max URL
+    const questionText = extractTextFromNode(top)
+    const encodedQuestion = encodeURIComponent(questionText)
+    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
+
     return (
         <li
             style={{ backgroundColor: color || 'white' }}
-            className="h-[643px] w-[500px] @2xl:h-[450px] @2xl:w-[350px] flex flex-col justify-between p-10 @2xl:p-6 gap-8 @2xl:gap-4 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 snap-center overflow-hidden shadow-xl"
+            className="h-[643px] w-[500px] @2xl:h-[411px] @2xl:w-[320px] flex flex-col justify-between p-10 @2xl:p-6 gap-8 @2xl:gap-4 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 snap-center overflow-hidden shadow-xl"
         >
             <div>
-                <h5 className="mt-0 mb-4 @2xl:mb-2 text-4xl @2xl:text-3xl text-black relative">"{top}"</h5>
-                <p className="text-3xl @2xl:text-xl text-black m-0 relative leading-normal">{bottom}</p>
+                <h5 className="mt-0 mb-4 @2xl:mb-2 text-4xl @2xl:text-2xl text-black relative">"{top}"</h5>
+                <p className="text-3xl @2xl:text-lg text-black m-0 relative leading-normal">{bottom}</p>
             </div>
-            <figure className={`flex-1 flex w-full justify-center items-center scale-[2] @2xl:scale-125 ${ImageSize}`}>
+            <figure
+                className={`flex-1 flex w-full justify-center items-center scale-[2] @2xl:scale-110 mb-8 ${ImageSize}`}
+            >
                 {Image}
             </figure>
+            <div className="absolute bottom-4 left-8 right-8">
+                <OSButton
+                    asLink
+                    to={maxUrl}
+                    variant="secondary"
+                    size="lg"
+                    width="full"
+                    className="flex items-center gap-2"
+                    external
+                >
+                    <IconLogomark className="size-6" />
+                    <span className="text-lg">Ask PostHog AI</span>
+                </OSButton>
+            </div>
         </li>
     )
 }
