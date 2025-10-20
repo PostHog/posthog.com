@@ -1,5 +1,7 @@
-import { IconBolt, IconCursor, IconGraph, IconMagicWand } from '@posthog/icons'
+import React from 'react'
+import { IconBolt, IconCursor, IconGraph, IconMagicWand, IconPieChart } from '@posthog/icons'
 import { IconBrain } from 'components/OSIcons/Icons'
+import { StickerPath } from 'components/Stickers/Stickers'
 
 export const max_ai = {
     name: 'Max',
@@ -76,41 +78,84 @@ export const max_ai = {
 
     features: [
         {
-            title: 'Max answers product questions',
-            headline: 'answers product questions',
+            title: 'Web Analytics',
+            headline: 'Web Analytics',
+            layout: 'ai',
+            icon: <IconPieChart className="size-5 text-green" />,
+            color: 'green',
             description:
-                'Getting insights from an analytics suite can sometimes feel like navigating an airplane cockpit. Max eliminates the need to fiddle with a bunch of controls. Just ask a question and Max will give you a direct answer.',
-            features: [
+                "Privacy-friendly web analytics that doesn't require selling your soul (or your users' data). PostHog AI surfaces why traffic tanked, and what's actually converting.",
+            images: [
                 {
-                    icon: IconBrain,
-                    title: 'Context-aware',
-                    items: [
-                        'Understands your event schema and property definitions',
-                        'Ability to factor in business context<br /><p class="italic leading-normal text-secondary text-[15px]">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</p>',
-                    ],
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
+                    alt: 'Stack traces',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Traffic seer',
+                    description: 'Illuminates pathways through clickthrough chaos and millions of pageviews',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 80,
                 },
                 {
-                    icon: IconBolt,
-                    title: 'Queries your data stack',
-                    items: [
-                        'Has access to your events and actions, people, user sessions, groups, and cohorts',
-                        'Sources data from your connected data warehouse sources',
-                    ],
+                    name: 'Writes SQL queries',
+                    percent: 95,
                 },
                 {
-                    icon: IconGraph,
-                    title: 'Generates insights',
-                    items: [
-                        'Builds data visualizations',
-                        'Capable of answers specific data questions without needing to generate visualizations',
-                    ],
+                    name: 'PostHog product expert',
+                    percent: 90,
                 },
                 {
-                    icon: IconCursor,
-                    title: 'Navigates the query building interface',
-                    items: [
-                        "Assists in sets date ranges and applying filters, data breakdowns, and formulas when you want to take manual control but don't want to do <em>all</em> the work yourself",
-                    ],
+                    name: 'Builds data transformations',
+                    percent: 95,
+                },
+                {
+                    name: 'Analytics industry knowledge',
+                    percent: 80,
+                },
+            ],
+        },
+        {
+            title: 'Product Analytics',
+            headline: 'Product Analytics',
+            layout: 'ai',
+            icon: <IconGraph className="size-5 text-blue" />,
+            color: 'blue',
+            description:
+                'Less digging - more dialogue. PostHog AI lives in your product data. Create insights and dashboards, and generate complex HogQL queries with natural language. ',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/product_analytics_90a59408f5.png',
+                    alt: 'Stack traces',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Insight composer',
+                    description: 'Builds insights and entire dashboards from a single prompt',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 80,
+                },
+                {
+                    name: 'Writes SQL queries',
+                    percent: 95,
+                },
+                {
+                    name: 'PostHog product expert',
+                    percent: 90,
+                },
+                {
+                    name: 'Builds data transformations',
+                    percent: 95,
+                },
+                {
+                    name: 'Analytics industry knowledge',
+                    percent: 80,
                 },
             ],
         },
@@ -221,7 +266,7 @@ export const max_ai = {
         {
             slug: 'product-analytics',
             description:
-                'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
+                'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviors.',
         },
         {
             slug: 'data-warehouse',

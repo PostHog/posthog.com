@@ -236,7 +236,6 @@ export default function MaxAI(): JSX.Element {
     const slides = createSlideConfig({
         exclude: [
             'customers',
-            'features',
             'ai',
             'comparison-summary',
             'feature-comparison',
@@ -254,7 +253,7 @@ export default function MaxAI(): JSX.Element {
         order: ['overview', 'roadmap', 'features', 'pricing', 'answers', 'getting-started'],
         templates: {
             overview: 'max',
-            features: 'columns',
+            features: 'ai',
             answers: 'demo',
         },
         content: {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
-import ProductImage from './Image'
+import ProductImage, { Image } from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface Feature {
@@ -16,7 +16,8 @@ interface FeatureItem {
     icon?: any
     color?: string
     features?: Feature[]
-    images?: Array<{ src: string; alt: string; stylize: boolean; shadow: boolean; className: string }>
+    skills?: Array<{ name: string; description?: string; sticker?: React.ReactNode; percent?: number } | string>
+    images?: Image[]
     imagesClasses?: string
     children?: React.ReactNode
 }
@@ -90,15 +91,17 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                         <div className="relative">
                             <div className={`${item.layout === 'columns' ? 'pt-4' : 'pt-12 px-4 pb-8'} pb-8`}>
                                 <h2
-                                    className={`text-5xl mb-0 ${item.layout === 'columns' ? 'text-left' : 'text-center'
-                                        }`}
+                                    className={`text-5xl mb-0 ${
+                                        item.layout === 'columns' ? 'text-left' : 'text-center'
+                                    }`}
                                 >
                                     {item.headline}
                                 </h2>
                                 {item.description && (
                                     <p
-                                        className={`mt-4 text-xl [&_code]:text-xl ${item.layout === 'columns' ? 'text-left' : 'text-center'
-                                            }`}
+                                        className={`mt-4 text-xl [&_code]:text-xl ${
+                                            item.layout === 'columns' ? 'text-left' : 'text-center'
+                                        }`}
                                         {...(typeof item.description === 'string'
                                             ? { dangerouslySetInnerHTML: { __html: item.description } }
                                             : { children: item.description })}
@@ -128,6 +131,63 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         {(item as any).children && <div className="p-4">{(item as any).children}</div>}
                                     </aside>
                                 </div>
+                            ) : item.layout === 'ai' ? (
+                                <>
+                                    <div className="px-4">
+                                        {item.features &&
+                                            item.features.map((feature: Feature, featureIndex: number) => (
+                                                <div key={featureIndex} className="mb-6">
+                                                    <h3 className="text-2xl mb-1">{feature.title}!!</h3>
+                                                    <p className="text-lg">{feature.description}</p>
+                                                </div>
+                                            ))}
+                                    </div>
+                                    {item.images && item.images.length > 0 && (
+                                        <div className="max-w-xl mx-auto float-right">
+                                            <ProductImage images={item.images} />
+                                        </div>
+                                    )}
+                                    {item.skills && item.skills.length > 0 && (
+                                        <>
+                                            <h3 className="text-2xl mt-6 mb-4">Skills</h3>
+                                            <div className="grid @2xl:grid-cols-2 gap-x-8 gap-y-4">
+                                                {item.skills.map((skill: any, skillIndex: number) => {
+                                                    if (typeof skill === 'string') {
+                                                        return (
+                                                            <div key={skillIndex} className="text-xl">
+                                                                {skill}
+                                                            </div>
+                                                        )
+                                                    }
+                                                    return (
+                                                        <div key={skillIndex}>
+                                                            <div className="flex items-center gap-2 mb-2">
+                                                                {skill.sticker && (
+                                                                    <div className="shrink-0">{skill.sticker}</div>
+                                                                )}
+                                                                <div className="text-lg font-medium">{skill.name}</div>
+                                                            </div>
+                                                            {skill.description && (
+                                                                <p className="text-base text-secondary mb-2">
+                                                                    {skill.description}
+                                                                </p>
+                                                            )}
+                                                            {skill.percent !== undefined && (
+                                                                <div className="w-full h-2 bg-input rounded-full">
+                                                                    <div
+                                                                        className="h-2 rounded-full bg-red dark:bg-yellow"
+                                                                        style={{ width: `${skill.percent}%` }}
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </>
+                                    )}
+                                    {(item as any).children && <div className="p-4">{(item as any).children}</div>}
+                                </>
                             ) : (
                                 <>
                                     <div className="grid grid-cols-2 gap-4 px-4">
