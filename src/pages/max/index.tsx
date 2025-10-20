@@ -3,10 +3,14 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { useUser } from 'hooks/useUser'
-import { VoteBox } from 'components/Roadmap'
+// removed unused import: useUser
+// removed unused import: VoteBox
 import Markdown from 'components/Squeak/components/Markdown'
 import { IconCheck } from '@posthog/icons'
+// removed unused import: MaxQuestionInput
+import Cards from 'components/Cards'
+import { MaxExampleCards } from 'components/Cards/data'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const PRODUCT_HANDLE = 'max_ai'
 
@@ -24,7 +28,7 @@ interface RoadmapItem {
 }
 
 const CustomRoadmapSlide = () => {
-    const { user } = useUser()
+    // removed unused variable: user
     const { roadmaps, isLoading } = useRoadmaps({
         params: {
             filters: {
@@ -170,6 +174,21 @@ const CustomPricingSlide = () => {
     )
 }
 
+const CustomDemoSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-7xl @2xl:text-5xl pt-12">Chat with your data</h2>
+            <p className="text-4xl @2xl:text-2xl pt-4 pb-16 @2xl:pb-0">Still building insights manually? Ew.</p>
+            <ScrollArea className="min-h-0 w-full h-full">
+                <Cards data={MaxExampleCards} buttons={false} />
+            </ScrollArea>
+        </div>
+    )
+}
+
 export default function MaxAI(): JSX.Element {
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
@@ -243,6 +262,7 @@ export default function MaxAI(): JSX.Element {
             'docs',
             'pairs-with',
             'posthog-on-posthog',
+            'answers',
         ],
         custom: [
             {
@@ -250,8 +270,13 @@ export default function MaxAI(): JSX.Element {
                 name: 'Roadmap',
                 component: CustomRoadmapSlide,
             },
+            {
+                slug: 'demo',
+                name: 'Demo',
+                component: CustomDemoSlide,
+            },
         ],
-        order: ['overview', 'roadmap', 'features', 'pricing', 'answers', 'getting-started'],
+        order: ['overview', 'demo', 'roadmap', 'features', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'columns',
