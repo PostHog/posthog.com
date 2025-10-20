@@ -59,6 +59,11 @@ const InstallationPlatforms = ({ columns = 2 }: InstallationPlatformsProps) => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg',
         },
         {
+            label: 'Android',
+            url: '/docs/error-tracking/installation/android',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg',
+        },
+        {
             label: 'Manual/API',
             url: '/docs/error-tracking/installation/manual',
             icon: 'IconCode',
