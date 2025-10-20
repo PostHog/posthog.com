@@ -26,16 +26,16 @@ These features apply as sequential filters:
 Consider a flag with:
 
 - Runtime: `server`
-- Evaluation environments: `["production", "api"]`
+- Evaluation environments: `["main-app", "api"]`
 
 Here's what happens in different scenarios:
 
 | SDK Type | Environment Values | Result |
 |----------|-------------------|--------|
-| JavaScript Web | `["production", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
-| Node.js | `["staging", "backend"]` | ❌ Blocked by environments (neither "staging" nor "backend" match flag's tags) |
-| Node.js | `["production", "api"]` | ✅ Both filters pass |
-| Python | `["production", "backend"]` | ✅ Both filters pass ("production" matches) |
+| JavaScript Web | `["main-app", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
+| Node.js | `["marketing-site", "backend"]` | ❌ Blocked by environments (neither "marketing-site" nor "backend" match flag's tags) |
+| Node.js | `["main-app", "api"]` | ✅ Both filters pass |
+| Python | `["main-app", "backend"]` | ✅ Both filters pass ("main-app" matches) |
 
 ## Quick setup
 
@@ -62,35 +62,35 @@ Then configure your SDKs with matching `evaluation_environments`. See the [evalu
 ```javascript
 // API service - Gets the flag
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['production', 'api']
+    evaluation_environments: ['main-app', 'api']
 })
 
 // Web browser - Never sees this flag (blocked by runtime)
 // Background worker - Doesn't get the flag (no 'api' tag)
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['production', 'workers']
+    evaluation_environments: ['main-app', 'workers']
 })
 ```
 
-### Preventing staging features from affecting production
+### Preventing marketing site features from affecting main app
 
-**Scenario**: You're testing a new recommendation algorithm in staging, but some services are shared between staging and production environments.
+**Scenario**: You're testing a new recommendation algorithm for your marketing site, but some services are shared between your marketing site and main application.
 
 **Configuration**:
 
 - Runtime: `all`
-- Evaluation environments: `["staging"]`
+- Evaluation environments: `["marketing-site"]`
 
-**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** in staging. The environment constraint ensures production services never evaluate this flag, even if they share code with staging.
+**Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** for the marketing site. The environment constraint ensures main app services never evaluate this flag, even if they share code with the marketing site.
 
 ```python
-# Staging recommendation service - Gets the flag
+# Marketing site recommendation service - Gets the flag
 posthog = Posthog('KEY', 
-    evaluation_environments=['staging', 'recommendations'])
+    evaluation_environments=['marketing-site', 'recommendations'])
 
-# Production recommendation service - Doesn't get the flag
+# Main app recommendation service - Doesn't get the flag
 posthog = Posthog('KEY',
-    evaluation_environments=['production', 'recommendations'])
+    evaluation_environments=['main-app', 'recommendations'])
 ```
 
 ### Rolling out mobile features without affecting web
@@ -107,12 +107,12 @@ posthog = Posthog('KEY',
 ```javascript
 // React Native app - Gets the flag
 posthog.init('KEY', {
-    evaluation_environments: ['production', 'mobile']
+    evaluation_environments: ['main-app', 'mobile']
 })
 
 // Web app - Doesn't get the flag (no 'mobile' tag)
 posthog.init('KEY', {
-    evaluation_environments: ['production', 'web']
+    evaluation_environments: ['main-app', 'web']
 })
 
 // API server - Never sees this flag (blocked by runtime)
@@ -132,17 +132,17 @@ posthog.init('KEY', {
 ```javascript
 // Checkout UI component - Gets the flag
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['production', 'billing', 'web']
+    evaluation_environments: ['main-app', 'billing', 'web']
 })
 
 // Billing service - Gets the flag  
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['production', 'billing', 'api']
+    evaluation_environments: ['main-app', 'billing', 'api']
 })
 
 // Main app dashboard - Doesn't get the flag (no 'billing' tag)
 const posthog = new PostHog('KEY', {
-    evaluation_environments: ['production', 'dashboard', 'web']
+    evaluation_environments: ['main-app', 'dashboard', 'web']
 })
 ```
 
@@ -158,7 +158,7 @@ Set runtime to `server` for flags containing:
 
 ### Layer environments for precise control
 
-Remember that evaluation environments use OR logic: `["staging", "checkout"]` matches ANY staging OR ANY checkout. For AND logic, use compound tags like `["staging-checkout"]`.
+Remember that evaluation environments use OR logic: `["marketing-site", "checkout"]` matches ANY marketing-site OR ANY checkout. For AND logic, use compound tags like `["marketing-site-checkout"]`.
 
 ### Start simple
 
