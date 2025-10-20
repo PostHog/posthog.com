@@ -11,7 +11,7 @@ import Modal from 'components/Modal'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { useApp } from '../../context/App'
 import { useUser } from 'hooks/useUser'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useWindow } from '../../context/Window'
 import { useToast } from '../../context/Toast'
@@ -502,7 +502,7 @@ export default function MediaUploadModal() {
     const { setWindowTitle } = useApp()
     const { getJwt, user } = useUser()
     const [loading, setLoading] = useState(0)
-    const [images, setImages] = useState<any[]>([])
+    const [userImages, setUserImages] = useState<any[]>([])
     const [allImages, setAllImages] = useState<any[]>([])
     const [searchQuery, setSearchQuery] = useState('')
     const [isPasting, setIsPasting] = useState(false)
@@ -525,7 +525,7 @@ export default function MediaUploadModal() {
                         type: 'api::profile.profile',
                     })
                     setLoading((loadingNumber) => loadingNumber - 1)
-                    setImages((images) => [...images, uploadedImage])
+                    setUserImages((userImages) => [...userImages, uploadedImage])
                 })
             ).catch((err) => console.error(err))
         }
@@ -596,22 +596,15 @@ export default function MediaUploadModal() {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     // Filter images based on search query and tag
-    const displayImages = showAllUploads ? allImages : [...images, ...((user?.profile as any)?.images || [])]
+    const displayImages = showAllUploads ? allImages : [...userImages, ...((user?.profile as any)?.images || [])]
 
-    let filteredImages = displayImages
-
-    // Apply search filter
-    if (searchQuery) {
-        filteredImages = filteredImages.filter((image) => image.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    }
-
-    // Apply tag filter
-    if (selectedTag) {
-        filteredImages = filteredImages.filter((image) => {
-            const imageTags = Array.isArray(image.tags) ? image.tags : []
-            return imageTags.includes(selectedTag)
-        })
-    }
+    const filteredImages = useMemo(() => {
+        return displayImages.filter(
+            (image) =>
+                (!searchQuery || image.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+                (!selectedTag || image.tags.includes(selectedTag))
+        )
+    }, [displayImages, searchQuery, selectedTag])
 
     // Handle ESC key to clear search and paste events
     useEffect(() => {
