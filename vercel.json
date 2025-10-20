@@ -1620,7 +1620,11 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
-        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" }
+        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        {
+            "source": "/docs/max-ai",
+            "destination": "/docs/posthog-ai"
+        }
     ],
     "headers": [
         {
