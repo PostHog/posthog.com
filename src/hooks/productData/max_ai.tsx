@@ -63,29 +63,6 @@ export const max_ai = {
         alt: "Hi, I'm Max!",
         classes: 'max-w-[413px]',
     },
-    skills: [
-        {
-            name: 'Answers product questions',
-            percent: 95,
-        },
-        {
-            name: 'Writes SQL queries',
-            percent: 95,
-        },
-        {
-            name: 'PostHog product expert',
-            percent: 90,
-        },
-        {
-            name: 'Builds data transformations',
-            percent: 95,
-        },
-        {
-            name: 'Analytics industry knowledge',
-            percent: 80,
-        },
-    ],
-
     features: [
         {
             title: 'Web Analytics',

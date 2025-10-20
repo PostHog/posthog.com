@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ProductImage, { Image } from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { IconSparkles } from '@posthog/icons'
 
 interface Feature {
     title: string
@@ -93,11 +94,24 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                 )}
                                 <div className="relative">
                                     <div className="flex flex-col @2xl:flex-row">
-                                        <div className="pt-12 px-4 pb-8 flex-1">
-                                            <h2 className="text-5xl mb-0 text-left">{item.headline}</h2>
+                                        <div className="pt-8 px-4 pb-4 flex-1">
+                                            <div className="flex items-center gap-2 mb-8 text-2xl">
+                                                <IconSparkles className="size-8 text-${item.color}" />
+                                                PostHog AI knows...
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                {item.icon && (
+                                                    <div className="shrink-0">
+                                                        <div className={`size-12 [&>svg]:size-12 text-${item.color}`}>
+                                                            {item.icon}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                <h2 className="text-5xl mb-0 text-left">{item.headline}</h2>
+                                            </div>
                                             {item.description && (
                                                 <p
-                                                    className="mt-4 text-xl [&_code]:text-xl text-left"
+                                                    className="mt-4 text-2xl [&_code]:text-2xl text-left"
                                                     {...(typeof item.description === 'string'
                                                         ? { dangerouslySetInnerHTML: { __html: item.description } }
                                                         : { children: item.description })}
@@ -129,7 +143,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         {/* Skills section */}
                                         {item.skills && item.skills.length > 0 && (
                                             <div className="mt-6">
-                                                <h3 className="text-2xl mb-4">Skills</h3>
+                                                <h3 className="text-2xl border-b border-primary pb-2 mb-8">Skills</h3>
                                                 <div className="grid @2xl:grid-cols-2 gap-x-8 gap-y-4">
                                                     {item.skills.map((skill: any, skillIndex: number) => {
                                                         if (typeof skill === 'string') {
@@ -141,10 +155,12 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                                         }
                                                         return (
                                                             <div key={skillIndex}>
-                                                                <div className="flex gap-2 mb-2 w-full">
+                                                                <div className="flex gap-4 mb-2 w-full">
                                                                     {skill.sticker && (
-                                                                        <div className="shrink-0 mt-1 size-12">
-                                                                            {skill.sticker}
+                                                                        <div>
+                                                                            <div className="mt-1 size-12 [&>svg]:size-12">
+                                                                                {skill.sticker}
+                                                                            </div>
                                                                         </div>
                                                                     )}
                                                                     <div className="flex-1">
