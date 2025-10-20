@@ -14,7 +14,7 @@ import { errorTracking } from './productData/error_tracking'
 import { cdp } from './productData/cdp'
 import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
-import { max_ai } from './productData/max_ai'
+import { posthog_ai } from './productData/max_ai'
 import { llmAnalytics } from './productData/llm_analytics'
 import { revenueAnalytics } from './productData/revenue_analytics'
 import { realtimeDestinations } from './productData/realtime_destinations'
@@ -30,7 +30,7 @@ const initialProducts = [
     cdp,
     webAnalytics,
     experiments,
-    max_ai,
+    posthog_ai,
     llmAnalytics,
     revenueAnalytics,
 ]

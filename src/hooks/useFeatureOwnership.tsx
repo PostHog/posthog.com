@@ -194,8 +194,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
     },
     'max-ai': {
-        feature: 'Max AI platform',
-        owner: ['max-ai'],
+        feature: 'PostHog AI platform',
+        owner: ['posthog-ai'],
         label: 'feature/max-ai',
     },
     'mcp-server': {
@@ -330,10 +330,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     Mobile team
                 </a>{' '}
                 for triage, loop in
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">
-                    #support-mobile
-                </PrivateLink>{' '}
-                as needed.
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
+                needed.
             </>
         ),
         label: 'feature/mobile',

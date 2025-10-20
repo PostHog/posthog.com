@@ -1284,10 +1284,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                                        {
+                    {
                         name: 'Hogpatch',
                         url: '/handbook/growth/sales/hogpatch',
-                    }
+                    },
                 ],
             },
             {
@@ -4812,10 +4812,10 @@ export const productMenu = {
             url: '/llm-analytics',
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/max',
+            url: '/ai',
         },
         {
             name: 'Product OS',

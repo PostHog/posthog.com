@@ -1466,7 +1466,11 @@
         },
         {
             "source": "/max-ai",
-            "destination": "/max"
+            "destination": "/ai"
+        },
+        {
+            "source": "/max",
+            "destination": "/ai"
         },
         {
             "source": "/docs/surveys/webhook",

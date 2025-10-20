@@ -13,13 +13,13 @@ import {
 } from '@posthog/icons'
 import { StickerPath } from 'components/Stickers/Stickers'
 
-export const max_ai = {
+export const posthog_ai = {
     name: 'Max',
     parentIcon: 'aiMax',
     // Icon: IconMagicWand,
     description: 'Your AI-powered product analyst and product manager',
     role: 'Helpful chatbot',
-    handle: 'max_ai',
+    handle: 'posthog_ai',
     color: 'ai-blue',
     colorSecondary: 'lilac',
     category: 'ai',

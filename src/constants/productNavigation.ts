@@ -16,7 +16,7 @@ export const categoryOrder = [
     'product',
     // 'engineering',
     'communication',
-    'ai',
+    'posthog_ai',
     'product_os',
 ] as const
 
@@ -29,7 +29,6 @@ export const categoryDisplayNames: Record<string, string> = {
     product: 'Product',
     // engineering: 'Engineering',
     communication: 'Communication',
-    ai: 'PostHog AI',
     product_os: 'Utilities, add-ons, & packages',
 }
 
@@ -42,7 +41,6 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
     product: { icon: 'IconApps', color: 'red' },
     // engineering: { icon: 'IconWrench', color: 'gray' },
     communication: { icon: 'IconMessage', color: 'sky-blue' },
-    ai: { icon: 'IconSparkles', color: 'purple' },
     product_os: { icon: 'IconGear', color: 'gray' },
 }
 
@@ -72,7 +70,7 @@ export const productOrder: Record<string, string[]> = {
         'bi',
     ],
     communication: ['surveys', 'messaging', 'user-interviews'],
-    ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
+    posthog_ai: ['posthog_ai'],
     product_os: ['api', 'webhooks', 'notebooks', 'activity', 'toolbar', 'profiles', 'platform_packages'],
 }
 
@@ -115,15 +113,6 @@ export const nonProductPages = {
         url: '/customer-data-infrastructure/destinations',
         icon: 'IconDecisionTree',
         color: 'purple',
-    },
-    ai: {
-        slug: 'ai',
-        url: '/ai',
-        category: 'ai',
-        parentIcon: 'doc',
-        icon: 'IconBrain',
-        color: 'purple',
-        description: 'AI suite',
     },
 }
 

@@ -844,7 +844,7 @@ export const ProductMax = () => {
 
                         <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                             <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
-                                <Plans showTitle={false} groupsToShow={['max_ai']} />
+                                <Plans showTitle={false} groupsToShow={['posthog_ai']} />
                             </div>
                         </div>
                     </section>
