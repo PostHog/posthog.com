@@ -125,60 +125,51 @@ export default function TaskOwnershipTable({ dataset }: TaskOwnershipTableProps)
                 />
             </div>
 
-            <div ref={containerRef}>
-                {groups.map((group) => (
-                    <div key={group.key} className="">
-                        <h3 className="text-xl font-bold mb-4">{group.name}</h3>
-                        <div className="overflow-x-auto">
-                            <table className="w-full my-0">
-                                <thead>
-                                    <tr>
-                                        {group.columns.map((col, idx) => (
-                                            <th key={idx} className="text-left">
-                                                {col.label}
-                                            </th>
-                                        ))}
+            <div ref={containerRef} className="overflow-x-auto">
+                <table className="w-full mt-4">
+                    <thead>
+                        <tr>
+                            <th className="text-left px-2 border-b border-primary">Task</th>
+                            <th className="text-left px-2 border-b border-primary">Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {groups.map((group, groupIdx) => (
+                            <React.Fragment key={group.key}>
+                                <tr>
+                                    <td colSpan={2} className={`p-0 ${groupIdx > 0 ? '' : ''}`}>
+                                        <h3 className={`text-[15px] font-bold bg-accent my-0 py-1 px-2`}>
+                                            {group.name}
+                                        </h3>
+                                    </td>
+                                </tr>
+                                {group.tasks.map((task, taskIdx) => (
+                                    <tr key={taskIdx}>
+                                        <td className="align-top px-2 py-2">
+                                            <span data-searchable>{task.task}</span>
+                                        </td>
+                                        <td className="align-top px-2 py-2">
+                                            {task.owner.length > 0 ? (
+                                                <div className="flex flex-wrap gap-2 -mt-0.5" data-searchable>
+                                                    {task.owner.map((owner, ownerIdx) => {
+                                                        // Check if it's a team slug (lowercase with hyphens)
+                                                        if (typeof owner === 'string' && owner.includes('-')) {
+                                                            return <SmallTeam key={ownerIdx} slug={owner} noMiniCrest />
+                                                        }
+                                                        // Otherwise it's a person's full name
+                                                        return (
+                                                            <TeamMember key={ownerIdx} name={owner as string} photo />
+                                                        )
+                                                    })}
+                                                </div>
+                                            ) : null}
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {group.tasks.map((task, taskIdx) => (
-                                        <tr key={taskIdx}>
-                                            <td className="align-top">
-                                                <span data-searchable>{task.task}</span>
-                                            </td>
-                                            <td className="align-top">
-                                                {task.owner.length > 0 ? (
-                                                    <div className="flex flex-wrap gap-2" data-searchable>
-                                                        {task.owner.map((owner, ownerIdx) => {
-                                                            // Check if it's a team slug (lowercase with hyphens)
-                                                            if (typeof owner === 'string' && owner.includes('-')) {
-                                                                return (
-                                                                    <SmallTeam
-                                                                        key={ownerIdx}
-                                                                        slug={owner}
-                                                                        noMiniCrest
-                                                                    />
-                                                                )
-                                                            }
-                                                            // Otherwise it's a person's full name
-                                                            return (
-                                                                <TeamMember
-                                                                    key={ownerIdx}
-                                                                    name={owner as string}
-                                                                    photo
-                                                                />
-                                                            )
-                                                        })}
-                                                    </div>
-                                                ) : null}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                ))}
+                                ))}
+                            </React.Fragment>
+                        ))}
+                    </tbody>
+                </table>
             </div>
 
             {groups.length === 0 && searchQuery && (
