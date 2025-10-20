@@ -3,10 +3,11 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { useUser } from 'hooks/useUser'
-import { VoteBox } from 'components/Roadmap'
 import Markdown from 'components/Squeak/components/Markdown'
-import { IconCheck } from '@posthog/icons'
+import { IconCheck, IconLightBulb } from '@posthog/icons'
+import Cards from 'components/Cards'
+import { MaxExampleCards } from 'components/Cards/data'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const PRODUCT_HANDLE = 'max_ai'
 
@@ -24,7 +25,6 @@ interface RoadmapItem {
 }
 
 const CustomRoadmapSlide = () => {
-    const { user } = useUser()
     const { roadmaps, isLoading } = useRoadmaps({
         params: {
             filters: {
@@ -170,6 +170,32 @@ const CustomPricingSlide = () => {
     )
 }
 
+const CustomDemoSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-7xl @2xl:text-5xl pt-12 px-4">Chat with your data</h2>
+            <p className="text-4xl @2xl:text-2xl pt-4 px-4 leading-normal text-center text-balance pb-16 @2xl:pb-0">
+                Still building insights manually? Ew. Let PostHog AI help.
+            </p>
+
+            <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
+                <Cards data={MaxExampleCards} buttons={false} />
+            </ScrollArea>
+
+            <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">
+                <IconLightBulb className="size-10 opacity-50" />
+                <div className="flex flex-col text-xl">
+                    <strong>Signed into PostHog?</strong>
+                    <p>Click any question to open PostHog and get Max started.</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export default function MaxAI(): JSX.Element {
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
@@ -242,6 +268,7 @@ export default function MaxAI(): JSX.Element {
             'docs',
             'pairs-with',
             'posthog-on-posthog',
+            'answers',
         ],
         custom: [
             {
@@ -249,8 +276,13 @@ export default function MaxAI(): JSX.Element {
                 name: 'Roadmap',
                 component: CustomRoadmapSlide,
             },
+            {
+                slug: 'demo',
+                name: 'Demo',
+                component: CustomDemoSlide,
+            },
         ],
-        order: ['overview', 'roadmap', 'features', 'pricing', 'answers', 'getting-started'],
+        order: ['overview', 'demo', 'roadmap', 'features', 'pricing', 'getting-started'],
         templates: {
             overview: 'max',
             features: 'ai',
