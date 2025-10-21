@@ -16,8 +16,8 @@ export const Content = () => {
                     <p>
                         PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
                         You don't need any vendor-specific SDKs - just use standard OpenTelemetry libraries to send logs
-                        to PostHog. You can migrate to PostHog logs by configuring your _existing_ OpenTelemetry client
-                        to send logs to PostHog's gRPC endpoint.
+                        to PostHog. You can migrate to PostHog logs by configuring your existing OpenTelemetry client to
+                        send logs to PostHog's gRPC endpoint.
                     </p>
 
                     <div className="flex justify-center mb-8">
