@@ -825,12 +825,30 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'AI Platform',
-                url: '/handbook/engineering/ai-platform',
-            },
-            {
-                name: 'Implementing AI features',
-                url: '/handbook/engineering/implementing-ai-features',
+                name: 'PostHog AI',
+                url: '',
+                children: [
+                    {
+                        name: 'AI platform overview',
+                        url: '/handbook/engineering/ai/ai-platform',
+                    },
+                    {
+                        name: 'AI products',
+                        url: '/handbook/engineering/ai/products',
+                    },
+                    {
+                        name: 'AI platform architecture',
+                        url: '/handbook/engineering/ai/architecture',
+                    },
+                    {
+                        name: 'Implementing AI features',
+                        url: '/handbook/engineering/ai/implementation',
+                    },
+                    {
+                        name: 'Team structure and collaboration',
+                        url: '/handbook/engineering/ai/team-structure',
+                    },
+                ],
             },
             {
                 name: 'Deployments',
