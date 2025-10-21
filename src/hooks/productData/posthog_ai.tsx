@@ -100,7 +100,7 @@ export const posthog_ai = {
                 },
                 {
                     name: 'Scientific researcher',
-                    description: 'Explains anomalies and make sense of outliers',
+                    description: 'Explains anomalies and makes sense of outliers',
                     sticker: <StickerPath className="size-12" />,
                     percent: 0,
                 },
