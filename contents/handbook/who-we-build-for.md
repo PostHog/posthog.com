@@ -28,7 +28,7 @@ Each team will focus more or less on different members of the product team. This
 During the life of PostHog, we've tried to build different types of tools for different types of people (or, personas). We've found that, as companies get bigger, the type of person that uses a product changes. As an example:
 
 - We built product analytics for engineers at startups
-- As those companies get a little bit bigger, they'll hire Product Managers who will mostly use product analytics. PMs have more complicates requirements for what a product analytics tool needs to do
+- As those companies get a little bit bigger, they'll hire Product Managers who will mostly use product analytics. PMs have more complicated requirements for what a product analytics tool needs to do
 - Even bigger companies often have specialised "analytics engineers". These people are the most demanding.
 
 Some of our products will have multiple personas. It's up to each product team to decide who those are, and how to prioritise between them. 
