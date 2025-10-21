@@ -103,7 +103,7 @@ SDK doctor only shows SDKs that have sent events in the last 7 days. If you've j
 
 SDK doctor samples your recent events when you open PostHog. Event samples and SDK versions are cached for 24 hours for your team. Use the `Scan events` button to re-sample.
 
-### Why am I seeing several version for the same SDK?
+### Why am I seeing several versions for the same SDK?
 
 This means that events have been detected from multiple SDK versions within the last 7 days. If you’ve recently upgraded your SDK, seeing multiple versions is expected and can be safely ignored. However, if it’s been a while since your last upgrade, it could indicate that different versions of the SDK are still running at the same time. In that case, review your deployment to ensure older versions aren’t still in use.
 
