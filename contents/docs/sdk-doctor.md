@@ -98,7 +98,7 @@ SDK doctor samples your recent events when you open PostHog. Event samples and S
 
 Once you deploy an updated SDK and it starts sending events, SDK doctor will detect the new version within 24 hours. 
 
-Or, after you've ingested a few dozen events from the latest SDK version, you can click the `...` menu in the upper-right of SDK doctor's panel, and select `Scan events` to have SDK doctor check again.
+You can also refresh SDK doctor manually by clicking the **Scan events** button. This will only work after your updated SDK has ingested a few dozen events.
 
 ### Does SDK doctor affect my event ingestion?
 
