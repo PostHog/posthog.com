@@ -3794,6 +3794,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
+                },
+                {
                     name: 'Guides',
                 },
                 {
