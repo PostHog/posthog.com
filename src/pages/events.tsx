@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
+import React, { useEffect, useState, useLayoutEffect, useRef, useCallback } from 'react'
 import SEO from 'components/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -17,6 +17,7 @@ import dayjs from 'dayjs'
 import { AnimatePresence, motion } from 'framer-motion'
 import EventForm from 'components/EventForm'
 import { useUser } from 'hooks/useUser'
+import qs from 'qs'
 
 type Event = {
     date: string // YYYY-MM-DD
@@ -68,59 +69,43 @@ const transformStrapiEvent = (strapiEvent: any): Event => {
     }
 }
 
-// Fetch events from GraphQL
-const useEvents = (): Event[] => {
-    const data = useStaticQuery(graphql`
-        query EventsQuery {
-            allEvent {
-                nodes {
-                    attributes {
-                        name
-                        description
-                        date
-                        private
-                        format
-                        audience
-                        speakerTopic
-                        attendees
-                        vibeScore
-                        video
-                        presentation
-                        link
-                        location {
-                            label
-                            lat
-                            lng
-                            venue {
-                                name
-                            }
-                        }
-                        partners {
-                            name
-                            url
-                        }
-                        photos {
-                            data {
-                                attributes {
-                                    url
-                                }
-                            }
-                        }
-                        speakers {
-                            data {
-                                attributes {
-                                    firstName
-                                    lastName
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
+const useEvents = (): { events: Event[]; refreshEvents: () => void } => {
+    const [events, setEvents] = useState<Event[]>([])
+    const fetchEvents = async (page = 1) => {
+        const eventsQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                sort: ['date:desc'],
+                populate: {
+                    location: {
+                        populate: ['venue'],
+                    },
+                    photos: true,
+                    speakers: true,
+                    partners: true,
+                },
+            },
+            { encodeValuesOnly: true }
+        )
+        const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
+        const { data: events, meta } = await fetch(eventsUrl).then((res) => res.json())
+        setEvents((prev) => [...prev, ...events.map(transformStrapiEvent)])
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
+    }
 
-    return data.allEvent.nodes.map(transformStrapiEvent)
+    const refreshEvents = useCallback(() => {
+        setEvents([])
+        fetchEvents()
+    }, [])
+
+    useEffect(() => {
+        fetchEvents()
+    }, [])
+
+    return { events, refreshEvents }
 }
 
 const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
@@ -146,7 +131,7 @@ const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: 
 
 function Events() {
     const { isModerator } = useUser()
-    const eventsData = useEvents()
+    const { events: eventsData, refreshEvents } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
@@ -930,7 +915,12 @@ function Events() {
                             {creatingEvent && isModerator ? (
                                 <EventCard onClose={() => setCreatingEvent(false)}>
                                     <div className="p-4">
-                                        <EventForm onSuccess={() => setCreatingEvent(false)} />
+                                        <EventForm
+                                            onSuccess={() => {
+                                                setCreatingEvent(false)
+                                                refreshEvents()
+                                            }}
+                                        />
                                     </div>
                                 </EventCard>
                             ) : (
