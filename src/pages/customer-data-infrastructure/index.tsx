@@ -20,6 +20,7 @@ import { TextureTan } from 'components/Textures'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useWindow } from '../../context/Window'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
+import TeamMember from 'components/TeamMember'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -328,12 +329,15 @@ export default function CDP(): JSX.Element {
                 <CDPDiagram className="max-w-lg fill-primary mx-auto" />
                 <h3>How our support engineers use the data warehouse</h3>
                 <div className="my-6">
-                    <WistiaCustomPlayer 
-                        mediaId="zcyze15pzj" 
-                        aspectRatio={16/9}
-                        className="max-w-4xl mx-auto"
-                    />
+                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl mx-auto" />
                 </div>
+                <p>
+                    You can use data in the PostHog warehouse for almost anything, including building custom insights
+                    and dashboards. One of the ways we use it ourselves is to track our support metrics, such as SLAs
+                    and first response times. <TeamMember name="Abigail Richardson" photo /> writes up a summary based
+                    on this data and shares it with the exec team weekly -&gt; and in the video above she explains how
+                    she gathers the data using SQL (and a little help from PostHog AI).
+                </p>
                 <h3>🪦 RIP the modern data stack</h3>
                 <p>
                     It was a great idea, but as the stage of your company changes, the “modern data stack” inevitably
