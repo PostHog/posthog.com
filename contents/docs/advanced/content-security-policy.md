@@ -102,10 +102,10 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 
 ## Keeping track of your CSP violations
 
-You can [send reports of CSP rule violations](/docs/csp-tracking) to PostHog, which is useful for
-* warning when your website is under certain kinds of attack
-* debugging problems when adding external scripts/media/etc to your site
-* being confident that changes to your site haven't broken the loading of any resources
+You can [send reports of CSP rule violations](/docs/csp-tracking) to PostHog, which is useful for:
+* Warning when your website is under certain kinds of attack
+* Debugging problems when adding external scripts/media/etc to your site
+* Being confident that changes to your site haven't broken the loading of any resources
 
 
 ## Troubleshooting / FAQ
