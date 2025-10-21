@@ -92,7 +92,7 @@ SDK doctor only shows SDKs that have sent events recently. If you've just instal
 
 ### How often does SDK doctor update?
 
-SDK doctor samples your recent events when you open PostHog. Event samples, and SDK versions with release dates from GitHub, are cached for your entire team for 24 hours. Use the `Scan events` button to re-sample
+SDK doctor samples your recent events when you open PostHog. Event samples and SDK versions are cached for 24 hours for your team. Use the `Scan events` button to re-sample.
 
 ### What happens when I update an SDK?
 
