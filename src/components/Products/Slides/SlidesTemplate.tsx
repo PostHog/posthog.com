@@ -237,6 +237,16 @@ export default function SlidesTemplate({
                     )
                 }
 
+                if (template === 'ai') {
+                    return (
+                        <FeaturesSlide
+                            features={productData?.features || []}
+                            backgroundImage={contentConfig.featuresBackgroundImage}
+                            {...props}
+                        />
+                    )
+                }
+
                 if (template === 'grid') {
                     // Individual feature grid slide
                     const features = productData?.features || []

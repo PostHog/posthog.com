@@ -1211,7 +1211,8 @@
         { "source": "/handbook/small-teams/feature-success", "destination": "/teams/feature-success" },
         { "source": "/handbook/small-teams/customer-success", "destination": "/teams/customer-success" },
         { "source": "/handbook/small-teams/growth", "destination": "/teams/growth" },
-        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-warehouse" },
+        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-stack" },
+        { "source": "/teams/data-warehouse", "destination": "/teams/data-stack" },
         { "source": "/handbook/small-teams/infrastructure", "destination": "/teams/infrastructure" },
         { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
         { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
@@ -1466,7 +1467,11 @@
         },
         {
             "source": "/max-ai",
-            "destination": "/max"
+            "destination": "/ai"
+        },
+        {
+            "source": "/max",
+            "destination": "/ai"
         },
         {
             "source": "/docs/surveys/webhook",
@@ -1616,7 +1621,11 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
-        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" }
+        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        {
+            "source": "/docs/max-ai",
+            "destination": "/docs/posthog-ai"
+        }
     ],
     "headers": [
         {

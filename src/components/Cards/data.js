@@ -119,7 +119,7 @@ export const MaxExampleCards = [
         top: 'How do I set up a feature flag?',
         bottom: (
             <>
-                PostHog AI is expert in <strong>how to use PostHog products.</strong> (Duh!)
+                PostHog AI is an expert on <strong>using PostHog products.</strong> (Duh!)
             </>
         ),
         color: '#FDBAF2',
