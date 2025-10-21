@@ -20,6 +20,7 @@ import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { useWindow } from '../context/Window'
+import { ZoomImage } from 'components/ZoomImage'
 
 dayjs.extend(utc)
 
@@ -135,10 +136,10 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
             >
                 <div className="flex justify-between space-x-2 p-4 border-b border-primary">
                     <div className="flex-1">
-                        <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
+                        <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
                         <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
                     </div>
-                    <aside>
+                    <aside className="">
                         {isModerator && (
                             <Tooltip
                                 trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
@@ -154,14 +155,20 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                 <div className="flex-1 min-h-0">
                     <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
                         {roadmap.media?.gatsbyImageData && (
-                            <div className="mt-2">
-                                <GatsbyImage image={roadmap.media.gatsbyImageData} alt={roadmap.title} />
+                            <div className="mt-4 px-4">
+                                <ZoomImage>
+                                    <GatsbyImage
+                                        image={roadmap.media.gatsbyImageData}
+                                        alt={roadmap.title}
+                                        className="rounded"
+                                    />
+                                </ZoomImage>
                             </div>
                         )}
                         {hasProfiles && (
                             <div
                                 data-scheme="secondary"
-                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary mt-4"
+                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary"
                             >
                                 {roadmap.profiles?.data?.map((profile) => {
                                     const avatar = profile.attributes?.avatar?.data?.attributes?.url
@@ -213,7 +220,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                             </div>
                         )}
                         {roadmap.description && (
-                            <div className="mt-2 py-2 px-4">
+                            <div className="py-2 px-4">
                                 <Markdown>{roadmap.description}</Markdown>
                             </div>
                         )}
