@@ -1,9 +1,11 @@
 import React from 'react'
 import MediaPlayer from 'components/MediaPlayer'
 import SEO from 'components/seo'
-import { videos } from '../../data/videos'
+import { useVideos } from '../../hooks/useVideos'
 
 export default function VideoPlayer({ location }: { location: Location }): JSX.Element {
+    const videos = useVideos()
+
     // Parse URL parameters
     const params = new URLSearchParams(location.search)
     const source = (params.get('source') as 'youtube' | 'wistia') || 'youtube'

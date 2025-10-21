@@ -4,6 +4,7 @@ export interface Video {
     title: string
     folder: string
     tags?: string[]
+    thumbnail?: string
 }
 
 export const videos: Video[] = [

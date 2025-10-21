@@ -11,7 +11,8 @@ import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 import { useMenuSelectOptions } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon, AppIconName } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
-import { videos, Video } from '../../data/videos'
+import { Video } from '../../data/videos'
+import { useVideos } from '../../hooks/useVideos'
 
 // Map video source to icon name
 const getIconForVideo = (video: Video): AppIconName => {
@@ -34,18 +35,21 @@ const getIconForVideo = (video: Video): AppIconName => {
 export default function VideoLibrary(): JSX.Element {
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
     const selectOptions = useMenuSelectOptions()
+    const videos = useVideos()
 
     // Group videos by folder
     const videosByFolder = useMemo(() => {
         const grouped: Record<string, Video[]> = {}
-        videos.forEach((video) => {
-            if (!grouped[video.folder]) {
-                grouped[video.folder] = []
-            }
-            grouped[video.folder].push(video)
-        })
+        if (Array.isArray(videos)) {
+            videos.forEach((video) => {
+                if (!grouped[video.folder]) {
+                    grouped[video.folder] = []
+                }
+                grouped[video.folder].push(video)
+            })
+        }
         return grouped
-    }, [])
+    }, [videos])
 
     return (
         <>
@@ -134,7 +138,17 @@ export default function VideoLibrary(): JSX.Element {
                                                     <AppLink
                                                         label={video.title}
                                                         url={`/videos/play?source=${video.source}&videoId=${video.videoId}`}
-                                                        Icon={<AppIcon name={getIconForVideo(video)} />}
+                                                        Icon={
+                                                            video.thumbnail ? (
+                                                                <img
+                                                                    src={video.thumbnail}
+                                                                    alt={video.title}
+                                                                    className="w-full h-full object-cover rounded"
+                                                                />
+                                                            ) : (
+                                                                <AppIcon name={getIconForVideo(video)} />
+                                                            )
+                                                        }
                                                         background="bg-primary"
                                                         className="size-12"
                                                         orientation={isListLayout ? 'row' : 'column'}
