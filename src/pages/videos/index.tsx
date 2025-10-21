@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import SEO from 'components/seo'
@@ -8,32 +8,44 @@ import { explorerGridColumns } from '../../constants'
 import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
-import { SparksJoyItems, useMenuSelectOptions } from '../../components/TaskBarMenu/menuData'
+import { useMenuSelectOptions } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon, AppIconName } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
+import { videos, Video } from '../../data/videos'
 
-const VideoLibraryItems = {
-    products: [
-        {
-            label: 'How PostHog uses Experiments',
-            link: '#',
-            iconName: 'hedgehog_mode' as AppIconName,
-            customIcon: null,
-        },
-    ],
-    changelog: [
-        {
-            label: 'Changelog 001',
-            link: '#',
-            iconName: 'photobooth' as AppIconName,
-            customIcon: null,
-        },
-    ],
+// Map video source to icon name
+const getIconForVideo = (video: Video): AppIconName => {
+    // You can customize this based on video properties
+    if (video.folder === 'changelog') {
+        return 'photobooth'
+    }
+    if (video.tags?.includes('experiments')) {
+        return 'hedgehog_mode'
+    }
+    if (video.tags?.includes('feature flags')) {
+        return 'hedgehog_mode'
+    }
+    if (video.tags?.includes('demo')) {
+        return 'video'
+    }
+    return 'video'
 }
 
 export default function VideoLibrary(): JSX.Element {
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
     const selectOptions = useMenuSelectOptions()
+
+    // Group videos by folder
+    const videosByFolder = useMemo(() => {
+        const grouped: Record<string, Video[]> = {}
+        videos.forEach((video) => {
+            if (!grouped[video.folder]) {
+                grouped[video.folder] = []
+            }
+            grouped[video.folder].push(video)
+        })
+        return grouped
+    }, [])
 
     return (
         <>
@@ -90,121 +102,52 @@ export default function VideoLibrary(): JSX.Element {
                 }
             >
                 <div className="@container not-prose space-y-2 @md:-ml-3">
-                    {/* Products Section */}
-                    <Accordion
-                        skin={false}
-                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                        items={[
-                            {
-                                value: 'products',
-                                trigger: (
-                                    <span className="bg-primary pr-2 relative z-10 select-none">
-                                        Products (
-                                        {
-                                            VideoLibraryItems.products.filter(
-                                                (item) => item.iconName || item.customIcon
-                                            ).length
-                                        }
-                                        )
-                                    </span>
-                                ),
-                                content: (
-                                    <div
-                                        className={`@md:pl-4 grid ${
-                                            isListLayout
-                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                : explorerGridColumns + ' gap-y-4 items-start justify-items-center'
-                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
-                                    >
-                                        {VideoLibraryItems.products
-                                            .filter((item) => item.iconName || item.customIcon)
-                                            .map((item) => (
+                    {/* Dynamically generated sections for each folder */}
+                    {Object.entries(videosByFolder).map(([folder, folderVideos], index) => (
+                        <Accordion
+                            key={folder}
+                            skin={false}
+                            triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                            items={[
+                                {
+                                    value: folder,
+                                    trigger: (
+                                        <span className="bg-primary pr-2 relative z-10 select-none">
+                                            {folder.charAt(0).toUpperCase() + folder.slice(1)} ({folderVideos.length})
+                                        </span>
+                                    ),
+                                    content: (
+                                        <div
+                                            className={`@md:pl-4 grid ${
+                                                isListLayout
+                                                    ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                    : explorerGridColumns + ' gap-y-4 items-start justify-items-center'
+                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                        >
+                                            {folderVideos.map((video) => (
                                                 <ZoomHover
-                                                    key={item.link}
+                                                    key={`${video.source}-${video.videoId}`}
                                                     className={
                                                         isListLayout ? 'w-full justify-start' : 'w-28 justify-center'
                                                     }
                                                 >
                                                     <AppLink
-                                                        label={item.label}
-                                                        url={item.link}
-                                                        Icon={
-                                                            item.iconName ? (
-                                                                <AppIcon name={item.iconName} />
-                                                            ) : (
-                                                                item.customIcon
-                                                            )
-                                                        }
+                                                        label={video.title}
+                                                        url={`/videos/play?source=${video.source}&videoId=${video.videoId}`}
+                                                        Icon={<AppIcon name={getIconForVideo(video)} />}
                                                         background="bg-primary"
                                                         className="size-12"
                                                         orientation={isListLayout ? 'row' : 'column'}
                                                     />
                                                 </ZoomHover>
                                             ))}
-                                    </div>
-                                ),
-                            },
-                        ]}
-                        defaultValue="games"
-                    />
-
-                    {/* Not games Section */}
-                    <Accordion
-                        skin={false}
-                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                        items={[
-                            {
-                                value: 'changelog',
-                                trigger: (
-                                    <span className="bg-primary pr-2 relative z-10 select-none">
-                                        Changelog (
-                                        {
-                                            VideoLibraryItems.changelog.filter(
-                                                (item) => item.iconName || item.customIcon
-                                            ).length
-                                        }
-                                        )
-                                    </span>
-                                ),
-                                content: (
-                                    <div
-                                        className={`@md:pl-4 grid ${
-                                            isListLayout
-                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                : explorerGridColumns + ' gap-y-4 items-start justify-items-center'
-                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
-                                    >
-                                        {SparksJoyItems.notGames
-                                            .filter((item) => item.iconName || item.customIcon)
-                                            .map((item) => (
-                                                <ZoomHover
-                                                    key={item.link}
-                                                    className={
-                                                        isListLayout ? 'w-full justify-start' : 'w-28 justify-center'
-                                                    }
-                                                >
-                                                    <AppLink
-                                                        label={item.label}
-                                                        url={item.link}
-                                                        Icon={
-                                                            item.iconName ? (
-                                                                <AppIcon name={item.iconName} />
-                                                            ) : (
-                                                                item.customIcon
-                                                            )
-                                                        }
-                                                        background="bg-primary"
-                                                        className="size-12"
-                                                        orientation={isListLayout ? 'row' : 'column'}
-                                                    />
-                                                </ZoomHover>
-                                            ))}
-                                    </div>
-                                ),
-                            },
-                        ]}
-                        defaultValue="grab-bag"
-                    />
+                                        </div>
+                                    ),
+                                },
+                            ]}
+                            defaultValue={index === 0 ? folder : undefined}
+                        />
+                    ))}
                 </div>
             </Explorer>
         </>
