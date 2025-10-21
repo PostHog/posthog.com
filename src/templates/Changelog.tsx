@@ -91,6 +91,7 @@ type RoadmapNode = {
 }
 
 const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => void }) => {
+    const { appWindow } = useWindow()
     const { isModerator } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
@@ -118,17 +119,19 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
         onClose()
     }
 
+    const containerWidth = (appWindow?.size?.width || 0) <= width ? '100%' : width
+
     return (
         <motion.div
             className="h-full border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
             initial={{ width: 0 }}
-            animate={{ width }}
+            animate={{ width: containerWidth }}
             exit={{ width: 0 }}
             transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
         >
             <motion.div
                 className="h-full flex flex-col"
-                style={{ width }}
+                style={{ width: containerWidth }}
                 initial={{ x: width }}
                 animate={{ x: 0 }}
                 exit={{ x: width }}
