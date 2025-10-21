@@ -1,6 +1,6 @@
 import { IconX } from '@posthog/icons'
 import React, { useCallback } from 'react'
-import { Accept, FileError, FileRejection, useDropzone } from 'react-dropzone'
+import { Accept, FileRejection, useDropzone } from 'react-dropzone'
 
 export type Image = {
     file: File
@@ -32,7 +32,7 @@ export default function ImageDrop({
                 })
             }
         },
-        [image]
+        [onDrop]
     )
 
     const { getRootProps, getInputProps, open } = useDropzone({

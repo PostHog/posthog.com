@@ -10,6 +10,7 @@ import { IconSpinner, IconCheck, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
+import { useToast } from '../../context/Toast'
 
 type EventFormValues = {
     name: string
@@ -295,10 +296,10 @@ function CreatableMultiSelect({
     )
 }
 
-export default function EventForm(): React.ReactElement {
+export default function EventForm({ onSuccess }: { onSuccess?: () => void }): React.ReactElement {
     const { getJwt } = useUser()
+    const { addToast } = useToast()
     const [submitting, setSubmitting] = React.useState<boolean>(false)
-    const [submitted, setSubmitted] = React.useState<boolean>(false)
     const data = useStaticQuery(graphql`
         query {
             allEvent {
@@ -415,7 +416,11 @@ export default function EventForm(): React.ReactElement {
                         }
                     }
                 }
-                setSubmitted(true)
+                addToast({
+                    title: 'Event created',
+                    description: 'Event will appear on the next build',
+                })
+                onSuccess?.()
             } catch (error) {
                 console.error('Error creating event:', error)
             } finally {
@@ -638,6 +643,7 @@ export default function EventForm(): React.ReactElement {
                                     next.splice(idx, 1)
                                     formik.setFieldValue('photosLocal', next)
                                 }}
+                                className="!h-auto aspect-square"
                             />
                         ))}
                         <ImageDrop
@@ -645,6 +651,7 @@ export default function EventForm(): React.ReactElement {
                                 image && formik.setFieldValue('photosLocal', [...formik.values.photosLocal, image])
                             }
                             onRemove={() => null}
+                            className="!h-auto aspect-square"
                         />
                     </div>
                 </div>

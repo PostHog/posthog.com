@@ -930,7 +930,7 @@ function Events() {
                             {creatingEvent && isModerator ? (
                                 <EventCard onClose={() => setCreatingEvent(false)}>
                                     <div className="p-4">
-                                        <EventForm />
+                                        <EventForm onSuccess={() => setCreatingEvent(false)} />
                                     </div>
                                 </EventCard>
                             ) : (
