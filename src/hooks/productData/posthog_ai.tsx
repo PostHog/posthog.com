@@ -268,45 +268,6 @@ export const posthog_ai = {
                 },
             ],
         },
-
-        {
-            title: 'Experiments',
-            headline: 'Experiments',
-            layout: 'ai',
-            icon: <IconFlask className="size-5" />,
-            color: 'purple',
-            description:
-                "Statistical significance calculated automatically (p-values are no longer your problem). PostHog AI generates test variations you hadn't thought of.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/experiments_1dc7831033.png',
-                    alt: 'Experiments',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Bias buster',
-                    description: 'Spots sampling errors to tell if results are real or random',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Variant champion',
-                    description: 'Transmutes 30 shades of blue buttons into revenue (sometimes)',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Hypothesis assassin',
-                    description: 'Murders your assumptions with cold, hard data',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 90,
-                },
-            ],
-        },
         {
             label: 'Communication',
         },
