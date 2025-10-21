@@ -21,18 +21,20 @@ SDK doctor analyzes recent events to provide actionable insights about your Post
 
 SDK doctor currently monitors 12 PostHog SDKs:
 
-- **Web** (`posthog-js`)
-- **Python** (`posthog-python`)
-- **Node.js** (`posthog-node`)
-- **React Native** (`posthog-react-native`)
-- **Flutter** (`posthog-flutter`)
-- **iOS** (`posthog-ios`)
-- **Android** (`posthog-android`)
-- **Go** (`posthog-go`)
-- **PHP** (`posthog-php`)
-- **Ruby** (`posthog-ruby`)
-- **Elixir** (`posthog-elixir`)
-- .NET (`posthog-dotnet`)
+| Platform | Package name | Documentation link |
+|----------|--------------|-------------------|
+| **Web** | `posthog-js` | [JavaScript](/docs/libraries/js) |
+| **Python** | `posthog-python` | [Python](/docs/libraries/python) |
+| **Node.js** | `posthog-node` | [Node.js](/docs/libraries/node) |
+| **React Native** | `posthog-react-native` | [React Native](/docs/libraries/react-native) |
+| **Flutter** | `posthog-flutter` | [Flutter](/docs/libraries/flutter) |
+| **iOS** | `posthog-ios` | [iOS](/docs/libraries/ios) |
+| **Android** | `posthog-android` | [Android](/docs/libraries/android) |
+| **Go** | `posthog-go` | [Go](/docs/libraries/go) |
+| **PHP** | `posthog-php` | [PHP](/docs/libraries/php) |
+| **Ruby** | `posthog-ruby` | [Ruby](/docs/libraries/ruby) |
+| **Elixir** | `posthog-elixir` | [Elixir](/docs/libraries/elixir) |
+| **.NET** | `posthog-dotnet` | [.NET](/docs/libraries/dotnet) |
 
 ## How it works
 
