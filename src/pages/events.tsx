@@ -18,6 +18,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import EventForm from 'components/EventForm'
 import { useUser } from 'hooks/useUser'
 import qs from 'qs'
+import { IconTrash } from '@posthog/icons'
+import { useToast } from '../context/Toast'
 
 type Event = {
     date: string // YYYY-MM-DD
@@ -44,6 +46,7 @@ type Event = {
     presentation?: string
     link?: string
     startTime?: string // HH:mm format
+    id: number
 }
 
 const transformStrapiEvent = (strapiEvent: any): Event => {
@@ -66,10 +69,13 @@ const transformStrapiEvent = (strapiEvent: any): Event => {
         speakers,
         partners,
         photos,
+        id: strapiEvent.id,
     }
 }
 
-const useEvents = (): { events: Event[]; refreshEvents: () => void } => {
+const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
+    const { getJwt } = useUser()
+    const { addToast } = useToast()
     const [events, setEvents] = useState<Event[]>([])
     const fetchEvents = async (page = 1) => {
         const eventsQuery = qs.stringify(
@@ -96,16 +102,42 @@ const useEvents = (): { events: Event[]; refreshEvents: () => void } => {
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
     }
 
+    const deleteEvent = async (eventId: number) => {
+        if (confirm('Are you sure you want to delete this event?')) {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events/${eventId}`, {
+                    headers: {
+                        Authorization: `Bearer ${await getJwt()}`,
+                    },
+                    method: 'DELETE',
+                })
+
+                if (!response.ok) {
+                    throw new Error(response.statusText)
+                }
+
+                addToast({ title: 'Event deleted', description: 'The event was deleted successfully.' })
+                refreshEvents()
+            } catch (error: any) {
+                addToast({
+                    title: 'Failed to delete event',
+                    description: error?.message || 'An unexpected error occurred while deleting the event.',
+                    error: true,
+                })
+            }
+        }
+    }
+
     const refreshEvents = useCallback(() => {
         setEvents([])
         fetchEvents()
     }, [])
 
     useEffect(() => {
-        fetchEvents()
+        refreshEvents()
     }, [])
 
-    return { events, refreshEvents }
+    return { events, refreshEvents, deleteEvent }
 }
 
 const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
@@ -131,7 +163,7 @@ const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: 
 
 function Events() {
     const { isModerator } = useUser()
-    const { events: eventsData, refreshEvents } = useEvents()
+    const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
@@ -145,7 +177,7 @@ function Events() {
     // Generate unique event key
     const getEventKey = (event: Event) => {
         const slug = event.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-        return `${event.date}-${slug}`
+        return `${event.date}-${event.id}-${slug}`
     }
 
     const today = new Date()
@@ -1117,6 +1149,19 @@ function Events() {
                                                         >
                                                             View details
                                                         </OSButton>
+                                                    </div>
+                                                )}
+                                                {isModerator && (
+                                                    <div>
+                                                        <OSButton
+                                                            size="md"
+                                                            tooltip="Delete this event"
+                                                            icon={<IconTrash />}
+                                                            onClick={() => {
+                                                                deleteEvent(selectedEvent.id)
+                                                                setSelectedEvent(null)
+                                                            }}
+                                                        />
                                                     </div>
                                                 )}
                                             </div>
