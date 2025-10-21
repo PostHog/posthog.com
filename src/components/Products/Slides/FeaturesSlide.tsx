@@ -116,7 +116,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         <div className="pt-8 px-4 pb-4 flex-1">
                                             <div
                                                 data-scheme="secondary"
-                                                className="inline-flex items-center gap-2 mb-8 text-lg p-2 rounded bg-primary border border-primary font-medium"
+                                                className="inline-flex items-center gap-2 mb-8 text-lg px-2 py-1 -mt-2 rounded bg-primary border border-primary font-medium"
                                             >
                                                 <IconBrain className="size-8 text-${item.color}" />
                                                 PostHog AI knows...
@@ -166,7 +166,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         {item.skills && item.skills.length > 0 && (
                                             <div className="mt-4">
                                                 <h3 className="text-2xl border-b border-primary pb-2 mb-4">Skills</h3>
-                                                <div className="grid @2xl:grid-cols-2 gap-x-8 gap-y-4">
+                                                <div className="grid @2xl:grid-cols-2 gap-x-8 gap-y-3">
                                                     {item.skills.map((skill: any, skillIndex: number) => {
                                                         if (typeof skill === 'string') {
                                                             return (
