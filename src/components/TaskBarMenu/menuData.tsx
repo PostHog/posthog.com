@@ -639,6 +639,12 @@ export function useMenuData(): MenuType[] {
                     ],
                 },
                 {
+                    type: 'item',
+                    label: 'Video library',
+                    link: '/videos',
+                    icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
+                },
+                {
                     type: 'submenu',
                     label: 'Sexy legal documents',
                     icon: <Icons.IconTie className="size-4 text-brown dark:text-creamsicle-dark" />,
@@ -792,40 +798,40 @@ export function useMenuData(): MenuType[] {
     // On mobile, include main navigation items in the logo menu
     const logoMenuItems = isMobile
         ? [
-            {
-                type: 'item' as const,
-                label: 'home.mdx',
-                link: '/',
-            },
-            { type: 'separator' as const },
-            // Main navigation items processed for mobile
-            ...processMobileNavItems(),
-            { type: 'separator' as const },
-            // System items
-            ...baseLogoMenuItems,
-        ]
+              {
+                  type: 'item' as const,
+                  label: 'home.mdx',
+                  link: '/',
+              },
+              { type: 'separator' as const },
+              // Main navigation items processed for mobile
+              ...processMobileNavItems(),
+              { type: 'separator' as const },
+              // System items
+              ...baseLogoMenuItems,
+          ]
         : [
-            // Desktop: only show system items
-            ...baseLogoMenuItems,
-            { type: 'separator' as const },
-            {
-                type: 'item' as const,
-                label: 'Start screensaver',
-                onClick: () => {
-                    setScreensaverPreviewActive(true)
-                },
-                shortcut: ['Shift', 'Z'],
-            },
-            {
-                type: 'item' as const,
-                label: 'Close all windows',
-                disabled: windows.length < 1,
-                onClick: () => {
-                    animateClosingAllWindows()
-                },
-                shortcut: ['Shift', 'X'],
-            },
-        ]
+              // Desktop: only show system items
+              ...baseLogoMenuItems,
+              { type: 'separator' as const },
+              {
+                  type: 'item' as const,
+                  label: 'Start screensaver',
+                  onClick: () => {
+                      setScreensaverPreviewActive(true)
+                  },
+                  shortcut: ['Shift', 'Z'],
+              },
+              {
+                  type: 'item' as const,
+                  label: 'Close all windows',
+                  disabled: windows.length < 1,
+                  onClick: () => {
+                      animateClosingAllWindows()
+                  },
+                  shortcut: ['Shift', 'X'],
+              },
+          ]
 
     return [
         {
