@@ -230,44 +230,44 @@ export const posthog_ai = {
                 },
             ],
         },
-        {
-            title: 'Feature Flags',
-            headline: 'Feature Flags',
-            layout: 'ai',
-            icon: <IconToggle className="size-5" />,
-            color: 'green',
-            description:
-                'Feature flags without the config file? PostHog AI builds complex targeting logic, percentage splits, and override rules — all from a simple prompt.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
-                    alt: 'Feature Flags',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Multiverse manager',
-                    description: 'Runs parallel realities where different features exist',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Chaos coordinator',
-                    description: 'Sets up kill switches to mitigate damage control',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Targeting sniper',
-                    description: 'Flags cohorts and specific users with surgical precision',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 90,
-                },
-            ],
-        },
+        // {
+        //       title: 'Feature Flags',
+        //       headline: 'Feature Flags',
+        //       layout: 'ai',
+        //       icon: <IconToggle className="size-5" />,
+        //       color: 'green',
+        //       description:
+        //           'Feature flags without the config file? PostHog AI builds complex targeting logic, percentage splits, and override rules — all from a simple prompt.',
+        //       images: [
+        //           {
+        //               src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
+        //               alt: 'Feature Flags',
+        //               className: 'max-h-64',
+        //               // stylize: true,
+        //               // shadow: true,
+        //           },
+        //       ],
+        //       skills: [
+        //           {
+        //               name: 'Multiverse manager',
+        //               description: 'Runs parallel realities where different features exist',
+        //               sticker: <StickerPath className="size-6" />,
+        //               percent: 80,
+        //           },
+        //           {
+        //               name: 'Chaos coordinator',
+        //               description: 'Sets up kill switches to mitigate damage control',
+        //               sticker: <StickerPath className="size-6" />,
+        //               percent: 100,
+        //           },
+        //           {
+        //               name: 'Targeting sniper',
+        //               description: 'Flags cohorts and specific users with surgical precision',
+        //               sticker: <StickerPath className="size-6" />,
+        //               percent: 90,
+        //           },
+        //       ],
+        //   },
         {
             label: 'Communication',
         },
