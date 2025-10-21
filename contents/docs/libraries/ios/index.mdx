@@ -410,8 +410,6 @@ With swizzling disabled, the SDK only uses application open/backgrounded events 
 
 PostHog supports sharing analytics data between your main app and application extensions (such as widgets, app clips, share extensions, and custom keyboards) through App Groups. This ensures that users maintain the same identity across all parts of your app ecosystem.
 
-### Why use App Groups?
-
 By default, each iOS app target stores its data in its own sandboxed directory. This means that if a user interacts with your main app and then uses a widget or extension, PostHog would treat them as two different anonymous users. This can lead to:
 
 - Inflated user counts in your analytics
@@ -431,7 +429,7 @@ PostHogSDK.shared.setup(config)
 
 ### Custom keyboard extensions
 
-Custom keyboard extensions have stricter security rules than other extension types. To use PostHog analytics in a custom keyboard, the keyboard must have [Open Access permission](https://developer.apple.com/documentation/uikit/keyboards_and_input/creating_a_custom_keyboard/configuring_a_custom_keyboard#2962436) enabled. This permission is required for network requests and write access to shared containers.
+Custom keyboard extensions have stricter security rules than other extension types. To use PostHog analytics in a custom keyboard, the keyboard must have [Open Access permission](https://developer.apple.com/documentation/uikit/configuring-open-access-for-a-custom-keyboard) enabled. This permission is required for network requests and write access to shared containers.
 
 Users must explicitly grant Open Access in **Settings > General > Keyboard > Keyboards > [Your Keyboard] > Allow Full Access**.
 
