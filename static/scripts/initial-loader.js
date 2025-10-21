@@ -1,8 +1,15 @@
-(function () {
+;(function () {
     try {
-        const body = document.body;
-        const loadingWrapper = document.createElement('div');
-        const loadingStyles = document.createElement('style');
+        const LOADING_MESSAGES = [
+            'Booting the PostHog.com experience',
+            'Sourcing and transforming nodes',
+            'Compiling hedgehog shaders',
+            'Rebuilding webpack',
+            `Running <code>yarn serve</code>`,
+        ]
+        const body = document.body
+        const loadingWrapper = document.createElement('div')
+        const loadingStyles = document.createElement('style')
         loadingStyles.textContent = `
             #initial-loader {
                 position: fixed;
@@ -22,11 +29,12 @@
                 justify-content: center;
                 gap: 0.5rem;
                 width: 20rem;
-                background: rgba(255, 255, 255, 0.75);
+                background: #FDFDF8;
                 backdrop-filter: blur(8px);
-                border: 1px solid rgba(0, 0, 0, 0.1);
+                border: 1px solid #BFC1B7;
                 border-radius: 0.25rem;
                 padding: 1rem;
+                box-shadow: 0 25px 25px -12px rgb(0 0 0 / 0.1);
             }
             body.dark #initial-loader-content {
                 background: rgba(30, 31, 35, 0.75);
@@ -68,8 +76,11 @@
             body.dark #initial-loader-text {
                 color: rgba(255, 255, 255, 0.8);
             }
-        `;
-        loadingWrapper.id = 'initial-loader';
+            body.dark .hourglass-spinner {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        `
+        loadingWrapper.id = 'initial-loader'
         loadingWrapper.innerHTML = `
             <div id="initial-loader-content">
                 <svg class="hourglass-spinner" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -77,12 +88,30 @@
                     <path class="sand-top" d="M8 4 L16 4 L14.5 7 L9.5 7 Z" fill="currentColor" opacity="0.6"/>
                     <path class="sand-bottom" d="M8 20 L16 20 L14.5 17 L9.5 17 Z" fill="currentColor" opacity="0.6"/>
                 </svg>
-                <div id="initial-loader-text">Loading PostHog...</div>
+                <div id="initial-loader-text" class="text-sm">Hydrating the hedgehogs...</div>
             </div>
-        `;
-        body.appendChild(loadingStyles);
-        body.appendChild(loadingWrapper);
+        `
+        body.appendChild(loadingStyles)
+        body.appendChild(loadingWrapper)
+        let currentMessageIndex = 0
+        const intervalId = setInterval(() => {
+            const currentMessage = LOADING_MESSAGES[currentMessageIndex]
+            loadingWrapper.querySelector('#initial-loader-text').innerHTML = currentMessage
+            currentMessageIndex = (currentMessageIndex + 1) % LOADING_MESSAGES.length
+        }, 1300)
+
+        const cleanup = () => {
+            clearInterval(intervalId)
+            loadingWrapper.remove()
+            loadingStyles.remove()
+        }
+
+        if (window.__desktopLoaded) {
+            cleanup()
+        } else {
+            window.addEventListener('desktopLoaded', cleanup, { once: true })
+        }
     } catch (error) {
-        console.error('Failed to initialize loading spinner:', error);
+        console.error('Failed to initialize loading spinner:', error)
     }
-})();
+})()

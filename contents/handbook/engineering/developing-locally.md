@@ -270,7 +270,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     <code>$PATH</code>. Otherwise the command line will use your system Node.js version instead.
 </blockquote>
 
-2. Install the latest Node.js 18 (the version used by PostHog in production) with `nvm install 18`. You can start using it in the current shell with `nvm use 18`.
+2. Install the latest Node.js 22 (the version used by PostHog in production) with `nvm install 22`. You can start using it in the current shell with `nvm use 22`.
 
 3. Install pnpm by running `corepack enable` and then running `corepack prepare pnpm@9 --activate`. Validate the installation with `pnpm --version`.
 
@@ -415,13 +415,16 @@ DEBUG=1 ./bin/migrate
 
 #### 6. Start PostHog
 
-Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
+Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with one of:
 
 ```bash
 ./bin/start
 
 # only services strictly required to run posthog
 ./bin/start --minimal
+
+# if you want to log additionally each process to a /tmp/posthog-<process-name>.log file for AI code editors to be able to grep
+./bin/start --custom bin/mprocs-with-logging.yaml
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.

@@ -15,6 +15,7 @@ features:
   groupAnalytics: true
   surveys: false
   llmAnalytics: false
+  errorTracking: true
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -187,7 +188,7 @@ no matter how many events have been gathered.
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
 
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply { 
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     flushAt = 20
     flushIntervalSeconds = 30
 }
@@ -266,6 +267,10 @@ PostHog.group(
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
+
+## Error tracking
+
+To set up error tracking in your project, follow the [Android installation guide](/docs/error-tracking/installation/android).
 
 ## Session replay
 
@@ -352,6 +357,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Whether the SDK should reuse the anonymous Id between user changes. 
     // When enabled, a single Id will be used for all anonymous users on this device (off/false by default)
     reuseAnonymousId = false
+
+    // Error tracking configuration
+    errorTrackingConfig = PostHogErrorTrackingConfig(...)
 }
 ```
 
@@ -360,4 +368,3 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 ## Do I need to declare permissions in the AndroidManifest.xml?
 
 We don't declare nor use any 'Service', so no permissions are needed.
-

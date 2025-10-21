@@ -17,7 +17,7 @@ import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
-import { IconChevronDown, IconPlus, IconShieldLock } from '@posthog/icons'
+import { IconChevronDown, IconPencil, IconPlus, IconShieldLock } from '@posthog/icons'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import CloudinaryImage from 'components/CloudinaryImage'
 import uniqBy from 'lodash/uniqBy'
@@ -328,12 +328,15 @@ const RoadmapTable = ({
     loading,
     onLastRowInView,
     expandAll,
+    onEdit,
 }: {
     roadmaps: any[]
     loading?: boolean
     onLastRowInView?: () => void
     expandAll?: boolean
+    onEdit?: (id: number) => void
 }) => {
+    const { isModerator } = useUser()
     return (
         <OSTable
             loading={loading}
@@ -357,6 +360,7 @@ const RoadmapTable = ({
                     name: 'Author',
                     align: 'left',
                 },
+                ...(isModerator ? [{ name: '', width: '50px', align: 'center' as const }] : []),
             ]}
             rowAlignment="top"
             rows={roadmaps.map((roadmap) => {
@@ -400,6 +404,24 @@ const RoadmapTable = ({
                                     <Teams teams={teams} className="-my-1" />
                                 ),
                         },
+                        ...(isModerator
+                            ? [
+                                  {
+                                      content: (
+                                          <Tooltip
+                                              className="my-auto flex"
+                                              trigger={
+                                                  <button onClick={() => onEdit(roadmap.id)}>
+                                                      <IconPencil className="size-5" />
+                                                  </button>
+                                              }
+                                          >
+                                              <p className="text-sm m-0">Edit</p>
+                                          </Tooltip>
+                                      ),
+                                  },
+                              ]
+                            : []),
                     ],
                 }
             })}
@@ -543,6 +565,20 @@ export default function Changelog({ pageContext }) {
                                     }
                                 }}
                                 expandAll={expandAll}
+                                onEdit={(id) =>
+                                    addWindow(
+                                        <RoadmapWindow
+                                            location={{ pathname: `edit-roadmap-${id}` }}
+                                            key={`edit-roadmap`}
+                                            newWindow
+                                            id={id}
+                                            status="complete"
+                                            onSubmit={() => {
+                                                mutate()
+                                            }}
+                                        />
+                                    )
+                                }
                             />
                         )
                     ) : null}

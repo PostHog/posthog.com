@@ -311,6 +311,7 @@
         { "source": "/travismedia", "destination": "/?utm_source=travismedia&utm_campaign=travismedia" },
         { "source": "/viktor", "destination": "/?utm_source=viktor&utm_campaign=viktor" },
         { "source": "/starterstory", "destination": "/?utm_source=starterstory&utm_campaign=starterstory" },
+        { "source": "/jsmastery", "destination": "/?utm_source=jsmastery&utm_campaign=jsmastery" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -1211,7 +1212,8 @@
         { "source": "/handbook/small-teams/feature-success", "destination": "/teams/feature-success" },
         { "source": "/handbook/small-teams/customer-success", "destination": "/teams/customer-success" },
         { "source": "/handbook/small-teams/growth", "destination": "/teams/growth" },
-        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-warehouse" },
+        { "source": "/handbook/small-teams/data-warehouse", "destination": "/teams/data-stack" },
+        { "source": "/teams/data-warehouse", "destination": "/teams/data-stack" },
         { "source": "/handbook/small-teams/infrastructure", "destination": "/teams/infrastructure" },
         { "source": "/handbook/small-teams/pipeline", "destination": "/teams/pipeline" },
         { "source": "/handbook/small-teams/web-analytics", "destination": "/teams/web-analytics" },
@@ -1466,7 +1468,11 @@
         },
         {
             "source": "/max-ai",
-            "destination": "/max"
+            "destination": "/ai"
+        },
+        {
+            "source": "/max",
+            "destination": "/ai"
         },
         {
             "source": "/docs/surveys/webhook",
@@ -1616,7 +1622,11 @@
         { "source": "/eu", "destination": "/pricing" },
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
-        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" }
+        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
+        {
+            "source": "/docs/max-ai",
+            "destination": "/docs/posthog-ai"
+        }
     ],
     "headers": [
         {
