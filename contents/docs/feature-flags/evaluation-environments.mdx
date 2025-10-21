@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 availability:
   free: false
-  selfServe: boost
   enterprise: full
 ---
 
@@ -12,7 +11,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Heads up!" type="caution">
-Evaluation environments are currently in alpha release and require (at least) the boost add-on (they need the resource tagging feature to function correctly). This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
+Evaluation environments are currently in alpha release and require (at least) the **Boost add-on** for the resource tagging feature to function correctly. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
 </CalloutBox>
 
 Evaluation environments provide fine-grained control over where and when your feature flags evaluate. By constraining flag evaluation to specific environments or contexts, you can reduce unnecessary evaluations, optimize costs, and better organize your feature management strategy.
@@ -29,24 +28,28 @@ When you configure evaluation environment tags on a feature flag:
 ## Why use evaluation environments?
 
 ### 1. Application isolation
+
 Prevent feature flags from accidentally affecting the wrong application or context. For example:
 - Marketing site flags won't affect your main application
 - Documentation site flags won't impact your mobile apps
 - Admin panel flags won't evaluate in customer-facing features
 
 ### 2. Cost optimization
+
 Reduce unnecessary flag evaluations and associated costs by:
 - Only evaluating relevant flags per application context
 - Reducing network payload sizes
 - Minimizing server-side processing
 
 ### 3. Better organization
+
 Group and filter flags by their intended application context in the feature flags UI, for example:
 - Application type (e.g., "main-app", "marketing-site", "docs")
 - Platform (e.g., "web", "mobile", "api")
 - Product area (e.g., "checkout", "onboarding", "admin")
 
 ### 4. Improved performance
+
 Smaller, more focused flag sets mean:
 - Faster evaluation times
 - Reduced memory usage in SDKs
@@ -202,12 +205,15 @@ Establish a naming convention for your evaluation environment tags:
 - Product area: `checkout`, `onboarding`, `billing`
 
 ### Document your application contexts
+
 Maintain a list of standard application context names and their purposes to ensure consistent usage across teams.
 
 ### Gradual adoption
+
 You don't need to add evaluation environment tags to all flags at once. Start with new flags or high-traffic flags where the benefits are most significant.
 
 ### Monitor impact
+
 Track the reduction in flag evaluations and associated cost savings after implementing evaluation environments.
 
 ## Differences from evaluation runtime
@@ -228,6 +234,7 @@ For practical examples of using both features together, see [How to use evaluati
 ## Common use cases
 
 ### Multi-application organizations
+
 If you have multiple applications sharing a PostHog instance:
 ```javascript
 // Marketing site
@@ -241,6 +248,7 @@ posthog.init('KEY', { evaluation_environments: ['docs', 'web'] })
 ```
 
 ### Platform-specific features
+
 Separate features by platform while maintaining a single flag source:
 ```javascript
 // iOS app
@@ -254,6 +262,7 @@ posthog.init('KEY', { evaluation_environments: ['main-app', 'web'] })
 ```
 
 ### Product area isolation
+
 Separate features by product area within your main application:
 ```javascript
 // Checkout flow
@@ -269,6 +278,7 @@ posthog.init('KEY', { evaluation_environments: ['admin-panel', 'web'] })
 ## Troubleshooting
 
 ### Flags not evaluating
+
 If a flag with evaluation environment tags isn't evaluating:
 1. **Check that your SDK is configured with `evaluation_environments`** - This is the most common issue. Your application must explicitly declare its application contexts.
 2. Verify at least one evaluation tag in the UI matches your SDK's `evaluation_environments`
@@ -276,12 +286,14 @@ If a flag with evaluation environment tags isn't evaluating:
 4. Confirm you've deployed the SDK configuration changes to your application
 
 ### All flags evaluating
+
 If you're still seeing all flags despite using evaluation environments:
 1. Confirm your SDK version supports evaluation environments
 2. Check that flags have tags marked as evaluation constraints (bolt icon, not just regular tags)
 3. Verify your SDK is sending the `evaluation_environments` parameter
 
 ### Performance not improved
+
 If you don't see performance improvements:
 1. Ensure you've added evaluation environment tags to high-traffic flags
 2. Check that your application contexts are specific enough to filter effectively
