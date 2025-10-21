@@ -3716,6 +3716,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/hono',
                         },
                         {
+                            name: 'Android',
+                            url: '/docs/error-tracking/installation/android',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
