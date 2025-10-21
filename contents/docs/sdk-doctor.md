@@ -9,8 +9,8 @@ showTitle: true
 > **Note:** SDK doctor is currently in beta. Give feedback by [raising an issue](https://github.com/PostHog/posthog/issues/new?labels=feature%2Fsdk-doctor).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_10_21_T21_17_30_549_Z_e746c302f3.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_10_21_T21_17_48_367_Z_385a4b561a.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sdk_light_0e172bf201.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sdk_dark_4c91c12471.png"
   alt="SDK Doctor"
   classes="rounded"
 />
