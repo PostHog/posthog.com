@@ -5,6 +5,12 @@
 @tailwind utilities;
 
 @layer components {
+    .markdown.prose {
+        img {
+            @apply m-0 rounded;
+        }
+    }
+
     .prose {
         @apply max-w-none;
 
@@ -791,7 +797,7 @@ fieldset {
 /* applies to question and reply content */
 .question-content {
     a {
-        @apply text-red dark:text-yellow;
+        @apply font-semibold underline;
     }
     h3 {
         @apply text-xl;
