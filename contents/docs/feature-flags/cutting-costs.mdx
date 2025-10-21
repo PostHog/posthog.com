@@ -25,7 +25,7 @@ For **server-side SDKs** (Node, Python, PHP, etc.), each call to `getFeatureFlag
 </CalloutBox>
 
 
-Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
+Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
@@ -33,7 +33,7 @@ The number of `/flags` requests and the number of `$feature_flag_called` events 
 
   Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
   
-  To stop charges for unused flags, you must **delete or archive** them in the PostHog UI – simply removing them from your code is not enough.
+  To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough. If you disable/delete/archive a flag but keep it in your code, you'll still see `$feature_flag_called` events (since we track flag usage), but the flag won't be evaluated and will always return `false`.
 
 </CalloutBox>
 
