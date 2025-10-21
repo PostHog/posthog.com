@@ -95,6 +95,8 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
                 image={`/images/og/default.png`}
             />
             <OSTabs
+                autoCalculateTabRows={false}
+                forceMount
                 tabs={[
                     {
                         label: 'Install with AI',

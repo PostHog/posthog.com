@@ -42,7 +42,7 @@ export default function TaskBarMenu() {
         posthogInstance,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
-    const totalWindows = windows.length
+    const totalWindows = windows.filter((window) => !window.hidden).length
 
     const { user, notifications, logout, isModerator } = useUser()
     const menuData = useMenuData()

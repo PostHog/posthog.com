@@ -7,7 +7,7 @@ import { navigate } from 'gatsby'
 
 export default function ActiveWindowsPanel() {
     const {
-        windows,
+        windows: activeWindows,
         isActiveWindowsPanelOpen,
         setIsActiveWindowsPanelOpen,
         focusedWindow,
@@ -15,6 +15,8 @@ export default function ActiveWindowsPanel() {
         closeWindow,
         animateClosingAllWindows,
     } = useApp()
+
+    const windows = activeWindows.filter((window) => !window.hidden)
 
     const closeActiveWindowsPanel = () => {
         setIsActiveWindowsPanelOpen(false)
