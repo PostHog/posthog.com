@@ -14,6 +14,9 @@ import { ZoomImage } from 'components/ZoomImage'
 import { useWindow } from '../context/Window'
 import { graphql, useStaticQuery } from 'gatsby'
 import dayjs from 'dayjs'
+import { AnimatePresence, motion } from 'framer-motion'
+import EventForm from 'components/EventForm'
+import { useUser } from 'hooks/useUser'
 
 type Event = {
     date: string // YYYY-MM-DD
@@ -120,12 +123,35 @@ const useEvents = (): Event[] => {
     return data.allEvent.nodes.map(transformStrapiEvent)
 }
 
+const EventCard = ({ children, onClose }: { children: React.ReactNode; onClose: () => void }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, translateX: '-50%' }}
+            animate={{ opacity: 1, translateX: 0 }}
+            exit={{ opacity: 0, translateX: '-50%' }}
+            transition={{ duration: 0.3 }}
+            className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col"
+        >
+            <button
+                onClick={onClose}
+                className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
+            >
+                ✕
+            </button>
+
+            <ScrollArea className="flex-1">{children}</ScrollArea>
+        </motion.div>
+    )
+}
+
 function Events() {
+    const { isModerator } = useUser()
     const eventsData = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
     const [chartKey, setChartKey] = useState(0)
+    const [creatingEvent, setCreatingEvent] = useState(false)
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
     const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
@@ -831,6 +857,16 @@ function Events() {
                         <ScrollArea className="flex-1">
                             <div className="p-4 h-96 @xl:h-full">
                                 <div className="space-y-3">
+                                    {isModerator && (
+                                        <OSButton
+                                            variant="primary"
+                                            width="full"
+                                            size="md"
+                                            onClick={() => setCreatingEvent(true)}
+                                        >
+                                            Add event
+                                        </OSButton>
+                                    )}
                                     {displayEvents.map((event) => (
                                         <OSButton
                                             data-scheme="primary"
@@ -890,206 +926,215 @@ function Events() {
                     </aside>
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
-                        {selectedEvent && (
-                            <div className="absolute left-4 top-4 bottom-4 w-96 rounded bg-primary border border-primary shadow-lg z-10 overflow-hidden flex flex-col">
-                                <button
-                                    onClick={() => setSelectedEvent(null)}
-                                    className="absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded hover:bg-accent text-primary hover:text-primary text-xl leading-none"
-                                >
-                                    ✕
-                                </button>
-
-                                <ScrollArea className="flex-1">
+                        <AnimatePresence>
+                            {creatingEvent && isModerator ? (
+                                <EventCard onClose={() => setCreatingEvent(false)}>
                                     <div className="p-4">
-                                        <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
-                                        <div className="mb-2 text-secondary">
-                                            {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
-                                        </div>
-
-                                        <div className="space-y-3 text-sm mb-4">
-                                            {selectedEvent.private && (
-                                                <div
-                                                    data-scheme="secondary"
-                                                    className="border border-primary bg-primary rounded p-2"
-                                                >
-                                                    <div className="text-secondary text-[13px]">
-                                                        This event is closed to the public
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.startTime && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Start time</div>
-                                                    <div>
-                                                        {dayjs(
-                                                            `${selectedEvent.date} ${selectedEvent.startTime}`
-                                                        ).format('h:mm A')}
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            <div>
-                                                <div className="text-secondary text-[13px] mb-1">Location</div>
-                                                {selectedEvent.location.venue && (
-                                                    <div className="text-primary font-semibold mt-1">
-                                                        {selectedEvent.location.venue.name}
-                                                    </div>
-                                                )}
-                                                <div>{selectedEvent.location.label}</div>
+                                        <EventForm />
+                                    </div>
+                                </EventCard>
+                            ) : (
+                                selectedEvent && (
+                                    <EventCard onClose={() => setSelectedEvent(null)}>
+                                        <div className="p-4">
+                                            <h2 className="text-xl font-bold mb-1 pr-12">{selectedEvent.name}</h2>
+                                            <div className="mb-2 text-secondary">
+                                                {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
                                             </div>
 
-                                            {selectedEvent.description && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Description</div>
-                                                    <div className="text-sm leading-relaxed">
-                                                        {selectedEvent.description}
+                                            <div className="space-y-3 text-sm mb-4">
+                                                {selectedEvent.private && (
+                                                    <div
+                                                        data-scheme="secondary"
+                                                        className="border border-primary bg-primary rounded p-2"
+                                                    >
+                                                        <div className="text-secondary text-[13px]">
+                                                            This event is closed to the public
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">
-                                                        Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                {selectedEvent.startTime && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Start time
+                                                        </div>
+                                                        <div>
+                                                            {dayjs(
+                                                                `${selectedEvent.date} ${selectedEvent.startTime}`
+                                                            ).format('h:mm A')}
+                                                        </div>
                                                     </div>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {selectedEvent.speakers.map((speaker, i) => (
-                                                            <TeamMember key={i} name={speaker} photo />
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.speakerTopic && (
                                                 <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Topic</div>
-                                                    <div>{selectedEvent.speakerTopic}</div>
-                                                    {selectedEvent.presentation && (
-                                                        <a
-                                                            href={selectedEvent.presentation}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="block mt-1 font-semibold underline"
-                                                        >
-                                                            View slide deck
-                                                        </a>
+                                                    <div className="text-secondary text-[13px] mb-1">Location</div>
+                                                    {selectedEvent.location.venue && (
+                                                        <div className="text-primary font-semibold mt-1">
+                                                            {selectedEvent.location.venue.name}
+                                                        </div>
                                                     )}
+                                                    <div>{selectedEvent.location.label}</div>
                                                 </div>
-                                            )}
 
-                                            {selectedEvent.format && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Format</div>
-                                                    <div>{selectedEvent.format.join(', ')}</div>
-                                                </div>
-                                            )}
+                                                {selectedEvent.description && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Description
+                                                        </div>
+                                                        <div className="text-sm leading-relaxed">
+                                                            {selectedEvent.description}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                            {selectedEvent.audience && selectedEvent.audience.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Audience</div>
-                                                    <div>{selectedEvent.audience.join(', ')}</div>
-                                                </div>
-                                            )}
+                                                {selectedEvent.speakers && selectedEvent.speakers.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Speaker{selectedEvent.speakers.length > 1 ? 's' : ''}
+                                                        </div>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedEvent.speakers.map((speaker, i) => (
+                                                                <TeamMember key={i} name={speaker} photo />
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                            {selectedEvent.partners && selectedEvent.partners.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Partners</div>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {selectedEvent.partners.map((partner, i) =>
-                                                            partner.url ? (
-                                                                <a
-                                                                    key={i}
-                                                                    href={partner.url}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="text-orange hover:underline"
-                                                                >
-                                                                    {partner.name}
-                                                                </a>
-                                                            ) : (
-                                                                <span key={i}>{partner.name}</span>
-                                                            )
+                                                {selectedEvent.speakerTopic && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Topic</div>
+                                                        <div>{selectedEvent.speakerTopic}</div>
+                                                        {selectedEvent.presentation && (
+                                                            <a
+                                                                href={selectedEvent.presentation}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="block mt-1 font-semibold underline"
+                                                            >
+                                                                View slide deck
+                                                            </a>
                                                         )}
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.attendees && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Attendees</div>
-                                                    <div>{selectedEvent.attendees} people</div>
-                                                </div>
-                                            )}
-
-                                            {selectedEvent.vibeScore && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Vibe Score</div>
-                                                    <div className="flex gap-1">
-                                                        {Array.from({ length: selectedEvent.vibeScore }).map((_, i) => (
-                                                            <span key={i} className="text-lg">
-                                                                🔥
-                                                            </span>
-                                                        ))}
+                                                {selectedEvent.format && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Format</div>
+                                                        <div>{selectedEvent.format.join(', ')}</div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.photos && selectedEvent.photos.length > 0 && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Photos</div>
-                                                    <div className="grid grid-cols-2 gap-2">
-                                                        {selectedEvent.photos.map((photo, i) => (
-                                                            <ZoomImage key={i}>
-                                                                <img
-                                                                    src={photo}
-                                                                    alt={`Event photo ${i + 1}`}
-                                                                    className="w-full h-32 object-cover rounded"
-                                                                />
-                                                            </ZoomImage>
-                                                        ))}
+                                                {selectedEvent.audience && selectedEvent.audience.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Audience</div>
+                                                        <div>{selectedEvent.audience.join(', ')}</div>
                                                     </div>
-                                                </div>
-                                            )}
+                                                )}
 
-                                            {selectedEvent.video && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Video</div>
-                                                    <a
-                                                        href={selectedEvent.video}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-orange hover:underline text-sm"
-                                                    >
-                                                        Watch video →
-                                                    </a>
-                                                </div>
-                                            )}
+                                                {selectedEvent.partners && selectedEvent.partners.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Partners</div>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedEvent.partners.map((partner, i) =>
+                                                                partner.url ? (
+                                                                    <a
+                                                                        key={i}
+                                                                        href={partner.url}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="text-orange hover:underline"
+                                                                    >
+                                                                        {partner.name}
+                                                                    </a>
+                                                                ) : (
+                                                                    <span key={i}>{partner.name}</span>
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                            {selectedEvent.link && (
-                                                <div>
-                                                    <OSButton
-                                                        asLink
-                                                        to={selectedEvent.link}
-                                                        variant={
-                                                            new Date(selectedEvent.date) >=
-                                                            new Date(new Date().toISOString().split('T')[0])
-                                                                ? 'primary'
-                                                                : 'secondary'
-                                                        }
-                                                        width="full"
-                                                        size="md"
-                                                        external
-                                                    >
-                                                        View details
-                                                    </OSButton>
-                                                </div>
-                                            )}
+                                                {selectedEvent.attendees && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Attendees</div>
+                                                        <div>{selectedEvent.attendees} people</div>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.vibeScore && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">
+                                                            Vibe Score
+                                                        </div>
+                                                        <div className="flex gap-1">
+                                                            {Array.from({ length: selectedEvent.vibeScore }).map(
+                                                                (_, i) => (
+                                                                    <span key={i} className="text-lg">
+                                                                        🔥
+                                                                    </span>
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.photos && selectedEvent.photos.length > 0 && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Photos</div>
+                                                        <div className="grid grid-cols-2 gap-2">
+                                                            {selectedEvent.photos.map((photo, i) => (
+                                                                <ZoomImage key={i}>
+                                                                    <img
+                                                                        src={photo}
+                                                                        alt={`Event photo ${i + 1}`}
+                                                                        className="w-full h-32 object-cover rounded"
+                                                                    />
+                                                                </ZoomImage>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.video && (
+                                                    <div>
+                                                        <div className="text-secondary text-[13px] mb-1">Video</div>
+                                                        <a
+                                                            href={selectedEvent.video}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-orange hover:underline text-sm"
+                                                        >
+                                                            Watch video →
+                                                        </a>
+                                                    </div>
+                                                )}
+
+                                                {selectedEvent.link && (
+                                                    <div>
+                                                        <OSButton
+                                                            asLink
+                                                            to={selectedEvent.link}
+                                                            variant={
+                                                                new Date(selectedEvent.date) >=
+                                                                new Date(new Date().toISOString().split('T')[0])
+                                                                    ? 'primary'
+                                                                    : 'secondary'
+                                                            }
+                                                            width="full"
+                                                            size="md"
+                                                            external
+                                                        >
+                                                            View details
+                                                        </OSButton>
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                </ScrollArea>
-                            </div>
-                        )}
+                                    </EventCard>
+                                )
+                            )}
+                        </AnimatePresence>
 
                         <div key={chartKey} ref={chartRef} className="w-full h-full" />
                     </div>
