@@ -82,15 +82,21 @@ If you are summonsed for jury duty, please let Fraser know right away - we can o
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 6 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year the following guidance is relevant for parental leave:
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 6 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year the following guidance is relevant for parental leave: 
 
-#### Maternity leave
+| Time at posthog | maternity leave | paternity leave |
+| - | - |
+| under 6 months | 3 weeks | 2 - 3 weeks |
+| 6 - 12 months | 6 weeks | 2 - 3 weeks |
+| over 12 months | up to 24 weeks | 6 weeks |
 
-If you have been at PostHog for under 6 months before your child is born, you will receive 3 weeks of paid parental leave. If you have been at PostHog for between 6-12 months you will receive 6 weeks of paid parental leave. In either situation, please contact Fraser with how much time you intend to take off. See above for the enhanced leave.
+### Maternity leave
 
-#### Paternity leave
+The above is in reference to Paid Time Off (PTO) - for any expecting mothers, please just let Fraser know the total amount of time you expect to take off, as soons as possible. 
 
-If you have been at PostHog for under 12 months we would expect you to take 2-3 weeks PTO when your child has arrived. See above for the enhanced leave.
+### Paternity leave
+
+We do not offer unpaid leave for Paternity leave. 
 
 > Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  Wherever there is a discrepancy between these local regulations and PostHog policy, we will merge the local minimum rules with the above.
 
