@@ -84,11 +84,11 @@ Parental leave is exceptional as it needs to be significantly longer than a typi
 
 This table explains the amount of paid time off, depending on how long you've been at PostHog
 
-| Time at posthog | maternity leave | paternity leave |
+| Time at posthog    | maternity leave | paternity leave |
 | - | - | - |
-| under 6 months | 3 weeks | 2 - 3 weeks |
-| 6 - 12 months | 6 weeks | 2 - 3 weeks |
-| over 12 months | up to 24 weeks | 6 weeks |
+| under 6 months    | 3 weeks          | 2 - 3 weeks |
+| 6 - 12 months     | 6 weeks          | 2 - 3 weeks |
+| over 12 months    | up to 24 weeks   | 6 weeks |
 
 > Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  Wherever there is a discrepancy between these local regulations and PostHog policy, we will merge the local minimum rules with the above.
 
