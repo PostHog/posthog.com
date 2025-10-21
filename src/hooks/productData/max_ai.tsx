@@ -168,24 +168,24 @@ export const posthog_ai = {
                 },
             ],
             skills: [
-                // {
-                //     name: 'Eval',
-                //     description: 'Builds single dashboard entire dashboards from a single thought',
-                //     sticker: <StickerPath className="size-6" />,
-                //     percent: 80,
-                // },
-                // {
-                //     name: 'Eval',
-                //     description: 'Links multiple metrics together to uncover deeper relationships',
-                //     sticker: <StickerPath className="size-6" />,
-                //     percent: 100,
-                // },
-                // {
-                //     name: 'Eval',
-                //     description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
-                //     sticker: <StickerPath className="size-6" />,
-                //     percent: 90,
-                // },
+                {
+                    name: 'Budget Bloodhound',
+                    description: 'Knows which users and models are burning tokens',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Sentiment Sleuth',
+                    description: 'Categorizes batches of traces as good, bad, "wtf?"',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 75,
+                },
+                {
+                    name: 'Hallucination Exorcist',
+                    description: 'Banishes confidently wrong LLM outputs"',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 60,
+                },
             ],
         },
         {
