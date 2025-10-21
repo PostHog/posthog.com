@@ -54,7 +54,7 @@ SDK doctor's approach tries to reduce noise from our frequent releases, but stil
 
 ## Accessing SDK doctor
 
-SDK doctor is available in the right side panel. The SDK doctor button will be added to the right side panel if you have one or more outdated SDKs in need of an update.
+SDK doctor is available in the [right side panel](https://app.posthog.com/#panel=sdk-doctor). The SDK doctor button will be added to the right side panel if you have one or more outdated SDKs in need of an update.
 
 1. Click the three vertical dots in the lower-right corner of any page.
 2. In the resulting menu, click `SDK doctor`
