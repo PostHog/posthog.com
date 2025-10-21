@@ -194,8 +194,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['web-analytics'],
     },
     'max-ai': {
-        feature: 'Max AI platform',
-        owner: ['max-ai'],
+        feature: 'PostHog AI platform',
+        owner: ['posthog-ai'],
         label: 'feature/max-ai',
     },
     'mcp-server': {

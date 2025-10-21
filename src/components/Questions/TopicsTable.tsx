@@ -40,6 +40,7 @@ import {
     IconMagicWand,
     IconLlmAnalytics,
     IconPiggyBank,
+    IconSparkles,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -73,7 +74,7 @@ export const topicIcons = {
     '#introductions': IconHandwave,
     kubernetes: DataWarehouse, // to be replaced or removed
     'llm analytics': IconLlmAnalytics,
-    'max ai': IconMagicWand,
+    'posthog ai': IconSparkles,
     'migrating to posthog': DataManagement, // to be replaced or removed
     migration: IconUpload,
     more: IconEllipsis,

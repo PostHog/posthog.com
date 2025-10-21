@@ -525,28 +525,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'AI README.md',
-            // Icon: IconMagicWand,
-            parentIcon: 'doc',
-            description: 'AI suite',
-            handle: 'ai',
-            color: 'blue',
-            colorSecondary: 'lilac',
-            category: 'ai',
-            slug: 'ai',
-            seo: {
-                title: 'AI @ PostHog',
-                description: 'Your AI-powered product agents',
-            },
-            overview: {
-                title: 'Your AI product analyst and assistant',
-                description:
-                    'Max is an AI-powered product analyst that lives in PostHog. Research answers to product questions by querying data, get things done quickly in the PostHog UI, and learn all about PostHog features.',
-                textColor: 'text-white',
-                layout: 'columns',
-            },
-        },
-        {
             name: 'Graphs & trends',
             Icon: IconGraph,
             handle: 'trends',

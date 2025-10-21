@@ -31,7 +31,7 @@ Eventually, frustrated with a scattered stack, the team decided to centralize as
 <OSQuote
   customer="exa"
   author="liam_hinzman"
-  product="max_ai"
+  product="posthog_ai"
  />
 
 ## Using PostHog for an AI-assisted engineering loop
