@@ -340,8 +340,8 @@ export const productAnalytics = {
                     title: 'Get help writing SQL',
                     description: (
                         <>
-                            <Link href="/max" state={{ newWindow: true }}>
-                                Max AI
+                            <Link href="/ai" state={{ newWindow: true }}>
+                                PostHog AI
                             </Link>{' '}
                             knows your data and can write syntax for you.
                         </>

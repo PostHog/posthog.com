@@ -1284,10 +1284,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                                        {
+                    {
                         name: 'Hogpatch',
                         url: '/handbook/growth/sales/hogpatch',
-                    }
+                    },
                 ],
             },
             {
@@ -2413,12 +2413,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools and features',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
+                            name: 'PostHog AI',
+                            url: '/docs/posthog-ai',
                         },
                         {
                             name: 'Toolbar',
@@ -3716,6 +3716,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/hono',
                         },
                         {
+                            name: 'Android',
+                            url: '/docs/error-tracking/installation/android',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
@@ -4556,37 +4560,37 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/docs/max-ai',
+            url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
                 {
-                    name: 'Max AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/max-ai#how-do-i-access-max',
+                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
                     name: 'Data access',
-                    url: '/docs/max-ai#what-access-does-max-have-to-my-data',
+                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
                 {
                     name: 'Security',
-                    url: '/docs/max-ai#is-my-data-shared-with-third-parties',
+                    url: '/docs/posthog-ai#is-my-data-shared-with-third-parties',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -4812,10 +4816,10 @@ export const productMenu = {
             url: '/llm-analytics',
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/max',
+            url: '/ai',
         },
         {
             name: 'Product OS',
