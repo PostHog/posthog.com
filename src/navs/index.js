@@ -664,6 +664,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Changelog',
+                url: '/handbook/content/changelog',
+            },
+            {
                 name: 'Writing for PostHog',
                 url: '',
                 children: [
@@ -1199,6 +1203,16 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/incidents#customer-communications',
             },
             {
+                name: 'Internal processes',
+                url: '',
+                children: [
+                    {
+                        name: 'Support zero weeks',
+                        url: '/handbook/support/support-zero',
+                    },
+                ],
+            },
+            {
                 name: 'Troubleshooting tips',
                 url: '/handbook/support/troubleshooting-tips',
             },
@@ -1215,6 +1229,10 @@ export const handbookSidebar = [
                     {
                         name: 'Overview',
                         url: '/handbook/growth/sales/overview',
+                    },
+                    {
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
                     },
                     {
                         name: 'Why buy PostHog',
@@ -1240,6 +1258,10 @@ export const handbookSidebar = [
                                 name: 'Cross-sell motions',
                                 url: '/handbook/growth/sales/cross-selling',
                             },
+                            {
+                                name: 'Cross sell motions',
+                                url: '/handbook/growth/sales/cross-sell-motions',
+                            },
                         ],
                     },
                     {
@@ -1255,37 +1277,16 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/selling-via-aws',
                     },
                     {
-                        name: 'Expansion, cross-sell & retention',
-                        url: '/handbook/growth/sales/expansion-and-retention',
-                        children: [
-                            {
-                                name: 'Account planning',
-                                url: '/handbook/growth/sales/account-planning',
-                            },
-                            {
-                                name: 'Cross-selling',
-                                url: '/handbook/growth/sales/cross-selling',
-                            },
-                            {
-                                name: 'Cross sell motions',
-                                url: '/handbook/growth/sales/cross-sell-motions',
-                            },
-                        ],
-                    },
-
-                    {
                         name: 'Utilization by business type',
                         url: '/handbook/growth/sales/utilization-by-business-type',
                     },
                     {
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
-                        children: [
-                            {
-                                name: 'New team member onboarding',
-                                url: '/handbook/growth/sales/new-hire-onboarding',
-                            },
-                        ],
+                    },
+                    {
+                        name: 'Hogpatch',
+                        url: '/handbook/growth/sales/hogpatch',
                     },
                 ],
             },
@@ -1991,6 +1992,20 @@ export const docsMenu = {
                         {
                             name: 'Nuxt.js',
                             url: '/docs/libraries/nuxt-js',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/libraries/nuxt-js',
+                                },
+                                {
+                                    name: '3.0 to 3.6',
+                                    url: '/docs/libraries/nuxt-js-3-6',
+                                },
+                                {
+                                    name: '2.16 and below',
+                                    url: '/docs/libraries/nuxt-js-2',
+                                },
+                            ],
                         },
                         {
                             name: 'n8n',
@@ -2398,12 +2413,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools and features',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
+                            name: 'PostHog AI',
+                            url: '/docs/posthog-ai',
                         },
                         {
                             name: 'Toolbar',
@@ -2421,6 +2436,10 @@ export const docsMenu = {
                         {
                             name: 'Activity',
                             url: '/docs/activity',
+                        },
+                        {
+                            name: 'SDK Doctor',
+                            url: '/docs/sdk-doctor',
                         },
                         {
                             name: 'Organizations',
@@ -3681,6 +3700,16 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/error-tracking/installation/nuxt',
+                            children: [
+                                {
+                                    name: '3.7 and above',
+                                    url: '/docs/error-tracking/installation/nuxt',
+                                },
+                                {
+                                    name: '3.6 and below',
+                                    url: '/docs/error-tracking/installation/nuxt-3-6',
+                                },
+                            ],
                         },
                         {
                             name: 'SvelteKit',
@@ -3689,6 +3718,10 @@ export const docsMenu = {
                         {
                             name: 'Hono',
                             url: '/docs/error-tracking/installation/hono',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/error-tracking/installation/android',
                         },
                         {
                             name: 'Manual/API',
@@ -3763,6 +3796,12 @@ export const docsMenu = {
                     url: '/docs/error-tracking/fingerprints',
                     icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
                 },
                 {
                     name: 'Guides',
@@ -4531,55 +4570,55 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/docs/max-ai',
+            url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
                 {
-                    name: 'Max AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/max-ai#how-do-i-access-max',
+                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
                     name: 'Data access',
-                    url: '/docs/max-ai#what-access-does-max-have-to-my-data',
+                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
                 {
                     name: 'Security',
-                    url: '/docs/max-ai#is-my-data-shared-with-third-parties',
+                    url: '/docs/posthog-ai#is-my-data-shared-with-third-parties',
                     icon: 'IconShield',
                     color: 'red',
                 },
             ],
         },
         {
-            name: 'Messaging',
+            name: 'Workflows',
             icon: 'IconMegaphone',
             color: 'red',
-            url: '/docs/messaging',
-            description: 'Create campaigns to send messages to your users.',
+            url: '/docs/workflows',
+            description: 'Create automations or campaigns to send messages to your users.',
             children: [
                 {
-                    name: 'Messaging',
+                    name: 'Workflows',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/messaging',
+                    url: '/docs/workflows',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
@@ -4588,21 +4627,21 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/messaging/start-here',
+                    url: '/docs/workflows/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Configure a messaging channel',
-                    url: '/docs/messaging/configure-channels',
+                    url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'Design your first campaign',
-                    url: '/docs/messaging/launch-campaign',
+                    name: 'Launch your first workflow',
+                    url: '/docs/workflows/launch-workflow',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
@@ -4611,8 +4650,8 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Campaign builder',
-                    url: '/docs/messaging/campaign-builder',
+                    name: 'Workflow builder',
+                    url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
@@ -4621,7 +4660,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Create a drip campaign',
-                    url: '/docs/messaging/email-drip-campaign',
+                    url: '/docs/workflows/email-drip-campaign',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
@@ -4630,7 +4669,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Troubleshooting and FAQs',
-                    url: '/docs/messaging/troubleshooting',
+                    url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'red',
                 },
@@ -4787,10 +4826,10 @@ export const productMenu = {
             url: '/llm-analytics',
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/max',
+            url: '/ai',
         },
         {
             name: 'Product OS',

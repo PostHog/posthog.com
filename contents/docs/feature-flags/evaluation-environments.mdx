@@ -9,6 +9,11 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Heads up!" type="caution">
+Evaluation environments are currently in alpha release. This feature may not be available in your PostHog instance yet. Contact support if you'd like early access to this feature.
+</CalloutBox>
 
 Evaluation environments provide fine-grained control over where and when your feature flags evaluate. By constraining flag evaluation to specific environments or contexts, you can reduce unnecessary evaluations, optimize costs, and better organize your feature management strategy.
 
@@ -287,7 +292,7 @@ To adopt evaluation environments in an existing PostHog setup:
 2. **Define tag taxonomy**: Create a consistent naming scheme for your environments
 3. **Configure tags**: Mark appropriate tags as evaluation constraints
 4. **Update high-impact flags first**: Start with flags that have the most evaluations
-5. **Update SDKs gradually**: Roll out SDK changes with `evaluation_environments` per environment
+5. **Update SDKs gradually**: Roll out [SDK changes](/docs/sdk-doctor) with `evaluation_environments` per environment
 6. **Monitor and adjust**: Track the impact and refine your tag strategy
 
 ## SDK support

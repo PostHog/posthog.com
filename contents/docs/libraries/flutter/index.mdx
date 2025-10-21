@@ -146,6 +146,18 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 <FlutterFeatureFlagsCode />
 
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```dart
+if (await Posthog().getFeatureFlag('experiment-feature-flag-key') == 'variant-name') {
+    // Do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 ## Session replay
 
 > **Note:** Session replay is supported on the Flutter Web, Android and iOS environments.

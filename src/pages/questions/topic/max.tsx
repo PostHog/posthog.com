@@ -124,8 +124,8 @@ export default function Questions({ location }: IProps) {
                         fetchMore={fetchMore}
                         sortBy={sortBy}
                         currentPage={{
-                            title: 'Max AI',
-                            url: `/questions/topic/max`,
+                            title: 'PostHog AI',
+                            url: `/questions/topic/ai`,
                         }}
                     />
                 </div>

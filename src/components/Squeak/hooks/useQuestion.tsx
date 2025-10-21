@@ -59,6 +59,7 @@ const query = (id: string | number, isModerator: boolean) =>
                 },
                 replies: {
                     sort: ['createdAt:asc'],
+                    publicationState: isModerator ? 'preview' : 'live',
                     populate: {
                         edits: {
                             sort: ['date:desc'],

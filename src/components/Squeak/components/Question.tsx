@@ -266,13 +266,13 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                                         <Logomark className="w-[16px]" />
                                     </span>
                                 </div>
-                                <strong>Max AI</strong>
+                                <strong>PostHog AI</strong>
                             </div>
                         </div>
                     }
                 >
                     <div className="text-sm max-w-64">
-                        Max AI is our resident AI assistant. Double-check responses for accuracy.
+                        PostHog AI is our resident AI assistant. Double-check responses for accuracy.
                     </div>
                 </Tooltip>
                 <div

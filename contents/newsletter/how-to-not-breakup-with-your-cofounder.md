@@ -79,7 +79,7 @@ Right now, we split our responsibilities around the products we care most about,
 
   * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM analytics](/docs/llm-analytics). He’s great at execution and understands the ins and outs of these products better than I.
 
-  * I’m focused on marketing, and AI-first products and features like [Max AI](/docs/max-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
+  * I’m focused on marketing, and AI-first products and features like [PostHog AI](/docs/posthog-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
 
 There are also a handful of things we _both_ want to be involved in, such as people and strategy. We think both of us being involved leads to the best decisions here, and keeps us aligned.
 

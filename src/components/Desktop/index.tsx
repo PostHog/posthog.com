@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import useProduct from 'hooks/useProduct'
-import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -13,10 +11,14 @@ import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
-import OSButton from 'components/OSButton'
+
+declare global {
+    interface Window {
+        __desktopLoaded?: boolean
+    }
+}
 
 interface Product {
     name: string
@@ -113,6 +115,12 @@ export const apps: AppItem[] = [
         url: '/roadmap',
         source: 'desktop',
     },
+    // {
+    //     label: 'Cool tech events',
+    //     Icon: <AppIcon name="invite" />,
+    //     url: '/events',
+    //     source: 'desktop',
+    // },
     {
         label: 'Company handbook',
         Icon: <AppIcon name="handbook" />,
@@ -204,7 +212,7 @@ export default function Desktop() {
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
 
-    function generateInitialPositions(): IconPositions {
+    function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
         // Default positions if container isn't available yet
@@ -227,7 +235,8 @@ export default function Desktop() {
 
         // Position productLinks starting from the left
         let currentColumn = 0
-        productLinks.forEach((app, index) => {
+        const leftIcons = columns === 1 ? [...productLinks, ...apps] : productLinks
+        leftIcons.forEach((app, index) => {
             const columnIndex = Math.floor(index / maxIconsPerColumn)
             const positionInColumn = index % maxIconsPerColumn
 
@@ -238,6 +247,10 @@ export default function Desktop() {
 
             currentColumn = Math.max(currentColumn, columnIndex + 1)
         })
+
+        if (columns === 1) {
+            return positions
+        }
 
         // Start from the rightmost position and flow left
         const rightmostStart = containerWidth - paddingHorizontal - iconWidth
@@ -254,6 +267,20 @@ export default function Desktop() {
                 y: startY + positionInColumn * iconHeight,
             }
         })
+
+        if (columns > 1) {
+            const isAnyIconOutOfBounds = Object.values(positions).some(
+                (position) =>
+                    position.x < 0 ||
+                    position.y < 0 ||
+                    position.x + iconWidth > containerWidth ||
+                    position.y + iconHeight > containerHeight
+            )
+
+            if (isAnyIconOutOfBounds) {
+                return generateInitialPositions(1)
+            }
+        }
 
         return positions
     }
@@ -293,6 +320,13 @@ export default function Desktop() {
             window.removeEventListener('resize', handleResize)
         }
     }, [posthogInstance])
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.__desktopLoaded = true
+            window.dispatchEvent(new CustomEvent('desktopLoaded'))
+        }
+    }, [])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }

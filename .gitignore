@@ -26,6 +26,7 @@ static/fonts/MatterSQItalicVF.woff
 static/fonts/MatterSQItalicVF.woff2
 static/fonts/MatterSQVF.woff
 static/fonts/MatterSQVF.woff2
+static/scripts/posthog-init.js
 yarn.lock
 .vercel
 .env
