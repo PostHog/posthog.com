@@ -119,114 +119,120 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
 
     return (
         <motion.div
-            className="h-full border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden"
+            className="h-full border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
             initial={{ width: 0 }}
             animate={{ width }}
             exit={{ width: 0 }}
             transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
         >
             <motion.div
-                className="h-full overflow-auto"
+                className="h-full flex flex-col"
                 style={{ width }}
                 initial={{ x: width }}
                 animate={{ x: 0 }}
                 exit={{ x: width }}
                 transition={{ duration: isResizing ? 0 : 0.3, ease: 'easeInOut' }}
             >
-                <div className="p-4 h-full flex flex-col">
-                    <div className="flex justify-between space-x-2">
-                        <div className="flex-1">
-                            <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
-                            <p className="m-0 opacity-50 text-sm mt-1">
-                                {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
-                            </p>
-                        </div>
-                        <aside>
-                            {isModerator && (
-                                <Tooltip
-                                    trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
-                                    delay={0}
-                                >
-                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
-                                    Edit roadmap item
-                                </Tooltip>
-                            )}
-                            <OSButton size="md" icon={<IconX />} onClick={handleClose} />
-                        </aside>
+                <div className="flex justify-between space-x-2 p-4 border-b border-primary">
+                    <div className="flex-1">
+                        <h4 className="m-0 text-lg leading-tight line-clamp-1">{roadmap.title}</h4>
+                        <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
                     </div>
-                    {roadmap.media?.gatsbyImageData && (
-                        <div className="mt-2">
-                            <GatsbyImage image={roadmap.media.gatsbyImageData} alt={roadmap.title} />
-                        </div>
-                    )}
-                    {hasProfiles && (
-                        <div className="p-2 border border-primary rounded-md bg-accent mt-2">
-                            {roadmap.profiles?.data?.map((profile) => {
-                                const avatar = profile.attributes?.avatar?.data?.attributes?.url
-                                const name = [profile.attributes?.firstName, profile.attributes?.lastName]
-                                    .filter(Boolean)
-                                    .join(' ')
-                                const team = profile.attributes?.teams?.data?.[0]
-                                return (
-                                    <Link
-                                        to={`/community/profiles/${profile.id}`}
-                                        state={{ newWindow: true }}
-                                        key={profile.id}
-                                        className="flex gap-2 items-center justify-between"
-                                    >
-                                        <div className="flex gap-2 items-center">
-                                            {avatar && (
-                                                <div
-                                                    className={`size-10 rounded-full overflow-hidden bg-${profile.attributes?.color}`}
-                                                >
-                                                    <CloudinaryImage
-                                                        className={`w-full`}
-                                                        src={avatar as `https://res.cloudinary.com/${string}`}
-                                                        alt={profile.attributes?.firstName}
-                                                    />
-                                                </div>
-                                            )}
-                                            <div>
-                                                <h5 className="m-0 leading-tight">{name}</h5>
-                                                <p className="!m-0 text-sm leading-tight">{team?.attributes?.name}</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            {team?.attributes?.miniCrest?.data?.attributes?.url && (
-                                                <CloudinaryImage
-                                                    className="w-10"
-                                                    src={
-                                                        team.attributes.miniCrest.data.attributes
-                                                            .url as `https://res.cloudinary.com/${string}`
-                                                    }
-                                                    alt={team.attributes.name}
-                                                />
-                                            )}
-                                        </div>
-                                    </Link>
-                                )
-                            })}
-                        </div>
-                    )}
-                    {roadmap.description && (
-                        <div className="mt-2">
-                            <Markdown>{roadmap.description}</Markdown>
-                        </div>
-                    )}
-                    {roadmap.cta?.url && (
-                        <div className="mt-auto">
-                            <OSButton
-                                asLink
-                                to={roadmap.cta.url}
-                                variant="secondary"
-                                width="full"
-                                state={{ newWindow: true }}
+                    <aside>
+                        {isModerator && (
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconPencil />} onClick={handleEditRoadmap} />}
+                                delay={0}
                             >
-                                {roadmap.cta.label}
-                            </OSButton>
-                        </div>
-                    )}
+                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" /> Edit
+                                roadmap item
+                            </Tooltip>
+                        )}
+                        <OSButton size="md" icon={<IconX />} onClick={handleClose} />
+                    </aside>
                 </div>
+                <div className="flex-1">
+                    <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
+                        {roadmap.media?.gatsbyImageData && (
+                            <div className="mt-2">
+                                <GatsbyImage image={roadmap.media.gatsbyImageData} alt={roadmap.title} />
+                            </div>
+                        )}
+                        {hasProfiles && (
+                            <div
+                                data-scheme="secondary"
+                                className="py-2 mx-4 px-4 border border-primary rounded-md bg-primary mt-4"
+                            >
+                                {roadmap.profiles?.data?.map((profile) => {
+                                    const avatar = profile.attributes?.avatar?.data?.attributes?.url
+                                    const name = [profile.attributes?.firstName, profile.attributes?.lastName]
+                                        .filter(Boolean)
+                                        .join(' ')
+                                    const team = profile.attributes?.teams?.data?.[0]
+                                    return (
+                                        <Link
+                                            to={`/community/profiles/${profile.id}`}
+                                            state={{ newWindow: true }}
+                                            key={profile.id}
+                                            className="group flex gap-2 items-center justify-between !no-underline"
+                                        >
+                                            <div className="flex gap-2 items-center">
+                                                {avatar && (
+                                                    <div
+                                                        className={`size-10 rounded-full overflow-hidden bg-${profile.attributes?.color}`}
+                                                    >
+                                                        <CloudinaryImage
+                                                            className={`w-full`}
+                                                            src={avatar as `https://res.cloudinary.com/${string}`}
+                                                            alt={profile.attributes?.firstName}
+                                                        />
+                                                    </div>
+                                                )}
+                                                <div>
+                                                    <h5 className="m-0 leading-tight group-hover:!underline">{name}</h5>
+                                                    <p className="!m-0 text-sm leading-tight">
+                                                        {team?.attributes?.name}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                {team?.attributes?.miniCrest?.data?.attributes?.url && (
+                                                    <CloudinaryImage
+                                                        className="w-10"
+                                                        src={
+                                                            team.attributes.miniCrest.data.attributes
+                                                                .url as `https://res.cloudinary.com/${string}`
+                                                        }
+                                                        alt={team.attributes.name}
+                                                    />
+                                                )}
+                                            </div>
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        )}
+                        {roadmap.description && (
+                            <div className="mt-2 py-2 px-4">
+                                <Markdown>{roadmap.description}</Markdown>
+                            </div>
+                        )}
+                    </ScrollArea>
+                </div>
+
+                {roadmap.cta?.url && (
+                    <div className="mt-auto py-2 px-4 border-t border-primary">
+                        <OSButton
+                            asLink
+                            to={roadmap.cta.url}
+                            variant="secondary"
+                            width="full"
+                            state={{ newWindow: true }}
+                        >
+                            {roadmap.cta.label}
+                        </OSButton>
+                    </div>
+                )}
 
                 {/* Resize handle */}
                 <motion.div
@@ -462,7 +468,7 @@ const RoadmapCards = ({
                                                     return (
                                                         <li
                                                             key={roadmap.id}
-                                                            className="p-0 mt-0 border-b border-primary"
+                                                            className="p-0 m-0 border-b border-primary"
                                                         >
                                                             <button
                                                                 data-scheme="secondary"

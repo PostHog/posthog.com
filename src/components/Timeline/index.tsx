@@ -251,7 +251,7 @@ export default function Timeline({
                             return `translate3d(${xValue}, 50%, 0) scale(${scaleValue})`
                         }}
                         style={{ width: windowWidth, y: 0, top: 0 }}
-                        className="absolute left-0 top-0 h-[48px] border-[2px] border-primary dark:border-[#d1d5db] rounded !m-0"
+                        className="absolute left-0 top-0 h-[48px] border-[2px] border-primary hover:border-input dark:border-[#d1d5db] bg-white/25 dark:bg-dark/25 rounded !m-0 cursor-grab"
                     />
                 </div>
             </div>

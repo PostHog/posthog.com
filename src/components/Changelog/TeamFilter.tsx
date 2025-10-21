@@ -19,6 +19,7 @@ export default function TeamFilter({ onChange, value }: { onChange: (value: stri
     return (
         <Select
             defaultValue={value}
+            dataScheme="primary"
             onValueChange={(value) => {
                 onChange(value)
             }}

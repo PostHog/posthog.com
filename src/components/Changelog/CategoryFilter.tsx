@@ -19,6 +19,7 @@ export default function CategoryFilter({ onChange, value }: { onChange: (value: 
     return (
         <Select
             defaultValue={value}
+            dataScheme="primary"
             onValueChange={(value) => {
                 onChange(value)
             }}
