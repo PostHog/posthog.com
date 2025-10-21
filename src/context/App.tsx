@@ -657,7 +657,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/videos': {
+    '/videos/play': {
         size: {
             min: {
                 width: 960,
