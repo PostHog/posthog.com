@@ -323,6 +323,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         ),
         label: 'feature/libraries',
     },
+    'sdks-doctor': {
+        feature: 'SDK doctor',
+        owner: ['growth'],
+        label: 'feature/sdk-doctor',
+    },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
         owner: [''],
