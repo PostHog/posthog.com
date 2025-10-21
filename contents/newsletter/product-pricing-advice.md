@@ -24,28 +24,52 @@ We care a lot about pricing at PostHog. As proof:
 
 All of this has meant we’ve thought, debated, and learned a lot about pricing. We’re sharing the best bits we’ve learned here. 
 
-## 1. Charge early
+## 1. How you price is who you are
+
+Pricing is often relegated to an afterthought when building a product, but it shouldn't be. It's as impactful to the overall product experience as the functionality or design.
+
+To show you how, imagine two [feature flag](/newsletter/feature-flag-mistakes) tools.
+
+The first charges by **seats** and **flags created**. 
+
+Their customers think about every flag and user they add, meaning they do less of both. The flags they do create are more important and are used more heavily. This model appeals to larger companies with more requests per flag, and that means enterprise features like auditability and access controls are more important.
+
+The second charges by **requests**. 
+
+This means more developers can access and create flags. There are more flags created, but where they put those flags becomes more important so they aren’t charged too much for requests. This appeals to smaller companies who ship more flags, so cost controls and DevEx features like local evaluation matter more.
+
+These two examples show **how much** you charge often doesn’t matter as much as **how** you charge. There are many ways this can vary like:
+
+- Usage-based pricing vs. seat-based pricing.
+- Pay-as-you-go vs. annual contracts vs. licenses.
+- Self-serve vs. custom contracts with sales.
+
+Deciding your pricing model comes down to your [ideal customer](/newsletter/ideal-customer-profile-framework). For us, that is [product engineers](/blog/what-is-a-product-engineer) at high-growth startups. The ability to self-serve and have pricing align with usage is important for them, so that is what we’ve gone with.
+
+## 2. Don't be afraid to charge early
 
 If you’re hoping that your product is a business, you should charge early for it. It’s easy to give things away, especially zero marginal cost software. It’s a lot harder to sell them.
 
-The feedback you get from customers is very different from what you get from free users. If you’re trying to build a successful business, free users can lead you down the wrong path. This is why acquiring reference **customers** is a core part of [finding product market fit](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers), for example.
+The feedback you get from free users is very different from what you get from customers. If you’re trying to build a successful business, free users can lead you down the wrong path. This is why acquiring reference **customers** is a core part of [finding product market fit](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers).
 
 There are two big reasons why companies don’t charge early:
 
 1. They are scared no one will pay them.
 2. They are afraid they are going to get pricing wrong.
 
-These fears ignore the excitement of getting people to pay them, the fact that it is best to know early if someone won’t pay you, and that everyone gets their pricing wrong. 
+![Charging early](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_10_21_T09_09_16_516_Z_216ab957a1.jpeg)
 
-For example, our early pricing was wildly different from our pricing now. It was a monthly subscription with a free trial and way fewer events.
+These fears ignore the excitement of getting people to pay, that it is best to know early if someone won’t pay you, and that everyone gets pricing wrong.
 
-![Early pricing](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_03_at_14_24_212x_097c5fc3f5.png)
+For example, our early pricing was wildly different from our pricing now. PostHog was a monthly subscription with a free trial and way fewer events. This evolved to be usage-based with a free tier for a single product, and then the multi-product, usage-based pricing with large free tiers we have now.
 
-## 2. It’s OK to change your pricing
+![PostHog's pricing evolution](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_21_at_10_35_36_2x_ea3196b5bc.png)
 
-What the above example shows is that your pricing is always going to be a bit wrong. We started as a monthly subscription but eventually changed to usage-based. We had paid self-hosted product but made the tough decision to [sunset it](/blog/sunsetting-helm-support-posthog).
+## 3. It’s OK to change your pricing
 
-To reach your full potential, you will need to change your pricing. Your product evolves, so should your pricing. All of your favorite companies do it:
+What the above example shows is that your pricing is always going to be a bit wrong. We started as a monthly subscription but eventually changed to usage-based. We had a paid self-hosted product, but made the tough decision to [sunset it](/blog/sunsetting-helm-support-posthog).
+
+To reach your full potential, you will need to change your pricing. Your product evolves, your pricing should too. All of your favorite companies do it:
 
 - **Notion** used to be paid only until [2020 when they added a free tier](https://www.notion.com/releases/2020-05-19) for personal use. They’ve since [expanded the free tier to remove any paid personal plans](https://www.notion.com/blog/notion-introduces-business-plan-and-expanded-free-plan), just focusing on paid teams plans.
 
@@ -59,7 +83,7 @@ Changing your pricing enables you to better align the value you create with what
 
 The important part of doing this is making sure you communicate the change well. Our tips for doing this include:
 
-- Communicating early. Figma announced pricing changes in December 2024 that took effect March 2025.
+- Communicate early. Figma announced pricing changes in December 2024 that took effect March 2025.
 
 - Give people a warning and a discount (grace period) if you are going to raise their prices.
 
@@ -67,109 +91,58 @@ The important part of doing this is making sure you communicate the change well.
 
 - We try to grandfather existing customers’ pricing unless it is more expensive or we have a very good reason not to.
 
-## 3. How you price is who you are
+## 4. Settle free tier debates before they happen
 
-Imagine two [feature flag](/newsletter/feature-flag-mistakes) tools, they charge by:
+The eternal questions for SaaS companies: How much free stuff should we give away? It's easy to either debate endlessly about this or fall into one of two extremes:
 
-1. Seats and flags created.
-2. Requests. 
+1. Give away as much as possible. Users love free stuff, increasing your free tier is a good way to get more users.
 
-Charging by seats and flags created will likely appeal to large enterprises who ship relatively few features. Enterprise features like auditability and access controls will likely be the focus.
+2. Charge for everything. This makes more money and money is good.
 
-Charging by requests means more developers can access and create flags, but might be more sensitive about where they put those flags in their app so they aren’t charged too much for requests.
+Ideally, there should be nuance to this. The best way to create this (and settle debates) is to have [clear principles for your free tier](/handbook/engineering/feature-pricing). For us, these are:
 
-These show the impact pricing can have on the overall product experience. **How much** you charge often doesn’t matter as much as **how** you charge and there are many ways this can vary like:
+- Hobbyists or pre-PMF startups should be able to use PostHog for free. This creates ultra-valuable [word-of-mouth growth](/newsletter/marketing-for-devs). GitHub famously does the same.
 
-- Usage-based pricing vs. seat-based pricing.
-- Pay-as-you-go vs. annual contracts.
-- Self-serve vs. custom contracts with sales.
+- Be more generous than competitors, making it a no-brainer to choose PostHog. This often means a larger free tier with more features on that free tier. For example, we're one of the few session replay tools that offers mobile replays for free.
 
-How you decide this likely comes down to your [ideal customer](/newsletter/ideal-customer-profile-framework). For us, that is [product engineers](/blog/what-is-a-product-engineer) at high-growth startups. The ability to self-serve and have usage-based pricing is important for them, so that is what we’ve gone with.
+- Every product should be priced separately. This means separate free tiers for each product. For example, LLM analytics is separate from product analytics, even though they both use "events." Multi-product companies like Atlassian and AWS are our models here.
 
-## 4. Know the three Cs of pricing
+- Features that increase stickiness should be free (with a reasonable limit). A good question to ask here is: "If I were to switch away to a competitor, what would I feel like I am losing?" It's tough to leave Figma when all your projects and designs are in one place.
 
-When it comes to setting your prices there are three Cs you should care about:
+Principles prevent every discussion about the free tier from becoming a debate, while avoiding the extremes of giving away too much or charging for too little.
 
-### Costs
+## 5. Billing will become a bottleneck
 
-For you to set prices properly, you need transparency into your costs. 
+If you want to go beyond the simple subscription model most billing systems offer, you will need at least one engineer dedicated to it. 
 
-- How much does the infrastructure behind your product cost to run?
-- What are the most expensive bits of your stack?
-- How do these costs scale?
-
-Our [infrastructure team](/teams/infrastructure) has done a lot of work on helping us understand this with tools like AWS cost allocation tags. 
-
-Having an accurate picture of our costs enables us to price with enough margin to be sustainable as a business and discover areas for savings (which often get [passed along to users](/blog/session-replay-pricing)).
-
-### Competitors
-
-Users will size you up with competitors, so you better know how they are pricing.
-
-“But I don’t have competitors…” you might say. There is almost always an alternative out there. How are your users accomplishing what your product accomplishes now? More importantly, how much does that cost?
-
-Knowing how much competitors charge enables you to create a pricing model and compare your proposed pricing with them. Although you can’t always have the lowest price for all customers, this enables you to have competitive (ideally, cheaper) pricing for your ideal customers.
-
-![Pricing model](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_10_15_at_11_48_112x_4a659ff7c3.png)
-
-### Company
-
-When I was first interviewing at PostHog, [James](/community/profiles/27732) very proudly told me it was default alive. This means that PostHog would become profitable before it ran out of money. 
-
-Knowing this is a result of financial modelling [our ops team](/teams/people) does. We have hiring plans, revenue projections, team budgets and financial statements that help us figure out if we’re making enough and growing fast enough to be a world-class business. If not, pricing is one of the levers that can change this.
-
-## 5. Be careful with your free tier
-
-Your free tier is important for multiple different reasons:
-
-- Your free tier is going to be how users experience your product for the first time.
-
-- Increasing it is easy. Decreasing it is painful. Either way, changing your free tier will impact your revenue. Increasing [our survey’s](/surveys) free tier from 250 responses to 1500 lost us 55% of its short-term revenue.
-
-- The features that **aren’t** on your free tier will be the ones customers need to upgrade to get.
-
-If you aren’t careful with your free tier, you can either lose a lot of money or hamstring your growth. Our approach to getting this right involved [developing principles for our free tier](/handbook/engineering/feature-pricing) that include:
-
-- Hobbyists or pre-PMF startups should be able to use PostHog for free.
-- Be more generous than competitors, making it a no brainer to choose PostHog.
-- Features that increase our stickiness should be free (with a reasonable limit).
-- Features that need to be experienced in order to demonstrate value should be available on the free plan but with a reasonable limit.
-- Features that have the potential to [grow our word-of-mouth](/newsletter/marketing-for-devs) should be free. For example, we shouldn't (and don't) charge for extra users in an org because the more people we get inside PostHog, the better.
-
-These principles help us ensure that our free tier fits our business and make future decisions about our free tier easier.
-
-## 6. Billing is a likely bottleneck
-
-Billing, AKA the process of charging customers, is a lot of work. We have an [entire Glue team](/newsletter/glue-teams-vs-back-office-teams) as well as a support engineer dedicated to it. 
+This has been the case at PostHog as long as I’ve been here. Three years ago, billing was the [growth team’s responsibility](/blog/what-is-a-growth-engineer), but eventually transitioned to [a glue team focused on billing](/newsletter/glue-teams-vs-back-office-teams), which now has 4 people (as well as a support engineer).
 
 Why do we need so many people involved in billing?
 
-- It enables us to charge the way we want. We don’t need to have simple, seat based pricing. We can have all of our products priced separately with add-ons and platform packages instead.
+- It enables us to charge the way we want. It can be tempting to just accept the simple subscription model most billing systems offer, but this limits your ability to have pricing that aligns with your value creation. Our billing team lets us price products, add-ons, and platform packages how we want.
 
-- The billing system needs the flexibility to handle many situations such as discounts, contracts, credits, invoicing, and weird payment methods (pay by cheque anyone?)
+- The billing system needs the flexibility to handle many situations such as discounts, contracts, credits, invoicing, and weird payment methods (pay by cheque anyone?). 
 
-- It needs to be reliable. Charge too much and customers will be super unhappy. Charge too little (or missing failed/late payments) and you are literally leaving money on the table.
+- It needs to be reliable. Charge too much and customers will be super unhappy. Charge too little (or miss failed/late payments) and you are literally leaving money on the table.
 
-Billing has had at least one engineer dedicated to it as long as I’ve been at PostHog. Earlier, it was the [growth team’s responsibility](/blog/what-is-a-growth-engineer), but eventually transitioned to [a team entirely focused on billing](/teams/billing), which now has 4 people. This has helped ensure billing doesn’t become a bottleneck.
+Without someone dedicated to billing, pricing launches will be painful, your ability to charge users will be limited, and more errors and unhappy customers will pop up.
 
-## 7. Help people trust your pricing
+## 6. Make your pricing more predictable
 
-Being burned by pricing is one of the areas that can hurt the most. It costs customers real money when things are messed up here. 
+Everyone hates being charged more than they expected. This, of course, hurts the customer, but it also hurts you, as it leads to more churn and a worse reputation.
 
-Being burned doesn’t just mean overcharging or mischarging, it also means being unpredictable or uncontrollable. Our billing team has found that more unpredictability means more churn. 
+The best way to prevent this is to make your pricing more predictable. Some ways to do this include:
 
-We’ve developed both principles and tools to help people trust our pricing more. They include:
-
-- A transparent and detailed [pricing page](/pricing). You’ll know roughly how much you’ll pay for PostHog before you start. We list our [sales discounts](/handbook/growth/sales/contract-rules) publicly too.
+- Creating a transparent and detailed [pricing page](/pricing). [Stripe](https://stripe.com/pricing) and [Twilio](https://www.twilio.com/pricing) are great examples of this. People want to know roughly how much they'll pay before they start. We take this a step further and list our [sales discounts](/handbook/growth/sales/contract-rules) publicly too.
     
 ![Pricing page](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_15_at_11_54_142x_e558079a03.png)
     
-- Projected spend, [a billable usage dashboard](/templates/posthog-billable-usage), and a [docs page on ways to estimate your spend](/docs/billing/estimating-usage-costs).
+- Give users a clear view on how much they've spent so far and how much they are projected to spend. We do this on our billing page, along with [a billable usage dashboard](/templates/posthog-billable-usage) and a [docs page on ways to estimate your spend](/docs/billing/estimating-usage-costs).
 
-- Spend limits for all of our products. If you don’t want to pay us anything, we’ll be sure to respect that.
+- Add spend limits. If customers don't want to pay over a certain amount, respect that, but make it clear what they'll lose when they hit the cap.
 
-- Docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs).
+- Help users tune their spend to what they're actually using. We do this by providing docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
 
-- Generally being generous with refunds. For example, we have [side project insurance](/side-project-insurance) that protects customers from huge bills if their product goes viral.
+- As a last resort, be generous with refunds. For example, we have [side project insurance](/side-project-insurance) that protects customers from huge bills if their product goes viral.
 
-These may seem like leaving money on the table, but we see them as doing the right thing. I’m sure others have had success with the dodgiest pricing tactics possible, but the trust we’ve built with customers is core to what makes PostHog successful, so we won’t be changing these.
+Some may call this "leaving money on the table" but we see it as doing the right thing. I’m sure others have had success with the dodgiest pricing tactics possible, but the trust we’ve built with customers is core to what makes PostHog successful, so we won’t be changing these.
