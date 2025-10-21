@@ -6,7 +6,7 @@ showTitle: true
 
 SDK doctor helps you monitor and maintain your PostHog SDK integrations by automatically detecting version issues, configuration problems, and implementation patterns across your applications.
 
-> **Note:** SDK doctor is currently in beta. Give feedback by [raising and issue](https://github.com/PostHog/posthog/issues/new?labels=feature%2Fsdk-doctor).
+> **Note:** SDK doctor is currently in beta. Give feedback by [raising an issue](https://github.com/PostHog/posthog/issues/new?labels=feature%2Fsdk-doctor).
 
 ## What is SDK doctor?
 
