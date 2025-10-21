@@ -96,6 +96,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['platform-features'],
         label: 'feature/comments',
     },
+    'csp-tracking': {
+        feature: 'CSP tracking',
+        owner: ['web-analytics'],
+        label: 'feature/csp-tracking',
+    },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
         owner: ['revenue-analytics'],
@@ -425,7 +430,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
 }
 
-export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}) => {
+export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}): { features: Feature[] } => {
     const features = Object.entries(FEATURE_DATA).reduce((acc, [key, feature]) => {
         const featureWithSlug: Feature = {
             ...feature,
