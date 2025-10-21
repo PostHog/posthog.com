@@ -64,6 +64,6 @@ const InstallationPlatforms = ({ urlFragment = '' }: InstallationPlatformsProps)
         },
     ]
 
-    return <List className="grid sm:grid-cols-2" items={platforms} />
+    return <List className="grid sm:grid-cols-2 mb-4" items={platforms} />
 }
 export default InstallationPlatforms
