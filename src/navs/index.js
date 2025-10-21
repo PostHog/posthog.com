@@ -2438,7 +2438,7 @@ export const docsMenu = {
                             url: '/docs/activity',
                         },
                         {
-                            name: 'SDK Doctor',
+                            name: 'SDK doctor',
                             url: '/docs/sdk-doctor',
                         },
                         {

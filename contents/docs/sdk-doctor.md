@@ -4,9 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-SDK doctor helps you monitor and maintain your PostHog SDK integrations by automatically detecting version issues, configuration problems, and implementation patterns across your applications.
+[SDK doctor](https://app.posthog.com/#panel=sdk-doctor) helps you monitor and maintain your PostHog SDK integrations by automatically detecting version issues, configuration problems, and implementation patterns across your applications.
 
 > **Note:** SDK doctor is currently in beta. Give feedback by [raising an issue](https://github.com/PostHog/posthog/issues/new?labels=feature%2Fsdk-doctor).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sdk_light_0e172bf201.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/sdk_dark_4c91c12471.png"
+  alt="SDK Doctor"
+  classes="rounded"
+/>
 
 ## What is SDK doctor?
 
@@ -48,9 +55,11 @@ SDK doctor analyzes recently ingested events to extract SDK version information,
 SDK doctor's approach tries to reduce noise from our frequent releases, but still lets you know when your SDK version is too outdated for comfort:
 
 - **Grace period**: Versions less than 7 days old are never flagged, even if newer versions exists.
-- **Major versions**: Always flagged if you're not on the current major version (e.g., you're still using v1.x when v2.x is available) or if your version is over 1 year old
+- **Major versions**: Always flagged if you're not on the current major version (e.g., you're still using v1.x when v2.x is available)
 - **Minor versions**: Flagged if 3+ minor versions behind, or more than 6 months old
-- **Patch versions**: Flagged if 5+ patch versions behind, or more than 3 months old
+- **Patch versions**: Never flagged
+
+SDK doctor will also notify you if your SDK version isn't officially "outdated", but is old enough that an update is recommended. For mobile SDKs, you'll see a warning if the version is more than 6 months old. For all other SDKs, the threshold is 4 months. Upgrading to a newer version helps you benefit from recent fixes and features.
 
 ## Accessing SDK doctor
 
@@ -88,11 +97,15 @@ SDK doctor uses badges to quickly communicate SDK status:
 
 ### Why don't I see all my SDKs?
 
-SDK doctor only shows SDKs that have sent events recently. If you've just installed an SDK or it's in a low-traffic environment, it may take time to appear.
+SDK doctor only shows SDKs that have sent events in the last 7 days. If you've just installed an SDK or it's in a low-traffic environment, it may take time to appear.
 
 ### How often does SDK doctor update?
 
 SDK doctor samples your recent events when you open PostHog. Event samples and SDK versions are cached for 24 hours for your team. Use the `Scan events` button to re-sample.
+
+### Why am I seeing several versions for the same SDK?
+
+This means that events have been detected from multiple SDK versions within the last 7 days. If you’ve recently upgraded your SDK, seeing multiple versions is expected and can be safely ignored. However, if it’s been a while since your last upgrade, it could indicate that different versions of the SDK are still running at the same time. In that case, review your deployment to ensure older versions aren’t still in use.
 
 ### What happens when I update an SDK?
 
