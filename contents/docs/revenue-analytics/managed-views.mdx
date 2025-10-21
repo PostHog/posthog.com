@@ -33,7 +33,7 @@ Example view names assuming one data warehouse source and one event:
 
 ### Charge
 
-The `charge` view is a low-level table displaying all of the charges you've made. It does not aggregate data by any means and simply exposes the data we're collecting from your sources in standardized fashion. This table also handles converting the data from the original currency to your [reporting currency](/docs/getting-started#choosing-your-reporting-currency).
+The `charge` view is a low-level table displaying all of the charges you've made. It does not aggregate data by any means and simply exposes the data we're collecting from your sources in standardized fashion. This table also handles converting the data from the original currency to your [reporting currency](/docs/revenue-analytics/start-here#quest-item-choose-your-reporting-currency).
 
 You should prefer the `revenue_item` view over the `charge` view since it implements [deferred revenue](/docs/revenue-analytics/deferred-revenue).
 
@@ -70,7 +70,7 @@ You can look at the table schema in the [SQL editor](/docs/data-warehouse/query)
 
 ### Revenue Item
 
-The `revenue_item` view is a table containing the list of all revenue items you have in your sources. It applies [deferred revenue](/docs/revenue-analytics/deferred-revenue) and [currency conversion](/docs/revenue-analytics/faq#how-do-you-convert-revenue-in-different-currencies) to the data automatically.
+The `revenue_item` view is a table containing the list of all revenue items you have in your sources. It applies [deferred revenue](/docs/revenue-analytics/deferred-revenue) and [currency conversion](/docs/revenue-analytics/common-questions#how-do-you-convert-revenue-in-different-currencies) to the data automatically.
 
 This data is inferred both from your events and data warehouse sources. For data warehouse sources, we consider all of your invoices plus all of your invoiceless charges. You can omit invoiceless charges in the [settings](/docs/revenue-analytics/payment-platforms).
 

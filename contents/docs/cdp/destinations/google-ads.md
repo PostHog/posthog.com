@@ -4,13 +4,11 @@ templateId:
     - template-google-ads
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 > **IMPORTANT:** This is an experimental destination that we do not provide official support for. Check out [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for more details on installing the integration.
 
-<Requirements />
 
 You'll also need access to the relevant Google Ads account.
 

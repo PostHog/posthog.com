@@ -107,13 +107,12 @@ The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and e
 
 ## Creating the batch export
 
-1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
-3. Click "Create export workflow".
-4. Select **BigQuery** as the batch export destination.
-5. Fill in the necessary [configuration details](#bigquery-configuration).
-6. Finalize the creation by clicking on "Create".
-7. Done! The batch export will schedule its first run on the start of the next period.
+1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+2. Click **+ New destination** in the top-right corner.
+3. Select **BigQuery** as the batch export destination.
+4. Fill in the necessary [configuration details](#bigquery-configuration).
+5. Finalize the creation by clicking on **Create**.
+6. Done! The batch export will schedule its first run on the start of the next period.
 
 ## BigQuery configuration
 

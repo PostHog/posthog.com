@@ -29,7 +29,7 @@ From our [roadmap](/roadmap), here's what we're working on next:
 - Customer analytics `#team-customer-analytics`
 - 100x the toolbar
 - Revenue analytics `#team-revenue-analytics`
-- Workflows `#team-messaging-cdp`
+- Workflows `#team-workflows`
 
 ## How we pick new products
 
