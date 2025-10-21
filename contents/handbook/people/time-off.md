@@ -82,21 +82,13 @@ If you are summonsed for jury duty, please let Fraser know right away - we can o
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 6 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year the following guidance is relevant for parental leave: 
+This table explains the amount of paid time off, depending on how long you've been at PostHog
 
 | Time at posthog | maternity leave | paternity leave |
 | - | - | - |
 | under 6 months | 3 weeks | 2 - 3 weeks |
 | 6 - 12 months | 6 weeks | 2 - 3 weeks |
 | over 12 months | up to 24 weeks | 6 weeks |
-
-### Maternity leave
-
-The above is in reference to Paid Time Off (PTO) - for any expecting mothers, please just let Fraser know the total amount of time you expect to take off, as soons as possible. 
-
-### Paternity leave
-
-We do not offer unpaid leave for Paternity leave. 
 
 > Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  Wherever there is a discrepancy between these local regulations and PostHog policy, we will merge the local minimum rules with the above.
 
@@ -106,6 +98,13 @@ Parental leave isn't supposed to be combined with our unlimited PTO policy here 
 
 Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
 
+### Maternity leave
+
+The above is in reference to Paid Time Off (PTO) - for any expecting mothers, please just let Fraser know the total amount of time you expect to take off, as soons as possible. 
+
+### Paternity leave
+
+We do not offer unpaid leave for Paternity leave. 
 
 ## Birthday and anniversaries
 
