@@ -419,6 +419,20 @@ const RoadmapCards = ({
         if (!viewport) return
 
         const handleWheel = (e: WheelEvent) => {
+            const targetViewport =
+                e.target instanceof Element
+                    ? (e.target.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null)
+                    : null
+            const targetViewportChild = targetViewport?.querySelector('div') as HTMLElement | null
+
+            if (
+                targetViewport &&
+                targetViewportChild &&
+                targetViewport !== viewport &&
+                targetViewportChild.getBoundingClientRect().height > targetViewport.getBoundingClientRect().height
+            )
+                return
+
             // Only handle vertical scrolling (deltaY)
             if (e.deltaY !== 0) {
                 e.preventDefault()
