@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
+import { IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
@@ -19,6 +19,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import type { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useWindow } from '../context/Window'
 import { ZoomImage } from 'components/ZoomImage'
 
@@ -34,7 +35,7 @@ type RoadmapNode = {
         url?: string
     }
     media?: {
-        gatsbyImageData?: any
+        gatsbyImageData?: IGatsbyImageData
     }
     profiles?: {
         data?: Array<{
@@ -750,6 +751,34 @@ export default function Changelog(): JSX.Element {
         }
     }
 
+    const handleDownloadCSV = () => {
+        const headers = ['Title', 'Date', 'Team', 'Description']
+        const escapeCSV = (value: unknown) => {
+            const str = value == null ? '' : String(value)
+            return `"${str.replace(/"/g, '""')}"`
+        }
+        const rows: Array<[string, string, string, string]> = filteredData.map((item: RoadmapNode) => [
+            item.title,
+            item.date,
+            item.teams?.data?.[0]?.attributes?.name || '',
+            item.description || '',
+        ])
+        const csv = [
+            headers.join(','),
+            ...rows.map((row: [string, string, string, string]) => row.map(escapeCSV).join(',')),
+        ].join('\n')
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'roadmap.csv'
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        URL.revokeObjectURL(url)
+    }
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -773,13 +802,24 @@ export default function Changelog(): JSX.Element {
                                 categoryFilterValue={categoryFilter}
                             />
                             {isModerator && (
-                                <Tooltip
-                                    trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
-                                    delay={0}
-                                >
-                                    <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
-                                    Add roadmap item
-                                </Tooltip>
+                                <div className="space-x-1">
+                                    <Tooltip
+                                        trigger={<OSButton size="md" icon={<IconPlus />} onClick={handleAddFeature} />}
+                                        delay={0}
+                                    >
+                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                        Add roadmap item
+                                    </Tooltip>
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />
+                                        }
+                                        delay={0}
+                                    >
+                                        <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                        Download as CSV
+                                    </Tooltip>
+                                </div>
                             )}
                         </div>
 
