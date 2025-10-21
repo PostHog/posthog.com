@@ -15,7 +15,7 @@ SDK doctor is a diagnostic tool that monitors your PostHog SDK version to identi
 - **Outdated SDK versions** – Notifies you when your SDKs are far behind the latest release
 - **Version fragmentation** – Shows you if multiple versions of the same SDK are in use in recent events 
 
-SDK doctor runs when you open PostHog, analyzing recent events to provide actionable insights about the health of yourPostHog integration. You can also run it again with the `Scan events` button
+SDK doctor analyzes recent events to provide actionable insights about your PostHog integrations. It analyzes recent events when you open PostHog, and you can run it manually with the **Scan events** button.
 
 ## Supported SDKs
 
