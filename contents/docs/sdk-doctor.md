@@ -108,6 +108,6 @@ No. SDK doctor analyzes only events that have already been ingested.
 
 SDK doctor is actively being developed. We'd love your feedback:
 
-- [Report bugs ](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml)or [request features](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) 
+- [Report bugs](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) or [request features](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) 
 - Use the feedback link at the top of the SDK doctor side panel
 
