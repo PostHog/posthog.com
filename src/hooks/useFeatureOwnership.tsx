@@ -124,7 +124,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -133,7 +133,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-warehouse': {
         feature: 'Data warehouse',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -163,7 +163,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -250,7 +250,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/pipelines',
     },
     platform: {
@@ -275,7 +275,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -330,10 +330,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                     Mobile team
                 </a>{' '}
                 for triage, loop in
-                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">
-                    #support-mobile
-                </PrivateLink>{' '}
-                as needed.
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
+                needed.
             </>
         ),
         label: 'feature/mobile',
@@ -371,11 +369,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: false,
     },
     sso: {
