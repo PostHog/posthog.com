@@ -10,7 +10,7 @@ We build for the people building the **most-loved products** at **high-growth st
 
 Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** – customers that are likely to later become high-growth customers (e.g. PostHog itself during YC). We should be in maintenance mode for **hobbyists**, such as engineers building side projects. We want to be the first tool that technical founders add to their product.
 
-Because we have a lot of products, we support a few different _personas_, depending on the stage of the company (see [our current persona](#our-current-persona) section below).
+Because we have a lot of products, we support a few different _personas_, depending on the stage of the company (see [our current persona](#personas-vary-by-product-focus-and-maturity) section below).
 
 ## Our current ICP
 
@@ -27,17 +27,19 @@ Each team will focus more or less on different members of the product team. This
 
 As companies get bigger, the type of person that uses a product changes. As an example:
 
-- We built product analytics for engineers at startups
-- As those companies get a little bit bigger, they'll hire Product Managers who will mostly use product analytics. PMs have more complicated requirements for what a product analytics tool needs to do
-- Even bigger companies often have specialised "analytics engineers". These people are the most demanding.
+- We initially built product analytics for engineers at startups.
+- As those companies get a little bit bigger, they'll hire Product Managers who will mostly use product analytics. PMs have more complicated requirements for what a product analytics tool needs to do.
+- Even bigger companies often have specialized "analytics engineers." These people are the most demanding.
 
-Some of our products will have multiple personas. It's up to each product team to decide who those are, and how to prioritise between them. 
+Each product should start with a single persona, usually an early person (preferably engineer) at a startup. Teams should make sure to build a really good product with PMF for that single persona. As the product and user-base matures, new personas will emerge as users. You only serve that new persona if you've found PMF and satisfied requirements for the initial persona.
+
+How do you know if you have PMF and satisfied requirements? Look at churn. If the initial persona is churning from your product, you still have work to do. If instead the product has been handed off to another persona in the org, and _they_ are churning, that's an indication that you may need to start supporting the needs of this next persona.
 
 We've not always been successful at building products for personas other than engineers. We're now at a stage where we need to be in order to continue growing. 
 
 ### New products
 
-With AI, we think the biggest change that has happened and will happen is: generalists > specialists. Before, products would be built by teams of engineers, PMs, designers, marketeers and data engineers. Now, a single builder, using AI, can do a lot of these jobs, and that'll continue to be more true over time.
+With AI, we think the biggest change that has happened and will happen is: generalists > specialists. Before, products would be built by teams of engineers, PMs, designers, marketers and data engineers. Now, a single builder, using AI, can do a lot of these jobs, and that'll continue to be more true over time.
 
 Builders, whether they call themselves developers, product engineers or founders, have always been the most excited users of PostHog, and the keenest to use new products. **That means we want to build new products a builder would use**, products like error tracking, logs and LLM analytics.
 
