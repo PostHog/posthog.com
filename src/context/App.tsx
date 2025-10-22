@@ -1165,6 +1165,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   path: newWindow.path,
                                   fromHistory: newWindow.fromHistory,
                                   props: newWindow.props,
+                                  location: newWindow.location,
                               }
                             : w
                     )
