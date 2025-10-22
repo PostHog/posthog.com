@@ -19,7 +19,7 @@ The unit that matches usage the closest is token consumption. This means to fix 
 
 To keep our AI pricing simple, this pricing applies to all AI features once they are in general availability, that means per-product AI features as well as Session summaries and Deep research.
 
-So that users can learn how to use PostHog without worrying about being charged, we are keeping chats that refer to our documentaion free without a limit.
+So that users can learn how to use PostHog without worrying about being charged, we are keeping chats that refer to our documentation free without a limit.
 
 ### How users should think about our products
 
