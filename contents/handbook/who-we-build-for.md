@@ -23,7 +23,7 @@ Because we have a lot of products, we support a few different _personas_, depend
 
 Each team will focus more or less on different members of the product team. This is detailed on their team pages.
 
-## Our current Persona
+## Personas vary by product focus and maturity
 
 As companies get bigger, the type of person that uses a product changes. As an example:
 
