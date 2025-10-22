@@ -2711,8 +2711,8 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
-                            name: 'Annual plans',
-                            url: '/docs/billing/annual-plans',
+                            name: 'Pre-paid plans',
+                            url: '/docs/billing/pre-paid-plans',
                         },
                         {
                             name: 'Spike detection',
