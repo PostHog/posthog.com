@@ -6,7 +6,7 @@ showTitle: true
 
 > Technically, most of what we do is _demand capture_ – converting existing intent into action. That intent often comes from word of mouth or brand-driven awareness. That’s the real demand gen. But for the sake of clarity, we’re calling this "demand gen" because that's what people usually call it in the industry.
 
-## Why demand gem
+## Why demand gen
 
 We’re in a strong position today. We’ve got a healthy volume of high-quality inbound leads driven by word of mouth and general brand love/awareness. That won’t last forever.
 
