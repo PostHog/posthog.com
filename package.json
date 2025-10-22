@@ -53,6 +53,7 @@
         "@radix-ui/react-menubar": "^1.1.6",
         "@radix-ui/react-tabs": "^1.1.4",
         "@tailwindcss/container-queries": "^0.1.1",
+        "@tanstack/react-virtual": "^3.13.12",
         "@types/lodash.groupby": "^4.6.7",
         "@types/react-slick": "^0.23.10",
         "@types/styled-components": "^5.1.26",
