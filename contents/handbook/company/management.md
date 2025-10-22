@@ -1,3 +1,7 @@
+MANAGER SKILLS VS ENGINEERING SKILLS, PROMOTION / DEMOTION ✔️
+NOT PERMANENT ✔️
+UNDERSTANDING CUSTOMERS AND THEIR NEEDS
+
 ---
 title: Managers and management
 sidebar: Handbook
@@ -107,6 +111,14 @@ Two things:
 - If you think your team needs someone, make a [new hire request](https://github.com/PostHog/company-internal/issues/new/choose). The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
 
 See the `#technical-interviewers` channel for more info here. 
+
+## What you can expect as a manager
+
+Management roles at PostHog are often (but not always) temporary. That's because as the company changes, our needs for different people in different roles will change as well. Because all of our managers are also strong ICs (individual contributors), sometimes putting someone back into an IC role makes sense if that's what's best for the company. This has happened many times with people at PostHog, some who have gone back and forth between being a manager and not being a manager multiple times (hi Marius!).
+
+As such, management roles are paid on the same pay scale as other ICs. Becoming a manager does not mean you get a pay raise, and going from a manager role back to an IC role does not mean you get a pay decrease. 
+
+Management is a skill of its own, and it's not any more important than any other skills that make someone a great IC. It's possible that you may be a manager for a short time, but it becomes clear that your strengths lie primarily in the other skills that are involved with being an IC. In this case we might move you back to a pure IC position, where your skills can really shine, and move someone else from your team or from around the company into the manager / team lead role.
 
 ## Recommended reading
 
