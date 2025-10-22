@@ -2438,6 +2438,10 @@ export const docsMenu = {
                             url: '/docs/activity',
                         },
                         {
+                            name: 'SDK doctor',
+                            url: '/docs/sdk-doctor',
+                        },
+                        {
                             name: 'Organizations',
                             url: '/docs/settings/organizations',
                         },

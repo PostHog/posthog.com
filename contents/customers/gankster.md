@@ -1,5 +1,5 @@
 ---
-title: How Gankster leveled up retention with Max AI
+title: How Gankster leveled up retention with PostHog AI
 customer: Gankster
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/gankster_f4fd8da892.jpg
@@ -22,12 +22,12 @@ After adopting PostHog for product analytics, Gankster’s usage quickly grew as
 
 Cohorts are especially useful for Gankster, as every time the team launches a new feature they’ll set up cohorts to segment users by their adoption rate and discovery path. Armed with this, Dan can create insights to track retention and discover new opportunities. Often, he uses SQL insights to create bespoke visualizations. 
 
-“SQL is a pain sometimes,” admits Dan. “We have a shared Slack channel with PostHog engineers for support questions and I often hammer them with questions so I can identify how we can best hook in new users. Max AI has made this a lot easier lately, though.”
+“SQL is a pain sometimes,” admits Dan. “We have a shared Slack channel with PostHog engineers for support questions and I often hammer them with questions so I can identify how we can best hook in new users. PostHog AI has made this a lot easier lately, though.”
 
-### Improving user retention with Max AI
-Max AI, the AI product manager available both in PostHog and our docs, can quickly draft SQL queries for Dan, as well as search existing insights or create dashboards. Like other AI tools, it isn’t perfect, but for an engineer like Dan who can validate the work, it’s an effective shortcut to the information he needs. 
+### Improving user retention with PostHog AI
+PostHog AI, the AI product manager available both in PostHog and our docs, can quickly draft SQL queries for Dan, as well as search existing insights or create dashboards. Like other AI tools, it isn’t perfect, but for an engineer like Dan who can validate the work, it’s an effective shortcut to the information he needs. 
 
-“I get close to breaking up with Max sometimes,” says Dan. “Yesterday we had a rough day together trying to make some particularly big queries. But it’s still in beta right now and it’s recently been getting a lot better.”
+“I get close to breaking up with PostHog AI sometimes,” says Dan. “Yesterday we had a rough day together trying to make some particularly big queries. But it’s still in beta right now and it’s recently been getting a lot better.”
 
 Creating insights in this way, the team has found some surprising ways to boost retention. Analyzing active users, for example, recently revealed an unexpected nuance that led to changes across the entire sign-up flow.
 

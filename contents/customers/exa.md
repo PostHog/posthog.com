@@ -1,5 +1,5 @@
 ---
-title: Why Exa loves PostHog’s Max AI
+title: Why Exa loves PostHog AI
 customer: Exa
 logo: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/lovable_dark_png_bf5d7c603c.png
@@ -14,7 +14,7 @@ users:
 toolsUsed:
     - Product analytics
     - Session replay
-    - Max AI
+    - PostHog AI
 date: 2025-08-19
 ---
 
@@ -38,7 +38,7 @@ Eventually, frustrated with a scattered stack, the team decided to centralize as
 
 Now, with analytics centralized into PostHog, the team can much more flexibly and reliably interrogate data from multiple sources using a mix of ready-made visualization tools ([funnels](/docs/product-analytics/funnels), [paths](/docs/product-analytics/paths), etc.) and [SQL](/docs/data-warehouse/sql) when needed.
 
-“The best thing for me is [Max AI](/max),” says Liam. “It’s really nice to have it help with SQL queries when you’re like 80-90% of the way there and it can finish them for you. If I get something wrong with one of my SQL operations, Max AI can just fix it up for me.”
+“The best thing for me is [PostHog AI](/ai),” says Liam. “It’s really nice to have it help with SQL queries when you’re like 80-90% of the way there and it can finish them for you. If I get something wrong with one of my SQL operations, PostHog AI can just fix it up for me.”
 
 Exa didn’t stop at just bringing analytics into PostHog, however. Tools such as session replay have also enabled the team to debug errors and even ship code faster than before.
 
