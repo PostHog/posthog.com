@@ -108,7 +108,7 @@ const body = {
     }
 };
 
-const url = `${process.env.POSTHOG_API_HOST}/i/v0/e/`;
+const url = "<ph_client_api_host>/i/v0/e/";
 
 fetch(url, {
     method: 'POST',
@@ -181,7 +181,7 @@ const headers = {
 };
 
 const body = {
-    "api_key": process.env.POSTHOG_API_KEY,
+    "api_key": "<ph_project_api_key>",
     "event": "big_request",
     "timestamp": "2022-10-21 09:03:11.913767",
     "properties": {
@@ -191,7 +191,7 @@ const body = {
     }
 };
 
-const url = `${process.env.POSTHOG_API_HOST}/i/v0/e/`;
+const url = "<ph_client_api_host>/i/v0/e/";
 
 fetch(url, {
     method: 'POST',
@@ -275,14 +275,14 @@ const body = {
         {
             "event": "batched_event",
             "properties" : {
-                "distinct_id": "test-user-javascript",
+                "distinct_id": "ian@posthog.com",
                 "number_in_batch": 1
             }
         },
         {
             "event": "batched_event",
             "properties" : {
-                "distinct_id": "test-user-javascript",
+                "distinct_id": "ian@posthog.com",
                 "number_in_batch": 2
             }
         }
@@ -351,9 +351,9 @@ const headers = {
 
 const body = {
     "api_key": "<ph_project_api_key>",
-    "distinct_id": "test-user-javascript",
+    "distinct_id": "ian@posthog.com",
     "$set": {
-        "email": "test-user-javascript@example.com",
+        "email": "ian@posthog.com",
         "is_cool": true
     },
     "event": "$identify"
@@ -419,8 +419,8 @@ const headers = {
 const body = {
     "api_key": "<ph_project_api_key>",
     "properties": {
-        "distinct_id": "test-user-javascript",
-        "alias": "test-user-javascript-alias"
+        "distinct_id": "ian@posthog.com",
+        "alias": "ian2@posthog.com"
     },
     "event": "$create_alias"
 };
