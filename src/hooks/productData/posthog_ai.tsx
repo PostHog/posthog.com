@@ -94,7 +94,7 @@ export const posthog_ai = {
                 },
                 {
                     name: 'Filter architect',
-                    description: "Not sure what filters to apply? We got you",
+                    description: 'Not sure what filters to apply? We got you',
                     sticker: <StickerPath className="size-12" />,
                     percent: 30,
                 },
@@ -144,7 +144,7 @@ export const posthog_ai = {
                 },
                 {
                     name: 'Copywriter',
-                    description: 'Generates Insight and Dashboard names automagically',
+                    description: 'Generates insight and dashboard names automatically',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
@@ -281,6 +281,32 @@ export const posthog_ai = {
         //       ],
         //   },
         {
+            title: 'Error Tracking',
+            headline: 'Error Tracking',
+            layout: 'ai',
+            icon: <IconWarning className="size-5" />,
+            color: 'orange',
+            description:
+                'Find out what broke before your users tweet about it. PostHog AI helps identify error patterns and correlate signals across your product data.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806655/error_tracking_4e0dff38af.png',
+                    alt: 'Error Tracking',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Stack trace decoder',
+                    description: 'Translates cryptic errors into "oh, THAT\'S the problem."',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 80,
+                },
+            ],
+        },
+        {
             label: 'Communication',
         },
         {
@@ -365,32 +391,6 @@ export const posthog_ai = {
         //         },
         //     ],
         // },
-        {
-            title: 'Error Tracking',
-            headline: 'Error Tracking',
-            layout: 'ai',
-            icon: <IconWarning className="size-5" />,
-            color: 'orange',
-            description:
-                'Find out what broke before your users tweet about it. PostHog AI helps identify error patterns and correlate signals across your product data.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806655/error_tracking_4e0dff38af.png',
-                    alt: 'Error Tracking',
-                    className: 'max-h-64',
-                    // stylize: true,
-                    // shadow: true,
-                },
-            ],
-            skills: [
-                {
-                    name: 'Stack trace decoder',
-                    description: 'Translates cryptic errors into "oh, THAT\'S the problem."',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-            ],
-        },
         {
             label: 'Customer data infrastructure',
         },
