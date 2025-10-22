@@ -131,7 +131,7 @@ For complete definitions, see the [Glossary](/handbook/engineering/ai/architectu
 - **Prefer working in your editor?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 
 ### For engineers building AI features
-- **Adding AI to your product?** Start with [Team Structure and Collaboration](/handbook/engineering/ai/team-structure) to understand the process.
+- **Adding AI to your product?** Start with [Team structure and collaboration](/handbook/engineering/ai/team-structure) to understand the process.
 - **Want to add a new agent mode?** See [Architecture](/handbook/engineering/ai/architecture) for technical details.
 - **Need implementation guidance?** Check [Implementation Guide](/handbook/engineering/ai/implementation) for best practices and patterns.
 
