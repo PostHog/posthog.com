@@ -15,7 +15,7 @@ export default function ImageDrop({
     accept = { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
     onDropRejected,
 }: {
-    image?: Image
+    image?: Image | { id: number; url: string }
     onDrop: (image: Image | undefined) => void
     onRemove: () => void
     className?: string
@@ -52,7 +52,7 @@ export default function ImageDrop({
             <input className="hidden" {...getInputProps()} />
             <button className="w-full h-full flex justify-center items-center p-1" type="button" onClick={() => open()}>
                 {image ? (
-                    <img className="w-auto h-auto max-h-[200px]" src={image.objectURL} />
+                    <img className="w-auto h-auto max-h-[200px]" src={image.objectURL || image.url} />
                 ) : (
                     <div className="py-4">
                         <svg

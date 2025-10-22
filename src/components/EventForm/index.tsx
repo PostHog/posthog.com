@@ -11,6 +11,7 @@ import Toggle from 'components/Toggle'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { useToast } from '../../context/Toast'
+import { Event } from '../../pages/events'
 
 type EventFormValues = {
     name: string
@@ -19,8 +20,8 @@ type EventFormValues = {
     description: string
     link: string
     locationLabel: string
-    locationLat?: string
-    locationLng?: string
+    locationLat?: number
+    locationLng?: number
     venueName?: string
     format: string[]
     audience: string[]
@@ -28,9 +29,9 @@ type EventFormValues = {
     private: boolean
     speakerTopic?: string
     partners: Array<{ name: string; url?: string }>
-    attendees?: string
-    vibeScore?: string
-    photosLocal: UploadImage[]
+    attendees?: number
+    vibeScore?: number
+    photosLocal: UploadImage[] | { id: number; url: string }[]
     video?: string
     presentation?: string
 }
@@ -56,6 +57,42 @@ const validationSchema = Yup.object().shape({
     video: Yup.string().url('Enter a valid URL').optional(),
     presentation: Yup.string().url('Enter a valid URL').optional(),
 })
+
+const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[]): EventFormValues => {
+    const parsed = dayjs(event?.date)
+    const dateStr = parsed.isValid() ? parsed.format('YYYY-MM-DD') : ''
+    const timeFromDate = parsed.isValid() ? parsed.format('HH:mm') : ''
+    const startTime = event?.startTime || (timeFromDate !== '00:00' ? timeFromDate : '')
+
+    const speakersValues = (event?.speakers || [])
+        .map((name) => speakerOptions?.find((o) => o.label === name)?.value)
+        .filter(Boolean) as string[]
+
+    return {
+        name: event?.name || '',
+        date: dateStr,
+        startTime: startTime || '',
+        description: event?.description || '',
+        link: event?.link || '',
+        locationLabel: event?.location?.label || '',
+        locationLat: event?.location?.lat || undefined,
+        locationLng: event?.location?.lng || undefined,
+        venueName: event?.location?.venue?.name || '',
+        format: event?.format || [],
+        audience: event?.audience || [],
+        speakers: speakersValues,
+        private: Boolean(event?.private),
+        speakerTopic: event?.speakerTopic || '',
+        partners: (event?.partners && event.partners.length > 0
+            ? event.partners.map((p) => ({ name: p.name, url: p.url || '' }))
+            : [{ name: '', url: '' }]) || [{ name: '', url: '' }],
+        attendees: event?.attendees || undefined,
+        vibeScore: event?.vibeScore || undefined,
+        photosLocal: event?.photos?.map((p) => ({ id: p.id, url: p.url })) || [],
+        video: event?.video || '',
+        presentation: event?.presentation || '',
+    }
+}
 
 function CreatableMultiSelect({
     label,
@@ -296,7 +333,7 @@ function CreatableMultiSelect({
     )
 }
 
-export default function EventForm({ onSuccess }: { onSuccess?: () => void }): React.ReactElement {
+export default function EventForm({ onSuccess, event }: { onSuccess?: () => void; event?: Event }): React.ReactElement {
     const { getJwt } = useUser()
     const { addToast } = useToast()
     const [submitting, setSubmitting] = React.useState<boolean>(false)
@@ -341,32 +378,45 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }): Re
         .filter((s: SelectOption) => s.label)
 
     const formik = useFormik<EventFormValues>({
-        initialValues: {
-            name: '',
-            date: '',
-            startTime: '',
-            description: '',
-            link: '',
-            locationLabel: '',
-            locationLat: '',
-            locationLng: '',
-            venueName: '',
-            format: [],
-            audience: [],
-            speakers: [],
-            private: false,
-            speakerTopic: '',
-            partners: [{ name: '', url: '' }],
-            attendees: '',
-            vibeScore: '',
-            photosLocal: [],
-            video: '',
-            presentation: '',
-        },
+        initialValues: event
+            ? transformEventToFormValues(event, speakers)
+            : {
+                  name: '',
+                  date: '',
+                  startTime: '',
+                  description: '',
+                  link: '',
+                  locationLabel: '',
+                  locationLat: undefined,
+                  locationLng: undefined,
+                  venueName: '',
+                  format: [],
+                  audience: [],
+                  speakers: [],
+                  private: false,
+                  speakerTopic: '',
+                  partners: [{ name: '', url: '' }],
+                  attendees: undefined,
+                  vibeScore: undefined,
+                  photosLocal: [],
+                  video: '',
+                  presentation: '',
+              },
         validationSchema,
         onSubmit: async (values) => {
             setSubmitting(true)
             try {
+                const jwt = await getJwt()
+                if (!jwt) {
+                    throw new Error('No JWT found')
+                }
+                const uploadedPhotos = await Promise.all(
+                    values.photosLocal
+                        .filter((image) => 'file' in image)
+                        .map(async (img) => {
+                            return await uploadImage(img.file, jwt)
+                        })
+                )
                 const dateTime = dayjs(`${values.date} ${values.startTime || '00:00'}`).toISOString()
                 const eventPayload: any = {
                     name: values.name,
@@ -393,33 +443,16 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }): Re
                         lng: values.locationLng ? Number(values.locationLng) : undefined,
                         venue: values.venueName ? { name: values.venueName } : undefined,
                     },
+                    photos: [
+                        ...uploadedPhotos.map((photo) => photo.id),
+                        ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
+                    ],
                 }
-                // Create event first
-                const created = await createEvent(eventPayload)
-                const createdId = (created?.data?.id ?? created?.id) as string | number | undefined
-                // Upload photos (if any) and relate to the event
-                if (createdId && values.photosLocal?.length > 0) {
-                    const jwt = await getJwt()
-                    if (!jwt) {
-                        console.warn('Skipping photo upload - missing JWT')
-                    } else {
-                        for (const img of values.photosLocal) {
-                            try {
-                                await uploadImage(img.file, jwt, {
-                                    id: Number(createdId),
-                                    type: 'api::event.event',
-                                    field: 'photos',
-                                })
-                            } catch (e) {
-                                console.error('Error uploading photo', e)
-                            }
-                        }
-                    }
+                if (event) {
+                    await updateEvent(event.id, eventPayload)
+                } else {
+                    await createEvent(eventPayload)
                 }
-                addToast({
-                    title: 'Event created',
-                    description: 'Event will appear on the next build',
-                })
                 onSuccess?.()
             } catch (error) {
                 console.error('Error creating event:', error)
@@ -442,9 +475,41 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }): Re
             if (!response.ok) {
                 throw new Error(`Failed to create event: ${response.statusText}`)
             }
+            addToast({
+                description: 'Event created successfully',
+            })
             return response.json()
         } catch (error) {
             console.error('Error creating event:', error)
+            addToast({
+                description: 'Failed to create event',
+            })
+            throw error
+        }
+    }
+
+    const updateEvent = async (eventId: number, eventPayload: Record<string, unknown>): Promise<any> => {
+        try {
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events/${eventId}`, {
+                method: 'PUT',
+                body: JSON.stringify({ data: eventPayload }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            if (!response.ok) {
+                throw new Error(`Failed to update event: ${response.statusText}`)
+            }
+            addToast({
+                description: 'Event updated successfully',
+            })
+            return response.json()
+        } catch (error) {
+            console.error('Error updating event:', error)
+            addToast({
+                description: 'Failed to update event',
+            })
             throw error
         }
     }
@@ -643,7 +708,7 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }): Re
                                     next.splice(idx, 1)
                                     formik.setFieldValue('photosLocal', next)
                                 }}
-                                className="!h-auto aspect-square"
+                                className="!h-auto aspect-square overflow-hidden"
                             />
                         ))}
                         <ImageDrop
@@ -651,7 +716,7 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }): Re
                                 image && formik.setFieldValue('photosLocal', [...formik.values.photosLocal, image])
                             }
                             onRemove={() => null}
-                            className="!h-auto aspect-square"
+                            className="!h-auto aspect-square overflow-hidden"
                         />
                     </div>
                 </div>
@@ -684,7 +749,13 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }): Re
                 </div>
                 <div className="flex items-center gap-2 pt-1">
                     <OSButton disabled={submitting} variant="primary" size="md" type="submit">
-                        {submitting ? <IconSpinner className="animate-spin size-4" /> : 'Add event'}
+                        {submitting ? (
+                            <IconSpinner className="animate-spin size-4" />
+                        ) : event ? (
+                            'Update event'
+                        ) : (
+                            'Add event'
+                        )}
                     </OSButton>
                     <OSButton
                         disabled={submitting}

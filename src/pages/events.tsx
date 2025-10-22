@@ -18,10 +18,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import EventForm from 'components/EventForm'
 import { useUser } from 'hooks/useUser'
 import qs from 'qs'
-import { IconTrash } from '@posthog/icons'
+import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 
-type Event = {
+export type Event = {
     date: string // YYYY-MM-DD
     name: string
     description?: string
@@ -41,7 +41,7 @@ type Event = {
     partners?: Array<{ name: string; url?: string }>
     attendees?: number
     vibeScore?: number
-    photos?: string[]
+    photos?: { id: number; url: string }[]
     video?: string
     presentation?: string
     link?: string
@@ -57,7 +57,7 @@ const transformStrapiEvent = (strapiEvent: any): Event => {
         photos: photosData,
     } = strapiEvent.attributes
 
-    const photos = photosData?.data?.map((photo: any) => photo.attributes?.url)
+    const photos = photosData?.data?.map((photo: any) => ({ id: photo.id, url: photo.attributes?.url }))
     const speakers = speakersData?.data?.map((s: any) =>
         [s.attributes?.firstName, s.attributes?.lastName].filter(Boolean).join(' ')
     )
@@ -169,6 +169,7 @@ function Events() {
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null)
     const [chartKey, setChartKey] = useState(0)
     const [creatingEvent, setCreatingEvent] = useState(false)
+    const [editingEvent, setEditingEvent] = useState<boolean>(false)
     const chartRef = useRef<HTMLDivElement>(null)
     const chartInstanceRef = useRef<am5map.MapChart | null>(null)
     const pointSeriesRef = useRef<am5map.ClusteredPointSeries | null>(null)
@@ -193,6 +194,8 @@ function Events() {
 
     const handleEventClick = (event: Event) => {
         setSelectedEvent(event)
+        setEditingEvent(false)
+        setCreatingEvent(false)
         // Hide tooltip and zoom to the event location with animation (deeper zoom for active state)
         if (chartInstanceRef.current && pointSeriesRef.current && event.location.lat && event.location.lng) {
             pointSeriesRef.current.hideTooltip()
@@ -838,6 +841,13 @@ function Events() {
         }
     }, [selectedEvent, displayEvents])
 
+    useEffect(() => {
+        const newSelectedEvent = selectedEvent && eventsData.find((event) => selectedEvent.id === event.id)
+        if (newSelectedEvent && newSelectedEvent !== selectedEvent) {
+            setSelectedEvent(newSelectedEvent)
+        }
+    }, [eventsData])
+
     return (
         <>
             <SEO
@@ -879,7 +889,11 @@ function Events() {
                                             variant="primary"
                                             width="full"
                                             size="md"
-                                            onClick={() => setCreatingEvent(true)}
+                                            onClick={() => {
+                                                setCreatingEvent(true)
+                                                setSelectedEvent(null)
+                                                setEditingEvent(false)
+                                            }}
                                         >
                                             Add event
                                         </OSButton>
@@ -908,7 +922,7 @@ function Events() {
                                                     <div className="float-right ml-2 max-w-20">
                                                         {event.photos[0] && (
                                                             <img
-                                                                src={event.photos[0]}
+                                                                src={event.photos[0].url}
                                                                 alt={`Event photo`}
                                                                 className="w-20 max-h-20 object-cover rounded"
                                                             />
@@ -944,12 +958,23 @@ function Events() {
 
                     <div className="flex-1 relative h-full border-primary border-t @xl:border-t-0">
                         <AnimatePresence>
-                            {creatingEvent && isModerator ? (
-                                <EventCard onClose={() => setCreatingEvent(false)}>
+                            {(editingEvent || creatingEvent) && isModerator ? (
+                                <EventCard
+                                    onClose={() => {
+                                        setCreatingEvent(false)
+                                        setEditingEvent(false)
+                                        setSelectedEvent(null)
+                                    }}
+                                >
                                     <div className="p-4">
                                         <EventForm
+                                            event={editingEvent && selectedEvent ? selectedEvent : undefined}
                                             onSuccess={() => {
-                                                setCreatingEvent(false)
+                                                if (editingEvent) {
+                                                    setEditingEvent(false)
+                                                } else {
+                                                    setCreatingEvent(false)
+                                                }
                                                 refreshEvents()
                                             }}
                                         />
@@ -1108,7 +1133,7 @@ function Events() {
                                                             {selectedEvent.photos.map((photo, i) => (
                                                                 <ZoomImage key={i}>
                                                                     <img
-                                                                        src={photo}
+                                                                        src={photo.url}
                                                                         alt={`Event photo ${i + 1}`}
                                                                         className="w-full h-32 object-cover rounded"
                                                                     />
@@ -1152,7 +1177,15 @@ function Events() {
                                                     </div>
                                                 )}
                                                 {isModerator && (
-                                                    <div>
+                                                    <div className="mt-2 flex justify-end gap-1">
+                                                        <OSButton
+                                                            size="md"
+                                                            tooltip="Edit this event"
+                                                            icon={<IconPencil />}
+                                                            onClick={() => {
+                                                                setEditingEvent(true)
+                                                            }}
+                                                        />
                                                         <OSButton
                                                             size="md"
                                                             tooltip="Delete this event"
