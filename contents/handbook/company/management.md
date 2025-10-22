@@ -76,7 +76,7 @@ Talking about long-term career plans every now and again is also important but e
 
 ### Performance
 
-We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a team lead, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but you should proactively give feedback and raise concerns with your exec.
+We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a team lead, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but you should proactively give feedback and raise concerns with your exec as they arise.
 
 - We expect you to regularly give proactive, actionable feedback to everyone on your team - it’s the most direct way to help troubleshoot issues upstream. This is particularly important at the 30-day, 60-day and 80-day check-ins after a new starter joins.
 -  The team lead will be asked to consider the following questions that are aligned with our values:
@@ -99,6 +99,25 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
+
+### Weave
+
+We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see how their numbers compare to averages across the company. 
+
+We understand that all the work an engineer does can't be properly represented in a tool that just looks at PR output. Data in Weave is _not_ the decision-maker for whether someone is succeeding in their role at PostHog. It can be, however, a part of the conversation.
+
+We use Weave to:
+- Look for outliers in the company in terms of output (both high and low - sometimes unexpected people are rising to the top!)
+- Watch for issues with overall team productivity to identify possible blockers
+- Start conversations with team leads
+
+We don't use Weave to:
+- Make a decision to let someone go - if and when this happens, it only follows detailed discussion with and recommendation from the team lead
+- Monitor your PRs - our management layer is stretched way too thin to micromanage this
+- Creep on your use of AI - we don't care how or if you use AI to get a job done, as long as it gets done
+- Make a call on how valuable someone is - some people with low PR output are very valuable to the company, and we're 100% aware that things like heavy support load can impact output
+
+We have compared statistics in Weave agaist other (imperfect!) metrics that can be used to gauge productivity, such as number of commits, number of PRs, total github activity, etc. The numbers end up stack-ranking pretty similarly. Weave gives us a nice UI for evaluating output across all the engineers we have, which we don't have any other good interface for. In addition, it gives engineers access to the same information we have about them, so using it increases transparency.
 
 ## What does being a hiring manager entail?
 
