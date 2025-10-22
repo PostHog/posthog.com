@@ -6,7 +6,7 @@ showTitle: true
 
 This page provides a technical deep dive into the PostHog AI platform architecture. For a high-level overview, see the [AI platform overview](/handbook/engineering/ai/ai-platform).
 
-## AI platform Architecture Overview
+## AI platform architecture overview
 
 The following diagram shows how all components of the AI platform work together:
 
@@ -51,7 +51,7 @@ graph TB
     TaskGen --> ArrayApp
 ```
 
-### Key Integration Points
+### Key integration points
 
 1. **The agent exposes tools via agent modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
 
@@ -61,15 +61,15 @@ graph TB
 
 4. **Shared capabilities**: Array, Wizard, and external tools all consume the same agent modes through the MCP, ensuring consistency across the platform.
 
-## Single-Loop Agent Architecture
+## Single-loop agent architecture
 
-### Mode Switching
+### Mode switching
 
 PostHog AI is based on a single-loop agent architecture, heavily inspired by Claude Code, with some PostHog unique flavour. The core insight is simple: instead of routing between multiple specialized agents that act as black boxes, we have one agent that maintains full conversation context and can dynamically load expertise as needed.
 
 The single-loop agent has direct access to all tools, uses a todo-list pattern to track progress across long-running tasks (just like Claude Code), and provides complete visibility into every step it takes. When it needs specialized knowledge, it doesn't delegate to a sub-agent — it switches its own mode to become an expert in that domain.
 
-### How the Single-Loop Agent Works
+### How the single-loop agent works
 
 ```mermaid
 sequenceDiagram
@@ -97,7 +97,7 @@ The key differences from older architectures:
 - **Maintained context**: The agent remembers every decision it made and can build on them
 - **Explainable**: The agent can justify every choice because it has complete visibility
 
-### Core Tools: Always Available
+### Core tools: Always available
 
 No matter what mode the agent is in, it always has access to a core set of tools:
 
@@ -109,7 +109,7 @@ The **enable_mode** tool is how the agent switches between different areas of ex
 
 Finally, **todo_write** is the tool that lets the agent manage long-running tasks. When you ask for something complex, the agent can write out a plan, track its progress, and make sure it doesn't lose context.
 
-### Agent Modes: Dynamic Expertise
+### Agent modes: Dynamic expertise
 
 Here's the key innovation: instead of having specialized sub-agents, we have a single agent that can "switch gear" by switching modes. Each mode gives the agent new tools, a new system prompt with domain expertise, and example workflows (which we call "trajectories") to follow.
 
@@ -125,11 +125,11 @@ A **system prompt** that contains expert instructions for this domain. When the 
 
 This architecture allows product teams to create their own modes without touching the core agent. Modes can be composed and nested. Think of it as "thousands of agents" through mode combinations, rather than a fixed set of AI products.
 
-### When Do Black-Box Sub-Agents Still Make Sense?
+### When do black-box sub-agents still make sense?
 
 There are exceptions. Some processes benefit from being hidden from the main agent — usually when the logic is completely detached from the conversation context, or when you want to use strategies or optimizations that would confuse the main agent if exposed. Our agentic RAG system for insight search is a good example: it iteratively searches through insights and cherry-picks the best ones using a complex scoring system. The main agent doesn't need to see all that — it just needs the final result.
 
-### Architecture Diagram
+### Architecture diagram
 
 ```mermaid
 graph TB
@@ -167,7 +167,7 @@ graph TB
     Actions --> Response[Response to User]
 ```
 
-## How PostHog AI and MCP Share the Same Capabilities
+## How PostHog AI and MCP share the same capabilities
 
 The problem we needed to solve: PostHog AI and the MCP server were developed by different teams, didn't offer the same tools, and had completely different architectures. Users would find features in PostHog AI that didn't exist in the MCP, and vice versa.
 
@@ -183,7 +183,7 @@ We could also tag modes for specific interfaces. For example, a `CodingMode(tags
 
 **Agent**: An autonomous AI process that can reason about what to do, plan multiple steps, and take actions by calling tools. PostHog is an agent. Claude is an agent.
 
-**Agent Mode**: A specialized configuration of an agent that gives it domain-specific tools, expert knowledge (via system prompts), and workflow examples. When PostHog AI switches to "SQL mode," it becomes an expert in writing and debugging SQL queries.
+**Agent mode**: A specialized configuration of an agent that gives it domain-specific tools, expert knowledge (via system prompts), and workflow examples. When PostHog AI switches to "SQL mode," it becomes an expert in writing and debugging SQL queries.
 
 **Tool**: An external capability the agent can call to perform actions it can't do natively. Tools might search documentation, query a database, create a PostHog resource, or run code.
 
