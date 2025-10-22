@@ -11,6 +11,7 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  errorTracking: true
   surveys: false
   llmAnalytics: false
 ---
@@ -39,6 +40,88 @@ import ElixirFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets
 
 <ElixirFeatureFlagsCode />
 
+## Error tracking
+
+Error tracking is enabled by default. It will automatically captures exceptions thrown by the application.
+
+As a matter of fact, since this is built on top of Elixir's `Logger` module, it automatically captures any `Logger.error` calls.
+
+You can always disable it by setting `enable_error_tracking` to false:
+
+```elixir
+config :posthog,
+  enable_error_tracking: false
+```
+
+## Advanced configuration
+
+By default, PostHog starts its own supervision tree and attaches a logger handler.
+
+In certain cases, you might want to run this supervision tree yourself. You can do this by disabling the default supervisor and adding PostHog.Supervisor to your application tree with its own configuration:
+
+```elixir file=config.exs
+config :posthog, enable: false
+
+config :my_app, :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_api_key>"
+```
+
+```elixir file=application.ex
+defmodule MyApp.Application do
+  use Application
+
+  def start(_type, _args) do
+    posthog_config = Application.fetch_env!(:my_app, :posthog) |> PostHog.Config.validate!()
+
+    :logger.add_handler(:posthog, PostHog.Handler, %{config: posthog_config})
+
+    children = [
+      {PostHog.Supervisor, posthog_config}
+    ]
+
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
+end
+```
+
+### Multiple instances
+
+In even more advanced cases, you might want to interact with more than one PostHog project. In this case, you can run multiple PostHog supervision trees, one of which can be the default one:
+
+```elixir file=config.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_api_key>"
+
+config :my_app, :another_posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "a_different_project_api_key",
+  supervisor_name: AnotherPostHog
+```
+
+```elixir file=application.ex
+defmodule MyApp.Application do
+  use Application
+
+  def start(_type, _args) do
+    posthog_config = Application.fetch_env!(:my_app, :another_posthog) |> PostHog.Config.validate!()
+
+    children = [
+      {PostHog.Supervisor, posthog_config}
+    ]
+
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
+end
+```
+
+Then, each function in the PostHog module accepts an optional first argument with the name of the PostHog supervisor tree that will process the capture:
+
+```elixir
+PostHog.capture(AnotherPostHog, "user_signed_up", %{distinct_id: "user123"})
+```
+
 ## Thanks
 
-Thanks to [nkezhaya](https://github.com/nkezhaya) for initially contributing this library. The library is maintained by the PostHog team since February 2025.
+The library is maintained by the PostHog team since February 2025. Thanks to [nkezhaya](https://github.com/nkezhaya) for contributing v0.1.0. Thanks to [martosaur](https://github.com/martosaur) for contributing v2.0.0.

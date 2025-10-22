@@ -2,7 +2,7 @@ import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import { useLayoutData } from 'components/Layout/hooks'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
-import React from 'react'
+import React, { useMemo } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
@@ -105,20 +105,19 @@ export default function Link({
         glossary?.find((glossaryItem) => {
             return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
         })
+    const isSignupUrl = useMemo(() => {
+        if (!url) return false
+        try {
+            const urlObj = new URL(url)
+            return isPostHogAppUrl && urlObj.pathname === '/signup'
+        } catch {
+            return false
+        }
+    }, [url, isPostHogAppUrl])
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl && !posthogInstance) {
             posthog?.createPersonProfile?.()
-            const urlObj = new URL(url)
-            const path = urlObj.pathname
-            if (path === '/signup') {
-                e.preventDefault()
-                const subdomain = urlObj.hostname.split('.')[0]
-                openStart({
-                    subdomain,
-                    initialTab: siteSettings.experience === 'boring' ? 'signup' : state?.initialTab,
-                })
-            }
         }
         if (event && posthog) {
             posthog.capture(event)
@@ -192,7 +191,7 @@ export default function Link({
                     {...other}
                     href={url}
                     className={`${className} group`}
-                    target={external || externalNoIcon ? '_blank' : ''}
+                    target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
                 >
                     {external ? (
                         <span className="inline-flex justify-center items-center group">
@@ -245,7 +244,7 @@ export default function Link({
                     {...other}
                     href={url}
                     className={`${className} group`}
-                    target={external || externalNoIcon ? '_blank' : ''}
+                    target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
                 >
                     {external ? (
                         <span className="inline-flex justify-center items-center group">

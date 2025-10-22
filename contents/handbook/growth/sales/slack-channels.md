@@ -5,9 +5,9 @@ showTitle: true
 ---
 
 We offer shared Slack channels to customers and prospective customers in several circumstances:
-- Prospective, [new customers](/handbook/growth/sales/new-sales) can have a shared Slack channel for the duration of [a trial period](/handbook/growth/sales/trials), and keep a shared Slack channel after the trial if they qualify with <$20k in annual, committed spend OR a subscribe to a [support package](https://posthog.com/platform-addons) which includes a shared Slack.
-- [Product-led customers](/handbook/growth/sales/product-led-sales) can earn a shared Slack channel by growing beyond <$20k in annualized spend.
-- [Existing customers](/handbook/growth/sales/expansion-and-retention) can earn a shared Slack channel by committing to <$20k in annual spend OR growing beyond <$20k in annualized spend.
+- Prospective, [new customers](/handbook/growth/sales/new-sales) can have a shared Slack channel for the duration of [a trial period](/handbook/growth/sales/trials), and keep a shared Slack channel after the trial if they qualify with at least $20k in annual, committed spend OR a subscribe to a [support package](https://posthog.com/platform-addons) which includes a shared Slack.
+- [Product-led customers](/handbook/growth/sales/product-led-sales) can earn a shared Slack channel by growing beyond $20k in annualized spend.
+- [Existing customers](/handbook/growth/sales/expansion-and-retention) can earn a shared Slack channel by committing to $20k in annual spend OR growing beyond $20k in annualized spend.
 
 We use shared Slack channels to provide timely support and to build relationships with those at our customers shipping things with PostHog. 
 

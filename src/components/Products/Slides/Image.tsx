@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { ZoomImage } from 'components/ZoomImage'
-import CloudinaryImage from "components/CloudinaryImage"
+import CloudinaryImage from 'components/CloudinaryImage'
 
-interface Image {
+export interface Image {
     src: string
-    srcDark: string
+    srcDark?: string
     alt: string
-    stylize: boolean
-    shadow: boolean
-    className: string
+    stylize?: boolean
+    shadow?: boolean
+    className?: string
 }
 
 interface ProductImageProps {
@@ -30,7 +30,7 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
                 bodyClass,
                 bodyIsDark,
                 currentImage: images[currentIndex]?.src,
-                currentImageDark: images[currentIndex]?.srcDark
+                currentImageDark: images[currentIndex]?.srcDark,
             })
         }
 
@@ -59,14 +59,14 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
     }
 
     // Use srcDark if it exists AND theme is dark, otherwise use src
-    const imageSrc = (currentImage.srcDark && isDark) ? currentImage.srcDark : currentImage.src
+    const imageSrc = currentImage.srcDark && isDark ? currentImage.srcDark : currentImage.src
 
     console.log('Image selection:', {
         isDark,
         hasSrcDark: !!currentImage.srcDark,
         selectedSrc: imageSrc,
         originalSrc: currentImage.src,
-        darkSrc: currentImage.srcDark
+        darkSrc: currentImage.srcDark,
     })
 
     const content = (
@@ -74,8 +74,9 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
             key={`${imageSrc}-${isDark ? 'dark' : 'light'}`} // Force re-render when theme changes
             src={imageSrc as `https://res.cloudinary.com/${string}`}
             alt={currentImage.alt}
-            className={`w-full h-full object-contain ${currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
-                } ${currentImage.shadow ? 'shadow-xl' : ''} || ''}`}
+            className={`w-full h-full object-contain ${
+                currentImage.stylize ? 'bg-accent p-4 rounded border border-primary' : ''
+            } ${currentImage.shadow ? 'shadow-xl' : ''} || ''}`}
             imgClassName={currentImage.className || ''}
         />
     )
@@ -125,8 +126,9 @@ export default function ProductImage({ images, className = '' }: ProductImagePro
                             <button
                                 key={index}
                                 onClick={() => setCurrentIndex(index)}
-                                className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-primary' : 'bg-primary/40 hover:bg-primary/60'
-                                    }`}
+                                className={`w-2 h-2 rounded-full transition-colors ${
+                                    index === currentIndex ? 'bg-primary' : 'bg-primary/40 hover:bg-primary/60'
+                                }`}
                                 aria-label={`Go to image ${index + 1}`}
                             />
                         ))}

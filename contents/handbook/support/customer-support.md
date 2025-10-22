@@ -51,25 +51,11 @@ Right now, support engineers provide the first level of support for the followin
 
 Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
-When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. Afterwards, they join the Support Zero rotation. 
+When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. 
 
 #### What do Support Heroes do?
 
 One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We find each stint as Support Hero throws up a lot of really valuable feedback.
-
-## Support isn't just about tickets
-
-Supporting our customers isn't just about solving tickets, and we don't judge the success of support engineers solely by how many tickets solve. Instead, we free up support engineers to spend at least one day a week as a _Support Zero_, when they can work on other tasks which help users. These tasks can include working on their quarterly goals, analyzing team performance, building new support features, tasks from our Big Ideas list, or whatever else they think will help us move faster. 
-
-The current rotation for Support Zero is: 
-
-**Monday:** Nobody 
-**Tuesday:** <TeamMember name="Steven Shults" photo /> (NA) & <TeamMember name="Luke Belton" photo /> (EU)
-**Wednesday:** <TeamMember name="Joshua Ordehi" photo /> (NA)
-**Thursday:** <TeamMember name="Ben Haynes" photo /> (NA)
-**Friday:** <TeamMember name="Ben Lea" photo /> (EU)
-
-We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
 
 ## Response targets, SLAs, and CSAT surveys
 
@@ -124,6 +110,10 @@ If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember na
 ### Dealing with legal requests from users
 
 We very rarely receive messages from people wishing to make a legal claim against PostHog, such as cease and desist letters. These can come via the app, or [Community Questions](/questions). Do not respond to these requests. Instead, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> immediately. They will either take this on, or advise you on how to reply.
+
+### Dealing with billing issues
+
+Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to the billing team, however some issues require technical investigation before the billing issue can be resolved. In such cases, add <TeamMember name="Eleftheria Trivyzaki" /> as a follower to the support ticket from the outset, and leave an internal note briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to the billing team.
 
 ### Users asking for demos, consultations or partnerships
 

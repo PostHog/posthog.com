@@ -138,7 +138,7 @@ You'll just need to set the name of the org in an existing trigger in Zendesk, t
 
 1. After Logging into Zendesk, go to the [admin center](https://posthoghelp.zendesk.com/admin/home)
 2. In the left column, expand `Objects and rules` and click on `Triggers` (under "Business rules")
-3. On the Triggers page, expand `Prioritization and new ticket notifications` and click on `Add alert for org with special-handling`
+3. On the Triggers page, expand `Housekeeping` and click on `Add alert for org with special-handling`
 4. Under `Conditions`, the last condition is: `Organization > Organization` `Is` `PostHog`. Change `PostHog` to the name of organization who has had their access limited as a result of the incident. (Click on "PostHog" and then start typing to filter and find the org name, then click on it)
 5. Scroll to the bottom of the page and click the `Save` button
 

@@ -24,9 +24,9 @@ export const productAnalytics = {
     colorSecondary: 'sky-blue',
     category: 'analytics',
     seo: {
-        title: 'Product analytics - PostHog',
+        title: 'Product Analytics – Understand your product with PostHog',
         description:
-            'PostHog is the only product analytics platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
     },
     overview: {
         title: 'Product analytics with autocapture',
@@ -45,6 +45,11 @@ export const productAnalytics = {
             srcDark:
                 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_product_analytics_trend_dark_086dcec4b2.png',
             alt: 'Product analytics screenshot',
+        },
+        funnelVertical: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_light_3909cad637.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_dark_e0854a4c86.png',
+            alt: 'Product analytics funnel',
         },
     },
     hog: {
@@ -335,8 +340,8 @@ export const productAnalytics = {
                     title: 'Get help writing SQL',
                     description: (
                         <>
-                            <Link href="/max" state={{ newWindow: true }}>
-                                Max AI
+                            <Link href="/ai" state={{ newWindow: true }}>
+                                PostHog AI
                             </Link>{' '}
                             knows your data and can write syntax for you.
                         </>

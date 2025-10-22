@@ -40,7 +40,28 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission. 
 
-## Just been handed an account?
+### Your first message where we've never had contact
+Despite the organization using PostHog, they may not recognize you/PostHog, or may not even be the correct person to talk to about PostHog, which means your message needs to be well crafted.
+
+When crafting a message, consider the following:
+
+1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. [Tim has some great thoughts on this subject](https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549).
+2. Avoid fluff. "I'm just reaching out to", "I just wanted to" etc. are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
+3. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
+4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?
+
+An example good email could look like:
+
+> Hello [name],
+> It looks like your Product Analytics usage has increased over the past month and I wanted to ensure that the increase was expected.
+> [Here are some tools you can use](https://posthog.com/docs/product-analytics/cutting-costs) to ensure you are collecting the correct events and getting valuable insights from them. We have a whole host of [tutorials and guides](https://posthog.com/docs/product-analytics/tutorials) to help you get the most out of PostHog.
+> If you have any questions, don't hesitate to ask.
+
+### Asking for introductions
+
+If you feel like you have done a good job with a customer, and have genuinely been helpful, it's ok to ask for a favor back. You can be specific and ask for a direct introduction to a person you want to talk to, or try go a bit more broad and ask the person if they know anyone who would benefit from some help with PostHog. Either way, a warm introduction from a colleague is always going to be better than reaching out on your own.
+Something like "Hey Leon, our session last week seemed to have landed well. I'm glad you found it useful. I was wondering if you could help me out. Your team is growing really quickly, and there's a bunch of new folks starting to use PostHog. I imagine not all of them are super comfortable with the platform yet and could use a helping hand. Could you introduce me to Simon, Charles and Scott?"
+### Just been handed an account?
 
 Sometimes you'll get a customer in your book who was previously working with someone else on the PostHog team. A pre-existing relationship can help, but it's not guaranteed they'll want to talk to you. 
 

@@ -125,7 +125,7 @@ function NewsletterSubscribeForm({
                     <>
                         <h1 className="relative !text-2xl !m-0 !leading-tight text-center">Product for Engineers</h1>
                         <p className="!m-0 !text-lg md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
-                            Read by 60,000+ founders and builders
+                            Read by 100,000+ founders and builders
                         </p>
                         <div className="">
                             <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2 my-4 lg:my-2">

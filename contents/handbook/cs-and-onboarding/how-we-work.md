@@ -9,21 +9,16 @@ showTitle: true
 ## Main metrics for each role
 
 - Technical CSM: revenue retention
-- Onboarding Specialist: logo retention
 
 ## Book of business
 
 ### Customer Success Managers
 
-Each CSM is assigned ~30 existing customer accounts to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselves (that's up to Dana or Charles).
+Each CSM is assigned customer accounts accumulating to ~$1.5m ARR to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselves (that's up to Dana or Charles).
 
-### Onboarding Specialists
+## Weekly Customer Success standup
 
-Each OS is assigned ~100 accounts to work with across a three month period and these will be assigned in Vitally, tagged as "onboarding" segment.
-
-## Weekly CS and Onboarding standup
-
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly cs and onboarding standups on Wednesday to review accounts and discuss any at-risk accounts to highlight.
+In addition to the weekly sprint planning meeting on a Monday, we do an account review standup on Wednesday to discuss any at-risk accounts.
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
@@ -38,25 +33,33 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 - Your OTE comprises a 90/10 split between base and contractual bonus.
 - Bonus is paid based on revenue retention above 100%, and is _uncapped_.
   - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus.
-  - While the Q2 2025 target is 120%, this may change in future depending on how things go.
-  - To calculate retention we use the total quarterly usage and annualize this.
-    - For monthly customers this is the total of their 3 invoices multiplied by 4
-    - For annual customers, we look at the usage-based MRR and multiply by 4
+  - The Q4 2025 target is 120% half-yearly NRR. This may change in future depending on how things go.
+  - To calculate retention we use the total usage over the past 2 quarters and annualize this, then compare it to the 2 quarters before that.
+    - For monthly customers this is the total of their 6 invoices multiplied by 2
+    - For annual customers, we look at the usage-based MRR and multiply by 2
+    - For newer customers: if there's at least 2 quarters of revenue, we use quarter-on-quarter comparison for that specific customer. If it's a brand new customer with less than 1 quarter of revenue, we start measuring next quarter.
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
 - If an account is added to your book:
-  - If you inherit a new account, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
+  - If you inherit a new account that hasn't been managed by a PostHog human before, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
+  - If you inherit an account from another CSM, AE, or AM, it will count toward your NRR in that quarter.
 - How bonus is calculated:
-  - In general, we compare start of quarter ARR with end of quarter ARR.
+  - In general, we compare annualized ARR over the past 2 quarters with annualized ARR 2 quarters before.
+    - For Q4 2025 bonus: (Q4 + Q3 ARR) vs (Q2 + Q1 ARR)
+    - For Q1 2026 bonus: (Q1 + Q4 ARR) vs (Q3 + Q2 ARR)
   - For customers on annual plans, we will look at their usage-based spending (instead of total contract amount / 12)
-  - If you get a new account added mid-quarter, their starting ARR doesn't count towards your target - only growth from the point they were added.
   - If an account is removed from your book mid-quarter, they will not be included in bonus calculation.
   - If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened.
+ 
+**Account allocation**
+- CSMs manage approximately $1.5M in ARR.
+- This coverage amount will grow ~10% quarterly to match our growth targets.
+- When rebalancing accounts (e.g., if accounts drop below the $20k threshold), we'll bring you up to the current quarter's target amount.
 
 ## Working with engineering teams
 
-We hire Technical CSMs and Technical OSs. This means you are responsible for dealing with the vast majority of product queries from your customers. However, we still work closely with engineering teams!
+We hire Technical CSMs. This means you are responsible for dealing with the vast majority of product queries from your customers. However, we still work closely with engineering teams!
 
 **Product requests from large customers**
 

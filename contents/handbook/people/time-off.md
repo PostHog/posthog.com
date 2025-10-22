@@ -82,7 +82,15 @@ If you are summonsed for jury duty, please let Fraser know right away - we can o
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year and have passed probation, you should just some time off as PTO, typically 2-3 weeks but talk to Fraser.
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 6 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year the following guidance is relevant for parental leave
+
+### Maternity leave
+
+If you have been at PostHog for under 6 months before your child is born, you will receive 3 weeks of paid parental leave. If you have been at PostHog for between 6-12 months you will receive 6 weeks of paid parental leave. In either situation, please contact Fraser with how much time you intend to take off. 
+
+### Paternity leave
+
+If you have been at PostHog for under 12 months we would expect you to take 2-3 weeks PTO when your child has arrived. 
 
 > Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  Wherever there is a discrepancy between these local regulations and PostHog policy, we will merge the local minimum rules with the above.
 

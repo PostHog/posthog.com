@@ -26,17 +26,17 @@ Use the following principles:
 -   **Clear:** Anyone with general context can read it and instantly know what specifically it means to achieve it (i.e. NOT “refactor components”)
 -   **Finite:** There should be an obvious end to the goal and cannot go on forever (i.e. NOT “improve dashboards”)
 -   **Assessable:** You can validate whether or not you’ve achieved the goal - it doesn’t need to be a metric (e.g. Increased signups by 20% or Events can be ingested in any order)
--   **Meaningful:** If we achieve this goal it will make our solve a real need for our customers (i.e. a 10x improvement in performance sounds great as a goal - but its not meaningful if our customers are happy with the current performance)
+-   **Meaningful:** If we achieve this goal it will solve a real need for our customers (i.e. a 10x improvement in performance sounds great as a goal - but it's not meaningful if our customers are happy with the current performance)
 -   **Challenging:** It should too big for one person to solve on their own and require creativity or brute force to achieve in the proposed time-frame (e.g. ship correlation analysis with a killer feature no one else has)
 -   **Homogenous:** The goal should be all about achieving a single meaningful thing and not a collection of unconnected things (i.e. NOT ‘Improve query performance and launch collaboration MVP’)
 
 ### Assign an owner
 
-A single engineer should be accountable for a milestone partnering closely other functions to ensure it’s successful.
+A single engineer should be accountable for a milestone partnering closely with other functions to ensure it’s successful.
 
 ### Think about other teams
 
-Most things won't cause issues for other teams. However, if it will - don't "align teams" or write a huge RFC (unless that'd help you). Do a quick 1/1 with the most relevant person on another team.
+Most things won't cause issues for other teams. However, if it will, don't "align teams" or write a huge RFC (unless that'd help you). Do a quick 1:1 with the most relevant person on another team.
 
 Consider:
 
@@ -73,7 +73,7 @@ Review impact of each major milestone and feedback into the planning process.
 When we review the status of goals we classify them as follows:
 
 -   **Nailed it:** We hit the goal spectacularly. High fives all round.
--   **Scraped it:** We _almost_ hit the goal, but we'll need to do a little bit more next sprint to tidy up. We should adjust our workload to have fewer resources on big goals during the next sprint to comfortable get this finished.
+-   **Scraped it:** We _almost_ hit the goal, but we'll need to do a little bit more next sprint to tidy up. We should adjust our workload to have fewer resources on big goals during the next sprint to comfortably get this finished.
 -   **Failed it:** We were nowhere near hitting the goal, but we learned some valuable lessons. We're going to go back to the drawing board. Maybe the goal wasn't right or maybe there's a different way to approach it?
 
 ## What about the small stuff?

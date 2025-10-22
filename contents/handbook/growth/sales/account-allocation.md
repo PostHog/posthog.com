@@ -9,19 +9,19 @@ We have different roles within the team who manage customers at various stages i
 
 [Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles.  When deciding whether a customer should be with a TAM or CSM we factor in to account their usage of our primary products.
 
-**Primary products** are the set of billable main products which can be found on the [pricing](/pricing) page, not including add-ons or platform features.  Our current set of primary products are:
+**Primary products** are the set of billable main products which we believe that all engineers should be using, not including add-ons or platform features.  Our current set of primary products are:
 
-- Product analytics
 - Session replay
 - Feature flags
-- Surveys
-- Data warehouse
 - Error tracking
 
-We track the count of these products in Vitally using the `Total paid product count (main only)` custom trait and can use that number in determining who gets allocated to a customer.
+We track whether a customer is paying for each product in Vitally using the `Paying for <Product Name>` trait.
 
-- Customers paying for 1 or 2 primary products should go to a Technical Account Manager.  This is because there are a lot more products that the customer can use, so we need someone focused on cross-sell to make PostHog as sticky as possible.
-- Customers paying for 3 or more primary products should go to a Customer Success Manager.  At this product count they should be pretty sticky as a customer so the main focus here is retention.
+- Customers already paying for all of the primary products are considered expanded to the Max and should go to a Customer Success Manager.  They should be pretty sticky as a customer so the main focus here is retention.
+- Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
+
+> Today we have lots of customers who aren't paying for the three primary products so it might make sense to allocate some customers who are paying for 2 out of the 3 to a CSM whilst we are hiring more TAMs.
+
 
 ### Doing the allocation
 
