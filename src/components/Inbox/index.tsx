@@ -25,7 +25,7 @@ import { useWindow } from '../../context/Window'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
-import { flattenStrapiResponse } from '../../utils'
+import { flattenStrapiResponse, getFilteredReplyCount } from '../../utils'
 import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../context/App'
 import Link from 'components/Link'
@@ -367,8 +367,8 @@ export default function Inbox(props) {
                                                 ? subscribedQuestions
                                                 : flattenStrapiResponse(questions.data)
                                             )?.map((question) => {
-                                                const { subject, numReplies, activeAt, replies, profile, permalink } =
-                                                    question
+                                                const { subject, activeAt, replies, profile, permalink } = question
+                                                const numReplies = getFilteredReplyCount(replies)
                                                 const latestAuthor =
                                                     replies?.data?.[replies.data.length - 1]?.profile || profile
                                                 const active = `/questions/${permalink}` === appWindow?.path

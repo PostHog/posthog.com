@@ -49,3 +49,15 @@ export function flattenStrapiResponse(response: any): any {
 
     return response
 }
+
+export function getFilteredReplyCount(replies: any): number {
+    return (
+        replies?.data?.filter(
+            (reply: any) =>
+                // Only show published replies (matches publicationState: 'live' behavior in useQuestion hook)
+                reply?.attributes?.publishedAt !== null &&
+                // Hide replies that have been marked unhelpful from Max AI from the count
+                (reply?.attributes?.profile?.data.id !== 28378 || reply?.attributes?.helpful !== false)
+        )?.length || 0
+    )
+}
