@@ -148,7 +148,7 @@ The AI platform is actively evolving. Major initiatives include:
 - **Deep research refinement**: Improving research strategies and denoising algorithms
 - **Mode expansion**: Adding more specialized agent modes as product teams identify needs
 
-For details on upcoming work, see [Future Directions](/handbook/engineering/ai/implementation#future-directions).
+For details on upcoming work, see [Future directions](/handbook/engineering/ai/implementation#future-directions).
 
 ## Documentation navigation
 
