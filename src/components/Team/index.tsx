@@ -15,7 +15,7 @@ import { TeamMember } from 'components/People'
 import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconInfo, IconX, IconCrown, IconPlus } from '@posthog/icons'
+import { IconInfo, IconX, IconCrown, IconPlus, IconShieldLock } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
@@ -476,12 +476,14 @@ export default function Team({
 
     const handleTeamLead = (profileID, isTeamLead) => {
         if (isTeamLead) {
+            // Remove this person as team lead
             setFieldValue(
                 'teamLeads',
                 values.teamLeads.filter((teamLead) => teamLead.id !== profileID)
             )
         } else {
-            setFieldValue('teamLeads', [...values.teamLeads, { id: profileID }])
+            // Set this person as the only team lead (remove all others first)
+            setFieldValue('teamLeads', [{ id: profileID }])
         }
     }
 
@@ -666,15 +668,26 @@ export default function Team({
                                                       >
                                                           <IconX className="w-4 h-4" />
                                                       </button>
-                                                      <button
-                                                          onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                          className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
-                                                              isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
-                                                          }`}
-                                                          title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
+                                                      <Tooltip
+                                                          trigger={
+                                                              <button
+                                                                  onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                                  className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
+                                                                      isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                                  }`}
+                                                              >
+                                                                  <IconCrown className="w-4 h-4" />
+                                                              </button>
+                                                          }
+                                                          delay={0}
                                                       >
-                                                          <IconCrown className="w-4 h-4" />
-                                                      </button>
+                                                          <>
+                                                              <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                              {isTeamLead(id)
+                                                                  ? 'Remove as team lead'
+                                                                  : 'Set as team lead'}
+                                                          </>
+                                                      </Tooltip>
                                                   </div>
                                               )}
                                           </li>
