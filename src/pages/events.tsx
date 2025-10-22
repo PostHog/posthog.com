@@ -78,28 +78,51 @@ const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent:
     const { addToast } = useToast()
     const [events, setEvents] = useState<Event[]>([])
     const fetchEvents = async (page = 1) => {
-        const eventsQuery = qs.stringify(
-            {
-                pagination: {
-                    page,
-                    pageSize: 100,
-                },
-                sort: ['date:desc'],
-                populate: {
-                    location: {
-                        populate: ['venue'],
+        try {
+            const eventsQuery = qs.stringify(
+                {
+                    pagination: {
+                        page,
+                        pageSize: 100,
                     },
-                    photos: true,
-                    speakers: true,
-                    partners: true,
+                    sort: ['date:desc'],
+                    populate: {
+                        location: {
+                            populate: ['venue'],
+                        },
+                        photos: true,
+                        speakers: true,
+                        partners: true,
+                    },
                 },
-            },
-            { encodeValuesOnly: true }
-        )
-        const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
-        const { data: events, meta } = await fetch(eventsUrl).then((res) => res.json())
-        setEvents((prev) => [...prev, ...events.map(transformStrapiEvent)])
-        if (meta?.pagination?.pageCount > meta?.pagination?.page) await fetchEvents(page + 1)
+                { encodeValuesOnly: true }
+            )
+            const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
+            const response = await fetch(eventsUrl)
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch events: ${response.statusText}`)
+            }
+
+            const { data: events, meta } = await response.json()
+
+            if (!events || !Array.isArray(events)) {
+                throw new Error('Invalid response format: events data is missing or malformed')
+            }
+
+            setEvents((prev) => [...prev, ...events.map(transformStrapiEvent)])
+
+            if (meta?.pagination?.pageCount > meta?.pagination?.page) {
+                await fetchEvents(page + 1)
+            }
+        } catch (error: any) {
+            console.error('Error fetching events:', error)
+            addToast({
+                title: 'Failed to load events',
+                description: error?.message || 'An unexpected error occurred while loading events.',
+                error: true,
+            })
+        }
     }
 
     const deleteEvent = async (eventId: number) => {
