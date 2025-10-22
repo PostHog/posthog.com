@@ -6,9 +6,9 @@ showTitle: true
 
 This page provides implementation guidance, pricing philosophy, and future directions for the PostHog AI platform. For a high-level overview, see the [AI platform overview](/handbook/engineering/ai/ai-platform).
 
-## Pricing and Product Positioning
+## Pricing and product positioning
 
-### How We Think About Pricing
+### How we think about pricing
 
 We think about AI features in two categories:
 
@@ -18,21 +18,21 @@ We think about AI features in two categories:
 
 Right now everything is in beta and pricing is subject to change as we learn what users value.
 
-### How Users Should Think About Our Products
+### How users should think about our products
 
-**PostHog AI** is the main PostHog product for AI interactions. It's where most users will spend their time. You can switch between Core, Deep Research, and Session Summaries modes depending on what you're trying to do. The UX is better than external tools because we can support sharing, navigation, and linking between AI results and PostHog artifacts. PostHog AI is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
+**PostHog AI** is the main PostHog product for AI interactions. It's where most users will spend their time. You can switch between Core, Deep research, and Session summaries features depending on what you're trying to do. The UX is better than external tools because we can support sharing, navigation, and linking between AI results and PostHog artifacts. PostHog AI is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
 
-**Deep Research** is a mode available within PostHog AI, but also accessible through its own dedicated UI if you want to jump straight into research mode. Use it for open-ended investigative work where you're trying to understand a complex problem.
+**Deep research** is a mode available within PostHog AI, but also accessible through its own dedicated UI if you want to jump straight into research mode. Use it for open-ended investigative work where you're trying to understand a complex problem.
 
-**Session Summaries** is callable from PostHog AI and Deep Research, and also has its own UI. Use it when you need to analyze many session recordings and extract patterns or issues.
+**Session summaries** is callable from PostHog AI and Deep research, and also has its own UI. Use it when you need to analyze many session recordings and extract patterns or issues.
 
 **Array** is a desktop product for single-engineer use. It's separate from PostHog AI because the workflow is different — you're not asking questions, you're letting an AI agent watch PostHog for problems and automatically fix them in your codebase. Think of it as an AI assistant that lives in your development environment.
 
 **MCP** is for users who prefer to work in third-party tools like Claude Code or VS Code. You get access to PostHog's data and can combine it with other MCP servers (like Hubspot or Zendesk). The trade-off is you don't get PostHog AI's polished UX or PostHog-specific training.
 
-## Implementation Recommendations
+## Implementation recommendations
 
-### For Engineers Adding AI Features
+### For engineers adding AI features
 
 If your feature **reads or writes PostHog data**, build it into PostHog AI or have it hand off to PostHog AI after initiation. For example, if you're adding a "Fix with AI" button to debug SQL queries, that button should open PostHog AI with context about the query, so users can iteratively debug with AI assistance.
 
@@ -40,27 +40,27 @@ If your feature **triggers code changes**, feed it as a signal into the Array pr
 
 If your feature **doesn't fit either category**, use your judgment and consult with the PostHog AI team if you're unsure. We're still figuring out where some things fit.
 
-## Future Directions
+## Future directions
 
-### Third-Party Context Integration
+### Third-party context integration
 
 We want to connect PostHog AI to third-party tools for additional context. Imagine PostHog AI analyzing data across PostHog, Slack messages, and Zendesk tickets to understand not just what users are doing, but what they're saying and reporting. This data could also generate signals for the Array product — if users are complaining about a bug in Slack and PostHog sees errors in the same area, that's a strong signal for Array to investigate and potentially fix it automatically.
 
 This is in the idea stage right now, but the PostHog AI team will likely start working on it soon.
 
-### Continuous Instrumentation
+### Continuous instrumentation
 
 The Wizard's future evolution involves continuous instrumentation — watching your codebase and suggesting event tracking for new features, filling gaps in existing tracking, and standardizing event patterns. This could integrate with Array to automatically handle PostHog instrumentation when generating code.
 
-### Mode Expansion
+### Mode expansion
 
 As product teams identify needs, we'll continue adding specialized agent modes. The mode architecture is designed to scale — teams can create their own modes without touching the core agent infrastructure.
 
-### Research Improvements
+### Research improvements
 
-Deep Research is being refined with better research strategies, improved denoising algorithms, and more sophisticated pattern recognition. The goal is to reduce rabbit holes and improve data interpretation accuracy.
+Deep research is being refined with better research strategies, improved denoising algorithms, and more sophisticated pattern recognition. The goal is to reduce rabbit holes and improve data interpretation accuracy.
 
-## Contact and Resources
+## Contact and resources
 
 For questions about working with PostHog AI, ask in the #team-posthog-ai Slack channel.
 
