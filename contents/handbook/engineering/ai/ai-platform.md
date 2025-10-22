@@ -76,7 +76,7 @@ When you need to investigate complex, open-ended problems, Deep Research digs de
 [Learn more →](/handbook/engineering/ai/products#deep-research)
 
 ### Session summaries [Alpha]
-Analyze hundreds of session recordings in minutes instead of hours. Session Summaries finds patterns, clusters similar issues, and shows you what's actually happening across your user sessions—not just what you caught in the first few recordings you watched.
+Analyze hundreds of session recordings in minutes instead of hours. Session summaries finds patterns, clusters similar issues, and shows you what's actually happening across your user sessions—not just what you caught in the first few recordings you watched.
 
 **Best for**: Understanding UX issues, debugging problems affecting multiple users, finding edge cases
 **Status**: Alpha | **Pricing**: Paid with free tier
