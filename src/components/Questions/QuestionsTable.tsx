@@ -9,7 +9,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { useInView } from 'react-intersection-observer'
 import { IconCheckCircle, IconClock, IconPin, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
-import { getFilteredReplyCount } from 'utils'
+import { getFilteredReplyCount } from '../../utils'
 dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
