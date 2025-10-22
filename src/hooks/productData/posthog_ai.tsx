@@ -287,7 +287,7 @@ export const posthog_ai = {
             icon: <IconWarning className="size-5" />,
             color: 'orange',
             description:
-                'Find out what broke before your users tweet about it. PostHog AI helps identify error patterns and correlate signals across your product data.',
+                'Find out what broke before your users tweet about it. PostHog AI connects exceptions to user sessions, revenue impact, and business context—not just stack traces.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806655/error_tracking_4e0dff38af.png',
@@ -299,10 +299,22 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Stack trace decoder',
-                    description: 'Translates cryptic errors into "oh, THAT\'S the problem."',
+                    name: 'Exception hunter',
+                    description: 'Natural language search to find specific errors (e.g., "timeout errors in checkout")',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 80,
+                    percent: 70,
+                },
+                {
+                    name: 'Impact ranker',
+                    description: 'Surfaces high-impact exceptions based on affected users and business context',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Smart grouper',
+                    description: 'Groups exceptions by root cause using semantic similarity, not just stack traces',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
                 },
             ],
         },
@@ -328,22 +340,22 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Question curator',
-                    description: 'Generates complete surveys based on your research goals',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 80,
-                },
-                {
-                    name: 'Salt sifter',
-                    description: 'Separates legitimate responses from people having a bad day',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 100,
-                },
-                {
-                    name: 'Insight disseminator',
-                    description: 'Translates sentiment summaries into actionable product insights',
+                    name: 'Survey builder',
+                    description: 'Generates questions, sets up targeting, and launches surveys in seconds',
                     sticker: <StickerPath className="size-6" />,
                     percent: 90,
+                },
+                {
+                    name: 'Response synthesizer',
+                    description: 'Surfaces themes and patterns across all feedback',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Feedback oracle',
+                    description: 'Ask questions across all survey responses and get answers by meaning, not just keyword matching',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
                 },
             ],
         },
