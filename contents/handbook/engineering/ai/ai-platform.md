@@ -136,7 +136,7 @@ For complete definitions, see the [Glossary](/handbook/engineering/ai/architectu
 - **Need implementation guidance?** Check [Implementation guide](/handbook/engineering/ai/implementation) for best practices and patterns.
 
 ### For product managers
-- **Planning an AI feature?** Read [Pricing and Product Positioning](/handbook/engineering/ai/implementation#pricing-and-product-positioning) to understand our approach.
+- **Planning an AI feature?** Read [Pricing and product positioning](/handbook/engineering/ai/implementation#pricing-and-product-positioning) to understand our approach.
 - **Want to understand capabilities?** See [Products](/handbook/engineering/ai/products) for detailed breakdowns of each product.
 
 ## What's next?
