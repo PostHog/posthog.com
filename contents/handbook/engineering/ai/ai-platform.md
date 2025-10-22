@@ -68,7 +68,7 @@ Your primary interface for working with PostHog. Instead of clicking through for
 [Learn more →](/handbook/engineering/ai/products#posthog-ai)
 
 ### Deep research [Under development]
-When you need to investigate complex, open-ended problems, Deep Research digs deep. It systematically explores your data—session recordings, analytics, error logs—and produces comprehensive research reports that would take a human analyst hours to create.
+When you need to investigate complex, open-ended problems, Deep research digs deep. It systematically explores your data—session recordings, analytics, error logs—and produces comprehensive research reports that would take a human analyst hours to create.
 
 **Best for**: Understanding why metrics changed, investigating user behavior patterns, root cause analysis
 **Status**: Under development | **Pricing**: Paid with free tier
