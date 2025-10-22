@@ -658,6 +658,7 @@ export default function Team({
                                                   pineappleOnPizza={pineappleOnPizza}
                                                   startDate={profile.attributes.startDate}
                                                   isTeamLead={isTeamLead(id)}
+                                                  viewingOwnTeam={true}
                                               />
                                               {editing && (
                                                   <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">

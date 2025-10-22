@@ -718,6 +718,7 @@ export default function TeamPage(props: TeamPageProps) {
                                                       startDate={profile.attributes.startDate}
                                                       isTeamLead={isTeamLead(id)}
                                                       teams={teams}
+                                                      viewingOwnTeam={true}
                                                   />
                                                   {editing && (
                                                       <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
