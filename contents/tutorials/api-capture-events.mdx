@@ -45,6 +45,12 @@ For your PostHog project (if you're authenticated on [PostHog](https://app.posth
 <ph_client_api_host>/i/v0/e/
 ```
 
+You can also use the `/batch` endpoint to capture multiple events in one request. We cover this in the [batching events section](#batching-events).
+
+```bash
+<ph_client_api_host>/batch/
+```
+
 ## Authenticating with the project API key
 
 The first thing needed, like the [basic GET request tutorial](/tutorials/api-get-insights-persons), is to authenticate ourselves in the API. Unlike in the GET request tutorial, we can use the project API key (the same key you use to initialize a PostHog library). This can be found in your project settings. 
