@@ -8,7 +8,7 @@ showTitle: true
 
 The PostHog AI platform is our infrastructure for building and delivering AI-powered features across all PostHog products. Instead of each team building isolated AI capabilities, we provide shared architecture, reusable components, and a consistent framework that lets everyone contribute toward our AI capabilities while maintaining quality and consistency.
 
-Think of it like HogQL: rather than having every team write their own query engines, we built one shared system that everyone can use and extend. The AI platform follows the same philosophy—avoid reinventing AI infrastructure and prevent "death by random AI widgets."
+Think of it like HogQL: rather than having every team write their own query engines, we built one shared system that everyone can use and extend. The AI platform follows the same philosophy — avoid reinventing AI infrastructure and prevent "death by random AI widgets."
 
 ## Why we built it
 
@@ -45,13 +45,13 @@ These are the AI features users interact with directly:
 The shared components that power all products:
 - **Single-loop agent**: An agent architecture that maintains full context and can dynamically load domain expertise
 - **Agent modes**: Pluggable modules that give the agent specialized knowledge and tools (SQL, Analytics, CDP, etc.)
-- **Core tools**: Universal capabilities like search, data reading, and task tracking
-- **MCP integration**: Exposes agent capabilities to external tools via Model Context Protocol
+- **Core tools**: Universal features like search, data reading, and task tracking
+- **MCP integration**: Exposes agent features to external tools via Model Context Protocol
 
 ### 3. Integration points
 
 How everything connects together:
-- Products share the same agent modes through the MCP server
+- Products share the same agent features through the MCP server
 - Task generation systems (from Deep Research, Session Summaries, PostHog signals) feed Array
 - The Wizard and Array consume MCP tools to interact with PostHog
 
@@ -60,7 +60,7 @@ For a detailed technical overview, see [AI platform architecture](/handbook/engi
 ## Products overview
 
 ### PostHog AI [Beta]
-Your primary interface for working with PostHog. Instead of clicking through forms and menus, describe what you want in natural language. PostHog AI can create dashboards, write SQL queries, set up surveys, and answer questions about your data—all through conversation.
+Your primary interface for working with PostHog. Instead of clicking through forms and menus, describe what you want in natural language. PostHog AI can create dashboards, write SQL queries, set up surveys, and answer questions about your data — all through conversation.
 
 **Best for**: Quick answers, creating resources, learning PostHog, iterative exploration
 **Status**: Beta | **Pricing**: Paid with free tier
@@ -68,7 +68,7 @@ Your primary interface for working with PostHog. Instead of clicking through for
 [Learn more →](/handbook/engineering/ai/products#posthog-ai)
 
 ### Deep research [Under development]
-When you need to investigate complex, open-ended problems, Deep research digs deep. It systematically explores your data—session recordings, analytics, error logs—and produces comprehensive research reports that would take a human analyst hours to create.
+When you need to investigate complex, open-ended problems, Deep research digs deep. It systematically explores your data — session recordings, analytics, error logs — and produces comprehensive research reports that would take a human analyst hours to create.
 
 **Best for**: Understanding why metrics changed, investigating user behavior patterns, root cause analysis
 **Status**: Under development | **Pricing**: Paid with free tier
@@ -76,7 +76,7 @@ When you need to investigate complex, open-ended problems, Deep research digs de
 [Learn more →](/handbook/engineering/ai/products#deep-research)
 
 ### Session summaries [Alpha]
-Analyze hundreds of session recordings in minutes instead of hours. Session summaries finds patterns, clusters similar issues, and shows you what's actually happening across your user sessions—not just what you caught in the first few recordings you watched.
+Analyze hundreds of session recordings in minutes instead of hours. Session summaries finds patterns, clusters similar issues, and shows you what's actually happening across your user sessions — not just what you caught in the first few recordings you watched.
 
 **Best for**: Understanding UX issues, debugging problems affecting multiple users, finding edge cases
 **Status**: Alpha | **Pricing**: Paid with free tier
@@ -84,7 +84,7 @@ Analyze hundreds of session recordings in minutes instead of hours. Session summ
 [Learn more →](/handbook/engineering/ai/products#session-summaries)
 
 ### Array [Under development]
-A desktop agent that watches PostHog for signals (errors, frustration patterns, user feedback) and automatically turns them into shipped code. Array handles the entire workflow—from signal detection to task creation to code generation to PR creation—with human oversight at key decision points.
+A desktop agent that watches PostHog for signals (errors, frustration patterns, user feedback) and automatically turns them into shipped code. Array handles the entire workflow - from signal detection to task creation to code generation to PR creation - with human oversight at key decision points.
 
 **Best for**: Product engineers who want to automate repetitive fixes and focus on building features
 **Status**: Under development | **Pricing**: TBD
@@ -100,7 +100,7 @@ Get PostHog set up in minutes instead of hours. The Wizard detects your tech sta
 [Learn more →](/handbook/engineering/ai/products#wizard)
 
 ### MCP server [General availability]
-Bring PostHog into your development environment. The MCP server makes PostHog's capabilities available to Claude Code, VS Code, and other MCP-compatible tools, so you never have to leave your editor to check analytics or create insights.
+Bring PostHog into your development environment. The MCP server makes PostHog AI's features available to Claude Code, VS Code, and other MCP-compatible tools, so you never have to leave your editor to check analytics or create insights.
 
 **Best for**: Engineers who prefer editor-based workflows, combining PostHog with other data sources
 **Status**: General availability | **Pricing**: Free
@@ -108,26 +108,13 @@ Bring PostHog into your development environment. The MCP server makes PostHog's 
 [Learn more →](/handbook/engineering/ai/products#mcp)
 
 ## Key concepts
-
-Before diving into the details, here are the core concepts you'll encounter:
-
-**Agent**: An autonomous AI system that can reason, plan, and take actions by calling tools. PostHog AI is an agent.
-
-**Agent mode**: A specialized configuration that gives an agent domain-specific tools and expertise. When PostHog AI switches to "SQL mode," it gains SQL-specific knowledge and tools.
-
-**Tool**: An external capability the agent can call to perform actions—search docs, create insights, write SQL queries, etc.
-
-**Single-loop architecture**: An agent design where one agent maintains full context throughout a conversation, rather than delegating to isolated sub-agents.
-
-**MCP (Model Context Protocol)**: A standard protocol for connecting AI tools to external data sources and capabilities.
-
-For complete definitions, see the [Glossary](/handbook/engineering/ai/architecture#glossary).
+For a list of key concepts definitions, see the [Glossary](/handbook/engineering/ai/architecture#glossary).
 
 ## Getting started
 
 ### For users
 - **Want to try PostHog AI?** Open the chat interface in PostHog and start asking questions. See [user documentation](/docs/posthog-ai).
-- **Need deep investigation?** Toggle to Deep research mode in PostHog AI.
+- **Need deep investigation?** Toggle to Deep research feature in PostHog AI.
 - **Prefer working in your editor?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 
 ### For engineers building AI features

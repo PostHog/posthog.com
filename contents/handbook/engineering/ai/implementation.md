@@ -25,7 +25,7 @@ So that users can learn how to use PostHog without worrying about being charged,
 
 **PostHog AI** is the main PostHog product for AI interactions. It's where most users will spend their time. You can switch between Core, Deep research, and Session summaries features depending on what you're trying to do. The UX is better than external tools because we can support sharing, navigation, and linking between AI results and PostHog artifacts. PostHog AI is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
 
-**Deep research** is a mode available within PostHog AI, but also accessible through its own dedicated UI if you want to jump straight into research mode. Use it for open-ended investigative work where you're trying to understand a complex problem.
+**Deep research** is a feature available within PostHog AI, but also accessible through its own dedicated UI if you want to jump straight into research mode. Use it for open-ended investigative work where you're trying to understand a complex problem.
 
 **Session summaries** is callable from PostHog AI and Deep research, and also has its own UI. Use it when you need to analyze many session recordings and extract patterns or issues.
 
@@ -55,9 +55,9 @@ This is in the idea stage right now, but the PostHog AI team will likely start w
 
 The Wizard's future evolution involves continuous instrumentation — watching your codebase and suggesting event tracking for new features, filling gaps in existing tracking, and standardizing event patterns. This could integrate with Array to automatically handle PostHog instrumentation when generating code.
 
-### Mode expansion
+### Mode and features expansion
 
-As product teams identify needs, we'll continue adding specialized agent modes. The mode architecture is designed to scale — teams can create their own modes without touching the core agent infrastructure.
+As product teams identify needs, we'll continue adding specialized agent modes and user-facing features. The mode architecture is designed to scale — teams can create their own modes without touching the core agent infrastructure.
 
 ### Research improvements
 

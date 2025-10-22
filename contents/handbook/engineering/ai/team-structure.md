@@ -10,7 +10,7 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### The PostHog AI team
 
-**The PostHog AI team** is responsible for the architecture, performance, and UX/UI of the AI platform. We review PRs from product teams to ensure they meet our quality bar. We build and maintain the core tooling (search, read_data, read_taxonomy, enable_mode). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products — things like SQL generation or universal filtering.
+**The PostHog AI team** is responsible for the architecture, performance, and UX/UI of the AI platform. We review PRs from product teams to ensure they meet our quality bar. We build and maintain the core tooling (`search`, `read_data`, `read_taxonomy`, `enable_mode`). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products — things like SQL generation or universal filtering.
 
 ### The Array team
 
@@ -18,15 +18,15 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### Product teams
 
-**Product teams** add their product-specific tools and modes to the platform. They're responsible for:
-- Making sure their capabilities are discoverable by users
+**Product teams** add their product-specific tools, modes and features to the platform. They're responsible for:
+- Making sure their features are discoverable by users
 - Implementing the tool logic for their specific product area
 - Adding any necessary frontend components (usually based on the MaxTool frontend class pattern)
 - Defining workflows as trajectories for their domain
 
 ## How to get started
 
-If you need AI capabilities for your product area, here's the process:
+If you need AI features for your product area, here's the process:
 
 ### Step 1: Reach out early
 

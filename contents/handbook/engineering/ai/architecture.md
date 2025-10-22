@@ -53,13 +53,13 @@ graph TB
 
 ### Key integration points
 
-1. **The agent exposes tools via agent modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
+1. **The agent uses dynamic modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
 
-2. **MCP provides universal access**: The MCP server makes agent modes accessible to any MCP-compatible client, including Array, Wizard, and third-party tools like Claude Code.
+2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client, including Array, Wizard, and third-party tools like Claude Code.
 
 3. **Task generation feeds Array**: Signals from PostHog data, PostHog AI conversations, and Deep Research investigations are processed into structured tasks that Array can execute automatically.
 
-4. **Shared capabilities**: Array, Wizard, and external tools all consume the same agent modes through the MCP, ensuring consistency across the platform.
+4. **Shared features**: Array, Wizard, and external tools all consume the same agent features through the MCP, ensuring consistency across the platform.
 
 ## Single-loop agent architecture
 
@@ -167,11 +167,11 @@ graph TB
     Actions --> Response[Response to User]
 ```
 
-## How PostHog AI and MCP share the same capabilities
+## How PostHog AI and MCP share the same features
 
 The problem we needed to solve: PostHog AI and the MCP server were developed by different teams, didn't offer the same tools, and had completely different architectures. Users would find features in PostHog AI that didn't exist in the MCP, and vice versa.
 
-The solution is an abstraction layer. Agent modes expose both high-level LLM tools (like "create a funnel with these parameters") and low-level API endpoint tools (like "call POST /api/projects/{id}/insights"). Both PostHog AI and the MCP have access to the same capabilities, just through different interfaces.
+The solution is an abstraction layer. Agent modes expose both high-level LLM tools (like "create a funnel with these parameters") and low-level API endpoint tools (like "call POST /api/projects/{id}/insights"). Both PostHog AI and the MCP have access to the same features, just through different interfaces.
 
 ## How Array and Wizard Fit In
 
@@ -183,9 +183,13 @@ We could also tag modes for specific interfaces. For example, a `CodingMode(tags
 
 **Agent**: An autonomous AI process that can reason about what to do, plan multiple steps, and take actions by calling tools. PostHog is an agent. Claude is an agent.
 
-**Agent mode**: A specialized configuration of an agent that gives it domain-specific tools, expert knowledge (via system prompts), and workflow examples. When PostHog AI switches to "SQL mode," it becomes an expert in writing and debugging SQL queries.
+**Single-loop architecture**: An agent architecture that maintains full context throughout a conversation without delegating to black-box sub-agents. The agent can see all tools, all previous messages, and all decisions it's made.
 
-**Tool**: An external capability the agent can call to perform actions it can't do natively. Tools might search documentation, query a database, create a PostHog resource, or run code.
+**Feature**: Any Agent capability we expose to the user. Creating insights, summarizing sessions, performing a Deep research, all of these are features. 
+
+**Tool**: A capability the agent can call to perform actions — search docs, create insights, write SQL queries, etc.
+
+**Agent mode**: A specialized configuration of an agent that gives it domain-specific tools, expert knowledge (via system prompts), and workflow examples. When PostHog AI switches to "SQL mode," it becomes an expert in writing and debugging SQL queries.
 
 **Trajectory**: An example workflow showing the sequence of steps to accomplish a specific task. We use trajectories instead of the heavier "jobs-to-be-done" framework to teach agents how to use tools together effectively.
 
@@ -194,5 +198,3 @@ We could also tag modes for specific interfaces. For example, a `CodingMode(tags
 **MCP Server**: The component that exposes tools and data sources following the MCP specification. PostHog's MCP server makes our analytics data available to any MCP-compatible client.
 
 **MCP Client**: The component that connects to MCP servers to discover and use tools. Claude Code, VS Code with AI extensions, and other tools can act as MCP clients.
-
-**Single-loop agent**: An agent architecture that maintains full context throughout a conversation without delegating to black-box sub-agents. The agent can see all tools, all previous messages, and all decisions it's made.

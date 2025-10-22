@@ -445,12 +445,12 @@ The MCP server also supports session state (active project ID, org ID, distinct 
 
 ### PostHog AI vs. MCP: When to use each
 
-Both PostHog AI and MCP give you access to the same PostHog capabilities, but they serve different workflows:
+Both PostHog AI and MCP give you access to the same features, but they serve different workflows:
 
 **Use PostHog AI when:**
 - You want the best possible UX with sharing, navigation, and linking between AI results and PostHog artifacts
 - You're doing exploratory analysis and want to iterate quickly
-- You need Deep Research or Session Summaries capabilities
+- You need Deep Research or Session Summaries features
 - You want AI specifically trained on PostHog patterns and your actual usage data
 
 **Use MCP when:**
@@ -463,4 +463,4 @@ Our goal is to make PostHog AI so good that users want to "own" their workflow i
 
 ### Current Status & Ownership
 
-MCP is in general availability. The PostHog AI team owns the MCP server, with Josh Snyder as the primary support contact. We're actively working on dynamic tool discovery to reduce context window usage and aligning the server with our mode switching framework to share capabilities with PostHog AI.
+MCP is in general availability. The PostHog AI team owns the MCP server, with Josh Snyder as the primary support contact. We're actively working on dynamic tool discovery to reduce context window usage and aligning the server with our mode switching framework to share features with PostHog AI.
