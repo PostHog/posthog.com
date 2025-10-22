@@ -6,7 +6,7 @@ We offer pre-paid plans to companies who are looking to commit to using PostHog 
 
 ## Benefits
 
-With an pre-paid plan you'll:
+With a pre-paid plan you'll:
 
 1. Obtain a bigger discount versus paying monthly based on usage.
 2. Have the ability to use additional PostHog products without signing a new contract.
