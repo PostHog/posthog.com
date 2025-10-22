@@ -747,8 +747,9 @@ export default function TeamPage(props: TeamPageProps) {
                                                               <>
                                                                   <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
                                                                   {isTeamLead(id)
-                                                                      ? 'Remove as team lead!'
-                                                                      : 'Set as team lead!'}
+                                                                  {isTeamLead(id)
+                                                                      ? 'Remove as team lead'
+                                                                      : 'Set as team lead'}
                                                               </>
                                                           </Tooltip>
                                                       </div>
