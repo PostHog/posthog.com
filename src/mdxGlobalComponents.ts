@@ -26,7 +26,9 @@ import { Steps, Step } from './components/Docs/Steps'
 import AskMax from './components/AskMax'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
+import TaskOwnershipTable from './components/TaskOwnershipTable'
 
+// Global MDX components
 export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
@@ -57,4 +59,5 @@ export const shortcodes = {
     AskMax,
     CountriesWeHireIn,
     FeatureOwnershipTable,
+    TaskOwnershipTable,
 }
