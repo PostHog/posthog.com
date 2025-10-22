@@ -54,6 +54,20 @@ Write "URLs", not "urls".
 
 Many acronyms, like that one, will be familiar to developers. When in doubt, link the first use of an acronym to a definition, or provide one.
 
+### Use sentence case for titles and product names
+
+Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay apps", not "PostHog has Product Analytics and Session Replay apps".
+
+### Capitalize proper names as appropriate
+
+Write "Redis server", not "redis server".
+
+### Capitalize acronyms and define where needed
+
+Write "URLs", not "urls".
+
+Many acronyms, like that one, will be familiar to developers. When in doubt, link the first use of an acronym to a definition, or provide one.
+
 ### Use the Oxford comma 
 
 Write "bananas, apples, and oranges", not "bananas, apples and oranges".

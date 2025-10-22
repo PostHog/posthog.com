@@ -16,8 +16,8 @@ const linklist: IProps[] = [
                 url: '/products',
             },
             {
-                title: 'Max AI',
-                url: '/max',
+                title: 'PostHog AI',
+                url: '/ai',
             },
             {
                 title: 'Product analytics',

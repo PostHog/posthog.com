@@ -72,9 +72,11 @@ So you've written a great piece of content. Now what? Here are various ways to s
 
 ### 1. SEO
 
-If we can capture search traffic, we should try to do it. Start by understanding the keywords related to the article and what keywords you are trying to rank for. Make sure you are including those where possible and then follow our [SEO best practices guide](/handbook/content/seo-guide).
+If we can capture search traffic, we should try to do it. Start by identifying the keywords most relevant to your article, and aim for a mix of short-tail terms (broad, high-volume) and long-tail ones (specific, lower-volume but higher intent). Use them naturally throughout the piece – especially in headings, intros, and anchor text – and make sure your target keyword appears in the meta title and meta description.
 
-Improving an article's SEO also helps it get referenced in LLMs (aka AEO).
+Good SEO doesn’t just help your content rank in search, it also improves your chances of being cited by LLMs (aka AEO).
+
+Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on structure, formatting, and linking.
 
 ### 2. LinkedIn
 
@@ -112,7 +114,7 @@ Tips for writing a good post:
 
 Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations. 
 
-It's worth sharing in their Slack channels directly as they don't see everything we publish. Asking them to smash the like button, subscribe, and share with their family is a good tactic too.
+It's worth sharing in their Slack channels directly as they don't see everything we publish. Asking them to smash the like button, subscribe, and share with their friends and family is a good tactic too.
 
 ### 5. Paid ads + newsletters
 

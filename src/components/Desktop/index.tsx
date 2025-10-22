@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import useProduct from 'hooks/useProduct'
-import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons'
+import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -13,12 +11,14 @@ import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
 import { motion } from 'framer-motion'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
-import ProgressBar from 'components/ProgressBar'
-import OSButton from 'components/OSButton'
-import HourglassSpinner from './HourglassSpinner'
+
+declare global {
+    interface Window {
+        __desktopLoaded?: boolean
+    }
+}
 
 interface Product {
     name: string
@@ -110,9 +110,9 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
-        label: 'Roadmap',
-        Icon: <AppIcon name="map" />,
-        url: '/roadmap',
+        label: 'Changelog',
+        Icon: <AppIcon name="invite" />,
+        url: '/changelog',
         source: 'desktop',
     },
     // {
@@ -193,17 +193,6 @@ const validateIconPositions = (
     return true
 }
 
-const LOADING_MESSAGES = [
-    'Booting the PostHog experience',
-    'Compiling hedgehog shaders',
-    'Rebuilding webpack',
-    'Hydrating the hedgehogs',
-    'Sourcing and transforming nodes',
-    <>
-        Running <code>yarn serve</code>
-    </>,
-]
-
 export default function Desktop() {
     const productLinks = useProductLinks()
     const {
@@ -222,10 +211,8 @@ export default function Desktop() {
     })
     const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
-    const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
-    const [isMessageExiting, setIsMessageExiting] = useState(false)
 
-    function generateInitialPositions(): IconPositions {
+    function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
         // Default positions if container isn't available yet
@@ -248,7 +235,8 @@ export default function Desktop() {
 
         // Position productLinks starting from the left
         let currentColumn = 0
-        productLinks.forEach((app, index) => {
+        const leftIcons = columns === 1 ? [...productLinks, ...apps] : productLinks
+        leftIcons.forEach((app, index) => {
             const columnIndex = Math.floor(index / maxIconsPerColumn)
             const positionInColumn = index % maxIconsPerColumn
 
@@ -259,6 +247,10 @@ export default function Desktop() {
 
             currentColumn = Math.max(currentColumn, columnIndex + 1)
         })
+
+        if (columns === 1) {
+            return positions
+        }
 
         // Start from the rightmost position and flow left
         const rightmostStart = containerWidth - paddingHorizontal - iconWidth
@@ -276,16 +268,24 @@ export default function Desktop() {
             }
         })
 
+        if (columns > 1) {
+            const isAnyIconOutOfBounds = Object.values(positions).some(
+                (position) =>
+                    position.x < 0 ||
+                    position.y < 0 ||
+                    position.x + iconWidth > containerWidth ||
+                    position.y + iconHeight > containerHeight
+            )
+
+            if (isAnyIconOutOfBounds) {
+                return generateInitialPositions(1)
+            }
+        }
+
         return positions
     }
 
     useEffect(() => {
-        // Hide the initial SSR loader once React has hydrated
-        const initialLoader = document.getElementById('initial-loader')
-        if (initialLoader) {
-            initialLoader.style.display = 'none'
-        }
-
         const savedPositions = localStorage.getItem(STORAGE_KEY)
         if (savedPositions) {
             try {
@@ -322,19 +322,11 @@ export default function Desktop() {
     }, [posthogInstance])
 
     useEffect(() => {
-        if (rendered) return
-
-        const interval = setInterval(() => {
-            setIsMessageExiting(true)
-
-            setTimeout(() => {
-                setCurrentMessageIndex((prev) => (prev + 1) % LOADING_MESSAGES.length)
-                setIsMessageExiting(false)
-            }, 300)
-        }, 1000)
-
-        return () => clearInterval(interval)
-    }, [rendered, currentMessageIndex])
+        if (typeof window !== 'undefined') {
+            window.__desktopLoaded = true
+            window.dispatchEvent(new CustomEvent('desktopLoaded'))
+        }
+    }, [])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
@@ -578,26 +570,6 @@ export default function Desktop() {
                         recycle={false}
                         numberOfPieces={1000}
                     />
-                </div>
-            )}
-            {!rendered && (
-                <div
-                    data-scheme="secondary"
-                    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex items-center justify-center z-50"
-                >
-                    <div className="flex items-center justify-center gap-2 w-80 bg-primary/75 backdrop-blur border border-primary rounded p-4">
-                        <HourglassSpinner className="text-primary opacity-75" />
-                        <div className="flex-1 relative">
-                            <strong
-                                key={currentMessageIndex}
-                                className={`font-medium text-secondary block ${
-                                    isMessageExiting ? 'animate-slide-up-fade-out' : 'animate-slide-up-fade-in'
-                                }`}
-                            >
-                                {LOADING_MESSAGES[currentMessageIndex]}
-                            </strong>
-                        </div>
-                    </div>
                 </div>
             )}
         </>

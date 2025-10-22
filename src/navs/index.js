@@ -374,6 +374,10 @@ export const dataPipelines = {
                     name: 'Redshift',
                     url: '/docs/cdp/batch-exports/redshift',
                 },
+                {
+                    name: 'Databricks',
+                    url: '/docs/cdp/batch-exports/databricks',
+                },
             ],
         },
         {
@@ -2403,12 +2407,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools and features',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
+                            name: 'PostHog AI',
+                            url: '/docs/posthog-ai',
                         },
                         {
                             name: 'Toolbar',
@@ -2426,6 +2430,10 @@ export const docsMenu = {
                         {
                             name: 'Activity',
                             url: '/docs/activity',
+                        },
+                        {
+                            name: 'SDK doctor',
+                            url: '/docs/sdk-doctor',
                         },
                         {
                             name: 'Organizations',
@@ -2697,8 +2705,8 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
-                            name: 'Annual plans',
-                            url: '/docs/billing/annual-plans',
+                            name: 'Pre-paid plans',
+                            url: '/docs/billing/pre-paid-plans',
                         },
                         {
                             name: 'Spike detection',
@@ -3706,6 +3714,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/hono',
                         },
                         {
+                            name: 'Android',
+                            url: '/docs/error-tracking/installation/android',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
@@ -3778,6 +3790,12 @@ export const docsMenu = {
                     url: '/docs/error-tracking/fingerprints',
                     icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
                 },
                 {
                     name: 'Guides',
@@ -4546,37 +4564,37 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/docs/max-ai',
+            url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
                 {
-                    name: 'Max AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/max-ai#how-do-i-access-max',
+                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
                     name: 'Data access',
-                    url: '/docs/max-ai#what-access-does-max-have-to-my-data',
+                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
                 {
                     name: 'Security',
-                    url: '/docs/max-ai#is-my-data-shared-with-third-parties',
+                    url: '/docs/posthog-ai#is-my-data-shared-with-third-parties',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -4802,10 +4820,10 @@ export const productMenu = {
             url: '/llm-analytics',
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/max',
+            url: '/ai',
         },
         {
             name: 'Product OS',

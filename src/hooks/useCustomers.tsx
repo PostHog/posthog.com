@@ -388,7 +388,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'data_warehouse',
             'error_tracking',
             'cdp',
-            'max_ai',
+            'posthog_ai',
         ],
         notes: <>Would it be clever or lame if we included our own company here?</>,
         logo: PostHogLogo,
@@ -504,7 +504,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
-        toolsUsed: ['max_ai', 'experiments', 'product_analytics'],
+        toolsUsed: ['posthog_ai', 'experiments', 'product_analytics'],
         industries: ['Devtool'],
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Postgres in the cloud',
@@ -574,7 +574,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
-        toolsUsed: ['max_ai', 'session_replay', 'product_analytics'],
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
         industries: ['AI', 'Search'],
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
@@ -633,7 +633,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     // },
     gankster: {
         name: 'Gankster',
-        toolsUsed: ['max_ai', 'session_replay', 'product_analytics'],
+        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
         industries: ['Gaming'],
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Gaming platform',
