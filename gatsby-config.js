@@ -23,20 +23,19 @@ console.log('🔍 Monorepo docs config:', {
     pathExists,
     POSTHOG_REPO_PATH: process.env.POSTHOG_REPO_PATH,
     POSTHOG_DOCS_REF: envVarSet,
-    shouldActivate: pathExists || envVarSet,
+    willActivate: pathExists,
 })
 
-const monorepoDocsPlugin =
-    pathExists || envVarSet
-        ? {
-              resolve: `gatsby-source-filesystem`,
-              options: {
-                  name: `monorepo-docs`,
-                  path: monorepoDocsPath,
-                  ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
-              },
-          }
-        : null
+const monorepoDocsPlugin = pathExists
+    ? {
+          resolve: `gatsby-source-filesystem`,
+          options: {
+              name: `monorepo-docs`,
+              path: monorepoDocsPath,
+              ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+          },
+      }
+    : null
 
 const getQuestionPages = async (base) => {
     const fetchQuestions = async (page) => {
