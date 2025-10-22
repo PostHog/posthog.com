@@ -129,7 +129,7 @@ Flox is a development environment manager – it ensures we all have the same ri
 
 To get PostHog running in a dev environment:
 
-1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
+1. Once you have cloned the repo and installed OrbStack, now install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
 
     ```bash
     brew install flox ruff rustup && rustup-init && rustup default stable
