@@ -10,13 +10,16 @@ This page provides implementation guidance, pricing philosophy, and future direc
 
 ### How we think about pricing
 
-We think about AI features in two categories:
+With our AI pricing, we want to follow the [PostHog pricing principles](/handbook/engineering/feature-pricing). Concretely, this means:
 
-**Features that don't add new capabilities** are things you could do by clicking around the UI, but AI makes them faster or easier. PostHog AI falls into this category — it's a different interaction model, not a new capability. These features are important for learning PostHog and improving adoption, so we keep them free (with reasonable caps for non-subscribers).
+1. We offer a generous free tier
+2. We charge usage-based instead of a flat subscription
 
-**Features that add new capabilities** are things you couldn't do before, or would take so long that you practically couldn't do them. Deep Research and Session Summaries fall into this category. These features can find signals in data that humans would miss, or accomplish in minutes what would take hours manually. We make these paid features with generous free tiers, just like our other products.
+The unit that matches usage the closest is token consumption. This means to fix a SQL query with AI, the user would pay very little, analysing hundreds of session recordings will cost more. Since token costs differ based on token type & model, we are passing on our own costs to our users, with a small markup, instead of having a fixed price per token.
 
-Right now everything is in beta and pricing is subject to change as we learn what users value.
+To keep our AI pricing simple, this pricing applies to all AI features once they are in general availability, that means per-product AI features as well as Session summaries and Deep research.
+
+So that users can learn how to use PostHog without worrying about being charged, we are keeping chats that refer to our documentaion free without a limit.
 
 ### How users should think about our products
 
