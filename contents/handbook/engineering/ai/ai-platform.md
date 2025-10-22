@@ -133,7 +133,7 @@ For complete definitions, see the [Glossary](/handbook/engineering/ai/architectu
 ### For engineers building AI features
 - **Adding AI to your product?** Start with [Team structure and collaboration](/handbook/engineering/ai/team-structure) to understand the process.
 - **Want to add a new agent mode?** See [Architecture](/handbook/engineering/ai/architecture) for technical details.
-- **Need implementation guidance?** Check [Implementation Guide](/handbook/engineering/ai/implementation) for best practices and patterns.
+- **Need implementation guidance?** Check [Implementation guide](/handbook/engineering/ai/implementation) for best practices and patterns.
 
 ### For product managers
 - **Planning an AI feature?** Read [Pricing and Product Positioning](/handbook/engineering/ai/implementation#pricing-and-product-positioning) to understand our approach.
