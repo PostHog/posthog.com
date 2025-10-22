@@ -105,7 +105,7 @@ const Row = ({
     } = question
 
     const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
-    const numReplies = getFilteredReplyCount(replies)
+    const numReplies = getFilteredReplyCount(replies.data)
     const { ref, inView } = useInView({
         threshold: 0,
         triggerOnce: true,
