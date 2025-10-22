@@ -222,23 +222,23 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Session summoner',
-                    description: 'Filters 10,000 sessions and teleports you to the 3 that matter',
+                    name: 'Session finder',
+                    description: 'Natural language search for specific replays (e.g., "users who abandoned checkout")',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 80,
+                    percent: 70,
                 },
                 {
-                    name: 'Rage click wrangler',
+                    name: 'Config helper',
                     description:
-                        'Groups frustration patterns into categories (scroll loops, failed clicks, hesitations)',
+                        'Helps set up privacy masking, regex rules, and recording configuration',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 100,
+                    percent: 30,
                 },
                 {
-                    name: 'Empathy engine',
-                    description: 'Explains what the user was trying to do, not just what they did',
+                    name: 'Playlist curator',
+                    description: 'Clusters similar sessions and shows you the 10 that represent 1000',
                     sticker: <StickerPath className="size-6" />,
-                    percent: 90,
+                    percent: 0,
                 },
             ],
         },
