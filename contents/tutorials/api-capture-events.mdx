@@ -1,6 +1,6 @@
 ---
 title: Using the PostHog API to capture events
-date: 2023-02-09T00:00:00.000Z
+date: 2025-10-22T00:00:00.000Z
 author:
   - ian-vanagas
 showTitle: true
@@ -175,8 +175,6 @@ print(response.json())
 ```
 
 ```js file=NodeJS
-// Load environment variables from .env file
-require('dotenv').config();
 
 const headers = {
     "Content-Type": "application/json",
@@ -267,9 +265,6 @@ print(response.json())
 ```
 
 ```js file=NodeJS
-// Load environment variables from .env file
-require('dotenv').config();
-
 const headers = {
     "Content-Type": "application/json",
 };
@@ -350,9 +345,6 @@ response = requests.post(url, headers=headers, json=body)
 print(response.json())
 ```
 ```js file=NodeJS
-// Load environment variables from .env file
-require('dotenv').config();
-
 const headers = {
     "Content-Type": "application/json",
 };
@@ -420,9 +412,6 @@ response = requests.post(url, headers=headers, json=body)
 print(response.json())
 ```
 ```js file=NodeJS
-// Load environment variables from .env file
-require('dotenv').config();
-
 const headers = {
     "Content-Type": "application/json",
 };
@@ -463,70 +452,62 @@ Here's an example of how to capture an error:
 <MultiLanguage>
 
 ```bash
-#!/bin/bash
-
-# Load environment variables from .env file
-if [ -f .env ]; then
-    export $(cat .env | grep -v '^#' | xargs)
-fi
-
 curl -X POST "<ph_client_api_host>/i/v0/e/" \
      -H "Content-Type: application/json" \
-     -d "{
-         \"api_key\": \"<ph_project_api_key>\",
-         \"event\": \"\$exception\",
-         \"properties\": {
-             \"distinct_id\": \"ian@posthog.com\",
-             \"\$exception_list\": [{
-                 \"type\": \"ScriptError\",
-                 \"value\": \"Command not found: fake_command\",
-                 \"mechanism\": {
-                     \"handled\": true,
-                     \"synthetic\": false
+     -d '{
+         "api_key": "<ph_project_api_key>",
+         "event": "$exception",
+         "properties": {
+             "distinct_id": "ian@posthog.com",
+             "$exception_list": [{
+                 "type": "ScriptError",
+                 "value": "Command not found: fake_command",
+                 "mechanism": {
+                     "handled": true,
+                     "synthetic": false
                  },
-                 \"stacktrace\": {
-                     \"type\": \"raw\",
-                     \"frames\": [
+                 "stacktrace": {
+                     "type": "raw",
+                     "frames": [
                          {
-                             \"platform\": \"custom\",
-                             \"lang\": \"bash\",
-                             \"function\": \"main\",
-                             \"filename\": \"basic-exception.sh\",
-                             \"lineno\": 15,
-                             \"colno\": 1,
-                             \"module\": \"script_execution\",
-                             \"resolved\": true,
-                             \"in_app\": true
+                             "platform": "custom",
+                             "lang": "bash",
+                             "function": "main",
+                             "filename": "basic-exception.sh",
+                             "lineno": 15,
+                             "colno": 1,
+                             "module": "script_execution",
+                             "resolved": true,
+                             "in_app": true
                          },
                          {
-                             \"platform\": \"custom\",
-                             \"lang\": \"bash\",
-                             \"function\": \"execute_command\",
-                             \"filename\": \"utils.sh\",
-                             \"lineno\": 42,
-                             \"colno\": 5,
-                             \"module\": \"command_handler\",
-                             \"resolved\": true,
-                             \"in_app\": true
+                             "platform": "custom",
+                             "lang": "bash",
+                             "function": "execute_command",
+                             "filename": "utils.sh",
+                             "lineno": 42,
+                             "colno": 5,
+                             "module": "command_handler",
+                             "resolved": true,
+                             "in_app": true
                          },
                          {
-                             \"platform\": \"custom\",
-                             \"lang\": \"bash\",
-                             \"function\": \"error_event_bash\",
-                             \"filename\": \"error_handler.sh\",
-                             \"lineno\": 8,
-                             \"colno\": 12,
-                             \"module\": \"error_tracking\",
-                             \"resolved\": false,
-                             \"in_app\": false
+                             "platform": "custom",
+                             "lang": "bash",
+                             "function": "error_event_bash",
+                             "filename": "error_handler.sh",
+                             "lineno": 8,
+                             "colno": 12,
+                             "module": "error_tracking",
+                             "resolved": false,
+                             "in_app": false
                          }
                      ]
                  }
              }],
-             \"\$exception_fingerprint\": \"$(echo 'Command not found: fake_command' | md5sum | cut -c1-32)\"
+             "$exception_fingerprint": <MD5_HASH_OF_EXCEPTION_MESSAGE>
          }
-     }"
-
+     }'
 ```
 
 ```python
@@ -535,10 +516,6 @@ import os
 import traceback
 import hashlib
 import time
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 url = "<ph_client_api_host>/i/v0/e/"
 
@@ -618,8 +595,6 @@ print(response.json())
 ```
 
 ```js file=NodeJS
-// Load environment variables from .env file
-require('dotenv').config();
 const crypto = require('crypto');
 
 const headers = {
