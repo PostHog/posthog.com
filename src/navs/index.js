@@ -4627,7 +4627,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Configure a messaging channel',
+                    name: 'Configure a channel',
                     url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',

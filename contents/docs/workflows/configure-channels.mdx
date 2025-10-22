@@ -1,5 +1,5 @@
 ---
-title: "Configure a messaging channel"
+title: "Configure a workflows channel"
 showStepsToc: true
 ---
 
@@ -10,27 +10,32 @@ import Beta from './_snippets/beta.mdx'
 
 <Steps>
 
-<Step title="Create a new messaging channel" badge="required">
+<Step title="Create a new workflows channel" badge="required">
 
-Before you can design a workflow, you need to configure a messaging channel. Workflows that send messages use messaging channels to deliver messages to your users.
+Before you can design a workflow, you need to configure a workflows channel. Channels let you dispatch actions or messages to your users.
 
 To create a new channel, go to workflows > [**Channels** tab](https://app.posthog.com/workflows/channels) > click **+ New channel**, and select the channel you want to configure:
 
+<CalloutBox icon="IconInfo" title="CDP channels" type="fyi">
+
+Other than the channels shown below, you can also dispatch to any [realtime destination](/docs/cdp/destinations) in CDP. If you plan to use a CDP destination, you can configure them directly when you [design a workflow](/docs/workflows/workflow-builder).
+</CalloutBox>
+
 <Tab.Group tabs={[
-'Email', 
-'Slack', 
-'Twilio']}>
+  'Email', 
+  'Slack', 
+  'Twilio']}>
 <Tab.List>
-<Tab>Email</Tab>
-<Tab>Slack</Tab>
-<Tab>Twilio</Tab>
+  <Tab>Email</Tab>
+  <Tab>Slack</Tab>
+  <Tab>Twilio</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
 
-Email is the default messaging channel in PostHog.  
+Email is the default workflows channel in PostHog.  
 
-You can use it to send **[drip campaigns](/docs/workflows/email-drip-campaign), transactional messages, or announcements** directly from the Workflow Builder.
+You can use it to send **[drip campaigns](/docs/workflows/email-drip-campaign), transactional messages, or announcements** directly from the [workflow builder](/docs/workflows/workflow-builder).
 
 ### Configure the channel
 
