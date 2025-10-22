@@ -374,6 +374,10 @@ export const dataPipelines = {
                     name: 'Redshift',
                     url: '/docs/cdp/batch-exports/redshift',
                 },
+                {
+                    name: 'Databricks',
+                    url: '/docs/cdp/batch-exports/databricks',
+                },
             ],
         },
         {
@@ -2456,6 +2460,10 @@ export const docsMenu = {
                             url: '/docs/activity',
                         },
                         {
+                            name: 'SDK doctor',
+                            url: '/docs/sdk-doctor',
+                        },
+                        {
                             name: 'Organizations',
                             url: '/docs/settings/organizations',
                         },
@@ -2725,8 +2733,8 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
-                            name: 'Annual plans',
-                            url: '/docs/billing/annual-plans',
+                            name: 'Pre-paid plans',
+                            url: '/docs/billing/pre-paid-plans',
                         },
                         {
                             name: 'Spike detection',
@@ -3810,6 +3818,12 @@ export const docsMenu = {
                     url: '/docs/error-tracking/fingerprints',
                     icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
                 },
                 {
                     name: 'Guides',

@@ -11,6 +11,9 @@ import {
     IconBookmark,
     IconUpload,
     IconCode,
+    IconCheck,
+    IconCopy,
+    IconShare,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -23,8 +26,8 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
-import { navigate } from 'gatsby'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { Popover } from 'components/RadixUI/Popover'
 
 export default function TaskBarMenu() {
     const {
@@ -40,6 +43,7 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
+        copyDesktopParams,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length

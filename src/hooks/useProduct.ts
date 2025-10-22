@@ -49,16 +49,16 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         // },
 
         {
-            name: 'Messaging',
+            name: 'Workflows',
             Icon: IconDecisionTree,
-            description: 'send messages to users.',
-            handle: 'messaging',
+            description: 'Automate actions or messages to users.',
+            handle: 'workflows',
             color: 'blue',
             colorSecondary: 'sky-blue',
             category: 'communication',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'messaging',
-            status: 'alpha',
+            slug: 'workflows',
+            status: 'WIP',
         },
         {
             name: 'User interviews',
