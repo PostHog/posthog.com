@@ -127,7 +127,7 @@ For complete definitions, see the [Glossary](/handbook/engineering/ai/architectu
 
 ### For users
 - **Want to try PostHog AI?** Open the chat interface in PostHog and start asking questions. See [user documentation](/docs/posthog-ai).
-- **Need deep investigation?** Toggle to Deep Research mode in PostHog AI.
+- **Need deep investigation?** Toggle to Deep research mode in PostHog AI.
 - **Prefer working in your editor?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
 
 ### For engineers building AI features
