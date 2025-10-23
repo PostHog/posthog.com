@@ -1628,6 +1628,10 @@
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
+        },
+        {
+            "source": "/docs/libraries/js/features",
+            "destination": "/docs/libraries/js/usage"
         }
     ],
     "headers": [
