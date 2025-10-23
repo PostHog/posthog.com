@@ -2274,6 +2274,7 @@ export const docsMenu = {
                     name: 'AI engineering',
                     url: '/docs/ai-engineering',
                     icon: 'IconLlmPromptEvaluation',
+                    color: 'red',
                     children: [
                         {
                             name: 'Overview',
