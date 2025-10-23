@@ -111,7 +111,7 @@ See the `#technical-interviewers` channel for more info here.
 
 ## What you can expect as a manager
 
-Management roles at PostHog are often (but not always) temporary. That's because as the company changes, our needs for different people in different roles will change as well. Because all of our managers are also strong ICs (individual contributors), sometimes putting someone back into an IC role makes sense if that's what's best for the company. This has happened many times with people at PostHog, some who have gone back and forth between being a manager and not being a manager multiple times (hi Marius!).
+Management roles at PostHog are often (but not always) temporary. That's because as the company changes, our needs for different people in different roles will change as well. Because all of our managers are also strong ICs (individual contributors), sometimes putting someone back into an IC role makes sense if that's what's best for the company. This has happened many times with people at PostHog, some who have gone back and forth between being a manager and not being a manager multiple times (hi <TeamMember name="Marius Andra" photo />!).
 
 As such, management roles are paid on the same pay scale as other ICs. Becoming a manager does not mean you get a pay raise, and going from a manager role back to an IC role does not mean you get a pay decrease. 
 
