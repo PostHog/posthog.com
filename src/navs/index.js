@@ -3540,12 +3540,6 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Statistics overview',
-                    url: '/docs/experiments/statistics',
-                    icon: 'IconSquareRoot',
-                    color: 'purple',
-                },
-                {
                     name: 'Bayesian statistics',
                     url: '/docs/experiments/statistics-bayesian',
                     icon: 'IconFlask',
