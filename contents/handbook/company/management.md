@@ -65,12 +65,14 @@ Ways to burn yourself out:
 
 ## How do I make sure my direct reports are happy and productive?
 
-First, make sure you are setting the right context. Next, the most useful thing you can do here is to schedule regular 1:1s. There are three types that we've found useful:
-- First 1-1 when a team member starts
-- Weekly 1-1s as a regular check in
-- Bi-annual 1-1s to talk about longer term career plans (make sure you put these in the calendar!)
+First, make sure you are setting the right context. Next, the most useful thing you can do here is to schedule regular 1-1s. Typically we find that you should have higher frequency 1-1s with your reports when they join PostHog and reduced frequency over time as they settle in. There are some types that we've found useful:
+- **When they start*** schedule a longer 1-1 to get to know each other and set expectations on each other
+- **During their probation period** have weekly 1-1s as a regular check (this is an important time to be giving clear feedback about how they are doing)
+- **After their probation** have bi-weekly or monthly 1-1s to discuss how they are doing outside of the regular day-to-day context
 
-Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work! 
+The key thing here is to be pragmatic - 1-1s should feel useful and not like a chore. Everyone should see it as their own responsiblity to raise important feedback or issues as they happen and not waiting uncessarily for a scheduled meeting.
+
+Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work!
 
 [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member. These are not to be followed strictly if you don't want to - this is to just save you having to create something from scratch. 
 
