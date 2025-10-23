@@ -153,7 +153,7 @@ retention_period_days
 **GET `/api/projects/:id/session_recordings/:session_id/snapshots`**:
 Two-phase fetch:
 1. **Phase 1**: Returns available sources: `["blob"]` or `["blob", "realtime"]`
-    - note: "realtim"e" is deprecated and will be fully deleted soon
+    - note: "realtime" is deprecated and will be fully deleted soon
 2. **Phase 2**: Client requests `?source=blob`
 
 **Source resolution**:
