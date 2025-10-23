@@ -34,7 +34,7 @@ The heatmap won't work on Shopify out of the box because Shopify has very strict
 
 You can bypass this issue and enable the heatmap by running a Cloudflare worker that rewrites the `frame-ancestors` header. We recommend using a separate subdomain like `heatmap.myshop.com` from your production site to minimize impact. Here is a simple Cloudflare worker that updates this header:
 
-```jsx
+```js
 export default {
   async fetch(request) {
     const response = await fetch(request);
