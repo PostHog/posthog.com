@@ -7,7 +7,7 @@ import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templa
 import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
-const { externalDocsSources } = require('../gatsby-config')
+const { externalDocsSources } = require('../gatsby-config-exports')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)

@@ -8,38 +8,9 @@ require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
-// External docs sources - configure multiple repos that can contribute docs
-// Each source defines where to find docs AND how to map paths to the site
-const externalDocsSources = [
-    {
-        name: 'posthog-monorepo',
-        // GitHub source configuration
-        github: {
-            repo: 'PostHog/posthog',
-            path: 'docs/published', // Only clone published docs
-        },
-        // Local path where docs are cloned to
-        path: process.env.POSTHOG_REPO_PATH
-            ? `${process.env.POSTHOG_REPO_PATH}/docs/published`
-            : path.join(process.cwd(), '.posthog-monorepo-cache'),
-        // Path mapping: /foo.md → /handbook/engineering/foo
-        pathTransform: (slug) => `/handbook/engineering${slug}`,
-        // Optional: ref/branch being used (for logging/override)
-        // Note: clone script uses POSTHOG_MONOREPO_REF (generated from name)
-        ref: process.env.POSTHOG_MONOREPO_REF,
-    },
-    // Future sources can be added here, e.g.:
-    // {
-    //     name: 'posthog-cloud-docs',
-    //     github: {
-    //         repo: 'PostHog/posthog-cloud',
-    //         path: 'docs',
-    //     },
-    //     path: path.join(process.cwd(), '.cloud-docs-cache'),
-    //     pathTransform: (slug) => `/docs/cloud${slug}`,
-    //     ref: process.env.CLOUD_DOCS_REF,
-    // },
-]
+// Import external docs sources from shared config file
+// (Gatsby validates module.exports and doesn't allow custom properties)
+const { externalDocsSources } = require('./gatsby-config-exports')
 
 // Build gatsby-source-filesystem plugins for each available source
 const externalDocsPlugins = externalDocsSources
@@ -452,7 +423,3 @@ module.exports = {
             : [algoliaConfig]),
     ].filter(Boolean), // Remove null plugins (e.g., monorepo docs if not available)
 }
-
-// Export for use in clone script and createPages.ts
-// Note: Must be AFTER module.exports to avoid being overwritten
-module.exports.externalDocsSources = externalDocsSources

@@ -28,7 +28,7 @@ const path = require('path')
 const fs = require('fs')
 
 // Import external docs sources config
-const { externalDocsSources } = require('../gatsby-config')
+const { externalDocsSources } = require('../gatsby-config-exports')
 
 // Detect if running on Vercel
 const isVercel = !!process.env.VERCEL
