@@ -6,6 +6,9 @@ showStepsToc: true
 import Tab from "components/Tab"
 import Beta from './_snippets/beta.mdx'
 
+import AddSlackToWorkspace from './_snippets/add-posthog-to-slack-workspace.mdx'
+import AddSlackToChannel from './_snippets/add-posthog-to-slack-channel.mdx'
+
 <Beta />
 
 <Steps>
@@ -62,7 +65,11 @@ Once verified, you'll see a green check mark in your settings.
 </Tab.Panel>
 <Tab.Panel>
 
-> Slack support is coming soon. If there are other channels you'd like to see supported, please [let us know](https://app.posthog.com/workflows#panel=support).
+A Slack connection enables you to deliver messages to a Slack channel. 
+
+<AddSlackToWorkspace/>
+
+<AddSlackToChannel/>
 
 </Tab.Panel>
 <Tab.Panel>
