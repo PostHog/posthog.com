@@ -117,7 +117,7 @@ We don't use Weave to:
 - Creep on your use of AI - we don't care how or if you use AI to get a job done, as long as it gets done
 - Make a call on how valuable someone is - some people with low PR output are very valuable to the company, and we're 100% aware that things like heavy support load can impact output
 
-We have compared statistics in Weave against other (imperfect!) metrics that can be used to gauge productivity, such as number of commits, number of PRs, total github activity, etc. The numbers end up stack-ranking pretty similarly. Weave gives us a nice UI for evaluating output across all the engineers we have, which we don't have any other good interface for. In addition, it gives engineers access to the same information we have about them, so using it increases transparency.
+We have compared statistics in Weave against other (imperfect!) metrics that can be used to gauge productivity, such as number of commits, number of PRs, total github activity, etc, and see similar patterns amongst them. Weave gives us more detail and a nice UI for evaluating output across all the engineers we have, which we don't have any other good interface for. In addition, it gives engineers access to the same information we have about them, so using it increases transparency.
 
 ## What does being a hiring manager entail?
 
