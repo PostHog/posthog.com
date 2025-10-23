@@ -26,36 +26,36 @@ All of this has meant we’ve thought, debated, and learned a lot about pricing.
 
 ## 1. How you price is who you are
 
-Pricing is often relegated to an afterthought when building a product, but it shouldn't be. It's as impactful to the overall product experience as the functionality or design.
+Pricing isn't just how you make money, it defines the type of company and brand you'll build. It's as impactful to the overall product experience as the functionality or design.
 
-To show you how, imagine two [feature flag](/newsletter/feature-flag-mistakes) tools.
+Imagine two [feature flag](/newsletter/feature-flag-mistakes) tools. The first charges by **seats** and **flags created**. 
 
-The first charges by **seats** and **flags created**. 
-
-Their customers think about every flag and user they add, meaning they do less of both. The flags they do create are more important and are used more heavily. This model appeals to larger companies with more requests per flag, and that means enterprise features like auditability and access controls are more important.
+Their customers think about every flag and user they add, meaning they do less of both, but the flags they do create are more important and are used more heavily. This model appeals to larger companies that ship slowly and make more requests per flag, and that means enterprise features like auditability and access controls are more important.
 
 The second charges by **requests**. 
 
-This means more developers can access and create flags. There are more flags created, but where they put those flags becomes more important so they aren’t charged too much for requests. This appeals to smaller companies who ship more flags, so cost controls and DevEx features like local evaluation matter more.
+This means more developers can access and create flags. There are more flags created, but where they put those flags becomes more important, so they aren’t charged too much for requests. This appeals to smaller companies who ship more flags, so cost controls and DevEx features like local evaluation matter more.
 
-These two examples show **how much** you charge often doesn’t matter as much as **how** you charge. There are many ways this can vary like:
 
-- Usage-based pricing vs. seat-based pricing.
-- Pay-as-you-go vs. annual contracts vs. licenses.
-- Self-serve vs. custom contracts with sales.
+These examples show **how much** you charge often doesn’t matter as much as **how** you charge. Moreover, how you charge will influence how you sell and market your product, too.
 
-Deciding your pricing model comes down to your [ideal customer](/newsletter/ideal-customer-profile-framework). For us, that is [product engineers](/blog/what-is-a-product-engineer) at high-growth startups. The ability to self-serve and have pricing align with usage is important for them, so that is what we’ve gone with.
+A usage-based model lends itself to faster, self-serve, product-led sales motions; seat-based pricing biases you toward slower, enterprise-style sales motion.
 
-## 2. Don't be afraid to charge early
+Ultimately, how you price your product should come from your [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP). Our ICP is high-growth startups that are led by [product engineers](/blog/what-is-a-product-engineer). The ability self-serve and have pricing align with usage is important for them, so that is what we’ve gone with.
 
-If you’re hoping that your product is a business, you should charge early for it. It’s easy to give things away, especially zero marginal cost software. It’s a lot harder to sell them.
+## 2. Charging something is better giving it away for free
 
-The feedback you get from free users is very different from what you get from customers. If you’re trying to build a successful business, free users can lead you down the wrong path. This is why acquiring reference **customers** is a core part of [finding product market fit](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers).
+It’s easy to give things away, especially zero marginal cost software, but it's a trap for any early-stage startup that wanting build a real business. You're always better off charging something as soon as possible, even if the unit economics don't add up yet.
 
-There are two big reasons why companies don’t charge early:
+Why does this matter? Because paying customers give you different, and typically more valuable, feedback than free users. They care enough about the problem you're solving to give you money, so they care more about it improving. They have skin in the game. 
 
-1. They are scared no one will pay them.
-2. They are afraid they are going to get pricing wrong.
+This is why acquiring reference **customers** is a core part of [finding product-market fit](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers).
+
+There are three big reasons why companies don’t charge early:
+
+1. **They are scared no one will pay them.** Delaying won't help you here.
+2. **They are afraid they are going to get pricing wrong.** You probably will. That's the point of trying and learning.
+3. **They think user growth is more important than revenue growth.** True if you're building Facebook, but rarely true for SaaS.
 
 ![Charging early](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_10_21_T09_09_16_516_Z_216ab957a1.jpeg)
 
@@ -65,7 +65,7 @@ For example, our early pricing was wildly different from our pricing now. PostHo
 
 ![PostHog's pricing evolution](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_21_at_10_35_36_2x_ea3196b5bc.png)
 
-## 3. It’s OK to change your pricing
+## 3. Frequently changing pricing is totally normal
 
 What the above example shows is that your pricing is always going to be a bit wrong. We started as a monthly subscription but eventually changed to usage-based. We had a paid self-hosted product, but made the tough decision to [sunset it](/blog/sunsetting-helm-support-posthog).
 
