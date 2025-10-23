@@ -127,11 +127,13 @@ Why do we need so many people involved in billing?
 
 Without someone dedicated to billing, pricing launches will be painful, your ability to charge users will be limited, and more errors and unhappy customers will pop up.
 
-## 6. Make your pricing more predictable
+## 6. Predictable and transparent pricing > simple pricing
 
 Everyone hates being charged more than they expected. This, of course, hurts the customer, but it also hurts you, as it leads to more churn and a worse reputation.
 
-The best way to prevent this is to make your pricing more predictable. Some ways to do this include:
+The solution to this, for many companies, is to make their pricing simpler. Fewer tiers, a unified credit system, a single subscription for everything. This is a mistake as it limits your ability to charge users for the value they receive.
+
+The alternative we recommend is making your pricing more predictable and transparent. Some ways to do this include:
 
 - Creating a transparent and detailed [pricing page](/pricing). [Stripe](https://stripe.com/pricing) and [Twilio](https://www.twilio.com/pricing) are great examples of this. People want to know roughly how much they'll pay before they start. We take this a step further and list our [sales discounts](/handbook/growth/sales/contract-rules) publicly too.
     
@@ -141,7 +143,9 @@ The best way to prevent this is to make your pricing more predictable. Some ways
 
 - Add spend limits. If customers don't want to pay over a certain amount, respect that, but make it clear what they'll lose when they hit the cap.
 
-- Help users tune their spend to what they're actually using. We do this by providing docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
+![Spend limits](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_23_at_10_34_08_2x_c33e9fe6bd.png)
+
+- Help users tune their spend to what they're actually using. Our [customer success team](/teams/customer-success) helps a lot with this and we provide docs pages on cutting costs for most of our products like [product analytics](/docs/product-analytics/cutting-costs), [session replay](/docs/session-replay/cutting-costs), and [feature flags](/docs/feature-flags/cutting-costs). Data infrastructure companies like Snowflake, Supabase, and PlanetScale all offer ways to identify costly queries and resources to optimize their spend.
 
 - As a last resort, be generous with refunds. For example, we have [side project insurance](/side-project-insurance) that protects customers from huge bills if their product goes viral.
 
