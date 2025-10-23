@@ -3546,6 +3546,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Bayesian statistics',
+                    url: '/docs/experiments/statistics-bayesian',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                },
+                {
                     name: 'Frequentist method',
                     url: '/docs/experiments/frequentist-method',
                     icon: 'IconBook',
