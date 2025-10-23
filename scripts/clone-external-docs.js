@@ -5,7 +5,7 @@
  * Prebuild script for external docs integration
  *
  * Clones external repos during Vercel builds to include their docs.
- * Configuration is read from gatsby-config.js externalDocsSources array.
+ * Configuration is read from gatsby-config-exports.js externalDocsSources array.
  *
  * Each source specifies:
  * - github.repo: GitHub repo to clone from (e.g., 'PostHog/posthog')
@@ -16,11 +16,7 @@
  * Usage:
  *   - Local dev: Skip (no env vars set, no sources present)
  *   - Vercel builds: Clones all configured sources
- *   - Feature branch previews: Override ref with env var (e.g., POSTHOG_DOCS_REF)
- *
- * References:
- *   - Issue: PostHog/posthog#38584
- *   - Guide: /docs/MONOREPO_DOCS_BUILD_GUIDE.md in posthog monorepo
+ *   - Feature branch previews: Override ref with env var (e.g., POSTHOG_MONOREPO_REF)
  */
 
 const { execSync } = require('child_process')
@@ -44,6 +40,18 @@ if (!externalDocsSources || externalDocsSources.length === 0) {
     process.exit(0)
 }
 
+// Sanitize shell inputs to prevent command injection
+function sanitizeShellArg(arg) {
+    // Only allow alphanumeric, underscore, hyphen, forward slash, and dot
+    if (typeof arg !== 'string' || !/^[a-zA-Z0-9/_.-]+$/.test(arg)) {
+        throw new Error(`Invalid shell argument: ${arg}`)
+    }
+    return arg
+}
+
+// Track cloned docs for manifest generation
+const clonedDocs = []
+
 // Clone each configured source
 externalDocsSources.forEach((source) => {
     const { name, github, path: dest, ref: configRef } = source
@@ -54,7 +62,7 @@ externalDocsSources.forEach((source) => {
     }
 
     // Determine ref to clone:
-    // 1. Check for source-specific env var (e.g., POSTHOG_DOCS_REF)
+    // 1. Check for source-specific env var (e.g., POSTHOG_MONOREPO_REF)
     // 2. Use config ref if set
     // 3. Default to 'master' on Vercel
     const envVarName = `${name.toUpperCase().replace(/-/g, '_')}_REF`
@@ -81,18 +89,24 @@ externalDocsSources.forEach((source) => {
             return
         }
 
+        // Sanitize inputs to prevent command injection
+        const safeRef = sanitizeShellArg(refToClone)
+        const safeRepo = sanitizeShellArg(github.repo)
+        const safePath = sanitizeShellArg(github.path)
+        const safeDest = sanitizeShellArg(dest)
+
         // Clone only specified directory with sparse-checkout (shallow, minimal data)
         console.log(`   📦 Setting up sparse clone...`)
 
         // Step 1: Initialize repo with no checkout
         execSync(
-            `git clone --depth 1 --single-branch --branch ${refToClone} --no-checkout https://github.com/${github.repo}.git ${dest}`,
+            `git clone --depth 1 --single-branch --branch ${safeRef} --no-checkout https://github.com/${safeRepo}.git ${safeDest}`,
             { stdio: 'inherit' }
         )
 
         // Step 2: Enable sparse-checkout in no-cone mode for strict path filtering
         execSync(
-            `cd ${dest} && git sparse-checkout init --no-cone && git sparse-checkout set "${github.path}/*" && git checkout`,
+            `cd ${safeDest} && git sparse-checkout init --no-cone && git sparse-checkout set "${safePath}/*" && git checkout`,
             {
                 stdio: 'inherit',
             }
@@ -105,17 +119,26 @@ externalDocsSources.forEach((source) => {
             fs.rmSync(gitDir, { recursive: true, force: true })
         }
 
+        // Step 4: Collect cloned docs for manifest
+        const docsDir = path.join(dest, github.path)
+        if (fs.existsSync(docsDir)) {
+            const files = fs
+                .readdirSync(docsDir, { recursive: true })
+                .filter((file) => file.match(/\.(md|mdx)$/i))
+                .map((file) => ({
+                    sourcePath: path.join(github.repo, github.path, file),
+                    destinationPath: source.pathTransform
+                        ? source.pathTransform(`/${file.replace(/\.mdx?$/, '')}`)
+                        : `/${file}`,
+                    source: name,
+                }))
+            clonedDocs.push(...files)
+        }
+
         // Step 5: List and verify only expected files remain
         console.log(`   📋 Verifying clone contents...`)
         const remainingFiles = fs.readdirSync(dest)
         console.log(`   Files in ${dest}:`, remainingFiles)
-
-        // Remove any markdown files that shouldn't be there (like README.md at root)
-        remainingFiles.forEach((file) => {
-            if (file.match(/\.(md|mdx)$/i) && !file.startsWith('.')) {
-                console.log(`   ⚠️  Found unexpected markdown at root: ${file}`)
-            }
-        })
 
         console.log(`   ✅ Cloned successfully`)
     } catch (error) {
@@ -124,6 +147,28 @@ externalDocsSources.forEach((source) => {
         console.warn(`   Continuing build without ${name}...`)
     }
 })
+
+// Generate manifest for debugging and visibility
+if (clonedDocs.length > 0) {
+    const publicDir = path.join(__dirname, '..', 'public')
+    if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true })
+    }
+    const manifestPath = path.join(publicDir, 'external-docs-map.json')
+    fs.writeFileSync(
+        manifestPath,
+        JSON.stringify(
+            {
+                generatedAt: new Date().toISOString(),
+                sources: externalDocsSources.map((s) => ({ name: s.name, repo: s.github?.repo, ref: s.ref })),
+                docs: clonedDocs,
+            },
+            null,
+            2
+        )
+    )
+    console.log(`📝 Generated external docs manifest: ${manifestPath}`)
+}
 
 console.log('✅ External docs clone complete')
 process.exit(0)
