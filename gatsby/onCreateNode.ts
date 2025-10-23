@@ -145,7 +145,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             })
         }
 
-        const slug = createFilePath({ node, getNode, basePath: `pages` })
+        let slug = createFilePath({ node, getNode, basePath: `pages` })
+        if (parent?.sourceInstanceName === 'posthog-main-repo') {
+            slug = `/handbook/engineering${slug}`
+        }
 
         createNodeField({
             node,
