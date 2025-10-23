@@ -19,7 +19,7 @@ export const Content = () => {
                         PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP).
                         You don't need any vendor-specific SDKs - just use standard OpenTelemetry libraries to send logs
                         to PostHog. You can migrate to PostHog logs by configuring your existing OpenTelemetry client to
-                        send logs to PostHog's gRPC endpoint.
+                        send logs to PostHog's HTTP endpoint using your project token.
                     </p>
 
                     <div className="flex justify-center mb-8">
@@ -65,8 +65,8 @@ export const Content = () => {
                     </p>
                     <ol>
                         <li>Use standard OpenTelemetry logging APIs in your application</li>
-                        <li>Include a JWT token with your team ID in the Authorization header</li>
-                        <li>Configure your OpenTelemetry client to send logs to PostHog's endpoint</li>
+                        <li>Include your project token in the Authorization header or as a query parameter</li>
+                        <li>Configure your OpenTelemetry client to send logs to PostHog's HTTP endpoint</li>
                         <li>Search and analyze your logs in the PostHog interface</li>
                     </ol>
                 </div>

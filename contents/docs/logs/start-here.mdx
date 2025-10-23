@@ -21,10 +21,11 @@ import Beta from './_snippets/beta.mdx'
 PostHog logs is a powerful logging solution that works with the OpenTelemetry Protocol (OTLP). 
 You don't need any vendor specific SDKs – just use standard OpenTelemetry libraries.
 
-Install and or update your existing logging client configuration to send logs to PostHog:
+Install and configure your logging client to send logs to PostHog:
 
-- Set the gRPC endpoint to `http://your-posthog-host:4317`
-- Include a JWT token with your team ID in the Authorization header
+- Use the HTTP endpoint: `https://us.i.posthog.com/logs`
+- Authenticate with your project token (same token as events/exceptions)
+- Include the token in the Authorization header or as a `?token=` query parameter
 - Use the standard [OTLP log format](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
 
 <CallToAction type="primary" to="/docs/logs/installation">
@@ -61,8 +62,8 @@ Navigate to the Logs section in your PostHog dashboard to start exploring your l
 
 Common issues you might encounter when setting up logging:
 
-- **Authentication errors** - Make sure your JWT token includes the correct team_id
-- **Connection issues** - Verify the gRPC endpoint and port 4317 are accessible
+- **Authentication errors** - Make sure you're using your correct project token
+- **Connection issues** - Verify the HTTP endpoint is accessible
 - **Log format problems** - Ensure you're using the standard [OTLP log format](https://opentelemetry.io/docs/specs/otel/logs/data-model/)
 
 <CallToAction type="primary" to="/docs/logs/troubleshooting">

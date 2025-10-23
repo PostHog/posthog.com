@@ -11,30 +11,30 @@ import Beta from './_snippets/beta.mdx'
 **Problem**: Getting 401 Unauthorized errors when sending logs.
 
 **Solutions**:
-- Verify your JWT token is valid and not expired
-- Ensure the JWT token contains a `team_id` claim
-- Check that the JWT secret matches between your client and the log capture service
-- Verify the Authorization header format: `Bearer {your-jwt-token}`
+- Verify you're using the correct project token from [Project Settings](https://app.posthog.com/settings/project)
+- Check the Authorization header format: `Bearer {your-project-token}`
+- If using query parameter, verify the format: `?token={your-project-token}`
+- Ensure your project token hasn't been rotated or revoked
 
 ## Connection issues
 
-**Problem**: Cannot connect to the log capture service on port 4317.
+**Problem**: Cannot connect to the PostHog logs endpoint.
 
 **Solutions**:
-- Verify the log capture service is running: `curl http://your-posthog-host:8000/_readiness`
-- Check that port 4317 is accessible from your application
-- Ensure firewall rules allow outbound connections to port 4317
-- Verify the endpoint URL format: `http://your-posthog-host:4317/v1/logs`
+- Verify the endpoint URL: `https://us.i.posthog.com/logs` 
+- Check that your application can make outbound HTTPS requests
+- Ensure firewall rules allow outbound connections to PostHog
+- For self-hosted instances, verify the endpoint is correct for your deployment
 
 ## Logs not appearing in PostHog
 
 **Problem**: Logs are being sent but don't appear in the PostHog interface.
 
 **Solutions**:
-- Check that the JWT token contains the correct `team_id`
-- Verify logs are being sent in the correct OTLP format
-- Check the log capture service logs for processing errors
-- Ensure your team has access to the Logs feature in PostHog
+- Verify your project token is correct and associated with the right project
+- Check that logs are being sent in the correct OTLP format
+- Ensure your project has access to the Logs feature in PostHog
+- Check the network tab in your browser/application to verify requests are succeeding (200 status)
 
 ## Performance issues
 
@@ -42,9 +42,9 @@ import Beta from './_snippets/beta.mdx'
 
 **Solutions**:
 - Adjust the batch size in your OpenTelemetry configuration
-- Consider using asynchronous log processing
-- Monitor the log capture service metrics at `/metrics`
-- Check for network latency between your application and the log service
+- Use BatchLogRecordProcessor instead of SimpleLogRecordProcessor for better performance
+- Consider filtering logs on the client side to reduce volume
+- Check for network latency between your application and PostHog
 
 ## Log format problems
 
@@ -56,21 +56,33 @@ import Beta from './_snippets/beta.mdx'
 - Check that log attributes are properly structured
 - Use the OpenTelemetry logging APIs instead of raw log libraries
 
-## Team association issues
+## Token authentication issues
 
-**Problem**: Logs are appearing under the wrong team or not associated with any team.
+**Problem**: Confused about which token to use or how to authenticate.
 
 **Solutions**:
-- Verify the `team_id` in your JWT token matches your PostHog team ID
-- Check that the JWT token is being sent with each log batch
-- Ensure the log capture service is using the correct JWT secret for validation
-- Contact support if team IDs are not matching expected values
+- Use your **project token** (the same one you use for capturing events)
+- Find it in [Project Settings](https://app.posthog.com/settings/project)
+- You can authenticate in two ways:
+  - **Header**: `Authorization: Bearer {your-project-token}`
+  - **Query param**: `?token={your-project-token}`
+- Do not use your personal API key or other authentication methods
+
+## Self-hosted endpoint issues
+
+**Problem**: Logs not working with self-hosted PostHog.
+
+**Solutions**:
+- Use your self-hosted instance URL instead of `https://us.i.posthog.com`
+- Verify the logs endpoint is enabled on your self-hosted instance
+- Check that the endpoint path is correct: `/logs`
+- Ensure your PostHog version supports the logs feature
 
 ## Still having issues?
 
 If you're still experiencing problems:
 
-1. Check the log capture service logs for detailed error messages
-2. Verify your OpenTelemetry client configuration matches the examples
-3. Test with a simple log message first before sending complex logs
+1. Verify your OpenTelemetry client configuration matches the examples in the [installation guide](/docs/logs/installation)
+2. Test with a simple log message first before sending complex logs
+3. Check the network requests to see the actual HTTP status codes and error messages
 4. Contact PostHog support with your specific error messages and configuration details

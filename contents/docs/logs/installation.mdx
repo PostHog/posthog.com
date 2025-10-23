@@ -71,7 +71,7 @@ pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
 
 ```bash
 go get go.opentelemetry.io/otel/sdk/log
-go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc
+go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp
 ```
 
 </Tab.Panel>
@@ -80,10 +80,9 @@ go get go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc
 PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
 
 The key requirements are:
-- Use OTLP (OpenTelemetry Protocol) for log export
-- Send logs with gRPC to `http://your-posthog-host:4317/v1/logs`
-- Include JWT token in Authorization header: `Bearer {your-jwt-token}`
-- JWT token must contain `team_id` claim
+- Use OTLP (OpenTelemetry Protocol) for log export over HTTP
+- Send logs to `https://us.i.posthog.com/logs` (or your self-hosted endpoint)
+- Include your project token in the Authorization header or as a `?token=` query parameter
 
 </Tab.Panel>
 
@@ -93,45 +92,11 @@ The key requirements are:
 
 </Step>
 
-<Step title="Generate JWT token" badge="required">
+<Step title="Get your project token" badge="required">
 
-You need a JWT token that contains your team ID. The token must include a `team_id` claim.
+You'll need your PostHog project token to authenticate log requests. This is the same token you use for capturing events and exceptions.
 
-```json
-{
-  "team_id": "your-team-id",
-  "exp": 1735689600
-}
-```
-
-You can generate JWT tokens with any JWT library with the same payload. Here are examples for Node.js and Python.
-
-<MultiLanguage>
-
-```javascript
-import jwt from 'jsonwebtoken';
-
-const payload = {
-  team_id: 'your-team-id',
-  exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // 24 hours
-};
-
-const token = jwt.sign(payload, 'your-jwt-secret');
-```
-
-```python
-import jwt
-import time
-
-payload = {
-    'team_id': 'your-team-id',
-    'exp': int(time.time()) + (60 * 60 * 24)  # 24 hours
-}
-
-token = jwt.encode(payload, 'your-jwt-secret', algorithm='HS256')
-```
-
-</MultiLanguage>
+You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
 
 </Step>
 
@@ -166,15 +131,27 @@ import { SimpleLogRecordProcessor } from '@opentelemetry/sdk-logs';
 const sdk = new NodeSDK({
   logRecordProcessor: new SimpleLogRecordProcessor(
     new OTLPLogExporter({
-      url: 'http://your-posthog-host:4317/v1/logs',
+      url: 'https://us.i.posthog.com/logs',
       headers: {
-        'Authorization': `Bearer ${jwtTokenWithTeamId}`
+        'Authorization': `Bearer ${YOUR_PROJECT_TOKEN}`
       }
     })
   )
 });
 
 sdk.start();
+```
+
+Alternatively, you can pass the token as a query parameter:
+
+```javascript
+const sdk = new NodeSDK({
+  logRecordProcessor: new SimpleLogRecordProcessor(
+    new OTLPLogExporter({
+      url: `https://us.i.posthog.com/logs?token=${YOUR_PROJECT_TOKEN}`
+    })
+  )
+});
 ```
 
 </Tab.Panel>
@@ -184,16 +161,16 @@ sdk.start();
 from opentelemetry import logs
 from opentelemetry.sdk.logs import LoggerProvider, LoggingHandler
 from opentelemetry.sdk.logs.export import BatchLogRecordProcessor
-from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
+from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
 
 # Configure the logger provider
 logger_provider = LoggerProvider()
 logs.set_logger_provider(logger_provider)
 
-# Create OTLP exporter
+# Create OTLP exporter with token in header
 otlp_exporter = OTLPLogExporter(
-    endpoint="http://your-posthog-host:4317",
-    headers={"Authorization": f"Bearer {jwt_token_with_team_id}"}
+    endpoint="https://us.i.posthog.com/logs",
+    headers={"Authorization": f"Bearer {YOUR_PROJECT_TOKEN}"}
 )
 
 # Add processor
@@ -205,6 +182,14 @@ logger_provider.add_log_record_processor(
 logger = logs.get_logger("my-app")
 ```
 
+Alternatively, you can pass the token as a query parameter:
+
+```python
+otlp_exporter = OTLPLogExporter(
+    endpoint=f"https://us.i.posthog.com/logs?token={YOUR_PROJECT_TOKEN}"
+)
+```
+
 </Tab.Panel>
 <Tab.Panel>
 
@@ -212,20 +197,28 @@ logger = logs.get_logger("my-app")
 import io.opentelemetry.api.logs.GlobalLoggerProvider;
 import io.opentelemetry.sdk.logs.SdkLoggerProvider;
 import io.opentelemetry.sdk.logs.export.BatchLogRecordProcessor;
-import io.opentelemetry.exporter.otlp.logs.OtlpGrpcLogRecordExporter;
+import io.opentelemetry.exporter.otlp.logs.OtlpHttpLogRecordExporter;
 
 SdkLoggerProvider loggerProvider = SdkLoggerProvider.builder()
     .addLogRecordProcessor(
         BatchLogRecordProcessor.builder(
-            OtlpGrpcLogRecordExporter.builder()
-                .setEndpoint("http://your-posthog-host:4317")
-                .addHeader("Authorization", "Bearer " + jwtTokenWithTeamId)
+            OtlpHttpLogRecordExporter.builder()
+                .setEndpoint("https://us.i.posthog.com/logs")
+                .addHeader("Authorization", "Bearer " + YOUR_PROJECT_TOKEN)
                 .build()
         ).build()
     )
     .build();
 
 GlobalLoggerProvider.set(loggerProvider);
+```
+
+Alternatively, you can pass the token as a query parameter:
+
+```java
+OtlpHttpLogRecordExporter.builder()
+    .setEndpoint("https://us.i.posthog.com/logs?token=" + YOUR_PROJECT_TOKEN)
+    .build()
 ```
 
 </Tab.Panel>
@@ -237,18 +230,19 @@ package main
 import (
     "context"
     "go.opentelemetry.io/otel"
-    "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc"
+    "go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploghttp"
     "go.opentelemetry.io/otel/sdk/log"
 )
 
 func main() {
     ctx := context.Background()
     
-    // Create OTLP exporter
-    exporter, err := otlploggrpc.New(ctx,
-        otlploggrpc.WithEndpoint("your-posthog-host:4317"),
-        otlploggrpc.WithHeaders(map[string]string{
-            "Authorization": "Bearer " + jwtTokenWithTeamId,
+    // Create OTLP HTTP exporter
+    exporter, err := otlploghttp.New(ctx,
+        otlploghttp.WithEndpoint("us.i.posthog.com"),
+        otlploghttp.WithURLPath("/v1/logs"),
+        otlploghttp.WithHeaders(map[string]string{
+            "Authorization": "Bearer " + YOUR_PROJECT_TOKEN,
         }),
     )
     if err != nil {
@@ -264,16 +258,23 @@ func main() {
 }
 ```
 
+Alternatively, you can pass the token as a query parameter by modifying the URL path:
+
+```go
+otlploghttp.WithURLPath("/v1/logs?token=" + YOUR_PROJECT_TOKEN)
+```
+
 </Tab.Panel>
 <Tab.Panel>
 
 PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
 
 The key requirements are:
-- Use OTLP (OpenTelemetry Protocol) for log export
-- Send logs to `http://your-posthog-host:4317/v1/logs`
-- Include JWT token in Authorization header: `Bearer {your-jwt-token}`
-- JWT token must contain `team_id` claim
+- Use OTLP (OpenTelemetry Protocol) for log export over HTTP
+- Send logs to `https://us.i.posthog.com/logs` (or your self-hosted endpoint)
+- Include your project token either:
+  - In the Authorization header: `Bearer {your-project-token}`
+  - As a query parameter: `?token={your-project-token}`
 
 </Tab.Panel>
 
@@ -372,12 +373,6 @@ logger.Info(ctx, "User action",
 
 PostHog logs works with any OpenTelemetry-compatible client. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for your specific language or framework.
 
-The key requirements are:
-- Use OTLP (OpenTelemetry Protocol) for log export
-- Send logs to `http://your-posthog-host:4317/v1/logs`
-- Include JWT token in Authorization header: `Bearer {your-jwt-token}`
-- JWT token must contain `team_id` claim
-
 </Tab.Panel>
 
 </Tab.Panels>
@@ -392,7 +387,7 @@ Once everything is configured, test that logs are flowing into PostHog:
 
 1. Send a test log from your application
 2. Check the PostHog logs interface for your log entries
-3. Verify the logs appear with the correct team association
+3. Verify the logs appear in your project
 
 <CallToAction type="primary" to="https://app.posthog.com/logs">
 View your logs in PostHog
