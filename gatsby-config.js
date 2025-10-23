@@ -25,7 +25,8 @@ const externalDocsSources = [
         // Path mapping: /foo.md → /handbook/engineering/foo
         pathTransform: (slug) => `/handbook/engineering${slug}`,
         // Optional: ref/branch being used (for logging/override)
-        ref: process.env.POSTHOG_DOCS_REF,
+        // Note: clone script uses POSTHOG_MONOREPO_REF (generated from name)
+        ref: process.env.POSTHOG_MONOREPO_REF,
     },
     // Future sources can be added here, e.g.:
     // {
