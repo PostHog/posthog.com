@@ -33,7 +33,7 @@ app.onError(async (err, c) => {
     headers: c.req.header(),
     // ... other properties
   })
-  await posthog.flush() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+  await posthog.flush() // TIP: On program exit, call flush to send any remaining events
   // other error handling logic
   return c.text('Internal Server Error', 500)
 })
