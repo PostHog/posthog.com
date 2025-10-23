@@ -93,14 +93,14 @@ export const posthog_ai = {
                     percent: 30,
                 },
                 {
-                    name: 'Filter architect',
-                    description: 'Not sure what filters to apply? We got you',
+                    name: 'Natural language filters',
+                    description: 'Tell PostHog AI how you want to filter your data, and they shall be applied',
                     sticker: <StickerPath className="size-12" />,
                     percent: 30,
                 },
                 {
-                    name: 'Scientific researcher',
-                    description: 'Explains anomalies and makes sense of outliers',
+                    name: 'Anomaly explainer',
+                    description: 'Detects and explains anomalies and makes sense of outliers',
                     sticker: <StickerPath className="size-12" />,
                     percent: 0,
                 },
@@ -125,25 +125,25 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Insight conductor',
+                    name: 'Insight generator',
                     description: 'Builds insights and entire dashboards from a single prompt',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Anomaly detective',
+                    name: 'Anomaly detector',
                     description: 'Suggests and sets up alerts automatically to catch those outliers asap',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
                 {
-                    name: 'Query crafter',
+                    name: 'Query helper',
                     description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Copywriter',
+                    name: 'Auto-generated names',
                     description: 'Generates insight and dashboard names automatically',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
@@ -425,13 +425,13 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Query cupid',
-                    description: 'Fixes your errors to make sure you are matched with the data you want and need',
+                    name: 'Query helper',
+                    description: 'Fixes your errors to make sure you get with the data you want and need',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Query completer',
+                    name: 'Query autocomplete',
                     description: 'Autocompletes your code, so that you have time for the important stuff',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
