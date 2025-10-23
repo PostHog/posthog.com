@@ -98,31 +98,7 @@ externalDocsSources.forEach((source) => {
             }
         )
 
-        // Step 3: Move files up from subdirectory if needed
-        const sparseDir = path.join(dest, github.path)
-        if (fs.existsSync(sparseDir) && sparseDir !== dest) {
-            console.log(`   📦 Moving ${github.path} to root...`)
-
-            // Move all files from sparse directory to dest root
-            const files = fs.readdirSync(sparseDir)
-            files.forEach((file) => {
-                const srcPath = path.join(sparseDir, file)
-                const destPath = path.join(dest, file)
-                fs.renameSync(srcPath, destPath)
-            })
-
-            // Remove empty sparse directory structure
-            const pathParts = github.path.split('/')
-            let currentPath = dest
-            for (const part of pathParts) {
-                currentPath = path.join(currentPath, part)
-                if (fs.existsSync(currentPath)) {
-                    fs.rmdirSync(currentPath, { recursive: true })
-                }
-            }
-        }
-
-        // Step 4: Remove .git directory to prevent Gatsby from processing unwanted files
+        // Step 3: Remove .git directory to prevent Gatsby from processing unwanted files
         const gitDir = path.join(dest, '.git')
         if (fs.existsSync(gitDir)) {
             console.log(`   🧹 Removing .git directory...`)
