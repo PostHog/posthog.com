@@ -90,10 +90,13 @@ externalDocsSources.forEach((source) => {
             { stdio: 'inherit' }
         )
 
-        // Step 2: Enable sparse-checkout and fetch only specified path
-        execSync(`cd ${dest} && git sparse-checkout set ${github.path} && git checkout`, {
-            stdio: 'inherit',
-        })
+        // Step 2: Enable sparse-checkout in no-cone mode for strict path filtering
+        execSync(
+            `cd ${dest} && git sparse-checkout init --no-cone && git sparse-checkout set "${github.path}/*" && git checkout`,
+            {
+                stdio: 'inherit',
+            }
+        )
 
         // Step 3: Move files up from subdirectory if needed
         const sparseDir = path.join(dest, github.path)
@@ -125,6 +128,18 @@ externalDocsSources.forEach((source) => {
             console.log(`   🧹 Removing .git directory...`)
             fs.rmSync(gitDir, { recursive: true, force: true })
         }
+
+        // Step 5: List and verify only expected files remain
+        console.log(`   📋 Verifying clone contents...`)
+        const remainingFiles = fs.readdirSync(dest)
+        console.log(`   Files in ${dest}:`, remainingFiles)
+
+        // Remove any markdown files that shouldn't be there (like README.md at root)
+        remainingFiles.forEach((file) => {
+            if (file.match(/\.(md|mdx)$/i) && !file.startsWith('.')) {
+                console.log(`   ⚠️  Found unexpected markdown at root: ${file}`)
+            }
+        })
 
         console.log(`   ✅ Cloned successfully`)
     } catch (error) {
