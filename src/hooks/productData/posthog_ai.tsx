@@ -87,7 +87,7 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Insight generator',
+                    name: 'AI-generated insights',
                     description: 'AI-generated insights for both event and session-level metrics',
                     sticker: <StickerPath className="size-12" />,
                     percent: 30,
@@ -99,7 +99,7 @@ export const posthog_ai = {
                     percent: 30,
                 },
                 {
-                    name: 'Anomaly explainer',
+                    name: 'Explanations for outliers',
                     description: 'Detects and explains anomalies and makes sense of outliers',
                     sticker: <StickerPath className="size-12" />,
                     percent: 0,
@@ -125,19 +125,19 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Insight generator',
+                    name: 'AI-generated insights',
                     description: 'Builds insights and entire dashboards from a single prompt',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Anomaly detector',
+                    name: 'Detecting anomalies',
                     description: 'Suggests and sets up alerts automatically to catch those outliers asap',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
                 {
-                    name: 'Query helper',
+                    name: 'Prompt queries',
                     description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
@@ -425,7 +425,7 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Query helper',
+                    name: 'Fixing SQL mistakes',
                     description: 'Fixes your errors to make sure you get with the data you want and need',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
