@@ -312,7 +312,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ...shortcodes,
     }
     const initialTag = undefined
-    const { tableOfContents, askMax } = pageContext
+    const { tableOfContents, askPostHogAI } = pageContext
     const { fullWidthContent, theoMode } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
