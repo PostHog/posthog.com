@@ -1,16 +1,12 @@
 ---
-title: Session Replay Architecture
+title: Session replay architecture
 sidebar: Docs
 showTitle: true
 ---
 
-# Session Replay Architecture
+## Session recording architecture: ingestion → processing → serving
 
-> **Note:** This document outlines the architecture and technical details of PostHog's Session Replay feature.
-
-## Session Recording Architecture: Ingestion → Processing → Serving
-
-## 1. Capture (Client-side)
+## 1. Capture (client-side)
 
 **PostHog-JS** uses **rrweb** (record and replay the web) to:
 - Serialize DOM into JSON snapshots
@@ -21,20 +17,20 @@ showTitle: true
 
 Events include metadata: `$window_id`, `$session_id`, `$snapshot_source` (Web/Mobile), timestamps, distinct_id
 
-## 2. Ingestion Pipeline
+## 2. Ingestion pipeline
 
-### Phase 1: Rust Capture Service
+### Phase 1: Rust capture service
 **`rust/capture/src/v0_endpoint.rs`**
 - Receives POST to `/s/` endpoint
 - Validates session_id (rejects malformed/too long IDs)
 - Routes to replay-specific Kafka sink (`process_replay_events`)
 - Publishes to **`session_recording_snapshot_item_events`** topic (or `_overflow` topic if billing-limited)
 
-**Kafka Sink** (`rust/capture/src/sinks/kafka.rs`):
+**Kafka sink** (`rust/capture/src/sinks/kafka.rs`):
 - Produces to primary topic: `KAFKA_SESSION_RECORDING_SNAPSHOT_ITEM_EVENTS`
 - Overflow topic: `KAFKA_SESSION_RECORDING_SNAPSHOT_ITEM_OVERFLOW`
 
-### Phase 2: Blob Ingestion Consumer (Node.js/TypeScript)
+### Phase 2: Blob ingestion consumer (Node.js/TypeScript)
 **`plugin-server/src/main/ingestion-queues/session-recording-v2/`**
 
 **SessionRecordingIngester** consumes from Kafka and:
@@ -113,9 +109,9 @@ Events include metadata: `$window_id`, `$session_id`, `$snapshot_source` (Web/Mo
 - Stores: session_id, team_id, distinct_id, timestamps, URLs, counts (clicks/keypresses/console), block locations, retention_period_days
 - Old format also used: **`session_recording_events`** (deprecated, contains raw snapshot_data)
 
-## 3. Storage Schema
+## 3. Storage schema
 
-### ClickHouse Tables
+### ClickHouse tables
 **`session_replay_events`** (primary, v2):
 ```
 session_id, team_id, distinct_id
@@ -141,7 +137,7 @@ retention_period_days
 - Metadata: duration, active_seconds, click_count, start_time, end_time, distinct_id
 - Used for persisted/LTS recordings
 
-### S3 Object Storage
+### S3 object storage
 - Main storage: `session_recordings/{team_id}/{session_id}/...`
 - Blob ingestion: organized by retention period + timestamp
 - Files are byte-addressable compressed session blocks
@@ -160,7 +156,7 @@ Two-phase fetch:
     - note: "realtim"e" is deprecated and will be fully deleted soon
 2. **Phase 2**: Client requests `?source=blob`
 
-**Source Resolution**:
+**Source resolution**:
 - **Blob (primary)**: Queries ClickHouse for block metadata
   - Gets S3 URLs with byte ranges for each session block
   - Generates pre-signed URLs (60s expiry)
@@ -184,7 +180,7 @@ Returns block listing:
 }, ...]
 ```
 
-### Frontend Playback
+### Frontend playback
 **`frontend/src/scenes/session-recordings/player/`**
 
 1. **sessionRecordingPlayerLogic** fetches snapshots
@@ -197,7 +193,7 @@ Returns block listing:
 - Shows person info, properties, events, console logs
 - Queries events from `events` table filtered by session_id
 
-## Key Optimizations
+## Key optimizations
 
 - **Compression**: Snappy for session blocks (~70-80% reduction)
 - **Byte-range fetching**: Only fetch needed time ranges from S3
@@ -207,7 +203,7 @@ Returns block listing:
 - **TTL**: Automatic expiry based on retention_period_days
 - **Overflow handling**: Separate Kafka topic + limiter for billing control
 
-## Data Flow Summary
+## Data flow summary
 
 ```
 Browser (rrweb)
