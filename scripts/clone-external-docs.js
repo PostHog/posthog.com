@@ -119,6 +119,13 @@ externalDocsSources.forEach((source) => {
             }
         }
 
+        // Step 4: Remove .git directory to prevent Gatsby from processing unwanted files
+        const gitDir = path.join(dest, '.git')
+        if (fs.existsSync(gitDir)) {
+            console.log(`   🧹 Removing .git directory...`)
+            fs.rmSync(gitDir, { recursive: true, force: true })
+        }
+
         console.log(`   ✅ Cloned successfully`)
     } catch (error) {
         // Don't fail the build - log warning but continue
