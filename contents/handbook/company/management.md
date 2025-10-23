@@ -66,7 +66,7 @@ Ways to burn yourself out:
 ## How do I make sure my direct reports are happy and productive?
 
 First, make sure you are setting the right context. Next, the most useful thing you can do here is to schedule regular 1-1s. Typically we find that you should have higher frequency 1-1s with your reports when they join PostHog and reduced frequency over time as they settle in. There are some types that we've found useful:
-- **When they start*** schedule a longer 1-1 to get to know each other and set expectations on each other
+- **When they start** schedule a longer 1-1 to get to know each other and set expectations on each other
 - **During their probation period** have weekly 1-1s as a regular check in (this is an important time to be giving clear feedback about how they are doing)
 - **After their probation** have bi-weekly or monthly 1-1s to discuss how they are doing outside of the regular day-to-day context
 
