@@ -403,17 +403,29 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const publishedDocs = externalDocsManifest.filter((doc) => doc.status === 'published')
     const overwrittenDocs = externalDocsManifest.filter((doc) => doc.status === 'overwritten')
 
-    // Calculate per-source statistics
+    // Calculate per-source statistics and read git info
     const sourceStats = externalDocsSources.map((source) => {
         const sourceDocs = externalDocsManifest.filter((doc) => doc.source === source.name)
         const published = sourceDocs.filter((doc) => doc.status === 'published').length
         const overwritten = sourceDocs.filter((doc) => doc.status === 'overwritten').length
+
+        // Read git info if available
+        let gitInfo = null
+        const gitInfoPath = path.join(source.path, '.git-info.json')
+        if (fs.existsSync(gitInfoPath)) {
+            try {
+                gitInfo = JSON.parse(fs.readFileSync(gitInfoPath, 'utf8'))
+            } catch (error) {
+                console.warn(`Failed to read git info for ${source.name}:`, error.message)
+            }
+        }
 
         return {
             name: source.name,
             repo: source.github?.repo,
             path: source.github?.path,
             ref: source.ref || 'master',
+            ...(gitInfo ? { git: gitInfo } : {}),
             totalDocs: sourceDocs.length,
             publishedDocs: published,
             overwrittenDocs: overwritten,

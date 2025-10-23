@@ -109,6 +109,27 @@ externalDocsSources.forEach((source) => {
             }
         )
 
+        // Step 2.5: Capture git info before removing .git directory
+        const gitSha = execSync(`cd ${safeDest} && git rev-parse HEAD`, { encoding: 'utf8' }).trim()
+        const gitBranch = execSync(`cd ${safeDest} && git rev-parse --abbrev-ref HEAD`, { encoding: 'utf8' }).trim()
+        console.log(`   📍 Cloned commit: ${gitSha} (${gitBranch})`)
+
+        // Write git info to metadata file for manifest generation
+        const gitInfoPath = path.join(dest, '.git-info.json')
+        fs.writeFileSync(
+            gitInfoPath,
+            JSON.stringify(
+                {
+                    sha: gitSha,
+                    branch: gitBranch,
+                    ref: refToClone,
+                    clonedAt: new Date().toISOString(),
+                },
+                null,
+                2
+            )
+        )
+
         // Step 3: Remove .git directory to prevent Gatsby from processing unwanted files
         const gitDir = path.join(dest, '.git')
         if (fs.existsSync(gitDir)) {
