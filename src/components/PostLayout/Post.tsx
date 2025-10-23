@@ -35,7 +35,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         stickySidebar,
         searchFilter,
         fullWidthContent,
-        askMax,
+        askPostHogAI,
     } = usePost()
     const { compact, internalMenu } = useLayoutData()
 
