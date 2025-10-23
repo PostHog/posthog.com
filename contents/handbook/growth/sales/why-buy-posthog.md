@@ -37,7 +37,7 @@ After your engineers integrate the PostHog SDK you’ll be able to self-serve an
 - [Track key metrics such as NPS, CSAT](/surveys) via in-app surveys and measure the trends over time.
 - [Easily uncover user friction](/session-replay) by following the drop-offs in a funnel to replays to understand what the user experiences.  Surface any errors to your engineering team via issue assignment to get your user problems solved quickly.
 - [Enrich your product data](/bi) with revenue and other data to gain a deeper understanding of what drives revenue growth in your product.  It’s only a few clicks to integrate most data sources and then you’ll be able to enrich your user data with additional metrics without a data team.  We do the heavy lifting for you.
-- [Ask questions of your product](/max) - We create the insights for you, all you need to do is ask Max AI questions about your product.
+- [Ask questions of your product](/ai) - We create the insights for you, all you need to do is ask PostHog AI questions about your product.
 
 
 ## Marketing

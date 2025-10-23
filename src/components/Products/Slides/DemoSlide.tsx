@@ -55,7 +55,7 @@ export default function DemoSlide({ productHandle, answers = [] }: DemoSlideProp
                 <IconLightBulb className="size-10 opacity-50" />
                 <div className="flex flex-col text-xl">
                     <strong>Signed into PostHog?</strong>
-                    <p>Click any question to open PostHog and get Max started.</p>
+                    <p>Click any question to get PostHog AI started.</p>
                 </div>
             </div>
         </div>

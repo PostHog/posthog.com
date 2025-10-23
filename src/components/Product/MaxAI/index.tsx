@@ -38,7 +38,7 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
 import { useStaticQuery, graphql } from 'gatsby'
-import { MaxQuestionInput } from 'components/MaxQuestionInput'
+import { PostHogAIQuestionInput } from 'components/MaxQuestionInput'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useUser } from 'hooks/useUser'
@@ -378,7 +378,7 @@ const Roadmap = () => {
             </div>
 
             <div className="mt-auto text-center pt-8 flex flex-col gap-2 mdlg:flex-row mdlg:justify-center mdlg:items-center pb-8">
-                <strong className="">Have an idea for Max?</strong>
+                <strong className="">Have an idea for PostHog AI?</strong>
                 <CallToAction
                     href="https://github.com/PostHog/posthog/issues"
                     type="secondary"
@@ -417,7 +417,7 @@ const features = [
     },
     {
         title: '"Show me users who have rageclicked"',
-        description: 'Let Max automatically build filters and playlists for you',
+        description: 'Let PostHog AI automatically build filters and playlists for you',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/table_cedb252de2.png"
@@ -443,25 +443,28 @@ const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Product analytics',
-        description: 'Explore your product data with graphs, funnels, retention charts, and more just by asking Max',
+        description:
+            'Explore your product data with graphs, funnels, retention charts, and more just by asking PostHog AI',
         icon: <IconGraph />,
         color: 'blue',
     },
     {
         title: 'Session replays',
-        description: 'Tell Max what behaviours you are looking for and he can find the matching session recordings',
+        description:
+            'Tell PostHog AI what behaviours you are looking for and he can find the matching session recordings',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
         title: 'SQL insights',
-        description: 'Tired of writing long SQL queries? Max can do that for you to help you query your data warehouse',
+        description:
+            'Tired of writing long SQL queries? PostHog AI can do that for you to help you query your data warehouse',
         icon: <IconCode />,
         color: 'seagreen',
     },
     {
         title: 'PostHog docs',
-        description: 'Want advice on building your product? Max can access all our docs and give you tips',
+        description: 'Want advice on building your product? PostHog AI can access all our docs and give you tips',
         icon: <IconBook />,
         color: 'green',
     },
@@ -613,17 +616,17 @@ export const ProductMax = () => {
                 >
                     <div className="flex flex-col-reverse mdlg:grid mdlg:grid-cols-2 gap-8 xl:gap-16 mb-12 xl:mb-16 px-2 mdlg:px-0">
                         <div className="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto">
-                            <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
+                            <img src={headlineImg} alt="PostHog AI" className="w-full max-w-[604px]" />
 
                             <div>
                                 <img
                                     src={betaMobileImg}
-                                    alt="Max AI"
+                                    alt="PostHog AI"
                                     className="w-full mdlg:hidden max-w-[222px] mx-auto"
                                 />
                                 <img
                                     src={betaDesktopImg}
-                                    alt="Max AI"
+                                    alt="PostHog AI"
                                     className="w-full hidden mdlg:block max-w-[437px] mx-auto"
                                 />
 
@@ -727,12 +730,12 @@ export const ProductMax = () => {
                     <div className="text-center mb-12">
                         <img
                             src={descriptionMobileImg}
-                            alt="Max AI"
+                            alt="PostHog AI"
                             className="w-full mdlg:hidden max-w-[412px] mx-auto"
                         />
                         <img
                             src={descriptionDesktopImg}
-                            alt="Max AI"
+                            alt="PostHog AI"
                             className="w-full hidden mdlg:block max-w-[619px] mx-auto"
                         />
                     </div>
@@ -813,9 +816,9 @@ export const ProductMax = () => {
                     </div>
 
                     <div className="mb-12">
-                        <MaxQuestionInput
+                        <PostHogAIQuestionInput
                             className="bg-[#f5e2b1] border-[#F5E2B2] shadow-xl"
-                            placeholder="Ask Max anything about your product data..."
+                            placeholder="Ask PostHog AI anything about your product data..."
                         />
                     </div>
 
@@ -829,13 +832,13 @@ export const ProductMax = () => {
                                 <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
                                 <p className="mb-2">We have big free tiers on all our products.</p>
                                 <p>
-                                    <strong>Max is free during beta</strong> and doesn't cost anything extra. We will
-                                    charge something, but with a generous free tier, when he's out of beta.
+                                    <strong>PostHog AI is free during beta</strong> and doesn't cost anything extra. We
+                                    will charge something, but with a generous free tier, when it's out of beta.
                                 </p>
                             </div>
                             <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-16">
                                 <CloudinaryImage
-                                    alt="Max AI assistant"
+                                    alt="PostHog AI assistant"
                                     placeholder="blurred"
                                     className="w-full max-w-[250px]"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
