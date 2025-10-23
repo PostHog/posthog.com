@@ -22,7 +22,7 @@ We care a lot about pricing at PostHog. As proof:
 
 - There are over [100 RFCs](/newsletter/how-we-work-async#5-our-request-for-comments-process) (108 to be exact) about pricing in our private (sorry) product discussions repo.
 
-All of this has meant we’ve thought, debated, and learned a lot about pricing. We’re sharing the best bits we’ve learned here. 
+All of this has meant we’ve thought, debated, and learned a lot about pricing. We’re sharing the best bits here. 
 
 ## 1. How you price is who you are
 
@@ -30,23 +30,23 @@ Pricing isn't just how you make money, it defines the type of company and brand 
 
 Imagine two [feature flag](/newsletter/feature-flag-mistakes) tools. The first charges by **seats** and **flags created**. 
 
-Their customers think about every flag and user they add, meaning they do less of both, but the flags they do create are more important and are used more heavily. This model appeals to larger companies that ship slowly and make more requests per flag, and that means enterprise features like auditability and access controls are more important.
+Their customers think about every flag and user they add, meaning they do less of both. The flags they do create are relied on more heavily. This model appeals to larger companies that ship slowly and make more requests per flag. This means enterprise features like auditability and access controls are a priority.
 
 The second charges by **requests**. 
 
-This means more developers can access and create flags. There are more flags created, but where they put those flags becomes more important, so they aren’t charged too much for requests. This appeals to smaller companies who ship more flags, so cost controls and DevEx features like local evaluation matter more.
+This means more developers can access and create flags, but they need to be more thoughtful about where flags go in code so they aren’t charged too much. This appeals to smaller companies who ship more flags, which means cost controls and DevEx features like [local evaluation](/docs/feature-flags/local-evaluation) matter more.
 
-These examples show **how much** you charge often doesn’t matter as much as **how** you charge. Moreover, how you charge will influence how you sell and market your product, too.
+Two similar products with completely different experiences because of pricing. This shows **how much** you charge often doesn’t matter as much as **how** you charge. Moreover, how you charge will influence how you sell and market your product, too.
 
 A usage-based model lends itself to faster, self-serve, product-led sales motions; seat-based pricing biases you toward slower, enterprise-style sales motion.
 
-Ultimately, how you price your product should come from your [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP). Our ICP is high-growth startups that are led by [product engineers](/blog/what-is-a-product-engineer). The ability self-serve and have pricing align with usage is important for them, so that is what we’ve gone with.
+Ultimately, how you price your product should come from your [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP). Our ICP is high-growth startups that are led by [product engineers](/blog/what-is-a-product-engineer). The ability to self-serve and have pricing that aligns with usage is important for them, so that is what we’ve gone with.
 
 ## 2. Charging something is better giving it away for free
 
-It’s easy to give things away, especially zero marginal cost software, but it's a trap for any early-stage startup that wanting build a real business. You're always better off charging something as soon as possible, even if the unit economics don't add up yet.
+It’s easy to give things away, especially zero marginal cost software, but it's a trap for any early-stage startup wanting to build a real business. You're always better off charging something as soon as possible, even if the unit economics don't add up yet.
 
-Why does this matter? Because paying customers give you different, and typically more valuable, feedback than free users. They care enough about the problem you're solving to give you money, so they care more about it improving. They have skin in the game. 
+Why does this matter? Because paying customers give you different and, typically, more valuable feedback than free users. They care enough about your solution to give you money, so they'll care more about it improving. They have skin in the game. 
 
 This is why acquiring reference **customers** is a core part of [finding product-market fit](/founders/product-market-fit-game#level-5---onboard-your-first-5-reference-paying-customers).
 
@@ -60,7 +60,7 @@ There are three big reasons why companies don’t charge early:
 
 ![Charging early](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_10_21_T09_09_16_516_Z_216ab957a1.jpeg)
 
-Not charging early can literally sink a startup. For example, the founder of [Kite](https://kite.com/), a failed AI coding startup, wrote:
+Not charging early can literally sink a startup. For example, the founder of [Kite](https://kite.com/), a failed AI coding startup, reflected:
 
 > We failed to build a business because our product did not monetize, and it took too long to figure that out.
 >
@@ -68,15 +68,15 @@ Not charging early can literally sink a startup. For example, the founder of [Ki
 
 The first three steps all worked. They built a "world-class engineering team" and grew the product to 500k developers with almost no marketing spend. 
 
-It was monetization that let them down. Those developers did not pay to use it. All the work they put into the previous steps did not pay off and they had to shut down after 7 years.
+It was monetization that let them down. Those developers did not pay to use Kite. All the work they put into the previous steps did not pay off and they had to shut down after 7 years.
 
-If they charged early, they would have at least been able to figure this out sooner.
+If they charged early, they would have at least been able to figure this out sooner and likely save themselves a lot of pain.
 
 ## 3. Frequently changing pricing is totally normal
 
-You'll almost certainly get your pricing wrong, especially if you are charging early. That's normal, we all do it.
+You'll almost certainly get your pricing wrong, especially if you are charging early. That's normal, all companies do it.
 
-For example, our early pricing was wildly different from our pricing now. In August 2020, we started as a monthly subscription.
+For example, PostHog's early pricing was wildly different from [our pricing now](/pricing). In August 2020, we started as a monthly subscription.
 
 ![August 2020 pricing](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_03_at_14_24_21_2x_f828b75ded.png)
 
@@ -106,7 +106,7 @@ The important part of doing this is making sure you communicate the change well.
 
 - Give people a warning and a discount (grace period) if you are going to raise their prices.
 
-- Understand who is going to pay more or less. 98% of our data pipeline customers paid less, but for the 2% who paid more, we made sure to communicate why we did this and help lower the impact of the change.
+- Understand who is going to pay more or less. 98% of our [data pipeline](/docs/cdp) customers paid less, but for the 2% who paid more, we made sure to communicate why we did this and help lower the impact of the change.
 
 - We try to grandfather existing customers’ pricing unless it is more expensive or we have a very good reason not to.
 
@@ -122,9 +122,9 @@ Ideally, there should be nuance to this. The best way to create this (and settle
 
 - Hobbyists or pre-PMF startups should be able to use PostHog for free. This creates ultra-valuable [word-of-mouth growth](/newsletter/marketing-for-devs). GitHub famously does the same.
 
-- Be more generous than competitors, making it a no-brainer to choose PostHog. This often means a larger free tier with more features on that free tier. For example, we're one of the few session replay tools that offers mobile replays for free.
+- Be more generous than competitors, making it a no-brainer to choose PostHog. This often means a larger free tier with more features on that free tier. For example, we're one of the few session replay tools that offers [mobile replays for free](/docs/session-replay/mobile).
 
-- Every product should be priced separately. This means separate free tiers for each product. For example, LLM analytics is separate from product analytics, even though they both use "events." Multi-product companies like Atlassian and AWS are our models here.
+- Every product should be priced separately. This means separate free tiers for each product. For example, [LLM analytics](/llm-analytics) is separate from product analytics, even though they both use "events." Multi-product companies like [Atlassian](/newsletter/the-companies-that-shaped-posthog) and AWS are our models here.
 
 - Features that increase stickiness should be free (with a reasonable limit). A good question to ask here is: "If I were to switch away to a competitor, what would I feel like I am losing?" It's tough to leave Figma when all your projects and designs are in one place.
 
@@ -140,11 +140,11 @@ Why do we need so many people involved in billing?
 
 - It enables us to charge the way we want. It can be tempting to just accept the simple subscription model most billing systems offer, but this limits your ability to have pricing that aligns with your value creation. Our billing team lets us price products, add-ons, and platform packages how we want.
 
-- The billing system needs the flexibility to handle many situations such as discounts, contracts, credits, invoicing, and weird payment methods (pay by cheque anyone?). 
+- The billing system needs the flexibility to handle many situations such as discounts, contracts, credits, invoicing, and weird payment methods (pay by cheque anyone? *Please don't*). 
 
 - It needs to be reliable. Charge too much and customers will be super unhappy. Charge too little (or miss failed/late payments) and you are literally leaving money on the table.
 
-Without someone dedicated to billing, pricing launches will be painful, your ability to charge users will be limited, and more errors and unhappy customers will pop up.
+Without someone dedicated to billing, pricing launches are painful, your ability to charge users is limited, and more errors and unhappy customers pop up.
 
 ## 6. Predictable and transparent pricing > simple pricing
 
