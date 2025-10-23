@@ -222,7 +222,7 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Session finder',
+                    name: 'Session search',
                     description: 'Natural language search for specific replays (e.g., "users who abandoned checkout")',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
@@ -235,7 +235,7 @@ export const posthog_ai = {
                     percent: 30,
                 },
                 {
-                    name: 'Playlist curator',
+                    name: 'Session clustering',
                     description: 'Clusters similar sessions and shows you the 10 that represent 1000',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
@@ -299,19 +299,19 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Exception hunter',
-                    description: 'Natural language search to find specific errors (e.g., "timeout errors in checkout")',
+                    name: 'Exception search',
+                    description: 'Natural language search to find specific errors',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Impact ranker',
+                    name: 'Impact scoring',
                     description: 'Surfaces high-impact exceptions based on affected users and business context',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Smart grouper',
+                    name: 'Semantic grouping',
                     description: 'Groups exceptions by root cause using semantic similarity, not just stack traces',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
@@ -340,19 +340,19 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'Survey builder',
+                    name: 'Survey generation',
                     description: 'Generates questions, sets up targeting, and launches surveys in seconds',
                     sticker: <StickerPath className="size-6" />,
                     percent: 90,
                 },
                 {
-                    name: 'Response synthesizer',
+                    name: 'Response synthesis',
                     description: 'Surfaces themes and patterns across all feedback',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Feedback oracle',
+                    name: 'Search based on meaning',
                     description: 'Ask questions across all survey responses and get answers by meaning, not just keyword matching',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
