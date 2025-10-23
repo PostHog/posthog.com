@@ -16,9 +16,7 @@ const externalDocsSources = [
             repo: 'PostHog/posthog',
             path: 'docs/published',
         },
-        path: process.env.POSTHOG_REPO_PATH
-            ? `${process.env.POSTHOG_REPO_PATH}/docs/published`
-            : path.join(process.cwd(), '.posthog-monorepo-cache'),
+        path: path.join(process.cwd(), '.posthog-monorepo-cache'),
         pathTransform: (slug) => `/handbook/engineering${slug}`,
         ref: process.env.POSTHOG_MONOREPO_REF,
     },

@@ -15,8 +15,8 @@ const { externalDocsSources } = require('./gatsby-config-exports')
 // Build gatsby-source-filesystem plugins for each available source
 const externalDocsPlugins = externalDocsSources
     .map((source) => {
-        // Construct full path to the docs subdirectory
-        const docsPath = source.github?.path ? path.join(source.path, source.github.path) : source.path
+        // Clone script creates full directory structure at source.path via sparse-checkout
+        const docsPath = path.join(source.path, source.github.path)
         const pathExists = fs.existsSync(docsPath)
         console.log(`🔍 External docs source: ${source.name}`, {
             path: docsPath,

@@ -20,6 +20,77 @@ import { externalDocsSources } from '../gatsby-config-exports'
 
 const limit = pLimit(10)
 
+function calculateSourceStats() {
+    return externalDocsSources.map((source) => {
+        const sourceDocs = externalDocsManifest.filter((doc) => doc.source === source.name)
+        const published = sourceDocs.filter((doc) => doc.status === 'published').length
+        const overwritten = sourceDocs.filter((doc) => doc.status === 'overwritten').length
+
+        // Read git info if available
+        let gitInfo = null
+        const gitInfoPath = path.join(source.path, source.github.path, '.git-info.json')
+        if (fs.existsSync(gitInfoPath)) {
+            try {
+                gitInfo = JSON.parse(fs.readFileSync(gitInfoPath, 'utf8'))
+            } catch (error) {
+                console.warn(`Failed to read git info for ${source.name}:`, error.message)
+            }
+        }
+
+        return {
+            name: source.name,
+            repo: source.github?.repo,
+            path: source.github?.path,
+            ref: source.ref || 'master',
+            ...(gitInfo ? { git: gitInfo } : {}),
+            totalDocs: sourceDocs.length,
+            publishedDocs: published,
+            overwrittenDocs: overwritten,
+            hasNoDocs: sourceDocs.length === 0,
+        }
+    })
+}
+
+function generateExternalDocsManifest() {
+    const publicDir = path.resolve(__dirname, '../public')
+    if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true })
+    }
+    const manifestPath = path.join(publicDir, 'external-docs-map.json')
+
+    const publishedDocs = externalDocsManifest.filter((doc) => doc.status === 'published')
+    const overwrittenDocs = externalDocsManifest.filter((doc) => doc.status === 'overwritten')
+    const sourceStats = calculateSourceStats()
+
+    fs.writeFileSync(
+        manifestPath,
+        JSON.stringify(
+            {
+                generatedAt: new Date().toISOString(),
+                summary: {
+                    totalExternalDocs: externalDocsManifest.length,
+                    published: publishedDocs.length,
+                    overwrittenByPosthogCom: overwrittenDocs.length,
+                    sourcesWithNoDocs: sourceStats.filter((s) => s.hasNoDocs).length,
+                },
+                sources: sourceStats,
+                docs: externalDocsManifest,
+            },
+            null,
+            2
+        )
+    )
+
+    if (externalDocsManifest.length > 0) {
+        console.log(
+            `📝 Generated external docs manifest: ${manifestPath}\n` +
+                `   Total: ${externalDocsManifest.length} | Published: ${publishedDocs.length} | Overwritten: ${overwrittenDocs.length}`
+        )
+    } else {
+        console.log(`📝 Generated external docs manifest: ${manifestPath} (no external docs found)`)
+    }
+}
+
 const createOGImages = async () => {
     console.log('Creating OG images')
 
@@ -393,73 +464,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         generateSdkReferencesMarkdown(node)
     })
 
-    // Generate external docs manifest
-    const publicDir = path.resolve(__dirname, '../public')
-    if (!fs.existsSync(publicDir)) {
-        fs.mkdirSync(publicDir, { recursive: true })
-    }
-    const manifestPath = path.join(publicDir, 'external-docs-map.json')
-
-    const publishedDocs = externalDocsManifest.filter((doc) => doc.status === 'published')
-    const overwrittenDocs = externalDocsManifest.filter((doc) => doc.status === 'overwritten')
-
-    // Calculate per-source statistics and read git info
-    const sourceStats = externalDocsSources.map((source) => {
-        const sourceDocs = externalDocsManifest.filter((doc) => doc.source === source.name)
-        const published = sourceDocs.filter((doc) => doc.status === 'published').length
-        const overwritten = sourceDocs.filter((doc) => doc.status === 'overwritten').length
-
-        // Read git info if available
-        let gitInfo = null
-        const gitInfoPath = path.join(source.path, '.git-info.json')
-        if (fs.existsSync(gitInfoPath)) {
-            try {
-                gitInfo = JSON.parse(fs.readFileSync(gitInfoPath, 'utf8'))
-            } catch (error) {
-                console.warn(`Failed to read git info for ${source.name}:`, error.message)
-            }
-        }
-
-        return {
-            name: source.name,
-            repo: source.github?.repo,
-            path: source.github?.path,
-            ref: source.ref || 'master',
-            ...(gitInfo ? { git: gitInfo } : {}),
-            totalDocs: sourceDocs.length,
-            publishedDocs: published,
-            overwrittenDocs: overwritten,
-            hasNoDocs: sourceDocs.length === 0,
-        }
-    })
-
-    fs.writeFileSync(
-        manifestPath,
-        JSON.stringify(
-            {
-                generatedAt: new Date().toISOString(),
-                summary: {
-                    totalExternalDocs: externalDocsManifest.length,
-                    published: publishedDocs.length,
-                    overwrittenByPosthogCom: overwrittenDocs.length,
-                    sourcesWithNoDocs: sourceStats.filter((s) => s.hasNoDocs).length,
-                },
-                sources: sourceStats,
-                docs: externalDocsManifest,
-            },
-            null,
-            2
-        )
-    )
-
-    if (externalDocsManifest.length > 0) {
-        console.log(
-            `📝 Generated external docs manifest: ${manifestPath}\n` +
-                `   Total: ${externalDocsManifest.length} | Published: ${publishedDocs.length} | Overwritten: ${overwrittenDocs.length}`
-        )
-    } else {
-        console.log(`📝 Generated external docs manifest: ${manifestPath} (no external docs found)`)
-    }
+    generateExternalDocsManifest()
 
     // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
     const markdownQuery = await graphql(`
