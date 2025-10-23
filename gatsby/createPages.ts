@@ -7,6 +7,7 @@ import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templa
 import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
+const { externalDocsSources } = require('../gatsby-config')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
@@ -406,7 +407,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            monorepoDocs: allMdx(filter: { fileAbsolutePath: { regex: "/.posthog-monorepo-cache/" } }) {
+            externalDocs: allMdx(
+                filter: { fileAbsolutePath: { regex: "/.posthog-monorepo-cache/|posthog-monorepo/" } }
+            ) {
                 nodes {
                     id
                     slug
@@ -421,6 +424,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     frontmatter {
                         title
                     }
+                    fileAbsolutePath
                 }
             }
         }
@@ -657,46 +661,57 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     )
 
+    // External docs from other repos - published to real paths
+    // Created FIRST so posthog.com wins if same path exists (last createPage() call wins)
+    console.log('🔍 External docs query result:', {
+        hasExternalDocs: !!result.data.externalDocs,
+        count: result.data.externalDocs?.nodes?.length || 0,
+    })
+
+    result.data.externalDocs?.nodes?.forEach((node) => {
+        const links =
+            node?.rawBody &&
+            markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
+        const slug = node.fields?.slug || node.slug
+
+        // Determine which source this doc came from
+        const source = externalDocsSources.find((s) => node.fileAbsolutePath?.includes(s.name))
+
+        if (!source) {
+            console.warn(`⚠️  No source config found for external doc: ${node.fileAbsolutePath}`)
+            return
+        }
+
+        // Apply source-specific path transformation
+        const productionPath = source.pathTransform(slug)
+
+        const tableOfContents = node.headings && formatToc(node.headings)
+        const titleFallback = node.frontmatter?.title || node.headings?.find((h) => h.depth === 1)?.value || 'Untitled'
+
+        createPage({
+            path: replacePath(productionPath),
+            component: HandbookTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug: productionPath,
+                links,
+                searchFilter: 'docs',
+                nextURL: '',
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+                titleFallback,
+                hideTitle: !node.frontmatter?.title,
+            },
+        })
+    })
+
+    // Create posthog.com docs AFTER external docs, so posthog.com wins conflicts
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
     }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
-
-    // Monorepo docs - served at /_monorepo-preview/ during PoC (excluded from sitemap/search)
-    console.log('🔍 Monorepo docs query result:', {
-        hasMonorepoDocs: !!result.data.monorepoDocs,
-        count: result.data.monorepoDocs?.nodes?.length || 0,
-    })
-    result.data.monorepoDocs?.nodes?.forEach((node) => {
-        const links =
-            node?.rawBody &&
-            markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
-        const slug = node.fields?.slug || node.slug
-        // Prefix monorepo docs with /_monorepo-preview/ for PoC phase (underscore signals temporary/internal)
-        const monorepoDartPath = `/_monorepo-preview${slug}`
-        const tableOfContents = node.headings && formatToc(node.headings)
-
-        // Fallback to first h1 heading if frontmatter title not provided
-        const titleFallback = node.frontmatter?.title || node.headings?.find((h) => h.depth === 1)?.value || 'Untitled'
-
-        createPage({
-            path: replacePath(monorepoDartPath),
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                tableOfContents,
-                slug: monorepoDartPath,
-                links,
-                searchFilter: 'docs',
-                nextURL: '', // Required by HandbookTemplate
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-                titleFallback, // Use first h1 heading if frontmatter title missing
-                hideTitle: !node.frontmatter?.title, // Hide rendered title if using h1 fallback
-            },
-        })
-    })
 
     result.data.tutorials.nodes.forEach((node) => {
         const { slug } = node.fields

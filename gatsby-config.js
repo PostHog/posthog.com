@@ -8,34 +8,64 @@ require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
-// Conditional plugin for monorepo docs (PoC)
-// Safe to merge - won't break if monorepo not available
-// Points to /docs/ which includes both published/ and internal/ subdirectories
-const monorepoDocsPath = process.env.POSTHOG_REPO_PATH
-    ? `${process.env.POSTHOG_REPO_PATH}/docs`
-    : path.join(process.cwd(), '.posthog-monorepo-cache', 'docs')
+// External docs sources - configure multiple repos that can contribute docs
+// Each source defines where to find docs AND how to map paths to the site
+const externalDocsSources = [
+    {
+        name: 'posthog-monorepo',
+        // GitHub source configuration
+        github: {
+            repo: 'PostHog/posthog',
+            path: 'docs/published', // Only clone published docs
+        },
+        // Local path where docs are cloned to
+        path: process.env.POSTHOG_REPO_PATH
+            ? `${process.env.POSTHOG_REPO_PATH}/docs/published`
+            : path.join(process.cwd(), '.posthog-monorepo-cache'),
+        // Path mapping: /foo.md → /handbook/engineering/foo
+        pathTransform: (slug) => `/handbook/engineering${slug}`,
+        // Optional: ref/branch being used (for logging/override)
+        ref: process.env.POSTHOG_DOCS_REF,
+    },
+    // Future sources can be added here, e.g.:
+    // {
+    //     name: 'posthog-cloud-docs',
+    //     github: {
+    //         repo: 'PostHog/posthog-cloud',
+    //         path: 'docs',
+    //     },
+    //     path: path.join(process.cwd(), '.cloud-docs-cache'),
+    //     pathTransform: (slug) => `/docs/cloud${slug}`,
+    //     ref: process.env.CLOUD_DOCS_REF,
+    // },
+]
 
-const pathExists = fs.existsSync(monorepoDocsPath)
-const envVarSet = process.env.POSTHOG_DOCS_REF
+// Export for use in createPages.ts
+module.exports.externalDocsSources = externalDocsSources
 
-console.log('🔍 Monorepo docs config:', {
-    monorepoDocsPath,
-    pathExists,
-    POSTHOG_REPO_PATH: process.env.POSTHOG_REPO_PATH,
-    POSTHOG_DOCS_REF: envVarSet,
-    willActivate: pathExists,
-})
+// Build gatsby-source-filesystem plugins for each available source
+const externalDocsPlugins = externalDocsSources
+    .map((source) => {
+        const pathExists = fs.existsSync(source.path)
+        console.log(`🔍 External docs source: ${source.name}`, {
+            path: source.path,
+            pathExists,
+            ref: source.ref || 'not set',
+            willActivate: pathExists,
+        })
 
-const monorepoDocsPlugin = pathExists
-    ? {
-          resolve: `gatsby-source-filesystem`,
-          options: {
-              name: `monorepo-docs`,
-              path: monorepoDocsPath,
-              ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
-          },
-      }
-    : null
+        return pathExists
+            ? {
+                  resolve: `gatsby-source-filesystem`,
+                  options: {
+                      name: source.name,
+                      path: source.path,
+                      ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                  },
+              }
+            : null
+    })
+    .filter(Boolean)
 
 const getQuestionPages = async (base) => {
     const fetchQuestions = async (page) => {
@@ -201,8 +231,8 @@ module.exports = {
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
-        // Monorepo docs plugin (PoC) - safely skipped if not available
-        monorepoDocsPlugin,
+        // External docs plugins - dynamically added based on available sources
+        ...externalDocsPlugins,
         {
             resolve: `gatsby-source-strapi-pages`,
             options: {
@@ -227,7 +257,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                excludes: ['/_monorepo-preview/*'],
+                excludes: [],
                 createLinkInHead: true,
                 query: `
                 {
