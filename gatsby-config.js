@@ -15,9 +15,11 @@ const { externalDocsSources } = require('./gatsby-config-exports')
 // Build gatsby-source-filesystem plugins for each available source
 const externalDocsPlugins = externalDocsSources
     .map((source) => {
-        const pathExists = fs.existsSync(source.path)
+        // Construct full path to the docs subdirectory
+        const docsPath = source.github?.path ? path.join(source.path, source.github.path) : source.path
+        const pathExists = fs.existsSync(docsPath)
         console.log(`🔍 External docs source: ${source.name}`, {
-            path: source.path,
+            path: docsPath,
             pathExists,
             ref: source.ref || 'not set',
             willActivate: pathExists,
@@ -28,7 +30,7 @@ const externalDocsPlugins = externalDocsSources
                   resolve: `gatsby-source-filesystem`,
                   options: {
                       name: source.name,
-                      path: source.path,
+                      path: docsPath,
                       ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
                   },
               }
