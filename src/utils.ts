@@ -49,3 +49,21 @@ export function flattenStrapiResponse(response: any): any {
 
     return response
 }
+
+export function getFilteredReplyCount(replies: any): number {
+    if (!replies) return 0
+
+    // Normalize replies to an array
+    const replyArray = Array.isArray(replies?.data)
+        ? replies.data
+        : typeof replies === 'object'
+        ? Object.values(replies)
+        : []
+
+    return replyArray.filter((reply: any) =>
+        reply?.attributes?.publishedAt !== null &&
+        // Hide replies that have been marked unhelpful from Max AI from the count 
+        (reply?.attributes?.profile?.data?.id !== 28378 || reply?.attributes?.helpful !== false)
+    ).length
+}
+

@@ -7,7 +7,6 @@ import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
-import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconSearch } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
@@ -23,9 +22,8 @@ import { useInView } from 'react-intersection-observer'
 import useTopicsNav from '../../navs/useTopicsNav'
 import { useWindow } from '../../context/Window'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
-import { flattenStrapiResponse } from '../../utils'
+import { flattenStrapiResponse, getFilteredReplyCount } from '../../utils'
 import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../context/App'
 import Link from 'components/Link'
@@ -367,8 +365,8 @@ export default function Inbox(props) {
                                                 ? subscribedQuestions
                                                 : flattenStrapiResponse(questions.data)
                                             )?.map((question) => {
-                                                const { subject, numReplies, activeAt, replies, profile, permalink } =
-                                                    question
+                                                const { subject, activeAt, replies, profile, permalink } = question
+                                                const numReplies = getFilteredReplyCount(replies)
                                                 const latestAuthor =
                                                     replies?.data?.[replies.data.length - 1]?.profile || profile
                                                 const active = `/questions/${permalink}` === appWindow?.path
