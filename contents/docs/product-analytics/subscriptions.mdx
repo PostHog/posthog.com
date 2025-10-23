@@ -1,9 +1,13 @@
 ---
 title: Subscriptions
 availability:
-  free: none
-  selfServe: full
-  enterprise: full
+    features:
+        subscriptions:
+            free: false
+            selfServe: true
+            boost: true
+            scale: true
+            enterprise: true
 ---
 export const newSubscriptionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-light-mode.png"
 export const newSubscriptionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/new-subscription-button-dark-mode.png"
@@ -13,6 +17,8 @@ export const slackAddLight = "https://res.cloudinary.com/dmukukwp6/image/upload/
 export const slackAddDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-dark-mode.png"
 
 Subscriptions enable you to send [insights](/docs/product-analytics/insights) or [dashboards](/docs/product-analytics/dashboards) to your email or Slack on a regular basis. 
+
+<FeatureAvailability availability={_frontmatter.availability.features.subscriptions} />
 
 > **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/cdp/destinations) to learn how to send event or action data to webhooks, Slack, and more.
 

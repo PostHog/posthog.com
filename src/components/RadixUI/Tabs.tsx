@@ -28,6 +28,11 @@ interface TabsTriggerProps {
     color?: string
 }
 
+interface TabsLabelProps {
+    className?: string
+    children: React.ReactNode
+}
+
 interface TabsContentProps {
     className?: string
     value: string
@@ -80,8 +85,9 @@ const TabsRoot = ({
 const TabsList = ({ 'aria-label': ariaLabel, orientation, className, children }: TabsListProps): JSX.Element => {
     return (
         <RadixTabs.List
-            className={`flex shrink-0 p-1 gap-0.5 min-w-52 ${className} ${orientation === 'vertical' ? 'flex-col' : ''
-                }`}
+            className={`flex shrink-0 p-1 gap-0.5 min-w-52 ${className} ${
+                orientation === 'vertical' ? 'flex-col' : ''
+            }`}
             aria-label={ariaLabel}
         >
             {children}
@@ -134,6 +140,37 @@ const TabsTrigger = ({ className, value, children, icon, color }: TabsTriggerPro
     )
 }
 
+const TabsLabel = ({ className, children }: TabsLabelProps): JSX.Element => {
+    const size = React.useContext(TabsContext)
+
+    // Size-based styling for labels (section dividers)
+    // only 'lg' is in use currently (on PostHog AI product page) - others need to be sized
+    const sizeStyles = {
+        sm: {
+            fontSize: 'text-xs',
+            padding: 'mx-2 pt-2 pb-2 mb-1',
+        },
+        md: {
+            fontSize: 'text-sm',
+            padding: 'mx-2 pt-2 pb-2 mb-1',
+        },
+        lg: {
+            fontSize: 'text-base',
+            padding: 'mx-2 pt-2 pb-2 mb-1',
+        },
+        xl: {
+            fontSize: 'text-lg',
+            padding: 'mx-2 pt-2 pb-2 mb-1',
+        },
+    }
+
+    const currentSize = sizeStyles[size]
+    const baseClassName = `${currentSize.fontSize} ${currentSize.padding} font-normal text-secondary border-b border-primary`
+    const finalClassName = `${baseClassName} ${className || ''}`
+
+    return <div className={finalClassName}>{children}</div>
+}
+
 const TabsContent = ({ className, value, children }: TabsContentProps): JSX.Element => {
     const size = React.useContext(TabsContext)
 
@@ -158,6 +195,7 @@ const Tabs = {
     Root: TabsRoot,
     List: TabsList,
     Trigger: TabsTrigger,
+    Label: TabsLabel,
     Content: TabsContent,
 }
 

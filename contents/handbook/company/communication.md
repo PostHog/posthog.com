@@ -150,7 +150,7 @@ Slack is used for more informal communication, or where it doesn't make sense to
 
 Also keep in mind that, as an open source platform, PostHog has contributors who don't have access to Slack. Having too much context in a private location can be detrimental to those who are trying to understand the rationale for a certain decision.
 
-> Slack canvasses are useful for storing information like schedules, bookmarks, personal to-do lists, scratch notes etc. However, things like quarterly goals, runbooks, sprint plans, FAQs etc. should live in the Handbook, Docs, or in a GitHub RFC or Issue by default. If you find yourself documenting something useful in Slack, it's much better to put it in GitHub instead and link to it from Slack so that Max AI can include it in future search results. Slack canvasses are terrible for searchability!
+> Slack canvasses are useful for storing information like schedules, bookmarks, personal to-do lists, scratch notes etc. However, things like quarterly goals, runbooks, sprint plans, FAQs etc. should live in the Handbook, Docs, or in a GitHub RFC or Issue by default. If you find yourself documenting something useful in Slack, it's much better to put it in GitHub instead and link to it from Slack so that PostHog AI can include it in future search results. Slack canvasses are terrible for searchability!
 
 **Slack etiquette**
 

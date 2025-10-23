@@ -100,7 +100,10 @@ const slides = createSlideConfig({
 
 -   `OverviewSlide` - Product introduction with screenshot and hog image
 -   `CustomersSlide` - Customer testimonials and case studies table
--   `FeaturesSlide` - Tabbed features display with images
+-   `FeaturesSlide` - Tabbed features display with images. Supports multiple layouts:
+    -   **Default (grid)**: 2-column grid with centered content
+    -   **Columns**: Split layout with scrollable features on left
+    -   **AI**: Floating images, skills with progress bars, section labels (see AI Layout section below)
 -   `QuestionsSlide` - FAQ/questions with tutorial content
 -   `ComparisonSummarySlide` - "PostHog vs..." comparison summary
 -   `FeatureComparisonSlide` - Detailed feature comparison table
@@ -188,8 +191,8 @@ interface ProductData {
         title: string
         headline: string
         description?: string
-        handle?: string      // Optional: used for unique slide slug
-        template?: 'tabs' | 'split' | 'grid'  // Optional: slide template
+        handle?: string // Optional: used for unique slide slug
+        template?: 'tabs' | 'split' | 'grid' // Optional: slide template
         icon?: any
         color?: string
         features?: Array<{ title: string; description: string }>
@@ -352,8 +355,8 @@ You can now specify templates directly in your feature data structure, and Slide
 features: [
     {
         title: 'Trace monitoring',
-        handle: 'trace_monitoring',  // Optional: used for slide slug
-        template: 'split',           // Specify the template for this feature
+        handle: 'trace_monitoring', // Optional: used for slide slug
+        template: 'split', // Specify the template for this feature
         headline: 'Trace monitoring',
         description: 'Debug entire conversations...',
         // ... other feature properties
@@ -361,7 +364,7 @@ features: [
     {
         title: 'Native integrations',
         handle: 'native_integrations',
-        template: 'grid',            // Different template for this feature
+        template: 'grid', // Different template for this feature
         headline: 'Works with your AI stack',
         // ... other feature properties
     },
@@ -370,7 +373,7 @@ features: [
         // No template specified - will use default tabs template
         headline: 'Another feature',
         // ... other feature properties
-    }
+    },
 ]
 ```
 
@@ -383,11 +386,102 @@ features: [
 
 #### Available Feature Templates:
 
-- **tabs** (default): Feature appears in the tabbed features slide
-- **split**: Individual slide with split layout (image on one side, content on the other)
-- **grid**: Individual slide with grid layout for feature details
+-   **tabs** (default): Feature appears in the tabbed features slide
+-   **split**: Individual slide with split layout (image on one side, content on the other)
+-   **grid**: Individual slide with grid layout for feature details
+-   **ai**: Individual feature with AI-specific layout (images float right, skills with progress bars, left-aligned content)
 
 This approach eliminates the need for custom logic in individual product pages - just set the template in your feature data!
+
+### AI Layout for Features Slide
+
+The 'ai' layout provides a specialized template for AI-powered features with support for skills, stickers, and section labels. This layout is used on the PostHog AI product page.
+
+#### Using the AI Layout
+
+Set `layout: 'ai'` on individual features within your features array:
+
+```tsx
+// In your product data file (e.g., src/hooks/productData/posthog_ai.tsx)
+features: [
+    {
+        label: 'Analytics', // Optional: Section divider label
+    },
+    {
+        title: 'Web Analytics',
+        headline: 'Web Analytics',
+        layout: 'ai', // Use AI layout
+        icon: <IconPieChart className="size-5 text-green" />,
+        color: 'green',
+        description: 'Privacy-friendly web analytics...',
+        images: [
+            {
+                src: 'https://...',
+                alt: 'Screenshot',
+            },
+        ],
+        skills: [
+            {
+                name: 'Traffic seer',
+                description: 'Illuminates pathways through clickthrough chaos',
+                sticker: <StickerPath className="size-6" />,
+                percent: 80,
+            },
+            {
+                name: 'Writes SQL queries',
+                percent: 95,
+            },
+        ],
+    },
+]
+```
+
+#### AI Layout Features
+
+**1. Section Labels**
+
+-   Add `{ label: 'Section Name' }` objects to visually separate groups of tabs
+-   Labels render as non-clickable dividers in the tab list
+-   Only visible on larger screens (`@2xl:block`)
+
+**2. Skills Display**
+
+-   Skills render in a 2-column grid on larger screens
+-   Each skill can include:
+    -   `name` (required): Skill title
+    -   `description` (optional): Detailed explanation
+    -   `sticker` (optional): React component for icon/sticker
+    -   `percent` (optional): Progress bar percentage (0-100)
+-   String-only skills are also supported: `skills: ['Skill 1', 'Skill 2']`
+
+**3. Layout Structure**
+
+-   **Images**: Float right on larger screens, centered on mobile
+-   **Headline & Description**: Left-aligned (not centered)
+-   **Features**: Vertical list format
+-   **Skills**: 2-column grid with progress bars and stickers
+-   **Overflow**: Auto-scrolling when content exceeds viewport
+
+**4. Stickers**
+Stickers use the `StickerComponent` system from `components/Stickers/Stickers.tsx`:
+
+-   Import from `components/Stickers/Stickers`
+-   Apply size classes: `className="size-6"`
+-   Custom viewBox supported (e.g., StickerPath uses 100x100 instead of default 36x36)
+
+#### Template Configuration
+
+Specify the AI layout at the slide level:
+
+```tsx
+const slides = createSlideConfig({
+    templates: {
+        features: 'ai', // Use AI layout for all features
+    },
+})
+```
+
+Or use `layout: 'ai'` on individual features for mixed layouts within the same slide (tabbed and AI together).
 
 ### Slide Templates (Overview Slides)
 

@@ -516,9 +516,9 @@ export const DocsIndex = () => {
                             <ul>
                                 <li>
                                     <AskMax linkOnly className="underline font-medium">
-                                        Ask Max
+                                        Ask PostHog AI
                                     </AskMax>
-                                    , our trusty AI chatbot. Start a chat on any docs page and Max will have the
+                                    , our trusty AI chatbot. Start a chat on any docs page and PostHog AI will have the
                                     relevant context.
                                 </li>
                                 <li>Search with the icon at the top right</li>
@@ -536,7 +536,7 @@ export const DocsIndex = () => {
                             </p>
                             <ul>
                                 <li>Look for tooltips that link to docs - they open right inside the product</li>
-                                <li>Ask Max in the product</li>
+                                <li>Ask PostHog AI in the product</li>
                             </ul>
 
                             <hr className="my-4" />
