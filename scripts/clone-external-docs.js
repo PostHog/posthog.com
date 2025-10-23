@@ -137,23 +137,7 @@ externalDocsSources.forEach((source) => {
             fs.rmSync(gitDir, { recursive: true, force: true })
         }
 
-        // Step 4: Collect cloned docs for manifest
-        const docsDir = path.join(dest, github.path)
-        if (fs.existsSync(docsDir)) {
-            const files = fs
-                .readdirSync(docsDir, { recursive: true })
-                .filter((file) => file.match(/\.(md|mdx)$/i))
-                .map((file) => ({
-                    sourcePath: path.join(github.repo, github.path, file),
-                    destinationPath: source.pathTransform
-                        ? source.pathTransform(`/${file.replace(/\.mdx?$/, '')}`)
-                        : `/${file}`,
-                    source: name,
-                }))
-            clonedDocs.push(...files)
-        }
-
-        // Step 5: List and verify only expected files remain
+        // Step 4: List and verify only expected files remain
         console.log(`   📋 Verifying clone contents...`)
         const remainingFiles = fs.readdirSync(dest)
         console.log(`   Files in ${dest}:`, remainingFiles)
@@ -165,28 +149,6 @@ externalDocsSources.forEach((source) => {
         console.warn(`   Continuing build without ${name}...`)
     }
 })
-
-// Generate manifest for debugging and visibility
-if (clonedDocs.length > 0) {
-    const publicDir = path.join(__dirname, '..', 'public')
-    if (!fs.existsSync(publicDir)) {
-        fs.mkdirSync(publicDir, { recursive: true })
-    }
-    const manifestPath = path.join(publicDir, 'external-docs-map.json')
-    fs.writeFileSync(
-        manifestPath,
-        JSON.stringify(
-            {
-                generatedAt: new Date().toISOString(),
-                sources: externalDocsSources.map((s) => ({ name: s.name, repo: s.github?.repo, ref: s.ref })),
-                docs: clonedDocs,
-            },
-            null,
-            2
-        )
-    )
-    console.log(`📝 Generated external docs manifest: ${manifestPath}`)
-}
 
 console.log('✅ External docs clone complete')
 process.exit(0)
