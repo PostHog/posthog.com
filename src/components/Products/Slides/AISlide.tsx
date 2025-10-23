@@ -15,17 +15,17 @@ export default function AISlide({ ai, productName }: AISlideProps) {
                 <aside className="text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/max_aeaeca84a3.png"
-                        alt="Max AI"
+                        alt="PostHog AI"
                         className="max-w-[469px]"
                     />
                 </aside>
                 <div className="flex-1 prose">
                     <h2 className="text-5xl font-bold text-primary mb-4">
-                        {ai?.title || 'Max does ' + productName.toLowerCase() + '.'}
+                        {ai?.title || 'PostHog AI does ' + productName.toLowerCase() + '.'}
                     </h2>
                     <p className="text-2xl text-secondary mx-auto">
                         Our{' '}
-                        <Link to="/max" className="font-semibold underline" state={{ newWindow: true }}>
+                        <Link to="/ai" className="font-semibold underline" state={{ newWindow: true }}>
                             AI-powered product assistant
                         </Link>{' '}
                         can help you {ai?.description || 'work with ' + productName + ' more efficiently'}.

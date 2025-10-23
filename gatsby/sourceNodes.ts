@@ -75,6 +75,121 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         components: JSON.stringify(spec.components),
     })
 
+    // PostHog SDK references
+
+    // Paths to the SDK references folders
+    const SDK_REFERENCES_FOLDER_PATHS = [
+        {
+            id: 'posthog-python',
+            repo: 'posthog/posthog-python',
+            repo_branch: 'master',
+            folder_path: 'references',
+        },
+        {
+            id: 'posthog-js',
+            repo: 'posthog/posthog-js',
+            repo_branch: 'main',
+            folder_path: 'packages/browser/references',
+        },
+        {
+            id: 'posthog-node',
+            repo: 'posthog/posthog-js',
+            repo_branch: 'main',
+            folder_path: 'packages/node/references',
+        },
+        {
+            id: 'posthog-react-native',
+            repo: 'posthog/posthog-js',
+            repo_branch: 'main',
+            folder_path: 'packages/react-native/references',
+        },
+    ]
+
+    const referencesData = {}
+    function parseReferencesVersion(version: string): string {
+        return version.split('-').pop()?.replace('.json', '') || ''
+    }
+
+    // Fetch all folder contents in a batch
+    const folderPromises = SDK_REFERENCES_FOLDER_PATHS.map(async (folderPath) => {
+        const url = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}?ref=${folderPath.repo_branch}`
+        const response = await fetch(url)
+        const data = await response.json()
+        return { folderPath, data }
+    })
+
+    const folderResults = await Promise.allSettled(folderPromises).then((results) =>
+        results
+            .map((result) => {
+                if (result.status === 'fulfilled' && result.value?.data && Array.isArray(result.value.data)) {
+                    return { folderPath: result.value.folderPath, data: result.value.data }
+                }
+                console.error('Failed to fetch SDK reference files')
+                return null
+            })
+            .filter((result) => result !== null)
+    )
+
+    for (const { folderPath, data } of folderResults) {
+        referencesData[folderPath.id] = {}
+
+        const filePromises = data
+            .filter((item) => item.type === 'file')
+            .map(async (item) => {
+                const fileUrl = `https://api.github.com/repos/${folderPath.repo}/contents/${folderPath.folder_path}/${item.name}?ref=${folderPath.repo_branch}`
+                const fileResponse = await fetch(fileUrl)
+                const fileData = await fileResponse.json()
+                const version = parseReferencesVersion(item.name)
+                return { version, content: fileData.content }
+            })
+
+        const fileResults = await Promise.allSettled(filePromises).then((results) =>
+            results.map((result) => {
+                if (result.status === 'fulfilled' && result.value?.version && result.value?.content) {
+                    return { version: result.value.version, content: result.value.content }
+                }
+                console.error(`Failed to fetch SDK reference file in ${folderPath.repo}/${folderPath.folder_path}`)
+                return null
+            })
+        )
+
+        for (const { version, content } of fileResults.filter((result) => result !== null)) {
+            if (version) {
+                referencesData[folderPath.id][version] = content
+            }
+        }
+    }
+
+    for (const id in referencesData) {
+        // Create version-specific nodes
+        for (const version in referencesData[id]) {
+            // Decode the base64 data first
+            const versionDataBase64 = referencesData[id][version]
+            let versionData
+
+            try {
+                const decodedString = Buffer.from(versionDataBase64, 'base64').toString('utf-8')
+                versionData = JSON.parse(decodedString)
+            } catch (error) {
+                console.error(`Failed to decode version ${version} for ${id}:`, error)
+                continue
+            }
+            versionData.id = `${id}-${version}`
+            const versionNode = {
+                parent: null,
+                children: [],
+                internal: {
+                    type: `SdkReferences`,
+                    contentDigest: createContentDigest(versionData),
+                },
+                referenceId: id,
+                version: version,
+                ...versionData, // Spread the decoded JSON data
+            }
+            createNode(versionNode)
+        }
+    }
+
     const postHogIssues = await fetch(
         'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
     ).then((res) => res.json())
@@ -241,7 +356,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     page,
                     pageSize: 100,
                 },
-                populate: ['image', 'teams', 'topic', 'cta'],
+                populate: {
+                    image: true,
+                    teams: {
+                        populate: {
+                            miniCrest: true,
+                        },
+                    },
+                    topic: true,
+                    cta: true,
+                    profiles: {
+                        populate: {
+                            avatar: true,
+                            teams: {
+                                populate: {
+                                    miniCrest: true,
+                                },
+                            },
+                        },
+                    },
+                },
             },
             {
                 encodeValuesOnly: true,

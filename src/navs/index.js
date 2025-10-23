@@ -374,6 +374,10 @@ export const dataPipelines = {
                     name: 'Redshift',
                     url: '/docs/cdp/batch-exports/redshift',
                 },
+                {
+                    name: 'Databricks',
+                    url: '/docs/cdp/batch-exports/databricks',
+                },
             ],
         },
         {
@@ -514,6 +518,7 @@ export const handbookSidebar = [
         url: '',
         children: [
             { name: 'Spending money', url: '/handbook/people/spending-money' },
+            { name: 'Team changes', url: '/handbook/company/team-changes' },           
             { name: 'Using GitHub', url: '/handbook/company/new-to-github' },
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
@@ -650,6 +655,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Changelog',
+                url: '/handbook/content/changelog',
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
                 children: [
@@ -664,34 +673,20 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Changelog',
-                url: '/handbook/content/changelog',
+                name: 'SEO best practices',
+                url: '/handbook/content/seo-guide',
             },
             {
-                name: 'Writing for PostHog',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/writing-for-posthog',
-                    },
-                    {
-                        name: 'SEO best practices',
-                        url: '/handbook/content/seo-guide',
-                    },
-                    {
-                        name: 'Style guide',
-                        url: '/handbook/content/posthog-style-guide',
-                    },
-                    {
-                        name: 'Tags and categories',
-                        url: '/handbook/content/tags-and-categories',
-                    },
-                    {
-                        name: 'Content components',
-                        url: '/handbook/content/components',
-                    },
-                ],
+                name: 'Style guide',
+                url: '/handbook/content/posthog-style-guide',
+            },
+            {
+                name: 'Writing metadata',
+                url: '/handbook/content/metadata',
+            },
+            {
+                name: 'Content components',
+                url: '/handbook/content/components',
             },
         ],
     },
@@ -825,12 +820,30 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Working with Max AI',
-                url: '/handbook/engineering/working-with-max-ai',
-            },
-            {
-                name: 'Implementing AI features',
-                url: '/handbook/engineering/implementing-ai-features',
+                name: 'PostHog AI',
+                url: '',
+                children: [
+                    {
+                        name: 'AI platform overview',
+                        url: '/handbook/engineering/ai/ai-platform',
+                    },
+                    {
+                        name: 'AI products',
+                        url: '/handbook/engineering/ai/products',
+                    },
+                    {
+                        name: 'AI platform architecture',
+                        url: '/handbook/engineering/ai/architecture',
+                    },
+                    {
+                        name: 'Implementing AI features',
+                        url: '/handbook/engineering/ai/implementation',
+                    },
+                    {
+                        name: 'Team structure and collaboration',
+                        url: '/handbook/engineering/ai/team-structure',
+                    },
+                ],
             },
             {
                 name: 'Deployments',
@@ -1284,10 +1297,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/growth/sales/how-we-work',
                     },
-                                        {
+                    {
                         name: 'Hogpatch',
                         url: '/handbook/growth/sales/hogpatch',
-                    }
+                    },
                 ],
             },
             {
@@ -2413,12 +2426,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools and features',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconToolbar',
                     children: [
                         {
-                            name: 'Max AI',
-                            url: '/docs/max-ai',
+                            name: 'PostHog AI',
+                            url: '/docs/posthog-ai',
                         },
                         {
                             name: 'Toolbar',
@@ -2436,6 +2449,10 @@ export const docsMenu = {
                         {
                             name: 'Activity',
                             url: '/docs/activity',
+                        },
+                        {
+                            name: 'SDK doctor',
+                            url: '/docs/sdk-doctor',
                         },
                         {
                             name: 'Organizations',
@@ -2707,8 +2724,8 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
-                            name: 'Annual plans',
-                            url: '/docs/billing/annual-plans',
+                            name: 'Pre-paid plans',
+                            url: '/docs/billing/pre-paid-plans',
                         },
                         {
                             name: 'Spike detection',
@@ -3716,6 +3733,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/hono',
                         },
                         {
+                            name: 'Android',
+                            url: '/docs/error-tracking/installation/android',
+                        },
+                        {
                             name: 'Manual/API',
                             url: '/docs/error-tracking/installation/manual',
                         },
@@ -3788,6 +3809,12 @@ export const docsMenu = {
                     url: '/docs/error-tracking/fingerprints',
                     icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
                 },
                 {
                     name: 'Guides',
@@ -4556,37 +4583,37 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/docs/max-ai',
+            url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
                 {
-                    name: 'Max AI',
+                    name: 'PostHog AI',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/max-ai',
+                    url: '/docs/posthog-ai',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/max-ai#how-do-i-access-max',
+                    url: '/docs/posthog-ai#how-do-i-access-posthog-ai',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                 },
                 {
                     name: 'Data access',
-                    url: '/docs/max-ai#what-access-does-max-have-to-my-data',
+                    url: '/docs/posthog-ai#what-access-does-posthog-ai-have-to-my-data',
                     icon: 'IconDatabase',
                     color: 'orange',
                 },
                 {
                     name: 'Security',
-                    url: '/docs/max-ai#is-my-data-shared-with-third-parties',
+                    url: '/docs/posthog-ai#is-my-data-shared-with-third-parties',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -4619,7 +4646,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Configure a messaging channel',
+                    name: 'Configure a channel',
                     url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',
@@ -4812,10 +4839,10 @@ export const productMenu = {
             url: '/llm-analytics',
         },
         {
-            name: 'Max AI',
+            name: 'PostHog AI',
             icon: 'IconMagicWand',
             color: 'purple',
-            url: '/max',
+            url: '/ai',
         },
         {
             name: 'Product OS',

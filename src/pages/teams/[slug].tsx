@@ -2,6 +2,7 @@ import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { graphql, useStaticQuery, navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconPencil, IconInfo, IconX, IconCrown } from '@posthog/icons'
+import dayjs from 'dayjs'
 import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -459,10 +460,15 @@ export default function TeamPage(props: TeamPageProps) {
 
     const inProgress = teamData?.roadmaps?.filter((roadmap) => !roadmap.complete && roadmap.projectedCompletion)
 
+    const fifteenDaysAgo = dayjs().subtract(15, 'day')
+
     const [recentlyShipped] =
         teamData?.roadmaps
-            ?.filter((roadmap) => roadmap.complete)
-            .sort((a, b) => (new Date(a.dateCompleted).getTime() > new Date(b.dateCompleted).getTime() ? -1 : 1)) || []
+            ?.filter((roadmap) => {
+                if (!roadmap.complete || !roadmap.dateCompleted) return false
+                return dayjs(roadmap.dateCompleted).isAfter(fifteenDaysAgo)
+            })
+            .sort((a, b) => (dayjs(a.dateCompleted).isAfter(dayjs(b.dateCompleted)) ? -1 : 1)) || []
 
     const { updates } = useTeamUpdates({
         teamName: name,
@@ -475,7 +481,7 @@ export default function TeamPage(props: TeamPageProps) {
         },
     })
 
-    const hasUnderConsideration = underConsideration?.length > 0
+    const hasUnderConsideration = false
     const hasInProgress = inProgress?.length > 0
     const hasBody = !!body
     const heightToHedgehogs =

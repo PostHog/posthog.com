@@ -28,11 +28,18 @@ export const wrapPageElement = ({ element, props: { location } }) => {
     )
 }
 
-export const onRenderBody = function ({ setPreBodyComponents }) {
+export const onRenderBody = function ({ setPreBodyComponents, setPostBodyComponents }) {
     setPreBodyComponents([
         React.createElement('script', {
             key: 'dark-mode',
             src: '/scripts/theme-init.js',
+        }),
+    ])
+
+    setPostBodyComponents([
+        React.createElement('script', {
+            key: 'initial-loader',
+            src: '/scripts/initial-loader.js',
         }),
     ])
 }

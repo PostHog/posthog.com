@@ -823,7 +823,7 @@ function ReaderViewContent({
                                             })
                                         }
                                     >
-                                        Ask Max AI
+                                        Ask PostHog AI
                                     </button>{' '}
                                     or{' '}
                                     <Link

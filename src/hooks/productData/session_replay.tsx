@@ -20,8 +20,9 @@ export const sessionReplay = {
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
-        title: 'Session replay - PostHog',
-        description: 'Watch people use your product to diagnose issues and understand user behavior',
+        title: 'Session Replay – Debug and analyze sessions with PostHog',
+        description:
+            'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and understand user behavior.',
     },
     overview: {
         title: 'Watch people use your product',
