@@ -9,7 +9,7 @@ showTitle: true
 ---
 
 A manager at PostHog has a short list of responsibilities:
-1. Setting the right context for your direct reports to do their jobs
+1. Setting the right [context](#how-do-i-set-context) for your direct reports to do their jobs
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
@@ -48,6 +48,7 @@ At PostHog, we hire highly experienced people for 99% of roles. That means manag
 
 However, for those people to make the best decisions, they need context. The things a manager can do to set context include:
 - Creating a roadmap that the team can work towards
+      - This is best achieved by having a very deep understanding of customers and the problem space you are working in, and conveying that knowledge to the rest of the team
 - Helping someone figure out who else to talk to within PostHog
 - Enabling or encouraging the team to measure their impact
 - Improving the process in which a team works (things like standups, reviews etc.)
