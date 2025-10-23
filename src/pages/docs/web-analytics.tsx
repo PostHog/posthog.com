@@ -9,7 +9,7 @@ import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import Intro from 'components/Docs/Intro'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
@@ -83,7 +83,7 @@ const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
                 imageClasses="max-h-48 md:max-h-64"
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'Do I need a cookie banner?',
                     'How do I track conversions?',

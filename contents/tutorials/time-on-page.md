@@ -37,7 +37,7 @@ From there, we can calculate average time on page by creating a [new trend insig
 
 ## Calculating time on page for specific pages
 
-<MaxCTA question="What's my average time on page?"/>
+<PostHogAICTA question="What's my average time on page?"/>
 
 To get the average time on page for specific pages, we can start by breaking down our time on page by the pathname. On the same insight, click **Add breakdown** and select **Previous pageview pathname**. 
 

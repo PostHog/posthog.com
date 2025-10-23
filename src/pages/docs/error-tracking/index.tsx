@@ -1,7 +1,7 @@
 import React from 'react'
 import { SEO } from 'components/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 import OSTable from 'components/OSTable'
@@ -213,7 +213,7 @@ const ErrorTracking: React.FC = () => {
                 <Content />
 
                 <div>
-                    <AskMax
+                    <AskPostHogAI
                         className=""
                         quickQuestions={[
                             'How do I see what the most common issues are?',

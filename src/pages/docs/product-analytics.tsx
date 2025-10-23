@@ -13,7 +13,7 @@ import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
 
@@ -51,7 +51,7 @@ export const Content = ({ quickLinks = false }) => {
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     "Why aren't my events showing up?",
                     'How do I send custom properties with an event?',

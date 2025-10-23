@@ -155,26 +155,24 @@ You can also link to PostHog AI with a pre-loaded question if you want to give u
 
 Be aware that PostHog AI works best with straightforward questions that have predictable answers, e.g. "How many users completed the $pageview event this week?". It may struggle with more open-ended questions such as "Where are users struggling?". For this reason, you should test questions on PostHog AI before adding it to docs. 
 
-> **Note:** This component will be renamed to AskPostHogAICTA component soon.
-
-To add a preloaded question to docs or tutorials, you can use the AskMaxCTA component and add the question you'd like to preload in the question field, like so:
+To add a preloaded question to docs or tutorials, you can use the PostHogAICTA component and add the question you'd like to preload in the question field, like so:
 
 ```
-<MaxCTA question="What's my churn rate?" />
+<PostHogAICTA question="What's my churn rate?" />
 ```
 
 This creates the following component in the docs, where the final link will divert to the relevant question. 
 
-<MaxCTA question="What's my churn rate?" />
+<PostHogAICTA question="What's my churn rate?" />
 
 This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with PostHog AI (currently).
 
-### AskMax
+### AskPostHogAI
 
-The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+The `<AskPostHogAI>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<PostHogAICTA>` which links to the PostHog app, this keeps users in the docs context.
 
 ```jsx
-<AskMax
+<AskPostHogAI
     title="Need help with feature flags?"
     quickQuestions={[
         'Why is there a delay in loading flags?',
@@ -184,7 +182,7 @@ The `<AskMax>` component opens the PostHog AI chat window directly on the websit
 />
 ```
 
-<AskMax
+<AskPostHogAI
     title="Need help with feature flags?"
     quickQuestions={[
         'Why is there a delay in loading flags?',

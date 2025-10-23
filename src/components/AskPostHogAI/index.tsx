@@ -9,7 +9,7 @@ import { useApp } from '../../context/App'
 import { useLocation } from '@reach/router'
 import { useWindow } from '../../context/Window'
 
-interface AskMaxProps {
+interface AskPostHogAIProps {
     title?: string
     border?: boolean
     className?: string
@@ -18,14 +18,14 @@ interface AskMaxProps {
     children?: React.ReactNode
 }
 
-export default function AskMax({
+export default function AskPostHogAI({
     title = 'Questions?',
     border = false,
     className = '',
     quickQuestions,
     linkOnly = false,
     children,
-}: AskMaxProps) {
+}: AskPostHogAIProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { openNewChat } = useApp()
@@ -44,9 +44,9 @@ export default function AskMax({
     const borderClasses = border ? 'py-6 mt-4 border-y border-primary' : 'mb-8'
 
     const handleChatOpen = () => {
-        posthog?.capture('Opened MaxAI chat')
+        posthog?.capture('Opened PostHog AI chat')
         openNewChat({
-            path: `ask-max-${location.pathname}`,
+            path: `ask-posthog-ai-${location.pathname}`,
             quickQuestions,
             context: [
                 {

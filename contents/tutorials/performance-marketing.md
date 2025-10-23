@@ -55,7 +55,7 @@ Even better, use the UTM campaign, content, medium, or check for a specific clic
 
 Doing a combination of these to fit the performance marketing you are doing helps you track the total traffic from individual campaigns. 
 
-<MaxCTA question="Which UTM campaigns are driving the most traffic this month?" />
+<PostHogAICTA question="Which UTM campaigns are driving the most traffic this month?" />
 
 ## Tracking signups from performance marketing
 
@@ -93,7 +93,7 @@ Second, we can change the graph type to “Historical trends” to give us a bet
 
 On top of these, there are lots of settings to tweak your funnel such as “Conversion rate calculation,” “Conversion window limit,” and “Date range” to match your desired insights. 
 
-<MaxCTA question="Create a funnel showing my performance marketing conversion from pageview to signup" />
+<PostHogAICTA question="Create a funnel showing my performance marketing conversion from pageview to signup" />
 
 ## What are the benefits of measuring your performance marketing?
 

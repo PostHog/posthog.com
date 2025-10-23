@@ -52,12 +52,12 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
-import { MaxCTA } from './components/MaxCTA'
+import { PostHogAICTA } from './components/PostHogAICTA'
 import TeamMember from './components/TeamMember'
 import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
 import OSButton from './components/OSButton'
-import AskMax from './components/AskMax'
+import AskPostHogAI from './components/AskPostHogAI'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import TaskOwnershipTable from './components/TaskOwnershipTable'
@@ -116,12 +116,12 @@ export const shortcodes = {
     TracksCTA,
     Tweet,
     ZendeskTicket,
-    MaxCTA,
+    PostHogAICTA,
     SmallTeam,
     TeamMember,
     Steps,
     Step,
-    AskMax,
+    AskPostHogAI,
     CountriesWeHireIn,
     FeatureOwnershipTable,
     TaskOwnershipTable,

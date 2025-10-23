@@ -4,15 +4,15 @@ import CalloutBox from 'components/Docs/CalloutBox'
 import { CallToAction } from 'components/CallToAction'
 import { IconOpenSidebar, IconMagicWand } from '@posthog/icons'
 
-type MaxCTAProps = {
+type PostHogAICTAProps = {
     className?: string
     children?: React.ReactNode
     question: string
 }
 
-export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX.Element => {
+export const PostHogAICTA = ({ className = '', children, question }: PostHogAICTAProps): JSX.Element => {
     const encodedQuestion = encodeURIComponent(question)
-    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
+    const posthogAIUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
     return (
         <div
@@ -35,7 +35,7 @@ export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX
                     size="sm"
                     className="group [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
                     childClassName="whitespace-nowrap"
-                    href={maxUrl}
+                    href={posthogAIUrl}
                     externalNoIcon
                 >
                     Ask PostHog AI

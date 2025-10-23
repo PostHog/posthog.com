@@ -10,7 +10,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import ReaderView from 'components/ReaderView'
 
 export const Content = ({ quickLinks = false }) => {
@@ -63,7 +63,7 @@ const DataWarehouse: React.FC = () => {
                 imageClasses="max-h-48 md:max-h-64"
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'What are some cool things I can do?',
                     'What is SQL access and why should I use it?',

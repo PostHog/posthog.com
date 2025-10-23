@@ -53,7 +53,7 @@ Calculating returning users is done by identifying users who aren’t new and ha
 
 Alternatively, if you created a `created_at` person property, you can also filter for users who weren’t created recently but completed the event. 
 
-<MaxCTA question="How many returning users viewed a page in the last 7 days?" />
+<PostHogAICTA question="How many returning users viewed a page in the last 7 days?" />
 
 ### Using a retention insight
 

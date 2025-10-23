@@ -10,7 +10,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
@@ -167,7 +167,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                 imageClasses=""
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'Why is there a delay in loading flags?',
                     'How do I create a multivariate flag?',
