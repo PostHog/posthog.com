@@ -227,7 +227,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-                excludes: [],
+                excludes: ['/_monorepo-preview/*'],
                 createLinkInHead: true,
                 query: `
                 {

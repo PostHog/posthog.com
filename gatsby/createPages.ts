@@ -664,7 +664,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
-    // Monorepo docs - served at /docs-from-monorepo/ during PoC
+    // Monorepo docs - served at /_monorepo-preview/ during PoC (excluded from sitemap/search)
     console.log('🔍 Monorepo docs query result:', {
         hasMonorepoDocs: !!result.data.monorepoDocs,
         count: result.data.monorepoDocs?.nodes?.length || 0,
@@ -674,8 +674,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             node?.rawBody &&
             markdownLinkExtractor(node?.rawBody)?.map((url) => url.replace(/https:\/\/posthog.com|#.*/gi, ''))
         const slug = node.fields?.slug || node.slug
-        // Prefix monorepo docs with /docs-from-monorepo/ for PoC phase
-        const monorepoDartPath = `/docs-from-monorepo${slug}`
+        // Prefix monorepo docs with /_monorepo-preview/ for PoC phase (underscore signals temporary/internal)
+        const monorepoDartPath = `/_monorepo-preview${slug}`
         const tableOfContents = node.headings && formatToc(node.headings)
 
         // Fallback to first h1 heading if frontmatter title not provided
