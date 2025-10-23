@@ -19,7 +19,7 @@ We should never run lengthy consultations, or individual meetings with all those
 
 ## How to propose a team change
 
-Follow this process whether you're proposing creating a new team, splitting up an existing team in two, or even closing down a team.
+Follow this process whether you're proposing creating a new team, splitting up an existing team, or even closing down a team.
 
 ### 1. Create a team change proposal issue
 
@@ -61,7 +61,7 @@ Once made, they should share their decision in #tell-posthog-anything and the re
 
 ### What if I want to move teams?
 
-Individuals wishing to change teams should speak directly with their line manager. This process exists purely for making larger changes to existing teams, or forming new ones, that impact multiple people.
+Talk to your line manager. This process exists purely for making larger changes to existing teams, or forming new ones, that impact multiple people.
 
 ### What happens after a decision is made?
 
