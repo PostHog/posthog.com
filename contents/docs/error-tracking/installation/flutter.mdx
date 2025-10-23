@@ -31,8 +31,9 @@ import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
 We currently don't support the following features:
 
 - Automatic exception capture
-- De-obfuscating stacktraces from obfuscated builds ([--obfuscate](https://docs.flutter.dev/deployment/obfuscate))
+- De-obfuscating stacktraces from obfuscated builds ([--obfuscate](https://docs.flutter.dev/deployment/obfuscate) and [--split-debug-info](https://docs.flutter.dev/deployment/obfuscate))
 - [Source code context](/docs/error-tracking/stack-traces) associated with an exception
+- Flutter web support
 
 These features will be added in future releases.
 
@@ -97,6 +98,9 @@ await Posthog().setup(config);
 - **`inAppIncludes`**: List of package names to be considered inApp frames (takes precedence over excludes)
 - **`inAppExcludes`**: List of package names to be excluded from inApp frames  
 - **`inAppByDefault`**: Whether frames are considered inApp by default when their origin cannot be determined
+
+`inApp` frames are stack trace frames that belong to your application code (as opposed to third-party libraries or system code). 
+These are highlighted in the PostHog error tracking interface to help you focus on the relevant parts of the stack trace.
 
 </Step>
 
