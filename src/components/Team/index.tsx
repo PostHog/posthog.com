@@ -21,6 +21,8 @@ import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
 import usePostHog from '../../hooks/usePostHog'
 import { PrivateLink } from 'components/PrivateLink'
+import TaskOwnershipTable from 'components/TaskOwnershipTable'
+import SmallTeam from 'components/SmallTeam'
 import Stickers from 'components/ProfileStickers'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import slugify from 'slugify'
@@ -760,7 +762,9 @@ export default function Team({
                 <>
                     <h2>Handbook</h2>
                     <div className="article-content team-page-content">
-                        <MDXProvider components={{ PrivateLink }}>
+                        <MDXProvider
+                            components={{ PrivateLink, TaskOwnershipTable, SmallTeam, TeamMember: TeamMemberComponent }}
+                        >
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>

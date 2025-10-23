@@ -63,9 +63,9 @@ This is a faster option to get up and running. If you don't want to or can't use
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open the codespace, using one of the "Open in" options from the list.
 4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-5. In another terminal, run `pnpm i` (and use the same terminal for the following commands)
+5. Ensure that you are using the right Node version (`nvm install 22 && nvm use 22`) then, in another terminal, run `pnpm i` (and use the same terminal for the following commands).
 6. Then run `uv sync`
-    - If this doesn't activate your python virtual environment, run `uv venv`
+    - If this doesn't activate your python virtual environment, run `uv venv` (install `uv` following instructions [here](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer) if needed)
 7. Install `sqlx-cli` with `cargo install sqlx-cli` (install Cargo following instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) if needed)
 8. Now run `DEBUG=1 ./bin/migrate`
 9. Install [mprocs](https://github.com/pvolok/mprocs#installation) (`cargo install mprocs`)
@@ -129,7 +129,7 @@ Flox is a development environment manager – it ensures we all have the same ri
 
 To get PostHog running in a dev environment:
 
-1. Install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
+1. Once you have cloned the repo and installed OrbStack, now install Flox (plus `ruff` and `rustup` for pre-commit checks outside the Flox env).
 
     ```bash
     brew install flox ruff rustup && rustup-init && rustup default stable

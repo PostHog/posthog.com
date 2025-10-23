@@ -518,6 +518,7 @@ export const handbookSidebar = [
         url: '',
         children: [
             { name: 'Spending money', url: '/handbook/people/spending-money' },
+            { name: 'Team changes', url: '/handbook/company/team-changes' },
             { name: 'Using GitHub', url: '/handbook/company/new-to-github' },
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
@@ -654,6 +655,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Changelog',
+                url: '/handbook/content/changelog',
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
                 children: [
@@ -668,34 +673,20 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Changelog',
-                url: '/handbook/content/changelog',
+                name: 'SEO best practices',
+                url: '/handbook/content/seo-guide',
             },
             {
-                name: 'Writing for PostHog',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/content/writing-for-posthog',
-                    },
-                    {
-                        name: 'SEO best practices',
-                        url: '/handbook/content/seo-guide',
-                    },
-                    {
-                        name: 'Style guide',
-                        url: '/handbook/content/posthog-style-guide',
-                    },
-                    {
-                        name: 'Tags and categories',
-                        url: '/handbook/content/tags-and-categories',
-                    },
-                    {
-                        name: 'Content components',
-                        url: '/handbook/content/components',
-                    },
-                ],
+                name: 'Style guide',
+                url: '/handbook/content/posthog-style-guide',
+            },
+            {
+                name: 'Writing metadata',
+                url: '/handbook/content/metadata',
+            },
+            {
+                name: 'Content components',
+                url: '/handbook/content/components',
             },
         ],
     },
@@ -829,12 +820,30 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Working with Max AI',
-                url: '/handbook/engineering/working-with-max-ai',
-            },
-            {
-                name: 'Implementing AI features',
-                url: '/handbook/engineering/implementing-ai-features',
+                name: 'PostHog AI',
+                url: '',
+                children: [
+                    {
+                        name: 'AI platform overview',
+                        url: '/handbook/engineering/ai/ai-platform',
+                    },
+                    {
+                        name: 'AI products',
+                        url: '/handbook/engineering/ai/products',
+                    },
+                    {
+                        name: 'AI platform architecture',
+                        url: '/handbook/engineering/ai/architecture',
+                    },
+                    {
+                        name: 'Implementing AI features',
+                        url: '/handbook/engineering/ai/implementation',
+                    },
+                    {
+                        name: 'Team structure and collaboration',
+                        url: '/handbook/engineering/ai/team-structure',
+                    },
+                ],
             },
             {
                 name: 'Deployments',
@@ -4637,7 +4646,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Configure a messaging channel',
+                    name: 'Configure a channel',
                     url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',

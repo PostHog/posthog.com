@@ -46,6 +46,7 @@ Put button, tab, and other navigation names in bold. This makes it easier for ou
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
 ## Navigating UI
+
 When documenting UI steps, references to UI elements should be in chronological order. When possible, hyperlink to the correct location.
 
 > **Do:** Under **Settings** > **User**, under the [Two-factor section](https://us.posthog.com/settings/user#2fa), click the **Set up 2FA** button.
@@ -166,11 +167,11 @@ This creates the following component in the docs, where the final link will dive
 
 <MaxCTA question="What's my churn rate?" />
 
-This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
+This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with PostHog AI (currently).
 
 ### AskMax
 
-The `<AskMax>` component opens the Max AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
+The `<AskMax>` component opens the PostHog AI chat window directly on the website. Use this for documentation pages where users might need help understanding concepts or troubleshooting. Unlike `<MaxCTA>` which links to the PostHog app, this keeps users in the docs context.
 
 ```jsx
 <AskMax
@@ -198,7 +199,7 @@ Available props:
 - `border`: Add top/bottom borders (defaults to false)
 - `linkOnly`: Render as a button only without the full UI (defaults to false)
 
-The component automatically tracks when users open Max AI and includes the current page context.
+The component automatically tracks when users open PostHog AI and includes the current page context.
 
 ### Steps
 
