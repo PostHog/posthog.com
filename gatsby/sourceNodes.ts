@@ -190,74 +190,90 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
-    const postHogIssues = await fetch(
-        'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
-    ).then((res) => res.json())
-    postHogIssues.forEach((issue) => {
-        const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
-        const data = {
-            url: html_url,
-            title,
-            number,
-            comments,
-            user: {
-                username: user?.login,
-                avatar: user?.avatar_url,
-                url: user?.html_url,
-            },
-            reactions,
-            labels,
-            body,
-            updated_at,
-        }
-        if (data.reactions) {
-            data.reactions.plus1 = data.reactions['+1']
-            data.reactions.minus1 = data.reactions['-1']
-        }
-        const node = {
-            id: createNodeId(`posthog-issue-${title}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `PostHogIssue`,
-                contentDigest: createContentDigest(data),
-            },
-            ...data,
-        }
-        createNode(node)
-    })
+    const postHogIssues = await fetch('https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5')
+        .then((res) => res.json())
+        .catch((error) => {
+            console.warn('Failed to fetch PostHog GitHub issues:', error.message)
+            return []
+        })
 
-    const postHogPulls = await fetch(
-        'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
-    ).then((res) => res.json())
-    postHogPulls.forEach((issue) => {
-        const { html_url, title, number, user, labels, body, updated_at } = issue
-        const data = {
-            url: html_url,
-            title,
-            number,
-            user: {
-                username: user?.login,
-                avatar: user?.avatar_url,
-                url: user?.html_url,
-            },
-            labels,
-            body,
-            updated_at,
-        }
+    if (Array.isArray(postHogIssues)) {
+        postHogIssues.forEach((issue) => {
+            const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
+            const data = {
+                url: html_url,
+                title,
+                number,
+                comments,
+                user: {
+                    username: user?.login,
+                    avatar: user?.avatar_url,
+                    url: user?.html_url,
+                },
+                reactions,
+                labels,
+                body,
+                updated_at,
+            }
+            if (data.reactions) {
+                data.reactions.plus1 = data.reactions['+1']
+                data.reactions.minus1 = data.reactions['-1']
+            }
+            const node = {
+                id: createNodeId(`posthog-issue-${title}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `PostHogIssue`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
+    } else {
+        console.warn('GitHub API returned non-array response for issues, skipping...', postHogIssues)
+    }
 
-        const node = {
-            id: createNodeId(`posthog-pull-${title}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `PostHogPull`,
-                contentDigest: createContentDigest(data),
-            },
-            ...data,
-        }
-        createNode(node)
-    })
+    const postHogPulls = await fetch('https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5')
+        .then((res) => res.json())
+        .catch((error) => {
+            console.warn('Failed to fetch PostHog GitHub pulls:', error.message)
+            return []
+        })
+
+    if (Array.isArray(postHogPulls)) {
+        postHogPulls.forEach((issue) => {
+            const { html_url, title, number, user, labels, body, updated_at } = issue
+            const data = {
+                url: html_url,
+                title,
+                number,
+                user: {
+                    username: user?.login,
+                    avatar: user?.avatar_url,
+                    url: user?.html_url,
+                },
+                labels,
+                body,
+                updated_at,
+            }
+
+            const node = {
+                id: createNodeId(`posthog-pull-${title}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `PostHogPull`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
+    } else {
+        console.warn('GitHub API returned non-array response for pulls, skipping...', postHogPulls)
+    }
 
     const createGitHubStatsNode = async (owner, repo) => {
         const repoStats = await fetch(`https://api.github.com/repos/${owner}/${repo}`).then((res) => res.json())
