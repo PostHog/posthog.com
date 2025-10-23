@@ -1,7 +1,3 @@
-MANAGER SKILLS VS ENGINEERING SKILLS, PROMOTION / DEMOTION ✔️
-NOT PERMANENT ✔️
-UNDERSTANDING CUSTOMERS AND THEIR NEEDS
-
 ---
 title: Managers and management
 sidebar: Handbook
@@ -48,7 +44,7 @@ At PostHog, we hire highly experienced people for 99% of roles. That means manag
 
 However, for those people to make the best decisions, they need context. The things a manager can do to set context include:
 - Creating a roadmap that the team can work towards
-      - This is best achieved by having a very deep understanding of customers and the problem space you are working in, and conveying that knowledge to the rest of the team
+- Helping the team level-up their understanding of your target customer and the problem space you are working in (eg by encouraging them to talk to users, and doing so yourself)
 - Helping someone figure out who else to talk to within PostHog
 - Enabling or encouraging the team to measure their impact
 - Improving the process in which a team works (things like standups, reviews etc.)
