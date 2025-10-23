@@ -15,6 +15,8 @@ import {
     generateSdkReferencesMarkdown,
 } from './rawMarkdownUtils'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
+import { externalDocsManifest } from './createPages'
+import { externalDocsSources } from '../gatsby-config-exports'
 
 const limit = pLimit(10)
 
@@ -390,6 +392,62 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     sdkReferencesQuery.data.allSdkReferences.nodes.forEach((node) => {
         generateSdkReferencesMarkdown(node)
     })
+
+    // Generate external docs manifest
+    const publicDir = path.resolve(__dirname, '../public')
+    if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true })
+    }
+    const manifestPath = path.join(publicDir, 'external-docs-map.json')
+
+    const publishedDocs = externalDocsManifest.filter((doc) => doc.status === 'published')
+    const overwrittenDocs = externalDocsManifest.filter((doc) => doc.status === 'overwritten')
+
+    // Calculate per-source statistics
+    const sourceStats = externalDocsSources.map((source) => {
+        const sourceDocs = externalDocsManifest.filter((doc) => doc.source === source.name)
+        const published = sourceDocs.filter((doc) => doc.status === 'published').length
+        const overwritten = sourceDocs.filter((doc) => doc.status === 'overwritten').length
+
+        return {
+            name: source.name,
+            repo: source.github?.repo,
+            path: source.github?.path,
+            ref: source.ref || 'master',
+            totalDocs: sourceDocs.length,
+            publishedDocs: published,
+            overwrittenDocs: overwritten,
+            hasNoDocs: sourceDocs.length === 0,
+        }
+    })
+
+    fs.writeFileSync(
+        manifestPath,
+        JSON.stringify(
+            {
+                generatedAt: new Date().toISOString(),
+                summary: {
+                    totalExternalDocs: externalDocsManifest.length,
+                    published: publishedDocs.length,
+                    overwrittenByPosthogCom: overwrittenDocs.length,
+                    sourcesWithNoDocs: sourceStats.filter((s) => s.hasNoDocs).length,
+                },
+                sources: sourceStats,
+                docs: externalDocsManifest,
+            },
+            null,
+            2
+        )
+    )
+
+    if (externalDocsManifest.length > 0) {
+        console.log(
+            `📝 Generated external docs manifest: ${manifestPath}\n` +
+                `   Total: ${externalDocsManifest.length} | Published: ${publishedDocs.length} | Overwritten: ${overwrittenDocs.length}`
+        )
+    } else {
+        console.log(`📝 Generated external docs manifest: ${manifestPath} (no external docs found)`)
+    }
 
     // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
     const markdownQuery = await graphql(`

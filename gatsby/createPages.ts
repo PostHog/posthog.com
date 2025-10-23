@@ -9,6 +9,19 @@ const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 const { externalDocsSources } = require('../gatsby-config-exports')
 
+// Track external docs for manifest generation
+export const externalDocsManifest: Array<{
+    sourcePath: string
+    destinationPath: string
+    source: string
+    fileAbsolutePath: string
+    status: 'published' | 'overwritten'
+    overwrittenBy?: string
+}> = []
+
+// Track created page paths to detect conflicts
+const createdPages = new Set<string>()
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
@@ -475,8 +488,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             })
 
+            const normalizedPath = replacePath(slug)
+
+            // Check if this overwrites an external doc
+            if (createdPages.has(normalizedPath)) {
+                const externalDoc = externalDocsManifest.find(
+                    (doc) => replacePath(doc.destinationPath) === normalizedPath
+                )
+                if (externalDoc && externalDoc.status === 'published') {
+                    externalDoc.status = 'overwritten'
+                    externalDoc.overwrittenBy = 'posthog.com'
+                }
+            }
+
             createPage({
-                path: replacePath(slug),
+                path: normalizedPath,
                 component: template,
                 context: {
                     id: node.id,
@@ -692,8 +718,20 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const tableOfContents = node.headings && formatToc(node.headings)
         const titleFallback = node.frontmatter?.title || node.headings?.find((h) => h.depth === 1)?.value || 'Untitled'
 
+        // Track for manifest generation
+        const normalizedPath = replacePath(productionPath)
+        externalDocsManifest.push({
+            sourcePath:
+                node.fileAbsolutePath?.replace(/^.*\/(PostHog\/posthog\/.*)$/, '$1') || node.fileAbsolutePath || '',
+            destinationPath: productionPath,
+            source: source.name,
+            fileAbsolutePath: node.fileAbsolutePath || '',
+            status: 'published',
+        })
+        createdPages.add(normalizedPath)
+
         createPage({
-            path: replacePath(productionPath),
+            path: normalizedPath,
             component: HandbookTemplate,
             context: {
                 id: node.id,

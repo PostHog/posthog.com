@@ -49,9 +49,6 @@ function sanitizeShellArg(arg) {
     return arg
 }
 
-// Track cloned docs for manifest generation
-const clonedDocs = []
-
 // Clone each configured source
 externalDocsSources.forEach((source) => {
     const { name, github, path: dest, ref: configRef } = source
