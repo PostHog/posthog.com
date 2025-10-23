@@ -36,7 +36,6 @@ The second charges by **requests**.
 
 This means more developers can access and create flags. There are more flags created, but where they put those flags becomes more important, so they aren’t charged too much for requests. This appeals to smaller companies who ship more flags, so cost controls and DevEx features like local evaluation matter more.
 
-
 These examples show **how much** you charge often doesn’t matter as much as **how** you charge. Moreover, how you charge will influence how you sell and market your product, too.
 
 A usage-based model lends itself to faster, self-serve, product-led sales motions; seat-based pricing biases you toward slower, enterprise-style sales motion.
@@ -54,20 +53,40 @@ This is why acquiring reference **customers** is a core part of [finding product
 There are three big reasons why companies don’t charge early:
 
 1. **They are scared no one will pay them.** Delaying won't help you here.
+
 2. **They are afraid they are going to get pricing wrong.** You probably will. That's the point of trying and learning.
+
 3. **They think user growth is more important than revenue growth.** True if you're building Facebook, but rarely true for SaaS.
 
 ![Charging early](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_10_21_T09_09_16_516_Z_216ab957a1.jpeg)
 
-These fears ignore the excitement of getting people to pay, that it is best to know early if someone won’t pay you, and that everyone gets pricing wrong.
+Not charging early can literally sink a startup. For example, the founder of [Kite](https://kite.com/), a failed AI coding startup, wrote:
 
-For example, our early pricing was wildly different from our pricing now. PostHog was a monthly subscription with a free trial and way fewer events. This evolved to be usage-based with a free tier for a single product, and then the multi-product, usage-based pricing with large free tiers we have now.
+> We failed to build a business because our product did not monetize, and it took too long to figure that out.
+>
+> We sequenced building our business in the following order: First we built our team, then the product, then distribution, and then monetization.
 
-![PostHog's pricing evolution](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_21_at_10_35_36_2x_ea3196b5bc.png)
+The first three steps all worked. They built a "world-class engineering team" and grew the product to 500k developers with almost no marketing spend. 
+
+It was monetization that let them down. Those developers did not pay to use it. All the work they put into the previous steps did not pay off and they had to shut down after 7 years.
+
+If they charged early, they would have at least been able to figure this out sooner.
 
 ## 3. Frequently changing pricing is totally normal
 
-What the above example shows is that your pricing is always going to be a bit wrong. We started as a monthly subscription but eventually changed to usage-based. We had a paid self-hosted product, but made the tough decision to [sunset it](/blog/sunsetting-helm-support-posthog).
+You'll almost certainly get your pricing wrong, especially if you are charging early. That's normal, we all do it.
+
+For example, our early pricing was wildly different from our pricing now. In August 2020, we started as a monthly subscription.
+
+![August 2020 pricing](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_03_at_14_24_21_2x_f828b75ded.png)
+
+In October 2020, we then added more tiers along with more events and features on each one.
+
+![October 2020 pricing](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_10_03_at_14_25_01_2x_bf96fbd6fc.png)
+
+Finally, in March 2021, we added our first iteration of usage-based pricing for a single product and have kept iterating on this model ever since.
+
+![March 2021 pricing](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_03_at_14_25_59_2xcroped_55c086d020.png)
 
 To reach your full potential, you will need to change your pricing. Your product evolves, your pricing should too. All of your favorite companies do it:
 
