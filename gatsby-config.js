@@ -41,9 +41,6 @@ const externalDocsSources = [
     // },
 ]
 
-// Export for use in createPages.ts
-module.exports.externalDocsSources = externalDocsSources
-
 // Build gatsby-source-filesystem plugins for each available source
 const externalDocsPlugins = externalDocsSources
     .map((source) => {
@@ -455,3 +452,7 @@ module.exports = {
             : [algoliaConfig]),
     ].filter(Boolean), // Remove null plugins (e.g., monorepo docs if not available)
 }
+
+// Export for use in clone script and createPages.ts
+// Note: Must be AFTER module.exports to avoid being overwritten
+module.exports.externalDocsSources = externalDocsSources
