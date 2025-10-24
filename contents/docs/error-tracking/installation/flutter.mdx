@@ -33,7 +33,6 @@ We currently don't support the following features:
 - Automatic exception capture
 - De-obfuscating stacktraces from obfuscated builds ([--obfuscate](https://docs.flutter.dev/deployment/obfuscate) and [--split-debug-info](https://docs.flutter.dev/deployment/obfuscate))
 - [Source code context](/docs/error-tracking/stack-traces) associated with an exception
-- Flutter web support
 
 These features will be added in future releases.
 
@@ -92,6 +91,8 @@ config.errorTrackingConfig.inAppByDefault = true;
 
 await Posthog().setup(config);
 ```
+
+Note: This configuration is currently ignored for web builds.
 
 **Configuration options:**
 
