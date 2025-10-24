@@ -1,0 +1,95 @@
+---
+title: Sessions
+---
+
+Sessions are a way to group related LLM interactions together. They represent a continuous conversation or workflow where multiple [generations](/docs/llm-analytics/generations), [traces](/docs/llm-analytics/traces), and [spans](/docs/llm-analytics/spans) are logically connected.
+
+Sessions are identified using the `$ai_session_id` property, which you can set on any LLM analytics event. By grouping events with the same session ID, you can:
+
+- Analyze complete user conversations across multiple turns
+- Track the performance and cost of entire workflows
+- Debug issues in context of the full interaction history
+- Understand how users engage with your AI application over time
+
+## When to use sessions
+
+Sessions are useful when your application involves:
+
+- **Multi-turn conversations**: Chatbots or assistants where users have back-and-forth exchanges
+- **Complex workflows**: Applications where multiple LLM calls work together to complete a task
+- **User journeys**: Tracking how individual users interact with your AI features over time
+- **A/B testing**: Comparing different approaches or models across complete conversation flows
+
+## How to set a session ID
+
+You can set the `$ai_session_id` property when capturing LLM events. The session ID should be a unique identifier that persists across related events.
+
+Common approaches include:
+
+```python
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>')
+
+# Use a conversation ID from your application
+session_id = "conv_abc123"
+
+# Set it on generation events
+posthog.capture(
+    distinct_id='user_id',
+    event='$ai_generation',
+    properties={
+        '$ai_session_id': session_id,
+        '$ai_model': 'gpt-4',
+        # ... other properties
+    }
+)
+
+# Set it on trace events
+posthog.capture(
+    distinct_id='user_id',
+    event='$ai_trace',
+    properties={
+        '$ai_session_id': session_id,
+        '$ai_trace_id': 'trace_xyz',
+        # ... other properties
+    }
+)
+```
+
+## Analyzing sessions
+
+Once you've set session IDs on your events, you can analyze them in several ways:
+
+### In the Activity tab
+
+View all events for a specific session by filtering for the `$ai_session_id` property in the [Activity tab](https://app.posthog.com/events).
+
+### In insights
+
+Create insights that aggregate metrics by session:
+
+- Average cost per session
+- Token usage per session
+- Session duration
+- Conversion rates by session
+
+### In the trace viewer
+
+When viewing a [trace](/docs/llm-analytics/traces), all events with the same `$ai_session_id` are displayed together, giving you a complete view of the conversation or workflow.
+
+## Best practices
+
+**Use consistent IDs**: Ensure your session IDs are unique and consistent across all related events. Common choices include:
+- User conversation IDs from your application
+- User session IDs (if users typically have one conversation per session)
+- Custom UUIDs generated at the start of each conversation
+
+**Set session IDs early**: Include the `$ai_session_id` from the first event in a conversation to ensure complete tracking.
+
+**Consider session boundaries**: Decide what constitutes a "session" in your application. For example:
+- A single chat conversation
+- A 30-minute window of user activity
+- A specific task or workflow completion
+
+**Combine with other properties**: Use `$ai_session_id` alongside other properties like `$user_id` or [custom properties](/docs/llm-analytics/custom-properties) to enable rich analysis.

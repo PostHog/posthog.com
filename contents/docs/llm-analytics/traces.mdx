@@ -39,10 +39,14 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 ```mermaid
 flowchart TD
 
+    S["<strong>$ai_session_id</strong><br/>(optional)"]
+
     A[<strong>$ai_trace</strong>]
-            
+
+    A2[<strong>$ai_trace</strong>]
+
     B[<strong>$ai_generation</strong>]
-      
+
     C@{ shape: processes, label: "<strong>$ai_spans</strong>" }
 
     D[<strong>$ai_generation</strong>]
@@ -51,6 +55,8 @@ flowchart TD
 
     F[<strong>$ai_generation</strong>]
 
+    S -.-> A
+    S -.-> A2
     A --> B
     A --> C
     C --> D
@@ -58,12 +64,13 @@ flowchart TD
     E --> F
 ```
 
-Traces consist of the following event hierarchy: 
+Traces consist of the following event hierarchy:
 
-1. A trace is the top-level event entity.
-2. A trace can contain multiple spans and generations.
-3. A span can be the parent of other spans.
-4. A generation can be the child of a span or trace.
+1. (Optional) A session can group multiple traces together.
+2. A trace is the top-level event entity for a single interaction.
+3. A trace can contain multiple spans and generations.
+4. A span can be the parent of other spans.
+5. A generation can be the child of a span or trace.
 
 ## Event properties
 

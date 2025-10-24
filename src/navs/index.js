@@ -4369,6 +4369,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Sessions',
+                    url: '/docs/llm-analytics/sessions',
+                    icon: 'IconMessages',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
                     name: 'Embeddings',
                     url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
