@@ -44,7 +44,7 @@ Once we click “Save & add to dashboard,” below is how our retention dashboar
 
 This insight gives us a basic understanding of the features weekly or monthly active users are using. It gives us a first glance at what the most important features for retention might be.
 
-<PostHogAICTA question="Which features are most used by monthly active users?" />
+<PostHogAIPrompt question="Which features are most used by monthly active users?" />
 
 ## Adding feature retention charts
 

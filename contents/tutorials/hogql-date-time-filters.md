@@ -110,7 +110,7 @@ dateDiff(
 ) <= 3
 ```
 
-<PostHogAICTA question="Filter users whose trial ends in 3 days, using only their trial_started property." />
+<PostHogAIPrompt question="Filter users whose trial ends in 3 days, using only their trial_started property." />
 
 A use case for this is creating an action for `pricing pageviews` during the last days of the trial, then posting to a [webhook](/docs/webhooks) to notify your team to reach out to the user.
 

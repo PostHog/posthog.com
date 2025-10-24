@@ -52,7 +52,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
-import { PostHogAICTA } from './components/PostHogAICTA'
+import { PostHogAIPrompt } from './components/PostHogAIPrompt'
 import TeamMember from './components/TeamMember'
 import SmallTeam from './components/SmallTeam'
 import { Steps, Step } from './components/Docs/Steps'
@@ -116,7 +116,7 @@ export const shortcodes = {
     TracksCTA,
     Tweet,
     ZendeskTicket,
-    PostHogAICTA,
+    PostHogAIPrompt,
     SmallTeam,
     TeamMember,
     Steps,

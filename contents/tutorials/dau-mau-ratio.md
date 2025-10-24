@@ -56,7 +56,7 @@ In PostHog, [create an insight](https://app.posthog.com/insights/new) with two s
 > - **`dau` aka "unique users":** count of unique users in the interval, which defaults to daily. Despite the name, if you select the `interval` to be weekly or monthly, this will show weekly or monthly active users respectively.
 > - **`monthly_active`:** rolling average of users who sent events in the last month.
 
-<PostHogAICTA question="What's my DAU/MAU ratio?" />
+<PostHogAIPrompt question="What's my DAU/MAU ratio?" />
 
 ## Customizing your DAU/MAU ratio
 

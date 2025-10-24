@@ -4,13 +4,13 @@ import CalloutBox from 'components/Docs/CalloutBox'
 import { CallToAction } from 'components/CallToAction'
 import { IconOpenSidebar, IconMagicWand } from '@posthog/icons'
 
-type PostHogAICTAProps = {
+type PostHogAIPromptProps = {
     className?: string
     children?: React.ReactNode
     question: string
 }
 
-export const PostHogAICTA = ({ className = '', children, question }: PostHogAICTAProps): JSX.Element => {
+export const PostHogAIPrompt = ({ className = '', children, question }: PostHogAIPromptProps): JSX.Element => {
     const encodedQuestion = encodeURIComponent(question)
     const posthogAIUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
