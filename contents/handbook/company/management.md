@@ -73,7 +73,7 @@ First, make sure you are setting the right context. Next, the most useful thing 
 The key thing here is to be pragmatic - 1-1s should feel useful and not like a waste of time. Everyone should see it as their own responsibility to raise important feedback or issues as they happen and not wait unnecessarily for a scheduled meeting.
 
 
-Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work!
+Talking about long-term career goals every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term goals while at the same time hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work!
 
 [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member. These are not to be followed strictly if you don't want to - this is to just save you having to create something from scratch. 
 
