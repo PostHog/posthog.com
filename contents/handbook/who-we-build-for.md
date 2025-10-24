@@ -6,7 +6,7 @@ showTitle: true
 
 AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework) or ICP (ie, the company), and our persona (ie, the person).
 
-We build for the people building the **most-loved products** at **high-growth startups**. 
+We build for the people building products at **high-growth startups**. 
 
 Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** – customers that are likely to later become high-growth customers (e.g. PostHog itself during YC). We should be in maintenance mode for **hobbyists**, such as engineers building side projects. We want to be the first tool that technical founders add to their product.
 
