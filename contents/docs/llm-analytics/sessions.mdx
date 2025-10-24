@@ -102,8 +102,8 @@ When viewing a [trace](/docs/llm-analytics/traces), you can see which session it
 
 ## Note on PostHog session IDs
 
-`$ai_session_id` is different from PostHog's standard [`session_id`](/docs/data/sessions). LLM events (traces, generations, spans) are often captured from your backend, where you don't have automatic access to the frontend session ID that PostHog normally tracks.
+`$ai_session_id` is different from PostHog's standard [`$session_id`](/docs/data/sessions). LLM events (traces, generations, spans) are often captured from your backend, where you don't have automatic access to the frontend session ID that PostHog normally tracks.
 
 If you have your own custom session tracking and a way to pass your session ID from frontend to backend, you can use the same session ID for both. However, most applications will use different session identifiers:
-- **`session_id`**: PostHog's auto-captured frontend session tracking
+- **`$session_id`**: PostHog's auto-captured frontend session tracking (which you can overwrite if you want)
 - **`$ai_session_id`**: Your custom session identifier for grouping LLM interactions (typically managed by your backend)
