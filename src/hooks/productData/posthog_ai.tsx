@@ -11,6 +11,7 @@ import {
     IconWarning,
     IconAsterisk,
     IconSparkles,
+    IconPlug,
 } from '@posthog/icons'
 import { StickerPath } from 'components/Stickers/Stickers'
 
@@ -229,8 +230,7 @@ export const posthog_ai = {
                 },
                 {
                     name: 'Config helper',
-                    description:
-                        'Helps set up privacy masking, regex rules, and recording configuration',
+                    description: 'Helps set up privacy masking, regex rules, and recording configuration',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
@@ -353,56 +353,45 @@ export const posthog_ai = {
                 },
                 {
                     name: 'Search based on meaning',
-                    description: 'Ask questions across all survey responses and get answers by meaning, not just keyword matching',
+                    description:
+                        'Ask questions across all survey responses and get answers by meaning, not just keyword matching',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
             ],
         },
-
-        // {
-        //     title: 'Workflows',
-        //     headline: 'Workflows',
-        //     layout: 'ai',
-        //     icon: <IconBolt className="size-5" />,
-        //     color: 'blue',
-        //     description: 'Need more info...',
-        //     images: [
-        //         {
-        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/workflows_90a59408f5.png',
-        //             alt: 'Workflows',
-        //             className: 'max-h-64',
-        //             // stylize: true,
-        //             // shadow: true,
-        //         },
-        //     ],
-        //     skills: [
-        //         {
-        //             name: 'Skill name',
-        //             description: 'Skill description',
-        //             sticker: <StickerPath className="size-6" />,
-        //             percent: 80,
-        //         },
-        //         {
-        //             name: 'Skill name',
-        //             description: 'Skill description',
-        //             sticker: <StickerPath className="size-6" />,
-        //             percent: 100,
-        //         },
-        //         {
-        //             name: 'Skill name',
-        //             description: 'Skill description',
-        //             sticker: <StickerPath className="size-6" />,
-        //             percent: 90,
-        //         },
-        //         {
-        //             name: 'Skill name',
-        //             description: 'Skill description',
-        //             sticker: <StickerPath className="size-6" />,
-        //             percent: 70,
-        //         },
-        //     ],
-        // },
+        {
+            title: 'Workflows',
+            headline: 'Workflows',
+            layout: 'ai',
+            icon: <IconBolt className="size-5" />,
+            color: 'blue',
+            description: 'Create workflows that automate actions or send messages to your users.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/workflows_90a59408f5.png',
+                    alt: 'Workflows',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Create email templates',
+                    description:
+                        'Create email templates in your content library, including subject, body, html and liquid support',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 50,
+                },
+                {
+                    name: 'Natural language workflow creation',
+                    description: 'Create multistep workflows from scratch using natural language',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
+                },
+            ],
+        },
         {
             label: 'Customer data infrastructure',
         },
@@ -435,6 +424,40 @@ export const posthog_ai = {
                     description: 'Autocompletes your code, so that you have time for the important stuff',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
+                },
+            ],
+        },
+        {
+            title: 'Data Pipelines',
+            headline: 'Data Pipelines',
+            layout: 'ai',
+            icon: <IconPlug className="size-5" />,
+            color: 'blue',
+            description:
+                'Transform data into PostHog and export your data out of PostHog to your favorite destinations.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/data_warehouse_99ac92f444.png',
+                    alt: 'Data Warehouse',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Destinations set up',
+                    description:
+                        'Quickly set up destinations. Write custom (hog) code and automatically filter on the right events',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
+                },
+                {
+                    name: 'Transformations set up',
+                    description:
+                        'Quickly set up transformations. Write custom (hog) code and automatically filter on the right events',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 70,
                 },
             ],
         },
