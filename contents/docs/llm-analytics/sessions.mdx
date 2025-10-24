@@ -2,57 +2,62 @@
 title: Sessions
 ---
 
-Sessions are a way to group related LLM interactions together. They represent a continuous conversation or workflow where multiple [generations](/docs/llm-analytics/generations), [traces](/docs/llm-analytics/traces), and [spans](/docs/llm-analytics/spans) are logically connected.
+Sessions group multiple [traces](/docs/llm-analytics/traces) together that occur during the same user visit or application session. While a trace typically represents a single conversation or workflow, a session represents the broader context of a user's visit to your application.
 
-Sessions are identified using the `$ai_session_id` property, which you can set on any LLM analytics event. By grouping events with the same session ID, you can:
+Sessions are identified using the `$ai_session_id` property, which you can set on any LLM analytics event. By grouping traces with the same session ID, you can:
 
-- Analyze complete user conversations across multiple turns
-- Track the performance and cost of entire workflows
-- Debug issues in context of the full interaction history
-- Understand how users engage with your AI application over time
+- Track multiple conversations that happen during the same user visit
+- Analyze metrics like "conversations per session" or "cost per user session"
+- Understand user behavior across multiple interactions
+- Group related but distinct conversations together (e.g., all chats during a single app visit)
 
 ## When to use sessions
 
-Sessions are useful when your application involves:
+Sessions are useful when you want to track:
 
-- **Multi-turn conversations**: Chatbots or assistants where users have back-and-forth exchanges
-- **Complex workflows**: Applications where multiple LLM calls work together to complete a task
-- **User journeys**: Tracking how individual users interact with your AI features over time
-- **A/B testing**: Comparing different approaches or models across complete conversation flows
+- **Multiple conversations per visit**: A user has several separate conversations during the same app session
+- **User behavior patterns**: How users engage with your AI application across multiple interactions
+- **Session-level metrics**: Total cost, conversations, or tokens used during a user's visit
+- **Conversation frequency**: How many separate conversations users typically have per session
+
+## Traces vs Sessions
+
+It's important to understand the distinction:
+
+- **Trace** (`$ai_trace_id`): Represents a single conversation or workflow. All messages in one back-and-forth conversation should share the same trace ID.
+- **Session** (`$ai_session_id`): Groups multiple traces together. When a user starts a new conversation, create a new trace with a different trace ID, but keep the same session ID if it's during the same visit.
 
 ## How to set a session ID
 
-You can set the `$ai_session_id` property when capturing LLM events. The session ID should be a unique identifier that persists across related events.
+You can set the `$ai_session_id` property when capturing LLM events. The session ID should be a unique identifier that represents a user's app visit or session.
 
-Common approaches include:
+**Example scenario**: A user opens your chatbot app and has multiple conversations:
 
 ```python
 from posthog import Posthog
 
 posthog = Posthog('<ph_project_api_key>')
 
-# Use a conversation ID from your application
-session_id = "conv_abc123"
+# Generate a session ID when the user opens your app
+session_id = "session_abc123"  # Persists for the entire app visit
 
-# Set it on generation events
-posthog.capture(
-    distinct_id='user_id',
-    event='$ai_generation',
-    properties={
-        '$ai_session_id': session_id,
-        '$ai_model': 'gpt-4',
-        # ... other properties
-    }
-)
-
-# Set it on trace events
+# First conversation - Trace 1
 posthog.capture(
     distinct_id='user_id',
     event='$ai_trace',
     properties={
-        '$ai_session_id': session_id,
-        '$ai_trace_id': 'trace_xyz',
-        # ... other properties
+        '$ai_session_id': session_id,        # Same session
+        '$ai_trace_id': 'trace_conversation1', # Unique trace for this conversation
+    }
+)
+
+# User starts a NEW conversation - Trace 2
+posthog.capture(
+    distinct_id='user_id',
+    event='$ai_trace',
+    properties={
+        '$ai_session_id': session_id,        # Same session (still in the same app visit)
+        '$ai_trace_id': 'trace_conversation2', # NEW trace for the new conversation
     }
 )
 ```
@@ -63,33 +68,34 @@ Once you've set session IDs on your events, you can analyze them in several ways
 
 ### In the Activity tab
 
-View all events for a specific session by filtering for the `$ai_session_id` property in the [Activity tab](https://app.posthog.com/events).
+View all traces and events for a specific session by filtering for the `$ai_session_id` property in the [Activity tab](https://app.posthog.com/events).
 
 ### In insights
 
 Create insights that aggregate metrics by session:
 
+- Number of conversations (traces) per session
 - Average cost per session
-- Token usage per session
+- Total tokens used per session
 - Session duration
-- Conversion rates by session
+- User engagement patterns across sessions
 
 ### In the trace viewer
 
-When viewing a [trace](/docs/llm-analytics/traces), all events with the same `$ai_session_id` are displayed together, giving you a complete view of the conversation or workflow.
+When viewing a [trace](/docs/llm-analytics/traces), you can see which session it belongs to, helping you understand the broader context of that conversation.
 
 ## Best practices
 
-**Use consistent IDs**: Ensure your session IDs are unique and consistent across all related events. Common choices include:
-- User conversation IDs from your application
-- User session IDs (if users typically have one conversation per session)
-- Custom UUIDs generated at the start of each conversation
+**Use session IDs for app visits**: Generate a session ID when a user opens your application and reuse it for all conversations during that visit. Common approaches:
+- Browser session IDs
+- App session identifiers
+- Time-based session windows (e.g., 30-minute windows)
 
-**Set session IDs early**: Include the `$ai_session_id` from the first event in a conversation to ensure complete tracking.
+**Create new traces for new conversations**: When a user starts a new conversation, generate a new trace ID but keep the same session ID (if they're still in the same app visit).
 
-**Consider session boundaries**: Decide what constitutes a "session" in your application. For example:
-- A single chat conversation
-- A 30-minute window of user activity
-- A specific task or workflow completion
+**Consider session boundaries**: Decide what constitutes a "session" in your application:
+- A single browser/app session
+- A time-based window (e.g., 30 minutes of inactivity starts a new session)
+- Explicit user actions (e.g., logging out ends a session)
 
-**Combine with other properties**: Use `$ai_session_id` alongside other properties like `$user_id` or [custom properties](/docs/llm-analytics/custom-properties) to enable rich analysis.
+**Combine with other properties**: Use `$ai_session_id` alongside `$ai_trace_id` and other properties like `distinct_id` or [custom properties](/docs/llm-analytics/custom-properties) to enable rich analysis.
