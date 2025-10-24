@@ -99,3 +99,11 @@ When viewing a [trace](/docs/llm-analytics/traces), you can see which session it
 - Explicit user actions (e.g., logging out ends a session)
 
 **Combine with other properties**: Use `$ai_session_id` alongside `$ai_trace_id` and other properties like `distinct_id` or [custom properties](/docs/llm-analytics/custom-properties) to enable rich analysis.
+
+## Note on PostHog session IDs
+
+`$ai_session_id` is different from PostHog's standard [`session_id`](/docs/data/sessions). LLM events (traces, generations, spans) are often captured from your backend, where you don't have automatic access to the frontend session ID that PostHog normally tracks.
+
+If you have your own custom session tracking and a way to pass your session ID from frontend to backend, you can use the same session ID for both. However, most applications will use different session identifiers:
+- **`session_id`**: PostHog's auto-captured frontend session tracking
+- **`$ai_session_id`**: Your custom session identifier for grouping LLM interactions (typically managed by your backend)
