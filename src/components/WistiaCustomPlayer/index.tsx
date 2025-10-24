@@ -686,7 +686,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
             return (
                 <div className={`flex flex-col overflow-hidden ${className}`}>
                     <div
-                        className={`relative bg-black ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
+                        className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
                         style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
                     >
                         <div className="absolute inset-0 flex items-center justify-center">
