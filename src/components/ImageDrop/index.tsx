@@ -7,6 +7,7 @@ export type Image = {
     objectURL: string
 }
 
+
 export default function ImageDrop({
     image,
     onDrop,
