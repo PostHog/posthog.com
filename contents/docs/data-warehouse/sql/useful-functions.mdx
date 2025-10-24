@@ -166,6 +166,20 @@ select
 from events
 ```
 
+### SemVer
+
+If you have a SemVer version number, you can use the `sortableSemVer()` function to get a version number that you can use for sorting purposes.
+
+```sql
+SELECT
+    DISTINCT properties.$lib_version
+FROM events
+ORDER BY sortableSemVer(properties.$lib_version) DESC
+WHERE event = '$pageview'
+  AND timestamp >= now() - INTERVAL 1 DAY
+LIMIT 10
+```
+
 ### Session replays
 
 You can create a button to view the replay for a session by using the `recordingButton()` function with the `session_id`. For example, to get a list of recent replays, you can use:
