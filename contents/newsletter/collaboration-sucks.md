@@ -15,8 +15,6 @@ crosspost:
   - Blog
 ---
 
-# Collaboration sucks
-
 ### If you want to go fast, go alone; if you want to go far, go alone too.
 
 > If you want to go fast, go alone; if you want to go far, go together
