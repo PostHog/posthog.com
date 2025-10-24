@@ -37,7 +37,7 @@ view.accessibilityLabel = "ph-no-capture"
 
 > **Important:** By default, PostHog will make a best effort to automatically exclude fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
 
-For more details on how to setup masking for session replay, please refer to our [Privacy Controls](/docs/session-replay/privacy?tab=iOS) documentation.
+For more details on how to setup masking for session replay, please refer to our [privacy controls](/docs/session-replay/privacy?tab=iOS) documentation.
 
 ## Identifying users
 
@@ -97,9 +97,9 @@ PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userProper
 PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userPropertiesSetOnce: ["user_property_name": "your_value"])
 ```
 
-## Super Properties
+## Super properties
 
-Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
+Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
 
 They are set using `PostHogSDK.shared.register`, which takes a properties object as a parameter, and they persist across sessions.
 
@@ -113,17 +113,17 @@ The call above ensures that every event sent by the user will include `"team_id"
 
 However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHogSDK.shared.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
-### Removing stored Super Properties
+### Removing stored super properties
 
-Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `PostHogSDK.shared.unregister`, like so:
+Super properties persist across sessions so you have to explicitly remove them if they are no longer relevant. To stop sending a super property with events, you can use `PostHogSDK.shared.unregister`, like so:
 
 ```swift
 PostHogSDK.shared.unregister("team_id")
 ```
 
-This will remove the Super Property and subsequent events will not include it.
+This removes the super property and subsequent events will not include it.
 
-If you are doing this as part of a user logging out you can instead simply use `PostHogSDK.shared.reset` which takes care of clearing all stored Super Properties and more.
+If you are doing this as part of a user logging out, you can instead simply use `PostHogSDK.shared.reset` which clears all super properties and more.
 
 ## Reset after logout
 
@@ -155,7 +155,7 @@ PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db", groupProp
 
 The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
-## Feature Flags
+## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
