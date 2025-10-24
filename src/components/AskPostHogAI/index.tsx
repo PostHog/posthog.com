@@ -44,9 +44,9 @@ export default function AskPostHogAI({
     const borderClasses = border ? 'py-6 mt-4 border-y border-primary' : 'mb-8'
 
     const handleChatOpen = () => {
-        posthog?.capture('Opened PostHog AI chat')
+        posthog?.capture('Opened MaxAI chat')
         openNewChat({
-            path: `ask-posthog-ai-${location.pathname}`,
+            path: `ask-max-${location.pathname}`,
             quickQuestions,
             context: [
                 {
