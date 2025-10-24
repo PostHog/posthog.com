@@ -7,7 +7,7 @@ A trace is a group that contains multiple spans, generations, and embeddings. Tr
 | Property | Description |
 |----------|-------------|
 | `$ai_trace_id` | The trace ID (a UUID to group related AI events together)<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code><br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
-| `$ai_session_id` | *(Optional)* Groups related traces together in a session (e.g., a long multipart conversation, workflow, or chain of seperate interations in the same visit). One session can contain many traces.<br/>Example: `session-abc-123`, `conv-user-456` |
+| `$ai_session_id` | *(Optional)* Groups related traces together in a session (e.g., a long multipart conversation, workflow, or chain of separate interations in the same visit). One session can contain many traces.<br/>Example: `session-abc-123`, `conv-user-456` |
 | `$ai_input_state` | The input of the whole trace<br/>Example: `[{"role": "user", "content": "What's the weather in SF?"}]` or any JSON-serializable state |
 | `$ai_output_state` | The output of the whole trace<br/>Example: `[{"role": "assistant", "content": "The weather in San Francisco is..."}]` or any JSON-serializable state |
 | `$ai_latency` | *(Optional)* The latency of the trace in seconds |
