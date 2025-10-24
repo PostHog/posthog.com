@@ -4348,10 +4348,10 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Sessions',
-                    url: '/docs/llm-analytics/sessions',
-                    icon: 'IconMessages',
-                    color: 'blue',
+                    name: 'Generations',
+                    url: '/docs/llm-analytics/generations',
+                    icon: 'IconAIText',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
@@ -4369,10 +4369,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Generations',
-                    url: '/docs/llm-analytics/generations',
-                    icon: 'IconAIText',
-                    color: 'seagreen',
+                    name: 'Sessions',
+                    url: '/docs/llm-analytics/sessions',
+                    icon: 'IconMessages',
+                    color: 'blue',
                     featured: true,
                 },
                 {
