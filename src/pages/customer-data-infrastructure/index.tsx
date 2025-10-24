@@ -328,13 +328,8 @@ export default function CDP(): JSX.Element {
                 </p>
                 <CDPDiagram className="max-w-lg fill-primary mx-auto" />
                 <h3>How our support engineers use the data warehouse</h3>
-                <div className="my-6">
-                    <WistiaCustomPlayer
-                        theme="light"
-                        mediaId="1cv9e1aimw"
-                        aspectRatio={16 / 9}
-                        className="max-w-4xl mx-auto"
-                    />
+                <div>
+                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl mx-auto" />
                 </div>
                 <p>
                     You can use data in the PostHog warehouse for almost anything, including building custom insights
