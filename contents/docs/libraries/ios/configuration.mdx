@@ -16,6 +16,9 @@ features:
   surveys: true
   llmAnalytics: false
 ---
+
+import AutocaptureConfig from './_snippets/autocapture.mdx'
+
 ## Autocapture configuration
 
 You can enable or disable autocapture through the `PostHogConfig` object.
@@ -23,6 +26,8 @@ You can enable or disable autocapture through the `PostHogConfig` object.
 <AutocaptureConfig />
 
 ## Flush configuration
+
+The iOS SDK uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 You can set the number of events in the configuration that should queue before flushing.
 
@@ -38,14 +43,6 @@ You can also manually flush the queue:
 PostHogSDK.shared.capture("logged_out")
 PostHogSDK.shared.flush()
 ```
-
-## Offline behavior
-
-The PostHog iOS SDK will continue to capture events when the device is offline. The events are stored in a queue in the device's file storage and are flushed when the device is online.
-
-- The queue has a maximum size defined by `maxQueueSize` in the configuration.
-- When the queue is full, the oldest event is deleted first.
-- The queue is flushed only when the device is online.
 
 ## Amending, dropping or sampling events
 
@@ -196,13 +193,18 @@ PostHogSDK.shared.isOptOut()
 
 ## Method swizzling
 
-The PostHog iOS SDK uses method swizzling to intercept and modify method calls at runtime to provide advanced features like:
+Method swizzling is a technique that allows the SDK to intercept and modify method calls at runtime to provide advanced features like screen view tracking, element interactions, session replay, surveys, and more.
 
-- **Screen view tracking** - Automatically captures when view controllers are presented (`config.captureScreenViews`)
-- **Element interactions** - Automatically tracks user interactions with UI elements (`config.captureElementInteractions`)  
-- **Session replay** - Records user sessions (`config.sessionReplay`)
-- **Surveys** - Displays surveys at appropriate times (`config.surveys`)
-- **Advanced metrics tracking** - Provides more precise session ID calculation and rotation by detecting user activity and idleness
+You can configure method swizzling through the `PostHogConfig` object with these options:
+
+| Feature                        | Description                                                                           | Config option                    |
+| ------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------- |
+| Screen view tracking           | Automatically captures when view controllers are presented                            | `config.captureScreenViews`      |
+| Element interactions           | Automatically tracks user interactions with UI elements                               | `config.captureElementInteractions` |
+| Session replay                 | Records user sessions                                                                 | `config.sessionReplay`           |
+| Surveys                        | Displays surveys at appropriate times                                                 | `config.surveys`                 |
+| Advanced metrics tracking      | Provides more precise session ID calculation and rotation by detecting user activity and idleness | —                          |
+
 
 ### Disabling method swizzling
 
@@ -221,27 +223,6 @@ PostHogSDK.shared.setup(config)
 Method swizzling is particularly important for accurate [session metrics tracking](/tutorials/session-metrics). With swizzling enabled, the SDK can better detect user activity and idle times to provide a better session rotation. 
 
 With swizzling disabled, the SDK only uses application open/backgrounded events to detect user activity, which can lead to a sub-optimal session calculation. 
-
-## Using PostHog with application extensions
-
-PostHog supports sharing analytics data between your main app and application extensions (such as widgets, app clips, share extensions, and custom keyboards) through App Groups. This ensures that users maintain the same identity across all parts of your app ecosystem.
-
-By default, each iOS app target stores its data in its own sandboxed directory. This means that if a user interacts with your main app and then uses a widget or extension, PostHog would treat them as two different anonymous users. This can lead to:
-
-- Inflated user counts in your analytics
-- Fragmented user journeys
-- Difficulty tracking feature adoption across your app ecosystem
-
-### Setup
-
-1. **Configure App Groups**: Set up an [App Group](https://developer.apple.com/documentation/xcode/configuring-app-groups) in Xcode for your main app and extension targets
-2. **Configure PostHog**: Use the same App Group identifier in all targets:
-
-```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_api_client_host>")
-config.appGroupIdentifier = "group.com.yourcompany.yourapp"
-PostHogSDK.shared.setup(config)
-```
 
 ### Custom keyboard extensions
 

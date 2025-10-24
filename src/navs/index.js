@@ -1888,7 +1888,7 @@ export const docsMenu = {
                             url: '/docs/libraries/node',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/node',
                                 },
                                 {
@@ -1906,7 +1906,7 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/python',
                                 },
                                 {
@@ -1932,7 +1932,7 @@ export const docsMenu = {
                             },
                             children: [
                                 {
-                                    name: 'Setup and features',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/react-native',
                                 },
                                 {
