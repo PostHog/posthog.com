@@ -10,6 +10,7 @@ import {
 import { Select } from 'components/RadixUI/Select'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
+import usePostHog from 'hooks/usePostHog'
 
 interface WistiaCustomPlayerProps {
     mediaId: string
@@ -69,6 +70,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         const [showCaptionSearch, setShowCaptionSearch] = useState(false)
         const [captionSearchQuery, setCaptionSearchQuery] = useState('')
         const [isReady, setIsReady] = useState(false)
+        const hasTrackedPlayRef = useRef(false)
+        const posthog = usePostHog()
 
         // Store initial props in refs to use them without causing re-renders
         const autoPlayRef = useRef(autoPlay)
@@ -431,7 +434,23 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         }
 
                         // Bind event listeners
-                        video.bind('play', () => setIsPlaying(true))
+                        video.bind('play', () => {
+                            setIsPlaying(true)
+
+                            // Track video play event in PostHog (only once per session)
+                            if (!hasTrackedPlayRef.current && posthog && typeof posthog.capture === 'function') {
+                                hasTrackedPlayRef.current = true
+
+                                // Get video title from Wistia
+                                const videoTitle = video.name?.() || video._impl?.data?.media?.name || 'Unknown'
+
+                                posthog.capture('Played video', {
+                                    video_source: 'wistia',
+                                    video_id: mediaId,
+                                    video_title: videoTitle,
+                                })
+                            }
+                        })
                         video.bind('pause', () => setIsPlaying(false))
                         video.bind('end', () => setIsPlaying(false))
                         video.bind('timechange', (t: number) => {
