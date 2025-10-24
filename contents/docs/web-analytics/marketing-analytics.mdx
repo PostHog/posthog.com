@@ -105,17 +105,6 @@ You can configure self-managed sources from S3, GCS, Cloudflare R2, and Azure. L
 
 Please refer to the [data pipeline docs](/docs/cdp/sources) for more information on configuring external data sources.
 
-### Base currency
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bc_dark_c6547dfdb9.png"
-    alt="Base currency configuration"
-    classes="rounded"
-/>
-
-PostHog converts currency values for the entire team to the base currency you set in [your project settings](https://app.posthog.com/settings/project#base-currency) before displaying them. If we can't properly detect your currency from the source data, we'll assume it's in this currency as well.
-
 ### Conversion goals
 
 <ProductScreenshot
@@ -137,3 +126,14 @@ For data warehouse table conversion goals, you'll need to map the following requ
 - **UTM Source Name**: Maps to the `utm_source` parameter for attribution  
 - **Timestamp Field**: Date/time field for the conversion event
 - **Distinct ID Field** (optional): User identifier for conversion tracking
+
+### Base currency
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bc_dark_c6547dfdb9.png"
+    alt="Base currency configuration"
+    classes="rounded"
+/>
+
+PostHog converts currency values for the entire team to the base currency you set in [your project settings](https://app.posthog.com/settings/project#base-currency) before displaying them. If we can't properly detect your currency from the source data, we'll assume it's in this currency as well.
