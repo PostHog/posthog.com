@@ -70,7 +70,8 @@ First, make sure you are setting the right context. Next, the most useful thing 
 - **During their probation period** have weekly 1-1s as a regular check in (this is an important time to be giving clear feedback about how they are doing)
 - **After their probation** have bi-weekly or monthly 1-1s to discuss how they are doing outside of the regular day-to-day context
 
-The key thing here is to be pragmatic - 1-1s should feel useful and not like a waste of time. Everyone should see it as their own responsibility to raise important feedback or issues as they happen and not waiting unnecessarily for a scheduled meeting.
+The key thing here is to be pragmatic - 1-1s should feel useful and not like a waste of time. Everyone should see it as their own responsibility to raise important feedback or issues as they happen and not wait unnecessarily for a scheduled meeting.
+
 
 Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work!
 
