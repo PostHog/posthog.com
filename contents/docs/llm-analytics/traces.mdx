@@ -6,6 +6,20 @@ import TraceEvent from "./_snippets/trace-event.mdx"
 
 Traces are a collection of [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
+## Sessions vs Traces
+
+While traces group individual LLM calls and operations together, **sessions** provide a higher level of organization:
+
+- **Trace** (`$ai_trace_id`): Groups related generations and spans together. This can be a single LLM call or a multi-turn conversation.
+- **Session** (`$ai_session_id`): Groups multiple separate traces together that occur during the same user session, app visit, or workflow.
+
+For example, in a chatbot application:
+- A multi-turn conversation would use the **same trace ID** for all messages and responses
+- If the user starts a new conversation during the same visit, you'd create a **new trace** with a different trace ID
+- Both conversations would share the **same session ID** since they happened in the same app session
+
+Sessions are optional but useful for tracking metrics like "how many conversations per user session" or analyzing user behavior across multiple interactions.
+
 ## Trace timeline
 
 Clicking on a trace opens a timeline of the interaction with all the generation and span events. The trace timeline enables you to see the entire conversation, profiling details, and the individual generations and spans.

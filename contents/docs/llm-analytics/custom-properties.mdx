@@ -223,6 +223,81 @@ response = client.responses.create(
 
 The `$ai_span_name` property will appear as the primary label in your trace visualization, making it easier to identify specific operations.
 
+### 4. Session and conversation tracking
+
+Track multiple conversations or interactions that occur during a single user session using `$ai_session_id`. This is useful for grouping separate conversations that happen during the same app visit or workflow:
+
+<MultiLanguage>
+
+```javascript file=JavaScript
+// Generate a session ID when the user starts their app session
+const sessionId = `session-${userId}-${Date.now()}`
+
+// First conversation
+const conversation1TraceId = crypto.randomUUID()
+await openai.responses.create({
+  model: 'gpt-5',
+  messages: firstConversationMessages,
+  posthogProperties: {
+    $ai_session_id: sessionId,
+    $ai_trace_id: conversation1TraceId,
+    conversation_topic: 'product_recommendations'
+  }
+})
+
+// User starts a new conversation in the same session
+const conversation2TraceId = crypto.randomUUID()
+await openai.responses.create({
+  model: 'gpt-5',
+  messages: secondConversationMessages,
+  posthogProperties: {
+    $ai_session_id: sessionId,  // Same session ID
+    $ai_trace_id: conversation2TraceId,  // Different trace ID
+    conversation_topic: 'order_status'
+  }
+})
+```
+
+```python file=Python
+import uuid
+import time
+
+# Generate a session ID when the user starts their app session
+session_id = f"session-{user_id}-{int(time.time())}"
+
+# First conversation
+conversation1_trace_id = str(uuid.uuid4())
+response = client.responses.create(
+    model="gpt-5",
+    messages=first_conversation_messages,
+    posthog_properties={
+        "$ai_session_id": session_id,
+        "$ai_trace_id": conversation1_trace_id,
+        "conversation_topic": "product_recommendations"
+    }
+)
+
+# User starts a new conversation in the same session
+conversation2_trace_id = str(uuid.uuid4())
+response = client.responses.create(
+    model="gpt-5",
+    messages=second_conversation_messages,
+    posthog_properties={
+        "$ai_session_id": session_id,  # Same session ID
+        "$ai_trace_id": conversation2_trace_id,  # Different trace ID
+        "conversation_topic": "order_status"
+    }
+)
+```
+
+</MultiLanguage>
+
+This enables you to:
+- Track how many conversations users have per session
+- Analyze conversation patterns within user sessions
+- Calculate total cost and usage per session across multiple conversations
+- Filter traces in the dashboard by session ID to see all related conversations
+
 ## Filtering in the dashboard
 
 Once you've set custom properties, they appear in the PostHog LLM analytics dashboard where you can:
