@@ -70,7 +70,7 @@ Your first week can definitely be a bit overwhelming at any new company, so here
 - You will get all your equipment set up and get access to all the accounts you need
 - You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company
 - You should try and set up a few calls with a range of people to introduce yourself
-- You should try and speak to some actual users of your product, your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
+- You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
 - You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
 
 ### Engineering
