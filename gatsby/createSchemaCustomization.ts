@@ -387,6 +387,59 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         description: String
         createdAt: Date
     }
+    type EventVenue {
+        name: String
+    }
+    type EventLocation {
+        label: String
+        lat: Float
+        lng: Float
+        venue: EventVenue
+    }
+    type EventPartner {
+        name: String
+        url: String
+    }
+    type EventPhotoAttributes {
+        url: String
+    }
+    type EventPhotoData {
+        attributes: EventPhotoAttributes
+    }
+    type EventPhoto {
+        data: [EventPhotoData]
+    }
+    type EventSpeakerAttributes {
+        firstName: String
+        lastName: String
+    }
+    type EventSpeakerData {
+        attributes: EventSpeakerAttributes
+    }
+    type EventSpeaker {
+        data: [EventSpeakerData]
+    }
+    type EventAttributes {
+        name: String
+        description: String
+        date: Date
+        private: Boolean
+        format: [String]
+        audience: [String]
+        speakerTopic: String
+        attendees: Int
+        vibeScore: Float
+        video: String
+        presentation: String
+        link: String
+        location: EventLocation
+        partners: [EventPartner]
+        photos: EventPhoto
+        speakers: EventSpeaker
+    }
+    type Event implements Node {
+        attributes: EventAttributes
+    }
   `)
     createTypes([
         schema.buildObjectType({
