@@ -271,6 +271,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
       introSnippet: String
       installationSnippet: String
+      inputs_schema: [PostHogPipelineInputSchema]
+      name: String
+      slug: String
+      type: String
+      category: String
+      description: String
+      icon_url: String
+      status: String
     }
     type PostHogPipelineInputSchema {
       key: String
