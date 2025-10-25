@@ -275,7 +275,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       name: String
       slug: String
       type: String
-      category: String
+      category: [String]
       description: String
       icon_url: String
       status: String
