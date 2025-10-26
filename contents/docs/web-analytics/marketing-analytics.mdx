@@ -119,9 +119,11 @@ Please refer to the [data pipeline docs](/docs/cdp/sources) for more information
 Define conversion goals by selecting events, actions, or data warehouse tables. These goals are used to track and analyze user conversions in your marketing analytics.
 
 To configure conversion goals, select:
-- **Conversion goal name**: Descriptive name (e.g., purchase, sign up, download)
-- **Event, action or data warehouse table**: Select what to track for conversions
-- **Schema mapping**: For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source`
+| Configuration Field | Description |
+|---------------------|-------------|
+| Conversion goal name | Descriptive name (e.g., purchase, sign up, download) |
+| Event, action or data warehouse table | Select what to track for conversions |
+| Schema mapping | For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source` |
 
 For data warehouse table conversion goals, you'll need to map the following required fields:
 | Required Field | Description |
