@@ -16,7 +16,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 ## Marketing dashboard
 
-The marketing dashboard contains multiple pre-built insights helping you understand your campaigns and costs. 
+The marketing dashboard contains multiple pre-built insights that help you understand your campaigns and costs. 
 
 ### Marketing costs over time
 
@@ -46,8 +46,8 @@ The marketing costs chart displays your total advertising spend across all confi
 
 The campaign breakdown table provides detailed performance metrics by individual campaign:
 
-- **Campaign**: Campaign identifier from your advertising platform (should match to `utm_campaign` value)
-- **Source**: Ad platform name (e.g., `google`, should match to `utm_source` value)
+- **Campaign**: Campaign identifier from your advertising platform (must match the `utm_campaign` value in your conversion events)
+- **Source**: Ad platform name (e.g., `google`, must match the `utm_source` value in your conversion events)
 - **Total cost**: Total spend for the campaign in your base currency
 - **Total clicks**: Number of clicks received during the selected period
 - **Total impressions**: Number of impressions served
@@ -74,6 +74,7 @@ PostHog supports three types of data sources for marketing analytics. All source
 PostHog can automatically sync marketing data from supported advertising platforms. You'll need to sync the required tables for each source to enable the functionality.
 
 **Supported native sources:**
+
 | Platform | Setup Guide | Required Tables |
 |----------|------------|-----------------|
 | Google Ads | [Setup guide](/docs/cdp/sources/google-ads) | `campaign` and `campaign_stats` |
@@ -119,6 +120,7 @@ Please refer to the [data pipeline docs](/docs/cdp/sources) for more information
 Define conversion goals by selecting events, actions, or data warehouse tables. These goals are used to track and analyze user conversions in your marketing analytics.
 
 To configure conversion goals, select:
+
 | Configuration Field | Description |
 |---------------------|-------------|
 | Conversion goal name | Descriptive name (e.g., purchase, sign up, download) |
@@ -126,6 +128,7 @@ To configure conversion goals, select:
 | Schema mapping | For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source` |
 
 For data warehouse table conversion goals, you'll need to map the following required fields:
+
 | Required Field | Description |
 |----------------|-------------|
 | UTM Campaign Name | Maps to the `utm_campaign` parameter for attribution |
