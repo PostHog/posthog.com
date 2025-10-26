@@ -122,10 +122,12 @@ To configure conversion goals, select:
 - **Schema mapping**: For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source`
 
 For data warehouse table conversion goals, you'll need to map the following required fields:
-- **UTM Campaign Name**: Maps to the `utm_campaign` parameter for attribution
-- **UTM Source Name**: Maps to the `utm_source` parameter for attribution  
-- **Timestamp Field**: Date/time field for the conversion event
-- **Distinct ID Field** (optional): User identifier for conversion tracking
+| Required Field | Description |
+|----------------|-------------|
+| UTM Campaign Name | Maps to the `utm_campaign` parameter for attribution |
+| UTM Source Name | Maps to the `utm_source` parameter for attribution |
+| Timestamp Field | Date/time field for the conversion event |
+| Distinct ID Field (optional) | User identifier for conversion tracking |
 
 ### Base currency
 
