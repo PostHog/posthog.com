@@ -65,8 +65,8 @@ export default function ContactSales({ location }) {
         <>
             <Script id="default-form-script" src="/scripts/default-form-script.js" />
             <SEO
-                title="Talk to a human - PostHog"
-                description="PostHog is self-serve, but you can talk to a real person if you need to!"
+                title="Talk to a human – Book a PostHog demo"
+                description="PostHog is self-serve, but our team is here if you need us. Book a demo to get setup help, discuss your technical requirements, or see features in action."
                 image={`/images/og/talk-to-a-human.png`}
             />
             <ScrollArea>

@@ -72,9 +72,9 @@ Call structure:
 
 # Customer Prioritization
 
--   Consider a separate approach for monthly and annual customers:
-    -   Annual plans: prioritize accounts with contract renewals in the next 3-4 months
-    -   Monthly plans: look for significant growth within the last quarter
+-   Consider a separate approach for pay-as-you-go and pre-paid customers:
+    -   Pay-as-you-go plans: look for significant growth within the last quarter
+    -   Pre-paid plans: prioritize accounts with contract renewals in the next 3-4 months
 -   Accounts with platform packages
     -   Customers on legacy "Teams" add-on ($450/month) could save $200 by switching to the "Boost" add-on if they do not require SAML SSO or managed reserve proxy. The teams add-on has now been split into:
         -   [Boost add-on](/platform-packages#boost-add-on) ($250/month)

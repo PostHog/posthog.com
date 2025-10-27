@@ -82,7 +82,7 @@ export default function AskMax({
 
                             <div className="flex flex-col text-center @lg:text-left">
                                 <h3 className="m-0 !text-2xl @lg:!text-xl leading-tight">
-                                    {title} <span className="text-red dark:text-yellow">Ask Max AI.</span>
+                                    {title} <span className="text-red dark:text-yellow">Ask PostHog AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">
                                     It's easier than reading through{' '}
@@ -98,7 +98,7 @@ export default function AskMax({
                                 childClassName="whitespace-nowrap"
                                 onClick={handleChatOpen}
                             >
-                                Chat with Max
+                                Chat with PostHog AI
                                 <IconSidebarOpen className="size-6 inline-block opacity-75 group-hover:opacity-100" />
                             </CallToAction>
                         </div>
