@@ -242,44 +242,88 @@ export const posthog_ai = {
                 },
             ],
         },
-        // {
-        //       title: 'Feature Flags',
-        //       headline: 'Feature Flags',
-        //       layout: 'ai',
-        //       icon: <IconToggle className="size-5" />,
-        //       color: 'green',
-        //       description:
-        //           'Feature flags without the config file? PostHog AI builds complex targeting logic, percentage splits, and override rules — all from a simple prompt.',
-        //       images: [
-        //           {
-        //               src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
-        //               alt: 'Feature Flags',
-        //               className: 'max-h-64',
-        //               // stylize: true,
-        //               // shadow: true,
-        //           },
-        //       ],
-        //       skills: [
-        //           {
-        //               name: 'Multiverse manager',
-        //               description: 'Runs parallel realities where different features exist',
-        //               sticker: <StickerPath className="size-6" />,
-        //               percent: 80,
-        //           },
-        //           {
-        //               name: 'Chaos coordinator',
-        //               description: 'Sets up kill switches to mitigate damage control',
-        //               sticker: <StickerPath className="size-6" />,
-        //               percent: 100,
-        //           },
-        //           {
-        //               name: 'Targeting sniper',
-        //               description: 'Flags cohorts and specific users with surgical precision',
-        //               sticker: <StickerPath className="size-6" />,
-        //               percent: 90,
-        //           },
-        //       ],
-        //   },
+        {
+              title: 'Feature Flags',
+              headline: 'Feature Flags',
+              layout: 'ai',
+              icon: <IconToggle className="size-5" />,
+              color: 'green',
+              description:
+                  'PostHog AI sets up, monitors, and rolls out your feature flags — making releases safe by default.',
+              images: [
+                  {
+                      src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
+                      alt: 'Feature Flags',
+                      className: 'max-h-64',
+                      // stylize: true,
+                      // shadow: true,
+                  },
+              ],
+              skills: [
+                  {
+                      name: 'AI-assisted setup',
+                      description: 'Create and configure feature flags in natural language',
+                      sticker: <StickerPath className="size-6" />,
+                      percent: 30,
+                  },
+                  {
+                      name: 'Monitoring & anomaly detection',
+                      description: 'Replace manual checks with automated performance reports',
+                      sticker: <StickerPath className="size-6" />,
+                      percent: 0,
+                  },
+                  {
+                      name: 'Invisible rollout automation',
+                      description: 'Delegate rule-based flag rollouts to AI',
+                      sticker: <StickerPath className="size-6" />,
+                      percent: 0,
+                  },
+              ],
+          },
+    {
+            title: 'Experiments',
+            headline: 'Experiments',
+            layout: 'ai',
+            icon: <IconFlask className="size-5" />,
+            color: 'purple',
+            description:
+                "Experiment smarter, not harder, with AI that finds, runs, and explains results.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/experiments_1dc7831033.png',
+                    alt: 'Experiments',
+                    className: 'max-h-64',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'AI-assisted setup',
+                    description: 'Create and configure experiments in natural language',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
+                },
+                {
+                    name: 'Experiments doctor',
+                    description: 'Troubleshoot your experiment setup for valid & reliable results',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
+                },
+                {
+                    name: 'Experiments summaries',
+                    description: 'Highlights the winning variant and suggests next action',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
+                },
+                {
+                    name: 'Experiments summaries',
+                    description: 'Highlights the winning variant and suggests next action',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
+                },
+            ],
+        },
         {
             title: 'Error Tracking',
             headline: 'Error Tracking',
