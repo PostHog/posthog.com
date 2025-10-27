@@ -24,7 +24,7 @@ I joined PostHog when we were 11 people and had sold nothing. 5 years later, weâ
 
 2. You will relax your standards for that one hire, then regret it. You will keep re-learning this lesson, but hopefully with longer gaps between each one.
 
-3. It is 1,000x easier to say no at the [interview stage](https://posthog/newsletter/job-interview-questions-engineers) than to let someone go later.
+3. It is 1,000x easier to say no at the [interview stage](/newsletter/job-interview-questions-engineers) than to let someone go later.
 
 4. It is MUCH more important to make sure your existing team is effective before hiring more people.
 
