@@ -34,6 +34,8 @@ As companies get bigger, the type of person that uses a product changes. As an e
 
 Each product should start with a single persona, usually an early person (preferably engineer) at a startup. Teams should make sure to build a really good product with PMF for that single persona. As the product and user-base matures, new personas will emerge as users. You only serve that new persona if you've found PMF and satisfied requirements for the initial persona.
 
+You still need to keep your initial personas happy too, which is tricky, but important as that initial persona is how we get in first.
+
 How do you know if you have PMF and satisfied requirements? Look at churn. If the initial persona is churning from your product, you still have work to do to retain that persona before moving onto others. If instead the product has been handed off to another persona in the org, and _they_ are churning, that's an indication that you may need to start supporting the needs of this next persona.
 
 We've not always been successful at building products for personas other than engineers. We're now at a stage where we need to be in order to continue growing. 
