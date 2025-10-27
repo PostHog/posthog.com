@@ -165,13 +165,7 @@ Once the org has had their full access restored, repeat the steps above, but thi
 
 When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
 
-## What happens after an incident? (Incident analysis)
+## What happens after an incident?
 
-1. If the impact was high, or the incident recurs frequently, proceed to the next step to document the incident and hold an incident-review meeting. If this is a low-/no-impact incident, it's recommended to opt-out of the post-incident flow - we only want to document relevant incidents and keep our processes lean!
-2. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
-3. Hold a ~30 min meeting discussing the above
-4. If an incident had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+In almost all cases, a valid incident will have a post-mortem - check out [Post-mortems](/handbook/engineering/operations/post-mortems) for more details.
 
-All critical incidents should have a PR in the post-mortem repository + a scheduled meeting. All major incidents should have a PR in the post-mortem repository, and optionally a scheduled meeting.
-
-_Thanks to [Incident Review and Postmortem Best Practices](https://blog.pragmaticengineer.com/postmortem-best-practices/) from Pragmatic Engineer_

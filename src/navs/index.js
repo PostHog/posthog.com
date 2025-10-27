@@ -780,6 +780,10 @@ export const handbookSidebar = [
                         name: 'Handling incidents',
                         url: '/handbook/engineering/operations/incidents',
                     },
+                    {
+                        name: 'Post-mortems',
+                        url: '/handbook/engineering/operations/post-mortems',
+                    },
                 ],
             },
             {

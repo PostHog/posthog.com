@@ -22,29 +22,22 @@ Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-c
     - For example 8:00-17:00 for EU based engineers is likely preferable as there will be US engineers who can take 17:00 onwards
     - Each member is responsible for ensuring this is up-to-date with PTO. You can create an override for your schedule simply assigned to "No one".
 * `Support: {team}`
-    - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the customer support rotation as well as the out of-hours-escalation for the extreme case
-
-### Escalator schedules
-
-[Schedule in incident.io](https://app.incident.io/posthog/on-call/schedules/01K6WTVH37A4P75HBBYBJ0TAE6)
-
-Before hitting the global on-call rotation, our escalation policies attempt to find someone from the `escalators` schedule. The `escalators` group consists of a range of engineers across the more infra-heavy teams. These are typically engineers who are frequently working with Kubernetes, AWS and our monitoring infrastructure and as such are well placed to respond quickly to incidents, avoiding the need to escalate further.
-
-This group is best effort and not a requirement to be a part of.
+    - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the [support hero rotation](/handbook/engineering/operations/support-hero) as well as the out of-hours-escalation for the extreme case
 
 ### Global on-call schedule
 
-[Schedule in incident.io](https://app.incident.io/posthog/on-call/schedules/01K71R8Y2HJ67G0BDGFWPZA1Q4)
+[Schedule in incident.io](https://app.incident.io/posthog/on-call/schedules/01K7PNGFNP8ZZSCSTBXKPVWVAZ)
+
+> 💡 You can use @on-call-global in Slack to reach out to whoever is on call! This syncs automatically with the incident.io schedule. This group is also automatically added to all incidents.
 
 PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. As a 24/7 service, our goal is to be 100% operational 100% of the time. The global on-call is the last line of defence and is escalated to:
-* if nobody at the `team level` is available
-* if nobody at the `escalator level` is available
+* if nobody at the `On call: {team}` level is available
 * if the alert is critical but has no team assignment (for whatever reason)
 
 This schedule has 3 week day layers:
-- **Europe** (06:00 to 16:00 UTC) - (10 hours)
-- **Americas East** (14:00 to 23:00 UTC) - (8 hours)
-- **Americas West**  (24:00 to 06:00 UTC) - (6 hours)
+- **Europe** (06:00 to 14:00 UTC) - (8 hours)
+- **Americas East** (14:00 to 22:00 UTC) - (8 hours)
+- **Americas West**  (22:00 to 06:00 UTC) - (8 hours)
 
 And 2 weekend layers:
 - **Europe Weekend** (06:00 to 18:00 UTC) - (12 hours)
@@ -95,14 +88,14 @@ As well as the above access you should ensure you have access and feel comfortab
 
 ## Responding to alerts when on-call
 
-![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/incidentio_alert_343ed2062b.png)
+![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_10_27_at_08_42_11_f7508c7432.png)
 
 Critical alerts will trigger per-team escalation policies which go like this:
 1. If available, a member of the team associated with the alert is paged first
 1. If nobody is available or nobody responds within the configured time, the `escalators` group is additionally paged with the same conditions
 1. If nobody is available or nobody responds within the configured time then the `On call: global` schedule is paged
 
-> **If at any point you get paged - always respond!** You can mark yourself as unavailable and incident.io will automatically move up the escaltion path. If you are in working hours, or 
+> **If at any point you get paged - always respond!** Even if you are not unavailable you should respond as such (either via the app or the personal Slack notification). That way the escaltion can continue to the next available person.
 
 By default if you are being paged, especially as the global on-call, the alert is considered critical, meaning it almost definitely requires attention. Your primary job is to:
 
