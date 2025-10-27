@@ -40,3 +40,7 @@ How do you know if you have PMF and satisfied requirements? Look at churn. If th
 
 We've not always been successful at building products for personas other than engineers. We're now at a stage where we need to be in order to continue growing. 
 
+### Churn?
+
+If a team does not currently support a persona, and that persona churns off of using that product, we are okay with that, as long as that doesn't cause the customer to churn off of PostHog entirely. We should try to support those personas to gracefully move off of PostHog. For example: we are okay with sales people churning off to a CRM, and we'll provide exports to export PostHog data to those systems.
+
