@@ -72,6 +72,7 @@ export const posthog_ai = {
         {
             title: 'Web Analytics',
             headline: 'Web Analytics',
+            team: 'web-analytics',
             layout: 'ai',
             icon: <IconPieChart className="size-5" />,
             color: 'green',
@@ -81,7 +82,7 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
                     alt: 'Web analytics',
-                    className: 'max-h-64 @2xl:mt-8',
+                    className: 'max-h-56 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -112,6 +113,7 @@ export const posthog_ai = {
         {
             title: 'Product Analytics',
             headline: 'Product Analytics',
+            team: 'product-analytics',
             layout: 'ai',
             icon: <IconGraph className="size-5" />,
             color: 'blue',
@@ -156,6 +158,7 @@ export const posthog_ai = {
         {
             title: 'LLM Analytics',
             headline: 'LLM Analytics',
+            team: 'llm-analytics',
             layout: 'ai',
             icon: <IconLlmAnalytics className="size-5" />,
             color: 'purple',
@@ -165,7 +168,7 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1742425353/llm_obvs_86706b1ab7.png',
                     alt: 'LLM Analytics',
-                    className: 'max-h-48 @2xl:mr-8 @2xl:mt-8',
+                    className: 'max-h-40 @2xl:mr-8 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -209,6 +212,7 @@ export const posthog_ai = {
         {
             title: 'Session Replay',
             headline: 'Session Replay',
+            team: 'replay',
             layout: 'ai',
             icon: <IconRewindPlay className="size-5" />,
             color: 'yellow',
@@ -248,6 +252,7 @@ export const posthog_ai = {
         {
             title: 'Feature Flags',
             headline: 'Feature Flags',
+            team: 'feature-flags',
             layout: 'ai',
             icon: <IconToggle className="size-5" />,
             color: 'green',
@@ -286,6 +291,7 @@ export const posthog_ai = {
         {
             title: 'Experiments',
             headline: 'Experiments',
+            team: 'experiments',
             layout: 'ai',
             icon: <IconFlask className="size-5" />,
             color: 'purple',
@@ -332,6 +338,7 @@ export const posthog_ai = {
         {
             title: 'Error Tracking',
             headline: 'Error Tracking',
+            team: 'error-tracking',
             layout: 'ai',
             icon: <IconWarning className="size-5" />,
             color: 'orange',
@@ -373,6 +380,7 @@ export const posthog_ai = {
         {
             title: 'Surveys',
             headline: 'Surveys',
+            team: 'surveys',
             layout: 'ai',
             icon: <IconMessage className="size-5" />,
             color: 'salmon',
@@ -411,6 +419,7 @@ export const posthog_ai = {
         {
             title: 'Workflows',
             headline: 'Workflows',
+            team: 'workflows',
             layout: 'ai',
             icon: <IconBolt className="size-5" />,
             color: 'blue',
@@ -447,6 +456,7 @@ export const posthog_ai = {
         {
             title: 'Data Stack',
             headline: 'Data Stack',
+            team: 'data-stack',
             layout: 'ai',
             icon: <IconAsterisk className="size-5" />,
             color: 'purple',
@@ -480,6 +490,7 @@ export const posthog_ai = {
         {
             title: 'Data Pipelines',
             headline: 'Data Pipelines',
+            team: 'workflows',
             layout: 'ai',
             icon: <IconPlug className="size-5" />,
             color: 'blue',
