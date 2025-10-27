@@ -1628,7 +1628,8 @@
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
-        }
+        },
+        { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
     ],
     "headers": [
         {
