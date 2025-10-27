@@ -23,7 +23,7 @@ This is a stupid phrase and I’m here to prove it.
 
 Imagine you are driving a car. It’s often helpful to have someone tell you directions, spot gas stations, and recommend stops for snacks. This is a helpful amount of collaboration.
 
-A not helpful amount of collaboration is getting out of your car to ask pedestrians if they like your car, swapping drivers every 10 minutes, or having someone constantly commenting on your driving.
+An unhelpful amount of collaboration is getting out of your car to ask pedestrians if they like your car, swapping drivers every 10 minutes, or having someone constantly commenting on your driving.
 
 In the first scenario, you get the right amount of feedback to get to your destination as fast as possible. In the second, you get more feedback, but it slows you down. You run the risk of not making it to the place you want to go.
 
@@ -33,13 +33,13 @@ The second scenario is also the one most startups (or companies, really) end up 
 
 > “Feedback is a gift” - Person who gives too much feedback
 
-As PostHog grows, I’ve seen more and more collaboration that doesn’t add value or adds far too little value compared to the time lost to collaborating.
+As PostHog grows, I’ve seen more and more collaboration that doesn’t add value or adds far too little value for the time lost collaborating.
 
 A [key value](/handbook/values) for us at PostHog is “you’re the driver.” We aim to hire people who are great at their jobs and get out of their way. No deadlines, minimal coordination, and no managers telling you what to do. 
 
-In return, we ask for extraordinarily high ownership and the ability to get a lot done by *yourself.* Marketers ship code, salespeople answer technical questions without backup, and engineers need to work across the stack.
+In return, we ask for extraordinarily high ownership and the ability to get a lot done by *yourself.* Marketers ship code, salespeople answer technical questions without backup, and engineers work across the stack.
 
-This means there is almost always someone better at the thing you are doing than you are. It is tempting to get them, or anybody really, involved and ✨ collaborate ✨, but collaboration forces the driver to slow down and explain stuff (background, context, their thinking). 
+This means there is almost always someone better at what you are doing than you are. It is tempting to get them, or anybody really, involved and ✨ collaborate ✨, but collaboration forces the driver to slow down and explain stuff (background, context, their thinking). 
 
 This tendency reveals itself in a few key phrases:
 
@@ -89,4 +89,4 @@ So if collaboration is your enemy, how do you defeat it?
 
 ![See it, say it, sorted](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_10_24_at_11_22_00_2x_b1cd420758.png)
 
-A team that collaborates less gets more shipped. Of course, this relies on having people you trust to do great work, which is why having a high hiring bar and giving feedback (at the right time) are so important. This enables our team (and PostHog) to go both fast and far.
+Unfortunately for me, not all collaboration can be rooted out, and even I will admit that some collaboration is useful. The point is, if you aren’t actively attempting to collaborate less, you are collaborating too much and hurting your ability to go far, fast.
