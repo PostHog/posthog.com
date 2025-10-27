@@ -65,6 +65,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     fields {
                         slug
                     }
+                    parent {
+                        ... on File {
+                            sourceInstanceName
+                        }
+                    }
                     rawBody
                 }
             }
@@ -637,8 +642,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     )
-
-    createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    const { localHandbook, engineeringHandbook } = result.data.handbook.nodes.reduce(
+        (acc, node) => {
+            if (node.parent?.sourceInstanceName === 'posthog-main-repo') {
+                acc.engineeringHandbook.push(node)
+            } else {
+                acc.localHandbook.push(node)
+            }
+            return acc
+        },
+        { localHandbook: [], engineeringHandbook: [] }
+    )
+    createPosts(engineeringHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
+    createPosts(localHandbook, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
