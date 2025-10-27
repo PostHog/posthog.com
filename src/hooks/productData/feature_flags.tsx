@@ -10,7 +10,7 @@ export const featureFlags = {
     handle: 'feature_flags',
     type: 'feature_flags',
     slug: 'feature-flags',
-    color: 'green',
+    color: 'seagreen',
     colorSecondary: 'seagreen',
     category: 'product_engineering',
     seo: {
