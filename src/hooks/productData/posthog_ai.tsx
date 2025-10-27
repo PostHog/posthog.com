@@ -257,14 +257,12 @@ export const posthog_ai = {
             icon: <IconToggle className="size-5" />,
             color: 'green',
             description:
-                'PostHog AI sets up, monitors, and rolls out your feature flags — making releases safe by default.',
+                'PostHog AI sets up, monitors, manages, and rolls out your feature flags — making releases safe by default.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
                     alt: 'Feature Flags',
                     className: 'max-h-64 @2xl:mt-8 @2xl:mr-4',
-                    // stylize: true,
-                    // shadow: true,
                 },
             ],
             skills: [
@@ -285,6 +283,12 @@ export const posthog_ai = {
                     description: 'Delegate rule-based flag rollouts to AI',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
+                },
+                {
+                    name: 'Stale feature flag detection',
+                    description: 'Detect stale feature flags and automatically remove them from your app and codebase',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
                 },
             ],
         },
