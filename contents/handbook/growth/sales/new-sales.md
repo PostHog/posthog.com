@@ -6,7 +6,7 @@ showTitle: true
 
 This is our playbook for managing inbound sales, ie. customers who have contacted the sales team directly. 
 
-We [build PostHog for product engineers](/handbook/who-we-are-building-for). While many non-technical folks use PostHog successfully every day, our inbound sales process is built with technical folks in mind. Once implemented, a customer may use PostHog for all manner of things (and we hope they do!).
+We [build PostHog for product engineers](/handbook/who-we-build-for). While many non-technical folks use PostHog successfully every day, our inbound sales process is built with technical folks in mind. Once implemented, a customer may use PostHog for all manner of things (and we hope they do!).
 
 Three other general principles to bear in mind:
 

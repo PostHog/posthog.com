@@ -981,8 +981,8 @@ const isLabel = (item: any) => !item?.url && item?.name
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const siteSettings = {
         experience: 'posthog',
-        colorMode: 'light',
-        theme: 'light',
+        colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
+        theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
