@@ -94,7 +94,6 @@ As well as the above access you should ensure you have access and feel comfortab
 
 Critical alerts will trigger per-team escalation policies which go like this:
 1. If available, a member of the team associated with the alert is paged first
-1. If nobody is available or nobody responds within the configured time, the `escalators` group is additionally paged with the same conditions
 1. If nobody is available or nobody responds within the configured time then the `On call: global` schedule is paged
 
 > **If at any point you get paged - always respond!** Even if you are unavailable you should respond as such (either via the app or the personal Slack notification). That way the escalation can continue to the next available person.
