@@ -252,7 +252,7 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 1. Problem Agreement - Buyer explicitly acknowledges they have a meaningful problem that can be qualified (e.g. "What happens if you don't solve this problem?")
 2. Solution Agreement - Buyer confirms our solution is best suited to solve their problem. Can be as simple as "We think PostHog will work for us"
 3. Priority Agreement - A senior decision-maker acknowledges the problem as a priority and validates our solution.
-4. Commerical Agreement - Mutual agreement is reached on price and all contractual terms.
+4. Commercial Agreement - Mutual agreement is reached on price and all contractual terms.
 5. Vendor Approval - Buyer completes internal processes (legal, security, procurement) and contract is executed.
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
@@ -291,7 +291,7 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 
 -   Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
-  -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this chnage made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage and with a timeline for when you expect we’ll get it.
+  -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage and with a timeline for when you expect we’ll get it.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
 
 ### Opportunity closure details
