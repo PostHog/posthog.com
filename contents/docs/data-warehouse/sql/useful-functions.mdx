@@ -170,15 +170,13 @@ from events
 
 If you have a SemVer version number, you can use the `sortableSemVer()` function to get a version number that you can use for sorting purposes.
 
-```sql
 SELECT
     DISTINCT properties.$lib_version
 FROM events
-ORDER BY sortableSemVer(properties.$lib_version) DESC
 WHERE event = '$pageview'
   AND timestamp >= now() - INTERVAL 1 DAY
+ORDER BY sortableSemVer(properties.$lib_version) DESC
 LIMIT 10
-```
 
 ### Session replays
 
