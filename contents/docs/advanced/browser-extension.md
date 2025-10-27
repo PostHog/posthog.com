@@ -205,7 +205,7 @@ posthog.init('<ph_project_api_key>', {
         distinctID: distinctId
     },
     api_host: '<ph_client_api_host>',
-    persistence: 'localStorage',
+    disable_persistence: true, // No localStorage in service workers
     disable_external_dependency_loading: true,
     capture_pageview: false, // No DOM in service workers
     autocapture: false, // No DOM events to capture
