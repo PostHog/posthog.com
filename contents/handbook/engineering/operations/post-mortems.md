@@ -45,7 +45,7 @@ Minor incidents can be handled more simply:
 
 Sometimes incidents are raised but turn out to be false-positives. In this case you can usually just close the incident and opt-out of the post-mortem process.
 
-But wait! Before you do this you should consider what could have been done better to prevent the incident from happening in the first place. Clearly there was some false-alert or unclear alerting that caused the incident to be raised in the first place. It might be worth a quick post-mortem just to check that we have follow ups i place
+But wait! Before you do this you should consider what could have been done better to prevent the incident from happening in the first place. Clearly there was some false-alert or unclear alerting that caused the incident to be raised in the first place. It might be worth a quick post-mortem just to check that we have follow ups in place
 
 
 > 💡 Remember: **The goal is not to prevent all incidents, but to learn from them and improve our systems and processes.** Every incident is an opportunity to make PostHog more reliable and our team more effective.
