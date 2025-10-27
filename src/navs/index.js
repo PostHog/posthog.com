@@ -518,7 +518,7 @@ export const handbookSidebar = [
         url: '',
         children: [
             { name: 'Spending money', url: '/handbook/people/spending-money' },
-            { name: 'Team changes', url: '/handbook/company/team-changes' },           
+            { name: 'Team changes', url: '/handbook/company/team-changes' },
             { name: 'Using GitHub', url: '/handbook/company/new-to-github' },
             { name: 'Adding tools', url: '/handbook/company/adding-tools' },
             { name: 'Security', url: '/handbook/company/security' },
@@ -1474,6 +1474,16 @@ export const handbookSidebar = [
                     {
                         name: 'New customer onboarding',
                         url: '/handbook/growth/sales/customer-onboarding.md',
+                    },
+                ],
+            },
+            {
+                name: 'Use cases',
+                url: '',
+                children: [
+                    {
+                        name: 'Chrome Extension Billing Issues',
+                        url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
                 ],
             },

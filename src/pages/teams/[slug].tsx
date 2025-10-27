@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { graphql, useStaticQuery, navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconInfo, IconX, IconCrown } from '@posthog/icons'
+import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock } from '@posthog/icons'
 import dayjs from 'dayjs'
 import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
@@ -403,12 +403,14 @@ export default function TeamPage(props: TeamPageProps) {
 
     const handleTeamLead = (profileID: string, isTeamLead: boolean) => {
         if (isTeamLead) {
+            // Remove this person as team lead
             setFieldValue(
                 'teamLeads',
                 values.teamLeads.filter((teamLead: any) => teamLead.id !== profileID)
             )
         } else {
-            setFieldValue('teamLeads', [...values.teamLeads, { id: profileID }])
+            // Set this person as the only team lead (remove all others first)
+            setFieldValue('teamLeads', [{ id: profileID }])
         }
     }
 
@@ -508,7 +510,22 @@ export default function TeamPage(props: TeamPageProps) {
     })
 
     const editButton = isModerator ? (
-        <>{!editing && <OSButton size="md" icon={<IconPencil />} onClick={() => setEditing(true)} />}</>
+        <>
+            {!editing && (
+                <OSButton
+                    size="md"
+                    tooltip={
+                        <>
+                            <IconShieldLock className="size-5 relative top-[-2px] inline-block text-secondary" /> Edit
+                            team details
+                        </>
+                    }
+                    tooltipDelay={0}
+                    icon={<IconPencil />}
+                    onClick={() => setEditing(true)}
+                />
+            )}
+        </>
     ) : null
 
     const editActions =
@@ -701,6 +718,7 @@ export default function TeamPage(props: TeamPageProps) {
                                                       startDate={profile.attributes.startDate}
                                                       isTeamLead={isTeamLead(id)}
                                                       teams={teams}
+                                                      viewingOwnTeam={true}
                                                   />
                                                   {editing && (
                                                       <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
@@ -711,19 +729,28 @@ export default function TeamPage(props: TeamPageProps) {
                                                           >
                                                               <IconX className="w-4 h-4" />
                                                           </button>
-                                                          <button
-                                                              onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                              className={`w-7 h-7 rounded-full border border-input flex items-center justify-center ${
-                                                                  isTeamLead(id)
-                                                                      ? 'bg-yellow text-white'
-                                                                      : 'bg-accent text-black dark:text-white'
-                                                              }`}
-                                                              title={
-                                                                  isTeamLead(id) ? 'Remove team lead' : 'Make team lead'
+                                                          <Tooltip
+                                                              trigger={
+                                                                  <button
+                                                                      onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                                      className={`w-7 h-7 rounded-full border border-input flex items-center justify-center ${
+                                                                          isTeamLead(id)
+                                                                              ? 'bg-yellow text-white'
+                                                                              : 'bg-accent text-black dark:text-white'
+                                                                      }`}
+                                                                  >
+                                                                      <IconCrown className="w-4 h-4" />
+                                                                  </button>
                                                               }
+                                                              delay={0}
                                                           >
-                                                              <IconCrown className="w-4 h-4" />
-                                                          </button>
+                                                              <>
+                                                                  <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                                  {isTeamLead(id)
+                                                                      ? 'Remove as team lead'
+                                                                      : 'Set as team lead'}
+                                                              </>
+                                                          </Tooltip>
                                                       </div>
                                                   )}
                                               </li>
