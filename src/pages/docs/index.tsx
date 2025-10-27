@@ -51,7 +51,7 @@ const processDocsMenu = () => {
                 name: 'AI wizard',
                 url: '/docs/ai-engineering/ai-wizard',
                 icon: 'IconMagicWand',
-                color: 'seagreen',
+                color: 'purple',
             },
         ],
     }
