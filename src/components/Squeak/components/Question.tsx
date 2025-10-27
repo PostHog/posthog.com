@@ -36,6 +36,9 @@ import EditWrapper from './EditWrapper'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import ZendeskTicket from 'components/ZendeskTicket'
+import { TopicSelector } from './TopicSelector'
+import { XIcon } from 'lucide-react'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -458,6 +461,7 @@ export function Question(props: QuestionProps) {
         pinTopics,
         escalate,
         mutate,
+        removeTopic,
     } = useQuestion(id, { data: question })
 
     useEffect(() => {
@@ -659,6 +663,92 @@ export function Question(props: QuestionProps) {
                             isInForum={isInForum}
                         />
                     </div>
+                    {isModerator && isInForum && (
+                        <div className="p-4 pb-0">
+                            <div className="bg-accent rounded-md p-6 text-primary border border-border">
+                                <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
+                                    Moderator tools
+                                </h4>
+                                <div className="grid grid-cols-2">
+                                    <div>
+                                        <Link
+                                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
+                                            className="text-yellow font-bold"
+                                        >
+                                            {questionData?.attributes?.profile?.data?.attributes?.firstName
+                                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
+                                                : 'Anonymous'}
+                                        </Link>
+                                        <input
+                                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                                            type="text"
+                                            value={
+                                                questionData?.attributes?.profile?.data?.attributes?.user?.data
+                                                    ?.attributes?.email
+                                            }
+                                            readOnly
+                                            onFocus={(e) => e.target.select()}
+                                        />
+                                    </div>
+                                    <div className="w-full relative">
+                                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                                            <Link
+                                                className="font-bold"
+                                                to={questionData.attributes.permalink}
+                                                externalNoIcon
+                                            >
+                                                View in PostHog
+                                            </Link>
+                                            <Link
+                                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                                externalNoIcon
+                                                className="font-bold"
+                                            >
+                                                View in Strapi
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    className={`grid gap-x-4 mt-4 border-t divide-x divide-border border-border ${
+                                        questionData.attributes.zendeskTicketID ? 'grid-cols-2' : ''
+                                    }`}
+                                >
+                                    <ZendeskTicket question={questionData} questionID={questionData.id} />
+                                    <div className={`pt-4 ${questionData.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
+                                        <div className="flex items-center justify-between mb-2">
+                                            <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
+                                                Forum topics
+                                            </h4>
+                                            <TopicSelector
+                                                questionId={questionData.id}
+                                                permalink={questionData.attributes.permalink}
+                                            />
+                                        </div>
+                                        <ul className="flex items-center list-none p-0 flex-wrap">
+                                            {questionData.attributes?.topics?.data.map((topic) => (
+                                                <li
+                                                    key={topic.id}
+                                                    className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                                >
+                                                    <Link
+                                                        to={`/questions/topic/${topic.attributes.slug}`}
+                                                        className="text-yellow text-sm"
+                                                    >
+                                                        {topic.attributes.label}
+                                                    </Link>
+
+                                                    <button onClick={() => removeTopic(topic)}>
+                                                        <XIcon className="h-4 w-4 text-primary" />
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </CurrentQuestionContext.Provider>

@@ -84,7 +84,7 @@ Right now, we split our responsibilities around the products we care most about,
 There are also a handful of things we _both_ want to be involved in, such as people and strategy. We think both of us being involved leads to the best decisions here, and keeps us aligned.
 
 ![max ai](https://res.cloudinary.com/dmukukwp6/image/upload/max_ai_a2455c04fe.png)
-<Caption>I love taking big bets and Max AI is one of them. You can already use it to query your analytics data in PostHog, find session replays, and write SQL.</Caption>
+<Caption>I love taking big bets and PostHog AI is one of them. You can already use it to query your analytics data in PostHog, find session replays, and write SQL.</Caption>
 
 ## 5. Zoom out to solve problems 
 

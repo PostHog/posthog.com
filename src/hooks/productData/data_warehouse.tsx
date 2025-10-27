@@ -77,7 +77,7 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'Write SQL without knowing SQL',
-                    description: 'Nobody likes writing SQL, except for our AI helper, Max',
+                    description: 'Nobody likes writing SQL, except for PostHog AI',
                 },
                 {
                     title: 'Simplified syntax',

@@ -49,20 +49,20 @@ export const posthog_ai = {
         sidebarInitial: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_light_1fbdd896ec.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_f80f0d13ac.png',
-            alt: 'Max chat',
+            alt: 'PostHog AI chat',
             // imgClasses: 'max-h-full'
         },
         sidebarInitialCropped: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_light_cropped_d4ac0441a1.png',
             srcDark:
                 'https://res.cloudinary.com/dmukukwp6/image/upload/max_sidebar_initial_dark_cropped_240b38f95e.png',
-            alt: 'Max chat',
+            alt: 'PostHog AI chat',
             imgClasses: 'max-w-[444px]',
         },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_max_e80de99727.png',
-        alt: "Hi, I'm Max!",
+        alt: 'Hello, PostHog AI!',
         classes: 'max-w-[413px]',
     },
     features: [

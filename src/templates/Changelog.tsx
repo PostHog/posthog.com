@@ -22,6 +22,10 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useWindow } from '../context/Window'
 import { ZoomImage } from 'components/ZoomImage'
+import { CallToAction } from 'components/CallToAction'
+import { Heading } from 'components/Heading'
+import slugify from 'slugify'
+import { Video } from 'cloudinary-react'
 
 dayjs.extend(utc)
 
@@ -89,6 +93,46 @@ type RoadmapNode = {
             }
         }
     }
+}
+
+export const Change = ({ title, teamName, media, description, cta }) => {
+    return (
+        <>
+            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
+                {title}
+            </Heading>
+            {teamName && <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>}
+            {media?.data?.attributes?.mime === 'video/mp4' ? (
+                <div className="my-4">
+                    <ZoomImage>
+                        <Video
+                            publicId={media?.data?.attributes?.provider_metadata?.public_id}
+                            cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                            className="max-w-2xl w-full"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                        />
+                    </ZoomImage>
+                </div>
+            ) : media?.data?.attributes?.url ? (
+                <div className="my-4">
+                    <ZoomImage>
+                        <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={1500} />
+                    </ZoomImage>
+                </div>
+            ) : null}
+            <div className="mt-2">
+                <Markdown regularText={true}>{description}</Markdown>
+            </div>
+            {cta && (
+                <CallToAction type="secondary" size="md" to={cta.url}>
+                    {cta.label}
+                </CallToAction>
+            )}
+        </>
+    )
 }
 
 const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => void }) => {
@@ -159,7 +203,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                 <div className="flex-1 min-h-0">
                     <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
                         {roadmap.media?.gatsbyImageData && (
-                            <div className="mt-4 px-4">
+                            <div className="mt-4 px-4 not-prose">
                                 <ZoomImage>
                                     <GatsbyImage
                                         image={roadmap.media.gatsbyImageData}

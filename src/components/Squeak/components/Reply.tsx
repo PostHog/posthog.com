@@ -435,7 +435,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         delay={0}
                     >
                         <p>
-                            Max AI is our resident AI assistant.
+                            PostHog AI is our resident AI assistant.
                             <br />
                             Double-check responses for accuracy.
                         </p>
