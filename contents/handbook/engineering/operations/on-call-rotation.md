@@ -97,7 +97,7 @@ Critical alerts will trigger per-team escalation policies which go like this:
 1. If nobody is available or nobody responds within the configured time, the `escalators` group is additionally paged with the same conditions
 1. If nobody is available or nobody responds within the configured time then the `On call: global` schedule is paged
 
-> **If at any point you get paged - always respond!** Even if you are not unavailable you should respond as such (either via the app or the personal Slack notification). That way the escaltion can continue to the next available person.
+> **If at any point you get paged - always respond!** Even if you are unavailable you should respond as such (either via the app or the personal Slack notification). That way the escalation can continue to the next available person.
 
 By default if you are being paged, especially as the global on-call, the alert is considered critical, meaning it almost definitely requires attention. Your primary job is to:
 
