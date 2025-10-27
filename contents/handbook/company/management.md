@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 A manager at PostHog has a short list of responsibilities:
-1. Setting the right context for your direct reports to do their jobs
+1. Setting the right [context](#how-do-i-set-context) for your direct reports to do their jobs
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
@@ -44,6 +44,7 @@ At PostHog, we hire highly experienced people for 99% of roles. That means manag
 
 However, for those people to make the best decisions, they need context. The things a manager can do to set context include:
 - Creating a roadmap that the team can work towards
+- Helping the team level-up their understanding of your target customer and the problem space you are working in (eg by encouraging them to talk to users, and doing so yourself)
 - Helping someone figure out who else to talk to within PostHog
 - Enabling or encouraging the team to measure their impact
 - Improving the process in which a team works (things like standups, reviews etc.)
@@ -79,7 +80,7 @@ Talking about long-term career goals every now and again is also important but e
 
 ### Performance
 
-We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a team lead, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but you should proactively give feedback and raise concerns with your exec.
+We care about having a consistent, transparent, and fair way to handle recurring performance issues. We don’t want this to be a source of stress for you - it’s not your core responsibility as a team lead, and we want you to feel supported. The People & Ops team will prompt you to consider performance within your team at key moments to make this easy and straightforward, but you should proactively give feedback and raise concerns with your exec as they arise.
 
 - We expect you to regularly give proactive, actionable feedback to everyone on your team - it’s the most direct way to help troubleshoot issues upstream. This is particularly important at the 30-day, 60-day and 80-day check-ins after a new starter joins.
 -  The team lead will be asked to consider the following questions that are aligned with our values:
@@ -103,6 +104,25 @@ That form will be shared with the relevant team Blitzscale member, so they can h
 
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
+### Weave
+
+We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see how their numbers compare to averages across the company. 
+
+We understand that all the work an engineer does can't be properly represented in a tool that just looks at PR output. Data in Weave is _not_ the decision-maker for whether someone is succeeding in their role at PostHog. It can be, however, a part of the conversation.
+
+We use Weave to:
+- Look for outliers in the company in terms of output (both high and low - sometimes unexpected people are rising to the top!)
+- Watch for issues with overall team productivity to identify possible blockers
+- Start conversations with team leads
+
+We don't use Weave to:
+- Make a decision to let someone go - if and when this happens, it only follows detailed discussion with and recommendation from the team lead
+- Monitor your PRs - our management layer is stretched way too thin to micromanage this
+- Creep on your use of AI - we don't care how or if you use AI to get a job done, as long as it gets done
+- Make a call on how valuable someone is - some people with low PR output are very valuable to the company, and we're 100% aware that things like heavy support load can impact output
+
+We have compared statistics in Weave against other (imperfect!) metrics that can be used to gauge productivity, such as number of commits, number of PRs, total github activity, etc, and see similar patterns amongst them. Weave gives us more detail and a nice UI for evaluating output across all the engineers we have, which we don't have any other good interface for. In addition, it gives engineers access to the same information we have about them, so using it increases transparency.
+
 ## What does being a hiring manager entail?
 
 Two things:
@@ -110,6 +130,14 @@ Two things:
 - If you think your team needs someone, make a [new hire request](https://github.com/PostHog/company-internal/issues/new/choose). The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
 
 See the `#technical-interviewers` channel for more info here. 
+
+## What you can expect as a manager
+
+Management roles at PostHog are often (but not always) temporary. That's because as the company changes, our needs for different people in different roles will change as well. Because all of our managers are also strong ICs (individual contributors), sometimes putting someone back into an IC role makes sense if that's what's best for the company. This has happened many times with people at PostHog, some who have gone back and forth between being a manager and not being a manager multiple times (hi <TeamMember name="Marius Andra" photo />!).
+
+As such, management roles are paid on the same pay scale as other ICs. Becoming a manager does not mean you get a pay raise, and going from a manager role back to an IC role does not mean you get a pay decrease. 
+
+Management is a skill of its own, and it's not any more important than any other skills that make someone a great IC. It's possible that you may be a manager for a short time, but it becomes clear that your strengths lie primarily in the other skills that are involved with being an IC. In this case we might move you back to a pure IC position, where your skills can really shine, and move someone else from your team or from around the company into the manager / team lead role.
 
 ## Recommended reading
 
