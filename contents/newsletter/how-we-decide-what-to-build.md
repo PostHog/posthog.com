@@ -40,7 +40,7 @@ At PostHog, our principles for what to build tie to [our core strategy](/handboo
 
 3. Be the source of truth for customer and product data.
 
-We also put a lot of weight on user feedback, especially from [our ideal customer profile (ICP)](/handbook/who-we-are-building-for). We talk to users regularly and ask them to comment on our public roadmap and vote on what they want.
+We also put a lot of weight on user feedback, especially from [our ideal customer profile (ICP)](/handbook/who-we-build-for). We talk to users regularly and ask them to comment on our public roadmap and vote on what they want.
 
 There are many other principles such as agile, lean, RICE, themes, metrics, top-down planning, weighted scoring, or following a [benevolent dictator](https://en.wikipedia.org/wiki/Benevolent_dictator_for_life). What matters is **choosing something**.
 
@@ -54,7 +54,7 @@ By talking directly to users and making it easy to share ad hoc feedback, we’v
 
 ![Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/map.jpeg)
 
-The axes for this graph relate to our [ICP](/handbook/who-we-are-building-for): **product engineers** at **high-growth startups**. Everything we’ve built already is in green, while things we’re building at the moment are in blue.
+The axes for this graph relate to our [ICP](/handbook/who-we-build-for): **product engineers** at **high-growth startups**. Everything we’ve built already is in green, while things we’re building at the moment are in blue.
 
 Features towards the bottom left correlate best to our ICP, but there are outliers. We’re building web analytics, for example, because it helps us get in first and it’s easy for us to build because we’ve already built product analytics.
 
