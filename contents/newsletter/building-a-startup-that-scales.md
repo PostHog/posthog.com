@@ -1,6 +1,6 @@
 ---
 title: 32 things we’ve learned about building a startup that scales
-date: 2025-08-14
+date: 2025-10-14
 author:
  - charles-cook
 featuredImage: >-
