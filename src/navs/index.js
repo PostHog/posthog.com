@@ -444,7 +444,7 @@ export const handbookSidebar = [
             },
             {
                 name: '4. Who we are building for',
-                url: '/handbook/who-we-are-building-for',
+                url: '/handbook/who-we-build-for',
             },
             {
                 name: '5. How we make users happy',
@@ -2284,6 +2284,7 @@ export const docsMenu = {
                     name: 'AI engineering',
                     url: '/docs/ai-engineering',
                     icon: 'IconLlmPromptEvaluation',
+                    color: 'red',
                     children: [
                         {
                             name: 'Overview',
@@ -4594,8 +4595,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconMagicWand',
-            color: 'purple',
+            icon: 'IconLogomark',
+            color: 'black',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [

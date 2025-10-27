@@ -12,7 +12,7 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 - *Role* - from experience we sell best to people in an engineering, product or leadership role.
 - *Country* - from experience we know that certain countries have a higher inclination to pay for software so we weight those.
 
-> Note that we also calculate an [ICP score](/handbook/growth/marketing/icp) in Salesforce.  This is more marketing aligned and designed to show us whether we are capturing [who we are building for](/handbook/who-we-are-building-for) as inbound leads.
+> Note that we also calculate an [ICP score](/handbook/growth/marketing/icp) in Salesforce.  This is more marketing aligned and designed to show us whether we are capturing [who we are building for](/handbook/who-we-build-for) as inbound leads.
 
 | Metric         | Value                                                                                                          | Score |
 |----------------|----------------------------------------------------------------------------------------------------------------|-------|
