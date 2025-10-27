@@ -30,7 +30,7 @@ Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-c
 
 > 💡 You can use @on-call-global in Slack to reach out to whoever is on call! This syncs automatically with the incident.io schedule. This group is also automatically added to all incidents.
 
-PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. As a 24/7 service, our goal is to be 100% operational 100% of the time. The global on-call is the last line of defence and is escalated to:
+PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. As a 24/7 service, our goal is to be 100% operational 100% of the time. The global on-call is the last line of defense and is escalated to:
 * if nobody at the `On call: {team}` level is available
 * if the alert is critical but has no team assignment (for whatever reason)
 
