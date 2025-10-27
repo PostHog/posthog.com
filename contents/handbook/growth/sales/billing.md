@@ -62,7 +62,7 @@ If this is a new contract for an existing customer, you will need to add their e
 
 We define late payments as follows:
 
-1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually this is 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
+1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
 2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
 
 In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
