@@ -203,7 +203,7 @@ const Roadmap = ({ roadmap, onClose }: { roadmap: RoadmapNode; onClose: () => vo
                 <div className="flex-1 min-h-0">
                     <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
                         {roadmap.media?.gatsbyImageData && (
-                            <div className="mt-4 px-4">
+                            <div className="mt-4 px-4 not-prose">
                                 <ZoomImage>
                                     <GatsbyImage
                                         image={roadmap.media.gatsbyImageData}
