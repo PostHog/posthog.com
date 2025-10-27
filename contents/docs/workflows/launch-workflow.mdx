@@ -67,12 +67,12 @@ Now that we have a trigger that can initiate the workflow, we need to add an Dis
 
 <Tab.Group tabs={[
 'Email', 
-'Twilio', 
+'Slack', 
 'Webhook']}>
 <Tab.List>
 <Tab>Email</Tab>
+<Tab>Slack</Tab>
 <Tab>Twilio</Tab>
-<Tab>Webhook</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -103,6 +103,20 @@ The email template has access to event and person properties of the trigger even
 </Tab.Panel>
 <Tab.Panel>
 
+Drag a **Slack** dispatch beneath the trigger, into the workflow. Then, click on the Slack block to configure it.
+
+In the Slack step, you'll need to configure the following:
+
+- **Slack workspace**: Select the Slack workspace you connected to when you configured your Slack workflow channel.
+- **Channel to post to**: This is the Slack channel messages will be delivered to.
+- **Emoji icon**: Optional emoji for the bot.
+- **Bot name**: Optional name for the bot.
+- **Blocks**: Optionally define [blocks](https://docs.slack.dev/block-kit/) to compose your message.
+- **Plain text message**: The content of your Slack message. You can use templating variables like `{{ event.event }}` to include event properties in the message.
+
+</Tab.Panel>
+<Tab.Panel>
+
 Drag a **SMS** dispatch beneath the trigger, into the workflow. Then, click on the SMS block to configure it.
 
 In the SMS step, you'll need to configure the following:
@@ -113,11 +127,6 @@ In the SMS step, you'll need to configure the following:
 | **From phone number**  | One of the phone numbers available on your Twilio account.                                                                                            |
 | **Recipient phone number** | The recipient's number. If your workflow is triggered by an identified event, use `{{ person.properties.phone }}` to reference it from [person properties](/docs/product-analytics/person-properties). |
 | **Message**            | The content of your SMS message. You can use templating variables like `{{ event.event }}` to include event properties in the message.                |
-
-</Tab.Panel>
-<Tab.Panel>
-
-> Webhook support is coming soon. If there are other channels you'd like to see supported, please [let us know](https://app.posthog.com/workflows#panel=support).
 
 </Tab.Panel>
 </Tab.Panels>
