@@ -81,27 +81,29 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807222/web_analytics_45ba970699.png',
                     alt: 'Web analytics',
-                    className: 'max-h-64',
+                    className: 'max-h-64 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'AI-generated insights',
-                    description: 'AI-generated insights for both event and session-level metrics',
+                    name: 'Insight generation',
+                    description:
+                        'Create insights with text prompts to analyze traffic patterns, conversion funnels, or user journeys',
                     sticker: <StickerPath className="size-12" />,
                     percent: 30,
                 },
                 {
-                    name: 'Natural language filters',
-                    description: 'Tell PostHog AI how you want to filter your data, and they shall be applied',
+                    name: 'Conversational filters',
+                    description: 'Apply filters by page path, geography, device type, or referrer using plain language',
                     sticker: <StickerPath className="size-12" />,
                     percent: 30,
                 },
                 {
-                    name: 'Explanations for outliers',
-                    description: 'Detects and explains anomalies and makes sense of outliers',
+                    name: 'Anomaly analysis',
+                    description:
+                        'Detect unusual traffic spikes or drops and get PostHog AI to explain potential causes',
                     sticker: <StickerPath className="size-12" />,
                     percent: 0,
                 },
@@ -126,28 +128,28 @@ export const posthog_ai = {
             ],
             skills: [
                 {
-                    name: 'AI-generated insights',
-                    description: 'Builds insights and entire dashboards from a single prompt',
+                    name: 'Insight generation',
+                    description: 'Build insights and entire dashboards from a single prompt',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Detecting anomalies',
-                    description: 'Suggests and sets up alerts automatically to catch those outliers asap',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 0,
-                },
-                {
-                    name: 'Prompt queries',
-                    description: 'Crafts optimized HogQL queries and teaches you the logic behind them',
+                    name: 'Query assistance',
+                    description: 'Create optimized HogQL queries and get an explanation of the logic behind them',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Auto-generated names',
-                    description: 'Generates insight and dashboard names automatically',
+                    name: 'Auto-naming',
+                    description: 'Automatically generate descriptive names for insights and dashboards',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
+                },
+                {
+                    name: 'Anomaly detection',
+                    description: 'Detect outliers with AI and configure alerts to catch them',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
                 },
             ],
         },
@@ -163,7 +165,7 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1742425353/llm_obvs_86706b1ab7.png',
                     alt: 'LLM Analytics',
-                    className: 'max-h-48 mr-8 mt-8',
+                    className: 'max-h-48 @2xl:mr-8 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -216,7 +218,7 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/session_replay_67e4cf38de.png',
                     alt: 'Session replay',
-                    className: 'max-h-64',
+                    className: 'max-h-64 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -224,101 +226,104 @@ export const posthog_ai = {
             skills: [
                 {
                     name: 'Session search',
-                    description: 'Natural language search for specific replays (e.g., "users who abandoned checkout")',
+                    description: 'Find specific replays using natural language (e.g., "users who abandoned checkout")',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Config helper',
-                    description: 'Helps set up privacy masking, regex rules, and recording configuration',
+                    name: 'Session clustering',
+                    description:
+                        'Ask PostHog AI to group similar sessions and surface representative examples from thousands',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
                 {
-                    name: 'Session clustering',
-                    description: 'Clusters similar sessions and shows you the 10 that represent 1000',
+                    name: 'Configuration assistant',
+                    description: 'Set up privacy masking, regex rules, and recording settings with natural language',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
             ],
         },
         {
-              title: 'Feature Flags',
-              headline: 'Feature Flags',
-              layout: 'ai',
-              icon: <IconToggle className="size-5" />,
-              color: 'green',
-              description:
-                  'PostHog AI sets up, monitors, and rolls out your feature flags — making releases safe by default.',
-              images: [
-                  {
-                      src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
-                      alt: 'Feature Flags',
-                      className: 'max-h-64',
-                      // stylize: true,
-                      // shadow: true,
-                  },
-              ],
-              skills: [
-                  {
-                      name: 'AI-assisted setup',
-                      description: 'Create and configure feature flags in natural language',
-                      sticker: <StickerPath className="size-6" />,
-                      percent: 30,
-                  },
-                  {
-                      name: 'Monitoring & anomaly detection',
-                      description: 'Replace manual checks with automated performance reports',
-                      sticker: <StickerPath className="size-6" />,
-                      percent: 0,
-                  },
-                  {
-                      name: 'Invisible rollout automation',
-                      description: 'Delegate rule-based flag rollouts to AI',
-                      sticker: <StickerPath className="size-6" />,
-                      percent: 0,
-                  },
-              ],
-          },
-    {
-            title: 'Experiments',
-            headline: 'Experiments',
+            title: 'Feature Flags',
+            headline: 'Feature Flags',
             layout: 'ai',
-            icon: <IconFlask className="size-5" />,
-            color: 'purple',
+            icon: <IconToggle className="size-5" />,
+            color: 'green',
             description:
-                "Experiment smarter, not harder, with AI that finds, runs, and explains results.",
+                'PostHog AI sets up, monitors, and rolls out your feature flags — making releases safe by default.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/experiments_1dc7831033.png',
-                    alt: 'Experiments',
-                    className: 'max-h-64',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806653/feature_flags_150eb811c6.png',
+                    alt: 'Feature Flags',
+                    className: 'max-h-64 @2xl:mt-8 @2xl:mr-4',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'AI-assisted setup',
-                    description: 'Create and configure experiments in natural language',
+                    name: 'Feature flag setup',
+                    description: 'Create and configure feature flags using natural language',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
+                },
+                {
+                    name: 'Monitoring & anomaly detection',
+                    description: 'Replace manual checks with automated performance reports',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
+                },
+                {
+                    name: 'Invisible rollout automation',
+                    description: 'Delegate rule-based flag rollouts to AI',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 0,
+                },
+            ],
+        },
+        {
+            title: 'Experiments',
+            headline: 'Experiments',
+            layout: 'ai',
+            icon: <IconFlask className="size-5" />,
+            color: 'purple',
+            description:
+                'Ship ideas like a mad scientist. PostHog AI handles setup, flags, and metrics — you decide what deploys (and which experiments never leave the lab).',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/experiments_1dc7831033.png',
+                    alt: 'Experiments',
+                    className: 'max-h-64 @2xl:mt-8',
+                    // stylize: true,
+                    // shadow: true,
+                },
+            ],
+            skills: [
+                {
+                    name: 'Experiment builder',
+                    description: 'Create and configure A/B tests using natural language prompts',
+                    sticker: <StickerPath className="size-6" />,
+                    percent: 30,
+                },
+                {
+                    name: 'Results analysis',
+                    description:
+                        'Identify winning variants through AI summaries, and get recommendations for next steps',
                     sticker: <StickerPath className="size-6" />,
                     percent: 30,
                 },
                 {
                     name: 'Experiments doctor',
-                    description: 'Troubleshoot your experiment setup for valid & reliable results',
+                    description: 'Troubleshoot setup issues with AI to ensure statistically valid and reliable results',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
                 {
-                    name: 'Experiments summaries',
-                    description: 'Highlights the winning variant and suggests next action',
-                    sticker: <StickerPath className="size-6" />,
-                    percent: 30,
-                },
-                {
-                    name: 'Experiments summaries',
-                    description: 'Highlights the winning variant and suggests next action',
+                    name: 'Opportunity detection',
+                    description:
+                        'Surface testing opportunities by analyzing metrics, behavior, and code changes with AI',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
@@ -336,7 +341,7 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806655/error_tracking_4e0dff38af.png',
                     alt: 'Error Tracking',
-                    className: 'max-h-64',
+                    className: 'max-h-64 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
@@ -344,19 +349,19 @@ export const posthog_ai = {
             skills: [
                 {
                     name: 'Exception search',
-                    description: 'Natural language search to find specific errors',
+                    description: 'Ask PostHog AI to find specific errors with natural language queries',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
                     name: 'Impact scoring',
-                    description: 'Surfaces high-impact exceptions based on affected users and business context',
+                    description: 'Surface high-impact exceptions based on affected users and business context',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
                     name: 'Semantic grouping',
-                    description: 'Groups exceptions by root cause using semantic similarity, not just stack traces',
+                    description: 'Group exceptions by root cause with AI analysis, not just stack traces',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
@@ -377,28 +382,27 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/surveys_e13b99220b.png',
                     alt: 'Surveys',
-                    className: 'max-h-64',
+                    className: 'max-h-64 @2xl:mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'Survey generation',
-                    description: 'Generates questions, sets up targeting, and launches surveys in seconds',
+                    name: 'Survey creation',
+                    description: 'Generate questions, configure targeting, and launch surveys with natural language',
                     sticker: <StickerPath className="size-6" />,
                     percent: 90,
                 },
                 {
                     name: 'Response synthesis',
-                    description: 'Surfaces themes and patterns across all feedback',
+                    description: 'Ask PostHog AI to surface themes and patterns from aggregated feedback',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Search based on meaning',
-                    description:
-                        'Ask questions across all survey responses and get answers by meaning, not just keyword matching',
+                    name: 'Sentiment search',
+                    description: 'Ask questions about survey responses and get answers by meaning, not keywords',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
@@ -410,27 +414,28 @@ export const posthog_ai = {
             layout: 'ai',
             icon: <IconBolt className="size-5" />,
             color: 'blue',
-            description: 'Create workflows that automate actions or send messages to your users.',
+            description:
+                'Why drag and drop when you can just ask? PostHog AI builds the workflow, sets the triggers, and ships it faster than you can say <em>“if this, then that.”</em>',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730807086/workflows_90a59408f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1743523365/messaging_crest_8de90d3c39.png',
                     alt: 'Workflows',
-                    className: 'max-h-64',
+                    className: 'max-h-64 mt-8 mr-8',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'Create email templates',
-                    description:
-                        'Create email templates in your content library, including subject, body, html and liquid support',
+                    name: 'Email template builder',
+                    description: 'Ask PostHog AI to generate dynamic templates in your content library',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
-                    name: 'Natural language workflow creation',
-                    description: 'Create multistep workflows from scratch using natural language',
+                    name: 'Workflow builder',
+                    description:
+                        'Create multi-step workflows using natural language to automate actions or send messages',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
@@ -451,21 +456,22 @@ export const posthog_ai = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/data_warehouse_99ac92f444.png',
                     alt: 'Data Warehouse',
-                    className: 'max-h-64',
+                    className: 'max-h-64 mt-8',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'Fixing SQL mistakes',
-                    description: 'Fixes your errors to make sure you get with the data you want and need',
+                    name: 'SQL error fixing',
+                    description:
+                        'Use PostHog AI to correct syntax and logic errors to ensure queries return the data you need',
                     sticker: <StickerPath className="size-6" />,
                     percent: 50,
                 },
                 {
                     name: 'Query autocomplete',
-                    description: 'Autocompletes your code, so that you have time for the important stuff',
+                    description: 'Complete code automatically so you can focus on analysis',
                     sticker: <StickerPath className="size-6" />,
                     percent: 0,
                 },
@@ -478,28 +484,26 @@ export const posthog_ai = {
             icon: <IconPlug className="size-5" />,
             color: 'blue',
             description:
-                'Transform data into PostHog and export your data out of PostHog to your favorite destinations.',
+                'PostHog AI is your data plumber. It finds the leaks, clears the clogs, and keeps insights flowing without flooding your warehouse.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1730806654/data_warehouse_99ac92f444.png',
-                    alt: 'Data Warehouse',
-                    className: 'max-h-64',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1742915575/ingestion_f1030194a7.png',
+                    alt: 'Data Pipelines',
+                    className: 'max-h-64 mt-8 mr-8',
                     // stylize: true,
                     // shadow: true,
                 },
             ],
             skills: [
                 {
-                    name: 'Destinations set up',
-                    description:
-                        'Quickly set up destinations. Write custom (hog) code and automatically filter on the right events',
+                    name: 'Destination setup',
+                    description: 'Configure integrations with AI-generated HogQL and automatic event filtering',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
                 {
-                    name: 'Transformations set up',
-                    description:
-                        'Quickly set up transformations. Write custom (hog) code and automatically filter on the right events',
+                    name: 'Data transformation',
+                    description: 'Ask PostHog AI to Write custom logic to modify and enrich event data',
                     sticker: <StickerPath className="size-6" />,
                     percent: 70,
                 },
