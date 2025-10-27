@@ -209,7 +209,7 @@ const AIAgents = () => {
                             <span>
                                 <Tooltip
                                     trigger={
-                                        <Link to="/max" state={{ newWindow: true }}>
+                                        <Link to="/ai" state={{ newWindow: true }}>
                                             <img
                                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/h_200,c_limit,q_auto,f_auto/ai_max_e80de99727.png"
                                                 className="w-16 -m-2"
@@ -224,14 +224,14 @@ const AIAgents = () => {
                                             className=""
                                         />
                                         <div className="absolute top-[calc(100%-5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange rotate-[3.5deg] left-0 right-4">
-                                            Hi, I'm Max
+                                            Hi, I'm PostHog AI
                                         </div>
                                     </div>
                                 </Tooltip>
                             </span>
                             <div className="flex flex-col">
-                                <Link to="/max" state={{ newWindow: true }}>
-                                    Max
+                                <Link to="/ai" state={{ newWindow: true }}>
+                                    PostHog AI
                                 </Link>
                                 <span className="text-sm text-secondary">Helpful chatbot, data concierge</span>
                             </div>
@@ -1124,7 +1124,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonAI',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/max">Learn about Max AI</Button>,
+        Editor: () => <Button url="/ai">Learn about PostHog AI</Button>,
     },
     {
         name: 'ButtonAbout',
@@ -1219,9 +1219,9 @@ export default function Home() {
     return (
         <>
             <SEO
-                title="PostHog is for product engineers"
+                title="PostHog – We make dev tools for product engineers"
                 updateWindowTitle={false}
-                description="We’re building every tool for product engineers to build successful products."
+                description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
             <MDXEditor

@@ -234,7 +234,7 @@ export default function HeaderBar({
                                 {appWindow?.meta?.title}
                             </div>
                         ))}
-                    <div className="flex items-center gap-px relative">
+                    <div className="flex items-center gap-0.5 relative">
                         {rightActionButtons}
                         {showSearch && (searchContentRef || onSearch) && !isEditing && (
                             <Tooltip

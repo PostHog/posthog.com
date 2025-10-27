@@ -4,7 +4,11 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most-loved products** at **high-growth startups**. This is our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (or ICP). Within that ICP, we focus on the **product engineers** (full-stack engineers skewed towards the frontend) as our persona, though PostHog should be usable by everyone on the product team.
+AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework) or ICP.
+
+We build for the highest-performing **product engineers** (full-stack engineers skewed towards the frontend) building the **most-loved products** at **high-growth startups**. 
+
+We aren't focused on other members of the product team, such as PMs, designers, and data engineers, though we are aware they are oftentimes users of PostHog as well. We expect PostHog to be usable for them, but only prioritize their feature requests when they are in service of product engineering workflows and/or have been requested by product engineers as well.
 
 > Example: PostHog anytime from Series B to IPO
 
@@ -19,7 +23,7 @@ Why? We believe that the best tech companies are increasingly engineering-led. B
 | **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
 | **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO'ed |
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
-| **Examples** | PostHog anytime from their Series B to IPO, Linear, Ramp, Vercel, Retool |
+| **Examples** | PostHog anytime from their Series B to IPO, Supabase, 11Labs |
 
 Each team will focus more or less on different members of the product team. This is detailed on their team pages.
 
@@ -36,6 +40,7 @@ We build for the power users of the **product team**
 **Should be usable by**:
 - Designers
 - Less technical product managers
+- Data engineers
 - Marketers
 
 ## FAQs
@@ -110,14 +115,8 @@ We build for the power users of the **product team**
     - They have a large active social media reach
     - They are in major tech cities e.g. San Francisco, Austin, New York, London, Berlin, etc.
 
-### Why the data team?
-
-- The data team is a team that we should experiment with for marketing and customer success. We have seen early signs of them being the champion within the org or the person responsible for paying.
-
-- Data products are strategically advantageous to us. The product and customer data is used throughout the organization. By enabling the data team to serve other teams across the company (e.g. marketing, revenue ops) we form a strong moat and can enable the data team to be our advocates.
-
 ### What about marketing?
 
-- The features should be usable by the marketing team, but we shouldn’t focus on building features specifically _for_ them. Generally, they have a different level of technical ability to our core power users.
+- The features should be usable by the marketing team, but we shouldn’t focus on building features specifically _for_ them. Generally, they have a different level of technical ability to our core power users, and tools in the marketing stack tend to be extremely complicated (and hacky).
 
 - There is an exception to the rule: If a feature will make PostHog more widely adopted in a company, and will decrease the risk of the company moving to a competitor, we should build the feature. Ultimately, this is in line with our wider strategy, because the more teams in a company using the same set of product data stored in PostHog vs a second tool, the more successfully the company will operate. Anti goal: Make PostHog _harder_ to use for product engineers by supporting features for non-ICP users.

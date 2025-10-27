@@ -4,6 +4,11 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const purchasedWith = [
     {
+        name: 'Supabase',
+        description: 'Postgres database development platform',
+        logo: 'https://obuldanrptloktxcffvn.supabase.co/storage/v1/object/public/supabase-brand-assets/logos/supabase-logo-icon.svg',
+    },
+    {
         name: 'Digital Ocean',
         description: 'Cloud infrastructure for developers',
         logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/DO_Logo_icon_blue_0ade9109b2.svg',

@@ -57,7 +57,7 @@ If you have some invoice/receipt to share with the Finance team, send it to fina
 ### Your personal card
 
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. Please avoid using your personal card over your Brex card. The company get points which we use towards billboard campaigns, we also can't process lots of reimbursement requests for people looking to get their own points. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
+- If you do need to use your personal card, please use the request reimbursement function in Brex.
 
 Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
@@ -87,7 +87,7 @@ We'd prefer you to use a laptop. This is so when we host meetups in real life, y
 
 Below are general guidelines for the laptop configurations currently recommended, by role. The most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines please ask Fraser for approval prior to making the purchase.
 
-* For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
 * For sales roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
 * All other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
