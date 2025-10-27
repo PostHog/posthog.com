@@ -395,7 +395,7 @@ This approach eliminates the need for custom logic in individual product pages -
 
 ### AI Layout for Features Slide
 
-The 'ai' layout provides a specialized template for AI-powered features with support for skills, stickers, and section labels. This layout is used on the Max AI product page.
+The 'ai' layout provides a specialized template for AI-powered features with support for skills, stickers, and section labels. This layout is used on the PostHog AI product page.
 
 #### Using the AI Layout
 

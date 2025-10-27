@@ -6,7 +6,7 @@ import { useRoadmaps } from 'hooks/useRoadmaps'
 import Markdown from 'components/Squeak/components/Markdown'
 import { IconCheck, IconLightBulb } from '@posthog/icons'
 import Cards from 'components/Cards'
-import { MaxExampleCards } from 'components/Cards/data'
+import { PostHogAIExampleCards } from 'components/Cards/data'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const PRODUCT_HANDLE = 'posthog_ai'
@@ -239,21 +239,21 @@ const CustomDemoSlide = () => {
             </p>
 
             <ScrollArea className="min-h-0 w-full h-full @2xl:-mt-4">
-                <Cards data={MaxExampleCards} buttons={false} />
+                <Cards data={PostHogAIExampleCards} buttons={false} />
             </ScrollArea>
 
             <div className="flex gap-2 justify-center absolute bottom-4 left-0 right-0 scale-125 @2xl:scale-100">
                 <IconLightBulb className="size-10 opacity-50" />
                 <div className="flex flex-col text-xl">
                     <strong>Signed into PostHog?</strong>
-                    <p>Click any question to open PostHog and get Max started.</p>
+                    <p>Click any question to get PostHog AI started.</p>
                 </div>
             </div>
         </div>
     )
 }
 
-export default function MaxAI(): JSX.Element {
+export default function PostHogAI(): JSX.Element {
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
@@ -351,7 +351,7 @@ export default function MaxAI(): JSX.Element {
             answers: 'demo',
         },
         content: {
-            answersDescription: 'What can Max do?',
+            answersDescription: 'What can PostHog AI do?',
         },
     })
 

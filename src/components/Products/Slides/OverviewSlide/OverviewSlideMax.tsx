@@ -20,7 +20,7 @@ export default function OverviewSlideMax() {
                     <aside className="text-center">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/max_aeaeca84a3.png"
-                            alt="Max AI"
+                            alt="PostHog AI"
                             className="max-w-[469px]"
                         />
                     </aside>

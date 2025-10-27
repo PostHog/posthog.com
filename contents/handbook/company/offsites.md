@@ -36,17 +36,30 @@ Typical agenda:
 
 We want to try to encourage small teams to get together once each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
 
+Planning a small team offsite? Kendal’s got you covered.
+Here’s how it works:
+
+- The team lead should message Kendal with their proposed dates and location.
+- Kendal will then go away and find suitable accommodation for the group.
+- Once that’s sorted, she’ll:
+  - Create a Slack channel for the offsite and add everyone who’s going.
+  - Set up the offsite budget in Brex.
+  - Update the team’s Canvas with:
+    - Accommodation details and a handy map
+    - A flight tracker
+    - A rough itinerary (Kendal will include the mandatory bits, like 360° feedback/Readme sessions, team leads can fill in the rest)
+  - Look up dining options for a couple of group dinners (we like to keep a few nights free for “choose your own adventure” dining).
+  - Suggest and book a whole group activity for everyone to enjoy together.
+If there’s anything ad hoc you’d like Kendal to take point on, just let her know, she’s happy to help!
+Each team member is still responsible for booking their own flights.
+
 Some guidelines:
 
-- These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
-- We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved. If the group is large enough optimize for multiple apartments in the same building so that you have separate spaces to work / chill / take calls.
-- If Airbnbs aren't an option for some reason, make sure the hotel has meeting rooms/working areas, or there's a coworking space a few minutes away where everyone fits comfortably.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. Also, it's a good idea to have an expectation-setting session (can be async in a Figjam) to ensure everyone is on the same page about what the outcome/output of the offsite should be.
 - Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
-- Everyone should have their own bedroom which they don't need to share.
 - You should do a [360 degree feedback session](/handbook/people/feedback#ground-rules). It can feel uncomfortable doing these, but almost everyone who's done one at PostHog has come out feeling better and with a whole host of things they can improve. These are best in person.
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
 
