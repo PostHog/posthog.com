@@ -61,6 +61,7 @@ export const dataWarehouse = {
             },
             volume: 1000000,
             unit: 'row',
+            freeAllocationText: 'Free for the first 7 days of each new source (100M on free plan, unlimited on paid)',
         },
     ],
     customers: {
