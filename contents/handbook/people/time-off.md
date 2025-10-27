@@ -87,10 +87,10 @@ This table explains the amount of paid time off, depending on how long you've be
 | Time at posthog    | maternity leave | paternity leave |
 | - | - | - |
 | under 6 months    | 3 weeks          | 2 - 3 weeks |
-| 6 - 12 months     | 6 weeks          | 2 - 3 weeks |
+| 6 - 12 months     | 12 weeks         | 2 - 3 weeks |
 | over 12 months    | up to 24 weeks   | 6 weeks |
 
-> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  Wherever there is a discrepancy between these local regulations and PostHog policy, we will merge the local minimum rules with the above.
+> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy. 
 
 We only pay the enhanced parental leave in one continuous block.
 
