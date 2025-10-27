@@ -8,7 +8,7 @@ showTitle: true
 
 We’re [100% remote](/handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life. Still, we’re figuring out how to do events "the PostHog way."
 
-For us to be involved the event has to be relevant to our [ICP](/handbook/who-we-are-building-for). We prefer not to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we avoid booths, badge-scanning, buying attendee lists, paying to speak, webinars, and dinners.
+For us to be involved the event has to be relevant to our [ICP](/handbook/who-we-build-for). We prefer not to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we avoid booths, badge-scanning, buying attendee lists, paying to speak, webinars, and dinners.
 
 The event formats we get involved in (and organize ourselves) fall into one of these:
 
