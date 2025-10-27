@@ -12,7 +12,7 @@ export const profileBackgrounds: ProfileBackground[] = [
         id: 'purple-hearts',
         name: 'Purple hearts',
         url: 'https://res.cloudinary.com/dmukukwp6/image/upload/purple_hearts_107e563a6b.jpg',
-        backgroundSize: 'cover',
+        backgroundRepeat: 'repeat',
     },
     {
         id: 'blue-stars',

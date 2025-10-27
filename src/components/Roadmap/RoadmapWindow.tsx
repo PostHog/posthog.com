@@ -143,7 +143,18 @@ export default function RoadmapWindow({
                         onSubmit={() => {
                             closeWindow(appWindow)
                             addToast({
-                                description: id ? 'Roadmap updated successfully' : 'Roadmap created successfully',
+                                title:
+                                    status !== 'complete'
+                                        ? undefined
+                                        : id
+                                        ? 'Roadmap updated successfully'
+                                        : 'Roadmap created successfully',
+                                description:
+                                    status === 'complete'
+                                        ? 'Your changes will be live on the next build.'
+                                        : id
+                                        ? 'Roadmap updated successfully'
+                                        : 'Roadmap created successfully',
                             })
                             onSubmit?.()
                         }}

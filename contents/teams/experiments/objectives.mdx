@@ -1,37 +1,33 @@
-### Q3 2025 Objectives
+### Q4 2025 Objectives
+This quarter we’re doubling down on making experiments more powerful and easier to use – pushing towards AI automation, strengthening the feature flag foundations, and expanding the metrics and tools that help teams learn faster and act with confidence.
 
-#### Objective 1: Metrics + UX improvements  
-Motivation: Continue closing the gap with more mature competitors. Make experiments easier to set up, monitor, and understand.
 
-What we will ship:
-* **Results timeseries** – Show the historical progression of experiment results to give a clearer picture over time, not just a snapshot. <TeamMember name="Juraj Majerik" photo />
-* **Setup wizard** – a simpler way to set up experiments, possibly with MaxAI assistance <TeamMember name="Rodrigo Iloro" photo />
-* **Activity log** – Show who made changes to an experiment and when <TeamMember name="Rodrigo Iloro" photo />
-* **Ratio metrics** – Enable metrics like "% of positive feedback" <TeamMember name="Anders Asheim Hennum" photo />
-* **Exclusion step** for funnel experiments <TeamMember name="Juraj Majerik" photo />
+#### AI features
+Motivation: We’re pushing towards more automation, using AI to make experimentation easier to set up, interpret, and act on.
 
-#### Objective 2: Improve integration with feature flags <TeamMember name="Anders Asheim Hennum" photo />
-Motivation: Improve user experience for setting up feature flags for experiments.
+* **Integrate Experiments into Tasks (AI)** – Deploy any code change behind an experiment, track its progress, and make a decision based on results. <TeamMember name="Juraj Majerik" photo /> <TeamMember name="Rodrigo Iloro" photo />
 
-What we will ship:
-* **Multiple experiments for a single feature flag** – Support running several experiments using the same feature flag, enabling more flexible experimentation workflows.
-* **Sticky bucketing** – Ensure consistent experiences by keeping the flag value stable for each user throughout the experiment.
-* **Experiment layers** – Prevent user overlap by allowing experiments to run in isolated layers.
+* **“Analyze results”** AI agent – An AI agent that reviews experiment results, highlights important findings, and explains them in plain language. It can suggest whether to continue the test, stop it early, or roll out a variant. The agent should also call out risks, like low sample size or unusual data patterns, to help teams make better decisions. <TeamMember name="Anders Asheim Hennum" photo />
 
-#### Objective 3: Awesome documentation <TeamMember name="Juraj Majerik" photo />
-Motivation: Present ourselves as a mature and sophisticated product through excellent documentation.
 
-What we will ship:
-* A clear, intuitive structure that supports both statistical methods and both versions of the query engine  
-* Detailed method explanations with examples  
-* Commonly used scenario walkthroughs  
-* AI-related content – Examples of how to run AI/prompt experiments
-* Add easy ways to get to the relevant docs from within the app
+#### Feature flags foundation
+Motivation: Experiments rely on flags, so we need to make sure the basics are solid and ready to support advanced use cases.
 
-#### Objective 4: Clean code  
-Motivation: Keep development fast and enjoyable.
+* **Anonymous -> Logged in users experiments** – Create a seamless experience for experiments that start with anonymous users but continue when the same user logs in. <TeamMember name="Anders Asheim Hennum" photo />
 
-What we will ship:
-* Use the same UI for both Bayesian and Frequentist results  
-* Break up `experimentLogic` into 5 - 8 smaller logics based on the single responsibility principle  
-* Isolate utility functions and ensure they are well-tested
+* **Feature flags integration** <TeamMember name="Anders Asheim Hennum" photo />
+    - Make it possible to run multiple experiments on the same feature flag
+    - Support boolean flags in experiments
+
+
+#### Metrics & results
+Motivation: Users need the right metrics and analysis options to get meaningful answers from experiments.
+
+* **Retention metric** – Add support for retention as a metric type, covering use cases like “users who return after 7 days”. This is the last major metric type missing from experiments. <TeamMember name="Rodrigo Iloro" photo />
+
+* **Metric breakdowns** – Enable users to break down experiment metrics by properties such as country, device, plan type, or any custom property. This allows deeper analysis of how variants perform across different user segments. <TeamMember name="Rodrigo Iloro" photo />
+
+* **Running time calculator** <TeamMember name="Juraj Majerik" photo />
+Build a new calculator with two functions:
+    - Before launch: let users enter their expected traffic and baseline conversion to estimate how long the experiment will take to reach significance.  
+    - During the experiment: show how much longer the experiment likely needs based on current progress and live data.

@@ -4,13 +4,11 @@ templateId:
     - template-brevo
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 You can use your PostHog event data to create and update contacts in Brevo. Here's everything you need to get started.
 
-<Requirements />
 
 ## Configuring Brevo
 

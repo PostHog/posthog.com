@@ -59,6 +59,7 @@ You can further customize how PostHog works through its configuration on initial
 | `enableSessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | Enable Recording of Session replay for Android and iOS.                                                                                                                                                                                                                                                    |
 | `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `null`                                 | Session replay configuration. See the [replay install docs](/docs/session-replay/installation) for more details.                                                                                                                                                                                                       |
 | `enablePersistSessionIdAcrossRestart`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | When true, persists the `$session_id` across app restarts. If false, `$session_id` always resets on app restart.                                                                                                                                                                                           |
+| `evaluationEnvironments`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Environment tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation tags (or no evaluation tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation environments documentation](/docs/feature-flags/evaluation-environments) for more details. |
 
 ## Capturing events
 
@@ -328,6 +329,8 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 ## Surveys
 
 To set up surveys, follow the [additional installation instructions for React Native](/docs/surveys/installation?tab=React+Native). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+> Note: URL and CSS selector targeting are not supported in React Native. Surveys that rely on these conditions will not appear.
 
 ## Disabling for local development
 

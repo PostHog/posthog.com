@@ -27,6 +27,8 @@ This is why the [Feature Flags team](/teams/feature-flags) has spent the last fe
 
 This post is about how we did it, and what we learned along the way.
 
+> Two years later, we made flags even faster and even more reliable. Check out [this newer post](/blog/even-faster-more-reliable-flags) for details.
+
 ## Special problem constraints
 
 Before we jump into how we improved things, it's worth listing out constraints that we can use to create solutions that otherwise wouldn't be possible.

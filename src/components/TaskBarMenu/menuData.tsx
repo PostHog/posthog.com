@@ -27,7 +27,6 @@ import {
     IconSparksJoy,
 } from 'components/OSIcons'
 import { useApp } from '../../context/App'
-import { useResponsive } from '../../hooks/useResponsive'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 
@@ -316,8 +315,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive } = useApp()
-    const { isMobile, isLoaded } = useResponsive()
+    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile } = useApp()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -416,12 +414,45 @@ export function useMenuData(): MenuType[] {
             items: mergedDocsMenu(allProducts),
         },
         {
-            trigger: 'Library',
+            trigger: 'Community',
             items: [
                 {
                     type: 'item',
                     label: 'PostHog newspaper',
                     link: '/community',
+                    icon: <Icons.IconNewspaper className="size-4 text-orange" />,
+                },
+                {
+                    type: 'item' as const,
+                    label: 'Forums',
+                    link: '/questions',
+                    icon: <Icons.IconMessage className="size-4 text-green" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Merch store',
+                    link: '/merch',
+                    icon: <Icons.IconStore className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Events',
+                    link: '/events',
+                    icon: <Icons.IconCalendar className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Cool tech jobs',
+                    link: '/cool-tech-jobs',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Content',
+                    disabled: true,
                 },
                 {
                     type: 'item',
@@ -432,11 +463,6 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Blog',
                     link: '/blog',
-                },
-                {
-                    type: 'item',
-                    label: "Everything we've learned",
-                    disabled: true,
                 },
                 {
                     type: 'item',
@@ -569,18 +595,6 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: [
-                {
-                    type: 'item',
-                    label: 'Merch store',
-                    link: '/merch',
-                    icon: <Icons.IconStore className="size-4 text-purple" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Cool tech jobs',
-                    link: '/cool-tech-jobs',
-                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
-                },
                 {
                     type: 'item',
                     label: 'DeskHog',
@@ -776,43 +790,42 @@ export function useMenuData(): MenuType[] {
     }
 
     // On mobile, include main navigation items in the logo menu
-    const logoMenuItems =
-        isLoaded && isMobile
-            ? [
-                  {
-                      type: 'item' as const,
-                      label: 'home.mdx',
-                      link: '/',
-                  },
-                  { type: 'separator' as const },
-                  // Main navigation items processed for mobile
-                  ...processMobileNavItems(),
-                  { type: 'separator' as const },
-                  // System items
-                  ...baseLogoMenuItems,
-              ]
-            : [
-                  // Desktop: only show system items
-                  ...baseLogoMenuItems,
-                  { type: 'separator' as const },
-                  {
-                      type: 'item' as const,
-                      label: 'Start screensaver',
-                      onClick: () => {
-                          setScreensaverPreviewActive(true)
-                      },
-                      shortcut: ['Shift', 'Z'],
-                  },
-                  {
-                      type: 'item' as const,
-                      label: 'Close all windows',
-                      disabled: windows.length < 1,
-                      onClick: () => {
-                          animateClosingAllWindows()
-                      },
-                      shortcut: ['Shift', 'X'],
-                  },
-              ]
+    const logoMenuItems = isMobile
+        ? [
+            {
+                type: 'item' as const,
+                label: 'home.mdx',
+                link: '/',
+            },
+            { type: 'separator' as const },
+            // Main navigation items processed for mobile
+            ...processMobileNavItems(),
+            { type: 'separator' as const },
+            // System items
+            ...baseLogoMenuItems,
+        ]
+        : [
+            // Desktop: only show system items
+            ...baseLogoMenuItems,
+            { type: 'separator' as const },
+            {
+                type: 'item' as const,
+                label: 'Start screensaver',
+                onClick: () => {
+                    setScreensaverPreviewActive(true)
+                },
+                shortcut: ['Shift', 'Z'],
+            },
+            {
+                type: 'item' as const,
+                label: 'Close all windows',
+                disabled: windows.length < 1,
+                onClick: () => {
+                    animateClosingAllWindows()
+                },
+                shortcut: ['Shift', 'X'],
+            },
+        ]
 
     return [
         {
@@ -828,7 +841,7 @@ export function useMenuData(): MenuType[] {
             items: logoMenuItems,
         },
         // On desktop, show main navigation items
-        ...(isLoaded && !isMobile ? mainNavItems : []),
+        ...(!isMobile ? mainNavItems : []),
     ]
 }
 
@@ -863,12 +876,6 @@ export const DocsItemsEnd = [
         label: 'Tracks',
         link: '/tracks',
         icon: <Icons.IconGraduationCap className="size-4 text-black" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Forums',
-        link: '/questions',
-        icon: <Icons.IconMessage className="size-4 text-green" />,
     },
 ]
 

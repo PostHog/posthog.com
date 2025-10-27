@@ -127,7 +127,7 @@ In contrast, a question like "What will I be working on?" indicates you're looki
 
 You could also ask:
 
-* "What's the hardest problem you're trying to solve right now?
+* "What's the hardest problem you're trying to solve right now?"
 * "What problem are you ignoring at the moment?"
 * "What's the biggest complaint your users have right now?"
 

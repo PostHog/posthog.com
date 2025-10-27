@@ -9,7 +9,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification } from '@posthog/icons'
+import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconSearch } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
@@ -18,6 +18,7 @@ import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
 import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
+import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 import { useInView } from 'react-intersection-observer'
 import useTopicsNav from '../../navs/useTopicsNav'
 import { useWindow } from '../../context/Window'
@@ -170,7 +171,7 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const { addWindow } = useApp()
+    const { addWindow, openSearch } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -299,7 +300,8 @@ export default function Inbox(props) {
                         showForward
                         showSearch
                         rightActionButtons={
-                            <>
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <OSButton icon={<IconSearch />} onClick={() => openSearch('questions')} />
                                 <CallToAction
                                     size="sm"
                                     onClick={() =>
@@ -322,10 +324,10 @@ export default function Inbox(props) {
                                         options={layoutOptions}
                                         onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
                                         value={sideBySide ? 'side-by-side' : 'stacked'}
-                                        className="-my-1 ml-2"
+                                        className="-my-1"
                                     />
                                 ) : null}
-                            </>
+                            </div>
                         }
                     />
 
@@ -412,7 +414,7 @@ export default function Inbox(props) {
                                                             <div className="hidden @3xl:block w-24 text-center">
                                                                 {numReplies}
                                                             </div>
-                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 ">
+                                                            <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 font-normal">
                                                                 <Tooltip trigger={dayjs(activeAt).fromNow()}>
                                                                     {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
                                                                     {dayjs(activeAt).format('h:mm A')}
@@ -440,7 +442,13 @@ export default function Inbox(props) {
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Lottie
                                                         animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75"
+                                                        className="size-6 opacity-75 text-secondary"
+                                                        className="size-6 opacity-75 dark:hidden"
+                                                        title="Loading questions..."
+                                                    />
+                                                    <Lottie
+                                                        animationData={hourglassAnimationWhite}
+                                                        className="size-6 opacity-75 hidden dark:block"
                                                         title="Loading questions..."
                                                     />
                                                 </div>
@@ -599,12 +607,14 @@ export default function Inbox(props) {
                                                 </div>
                                             </div>
                                             <ScrollArea>
-                                                <div className="p-5 pb-[64px]">
+                                                <div className="pb-[64px]">
                                                     <Question
+                                                        key={permalink}
                                                         id={permalink}
                                                         onQuestionReady={(question) => setQuestion(question)}
                                                         subscribeButton={false}
                                                         showSlug
+                                                        isInForum={true}
                                                     />
                                                 </div>
                                             </ScrollArea>

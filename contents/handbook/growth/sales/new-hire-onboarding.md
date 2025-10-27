@@ -83,7 +83,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 By the end of month 1:
  - Be leading customer calls and demos on your own
  - Have evaluations in flight (with support from the team if needed)
- - Have closed your first annual deal of any size
+ - Have closed your first prepaid credit deal of any size
 
 By the end of month 2:
  - Be leading evaluations on your own
@@ -150,7 +150,7 @@ By the end of month 1:
  - Successfully made contact with _everyone_ in your book of business
 
 By the end of month 2:
- - Have closed your first annual deal of any size (net new or conversion to annual)
+ - Have closed your first prepaid credit deal of any size (net new or conversion to)
  - Be leading evaluations on your own
  - Have identified some opportunities to add to your book from self-serve signups who aren't paying yet
 

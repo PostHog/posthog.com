@@ -19,7 +19,7 @@ We run email campaigns through Customer.io. Speak to <TeamMember name="Joe Marti
 <details>
 <summary>I'm interested in running, attending, or speaking at an event</summary>
 
-You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party planner". Read the [events strategy handbook](/handbook/brand/events) for more. 
+You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party planner". Read the [events strategy handbook](/handbook/marketing/events) for more. 
 </details>
 
 <details>
@@ -53,7 +53,7 @@ If another company is interested in building an integration with PostHog, raise 
 <details>
 <summary>Someone wants us to sponsor them</summary>
 
-If it's an influencer or podcast, refer them to <TeamMember name="Ian Vanagas" />.
+If it's an [influencer](/handbook/growth/marketing/influencers) or podcast, refer them to <TeamMember name="Ian Vanagas" />.
 
 We're not currently running newsletter sponsorships, but contact <TeamMember name="Lior Neu-ner" /> if you think it's sufficiently interesting.
 

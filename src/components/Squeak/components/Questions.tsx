@@ -42,7 +42,7 @@ export const Questions = ({
         <div>
             {hasQuestions && title && <h3>{title}</h3>}
             {hasQuestions && (
-                <ul className="m-0 p-0 list-none mb-6">
+                <ul className="not-prose m-0 p-0 list-none mb-6">
                     {questions.data.map((question) => {
                         return (
                             <li key={question.id} className="py-4 first:pt-0">
