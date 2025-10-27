@@ -57,7 +57,7 @@ Because the stability of production systems is critical, on-call involves weeken
 
 Before going on call, make sure you have the **Incident.io mobile app** [Android](https://play.google.com/store/apps/details?id=com.incidentio.incidentio&pli=1) / [iOS](https://apps.apple.com/us/app/incident-io/id6471268530) installed and configured. This way it'll be harder to miss an alert.
 
-> TRICKY: We use Slack auth for incident.io and Slack really doesn't like you using the mobile web version. Make sure to choose `Sign in with Slack` and then use your email to login, **not** google auth as that seems to cause redirect issues for some people.
+> TRICKY: We use Slack auth for incident.io and Slack really doesn't like you using the mobile web version. Make sure to choose `Sign in with Slack` and then use your email to login to Slack, **not** google auth as that seems to cause redirect issues for some people.
 
 To get a calendar with all your on-call shifts from incident.io go to the [schedules section](https://app.incident.io/posthog/on-call/schedules), select `Sync calendar` at the top right and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
 
