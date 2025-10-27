@@ -19,7 +19,7 @@ Marketing and customer success should primarily focus on this ICP, but should al
 | **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
 | **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO'ed |
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
-| **Examples** | PostHog anytime from their Series B to IPO, Supabase, 11Labs |
+| **Examples** | PostHog anytime from their Series B to IPO, Supabase, ElevenLabs |
 
 
 ## Our current Persona
