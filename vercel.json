@@ -1628,7 +1628,12 @@
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
-        }
+        },
+        {
+            "source": "/handbook/engineering/on-call-rotation",
+            "destination": "/handbook/engineering/operations/on-call-rotation"
+        },
+        { "source": "/handbook/engineering/incidents", "destination": "/handbook/engineering/operations/incidents" }
     ],
     "headers": [
         {
