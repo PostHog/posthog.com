@@ -39,10 +39,8 @@ We've not always been successful at building products for personas other than en
 
 ### New products
 
-With AI, we think the biggest change that has happened and will happen is: generalists > specialists. Before, products would be built by teams of engineers, PMs, designers, marketers and data engineers. Now, a single builder, using AI, can do a lot of these jobs, and that'll continue to be more true over time.
-
-Builders, whether they call themselves developers, product engineers or founders, have always been the most excited users of PostHog, and the keenest to use new products. **That means we want to build new products a builder would use**, products like error tracking, logs and LLM analytics.
+Engineers, whether they call themselves developers, product engineers or founders, have always been the most excited users of PostHog, and the keenest to use new products. **That means we want to build new products an engineer would use**, products like error tracking, logs and LLM analytics.
 
 There are also products that those builders will often be the first to set up and use, but currently hand over to specialists. Think of a data warehouse (handed over to data engineers), experimentation platform (handed over to PMs, growth engineers or analytics engineers) or messaging platform (marketing). We should build these products so that the builder can delay the point at which they need to hire a specialist to use that product. For example, by making it super easy to set up email campaigns (part written by AI) you don't need to hire a dedicated marketing person for a while.
 
-We don't want to build products where the initial persona is someone other than a builder. Think a CRM, customer support product or marketing tools.
+We don't want to build products where the initial persona is someone other than an engineer. Think a CRM, customer support product or marketing tools.
