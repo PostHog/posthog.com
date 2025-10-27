@@ -4596,7 +4596,7 @@ export const docsMenu = {
         {
             name: 'PostHog AI',
             icon: 'IconLogomark',
-            color: 'purple',
+            color: 'black',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [
