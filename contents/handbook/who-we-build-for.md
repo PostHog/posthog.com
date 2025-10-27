@@ -4,15 +4,15 @@ sidebar: Handbook
 showTitle: true
 ---
 
-AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework) or ICP (ie, the company), and our persona (ie, the person).
+We define who we build for as ICP (ie, the company) and the Persona (ie the actual person using the product).
+
+## Our current ICP
+
+AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework).
 
 We build for the people building products at **high-growth startups**. 
 
 Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** – customers that are likely to later become high-growth customers (e.g. PostHog itself during YC). We should be in maintenance mode for **hobbyists**, such as engineers building side projects. We want to be the first tool that technical founders add to their product.
-
-Because we have a lot of products, we support a few different _personas_, depending on the stage of the company (see [our current persona](#personas-vary-by-product-focus-and-maturity) section below).
-
-## Our current ICP
 
 | &nbsp; | High-growth startup |
 | --- | --- |
@@ -21,9 +21,10 @@ Because we have a lot of products, we support a few different _personas_, depend
 | **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
 | **Examples** | PostHog anytime from their Series B to IPO, Supabase, 11Labs |
 
-Each team will focus more or less on different members of the product team. This is detailed on their team pages.
 
-## Personas vary by product focus and maturity
+## Our current Persona
+
+Persona is the job title or role of the person actually using a product in PostHog. Each team will focus more or less on different members of the product team. This is detailed on their team pages.
 
 As companies get bigger, the type of person that uses a product changes. As an example:
 
@@ -36,6 +37,7 @@ Each product should start with a single persona, usually an early person (prefer
 How do you know if you have PMF and satisfied requirements? Look at churn. If the initial persona is churning from your product, you still have work to do to retain that persona before moving onto others. If instead the product has been handed off to another persona in the org, and _they_ are churning, that's an indication that you may need to start supporting the needs of this next persona.
 
 We've not always been successful at building products for personas other than engineers. We're now at a stage where we need to be in order to continue growing. 
+
 
 ### New products
 
