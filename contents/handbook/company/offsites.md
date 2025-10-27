@@ -42,7 +42,7 @@ Here’s how it works:
 - The team lead should message Kendal with their proposed dates and location.
 - Kendal will then go away and find suitable accommodation for the group.
 - Once that’s sorted, she’ll:
-  - Create a Slack channel for the offsite and add everyone who’s going.
+  - Create a Slack channel for the offsite (use `#offsite-[team]-[month]-[year]-[where]`) and add everyone who’s going.
   - Set up the offsite budget in Brex.
   - Update the team’s Canvas with:
     - Accommodation details and a handy map
