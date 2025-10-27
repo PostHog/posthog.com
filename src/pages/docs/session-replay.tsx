@@ -10,7 +10,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
@@ -139,7 +139,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                 imageClasses=""
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'How do I mask sensitive data?',
                     'Can I enable recordings only for certain users?',

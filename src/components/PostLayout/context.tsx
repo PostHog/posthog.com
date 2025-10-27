@@ -23,7 +23,7 @@ export const PostProvider: React.FC<ProviderProps> = ({
         darkMode = true,
         hideSidebar,
         sidebar,
-        askMax = false,
+        askPostHogAI = false,
         ...other
     },
     children,
@@ -88,7 +88,7 @@ export const PostProvider: React.FC<ProviderProps> = ({
                 hideSidebar,
                 sidebar,
                 menu,
-                askMax,
+                askPostHogAI,
                 contentContainerClasses,
                 tableOfContents,
             }}

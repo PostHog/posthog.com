@@ -11,7 +11,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import ReaderView from 'components/ReaderView'
 
 type SurveysProps = {
@@ -132,7 +132,7 @@ const Surveys: React.FC<SurveysProps> = () => {
                 imageClasses=""
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'Can I target a survey based on user behavior?',
                     'How do I create my own survey UI?',

@@ -10,7 +10,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import ReaderView from 'components/ReaderView'
 
 export const quickLinks = [
@@ -121,7 +121,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                 imageClasses=""
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'How can I watch recordings of users in my experiment?',
                     'Can I override a release condition?',

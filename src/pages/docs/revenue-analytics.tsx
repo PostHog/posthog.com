@@ -2,7 +2,7 @@ import React from 'react'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Link from 'components/Link'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import ReaderView from 'components/ReaderView'
 import Intro from 'components/Docs/Intro'
 import { docsMenu } from '../../navs'
@@ -32,7 +32,7 @@ export const Content = ({ quickLinks = true }) => {
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/revenue_analytics_hog_81ae754b5e.png"
             />
 
-            <AskMax
+            <AskPostHogAI
                 quickQuestions={[
                     'Can I track my revenue with PostHog?',
                     'What metrics can I track with revenue analytics?',

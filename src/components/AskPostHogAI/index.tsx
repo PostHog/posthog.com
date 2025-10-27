@@ -9,7 +9,7 @@ import { useApp } from '../../context/App'
 import { useLocation } from '@reach/router'
 import { useWindow } from '../../context/Window'
 
-interface AskMaxProps {
+interface AskPostHogAIProps {
     title?: string
     border?: boolean
     className?: string
@@ -18,14 +18,14 @@ interface AskMaxProps {
     children?: React.ReactNode
 }
 
-export default function AskMax({
+export default function AskPostHogAI({
     title = 'Questions?',
     border = false,
     className = '',
     quickQuestions,
     linkOnly = false,
     children,
-}: AskMaxProps) {
+}: AskPostHogAIProps) {
     const posthog = usePostHog()
     const { compact } = useLayoutData()
     const { openNewChat } = useApp()

@@ -23,7 +23,7 @@ import { ProductVideo } from './components/ProductVideo'
 import { StarRepoButton } from './components/StarRepoButton'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import { Steps, Step } from './components/Docs/Steps'
-import AskMax from './components/AskMax'
+import AskPostHogAI from './components/AskPostHogAI'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import TaskOwnershipTable from './components/TaskOwnershipTable'
@@ -56,7 +56,7 @@ export const shortcodes = {
     Step,
     SmallTeam,
     TeamMember,
-    AskMax,
+    AskPostHogAI,
     CountriesWeHireIn,
     FeatureOwnershipTable,
     TaskOwnershipTable,

@@ -11,7 +11,7 @@ import KeyboardShortcut from 'components/KeyboardShortcut'
 import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
-import AskMax from 'components/AskMax'
+import AskPostHogAI from 'components/AskPostHogAI'
 import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
 import ReaderView from 'components/ReaderView'
 import ZoomHover from 'components/ZoomHover'
@@ -515,9 +515,9 @@ export const DocsIndex = () => {
                             </p>
                             <ul>
                                 <li>
-                                    <AskMax linkOnly className="underline font-medium">
+                                    <AskPostHogAI linkOnly className="underline font-medium">
                                         Ask PostHog AI
-                                    </AskMax>
+                                    </AskPostHogAI>
                                     , our trusty AI chatbot. Start a chat on any docs page and PostHog AI will have the
                                     relevant context.
                                 </li>
