@@ -78,3 +78,32 @@ We do use a proxy for our own analytics! However, ad blockers specifically targe
 This means that even if we proxy our own tracking through a subdomain like `e.posthog.com`, ad blockers will still block it because they've specifically identified it as a PostHog tracking endpoint. You might notice this if you use an ad blocker on `us.posthog.com` - some of our internal feature flags may not load properly because the ad blocker is intercepting those requests.
 
 Your proxy works differently because ad blockers haven't specifically visited your domain to catalog your tracking setup. When you use a domain like `e.yourdomain.com`, it appears to ad blockers as just another part of your application rather than a known tracking service.
+
+### Does PostHog Cloud provide static IP addresses for firewall allowlisting?
+
+No, PostHog Cloud does not provide static IP addresses for its public API endpoints. These domains handle event ingestion, feature flag evaluation, session replay, and asset delivery. They use AWS infrastructure with load balancing, which rotates IPs for scalability and performance.
+
+**Domains that require access:**
+
+- **US Cloud:** `us.i.posthog.com`, `us-assets.i.posthog.com`
+- **EU Cloud:** `eu.i.posthog.com`, `eu-assets.i.posthog.com`
+- **Toolbar/internal metrics:** `internal-t.posthog.com`
+
+We recommend one of two approaches:
+
+**1. Domain-based filtering (if your firewall supports FQDN resolution)**
+
+Allow outbound HTTPS (port 443) traffic to:
+- `*.posthog.com` (covers all PostHog domains), or
+- Specific domains listed above for your region
+
+**2. Reverse proxy with static IP (most reliable)**
+
+- Set up a [reverse proxy](/docs/advanced/proxy) in your infrastructure with a known static IP
+- Configure that proxy to forward requests to PostHog Cloud domains
+- Allowlist only your own proxy's IP in your firewall
+- This gives you full control over the IP addressing
+
+The reverse proxy solution is particularly useful for enterprise firewalls (like F5 BIG-IP, Palo Alto, etc.) that require IP-based rules, since you maintain complete control over the network path.
+
+> **Note:** PostHog does provide static IP addresses for [data warehouse sources](/docs/cdp/sources) that need to connect to your databases, but these are separate from the public API endpoints.

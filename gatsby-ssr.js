@@ -28,11 +28,30 @@ export const wrapPageElement = ({ element, props: { location } }) => {
     )
 }
 
-export const onRenderBody = function ({ setPreBodyComponents }) {
+export const onRenderBody = function ({ setPreBodyComponents, setPostBodyComponents }) {
     setPreBodyComponents([
         React.createElement('script', {
             key: 'dark-mode',
             src: '/scripts/theme-init.js',
         }),
     ])
+
+    setPostBodyComponents([
+        React.createElement('script', {
+            key: 'initial-loader',
+            src: '/scripts/initial-loader.js',
+        }),
+    ])
+}
+
+export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+    const filteredComponents = getHeadComponents().filter((component) => {
+        // remove the inline script added by the gatsby-remark-autolink-headers plugin
+        if (component?.type === 'script' && component?.key === 'gatsby-remark-autolink-headers-script') {
+            return false
+        }
+        return true
+    })
+
+    replaceHeadComponents(filteredComponents)
 }

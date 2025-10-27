@@ -4,13 +4,11 @@ templateId:
     - template-airtable
 ---
 
-import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 It’s easier than ever to export realtime PostHog data to satisfy the Airtable fanatics in your life.
 
-<Requirements />
 
 ## Configuring Airtable
 

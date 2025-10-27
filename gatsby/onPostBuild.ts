@@ -337,56 +337,57 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     const sdkReferencesQuery = (await graphql(`
         query {
-            allSdkReferencesJson {
-                edges {
-                    node {
+            allSdkReferences {
+                nodes {
+                    info {
+                        description
                         id
-                        hogRef
-                        info {
-                            version
-                            description
-                            id
-                            slugPrefix
-                            specUrl
-                            title
-                        }
-                        classes {
-                            description
-                            id
-                            title
-                            functions {
-                                category
-                                description
-                                details
-                                id
-                                showDocs
-                                title
-                                releaseTag
-                                examples {
-                                    code
-                                    id
-                                    name
-                                }
-                                params {
-                                    description
-                                    isOptional
-                                    type
-                                    name
-                                }
-                                returnType {
-                                    id
-                                    name
-                                }
-                            }
-                        }
-                        categories
+                        specUrl
+                        slugPrefix
+                        title
+                        version
                     }
+                    referenceId
+                    hogRef
+                    id
+                    categories
+                    classes {
+                        description
+                        functions {
+                            category
+                            description
+                            details
+                            examples {
+                                code
+                                name
+                                id
+                            }
+                            id
+                            params {
+                                description
+                                isOptional
+                                name
+                                type
+                            }
+                            path
+                            releaseTag
+                            showDocs
+                            returnType {
+                                id
+                                name
+                            }
+                            title
+                        }
+                        id
+                        title
+                    }
+                    version
                 }
             }
         }
-    `)) as { data: { allSdkReferencesJson: { edges: { node: SdkReferenceData }[] } } }
+    `)) as { data: { allSdkReferences: { nodes: SdkReferenceData[] } } }
 
-    sdkReferencesQuery.data.allSdkReferencesJson.edges.forEach(({ node }) => {
+    sdkReferencesQuery.data.allSdkReferences.nodes.forEach((node) => {
         generateSdkReferencesMarkdown(node)
     })
 

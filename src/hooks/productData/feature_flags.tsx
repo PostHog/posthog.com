@@ -10,12 +10,13 @@ export const featureFlags = {
     handle: 'feature_flags',
     type: 'feature_flags',
     slug: 'feature-flags',
-    color: 'green',
+    color: 'seagreen',
     colorSecondary: 'seagreen',
     category: 'product_engineering',
     seo: {
-        title: 'Feature flags - PostHog',
-        description: 'Safely roll out features to specific users or groups',
+        title: 'Feature Flags – Ship safely and control rollouts with PostHog',
+        description:
+            "Deploy new features confidently with Feature Flags. Test in production, target cohorts, and measure impact through PostHog's integrated analytics and experiments.",
     },
     overview: {
         title: 'Safely roll out features to specific users or groups',

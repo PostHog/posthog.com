@@ -132,7 +132,7 @@ Beyond founder mode, what are some specific ways we aim to improve our workflows
 
 - Trying different models with the same tools to figure out which models are good at what. For example, a lot of our engineers find switching to Opus extremely beneficial (over Sonnet) and have been experimenting with Qwen in Cursor.
 
-- Building and dogfooding our own AI engineering tools like [Max AI](/docs/max-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
+- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
 
 - Nearly every hackathon has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
 
