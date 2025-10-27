@@ -99,7 +99,7 @@ Critical alerts will trigger per-team escalation policies which go like this:
 
 > **If at any point you get paged - always respond!** Even if you are unavailable you should respond as such (either via the app or the personal Slack notification). That way the escalation can continue to the next available person.
 
-By default if you are being paged, especially as the global on-call, the alert is considered critical, meaning it almost definitely requires attention. Your primary job is to:
+By default if you are being paged, especially as the global on-call, the alert is considered critical, meaning it almost definitely requires attention.
 
 Every alert should have associated Grafana and Runbook links allowing you to quickly get more visual details of what is going on and how to respond.
 
