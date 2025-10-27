@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 At PostHog, every engineer is responsible for maintaining their team's services and systems. That includes:
-* Tracking and visualising key performance metrics
+* Tracking and visualizing key performance metrics
 * Configuring automated alerting
 * Documenting runbooks for on-call resolution
 * First-responder to team-owned services during working hours
