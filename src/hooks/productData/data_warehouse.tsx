@@ -49,6 +49,20 @@ export const dataWarehouse = {
         max: 1000000000,
     },
     volume: 1000000,
+    includeAddonRates: true,
+    addonSliders: [
+        {
+            key: 'data_warehouse_historical',
+            label: 'Data warehouse historical syncs',
+            sliderConfig: {
+                marks: [1000000, 10000000, 100000000, 1000000000, 10000000000],
+                min: 1000000,
+                max: 10000000000,
+            },
+            volume: 1000000,
+            unit: 'row',
+        },
+    ],
     customers: {
         headshotpro: {
             headline: 'analyzes Google Adwords data in PostHog',
