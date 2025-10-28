@@ -415,7 +415,7 @@ export const dataPipelines = {
         },
         {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
-            url: '/docs/cdp/batch-exports/fivetran-airbyte',
+            url: '/docs/cdp/fivetran-airbyte',
         },
     ],
 }
