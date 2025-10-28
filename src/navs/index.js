@@ -3556,8 +3556,8 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Frequentist method',
-                    url: '/docs/experiments/frequentist-method',
+                    name: 'Frequentist statistics',
+                    url: '/docs/experiments/statistics-frequentist',
                     icon: 'IconBook',
                     color: 'blue',
                 },

@@ -2,15 +2,9 @@
 title: Frequentist statistics
 ---
 
-PostHog's frequentist analysis engine provides a statistically rigorous and widely understood approach to experimentation. It uses t-tests and confidence intervals to determine whether differences between variants are statistically significant and directly answers the question: "Can we be confident this difference isn't due to chance?"
+PostHog's frequentist analysis engine provides a statistically rigorous and widely understood approach to experimentation. It uses t-tests and confidence intervals to determine whether differences between variants are statistically significant and directly answers the question:
 
-The engine transforms raw experiment data through a clear 5-step pipeline:
-
-1. **Aggregate** user-level data into sufficient statistics
-2. **Validate** data quality and sample size requirements
-3. **Calculate** effect size and its uncertainty
-4. **Perform** statistical hypothesis testing
-5. **Generate** confidence intervals and significance results
+> "Can we be confident this difference isn't due to chance?"
 
 ## Input data: What goes into the analysis
 
@@ -28,9 +22,19 @@ Measure numeric values for each user, such as revenue per user or session durati
 
 Combine two metrics by dividing one by another, like revenue per order or clicks per session. These help understand efficiency and relationship between different user behaviors. ([Learn more about ratio metrics](/docs/experiments/metrics#ratio))
 
-## Step 1: Data aggregation
+## What the experimentation pipeline does
 
-### Aggregation into sufficient statistics
+The engine transforms raw experiment data through a clear 5-step pipeline:
+
+1. **Aggregate** user-level data into sufficient statistics
+2. **Validate** data quality and sample size requirements
+3. **Calculate** effect size and its uncertainty
+4. **Perform** statistical hypothesis testing
+5. **Generate** confidence intervals and significance results
+
+### Step 1: Data aggregation
+
+#### Aggregation into sufficient statistics
 
 The raw event data is aggregated into sufficient statistics for each variant:
 
@@ -50,11 +54,11 @@ The raw event data is aggregated into sufficient statistics for each variant:
 
 These sufficient statistics contain all the information needed to calculate means, variances, and standard errors without storing individual user data.
 
-### Outlier handling (winsorization)
+#### Outlier handling (winsorization)
 
 For mean metrics, extreme outliers can skew results. PostHog optionally applies winsorization by trimming values below a lower percentile (e.g., 1st percentile) and capping values above an upper percentile (e.g., 99th percentile). This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are configured per metric when setting up the experiment.
 
-## Step 2: Data quality validation
+### Step 2: Data quality validation
 
 Before analysis proceeds, the engine validates the data quality based on metric type:
 
@@ -70,9 +74,9 @@ Before analysis proceeds, the engine validates the data quality based on metric 
 
 If any validation fails, the analysis stops and returns appropriate error messages instead of potentially misleading results.
 
-## Step 3: Calculate effect size and variance
+### Step 3: Calculate effect size and variance
 
-### Effect size calculation
+#### Effect size calculation
 
 The effect size quantifies how much better (or worse) the treatment variant performs compared to control. PostHog uses relative differences by default, which express changes as percentages:
 
@@ -82,7 +86,7 @@ effect_size = (treatment_mean - control_mean) / control_mean
 
 For example, if control has a 10% conversion rate and treatment has 12%, the relative difference is +20%. This is what PostHog displays in the UI (e.g., "Variant B: +20% conversion rate"). Relative differences are intuitive for business metrics because they show the proportional change, making it easy to understand the business impact.
 
-### Variance calculation
+#### Variance calculation
 
 Variance measures the spread or uncertainty in our data. Think of it as quantifying "how sure are we about this number?" A high variance means the data points are spread out and we're less certain about the true average. A low variance means the data is consistent and we can be more confident.
 
@@ -120,17 +124,17 @@ pooled_variance = treatment_variance/(n_treatment × control_mean²) + (treatmen
 
 This pooled variance determines the width of our confidence intervals and the sensitivity of our statistical test.
 
-## Step 4: Statistical hypothesis testing
+### Step 4: Statistical hypothesis testing
 
 The frequentist approach tests a specific hypothesis about the difference between variants using a two-sided t-test. This follows the classical statistical framework of null hypothesis significance testing.
 
-### The null hypothesis
+#### The null hypothesis
 
 The null hypothesis (H₀) states that there is no difference between the treatment and control:
 - H₀: effect_size = 0 (no difference)
 - H₁: effect_size ≠ 0 (there is a difference)
 
-### The t-test
+#### The t-test
 
 PostHog uses Welch's t-test, which handles unequal variances between groups:
 
@@ -146,7 +150,7 @@ df = (s₁²/n₁ + s₂²/n₂)² / [(s₁²/n₁)²/(n₁-1) + (s₂²/n₂)²
 
 Where s₁² and s₂² are the sample variances, and n₁ and n₂ are the sample sizes.
 
-### P-value calculation
+#### P-value calculation
 
 The p-value represents the probability of observing a difference this large or larger if there truly was no effect:
 
@@ -156,15 +160,15 @@ p_value = 2 × (1 - t_cdf(|t_statistic|, degrees_of_freedom))
 
 This uses the cumulative distribution function (CDF) of the t-distribution to calculate the two-sided p-value.
 
-## Step 5: Generate results
+### Step 5: Generate results
 
 From the statistical test, we generate the key metrics shown in the PostHog UI.
 
-### Point estimate
+#### Point estimate
 
 The best estimate of the true effect size - this is simply the observed difference between treatment and control, expressed as a relative percentage by default.
 
-### Confidence interval
+#### Confidence interval
 
 The 95% confidence interval gives a range of plausible values for the true effect:
 
@@ -177,7 +181,7 @@ Where `t_critical` is the critical value from the t-distribution at the 95% conf
 
 You can interpret this as: "If we repeated this experiment many times, 95% of confidence intervals would contain the true effect size."
 
-### Statistical significance
+#### Statistical significance
 
 A result is marked as "statistically significant" when we have strong evidence against the null hypothesis:
 
