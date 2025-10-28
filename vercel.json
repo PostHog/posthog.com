@@ -1631,6 +1631,11 @@
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
         },
+        {
+            "source": "/handbook/engineering/on-call-rotation",
+            "destination": "/handbook/engineering/operations/on-call-rotation"
+        },
+        { "source": "/handbook/engineering/incidents", "destination": "/handbook/engineering/operations/incidents" },
         { "source": "/handbook/who-we-are-building-for", "destination": "/handbook/who-we-build-for" }
     ],
     "headers": [

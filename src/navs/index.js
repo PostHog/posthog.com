@@ -768,28 +768,24 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Internal processes',
+                name: 'Operations',
                 url: '',
                 children: [
                     {
                         name: 'Support hero',
-                        url: '/handbook/engineering/support-hero',
-                    },
-                    {
-                        name: 'Feature ownership',
-                        url: '/handbook/engineering/feature-ownership',
-                    },
-                    {
-                        name: 'Handling incidents',
-                        url: '/handbook/engineering/incidents',
+                        url: '/handbook/engineering/operations/support-hero',
                     },
                     {
                         name: 'On-call rotation',
-                        url: '/handbook/engineering/on-call-rotation',
+                        url: '/handbook/engineering/operations/on-call-rotation',
                     },
                     {
-                        name: 'Bug prioritization',
-                        url: '/handbook/engineering/bug-prioritization',
+                        name: 'Handling incidents',
+                        url: '/handbook/engineering/operations/incidents',
+                    },
+                    {
+                        name: 'Post-mortems',
+                        url: '/handbook/engineering/operations/post-mortems',
                     },
                 ],
             },
@@ -930,6 +926,14 @@ export const handbookSidebar = [
                         ],
                     },
                 ],
+            },
+            {
+                name: 'Feature ownership',
+                url: '/handbook/engineering/feature-ownership',
+            },
+            {
+                name: 'Bug prioritization',
+                url: '/handbook/engineering/bug-prioritization',
             },
             {
                 name: 'Shipping & releasing',
@@ -1217,7 +1221,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Incidents & maintenance',
-                url: '/handbook/engineering/incidents#customer-communications',
+                url: '/handbook/engineering/operations/incidents#customer-communications',
             },
             {
                 name: 'Internal processes',
