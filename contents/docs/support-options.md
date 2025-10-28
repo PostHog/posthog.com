@@ -89,12 +89,13 @@ Anybody using PostHog Cloud can raise a bug, submit feedback or otherwise ask fo
 
 In order to prioritise our responses we ask you to indicate the impact an issue is having for you.  When creating a ticket you'll be asked to choose a severity level from one of the following:
 
-| **Level** | **Impact**                                                                                        | **Examples**                                                                                                                                         |
-|-----------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Critical  | PostHog is completely unavailable or other significant business impact                         | <ul> <li>PostHog Cloud UI is unavailable</li> <li>Feature Flags API not responding</li> <li>Data loss</li> <li>Security breach</li> </ul>            |
-| High      | Key features of the product are unavailable, causing major inconvenience or limited functionality | <ul><li>Dashboards not loading</li><li>Session Replays not loading</li><li>Data Ingestion is delayed</li><li>Feature Flag targeting issues</li></ul> |
-| Medium    | There are issues with the product, but the impact is limited                                      | <ul><li>Insights are slow to load</li><li>Session replays have missing information</li></ul>                                                         |
-| Low       | Requests that have minimal impact on the usability of the product                                 | <ul><li>Feature requests</li><li>Usage questions</li></ul>                                                                                           |                                                                                                                                           |                                                                        |                                                                                                 |
+| **Level** | **Impact** | **Examples** |
+| --- | --- | --- |
+| Critical | PostHog is completely unavailable or other significant business impact | <ul><li>PostHog Cloud UI is unavailable</li><li>Feature Flags API not responding</li><li>Data loss</li><li>Security breach</li></ul> |
+| High | Key features of the product are unavailable, causing major inconvenience or limited functionality | <ul><li>Dashboards not loading</li><li>Session Replays not loading</li><li>Data ingestion is delayed</li><li>Feature flag targeting issues</li></ul> |
+| Medium | There are issues with the product, but the impact is limited | <ul><li>Insights are slow to load</li><li>Session replays have missing information</li></ul> |
+| Low | Requests that have minimal impact on the usability of the product | <ul><li>Feature requests</li><li>Usage questions</li></ul> |
+
 ## Dedicated Slack
 
 For certain paid customers we support you through a private Slack channel. This helps us all get on the same side - and it's just more fun for everyone.

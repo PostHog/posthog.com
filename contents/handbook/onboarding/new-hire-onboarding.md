@@ -57,7 +57,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few colleagues (dep
 - Toolkit and internal processes.
 - No stupid questions session.
 
-Detailed checklist [here](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
+Detailed checklist available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0).
 
 ## Weeks 3-4
 
