@@ -59,7 +59,7 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 - Why was churn so high last month? Can we identify any reasons?
 - Where in the onboarding funnel do new users struggle?
 - Can we find leading indicators that predict long-term product usage? (e.g. Facebook’s 7 friends in 10 days)
-- Are there any difference between [high ICP](/handbook/who-we-are-building-for) and non ICP customers in how they use the product?
+- Are there any difference between [high ICP](/handbook/who-we-build-for) and non ICP customers in how they use the product?
 - Are our 10 biggest customers happy users of the product?
 
 ## In-sync or async?

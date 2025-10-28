@@ -413,6 +413,10 @@ export const dataPipelines = {
             color: 'blue',
             featured: true,
         },
+        {
+            name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
+            url: '/docs/cdp/fivetran-airbyte',
+        },
     ],
 }
 
@@ -444,7 +448,7 @@ export const handbookSidebar = [
             },
             {
                 name: '4. Who we are building for',
-                url: '/handbook/who-we-are-building-for',
+                url: '/handbook/who-we-build-for',
             },
             {
                 name: '5. How we make users happy',
@@ -1482,6 +1486,16 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Use cases',
+                url: '',
+                children: [
+                    {
+                        name: 'Chrome Extension Billing Issues',
+                        url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
+                    },
+                ],
+            },
+            {
                 name: 'Getting people to talk to you',
                 url: '/handbook/growth/sales/getting-people-to-talk-to-you',
             },
@@ -2278,6 +2292,7 @@ export const docsMenu = {
                     name: 'AI engineering',
                     url: '/docs/ai-engineering',
                     icon: 'IconLlmPromptEvaluation',
+                    color: 'red',
                     children: [
                         {
                             name: 'Overview',
@@ -3544,14 +3559,14 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Statistics overview',
-                    url: '/docs/experiments/statistics',
-                    icon: 'IconSquareRoot',
+                    name: 'Bayesian statistics',
+                    url: '/docs/experiments/statistics-bayesian',
+                    icon: 'IconFlask',
                     color: 'purple',
                 },
                 {
-                    name: 'Frequentist method',
-                    url: '/docs/experiments/frequentist-method',
+                    name: 'Frequentist statistics',
+                    url: '/docs/experiments/statistics-frequentist',
                     icon: 'IconBook',
                     color: 'blue',
                 },
@@ -4588,8 +4603,8 @@ export const docsMenu = {
         },
         {
             name: 'PostHog AI',
-            icon: 'IconMagicWand',
-            color: 'purple',
+            icon: 'IconLogomark',
+            color: 'black',
             url: '/docs/posthog-ai',
             description: 'AI-powered product analyst and assistant',
             children: [

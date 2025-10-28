@@ -18,7 +18,7 @@ Some of the influencers we sponsor include:
 
 - You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we’ve already sponsored, inbound, and [Passionfroot](https://www.passionfroot.me/).
 
-- Their audience needs to be relevant to us, ideally targeting our [ICP](/handbook/who-we-are-building-for), but broadly engineers and founders.
+- Their audience needs to be relevant to us, ideally targeting our [ICP](/handbook/who-we-build-for), but broadly engineers and founders.
 
 - Even within this group, there are some categories to avoid like job interview prep, career growth, low-level engineering, and heavy computer science focus. Try to find web or mobile developers, product engineers, startup founders, and indiehackers instead.
 
