@@ -12,15 +12,15 @@ For example, instead of saying "statistically significant at p < 0.05," you get 
 
 The Bayesian engine processes three types of metrics:
 
-#### Funnel metrics
+### Funnel metrics
 
 Track whether users complete a specific action like "Did they complete checkout?" These are yes/no outcomes that we analyze as conversion rates. [Learn more about funnel metrics](/docs/experiments/metrics#funnel).
 
-#### Mean metrics
+### Mean metrics
 
 Measure numeric values for each user, such as revenue per user or session duration. We calculate the average value across all users in each variant. [Learn more about mean metrics](/docs/experiments/metrics#mean).
 
-#### Ratio metrics
+### Ratio metrics
 
 Combine two metrics by dividing one by another, like revenue per order or clicks per session. These help understand efficiency and relationship between different user behaviors. [Learn more about ratio metrics](/docs/experiments/metrics#ratio)
 
@@ -183,9 +183,9 @@ is_significant = chance_to_win > 0.95 or chance_to_win < 0.05
 
 This means we're at least 95% confident that one variant is better than the other.
 
-### Mathematical formulas reference
+## Mathematical formulas reference
 
-#### Posterior update with Gaussian conjugate priors
+### Posterior update with Gaussian conjugate priors
 
 For those interested in the mathematical details, here's how Bayesian updating works using Gaussian conjugate priors (a mathematical framework where prior and posterior distributions have the same form):
 
@@ -206,7 +206,7 @@ The key insight is that precision (inverse of variance) represents how "confiden
 
 With non-informative priors (τ₀ → 0), this simplifies to μₙ ≈ x̄ and σₙ² ≈ σ²/n.
 
-#### Delta method for ratio metrics
+### Delta method for ratio metrics
 
 For a ratio R = M/D where M and D are random variables, the delta method provides a linear approximation for the variance:
 
@@ -217,7 +217,7 @@ Var[R] ≈ (1/E[D]²)[Var[M] + R²×Var[D] - 2R×Cov(M,D)]
 
 This first-order Taylor approximation works well when the coefficient of variation of D is small (< 0.3), meaning the denominator doesn't vary too much relative to its mean.
 
-#### What about multiple variants?
+### What about multiple variants?
 
 When testing multiple variants (A/B/C/D tests):
 - Each variant is compared to control independently
