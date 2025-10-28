@@ -8,6 +8,24 @@ For example, instead of saying "statistically significant at p < 0.05," you get 
 
 > "There's a 96% chance that variant B increases conversion rate."
 
+## Input data: What goes into the analysis
+
+The Bayesian engine processes three types of metrics:
+
+#### Funnel metrics
+
+Track whether users complete a specific action like "Did they complete checkout?" These are yes/no outcomes that we analyze as conversion rates. [Learn more about funnel metrics](/docs/experiments/metrics#funnel).
+
+#### Mean metrics
+
+Measure numeric values for each user, such as revenue per user or session duration. We calculate the average value across all users in each variant. [Learn more about mean metrics](/docs/experiments/metrics#mean).
+
+#### Ratio metrics
+
+Combine two metrics by dividing one by another, like revenue per order or clicks per session. These help understand efficiency and relationship between different user behaviors. [Learn more about ratio metrics](/docs/experiments/metrics#ratio)
+
+## What the experimentation pipeline does
+
 The engine transforms raw experiment data through a clear 5-step pipeline:
 
 1. **Aggregate** user-level data into sufficient statistics
@@ -16,25 +34,9 @@ The engine transforms raw experiment data through a clear 5-step pipeline:
 4. **Update** beliefs using Bayesian inference
 5. **Generate** intuitive probability-based results
 
-## Input data: What goes into the analysis
+### Step 1: Data aggregation
 
-The Bayesian engine processes three types of metrics:
-
-### Funnel metrics
-
-Track whether users complete a specific action like "Did they complete checkout?" These are yes/no outcomes that we analyze as conversion rates. [Learn more about funnel metrics](/docs/experiments/metrics#funnel).
-
-### Mean metrics
-
-Measure numeric values for each user, such as revenue per user or session duration. We calculate the average value across all users in each variant. [Learn more about mean metrics](/docs/experiments/metrics#mean).
-
-### Ratio metrics
-
-Combine two metrics by dividing one by another, like revenue per order or clicks per session. These help understand efficiency and relationship between different user behaviors. [Learn more about ratio metrics](/docs/experiments/metrics#ratio)
-
-## Step 1: Data aggregation
-
-### Aggregation into sufficient statistics
+#### Aggregation into sufficient statistics
 
 The raw event data is aggregated into sufficient statistics for each variant:
 
@@ -54,11 +56,11 @@ The raw event data is aggregated into sufficient statistics for each variant:
 
 These sufficient statistics contain all the information needed to calculate means, variances, and covariances without storing individual user data.
 
-### Outlier handling (winsorization)
+#### Outlier handling (winsorization)
 
-For mean metrics, extreme outliers can skew results. PostHog optionally applies winsorization by trimming values below a lower percentile (e.g., 1st percentile) and capping values above an upper percentile (e.g., 99th percentile). This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are configured per metric when setting up the experiment.
+For mean metrics, extreme outliers can skew results. PostHog optionally applies winsorization by trimming values below a lower percentile (e.g., 1st percentile) and capping values above an upper percentile (e.g., 99th percentile). This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are [configured per metric](https://posthog.com/docs/experiments/metrics#outlier-handling) when setting up the experiment.
 
-## Step 2: Data quality validation
+### Step 2: Data quality validation
 
 Before analysis proceeds, the engine validates the data quality based on metric type:
 
@@ -74,9 +76,9 @@ Before analysis proceeds, the engine validates the data quality based on metric 
 
 If any validation fails, the analysis stops and returns appropriate error messages instead of potentially misleading results.
 
-## Step 3: Calculate effect size and variance
+### Step 3: Calculate effect size and variance
 
-### Effect size calculation
+#### Effect size calculation
 
 The effect size quantifies how much better (or worse) the treatment variant performs compared to control. PostHog uses relative differences by default, which express changes as percentages:
 
@@ -86,7 +88,7 @@ effect_size = (treatment_mean - control_mean) / control_mean
 
 For example, if control has a 10% conversion rate and treatment has 12%, the relative difference is +20%. This is what PostHog displays in the UI (e.g., "Variant B: +20% conversion rate"). Relative differences are intuitive for business metrics because they show the proportional change, making it easy to understand the business impact.
 
-### Variance calculation
+#### Variance calculation
 
 Variance measures the spread or uncertainty in our data. Think of it as quantifying "how sure are we about this number?" A high variance means the data points are spread out and we're less certain about the true average. A low variance means the data is consistent and we can be more confident.
 
@@ -117,15 +119,15 @@ effect_variance = treatment_variance/n_treatment + control_variance/n_control
 
 This combined variance is what determines the width of our credible intervals and our confidence in the results.
 
-## Step 4: Bayesian posterior update
+### Step 4: Bayesian posterior update
 
 The Bayesian approach combines prior beliefs with observed data to create an updated (posterior) distribution of the effect size. This posterior distribution represents our best understanding of the true effect, accounting for all uncertainty.
 
-### The prior distribution
+#### The prior distribution
 
 PostHog uses **non-informative priors** with a mean of 0 (no expected effect) and very large variance (highly uncertain). This essentially means "let the data speak for itself" - our results are driven entirely by the observed data, not by any preconceived notions about what the effect should be.
 
-### The posterior distribution
+#### The posterior distribution
 
 With a non-informative prior, the math simplifies:
 
@@ -142,11 +144,11 @@ Effect Size ~ Normal(posterior_mean, posterior_variance)
 
 This normal distribution represents our updated belief about the true effect size, incorporating all the uncertainty from our finite sample.
 
-## Step 5: Generate results
+### Step 5: Generate results
 
 From the posterior distribution, we calculate the key metrics shown in the PostHog UI.
 
-### Chance to win
+#### Chance to win
 
 The probability that the treatment variant is actually better than control:
 
@@ -160,7 +162,7 @@ chance_to_win = NormalCDF(0, posterior_mean, posterior_std)
 
 This uses the cumulative distribution function (CDF) of the normal distribution to calculate the probability that the effect size is positive (improvement) or negative (degradation).
 
-### Credible interval
+#### Credible interval
 
 The 95% credible interval gives a range where the true effect size likely lies:
 
@@ -171,7 +173,7 @@ upper_bound = posterior_mean + 1.96 × posterior_std
 
 You can directly interpret this as: "There's a 95% probability the true effect lies in this range."
 
-### Significance (decisiveness)
+#### Significance (decisiveness)
 
 A result is marked as "significant" (or decisive) when we have strong evidence:
 
@@ -181,9 +183,9 @@ is_significant = chance_to_win > 0.95 or chance_to_win < 0.05
 
 This means we're at least 95% confident that one variant is better than the other.
 
-## Mathematical formulas reference
+### Mathematical formulas reference
 
-### Posterior update with Gaussian conjugate priors
+#### Posterior update with Gaussian conjugate priors
 
 For those interested in the mathematical details, here's how Bayesian updating works using Gaussian conjugate priors (a mathematical framework where prior and posterior distributions have the same form):
 
@@ -204,7 +206,7 @@ The key insight is that precision (inverse of variance) represents how "confiden
 
 With non-informative priors (τ₀ → 0), this simplifies to μₙ ≈ x̄ and σₙ² ≈ σ²/n.
 
-### Delta method for ratio metrics
+#### Delta method for ratio metrics
 
 For a ratio R = M/D where M and D are random variables, the delta method provides a linear approximation for the variance:
 
@@ -215,7 +217,7 @@ Var[R] ≈ (1/E[D]²)[Var[M] + R²×Var[D] - 2R×Cov(M,D)]
 
 This first-order Taylor approximation works well when the coefficient of variation of D is small (< 0.3), meaning the denominator doesn't vary too much relative to its mean.
 
-### What about multiple variants?
+#### What about multiple variants?
 
 When testing multiple variants (A/B/C/D tests):
 - Each variant is compared to control independently
