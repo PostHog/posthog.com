@@ -4374,6 +4374,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Traces',
+                    url: '/docs/llm-analytics/traces',
+                    icon: 'IconUserPaths',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Spans',
                     url: '/docs/llm-analytics/spans',
                     icon: 'IconBrackets',
@@ -4381,10 +4388,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Traces',
-                    url: '/docs/llm-analytics/traces',
-                    icon: 'IconUserPaths',
-                    color: 'orange',
+                    name: 'Sessions',
+                    url: '/docs/llm-analytics/sessions',
+                    icon: 'IconMessages',
+                    color: 'blue',
                     featured: true,
                 },
                 {
