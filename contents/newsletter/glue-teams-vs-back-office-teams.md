@@ -29,7 +29,7 @@ But then you grow. Areas need to be split up for ownership. Some bits get choppe
 
 ## Two types of teams
 
-As product-focused companies scale, you’ll hear calls for two kinds of engineering teams: **back-office teams** and **glue teams.** [^1]
+As product-focused companies [scale](/newsletter/building-a-startup-that-scales), you’ll hear calls for two kinds of engineering teams: **back-office teams** and **glue teams.** [^1]
 
 People think they’re the same because they both:
 
