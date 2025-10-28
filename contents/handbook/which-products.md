@@ -9,7 +9,7 @@ Shipping them in the right order is key to a fast return on investment from ever
 
 ## How we pick new products
 
-Like any hit-driven business model, it's hard to predict what products will do well. At any time, we want to work on a mix of new products. Some we're very sure will do well, others that are more of a bet with a potentially big outcome.
+Like any hit-driven business model, it's hard to predict what products will do well. At any time, we want to work on a mix of new products. Some we're very sure will do well, others that are more of a bet with a potentially big outcome. This guidance is therefore less prescriptive!
 
 Products we know will work well if we ship them:
 - Products engineers use at all company stages
