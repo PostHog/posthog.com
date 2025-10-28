@@ -1,0 +1,63 @@
+// Row configuration for revenue analytics feature comparison slide
+export const revenueAnalyticsComparisonRows = [
+    { type: 'header', label: 'Core Features' },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'revenue_tracking',
+        label: 'Revenue tracking',
+        description: 'Track revenue from payment processors',
+    },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'event_based_revenue_tracking',
+        label: 'Event-based revenue tracking',
+        description: 'Track revenue for individual events and features',
+    },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'native_multi_source_revenue_tracking',
+        label: 'Native multi-source revenue tracking',
+        description: 'Aggregate revenue from multiple sources in one place',
+    },
+    { type: 'header', label: 'Accounting' },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'deferred_revenue',
+        label: 'Deferred revenue',
+        description: 'Automatic deferred revenue recognition for subscriptions',
+    },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'multi_currency_support',
+        label: 'Multi-currency support',
+        description: 'Handle payments in different currencies with conversion',
+    },
+    { type: 'header', label: 'Integration & Analysis' },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'product_analytics_integration',
+        label: 'Product analytics integration',
+        description: 'Connect revenue data with user behavior',
+    },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'sql_access',
+        label: 'SQL access',
+        description: 'Query revenue data directly with SQL',
+    },
+    { type: 'header', label: 'Forecasting' },
+    {
+        type: 'feature',
+        product: 'revenue_analytics',
+        feature: 'revenue_prediction',
+        label: 'Revenue prediction',
+        description: 'Predict future revenue based on historical data',
+    },
+]

@@ -21,6 +21,20 @@ import { optimizely } from '../../hooks/competitorData/optimizely'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { flagsmith } from '../../hooks/competitorData/flagsmith'
 import { growthbook } from '../../hooks/competitorData/growthbook'
+import { amplitude } from '../../hooks/competitorData/amplitude'
+import { mixpanel } from '../../hooks/competitorData/mixpanel'
+import { heap } from '../../hooks/competitorData/heap'
+import { pendo } from '../../hooks/competitorData/pendo'
+import { ga4 } from '../../hooks/competitorData/ga4'
+import { vwo } from '../../hooks/competitorData/vwo'
+import { sprig } from '../../hooks/competitorData/sprig'
+import { segment } from '../../hooks/competitorData/segment'
+import { mparticle } from '../../hooks/competitorData/mparticle'
+import { rudderstack } from '../../hooks/competitorData/rudderstack'
+import { fivetran } from '../../hooks/competitorData/fivetran'
+import { baremetrics } from '../../hooks/competitorData/baremetrics'
+import { chartmogul } from '../../hooks/competitorData/chartmogul'
+import { stripe } from '../../hooks/competitorData/stripe'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -101,6 +115,20 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
         launchdarkly,
         flagsmith,
         growthbook,
+        amplitude,
+        mixpanel,
+        heap,
+        pendo,
+        ga4,
+        vwo,
+        sprig,
+        segment,
+        mparticle,
+        rudderstack,
+        fivetran,
+        baremetrics,
+        chartmogul,
+        stripe,
     }
 
     // Feature definitions

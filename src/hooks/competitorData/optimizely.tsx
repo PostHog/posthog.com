@@ -6,6 +6,25 @@ export const optimizely = {
         comparisonArticle: '/blog/posthog-vs-optimizely',
     },
     products: {
+        experiments: {
+            available: true,
+            features: {
+                unlimited_experiments: true,
+                multivariate_experiments: true,
+                secondary_metrics: true,
+                minimum_metrics: true,
+                duration_prediction: false,
+                cross_domain_experiments: true,
+                traffic_allocation: true,
+                target_by_cohort: true,
+                target_by_person_property: true,
+                bayesian_statistics: false,
+                check_results_anytime: false,
+                group_level_experiments: false,
+                integrated_session_replay: false,
+                shared_metrics_library: true,
+            },
+        },
         feature_flags: {
             available: true,
             features: {

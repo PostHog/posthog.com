@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
+import { productAnalyticsComparisonRows } from 'hooks/productData/product_analytics_rows'
 
 const PRODUCT_HANDLE = 'product_analytics'
 
@@ -65,6 +66,13 @@ export default function ProductAnalytics(): JSX.Element {
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
+        },
+        overrides: {
+            'feature-comparison': {
+                props: {
+                    rows: productAnalyticsComparisonRows,
+                },
+            },
         },
     })
 

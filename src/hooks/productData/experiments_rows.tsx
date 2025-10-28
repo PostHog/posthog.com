@@ -1,0 +1,31 @@
+// Row configuration for experiments feature comparison slide
+export const experimentsComparisonRows = [
+    { type: 'header', label: 'Core Features' },
+    { type: 'feature', product: 'experiments', feature: 'unlimited_experiments', label: 'Unlimited experiments' },
+    { type: 'feature', product: 'experiments', feature: 'multivariate_experiments', label: 'Multivariate experiments' },
+    { type: 'feature', product: 'experiments', feature: 'secondary_metrics', label: 'Secondary metrics' },
+    { type: 'feature', product: 'experiments', feature: 'minimum_metrics', label: 'Minimum metrics' },
+    { type: 'feature', product: 'experiments', feature: 'duration_prediction', label: 'Duration prediction' },
+    { type: 'feature', product: 'experiments', feature: 'cross_domain_experiments', label: 'Cross-domain experiments' },
+    { type: 'feature', product: 'experiments', feature: 'traffic_allocation', label: 'Traffic allocation' },
+    { type: 'header', label: 'Targeting' },
+    { type: 'feature', product: 'experiments', feature: 'target_by_cohort', label: 'Target by cohort' },
+    {
+        type: 'feature',
+        product: 'experiments',
+        feature: 'target_by_person_property',
+        label: 'Target by person property',
+    },
+    { type: 'header', label: 'Analysis' },
+    { type: 'feature', product: 'experiments', feature: 'bayesian_statistics', label: 'Bayesian statistics' },
+    { type: 'feature', product: 'experiments', feature: 'check_results_anytime', label: 'Check results anytime' },
+    { type: 'header', label: 'Advanced Features' },
+    { type: 'feature', product: 'experiments', feature: 'group_level_experiments', label: 'Group-level experiments' },
+    {
+        type: 'feature',
+        product: 'experiments',
+        feature: 'integrated_session_replay',
+        label: 'Integrated session replay',
+    },
+    { type: 'feature', product: 'experiments', feature: 'shared_metrics_library', label: 'Shared metrics library' },
+]

@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 import { Accordion } from 'components/RadixUI/Accordion'
+import { experimentsComparisonRows } from 'hooks/productData/experiments_rows'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'experiments'
@@ -426,6 +427,13 @@ export default function Experiments(): JSX.Element {
         ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
+        },
+        overrides: {
+            'feature-comparison': {
+                props: {
+                    rows: experimentsComparisonRows,
+                },
+            },
         },
     })
 
