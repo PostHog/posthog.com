@@ -238,6 +238,7 @@ Below are a list of Slack channels you may find helpful:
 -   `#general`
 -   `#alerts`
 -   `#industry-news`
+-   `#changelog` - keep up with all the cool things we're shipping across the team
 
 ### Social channels
 
