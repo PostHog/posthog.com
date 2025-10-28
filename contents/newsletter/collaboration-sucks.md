@@ -89,4 +89,4 @@ So if collaboration is your enemy, how do you defeat it?
 
 ![See it, say it, sorted](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_10_24_at_11_22_00_2x_b1cd420758.png)
 
-Unfortunately for me, not all collaboration can be rooted out, and even I will admit that some collaboration is useful. The point is, if you aren’t actively attempting to collaborate less, you are collaborating too much and hurting your ability to go far, fast.
+Unfortunately for me, not all collaboration can be rooted out, and even I will admit that some collaboration is useful. Ian edited this newsletter after all. The point is, if you aren’t actively attempting to collaborate less, you are collaborating too much by default and hurting your ability to go far, fast.
