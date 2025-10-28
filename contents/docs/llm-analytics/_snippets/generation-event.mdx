@@ -7,6 +7,7 @@ A generation is a single call to an LLM.
 | Property | Description |
 |----------|-------------|
 | `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id`<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code> <br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
+| `$ai_session_id` | *(Optional)* Groups related traces together. Use this to organize traces by whatever grouping makes sense for your application (user sessions, workflows, conversations, or other logical boundaries).<br/>Example: `session-abc-123`, `conv-user-456` |
 | `$ai_span_id` | *(Optional)* Unique identifier for this generation |
 | `$ai_span_name` | *(Optional)* Name given to this generation <br/>Example: `summarize_text` |
 | `$ai_parent_id` | *(Optional)* Parent span ID for tree view grouping | 
@@ -60,6 +61,7 @@ curl -X POST "<ph_client_api_host>/i/v0/e/" \
          "properties": {
              "distinct_id": "user_123",
              "$ai_trace_id": "d9222e05-8708-41b8-98ea-d4a21849e761",
+             "$ai_session_id": "session-abc-123",
              "$ai_model": "gpt-4o",
              "$ai_provider": "openai",
              "$ai_input": [{"role": "user", "content": [{"type": "text", "text": "Analyze this data and suggest improvements"}]}],

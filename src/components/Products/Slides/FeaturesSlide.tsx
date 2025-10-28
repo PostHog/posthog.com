@@ -3,6 +3,8 @@ import Tabs from 'components/RadixUI/Tabs'
 import ProductImage, { Image } from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconBrain } from '@posthog/icons'
+import Link from 'components/Link'
+import SmallTeam from 'components/SmallTeam'
 
 interface Feature {
     title: string
@@ -142,7 +144,7 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         </div>
                                         {item.images && item.images.length > 0 && (
                                             <aside>
-                                                <div className="max-w-md mx-auto @2xl:ml-4 mb-4">
+                                                <div className="max-w-md mx-auto @2xl:ml-4">
                                                     <ProductImage images={item.images} />
                                                 </div>
                                             </aside>
@@ -165,7 +167,19 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         {/* Skills section */}
                                         {item.skills && item.skills.length > 0 && (
                                             <div className="mt-4">
-                                                <h3 className="text-2xl border-b border-primary pb-2 mb-4">Skills</h3>
+                                                <div className="border-b border-primary pb-2 mb-4">
+                                                    <h3 className="text-2xl">Skills</h3>
+                                                    <p className="text-lg">
+                                                        The{' '}
+                                                        <SmallTeam
+                                                            slug={item.team as string}
+                                                            className="relative top-1"
+                                                        />{' '}
+                                                        is actively cooking and refining AI skills. Here's a
+                                                        self-assessment of you can expect each skill to perform –{' '}
+                                                        <em>and they're improving every week!</em>
+                                                    </p>
+                                                </div>
                                                 <div className="grid @2xl:grid-cols-2 gap-x-8 gap-y-3">
                                                     {item.skills.map((skill: any, skillIndex: number) => {
                                                         if (typeof skill === 'string') {
@@ -187,7 +201,15 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                                                     )}
                                                                     <div className="flex-1">
                                                                         <div className="text-xl font-bold mb-2">
-                                                                            {skill.name}
+                                                                            <span className="mr-1">{skill.name}</span>
+                                                                            {skill.percent === 0 && (
+                                                                                <span
+                                                                                    data-scheme="secondary"
+                                                                                    className="text-secondary text-sm bg-primary px-1 py-0.5 rounded-sm font-normal relative -top-px"
+                                                                                >
+                                                                                    Roadmap
+                                                                                </span>
+                                                                            )}
                                                                         </div>
                                                                         {skill.percent !== undefined && (
                                                                             <div className="w-full h-2 bg-input rounded-full">

@@ -6,7 +6,7 @@ showTitle: true
 
 > **Have something you want to announce?** Let the Marketing team know! If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
 
-Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
+Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
 
 ## Types of announcement
 
@@ -79,5 +79,5 @@ We typically notify users of upcoming maintenance by email, so the Marketing tea
 
 ## Incidents communications
 
-When an [incident is declared](/handbook/engineering/incidents) the Brand team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly. 
+When an [incident is declared](/handbook/engineering/operations/incidents) the Brand team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly. 
 

@@ -52,7 +52,7 @@ Discovery includes preparation. Before speaking with any new customer interested
 
 **Examples:**
 
-- Learn more about our [ICP](/handbook/who-we-are-building-for)
+- Learn more about our [ICP](/handbook/who-we-build-for)
 - Cross-reference Vitally, PostHog, Slack and Salesforce for any prior engagement or current activity/status
 - Learn more about who you're speaking with via LinkedIn/X
 - Visit the company's website, learn about their product, who they are marketing/selling to, language they are using. Familiarize yourself with what may be important to them
@@ -116,7 +116,7 @@ A key component of discovery is qualifying customers to ensure they are a good f
 
 **Qualifiers:**
 
-- They fit the [ICP](/handbook/who-we-are-building-for)
+- They fit the [ICP](/handbook/who-we-build-for)
 - Path to $2k/mo or $20k/year in spend
 - Clear problem that PostHog can solve
 - Have technical resources to assist with instrumentation of PostHog
@@ -125,7 +125,7 @@ A key component of discovery is qualifying customers to ensure they are a good f
 **Disqualifiers:**
 
 - **No path to >=$20K annual spend** - Our team looks after customers who are paying or could pay [>=$20k+/yr](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr)
-- **Not in ICP** - You can gather great product insights when chatting with people in other roles, but we tend to work best with our [ICP](/handbook/who-we-are-building-for)
+- **Not in ICP** - You can gather great product insights when chatting with people in other roles, but we tend to work best with our [ICP](/handbook/who-we-build-for)
 - **Can't meet technical requirements** - To be successful, the customer needs to (at minimum), be able to implement PostHog via the JS/SDKs
 - **Support request** - Be helpful, but if it's better suited for support, you can send them thru the available [Support](/docs/support-options) channels
 - **Startup program** - For companies who qualify, we have a special program designed for [startups](/handbook/brand/startups) interested in PostHog
