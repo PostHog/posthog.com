@@ -7,7 +7,7 @@ An embedding is a single call to an embedding model to convert text into a vecto
 | **Property** | **Description** |
 |--------------|-----------------|
 | `$ai_trace_id` | The trace ID (a UUID to group related AI events together). Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code> <br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
-| `$ai_session_id` | *(Optional)* Groups related traces together in a session (e.g., a long multipart conversation, workflow, or chain of separate interactions in the same visit). One session can contain many traces.<br/>Example: `session-abc-123`, `conv-user-456` |
+| `$ai_session_id` | *(Optional)* Groups related traces together. Use this to organize traces by whatever grouping makes sense for your application (user sessions, workflows, conversations, or other logical boundaries).<br/>Example: `session-abc-123`, `conv-user-456` |
 | `$ai_span_id` | *(Optional)* Unique identifier for this embedding operation |
 | `$ai_span_name` | *(Optional)* Name given to this embedding operation <br/>Example: `embed_user_query`, `index_document` |
 | `$ai_parent_id` | *(Optional)* Parent span ID for tree-view grouping |

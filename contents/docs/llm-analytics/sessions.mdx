@@ -2,17 +2,13 @@
 title: Sessions
 ---
 
-Sessions group multiple [traces](/docs/llm-analytics/traces) together using the `$ai_session_id` property. 
+Sessions group multiple [traces](/docs/llm-analytics/traces) together using the `$ai_session_id` property.
 
-What constitutes a "session" is flexible and depends on your use case.
+What constitutes a "session" is flexible and depends on your use case. The `$ai_session_id` property can represent whatever grouping makes sense for your application - whether that's user sessions, workflows, conversations, threads, or other logical boundaries.
 
-The `$ai_session_id` property can represent whatever grouping makes sense for your application:
-- **User sessions**: Multiple conversations during the same app visit or browser session
-- **Workflow executions**: A series of agent tasks or operations within a single run
-- **Thread IDs**: Grouping traces by thread or conversation context (similar to frameworks like LangChain or OpenAI Assistants)
-- **Custom business logic**: Any other logical grouping that helps you analyze related AI interactions
+## Benefits of using sessions
 
-By grouping traces with the same session ID, you can:
+Grouping traces with the same session ID enables you to:
 
 - Track related interactions across multiple traces
 - Analyze aggregate metrics like total cost, tokens, or latency per session
@@ -30,108 +26,12 @@ Sessions are useful when you want to:
 
 ## Traces vs Sessions
 
-It's important to understand the distinction:
-
-- **Trace** (`$ai_trace_id`): Represents a single unit of work - a conversation, workflow, or operation. All related events (generations, spans, embeddings) within that unit share the same trace ID.
-- **Session** (`$ai_session_id`): Groups multiple traces together based on your chosen grouping strategy (user visit, workflow run, thread, etc.).
+- **Trace** (`$ai_trace_id`): Groups related AI events (generations, spans, embeddings) together. Required for all LLM analytics events.
+- **Session** (`$ai_session_id`): Optional property that groups multiple traces together based on your chosen grouping strategy.
 
 ## How to set a session ID
 
-You can set the `$ai_session_id` property when capturing LLM events using PostHog's LLM analytics SDKs. The session ID should be whatever identifier makes sense for grouping related traces in your application.
-
-### Example: Chatbot with multiple conversations per user visit
-
-In this common scenario, a user opens your chatbot and has multiple separate conversations during the same app session:
-
-<MultiLanguage>
-
-```javascript file=JavaScript
-import { OpenAI } from '@posthog/ai'
-import { PostHog } from 'posthog-node'
-
-const phClient = new PostHog(
-  '<ph_project_api_key>',
-  { host: '<ph_client_api_host>' }
-)
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  posthog: phClient
-})
-
-// Generate a session ID when the user starts their app session
-const sessionId = `session-${userId}-${Date.now()}`
-
-// First conversation - Trace 1
-const conversation1TraceId = crypto.randomUUID()
-await openai.responses.create({
-  model: 'gpt-5',
-  messages: firstConversationMessages,
-  posthogProperties: {
-    $ai_session_id: sessionId,
-    $ai_trace_id: conversation1TraceId,
-    conversation_topic: 'product_recommendations'
-  }
-})
-
-// User starts a new conversation - Trace 2
-const conversation2TraceId = crypto.randomUUID()
-await openai.responses.create({
-  model: 'gpt-5',
-  messages: secondConversationMessages,
-  posthogProperties: {
-    $ai_session_id: sessionId,  // Same session ID
-    $ai_trace_id: conversation2TraceId,  // Different trace ID
-    conversation_topic: 'order_status'
-  }
-})
-```
-
-```python file=Python
-from posthog.ai.openai import OpenAI
-from posthog import Posthog
-import uuid
-import time
-
-posthog = Posthog(
-    "<ph_project_api_key>",
-    host="<ph_client_api_host>"
-)
-
-client = OpenAI(
-    api_key="sk-...",
-    posthog_client=posthog
-)
-
-# Generate a session ID when the user starts their app session
-session_id = f"session-{user_id}-{int(time.time())}"
-
-# First conversation - Trace 1
-conversation1_trace_id = str(uuid.uuid4())
-response = client.responses.create(
-    model="gpt-5",
-    messages=first_conversation_messages,
-    posthog_properties={
-        "$ai_session_id": session_id,
-        "$ai_trace_id": conversation1_trace_id,
-        "conversation_topic": "product_recommendations"
-    }
-)
-
-# User starts a new conversation - Trace 2
-conversation2_trace_id = str(uuid.uuid4())
-response = client.responses.create(
-    model="gpt-5",
-    messages=second_conversation_messages,
-    posthog_properties={
-        "$ai_session_id": session_id,  # Same session ID
-        "$ai_trace_id": conversation2_trace_id,  # Different trace ID
-        "conversation_topic": "order_status"
-    }
-)
-```
-
-</MultiLanguage>
+Set the `$ai_session_id` property when capturing LLM events using the `posthogProperties` (JavaScript) or `posthog_properties` (Python) parameter in PostHog's LLM analytics SDKs. Use any identifier that makes sense for grouping related traces in your application.
 
 ## Analyzing sessions
 
@@ -145,11 +45,11 @@ View all traces and events for a specific session by filtering for the `$ai_sess
 
 Create insights that aggregate metrics by session:
 
-- Number of conversations (traces) per session
+- Number of traces per session
 - Average cost per session
 - Total tokens used per session
 - Session duration
-- User engagement patterns across sessions
+- Patterns across sessions
 
 ### In the trace viewer
 
