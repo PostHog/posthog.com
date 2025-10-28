@@ -130,7 +130,7 @@ Browser extensions run in multiple contexts, each with different capabilities an
 
 ### Context-specific persistence considerations
 
-For contexts like popup, sidepanel, background, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites.
+For contexts like popup, sidepanel, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites. In background service workers, use `disable_persistence: true` since `localStorage` is not available in service workers. 
 
 ### Distinct ID synchronization
 
