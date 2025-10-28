@@ -1,0 +1,66 @@
+// Row configuration for feature flags feature comparison slide
+export const featureFlagsComparisonRows = [
+    { type: 'header', label: 'Core Features' },
+    {
+        type: 'feature',
+        product: 'feature_flags',
+        feature: 'target_by_percentage',
+        label: 'Target by percentage',
+        description: 'Target features to a percentage of users',
+    },
+    {
+        type: 'feature',
+        product: 'feature_flags',
+        feature: 'target_by_person_properties',
+        label: 'Target by person properties',
+        description: 'Target features based on user properties and attributes',
+    },
+    {
+        type: 'feature',
+        product: 'feature_flags',
+        feature: 'flag_scheduling',
+        label: 'Flag scheduling',
+        description: 'Schedule flags to turn on or off automatically',
+    },
+    {
+        type: 'feature',
+        product: 'feature_flags',
+        feature: 'experimentation',
+        label: 'Experimentation',
+        description: 'Run A/B tests with feature flags',
+    },
+    {
+        type: 'feature',
+        product: 'feature_flags',
+        feature: 'multivariate_flags',
+        label: 'Multivariate flags',
+        description: 'Test multiple variants of a feature',
+    },
+    { type: 'header', label: 'Platform Features' },
+    { type: 'platform', feature: 'open_source', label: 'Open-source', description: 'Fully open-source codebase' },
+    {
+        type: 'platform',
+        feature: 'self_host',
+        label: 'Self-host option',
+        description: 'Deploy and run on your own infrastructure',
+    },
+    {
+        type: 'platform',
+        feature: 'usage_based_pricing',
+        label: 'Usage-based pricing',
+        description: 'Pay only for what you use',
+    },
+    {
+        type: 'platform',
+        feature: 'transparent_pricing',
+        label: 'Transparent pricing',
+        description: 'No hidden fees or surprises',
+    },
+    { type: 'platform', feature: 'free_tier', label: 'Free tier', description: 'Get started for free' },
+    {
+        type: 'platform',
+        feature: 'built_in_analytics',
+        label: 'Built-in product analytics',
+        description: 'Integrate flags with analytics',
+    },
+]

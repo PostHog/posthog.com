@@ -20,6 +20,7 @@ interface Row {
     cells: {
         content: React.ReactNode
         className?: string
+        style?: React.CSSProperties
     }[]
 }
 
@@ -197,6 +198,7 @@ const Row = ({
                     ? 'justify-end'
                     : 'items-center'
             } ${cell.className || ''}`}
+                            style={cell.style}
                         >
                             {cell.content}
                         </div>

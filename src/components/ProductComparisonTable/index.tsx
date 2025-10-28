@@ -17,6 +17,10 @@ import { clarity } from '../../hooks/competitorData/clarity'
 import { rollbar } from '../../hooks/competitorData/rollbar'
 import { glitchtip } from '../../hooks/competitorData/glitchtip'
 import { signoz } from '../../hooks/competitorData/signoz'
+import { optimizely } from '../../hooks/competitorData/optimizely'
+import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
+import { flagsmith } from '../../hooks/competitorData/flagsmith'
+import { growthbook } from '../../hooks/competitorData/growthbook'
 
 // Feature definition imports
 import { errorTrackingFeatures } from '../../hooks/featureDefinitions/error_tracking'
@@ -93,6 +97,10 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
         rollbar,
         glitchtip,
         signoz,
+        optimizely,
+        launchdarkly,
+        flagsmith,
+        growthbook,
     }
 
     // Feature definitions
@@ -133,6 +141,11 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
     const getFeatureInfo = (row: RowConfig): { name: string; description?: string } => {
         if (row.type === 'header') return { name: row.label || '' }
 
+        // If label is explicitly provided, use it
+        if (row.label) {
+            return { name: row.label, description: row.description }
+        }
+
         // Get from feature definition if available
         if (row.feature && row.featureSet) {
             const defs = row.type === 'platform' ? featureDefs.platform : featureDefs[row.product || '']
@@ -140,12 +153,29 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
             const feat = set?.[row.feature]
 
             return {
-                name: row.label || feat?.name || row.feature,
+                name: feat?.name || row.feature,
                 description: row.description || feat?.description,
             }
         }
 
-        return { name: row.label || '', description: row.description }
+        // Try to find feature in any featureSet (for flat structures like session_replay)
+        if (row.feature && row.product) {
+            const defs = featureDefs[row.product]
+            if (defs) {
+                // Search through all featureSets for this feature
+                for (const featureSet in defs) {
+                    const feat = defs[featureSet]?.[row.feature]
+                    if (feat) {
+                        return {
+                            name: feat.name || row.feature,
+                            description: row.description || feat.description,
+                        }
+                    }
+                }
+            }
+        }
+
+        return { name: row.label || row.feature || '', description: row.description }
     }
 
     // Render competitor cell
@@ -206,6 +236,19 @@ export default function ProductComparisonTable({ competitors, rows }: ProductCom
 
     // Build rows
     const tableRows = parsedRows.map((row, index) => {
+        // Handle header rows - span across all columns
+        if (row.type === 'header') {
+            return {
+                key: `row-${index}`,
+                cells: [
+                    {
+                        content: <div className="font-semibold text-lg">{row.label || ''}</div>,
+                        className: 'col-span-full border-b-2 border-primary pb-2 mb-2',
+                    },
+                ],
+            }
+        }
+
         const featureInfo = getFeatureInfo(row)
         const cells = [
             {

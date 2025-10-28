@@ -49,6 +49,19 @@ export const posthog = {
         },
         feature_flags: {
             available: true,
+            features: {
+                target_by_percentage: true,
+                target_by_person_properties: true,
+                flag_scheduling: true,
+                experimentation: true,
+                multivariate_flags: true,
+                unlimited_flags_for_free: true,
+                free_third_party_plugins: true,
+                activity_logs: false,
+                data_export: false,
+                multi_environment_support: true,
+                automatic_ip_resolution: true,
+            },
         },
         experiments: {
             available: true,

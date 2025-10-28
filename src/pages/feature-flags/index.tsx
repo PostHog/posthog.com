@@ -2,6 +2,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
+import { featureFlagsComparisonRows } from 'hooks/productData/feature_flags_rows'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'feature_flags'
@@ -69,6 +70,13 @@ export default function FeatureFlags(): JSX.Element {
         },
         content: {
             // answersDescription: 'Control the release of new features to your users', moved to json
+        },
+        overrides: {
+            'feature-comparison': {
+                props: {
+                    rows: featureFlagsComparisonRows,
+                },
+            },
         },
     })
 
