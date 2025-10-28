@@ -8,9 +8,12 @@ availability:
     enterprise: full
 ---
 
-This is an [ever-expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py) list of enabled ClickHouse functions.
+This is an [ever-expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/functions/mapping.py) list of enabled ClickHouse functions.
 
 You can find their full definitions in the [ClickHouse documentation](https://clickhouse.com/docs/en/sql-reference/functions). Additionally, we include a list of popular ones and their uses in the [HogQL expressions](/docs/hogql/expressions#functions-and-aggregations) and [SQL insight](/docs/product-analytics/sql#useful-functions) documentation.
+
+Most of the type conversion functions are safer versions of the equivalent ClickHouse functions to avoid NULL/zero mistakes.
+If the function's name includes a leading underscore, then it's not safe and simply calls the underlying ClickHouse function.
 
 ## Arithmetic
 
@@ -70,6 +73,7 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `arrayDistinct`
 - `arrayEnumerateDense`
 - `arrayIntersect`
+- `arrayReduce`
 - `arrayReverse`
 - `arrayFilter`
 - `arrayFlatten`
@@ -78,9 +82,13 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `arrayAUC`
 - `arrayMap`
 - `arrayFill`
+- `arrayFold`
+- `arrayWithConstant`
 - `arraySplit`
 - `arrayReverseFill`
 - `arrayReverseSplit`
+- `arrayRotateLeft`
+- `arrayRotateRight`
 - `arrayExists`
 - `arrayAll`
 - `arrayFirst`
@@ -94,6 +102,8 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `arrayCumSum`
 - `arrayCumSumNonNegative`
 - `arrayProduct`
+- `arrayStringConcat`
+- `generateSeries`
 
 ## Comparison
 
@@ -113,19 +123,39 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 
 ## Type conversions
 
+
+
+- `hex`
+- `unhex`
 - `toInt`
+- `toIntOrZero`
+- `_toInt8`
+- `_toInt16`
+- `_toInt32`
+- `_toInt64`
+- `_toUInt64`
+- `_toUInt128`
 - `toFloat`
+- `toFloatOrZero`
+- `toFloatOrDefault`
 - `toDecimal`
-- `toDate`
-- `toDateTime`
 - `toUUID`
 - `toString`
+- `toBool`
 - `toJSONString`
+- `toTypeName`
 - `parseDateTime`
 - `parseDateTimeBestEffort`
+- `cityHash64`
+- `UUIDv7ToDateTime`
 
 ## Dates and times
 
+- `toDate`
+- `toDateTime`
+- `toDateTime64`
+- `toDateTimeUS`
+- `_toDate`
 - `toTimeZone`
 - `timeZoneOf`
 - `timeZoneOffset`
@@ -134,11 +164,13 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `toMonth`
 - `toDayOfYear`
 - `toDayOfMonth`
-- `toDayOfWeek`
+- `toDayOfWeek` 
 - `toHour`
 - `toMinute`
 - `toSecond`
 - `toUnixTimestamp`
+- `toUnixTimestamp64Milli`
+- `toStartOfInterval`
 - `toStartOfYear`
 - `toStartOfISOYear`
 - `toStartOfQuarter`
@@ -146,6 +178,7 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `toLastDayOfMonth`
 - `toMonday`
 - `toStartOfWeek`
+- `toLastDayOfWeek`
 - `toStartOfDay`
 - `toStartOfHour`
 - `toStartOfMinute`
@@ -168,6 +201,8 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `now`
 - `NOW`
 - `nowInBlock`
+- `current_timestamp`
+- `current_date`
 - `today`
 - `yesterday`
 - `timeSlot`
@@ -206,11 +241,26 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `toIntervalQuarter`
 - `toIntervalYear`
 
+### Postgres-style date functions
+
+- `date_part`
+- `date_trunc`
+- `make_timestamp`
+- `date_bin`
+- `date_add`
+- `date_subtract`
+- `date_diff`
+- `make_interval`
+- `make_timestampz`
+
+
 ## Strings
 
+- `left`
+- `right`
 - `lengthUTF8`
-- `leftPad`
-- `rightPad`
+- `leftPad` or `lpad`
+- `rightPad` or `rpad`
 - `leftPadUTF8`
 - `rightPadUTF8`
 - `lower`
@@ -219,7 +269,6 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `upperUTF8`
 - `isValidUTF8`
 - `toValidUTF8`
-- `repeat`
 - `format`
 - `reverseUTF8`
 - `concat`
@@ -235,14 +284,16 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `tryBase64Decode`
 - `endsWith`
 - `startsWith`
-- `trim`
-- `trimLeft`
-- `trimRight`
+- `trim` or `btrim`
+- `trimLeft` or `ltrim`
+- `trimRight` or `rtrim`
 - `encodeXMLComponent`
 - `decodeXMLComponent`
 - `extractTextFromHTML`
 - `ascii`
 - `concatWithSeparator`
+- `repeat`
+- `initcap`
 
 ## Searching in strings
 
@@ -370,7 +421,6 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `splitByRegexp`
 - `splitByWhitespace`
 - `splitByNonAlpha`
-- `arrayStringConcat`
 - `alphaTokens`
 - `extractAllGroups`
 - `ngrams`
@@ -464,6 +514,7 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `JSONExtractRaw`
 - `JSONExtractArrayRaw`
 - `JSONExtractKeysAndValuesRaw`
+- `JSON_VALUE`
 
 ## Geo
 
@@ -472,6 +523,50 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `greatCircleAngle`
 - `pointInEllipses`
 - `pointInPolygon`
+- `geohashDecode`
+- `geohashesInBox`
+- `h3IsValid`
+- `h3GetResolution`
+- `h3GetBaseCell`
+- `h3EdgeAngle`
+- `h3EdgeLengthM`
+- `h3EdgeLengthKm`
+- `geoToH3`
+- `h3ToGeo`
+- `h3ToGeoBoundary`
+- `h3kRing`
+- `h3HexAreaM2`
+- `h3HexAreaKm2`
+- `h3IndexesAreNeighbors`
+- `h3ToChildren`
+- `h3ToParent`
+- `h3ToString`
+- `stringToH3`
+- `h3IsResClassIII`
+- `h3IsPentagon`
+- `h3GetFaces`
+- `h3CellAreaM2`
+- `h3CellAreaRads2`
+- `h3ToCenterChild`
+- `h3ExactEdgeLengthM`
+- `h3ExactEdgeLengthKm`
+- `h3ExactEdgeLengthRads`
+- `h3NumHexagons`
+- `h3PointDistM`
+- `h3PointDistKm`
+- `h3PointDistRads`
+- `h3GetRes0Indexes`
+- `h3GetPentagonIndexes`
+- `h3Line`
+- `h3Distance`
+- `h3HexRing`
+- `h3GetUnidirectionalEdge`
+- `h3UnidirectionalEdgeIsValid`
+- `h3GetOriginIndexFromUnidirectionalEdge`
+- `h3GetDestinationIndexFromUnidirectionalEdge`
+- `h3GetIndexesFromUnidirectionalEdge`
+- `h3GetUnidirectionalEdgesFromHexagon`
+- `h3GetUnidirectionalEdgeBoundary`
 
 ## Nullable
 
@@ -523,6 +618,17 @@ You can find their full definitions in the [ClickHouse documentation](https://cl
 - `LinfNormalize`
 - `LpNormalize`
 - `cosineDistance`
+
+## Window functions
+
+- `lag` or `lagInFrame`
+- `lead` or `leadInFrame`
+- `rank`
+- `dense_rank`
+- `row_number`
+- `first_value`
+- `last_value`
+- `nth_value`
 
 ## Other
 
