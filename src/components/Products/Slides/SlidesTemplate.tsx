@@ -383,14 +383,32 @@ export default function SlidesTemplate({
                     />
                 )
 
-            case 'feature-comparison':
+            case 'feature-comparison': {
+                // Convert old format to new format if needed
+                const companies = productData?.comparison?.companies || []
+                const competitors = companies.map((c: any) => c.key)
+
+                // Check if we should use new format (rows prop exists)
+                if (props.rows) {
+                    return (
+                        <FeatureComparisonSlide
+                            competitors={competitors}
+                            rows={props.rows}
+                            product={productHandle}
+                            {...props}
+                        />
+                    )
+                }
+
+                // Legacy format
                 return (
                     <FeatureComparisonSlide
                         features={productData?.comparison?.features || []}
-                        companies={productData?.comparison?.companies}
+                        companies={companies}
                         {...props}
                     />
                 )
+            }
 
             case 'docs':
                 return (

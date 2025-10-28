@@ -45,6 +45,125 @@ Before jumping into the list, here are the features we are looking for in each t
     competitors={['posthog', 'sentry', 'rollbar', 'bugsnag', 'glitchtip', 'signoz']}
     rows={errorTrackingRows}
 />
+column1={true}
+column2={true}
+column3={true}
+column4={true}
+column5={true}
+column6={true}
+feature="Real-time error capture" description="Capture and report errors as they happen in production" />
+
+<ComparisonRow
+    column1={true}
+    column2="Limited"
+    column3={false}
+    column4={false}
+    column5={false}
+    column6={false}
+    feature="Session replay"
+    description="Link error events to session replays to see what users did"
+/>
+<ComparisonRow
+    column1={true}
+    column2={true}
+    column3={true}
+    column4={true}
+    column5={true}
+    column6={true}
+    feature="User / device context"
+    description="Capture user information and device details with errors"
+/>
+<ComparisonRow
+    column1="Partial"
+    column2={true}
+    column3={true}
+    column4={true}
+    column5={false}
+    column6="Partial"
+    feature="Release and deploy tracking"
+    description="Track errors by release version and deployment"
+/>
+<ComparisonRow
+    column1={true}
+    column2={true}
+    column3={false}
+    column4={true}
+    column5={false}
+    column6={true}
+    feature="Performance monitoring"
+    description="Monitor application performance and track slow operations"
+/>
+<ComparisonRow
+    column1={true}
+    column2={false}
+    column3={false}
+    column4={false}
+    column5={false}
+    column6={false}
+    feature="Console log capture"
+    description="Capture console logs alongside error events"
+/>
+<ComparisonRow
+    column1="Partial"
+    column2={true}
+    column3={true}
+    column4={true}
+    column5={false}
+    column6="Partial"
+    feature="Mobile SDK coverage"
+    description="SDKs for iOS, Android, and mobile frameworks"
+/>
+<ComparisonRow
+    column1="Limited"
+    column2={true}
+    column3={false}
+    column4={false}
+    column5={true}
+    column6={true}
+    feature="Self-host option"
+    description="Deploy and run on your own infrastructure"
+/>
+<ComparisonRow
+    column1={true}
+    column2={true}
+    column3={true}
+    column4={false}
+    column5={false}
+    column6={false}
+    feature="Usage-based pricing"
+    description="Pay only for what you use with flexible pricing"
+/>
+<ComparisonRow
+    column1={true}
+    column2={true}
+    column3={true}
+    column4={true}
+    column5="Limited"
+    column6="Partial"
+    feature="Integrations (CI/CD, issue tracking)"
+    description="Connect with development tools and workflows"
+/>
+<ComparisonRow
+    column1={true}
+    column2={false}
+    column3={false}
+    column4={false}
+    column5={false}
+    column6={false}
+    feature="Built-in product analytics"
+    description="Combine error tracking with product analytics data"
+/>
+<ComparisonRow
+    column1={true}
+    column2="Open core"
+    column3={false}
+    column4={false}
+    column5={true}
+    column6={true}
+    feature="Open-source"
+    description="Fully open-source codebase"
+/>
+]} />
 
 ### 1. PostHog: Best for contextual debugging and developer control
 

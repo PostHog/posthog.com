@@ -1,0 +1,42 @@
+export const hotjar = {
+    name: 'Hotjar',
+    key: 'hotjar',
+    assets: {
+        icon: '/images/competitors/hotjar.svg',
+        comparisonArticle: '/blog/posthog-vs-hotjar',
+    },
+    products: {
+        session_replay: {
+            available: true,
+            beta: false,
+            features: {
+                ai_summaries: true,
+                single_page_app: true,
+                ios_recordings: false,
+                android_recordings: false,
+                react_native_recordings: false,
+                flutter_recordings: false,
+                identity_detection: false,
+                target_by_url: true,
+                target_by_sample: true,
+                filter_by_user_or_event: true,
+                search_by_network: true,
+                rage_click_detection: true,
+                privacy_masking: true,
+                export_to_json: true,
+                export_to_video: false,
+                retention_policy: '12 months',
+            },
+        },
+    },
+    platform: {
+        open_source: false,
+        self_host: false,
+        usage_based_pricing: true,
+        transparent_pricing: false,
+        free_tier: true,
+    },
+    pricing: {
+        model: 'Tier-based',
+    },
+}

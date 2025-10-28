@@ -3,6 +3,7 @@ import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
 import { IconArrowUpRight } from '@posthog/icons'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 interface ComparisonFeature {
     feature: string
@@ -17,12 +18,28 @@ interface CompanyMetadata {
 }
 
 interface FeatureComparisonSlideProps {
-    features: ComparisonFeature[]
+    features?: ComparisonFeature[]
     companies?: CompanyMetadata[]
+    // New props for ProductComparisonTable
+    competitors?: string[]
+    rows?: any[]
+    product?: string
 }
 
-export default function FeatureComparisonSlide({ features, companies }: FeatureComparisonSlideProps) {
-    if (!features || features.length === 0) {
+export default function FeatureComparisonSlide({
+    features,
+    companies,
+    competitors,
+    rows,
+    product,
+}: FeatureComparisonSlideProps) {
+    // If new props are provided, use ProductComparisonTable
+    if (competitors && rows) {
+        return <ProductComparisonTable competitors={competitors} rows={rows} />
+    }
+
+    // Legacy support for old format
+    if ((!features || features.length === 0) && !competitors) {
         return (
             <div className="h-full p-8 flex items-center justify-center">
                 <p className="text-xl text-secondary">No feature comparison available</p>
@@ -31,7 +48,8 @@ export default function FeatureComparisonSlide({ features, companies }: FeatureC
     }
 
     // Use provided companies metadata or fallback to extracting from first feature
-    const companyList = companies || Object.keys(features[0]?.companies || {}).map((key) => ({ name: key, key }))
+    const companyList =
+        companies || Object.keys((features || [])[0]?.companies || {}).map((key) => ({ name: key, key }))
 
     return (
         <div className="h-full text-primary flex flex-col">
@@ -71,7 +89,7 @@ export default function FeatureComparisonSlide({ features, companies }: FeatureC
                             </tr>
                         </thead>
                         <tbody>
-                            {features.map((feature: ComparisonFeature, index: number) => {
+                            {(features || []).map((feature: ComparisonFeature, index: number) => {
                                 if (feature.type === 'header') {
                                     return (
                                         <tr key={index} className="bg-primary">

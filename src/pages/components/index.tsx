@@ -13,6 +13,7 @@ import OSButton from 'components/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
 import { OSInput, OSTextarea, OSSelect } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
+import ProductComparisonTable from 'components/ProductComparisonTable'
 
 export default function Components(): JSX.Element {
     const { customers } = useCustomers()
@@ -1931,6 +1932,75 @@ export default function Components(): JSX.Element {
                                         placeholder="Select your team..."
                                     />
                                 </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2 className="">Competitor feature matrix</h2>
+
+                            <p className="mb-6 text-secondary">
+                                Comprehensive view of all product and platform features across competitors. This serves
+                                as internal tooling for QA, content creation, and identifying gaps in competitive data.
+                            </p>
+
+                            {/* Error Tracking Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Error Tracking Features</h3>
+                                <ProductComparisonTable
+                                    competitors={['posthog', 'sentry', 'logrocket', 'bugsnag', 'datadog']}
+                                    rows={[
+                                        { path: 'error_tracking.core.error_alerts' },
+                                        { path: 'error_tracking.core.exception_capture' },
+                                        { path: 'error_tracking.core.issue_management' },
+                                        { path: 'error_tracking.core.error_grouping' },
+                                        { path: 'error_tracking.core.stack_tracing' },
+                                        { path: 'error_tracking.monitoring.network_performance' },
+                                        { path: 'error_tracking.monitoring.source_map_support' },
+                                        { path: 'error_tracking.integrations.product_analytics' },
+                                        { path: 'error_tracking.integrations.session_replays' },
+                                        { path: 'error_tracking.integrations.ab_experiments' },
+                                    ]}
+                                />
+                            </div>
+
+                            {/* Session Replay Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Session Replay Features</h3>
+                                <ProductComparisonTable
+                                    competitors={['posthog', 'fullstory', 'hotjar', 'logrocket', 'clarity', 'matomo']}
+                                    rows={[
+                                        { path: 'session_replay.ai.ai_summaries' },
+                                        { path: 'session_replay.platform_support.single_page_app' },
+                                        { path: 'session_replay.platform_support.ios_recordings' },
+                                        { path: 'session_replay.platform_support.android_recordings' },
+                                        { path: 'session_replay.platform_support.react_native_recordings' },
+                                        { path: 'session_replay.platform_support.flutter_recordings' },
+                                        { path: 'session_replay.identity.identity_detection' },
+                                        { path: 'session_replay.targeting.target_by_url' },
+                                        { path: 'session_replay.targeting.filter_by_user_or_event' },
+                                        { path: 'session_replay.export.export_to_json' },
+                                        { path: 'session_replay.export.retention_policy' },
+                                    ]}
+                                />
+                            </div>
+
+                            {/* Platform Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Platform Features</h3>
+                                <ProductComparisonTable
+                                    competitors={['posthog', 'sentry', 'logrocket', 'bugsnag', 'glitchtip', 'signoz']}
+                                    rows={[
+                                        { path: 'platform.deployment.open_source' },
+                                        { path: 'platform.deployment.self_host' },
+                                        { path: 'platform.pricing.usage_based_pricing' },
+                                        { path: 'platform.pricing.transparent_pricing' },
+                                        { path: 'platform.pricing.free_tier' },
+                                        { path: 'platform.support.console_log_capture' },
+                                        { path: 'platform.support.mobile_sdk_coverage' },
+                                        { path: 'platform.integrations.ci_cd_integrations' },
+                                        { path: 'platform.analytics_integration.built_in_analytics' },
+                                    ]}
+                                />
                             </div>
                         </section>
 

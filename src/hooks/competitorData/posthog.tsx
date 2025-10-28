@@ -1,0 +1,75 @@
+export const posthog = {
+    name: 'PostHog',
+    key: 'posthog',
+    assets: {
+        icon: '/images/logo.svg',
+    },
+    products: {
+        error_tracking: {
+            available: true,
+            features: {
+                error_alerts: true,
+                exception_capture: true,
+                issue_management: true,
+                error_grouping: true,
+                stack_tracing: true,
+                network_performance: true,
+                source_map_support: true,
+            },
+            integrations: {
+                product_analytics: true,
+                session_replays: true,
+                ab_experiments: true,
+            },
+        },
+        session_replay: {
+            available: true,
+            beta: false,
+            features: {
+                ai_summaries: 'In alpha',
+                single_page_app: true,
+                ios_recordings: true,
+                android_recordings: true,
+                react_native_recordings: true,
+                flutter_recordings: true,
+                identity_detection: true,
+                target_by_url: true,
+                target_by_sample: true,
+                filter_by_user_or_event: true,
+                search_by_network: false,
+                rage_click_detection: true,
+                privacy_masking: true,
+                export_to_json: true,
+                export_to_video: 'Beta',
+                retention_policy: 'Up to 3 months',
+            },
+        },
+        product_analytics: {
+            available: true,
+        },
+        feature_flags: {
+            available: true,
+        },
+        experiments: {
+            available: true,
+        },
+        surveys: {
+            available: true,
+        },
+    },
+    platform: {
+        open_source: true,
+        self_host: 'Limited',
+        usage_based_pricing: true,
+        transparent_pricing: true,
+        free_tier: true,
+        console_log_capture: true,
+        mobile_sdk_coverage: 'Partial',
+        release_tracking: 'Partial',
+        ci_cd_integrations: true,
+        built_in_analytics: true,
+    },
+    pricing: {
+        model: 'Usage-based',
+    },
+}
