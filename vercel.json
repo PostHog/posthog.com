@@ -631,6 +631,7 @@
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
+        { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/features/feature-flags", "destination": "/docs/feature-flags" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags" },
