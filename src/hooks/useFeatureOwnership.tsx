@@ -218,7 +218,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     onboarding: {
         feature: 'Onboarding',
-        owner: ['content'],
+        owner: ['growth'],
     },
     'path-cleaning': {
         feature: 'Path cleaning',
@@ -330,7 +330,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
-        owner: [''],
+        owner: ['mobile'],
         notes: (
             <>
                 Shared responsibility with the relevant small team for feature-owned areas.
@@ -413,7 +413,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     toolbar: {
         feature: 'Toolbar',
-        owner: ['replay'],
+        owner: ['growth'],
     },
     'usage-reports': {
         feature: 'Usage reports',
