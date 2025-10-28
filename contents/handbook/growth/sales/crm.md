@@ -291,7 +291,7 @@ The renewal pipeline stages are:
 The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
 
 -   Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
-  -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage and with a timeline for when you expect we’ll get it.
+  -   For the New Business Sales Team, the Next Step should have three specific elements:  1) a timestamp  -- when was this change made, 2) the owner at the customer for the next step -- who do we expect to take the action? 3) a binary outcome - (what will we/you get) related to the stage and with a timeline for when you expect we'll get it.
 -   Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
 
 ### Opportunity closure details
