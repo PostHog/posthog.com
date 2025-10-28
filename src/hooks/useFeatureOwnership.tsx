@@ -86,10 +86,20 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Cohorts',
         owner: ['feature-flags'],
     },
+    'command-palette': {
+        feature: 'Command palette',
+        owner: ['platform-ux'],
+        label: 'feature/command-bar',
+    },
     comments: {
         feature: 'Comments/Discussions',
         owner: ['platform-features'],
         label: 'feature/comments',
+    },
+    'csp-tracking': {
+        feature: 'CSP tracking',
+        owner: ['web-analytics'],
+        label: 'feature/csp-tracking',
     },
     'currency-rate-dataset': {
         feature: 'Currency rate dataset',
@@ -119,7 +129,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-visualization': {
         feature: 'Data visualization',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'data-pipelines': {
         feature: 'Data pipelines',
@@ -128,7 +138,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-warehouse': {
         feature: 'Data warehouse',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'early-access-features': {
         feature: 'Early access features',
@@ -158,7 +168,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -188,14 +198,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
-    'max-ai': {
-        feature: 'Max AI platform',
-        owner: ['max-ai'],
-        label: 'feature/max-ai',
-    },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['max-ai'],
+        owner: ['posthog-ai'],
         label: 'feature/mcp',
     },
     messaging: {
@@ -245,7 +250,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-sources': {
         feature: 'Pipeline sources',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/pipelines',
     },
     platform: {
@@ -257,6 +262,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'PostHog.com',
         owner: ['brand'],
         label: false,
+    },
+    'posthog-ai': {
+        feature: 'PostHog AI platform',
+        owner: ['posthog-ai'],
+        label: 'feature/posthog-ai',
     },
     'project-homepage': {
         feature: 'Project homepage',
@@ -270,7 +280,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     qaas: {
         feature: 'Queries as a Service',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: 'feature/qaas',
     },
     'query-performance': {
@@ -308,10 +318,15 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <PrivateLink url="https://posthog.pagerduty.com/schedules#P7B7NTR">Pager Duty schedule</PrivateLink>.
                 <br />
                 <br />
-                <strong>For Mobile SDK issues, defer to the Mobile group first.</strong>
+                <strong>For Mobile SDK issues, defer to the Mobile team first.</strong>
             </>
         ),
         label: 'feature/libraries',
+    },
+    'sdks-doctor': {
+        feature: 'SDK doctor',
+        owner: ['growth'],
+        label: 'feature/sdk-doctor',
     },
     'sdks-mobile': {
         feature: 'SDKs (mobile)',
@@ -322,16 +337,19 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
                 <br />
                 <br /> Start with the{' '}
                 <a href="https://github.com/orgs/PostHog/teams/team-mobile" target="_blank" rel="noopener noreferrer">
-                    Mobile group
+                    Mobile team
                 </a>{' '}
                 for triage, loop in
-                <PrivateLink url="https://posthog.slack.com/archives/C04MZFDA5KK">
-                    #support-client-libraries
-                </PrivateLink>{' '}
-                as needed.
+                <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C0643MHR56X">#support-mobile</PrivateLink> as
+                needed.
             </>
         ),
         label: 'feature/mobile',
+    },
+    search: {
+        feature: 'Search',
+        owner: ['platform-ux'],
+        label: false,
     },
     security: {
         feature: 'Security',
@@ -361,11 +379,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'sql-editor': {
         feature: 'SQL editor',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
     },
     'sql-insights': {
         feature: 'SQL insights',
-        owner: ['data-warehouse'],
+        owner: ['data-stack'],
         label: false,
     },
     sso: {
@@ -417,7 +435,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
 }
 
-export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}) => {
+export const useFeatureOwnership = ({ teamSlug }: { teamSlug?: string } = {}): { features: Feature[] } => {
     const features = Object.entries(FEATURE_DATA).reduce((acc, [key, feature]) => {
         const featureWithSlug: Feature = {
             ...feature,

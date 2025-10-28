@@ -57,7 +57,7 @@ As you grow, it’s important not to drift from targeting your persona or to let
 
 “When I joined Puzzle I was very happy to hear people talking about our target persona,” says Scott. “While there were still debates about some of the finer details and who some of the buyer personas may be, it was clear that our target persona was our guiding light.”
 
-At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [who we are building for](/handbook/who-we-are-building-for) — but Puzzle took a different approach.  
+At PostHog, we’ve solved this issue with [a public handbook](/handbook) which documents [who we are building for](/handbook/who-we-build-for) — but Puzzle took a different approach.  
 
 “We reinforce who we're building for constantly," says Scott. "We bring it up in all-hands regularly, for example, and will often reference it in other meetings. Internally, we're always trying to be clear that we're building primarily for founders." 
 

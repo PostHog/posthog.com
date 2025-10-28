@@ -26,7 +26,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Anna Szell" photo /></legend>
 
 -   [Analytics Platform](/teams/analytics-platform)
--   [Data Warehouse](/teams/data-warehouse)
+-   [Data Stack](/teams/data-stack)
 -   [Product Analytics](/teams/product-analytics)
 -   [Web Analytics](/teams/web-analytics)
 
@@ -37,7 +37,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   [Feature Flags](/teams/feature-flags)
 -   [Experiments](/teams/experiments)
--   [Max AI](/teams/max-ai)
+-   [PostHog AI](/teams/posthog-ai)
 
 </fieldset>
 

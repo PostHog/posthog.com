@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { IconChevronDown, IconSearch, IconCheck, IconInfo } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
-interface SelectOption {
+export interface SelectOption {
     label: string
     value: any
     disabled?: boolean
     icon?: string | React.ReactNode
     color?: string
     description?: string
+    isHeader?: boolean
 }
 
 interface SelectProps {
@@ -28,6 +30,7 @@ interface SelectProps {
     disabled?: boolean
     searchable?: boolean
     searchPlaceholder?: string
+    height?: string
     maxHeight?: string
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
     className?: string
@@ -53,6 +56,7 @@ const OSSelect = ({
     disabled = false,
     searchable = true,
     searchPlaceholder = 'Search...',
+    height = 'h-auto',
     maxHeight = 'max-h-60',
     dataScheme,
     className = '',
@@ -88,9 +92,9 @@ const OSSelect = ({
 
     const selectId = label?.toLowerCase().replace(/\s+/g, '-')
 
-    // Find the selected option
+    // Find the selected option (excluding headers)
     const selectedOption = useMemo(() => {
-        return options.find((option) => option.value === value)
+        return options.find((option) => !option.isHeader && option.value === value)
     }, [options, value])
 
     // Filter options based on search term
@@ -100,17 +104,34 @@ const OSSelect = ({
         }
 
         const searchLower = searchTerm.toLowerCase()
-        return options.filter((option) => {
-            const searchableText = option.label.toLowerCase()
-            // Simple fuzzy matching: check if all search characters appear in order
-            let searchIndex = 0
-            for (let i = 0; i < searchableText.length && searchIndex < searchLower.length; i++) {
-                if (searchableText[i] === searchLower[searchIndex]) {
-                    searchIndex++
+        const result: SelectOption[] = []
+        let currentHeader: SelectOption | null = null
+
+        options.forEach((option) => {
+            if (option.isHeader) {
+                // Keep track of current header
+                currentHeader = option
+            } else {
+                const searchableText = option.label.toLowerCase()
+                // Simple fuzzy matching: check if all search characters appear in order
+                let searchIndex = 0
+                for (let i = 0; i < searchableText.length && searchIndex < searchLower.length; i++) {
+                    if (searchableText[i] === searchLower[searchIndex]) {
+                        searchIndex++
+                    }
+                }
+
+                // If this option matches, add its header (if not already added) and the option
+                if (searchIndex === searchLower.length) {
+                    if (currentHeader && !result.includes(currentHeader)) {
+                        result.push(currentHeader)
+                    }
+                    result.push(option)
                 }
             }
-            return searchIndex === searchLower.length
         })
+
+        return result
     }, [options, searchTerm, searchable])
 
     // Handle click outside to close dropdown
@@ -127,20 +148,21 @@ const OSSelect = ({
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, []) // Remove dependency on isOpen
 
-    // Focus search input when dropdown opens and highlight first option
+    // Focus search input when dropdown opens and highlight first non-header option
     useEffect(() => {
         if (isOpen) {
             if (searchable && searchInputRef.current) {
                 searchInputRef.current.focus()
             }
-            // Highlight first option by default
-            if (filteredOptions.length > 0) {
-                setHighlightedIndex(0)
+            // Highlight first non-header option by default
+            const firstSelectableIndex = filteredOptions.findIndex((opt) => !opt.isHeader)
+            if (firstSelectableIndex >= 0) {
+                setHighlightedIndex(firstSelectableIndex)
             }
         } else {
             setHighlightedIndex(-1)
         }
-    }, [isOpen, searchable, filteredOptions.length])
+    }, [isOpen, searchable, filteredOptions])
 
     // Scroll highlighted option into view
     useEffect(() => {
@@ -152,14 +174,40 @@ const OSSelect = ({
         }
     }, [highlightedIndex])
 
-    // Reset highlighted index when options change
+    // Auto-highlight first selectable option when filtered options change
     useEffect(() => {
-        setHighlightedIndex(-1)
-    }, [filteredOptions])
+        if (isOpen) {
+            const firstSelectableIndex = filteredOptions.findIndex((opt) => !opt.isHeader)
+            setHighlightedIndex(firstSelectableIndex >= 0 ? firstSelectableIndex : -1)
+        }
+    }, [filteredOptions, isOpen])
+
+    // Helper functions to find next/previous non-header option
+    const findNextSelectableIndex = (currentIndex: number): number => {
+        for (let i = currentIndex + 1; i < filteredOptions.length; i++) {
+            if (!filteredOptions[i].isHeader) return i
+        }
+        // Wrap around to find first selectable from start
+        for (let i = 0; i <= currentIndex; i++) {
+            if (!filteredOptions[i].isHeader) return i
+        }
+        return currentIndex
+    }
+
+    const findPrevSelectableIndex = (currentIndex: number): number => {
+        for (let i = currentIndex - 1; i >= 0; i--) {
+            if (!filteredOptions[i].isHeader) return i
+        }
+        // Wrap around to find last selectable from end
+        for (let i = filteredOptions.length - 1; i >= currentIndex; i--) {
+            if (!filteredOptions[i].isHeader) return i
+        }
+        return currentIndex
+    }
 
     // Handle option selection
     const handleOptionSelect = (option: SelectOption) => {
-        if (!option.disabled) {
+        if (!option.disabled && !option.isHeader) {
             onChange(option.value)
             setIsOpen(false)
             setSearchTerm('')
@@ -188,10 +236,7 @@ const OSSelect = ({
             if (!isOpen) {
                 setIsOpen(true)
             } else {
-                setHighlightedIndex((prev) => {
-                    const newIndex = prev < filteredOptions.length - 1 ? prev + 1 : 0
-                    return newIndex
-                })
+                setHighlightedIndex((prev) => findNextSelectableIndex(prev))
             }
         } else if (event.key === 'ArrowUp') {
             event.preventDefault()
@@ -199,10 +244,7 @@ const OSSelect = ({
             if (!isOpen) {
                 setIsOpen(true)
             } else {
-                setHighlightedIndex((prev) => {
-                    const newIndex = prev > 0 ? prev - 1 : filteredOptions.length - 1
-                    return newIndex
-                })
+                setHighlightedIndex((prev) => findPrevSelectableIndex(prev))
             }
         }
     }
@@ -213,19 +255,13 @@ const OSSelect = ({
             event.preventDefault()
             event.stopPropagation()
             if (filteredOptions.length > 0) {
-                setHighlightedIndex((prev) => {
-                    const newIndex = prev < filteredOptions.length - 1 ? prev + 1 : 0
-                    return newIndex
-                })
+                setHighlightedIndex((prev) => findNextSelectableIndex(prev))
             }
         } else if (event.key === 'ArrowUp') {
             event.preventDefault()
             event.stopPropagation()
             if (filteredOptions.length > 0) {
-                setHighlightedIndex((prev) => {
-                    const newIndex = prev > 0 ? prev - 1 : filteredOptions.length - 1
-                    return newIndex
-                })
+                setHighlightedIndex((prev) => findPrevSelectableIndex(prev))
             }
         } else if (event.key === 'Enter') {
             event.preventDefault()
@@ -297,7 +333,7 @@ const OSSelect = ({
                     onClick={() => !disabled && setIsOpen(!isOpen)}
                     onKeyDown={handleKeyDown}
                     disabled={disabled}
-                    className={`group bg-primary border border-primary rounded ring-0 focus:ring-1 flex items-center justify-between ${
+                    className={`group bg-primary border rounded ring-0 focus:ring-1 flex items-center justify-between ${
                         touched && error ? 'border-red dark:border-yellow' : 'border-primary'
                     } ${sizeClasses[size]} ${widthClasses[width]} ${
                         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
@@ -330,58 +366,68 @@ const OSSelect = ({
                         role="listbox"
                         onKeyDown={handleKeyDown}
                     >
-                        {searchable && (
-                            <div className="p-2 border-b border-primary">
-                                <div className="relative">
-                                    <IconSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 size-4 text-muted" />
-                                    <input
-                                        ref={searchInputRef}
-                                        type="text"
-                                        placeholder={searchPlaceholder}
-                                        value={searchTerm}
-                                        onChange={(e) => setSearchTerm(e.target.value)}
-                                        onKeyDown={handleSearchKeyDown}
-                                        className="w-full pl-8 pr-3 py-1.5 text-sm bg-primary border border-primary rounded text-primary placeholder-muted focus:outline-none focus:ring-1 focus:ring-blue"
-                                    />
+                        <ScrollArea className={`min-h-0 ${height} ${maxHeight}`}>
+                            {searchable && (
+                                <div className="p-2 border-b border-primary">
+                                    <div className="relative">
+                                        <IconSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 size-4 text-muted" />
+                                        <input
+                                            ref={searchInputRef}
+                                            type="text"
+                                            placeholder={searchPlaceholder}
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            onKeyDown={handleSearchKeyDown}
+                                            className="w-full pl-8 pr-3 py-1.5 text-sm bg-primary border border-primary rounded text-primary placeholder-muted focus:outline-none focus:ring-1 focus:ring-blue"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                        <div className={`${maxHeight} overflow-y-auto`}>
+                            )}
                             {filteredOptions.length > 0 ? (
-                                filteredOptions.map((option, index) => (
-                                    <button
-                                        key={`${option.value}-${index}`}
-                                        ref={(el) => (optionRefs.current[index] = el)}
-                                        type="button"
-                                        onClick={() => handleOptionSelect(option)}
-                                        disabled={option.disabled}
-                                        className={`w-full px-3 py-2 text-left text-sm hover:bg-accent focus:bg-accent focus:outline-none flex items-center justify-between ${
-                                            option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-                                        } ${option.value === value ? 'font-bold' : ''} ${
-                                            index === highlightedIndex ? 'bg-accent' : ''
-                                        }`}
-                                        role="option"
-                                        aria-selected={option.value === value}
-                                        onMouseEnter={() => setHighlightedIndex(index)}
-                                    >
-                                        <span className="flex items-center space-x-2">
-                                            {renderIcon(option.icon, option.color)}
-                                            <div>
-                                                <div className="text-primary">{option.label}</div>
-                                                {option.description && (
-                                                    <div className="text-xs text-muted">{option.description}</div>
-                                                )}
-                                            </div>
-                                        </span>
-                                        {option.value === value && <IconCheck className="size-4 text-primary" />}
-                                    </button>
-                                ))
+                                filteredOptions.map((option, index) =>
+                                    option.isHeader ? (
+                                        <div
+                                            data-scheme="secondary"
+                                            key={`header-${option.label}-${index}`}
+                                            className="px-3 py-1 text-sm text-muted bg-primary border-y border-primary"
+                                        >
+                                            {option.label}
+                                        </div>
+                                    ) : (
+                                        <button
+                                            key={`${option.value}-${index}`}
+                                            ref={(el) => (optionRefs.current[index] = el)}
+                                            type="button"
+                                            onClick={() => handleOptionSelect(option)}
+                                            disabled={option.disabled}
+                                            className={`w-full px-3 py-2 text-left text-sm hover:bg-accent focus:bg-accent focus:outline-none flex items-center justify-between ${
+                                                option.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+                                            } ${option.value === value ? 'font-bold' : ''} ${
+                                                index === highlightedIndex ? 'bg-accent' : ''
+                                            }`}
+                                            role="option"
+                                            aria-selected={option.value === value}
+                                            onMouseEnter={() => setHighlightedIndex(index)}
+                                        >
+                                            <span className="flex items-center space-x-2">
+                                                {renderIcon(option.icon, option.color)}
+                                                <div>
+                                                    <div className="text-primary">{option.label}</div>
+                                                    {option.description && (
+                                                        <div className="text-xs text-muted">{option.description}</div>
+                                                    )}
+                                                </div>
+                                            </span>
+                                            {option.value === value && <IconCheck className="size-4 text-primary" />}
+                                        </button>
+                                    )
+                                )
                             ) : (
                                 <div className="px-3 py-2 text-sm text-muted">
                                     {searchTerm ? `No options found for "${searchTerm}"` : 'No options available'}
                                 </div>
                             )}
-                        </div>
+                        </ScrollArea>
                     </div>
                 )}
                 {touched && error && <p className="text-sm text-red dark:text-yellow m-0 mt-1">{error}</p>}

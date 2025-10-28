@@ -19,7 +19,7 @@ const InstallationPlatforms = ({ urlFragment = '' }: InstallationPlatformsProps)
         },
         {
             label: 'Node.js',
-            url: `/docs/experiments/installation/nodejs${urlFragment}`,
+            url: `/docs/experiments/installation/node${urlFragment}`,
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg',
         },
         {
@@ -64,6 +64,6 @@ const InstallationPlatforms = ({ urlFragment = '' }: InstallationPlatformsProps)
         },
     ]
 
-    return <List className="grid sm:grid-cols-2" items={platforms} />
+    return <List className="grid sm:grid-cols-2 mb-4" items={platforms} />
 }
 export default InstallationPlatforms

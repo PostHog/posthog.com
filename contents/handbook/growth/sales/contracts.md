@@ -122,18 +122,18 @@ Once you the signed form in PandaDoc is marked as complete and the Salesforce op
 
 ## Master Services Agreement (MSA)
 
-Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. We don't have this templated in PandaDoc yet as it's so infrequent.
+Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. 
 
 1. Download a copy of the [PostHog Cloud MSA](https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit#heading=h.y38xfjgcg4xm) as a Word Document (legal teams prefer this format) and share it with your Customer contact.
-2. They may want to propose changes (also known as 'redlines'). Work with Fraser to get these agreed.
+2. They may want to propose changes (also known as 'redlines'). Work with Hector or Fraser to get these agreed.
 3. Create a new document in PandaDoc, you can choose to either import from Google Drive or upload from your local machine. This should be the clean, non-redlined document as agreed by both parties.
 4. Change the name to be `PostHog Cloud MSA - CUSTOMER LEGAL NAME`.
-5. Add the Client and PostHog (fraser@posthog.com) as roles.
+5. Add the Client and your name and PostHog email as roles.
 6. Add a Signature, Name and Title field for both PostHog and the Customer.
 7. Check the signing order (Client, then PostHog normally).
-8. Send for signature.
+8. Send for signature - so long as any proposed changes have been reviewed and approved by Hector or Fraser, you are free to sign on behalf of PostHog
 
-Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo [here](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask Fraser.
+Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo [here](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
 
 ## Business Associate Agreement (BAA)
 
