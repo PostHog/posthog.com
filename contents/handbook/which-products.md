@@ -25,6 +25,11 @@ Products we're less excited about building
 - Products where the ICP quickly changes to something other than an engineer, especially teams far removed from engineering
   - For example, a CRM. We'd be more excited about building a customer support tool, as support often is a task that involves engineering.
 
+## How new products get built
+
+Sometimes the Blitzscale team will decide a new product needs to be built. They'll find someone internally to run it, ideally someone who's been at PostHog for 6 months (we tried getting new people to ship new products, but they often struggled to ship quickly).
+
+Other times you might have an idea for a great product we should build. In that case, use the [New Product RFC template](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-product.md). You might choose to hack together a prototype of the product to demo and show off, which you should do! Blitzscale only needs to get involved if you want to start working on this product full time. At that point, we are choosing whether to invest a pretty serious amount of money into launching it, so we want to get that right.
 
 ## Next products on deck
 
