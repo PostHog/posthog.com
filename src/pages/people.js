@@ -4,7 +4,7 @@ import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import People from 'components/People'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 
 const PeoplePage = ({ data }) => {
     const [searchTerm, setSearchTerm] = useState('')

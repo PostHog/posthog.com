@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
-import { graphql, useStaticQuery, navigate } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock } from '@posthog/icons'
 import dayjs from 'dayjs'
@@ -142,6 +142,7 @@ type TeamPageProps = {
 
 export default function TeamPage(props: TeamPageProps) {
     const { slug } = props?.params || {}
+    const { data } = props as any
     const [editing, setEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
@@ -153,106 +154,6 @@ export default function TeamPage(props: TeamPageProps) {
     const { team, updateTeam, loading } = useTeam({ slug })
     const { name, crest, crestOptions, description, tagline, profiles, leadProfiles, teamImage, miniCrest } =
         (team as any)?.attributes || {}
-
-    const data = useStaticQuery(graphql`
-        {
-            allTeams: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+$/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    body
-                }
-            }
-            allObjectives: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+/objectives$/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    body
-                }
-            }
-            allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    emojis {
-                        name
-                        localFile {
-                            publicURL
-                        }
-                    }
-                    roadmaps {
-                        squeakId
-                        betaAvailable
-                        complete
-                        dateCompleted
-                        title
-                        description
-                        media {
-                            gatsbyImageData
-                            publicId
-                            data {
-                                attributes {
-                                    mime
-                                }
-                            }
-                        }
-                        githubPages {
-                            title
-                            html_url
-                            number
-                            closed_at
-                            reactions {
-                                hooray
-                                heart
-                                eyes
-                                plus1
-                            }
-                        }
-                        projectedCompletion
-                        cta {
-                            label
-                            url
-                        }
-                    }
-                }
-            }
-            allSlackEmoji {
-                totalCount
-            }
-            allTeamsData: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-            allAshbyJobPosting(filter: { isListed: { eq: true } }) {
-                nodes {
-                    fields {
-                        title
-                        slug
-                    }
-                    parent {
-                        ... on AshbyJob {
-                            customFields {
-                                value
-                                title
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
 
     const body = data?.allTeams?.nodes?.find((node: any) => node?.fields?.slug === `/teams/${slug}`)?.body
     const objectives = data?.allObjectives?.nodes?.find(
@@ -833,3 +734,103 @@ export default function TeamPage(props: TeamPageProps) {
         </>
     )
 }
+
+export const query = graphql`
+    {
+        allTeams: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+$/" } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                body
+            }
+        }
+        allObjectives: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+/objectives$/" } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                body
+            }
+        }
+        allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
+            nodes {
+                id
+                name
+                slug
+                emojis {
+                    name
+                    localFile {
+                        publicURL
+                    }
+                }
+                roadmaps {
+                    squeakId
+                    betaAvailable
+                    complete
+                    dateCompleted
+                    title
+                    description
+                    media {
+                        gatsbyImageData
+                        publicId
+                        data {
+                            attributes {
+                                mime
+                            }
+                        }
+                    }
+                    githubPages {
+                        title
+                        html_url
+                        number
+                        closed_at
+                        reactions {
+                            hooray
+                            heart
+                            eyes
+                            plus1
+                        }
+                    }
+                    projectedCompletion
+                    cta {
+                        label
+                        url
+                    }
+                }
+            }
+        }
+        allSlackEmoji {
+            totalCount
+        }
+        allTeamsData: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+            }
+        }
+        allAshbyJobPosting(filter: { isListed: { eq: true } }) {
+            nodes {
+                fields {
+                    title
+                    slug
+                }
+                parent {
+                    ... on AshbyJob {
+                        customFields {
+                            value
+                            title
+                        }
+                    }
+                }
+            }
+        }
+    }
+`

@@ -9,7 +9,7 @@ import { IconBold, IconLink } from 'components/OSIcons'
 import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CUSTOMER_COUNT } from '../../constants'
 

@@ -10,7 +10,6 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import { useChat } from 'hooks/useChat'
-import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
 import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import AskMax from 'components/AskMax'
@@ -27,17 +26,11 @@ type ProductAnalyticsProps = {
     }
 }
 
-export const Content = ({ quickLinks = false }) => {
+export const Content = ({ quickLinks = false, data }: any) => {
     const { compact } = useLayoutData()
     const {
         allDocsPages: { totalDocsCount },
-    } = useStaticQuery(graphql`
-        query {
-            allDocsPages: allMdx(filter: { slug: { regex: "^/docs/" } }) {
-                totalDocsCount: totalCount
-            }
-        }
-    `)
+    } = data
 
     return (
         <>
@@ -190,9 +183,17 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
         <ReaderView>
             <SEO title="Product analytics - Documentation - PostHog" />
 
-            <Content />
+            <Content data={data} />
         </ReaderView>
     )
 }
 
 export default ProductAnalytics
+
+export const query = graphql`
+    query {
+        allDocsPages: allMdx(filter: { slug: { regex: "^/docs/" } }) {
+            totalDocsCount: totalCount
+        }
+    }
+`

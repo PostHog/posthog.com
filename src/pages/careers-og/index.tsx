@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
-const query = graphql`
+export const query = graphql`
     query CareersOGJobListings {
         allAshbyJobPosting(filter: { isListed: { eq: true } }) {
             jobs: nodes {
@@ -43,11 +43,11 @@ const columns = [
     { name: 'Timezone(s)', width: 'minmax(200px,1fr)', align: 'left' as const, className: '!text-xl' },
 ]
 
-export default function CareersOG(): JSX.Element {
+export default function CareersOG({ data }: any): JSX.Element {
     const {
         allAshbyJobPosting: { jobs: originalJobs },
         allTeams: { nodes: allTeams },
-    } = useStaticQuery(query)
+    } = data
 
     const jobRows = useMemo(() => {
         // Group jobs by role grouping

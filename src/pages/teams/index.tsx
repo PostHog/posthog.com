@@ -6,70 +6,16 @@ import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'
 import TeamPatch from 'components/TeamPatch'
 import { TreeMenu } from 'components/TreeMenu'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useMemo, useState } from 'react'
 
-const TeamsPage = () => {
+const TeamsPage = ({ data }: any) => {
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedIndex, setSelectedIndex] = useState(0)
     const { isModerator } = useUser()
 
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    createdAt
-                    tagline
-                    description
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                color
-                                firstName
-                                lastName
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    leadProfiles {
-                        data {
-                            id
-                        }
-                    }
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                    crestOptions {
-                        textColor
-                        textShadow
-                        fontSize
-                        frame
-                        frameColor
-                        plaque
-                        plaqueColor
-                        imageScale
-                        imageXOffset
-                        imageYOffset
-                    }
-                }
-            }
-        }
-    `)
+    const { allTeams } = data
 
     // Create teams navigation for sidebar
     const teamsNavigation = useMemo(() => {
@@ -364,3 +310,59 @@ const TeamsPage = () => {
 }
 
 export default TeamsPage
+
+export const query = graphql`
+    {
+        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                slug
+                createdAt
+                tagline
+                description
+                profiles {
+                    data {
+                        id
+                        attributes {
+                            color
+                            firstName
+                            lastName
+                            avatar {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                leadProfiles {
+                    data {
+                        id
+                    }
+                }
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
+                }
+            }
+        }
+    }
+`

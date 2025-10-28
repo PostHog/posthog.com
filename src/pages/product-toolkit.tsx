@@ -15,7 +15,7 @@ import Logo from 'components/Logo'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import MDXEditor from 'components/MDXEditor'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 
@@ -340,17 +340,10 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     },
 ]
 
-export default function ProductToolkit() {
+export default function ProductToolkit({ data }: any) {
     const {
         mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "product-toolkit" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
+    } = data
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
@@ -378,3 +371,12 @@ export default function ProductToolkit() {
         </>
     )
 }
+
+export const query = graphql`
+    query {
+        mdx(slug: { eq: "product-toolkit" }) {
+            rawBody
+            mdxBody: body
+        }
+    }
+`
