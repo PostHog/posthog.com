@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The paid ads team exists to do three things only:
+The paid ads team exists to do two things only:
 
 - Generate high quality new business leads for the sales team
 - Convert high-intent, high-ICP-scoring engineers searching for PostHog or products we offer into signups that drive MRR growth
