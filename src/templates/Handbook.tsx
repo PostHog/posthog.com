@@ -5,7 +5,6 @@ import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
-import Team from 'components/People'
 import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { shortcodes } from '../mdxGlobalComponents'
@@ -344,7 +343,6 @@ export default function Handbook({
     } = post
 
     const components = {
-        Team,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,

@@ -23,7 +23,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
-import { TeamMember } from 'components/People'
+import TeamMember from 'components/People/TeamMember'
 import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
