@@ -695,16 +695,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Demand gen',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/demand/overview',
-            },
-        ],
-    },
-    {
         name: 'Engineering',
         url: '',
         children: [
