@@ -36,12 +36,12 @@ export const onRenderBody = function ({ setPreBodyComponents, setPostBodyCompone
         }),
     ])
 
-    setPostBodyComponents([
-        React.createElement('script', {
-            key: 'initial-loader',
-            src: '/scripts/initial-loader.js',
-        }),
-    ])
+    // setPostBodyComponents([
+    //     React.createElement('script', {
+    //         key: 'initial-loader',
+    //         src: '/scripts/initial-loader.js',
+    //     }),
+    // ])
 }
 
 export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
