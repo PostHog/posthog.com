@@ -99,3 +99,5 @@ I joined PostHog when we were 11 people and had sold nothing. 5 years later, we�
 31. It’s ok if marketing and sales lag product. A user’s default is to not care about you. You can do a launch months after a product first shipped, nobody cares.
 
 32. Your competition is for attention, i.e. TikTok, not the blogs of other B2B SaaS companies.
+
+<NewsletterForm />
