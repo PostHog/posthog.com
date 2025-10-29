@@ -1,5 +1,4 @@
 import React from 'react'
-import { revenueAnalyticsProductFeatures } from './revenue_analytics_features'
 import { IconPiggyBank } from '@posthog/icons'
 
 export const revenueAnalytics = {
@@ -295,7 +294,7 @@ export const revenueAnalytics = {
                 key: 'posthog',
             },
         ],
-        rows: revenueAnalyticsProductFeatures,
+        rows: ['revenue_analytics'],
         features: [
             {
                 feature: 'Revenue tracking',

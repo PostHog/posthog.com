@@ -17,7 +17,6 @@ seo:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import AskMax from 'components/AskMax'
-import { posthogVsAmplitudeRows } from './posthog-vs-amplitude-rows'
 
 Choosing the right analytics platform often comes down to trade-offs.
 
@@ -76,7 +75,21 @@ In 2024, we [cut prices for session replay](/blog/session-replay-pricing) and [a
 
 PostHog and Amplitude offer a similar suite of products, but Amplitude lacks things like error tracking and LLM analytics.
 
-<ProductComparisonTable competitors={['posthog', 'amplitude']} rows={posthogVsAmplitudeRows} />
+<ProductComparisonTable
+    competitors={['posthog', 'amplitude']}
+    rows={[
+        { product: 'product_analytics' },
+        { product: 'web_analytics' },
+        { product: 'session_replay' },
+        { product: 'feature_flags' },
+        { product: 'experiments' },
+        { product: 'surveys' },
+        { product: 'error_tracking' },
+        { product: 'llm_analytics' },
+        { product: 'revenue_analytics' },
+        { product: 'product_tours' },
+    ]}
+/>
 
 <details>
   <summary>What's the best product analytics tool for startups?</summary>

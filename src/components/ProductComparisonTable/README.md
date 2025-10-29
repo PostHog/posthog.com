@@ -91,7 +91,6 @@ export const comparisonRows = [
 
 ```tsx
 import { comparisonRows } from './comparison-rows'
-
 ;<ProductComparisonTable competitors={['posthog', 'sentry']} rows={comparisonRows} />
 ```
 
@@ -174,14 +173,17 @@ export const errorTracking = {
 **Example feature configuration:**
 
 ```typescript
-export const errorTrackingProductFeatures = [
-    { label: 'Core features' },
-    { product: 'error_tracking', feature: 'error_alerts' },
-    { product: 'error_tracking', feature: 'exception_capture' },
-    { label: 'Platform features' },
-    { feature: 'open_source' },
-    { feature: 'self_host' },
-]
+// In product data file (e.g., error_tracking.tsx)
+export const errorTracking = {
+    // ... other config
+    comparison: {
+        companies: [
+            { name: 'Sentry', key: 'sentry' },
+            { name: 'PostHog', key: 'posthog' },
+        ],
+        rows: ['error_tracking'], // Expands to all sections and features
+    },
+}
 ```
 
 ## Data Structure
